@@ -15,6 +15,9 @@
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
     "test": "jest"
   },
+  "files": [
+    "lib/"
+  ],
   "dependencies": {
     "@phensley/cldr-core": "^0.1.5"
   },
