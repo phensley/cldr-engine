@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-core",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Core library for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
