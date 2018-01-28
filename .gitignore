@@ -13,10 +13,12 @@ package-deps.json
 
 .DS_Store
 yarn.lock
+yarn-error.log
 lerna-debug.log
 
 *.build.log
 *.build.error.log
+phensley-cldr*.tgz
 
 /*/**/.vscode/
 
