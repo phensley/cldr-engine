@@ -13,6 +13,7 @@
     "coverage:merge": "ts-node ./scripts/merge-coverage.ts",
     "coverage:report": "nyc report -r html -r text",
     "lint": "lerna run lint",
+    "release": "lerna run clean && lerna run build && lerna publish",
     "test": "jest",
     "test:watch": "jest --watch"
   },
