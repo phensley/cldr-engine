@@ -1,0 +1,44 @@
+{
+  "name": "@phensley/cldr",
+  "version": "0.1.4",
+  "description": "Internationalization in Typescript with Unicode CLDR, batteries included",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": "Patrick Hensley <pathensley@gmail.com>",
+  "license": "MIT",
+  "repository": {},
+  "scripts": {
+    "build": "tsc -p ./tsconfig.build.json",
+    "build:watch": "tsc -p ./tsconfig.build.json -w",
+    "clean": "rimraf ./lib",
+    "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
+    "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@phensley/cldr-core": "^0.1.4"
+  },
+  "devDependencies": {
+    "@phensley/cldr-compiler": "^0.1.4",
+    "typescript": "2.6.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/src/**/*.ts",
+      "!**/src/**/*.d.ts",
+      "!**/src/cli/*"
+    ],
+    "mapCoverage": true,
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.ts"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>../..//node_modules/ts-jest/preprocessor.js"
+    }
+  }
+}

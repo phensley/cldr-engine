@@ -1,0 +1,62 @@
+{
+  "private": true,
+  "name": "cldr-engine-monorepo",
+  "version": "0.1.0",
+  "author": "Patrick Hensley <pathensley@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "lerna run build",
+    "build:watch": "lerna run build:watch --parallel",
+    "clean": "lerna run clean && rimraf ./coverage && jest --clearCache",
+    "clean:full": "yarn clean && rimraf ./node_modules",
+    "coverage": "rimraf ./coverage && lerna exec yarn coverage && yarn run coverage:merge && yarn run coverage:report",
+    "coverage:merge": "ts-node ./scripts/merge-coverage.ts",
+    "coverage:report": "nyc report -r html -r text",
+    "lint": "lerna run lint",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@microsoft/api-documenter": "^1.1.5",
+    "@types/glob": "^5.0.34",
+    "@types/jest": "22.0.1",
+    "@types/node": "8.5.8",
+    "glob": "^7.1.2",
+    "jest": "22.1.4",
+    "lerna": "^2.8.0",
+    "nyc": "11.4.1",
+    "rimraf": "^2.6.2",
+    "ts-jest": "22.0.1",
+    "ts-node": "4.1.0",
+    "tslint": "5.9.1",
+    "tslint-no-circular-imports": "^0.2.1",
+    "typedoc": "^0.9.0",
+    "typescript": "^2.6.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "**/src/**/*.ts",
+      "!**/src/**/*.d.ts",
+      "!**/src/cli/*"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov"
+    ],
+    "mapCoverage": true,
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "projects": [
+      "<rootDir>/packages/*"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
+  }
+}

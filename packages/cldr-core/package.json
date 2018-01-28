@@ -1,0 +1,52 @@
+{
+  "name": "@phensley/cldr-core",
+  "version": "0.1.4",
+  "description": "Core library for @phensley/cldr",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": "Patrick Hensley <pathensley@gmail.com>",
+  "license": "MIT",
+  "repository": {},
+  "scripts": {
+    "build": "tsc -p ./tsconfig.build.json",
+    "build:watch": "tsc -p ./tsconfig.build.json -w",
+    "clean": "rimraf ./lib",
+    "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
+    "gen-tables": "../../node_modules/.bin/ts-node ./scripts/gen-tables.ts",
+    "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
+    "prepublish": "yarn build"
+  },
+  "files": [
+    "lib/"
+  ],
+  "dependencies": {
+    "@phensley/cldr-schema": "^0.1.4"
+  },
+  "devDependencies": {
+    "microtime": "^2.1.7",
+    "typescript": "^2.6.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/src/**/*.ts",
+      "!**/src/**/*.d.ts",
+      "!**/src/cli/*"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov"
+    ],
+    "mapCoverage": true,
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.ts"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>../..//node_modules/ts-jest/preprocessor.js"
+    }
+  }
+}
