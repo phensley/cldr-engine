@@ -9,14 +9,17 @@
   "repository": {},
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
+    "build:packs": "cldr-compiler pack -o ./packs",
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib",
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
+    "prepare": "npm run build:packs",
     "test": "jest"
   },
   "files": [
-    "lib/"
+    "lib/",
+    "packs/"
   ],
   "dependencies": {
     "@phensley/cldr-core": "^0.1.6"

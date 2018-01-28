@@ -3,6 +3,7 @@
 
 node_modules/
 lib/
+packs/
 off/
 dist/
 coverage/

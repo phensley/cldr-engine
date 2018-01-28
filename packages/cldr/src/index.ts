@@ -2,9 +2,7 @@ import {
   Locale,
   LocaleMatcher,
   LanguageResolver,
-  LanguageTag
 } from '@phensley/cldr-core';
-
 
 /**
  * Parse a locale identifier into a locale object that includes the original
@@ -20,9 +18,7 @@ export const getLocale = (id: string): Locale => {
  * performs distance-based enhanced language matching:
  * http://www.unicode.org/reports/tr35/tr35.html#EnhancedLanguageMatching
  */
-export const getLocaleMatcher = (supported: string | string[]): LocaleMatcher => {
-  return new LocaleMatcher(supported);
-};
+export const getLocaleMatcher = (supported: string | string[]): LocaleMatcher => new LocaleMatcher(supported);
 
 /**
  * Callback function that an application must provide to the framework.

@@ -1,6 +1,6 @@
+import { Bundle } from '@phensley/cldr-schema';
 import { base100decode } from './encoding';
 import { Locale, LanguageTag, LanguageResolver } from '../locale';
-import { Bundle } from '@phensley/cldr-schema';
 
 const DELIMITER = '\t';
 
