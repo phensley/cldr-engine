@@ -1,0 +1,79 @@
+
+# Test cases from:
+# https://ssl.icu-project.org/repos/icu/trunk/icu4j/main/tests/core/src/com/ibm/icu/dev/test/util/data/localeDistanceTest.txt
+
+# FORMAT:
+#
+#  supported  ;  desired  ;  dist(d, s)  ; dist(s, d) if different
+
+
+# asymmetric distance with en-GB per https://unicode.org/cldr/trac/ticket/10148
+
+en-US ; en-US ; 0
+en-US ; en-GB ; 3 ; 5
+en-US ; en-VI ; 4
+en-US ; en-IN ; 5
+en-US ; en-ZA ; 5
+
+en-GB ; en-GB ; 0
+en-GB ; en-ZA ; 3 ; 4
+en-GB ; en-IN ; 3 ; 4
+en-GB ; en-VI ; 5
+
+en-IN ; en-ZA ; 4
+en-IN ; en-VI ; 5
+
+en-VI ; en-PR ; 4
+
+
+####
+en-CA ; en-CA ; 0
+en-CA ; ar-MK ; 100
+
+he ; iw ; 0
+cmn ; zh ; 0
+
+en ; to ; 14 ; 100
+
+no-DE ; no ; 4
+no    ; nn    ; 10
+
+nn ; no-DE ; 14
+
+no ; no ; 0
+da ; no ; 12
+
+zh-Hant ; da ; 100
+zh-Hans ; zh-Hant ; 23 ; 19
+
+en ; zh-Hans ; 100
+
+en-AU ; en-US ; 5
+en-GU ; en-VI ; 4
+en-CA ; en-AU ; 4
+
+en-Cyrl ; en-CA ; 100
+es-MX ; en-Cyrl ; 100
+
+sr ; hr ; 100
+#sr-Latn ; hr ; 8
+sr-Latn ; sr ; 5
+
+es-AR ; es-MX ; 4
+es-419 ; es-MX ; 4
+es-MX ; es-MX ; 0
+es-ES ; es-MX ; 5
+es-PT ; es-MX ; 5
+es-150 ; es-MX ; 5
+es-AR ; es-419 ; 4
+es-419 ; es-419 ; 0
+es-ES ; es-419 ; 5
+es-PT ; es-419 ; 5
+es-150 ; es-419 ; 5
+es-AR ; es-ES ; 5
+es-419 ; es-ES ; 5
+es-MX ; es-ES ; 5
+es-ES ; es-ES ; 0
+es-PT ; es-ES ; 4
+es-150 ; es-419 ; 5
+
