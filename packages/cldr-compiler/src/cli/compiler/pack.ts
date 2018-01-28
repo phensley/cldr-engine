@@ -34,6 +34,11 @@ export const runPack = (argv: yargs.Arguments) => {
     langs = checkLanguages(argv.lang.split(','));
   }
 
+  const dest = argv.out;
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest);
+  }
+
   const pkg = getPackageInfo();
 
   langs.forEach(lang => {
@@ -55,7 +60,7 @@ export const runPack = (argv: yargs.Arguments) => {
 
     // Pack all strings appended by the encoder.
     const raw = pack.render();
-    const path = join(argv.out, `${lang}.res.gz`);
+    const path = join(dest, `${lang}.res.gz`);
     console.warn(`writing:  ${path}`);
 
     // Compress and write the pack to disk.
