@@ -1,0 +1,2279 @@
+{
+  "supplemental": {
+    "pluralRanges": {
+      "af": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ak": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "am": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ar": [
+        {
+          "start": "zero", 
+          "end": "one", 
+          "result": "zero"
+        }, 
+        {
+          "start": "zero", 
+          "end": "two", 
+          "result": "zero"
+        }, 
+        {
+          "start": "zero", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "zero", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "zero", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "two", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "two", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "two", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "two", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "two", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "as": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "az": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "be": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "many", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "bg": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "bn": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "bs": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ca": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "cs": [
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "many", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "cy": [
+        {
+          "start": "zero", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "zero", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "zero", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "zero", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "zero", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "two", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "two", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "two", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "da": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "de": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "el": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "en": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "es": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "et": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "eu": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "fa": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "fi": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "fil": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "fr": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ga": [
+        {
+          "start": "one", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "two", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "two", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "two", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "gl": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "gsw": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "gu": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "he": [
+        {
+          "start": "one", 
+          "end": "two", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "two", 
+          "end": "many", 
+          "result": "other"
+        }, 
+        {
+          "start": "two", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "two", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "hi": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "hr": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "hu": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "hy": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "id": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "io": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "is": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "it": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ja": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ka": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "kk": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "km": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "kn": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ko": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ky": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "lo": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "lt": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "many", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "lv": [
+        {
+          "start": "zero", 
+          "end": "zero", 
+          "result": "other"
+        }, 
+        {
+          "start": "zero", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "zero", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "zero", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "zero", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "mk": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ml": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "mn": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "mr": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ms": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "my": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "nb": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ne": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "nl": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "or": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "pa": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "pl": [
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "many", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ps": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "pt": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ro": [
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ru": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "many", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "sd": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "si": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "sk": [
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "many", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "sl": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "two", 
+          "end": "one", 
+          "result": "few"
+        }, 
+        {
+          "start": "two", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "two", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "two", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "two", 
+          "result": "two"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "sq": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "sr": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "sv": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "sw": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ta": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "te": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "th": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "tk": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "tr": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ug": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "uk": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "one", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "few", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "few", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "few", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "few", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "many", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "many", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "many", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "many", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "few", 
+          "result": "few"
+        }, 
+        {
+          "start": "other", 
+          "end": "many", 
+          "result": "many"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "ur": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "uz": [
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "vi": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "yue": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "zh": [
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ], 
+      "zu": [
+        {
+          "start": "one", 
+          "end": "one", 
+          "result": "one"
+        }, 
+        {
+          "start": "one", 
+          "end": "other", 
+          "result": "other"
+        }, 
+        {
+          "start": "other", 
+          "end": "other", 
+          "result": "other"
+        }
+      ]
+    }
+  }
+}
