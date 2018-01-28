@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-compiler",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "description": "Compiler for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
