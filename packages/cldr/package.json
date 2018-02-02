@@ -15,7 +15,8 @@
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
     "prepare": "npm run build:packs",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "lib/",
@@ -25,8 +26,7 @@
     "@phensley/cldr-core": "^0.1.10"
   },
   "devDependencies": {
-    "@phensley/cldr-compiler": "^0.1.10",
-    "typescript": "2.6.2"
+    "@phensley/cldr-compiler": "^0.1.10"
   },
   "jest": {
     "collectCoverageFrom": [

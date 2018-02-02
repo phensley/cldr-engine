@@ -5,6 +5,8 @@ import {
   NumberSymbol, NumberSymbolType
 } from '@phensley/cldr-schema';
 
+import { BigDecimal } from '../../types/bigdecimal';
+
 import { CurrencyFormatOptions, DecimalFormatOptions } from './options';
 
 export class NumberEngine {
@@ -35,13 +37,18 @@ export class NumberEngine {
     return this.currencies(code as CurrencyType).displayName(this.bundle);
   }
 
-  formatDecimal(n: number, options: DecimalFormatOptions): string {
+  formatDecimal(n: number | string | BigDecimal, options: DecimalFormatOptions): string {
+    if (typeof n === 'number' || typeof n === 'string') {
+      n = new BigDecimal(n);
+    }
     // TODO:
     return '';
   }
 
-  formatCurrency(n: number, code: CurrencyType | string, options: CurrencyFormatOptions): string {
-    // TODO:
+  formatCurrency(n: number | string | BigDecimal, code: CurrencyType | string, options: CurrencyFormatOptions): string {
+    if (typeof n === 'number' || typeof n === 'string') {
+      n = new BigDecimal(n);
+    }
     this.symbols(this.bundle, NumberSymbol.decimal);
     return '';
   }

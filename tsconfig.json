@@ -4,7 +4,7 @@
     "module": "commonjs",
     "lib": ["es6", "dom"],
     "declaration": true,
-    "removeComments": false,
+    "removeComments": true,
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,

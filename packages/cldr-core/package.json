@@ -14,17 +14,14 @@
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
     "gen-tables": "../../node_modules/.bin/ts-node ./scripts/gen-tables.ts",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+		"test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "lib/"
   ],
   "dependencies": {
     "@phensley/cldr-schema": "^0.1.10"
-  },
-  "devDependencies": {
-    "microtime": "^2.1.7",
-    "typescript": "^2.6.2"
   },
   "jest": {
     "collectCoverageFrom": [

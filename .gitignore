@@ -9,6 +9,7 @@ dist/
 coverage/
 .nyc_output/
 temp/
+.vscode/
 
 package-deps.json
 

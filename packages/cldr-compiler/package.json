@@ -16,7 +16,8 @@
     "clean": "rimraf ./lib",
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "bin",
@@ -32,10 +33,6 @@
     "partial.lenses": "^13.1.1",
     "prettier": "^1.10.2",
     "yargs": "^10.1.1"
-  },
-  "devDependencies": {
-    "@types/microtime": "^2.1.0",
-    "typescript": "2.6.2"
   },
   "jest": {
     "collectCoverageFrom": [

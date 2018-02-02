@@ -1,4 +1,4 @@
-import { parse, NumberField, NumberPattern } from '../../../src/parsing/patterns/number';
+import { parseNumberPattern as parse, NumberField, NumberPattern } from '../../../src/parsing/patterns/number';
 
 test('parse', () => {
   expect(parse('(¤#,##0.00)')).toEqual({

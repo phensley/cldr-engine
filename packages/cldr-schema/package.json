@@ -12,17 +12,13 @@
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib",
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
-    "gen-tables": "../../node_modules/.bin/ts-node ./scripts/gen-tables.ts",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "lib/"
   ],
-  "devDependencies": {
-    "microtime": "^2.1.7",
-    "typescript": "^2.6.2"
-  },
   "jest": {
     "collectCoverageFrom": [
       "**/src/**/*.ts",
