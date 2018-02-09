@@ -166,7 +166,7 @@ class NumberPatternParser {
   }
 }
 
-export const parse = (raw: string): NumberPattern => {
+export const parseNumberPattern = (raw: string): NumberPattern => {
   const parser = new NumberPatternParser();
   return parser.parse(raw);
 };

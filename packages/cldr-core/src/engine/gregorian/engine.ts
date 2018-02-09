@@ -24,7 +24,7 @@ const defaultFormatOptions = new GregorianFormatOptions();
  */
 export class GregorianEngine {
 
-  readonly cache: Map<string, DateTimeNode[]>;
+  private readonly cache: Map<string, DateTimeNode[]>;
 
   constructor(
     protected internal: GregorianInternal,
@@ -84,26 +84,28 @@ export class GregorianEngine {
   format(date: ZonedDateTime, options: GregorianFormatOptions = defaultFormatOptions): string {
     const width = options.date ? options.date : 'full';
     const raw = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
-
-    // let pattern = this.cache.get(raw);
-    // if (pattern === undefined) {
-    //   pattern = parseDatePattern(raw);
-    // }
-    // return this.formatter.format(this.bundle, date, pattern);
-
-    return this.internal.format(this.bundle, date, parseDatePattern(raw));
+    return this.internal.format(this.bundle, date, this.getPattern(raw));
   }
 
   formatParts(date: ZonedDateTime, options: GregorianFormatOptions = defaultFormatOptions): any[] {
     const width = options.date ? options.date : 'full';
     const raw = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
-    return this.internal.formatParts(this.bundle, date, parseDatePattern(raw));
+    return this.internal.formatParts(this.bundle, date, this.getPattern(raw));
   }
 
   formatInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): string {
     const field = start.fieldOfGreatestDifference(end);
     const raw = this.internal.Gregorian.intervalFormats(skeleton).field(this.bundle, field);
-    return this.internal.formatInterval(this.bundle, start, end, parseDatePattern(raw));
+    return this.internal.formatInterval(this.bundle, start, end, this.getPattern(raw));
+  }
+
+  private getPattern(raw: string): DateTimeNode[] {
+    let pattern = this.cache.get(raw);
+    if (pattern === undefined) {
+      pattern = parseDatePattern(raw);
+      this.cache.set(raw, pattern);
+    }
+    return pattern;
   }
 
 }

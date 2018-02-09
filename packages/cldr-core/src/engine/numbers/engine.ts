@@ -8,6 +8,7 @@ import {
 import { BigDecimal } from '../../types/bigdecimal';
 
 import { CurrencyFormatOptions, DecimalFormatOptions } from './options';
+import { NumberPattern, parseNumberPattern } from '../../parsing/patterns/number';
 
 export class NumberEngine {
 
@@ -15,6 +16,8 @@ export class NumberEngine {
   private readonly decimalFormats: DecimalFormats;
   private readonly symbols: FieldMapArrow<NumberSymbolType>;
   private readonly currencies: ScopeArrow<CurrencyType, CurrencyInfo>;
+
+  private readonly cache: Map<string, NumberPattern>;
 
   constructor(
     private readonly root: Root,
@@ -51,5 +54,14 @@ export class NumberEngine {
     }
     this.symbols(this.bundle, NumberSymbol.decimal);
     return '';
+  }
+
+  private getPattern(raw: string): NumberPattern {
+    let pattern = this.cache.get(raw);
+    if (pattern === undefined) {
+      pattern = parseNumberPattern(raw);
+      this.cache.set(raw, pattern);
+    }
+    return pattern;
   }
 }
