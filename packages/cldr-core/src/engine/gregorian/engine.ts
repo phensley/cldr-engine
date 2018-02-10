@@ -17,6 +17,9 @@ import { parseDatePattern, DateTimeNode } from '../../parsing/patterns/date';
 import { GregorianInternal } from './internal';
 import { GregorianFormatOptions } from './options';
 
+const ISO_WEEKDATE_EXTENDED = "YYYY-'W'ww-";
+const ISO_WEEKDATE_COMPACT = "YYYY'W'ww";
+
 const defaultFormatOptions = new GregorianFormatOptions();
 
 /**
@@ -81,6 +84,14 @@ export class GregorianEngine {
     return this.internal.weekdays.standAlone[width](this.bundle, weekday);
   }
 
+  getCompactISOWeekDate(date: ZonedDateTime): string {
+    return this.getISOWeekDate(date, ISO_WEEKDATE_COMPACT);
+  }
+
+  getExtendedISOWeekDate(date: ZonedDateTime): string {
+    return this.getISOWeekDate(date, ISO_WEEKDATE_EXTENDED);
+  }
+
   format(date: ZonedDateTime, options: GregorianFormatOptions = defaultFormatOptions): string {
     const width = options.date ? options.date : 'full';
     const raw = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
@@ -97,6 +108,12 @@ export class GregorianEngine {
     const field = start.fieldOfGreatestDifference(end);
     const raw = this.internal.Gregorian.intervalFormats(skeleton).field(this.bundle, field);
     return this.internal.formatInterval(this.bundle, start, end, this.getPattern(raw));
+  }
+
+  private getISOWeekDate(date: ZonedDateTime, raw: string): string {
+    const weekday = date.getDayOfWeek();
+    const base = this.internal.format(this.bundle, date, this.getPattern(raw));
+    return base + weekday;
   }
 
   private getPattern(raw: string): DateTimeNode[] {

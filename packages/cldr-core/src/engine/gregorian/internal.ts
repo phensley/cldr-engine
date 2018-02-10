@@ -279,7 +279,7 @@ export class GregorianInternal {
   }
 
   protected weekdayLocal(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    // TODO:
+    // TODO: need to add start of week day.
     return '';
   }
 
@@ -289,18 +289,34 @@ export class GregorianInternal {
   }
 
   protected isoWeek(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    // TODO:
-    return '';
+    const week = date.getISOWeek();
+    switch (width) {
+    case 2:
+      return zeroPad2(week, width);
+    default:
+      return String(week);
+    }
   }
 
   protected year(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const year = date.getYear();
-    return zeroPad2(year, width);
+    return this.formatYear(date.getYear(), width);
   }
 
   protected isoYear(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    // TODO:
-    return '';
+    return this.formatYear(date.getISOYear(), width);
   }
 
+  protected formatYear(year: number, width: number): string {
+    if (width === 2) {
+      year %= 100;
+    }
+    const digits = year >= 10000 ? 5 : year >= 1000 ? 4 : year >= 100 ? 3 : year >= 10 ? 2 : 1;
+    if (width > 1) {
+      const zeros = width - digits;
+      if (zeros > 0) {
+        return zeroPad2(year, zeros);
+      }
+    }
+    return String(year);
+  }
 }
