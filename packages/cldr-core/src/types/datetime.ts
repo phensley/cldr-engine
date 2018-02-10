@@ -14,8 +14,7 @@ const isLeap = (y: number): boolean => {
 };
 
 const ORDINAL_DAY = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-const ISO_WEEK = 0;
-const ISO_YEAR = 1;
+const WEEKMS = 7 * 86400000;
 
 /**
  * A date-time object with a timezone identifier.
@@ -31,11 +30,10 @@ export class ZonedDateTime {
   private _dst: boolean;
 
   // cache for iso week-based fields
-  private _isoUTC: number[] = [-1, -1];
-  private _isoLocal: number[] = [-1, -1];
+  private _isoLocal: number[];
 
   constructor(date: Date | number, zoneId: string) {
-    this._epoch = typeof date === 'number' ? date : date.getTime();
+    this._epoch = +date;
     this._utc = new Date(this._epoch);
     this._zoneId = substituteZoneAlias(zoneId);
     this._metaZoneId = findMetaZone(this._zoneId, this._epoch);
@@ -208,17 +206,17 @@ export class ZonedDateTime {
   /**
    * ISO 8601 Week of week-based year.
    */
-  getISOWeekOfWeekYear(): number {
-    this.calcISO(this._isoLocal);
-    return this._isoLocal[ISO_WEEK];
+  getISOWeek(): number {
+    this.calcISO();
+    return this._isoLocal[0];
   }
 
   /**
    * ISO 8601 Year of week-based Year.
    */
-  getISOYearOfWeekYear(): number {
-    this.calcISO(this._isoLocal);
-    return this._isoLocal[ISO_YEAR];
+  getISOYear(): number {
+    this.calcISO();
+    return this._isoLocal[1];
   }
 
   fieldOfGreatestDifference(other: ZonedDateTime): DateTimeFieldType {
@@ -246,15 +244,39 @@ export class ZonedDateTime {
     return DateTimeField.SECOND;
   }
 
-  private calcISO(iso: number[]): void {
-    if (iso[ISO_WEEK] !== -1) {
+  toISOString(): string {
+    return this._local.toISOString();
+  }
+
+  private calcISO(): void {
+    if (this._isoLocal !== undefined) {
       return;
     }
+
+    const month = this.getMonth();
     const year = this.getYear();
-    const yearday = this.getDayOfYear();
-    const weekday = this.getDayOfWeek();
-    const isoWeek = Math.floor((yearday - weekday + 10) / 7);
-    console.log('>', isoWeek);
-    // TODO:
+
+    const date  = new Date(this._local.valueOf());
+    const yearday = date.getDate();
+    const weekday = (date.getDay() + 6) % 7;
+
+    // Thursday of same week.
+    date.setDate(yearday - weekday + 3);
+    const thursday = date.valueOf();
+
+    // Thursday of first week of January.
+    date.setMonth(0, 1);
+    if (date.getDay() !== 4) {
+      date.setMonth(0, 1 + ((4 - date.getDay()) + 7) % 7);
+    }
+
+    const isoweek = 1 + Math.ceil((thursday - (+date)) / WEEKMS);
+    let isoyear = year;
+    if (month === 0 && isoweek >= 52) {
+      isoyear--;
+    } else if (month === 11 && isoweek === 1) {
+      isoyear++;
+    }
+    this._isoLocal = [isoweek, isoyear];
   }
 }

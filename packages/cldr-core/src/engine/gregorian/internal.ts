@@ -60,7 +60,7 @@ export class GregorianInternal {
     'M': { type: 'month', impl: this.month },
     'L': { type: 'month', impl: this.month },
     // 'l': deprecated
-    'w': { type: 'iso-week', impl: this.weekISO },
+    'w': { type: 'iso-week', impl: this.isoWeek },
     'W': { type: 'week-of-month', impl: this.weekOfMonth },
     'd': { type: 'day', impl: this.dayOfMonth },
     'D': { type: 'date', impl: this.dayOfYear },
@@ -288,7 +288,7 @@ export class GregorianInternal {
     return '';
   }
 
-  protected weekISO(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+  protected isoWeek(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     // TODO:
     return '';
   }
