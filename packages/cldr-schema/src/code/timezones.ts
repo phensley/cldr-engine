@@ -14,5 +14,8 @@ export const TIME_ZONE_NAMES: Scope = scope('TimeZoneNames', [
   scopemap('metaZones', MetaZoneValues, [
     metaZoneFormat('long'),
     metaZoneFormat('short')
-  ])
+  ]),
+  field('gmtFormat', 'gmtFormat'),
+  field('hourFormat', 'hourFormat'),
+  field('gmtZeroFormat', 'gmtZeroFormat')
 ]);

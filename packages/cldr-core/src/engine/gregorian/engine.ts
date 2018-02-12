@@ -13,28 +13,23 @@ import {
 } from '@phensley/cldr-schema';
 
 import { ZonedDateTime } from '../../types/datetime';
-import { parseDatePattern, DateTimeNode } from '../../parsing/patterns/date';
 import { GregorianInternal } from './internal';
 import { GregorianFormatOptions } from './options';
 
 const ISO_WEEKDATE_EXTENDED = "YYYY-'W'ww-";
 const ISO_WEEKDATE_COMPACT = "YYYY'W'ww";
 
-const defaultFormatOptions = new GregorianFormatOptions();
+const defaultFormatOptions = {};
 
 /**
  * Date formatting using the Gregorian calendar.
  */
 export class GregorianEngine {
 
-  private readonly cache: Map<string, DateTimeNode[]>;
-
   constructor(
     protected internal: GregorianInternal,
     protected bundle: Bundle
-  ) {
-    this.cache = new Map();
-  }
+  ) { }
 
   bundleId(): string {
     return this.bundle.bundleId();
@@ -93,36 +88,31 @@ export class GregorianEngine {
   }
 
   format(date: ZonedDateTime, options: GregorianFormatOptions = defaultFormatOptions): string {
+    let pattern = '';
+    if (options.datetime !== undefined) {
+      pattern = this.internal.Gregorian.timeFormats(this.bundle, (options.datetime || 'full') as FormatWidthType);
+    }
     const width = options.date ? options.date : 'full';
-    const raw = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
-    return this.internal.format(this.bundle, date, this.getPattern(raw));
+    // const raw = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
+    return this.internal.format(this.bundle, date, pattern);
   }
 
   formatParts(date: ZonedDateTime, options: GregorianFormatOptions = defaultFormatOptions): any[] {
     const width = options.date ? options.date : 'full';
-    const raw = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
-    return this.internal.formatParts(this.bundle, date, this.getPattern(raw));
+    const pattern = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
+    return this.internal.formatParts(this.bundle, date, pattern);
   }
 
   formatInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): string {
     const field = start.fieldOfGreatestDifference(end);
-    const raw = this.internal.Gregorian.intervalFormats(skeleton).field(this.bundle, field);
-    return this.internal.formatInterval(this.bundle, start, end, this.getPattern(raw));
+    const pattern = this.internal.Gregorian.intervalFormats(skeleton).field(this.bundle, field);
+    return this.internal.formatInterval(this.bundle, start, end, pattern);
   }
 
-  private getISOWeekDate(date: ZonedDateTime, raw: string): string {
+  private getISOWeekDate(date: ZonedDateTime, pattern: string): string {
     const weekday = date.getDayOfWeek();
-    const base = this.internal.format(this.bundle, date, this.getPattern(raw));
+    const base = this.internal.format(this.bundle, date, pattern);
     return base + weekday;
-  }
-
-  private getPattern(raw: string): DateTimeNode[] {
-    let pattern = this.cache.get(raw);
-    if (pattern === undefined) {
-      pattern = parseDatePattern(raw);
-      this.cache.set(raw, pattern);
-    }
-    return pattern;
   }
 
 }

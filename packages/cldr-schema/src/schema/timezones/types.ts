@@ -17,6 +17,9 @@ export interface TimeZoneInfo {
 }
 
 export interface TimeZoneNames {
+  readonly gmtFormat: FieldArrow;
+  readonly gmtZeroFormat: FieldArrow;
+  readonly hourFormat: FieldArrow;
   readonly metaZones: ScopeArrow<MetaZoneType, MetaZoneInfo>;
   readonly timeZones: ScopeArrow<TimeZoneType, TimeZoneInfo>;
 }

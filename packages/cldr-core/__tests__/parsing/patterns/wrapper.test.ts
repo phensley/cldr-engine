@@ -1,9 +1,9 @@
-import { parse, Arg } from '../../../src/parsing/patterns/wrapper';
+import { parseWrapperPattern } from '../../../src/parsing/patterns/wrapper';
 
-const arg = (n: number) => new Arg(n);
+const parse = parseWrapperPattern;
 
 test('basics', () => {
   expect(parse("{1} 'at' {0}")).toEqual([
-    arg(1), ' at ', arg(0)
+    1, ' at ', 0
   ]);
 });

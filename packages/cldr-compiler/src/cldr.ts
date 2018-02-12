@@ -243,6 +243,9 @@ const Numbers = {
  * Time zone data.
  */
 const TimeZoneNames = {
+  gmtFormat: get([_timeZoneNames, 'gmtFormat']),
+  gmtZeroFormat: get([_timeZoneNames, 'gmtZeroFormat']),
+  hourFormat: get([_timeZoneNames, 'hourFormat']),
   metaZones: get([_timeZoneNames, 'metazone']),
   timeZones: get([_timeZoneNames, 'zone', flattenTimeZones])
 };

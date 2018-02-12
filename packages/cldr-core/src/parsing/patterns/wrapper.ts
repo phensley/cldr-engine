@@ -1,15 +1,10 @@
-
-export class Arg {
-  constructor(readonly index: number) { }
-}
-
-export type WrapperNode = Arg | string;
+export type WrapperNode = number | string;
 
 /**
  * Parse a generic wrapper pattern.
  * Example:  "{1} at {0}"
  */
-export const parse = (raw: string): WrapperNode[] => {
+export const parseWrapperPattern = (raw: string): WrapperNode[] => {
   const nodes: WrapperNode[] = [];
   const len = raw.length;
 
@@ -44,7 +39,7 @@ export const parse = (raw: string): WrapperNode[] => {
     default:
       if (intag) {
         // Index doesn't exceed single digits.
-        nodes.push(new Arg(Number(ch)));
+        nodes.push(Number(ch));
       } else {
         buf += ch;
       }

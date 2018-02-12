@@ -1,4 +1,4 @@
-export class GregorianFormatOptions {
+export interface GregorianFormatOptions {
 
   // Combination date and time.
   readonly datetime?: string;

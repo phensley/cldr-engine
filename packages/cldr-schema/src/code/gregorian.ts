@@ -53,7 +53,7 @@ export const GREGORIAN: Scope = scope('Gregorian', [
 
   formatWidths('dateFormats'),
   formatWidths('dateTimeFormats'),
-  formatWidths('timeFormat'),
+  formatWidths('timeFormats'),
 
   fieldmap('availableFormats', AvailableFormatValues, Choice.ALT),
 

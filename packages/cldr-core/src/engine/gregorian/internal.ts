@@ -1,23 +1,28 @@
-import { Bundle, Root } from '@phensley/cldr-schema';
 import { ZonedDateTime } from '../../types/datetime';
 import {
+  Bundle,
   DayPeriodsFormats,
   Gregorian,
   EraType,
+  EraValues,
+  ErasFormat,
   QuarterType,
+  QuarterValues,
+  QuartersFormats,
+  MetaZoneType,
   MonthType,
+  MonthValues,
+  MonthsFormats,
   WeekdayType,
   WeekdaysFormats,
-  MonthsFormats,
-  QuartersFormats,
-  ErasFormat,
   WeekdayValues,
-  MonthValues,
-  QuarterValues,
-  EraValues,
+  Root,
+  TimeZoneNames,
 } from '@phensley/cldr-schema';
 
-import { DateTimeNode, splitDateIntervalPattern } from '../../parsing/patterns/date';
+import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
+import { WrapperNode, parseWrapperPattern } from '../../parsing/patterns/wrapper';
+import { LRU } from '../../utils/lru';
 
 export type FormatterFunc = (
   bundle: Bundle,
@@ -39,7 +44,7 @@ const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` :
  * Wires up field formatters. Only has to be initialized once, on demand when
  * gregorian calendar formatting is needed.
  */
-export class GregorianInternal {
+ export class GregorianInternal {
 
   readonly Gregorian: Gregorian;
   readonly dayPeriods: DayPeriodsFormats;
@@ -47,6 +52,14 @@ export class GregorianInternal {
   readonly months: MonthsFormats;
   readonly quarters: QuartersFormats;
   readonly weekdays: WeekdaysFormats;
+
+  readonly TimeZoneNames: TimeZoneNames;
+
+  // TODO: simpler LRU
+  private readonly datePatternCache: LRU<string, DateTimeNode[]>;
+  private readonly wrapperPatternCache: LRU<string, WrapperNode[]>;
+  // private readonly datePatternCache: Map<string, DateTimeNode[]>;
+  // private readonly wrapperPatternCache: Map<string, WrapperNode[]>;
 
   private impl: FieldFormatterMap = {
     'G': { type: 'era', impl: this.era },
@@ -83,40 +96,34 @@ export class GregorianInternal {
     's': { type: 'second', impl: this.second },
     'S': { type: 'fracsec', impl: this.fractionalSecond },
     // 'A'
-    // 'z' tz
+    'z': { type: 'timezone', impl: this.timeZone_z },
     // 'Z' tz
-    // 'O' tz
+    'O': { type: 'timezone', impl: this.timeZone_O },
     // 'v' tz
     // 'V' tz
     // 'X' tz
     // 'x' tz
   };
 
-  constructor(readonly root: Root) {
+  constructor(readonly root: Root, readonly cacheSize: number = 100) {
     this.Gregorian = root.Gregorian;
     this.dayPeriods = root.Gregorian.dayPeriods;
     this.eras = root.Gregorian.eras;
     this.months = root.Gregorian.months;
     this.quarters = root.Gregorian.quarters;
     this.weekdays = root.Gregorian.weekdays;
+    this.TimeZoneNames = root.TimeZoneNames;
+
+    this.datePatternCache = new LRU(cacheSize);
+    // this.datePatternCache = new Map();
   }
 
-  format(bundle: Bundle, date: ZonedDateTime, format: DateTimeNode[]): string {
-    let res = '';
-    for (const node of format) {
-      if (typeof node === 'string') {
-        res += node;
-      } else {
-        const func = this.impl[node.ch];
-        if (func !== undefined) {
-          res += func.impl.call(this, bundle, date, node.ch, node.width);
-        }
-      }
-    }
-    return res;
+  format(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
+    return this._format(bundle, date, this.getDatePattern(pattern));
   }
 
-  formatParts(bundle: Bundle, date: ZonedDateTime, format: DateTimeNode[]): any[] {
+  formatParts(bundle: Bundle, date: ZonedDateTime, pattern: string): any[] {
+    const format = this.getDatePattern(pattern);
     const res = [];
     for (const node of format) {
       if (typeof node === 'string') {
@@ -132,11 +139,27 @@ export class GregorianInternal {
     return res;
   }
 
-  formatInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, format: DateTimeNode[]): string {
+  formatInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): string {
+    const format = this.getDatePattern(pattern);
     // TODO: use fallback format if format.length == 0
-    const [ fst, snd ] = splitDateIntervalPattern(format);
-    const res = this.format(bundle, start, fst);
-    return res + this.format(bundle, end, snd);
+    const idx = intervalPatternBoundary(format);
+    const res = this._format(bundle, start, format.slice(0, idx));
+    return res + this._format(bundle, end, format.slice(idx));
+  }
+
+  protected _format(bundle: Bundle, date: ZonedDateTime, format: DateTimeNode[]): string {
+    let res = '';
+    for (const node of format) {
+      if (typeof node === 'string') {
+        res += node;
+      } else {
+        const func = this.impl[node.ch];
+        if (func !== undefined) {
+          res += func.impl.call(this, bundle, date, node.ch, node.width);
+        }
+      }
+    }
+    return res;
   }
 
   protected dayOfMonth(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
@@ -191,7 +214,7 @@ export class GregorianInternal {
   protected hour(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     const twelve = field === 'h';
     let hours = date.getHour();
-    if (twelve && hours < 12) {
+    if (twelve && hours > 12) {
       hours = hours - 12;
     }
     if (twelve && hours === 0) {
@@ -299,14 +322,41 @@ export class GregorianInternal {
   }
 
   protected year(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    return this.formatYear(date.getYear(), width);
+    return this._year(date.getYear(), width);
   }
 
   protected isoYear(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    return this.formatYear(date.getISOYear(), width);
+    return this._year(date.getISOYear(), width);
   }
 
-  protected formatYear(year: number, width: number): string {
+  protected timeZone_z(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    if (width > 4) {
+      return '';
+    }
+    const zoneId = date.zoneId();
+    const metaZoneId = date.metaZoneId();
+    const isDST = date.isDaylightSavings();
+    const metaZone = this.TimeZoneNames.metaZones(metaZoneId as MetaZoneType);
+    const format = width === 4 ? metaZone.long : metaZone.short;
+    const name = isDST ? format.daylight(bundle) : format.standard(bundle);
+    return name;
+  }
+
+  protected timeZone_O(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    const offset = date.timezoneOffset();
+    const hours = offset / 60 | 0;
+    const minutes = offset % 60;
+    this.TimeZoneNames.gmtFormat(bundle);
+    switch (width) {
+    case 1:
+      // return this._wrapper()
+    //
+    }
+    // TODO:
+    return '';
+  }
+
+  protected _year(year: number, width: number): string {
     if (width === 2) {
       year %= 100;
     }
@@ -318,5 +368,53 @@ export class GregorianInternal {
       }
     }
     return String(year);
+  }
+
+  protected _wrapGMT(bundle: Bundle, offset: number, short: boolean): string {
+    if (offset === 0) {
+      return this.TimeZoneNames.gmtZeroFormat(bundle);
+    }
+
+    const negative = offset < 0;
+    if (negative) {
+      offset *= -1;
+    }
+    const hours = offset / 60 | 0;
+    const minutes = offset % 60;
+    const wrapper = this.getWrapperPattern(this.TimeZoneNames.gmtFormat(bundle));
+    const hourformat = this.TimeZoneNames.hourFormat(bundle).split(';');
+    const format = negative ? hourformat[0] : hourformat[1];
+    // TODO:
+    return '';
+  }
+
+  protected _wrapper(pattern: WrapperNode[], args: string[]): string {
+    let res = '';
+    for (const node of pattern) {
+      if (typeof node === 'string') {
+        res += node;
+      } else {
+        res += args[node] || '';
+      }
+    }
+    return res;
+  }
+
+  private getDatePattern(raw: string): DateTimeNode[] {
+    let pattern = this.datePatternCache.get(raw);
+    if (pattern === undefined) {
+      pattern = parseDatePattern(raw);
+      this.datePatternCache.set(raw, pattern);
+    }
+    return pattern;
+  }
+
+  private getWrapperPattern(raw: string): WrapperNode[] {
+    let pattern = this.wrapperPatternCache.get(raw);
+    if (pattern === undefined) {
+      pattern = parseWrapperPattern(raw);
+      this.wrapperPatternCache.set(raw, pattern);
+    }
+    return pattern;
   }
 }

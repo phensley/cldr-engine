@@ -1,4 +1,3 @@
-
 export class Field {
   constructor(
     readonly ch: string,
@@ -83,27 +82,18 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
 };
 
 /**
- * Scan the date interval pattern for the first repeated field.
- * Use that to split the pattern in two parts.
+ * Scan the date interval pattern and return the index of the first repeated field.
  */
-export const splitDateIntervalPattern = (pattern: DateTimeNode[]): [DateTimeNode[], DateTimeNode[]] => {
+export const intervalPatternBoundary = (pattern: DateTimeNode[]): number => {
   const seen: Set<string> = new Set();
-  const fst: DateTimeNode[] = [];
-  const snd: DateTimeNode[] = [];
-  let boundary = false;
-  for (const node of pattern) {
-    if (!boundary && typeof node !== 'string') {
+  for (let i = 0; i < pattern.length; i++) {
+    const node = pattern[i];
+    if (typeof node !== 'string') {
       if (seen.has(node.ch)) {
-        boundary = true;
-      } else {
-        seen.add(node.ch);
+        return i;
       }
-    }
-    if (boundary) {
-      snd.push(node);
-    } else {
-      fst.push(node);
+      seen.add(node.ch);
     }
   }
-  return [fst, snd];
+  return -1;
 };
