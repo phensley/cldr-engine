@@ -395,9 +395,10 @@ export class Decimal {
       emitted++;
     }
 
+    const last = len - 1;
     for (let i = 0; i < len; i++) {
       let d = this.data[i];
-      const c = digits(d);
+      const c = i === last ? digits(d) : RDIGITS;
       for (let j = 0; j < c; j++) {
         if (exp === 0) {
           r.push(format.decimal);

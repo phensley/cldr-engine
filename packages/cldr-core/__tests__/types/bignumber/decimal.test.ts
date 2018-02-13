@@ -65,6 +65,8 @@ test('format', () => {
   expect(parse('.00123').format(opts)).toEqual('0.00123');
   expect(parse('123456789.1234005').format(opts)).toEqual('12,3456,789.1234005');
   expect(parse('1e5').format(opts)).toEqual('10,000');
+  expect(parse('123000000000000000000.000000456000000000000').format(opts)).toEqual(
+    '12,3000,0000,0000,0000,000.000000456000000000000');
 });
 
 test('add', () => {
