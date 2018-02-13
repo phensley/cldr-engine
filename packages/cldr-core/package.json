@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-core",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Core library for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -14,13 +14,13 @@
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
     "prepublish": "yarn build",
-		"test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
+    "test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "lib/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "0.1.10"
+    "@phensley/cldr-schema": "^0.1.11"
   },
   "jest": {
     "collectCoverageFrom": [
