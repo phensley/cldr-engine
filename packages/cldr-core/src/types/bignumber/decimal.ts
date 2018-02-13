@@ -706,5 +706,16 @@ export class Decimal {
 
 }
 
-const ZERO = new Decimal('0');
-const ONE = new Decimal('1');
+export const ZERO = new Decimal('0');
+export const ONE = new Decimal('1');
+
+// https://oeis.org/A000796/constant
+export const PI = new Decimal(
+  '3.141592653589793238462643383279502884197169399375105' +
+  '82097494459230781640628620899862803482534211706798214');
+
+// https://oeis.org/A001113/constant
+export const E = new Decimal(
+  '2.718281828459045235360287471352662497757247093699959' +
+  '57496696762772407663035354759457138217852516642742746'
+);
