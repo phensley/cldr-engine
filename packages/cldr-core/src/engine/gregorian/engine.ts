@@ -29,10 +29,6 @@ export class GregorianEngine {
     protected bundle: Bundle
   ) { }
 
-  bundleId(): string {
-    return this.bundle.bundleId();
-  }
-
   /**
    * Get standalone day period.
    */

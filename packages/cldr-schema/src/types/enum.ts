@@ -1,3 +1,8 @@
+/*
+ * Builders for runtime enumerated values. Main advantage is reduction
+ * of source code size for creating enums with multiple views.
+ */
+
 export const makeEnum = <T extends string>(specs: Array<T>): [ {[K in T]: K}, T[], {[K in T]: number} ] => {
   /* tslint:disable-next-line */
   const _enum: {[K in T]: K} = Object.create(null);

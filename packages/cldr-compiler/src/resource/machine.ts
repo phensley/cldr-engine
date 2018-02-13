@@ -15,11 +15,11 @@ export interface Encoder {
 }
 
 const pluralValues = ['other', 'zero', 'one', 'two', 'few', 'many'];
-const altValues = ['', '-alt-variant', '-alt-short'];
+const altValues = ['', '-alt-variant', '-alt-short', '-alt-narrow'];
 const yeartypeValues = ['', '-yeartype-leap'];
 
 export const pluralFields = (key: string) => pluralValues.map(v => `${key}-count-${v}`);
-export const altField = (key: string) => altValues.map(v => `${key}-alt-${v}`);
+export const altField = (key: string) => altValues.map(v => `${key}${v}`);
 export const yeartypeField = (key: string) => yeartypeValues.map(v => `${key}-yeartype-${v}`);
 
 // Produces a list of pluralized digits to for long/short formats.
@@ -80,7 +80,6 @@ export class EncoderMachine {
     switch (choice) {
     case Choice.PLURAL:
       for (const f1 of pluralFields(name)) {
-        // console.log('encode:', f1, obj[f1]);
         this.encoder.encode(obj[f1]);
       }
       break;

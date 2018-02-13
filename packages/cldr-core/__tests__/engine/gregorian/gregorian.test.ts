@@ -1,4 +1,5 @@
-import { languageBundle, schema } from '../../_helpers/bundle';
+import { languageBundle } from '../../_helpers/bundle';
+import { buildSchema } from '../../../src/schema';
 import { GregorianEngine, GregorianInternal } from '../../../src/engine/gregorian';
 import { ZonedDateTime } from '../../../src/types/datetime';
 
@@ -11,8 +12,7 @@ const LT = languageBundle('lt');
 const SR = languageBundle('sr');
 const ZH = languageBundle('zh');
 
-const SCHEMA = schema();
-const INTERNAL = new GregorianInternal(SCHEMA);
+const INTERNAL = new GregorianInternal(buildSchema());
 
 const LOS_ANGELES = 'America/Los_Angeles';
 const MARCH_11_2018 = new ZonedDateTime(1520751625000, LOS_ANGELES);

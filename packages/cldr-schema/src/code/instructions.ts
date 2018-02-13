@@ -32,6 +32,7 @@ export interface Origin {
 export interface Scope {
   readonly type: 'scope';
   readonly name: string;
+  readonly identifier: string;
   readonly block: Instruction[];
 }
 
@@ -62,8 +63,8 @@ export const fieldmap = (name: string, fields: string[], choice: Choice = Choice
 export const origin = (block: Instruction[]) =>
   ({ type: 'origin', block } as Origin);
 
-export const scope = (name: string, block: Instruction[]) =>
-  ({ type: 'scope', name, block } as Scope);
+export const scope = (name: string, identifier: string, block: Instruction[]) =>
+  ({ type: 'scope', name, identifier, block } as Scope);
 
 export const scopefield = (name: string, fields: string[]) =>
   ({ type: 'scopefield', name, fields } as ScopeField);

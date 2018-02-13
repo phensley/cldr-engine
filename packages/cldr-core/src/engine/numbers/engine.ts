@@ -1,43 +1,36 @@
 import {
-  Bundle, FieldMapArrow, Schema, ScopeArrow,
-  CurrencyType, CurrencyInfo,
-  CurrencyFormats, DecimalFormats,
-  NumberSymbol, NumberSymbolType
+  Alt,
+  Bundle,
+  CurrencyType,
+  NumberSymbol,
+  Plural,
+  pluralCategory,
+  PluralValues
 } from '@phensley/cldr-schema';
 
+import { NumbersInternal } from './internal';
+import { CurrencyFormatOptions, DecimalFormatOptions } from './options';
 import { Decimal } from '../../types/bignumber';
 
-import { CurrencyFormatOptions, DecimalFormatOptions } from './options';
-import { NumberPattern, parseNumberPattern } from '../../parsing/patterns/number';
-
-export class NumberEngine {
-
-  private readonly currencyFormats: CurrencyFormats;
-  private readonly decimalFormats: DecimalFormats;
-  private readonly symbols: FieldMapArrow<NumberSymbolType>;
-  private readonly currencies: ScopeArrow<CurrencyType, CurrencyInfo>;
-
-  private readonly cache: Map<string, NumberPattern>;
+export class NumbersEngine {
 
   constructor(
-    private readonly root: Schema,
-    private readonly bundle: Bundle) {
-      this.currencyFormats = root.Numbers.currencyFormats;
-      this.decimalFormats = root.Numbers.decimalFormats;
-      this.symbols = root.Numbers.symbols;
+    protected readonly internal: NumbersInternal,
+    protected readonly bundle: Bundle) {
   }
 
-  bundleId(): string {
-    return this.bundle.bundleId();
-  }
-
-  getCurrencySymbol(code: CurrencyType | string): string {
-    // TODO: add option to fetch narrow symbol once Alt enum is supported.
-    return this.currencies(code as CurrencyType).symbol(this.bundle);
+  getCurrencySymbol(code: CurrencyType | string, narrow: boolean = false): string {
+    const alt = narrow ? Alt.NARROW : Alt.NONE;
+    return this.internal.Currencies(code as CurrencyType).symbol(this.bundle, alt);
   }
 
   getCurrencyDisplayName(code: CurrencyType | string): string {
-    return this.currencies(code as CurrencyType).displayName(this.bundle);
+    return this.internal.Currencies(code as CurrencyType).displayName(this.bundle);
+  }
+
+  getCurrencyPluralName(code: CurrencyType | string, plural: string): string {
+    const cat: Plural = pluralCategory(plural);
+    return this.internal.Currencies(code as CurrencyType).pluralName(this.bundle, cat);
   }
 
   formatDecimal(n: number | string | Decimal, options: DecimalFormatOptions): string {
@@ -45,23 +38,14 @@ export class NumberEngine {
       n = new Decimal(n);
     }
     // TODO:
-    return '';
+    return n.toString();
   }
 
   formatCurrency(n: number | string | Decimal, code: CurrencyType | string, options: CurrencyFormatOptions): string {
     if (typeof n === 'number' || typeof n === 'string') {
       n = new Decimal(n);
     }
-    this.symbols(this.bundle, NumberSymbol.decimal);
+    this.internal.symbols(this.bundle, NumberSymbol.decimal);
     return '';
-  }
-
-  private getPattern(raw: string): NumberPattern {
-    let pattern = this.cache.get(raw);
-    if (pattern === undefined) {
-      pattern = parseNumberPattern(raw);
-      this.cache.set(raw, pattern);
-    }
-    return pattern;
   }
 }

@@ -1,7 +1,7 @@
 import { Rational } from '../../../src/types/bignumber';
 
 test('basics', () => {
-  const rat = Rational.parse('1 / pi');
   // TODO:
-  console.log(rat);
+  console.log(Rational.parse('1 / pi'));
+  console.log(Rational.parse('1/e'));
 });

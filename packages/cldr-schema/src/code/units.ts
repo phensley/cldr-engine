@@ -6,7 +6,7 @@ const unitInfo = (n: string): ScopeMap => scopemap(n, UnitValues, [
   field('unitPattern', 'unitPattern', Choice.PLURAL)
 ]);
 
-export const UNITS: Scope = scope('Units', [
+export const UNITS: Scope = scope('Units', 'Units', [
   unitInfo('long'),
   unitInfo('narrow'),
   unitInfo('short')

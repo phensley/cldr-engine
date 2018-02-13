@@ -4,7 +4,7 @@
 const LIMIT = 10000000000000;
 
 // TODO: Now that bignumber Decimal exists add a method to compute the
-// number operands.
+// number operands. that will eliminate the need for this redundant parser.
 
 /**
  * Operands for use in evaluating localized plural rules:

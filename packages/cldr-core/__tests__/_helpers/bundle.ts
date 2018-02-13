@@ -4,25 +4,10 @@ import * as process from 'process';
 import * as child from 'child_process';
 import * as zlib from 'zlib';
 
-import { SchemaBuilder } from '../../src/internals';
-import { Pack } from '../../src/resource/pack';
+import { Bundle } from '@phensley/cldr-schema';
 import { LanguageResolver } from '../../src/locale/resolver';
-import { Bundle, Schema, ORIGIN } from '@phensley/cldr-schema';
-
-// Singleton schema accessor.
-let SCHEMA: Schema;
-
-/**
- * Builds and returns the global schema accessor object.
- */
-export const schema = (): Schema => {
-  if (SCHEMA === undefined) {
-    const builder = new SchemaBuilder();
-    SCHEMA = ({} as any) as Schema;
-    builder.construct(SCHEMA, ORIGIN);
-  }
-  return SCHEMA;
-};
+import { Pack } from '../../src/resource/pack';
+import { SchemaBuilder } from '../../src/schema';
 
 /**
  * Load a resource bundle for a given language. If resource file does

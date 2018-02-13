@@ -1,11 +1,20 @@
 import { LRU } from './lru';
 
-export class PatternCache<T> {
+/**
+ * Links an arrow function to an LRU cache. The function converts
+ * a string to a value of type T. The string itself is used as
+ * the cache key.
+ */
+export class Cache<T> {
 
   private storage: LRU<string, T>;
 
   constructor(private parser: (s: string) => T, capacity: number) {
     this.storage = new LRU(capacity);
+  }
+
+  size(): number {
+    return this.storage.size();
   }
 
   get(raw: string): T {

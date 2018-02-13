@@ -22,23 +22,12 @@ import {
   OffsetMap,
   OffsetsMap,
   Origin,
+  Schema,
   Scope,
   ScopeField,
   ScopeMap,
+  ORIGIN,
 } from '@phensley/cldr-schema';
-
-const IDENTIFIER_UNSAFE = /[^a-z-]+/ig;
-const IDENTIFIER_SEGMENT = /(-[a-z]+)/g;
-
-/**
- * Convert a field / scope name into a call-safe identifier.
- */
-export const identifier = (name: string) => {
-  const raw = name.replace(IDENTIFIER_UNSAFE, '');
-  return raw.replace(IDENTIFIER_SEGMENT, (x: string): string => {
-    return x[1].toUpperCase() + x.substring(2).toLowerCase();
-  });
-};
 
 /**
  * Generates field offsets for the schema builder.
@@ -114,9 +103,8 @@ export class SchemaBuilder {
   }
 
   private constructDigits(obj: any, inst: Digits): void {
-    const ident = identifier(inst.name);
     const offsets = this.generator.pluralDigits();
-    obj[ident] = digitsArrow(offsets);
+    obj[inst.name] = digitsArrow(offsets);
   }
 
   private constructField(obj: any, inst: Field): void {
@@ -131,20 +119,19 @@ export class SchemaBuilder {
   }
 
   private constructFieldMap(obj: any, inst: FieldMap): void {
-    const name = identifier(inst.name);
     const choice = inst.choice;
     if (choice === Choice.NONE) {
       const map: OffsetMap = {};
       for (const field of inst.fields) {
         map[field] = this.generator.field();
       }
-      obj[name] = fieldMapArrow(map);
+      obj[inst.name] = fieldMapArrow(map);
     } else {
      const map: OffsetsMap = {};
       for (const field of inst.fields) {
         map[field] = this.generator.choiceField(choice);
       }
-      obj[name] = fieldMapIndexedArrow(map);
+      obj[inst.name] = fieldMapIndexedArrow(map);
     }
   }
 
@@ -155,9 +142,8 @@ export class SchemaBuilder {
   }
 
   private constructScope(obj: any, inst: Scope): void {
-    const name = identifier(inst.name);
     const curr: any = {};
-    obj[name] = curr;
+    obj[inst.identifier] = curr;
     for (const i of inst.block) {
       this.construct(curr, i);
     }
@@ -190,3 +176,14 @@ export class SchemaBuilder {
   }
 
 }
+
+let SCHEMA: Schema;
+
+export const buildSchema = (): Schema => {
+  if (SCHEMA === undefined) {
+    const builder = new SchemaBuilder();
+    SCHEMA = ({} as any) as Schema;
+    builder.construct(SCHEMA, ORIGIN);
+  }
+  return SCHEMA;
+};

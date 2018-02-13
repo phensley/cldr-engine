@@ -1,33 +1,33 @@
 import { Choice, Scope, digits, field, fieldmap, scope } from './instructions';
 import { NumberSymbolValues } from '../schema/numbers';
 
-export const NUMBERS: Scope = scope('Numbers', [
+export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
   fieldmap('symbols', NumberSymbolValues),
 
-  scope('currencyFormats', [
+  scope('currencyFormats', 'currencyFormats', [
     field('standard', 'standard'),
     field('accounting', 'accounting'),
 
-    scope('short', [
+    scope('short', 'short', [
       digits('standard')
     ]),
 
     field('unitPattern', 'unitPattern', Choice.PLURAL)
   ]),
 
-  scope('decimalFormats', [
+  scope('decimalFormats', 'decimalFormats', [
     field('standard', 'standard'),
 
-    scope('short', [
+    scope('short', 'short', [
       digits('decimalFormat')
     ]),
 
-    scope('long', [
+    scope('long', 'long', [
       digits('decimalFormat')
     ])
   ]),
 
-  scope('percentFormats', [
+  scope('percentFormats', 'percentFormats', [
     field('standard', 'standard')
   ])
 ]);

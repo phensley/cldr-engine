@@ -20,6 +20,10 @@ export class LRU<K, V> {
     this.root = root;
   }
 
+  size(): number {
+    return this.storage.size;
+  }
+
   get(key: K): V | undefined {
     const n = this.storage.get(key);
     if (n === undefined) {

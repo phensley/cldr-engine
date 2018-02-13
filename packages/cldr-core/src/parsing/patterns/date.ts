@@ -10,9 +10,9 @@ export type DateTimeNode = Field | string;
 const patternChars = [
   'G', 'y', 'Y', 'u', 'U', 'r', 'Q', 'q', 'M', 'L', 'l', 'w', 'W', 'd', 'D',
   'F', 'g', 'E', 'e', 'c', 'a', 'b', 'B', 'h', 'H', 'K', 'k', 'j', 'J', 'C',
-  'm', 's', 'S', 'A', 'z', 'Z', 'O', 'v', 'V', 'X', 'x']
-  .reduce((o: any, c) => {
-    o[c] = 1;
+  'm', 's', 'S', 'A', 'z', 'Z', 'O', 'v', 'V', 'X', 'x'
+].reduce((o: any, c, i) => {
+    o[c] = i + 1;
     return o;
   }, {});
 
@@ -42,7 +42,7 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
       continue;
     }
 
-    if (patternChars[ch] === 1) {
+    if (patternChars[ch] > 0) {
       if (buf.length > 0) {
         nodes.push(buf);
         buf = '';
@@ -85,14 +85,17 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
  * Scan the date interval pattern and return the index of the first repeated field.
  */
 export const intervalPatternBoundary = (pattern: DateTimeNode[]): number => {
-  const seen: Set<string> = new Set();
+  // Use bit flags to detect first repeated field.
+  const data = [0, 0];
   for (let i = 0; i < pattern.length; i++) {
     const node = pattern[i];
     if (typeof node !== 'string') {
-      if (seen.has(node.ch)) {
+      const n = patternChars[node.ch];
+      const idx = n >>> 5;
+      if ((data[idx] >>> (n % 32) & 1) === 1) {
         return i;
       }
-      seen.add(node.ch);
+      data[idx] |= (1 << n);
     }
   }
   return -1;

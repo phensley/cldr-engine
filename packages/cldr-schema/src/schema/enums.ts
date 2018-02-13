@@ -9,17 +9,37 @@ export enum Plural {
 
 export const PluralValues = 'other zero one two few many'.split(' ');
 
+export const pluralCategory = (s: string): Plural => {
+  switch (s) {
+  case 'zero':
+    return Plural.ZERO;
+  case 'one':
+    return Plural.ONE;
+  case 'two':
+    return Plural.TWO;
+  case 'few':
+    return Plural.FEW;
+  case 'many':
+    return Plural.MANY;
+  default:
+    return Plural.OTHER;
+  }
+};
+
+export type PluralType = 'other' | 'zero' | 'one' | 'two' | 'few' | 'many';
+
 export enum Alt {
   NONE = 0,
   VARIANT = 1,
-  SHORT = 2
+  SHORT = 2,
+  NARROW = 3,
 }
 
-export const AltValues = '|-variant|-short'.split('|');
+export const AltValues = '|-alt-variant|-alt-short|-alt-narrow'.split('|');
 
 export enum Yeartype {
   NONE = 0,
   LEAP = 1,
 }
 
-export const YeartypeValues = '|-leap'.split('|');
+export const YeartypeValues = '|-yeartype-leap'.split('|');

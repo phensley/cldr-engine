@@ -22,9 +22,12 @@ import {
 
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
 import { WrapperNode, parseWrapperPattern } from '../../parsing/patterns/wrapper';
-import { PatternCache } from '../../utils/cache';
+import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';
 
+/**
+ * Function that formats a given date field.
+ */
 export type FormatterFunc = (
   bundle: Bundle,
   date: ZonedDateTime,
@@ -55,8 +58,8 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   readonly TimeZoneNames: TimeZoneNames;
 
   // TODO: simpler LRU
-  private readonly datePatternCache: PatternCache<DateTimeNode[]>;
-  private readonly wrapperPatternCache: PatternCache<WrapperNode[]>;
+  private readonly datePatternCache: Cache<DateTimeNode[]>;
+  private readonly wrapperPatternCache: Cache<WrapperNode[]>;
 
   private impl: FieldFormatterMap = {
     'G': { type: 'era', impl: this.era },
@@ -111,8 +114,8 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     this.weekdays = root.Gregorian.weekdays;
     this.TimeZoneNames = root.TimeZoneNames;
 
-    this.datePatternCache = new PatternCache(parseDatePattern, cacheSize);
-    this.wrapperPatternCache = new PatternCache(parseWrapperPattern, cacheSize);
+    this.datePatternCache = new Cache(parseDatePattern, cacheSize);
+    this.wrapperPatternCache = new Cache(parseWrapperPattern, cacheSize);
   }
 
   format(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
@@ -285,7 +288,8 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
 
   protected weekday(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     const format = this.weekdays.format;
-    const weekday = WeekdayValues[date.getDayOfWeek()] as WeekdayType;
+    const index = date.getDayOfWeek() % 7;
+    const weekday = WeekdayValues[index] as WeekdayType;
     switch (width) {
     case 6:
       return format.short(bundle, weekday);

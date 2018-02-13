@@ -8,6 +8,7 @@ export type StringMap = { [x: string]: string };
 
 export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
 
+// Notation for categories in compact plural rules
 const CATEGORIES: any = {
   'A': Plural.ZERO,
   'B': Plural.ONE,

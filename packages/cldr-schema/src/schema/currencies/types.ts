@@ -1,11 +1,11 @@
 import { FieldArrow, FieldIndexedArrow } from '../arrows';
 import { CurrencyType } from './autogen.currencies';
-import { Plural } from '../enums';
+import { Alt, Plural } from '../enums';
 
 export interface CurrencyInfo {
   readonly displayName: FieldArrow;
   readonly pluralName: FieldIndexedArrow<Plural>;
-  readonly symbol: FieldArrow;
+  readonly symbol: FieldIndexedArrow<Alt>;
 }
 
 export interface Currencies {
