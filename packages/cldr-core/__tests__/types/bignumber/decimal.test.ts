@@ -1,8 +1,9 @@
-import { BigDecimal, RoundingMode } from '../../src/types/bigdecimal';
-import { DivMod, divide } from '../../src/types/bigdecimal/math';
+import { Decimal, RoundingMode } from '../../../src/types/bignumber';
+import { DivMod, divide } from '../../../src/types/bignumber/math';
+import { DecimalFormat } from '../../../src/types/bignumber/types';
 
-const parse = (s: string) => new BigDecimal(s);
-const parsedata = (s: string) => (new BigDecimal(s) as any).data;
+const parse = (s: string) => new Decimal(s);
+const parsedata = (s: string) => (new Decimal(s) as any).data;
 const cmp = (u: string, v: string) => parse(u).compare(parse(v));
 const add = (u: string, v: string) => parse(u).add(parse(v));
 const sub = (u: string, v: string) => parse(u).subtract(parse(v));
@@ -50,6 +51,20 @@ test('scale', () => {
   expect(parse('1234').scale()).toEqual(0);
   expect(parse('1.234').scale()).toEqual(3);
   expect(parse('1e3').scale()).toEqual(-3);
+});
+
+test('format', () => {
+  const opts: DecimalFormat = {
+    decimal: '.',
+    group: ',',
+    minIntDigits: 1,
+    minGroupingDigits: 1,
+    primaryGroupSize: 3,
+    secondaryGroupSize: 4
+  };
+  expect(parse('.00123').format(opts)).toEqual('0.00123');
+  expect(parse('123456789.1234005').format(opts)).toEqual('12,3456,789.1234005');
+  expect(parse('1e5').format(opts)).toEqual('10,000');
 });
 
 test('add', () => {

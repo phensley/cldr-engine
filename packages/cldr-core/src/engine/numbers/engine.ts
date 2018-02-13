@@ -1,11 +1,11 @@
 import {
-  Bundle, FieldMapArrow, Root, ScopeArrow,
+  Bundle, FieldMapArrow, Schema, ScopeArrow,
   CurrencyType, CurrencyInfo,
   CurrencyFormats, DecimalFormats,
   NumberSymbol, NumberSymbolType
 } from '@phensley/cldr-schema';
 
-import { BigDecimal } from '../../types/bigdecimal';
+import { Decimal } from '../../types/bignumber';
 
 import { CurrencyFormatOptions, DecimalFormatOptions } from './options';
 import { NumberPattern, parseNumberPattern } from '../../parsing/patterns/number';
@@ -20,7 +20,7 @@ export class NumberEngine {
   private readonly cache: Map<string, NumberPattern>;
 
   constructor(
-    private readonly root: Root,
+    private readonly root: Schema,
     private readonly bundle: Bundle) {
       this.currencyFormats = root.Numbers.currencyFormats;
       this.decimalFormats = root.Numbers.decimalFormats;
@@ -40,17 +40,17 @@ export class NumberEngine {
     return this.currencies(code as CurrencyType).displayName(this.bundle);
   }
 
-  formatDecimal(n: number | string | BigDecimal, options: DecimalFormatOptions): string {
+  formatDecimal(n: number | string | Decimal, options: DecimalFormatOptions): string {
     if (typeof n === 'number' || typeof n === 'string') {
-      n = new BigDecimal(n);
+      n = new Decimal(n);
     }
     // TODO:
     return '';
   }
 
-  formatCurrency(n: number | string | BigDecimal, code: CurrencyType | string, options: CurrencyFormatOptions): string {
+  formatCurrency(n: number | string | Decimal, code: CurrencyType | string, options: CurrencyFormatOptions): string {
     if (typeof n === 'number' || typeof n === 'string') {
-      n = new BigDecimal(n);
+      n = new Decimal(n);
     }
     this.symbols(this.bundle, NumberSymbol.decimal);
     return '';

@@ -33,6 +33,12 @@ export class StringBundle implements Bundle {
   }
 }
 
+/**
+ * Bundle that gets returned when a lookup fails.
+ *
+ * TODO: once public api is hammered out this may be unnecessary as
+ * we may throw an error.
+ */
 export class DummyBundle implements Bundle {
 
   bundleId(): string {
@@ -47,6 +53,9 @@ export class DummyBundle implements Bundle {
 
 const DUMMY_BUNDLE = new DummyBundle();
 
+/**
+ * Layer in the pack that supports all regions for a single language + script.
+ */
 export class PackScript {
 
   readonly _strings: string[];
@@ -102,10 +111,13 @@ export class Pack {
 
   constructor(data: string) {
     const raw: any = JSON.parse(data);
-    const { version, cldrVersion, language } = raw;
+    const { version, cldr, language } = raw;
     if (typeof version === undefined) {
       throw new Error('Severe error: data does not look like a valid resource pack.');
     }
+    this.version = version;
+    this.cldrVersion = cldr;
+    this.language = language;
     Object.keys(raw.scripts).forEach(k => {
       const obj = raw.scripts[k];
       this.scripts[k] = new PackScript(obj.strings, obj.exceptions, obj.regions);

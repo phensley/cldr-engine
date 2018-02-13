@@ -1,2 +1,2 @@
-export * from './bigdecimal';
+export * from './bignumber';
 export * from './enum';

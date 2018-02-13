@@ -3,14 +3,14 @@ import { join } from 'path';
 import * as yargs from 'yargs';
 import * as zlib from 'zlib';
 
-import { Locale, LanguageResolver } from '@phensley/cldr-core';
 import { availableLocales, getMain  } from '../../cldr';
 import { EncoderMachine, Encoder } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
 import { getPackageInfo } from './util';
 import { localeMap, checkLanguages, writeJSON } from './util';
 
-import { Root, ORIGIN } from '@phensley/cldr-schema';
+import { ORIGIN } from '@phensley/cldr-schema';
+import { Locale, LanguageResolver } from '@phensley/cldr-core';
 
 /**
  * Encodes fields into a resource pack and returns the offset

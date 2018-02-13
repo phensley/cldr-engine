@@ -6,6 +6,10 @@ import {
   fieldMapIndexedArrow,
   scopeArrow,
 
+  AltValues,
+  PluralValues,
+  YeartypeValues,
+
   Choice,
   Digits,
   Field,
@@ -36,15 +40,53 @@ export const identifier = (name: string) => {
   });
 };
 
-export interface Builder {
-  field(): number;
-  choiceField(choice: Choice): number[];
-  pluralDigits(): number[][];
+/**
+ * Generates field offsets for the schema builder.
+ */
+class Generator {
+
+  private offset: number = 0;
+
+  field(): number {
+    return this.offset++;
+  }
+
+  choiceField(choice: Choice): number[] {
+    switch (choice) {
+    case Choice.ALT:
+      return this._field(AltValues);
+    case Choice.PLURAL:
+      return this._field(PluralValues);
+    case Choice.YEARTYPE:
+      return this._field(YeartypeValues);
+    default:
+      return [];
+    }
+  }
+
+  pluralDigits(): number[][] {
+    const res: number[][] = [];
+    for (let i = 4; i <= 15; i++) {
+      res.push(this._field(PluralValues));
+    }
+    return res;
+  }
+
+  private _field(fields: any[]): number[] {
+    const res: number[] = [];
+    for (let i = 0; i < fields.length; i++) {
+      res.push(this.offset++);
+    }
+    return res;
+  }
 }
 
-export class BuilderMachine {
+/**
+ * Builds the schema accessor singleton.
+ */
+export class SchemaBuilder {
 
-  constructor(private builder: Builder) {}
+  private generator: Generator = new Generator();
 
   construct(obj: any, inst: Instruction): void {
     switch (inst.type) {
@@ -73,17 +115,17 @@ export class BuilderMachine {
 
   private constructDigits(obj: any, inst: Digits): void {
     const ident = identifier(inst.name);
-    const offsets = this.builder.pluralDigits();
+    const offsets = this.generator.pluralDigits();
     obj[ident] = digitsArrow(offsets);
   }
 
   private constructField(obj: any, inst: Field): void {
     const choice = inst.choice;
     if (choice === Choice.NONE) {
-      const offset = this.builder.field();
+      const offset = this.generator.field();
       obj[inst.identifier] = fieldArrow(offset);
     } else {
-      const offsets = this.builder.choiceField(choice);
+      const offsets = this.generator.choiceField(choice);
       obj[inst.identifier] = fieldIndexedArrow(offsets);
     }
   }
@@ -94,13 +136,13 @@ export class BuilderMachine {
     if (choice === Choice.NONE) {
       const map: OffsetMap = {};
       for (const field of inst.fields) {
-        map[field] = this.builder.field();
+        map[field] = this.generator.field();
       }
       obj[name] = fieldMapArrow(map);
     } else {
      const map: OffsetsMap = {};
       for (const field of inst.fields) {
-        map[field] = this.builder.choiceField(choice);
+        map[field] = this.generator.choiceField(choice);
       }
       obj[name] = fieldMapIndexedArrow(map);
     }
@@ -124,7 +166,7 @@ export class BuilderMachine {
   private constructScopeField(obj: any, inst: ScopeField): void {
     const map: any = {};
     for (const field of inst.fields) {
-      const offset = this.builder.field();
+      const offset = this.generator.field();
       map[field] = [offset];
     }
     obj[inst.name] = fieldMapArrow(map);

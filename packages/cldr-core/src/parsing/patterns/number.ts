@@ -2,7 +2,7 @@ export class NumberPattern {
 
   constructor(
     protected nodes: NumberNode[],
-    protected maxInt: number,
+    protected minInt: number,
     protected maxFrac: number,
     protected minFrac: number,
     protected priGroup: number,
@@ -13,8 +13,8 @@ export class NumberPattern {
     return this.nodes;
   }
 
-  maxIntegerDigits(): number {
-    return this.maxInt;
+  minIntegerDigits(): number {
+    return this.minInt;
   }
 
   maxFractionDigits(): number {
@@ -46,11 +46,13 @@ export enum NumberField {
   NUMBER = 3
 }
 
-const MAX_INT = 0;
-const MAX_FRAC = 1;
-const MIN_FRAC = 2;
-const PRI_GROUP = 3;
-const SEC_GROUP = 4;
+const enum Field {
+  MIN_INT = 0,
+  MAX_FRAC = 1,
+  MIN_FRAC = 2,
+  PRI_GROUP = 3,
+  SEC_GROUP = 4
+}
 
 class NumberPatternParser {
 
@@ -97,17 +99,17 @@ class NumberPatternParser {
       case '#':
         this.attach();
         if (ingroup) {
-          this.fields[PRI_GROUP]++;
+          this.fields[Field.PRI_GROUP]++;
         } else if (indecimal) {
-          this.fields[MAX_FRAC]++;
+          this.fields[Field.MAX_FRAC]++;
         }
         break;
 
       case ',':
         this.attach();
         if (ingroup) {
-          this.fields[SEC_GROUP] = this.fields[PRI_GROUP];
-          this.fields[PRI_GROUP] = 0;
+          this.fields[Field.SEC_GROUP] = this.fields[Field.PRI_GROUP];
+          this.fields[Field.PRI_GROUP] = 0;
         } else {
           ingroup = true;
         }
@@ -122,13 +124,13 @@ class NumberPatternParser {
       case '0':
         this.attach();
         if (ingroup) {
-          this.fields[PRI_GROUP]++;
+          this.fields[Field.PRI_GROUP]++;
         } else if (indecimal) {
-          this.fields[MAX_FRAC]++;
-          this.fields[MIN_FRAC]++;
+          this.fields[Field.MAX_FRAC]++;
+          this.fields[Field.MIN_FRAC]++;
         }
         if (!indecimal) {
-          this.fields[MAX_INT]++;
+          this.fields[Field.MIN_INT]++;
         }
         break;
 
@@ -142,11 +144,11 @@ class NumberPatternParser {
     this.pushText();
     return new NumberPattern(
       this.nodes,
-      this.fields[MAX_INT],
-      this.fields[MAX_FRAC],
-      this.fields[MIN_FRAC],
-      this.fields[PRI_GROUP],
-      this.fields[SEC_GROUP]
+      this.fields[Field.MIN_INT],
+      this.fields[Field.MAX_FRAC],
+      this.fields[Field.MIN_FRAC],
+      this.fields[Field.PRI_GROUP],
+      this.fields[Field.SEC_GROUP]
     );
   }
 

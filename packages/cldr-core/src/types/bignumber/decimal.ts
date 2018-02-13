@@ -1,18 +1,37 @@
 import { DivMod, add, subtract, multiply, trimLeadingZeros, divide } from './math';
 import { allzero, compare, digits } from './ops';
-import { Chars, ParseState, ParseFlags, POWERS10, Power10, RADIX, RDIGITS, RoundingMode } from './types';
+import {
+  Chars,
+  DecimalFormat,
+  ParseState,
+  ParseFlags,
+  POWERS10,
+  Power10,
+  RADIX,
+  RDIGITS,
+  RoundingMode
+} from './types';
+
+const DEFAULT_FORMAT: DecimalFormat = {
+  decimal: '.',
+  group: ',',
+  minIntDigits: 1,
+  minGroupingDigits: 1,
+  primaryGroupSize: 3,
+  secondaryGroupSize: 3
+};
 
 /**
  * Arbitrary precision decimal type.
  */
-export class BigDecimal {
+export class Decimal {
 
-  private data: number[];
-  private sign: number;
-  private exp: number;
+  protected data: number[];
+  protected sign: number;
+  protected exp: number;
 
-  constructor(num: number | string | BigDecimal) {
-    if (num instanceof BigDecimal) {
+  constructor(num: number | string | Decimal) {
+    if (num instanceof Decimal) {
       this.data = num.data.slice();
       this.sign = num.sign;
       this.exp = num.exp;
@@ -21,7 +40,7 @@ export class BigDecimal {
     }
   }
 
-  compare(v: BigDecimal): number {
+  compare(v: Decimal): number {
     const u = this;
     const us = u.sign;
     const vs = v.sign;
@@ -58,21 +77,25 @@ export class BigDecimal {
     return 0;
   }
 
+  isNegative(): boolean {
+    return this.sign === -1;
+  }
+
   isInteger(): boolean {
     return this.sign === 0 ? true : this.exp + this.trailingZeros() >= 0;
   }
 
-  add(v: BigDecimal): BigDecimal {
+  add(v: Decimal): Decimal {
     return this.addsub(this, v, v.sign);
   }
 
-  subtract(v: BigDecimal): BigDecimal {
+  subtract(v: Decimal): Decimal {
     return this.addsub(this, v, v.sign === 1 ? -1 : 1);
   }
 
-  multiply(v: BigDecimal): BigDecimal {
+  multiply(v: Decimal): Decimal {
     const u = this;
-    const w = new BigDecimal(ZERO);
+    const w = new Decimal(ZERO);
     if (u.sign === 0 || v.sign === 0) {
       return w;
     }
@@ -87,14 +110,14 @@ export class BigDecimal {
   /**
    * Divide this number by v and return the quotient.
    */
-  divide(v: BigDecimal): BigDecimal {
+  divide(v: Decimal): Decimal {
     let w = this.checkDivision(v);
     if (w !== undefined) {
       return w;
     }
 
     const u = this;
-    w = new BigDecimal(ZERO);
+    w = new Decimal(ZERO);
 
     // TODO: precision support.
     const prec = 20;
@@ -106,7 +129,7 @@ export class BigDecimal {
 
     // TODO: shift u or v depending on direction of shift
 
-    const [q, r] = divide(u.data, v.data);
+    const [q, r] = divide(u.data, v.data, false);
     w.data = q;
     w.sign = u.sign === v.sign ? 1 : -1;
 
@@ -117,16 +140,16 @@ export class BigDecimal {
   /**
    * Divide this number by v and return the quotient and remainder.
    */
-  divmod(v: BigDecimal): [BigDecimal, BigDecimal] {
+  divmod(v: Decimal): [Decimal, Decimal] {
     const w = this.checkDivision(v);
     if (w !== undefined) {
-      return [w, new BigDecimal(ZERO)];
+      return [w, new Decimal(ZERO)];
     }
 
-    const [qd, rd] = divide(this.data, v.data);
-    const q = new BigDecimal(ZERO);
+    const [qd, rd] = divide(this.data, v.data, true);
+    const q = new Decimal(ZERO);
     q.data = qd;
-    const r = new BigDecimal(ZERO);
+    const r = new Decimal(ZERO);
     r.data = rd;
 
     q.trim();
@@ -158,9 +181,9 @@ export class BigDecimal {
   /**
    * Strip all trailing zeros.
    */
-  stripTrailingZeros(): BigDecimal {
+  stripTrailingZeros(): Decimal {
     const n = this.trailingZeros();
-    return n > 0 ? this.shiftright(n, RoundingMode.TRUNCATE) : new BigDecimal(this);
+    return n > 0 ? this.shiftright(n, RoundingMode.TRUNCATE) : new Decimal(this);
   }
 
   /**
@@ -202,8 +225,8 @@ export class BigDecimal {
   /**
    * Move the decimal point +n (left) or -n (right) places.
    */
-  movePoint(n: number): BigDecimal {
-    const w = new BigDecimal(this);
+  movePoint(n: number): Decimal {
+    const w = new Decimal(this);
     if (n === 0) {
       return w;
     }
@@ -212,8 +235,8 @@ export class BigDecimal {
     return w;
   }
 
-  shiftleft(shift: number): BigDecimal {
-    const w = new BigDecimal(this);
+  shiftleft(shift: number): Decimal {
+    const w = new Decimal(this);
     if (shift <= 0 || w.sign === 0) {
       return w;
     }
@@ -264,8 +287,8 @@ export class BigDecimal {
   /**
    * Shifts all digits to the right, reducing the precision by shift.
    */
-  shiftright(shift: number, mode: RoundingMode = RoundingMode.HALF_EVEN): BigDecimal {
-    const w = new BigDecimal(this);
+  shiftright(shift: number, mode: RoundingMode = RoundingMode.HALF_EVEN): Decimal {
+    const w = new Decimal(this);
     if (shift <= 0 || w.sign === 0) {
       return w;
     }
@@ -317,16 +340,116 @@ export class BigDecimal {
     return w;
   }
 
+  toString(): string {
+    return this.format(DEFAULT_FORMAT);
+  }
+
+  /**
+   * Render this number to a string, using the given formatting options.
+   *
+   * TODO: support alternate digit systems, algorithmic / spellout
+   */
+  format(format: DecimalFormat): string {
+    const grouping = format.group !== '';
+    const pgs = format.primaryGroupSize;
+    let sgs = format.secondaryGroupSize;
+    if (sgs < 0) {
+      sgs = pgs;
+    }
+
+    let exp = this.exp;
+    if (exp > 0) {
+      exp--;
+    }
+
+    let int = this.precision() + exp;
+    if (format.minIntDigits === 0 && this.compare(ONE) === -1) {
+      int = 0;
+    } else {
+      int = Math.max(int, format.minIntDigits);
+    }
+
+    let shouldGroup = false;
+    if (grouping && pgs > 0) {
+      shouldGroup = int >= format.minGroupingDigits + pgs;
+    }
+
+    const r: string[] = [];
+    const len = this.data.length;
+    let groupSize = pgs;
+    let emitted = 0;
+
+    let zeros = exp;
+    while (zeros > 0) {
+      if (shouldGroup) {
+        const emit = emitted > 0 && emitted % groupSize === 0;
+        if (emit) {
+          r.push(format.group);
+          emitted -= groupSize;
+          groupSize = sgs;
+        }
+      }
+      r.push('0');
+      zeros--;
+      int--;
+      emitted++;
+    }
+
+    for (let i = 0; i < len; i++) {
+      let d = this.data[i];
+      const c = digits(d);
+      for (let j = 0; j < c; j++) {
+        if (exp === 0) {
+          r.push(format.decimal);
+        }
+        exp++;
+
+        r.push(String(d % 10));
+        d = (d / 10) | 0;
+
+        if (shouldGroup) {
+          const emit = emitted > 0 && emitted % groupSize === 0;
+          if (emit) {
+            r.push(format.group);
+            emitted -= groupSize;
+            groupSize = sgs;
+          }
+        }
+        if (exp >= 0) {
+          int--;
+          emitted++;
+        }
+      }
+    }
+
+    while (exp < 0) {
+      r.push('0');
+      exp++;
+      if (exp === 0) {
+        r.push(format.decimal);
+      }
+    }
+
+    // Leading zeros
+    while (int > 0) {
+      r.push('0');
+      int--;
+    }
+
+    r.reverse();
+    return r.join('');
+  }
+
   /**
    * Check for u/0 or 0/v cases.
    */
-  private checkDivision(v: BigDecimal): BigDecimal | undefined {
+  protected checkDivision(v: Decimal): Decimal | undefined {
     if (v.sign === 0) {
       throw new Error('Divide by zero');
     }
     const vlen = v.data.length;
     if (this.sign === 0 || this.data.length < vlen) {
-      return new BigDecimal(ZERO);
+      return new Decimal(ZERO);
     }
     return undefined;
   }
@@ -334,7 +457,7 @@ export class BigDecimal {
   /**
    * Trim leading zeros from a result and reset sign and exponent accordingly.
    */
-  private trim(): void {
+  protected trim(): void {
     trimLeadingZeros(this.data);
     if (this.data.length === 0) {
       this.sign = 0;
@@ -345,7 +468,7 @@ export class BigDecimal {
   /**
    * Increment the least-significant digit by 1.
    */
-  private _increment(): void {
+  protected _increment(): void {
     const d = this.data;
     const len = d.length;
     let s = 0;
@@ -367,7 +490,7 @@ export class BigDecimal {
   /**
    * Return a rounding indicator for a given rounding mode,
    */
-  private round(rnd: number, mode: RoundingMode): number {
+  protected round(rnd: number, mode: RoundingMode): number {
     switch (mode) {
     case RoundingMode.UP:
       return Number(rnd !== 0);
@@ -397,17 +520,17 @@ export class BigDecimal {
   /**
    * Return true if this instance is odd.
    */
-  private isodd(): boolean {
+  protected isodd(): boolean {
     return this.data.length > 0 && (this.data[0] % 2 === 1);
   }
 
   /**
    * Addition and subtraction.
    */
-  private addsub(u: BigDecimal, v: BigDecimal, vsign: number): BigDecimal {
+  protected addsub(u: Decimal, v: Decimal, vsign: number): Decimal {
     const zero = u.sign === 0;
     if (zero || v.sign === 0) {
-      return zero ? new BigDecimal(v) : new BigDecimal(u);
+      return zero ? new Decimal(v) : new Decimal(u);
     }
 
     let swap = 0;
@@ -419,7 +542,7 @@ export class BigDecimal {
     const shift = u.exp - v.exp;
     u = u.shiftleft(shift);
 
-    const w = new BigDecimal(ZERO);
+    const w = new Decimal(ZERO);
     w.exp = v.exp;
 
     if (u.data.length < v.data.length) {
@@ -452,14 +575,10 @@ export class BigDecimal {
     return w;
   }
 
-  // private convert(arg: string | number | BigDecimal): BigDecimal {
-  //   return arg instanceof BigDecimal ? arg : new BigDecimal(arg);
-  // }
-
   /**
    * Parse a number or string setting the fields on the current instance.
    */
-  private parse(arg: string | number): void {
+  protected parse(arg: string | number): void {
     const str: string = typeof arg === 'string' ? arg : arg.toString();
     const msg = this._parse(str);
     if (msg !== undefined) {
@@ -468,12 +587,11 @@ export class BigDecimal {
   }
 
   /**
-   * Parse a string of the form:  [-+][digits][.][digits][eE][-+][digits]
+   * Parse a string into a Decimal.
    *
-   * We parse from the end to avoid multiple passes or splitting of the
-   * input string.
+   * Expects strings of the form:  "[-+][digits][.][digits][eE][-+][digits]"
    */
-  private _parse(str: string): string | undefined {
+  protected _parse(str: string): string | undefined {
     const len = str.length;
 
     // Local variables to accumulate digits, sign and exponent
@@ -496,7 +614,9 @@ export class BigDecimal {
     // Total number of digits parsed.
     let dig = 0;
 
-    while (i >= 0) {
+    // We parse from the end to avoid multiple passes or splitting of the
+    // input string.
+     while (i >= 0) {
       const code = str.charCodeAt(i);
       switch (code) {
       case Chars.ELOWER:
@@ -586,4 +706,5 @@ export class BigDecimal {
 
 }
 
-const ZERO = new BigDecimal('0');
+const ZERO = new Decimal('0');
+const ONE = new Decimal('1');

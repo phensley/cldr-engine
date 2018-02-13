@@ -4,7 +4,7 @@ const DEFAULT_CAPACITY = 100;
 export type Node<K, V> = { key: K, val: V, next?: Node<K, V>, prev?: Node<K, V> };
 
 /**
- * Cache evicts the least-recently used element when capacity is exceeded.
+ * Cache evicts the least-recently-used key when capacity is exceeded.
  */
 export class LRU<K, V> {
 
@@ -38,10 +38,12 @@ export class LRU<K, V> {
       n.val = val;
     }
     this.moveFront(n);
-    if (this.storage.size > this.capacity && this.root.prev) {
-      const elem = this.root.prev;
-      this.storage.delete(elem.key);
-      this.remove(elem);
+    if (this.storage.size > this.capacity) {
+      const oldest = this.root.prev;
+      if (oldest) {
+        this.storage.delete(oldest.key);
+        this.remove(oldest);
+      }
     }
   }
 

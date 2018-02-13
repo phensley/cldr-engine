@@ -1,22 +1,19 @@
-
-/common/temp/
-
-node_modules/
-lib/
-packs/
-off/
-dist/
-coverage/
 .nyc_output/
-temp/
 .vscode/
-
-package-deps.json
+coverage/
+dist/
+lib/
+node_modules/
+off/
+packs/
+scratch/
+temp/
 
 .DS_Store
 yarn.lock
 yarn-error.log
 lerna-debug.log
+package-deps.json
 
 *.build.log
 *.build.error.log

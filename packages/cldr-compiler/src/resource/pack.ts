@@ -19,11 +19,13 @@ class Layer {
     }
 }
 
+const RE_QUOTE = /"/g;
+
 /**
  * Join an array of strings together, escape double quotes, and UTF-8
  * encode the result.
  */
-const join = (strings: string[]): string => strings.join(DELIMITER).replace('"', '\\"');
+const join = (strings: string[]): string => strings.join(DELIMITER).replace(RE_QUOTE, '\"');
 
 /**
  * Builds a resource pack containing all strings across all regions for a

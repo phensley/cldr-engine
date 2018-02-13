@@ -1,4 +1,4 @@
-import { RoundingMode } from '../../types/bigdecimal';
+import { RoundingMode } from '../../types/bignumber';
 
 export enum NumberFormatMode {
   DEFAULT = 0,

@@ -34,7 +34,6 @@ export interface PackLoader {
    * // TODO: support async loading
    */
   (language: string): string;
-
 }
 
 // TODO: rename me

@@ -19,8 +19,6 @@ import { GregorianFormatOptions } from './options';
 const ISO_WEEKDATE_EXTENDED = "YYYY-'W'ww-";
 const ISO_WEEKDATE_COMPACT = "YYYY'W'ww";
 
-const defaultFormatOptions = {};
-
 /**
  * Date formatting using the Gregorian calendar.
  */
@@ -87,17 +85,20 @@ export class GregorianEngine {
     return this.getISOWeekDate(date, ISO_WEEKDATE_EXTENDED);
   }
 
-  format(date: ZonedDateTime, options: GregorianFormatOptions = defaultFormatOptions): string {
-    let pattern = '';
-    if (options.datetime !== undefined) {
-      pattern = this.internal.Gregorian.timeFormats(this.bundle, (options.datetime || 'full') as FormatWidthType);
-    }
+  // TODO: Support context transforms, context-sensitive fields
+  // https://www.unicode.org/reports/tr35/tr35-dates.html#months_days_quarters_eras
+
+  format(date: ZonedDateTime, options: GregorianFormatOptions = {}): string {
+    // let pattern = '';
+    // if (options.datetime !== undefined) {
+    //   pattern = this.internal.Gregorian.timeFormats(this.bundle, (options.datetime || 'full') as FormatWidthType);
+    // }
     const width = options.date ? options.date : 'full';
-    // const raw = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
+    const pattern = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
     return this.internal.format(this.bundle, date, pattern);
   }
 
-  formatParts(date: ZonedDateTime, options: GregorianFormatOptions = defaultFormatOptions): any[] {
+  formatParts(date: ZonedDateTime, options: GregorianFormatOptions = {}): any[] {
     const width = options.date ? options.date : 'full';
     const pattern = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
     return this.internal.formatParts(this.bundle, date, pattern);

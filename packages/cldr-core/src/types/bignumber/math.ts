@@ -91,7 +91,7 @@ export const multiplyword = (w: number[], u: number[], n: number, v: number): vo
  * Knuth TAoCP 4.3.1 Algorithm D
  * Division of nonnegative integer u by v, returning the quotient q and remainder r.
  */
-export const divide = (uc: number[], vc: number[]): [number[], number[]] => {
+export const divide = (uc: number[], vc: number[], remainder: boolean): [number[], number[]] => {
   const n = vc.length;
   const m = uc.length - n;
   if (n === 1) {
@@ -186,14 +186,16 @@ export const divide = (uc: number[], vc: number[]): [number[], number[]] => {
   }
 
   // D8. Unnormalize remainder.
-  k = 0;
-  for (let i = n - 1; i >= 0; i--) {
-    p = u[i] + (k * RADIX);
-    r[i] = (p / d) | 0;
-    k = p - r[i] * d;
+  if (remainder) {
+    k = 0;
+    for (let i = n - 1; i >= 0; i--) {
+      p = u[i] + (k * RADIX);
+      r[i] = (p / d) | 0;
+      k = p - r[i] * d;
+    }
+    return [q, r];
   }
-
-  return [q, r];
+  return [q, []];
 };
 
 /**

@@ -3,6 +3,9 @@
 // by 10 will still be < MAX_SAFE_INTEGER.
 const LIMIT = 10000000000000;
 
+// TODO: Now that bignumber Decimal exists add a method to compute the
+// number operands.
+
 /**
  * Operands for use in evaluating localized plural rules:
  * See: http://www.unicode.org/reports/tr35/tr35-numbers.html#Plural_Operand_Meanings

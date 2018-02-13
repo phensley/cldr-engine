@@ -12,7 +12,6 @@
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib",
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
-    "gen-tables": "../../node_modules/.bin/ts-node ./scripts/gen-tables.ts",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
     "prepublish": "yarn build",
 		"test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
@@ -21,7 +20,7 @@
     "lib/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "^0.1.10"
+    "@phensley/cldr-schema": "0.1.10"
   },
   "jest": {
     "collectCoverageFrom": [

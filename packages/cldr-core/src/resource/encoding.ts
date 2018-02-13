@@ -1,7 +1,7 @@
 // Simple base-100 UTF-8-safe encoding of numbers. With 64-bit bitwise
-// operations we could do a variable-length encoding of Javascript's maximum
-// safe integer. However, since JavaScript's bitwise operations only support
-// 32-bit numbers, we do this compromise.
+// operations we could do a variable-length encoding of numbers up to
+// Number.MAX_SAFE_INTEGER. Since JavaScript's bitwise operations only
+// support 32-bit numbers, we do this compromise.
 
 // The minus symbol is reserved to indicate negative numbers, and period is
 // reserved in case of future support of encoding floating point numbers.

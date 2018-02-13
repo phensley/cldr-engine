@@ -13,16 +13,17 @@ import {
   MonthType,
   MonthValues,
   MonthsFormats,
+  Schema,
+  TimeZoneNames,
   WeekdayType,
   WeekdaysFormats,
   WeekdayValues,
-  Root,
-  TimeZoneNames,
 } from '@phensley/cldr-schema';
 
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
 import { WrapperNode, parseWrapperPattern } from '../../parsing/patterns/wrapper';
-import { LRU } from '../../utils/lru';
+import { PatternCache } from '../../utils/cache';
+import { zeroPad2 } from '../../utils/string';
 
 export type FormatterFunc = (
   bundle: Bundle,
@@ -37,8 +38,6 @@ export interface FieldFormatter {
 }
 
 export type FieldFormatterMap = { [ch: string]: FieldFormatter };
-
-const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` : `${n}`;
 
 /**
  * Wires up field formatters. Only has to be initialized once, on demand when
@@ -56,10 +55,8 @@ const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` :
   readonly TimeZoneNames: TimeZoneNames;
 
   // TODO: simpler LRU
-  private readonly datePatternCache: LRU<string, DateTimeNode[]>;
-  private readonly wrapperPatternCache: LRU<string, WrapperNode[]>;
-  // private readonly datePatternCache: Map<string, DateTimeNode[]>;
-  // private readonly wrapperPatternCache: Map<string, WrapperNode[]>;
+  private readonly datePatternCache: PatternCache<DateTimeNode[]>;
+  private readonly wrapperPatternCache: PatternCache<WrapperNode[]>;
 
   private impl: FieldFormatterMap = {
     'G': { type: 'era', impl: this.era },
@@ -105,7 +102,7 @@ const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` :
     // 'x' tz
   };
 
-  constructor(readonly root: Root, readonly cacheSize: number = 100) {
+  constructor(readonly root: Schema, readonly cacheSize: number = 50) {
     this.Gregorian = root.Gregorian;
     this.dayPeriods = root.Gregorian.dayPeriods;
     this.eras = root.Gregorian.eras;
@@ -114,16 +111,16 @@ const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` :
     this.weekdays = root.Gregorian.weekdays;
     this.TimeZoneNames = root.TimeZoneNames;
 
-    this.datePatternCache = new LRU(cacheSize);
-    // this.datePatternCache = new Map();
+    this.datePatternCache = new PatternCache(parseDatePattern, cacheSize);
+    this.wrapperPatternCache = new PatternCache(parseWrapperPattern, cacheSize);
   }
 
   format(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
-    return this._format(bundle, date, this.getDatePattern(pattern));
+    return this._format(bundle, date, this.datePatternCache.get(pattern));
   }
 
   formatParts(bundle: Bundle, date: ZonedDateTime, pattern: string): any[] {
-    const format = this.getDatePattern(pattern);
+    const format = this.datePatternCache.get(pattern);
     const res = [];
     for (const node of format) {
       if (typeof node === 'string') {
@@ -140,7 +137,7 @@ const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` :
   }
 
   formatInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): string {
-    const format = this.getDatePattern(pattern);
+    const format = this.datePatternCache.get(pattern);
     // TODO: use fallback format if format.length == 0
     const idx = intervalPatternBoundary(format);
     const res = this._format(bundle, start, format.slice(0, idx));
@@ -381,7 +378,7 @@ const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` :
     }
     const hours = offset / 60 | 0;
     const minutes = offset % 60;
-    const wrapper = this.getWrapperPattern(this.TimeZoneNames.gmtFormat(bundle));
+    const wrapper = this.wrapperPatternCache.get(this.TimeZoneNames.gmtFormat(bundle));
     const hourformat = this.TimeZoneNames.hourFormat(bundle).split(';');
     const format = negative ? hourformat[0] : hourformat[1];
     // TODO:
@@ -400,21 +397,4 @@ const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` :
     return res;
   }
 
-  private getDatePattern(raw: string): DateTimeNode[] {
-    let pattern = this.datePatternCache.get(raw);
-    if (pattern === undefined) {
-      pattern = parseDatePattern(raw);
-      this.datePatternCache.set(raw, pattern);
-    }
-    return pattern;
-  }
-
-  private getWrapperPattern(raw: string): WrapperNode[] {
-    let pattern = this.wrapperPatternCache.get(raw);
-    if (pattern === undefined) {
-      pattern = parseWrapperPattern(raw);
-      this.wrapperPatternCache.set(raw, pattern);
-    }
-    return pattern;
-  }
 }

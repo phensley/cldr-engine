@@ -1,15 +1,17 @@
+import { FormatWidthType, AvailableFormatType } from '@phensley/cldr-schema';
+
 export interface GregorianFormatOptions {
 
   // Combination date and time.
-  readonly datetime?: string;
+  readonly datetime?: FormatWidthType;
 
   // Date format. Named or skeleton.
-  readonly date?: string;
+  readonly date?: FormatWidthType | AvailableFormatType;
 
   // Time format. Named or skeleton.
-  readonly time?: string;
+  readonly time?: FormatWidthType | AvailableFormatType;
 
   // Wrapper format to use, if both a date and time are being formatted.
-  readonly wrap?: string;
+  readonly wrap?: FormatWidthType;
 
 }

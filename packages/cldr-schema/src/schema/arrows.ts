@@ -4,6 +4,10 @@ import { Plural } from './enums';
 export type OffsetMap = { [x: string]: number };
 export type OffsetsMap = { [x: string]: number[] };
 
+/**
+ * Encapsulates a set of strings, providing access to a string
+ * at a given offset.
+ */
 export interface Bundle {
   bundleId(): string;
   get(offset: number): string;

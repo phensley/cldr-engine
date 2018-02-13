@@ -6,3 +6,5 @@ export const stringToObject = (raw: string, d1: string, d2: string): { [x: strin
   }
   return o;
 };
+
+export const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` : `${n}`;
