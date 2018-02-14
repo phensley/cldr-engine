@@ -8,13 +8,13 @@
   "license": "MIT",
   "repository": {},
   "scripts": {
-    "build": "tsc -p ./tsconfig.build.json",
+    "build": "yarn run build:code && yarn run build:packs",
+    "build:code": "tsc -p ./tsconfig.build.json",
     "build:packs": "cldr-compiler pack -o ./packs",
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib ./packs",
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
-    "prepare": "npm run build:packs",
     "test": "jest",
     "test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
   },

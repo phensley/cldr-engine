@@ -34,6 +34,8 @@ export const runPack = (argv: yargs.Arguments) => {
     langs = checkLanguages(argv.lang.split(','));
   }
 
+  const ext = argv.z ? '.gz' : '';
+
   const dest = argv.out;
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest);
@@ -60,12 +62,16 @@ export const runPack = (argv: yargs.Arguments) => {
 
     // Pack all strings appended by the encoder.
     const raw = pack.render();
-    const path = join(dest, `${lang}.res.gz`);
+    const path = join(dest, `${lang}.json${ext}`);
     console.warn(`writing:  ${path}`);
 
     // Compress and write the pack to disk.
-    const data = zlib.gzipSync(raw, { level: zlib.constants.Z_BEST_COMPRESSION });
-    fs.writeFileSync(path, data, { encoding: 'binary' });
+    if (argv.z) {
+      const data = zlib.gzipSync(raw, { level: zlib.constants.Z_BEST_COMPRESSION });
+      fs.writeFileSync(path, data, { encoding: 'binary' });
+    } else {
+      fs.writeFileSync(path, raw, { encoding: 'utf-8' });
+    }
   });
 
 };

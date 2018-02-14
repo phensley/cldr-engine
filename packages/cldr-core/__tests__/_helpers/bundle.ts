@@ -20,7 +20,7 @@ export const languageBundle = (tag: string): Bundle => {
   }
   const locale = LanguageResolver.addLikelySubtags(tag);
   const language = locale.language();
-  const path = join(scratch, `${language}.res.gz`);
+  const path = join(scratch, `${language}.json.gz`);
   if (!fs.existsSync(path)) {
     const node = process.argv[0];
     const script = join(__dirname, '..', '..', '..', 'cldr-compiler', 'bin', 'compiler.js');

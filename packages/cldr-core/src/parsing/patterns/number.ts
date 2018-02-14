@@ -168,7 +168,15 @@ class NumberPatternParser {
   }
 }
 
-export const parseNumberPattern = (raw: string): NumberPattern => {
-  const parser = new NumberPatternParser();
-  return parser.parse(raw);
+const parse = (raw: string): NumberPattern => (new NumberPatternParser().parse(raw));
+
+export const parseNumberPattern = (raw: string): NumberPattern[] => {
+  const i = raw.indexOf(';');
+  if (i === -1) {
+    const pattern = parse(raw);
+    return [pattern, pattern];
+  }
+  const positive = parse(raw.substring(0, i));
+  const negative = parse(raw.substring(i + 1));
+  return [positive, negative];
 };

@@ -17,7 +17,7 @@ export class NumbersInternal {
   readonly decimalFormats: DecimalFormats;
   readonly symbols: FieldMapArrow<NumberSymbolType>;
 
-  protected readonly numberPatternCache: Cache<NumberPattern>;
+  protected readonly numberPatternCache: Cache<NumberPattern[]>;
 
   constructor(readonly root: Schema, cacheSize: number = 50) {
     this.Currencies = root.Currencies;
@@ -27,7 +27,7 @@ export class NumbersInternal {
     this.numberPatternCache = new Cache(parseNumberPattern, cacheSize);
   }
 
-  getNumberPattern(raw: string): NumberPattern {
+  getNumberPattern(raw: string): NumberPattern[] {
     return this.numberPatternCache.get(raw);
   }
 }

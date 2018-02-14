@@ -1,26 +1,29 @@
 import {
   buildSchema,
   Cache,
+  GregorianEngine,
+  GregorianInternal,
   Locale,
   LocaleMatcher,
   LanguageResolver,
+  NumbersEngine,
+  NumbersInternal,
   Pack,
-  GregorianEngine,
-  GregorianInternal,
 } from '@phensley/cldr-core';
 
 const SCHEMA = buildSchema();
 
 // TODO: rename me
-export class Engine {
+export interface Engine {
 
-  constructor(
-    readonly Gregorian: GregorianEngine
-  ) {}
-
+  readonly Gregorian: GregorianEngine;
+  readonly Numbers: NumbersEngine;
 }
 
-export interface CLDROptions {
+/**
+ * Options to initialize the library.
+ */
+export class CLDROptions {
   /**
    * Given a language identifier, fetch the resource pack from the
    * filesystem, webserver, etc, and return the raw decompressed string.
@@ -42,12 +45,14 @@ export interface CLDROptions {
 }
 
 /**
- * TODO: rename me
+ * Initializes the library.
  */
 export class CLDR {
 
   protected packCache: Cache<Pack>;
+
   protected gregorianInternal: GregorianInternal;
+  protected numbersInternal: NumbersInternal;
 
   constructor(protected readonly options: CLDROptions) {
     const packLoader = (language: string): Pack => {
@@ -55,8 +60,10 @@ export class CLDR {
       return new Pack(raw);
     };
     this.packCache = new Cache(packLoader, options.packCacheSize || 2);
+
     const patternCacheSize = options.patternCacheSize || 50;
     this.gregorianInternal = new GregorianInternal(SCHEMA, patternCacheSize);
+    this.numbersInternal = new NumbersInternal(SCHEMA, patternCacheSize);
   }
 
   info(): string {
@@ -89,9 +96,10 @@ export class CLDR {
     const language = tag.language();
     const pack = this.packCache.get(language);
     const bundle = pack.get(tag);
-    return new Engine(
-      new GregorianEngine(this.gregorianInternal, bundle)
-    );
+    return {
+      Gregorian: new GregorianEngine(this.gregorianInternal, bundle),
+      Numbers: new NumbersEngine(this.numbersInternal, bundle),
+    };
   }
 
 }
