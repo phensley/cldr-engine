@@ -1,6 +1,6 @@
 # cldr-engine
 
-Internationalization in Typescript with Unicode CLDR, with batteries included
+Internationalization in Typescript with Unicode CLDR, batteries included
 
 ## Goals
 
