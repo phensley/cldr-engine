@@ -5,7 +5,7 @@ export * from './locale';
 export * from './types';
 export { buildSchema } from './schema';
 export { Pack } from './resource/pack';
-export { Cache } from './utils/cache';
+export { LRU } from './utils/lru';
 
 // Used by cldr-compiler
 import * as encoding from './resource/encoding';

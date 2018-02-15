@@ -1,11 +1,12 @@
 import {
   buildSchema,
-  Cache,
   GregorianEngine,
   GregorianInternal,
+  LanguageTag,
   Locale,
   LocaleMatcher,
   LanguageResolver,
+  LRU,
   NumbersEngine,
   NumbersInternal,
   Pack,
@@ -13,9 +14,8 @@ import {
 
 const SCHEMA = buildSchema();
 
-// TODO: rename me
 export interface Engine {
-
+  readonly locale: Locale;
   readonly Gregorian: GregorianEngine;
   readonly Numbers: NumbersEngine;
 }
@@ -28,7 +28,9 @@ export class CLDROptions {
    * Given a language identifier, fetch the resource pack from the
    * filesystem, webserver, etc, and return the raw decompressed string.
    */
-  loader: (language: string) => string;
+  loader?: (language: string) => string;
+
+  promiseLoader?: (language: string) => Promise<string>;
 
   /**
    * Number of language packs to keep in memory. Note that a language pack
@@ -36,12 +38,12 @@ export class CLDROptions {
    * collected, so if you hold onto instances the cache may be
    * ineffective.
    */
-  packCacheSize: number;
+  packCacheSize?: number;
 
   /**
    * Size of internal pattern caches.
    */
-  patternCacheSize: number;
+  patternCacheSize?: number;
 }
 
 /**
@@ -49,18 +51,17 @@ export class CLDROptions {
  */
 export class CLDR {
 
-  protected packCache: Cache<Pack>;
+  protected readonly packCache: LRU<string, Pack>;
+  protected readonly loader?: (language: string) => string;
+  protected readonly promiseLoader?: (language: string) => Promise<string>;
+  protected readonly gregorianInternal: GregorianInternal;
+  protected readonly numbersInternal: NumbersInternal;
 
-  protected gregorianInternal: GregorianInternal;
-  protected numbersInternal: NumbersInternal;
+  protected readonly outstanding: Map<string, Promise<Engine>> = new Map();
 
   constructor(protected readonly options: CLDROptions) {
-    const packLoader = (language: string): Pack => {
-      const raw = this.options.loader(language);
-      return new Pack(raw);
-    };
-    this.packCache = new Cache(packLoader, options.packCacheSize || 2);
-
+    this.packCache = new LRU(options.packCacheSize || 2);
+    this.promiseLoader = options.promiseLoader;
     const patternCacheSize = options.patternCacheSize || 50;
     this.gregorianInternal = new GregorianInternal(SCHEMA, patternCacheSize);
     this.numbersInternal = new NumbersInternal(SCHEMA, patternCacheSize);
@@ -89,17 +90,71 @@ export class CLDR {
   }
 
   /**
-   * Builds an instance of an Engine for the given locale.
+   * Synchronously load a bundle and construct an instance of an Engine for
+   * a given locale.
    */
   get(locale: Locale | string): Engine {
-    const { tag } = typeof locale === 'string' ? this.resolve(locale) : locale;
-    const language = tag.language();
-    const pack = this.packCache.get(language);
-    const bundle = pack.get(tag);
+    if (this.loader === undefined) {
+      throw new Error('a synchronous resource loader is not defined');
+    }
+    const resolved = typeof locale === 'string' ? this.resolve(locale) : locale;
+    const language = resolved.tag.language();
+    let pack = this.packCache.get(language);
+    if (pack === undefined) {
+      const raw = this.loader(language);
+      pack = new Pack(raw);
+    }
+    return this._get(resolved, pack);
+  }
+
+  /**
+   * Asynchronously load a bundle and construct an instance of an Engine for
+   * a given locale.
+   */
+  getAsync(locale: Locale | string): Promise<Engine> {
+    const promiseLoader = this.promiseLoader;
+    if (promiseLoader === undefined) {
+      throw new Error('a Promise-based resource loader is not defined');
+    }
+    const resolved = typeof locale === 'string' ? this.resolve(locale) : locale;
+    const language = resolved.tag.language();
+
+    // If the same language is loaded multiple times in rapid succession,
+    // reuse the promise that is already in flight.
+    let promise = this.outstanding.get(language);
+    if (promise !== undefined) {
+      return promise;
+    }
+
+    promise = new Promise<Engine>((resolve, reject) => {
+      const pack = this.packCache.get(language);
+      if (pack !== undefined) {
+        resolve(this._get(resolved, pack));
+        return;
+      }
+
+      // Resolve via the promise loader
+      promiseLoader(language).then(raw => {
+        const _pack = new Pack(raw);
+        this.packCache.set(language, _pack);
+        resolve(this._get(resolved, _pack));
+        this.outstanding.delete(language);
+      }).catch(reason => reject(reason));
+    });
+
+    this.outstanding.set(language, promise);
+    return promise;
+  }
+
+  /**
+   * Builds an engine instance.
+   */
+  protected _get(locale: Locale, pack: Pack): Engine {
+    const bundle = pack.get(locale.tag);
     return {
+      locale,
       Gregorian: new GregorianEngine(this.gregorianInternal, bundle),
       Numbers: new NumbersEngine(this.numbersInternal, bundle),
     };
   }
-
 }

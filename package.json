@@ -11,6 +11,7 @@
     "coverage": "rimraf ./coverage && lerna exec yarn coverage && yarn run coverage:merge && yarn run coverage:report",
     "coverage:merge": "ts-node ./scripts/merge-coverage.ts",
     "coverage:report": "nyc report -r html -r text",
+    "link": "lerna exec yarn link",
     "lint": "lerna run lint",
     "release": "lerna run clean && lerna run build && lerna publish --force-publish=*",
     "test": "jest",
