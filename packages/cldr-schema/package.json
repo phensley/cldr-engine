@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-schema",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Schema for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
