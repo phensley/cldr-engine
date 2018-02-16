@@ -4,15 +4,19 @@ import { Alt } from '../enums';
 
 import {
   AvailableFormatType,
-  DateTimeFieldType,
-  DayPeriodType,
   EraType,
-  FormatWidthType,
   IntervalFormatType,
-  MonthType,
-  QuarterType,
-  WeekdayType,
+  MonthType
 } from './enums';
+
+import {
+  DateTimeFieldType,
+  DayPeriodsFormat,
+  DayPeriodsFormats,
+  FormatWidthType,
+  QuartersFormats,
+  WeekdaysFormats
+} from '../calendar';
 
 export interface ErasFormat {
   readonly names: FieldMapArrow<EraType>;
@@ -20,16 +24,8 @@ export interface ErasFormat {
   readonly narrow: FieldMapArrow<EraType>;
 }
 
-export interface WeekdaysFormat {
-  readonly abbreviated: FieldMapArrow<WeekdayType>;
-  readonly narrow: FieldMapArrow<WeekdayType>;
-  readonly wide: FieldMapArrow<WeekdayType>;
-  readonly short: FieldMapArrow<WeekdayType>;
-}
-
-export interface WeekdaysFormats {
-  readonly format: WeekdaysFormat;
-  readonly standAlone: WeekdaysFormat;
+export interface IntervalFormats {
+  readonly field: FieldMapArrow<DateTimeFieldType>;
 }
 
 export interface MonthsFormat {
@@ -42,34 +38,6 @@ export interface MonthsFormat {
 export interface MonthsFormats {
   readonly format: MonthsFormat;
   readonly standAlone: MonthsFormat;
-}
-
-export interface QuartersFormat {
-  readonly abbreviated: FieldMapArrow<QuarterType>;
-  readonly narrow: FieldMapArrow<QuarterType>;
-  readonly wide: FieldMapArrow<QuarterType>;
-  readonly short: FieldMapArrow<QuarterType>;
-}
-
-export interface QuartersFormats {
-  readonly format: QuartersFormat;
-  readonly standAlone: QuartersFormat;
-}
-
-export interface DayPeriodsFormat {
-  readonly abbreviated: FieldMapIndexedArrow<DayPeriodType, Alt>;
-  readonly narrow: FieldMapIndexedArrow<DayPeriodType, Alt>;
-  readonly wide: FieldMapIndexedArrow<DayPeriodType, Alt>;
-  readonly short: FieldMapIndexedArrow<DayPeriodType, Alt>;
-}
-
-export interface DayPeriodsFormats {
-  readonly format: DayPeriodsFormat;
-  readonly standAlone: DayPeriodsFormat;
-}
-
-export interface IntervalFormats {
-  readonly field: FieldMapArrow<DateTimeFieldType>;
 }
 
 export interface Gregorian {

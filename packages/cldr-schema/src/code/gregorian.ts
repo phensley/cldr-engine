@@ -1,5 +1,5 @@
 import { Choice, Scope, FieldMap, fieldmap, scope, scopefield, scopemap } from './instructions';
-import { PluralValues } from '../schema/enums';
+
 import {
   AvailableFormatValues,
   DateTimeFieldValues,
@@ -8,10 +8,11 @@ import {
   FieldWidthValues,
   FormatWidthValues,
   IntervalFormatValues,
+  PluralValues,
   QuarterValues,
   MonthValues,
   WeekdayValues,
-} from '../schema/gregorian';
+} from '../schema';
 
 const weekdays = FieldWidthValues.map(n => fieldmap(n, WeekdayValues));
 const months = FieldWidthValues.map(n => fieldmap(n, MonthValues));

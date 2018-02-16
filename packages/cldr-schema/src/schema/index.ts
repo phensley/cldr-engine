@@ -1,5 +1,6 @@
 export * from './arrows';
 export * from './enums';
+export * from './calendar';
 export * from './gregorian';
 export * from './currencies';
 export * from './numbers';
