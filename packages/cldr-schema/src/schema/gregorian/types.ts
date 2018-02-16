@@ -1,4 +1,6 @@
-import { FieldArrow, FieldMapArrow, ScopeArrow } from '../arrows';
+import { FieldArrow, FieldMapArrow, FieldMapIndexedArrow, ScopeArrow } from '../arrows';
+
+import { Alt } from '../enums';
 
 import {
   AvailableFormatType,
@@ -55,10 +57,10 @@ export interface QuartersFormats {
 }
 
 export interface DayPeriodsFormat {
-  readonly abbreviated: FieldMapArrow<DayPeriodType>;
-  readonly narrow: FieldMapArrow<DayPeriodType>;
-  readonly wide: FieldMapArrow<DayPeriodType>;
-  readonly short: FieldMapArrow<DayPeriodType>;
+  readonly abbreviated: FieldMapIndexedArrow<DayPeriodType, Alt>;
+  readonly narrow: FieldMapIndexedArrow<DayPeriodType, Alt>;
+  readonly wide: FieldMapIndexedArrow<DayPeriodType, Alt>;
+  readonly short: FieldMapIndexedArrow<DayPeriodType, Alt>;
 }
 
 export interface DayPeriodsFormats {

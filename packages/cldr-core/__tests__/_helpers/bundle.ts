@@ -24,7 +24,7 @@ export const languageBundle = (tag: string): Bundle => {
   if (!fs.existsSync(path)) {
     const node = process.argv[0];
     const script = join(__dirname, '..', '..', '..', 'cldr-compiler', 'bin', 'compiler.js');
-    child.execSync(`${node} ${script} pack -o ${scratch} -l ${language}`);
+    child.execSync(`${node} ${script} pack -o ${scratch} -l ${language} -z`);
   }
   const compressed = fs.readFileSync(path);
   const raw = zlib.gunzipSync(compressed).toString('utf-8');

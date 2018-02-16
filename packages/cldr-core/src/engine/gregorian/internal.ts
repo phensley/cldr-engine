@@ -1,7 +1,9 @@
 import { ZonedDateTime } from '../../types/datetime';
 import {
+  Alt,
   Bundle,
   DayPeriodsFormats,
+  DayPeriodType,
   Gregorian,
   EraType,
   EraValues,
@@ -83,8 +85,8 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     'e': { type: 'weekday', impl: this.weekdayLocal },
     'c': { type: 'weekday', impl: this.weekdayLocal },
     'a': { type: 'dayperiod', impl: this.dayPeriod },
-    'b': { type: 'dayperiod', impl: this.dayPeriod },
-    'B': { type: 'dayperiod', impl: this.dayPeriod },
+    'b': { type: 'dayperiod', impl: this.dayPeriodExt },
+    'B': { type: 'dayperiod', impl: this.dayPeriodFlex },
     'h': { type: 'hour', impl: this.hour },
     'H': { type: 'hour', impl: this.hour },
     'K': { type: 'hour', impl: this.hourAlt },
@@ -178,7 +180,38 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   }
 
   protected dayPeriod(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    // TODO:
+    const format = this.dayPeriods.format;
+    const key = date.getHour() < 13 ? 'am' : 'pm';
+    switch (width) {
+    case 5:
+      return format.narrow(bundle, key, Alt.NONE);
+    case 4:
+      return format.wide(bundle, key, Alt.NONE);
+    default:
+    return format.abbreviated(bundle, key, Alt.NONE);
+    }
+  }
+
+  protected dayPeriodExt(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    const format = this.dayPeriods.format;
+    const hour = date.getHour();
+    const minute = date.getMinute();
+    let key: DayPeriodType = hour < 13 ? 'am' : 'pm';
+    if (minute === 0) {
+      key = hour === 0 ? 'midnight' : 'noon';
+    }
+    switch (width) {
+    case 5:
+      return format.narrow(bundle, key, Alt.NONE);
+    case 4:
+      return format.wide(bundle, key, Alt.NONE);
+    default:
+      return format.abbreviated(bundle, key, Alt.NONE);
+    }
+  }
+
+  protected dayPeriodFlex(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    // TODO: need to embed the dayPeriodRules.
     return '';
   }
 
@@ -246,7 +279,7 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   }
 
   protected month(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const format = this.months.format;
+    const format = field === 'M' ? this.months.format : this.months.standAlone;
     const index = date.getMonth();
     const month = MonthValues[index] as MonthType;
     switch (width) {
@@ -267,7 +300,7 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   }
 
   protected quarter(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const format = this.quarters.format;
+    const format = field === 'Q' ? this.quarters.format : this.quarters.standAlone;
     const index = (date.getMonth() / 3) + 1;
     const quarter = QuarterValues[index] as QuarterType;
     switch (width) {

@@ -1,4 +1,5 @@
 import {
+  Alt,
   Bundle,
   FieldWidth,
   FieldWidthType,
@@ -33,7 +34,7 @@ export class GregorianEngine {
    * Get standalone day period.
    */
   getDayPeriod(dayPeriod: DayPeriodType, width: FieldWidthType = FieldWidth.WIDE): string {
-    return this.internal.dayPeriods.standAlone[width](this.bundle, dayPeriod);
+    return this.internal.dayPeriods.standAlone[width](this.bundle, dayPeriod, Alt.NONE);
   }
 
   /**

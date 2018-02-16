@@ -14,4 +14,6 @@ export interface GregorianFormatOptions {
   // Wrapper format to use, if both a date and time are being formatted.
   readonly wrap?: FormatWidthType;
 
+  //
+  // readonly context: FormatContextType;
 }

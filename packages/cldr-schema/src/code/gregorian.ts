@@ -16,7 +16,7 @@ import {
 const weekdays = FieldWidthValues.map(n => fieldmap(n, WeekdayValues));
 const months = FieldWidthValues.map(n => fieldmap(n, MonthValues));
 const quarters = FieldWidthValues.map(n => fieldmap(n, QuarterValues));
-const dayPeriods = FieldWidthValues.map(n => fieldmap(n, DayPeriodValues));
+const dayPeriods = FieldWidthValues.map(n => fieldmap(n, DayPeriodValues, Choice.ALT));
 
 const eras = (n: string) => fieldmap(n, EraValues);
 
