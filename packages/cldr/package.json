@@ -14,13 +14,15 @@
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib ./packs",
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
+    "install": "node ./scripts/extract.js",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
     "test": "jest",
     "test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "lib/",
-    "packs/"
+    "packs/*.gz",
+    "scripts/"
   ],
   "dependencies": {
     "@phensley/cldr-core": "^0.1.12"
