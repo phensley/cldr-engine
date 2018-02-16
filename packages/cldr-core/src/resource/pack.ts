@@ -109,8 +109,8 @@ export class Pack {
   readonly language: string;
   readonly scripts: { [x: string]: PackScript } = {};
 
-  constructor(data: string) {
-    const raw: any = JSON.parse(data);
+  constructor(data: any) {
+    const raw: any = typeof data === 'string' ? JSON.parse(data) : data;
     const { version, cldr, language } = raw;
     if (typeof version === undefined) {
       throw new Error('Severe error: data does not look like a valid resource pack.');
