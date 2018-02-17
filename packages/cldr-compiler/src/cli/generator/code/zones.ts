@@ -6,10 +6,24 @@ import { HEADER, Code, lineWrap, escapeString, formatSource, enumName } from './
 
 const { base100encode, bitarrayCreate } = encoding;
 
-const buildZoneDST = (): [any, any] => {
+const buildZoneDST = (): [any, any, any] => {
   const path = join(__dirname, '..', '..', '..', '..', 'data', 'timezones', 'temp', 'tzdata.json');
   const raw = fs.readFileSync(path);
   const tzdata = JSON.parse(raw.toString());
+
+  const untilsIndex: any = {};
+  const untilsArray: string[] = [];
+  let untilsSeq = 0;
+
+  const indexUntil = (k: string) => {
+    let id = untilsIndex[k];
+    if (id === undefined) {
+      id = base100encode(untilsSeq++);
+      untilsArray.push(k);
+      untilsIndex[k] = id;
+    }
+    return id;
+  };
 
   const inverted: any = {};
   for (const row of tzdata) {
@@ -18,7 +32,7 @@ const buildZoneDST = (): [any, any] => {
 
     const offsets = _offsets.join(' ');
     const index = _index.join('');
-    const untils = _untils.map(base100encode).join(' ');
+    const untils = _untils.map(base100encode).map(indexUntil).join(' ');
     const dsts = bitarrayCreate(_dsts).map(base100encode).join(' ');
 
     const key = [offsets, index, untils, dsts].join('\t');
@@ -37,15 +51,19 @@ const buildZoneDST = (): [any, any] => {
       zoneLinks[k] = first;
     });
   });
-  return [zoneDST, zoneLinks];
+  return [zoneDST, zoneLinks, untilsArray];
 };
 
 export const getZones = (data: any): Code[] => {
   const result: Code[] = [];
 
-  const [ zoneDST, zoneLinks ] = buildZoneDST();
+  const [ zoneDST, zoneLinks, untilsArray ] = buildZoneDST();
 
   let code = HEADER + '/* tslint:disable:max-line-length */\n';
+  code += `export const untilsIndex: string = '`;
+  code += untilsArray.join(' ');
+  code += `';\n\n`;
+
   code += `export const zoneDST: { [x: string]: string } = {\n`;
   Object.keys(zoneDST).forEach(k => {
     const str = escapeString(zoneDST[k]);

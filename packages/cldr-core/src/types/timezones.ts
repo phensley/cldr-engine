@@ -3,7 +3,7 @@ import { base100decode } from '../resource/encoding';
 import { stringToObject } from '../utils/string';
 
 import { zoneAliasRaw } from './autogen.aliases';
-import { zoneDST, zoneLinks, metazoneRanges } from './autogen.zones';
+import { untilsIndex, zoneDST, zoneLinks, metazoneRanges } from './autogen.zones';
 
 export interface ZoneInfo {
   readonly offsets: number[];
@@ -12,14 +12,17 @@ export interface ZoneInfo {
 }
 
 const zoneCache: { [x: string]: ZoneInfo } = {};
+const untilsArray = untilsIndex.split(' ').map(base100decode);
 
 const parseZoneInfo = (raw: string): ZoneInfo => {
   const parts = raw.split('\t');
   const _offsets = parts[0].split(' ').map(o => parseInt(o, 10));
   const index = parts[1].split('').map(Number);
   const offsets = index.map(i => _offsets[i]);
-  const untils = parts[2].split(' ').map(base100decode);
+  const _untils = parts[2].split(' ').map(base100decode);
   const dsts = parts[3].split(' ').map(base100decode);
+
+  const untils: number[] = _untils.map(i => untilsArray[i]);
 
   // Expand untils deltas
   const len = untils.length;
