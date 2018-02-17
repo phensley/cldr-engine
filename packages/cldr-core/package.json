@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
     "build:watch": "tsc -p ./tsconfig.build.json -w",
-    "clean": "rimraf ./lib",
+    "clean": "rimraf ./lib ./scratch",
     "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
     "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
     "prepublish": "yarn build",
