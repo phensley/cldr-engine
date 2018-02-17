@@ -120,10 +120,17 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     this.wrapperPatternCache = new Cache(parseWrapperPattern, cacheSize);
   }
 
+  /**
+   * Format a date-time pattern into a string.
+   */
   format(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
     return this._format(bundle, date, this.datePatternCache.get(pattern));
   }
 
+  /**
+   * Format a pattern into an array of parts, each part being either a string literal
+   * or a named field.
+   */
   formatParts(bundle: Bundle, date: ZonedDateTime, pattern: string): any[] {
     const format = this.datePatternCache.get(pattern);
     const res = [];
@@ -141,6 +148,9 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     return res;
   }
 
+  /**
+   * Format a date-time interval pattern as a sring.
+   */
   formatInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): string {
     const format = this.datePatternCache.get(pattern);
     // TODO: use fallback format if format.length == 0
