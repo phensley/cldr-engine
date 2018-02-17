@@ -1,4 +1,4 @@
-import { Rational } from '../../../src/types/bignumber';
+import { Rational } from '../../../src/types/numbers';
 
 test('basics', () => {
   // TODO:

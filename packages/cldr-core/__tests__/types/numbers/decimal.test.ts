@@ -1,6 +1,6 @@
-import { Decimal, RoundingMode } from '../../../src/types/bignumber';
-import { DivMod, divide } from '../../../src/types/bignumber/math';
-import { DecimalFormat } from '../../../src/types/bignumber/types';
+import { Decimal, RoundingMode } from '../../../src/types/numbers';
+import { DivMod, divide } from '../../../src/types/numbers/math';
+import { DecimalFormat } from '../../../src/types/numbers/types';
 
 const parse = (s: string) => new Decimal(s);
 const parsedata = (s: string) => (new Decimal(s) as any).data;
