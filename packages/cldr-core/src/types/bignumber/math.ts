@@ -10,13 +10,21 @@ export const add = (u: number[], v: number[]): number[] => {
   const n = u.length;
   const w: number[] = new Array(n);
 
+  // A1. Initialize
   let j = 0;
   let k = 0;
   while (j < n) {
+    // v may be shorter than u
     const vj = j < vlen ? v[j] : 0;
+
+    // A2. Add digits
     const z = u[j] + vj + k;
     w[j] = z % RADIX;
+
+    // .. k is being set to 1 or 0, to carry
     k = (z / RADIX) | 0;
+
+    // A3. Loop on j
     j++;
   }
   if (k === 1) {
@@ -35,13 +43,21 @@ export const subtract = (u: number[], v: number[]): number[] => {
   const n = u.length;
   const w: number[] = new Array(n);
 
+  // S1. Initialize
   let j = 0;
   let k = 0;
   while (j < n) {
+    // v may be shorter than u
     const vj = j < vlen ? v[j] : 0;
+
+    // S2. Subtract digits
     const z = u[j] - vj + k;
     w[j] = z < 0 ? z + RADIX : z;
+
+    // .. k is set to -1 or 0, to borrow
     k = z < 0 ? -1 : 0;
+
+    // S3. Loop on j
     j++;
   }
   return w;
@@ -54,25 +70,42 @@ export const subtract = (u: number[], v: number[]): number[] => {
 export const multiply = (u: number[], v: number[]): number[] => {
   const m = u.length;
   const n = v.length;
-  let i = 0;
-  let j = 0;
+
+  // M1. Initialize, set w all to zero
   const w = new Array(n + m);
   w.fill(0);
 
-  for (j = 0; j < n; j++) {
-    let k = 0;
-    for (i = 0; i < m; i++) {
+  // Skip M2. Zero multiplier check, just follow the algorithm/
+
+  let i = 0;
+  let j = 0;
+  let k = 0;
+  while (j < n) {
+    // M3. Initialize i
+    i = 0;
+    k = 0;
+    while (i < m) {
+      // M4. Multiply and add
       const p = (k + w[i + j]) + u[i] * v[j];
       k = (p / RADIX) | 0;
       w[i + j] = p - k * RADIX;
+
+      // M5. Loop on i
+      i++;
     }
+
+    // Final carry
     w[j + m] = k;
+
+    // M6. Loop on j
+    j++;
   }
   return w;
 };
 
 /**
  * Multiplication of a nonnegative integer u by a single word v, returning the product w.
+ * See TAoCP 4.3.1 exercise 13.
  */
 export const multiplyword = (w: number[], u: number[], n: number, v: number): void => {
   let i = 0;
@@ -208,7 +241,6 @@ const divideword = (u: number[], v: number): [number[], number[]] => {
   const q = new Array(n);
   q.fill(0);
   let r = 0;
-  // console.log(`>> ${u} / ${v}`);
   for (let i = n - 1; i >= 0; i--) {
     const p = u[i] + (r * RADIX);
     q[i] = (p / v) | 0;
@@ -221,24 +253,27 @@ const divideword = (u: number[], v: number): [number[], number[]] => {
  * divide() helper, to add u + v and store the result in w.
  */
 const _add = (w: number[], j0: number, u: number[], j1: number, v: number[], m: number, n: number): number => {
+  let i = 0;
   let k = 0;
   let s = 0;
-  let i = 0;
 
-  for (i = 0; i < n; i++) {
+  while (i < n) {
     s = u[i + j1] + (v[i] + k);
     k = (s < u[i] || s >= RADIX) ? 1 : 0;
     w[i + j0] = k ? s - RADIX : s;
+    i++;
   }
 
-  for (; k && i < m; i++) {
+  while (k && i < m) {
     s = u[i + j1] + k;
     k = s === RADIX ? 1 : 0;
     w[i + j0] = k === 1 ? s - RADIX : s;
+    i++;
   }
 
-  for (; i < m; i++) {
+  while (i < m) {
     w[i + j0] = u[i + j1];
+    i++;
   }
 
   return k;
