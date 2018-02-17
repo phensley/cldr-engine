@@ -1,4 +1,4 @@
-import { findMetaZone, substituteZoneAlias, getZoneInfo } from './timezones';
+import { substituteZoneAlias, getZoneInfo } from './timezones';
 import { binarySearch } from '../utils/search';
 import * as encoding from '../resource/encoding';
 import { DateTimeField, DateTimeFieldType } from '@phensley/cldr-schema';
@@ -36,15 +36,17 @@ export class ZonedDateTime {
     this._epoch = +date;
     this._utc = new Date(this._epoch);
     this._zoneId = substituteZoneAlias(zoneId);
-    this._metaZoneId = findMetaZone(this._zoneId, this._epoch);
 
     const info = getZoneInfo(zoneId);
-    const index = binarySearch(info.untils, this._epoch);
+    let index = binarySearch(info.untils, this._epoch);
     this._dst = encoding.bitarrayGet(info.dsts, index);
 
     const len = info.untils.length;
     this._offset = index < len ? info.offsets[index] : info.offsets[len - 1];
     this._local = new Date(this._epoch - (this._offset * 60000));
+
+    index = binarySearch(info.metazoneUntils, this._epoch);
+    this._metaZoneId = info.metazoneIds[index];
   }
 
   /**

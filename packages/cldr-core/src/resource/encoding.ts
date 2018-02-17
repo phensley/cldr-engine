@@ -16,6 +16,9 @@ const DECODE = ENCODE.split('').reduce((o: any, ch, i) => {
 }, {});
 
 export const base100encode = (orig: number): string => {
+  if (orig === 0) {
+    return ENCODE[0];
+  }
   let res = orig < 0 ? '-' : '';
   let n = Math.abs(orig);
   while (n >= 100) {

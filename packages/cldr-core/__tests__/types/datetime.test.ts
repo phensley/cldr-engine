@@ -2,7 +2,7 @@ import { ZonedDateTime } from '../../src/types/datetime';
 
 const make = (epoch: number | Date, zoneId: string) => new ZonedDateTime(epoch, zoneId);
 
-test('america/new york', () => {
+test('metazones, dst, offsets', () => {
   const zoneId = 'America/New_York';
 
   // Thu, Jun 3, 2004 22:00:00 UTC
@@ -54,6 +54,52 @@ test('america/new york', () => {
   expect(date.timezoneOffset()).toEqual(240);
 
   // TODO: november 2018
+});
+
+test('metazone ids', () => {
+  // Uses 3 different metazones.
+  // See https://github.com/unicode-cldr/cldr-core/blob/master/supplemental/metaZones.json#L495
+  const zoneId = 'Africa/Windhoek';
+
+  // Tuesday, January 19, 2100 12:00:00 AM UTC
+  let epoch = 4104000000;
+  let date = make(epoch, zoneId);
+  expect(date.metaZoneId()).toEqual('Africa_Southern');
+
+  // Tuesday, March 20, 1990 9:00:00 PM UTC
+  epoch = 637966800000;
+  date = make(epoch, zoneId);
+  expect(date.metaZoneId()).toEqual('Africa_Southern');
+
+  // 1 hour later, switch metazone ids
+  epoch += 3600000;
+  date = make(epoch, zoneId);
+  expect(date.metaZoneId()).toEqual('Africa_Central');
+
+  // Sunday, March 20, 1994 9:00:00 PM UTC
+  epoch = 764197200000;
+  date = make(epoch, zoneId);
+  expect(date.metaZoneId()).toEqual('Africa_Central');
+
+  // 1 hour later, switch metazone ids
+  epoch += 3600000;
+  date = make(epoch, zoneId);
+  expect(date.metaZoneId()).toEqual('Africa_Western');
+
+  // Sunday, September 3, 2017 12:30:00 AM UTC
+  epoch = 1504398600000;
+  date = make(epoch, zoneId);
+  expect(date.metaZoneId()).toEqual('Africa_Western');
+
+  // 30 minutes later, switch metazone ids
+  epoch += 1800000;
+  date = make(epoch, zoneId);
+  expect(date.metaZoneId()).toEqual('Africa_Central');
+
+  // Tuesday, September 3, 2019 12:30:00 AM UTC
+  epoch = 1567470600000;
+  date = make(epoch, zoneId);
+  expect(date.metaZoneId()).toEqual('Africa_Central');
 });
 
 test('iso week', () => {

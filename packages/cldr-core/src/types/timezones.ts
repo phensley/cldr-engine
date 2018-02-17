@@ -3,16 +3,19 @@ import { base100decode } from '../resource/encoding';
 import { stringToObject } from '../utils/string';
 
 import { zoneAliasRaw } from './autogen.aliases';
-import { untilsIndex, zoneDST, zoneLinks, metazoneRanges } from './autogen.zones';
+import { untilsIndex, zoneDST, zoneLinks, metazoneIds } from './autogen.zones';
 
 export interface ZoneInfo {
   readonly offsets: number[];
   readonly untils: number[];
   readonly dsts: number[];
+  readonly metazoneIds: string[];
+  readonly metazoneUntils: number[];
 }
 
 const zoneCache: { [x: string]: ZoneInfo } = {};
 const untilsArray = untilsIndex.split(' ').map(base100decode);
+const metazoneIdIndex = metazoneIds.split(' ');
 
 const parseZoneInfo = (raw: string): ZoneInfo => {
   const parts = raw.split('\t');
@@ -21,6 +24,8 @@ const parseZoneInfo = (raw: string): ZoneInfo => {
   const offsets = index.map(i => _offsets[i]);
   const _untils = parts[2].split(' ').map(base100decode);
   const dsts = parts[3].split(' ').map(base100decode);
+  const _metazoneIds = parts[4].split(' ').map(base100decode).map(i => metazoneIdIndex[i]);
+  const metazoneUntils = parts[5].split(' ').map(base100decode);
 
   const untils: number[] = _untils.map(i => untilsArray[i]);
 
@@ -33,7 +38,7 @@ const parseZoneInfo = (raw: string): ZoneInfo => {
     }
   }
 
-  return { offsets, untils, dsts };
+  return { offsets, untils, dsts, metazoneIds: _metazoneIds, metazoneUntils };
 };
 
 export const getZoneInfo = (zoneId: string): ZoneInfo => {
@@ -49,41 +54,7 @@ export const getZoneInfo = (zoneId: string): ZoneInfo => {
     return zone;
   }
   // Not much else to do for an unidentified zone except default to UTC
-  return UTCZoneInfo;
-};
-
-export const UTCZoneInfo = getZoneInfo('UTC');
-
-type MetaZoneRange = [string, number, number];
-
-const METAZONE = 0;
-const FROM = 1;
-const TO = 2;
-
-/**
- * Find the metazone for the given timezone id and epoch timestamp.
- *
- * TODO: flatten to a 1:1 array with metazone and use binary search.
- */
-export const findMetaZone = (zoneId: string, epoch: number): string | undefined => {
-  const ranges = metazoneRanges[zoneId];
-  if (ranges === undefined) {
-    return '';
-  }
-  for (const range of ranges) {
-    if (range[FROM] === -1) {
-      if (range[TO] === -1 || epoch < range[TO]) {
-        return range[METAZONE];
-      }
-    } else if (range[TO] === -1) {
-      if (range[FROM] <= epoch) {
-        return range[METAZONE];
-      }
-    } else if (range[FROM] <= epoch && epoch < range[TO]) {
-      return range[METAZONE];
-    }
-  }
-  return undefined;
+  return getZoneInfo('UTC');
 };
 
 /**

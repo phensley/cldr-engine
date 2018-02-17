@@ -6,36 +6,48 @@ import { HEADER, Code, lineWrap, escapeString, formatSource, enumName } from './
 
 const { base100encode, bitarrayCreate } = encoding;
 
-const buildZoneDST = (): [any, any, any] => {
+class IdArray {
+
+  readonly array: string[] = [];
+  private index: any = {};
+  private sequence: number = 0;
+
+  add(key: string): string {
+    let id = this.index[key];
+    if (id === undefined) {
+      id = base100encode(this.sequence++);
+      this.index[key] = id;
+      this.array.push(key);
+    }
+    return id;
+  }
+}
+
+/**
+ * Process tzdata and encode into a compact form.
+ */
+const buildZoneDST = (metazones: any): [any, any, any] => {
   const path = join(__dirname, '..', '..', '..', '..', 'data', 'timezones', 'temp', 'tzdata.json');
   const raw = fs.readFileSync(path);
   const tzdata = JSON.parse(raw.toString());
 
-  const untilsIndex: any = {};
-  const untilsArray: string[] = [];
-  let untilsSeq = 0;
-
-  const indexUntil = (k: string) => {
-    let id = untilsIndex[k];
-    if (id === undefined) {
-      id = base100encode(untilsSeq++);
-      untilsArray.push(k);
-      untilsIndex[k] = id;
-    }
-    return id;
-  };
-
+  const untilsIndex = new IdArray();
   const inverted: any = {};
   for (const row of tzdata) {
     const [ name, _indexed, _untils, _dsts ] = row;
+    const metazone = metazones[name];
+    if (metazone === undefined) {
+      console.warn(`skipping: ${name}`);
+      continue;
+    }
     const [ _offsets, _index ] = _indexed;
 
     const offsets = _offsets.join(' ');
     const index = _index.join('');
-    const untils = _untils.map(base100encode).map(indexUntil).join(' ');
+    const untils = _untils.map(base100encode).map((k: string) => untilsIndex.add(k)).join(' ');
     const dsts = bitarrayCreate(_dsts).map(base100encode).join(' ');
 
-    const key = [offsets, index, untils, dsts].join('\t');
+    const key = [offsets, index, untils, dsts, metazone].join('\t');
     const ids = inverted[key] || [];
     ids.push(name);
     inverted[key] = ids;
@@ -51,13 +63,40 @@ const buildZoneDST = (): [any, any, any] => {
       zoneLinks[k] = first;
     });
   });
-  return [zoneDST, zoneLinks, untilsArray];
+  return [zoneDST, zoneLinks, untilsIndex.array];
 };
 
+/**
+ * Process cldr metazone time ranges into a compact form.
+ */
+const buildMetaZones = (data: any): [any, any] => {
+  const zoneIdIndex = new IdArray();
+  const metazoneIndex = new IdArray();
+  const metazones: any = {};
+  Object.keys(data).forEach(zoneId => {
+    const ranges = data[zoneId].reverse();
+    const offsets: string[] = [];
+    const untils: string[] = [];
+    ranges.forEach((range: [string, number, number]) => {
+      const [ metazoneId, from, to ] = range;
+      const offset = metazoneIndex.add(metazoneId);
+      offsets.push(offset);
+      untils.push(base100encode(from));
+    });
+    metazones[zoneId] = [offsets.join(' '), untils.join(' ')].join('\t');
+  });
+  return [metazoneIndex.array.join(' '), metazones];
+};
+
+/**
+ * Construct timezone source.
+ */
 export const getZones = (data: any): Code[] => {
   const result: Code[] = [];
 
-  const [ zoneDST, zoneLinks, untilsArray ] = buildZoneDST();
+  // Build autogen.zones.ts source
+  const [metazoneIds, metazones] = buildMetaZones(data.metaZoneRanges);
+  const [ zoneDST, zoneLinks, untilsArray ] = buildZoneDST(metazones);
 
   let code = HEADER + '/* tslint:disable:max-line-length */\n';
   code += `export const untilsIndex: string = '`;
@@ -78,13 +117,11 @@ export const getZones = (data: any): Code[] => {
   });
   code += '};\n\n';
 
-  code += formatSource(`export const metazoneRanges: { [x: string]: [string, number, number][] } =` +
-    JSON.stringify(data.metaZoneRanges) +
-    ';\n'
-  );
+  code += `export const metazoneIds = '${metazoneIds}';\n`;
 
   result.push(Code.core(['types', 'autogen.zones.ts'], code));
 
+  // Build autogen.timezones.ts source
   code = `${HEADER}import { makeEnum, makeKeyedEnum } from '../../types/enum';\n\n`;
   code += 'export const [ TimeZone, TimeZoneValues ] = makeKeyedEnum([';
   data.timeZoneIds.forEach((k: string) => {

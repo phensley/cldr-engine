@@ -4,6 +4,10 @@ import {
   bitarrayCreate,
   bitarrayGet } from '../../src/resource/encoding';
 
+test('encode', () => {
+  expect(base100encode(0)).toEqual('!');
+});
+
 test('round-trip', () => {
   const nums = [Number.MIN_SAFE_INTEGER, -135, -1, 0, 1, 135, Number.MAX_SAFE_INTEGER];
   const encoded = nums.map(base100encode).join(' ');
