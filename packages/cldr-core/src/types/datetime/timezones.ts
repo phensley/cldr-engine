@@ -1,6 +1,6 @@
-import * as encoding from '../resource/encoding';
-import { base100decode } from '../resource/encoding';
-import { stringToObject } from '../utils/string';
+import * as encoding from '../../resource/encoding';
+import { base100decode } from '../../resource/encoding';
+import { stringToObject } from '../../utils/string';
 
 import { zoneAliasRaw } from './autogen.aliases';
 import { untilsIndex, zoneDST, zoneLinks, metazoneIds } from './autogen.zones';

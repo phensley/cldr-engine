@@ -1,7 +1,7 @@
-import { substituteZoneAlias, getZoneInfo } from './timezones';
-import { binarySearch } from '../utils/search';
-import * as encoding from '../resource/encoding';
 import { DateTimeField, DateTimeFieldType } from '@phensley/cldr-schema';
+import { substituteZoneAlias, getZoneInfo } from './timezones';
+import { binarySearch } from '../../utils/search';
+import * as encoding from '../../resource/encoding';
 
 const isLeap = (y: number): boolean => {
   if (y % 4 !== 0) {
