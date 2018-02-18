@@ -1,7 +1,9 @@
 import { Plural } from '@phensley/cldr-schema';
-import { pluralCardinal, NumberOperands } from '../../../src/engine/plurals';
+import { Decimal } from '../../../src/types/numbers';
+import { pluralCardinal } from '../../../src/engine/plurals';
 
-const cardinal = (lang: string, n: string) => pluralCardinal(lang, new NumberOperands(n));
+const operands = (n: string) => new Decimal(n).operands();
+const cardinal = (lang: string, n: string) => pluralCardinal(lang, operands(n));
 
 test('english', () => {
   const lang = 'en';
@@ -57,4 +59,24 @@ test('polish', () => {
   expect(cardinal(lang, '0.0')).toEqual(Plural.OTHER);
   expect(cardinal(lang, '1.0')).toEqual(Plural.OTHER);
   expect(cardinal(lang, '1.1')).toEqual(Plural.OTHER);
+});
+
+test('welsh', () => {
+  const lang = 'cy';
+  expect(cardinal(lang, '0')).toEqual(Plural.ZERO);
+  expect(cardinal(lang, '0.0')).toEqual(Plural.ZERO);
+  expect(cardinal(lang, '1')).toEqual(Plural.ONE);
+  expect(cardinal(lang, '1.0')).toEqual(Plural.ONE);
+  expect(cardinal(lang, '2')).toEqual(Plural.TWO);
+  expect(cardinal(lang, '2.0')).toEqual(Plural.TWO);
+  expect(cardinal(lang, '3')).toEqual(Plural.FEW);
+  expect(cardinal(lang, '3.0')).toEqual(Plural.FEW);
+  expect(cardinal(lang, '6')).toEqual(Plural.MANY);
+  expect(cardinal(lang, '6.0')).toEqual(Plural.MANY);
+
+  expect(cardinal(lang, '1.1')).toEqual(Plural.OTHER);
+  expect(cardinal(lang, '2.5')).toEqual(Plural.OTHER);
+  expect(cardinal(lang, '4')).toEqual(Plural.OTHER);
+  expect(cardinal(lang, '4.0')).toEqual(Plural.OTHER);
+  expect(cardinal(lang, '15')).toEqual(Plural.OTHER);
 });

@@ -1,5 +1,6 @@
 import { DivMod, add, subtract, multiply, trimLeadingZeros, divide } from './math';
 import { allzero, compare, digits } from './ops';
+import { NumberOperands, decimalOperands } from './operands';
 import {
   Chars,
   DecimalFormat,
@@ -75,6 +76,10 @@ export class Decimal {
 
     // Equal
     return 0;
+  }
+
+  operands(): NumberOperands {
+    return decimalOperands(this.sign, this.exp, this.data);
   }
 
   isNegative(): boolean {
@@ -462,7 +467,6 @@ export class Decimal {
     trimLeadingZeros(this.data);
     if (this.data.length === 0) {
       this.sign = 0;
-      this.exp = 0;
     }
   }
 

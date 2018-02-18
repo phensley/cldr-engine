@@ -5,7 +5,7 @@ import {
   NumberSymbol, NumberSymbolType
 } from '@phensley/cldr-schema';
 
-import { Decimal, RoundingMode } from '../../types/bignumber';
+import { Decimal, RoundingMode } from '../../types/numbers';
 import { NumberFormatMode } from './options';
 import { NumberPattern, parseNumberPattern } from '../../parsing/patterns/number';
 import { Cache } from '../../utils/cache';

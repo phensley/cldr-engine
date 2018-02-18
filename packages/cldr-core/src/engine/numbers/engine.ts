@@ -10,7 +10,7 @@ import {
 
 import { NumbersInternal } from './internal';
 import { CurrencyFormatOptions, DecimalFormatOptions } from './options';
-import { Decimal } from '../../types/bignumber';
+import { Decimal } from '../../types/numbers';
 
 export class NumbersEngine {
 

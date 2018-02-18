@@ -38,6 +38,40 @@ test('basics', () => {
   expect(parse('123.45e99')).toEqual({ data: [12345], exp: 97, sign: 1 });
 });
 
+test('operands', () => {
+  expect(parse('1').operands()).toEqual(
+    { n: 1, i: 1, v: 0, w: 0, f: 0, t: 0, neg: false, dec: false }
+  );
+
+  expect(parse('1e-3').operands()).toEqual(
+    { n: 0, i: 0, v: 3, w: 3, f: 1, t: 1, neg: false, dec: true }
+  );
+
+  expect(parse('1e2').operands()).toEqual(
+    { n: 100, i: 100, v: 0, w: 0, f: 0, t: 0, neg: false, dec: false }
+  );
+
+  expect(parse('123.12').operands()).toEqual(
+    { n: 123, i: 123, v: 2, w: 2, f: 12, t: 12, neg: false, dec: true }
+  );
+
+  expect(parse('-123.400').operands()).toEqual(
+    { n: 123, i: 123, v: 3, w: 1, f: 400, t: 4, neg: true, dec: true }
+  );
+
+  expect(parse('-1234567890.12300').operands()).toEqual(
+    { n: 1234567890, i: 1234567890, v: 5, w: 3, f: 12300, t: 123, neg: true, dec: true }
+  );
+
+  expect(parse('0.1234567890123456789').operands()).toEqual(
+    { n: 0, i: 0, v: 19, w: 19, f: 12345678901234, t: 12345678901234, neg: false, dec: true }
+  );
+
+  expect(parse('1234567890123456789.12345000').operands()).toEqual(
+    { n: 7890123456789, i: 7890123456789, v: 8, w: 5, f: 12345000, t: 12345, neg: false, dec: true }
+  );
+});
+
 test('precision', () => {
   expect(parse('0').precision()).toEqual(1);
   expect(parse('1').precision()).toEqual(1);
@@ -261,14 +295,14 @@ test('shift right', () => {
   expect(shr('155.578', 3, m)).toEqual(parse('156'));
   expect(shr('155.578', 4, m)).toEqual(parse('16e1'));
   expect(shr('155.578', 5, m)).toEqual(parse('2e2'));
-  expect(shr('155.578', 6, m)).toEqual(parse('0'));
-  expect(shr('155.578', 7, m)).toEqual(parse('0'));
+  expect(shr('155.578', 6, m)).toEqual(parse('0e3'));
+  expect(shr('155.578', 7, m)).toEqual(parse('0e-3'));
 
   expect(shr('1.545', 1, m)).toEqual(parse('1.54'));
   expect(shr('1.545', 2, m)).toEqual(parse('1.5'));
   expect(shr('1.545', 3, m)).toEqual(parse('2'));
-  expect(shr('1.545', 4, m)).toEqual(parse('0'));
-  expect(shr('1.545', 5, m)).toEqual(parse('0'));
+  expect(shr('1.545', 4, m)).toEqual(parse('0e1'));
+  expect(shr('1.545', 5, m)).toEqual(parse('0e2'));
 
   expect(shr('1.234', 1, m)).toEqual(parse('1.23'));
   expect(shr('1.234', 2, m)).toEqual(parse('1.2'));

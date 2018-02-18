@@ -1,7 +1,6 @@
 import { expressions, cardinalRules, ordinalRules } from './autogen.rules';
-import { NumberOperands } from './operands';
 import { PluralRules } from './types';
-export { NumberOperands } from './operands';
+import { NumberOperands } from '../../types/numbers';
 
 const pluralRules = new PluralRules(expressions, cardinalRules, ordinalRules);
 

@@ -1,5 +1,5 @@
 import { Plural } from '@phensley/cldr-schema';
-import { NumberOperands } from './operands';
+import { NumberOperands } from '../../types/numbers';
 
 // TODO: needs a bit of cleanup.
 
@@ -195,15 +195,16 @@ export class PluralExpr {
 export const evaluateExpr = (operands: NumberOperands, expr: PluralExpr): boolean => {
   const { operand, ranges } = expr;
   let n: number = operands[operand];
-  if (expr.mod !== 0) {
-    // If we're applying modulus to the 'n' operand we must also ensure
-    // decimal value is zero.
-    if (expr.operand === 'n') {
-      if (operands.f !== 0) {
-        return false;
-      }
-    }
 
+  // If we're applying modulus to the 'n' operand we must also ensure
+  // decimal value is zero.
+  if (expr.operand === 'n') {
+    if (operands.f !== 0) {
+      return false;
+    }
+  }
+
+  if (expr.mod !== 0) {
     n = n % expr.mod;
   }
 
