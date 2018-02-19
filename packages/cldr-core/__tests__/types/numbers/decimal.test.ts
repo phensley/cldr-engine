@@ -5,12 +5,7 @@ import { DecimalFormat } from '../../../src/types/numbers/types';
 const parse = (s: string) => new Decimal(s);
 const parsedata = (s: string) => (new Decimal(s) as any).data;
 const cmp = (u: string, v: string, abs: boolean = false) => parse(u).compare(parse(v), abs);
-const add = (u: string, v: string) => parse(u).add(parse(v));
-const sub = (u: string, v: string) => parse(u).subtract(parse(v));
-const mul = (u: string, v: string) => parse(u).multiply(parse(v));
-const div = (u: string, v: string) => parse(u).divide(parse(v));
 const digits = (u: string) => parse(u).precision();
-const isInteger = (u: string) => parse(u).isInteger();
 const trailZeros = (u: string) => parse(u).trailingZeros();
 const shr = (u: string, s: number, m: RoundingMode) => parse(u).shiftright(s, m);
 
@@ -51,17 +46,25 @@ test('is negative', () => {
 });
 
 test('is integer', () => {
+  expect(parse('0').isInteger()).toEqual(true);
+  expect(parse('0.1').isInteger()).toEqual(false);
+  expect(parse('123').isInteger()).toEqual(true);
+  expect(parse('.123e3').isInteger()).toEqual(true);
+  expect(parse('123.01').isInteger()).toEqual(false);
+  expect(parse('123e-3').isInteger()).toEqual(false);
+
   expect(parse('1').isInteger()).toEqual(true);
-  expect(parse('1.0').isInteger()).toEqual(true);
   expect(parse('1001').isInteger()).toEqual(true);
 
   // If decimal is all zeros we count this as an integer since it can
   // be represented as an integer without loss of precision.
+  expect(parse('1.0').isInteger()).toEqual(true);
+  expect(parse('123.0').isInteger()).toEqual(true);
   expect(parse('1001.0000000000').isInteger()).toEqual(true);
-  expect(parse('10e100').isInteger()).toEqual(true);
 
   expect(parse('1.01').isInteger()).toEqual(false);
   expect(parse('1001.00000000001').isInteger()).toEqual(false);
+  expect(parse('10e100').isInteger()).toEqual(true);
   expect(parse('10e-100').isInteger()).toEqual(false);
 });
 
@@ -112,32 +115,6 @@ test('scale', () => {
   expect(parse('1234').scale()).toEqual(0);
   expect(parse('1.234').scale()).toEqual(3);
   expect(parse('1e3').scale()).toEqual(-3);
-});
-
-test('multiply', () => {
-  expect(mul('1.234', '0')).toEqual(parse('0'));
-  expect(mul('-1.234', '0')).toEqual(parse('0'));
-
-  expect(mul('15', '100')).toEqual(parse('1500'));
-  expect(mul('15000000', '100000')).toEqual(parse('1500000000000'));
-
-  expect(mul('100123', '5')).toEqual(parse('500615'));
-  expect(mul('1000123', '5')).toEqual(parse('5000615'));
-  expect(mul('10000123', '5')).toEqual(parse('50000615'));
-  expect(mul('100000123', '5')).toEqual(parse('500000615'));
-
-  expect(mul('-1000123', '-500')).toEqual(parse('500061500'));
-  expect(mul('-1000123', '-5000')).toEqual(parse('5000615000'));
-  expect(mul('-1000123', '-50000')).toEqual(parse('50006150000'));
-
-  expect(mul('-1000.123', '500')).toEqual(parse('-500061.500'));
-  expect(mul('-1000.12317', '500')).toEqual(parse('-500061.58500'));
-  expect(mul('-.12345', '999')).toEqual(parse('-123.32655'));
-
-  expect(mul('9999999999.999', '2')).toEqual(parse('19999999999.998'));
-
-  expect(mul('1.5', '-30.7')).toEqual(parse('-46.05'));
-  expect(mul('-1.11111112', '7.35')).toEqual(parse('-8.1666667320'));
 });
 
 test('compare', () => {
@@ -369,18 +346,6 @@ test('invalid', () => {
   expect(() => parse('12345E--1')).toThrowError();
   expect(() => parse('12345e10000000000000000')).toThrowError();
   expect(() => parse('123xyz')).toThrowError();
-});
-
-test('is integer', () => {
-  expect(isInteger('0')).toEqual(true);
-  expect(isInteger('1')).toEqual(true);
-  expect(isInteger('123')).toEqual(true);
-  expect(isInteger('123.0')).toEqual(true);
-  expect(isInteger('.123e3')).toEqual(true);
-
-  expect(isInteger('0.1')).toEqual(false);
-  expect(isInteger('123.01')).toEqual(false);
-  expect(isInteger('123e-3')).toEqual(false);
 });
 
 test('trailing zeros count', () => {
