@@ -263,15 +263,11 @@ export class Decimal {
   }
 
   /**
-   * Move the decimal point +n (left) or -n (right) places.
+   * Move the decimal point -n (left) or +n (right) places.
    */
   movePoint(n: number): Decimal {
     const w = new Decimal(this);
-    if (n === 0) {
-      return w;
-    }
-    const shift = w.exp + n;
-    console.log(`shift=${shift}`);
+    w.exp += n;
     return w;
   }
 
