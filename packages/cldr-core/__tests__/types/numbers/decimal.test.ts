@@ -4,7 +4,7 @@ import { DecimalFormat } from '../../../src/types/numbers/types';
 
 const parse = (s: string) => new Decimal(s);
 const parsedata = (s: string) => (new Decimal(s) as any).data;
-const cmp = (u: string, v: string) => parse(u).compare(parse(v));
+const cmp = (u: string, v: string, abs: boolean = false) => parse(u).compare(parse(v), abs);
 const add = (u: string, v: string) => parse(u).add(parse(v));
 const sub = (u: string, v: string) => parse(u).subtract(parse(v));
 const mul = (u: string, v: string) => parse(u).multiply(parse(v));
@@ -14,7 +14,7 @@ const isInteger = (u: string) => parse(u).isInteger();
 const trailZeros = (u: string) => parse(u).trailingZeros();
 const shr = (u: string, s: number, m: RoundingMode) => parse(u).shiftright(s, m);
 
-test('basics', () => {
+test('parse', () => {
   expect(parse('0')).toEqual({ data: [], exp: 0, sign: 0 });
   expect(parse('1')).toEqual({ data: [1], exp: 0, sign: 1 });
   expect(parse('.1')).toEqual({ data: [1], exp: -1, sign: 1 });
@@ -36,6 +36,33 @@ test('basics', () => {
 
   expect(parse('-10E+5')).toEqual({ data: [10], exp: 5, sign: -1 });
   expect(parse('123.45e99')).toEqual({ data: [12345], exp: 97, sign: 1 });
+});
+
+test('negate', () => {
+  expect(parse('1.12').negate()).toEqual(parse('-1.12'));
+  expect(parse('-1.12').negate()).toEqual(parse('1.12'));
+  expect(parse('0.00').negate()).toEqual(parse('0.00'));
+});
+
+test('is negative', () => {
+  expect(parse('1').isNegative()).toEqual(false);
+  expect(parse('0').isNegative()).toEqual(false);
+  expect(parse('-1').isNegative()).toEqual(true);
+});
+
+test('is integer', () => {
+  expect(parse('1').isInteger()).toEqual(true);
+  expect(parse('1.0').isInteger()).toEqual(true);
+  expect(parse('1001').isInteger()).toEqual(true);
+
+  // If decimal is all zeros we count this as an integer since it can
+  // be represented as an integer without loss of precision.
+  expect(parse('1001.0000000000').isInteger()).toEqual(true);
+  expect(parse('10e100').isInteger()).toEqual(true);
+
+  expect(parse('1.01').isInteger()).toEqual(false);
+  expect(parse('1001.00000000001').isInteger()).toEqual(false);
+  expect(parse('10e-100').isInteger()).toEqual(false);
 });
 
 test('operands', () => {
@@ -87,65 +114,6 @@ test('scale', () => {
   expect(parse('1e3').scale()).toEqual(-3);
 });
 
-test('format', () => {
-  const opts: DecimalFormat = {
-    decimal: '.',
-    group: ',',
-    minIntDigits: 1,
-    minGroupingDigits: 1,
-    primaryGroupSize: 3,
-    secondaryGroupSize: 4
-  };
-  expect(parse('.00123').format(opts)).toEqual('0.00123');
-  expect(parse('123456789.1234005').format(opts)).toEqual('12,3456,789.1234005');
-  expect(parse('1e5').format(opts)).toEqual('10,000');
-  expect(parse('123000000000000000000.000000456000000000000').format(opts)).toEqual(
-    '12,3000,0000,0000,0000,000.000000456000000000000');
-});
-
-test('add', () => {
-  expect(add('0', '0')).toEqual(parse('0'));
-  expect(add('12', '0')).toEqual(parse('12'));
-  expect(add('123', '456')).toEqual(parse('579'));
-  expect(add('12345', '1000000001')).toEqual(parse('1000012346'));
-
-  expect(add('1.234', '100')).toEqual(parse('101.234'));
-  expect(add('12.34', '123.45')).toEqual(parse('135.79'));
-  expect(add('12345.1', '.00001')).toEqual(parse('12345.10001'));
-
-  expect(add('1.234', '50e1')).toEqual(parse('501.234'));
-  expect(add('12.34', '50e1')).toEqual(parse('512.34'));
-
-  expect(add('-1.234', '-50e1')).toEqual(parse('-501.234'));
-
-  expect(add('9999', '2')).toEqual(parse('10001'));
-  expect(add('99999', '2')).toEqual(parse('100001'));
-  expect(add('999999', '2')).toEqual(parse('1000001'));
-  expect(add('9999999', '2')).toEqual(parse('10000001'));
-  expect(add('99999999', '2')).toEqual(parse('100000001'));
-  expect(add('999999999', '2')).toEqual(parse('1000000001'));
-  expect(add('9999999999', '2')).toEqual(parse('10000000001'));
-  expect(add('99999999999', '2')).toEqual(parse('100000000001'));
-
-  expect(add('2', '9999')).toEqual(parse('10001'));
-  expect(add('2', '99999')).toEqual(parse('100001'));
-  expect(add('2', '999999')).toEqual(parse('1000001'));
-  expect(add('2', '9999999')).toEqual(parse('10000001'));
-  expect(add('2', '99999999')).toEqual(parse('100000001'));
-  expect(add('2', '999999999')).toEqual(parse('1000000001'));
-  expect(add('2', '9999999999')).toEqual(parse('10000000001'));
-  expect(add('2', '99999999999')).toEqual(parse('100000000001'));
-});
-
-test('subtract', () => {
-  expect(sub('543', '200')).toEqual(parse('343'));
-  expect(sub('1000000000', '1')).toEqual(parse('999999999'));
-  expect(sub('12.3456789', '.020406')).toEqual(parse('12.3252729'));
-
-  expect(sub('-54321', '-321')).toEqual(parse('-54000'));
-  expect(sub('-54.0321', '-.0321')).toEqual(parse('-54.0000'));
-});
-
 test('multiply', () => {
   expect(mul('1.234', '0')).toEqual(parse('0'));
   expect(mul('-1.234', '0')).toEqual(parse('0'));
@@ -172,39 +140,6 @@ test('multiply', () => {
   expect(mul('-1.11111112', '7.35')).toEqual(parse('-8.1666667320'));
 });
 
-test('divide', () => {
-  expect(div('99999', '10')).toEqual(parse('9999'));
-  expect(div('99899999001', '999')).toEqual(parse('99999999'));
-  expect(div('99799999002', '998')).toEqual(parse('99999999'));
-  expect(div('9999999999999999999999', '9999999999999999999')).toEqual(parse('1000'));
-
-  expect(div('10000000000', '99000000')).toEqual(parse('101'));
-  expect(div('99899999001', '1199999999')).toEqual(parse('83'));
-  expect(div('9999999999999', '55555555555')).toEqual(parse('180'));
-
-  // TODO:
-  // console.log(divide(parsedata('100'), parsedata('99')));
-  // console.log(divide(parsedata('100000000'), parsedata('99000000')));
-  // console.log(div('123456789', '.1'));
-  // console.log(div('123456789', '1'));
-  // console.log(div('123456789', '10'));
-});
-
-test('divide decrements qhat', () => {
-  // Cases that cause qhat to be decremented
-  expect(div('96441598043416655685', '13367828761276')).toEqual(parse('7214454'));
-  expect(div('35314321308673059375', '16403941393069')).toEqual(parse('2152794'));
-});
-
-test('divide add back', () => {
-  // Causes D6 to be executed.
-  // TODO: Generate more cases
-  const u = '88888888888888888888888888888888888888888888888888';
-  const v = '333333333333635';
-  const w = '266666666666425333333333551739999999';
-  expect(div(u, v)).toEqual(parse(w));
-});
-
 test('compare', () => {
   expect(cmp('0', '0')).toEqual(0);
   expect(cmp('1', '1')).toEqual(0);
@@ -219,6 +154,18 @@ test('compare', () => {
   expect(cmp('1.234', '12.34e-1')).toEqual(0);
 
   expect(cmp('1e10', '1e11')).toEqual(-1);
+  expect(cmp('1.23e5', '12e4')).toEqual(1);
+  expect(cmp('12e4', '1.23e5')).toEqual(1);
+  expect(cmp('-12e4', '1.23e5')).toEqual(-1);
+  expect(cmp('-1.23e5', '12e4')).toEqual(-1);
+});
+
+test('compare abs', () => {
+  expect(cmp('0', '0', true)).toEqual(0);
+  expect(cmp('-1', '1', true)).toEqual(0);
+  expect(cmp('1', '-1', true)).toEqual(0);
+  expect(cmp('-15', '10', true)).toEqual(1);
+  expect(cmp('10', '-15', true)).toEqual(-1);
 });
 
 test('digits', () => {

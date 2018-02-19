@@ -23,6 +23,7 @@ export class MathContext {
 export interface DecimalFormat {
   decimal: string;
   group: string;
+  minusSign: string;
   minIntDigits: number;
   minGroupingDigits: number;
   primaryGroupSize: number;

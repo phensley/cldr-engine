@@ -1,5 +1,5 @@
 import { DivMod, add, subtract, multiply, trimLeadingZeros, divide } from './math';
-import { allzero, compare, digits } from './ops';
+import { allzero, compare, digits } from './operations';
 import { NumberOperands, decimalOperands } from './operands';
 import {
   Chars,
@@ -15,11 +15,17 @@ import {
 
 const DEFAULT_FORMAT: DecimalFormat = {
   decimal: '.',
-  group: ',',
+  group: '',
+  minusSign: '-',
   minIntDigits: 1,
   minGroupingDigits: 1,
   primaryGroupSize: 3,
   secondaryGroupSize: 3
+};
+
+type GroupFunc = () => void;
+const GROUP_NOOP: GroupFunc = (): void => {
+  // nothing
 };
 
 /**
@@ -32,26 +38,38 @@ export class Decimal {
   protected exp: number;
 
   constructor(num: number | string | Decimal) {
-    if (num instanceof Decimal) {
+    if (typeof num === 'string' || typeof num === 'number') {
+      this.parse(num);
+    } else {
       this.data = num.data.slice();
       this.sign = num.sign;
       this.exp = num.exp;
-    } else {
-      this.parse(num);
     }
   }
 
-  compare(v: Decimal): number {
+  /**
+   * Compare decimal u to v, returning the following:
+   *
+   *  -1   if  u < v
+   *   0   if  u = v
+   *   1   if  u > v
+   *
+   * If the abs flag is true compare the absolute values.
+   */
+  compare(v: Decimal, abs: boolean = false): number {
     const u = this;
     const us = u.sign;
     const vs = v.sign;
-    if (us !== vs) {
+    if (!abs && us !== vs) {
       return us === -1 ? -1 : 1;
     }
 
     const ue = u.alignexp();
     const ve = v.alignexp();
     if (ue !== ve) {
+      if (abs) {
+        return ue < ve ? -1 : 1;
+      }
       return ue < ve ? -1 * us : us;
     }
 
@@ -63,13 +81,13 @@ export class Decimal {
       return compare(u.data, v.data, -shift);
     }
 
-    // Same number of digits.
+    // Same number of radix digits.
     let i = u.data.length;
     while (i >= 0) {
       const a = u.data[i];
       const b = v.data[i];
       if (a !== b) {
-        return (a < b ? -1 : 1) * u.sign;
+        return (a < b ? -1 : 1) * (abs ? 1 : u.sign);
       }
       i--;
     }
@@ -78,14 +96,31 @@ export class Decimal {
     return 0;
   }
 
+  /**
+   * Compute operands for this number, used for determining the plural category.
+   */
   operands(): NumberOperands {
     return decimalOperands(this.sign, this.exp, this.data);
   }
 
+  /**
+   * Invert this number's sign.
+   */
+  negate(): Decimal {
+    return this.sign === 0 ? new Decimal(this) : Decimal.fromRaw(-this.sign, this.exp, this.data);
+  }
+
+  /**
+   * Indicates this number is negative.
+   */
   isNegative(): boolean {
     return this.sign === -1;
   }
 
+  /**
+   * Check if this number can be represented as an integer without loss of precision.
+   * For example, '12.000' is the same number as '12'.
+   */
   isInteger(): boolean {
     return this.sign === 0 ? true : this.exp + this.trailingZeros() >= 0;
   }
@@ -345,9 +380,14 @@ export class Decimal {
     return w;
   }
 
+  /**
+   * Format the number to a string, using fixed point.
+   */
   toString(): string {
     return this.format(DEFAULT_FORMAT);
   }
+
+  // TODO: support scientific formats
 
   /**
    * Render this number to a string, using the given formatting options.
@@ -355,6 +395,8 @@ export class Decimal {
    * TODO: support alternate digit systems, algorithmic / spellout
    */
   format(format: DecimalFormat): string {
+    // Determine if grouping is enabled, and set the primary and
+    // secondary group sizes.
     const grouping = format.group !== '';
     const pgs = format.primaryGroupSize;
     let sgs = format.secondaryGroupSize;
@@ -363,87 +405,113 @@ export class Decimal {
     }
 
     let exp = this.exp;
-    if (exp > 0) {
-      exp--;
-    }
 
+    // Determine how many integer digits to emit. If integer digits is
+    // larger than the integer coefficient we emit leading zeros.
     let int = this.precision() + exp;
-    if (format.minIntDigits === 0 && this.compare(ONE) === -1) {
+    if (format.minIntDigits === 0 && this.compare(ONE, true) === -1) {
+      // If the number is between 0 and 1 and format requested minimum
+      // integer digits of zero, don't emit a leading zero digit.
       int = 0;
     } else {
       int = Math.max(int, format.minIntDigits);
     }
 
-    let shouldGroup = false;
-    if (grouping && pgs > 0) {
-      shouldGroup = int >= format.minGroupingDigits + pgs;
-    }
-
+    // Array to append digits in reverse order
     const r: string[] = [];
     const len = this.data.length;
     let groupSize = pgs;
     let emitted = 0;
 
-    let zeros = exp;
-    while (zeros > 0) {
-      if (shouldGroup) {
-        const emit = emitted > 0 && emitted % groupSize === 0;
-        if (emit) {
+    // Determine if grouping should be active.
+    let groupFunc = GROUP_NOOP;
+    if (grouping && pgs > 0 && int >= format.minGroupingDigits + pgs) {
+      groupFunc = () => {
+        if (emitted > 0 && emitted % groupSize === 0) {
+          // Push group character, reset emitted digits, and switch
+          // to secondary grouping size.
           r.push(format.group);
-          emitted -= groupSize;
+          emitted = 0;
           groupSize = sgs;
         }
-      }
-      r.push('0');
-      zeros--;
-      int--;
-      emitted++;
+      };
     }
 
+    // Push trailing zeros for a positive exponent
+    let zeros = exp;
+    while (zeros > 0) {
+      r.push('0');
+      emitted++;
+      int--;
+      if (int > 0) {
+        groupFunc();
+      }
+      zeros--;
+    }
+
+    // Scan coefficient from least- to most-significant digit.
     const last = len - 1;
     for (let i = 0; i < len; i++) {
+      // Count the decimal digits c in this radix digit d
       let d = this.data[i];
       const c = i === last ? digits(d) : RDIGITS;
-      for (let j = 0; j < c; j++) {
-        if (exp === 0) {
-          r.push(format.decimal);
-        }
-        exp++;
 
+      // Loop over the decimal digits
+      for (let j = 0; j < c; j++) {
+        // Push decimal digit
         r.push(String(d % 10));
         d = (d / 10) | 0;
 
-        if (shouldGroup) {
-          const emit = emitted > 0 && emitted % groupSize === 0;
-          if (emit) {
-            r.push(format.group);
-            emitted -= groupSize;
-            groupSize = sgs;
-          }
+        // When we've reached exponent of 0, push the decimal point.
+        exp++;
+        if (exp === 0) {
+          r.push(format.decimal);
         }
-        if (exp >= 0) {
-          int--;
+
+        // Decrement integer, increment emitted digits when exponent is positive, to
+        // trigger grouping logic. We only do this once exp has become positive to
+        // avoid counting emitted digits for decimal part.
+        if (exp > 0) {
           emitted++;
+          int--;
+          if (int > 0) {
+            groupFunc();
+          }
         }
       }
     }
 
+    // If exponent still negative, emit leading decimal zeros
     while (exp < 0) {
       r.push('0');
+
+      // When we've reached exponent of 0, push the decimal point
       exp++;
       if (exp === 0) {
         r.push(format.decimal);
       }
     }
 
-    // Leading zeros
+    // Leading integer zeros
     while (int > 0) {
       r.push('0');
+      emitted++;
       int--;
+      if (int > 0) {
+        groupFunc();
+      }
     }
 
-    r.reverse();
-    return r.join('');
+    // Sign symbol
+    if (this.sign === -1) {
+      r.push(format.minusSign);
+    }
+
+    return r.reverse().join('');
+  }
+
+  protected static fromRaw(sign: number, exp: number, data: number[]): Decimal {
+    return new Decimal({ sign, exp, data} as any as Decimal);
   }
 
   /**
@@ -535,46 +603,48 @@ export class Decimal {
   protected addsub(u: Decimal, v: Decimal, vsign: number): Decimal {
     const zero = u.sign === 0;
     if (zero || v.sign === 0) {
-      return zero ? new Decimal(v) : new Decimal(u);
+      return zero ? Decimal.fromRaw(vsign, v.exp, v.data) : new Decimal(u);
     }
 
+    let m = u; // m = bigger
+    let n = v; // n = smaller
     let swap = 0;
-    if (u.exp < v.exp) {
-      [u, v] = [v, u];
+    if (m.exp < n.exp) {
+      [m, n] = [n, m];
       swap++;
     }
 
-    const shift = u.exp - v.exp;
-    u = u.shiftleft(shift);
+    const shift = m.exp - n.exp;
+    m = m.shiftleft(shift);
 
     const w = new Decimal(ZERO);
-    w.exp = v.exp;
+    w.exp = n.exp;
 
-    if (u.data.length < v.data.length) {
-      [u, v] = [v, u];
+    if (m.data.length < n.data.length) {
+      [m, n] = [n, m];
       swap++;
     }
 
     if (u.sign === vsign) {
-      w.data = add(u.data, v.data);
+      w.data = add(m.data, n.data);
       w.sign = vsign;
 
     } else {
-      const ulen = u.data.length;
-      const vlen = v.data.length;
+      const ulen = m.data.length;
+      const vlen = n.data.length;
       if (ulen === vlen) {
         for (let i = ulen - 1; i >= 0; i--) {
-          if (u.data[i] !== v.data[i]) {
-            if (u.data[i] < v.data[i]) {
-              [u, v] = [v, u];
+          if (m.data[i] !== n.data[i]) {
+            if (m.data[i] < n.data[i]) {
+              [m, n] = [n, m];
               swap++;
             }
             break;
           }
         }
       }
-      w.data = subtract(u.data, v.data);
-      w.sign = (swap & 1) === 1 ? vsign : u.sign;
+      w.data = subtract(m.data, n.data);
+      w.sign = (swap & 1) === 1 ? vsign : m.sign;
     }
     w.trim();
     return w;

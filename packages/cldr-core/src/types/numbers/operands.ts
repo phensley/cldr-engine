@@ -1,4 +1,4 @@
-import { digits } from './ops';
+import { digits } from './operations';
 import { RDIGITS, POWERS10 } from './types';
 
 // When a number crosses this limit we reduce it to avoid overflow.
@@ -97,6 +97,8 @@ outer:
       if (intdigits > 0) {
         // Integer part
         n = (n * 10) + q;
+
+        // If the integer digits exceed the limit we apply modulus.
         if (n > LIMIT) {
           n = n % LIMIT;
         }
