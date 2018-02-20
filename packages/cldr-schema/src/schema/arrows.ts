@@ -53,9 +53,7 @@ export const fieldArrow = (offset: number): FieldArrow => {
 };
 
 export const fieldIndexedArrow = (offsets: number[]): FieldIndexedArrow<number> => {
-  return (bundle: Bundle, index: number): string => {
-    return bundle.get(offsets[index]);
-  };
+  return (bundle: Bundle, index: number): string => bundle.get(offsets[index]);
 };
 
 export const fieldMapArrow = (map: OffsetMap): FieldMapArrow<string> => {

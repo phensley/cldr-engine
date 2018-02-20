@@ -113,8 +113,8 @@ export class ResourcePack {
     // Keep a mapping of offsets to strings in the exceptions array.
     const index: { [x: string]: number } = {};
 
-    // Iterate over each non-base layer.
-    for (let i = 1; i < layers.length; i++) {
+    // Iterate over each layer, computing its exception index.
+    for (let i = 0; i < layers.length; i++) {
       const curr = layers[i];
 
       // Iterate over all strings for the current layer.
