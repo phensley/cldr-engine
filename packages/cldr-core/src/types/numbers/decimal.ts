@@ -118,6 +118,13 @@ export class Decimal {
   }
 
   /**
+   * Signum.
+   */
+  signum(): number {
+    return this.sign;
+  }
+
+  /**
    * Check if this number can be represented as an integer without loss of precision.
    * For example, '12.000' is the same number as '12'.
    */

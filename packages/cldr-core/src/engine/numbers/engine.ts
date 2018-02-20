@@ -37,8 +37,7 @@ export class NumbersEngine {
     if (typeof n === 'number' || typeof n === 'string') {
       n = new Decimal(n);
     }
-    // TODO:
-    return n.toString();
+    return this.internal.formatDecimal(this.bundle, n, options);
   }
 
   formatCurrency(n: number | string | Decimal, code: CurrencyType | string, options: CurrencyFormatOptions): string {

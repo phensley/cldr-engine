@@ -39,8 +39,12 @@ export interface ScopeArrow<T extends string, R> {
 
 export const digitsArrow = (table: number[][]): DigitsArrow => {
   return (bundle: Bundle, digits: number, index: number): string => {
-    const offsets = table[digits] || table[4];
-    return bundle.get(offsets[index]);
+    if (digits < 4) {
+      return '';
+    }
+    digits -= 4;
+    const offsets = digits >= table.length ? table[table.length - 1] : table[digits];
+    return offsets === undefined ? '' : bundle.get(offsets[index]);
   };
 };
 

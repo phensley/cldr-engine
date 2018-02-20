@@ -1,7 +1,7 @@
 import { Plural } from '@phensley/cldr-schema';
 import { languageBundle } from '../../_helpers/bundle';
 import { buildSchema } from '../../../src/schema';
-import { NumbersEngine, NumbersInternal } from '../../../src/engine/numbers';
+import { DecimalFormatOptions, NumbersEngine, NumbersInternal } from '../../../src/engine/numbers';
 
 const EN = languageBundle('en');
 const EN_GB = languageBundle('en-GB');
@@ -14,10 +14,9 @@ const USD = 'USD';
 const AUD = 'AUD';
 
 test('basics', () => {
+  const opts: DecimalFormatOptions = {};
   let formatter = new NumbersEngine(INTERNAL, EN);
-  let s = formatter.formatDecimal('1.234', {});
-  // TODO
-  console.log(s);
+  let s = formatter.formatDecimal('1.234', opts);
 });
 
 test('display names', () => {

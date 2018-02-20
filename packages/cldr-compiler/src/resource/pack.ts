@@ -146,7 +146,15 @@ export class ResourcePack {
     // Pack all regions together with their exception indices.
     const regions = layers.map(curr => {
       const idx = curr.index.map(base100encode).join(' ');
-      return `"${curr.tag.region()}":"${idx}"`;
+      let id = curr.tag.region();
+
+      // TODO: Revisit variant support. For now we append variant to region
+      // to distinguish them.
+      const variant = curr.tag.variant();
+      if (variant !== '') {
+        id += '-' + variant;
+      }
+      return `"${id}":"${idx}"`;
     });
 
     // Manually build the JSON to ensure the same result every time (avoid passing
