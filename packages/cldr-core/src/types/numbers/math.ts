@@ -1,4 +1,4 @@
-import { RADIX, RDIGITS, POWERS10 } from './types';
+import { Constants, POWERS10 } from './types';
 
 /**
  * Knuth TAoCP 4.3.1 Algorithm A
@@ -19,10 +19,10 @@ export const add = (u: number[], v: number[]): number[] => {
 
     // A2. Add digits
     const z = u[j] + vj + k;
-    w[j] = z % RADIX;
+    w[j] = z % Constants.RADIX;
 
     // .. k is being set to 1 or 0, to carry
-    k = (z / RADIX) | 0;
+    k = (z / Constants.RADIX) | 0;
 
     // A3. Loop on j
     j++;
@@ -52,7 +52,7 @@ export const subtract = (u: number[], v: number[]): number[] => {
 
     // S2. Subtract digits
     const z = u[j] - vj + k;
-    w[j] = z < 0 ? z + RADIX : z;
+    w[j] = z < 0 ? z + Constants.RADIX : z;
 
     // .. k is set to -1 or 0, to borrow
     k = z < 0 ? -1 : 0;
@@ -87,8 +87,8 @@ export const multiply = (u: number[], v: number[]): number[] => {
     while (i < m) {
       // M4. Multiply and add
       const p = (k + w[i + j]) + u[i] * v[j];
-      k = (p / RADIX) | 0;
-      w[i + j] = p - k * RADIX;
+      k = (p / Constants.RADIX) | 0;
+      w[i + j] = p - k * Constants.RADIX;
 
       // M5. Loop on i
       i++;
@@ -112,8 +112,8 @@ export const multiplyword = (w: number[], u: number[], n: number, v: number): vo
   let k = 0;
   for (i = 0; i < n; i++) {
     const p = (k + u[i] * v);
-    k = (p / RADIX) | 0;
-    w[i] = p - k * RADIX;
+    k = (p / Constants.RADIX) | 0;
+    w[i] = p - k * Constants.RADIX;
   }
   if (k > 0) {
     w[i] = k;
@@ -150,7 +150,7 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
   r.fill(0);
 
   // D1. Normalize
-  const d = (RADIX / (v[n - 1] + 1)) | 0;
+  const d = (Constants.RADIX / (v[n - 1] + 1)) | 0;
   if (d !== 1) {
     multiplyword(u, uc, nplusm, d);
     multiplyword(v, vc, n, d);
@@ -164,15 +164,15 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
   let j = m;
   while (j >= 0) {
     // D3. Calculate q̂ and r̂.
-    p = u[j + n - 1] + (u[j + n] * RADIX);
+    p = u[j + n - 1] + (u[j + n] * Constants.RADIX);
     let qhat = (p / v[n - 1]) | 0;
     let rhat = p - qhat * v[n - 1];
     while (true) {
       // D3. Test if q̂ = radix ...
-      if (qhat < RADIX) {
+      if (qhat < Constants.RADIX) {
         const z = qhat * v[n - 2];
-        hi = (z / RADIX) | 0;
-        lo = z - hi * RADIX;
+        hi = (z / Constants.RADIX) | 0;
+        lo = z - hi * Constants.RADIX;
         if (hi <= rhat) {
           if (hi !== rhat || lo <= u[j + n - 2]) {
             break;
@@ -183,7 +183,7 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
       // D3. ... decrease q̂ by 1, increase r̂ by v[n - 1]
       qhat--;
       rhat += v[n - 1];
-      if (rhat >= RADIX) {
+      if (rhat >= Constants.RADIX) {
         break;
       }
     }
@@ -194,13 +194,13 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
     for (i = 0; i <= n; i++) {
       // Multiply.
       p = qhat * v[i] + k;
-      hi = (p / RADIX) | 0;
-      lo = p - hi * RADIX;
+      hi = (p / Constants.RADIX) | 0;
+      lo = p - hi * Constants.RADIX;
 
       // Subtract and determine carry.
       const x = u[i + j] - lo;
       k = x < 0 ? 1 : 0;
-      u[i + j] = k ? x + RADIX : x;
+      u[i + j] = k ? x + Constants.RADIX : x;
       k += hi;
     }
 
@@ -222,7 +222,7 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
   if (remainder) {
     k = 0;
     for (let i = n - 1; i >= 0; i--) {
-      p = u[i] + (k * RADIX);
+      p = u[i] + (k * Constants.RADIX);
       r[i] = (p / d) | 0;
       k = p - r[i] * d;
     }
@@ -242,7 +242,7 @@ const divideword = (u: number[], v: number): [number[], number[]] => {
   q.fill(0);
   let r = 0;
   for (let i = n - 1; i >= 0; i--) {
-    const p = u[i] + (r * RADIX);
+    const p = u[i] + (r * Constants.RADIX);
     q[i] = (p / v) | 0;
     r = p - q[i] * v;
   }
@@ -259,15 +259,15 @@ const _add = (w: number[], j0: number, u: number[], j1: number, v: number[], m: 
 
   while (i < n) {
     s = u[i + j1] + (v[i] + k);
-    k = (s < u[i] || s >= RADIX) ? 1 : 0;
-    w[i + j0] = k ? s - RADIX : s;
+    k = (s < u[i] || s >= Constants.RADIX) ? 1 : 0;
+    w[i + j0] = k ? s - Constants.RADIX : s;
     i++;
   }
 
   while (k && i < m) {
     s = u[i + j1] + k;
-    k = s === RADIX ? 1 : 0;
-    w[i + j0] = k === 1 ? s - RADIX : s;
+    k = s === Constants.RADIX ? 1 : 0;
+    w[i + j0] = k === 1 ? s - Constants.RADIX : s;
     i++;
   }
 
@@ -307,7 +307,7 @@ export class DivMod {
   }
 
   size(n: number): number {
-    const [q, r] = divword(this.s, n, RDIGITS);
+    const [q, r] = divword(this.s, n, Constants.RDIGITS);
     return r === 0 ? q : q + 1;
   }
 }

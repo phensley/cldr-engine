@@ -4,8 +4,8 @@ const parse = (s: string) => new Decimal(s);
 const mul = (u: string, v: string) => parse(u).multiply(parse(v));
 
 test('multiply', () => {
-  expect(mul('1.234', '0')).toEqual(parse('0'));
-  expect(mul('-1.234', '0')).toEqual(parse('0'));
+  expect(mul('1.234', '0')).toEqual(parse('0.000'));
+  expect(mul('-1.234', '0')).toEqual(parse('0.000'));
 
   expect(mul('15', '100')).toEqual(parse('1500'));
   expect(mul('15000000', '100000')).toEqual(parse('1500000000000'));

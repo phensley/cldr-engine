@@ -30,32 +30,32 @@ export interface DecimalFormat {
   secondaryGroupSize: number;
 }
 
-// 10^7 < sqrt(Number.MAX_SAFE_INTEGER)
-export const RADIX = 1e7;
-export const RDIGITS = 7;
+export const enum Constants {
+  // 10^7 < sqrt(Number.MAX_SAFE_INTEGER)
+  RADIX = 1e7,
+  RDIGITS = 7,
 
-export const enum Power10 {
-  E0 = 1,
-  E1 = 10,
-  E2 = 100,
-  E3 = 1000,
-  E4 = 10000,
-  E5 = 100000,
-  E6 = 1000000,
-  E7 = 10000000,
-  E8 = 100000000
+  P0 = 1,
+  P1 = 10,
+  P2 = 100,
+  P3 = 1000,
+  P4 = 10000,
+  P5 = 100000,
+  P6 = 1000000,
+  P7 = 10000000,
+  P8 = 100000000
 }
 
 export const POWERS10 = [
-  Power10.E0,
-  Power10.E1,
-  Power10.E2,
-  Power10.E3,
-  Power10.E4,
-  Power10.E5,
-  Power10.E6,
-  Power10.E7,
-  Power10.E8
+  Constants.P0,
+  Constants.P1,
+  Constants.P2,
+  Constants.P3,
+  Constants.P4,
+  Constants.P5,
+  Constants.P6,
+  Constants.P7,
+  Constants.P8
 ];
 
 export const enum ParseState {

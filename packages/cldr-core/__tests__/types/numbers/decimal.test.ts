@@ -138,6 +138,12 @@ test('compare', () => {
 });
 
 test('compare abs', () => {
+  expect(cmp('0', '0', false)).toEqual(0);
+  expect(cmp('-1', '1', false)).toEqual(-1);
+  expect(cmp('1', '-1', false)).toEqual(1);
+  expect(cmp('-15', '10', false)).toEqual(-1);
+  expect(cmp('10', '-15', false)).toEqual(1);
+
   expect(cmp('0', '0', true)).toEqual(0);
   expect(cmp('-1', '1', true)).toEqual(0);
   expect(cmp('1', '-1', true)).toEqual(0);
@@ -183,6 +189,31 @@ test('scale', () => {
   expect(scale('0.99999999999999999999')).toEqual(20);
   expect(scale('0.000000000000000000000000000000000000001')).toEqual(39);
   expect(scale('1.000000000000000000000000000000000000001')).toEqual(39);
+});
+
+test('set scale', () => {
+  expect(parse('10.34567').setScale(-4)).toEqual(parse('0e4'));
+  expect(parse('10.34567').setScale(-3)).toEqual(parse('0e3'));
+  expect(parse('10.34567').setScale(-2)).toEqual(parse('0e2'));
+  expect(parse('10.34567').setScale(-1)).toEqual(parse('1e1'));
+  expect(parse('10.34567').setScale(0)).toEqual(parse('10'));
+  expect(parse('10.34567').setScale(1)).toEqual(parse('10.3'));
+  expect(parse('10.34567').setScale(2)).toEqual(parse('10.34'));
+  expect(parse('10.34567').setScale(3)).toEqual(parse('10.346'));
+  expect(parse('10.34567').setScale(4)).toEqual(parse('10.3457'));
+  expect(parse('10.34567').setScale(5)).toEqual(parse('10.34567'));
+  expect(parse('10.34567').setScale(6)).toEqual(parse('10.345670'));
+
+  expect(parse('1034567').setScale(-6)).toEqual(parse('1e+6'));
+  expect(parse('1034567').setScale(-5)).toEqual(parse('10e+5'));
+  expect(parse('1034567').setScale(-4)).toEqual(parse('103e+4'));
+  expect(parse('1034567').setScale(-3)).toEqual(parse('1034e+3'));
+  expect(parse('1034567').setScale(-2)).toEqual(parse('10346e+2'));
+  expect(parse('1034567').setScale(-1)).toEqual(parse('103457e+1'));
+  expect(parse('1034567').setScale(0)).toEqual(parse('1034567'));
+  expect(parse('1034567').setScale(1)).toEqual(parse('1034567.0'));
+  expect(parse('1034567').setScale(2)).toEqual(parse('1034567.00'));
+  expect(parse('1034567').setScale(3)).toEqual(parse('1034567.000'));
 });
 
 test('divmod pow10', () => {
@@ -236,6 +267,10 @@ test('shift left', () => {
   expect(parse('1234').shiftleft(7)).toEqual(parse('12340000000'));
   expect(parse('1234').shiftleft(8)).toEqual(parse('123400000000'));
   expect(parse('1234').shiftleft(9)).toEqual(parse('1234000000000'));
+});
+
+test('shiftfoo', () => {
+  expect(parse('12345678900000000000').shiftleft(10)).toEqual(parse('123456789000000000000000000000'));
 });
 
 test('shift right', () => {

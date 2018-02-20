@@ -1,16 +1,16 @@
 import { DivMod, add, subtract, multiply, trimLeadingZeros, divide } from './math';
 import { allzero, compare, digits } from './operations';
 import { NumberOperands, decimalOperands } from './operands';
+
 import {
   Chars,
+  Constants,
   DecimalFormat,
   ParseState,
   ParseFlags,
   POWERS10,
-  Power10,
-  RADIX,
-  RDIGITS,
-  RoundingMode
+  RoundingMode,
+  MathContext
 } from './types';
 
 const DEFAULT_FORMAT: DecimalFormat = {
@@ -136,45 +136,51 @@ export class Decimal {
   multiply(v: Decimal): Decimal {
     const u = this;
     const w = new Decimal(ZERO);
+    w.exp = u.exp + v.exp;
+
     if (u.sign === 0 || v.sign === 0) {
       return w;
     }
 
     w.data = multiply(u.data, v.data);
     w.sign = u.sign === v.sign ? 1 : -1;
-    w.exp = u.exp + v.exp;
-    w.trim();
-    return w;
+    return w.trim();
   }
 
   /**
    * Divide this number by v and return the quotient.
    */
-  divide(v: Decimal): Decimal {
+  divide(v: Decimal, context?: MathContext): Decimal {
     let w = this.checkDivision(v);
     if (w !== undefined) {
       return w;
     }
 
-    const u = this;
+    let u: Decimal = this;
     w = new Decimal(ZERO);
 
-    // TODO: precision support.
-    const prec = 20;
-    const shift = (u.precision() - v.precision()) + prec + 1;
-    const iexp = u.exp - v.exp;
-    const exp = iexp - shift;
+    const prec = context === undefined ? Math.max(v.precision(), u.precision()) + 1 : context.precision;
+    const mode = context === undefined ? RoundingMode.HALF_EVEN : context.roundingMode;
 
-    // console.log(`u=${u.data} v=${v.data}  shift=${shift} iexp=${iexp}  exp=${exp}`);
+    const shift = (v.precision() - u.precision()) + prec + 1;
+    const exp = (u.exp - v.exp) - shift;
+    if (shift > 0) {
+      u = u.shiftleft(shift);
+    } else {
+      v = v.shiftleft(-shift);
+    }
 
-    // TODO: shift u or v depending on direction of shift
-
-    const [q, r] = divide(u.data, v.data, false);
+    // Perform the division.
+    const [q] = divide(u.data, v.data, false);
     w.data = q;
     w.sign = u.sign === v.sign ? 1 : -1;
-
+    w.exp = exp;
     w.trim();
-    return w;
+
+    // Adjust precision of result
+    const d = w.precision() - prec;
+    w = d > 0 ? w.shiftright(d, mode) : w.shiftright(1, mode);
+    return context === undefined ? w.stripTrailingZeros() : w;
   }
 
   /**
@@ -183,18 +189,32 @@ export class Decimal {
   divmod(v: Decimal): [Decimal, Decimal] {
     const w = this.checkDivision(v);
     if (w !== undefined) {
-      return [w, new Decimal(ZERO)];
+      return [w, new Decimal(v)];
     }
 
-    const [qd, rd] = divide(this.data, v.data, true);
+    let u: Decimal = this;
+    const exp = u.exp > v.exp ? v.exp : u.exp;
+    if (u.exp !== v.exp) {
+      const shift = u.exp - v.exp;
+      if (shift > 0) {
+        u = u.shiftleft(shift);
+      } else {
+        v = v.shiftleft(-shift);
+      }
+    }
+
+    const [qd, rd] = divide(u.data, v.data, true);
+
     const q = new Decimal(ZERO);
     q.data = qd;
+    q.sign = u.sign === v.sign ? 1 : -1;
+
     const r = new Decimal(ZERO);
     r.data = rd;
+    r.sign = u.sign;
+    r.exp = exp;
 
-    q.trim();
-    r.trim();
-    return [q, r];
+    return [q.trim(), r.trim()];
   }
 
   /**
@@ -207,7 +227,7 @@ export class Decimal {
     for (let i = 0; i < len; i++) {
       if (d[i] !== 0) {
         let n = d[i];
-        r = i * RDIGITS;
+        r = i * Constants.RDIGITS;
         while (n % 10 === 0) {
           n /= 10 | 0;
           r++;
@@ -234,7 +254,7 @@ export class Decimal {
       return 1;
     }
     const len = this.data.length;
-    return ((len - 1) * RDIGITS) + digits(this.data[len - 1]);
+    return ((len - 1) * Constants.RDIGITS) + digits(this.data[len - 1]);
   }
 
   /**
@@ -242,6 +262,16 @@ export class Decimal {
    */
   scale(): number {
     return this.exp === 0 ? 0 : -this.exp;
+  }
+
+  /**
+   * Returns a new number with the given scale, shifting the coefficient as needed.
+   */
+  setScale(scale: number, roundingMode: RoundingMode = RoundingMode.HALF_EVEN): Decimal {
+    const diff = scale - this.scale();
+    const r = diff > 0 ? this.shiftleft(diff) : this.shiftright(-diff, roundingMode);
+    r.exp = scale === 0 ? 0 : -scale;
+    return r;
   }
 
   /**
@@ -257,13 +287,14 @@ export class Decimal {
    * Return the storage space needed to hold a given number of digits.
    */
   size(n: number): number {
-    const q = (n / RDIGITS) | 0;
-    const r = n - q * RDIGITS;
+    const q = (n / Constants.RDIGITS) | 0;
+    const r = n - q * Constants.RDIGITS;
     return r === 0 ? q : q + 1;
   }
 
   /**
-   * Move the decimal point -n (left) or +n (right) places.
+   * Move the decimal point -n (left) or +n (right) places. Does not change
+   * precision, only affects the exponent.
    */
   movePoint(n: number): Decimal {
     const w = new Decimal(this);
@@ -271,6 +302,9 @@ export class Decimal {
     return w;
   }
 
+  /**
+   * Shifts all digits to the left, increasing the precision.
+   */
   shiftleft(shift: number): Decimal {
     const w = new Decimal(this);
     if (shift <= 0 || w.sign === 0) {
@@ -280,8 +314,8 @@ export class Decimal {
     let m = u.data.length;
 
     // Compute the shift in terms of our radix.
-    const q = (shift / RDIGITS) | 0;
-    const r = shift - q * RDIGITS;
+    const q = (shift / Constants.RDIGITS) | 0;
+    const r = shift - q * Constants.RDIGITS;
 
     // Expand w to hold shifted result and zero all elements.
     let n = this.size(u.precision() + shift);
@@ -298,15 +332,19 @@ export class Decimal {
 
     // Shift divided by radix leaves a remainder.
     const powlo = POWERS10[r];
-    const powhi = POWERS10[RDIGITS - r];
-    let hi = 0, lo = 0, loprev = 0;
+    const powhi = POWERS10[Constants.RDIGITS - r];
+    let hi = 0;
+    let lo = 0;
+    let loprev = 0;
 
     n--;
     m--;
     hi = (u.data[m] / powhi) | 0;
     loprev = u.data[m] - hi * powhi;
     if (hi !== 0) {
-      w.data[n--] = hi;
+      w.data[n] = hi;
+      n--;
+      m--;
     }
 
     // Divmod each element of u, copying the hi/lo parts to w.
@@ -321,7 +359,8 @@ export class Decimal {
   }
 
   /**
-   * Shifts all digits to the right, reducing the precision by shift.
+   * Shifts all digits to the right, reducing the precision. Result is rounded
+   * using the given rounding mode.
    */
   shiftright(shift: number, mode: RoundingMode = RoundingMode.HALF_EVEN): Decimal {
     const w = new Decimal(this);
@@ -332,14 +371,14 @@ export class Decimal {
     const u = this;
 
     const div = new DivMod();
-    const [q, r] = div.word(shift, RDIGITS);
+    const [q, r] = div.word(shift, Constants.RDIGITS);
 
     let i = 0, j = 0;
     let rnd = 0, rest = 0;
 
     if (r === 0) {
       if (q > 0) {
-        [rnd, rest] = div.pow10(u.data[q - 1], RDIGITS - 1);
+        [rnd, rest] = div.pow10(u.data[q - 1], Constants.RDIGITS - 1);
         if (rest === 0) {
           rest = allzero(u.data, q - 1) === 0 ? 1 : 0;
         }
@@ -347,12 +386,11 @@ export class Decimal {
       for (j = 0; j < u.data.length - q; j++) {
         w.data[j] = u.data[q + j];
       }
-      w.trim();
-      return w;
+      return w.trim();
     }
 
     let hiprev = 0;
-    const ph = POWERS10[RDIGITS - r];
+    const ph = POWERS10[Constants.RDIGITS - r];
     [hiprev, rest] = div.pow10(u.data[q], r);
     [rnd, rest] = div.pow10(rest, r - 1);
     if (rest === 0 && q > 0) {
@@ -372,8 +410,7 @@ export class Decimal {
     if (w.round(rnd, mode)) {
       w._increment();
     }
-    w.trim();
-    return w;
+    return w.trim();
   }
 
   /**
@@ -450,7 +487,7 @@ export class Decimal {
     for (let i = 0; i < len; i++) {
       // Count the decimal digits c in this radix digit d
       let d = this.data[i];
-      const c = i === last ? digits(d) : RDIGITS;
+      const c = i === last ? digits(d) : Constants.RDIGITS;
 
       // Loop over the decimal digits
       for (let j = 0; j < c; j++) {
@@ -527,11 +564,12 @@ export class Decimal {
   /**
    * Trim leading zeros from a result and reset sign and exponent accordingly.
    */
-  protected trim(): void {
+  protected trim(): Decimal {
     trimLeadingZeros(this.data);
     if (this.data.length === 0) {
       this.sign = 0;
     }
+    return this;
   }
 
   /**
@@ -544,7 +582,7 @@ export class Decimal {
     let k = 1;
     for (let i = 0; k === 1 && i < len; i++) {
       s = d[i] + k;
-      k = s === RADIX ? 1 : 0;
+      k = s === Constants.RADIX ? 1 : 0;
       d[i] = k ? 0 : s;
     }
     if (k === 1) {
@@ -642,8 +680,7 @@ export class Decimal {
       w.data = subtract(m.data, n.data);
       w.sign = (swap & 1) === 1 ? vsign : m.sign;
     }
-    w.trim();
-    return w;
+    return w.trim();
   }
 
   /**
@@ -747,7 +784,7 @@ export class Decimal {
         n += (code - Chars.DIGIT0) * POWERS10[z];
         z++;
         dig++;
-        if (z === RDIGITS) {
+        if (z === Constants.RDIGITS) {
           data.push(n);
           n = 0;
           z = 0;
