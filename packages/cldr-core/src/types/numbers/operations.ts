@@ -9,6 +9,7 @@ export const compare = (a: number[], b: number[], shift: number): number => {
   let m = b.length;
 
   const [q, r] = div.word(shift, Constants.RDIGITS);
+
   if (r === 0) {
     while (--m >= 0) {
       const c = cmp(a[m + q], b[m]);

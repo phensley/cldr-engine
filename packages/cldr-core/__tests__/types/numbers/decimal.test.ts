@@ -115,6 +115,14 @@ test('operands', () => {
   expect(parse('1234567890123456789.12345000').operands()).toEqual(
     { n: 7890123456789, i: 7890123456789, v: 8, w: 5, f: 12345000, t: 12345, neg: false, dec: true }
   );
+
+  expect(parse('1234567e5').operands()).toEqual(
+    { n: 123456700000, i: 123456700000, v: 0, w: 0, f: 0, t: 0, neg: false, dec: false }
+  );
+
+  expect(parse('9999999e10').operands()).toEqual(
+    { n: 9990000000000, i: 9990000000000, v: 0, w: 0, f: 0, t: 0, neg: false, dec: false }
+  );
 });
 
 test('compare', () => {
@@ -135,6 +143,21 @@ test('compare', () => {
   expect(cmp('12e4', '1.23e5')).toEqual(1);
   expect(cmp('-12e4', '1.23e5')).toEqual(-1);
   expect(cmp('-1.23e5', '12e4')).toEqual(-1);
+  expect(cmp('1.2345e-10', '12e4')).toEqual(-1);
+
+  expect(cmp('10000000', '10000001')).toEqual(-1);
+  expect(cmp('10000000', '10000000')).toEqual(0);
+  expect(cmp('10000001', '10000000')).toEqual(1);
+
+  expect(cmp('99999999999', '99999999998')).toEqual(1);
+  expect(cmp('99999999999e-3', '99999999998')).toEqual(-1);
+  expect(cmp('-99999999999e-10', '99999999998e-2')).toEqual(-1);
+
+  expect(cmp('100000.2345666666e-7', '100000.23457e-7')).toEqual(-1);
+  expect(cmp('100000.2345666666e-7', '100000.23447e-7')).toEqual(1);
+  expect(cmp('100000000.2345666666e-7', '100020000.23447e-7')).toEqual(-1);
+  expect(cmp('10000000000.2345666666e-7', '10000000000.23457e-7')).toEqual(-1);
+  expect(cmp('10000000000.234566666666e-6', '10000000000.23457e-6')).toEqual(-1);
 });
 
 test('compare abs', () => {
@@ -267,10 +290,9 @@ test('shift left', () => {
   expect(parse('1234').shiftleft(7)).toEqual(parse('12340000000'));
   expect(parse('1234').shiftleft(8)).toEqual(parse('123400000000'));
   expect(parse('1234').shiftleft(9)).toEqual(parse('1234000000000'));
-});
 
-test('shiftfoo', () => {
-  expect(parse('12345678900000000000').shiftleft(10)).toEqual(parse('123456789000000000000000000000'));
+  expect(parse('12345678900000000000').shiftleft(10))
+    .toEqual(parse('123456789000000000000000000000'));
 });
 
 test('shift right', () => {
