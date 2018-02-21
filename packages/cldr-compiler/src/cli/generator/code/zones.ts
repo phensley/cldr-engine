@@ -37,7 +37,6 @@ const buildZoneDST = (metazones: any): [any, any, any] => {
     const [ name, _indexed, _untils, _dsts ] = row;
     const metazone = metazones[name];
     if (metazone === undefined) {
-      console.warn(`skipping: ${name}`);
       continue;
     }
     const [ _offsets, _index ] = _indexed;
@@ -119,7 +118,7 @@ export const getZones = (data: any): Code[] => {
 
   code += `export const metazoneIds = '${metazoneIds}';\n`;
 
-  result.push(Code.core(['types', 'autogen.zones.ts'], code));
+  result.push(Code.core(['types', 'datetime', 'autogen.zones.ts'], code));
 
   // Build autogen.timezones.ts source
   code = `${HEADER}import { makeEnum, makeKeyedEnum } from '../../types/enum';\n\n`;

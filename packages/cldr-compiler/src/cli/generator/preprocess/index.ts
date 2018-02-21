@@ -9,6 +9,7 @@ import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
 import { getSymbols } from './symbols';
 import { getZoneDST } from './zonedst';
+import { getCurrencyInfo } from './currency';
 
 const supplemental = getSupplemental();
 
@@ -16,6 +17,7 @@ const getAliases = (): any => supplemental.Aliases;
 
 const OUTPUTS: { [x: string]: () => string } = {
   aliases: getAliases,
+  currencyinfo: getCurrencyInfo,
   matching: getMatching,
   metazones: getMetazones,
   plurals: getPlurals,

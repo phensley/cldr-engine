@@ -24,7 +24,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
 };
 
 const DATA_FILES = [
-  'aliases', 'matching', 'metazones', 'plurals', 'subtags', 'symbols', 'zonedst'
+  'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals', 'subtags', 'symbols', 'zonedst'
 ];
 
 const load = (): any => {

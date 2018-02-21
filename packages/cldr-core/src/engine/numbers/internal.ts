@@ -4,6 +4,7 @@ import {
   CurrencyType,
   CurrencyInfo,
   CurrencyFormats,
+  CurrencyValues,
   DecimalFormats,
   FieldMapArrow,
   NumberSymbol,
@@ -25,6 +26,7 @@ import {
 
 import { NumberPattern, parseNumberPattern, NumberField } from '../../parsing/patterns/number';
 import { Cache } from '../../utils/cache';
+import { getCurrencyFractions } from './util';
 
 /**
  * Number internal engine singleton, shared across all locales.
@@ -75,9 +77,10 @@ export class NumbersInternal {
 
   formatCurrency(
     bundle: Bundle, n: Decimal, code: string, options: CurrencyFormatOptions, params: NumberParams): string {
+    const fractions = getCurrencyFractions(code);
 
     // TODO: fix symbol width
-    const alt = Alt.NONE;
+    const alt = options.symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
 
     const style = options.style === undefined ? CurrencyFormatStyle.SYMBOL : options.style;
     switch (style) {
@@ -95,7 +98,7 @@ export class NumbersInternal {
         const raw = this.currencyFormats.standard(bundle);
         const pattern = this.getNumberPattern(raw, n.isNegative());
         const formatMode = orDefault(options.formatMode, NumberFormatMode.SIGNIFICANT_MAXFRAC);
-        const ctx = new NumberContext(options, formatMode, 2); // TODO: currencyDigits
+        const ctx = new NumberContext(options, formatMode, fractions.digits);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         return render(n, pattern, params, symbol, '', options.group === true, ctx.minInt);
