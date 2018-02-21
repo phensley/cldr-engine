@@ -24,6 +24,12 @@ export interface FieldMap {
   readonly choice: Choice;
 }
 
+export interface ObjectMap {
+  readonly type: 'objectmap';
+  readonly name: string;
+  readonly fields: string[];
+}
+
 export interface Origin {
   readonly type: 'origin';
   readonly block: Instruction[];
@@ -49,7 +55,7 @@ export interface ScopeMap {
   readonly block: Instruction[];
 }
 
-export type Instruction = Digits | Field | FieldMap | Origin | Scope | ScopeField | ScopeMap;
+export type Instruction = Digits | Field | FieldMap | ObjectMap | Origin | Scope | ScopeField | ScopeMap;
 
 export const digits = (name: string) =>
   ({ type: 'digits', name } as Digits);
@@ -59,6 +65,9 @@ export const field = (name: string, identifier: string, choice: Choice = Choice.
 
 export const fieldmap = (name: string, fields: string[], choice: Choice = Choice.NONE) =>
   ({ type: 'fieldmap', name, fields, choice } as FieldMap);
+
+export const objectmap = (name: string, fields: string[]) =>
+  ({ type: 'objectmap', name, fields } as ObjectMap);
 
 export const origin = (block: Instruction[]) =>
   ({ type: 'origin', block } as Origin);

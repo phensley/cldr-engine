@@ -1,5 +1,4 @@
-import { DigitsArrow, FieldArrow, FieldMapArrow, FieldIndexedArrow } from '../arrows';
-import { NumberSymbolType } from './enums';
+import { DigitsArrow, FieldArrow, FieldMapArrow, FieldIndexedArrow, ObjectArrow } from '../arrows';
 import { Plural } from '../enums';
 
 export interface CurrencyFormats {
@@ -27,9 +26,25 @@ export interface PercentFormats {
   readonly standard: FieldArrow;
 }
 
+export interface NumberSymbols {
+  readonly decimal: string;
+  readonly exponential: string;
+  readonly group: string;
+  readonly infinity: string;
+  readonly list: string;
+  readonly minusSign: string;
+  readonly nan: string;
+  readonly perMille: string;
+  readonly percentSign: string;
+  readonly plusSign: string;
+  readonly superscriptingExponent: string;
+  readonly timeSeparator: string;
+}
+
 export interface Numbers {
   readonly currencyFormats: CurrencyFormats;
   readonly decimalFormats: DecimalFormats;
   readonly percentFormats: PercentFormats;
-  readonly symbols: FieldMapArrow<NumberSymbolType>;
+  readonly symbols: ObjectArrow<NumberSymbols>;
+  readonly minimumGroupingDigits: FieldArrow;
 }

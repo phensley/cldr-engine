@@ -34,7 +34,16 @@ test('parse', () => {
     secGroup: 0
   };
 
-  expect(parse('#,##0%')).toEqual([pos1, pos1]);
+  const neg1 = {
+    nodes: [NumberField.MINUS, NumberField.NUMBER, NumberField.PERCENT],
+    minInt: 1,
+    maxFrac: 0,
+    minFrac: 0,
+    priGroup: 3,
+    secGroup: 0
+  };
+
+  expect(parse('#,##0%')).toEqual([pos1, neg1]);
 
   const pos2 = {
     nodes: [NumberField.NUMBER],
@@ -66,7 +75,16 @@ test('parse', () => {
     secGroup: 2
   };
 
-  expect(parse('#,##,##0.###')).toEqual([pos3, pos3]);
+  const neg3 = {
+    nodes: [NumberField.MINUS, NumberField.NUMBER],
+    minInt: 1,
+    maxFrac: 3,
+    minFrac: 0,
+    priGroup: 3,
+    secGroup: 2
+  };
+
+  expect(parse('#,##,##0.###')).toEqual([pos3, neg3]);
 
   // "mk" short standard 12-digit
   const pos4 = {
@@ -78,13 +96,22 @@ test('parse', () => {
     secGroup: 0
   };
 
-  expect(parse("¤ 000 милј'.'")).toEqual([pos4, pos4]);
+  const neg4 = {
+    nodes: [NumberField.MINUS, NumberField.CURRENCY, '\u00a0', NumberField.NUMBER, '\u00a0милј.'],
+    minInt: 3,
+    maxFrac: 0,
+    minFrac: 0,
+    priGroup: 0,
+    secGroup: 0
+  };
+
+  expect(parse("¤ 000 милј'.'")).toEqual([pos4, neg4]);
 
   const pos5 = parse('¤000K')[0];
-  expect(pos5.format()).toEqual([NumberField.CURRENCY, NumberField.NUMBER, 'K']);
-  expect(pos5.primaryGroupingSize()).toEqual(3);
-  expect(pos5.secondaryGroupingSize()).toEqual(3);
-  expect(pos5.minIntegerDigits()).toEqual(3);
-  expect(pos5.maxFractionDigits()).toEqual(0);
-  expect(pos5.minFractionDigits()).toEqual(0);
+  expect(pos5.nodes).toEqual([NumberField.CURRENCY, NumberField.NUMBER, 'K']);
+  expect(pos5.priGroup).toEqual(0);
+  expect(pos5.secGroup).toEqual(0);
+  expect(pos5.minInt).toEqual(3);
+  expect(pos5.maxFrac).toEqual(0);
+  expect(pos5.minFrac).toEqual(0);
 });

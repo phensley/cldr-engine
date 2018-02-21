@@ -1,8 +1,10 @@
-import { Choice, Scope, digits, field, fieldmap, scope } from './instructions';
+import { Choice, Scope, digits, field, fieldmap, objectmap, scope } from './instructions';
 import { NumberSymbolValues } from '../schema/numbers';
 
 export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
-  fieldmap('symbols', NumberSymbolValues),
+  objectmap('symbols', NumberSymbolValues),
+
+  field('minimumGroupingDigits', 'minimumGroupingDigits'),
 
   scope('currencyFormats', 'currencyFormats', [
     field('standard', 'standard'),

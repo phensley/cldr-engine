@@ -1,12 +1,18 @@
 import { Plural } from '@phensley/cldr-schema';
 import { languageBundle } from '../../_helpers/bundle';
 import { buildSchema } from '../../../src/schema';
-import { DecimalFormatOptions, NumbersEngine, NumbersInternal } from '../../../src/engine/numbers';
+import {
+  CurrencyFormatOptions,
+  DecimalFormatOptions,
+  NumbersEngine,
+  NumbersInternal
+} from '../../../src/engine/numbers';
 
 const EN = languageBundle('en');
 const EN_GB = languageBundle('en-GB');
 const ES_419 = languageBundle('es-419');
 const FR = languageBundle('fr');
+const DE = languageBundle('de');
 
 const INTERNAL = new NumbersInternal(buildSchema());
 
@@ -14,12 +20,25 @@ const USD = 'USD';
 const AUD = 'AUD';
 
 test('basics', () => {
-  const opts: DecimalFormatOptions = {};
+  const opts: DecimalFormatOptions = { minimumFractionDigits: 5, minimumIntegerDigits: 3 };
   let formatter = new NumbersEngine(INTERNAL, EN);
-  let s = formatter.formatDecimal('1.234', opts);
+  let actual = formatter.formatDecimal('1.234', opts);
+  expect(actual).toEqual('001.23400');
+
+  opts.group = true;
+  formatter = new NumbersEngine(INTERNAL, DE);
+  actual = formatter.formatDecimal('12345.234', opts);
+  expect(actual).toEqual('12.345,23400');
 });
 
-test('display names', () => {
+test('currency', () => {
+  const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
+  let formatter = new NumbersEngine(INTERNAL, EN);
+  let actual = formatter.formatCurrency('12345.234', USD, opts);
+  expect(actual).toEqual('$12,345.23');
+});
+
+test('currency display names', () => {
   let formatter = new NumbersEngine(INTERNAL, EN);
 
   let s = formatter.getCurrencySymbol(USD);
@@ -52,3 +71,4 @@ test('display names', () => {
   s = formatter.getCurrencyDisplayName(USD);
   expect(s).toEqual('dollar des États-Unis');
 });
+

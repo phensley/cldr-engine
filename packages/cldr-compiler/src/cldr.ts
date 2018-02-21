@@ -235,6 +235,7 @@ const MetaZones = {
 const Numbers = {
   currencyFormats: get(['numbers', 'currencyFormats-numberSystem-latn']),
   decimalFormats: get(['numbers', 'decimalFormats-numberSystem-latn']),
+  minimumGroupingDigits: get(['numbers', 'minimumGroupingDigits']),
   percentFormats: get(['numbers', 'percentFormats-numberSystem-latn']),
   symbols: get(['numbers', 'symbols-numberSystem-latn'])
 };

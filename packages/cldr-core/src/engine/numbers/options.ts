@@ -1,4 +1,10 @@
+import { NumberSymbols } from '@phensley/cldr-schema';
 import { RoundingMode } from '../../types/numbers';
+
+export interface NumberParams {
+  symbols: NumberSymbols;
+  minimumGroupingDigits: number;
+}
 
 export enum NumberFormatMode {
   DEFAULT = 0,
@@ -10,7 +16,7 @@ export interface NumberFormatOptions {
   formatMode?: NumberFormatMode;
   round?: RoundingMode;
   group?: boolean;
-  minIntDigits?: number;
+  minimumIntegerDigits?: number;
   maximumFractionDigits?: number;
   minimumFractionDigits?: number;
   maximumSignificantDigits?: number;

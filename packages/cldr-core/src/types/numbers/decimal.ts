@@ -5,23 +5,12 @@ import { NumberOperands, decimalOperands } from './operands';
 import {
   Chars,
   Constants,
-  DecimalFormat,
   ParseState,
   ParseFlags,
   POWERS10,
   RoundingMode,
   MathContext
 } from './types';
-
-const DEFAULT_FORMAT: DecimalFormat = {
-  decimal: '.',
-  group: '',
-  minusSign: '-',
-  minIntDigits: 1,
-  minGroupingDigits: 1,
-  primaryGroupSize: 3,
-  secondaryGroupSize: 3
-};
 
 type GroupFunc = () => void;
 const GROUP_NOOP: GroupFunc = (): void => {
@@ -351,8 +340,8 @@ export class Decimal {
     if (hi !== 0) {
       w.data[n] = hi;
       n--;
-      m--;
     }
+    m--;
 
     // Divmod each element of u, copying the hi/lo parts to w.
     for (; m >= 0; m--, n--) {
@@ -361,6 +350,7 @@ export class Decimal {
       w.data[n] = powlo * loprev + hi;
       loprev = lo;
     }
+
     w.data[q] = powlo * loprev;
     return w;
   }
@@ -424,7 +414,8 @@ export class Decimal {
    * Format the number to a string, using fixed point.
    */
   toString(): string {
-    return this.format(DEFAULT_FORMAT);
+    const r = this.format('.', '', 1, 1, 3, 3);
+    return this.sign === -1 ? '-' + r : r;
   }
 
   // TODO: support scientific formats
@@ -432,16 +423,21 @@ export class Decimal {
   /**
    * Render this number to a string, using the given formatting options.
    *
+   *   decimal   - decimal point character to use
+   *    group    - digit grouping character to use, or '' for no grouping
+   *   minInt    - minimum integer digits
+   *   minGroup  - minimum grouping digits
+   *   priGroup  - primary grouping size
+   *   secGroup  - secondary digit grouping size
+   *
    * TODO: support alternate digit systems, algorithmic / spellout
    */
-  format(format: DecimalFormat): string {
+  format(decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): string {
     // Determine if grouping is enabled, and set the primary and
     // secondary group sizes.
-    const grouping = format.group !== '';
-    const pgs = format.primaryGroupSize;
-    let sgs = format.secondaryGroupSize;
-    if (sgs < 0) {
-      sgs = pgs;
+    const grouping = group !== '';
+    if (secGroup < 0) {
+      secGroup = priGroup;
     }
 
     let exp = this.exp;
@@ -449,30 +445,30 @@ export class Decimal {
     // Determine how many integer digits to emit. If integer digits is
     // larger than the integer coefficient we emit leading zeros.
     let int = this.precision() + exp;
-    if (format.minIntDigits === 0 && this.compare(ONE, true) === -1) {
+    if (minInt <= 0 && this.compare(ONE, true) === -1) {
       // If the number is between 0 and 1 and format requested minimum
       // integer digits of zero, don't emit a leading zero digit.
       int = 0;
     } else {
-      int = Math.max(int, format.minIntDigits);
+      int = Math.max(int, minInt);
     }
 
     // Array to append digits in reverse order
     const r: string[] = [];
     const len = this.data.length;
-    let groupSize = pgs;
+    let groupSize = priGroup;
     let emitted = 0;
 
     // Determine if grouping should be active.
     let groupFunc = GROUP_NOOP;
-    if (grouping && pgs > 0 && int >= format.minGroupingDigits + pgs) {
+    if (grouping && priGroup > 0 && int >= minGroup + priGroup) {
       groupFunc = () => {
         if (emitted > 0 && emitted % groupSize === 0) {
           // Push group character, reset emitted digits, and switch
           // to secondary grouping size.
-          r.push(format.group);
+          r.push(group);
           emitted = 0;
-          groupSize = sgs;
+          groupSize = secGroup;
         }
       };
     }
@@ -505,7 +501,7 @@ export class Decimal {
         // When we've reached exponent of 0, push the decimal point.
         exp++;
         if (exp === 0) {
-          r.push(format.decimal);
+          r.push(decimal);
         }
 
         // Decrement integer, increment emitted digits when exponent is positive, to
@@ -528,7 +524,7 @@ export class Decimal {
       // When we've reached exponent of 0, push the decimal point
       exp++;
       if (exp === 0) {
-        r.push(format.decimal);
+        r.push(decimal);
       }
     }
 
@@ -540,11 +536,6 @@ export class Decimal {
       if (int > 0) {
         groupFunc();
       }
-    }
-
-    // Sign symbol
-    if (this.sign === -1) {
-      r.push(format.minusSign);
     }
 
     return r.reverse().join('');

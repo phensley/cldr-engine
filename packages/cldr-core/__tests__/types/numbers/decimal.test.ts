@@ -1,6 +1,5 @@
 import { Decimal, RoundingMode } from '../../../src/types/numbers';
 import { DivMod, divide } from '../../../src/types/numbers/math';
-import { DecimalFormat } from '../../../src/types/numbers/types';
 
 const parse = (s: string) => new Decimal(s);
 const parsedata = (s: string) => (new Decimal(s) as any).data;
@@ -290,6 +289,11 @@ test('shift left', () => {
   expect(parse('1234').shiftleft(7)).toEqual(parse('12340000000'));
   expect(parse('1234').shiftleft(8)).toEqual(parse('123400000000'));
   expect(parse('1234').shiftleft(9)).toEqual(parse('1234000000000'));
+
+  expect(parse('12345.234').shiftleft(1)).toEqual(parse('123452.340'));
+  expect(parse('12345.234').shiftleft(2)).toEqual(parse('1234523.400'));
+  expect(parse('12345.234').shiftleft(3)).toEqual(parse('12345234.000'));
+  expect(parse('12345.234').shiftleft(4)).toEqual(parse('123452340.000'));
 
   expect(parse('12345678900000000000').shiftleft(10))
     .toEqual(parse('123456789000000000000000000000'));

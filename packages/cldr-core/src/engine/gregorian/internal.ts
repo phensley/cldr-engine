@@ -45,8 +45,7 @@ export interface FieldFormatter {
 export type FieldFormatterMap = { [ch: string]: FieldFormatter };
 
 /**
- * Wires up field formatters. Only has to be initialized once, on demand when
- * gregorian calendar formatting is needed.
+ * Gregorian calendar internal engine singleton, shared across all locales.
  */
  export class GregorianInternal {
 

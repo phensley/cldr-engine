@@ -4,6 +4,7 @@ import {
   Field,
   FieldMap,
   Instruction,
+  ObjectMap,
   Origin,
   Scope,
   ScopeField,
@@ -60,6 +61,9 @@ export class EncoderMachine {
       break;
     case 'fieldmap':
       this.encodeFieldMap(obj, inst);
+      break;
+    case 'objectmap':
+      this.encodeObjectMap(obj, inst);
       break;
     case 'origin':
       this.encodeOrigin(obj, inst);
@@ -119,6 +123,13 @@ export class EncoderMachine {
     const choice = inst.choice;
     for (const field of inst.fields) {
       this._encodeField(curr, field, choice);
+    }
+  }
+
+  private encodeObjectMap(obj: any, inst: ObjectMap): void {
+    const curr = obj[inst.name] || {};
+    for (const field of inst.fields) {
+      this._encodeField(curr, field);
     }
   }
 

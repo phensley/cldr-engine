@@ -17,19 +17,6 @@ export class MathContext {
   ) {}
 }
 
-/**
- * Options for the Decimal formatter.
- */
-export interface DecimalFormat {
-  decimal: string;
-  group: string;
-  minusSign: string;
-  minIntDigits: number;
-  minGroupingDigits: number;
-  primaryGroupSize: number;
-  secondaryGroupSize: number;
-}
-
 export const enum Constants {
   // 10^7 < sqrt(Number.MAX_SAFE_INTEGER)
   RADIX = 1e7,

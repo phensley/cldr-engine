@@ -4,6 +4,7 @@ import {
   fieldIndexedArrow,
   fieldMapArrow,
   fieldMapIndexedArrow,
+  objectMapArrow,
   scopeArrow,
 
   AltValues,
@@ -19,6 +20,8 @@ import {
   FieldMapArrow,
   FieldMapIndexedArrow,
   Instruction,
+  KeyIndexMap,
+  ObjectMap,
   OffsetMap,
   OffsetsMap,
   Origin,
@@ -88,6 +91,9 @@ export class SchemaBuilder {
     case 'fieldmap':
       this.constructFieldMap(obj, inst);
       break;
+    case 'objectmap':
+      this.constructObjectMap(obj, inst);
+      break;
     case 'origin':
       this.constructOrigin(obj, inst);
       break;
@@ -133,6 +139,14 @@ export class SchemaBuilder {
       }
       obj[inst.name] = fieldMapIndexedArrow(map);
     }
+  }
+
+  private constructObjectMap(obj: any, inst: ObjectMap): void {
+    const index: KeyIndexMap = [];
+    for (const field of inst.fields) {
+      index.push([field, this.generator.field()]);
+    }
+    obj[inst.name] = objectMapArrow(index);
   }
 
   private constructOrigin(obj: any, inst: Origin): void {

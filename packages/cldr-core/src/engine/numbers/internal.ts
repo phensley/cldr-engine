@@ -1,23 +1,39 @@
 import {
-  Bundle, FieldMapArrow, Schema, ScopeArrow,
-  CurrencyType, CurrencyInfo,
-  CurrencyFormats, DecimalFormats,
-  NumberSymbol, NumberSymbolType
+  Alt,
+  Bundle,
+  CurrencyType,
+  CurrencyInfo,
+  CurrencyFormats,
+  DecimalFormats,
+  FieldMapArrow,
+  NumberSymbol,
+  Schema,
+  ScopeArrow
 } from '@phensley/cldr-schema';
 
 import { Decimal, RoundingMode } from '../../types/numbers';
-import { DecimalFormatOptions, NumberFormatMode } from './options';
-import { NumberPattern, parseNumberPattern } from '../../parsing/patterns/number';
+import { NumberContext } from './context';
+import {
+  CurrencyFormatOptions,
+  CurrencyFormatStyle,
+  CurrencySymbolWidth,
+  DecimalFormatOptions,
+  DecimalFormatStyle,
+  NumberFormatMode,
+  NumberParams
+} from './options';
+
+import { NumberPattern, parseNumberPattern, NumberField } from '../../parsing/patterns/number';
 import { Cache } from '../../utils/cache';
 
-import * as util from 'util';
-
+/**
+ * Number internal engine singleton, shared across all locales.
+ */
 export class NumbersInternal {
 
   readonly Currencies: ScopeArrow<CurrencyType, CurrencyInfo>;
   readonly currencyFormats: CurrencyFormats;
   readonly decimalFormats: DecimalFormats;
-  readonly symbols: FieldMapArrow<NumberSymbolType>;
 
   protected readonly numberPatternCache: Cache<NumberPattern[]>;
 
@@ -25,76 +41,121 @@ export class NumbersInternal {
     this.Currencies = root.Currencies;
     this.currencyFormats = root.Numbers.currencyFormats;
     this.decimalFormats = root.Numbers.decimalFormats;
-    this.symbols = root.Numbers.symbols;
     this.numberPatternCache = new Cache(parseNumberPattern, cacheSize);
   }
 
-  formatDecimal(bundle: Bundle, n: Decimal, options: DecimalFormatOptions): string {
-    const format = this.decimalFormats.standard(bundle);
-    console.log(this.decimalFormats.long.decimalFormat(bundle, 15, 0));
-    const pattern = this.getNumberPattern(format)[n.isNegative() ? 0 : 1];
+  formatDecimal(bundle: Bundle, n: Decimal, options: DecimalFormatOptions, params: NumberParams): string {
+    const style = options.style === undefined ? DecimalFormatStyle.DECIMAL : options.style;
+    switch (style) {
+    case DecimalFormatStyle.LONG:
 
-    // TODO:
+    case DecimalFormatStyle.SHORT:
 
+    case DecimalFormatStyle.PERCENT:
+    case DecimalFormatStyle.PERCENT_SCALED:
+
+    case DecimalFormatStyle.PERMILLE:
+    case DecimalFormatStyle.PERMILLE_SCALED:
+
+    case DecimalFormatStyle.DECIMAL:
+    {
+      const raw = this.decimalFormats.standard(bundle);
+      const pattern = this.getNumberPattern(raw, n.isNegative());
+      const formatMode = orDefault(options.formatMode, NumberFormatMode.DEFAULT);
+      const ctx = new NumberContext(options, formatMode, -1);
+      ctx.setPattern(pattern);
+      n = ctx.adjust(n);
+      return render(n, pattern, params, '', '', options.group === true, ctx.minInt);
+    }
+    }
+
+    // No valid style matched
     return '';
   }
 
-  getNumberPattern(raw: string): NumberPattern[] {
-    return this.numberPatternCache.get(raw);
+  formatCurrency(
+    bundle: Bundle, n: Decimal, code: string, options: CurrencyFormatOptions, params: NumberParams): string {
+
+    // TODO: fix symbol width
+    const alt = Alt.NONE;
+
+    const style = options.style === undefined ? CurrencyFormatStyle.SYMBOL : options.style;
+    switch (style) {
+    case CurrencyFormatStyle.ACCOUNTING:
+
+    case CurrencyFormatStyle.CODE:
+
+    case CurrencyFormatStyle.NAME:
+
+    case CurrencyFormatStyle.SHORT:
+
+    case CurrencyFormatStyle.SYMBOL:
+      {
+        const symbol = this.Currencies(code as CurrencyType).symbol(bundle, alt);
+        const raw = this.currencyFormats.standard(bundle);
+        const pattern = this.getNumberPattern(raw, n.isNegative());
+        const formatMode = orDefault(options.formatMode, NumberFormatMode.SIGNIFICANT_MAXFRAC);
+        const ctx = new NumberContext(options, formatMode, 2); // TODO: currencyDigits
+        ctx.setPattern(pattern);
+        n = ctx.adjust(n);
+        return render(n, pattern, params, symbol, '', options.group === true, ctx.minInt);
+      }
+    }
+
+    // No valid style matched
+    return '';
   }
+
+  protected getNumberPattern(raw: string, negative: boolean): NumberPattern {
+    return this.numberPatternCache.get(raw)[negative ? 1 : 0];
+  }
+
 }
 
-const adjustNumber = (
+const orDefault = <T>(v: T | undefined, alt: T): T => v === undefined ? alt : v;
+
+/**
+ * Renders each node in the NumberPattern to a string.
+ */
+const render = (
   n: Decimal,
-  roundingMode: RoundingMode,
-  format: NumberFormatMode,
-  minIntDigits: number,
-  maxFracDigits: number,
-  minFracDigits: number,
-  maxSigDigits: number,
-  minSigDigits: number
-): Decimal => {
+  pattern: NumberPattern,
+  params: NumberParams,
+  currency: string,
+  percent: string,
+  group: boolean,
+  minInt: number): string => {
 
-  const usesig = format === NumberFormatMode.SIGNIFICANT || format === NumberFormatMode.SIGNIFICANT_MAXFRAC;
+  let s = '';
+  for (const node of pattern.nodes) {
+    if (typeof node === 'string') {
+      s += node;
+    } else {
+      switch (node) {
+      case NumberField.CURRENCY:
+        s += currency;
+        break;
 
-  if (usesig && minSigDigits > 0 && maxSigDigits > 0) {
-    // Scale the number to have at most the maximum significant digits.
-    if (n.precision() > maxSigDigits) {
-      const scale = maxSigDigits - n.precision() + n.scale();
-      n = n.setScale(scale, roundingMode);
-    }
+      case NumberField.MINUS:
+        s += params.symbols.minusSign;
+        break;
 
-    // Ensure we don't exceed the maximum number of fraction digits allowed.
-    if (format === NumberFormatMode.SIGNIFICANT_MAXFRAC && maxFracDigits < n.scale()) {
-      n = n.setScale(maxFracDigits, roundingMode);
-    }
+      case NumberField.NUMBER:
+        s += n.format(
+          params.symbols.decimal,
+          group ? params.symbols.group : '',
+          minInt,
+          params.minimumGroupingDigits,
+          pattern.priGroup,
+          pattern.secGroup
+        );
+        break;
 
-    // Ensure that one less digit is emitted if the number is exactly zero.
-    n = n.stripTrailingZeros();
-    const zero = n.signum() === 0;
-    let precision = n.precision();
-    if (zero && n.scale() === 1) {
-      precision--;
-    }
-
-    // scale the number to have at least the minimum significant digits
-    if (precision < minSigDigits) {
-      const scale = minSigDigits - precision + n.scale();
-      n = n.setScale(scale, roundingMode);
-    }
-
-  } else {
-    // Precise control over number of integer and decimal digits to include, e.g. when
-    // formatting exact currency values.
-    const scale = Math.max(minFracDigits, Math.min(n.scale(), maxFracDigits));
-    n = n.setScale(scale, roundingMode);
-    n = n.stripTrailingZeros();
-
-    // Ensure minimum fraction digits is met.
-    if (n.scale() < minFracDigits) {
-      n = n.setScale(minFracDigits, roundingMode);
+      case NumberField.PERCENT:
+        s += percent;
+        break;
+      }
     }
   }
-
-  return n;
+  return s;
 };

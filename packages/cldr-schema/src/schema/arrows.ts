@@ -3,6 +3,7 @@ import { Plural } from './enums';
 
 export type OffsetMap = { [x: string]: number };
 export type OffsetsMap = { [x: string]: number[] };
+export type KeyIndexMap = [string, number][];
 
 /**
  * Encapsulates a set of strings, providing access to a string
@@ -31,6 +32,10 @@ export interface FieldMapArrow<T extends string> {
 
 export interface FieldMapIndexedArrow<T extends string, X extends number> {
   (bundle: Bundle, field: T, index: X): string;
+}
+
+export interface ObjectArrow<T> {
+  (bundle: Bundle): T;
 }
 
 export interface ScopeArrow<T extends string, R> {
@@ -67,6 +72,17 @@ export const fieldMapIndexedArrow = (map: OffsetsMap): FieldMapIndexedArrow<stri
   return (bundle: Bundle, field: string, index: number): string => {
     const offsets = map[field];
     return offsets === undefined ? '' : bundle.get(offsets[index]);
+  };
+};
+
+export const objectMapArrow = (index: KeyIndexMap): ObjectArrow<any> => {
+  return (bundle: Bundle): any => {
+    const o: any = {};
+    for (let i = 0; i < index.length; i++) {
+      const [key, offset] = index[i];
+      o[key] = bundle.get(offset);
+    }
+    return o;
   };
 };
 

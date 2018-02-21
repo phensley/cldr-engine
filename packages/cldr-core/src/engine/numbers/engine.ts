@@ -2,21 +2,31 @@ import {
   Alt,
   Bundle,
   CurrencyType,
-  NumberSymbol,
+  NumberSymbols,
   Plural,
   pluralCategory,
   PluralValues
 } from '@phensley/cldr-schema';
 
 import { NumbersInternal } from './internal';
-import { CurrencyFormatOptions, DecimalFormatOptions } from './options';
+import { CurrencyFormatOptions, DecimalFormatOptions, NumberParams } from './options';
 import { Decimal } from '../../types/numbers';
 
+/**
+ * Number and currency formatting.
+ */
 export class NumbersEngine {
+
+  private params: NumberParams;
 
   constructor(
     protected readonly internal: NumbersInternal,
     protected readonly bundle: Bundle) {
+
+    this.params = {
+      symbols: internal.root.Numbers.symbols(bundle),
+      minimumGroupingDigits: Number(internal.root.Numbers.minimumGroupingDigits(bundle))
+    };
   }
 
   getCurrencySymbol(code: CurrencyType | string, narrow: boolean = false): string {
@@ -37,14 +47,13 @@ export class NumbersEngine {
     if (typeof n === 'number' || typeof n === 'string') {
       n = new Decimal(n);
     }
-    return this.internal.formatDecimal(this.bundle, n, options);
+    return this.internal.formatDecimal(this.bundle, n, options, this.params);
   }
 
   formatCurrency(n: number | string | Decimal, code: CurrencyType | string, options: CurrencyFormatOptions): string {
     if (typeof n === 'number' || typeof n === 'string') {
       n = new Decimal(n);
     }
-    this.internal.symbols(this.bundle, NumberSymbol.decimal);
-    return '';
+    return this.internal.formatCurrency(this.bundle, n, code, options, this.params);
   }
 }

@@ -1,40 +1,10 @@
-export class NumberPattern {
-
-  constructor(
-    protected nodes: NumberNode[],
-    protected minInt: number,
-    protected maxFrac: number,
-    protected minFrac: number,
-    protected priGroup: number,
-    protected secGroup: number
-  ) {}
-
-  format(): NumberNode[] {
-    return this.nodes;
-  }
-
-  minIntegerDigits(): number {
-    return this.minInt;
-  }
-
-  maxFractionDigits(): number {
-    return this.maxFrac;
-  }
-
-  minFractionDigits(): number {
-    return this.minFrac;
-  }
-
-  primaryGroupingSize(): number {
-    // TODO: this defaulting should probably go elsewhere
-    return this.priGroup === 0 ? 3 : this.priGroup;
-  }
-
-  secondaryGroupingSize(): number {
-    // TODO: this defaulting should probably go elsewhere
-    return this.secGroup === 0 ? this.primaryGroupingSize() : this.secGroup;
-  }
-
+export interface NumberPattern {
+  nodes: NumberNode[];
+  minInt: number;
+  maxFrac: number;
+  minFrac: number;
+  priGroup: number;
+  secGroup: number;
 }
 
 export type NumberNode = string | NumberField;
@@ -142,14 +112,14 @@ class NumberPatternParser {
       i++;
     }
     this.pushText();
-    return new NumberPattern(
-      this.nodes,
-      this.fields[Field.MIN_INT],
-      this.fields[Field.MAX_FRAC],
-      this.fields[Field.MIN_FRAC],
-      this.fields[Field.PRI_GROUP],
-      this.fields[Field.SEC_GROUP]
-    );
+    return {
+      nodes: this.nodes,
+      minInt: this.fields[Field.MIN_INT],
+      maxFrac: this.fields[Field.MAX_FRAC],
+      minFrac: this.fields[Field.MIN_FRAC],
+      priGroup: this.fields[Field.PRI_GROUP],
+      secGroup: this.fields[Field.SEC_GROUP]
+    };
   }
 
   private attach(): void {
@@ -171,10 +141,11 @@ class NumberPatternParser {
 const parse = (raw: string): NumberPattern => (new NumberPatternParser().parse(raw));
 
 export const parseNumberPattern = (raw: string): NumberPattern[] => {
+  // Check if separate negative and positive patterns are present.
   const i = raw.indexOf(';');
   if (i === -1) {
-    const pattern = parse(raw);
-    return [pattern, pattern];
+    // Construct the negative pattern from the positive.
+    return [parse(raw), parse('-' + raw)];
   }
   const positive = parse(raw.substring(0, i));
   const negative = parse(raw.substring(i + 1));
