@@ -24,6 +24,7 @@ import {
 
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
 import { WrapperNode, parseWrapperPattern } from '../../parsing/patterns/wrapper';
+import { WrapperInternal } from '../wrapper';
 import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';
 
@@ -60,7 +61,6 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
 
   // TODO: simpler LRU
   private readonly datePatternCache: Cache<DateTimeNode[]>;
-  private readonly wrapperPatternCache: Cache<WrapperNode[]>;
 
   private impl: FieldFormatterMap = {
     'G': { type: 'era', impl: this.era },
@@ -106,7 +106,10 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     // 'x' tz
   };
 
-  constructor(readonly root: Schema, readonly cacheSize: number = 50) {
+  constructor(
+    readonly root: Schema,
+    readonly wrapper: WrapperInternal,
+    readonly cacheSize: number = 50) {
     this.Gregorian = root.Gregorian;
     this.dayPeriods = root.Gregorian.dayPeriods;
     this.eras = root.Gregorian.eras;
@@ -116,7 +119,6 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     this.TimeZoneNames = root.TimeZoneNames;
 
     this.datePatternCache = new Cache(parseDatePattern, cacheSize);
-    this.wrapperPatternCache = new Cache(parseWrapperPattern, cacheSize);
   }
 
   /**
@@ -424,23 +426,11 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     }
     const hours = offset / 60 | 0;
     const minutes = offset % 60;
-    const wrapper = this.wrapperPatternCache.get(this.TimeZoneNames.gmtFormat(bundle));
+    const pattern = this.TimeZoneNames.gmtFormat(bundle);
     const hourformat = this.TimeZoneNames.hourFormat(bundle).split(';');
     const format = negative ? hourformat[0] : hourformat[1];
     // TODO:
     return '';
-  }
-
-  protected _wrapper(pattern: WrapperNode[], args: string[]): string {
-    let res = '';
-    for (const node of pattern) {
-      if (typeof node === 'string') {
-        res += node;
-      } else {
-        res += args[node] || '';
-      }
-    }
-    return res;
   }
 
 }

@@ -11,11 +11,17 @@ export type KeyIndexMap = [string, number][];
  */
 export interface Bundle {
   bundleId(): string;
+  language(): string;
+  region(): string;
   get(offset: number): string;
 }
 
 export interface DigitsArrow {
   (bundle: Bundle, digits: number, index: number): string;
+}
+
+export interface DivisorArrow {
+  (bundle: Bundle, digits: number): number;
 }
 
 export interface FieldArrow {
@@ -44,12 +50,23 @@ export interface ScopeArrow<T extends string, R> {
 
 export const digitsArrow = (table: number[][]): DigitsArrow => {
   return (bundle: Bundle, digits: number, index: number): string => {
-    if (digits < 4) {
+    if (digits < 1) {
       return '';
     }
-    digits -= 4;
+    digits -= 1;
     const offsets = digits >= table.length ? table[table.length - 1] : table[digits];
     return offsets === undefined ? '' : bundle.get(offsets[index]);
+  };
+};
+
+export const divisorArrow = (table: number[]): DivisorArrow => {
+  return (bundle: Bundle, digits: number): number => {
+    if (digits < 1) {
+      return 0;
+    }
+    digits -= 1;
+    const offset = digits >= table.length ? table[table.length - 1] : table[digits];
+    return Number(bundle.get(offset));
   };
 };
 

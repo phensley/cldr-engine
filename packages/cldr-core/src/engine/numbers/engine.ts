@@ -39,8 +39,7 @@ export class NumbersEngine {
   }
 
   getCurrencyPluralName(code: CurrencyType | string, plural: string): string {
-    const cat: Plural = pluralCategory(plural);
-    return this.internal.Currencies(code as CurrencyType).pluralName(this.bundle, cat);
+    return this.internal.getCurrencyPluralName(this.bundle, code, pluralCategory(plural));
   }
 
   formatDecimal(n: number | string | Decimal, options: DecimalFormatOptions): string {

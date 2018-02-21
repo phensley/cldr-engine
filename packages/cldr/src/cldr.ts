@@ -10,6 +10,7 @@ import {
   NumbersEngine,
   NumbersInternal,
   Pack,
+  WrapperInternal
 } from '@phensley/cldr-core';
 
 const SCHEMA = buildSchema();
@@ -56,7 +57,9 @@ export class CLDR {
   protected readonly promiseLoader?: (language: string) => Promise<any>;
   protected readonly gregorianInternal: GregorianInternal;
   protected readonly numbersInternal: NumbersInternal;
+  protected readonly wrapperInternal: WrapperInternal;
 
+  // Keeps track of in-flight promises.
   protected readonly outstanding: Map<string, Promise<Engine>> = new Map();
 
   constructor(protected readonly options: CLDROptions) {
@@ -65,7 +68,8 @@ export class CLDR {
     this.promiseLoader = options.promiseLoader;
 
     const patternCacheSize = options.patternCacheSize || 50;
-    this.gregorianInternal = new GregorianInternal(SCHEMA, patternCacheSize);
+    this.wrapperInternal = new WrapperInternal(patternCacheSize);
+    this.gregorianInternal = new GregorianInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
     this.numbersInternal = new NumbersInternal(SCHEMA, patternCacheSize);
   }
 

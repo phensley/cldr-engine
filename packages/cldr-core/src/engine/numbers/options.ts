@@ -7,14 +7,43 @@ export interface NumberParams {
 }
 
 export enum NumberFormatMode {
-  DEFAULT = 0,
-  SIGNIFICANT = 1,
-  SIGNIFICANT_MAXFRAC = 2
+  DEFAULT = 'default',
+  SIGNIFICANT = 'significant',
+  SIGNIFICANT_MAXFRAC = 'significant-maxfrac'
 }
 
+export type NumberFormatModeType = 'default' | 'significant' | 'significant-maxfrac';
+
+export type RoundingModeType =
+  'up' | 'down' | 'ceiling' | 'floor' | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
+
+export const getRoundingMode = (mode: RoundingModeType | undefined, alt: RoundingModeType): RoundingMode => {
+  switch (mode === undefined ? alt : mode) {
+  case 'up':
+    return RoundingMode.UP;
+  case 'down':
+    return RoundingMode.DOWN;
+  case 'ceiling':
+    return RoundingMode.CEILING;
+  case 'floor':
+    return RoundingMode.FLOOR;
+  case 'half-up':
+    return RoundingMode.HALF_UP;
+  case 'half-down':
+    return RoundingMode.HALF_DOWN;
+  case '05up':
+    return RoundingMode.ZERO_FIVE_UP;
+  case 'truncate':
+    return RoundingMode.TRUNCATE;
+  case 'half-even':
+  default:
+    return RoundingMode.HALF_EVEN;
+  }
+};
+
 export interface NumberFormatOptions {
-  formatMode?: NumberFormatMode;
-  round?: RoundingMode;
+  formatMode?: NumberFormatModeType;
+  round?: RoundingModeType;
   group?: boolean;
   minimumIntegerDigits?: number;
   maximumFractionDigits?: number;
@@ -23,7 +52,7 @@ export interface NumberFormatOptions {
   minimumSignificantDigits?: number;
 }
 
-export enum DecimalFormatStyle {
+export const enum DecimalFormatStyle {
   DECIMAL = 'decimal',
   PERCENT = 'percent',
   PERCENT_SCALED = 'percent-scaled',
@@ -33,11 +62,7 @@ export enum DecimalFormatStyle {
   LONG = 'long'
 }
 
-export interface DecimalFormatOptions extends NumberFormatOptions {
-  style?: DecimalFormatStyle;
-}
-
-export enum CurrencyFormatStyle {
+export const enum CurrencyFormatStyle {
   SYMBOL = 'symbol',
   ACCOUNTING = 'accounting',
   CODE = 'code',
@@ -50,7 +75,13 @@ export enum CurrencySymbolWidth {
   NARROW = 'narrow'
 }
 
+export type CurrencyFormatStyleType = 'symbol' | 'accounting' | 'code' | 'name' | 'short';
+
+export interface DecimalFormatOptions extends NumberFormatOptions {
+  style?: DecimalFormatStyle;
+}
+
 export interface CurrencyFormatOptions extends NumberFormatOptions {
-  style?: CurrencyFormatStyle;
+  style?: CurrencyFormatStyleType;
   symbolWidth?: CurrencySymbolWidth;
 }

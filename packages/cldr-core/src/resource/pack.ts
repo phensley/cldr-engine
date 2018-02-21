@@ -10,6 +10,7 @@ export class StringBundle implements Bundle {
 
   constructor(
     readonly id: string,
+    readonly tag: LanguageTag,
     readonly strings: string[],
     readonly exceptions: string[],
     readonly index?: ExceptionIndex
@@ -17,6 +18,14 @@ export class StringBundle implements Bundle {
 
   bundleId(): string {
     return this.id;
+  }
+
+  language(): string {
+    return this.tag.language();
+  }
+
+  region(): string {
+    return this.tag.region();
   }
 
   get(offset: number): string {
@@ -43,6 +52,14 @@ export class DummyBundle implements Bundle {
 
   bundleId(): string {
     return 'und';
+  }
+
+  language(): string {
+    return 'und';
+  }
+
+  region(): string {
+    return 'ZZ';
   }
 
   get(offset: number): string {
@@ -78,7 +95,7 @@ export class PackScript {
     const index = this._cache[region] || this.decode(region);
     return index === undefined ?
       DUMMY_BUNDLE :
-      new StringBundle(tag.compact(), this._strings, this._exceptions, index);
+      new StringBundle(tag.compact(), tag, this._strings, this._exceptions, index);
   }
 
   private decode(region: string): ExceptionIndex | undefined {

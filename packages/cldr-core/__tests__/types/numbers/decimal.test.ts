@@ -82,6 +82,19 @@ test('is integer', () => {
   expect(parse('10e-100').isInteger()).toEqual(false);
 });
 
+test('integer digits', () => {
+  expect(parse('0').integerDigits()).toEqual(1);
+  expect(parse('0.0001').integerDigits()).toEqual(1);
+  expect(parse('1.1').integerDigits()).toEqual(1);
+  expect(parse('1e-5').integerDigits()).toEqual(1);
+  expect(parse('1e0').integerDigits()).toEqual(1);
+  expect(parse('1e1').integerDigits()).toEqual(2);
+  expect(parse('1e2').integerDigits()).toEqual(3);
+  expect(parse('1e3').integerDigits()).toEqual(4);
+  expect(parse('1e4').integerDigits()).toEqual(5);
+  expect(parse('1e5').integerDigits()).toEqual(6);
+});
+
 test('operands', () => {
   expect(parse('1').operands()).toEqual(
     { n: 1, i: 1, v: 0, w: 0, f: 0, t: 0, neg: false, dec: false }

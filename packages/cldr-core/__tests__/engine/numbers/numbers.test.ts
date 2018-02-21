@@ -33,9 +33,31 @@ test('basics', () => {
 
 test('currency', () => {
   const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
-  let formatter = new NumbersEngine(INTERNAL, EN);
+  const formatter = new NumbersEngine(INTERNAL, EN);
+
   let actual = formatter.formatCurrency('12345.234', USD, opts);
   expect(actual).toEqual('$12,345.23');
+
+  opts.style = 'accounting';
+  actual = formatter.formatCurrency('-12345.234', USD, opts);
+  expect(actual).toEqual('($12,345.23)');
+
+  opts.style = 'name';
+  actual = formatter.formatCurrency('12345.234', USD, opts);
+  expect(actual).toEqual('12,345.23 US dollars');
+
+  actual = formatter.formatCurrency('1', USD, opts);
+  expect(actual).toEqual('1.00 US dollars');
+
+  opts.formatMode = 'significant-maxfrac';
+  opts.minimumFractionDigits = 0;
+  actual = formatter.formatCurrency('1', USD, opts);
+  expect(actual).toEqual('1 US dollar');
+
+  opts.style = 'short';
+  actual = formatter.formatCurrency('12345.234', USD, opts);
+  // expect(actual).toEqual('$12,345.23');
+
 });
 
 test('currency display names', () => {
@@ -71,4 +93,3 @@ test('currency display names', () => {
   s = formatter.getCurrencyDisplayName(USD);
   expect(s).toEqual('dollar des États-Unis');
 });
-

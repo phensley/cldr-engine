@@ -23,26 +23,46 @@ export const pluralFields = (key: string) => pluralValues.map(v => `${key}-count
 export const altField = (key: string) => altValues.map(v => `${key}${v}`);
 export const yeartypeField = (key: string) => yeartypeValues.map(v => `${key}-yeartype-${v}`);
 
+const pluralDigit = (n: number): string => {
+  let r = '1';
+  for (let i = 0; i < n - 1; i++) {
+    r += '0';
+  }
+  return r;
+};
+
 // Produces a list of pluralized digits to for long/short formats.
 // e.g. 1000-count-zero, 1000-count-one, ..., etc.
 export const pluralDigitFields = (() => {
-  const digit = (n: number): string => {
-    let r = '1';
-    for (let i = 0; i < n - 1; i++) {
-      r += '0';
-    }
-    return r;
-  };
-
   const res = [];
-  for (let i = 4; i <= 15; i++) {
-    const base = digit(i);
+  for (let i = 1; i <= 15; i++) {
+    const base = pluralDigit(i);
     for (const key of pluralFields(base)) {
       res.push(key);
     }
   }
   return res;
 })();
+
+export const pluralDivisorFields = (() => {
+  const res: [number, string][] = [];
+  for (let i = 1; i <= 15; i++) {
+    const base = pluralDigit(i);
+    const field = `${base}-count-other`;
+    res.push([i, field]);
+  }
+  return res;
+})();
+
+const countChars = (s: string, ch: string): number => {
+  let res = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === ch) {
+      res++;
+    }
+  }
+  return res;
+};
 
 /**
  * Executes the instructions to encode strings.
@@ -111,6 +131,19 @@ export class EncoderMachine {
     const curr = obj[inst.name] || {};
     for (const field of pluralDigitFields) {
       this.encoder.encode(curr[field]);
+    }
+
+    // Compute divisors for pluralized digit formats
+    for (const entry of pluralDivisorFields) {
+      const [digits, field] = entry;
+      const value = curr[field];
+      if (value === undefined || value === '0') {
+        this.encoder.encode('0');
+      } else {
+        const count = countChars(value, '0');
+        const divisor = digits - count;
+        this.encoder.encode(String(divisor));
+      }
     }
   }
 

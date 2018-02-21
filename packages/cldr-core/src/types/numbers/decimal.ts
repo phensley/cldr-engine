@@ -261,6 +261,13 @@ export class Decimal {
   }
 
   /**
+   * Number of integer digits, 1 or higher.
+   */
+  integerDigits(): number {
+    return Math.max(this.precision() + this.exp, 1);
+  }
+
+  /**
    * Returns a new number with the given scale, shifting the coefficient as needed.
    */
   setScale(scale: number, roundingMode: RoundingMode = RoundingMode.HALF_EVEN): Decimal {

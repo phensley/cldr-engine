@@ -1,5 +1,6 @@
 import {
   digitsArrow,
+  divisorArrow,
   fieldArrow,
   fieldIndexedArrow,
   fieldMapArrow,
@@ -58,8 +59,16 @@ class Generator {
 
   pluralDigits(): number[][] {
     const res: number[][] = [];
-    for (let i = 4; i <= 15; i++) {
+    for (let i = 1; i <= 15; i++) {
       res.push(this._field(PluralValues));
+    }
+    return res;
+  }
+
+  divisorDigits(): number[] {
+    const res: number[] = [];
+    for (let i = 1; i <= 15; i++) {
+      res.push(this.offset++);
     }
     return res;
   }
@@ -111,6 +120,8 @@ export class SchemaBuilder {
   private constructDigits(obj: any, inst: Digits): void {
     const offsets = this.generator.pluralDigits();
     obj[inst.name] = digitsArrow(offsets);
+    const divisorName = `${inst.name}Divisor`;
+    obj[divisorName] = divisorArrow(this.generator.divisorDigits());
   }
 
   private constructField(obj: any, inst: Field): void {

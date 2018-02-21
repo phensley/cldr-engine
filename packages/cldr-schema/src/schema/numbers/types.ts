@@ -1,4 +1,4 @@
-import { DigitsArrow, FieldArrow, FieldMapArrow, FieldIndexedArrow, ObjectArrow } from '../arrows';
+import { DigitsArrow, DivisorArrow, FieldArrow, FieldMapArrow, FieldIndexedArrow, ObjectArrow } from '../arrows';
 import { Plural } from '../enums';
 
 export interface CurrencyFormats {
@@ -10,10 +10,12 @@ export interface CurrencyFormats {
 
 export interface CurrencyShortFormat {
   readonly standard: DigitsArrow;
+  readonly standardDivisor: DivisorArrow;
 }
 
 export interface DecimalPluralFormat {
   readonly decimalFormat: DigitsArrow;
+  readonly decimalFormatDivisor: DivisorArrow;
 }
 
 export interface DecimalFormats {
