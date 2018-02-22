@@ -1,4 +1,4 @@
-import { getCLDR } from './helpers';
+import { getCLDR, loader, asyncLoader } from './helpers';
 import { LocaleMatcher } from '../src';
 
 test('loaders', () => {

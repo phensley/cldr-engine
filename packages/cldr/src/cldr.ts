@@ -33,9 +33,9 @@ export class CLDROptions {
    * Given a language identifier, fetch the resource pack from the
    * filesystem, webserver, etc, and return the raw decompressed string.
    */
-  syncLoader?: (language: string) => any;
+  loader?: (language: string) => any;
 
-  promiseLoader?: (language: string) => Promise<any>;
+  asyncLoader?: (language: string) => Promise<any>;
 
   /**
    * Number of language packs to keep in memory. Note that a language pack
@@ -57,8 +57,8 @@ export class CLDROptions {
 export class CLDR {
 
   protected readonly packCache: LRU<string, Pack>;
-  protected readonly syncLoader?: (language: string) => any;
-  protected readonly promiseLoader?: (language: string) => Promise<any>;
+  protected readonly loader?: (language: string) => any;
+  protected readonly asyncLoader?: (language: string) => Promise<any>;
   protected readonly gregorianInternal: GregorianInternal;
   protected readonly namesInternal: NamesInternal;
   protected readonly numbersInternal: NumbersInternal;
@@ -69,8 +69,8 @@ export class CLDR {
 
   constructor(protected readonly options: CLDROptions) {
     this.packCache = new LRU(options.packCacheSize || 2);
-    this.syncLoader = options.syncLoader;
-    this.promiseLoader = options.promiseLoader;
+    this.loader = options.loader;
+    this.asyncLoader = options.asyncLoader;
 
     const patternCacheSize = options.patternCacheSize || 50;
     this.wrapperInternal = new WrapperInternal(patternCacheSize);
@@ -111,7 +111,7 @@ export class CLDR {
    * when your application's state store is initialized.
    */
   get(locale: Locale | string): Engine {
-    if (this.syncLoader === undefined) {
+    if (this.loader === undefined) {
       throw new Error('a synchronous resource loader is not defined');
     }
     const resolved = typeof locale === 'string' ? this.parseLocale(locale) : locale;
@@ -119,7 +119,7 @@ export class CLDR {
 
     let pack = this.packCache.get(language);
     if (pack === undefined) {
-      const data = this.syncLoader(language);
+      const data = this.loader(language);
       pack = new Pack(data);
       this.packCache.set(language, pack);
     }
@@ -131,8 +131,8 @@ export class CLDR {
    * a given locale.
    */
   getAsync(locale: Locale | string): Promise<Engine> {
-    const promiseLoader = this.promiseLoader;
-    if (promiseLoader === undefined) {
+    const asyncLoader = this.asyncLoader;
+    if (asyncLoader === undefined) {
       throw new Error('a Promise-based resource loader is not defined');
     }
     const resolved = typeof locale === 'string' ? this.parseLocale(locale) : locale;
@@ -153,7 +153,7 @@ export class CLDR {
       }
 
       // Resolve via the promise loader
-      promiseLoader(language).then(raw => {
+      asyncLoader(language).then(raw => {
         const _pack = new Pack(raw);
         this.packCache.set(language, _pack);
         resolve(this._get(resolved, _pack));
