@@ -147,7 +147,7 @@ export class CLDR {
         this.packCache.set(language, _pack);
         resolve(this._get(resolved, _pack));
         this.outstanding.delete(language);
-      }).catch(reason => reject(reason));
+      }).catch(reject);
     });
 
     this.outstanding.set(language, promise);
