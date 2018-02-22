@@ -6,6 +6,7 @@ import { Code } from './util';
 import { getAliases } from './aliases';
 import { getCurrencies } from './currencies';
 import { getDistance } from './distance';
+import { getLocale } from './locale';
 import { getPartition } from './partition';
 import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
@@ -16,6 +17,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   aliases: getAliases,
   currencies: getCurrencies,
   distance: getDistance,
+  locale: getLocale,
   partition: getPartition,
   plurals: getPlurals,
   subtags: getSubtags,

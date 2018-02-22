@@ -1,4 +1,5 @@
 import {
+  availableLocales,
   buildSchema,
   GregorianEngine,
   GregorianInternal,
@@ -73,6 +74,10 @@ export class CLDR {
     this.numbersInternal = new NumbersInternal(SCHEMA, patternCacheSize);
   }
 
+  availableLocales(): Locale[] {
+    return availableLocales();
+  }
+
   info(): string {
     return `packs loaded: ${this.packCache.size()}`;
   }
@@ -81,7 +86,7 @@ export class CLDR {
    * Parse a locale identifier into a locale object that includes the original
    * id plus a resolved LanguageTag.
    */
-  resolve(id: string): Locale {
+  parseLocale(id: string): Locale {
     const tag = LanguageResolver.resolve(id);
     return { id, tag };
   }
@@ -104,8 +109,9 @@ export class CLDR {
     if (this.syncLoader === undefined) {
       throw new Error('a synchronous resource loader is not defined');
     }
-    const resolved = typeof locale === 'string' ? this.resolve(locale) : locale;
+    const resolved = typeof locale === 'string' ? this.parseLocale(locale) : locale;
     const language = resolved.tag.language();
+
     let pack = this.packCache.get(language);
     if (pack === undefined) {
       const data = this.syncLoader(language);
@@ -124,7 +130,7 @@ export class CLDR {
     if (promiseLoader === undefined) {
       throw new Error('a Promise-based resource loader is not defined');
     }
-    const resolved = typeof locale === 'string' ? this.resolve(locale) : locale;
+    const resolved = typeof locale === 'string' ? this.parseLocale(locale) : locale;
     const language = resolved.tag.language();
 
     // If the same language is loaded multiple times in rapid succession,
