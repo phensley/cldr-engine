@@ -110,6 +110,7 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     readonly root: Schema,
     readonly wrapper: WrapperInternal,
     readonly cacheSize: number = 50) {
+
     this.Gregorian = root.Gregorian;
     this.dayPeriods = root.Gregorian.dayPeriods;
     this.eras = root.Gregorian.eras;

@@ -142,13 +142,13 @@ export class SchemaBuilder {
       for (const field of inst.fields) {
         map[field] = this.generator.field();
       }
-      obj[inst.name] = fieldMapArrow(map);
+      obj[inst.identifier] = fieldMapArrow(map);
     } else {
      const map: OffsetsMap = {};
       for (const field of inst.fields) {
         map[field] = this.generator.choiceField(choice);
       }
-      obj[inst.name] = fieldMapIndexedArrow(map);
+      obj[inst.identifier] = fieldMapIndexedArrow(map);
     }
   }
 

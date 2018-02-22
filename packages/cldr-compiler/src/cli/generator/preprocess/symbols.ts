@@ -48,7 +48,7 @@ export const getSymbols = (): any => {
     addKeys(main.TimeZoneNames.metaZones, metaZoneIds);
     addKeys(main.Currencies, currencies);
     addKeys(main.Numbers.symbols, numberSymbols);
-    addKeys(main.Territories, territories);
+    addKeys(main.Territories.territories, territories);
     addKeys(main.Gregorian.availableFormats, availableFormats);
     addKeys(main.Gregorian.intervalFormats, intervalFormats);
     addKeys(main.Units.names, unitsRaw);

@@ -20,6 +20,7 @@ export interface Field {
 export interface FieldMap {
   readonly type: 'fieldmap';
   readonly name: string;
+  readonly identifier: string;
   readonly fields: string[];
   readonly choice: Choice;
 }
@@ -63,8 +64,9 @@ export const digits = (name: string) =>
 export const field = (name: string, identifier: string, choice: Choice = Choice.NONE) =>
   ({ type: 'field', name, identifier, choice } as Field);
 
-export const fieldmap = (name: string, fields: string[], choice: Choice = Choice.NONE) =>
-  ({ type: 'fieldmap', name, fields, choice } as FieldMap);
+export const fieldmap =
+  (name: string, identifier: string, fields: string[], choice: Choice = Choice.NONE) =>
+  ({ type: 'fieldmap', name, identifier, fields, choice } as FieldMap);
 
 export const objectmap = (name: string, fields: string[]) =>
   ({ type: 'objectmap', name, fields } as ObjectMap);

@@ -10,6 +10,7 @@ import { getLocale } from './locale';
 import { getPartition } from './partition';
 import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
+import { getTerritories } from './territories';
 import { getUnits } from './units';
 import { getZones } from './zones';
 
@@ -21,6 +22,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   partition: getPartition,
   plurals: getPlurals,
   subtags: getSubtags,
+  territories: getTerritories,
   units: getUnits,
   zones: getZones,
 };

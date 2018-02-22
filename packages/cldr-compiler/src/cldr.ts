@@ -318,7 +318,7 @@ export const getMain = (language: string) => {
     ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies'),
     ...access({ ListPatterns: get(['listPatterns']) }, 'listPatterns'),
     ...access({ ContextTransforms: get(['contextTransforms']) }, 'contextTransforms', true),
-    ...access({ Territories: get(['localeDisplayNames', 'territories']) }, 'territories')
+    ...access({ Territories: get(['localeDisplayNames']) }, 'territories')
   };
 };
 

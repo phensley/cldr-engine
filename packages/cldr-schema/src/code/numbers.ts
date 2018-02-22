@@ -1,4 +1,4 @@
-import { Choice, Scope, digits, field, fieldmap, objectmap, scope } from './instructions';
+import { Choice, Scope, digits, field, objectmap, scope } from './instructions';
 import { NumberSymbolValues } from '../schema/numbers';
 
 export const NUMBERS: Scope = scope('Numbers', 'Numbers', [

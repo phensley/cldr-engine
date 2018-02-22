@@ -8,6 +8,8 @@ import {
   LocaleMatcher,
   LanguageResolver,
   LRU,
+  NamesEngine,
+  NamesInternal,
   NumbersEngine,
   NumbersInternal,
   Pack,
@@ -20,6 +22,7 @@ export interface Engine {
   readonly locale: Locale;
   readonly Gregorian: GregorianEngine;
   readonly Numbers: NumbersEngine;
+  readonly Names: NamesEngine;
 }
 
 /**
@@ -57,6 +60,7 @@ export class CLDR {
   protected readonly syncLoader?: (language: string) => any;
   protected readonly promiseLoader?: (language: string) => Promise<any>;
   protected readonly gregorianInternal: GregorianInternal;
+  protected readonly namesInternal: NamesInternal;
   protected readonly numbersInternal: NumbersInternal;
   protected readonly wrapperInternal: WrapperInternal;
 
@@ -71,6 +75,7 @@ export class CLDR {
     const patternCacheSize = options.patternCacheSize || 50;
     this.wrapperInternal = new WrapperInternal(patternCacheSize);
     this.gregorianInternal = new GregorianInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
+    this.namesInternal = new NamesInternal(SCHEMA, patternCacheSize);
     this.numbersInternal = new NumbersInternal(SCHEMA, patternCacheSize);
   }
 
@@ -168,6 +173,7 @@ export class CLDR {
     return {
       locale,
       Gregorian: new GregorianEngine(this.gregorianInternal, bundle),
+      Names: new NamesEngine(this.namesInternal, bundle),
       Numbers: new NumbersEngine(this.numbersInternal, bundle),
     };
   }
