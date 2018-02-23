@@ -76,7 +76,7 @@ export class CLDR {
     this.wrapperInternal = new WrapperInternal(patternCacheSize);
     this.gregorianInternal = new GregorianInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
     this.namesInternal = new NamesInternal(SCHEMA, patternCacheSize);
-    this.numbersInternal = new NumbersInternal(SCHEMA, patternCacheSize);
+    this.numbersInternal = new NumbersInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
   }
 
   availableLocales(): Locale[] {

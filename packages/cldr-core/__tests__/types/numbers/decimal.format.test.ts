@@ -1,9 +1,16 @@
-import { Decimal, DecimalFormat } from '../../../src';
+import { Decimal } from '../../../src';
+import { Part } from '../../../src';
 
 const parse = (s: string) => new Decimal(s);
-const format = (s: string, opts: any[]) => {
+
+const format = (s: string, opts: any[]): string => {
   const n = parse(s);
   return n.format.apply(n, opts);
+};
+
+const formatParts = (s: string, opts: any[]): Part[] => {
+  const n = parse(s);
+  return n.formatParts.apply(n, opts);
 };
 
 test('string', () => {
@@ -63,4 +70,15 @@ test('leading integer zeros', () => {
   expect(format('1.0000012345', opts)).toEqual('1.0000012345');
   expect(format('123.1', opts)).toEqual('123.1');
   expect(format('123.0000012345', opts)).toEqual('123.0000012345');
+});
+
+test('format parts', () => {
+  const opts = ['.', ',', 1, 1, 3, -1];
+  expect(formatParts('12345.12300', opts)).toEqual([
+    { type: 'digits', value: '12' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '345' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '12300' }
+  ]);
 });

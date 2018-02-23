@@ -13,7 +13,7 @@ import {
   ScopeArrow
 } from '@phensley/cldr-schema';
 
-import { Decimal, RoundingMode } from '../../types/numbers';
+import { Decimal, RoundingMode, Part } from '../../types';
 import { NumberContext } from './context';
 import {
   CurrencyFormatOptions,
@@ -29,6 +29,7 @@ import { NumberPattern, parseNumberPattern, NumberField } from '../../parsing/pa
 import { Cache } from '../../utils/cache';
 import { getCurrencyFractions } from './util';
 import { pluralCardinal } from '../plurals';
+import { WrapperInternal } from '../wrapper';
 
 /**
  * Number internal engine singleton, shared across all locales.
@@ -41,14 +42,20 @@ export class NumbersInternal {
 
   protected readonly numberPatternCache: Cache<NumberPattern[]>;
 
-  constructor(readonly root: Schema, cacheSize: number = 50) {
+  constructor(
+    readonly root: Schema,
+    readonly wrapper: WrapperInternal,
+    cacheSize: number = 50) {
+
     this.Currencies = root.Currencies;
     this.currencyFormats = root.Numbers.currencyFormats;
     this.decimalFormats = root.Numbers.decimalFormats;
     this.numberPatternCache = new Cache(parseNumberPattern, cacheSize);
   }
 
-  formatDecimal(bundle: Bundle, n: Decimal, options: DecimalFormatOptions, params: NumberParams): string {
+  formatDecimal<T>(bundle: Bundle, renderer: Renderer<T>,
+    n: Decimal, options: DecimalFormatOptions, params: NumberParams): T {
+
     const style = options.style === undefined ? DecimalFormatStyle.DECIMAL : options.style;
     switch (style) {
     case DecimalFormatStyle.LONG:
@@ -69,20 +76,19 @@ export class NumbersInternal {
       const ctx = new NumberContext(options, formatMode, -1);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
-      return render(n, pattern, params, '', '', options.group === true, ctx.minInt);
+      return renderer.render(n, pattern, params, '', '', options.group === true, ctx.minInt);
     }
     }
 
     // No valid style matched
-    return '';
+    return renderer.empty();
   }
 
-  formatCurrency(
-    bundle: Bundle, n: Decimal, code: string, options: CurrencyFormatOptions, params: NumberParams): string {
+  formatCurrency<T>(bundle: Bundle, renderer: Renderer<T>,
+    n: Decimal, code: string, options: CurrencyFormatOptions, params: NumberParams): T {
+
     const fractions = getCurrencyFractions(code);
-
     const width = options.symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
-
     const style = options.style === undefined ? CurrencyFormatStyle.SYMBOL : options.style;
 
     switch (style) {
@@ -100,10 +106,9 @@ export class NumbersInternal {
       const operands = n.operands();
       const plural = pluralCardinal(bundle.language(), operands);
 
-      const num = render(n, pattern, params, '', '', options.group === true, ctx.minInt);
+      const num = renderer.render(n, pattern, params, '', '', options.group === true, ctx.minInt);
       const unit = style === CurrencyFormatStyle.CODE ? code : this.getCurrencyPluralName(bundle, code, plural);
-      // TODO: unit wrapper
-      return `${num} ${unit}`;
+      return renderer.wrap(this.wrapper, '{0} {1}', num, renderer.part('unit', unit));
     }
 
     case CurrencyFormatStyle.SHORT:
@@ -129,12 +134,12 @@ export class NumbersInternal {
       const ctx = new NumberContext(options, formatMode, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
-      return render(n, pattern, params, symbol, '', options.group === true, ctx.minInt);
+      return renderer.render(n, pattern, params, symbol, '', options.group === true, ctx.minInt);
     }
     }
 
     // No valid style matched
-    return '';
+    return renderer.empty();
   }
 
   getCurrencyPluralName(bundle: Bundle, code: string, plural: Plural): string {
@@ -149,48 +154,119 @@ export class NumbersInternal {
 
 const orDefault = <T>(v: T | undefined, alt: T): T => v === undefined ? alt : v;
 
+export interface Renderer<T> {
+  render(n: Decimal, pattern: NumberPattern,
+    params: NumberParams, currency: string, percent: string, group: boolean, minInt: number): T;
+  wrap(internal: WrapperInternal, pattern: string, ...args: T[]): T;
+  part(type: string, value: string): T;
+  empty(): T;
+}
+
 /**
  * Renders each node in the NumberPattern to a string.
  */
-const render = (
-  n: Decimal,
-  pattern: NumberPattern,
-  params: NumberParams,
-  currency: string,
-  percent: string,
-  group: boolean,
-  minInt: number): string => {
+export class StringRenderer implements Renderer<string> {
+  render(n: Decimal, pattern: NumberPattern,
+    params: NumberParams, currency: string, percent: string, group: boolean, minInt: number): string {
 
-  let s = '';
-  for (const node of pattern.nodes) {
-    if (typeof node === 'string') {
-      s += node;
-    } else {
-      switch (node) {
-      case NumberField.CURRENCY:
-        s += currency;
-        break;
+    let s = '';
+    for (const node of pattern.nodes) {
+      if (typeof node === 'string') {
+        s += node;
+      } else {
+        switch (node) {
+        case NumberField.CURRENCY:
+          s += currency;
+          break;
 
-      case NumberField.MINUS:
-        s += params.symbols.minusSign;
-        break;
+        case NumberField.MINUS:
+          s += params.symbols.minusSign;
+          break;
 
-      case NumberField.NUMBER:
-        s += n.format(
-          params.symbols.decimal,
-          group ? params.symbols.group : '',
-          minInt,
-          params.minimumGroupingDigits,
-          pattern.priGroup,
-          pattern.secGroup
-        );
-        break;
+        case NumberField.NUMBER:
+          s += n.format(
+            params.symbols.decimal,
+            group ? params.symbols.group : '',
+            minInt,
+            params.minimumGroupingDigits,
+            pattern.priGroup,
+            pattern.secGroup
+          );
+          break;
 
-      case NumberField.PERCENT:
-        s += percent;
-        break;
+        case NumberField.PERCENT:
+          s += percent;
+          break;
+        }
       }
     }
+    return s;
   }
-  return s;
-};
+
+  wrap(internal: WrapperInternal, pattern: string, ...args: string[]): string {
+    return internal.format(pattern, args);
+  }
+
+  part(type: string, value: string): string {
+    return value;
+  }
+
+  empty(): string {
+    return '';
+  }
+}
+
+export class PartsRenderer implements Renderer<Part[]> {
+  render(n: Decimal, pattern: NumberPattern,
+    params: NumberParams, currency: string, percent: string, group: boolean, minInt: number): Part[] {
+
+    let r: Part[] = [];
+      for (const node of pattern.nodes) {
+        if (typeof node === 'string') {
+          r.push({ type: 'literal', value: node });
+        } else {
+          switch (node) {
+          case NumberField.CURRENCY:
+            r.push({ type: 'currency', value: currency });
+            break;
+
+          case NumberField.MINUS:
+            r.push({ type: 'minus', value: params.symbols.minusSign });
+            break;
+
+          case NumberField.NUMBER:
+            r = r.concat(n.formatParts(
+              params.symbols.decimal,
+              group ? params.symbols.group : '',
+              minInt,
+              params.minimumGroupingDigits,
+              pattern.priGroup,
+              pattern.secGroup
+            ));
+            break;
+
+          case NumberField.PERCENT:
+            r.push({ type: 'percent', value: percent });
+            break;
+          }
+        }
+      }
+    return r;
+  }
+
+  wrap(internal: WrapperInternal, pattern: string, ...args: Part[][]): Part[] {
+    return internal.formatParts(pattern, args);
+  }
+
+  part(type: string, value: string): Part[] {
+    return [{ type, value }];
+  }
+
+  empty(): Part[] {
+    return [];
+  }
+}
+
+export const STRING_RENDERER = new StringRenderer();
+
+export const PARTS_RENDERER = new PartsRenderer();

@@ -27,6 +27,7 @@ import { WrapperNode, parseWrapperPattern } from '../../parsing/patterns/wrapper
 import { WrapperInternal } from '../wrapper';
 import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';
+import { Part } from '../../types';
 
 /**
  * Function that formats a given date field.
@@ -133,7 +134,7 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
    * Format a pattern into an array of parts, each part being either a string literal
    * or a named field.
    */
-  formatParts(bundle: Bundle, date: ZonedDateTime, pattern: string): any[] {
+  formatParts(bundle: Bundle, date: ZonedDateTime, pattern: string): Part[] {
     const format = this.datePatternCache.get(pattern);
     const res = [];
     for (const node of format) {

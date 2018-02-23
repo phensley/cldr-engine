@@ -1,7 +1,8 @@
 import { DivMod, add, subtract, multiply, trimLeadingZeros, divide } from './math';
 import { allzero, compare, digits } from './operations';
 import { NumberOperands, decimalOperands } from './operands';
-
+import { Formatter, StringFormatter, PartsFormatter } from './format';
+import { Part } from '../parts';
 import {
   Chars,
   Constants,
@@ -440,10 +441,26 @@ export class Decimal {
    * TODO: support alternate digit systems, algorithmic / spellout
    */
   format(decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): string {
+    const formatter = new StringFormatter();
+    this._format(formatter, decimal, group, minInt, minGroup, priGroup, secGroup);
+    return formatter.render();
+  }
+
+  formatParts(
+    decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): Part[] {
+
+    const formatter = new PartsFormatter(decimal, group);
+    this._format(formatter, decimal, group, minInt, minGroup, priGroup, secGroup);
+    return formatter.render();
+  }
+
+  _format(
+    formatter: Formatter<any>,
+    decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): void {
     // Determine if grouping is enabled, and set the primary and
     // secondary group sizes.
     const grouping = group !== '';
-    if (secGroup < 0) {
+    if (secGroup <= 0) {
       secGroup = priGroup;
     }
 
@@ -461,7 +478,6 @@ export class Decimal {
     }
 
     // Array to append digits in reverse order
-    const r: string[] = [];
     const len = this.data.length;
     let groupSize = priGroup;
     let emitted = 0;
@@ -473,7 +489,7 @@ export class Decimal {
         if (emitted > 0 && emitted % groupSize === 0) {
           // Push group character, reset emitted digits, and switch
           // to secondary grouping size.
-          r.push(group);
+          formatter.add(group);
           emitted = 0;
           groupSize = secGroup;
         }
@@ -483,7 +499,7 @@ export class Decimal {
     // Push trailing zeros for a positive exponent
     let zeros = exp;
     while (zeros > 0) {
-      r.push('0');
+      formatter.add('0');
       emitted++;
       int--;
       if (int > 0) {
@@ -502,13 +518,13 @@ export class Decimal {
       // Loop over the decimal digits
       for (let j = 0; j < c; j++) {
         // Push decimal digit
-        r.push(String(d % 10));
+        formatter.add(String(d % 10));
         d = (d / 10) | 0;
 
         // When we've reached exponent of 0, push the decimal point.
         exp++;
         if (exp === 0) {
-          r.push(decimal);
+          formatter.add(decimal);
         }
 
         // Decrement integer, increment emitted digits when exponent is positive, to
@@ -526,26 +542,24 @@ export class Decimal {
 
     // If exponent still negative, emit leading decimal zeros
     while (exp < 0) {
-      r.push('0');
+      formatter.add('0');
 
       // When we've reached exponent of 0, push the decimal point
       exp++;
       if (exp === 0) {
-        r.push(decimal);
+        formatter.add(decimal);
       }
     }
 
     // Leading integer zeros
     while (int > 0) {
-      r.push('0');
+      formatter.add('0');
       emitted++;
       int--;
       if (int > 0) {
         groupFunc();
       }
     }
-
-    return r.reverse().join('');
   }
 
   protected static fromRaw(sign: number, exp: number, data: number[]): Decimal {

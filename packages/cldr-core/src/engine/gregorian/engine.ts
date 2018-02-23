@@ -16,6 +16,7 @@ import {
 import { ZonedDateTime } from '../../types/datetime';
 import { GregorianInternal } from './internal';
 import { GregorianFormatOptions } from './options';
+import { Part } from '../../types';
 
 const ISO_WEEKDATE_EXTENDED = "YYYY-'W'ww-";
 const ISO_WEEKDATE_COMPACT = "YYYY'W'ww";
@@ -95,7 +96,7 @@ export class GregorianEngine {
     return this.internal.format(this.bundle, date, pattern);
   }
 
-  formatParts(date: ZonedDateTime, options: GregorianFormatOptions = {}): any[] {
+  formatParts(date: ZonedDateTime, options: GregorianFormatOptions = {}): Part[] {
     const width = options.date ? options.date : 'full';
     const pattern = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
     return this.internal.formatParts(this.bundle, date, pattern);

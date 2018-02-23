@@ -1,5 +1,6 @@
 import { Cache } from '../../utils/cache';
 import { WrapperNode, parseWrapperPattern } from '../../parsing/patterns/wrapper';
+import { Part } from '../../types';
 
 export class WrapperInternal {
 
@@ -17,6 +18,22 @@ export class WrapperInternal {
         res += node;
       } else {
         res += args[node] || '';
+      }
+    }
+    return res;
+  }
+
+  formatParts(format: string, args: Part[][]): Part[] {
+    const pattern = this.wrapperPatternCache.get(format);
+    let res: Part[] = [];
+    for (const node of pattern) {
+      if (typeof node === 'string') {
+        res.push({ type: 'literal', value: node });
+      } else {
+        const arg = args[node];
+        if (arg !== undefined) {
+          res = res.concat(arg);
+        }
       }
     }
     return res;

@@ -5,8 +5,9 @@ import {
   CurrencyFormatOptions,
   DecimalFormatOptions,
   NumbersEngine,
-  NumbersInternal
-} from '../../../src/engine/numbers';
+  NumbersInternal,
+  WrapperInternal
+} from '../../../src/engine';
 
 const EN = languageBundle('en');
 const EN_GB = languageBundle('en-GB');
@@ -14,12 +15,12 @@ const ES_419 = languageBundle('es-419');
 const FR = languageBundle('fr');
 const DE = languageBundle('de');
 
-const INTERNAL = new NumbersInternal(buildSchema());
+const INTERNAL = new NumbersInternal(buildSchema(), new WrapperInternal());
 
 const USD = 'USD';
 const AUD = 'AUD';
 
-test('basics', () => {
+test('decimals', () => {
   const opts: DecimalFormatOptions = { minimumFractionDigits: 5, minimumIntegerDigits: 3 };
   let formatter = new NumbersEngine(INTERNAL, EN);
   let actual = formatter.formatDecimal('1.234', opts);
@@ -29,6 +30,19 @@ test('basics', () => {
   formatter = new NumbersEngine(INTERNAL, DE);
   actual = formatter.formatDecimal('12345.234', opts);
   expect(actual).toEqual('12.345,23400');
+});
+
+test('decimal parts', () => {
+  const opts: DecimalFormatOptions = { group: true };
+  const formatter = new NumbersEngine(INTERNAL, EN);
+  const actual = formatter.formatDecimalParts('12345.1234', opts);
+  expect(actual).toEqual([
+    { type: 'digits', value: '12' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '345' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '123' }
+  ]);
 });
 
 test('currency', () => {
@@ -54,10 +68,38 @@ test('currency', () => {
   actual = formatter.formatCurrency('1', USD, opts);
   expect(actual).toEqual('1 US dollar');
 
-  opts.style = 'short';
-  actual = formatter.formatCurrency('12345.234', USD, opts);
+  // TODO:
+  // opts.style = 'short';
+  // actual = formatter.formatCurrency('12345.234', USD, opts);
   // expect(actual).toEqual('$12,345.23');
+});
 
+test('currency parts', () => {
+  const formatter = new NumbersEngine(INTERNAL, EN);
+  const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
+  const actual1 = formatter.formatCurrencyParts('12345.234', USD, opts);
+  expect(actual1).toEqual([
+    { type: 'currency', value: '$' },
+    { type: 'digits', value: '12' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '345' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '23' }
+  ]);
+
+  opts.style = 'code';
+  const actual2 = formatter.formatCurrencyParts('1002123.0166', AUD, opts);
+  expect(actual2).toEqual([
+    { type: 'digits', value: '1' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '002' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '123' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '02' },
+    { type: 'literal', value: ' ' },
+    { type: 'unit', value: 'AUD' }
+  ]);
 });
 
 test('currency display names', () => {
