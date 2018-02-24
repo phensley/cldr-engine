@@ -77,6 +77,8 @@ export enum CurrencySymbolWidth {
   NARROW = 'narrow'
 }
 
+export type CurrencySymbolWidthType = 'default' | 'narrow';
+
 export type DecimalFormatStyleType =
   'decimal' | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled' | 'short' | 'long';
 

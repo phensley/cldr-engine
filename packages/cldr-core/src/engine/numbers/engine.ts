@@ -9,7 +9,7 @@ import {
 } from '@phensley/cldr-schema';
 
 import { NumbersInternal } from './internal';
-import { CurrencyFormatOptions, DecimalFormatOptions, NumberParams } from './options';
+import { CurrencyFormatOptions, CurrencySymbolWidthType, DecimalFormatOptions, NumberParams } from './options';
 import { STRING_RENDERER, PARTS_RENDERER } from './render';
 import { Decimal, Part } from '../../types';
 
@@ -35,17 +35,29 @@ export class NumbersEngine {
     };
   }
 
-  getCurrencySymbol(code: CurrencyType | string, narrow: boolean = false): string {
-    const alt = narrow ? Alt.NARROW : Alt.NONE;
-    return this.internal.Currencies(code as CurrencyType).symbol(this.bundle, alt);
+  /**
+   * Return the symbol for the given currency.
+   */
+  getCurrencySymbol(code: CurrencyType, symbolWidth?: CurrencySymbolWidthType): string {
+    const currencies = this.internal.Currencies(code as CurrencyType);
+    const alt = symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
+    return currencies.symbol(this.bundle, alt) || currencies.symbol(this.bundle, Alt.NONE);
   }
 
-  getCurrencyDisplayName(code: CurrencyType | string): string {
+  /**
+   * Return the display name for the given currency.
+   */
+  getCurrencyDisplayName(code: CurrencyType): string {
     return this.internal.Currencies(code as CurrencyType).displayName(this.bundle);
   }
 
-  getCurrencyPluralName(code: CurrencyType | string, plural: string): string {
-    return this.internal.getCurrencyPluralName(this.bundle, code, pluralCategory(plural));
+  /**
+   * Return the pluralized name for the given currency.
+   */
+  getCurrencyPluralName(code: CurrencyType, plural: string): string {
+    const category = pluralCategory(plural);
+    const name = this.internal.getCurrencyPluralName(this.bundle, code, category);
+    return name !== '' ? name : this.internal.getCurrencyPluralName(this.bundle, code, Plural.OTHER);
   }
 
   formatDecimal(n: NumberArg, options: DecimalFormatOptions): string {
@@ -58,12 +70,12 @@ export class NumbersEngine {
     return this.internal.formatDecimal(this.bundle, PARTS_RENDERER, d, options, this.params);
   }
 
-  formatCurrency(n: NumberArg, code: CurrencyType | string, options: CurrencyFormatOptions): string {
+  formatCurrency(n: NumberArg, code: CurrencyType, options: CurrencyFormatOptions): string {
     const d = this.toDecimal(n);
     return this.internal.formatCurrency(this.bundle, STRING_RENDERER, d, code, options, this.params);
   }
 
-  formatCurrencyParts(n: NumberArg, code: CurrencyType | string, options: CurrencyFormatOptions): Part[] {
+  formatCurrencyParts(n: NumberArg, code: CurrencyType, options: CurrencyFormatOptions): Part[] {
     const d = this.toDecimal(n);
     return this.internal.formatCurrency(this.bundle, PARTS_RENDERER, d, code, options, this.params);
   }
