@@ -1,10 +1,22 @@
 import { DigitsArrow, DivisorArrow, FieldArrow, FieldMapArrow, FieldIndexedArrow, ObjectArrow } from '../arrows';
 import { Plural } from '../enums';
 
+export interface CurrencySpacing {
+  readonly currencyMatch: string;
+  readonly surroundingMatch: string;
+  readonly insertBetween: string;
+}
+
+export interface CurrencySpacingInfo {
+  readonly beforeCurrency: ObjectArrow<CurrencySpacing>;
+  readonly afterCurrency: ObjectArrow<CurrencySpacing>;
+}
+
 export interface CurrencyFormats {
   readonly accounting: FieldArrow;
   readonly short: CurrencyShortFormat;
   readonly standard: FieldArrow;
+  readonly currencySpacing: CurrencySpacingInfo;
   readonly unitPattern: FieldIndexedArrow<Plural>;
 }
 

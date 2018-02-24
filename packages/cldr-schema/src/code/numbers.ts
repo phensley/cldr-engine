@@ -1,6 +1,8 @@
 import { Choice, Scope, digits, field, objectmap, scope } from './instructions';
 import { NumberSymbolValues } from '../schema/numbers';
 
+const CURRENCY_SPACING = ['currencyMatch', 'surroundingMatch', 'insertBetween'];
+
 export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
   objectmap('symbols', NumberSymbolValues),
 
@@ -12,6 +14,11 @@ export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
 
     scope('short', 'short', [
       digits('standard')
+    ]),
+
+    scope('currencySpacing', 'currencySpacing', [
+      objectmap('beforeCurrency', CURRENCY_SPACING),
+      objectmap('afterCurrency', CURRENCY_SPACING)
     ]),
 
     field('unitPattern', 'unitPattern', Choice.PLURAL)

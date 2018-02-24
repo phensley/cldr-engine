@@ -1,9 +1,11 @@
-import { NumberSymbols } from '@phensley/cldr-schema';
+import { CurrencySpacing, NumberSymbols } from '@phensley/cldr-schema';
 import { RoundingMode } from '../../types/numbers';
 
 export interface NumberParams {
   symbols: NumberSymbols;
   minimumGroupingDigits: number;
+  beforeCurrency: CurrencySpacing;
+  afterCurrency: CurrencySpacing;
 }
 
 export enum NumberFormatMode {
