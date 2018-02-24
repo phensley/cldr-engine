@@ -4,6 +4,7 @@ import { buildSchema } from '../../../src/schema';
 import {
   CurrencyFormatOptions,
   DecimalFormatOptions,
+  DecimalFormatStyleType,
   NumbersEngine,
   NumbersInternal,
   WrapperInternal
@@ -46,8 +47,8 @@ test('decimal percents', () => {
 
   opts.style = 'permille';
   opts.minimumFractionDigits = 0;
-  actual = formatter.formatDecimal('1.234', opts);
-  expect(actual).toEqual('1234%');
+  actual = formatter.formatDecimal('-1.234', opts);
+  expect(actual).toEqual('-1234%');
 });
 
 test('decimal compact', () => {
@@ -59,12 +60,37 @@ test('decimal compact', () => {
   opts.style = 'long';
   actual = formatter.formatDecimal('12345.234', opts);
   expect(actual).toEqual('12.3 thousand');
+
+  actual = formatter.formatDecimal('0.999', opts);
+  expect(actual).toEqual('1');
+
+  actual = formatter.formatDecimal('-0.999', opts);
+  expect(actual).toEqual('-1');
+
+  opts.round = 'ceiling';
+  opts.formatMode = 'significant-maxfrac';
+  opts.maximumFractionDigits = 1;
+  actual = formatter.formatDecimal('-0.999', opts);
+  expect(actual).toEqual('-0.9');
+
+  opts.maximumFractionDigits = 0;
+  actual = formatter.formatDecimal('-0.999', opts);
+  expect(actual).toEqual('0');
+});
+
+test('decimal rounding', () => {
+  const formatter = new NumbersEngine(INTERNAL, EN);
+  const opts: DecimalFormatOptions = { style: 'long', formatMode: 'significant-maxfrac' };
+  opts.round = 'ceiling';
+  opts.maximumFractionDigits = 0;
+  const actual = formatter.formatDecimal('-0.9989898', opts);
+  expect(actual).toEqual('0');
 });
 
 test('decimal parts', () => {
   const opts: DecimalFormatOptions = { group: true };
   const formatter = new NumbersEngine(INTERNAL, EN);
-  const actual = formatter.formatDecimalParts('12345.1234', opts);
+  let actual = formatter.formatDecimalParts('12345.1234', opts);
   expect(actual).toEqual([
     { type: 'digits', value: '12' },
     { type: 'group', value: ',' },
@@ -72,6 +98,21 @@ test('decimal parts', () => {
     { type: 'decimal', value: '.' },
     { type: 'digits', value: '123' }
   ]);
+
+  opts.style = 'percent';
+  actual = formatter.formatDecimalParts('-1.234', opts);
+  expect(actual).toEqual([
+    { type: 'minus', value: '-' },
+    { type: 'digits', value: '123' },
+    { type: 'percent', value: '%' }
+  ]);
+});
+
+test('decimal invalid', () => {
+  const opts: DecimalFormatOptions = { style: 'invalid' as DecimalFormatStyleType };
+  const formatter = new NumbersEngine(INTERNAL, EN);
+  const actual = formatter.formatDecimal('12345.1234', opts);
+  expect(actual).toEqual('');
 });
 
 test('currency', () => {
