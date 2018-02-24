@@ -91,5 +91,5 @@ export interface DecimalFormatOptions extends NumberFormatOptions {
 
 export interface CurrencyFormatOptions extends NumberFormatOptions {
   style?: CurrencyFormatStyleType;
-  symbolWidth?: CurrencySymbolWidth;
+  symbolWidth?: CurrencySymbolWidthType;
 }

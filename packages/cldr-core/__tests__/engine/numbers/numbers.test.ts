@@ -14,6 +14,7 @@ const EN_GB = languageBundle('en-GB');
 const ES_419 = languageBundle('es-419');
 const FR = languageBundle('fr');
 const DE = languageBundle('de');
+const KM = languageBundle('km');
 
 const INTERNAL = new NumbersInternal(buildSchema(), new WrapperInternal());
 
@@ -116,6 +117,36 @@ test('currency', () => {
   expect(actual).toEqual('$1M');
 });
 
+test('currency spacing', () => {
+  let formatter = new NumbersEngine(INTERNAL, EN);
+  const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
+  let actual = formatter.formatCurrency('12345.234', 'BAD', opts);
+  expect(actual).toEqual('BAD\u00a012,345.23');
+
+  actual = formatter.formatCurrency('12345.234', 'AUD', opts);
+  expect(actual).toEqual('A$12,345.23');
+
+  opts.symbolWidth = 'narrow';
+  actual = formatter.formatCurrency('12345.234', 'AUD', opts);
+  expect(actual).toEqual('$12,345.23');
+
+  formatter = new NumbersEngine(INTERNAL, DE);
+  opts.symbolWidth = 'default';
+
+  actual = formatter.formatCurrency('12345.234', 'BAD', opts);
+  expect(actual).toEqual('12.345,23\u00a0BAD');
+
+  actual = formatter.formatCurrency('12345.234', 'USD', opts);
+  expect(actual).toEqual('12.345,23\u00a0$');
+
+  formatter = new NumbersEngine(INTERNAL, KM);
+  actual = formatter.formatCurrency('12345.234', 'USD', opts);
+  expect(actual).toEqual('12.345,23$');
+
+  actual = formatter.formatCurrency('12345.234', 'BAD', opts);
+  expect(actual).toEqual('12.345,23\u00a0BAD');
+});
+
 test('currency parts', () => {
   const formatter = new NumbersEngine(INTERNAL, EN);
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
@@ -141,6 +172,33 @@ test('currency parts', () => {
     { type: 'digits', value: '02' },
     { type: 'literal', value: ' ' },
     { type: 'unit', value: 'AUD' }
+  ]);
+});
+
+test('currency parts spacing', () => {
+  const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
+  let formatter = new NumbersEngine(INTERNAL, EN);
+  let actual = formatter.formatCurrencyParts('12345.234', 'BAD', opts);
+  expect(actual).toEqual([
+    { type: 'currency', value: 'BAD' },
+    { type: 'spacer', value: '\u00a0' },
+    { type: 'digits', value: '12' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '345' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '23' }
+  ]);
+
+  formatter = new NumbersEngine(INTERNAL, KM);
+  actual = formatter.formatCurrencyParts('12345.234', 'BAD', opts);
+  expect(actual).toEqual([
+    { type: 'digits', value: '12' },
+    { type: 'group', value: '.' },
+    { type: 'digits', value: '345' },
+    { type: 'decimal', value: ',' },
+    { type: 'digits', value: '23' },
+    { type: 'spacer', value: '\u00a0' },
+    { type: 'currency', value: 'BAD' }
   ]);
 });
 
