@@ -32,6 +32,37 @@ test('decimals', () => {
   expect(actual).toEqual('12.345,23400');
 });
 
+test('decimal percents', () => {
+  const opts: DecimalFormatOptions = { style: 'percent' };
+  const formatter = new NumbersEngine(INTERNAL, EN);
+  let actual = formatter.formatDecimal('1.234', opts);
+  expect(actual).toEqual('123%');
+
+  opts.minimumFractionDigits = 1;
+  actual = formatter.formatDecimal('1.234', opts);
+  expect(actual).toEqual('123.4%');
+
+  opts.style = 'percent-scaled';
+  actual = formatter.formatDecimal('1.234', opts);
+  expect(actual).toEqual('1.2%');
+
+  opts.style = 'permille';
+  opts.minimumFractionDigits = 0;
+  actual = formatter.formatDecimal('1.234', opts);
+  expect(actual).toEqual('1234%');
+});
+
+test('decimal compact', () => {
+  const opts: DecimalFormatOptions = { style: 'short' };
+  const formatter = new NumbersEngine(INTERNAL, EN);
+  let actual = formatter.formatDecimal('12345.234', opts);
+  expect(actual).toEqual('12.3K');
+
+  opts.style = 'long';
+  actual = formatter.formatDecimal('12345.234', opts);
+  expect(actual).toEqual('12.3 thousand');
+});
+
 test('decimal parts', () => {
   const opts: DecimalFormatOptions = { group: true };
   const formatter = new NumbersEngine(INTERNAL, EN);
@@ -68,10 +99,24 @@ test('currency', () => {
   actual = formatter.formatCurrency('1', USD, opts);
   expect(actual).toEqual('1 US dollar');
 
-  // TODO:
-  // opts.style = 'short';
-  // actual = formatter.formatCurrency('12345.234', USD, opts);
-  // expect(actual).toEqual('$12,345.23');
+  opts.formatMode = 'default';
+  opts.style = 'short';
+  actual = formatter.formatCurrency('12690.234', USD, opts);
+  expect(actual).toEqual('$12.69K');
+
+  actual = formatter.formatCurrency('999.9', USD, opts);
+  expect(actual).toEqual('$999.9');
+
+  actual = formatter.formatCurrency('999999.9', USD, opts);
+  expect(actual).toEqual('$1M');
+
+  actual = formatter.formatCurrency('999900.00', USD, opts);
+  expect(actual).toEqual('$999.9K');
+
+  opts.formatMode = 'significant-maxfrac';
+  opts.maximumFractionDigits = 0;
+  actual = formatter.formatCurrency('999900.00', USD, opts);
+  expect(actual).toEqual('$1M');
 });
 
 test('currency parts', () => {

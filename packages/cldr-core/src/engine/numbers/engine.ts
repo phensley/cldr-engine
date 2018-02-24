@@ -8,8 +8,9 @@ import {
   PluralValues
 } from '@phensley/cldr-schema';
 
-import { NumbersInternal, STRING_RENDERER, PARTS_RENDERER } from './internal';
+import { NumbersInternal } from './internal';
 import { CurrencyFormatOptions, DecimalFormatOptions, NumberParams } from './options';
+import { STRING_RENDERER, PARTS_RENDERER } from './render';
 import { Decimal, Part } from '../../types';
 
 export type NumberArg = number | string | Decimal;

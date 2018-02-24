@@ -10,12 +10,14 @@ import {
   NumberSymbol,
   Plural,
   Schema,
-  ScopeArrow
+  ScopeArrow,
+  PercentFormats
 } from '@phensley/cldr-schema';
 
 import { Decimal, RoundingMode, Part } from '../../types';
 import { NumberContext } from './context';
 import {
+  getRoundingMode,
   CurrencyFormatOptions,
   CurrencyFormatStyle,
   CurrencySymbolWidth,
@@ -25,6 +27,7 @@ import {
   NumberParams
 } from './options';
 
+import { Renderer } from './render';
 import { NumberPattern, parseNumberPattern, NumberField } from '../../parsing/patterns/number';
 import { Cache } from '../../utils/cache';
 import { getCurrencyFractions } from './util';
@@ -39,6 +42,7 @@ export class NumbersInternal {
   readonly Currencies: ScopeArrow<CurrencyType, CurrencyInfo>;
   readonly currencyFormats: CurrencyFormats;
   readonly decimalFormats: DecimalFormats;
+  readonly percentFormats: PercentFormats;
 
   protected readonly numberPatternCache: Cache<NumberPattern[]>;
 
@@ -50,6 +54,7 @@ export class NumbersInternal {
     this.Currencies = root.Currencies;
     this.currencyFormats = root.Numbers.currencyFormats;
     this.decimalFormats = root.Numbers.decimalFormats;
+    this.percentFormats = root.Numbers.percentFormats;
     this.numberPatternCache = new Cache(parseNumberPattern, cacheSize);
   }
 
@@ -59,24 +64,107 @@ export class NumbersInternal {
     const style = options.style === undefined ? DecimalFormatStyle.DECIMAL : options.style;
     switch (style) {
     case DecimalFormatStyle.LONG:
-
     case DecimalFormatStyle.SHORT:
+    {
+      // The extra complexity here is to deal with rounding up and selecting the
+      // correct pluralized pattern for the final rounded form.
+      const standardRaw = this.decimalFormats.standard(bundle);
+      const isShort = style === DecimalFormatStyle.SHORT;
+      const negative = n.isNegative();
+      const divisorImpl = isShort ? this.decimalFormats.short.decimalFormatDivisor
+        : this.decimalFormats.long.decimalFormatDivisor;
+      const patternImpl = isShort ? this.decimalFormats.short.decimalFormat
+        : this.decimalFormats.long.decimalFormat;
+      const ctx = new NumberContext(options, NumberFormatMode.SIGNIFICANT);
+
+      // Select the correct divisor based on the number of integer digits in n.
+      let ndigits = n.integerDigits();
+      const ndivisor = divisorImpl(bundle, ndigits);
+
+      // Move the decimal point of n, producing q1. We always strip trailing
+      // zeros on compact patterns.
+      let q1 = n;
+      if (ndivisor > 0) {
+        q1 = q1.movePoint(-ndivisor).stripTrailingZeros();
+      }
+
+      // Select the initial compact pattern based on the integer digits of n.
+      // The plural category doesn't matter until the final pattern is selected.
+      let raw = patternImpl(bundle, ndigits, Plural.OTHER) || standardRaw;
+      let pattern = this.getNumberPattern(raw, negative);
+
+      // Adjust q1 using the compact pattern's patterns, to produce q2.
+      const q1digits = q1.integerDigits();
+      ctx.setCompact(pattern, q1digits, ndivisor);
+      let q2 = ctx.adjust(q1);
+      const q2digits = q2.integerDigits();
+
+      // Check if the number rounded up, adding another integer digit.
+      if (q2digits > q1digits) {
+        // Select a new divisor and pattern.
+        ndigits++;
+        const divisor = divisorImpl(bundle, ndigits);
+        raw = patternImpl(bundle, ndigits, Plural.OTHER) || standardRaw;
+        pattern = this.getNumberPattern(raw, negative);
+
+        // If divisor changed we need to divide and adjust again. We don't divide,
+        // we just move the decimal point, since our Decimal type uses a radix that
+        // is a power of 10. Otherwise q2 is ready for formatting.
+        if (divisor > ndivisor) {
+          q1 = n.movePoint(-divisor).stripTrailingZeros();
+          ctx.setCompact(pattern, q1.integerDigits(), divisor);
+          q2 = ctx.adjust(q1);
+        }
+      }
+      // Compute the plural category for the final q2.
+      const operands = q2.operands();
+      const plural = pluralCardinal(bundle.language(), operands);
+
+      // Select the final pluralized compact pattern based on the integer
+      // digits of n and the plural category of the rounded / shifted number q2.
+      raw = patternImpl(bundle, ndigits, plural) || standardRaw;
+      pattern = this.getNumberPattern(raw, negative);
+      return renderer.render(q2, pattern, params, '', '', options.group, ctx.minInt);
+    }
 
     case DecimalFormatStyle.PERCENT:
     case DecimalFormatStyle.PERCENT_SCALED:
-
     case DecimalFormatStyle.PERMILLE:
     case DecimalFormatStyle.PERMILLE_SCALED:
+    {
+      // Get percent pattern.
+      const raw = this.percentFormats.standard(bundle);
+      const pattern = this.getNumberPattern(raw, n.isNegative());
+
+      // Scale the number to a percent or permille form as needed.
+      if (style === DecimalFormatStyle.PERCENT) {
+        n = n.movePoint(2);
+      } else if (style === DecimalFormatStyle.PERMILLE) {
+        n = n.movePoint(3);
+      }
+
+      // Select percent or permille symbol.
+      const symbol = style === DecimalFormatStyle.PERCENT || DecimalFormatStyle.PERCENT_SCALED ?
+        params.symbols.percentSign : params.symbols.perMille;
+
+      // Adjust number using pattern and options, then render.
+      const ctx = new NumberContext(options, NumberFormatMode.DEFAULT, -1);
+      ctx.setPattern(pattern);
+      n = ctx.adjust(n);
+      return renderer.render(n, pattern, params, '', symbol, options.group, ctx.minInt);
+    }
 
     case DecimalFormatStyle.DECIMAL:
     {
+      // Get decimal pattern.
       const raw = this.decimalFormats.standard(bundle);
       const pattern = this.getNumberPattern(raw, n.isNegative());
-      const formatMode = orDefault(options.formatMode, NumberFormatMode.DEFAULT);
-      const ctx = new NumberContext(options, formatMode, -1);
+
+      // Adjust number using pattern and options, then render.
+      const ctx = new NumberContext(options, NumberFormatMode.DEFAULT, -1);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
-      return renderer.render(n, pattern, params, '', '', options.group === true, ctx.minInt);
+      return renderer.render(n, pattern, params, '', '', options.group, ctx.minInt);
     }
     }
 
@@ -91,6 +179,8 @@ export class NumbersInternal {
     const width = options.symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
     const style = options.style === undefined ? CurrencyFormatStyle.SYMBOL : options.style;
 
+    const standardRaw = this.currencyFormats.standard(bundle);
+
     switch (style) {
 
     case CurrencyFormatStyle.CODE:
@@ -99,42 +189,97 @@ export class NumbersInternal {
       const raw = this.decimalFormats.standard(bundle);
       const pattern = this.getNumberPattern(raw, n.isNegative());
 
+      // Adjust number using pattern and options, then render.
       const ctx = new NumberContext(options, NumberFormatMode.DEFAULT, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
+      const num = renderer.render(n, pattern, params, '', '', options.group, ctx.minInt);
 
+      // Compute plural category and select pluralized unit.
       const operands = n.operands();
       const plural = pluralCardinal(bundle.language(), operands);
-
-      const num = renderer.render(n, pattern, params, '', '', options.group === true, ctx.minInt);
       const unit = style === CurrencyFormatStyle.CODE ? code : this.getCurrencyPluralName(bundle, code, plural);
-      return renderer.wrap(this.wrapper, '{0} {1}', num, renderer.part('unit', unit));
+
+      // Wrap number and unit together.
+      const unitWrapper = this.currencyFormats.unitPattern(bundle, plural);
+      return renderer.wrap(this.wrapper, unitWrapper, num, renderer.part('unit', unit));
     }
 
     case CurrencyFormatStyle.SHORT:
     {
-      const digits = n.integerDigits();
-      const divisor = this.currencyFormats.short.standardDivisor(bundle, digits);
+      // The extra complexity here is to deal with rounding up and selecting the
+      // correct pluralized pattern for the final rounded form.
+      const negative = n.isNegative();
+      const divisorImpl = this.currencyFormats.short.standardDivisor;
+      const patternImpl = this.currencyFormats.short.standard;
       const ctx = new NumberContext(options, NumberFormatMode.SIGNIFICANT_MAXFRAC, fractions.digits);
       const symbol = this.Currencies(code as CurrencyType).symbol(bundle, width);
-      const operands = n.operands();
 
-      let raw = this.currencyFormats.short.standard(bundle, digits, Plural.OTHER);
-      break;
+      // Select the correct divisor based on the number of integer digits in n.
+      let ndigits = n.integerDigits();
+      const ndivisor = divisorImpl(bundle, ndigits);
+
+      // Move the decimal point of n, producing q1. We always strip trailing
+      // zeros on compact patterns.
+      let q1 = n;
+      if (ndivisor > 0) {
+        q1 = q1.movePoint(-ndivisor).stripTrailingZeros();
+      }
+
+      // Select the initial compact pattern based on the integer digits of n.
+      // The plural category doesn't matter until the final pattern is selected.
+      let raw = patternImpl(bundle, ndigits, Plural.OTHER) || standardRaw;
+      let pattern = this.getNumberPattern(raw, negative);
+
+      // Adjust q1 using the compact pattern's parameters, to produce q2.
+      const q1digits = q1.integerDigits();
+      ctx.setCompact(pattern, q1digits, ndivisor);
+      let q2 = ctx.adjust(q1);
+      const q2digits = q2.integerDigits();
+
+      // Check if the number rounded up, adding another integer digit.
+      if (q2digits > q1digits) {
+        // Select a new divisor and pattern.
+        ndigits++;
+        const divisor = divisorImpl(bundle, ndigits);
+        raw = patternImpl(bundle, ndigits, Plural.OTHER) || standardRaw;
+        pattern = this.getNumberPattern(raw, negative);
+
+        // If divisor changed we need to divide and adjust again. We don't divide,
+        // we just move the decimal point, since our Decimal type uses a radix that
+        // is a power of 10. Otherwise q2 is ready for formatting.
+        if (divisor > ndivisor) {
+          q1 = n.movePoint(-divisor).stripTrailingZeros();
+          ctx.setCompact(pattern, q1.integerDigits(), divisor);
+          q2 = ctx.adjust(q1);
+        }
+      }
+
+      // Compute the plural category for the final q2.
+      const operands = q2.operands();
+      const plural = pluralCardinal(bundle.language(), operands);
+
+      // Select the final pluralized compact pattern based on the integer
+      // digits of n and the plural category of the rounded / shifted number q2.
+      raw = patternImpl(bundle, ndigits, plural) || standardRaw;
+      pattern = this.getNumberPattern(raw, negative);
+      return renderer.render(q2, pattern, params, symbol, '', options.group, ctx.minInt);
     }
 
     case CurrencyFormatStyle.ACCOUNTING:
     case CurrencyFormatStyle.SYMBOL:
     {
-      const symbol = this.Currencies(code as CurrencyType).symbol(bundle, width);
+      // Select standard or accounting pattern based on style.
       const raw = style === CurrencyFormatStyle.SYMBOL ?
         this.currencyFormats.standard(bundle) : this.currencyFormats.accounting(bundle);
       const pattern = this.getNumberPattern(raw, n.isNegative());
-      const formatMode = orDefault(options.formatMode, NumberFormatMode.SIGNIFICANT_MAXFRAC);
-      const ctx = new NumberContext(options, formatMode, fractions.digits);
+
+      // Adjust number using pattern and options, then render.
+      const ctx = new NumberContext(options, NumberFormatMode.DEFAULT, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
-      return renderer.render(n, pattern, params, symbol, '', options.group === true, ctx.minInt);
+      const symbol = this.Currencies(code as CurrencyType).symbol(bundle, width);
+      return renderer.render(n, pattern, params, symbol, '', options.group, ctx.minInt);
     }
     }
 
@@ -153,120 +298,3 @@ export class NumbersInternal {
 }
 
 const orDefault = <T>(v: T | undefined, alt: T): T => v === undefined ? alt : v;
-
-export interface Renderer<T> {
-  render(n: Decimal, pattern: NumberPattern,
-    params: NumberParams, currency: string, percent: string, group: boolean, minInt: number): T;
-  wrap(internal: WrapperInternal, pattern: string, ...args: T[]): T;
-  part(type: string, value: string): T;
-  empty(): T;
-}
-
-/**
- * Renders each node in the NumberPattern to a string.
- */
-export class StringRenderer implements Renderer<string> {
-  render(n: Decimal, pattern: NumberPattern,
-    params: NumberParams, currency: string, percent: string, group: boolean, minInt: number): string {
-
-    let s = '';
-    for (const node of pattern.nodes) {
-      if (typeof node === 'string') {
-        s += node;
-      } else {
-        switch (node) {
-        case NumberField.CURRENCY:
-          s += currency;
-          break;
-
-        case NumberField.MINUS:
-          s += params.symbols.minusSign;
-          break;
-
-        case NumberField.NUMBER:
-          s += n.format(
-            params.symbols.decimal,
-            group ? params.symbols.group : '',
-            minInt,
-            params.minimumGroupingDigits,
-            pattern.priGroup,
-            pattern.secGroup
-          );
-          break;
-
-        case NumberField.PERCENT:
-          s += percent;
-          break;
-        }
-      }
-    }
-    return s;
-  }
-
-  wrap(internal: WrapperInternal, pattern: string, ...args: string[]): string {
-    return internal.format(pattern, args);
-  }
-
-  part(type: string, value: string): string {
-    return value;
-  }
-
-  empty(): string {
-    return '';
-  }
-}
-
-export class PartsRenderer implements Renderer<Part[]> {
-  render(n: Decimal, pattern: NumberPattern,
-    params: NumberParams, currency: string, percent: string, group: boolean, minInt: number): Part[] {
-
-    let r: Part[] = [];
-      for (const node of pattern.nodes) {
-        if (typeof node === 'string') {
-          r.push({ type: 'literal', value: node });
-        } else {
-          switch (node) {
-          case NumberField.CURRENCY:
-            r.push({ type: 'currency', value: currency });
-            break;
-
-          case NumberField.MINUS:
-            r.push({ type: 'minus', value: params.symbols.minusSign });
-            break;
-
-          case NumberField.NUMBER:
-            r = r.concat(n.formatParts(
-              params.symbols.decimal,
-              group ? params.symbols.group : '',
-              minInt,
-              params.minimumGroupingDigits,
-              pattern.priGroup,
-              pattern.secGroup
-            ));
-            break;
-
-          case NumberField.PERCENT:
-            r.push({ type: 'percent', value: percent });
-            break;
-          }
-        }
-      }
-    return r;
-  }
-
-  wrap(internal: WrapperInternal, pattern: string, ...args: Part[][]): Part[] {
-    return internal.formatParts(pattern, args);
-  }
-
-  part(type: string, value: string): Part[] {
-    return [{ type, value }];
-  }
-
-  empty(): Part[] {
-    return [];
-  }
-}
-
-export const STRING_RENDERER = new StringRenderer();
-
-export const PARTS_RENDERER = new PartsRenderer();

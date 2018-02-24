@@ -75,10 +75,14 @@ export enum CurrencySymbolWidth {
   NARROW = 'narrow'
 }
 
-export type CurrencyFormatStyleType = 'symbol' | 'accounting' | 'code' | 'name' | 'short';
+export type DecimalFormatStyleType =
+  'decimal' | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled' | 'short' | 'long';
+
+export type CurrencyFormatStyleType =
+  'symbol' | 'accounting' | 'code' | 'name' | 'short';
 
 export interface DecimalFormatOptions extends NumberFormatOptions {
-  style?: DecimalFormatStyle;
+  style?: DecimalFormatStyleType;
 }
 
 export interface CurrencyFormatOptions extends NumberFormatOptions {
