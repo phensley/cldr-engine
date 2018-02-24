@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-core",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "Core library for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -20,7 +20,7 @@
     "lib/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "^0.1.19"
+    "@phensley/cldr-schema": "^0.1.20"
   },
   "jest": {
     "collectCoverageFrom": [
