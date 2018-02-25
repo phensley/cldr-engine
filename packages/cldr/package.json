@@ -31,11 +31,6 @@
     "@phensley/cldr-compiler": "^0.1.21"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "**/src/**/*.ts",
-      "!**/src/**/*.d.ts",
-      "!**/src/cli/*"
-    ],
     "moduleFileExtensions": [
       "js",
       "ts",
@@ -45,7 +40,7 @@
       "**/__tests__/**/*.test.ts"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>../..//node_modules/ts-jest/preprocessor.js"
+      "^.+\\.(ts|tsx)$": "<rootDir>../../node_modules/ts-jest/preprocessor.js"
     }
   }
 }

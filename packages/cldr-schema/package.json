@@ -20,15 +20,6 @@
     "lib/"
   ],
   "jest": {
-    "collectCoverageFrom": [
-      "**/src/**/*.ts",
-      "!**/src/**/*.d.ts",
-      "!**/src/cli/*"
-    ],
-    "coverageReporters": [
-      "json",
-      "lcov"
-    ],
     "moduleFileExtensions": [
       "js",
       "ts",
@@ -38,7 +29,7 @@
       "**/__tests__/**/*.test.ts"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>../..//node_modules/ts-jest/preprocessor.js"
+      "^.+\\.(ts|tsx)$": "<rootDir>../../node_modules/ts-jest/preprocessor.js"
     }
   }
 }
