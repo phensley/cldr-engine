@@ -5,6 +5,10 @@ const zlib = require('zlib');
 const EXT = '.json.gz';
 
 const root = join(__dirname, '..', 'packs');
+if (!fs.existsSync(root)) {
+  fs.mkdirSync(root);
+}
+
 const packs = fs.readdirSync(root)
   .filter(n => n.endsWith(EXT))
   .map(n => join(root, n));

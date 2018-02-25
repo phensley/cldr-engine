@@ -36,7 +36,6 @@
       "!**/src/**/*.d.ts",
       "!**/src/cli/*"
     ],
-    "mapCoverage": true,
     "moduleFileExtensions": [
       "js",
       "ts",

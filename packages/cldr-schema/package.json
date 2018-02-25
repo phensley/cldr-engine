@@ -29,7 +29,6 @@
       "json",
       "lcov"
     ],
-    "mapCoverage": true,
     "moduleFileExtensions": [
       "js",
       "ts",
