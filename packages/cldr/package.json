@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Internationalization in Typescript with Unicode CLDR, batteries included",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -25,10 +25,10 @@
     "scripts/"
   ],
   "dependencies": {
-    "@phensley/cldr-core": "^0.1.21"
+    "@phensley/cldr-core": "^0.1.22"
   },
   "devDependencies": {
-    "@phensley/cldr-compiler": "^0.1.21"
+    "@phensley/cldr-compiler": "^0.1.22"
   },
   "jest": {
     "moduleFileExtensions": [
