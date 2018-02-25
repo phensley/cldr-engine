@@ -1,4 +1,4 @@
-import { makeEnum, makeKeyedEnum } from '../../src/types/enum';
+import { makeEnum } from '../../src/types/enum';
 
 test('basics', () => {
   const [ Foo, FooValues, FooIndex ] = makeEnum([

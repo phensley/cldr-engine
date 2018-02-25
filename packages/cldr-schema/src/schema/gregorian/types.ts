@@ -1,6 +1,4 @@
-import { FieldArrow, FieldMapArrow, FieldMapIndexedArrow, ScopeArrow } from '../arrows';
-
-import { Alt } from '../enums';
+import { FieldArrow, FieldMapArrow, ScopeArrow } from '../arrows';
 
 import {
   AvailableFormatType,
@@ -11,7 +9,6 @@ import {
 
 import {
   DateTimeFieldType,
-  DayPeriodsFormat,
   DayPeriodsFormats,
   FormatWidthType,
   QuartersFormats,

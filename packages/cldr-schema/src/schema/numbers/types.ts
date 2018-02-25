@@ -1,4 +1,4 @@
-import { DigitsArrow, DivisorArrow, FieldArrow, FieldMapArrow, FieldIndexedArrow, ObjectArrow } from '../arrows';
+import { DigitsArrow, DivisorArrow, FieldArrow, FieldIndexedArrow, ObjectArrow } from '../arrows';
 import { Plural } from '../enums';
 
 export interface CurrencySpacing {

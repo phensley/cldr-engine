@@ -1,4 +1,4 @@
-import { makeEnum, makeKeyedEnum } from '../../types';
+import { makeKeyedEnum } from '../../types';
 
 // Enums common to all calendars
 

@@ -1,8 +1,7 @@
 import { Decimal, RoundingMode } from '../../../src/types/numbers';
-import { DivMod, divide } from '../../../src/types/numbers/math';
+import { DivMod } from '../../../src/types/numbers/math';
 
 const parse = (s: string) => new Decimal(s);
-const parsedata = (s: string) => (new Decimal(s) as any).data;
 const cmp = (u: string, v: string, abs: boolean = false) => parse(u).compare(parse(v), abs);
 const precision = (u: string) => parse(u).precision();
 const scale = (u: string) => parse(u).scale();

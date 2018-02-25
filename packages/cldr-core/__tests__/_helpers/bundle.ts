@@ -7,7 +7,6 @@ import * as zlib from 'zlib';
 import { Bundle } from '@phensley/cldr-schema';
 import { LanguageResolver } from '../../src/locale/resolver';
 import { Pack } from '../../src/resource/pack';
-import { SchemaBuilder } from '../../src/schema';
 
 /**
  * Load a resource bundle for a given language. If resource file does
@@ -24,7 +23,7 @@ export const languageBundle = (tag: string): Bundle => {
   if (!fs.existsSync(path)) {
     const node = process.argv[0];
     const script = join(__dirname, '..', '..', '..', 'cldr-compiler', 'bin', 'compiler.js');
-    const out = child.execSync(`${node} ${script} pack -o ${scratch} -l ${language} -z`);
+    child.execSync(`${node} ${script} pack -o ${scratch} -l ${language} -z`);
   }
   const compressed = fs.readFileSync(path);
   const raw = zlib.gunzipSync(compressed).toString('utf-8');

@@ -9,10 +9,9 @@
     "build:watch": "lerna run build:watch --parallel",
     "clean": "lerna run clean && rimraf ./coverage && jest --clearCache",
     "clean:full": "yarn clean && rimraf ./node_modules",
-    "link": "lerna exec yarn link",
     "lint": "lerna run lint",
     "release": "lerna run clean && lerna run build && lerna publish --force-publish=*",
-    "test": "rimraf ./coverage && jest --coverage",
+    "test": "rimraf ./coverage && jest --coverage --verbose",
     "test:watch": "jest --watch"
   },
   "dependencies": {

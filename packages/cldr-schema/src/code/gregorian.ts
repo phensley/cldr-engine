@@ -8,7 +8,6 @@ import {
   FieldWidthValues,
   FormatWidthValues,
   IntervalFormatValues,
-  PluralValues,
   QuarterValues,
   MonthValues,
   WeekdayValues,

@@ -9,7 +9,6 @@ import {
   MonthType,
   WeekdayType,
   EraType,
-  FormatWidth,
   FormatWidthType
 } from '@phensley/cldr-schema';
 

@@ -8,7 +8,7 @@ import { TERRITORIES } from './territories';
 import { TIME_ZONE_NAMES } from './timezones';
 import { UNITS } from './units';
 
-export const ORIGIN = origin([
+export const ORIGIN: Origin = origin([
   NUMBERS,
   GREGORIAN,
   CURRENCIES,

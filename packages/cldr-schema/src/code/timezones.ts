@@ -1,4 +1,4 @@
-import { Choice, Scope, field, scope, scopemap } from './instructions';
+import { Scope, field, scope, scopemap } from './instructions';
 import { MetaZoneValues, TimeZoneValues } from '../schema/timezones';
 
 const metaZoneFormat = (n: string) => scope(n, n, [

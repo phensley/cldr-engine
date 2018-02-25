@@ -23,7 +23,6 @@ import {
 } from '@phensley/cldr-schema';
 
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
-import { WrapperNode, parseWrapperPattern } from '../../parsing/patterns/wrapper';
 import { WrapperInternal } from '../wrapper';
 import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';

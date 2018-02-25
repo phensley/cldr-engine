@@ -1,5 +1,4 @@
 import {
-  LanguageTag,
   LanguageResolver,
   parseLanguageTag,
 } from '../../src/locale';

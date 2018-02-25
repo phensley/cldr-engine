@@ -1,6 +1,3 @@
-import { Choice } from '../code';
-import { Plural } from './enums';
-
 export type OffsetMap = { [x: string]: number };
 export type OffsetsMap = { [x: string]: number[] };
 export type KeyIndexMap = [string, number][];

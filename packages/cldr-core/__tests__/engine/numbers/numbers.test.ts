@@ -1,4 +1,4 @@
-import { Plural, CurrencyType } from '@phensley/cldr-schema';
+import { CurrencyType } from '@phensley/cldr-schema';
 import { languageBundle } from '../../_helpers/bundle';
 import { buildSchema } from '../../../src/schema';
 import {
