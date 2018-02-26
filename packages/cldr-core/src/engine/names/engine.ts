@@ -16,6 +16,7 @@ export class NamesEngine {
 
   getTerritoryDisplayName(code: TerritoryType | string, type?: string): string {
     const alt = type === 'short' ? Alt.SHORT : type === 'variant' ? Alt.VARIANT : Alt.NONE;
-    return this.internal.getTerritoryDisplayName(this.bundle, code, alt);
+    const name = this.internal.getTerritoryDisplayName(this.bundle, code, alt);
+    return name !== '' ? name : this.internal.getTerritoryDisplayName(this.bundle, code, Alt.NONE);
   }
 }
