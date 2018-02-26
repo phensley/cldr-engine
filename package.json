@@ -4,7 +4,7 @@
   "author": "Patrick Hensley <pathensley@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "bench": "lerna run --concurrency=1 bench",
+    "bench": "lerna run --stream --concurrency=1 bench",
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "build:watch": "lerna run build:watch --parallel",
