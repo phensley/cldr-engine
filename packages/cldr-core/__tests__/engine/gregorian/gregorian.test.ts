@@ -1,22 +1,15 @@
-import { languageBundle } from '../../_helpers/bundle';
+import { EN, EN_GB, ES, ES_419, FR, LT, SR, ZH } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
-import { GregorianEngine, GregorianInternal } from '../../../src/engine/gregorian';
+import { GregorianEngine, GregorianInternal, WrapperInternal } from '../../../src/engine';
 import { ZonedDateTime } from '../../../src/types/datetime';
 
-const EN = languageBundle('en');
-const EN_GB = languageBundle('en-GB');
-const ES = languageBundle('es');
-const ES_419 = languageBundle('es-419');
-const FR = languageBundle('fr');
-const LT = languageBundle('lt');
-const SR = languageBundle('sr');
-const ZH = languageBundle('zh');
+const SCHEMA = buildSchema();
+const INTERNAL = new GregorianInternal(SCHEMA, new WrapperInternal());
 
-const INTERNAL = new GregorianInternal(buildSchema());
-
+const DAY = 86400000;
 const LOS_ANGELES = 'America/Los_Angeles';
 const MARCH_11_2018 = new ZonedDateTime(1520751625000, LOS_ANGELES);
-const MARCH_14_2018 = new ZonedDateTime(1520751625000 + (86400000 * 3), LOS_ANGELES);
+const MARCH_14_2018 = new ZonedDateTime(1520751625000 + (DAY * 3), LOS_ANGELES);
 
 test('basics', () => {
   let formatter = new GregorianEngine(INTERNAL, EN);

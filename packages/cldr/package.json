@@ -13,11 +13,12 @@
     "build:packs": "cldr-compiler pack -o ./packs -z",
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib ./packs",
-    "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache",
+    "coverage": "jest --coverage --runInBand --no-cache",
     "install": "node ./scripts/extract.js",
-    "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
+    "lint": "tslint -p ./tsconfig.json",
+    "prepublish": "yarn build",
     "test": "jest",
-    "test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
+    "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "lib/",
@@ -28,7 +29,17 @@
     "@phensley/cldr-core": "^0.1.22"
   },
   "devDependencies": {
-    "@phensley/cldr-compiler": "^0.1.22"
+    "@phensley/cldr-compiler": "^0.1.22",
+    "@types/jest": "^22.1.3",
+    "beautify-benchmark": "^0.2.4",
+    "benchmark": "^2.1.4",
+    "chalk": "^2.3.1",
+    "jest": "^22.4.2",
+    "rimraf": "^2.6.2",
+    "tslint": "5.9.1",
+    "tslint-no-circular-imports": "^0.2.1",
+    "ts-node": "4.1.0",
+    "typescript": "~2.6.2"
   },
   "jest": {
     "moduleFileExtensions": [

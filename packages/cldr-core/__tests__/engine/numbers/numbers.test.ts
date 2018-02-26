@@ -1,5 +1,5 @@
 import { CurrencyType } from '@phensley/cldr-schema';
-import { languageBundle } from '../../_helpers/bundle';
+import { EN, EN_GB, ES_419, FR, DE, KM } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import {
   CurrencyFormatOptions,
@@ -9,13 +9,6 @@ import {
   NumbersInternal,
   WrapperInternal
 } from '../../../src/engine';
-
-const EN = languageBundle('en');
-const EN_GB = languageBundle('en-GB');
-const ES_419 = languageBundle('es-419');
-const FR = languageBundle('fr');
-const DE = languageBundle('de');
-const KM = languageBundle('km');
 
 const INTERNAL = new NumbersInternal(buildSchema(), new WrapperInternal());
 

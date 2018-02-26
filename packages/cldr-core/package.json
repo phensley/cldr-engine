@@ -8,19 +8,32 @@
   "license": "MIT",
   "repository": {},
   "scripts": {
+    "bench": "ts-node __benchmarks__/",
     "build": "tsc -p ./tsconfig.build.json",
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib ./scratch",
-    "coverage": "../../node_modules/.bin/jest --coverage --runInBand --no-cache --coverageReporters=html",
-    "lint": "../../node_modules/.bin/tslint -p ./tsconfig.json",
+    "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
+    "lint": "tslint -p ./tsconfig.json",
     "prepublish": "yarn build",
-    "test:watch": "../../node_modules/.bin/jest --watch --coverage --coverageReporters=html"
+    "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "lib/"
   ],
   "dependencies": {
     "@phensley/cldr-schema": "^0.1.22"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.3",
+    "beautify-benchmark": "^0.2.4",
+    "benchmark": "^2.1.4",
+    "chalk": "^2.3.1",
+    "jest": "^22.4.2",
+    "rimraf": "^2.6.2",
+    "tslint": "5.9.1",
+    "tslint-no-circular-imports": "^0.2.1",
+    "ts-node": "4.1.0",
+    "typescript": "~2.6.2"
   },
   "jest": {
     "moduleFileExtensions": [
