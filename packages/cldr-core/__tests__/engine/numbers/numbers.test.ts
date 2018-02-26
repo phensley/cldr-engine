@@ -18,10 +18,58 @@ test('decimals', () => {
   let actual = formatter.formatDecimal('1.234', opts);
   expect(actual).toEqual('001.23400');
 
+  actual = formatter.formatDecimal('1.2', { style: 'percent' });
+
   opts.group = true;
   formatter = new NumbersEngine(INTERNAL, DE);
   actual = formatter.formatDecimal('12345.234', opts);
   expect(actual).toEqual('12.345,23400');
+});
+
+test('decimals short', () => {
+  const formatter = new NumbersEngine(INTERNAL, EN);
+  let actual: string;
+
+  actual = formatter.formatDecimal('1000000000', { style: 'short' });
+  expect(actual).toEqual('1B');
+
+  actual = formatter.formatDecimal('1000000000000', { style: 'short' });
+  expect(actual).toEqual('1T');
+
+  actual = formatter.formatDecimal('10000000000000', { style: 'short' });
+  expect(actual).toEqual('10T');
+
+  actual = formatter.formatDecimal('100000000000000', { style: 'short' });
+  expect(actual).toEqual('100T');
+
+  actual = formatter.formatDecimal('1000000000000000', { style: 'short', group: true });
+  expect(actual).toEqual('1,000T');
+
+  actual = formatter.formatDecimal('10000000000000000', { style: 'short', group: true });
+  expect(actual).toEqual('10,000T');
+});
+
+test('decimals long', () => {
+  const formatter = new NumbersEngine(INTERNAL, EN);
+  let actual: string;
+
+  actual = formatter.formatDecimal('1000000000', { style: 'long' });
+  expect(actual).toEqual('1 billion');
+
+  actual = formatter.formatDecimal('1000000000000', { style: 'long' });
+  expect(actual).toEqual('1 trillion');
+
+  actual = formatter.formatDecimal('10000000000000', { style: 'long' });
+  expect(actual).toEqual('10 trillion');
+
+  actual = formatter.formatDecimal('100000000000000', { style: 'long' });
+  expect(actual).toEqual('100 trillion');
+
+  actual = formatter.formatDecimal('1000000000000000', { style: 'long', group: true });
+  expect(actual).toEqual('1,000 trillion');
+
+  actual = formatter.formatDecimal('10000000000000000', { style: 'long', group: true });
+  expect(actual).toEqual('10,000 trillion');
 });
 
 test('decimal percents', () => {

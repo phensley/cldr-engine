@@ -391,6 +391,7 @@ export class Decimal {
       for (j = 0; j < u.data.length - q; j++) {
         w.data[j] = u.data[q + j];
       }
+      w.exp += shift;
       return w.trim();
     }
 

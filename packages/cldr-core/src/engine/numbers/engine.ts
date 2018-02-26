@@ -27,9 +27,13 @@ export class NumbersEngine {
     protected readonly bundle: Bundle) {
 
     const currencySpacing = internal.root.Numbers.currencyFormats.currencySpacing;
+    const standardRaw = internal.root.Numbers.decimalFormats.standard(bundle);
+    const standard = internal.getNumberPattern(standardRaw, false);
     this.params = {
       symbols: internal.root.Numbers.symbols(bundle),
       minimumGroupingDigits: Number(internal.root.Numbers.minimumGroupingDigits(bundle)),
+      primaryGroupingSize: standard.priGroup,
+      secondaryGroupingSize: standard.secGroup,
       beforeCurrency: currencySpacing.beforeCurrency(bundle),
       afterCurrency: currencySpacing.afterCurrency(bundle)
     };

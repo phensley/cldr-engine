@@ -319,7 +319,7 @@ test('shift right', () => {
   expect(shr('155.578', 4, m)).toEqual(parse('16e1'));
   expect(shr('155.578', 5, m)).toEqual(parse('2e2'));
   expect(shr('155.578', 6, m)).toEqual(parse('0e3'));
-  expect(shr('155.578', 7, m)).toEqual(parse('0e-3'));
+  expect(shr('155.578', 7, m)).toEqual(parse('0e4'));
 
   expect(shr('1.545', 1, m)).toEqual(parse('1.54'));
   expect(shr('1.545', 2, m)).toEqual(parse('1.5'));
@@ -341,6 +341,10 @@ test('shift right', () => {
 
   expect(shr('9', 1, m)).toEqual(parse('1e1'));
   expect(shr('9', 2, m)).toEqual(parse('0e2'));
+
+  expect(shr('100000000000000', 12, m)).toEqual(parse('100e12'));
+  expect(shr('100000000000000', 13, m)).toEqual(parse('10e13'));
+  expect(shr('100000000000000', 14, m)).toEqual(parse('1e14'));
 });
 
 test('shift right rounding modes', () => {

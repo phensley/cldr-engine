@@ -4,6 +4,8 @@ import { RoundingMode } from '../../types/numbers';
 export interface NumberParams {
   symbols: NumberSymbols;
   minimumGroupingDigits: number;
+  primaryGroupingSize: number;
+  secondaryGroupingSize: number;
   beforeCurrency: CurrencySpacing;
   afterCurrency: CurrencySpacing;
 }

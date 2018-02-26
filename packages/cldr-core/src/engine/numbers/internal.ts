@@ -220,6 +220,10 @@ export class NumbersInternal {
     return this.Currencies(code as CurrencyType).pluralName(bundle, plural);
   }
 
+  getNumberPattern(raw: string, negative: boolean): NumberPattern {
+    return this.numberPatternCache.get(raw)[negative ? 1 : 0];
+  }
+
   /**
    * Setup for a compact pattern. Returns the adjusted number and digits for
    * selecting the pluralized pattern.
@@ -272,10 +276,6 @@ export class NumbersInternal {
     }
 
     return [q2, ndigits];
-  }
-
-  protected getNumberPattern(raw: string, negative: boolean): NumberPattern {
-    return this.numberPatternCache.get(raw)[negative ? 1 : 0];
   }
 
 }
