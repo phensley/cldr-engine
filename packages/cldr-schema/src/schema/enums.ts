@@ -26,6 +26,8 @@ export const pluralCategory = (s: string): Plural => {
   }
 };
 
+export const pluralString = (c: Plural): string => PluralValues[c] || 'other';
+
 export type PluralType = 'other' | 'zero' | 'one' | 'two' | 'few' | 'many';
 
 export enum Alt {

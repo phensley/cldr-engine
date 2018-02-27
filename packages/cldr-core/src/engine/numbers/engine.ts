@@ -1,15 +1,17 @@
 import {
+  pluralCategory,
+  pluralString,
   Alt,
   Bundle,
   CurrencyType,
   NumberSymbols,
   Plural,
-  pluralCategory,
   PluralValues
 } from '@phensley/cldr-schema';
 
 import { NumbersInternal } from './internal';
 import { CurrencyFormatOptions, CurrencySymbolWidthType, DecimalFormatOptions, NumberParams } from './options';
+import { pluralCardinal, pluralOrdinal } from '../plurals';
 import { STRING_RENDERER, PARTS_RENDERER } from './render';
 import { Decimal, Part } from '../../types';
 
@@ -62,6 +64,18 @@ export class NumbersEngine {
     const category = pluralCategory(plural);
     const name = this.internal.getCurrencyPluralName(this.bundle, code, category);
     return name !== '' ? name : this.internal.getCurrencyPluralName(this.bundle, code, Plural.OTHER);
+  }
+
+  getPluralCardinal(n: NumberArg): string {
+    const d = this.toDecimal(n);
+    const cat = pluralCardinal(this.bundle.language(), d.operands());
+    return pluralString(cat);
+  }
+
+  getPluralOrdinal(n: NumberArg): string {
+    const d = this.toDecimal(n);
+    const cat = pluralOrdinal(this.bundle.language(), d.operands());
+    return pluralString(cat);
   }
 
   formatDecimal(n: NumberArg, options: DecimalFormatOptions): string {
