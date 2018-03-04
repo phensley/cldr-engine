@@ -271,6 +271,16 @@ const Units = {
 };
 
 /**
+ * Week data.
+ */
+const WeekData = {
+  minDays: get(['weekData', 'minDays']),
+  firstDay: get(['weekData', 'firstDay']),
+  weekendStart: get(['weekData', 'weekendStart']),
+  weekendEnd: get(['weekData', 'weekendEnd'])
+};
+
+/**
  * Iterate over keys in the group, populating an object with the values
  * retrieved by evaluating each lens property.
  */
@@ -335,6 +345,7 @@ export const getSupplemental = () => {
   return {
     Aliases: access(Aliases, 'aliases'),
     MetaZones: access(MetaZones, 'metaZones'),
+    WeekData: access(WeekData, 'weekData'),
 
     ...access({ Cardinals: get(['plurals-type-cardinal']) }, 'plurals'),
     ...access({ CurrencyFractions: get(['currencyData', 'fractions']) }, 'currencyData'),

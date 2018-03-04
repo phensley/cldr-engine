@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import { Suite } from 'benchmark';
 import * as beautify from 'beautify-benchmark';
 import chalk from 'chalk';
+import * as process from 'process';
 
 /**
  * Constructs a benchmark suite, setting a few lifecycle handlers.

@@ -32,21 +32,23 @@ export class ZonedDateTime {
   // cache for iso week-based fields
   private _isoLocal: number[];
 
-  constructor(date: Date | number, zoneId: string) {
-    this._epoch = +date;
-    this._utc = new Date(this._epoch);
-    this._zoneId = substituteZoneAlias(zoneId);
+  constructor(date: number | Date | ZonedDateTime, zoneId: string = 'UTC') {
+    if (typeof +date === 'number') {
+      this._epoch = +date;
+      this._utc = new Date(this._epoch);
+      this._zoneId = substituteZoneAlias(zoneId);
 
-    const info = getZoneInfo(zoneId);
-    let index = binarySearch(info.untils, this._epoch);
-    this._dst = encoding.bitarrayGet(info.dsts, index);
+      const info = getZoneInfo(zoneId);
+      let index = binarySearch(info.untils, this._epoch);
+      this._dst = encoding.bitarrayGet(info.dsts, index);
 
-    const len = info.untils.length;
-    this._offset = index < len ? info.offsets[index] : info.offsets[len - 1];
-    this._local = new Date(this._epoch - (this._offset * 60000));
+      const len = info.untils.length;
+      this._offset = index < len ? info.offsets[index] : info.offsets[len - 1];
+      this._local = new Date(this._epoch - (this._offset * 60000));
 
-    index = binarySearch(info.metazoneUntils, this._epoch);
-    this._metaZoneId = info.metazoneIds[index];
+      index = binarySearch(info.metazoneUntils, this._epoch);
+      this._metaZoneId = info.metazoneIds[index];
+    }
   }
 
   /**

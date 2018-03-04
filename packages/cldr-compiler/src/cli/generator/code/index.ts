@@ -12,6 +12,7 @@ import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
 import { getTerritories } from './territories';
 import { getUnits } from './units';
+import { getWeekData } from './weekdata';
 import { getZones } from './zones';
 
 const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
@@ -24,11 +25,13 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   subtags: getSubtags,
   territories: getTerritories,
   units: getUnits,
+  weekdata: getWeekData,
   zones: getZones,
 };
 
 const DATA_FILES = [
-  'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals', 'subtags', 'symbols', 'zonedst'
+  'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals', 'subtags', 'symbols',
+  'weekdata', 'zonedst'
 ];
 
 const load = (): any => {

@@ -3,13 +3,14 @@ import * as yargs from 'yargs';
 import { join } from 'path';
 import { getSupplemental } from '../../../cldr';
 
+import { getCurrencyInfo } from './currency';
 import { getMatching } from './matching';
 import { getMetazones } from './metazones';
 import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
 import { getSymbols } from './symbols';
 import { getZoneDST } from './zonedst';
-import { getCurrencyInfo } from './currency';
+import { getWeekData } from './weekdata';
 
 const supplemental = getSupplemental();
 
@@ -24,6 +25,7 @@ const OUTPUTS: { [x: string]: () => string } = {
   subtags: getSubtags,
   symbols: getSymbols,
   zonedst: getZoneDST,
+  weekdata: getWeekData,
 };
 
 const save = (name: string, data: any): void => {

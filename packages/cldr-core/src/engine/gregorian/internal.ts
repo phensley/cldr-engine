@@ -1,4 +1,3 @@
-import { ZonedDateTime } from '../../types/datetime';
 import {
   Alt,
   Bundle,
@@ -18,6 +17,7 @@ import {
   Schema,
   TimeZoneNames,
   WeekdayType,
+  WeekdaysFormat,
   WeekdaysFormats,
   WeekdayValues,
 } from '@phensley/cldr-schema';
@@ -26,8 +26,8 @@ import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../p
 import { WrapperInternal } from '../wrapper';
 import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';
-import { Part } from '../../types';
-
+import { Part, ZonedDateTime } from '../../types';
+import { weekFirstDay } from './autogen.weekdata';
 /**
  * Function that formats a given date field.
  */
@@ -82,7 +82,7 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     'g': { type: '', impl: this.modifiedJulianDay },
     'E': { type: 'weekday', impl: this.weekday },
     'e': { type: 'weekday', impl: this.weekdayLocal },
-    'c': { type: 'weekday', impl: this.weekdayLocal },
+    'c': { type: 'weekday', impl: this.weekdayLocalStandalone },
     'a': { type: 'dayperiod', impl: this.dayPeriod },
     'b': { type: 'dayperiod', impl: this.dayPeriodExt },
     'B': { type: 'dayperiod', impl: this.dayPeriodFlex },
@@ -332,7 +332,29 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   }
 
   protected weekday(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const format = this.weekdays.format;
+    return this._weekday(bundle, date, field, width, this.weekdays.format);
+  }
+
+  protected weekdayLocal(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    if (width > 2) {
+      return this._weekday(bundle, date, field, width, this.weekdays.format);
+    }
+    const weekday = this._weekdayNumeric(bundle, date);
+    return width === 2 ? `0${weekday}` : `${weekday}`;
+  }
+
+  protected weekdayLocalStandalone(
+    bundle: Bundle, date: ZonedDateTime, field: string, width: number
+  ): string {
+    if (width > 2) {
+      return this._weekday(bundle, date, field, width, this.weekdays.standAlone);
+    }
+    return `${this._weekdayNumeric(bundle, date)}`;
+  }
+
+  protected _weekday(
+    bundle: Bundle, date: ZonedDateTime, field: string, width: number, format: WeekdaysFormat): string {
+
     const index = date.getDayOfWeek() % 7;
     const weekday = WeekdayValues[index] as WeekdayType;
     switch (width) {
@@ -347,9 +369,15 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     }
   }
 
-  protected weekdayLocal(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    // TODO: need to add start of week day.
-    return '';
+  /**
+   * Convert ISO-8601 week number where mon=1 and sun=7. We adjust it using the
+   * locale's "first day of the week" which in the US is Sunday.
+   */
+  protected _weekdayNumeric(bundle: Bundle, date: ZonedDateTime): number {
+    const region = bundle.region();
+    const weekday = date.getDayOfWeek();
+    const firstDay = weekFirstDay[region] || weekFirstDay['001'];
+    return (7 - firstDay + weekday) % 7 + 1;
   }
 
   protected weekOfMonth(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
