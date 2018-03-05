@@ -20,6 +20,8 @@ const GROUP_NOOP: GroupFunc = (): void => {
 
 /**
  * Arbitrary precision decimal type.
+ *
+ * @alpha
  */
 export class Decimal {
 
@@ -447,6 +449,9 @@ export class Decimal {
     return formatter.render();
   }
 
+  /**
+   * Render this number to an array of parts.
+   */
   formatParts(
     decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): Part[] {
 
@@ -455,7 +460,10 @@ export class Decimal {
     return formatter.render();
   }
 
-  _format(
+  /**
+   * Low-level formatting of string and Part[] forms.
+   */
+  protected _format(
     formatter: Formatter<any>,
     decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): void {
     // Determine if grouping is enabled, and set the primary and
@@ -564,7 +572,7 @@ export class Decimal {
   }
 
   protected static fromRaw(sign: number, exp: number, data: number[]): Decimal {
-    return new Decimal({ sign, exp, data} as any as Decimal);
+    return new this({ sign, exp, data } as any as Decimal);
   }
 
   /**

@@ -118,6 +118,8 @@ export class PackScript {
 
 /**
  * Runtime resource pack manager.
+ *
+ * @alpha
  */
 export class Pack {
 

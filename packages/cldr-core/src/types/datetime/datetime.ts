@@ -18,6 +18,8 @@ const WEEKMS = 7 * 86400000;
 
 /**
  * A date-time object with a timezone identifier.
+ *
+ * @alpha
  */
 export class ZonedDateTime {
 

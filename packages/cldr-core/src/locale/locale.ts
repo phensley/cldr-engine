@@ -39,6 +39,8 @@ const canonicalize = (field: number, value?: string): string | undefined => {
 /**
  * Wrapper pairing an application's opaque locale identifier with a
  * parsed and resolved language tag object.
+ *
+ * @alpha
  */
 export interface Locale {
 
@@ -58,6 +60,8 @@ export interface Locale {
 /**
  * IETF BCP 47 language tag with static methods for parsing, adding likely
  * subtags, etc.
+ *
+ * @alpha
  */
 export class LanguageTag {
 

@@ -1,5 +1,8 @@
 import { Decimal, PI, E } from './decimal';
 
+/**
+ * Default Rational parser, to identify named constants.
+ */
 const parse = (s: string): Decimal => {
   switch (s.toLowerCase()) {
   case 'e':
@@ -11,6 +14,11 @@ const parse = (s: string): Decimal => {
   }
 };
 
+/**
+ * Arbitrary precision rational type.
+ *
+ * @alpha
+ */
 export class Rational {
 
   constructor(

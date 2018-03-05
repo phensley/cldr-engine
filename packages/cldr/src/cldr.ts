@@ -18,6 +18,11 @@ import {
 
 const SCHEMA = buildSchema();
 
+/**
+ * Interface exporting all functionality for a given locale.
+ *
+ * @alpha
+ */
 export interface Engine {
   readonly locale: Locale;
   readonly Gregorian: GregorianEngine;
@@ -27,6 +32,8 @@ export interface Engine {
 
 /**
  * Options to initialize the library.
+ *
+ * @alpha
  */
 export class CLDROptions {
   /**
@@ -52,7 +59,9 @@ export class CLDROptions {
 }
 
 /**
- * Initializes the library.
+ * Top-level entry point for the library.
+ *
+ * @alpha
  */
 export class CLDR {
 

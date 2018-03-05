@@ -73,6 +73,8 @@ export class LanguageMatch {
  *
  * Implementation of CLDR enhanced language matching:
  * http://www.unicode.org/reports/tr35/tr35.html#EnhancedLanguageMatching
+ *
+ * @alpha
  */
 export class LocaleMatcher {
 
