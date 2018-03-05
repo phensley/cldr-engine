@@ -14,4 +14,10 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 * No familiarity with CLDR structure is required for developers to use this library.
 * High performance.
 
-TODO: design document spelling out why these are useful goals and how they are accomplished.
+## License
+
+[MIT](LICENSE)
+
+## Affiliation
+
+This project is not affiliated with the [Unicode Inc.](https://unicode.org) or the [Unicode CLDR](http://cldr.unicode.org/) project.
