@@ -107,7 +107,7 @@ export class NumbersInternal {
       }
 
       // Select percent or permille symbol.
-      const symbol = style === DecimalFormatStyle.PERCENT || DecimalFormatStyle.PERCENT_SCALED ?
+      const symbol = (style === DecimalFormatStyle.PERCENT || style === DecimalFormatStyle.PERCENT_SCALED) ?
         params.symbols.percentSign : params.symbols.perMille;
 
       // Adjust number using pattern and options, then render.
