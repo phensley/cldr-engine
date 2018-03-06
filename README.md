@@ -2,6 +2,12 @@
 
 Internationalization in Typescript with Unicode CLDR, batteries included
 
+## Documentation
+
+This project is **currently in pre-ALPHA** and under active development, with the potential major changes to APIs before the initial release.
+
+[Project documentation](docs/index.md).
+
 ## Goals
 
 * Support a broad set of CLDR features in the browser "out of the box".
@@ -14,12 +20,6 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 * No familiarity with CLDR structure is required for developers to use this library.
 * High performance.
 * Enhance functionality with arbitrary precision decimal math.
-
-## Documentation
-
-This project is **currently in pre-ALPHA** and under active development, with the potential major changes to APIs before the initial release.
-
-[Project documentation](docs/index.md).
 
 ## License
 
