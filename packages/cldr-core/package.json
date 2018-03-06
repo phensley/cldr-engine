@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/phensley/cldr-engine"
 	},
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "bench": "ts-node __benchmarks__/",
     "build": "tsc -p ./tsconfig.build.json",
