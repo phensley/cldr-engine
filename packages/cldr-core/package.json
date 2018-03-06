@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Core library for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -9,7 +9,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/phensley/cldr-engine"
-	},
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -27,7 +27,7 @@
     "lib/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "^0.2.0"
+    "@phensley/cldr-schema": "^0.2.1"
   },
   "devDependencies": {
     "@types/jest": "^22.1.3",
