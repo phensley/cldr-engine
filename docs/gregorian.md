@@ -1,12 +1,17 @@
 # Gregorian
 
 ```typescript
-engine = cldr.get('en');
-engine.Gregorian.format(march5, { date: 'full' });
+import { ZonedDateTime } from '@phensley/cldr';
+
+// March 5, 2018 3:35:08 PM UTC
+const march5 = new ZonedDateTime(1520282108000, 'America/New_York');
+
+const EN = cldr.get('en');
+EN.Gregorian.format(march5, { date: 'full' });
 // > "Monday, March 5, 2018"
 
-const engine = cldr.get('es-419');
-engine.Gregorian.format(march5, { date: 'full' });
+const ES419 = cldr.get('es-419');
+ES419.Gregorian.format(march5, { date: 'full' });
 // > "lunes, 5 de marzo de 2018"
 ```
 
@@ -15,7 +20,7 @@ TODO: intervals
 ### Formatting as parts
 
 ```typescript
-engine.Gregorian.formatParts(march5, { date: 'full' });
+EN.Gregorian.formatParts(march5, { date: 'full' });
 ```
 
 Produces:
@@ -33,4 +38,3 @@ Produces:
 ```
 
 TODO: interval parts
-
