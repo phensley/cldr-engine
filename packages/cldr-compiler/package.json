@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-compiler",
-  "version": "0.1.22",
+  "version": "0.2.0",
   "description": "Compiler for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,8 +24,8 @@
     "lib/"
   ],
   "dependencies": {
-    "@phensley/cldr-core": "^0.1.22",
-    "@phensley/cldr-schema": "^0.1.22",
+    "@phensley/cldr-core": "^0.2.0",
+    "@phensley/cldr-schema": "^0.2.0",
     "@types/node": "8.5.8",
     "@types/prettier": "^1.9.0",
     "@types/yargs": "^10.0.1",
@@ -41,9 +41,9 @@
     "chalk": "^2.3.1",
     "jest": "^22.4.2",
     "rimraf": "^2.6.2",
+    "ts-node": "4.1.0",
     "tslint": "5.9.1",
     "tslint-no-circular-imports": "^0.2.1",
-    "ts-node": "4.1.0",
     "typescript": "~2.6.2"
   },
   "jest": {
