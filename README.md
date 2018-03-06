@@ -2,6 +2,18 @@
 
 Internationalization in Typescript with Unicode CLDR, batteries included
 
+## Install
+
+Install the [NPM package](https://www.npmjs.com/package/@phensley/cldr):
+
+```bash
+npm install --save @phensley/cldr
+
+# or
+
+yarn add @phensley/cldr
+```
+
 ## Documentation
 
 This project is **currently in pre-ALPHA** and under active development, with the potential major changes to APIs before the initial release.

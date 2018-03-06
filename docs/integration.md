@@ -4,10 +4,10 @@ Key goals for this project are ease-of-use and "batteries included". Adding `@ph
 
 ## Installing
 
-Add `@phensley/cldr` as a dependency. This will download the library and extract the resource packs.
+Add [@phensley/cldr](https://www.npmjs.com/package/@phensley/cldr) as a dependency. This will download the library and extract the resource packs.
 
 ```bash
-npm install @phensley/cldr
+npm install --save @phensley/cldr
 
 # or
 
@@ -49,8 +49,20 @@ Adding all world regions doesn't add much to the size of the compressed resource
 ```bash
 % du -sh node_modules/@phensley/cldr/packs/en.json.gz
 24K	node_modules/@phensley/cldr/packs/en.json.gz
-```
 
+% gunzip -c packages/cldr/packs/en.json.gz | fold -w 80
+{"version":"0.2.2","cldr":"32.0.1","language":"en","scripts":{"Latn":{"strings":
+".\tE\t,\t∞\t;\t-\tNaN\t‰\t%\t+\t×\t:\t1\t¤#,##0.00\t¤#,##0.00;(¤#,##0.00)\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t¤0K\t\t¤0K\t\t\t\t¤00K\t\t¤00K\t\t\t\t¤000K\t\t¤
+000K\t\t\t\t¤0M\t\t¤0M\t\t\t\t¤00M\t\t¤00M\t\t\t\t¤000M\t\t¤000M\t\t\t\t¤0B\t\t¤
+0B\t\t\t\t¤00B\t\t¤00B\t\t\t\t¤000B\t\t¤000B\t\t\t\t¤0T\t\t¤0T\t\t\t\t¤00T\t\t¤0
+0T\t\t\t\t¤000T\t\t¤000T\t\t\t\t0\t0\t0\t3\t3\t3\t6\t6\t6\t9\t9\t9\t12\t12\t12\t
+[:^S:]\t[:digit:]\t \t[:^S:]\t[:digit:]\t \t{0} {1}\t\t{0} {1}\t\t\t\t#,##0.###\
+t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0K\t\t0K\t\t\t\t00K\t\t00K\t\t\t\t000K\t\t0
+00K\t\t\t\t0M\t\t0M\t\t\t\t00M\t\t00M\t\t\t\t000M\t\t000M\t\t\t\t0B\t\t0B\t\t\t\
+t00B\t\t00B\t\t\t\t000B\t\t000B\t\t\t\t0T\t\t0T\t\t\t\t00T\t\t00T\t\t\t\t000T\t\
+.. snip ..
+```
 You can choose to copy the GZIP-compressed or uncompressed resource packs, depending on how your application is served at runtime, and whether your web server already does on-the-fly compression of JSON files.
 
 ## Important note
