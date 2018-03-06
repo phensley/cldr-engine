@@ -1,11 +1,10 @@
 import {
-  getRoundingMode,
   NumberFormatMode,
   NumberFormatModeType,
   NumberFormatOptions,
   RoundingModeType
 } from './options';
-import { Decimal, RoundingMode } from  '../../types/numbers';
+import { getRoundingMode, Decimal, RoundingMode } from  '../../types/numbers';
 import { NumberPattern } from '../../parsing/patterns/number';
 
 /**

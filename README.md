@@ -13,6 +13,7 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 * Provide type-safety, reducing programming errors.
 * No familiarity with CLDR structure is required for developers to use this library.
 * High performance.
+* Enhance functionality with arbitrary precision decimal math.
 
 ## Documentation
 

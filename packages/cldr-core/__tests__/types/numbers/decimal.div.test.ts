@@ -12,20 +12,20 @@ test('divide default', () => {
   expect(div('99799999002', '998')).toEqual(parse('99999999'));
 
   expect(div('10000000000', '99000000'))
-    .toEqual(parse('101.01010101'));
+    .toEqual(parse('101.010101010101010101010101'));
 
   expect(div('99899999001', '1199999999'))
-    .toEqual(parse('83.2499992369'));
+    .toEqual(parse('83.24999923687499936406249947'));
 
   expect(div('9999999999999', '55555555555'))
-    .toEqual(parse('180.00000000178'));
+    .toEqual(parse('180.00000000178200000001782'));
 
   expect(div('9999999999999999999999', '9999999999999999999'))
     .toEqual(parse('1000.0000000000000000999'));
 });
 
 test('divide half even', () => {
-  const halfEven = (p: number) => new MathContext(p, RoundingMode.HALF_EVEN);
+  const halfEven = (precision: number): MathContext => ({ precision, rounding: RoundingMode.HALF_EVEN });
 
   expect(div('2', '3', halfEven(0))).toEqual(parse('1'));
   expect(div('2', '3', halfEven(1))).toEqual(parse('0.7'));
@@ -63,25 +63,25 @@ test('divide half even', () => {
 test('divide decrements qhat', () => {
   // Cases that cause qhat to be decremented in D3
   expect(div('96441598043416655685', '13367828761276'))
-    .toEqual(parse('7214454.9250054136092'));
+    .toEqual(parse('7214454.92500541360919505766'));
 
   expect(div('35314321308673059375', '16403941393069'))
-    .toEqual(parse('2152794.89620671778312'));
+    .toEqual(parse('2152794.896206717783118193836'));
 
   expect(div('506806006102288', '46464220541015929'))
-    .toEqual(parse('0.0109074466374596544'));
+    .toEqual(parse('0.0109074466374596544269297722'));
 });
 
 test('divide add back', () => {
   // Cases that cause D6 to be executed.
   expect(div('888888888888888888888888888888888888888', '33333333000000420'))
-    .toEqual(parse('26666666933332999999993.30667079973345897'));
+    .toEqual(parse('26666666933332999999993.30667'));
 
   expect(div('88888888888888888888888888888888888', '17721038931014481'))
-    .toEqual(parse('5016008893999999985.89782878509794418'));
+    .toEqual(parse('5016008893999999985.897828785'));
 
   expect(div('66666666666666666666666666', '69969109701080089'))
-    .toEqual(parse('952801414.102279999999919229'));
+    .toEqual(parse('952801414.1022799999999192286'));
 });
 
 test('divide by zero', () => {

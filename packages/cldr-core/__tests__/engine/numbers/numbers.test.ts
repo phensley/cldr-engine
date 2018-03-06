@@ -89,7 +89,7 @@ test('decimal percents', () => {
   opts.style = 'permille';
   opts.minimumFractionDigits = 0;
   actual = engine.formatDecimal('-1.234', opts);
-  expect(actual).toEqual('-1234%');
+  expect(actual).toEqual('-1234‰');
 });
 
 test('decimal compact', () => {

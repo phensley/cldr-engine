@@ -21,30 +21,6 @@ export type NumberFormatModeType = 'default' | 'significant' | 'significant-maxf
 export type RoundingModeType =
   'up' | 'down' | 'ceiling' | 'floor' | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
 
-export const getRoundingMode = (mode: RoundingModeType | undefined, alt: RoundingModeType): RoundingMode => {
-  switch (mode === undefined ? alt : mode) {
-  case 'up':
-    return RoundingMode.UP;
-  case 'down':
-    return RoundingMode.DOWN;
-  case 'ceiling':
-    return RoundingMode.CEILING;
-  case 'floor':
-    return RoundingMode.FLOOR;
-  case 'half-up':
-    return RoundingMode.HALF_UP;
-  case 'half-down':
-    return RoundingMode.HALF_DOWN;
-  case '05up':
-    return RoundingMode.ZERO_FIVE_UP;
-  case 'truncate':
-    return RoundingMode.TRUNCATE;
-  case 'half-even':
-  default:
-    return RoundingMode.HALF_EVEN;
-  }
-};
-
 export interface NumberFormatOptions {
   formatMode?: NumberFormatModeType;
   round?: RoundingModeType;

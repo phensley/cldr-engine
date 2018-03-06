@@ -1,6 +1,6 @@
 # Documentation
 
-* [Integration](integration.md) and using @phensley/cldr
+* [Integration](integration.md) of @phensley/cldr into an application
 * [Locales](locale.md) parsing, resolving, distance-based matching
 * [Number](numbers.md) formatting to strings, parts, arbitrary precision
 * [Currency](currencies.md) formatting to strings, parts, arbitrary precision
@@ -9,7 +9,7 @@
 
 ### Types
 
-* [Arbitrary precision math](math.md) to any number of digits
+* [Arbitrary precision math](math.md)
 * [Date-time with timezone](datetime.md)
 
 #### Todo

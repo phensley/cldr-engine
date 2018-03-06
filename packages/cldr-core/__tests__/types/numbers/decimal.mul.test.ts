@@ -1,7 +1,8 @@
-import { Decimal } from '../../../src';
+import { Decimal, DecimalConstants, MathContext } from '../../../src';
 
 const parse = (s: string) => new Decimal(s);
-const mul = (u: string, v: string) => parse(u).multiply(parse(v));
+const mul = (u: string, v: string, c?: MathContext) =>
+  parse(u).multiply(parse(v), c);
 
 test('multiply', () => {
   expect(mul('1.234', '0')).toEqual(parse('0.000'));
@@ -28,5 +29,14 @@ test('multiply', () => {
   expect(mul('1.5', '-30.7')).toEqual(parse('-46.05'));
   expect(mul('-1.11111112', '7.35')).toEqual(parse('-8.1666667320'));
 
-  expect(mul('10203040506070809010', '-9.876543210')).toEqual(parse('-100770770431588612506.922322100'));
+  expect(mul('10203040506070809010', '-9.876543210')).toEqual(parse('-100770770431588612506.9223221'));
+});
+
+test('multiply context', () => {
+  const diameter = parse('8.8e26');
+  let circ = diameter.multiply(DecimalConstants.PI);
+  expect(circ).toEqual(parse('2764601535159018049847126177'));
+
+  circ = diameter.multiply(DecimalConstants.PI, { precision: 40 });
+  expect(circ).toEqual(parse('2764601535159018049847126177.285962538094'));
 });

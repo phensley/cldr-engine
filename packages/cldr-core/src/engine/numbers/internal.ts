@@ -19,7 +19,6 @@ import {
 import { Decimal, RoundingMode, Part } from '../../types';
 import { NumberContext } from './context';
 import {
-  getRoundingMode,
   CurrencyFormatOptions,
   CurrencyFormatStyle,
   CurrencySymbolWidth,

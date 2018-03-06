@@ -1,4 +1,4 @@
-import { Decimal, PI, E } from './decimal';
+import { Decimal, DecimalConstants } from './decimal';
 
 /**
  * Default Rational parser, to identify named constants.
@@ -6,9 +6,9 @@ import { Decimal, PI, E } from './decimal';
 const parse = (s: string): Decimal => {
   switch (s.toLowerCase()) {
   case 'e':
-    return E;
+    return DecimalConstants.E;
   case 'pi':
-    return PI;
+    return DecimalConstants.PI;
   default:
     return new Decimal(s);
   }

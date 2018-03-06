@@ -10,11 +10,33 @@ export enum RoundingMode {
   TRUNCATE
 }
 
-export class MathContext {
-  constructor(
-    readonly precision: number,
-    readonly roundingMode: RoundingMode
-  ) {}
+export const getRoundingMode = (mode: string | undefined, alt: string): RoundingMode => {
+  switch (mode === undefined ? alt : mode) {
+  case 'up':
+    return RoundingMode.UP;
+  case 'down':
+    return RoundingMode.DOWN;
+  case 'ceiling':
+    return RoundingMode.CEILING;
+  case 'floor':
+    return RoundingMode.FLOOR;
+  case 'half-up':
+    return RoundingMode.HALF_UP;
+  case 'half-down':
+    return RoundingMode.HALF_DOWN;
+  case '05up':
+    return RoundingMode.ZERO_FIVE_UP;
+  case 'truncate':
+    return RoundingMode.TRUNCATE;
+  case 'half-even':
+  default:
+    return RoundingMode.HALF_EVEN;
+  }
+};
+
+export interface MathContext {
+  precision: number;
+  rounding?: string | RoundingMode;
 }
 
 export const enum Constants {

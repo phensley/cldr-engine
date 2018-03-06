@@ -10,12 +10,31 @@ import {
   ParseFlags,
   POWERS10,
   RoundingMode,
-  MathContext
+  MathContext,
+  getRoundingMode
 } from './types';
 
 type GroupFunc = () => void;
 const GROUP_NOOP: GroupFunc = (): void => {
   // nothing
+};
+
+const DEFAULT_PRECISION = 28;
+
+export type DecimalArg = number | string | Decimal;
+
+const coerce = (n: DecimalArg): Decimal =>
+  typeof n === 'number' || typeof n === 'string' ? new Decimal(n) : n;
+
+const _roundingMode = (context: MathContext | undefined, defaultMode: RoundingMode): RoundingMode => {
+  if (context === undefined) {
+    return defaultMode;
+  }
+  const { rounding } = context;
+  if (rounding === undefined || typeof rounding === 'string') {
+    return getRoundingMode(rounding, 'half-even');
+  }
+  return rounding;
 };
 
 /**
@@ -29,7 +48,7 @@ export class Decimal {
   protected sign: number;
   protected exp: number;
 
-  constructor(num: number | string | Decimal) {
+  constructor(num: DecimalArg) {
     if (typeof num === 'string' || typeof num === 'number') {
       this.parse(num);
     } else {
@@ -48,8 +67,9 @@ export class Decimal {
    *
    * If the abs flag is true compare the absolute values.
    */
-  compare(v: Decimal, abs: boolean = false): number {
+  compare(v: DecimalArg, abs: boolean = false): number {
     const u = this;
+    v = coerce(v);
     const us = u.sign;
     const vs = v.sign;
     if (!abs && us !== vs) {
@@ -124,16 +144,22 @@ export class Decimal {
     return this.sign === 0 ? true : this.exp + this.trailingZeros() >= 0;
   }
 
-  add(v: Decimal): Decimal {
+  add(v: DecimalArg): Decimal {
+    v = coerce(v);
     return this.addsub(this, v, v.sign);
   }
 
-  subtract(v: Decimal): Decimal {
+  subtract(v: DecimalArg): Decimal {
+    v = coerce(v);
     return this.addsub(this, v, v.sign === 1 ? -1 : 1);
   }
 
-  multiply(v: Decimal): Decimal {
+  multiply(v: DecimalArg, context?: MathContext): Decimal {
+    const prec = context === undefined ? DEFAULT_PRECISION : Math.max(context.precision, 0);
+    const mode = _roundingMode(context, RoundingMode.HALF_EVEN);
+
     const u = this;
+    v = coerce(v);
     const w = new Decimal(ZERO);
     w.exp = u.exp + v.exp;
 
@@ -143,13 +169,20 @@ export class Decimal {
 
     w.data = multiply(u.data, v.data);
     w.sign = u.sign === v.sign ? 1 : -1;
+
+    // Adjust coefficient to match precision
+    const delta = w.precision() - prec;
+    if (delta > 0) {
+      return w.shiftright(delta, mode);
+    }
     return w.trim();
   }
 
   /**
    * Divide this number by v and return the quotient.
    */
-  divide(v: Decimal, context?: MathContext): Decimal {
+  divide(v: DecimalArg, context?: MathContext): Decimal {
+    v = coerce(v);
     let w = this.checkDivision(v);
     if (w !== undefined) {
       return w;
@@ -158,8 +191,8 @@ export class Decimal {
     let u: Decimal = this;
     w = new Decimal(ZERO);
 
-    const prec = context === undefined ? Math.max(v.precision(), u.precision()) + 1 : context.precision;
-    const mode = context === undefined ? RoundingMode.HALF_EVEN : context.roundingMode;
+    const prec = context === undefined ? DEFAULT_PRECISION : Math.max(context.precision, 0);
+    const mode = _roundingMode(context, RoundingMode.HALF_EVEN);
 
     const shift = (v.precision() - u.precision()) + prec + 1;
     const exp = (u.exp - v.exp) - shift;
@@ -185,7 +218,8 @@ export class Decimal {
   /**
    * Divide this number by v and return the quotient and remainder.
    */
-  divmod(v: Decimal): [Decimal, Decimal] {
+  divmod(v: DecimalArg): [Decimal, Decimal] {
+    v = coerce(v);
     const w = this.checkDivision(v);
     if (w !== undefined) {
       return [w, new Decimal(v)];
@@ -842,16 +876,23 @@ export class Decimal {
 
 }
 
-export const ZERO = new Decimal('0');
-export const ONE = new Decimal('1');
+const ZERO = new Decimal('0');
+const ONE = new Decimal('1');
 
 // https://oeis.org/A000796/constant
-export const PI = new Decimal(
+const PI = new Decimal(
   '3.141592653589793238462643383279502884197169399375105' +
   '82097494459230781640628620899862803482534211706798214');
 
 // https://oeis.org/A001113/constant
-export const E = new Decimal(
+const E = new Decimal(
   '2.718281828459045235360287471352662497757247093699959' +
   '57496696762772407663035354759457138217852516642742746'
 );
+
+export const DecimalConstants = {
+  ZERO,
+  ONE,
+  PI,
+  E
+};
