@@ -16,7 +16,7 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 
 ## Documentation
 
-This project is currently in ALPHA with potential major changes to APIs before the initial release.
+This project is **currently in pre-ALPHA** and under active development, with the potential major changes to APIs before the initial release.
 
 [Project documentation](docs/index.md).
 
