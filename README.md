@@ -6,7 +6,26 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 
 This project is **currently in pre-ALPHA** and under active development, with the potential major changes to APIs before the initial release.
 
-[Project documentation](docs/index.md).
+* [Integration](docs/integration.md) of @phensley/cldr into an application
+* [Locales](docs/locale.md) parsing, resolving, distance-based matching
+* [Number](docs/numbers.md) formatting to strings, parts, arbitrary precision
+* [Currency](docs/currencies.md) formatting to strings, parts, arbitrary precision
+* [Gregorian date](docs/gregorian.md) formatting to strings, parts
+* [Names of things](docs/names.md), languages, places, etc
+
+#### Datatypes
+
+* [Arbitrary precision math](docs/math.md)
+* [Date-time with timezone](docs/datetime.md)
+
+#### Upcoming
+
+ * Units
+ * Unit conversions
+ * Messages
+ * Timezone info
+   * Exemplar cities with lat/long mapping to timezone id
+
 
 ## Goals
 

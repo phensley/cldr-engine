@@ -3,6 +3,8 @@
 Formatting currencies shares a lot of code under the hood with plain decimal formatting, so the interfaces should look very similar.
 
 ```typescript
+const EN = cldr.get('en-US');
+
 EN.Numbers.formatCurrency('1', 'USD', { style: 'name' });
 // > "1.00 US dollars"
 
