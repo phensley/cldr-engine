@@ -12,7 +12,7 @@
     "clean:full": "yarn clean && rimraf ./node_modules",
     "lint": "lerna run lint",
     "release": "lerna run clean && lerna run build && lerna publish --force-publish=* --npm-client=npm",
-    "test": "rimraf ./coverage && jest --coverage --verbose",
+    "test": "rimraf ./coverage && jest --coverage --verbose -i",
     "test:watch": "jest --watch"
   },
   "dependencies": {
