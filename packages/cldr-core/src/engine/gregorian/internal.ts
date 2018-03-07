@@ -1,5 +1,6 @@
 import {
   Alt,
+  AvailableFormatType,
   Bundle,
   DayPeriodsFormats,
   DayPeriodType,
@@ -7,6 +8,7 @@ import {
   EraType,
   EraValues,
   ErasFormat,
+  FormatWidthType,
   QuarterType,
   QuarterValues,
   QuartersFormats,
@@ -19,15 +21,17 @@ import {
   WeekdayType,
   WeekdaysFormat,
   WeekdaysFormats,
-  WeekdayValues,
+  WeekdayValues
 } from '@phensley/cldr-schema';
 
+import { weekFirstDay } from './autogen.weekdata';
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
-import { WrapperInternal } from '../wrapper';
+import { GregorianFormatOptions } from './options';
 import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';
 import { Part, ZonedDateTime } from '../../types';
-import { weekFirstDay } from './autogen.weekdata';
+import { WrapperInternal } from '../wrapper';
+
 /**
  * Function that formats a given date field.
  */
@@ -125,7 +129,30 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   /**
    * Format a date-time pattern into a string.
    */
-  format(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
+  format(bundle: Bundle, date: ZonedDateTime, options: GregorianFormatOptions): string {
+    const timeKey = options === undefined ? undefined : (options.datetime || options.time);
+    const timePattern = this.getTimePattern(bundle, timeKey);
+
+    let dateKey: string | undefined;
+    if (options !== undefined) {
+      dateKey = options.datetime || options.date;
+    }
+    if (timeKey === undefined && dateKey === undefined) {
+      dateKey = 'full';
+    }
+    const datePattern = this.getDatePattern(bundle, dateKey);
+
+    const wrapperRaw = this.getWrapperPattern(bundle, options);
+    const _date = datePattern === undefined ? undefined : this._format(bundle, date, datePattern);
+    const _time = timePattern === undefined ? undefined : this._format(bundle, date, timePattern);
+
+    if (wrapperRaw !== undefined && _date !== undefined && _time !== undefined) {
+      return this.wrapper.format(wrapperRaw, [_time, _date]);
+    }
+    return _date !== undefined ? _date : _time !== undefined ? _time : '';
+  }
+
+  formatRaw(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
     return this._format(bundle, date, this.datePatternCache.get(pattern));
   }
 
@@ -133,21 +160,27 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
    * Format a pattern into an array of parts, each part being either a string literal
    * or a named field.
    */
-  formatParts(bundle: Bundle, date: ZonedDateTime, pattern: string): Part[] {
-    const format = this.datePatternCache.get(pattern);
-    const res = [];
-    for (const node of format) {
-      if (typeof node === 'string') {
-        res.push({ type: 'literal', value: node });
-      } else {
-        const func = this.impl[node.ch];
-        if (func !== undefined) {
-          const value = func.impl.call(this, bundle, date, node.ch, node.width);
-          res.push({ type: func.type, value });
-        }
-      }
+  formatParts(bundle: Bundle, date: ZonedDateTime, options: GregorianFormatOptions): Part[] {
+    const timeKey = options === undefined ? undefined : (options.datetime || options.time);
+    const timePattern = this.getTimePattern(bundle, timeKey);
+
+    let dateKey: string | undefined;
+    if (options !== undefined) {
+      dateKey = options.datetime || options.date;
     }
-    return res;
+    if (timeKey === undefined && dateKey === undefined) {
+      dateKey = 'full';
+    }
+    const datePattern = this.getDatePattern(bundle, dateKey);
+
+    const wrapperRaw = this.getWrapperPattern(bundle, options);
+    const _date = datePattern === undefined ? undefined : this._formatParts(bundle, date, datePattern);
+    const _time = timePattern === undefined ? undefined : this._formatParts(bundle, date, timePattern);
+
+    if (wrapperRaw !== undefined && _date !== undefined && _time !== undefined) {
+      return this.wrapper.formatParts(wrapperRaw, [_time, _date]);
+    }
+    return _date !== undefined ? _date : _time !== undefined ? _time : [];
   }
 
   /**
@@ -161,6 +194,53 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     return res + this._format(bundle, end, format.slice(idx));
   }
 
+  protected getDatePattern(bundle: Bundle, key: string | undefined): DateTimeNode[] | undefined {
+    if (key !== undefined) {
+      let pattern = this.Gregorian.dateFormats(bundle, key as FormatWidthType);
+      if (pattern === '') {
+        pattern = this.Gregorian.availableFormats(bundle, key as AvailableFormatType, Alt.NONE);
+      }
+      return pattern === '' ? undefined : this.datePatternCache.get(pattern);
+    }
+    return undefined;
+  }
+
+  protected getTimePattern(bundle: Bundle, key: string | undefined): DateTimeNode[] | undefined {
+    if (key !== undefined) {
+      let pattern = this.Gregorian.timeFormats(bundle, key as FormatWidthType);
+      if (pattern === '') {
+        pattern = this.Gregorian.availableFormats(bundle, key as AvailableFormatType, Alt.NONE);
+      }
+      return pattern === '' ? undefined : this.datePatternCache.get(pattern);
+    }
+    return undefined;
+  }
+
+  protected getWrapperPattern(bundle: Bundle, options: GregorianFormatOptions): string | undefined {
+    let key = options.wrap;
+    if (key === undefined) {
+      if (options.datetime !== undefined) {
+        key = options.datetime;
+      } else if (options.date !== undefined && options.time !== undefined) {
+        switch (options.date) {
+        case 'full':
+        case 'long':
+        case 'medium':
+        case 'short':
+          key = options.date;
+          break;
+        default:
+          key = 'short';
+          break;
+        }
+      }
+    }
+    if (key !== undefined) {
+      return this.Gregorian.dateTimeFormats(bundle, key);
+    }
+    return undefined;
+  }
+
   protected _format(bundle: Bundle, date: ZonedDateTime, format: DateTimeNode[]): string {
     let res = '';
     for (const node of format) {
@@ -170,6 +250,22 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
         const func = this.impl[node.ch];
         if (func !== undefined) {
           res += func.impl.call(this, bundle, date, node.ch, node.width);
+        }
+      }
+    }
+    return res;
+  }
+
+  protected _formatParts(bundle: Bundle, date: ZonedDateTime, format: DateTimeNode[]): Part[] {
+    const res = [];
+    for (const node of format) {
+      if (typeof node === 'string') {
+        res.push({ type: 'literal', value: node });
+      } else {
+        const func = this.impl[node.ch];
+        if (func !== undefined) {
+          const value = func.impl.call(this, bundle, date, node.ch, node.width);
+          res.push({ type: func.type, value });
         }
       }
     }

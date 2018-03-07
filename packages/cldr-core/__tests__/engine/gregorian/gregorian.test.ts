@@ -23,6 +23,42 @@ test('basics', () => {
   let s = engine.format(mar11, { date: 'full' });
   expect(s).toEqual('Saturday, March 10, 2018');
 
+  s = engine.format(mar11, { date: 'long' });
+  expect(s).toEqual('March 10, 2018');
+
+  s = engine.format(mar11, { date: 'medium' });
+  expect(s).toEqual('Mar 10, 2018');
+
+  s = engine.format(mar11, { date: 'short' });
+  expect(s).toEqual('3/10/18');
+
+  s = engine.format(mar11, { time: 'full' });
+  expect(s).toEqual('11:00:25 PM Pacific Standard Time');
+
+  s = engine.format(mar11, { time: 'long' });
+  expect(s).toEqual('11:00:25 PM PST');
+
+  s = engine.format(mar11, { time: 'medium' });
+  expect(s).toEqual('11:00:25 PM');
+
+  s = engine.format(mar11, { time: 'short' });
+  expect(s).toEqual('11:00 PM');
+
+  s = engine.format(mar11, { datetime: 'full' });
+  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
+
+  s = engine.format(mar11, { datetime: 'long' });
+  expect(s).toEqual('March 10, 2018 at 11:00:25 PM PST');
+
+  s = engine.format(mar11, { datetime: 'medium' });
+  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
+
+  s = engine.format(mar11, { datetime: 'short' });
+  expect(s).toEqual('3/10/18, 11:00 PM');
+
+  s = engine.format(mar11, { date: 'yMMMd', time: 'hms', wrap: 'full' });
+  expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
+
   s = engine.formatInterval(mar11, mar14, 'yMMMd');
   expect(s).toEqual('Mar 10 – 14, 2018');
 
@@ -58,7 +94,7 @@ test('basics', () => {
   expect(s).toEqual('2018年3月10日星期六');
 });
 
-test('weekday firstday', () => {
+test('weekday firstday raw', () => {
   const base = MARCH_11_2018_030025_UTC;
 
   // March 11 NY
@@ -67,11 +103,11 @@ test('weekday firstday', () => {
   expect(d.getUTCDayOfWeek()).toEqual(7);
 
   // US firstDay = sun
-  let s = INTERNAL.format(EN, d, 'e');
+  let s = INTERNAL.formatRaw(EN, d, 'e');
   expect(s).toEqual('1');
 
   // DE firstDay = mon
-  s = INTERNAL.format(DE, d, 'e');
+  s = INTERNAL.formatRaw(DE, d, 'e');
   expect(s).toEqual('7');
 
   // March 12 NY
@@ -79,10 +115,10 @@ test('weekday firstday', () => {
   expect(d.getDayOfWeek()).toEqual(1);
   expect(d.getUTCDayOfWeek()).toEqual(1);
 
-  s = INTERNAL.format(EN, d, 'e');
+  s = INTERNAL.formatRaw(EN, d, 'e');
   expect(s).toEqual('2');
 
-  s = INTERNAL.format(DE, d, 'e');
+  s = INTERNAL.formatRaw(DE, d, 'e');
   expect(s).toEqual('1');
 
   // March 10 LA
@@ -90,9 +126,9 @@ test('weekday firstday', () => {
   expect(d.getDayOfWeek()).toEqual(6); // saturday local
   expect(d.getUTCDayOfWeek()).toEqual(7); // sunday utc
 
-  s = INTERNAL.format(EN, d, 'e');
+  s = INTERNAL.formatRaw(EN, d, 'e');
   expect(s).toEqual('7'); // sat is last day of week
 
-  s = INTERNAL.format(DE, d, 'e');
+  s = INTERNAL.formatRaw(DE, d, 'e');
   expect(s).toEqual('6'); // sat is next to last day of week
 });

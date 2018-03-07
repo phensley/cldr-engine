@@ -16,6 +16,7 @@ import { ZonedDateTime } from '../../types/datetime';
 import { GregorianInternal } from './internal';
 import { GregorianFormatOptions } from './options';
 import { Part } from '../../types';
+import { WrapperInternal } from '../wrapper';
 
 const ISO_WEEKDATE_EXTENDED = "YYYY-'W'ww-";
 const ISO_WEEKDATE_COMPACT = "YYYY'W'ww";
@@ -86,19 +87,15 @@ export class GregorianEngine {
   // https://www.unicode.org/reports/tr35/tr35-dates.html#months_days_quarters_eras
 
   format(date: ZonedDateTime, options: GregorianFormatOptions = {}): string {
-    // let pattern = '';
-    // if (options.datetime !== undefined) {
-    //   pattern = this.internal.Gregorian.timeFormats(this.bundle, (options.datetime || 'full') as FormatWidthType);
-    // }
-    const width = options.date ? options.date : 'full';
-    const pattern = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
-    return this.internal.format(this.bundle, date, pattern);
+    return this.internal.format(this.bundle, date, options);
   }
 
   formatParts(date: ZonedDateTime, options: GregorianFormatOptions = {}): Part[] {
-    const width = options.date ? options.date : 'full';
-    const pattern = this.internal.Gregorian.dateFormats(this.bundle, width as FormatWidthType);
-    return this.internal.formatParts(this.bundle, date, pattern);
+    return this.internal.formatParts(this.bundle, date, options);
+  }
+
+  formatRaw(date: ZonedDateTime, pattern: string): string {
+    return this.internal.formatRaw(this.bundle, date, pattern);
   }
 
   formatInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): string {
@@ -109,7 +106,7 @@ export class GregorianEngine {
 
   private getISOWeekDate(date: ZonedDateTime, pattern: string): string {
     const weekday = date.getDayOfWeek();
-    const base = this.internal.format(this.bundle, date, pattern);
+    const base = this.internal.formatRaw(this.bundle, date, pattern);
     return base + weekday;
   }
 

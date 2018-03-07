@@ -1,4 +1,5 @@
-import { FieldArrow, FieldMapArrow, ScopeArrow } from '../arrows';
+import { FieldArrow, FieldMapArrow, FieldMapIndexedArrow, ScopeArrow } from '../arrows';
+import { Alt } from '../enums';
 
 import {
   AvailableFormatType,
@@ -46,7 +47,7 @@ export interface Gregorian {
   readonly dateFormats: FieldMapArrow<FormatWidthType>;
   readonly dateTimeFormats: FieldMapArrow<FormatWidthType>;
   readonly timeFormats: FieldMapArrow<FormatWidthType>;
-  readonly availableFormats: FieldMapArrow<AvailableFormatType>;
+  readonly availableFormats: FieldMapIndexedArrow<AvailableFormatType, Alt>;
   readonly intervalFormats: ScopeArrow<IntervalFormatType, IntervalFormats>;
   readonly intervalFallbackFormat: FieldArrow;
 }
