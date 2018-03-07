@@ -12,23 +12,23 @@ EN.Numbers.formatDecimal('12345.234', { style: 'long' });
 EN.Numbers.formatDecimal('12345.234', { style: 'short' });
 // > "12.3K"
 
-EN.Numbers.formatDecimal('.995', { style: 'percent', group: true });
+EN.Numbers.formatDecimal('.995', { style: 'percent' });
 // > "100%"
 
-EN.Numbers.formatDecimal('.995', { style: 'percent', minimumFractionDigits: 1, group: true });
+EN.Numbers.formatDecimal('.995', { style: 'percent', minimumFractionDigits: 1 });
 // > "99.5%"
 
-EN.Numbers.formatDecimal('.995', { style: 'permille', minimumFractionDigits: 1, group: true });
+EN.Numbers.formatDecimal('.995', { style: 'permille', minimumFractionDigits: 1 });
 // > "995.0‰"
 ```
 
 You can also format percent and per mille with a number that has already been scaled:
 
 ```typescript
-EN.Numbers.formatDecimal('12.5', { style: 'percent-scaled', minimumFractionDigits: 1, group: true });
+EN.Numbers.formatDecimal('12.5', { style: 'percent-scaled', minimumFractionDigits: 1 });
 // > "12.5%"
 
-EN.Numbers.formatDecimal('12.5', { style: 'permille-scaled', minimumFractionDigits: 1, group: true });
+EN.Numbers.formatDecimal('12.5', { style: 'permille-scaled', minimumFractionDigits: 1 });
 // > "12.5‰"
 ```
 
@@ -36,7 +36,7 @@ EN.Numbers.formatDecimal('12.5', { style: 'permille-scaled', minimumFractionDigi
 const locales = ['es-419', 'fr-CA', 'de', 'ja', 'ar', 'ko'];
 for (const locale of locales) {
   const e = cldr.get(locale);
-  console.log(`${locale}: ${e.Numbers.formatDecimal('12345.234', { style: 'long', group: true })}`);
+  console.log(`${locale}: ${e.Numbers.formatDecimal('12345.234', { style: 'long' })}`);
 }
 
 // > "es-419: 12.3 mil"
