@@ -1,5 +1,4 @@
 import {
-  availableLocales,
   buildSchema,
   GregorianEngine,
   GregorianInternal,
@@ -17,6 +16,15 @@ import {
 } from '@phensley/cldr-core';
 
 const SCHEMA = buildSchema();
+
+/**
+ * Parse a locale identifier into a locale object that includes the original
+ * id plus a resolved LanguageTag.
+ */
+export const parseLocale = (id: string): Locale => {
+  const tag = LanguageResolver.resolve(id);
+  return { id, tag };
+};
 
 /**
  * Interface exporting all functionality for a given locale.
@@ -59,7 +67,10 @@ export class CLDROptions {
 }
 
 /**
- * Top-level entry point for the library.
+ * Top-level entry point for the library. It's only purpose at the
+ * moment is to construct instances of Engine for a particular locale.
+ * All other functionality should be available statically through
+ * exported types and functions.
  *
  * @alpha
  */
@@ -88,30 +99,8 @@ export class CLDR {
     this.numbersInternal = new NumbersInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
   }
 
-  availableLocales(): Locale[] {
-    return availableLocales();
-  }
-
   info(): string {
     return `packs loaded: ${this.packCache.size()}`;
-  }
-
-  /**
-   * Parse a locale identifier into a locale object that includes the original
-   * id plus a resolved LanguageTag.
-   */
-  parseLocale(id: string): Locale {
-    const tag = LanguageResolver.resolve(id);
-    return { id, tag };
-  }
-
-  /**
-   * Given a list of supported locales, return a LocaleMatcher object. This
-   * performs distance-based enhanced language matching:
-   * http://www.unicode.org/reports/tr35/tr35.html#EnhancedLanguageMatching
-   */
-  getLocaleMatcher(supported: string | string[]): LocaleMatcher {
-    return new LocaleMatcher(supported);
   }
 
   /**
@@ -123,7 +112,7 @@ export class CLDR {
     if (this.loader === undefined) {
       throw new Error('a synchronous resource loader is not defined');
     }
-    const resolved = typeof locale === 'string' ? this.parseLocale(locale) : locale;
+    const resolved = typeof locale === 'string' ? parseLocale(locale) : locale;
     const language = resolved.tag.language();
 
     let pack = this.packCache.get(language);
@@ -144,7 +133,7 @@ export class CLDR {
     if (asyncLoader === undefined) {
       throw new Error('a Promise-based resource loader is not defined');
     }
-    const resolved = typeof locale === 'string' ? this.parseLocale(locale) : locale;
+    const resolved = typeof locale === 'string' ? parseLocale(locale) : locale;
     const language = resolved.tag.language();
 
     // If the same language is loaded multiple times in rapid succession,

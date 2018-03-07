@@ -1,4 +1,4 @@
-import { LanguageTag } from './locale';
+import { LanguageTag } from './languagetag';
 import { getRegionPartition } from './partition';
 import { distanceMap, DistanceMap, DistanceNode } from './autogen.distance';
 

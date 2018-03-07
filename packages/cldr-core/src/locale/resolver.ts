@@ -1,4 +1,4 @@
-import { LanguageTag, LANGUAGE, SCRIPT, REGION } from './locale';
+import { LanguageTag, LANGUAGE, SCRIPT, REGION } from './languagetag';
 import { parseLanguageTag } from './parser';
 import { substituteRegionAliases, FastTag, LanguageAliasMap } from './util';
 import { stringToObject } from '../utils/string';

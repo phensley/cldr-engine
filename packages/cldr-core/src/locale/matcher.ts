@@ -1,4 +1,5 @@
-import { LanguageTag, Locale } from './locale';
+import { LanguageTag } from './languagetag';
+import { Locale } from './locale';
 import { getDistance, DEFAULT_THRESHOLD, MAX_DISTANCE } from './distance';
 import { parseLanguageTag } from './parser';
 import { LanguageResolver } from './resolver';

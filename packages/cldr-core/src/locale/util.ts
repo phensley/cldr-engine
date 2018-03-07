@@ -1,4 +1,4 @@
-import { REGION } from './locale';
+import { REGION } from './languagetag';
 import { territoryAliasRaw } from './autogen.aliases';
 
 export type FastTag = (string | number)[];
