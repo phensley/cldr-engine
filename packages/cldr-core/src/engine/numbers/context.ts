@@ -116,9 +116,22 @@ export class NumberContext {
     this.minFrac = this.currencyDigits === -1 ? pattern.minFrac : this.currencyDigits;
     this.minFrac = orDefault(o.minimumFractionDigits, this.minFrac);
 
+    if (this.minFrac !== -1 && this.minFrac > this.maxFrac) {
+      this.maxFrac = this.minFrac;
+    }
+    if (this.maxFrac !== -1 && this.maxFrac < this.minFrac) {
+      this.minFrac = this.maxFrac;
+    }
+
     if (this.useSignificant) {
       this.maxSig = orDefault(o.maximumSignificantDigits, maxSigDigits);
       this.minSig = orDefault(o.minimumSignificantDigits, minSigDigits);
+      if (this.minSig !== -1 && this.minSig > this.maxSig) {
+        this.maxSig = this.minSig;
+      }
+      if (this.maxSig !== -1 && this.maxSig < this.minSig) {
+        this.minSig = this.maxSig;
+      }
     } else {
       this.maxSig = -1;
       this.minSig = -1;
