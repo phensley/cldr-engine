@@ -94,14 +94,24 @@ export class GregorianEngine {
     return this.internal.formatParts(this.bundle, date, options);
   }
 
-  formatRaw(date: ZonedDateTime, pattern: string): string {
-    return this.internal.formatRaw(this.bundle, date, pattern);
-  }
-
   formatInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): string {
     const field = start.fieldOfGreatestDifference(end);
     const pattern = this.internal.Gregorian.intervalFormats(skeleton).field(this.bundle, field);
     return this.internal.formatInterval(this.bundle, start, end, pattern);
+  }
+
+  formatIntervalParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): Part[] {
+    const field = start.fieldOfGreatestDifference(end);
+    const pattern = this.internal.Gregorian.intervalFormats(skeleton).field(this.bundle, field);
+    return this.internal.formatIntervalParts(this.bundle, start, end, pattern);
+  }
+
+  formatRaw(date: ZonedDateTime, pattern: string): string {
+    return this.internal.formatRaw(this.bundle, date, pattern);
+  }
+
+  formatRawParts(date: ZonedDateTime, pattern: string): Part[] {
+    return this.internal.formatRawParts(this.bundle, date, pattern);
   }
 
   private getISOWeekDate(date: ZonedDateTime, pattern: string): string {

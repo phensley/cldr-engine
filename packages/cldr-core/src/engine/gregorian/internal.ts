@@ -152,10 +152,6 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     return _date !== undefined ? _date : _time !== undefined ? _time : '';
   }
 
-  formatRaw(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
-    return this._format(bundle, date, this.datePatternCache.get(pattern));
-  }
-
   /**
    * Format a pattern into an array of parts, each part being either a string literal
    * or a named field.
@@ -192,6 +188,21 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     const idx = intervalPatternBoundary(format);
     const res = this._format(bundle, start, format.slice(0, idx));
     return res + this._format(bundle, end, format.slice(idx));
+  }
+
+  formatIntervalParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): Part[] {
+    const format = this.datePatternCache.get(pattern);
+    const idx = intervalPatternBoundary(format);
+    const res = this._formatParts(bundle, start, format.slice(0, idx));
+    return res.concat(this._formatParts(bundle, end, format.slice(idx)));
+  }
+
+  formatRaw(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
+    return this._format(bundle, date, this.datePatternCache.get(pattern));
+  }
+
+  formatRawParts(bundle: Bundle, date: ZonedDateTime, pattern: string): Part[] {
+    return this._formatParts(bundle, date, this.datePatternCache.get(pattern));
   }
 
   protected getDatePattern(bundle: Bundle, key: string | undefined): DateTimeNode[] | undefined {
