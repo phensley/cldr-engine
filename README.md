@@ -18,7 +18,7 @@ yarn add @phensley/cldr
 
 ## Documentation
 
-This project is **currently in pre-ALPHA** and under active development, with the potential major changes to APIs before the initial release.
+This project is **currently in pre-ALPHA** and under active development, with the potential for major changes to APIs before the initial release.
 
 * [Integration](docs/integration.md) of @phensley/cldr into an application
 * [Locales](docs/locale.md) parsing, resolving, distance-based matching
