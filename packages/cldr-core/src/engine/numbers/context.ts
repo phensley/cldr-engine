@@ -4,7 +4,7 @@ import {
   NumberFormatOptions,
   RoundingModeType
 } from './options';
-import { getRoundingMode, Decimal, RoundingMode } from  '../../types/numbers';
+import { Decimal, RoundingMode } from  '../../types/numbers';
 import { NumberPattern } from '../../parsing/patterns/number';
 
 /**
@@ -14,7 +14,7 @@ import { NumberPattern } from '../../parsing/patterns/number';
 export class NumberContext {
 
   readonly options: NumberFormatOptions;
-  roundingMode: RoundingMode;
+  roundingMode: RoundingModeType;
   formatMode: NumberFormatModeType;
   useSignificant: boolean;
 
@@ -31,7 +31,7 @@ export class NumberContext {
     currencyDigits: number = -1
   ) {
     this.options = options;
-    this.roundingMode = getRoundingMode(options.round, 'half-even');
+    this.roundingMode = options.round || 'half-even';
     this.formatMode = options.formatMode === undefined ? defaultFormatMode : options.formatMode;
     this.currencyDigits = currencyDigits;
     this.useSignificant = this.formatMode === NumberFormatMode.SIGNIFICANT ||

@@ -25,39 +25,18 @@ test('divide default', () => {
 });
 
 test('divide half even', () => {
-  const halfEven = (precision: number): MathContext => ({ precision, rounding: RoundingMode.HALF_EVEN });
-
-  expect(div('2', '3', halfEven(0))).toEqual(parse('1'));
-  expect(div('2', '3', halfEven(1))).toEqual(parse('0.7'));
-  expect(div('2', '3', halfEven(2))).toEqual(parse('0.67'));
-  expect(div('2', '3', halfEven(3))).toEqual(parse('0.667'));
-  expect(div('2', '3', halfEven(5))).toEqual(parse('0.66667'));
-  expect(div('2', '3', halfEven(10))).toEqual(parse('0.6666666667'));
-
-  expect(div('10', '3', halfEven(0))).toEqual(parse('0e1'));
-  expect(div('10', '3', halfEven(1))).toEqual(parse('3'));
-  expect(div('10', '3', halfEven(2))).toEqual(parse('3.3'));
-  expect(div('10', '3', halfEven(3))).toEqual(parse('3.33'));
-  expect(div('10', '3', halfEven(5))).toEqual(parse('3.3333'));
-  expect(div('10', '3', halfEven(10))).toEqual(parse('3.333333333'));
-
-  expect(div('10', '6', halfEven(0))).toEqual(parse('0e1'));
-  expect(div('10', '6', halfEven(1))).toEqual(parse('2'));
-  expect(div('10', '6', halfEven(2))).toEqual(parse('1.7'));
-  expect(div('10', '6', halfEven(3))).toEqual(parse('1.67'));
-  expect(div('10', '6', halfEven(5))).toEqual(parse('1.6667'));
-  expect(div('10', '6', halfEven(10))).toEqual(parse('1.666666667'));
+  const halfEven = (precision: number): MathContext => ({ precision, rounding: 'half-even' });
 
   expect(div('12', '3', halfEven(0))).toEqual(parse('0e1'));
   expect(div('12', '3', halfEven(1))).toEqual(parse('4'));
-  expect(div('12', '3', halfEven(10))).toEqual(parse('4.000000000'));
+  expect(div('12', '3', halfEven(10))).toEqual(parse('4'));
 
   expect(div('3', '10', halfEven(0))).toEqual(parse('0'));
   expect(div('3', '10', halfEven(1))).toEqual(parse('0.3'));
-  expect(div('3', '10', halfEven(10))).toEqual(parse('.3000000000'));
+  expect(div('3', '10', halfEven(10))).toEqual(parse('.3'));
 
   expect(div('99999', '10', halfEven(5))).toEqual(parse('9999.9'));
-  expect(div('99999', '10', halfEven(10))).toEqual(parse('9999.900000'));
+  expect(div('99999', '10', halfEven(10))).toEqual(parse('9999.9'));
 });
 
 test('divide decrements qhat', () => {
@@ -86,6 +65,149 @@ test('divide add back', () => {
 
 test('divide by zero', () => {
   expect(() => div('123', '0')).toThrowError();
+  expect(() => div('123', '0.0000e4')).toThrowError();
+});
+
+test('divide with precision', () => {
+  expect(div('10', '3', { precision: 0 })).toEqual(parse('0e1'));
+  expect(div('10', '3', { precision: 1 })).toEqual(parse('3'));
+  expect(div('10', '3', { precision: 2 })).toEqual(parse('3.3'));
+  expect(div('10', '3', { precision: 3 })).toEqual(parse('3.33'));
+  expect(div('10', '3', { precision: 4 })).toEqual(parse('3.333'));
+  expect(div('10', '3', { precision: 5 })).toEqual(parse('3.3333'));
+  expect(div('10', '3', { precision: 10 })).toEqual(parse('3.333333333'));
+  expect(div('10', '3', { precision: 20 })).toEqual(parse('3.3333333333333333333'));
+
+  expect(div('2', '3', { precision: 0 })).toEqual(parse('1'));
+  expect(div('2', '3', { precision: 1 })).toEqual(parse('0.7'));
+  expect(div('2', '3', { precision: 2 })).toEqual(parse('0.67'));
+  expect(div('2', '3', { precision: 3 })).toEqual(parse('0.667'));
+  expect(div('2', '3', { precision: 4 })).toEqual(parse('0.6667'));
+  expect(div('2', '3', { precision: 5 })).toEqual(parse('0.66667'));
+  expect(div('2', '3', { precision: 10 })).toEqual(parse('0.6666666667'));
+  expect(div('2', '3', { precision: 20 })).toEqual(parse('0.66666666666666666667'));
+  expect(div('2', '3', { precision: 30 })).toEqual(parse('0.666666666666666666666666666667'));
+
+  expect(div('10', '6', { precision: 0 })).toEqual(parse('0e1'));
+  expect(div('10', '6', { precision: 1 })).toEqual(parse('2'));
+  expect(div('10', '6', { precision: 2 })).toEqual(parse('1.7'));
+  expect(div('10', '6', { precision: 3 })).toEqual(parse('1.67'));
+  expect(div('10', '6', { precision: 4 })).toEqual(parse('1.667'));
+  expect(div('10', '6', { precision: 5 })).toEqual(parse('1.6667'));
+  expect(div('10', '6', { precision: 10 })).toEqual(parse('1.666666667'));
+  expect(div('10', '6', { precision: 20 })).toEqual(parse('1.6666666666666666667'));
+  expect(div('10', '6', { precision: 30 })).toEqual(parse('1.66666666666666666666666666667'));
+
+  expect(div('10000', '6', { precision: 0 })).toEqual(parse('0e4'));
+  expect(div('10000', '6', { precision: 1 })).toEqual(parse('2e3'));
+  expect(div('10000', '6', { precision: 2 })).toEqual(parse('17e2'));
+  expect(div('10000', '6', { precision: 3 })).toEqual(parse('167e1'));
+  expect(div('10000', '6', { precision: 4 })).toEqual(parse('1667'));
+  expect(div('10000', '6', { precision: 5 })).toEqual(parse('1666.7'));
+  expect(div('10000', '6', { precision: 6 })).toEqual(parse('1666.67'));
+  expect(div('10000', '6', { precision: 7 })).toEqual(parse('1666.667'));
+  expect(div('10000', '6', { precision: 8 })).toEqual(parse('1666.6667'));
+  expect(div('10000', '6', { precision: 9 })).toEqual(parse('1666.66667'));
+  expect(div('10000', '6', { precision: 10 })).toEqual(parse('1666.666667'));
+
+  // Default precision 28
+  expect(div('1101600.00', '3.141592653589793238462643383'))
+    .toEqual(parse('350650.1706200638037660047075'));
+
+  expect(div('1101600.00', '3.141592653589793238462643383', { precision: 30 }))
+    .toEqual(parse('350650.170620063803766004707494'));
+});
+
+test('divide with scale', () => {
+  expect(div('10', '3', { scale: -2 })).toEqual(parse('0e2'));
+  expect(div('10', '3', { scale: -1 })).toEqual(parse('0e1'));
+  expect(div('10', '3', { scale: 0 })).toEqual(parse('3'));
+  expect(div('10', '3', { scale: 1 })).toEqual(parse('3.3'));
+  expect(div('10', '3', { scale: 2 })).toEqual(parse('3.33'));
+  expect(div('10', '3', { scale: 3 })).toEqual(parse('3.333'));
+  expect(div('10', '3', { scale: 4 })).toEqual(parse('3.3333'));
+  expect(div('10', '3', { scale: 5 })).toEqual(parse('3.33333'));
+  expect(div('10', '3', { scale: 10 })).toEqual(parse('3.3333333333'));
+  expect(div('10', '3', { scale: 20 })).toEqual(parse('3.33333333333333333333'));
+
+  expect(div('10', '6', { scale: -2 })).toEqual(parse('0e2'));
+  expect(div('10', '6', { scale: -1 })).toEqual(parse('0e1'));
+  expect(div('10', '6', { scale: 0 })).toEqual(parse('2'));
+  expect(div('10', '6', { scale: 1 })).toEqual(parse('1.7'));
+  expect(div('10', '6', { scale: 2 })).toEqual(parse('1.67'));
+  expect(div('10', '6', { scale: 3 })).toEqual(parse('1.667'));
+  expect(div('10', '6', { scale: 4 })).toEqual(parse('1.6667'));
+  expect(div('10', '6', { scale: 5 })).toEqual(parse('1.66667'));
+  expect(div('10', '6', { scale: 10 })).toEqual(parse('1.6666666667'));
+  expect(div('10', '6', { scale: 20 })).toEqual(parse('1.66666666666666666667'));
+
+  expect(div('10000', '6', { scale: -4 })).toEqual(parse('0e4'));
+  expect(div('10000', '6', { scale: -3 })).toEqual(parse('2e3'));
+  expect(div('10000', '6', { scale: -2 })).toEqual(parse('17e2'));
+  expect(div('10000', '6', { scale: -1 })).toEqual(parse('167e1'));
+  expect(div('10000', '6', { scale: 0 })).toEqual(parse('1667'));
+  expect(div('10000', '6', { scale: 1 })).toEqual(parse('1666.7'));
+  expect(div('10000', '6', { scale: 2 })).toEqual(parse('1666.67'));
+  expect(div('10000', '6', { scale: 3 })).toEqual(parse('1666.667'));
+  expect(div('10000', '6', { scale: 4 })).toEqual(parse('1666.6667'));
+  expect(div('10000', '6', { scale: 5 })).toEqual(parse('1666.66667'));
+  expect(div('10000', '6', { scale: 6 })).toEqual(parse('1666.666667'));
+
+  expect(div('1101600.00', '3.141592653589793238462643383', { scale: 30 }))
+    .toEqual(parse('350650.170620063803766004707493520473'));
+});
+
+test('divide by single digit', () => {
+  expect(div('982.0065714814661859824253792', '1', { scale: 11 })).toEqual(parse('982.00657148147'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 10 })).toEqual(parse('982.0065714815'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 9 })).toEqual(parse('982.006571481'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 8 })).toEqual(parse('982.00657148'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 7 })).toEqual(parse('982.0065715'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 6 })).toEqual(parse('982.006571'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 5 })).toEqual(parse('982.00657'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 4 })).toEqual(parse('982.0066'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 3 })).toEqual(parse('982.006'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 2 })).toEqual(parse('982.01'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 1 })).toEqual(parse('982.0'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 0 })).toEqual(parse('982'));
+
+  expect(div('982.0065714814661859824253792', '2', { scale: 10 })).toEqual(parse('491.0032857407'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 9 })).toEqual(parse('491.003285741'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 8 })).toEqual(parse('491.00328574'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 7 })).toEqual(parse('491.0032857'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 6 })).toEqual(parse('491.003286'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 5 })).toEqual(parse('491.00328'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 4 })).toEqual(parse('491.0033'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 3 })).toEqual(parse('491.003'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 2 })).toEqual(parse('491.00'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 1 })).toEqual(parse('491.0'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 0 })).toEqual(parse('491'));
+
+  expect(div('982.0065714814661859824253792', '3', { scale: 11 })).toEqual(parse('327.33552382716'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 10 })).toEqual(parse('327.3355238272'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 9 })).toEqual(parse('327.335523827'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 8 })).toEqual(parse('327.33552383'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 7 })).toEqual(parse('327.3355238'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 6 })).toEqual(parse('327.335524'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 5 })).toEqual(parse('327.33552'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 4 })).toEqual(parse('327.3355'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 3 })).toEqual(parse('327.336'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 2 })).toEqual(parse('327.34'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 1 })).toEqual(parse('327.3'));
+  expect(div('982.0065714814661859824253792', '3', { scale: 0 })).toEqual(parse('327'));
+
+  expect(div('982.0065714814661859824253792', '4', { scale: 11 })).toEqual(parse('245.50164287037'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 10 })).toEqual(parse('245.5016428704'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 9 })).toEqual(parse('245.501642870'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 8 })).toEqual(parse('245.50164287'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 7 })).toEqual(parse('245.5016429'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 6 })).toEqual(parse('245.501643'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 5 })).toEqual(parse('245.50164'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 4 })).toEqual(parse('245.5016'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 3 })).toEqual(parse('245.502'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 2 })).toEqual(parse('245.50'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 1 })).toEqual(parse('245.5'));
+  expect(div('982.0065714814661859824253792', '4', { scale: 0 })).toEqual(parse('246'));
 });
 
 test('divmod', () => {

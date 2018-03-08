@@ -10,5 +10,6 @@ export {
   LocaleMatcher,
   MathContext,
   Pack,
+  Rational,
   ZonedDateTime
 } from '@phensley/cldr-core';

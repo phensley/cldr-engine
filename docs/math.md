@@ -1,12 +1,12 @@
 # Arbitrary precision math
 
-A `Decimal` type with arbitrary precision is available. You can format and manipulate numbers far beyond the limited precision of JavaScript's `number` type.
+Arbitrary precision support enables formatting and manipulation of numbers far beyond the precision of JavaScript's `number` type.
+There are times when you need to perform arithmetic on numbers prior to formatting, and these types give you a greater degree of control over these operations.
 
-There are times when you need to perform arithmetic on numbers prior to formatting, and `Decimal` gives you control over these operations.
+ * `Decimal` numbers with a decimal point.
+ * `Rational` to represent fractions.
 
-`Decimal` values are immutable, so any operations on them return new values.
-
-Arguments to methods that accept `Decimal` also accept `string` or `number` and will automatically coerce those types fo `Decimal`.
+Both `Decimal` and `Rational` values are immutable, so any operations on them return new values.
 
 ```typescript
 const n = new Decimal('10');
@@ -172,10 +172,12 @@ import { DecimalConstants } from '@phensley/cldr';
 const diameter = new Decimal('8.8e26');
 // > 880000000000000000000000000
 
-// Calculating the circumference to 60 digits of precision
-// using 100 digits of π
-diameter.multiply(DecimalConstants.PI, { precision: 60 });
+// Calculating the circumference to 60 digits of precision using 100 digits of π
+const circumference = diameter.multiply(DecimalConstants.PI, { precision: 60 });
 // > 2764601535159018049847126177.28596253809350907145009312245795
+
+circumference.divide(DecimalConstants.PI, { precision: 60 });
+// > 880000000000000000000000000
 ```
 
 ### Scaling
@@ -203,4 +205,62 @@ n.movePoint(-10);
 
 n.movePoint(10);
 // > 123451234500000
+```
+
+## Rational numbers
+
+```typescript
+const pi = new Rational('pi');
+const radius = new Rational('17.68');
+const area = pi.multiply(radius).multiply(radius);
+area.toDecimal({ scale: 10 });
+
+// > 982.0065714815
+```
+
+### Unit conversions with rationals
+
+If you need to convert between units, using `Rational` numbers can help avoid losing precision. Multiply several `Rational` factors together repeatedly and divide to `Decimal` at the final step.
+
+For example, suppose you define units in terms of other units. Depending on how you've defined your factors it may take more than one calculation.
+
+```typescript
+import { Decimal, Rational } from '@phensley/cldr';
+
+const rjust = (s: string, w: number): string => {
+  const d = w - s.length;
+  return d < 0 ? s : new Array(d).fill(' ').join('') + s;
+};
+
+const factors: { [x: string]: [Rational, string]} = {
+  'radian':     [new Rational('0.5 / pi'), 'revolution'],
+  'revolution': [new Rational('360'), 'degree'],
+  'degree':     [new Rational('60'), 'arc-minute'],
+  'arc-minute': [new Rational('60'), 'arc-second'],
+  'arc-second': [new Rational('60'), 'arc-minute']
+};
+
+const radians = new Rational('1.7');
+let unit = 'radian';
+let value = radians;
+console.log(radians.toDecimal().toString(), unit, 'is equal to...');
+
+do {
+  const [factor, next] = factors[unit];
+  value = factor.multiply(value);
+  unit = next;
+
+  const str = value.toDecimal().setScale(8).toString();
+  console.log(rjust(str, 20), unit);
+} while (unit !== 'arc-second');
+```
+
+Outputs:
+
+```
+1.7 radian is equal to...
+          0.27056340 revolution
+         97.40282517 degree
+       5844.16951033 arc-minute
+     350650.17062006 arc-second
 ```

@@ -1,42 +1,22 @@
-export enum RoundingMode {
-  UP,
-  DOWN,
-  CEILING,
-  FLOOR,
-  HALF_UP,
-  HALF_DOWN,
-  HALF_EVEN,
-  ZERO_FIVE_UP,
-  TRUNCATE
+export const enum RoundingMode {
+  UP = 'up',
+  DOWN = 'down',
+  CEILING = 'ceiling',
+  FLOOR = 'floor',
+  HALF_UP = 'half-up',
+  HALF_DOWN = 'half-down',
+  HALF_EVEN = 'half-even',
+  ZERO_FIVE_UP = '05up',
+  TRUNCATE = 'truncate'
 }
 
-export const getRoundingMode = (mode: string | undefined, alt: string): RoundingMode => {
-  switch (mode === undefined ? alt : mode) {
-  case 'up':
-    return RoundingMode.UP;
-  case 'down':
-    return RoundingMode.DOWN;
-  case 'ceiling':
-    return RoundingMode.CEILING;
-  case 'floor':
-    return RoundingMode.FLOOR;
-  case 'half-up':
-    return RoundingMode.HALF_UP;
-  case 'half-down':
-    return RoundingMode.HALF_DOWN;
-  case '05up':
-    return RoundingMode.ZERO_FIVE_UP;
-  case 'truncate':
-    return RoundingMode.TRUNCATE;
-  case 'half-even':
-  default:
-    return RoundingMode.HALF_EVEN;
-  }
-};
+export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor'
+  | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
 
 export interface MathContext {
-  precision: number;
-  rounding?: string | RoundingMode;
+  scale?: number;
+  precision?: number;
+  rounding?: RoundingModeType;
 }
 
 export const enum Constants {

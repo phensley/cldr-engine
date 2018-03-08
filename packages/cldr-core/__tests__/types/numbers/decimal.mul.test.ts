@@ -40,3 +40,70 @@ test('multiply context', () => {
   circ = diameter.multiply(DecimalConstants.PI, { precision: 40 });
   expect(circ).toEqual(parse('2764601535159018049847126177.285962538094'));
 });
+
+test('multiply with precision', () => {
+  expect(mul('10', '.33333', { precision: 0 })).toEqual(parse('0e1'));
+  expect(mul('10', '.33333', { precision: 1 })).toEqual(parse('3'));
+  expect(mul('10', '.33333', { precision: 2 })).toEqual(parse('3.3'));
+  expect(mul('10', '.33333', { precision: 3 })).toEqual(parse('3.33'));
+  expect(mul('10', '.33333', { precision: 4 })).toEqual(parse('3.333'));
+  expect(mul('10', '.33333', { precision: 5 })).toEqual(parse('3.3333'));
+  expect(mul('10', '.33333', { precision: 6 })).toEqual(parse('3.33330'));
+
+  expect(mul('10', '.66666', { precision: 0 })).toEqual(parse('1e1'));
+  expect(mul('10', '.66666', { precision: 1 })).toEqual(parse('7'));
+  expect(mul('10', '.66666', { precision: 2 })).toEqual(parse('6.7'));
+  expect(mul('10', '.66666', { precision: 3 })).toEqual(parse('6.67'));
+  expect(mul('10', '.66666', { precision: 4 })).toEqual(parse('6.667'));
+  expect(mul('10', '.66666', { precision: 5 })).toEqual(parse('6.6666'));
+  expect(mul('10', '.66666', { precision: 6 })).toEqual(parse('6.66660'));
+
+  expect(mul('50', '.33333', { precision: 0 })).toEqual(parse('0e2'));
+  expect(mul('50', '.33333', { precision: 1 })).toEqual(parse('2e1'));
+  expect(mul('50', '.33333', { precision: 2 })).toEqual(parse('17'));
+  expect(mul('50', '.33333', { precision: 3 })).toEqual(parse('16.7'));
+  expect(mul('50', '.33333', { precision: 4 })).toEqual(parse('16.67'));
+  expect(mul('50', '.33333', { precision: 5 })).toEqual(parse('16.666'));
+  expect(mul('50', '.33333', { precision: 6 })).toEqual(parse('16.6665'));
+  expect(mul('50', '.33333', { precision: 7 })).toEqual(parse('16.66650'));
+
+  expect(mul('50', '.66666', { precision: 0 })).toEqual(parse('0e2'));
+  expect(mul('50', '.66666', { precision: 1 })).toEqual(parse('3e1'));
+  expect(mul('50', '.66666', { precision: 2 })).toEqual(parse('33'));
+  expect(mul('50', '.66666', { precision: 3 })).toEqual(parse('33.3'));
+  expect(mul('50', '.66666', { precision: 4 })).toEqual(parse('33.33'));
+  expect(mul('50', '.66666', { precision: 5 })).toEqual(parse('33.333'));
+  expect(mul('50', '.66666', { precision: 6 })).toEqual(parse('33.3330'));
+  expect(mul('50', '.66666', { precision: 7 })).toEqual(parse('33.33300'));
+});
+
+test('multiply with scale', () => {
+  expect(mul('10', '.33333', { scale: -1 })).toEqual(parse('0e1'));
+  expect(mul('10', '.33333', { scale: 0 })).toEqual(parse('3'));
+  expect(mul('10', '.33333', { scale: 1 })).toEqual(parse('3.3'));
+  expect(mul('10', '.33333', { scale: 2 })).toEqual(parse('3.33'));
+  expect(mul('10', '.33333', { scale: 3 })).toEqual(parse('3.333'));
+  expect(mul('10', '.33333', { scale: 4 })).toEqual(parse('3.3333'));
+  expect(mul('10', '.33333', { scale: 5 })).toEqual(parse('3.33330'));
+
+  expect(mul('7.3', '4.123', { scale: 4 })).toEqual(parse('30.0979'));
+  expect(mul('7.3', '4.123', { scale: 3 })).toEqual(parse('30.098'));
+  expect(mul('7.3', '4.123', { scale: 2 })).toEqual(parse('30.10'));
+  expect(mul('7.3', '4.123', { scale: 1 })).toEqual(parse('30.1'));
+
+  expect(mul('157', '.2', { scale: 2 })).toEqual(parse('31.40'));
+  expect(mul('157', '.2', { scale: 1 })).toEqual(parse('31.4'));
+  expect(mul('157', '.2', { scale: 0 })).toEqual(parse('31'));
+
+  expect(mul('157', '.7', { scale: 2 })).toEqual(parse('109.90'));
+  expect(mul('157', '.7', { scale: 1 })).toEqual(parse('109.9'));
+  expect(mul('157', '.7', { scale: 0 })).toEqual(parse('110'));
+  expect(mul('157', '.7', { scale: -1 })).toEqual(parse('11e1'));
+
+  expect(mul('1234567', '10', { scale: -4 })).toEqual(parse('1234e4'));
+  expect(mul('1234567', '10', { scale: -3 })).toEqual(parse('12346e3'));
+  expect(mul('1234567', '10', { scale: -2 })).toEqual(parse('123457e2'));
+  expect(mul('1234567', '10', { scale: -1 })).toEqual(parse('1234567e1'));
+  expect(mul('1234567', '10', { scale: 0 })).toEqual(parse('12345670'));
+  expect(mul('1234567', '10', { scale: 1 })).toEqual(parse('12345670.0'));
+});

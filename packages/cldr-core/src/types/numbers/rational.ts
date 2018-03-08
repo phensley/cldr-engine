@@ -14,7 +14,7 @@ const coerceRational = (n: RationalArg): Rational => {
   if (typeof n === 'number') {
     return new Rational(n, DecimalConstants.ONE);
   } else if (typeof n === 'string') {
-    return Rational.parse(n);
+    return new Rational(n);
   } else if (n instanceof Rational || (n as any).numerator !== undefined) {
     return n as Rational;
   }
@@ -44,59 +44,74 @@ export type RationalArg = Rational | Decimal | number | string;
  */
 export class Rational {
 
-  readonly numerator: Decimal;
-  readonly denominator: Decimal;
+  protected numer: Decimal;
+  protected denom: Decimal;
 
   constructor(
     numerator: DecimalArg,
-    denominator: DecimalArg = DecimalConstants.ONE) {
+    denominator?: DecimalArg) {
 
-    this.numerator = coerceDecimal(numerator);
-    this.denominator = coerceDecimal(denominator);
+    if (typeof numerator === 'string' && denominator === undefined) {
+      this._parse(numerator);
+    } else {
+      denominator = denominator === undefined ? DecimalConstants.ONE : denominator;
+      this.numer = coerceDecimal(numerator);
+      this.denom = coerceDecimal(denominator);
+    }
   }
 
-  static parse(raw: string): Rational {
-    const i = raw.indexOf('/');
-    if (i === -1) {
-      return new Rational(raw, DecimalConstants.ONE);
-    }
-    const numerator = raw.substring(0, i).trim();
-    const denominator = raw.substring(i + 1).trim();
-    return new Rational(numerator, denominator);
+  numerator(): Decimal {
+    return this.numer;
+  }
+
+  denominator(): Decimal {
+    return this.denom;
   }
 
   compare(num: RationalArg, context?: MathContext): number {
     const n = coerceRational(num);
-    const a = this.numerator.multiply(n.denominator, context);
-    const b = n.numerator.multiply(this.denominator, context);
+    const a = this.numer.multiply(n.denom, context);
+    const b = n.numer.multiply(this.denom, context);
     return a.compare(b);
   }
 
   divide(num: RationalArg, context?: MathContext): Rational {
     const n = coerceRational(num);
     return new Rational(
-      this.numerator.multiply(n.denominator, context),
-      this.denominator.multiply(n.numerator, context)
+      this.numer.multiply(n.denom, context),
+      this.denom.multiply(n.numer, context)
     );
   }
 
   multiply(num: RationalArg, context?: MathContext): Rational {
     const n = coerceRational(num);
     return new Rational(
-      this.numerator.multiply(n.numerator, context),
-      this.denominator.multiply(n.denominator, context)
+      this.numer.multiply(n.numer, context),
+      this.denom.multiply(n.denom, context)
     );
   }
 
   inverse(): Rational {
-    return new Rational(this.denominator, this.numerator);
+    return new Rational(this.denom, this.numer);
   }
 
   toDecimal(context?: MathContext): Decimal {
-    if (context === undefined) {
-      context = { precision: this.numerator.precision() + this.denominator.precision() };
+    return this.numer.divide(this.denom, context);
+  }
+
+  toString(): string {
+    return `${this.numer.toString()} / ${this.denom.toString()}`;
+  }
+
+  private _parse(raw: string): void {
+    const i = raw.indexOf('/');
+    if (i === -1) {
+      this.numer = fromString(raw);
+      this.denom = DecimalConstants.ONE;
+    } else {
+      this.numer = fromString(raw.substring(0, i).trim());
+      this.denom = fromString(raw.substring(i + 1).trim());
     }
-    return this.numerator.divide(this.denominator, context);
   }
 
 }

@@ -11,7 +11,7 @@ import {
   POWERS10,
   RoundingMode,
   MathContext,
-  getRoundingMode
+  RoundingModeType
 } from './types';
 
 type GroupFunc = () => void;
@@ -26,15 +26,24 @@ export type DecimalArg = number | string | Decimal;
 const coerce = (n: DecimalArg): Decimal =>
   typeof n === 'number' || typeof n === 'string' ? new Decimal(n) : n;
 
-const _roundingMode = (context: MathContext | undefined, defaultMode: RoundingMode): RoundingMode => {
-  if (context === undefined) {
-    return defaultMode;
+/**
+ * Parses and interprets a math context argument, with appropriate defaults.
+ */
+const parseMathContext = (rounding: RoundingModeType, context?: MathContext): [boolean, number, RoundingModeType] => {
+  let usePrecision = true;
+  let scaleprec = DEFAULT_PRECISION;
+  if (context !== undefined) {
+    if (context.scale !== undefined) {
+      scaleprec = context.scale;
+      usePrecision = false;
+    } else if (context.precision !== undefined) {
+      scaleprec = Math.max(context.precision, 0);
+    }
+    if (context.rounding !== undefined) {
+      rounding = context.rounding;
+    }
   }
-  const { rounding } = context;
-  if (rounding === undefined || typeof rounding === 'string') {
-    return getRoundingMode(rounding, 'half-even');
-  }
-  return rounding;
+  return [usePrecision, scaleprec, rounding];
 };
 
 /**
@@ -155,50 +164,71 @@ export class Decimal {
   }
 
   multiply(v: DecimalArg, context?: MathContext): Decimal {
-    const prec = context === undefined ? DEFAULT_PRECISION : Math.max(context.precision, 0);
-    const mode = _roundingMode(context, RoundingMode.HALF_EVEN);
+    const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
 
-    const u = this;
+    const u: Decimal = this;
     v = coerce(v);
-    const w = new Decimal(ZERO);
-    w.exp = u.exp + v.exp;
+    let w = new Decimal(ZERO);
+    w.exp = (u.exp + v.exp);
 
     if (u.sign === 0 || v.sign === 0) {
-      return w;
+      return usePrecision ? w : w.setScale(scaleprec);
     }
 
     w.data = multiply(u.data, v.data);
     w.sign = u.sign === v.sign ? 1 : -1;
+    w.trim();
 
     // Adjust coefficient to match precision
-    const delta = w.precision() - prec;
-    if (delta > 0) {
-      return w.shiftright(delta, mode);
+    if (usePrecision) {
+      const delta = w.precision() - scaleprec;
+      if (delta > 0) {
+        w = w.shiftright(delta, rounding);
+      }
+    } else {
+      w = w.setScale(scaleprec, rounding);
     }
-    return w.trim();
+    return w;
   }
 
   /**
    * Divide this number by v and return the quotient.
    */
   divide(v: DecimalArg, context?: MathContext): Decimal {
+    const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
+
     v = coerce(v);
-    let w = this.checkDivision(v);
-    if (w !== undefined) {
-      return w;
+    if (this.checkDivision(v)) {
+      return usePrecision ? ZERO : ZERO.setScale(scaleprec);
     }
 
     let u: Decimal = this;
-    w = new Decimal(ZERO);
+    if (!usePrecision) {
+      // Shift the numerator to ensure the result has the desired scale.
+      const sh = scaleprec + v.scale();
+      if (sh > 0) {
+        u = u.shiftleft(sh);
+        u.exp -= sh;
+      }
+    }
 
-    const prec = context === undefined ? DEFAULT_PRECISION : Math.max(context.precision, 0);
-    const mode = _roundingMode(context, RoundingMode.HALF_EVEN);
+    let w = new Decimal(ZERO);
 
-    const shift = (v.precision() - u.precision()) + prec + 1;
+    // Shift in extra digits for rounding.
+    let shift = 2;
+
+    // In precision mode, ensure shift takes into account target precision
+    if (usePrecision) {
+      shift += (v.precision() - u.precision()) + scaleprec;
+    }
+
+    // Calculate the exponent on the result
     const exp = (u.exp - v.exp) - shift;
+
+    // Shift numerator or denominator
     if (shift > 0) {
       u = u.shiftleft(shift);
-    } else {
+    } else if (shift < 0) {
       v = v.shiftleft(-shift);
     }
 
@@ -209,10 +239,15 @@ export class Decimal {
     w.exp = exp;
     w.trim();
 
-    // Adjust precision of result
-    const d = w.precision() - prec;
-    w = d > 0 ? w.shiftright(d, mode) : w.shiftright(1, mode);
-    return context === undefined ? w.stripTrailingZeros() : w;
+    // Adjust the precision or scale
+    if (usePrecision) {
+      const delta = w.precision() - scaleprec;
+      w = delta > 0 ? w.shiftright(delta, rounding) : w.shiftright(1, rounding);
+    } else {
+      w = w.setScale(scaleprec, rounding);
+    }
+
+    return usePrecision ? w.stripTrailingZeros() : w;
   }
 
   /**
@@ -220,9 +255,8 @@ export class Decimal {
    */
   divmod(v: DecimalArg): [Decimal, Decimal] {
     v = coerce(v);
-    const w = this.checkDivision(v);
-    if (w !== undefined) {
-      return [w, new Decimal(v)];
+    if (this.checkDivision(v)) {
+      return [ZERO, new Decimal(v)];
     }
 
     let u: Decimal = this;
@@ -307,7 +341,7 @@ export class Decimal {
   /**
    * Returns a new number with the given scale, shifting the coefficient as needed.
    */
-  setScale(scale: number, roundingMode: RoundingMode = RoundingMode.HALF_EVEN): Decimal {
+  setScale(scale: number, roundingMode: RoundingModeType = RoundingMode.HALF_EVEN): Decimal {
     const diff = scale - this.scale();
     const r = diff > 0 ? this.shiftleft(diff) : this.shiftright(-diff, roundingMode);
     r.exp = scale === 0 ? 0 : -scale;
@@ -403,7 +437,7 @@ export class Decimal {
    * Shifts all digits to the right, reducing the precision. Result is rounded
    * using the given rounding mode.
    */
-  shiftright(shift: number, mode: RoundingMode = RoundingMode.HALF_EVEN): Decimal {
+  shiftright(shift: number, mode: RoundingModeType = RoundingMode.HALF_EVEN): Decimal {
     const w = new Decimal(this);
     if (shift <= 0 || w.sign === 0) {
       return w;
@@ -511,7 +545,7 @@ export class Decimal {
 
     // Determine how many integer digits to emit. If integer digits is
     // larger than the integer coefficient we emit leading zeros.
-    let int = this.precision() + exp;
+    let int = this.data.length === 0 ? 1 : this.precision() + exp;
     if (minInt <= 0 && this.compare(ONE, true) === -1) {
       // If the number is between 0 and 1 and format requested minimum
       // integer digits of zero, don't emit a leading zero digit.
@@ -612,15 +646,11 @@ export class Decimal {
   /**
    * Check for u/0 or 0/v cases.
    */
-  protected checkDivision(v: Decimal): Decimal | undefined {
+  protected checkDivision(v: Decimal): boolean {
     if (v.sign === 0) {
       throw new Error('Divide by zero');
     }
-    const vlen = v.data.length;
-    if (this.sign === 0 || this.data.length < vlen) {
-      return new Decimal(ZERO);
-    }
-    return undefined;
+    return this.sign === 0;
   }
 
   /**
@@ -659,7 +689,7 @@ export class Decimal {
   /**
    * Return a rounding indicator for a given rounding mode,
    */
-  protected round(rnd: number, mode: RoundingMode): number {
+  protected round(rnd: number, mode: RoundingModeType): number {
     switch (mode) {
     case RoundingMode.UP:
       return Number(rnd !== 0);
