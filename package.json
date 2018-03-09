@@ -13,6 +13,7 @@
     "lint": "lerna run lint",
     "release": "lerna run clean && lerna run build && lerna publish --force-publish=* --npm-client=npm",
     "test": "rimraf ./coverage && jest --coverage --verbose -i",
+    "test:codecov": "rimraf ./coverage && jest --coverage --coverageReporters=lcovonly --verbose -i",
     "test:watch": "jest --watch"
   },
   "dependencies": {
