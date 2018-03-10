@@ -50,7 +50,10 @@
     ],
     "moduleNameMapper": {
       "@phensley/(.+?)/(.*)": "<rootDir>/packages/$1/src/$2",
-      "@phensley/(.+)": "<rootDir>/packages/$1/src"
+      "@phensley/(.+)": "<rootDir>/packages/$1/src",
+      "./main/(.+)": "<rootDir>/node_modules/cldr-data/main/$1.json",
+      "./supplemental/(.+)": "<rootDir>/node_modules/cldr-data/supplemental/$1.json",
+      "./availableLocales": "<rootDir>/node_modules/cldr-data/availableLocales.json"
     },
     "testMatch": [
       "**/__tests__/**/*.test.ts"

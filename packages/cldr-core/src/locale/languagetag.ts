@@ -61,8 +61,8 @@ export class LanguageTag {
       canonicalize(REGION, region),
       canonicalize(VARIANT, variant)
     ];
-    this._extensions = extensions;
-    this._privateUse = privateUse;
+    this._extensions = extensions || [];
+    this._privateUse = privateUse || '';
   }
 
   /**

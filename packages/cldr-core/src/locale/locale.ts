@@ -1,5 +1,8 @@
 import { LanguageTag } from './languagetag';
 import { LanguageResolver } from './resolver';
+import { parseLanguageTag } from './parser';
+
+const UNDEFINED = new LanguageTag();
 
 /**
  * Wrapper pairing an application's opaque locale identifier with a
@@ -31,8 +34,13 @@ export interface Locale {
  * @alpha
  */
 export class Locale {
-  static parse(id: string): Locale {
-    const tag = LanguageResolver.resolve(id);
+  static resolve(id: string): Locale {
+    let tag = parseLanguageTag(id);
+    if (tag.hasLanguage() || tag.hasScript() || tag.hasRegion()) {
+      tag = LanguageResolver.resolve(tag);
+    } else {
+      tag = UNDEFINED;
+    }
     return { id, tag };
   }
 }

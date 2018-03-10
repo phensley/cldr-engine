@@ -39,7 +39,7 @@ export class ZonedDateTime {
     this._utc = new Date(this._epoch);
     this._zoneId = substituteZoneAlias(zoneId);
 
-    const info = getZoneInfo(zoneId);
+    const info = getZoneInfo(this._zoneId);
     let index = binarySearch(info.untils, this._epoch);
     this._dst = encoding.bitarrayGet(info.dsts, index);
 
@@ -193,22 +193,22 @@ export class ZonedDateTime {
    * Local Gregorian full 4-digit year.
    */
   getYear(): number {
-    return this._local.getFullYear();
+    return this._local.getUTCFullYear();
   }
 
   /**
    * UTC Gregorian full 4-digit year.
    */
   getUTCYear(): number {
-    return this._utc.getFullYear();
+    return this._utc.getUTCFullYear();
   }
 
   isLeapYear(): boolean {
-    return isLeap(this._local.getFullYear());
+    return isLeap(this.getYear());
   }
 
   isUTCLeapYear(): boolean {
-    return isLeap(this._utc.getFullYear());
+    return isLeap(this.getUTCYear());
   }
 
   /**
