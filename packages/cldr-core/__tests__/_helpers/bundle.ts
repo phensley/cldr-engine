@@ -13,18 +13,10 @@ import { Pack } from '../../src/resource/pack';
  * not exist it is generated.
  */
 export const languageBundle = (tag: string): Bundle => {
-  const scratch = join(__dirname, '../../scratch');
-  if (!fs.existsSync(scratch)) {
-    fs.mkdirSync(scratch);
-  }
-  const locale = LanguageResolver.addLikelySubtags(tag);
+  const locale = LanguageResolver.resolve(tag);
   const language = locale.language();
-  const path = join(scratch, `${language}.json.gz`);
-  if (!fs.existsSync(path)) {
-    const node = process.argv[0];
-    const script = join(__dirname, '..', '..', '..', 'cldr-compiler', 'bin', 'compiler.js');
-    child.execSync(`${node} ${script} pack -o ${scratch} -l ${language} -z`);
-  }
+  const path = join(__dirname, '..', '..', '..', 'cldr', 'packs', `${language}.json.gz`);
+
   const compressed = fs.readFileSync(path);
   const raw = zlib.gunzipSync(compressed).toString('utf-8');
   const pack = new Pack(raw);

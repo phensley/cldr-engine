@@ -1,3 +1,4 @@
+import * as crypto from 'crypto';
 import * as fs from 'fs';
 import { join } from 'path';
 import * as yargs from 'yargs';
@@ -25,6 +26,9 @@ export class PackEncoder implements Encoder {
   }
 }
 
+export const sha256 = (data: string | Buffer): string =>
+  crypto.createHash('sha256').update(data).digest('hex');
+
 /**
  * Generates static data that will be impored into the runtime.
  */
@@ -34,15 +38,14 @@ export const runPack = (argv: yargs.Arguments) => {
     langs = checkLanguages(argv.lang.split(','));
   }
 
-  const ext = argv.z ? '.gz' : '';
-
   const dest = argv.out;
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest);
   }
 
+  let path: string;
+  const hashes: { [x: string]: string } = {};
   const pkg = getPackageInfo();
-
   langs.forEach(lang => {
     // Get the list of languages that should live together in this bundle.
     const locales = localeMap[lang]; // [lang].concat(regionsFor(lang));
@@ -62,16 +65,26 @@ export const runPack = (argv: yargs.Arguments) => {
 
     // Pack all strings appended by the encoder.
     const raw = pack.render();
-    const path = join(dest, `${lang}.json${ext}`);
-    console.warn(`writing:  ${path}`);
 
-    // Compress and write the pack to disk.
-    if (argv.z) {
-      const data = zlib.gzipSync(raw, { level: zlib.constants.Z_BEST_COMPRESSION });
-      fs.writeFileSync(path, data, { encoding: 'binary' });
-    } else {
-      fs.writeFileSync(path, raw, { encoding: 'utf-8' });
-    }
+    // Write uncompressed pack
+    let name = `${lang}.json`;
+    path = join(dest, name);
+    console.warn(`writing:  ${path}`);
+    fs.writeFileSync(path, raw, { encoding: 'utf-8' });
+    hashes[name] = sha256(raw);
+
+    // Write compressed
+    name = `${lang}.json.gz`;
+    path = join(dest, name);
+    console.warn(`writing:  ${path}`);
+    const data = zlib.gzipSync(raw, { level: zlib.constants.Z_BEST_COMPRESSION });
+    fs.writeFileSync(path, data, { encoding: 'binary' });
+    hashes[name] = sha256(data);
   });
 
+  // Write hashes file
+  path = join(dest, 'sha256sums.txt');
+  console.warn(`writing: ${path}`);
+
+  fs.writeFileSync(path, Object.keys(hashes).sort().map(k => `${hashes[k]}  ${k}`).join('\n') + '\n');
 };

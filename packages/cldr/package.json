@@ -18,7 +18,7 @@
     "api:local": "yarn run api -l",
     "build": "yarn run build:code && yarn run build:packs",
     "build:code": "tsc -p ./tsconfig.build.json",
-    "build:packs": "cldr-compiler pack -o ./packs -z",
+    "build:packs": "cldr-compiler pack -o ./packs",
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib ./packs",
     "coverage": "jest --coverage --runInBand --no-cache",
@@ -31,6 +31,7 @@
   "files": [
     "lib/",
     "packs/*.gz",
+    "packs/sha*.txt",
     "scripts/"
   ],
   "dependencies": {
