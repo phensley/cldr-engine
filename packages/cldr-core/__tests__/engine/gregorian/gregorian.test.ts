@@ -8,8 +8,8 @@ const INTERNAL = new GregorianInternal(SCHEMA, new WrapperInternal());
 
 const datetime = (e: number, z: string) => new ZonedDateTime(e, z);
 
-// March 11, 2018 3:00:25 AM UTC
-const MARCH_11_2018_030025_UTC = 1520751625000;
+// March 11, 2018 7:00:25 AM UTC
+const MARCH_11_2018_070025_UTC = 1520751625000;
 
 const DAY = 86400000;
 const NEW_YORK = 'America/New_York';
@@ -17,8 +17,8 @@ const LOS_ANGELES = 'America/Los_Angeles';
 const LONDON = 'Europe/London';
 
 test('formats', () => {
-  const mar11 = datetime(MARCH_11_2018_030025_UTC, LOS_ANGELES);
-  const mar14 = datetime(MARCH_11_2018_030025_UTC + (DAY * 3), LOS_ANGELES);
+  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   const engine = new GregorianEngine(INTERNAL, EN);
   let s = engine.format(mar11, { date: 'full' });
@@ -62,8 +62,8 @@ test('formats', () => {
 });
 
 test('intervals', () => {
-  const mar11 = datetime(MARCH_11_2018_030025_UTC, LOS_ANGELES);
-  const mar14 = datetime(MARCH_11_2018_030025_UTC + (DAY * 3), LOS_ANGELES);
+  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   let engine = new GregorianEngine(INTERNAL, EN);
   let s = engine.formatInterval(mar11, mar14, 'yMMMd');
@@ -102,7 +102,7 @@ test('intervals', () => {
 });
 
 test('day periods', () => {
-  const base = MARCH_11_2018_030025_UTC;
+  const base = MARCH_11_2018_070025_UTC;
   const losangeles = (n: number) => datetime(base + n, LOS_ANGELES);
   const london = (n: number) => datetime(base + n, LONDON);
 
@@ -110,19 +110,35 @@ test('day periods', () => {
 
   let d = losangeles(0);
   expect(engine.formatRaw(d, 'a')).toEqual('PM');
-  expect(engine.formatRaw(d, 'aa')).toEqual('PM');
-  expect(engine.formatRaw(d, 'aaa')).toEqual('PM');
   expect(engine.formatRaw(d, 'aaaa')).toEqual('PM');
+  expect(engine.formatRaw(d, 'aaaaa')).toEqual('p');
+  expect(engine.formatRaw(d, 'b')).toEqual('PM');
+  expect(engine.formatRaw(d, 'bbbb')).toEqual('PM');
+  expect(engine.formatRaw(d, 'bbbbb')).toEqual('p');
 
   d = london(0);
   expect(engine.formatRaw(d, 'a')).toEqual('AM');
-  expect(engine.formatRaw(d, 'aa')).toEqual('AM');
-  expect(engine.formatRaw(d, 'aaa')).toEqual('AM');
   expect(engine.formatRaw(d, 'aaaa')).toEqual('AM');
+  expect(engine.formatRaw(d, 'aaaaa')).toEqual('a');
+  expect(engine.formatRaw(d, 'b')).toEqual('AM');
+  expect(engine.formatRaw(d, 'bbbb')).toEqual('AM');
+  expect(engine.formatRaw(d, 'bbbbb')).toEqual('a');
+
+  d = london(-(7 * 3600 * 1000));
+  expect(engine.formatRaw(d, 'b')).toEqual('midnight');
+  expect(engine.formatRaw(d, 'bbbb')).toEqual('midnight');
+  expect(engine.formatRaw(d, 'bbbbb')).toEqual('mi');
+
+  d = london(5 * 3600 * 1000);
+  expect(engine.formatRaw(d, 'b')).toEqual('noon');
+  expect(engine.formatRaw(d, 'bbbb')).toEqual('noon');
+  expect(engine.formatRaw(d, 'bbbbb')).toEqual('n');
+
+  // TODO: flexible day periods
 });
 
 test('weekday firstday raw', () => {
-  const base = MARCH_11_2018_030025_UTC;
+  const base = MARCH_11_2018_070025_UTC;
 
   // March 11 NY
   let d = datetime(base, NEW_YORK);

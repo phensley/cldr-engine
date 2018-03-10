@@ -317,7 +317,11 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     const minute = date.getMinute();
     let key: DayPeriodType = hour < 13 ? 'am' : 'pm';
     if (minute === 0) {
-      key = hour === 0 ? 'midnight' : 'noon';
+      if (hour === 0) {
+        key = 'midnight';
+      } else if (hour === 12) {
+        key = 'noon';
+      }
     }
     switch (width) {
     case 5:

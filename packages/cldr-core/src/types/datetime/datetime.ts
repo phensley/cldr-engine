@@ -58,6 +58,10 @@ export class ZonedDateTime {
     return this._zoneId;
   }
 
+  epochUTC(): number {
+    return this._epoch;
+  }
+
   /**
    * Meta zone ID for selecting an appropriate format or standalone name.
    */

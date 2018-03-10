@@ -1,4 +1,8 @@
 import {
+  datetimeSuite
+} from './datetime';
+
+import {
   numberEngineSuite,
   numberFormatSuite,
   numberFormatBaselineSuite,
@@ -7,6 +11,7 @@ import {
 
 const options = { async: false, delay: 0.5 };
 
+datetimeSuite.run(options);
 numberEngineSuite.run(options);
 numberFormatBaselineSuite.run(options);
 numberFormatSuite.run(options);
