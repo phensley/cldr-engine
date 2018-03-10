@@ -692,22 +692,31 @@ export class Decimal {
   protected round(rnd: number, mode: RoundingModeType): number {
     switch (mode) {
     case RoundingMode.UP:
+      // round away from zero
       return Number(rnd !== 0);
     case RoundingMode.DOWN:
     case RoundingMode.TRUNCATE:
+      // round towards zero
       return 0;
     case RoundingMode.CEILING:
+      // round towards positive infinity
       return Number(!(rnd === 0 || this.sign === -1));
     case RoundingMode.FLOOR:
+      // round towards negative infinity
       return Number(!(rnd === 0 || this.sign >= 0));
     case RoundingMode.HALF_UP:
+      // if n >= 5 round up; otherwise round down
       return Number(rnd >= 5);
     case RoundingMode.HALF_DOWN:
+      // if n > 5 round up; otherwise round down
       return Number(rnd > 5);
     case RoundingMode.HALF_EVEN:
+      // if n = 5 and digit to left of n is odd round up; if even round down
       return Number((rnd > 5) || ((rnd === 5 && this.isodd())));
     case RoundingMode.ZERO_FIVE_UP:
     {
+      // round away from zero if digit to left is is 0 or 5
+      // otherwise round towards zero
       const lsd = this.data.length > 0 ? this.data[0] % 10 : 0;
       return Number(!(rnd === 0) && (lsd === 0 || lsd === 5));
     }

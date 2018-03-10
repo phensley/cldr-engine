@@ -372,6 +372,18 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-5'));
 
+  m = RoundingMode.TRUNCATE;
+  expect(shr('5.5', 1, m)).toEqual(parse('5'));
+  expect(shr('2.5', 1, m)).toEqual(parse('2'));
+  expect(shr('1.6', 1, m)).toEqual(parse('1'));
+  expect(shr('1.1', 1, m)).toEqual(parse('1'));
+  expect(shr('1.0', 1, m)).toEqual(parse('1'));
+  expect(shr('-1.0', 1, m)).toEqual(parse('-1'));
+  expect(shr('-1.1', 1, m)).toEqual(parse('-1'));
+  expect(shr('-1.6', 1, m)).toEqual(parse('-1'));
+  expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
+  expect(shr('-5.5', 1, m)).toEqual(parse('-5'));
+
   m = RoundingMode.CEILING;
   expect(shr('5.5', 1, m)).toEqual(parse('6'));
   expect(shr('2.5', 1, m)).toEqual(parse('3'));
@@ -409,7 +421,6 @@ test('shift right rounding modes', () => {
   expect(shr('-5.5', 1, m)).toEqual(parse('-6'));
 
   m = RoundingMode.HALF_DOWN;
-  // same as TRUNCATE
   expect(shr('5.5', 1, m)).toEqual(parse('5'));
   expect(shr('2.5', 1, m)).toEqual(parse('2'));
   expect(shr('1.6', 1, m)).toEqual(parse('2'));

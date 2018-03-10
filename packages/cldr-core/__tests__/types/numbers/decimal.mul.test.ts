@@ -32,6 +32,14 @@ test('multiply', () => {
   expect(mul('10203040506070809010', '-9.876543210')).toEqual(parse('-100770770431588612506.9223221'));
 });
 
+test('multiply integers', () => {
+  const big = String(Number.MAX_SAFE_INTEGER);
+  console.log(big);
+  const n = new Decimal(big);
+  const r = n.multiply(n);
+  console.log(r.toString());
+});
+
 test('multiply context', () => {
   const diameter = parse('8.8e26');
   let circ = diameter.multiply(DecimalConstants.PI);

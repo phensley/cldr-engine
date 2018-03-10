@@ -28,10 +28,18 @@ const big = String(Number.MAX_SAFE_INTEGER));
 
 const n = new Decimal(big);
 n.add(n);
-// > "18014398509481982"
+// > 18014398509481982
 
+// Default precision is 28
 n.multiply(n);
-// > "81129638414606663681390495662081"
+// > 81129638414606663681390495660000
+
+n.multiply(n, { precision: 40 });
+// > 81129638414606663681390495662081
+
+// You can also use scale instead to control the number of decimal places
+n.multiply(n, { scale: 5 });
+// > 81129638414606663681390495662081.00000
 
 const pi = new Decimal('3.141592653');
 pi.precision();
@@ -40,18 +48,22 @@ pi.precision();
 pi.scale();
 // > 9
 
+// Default precision is 28
 n.divide(pi);
-// > "2867080570149586.2"
+// > 2867080570149586.162786331166
 
 n.divide(pi, { precision: 30 });
-// > "2867080570149586.16278633116602"
+// > 2867080570149586.16278633116602
 
 n.divide(pi, { precision: 20 });
-// > "2867080570149586.1628"
+// > 2867080570149586.1628
 
-const ctx: MathContext = { precision: 20, rounding: 'floor' };
+n.divide(pi, { scale: 4 });
+// > 2867080570149586.1628
+
+const ctx: MathContext = { scale: 4, rounding: 'floor' };
 n.divide(pi, ctx);
-// > "2867080570149586.1627"
+// > 2867080570149586.1627
 
 const EN = cldr.get('en-US');
 EN.Numbers.formatDecimal(n.divide(pi, ctx), opts);
@@ -60,21 +72,18 @@ EN.Numbers.formatDecimal(n.divide(pi, ctx), opts);
 
 ### Parsing
 
+The `Decimal` type's parser does not support locale-aware parsing, and only supports parsing numbers with a handful of characters. Any unexpected characters will throw an error. A locale-aware parser can be added in the future but that interface will be separate from the `Decimal` type, e.g `cldr.Numbers.parseNumber(string)`.
+
+```
+number = '0'..'9' | '-' | '+' | 'e' | 'E' | '.' | ','
+```
+
 Exponential notation is supported.
 
 ```typescript
 const n = new Decimal('-1.2e-18');
 // > -0.0000000000000000012
 ```
-
-
-The `Decimal` type's parser does not support locale-aware parsing, and only supports parsing numbers with a handful of characters. Any unexpected characters will throw an error.
-
-```
-number = '0'..'9' | '-' | '+' | 'e' | 'E' | '.' | ','
-```
-
-A locale-aware parser can be added in the future but that interface will be separate from the `Decimal` type, e.g `cldr.Numbers.parseNumber(string)`.
 
 Note: For speed, parsing is done in reverse. Error messages may seem confusing as they will reflect the index of the first illegal character found, scanning right to left.
 
@@ -114,6 +123,53 @@ new Decimal('10').divide('6', { precision: 10 });
 
 new Decimal('10').divide('6', { precision: 10, rounding: 'floor' });
 // > 1.666666666
+```
+
+### Scale
+
+A scale value can be provided. This will be used instead of precision.
+
+```typescript
+new Decimal('10').divide('6', { scale: 5 });
+// > 1.66667
+
+new Decimal('10').divide('7', { scale: 20 });
+// > 1.42857142857142857143
+```
+
+### Setting the scale
+
+Using `setScale` will adjust the coefficient to the given scale.
+
+```typescript
+const n = new Decimal('12345.12345');
+n.setScale(2);
+// > 12345.12
+
+n.setScale(-2);
+// > 12300
+
+n.setScale(2, 'ceiling');
+```
+
+### Rounding
+
+The following rounding modes are supported. In the descriptions the value `n` is the least-significant digit being examined for rounding.
+
+ * `up` - round away from zero
+ * `down` - round towards zero
+ * `ceiling` - round towards positive infinity
+ * `floor` - round towards negative infinity
+ * `half-up` - if `n >= 5` round `up`; otherwise round `down`
+ * `half-down` - if `n > 5` round `up`; otherwise round `down`
+ * `half-even` (default) - if `n = 5` and digit to left of `n` is odd round `up`; if even round `down`
+ * `05up` - round away from zero if digit to left is is 0 or 5; otherwise round towards zero
+ * `truncate` - same as `half-down`
+
+```typescript
+new Decimal('1.5').setScale(0)
+new Decimal('10').divide('6', { scale: 5, rounding: 'ceiling' });
+// > 12345.13
 ```
 
 ### Addition
@@ -178,19 +234,6 @@ const circumference = diameter.multiply(DecimalConstants.PI, { precision: 60 });
 
 circumference.divide(DecimalConstants.PI, { precision: 60 });
 // > 880000000000000000000000000
-```
-
-### Scaling
-
-Using `setScale` will adjust the coefficient to the given scale.
-
-```typescript
-const n = new Decimal('12345.12345');
-n.setScale(2);
-// > 12345.12
-
-n.setScale(-2);
-// > 12300
 ```
 
 ### Moving the decimal point
