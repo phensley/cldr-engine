@@ -47,6 +47,18 @@ const parseMathContext = (rounding: RoundingModeType, context?: MathContext): [b
 };
 
 /**
+ * Return the storage space needed to hold a given number of digits.
+ */
+const size = (n: number): number => {
+  if (n <= 0) {
+    throw new Error(`Cannot represent a coefficient with ${n} digits`);
+  }
+  const q = (n / Constants.RDIGITS) | 0;
+  const r = n - q * Constants.RDIGITS;
+  return r === 0 ? q : q + 1;
+};
+
+/**
  * Arbitrary precision decimal type.
  *
  * @alpha
@@ -358,15 +370,6 @@ export class Decimal {
   }
 
   /**
-   * Return the storage space needed to hold a given number of digits.
-   */
-  size(n: number): number {
-    const q = (n / Constants.RDIGITS) | 0;
-    const r = n - q * Constants.RDIGITS;
-    return r === 0 ? q : q + 1;
-  }
-
-  /**
    * Move the decimal point -n (left) or +n (right) places. Does not change
    * precision, only affects the exponent.
    */
@@ -392,7 +395,7 @@ export class Decimal {
     const r = shift - q * Constants.RDIGITS;
 
     // Expand w to hold shifted result and zero all elements.
-    let n = this.size(u.precision() + shift);
+    let n = size(u.precision() + shift);
     w.data = new Array(n);
     w.data.fill(0);
 
@@ -487,6 +490,25 @@ export class Decimal {
       w._increment();
     }
     return w.trim();
+  }
+
+  /**
+   * Increment the least-significant integer digit.
+   */
+  increment(): Decimal {
+    const r = new Decimal(this);
+    if (r.sign === -1 || r.exp !== 0) {
+      return r.add(DecimalConstants.ONE);
+    }
+    r._increment();
+    return r;
+  }
+
+  /**
+   * Decrement the least-significant integer digit.
+   */
+  decrement(): Decimal {
+    return this.subtract(DecimalConstants.ONE);
   }
 
   /**
@@ -665,7 +687,7 @@ export class Decimal {
   }
 
   /**
-   * Increment the least-significant digit by 1.
+   * Increment the least-significant digit of the coefficient.
    */
   protected _increment(): void {
     const d = this.data;

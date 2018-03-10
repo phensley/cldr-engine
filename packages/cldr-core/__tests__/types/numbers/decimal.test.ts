@@ -286,6 +286,27 @@ test('move point', () => {
   expect(parse('1.234').movePoint(6).toString()).toEqual('1234000');
 });
 
+test('increment', () => {
+  expect(parse('-1').increment()).toEqual(parse('0'));
+  expect(parse('0').increment()).toEqual(parse('1'));
+  expect(parse('0.9').increment()).toEqual(parse('1.9'));
+  expect(parse('.1111111111111').increment()).toEqual(parse('1.1111111111111'));
+
+  expect(parse('9').increment()).toEqual(parse('10'));
+  expect(parse('99').increment()).toEqual(parse('100'));
+  expect(parse('999').increment()).toEqual(parse('1000'));
+  expect(parse('9999').increment()).toEqual(parse('10000'));
+  expect(parse('99999').increment()).toEqual(parse('100000'));
+  expect(parse('999999').increment()).toEqual(parse('1000000'));
+  expect(parse('9999999').increment()).toEqual(parse('10000000'));
+});
+
+test('decrement', () => {
+  expect(parse('-1').decrement()).toEqual(parse('-2'));
+  expect(parse('1').decrement()).toEqual(parse('0'));
+  expect(parse('1.9').decrement()).toEqual(parse('0.9'));
+});
+
 test('shift left', () => {
   expect(parse('1.0').shiftleft(0)).toEqual(parse('1.0'));
   expect(parse('1.0').shiftleft(1)).toEqual(parse('10.0'));
@@ -345,6 +366,12 @@ test('shift right', () => {
   expect(shr('100000000000000', 12, m)).toEqual(parse('100e12'));
   expect(shr('100000000000000', 13, m)).toEqual(parse('10e13'));
   expect(shr('100000000000000', 14, m)).toEqual(parse('1e14'));
+
+  expect(shr('99999', 1, m)).toEqual(parse('10000e1'));
+  expect(shr('999999', 1, m)).toEqual(parse('100000e1'));
+  expect(shr('9999999', 1, m)).toEqual(parse('1000000e1'));
+  expect(shr('99999999', 1, m)).toEqual(parse('10000000e1'));
+  expect(shr('999999999', 1, m)).toEqual(parse('100000000e1'));
 });
 
 test('shift right rounding modes', () => {
