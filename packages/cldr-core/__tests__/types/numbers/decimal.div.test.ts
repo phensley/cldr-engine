@@ -229,6 +229,26 @@ test('divmod', () => {
   expect(divmod('10e1', '.06')).toEqual([parse('1666'), parse('.04')]);
   expect(divmod('10e2', '.06')).toEqual([parse('16666'), parse('.04')]);
 
+  expect(divmod('12345.0000000000', '12')).toEqual([parse('1028'), parse('9.0000000000')]);
+  expect(divmod('12.0000000000000', '12')).toEqual([parse('1'), parse('0.0000000000000')]);
+  expect(divmod('12', '3.0000000000000')).toEqual([parse('4'), parse('0.0000000000000')]);
+
   expect(divmod('96441598043416655685', '13367828761276'))
     .toEqual([parse('7214454'), parse('12365313972381')]);
+});
+
+const DAY = new Decimal(86400);
+const HOUR = new Decimal(3600);
+const MINUTE = new Decimal(60);
+
+test('divmod conversions', () => {
+  const timestamp = new Decimal(1468800 + 46800 + 2520 + 23);
+  const [days, t2] = timestamp.divmod(DAY);
+  const [hours, t3] = t2.divmod(HOUR);
+  const [minutes, seconds] = t3.divmod(MINUTE);
+
+  expect(days).toEqual(parse('17'));
+  expect(hours).toEqual(parse('13'));
+  expect(minutes).toEqual(parse('42'));
+  expect(seconds).toEqual(parse('23'));
 });

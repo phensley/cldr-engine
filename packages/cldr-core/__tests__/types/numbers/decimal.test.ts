@@ -92,6 +92,7 @@ test('integer digits', () => {
   expect(parse('1e3').integerDigits()).toEqual(4);
   expect(parse('1e4').integerDigits()).toEqual(5);
   expect(parse('1e5').integerDigits()).toEqual(6);
+  expect(parse('12345.999999').integerDigits()).toEqual(5);
 });
 
 test('operands', () => {
