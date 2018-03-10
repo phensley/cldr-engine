@@ -41,6 +41,9 @@ const parseZoneInfo = (raw: string): ZoneInfo => {
   return { offsets, untils, dsts, metazoneIds: _metazoneIds, metazoneUntils };
 };
 
+zoneCache['Etc/GMT'] = parseZoneInfo(zoneDST['Etc/GMT']);
+zoneCache['UTC'] = zoneCache['Etc/GMT'];
+
 export const getZoneInfo = (zoneId: string): ZoneInfo => {
   let zone = zoneCache[zoneId];
   if (zone !== undefined) {
@@ -54,7 +57,7 @@ export const getZoneInfo = (zoneId: string): ZoneInfo => {
     return zone;
   }
   // Not much else to do for an unidentified zone except default to UTC
-  return getZoneInfo('UTC');
+  return zoneCache['UTC'];
 };
 
 /**

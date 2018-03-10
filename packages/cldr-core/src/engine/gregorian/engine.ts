@@ -35,7 +35,8 @@ export class GregorianEngine {
    * Get standalone day period.
    */
   getDayPeriod(dayPeriod: DayPeriodType, width: FieldWidthType = FieldWidth.WIDE): string {
-    return this.internal.dayPeriods.standAlone[width](this.bundle, dayPeriod, Alt.NONE);
+    const impl = this.internal.dayPeriods.standAlone[width];
+    return impl === undefined ? '' : impl(this.bundle, dayPeriod, Alt.NONE);
   }
 
   /**
@@ -58,21 +59,24 @@ export class GregorianEngine {
    * Get standalone month name.
    */
   getMonth(month: MonthType, width: FieldWidthType = FieldWidth.WIDE): string {
-    return this.internal.months.standAlone[width](this.bundle, month);
+    const impl = this.internal.months.standAlone[width];
+    return impl === undefined ? '' : impl(this.bundle, month);
   }
 
   /**
    * Get standalone quarter name.
    */
   getQuarter(quarter: QuarterType, width: FieldWidthType = FieldWidth.WIDE): string {
-    return this.internal.quarters.standAlone[width](this.bundle, quarter);
+    const impl = this.internal.quarters.standAlone[width];
+    return impl === undefined ? '' : impl(this.bundle, quarter);
   }
 
   /**
    * Get standalone weekday name.
    */
   getWeekday(weekday: WeekdayType, width: FieldWidthType = FieldWidth.WIDE): string {
-    return this.internal.weekdays.standAlone[width](this.bundle, weekday);
+    const impl = this.internal.weekdays.standAlone[width];
+    return impl === undefined ? '' : impl(this.bundle, weekday);
   }
 
   getCompactISOWeekDate(date: ZonedDateTime): string {

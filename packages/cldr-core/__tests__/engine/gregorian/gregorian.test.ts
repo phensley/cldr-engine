@@ -14,12 +14,13 @@ const MARCH_11_2018_030025_UTC = 1520751625000;
 const DAY = 86400000;
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
+const LONDON = 'Europe/London';
 
-test('basics', () => {
+test('formats', () => {
   const mar11 = datetime(MARCH_11_2018_030025_UTC, LOS_ANGELES);
   const mar14 = datetime(MARCH_11_2018_030025_UTC + (DAY * 3), LOS_ANGELES);
 
-  let engine = new GregorianEngine(INTERNAL, EN);
+  const engine = new GregorianEngine(INTERNAL, EN);
   let s = engine.format(mar11, { date: 'full' });
   expect(s).toEqual('Saturday, March 10, 2018');
 
@@ -58,8 +59,14 @@ test('basics', () => {
 
   s = engine.format(mar11, { date: 'yMMMd', time: 'hms', wrap: 'full' });
   expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
+});
 
-  s = engine.formatInterval(mar11, mar14, 'yMMMd');
+test('intervals', () => {
+  const mar11 = datetime(MARCH_11_2018_030025_UTC, LOS_ANGELES);
+  const mar14 = datetime(MARCH_11_2018_030025_UTC + (DAY * 3), LOS_ANGELES);
+
+  let engine = new GregorianEngine(INTERNAL, EN);
+  let s = engine.formatInterval(mar11, mar14, 'yMMMd');
   expect(s).toEqual('Mar 10 – 14, 2018');
 
   engine = new GregorianEngine(INTERNAL, EN_GB);
@@ -92,6 +99,26 @@ test('basics', () => {
   engine = new GregorianEngine(INTERNAL, ZH);
   s = engine.format(mar11, { date: 'full' });
   expect(s).toEqual('2018年3月10日星期六');
+});
+
+test('day periods', () => {
+  const base = MARCH_11_2018_030025_UTC;
+  const losangeles = (n: number) => datetime(base + n, LOS_ANGELES);
+  const london = (n: number) => datetime(base + n, LONDON);
+
+  const engine = new GregorianEngine(INTERNAL, EN);
+
+  let d = losangeles(0);
+  expect(engine.formatRaw(d, 'a')).toEqual('PM');
+  expect(engine.formatRaw(d, 'aa')).toEqual('PM');
+  expect(engine.formatRaw(d, 'aaa')).toEqual('PM');
+  expect(engine.formatRaw(d, 'aaaa')).toEqual('PM');
+
+  d = london(0);
+  expect(engine.formatRaw(d, 'a')).toEqual('AM');
+  expect(engine.formatRaw(d, 'aa')).toEqual('AM');
+  expect(engine.formatRaw(d, 'aaa')).toEqual('AM');
+  expect(engine.formatRaw(d, 'aaaa')).toEqual('AM');
 });
 
 test('weekday firstday raw', () => {
