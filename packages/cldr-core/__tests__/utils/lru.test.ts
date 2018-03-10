@@ -24,6 +24,21 @@ test('basics', () => {
   expect(cache.toString()).toEqual('ggg=6 ccc=33 fff=6 ddd=4 eee=5');
 });
 
+test('defaults', () => {
+  const cache = new LRU<number, string>();
+  for (let i = 0; i < 200; i++) {
+    cache.set(i, String(i));
+  }
+  expect(cache.size()).toEqual(100);
+  for (let i = 17; i < 300; i += 3) {
+    cache.get(i);
+  }
+  for (let i = 15; i < 400; i += 3) {
+    cache.get(i);
+  }
+  expect(cache.size()).toEqual(100);
+});
+
 test('zero capacity', () => {
   // Special case where nothing is retained in the lru. This is used
   // to performance test code that depends on a cache, in order to
