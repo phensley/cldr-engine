@@ -295,7 +295,7 @@ const convert = (group: any, root: any) => {
  * Load the cldr data from the given path. Raise an error if the path
  * does not exist, unless the optional flag is true.
  */
-const load = (path: string, optional = false) => {
+export const load = (path: string, optional = false) => {
   try {
     return cldr(path);
   } catch (e) {

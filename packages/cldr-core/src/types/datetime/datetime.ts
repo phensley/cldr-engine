@@ -40,10 +40,12 @@ export class ZonedDateTime {
     this._zoneId = substituteZoneAlias(zoneId);
 
     const info = getZoneInfo(this._zoneId);
+    const len = info.untils.length;
     let index = binarySearch(info.untils, this._epoch);
     this._dst = encoding.bitarrayGet(info.dsts, index);
 
-    const len = info.untils.length;
+    // TODO: extend untils/offsets past 2037 programmatically.
+
     this._offset = index < len ? info.offsets[index] : info.offsets[len - 1];
     this._local = new Date(this._epoch - (this._offset * 60000));
 
@@ -81,13 +83,6 @@ export class ZonedDateTime {
    */
   isDaylightSavings(): boolean {
     return this._dst;
-  }
-
-  /**
-   * Local Date object.
-   */
-  getLocal(): Date {
-    return this._local;
   }
 
   /**
@@ -253,7 +248,7 @@ export class ZonedDateTime {
   }
 
   toISOString(): string {
-    return this._local.toISOString();
+    return this._utc.toISOString();
   }
 
   private calcISO(): void {

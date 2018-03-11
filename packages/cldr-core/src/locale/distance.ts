@@ -27,6 +27,7 @@ const getany = (map: DistanceMap): DistanceNode => {
       return node;
     }
   }
+  /* istanbul ignore next */
   throw new Error('Severe error: wildcard levels missing in distance map.');
 };
 
