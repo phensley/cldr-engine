@@ -1,6 +1,7 @@
 import { languageBundle } from './bundle';
 import { Bundle } from '@phensley/cldr-schema';
 
+export const AZ: Bundle = languageBundle('az');
 export const DE: Bundle = languageBundle('de');
 export const EN: Bundle = languageBundle('en');
 export const EN_GB: Bundle = languageBundle('en-GB');

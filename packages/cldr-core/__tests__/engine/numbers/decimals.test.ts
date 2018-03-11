@@ -12,6 +12,14 @@ import {
 
 const INTERNAL = new NumbersInternal(buildSchema(), new WrapperInternal());
 
+test('decimals unknown style', () => {
+  const opts: DecimalFormatOptions = { style: 'UNKNOWN' as DecimalFormatStyleType };
+  const engine = new NumbersEngine(INTERNAL, EN);
+
+  const actual = engine.formatDecimal('1000000000', opts);
+  expect(actual).toEqual('');
+});
+
 test('decimals short', () => {
   const engine = new NumbersEngine(INTERNAL, EN);
   let actual: string;

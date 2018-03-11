@@ -3,6 +3,7 @@ import { EN, EN_GB, ES_419, FR, DE, KM } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import {
   CurrencyFormatOptions,
+  CurrencyFormatStyleType,
   DecimalFormatOptions,
   DecimalFormatStyleType,
   NumbersEngine,
@@ -57,6 +58,10 @@ test('currency', () => {
   opts.maximumFractionDigits = 0;
   actual = engine.formatCurrency('999900.00', 'USD', opts);
   expect(actual).toEqual('$1M');
+
+  opts.style = 'UNKNOWN' as CurrencyFormatStyleType;
+  actual = engine.formatCurrency('1234.567', 'USD', opts);
+  expect(actual).toEqual('');
 });
 
 test('currency fractions', () => {
@@ -156,8 +161,8 @@ test('currency parts spacing', () => {
   ]);
 });
 
-test('currency display names', () => {
-  let engine = new NumbersEngine(INTERNAL, EN);
+test('currency symbols', () => {
+  const engine = new NumbersEngine(INTERNAL, EN);
 
   let s = engine.getCurrencySymbol('USD');
   expect(s).toEqual('$');
@@ -179,8 +184,12 @@ test('currency display names', () => {
 
   s = engine.getCurrencySymbol('UNKNOWN' as CurrencyType);
   expect(s).toEqual('');
+});
 
-  s = engine.getCurrencyDisplayName('USD');
+test('currency display names', () => {
+  let engine = new NumbersEngine(INTERNAL, EN);
+
+  let s = engine.getCurrencyDisplayName('USD');
   expect(s).toEqual('US Dollar');
 
   s = engine.getCurrencyPluralName('USD', 'one');
