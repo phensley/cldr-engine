@@ -48,7 +48,7 @@ test('decimals short fractions', () => {
   let actual: string;
   let opts: DecimalFormatOptions;
 
-  opts = { style: 'short', formatMode: 'default', maximumFractionDigits: 2 };
+  opts = { style: 'short', mode: 'default', maximumFractionDigits: 2 };
 
   actual = engine.formatDecimal('12345.6789', opts);
   expect(actual).toEqual('12.34K');
@@ -117,7 +117,7 @@ test('decimal compact', () => {
   expect(actual).toEqual('-1');
 
   opts.round = 'ceiling';
-  opts.formatMode = 'significant-maxfrac';
+  opts.mode = 'significant-maxfrac';
   opts.maximumFractionDigits = 1;
   actual = engine.formatDecimal('-0.999', opts);
   expect(actual).toEqual('-0.9');
@@ -128,7 +128,7 @@ test('decimal compact', () => {
 });
 
 test('decimal rounding', () => {
-  const opts: DecimalFormatOptions = { style: 'long', formatMode: 'significant-maxfrac' };
+  const opts: DecimalFormatOptions = { style: 'long', mode: 'significant-maxfrac' };
   const engine = new NumbersEngine(INTERNAL, EN);
 
   opts.round = 'ceiling';

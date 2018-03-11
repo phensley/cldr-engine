@@ -22,7 +22,7 @@ export type RoundingModeType =
   'up' | 'down' | 'ceiling' | 'floor' | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
 
 export interface NumberFormatOptions {
-  formatMode?: NumberFormatModeType;
+  mode?: NumberFormatModeType;
   round?: RoundingModeType;
   group?: boolean;
   minimumIntegerDigits?: number;

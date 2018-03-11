@@ -239,7 +239,7 @@ export class NumbersInternal {
     let ndigits = n.integerDigits();
     const ndivisor = divisorImpl(bundle, ndigits);
 
-    const fracDigits = ctx.formatMode === 'default' ? 0 : -1;
+    const fracDigits = ctx.mode === 'default' ? 0 : -1;
 
     // Move the decimal point of n, producing q1. We always strip trailing
     // zeros on compact patterns.

@@ -134,7 +134,7 @@ test('currency short', () => {
   actual = engine.formatCurrency('999900.00', 'USD', opts);
   expect(actual).toEqual('$999.9K');
 
-  opts.formatMode = 'significant-maxfrac';
+  opts.mode = 'significant-maxfrac';
   opts.maximumFractionDigits = 1;
   actual = engine.formatCurrency('999900.00', 'USD', opts);
   expect(actual).toEqual('$999.9K');

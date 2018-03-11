@@ -15,7 +15,7 @@ export class NumberContext {
 
   readonly options: NumberFormatOptions;
   roundingMode: RoundingModeType;
-  formatMode: NumberFormatModeType;
+  mode: NumberFormatModeType;
   useSignificant: boolean;
 
   minInt: number;
@@ -32,10 +32,10 @@ export class NumberContext {
   ) {
     this.options = options;
     this.roundingMode = options.round || 'half-even';
-    this.formatMode = options.formatMode === undefined ? defaultFormatMode : options.formatMode;
+    this.mode = options.mode === undefined ? defaultFormatMode : options.mode;
     this.currencyDigits = currencyDigits;
-    this.useSignificant = this.formatMode === NumberFormatMode.SIGNIFICANT ||
-      this.formatMode === NumberFormatMode.SIGNIFICANT_MAXFRAC;
+    this.useSignificant = this.mode === NumberFormatMode.SIGNIFICANT ||
+      this.mode === NumberFormatMode.SIGNIFICANT_MAXFRAC;
   }
 
   /**
@@ -68,7 +68,7 @@ export class NumberContext {
       }
 
       // Ensure we don't exceed the maximum number of fraction digits allowed.
-      if (this.formatMode === NumberFormatMode.SIGNIFICANT_MAXFRAC && this.maxFrac < n.scale()) {
+      if (this.mode === NumberFormatMode.SIGNIFICANT_MAXFRAC && this.maxFrac < n.scale()) {
         n = n.setScale(this.maxFrac, this.roundingMode);
       }
 
