@@ -235,8 +235,11 @@ export class NumbersInternal {
       patternImpl: DigitsArrow, divisorImpl: DivisorArrow): [Decimal, number] {
 
     // Select the correct divisor based on the number of integer digits in n.
+    const negative = n.isNegative();
     let ndigits = n.integerDigits();
     const ndivisor = divisorImpl(bundle, ndigits);
+
+    const fracDigits = ctx.formatMode === 'default' ? 0 : -1;
 
     // Move the decimal point of n, producing q1. We always strip trailing
     // zeros on compact patterns.
@@ -248,11 +251,12 @@ export class NumbersInternal {
     // Select the initial compact pattern based on the integer digits of n.
     // The plural category doesn't matter until the final pattern is selected.
     let raw = patternImpl(bundle, ndigits, Plural.OTHER) || standardRaw;
-    let pattern = this.getNumberPattern(raw, false);
+    let pattern = this.getNumberPattern(raw, negative);
 
     // Adjust q1 using the compact pattern's parameters, to produce q2.
     const q1digits = q1.integerDigits();
-    ctx.setCompact(pattern, q1digits, ndivisor);
+    ctx.setCompact(pattern, q1digits, ndivisor, fracDigits);
+
     let q2 = ctx.adjust(q1);
     const q2digits = q2.integerDigits();
 
@@ -262,14 +266,14 @@ export class NumbersInternal {
       ndigits++;
       const divisor = divisorImpl(bundle, ndigits);
       raw = patternImpl(bundle, ndigits, Plural.OTHER) || standardRaw;
-      pattern = this.getNumberPattern(raw, false);
+      pattern = this.getNumberPattern(raw, negative);
 
       // If divisor changed we need to divide and adjust again. We don't divide,
       // we just move the decimal point, since our Decimal type uses a radix that
       // is a power of 10. Otherwise q2 is ready for formatting.
       if (divisor > ndivisor) {
         q1 = n.movePoint(-divisor).stripTrailingZeros();
-        ctx.setCompact(pattern, q1.integerDigits(), divisor);
+        ctx.setCompact(pattern, q1.integerDigits(), divisor, fracDigits);
         q2 = ctx.adjust(q1);
       }
     }

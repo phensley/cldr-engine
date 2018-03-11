@@ -42,19 +42,18 @@ export class NumberContext {
    * Set a pattern.
    */
   setPattern(pattern: NumberPattern): void {
-    this._setPattern(pattern, -1, -1);
+    this._setPattern(pattern, -1, -1, -1);
   }
 
   /**
    * Set a compact pattern.
    */
-  setCompact(pattern: NumberPattern, integerDigits: number, divisor: number): void {
+  setCompact(pattern: NumberPattern, integerDigits: number, divisor: number, maxFracDigits: number = -1): void {
     let maxSigDigits = Math.max(pattern.minInt, integerDigits) + 1;
-    const minSigDigits = 1;
     if (divisor === 0) {
       maxSigDigits = integerDigits + 1;
     }
-    this._setPattern(pattern, maxSigDigits, minSigDigits);
+    this._setPattern(pattern, maxSigDigits, 1, maxFracDigits);
   }
 
   /**
@@ -91,6 +90,7 @@ export class NumberContext {
       // Precise control over number of integer and decimal digits to include, e.g. when
       // formatting exact currency values.
       const scale = Math.max(this.minFrac, Math.min(n.scale(), this.maxFrac));
+
       n = n.setScale(scale, this.roundingMode);
       n = n.stripTrailingZeros();
 
@@ -106,32 +106,47 @@ export class NumberContext {
   /**
    * Set context parameters from options, pattern and significant digit arguments.
    */
-  private _setPattern(pattern: NumberPattern, maxSigDigits: number, minSigDigits: number): void {
+  private _setPattern(pattern: NumberPattern, maxSigDigits: number, minSigDigits: number, maxFracDigits: number): void {
     const o = this.options;
     this.minInt = orDefault(o.minimumIntegerDigits, pattern.minInt);
-
-    this.maxFrac = this.currencyDigits === -1 ? pattern.maxFrac : this.currencyDigits;
-    this.maxFrac = orDefault(o.maximumFractionDigits, this.maxFrac);
-
     this.minFrac = this.currencyDigits === -1 ? pattern.minFrac : this.currencyDigits;
-    this.minFrac = orDefault(o.minimumFractionDigits, this.minFrac);
+    this.maxFrac = this.currencyDigits === -1 ? pattern.maxFrac : this.currencyDigits;
 
-    if (this.minFrac !== -1 && this.minFrac > this.maxFrac) {
-      this.maxFrac = this.minFrac;
-    }
-    if (this.maxFrac !== -1 && this.maxFrac < this.minFrac) {
-      this.minFrac = this.maxFrac;
+    const minFrac = o.minimumFractionDigits;
+    let maxFrac = o.maximumFractionDigits;
+    if (maxFrac === undefined && maxFracDigits > -1) {
+      maxFrac = maxFracDigits;
     }
 
+    if (maxFrac !== undefined && maxFrac > -1) {
+      this.maxFrac = maxFrac;
+    }
+
+    if (minFrac !== undefined && minFrac > -1) {
+      this.minFrac = maxFrac !== undefined && maxFrac > -1 ? (maxFrac < minFrac ? maxFrac : minFrac) : minFrac;
+      if (this.minFrac > this.maxFrac) {
+        this.maxFrac = this.minFrac;
+      }
+    }
+
+    if (maxFrac !== undefined && maxFrac > -1) {
+      if (this.maxFrac < this.minFrac || this.minFrac === -1) {
+        this.minFrac = this.maxFrac;
+      }
+    }
     if (this.useSignificant) {
-      this.maxSig = orDefault(o.maximumSignificantDigits, maxSigDigits);
-      this.minSig = orDefault(o.minimumSignificantDigits, minSigDigits);
-      if (this.minSig !== -1 && this.minSig > this.maxSig) {
-        this.maxSig = this.minSig;
+      let minSig = orDefault(o.minimumSignificantDigits, minSigDigits);
+      let maxSig = orDefault(o.maximumSignificantDigits, maxSigDigits);
+
+      if (minSig !== -1 && minSig > maxSig) {
+        maxSig = minSig;
       }
-      if (this.maxSig !== -1 && this.maxSig < this.minSig) {
-        this.minSig = this.maxSig;
+      if (maxSig !== -1 && maxSig < minSig) {
+        minSig = maxSig;
       }
+
+      this.maxSig = maxSig === -1 ? minSig : maxSig;
+      this.minSig = minSig === -1 ? maxSig : minSig;
     } else {
       this.maxSig = -1;
       this.minSig = -1;

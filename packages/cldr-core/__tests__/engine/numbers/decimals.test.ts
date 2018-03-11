@@ -43,6 +43,20 @@ test('decimals short', () => {
   expect(actual).toEqual('10,000T');
 });
 
+test('decimals short fractions', () => {
+  const engine = new NumbersEngine(INTERNAL, EN);
+  let actual: string;
+  let opts: DecimalFormatOptions;
+
+  opts = { style: 'short', formatMode: 'default', maximumFractionDigits: 2 };
+
+  actual = engine.formatDecimal('12345.6789', opts);
+  expect(actual).toEqual('12.34K');
+
+  actual = engine.formatDecimal('45.6789', opts);
+  expect(actual).toEqual('45.68');
+});
+
 test('decimals long', () => {
   const engine = new NumbersEngine(INTERNAL, EN);
   let actual: string;
@@ -130,6 +144,7 @@ test('decimal parts', () => {
   const opts: DecimalFormatOptions = { group: true };
   const engine = new NumbersEngine(INTERNAL, EN);
   let actual = engine.formatDecimalParts('12345.1234', opts);
+
   expect(actual).toEqual([
     { type: 'digits', value: '12' },
     { type: 'group', value: ',' },
