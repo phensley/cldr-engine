@@ -67,6 +67,8 @@ export class ResourcePack {
    */
   add(raw: string | undefined): number {
     const value = typeof raw === 'string' ? raw : '';
+
+    /* istanbul ignore if */
     if (value.indexOf(DELIMITER) !== -1) {
       const id = this.current.localeId;
       throw new Error(`Resource pack delimiter character found in ${id} string "${value}"`);
@@ -95,10 +97,14 @@ export class ResourcePack {
    */
   private renderScript(script: string): string {
     const layers = this.layers[script];
+
+    /* istanbul ignore if */
     if (layers === undefined) {
       throw new Error(`Attempt to render a non-existent script layer: ${script}`);
     }
     const len = layers.length;
+
+    /* istanbul ignore if */
     if (len === 0) {
       throw new Error('Attempt to render an empty pack');
     }
@@ -192,6 +198,8 @@ export class ResourcePack {
         // If the string array lengths do not match this is a serious error as it
         // means there a severe bug in the encoder.
         const currLen = curr.strings.length;
+
+        /* istanbul ignore if */
         if (baseLen !== currLen) {
           throw new Error(`Severe error: string tables for ${base.localeId} and` +
             `${curr.localeId} lengths differ: ${baseLen} !== ${currLen}`);
