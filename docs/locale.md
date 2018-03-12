@@ -5,7 +5,9 @@
 Parsing a locale identifier / language tag will substitute aliases and fill in add likely subtags, filling in any undefined subtags.
 
 ```typescript
-const { id, tag } = cldr.parseLocale('es_419');
+import { parseLocale } from '@phensley/cldr';
+
+const { id, tag } = parseLocale('es_419');
 
 // The original string you parsed in is stored on the "id" property
 id
@@ -33,7 +35,9 @@ To perform a language match [based on distance](https://www.unicode.org/reports/
 The list of supported locale identifiers should be sorted from most- to least-supported. In the example below French is most supported, followed by US English with Spanish last. If no match is sufficiently "close" to one of these, within a given threshold, the first locale in the list is returned.
 
 ```typescript
-const matcher = cldr.getLocaleMatcher('fr, en, en-GB, es-419, es-MX, es');
+import { LocaleMatcher } from '@phensley/cldr';
+
+const matcher = new LocaleMatcher('fr, en, en-GB, es-419, es-MX, es');
 const match = matcher.match('en-NZ');
 
 match.distance
