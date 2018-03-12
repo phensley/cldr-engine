@@ -141,10 +141,9 @@ test('currency short', () => {
   actual = engine.formatCurrency('999900.00', 'USD', opts);
   expect(actual).toEqual('$999.9K');
 
-  // TODO:
-  // opts.maximumFractionDigits = 0;
-  // actual = engine.formatCurrency('999900.00', 'USD', opts);
-  // expect(actual).toEqual('$1M');
+  opts.maximumFractionDigits = 0;
+  actual = engine.formatCurrency('999900.00', 'USD', opts);
+  expect(actual).toEqual('$1M');
 
   opts = { style: 'short', group: true };
   engine = new NumbersEngine(INTERNAL, DE);
