@@ -18,6 +18,8 @@ yarn add @phensley/cldr
 
 The resource packs contain all data for **all regions and scripts of a given language**. There is a high degree of overlap between regions so the resource pack bundles everything together with an internal layered structure, so regions can inherit from a base region.
 
+For example, if your user picks English and then switches between regions (e.g. `en-US` and `en-CA`)  the `"en.json"` resource pack is only loaded once. All English region bundles are constructed from this single pack. Similarly if someone picks Chinese and switches between the Hant and Hans scripts, all are fulfilled from the `"zh.json"` resource pack.
+
 The resource packs will need to be placed somewhere your application can load them at runtime. You'll also need to implement a loader function that will map a language identifier (`"en"`, `"es"`, etc) to the resource pack data.
 
 ```bash
@@ -87,15 +89,13 @@ There are currently two loaders: synchronous and asynchronous. The async loader 
 
 The library has a least-recently-used (LRU) implementation for caching resource packs and parsed patterns. It is used to cache objects that may be reused multiple times.
 
-The `packCacheSize` can be increased if you need to have multiple languages loaded simultaneously, or if you want to reduce the latency when users are switching back and forth between languages.
+The `packCacheSize` determines the size of the LRU cache holding language packs in memory. This size can be increased if you need to have multiple languages loaded simultaneously.
 
-The `patternCacheSize` is a single setting but controls the maximum size of the caches inside the various engines. For example, the `Numbers` engine will have a cache that holds parsed number patterns, using the raw pattern string as the key.
-
-**Note:** The pattern caches are currently stored on the `Engine` instance, so if you create and discard these frequently you'll see less benefit of the caches.
+The `patternCacheSize` is a single setting but controls the maximum size of the LRU caches for parsed patterns, e.g. numbers, dates, wrappers. Since the raw pattern string is used as the cache key, the  caches are framework-wide. For example, even if the number pattern `"0,###.###"` is used by two different languages the parsed representation will be cached once.
 
 #### Initialization example
 
-Below is an example of embedding English into the application statically (JSON inlined with Webpack) using a synchronous loader, while all other languages are loaded asynchronously.
+Below is an example of embedding English into a web application statically. The `en.json` resource is loaded into the framework synchronously while all other languages will be loaded asynchronously.
 
 `cldr.ts`:
 ```typescript
@@ -140,7 +140,7 @@ export const DefaultEngine = cldr.get('en-US');
 
 If you're using Redux you might want to place the current language and `Engine` instance into the store. Any components using this store will update when the language changes.
 
-Below is an example showing the use of Redux Sagas to asynchronously switch languages.
+Below is an example showing the use of Redux Sagas to asynchronously switch languages by firing the `locale/change` action.
 
 ```typescript
 import { call, put, takeEvery } from 'redux-saga/effects';
