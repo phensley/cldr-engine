@@ -1,6 +1,7 @@
 import { CurrencyType } from '@phensley/cldr-schema';
 import { EN, EN_GB, ES_419, FR, DE, KM } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
+import { Part } from '../../../src/types';
 import {
   CurrencyFormatOptions,
   CurrencyFormatStyleType,
@@ -212,9 +213,11 @@ test('currency spacing', () => {
 
 test('currency parts', () => {
   const engine = new NumbersEngine(INTERNAL, EN);
+  let actual: Part[];
+
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
-  const actual1 = engine.formatCurrencyParts('12345.234', 'USD', opts);
-  expect(actual1).toEqual([
+  actual = engine.formatCurrencyParts('12345.234', 'USD', opts);
+  expect(actual).toEqual([
     { type: 'currency', value: '$' },
     { type: 'digits', value: '12' },
     { type: 'group', value: ',' },
@@ -224,8 +227,8 @@ test('currency parts', () => {
   ]);
 
   opts.style = 'code';
-  const actual2 = engine.formatCurrencyParts('1002123.0166', 'AUD', opts);
-  expect(actual2).toEqual([
+  actual = engine.formatCurrencyParts('1002123.0166', 'AUD', opts);
+  expect(actual).toEqual([
     { type: 'digits', value: '1' },
     { type: 'group', value: ',' },
     { type: 'digits', value: '002' },
@@ -236,12 +239,22 @@ test('currency parts', () => {
     { type: 'literal', value: ' ' },
     { type: 'unit', value: 'AUD' }
   ]);
+
+  opts.style = 'short';
+  actual = engine.formatCurrencyParts('123456789.123', 'EUR', opts);
+  expect(actual).toEqual([
+    { type: 'currency', value: '€' },
+    { type: 'digits', value: '123' },
+    { type: 'literal', value: 'M' }
+  ]);
 });
 
 test('currency parts spacing', () => {
   const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
   let engine = new NumbersEngine(INTERNAL, EN);
-  let actual = engine.formatCurrencyParts('12345.234', 'BAD', opts);
+  let actual: Part[];
+
+  actual = engine.formatCurrencyParts('12345.234', 'BAD', opts);
   expect(actual).toEqual([
     { type: 'currency', value: 'BAD' },
     { type: 'spacer', value: '\u00a0' },
@@ -264,6 +277,16 @@ test('currency parts spacing', () => {
     { type: 'currency', value: 'BAD' }
   ]);
 });
+
+// TODO: should unknown currency throw error or return empty
+// test('currency parts unknown', () => {
+//   const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
+//   let engine = new NumbersEngine(INTERNAL, EN);
+//   let actual: Part[];
+
+//   actual = engine.formatCurrencyParts('12345.234', 'XXQ' as CurrencyType, opts);
+//   expect(actual).toEqual([]);
+// });
 
 test('currency symbols', () => {
   const engine = new NumbersEngine(INTERNAL, EN);
