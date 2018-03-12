@@ -249,6 +249,16 @@ test('set scale', () => {
   expect(parse('1034567').setScale(1)).toEqual(parse('1034567.0'));
   expect(parse('1034567').setScale(2)).toEqual(parse('1034567.00'));
   expect(parse('1034567').setScale(3)).toEqual(parse('1034567.000'));
+
+  expect(parse('12345.6').setScale(1)).toEqual(parse('12345.6'));
+  expect(parse('12345.67').setScale(1)).toEqual(parse('12345.7'));
+  expect(parse('12345.678').setScale(1)).toEqual(parse('12345.7'));
+  expect(parse('12345.6781').setScale(1)).toEqual(parse('12345.7'));
+  expect(parse('12345.67811').setScale(1)).toEqual(parse('12345.7'));
+  expect(parse('12345.678111').setScale(1)).toEqual(parse('12345.7'));
+  expect(parse('12345.6781111').setScale(1)).toEqual(parse('12345.7'));
+  expect(parse('12345.67811111').setScale(1)).toEqual(parse('12345.7'));
+  expect(parse('12345.678111111').setScale(1)).toEqual(parse('12345.7'));
 });
 
 test('divmod pow10', () => {

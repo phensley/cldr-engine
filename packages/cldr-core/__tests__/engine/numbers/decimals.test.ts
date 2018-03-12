@@ -130,6 +130,12 @@ test('decimal compact', () => {
 
   actual = engine.formatDecimal('289300', { style: 'short', minimumFractionDigits: 1 });
   expect(actual).toEqual('289.3K');
+
+  actual = engine.formatDecimal('12345.678', { group: true, maximumFractionDigits: 1 });
+  expect(actual).toEqual('12,345.7');
+
+  actual = engine.formatDecimal('12345.67811111', { group: true, maximumFractionDigits: 1 });
+  expect(actual).toEqual('12,345.7');
 });
 
 test('decimal percents', () => {

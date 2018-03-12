@@ -465,6 +465,9 @@ export class Decimal {
         w.data[j] = u.data[q + j];
       }
       w.exp += shift;
+      if (w.round(rnd, mode)) {
+        w._increment();
+      }
       return w.trim();
     }
 
