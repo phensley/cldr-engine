@@ -1,4 +1,4 @@
-import { FormatWidthType, AvailableFormatType } from '@phensley/cldr-schema';
+import { AvailableFormatType, FormatWidthType } from '@phensley/cldr-schema';
 
 export interface GregorianFormatOptions {
 

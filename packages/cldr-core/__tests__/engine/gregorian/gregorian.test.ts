@@ -59,6 +59,15 @@ test('formats', () => {
 
   s = engine.format(mar11, { date: 'yMMMd', time: 'hms', wrap: 'full' });
   expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
+
+  s = engine.format(mar11, { date: 'yMMMd', time: 'hms', wrap: 'long' });
+  expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
+
+  s = engine.format(mar11, { date: 'yMMMd', time: 'hms', wrap: 'medium' });
+  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
+
+  s = engine.format(mar11, { date: 'yMMMd', time: 'hms', wrap: 'short' });
+  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
 });
 
 test('intervals', () => {
