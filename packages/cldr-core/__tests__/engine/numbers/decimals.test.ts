@@ -43,18 +43,52 @@ test('decimals short', () => {
   expect(actual).toEqual('10,000T');
 });
 
-test('decimals short fractions', () => {
+test('decimals compact fractions', () => {
   const engine = new NumbersEngine(INTERNAL, EN);
   let actual: string;
-  let opts: DecimalFormatOptions;
 
-  opts = { style: 'short', mode: 'default', maximumFractionDigits: 2 };
-
-  actual = engine.formatDecimal('12345.6789', opts);
+  actual = engine.formatDecimal('12345.6789', { style: 'short', maximumFractionDigits: 2 });
   expect(actual).toEqual('12.34K');
 
-  actual = engine.formatDecimal('45.6789', opts);
+  actual = engine.formatDecimal('45.6789', { style: 'short', maximumFractionDigits: 2 });
   expect(actual).toEqual('45.68');
+
+  actual = engine.formatDecimal('3456789123456789', { style: 'long', group: true, minimumFractionDigits: 1 });
+  expect(actual).toEqual('3,456.8 trillion');
+
+  actual = engine.formatDecimal('3456789123456789', { style: 'long', group: true, maximumFractionDigits: 1 });
+  expect(actual).toEqual('3,456.8 trillion');
+
+  actual = engine.formatDecimal('3456789123456789', { style: 'long', group: true, minimumSignificantDigits: 2 });
+  expect(actual).toEqual('3,457 trillion');
+
+  actual = engine.formatDecimal('3456789123456789',
+    { style: 'long', group: true, maximumSignificantDigits: 3});
+  expect(actual).toEqual('3,460 trillion');
+
+  actual = engine.formatDecimal('999.99', { style: 'long', group: true, maximumFractionDigits: 1 });
+  expect(actual).toEqual('1 thousand');
+
+  actual = engine.formatDecimal('0.999', { style: 'short' });
+  expect(actual).toEqual('1');
+
+  actual = engine.formatDecimal('999.99', { style: 'short' });
+  expect(actual).toEqual('1K');
+
+  actual = engine.formatDecimal('999999.99', { style: 'short' });
+  expect(actual).toEqual('1M');
+
+  actual = engine.formatDecimal('199999.99', { style: 'short' });
+  expect(actual).toEqual('200K');
+
+  actual = engine.formatDecimal('199999.99', { style: 'short', minimumFractionDigits: 1 });
+  expect(actual).toEqual('200.0K');
+
+  actual = engine.formatDecimal('199999.99', { style: 'short', maximumFractionDigits: 0 });
+  expect(actual).toEqual('200K');
+
+  actual = engine.formatDecimal('289300', { style: 'short', minimumFractionDigits: 1 });
+  expect(actual).toEqual('289.3K');
 });
 
 test('decimals long', () => {
@@ -104,11 +138,11 @@ test('decimal compact', () => {
   const opts: DecimalFormatOptions = { style: 'short' };
   const engine = new NumbersEngine(INTERNAL, EN);
   let actual = engine.formatDecimal('12345.234', opts);
-  expect(actual).toEqual('12.3K');
+  expect(actual).toEqual('12K');
 
   opts.style = 'long';
   actual = engine.formatDecimal('12345.234', opts);
-  expect(actual).toEqual('12.3 thousand');
+  expect(actual).toEqual('12 thousand');
 
   actual = engine.formatDecimal('0.999', opts);
   expect(actual).toEqual('1');
@@ -117,7 +151,6 @@ test('decimal compact', () => {
   expect(actual).toEqual('-1');
 
   opts.round = 'ceiling';
-  opts.mode = 'significant-maxfrac';
   opts.maximumFractionDigits = 1;
   actual = engine.formatDecimal('-0.999', opts);
   expect(actual).toEqual('-0.9');
@@ -128,7 +161,7 @@ test('decimal compact', () => {
 });
 
 test('decimal rounding', () => {
-  const opts: DecimalFormatOptions = { style: 'long', mode: 'significant-maxfrac' };
+  const opts: DecimalFormatOptions = { style: 'long' };
   const engine = new NumbersEngine(INTERNAL, EN);
 
   opts.round = 'ceiling';

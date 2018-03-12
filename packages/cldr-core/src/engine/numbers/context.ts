@@ -1,6 +1,4 @@
 import {
-  NumberFormatMode,
-  NumberFormatModeType,
   NumberFormatOptions,
   RoundingModeType
 } from './options';
@@ -15,7 +13,6 @@ export class NumberContext {
 
   readonly options: NumberFormatOptions;
   roundingMode: RoundingModeType;
-  mode: NumberFormatModeType;
   useSignificant: boolean;
 
   minInt: number;
@@ -25,17 +22,12 @@ export class NumberContext {
   minSig: number = -1;
   currencyDigits: number = -1;
 
-  constructor(
-    options: NumberFormatOptions,
-    defaultFormatMode: NumberFormatModeType,
-    currencyDigits: number = -1
-  ) {
+  constructor(options: NumberFormatOptions, currencyDigits: number = -1) {
     this.options = options;
     this.roundingMode = options.round || 'half-even';
-    this.mode = options.mode === undefined ? defaultFormatMode : options.mode;
     this.currencyDigits = currencyDigits;
-    this.useSignificant = this.mode === NumberFormatMode.SIGNIFICANT ||
-      this.mode === NumberFormatMode.SIGNIFICANT_MAXFRAC;
+    this.useSignificant = options.minimumSignificantDigits !== undefined ||
+      options.maximumSignificantDigits !== undefined;
   }
 
   /**
@@ -49,10 +41,7 @@ export class NumberContext {
    * Set a compact pattern.
    */
   setCompact(pattern: NumberPattern, integerDigits: number, divisor: number, maxFracDigits: number = -1): void {
-    let maxSigDigits = Math.max(pattern.minInt, integerDigits) + 1;
-    if (divisor === 0) {
-      maxSigDigits = integerDigits + 1;
-    }
+    const maxSigDigits = Math.max(pattern.minInt, integerDigits);
     this._setPattern(pattern, maxSigDigits, 1, maxFracDigits);
   }
 
@@ -61,15 +50,10 @@ export class NumberContext {
    */
   adjust(n: Decimal): Decimal {
     if (this.useSignificant && this.maxSig > 0 && this.maxSig > 0) {
-      // Scale the number to have at most the maximum significant digits.
       if (n.precision() > this.maxSig) {
+        // Scale the number to have at most the maximum significant digits.
         const scale = this.maxSig - n.precision() + n.scale();
         n = n.setScale(scale, this.roundingMode);
-      }
-
-      // Ensure we don't exceed the maximum number of fraction digits allowed.
-      if (this.mode === NumberFormatMode.SIGNIFICANT_MAXFRAC && this.maxFrac < n.scale()) {
-        n = n.setScale(this.maxFrac, this.roundingMode);
       }
 
       // Ensure that one less digit is emitted if the number is exactly zero.
@@ -114,7 +98,7 @@ export class NumberContext {
 
     const minFrac = o.minimumFractionDigits;
     let maxFrac = o.maximumFractionDigits;
-    if (maxFrac === undefined && maxFracDigits > -1) {
+    if (minFrac === undefined && maxFrac === undefined && maxFracDigits > -1) {
       maxFrac = maxFracDigits;
     }
 
@@ -134,6 +118,7 @@ export class NumberContext {
         this.minFrac = this.maxFrac;
       }
     }
+
     if (this.useSignificant) {
       let minSig = orDefault(o.minimumSignificantDigits, minSigDigits);
       let maxSig = orDefault(o.maximumSignificantDigits, maxSigDigits);
@@ -145,8 +130,8 @@ export class NumberContext {
         minSig = maxSig;
       }
 
-      this.maxSig = maxSig === -1 ? minSig : maxSig;
       this.minSig = minSig === -1 ? maxSig : minSig;
+      this.maxSig = maxSig === -1 ? minSig : maxSig;
     } else {
       this.maxSig = -1;
       this.minSig = -1;

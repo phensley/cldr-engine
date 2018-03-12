@@ -111,10 +111,10 @@ test('currency short', () => {
   let actual: string;
 
   actual = engine.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(actual).toEqual('-€12.3K');
+  expect(actual).toEqual('-€12K');
 
   actual = engine.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(actual).toEqual('-£12.3K');
+  expect(actual).toEqual('-£12K');
 
   actual = engine.formatCurrency('-12345.6789', 'JPY', opts);
   expect(actual).toEqual('-¥12K');
@@ -123,18 +123,20 @@ test('currency short', () => {
   expect(actual).toEqual('$1');
 
   actual = engine.formatCurrency('123.4567', 'USD', opts);
-  expect(actual).toEqual('$123.4');
+  expect(actual).toEqual('$123');
 
   actual = engine.formatCurrency('999.9', 'USD', opts);
-  expect(actual).toEqual('$999.9');
+  expect(actual).toEqual('$1K');
 
   actual = engine.formatCurrency('999999.9', 'USD', opts);
   expect(actual).toEqual('$1M');
 
   actual = engine.formatCurrency('999900.00', 'USD', opts);
-  expect(actual).toEqual('$999.9K');
+  expect(actual).toEqual('$1M');
 
-  opts.mode = 'significant-maxfrac';
+  actual = engine.formatCurrency('999000.00', 'USD', opts);
+  expect(actual).toEqual('$999K');
+
   opts.maximumFractionDigits = 1;
   actual = engine.formatCurrency('999900.00', 'USD', opts);
   expect(actual).toEqual('$999.9K');
@@ -147,20 +149,20 @@ test('currency short', () => {
   opts = { style: 'short', group: true };
   engine = new NumbersEngine(INTERNAL, DE);
   actual = engine.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(actual).toEqual('-12,3 Tsd. €');
+  expect(actual).toEqual('-12 Tsd. €');
 
   actual = engine.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(actual).toEqual('-12,3 Tsd. £');
+  expect(actual).toEqual('-12 Tsd. £');
 
   actual = engine.formatCurrency('-12345.6789', 'JPY', opts);
   expect(actual).toEqual('-12 Tsd. ¥');
 
   engine = new NumbersEngine(INTERNAL, ES_419);
   actual = engine.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(actual).toEqual('-12.3 mil EUR');
+  expect(actual).toEqual('-12 mil EUR');
 
   actual = engine.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(actual).toEqual('-12.3 mil GBP');
+  expect(actual).toEqual('-12 mil GBP');
 
   actual = engine.formatCurrency('-12345.6789', 'JPY', opts);
   expect(actual).toEqual('-12 mil JPY');

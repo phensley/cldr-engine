@@ -24,7 +24,6 @@ import {
   CurrencySymbolWidth,
   DecimalFormatOptions,
   DecimalFormatStyle,
-  NumberFormatMode,
   NumberParams
 } from './options';
 
@@ -73,7 +72,7 @@ export class NumbersInternal {
         : this.decimalFormats.long.decimalFormatDivisor;
       const patternImpl = isShort ? this.decimalFormats.short.decimalFormat
         : this.decimalFormats.long.decimalFormat;
-      const ctx = new NumberContext(options, NumberFormatMode.SIGNIFICANT);
+      const ctx = new NumberContext(options);
 
       // Adjust the number using the compact pattern and divisor.
       const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl, divisorImpl);
@@ -110,7 +109,7 @@ export class NumbersInternal {
         params.symbols.percentSign : params.symbols.perMille;
 
       // Adjust number using pattern and options, then render.
-      const ctx = new NumberContext(options, NumberFormatMode.DEFAULT, -1);
+      const ctx = new NumberContext(options, -1);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
@@ -124,7 +123,7 @@ export class NumbersInternal {
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
-      const ctx = new NumberContext(options, NumberFormatMode.DEFAULT, -1);
+      const ctx = new NumberContext(options, -1);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
@@ -154,7 +153,7 @@ export class NumbersInternal {
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
-      const ctx = new NumberContext(options, NumberFormatMode.DEFAULT, fractions.digits);
+      const ctx = new NumberContext(options, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
@@ -176,7 +175,7 @@ export class NumbersInternal {
       // correct pluralized pattern for the final rounded form.
       const divisorImpl = this.currencyFormats.short.standardDivisor;
       const patternImpl = this.currencyFormats.short.standard;
-      const ctx = new NumberContext(options, NumberFormatMode.SIGNIFICANT_MAXFRAC, fractions.digits);
+      const ctx = new NumberContext(options, fractions.digits);
       const symbol = this.Currencies(code as CurrencyType).symbol(bundle, width);
 
       // Adjust the number using the compact pattern and divisor.
@@ -202,7 +201,7 @@ export class NumbersInternal {
         let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
-      const ctx = new NumberContext(options, NumberFormatMode.DEFAULT, fractions.digits);
+      const ctx = new NumberContext(options, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
@@ -239,13 +238,13 @@ export class NumbersInternal {
     let ndigits = n.integerDigits();
     const ndivisor = divisorImpl(bundle, ndigits);
 
-    const fracDigits = ctx.mode === 'default' ? 0 : -1;
+    const fracDigits = ctx.useSignificant ? -1 : 0;
 
     // Move the decimal point of n, producing q1. We always strip trailing
     // zeros on compact patterns.
     let q1 = n;
     if (ndivisor > 0) {
-      q1 = q1.movePoint(-ndivisor).stripTrailingZeros();
+      q1 = q1.movePoint(-ndivisor);
     }
 
     // Select the initial compact pattern based on the integer digits of n.
@@ -272,7 +271,12 @@ export class NumbersInternal {
       // we just move the decimal point, since our Decimal type uses a radix that
       // is a power of 10. Otherwise q2 is ready for formatting.
       if (divisor > ndivisor) {
-        q1 = n.movePoint(-divisor).stripTrailingZeros();
+        // We shift right before we move the decimal point. This triggers rounding
+        // of the number at its correct scale. Otherwise we would end up with
+        // 999,999 becoming 0.999999 and half-even rounding truncating the
+        // number to '0M' instead of '1M'.
+        q1 = n.shiftright(divisor);
+        q1 = q1.movePoint(-divisor);
         ctx.setCompact(pattern, q1.integerDigits(), divisor, fracDigits);
         q2 = ctx.adjust(q1);
       }
