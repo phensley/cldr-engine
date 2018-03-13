@@ -3,13 +3,13 @@ import {
   DateFields,
   DateField,
   DateFieldType,
-  RelativeTimeWidth,
   Schema
 } from '@phensley/cldr-schema';
 
 import { pluralCardinal } from '../plurals';
 import { coerceDecimal, Decimal, DecimalArg, DecimalConstants, ZonedDateTime } from '../../types';
 import { WrapperInternal } from '..';
+import { RelativeTimeFormatOptions } from './options';
 
 export const fieldDifference = (a: ZonedDateTime, b: ZonedDateTime): [DateFieldType, number] => {
   if (a.zoneId() !== b.zoneId()) {
@@ -42,11 +42,13 @@ export class DateFieldsInternal {
     this.DateFields = root.DateFields;
   }
 
-  formatRelativeTime(bundle: Bundle, value: DecimalArg, field: DateFieldType, width: RelativeTimeWidth): string {
+  formatRelativeTime(
+    bundle: Bundle, value: DecimalArg, field: DateFieldType, options: RelativeTimeFormatOptions): string {
     const relative = this.DateFields.relativeTimes(field);
     if (relative === undefined) {
       return '';
     }
+    const width = options.width || 'wide';
     const format = relative[width];
     if (format === undefined) {
       return '';

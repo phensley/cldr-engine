@@ -1,3 +1,4 @@
+import { RelativeTimeFieldType, RelativeTimeWidthType } from '@phensley/cldr-schema';
 import { EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import { DateFieldsEngine, DateFieldsInternal, WrapperInternal } from '../../../src/engine';
@@ -57,4 +58,21 @@ test('relative', () => {
 
   s = engine.formatRelativeTime(new Decimal('-3.2'), 'week');
   expect(s).toEqual('3.2 weeks ago');
+
+  s = engine.formatRelativeTime(1, 'week', { width: 'short' });
+  expect(s).toEqual('next wk.');
+
+  s = engine.formatRelativeTime(-3, 'week', { width: 'narrow' });
+  expect(s).toEqual('3 wk. ago');
+
+  s = engine.formatRelativeTime(2, 'month', { width: 'narrow'});
+  expect(s).toEqual('in 2 mo.');
+
+  // Invalid field
+  s = engine.formatRelativeTime(5, 'weekXX' as RelativeTimeFieldType);
+  expect(s).toEqual('');
+
+  // Invalid width
+  s = engine.formatRelativeTime(5, 'week', { width: 'wideXX' as RelativeTimeWidthType });
+  expect(s).toEqual('');
 });

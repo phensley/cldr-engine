@@ -38,3 +38,16 @@ EN.formatRelativeTime(1, 'year');
 EN.formatRelativeTime(new Decimal('-3.2'), 'week');
 // > "3.2 weeks ago"
 ```
+
+You can vary the unit width by passing in options `{ width: <value> }` where value is `'wide'`, `'short'` or `'narrow'`.
+
+```typescript
+EN.formatRelativeTime(1, 'week', { width: 'short' });
+// > "next wk"
+
+EN.formatRelativeTime(-3, 'week', { width: 'narrow' });
+// > "3 wk. ago"
+
+EN.formatRelativeTime(2, 'month', { width: 'narrow'});
+// > "in 2 mo."
+```

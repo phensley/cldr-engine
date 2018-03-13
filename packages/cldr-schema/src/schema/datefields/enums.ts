@@ -1,6 +1,6 @@
 import { makeKeyedEnum } from '../../types';
 
-export type RelativeTimeWidth = 'short' | 'narrow' | 'wide';
+export type RelativeTimeWidthType = 'short' | 'narrow' | 'wide';
 
 export const [DateField, DateFieldValues] = makeKeyedEnum([
   ['ERA', 'era'],
