@@ -26,6 +26,7 @@ This project is **currently in pre-ALPHA** and under active development, with th
 * [Currency](docs/currencies.md) formatting to strings, parts, arbitrary precision
 * [Gregorian date](docs/gregorian.md) formatting to strings, parts
 * [Names of things](docs/names.md), languages, places, etc
+* [Units](docs/units.md) formatting quantities in units (e.g. meters, pounds, etc)
 
 #### Datatypes
 
@@ -34,7 +35,6 @@ This project is **currently in pre-ALPHA** and under active development, with th
 
 #### Upcoming
 
- * Units
  * Unit conversions
  * Messages
  * Timezone info
