@@ -1,4 +1,4 @@
-import { DateTimeField, DateTimeFieldType } from '@phensley/cldr-schema';
+import { DateTimePatternField, DateTimePatternFieldType } from '@phensley/cldr-schema';
 import { substituteZoneAlias, getZoneInfo } from './timezones';
 import { binarySearch } from '../../utils/search';
 import * as encoding from '../../resource/encoding';
@@ -222,29 +222,29 @@ export class ZonedDateTime {
     return this._isoLocal[1];
   }
 
-  fieldOfGreatestDifference(other: ZonedDateTime): DateTimeFieldType {
+  fieldOfGreatestDifference(other: ZonedDateTime): DateTimePatternFieldType {
     if (this._zoneId !== other._zoneId) {
       other = new ZonedDateTime(other._epoch, this._zoneId);
     }
     if (this.getYear() !== other.getYear()) {
-      return DateTimeField.YEAR;
+      return DateTimePatternField.YEAR;
     }
     if (this.getMonth() !== other.getMonth()) {
-      return DateTimeField.MONTH;
+      return DateTimePatternField.MONTH;
     }
     if (this.getDayOfMonth() !== other.getDayOfMonth()) {
-      return DateTimeField.DAY;
+      return DateTimePatternField.DAY;
     }
 
     // TODO: AM PM
 
     if (this.getHour() !== other.getHour()) {
-      return DateTimeField.HOUR;
+      return DateTimePatternField.HOUR;
     }
     if (this.getMinute() !== other.getMinute()) {
-      return DateTimeField.MINUTE;
+      return DateTimePatternField.MINUTE;
     }
-    return DateTimeField.SECOND;
+    return DateTimePatternField.SECOND;
   }
 
   toISOString(): string {

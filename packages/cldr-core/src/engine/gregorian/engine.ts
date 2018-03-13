@@ -1,6 +1,8 @@
 import {
   Alt,
   Bundle,
+  DateTimePatternField,
+  DateTimePatternFieldType,
   FieldWidth,
   FieldWidthType,
   IntervalFormatType,
@@ -87,8 +89,6 @@ export class GregorianEngine {
     return this.getISOWeekDate(date, ISO_WEEKDATE_EXTENDED);
   }
 
-  // TODO: may move ZonedDateTime.fieldOfGreatestDifference here
-
   // TODO: Support context transforms, context-sensitive fields
   // https://www.unicode.org/reports/tr35/tr35-dates.html#months_days_quarters_eras
 
@@ -110,6 +110,14 @@ export class GregorianEngine {
     const field = start.fieldOfGreatestDifference(end);
     const pattern = this.internal.Gregorian.intervalFormats(skeleton).field(this.bundle, field);
     return this.internal.formatIntervalParts(this.bundle, start, end, pattern);
+  }
+
+  formatRelative(start: ZonedDateTime, end: ZonedDateTime): string {
+    return '';
+  }
+
+  formatRelativeParts(start: ZonedDateTime, end: ZonedDateTime): Part[] {
+    return [];
   }
 
   formatRaw(date: ZonedDateTime, pattern: string): string {

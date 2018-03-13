@@ -141,6 +141,9 @@ test('field of greatest difference', () => {
   let d = make(base, NY).fieldOfGreatestDifference(make(base, NY));
   expect(d).toEqual('s');
 
+  d = make(base, NY).fieldOfGreatestDifference(make(base + 2, NY));
+  expect(d).toEqual('s');
+
   d = make(base, NY).fieldOfGreatestDifference(make(base + 27000, NY));
   expect(d).toEqual('m');
 
@@ -156,6 +159,9 @@ test('field of greatest difference', () => {
   expect(d).toEqual('M');
 
   d = MAR_11_2018_092537_NY.fieldOfGreatestDifference(DEC_31_2017_233045_NY);
+  expect(d).toEqual('y');
+
+  d = DEC_31_2017_233045_NY.fieldOfGreatestDifference(MAR_11_2018_092537_NY);
   expect(d).toEqual('y');
 
   // Argument timezone will be converted

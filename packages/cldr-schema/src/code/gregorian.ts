@@ -2,7 +2,7 @@ import { Choice, Scope, FieldMap, fieldmap, scope, scopefield, scopemap } from '
 
 import {
   AvailableFormatValues,
-  DateTimeFieldValues,
+  DateTimePatternFieldValues,
   DayPeriodValues,
   EraValues,
   FieldWidthValues,
@@ -46,6 +46,6 @@ export const GREGORIAN: Scope = scope('Gregorian', 'Gregorian', [
   fieldmap('availableFormats', 'availableFormats', AvailableFormatValues, Choice.ALT),
 
   scopemap('intervalFormats', IntervalFormatValues, [
-    scopefield('field', DateTimeFieldValues)
+    scopefield('field', DateTimePatternFieldValues)
   ])
 ]);

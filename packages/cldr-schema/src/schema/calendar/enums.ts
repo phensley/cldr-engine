@@ -3,7 +3,7 @@ import { makeKeyedEnum } from '../../types';
 // Enums common to all calendars
 
 // Values 'h' and 'H' for hours have been unified to 'H' for uniqueness.
-export const [ DateTimeField, DateTimeFieldValues ] = makeKeyedEnum([
+export const [ DateTimePatternField, DateTimePatternFieldValues ] = makeKeyedEnum([
   ['YEAR', 'y'],
   ['MONTH', 'M'],
   ['DAY', 'd'],
@@ -13,7 +13,7 @@ export const [ DateTimeField, DateTimeFieldValues ] = makeKeyedEnum([
   ['SECOND', 's']
 ]);
 
-export type DateTimeFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
+export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
 
 export const [ DayPeriod, DayPeriodValues ] = makeKeyedEnum([
   ['NOON', 'noon'],

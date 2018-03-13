@@ -9,7 +9,7 @@ import {
 } from './enums';
 
 import {
-  DateTimeFieldType,
+  DateTimePatternFieldType,
   DayPeriodsFormats,
   FormatWidthType,
   QuartersFormats,
@@ -23,7 +23,7 @@ export interface ErasFormat {
 }
 
 export interface IntervalFormats {
-  readonly field: FieldMapArrow<DateTimeFieldType>;
+  readonly field: FieldMapArrow<DateTimePatternFieldType>;
 }
 
 export interface MonthsFormat {

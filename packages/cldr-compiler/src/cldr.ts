@@ -22,6 +22,15 @@ const _pruneUnitFormats = L.remove(L.props('per', 'coordinateUnit'));
 const _sizeProps = L.props('short', 'medium', 'long', 'full');
 const _timeZoneNames = ['dates', 'timeZoneNames'];
 
+const _dateFields = ['dates', 'fields'];
+const _relativeTypes = [
+  'relative-type--1',
+  'relative-type-0',
+  'relative-type-1',
+  'relativeTime-type-future',
+  'relativeTime-type-past'
+];
+
 const isTimeZone = (o: any) => typeof o === 'object' &&
   ('exemplarCity' in o || 'short' in o || 'long' in o);
 
@@ -164,6 +173,35 @@ const Chinese = {
   timeFormats: get(chinese('timeFormats', ..._sizeProps)),
   weekdays: get(chinese('days', ..._formats)),
   zodiacs: get(chinese('cyclicNameSets', 'zodiacs', _formats))
+};
+
+const relativeFields = [
+  'year', 'quarter', 'month', 'week', 'day',
+  'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat',
+  'hour', 'minute', 'second'
+];
+
+const relativeKey = (k: string) => [k, `${k}-short`, `${k}-narrow`];
+
+// Restructure relative times under 'short', 'narrow', 'wide' subkeys
+const relativeTimes = (obj: any): any => {
+  const r: any = {};
+  relativeFields.forEach(key => {
+    const o: any = {};
+    ['', 'short', 'narrow'].forEach(ext => {
+      const k = `${key}${ext ? '-' : ''}${ext}`;
+      o[ext || 'wide'] = obj[k];
+    });
+    r[key] = o;
+  });
+  return r;
+};
+
+/**
+ * Date fields, relative times.
+ */
+const DateFields = {
+  relativeTimes: get([_dateFields, relativeTimes]),
 };
 
 const gregorian = (...keys: string[]) => ['dates', 'calendars', 'gregorian', ...keys];
@@ -318,6 +356,7 @@ export const getMain = (language: string) => {
 
   return {
     Chinese: access(Chinese, 'ca-chinese'),
+    DateFields: access(DateFields, 'dateFields'),
     Gregorian: access(Gregorian, 'ca-gregorian'),
     Hebrew: access(Hebrew, 'ca-hebrew'),
     Numbers: access(Numbers, 'numbers'),
