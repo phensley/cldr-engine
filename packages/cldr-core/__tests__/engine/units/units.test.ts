@@ -24,7 +24,7 @@ test('format string', () => {
   s = units.format({ value: '12345', unit: 'meter'}, { style: 'long', minimumFractionDigits: 1 });
   expect(s).toEqual('12.3 thousand meters');
 
-  s = units.format({ value: '1', unit: 'pound'}, { style: 'long', minimumFractionDigits: 0 });
+  s = units.format({ value: '1', unit: 'pound'}, { style: 'long' });
   expect(s).toEqual('1 pound');
 
   s = units.format({ value: '1', unit: 'pound'}, { style: 'long', minimumFractionDigits: 1 });
