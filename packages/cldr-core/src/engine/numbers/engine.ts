@@ -4,6 +4,7 @@ import {
   Alt,
   Bundle,
   CurrencyType,
+  Numbers,
   NumberSymbols,
   Plural,
   PluralValues
@@ -13,10 +14,25 @@ import { NumbersInternal } from './internal';
 import { CurrencyFormatOptions, CurrencySymbolWidthType, DecimalFormatOptions, NumberParams } from './options';
 import { pluralCardinal, pluralOrdinal } from '../plurals';
 import { STRING_RENDERER, PARTS_RENDERER } from './render';
-import { Decimal, DecimalArg, Part } from '../../types';
+import { coerceDecimal, Decimal, DecimalArg, Part } from '../../types';
 
-const coerce = (n: DecimalArg): Decimal =>
-  typeof n === 'number' || typeof n === 'string' ? new Decimal(n) : n;
+/**
+ * Locale-specific number parameters.
+ */
+export const getNumberParams = (bundle: Bundle, internal: NumbersInternal): NumberParams => {
+  const root = internal.root;
+  const currencySpacing = root.Numbers.currencyFormats.currencySpacing;
+  const standardRaw = root.Numbers.decimalFormats.standard(bundle);
+  const standard = internal.getNumberPattern(standardRaw, false);
+  return {
+    symbols: root.Numbers.symbols(bundle),
+    minimumGroupingDigits: Number(root.Numbers.minimumGroupingDigits(bundle)),
+    primaryGroupingSize: standard.priGroup,
+    secondaryGroupingSize: standard.secGroup,
+    beforeCurrency: currencySpacing.beforeCurrency(bundle),
+    afterCurrency: currencySpacing.afterCurrency(bundle)
+  };
+};
 
 /**
  * Number and currency formatting.
@@ -29,17 +45,11 @@ export class NumbersEngine {
     protected readonly internal: NumbersInternal,
     protected readonly bundle: Bundle) {
 
-    const currencySpacing = internal.root.Numbers.currencyFormats.currencySpacing;
-    const standardRaw = internal.root.Numbers.decimalFormats.standard(bundle);
-    const standard = internal.getNumberPattern(standardRaw, false);
-    this.params = {
-      symbols: internal.root.Numbers.symbols(bundle),
-      minimumGroupingDigits: Number(internal.root.Numbers.minimumGroupingDigits(bundle)),
-      primaryGroupingSize: standard.priGroup,
-      secondaryGroupingSize: standard.secGroup,
-      beforeCurrency: currencySpacing.beforeCurrency(bundle),
-      afterCurrency: currencySpacing.afterCurrency(bundle)
-    };
+    this.params = getNumberParams(bundle, internal);
+  }
+
+  getNumberParams(): NumberParams {
+    return this.params;
   }
 
   /**
@@ -68,34 +78,36 @@ export class NumbersEngine {
   }
 
   getPluralCardinal(n: DecimalArg): string {
-    const d = coerce(n);
+    const d = coerceDecimal(n);
     const cat = pluralCardinal(this.bundle.language(), d.operands());
     return pluralString(cat);
   }
 
   getPluralOrdinal(n: DecimalArg): string {
-    const d = coerce(n);
+    const d = coerceDecimal(n);
     const cat = pluralOrdinal(this.bundle.language(), d.operands());
     return pluralString(cat);
   }
 
   formatDecimal(n: DecimalArg, options: DecimalFormatOptions): string {
-    const d = coerce(n);
-    return this.internal.formatDecimal(this.bundle, STRING_RENDERER, d, options, this.params);
+    const d = coerceDecimal(n);
+    const [result, plural] = this.internal.formatDecimal(this.bundle, STRING_RENDERER, d, options, this.params);
+    return result;
   }
 
   formatDecimalParts(n: DecimalArg, options: DecimalFormatOptions): Part[] {
-    const d = coerce(n);
-    return this.internal.formatDecimal(this.bundle, PARTS_RENDERER, d, options, this.params);
+    const d = coerceDecimal(n);
+    const [result, plural] = this.internal.formatDecimal(this.bundle, PARTS_RENDERER, d, options, this.params);
+    return result;
   }
 
   formatCurrency(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): string {
-    const d = coerce(n);
+    const d = coerceDecimal(n);
     return this.internal.formatCurrency(this.bundle, STRING_RENDERER, d, code, options, this.params);
   }
 
   formatCurrencyParts(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): Part[] {
-    const d = coerce(n);
+    const d = coerceDecimal(n);
     return this.internal.formatCurrency(this.bundle, PARTS_RENDERER, d, code, options, this.params);
   }
 }

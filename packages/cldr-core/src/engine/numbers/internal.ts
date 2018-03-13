@@ -59,9 +59,12 @@ export class NumbersInternal {
   }
 
   formatDecimal<T>(bundle: Bundle, renderer: Renderer<T>,
-    n: Decimal, options: DecimalFormatOptions, params: NumberParams): T {
+    n: Decimal, options: DecimalFormatOptions, params: NumberParams): [T, number] {
 
     const style = options.style === undefined ? DecimalFormatStyle.DECIMAL : options.style;
+    let result: T;
+    let plural: number = Plural.OTHER;
+
     switch (style) {
     case DecimalFormatStyle.LONG:
     case DecimalFormatStyle.SHORT:
@@ -79,13 +82,14 @@ export class NumbersInternal {
 
       // Compute the plural category for the final q2.
       const operands = q2.operands();
-      const plural = pluralCardinal(bundle.language(), operands);
+      plural = pluralCardinal(bundle.language(), operands);
 
       // Select the final pluralized compact pattern based on the integer
       // digits of n and the plural category of the rounded / shifted number q2.
       const raw = patternImpl(bundle, ndigits, plural) || standardRaw;
       const pattern = this.getNumberPattern(raw, q2.isNegative());
-      return renderer.render(q2, pattern, params, '', '', options.group, ctx.minInt);
+      result = renderer.render(q2, pattern, params, '', '', options.group, ctx.minInt);
+      break;
     }
 
     case DecimalFormatStyle.PERCENT:
@@ -112,8 +116,12 @@ export class NumbersInternal {
       const ctx = new NumberContext(options, -1);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
+      const operands = n.operands();
+      plural = pluralCardinal(bundle.language(), operands);
+
       pattern = this.getNumberPattern(raw, n.isNegative());
-      return renderer.render(n, pattern, params, '', symbol, options.group, ctx.minInt);
+      result = renderer.render(n, pattern, params, '', symbol, options.group, ctx.minInt);
+      break;
     }
 
     case DecimalFormatStyle.DECIMAL:
@@ -126,13 +134,21 @@ export class NumbersInternal {
       const ctx = new NumberContext(options, -1);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
+      const operands = n.operands();
+      plural = pluralCardinal(bundle.language(), operands);
+
       pattern = this.getNumberPattern(raw, n.isNegative());
-      return renderer.render(n, pattern, params, '', '', options.group, ctx.minInt);
+      result = renderer.render(n, pattern, params, '', '', options.group, ctx.minInt);
+      break;
     }
+
+    default:
+      result = renderer.empty();
+      break;
     }
 
     // No valid style matched
-    return renderer.empty();
+    return [result, plural];
   }
 
   formatCurrency<T>(bundle: Bundle, renderer: Renderer<T>,

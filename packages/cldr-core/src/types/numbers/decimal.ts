@@ -23,7 +23,7 @@ const DEFAULT_PRECISION = 28;
 
 export type DecimalArg = number | string | Decimal;
 
-const coerce = (n: DecimalArg): Decimal =>
+export const coerceDecimal = (n: DecimalArg): Decimal =>
   typeof n === 'number' || typeof n === 'string' ? new Decimal(n) : n;
 
 /**
@@ -90,7 +90,7 @@ export class Decimal {
    */
   compare(v: DecimalArg, abs: boolean = false): number {
     const u = this;
-    v = coerce(v);
+    v = coerceDecimal(v);
     const us = u.sign;
     const vs = v.sign;
     if (!abs && us !== vs) {
@@ -166,12 +166,12 @@ export class Decimal {
   }
 
   add(v: DecimalArg): Decimal {
-    v = coerce(v);
+    v = coerceDecimal(v);
     return this.addsub(this, v, v.sign);
   }
 
   subtract(v: DecimalArg): Decimal {
-    v = coerce(v);
+    v = coerceDecimal(v);
     return this.addsub(this, v, v.sign === 1 ? -1 : 1);
   }
 
@@ -179,7 +179,7 @@ export class Decimal {
     const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
 
     const u: Decimal = this;
-    v = coerce(v);
+    v = coerceDecimal(v);
     let w = new Decimal(ZERO);
     w.exp = (u.exp + v.exp);
 
@@ -209,7 +209,7 @@ export class Decimal {
   divide(v: DecimalArg, context?: MathContext): Decimal {
     const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
 
-    v = coerce(v);
+    v = coerceDecimal(v);
     if (this.checkDivision(v)) {
       return usePrecision ? ZERO : ZERO.setScale(scaleprec);
     }
@@ -266,7 +266,7 @@ export class Decimal {
    * Divide this number by v and return the quotient and remainder.
    */
   divmod(v: DecimalArg): [Decimal, Decimal] {
-    v = coerce(v);
+    v = coerceDecimal(v);
     if (this.checkDivision(v)) {
       return [ZERO, new Decimal(v)];
     }

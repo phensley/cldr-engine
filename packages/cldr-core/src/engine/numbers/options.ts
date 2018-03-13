@@ -10,19 +10,10 @@ export interface NumberParams {
   afterCurrency: CurrencySpacing;
 }
 
-// export enum NumberFormatMode {
-//   DEFAULT = 'default',
-//   SIGNIFICANT = 'significant',
-//   SIGNIFICANT_MAXFRAC = 'significant-maxfrac'
-// }
-
-// export type NumberFormatModeType = 'default' | 'significant' | 'significant-maxfrac';
-
 export type RoundingModeType =
   'up' | 'down' | 'ceiling' | 'floor' | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
 
 export interface NumberFormatOptions {
-  // mode?: NumberFormatModeType;
   round?: RoundingModeType;
   group?: boolean;
   minimumIntegerDigits?: number;

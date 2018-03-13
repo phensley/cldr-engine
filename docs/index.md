@@ -6,6 +6,7 @@
 * [Currency](currencies.md) formatting to strings, parts, arbitrary precision
 * [Gregorian date](gregorian.md) formatting to strings, parts
 * [Names of things](names.md), languages, places, etc
+* [Units](units.md) formatting quantities in units (e.g. meters, pounds, etc)
 
 ### Types
 
@@ -14,7 +15,6 @@
 
 #### Todo
 
- * Units
  * Unit conversions
  * Messages
  * Timezone info
