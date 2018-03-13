@@ -30,7 +30,6 @@ EN.Units.format({ value: '1', unit: 'pound'}, { style: 'long', minimumFractionDi
 A sequence of units can be formatted together.
 
 ```typescript
-
 const quantities = [{ value: '123', unit: 'meter'}, { value: '17.2', unit: 'centimeter' }];
 EN.Units.formatSequence(quantities);
 // > "123 meters 17.2 centimeters"
@@ -43,11 +42,7 @@ Both unit and unit sequences can be formatted to a `Part[]` array.
 ```typescript
 const quantities = [{ value: '123', unit: 'meter'}, { value: '17.2', unit: 'centimeter' }];
 units.formatSequenceParts(quantities);
-```
 
-Produces:
-
-```
 [
   { type: 'digits', value: '123' },
   { type: 'literal', value: ' meters'},

@@ -110,6 +110,23 @@ test('intervals', () => {
   expect(s).toEqual('2018年3月10日星期六');
 });
 
+test('interval parts', () => {
+  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+
+  const engine = new GregorianEngine(INTERNAL, EN);
+  const res = engine.formatIntervalParts(mar11, mar14, 'yMMMd');
+  expect(res).toEqual([
+    { type: 'month', value: 'Mar' },
+    { type: 'literal', value: ' ' },
+    { type: 'day', value: '10' },
+    { type: 'literal', value: ' – ' },
+    { type: 'day', value: '14'},
+    { type: 'literal', value: ', '},
+    { type: 'year', value: '2018'}
+  ]);
+});
+
 test('day periods', () => {
   const base = MARCH_11_2018_070025_UTC;
   const losangeles = (n: number) => datetime(base + n, LOS_ANGELES);

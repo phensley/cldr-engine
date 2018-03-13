@@ -53,10 +53,7 @@ You can format any number as an array of `Part` objects. This can provide some f
 
 ```typescript
 EN.Numbers.formatDecimalParts('-12345.234', { group: true });
-```
 
-Returns:
-```javascript
 [
   { type: 'minus', value: '-' },
   { type: 'digits', value: '12' },

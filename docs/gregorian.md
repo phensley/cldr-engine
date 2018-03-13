@@ -15,17 +15,29 @@ ES419.Gregorian.format(march5, { date: 'full' });
 // > "lunes, 5 de marzo de 2018"
 ```
 
-TODO: intervals
+### Intervals
+
+Intervals can be formatted by providing a skeleton. The "field of greatest difference" will determine which pattern
+is used.
+
+```typescript
+// March 11, 2018 7:00:25 AM UTC
+// March 10, 2018 23:00:25 PM Los Angeles local time
+const epoch = 1520751625000;
+const day = 86400 * 1000;
+
+const mar11 = new ZonedDateTime(epoch, LOS_ANGELES);
+const mar14 = new ZonedDateTime(epoch + (3 * day), LOS_ANGELES);
+
+EN.Gregorian.formatInterval(mar11, mar14, 'yMMMd');
+// > "Mar 10 – 14, 2018"
+```
 
 ### Formatting as parts
 
 ```typescript
 EN.Gregorian.formatParts(march5, { date: 'full' });
-```
 
-Produces:
-
-```javascript
 [
   {type: 'weekday', value: 'Monday'},
   {type: 'literal', value: ', '},
@@ -37,4 +49,16 @@ Produces:
 ]
 ```
 
-TODO: interval parts
+```typescript
+EN.Gregorian.formatIntervalParts(mar11, mar14, 'yMMMd');
+
+[
+  { type: 'month', value: 'Mar' },
+  { type: 'literal', value: ' ' },
+  { type: 'day', value: '10' },
+  { type: 'literal', value: ' – ' },
+  { type: 'day', value: '14'},
+  { type: 'literal', value: ', '},
+  { type: 'year', value: '2018'}
+]
+```
