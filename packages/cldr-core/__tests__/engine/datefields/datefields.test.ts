@@ -16,7 +16,7 @@ const SCHEMA = buildSchema();
 const WRAPPER = new WrapperInternal();
 const INTERNAL = new DateFieldsInternal(SCHEMA, WRAPPER);
 
-test('relative', () => {
+test('relative time', () => {
   const engine = new DateFieldsEngine(INTERNAL, EN);
   let s: string;
 
@@ -55,6 +55,11 @@ test('relative', () => {
 
   s = engine.formatRelativeTime(1, 'year');
   expect(s).toEqual('next year');
+});
+
+test('relative time options', () => {
+  const engine = new DateFieldsEngine(INTERNAL, EN);
+  let s: string;
 
   s = engine.formatRelativeTime(new Decimal('-3.2'), 'week');
   expect(s).toEqual('3.2 weeks ago');
@@ -75,4 +80,25 @@ test('relative', () => {
   // Invalid width
   s = engine.formatRelativeTime(5, 'week', { width: 'wideXX' as RelativeTimeWidthType });
   expect(s).toEqual('');
+
+  // Invalid number
+  expect(() => engine.formatRelativeTime('xyz', 'week')).toThrowError();
+});
+
+test('relative time locales', () => {
+  let engine = new DateFieldsEngine(INTERNAL, ES_419);
+  let s: string;
+
+  s = engine.formatRelativeTime(1, 'day');
+  expect(s).toEqual('mañana');
+
+  s = engine.formatRelativeTime(-1, 'week');
+  expect(s).toEqual('la semana pasada');
+
+  engine = new DateFieldsEngine(INTERNAL, DE);
+  s = engine.formatRelativeTime(1, 'day');
+  expect(s).toEqual('morgen');
+
+  s = engine.formatRelativeTime(-1, 'week');
+  expect(s).toEqual('letzte Woche');
 });
