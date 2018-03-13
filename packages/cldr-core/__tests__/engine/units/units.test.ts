@@ -35,6 +35,25 @@ test('format string', () => {
   expect(s).toEqual('12.3M lb');
 });
 
+test('unit lengths', () => {
+  const units = new UnitsEngine(UNITS, NUMBERS, EN);
+  let s: string;
+
+  const q: Quantity = { value: '1', unit: 'meter' };
+
+  s = units.format(q);
+  expect(s).toEqual('1 meter');
+
+  s = units.format(q, { length: 'long' });
+  expect(s).toEqual('1 meter');
+
+  s = units.format(q, { length: 'short' });
+  expect(s).toEqual('1 m');
+
+  s = units.format(q, { length: 'narrow' });
+  expect(s).toEqual('1m');
+});
+
 test('format parts', () => {
   const units = new UnitsEngine(UNITS, NUMBERS, EN);
   let s: Part[];
@@ -56,7 +75,7 @@ test('format parts', () => {
   ]);
 });
 
-test('format sequence', () => {
+test('format sequence string', () => {
   const units = new UnitsEngine(UNITS, NUMBERS, EN);
   let s: string;
   let u: Quantity[];
