@@ -167,9 +167,17 @@ The following rounding modes are supported. In the descriptions the value `n` is
  * `truncate` - same as `half-down`
 
 ```typescript
-new Decimal('1.5').setScale(0)
+new Decimal('1.5').setScale(0);
+// > 2
+
+new Decimal('1.5').setScale(0, 'down');
+// > 1
+
 new Decimal('10').divide('6', { scale: 5, rounding: 'ceiling' });
-// > 12345.13
+// > 1.66667
+
+new Decimal('10').divide('6', { scale: 5, rounding: 'floor' });
+// > 1.66666
 ```
 
 ### Addition
