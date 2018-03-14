@@ -16,12 +16,18 @@ npm install --save @phensley/cldr
 yarn add @phensley/cldr
 ```
 
+## Status
+
+**The project is currently pre-ALPHA. Working on stabilizing the public API for an initial 1.0 release.**
+
 ## Documentation
 
 This project is **currently in pre-ALPHA** and under active development, with the potential for major changes to APIs before the initial release.
 
 * [Integration](docs/integration.md) of @phensley/cldr into an application
 * [Locales](docs/locale.md) parsing, resolving, distance-based matching
+* [Arbitrary precision math](docs/math.md) manipulate numbers of any number of digits
+* [Date-time with timezone](docs/datetime.md)
 * [Number](docs/numbers.md) formatting to strings, parts, arbitrary precision
 * [Currency](docs/currencies.md) formatting to strings, parts, arbitrary precision
 * [Gregorian date](docs/gregorian.md) formatting to strings, parts
@@ -29,17 +35,16 @@ This project is **currently in pre-ALPHA** and under active development, with th
 * [Names of things](docs/names.md), languages, places, etc
 * [Units](docs/units.md) formatting quantities in units (e.g. meters, pounds, etc)
 
-#### Datatypes
-
-* [Arbitrary precision math](docs/math.md)
-* [Date-time with timezone](docs/datetime.md)
-
 #### Upcoming
 
- * Unit conversions
- * Messages
- * Timezone info
-   * Exemplar cities with lat/long mapping to timezone id
+* Unit conversions
+* Message formatter
+* Timezone-related info
+  * Exemplar cities with lat/long mapping to timezone id
+
+#### Notes
+
+* [Testing](docs/testing.md) plan, browser compatibility
 
 
 ## Goals
