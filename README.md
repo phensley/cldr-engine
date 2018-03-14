@@ -4,6 +4,14 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 
 [![build](https://api.travis-ci.org/phensley/cldr-engine.svg?branch=master)](https://travis-ci.org/phensley/cldr-engine) [![codecov](https://codecov.io/gh/phensley/cldr-engine/branch/master/graph/badge.svg)](https://codecov.io/gh/phensley/cldr-engine) [![npm version](https://badge.fury.io/js/%40phensley%2Fcldr.svg)](https://www.npmjs.com/package/@phensley/cldr)
 
+## Demonstration
+
+[React-based demonstration app](https://phensley.github.io/cldr-engine-react-demo/)
+
+## Status
+
+**The project is currently pre-ALPHA. Working on stabilizing the public API for an initial 1.0 release.**
+
 ## Install
 
 Install the [NPM package](https://www.npmjs.com/package/@phensley/cldr):
@@ -15,10 +23,6 @@ npm install --save @phensley/cldr
 
 yarn add @phensley/cldr
 ```
-
-## Status
-
-**The project is currently pre-ALPHA. Working on stabilizing the public API for an initial 1.0 release.**
 
 ## Documentation
 
