@@ -1,5 +1,7 @@
 import {
   buildSchema,
+  DateFieldsEngine,
+  DateFieldsInternal,
   GregorianEngine,
   GregorianInternal,
   LanguageTag,
@@ -12,6 +14,8 @@ import {
   NumbersEngine,
   NumbersInternal,
   Pack,
+  UnitsEngine,
+  UnitsInternal,
   WrapperInternal
 } from '@phensley/cldr-core';
 
@@ -33,9 +37,11 @@ export const parseLocale = (id: string): Locale => {
  */
 export interface Engine {
   readonly locale: Locale;
+  readonly DateFields: DateFieldsEngine;
   readonly Gregorian: GregorianEngine;
   readonly Numbers: NumbersEngine;
   readonly Names: NamesEngine;
+  readonly Units: UnitsEngine;
 }
 
 /**
@@ -79,9 +85,11 @@ export class CLDR {
   protected readonly packCache: LRU<string, Pack>;
   protected readonly loader?: (language: string) => any;
   protected readonly asyncLoader?: (language: string) => Promise<any>;
+  protected readonly dateFieldsInternal: DateFieldsInternal;
   protected readonly gregorianInternal: GregorianInternal;
   protected readonly namesInternal: NamesInternal;
   protected readonly numbersInternal: NumbersInternal;
+  protected readonly unitsInternal: UnitsInternal;
   protected readonly wrapperInternal: WrapperInternal;
 
   // Keeps track of in-flight promises.
@@ -94,9 +102,11 @@ export class CLDR {
 
     const patternCacheSize = options.patternCacheSize || 50;
     this.wrapperInternal = new WrapperInternal(patternCacheSize);
+    this.dateFieldsInternal = new DateFieldsInternal(SCHEMA, this.wrapperInternal);
     this.gregorianInternal = new GregorianInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
     this.namesInternal = new NamesInternal(SCHEMA, patternCacheSize);
     this.numbersInternal = new NumbersInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
+    this.unitsInternal = new UnitsInternal(SCHEMA, this.numbersInternal, this.wrapperInternal, patternCacheSize);
   }
 
   info(): string {
@@ -170,9 +180,11 @@ export class CLDR {
     const bundle = pack.get(locale.tag);
     return {
       locale,
+      DateFields: new DateFieldsEngine(this.dateFieldsInternal, bundle),
       Gregorian: new GregorianEngine(this.gregorianInternal, bundle),
       Names: new NamesEngine(this.namesInternal, bundle),
       Numbers: new NumbersEngine(this.numbersInternal, bundle),
+      Units: new UnitsEngine(this.unitsInternal, this.numbersInternal, bundle)
     };
   }
 }

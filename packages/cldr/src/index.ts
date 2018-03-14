@@ -7,6 +7,7 @@ export {
   CurrencyFormatOptions,
   CurrencyFormatStyleType,
   CurrencySymbolWidthType,
+  DateFieldType,
   Decimal,
   DecimalConstants,
   DecimalFormatOptions,
@@ -20,5 +21,8 @@ export {
   MathContext,
   Pack,
   Rational,
+  RelativeTimeFormatOptions,
+  UnitFormatOptions,
+  UnitType,
   ZonedDateTime
 } from '@phensley/cldr-core';

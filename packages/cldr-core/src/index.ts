@@ -10,8 +10,11 @@ export { LRU } from './utils/lru';
 export {
   AvailableFormatType,
   CurrencyType,
+  DateFieldType,
   FieldWidthType,
-  FormatWidthType
+  FormatWidthType,
+  RelativeTimeWidthType,
+  UnitType
 } from '@phensley/cldr-schema';
 
 // Used by cldr-compiler
