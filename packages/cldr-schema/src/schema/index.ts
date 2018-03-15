@@ -3,6 +3,7 @@ export * from './enums';
 
 export * from './datefields';
 export * from './calendar';
+export * from './general';
 export * from './gregorian';
 export * from './currencies';
 export * from './numbers';
@@ -14,6 +15,7 @@ import {
   Currencies,
   DateFields,
   Gregorian,
+  Layout,
   Numbers,
   Territories,
   TimeZoneNames,
@@ -23,6 +25,7 @@ import {
 export interface Schema {
   readonly DateFields: DateFields;
   readonly Gregorian: Gregorian;
+  readonly Layout: Layout;
   readonly Numbers: Numbers;
   readonly Currencies: Currencies;
   readonly Territories: Territories;

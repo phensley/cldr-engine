@@ -152,6 +152,27 @@ const Aliases = {
   zoneAlias: get([_alias, 'zoneAlias', flattenZoneAliases])
 };
 
+const _orientation = ['layout', 'orientation'];
+
+const LAYOUT_KEY: any = {
+  'left-to-right': 'ltr',
+  'right-to-left': 'rtl',
+  'top-to-bottom': 'ttb',
+  'bottom-to-top': 'btt'
+};
+
+const layoutKey = (k: string): string => {
+  return LAYOUT_KEY[k] || k;
+};
+
+/**
+ * Layout
+ */
+const Layout = {
+  characterOrder: get([_orientation, 'characterOrder', layoutKey]),
+  lineOrder: get([_orientation, 'lineOrder', layoutKey])
+};
+
 const chinese = (...keys: string[]) => ['dates', 'calendars', 'chinese', ...keys];
 const chineseIntervals = chinese('dateTimeFormats', 'intervalFormats');
 
@@ -360,6 +381,7 @@ export const getMain = (language: string) => {
     DateFields: access(DateFields, 'dateFields'),
     Gregorian: access(Gregorian, 'ca-gregorian'),
     Hebrew: access(Hebrew, 'ca-hebrew'),
+    Layout: access(Layout, 'layout'),
     Numbers: access(Numbers, 'numbers'),
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames'),
     Units: access(Units, 'units'),
