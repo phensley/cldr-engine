@@ -201,3 +201,154 @@ test('weekday firstday raw', () => {
   s = INTERNAL.formatRaw(DE, d, 'e');
   expect(s).toEqual('6'); // sat is next to last day of week
 });
+
+test('timezone short/long specific non-location format', () => {
+  const base = MARCH_11_2018_070025_UTC;
+  let s: string;
+  let d: ZonedDateTime;
+
+  d = datetime(base, NEW_YORK);
+
+  s = INTERNAL.formatRaw(EN, d, 'z');
+  expect(s).toEqual('EDT');
+
+  s = INTERNAL.formatRaw(EN, d, 'zzzz');
+  expect(s).toEqual('Eastern Daylight Time');
+});
+
+test('timezone iso8601 basic/extended', () => {
+  const base = MARCH_11_2018_070025_UTC;
+  let s: string;
+  let d: ZonedDateTime;
+
+  d = datetime(base, NEW_YORK);
+
+  s = INTERNAL.formatRaw(EN, d, 'Z');
+  expect(s).toEqual('+0400');
+
+  s = INTERNAL.formatRaw(EN, d, 'ZZZZ'); // Same as 'OOOO'
+  expect(s).toEqual('GMT+04:00');
+
+  s = INTERNAL.formatRaw(EN, d, 'ZZZZZ');
+  expect(s).toEqual('+04:00');
+});
+
+test('timezone short/long localized gmt', () => {
+  const base = MARCH_11_2018_070025_UTC;
+  let s: string;
+  let d: ZonedDateTime;
+
+  d = datetime(base, NEW_YORK);
+
+  s = INTERNAL.formatRaw(EN, d, 'O');
+  expect(s).toEqual('GMT+4');
+
+  s = INTERNAL.formatRaw(EN, d, 'OOOO');
+  expect(s).toEqual('GMT+04:00');
+});
+
+test('timezone short/long generic non-location format', () => {
+  const base = MARCH_11_2018_070025_UTC;
+  let s: string;
+  let d: ZonedDateTime;
+
+  d = datetime(base, NEW_YORK);
+
+  s = INTERNAL.formatRaw(EN, d, 'v');
+  expect(s).toEqual('ET');
+
+  s = INTERNAL.formatRaw(EN, d, 'vvvv');
+  expect(s).toEqual('Eastern Time');
+
+  s = INTERNAL.formatRaw(ES_419, d, 'v');
+  expect(s).toEqual('GMT+4');
+
+  s = INTERNAL.formatRaw(ES_419, d, 'vvvv');
+  expect(s).toEqual('hora oriental');
+
+  s = INTERNAL.formatRaw(DE, d, 'v');
+  expect(s).toEqual('GMT+4');
+
+  s = INTERNAL.formatRaw(DE, d, 'vvvv');
+  expect(s).toEqual('Nordamerikanische Ostküstenzeit');
+});
+
+test('timezone short/long zone id, exemplar city, generic location format', () => {
+  const base = MARCH_11_2018_070025_UTC;
+  let s: string;
+  let d: ZonedDateTime;
+
+  d = datetime(base, NEW_YORK);
+
+  s = INTERNAL.formatRaw(EN, d, 'V');
+  expect(s).toEqual('unk');
+
+  s = INTERNAL.formatRaw(EN, d, 'VV');
+  expect(s).toEqual('America/New_York');
+
+  s = INTERNAL.formatRaw(EN, d, 'VVV');
+  expect(s).toEqual('New York');
+
+  s = INTERNAL.formatRaw(EN, d, 'VVVV');
+  expect(s).toEqual('New York Time');
+});
+
+test('timezone ISO8601 basic format', () => {
+  const base = MARCH_11_2018_070025_UTC;
+  let s: string;
+  let d: ZonedDateTime;
+
+  d = datetime(base, NEW_YORK);
+
+  s = INTERNAL.formatRaw(EN, d, 'x');
+  expect(s).toEqual('+04');
+  s = INTERNAL.formatRaw(EN, d, 'X');
+  expect(s).toEqual('+04');
+
+  s = INTERNAL.formatRaw(EN, d, 'xx');
+  expect(s).toEqual('+0400');
+  s = INTERNAL.formatRaw(EN, d, 'XX');
+  expect(s).toEqual('+0400');
+
+  s = INTERNAL.formatRaw(EN, d, 'xxx');
+  expect(s).toEqual('+04:00');
+  s = INTERNAL.formatRaw(EN, d, 'XXX');
+  expect(s).toEqual('+04:00');
+
+  s = INTERNAL.formatRaw(EN, d, 'xxxx');
+  expect(s).toEqual('+0400');
+  s = INTERNAL.formatRaw(EN, d, 'XXXX');
+  expect(s).toEqual('+0400');
+
+  s = INTERNAL.formatRaw(EN, d, 'xxxxx');
+  expect(s).toEqual('+04:00');
+  s = INTERNAL.formatRaw(EN, d, 'XXXXX');
+  expect(s).toEqual('+04:00');
+
+  d = datetime(base, LONDON);
+
+  s = INTERNAL.formatRaw(EN, d, 'x');
+  expect(s).toEqual('+00');
+  s = INTERNAL.formatRaw(EN, d, 'X');
+  expect(s).toEqual('+00Z');
+
+  s = INTERNAL.formatRaw(EN, d, 'xx');
+  expect(s).toEqual('+0000');
+  s = INTERNAL.formatRaw(EN, d, 'XX');
+  expect(s).toEqual('+0000Z');
+
+  s = INTERNAL.formatRaw(EN, d, 'xxx');
+  expect(s).toEqual('+00:00');
+  s = INTERNAL.formatRaw(EN, d, 'XXX');
+  expect(s).toEqual('+00:00Z');
+
+  s = INTERNAL.formatRaw(EN, d, 'xxxx');
+  expect(s).toEqual('+0000');
+  s = INTERNAL.formatRaw(EN, d, 'XXXX');
+  expect(s).toEqual('+0000Z');
+
+  s = INTERNAL.formatRaw(EN, d, 'xxxxx');
+  expect(s).toEqual('+00:00');
+  s = INTERNAL.formatRaw(EN, d, 'XXXXX');
+  expect(s).toEqual('+00:00Z');
+});

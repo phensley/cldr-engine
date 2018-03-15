@@ -20,6 +20,7 @@ export interface TimeZoneNames {
   readonly gmtFormat: FieldArrow;
   readonly gmtZeroFormat: FieldArrow;
   readonly hourFormat: FieldArrow;
+  readonly regionFormat: FieldArrow;
   readonly metaZones: ScopeArrow<MetaZoneType, MetaZoneInfo>;
   readonly timeZones: ScopeArrow<TimeZoneType, TimeZoneInfo>;
 }

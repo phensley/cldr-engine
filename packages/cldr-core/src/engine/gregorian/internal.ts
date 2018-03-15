@@ -21,7 +21,8 @@ import {
   WeekdayType,
   WeekdaysFormat,
   WeekdaysFormats,
-  WeekdayValues
+  WeekdayValues,
+  TimeZoneType
 } from '@phensley/cldr-schema';
 
 import { weekFirstDay } from './autogen.weekdata';
@@ -49,6 +50,23 @@ export interface FieldFormatter {
 
 export type FieldFormatterMap = { [ch: string]: FieldFormatter };
 
+type TZC = [number, boolean, number, number];
+
+const getTZC = (offset: number): TZC => {
+  const negative = offset < 0;
+  if (negative) {
+    offset *= -1;
+  }
+  const hours = offset / 60 | 0;
+  const minutes = offset % 60;
+  return [offset, negative, hours, minutes];
+};
+
+const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
+  const parts = raw.split(';');
+  return parts.length !== 2 ? [[], []] : [parseDatePattern(parts[0]), parseDatePattern(parts[1])];
+};
+
 /**
  * Gregorian calendar internal engine singleton, shared across all locales.
  */
@@ -60,19 +78,17 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   readonly months: MonthsFormats;
   readonly quarters: QuartersFormats;
   readonly weekdays: WeekdaysFormats;
-
   readonly TimeZoneNames: TimeZoneNames;
-
-  // TODO: simpler LRU
-  private readonly datePatternCache: Cache<DateTimeNode[]>;
+  readonly datePatternCache: Cache<DateTimeNode[]>;
+  readonly hourFormatCache: Cache<[DateTimeNode[], DateTimeNode[]]>;
 
   private impl: FieldFormatterMap = {
     'G': { type: 'era', impl: this.era },
     'y': { type: 'year', impl: this.year },
     'Y': { type: 'iso-year', impl: this.isoYear },
-    // 'u': TODO
-    // 'U': TODO
-    // 'r': TODO
+    // 'u': - non-gregorian
+    // 'U': - non-gregorian
+    // 'r': - non-gregorian
     'Q': { type: 'quarter', impl: this.quarter },
     'q': { type: 'quarter', impl: this.quarter },
     'M': { type: 'month', impl: this.month },
@@ -94,20 +110,20 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     'H': { type: 'hour', impl: this.hour },
     'K': { type: 'hour', impl: this.hourAlt },
     'k': { type: 'hour', impl: this.hourAlt },
-    // 'j'
-    // 'J'
-    // 'C'
+    // 'j' - input skeleton symbol
+    // 'J' - input skeleton symbol
+    // 'C' - input skeleton symbol
     'm': { type: 'minute', impl: this.minute },
     's': { type: 'second', impl: this.second },
     'S': { type: 'fracsec', impl: this.fractionalSecond },
     // 'A'
     'z': { type: 'timezone', impl: this.timeZone_z },
-    // 'Z' tz
+    'Z': { type: 'timezone', impl: this.timeZone_Z },
     'O': { type: 'timezone', impl: this.timeZone_O },
-    // 'v' tz
-    // 'V' tz
-    // 'X' tz
-    // 'x' tz
+    'v': { type: 'timezone', impl: this.timeZone_v },
+    'V': { type: 'timezone', impl: this.timeZone_V },
+    'X': { type: 'timezone', impl: this.timeZone_8601basic },
+    'x': { type: 'timezone', impl: this.timeZone_8601basic }
   };
 
   constructor(
@@ -124,6 +140,7 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     this.TimeZoneNames = root.TimeZoneNames;
 
     this.datePatternCache = new Cache(parseDatePattern, cacheSize);
+    this.hourFormatCache = new Cache(parseHourFormat, cacheSize);
   }
 
   /**
@@ -368,15 +385,18 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   }
 
   protected hour(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    return this._formatHour(date.getHour(), field, width);
+  }
+
+  protected _formatHour(hour: number, field: string, width: number): string {
     const twelve = field === 'h';
-    let hours = date.getHour();
-    if (twelve && hours > 12) {
-      hours = hours - 12;
+    if (twelve && hour > 12) {
+      hour = hour - 12;
     }
-    if (twelve && hours === 0) {
-      hours = 12;
+    if (twelve && hour === 0) {
+      hour = 12;
     }
-    return zeroPad2(hours, width);
+    return zeroPad2(hour, width);
   }
 
   protected hourAlt(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
@@ -514,30 +534,161 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
     return this._year(date.getISOYear(), width);
   }
 
+  /**
+   * Timezone: short/long specific non-location format.
+   * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
+   */
   protected timeZone_z(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     if (width > 4) {
       return '';
     }
-    const zoneId = date.zoneId();
+
     const metaZoneId = date.metaZoneId();
     const isDST = date.isDaylightSavings();
-    const metaZone = this.TimeZoneNames.metaZones(metaZoneId as MetaZoneType);
-    const format = width === 4 ? metaZone.long : metaZone.short;
-    const name = isDST ? format.daylight(bundle) : format.standard(bundle);
-    return name;
+    const info = this.TimeZoneNames.metaZones(metaZoneId as MetaZoneType);
+    if (info !== undefined) {
+      const format = width === 4 ? info.long : info.short;
+      const name = isDST ? format.daylight(bundle) : format.standard(bundle);
+      if (name !== '') {
+        return name;
+      }
+    }
+
+    // Fall back to 'O' or 'OOOO'
+    return this.timeZone_O(bundle, date, 'O', width);
   }
 
+  /**
+   * Timezone: ISO8601 basic/extended format, long localized GMT format.
+   * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
+   */
+  protected timeZone_Z(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    if (width === 4) {
+      return this.timeZone_O(bundle, date, 'O', width);
+    }
+
+    const [offset, negative, hours, minutes] = getTZC(date.timezoneOffset());
+
+    let fmt = '';
+    switch (width) {
+    case 5:
+    case 3:
+    case 2:
+    case 1:
+      fmt += negative ? '-' : '+';
+      fmt += zeroPad2(hours, 2);
+      if (width === 5) {
+        fmt += ':';
+      }
+      fmt += zeroPad2(minutes, 2);
+      break;
+    }
+    return fmt;
+  }
+
+  /**
+   * Timezone: short/long localized GMT format.
+   */
   protected timeZone_O(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     const offset = date.timezoneOffset();
-    const hours = offset / 60 | 0;
-    const minutes = offset % 60;
-    this.TimeZoneNames.gmtFormat(bundle);
     switch (width) {
     case 1:
-      // return this._wrapper()
-    //
+      return this._wrapGMT(bundle, offset, true);
+    case 4:
+      return this._wrapGMT(bundle, offset, false);
     }
-    // TODO:
+    return '';
+  }
+
+  /**
+   * Timezone: short/long generic non-location format.
+   */
+  protected timeZone_v(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    if (width !== 1 && width !== 4) {
+      return '';
+    }
+
+    const metaZoneId = date.metaZoneId();
+    const info = this.TimeZoneNames.metaZones(date.metaZoneId() as MetaZoneType);
+    let name = '';
+    if (info !== undefined) {
+      const format = width === 1 ? info.short : info.long;
+      name = format.generic(bundle);
+    }
+
+    if (name !== '') {
+      return name;
+    }
+
+    // Fall back to 'O' or 'OOOO'
+    return this.timeZone_O(bundle, date, 'O', width);
+  }
+
+  /**
+   * Timezone: short/long zone ID, exemplar city, generic location format.
+   * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
+   */
+  protected timeZone_V(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    const zoneId = date.zoneId();
+    switch (width) {
+    case 4:
+    {
+      // Generic location format, e.g. "Los Angeles Time"
+      const city = this.getExemplarCity(bundle, zoneId);
+      if (city === '') {
+        // TODO: docs say fallback to 'OOOO' only necessary for GMT-style
+        // timezone ids. Need to create a mapping
+        return this.timeZone_O(bundle, date, 'O', 4);
+      }
+      const pattern = this.TimeZoneNames.regionFormat(bundle);
+      return this.wrapper.format(pattern, [city]);
+    }
+
+    case 3:
+    {
+      // Exemplar city for the time zone, e.g. "Los Angeles"
+      const city = this.getExemplarCity(bundle, zoneId);
+      return city !== '' ? city : this.getExemplarCity(bundle, 'Etc/Unknown');
+    }
+
+    case 2:
+      // Long time zone ID, e.g. "America/Los_Angeles"
+      return zoneId;
+
+    case 1:
+      // TODO: short time zone ID not present in JSON CLDR data.
+      // return 'unk' for now
+      return 'unk';
+    }
+    return '';
+  }
+
+  /**
+   * Timezone: ISO8601 basic format
+   * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
+   */
+  protected timeZone_8601basic(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    const [offset, negative, hours, minutes] = getTZC(date.timezoneOffset());
+    let fmt = '';
+    switch (width) {
+    case 5:
+    case 4:
+    case 3:
+    case 2:
+    case 1:
+      fmt += negative ? '-' : '+';
+      fmt += zeroPad2(hours, 2);
+      if (width === 3 || width === 5) {
+        fmt += ':';
+      }
+      if (width !== 1 || minutes > 0) {
+        fmt += zeroPad2(minutes, 2);
+      }
+      if (field === 'X' && offset === 0) {
+        fmt += 'Z';
+      }
+      return fmt;
+    }
     return '';
   }
 
@@ -556,21 +707,46 @@ export type FieldFormatterMap = { [ch: string]: FieldFormatter };
   }
 
   protected _wrapGMT(bundle: Bundle, offset: number, short: boolean): string {
+    // Dedicated GMT zero format
     if (offset === 0) {
       return this.TimeZoneNames.gmtZeroFormat(bundle);
     }
 
-    const negative = offset < 0;
-    if (negative) {
-      offset *= -1;
+    const [_offset, negative, hours, minutes] = getTZC(offset);
+    const emitMins = !short || minutes > 0;
+
+    // Fetch the locale-specific hour format.
+    const hourFormat = this.getHourFormat(bundle, negative);
+    let fmt = '';
+    for (const node of hourFormat) {
+      if (typeof node === 'string') {
+        // If we're suppressing minutes we need to also suppress the hour:minute separator
+        const sep = node === '.' || node === ':';
+        if (!sep || emitMins) {
+          fmt += node;
+        }
+      } else {
+        if (node.ch === 'H') {
+          fmt += node.width === 1 ? zeroPad2(hours, 1) : zeroPad2(hours, short ? 1 : node.width);
+        } else if (node.ch === 'm' && emitMins) {
+          fmt += zeroPad2(minutes, node.width);
+        }
+      }
     }
-    const hours = offset / 60 | 0;
-    const minutes = offset % 60;
-    const pattern = this.TimeZoneNames.gmtFormat(bundle);
-    const hourformat = this.TimeZoneNames.hourFormat(bundle).split(';');
-    const format = negative ? hourformat[0] : hourformat[1];
-    // TODO:
-    return '';
+
+    // Wrap into locale-specific GMT format
+    const format = this.TimeZoneNames.gmtFormat(bundle);
+    return this.wrapper.format(format, [fmt]);
   }
 
+  protected getExemplarCity(bundle: Bundle, zoneId: string): string {
+    const info = this.TimeZoneNames.timeZones(zoneId as TimeZoneType);
+    return info !== undefined ? info.exemplarCity(bundle) : '';
+  }
+
+  protected getHourFormat(bundle: Bundle, negative: boolean): DateTimeNode[] {
+    const raw = this.TimeZoneNames.hourFormat(bundle);
+    const format = this.hourFormatCache.get(raw);
+    return format[negative ? 1 : 0];
+  }
 }

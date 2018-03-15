@@ -285,6 +285,7 @@ const TimeZoneNames = {
   gmtFormat: get([_timeZoneNames, 'gmtFormat']),
   gmtZeroFormat: get([_timeZoneNames, 'gmtZeroFormat']),
   hourFormat: get([_timeZoneNames, 'hourFormat']),
+  regionFormat: get([_timeZoneNames, 'regionFormat']),
   metaZones: get([_timeZoneNames, 'metazone']),
   timeZones: get([_timeZoneNames, 'zone', flattenTimeZones])
 };
