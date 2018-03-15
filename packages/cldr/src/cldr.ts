@@ -2,6 +2,8 @@ import {
   buildSchema,
   DateFieldsEngine,
   DateFieldsInternal,
+  GeneralEngine,
+  GeneralInternal,
   GregorianEngine,
   GregorianInternal,
   LanguageTag,
@@ -38,6 +40,7 @@ export const parseLocale = (id: string): Locale => {
 export interface Engine {
   readonly locale: Locale;
   readonly DateFields: DateFieldsEngine;
+  readonly General: GeneralEngine;
   readonly Gregorian: GregorianEngine;
   readonly Numbers: NumbersEngine;
   readonly Names: NamesEngine;
@@ -86,6 +89,7 @@ export class CLDR {
   protected readonly loader?: (language: string) => any;
   protected readonly asyncLoader?: (language: string) => Promise<any>;
   protected readonly dateFieldsInternal: DateFieldsInternal;
+  protected readonly generalInternal: GeneralInternal;
   protected readonly gregorianInternal: GregorianInternal;
   protected readonly namesInternal: NamesInternal;
   protected readonly numbersInternal: NumbersInternal;
@@ -103,6 +107,7 @@ export class CLDR {
     const patternCacheSize = options.patternCacheSize || 50;
     this.wrapperInternal = new WrapperInternal(patternCacheSize);
     this.dateFieldsInternal = new DateFieldsInternal(SCHEMA, this.wrapperInternal);
+    this.generalInternal = new GeneralInternal(SCHEMA, patternCacheSize);
     this.gregorianInternal = new GregorianInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
     this.namesInternal = new NamesInternal(SCHEMA, patternCacheSize);
     this.numbersInternal = new NumbersInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
@@ -181,6 +186,7 @@ export class CLDR {
     return {
       locale,
       DateFields: new DateFieldsEngine(this.dateFieldsInternal, bundle),
+      General: new GeneralEngine(this.generalInternal, bundle),
       Gregorian: new GregorianEngine(this.gregorianInternal, bundle),
       Names: new NamesEngine(this.namesInternal, bundle),
       Numbers: new NumbersEngine(this.numbersInternal, bundle),
