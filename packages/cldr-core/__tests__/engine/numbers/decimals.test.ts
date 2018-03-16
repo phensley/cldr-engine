@@ -138,6 +138,32 @@ test('decimal compact', () => {
   expect(actual).toEqual('12,345.7');
 });
 
+test('decimal compact significant digits', () => {
+  const engine = new NumbersEngine(INTERNAL, EN);
+  let actual: string;
+
+  actual = engine.formatDecimal('1200', { style: 'short' });
+  expect(actual).toEqual('1.2K');
+
+  actual = engine.formatDecimal('1000000000', { style: 'short' });
+  expect(actual).toEqual('1B');
+
+  actual = engine.formatDecimal('1000000000', { style: 'short', minimumFractionDigits: 1 });
+  expect(actual).toEqual('1.0B');
+
+  actual = engine.formatDecimal('1500000000', { style: 'short' });
+  expect(actual).toEqual('1.5B');
+
+  actual = engine.formatDecimal('1590000000', { style: 'short' });
+  expect(actual).toEqual('1.6B');
+
+  actual = engine.formatDecimal('12345', { style: 'short' });
+  expect(actual).toEqual('12K');
+
+  actual = engine.formatDecimal('12345', { style: 'short', minimumFractionDigits: 1 });
+  expect(actual).toEqual('12.3K');
+});
+
 test('decimal percents', () => {
   const engine = new NumbersEngine(INTERNAL, EN);
 

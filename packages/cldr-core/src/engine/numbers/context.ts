@@ -22,12 +22,16 @@ export class NumberContext {
   minSig: number = -1;
   currencyDigits: number = -1;
 
-  constructor(options: NumberFormatOptions, currencyDigits: number = -1) {
-    this.options = options;
+  constructor(options: NumberFormatOptions, compact: boolean, currencyDigits: number = -1) {
+    const o = options;
+    this.options = o;
     this.roundingMode = options.round || 'half-even';
     this.currencyDigits = currencyDigits;
-    this.useSignificant = options.minimumSignificantDigits !== undefined ||
-      options.maximumSignificantDigits !== undefined;
+
+    // Determine if we should use default or significant digit modes.
+    this.useSignificant =
+      (compact && o.maximumFractionDigits === undefined && o.minimumFractionDigits === undefined) ||
+      (!compact && o.minimumSignificantDigits === undefined && o.maximumSignificantDigits === undefined);
   }
 
   /**
@@ -41,7 +45,10 @@ export class NumberContext {
    * Set a compact pattern.
    */
   setCompact(pattern: NumberPattern, integerDigits: number, divisor: number, maxFracDigits: number = -1): void {
-    const maxSigDigits = Math.max(pattern.minInt, integerDigits);
+    let maxSigDigits = Math.max(pattern.minInt, integerDigits);
+    if (integerDigits === 1) {
+      maxSigDigits++;
+    }
     this._setPattern(pattern, maxSigDigits, 1, maxFracDigits);
   }
 
@@ -49,7 +56,7 @@ export class NumberContext {
    * Adjust the scale of the number using the resolved parameters.
    */
   adjust(n: Decimal): Decimal {
-    if (this.useSignificant && this.maxSig > 0 && this.maxSig > 0) {
+    if (this.useSignificant && this.minSig > 0 && this.maxSig > 0) {
       if (n.precision() > this.maxSig) {
         // Scale the number to have at most the maximum significant digits.
         const scale = this.maxSig - n.precision() + n.scale();
@@ -91,7 +98,9 @@ export class NumberContext {
    * Set context parameters from options, pattern and significant digit arguments.
    */
   private _setPattern(pattern: NumberPattern, maxSigDigits: number, minSigDigits: number, maxFracDigits: number): void {
+
     const o = this.options;
+
     this.minInt = orDefault(o.minimumIntegerDigits, pattern.minInt);
     this.minFrac = this.currencyDigits === -1 ? pattern.minFrac : this.currencyDigits;
     this.maxFrac = this.currencyDigits === -1 ? pattern.maxFrac : this.currencyDigits;

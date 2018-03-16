@@ -75,7 +75,7 @@ export class NumbersInternal {
         : this.decimalFormats.long.decimalFormatDivisor;
       const patternImpl = isShort ? this.decimalFormats.short.decimalFormat
         : this.decimalFormats.long.decimalFormat;
-      const ctx = new NumberContext(options);
+      const ctx = new NumberContext(options, true);
 
       // Adjust the number using the compact pattern and divisor.
       const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl, divisorImpl);
@@ -113,7 +113,7 @@ export class NumbersInternal {
         params.symbols.percentSign : params.symbols.perMille;
 
       // Adjust number using pattern and options, then render.
-      const ctx = new NumberContext(options, -1);
+      const ctx = new NumberContext(options, false, -1);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       const operands = n.operands();
@@ -131,7 +131,7 @@ export class NumbersInternal {
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
-      const ctx = new NumberContext(options, -1);
+      const ctx = new NumberContext(options, false, -1);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       const operands = n.operands();
@@ -169,7 +169,7 @@ export class NumbersInternal {
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
-      const ctx = new NumberContext(options, fractions.digits);
+      const ctx = new NumberContext(options, false, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
@@ -191,7 +191,7 @@ export class NumbersInternal {
       // correct pluralized pattern for the final rounded form.
       const divisorImpl = this.currencyFormats.short.standardDivisor;
       const patternImpl = this.currencyFormats.short.standard;
-      const ctx = new NumberContext(options, fractions.digits);
+      const ctx = new NumberContext(options, true, fractions.digits);
       const symbol = this.Currencies(code as CurrencyType).symbol(bundle, width);
 
       // Adjust the number using the compact pattern and divisor.
@@ -217,7 +217,7 @@ export class NumbersInternal {
         let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
-      const ctx = new NumberContext(options, fractions.digits);
+      const ctx = new NumberContext(options, false, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
