@@ -1,4 +1,4 @@
-import { digits } from './operations';
+import { digitCount } from './operations';
 import { Constants, POWERS10 } from './types';
 
 // When a number crosses this limit we reduce it to avoid overflow.
@@ -56,7 +56,7 @@ export const decimalOperands = (sign: number, exp: number, data: number[]): Numb
   const last = len - 1;
   const neg = sign === -1;
   const dec = exp < 0;
-  const precision = (last * Constants.RDIGITS) + digits(data[last]);
+  const precision = (last * Constants.RDIGITS) + digitCount(data[last]);
 
   // Local operands
   let n = 0;
@@ -85,7 +85,7 @@ outer:
   // Start at most-significant digit to least
   while (x >= 0) {
     let r = data[x];
-    const c = x !== last ? Constants.RDIGITS : digits(r);
+    const c = x !== last ? Constants.RDIGITS : digitCount(r);
     y = c - 1;
 
     // Scan each decimal digit of the radix number from

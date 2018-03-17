@@ -67,14 +67,15 @@ const run = (args: yargs.Arguments): void => {
     console.warn(`Scanning ${locale}..`);
     const main = getMain(locale);
     Object.keys(main).forEach(key => {
-      const dst = sections[key] || {};
+      const prefix = `Main.${key}`;
+      const dst = sections[prefix] || {};
       const src = main[key];
       if (!src) {
         return;
       }
       const counts = keyCounts(src);
       mergeKeyCounts(dst, counts);
-      sections[`Main.${key}`] = dst;
+      sections[prefix] = dst;
     });
   });
 

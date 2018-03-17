@@ -205,10 +205,10 @@ test('currency spacing', () => {
 
   engine = new NumbersEngine(INTERNAL, KM);
   actual = engine.formatCurrency('12345.234', 'USD', opts);
-  expect(actual).toEqual('12.345,23$');
+  expect(actual).toEqual('១២.៣៤៥,២៣$');
 
   actual = engine.formatCurrency('12345.234', 'BAD', opts);
-  expect(actual).toEqual('12.345,23\u00a0BAD');
+  expect(actual).toEqual('១២.៣៤៥,២៣\u00a0BAD');
 });
 
 test('currency parts', () => {
@@ -268,11 +268,11 @@ test('currency parts spacing', () => {
   engine = new NumbersEngine(INTERNAL, KM);
   actual = engine.formatCurrencyParts('12345.234', 'BAD', opts);
   expect(actual).toEqual([
-    { type: 'digits', value: '12' },
+    { type: 'digits', value: '១២' },
     { type: 'group', value: '.' },
-    { type: 'digits', value: '345' },
+    { type: 'digits', value: '៣៤៥' },
     { type: 'decimal', value: ',' },
-    { type: 'digits', value: '23' },
+    { type: 'digits', value: '២៣' },
     { type: 'spacer', value: '\u00a0' },
     { type: 'currency', value: 'BAD' }
   ]);

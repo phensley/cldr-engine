@@ -1,7 +1,10 @@
-import { CurrencySpacing, NumberSymbols } from '@phensley/cldr-schema';
+import { CurrencySpacing, NumberSymbols, NumberSystemName } from '@phensley/cldr-schema';
 import { RoundingMode } from '../../types/numbers';
+import { NumberSystem } from '../../systems';
 
 export interface NumberParams {
+  numberSystemName: NumberSystemName;
+  digits: string[];
   symbols: NumberSymbols;
   minimumGroupingDigits: number;
   primaryGroupingSize: number;
@@ -10,10 +13,14 @@ export interface NumberParams {
   afterCurrency: CurrencySpacing;
 }
 
+export type NumberSystemType =
+  'default' | 'native' | 'finance' | 'traditional' | NumberSystemName;
+
 export type RoundingModeType =
   'up' | 'down' | 'ceiling' | 'floor' | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
 
 export interface NumberFormatOptions {
+  nu?: NumberSystemType;
   round?: RoundingModeType;
   group?: boolean;
   minimumIntegerDigits?: number;

@@ -64,7 +64,7 @@ export const allzero = (data: number[], len: number): number => {
 /**
  * Returns the number of digits in w, where w < RADIX.
  */
-export const digits = (w: number): number => {
+export const digitCount = (w: number): number => {
   if (w < Constants.P4) {
     if (w < Constants.P2) {
       return w < Constants.P1 ? 1 : 2;

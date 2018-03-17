@@ -59,3 +59,10 @@ test('parse locale', () => {
     tag: new LanguageTag('und', 'Zzzz', 'ZZ')
   });
 });
+
+test('extensions', () => {
+  expect(Locale.resolve('en-US-u-nu-native')).toEqual({
+    id: 'en-US-u-nu-native',
+    tag: new LanguageTag('en', 'Latn', 'US', '', ['u-nu-native'])
+  });
+});

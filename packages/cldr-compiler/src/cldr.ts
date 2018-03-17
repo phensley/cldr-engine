@@ -288,15 +288,54 @@ const MetaZones = {
   ranges: get(['metaZones', 'metazoneInfo', 'timezone', flattenMetaZones]),
 };
 
+const numberSystemKeys = ['currencyFormats', 'decimalFormats', 'percentFormats', 'symbols'];
+
+/**
+ * Restructure the formats by numbering system.
+ */
+const numberSystemInfo = (o: any): any => {
+  const r: any = {};
+
+  // Get unique numbering system keys in this locale
+  const systems = new Set();
+  Object.keys(o).forEach(k => {
+    if (k.startsWith('decimalFormats-numberSystem')) {
+      const system = k.split('-')[2];
+      systems.add(system);
+    }
+  });
+
+  // Group formats by numbering system
+  systems.forEach(name => {
+    const system: any = {};
+    numberSystemKeys.forEach(k => {
+      system[k] = o[`${k}-numberSystem-${name}`];
+    });
+    r[name] = system;
+  });
+
+  return r;
+};
+
+const numberSystems = (o: any): any => {
+  const def = o.defaultNumberingSystem;
+  const other = o.otherNumberingSystems;
+  const native = other.native || def;
+  return {
+    default: def,
+    native,
+    finance: other.finance || def,
+    traditional: other.traditional || native
+  };
+};
+
 /**
  * Number and currency formatting data.
  */
 const Numbers = {
-  currencyFormats: get(['numbers', 'currencyFormats-numberSystem-latn']),
-  decimalFormats: get(['numbers', 'decimalFormats-numberSystem-latn']),
+  numberSystem: get(['numbers', numberSystemInfo]),
+  numberSystems: get(['numbers', numberSystems]),
   minimumGroupingDigits: get(['numbers', 'minimumGroupingDigits']),
-  percentFormats: get(['numbers', 'percentFormats-numberSystem-latn']),
-  symbols: get(['numbers', 'symbols-numberSystem-latn'])
 };
 
 /**
@@ -413,6 +452,7 @@ export const getSupplemental = () => {
     ...access({ CurrencyFractions: get(['currencyData', 'fractions']) }, 'currencyData'),
     ...access({ Ordinals: get(['plurals-type-ordinal']) }, 'ordinals'),
     ...access({ LikelySubtags: get(['likelySubtags']) }, 'likelySubtags'),
+    ...access({ NumberingSystems: get(['numberingSystems']) }, 'numberingSystems'),
     ...access({ TerritoryContainment: get(['territoryContainment']) }, 'territoryContainment')
   };
 };

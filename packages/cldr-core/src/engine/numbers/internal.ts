@@ -9,7 +9,9 @@ import {
   DigitsArrow,
   DivisorArrow,
   FieldMapArrow,
+  Numbers,
   NumberSymbol,
+  NumberSystemName,
   PercentFormats,
   Plural,
   Schema,
@@ -40,9 +42,12 @@ import { WrapperInternal } from '../wrapper';
 export class NumbersInternal {
 
   readonly Currencies: ScopeArrow<CurrencyType, CurrencyInfo>;
-  readonly currencyFormats: CurrencyFormats;
-  readonly decimalFormats: DecimalFormats;
-  readonly percentFormats: PercentFormats;
+  readonly Numbers: Numbers;
+
+  // TODO: remove
+  // readonly currencyFormats: CurrencyFormats;
+  // readonly decimalFormats: DecimalFormats;
+  // readonly percentFormats: PercentFormats;
 
   protected readonly numberPatternCache: Cache<NumberPattern[]>;
 
@@ -52,10 +57,12 @@ export class NumbersInternal {
     cacheSize: number = 50) {
 
     this.Currencies = root.Currencies;
-    this.currencyFormats = root.Numbers.currencyFormats;
-    this.decimalFormats = root.Numbers.decimalFormats;
-    this.percentFormats = root.Numbers.percentFormats;
+    this.Numbers = root.Numbers;
     this.numberPatternCache = new Cache(parseNumberPattern, cacheSize);
+
+    // this.currencyFormats = root.Numbers.currencyFormats;
+    // this.decimalFormats = root.Numbers.decimalFormats;
+    // this.percentFormats = root.Numbers.percentFormats;
   }
 
   formatDecimal<T>(bundle: Bundle, renderer: Renderer<T>,
@@ -65,16 +72,18 @@ export class NumbersInternal {
     let result: T;
     let plural: number = Plural.OTHER;
 
+    const decimalFormats = this.Numbers.numberSystem(params.numberSystemName).decimalFormats;
+
     switch (style) {
     case DecimalFormatStyle.LONG:
     case DecimalFormatStyle.SHORT:
     {
-      const standardRaw = this.decimalFormats.standard(bundle);
+      const standardRaw = decimalFormats.standard(bundle);
       const isShort = style === DecimalFormatStyle.SHORT;
-      const divisorImpl = isShort ? this.decimalFormats.short.decimalFormatDivisor
-        : this.decimalFormats.long.decimalFormatDivisor;
-      const patternImpl = isShort ? this.decimalFormats.short.decimalFormat
-        : this.decimalFormats.long.decimalFormat;
+      const divisorImpl = isShort ? decimalFormats.short.decimalFormatDivisor
+        : decimalFormats.long.decimalFormatDivisor;
+      const patternImpl = isShort ? decimalFormats.short.decimalFormat
+        : decimalFormats.long.decimalFormat;
       const ctx = new NumberContext(options, true);
 
       // Adjust the number using the compact pattern and divisor.
@@ -98,7 +107,8 @@ export class NumbersInternal {
     case DecimalFormatStyle.PERMILLE_SCALED:
     {
       // Get percent pattern.
-      const raw = this.percentFormats.standard(bundle);
+      const percentFormats = this.Numbers.numberSystem(params.numberSystemName).percentFormats;
+      const raw = percentFormats.standard(bundle);
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Scale the number to a percent or permille form as needed.
@@ -127,7 +137,7 @@ export class NumbersInternal {
     case DecimalFormatStyle.DECIMAL:
     {
       // Get decimal pattern.
-      const raw = this.decimalFormats.standard(bundle);
+      const raw = decimalFormats.standard(bundle);
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
@@ -158,14 +168,16 @@ export class NumbersInternal {
     const width = options.symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
     const style = options.style === undefined ? CurrencyFormatStyle.SYMBOL : options.style;
 
-    const standardRaw = this.currencyFormats.standard(bundle);
+    const info = this.Numbers.numberSystem(params.numberSystemName);
+    const currencyFormats = info.currencyFormats;
+    const standardRaw = currencyFormats.standard(bundle);
 
     switch (style) {
 
     case CurrencyFormatStyle.CODE:
     case CurrencyFormatStyle.NAME:
     {
-      const raw = this.decimalFormats.standard(bundle);
+      const raw = info.decimalFormats.standard(bundle);
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
@@ -181,7 +193,7 @@ export class NumbersInternal {
       const unit = style === CurrencyFormatStyle.CODE ? code : this.getCurrencyPluralName(bundle, code, plural);
 
       // Wrap number and unit together.
-      const unitWrapper = this.currencyFormats.unitPattern(bundle, plural);
+      const unitWrapper = currencyFormats.unitPattern(bundle, plural);
       return renderer.wrap(this.wrapper, unitWrapper, num, renderer.part('unit', unit));
     }
 
@@ -189,8 +201,8 @@ export class NumbersInternal {
     {
       // The extra complexity here is to deal with rounding up and selecting the
       // correct pluralized pattern for the final rounded form.
-      const divisorImpl = this.currencyFormats.short.standardDivisor;
-      const patternImpl = this.currencyFormats.short.standard;
+      const divisorImpl = currencyFormats.short.standardDivisor;
+      const patternImpl = currencyFormats.short.standard;
       const ctx = new NumberContext(options, true, fractions.digits);
       const symbol = this.Currencies(code as CurrencyType).symbol(bundle, width);
 
@@ -213,7 +225,7 @@ export class NumbersInternal {
     {
       // Select standard or accounting pattern based on style.
       const raw = style === CurrencyFormatStyle.SYMBOL ?
-        this.currencyFormats.standard(bundle) : this.currencyFormats.accounting(bundle);
+        currencyFormats.standard(bundle) : currencyFormats.accounting(bundle);
         let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.

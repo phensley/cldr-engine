@@ -1,5 +1,6 @@
-import { DigitsArrow, DivisorArrow, FieldArrow, FieldIndexedArrow, ObjectArrow } from '../arrows';
+import { DigitsArrow, DivisorArrow, FieldArrow, FieldIndexedArrow, ObjectArrow, ScopeArrow } from '../arrows';
 import { Plural } from '../enums';
+import { NumberSystemName } from './enums';
 
 export interface CurrencySpacing {
   readonly currencyMatch: string;
@@ -55,10 +56,28 @@ export interface NumberSymbols {
   readonly timeSeparator: string;
 }
 
-export interface Numbers {
+export interface NumberSystemInfo {
   readonly currencyFormats: CurrencyFormats;
   readonly decimalFormats: DecimalFormats;
   readonly percentFormats: PercentFormats;
   readonly symbols: ObjectArrow<NumberSymbols>;
+}
+
+export interface NumberSystemNames {
+  readonly native: NumberSystemName;
+  readonly default: NumberSystemName;
+  readonly finance: NumberSystemName;
+  readonly traditional: NumberSystemName;
+}
+
+export interface Numbers {
   readonly minimumGroupingDigits: FieldArrow;
+  readonly numberSystems: ObjectArrow<NumberSystemNames>;
+  readonly numberSystem: ScopeArrow<NumberSystemName, NumberSystemInfo>;
+
+  // TODO: remove
+  readonly currencyFormats: CurrencyFormats;
+  readonly decimalFormats: DecimalFormats;
+  readonly percentFormats: PercentFormats;
+  readonly symbols: ObjectArrow<NumberSymbols>;
 }

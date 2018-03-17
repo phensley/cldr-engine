@@ -1,5 +1,5 @@
 import { CurrencyType } from '@phensley/cldr-schema';
-import { EN, EN_GB, ES_419, FR, DE, KM } from '../../_helpers';
+import { EN, EN_GB, ES_419, FR, DE, KM, PL } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import {
   CurrencyFormatOptions,
@@ -18,6 +18,17 @@ test('decimals unknown style', () => {
 
   const actual = engine.formatDecimal('1000000000', opts);
   expect(actual).toEqual('');
+});
+
+test('minimum grouping digits', () => {
+  const engine = new NumbersEngine(INTERNAL, PL);
+  let actual: string;
+
+  actual = engine.formatDecimal('9999', { group: true });
+  expect(actual).toEqual('9999');
+
+  actual = engine.formatDecimal('11111', { group: true });
+  expect(actual).toEqual('11\u00a0111');
 });
 
 test('decimals short', () => {

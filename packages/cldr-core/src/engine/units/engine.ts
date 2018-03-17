@@ -3,7 +3,7 @@ import {
   UnitType
 } from '@phensley/cldr-schema';
 
-import { getNumberParams, NumbersInternal, NumberParams } from '../numbers';
+import { NumbersInternal, NumberParams, NumberParamsCache } from '../numbers';
 import { STRING_RENDERER, PARTS_RENDERER } from '../numbers/render';
 import { UnitsInternal } from './internal';
 import { UnitFormatOptions, UnitLength, Quantity } from './options';
@@ -13,14 +13,14 @@ const defaultOptions: UnitFormatOptions = { length: 'long', style: 'decimal' };
 
 export class UnitsEngine {
 
-  private numberParams: NumberParams;
+  private numberParams: NumberParamsCache;
 
   constructor(
     protected internal: UnitsInternal,
     protected numbers: NumbersInternal,
     protected bundle: Bundle
   ) {
-    this.numberParams = getNumberParams(bundle, numbers);
+    this.numberParams = new NumberParamsCache(bundle, numbers);
   }
 
   getDisplayName(name: UnitType, length: UnitLength = 'long'): string {
@@ -28,11 +28,13 @@ export class UnitsEngine {
   }
 
   format(q: Quantity, options: UnitFormatOptions = defaultOptions): string {
-    return this.internal.format(this.bundle, STRING_RENDERER, q, options, this.numberParams);
+    const params = this.numberParams.getNumberParams(options.nu);
+    return this.internal.format(this.bundle, STRING_RENDERER, q, options, params);
   }
 
   formatParts(q: Quantity, options: UnitFormatOptions = defaultOptions): Part[] {
-    return this.internal.format(this.bundle, PARTS_RENDERER, q, options, this.numberParams);
+    const params = this.numberParams.getNumberParams(options.nu);
+    return this.internal.format(this.bundle, PARTS_RENDERER, q, options, params);
   }
 
   // TODO: use list pattern formatter to join unit sequences instead of single space

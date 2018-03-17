@@ -1,6 +1,7 @@
 import {
   Bundle,
   FieldArrow,
+  Numbers,
   Schema,
   UnitInfo,
   Units,
@@ -18,6 +19,7 @@ import { Quantity, UnitFormatOptions } from './options';
 
 export class UnitsInternal {
 
+  readonly Numbers: Numbers;
   readonly Units: Units;
   readonly standardFormat: FieldArrow;
 
@@ -28,7 +30,7 @@ export class UnitsInternal {
     readonly cacheSize: number = 50
   ) {
     this.Units = root.Units;
-    this.standardFormat = root.Numbers.decimalFormats.standard;
+    this.Numbers = root.Numbers;
   }
 
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string {

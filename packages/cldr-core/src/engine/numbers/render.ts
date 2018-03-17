@@ -41,7 +41,8 @@ export class StringRenderer implements Renderer<string> {
       minInt,
       params.minimumGroupingDigits,
       pattern.priGroup <= 0 ? params.primaryGroupingSize : pattern.priGroup,
-      pattern.secGroup <= 0 ? params.secondaryGroupingSize : pattern.secGroup
+      pattern.secGroup <= 0 ? params.secondaryGroupingSize : pattern.secGroup,
+      params.digits
     );
 
     // Track relative position of the currency symbol and formatted number.
@@ -122,7 +123,8 @@ export class PartsRenderer implements Renderer<Part[]> {
       minInt,
       params.minimumGroupingDigits,
       pattern.priGroup <= 0 ? params.primaryGroupingSize : pattern.priGroup,
-      pattern.secGroup <= 0 ? params.secondaryGroupingSize : pattern.secGroup
+      pattern.secGroup <= 0 ? params.secondaryGroupingSize : pattern.secGroup,
+      params.digits
     );
 
     // Track relative position of the currency symbol and formatted number.

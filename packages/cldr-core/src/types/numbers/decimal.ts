@@ -1,5 +1,5 @@
 import { DivMod, add, subtract, multiply, trimLeadingZeros, divide } from './math';
-import { allzero, compare, digits } from './operations';
+import { allzero, compare, digitCount } from './operations';
 import { NumberOperands, decimalOperands } from './operands';
 import { Formatter, StringFormatter, PartsFormatter } from './format';
 import { Part } from '../parts';
@@ -20,6 +20,7 @@ const GROUP_NOOP: GroupFunc = (): void => {
 };
 
 const DEFAULT_PRECISION = 28;
+export const DECIMAL_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 export type DecimalArg = number | string | Decimal;
 
@@ -333,7 +334,7 @@ export class Decimal {
       return 1;
     }
     const len = this.data.length;
-    return ((len - 1) * Constants.RDIGITS) + digits(this.data[len - 1]);
+    return ((len - 1) * Constants.RDIGITS) + digitCount(this.data[len - 1]);
   }
 
   /**
@@ -533,12 +534,16 @@ export class Decimal {
    *   minGroup  - minimum grouping digits
    *   priGroup  - primary grouping size
    *   secGroup  - secondary digit grouping size
+   *   digits    - digit symbols to use
    *
    * TODO: support alternate digit systems, algorithmic / spellout
    */
-  format(decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): string {
+  format(
+    decimal: string, group: string, minInt: number, minGroup: number,
+    priGroup: number, secGroup: number, digits: string[] = DECIMAL_DIGITS): string {
+
     const formatter = new StringFormatter();
-    this._format(formatter, decimal, group, minInt, minGroup, priGroup, secGroup);
+    this._format(formatter, decimal, group, minInt, minGroup, priGroup, secGroup, digits);
     return formatter.render();
   }
 
@@ -546,10 +551,11 @@ export class Decimal {
    * Render this number to an array of parts.
    */
   formatParts(
-    decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): Part[] {
+    decimal: string, group: string, minInt: number, minGroup: number,
+    priGroup: number, secGroup: number, digits: string[] = DECIMAL_DIGITS): Part[] {
 
     const formatter = new PartsFormatter(decimal, group);
-    this._format(formatter, decimal, group, minInt, minGroup, priGroup, secGroup);
+    this._format(formatter, decimal, group, minInt, minGroup, priGroup, secGroup, digits);
     return formatter.render();
   }
 
@@ -557,8 +563,9 @@ export class Decimal {
    * Low-level formatting of string and Part[] forms.
    */
   protected _format(
-    formatter: Formatter<any>,
-    decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number): void {
+    formatter: Formatter<any>, decimal: string, group: string, minInt: number,
+    minGroup: number, priGroup: number, secGroup: number, digits: string[]): void {
+
     // Determine if grouping is enabled, and set the primary and
     // secondary group sizes.
     const grouping = group !== '';
@@ -601,7 +608,7 @@ export class Decimal {
     // Push trailing zeros for a positive exponent
     let zeros = exp;
     while (zeros > 0) {
-      formatter.add('0');
+      formatter.add(digits[0]);
       emitted++;
       int--;
       if (int > 0) {
@@ -615,12 +622,12 @@ export class Decimal {
     for (let i = 0; i < len; i++) {
       // Count the decimal digits c in this radix digit d
       let d = this.data[i];
-      const c = i === last ? digits(d) : Constants.RDIGITS;
+      const c = i === last ? digitCount(d) : Constants.RDIGITS;
 
       // Loop over the decimal digits
       for (let j = 0; j < c; j++) {
         // Push decimal digit
-        formatter.add(String(d % 10));
+        formatter.add(digits[d % 10]);
         d = (d / 10) | 0;
 
         // When we've reached exponent of 0, push the decimal point.
@@ -644,7 +651,7 @@ export class Decimal {
 
     // If exponent still negative, emit leading decimal zeros
     while (exp < 0) {
-      formatter.add('0');
+      formatter.add(digits[0]);
 
       // When we've reached exponent of 0, push the decimal point
       exp++;
@@ -655,7 +662,7 @@ export class Decimal {
 
     // Leading integer zeros
     while (int > 0) {
-      formatter.add('0');
+      formatter.add(digits[0]);
       emitted++;
       int--;
       if (int > 0) {

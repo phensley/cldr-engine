@@ -6,50 +6,42 @@ import {
   CurrencyType,
   Numbers,
   NumberSymbols,
+  NumberSystemInfo,
+  NumberSystemName,
   Plural,
   PluralValues
 } from '@phensley/cldr-schema';
 
 import { NumbersInternal } from './internal';
-import { CurrencyFormatOptions, CurrencySymbolWidthType, DecimalFormatOptions, NumberParams } from './options';
+import {
+  CurrencyFormatOptions,
+  CurrencySymbolWidthType,
+  DecimalFormatOptions,
+  NumberParams,
+  NumberSystemType
+} from './options';
+import { NumberParamsCache } from './params';
 import { pluralCardinal, pluralOrdinal } from '../plurals';
 import { STRING_RENDERER, PARTS_RENDERER } from './render';
 import { coerceDecimal, Decimal, DecimalArg, Part } from '../../types';
-
-/**
- * Locale-specific number parameters.
- */
-export const getNumberParams = (bundle: Bundle, internal: NumbersInternal): NumberParams => {
-  const root = internal.root;
-  const currencySpacing = root.Numbers.currencyFormats.currencySpacing;
-  const standardRaw = root.Numbers.decimalFormats.standard(bundle);
-  const standard = internal.getNumberPattern(standardRaw, false);
-  return {
-    symbols: root.Numbers.symbols(bundle),
-    minimumGroupingDigits: Number(root.Numbers.minimumGroupingDigits(bundle)),
-    primaryGroupingSize: standard.priGroup,
-    secondaryGroupingSize: standard.secGroup,
-    beforeCurrency: currencySpacing.beforeCurrency(bundle),
-    afterCurrency: currencySpacing.afterCurrency(bundle)
-  };
-};
+import { LRU } from '../../utils/lru';
 
 /**
  * Number and currency formatting.
  */
 export class NumbersEngine {
 
-  private params: NumberParams;
+  private numberParams: NumberParamsCache;
 
   constructor(
     protected readonly internal: NumbersInternal,
     protected readonly bundle: Bundle) {
 
-    this.params = getNumberParams(bundle, internal);
+    this.numberParams = new NumberParamsCache(bundle, internal);
   }
 
-  getNumberParams(): NumberParams {
-    return this.params;
+  getNumberParams(numberSystem?: NumberSystemType): NumberParams {
+    return this.numberParams.getNumberParams(numberSystem);
   }
 
   /**
@@ -89,25 +81,30 @@ export class NumbersEngine {
     return pluralString(cat);
   }
 
-  formatDecimal(n: DecimalArg, options: DecimalFormatOptions): string {
+  formatDecimal(n: DecimalArg, options: DecimalFormatOptions = {}): string {
     const d = coerceDecimal(n);
-    const [result, plural] = this.internal.formatDecimal(this.bundle, STRING_RENDERER, d, options, this.params);
+    const params = this.getNumberParams(options.nu);
+    const [result, plural] = this.internal.formatDecimal(this.bundle, STRING_RENDERER, d, options, params);
     return result;
   }
 
-  formatDecimalParts(n: DecimalArg, options: DecimalFormatOptions): Part[] {
+  formatDecimalParts(n: DecimalArg, options: DecimalFormatOptions = {}): Part[] {
     const d = coerceDecimal(n);
-    const [result, plural] = this.internal.formatDecimal(this.bundle, PARTS_RENDERER, d, options, this.params);
+    const params = this.getNumberParams(options.nu);
+    const [result, plural] = this.internal.formatDecimal(this.bundle, PARTS_RENDERER, d, options, params);
     return result;
   }
 
-  formatCurrency(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): string {
+  formatCurrency(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions = {}): string {
     const d = coerceDecimal(n);
-    return this.internal.formatCurrency(this.bundle, STRING_RENDERER, d, code, options, this.params);
+    const params = this.getNumberParams(options.nu);
+    return this.internal.formatCurrency(this.bundle, STRING_RENDERER, d, code, options, params);
   }
 
-  formatCurrencyParts(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): Part[] {
+  formatCurrencyParts(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions = {}): Part[] {
     const d = coerceDecimal(n);
-    return this.internal.formatCurrency(this.bundle, PARTS_RENDERER, d, code, options, this.params);
+    const params = this.getNumberParams(options.nu);
+    return this.internal.formatCurrency(this.bundle, PARTS_RENDERER, d, code, options, params);
   }
+
 }
