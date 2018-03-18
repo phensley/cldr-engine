@@ -74,10 +74,4 @@ export interface Numbers {
   readonly minimumGroupingDigits: FieldArrow;
   readonly numberSystems: ObjectArrow<NumberSystemNames>;
   readonly numberSystem: ScopeArrow<NumberSystemName, NumberSystemInfo>;
-
-  // TODO: remove
-  readonly currencyFormats: CurrencyFormats;
-  readonly decimalFormats: DecimalFormats;
-  readonly percentFormats: PercentFormats;
-  readonly symbols: ObjectArrow<NumberSymbols>;
 }

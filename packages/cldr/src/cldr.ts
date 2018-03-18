@@ -96,9 +96,6 @@ export class CLDR {
   protected readonly unitsInternal: UnitsInternal;
   protected readonly wrapperInternal: WrapperInternal;
 
-  // Keeps track of in-flight promises.
-  protected readonly outstanding: Map<string, Promise<Engine>> = new Map();
-
   constructor(protected readonly options: CLDROptions) {
     this.packCache = new LRU(options.packCacheSize || 2);
     this.loader = options.loader;
@@ -136,7 +133,7 @@ export class CLDR {
       pack = new Pack(data);
       this.packCache.set(language, pack);
     }
-    return this._get(resolved, pack);
+    return this.build(resolved, pack);
   }
 
   /**
@@ -151,17 +148,10 @@ export class CLDR {
     const resolved = typeof locale === 'string' ? parseLocale(locale) : locale;
     const language = resolved.tag.language();
 
-    // If the same language is loaded multiple times in rapid succession,
-    // reuse the promise that is already in flight.
-    let promise = this.outstanding.get(language);
-    if (promise !== undefined) {
-      return promise;
-    }
-
-    promise = new Promise<Engine>((resolve, reject) => {
+    const promise = new Promise<Engine>((resolve, reject) => {
       const pack = this.packCache.get(language);
       if (pack !== undefined) {
-        resolve(this._get(resolved, pack));
+        resolve(this.build(resolved, pack));
         return;
       }
 
@@ -169,19 +159,17 @@ export class CLDR {
       asyncLoader(language).then(raw => {
         const _pack = new Pack(raw);
         this.packCache.set(language, _pack);
-        resolve(this._get(resolved, _pack));
-        this.outstanding.delete(language);
+        resolve(this.build(resolved, _pack));
       }).catch(reject);
     });
 
-    this.outstanding.set(language, promise);
     return promise;
   }
 
   /**
    * Builds an engine instance.
    */
-  protected _get(locale: Locale, pack: Pack): Engine {
+  protected build(locale: Locale, pack: Pack): Engine {
     const bundle = pack.get(locale.tag);
     return {
       locale,
