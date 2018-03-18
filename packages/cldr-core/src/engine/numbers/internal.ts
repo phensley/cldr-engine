@@ -44,11 +44,6 @@ export class NumbersInternal {
   readonly Currencies: ScopeArrow<CurrencyType, CurrencyInfo>;
   readonly Numbers: Numbers;
 
-  // TODO: remove
-  // readonly currencyFormats: CurrencyFormats;
-  // readonly decimalFormats: DecimalFormats;
-  // readonly percentFormats: PercentFormats;
-
   protected readonly numberPatternCache: Cache<NumberPattern[]>;
 
   constructor(
@@ -59,10 +54,6 @@ export class NumbersInternal {
     this.Currencies = root.Currencies;
     this.Numbers = root.Numbers;
     this.numberPatternCache = new Cache(parseNumberPattern, cacheSize);
-
-    // this.currencyFormats = root.Numbers.currencyFormats;
-    // this.decimalFormats = root.Numbers.decimalFormats;
-    // this.percentFormats = root.Numbers.percentFormats;
   }
 
   formatDecimal<T>(bundle: Bundle, renderer: Renderer<T>,

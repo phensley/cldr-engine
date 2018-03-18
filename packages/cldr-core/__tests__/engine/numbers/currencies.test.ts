@@ -183,8 +183,11 @@ test('currency fractions', () => {
 
 test('currency spacing', () => {
   let engine = new NumbersEngine(INTERNAL, EN);
-  const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
-  let actual = engine.formatCurrency('12345.234', 'BAD', opts);
+  let opts: CurrencyFormatOptions;
+  let actual: string;
+
+  opts = { style: 'symbol', group: true };
+  actual = engine.formatCurrency('12345.234', 'BAD', opts);
   expect(actual).toEqual('BAD\u00a012,345.23');
 
   actual = engine.formatCurrency('12345.234', 'AUD', opts);
@@ -204,6 +207,10 @@ test('currency spacing', () => {
   expect(actual).toEqual('12.345,23\u00a0$');
 
   engine = new NumbersEngine(INTERNAL, KM);
+  actual = engine.formatCurrency('12345.234', 'USD', opts);
+  expect(actual).toEqual('12.345,23$');
+
+  opts = { style: 'symbol', symbolWidth: 'default', group: true, nu: 'native' };
   actual = engine.formatCurrency('12345.234', 'USD', opts);
   expect(actual).toEqual('១២.៣៤៥,២៣$');
 

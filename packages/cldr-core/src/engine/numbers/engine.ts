@@ -83,27 +83,27 @@ export class NumbersEngine {
 
   formatDecimal(n: DecimalArg, options: DecimalFormatOptions = {}): string {
     const d = coerceDecimal(n);
-    const params = this.getNumberParams(options.nu);
+    const params = this.numberParams.getNumberParams(options.nu);
     const [result, plural] = this.internal.formatDecimal(this.bundle, STRING_RENDERER, d, options, params);
     return result;
   }
 
   formatDecimalParts(n: DecimalArg, options: DecimalFormatOptions = {}): Part[] {
     const d = coerceDecimal(n);
-    const params = this.getNumberParams(options.nu);
+    const params = this.numberParams.getNumberParams(options.nu);
     const [result, plural] = this.internal.formatDecimal(this.bundle, PARTS_RENDERER, d, options, params);
     return result;
   }
 
   formatCurrency(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions = {}): string {
     const d = coerceDecimal(n);
-    const params = this.getNumberParams(options.nu);
+    const params = this.numberParams.getNumberParams(options.nu, 'finance');
     return this.internal.formatCurrency(this.bundle, STRING_RENDERER, d, code, options, params);
   }
 
   formatCurrencyParts(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions = {}): Part[] {
     const d = coerceDecimal(n);
-    const params = this.getNumberParams(options.nu);
+    const params = this.numberParams.getNumberParams(options.nu);
     return this.internal.formatCurrency(this.bundle, PARTS_RENDERER, d, code, options, params);
   }
 

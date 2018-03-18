@@ -1,11 +1,13 @@
 import { AR, EN, TH, ZH } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
+
 import {
   CurrencyFormatOptions,
   DecimalFormatOptions,
   DecimalFormatStyleType,
   NumbersEngine,
   NumbersInternal,
+  NumberSystemType,
   WrapperInternal
 } from '../../../src/engine';
 
@@ -31,4 +33,8 @@ test('numbering systems', () => {
   expect(actual).toEqual('١٢٬٣٤٥٫٧');
   actual = engine.formatDecimal('12345.678', { nu: 'latn', group: true, maximumFractionDigits: 1 });
   expect(actual).toEqual('12,345.7');
+
+  // Invalid number system names will use the default system.
+  actual = engine.formatDecimal('12345.678', { nu: 'xxx' as NumberSystemType });
+  expect(actual).toEqual('١٢٣٤٥٫٦٧٨');
 });

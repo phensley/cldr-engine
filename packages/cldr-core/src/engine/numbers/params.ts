@@ -14,7 +14,6 @@ export class NumberParamsCache {
 
   private numberParamsCache: LRU<string, NumberParams>;
   private numberSystems: NumberSystemNames;
-  private defaultParams: NumberParams;
 
   constructor(
     protected bundle: Bundle,
@@ -22,25 +21,38 @@ export class NumberParamsCache {
   ) {
     this.numberParamsCache = new LRU();
     this.numberSystems = internal.root.Numbers.numberSystems(bundle);
-    this.defaultParams = this.lookup(this.numberSystems.default);
   }
 
-  getNumberParams(numberSystem?: NumberSystemType): NumberParams {
+  getNumberParams(numberSystem?: NumberSystemType, defaultSystem?: NumberSystemType): NumberParams {
+    if (defaultSystem === undefined) {
+      defaultSystem = 'native';
+    }
     if (numberSystem === undefined) {
-      numberSystem = 'native';
+      numberSystem = defaultSystem;
     }
 
+    let realName: NumberSystemName = this.realName(numberSystem);
+
+    // Handle invalid number systems by returning the specified default
+    if (numericNumberingDigits[realName] === undefined) {
+      realName = this.realName(defaultSystem);
+    }
+
+    return this.lookup(realName);
+  }
+
+  protected realName(numberSystem: NumberSystemType): NumberSystemName {
     switch (numberSystem) {
-    case 'default':
-      return this.defaultParams;
+      case 'default':
+      case 'native':
+      case 'finance':
+      case 'traditional':
+        // Dereference to find real name of number system
+        return this.numberSystems[numberSystem];
 
-    case 'native':
-    case 'finance':
-    case 'traditional':
-      numberSystem = this.numberSystems[numberSystem];
-      break;
+      default:
+        return numberSystem;
     }
-    return this.lookup(numberSystem as NumberSystemName);
   }
 
   protected lookup(numberSystem: NumberSystemName): NumberParams {
@@ -56,10 +68,14 @@ export class NumberParamsCache {
     const root = this.internal.root;
     const info = root.Numbers.numberSystem(numberSystemName);
     const currencySpacing = info.currencyFormats.currencySpacing;
+
+    // Fetch standard pattern to determine grouping digits
     const standardRaw = info.decimalFormats.standard(this.bundle);
     const standard = this.internal.getNumberPattern(standardRaw, false);
 
-    const digits = numericNumberingDigits[numberSystemName] || numericNumberingDigits.latn;
+    // Decimal digits for the number system
+    const digits = numericNumberingDigits[numberSystemName];
+
     return {
       numberSystemName,
       digits,

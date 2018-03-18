@@ -1,4 +1,4 @@
-import { EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
+import { AR, EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import { Quantity, NumbersInternal, UnitsEngine, UnitsInternal, WrapperInternal } from '../../../src/engine';
 import { Part } from '../../../src/types';
@@ -12,6 +12,31 @@ test('display name', () => {
   const units = new UnitsEngine(UNITS, NUMBERS, EN);
   expect(units.getDisplayName('g-force')).toEqual('g-force');
   expect(units.getDisplayName('meter-per-second')).toEqual('meters per second');
+});
+
+test('number systems', () => {
+  let units = new UnitsEngine(UNITS, NUMBERS, AR);
+  let s: string;
+
+  s = units.format({ value: '123', unit: 'meter' });
+  expect(s).toEqual('١٢٣ مترًا');
+
+  s = units.format({ value: '123', unit: 'meter' }, { nu: 'latn' });
+  expect(s).toEqual('123 مترًا');
+
+  units = new UnitsEngine(UNITS, NUMBERS, ZH);
+
+  s = units.format({ value: '123', unit: 'meter' });
+  expect(s).toEqual('一二三米');
+
+  s = units.format({ value: '12345', unit: 'kilometer' }, { group: true });
+  expect(s).toEqual('一二,三四五公里');
+
+  s = units.format({ value: '123', unit: 'meter' }, { nu: 'latn' });
+  expect(s).toEqual('123米');
+
+  s = units.format({ value: '12345', unit: 'kilometer' }, { group: true, nu: 'latn' });
+  expect(s).toEqual('12,345公里');
 });
 
 test('format string', () => {
