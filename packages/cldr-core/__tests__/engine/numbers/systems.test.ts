@@ -20,11 +20,13 @@ test('numbering systems', () => {
   actual = engine.formatDecimal('12345.678', { nu: 'thai', group: true, maximumFractionDigits: 1 });
   expect(actual).toEqual('๑๒,๓๔๕.๗');
   actual = engine.formatDecimal('12345.678', { group: true, maximumFractionDigits: 1 });
-  expect(actual).toEqual('๑๒,๓๔๕.๗');
+  expect(actual).toEqual('12,345.7');
 
   engine = new NumbersEngine(INTERNAL, ZH);
-  actual = engine.formatDecimal('12345.678', { group: true, maximumFractionDigits: 1 });
+  actual = engine.formatDecimal('12345.678', { group: true, maximumFractionDigits: 1, nu: 'native' });
   expect(actual).toEqual('一二,三四五.七');
+  actual = engine.formatDecimal('12345.678', { group: true, maximumFractionDigits: 1 });
+  expect(actual).toEqual('12,345.7');
 
   engine = new NumbersEngine(INTERNAL, AR);
   actual = engine.formatDecimal('12345.678', { group: true, maximumFractionDigits: 1 });

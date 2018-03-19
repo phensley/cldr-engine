@@ -24,24 +24,27 @@ export class NumberParamsCache {
   }
 
   getNumberParams(numberSystem?: NumberSystemType, defaultSystem?: NumberSystemType): NumberParams {
+    // Default numbering system for a locale unless explicitly overridden
+    // https://www.unicode.org/reports/tr35/tr35-33/tr35-numbers.html#defaultNumberingSystem
     if (defaultSystem === undefined) {
-      defaultSystem = 'native';
+      defaultSystem = 'default';
     }
     if (numberSystem === undefined) {
       numberSystem = defaultSystem;
     }
 
-    let realName: NumberSystemName = this.realName(numberSystem);
+    let realName: NumberSystemName = this.select(numberSystem);
 
     // Handle invalid number systems by returning the specified default
+    // TODO: include algorithmic number system check
     if (numericNumberingDigits[realName] === undefined) {
-      realName = this.realName(defaultSystem);
+      realName = this.select(defaultSystem);
     }
 
     return this.lookup(realName);
   }
 
-  protected realName(numberSystem: NumberSystemType): NumberSystemName {
+  protected select(numberSystem: NumberSystemType): NumberSystemName {
     switch (numberSystem) {
       case 'default':
       case 'native':

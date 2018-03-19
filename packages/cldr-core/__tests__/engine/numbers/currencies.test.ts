@@ -257,11 +257,10 @@ test('currency parts', () => {
 });
 
 test('currency parts spacing', () => {
-  const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
   let engine = new NumbersEngine(INTERNAL, EN);
   let actual: Part[];
 
-  actual = engine.formatCurrencyParts('12345.234', 'BAD', opts);
+  actual = engine.formatCurrencyParts('12345.234', 'BAD', { group: true });
   expect(actual).toEqual([
     { type: 'currency', value: 'BAD' },
     { type: 'spacer', value: '\u00a0' },
@@ -273,13 +272,24 @@ test('currency parts spacing', () => {
   ]);
 
   engine = new NumbersEngine(INTERNAL, KM);
-  actual = engine.formatCurrencyParts('12345.234', 'BAD', opts);
+  actual = engine.formatCurrencyParts('12345.234', 'BAD', { group: true, nu: 'native' });
   expect(actual).toEqual([
     { type: 'digits', value: '១២' },
     { type: 'group', value: '.' },
     { type: 'digits', value: '៣៤៥' },
     { type: 'decimal', value: ',' },
     { type: 'digits', value: '២៣' },
+    { type: 'spacer', value: '\u00a0' },
+    { type: 'currency', value: 'BAD' }
+  ]);
+
+  actual = engine.formatCurrencyParts('12345.234', 'BAD', { group: true });
+  expect(actual).toEqual([
+    { type: 'digits', value: '12' },
+    { type: 'group', value: '.' },
+    { type: 'digits', value: '345' },
+    { type: 'decimal', value: ',' },
+    { type: 'digits', value: '23' },
     { type: 'spacer', value: '\u00a0' },
     { type: 'currency', value: 'BAD' }
   ]);

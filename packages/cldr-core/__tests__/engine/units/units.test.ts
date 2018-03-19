@@ -26,11 +26,14 @@ test('number systems', () => {
 
   units = new UnitsEngine(UNITS, NUMBERS, ZH);
 
-  s = units.format({ value: '123', unit: 'meter' });
+  s = units.format({ value: '123', unit: 'meter' }, { nu: 'native' });
   expect(s).toEqual('一二三米');
 
-  s = units.format({ value: '12345', unit: 'kilometer' }, { group: true });
+  s = units.format({ value: '12345', unit: 'kilometer' }, { group: true, nu: 'native' });
   expect(s).toEqual('一二,三四五公里');
+
+  s = units.format({ value: '123', unit: 'meter' });
+  expect(s).toEqual('123米');
 
   s = units.format({ value: '123', unit: 'meter' }, { nu: 'latn' });
   expect(s).toEqual('123米');
