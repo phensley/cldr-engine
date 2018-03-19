@@ -50,5 +50,5 @@ test('extensions', () => {
   expect(compact('en-US-u-cu-usd')).toEqual('en-US-u-cu-usd');
   expect(compact('fr-u-ca-islamic')).toEqual('fr-u-ca-islamic');
   expect(expanded('fr-u-ca-islamic')).toEqual('fr-Zzzz-ZZ-u-ca-islamic');
-  expect(extensions('fr-u-ca-islamic-u_co_phonebk')).toEqual(['u-ca-islamic', 'u-co-phonebk']);
+  expect(extensions('fr-u-ca-islamic-u_co_phonebk')).toEqual({ u: ['ca-islamic', 'co-phonebk'] });
 });

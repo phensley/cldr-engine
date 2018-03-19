@@ -6,7 +6,13 @@ const DELIMITER = '\t';
 
 export type ExceptionIndex = { [y: number]: number };
 
+export interface ResourceBundle extends Bundle {
+  numberSystem(): string;
+}
+
 export class StringBundle implements Bundle {
+
+  private _numberSystem: string = 'default';
 
   constructor(
     readonly id: string,
@@ -14,7 +20,14 @@ export class StringBundle implements Bundle {
     readonly strings: string[],
     readonly exceptions: string[],
     readonly index?: ExceptionIndex
-  ) { }
+  ) {
+    for (const subtag of tag.extensionSubtags('u')) {
+      if (subtag.startsWith('nu-')) {
+        this._numberSystem = subtag.substring(3);
+        break;
+      }
+    }
+  }
 
   bundleId(): string {
     return this.id;
@@ -26,6 +39,10 @@ export class StringBundle implements Bundle {
 
   region(): string {
     return this.tag.region();
+  }
+
+  numberSystem(): string {
+    return this._numberSystem;
   }
 
   get(offset: number): string {
@@ -48,7 +65,7 @@ export class StringBundle implements Bundle {
  * TODO: once public api is hammered out this may be unnecessary as
  * we may throw an error.
  */
-export class DummyBundle implements Bundle {
+export class DummyBundle implements ResourceBundle {
 
   bundleId(): string {
     return 'und';
@@ -60,6 +77,10 @@ export class DummyBundle implements Bundle {
 
   region(): string {
     return 'ZZ';
+  }
+
+  numberSystem(): string {
+    return 'default';
   }
 
   get(offset: number): string {
@@ -90,7 +111,7 @@ export class PackScript {
     this._regions = regions;
   }
 
-  get(tag: LanguageTag): Bundle {
+  get(tag: LanguageTag): ResourceBundle {
     const region = tag.region();
     const index = this._cache[region] || this.decode(region);
     return index === undefined ?
@@ -143,7 +164,7 @@ export class Pack {
     });
   }
 
-  get(tag: LanguageTag): Bundle {
+  get(tag: LanguageTag): ResourceBundle {
     // We need the script and region to find the correct string layer. Caller should
     // ideally supply a resolved language tag to avoid the overhead of this call.
     if (!tag.hasLanguage() || !tag.hasScript() || !tag.hasRegion()) {

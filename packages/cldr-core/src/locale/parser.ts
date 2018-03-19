@@ -27,6 +27,16 @@ const EXTENSION_SUBTAG = /^[\da-z]{2,8}$/i;
 const PRIVATEUSE_PREFIX = /^x$/i;
 const PRIVATEUSE_SUBTAG = /^[\da-z]{1,8}$/i;
 
+// https://www.unicode.org/reports/tr35/tr35-33/tr35.html#Key_And_Type_Definitions_
+const UNICODE_EXTENSION_KEYS: { [x: string]: number } = {
+  ca: 1, // calendar
+  co: 1, // collation
+  cu: 1, // currency
+  nu: 1, // numbering system
+  tz: 1, // timezone
+  va: 1  // common variant type
+};
+
 // Grandfathered irregular and regular tags from IANA registry.
 const GRANDFATHERED_TAGS: { [x: string]: string } = {
   ...stringToObject(subtags.grandfatheredRaw, '|', ':'),
@@ -65,7 +75,7 @@ class LanguageTagParser {
   private region?: string;
   private extlangs: string[] = [];
   private variants: string[] = [];
-  private extensions: string[] = [];
+  private extensions: { [x: string]: string[] } = {};
   private privateUse: string = '';
 
   private str: string;
@@ -152,24 +162,45 @@ class LanguageTagParser {
   }
 
   private parseExtensions(parts: string[]): boolean {
+    let parsed = false;
     while (parts.length > 0) {
       const prefix = match(parts, EXTENSION_PREFIX);
       if (prefix === undefined) {
         break;
       }
-      const subs = [];
+
+      const subs: string[] = [];
+      let temp = '';
       while (parts.length > 0) {
         const subtag = match(parts, EXTENSION_SUBTAG);
         if (subtag === undefined) {
           break;
         }
-        subs.push(subtag);
+
+        if (UNICODE_EXTENSION_KEYS[subtag] !== 1) {
+          temp += temp ? SEP + subtag : subtag;
+          continue;
+        }
+
+        if (temp) {
+          subs.push(temp);
+        }
+        temp = subtag;
       }
+
+      if (temp) {
+        subs.push(temp);
+      }
+
       if (subs.length > 0) {
-        this.extensions.push(`${prefix}${SEP}${subs.join(SEP)}`);
+        parsed = true;
+        subs.sort();
+        let curr = this.extensions[prefix];
+        curr = curr === undefined ? subs : curr.concat(subs);
+        this.extensions[prefix] = curr.sort();
       }
     }
-    return this.extensions.length !== 0;
+    return parsed;
   }
 
   private parsePrivateUse(parts: string[]): boolean {

@@ -45,7 +45,7 @@ const canonicalize = (field: number, value?: string): string | undefined => {
 export class LanguageTag {
 
   protected core: (undefined | string)[];
-  protected _extensions?: string[];
+  protected _extensions?: { [x: string]: string[] };
   protected _privateUse?: string;
 
   constructor(
@@ -53,7 +53,7 @@ export class LanguageTag {
     script?: string,
     region?: string,
     variant?: string,
-    extensions?: string[],
+    extensions?: { [x: string]: string[] },
     privateUse?: string) {
     this.core = [
       canonicalize(LANGUAGE, language),
@@ -61,7 +61,7 @@ export class LanguageTag {
       canonicalize(REGION, region),
       canonicalize(VARIANT, variant)
     ];
-    this._extensions = extensions || [];
+    this._extensions = extensions || {};
     this._privateUse = privateUse || '';
   }
 
@@ -115,10 +115,26 @@ export class LanguageTag {
   }
 
   /**
-   * Extension subtags.
+   * Return a copy of this language tag's extensions map.
    */
-  extensions(): string[] {
-    return this._extensions === undefined ? [] : this._extensions.slice(0);
+  extensions(): { [x: string]: string[] } {
+    const exts = this._extensions;
+    const res: { [x: string]: string[] } = {};
+    if (exts !== undefined) {
+      Object.keys(exts).forEach(k => {
+        res[k] = exts[k];
+      });
+    }
+    return res;
+  }
+
+  /**
+   * Return a copy of the extensions of the given type. Use 'u' for Unicode
+   * and 't' for Transforms.
+   */
+  extensionSubtags(key: string): string[] {
+    const exts = this._extensions === undefined ? [] : this._extensions[key];
+    return exts === undefined ? [] : exts.slice(0);
   }
 
   /**
@@ -167,8 +183,14 @@ export class LanguageTag {
         buf += val ? val : UNDEFINED_VALUES[key];
       }
     });
-    if (Array.isArray(this._extensions) && this._extensions.length > 0) {
-      buf += SEP + this._extensions.join(SEP);
+    const exts = this._extensions;
+    if (exts !== undefined) {
+      Object.keys(exts).sort().forEach(k => {
+        const vals = exts[k];
+        if (vals !== undefined && vals.length > 0) {
+          buf += SEP + k + SEP + exts[k].join(SEP);
+        }
+      });
     }
     if (typeof this._privateUse === 'string' && this._privateUse.length > 0) {
       buf += SEP + this._privateUse;

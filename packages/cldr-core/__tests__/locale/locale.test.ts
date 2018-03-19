@@ -7,7 +7,7 @@ test('basics', () => {
   expect(tag.script()).toEqual('Zzzz');
   expect(tag.region()).toEqual('US');
   expect(tag.variant()).toEqual('');
-  expect(tag.extensions()).toEqual([]);
+  expect(tag.extensions()).toEqual({});
   expect(tag.privateUse()).toEqual('');
 
   expect(tag.compact()).toEqual('en-US');
@@ -60,9 +60,31 @@ test('parse locale', () => {
   });
 });
 
-test('extensions', () => {
-  expect(Locale.resolve('en-US-u-nu-native')).toEqual({
-    id: 'en-US-u-nu-native',
-    tag: new LanguageTag('en', 'Latn', 'US', '', ['u-nu-native'])
+test('parse extensions', () => {
+  expect(Locale.resolve('en-US-u-nu-thai')).toEqual({
+    id: 'en-US-u-nu-thai',
+    tag: new LanguageTag('en', 'Latn', 'US', '', { u: ['nu-thai'] })
   });
+
+  expect(Locale.resolve('en-US-u-nu-thai-ca-gregory')).toEqual({
+    id: 'en-US-u-nu-thai-ca-gregory',
+    tag: new LanguageTag('en', 'Latn', 'US', '', { u: ['ca-gregory', 'nu-thai'] })
+  });
+
+  expect(Locale.resolve('en-US-u-nu-thai-u-foo-u-ca-gregory')).toEqual({
+    id: 'en-US-u-nu-thai-u-foo-u-ca-gregory',
+    tag: new LanguageTag('en', 'Latn', 'US', '', { u: ['ca-gregory', 'foo', 'nu-thai'] })
+  });
+});
+
+test('parse and render', () => {
+  let { id, tag } = Locale.resolve('en-US-u-nu-thai-ca-buddhist-u-co-search');
+  expect(id).toEqual('en-US-u-nu-thai-ca-buddhist-u-co-search');
+  expect(tag.extensions()).toEqual({ u: ['ca-buddhist', 'co-search', 'nu-thai'] });
+  expect(tag.expanded()).toEqual('en-Latn-US-u-ca-buddhist-co-search-nu-thai');
+
+  ({ id, tag } = Locale.resolve('en-u-bar-nu-hant-co-standard-ca-islamic-umalqura'));
+  expect(id).toEqual('en-u-bar-nu-hant-co-standard-ca-islamic-umalqura');
+  expect(tag.extensions()).toEqual({ u: ['bar', 'ca-islamic-umalqura', 'co-standard', 'nu-hant'] });
+  expect(tag.expanded()).toEqual('en-Latn-US-u-bar-ca-islamic-umalqura-co-standard-nu-hant');
 });
