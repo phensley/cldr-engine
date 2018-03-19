@@ -17,6 +17,7 @@
     "test:codecov": "rimraf ./coverage && jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache",
     "test:watch": "jest --watch"
   },
+  "cldr-data-urls-json": "../../config/cldr-data-urls.json",
   "dependencies": {
     "@types/glob": "^5.0.34",
     "@types/jest": "^22.1.3",
