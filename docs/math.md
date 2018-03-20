@@ -262,11 +262,13 @@ n.movePoint(10);
 
 ```typescript
 const pi = new Rational('pi');
-const radius = new Rational('17.68');
+const radius = new Rational('7 / 19');
 const area = pi.multiply(radius).multiply(radius);
-area.toDecimal({ scale: 10 });
 
-// > 982.0065714815
+// > "153.9380400258998686846695258 / 361"
+
+area.toDecimal({ scale: 10 });
+// > "0.4264211635"
 ```
 
 ### Unit conversions with rationals
