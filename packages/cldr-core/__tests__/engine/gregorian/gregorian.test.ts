@@ -159,8 +159,75 @@ test('day periods', () => {
   expect(engine.formatRaw(d, 'b')).toEqual('noon');
   expect(engine.formatRaw(d, 'bbbb')).toEqual('noon');
   expect(engine.formatRaw(d, 'bbbbb')).toEqual('n');
+});
 
-  // TODO: flexible day periods
+test('flexible day periods', () => {
+  const base = MARCH_11_2018_070025_UTC;
+  const losangeles = (n: number) => datetime(base + n, LOS_ANGELES);
+  const london = (n: number) => datetime(base + n, LONDON);
+
+  const hour = 3600 * 1000;
+
+  let engine = new GregorianEngine(INTERNAL, EN);
+  let d: ZonedDateTime;
+
+  // 11 pm
+  d = losangeles(0);
+  expect(engine.formatRaw(d, 'B')).toEqual('at night');
+
+  // 8 pm
+  d = losangeles(-3 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('in the evening');
+
+  // 5 pm
+  d = losangeles(-6 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('in the afternoon');
+
+  // 12 pm
+  d = losangeles(-11 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('noon');
+
+  // 10 am
+  d = losangeles(-13 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('in the morning');
+
+  // 3 am
+  d = losangeles(-20 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('at night');
+
+  // 12 am
+  d = losangeles(-23 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('midnight');
+
+  engine = new GregorianEngine(INTERNAL, ES);
+
+  // 11 pm
+  d = losangeles(0);
+  expect(engine.formatRaw(d, 'B')).toEqual('de la noche');
+
+  // 7 pm
+  d = losangeles(-4 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('de la tarde');
+
+  // 3 pm
+  d = losangeles(-8 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('de la tarde');
+
+  // 12 pm
+  d = losangeles(-11 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('del mediodía');
+
+  // 10 am
+  d = losangeles(-13 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('de la mañana');
+
+  // 3 am
+  d = losangeles(-20 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('de la madrugada');
+
+  // 12 am
+  d = losangeles(-23 * hour);
+  expect(engine.formatRaw(d, 'B')).toEqual('de la madrugada');
 });
 
 test('weekday firstday raw', () => {

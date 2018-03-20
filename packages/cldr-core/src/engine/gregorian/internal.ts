@@ -28,16 +28,17 @@ import {
 import { weekFirstDay } from './autogen.weekdata';
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
 import { GregorianFormatOptions } from './options';
+import { DayPeriodRules } from './rules';
 import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';
 import { Part, ZonedDateTime } from '../../types';
 import { WrapperInternal } from '../wrapper';
-
+import { ResourceBundle } from '../../resource/pack';
 /**
  * Function that formats a given date field.
  */
 export type FormatterFunc = (
-  bundle: Bundle,
+  bundle: ResourceBundle,
   date: ZonedDateTime,
   ch: string,
   width: number
@@ -81,6 +82,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   readonly TimeZoneNames: TimeZoneNames;
   readonly datePatternCache: Cache<DateTimeNode[]>;
   readonly hourFormatCache: Cache<[DateTimeNode[], DateTimeNode[]]>;
+  readonly dayPeriodRules: DayPeriodRules;
 
   private impl: FieldFormatterMap = {
     'G': { type: 'era', impl: this.era },
@@ -141,12 +143,13 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
 
     this.datePatternCache = new Cache(parseDatePattern, cacheSize);
     this.hourFormatCache = new Cache(parseHourFormat, cacheSize);
+    this.dayPeriodRules = new DayPeriodRules(cacheSize);
   }
 
   /**
    * Format a date-time pattern into a string.
    */
-  format(bundle: Bundle, date: ZonedDateTime, options: GregorianFormatOptions): string {
+  format(bundle: ResourceBundle, date: ZonedDateTime, options: GregorianFormatOptions): string {
     const timeKey = options === undefined ? undefined : (options.datetime || options.time);
     const timePattern = this.getTimePattern(bundle, timeKey);
 
@@ -173,7 +176,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
    * Format a pattern into an array of parts, each part being either a string literal
    * or a named field.
    */
-  formatParts(bundle: Bundle, date: ZonedDateTime, options: GregorianFormatOptions): Part[] {
+  formatParts(bundle: ResourceBundle, date: ZonedDateTime, options: GregorianFormatOptions): Part[] {
     const timeKey = options === undefined ? undefined : (options.datetime || options.time);
     const timePattern = this.getTimePattern(bundle, timeKey);
 
@@ -199,7 +202,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   /**
    * Format a date-time interval pattern as a sring.
    */
-  formatInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): string {
+  formatInterval(bundle: ResourceBundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): string {
     const format = this.datePatternCache.get(pattern);
     // TODO: use fallback format if format.length == 0
     const idx = intervalPatternBoundary(format);
@@ -207,18 +210,18 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     return res + this._format(bundle, end, format.slice(idx));
   }
 
-  formatIntervalParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): Part[] {
+  formatIntervalParts(bundle: ResourceBundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): Part[] {
     const format = this.datePatternCache.get(pattern);
     const idx = intervalPatternBoundary(format);
     const res = this._formatParts(bundle, start, format.slice(0, idx));
     return res.concat(this._formatParts(bundle, end, format.slice(idx)));
   }
 
-  formatRaw(bundle: Bundle, date: ZonedDateTime, pattern: string): string {
+  formatRaw(bundle: ResourceBundle, date: ZonedDateTime, pattern: string): string {
     return this._format(bundle, date, this.datePatternCache.get(pattern));
   }
 
-  formatRawParts(bundle: Bundle, date: ZonedDateTime, pattern: string): Part[] {
+  formatRawParts(bundle: ResourceBundle, date: ZonedDateTime, pattern: string): Part[] {
     return this._formatParts(bundle, date, this.datePatternCache.get(pattern));
   }
 
@@ -350,9 +353,18 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     }
   }
 
-  protected dayPeriodFlex(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    // TODO: need to embed the dayPeriodRules.
-    return '';
+  protected dayPeriodFlex(bundle: ResourceBundle, date: ZonedDateTime, field: string, width: number): string {
+    const minutes = (date.getHour() * 60) + date.getMinute();
+    const key = this.dayPeriodRules.get(bundle, minutes) as DayPeriodType;
+    const format = this.dayPeriods.format;
+    switch (width) {
+    case 5:
+      return format.narrow(bundle, key, Alt.NONE);
+    case 4:
+      return format.wide(bundle, key, Alt.NONE);
+    default:
+      return format.abbreviated(bundle, key, Alt.NONE);
+    }
   }
 
   protected era(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {

@@ -19,6 +19,7 @@ import { GregorianInternal } from './internal';
 import { GregorianFormatOptions } from './options';
 import { Part } from '../../types';
 import { WrapperInternal } from '../wrapper';
+import { ResourceBundle } from '../../resource/pack';
 
 const ISO_WEEKDATE_EXTENDED = "YYYY-'W'ww-";
 const ISO_WEEKDATE_COMPACT = "YYYY'W'ww";
@@ -30,7 +31,7 @@ export class GregorianEngine {
 
   constructor(
     protected internal: GregorianInternal,
-    protected bundle: Bundle
+    protected bundle: ResourceBundle
   ) { }
 
   /**
