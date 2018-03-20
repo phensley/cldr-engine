@@ -5,6 +5,7 @@ import { Code } from './util';
 
 import { getAliases } from './aliases';
 import { getCurrencies } from './currencies';
+import { getDayPeriods } from './dayperiods';
 import { getDistance } from './distance';
 import { getIdentifiers } from './identifiers';
 import { getLocale } from './locale';
@@ -19,6 +20,7 @@ import { getZones } from './zones';
 const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   aliases: getAliases,
   currencies: getCurrencies,
+  dayperiods: getDayPeriods,
   distance: getDistance,
   identifiers: getIdentifiers,
   locale: getLocale,

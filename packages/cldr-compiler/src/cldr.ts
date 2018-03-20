@@ -461,6 +461,7 @@ export const getSupplemental = () => {
     WeekData: access(WeekData, 'weekData'),
 
     ...access({ Cardinals: get(['plurals-type-cardinal']) }, 'plurals'),
+    ...access({ DayPeriods: get(['dayPeriodRuleSet'])}, 'dayPeriods'),
     ...access({ CurrencyFractions: get(['currencyData', 'fractions']) }, 'currencyData'),
     ...access({ Ordinals: get(['plurals-type-ordinal']) }, 'ordinals'),
     ...access({ LikelySubtags: get(['likelySubtags']) }, 'likelySubtags'),
