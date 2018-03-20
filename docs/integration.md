@@ -101,22 +101,21 @@ Below is an example of embedding English into a web application statically. The 
 ```typescript
 import wretch from 'wretch';
 import { CLDR, CLDROptions } from '@phensley/cldr';
+import Package from '../../package.json';
 
-// Import default language directly so it's always available
-import English from '@phensley/cldr/packs/en.json';
+// Grab the @phensley/cldr library version to append to our resource pack URLs
+const version = Package.dependencies['@phensley/cldr'];
 
-/**
- * English is the default language for this application, so it is
- * the only result for the synchronous loader.
- */
-const loader = (language: string): any => English;
+// Import default language English directly
+import EnglishPack from '@phensley/cldr/packs/en.json';
 
-/**
- * All other languages are loaded asynchronously at runtime.
- */
+// Load English synchronously (see below)
+const loader = (language: string): any => EnglishPack;
+
+// All other languages are loaded asynchronously at runtime
 const asyncLoader = (language: string): Promise<any> => {
   return new Promise<any>((resolve, reject) => {
-    wretch(`/packs/${language}.json`)
+    wretch(`${process.env.PUBLIC_URL}/packs/${language}.json?v=${version}`)
       .get()
       .json(resolve)
       .catch(reject);
@@ -126,16 +125,15 @@ const asyncLoader = (language: string): Promise<any> => {
 const options: CLDROptions = {
   loader,
   asyncLoader,
-  packCacheSize: 3,
+  packCacheSize: 8,
   patternCacheSize: 50
 };
 
 // Global instance of cldr configured for our app
 export const cldr = new CLDR(options);
 
-// Default language the application uses on startup, or when
-// the desired language is unavailable, so we load it statically.
-export const DefaultEngine = cldr.get('en-US');
+// Default cldr engine to be set in the locale store.
+export const English = cldr.get('en');
 ```
 
 If you're using Redux you might want to place the current language and `Engine` instance into the store. Any components using this store will update when the language changes.
