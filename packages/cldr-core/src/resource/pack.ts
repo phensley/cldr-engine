@@ -7,12 +7,21 @@ const DELIMITER = '\t';
 export type ExceptionIndex = { [y: number]: number };
 
 export interface ResourceBundle extends Bundle {
+  calendarSystem(): string;
   numberSystem(): string;
+  languageScript(): string;
+  languageRegion(): string;
 }
 
 export class StringBundle implements Bundle {
 
+  // Properties for fast internal lookups into maps.
+  // For example, extended day periods cover all of 'es' except for 'es-CO'.
+  // Pre-computing these to avoid string creation for lookups at runtime.
+  private _calendarSystem: string = 'gregory';
   private _numberSystem: string = 'default';
+  private _languageRegion: string;
+  private _languageScript: string;
 
   constructor(
     readonly id: string,
@@ -21,10 +30,17 @@ export class StringBundle implements Bundle {
     readonly exceptions: string[],
     readonly index?: ExceptionIndex
   ) {
+    const language = tag.language();
+    this._languageRegion = `${language}-${tag.region()}`;
+    this._languageScript = `${language}-${tag.script()}`;
+
+    // When bundle is constructed, see if there are unicode extensions for
+    // number and calendar systems.
     for (const subtag of tag.extensionSubtags('u')) {
       if (subtag.startsWith('nu-')) {
         this._numberSystem = subtag.substring(3);
-        break;
+      } else if (subtag.startsWith('co-')) {
+        this._calendarSystem = subtag.substring(3);
       }
     }
   }
@@ -39,6 +55,18 @@ export class StringBundle implements Bundle {
 
   region(): string {
     return this.tag.region();
+  }
+
+  languageScript(): string {
+    return this._languageScript;
+  }
+
+  languageRegion(): string {
+    return this._languageRegion;
+  }
+
+  calendarSystem(): string {
+    return this._calendarSystem;
   }
 
   numberSystem(): string {
@@ -77,6 +105,18 @@ export class DummyBundle implements ResourceBundle {
 
   region(): string {
     return 'ZZ';
+  }
+
+  languageScript(): string {
+    return 'und-Zzzz';
+  }
+
+  languageRegion(): string {
+    return 'und-ZZ';
+  }
+
+  calendarSystem(): string {
+    return 'gregory';
   }
 
   numberSystem(): string {
