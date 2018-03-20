@@ -30,8 +30,9 @@ export const getSymbols = (): any => {
   // Containers for extracted values.
   const timeZoneIds = new Set();
   const metaZoneIds = new Set();
-  const numberSymbols = new Set();
   const currencies = new Set();
+  const languages = new Set();
+  const scripts = new Set();
   const territories = new Set();
   const unitsRaw = new Set();
 
@@ -47,11 +48,13 @@ export const getSymbols = (): any => {
     addKeys(main.TimeZoneNames.timeZones, timeZoneIds);
     addKeys(main.TimeZoneNames.metaZones, metaZoneIds);
     addKeys(main.Currencies, currencies);
-    addKeys(main.Numbers.symbols, numberSymbols);
-    addKeys(main.Territories.territories, territories);
     addKeys(main.Gregorian.availableFormats, availableFormats);
     addKeys(main.Gregorian.intervalFormats, intervalFormats);
     addKeys(main.Units.names, unitsRaw);
+
+    addKeys(main.Names.languages.displayName, languages);
+    addKeys(main.Names.scripts.displayName, scripts);
+    addKeys(main.Names.territories.displayName, territories);
   });
 
   const unitCategories = unique(sorted(unitsRaw).map(u => u.split('-')[0]));
@@ -61,9 +64,10 @@ export const getSymbols = (): any => {
     units: sorted(unitsRaw),
     unitCategories: unitCategories,
     currencies: sorted(currencies),
-    numberSymbols: sorted(numberSymbols),
     availableFormats: sorted(availableFormats),
     intervalFormats: sorted(intervalFormats),
+    languages: sorted(languages),
+    scripts: sorted(scripts),
     territories: sorted(territories),
   };
 };

@@ -11,8 +11,6 @@ import {
   LocaleMatcher,
   LanguageResolver,
   LRU,
-  NamesEngine,
-  NamesInternal,
   NumbersEngine,
   NumbersInternal,
   Pack,
@@ -43,7 +41,6 @@ export interface Engine {
   readonly General: GeneralEngine;
   readonly Gregorian: GregorianEngine;
   readonly Numbers: NumbersEngine;
-  readonly Names: NamesEngine;
   readonly Units: UnitsEngine;
 }
 
@@ -91,7 +88,6 @@ export class CLDR {
   protected readonly dateFieldsInternal: DateFieldsInternal;
   protected readonly generalInternal: GeneralInternal;
   protected readonly gregorianInternal: GregorianInternal;
-  protected readonly namesInternal: NamesInternal;
   protected readonly numbersInternal: NumbersInternal;
   protected readonly unitsInternal: UnitsInternal;
   protected readonly wrapperInternal: WrapperInternal;
@@ -106,7 +102,6 @@ export class CLDR {
     this.dateFieldsInternal = new DateFieldsInternal(SCHEMA, this.wrapperInternal);
     this.generalInternal = new GeneralInternal(SCHEMA, patternCacheSize);
     this.gregorianInternal = new GregorianInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
-    this.namesInternal = new NamesInternal(SCHEMA, patternCacheSize);
     this.numbersInternal = new NumbersInternal(SCHEMA, this.wrapperInternal, patternCacheSize);
     this.unitsInternal = new UnitsInternal(SCHEMA, this.numbersInternal, this.wrapperInternal, patternCacheSize);
   }
@@ -176,7 +171,6 @@ export class CLDR {
       DateFields: new DateFieldsEngine(this.dateFieldsInternal, bundle),
       General: new GeneralEngine(this.generalInternal, bundle),
       Gregorian: new GregorianEngine(this.gregorianInternal, bundle),
-      Names: new NamesEngine(this.namesInternal, bundle),
       Numbers: new NumbersEngine(this.numbersInternal, bundle),
       Units: new UnitsEngine(this.unitsInternal, this.numbersInternal, bundle)
     };

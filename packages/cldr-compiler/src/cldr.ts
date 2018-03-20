@@ -425,6 +425,18 @@ export const getMain = (language: string) => {
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames'),
     Units: access(Units, 'units'),
 
+    Names: {
+      languages: {
+        ...access({ displayName: get(['localeDisplayNames', 'languages']) }, 'languages')
+      },
+      scripts: {
+        ...access({ displayName: get(['localeDisplayNames', 'scripts']) }, 'scripts'),
+      },
+      territories: {
+        ...access({ displayName: get(['localeDisplayNames', 'territories']) }, 'territories')
+      }
+    },
+
     ...access({ Characters: get(['characters']) }, 'characters'),
     ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies'),
     ...access({ ListPatterns: get(['listPatterns']) }, 'listPatterns'),

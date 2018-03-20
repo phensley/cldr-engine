@@ -6,8 +6,8 @@ export * from './calendar';
 export * from './general';
 export * from './gregorian';
 export * from './currencies';
+export * from './names';
 export * from './numbers';
-export * from './territories';
 export * from './timezones';
 export * from './units';
 
@@ -16,8 +16,8 @@ import {
   DateFields,
   Gregorian,
   Layout,
+  Names,
   Numbers,
-  Territories,
   TimeZoneNames,
   Units
 } from '.';
@@ -26,9 +26,9 @@ export interface Schema {
   readonly DateFields: DateFields;
   readonly Gregorian: Gregorian;
   readonly Layout: Layout;
+  readonly Names: Names;
   readonly Numbers: Numbers;
   readonly Currencies: Currencies;
-  readonly Territories: Territories;
   readonly TimeZoneNames: TimeZoneNames;
   readonly Units: Units;
 }

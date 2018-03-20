@@ -6,12 +6,12 @@ import { Code } from './util';
 import { getAliases } from './aliases';
 import { getCurrencies } from './currencies';
 import { getDistance } from './distance';
+import { getIdentifiers } from './identifiers';
 import { getLocale } from './locale';
 import { getPartition } from './partition';
 import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
 import { getSystems } from './systems';
-import { getTerritories } from './territories';
 import { getUnits } from './units';
 import { getWeekData } from './weekdata';
 import { getZones } from './zones';
@@ -20,12 +20,12 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   aliases: getAliases,
   currencies: getCurrencies,
   distance: getDistance,
+  identifiers: getIdentifiers,
   locale: getLocale,
   partition: getPartition,
   plurals: getPlurals,
   subtags: getSubtags,
   systems: getSystems,
-  territories: getTerritories,
   units: getUnits,
   weekdata: getWeekData,
   zones: getZones,
