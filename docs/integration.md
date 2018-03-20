@@ -123,9 +123,18 @@ const asyncLoader = (language: string): Promise<any> => {
 };
 
 const options: CLDROptions = {
+
+  // Sync blocking loader function
   loader,
+
+  // Promise-based loader function
   asyncLoader,
+
+  // Keep up to 8 languages loaded at a time.
   packCacheSize: 8,
+
+  // Patterns are parsed and cached on demand. This will keep up to
+  // 50 patterns in cache with least-recently-used eviction.
   patternCacheSize: 50
 };
 
