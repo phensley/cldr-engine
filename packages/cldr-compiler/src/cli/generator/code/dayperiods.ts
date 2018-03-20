@@ -1,7 +1,6 @@
 import { HEADER, Code } from './util';
 import { getSupplemental } from '../../../cldr';
 import { encoding } from '@phensley/cldr-core';
-import { binarySearch } from '../../../../../cldr-core/src/utils/search';
 
 const { base100encode } = encoding;
 
