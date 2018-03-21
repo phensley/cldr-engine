@@ -39,6 +39,12 @@ export class NumberParamsCache {
     // TODO: include algorithmic number system check
     if (numericNumberingDigits[realName] === undefined) {
       realName = this.select(defaultSystem);
+
+      // TODO: temporary double-check to default for zh finance until we
+      // have rbnf implemented.
+      if (numericNumberingDigits[realName] === undefined) {
+        realName = this.select('default');
+      }
     }
 
     return this.lookup(realName);

@@ -1,5 +1,5 @@
 import { CurrencyType } from '@phensley/cldr-schema';
-import { EN, EN_GB, ES_419, FR, DE, KM } from '../../_helpers';
+import { EN, EN_GB, ES_419, FR, DE, KM, ZH } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import { Part } from '../../../src/types';
 import {
@@ -108,64 +108,69 @@ test('currency name', () => {
 
 test('currency short', () => {
   let opts: CurrencyFormatOptions = { style: 'short', group: true };
-  let engine = new NumbersEngine(INTERNAL, EN);
-  let actual: string;
+  let e = new NumbersEngine(INTERNAL, EN);
+  let s: string;
 
-  actual = engine.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(actual).toEqual('-€12K');
+  s = e.formatCurrency('-12345.6789', 'EUR', opts);
+  expect(s).toEqual('-€12K');
 
-  actual = engine.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(actual).toEqual('-£12K');
+  s = e.formatCurrency('-12345.6789', 'GBP', opts);
+  expect(s).toEqual('-£12K');
 
-  actual = engine.formatCurrency('-12345.6789', 'JPY', opts);
-  expect(actual).toEqual('-¥12K');
+  s = e.formatCurrency('-12345.6789', 'JPY', opts);
+  expect(s).toEqual('-¥12K');
 
-  actual = engine.formatCurrency('0.9999', 'USD', opts);
-  expect(actual).toEqual('$1');
+  s = e.formatCurrency('0.9999', 'USD', opts);
+  expect(s).toEqual('$1');
 
-  actual = engine.formatCurrency('123.4567', 'USD', opts);
-  expect(actual).toEqual('$123');
+  s = e.formatCurrency('123.4567', 'USD', opts);
+  expect(s).toEqual('$123');
 
-  actual = engine.formatCurrency('999.9', 'USD', opts);
-  expect(actual).toEqual('$1K');
+  s = e.formatCurrency('999.9', 'USD', opts);
+  expect(s).toEqual('$1K');
 
-  actual = engine.formatCurrency('999999.9', 'USD', opts);
-  expect(actual).toEqual('$1M');
+  s = e.formatCurrency('999999.9', 'USD', opts);
+  expect(s).toEqual('$1M');
 
-  actual = engine.formatCurrency('999900.00', 'USD', opts);
-  expect(actual).toEqual('$1M');
+  s = e.formatCurrency('999900.00', 'USD', opts);
+  expect(s).toEqual('$1M');
 
-  actual = engine.formatCurrency('999000.00', 'USD', opts);
-  expect(actual).toEqual('$999K');
+  s = e.formatCurrency('999000.00', 'USD', opts);
+  expect(s).toEqual('$999K');
 
   opts.maximumFractionDigits = 1;
-  actual = engine.formatCurrency('999900.00', 'USD', opts);
-  expect(actual).toEqual('$999.9K');
+  s = e.formatCurrency('999900.00', 'USD', opts);
+  expect(s).toEqual('$999.9K');
 
   opts.maximumFractionDigits = 0;
-  actual = engine.formatCurrency('999900.00', 'USD', opts);
-  expect(actual).toEqual('$1M');
+  s = e.formatCurrency('999900.00', 'USD', opts);
+  expect(s).toEqual('$1M');
 
   opts = { style: 'short', group: true };
-  engine = new NumbersEngine(INTERNAL, DE);
-  actual = engine.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(actual).toEqual('-12 Tsd. €');
+  e = new NumbersEngine(INTERNAL, DE);
+  s = e.formatCurrency('-12345.6789', 'EUR', opts);
+  expect(s).toEqual('-12 Tsd. €');
 
-  actual = engine.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(actual).toEqual('-12 Tsd. £');
+  s = e.formatCurrency('-12345.6789', 'GBP', opts);
+  expect(s).toEqual('-12 Tsd. £');
 
-  actual = engine.formatCurrency('-12345.6789', 'JPY', opts);
-  expect(actual).toEqual('-12 Tsd. ¥');
+  s = e.formatCurrency('-12345.6789', 'JPY', opts);
+  expect(s).toEqual('-12 Tsd. ¥');
 
-  engine = new NumbersEngine(INTERNAL, ES_419);
-  actual = engine.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(actual).toEqual('-12 mil EUR');
+  e = new NumbersEngine(INTERNAL, ES_419);
+  s = e.formatCurrency('-12345.6789', 'EUR', opts);
+  expect(s).toEqual('-12 mil EUR');
 
-  actual = engine.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(actual).toEqual('-12 mil GBP');
+  s = e.formatCurrency('-12345.6789', 'GBP', opts);
+  expect(s).toEqual('-12 mil GBP');
 
-  actual = engine.formatCurrency('-12345.6789', 'JPY', opts);
-  expect(actual).toEqual('-12 mil JPY');
+  s = e.formatCurrency('-12345.6789', 'JPY', opts);
+  expect(s).toEqual('-12 mil JPY');
+
+  e = new NumbersEngine(INTERNAL, ZH);
+  s = e.formatCurrency('999999.987', 'USD', opts);
+  // TODO: support algorithmic numbering for chinese finance
+  expect(s).toEqual('US$100万');
 });
 
 test('currency fractions', () => {
