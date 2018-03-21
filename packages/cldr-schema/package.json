@@ -18,7 +18,7 @@
     "build:watch": "tsc -p ./tsconfig.build.json -w",
     "clean": "rimraf ./lib ./.scratch",
     "coverage": "jest --coverage --runInBand --no-cache",
-    "lint": "tsc -p ./tsconfig.json && tslint -p ./tsconfig.json",
+    "lint": "tslint -p ./tsconfig.json",
     "prepublish": "yarn build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
