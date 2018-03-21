@@ -7,13 +7,31 @@ const SCHEMA = buildSchema();
 const INTERNAL = new GeneralInternal(SCHEMA);
 
 test('territories', () => {
-  let formatter = new GeneralEngine(INTERNAL, EN);
-  expect(formatter.getTerritoryDisplayName('US')).toEqual('United States');
-  expect(formatter.getTerritoryDisplayName('US', 'short')).toEqual('US');
+  let e = new GeneralEngine(INTERNAL, EN);
+  expect(e.getTerritoryDisplayName('US')).toEqual('United States');
+  expect(e.getTerritoryDisplayName('US', 'short')).toEqual('US');
+  expect(e.getTerritoryDisplayName('ZZ')).toEqual('Unknown Region');
 
-  formatter = new GeneralEngine(INTERNAL, ES);
-  expect(formatter.getTerritoryDisplayName('US')).toEqual('Estados Unidos');
-  expect(formatter.getTerritoryDisplayName('US', 'short')).toEqual('EE. UU.');
+  e = new GeneralEngine(INTERNAL, ES);
+  expect(e.getTerritoryDisplayName('US')).toEqual('Estados Unidos');
+  expect(e.getTerritoryDisplayName('US', 'short')).toEqual('EE. UU.');
+  expect(e.getTerritoryDisplayName('ZZ')).toEqual('Región desconocida');
+});
+
+test('scripts', () => {
+  let e = new GeneralEngine(INTERNAL, EN);
+  expect(e.getScriptDisplayName('Latn')).toEqual('Latin');
+  expect(e.getScriptDisplayName('Cyrl')).toEqual('Cyrillic');
+  expect(e.getScriptDisplayName('Hant')).toEqual('Traditional');
+  expect(e.getScriptDisplayName('Arab')).toEqual('Arabic');
+  expect(e.getScriptDisplayName('Zzzz')).toEqual('Unknown Script');
+
+  e = new GeneralEngine(INTERNAL, ES);
+  expect(e.getScriptDisplayName('Latn')).toEqual('latino');
+  expect(e.getScriptDisplayName('Cyrl')).toEqual('cirílico');
+  expect(e.getScriptDisplayName('Hant')).toEqual('tradicional');
+  expect(e.getScriptDisplayName('Arab')).toEqual('árabe');
+  expect(e.getScriptDisplayName('Zzzz')).toEqual('alfabeto desconocido');
 });
 
 test('internals', () => {

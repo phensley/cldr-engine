@@ -152,7 +152,7 @@ test('compare', () => {
 
   expect(cmp('1e10', '1e11')).toEqual(-1);
   expect(cmp('1.23e5', '12e4')).toEqual(1);
-  expect(cmp('12e4', '1.23e5')).toEqual(1);
+  expect(cmp('12e4', '1.23e5')).toEqual(-1);
   expect(cmp('-12e4', '1.23e5')).toEqual(-1);
   expect(cmp('-1.23e5', '12e4')).toEqual(-1);
   expect(cmp('1.2345e-10', '12e4')).toEqual(-1);
@@ -170,6 +170,10 @@ test('compare', () => {
   expect(cmp('100000000.2345666666e-7', '100020000.23447e-7')).toEqual(-1);
   expect(cmp('10000000000.2345666666e-7', '10000000000.23457e-7')).toEqual(-1);
   expect(cmp('10000000000.234566666666e-6', '10000000000.23457e-6')).toEqual(-1);
+
+  expect(cmp('1', '2.0001')).toEqual(-1);
+  expect(cmp('2.0001', '1')).toEqual(1);
+  expect(cmp('2', '2.00000')).toEqual(0);
 });
 
 test('compare abs', () => {
@@ -259,6 +263,24 @@ test('set scale', () => {
   expect(parse('12345.6781111').setScale(1)).toEqual(parse('12345.7'));
   expect(parse('12345.67811111').setScale(1)).toEqual(parse('12345.7'));
   expect(parse('12345.678111111').setScale(1)).toEqual(parse('12345.7'));
+});
+
+test('abs', () => {
+  expect(parse('0').abs()).toEqual(parse('0'));
+  expect(parse('2.79').abs()).toEqual(parse('2.79'));
+  expect(parse('12345.6789').abs()).toEqual(parse('12345.6789'));
+  expect(parse('-2.79').abs()).toEqual(parse('2.79'));
+  expect(parse('-12345.6789').abs()).toEqual(parse('12345.6789'));
+});
+
+test('to integer', () => {
+  expect(parse('0.000').toInteger()).toEqual(parse('0'));
+  expect(parse('0.999').toInteger()).toEqual(parse('0'));
+  expect(parse('-0.999').toInteger()).toEqual(parse('0'));
+  expect(parse('2.79').toInteger()).toEqual(parse('2'));
+  expect(parse('12345.6789').toInteger()).toEqual(parse('12345'));
+  expect(parse('-2.79').toInteger()).toEqual(parse('-2'));
+  expect(parse('-12345.6789').toInteger()).toEqual(parse('-12345'));
 });
 
 test('divmod pow10', () => {

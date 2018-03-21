@@ -25,10 +25,10 @@ export class DayPeriodRules {
     this.cache = new Cache(parseRule, cacheSize);
   }
 
-  get(bundle: ResourceBundle, minutes: number): string {
-    let raw = dayPeriodRules[bundle.languageRegion()];
+  get(bundle: ResourceBundle, minutes: number): string | undefined {
+    const raw = dayPeriodRules[bundle.languageRegion()] || dayPeriodRules[bundle.language()];
     if (raw === undefined) {
-      raw = dayPeriodRules[bundle.language()] || dayPeriodRules.en;
+      return undefined;
     }
     const rule = this.cache.get(raw);
     const i = binarySearch(rule.minutes, minutes);

@@ -320,7 +320,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
 
   protected dayPeriod(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     const format = this.dayPeriods.format;
-    const key = date.getHour() < 13 ? 'am' : 'pm';
+    const key = date.getHour() < 12 ? 'am' : 'pm';
     switch (width) {
     case 5:
       return format.narrow(bundle, key, Alt.NONE);
@@ -335,27 +335,35 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const format = this.dayPeriods.format;
     const hour = date.getHour();
     const minute = date.getMinute();
-    let key: DayPeriodType = hour < 13 ? 'am' : 'pm';
+    const key: DayPeriodType = hour < 12 ? 'am' : 'pm';
+
+    // Set extended key which may not exist for some locales, in which case we
+    // fall back to "am" / "pm"
+    let extkey: DayPeriodType = key;
     if (minute === 0) {
       if (hour === 0) {
-        key = 'midnight';
+        extkey = 'midnight';
       } else if (hour === 12) {
-        key = 'noon';
+        extkey = 'noon';
       }
     }
     switch (width) {
     case 5:
-      return format.narrow(bundle, key, Alt.NONE);
+      return format.narrow(bundle, extkey, Alt.NONE) || format.narrow(bundle, key, Alt.NONE);
     case 4:
-      return format.wide(bundle, key, Alt.NONE);
+      return format.wide(bundle, extkey, Alt.NONE) || format.wide(bundle, key, Alt.NONE);
     default:
-      return format.abbreviated(bundle, key, Alt.NONE);
+      return format.abbreviated(bundle, extkey, Alt.NONE) || format.abbreviated(bundle, key, Alt.NONE);
     }
   }
 
   protected dayPeriodFlex(bundle: ResourceBundle, date: ZonedDateTime, field: string, width: number): string {
     const minutes = (date.getHour() * 60) + date.getMinute();
     const key = this.dayPeriodRules.get(bundle, minutes) as DayPeriodType;
+    if (key === undefined) {
+      // Fallback to extended day period
+      return this.dayPeriodExt(bundle, date, field, width);
+    }
     const format = this.dayPeriods.format;
     switch (width) {
     case 5:

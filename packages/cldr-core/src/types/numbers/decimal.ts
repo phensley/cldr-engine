@@ -90,7 +90,7 @@ export class Decimal {
    * If the abs flag is true compare the absolute values.
    */
   compare(v: DecimalArg, abs: boolean = false): number {
-    const u = this;
+    const u: Decimal = this;
     v = coerceDecimal(v);
     const us = u.sign;
     const vs = v.sign;
@@ -110,7 +110,8 @@ export class Decimal {
     if (u.exp !== v.exp) {
       const shift = u.exp - v.exp;
       if (shift > 0) {
-        return -1 * compare(u.data, v.data, shift);
+        const c = compare(v.data, u.data, shift);
+        return c === 0 ? c : -c;
       }
       return compare(u.data, v.data, -shift);
     }
@@ -148,7 +149,7 @@ export class Decimal {
    * Invert this number's sign.
    */
   negate(): Decimal {
-    return this.sign === 0 ? ZERO : Decimal.fromRaw(-this.sign, this.exp, this.data);
+    return this.sign === 0 ? this : Decimal.fromRaw(-this.sign, this.exp, this.data);
   }
 
   /**
@@ -171,6 +172,13 @@ export class Decimal {
    */
   isInteger(): boolean {
     return this.sign === 0 ? true : this.exp + this.trailingZeros() >= 0;
+  }
+
+  /**
+   * Return the integer part.
+   */
+  toInteger(): Decimal {
+    return this.setScale(0, RoundingMode.TRUNCATE);
   }
 
   /**

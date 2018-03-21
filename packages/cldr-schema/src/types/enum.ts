@@ -29,40 +29,16 @@ export const makeKeyedEnum = <T extends string, V extends string>(specs: Array<K
   /* tslint:disable-next-line */
   const _enum: {[K in T]: V} = Object.create(null);
   /* tslint:disable-next-line */
-  // const index: {[K in T]: number} = Object.create(null);
   const values: V[] = [];
   const len = specs.length;
   for (let i = 0; i < len; i++) {
     const [k, v] = specs[i];
     _enum[k] = v;
-    // index[k] = i;
     values.push(v);
   }
-  // return [_enum, values, index];
   Object.freeze(_enum);
   Object.freeze(values);
   return [_enum, values];
 };
 
 type UnitEnumSpec<A extends string, B extends string, C extends string> = [A, B, C];
-
-export const makeUnitEnum =
-  <C extends string, U extends string, R extends string>
-  (specs: Array<UnitEnumSpec<C, U, R>>): [ {[K in U]: R}, R[], string[]] => {
-
-  /* tslint:disable-next-line */
-  const _enum: {[K in U]: R} = Object.create(null);
-  const values: R[] = [];
-  const fields: string[] = [];
-  const len = specs.length;
-  for (let i = 0; i < len; i++) {
-    const [c, u, r] = specs[i];
-    _enum[u] = r;
-    values.push(r);
-    fields.push(`${c}-${r}`);
-  }
-  Object.freeze(_enum);
-  Object.freeze(values);
-  Object.freeze(fields);
-  return [_enum, values, fields];
-};

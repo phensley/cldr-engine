@@ -4,6 +4,7 @@ import { ResourceBundle } from '../../src/resource/pack';
 export const AZ: ResourceBundle = languageBundle('az');
 export const AR: ResourceBundle = languageBundle('ar');
 export const AR_IL: ResourceBundle = languageBundle('ar-IL');
+export const BE: ResourceBundle = languageBundle('be');
 export const DE: ResourceBundle = languageBundle('de');
 export const EN: ResourceBundle = languageBundle('en');
 export const EN_GB: ResourceBundle = languageBundle('en-GB');

@@ -40,4 +40,27 @@ test('compare', () => {
   expect(parse('1 / 5').compare(parse('1 / 5'))).toEqual(0);
   expect(parse('1 / 5').compare(parse('1 / 6'))).toEqual(1);
   expect(parse('.1 / 10').compare(parse('.2 / 10'))).toEqual(-1);
+
+  expect(parse('1 / 5').compare('.1')).toEqual(1);
+  expect(parse('1 / 5').compare(0.1)).toEqual(1);
+  expect(parse('1 / 5').compare(new Decimal('0.1'))).toEqual(1);
+
+  expect(parse('1 / 20').compare('.1')).toEqual(-1);
+  expect(parse('1 / 20').compare(0.1)).toEqual(-1);
+  expect(parse('1 / 20').compare(new Decimal('0.1'))).toEqual(-1);
+});
+
+test('coerce', () => {
+  expect(new Rational(15)).toEqual(parse('15 / 1'));
+  expect(new Rational(new Decimal(15))).toEqual(parse('15 / 1'));
+  expect(new Rational(new Decimal('15'), new Decimal('3'))).toEqual(parse('15 / 3'));
+  expect(new Rational(15, 3)).toEqual(parse('15 / 3'));
+});
+
+test('to decimal', () => {
+  expect(parse('15 / 3').toDecimal()).toEqual(new Decimal('5'));
+});
+
+test('to string', () => {
+  expect(parse('15 / 3').toString()).toEqual('15 / 3');
 });

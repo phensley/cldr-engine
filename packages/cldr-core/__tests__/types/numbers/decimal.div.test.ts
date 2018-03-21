@@ -252,3 +252,21 @@ test('divmod conversions', () => {
   expect(minutes).toEqual(parse('42'));
   expect(seconds).toEqual(parse('23'));
 });
+
+test('mod', () => {
+  expect(parse('0').mod(parse('1'))).toEqual(parse('1'));
+
+  expect(parse('99').mod(parse('9'))).toEqual(parse('0'));
+  expect(parse('100').mod(parse('9'))).toEqual(parse('1'));
+
+  expect(parse('122').mod(parse('3'))).toEqual(parse('2'));
+  expect(parse('123').mod(parse('3'))).toEqual(parse('0'));
+  expect(parse('124').mod(parse('3'))).toEqual(parse('1'));
+
+  expect(parse('122').mod(parse('4'))).toEqual(parse('2'));
+  expect(parse('123').mod(parse('4'))).toEqual(parse('3'));
+  expect(parse('124').mod(parse('4'))).toEqual(parse('0'));
+
+  expect(parse('123.456').mod(parse('10'))).toEqual(parse('3.456'));
+  expect(parse('990.987').mod(parse('10'))).toEqual(parse('0.987'));
+});

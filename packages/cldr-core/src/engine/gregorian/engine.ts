@@ -34,53 +34,39 @@ export class GregorianEngine {
     protected bundle: ResourceBundle
   ) { }
 
-  /**
-   * Get standalone day period.
-   */
-  getDayPeriod(dayPeriod: DayPeriodType, width: FieldWidthType = FieldWidth.WIDE): string {
-    const impl = this.internal.dayPeriods.standAlone[width];
-    return impl === undefined ? '' : impl(this.bundle, dayPeriod, Alt.NONE);
-  }
+  // TODO: rework these to return standalone field for a given 'now'
+  // getDayPeriod(dayPeriod: DayPeriodType, width: FieldWidthType = FieldWidth.WIDE): string {
+  //   const impl = this.internal.dayPeriods.standAlone[width];
+  //   return impl === undefined ? '' : impl(this.bundle, dayPeriod, Alt.NONE);
+  // }
 
-  /**
-   * Get standalone era name.
-   */
-  getEra(era: EraType, width: FieldWidthType = FieldWidth.WIDE): string {
-    switch (width) {
-    case FieldWidth.NARROW:
-    case FieldWidth.SHORT:
-      return this.internal.eras.narrow(this.bundle, era);
-    case FieldWidth.ABBREVIATED:
-      return this.internal.eras.abbr(this.bundle, era);
-    case FieldWidth.WIDE:
-    default:
-      return this.internal.eras.names(this.bundle, era);
-    }
-  }
+  // getEra(era: EraType, width: FieldWidthType = FieldWidth.WIDE): string {
+  //   switch (width) {
+  //   case FieldWidth.NARROW:
+  //   case FieldWidth.SHORT:
+  //     return this.internal.eras.narrow(this.bundle, era);
+  //   case FieldWidth.ABBREVIATED:
+  //     return this.internal.eras.abbr(this.bundle, era);
+  //   case FieldWidth.WIDE:
+  //   default:
+  //     return this.internal.eras.names(this.bundle, era);
+  //   }
+  // }
 
-  /**
-   * Get standalone month name.
-   */
-  getMonth(month: MonthType, width: FieldWidthType = FieldWidth.WIDE): string {
-    const impl = this.internal.months.standAlone[width];
-    return impl === undefined ? '' : impl(this.bundle, month);
-  }
+  // getMonth(month: MonthType, width: FieldWidthType = FieldWidth.WIDE): string {
+  //   const impl = this.internal.months.standAlone[width];
+  //   return impl === undefined ? '' : impl(this.bundle, month);
+  // }
 
-  /**
-   * Get standalone quarter name.
-   */
-  getQuarter(quarter: QuarterType, width: FieldWidthType = FieldWidth.WIDE): string {
-    const impl = this.internal.quarters.standAlone[width];
-    return impl === undefined ? '' : impl(this.bundle, quarter);
-  }
+  // getQuarter(quarter: QuarterType, width: FieldWidthType = FieldWidth.WIDE): string {
+  //   const impl = this.internal.quarters.standAlone[width];
+  //   return impl === undefined ? '' : impl(this.bundle, quarter);
+  // }
 
-  /**
-   * Get standalone weekday name.
-   */
-  getWeekday(weekday: WeekdayType, width: FieldWidthType = FieldWidth.WIDE): string {
-    const impl = this.internal.weekdays.standAlone[width];
-    return impl === undefined ? '' : impl(this.bundle, weekday);
-  }
+  // getWeekday(weekday: WeekdayType, width: FieldWidthType = FieldWidth.WIDE): string {
+  //   const impl = this.internal.weekdays.standAlone[width];
+  //   return impl === undefined ? '' : impl(this.bundle, weekday);
+  // }
 
   getCompactISOWeekDate(date: ZonedDateTime): string {
     return this.getISOWeekDate(date, ISO_WEEKDATE_COMPACT);
@@ -113,13 +99,14 @@ export class GregorianEngine {
     return this.internal.formatIntervalParts(this.bundle, start, end, pattern);
   }
 
-  formatRelative(start: ZonedDateTime, end: ZonedDateTime): string {
-    return '';
-  }
+  // TODO:
+  // formatRelative(start: ZonedDateTime, end: ZonedDateTime): string {
+  //   return '';
+  // }
 
-  formatRelativeParts(start: ZonedDateTime, end: ZonedDateTime): Part[] {
-    return [];
-  }
+  // formatRelativeParts(start: ZonedDateTime, end: ZonedDateTime): Part[] {
+  //   return [];
+  // }
 
   formatRaw(date: ZonedDateTime, pattern: string): string {
     return this.internal.formatRaw(this.bundle, date, pattern);

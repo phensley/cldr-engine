@@ -11,25 +11,26 @@ import { coerceDecimal, Decimal, DecimalArg, DecimalConstants, ZonedDateTime } f
 import { WrapperInternal } from '..';
 import { RelativeTimeFormatOptions } from './options';
 
-export const fieldDifference = (a: ZonedDateTime, b: ZonedDateTime): [DateFieldType, number] => {
-  if (a.zoneId() !== b.zoneId()) {
-    b = new ZonedDateTime(b.epochUTC(), a.zoneId());
-  }
+// TODO: expose a method to calculate field difference with different options
+// export const fieldDifference = (a: ZonedDateTime, b: ZonedDateTime): [DateFieldType, number] => {
+//   if (a.zoneId() !== b.zoneId()) {
+//     b = new ZonedDateTime(b.epochUTC(), a.zoneId());
+//   }
 
-  let diff = a.getYear() - b.getYear();
-  if (diff !== 0) {
-    return ['year', diff];
-  }
+//   let diff = a.getYear() - b.getYear();
+//   if (diff !== 0) {
+//     return ['year', diff];
+//   }
 
-  // TODO:
-  // diff = a.getMonth() - b.getMonth();
-  // if (diff !== 0) {
+//   // TODO:
+//   // diff = a.getMonth() - b.getMonth();
+//   // if (diff !== 0) {
 
-  // }
+//   // }
 
-  diff = a.getSecond() - b.getSecond();
-  return ['second', diff];
-};
+//   diff = a.getSecond() - b.getSecond();
+//   return ['second', diff];
+// };
 
 export class DateFieldsInternal {
 

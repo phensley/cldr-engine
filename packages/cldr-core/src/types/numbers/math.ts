@@ -290,6 +290,9 @@ export const trimLeadingZeros = (data: number[]): void => {
   }
 };
 
+/**
+ * Reusable quotient and remainder for repeated divmod operations.
+ */
 export class DivMod {
 
   // [quotient, remainder]
@@ -304,11 +307,6 @@ export class DivMod {
    */
   word(n: number, w: number): number[] {
     return divword(this.s, n, w);
-  }
-
-  size(n: number): number {
-    const [q, r] = divword(this.s, n, Constants.RDIGITS);
-    return r === 0 ? q : q + 1;
   }
 }
 

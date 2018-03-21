@@ -64,6 +64,9 @@ test('relative time options', () => {
   s = engine.formatRelativeTime(new Decimal('-3.2'), 'week');
   expect(s).toEqual('3.2 weeks ago');
 
+  s = engine.formatRelativeTime(1, 'week', {});
+  expect(s).toEqual('next week');
+
   s = engine.formatRelativeTime(1, 'week', { width: 'short' });
   expect(s).toEqual('next wk.');
 

@@ -15,7 +15,7 @@ const coerceRational = (n: RationalArg): Rational => {
     return new Rational(n, DecimalConstants.ONE);
   } else if (typeof n === 'string') {
     return new Rational(n);
-  } else if (n instanceof Rational || (n as any).numerator !== undefined) {
+  } else if (n instanceof Rational) {
     return n as Rational;
   }
   return new Rational(n, DecimalConstants.ONE);
@@ -69,9 +69,10 @@ export class Rational {
   }
 
   compare(num: RationalArg, context?: MathContext): number {
-    const n = coerceRational(num);
-    const a = this.numer.multiply(n.denom, context);
-    const b = n.numer.multiply(this.denom, context);
+    const u: Rational = this;
+    const v = coerceRational(num);
+    const a = u.numer.multiply(v.denom, context);
+    const b = v.numer.multiply(u.denom, context);
     return a.compare(b);
   }
 
