@@ -33,6 +33,7 @@
     "lib/",
     "packs/*.gz",
     "packs/sha*.txt",
+    "packs/resource.json",
     "scripts/"
   ],
   "dependencies": {
