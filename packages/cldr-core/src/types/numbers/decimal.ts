@@ -138,10 +138,17 @@ export class Decimal {
   }
 
   /**
+   * Return the absolute value of the number.
+   */
+  abs(): Decimal {
+    return this.sign === -1 ? Decimal.fromRaw(-this.sign, this.exp, this.data) : this;
+  }
+
+  /**
    * Invert this number's sign.
    */
   negate(): Decimal {
-    return this.sign === 0 ? new Decimal(this) : Decimal.fromRaw(-this.sign, this.exp, this.data);
+    return this.sign === 0 ? ZERO : Decimal.fromRaw(-this.sign, this.exp, this.data);
   }
 
   /**
@@ -166,16 +173,25 @@ export class Decimal {
     return this.sign === 0 ? true : this.exp + this.trailingZeros() >= 0;
   }
 
+  /**
+   * Adds v.
+   */
   add(v: DecimalArg): Decimal {
     v = coerceDecimal(v);
     return this.addsub(this, v, v.sign);
   }
 
+  /**
+   * Subtracts v.
+   */
   subtract(v: DecimalArg): Decimal {
     v = coerceDecimal(v);
     return this.addsub(this, v, v.sign === 1 ? -1 : 1);
   }
 
+  /**
+   * Multiplies by v with optional math context.
+   */
   multiply(v: DecimalArg, context?: MathContext): Decimal {
     const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
 
@@ -205,7 +221,7 @@ export class Decimal {
   }
 
   /**
-   * Divide this number by v and return the quotient.
+   * Divide by v with optional math context.
    */
   divide(v: DecimalArg, context?: MathContext): Decimal {
     const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
@@ -264,7 +280,7 @@ export class Decimal {
   }
 
   /**
-   * Divide this number by v and return the quotient and remainder.
+   * Divide by v and return the quotient and remainder.
    */
   divmod(v: DecimalArg): [Decimal, Decimal] {
     v = coerceDecimal(v);
@@ -295,6 +311,14 @@ export class Decimal {
     r.exp = exp;
 
     return [q.trim(), r.trim()];
+  }
+
+  /**
+   * Divide by v and return the remainder.
+   */
+  mod(v: DecimalArg): Decimal {
+    const [q, r] = this.divmod(v);
+    return r;
   }
 
   /**
