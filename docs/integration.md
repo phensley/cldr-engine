@@ -71,7 +71,8 @@ You can choose to copy the GZIP-compressed or uncompressed resource packs, depen
 
 **Resource packs are tied to the exact version of the `@phensley/cldr` you are using and must be kept in sync.** If a resouce pack from a different version is used, the string offsets may not align and you may see randomness.
 
-The resource packs are considered to be an inseparable part of the library. When you upgrade the library you must also copy the resource packs from that version. Otherwise all bets are off and things may break in unexpected ways.
+The resource packs are considered to be an inseparable part of the library. When you upgrade the library you must also copy the resource packs from that version and ensure they are loaded correctly (busting caches, etc).
+Otherwise all bets are off and things may break in unexpected ways.
 
 ## Initialization
 
@@ -97,14 +98,22 @@ The `patternCacheSize` is a single setting but controls the maximum size of the 
 
 Below is an example of embedding English into a web application statically. The `en.json` resource is loaded into the framework synchronously while all other languages will be loaded asynchronously.
 
+Note that the SHA-256 digest is read from the `resource.json` and embedded into the URLs. This presumes a build script has copied the resource files and embedded the same version into their filenames.
+
+See https://github.com/phensley/cldr-engine-react-demo for a demonstration.
+
 `cldr.ts`:
 ```typescript
 import wretch from 'wretch';
 import { CLDR, CLDROptions } from '@phensley/cldr';
-import Package from '../../package.json';
 
-// Grab the @phensley/cldr library version to append to our resource pack URLs
-const version = Package.dependencies['@phensley/cldr'];
+// Import the resource file containing information about the resource packs
+import Resource from '@phensley/cldr/packs/resource.json';
+
+// Copy the sha256 hash of all of the packages, to use for cache busting.
+// Note: Resource files are be copied by the build process with the
+// matching version in the path.
+const version = Resource.sha256.substring(0, 10);
 
 // Import default language English directly
 import EnglishPack from '@phensley/cldr/packs/en.json';
@@ -115,7 +124,7 @@ const loader = (language: string): any => EnglishPack;
 // All other languages are loaded asynchronously at runtime
 const asyncLoader = (language: string): Promise<any> => {
   return new Promise<any>((resolve, reject) => {
-    wretch(`${process.env.PUBLIC_URL}/packs/${language}.json?v=${version}`)
+    wretch(`${process.env.PUBLIC_URL}/packs/${language}-${version}.json`)
       .get()
       .json(resolve)
       .catch(reject);
