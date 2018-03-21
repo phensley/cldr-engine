@@ -45,6 +45,7 @@ export const runPack = (argv: yargs.Arguments) => {
 
   let path: string;
   const hashes: { [x: string]: string } = {};
+  const pkghash = crypto.createHash('sha256');
   const pkg = getPackageInfo();
   langs.forEach(lang => {
     // Get the list of languages that should live together in this bundle.
@@ -80,6 +81,7 @@ export const runPack = (argv: yargs.Arguments) => {
     const data = zlib.gzipSync(raw, { level: zlib.constants.Z_BEST_COMPRESSION });
     fs.writeFileSync(path, data, { encoding: 'binary' });
     hashes[name] = sha256(data);
+    pkghash.update(data);
   });
 
   // Write hashes file
@@ -87,4 +89,9 @@ export const runPack = (argv: yargs.Arguments) => {
   console.warn(`writing: ${path}`);
 
   fs.writeFileSync(path, Object.keys(hashes).sort().map(k => `${hashes[k]}  ${k}`).join('\n') + '\n');
+
+  path = join(dest, 'resource.json');
+  console.warn(`writing: ${path}`);
+
+  fs.writeFileSync(path, JSON.stringify({ sha256: pkghash.digest('hex') }));
 };
