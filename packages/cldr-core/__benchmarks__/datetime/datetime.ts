@@ -1,7 +1,8 @@
+import { Suite } from 'benchmark';
 import { makeSuite, readLines } from '../util';
 import { ZonedDateTime } from '../../src';
 
-export const datetimeSuite = makeSuite('ZonedDateTime');
+export const datetimeSuite: Suite = makeSuite('ZonedDateTime');
 
 const EPOCH = 1520693966000;
 

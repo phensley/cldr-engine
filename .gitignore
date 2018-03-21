@@ -10,6 +10,7 @@ scratch/
 temp/
 
 .DS_Store
+.scratch
 yarn.lock
 yarn-error.log
 lerna-debug.log

@@ -1,3 +1,4 @@
+import { Suite } from 'benchmark';
 import { join } from 'path';
 import { makeSuite, readLines } from '../util';
 import { Decimal } from '../../src';

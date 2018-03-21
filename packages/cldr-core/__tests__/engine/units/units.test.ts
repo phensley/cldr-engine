@@ -14,6 +14,14 @@ test('display name', () => {
   expect(units.getDisplayName('meter-per-second')).toEqual('meters per second');
 });
 
+test('significant', () => {
+  const e = new UnitsEngine(UNITS, NUMBERS, EN);
+  let s: string;
+
+  s = e.format({ value: '12345.6789', unit: 'mile' }, { maximumSignificantDigits: 3 });
+  expect(s).toEqual('12300 miles');
+});
+
 test('number systems', () => {
   let units = new UnitsEngine(UNITS, NUMBERS, AR);
   let s: string;

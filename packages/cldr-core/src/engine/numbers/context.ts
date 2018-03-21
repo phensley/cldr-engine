@@ -28,10 +28,12 @@ export class NumberContext {
     this.roundingMode = options.round || 'half-even';
     this.currencyDigits = currencyDigits;
 
-    // Determine if we should use default or significant digit modes.
-    this.useSignificant =
-      (compact && o.maximumFractionDigits === undefined && o.minimumFractionDigits === undefined) ||
-      (!compact && o.minimumSignificantDigits === undefined && o.maximumSignificantDigits === undefined);
+    // Determine if we should use default or significant digit modes. If we're in compact mode
+    // we will use significant digits unless any fraction option is set. Otherwise we use
+    // significant digits if any significant digit option is set.
+    const optFrac = o.minimumFractionDigits !== undefined || o.maximumFractionDigits !== undefined;
+    const optSig = o.minimumSignificantDigits !== undefined || o.maximumSignificantDigits !== undefined;
+    this.useSignificant = (compact && !optFrac) || optSig;
   }
 
   /**

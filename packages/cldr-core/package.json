@@ -17,9 +17,9 @@
     "bench": "ts-node __benchmarks__/",
     "build": "tsc -p ./tsconfig.build.json",
     "build:watch": "tsc -p ./tsconfig.build.json -w",
-    "clean": "rimraf ./lib ./scratch",
+    "clean": "rimraf ./lib ./.scratch",
     "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
-    "lint": "tslint -p ./tsconfig.json",
+    "lint": "tsc -p ./tsconfig.json && tslint -p ./tsconfig.json",
     "prepublish": "yarn build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
