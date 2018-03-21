@@ -100,7 +100,7 @@ test('multiply with scale', () => {
   expect(mul('157', '.7', { scale: 0 })).toEqual(parse('110'));
   expect(mul('157', '.7', { scale: -1 })).toEqual(parse('11e1'));
 
-  expect(mul('1234567', '10', { scale: -4 })).toEqual(parse('1234e4'));
+  expect(mul('1234567', '10', { scale: -4 })).toEqual(parse('1235e4'));
   expect(mul('1234567', '10', { scale: -3 })).toEqual(parse('12346e3'));
   expect(mul('1234567', '10', { scale: -2 })).toEqual(parse('123457e2'));
   expect(mul('1234567', '10', { scale: -1 })).toEqual(parse('1234567e1'));

@@ -498,7 +498,7 @@ export class Decimal {
         w.data[j] = u.data[q + j];
       }
       w.exp += shift;
-      if (w.round(rnd, mode)) {
+      if (w.round(rnd, rest, mode)) {
         w._increment();
       }
       return w.trim();
@@ -522,7 +522,7 @@ export class Decimal {
     }
 
     w.exp += shift;
-    if (w.round(rnd, mode)) {
+    if (w.round(rnd, rest, mode)) {
       w._increment();
     }
     return w.trim();
@@ -753,7 +753,10 @@ export class Decimal {
   /**
    * Return a rounding indicator for a given rounding mode,
    */
-  protected round(rnd: number, mode: RoundingModeType): number {
+  protected round(rnd: number, rest: number, mode: RoundingModeType): number {
+    if (rest !== 0 && (rnd === 0 || rnd === 5)) {
+      rnd++;
+    }
     switch (mode) {
     case RoundingMode.UP:
       // round away from zero

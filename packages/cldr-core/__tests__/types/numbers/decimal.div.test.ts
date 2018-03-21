@@ -166,7 +166,7 @@ test('divide by single digit', () => {
   expect(div('982.0065714814661859824253792', '1', { scale: 6 })).toEqual(parse('982.006571'));
   expect(div('982.0065714814661859824253792', '1', { scale: 5 })).toEqual(parse('982.00657'));
   expect(div('982.0065714814661859824253792', '1', { scale: 4 })).toEqual(parse('982.0066'));
-  expect(div('982.0065714814661859824253792', '1', { scale: 3 })).toEqual(parse('982.006'));
+  expect(div('982.0065714814661859824253792', '1', { scale: 3 })).toEqual(parse('982.007'));
   expect(div('982.0065714814661859824253792', '1', { scale: 2 })).toEqual(parse('982.01'));
   expect(div('982.0065714814661859824253792', '1', { scale: 1 })).toEqual(parse('982.0'));
   expect(div('982.0065714814661859824253792', '1', { scale: 0 })).toEqual(parse('982'));
@@ -176,7 +176,7 @@ test('divide by single digit', () => {
   expect(div('982.0065714814661859824253792', '2', { scale: 8 })).toEqual(parse('491.00328574'));
   expect(div('982.0065714814661859824253792', '2', { scale: 7 })).toEqual(parse('491.0032857'));
   expect(div('982.0065714814661859824253792', '2', { scale: 6 })).toEqual(parse('491.003286'));
-  expect(div('982.0065714814661859824253792', '2', { scale: 5 })).toEqual(parse('491.00328'));
+  expect(div('982.0065714814661859824253792', '2', { scale: 5 })).toEqual(parse('491.00329'));
   expect(div('982.0065714814661859824253792', '2', { scale: 4 })).toEqual(parse('491.0033'));
   expect(div('982.0065714814661859824253792', '2', { scale: 3 })).toEqual(parse('491.003'));
   expect(div('982.0065714814661859824253792', '2', { scale: 2 })).toEqual(parse('491.00'));

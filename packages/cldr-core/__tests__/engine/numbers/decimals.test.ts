@@ -3,12 +3,13 @@ import { EN, EN_GB, ES_419, FR, DE, KM, PL } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import {
   CurrencyFormatOptions,
+  Decimal,
   DecimalFormatOptions,
   DecimalFormatStyleType,
   NumbersEngine,
   NumbersInternal,
   WrapperInternal
-} from '../../../src/engine';
+} from '../../../src';
 
 const INTERNAL = new NumbersInternal(buildSchema(), new WrapperInternal());
 
@@ -77,6 +78,19 @@ test('decimals long', () => {
   expect(actual).toEqual('10,000 trillion');
 });
 
+test('significant digits', () => {
+  const e = new NumbersEngine(INTERNAL, EN);
+  let s: string;
+
+  const d = new Decimal('100599.99');
+
+  s = e.formatDecimal('100599.99', { maximumSignificantDigits: 3, round: 'half-even' });
+  expect(s).toEqual('101000');
+
+  s = e.formatDecimal('101599.99', { maximumSignificantDigits: 3, round: 'half-even' });
+  expect(s).toEqual('102000');
+});
+
 test('decimal compact', () => {
   const engine = new NumbersEngine(INTERNAL, EN);
   let actual: string;
@@ -100,7 +114,7 @@ test('decimal compact', () => {
   expect(actual).toEqual('0');
 
   actual = engine.formatDecimal('12345.6789', { style: 'short', maximumFractionDigits: 2 });
-  expect(actual).toEqual('12.34K');
+  expect(actual).toEqual('12.35K');
 
   actual = engine.formatDecimal('45.6789', { style: 'short', maximumFractionDigits: 2 });
   expect(actual).toEqual('45.68');
@@ -150,29 +164,29 @@ test('decimal compact', () => {
 });
 
 test('decimal compact significant digits', () => {
-  const engine = new NumbersEngine(INTERNAL, EN);
-  let actual: string;
+  const e = new NumbersEngine(INTERNAL, EN);
+  let s: string;
 
-  actual = engine.formatDecimal('1200', { style: 'short' });
-  expect(actual).toEqual('1.2K');
+  s = e.formatDecimal('1200', { style: 'short' });
+  expect(s).toEqual('1.2K');
 
-  actual = engine.formatDecimal('1000000000', { style: 'short' });
-  expect(actual).toEqual('1B');
+  s = e.formatDecimal('1000000000', { style: 'short' });
+  expect(s).toEqual('1B');
 
-  actual = engine.formatDecimal('1000000000', { style: 'short', minimumFractionDigits: 1 });
-  expect(actual).toEqual('1.0B');
+  s = e.formatDecimal('1000000000', { style: 'short', minimumFractionDigits: 1 });
+  expect(s).toEqual('1.0B');
 
-  actual = engine.formatDecimal('1500000000', { style: 'short' });
-  expect(actual).toEqual('1.5B');
+  s = e.formatDecimal('1500000000', { style: 'short' });
+  expect(s).toEqual('1.5B');
 
-  actual = engine.formatDecimal('1590000000', { style: 'short' });
-  expect(actual).toEqual('1.6B');
+  s = e.formatDecimal('1590000000', { style: 'short' });
+  expect(s).toEqual('1.6B');
 
-  actual = engine.formatDecimal('12345', { style: 'short' });
-  expect(actual).toEqual('12K');
+  s = e.formatDecimal('12345', { style: 'short' });
+  expect(s).toEqual('12K');
 
-  actual = engine.formatDecimal('12345', { style: 'short', minimumFractionDigits: 1 });
-  expect(actual).toEqual('12.3K');
+  s = e.formatDecimal('12345', { style: 'short', minimumFractionDigits: 1 });
+  expect(s).toEqual('12.3K');
 });
 
 test('decimal percents', () => {

@@ -237,7 +237,7 @@ test('set scale', () => {
   expect(parse('10.34567').setScale(-1)).toEqual(parse('1e1'));
   expect(parse('10.34567').setScale(0)).toEqual(parse('10'));
   expect(parse('10.34567').setScale(1)).toEqual(parse('10.3'));
-  expect(parse('10.34567').setScale(2)).toEqual(parse('10.34'));
+  expect(parse('10.34567').setScale(2)).toEqual(parse('10.35'));
   expect(parse('10.34567').setScale(3)).toEqual(parse('10.346'));
   expect(parse('10.34567').setScale(4)).toEqual(parse('10.3457'));
   expect(parse('10.34567').setScale(5)).toEqual(parse('10.34567'));
@@ -246,7 +246,7 @@ test('set scale', () => {
   expect(parse('1034567').setScale(-6)).toEqual(parse('1e+6'));
   expect(parse('1034567').setScale(-5)).toEqual(parse('10e+5'));
   expect(parse('1034567').setScale(-4)).toEqual(parse('103e+4'));
-  expect(parse('1034567').setScale(-3)).toEqual(parse('1034e+3'));
+  expect(parse('1034567').setScale(-3)).toEqual(parse('1035e+3'));
   expect(parse('1034567').setScale(-2)).toEqual(parse('10346e+2'));
   expect(parse('1034567').setScale(-1)).toEqual(parse('103457e+1'));
   expect(parse('1034567').setScale(0)).toEqual(parse('1034567'));
@@ -263,6 +263,8 @@ test('set scale', () => {
   expect(parse('12345.6781111').setScale(1)).toEqual(parse('12345.7'));
   expect(parse('12345.67811111').setScale(1)).toEqual(parse('12345.7'));
   expect(parse('12345.678111111').setScale(1)).toEqual(parse('12345.7'));
+
+  expect(parse('100599.99').setScale(-3)).toEqual(parse('101e3'));
 });
 
 test('abs', () => {
