@@ -4,7 +4,7 @@
 
 import { makeEnum } from '../../types/enum';
 
-export const [ Script, ScriptValues ] = makeEnum([
+export const [ ScriptId, ScriptIdValues ] = makeEnum([
   'Adlm', 'Afak', 'Aghb', 'Ahom', 'Arab', 'Armi', 'Armn', 'Avst', 'Bali'
 , 'Bamu', 'Bass', 'Batk', 'Beng', 'Bhks', 'Blis', 'Bopo', 'Brah', 'Brai'
 , 'Bugi', 'Buhd', 'Cakm', 'Cans', 'Cari', 'Cham', 'Cher', 'Cirt', 'Copt'
@@ -33,7 +33,7 @@ export const [ Script, ScriptValues ] = makeEnum([
 , 'Zzzz'
 ]);
 
-export type ScriptType = (
+export type ScriptIdType = (
   'Adlm'| 'Afak'| 'Aghb'| 'Ahom'| 'Arab'| 'Armi'| 'Armn'| 'Avst'| 'Bali'
 | 'Bamu'| 'Bass'| 'Batk'| 'Beng'| 'Bhks'| 'Blis'| 'Bopo'| 'Brah'| 'Brai'
 | 'Bugi'| 'Buhd'| 'Cakm'| 'Cans'| 'Cari'| 'Cham'| 'Cher'| 'Cirt'| 'Copt'
@@ -61,7 +61,7 @@ export type ScriptType = (
 | 'Xsux'| 'Yiii'| 'Zanb'| 'Zinh'| 'Zmth'| 'Zsye'| 'Zsym'| 'Zxxx'| 'Zyyy'
 | 'Zzzz');
 
-export const [ Territory, TerritoryValues ] = makeEnum([
+export const [ RegionId, RegionIdValues ] = makeEnum([
   '001', '002', '003', '005', '009', '011', '013', '014', '015', '017', '018'
 , '019', '021', '029', '030', '034', '035', '039', '053', '054', '057', '061'
 , '142', '143', '145', '150', '151', '154', '155', '202', '419', 'AC', 'AD'
@@ -87,7 +87,7 @@ export const [ Territory, TerritoryValues ] = makeEnum([
 , 'VI', 'VN', 'VU', 'WF', 'WS', 'XK', 'YE', 'YT', 'ZA', 'ZM', 'ZW', 'ZZ'
 ]);
 
-export type TerritoryType = (
+export type RegionIdType = (
   '001'| '002'| '003'| '005'| '009'| '011'| '013'| '014'| '015'| '017'| '018'
 | '019'| '021'| '029'| '030'| '034'| '035'| '039'| '053'| '054'| '057'| '061'
 | '142'| '143'| '145'| '150'| '151'| '154'| '155'| '202'| '419'| 'AC'| 'AD'

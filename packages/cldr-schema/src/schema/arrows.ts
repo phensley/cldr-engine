@@ -3,42 +3,42 @@ export type OffsetsMap = { [x: string]: number[] };
 export type KeyIndexMap = [string, number][];
 
 /**
- * Encapsulates a set of strings, providing access to a string
- * at a given offset.
+ * Very low-level access to strings in a bundle. Includes properties
+ * needed to resolve locales within a pack.
  */
-export interface Bundle {
-  bundleId(): string;
+export interface PrimitiveBundle {
+  id(): string;
   language(): string;
   region(): string;
   get(offset: number): string;
 }
 
 export interface DigitsArrow {
-  (bundle: Bundle, digits: number, index: number): string;
+  (bundle: PrimitiveBundle, digits: number, index: number): string;
 }
 
 export interface DivisorArrow {
-  (bundle: Bundle, digits: number): number;
+  (bundle: PrimitiveBundle, digits: number): number;
 }
 
 export interface FieldArrow {
-  (bundle: Bundle): string;
+  (bundle: PrimitiveBundle): string;
 }
 
 export interface FieldIndexedArrow<X extends number> {
-  (bundle: Bundle, index: X): string;
+  (bundle: PrimitiveBundle, index: X): string;
 }
 
 export interface FieldMapArrow<T extends string> {
-  (bundle: Bundle, field: T): string;
+  (bundle: PrimitiveBundle, field: T): string;
 }
 
 export interface FieldMapIndexedArrow<T extends string, X extends number> {
-  (bundle: Bundle, field: T, index: X): string;
+  (bundle: PrimitiveBundle, field: T, index: X): string;
 }
 
 export interface ObjectArrow<T> {
-  (bundle: Bundle): T;
+  (bundle: PrimitiveBundle): T;
 }
 
 export interface ScopeArrow<T extends string, R> {
@@ -46,7 +46,7 @@ export interface ScopeArrow<T extends string, R> {
 }
 
 export const digitsArrow = (table: number[][]): DigitsArrow => {
-  return (bundle: Bundle, digits: number, index: number): string => {
+  return (bundle: PrimitiveBundle, digits: number, index: number): string => {
     if (digits < 1) {
       return '';
     }
@@ -57,7 +57,7 @@ export const digitsArrow = (table: number[][]): DigitsArrow => {
 };
 
 export const divisorArrow = (table: number[]): DivisorArrow => {
-  return (bundle: Bundle, digits: number): number => {
+  return (bundle: PrimitiveBundle, digits: number): number => {
     if (digits < 1) {
       return 0;
     }
@@ -72,25 +72,25 @@ export const fieldArrow = (offset: number): FieldArrow => {
 };
 
 export const fieldIndexedArrow = (offsets: number[]): FieldIndexedArrow<number> => {
-  return (bundle: Bundle, index: number): string => bundle.get(offsets[index]);
+  return (bundle: PrimitiveBundle, index: number): string => bundle.get(offsets[index]);
 };
 
 export const fieldMapArrow = (map: OffsetMap): FieldMapArrow<string> => {
-  return (bundle: Bundle, field: string): string => {
+  return (bundle: PrimitiveBundle, field: string): string => {
     const offset = map[field];
     return offset === undefined ? '' : bundle.get(offset);
   };
 };
 
 export const fieldMapIndexedArrow = (map: OffsetsMap): FieldMapIndexedArrow<string, number> => {
-  return (bundle: Bundle, field: string, index: number): string => {
+  return (bundle: PrimitiveBundle, field: string, index: number): string => {
     const offsets = map[field];
     return offsets === undefined ? '' : bundle.get(offsets[index]);
   };
 };
 
 export const objectMapArrow = (index: KeyIndexMap): ObjectArrow<any> => {
-  return (bundle: Bundle): any => {
+  return (bundle: PrimitiveBundle): any => {
     const o: any = {};
     for (let i = 0; i < index.length; i++) {
       const [key, offset] = index[i];

@@ -1,5 +1,5 @@
-import { gregorianStress } from './gregorian';
+import { calendarStress } from './calendars';
 import { numberStress } from './numbers';
 
-gregorianStress();
+calendarStress();
 numberStress();

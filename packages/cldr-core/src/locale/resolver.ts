@@ -222,6 +222,8 @@ const LIKELY_SUBTAGS_MAP: LikelySubtagsMap = new LikelySubtagsMap(likelySubtags)
 
 /**
  * Methods for substituting language and region aliases, adding likely subtags, etc.
+ *
+ * @alpha
  */
 export class LanguageResolver {
 

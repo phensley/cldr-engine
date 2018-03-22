@@ -45,7 +45,7 @@ export const getCurrencies = (data: any): Code[] => {
   code += '/* tslint:disable-next-line:max-line-length */\n';
   code += `export const currencyFractionsRaw = '${fractions}';\n`;
 
-  result.push(Code.core(['engine', 'numbers', 'autogen.currencies.ts'], code));
+  result.push(Code.core(['internals', 'numbers', 'autogen.currencies.ts'], code));
 
   return result;
 };

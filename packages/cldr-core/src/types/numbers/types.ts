@@ -13,6 +13,9 @@ export const enum RoundingMode {
 export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor'
   | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
 
+/**
+ * @alpha
+ */
 export interface MathContext {
   scale?: number;
   precision?: number;

@@ -70,7 +70,7 @@ export interface NumberSystemNames {
   readonly traditional: NumberSystemName;
 }
 
-export interface Numbers {
+export interface NumbersSchema {
   readonly minimumGroupingDigits: FieldArrow;
   readonly numberSystems: ObjectArrow<NumberSystemNames>;
   readonly numberSystem: ScopeArrow<NumberSystemName, NumberSystemInfo>;

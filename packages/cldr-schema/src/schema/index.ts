@@ -12,23 +12,23 @@ export * from './timezones';
 export * from './units';
 
 import {
-  Currencies,
-  DateFields,
-  Gregorian,
-  Layout,
-  Names,
-  Numbers,
+  CurrenciesSchema,
+  DateFieldsSchema,
+  GregorianSchema,
+  LayoutSchema,
+  NamesSchema,
+  NumbersSchema,
   TimeZoneNames,
-  Units
+  UnitsSchema
 } from '.';
 
 export interface Schema {
-  readonly DateFields: DateFields;
-  readonly Gregorian: Gregorian;
-  readonly Layout: Layout;
-  readonly Names: Names;
-  readonly Numbers: Numbers;
-  readonly Currencies: Currencies;
+  readonly DateFields: DateFieldsSchema;
+  readonly Gregorian: GregorianSchema;
+  readonly Layout: LayoutSchema;
+  readonly Names: NamesSchema;
+  readonly Numbers: NumbersSchema;
+  readonly Currencies: CurrenciesSchema;
   readonly TimeZoneNames: TimeZoneNames;
-  readonly Units: Units;
+  readonly Units: UnitsSchema;
 }

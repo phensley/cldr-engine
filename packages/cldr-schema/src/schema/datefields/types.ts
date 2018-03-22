@@ -27,6 +27,6 @@ export interface RelativeTimes {
   readonly narrow: RelativeFields;
 }
 
-export interface DateFields {
+export interface DateFieldsSchema {
   readonly relativeTimes: ScopeArrow<DateFieldType, RelativeTimes>;
 }

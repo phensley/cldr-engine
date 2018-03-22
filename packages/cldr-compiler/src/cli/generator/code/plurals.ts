@@ -71,6 +71,6 @@ export const getPlurals = (data: any): Code[] => {
   code += formatSource(`export const expressions: string[] = ${JSON.stringify(expressionsSorted)};\n`);
 
   return [
-    Code.core(['engine', 'plurals', 'autogen.rules.ts'], code)
+    Code.core(['internals', 'plurals', 'autogen.rules.ts'], code)
   ];
 };

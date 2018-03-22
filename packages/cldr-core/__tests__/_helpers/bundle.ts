@@ -5,13 +5,13 @@ import * as child from 'child_process';
 import * as zlib from 'zlib';
 
 import { LanguageResolver } from '../../src/locale/resolver';
-import { Pack, ResourceBundle } from '../../src/resource/pack';
+import { Pack, Bundle } from '../../src/resource/pack';
 
 /**
  * Load a resource bundle for a given language. If resource file does
  * not exist it is generated.
  */
-export const languageBundle = (tag: string): ResourceBundle => {
+export const languageBundle = (tag: string): Bundle => {
   const locale = LanguageResolver.resolve(tag);
   const language = locale.language();
   const path = join(__dirname, '..', '..', '..', 'cldr', 'packs', `${language}.json.gz`);

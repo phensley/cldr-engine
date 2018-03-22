@@ -7,24 +7,24 @@ const process = (symbols: any): string[] => {
 
 export const getIdentifiers = (data: any): Code[] => {
   const scripts = process(data.scripts);
-  const territories = process(data.territories);
+  const regions = process(data.territories);
 
   let code = `${HEADER}import { makeEnum } from '../../types/enum';\n\n`;
 
-  code += 'export const [ Script, ScriptValues ] = makeEnum([\n';
+  code += 'export const [ ScriptId, ScriptIdValues ] = makeEnum([\n';
   code += lineWrap(80, ',', scripts);
   code += '\n]);\n\n';
 
-  code += 'export type ScriptType = (\n';
+  code += 'export type ScriptIdType = (\n';
   code += lineWrap(80, '|', scripts);
   code += ');\n\n';
 
-  code += 'export const [ Territory, TerritoryValues ] = makeEnum([\n';
-  code += lineWrap(80, ',', territories);
+  code += 'export const [ RegionId, RegionIdValues ] = makeEnum([\n';
+  code += lineWrap(80, ',', regions);
   code += '\n]);\n\n';
 
-  code += `export type TerritoryType = (\n`;
-  code += lineWrap(80, '|', territories);
+  code += `export type RegionIdType = (\n`;
+  code += lineWrap(80, '|', regions);
   code += ');\n';
 
   return [

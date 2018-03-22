@@ -16,7 +16,7 @@ export interface UnitInfo {
   readonly unitPattern: FieldIndexedArrow<Plural>;
 }
 
-export interface Units {
+export interface UnitsSchema {
   readonly long: ScopeArrow<UnitType, UnitInfo>;
   readonly narrow: ScopeArrow<UnitType, UnitInfo>;
   readonly short: ScopeArrow<UnitType, UnitInfo>;

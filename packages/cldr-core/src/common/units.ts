@@ -1,0 +1,20 @@
+import { UnitType } from '@phensley/cldr-schema';
+import { DecimalFormatOptions } from './numbers';
+import { Decimal } from '../types/numbers';
+
+/**
+ * @alpha
+ */
+export interface Quantity {
+  value: number | string | Decimal;
+  unit?: UnitType;
+}
+
+export type UnitNameLength = 'short' | 'narrow' | 'long';
+
+/**
+ * @alpha
+ */
+export interface UnitFormatOptions extends DecimalFormatOptions {
+  length?: UnitNameLength;
+}

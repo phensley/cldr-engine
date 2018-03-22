@@ -41,6 +41,6 @@ export const getWeekData = (data: any): Code[] => {
   code += `export const weekMinDays: { [x: string]: number } = {${encode(minDays)}};\n`;
 
   return [
-    Code.core(['engine', 'gregorian', 'autogen.weekdata.ts'], code)
+    Code.core(['internals', 'calendars', 'autogen.weekdata.ts'], code)
   ];
 };

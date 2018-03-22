@@ -8,6 +8,6 @@ export interface CurrencyInfo {
   readonly symbol: FieldIndexedArrow<Alt>;
 }
 
-export interface Currencies {
+export interface CurrenciesSchema {
   (code: CurrencyType): CurrencyInfo;
 }

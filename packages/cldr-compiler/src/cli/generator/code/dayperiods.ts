@@ -143,6 +143,6 @@ export const getDayPeriods = (data: any): Code[] => {
   code += '};\n';
 
   return [
-    Code.core(['engine', 'gregorian', 'autogen.dayperiods.ts'], code)
+    Code.core(['internals', 'calendars', 'autogen.dayperiods.ts'], code)
   ];
 };

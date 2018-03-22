@@ -1,16 +1,16 @@
 import { FieldMapArrow, FieldMapIndexedArrow } from '../arrows';
 import { Alt } from '../enums';
-import { ScriptType, TerritoryType } from './autogen.identifiers';
+import { ScriptIdType, RegionIdType } from './autogen.identifiers';
 
 export interface ScriptNameInfo {
-  readonly displayName: FieldMapArrow<ScriptType>;
+  readonly displayName: FieldMapArrow<ScriptIdType>;
 }
 
-export interface TerritoryNameInfo {
-  readonly displayName: FieldMapIndexedArrow<TerritoryType, Alt>;
+export interface RegionNameInfo {
+  readonly displayName: FieldMapIndexedArrow<RegionIdType, Alt>;
 }
 
-export interface Names {
+export interface NamesSchema {
   readonly scripts: ScriptNameInfo;
-  readonly territories: TerritoryNameInfo;
+  readonly regions: RegionNameInfo;
 }

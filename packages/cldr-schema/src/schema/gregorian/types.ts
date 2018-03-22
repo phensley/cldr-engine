@@ -38,7 +38,7 @@ export interface MonthsFormats {
   readonly standAlone: MonthsFormat;
 }
 
-export interface Gregorian {
+export interface GregorianSchema {
   readonly eras: ErasFormat;
   readonly weekdays: WeekdaysFormats;
   readonly months: MonthsFormats;
