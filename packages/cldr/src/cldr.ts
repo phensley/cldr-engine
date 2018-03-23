@@ -1,4 +1,5 @@
 import {
+  Bundle,
   Calendars,
   CalendarsImpl,
   General,
@@ -28,11 +29,41 @@ export const parseLocale = (id: string): Locale => {
 };
 
 /**
+ * Top-level namespace to expose info about the current locale and bundle,
+ * and attach helper methods for dealing with locales.
+ */
+export class Locales {
+
+  constructor(
+    protected readonly _locale: Locale,
+    protected readonly _bundle: Bundle) {}
+
+  bundle(): Bundle {
+    return this._bundle;
+  }
+
+  current(): Locale {
+    return this._locale;
+  }
+
+  resolve(tag: string): Locale {
+    return parseLocale(tag);
+  }
+
+}
+
+/**
  * Interface exporting all functionality for a given locale.
  *
  * @alpha
  */
-export interface CLDRApi {
+export interface CLDR {
+
+  /**
+   * Locale functions.
+   */
+  readonly Locales: Locales;
+
   /**
    * Calendar functions.
    */
@@ -92,7 +123,7 @@ export class CLDROptions {
  *
  * @alpha
  */
-export class CLDR {
+export class CLDRFramework {
 
   protected readonly packCache: LRU<string, Pack>;
   protected readonly loader?: (language: string) => any;
@@ -117,7 +148,7 @@ export class CLDR {
    * a given locale. Mainly used when you want to load a language statically
    * when your application's state store is initialized.
    */
-  get(locale: Locale | string): CLDRApi {
+  get(locale: Locale | string): CLDR {
     if (this.loader === undefined) {
       throw new Error('a synchronous resource loader is not defined');
     }
@@ -137,7 +168,7 @@ export class CLDR {
    * Asynchronously load a bundle and construct an instance of an API for
    * a given locale.
    */
-  getAsync(locale: Locale | string): Promise<CLDRApi> {
+  getAsync(locale: Locale | string): Promise<CLDR> {
     const asyncLoader = this.asyncLoader;
     if (asyncLoader === undefined) {
       throw new Error('a Promise-based resource loader is not defined');
@@ -145,7 +176,7 @@ export class CLDR {
     const resolved = typeof locale === 'string' ? parseLocale(locale) : locale;
     const language = resolved.tag.language();
 
-    const promise = new Promise<CLDRApi>((resolve, reject) => {
+    const promise = new Promise<CLDR>((resolve, reject) => {
       const pack = this.packCache.get(language);
       if (pack !== undefined) {
         resolve(this.build(resolved, pack));
@@ -166,13 +197,14 @@ export class CLDR {
   /**
    * Builds an API instance.
    */
-  protected build(locale: Locale, pack: Pack): CLDRApi {
+  protected build(locale: Locale, pack: Pack): CLDR {
     const bundle = pack.get(locale.tag);
     const privateApi = new PrivateApiImpl(bundle, this.internals);
 
     return {
       Calendars: new CalendarsImpl(bundle, this.internals),
       General: new GeneralImpl(bundle, this.internals),
+      Locales: new Locales(locale, bundle),
       Numbers: new NumbersImpl(bundle, this.internals, privateApi),
       Units: new UnitsImpl(bundle, this.internals, privateApi)
     };

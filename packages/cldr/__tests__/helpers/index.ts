@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 import * as zlib from 'zlib';
 
-import { CLDR, CLDROptions, Pack } from '../../src';
+import { CLDR, CLDRFramework, CLDROptions, Pack } from '../../src';
 
 const packPath = (language: string) => join(__dirname, '..', '..', 'packs', `${language}.json.gz`);
 
@@ -36,4 +36,4 @@ const defaultOptions: CLDROptions = {
   patternCacheSize: 50
 };
 
-export const getCLDR = (options: CLDROptions = defaultOptions): CLDR => new CLDR(options);
+export const getCLDR = (options: CLDROptions = defaultOptions): CLDRFramework => new CLDRFramework(options);

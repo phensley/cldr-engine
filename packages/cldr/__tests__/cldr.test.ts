@@ -1,25 +1,29 @@
 import { getCLDR, loader, asyncLoader } from './helpers';
 
 test('loaders', () => {
-  const cldr = getCLDR();
-  const cldrapi = cldr.get('en');
+  const framework = getCLDR();
+  const api = framework.get('en');
 
-  expect(() => cldr.get('xx')).toThrowError();
+  expect(() => framework.get('xx')).toThrowError();
 
-  expect(cldrapi.General.characterOrder()).toEqual('ltr');
-  expect(cldrapi.General.lineOrder()).toEqual('ttb');
+  expect(api.Locales.current().id).toEqual('en');
+  expect(api.Locales.resolve('zh').tag.expanded()).toEqual('zh-Hans-CN');
+  expect(api.Locales.bundle().id()).toEqual('en-Latn-US');
+
+  expect(api.General.characterOrder()).toEqual('ltr');
+  expect(api.General.lineOrder()).toEqual('ttb');
 
   // TODO:
   // expect(api.Calendars.getMonth('3')).toEqual('March');
 
-  expect(cldr.getAsync('en')).resolves.toEqual(cldrapi);
-  expect(cldr.info()).toEqual('packs loaded: 1');
+  expect(framework.getAsync('en')).resolves.toEqual(api);
+  expect(framework.info()).toEqual('packs loaded: 1');
 
-  cldr.get('es');
-  expect(cldr.info()).toEqual('packs loaded: 2');
-  cldr.get('es');
-  expect(cldr.info()).toEqual('packs loaded: 2');
+  framework.get('es');
+  expect(framework.info()).toEqual('packs loaded: 2');
+  framework.get('es');
+  expect(framework.info()).toEqual('packs loaded: 2');
 
-  expect(cldr.getAsync('xx')).rejects.toContain('no such file');
-  expect(cldr.getAsync('de')).resolves.toBeTruthy();
+  expect(framework.getAsync('xx')).rejects.toContain('no such file');
+  expect(framework.getAsync('de')).resolves.toBeTruthy();
 });
