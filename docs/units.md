@@ -4,12 +4,12 @@ Basic unit formatting accepts a `Quantity` which is a scalar value combined with
 optional, and will fall back to normal decimal number formatting.
 
 ```typescript
-const EN = cldr.get('en-US');
+const cldr = framework.get('en-US');
 
-EN.Units.format({ value: '123', unit: 'meter' });
+cldr.Units.formatQuantity({ value: '123', unit: 'meter' });
 // > "123 meters"
 
-EN.Units.format({ value: '12345', unit: 'meter' }, { style: 'long', minimumFractionDigits: 1 });
+cldr.Units.formatQuantity({ value: '12345', unit: 'meter' }, { style: 'long', minimumFractionDigits: 1 });
 // > "12.3 thousand meters"
 ```
 
@@ -18,10 +18,11 @@ EN.Units.format({ value: '12345', unit: 'meter' }, { style: 'long', minimumFract
 Plural rules are applied to the formatted number to select the appropriate unit pattern.
 
 ```typescript
-EN.Units.format({ value: '1', unit: 'pound'}, { style: 'long' });
+const qty = { value: '1', unit: 'pound'};
+cldr.Units.formatQuantity(qty, { style: 'long' });
 // > "1 pound"
 
-EN.Units.format({ value: '1', unit: 'pound'}, { style: 'long', minimumFractionDigits: 1 });
+cldr.Units.formatQuantity(qty, { style: 'long', minimumFractionDigits: 1 });
 // > "1.0 pounds"
 ```
 
@@ -31,7 +32,7 @@ A sequence of units can be formatted together.
 
 ```typescript
 const quantities = [{ value: '123', unit: 'meter'}, { value: '17.2', unit: 'centimeter' }];
-EN.Units.formatSequence(quantities);
+cldr.Units.formatQuantitySequence(quantities);
 // > "123 meters 17.2 centimeters"
 ```
 
@@ -41,7 +42,7 @@ Both unit and unit sequences can be formatted to a `Part[]` array.
 
 ```typescript
 const quantities = [{ value: '123', unit: 'meter'}, { value: '17.2', unit: 'centimeter' }];
-units.formatSequenceParts(quantities);
+cldr.Units.formatQuantitySequenceToParts(quantities);
 
 [
   { type: 'digits', value: '123' },

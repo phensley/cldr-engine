@@ -6,12 +6,14 @@ import { ZonedDateTime } from '@phensley/cldr';
 // March 5, 2018 3:35:08 PM UTC
 const march5 = new ZonedDateTime(1520282108000, 'America/New_York');
 
-const EN = cldr.get('en');
-EN.Gregorian.format(march5, { date: 'full' });
+let cldr = framework.get('en');
+cldr.Calendars.formatDate(march5, { date: 'full' });
+
 // > "Monday, March 5, 2018"
 
-const ES419 = cldr.get('es-419');
-ES419.Gregorian.format(march5, { date: 'full' });
+cldr = framework.get('es-419');
+cldr.Calendars.formatDate(march5, { date: 'full' });
+
 // > "lunes, 5 de marzo de 2018"
 ```
 
@@ -29,14 +31,14 @@ const day = 86400 * 1000;
 const mar11 = new ZonedDateTime(epoch, LOS_ANGELES);
 const mar14 = new ZonedDateTime(epoch + (3 * day), LOS_ANGELES);
 
-EN.Gregorian.formatInterval(mar11, mar14, 'yMMMd');
+cldr.Calendars.formatDateInterval(mar11, mar14, 'yMMMd');
 // > "Mar 10 – 14, 2018"
 ```
 
-### Formatting as parts
+### Formatting to parts
 
 ```typescript
-EN.Gregorian.formatParts(march5, { date: 'full' });
+cldr.Calendars.formatDateToParts(march5, { date: 'full' });
 
 [
   {type: 'weekday', value: 'Monday'},
@@ -50,7 +52,7 @@ EN.Gregorian.formatParts(march5, { date: 'full' });
 ```
 
 ```typescript
-EN.Gregorian.formatIntervalParts(mar11, mar14, 'yMMMd');
+cldr.Calendars.formatDateIntervalToParts(mar11, mar14, 'yMMMd');
 
 [
   { type: 'month', value: 'Mar' },

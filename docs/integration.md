@@ -105,7 +105,7 @@ See https://github.com/phensley/cldr-engine-react-demo for a demonstration.
 `cldr.ts`:
 ```typescript
 import wretch from 'wretch';
-import { CLDR, CLDROptions } from '@phensley/cldr';
+import { CLDRFramework, CLDROptions } from '@phensley/cldr';
 
 // Import the resource file containing information about the resource packs
 import Resource from '@phensley/cldr/packs/resource.json';
@@ -115,7 +115,7 @@ import Resource from '@phensley/cldr/packs/resource.json';
 // matching version in the path.
 const version = Resource.sha256.substring(0, 10);
 
-// Import default language English directly
+// Import default language directly so it's always available
 import EnglishPack from '@phensley/cldr/packs/en.json';
 
 // Load English synchronously (see below)
@@ -132,7 +132,6 @@ const asyncLoader = (language: string): Promise<any> => {
 };
 
 const options: CLDROptions = {
-
   // Sync blocking loader function
   loader,
 
@@ -148,10 +147,10 @@ const options: CLDROptions = {
 };
 
 // Global instance of cldr configured for our app
-export const cldr = new CLDR(options);
+export const framework = new CLDRFramework(options);
 
 // Default cldr engine to be set in the locale store.
-export const English = cldr.get('en');
+export const English = framework.get('en');
 ```
 
 If you're using Redux you might want to place the current language and `Engine` instance into the store. Any components using this store will update when the language changes.
@@ -159,23 +158,25 @@ If you're using Redux you might want to place the current language and `Engine` 
 Below is an example showing the use of Redux Sagas to asynchronously switch languages by firing the `locale/change` action.
 
 ```typescript
+import { Locale } from '@phensley/cldr';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { Action } from '../actions';
-import { cldr } from '../locale';
+import { Action, ActionType } from '../actions';
+import { framework } from '../locale';
 
-const getLanguage = (language: string) => cldr.getAsync(language);
+const get = (locale: Locale) => framework.getAsync(locale);
 
-export function* changeLocale(action: Action<string>): IterableIterator<any> {
-  const language = action.payload;
+export function* changeLocale(action: Action<Locale>): IterableIterator<any> {
+  const locale = action.payload;
   try {
-    const request = yield call(getLanguage, language);
-    yield put({ type: 'locale/updateEngine', payload: request });
+    const request = yield call(get, locale);
+    yield put({ type: ActionType.LOCALE_UPDATE, payload: request });
   } catch (e) {
-    yield put({ type: 'locale/invalidLanguage', language });
+    yield call(console.warn, e);
+    yield put({ type: ActionType.LOCALE_INVALID, locale });
   }
 }
 
 export function* localeSaga(): IterableIterator<any> {
-  yield takeEvery('locale/change', changeLocale);
+  yield takeEvery(ActionType.LOCALE_CHANGE, changeLocale);
 }
 ```

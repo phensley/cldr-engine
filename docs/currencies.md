@@ -27,10 +27,10 @@ EN.Numbers.formatCurrency('999999.9', 'USD', { style: 'short' });
 // > "$1M"
 ```
 
-### Formatting as parts
+### Formatting to parts
 
 ```typescript
-EN.Numbers.formatCurrencyParts('12345.234', 'BAD', { style: 'symbol', group: true });
+EN.Numbers.formatCurrencyToParts('12345.234', 'BAD', { style: 'symbol', group: true });
 ```
 Produces:
 ```javascript

@@ -34,7 +34,7 @@ This project is **currently in pre-ALPHA** and under active development, with th
 * [Date-time with timezone](docs/datetime.md)
 * [Number](docs/numbers.md) formatting to strings, parts, arbitrary precision
 * [Currency](docs/currencies.md) formatting to strings, parts, arbitrary precision
-* [Gregorian date](docs/gregorian.md) formatting to strings, parts
+* [Calendar](docs/calendars.md) date time, formatting to strings, parts
 * [Relative time](docs/relative-times.md) formatting, e.g. "1 month ago", "tomorrow", "in 1 hour", etc.
 * [Names of things](docs/names.md), languages, places, etc
 * [Units](docs/units.md) formatting quantities in units (e.g. meters, pounds, etc)
