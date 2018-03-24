@@ -1,4 +1,4 @@
-import { Decimal, RoundingMode, MathContext } from '../../../src/types/numbers';
+import { Decimal, MathContext } from '../../../src/types/numbers';
 
 const parse = (s: string) => new Decimal(s);
 const div = (u: string, v: string, c?: MathContext) => parse(u).divide(parse(v), c);
@@ -25,7 +25,7 @@ test('divide default', () => {
 });
 
 test('divide half even', () => {
-  const halfEven = (precision: number): MathContext => ({ precision, rounding: 'half-even' });
+  const halfEven = (precision: number): MathContext => ({ precision, round: 'half-even' });
 
   expect(div('12', '3', halfEven(0))).toEqual(parse('0e1'));
   expect(div('12', '3', halfEven(1))).toEqual(parse('4'));

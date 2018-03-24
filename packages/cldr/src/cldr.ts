@@ -31,6 +31,8 @@ export const parseLocale = (id: string): Locale => {
 /**
  * Top-level namespace to expose info about the current locale and bundle,
  * and attach helper methods for dealing with locales.
+ *
+ * @alpha
  */
 export class Locales {
 
@@ -38,14 +40,23 @@ export class Locales {
     protected readonly _locale: Locale,
     protected readonly _bundle: Bundle) {}
 
+  /**
+   * The current language bundle.
+   */
   bundle(): Bundle {
     return this._bundle;
   }
 
+  /**
+   * The current locale.
+   */
   current(): Locale {
     return this._locale;
   }
 
+  /**
+   * Resolve a language tag to a Locale.
+   */
   resolve(tag: string): Locale {
     return parseLocale(tag);
   }

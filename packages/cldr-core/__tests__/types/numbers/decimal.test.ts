@@ -1,4 +1,4 @@
-import { Decimal, RoundingMode } from '../../../src/types/numbers';
+import { Decimal, RoundingModeType } from '../../../src/types/numbers';
 import { DivMod } from '../../../src/types/numbers/math';
 
 const parse = (s: string) => new Decimal(s);
@@ -6,7 +6,7 @@ const cmp = (u: string, v: string, abs: boolean = false) => parse(u).compare(par
 const precision = (u: string) => parse(u).precision();
 const scale = (u: string) => parse(u).scale();
 const trailZeros = (u: string) => parse(u).trailingZeros();
-const shr = (u: string, s: number, m: RoundingMode) => parse(u).shiftright(s, m);
+const shr = (u: string, s: number, m: RoundingModeType) => parse(u).shiftright(s, m);
 
 test('parse', () => {
   expect(parse('0')).toEqual({ data: [], exp: 0, sign: 0 });
@@ -368,7 +368,7 @@ test('shift left', () => {
 });
 
 test('shift right', () => {
-  const m = RoundingMode.HALF_EVEN;
+  const m: RoundingModeType = 'half-even';
   expect(shr('155.578', 1, m)).toEqual(parse('155.58'));
   expect(shr('155.578', 2, m)).toEqual(parse('155.6'));
   expect(shr('155.578', 3, m)).toEqual(parse('156'));
@@ -410,7 +410,7 @@ test('shift right', () => {
 });
 
 test('shift right rounding modes', () => {
-  let m = RoundingMode.UP;
+  let m: RoundingModeType = 'up';
   expect(shr('5.5', 1, m)).toEqual(parse('6'));
   expect(shr('2.5', 1, m)).toEqual(parse('3'));
   expect(shr('1.6', 1, m)).toEqual(parse('2'));
@@ -422,7 +422,7 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-3'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-6'));
 
-  m = RoundingMode.DOWN;
+  m = 'down';
   expect(shr('5.5', 1, m)).toEqual(parse('5'));
   expect(shr('2.5', 1, m)).toEqual(parse('2'));
   expect(shr('1.6', 1, m)).toEqual(parse('1'));
@@ -434,7 +434,7 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-5'));
 
-  m = RoundingMode.TRUNCATE;
+  m = 'truncate';
   expect(shr('5.5', 1, m)).toEqual(parse('5'));
   expect(shr('2.5', 1, m)).toEqual(parse('2'));
   expect(shr('1.6', 1, m)).toEqual(parse('1'));
@@ -446,7 +446,7 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-5'));
 
-  m = RoundingMode.CEILING;
+  m = 'ceiling';
   expect(shr('5.5', 1, m)).toEqual(parse('6'));
   expect(shr('2.5', 1, m)).toEqual(parse('3'));
   expect(shr('1.6', 1, m)).toEqual(parse('2'));
@@ -458,7 +458,7 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-5'));
 
-  m = RoundingMode.FLOOR;
+  m = 'floor';
   expect(shr('5.5', 1, m)).toEqual(parse('5'));
   expect(shr('2.5', 1, m)).toEqual(parse('2'));
   expect(shr('1.6', 1, m)).toEqual(parse('1'));
@@ -470,7 +470,7 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-3'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-6'));
 
-  m = RoundingMode.HALF_UP;
+  m = 'half-up';
   expect(shr('5.5', 1, m)).toEqual(parse('6'));
   expect(shr('2.5', 1, m)).toEqual(parse('3'));
   expect(shr('1.6', 1, m)).toEqual(parse('2'));
@@ -482,7 +482,7 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-3'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-6'));
 
-  m = RoundingMode.HALF_DOWN;
+  m = 'half-down';
   expect(shr('5.5', 1, m)).toEqual(parse('5'));
   expect(shr('2.5', 1, m)).toEqual(parse('2'));
   expect(shr('1.6', 1, m)).toEqual(parse('2'));
@@ -494,7 +494,7 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-5'));
 
-  m = RoundingMode.HALF_EVEN;
+  m = 'half-even';
   expect(shr('5.5', 1, m)).toEqual(parse('6'));
   expect(shr('2.5', 1, m)).toEqual(parse('2'));
   expect(shr('1.6', 1, m)).toEqual(parse('2'));
@@ -506,7 +506,7 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-6'));
 
-  m = RoundingMode.ZERO_FIVE_UP;
+  m = '05up';
   expect(shr('5.5', 1, m)).toEqual(parse('6'));
   expect(shr('2.5', 1, m)).toEqual(parse('2'));
   expect(shr('1.6', 1, m)).toEqual(parse('1'));

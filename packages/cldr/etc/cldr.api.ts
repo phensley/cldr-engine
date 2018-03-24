@@ -1,11 +1,20 @@
 // @alpha
-class CLDR {
+interface CLDR {
+  readonly Calendars: Calendars;
+  readonly General: General;
+  readonly Locales: Locales;
+  readonly Numbers: Numbers;
+  readonly Units: Units;
+}
+
+// @alpha
+class CLDRFramework {
   constructor(options: CLDROptions);
   // (undocumented)
   protected readonly asyncLoader?: (language: string) => Promise<any>;
-  protected build(locale: Locale, pack: Pack): CLDRApi;
-  get(locale: Locale | string): CLDRApi;
-  getAsync(locale: Locale | string): Promise<CLDRApi>;
+  protected build(locale: Locale, pack: Pack): CLDR;
+  get(locale: Locale | string): CLDR;
+  getAsync(locale: Locale | string): Promise<CLDR>;
   // (undocumented)
   info(): string;
   // (undocumented)
@@ -16,14 +25,6 @@ class CLDR {
   protected readonly options: CLDROptions;
   // (undocumented)
   protected readonly packCache: LRU<string, Pack>;
-}
-
-// @alpha
-interface CLDRApi {
-  readonly Calendars: Calendars;
-  readonly General: General;
-  readonly Numbers: Numbers;
-  readonly Units: Units;
 }
 
 // @alpha
@@ -163,12 +164,24 @@ class LocaleMatcher {
   match(desiredLocales: string | string[], threshold?: number): LanguageMatch;
 }
 
-// @alpha (undocumented)
+// @alpha
+class Locales {
+  constructor(_locale: Locale, _bundle: Bundle);
+  // (undocumented)
+  protected readonly _bundle: Bundle;
+  // (undocumented)
+  protected readonly _locale: Locale;
+  bundle(): Bundle;
+  current(): Locale;
+  resolve(tag: string): Locale;
+}
+
+// @alpha
 interface MathContext {
   // (undocumented)
   precision?: number;
   // (undocumented)
-  rounding?: RoundingModeType;
+  round?: RoundingModeType;
   // (undocumented)
   scale?: number;
 }
@@ -232,7 +245,7 @@ interface RelativeTimeFormatOptions {
 // @alpha (undocumented)
 interface UnitFormatOptions extends DecimalFormatOptions {
   // (undocumented)
-  length?: UnitNameLength;
+  length?: UnitLength;
 }
 
 // @alpha
@@ -283,9 +296,10 @@ class ZonedDateTime {
 // WARNING: Unsupported export: DecimalConstants
 // WARNING: Unsupported export: DecimalFormatStyleType
 // WARNING: Unsupported export: FormatWidthType
+// WARNING: Unsupported export: ListPatternType
 // WARNING: Unsupported export: RationalArg
 // WARNING: Unsupported export: RegionIdType
 // WARNING: Unsupported export: ScriptIdType
-// WARNING: Unsupported export: UnitNameLength
+// WARNING: Unsupported export: UnitLength
 // WARNING: Unsupported export: UnitType
 // (No @packagedocumentation comment for this package)

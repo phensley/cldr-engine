@@ -1,9 +1,5 @@
-import {
-  NumberFormatOptions,
-  RoundingModeType
-} from '../../common';
-
-import { Decimal, RoundingMode } from  '../../types/numbers';
+import { NumberFormatOptions } from '../../common';
+import { Decimal, RoundingModeType } from  '../../types/numbers';
 import { NumberPattern } from '../../parsing/patterns/number';
 
 /**

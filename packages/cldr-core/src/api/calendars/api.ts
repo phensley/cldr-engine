@@ -85,12 +85,12 @@ export class CalendarsImpl implements Calendars {
   // TODO: Support context transforms, context-sensitive fields
   // https://www.unicode.org/reports/tr35/tr35-dates.html#months_days_quarters_eras
 
-  formatDate(date: ZonedDateTime, options: DateFormatOptions = {}): string {
-    return this.calendar.formatDate(this.bundle, date, options);
+  formatDate(date: ZonedDateTime, options?: DateFormatOptions): string {
+    return this.calendar.formatDate(this.bundle, date, options || {});
   }
 
-  formatDateToParts(date: ZonedDateTime, options: DateFormatOptions = {}): Part[] {
-    return this.calendar.formatDateToParts(this.bundle, date, options);
+  formatDateToParts(date: ZonedDateTime, options?: DateFormatOptions): Part[] {
+    return this.calendar.formatDateToParts(this.bundle, date, options || {});
   }
 
   formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): string {
@@ -115,7 +115,8 @@ export class CalendarsImpl implements Calendars {
   // }
 
   formatRelativeTimeField(
-    value: DecimalArg, field: DateFieldType, options: RelativeTimeFormatOptions = { width: 'wide' }): string {
+    value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string {
+    options = options || { width: 'wide' };
     return this.dateFields.formatRelativeTime(this.bundle, value, field, options);
   }
 

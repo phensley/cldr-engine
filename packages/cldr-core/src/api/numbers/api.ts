@@ -72,24 +72,24 @@ export class NumbersImpl implements Numbers {
     return pluralString(cat);
   }
 
-  formatDecimal(n: DecimalArg, options: DecimalFormatOptions = {}): string {
+  formatDecimal(n: DecimalArg, options?: DecimalFormatOptions): string {
     const renderer = this.numbers.stringRenderer();
-    return this.formatDecimalImpl(n, renderer, options);
+    return this.formatDecimalImpl(n, renderer, options || {});
   }
 
-  formatDecimalToParts(n: DecimalArg, options: DecimalFormatOptions = {}): Part[] {
+  formatDecimalToParts(n: DecimalArg, options?: DecimalFormatOptions): Part[] {
     const renderer = this.numbers.partsRenderer();
-    return this.formatDecimalImpl(n, renderer, options);
+    return this.formatDecimalImpl(n, renderer, options || {});
   }
 
-  formatCurrency(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions = {}): string {
+  formatCurrency(n: DecimalArg, code: CurrencyType, options?: CurrencyFormatOptions): string {
     const renderer = this.numbers.stringRenderer();
-    return this.formatCurrencyImpl(renderer, n, code, options);
+    return this.formatCurrencyImpl(renderer, n, code, options || {});
   }
 
-  formatCurrencyToParts(n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions = {}): Part[] {
+  formatCurrencyToParts(n: DecimalArg, code: CurrencyType, options?: CurrencyFormatOptions): Part[] {
     const renderer = this.numbers.partsRenderer();
-    return this.formatCurrencyImpl(renderer, n, code, options);
+    return this.formatCurrencyImpl(renderer, n, code, options || {});
   }
 
   protected formatDecimalImpl<T>(n: DecimalArg, renderer: NumberRenderer<T>, options: DecimalFormatOptions): T {

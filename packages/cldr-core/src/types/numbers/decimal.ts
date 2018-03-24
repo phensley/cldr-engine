@@ -9,7 +9,6 @@ import {
   ParseState,
   ParseFlags,
   POWERS10,
-  RoundingMode,
   MathContext,
   RoundingModeType
 } from './types';
@@ -40,8 +39,8 @@ const parseMathContext = (rounding: RoundingModeType, context?: MathContext): [b
     } else if (context.precision !== undefined) {
       scaleprec = Math.max(context.precision, 0);
     }
-    if (context.rounding !== undefined) {
-      rounding = context.rounding;
+    if (context.round !== undefined) {
+      rounding = context.round;
     }
   }
   return [usePrecision, scaleprec, rounding];
@@ -178,7 +177,7 @@ export class Decimal {
    * Return the integer part.
    */
   toInteger(): Decimal {
-    return this.setScale(0, RoundingMode.TRUNCATE);
+    return this.setScale(0, 'truncate');
   }
 
   /**
@@ -355,7 +354,7 @@ export class Decimal {
    */
   stripTrailingZeros(): Decimal {
     const n = this.trailingZeros();
-    return n > 0 ? this.shiftright(n, RoundingMode.TRUNCATE) : new Decimal(this);
+    return n > 0 ? this.shiftright(n, 'truncate') : new Decimal(this);
   }
 
   /**
@@ -386,7 +385,7 @@ export class Decimal {
   /**
    * Returns a new number with the given scale, shifting the coefficient as needed.
    */
-  setScale(scale: number, roundingMode: RoundingModeType = RoundingMode.HALF_EVEN): Decimal {
+  setScale(scale: number, roundingMode: RoundingModeType = 'half-even'): Decimal {
     const diff = scale - this.scale();
     const r = diff > 0 ? this.shiftleft(diff) : this.shiftright(-diff, roundingMode);
     r.exp = scale === 0 ? 0 : -scale;
@@ -473,7 +472,7 @@ export class Decimal {
    * Shifts all digits to the right, reducing the precision. Result is rounded
    * using the given rounding mode.
    */
-  shiftright(shift: number, mode: RoundingModeType = RoundingMode.HALF_EVEN): Decimal {
+  shiftright(shift: number, mode: RoundingModeType = 'half-even'): Decimal {
     const w = new Decimal(this);
     if (shift <= 0 || w.sign === 0) {
       return w;
@@ -758,29 +757,29 @@ export class Decimal {
       rnd++;
     }
     switch (mode) {
-    case RoundingMode.UP:
+    case 'up':
       // round away from zero
       return Number(rnd !== 0);
-    case RoundingMode.DOWN:
-    case RoundingMode.TRUNCATE:
+    case 'down':
+    case 'truncate':
       // round towards zero
       return 0;
-    case RoundingMode.CEILING:
+    case 'ceiling':
       // round towards positive infinity
       return Number(!(rnd === 0 || this.sign === -1));
-    case RoundingMode.FLOOR:
+    case 'floor':
       // round towards negative infinity
       return Number(!(rnd === 0 || this.sign >= 0));
-    case RoundingMode.HALF_UP:
+    case 'half-up':
       // if n >= 5 round up; otherwise round down
       return Number(rnd >= 5);
-    case RoundingMode.HALF_DOWN:
+    case 'half-down':
       // if n > 5 round up; otherwise round down
       return Number(rnd > 5);
-    case RoundingMode.HALF_EVEN:
+    case 'half-even':
       // if n = 5 and digit to left of n is odd round up; if even round down
       return Number((rnd > 5) || ((rnd === 5 && this.isodd())));
-    case RoundingMode.ZERO_FIVE_UP:
+    case '05up':
     {
       // round away from zero if digit to left is is 0 or 5
       // otherwise round towards zero

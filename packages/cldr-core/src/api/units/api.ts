@@ -25,29 +25,33 @@ export class UnitsImpl implements Units {
     this.units = internal.units;
   }
 
-  getUnitDisplayName(name: UnitType, length: UnitLength = 'long'): string {
-    return this.units.getDisplayName(this.bundle, name, length as string);
+  getUnitDisplayName(name: UnitType, length?: UnitLength): string {
+    return this.units.getDisplayName(this.bundle, name, length || 'long');
   }
 
-  formatQuantity(q: Quantity, options: UnitFormatOptions = defaultOptions): string {
+  formatQuantity(q: Quantity, options?: UnitFormatOptions): string {
+    options = options || defaultOptions;
     const params = this.privateApi.getNumberParams(options.nu);
     const renderer = this.numbers.stringRenderer();
     return this.units.format(this.bundle, renderer, q, options, params);
   }
 
-  formatQuantityToParts(q: Quantity, options: UnitFormatOptions = defaultOptions): Part[] {
+  formatQuantityToParts(q: Quantity, options?: UnitFormatOptions): Part[] {
+    options = options || defaultOptions;
     const params = this.privateApi.getNumberParams(options.nu);
     const renderer = this.numbers.partsRenderer();
     return this.units.format(this.bundle, renderer, q, options, params);
   }
 
-  formatQuantitySequence(qs: Quantity[], options: UnitFormatOptions = defaultOptions): string {
+  formatQuantitySequence(qs: Quantity[], options?: UnitFormatOptions): string {
+    options = options || defaultOptions;
     const items = qs.map(q => this.formatQuantity(q, options));
     const type = this.selectListType(options);
     return this.general.formatList(this.bundle, items, type);
   }
 
-  formatQuantitySequenceToParts(qs: Quantity[], options: UnitFormatOptions = defaultOptions): Part[] {
+  formatQuantitySequenceToParts(qs: Quantity[], options?: UnitFormatOptions): Part[] {
+    options = options || defaultOptions;
     const parts: Part[][] = qs.map(q => this.formatQuantityToParts(q, options));
     const type = this.selectListType(options);
     return this.general.formatListToPartsImpl(this.bundle, parts, type);

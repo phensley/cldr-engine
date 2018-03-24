@@ -1,25 +1,15 @@
-export const enum RoundingMode {
-  UP = 'up',
-  DOWN = 'down',
-  CEILING = 'ceiling',
-  FLOOR = 'floor',
-  HALF_UP = 'half-up',
-  HALF_DOWN = 'half-down',
-  HALF_EVEN = 'half-even',
-  ZERO_FIVE_UP = '05up',
-  TRUNCATE = 'truncate'
-}
-
 export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor'
   | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
 
 /**
+ * Sets the scale or precision, and the rounding mode for a math operation.
+ *
  * @alpha
  */
 export interface MathContext {
   scale?: number;
   precision?: number;
-  rounding?: RoundingModeType;
+  round?: RoundingModeType;
 }
 
 export const enum Constants {
