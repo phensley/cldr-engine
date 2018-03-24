@@ -281,6 +281,26 @@ const LanguageMatching = {
   paradigmLocales: get([_languageMatching, 'paradigmLocales'])
 };
 
+const listPatternKeys = [
+  ['standard', 'and'],
+  ['standard-short', 'andShort'],
+  ['or', 'or'],
+  ['unit', 'unitLong'],
+  ['unit-narrow', 'unitNarrow'],
+  ['unit-short', 'unitShort']
+];
+
+const listPattern = (o: any): any => {
+  const res: any = {};
+  listPatternKeys.forEach(([ext, key]) => {
+    const k = `listPattern-type-${ext}`;
+    const v = o[k];
+    v['two'] = v['2'];
+    res[key] = v;
+  });
+  return res;
+};
+
 /**
  * Metazone data.
  */
@@ -439,8 +459,8 @@ export const getMain = (language: string) => {
 
     ...access({ Characters: get(['characters']) }, 'characters'),
     ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies'),
-    ...access({ ListPatterns: get(['listPatterns']) }, 'listPatterns'),
     ...access({ ContextTransforms: get(['contextTransforms']) }, 'contextTransforms', true),
+    ...access({ ListPatterns: get(['listPatterns', listPattern]) }, 'listPatterns'),
     ...access({ Territories: get(['localeDisplayNames']) }, 'territories')
   };
 };

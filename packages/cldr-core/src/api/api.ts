@@ -14,10 +14,11 @@ import {
   CurrencySymbolWidthType,
   DecimalFormatOptions,
   DateFormatOptions,
+  ListPatternType,
   Quantity,
   RelativeTimeFormatOptions,
   UnitFormatOptions,
-  UnitNameLength
+  UnitLength
 } from '../common';
 
 import { DecimalArg, Part, ZonedDateTime } from '../types';
@@ -101,11 +102,18 @@ export interface General {
    */
   lineOrder(): LineOrderType;
 
-  // TODO:
-  // formatList(items: string[], type: ListType);
+  /**
+   * Format a list of items to string using the given list type.
+   */
+  formatList(items: string[], type?: ListPatternType): string;
+
+  /**
+   * Format a list of items to an array of parts using the given list type.
+   */
+  formatListToParts(items: string[], type?: ListPatternType): Part[];
 
   // TODO:
-  // formatListToParts(items: Part[][], type: ListType);
+  // formatPersonList
 
   /**
    * Returns the display name for the given script code.
@@ -202,6 +210,6 @@ export interface Units {
   /**
    * Returns the display name for the given unit.
    */
-  getUnitDisplayName(name: UnitType, length?: UnitNameLength): string;
+  getUnitDisplayName(name: UnitType, length?: UnitLength): string;
 
 }

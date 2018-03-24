@@ -3,5 +3,6 @@
 // NOTE: private.ts is not exported here
 
 export * from './calendars';
+export * from './general';
 export * from './numbers';
 export * from './units';

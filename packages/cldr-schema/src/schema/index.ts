@@ -16,6 +16,7 @@ import {
   DateFieldsSchema,
   GregorianSchema,
   LayoutSchema,
+  ListPatternsSchema,
   NamesSchema,
   NumbersSchema,
   TimeZoneNames,
@@ -26,6 +27,7 @@ export interface Schema {
   readonly DateFields: DateFieldsSchema;
   readonly Gregorian: GregorianSchema;
   readonly Layout: LayoutSchema;
+  readonly ListPatterns: ListPatternsSchema;
   readonly Names: NamesSchema;
   readonly Numbers: NumbersSchema;
   readonly Currencies: CurrenciesSchema;

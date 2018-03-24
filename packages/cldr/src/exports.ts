@@ -27,7 +27,7 @@ export {
   RelativeTimeFormatOptions,
   ScriptIdType,
   UnitFormatOptions,
-  UnitNameLength,
+  UnitLength,
   UnitType,
   ZonedDateTime
 } from '@phensley/cldr-core';

@@ -11,7 +11,8 @@ A more complete documentation site is being planned.
 * [Calendar](calendars.md) date time, formatting to strings, parts
 * [Relative time](relative-times.md) formatting, e.g. "1 month ago", "tomorrow", "in 1 hour", etc.
 * [Names of things](names.md), languages, places, etc
-* [Units](units.md) formatting quantities in units (e.g. meters, pounds, etc)
+* [Units](units.md) formatting quantities in units (e.g. meters, pounds, etc), sequences
+* [Lists](lists.md) of items with AND and OR
 
 #### Todo
 

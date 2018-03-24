@@ -119,7 +119,38 @@ test('format sequence string', () => {
 
   u = [{ value: '123', unit: 'meter'}, { value: '17.2', unit: 'centimeter' }];
   s = api.formatQuantitySequence(u);
-  expect(s).toEqual('123 meters 17.2 centimeters');
+  expect(s).toEqual('123 meters, 17.2 centimeters');
+
+  s = api.formatQuantitySequence(u, { length: 'short' });
+  expect(s).toEqual('123 m, 17.2 cm');
+
+  s = api.formatQuantitySequence(u, { length: 'narrow' });
+  expect(s).toEqual('123m 17.2cm');
+
+  u = [
+    { value: '312', unit: 'degree' },
+    { value: '1', unit: 'arc-minute' },
+    { value: '17', unit: 'arc-second' }
+  ];
+
+  s = api.formatQuantitySequence(u);
+  expect(s).toEqual('312 degrees, 1 arcminute, 17 arcseconds');
+
+  s = api.formatQuantitySequence(u, { length: 'short' });
+  expect(s).toEqual('312 deg, 1 arcmin, 17 arcsecs');
+
+  s = api.formatQuantitySequence(u, { length: 'narrow' });
+  expect(s).toEqual('312° 1′ 17″');
+
+  u = [{ value: '312', unit: 'foot' }, { value: '59', unit: 'inch' }];
+  s = api.formatQuantitySequence(u);
+  expect(s).toEqual('312 feet, 59 inches');
+
+  s = api.formatQuantitySequence(u, { length: 'short' });
+  expect(s).toEqual('312 ft, 59 in');
+
+  s = api.formatQuantitySequence(u, { length: 'narrow' });
+  expect(s).toEqual('312′ 59″');
 });
 
 test('format sequence parts', () => {
@@ -132,10 +163,20 @@ test('format sequence parts', () => {
   expect(p).toEqual([
     { type: 'digits', value: '123' },
     { type: 'literal', value: ' meters'},
-    { type: 'literal', value: ' '},
+    { type: 'literal', value: ', '},
     { type: 'digits', value: '17' },
     { type: 'decimal', value: '.'},
     { type: 'digits', value: '2'},
     { type: 'literal', value: ' centimeters'}
+  ]);
+
+  u = [{ value: '312', unit: 'foot' }, { value: '59', unit: 'inch' }];
+  p = api.formatQuantitySequenceToParts(u, { length: 'narrow' });
+  expect(p).toEqual([
+    { type: 'digits', value: '312' },
+    { type: 'literal', value: '′' },
+    { type: 'literal', value: ' '},
+    { type: 'digits', value: '59' },
+    { type: 'literal', value: '″' }
   ]);
 });

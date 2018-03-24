@@ -3,7 +3,7 @@ export * from './instructions';
 import { origin, Origin } from './instructions';
 import { CURRENCIES } from './currencies';
 import { DATEFIELDS } from './datefields';
-import { LAYOUT } from './general';
+import { LAYOUT, LIST_PATTERNS } from './general';
 import { GREGORIAN } from './gregorian';
 import { NAMES } from './names';
 import { NUMBERS } from './numbers';
@@ -15,6 +15,7 @@ export const ORIGIN: Origin = origin([
   NUMBERS,
   DATEFIELDS,
   LAYOUT,
+  LIST_PATTERNS,
   GREGORIAN,
   CURRENCIES,
   TIME_ZONE_NAMES,

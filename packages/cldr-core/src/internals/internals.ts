@@ -15,6 +15,7 @@ import {
   CurrencyFormatOptions,
   DateFormatOptions,
   DecimalFormatOptions,
+  ListPatternType,
   NumberSystemType,
   Quantity,
   RelativeTimeFormatOptions,
@@ -44,6 +45,12 @@ export interface DateFieldInternals {
 export interface GeneralInternals {
   characterOrder(bundle: Bundle): string;
   lineOrder(bundle: Bundle): string;
+  formatList(bundle: Bundle, items: string[], type: ListPatternType): string;
+  formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[];
+  formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[];
+  // TODO:
+  // formatPersonList
+  // formatPersonListToParts
   getScriptDisplayName(bundle: Bundle, code: string): string;
   getRegionDisplayName(bundle: Bundle, code: string, alt?: Alt): string;
 }
@@ -80,7 +87,6 @@ export interface NumberInternals {
     options: CurrencyFormatOptions, params: NumberParams): T;
   getCurrency(code: CurrencyType): CurrencyInfo;
   getCurrencyPluralName(bundle: Bundle, code: string, plural: Plural): string;
-  // getNumberParams(numberSystem?: NumberSystemType): NumberParams;
   getNumberPattern(raw: string, negative: boolean): NumberPattern;
 }
 

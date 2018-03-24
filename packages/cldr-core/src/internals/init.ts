@@ -39,7 +39,7 @@ export class InternalsImpl implements Internals {
 
     this.calendars = new CalendarInternalsImpl(this.schema, this.wrapper, patternCacheSize);
     this.dateFields = new DateFieldInternalsImpl(this.schema, this.plurals, this.wrapper);
-    this.general = new GeneralInternalsImpl(this.schema, patternCacheSize);
+    this.general = new GeneralInternalsImpl(this.schema, this.wrapper, patternCacheSize);
     this.numbers = new NumberInternalsImpl(this.schema, this.plurals, this.wrapper);
     this.units = new UnitsInternalImpl(this.schema, this.numbers, this.wrapper, patternCacheSize);
   }

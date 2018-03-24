@@ -7,7 +7,9 @@ import {
 } from '@phensley/cldr-schema';
 
 import { General } from '../api';
+import { ListPatternType } from '../../common';
 import { Bundle } from '../../resource';
+import { Part } from '../../types';
 import { GeneralInternals, Internals } from '../../internals';
 
 export class GeneralImpl implements General {
@@ -27,6 +29,14 @@ export class GeneralImpl implements General {
 
   lineOrder(): LineOrderType {
     return this.general.lineOrder(this.bundle) as LineOrderType;
+  }
+
+  formatList(items: string[], type?: ListPatternType): string {
+    return this.general.formatList(this.bundle, items, type || 'and');
+  }
+
+  formatListToParts(items: string[], type?: ListPatternType): Part[] {
+    return this.general.formatListToParts(this.bundle, items, type || 'and');
   }
 
   getScriptDisplayName(code: ScriptIdType | string): string {

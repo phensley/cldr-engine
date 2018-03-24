@@ -10,11 +10,11 @@ export interface Quantity {
   unit?: UnitType;
 }
 
-export type UnitNameLength = 'short' | 'narrow' | 'long';
+export type UnitLength = 'short' | 'narrow' | 'long';
 
 /**
  * @alpha
  */
 export interface UnitFormatOptions extends DecimalFormatOptions {
-  length?: UnitNameLength;
+  length?: UnitLength;
 }

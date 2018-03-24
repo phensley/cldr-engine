@@ -1,8 +1,8 @@
 import { UnitType } from '@phensley/cldr-schema';
 
 import { Units } from '../api';
-import { Internals, NumberInternals, UnitInternals } from '../../internals';
-import { UnitFormatOptions, UnitNameLength, Quantity } from '../../common';
+import { GeneralInternals, Internals, NumberInternals, UnitInternals } from '../../internals';
+import { Quantity, ListPatternType, UnitFormatOptions, UnitLength } from '../../common';
 import { Part } from '../../types';
 import { Bundle } from '../../resource';
 import { PrivateApiImpl } from '../private';
@@ -11,6 +11,7 @@ const defaultOptions: UnitFormatOptions = { length: 'long', style: 'decimal' };
 
 export class UnitsImpl implements Units {
 
+  private general: GeneralInternals;
   private numbers: NumberInternals;
   private units: UnitInternals;
 
@@ -19,11 +20,12 @@ export class UnitsImpl implements Units {
     protected internal: Internals,
     protected privateApi: PrivateApiImpl
   ) {
+    this.general = internal.general;
     this.numbers = internal.numbers;
     this.units = internal.units;
   }
 
-  getUnitDisplayName(name: UnitType, length: UnitNameLength = 'long'): string {
+  getUnitDisplayName(name: UnitType, length: UnitLength = 'long'): string {
     return this.units.getDisplayName(this.bundle, name, length as string);
   }
 
@@ -39,22 +41,26 @@ export class UnitsImpl implements Units {
     return this.units.format(this.bundle, renderer, q, options, params);
   }
 
-  // TODO: use list pattern formatter to join unit sequences instead of single space
-
   formatQuantitySequence(qs: Quantity[], options: UnitFormatOptions = defaultOptions): string {
-    return qs.map(q => this.formatQuantity(q, options)).join(' ');
+    const items = qs.map(q => this.formatQuantity(q, options));
+    const type = this.selectListType(options);
+    return this.general.formatList(this.bundle, items, type);
   }
 
   formatQuantitySequenceToParts(qs: Quantity[], options: UnitFormatOptions = defaultOptions): Part[] {
-    let res: Part[] = [];
-    const len = qs.length;
-    for (let i = 0; i < len; i++) {
-      if (i > 0) {
-        res.push({ type: 'literal', value: ' '});
-      }
-      const q = qs[i];
-      res = res.concat(this.formatQuantityToParts(q, options));
+    const parts: Part[][] = qs.map(q => this.formatQuantityToParts(q, options));
+    const type = this.selectListType(options);
+    return this.general.formatListToPartsImpl(this.bundle, parts, type);
+  }
+
+  protected selectListType(options: UnitFormatOptions): ListPatternType {
+    switch (options.length) {
+    case 'narrow':
+      return 'unit-narrow';
+    case 'short':
+      return 'unit-short';
+    default:
+      return 'unit-long';
     }
-    return res;
   }
 }

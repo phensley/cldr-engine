@@ -37,7 +37,8 @@ This project is **currently in pre-ALPHA** and under active development, with th
 * [Calendar](docs/calendars.md) date time, formatting to strings, parts
 * [Relative time](docs/relative-times.md) formatting, e.g. "1 month ago", "tomorrow", "in 1 hour", etc.
 * [Names of things](docs/names.md), languages, places, etc
-* [Units](docs/units.md) formatting quantities in units (e.g. meters, pounds, etc)
+* [Units](docs/units.md) formatting quantities in units (e.g. meters, pounds, etc), sequences
+* [Lists](docs/lists.md) of items with AND and OR
 
 #### Upcoming
 
