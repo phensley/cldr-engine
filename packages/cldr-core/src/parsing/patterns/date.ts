@@ -1,13 +1,8 @@
-export class Field {
-  constructor(
-    readonly ch: string,
-    readonly width: number
-  ) {}
-}
+export type DateTimeField = [string, number];
 
-export type DateTimeNode = Field | string;
+export type DateTimeNode = DateTimeField | string;
 
-const patternChars = [
+export const DATE_PATTERN_CHARS = [
   'G', 'y', 'Y', 'u', 'U', 'r', 'Q', 'q', 'M', 'L', 'l', 'w', 'W', 'd', 'D',
   'F', 'g', 'E', 'e', 'c', 'a', 'b', 'B', 'h', 'H', 'K', 'k', 'j', 'J', 'C',
   'm', 's', 'S', 'A', 'z', 'Z', 'O', 'v', 'V', 'X', 'x'
@@ -15,6 +10,20 @@ const patternChars = [
     o[c] = i + 1;
     return o;
   }, {});
+
+export const datePatternToString = (pattern: DateTimeNode[]): string => {
+  let r = '';
+  for (const n of pattern) {
+    if (typeof n === 'string') {
+      r += n;
+    } else {
+      for (let i = 0; i < n[1]; i++) {
+        r += n[0];
+      }
+    }
+  }
+  return r;
+};
 
 /**
  * Parse a datetime pattern into an array of nodes.
@@ -42,7 +51,7 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
       continue;
     }
 
-    if (patternChars[ch] > 0) {
+    if (DATE_PATTERN_CHARS[ch] > 0) {
       if (buf.length > 0) {
         nodes.push(buf);
         buf = '';
@@ -50,7 +59,7 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
 
       if (ch !== field) {
         if (field !== '') {
-          nodes.push(new Field(field, width));
+          nodes.push([field, width]);
         }
 
         field = ch;
@@ -61,7 +70,7 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
       }
     } else {
       if (field !== '') {
-        nodes.push(new Field(field, width));
+        nodes.push([field, width]);
       }
       field = '';
       if (ch === '\'') {
@@ -74,7 +83,7 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
   }
 
   if (width > 0 && field !== '') {
-    nodes.push(new Field(field, width));
+    nodes.push([field, width]);
   } else if (buf.length > 0) {
     nodes.push(buf);
   }
@@ -90,7 +99,7 @@ export const intervalPatternBoundary = (pattern: DateTimeNode[]): number => {
   for (let i = 0; i < pattern.length; i++) {
     const node = pattern[i];
     if (typeof node !== 'string') {
-      const n = patternChars[node.ch];
+      const n = DATE_PATTERN_CHARS[node[0]];
       const idx = n >>> 5;
       if ((data[idx] >>> (n % 32) & 1) === 1) {
         return i;

@@ -1,21 +1,18 @@
 import {
   Alt,
-  AvailableFormatType,
   DateTimePatternFieldType,
   DayPeriodsFormats,
   DayPeriodType,
   GregorianSchema,
-  EraType,
-  EraValues,
   ErasFormat,
   FormatWidthType,
-  IntervalFormatType,
+  FormatWidthValues,
+  GregorianInfo,
+  Plural,
   QuarterType,
   QuarterValues,
   QuartersFormats,
   MetaZoneType,
-  MonthType,
-  MonthValues,
   MonthsFormats,
   Schema,
   TimeZoneNames,
@@ -29,12 +26,14 @@ import {
 import { weekFirstDay } from './autogen.weekdata';
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
 import { DateFormatOptions } from '../../common';
+import { DateFormatRequest } from '../../common/private';
 import { DayPeriodRules } from './rules';
 import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';
 import { Part, ZonedDateTime } from '../../types';
 import { Bundle } from '../../resource';
 import { CalendarInternals, WrapperInternals } from '../../internals';
+import { DatePatternMatcher } from './matcher';
 
 /**
  * Function that formats a given date field.
@@ -148,28 +147,16 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     this.dayPeriodRules = new DayPeriodRules(cacheSize);
   }
 
+  // TODO: support non-Gregorian calendars
+
   /**
    * Format a date-time pattern into a string.
    */
-  formatDate(bundle: Bundle, date: ZonedDateTime, options: DateFormatOptions): string {
-    const timeKey = options === undefined ? undefined : (options.datetime || options.time);
-    const timePattern = this.getTimePattern(bundle, timeKey);
-
-    let dateKey: string | undefined;
-    if (options !== undefined) {
-      dateKey = options.datetime || options.date;
-    }
-    if (timeKey === undefined && dateKey === undefined) {
-      dateKey = 'full';
-    }
-    const datePattern = this.getDatePattern(bundle, dateKey);
-
-    const wrapperRaw = this.getWrapperPattern(bundle, options);
-    const _date = datePattern === undefined ? undefined : this._format(bundle, date, datePattern);
-    const _time = timePattern === undefined ? undefined : this._format(bundle, date, timePattern);
-
-    if (wrapperRaw !== undefined && _date !== undefined && _time !== undefined) {
-      return this.wrapper.format(wrapperRaw, [_time, _date]);
+  formatDate(bundle: Bundle, date: ZonedDateTime, request: DateFormatRequest): string {
+    const _date = request.date === undefined ? undefined : this._format(bundle, date, request.date);
+    const _time = request.time === undefined ? undefined : this._format(bundle, date, request.time);
+    if (_date !== undefined && _time !== undefined) {
+      return this.wrapper.format(request.wrapper, [_time, _date]);
     }
     return _date !== undefined ? _date : _time !== undefined ? _time : '';
   }
@@ -178,25 +165,11 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
    * Format a pattern into an array of parts, each part being either a string literal
    * or a named field.
    */
-  formatDateToParts(bundle: Bundle, date: ZonedDateTime, options: DateFormatOptions): Part[] {
-    const timeKey = options === undefined ? undefined : (options.datetime || options.time);
-    const timePattern = this.getTimePattern(bundle, timeKey);
-
-    let dateKey: string | undefined;
-    if (options !== undefined) {
-      dateKey = options.datetime || options.date;
-    }
-    if (timeKey === undefined && dateKey === undefined) {
-      dateKey = 'full';
-    }
-    const datePattern = this.getDatePattern(bundle, dateKey);
-
-    const wrapperRaw = this.getWrapperPattern(bundle, options);
-    const _date = datePattern === undefined ? undefined : this._formatParts(bundle, date, datePattern);
-    const _time = timePattern === undefined ? undefined : this._formatParts(bundle, date, timePattern);
-
-    if (wrapperRaw !== undefined && _date !== undefined && _time !== undefined) {
-      return this.wrapper.formatParts(wrapperRaw, [_time, _date]);
+  formatDateToParts(bundle: Bundle, date: ZonedDateTime, request: DateFormatRequest): Part[] {
+    const _date = request.date === undefined ? undefined : this._formatParts(bundle, date, request.date);
+    const _time = request.time === undefined ? undefined : this._formatParts(bundle, date, request.time);
+    if (_date !== undefined && _time !== undefined) {
+      return this.wrapper.formatParts(request.wrapper, [_time, _date]);
     }
     return _date !== undefined ? _date : _time !== undefined ? _time : [];
   }
@@ -227,56 +200,11 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     return this._formatParts(bundle, date, this.datePatternCache.get(pattern));
   }
 
-  intervalFormats(bundle: Bundle, skeleton: IntervalFormatType, field: DateTimePatternFieldType): string {
+  intervalFormats(bundle: Bundle, skeleton: string, field: DateTimePatternFieldType): string {
     return this.Gregorian.intervalFormats(skeleton).field(bundle, field);
   }
 
-  protected getDatePattern(bundle: Bundle, key: string | undefined): DateTimeNode[] | undefined {
-    if (key !== undefined) {
-      let pattern = this.Gregorian.dateFormats(bundle, key as FormatWidthType);
-      if (pattern === '') {
-        pattern = this.Gregorian.availableFormats(bundle, key as AvailableFormatType, Alt.NONE);
-      }
-      return pattern === '' ? undefined : this.datePatternCache.get(pattern);
-    }
-    return undefined;
-  }
-
-  protected getTimePattern(bundle: Bundle, key: string | undefined): DateTimeNode[] | undefined {
-    if (key !== undefined) {
-      let pattern = this.Gregorian.timeFormats(bundle, key as FormatWidthType);
-      if (pattern === '') {
-        pattern = this.Gregorian.availableFormats(bundle, key as AvailableFormatType, Alt.NONE);
-      }
-      return pattern === '' ? undefined : this.datePatternCache.get(pattern);
-    }
-    return undefined;
-  }
-
-  protected getWrapperPattern(bundle: Bundle, options: DateFormatOptions): string | undefined {
-    let key = options.wrap;
-    if (key === undefined) {
-      if (options.datetime !== undefined) {
-        key = options.datetime;
-      } else if (options.date !== undefined && options.time !== undefined) {
-        switch (options.date) {
-        case 'full':
-        case 'long':
-        case 'medium':
-        case 'short':
-          key = options.date;
-          break;
-        default:
-          key = 'short';
-          break;
-        }
-      }
-    }
-    if (key !== undefined) {
-      return this.Gregorian.dateTimeFormats(bundle, key);
-    }
-    return undefined;
-  }
+  // TODO: unify string and parts format loops
 
   protected _format(bundle: Bundle, date: ZonedDateTime, format: DateTimeNode[]): string {
     let res = '';
@@ -284,9 +212,10 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
       if (typeof node === 'string') {
         res += node;
       } else {
-        const func = this.impl[node.ch];
+        const [field, width] = node;
+        const func = this.impl[field];
         if (func !== undefined) {
-          res += func.impl.call(this, bundle, date, node.ch, node.width);
+          res += func.impl.call(this, bundle, date, field, width);
         }
       }
     }
@@ -299,9 +228,10 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
       if (typeof node === 'string') {
         res.push({ type: 'literal', value: node });
       } else {
-        const func = this.impl[node.ch];
+        const [field, width] = node;
+        const func = this.impl[field];
         if (func !== undefined) {
-          const value = func.impl.call(this, bundle, date, node.ch, node.width);
+          const value = func.impl.call(this, bundle, date, field, width);
           res.push({ type: func.type, value });
         }
       }
@@ -327,13 +257,14 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   protected dayPeriod(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     const format = this.dayPeriods.format;
     const key = date.getHour() < 12 ? 'am' : 'pm';
+    const alt = Alt.NONE;
     switch (width) {
     case 5:
-      return format.narrow(bundle, key, Alt.NONE);
+      return format.narrow(bundle, key, alt);
     case 4:
-      return format.wide(bundle, key, Alt.NONE);
+      return format.wide(bundle, key, alt);
     default:
-    return format.abbreviated(bundle, key, Alt.NONE);
+    return format.abbreviated(bundle, key, alt);
     }
   }
 
@@ -353,13 +284,14 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
         extkey = 'noon';
       }
     }
+    const alt = Alt.NONE;
     switch (width) {
     case 5:
-      return format.narrow(bundle, extkey, Alt.NONE) || format.narrow(bundle, key, Alt.NONE);
+      return format.narrow(bundle, extkey, Alt.NONE) || format.narrow(bundle, key, alt);
     case 4:
-      return format.wide(bundle, extkey, Alt.NONE) || format.wide(bundle, key, Alt.NONE);
+      return format.wide(bundle, extkey, Alt.NONE) || format.wide(bundle, key, alt);
     default:
-      return format.abbreviated(bundle, extkey, Alt.NONE) || format.abbreviated(bundle, key, Alt.NONE);
+      return format.abbreviated(bundle, extkey, Alt.NONE) || format.abbreviated(bundle, key, alt);
     }
   }
 
@@ -370,14 +302,15 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
       // Fallback to extended day period
       return this.dayPeriodExt(bundle, date, field, width);
     }
+    const alt = Alt.NONE;
     const format = this.dayPeriods.format;
     switch (width) {
     case 5:
-      return format.narrow(bundle, key, Alt.NONE);
+      return format.narrow(bundle, key, alt);
     case 4:
-      return format.wide(bundle, key, Alt.NONE);
+      return format.wide(bundle, key, alt);
     default:
-      return format.abbreviated(bundle, key, Alt.NONE);
+      return format.abbreviated(bundle, key, alt);
     }
   }
 
@@ -385,7 +318,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const format = this.eras;
     const year = date.getYear();
     const e = year < 0 ? 0 : 1;
-    const era = EraValues[e] as EraType;
+    const era = GregorianInfo.eras[e];
     switch (width) {
     case 5:
       return format.narrow(bundle, era);
@@ -450,7 +383,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   protected month(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     const format = field === 'M' ? this.months.format : this.months.standAlone;
     const index = date.getMonth();
-    const month = MonthValues[index] as MonthType;
+    const month = GregorianInfo.months[index];
     switch (width) {
     case 5:
       return format.narrow(bundle, month);
@@ -470,7 +403,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
 
   protected quarter(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     const format = field === 'Q' ? this.quarters.format : this.quarters.standAlone;
-    const index = (date.getMonth() / 3) + 1;
+    const index = Math.floor(date.getMonth() / 3);
     const quarter = QuarterValues[index] as QuarterType;
     switch (width) {
     case 5:
@@ -752,10 +685,11 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
           fmt += node;
         }
       } else {
-        if (node.ch === 'H') {
-          fmt += node.width === 1 ? zeroPad2(hours, 1) : zeroPad2(hours, short ? 1 : node.width);
-        } else if (node.ch === 'm' && emitMins) {
-          fmt += zeroPad2(minutes, node.width);
+        const [field, width] = node;
+        if (field === 'H') {
+          fmt += width === 1 ? zeroPad2(hours, 1) : zeroPad2(hours, short ? 1 : width);
+        } else if (field === 'm' && emitMins) {
+          fmt += zeroPad2(minutes, width);
         }
       }
     }

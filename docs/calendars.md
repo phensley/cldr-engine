@@ -17,6 +17,20 @@ cldr.Calendars.formatDate(march5, { date: 'full' });
 // > "lunes, 5 de marzo de 2018"
 ```
 
+### Skeleton matching
+
+ICU-compatible best-fit skeleton matching is supported. A skeleton can contain both date and time
+fields, and will select the appropriate patterns and wrapper.
+
+```typescript
+cldr = framework.get('en');
+cldr.Calendars.formatDate(march5, { skeleton: 'yMMMMdHms' });
+// > "March 5, 2018 at 15:35:08"
+
+cldr.Calendars.formatDate(march5, { skeleton: 'yEMMMMBh' });
+// > "Mon, March 5, 2018 at 3 in the afternoon"
+```
+
 ### Intervals
 
 Intervals can be formatted by providing a skeleton. The "field of greatest difference" will determine which pattern

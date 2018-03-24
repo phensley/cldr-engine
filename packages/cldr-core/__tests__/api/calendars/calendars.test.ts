@@ -1,5 +1,4 @@
 import { BE, EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
-import { buildSchema } from '../../../src/schema';
 import { Bundle, CalendarsImpl, InternalsImpl } from '../../../src';
 import { ZonedDateTime } from '../../../src/types/datetime';
 
@@ -57,19 +56,67 @@ test('formats', () => {
 
   s = api.formatDate(mar11, { datetime: 'short' });
   expect(s).toEqual('3/10/18, 11:00 PM');
+});
 
-  s = api.formatDate(mar11, { date: 'yMMMd', time: 'hms', wrap: 'full' });
+test('skeletons', () => {
+  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const jun09 = datetime(MARCH_11_2018_070025_UTC + (DAY * 90), LOS_ANGELES);
+  const sep07 = datetime(MARCH_11_2018_070025_UTC + (DAY * 180), LOS_ANGELES);
+  const api = calendarsApi(EN);
+  let s: string;
+
+  s = api.formatDate(mar11, { skeleton: 'yQQQ' });
+  expect(s).toEqual('Q1 2018');
+
+  s = api.formatDate(mar11, { skeleton: 'yQQQQ' });
+  expect(s).toEqual('1st quarter 2018');
+
+  s = api.formatDate(jun09, { skeleton: 'yQQQQ' });
+  expect(s).toEqual('2nd quarter 2018');
+
+  s = api.formatDate(sep07, { skeleton: 'yQQQQ' });
+  expect(s).toEqual('3rd quarter 2018');
+
+  s = api.formatDate(mar11, { skeleton: 'yMdEEEE' });
+  expect(s).toEqual('Saturday, 3/10/2018');
+
+  s = api.formatDate(mar11, { skeleton: 'yMdc' });
+  expect(s).toEqual('Sat, 3/10/2018');
+
+  s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'full' });
   expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
 
-  s = api.formatDate(mar11, { date: 'yMMMd', time: 'hms', wrap: 'long' });
+  s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'long' });
   expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
 
-  s = api.formatDate(mar11, { date: 'yMMMd', time: 'hms', wrap: 'medium' });
+  s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'medium' });
   expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
 
-  s = api.formatDate(mar11, { date: 'yMMMd', time: 'hms', wrap: 'short' });
+  s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'short' });
   expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
 });
+
+// TODO: implement skeleton metacharacters
+
+// test('skeleton metacharacters', () => {
+//   const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+//   let s: string;
+
+//   let api = calendarsApi(EN);
+//   s = api.formatDate(mar11, { skeleton: 'j' });
+//   expect(s).toEqual('');
+
+//   s = api.formatDate(mar11, { skeleton: 'J' });
+//   expect(s).toEqual('');
+
+//   s = api.formatDate(mar11, { skeleton: 'Cmm' });
+//   expect(s).toEqual('');
+
+//   api = calendarsApi(DE);
+//   s = api.formatDate(mar11, { skeleton: 'J' });
+//   expect(s).toEqual('');
+// });
 
 test('parts', () => {
   const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);

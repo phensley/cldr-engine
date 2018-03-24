@@ -1,36 +1,38 @@
 import {
   Alt,
   DateFieldType,
-  DateTimePatternField,
-  DateTimePatternFieldType,
   FieldWidth,
   FieldWidthType,
-  IntervalFormatType,
   DayPeriodType,
   QuarterType,
-  MonthType,
   WeekdayType,
-  EraType,
   FormatWidthType
 } from '@phensley/cldr-schema';
 
 import { Calendars } from '../api';
 import { Bundle } from '../..';
 import { CalendarInternals, DateFieldInternals, Internals } from '../../internals';
+import { DatePatternManager } from '../../internals/calendars/manager';
 import { DateFormatOptions, RelativeTimeFormatOptions } from '../../common';
+import { DateFormatRequest } from '../../common/private';
 import { ZonedDateTime } from '../../types/datetime';
 import { DecimalArg, Part } from '../../types';
 
 const ISO_WEEKDATE_EXTENDED = "YYYY-'W'ww-";
 const ISO_WEEKDATE_COMPACT = "YYYY'W'ww";
 
+const DEFAULT_OPTIONS = { skeleton: 'yMd' };
+
 /**
  * Date and time formatting per a given calendar.
  */
 export class CalendarsImpl implements Calendars {
 
+  // fake skeletons using date and time patterns for fuzzy matching.
+  protected datetimeSkels: string[] = [];
   protected calendar: CalendarInternals;
   protected dateFields: DateFieldInternals;
+  protected datePatternManager: DatePatternManager;
 
   constructor(
     protected bundle: Bundle,
@@ -38,6 +40,9 @@ export class CalendarsImpl implements Calendars {
   ) {
     this.calendar = internals.calendars;
     this.dateFields = internals.dateFields;
+
+    // TODO: reorg and move this type
+    this.datePatternManager = new DatePatternManager(bundle, internals);
   }
 
   // TODO: rework these to return standalone field for a given 'now'
@@ -86,20 +91,25 @@ export class CalendarsImpl implements Calendars {
   // https://www.unicode.org/reports/tr35/tr35-dates.html#months_days_quarters_eras
 
   formatDate(date: ZonedDateTime, options?: DateFormatOptions): string {
-    return this.calendar.formatDate(this.bundle, date, options || {});
+    // TODO: select calendar based on options
+    const request = this.datePatternManager.getRequest(date, options || DEFAULT_OPTIONS);
+    console.log(request);
+    return this.calendar.formatDate(this.bundle, date, request);
   }
 
   formatDateToParts(date: ZonedDateTime, options?: DateFormatOptions): Part[] {
-    return this.calendar.formatDateToParts(this.bundle, date, options || {});
+    // TODO: select calendar based on options
+    const request = this.datePatternManager.getRequest(date, options || DEFAULT_OPTIONS);
+    return this.calendar.formatDateToParts(this.bundle, date, request);
   }
 
-  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): string {
+  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): string {
     const field = start.fieldOfGreatestDifference(end);
     const pattern = this.calendar.intervalFormats(this.bundle, skeleton, field);
     return this.calendar.formatDateInterval(this.bundle, start, end, pattern);
   }
 
-  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): Part[] {
+  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): Part[] {
     const field = start.fieldOfGreatestDifference(end);
     const pattern = this.calendar.intervalFormats(this.bundle, skeleton, field);
     return this.calendar.formatDateIntervalToParts(this.bundle, start, end, pattern);

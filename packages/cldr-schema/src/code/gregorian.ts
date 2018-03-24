@@ -1,24 +1,21 @@
 import { Choice, Scope, FieldMap, fieldmap, scope, scopefield, scopemap } from './instructions';
 
 import {
-  AvailableFormatValues,
   DateTimePatternFieldValues,
   DayPeriodValues,
-  EraValues,
   FieldWidthValues,
   FormatWidthValues,
-  IntervalFormatValues,
+  GregorianInfo,
   QuarterValues,
-  MonthValues,
   WeekdayValues,
 } from '../schema';
 
 const weekdays = FieldWidthValues.map(n => fieldmap(n, n, WeekdayValues));
-const months = FieldWidthValues.map(n => fieldmap(n, n, MonthValues));
+const months = FieldWidthValues.map(n => fieldmap(n, n, GregorianInfo.months));
 const quarters = FieldWidthValues.map(n => fieldmap(n, n, QuarterValues));
 const dayPeriods = FieldWidthValues.map(n => fieldmap(n, n, DayPeriodValues, Choice.ALT));
 
-const eras = (n: string) => fieldmap(n, n, EraValues);
+const eras = (n: string) => fieldmap(n, n, GregorianInfo.eras);
 
 const scopeFormat = (map: FieldMap[]) => [
   scope('format', 'format', map),
@@ -43,9 +40,10 @@ export const GREGORIAN: Scope = scope('Gregorian', 'Gregorian', [
   formatWidths('dateTimeFormats'),
   formatWidths('timeFormats'),
 
-  fieldmap('availableFormats', 'availableFormats', AvailableFormatValues, Choice.ALT),
+  fieldmap('availableFormats', 'availableFormats', GregorianInfo.availableFormats),
+  fieldmap('availableFormats', 'pluralAvailableFormats', GregorianInfo.pluralAvailableFormats, Choice.PLURAL),
 
-  scopemap('intervalFormats', IntervalFormatValues, [
+  scopemap('intervalFormats', GregorianInfo.intervalFormats, [
     scopefield('field', DateTimePatternFieldValues)
   ])
 ]);

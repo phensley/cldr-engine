@@ -13,6 +13,7 @@ import { getPartition } from './partition';
 import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
 import { getSystems } from './systems';
+import { getTimeData } from './timedata';
 import { getUnits } from './units';
 import { getWeekData } from './weekdata';
 import { getZones } from './zones';
@@ -28,6 +29,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   plurals: getPlurals,
   subtags: getSubtags,
   systems: getSystems,
+  timedata: getTimeData,
   units: getUnits,
   weekdata: getWeekData,
   zones: getZones,
@@ -36,7 +38,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
 // Names of pre-processed data files
 const DATA_FILES = [
   'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals', 'subtags', 'symbols',
-  'weekdata', 'zonedst'
+  'timedata', 'weekdata', 'zonedst'
 ];
 
 const load = (): any => {

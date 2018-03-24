@@ -39,3 +39,11 @@ export interface WeekdaysFormats {
   readonly format: WeekdaysFormat;
   readonly standAlone: WeekdaysFormat;
 }
+
+export interface CalendarInfo {
+  eras: string[];
+  months: string[];
+  availableFormats: string[];
+  pluralAvailableFormats: string[];
+  intervalFormats: string[];
+}

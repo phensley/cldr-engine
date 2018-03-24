@@ -2,7 +2,6 @@ import {
   CharacterOrderType,
   CurrencyType,
   DateFieldType,
-  IntervalFormatType,
   LineOrderType,
   RegionIdType,
   ScriptIdType,
@@ -57,12 +56,12 @@ export interface Calendars {
   /**
    * Formats a date-time interval for the given skeleton to string.
    */
-  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): string;
+  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): string;
 
   /**
    * Formats a date-time interval for the given skeleton to an array of parts.
    */
-  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: IntervalFormatType): Part[];
+  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): Part[];
 
   /**
    * Formats a relative time field to string.

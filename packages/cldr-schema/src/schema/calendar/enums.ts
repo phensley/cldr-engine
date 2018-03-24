@@ -1,9 +1,9 @@
 import { makeKeyedEnum } from '../../types';
 
-// Enums common to all calendars
-
 // Values 'h' and 'H' for hours have been unified to 'H' for uniqueness.
-export const [ DateTimePatternField, DateTimePatternFieldValues ] = makeKeyedEnum([
+export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
+
+export const [ DateTimePatternField, DateTimePatternFieldValues ] = makeKeyedEnum<string, DateTimePatternFieldType>([
   ['YEAR', 'y'],
   ['MONTH', 'M'],
   ['DAY', 'd'],
@@ -13,9 +13,10 @@ export const [ DateTimePatternField, DateTimePatternFieldValues ] = makeKeyedEnu
   ['SECOND', 's']
 ]);
 
-export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
+export type DayPeriodType = 'noon' | 'midnight' | 'am' | 'pm' | 'morning1' | 'morning2' |
+  'afternoon1' | 'afternoon2' | 'evening1' | 'evening2' | 'night1' | 'night2';
 
-export const [ DayPeriod, DayPeriodValues ] = makeKeyedEnum([
+export const [ DayPeriod, DayPeriodValues ] = makeKeyedEnum<string, DayPeriodType>([
   ['NOON', 'noon'],
   ['MIDNIGHT', 'midnight'],
   ['AM', 'am'],
@@ -30,37 +31,36 @@ export const [ DayPeriod, DayPeriodValues ] = makeKeyedEnum([
   ['NIGHT2', 'night2']
 ]);
 
-export type DayPeriodType = 'noon' | 'midnight' | 'am' | 'pm' | 'morning1' | 'morning2' |
-  'afternoon1' | 'afternoon2' | 'evening1' | 'evening2' | 'night1' | 'night2';
+export type FieldWidthType = 'abbreviated' | 'narrow' | 'short' | 'wide';
 
-export const [ FieldWidth, FieldWidthValues ] = makeKeyedEnum([
+export const [ FieldWidth, FieldWidthValues ] = makeKeyedEnum<string, FieldWidthType>([
   ['ABBREVIATED', 'abbreviated'],
   ['NARROW', 'narrow'],
   ['SHORT', 'short'],
   ['WIDE', 'wide']
 ]);
 
-export type FieldWidthType = 'abbreviated' | 'narrow' | 'short' | 'wide';
+export type FormatWidthType = 'short' | 'medium' | 'long' | 'full';
 
-export const [ FormatWidth, FormatWidthValues ] = makeKeyedEnum([
+export const [ FormatWidth, FormatWidthValues ] = makeKeyedEnum<string, FormatWidthType>([
   ['SHORT', 'short'],
   ['MEDIUM', 'medium'],
   ['LONG', 'long'],
   ['FULL', 'full']
 ]);
 
-export type FormatWidthType = 'short' | 'medium' | 'long' | 'full';
+export type QuarterType = '1' | '2' | '3' | '4';
 
-export const [ Quarter, QuarterValues ] = makeKeyedEnum([
+export const [ Quarter, QuarterValues ] = makeKeyedEnum<string, QuarterType>([
   ['Q1', '1'],
   ['Q2', '2'],
   ['Q3', '3'],
   ['Q4', '4']
 ]);
 
-export type QuarterType = '1' | '2' | '3' | '4';
+export type WeekdayType = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 
-export const [ Weekday, WeekdayValues ] = makeKeyedEnum([
+export const [ Weekday, WeekdayValues ] = makeKeyedEnum<string, WeekdayType>([
   ['SUN', 'sun'],
   ['MON', 'mon'],
   ['TUE', 'tue'],
@@ -69,5 +69,3 @@ export const [ Weekday, WeekdayValues ] = makeKeyedEnum([
   ['FRI', 'fri'],
   ['SAT', 'sat']
 ]);
-
-export type WeekdayType = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';

@@ -9,6 +9,7 @@ import { getMetazones } from './metazones';
 import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
 import { getSymbols } from './symbols';
+import { getTimeData } from './timedata';
 import { getZoneDST } from './zonedst';
 import { getWeekData } from './weekdata';
 
@@ -24,6 +25,7 @@ const OUTPUTS: { [x: string]: () => string } = {
   plurals: getPlurals,
   subtags: getSubtags,
   symbols: getSymbols,
+  timedata: getTimeData,
   zonedst: getZoneDST,
   weekdata: getWeekData,
 };

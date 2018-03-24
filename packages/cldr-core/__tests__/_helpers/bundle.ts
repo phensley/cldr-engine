@@ -5,7 +5,7 @@ import * as child from 'child_process';
 import * as zlib from 'zlib';
 
 import { LanguageResolver } from '../../src/locale/resolver';
-import { Pack, Bundle } from '../../src/resource/pack';
+import { Pack, Bundle } from '../../src/resource';
 
 /**
  * Load a resource bundle for a given language. If resource file does

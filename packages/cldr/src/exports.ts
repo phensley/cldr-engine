@@ -1,6 +1,5 @@
 export {
   availableLocales,
-  AvailableFormatType,
   CharacterOrderType,
   CurrencyType,
   CurrencyFormatOptions,

@@ -486,7 +486,8 @@ export const getSupplemental = () => {
     ...access({ Ordinals: get(['plurals-type-ordinal']) }, 'ordinals'),
     ...access({ LikelySubtags: get(['likelySubtags']) }, 'likelySubtags'),
     ...access({ NumberingSystems: get(['numberingSystems']) }, 'numberingSystems'),
-    ...access({ TerritoryContainment: get(['territoryContainment']) }, 'territoryContainment')
+    ...access({ TerritoryContainment: get(['territoryContainment']) }, 'territoryContainment'),
+    ...access({ TimeData: get(['timeData']) }, 'timeData')
   };
 };
 

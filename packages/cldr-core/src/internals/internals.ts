@@ -4,7 +4,6 @@ import {
   CurrencyType,
   DateFieldType,
   DateTimePatternFieldType,
-  IntervalFormatType,
   Plural,
   Schema,
   UnitInfo,
@@ -13,7 +12,6 @@ import {
 
 import {
   CurrencyFormatOptions,
-  DateFormatOptions,
   DecimalFormatOptions,
   ListPatternType,
   NumberSystemType,
@@ -22,19 +20,20 @@ import {
   UnitFormatOptions
 } from '../common';
 
-import { NumberParams } from '../common/private';
+import { DateFormatRequest, NumberParams } from '../common/private';
 import { Bundle } from '../resource';
 import { NumberPattern } from '../parsing/patterns/number';
 import { Decimal, DecimalArg, NumberOperands, Part, ZonedDateTime } from '../types';
 
 export interface CalendarInternals {
-  formatDate(bundle: Bundle, date: ZonedDateTime, options: DateFormatOptions): string;
-  formatDateToParts(bundle: Bundle, date: ZonedDateTime, options: DateFormatOptions): Part[];
+
+  formatDate(bundle: Bundle, date: ZonedDateTime, request: DateFormatRequest): string;
+  formatDateToParts(bundle: Bundle, date: ZonedDateTime, request: DateFormatRequest): Part[];
   formatDateInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): string;
   formatDateIntervalToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): Part[];
   formatDateRaw(bundle: Bundle, date: ZonedDateTime, pattern: string): string;
   formatDateRawToParts(bundle: Bundle, date: ZonedDateTime, pattern: string): Part[];
-  intervalFormats(bundle: Bundle, skeleton: IntervalFormatType, field: DateTimePatternFieldType): string;
+  intervalFormats(bundle: Bundle, skeleton: string, field: DateTimePatternFieldType): string;
 }
 
 export interface DateFieldInternals {
