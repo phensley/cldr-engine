@@ -28,7 +28,7 @@ cldr.General.formatList(items, 'or');
 // > "un, deux, trois ou quatre"
 
 items = ['2 miles', '16 feet', '9 inches'];
-cldr.General.formatList(items, 'unit-wide');
+cldr.General.formatList(items, 'unit-long');
 // > "2 miles, 16 feet, 9 inches"
 
 items = ['15°', '17′', '31″'];

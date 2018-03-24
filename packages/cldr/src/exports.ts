@@ -16,6 +16,7 @@ export {
   FormatWidthType,
   LanguageResolver,
   LanguageTag,
+  ListPatternType,
   Locale,
   LocaleMatcher,
   MathContext,
