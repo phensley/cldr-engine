@@ -216,6 +216,24 @@ test('day periods', () => {
   ]);
 });
 
+test('iso week', () => {
+  // Week number verification using raw pattern
+  const api = calendarsApi(EN);
+  let d: ZonedDateTime;
+
+  d = datetime(1451624400000, LOS_ANGELES);
+  expect(api.formatDateRaw(d, 'ww YYYY')).toEqual('53 2015');
+
+  d = datetime(1451624400000, NEW_YORK);
+  expect(api.formatDateRaw(d, 'ww YYYY')).toEqual('53 2015');
+
+  d = datetime(1546318800000, LOS_ANGELES);
+  expect(api.formatDateRaw(d, 'ww YYYY')).toEqual('01 2019');
+
+  d = datetime(1546318800000, NEW_YORK);
+  expect(api.formatDateRaw(d, 'ww YYYY')).toEqual('01 2019');
+});
+
 test('flexible day periods', () => {
   const base = MARCH_11_2018_070025_UTC;
   const losangeles = (n: number) => datetime(base + n, LOS_ANGELES);
