@@ -112,9 +112,6 @@ export interface General {
    */
   formatListToParts(items: string[], type?: ListPatternType): Part[];
 
-  // TODO:
-  // formatPersonList
-
   /**
    * Returns the display name for the given script code.
    */

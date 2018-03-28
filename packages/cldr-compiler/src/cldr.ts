@@ -481,12 +481,26 @@ export const getSupplemental = () => {
     WeekData: access(WeekData, 'weekData'),
 
     ...access({ Cardinals: get(['plurals-type-cardinal']) }, 'plurals'),
-    ...access({ DayPeriods: get(['dayPeriodRuleSet'])}, 'dayPeriods'),
     ...access({ CurrencyFractions: get(['currencyData', 'fractions']) }, 'currencyData'),
+    ...access({ DayPeriods: get(['dayPeriodRuleSet']) }, 'dayPeriods'),
     ...access({ Ordinals: get(['plurals-type-ordinal']) }, 'ordinals'),
     ...access({ LikelySubtags: get(['likelySubtags']) }, 'likelySubtags'),
     ...access({ NumberingSystems: get(['numberingSystems']) }, 'numberingSystems'),
     ...access({ TerritoryContainment: get(['territoryContainment']) }, 'territoryContainment')
+  };
+};
+
+/**
+ * Supplemental files that live at the top level.
+ */
+export const getOther = () => {
+  const access = (group: {}, fileName: string) => {
+    const root = load(fileName);
+    return convert(group, root);
+  };
+
+  return {
+    ...access({ DefaultContent: get(['defaultContent']) }, 'defaultContent')
   };
 };
 

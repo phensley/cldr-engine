@@ -49,7 +49,7 @@ export const runPack = (argv: yargs.Arguments) => {
   const pkg = getPackageInfo();
   langs.forEach(lang => {
     // Get the list of languages that should live together in this bundle.
-    const locales = localeMap[lang]; // [lang].concat(regionsFor(lang));
+    const locales = localeMap[lang];
 
     // Construct a pack that will contain all strings across all regions for this language.
     const pack = new ResourcePack(lang, pkg.version, pkg.cldrVersion);

@@ -1,10 +1,8 @@
 import { base100decode } from './encoding';
 import { Locale, LanguageTag, LanguageResolver } from '../locale';
-import { Bundle, DummyBundle, ExceptionIndex, StringBundle } from './bundle';
+import { Bundle, ExceptionIndex, StringBundle } from './bundle';
 
 const DELIMITER = '\t';
-
-const DUMMY_BUNDLE = new DummyBundle();
 
 /**
  * Layer in the pack that supports all regions for a single language + script.
@@ -15,23 +13,29 @@ export class PackScript {
   readonly _exceptions: string[];
   readonly _regions: { [x: string]: string };
   readonly _cache: { [x: string]: ExceptionIndex} = {};
+  readonly _defaultRegion: string;
 
   constructor(
     strings: string,
     exceptions: string,
-    regions: { [x: string]: string }
+    regions: { [x: string]: string },
+    defaultRegion: string
   ) {
     this._strings = strings.split(DELIMITER);
     this._exceptions = exceptions.split(DELIMITER);
     this._regions = regions;
+    this._defaultRegion = defaultRegion;
   }
 
   get(tag: LanguageTag): Bundle {
-    const region = tag.region();
-    const index = this._cache[region] || this.decode(region);
-    return index === undefined ?
-      DUMMY_BUNDLE :
-      new StringBundle(tag.compact(), tag, this._strings, this._exceptions, index);
+    let region = tag.region();
+    let index = this._cache[region] || this.decode(region);
+    if (index === undefined) {
+      region = this._defaultRegion;
+      tag = new LanguageTag(tag.language(), tag.script(), region, tag.variant(), tag.extensions(), tag.privateUse());
+      index = this._cache[region] || this.decode(region);
+    }
+    return new StringBundle(tag.compact(), tag, this._strings, this._exceptions, index);
   }
 
   private decode(region: string): ExceptionIndex | undefined {
@@ -62,6 +66,7 @@ export class Pack {
   readonly version: string;
   readonly cldrVersion: string;
   readonly language: string;
+  readonly defaultTag: LanguageTag;
   readonly scripts: { [x: string]: PackScript } = {};
 
   constructor(data: any) {
@@ -70,12 +75,15 @@ export class Pack {
     if (typeof version === undefined) {
       throw new Error('Severe error: data does not look like a valid resource pack.');
     }
+
     this.version = version;
     this.cldrVersion = cldr;
     this.language = language;
+    this.defaultTag = LanguageResolver.resolve(raw.default);
+
     Object.keys(raw.scripts).forEach(k => {
       const obj = raw.scripts[k];
-      this.scripts[k] = new PackScript(obj.strings, obj.exceptions, obj.regions);
+      this.scripts[k] = new PackScript(obj.strings, obj.exceptions, obj.regions, obj.default);
     });
   }
 
@@ -87,8 +95,12 @@ export class Pack {
     }
 
     // Strings for a language are organized by script.
-    const script = this.scripts[tag.script()];
-    return script === undefined ? DUMMY_BUNDLE : script.get(tag);
+    let script = this.scripts[tag.script()];
+    if (script === undefined) {
+      script = this.scripts[this.defaultTag.script()];
+      return script.get(this.defaultTag);
+    }
+    return script.get(tag);
   }
 
 }

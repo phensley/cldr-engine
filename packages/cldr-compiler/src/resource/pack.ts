@@ -1,4 +1,13 @@
 import { encoding, Locale, LanguageResolver, LanguageTag } from '@phensley/cldr-core';
+import { getOther } from '../cldr';
+
+// Index default content for each language and language+script combination.
+const defaultContent = new Set();
+
+getOther().DefaultContent.forEach((s: string) => {
+  const { id, tag } = Locale.resolve(s);
+  defaultContent.add(tag.expanded());
+});
 
 const { base100encode } = encoding;
 
@@ -14,7 +23,7 @@ class Layer {
   readonly index: number[] = [];
 
   constructor(
-    readonly tag: LanguageTag) {
+    readonly tag: LanguageTag, readonly isDefault: boolean) {
       this.localeId = tag.expanded();
     }
 }
@@ -39,6 +48,7 @@ export class ResourcePack {
   // Layers are grouped by script
   private layers: { [x: string]: Layer[] } = {};
   private current: Layer;
+  private defaultLayer?: LanguageTag;
 
   constructor(
     private language: string,
@@ -57,7 +67,17 @@ export class ResourcePack {
       layers = [];
       this.layers[script] = layers;
     }
-    const layer = new Layer(tag);
+
+    // Determine the default region / script
+    const minimumTag = LanguageResolver.removeLikelySubtags(tag);
+
+    // Determine default layer for this language
+    if (minimumTag.compact() === minimumTag.language()) {
+      this.defaultLayer = tag;
+    }
+
+    const layerIsDefault = defaultContent.has(tag.expanded());
+    const layer = new Layer(tag, layerIsDefault);
     this.current = layer;
     layers.push(layer);
   }
@@ -86,9 +106,14 @@ export class ResourcePack {
       scripts.push(`"${script}":${json}`);
     });
 
+    if (this.defaultLayer === undefined) {
+      throw new Error(`No default layer found for ${this.language}!`);
+    }
+
     return `{"version":"${this.version}",` +
       `"cldr":"${this.cldrVersion}",` +
       `"language":"${this.language}",` +
+      `"default":"${this.defaultLayer}",` +
       `"scripts":{${scripts.join(',')}}}`;
   }
 
@@ -150,9 +175,13 @@ export class ResourcePack {
     }
 
     // Pack all regions together with their exception indices.
+    let defaultRegion = '';
     const regions = layers.map(curr => {
       const idx = curr.index.map(base100encode).join(' ');
       let id = curr.tag.region();
+      if (curr.isDefault) {
+        defaultRegion = id;
+      }
 
       // TODO: Revisit variant support. For now we append variant to region
       // to distinguish them.
@@ -163,12 +192,22 @@ export class ResourcePack {
       return `"${id}":"${idx}"`;
     });
 
+    if (defaultRegion === '') {
+      const def = this.defaultLayer;
+      if (def !== undefined && def.script() === script && def.hasRegion()) {
+        defaultRegion = def.region();
+      } else {
+        throw new Error(`Failed to set default region for ${this.language}-${script}`);
+      }
+    }
+
     // Manually build the JSON to ensure the same result every time (avoid passing
     // through object hash functions). We return a raw UTF-16 string that the
     // Node.js fs module will write as UTF-8.
     return `{"strings":"${join(base.strings)}",` +
       `"exceptions":"${join(exceptions)}",` +
-      `"regions":{${regions.join(',')}}}`;
+      `"regions":{${regions.join(',')}},` +
+      `"default":"${defaultRegion}"}`;
   }
 
   /**

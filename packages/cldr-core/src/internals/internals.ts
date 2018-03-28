@@ -48,9 +48,6 @@ export interface GeneralInternals {
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string;
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[];
   formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[];
-  // TODO:
-  // formatPersonList
-  // formatPersonListToParts
   getScriptDisplayName(bundle: Bundle, code: string): string;
   getRegionDisplayName(bundle: Bundle, code: string, alt?: Alt): string;
 }
@@ -82,7 +79,7 @@ export interface NumberInternals {
   stringRenderer(): NumberRenderer<string>;
   partsRenderer(): NumberRenderer<Part[]>;
   formatDecimal<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal,
-      options: DecimalFormatOptions, params: NumberParams): [T, number];
+    options: DecimalFormatOptions, params: NumberParams): [T, number];
   formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal, code: string,
     options: CurrencyFormatOptions, params: NumberParams): T;
   getCurrency(code: CurrencyType): CurrencyInfo;

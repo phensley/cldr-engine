@@ -2,7 +2,7 @@ import { getCLDR, loader, asyncLoader } from './helpers';
 
 test('loaders', () => {
   const framework = getCLDR();
-  const api = framework.get('en');
+  let api = framework.get('en');
 
   expect(() => framework.get('xx')).toThrowError();
 
@@ -26,4 +26,16 @@ test('loaders', () => {
 
   expect(framework.getAsync('xx')).rejects.toContain('no such file');
   expect(framework.getAsync('de')).resolves.toBeTruthy();
+
+  // Bundle with invalid region
+  api = framework.get('ar-Arab-XX');
+  expect(api.Locales.bundle().language()).toEqual('ar');
+  expect(api.Locales.bundle().languageRegion()).toEqual('ar-EG');
+  expect(api.Locales.bundle().languageScript()).toEqual('ar-Arab');
+
+  // Bundle with invalid script
+  api = framework.get('ar-Cyrl-SA');
+  expect(api.Locales.bundle().language()).toEqual('ar');
+  expect(api.Locales.bundle().languageRegion()).toEqual('ar-EG');
+  expect(api.Locales.bundle().languageScript()).toEqual('ar-Arab');
 });
