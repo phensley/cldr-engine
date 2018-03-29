@@ -71,7 +71,13 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     case 'second':
       break;
     default:
-      if (n.compare(DecimalConstants.ONE) === 0) {
+      if (n.compare(DecimalConstants.TWO) === 0) {
+        const p = negative ? format.previous2(bundle) : format.next2(bundle);
+        if (p !== '') {
+          return p;
+        }
+        // Fall through
+      } else if (n.compare(DecimalConstants.ONE) === 0) {
         return negative ? format.previous(bundle) : format.next(bundle);
       }
       break;

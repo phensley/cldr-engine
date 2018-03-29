@@ -14,9 +14,11 @@ export interface RelativeTimeFields {
 }
 
 export interface RelativeFields {
+  readonly previous2: FieldArrow;
   readonly previous: FieldArrow;
   readonly current: FieldArrow;
   readonly next: FieldArrow;
+  readonly next2: FieldArrow;
   readonly future: RelativeTimeFields;
   readonly past: RelativeTimeFields;
 }

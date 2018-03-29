@@ -3,9 +3,11 @@ import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap }
 import { DateFieldValues, RelativeTimeFieldValues, WeekdayValues } from '../schema';
 
 const relativeTimes = (width: string) => scope(width, width, [
+  field('relative-type--2', 'previous2'),
   field('relative-type--1', 'previous'),
   field('relative-type-0', 'current'),
   field('relative-type-1', 'next'),
+  field('relative-type-2', 'next2'),
   scope('relativeTime-type-future', 'future', [
     field('relativeTimePattern', 'pattern', Choice.PLURAL)
   ]),

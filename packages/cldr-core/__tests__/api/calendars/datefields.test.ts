@@ -57,6 +57,33 @@ test('relative time', () => {
   expect(s).toEqual('next year');
 });
 
+test('relative time 2', () => {
+  // German for -2 and +2 days
+  const api = calendarsApi(DE);
+  let s: string;
+
+  s = api.formatRelativeTimeField('-3', 'day');
+  expect(s).toEqual('vor 3 Tagen');
+
+  s = api.formatRelativeTimeField('-2', 'day');
+  expect(s).toEqual('vorgestern');
+
+  s = api.formatRelativeTimeField('-1', 'day');
+  expect(s).toEqual('gestern');
+
+  s = api.formatRelativeTimeField('0', 'day');
+  expect(s).toEqual('heute');
+
+  s = api.formatRelativeTimeField('1', 'day');
+  expect(s).toEqual('morgen');
+
+  s = api.formatRelativeTimeField('2', 'day');
+  expect(s).toEqual('übermorgen');
+
+  s = api.formatRelativeTimeField('3', 'day');
+  expect(s).toEqual('in 3 Tagen');
+});
+
 test('relative time options', () => {
   const api = calendarsApi(EN);
   let s: string;

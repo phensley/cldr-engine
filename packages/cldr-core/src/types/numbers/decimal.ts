@@ -983,6 +983,7 @@ export class Decimal {
 
 const ZERO = new Decimal('0');
 const ONE = new Decimal('1');
+const TWO = new Decimal('2');
 
 // https://oeis.org/A000796/constant
 const PI = new Decimal(
@@ -998,6 +999,7 @@ const E = new Decimal(
 export const DecimalConstants = {
   ZERO,
   ONE,
+  TWO,
   PI,
   E
 };
