@@ -93,7 +93,6 @@ export class CalendarsImpl implements Calendars {
   formatDate(date: ZonedDateTime, options?: DateFormatOptions): string {
     // TODO: select calendar based on options
     const request = this.datePatternManager.getRequest(date, options || DEFAULT_OPTIONS);
-    console.log(request);
     return this.calendar.formatDate(this.bundle, date, request);
   }
 
