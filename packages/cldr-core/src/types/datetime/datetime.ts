@@ -32,7 +32,7 @@ export class ZonedDateTime {
   private _dst: boolean;
 
   // cache for iso week-based fields
-  private _isoLocal: number[];
+  private _isoLocal: [number, number] | undefined;
 
   constructor(date: number | Date | ZonedDateTime, zoneId: string = 'UTC') {
     this._epoch = +date;
@@ -210,16 +210,16 @@ export class ZonedDateTime {
    * ISO 8601 Week of week-based year.
    */
   getISOWeek(): number {
-    this.calcISO();
-    return this._isoLocal[0];
+    const [week, year] = this.calcISO();
+    return week;
   }
 
   /**
    * ISO 8601 Year of week-based Year.
    */
   getISOYear(): number {
-    this.calcISO();
-    return this._isoLocal[1];
+    const [week, year] = this.calcISO();
+    return year;
   }
 
   fieldOfGreatestDifference(other: ZonedDateTime): DateTimePatternFieldType {
@@ -251,9 +251,9 @@ export class ZonedDateTime {
     return this._utc.toISOString();
   }
 
-  private calcISO(): void {
+  private calcISO(): [number, number] {
     if (this._isoLocal !== undefined) {
-      return;
+      return this._isoLocal;
     }
 
     const month = this.getMonth();
@@ -281,5 +281,6 @@ export class ZonedDateTime {
       isoyear++;
     }
     this._isoLocal = [isoweek, isoyear];
+    return this._isoLocal;
   }
 }

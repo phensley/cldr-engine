@@ -12,9 +12,9 @@ export class NumberContext {
   roundingMode: RoundingModeType;
   useSignificant: boolean;
 
-  minInt: number;
-  maxFrac: number;
-  minFrac: number;
+  minInt: number = -1;
+  maxFrac: number = -1;
+  minFrac: number = -1;
   maxSig: number = -1;
   minSig: number = -1;
   currencyDigits: number = -1;

@@ -65,9 +65,9 @@ const size = (n: number): number => {
  */
 export class Decimal {
 
-  protected data: number[];
-  protected sign: number;
-  protected exp: number;
+  protected data!: number[];
+  protected sign!: number;
+  protected exp!: number;
 
   constructor(num: DecimalArg) {
     if (typeof num === 'string' || typeof num === 'number') {

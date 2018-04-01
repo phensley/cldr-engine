@@ -19,7 +19,6 @@ export class UnitsInternalImpl implements UnitInternals {
 
   readonly numbersSchema: NumbersSchema;
   readonly unitsSchema: UnitsSchema;
-  readonly standardFormat: FieldArrow;
 
   constructor(
     readonly root: Schema,

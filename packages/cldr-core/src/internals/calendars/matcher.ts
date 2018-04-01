@@ -198,7 +198,7 @@ export class DateSkeleton {
   type: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   info: (SkeletonField | undefined)[] = [];
 
-  skeleton: string;
+  skeleton: string = '';
   pattern: DateTimeNode[] | undefined;
 
   private _isDate: boolean = false;

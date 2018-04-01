@@ -47,7 +47,7 @@ export class ResourcePack {
 
   // Layers are grouped by script
   private layers: { [x: string]: Layer[] } = {};
-  private current: Layer;
+  private current!: Layer;
   private defaultLayer?: LanguageTag;
 
   constructor(

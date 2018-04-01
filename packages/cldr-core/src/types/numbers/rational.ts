@@ -44,8 +44,8 @@ export type RationalArg = Rational | Decimal | number | string;
  */
 export class Rational {
 
-  protected numer: Decimal;
-  protected denom: Decimal;
+  protected numer!: Decimal;
+  protected denom!: Decimal;
 
   constructor(
     numerator: DecimalArg,
