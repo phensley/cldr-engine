@@ -280,6 +280,7 @@ export class DateSkeleton {
   private _parse(raw: string, isPattern: boolean, preferred: DateTimeNode[], allowed: DateTimeNode[]): void {
     const len = raw.length;
 
+    let noDayPeriod = false;
     let field = '';
     let width = 0;
     let inquote = false;
@@ -297,12 +298,14 @@ export class DateSkeleton {
         inquote = true;
 
       } else if (DATE_PATTERN_CHARS[ch] > 0) {
-
-        // TODO: handle metachar replacements
-
         if (ch !== field) {
           if (field !== '') {
-            this.set(field, field, width);
+            if ('jJC'.indexOf(field) !== -1) {
+              noDayPeriod = field === 'J';
+              this.setMeta(field, field === 'C' ? allowed : preferred);
+            } else {
+              this.set(field, field, width);
+            }
           }
           field = ch;
           width = 1;
@@ -317,13 +320,21 @@ export class DateSkeleton {
 
     // Push the last field
     if (width > 0 && field !== '') {
-      this.set(field, field, width);
+      if ('jJC'.indexOf(field) !== -1) {
+        noDayPeriod = field === 'J';
+        this.setMeta(field, field === 'C' ? allowed : preferred);
+      } else {
+        this.set(field, field, width);
+      }
     }
 
     // Handle some special hour cycle / day period behaviors
     const hour = this.info[F.HOUR];
     const dayPeriod = this.info[F.DAYPERIOD];
-    if (hour !== undefined && hour.field !== '') {
+    if (noDayPeriod) {
+      this.type[F.DAYPERIOD] = 0;
+      this.info[F.DAYPERIOD] = undefined;
+    }  else if (hour !== undefined && hour.field !== '') {
       // If we have a 12-hour-cycle but no dayperiod, add the default.
       if (hour.field === 'h' || hour.field === 'K') {
         if (dayPeriod === undefined) {
@@ -333,7 +344,7 @@ export class DateSkeleton {
           this.type[F.DAYPERIOD] = row[2];
           this.info[F.DAYPERIOD] = { input: 'a', field: 'a', width: row[3], repeat: row[3] };
         }
-      } else if (/* noDayPeriod || */ (dayPeriod !== undefined && dayPeriod.field !== '')) {
+      } else if (dayPeriod !== undefined && dayPeriod.field !== '') {
         this.type[F.DAYPERIOD] = 0;
         this.info[F.DAYPERIOD] = undefined;
       }
@@ -365,6 +376,14 @@ export class DateSkeleton {
       }
     }
     return r;
+  }
+
+  private setMeta(input: string, meta: DateTimeNode[]): void {
+    for (const n of meta) {
+      if (typeof n !== 'string') {
+        this.set(input, n[0], n[1]);
+      }
+    }
   }
 
   private set(input: string, field: string, width: number): void {

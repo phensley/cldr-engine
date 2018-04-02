@@ -60,7 +60,7 @@ test('formats', () => {
 });
 
 test('skeletons', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar11 = datetime(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
   const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
   const jun09 = datetime(MARCH_11_2018_070025_UTC + (DAY * 90), LOS_ANGELES);
   const sep07 = datetime(MARCH_11_2018_070025_UTC + (DAY * 180), LOS_ANGELES);
@@ -96,6 +96,9 @@ test('skeletons', () => {
 
   s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'short' });
   expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
+
+  s = api.formatDate(mar11, { skeleton: 'yyyyMMddjjmmssSSS' });
+  expect(s).toEqual('03/10/2018, 11:00:25.123 PM');
 });
 
 test('fractional seconds', () => {
@@ -137,26 +140,33 @@ test('fractional seconds', () => {
   expect(s).toEqual('11:00:25,5670 PM');
 });
 
-// TODO: implement skeleton metacharacters
+test('skeleton metacharacters', () => {
+  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  let s: string;
 
-// test('skeleton metacharacters', () => {
-//   const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-//   let s: string;
+  let api = calendarsApi(EN);
+  s = api.formatDate(mar11, { skeleton: 'j' });
+  expect(s).toEqual('11 PM');
 
-//   let api = calendarsApi(EN);
-//   s = api.formatDate(mar11, { skeleton: 'j' });
-//   expect(s).toEqual('');
+  s = api.formatDate(mar11, { skeleton: 'jmm' });
+  expect(s).toEqual('11:00 PM');
 
-//   s = api.formatDate(mar11, { skeleton: 'J' });
-//   expect(s).toEqual('');
+  s = api.formatDate(mar11, { skeleton: 'J' });
+  expect(s).toEqual('23');
 
-//   s = api.formatDate(mar11, { skeleton: 'Cmm' });
-//   expect(s).toEqual('');
+  s = api.formatDate(mar11, { skeleton: 'Jmm' });
+  expect(s).toEqual('23:00');
 
-//   api = calendarsApi(DE);
-//   s = api.formatDate(mar11, { skeleton: 'J' });
-//   expect(s).toEqual('');
-// });
+  s = api.formatDate(mar11, { skeleton: 'Cmm' });
+  expect(s).toEqual('11:00 PM');
+
+  api = calendarsApi(DE);
+  s = api.formatDate(mar11, { skeleton: 'J' });
+  expect(s).toEqual('23 Uhr');
+
+  s = api.formatDate(mar11, { skeleton: 'Jmm' });
+  expect(s).toEqual('23:00');
+});
 
 test('parts', () => {
   const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
