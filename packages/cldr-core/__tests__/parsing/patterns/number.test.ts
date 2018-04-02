@@ -115,3 +115,25 @@ test('parse', () => {
   expect(pos5.maxFrac).toEqual(0);
   expect(pos5.minFrac).toEqual(0);
 });
+
+test('user-supplied', () => {
+  const p = parse("'&laquo;'#,##0.00'&raquo;';('&laquo;'#,##0.00'&raquo;')");
+  expect(p).toEqual([
+    {
+      nodes: ['&laquo;', NumberField.NUMBER, '&raquo;'],
+      minInt: 1,
+      maxFrac: 2,
+      minFrac: 2,
+      priGroup: 3,
+      secGroup: 0
+    },
+    {
+      nodes: ['(&laquo;', NumberField.NUMBER, '&raquo;)'],
+      minInt: 1,
+      maxFrac: 2,
+      minFrac: 2,
+      priGroup: 3,
+      secGroup: 0
+    }
+  ]);
+});

@@ -1,3 +1,10 @@
+export const enum NumberField {
+  MINUS = 0,
+  PERCENT = 1,
+  CURRENCY = 2,
+  NUMBER = 3
+}
+
 export interface NumberPattern {
   nodes: NumberNode[];
   minInt: number;
@@ -9,35 +16,27 @@ export interface NumberPattern {
 
 export type NumberNode = string | NumberField;
 
-export enum NumberField {
-  MINUS = 0,
-  PERCENT = 1,
-  CURRENCY = 2,
-  NUMBER = 3
-}
+const MINUS_NODE: NumberNode[] = [NumberField.MINUS];
 
-const enum Field {
-  MIN_INT = 0,
-  MAX_FRAC = 1,
-  MIN_FRAC = 2,
-  PRI_GROUP = 3,
-  SEC_GROUP = 4
-}
+const newPattern = (): NumberPattern =>
+  ({ nodes: [], minInt: 0, maxFrac: 0, minFrac: 0, priGroup: 0, secGroup: 0 });
 
 class NumberPatternParser {
 
-  private nodes: NumberNode[] = [];
-  private fields: number[] = [0, 0, 0, 0, 0];
+  private curr: NumberPattern = newPattern();
   private buf: string = '';
   private attached: boolean = false;
 
-  parse(raw: string): NumberPattern {
+  parse(raw: string): NumberPattern[] {
     const len = raw.length;
 
+    let save: NumberPattern | undefined;
+    let curr = this.curr;
     let ingroup = false;
     let indecimal = false;
     let i = 0;
 
+    outer:
     while (i < len) {
       let ch = raw[i];
       switch (ch) {
@@ -51,35 +50,51 @@ class NumberPatternParser {
         }
         break;
 
+      case ';':
+        // If we encounter more than one pattern separator, bail out
+        if (save) {
+          break outer;
+        }
+        this.pushText();
+        // Save current pattern and start parsing a new one
+        save = curr;
+        curr = newPattern();
+        this.curr = curr;
+        // Reset state for next parse
+        indecimal = false;
+        ingroup = false;
+        this.attached = false;
+        break;
+
       case '-':
         this.pushText();
-        this.nodes.push(NumberField.MINUS);
+        curr.nodes.push(NumberField.MINUS);
         break;
 
       case '%':
         this.pushText();
-        this.nodes.push(NumberField.PERCENT);
+        curr.nodes.push(NumberField.PERCENT);
         break;
 
       case '\u00a4':
         this.pushText();
-        this.nodes.push(NumberField.CURRENCY);
+        curr.nodes.push(NumberField.CURRENCY);
         break;
 
       case '#':
         this.attach();
         if (ingroup) {
-          this.fields[Field.PRI_GROUP]++;
+          curr.priGroup++;
         } else if (indecimal) {
-          this.fields[Field.MAX_FRAC]++;
+          curr.maxFrac++;
         }
         break;
 
       case ',':
         this.attach();
         if (ingroup) {
-          this.fields[Field.SEC_GROUP] = this.fields[Field.PRI_GROUP];
-          this.fields[Field.PRI_GROUP] = 0;
+          curr.secGroup = curr.priGroup;
+          curr.priGroup = 0;
         } else {
           ingroup = true;
         }
@@ -94,13 +109,13 @@ class NumberPatternParser {
       case '0':
         this.attach();
         if (ingroup) {
-          this.fields[Field.PRI_GROUP]++;
+          curr.priGroup++;
         } else if (indecimal) {
-          this.fields[Field.MAX_FRAC]++;
-          this.fields[Field.MIN_FRAC]++;
+          curr.maxFrac++;
+          curr.minFrac++;
         }
         if (!indecimal) {
-          this.fields[Field.MIN_INT]++;
+          curr.minInt++;
         }
         break;
 
@@ -112,42 +127,30 @@ class NumberPatternParser {
       i++;
     }
     this.pushText();
-    return {
-      nodes: this.nodes,
-      minInt: this.fields[Field.MIN_INT],
-      maxFrac: this.fields[Field.MAX_FRAC],
-      minFrac: this.fields[Field.MIN_FRAC],
-      priGroup: this.fields[Field.PRI_GROUP],
-      secGroup: this.fields[Field.SEC_GROUP]
-    };
+    if (save === undefined) {
+      // Derive positive from negative by prepending a minus node
+      const { nodes, minInt, maxFrac, minFrac, priGroup, secGroup } = curr;
+      save = curr;
+      curr = { nodes: MINUS_NODE.concat(nodes.slice(0)), minInt, maxFrac, minFrac, priGroup, secGroup };
+    }
+    return [save, curr];
   }
 
   private attach(): void {
     this.pushText();
     if (!this.attached) {
-      this.nodes.push(NumberField.NUMBER);
+      this.curr.nodes.push(NumberField.NUMBER);
       this.attached = true;
     }
   }
 
   private pushText(): void {
     if (this.buf.length > 0) {
-      this.nodes.push(this.buf);
+      this.curr.nodes.push(this.buf);
       this.buf = '';
     }
   }
 }
 
-const parse = (raw: string): NumberPattern => (new NumberPatternParser().parse(raw));
-
-export const parseNumberPattern = (raw: string): NumberPattern[] => {
-  // Check if separate negative and positive patterns are present.
-  const i = raw.indexOf(';');
-  if (i === -1) {
-    // Construct the negative pattern from the positive.
-    return [parse(raw), parse('-' + raw)];
-  }
-  const positive = parse(raw.substring(0, i));
-  const negative = parse(raw.substring(i + 1));
-  return [positive, negative];
-};
+export const parseNumberPattern = (raw: string): NumberPattern[] =>
+  new NumberPatternParser().parse(raw);
