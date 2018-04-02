@@ -1,4 +1,5 @@
 import { FormatWidthType, RelativeTimeWidthType } from '@phensley/cldr-schema';
+import { NumberSystemType } from './numbers';
 
 /**
  * @alpha
@@ -22,6 +23,9 @@ export interface DateFormatOptions {
 
   // Specify the calendar to use.
   readonly ca?: string;
+
+  // Specify the number system to use.
+  readonly nu?: NumberSystemType;
 
   // TODO: add context
   // readonly context: FormatContextType;

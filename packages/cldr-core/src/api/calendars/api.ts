@@ -10,9 +10,9 @@ import {
 } from '@phensley/cldr-schema';
 
 import { Calendars } from '../api';
+import { PrivateApiImpl } from '../private';
 import { Bundle } from '../..';
 import { CalendarInternals, DateFieldInternals, Internals } from '../../internals';
-import { DatePatternManager } from '../../internals/calendars/manager';
 import { DateFormatOptions, RelativeTimeFormatOptions } from '../../common';
 import { DateFormatRequest } from '../../common/private';
 import { ZonedDateTime } from '../../types/datetime';
@@ -32,17 +32,14 @@ export class CalendarsImpl implements Calendars {
   protected datetimeSkels: string[] = [];
   protected calendar: CalendarInternals;
   protected dateFields: DateFieldInternals;
-  protected datePatternManager: DatePatternManager;
 
   constructor(
     protected bundle: Bundle,
-    protected internals: Internals
+    protected internals: Internals,
+    protected privateApi: PrivateApiImpl
   ) {
     this.calendar = internals.calendars;
     this.dateFields = internals.dateFields;
-
-    // TODO: reorg and move this type
-    this.datePatternManager = new DatePatternManager(bundle, internals);
   }
 
   // TODO: rework these to return standalone field for a given 'now'
@@ -92,13 +89,13 @@ export class CalendarsImpl implements Calendars {
 
   formatDate(date: ZonedDateTime, options?: DateFormatOptions): string {
     // TODO: select calendar based on options
-    const request = this.datePatternManager.getRequest(date, options || DEFAULT_OPTIONS);
+    const request = this.privateApi.getDateFormatRequest(date, options || DEFAULT_OPTIONS);
     return this.calendar.formatDate(this.bundle, date, request);
   }
 
   formatDateToParts(date: ZonedDateTime, options?: DateFormatOptions): Part[] {
     // TODO: select calendar based on options
-    const request = this.datePatternManager.getRequest(date, options || DEFAULT_OPTIONS);
+    const request = this.privateApi.getDateFormatRequest(date, options || DEFAULT_OPTIONS);
     return this.calendar.formatDateToParts(this.bundle, date, request);
   }
 

@@ -23,4 +23,5 @@ export interface DateFormatRequest {
   wrapper: string;
   date?: DateTimeNode[];
   time?: DateTimeNode[];
+  params: NumberParams;
 }

@@ -6,7 +6,7 @@ import {
   DATE_PATTERN_CHARS,
   datePatternToString,
   parseDatePattern
-} from '../../parsing/patterns/date';
+} from '../../../parsing/patterns/date';
 
 // Date field types
 const enum F {
@@ -439,7 +439,7 @@ export class DatePatternMatcher {
   /**
    * Make field width adjustments to pattern using the given skeleton.
    */
-  adjust(pattern: DateTimeNode[], skeleton: DateSkeleton): DateTimeNode[] {
+  adjust(pattern: DateTimeNode[], skeleton: DateSkeleton, decimal: string = '.'): DateTimeNode[] {
     const r: DateTimeNode[] = [];
     for (const n of pattern) {
       if (typeof n === 'string') {
@@ -465,6 +465,15 @@ export class DatePatternMatcher {
       // For hour, minute and second we use the width from the pattern.
       if (i === F.HOUR || i === F.MINUTE || i === F.SECOND) {
         r.push([field, adjwidth]);
+
+        // See if skeleton requested fractional seconds and augment the seconds field.
+        if (i === F.SECOND) {
+          const info = skeleton.info[F.FRACTIONAL_SECOND];
+          if (info !== undefined) {
+            r.push(decimal);
+            r.push([info.field, info.width]);
+          }
+        }
         continue;
       }
 

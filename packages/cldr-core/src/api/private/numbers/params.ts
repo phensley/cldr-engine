@@ -7,12 +7,12 @@ import {
   Schema
 } from '@phensley/cldr-schema';
 
-import { Internals } from '../../internals';
-import { NumberSystemType } from '../../common';
-import { NumberParams } from '../../common/private';
-import { numericNumberingDigits } from '../../systems';
-import { LRU } from './../../utils/lru';
-import { Bundle } from '../../resource';
+import { Internals } from '../../../internals';
+import { NumberSystemType } from '../../../common';
+import { NumberParams } from '../../../common/private';
+import { numericNumberingDigits } from '../../../systems';
+import { LRU } from './../../../utils/lru';
+import { Bundle } from '../../../resource';
 
 export class NumberParamsCache {
 

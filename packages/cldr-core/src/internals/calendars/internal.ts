@@ -33,7 +33,6 @@ import { zeroPad2 } from '../../utils/string';
 import { Part, ZonedDateTime } from '../../types';
 import { Bundle } from '../../resource';
 import { CalendarInternals, WrapperInternals } from '../../internals';
-import { DatePatternMatcher } from './matcher';
 
 /**
  * Function that formats a given date field.
@@ -84,6 +83,8 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   readonly datePatternCache: Cache<DateTimeNode[]>;
   readonly hourFormatCache: Cache<[DateTimeNode[], DateTimeNode[]]>;
   readonly dayPeriodRules: DayPeriodRules;
+
+  // TODO: use number system
 
   private impl: FieldFormatterMap = {
     'G': { type: 'era', impl: this.era },
@@ -332,7 +333,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   protected fractionalSecond(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     let millis = date.getMillisecond();
     let r = '';
-    let f = 1000;
+    let f = 100;
     while (width > 0 && f > 0) {
       const digit = Math.floor(millis / f);
       millis -= (digit * f);

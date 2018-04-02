@@ -8,15 +8,15 @@ import {
 } from '@phensley/cldr-schema';
 
 import { timeData } from './autogen.timedata';
-import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
-import { DateFormatOptions } from '../../common';
-import { DateFormatRequest } from '../../common/private';
-import { Internals } from '../../internals';
-import { Bundle } from '../../resource';
+import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../../parsing/patterns/date';
+import { DateFormatOptions } from '../../../common';
+import { DateFormatRequest, NumberParams } from '../../../common/private';
+import { Internals } from '../../../internals';
+import { Bundle } from '../../../resource';
 import { DatePatternMatcher, DateSkeleton } from './matcher';
-import { coerceDecimal, ZonedDateTime } from '../../types';
-import { Cache } from '../../utils/cache';
-import { LRU } from '../../utils/lru';
+import { coerceDecimal, ZonedDateTime } from '../../../types';
+import { Cache } from '../../../utils/cache';
+import { LRU } from '../../../utils/lru';
 
 export interface DateSkeletons {
   // Date pattern that matched the skeleton
@@ -109,7 +109,7 @@ export class DatePatternManager {
    * do a best-fit match to find the patterns, adjusted per the skeleton field
    * widths where possible.
    */
-  getRequest(d: ZonedDateTime, options: DateFormatOptions): DateFormatRequest {
+  getRequest(d: ZonedDateTime, options: DateFormatOptions, params: NumberParams): DateFormatRequest {
     const calendar = options.ca || this.defaultCalendar();
     // TODO: calendar support
     const [dateKey, timeKey, skelKey] = this.getPatternTypes(options);
@@ -117,7 +117,7 @@ export class DatePatternManager {
     // TODO: default wrapper
     let wrapKey: string | undefined = options.wrap;
     const wrapper = this.Gregorian.dateTimeFormats(this.bundle, (wrapKey || 'short') as FormatWidthType);
-    const req: DateFormatRequest = { wrapper };
+    const req: DateFormatRequest = { wrapper, params };
 
     // Handle standard named patterns
     if (dateKey !== '') {
@@ -174,14 +174,14 @@ export class DatePatternManager {
     let time: DateTimeNode[] | undefined;
     if (dateSkel) {
       const tempDate = dateSkel.pattern || this.getSkeletonPattern(d, dateSkel.skeleton);
-      date = matcher.adjust(tempDate, query);
+      date = matcher.adjust(tempDate, query, params.symbols.decimal);
       if (date.length === 0) {
         date = undefined;
       }
     }
     if (tquery && timeSkel) {
       const tempTime = timeSkel.pattern || this.getSkeletonPattern(d, timeSkel.skeleton);
-      time = matcher.adjust(tempTime, tquery);
+      time = matcher.adjust(tempTime, tquery, params.symbols.decimal);
       if (time.length === 0) {
         time = undefined;
       }

@@ -1,5 +1,5 @@
 import { BE, EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
-import { Bundle, CalendarsImpl, InternalsImpl } from '../../../src';
+import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
 import { ZonedDateTime } from '../../../src/types/datetime';
 
 const INTERNALS = new InternalsImpl();
@@ -14,7 +14,8 @@ const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
 const LONDON = 'Europe/London';
 
-const calendarsApi = (bundle: Bundle) => new CalendarsImpl(bundle, INTERNALS);
+const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
+const calendarsApi = (bundle: Bundle) => new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 
 test('best-fit skeleton matching', () => {
   const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);

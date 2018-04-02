@@ -1,5 +1,5 @@
 import { BE, EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
-import { Bundle, CalendarsImpl, InternalsImpl } from '../../../src';
+import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
 import { ZonedDateTime } from '../../../src/types/datetime';
 
 const INTERNALS = new InternalsImpl();
@@ -14,7 +14,8 @@ const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
 const LONDON = 'Europe/London';
 
-const calendarsApi = (bundle: Bundle) => new CalendarsImpl(bundle, INTERNALS);
+const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
+const calendarsApi = (bundle: Bundle) => new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 
 test('formats', () => {
   const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
@@ -95,6 +96,45 @@ test('skeletons', () => {
 
   s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'short' });
   expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
+});
+
+test('fractional seconds', () => {
+  const base = MARCH_11_2018_070025_UTC;
+  let api = calendarsApi(EN);
+  let s: string;
+  let date: ZonedDateTime;
+
+  date = datetime(base, LOS_ANGELES);
+  s = api.formatDate(date, { skeleton: 'hmsS' });
+  expect(s).toEqual('11:00:25.0 PM');
+
+  date = datetime(base, LOS_ANGELES);
+  s = api.formatDate(date, { skeleton: 'hmsSS' });
+  expect(s).toEqual('11:00:25.00 PM');
+
+  date = datetime(base, LOS_ANGELES);
+  s = api.formatDate(date, { skeleton: 'hmsSSS' });
+  expect(s).toEqual('11:00:25.000 PM');
+
+  date = datetime(base + 567, LOS_ANGELES);
+  s = api.formatDate(date, { skeleton: 'hmsS' });
+  expect(s).toEqual('11:00:25.5 PM');
+
+  date = datetime(base + 567, LOS_ANGELES);
+  s = api.formatDate(date, { skeleton: 'hmsSS' });
+  expect(s).toEqual('11:00:25.56 PM');
+
+  date = datetime(base + 567, LOS_ANGELES);
+  s = api.formatDate(date, { skeleton: 'hmsSSS' });
+  expect(s).toEqual('11:00:25.567 PM');
+
+  date = datetime(base + 567, LOS_ANGELES);
+  s = api.formatDate(date, { skeleton: 'hmsSSSS' });
+  expect(s).toEqual('11:00:25.5670 PM');
+
+  api = calendarsApi(FR);
+  s = api.formatDate(date, { skeleton: 'hmsSSSS' });
+  expect(s).toEqual('11:00:25,5670 PM');
 });
 
 // TODO: implement skeleton metacharacters
@@ -456,24 +496,24 @@ test('timezone iso8601 basic/extended', () => {
 });
 
 test('iso week', () => {
-  const e = new CalendarsImpl(EN, INTERNALS);
+  const api = calendarsApi(EN);
   const base = MARCH_11_2018_070025_UTC;
   let d: ZonedDateTime;
 
   d = datetime(base, NEW_YORK);
   expect(d.getDayOfYear()).toEqual(70);
-  expect(e.getCompactISOWeekDate(d)).toEqual('2018W107');
-  expect(e.getExtendedISOWeekDate(d)).toEqual('2018-W10-7');
+  expect(api.getCompactISOWeekDate(d)).toEqual('2018W107');
+  expect(api.getExtendedISOWeekDate(d)).toEqual('2018-W10-7');
 
   d = datetime(base + (10 * DAY), NEW_YORK);
   expect(d.getDayOfYear()).toEqual(80);
-  expect(e.getCompactISOWeekDate(d)).toEqual('2018W123');
-  expect(e.getExtendedISOWeekDate(d)).toEqual('2018-W12-3');
+  expect(api.getCompactISOWeekDate(d)).toEqual('2018W123');
+  expect(api.getExtendedISOWeekDate(d)).toEqual('2018-W12-3');
 
   d = datetime(base + (90 * DAY), NEW_YORK);
   expect(d.getDayOfYear()).toEqual(160);
-  expect(e.getCompactISOWeekDate(d)).toEqual('2018W236');
-  expect(e.getExtendedISOWeekDate(d)).toEqual('2018-W23-6');
+  expect(api.getCompactISOWeekDate(d)).toEqual('2018W236');
+  expect(api.getExtendedISOWeekDate(d)).toEqual('2018-W23-6');
 });
 
 test('timezone short/long localized gmt', () => {

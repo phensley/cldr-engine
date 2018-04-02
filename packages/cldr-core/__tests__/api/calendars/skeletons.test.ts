@@ -1,12 +1,14 @@
 import { EN } from '../../_helpers';
-import { Bundle, CalendarsImpl, InternalsImpl } from '../../../src';
+import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
 
 import { parseDatePattern } from '../../../src/parsing/patterns/date';
-import { DatePatternMatcher, DateSkeleton } from '../../../src/internals/calendars/matcher';
-import { DatePatternManager } from '../../../src/internals/calendars/manager';
+import { DatePatternMatcher, DateSkeleton } from '../../../src/api/private/calendars/matcher';
+import { DatePatternManager } from '../../../src/api/private/calendars/manager';
 import { ZonedDateTime } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
+
+const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 
 const parse = DateSkeleton.parse;
 const parsePattern = DateSkeleton.parsePattern;
@@ -44,30 +46,33 @@ test('compound split', () => {
 });
 
 test('matching skeletons', () => {
+  const api = privateApi(EN);
+  const params = api.getNumberParams('latn');
+
   const m = new DatePatternManager(EN, INTERNALS, 10);
   const d = datetime(MARCH_11_2018_070025_UTC, 'America/New_York');
-  let r = m.getRequest(d, { skeleton: 'yw' });
+  let r = m.getRequest(d, { skeleton: 'yw' }, params);
   expect(r.date).toEqual(['week ', ['w', 1], ' of ', ['Y', 1]]);
   expect(r.time).toEqual(undefined);
 
   // TODO: append individual missing fields to pattern
-  r = m.getRequest(d, { skeleton: 'ywd' });
+  r = m.getRequest(d, { skeleton: 'ywd' }, params);
   expect(r.date).toEqual(['week ', ['w', 1], ' of ', ['Y', 1]]);
   expect(r.time).toEqual(undefined);
 
-  r = m.getRequest(d, { skeleton: 'MMMMW' });
+  r = m.getRequest(d, { skeleton: 'MMMMW' }, params);
   expect(r.date).toEqual(['week ', ['W', 1], ' of ', ['M', 4]]);
   expect(r.time).toEqual(undefined);
 
-  r = m.getRequest(d, { skeleton: 'yQQQQQd' });
+  r = m.getRequest(d, { skeleton: 'yQQQQQd' }, params);
   expect(r.date).toEqual([['Q', 5], ' ', ['y', 1]]);
   expect(r.time).toEqual(undefined);
 
-  r = m.getRequest(d, { skeleton: 'yMMMdhmsv' });
+  r = m.getRequest(d, { skeleton: 'yMMMdhmsv' }, params);
   expect(r.date).toEqual([['M', 3], ' ', ['d', 1], ', ', ['y', 1]]);
   expect(r.time).toEqual([['h', 1], ':', ['m', 2], ':', ['s', 2], ' ', ['a', 1], ' ', ['v', 1]]);
 
-  r = m.getRequest(d, { date: 'full' });
+  r = m.getRequest(d, { date: 'full' }, params);
   expect(r.date).toEqual([['E', 4], ', ', ['M', 4], ' ', ['d', 1], ', ', ['y', 1]]);
   expect(r.time).toEqual(undefined);
 });

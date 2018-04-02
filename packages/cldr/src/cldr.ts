@@ -213,7 +213,7 @@ export class CLDRFramework {
     const privateApi = new PrivateApiImpl(bundle, this.internals);
 
     return {
-      Calendars: new CalendarsImpl(bundle, this.internals),
+      Calendars: new CalendarsImpl(bundle, this.internals, privateApi),
       General: new GeneralImpl(bundle, this.internals),
       Locales: new Locales(locale, bundle),
       Numbers: new NumbersImpl(bundle, this.internals, privateApi),
