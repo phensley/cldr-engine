@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-core",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Core library for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -27,7 +27,7 @@
     "lib/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "^0.3.8"
+    "@phensley/cldr-schema": "^0.3.9"
   },
   "devDependencies": {
     "@types/jest": "^22.2.2",
