@@ -472,9 +472,8 @@ export class DatePatternMatcher {
         continue;
       }
 
-      // TODO: handle 'J' for default hour cycle
-
-      // Adjust width of fields to match skeleton
+      // Adjust field and width to match skeleton below
+      let adjfield = field;
       let adjwidth = width;
 
       const i = p[1];
@@ -483,7 +482,7 @@ export class DatePatternMatcher {
 
       // For hour, minute and second we use the width from the pattern.
       if (i === F.HOUR || i === F.MINUTE || i === F.SECOND) {
-        r.push([field, adjwidth]);
+        r.push([adjfield, adjwidth]);
 
         // See if skeleton requested fractional seconds and augment the seconds field.
         if (i === F.SECOND) {
@@ -498,14 +497,20 @@ export class DatePatternMatcher {
 
       const ptype = p[2];
       const stype = skeleton.type[i];
-      if ((ptype > 0 && stype > 0) || (ptype < 0 || stype < 0)) {
+      // Ensure magnitudes are the same
+      if ((ptype < 0 && stype < 0) || (ptype > 0 && stype > 0)) {
         const _info = skeleton.info[i];
         if (_info !== undefined) {
+          adjfield = _info.field;
           adjwidth = _info.width;
         }
       }
 
-      r.push([field, adjwidth]);
+      // Metacharacters have already been replaced in the pattern.
+      if ('jJC'.indexOf(adjfield) !== -1) {
+        adjfield = field;
+      }
+      r.push([adjfield, adjwidth]);
     }
 
     // TODO: handle appending missing fields

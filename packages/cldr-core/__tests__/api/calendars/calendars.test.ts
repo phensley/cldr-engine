@@ -85,6 +85,13 @@ test('skeletons', () => {
   s = api.formatDate(mar11, { skeleton: 'yMdc' });
   expect(s).toEqual('Sat, 3/10/2018');
 
+  s = api.formatDate(mar11, { skeleton: 'Yw' });
+  expect(s).toEqual('week 10 of 2018');
+
+  // TODO: implement 'W' field
+  // s = api.formatDate(mar11, { skeleton: 'MMMMW' });
+  // expect(s).toEqual('week 10 of 2018');
+
   s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'full' });
   expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
 

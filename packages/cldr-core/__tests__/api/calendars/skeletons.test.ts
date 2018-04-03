@@ -51,12 +51,13 @@ test('matching skeletons', () => {
 
   const m = new DatePatternManager(EN, INTERNALS, 10);
   const d = datetime(MARCH_11_2018_070025_UTC, 'America/New_York');
-  let r = m.getRequest(d, { skeleton: 'yw' }, params);
+  let r = m.getRequest(d, { skeleton: 'Yw' }, params);
   expect(r.date).toEqual(['week ', ['w', 1], ' of ', ['Y', 1]]);
   expect(r.time).toEqual(undefined);
 
   // TODO: append individual missing fields to pattern
-  r = m.getRequest(d, { skeleton: 'ywd' }, params);
+
+  r = m.getRequest(d, { skeleton: 'Ywd' }, params);
   expect(r.date).toEqual(['week ', ['w', 1], ' of ', ['Y', 1]]);
   expect(r.time).toEqual(undefined);
 
@@ -75,6 +76,10 @@ test('matching skeletons', () => {
   r = m.getRequest(d, { date: 'full' }, params);
   expect(r.date).toEqual([['E', 4], ', ', ['M', 4], ' ', ['d', 1], ', ', ['y', 1]]);
   expect(r.time).toEqual(undefined);
+
+  r = m.getRequest(d, { skeleton: 'hmsVVV' }, params);
+  expect(r.date).toEqual(undefined);
+  expect(r.time).toEqual([['h', 1], ':', ['m', 2], ':', ['s', 2], ' ', ['a', 1], ' ', ['V', 3]]);
 });
 
 test('parsing skeletons', () => {
