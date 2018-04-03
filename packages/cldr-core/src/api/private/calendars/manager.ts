@@ -230,14 +230,17 @@ export class DatePatternManager {
 
     const req: DateIntervalFormatRequest = { params, wrapper };
 
-    // Use skeleton to find best fit patterns.
     const { matcher, cache } = this.getIntervalMatcher(calendar);
-    let pattern = cache.get(skeleton);
+
+    // Check cache if this combination of skeleton / field of greatest difference exists.
+    const key = `${skeleton}\t${field}`;
+    let pattern = cache.get(key);
     if (pattern !== undefined) {
       req.pattern = pattern;
       return req;
     }
 
+    // Use skeleton to find best fit patterns.
     const query = DateSkeleton.parse(skeleton, this.preferredFlex, this.allowedFlex[0]);
     if (query.compound()) {
       // We cannot format an interval containing date and time fields. Fall back to
@@ -257,7 +260,7 @@ export class DatePatternManager {
 
     if (pattern) {
       // Remember this pattern for next time
-      cache.set(skeleton, pattern);
+      cache.set(key, pattern);
       return { pattern, params, wrapper };
     }
     // Fallback

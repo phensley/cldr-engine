@@ -257,6 +257,8 @@ test('parts', () => {
 test('intervals best-fit', () => {
   const mar11 = datetime(MARCH_11_2018_070025_UTC + 789, LOS_ANGELES);
   const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const jan2019 = datetime(MARCH_11_2018_070025_UTC + (DAY * 301), LOS_ANGELES);
+
   const api = calendarsApi(EN);
   let s: string;
 
@@ -265,6 +267,9 @@ test('intervals best-fit', () => {
 
   s = api.formatDateInterval(mar11, mar14, { skeleton: 'yEMMMd' });
   expect(s).toEqual('Sat, Mar 10 – Wed, Mar 14, 2018');
+
+  s = api.formatDateInterval(mar11, jan2019, { skeleton: 'yMMMd' });
+  expect(s).toEqual('Mar 10, 2018 – Jan 5, 2019');
 
   // Fallback
   s = api.formatDateInterval(mar11, mar14, { skeleton: 'MMMdh' });
