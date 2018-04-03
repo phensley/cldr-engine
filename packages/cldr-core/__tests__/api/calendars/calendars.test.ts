@@ -254,19 +254,39 @@ test('parts', () => {
   ]);
 });
 
+test('intervals best-fit', () => {
+  const mar11 = datetime(MARCH_11_2018_070025_UTC + 789, LOS_ANGELES);
+  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const api = calendarsApi(EN);
+  let s: string;
+
+  s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
+  expect(s).toEqual('Mar 10 – 14, 2018');
+
+  s = api.formatDateInterval(mar11, mar14, { skeleton: 'yEMMMd' });
+  expect(s).toEqual('Sat, Mar 10 – Wed, Mar 14, 2018');
+
+  // Fallback
+  s = api.formatDateInterval(mar11, mar14, { skeleton: 'MMMdh' });
+  expect(s).toEqual('Mar 10, 11 PM – Mar 14, 12 AM');
+
+  s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMddhmsSSSv' });
+  expect(s).toEqual('Mar 10, 2018, 11:00:25.789 PM PT – Mar 14, 2018, 12:00:25.000 AM PT');
+});
+
 test('intervals', () => {
   const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
   const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   let api = calendarsApi(EN);
-  let s = api.formatDateInterval(mar11, mar14, 'yMMMd');
+  let s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
   expect(s).toEqual('Mar 10 – 14, 2018');
 
   api = calendarsApi(EN_GB);
   s = api.formatDate(mar11, { date: 'full' });
   expect(s).toEqual('Saturday, 10 March 2018');
 
-  s = api.formatDateInterval(mar11, mar14, 'yMMMd');
+  s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
   expect(s).toEqual('10–14 Mar 2018');
 
   api = calendarsApi(ES);
@@ -299,9 +319,9 @@ test('interval parts', () => {
   const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   const api = calendarsApi(EN);
-  const p = api.formatDateIntervalToParts(mar11, mar14, 'yMMMd');
+  const p = api.formatDateIntervalToParts(mar11, mar14, { skeleton: 'yMMMMd' });
   expect(p).toEqual([
-    { type: 'month', value: 'Mar' },
+    { type: 'month', value: 'March' },
     { type: 'literal', value: ' ' },
     { type: 'day', value: '10' },
     { type: 'literal', value: ' – ' },

@@ -13,6 +13,7 @@ import {
   CurrencySymbolWidthType,
   DecimalFormatOptions,
   DateFormatOptions,
+  DateIntervalFormatOptions,
   ListPatternType,
   Quantity,
   RelativeTimeFormatOptions,
@@ -56,12 +57,22 @@ export interface Calendars {
   /**
    * Formats a date-time interval for the given skeleton to string.
    */
-  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): string;
+  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): string;
 
   /**
    * Formats a date-time interval for the given skeleton to an array of parts.
    */
-  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): Part[];
+  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): Part[];
+
+  /**
+   * Formats a date-time interval for the given skeleton to string.
+   */
+  // formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): string;
+
+  /**
+   * Formats a date-time interval for the given skeleton to an array of parts.
+   */
+  // formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): Part[];
 
   /**
    * Formats a relative time field to string.

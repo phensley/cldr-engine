@@ -54,5 +54,5 @@ export interface GregorianSchema {
   readonly availableFormats: FieldMapArrow<string>;
   readonly pluralAvailableFormats: FieldMapIndexedArrow<string, Plural>;
   readonly intervalFormats: ScopeArrow<string, IntervalFormats>;
-  readonly intervalFallbackFormat: FieldArrow;
+  readonly intervalFormatFallback: FieldArrow;
 }

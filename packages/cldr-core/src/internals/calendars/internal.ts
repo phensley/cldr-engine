@@ -26,7 +26,7 @@ import {
 import { weekFirstDay } from './autogen.weekdata';
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
 import { DateFormatOptions } from '../../common';
-import { DateFormatRequest } from '../../common/private';
+import { DateFormatRequest, DateIntervalFormatRequest } from '../../common/private';
 import { DayPeriodRules } from './rules';
 import { Cache } from '../../utils/cache';
 import { zeroPad2 } from '../../utils/string';
@@ -175,22 +175,32 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     return _date !== undefined ? _date : _time !== undefined ? _time : [];
   }
 
-  /**
-   * Format a date-time interval pattern as a sring.
-   */
-  formatDateInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): string {
-    const format = this.datePatternCache.get(pattern);
-    // TODO: use fallback format if format.length == 0
-    const idx = intervalPatternBoundary(format);
-    const res = this._format(bundle, start, format.slice(0, idx));
-    return res + this._format(bundle, end, format.slice(idx));
+  formatDateInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: DateTimeNode[]): string {
+    const idx = intervalPatternBoundary(pattern);
+    const res = this._format(bundle, start, pattern.slice(0, idx));
+    return res + this._format(bundle, end, pattern.slice(idx));
   }
 
-  formatDateIntervalToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): Part[] {
-    const format = this.datePatternCache.get(pattern);
-    const idx = intervalPatternBoundary(format);
-    const res = this._formatParts(bundle, start, format.slice(0, idx));
-    return res.concat(this._formatParts(bundle, end, format.slice(idx)));
+  formatDateIntervalToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: DateTimeNode[]): Part[] {
+    const idx = intervalPatternBoundary(pattern);
+    const res = this._formatParts(bundle, start, pattern.slice(0, idx));
+    return res.concat(this._formatParts(bundle, end, pattern.slice(idx)));
+  }
+
+  formatDateIntervalFallback(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
+    request: DateFormatRequest, wrapper: string): string {
+
+    const s = this.formatDate(bundle, start, request);
+    const e = this.formatDate(bundle, end, request);
+    return this.wrapper.format(wrapper, [s, e]);
+  }
+
+  formatDateIntervalFallbackToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
+    request: DateFormatRequest, wrapper: string): Part[] {
+
+    const s = this.formatDateToParts(bundle, start, request);
+    const e = this.formatDateToParts(bundle, end, request);
+    return this.wrapper.formatParts(wrapper, [s, e]);
   }
 
   formatDateRaw(bundle: Bundle, date: ZonedDateTime, pattern: string): string {

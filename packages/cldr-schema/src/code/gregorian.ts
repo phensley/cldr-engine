@@ -1,4 +1,4 @@
-import { Choice, Scope, FieldMap, fieldmap, scope, scopefield, scopemap } from './instructions';
+import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap } from './instructions';
 
 import {
   DateTimePatternFieldValues,
@@ -45,5 +45,7 @@ export const GREGORIAN: Scope = scope('Gregorian', 'Gregorian', [
 
   scopemap('intervalFormats', GregorianInfo.intervalFormats, [
     scopefield('field', DateTimePatternFieldValues)
-  ])
+  ]),
+
+  field('intervalFormatFallback', 'intervalFormatFallback')
 ]);

@@ -13,7 +13,7 @@ import { Calendars } from '../api';
 import { PrivateApiImpl } from '../private';
 import { Bundle } from '../..';
 import { CalendarInternals, DateFieldInternals, Internals } from '../../internals';
-import { DateFormatOptions, RelativeTimeFormatOptions } from '../../common';
+import { DateFormatOptions, DateIntervalFormatOptions, RelativeTimeFormatOptions } from '../../common';
 import { DateFormatRequest } from '../../common/private';
 import { ZonedDateTime } from '../../types/datetime';
 import { DecimalArg, Part } from '../../types';
@@ -99,16 +99,28 @@ export class CalendarsImpl implements Calendars {
     return this.calendar.formatDateToParts(this.bundle, date, request);
   }
 
-  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): string {
-    const field = start.fieldOfGreatestDifference(end);
-    const pattern = this.calendar.intervalFormats(this.bundle, skeleton, field);
-    return this.calendar.formatDateInterval(this.bundle, start, end, pattern);
+  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): string {
+    options = options || DEFAULT_OPTIONS;
+    const req = this.privateApi.getDateIntervalFormatRequest(start, end, options || DEFAULT_OPTIONS);
+    if (req.pattern) {
+      return this.calendar.formatDateInterval(this.bundle, start, end, req.pattern);
+    }
+
+    const { skeleton, ca, nu } = options;
+    const request = this.privateApi.getDateFormatRequest(start, { skeleton, ca, nu });
+    return this.calendar.formatDateIntervalFallback(this.bundle, start, end, request, req.wrapper);
   }
 
-  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): Part[] {
-    const field = start.fieldOfGreatestDifference(end);
-    const pattern = this.calendar.intervalFormats(this.bundle, skeleton, field);
-    return this.calendar.formatDateIntervalToParts(this.bundle, start, end, pattern);
+  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): Part[] {
+    options = options || DEFAULT_OPTIONS;
+    const req = this.privateApi.getDateIntervalFormatRequest(start, end, options || DEFAULT_OPTIONS);
+    if (req.pattern) {
+      return this.calendar.formatDateIntervalToParts(this.bundle, start, end, req.pattern);
+    }
+
+    const { skeleton, ca, nu } = options;
+    const request = this.privateApi.getDateFormatRequest(start, { skeleton, ca, nu });
+    return this.calendar.formatDateIntervalFallbackToParts(this.bundle, start, end, request, req.wrapper);
   }
 
   // TODO: compute field difference and format

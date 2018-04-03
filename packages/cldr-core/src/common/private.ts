@@ -25,3 +25,14 @@ export interface DateFormatRequest {
   time?: DateTimeNode[];
   params: NumberParams;
 }
+
+/**
+ * @internal
+ */
+export interface DateIntervalFormatRequest {
+  pattern?: DateTimeNode[];
+  params: NumberParams;
+
+  // Wrapper for fallback
+  wrapper: string;
+}

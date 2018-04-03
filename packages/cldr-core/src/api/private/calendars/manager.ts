@@ -1,16 +1,17 @@
 import {
+  DateTimePatternFieldType,
   GregorianInfo,
   FormatWidthType,
   FormatWidthValues,
   GregorianSchema,
   Plural,
-  Schema,
+  Schema
 } from '@phensley/cldr-schema';
 
 import { timeData } from './autogen.timedata';
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../../parsing/patterns/date';
-import { DateFormatOptions } from '../../../common';
-import { DateFormatRequest, NumberParams } from '../../../common/private';
+import { DateFormatOptions, DateIntervalFormatOptions } from '../../../common';
+import { DateFormatRequest, DateIntervalFormatRequest, NumberParams } from '../../../common/private';
 import { Internals } from '../../../internals';
 import { Bundle } from '../../../resource';
 import { DatePatternMatcher, DateSkeleton } from './matcher';
@@ -36,6 +37,11 @@ export interface CalendarMatcher {
   cache: LRU<string, DatePatterns>;
 }
 
+export interface IntervalMatcher {
+  matcher: DatePatternMatcher;
+  cache: LRU<string, DateTimeNode[]>;
+}
+
 const CANONICAL_FIELDS = [
   'G', 'y', 'Q', 'M', 'w', 'W', 'E',
   'd', 'D', 'F', 'a',
@@ -59,7 +65,8 @@ export class DatePatternManager {
 
   // TODO: generalize to any calendar
   private Gregorian: GregorianSchema;
-  private matchers: LRU<string, CalendarMatcher>;
+  private dateMatchers: LRU<string, CalendarMatcher>;
+  private intervalMatchers: LRU<string, IntervalMatcher>;
   private patternCache: Cache<DateTimeNode[]>;
   private allowedFlex: DateTimeNode[][];
   private preferredFlex: DateTimeNode[];
@@ -70,7 +77,8 @@ export class DatePatternManager {
     readonly cacheSize: number = 50) {
 
     // Size this to number of calendars
-    this.matchers = new LRU(10);
+    this.dateMatchers = new LRU(10);
+    this.intervalMatchers = new LRU(10);
 
     // TODO: Use the calendar internals pattern cache
     this.patternCache = new Cache(parseDatePattern, cacheSize);
@@ -213,6 +221,49 @@ export class DatePatternManager {
     return req;
   }
 
+  getIntervalRequest(start: ZonedDateTime, end: ZonedDateTime,
+      options: DateIntervalFormatOptions, params: NumberParams): DateIntervalFormatRequest {
+    const calendar = options.ca || this.defaultCalendar();
+    const field = start.fieldOfGreatestDifference(end);
+    const skeleton = options.skeleton || 'yMd';
+    const wrapper = this.Gregorian.intervalFormatFallback(this.bundle);
+
+    const req: DateIntervalFormatRequest = { params, wrapper };
+
+    // Use skeleton to find best fit patterns.
+    const { matcher, cache } = this.getIntervalMatcher(calendar);
+    let pattern = cache.get(skeleton);
+    if (pattern !== undefined) {
+      req.pattern = pattern;
+      return req;
+    }
+
+    const query = DateSkeleton.parse(skeleton, this.preferredFlex, this.allowedFlex[0]);
+    if (query.compound()) {
+      // We cannot format an interval containing date and time fields. Fall back to
+      // default.
+      return req;
+    }
+
+    const skel = matcher.match(query);
+    if (skel) {
+      pattern = this.getIntervalPattern(skel.skeleton, field);
+      if (pattern === undefined) {
+        // Fallback
+        return req;
+      }
+      pattern = matcher.adjust(pattern, query, params.symbols.decimal);
+    }
+
+    if (pattern) {
+      // Remember this pattern for next time
+      cache.set(skeleton, pattern);
+      return { pattern, params, wrapper };
+    }
+    // Fallback
+    return req;
+  }
+
   protected getWrapper(dateSkel: DateSkeleton, date: DateTimeNode[], time: DateTimeNode[]): string {
     let wrapKey = 'short';
     const monthWidth = dateSkel.monthWidth();
@@ -255,11 +306,20 @@ export class DatePatternManager {
     return this.patternCache.get(raw);
   }
 
+  protected getIntervalPattern(skeleton: string, field: DateTimePatternFieldType): DateTimeNode[] | undefined {
+    const formats = this.Gregorian.intervalFormats(skeleton);
+    let raw = '';
+    if (formats) {
+      raw = formats.field(this.bundle, field);
+    }
+    return raw ? this.patternCache.get(raw) : undefined;
+  }
+
   /**
    * Build a date pattern matcher for the given calendar type.
    */
   protected getCalendarMatcher(calendar: string): CalendarMatcher {
-    let m = this.matchers.get(calendar);
+    let m = this.dateMatchers.get(calendar);
     if (m !== undefined) {
       return m;
     }
@@ -298,7 +358,24 @@ export class DatePatternManager {
     }
 
     m = { matcher: dm, cache: new LRU(this.cacheSize) };
-    this.matchers.set(calendar, m);
+    this.dateMatchers.set(calendar, m);
+    return m;
+  }
+
+  protected getIntervalMatcher(calendar: string): IntervalMatcher {
+    let m = this.intervalMatchers.get(calendar);
+    if (m !== undefined) {
+      return m;
+    }
+
+    const dm = new DatePatternMatcher();
+    for (const k of GregorianInfo.intervalFormats) {
+      const s = DateSkeleton.parse(k, this.preferredFlex, this.allowedFlex[0]);
+      dm.add(s);
+    }
+
+    m = { matcher: dm, cache: new LRU(this.cacheSize) };
+    this.intervalMatchers.set(calendar, m);
     return m;
   }
 

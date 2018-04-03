@@ -20,8 +20,9 @@ import {
   UnitFormatOptions
 } from '../common';
 
-import { DateFormatRequest, NumberParams } from '../common/private';
+import { DateFormatRequest, NumberParams, DateIntervalFormatRequest } from '../common/private';
 import { Bundle } from '../resource';
+import { DateTimeNode } from '../parsing/patterns/date';
 import { NumberPattern } from '../parsing/patterns/number';
 import { Decimal, DecimalArg, NumberOperands, Part, ZonedDateTime } from '../types';
 
@@ -29,8 +30,19 @@ export interface CalendarInternals {
 
   formatDate(bundle: Bundle, date: ZonedDateTime, request: DateFormatRequest): string;
   formatDateToParts(bundle: Bundle, date: ZonedDateTime, request: DateFormatRequest): Part[];
-  formatDateInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): string;
-  formatDateIntervalToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime, pattern: string): Part[];
+
+  formatDateInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
+    pattern: DateTimeNode[]): string;
+
+  formatDateIntervalToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
+    pattern: DateTimeNode[]): Part[];
+
+  formatDateIntervalFallback(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
+    request: DateFormatRequest, wrapper: string): string;
+
+  formatDateIntervalFallbackToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
+    request: DateFormatRequest, wrapper: string): Part[];
+
   formatDateRaw(bundle: Bundle, date: ZonedDateTime, pattern: string): string;
   formatDateRawToParts(bundle: Bundle, date: ZonedDateTime, pattern: string): Part[];
   intervalFormats(bundle: Bundle, skeleton: string, field: DateTimePatternFieldType): string;

@@ -34,6 +34,20 @@ export interface DateFormatOptions {
 /**
  * @alpha
  */
+export interface DateIntervalFormatOptions {
+
+  readonly skeleton: string;
+
+  // Specify the calendar to use
+  readonly ca?: string;
+
+  // Specify the number system to use
+  readonly nu?: NumberSystemType;
+}
+
+/**
+ * @alpha
+ */
 export interface RelativeTimeFormatOptions {
   width?: RelativeTimeWidthType;
 }

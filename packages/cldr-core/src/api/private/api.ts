@@ -1,8 +1,8 @@
 import { Bundle, ZonedDateTime } from '../../';
 import { Internals } from '../../internals';
-import { NumberSystemType, DateFormatOptions } from '../../common';
+import { NumberSystemType, DateFormatOptions, DateIntervalFormatOptions } from '../../common';
 import { NumberParamsCache } from './numbers/params';
-import { DateFormatRequest, NumberParams } from '../../common/private';
+import { DateFormatRequest, DateIntervalFormatRequest, NumberParams } from '../../common/private';
 import { DatePatternManager } from './calendars/manager';
 
 /**
@@ -28,5 +28,11 @@ export class PrivateApiImpl {
   getDateFormatRequest(date: ZonedDateTime, options: DateFormatOptions): DateFormatRequest {
     const params = this.getNumberParams(options.nu);
     return this.datePatternManager.getRequest(date, options, params);
+  }
+
+  getDateIntervalFormatRequest(start: ZonedDateTime, end: ZonedDateTime,
+      options: DateIntervalFormatOptions): DateIntervalFormatRequest {
+    const params = this.getNumberParams(options.nu);
+    return this.datePatternManager.getIntervalRequest(start, end, options, params);
   }
 }
