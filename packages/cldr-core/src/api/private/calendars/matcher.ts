@@ -387,11 +387,6 @@ export class DateSkeleton {
   }
 
   private set(input: string, field: string, width: number): void {
-
-    // TODO: handle 'jJC' characters in skeleton, substituting the locale-appropriate
-    // fields.  need default hour format, allowed hour formats, etc from bundle for
-    // this calendar.
-
     const ft = getFieldType(field, width);
     if (ft !== undefined) {
       this.index(input, field, width, ft);
@@ -411,8 +406,6 @@ const EMPTY = new DateSkeleton();
 
 /**
  * Cache of date patterns and skeletons with ICU-compatible best-fit matching.
- *
- * TODO: add locale default hour cycles to support 'J' in skeletons
  */
 export class DatePatternMatcher {
 
@@ -478,8 +471,6 @@ export class DatePatternMatcher {
 
       const i = p[1];
 
-      // TODO: future allow options to allow adjusting hour/minute/second width from skeleton
-
       // For hour, minute and second we use the width from the pattern.
       if (i === F.HOUR || i === F.MINUTE || i === F.SECOND) {
         r.push([adjfield, adjwidth]);
@@ -514,7 +505,6 @@ export class DatePatternMatcher {
     }
 
     // TODO: handle appending missing fields
-
     return r;
   }
 

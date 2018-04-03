@@ -28,6 +28,7 @@ export interface DateSkeletons {
 export interface DatePatterns {
   date?: DateTimeNode[];
   time?: DateTimeNode[];
+  wrap: string;
 }
 
 export interface CalendarMatcher {
@@ -116,7 +117,11 @@ export class DatePatternManager {
 
     // TODO: default wrapper
     let wrapKey: string | undefined = options.wrap;
-    const wrapper = this.Gregorian.dateTimeFormats(this.bundle, (wrapKey || 'short') as FormatWidthType);
+    let wrapper = '';
+    if (wrapKey) {
+      wrapper = this.Gregorian.dateTimeFormats(this.bundle, (wrapKey || 'short') as FormatWidthType);
+    }
+
     const req: DateFormatRequest = { wrapper, params };
 
     // Handle standard named patterns
@@ -129,14 +134,14 @@ export class DatePatternManager {
       req.time = this.patternCache.get(raw);
     }
 
-    if (req.date || req.time) {
-      if (req.date && req.time) {
-        if (!wrapKey) {
-          wrapKey = dateKey;
-        }
-        const raw = this.Gregorian.dateTimeFormats(this.bundle, wrapKey as FormatWidthType);
-        req.wrapper = raw;
+    if (req.date && req.time) {
+      if (!wrapKey) {
+        wrapKey = dateKey;
       }
+      req.wrapper = this.Gregorian.dateTimeFormats(this.bundle, wrapKey as FormatWidthType);
+    }
+
+    if (req.date || req.time) {
       return req;
     }
 
@@ -148,6 +153,9 @@ export class DatePatternManager {
     if (entry !== undefined) {
       req.date = entry.date;
       req.time = entry.time;
+      if (!req.wrapper) {
+        req.wrapper = entry.wrap;
+      }
       return req;
     }
 
@@ -187,27 +195,34 @@ export class DatePatternManager {
       }
     }
 
-    entry = { date, time };
+    // Determine wrapper using the date fields.
+    if (wrapKey) {
+      req.wrapper = this.Gregorian.dateTimeFormats(this.bundle, wrapKey as FormatWidthType);
+    } else if (dateSkel && date && time) {
+      req.wrapper = this.getWrapper(dateSkel, date, time);
+    }
+
+    entry = { date, time, wrap: req.wrapper };
+
     // Remember this skeleton
     cache.set(skelKey, entry);
 
     req.date = entry.date;
     req.time = entry.time;
 
-    // Determine wrapper using the date fields.
-    if (!wrapKey && dateSkel && date && time) {
-      wrapKey = 'short';
-      const monthWidth = dateSkel.monthWidth();
-      const hasWeekday = dateSkel.hasWeekday();
-      if (monthWidth === 4) {
-        wrapKey = hasWeekday ? 'full' : 'long';
-      } else if (monthWidth === 3) {
-        wrapKey = 'medium';
-      }
-      req.wrapper = this.Gregorian.dateTimeFormats(this.bundle, wrapKey as FormatWidthType);
-    }
-
     return req;
+  }
+
+  protected getWrapper(dateSkel: DateSkeleton, date: DateTimeNode[], time: DateTimeNode[]): string {
+    let wrapKey = 'short';
+    const monthWidth = dateSkel.monthWidth();
+    const hasWeekday = dateSkel.hasWeekday();
+    if (monthWidth === 4) {
+      wrapKey = hasWeekday ? 'full' : 'long';
+    } else if (monthWidth === 3) {
+      wrapKey = 'medium';
+    }
+    return this.Gregorian.dateTimeFormats(this.bundle, wrapKey as FormatWidthType);
   }
 
   protected getSkeletonPattern(d: ZonedDateTime, skeleton: string): DateTimeNode[] {

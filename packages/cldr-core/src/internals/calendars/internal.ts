@@ -660,7 +660,8 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     if (width > 1) {
       const zeros = width - digits;
       if (zeros > 0) {
-        return zeroPad2(year, zeros);
+        const z = new Array(zeros).fill('0').join('');
+        return `${z}${year}`;
       }
     }
     return String(year);

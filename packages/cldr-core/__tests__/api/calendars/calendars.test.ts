@@ -106,6 +106,35 @@ test('skeletons', () => {
 
   s = api.formatDate(mar11, { skeleton: 'yyyyMMddjjmmssSSS' });
   expect(s).toEqual('03/10/2018, 11:00:25.123 PM');
+
+  s = api.formatDate(mar11, { skeleton: 'yMMMMdjmsSSSVVVV' });
+  expect(s).toEqual('March 10, 2018 at 11:00:25.123 PM Los Angeles Time');
+
+  const nyMar11 = datetime(MARCH_11_2018_070025_UTC + 123, NEW_YORK);
+  s = api.formatDate(nyMar11, { skeleton: 'yMMMMdjmsSSSVVVV' });
+  expect(s).toEqual('March 11, 2018 at 3:00:25.123 AM New York Time');
+});
+
+test('skeleton wrapper width', () => {
+  const mar11 = datetime(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
+  const api = calendarsApi(EN);
+  let s: string;
+
+  // full
+  s = api.formatDate(mar11, { skeleton: 'yEMMMMdhm' });
+  expect(s).toEqual('Sat, March 10, 2018 at 11:00 PM');
+
+  // long
+  s = api.formatDate(mar11, { skeleton: 'yMMMMdhm' });
+  expect(s).toEqual('March 10, 2018 at 11:00 PM');
+
+  // medium
+  s = api.formatDate(mar11, { skeleton: 'yMMMEdhm' });
+  expect(s).toEqual('Sat, Mar 10, 2018, 11:00 PM');
+
+  // short
+  s = api.formatDate(mar11, { skeleton: 'yMdhm' });
+  expect(s).toEqual('3/10/2018, 11:00 PM');
 });
 
 test('fractional seconds', () => {

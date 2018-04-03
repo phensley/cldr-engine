@@ -25,10 +25,20 @@ fields, and will select the appropriate patterns and wrapper.
 ```typescript
 cldr = framework.get('en');
 cldr.Calendars.formatDate(march5, { skeleton: 'yMMMMdHms' });
+
 // > "March 5, 2018 at 15:35:08"
 
 cldr.Calendars.formatDate(march5, { skeleton: 'yEMMMMBh' });
+
 // > "Mon, March 5, 2018 at 3 in the afternoon"
+
+cldr.Calendars.formatDate(march5, { skeleton: 'yMMMMdhmsSSSVVVV' });
+
+// > "March, 5 2018 at 3:35:08 PM New York Time"
+
+cldr.Calendars.formatDate(march5, { skeleton: 'Yw' });
+
+// > "week 10 of 2018"
 ```
 
 ### Intervals
@@ -46,6 +56,7 @@ const mar11 = new ZonedDateTime(epoch, LOS_ANGELES);
 const mar14 = new ZonedDateTime(epoch + (3 * day), LOS_ANGELES);
 
 cldr.Calendars.formatDateInterval(mar11, mar14, 'yMMMd');
+
 // > "Mar 10 – 14, 2018"
 ```
 
