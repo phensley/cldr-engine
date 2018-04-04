@@ -9,6 +9,12 @@ const datetime = (e: number, z: string) => new ZonedDateTime(e, z);
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
 
+// March 1, 2018 6:45:17 PM UTC
+const MARCH_01_2018_184517_UTC = 1519929917000;
+
+// April, 1, 2018 11:23:34 AM UTC
+const APRIL_01_2018_112334_UTC = 1522581814000;
+
 const DAY = 86400000;
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
@@ -88,9 +94,8 @@ test('skeletons', () => {
   s = api.formatDate(mar11, { skeleton: 'Yw' });
   expect(s).toEqual('week 10 of 2018');
 
-  // TODO: implement 'W' field
-  // s = api.formatDate(mar11, { skeleton: 'MMMMW' });
-  // expect(s).toEqual('week 10 of 2018');
+  s = api.formatDate(mar11, { skeleton: 'MMMMW' });
+  expect(s).toEqual('week 2 of March');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'full' });
   expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
@@ -254,6 +259,66 @@ test('parts', () => {
   ]);
 });
 
+test('day of week in month', () => {
+  const make = (o: number) => datetime(MARCH_01_2018_184517_UTC + o, LOS_ANGELES);
+  const api = calendarsApi(EN);
+  let s: string;
+
+  s = api.formatDateRaw(make(0), 'F');
+  expect(s).toEqual('1');
+
+  s = api.formatDateRaw(make(DAY), 'F');
+  expect(s).toEqual('1');
+
+  s = api.formatDateRaw(make(2 * DAY), 'F');
+  expect(s).toEqual('1');
+
+  s = api.formatDateRaw(make(3 * DAY), 'F');
+  expect(s).toEqual('1');
+
+  s = api.formatDateRaw(make(4 * DAY), 'F');
+  expect(s).toEqual('1');
+
+  s = api.formatDateRaw(make(5 * DAY), 'F');
+  expect(s).toEqual('1');
+
+  s = api.formatDateRaw(make(6 * DAY), 'F');
+  expect(s).toEqual('1');
+
+  s = api.formatDateRaw(make(7 * DAY), 'F');
+  expect(s).toEqual('2');
+
+  s = api.formatDateRaw(make(8 * DAY), 'F');
+  expect(s).toEqual('2');
+
+  s = api.formatDateRaw(make(9 * DAY), 'F');
+  expect(s).toEqual('2');
+
+  s = api.formatDateRaw(make(10 * DAY), 'F');
+  expect(s).toEqual('2');
+
+  s = api.formatDateRaw(make(11 * DAY), 'F');
+  expect(s).toEqual('2');
+
+  s = api.formatDateRaw(make(12 * DAY), 'F');
+  expect(s).toEqual('2');
+
+  s = api.formatDateRaw(make(13 * DAY), 'F');
+  expect(s).toEqual('2');
+
+  s = api.formatDateRaw(make(14 * DAY), 'F');
+  expect(s).toEqual('3');
+});
+
+test('week in month', () => {
+  const make = (o: number) => datetime(MARCH_01_2018_184517_UTC + o, LOS_ANGELES);
+  const api = calendarsApi(EN);
+  let s: string;
+
+  s = api.formatDateRaw(make(0), 'W');
+  expect(s).toEqual('1');
+});
+
 test('intervals best-fit', () => {
   const mar11 = datetime(MARCH_11_2018_070025_UTC + 789, LOS_ANGELES);
   const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
@@ -270,6 +335,9 @@ test('intervals best-fit', () => {
 
   s = api.formatDateInterval(mar11, jan2019, { skeleton: 'yMMMd' });
   expect(s).toEqual('Mar 10, 2018 – Jan 5, 2019');
+
+  // TODO: fallback needs to be augmented
+  // s = api.formatDateInterval(mar11, jan2019, { skeleton: 'Bh' });
 
   // Fallback
   s = api.formatDateInterval(mar11, mar14, { skeleton: 'MMMdh' });
@@ -372,24 +440,6 @@ test('day periods', () => {
   expect(api.formatDateRawToParts(d, 'b')).toEqual([
     { type: 'dayperiod', value: 'noon'}
   ]);
-});
-
-test('iso week', () => {
-  // Week number verification using raw pattern
-  const api = calendarsApi(EN);
-  let d: ZonedDateTime;
-
-  d = datetime(1451624400000, LOS_ANGELES);
-  expect(api.formatDateRaw(d, 'ww YYYY')).toEqual('53 2015');
-
-  d = datetime(1451624400000, NEW_YORK);
-  expect(api.formatDateRaw(d, 'ww YYYY')).toEqual('53 2015');
-
-  d = datetime(1546318800000, LOS_ANGELES);
-  expect(api.formatDateRaw(d, 'ww YYYY')).toEqual('01 2019');
-
-  d = datetime(1546318800000, NEW_YORK);
-  expect(api.formatDateRaw(d, 'ww YYYY')).toEqual('01 2019');
 });
 
 test('flexible day periods', () => {
@@ -564,27 +614,6 @@ test('timezone iso8601 basic/extended', () => {
 
   s = calendars.formatDateRaw(EN, d, 'ZZZZZ');
   expect(s).toEqual('+04:00');
-});
-
-test('iso week', () => {
-  const api = calendarsApi(EN);
-  const base = MARCH_11_2018_070025_UTC;
-  let d: ZonedDateTime;
-
-  d = datetime(base, NEW_YORK);
-  expect(d.getDayOfYear()).toEqual(70);
-  expect(api.getCompactISOWeekDate(d)).toEqual('2018W107');
-  expect(api.getExtendedISOWeekDate(d)).toEqual('2018-W10-7');
-
-  d = datetime(base + (10 * DAY), NEW_YORK);
-  expect(d.getDayOfYear()).toEqual(80);
-  expect(api.getCompactISOWeekDate(d)).toEqual('2018W123');
-  expect(api.getExtendedISOWeekDate(d)).toEqual('2018-W12-3');
-
-  d = datetime(base + (90 * DAY), NEW_YORK);
-  expect(d.getDayOfYear()).toEqual(160);
-  expect(api.getCompactISOWeekDate(d)).toEqual('2018W236');
-  expect(api.getExtendedISOWeekDate(d)).toEqual('2018-W23-6');
 });
 
 test('timezone short/long localized gmt', () => {

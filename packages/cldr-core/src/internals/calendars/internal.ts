@@ -23,7 +23,7 @@ import {
   TimeZoneType
 } from '@phensley/cldr-schema';
 
-import { weekFirstDay } from './autogen.weekdata';
+import { weekMinDays, weekFirstDay } from './autogen.weekdata';
 import { DateTimeNode, parseDatePattern, intervalPatternBoundary } from '../../parsing/patterns/date';
 import { DateFormatOptions } from '../../common';
 import { DateFormatRequest, DateIntervalFormatRequest } from '../../common/private';
@@ -89,7 +89,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   private impl: FieldFormatterMap = {
     'G': { type: 'era', impl: this.era },
     'y': { type: 'year', impl: this.year },
-    'Y': { type: 'iso-year', impl: this.isoYear },
+    'Y': { type: 'year', impl: this.yearOfWeekYear },
     // 'u': - non-gregorian
     // 'U': - non-gregorian
     // 'r': - non-gregorian
@@ -98,8 +98,8 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     'M': { type: 'month', impl: this.month },
     'L': { type: 'month', impl: this.month },
     // 'l': deprecated
-    'w': { type: 'iso-week', impl: this.isoWeek },
-    'W': { type: 'week-of-month', impl: this.weekOfMonth },
+    'w': { type: 'week', impl: this.weekOfWeekYear },
+    'W': { type: 'week', impl: this.weekOfMonth },
     'd': { type: 'day', impl: this.dayOfMonth },
     'D': { type: 'date', impl: this.dayOfYear },
     'F': { type: 'day', impl: this.dayOfWeekInMonth },
@@ -256,8 +256,12 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   }
 
   protected dayOfWeekInMonth(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    // TODO:
-    return '';
+    if (width !== 1) {
+      return '';
+    }
+    const dom = date.getDayOfMonth();
+    const week = Math.floor((dom - 1) / 7) + 1;
+    return String(week);
   }
 
   protected dayOfYear(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
@@ -482,26 +486,51 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   }
 
   protected weekOfMonth(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    // TODO:
-    return '';
+    const dayMonth = date.getDayOfMonth();
+    const dayOfWeek = date.getDayOfWeek();
+    const week = this.weekNumber(bundle, dayMonth, dayOfWeek);
+    return zeroPad2(week, width);
   }
 
-  protected isoWeek(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const week = date.getISOWeek();
-    switch (width) {
-    case 2:
-      return zeroPad2(week, width);
-    default:
-      return String(week);
+  protected weekOfWeekYear(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    const dayOfYear = date.getDayOfYear();
+    let week = this.weekNumber(bundle, dayOfYear, date.getDayOfWeek());
+    if (week === 0) {
+      date = new ZonedDateTime(date.epochUTC() - (dayOfYear * 86400000), date.zoneId());
+      week = this.weekNumber(bundle, date.getDayOfYear(), date.getDayOfWeek());
     }
+    return zeroPad2(week, width);
   }
 
   protected year(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     return this._year(date.getYear(), width);
   }
 
-  protected isoYear(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    return this._year(date.getISOYear(), width);
+  protected yearOfWeekYear(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
+    const dayOfYear = date.getDayOfYear();
+    const dayOfWeek = date.getDayOfWeek();
+    const week = this.weekNumber(bundle, dayOfYear, dayOfWeek);
+    const year = date.getYear();
+    // TODO: complete
+    return this._year(week === 0 ? year - 1 : year, width);
+  }
+
+  protected weekNumber(bundle: Bundle, dayOfPeriod: number, dayOfWeek: number): number {
+    const region = bundle.region();
+    const firstDay = weekFirstDay[region] || weekFirstDay['001'];
+    const minDays = weekMinDays[region] || weekMinDays['001'];
+
+    let start = (dayOfWeek - firstDay - dayOfPeriod + 1) % 7;
+    if (start <= 0) {
+      start += 7;
+    }
+
+    let weekNo = Math.floor((dayOfPeriod + start - 1) / 7);
+    if ((7 - start) >= minDays) {
+      weekNo++;
+    }
+
+    return weekNo;
   }
 
   /**

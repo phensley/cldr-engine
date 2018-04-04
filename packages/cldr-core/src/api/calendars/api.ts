@@ -18,9 +18,6 @@ import { DateFormatRequest } from '../../common/private';
 import { ZonedDateTime } from '../../types/datetime';
 import { DecimalArg, Part } from '../../types';
 
-const ISO_WEEKDATE_EXTENDED = "YYYY-'W'ww-";
-const ISO_WEEKDATE_COMPACT = "YYYY'W'ww";
-
 const DEFAULT_OPTIONS = { skeleton: 'yMd' };
 
 /**
@@ -75,14 +72,6 @@ export class CalendarsImpl implements Calendars {
   //   const impl = this.internal.weekdays.standAlone[width];
   //   return impl === undefined ? '' : impl(this.bundle, weekday);
   // }
-
-  getCompactISOWeekDate(date: ZonedDateTime): string {
-    return this.getISOWeekDate(date, ISO_WEEKDATE_COMPACT);
-  }
-
-  getExtendedISOWeekDate(date: ZonedDateTime): string {
-    return this.getISOWeekDate(date, ISO_WEEKDATE_EXTENDED);
-  }
 
   // TODO: Support context transforms, context-sensitive fields
   // https://www.unicode.org/reports/tr35/tr35-dates.html#months_days_quarters_eras
@@ -144,12 +133,6 @@ export class CalendarsImpl implements Calendars {
 
   formatDateRawToParts(date: ZonedDateTime, pattern: string): Part[] {
     return this.calendar.formatDateRawToParts(this.bundle, date, pattern);
-  }
-
-  protected getISOWeekDate(date: ZonedDateTime, pattern: string): string {
-    const weekday = date.getDayOfWeek();
-    const base = this.calendar.formatDateRaw(this.bundle, date, pattern);
-    return base + weekday;
   }
 
 }

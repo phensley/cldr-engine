@@ -2,6 +2,7 @@ import { DateTimePatternField, DateTimePatternFieldType } from '@phensley/cldr-s
 import { substituteZoneAlias, getZoneInfo } from './timezones';
 import { binarySearch } from '../../utils/search';
 import * as encoding from '../../resource/encoding';
+import { zeroPad2 } from '../../utils/string';
 
 const isLeap = (y: number): boolean => {
   if (y % 4 !== 0) {
@@ -220,6 +221,17 @@ export class ZonedDateTime {
   getISOYear(): number {
     const [week, year] = this.calcISO();
     return year;
+  }
+
+  /**
+   * Returns the ISO week date, expanded by default.
+   */
+  getISOWeekString(compact: boolean = false): string {
+    const [_week, year] = this.calcISO();
+    const week = zeroPad2(_week, 2);
+    const day = this.getDayOfWeek();
+    const sep = compact ? '' : '-';
+    return `${year}${sep}W${week}${sep}${day}`;
   }
 
   fieldOfGreatestDifference(other: ZonedDateTime): DateTimePatternFieldType {

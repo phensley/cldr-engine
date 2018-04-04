@@ -2,6 +2,12 @@ import { ZonedDateTime } from '../../../src/types/datetime';
 
 const make = (epoch: number | Date, zoneId: string) => new ZonedDateTime(epoch, zoneId);
 
+// March 11, 2018 7:00:25 AM UTC
+const MARCH_11_2018_070025_UTC = 1520751625000;
+
+const NEW_YORK = 'America/New_York';
+const DAY = 86400000;
+
 test('iso week', () => {
   const zoneId = 'America/New_York';
 
@@ -49,4 +55,24 @@ test('iso week', () => {
   date = make(1520751625000, zoneId);
   expect(date.getISOWeek()).toEqual(10);
   expect(date.getISOYear()).toEqual(2018);
+});
+
+test('iso week string', () => {
+  let d: ZonedDateTime;
+  const base = MARCH_11_2018_070025_UTC;
+
+  d = make(base, NEW_YORK);
+  expect(d.getDayOfYear()).toEqual(70);
+  expect(d.getISOWeekString(true)).toEqual('2018W107');
+  expect(d.getISOWeekString()).toEqual('2018-W10-7');
+
+  d = make(base + (10 * DAY), NEW_YORK);
+  expect(d.getDayOfYear()).toEqual(80);
+  expect(d.getISOWeekString(true)).toEqual('2018W123');
+  expect(d.getISOWeekString()).toEqual('2018-W12-3');
+
+  d = make(base + (90 * DAY), NEW_YORK);
+  expect(d.getDayOfYear()).toEqual(160);
+  expect(d.getISOWeekString(true)).toEqual('2018W236');
+  expect(d.getISOWeekString()).toEqual('2018-W23-6');
 });

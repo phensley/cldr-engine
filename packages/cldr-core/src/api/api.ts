@@ -81,16 +81,6 @@ export interface Calendars {
 
   // TODO: formatRelativeTimeFieldToParts
 
-  /**
-   * Returns the compact ISO week date for the given timestamp.
-   */
-  getCompactISOWeekDate(date: ZonedDateTime): string;
-
-  /**
-   * Returns the extended ISO week date for the given timestamp.
-   */
-  getExtendedISOWeekDate(date: ZonedDateTime): string;
-
 }
 
 /**
