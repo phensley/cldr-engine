@@ -98,9 +98,9 @@ export const getZones = (data: any): Code[] => {
   const [ zoneDST, zoneLinks, untilsArray ] = buildZoneDST(metazones);
 
   let code = HEADER + '/* tslint:disable:max-line-length */\n';
-  code += `export const untilsIndex: string = '`;
+  code += `export const untilsLookup: string[] = '`;
   code += untilsArray.join(' ');
-  code += `';\n\n`;
+  code += `'.split(' ');\n\n`;
 
   code += `export const zoneDST: { [x: string]: string } = {\n`;
   Object.keys(zoneDST).forEach(k => {
@@ -116,9 +116,9 @@ export const getZones = (data: any): Code[] => {
   });
   code += '};\n\n';
 
-  code += `export const metazoneIds = '${metazoneIds}';\n`;
+  code += `export const metaZoneIds: string[] = '${metazoneIds}'.split(' ');\n`;
 
-  result.push(Code.core(['types', 'datetime', 'autogen.zones.ts'], code));
+  result.push(Code.core(['systems', 'calendars', 'autogen.zonedata.ts'], code));
 
   // Build autogen.timezones.ts source
   code = `${HEADER}import { makeEnum, makeKeyedEnum } from '../../types/enum';\n\n`;

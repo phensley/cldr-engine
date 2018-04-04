@@ -43,6 +43,9 @@ export class ZonedDateTime {
     const info = getZoneInfo(this._zoneId);
     const len = info.untils.length;
     let index = binarySearch(info.untils, this._epoch);
+    if (index === -1) {
+      index++;
+    }
     this._dst = encoding.bitarrayGet(info.dsts, index);
 
     // TODO: extend untils/offsets past 2037 programmatically.
@@ -57,7 +60,7 @@ export class ZonedDateTime {
   /**
    * Timezone identifier from the tz database.
    */
-  zoneId(): string {
+  timeZoneId(): string {
     return this._zoneId;
   }
 

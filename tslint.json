@@ -9,7 +9,7 @@
     "eofline": false,
     "forin": true,
     "indent": [true, "spaces", 2],
-    "interface-name": false,
+    "interface-name": [false, "always-prefix"],
     "label-position": true,
     "max-line-length": [true, 120],
     "member-access": false,

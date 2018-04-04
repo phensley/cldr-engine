@@ -15,6 +15,7 @@ import { Bundle } from '../..';
 import { CalendarInternals, DateFieldInternals, Internals } from '../../internals';
 import { DateFormatOptions, DateIntervalFormatOptions, RelativeTimeFormatOptions } from '../../common';
 import { DateFormatRequest } from '../../common/private';
+import { CalendarDate } from '../../systems/calendars';
 import { ZonedDateTime } from '../../types/datetime';
 import { DecimalArg, Part } from '../../types';
 
@@ -75,6 +76,10 @@ export class CalendarsImpl implements Calendars {
 
   // TODO: Support context transforms, context-sensitive fields
   // https://www.unicode.org/reports/tr35/tr35-dates.html#months_days_quarters_eras
+
+  newFormatDate(date: CalendarDate, options?: DateFormatOptions): string {
+    return '';
+  }
 
   formatDate(date: ZonedDateTime, options?: DateFormatOptions): string {
     // TODO: select calendar based on options

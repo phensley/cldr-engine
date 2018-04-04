@@ -21,6 +21,7 @@ import {
   UnitLength
 } from '../common';
 
+import { CalendarDate } from '../systems/calendars';
 import { DecimalArg, Part, ZonedDateTime } from '../types';
 
 /**
@@ -29,6 +30,11 @@ import { DecimalArg, Part, ZonedDateTime } from '../types';
  * @alpha
  */
 export interface Calendars {
+
+  /**
+   * Format a date to a string.
+   */
+  newFormatDate(date: CalendarDate, options?: DateFormatOptions): string;
 
   /**
    * Formats a date-time value to string.

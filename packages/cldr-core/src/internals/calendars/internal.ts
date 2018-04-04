@@ -103,7 +103,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     'd': { type: 'day', impl: this.dayOfMonth },
     'D': { type: 'date', impl: this.dayOfYear },
     'F': { type: 'day', impl: this.dayOfWeekInMonth },
-    'g': { type: '', impl: this.modifiedJulianDay },
+    'g': { type: 'mjulian-day', impl: this.modifiedJulianDay },
     'E': { type: 'weekday', impl: this.weekday },
     'e': { type: 'weekday', impl: this.weekdayLocal },
     'c': { type: 'weekday', impl: this.weekdayLocalStandalone },
@@ -496,7 +496,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const dayOfYear = date.getDayOfYear();
     let week = this.weekNumber(bundle, dayOfYear, date.getDayOfWeek());
     if (week === 0) {
-      date = new ZonedDateTime(date.epochUTC() - (dayOfYear * 86400000), date.zoneId());
+      date = new ZonedDateTime(date.epochUTC() - (dayOfYear * 86400000), date.timeZoneId());
       week = this.weekNumber(bundle, date.getDayOfYear(), date.getDayOfWeek());
     }
     return zeroPad2(week, width);
@@ -628,7 +628,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
    * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
    */
   protected timeZone_V(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const zoneId = date.zoneId();
+    const zoneId = date.timeZoneId();
     switch (width) {
     case 4:
     {
