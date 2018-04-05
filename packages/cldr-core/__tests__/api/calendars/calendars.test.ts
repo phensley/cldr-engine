@@ -4,7 +4,7 @@ import { ZonedDateTime } from '../../../src/types/datetime';
 
 const INTERNALS = new InternalsImpl();
 
-const datetime = (e: number, z: string) => new ZonedDateTime(e, z);
+const make = (e: number, z: string) => new ZonedDateTime(e, z);
 
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
@@ -15,6 +15,7 @@ const MARCH_01_2018_184517_UTC = 1519929917000;
 // April, 1, 2018 11:23:34 AM UTC
 const APRIL_01_2018_112334_UTC = 1522581814000;
 
+const HOUR = 3600000;
 const DAY = 86400000;
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
@@ -24,8 +25,8 @@ const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 const calendarsApi = (bundle: Bundle) => new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 
 test('formats', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const mar11 = make(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar14 = make(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   const api = calendarsApi(EN);
   let s = api.formatDate(mar11, { date: 'full' });
@@ -66,10 +67,10 @@ test('formats', () => {
 });
 
 test('skeletons', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
-  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
-  const jun09 = datetime(MARCH_11_2018_070025_UTC + (DAY * 90), LOS_ANGELES);
-  const sep07 = datetime(MARCH_11_2018_070025_UTC + (DAY * 180), LOS_ANGELES);
+  const mar11 = make(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
+  const mar14 = make(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const jun09 = make(MARCH_11_2018_070025_UTC + (DAY * 90), LOS_ANGELES);
+  const sep07 = make(MARCH_11_2018_070025_UTC + (DAY * 180), LOS_ANGELES);
   const api = calendarsApi(EN);
   let s: string;
 
@@ -115,13 +116,13 @@ test('skeletons', () => {
   s = api.formatDate(mar11, { skeleton: 'yMMMMdjmsSSSVVVV' });
   expect(s).toEqual('March 10, 2018 at 11:00:25.123 PM Los Angeles Time');
 
-  const nyMar11 = datetime(MARCH_11_2018_070025_UTC + 123, NEW_YORK);
+  const nyMar11 = make(MARCH_11_2018_070025_UTC + 123, NEW_YORK);
   s = api.formatDate(nyMar11, { skeleton: 'yMMMMdjmsSSSVVVV' });
   expect(s).toEqual('March 11, 2018 at 3:00:25.123 AM New York Time');
 });
 
 test('skeleton wrapper width', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
+  const mar11 = make(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
   const api = calendarsApi(EN);
   let s: string;
 
@@ -148,31 +149,31 @@ test('fractional seconds', () => {
   let s: string;
   let date: ZonedDateTime;
 
-  date = datetime(base, LOS_ANGELES);
+  date = make(base, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsS' });
   expect(s).toEqual('11:00:25.0 PM');
 
-  date = datetime(base, LOS_ANGELES);
+  date = make(base, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSS' });
   expect(s).toEqual('11:00:25.00 PM');
 
-  date = datetime(base, LOS_ANGELES);
+  date = make(base, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSSS' });
   expect(s).toEqual('11:00:25.000 PM');
 
-  date = datetime(base + 567, LOS_ANGELES);
+  date = make(base + 567, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsS' });
   expect(s).toEqual('11:00:25.5 PM');
 
-  date = datetime(base + 567, LOS_ANGELES);
+  date = make(base + 567, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSS' });
   expect(s).toEqual('11:00:25.56 PM');
 
-  date = datetime(base + 567, LOS_ANGELES);
+  date = make(base + 567, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSSS' });
   expect(s).toEqual('11:00:25.567 PM');
 
-  date = datetime(base + 567, LOS_ANGELES);
+  date = make(base + 567, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSSSS' });
   expect(s).toEqual('11:00:25.5670 PM');
 
@@ -182,7 +183,7 @@ test('fractional seconds', () => {
 });
 
 test('skeleton metacharacters', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar11 = make(MARCH_11_2018_070025_UTC, LOS_ANGELES);
   let s: string;
 
   let api = calendarsApi(EN);
@@ -210,8 +211,8 @@ test('skeleton metacharacters', () => {
 });
 
 test('parts', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const mar11 = make(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar14 = make(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   const api = calendarsApi(EN);
   let p = api.formatDateToParts(mar11, { date: 'full' });
@@ -260,96 +261,268 @@ test('parts', () => {
 });
 
 test('day of week in month', () => {
-  const make = (o: number) => datetime(MARCH_01_2018_184517_UTC + o, LOS_ANGELES);
+  const mk = (o: number) => make(MARCH_01_2018_184517_UTC + o, LOS_ANGELES);
   const api = calendarsApi(EN);
   let s: string;
 
-  s = api.formatDateRaw(make(0), 'F');
+  s = api.formatDateRaw(mk(0), 'F');
   expect(s).toEqual('1');
 
-  s = api.formatDateRaw(make(DAY), 'F');
+  s = api.formatDateRaw(mk(DAY), 'F');
   expect(s).toEqual('1');
 
-  s = api.formatDateRaw(make(2 * DAY), 'F');
+  s = api.formatDateRaw(mk(2 * DAY), 'F');
   expect(s).toEqual('1');
 
-  s = api.formatDateRaw(make(3 * DAY), 'F');
+  s = api.formatDateRaw(mk(3 * DAY), 'F');
   expect(s).toEqual('1');
 
-  s = api.formatDateRaw(make(4 * DAY), 'F');
+  s = api.formatDateRaw(mk(4 * DAY), 'F');
   expect(s).toEqual('1');
 
-  s = api.formatDateRaw(make(5 * DAY), 'F');
+  s = api.formatDateRaw(mk(5 * DAY), 'F');
   expect(s).toEqual('1');
 
-  s = api.formatDateRaw(make(6 * DAY), 'F');
+  s = api.formatDateRaw(mk(6 * DAY), 'F');
   expect(s).toEqual('1');
 
-  s = api.formatDateRaw(make(7 * DAY), 'F');
+  s = api.formatDateRaw(mk(7 * DAY), 'F');
   expect(s).toEqual('2');
 
-  s = api.formatDateRaw(make(8 * DAY), 'F');
+  s = api.formatDateRaw(mk(8 * DAY), 'F');
   expect(s).toEqual('2');
 
-  s = api.formatDateRaw(make(9 * DAY), 'F');
+  s = api.formatDateRaw(mk(9 * DAY), 'F');
   expect(s).toEqual('2');
 
-  s = api.formatDateRaw(make(10 * DAY), 'F');
+  s = api.formatDateRaw(mk(10 * DAY), 'F');
   expect(s).toEqual('2');
 
-  s = api.formatDateRaw(make(11 * DAY), 'F');
+  s = api.formatDateRaw(mk(11 * DAY), 'F');
   expect(s).toEqual('2');
 
-  s = api.formatDateRaw(make(12 * DAY), 'F');
+  s = api.formatDateRaw(mk(12 * DAY), 'F');
   expect(s).toEqual('2');
 
-  s = api.formatDateRaw(make(13 * DAY), 'F');
+  s = api.formatDateRaw(mk(13 * DAY), 'F');
   expect(s).toEqual('2');
 
-  s = api.formatDateRaw(make(14 * DAY), 'F');
+  s = api.formatDateRaw(mk(14 * DAY), 'F');
   expect(s).toEqual('3');
 });
 
 test('week in month', () => {
-  const make = (o: number) => datetime(MARCH_01_2018_184517_UTC + o, LOS_ANGELES);
+  const mk = (o: number) => make(MARCH_01_2018_184517_UTC + o, LOS_ANGELES);
   const api = calendarsApi(EN);
   let s: string;
 
-  s = api.formatDateRaw(make(0), 'W');
+  s = api.formatDateRaw(mk(0), 'W');
   expect(s).toEqual('1');
 });
 
-test('intervals best-fit', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC + 789, LOS_ANGELES);
-  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
-  const jan2019 = datetime(MARCH_11_2018_070025_UTC + (DAY * 301), LOS_ANGELES);
+test('foo', () => {
+  const base = MARCH_11_2018_070025_UTC + 789;
 
   const api = calendarsApi(EN);
   let s: string;
 
-  s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
+  let start: ZonedDateTime;
+  let end: ZonedDateTime;
+
+  start = make(base - ((HOUR * 13) + 123456), LOS_ANGELES);
+  end = make(base, LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'h' });
+  expect(s).toEqual('9 AM – 11 PM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'm' });
+  expect(s).toEqual('9:58 AM – 11:00 PM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 's' });
+  expect(s).toEqual('9 AM – 11 PM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'SSS' });
+  expect(s).toEqual('9 AM – 11 PM');
+
+  start = make(base - (HOUR * 5), LOS_ANGELES);
+  end = make(base, LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
+  expect(s).toEqual('3/10/18 6:00 – 11:00 PM');
+
+  start = make(base - (HOUR * 13), LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
+  expect(s).toEqual('3/10/18 10:00 AM – 11:00 PM');
+});
+
+test('intervals best-fit', () => {
+  const base = MARCH_11_2018_070025_UTC + 789;
+
+  const api = calendarsApi(EN);
+  let s: string;
+
+  let start: ZonedDateTime;
+  let end: ZonedDateTime;
+
+  start = make(base, LOS_ANGELES);
+
+  // Date skeleton, dates same
+  end = start;
+
+  s = api.formatDateInterval(start, end, { skeleton: 'd' });
+  expect(s).toEqual('10');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'M' });
+  expect(s).toEqual('3');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'y' });
+  expect(s).toEqual('2018');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'MEd' });
+  expect(s).toEqual('Sat, 3/10');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
+  expect(s).toEqual('Mar 10, 2018');
+
+  // Date skeleton, minutes differ
+  end = make(base + 60000, LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'd' });
+  expect(s).toEqual('10');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'M' });
+  expect(s).toEqual('3');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'y' });
+  expect(s).toEqual('2018');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
+  expect(s).toEqual('Mar 10, 2018');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yEMMMd' });
+  expect(s).toEqual('Sat, Mar 10, 2018');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'MMMd' });
+  expect(s).toEqual('Mar 10');
+
+  // Date skeleton, days differ
+  end = make(base + (DAY * 3), LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'd' });
+  expect(s).toEqual('3/10 – 3/14');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'M' });
+  expect(s).toEqual('3/10 – 3/14');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'y' });
+  expect(s).toEqual('3/10/2018 – 3/14/2018');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
   expect(s).toEqual('Mar 10 – 14, 2018');
 
-  s = api.formatDateInterval(mar11, mar14, { skeleton: 'yEMMMd' });
+  s = api.formatDateInterval(start, end, { skeleton: 'yEMMMd' });
   expect(s).toEqual('Sat, Mar 10 – Wed, Mar 14, 2018');
 
-  s = api.formatDateInterval(mar11, jan2019, { skeleton: 'yMMMd' });
+  s = api.formatDateInterval(start, end, { skeleton: 'MMMd' });
+  expect(s).toEqual('Mar 10 – 14');
+
+  // Date skeleton, months differ
+  end = make(base + (DAY * 34), LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'd' });
+  expect(s).toEqual('3/10 – 4/14');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'M' });
+  expect(s).toEqual('3 – 4');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'y' });
+  expect(s).toEqual('3/2018 – 4/2018');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
+  expect(s).toEqual('Mar 10 – Apr 14, 2018');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yEMMMd' });
+  expect(s).toEqual('Sat, Mar 10 – Sat, Apr 14, 2018');
+
+  // Date skeleton, years differ
+  end = make(base + (DAY * 301), LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'd' });
+  expect(s).toEqual('3/10/2018 – 1/5/2019');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'M' });
+  expect(s).toEqual('3/2018 – 1/2019');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'y' });
+  expect(s).toEqual('2018 – 2019');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
   expect(s).toEqual('Mar 10, 2018 – Jan 5, 2019');
 
-  // TODO: fallback needs to be augmented
-  // s = api.formatDateInterval(mar11, jan2019, { skeleton: 'Bh' });
+  s = api.formatDateInterval(start, end, { skeleton: 'yEMMMd' });
+  expect(s).toEqual('Sat, Mar 10, 2018 – Sat, Jan 5, 2019');
 
-  // Fallback
-  s = api.formatDateInterval(mar11, mar14, { skeleton: 'MMMdh' });
+  // Time skeleton, hours differ
+  start = make(base - ((HOUR * 13) + 123456), LOS_ANGELES);
+  end = make(base, LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'h' });
+  expect(s).toEqual('9 AM – 11 PM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'm' });
+  expect(s).toEqual('9:58 AM – 11:00 PM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 's' });
+  expect(s).toEqual('9 AM – 11 PM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'SSS' });
+  expect(s).toEqual('9 AM – 11 PM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
+  expect(s).toEqual('3/10/18 9:58 AM – 11:00 PM');
+
+  start = make(base - (HOUR * 5), LOS_ANGELES);
+  end = make(base, LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
+  expect(s).toEqual('3/10/18 6:00 – 11:00 PM');
+
+  // Time skeleton, years differ
+  start = make(base, LOS_ANGELES);
+  end = make(base + (DAY * 301), LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'ahm' });
+  expect(s).toEqual('3/10/2018, 11:00 PM – 1/5/2019, 11:00 PM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'ahmsSSS' });
+  expect(s).toEqual('3/10/2018, 11:00:25.789 PM – 1/5/2019, 11:00:25.789 PM');
+
+  // FALLBACKS
+
+  // Time skeleton, years differ
+
+  end = make(base + (DAY * 301) - (HOUR * 7), LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'Bh' });
+  expect(s).toEqual('3/10/2018, 11 at night – 1/5/2019, 4 in the afternoon');
+
+  // Mixed skeleton, months differ
+
+  end = make(base + (DAY * 3), LOS_ANGELES);
+
+  s = api.formatDateInterval(start, end, { skeleton: 'MMMdh' });
   expect(s).toEqual('Mar 10, 11 PM – Mar 14, 12 AM');
 
-  s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMddhmsSSSv' });
-  expect(s).toEqual('Mar 10, 2018, 11:00:25.789 PM PT – Mar 14, 2018, 12:00:25.000 AM PT');
+  // Mixed skeleton, months differ
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMMMddhmsSSSv' });
+  expect(s).toEqual('Mar 10, 2018, 11:00:25.789 PM PT – Mar 14, 2018, 12:00:25.789 AM PT');
 });
 
 test('intervals', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const mar11 = make(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar14 = make(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   let api = calendarsApi(EN);
   let s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
@@ -388,8 +561,8 @@ test('intervals', () => {
 });
 
 test('interval parts', () => {
-  const mar11 = datetime(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-  const mar14 = datetime(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const mar11 = make(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const mar14 = make(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   const api = calendarsApi(EN);
   const p = api.formatDateIntervalToParts(mar11, mar14, { skeleton: 'yMMMMd' });
@@ -406,8 +579,8 @@ test('interval parts', () => {
 
 test('day periods', () => {
   const base = MARCH_11_2018_070025_UTC;
-  const losangeles = (n: number) => datetime(base + n, LOS_ANGELES);
-  const london = (n: number) => datetime(base + n, LONDON);
+  const losangeles = (n: number) => make(base + n, LOS_ANGELES);
+  const london = (n: number) => make(base + n, LONDON);
 
   const api = calendarsApi(EN);
 
@@ -444,8 +617,8 @@ test('day periods', () => {
 
 test('flexible day periods', () => {
   const base = MARCH_11_2018_070025_UTC;
-  const losangeles = (n: number) => datetime(base + n, LOS_ANGELES);
-  const london = (n: number) => datetime(base + n, LONDON);
+  const losangeles = (n: number) => make(base + n, LOS_ANGELES);
+  const london = (n: number) => make(base + n, LONDON);
 
   const hour = 3600 * 1000;
 
@@ -548,7 +721,7 @@ test('weekday firstday raw', () => {
   const base = MARCH_11_2018_070025_UTC;
 
   // March 11 NY
-  let d = datetime(base, NEW_YORK);
+  let d = make(base, NEW_YORK);
   expect(d.getDayOfWeek()).toEqual(7);
   expect(d.getUTCDayOfWeek()).toEqual(7);
 
@@ -561,7 +734,7 @@ test('weekday firstday raw', () => {
   expect(s).toEqual('7');
 
   // March 12 NY
-  d = datetime(base + DAY, NEW_YORK);
+  d = make(base + DAY, NEW_YORK);
   expect(d.getDayOfWeek()).toEqual(1);
   expect(d.getUTCDayOfWeek()).toEqual(1);
 
@@ -572,7 +745,7 @@ test('weekday firstday raw', () => {
   expect(s).toEqual('1');
 
   // March 10 LA
-  d = datetime(base, LOS_ANGELES);
+  d = make(base, LOS_ANGELES);
   expect(d.getDayOfWeek()).toEqual(6); // saturday local
   expect(d.getUTCDayOfWeek()).toEqual(7); // sunday utc
 
@@ -589,7 +762,7 @@ test('timezone short/long specific non-location format', () => {
   let s: string;
   let d: ZonedDateTime;
 
-  d = datetime(base, NEW_YORK);
+  d = make(base, NEW_YORK);
 
   s = calendars.formatDateRaw(EN, d, 'z');
   expect(s).toEqual('EDT');
@@ -604,7 +777,7 @@ test('timezone iso8601 basic/extended', () => {
   let s: string;
   let d: ZonedDateTime;
 
-  d = datetime(base, NEW_YORK);
+  d = make(base, NEW_YORK);
 
   s = calendars.formatDateRaw(EN, d, 'Z');
   expect(s).toEqual('+0400');
@@ -622,7 +795,7 @@ test('timezone short/long localized gmt', () => {
   let s: string;
   let d: ZonedDateTime;
 
-  d = datetime(base, NEW_YORK);
+  d = make(base, NEW_YORK);
 
   s = calendars.formatDateRaw(EN, d, 'O');
   expect(s).toEqual('GMT+4');
@@ -637,7 +810,7 @@ test('timezone short/long generic non-location format', () => {
   let s: string;
   let d: ZonedDateTime;
 
-  d = datetime(base, NEW_YORK);
+  d = make(base, NEW_YORK);
 
   s = calendars.formatDateRaw(EN, d, 'v');
   expect(s).toEqual('ET');
@@ -664,7 +837,7 @@ test('timezone short/long zone id, exemplar city, generic location format', () =
   let s: string;
   let d: ZonedDateTime;
 
-  d = datetime(base, NEW_YORK);
+  d = make(base, NEW_YORK);
 
   s = calendars.formatDateRaw(EN, d, 'V');
   expect(s).toEqual('unk');
@@ -685,7 +858,7 @@ test('timezone iso8601 basic format', () => {
   let s: string;
   let d: ZonedDateTime;
 
-  d = datetime(base, NEW_YORK);
+  d = make(base, NEW_YORK);
 
   s = calendars.formatDateRaw(EN, d, 'x');
   expect(s).toEqual('+04');
@@ -712,7 +885,7 @@ test('timezone iso8601 basic format', () => {
   s = calendars.formatDateRaw(EN, d, 'XXXXX');
   expect(s).toEqual('+04:00');
 
-  d = datetime(base, LONDON);
+  d = make(base, LONDON);
 
   s = calendars.formatDateRaw(EN, d, 'x');
   expect(s).toEqual('+00');

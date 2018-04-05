@@ -88,23 +88,78 @@ export class CalendarsImpl implements Calendars {
     return this.calendar.formatDateToParts(this.bundle, date, request);
   }
 
+  // TODO: expand string/parts rendered so the string/part methods can be unified
+
   formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): string {
     options = options || DEFAULT_OPTIONS;
-    const req = this.privateApi.getDateIntervalFormatRequest(start, end, options || DEFAULT_OPTIONS);
-    if (req.pattern) {
-      return this.calendar.formatDateInterval(this.bundle, start, end, req.pattern);
+    const ireq = this.privateApi.getDateIntervalFormatRequest(start, end, options || DEFAULT_OPTIONS);
+
+    if (ireq.skeleton !== undefined) {
+      const { ca, nu } = options;
+      const request = this.privateApi.getDateFormatRequest(start, { skeleton: ireq.skeleton, ca, nu });
+      return this.calendar.formatDateIntervalFallback(this.bundle, start, end, request, ireq.wrapper);
     }
 
-    const { skeleton, ca, nu } = options;
-    const request = this.privateApi.getDateFormatRequest(start, { skeleton, ca, nu });
-    return this.calendar.formatDateIntervalFallback(this.bundle, start, end, request, req.wrapper);
+    let range = '';
+    if (ireq.range) {
+      range = this.calendar.formatDateInterval(this.bundle, start, end, ireq.range);
+    }
+
+    let date = '';
+    if (ireq.date) {
+      // Format standalone pattern.
+      const dreq: DateFormatRequest = { date: ireq.date, params: ireq.params, wrapper: '' };
+      date = this.calendar.formatDate(this.bundle, start, dreq);
+      if (!range) {
+        return date;
+      }
+    }
+
+    // TODO: the ICU date-time concatenation pattern not available in CLDR.
+    // May need to build a patch for this.
+
+    return date ? (range ? `${date} ${range}` : date) : range;
   }
 
   formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): Part[] {
     options = options || DEFAULT_OPTIONS;
+    const ireq = this.privateApi.getDateIntervalFormatRequest(start, end, options || DEFAULT_OPTIONS);
+
+    if (ireq.skeleton !== undefined) {
+      const { ca, nu } = options;
+      const request = this.privateApi.getDateFormatRequest(start, { skeleton: ireq.skeleton, ca, nu });
+      return this.calendar.formatDateIntervalFallbackToParts(this.bundle, start, end, request, ireq.wrapper);
+    }
+
+    let range: Part[] | undefined;
+    if (ireq.range) {
+      range = this.calendar.formatDateIntervalToParts(this.bundle, start, end, ireq.range);
+    }
+
+    let date: Part[] | undefined;
+    if (ireq.date) {
+      // Format standalone pattern.
+      const dreq: DateFormatRequest = { date: ireq.date, params: ireq.params, wrapper: '' };
+      date = this.calendar.formatDateToParts(this.bundle, start, dreq);
+      if (!range) {
+        return date;
+      }
+    }
+
+    // TODO: the ICU date-time concatenation pattern not available in CLDR. May need to build
+    // a patch for this
+    if (date !== undefined) {
+      const spacer: Part[] = [{ type: 'space', value: ' '}];
+      return range !== undefined ? date.concat(spacer, range) : date;
+    }
+    return range !== undefined ? range : [];
+  }
+
+  formatDateIntervalToPartsOld(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): Part[] {
+    options = options || DEFAULT_OPTIONS;
     const req = this.privateApi.getDateIntervalFormatRequest(start, end, options || DEFAULT_OPTIONS);
-    if (req.pattern) {
-      return this.calendar.formatDateIntervalToParts(this.bundle, start, end, req.pattern);
+    if (req.range) {
+      return this.calendar.formatDateIntervalToParts(this.bundle, start, end, req.range);
     }
 
     const { skeleton, ca, nu } = options;

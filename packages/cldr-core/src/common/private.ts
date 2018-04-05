@@ -30,7 +30,9 @@ export interface DateFormatRequest {
  * @internal
  */
 export interface DateIntervalFormatRequest {
-  pattern?: DateTimeNode[];
+  date?: DateTimeNode[];
+  range?: DateTimeNode[];
+  skeleton?: string;
   params: NumberParams;
 
   // Wrapper for fallback

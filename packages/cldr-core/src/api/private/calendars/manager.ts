@@ -32,6 +32,11 @@ export interface DatePatterns {
   wrap: string;
 }
 
+export interface DateIntervalPatterns {
+  date?: DateTimeNode[];
+  range?: DateTimeNode[];
+}
+
 export interface CalendarMatcher {
   matcher: DatePatternMatcher;
   cache: LRU<string, DatePatterns>;
@@ -39,7 +44,7 @@ export interface CalendarMatcher {
 
 export interface IntervalMatcher {
   matcher: DatePatternMatcher;
-  cache: LRU<string, DateTimeNode[]>;
+  cache: LRU<string, DateIntervalPatterns>;
 }
 
 const CANONICAL_FIELDS = [
@@ -221,11 +226,38 @@ export class DatePatternManager {
     return req;
   }
 
+  /**
+   * TODO: better description once this routine is reorganized
+   *
+   * We do a best-fit match of the input skeleton, which can request both date and time
+   * fields. The start and end dates can also differ in the "yMd" and "ahms" fields, so
+   * we handle the following cases:
+   *
+   * 1. Skeleton requests both date and time fields:
+   *  a. "yMd" same: split skeleton, format date standalone, followed by time range skeleton.
+   *  b. "yMd" differ: format full start/end with fallback format.
+   *
+   * 2. Skeleton requests date fields only:
+   *  a. "yMd" same: format date standalone
+   *  b. "yMd" differ: select date interval pattern and format
+   *
+   * 3. Skeleton requests time fields only.
+   *  a. "yMd" same, "ahms" same: format time standalone
+   *  b. "yMd" same, "ahms" differ: select time interval pattern and format
+   *  c. "yMd" differ: prepend "yMd" skeleton and go to (1a).
+   *
+   */
   getIntervalRequest(start: ZonedDateTime, end: ZonedDateTime,
       options: DateIntervalFormatOptions, params: NumberParams): DateIntervalFormatRequest {
+
     const calendar = options.ca || this.defaultCalendar();
+    const origSkeleton = options.skeleton || 'yMd';
+    let skeleton = origSkeleton;
+
     const field = start.fieldOfGreatestDifference(end);
-    const skeleton = options.skeleton || 'yMd';
+    const dateDiffers = 'yMd'.indexOf(field) !== -1;
+    const timeDiffers = 'aHms'.indexOf(field) !== -1;
+
     const wrapper = this.Gregorian.intervalFormatFallback(this.bundle);
 
     const req: DateIntervalFormatRequest = { params, wrapper };
@@ -233,37 +265,137 @@ export class DatePatternManager {
     const { matcher, cache } = this.getIntervalMatcher(calendar);
 
     // Check cache if this combination of skeleton / field of greatest difference exists.
-    const key = `${skeleton}\t${field}`;
-    let pattern = cache.get(key);
-    if (pattern !== undefined) {
-      req.pattern = pattern;
+    const cacheKey = `${skeleton}\t${field}`;
+    // console.log('cache key:', cacheKey);
+    let entry = cache.get(cacheKey);
+    if (entry !== undefined) {
+      req.date = entry.date;
+      req.range = entry.range;
       return req;
     }
+
+    entry = {};
 
     // Use skeleton to find best fit patterns.
-    const query = DateSkeleton.parse(skeleton, this.preferredFlex, this.allowedFlex[0]);
-    if (query.compound()) {
-      // We cannot format an interval containing date and time fields. Fall back to
-      // default.
-      return req;
+    let requery = false;
+    let query = DateSkeleton.parse(skeleton, this.preferredFlex, this.allowedFlex[0]);
+
+    // 3c. Skeleton requests time fields only, but "yMd" differs
+    if (!query.isDate() && query.isTime() && dateDiffers) {
+      // Modify requested skeleton to include "yMd"
+      skeleton = `yMd${skeleton}`;
+      requery = true;
+
+    } else if (dateDiffers) {
+      // Modify input skeleton based on requested fields and field of greatest difference.
+      // Ensures the skeleton contains appropriate context
+
+      // TODO: augment skeleton to make these queries use masks
+
+      switch (field) {
+      case 'y':
+        if (query.hasDay()) {
+          if (!query.hasMonth()) {
+            skeleton = 'M' + skeleton;
+          }
+        }
+        if (!query.hasYear()) {
+          skeleton = 'y' + skeleton;
+        }
+        break;
+
+      case 'M':
+        if (!query.hasMonth()) {
+          skeleton = 'M' + skeleton;
+        }
+        break;
+
+      case 'd':
+        if (!query.hasDay()) {
+          skeleton = 'd' + skeleton;
+        }
+        if (!query.hasMonth()) {
+          skeleton = 'M' + skeleton;
+        }
+        break;
+      }
+    } else {
+      switch (field) {
+      case 'a':
+      case 'H':
+        if (!query.hasHour()) {
+          skeleton = 'j' + skeleton;
+        }
+        if (!query.hasDayPeriod()) {
+          skeleton = 'a' + skeleton;
+        }
+        break;
+      }
     }
 
-    const skel = matcher.match(query);
-    if (skel) {
-      pattern = this.getIntervalPattern(skel.skeleton, field);
-      if (pattern === undefined) {
-        // Fallback
+    // Check if skeleton was augmented
+    if (origSkeleton !== skeleton) {
+      query = DateSkeleton.parse(skeleton, this.preferredFlex, this.allowedFlex[0]);
+    }
+
+    // 1. Skeleton requests both date and time fields.
+    if (query.compound()) {
+      // b. "yMd" differs.
+      if (dateDiffers) {
+        // Bail out and use the fallback format
+        req.skeleton = skeleton;
         return req;
       }
-      pattern = matcher.adjust(pattern, query, params.symbols.decimal);
+
+      // a. split skeleton, format date standalone...
+      const tquery = query.split();
+
+      // TODO: reorganize so this is reusable. inlined temporarily to get things working.
+
+      const datematcher = this.getCalendarMatcher(calendar);
+      const dateSkel = datematcher.matcher.match(query);
+      const tempDate = dateSkel.pattern || this.getSkeletonPattern(start, dateSkel.skeleton);
+      const datePattern = datematcher.matcher.adjust(tempDate, dateSkel, params.symbols.decimal);
+      if (datePattern.length !== 0) {
+        entry.date = datePattern;
+      }
+
+      // .. followed by time range skeleton
+      query = tquery;
     }
 
-    if (pattern) {
-      // Remember this pattern for next time
-      cache.set(key, pattern);
-      return { pattern, params, wrapper };
+    const standalone = (query.isDate() && !dateDiffers) || (query.isTime() && !timeDiffers);
+    if (standalone) {
+      // 2a. "yMd" same: format date standalone
+      // 3a. "yMd" same, "ahms" same: format time standalone
+
+      // TODO: reorganize so this is reusable. inlined temporarily to get things working.
+
+      const datematcher = this.getCalendarMatcher(calendar);
+      const dateSkel = datematcher.matcher.match(query);
+      const tempDate = dateSkel.pattern || this.getSkeletonPattern(start, dateSkel.skeleton);
+      const datePattern = datematcher.matcher.adjust(tempDate, query, params.symbols.decimal);
+      if (datePattern.length !== 0) {
+        entry.date = datePattern;
+      }
+    } else {
+      // 2b. "yMd" differ: select date interval pattern and format
+      // 3b. "yMd" same, "ahms" differ: select time interval pattern and format
+      // console.log('2b 3b');
+
+      const skel = matcher.match(query);
+      if (skel) {
+        const pattern = this.getIntervalPattern(skel.skeleton, field);
+        if (pattern) {
+          entry.range = matcher.adjust(pattern, query, params.symbols.decimal);
+        }
+      }
     }
-    // Fallback
+
+    // Cache the entry and return the request
+    cache.set(cacheKey, entry);
+    req.date = entry.date;
+    req.range = entry.range;
     return req;
   }
 

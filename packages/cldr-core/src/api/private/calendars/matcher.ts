@@ -224,9 +224,34 @@ export class DateSkeleton {
     return m ? m.width : 0;
   }
 
+  // TODO: replace with public flags/mask interface
+
+  hasYear(): boolean {
+    return this.info[F.YEAR] !== undefined;
+  }
+
+  hasMonth(): boolean {
+    return this.info[F.MONTH] !== undefined;
+  }
+
+  hasDay(): boolean {
+    return this.info[F.DAY] !== undefined;
+  }
+
   hasWeekday(): boolean {
-    const m = this.info[F.WEEKDAY];
-    return m !== undefined;
+    return this.info[F.WEEKDAY] !== undefined;
+  }
+
+  hasDayPeriod(): boolean {
+    return this.info[F.DAYPERIOD] !== undefined;
+  }
+
+  hasHour(): boolean {
+    return this.info[F.HOUR] !== undefined;
+  }
+
+  hasMinute(): boolean {
+    return this.info[F.MINUTE] !== undefined;
   }
 
   toString(): string {

@@ -115,6 +115,13 @@ export class ZonedDateTime {
   }
 
   /**
+   * Return 'am' or 'pm' depending on the hour.
+   */
+  getDayPeriod(): string {
+    return this.getHour() < 12 ? 'am' : 'pm';
+  }
+
+  /**
    * Local hours, an integer between 0 and 23, where 0 = midnight.
    */
   getHour(): number {
@@ -247,9 +254,9 @@ export class ZonedDateTime {
     if (this.getDayOfMonth() !== other.getDayOfMonth()) {
       return DateTimePatternField.DAY;
     }
-
-    // TODO: AM PM
-
+    if (this.getDayPeriod() !== other.getDayPeriod()) {
+      return DateTimePatternField.DAYPERIOD;
+    }
     if (this.getHour() !== other.getHour()) {
       return DateTimePatternField.HOUR;
     }

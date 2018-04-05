@@ -7,7 +7,7 @@ export const [ DateTimePatternField, DateTimePatternFieldValues ] = makeKeyedEnu
   ['YEAR', 'y'],
   ['MONTH', 'M'],
   ['DAY', 'd'],
-  ['AM_PM', 'a'],
+  ['DAYPERIOD', 'a'],
   ['HOUR', 'H'],
   ['MINUTE', 'm'],
   ['SECOND', 's']
