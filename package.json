@@ -2,7 +2,7 @@
   "private": true,
   "name": "cldr-engine-monorepo",
   "author": "Patrick Hensley <pathensley@gmail.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "bench": "lerna run --stream --concurrency=1 bench",
     "bootstrap": "lerna bootstrap",
