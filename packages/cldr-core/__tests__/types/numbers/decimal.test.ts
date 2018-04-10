@@ -308,6 +308,11 @@ test('aligned exponent', () => {
   expect(parse('.02').alignexp()).toEqual(-2);
 });
 
+test('to string', () => {
+  expect(parse('-1.3e-5').toString()).toEqual('-0.000013');
+  expect(parse('-2.9999998e-23').toString()).toEqual('-0.000000000000000000000029999998');
+});
+
 test('move point', () => {
   expect(parse('1').movePoint(1)).toEqual(parse('1e1'));
   expect(parse('1e5').movePoint(1)).toEqual(parse('1e6'));

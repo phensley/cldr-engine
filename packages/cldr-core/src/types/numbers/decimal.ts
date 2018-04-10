@@ -204,11 +204,14 @@ export class Decimal {
 
     const u: Decimal = this;
     v = coerceDecimal(v);
-    let w = new Decimal(ZERO);
+    const w = new Decimal(ZERO);
     w.exp = (u.exp + v.exp);
 
     if (u.sign === 0 || v.sign === 0) {
-      return usePrecision ? w : w.setScale(scaleprec);
+      if (!usePrecision) {
+        w._setScale(scaleprec);
+      }
+      return w;
     }
 
     w.data = multiply(u.data, v.data);
@@ -219,10 +222,10 @@ export class Decimal {
     if (usePrecision) {
       const delta = w.precision() - scaleprec;
       if (delta > 0) {
-        w = w.shiftright(delta, rounding);
+        w._shiftright(delta, rounding);
       }
     } else {
-      w = w.setScale(scaleprec, rounding);
+      w._setScale(scaleprec, rounding);
     }
     return w;
   }
@@ -248,7 +251,7 @@ export class Decimal {
       }
     }
 
-    let w = new Decimal(ZERO);
+    const w = new Decimal(ZERO);
 
     // Shift in extra digits for rounding.
     let shift = 2;
@@ -275,15 +278,20 @@ export class Decimal {
     w.exp = exp;
     w.trim();
 
-    // Adjust the precision or scale
     if (usePrecision) {
+      // Adjust precision to match context
       const delta = w.precision() - scaleprec;
-      w = delta > 0 ? w.shiftright(delta, rounding) : w.shiftright(1, rounding);
+      if (delta > 0) {
+        w._shiftright(delta, rounding);
+      }
     } else {
-      w = w.setScale(scaleprec, rounding);
+      // Adjust scale to match context
+      w._setScale(scaleprec, rounding);
     }
-
-    return usePrecision ? w.stripTrailingZeros() : w;
+    if (usePrecision) {
+      w._stripTrailingZeros();
+    }
+    return w;
   }
 
   /**
@@ -353,8 +361,9 @@ export class Decimal {
    * Strip all trailing zeros.
    */
   stripTrailingZeros(): Decimal {
-    const n = this.trailingZeros();
-    return n > 0 ? this.shiftright(n, 'truncate') : new Decimal(this);
+    const r = new Decimal(this);
+    r._stripTrailingZeros();
+    return r;
   }
 
   /**
@@ -386,9 +395,8 @@ export class Decimal {
    * Returns a new number with the given scale, shifting the coefficient as needed.
    */
   setScale(scale: number, roundingMode: RoundingModeType = 'half-even'): Decimal {
-    const diff = scale - this.scale();
-    const r = diff > 0 ? this.shiftleft(diff) : this.shiftright(-diff, roundingMode);
-    r.exp = scale === 0 ? 0 : -scale;
+    const r: Decimal = new Decimal(this);
+    r._setScale(scale, roundingMode);
     return r;
   }
 
@@ -416,55 +424,7 @@ export class Decimal {
    */
   shiftleft(shift: number): Decimal {
     const w = new Decimal(this);
-    if (shift <= 0 || w.sign === 0) {
-      return w;
-    }
-    const u = this;
-    let m = u.data.length;
-
-    // Compute the shift in terms of our radix.
-    const q = (shift / Constants.RDIGITS) | 0;
-    const r = shift - q * Constants.RDIGITS;
-
-    // Expand w to hold shifted result and zero all elements.
-    let n = size(u.precision() + shift);
-    w.data = new Array(n);
-    w.data.fill(0);
-
-    // Trivial case where shift is a multiple of our radix.
-    if (r === 0) {
-      while (--m >= 0) {
-        w.data[m + q] = u.data[m];
-      }
-      return w;
-    }
-
-    // Shift divided by radix leaves a remainder.
-    const powlo = POWERS10[r];
-    const powhi = POWERS10[Constants.RDIGITS - r];
-    let hi = 0;
-    let lo = 0;
-    let loprev = 0;
-
-    n--;
-    m--;
-    hi = (u.data[m] / powhi) | 0;
-    loprev = u.data[m] - hi * powhi;
-    if (hi !== 0) {
-      w.data[n] = hi;
-      n--;
-    }
-    m--;
-
-    // Divmod each element of u, copying the hi/lo parts to w.
-    for (; m >= 0; m--, n--) {
-      hi = (u.data[m] / powhi) | 0;
-      lo = u.data[m] - hi * powhi;
-      w.data[n] = powlo * loprev + hi;
-      loprev = lo;
-    }
-
-    w.data[q] = powlo * loprev;
+    w._shiftleft(shift);
     return w;
   }
 
@@ -474,57 +434,8 @@ export class Decimal {
    */
   shiftright(shift: number, mode: RoundingModeType = 'half-even'): Decimal {
     const w = new Decimal(this);
-    if (shift <= 0 || w.sign === 0) {
-      return w;
-    }
-    w.data.fill(0);
-    const u = this;
-
-    const div = new DivMod();
-    const [q, r] = div.word(shift, Constants.RDIGITS);
-
-    let i = 0, j = 0;
-    let rnd = 0, rest = 0;
-
-    if (r === 0) {
-      if (q > 0) {
-        [rnd, rest] = div.pow10(u.data[q - 1], Constants.RDIGITS - 1);
-        if (rest === 0) {
-          rest = allzero(u.data, q - 1) === 0 ? 1 : 0;
-        }
-      }
-      for (j = 0; j < u.data.length - q; j++) {
-        w.data[j] = u.data[q + j];
-      }
-      w.exp += shift;
-      if (w.round(rnd, rest, mode)) {
-        w._increment();
-      }
-      return w.trim();
-    }
-
-    let hiprev = 0;
-    const ph = POWERS10[Constants.RDIGITS - r];
-    [hiprev, rest] = div.pow10(u.data[q], r);
-    [rnd, rest] = div.pow10(rest, r - 1);
-    if (rest === 0 && q > 0) {
-      rest = allzero(u.data, q) === 0 ? 1 : 0;
-    }
-
-    for (j = 0, i = q + 1; i < u.data.length; i++, j++) {
-      const [hi, lo] = div.pow10(u.data[i], r);
-      w.data[j] = ph * lo + hiprev;
-      hiprev = hi;
-    }
-    if (hiprev !== 0) {
-      w.data[j] = hiprev;
-    }
-
-    w.exp += shift;
-    if (w.round(rnd, rest, mode)) {
-      w._increment();
-    }
-    return w.trim();
+    w._shiftright(shift, mode);
+    return w;
   }
 
   /**
@@ -704,6 +615,141 @@ export class Decimal {
 
   protected static fromRaw(sign: number, exp: number, data: number[]): Decimal {
     return new this({ sign, exp, data } as any as Decimal);
+  }
+
+  /**
+   * Mutating in-place shift left.
+   */
+  protected _shiftleft(shift: number): void {
+    if (shift <= 0 || this.sign === 0) {
+      return;
+    }
+    const w: Decimal = this;
+    const prec = w.precision();
+    const data = w.data.slice();
+    w.data.fill(0);
+
+    let m = data.length;
+
+    // Compute the shift in terms of our radix.
+    const q = (shift / Constants.RDIGITS) | 0;
+    const r = shift - q * Constants.RDIGITS;
+
+    // Expand w to hold shifted result and zero all elements.
+    let n = size(prec + shift);
+    w.data = new Array(n);
+    w.data.fill(0);
+
+    // Trivial case where shift is a multiple of our radix.
+    if (r === 0) {
+      while (--m >= 0) {
+        w.data[m + q] = data[m];
+      }
+      return;
+    }
+
+    // Shift divided by radix leaves a remainder.
+    const powlo = POWERS10[r];
+    const powhi = POWERS10[Constants.RDIGITS - r];
+    let hi = 0;
+    let lo = 0;
+    let loprev = 0;
+
+    n--;
+    m--;
+    hi = (data[m] / powhi) | 0;
+    loprev = data[m] - hi * powhi;
+    if (hi !== 0) {
+      w.data[n] = hi;
+      n--;
+    }
+    m--;
+
+    // Divmod each element of u, copying the hi/lo parts to w.
+    for (; m >= 0; m--, n--) {
+      hi = (data[m] / powhi) | 0;
+      lo = data[m] - hi * powhi;
+      w.data[n] = powlo * loprev + hi;
+      loprev = lo;
+    }
+
+    w.data[q] = powlo * loprev;
+  }
+
+  /**
+   * Mutating in-place shift right.
+   */
+  protected _shiftright(shift: number, mode: RoundingModeType = 'half-even'): void {
+    if (shift <= 0 || this.sign === 0) {
+      return;
+    }
+    const w: Decimal = this;
+    const data = w.data.slice();
+    w.data.fill(0);
+
+    const div = new DivMod();
+    const [q, r] = div.word(shift, Constants.RDIGITS);
+
+    let i = 0, j = 0;
+    let rnd = 0, rest = 0;
+
+    if (r === 0) {
+      if (q > 0) {
+        [rnd, rest] = div.pow10(data[q - 1], Constants.RDIGITS - 1);
+        if (rest === 0) {
+          rest = allzero(data, q - 1) === 0 ? 1 : 0;
+        }
+      }
+      for (j = 0; j < data.length - q; j++) {
+        w.data[j] = data[q + j];
+      }
+      w.exp += shift;
+      if (w.round(rnd, rest, mode)) {
+        w._increment();
+      }
+      w.trim();
+      return;
+    }
+
+    let hiprev = 0;
+    const ph = POWERS10[Constants.RDIGITS - r];
+    [hiprev, rest] = div.pow10(data[q], r);
+    [rnd, rest] = div.pow10(rest, r - 1);
+    if (rest === 0 && q > 0) {
+      rest = allzero(data, q) === 0 ? 1 : 0;
+    }
+
+    for (j = 0, i = q + 1; i < data.length; i++, j++) {
+      const [hi, lo] = div.pow10(data[i], r);
+      w.data[j] = ph * lo + hiprev;
+      hiprev = hi;
+    }
+    if (hiprev !== 0) {
+      w.data[j] = hiprev;
+    }
+
+    w.exp += shift;
+    if (w.round(rnd, rest, mode)) {
+      w._increment();
+    }
+    w.trim();
+  }
+
+  protected _setScale(scale: number, roundingMode: RoundingModeType = 'half-even'): void {
+    const diff = scale - this.scale();
+    if (diff > 0) {
+      this._shiftleft(diff);
+    } else {
+      this._shiftright(-diff, roundingMode);
+    }
+    this.exp = scale === 0 ? 0 : -scale;
+  }
+
+  protected _stripTrailingZeros(): void {
+    const n = this.trailingZeros();
+    if (n > 0) {
+      this._shiftright(n, 'truncate');
+    }
   }
 
   /**

@@ -68,6 +68,20 @@ test('divide by zero', () => {
   expect(() => div('123', '0.0000e4')).toThrowError();
 });
 
+test('divide zero', () => {
+  expect(div('0', '3')).toEqual(parse('0'));
+  expect(div('0', '3', { precision: 10 })).toEqual(parse('0'));
+  expect(div('0', '3', { scale: 10 })).toEqual(parse('0.0000000000'));
+});
+
+test('divide by one', () => {
+  expect(div('1', '1')).toEqual(parse('1'));
+  expect(div('3', '1')).toEqual(parse('3'));
+  expect(div('10', '1')).toEqual(parse('1e1'));
+  expect(div('10', '1', { scale: 2 })).toEqual(parse('10.00'));
+  expect(div('10', '1', { scale: 10 })).toEqual(parse('10.0000000000'));
+});
+
 test('divide with precision', () => {
   expect(div('10', '3', { precision: 0 })).toEqual(parse('0e1'));
   expect(div('10', '3', { precision: 1 })).toEqual(parse('3'));
