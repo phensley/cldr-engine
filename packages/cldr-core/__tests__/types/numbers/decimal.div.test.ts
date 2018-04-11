@@ -226,7 +226,7 @@ test('divide by single digit', () => {
 
 test('divmod', () => {
   expect(() => divmod('10', '0')).toThrowError();
-  expect(divmod('0', '10')).toEqual([parse('0'), parse('10')]);
+  expect(divmod('0', '10')).toEqual([parse('0'), parse('0')]);
   expect(divmod('2', '3')).toEqual([parse('0'), parse('2')]);
   expect(divmod('10', '6')).toEqual([parse('1'), parse('4')]);
 
@@ -249,6 +249,11 @@ test('divmod', () => {
 
   expect(divmod('96441598043416655685', '13367828761276'))
     .toEqual([parse('7214454'), parse('12365313972381')]);
+
+  expect(divmod('0', '12345')).toEqual([parse('0'), parse('0')]);
+  expect(divmod('1.1', '12345')).toEqual([parse('0'), parse('1.1')]);
+  expect(divmod('3.14159', '143')).toEqual([parse('0'), parse('3.14159')]);
+  expect(divmod('300000000.14159', '1484930')).toEqual([parse('202'), parse('44140.14159')]);
 });
 
 const DAY = new Decimal(86400);
@@ -268,7 +273,7 @@ test('divmod conversions', () => {
 });
 
 test('mod', () => {
-  expect(parse('0').mod(parse('1'))).toEqual(parse('1'));
+  expect(parse('0').mod(parse('1'))).toEqual(parse('0'));
 
   expect(parse('99').mod(parse('9'))).toEqual(parse('0'));
   expect(parse('100').mod(parse('9'))).toEqual(parse('1'));

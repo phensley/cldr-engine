@@ -300,10 +300,11 @@ export class Decimal {
   divmod(v: DecimalArg): [Decimal, Decimal] {
     v = coerceDecimal(v);
     if (this.checkDivision(v)) {
-      return [ZERO, new Decimal(v)];
+      return [ZERO, ZERO];
     }
 
     let u: Decimal = this;
+
     const exp = u.exp > v.exp ? v.exp : u.exp;
     if (u.exp !== v.exp) {
       const shift = u.exp - v.exp;
@@ -311,6 +312,17 @@ export class Decimal {
         u = u.shiftleft(shift);
       } else {
         v = v.shiftleft(-shift);
+      }
+    }
+
+    // Ensure u digits are >= v
+    const dsize = v.data.length - u.data.length;
+    if (dsize > 0) {
+      if (u === this) {
+        u = new Decimal(u);
+      }
+      for (let i = 0; i < dsize; i++) {
+        u.data.push(0);
       }
     }
 
