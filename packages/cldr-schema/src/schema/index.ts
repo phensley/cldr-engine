@@ -14,6 +14,7 @@ import {
   CurrenciesSchema,
   DateFieldsSchema,
   GregorianSchema,
+  JapaneseSchema,
   LayoutSchema,
   ListPatternsSchema,
   NamesSchema,
@@ -26,6 +27,7 @@ import {
 export interface Schema {
   readonly DateFields: DateFieldsSchema;
   readonly Gregorian: GregorianSchema;
+  readonly Japanese: JapaneseSchema;
   readonly Persian: PersianSchema;
   readonly Layout: LayoutSchema;
   readonly ListPatterns: ListPatternsSchema;
