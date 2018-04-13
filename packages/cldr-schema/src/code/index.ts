@@ -7,6 +7,7 @@ import { LAYOUT, LIST_PATTERNS } from './general';
 import { GREGORIAN } from './gregorian';
 import { NAMES } from './names';
 import { NUMBERS } from './numbers';
+import { PERSIAN } from './persian';
 import { TIME_ZONE_NAMES } from './timezones';
 import { UNITS } from './units';
 
@@ -17,6 +18,7 @@ export const ORIGIN: Origin = origin([
   LAYOUT,
   LIST_PATTERNS,
   GREGORIAN,
+  PERSIAN,
   CURRENCIES,
   TIME_ZONE_NAMES,
   UNITS

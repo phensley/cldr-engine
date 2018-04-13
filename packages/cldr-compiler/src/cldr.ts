@@ -265,11 +265,44 @@ const Hebrew = {
   weekdays: get(hebrew('days', ..._formats))
 };
 
+const japanese = (...keys: string[]) => ['dates', 'calendars', 'japanese', ...keys];
+const japaneseIntervals = japanese('dateTimeFormats', 'intervalFormats');
+
 /**
  * Japanese calendar data.
  */
 const Japanese = {
+  availableFormats: get(japanese('dateTimeFormats', 'availableFormats')),
+  dateFormats: get(japanese('dateFormats', ..._sizeProps)),
+  dayPeriods: get(japanese('dayPeriods', ..._formats)),
+  dateTimeFormats: get(japanese('dateTimeFormats', ..._sizeProps)),
+  intervalFormats: get([L.compose(japaneseIntervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
+  intervalFormatFallback: get(L.compose(japaneseIntervals, 'intervalFormatFallback')),
+  eras: get([japanese('eras'), fixEras]),
+  months: get(japanese('months', ..._formats)),
+  quarters: get(japanese('quarters', ..._formats)),
+  timeFormats: get(japanese('timeFormats', ..._sizeProps)),
+  weekdays: get(japanese('days', ..._formats))
+};
 
+const persian = (...keys: string[]) => ['dates', 'calendars', 'persian', ...keys];
+const persianIntervals = persian('dateTimeFormats', 'intervalFormats');
+
+/**
+ * Persian calendar data.
+ */
+const Persian = {
+  availableFormats: get(persian('dateTimeFormats', 'availableFormats')),
+  dateFormats: get(persian('dateFormats', ..._sizeProps)),
+  dayPeriods: get(persian('dayPeriods', ..._formats)),
+  dateTimeFormats: get(persian('dateTimeFormats', ..._sizeProps)),
+  intervalFormats: get([L.compose(persianIntervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
+  intervalFormatFallback: get(L.compose(persianIntervals, 'intervalFormatFallback')),
+  eras: get([persian('eras'), fixEras]),
+  months: get(persian('months', ..._formats)),
+  quarters: get(persian('quarters', ..._formats)),
+  timeFormats: get(persian('timeFormats', ..._sizeProps)),
+  weekdays: get(persian('days', ..._formats))
 };
 
 /**
@@ -440,6 +473,8 @@ export const getMain = (language: string) => {
     DateFields: access(DateFields, 'dateFields'),
     Gregorian: access(Gregorian, 'ca-gregorian'),
     Hebrew: access(Hebrew, 'ca-hebrew'),
+    Japanese: access(Japanese, 'ca-japanese'),
+    Persian: access(Persian, 'ca-persian'),
     Layout: access(Layout, 'layout'),
     Numbers: access(Numbers, 'numbers'),
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames'),
