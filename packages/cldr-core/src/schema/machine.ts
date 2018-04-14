@@ -7,6 +7,8 @@ import {
   fieldMapIndexedArrow,
   objectMapArrow,
   scopeArrow,
+  vector1Arrow,
+  vector2Arrow,
 
   AltValues,
   PluralValues,
@@ -30,8 +32,14 @@ import {
   Scope,
   ScopeField,
   ScopeMap,
+
+  Vector1,
+  Vector2,
+
   ORIGIN,
 } from '@phensley/cldr-schema';
+
+import { Decimal } from '../types';
 
 /**
  * Generates field offsets for the schema builder.
@@ -73,6 +81,18 @@ class Generator {
     return res;
   }
 
+  vector1(dim: number): number {
+    const off = this.offset;
+    this.offset += dim;
+    return off;
+  }
+
+  vector2(dim1: number, dim2: number): number {
+    const off = this.offset;
+    this.offset += (dim1 * dim2);
+    return off;
+  }
+
   private _field(fields: any[]): number[] {
     const res: number[] = [];
     for (let i = 0; i < fields.length; i++) {
@@ -81,6 +101,14 @@ class Generator {
     return res;
   }
 }
+
+const time = (n: [number, number]) =>
+  new Decimal(n[0]).add(new Decimal(n[1]).movePoint(-9));
+
+const elapsed = (start: [number, number]): string => {
+  const end = process.hrtime();
+  return time(end).subtract(time(start)).movePoint(6).toString();
+};
 
 /**
  * Builds the schema accessor singleton.
@@ -91,29 +119,39 @@ export class SchemaBuilder {
 
   construct(obj: any, inst: Instruction): void {
     switch (inst.type) {
-    case 'digits':
-      this.constructDigits(obj, inst);
-      break;
-    case 'field':
-      this.constructField(obj, inst);
-      break;
-    case 'fieldmap':
-      this.constructFieldMap(obj, inst);
-      break;
-    case 'objectmap':
-      this.constructObjectMap(obj, inst);
-      break;
-    case 'origin':
-      this.constructOrigin(obj, inst);
-      break;
-    case 'scope':
-      this.constructScope(obj, inst);
-      break;
-    case 'scopefield':
-      this.constructScopeField(obj, inst);
-      break;
-    case 'scopemap':
-      this.constructScopeMap(obj, inst);
+      case 'digits':
+        this.constructDigits(obj, inst);
+        break;
+      case 'field':
+        this.constructField(obj, inst);
+        break;
+      case 'fieldmap':
+        this.constructFieldMap(obj, inst);
+        break;
+      case 'objectmap':
+        this.constructObjectMap(obj, inst);
+        break;
+      case 'origin':
+        this.constructOrigin(obj, inst);
+        break;
+      case 'scope':
+        // const s = process.hrtime();
+        this.constructScope(obj, inst);
+        // const e = elapsed(s);
+        // console.log(`${e} scope ${inst.identifier}`);
+        break;
+      case 'scopefield':
+        this.constructScopeField(obj, inst);
+        break;
+      case 'scopemap':
+        this.constructScopeMap(obj, inst);
+        break;
+      case 'vector1':
+        this.constructVector1(obj, inst);
+        break;
+      case 'vector2':
+        this.constructVector2(obj, inst);
+        break;
     }
   }
 
@@ -200,6 +238,15 @@ export class SchemaBuilder {
     obj[inst.name] = scopeArrow(map, undef);
   }
 
+  private constructVector1(obj: any, inst: Vector1): void {
+    const offset = this.generator.vector1(inst.dim0.size);
+    obj[inst.identifier] = vector1Arrow(offset, inst.dim0);
+  }
+
+  private constructVector2(obj: any, inst: Vector2): void {
+    const offset = this.generator.vector2(inst.dim0.size, inst.dim1.size);
+    obj[inst.identifier] = vector2Arrow(offset, inst.dim0, inst.dim1);
+  }
 }
 
 let SCHEMA: Schema;

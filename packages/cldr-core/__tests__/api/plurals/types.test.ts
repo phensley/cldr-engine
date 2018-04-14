@@ -9,6 +9,6 @@ test('parse compact', () => {
   expect(expr.ranges).toEqual([2, 4, 17, [12, 14], [93, 145]]);
 
   const cond = new PluralCond('B|25&48|49&50|51&52');
-  expect(cond.category).toEqual(Plural.ONE);
+  expect(cond.category).toEqual('one');
   expect(cond.conditions).toEqual([ [25, 48], [49, 50], [51, 52] ]);
 });

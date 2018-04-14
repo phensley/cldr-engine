@@ -1,4 +1,4 @@
-import { field, objectmap, scope, Scope } from './instructions';
+import { field, objectmap, scope, Scope } from '../types';
 
 export const LAYOUT: Scope = scope('Layout', 'Layout', [
   field('characterOrder', 'characterOrder'),

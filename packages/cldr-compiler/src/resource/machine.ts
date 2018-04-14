@@ -9,6 +9,8 @@ import {
   Scope,
   ScopeField,
   ScopeMap,
+  Vector1,
+  Vector2
 } from '@phensley/cldr-schema';
 
 export interface Encoder {
@@ -96,6 +98,12 @@ export class EncoderMachine {
       break;
     case 'scopemap':
       this.encodeScopeMap(obj, inst);
+      break;
+    case 'vector1':
+      this.encodeVector1(obj, inst);
+      break;
+    case 'vector2':
+      this.encodeVector2(obj, inst);
       break;
     }
   }
@@ -197,6 +205,23 @@ export class EncoderMachine {
     const undef: any = {};
     for (const i of inst.block) {
       this.encode(undef, i);
+    }
+  }
+
+  private encodeVector1(obj: any, inst: Vector1): void {
+    const o0 = obj[inst.name] || {};
+    for (const k of inst.dim0.keys) {
+      this.encoder.encode(o0[k]);
+    }
+  }
+
+  private encodeVector2(obj: any, inst: Vector2): void {
+    const o0 = obj[inst.name] || {};
+    for (const k1 of inst.dim0.keys) {
+      const o1 = o0[k1] || {};
+      for (const k2 of inst.dim1.keys) {
+        this.encoder.encode(o1[k2]);
+      }
     }
   }
 }

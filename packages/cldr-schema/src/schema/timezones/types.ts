@@ -1,19 +1,15 @@
-import { FieldArrow, ScopeArrow } from '../arrows';
-import { MetaZoneType, TimeZoneType } from './autogen.timezones';
+import { FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
+import { MetaZoneType, MetaZoneValues, TimeZoneType, TimeZoneValues } from './autogen.timezones';
+import { KeyIndex } from '../../types';
 
-export interface MetaZoneFormat {
-  readonly daylight: FieldArrow;
-  readonly generic: FieldArrow;
-  readonly standard: FieldArrow;
-}
+export const MetaZoneIndex = new KeyIndex(MetaZoneValues);
+export const TimeZoneIndex = new KeyIndex(TimeZoneValues);
+export const TimeZoneTypeIndex = new KeyIndex(['daylight', 'generic', 'standard']);
+export type TimeZoneNameType = 'daylight' | 'generic' | 'standard';
 
 export interface MetaZoneInfo {
-  readonly short: MetaZoneFormat;
-  readonly long: MetaZoneFormat;
-}
-
-export interface TimeZoneInfo {
-  readonly exemplarCity: FieldArrow;
+  readonly short: Vector2Arrow<TimeZoneNameType, MetaZoneType>;
+  readonly long: Vector2Arrow<TimeZoneNameType, MetaZoneType>;
 }
 
 export interface TimeZoneNames {
@@ -21,6 +17,6 @@ export interface TimeZoneNames {
   readonly gmtZeroFormat: FieldArrow;
   readonly hourFormat: FieldArrow;
   readonly regionFormat: FieldArrow;
-  readonly metaZones: ScopeArrow<MetaZoneType, MetaZoneInfo>;
-  readonly timeZones: ScopeArrow<TimeZoneType, TimeZoneInfo>;
+  readonly metaZones: MetaZoneInfo;
+  readonly exemplarCity: Vector1Arrow<TimeZoneType>;
 }

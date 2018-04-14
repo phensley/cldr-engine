@@ -1,3 +1,5 @@
+import { KeyIndex } from '../types/instructions';
+
 export enum Plural {
   OTHER = 0,
   ZERO = 1,
@@ -8,6 +10,8 @@ export enum Plural {
 }
 
 export const PluralValues = 'other zero one two few many'.split(' ');
+
+export const PluralIndex = new KeyIndex(PluralValues);
 
 export const pluralCategory = (s: string): Plural => {
   switch (s) {
@@ -38,6 +42,10 @@ export enum Alt {
 }
 
 export const AltValues = '|-alt-variant|-alt-short|-alt-narrow'.split('|');
+
+export const AltIndex = new KeyIndex(['none', 'short', 'narrow', 'variant']);
+
+export type AltType = 'none' | 'short' | 'narrow' | 'variant';
 
 export enum Yeartype {
   NONE = 0,

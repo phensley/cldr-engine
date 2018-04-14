@@ -19,7 +19,7 @@
     "build": "yarn run build:code && yarn run build:packs",
     "build:code": "tsc -p ./tsconfig.build.json",
     "build:packs": "cldr-compiler pack -o ./packs",
-    "build:watch": "tsc -p ./tsconfig.build.json -w",
+    "build:watch": "tsc -p ./tsconfig.build.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./packs",
     "coverage": "jest --coverage --runInBand --no-cache",
     "install": "node ./scripts/extract.js",

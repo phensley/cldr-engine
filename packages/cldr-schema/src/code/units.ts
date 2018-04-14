@@ -1,4 +1,4 @@
-import { Choice, Scope, ScopeMap, field, scope, scopemap } from './instructions';
+import { Choice, Scope, ScopeMap, field, scope, scopemap } from '../types';
 import { UnitValues } from '../schema/units';
 
 const unitInfo = (n: string): ScopeMap => scopemap(n, UnitValues, [

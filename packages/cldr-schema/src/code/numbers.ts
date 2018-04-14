@@ -1,4 +1,4 @@
-import { Choice, Scope, digits, field, objectmap, scope, scopemap } from './instructions';
+import { Choice, Scope, digits, field, objectmap, scope, scopemap } from '../types';
 import { NumberSymbolValues, NumberSystemNameValues, NumberSystemTypes } from '../schema/numbers';
 
 const CURRENCY_SPACING = ['currencyMatch', 'surroundingMatch', 'insertBetween'];

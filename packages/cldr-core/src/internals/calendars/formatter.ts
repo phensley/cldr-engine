@@ -28,7 +28,6 @@ export class PartsRenderer implements CalendarRenderer<Part[]> {
 
   add(type: string, value: string): void {
     this.parts.push({ type, value });
-    //
   }
 
   build(): Part[] {

@@ -542,17 +542,15 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
       return '';
     }
 
-    const metaZoneId = date.metaZoneId();
     const isDST = date.isDaylightSavings();
-    const info = this.TimeZoneNames.metaZones(metaZoneId as MetaZoneType);
-    if (info !== undefined) {
-      const format = width === 4 ? info.long : info.short;
-      const name = isDST ? format.daylight(bundle) : format.standard(bundle);
+    const metaZoneId = date.metaZoneId();
+    if (metaZoneId !== undefined) {
+      const format = width === 4 ? this.TimeZoneNames.metaZones.long : this.TimeZoneNames.metaZones.short;
+      const name = format(bundle, isDST ? 'daylight' : 'standard', metaZoneId as MetaZoneType);
       if (name !== '') {
         return name;
       }
     }
-
     // Fall back to 'O' or 'OOOO'
     return this.timeZone_O(bundle, date, 'O', width);
   }
@@ -607,14 +605,12 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
       return '';
     }
 
-    const metaZoneId = date.metaZoneId();
-    const info = this.TimeZoneNames.metaZones(date.metaZoneId() as MetaZoneType);
     let name = '';
-    if (info !== undefined) {
-      const format = width === 1 ? info.short : info.long;
-      name = format.generic(bundle);
+    const metaZoneId = date.metaZoneId();
+    if (metaZoneId) {
+      const format = width === 1 ? this.TimeZoneNames.metaZones.short : this.TimeZoneNames.metaZones.long;
+      name = format(bundle, 'generic', metaZoneId as MetaZoneType);
     }
-
     if (name !== '') {
       return name;
     }
@@ -633,7 +629,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     case 4:
     {
       // Generic location format, e.g. "Los Angeles Time"
-      const city = this.getExemplarCity(bundle, zoneId);
+      const city = this.TimeZoneNames.exemplarCity(bundle, zoneId as TimeZoneType);
       if (city === '') {
         // TODO: docs say fallback to 'OOOO' only necessary for GMT-style
         // timezone ids. Need to create a mapping
@@ -646,8 +642,8 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     case 3:
     {
       // Exemplar city for the time zone, e.g. "Los Angeles"
-      const city = this.getExemplarCity(bundle, zoneId);
-      return city !== '' ? city : this.getExemplarCity(bundle, 'Etc/Unknown');
+      const city = this.TimeZoneNames.exemplarCity(bundle, zoneId as TimeZoneType);
+      return city !== '' ? city : this.TimeZoneNames.exemplarCity(bundle, 'Etc/Unknown');
     }
 
     case 2:
@@ -738,11 +734,6 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     // Wrap into locale-specific GMT format
     const format = this.TimeZoneNames.gmtFormat(bundle);
     return this.wrapper.format(format, [fmt]);
-  }
-
-  protected getExemplarCity(bundle: Bundle, zoneId: string): string {
-    const info = this.TimeZoneNames.timeZones(zoneId as TimeZoneType);
-    return info !== undefined ? info.exemplarCity(bundle) : '';
   }
 
   protected getHourFormat(bundle: Bundle, negative: boolean): DateTimeNode[] {

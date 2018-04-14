@@ -1,3 +1,4 @@
+import { PluralType } from '@phensley/cldr-schema';
 import { PluralInternals } from '..';
 import { expressions, cardinalRules, ordinalRules } from './autogen.rules';
 import { PluralRules } from './types';
@@ -7,11 +8,11 @@ const pluralRules = new PluralRules(expressions, cardinalRules, ordinalRules);
 
 export class PluralInternalsImpl implements PluralInternals {
 
-  cardinal(language: string, operands: NumberOperands): number {
+  cardinal(language: string, operands: NumberOperands): PluralType {
     return pluralRules.cardinal(language, operands);
   }
 
-  ordinal(language: string, operands: NumberOperands): number {
+  ordinal(language: string, operands: NumberOperands): PluralType {
     return pluralRules.ordinal(language, operands);
   }
 

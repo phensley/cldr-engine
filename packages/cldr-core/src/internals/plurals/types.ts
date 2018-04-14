@@ -1,4 +1,4 @@
-import { Plural } from '@phensley/cldr-schema';
+import { PluralType } from '@phensley/cldr-schema';
 import { NumberOperands } from '../../types/numbers';
 
 // TODO: needs a bit of cleanup.
@@ -9,13 +9,13 @@ export type StringMap = { [x: string]: string };
 export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
 
 // Notation for categories in compact plural rules
-const CATEGORIES: any = {
-  'A': Plural.ZERO,
-  'B': Plural.ONE,
-  'C': Plural.TWO,
-  'D': Plural.FEW,
-  'E': Plural.MANY,
-  'F': Plural.OTHER
+const CATEGORIES: { [x: string]: PluralType } = {
+  'A': 'zero',
+  'B': 'one',
+  'C': 'two',
+  'D': 'few',
+  'E': 'many',
+  'F': 'other'
 };
 
 export class RuleCache {
@@ -59,15 +59,15 @@ export class PluralRules {
       this.ordinals = new RuleCache(ordinalsRaw);
   }
 
-  cardinal(language: string, operands: NumberOperands): number {
+  cardinal(language: string, operands: NumberOperands): PluralType {
     return this.evaluate(language, operands, this.cardinals);
   }
 
-  ordinal(language: string, operands: NumberOperands): number {
+  ordinal(language: string, operands: NumberOperands): PluralType {
     return this.evaluate(language, operands, this.ordinals);
   }
 
-  private evaluate(language: string, operands: NumberOperands, cache: RuleCache): number {
+  private evaluate(language: string, operands: NumberOperands, cache: RuleCache): PluralType {
     const rule = cache.get(language);
     if (rule !== undefined) {
       for (const cond of rule.conditions) {
@@ -76,7 +76,7 @@ export class PluralRules {
         }
       }
     }
-    return Plural.OTHER;
+    return 'other';
   }
 
   private execute(operands: NumberOperands, conditions: number[][]): boolean {
@@ -131,7 +131,7 @@ export class PluralRule {
  */
 export class PluralCond {
 
-  readonly category: number;
+  readonly category: PluralType;
   readonly conditions: number[][];
 
   constructor(raw: string) {

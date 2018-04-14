@@ -5,7 +5,8 @@ import {
   FormatWidthValues,
   GregorianSchema,
   Plural,
-  Schema
+  Schema,
+  pluralCategory
 } from '@phensley/cldr-schema';
 
 import { timeData } from './autogen.timedata';
@@ -425,7 +426,10 @@ export class DatePatternManager {
     {
       plural = Plural.OTHER;
       const week = coerceDecimal(d.getISOWeek());
-      plural = this.internals.plurals.ordinal(this.bundle.language(), week.operands());
+
+      // TODO: use plural type directly
+      const pl = this.internals.plurals.ordinal(this.bundle.language(), week.operands());
+      plural = pluralCategory(pl);
       break;
     }
     default:

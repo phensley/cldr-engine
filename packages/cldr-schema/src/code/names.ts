@@ -1,6 +1,5 @@
-import { Scope, scope, fieldmap } from './instructions';
+import { Choice, Scope, scope, fieldmap } from '../types';
 import { ScriptIdValues, RegionIdValues } from '../schema/names';
-import { Choice } from '../code';
 
 export const NAMES: Scope = scope('Names', 'Names', [
 

@@ -1,10 +1,9 @@
 import {
   Alt,
-  CurrencyInfo,
   CurrencyType,
   DateFieldType,
   DateTimePatternFieldType,
-  Plural,
+  PluralType,
   Schema,
   UnitInfo,
   UnitType
@@ -17,7 +16,8 @@ import {
   NumberSystemType,
   Quantity,
   RelativeTimeFormatOptions,
-  UnitFormatOptions
+  UnitFormatOptions,
+  CurrencySymbolWidthType
 } from '../common';
 
 import { DateFormatRequest, NumberParams, DateIntervalFormatRequest } from '../common/private';
@@ -93,14 +93,16 @@ export interface NumberInternals {
     options: DecimalFormatOptions, params: NumberParams): [T, number];
   formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal, code: string,
     options: CurrencyFormatOptions, params: NumberParams): T;
-  getCurrency(code: CurrencyType): CurrencyInfo;
-  getCurrencyPluralName(bundle: Bundle, code: string, plural: Plural): string;
+  // getCurrency(code: CurrencyType): CurrencyInfo;
+  getCurrencySymbol(bundle: Bundle, code: CurrencyType, width?: CurrencySymbolWidthType): string;
+  getCurrencyDisplayName(bundle: Bundle, code: CurrencyType): string;
+  getCurrencyPluralName(bundle: Bundle, code: string, plural: PluralType): string;
   getNumberPattern(raw: string, negative: boolean): NumberPattern;
 }
 
 export interface PluralInternals {
-  cardinal(language: string, operands: NumberOperands): number;
-  ordinal(language: string, operands: NumberOperands): number;
+  cardinal(language: string, operands: NumberOperands): PluralType;
+  ordinal(language: string, operands: NumberOperands): PluralType;
 }
 
 export interface UnitInternals {

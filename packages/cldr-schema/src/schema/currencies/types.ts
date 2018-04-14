@@ -1,13 +1,12 @@
-import { FieldArrow, FieldIndexedArrow } from '../arrows';
-import { CurrencyType } from './autogen.currencies';
-import { Alt, Plural } from '../enums';
+import { FieldArrow, FieldIndexedArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
+import { CurrencyType, CurrencyValues } from './autogen.currencies';
+import { Alt, AltIndex, AltType, Plural, PluralIndex, PluralType } from '../enums';
+import { KeyIndex } from '../../types';
 
-export interface CurrencyInfo {
-  readonly displayName: FieldArrow;
-  readonly pluralName: FieldIndexedArrow<Plural>;
-  readonly symbol: FieldIndexedArrow<Alt>;
-}
+export const CurrencyIdIndex = new KeyIndex(CurrencyValues);
 
 export interface CurrenciesSchema {
-  (code: CurrencyType): CurrencyInfo;
+  readonly displayName: Vector1Arrow<CurrencyType>;
+  readonly pluralName: Vector2Arrow<PluralType, CurrencyType>;
+  readonly symbol: Vector2Arrow<AltType, CurrencyType>;
 }

@@ -2,7 +2,8 @@ import {
   DateField,
   DateFieldType,
   DateFieldsSchema,
-  Schema
+  Schema,
+  pluralCategory
 } from '@phensley/cldr-schema';
 
 import { coerceDecimal, Decimal, DecimalArg, DecimalConstants, ZonedDateTime } from '../../types';
@@ -86,7 +87,10 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     const operands = n.operands();
     const plural = this.plurals.cardinal(bundle.language(), operands);
     const arrow = negative ? format.past.pattern : format.future.pattern;
-    const raw = arrow(bundle, plural);
+
+    // TODO: use plural type directly
+    const pl = pluralCategory(plural);
+    const raw = arrow(bundle, pl);
     return this.wrapper.format(raw, [n.toString()]);
   }
 

@@ -1,4 +1,4 @@
-import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap } from './instructions';
+import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap } from '../types';
 
 import { DateFieldValues, RelativeTimeFieldValues, WeekdayValues } from '../schema';
 
@@ -24,3 +24,24 @@ export const DATEFIELDS: Scope = scope('DateFields', 'DateFields', [
   ]),
   fieldmap('displayName', 'displayName', DateFieldValues)
 ]);
+
+/**
+
+VectorArrow1<RelativeTimeFieldValues, RelativeTimePatternWidth>
+  vector arrow1: 'relative'
+  key index: RelativeTimeFieldValues
+  dim0: 'wide' | 'short' | 'narrow'
+
+VectorArrow2<RelativeTimeFieldType, RelativeTimeFuturePast, PluralValues>
+
+  name: 'relativeTimes'
+  key index: RelativeTimeFieldValues
+  dim0: 'future' | 'past'
+  dim2: <plural>
+
+VectorArrow<DateTimeFieldType>
+
+  vector arrow0: 'displayName'
+  key index: DateFieldValues
+
+  */

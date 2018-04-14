@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
-    "build:watch": "tsc -p ./tsconfig.build.json -w",
+    "build:watch": "tsc -p ./tsconfig.build.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./.scratch",
     "coverage": "jest --coverage --runInBand --no-cache",
     "lint": "tslint -p ./tsconfig.json",

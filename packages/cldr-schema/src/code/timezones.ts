@@ -1,22 +1,12 @@
-import { Scope, field, scope, scopemap } from './instructions';
-import { MetaZoneValues, TimeZoneValues } from '../schema/timezones';
+import { KeyIndex, Scope, field, scope, scopemap, vector1, vector2 } from '../types';
+import { MetaZoneIndex, MetaZoneValues, TimeZoneIndex, TimeZoneTypeIndex, TimeZoneValues } from '../schema/timezones';
 
-const metaZoneFormat = (n: string) => scope(n, n, [
-  field('daylight', 'daylight'),
-  field('generic', 'generic'),
-  field('standard', 'standard')
-]);
-
-export const TIME_ZONE_NAMES: Scope = scope('TimeZoneNames', 'TimeZoneNames', [
-  scopemap('timeZones', TimeZoneValues, [
-    field('exemplarCity', 'exemplarCity')
+export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZoneNames', [
+  scope('metaZones', 'metaZones', [
+    vector2('long', 'long', TimeZoneTypeIndex, MetaZoneIndex),
+    vector2('short', 'short', TimeZoneTypeIndex, MetaZoneIndex)
   ]),
-
-  scopemap('metaZones', MetaZoneValues, [
-    metaZoneFormat('long'),
-    metaZoneFormat('short')
-  ]),
-
+  vector1('exemplarCity', 'exemplarCity', TimeZoneIndex),
   field('gmtFormat', 'gmtFormat'),
   field('hourFormat', 'hourFormat'),
   field('gmtZeroFormat', 'gmtZeroFormat'),

@@ -7,6 +7,7 @@ import {
   NumberSystemInfo,
   NumberSystemName,
   Plural,
+  PluralType,
   PluralValues,
   Schema
 } from '@phensley/cldr-schema';
@@ -44,32 +45,33 @@ export class NumbersImpl implements Numbers {
   }
 
   getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string {
-    const currencies = this.numbers.getCurrency(code as CurrencyType);
-    const alt = width === 'narrow' ? Alt.NARROW : Alt.NONE;
-    return currencies.symbol(this.bundle, alt) || currencies.symbol(this.bundle, Alt.NONE);
+    return this.numbers.getCurrencySymbol(this.bundle, code, width);
+    // const currencies = this.numbers.getCurrency(code as CurrencyType);
+
+    // const alt = width === 'narrow' ? Alt.NARROW : Alt.NONE;
+    // return currencies.symbol(this.bundle, alt) || currencies.symbol(this.bundle, Alt.NONE);
   }
 
   getCurrencyDisplayName(code: CurrencyType): string {
-    const currencies = this.numbers.getCurrency(code as CurrencyType);
-    return currencies.displayName(this.bundle);
+    return this.numbers.getCurrencyDisplayName(this.bundle, code);
+    // const currencies = this.numbers.getCurrency(code as CurrencyType);
+    // return currencies.displayName(this.bundle);
   }
 
-  getCurrencyPluralName(code: CurrencyType, plural: string): string {
-    const category = pluralCategory(plural);
-    const name = this.numbers.getCurrencyPluralName(this.bundle, code, category);
-    return name !== '' ? name : this.numbers.getCurrencyPluralName(this.bundle, code, Plural.OTHER);
+  getCurrencyPluralName(code: CurrencyType, plural: PluralType): string {
+    // const category = pluralCategory(plural);
+    const name = this.numbers.getCurrencyPluralName(this.bundle, code, plural);
+    return name !== '' ? name : this.numbers.getCurrencyPluralName(this.bundle, code, 'other');
   }
 
   getPluralCardinal(n: DecimalArg): string {
     const d = coerceDecimal(n);
-    const cat = this.plurals.cardinal(this.bundle.language(), d.operands());
-    return pluralString(cat);
+    return this.plurals.cardinal(this.bundle.language(), d.operands());
   }
 
   getPluralOrdinal(n: DecimalArg): string {
     const d = coerceDecimal(n);
-    const cat = this.plurals.ordinal(this.bundle.language(), d.operands());
-    return pluralString(cat);
+    return this.plurals.ordinal(this.bundle.language(), d.operands());
   }
 
   formatDecimal(n: DecimalArg, options?: DecimalFormatOptions): string {

@@ -1,4 +1,4 @@
-import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap } from './instructions';
+import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap } from '../types';
 
 import {
   DateTimePatternFieldValues,

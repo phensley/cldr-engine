@@ -432,6 +432,10 @@ const WeekData = {
   weekendEnd: get(['weekData', 'weekendEnd'])
 };
 
+// ===============================
+
+import { transformCurrencies, transformNumbers, transformTimezones } from './data';
+
 /**
  * Iterate over keys in the group, populating an object with the values
  * retrieved by evaluating each lens property.
@@ -462,10 +466,11 @@ export const load = (path: string, optional = false) => {
  * Flattens and exports the main hierarchy for a given language.
  */
 export const getMain = (language: string) => {
-  const access = (group: {}, fileName: string, optional = false) => {
+  const access = (group: {}, fileName: string, optional = false, transformer?: (o: any) => any) => {
     const data = load(`main/${language}/${fileName}`, optional);
     const root = L.get(['main', language], data);
-    return convert(group, root);
+    const converted = convert(group, root);
+    return transformer === undefined ? converted : transformer(converted);
   };
 
   return {
@@ -477,7 +482,6 @@ export const getMain = (language: string) => {
     Persian: access(Persian, 'ca-persian'),
     Layout: access(Layout, 'layout'),
     Numbers: access(Numbers, 'numbers'),
-    TimeZoneNames: access(TimeZoneNames, 'timeZoneNames'),
     Units: access(Units, 'units'),
 
     Names: {
@@ -493,10 +497,16 @@ export const getMain = (language: string) => {
     },
 
     ...access({ Characters: get(['characters']) }, 'characters'),
-    ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies'),
     ...access({ ContextTransforms: get(['contextTransforms']) }, 'contextTransforms', true),
     ...access({ ListPatterns: get(['listPatterns', listPattern]) }, 'listPatterns'),
-    ...access({ Territories: get(['localeDisplayNames']) }, 'territories')
+    ...access({ Territories: get(['localeDisplayNames']) }, 'territories'),
+
+    // New vector-based transformers
+
+    ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies', false, transformCurrencies),
+    TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
+
+    Numbers2: access(Numbers, 'numbers', false, transformNumbers),
   };
 };
 

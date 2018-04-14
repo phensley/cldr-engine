@@ -1,9 +1,9 @@
 import {
   Alt,
   CurrencyType,
-  CurrencyInfo,
   CurrencyFormats,
   CurrencyValues,
+  CurrenciesSchema,
   DecimalFormats,
   DigitsArrow,
   DivisorArrow,
@@ -13,8 +13,10 @@ import {
   NumberSystemName,
   PercentFormats,
   Plural,
+  PluralType,
   Schema,
-  ScopeArrow
+  ScopeArrow,
+  pluralCategory
 } from '@phensley/cldr-schema';
 
 import {
@@ -44,7 +46,7 @@ const STRING_RENDERER = new StringNumberRenderer();
  */
 export class NumberInternalsImpl implements NumberInternals {
 
-  readonly currencies: ScopeArrow<CurrencyType, CurrencyInfo>;
+  readonly currencies: CurrenciesSchema;
   readonly numbers: NumbersSchema;
 
   protected readonly numberPatternCache: Cache<NumberPattern[]>;
@@ -55,7 +57,7 @@ export class NumberInternalsImpl implements NumberInternals {
     readonly wrapper: WrapperInternals,
     cacheSize: number = 50) {
 
-      this.currencies = root.Currencies;
+    this.currencies = root.Currencies;
     this.numbers = root.Numbers;
     this.numberPatternCache = new Cache(parseNumberPattern, cacheSize);
   }
@@ -68,12 +70,22 @@ export class NumberInternalsImpl implements NumberInternals {
     return STRING_RENDERER;
   }
 
-  getCurrency(code: CurrencyType): CurrencyInfo {
-    return this.currencies(code);
+  // getCurrency(code: CurrencyType): CurrencyInfo {
+  //   return this.currencies(code);
+  // }
+
+  getCurrencySymbol(bundle: Bundle, code: CurrencyType, width?: CurrencySymbolWidthType): string {
+    const alt = width === 'narrow' ? 'narrow' : 'none';
+    return this.currencies.symbol(bundle, alt, code) || this.currencies.symbol(bundle, 'none', code);
   }
 
-  getCurrencyPluralName(bundle: Bundle, code: string, plural: Plural): string {
-    return this.currencies(code as CurrencyType).pluralName(bundle, plural);
+  getCurrencyDisplayName(bundle: Bundle, code: CurrencyType): string {
+    return this.currencies.displayName(bundle, code);
+  }
+
+  getCurrencyPluralName(bundle: Bundle, code: string, plural: PluralType): string {
+    return this.currencies.pluralName(bundle, plural, code as CurrencyType);
+    // return this.currencies(code as CurrencyType).pluralName(bundle, plural);
   }
 
   getNumberPattern(raw: string, negative: boolean): NumberPattern {
@@ -85,7 +97,8 @@ export class NumberInternalsImpl implements NumberInternals {
 
     const style = options.style === undefined ? 'decimal' : options.style;
     let result: T;
-    let plural: number = Plural.OTHER;
+    let plural: PluralType = 'other';
+    let pl: number;
 
     const decimalFormats = this.numbers.numberSystem(params.numberSystemName).decimalFormats;
 
@@ -110,7 +123,10 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Select the final pluralized compact pattern based on the integer
       // digits of n and the plural category of the rounded / shifted number q2.
-      const raw = patternImpl(bundle, ndigits, plural) || standardRaw;
+
+      // TODO: switch to vectors and use plural type directly
+      pl = pluralCategory(plural);
+      const raw = patternImpl(bundle, ndigits, pl) || standardRaw;
       const pattern = this.getNumberPattern(raw, q2.isNegative());
       result = renderer.render(q2, pattern, params, '', '', options.group, ctx.minInt);
       break;
@@ -173,14 +189,17 @@ export class NumberInternalsImpl implements NumberInternals {
     }
 
     // No valid style matched
-    return [result, plural];
+    // TODO: return plural type directly
+    pl = pluralCategory(plural);
+    return [result, pl];
   }
 
   formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>,
     n: Decimal, code: string, options: CurrencyFormatOptions, params: NumberParams): T {
 
     const fractions = getCurrencyFractions(code);
-    const width = options.symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
+    // const width = options.symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
+    const width = options.symbolWidth === 'narrow' ? 'narrow' : 'none';
     const style = options.style === undefined ? 'symbol' : options.style;
 
     const info = this.numbers.numberSystem(params.numberSystemName);
@@ -208,7 +227,10 @@ export class NumberInternalsImpl implements NumberInternals {
       const unit = style === 'code' ? code : this.getCurrencyPluralName(bundle, code, plural);
 
       // Wrap number and unit together.
-      const unitWrapper = currencyFormats.unitPattern(bundle, plural);
+
+      // TODO: use plural type directly
+      const pl = pluralCategory(plural);
+      const unitWrapper = currencyFormats.unitPattern(bundle, pl);
       return renderer.wrap(this.wrapper, unitWrapper, num, renderer.part('unit', unit));
     }
 
@@ -219,7 +241,8 @@ export class NumberInternalsImpl implements NumberInternals {
       const divisorImpl = currencyFormats.short.standardDivisor;
       const patternImpl = currencyFormats.short.standard;
       const ctx = new NumberContext(options, true, fractions.digits);
-      const symbol = this.currencies(code as CurrencyType).symbol(bundle, width);
+      // const symbol = this.currencies(code as CurrencyType).symbol(bundle, width);
+      const symbol = this.currencies.symbol(bundle, width, code as CurrencyType);
 
       // Adjust the number using the compact pattern and divisor.
       const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl, divisorImpl);
@@ -230,7 +253,9 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Select the final pluralized compact pattern based on the integer
       // digits of n and the plural category of the rounded / shifted number q2.
-      const raw = patternImpl(bundle, ndigits, plural) || standardRaw;
+      // TODO: use plural type directly
+      const pl = pluralCategory(plural);
+      const raw = patternImpl(bundle, ndigits, pl) || standardRaw;
       const pattern = this.getNumberPattern(raw, q2.isNegative());
       return renderer.render(q2, pattern, params, symbol, '', options.group, ctx.minInt);
     }
@@ -248,7 +273,8 @@ export class NumberInternalsImpl implements NumberInternals {
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
-      const symbol = this.currencies(code as CurrencyType).symbol(bundle, width);
+      // const symbol = this.currencies(code as CurrencyType).symbol(bundle, width);
+      const symbol = this.currencies.symbol(bundle, width, code as CurrencyType);
       return renderer.render(n, pattern, params, symbol, '', options.group, ctx.minInt);
     }
     }
