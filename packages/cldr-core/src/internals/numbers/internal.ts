@@ -93,7 +93,7 @@ export class NumberInternalsImpl implements NumberInternals {
   }
 
   formatDecimal<T>(bundle: Bundle, renderer: NumberRenderer<T>,
-    n: Decimal, options: DecimalFormatOptions, params: NumberParams): [T, number] {
+    n: Decimal, options: DecimalFormatOptions, params: NumberParams): [T, PluralType] {
 
     const style = options.style === undefined ? 'decimal' : options.style;
     let result: T;
@@ -189,9 +189,7 @@ export class NumberInternalsImpl implements NumberInternals {
     }
 
     // No valid style matched
-    // TODO: return plural type directly
-    pl = pluralCategory(plural);
-    return [result, pl];
+    return [result, plural];
   }
 
   formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>,

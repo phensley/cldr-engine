@@ -1,9 +1,10 @@
-import { Choice, Scope, ScopeMap, field, scope, scopemap } from '../types';
-import { UnitValues } from '../schema/units';
+import { Scope, scope, vector1, vector2 } from '../types';
+import { PluralIndex } from '../schema';
+import { UnitNameIndex, UnitValues } from '../schema/units';
 
-const unitInfo = (n: string): ScopeMap => scopemap(n, UnitValues, [
-  field('displayName', 'displayName'),
-  field('unitPattern', 'unitPattern', Choice.PLURAL)
+const unitInfo = (width: string) => scope(width, width, [
+  vector2('unitPattern', 'unitPattern', PluralIndex, UnitNameIndex),
+  vector1('displayName', 'displayName', UnitNameIndex)
 ]);
 
 export const UNITS: Scope = scope('Units', 'Units', [

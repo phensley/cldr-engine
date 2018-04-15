@@ -1,6 +1,10 @@
-import { FieldArrow, FieldIndexedArrow, ScopeArrow } from '../arrows';
-import { Plural } from '../enums';
+import { FieldArrow, FieldIndexedArrow, ScopeArrow, Vector2Arrow, Vector1Arrow } from '../arrows';
+import { Plural, PluralType } from '../enums';
+import { UnitValues } from './autogen.units';
 import { UnitType } from './autogen.units';
+import { KeyIndex } from '../../types';
+
+export const UnitNameIndex = new KeyIndex(UnitValues);
 
 // TODO:
 // export interface UnitPerInfo {
@@ -12,12 +16,12 @@ import { UnitType } from './autogen.units';
 // readonly shortPer: UnitPerInfo;
 
 export interface UnitInfo {
-  readonly displayName: FieldArrow;
-  readonly unitPattern: FieldIndexedArrow<Plural>;
+  readonly displayName: Vector1Arrow<UnitType>;
+  readonly unitPattern: Vector2Arrow<PluralType, UnitType>;
 }
 
 export interface UnitsSchema {
-  readonly long: ScopeArrow<UnitType, UnitInfo>;
-  readonly narrow: ScopeArrow<UnitType, UnitInfo>;
-  readonly short: ScopeArrow<UnitType, UnitInfo>;
+  readonly long: UnitInfo;
+  readonly narrow: UnitInfo;
+  readonly short: UnitInfo;
 }

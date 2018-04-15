@@ -31,7 +31,7 @@ export class UnitsInternalImpl implements UnitInternals {
   }
 
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string {
-    return this.getUnitInfo(bundle, name, length).displayName(bundle);
+    return this.getUnitInfo(length).displayName(bundle, name);
   }
 
   format<T>(bundle: Bundle, renderer: NumberRenderer<T>, q: Quantity,
@@ -39,29 +39,23 @@ export class UnitsInternalImpl implements UnitInternals {
 
     const n = coerceDecimal(q.value);
     const [num, plural] = this.numbers.formatDecimal(bundle, renderer, n, options, params);
-
     if (q.unit === undefined) {
       return num;
     }
 
-    const info = this.getUnitInfo(bundle, q.unit, options.length || 'long');
-    if (info === undefined) {
-      return num;
-    }
-
-    const pattern = info.unitPattern(bundle, plural);
+    const info = this.getUnitInfo(options.length || '');
+    const pattern = info.unitPattern(bundle, plural, q.unit);
     return renderer.wrap(this.wrapper, pattern, num);
   }
 
-  getUnitInfo(bundle: Bundle, name: UnitType, length: string): UnitInfo {
+  getUnitInfo(length: string): UnitInfo {
     switch (length) {
     case 'narrow':
-      return this.unitsSchema.narrow(name);
+      return this.unitsSchema.narrow;
     case 'short':
-      return this.unitsSchema.short(name);
-    case 'long':
+      return this.unitsSchema.short;
     default:
-      return this.unitsSchema.long(name);
+      return this.unitsSchema.long;
     }
   }
 

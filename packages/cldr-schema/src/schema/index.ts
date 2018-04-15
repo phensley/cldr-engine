@@ -21,7 +21,7 @@ import {
   NumbersSchema,
   PersianSchema,
   TimeZoneNames,
-  UnitsSchema
+  UnitsSchema,
 } from '.';
 
 export interface Schema {

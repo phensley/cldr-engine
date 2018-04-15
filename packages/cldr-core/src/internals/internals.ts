@@ -90,7 +90,7 @@ export interface NumberInternals {
   stringRenderer(): NumberRenderer<string>;
   partsRenderer(): NumberRenderer<Part[]>;
   formatDecimal<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal,
-    options: DecimalFormatOptions, params: NumberParams): [T, number];
+    options: DecimalFormatOptions, params: NumberParams): [T, PluralType];
   formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal, code: string,
     options: CurrencyFormatOptions, params: NumberParams): T;
   // getCurrency(code: CurrencyType): CurrencyInfo;
@@ -109,7 +109,7 @@ export interface UnitInternals {
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string;
   format<T>(bundle: Bundle, renderer: NumberRenderer<T>, q: Quantity,
     options: UnitFormatOptions, params: NumberParams): T;
-  getUnitInfo(bundle: Bundle, name: UnitType, length: string): UnitInfo;
+  getUnitInfo(length: string): UnitInfo;
 }
 
 export interface WrapperInternals {

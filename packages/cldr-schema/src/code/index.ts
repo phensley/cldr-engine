@@ -21,5 +21,5 @@ export const ORIGIN: Origin = origin([
   PERSIAN,
   CURRENCIES,
   TIMEZONE,
-  UNITS,
+  UNITS
 ]);

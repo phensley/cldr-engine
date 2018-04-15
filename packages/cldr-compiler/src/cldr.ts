@@ -9,6 +9,14 @@ import { join } from 'path';
 import * as cldr from 'cldr-data';
 import * as L from 'partial.lenses';
 
+import {
+  transformCurrencies,
+  transformDatefields,
+  transformNumbers,
+  transformTimezones,
+  transformUnits
+} from './data';
+
 const get = (optic: any) => (o: any) => L.get(optic, o);
 
 const _widthTemplate = { 'wide': [], 'narrow': [], 'abbreviated': [], 'short': [] };
@@ -34,7 +42,6 @@ const _relativeTypes = [
 const isTimeZone = (o: any) => typeof o === 'object' &&
   ('exemplarCity' in o || 'short' in o || 'long' in o);
 
-// const isExemplarCity = (o: any) => 'exemplarCity' in o;
 const isTimeZoneAlias = (o: any) => '_replacement' in o;
 
 /**
@@ -115,16 +122,6 @@ const fixEras = (obj: any) => {
   return Object.keys(obj).reduce((o: any, key) => {
     const k = key.toLowerCase().substring(3);
     o[k] = obj[key];
-    return o;
-  }, {});
-};
-
-/**
- * Get the full unit names.
- */
-const getUnitNames = (obj: any) => {
-  return Object.keys(obj).reduce((o: any, k) => {
-    o[k] = {};
     return o;
   }, {});
 };
@@ -407,8 +404,6 @@ const TimeZoneNames = {
  * Unit names and formats.
  */
 const Units = {
-  names: get(['units', 'long', _pruneUnitFormats, getUnitNames]),
-
   long: get(['units', 'long', _pruneUnitFormats, fixUnitNames]),
   longPer: get(['units', 'long', 'per']),
   longCoordinate: get(['units', 'long', 'coordinateUnit']),
@@ -431,15 +426,6 @@ const WeekData = {
   weekendStart: get(['weekData', 'weekendStart']),
   weekendEnd: get(['weekData', 'weekendEnd'])
 };
-
-// ===============================
-
-import {
-  transformCurrencies,
-  transformDatefields,
-  transformNumbers,
-  transformTimezones
-} from './data';
 
 /**
  * Iterate over keys in the group, populating an object with the values
@@ -486,7 +472,6 @@ export const getMain = (language: string) => {
     Persian: access(Persian, 'ca-persian'),
     Layout: access(Layout, 'layout'),
     Numbers: access(Numbers, 'numbers'),
-    Units: access(Units, 'units'),
 
     Names: {
       languages: {
@@ -510,6 +495,7 @@ export const getMain = (language: string) => {
     ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies', false, transformCurrencies),
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
     DateFields: access(DateFields, 'dateFields', false, transformDatefields),
+    Units: access(Units, 'units', false, transformUnits),
 
     // In progress..
     // Numbers2: access(Numbers, 'numbers', false, transformNumbers),
