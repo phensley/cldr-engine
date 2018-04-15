@@ -38,15 +38,15 @@ test('scripts', () => {
 test('internals', () => {
   const { schema } = INTERNALS;
   let s: string;
-  s = schema.Names.regions.displayName(EN, 'none', '001');
+  s = schema.Names.regions.displayName.get(EN, 'none', '001');
   expect(s).toEqual('World');
 
-  s = schema.Names.scripts.displayName(EN, 'Arab');
+  s = schema.Names.scripts.displayName.get(EN, 'Arab');
   expect(s).toEqual('Arabic');
 
-  s = schema.Names.regions.displayName(ES, 'none', '001');
+  s = schema.Names.regions.displayName.get(ES, 'none', '001');
   expect(s).toEqual('Mundo');
 
-  s = schema.Names.scripts.displayName(ES, 'Arab');
+  s = schema.Names.scripts.displayName.get(ES, 'Arab');
   expect(s).toEqual('árabe');
 });

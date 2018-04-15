@@ -208,14 +208,14 @@ export class EncoderMachine {
     }
   }
 
-  private encodeVector1(obj: any, inst: Vector1): void {
+  private encodeVector1<T extends string>(obj: any, inst: Vector1<T>): void {
     const o0 = obj[inst.name] || {};
     for (const k of inst.dim0.keys) {
       this.encoder.encode(o0[k]);
     }
   }
 
-  private encodeVector2(obj: any, inst: Vector2): void {
+  private encodeVector2<T extends string, S extends string>(obj: any, inst: Vector2<T, S>): void {
     const o0 = obj[inst.name] || {};
     for (const k1 of inst.dim0.keys) {
       const o1 = o0[k1] || {};

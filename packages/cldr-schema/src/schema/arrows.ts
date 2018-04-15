@@ -47,14 +47,6 @@ export interface ScopeArrow<T extends string, R> {
   (name: T): R;
 }
 
-export interface Vector1Arrow<T extends string> {
-  (bundle: PrimitiveBundle, key: T): string;
-}
-
-export interface Vector2Arrow<T extends string, S extends string> {
-  (bundle: PrimitiveBundle, key1: T, key2: S): string;
-}
-
 export const digitsArrow = (table: number[][]): DigitsArrow => {
   return (bundle: PrimitiveBundle, digits: number, index: number): string => {
     if (digits < 1) {
@@ -114,35 +106,115 @@ export const scopeArrow = (map: any, undef: any): ScopeArrow<string, any> => {
   return (field: string): any => map[field] || undef;
 };
 
-export const vector1Arrow = (offset: number, index: KeyIndex): Vector1Arrow<string> => {
-  return (bundle: PrimitiveBundle, key: string): string => {
-    const i = index.get(key);
-    return i === -1 ? '' : bundle.get(offset + i);
-  };
-};
+export class Vector1Arrow<T extends string> {
 
-export const vector2Arrow = (offset: number, index1: KeyIndex, index2: KeyIndex): Vector2Arrow<string, string> => {
-  const size2 = index2.size;
-  return (bundle: PrimitiveBundle, key1: string, key2: string): string => {
-    const i = index1.get(key1);
-    const j = index2.get(key2);
-    if (i === -1 || j === -1) {
-      return '';
+  readonly len: number;
+
+  constructor(readonly offset: number, readonly index: KeyIndex<T>) {
+    this.len = index.keys.length;
+  }
+
+  get(bundle: PrimitiveBundle, key: T): string {
+    const i = this.index.get(key);
+    return i === -1 ? '' : bundle.get(this.offset + i);
+  }
+
+  mapping(bundle: PrimitiveBundle): any {
+    const len = this.len;
+    const offset = this.offset;
+    const keys = this.index.keys;
+    const res: any = {};
+    for (let i = 0; i < len; i++) {
+      const s = bundle.get(offset + i);
+      if (s) {
+        const k = keys[i];
+        res[k] = s;
+      }
     }
-    const k = offset + (i * size2) + j;
-    return bundle.get(k);
-  };
-};
+    return res;
+  }
 
-type VectorArrow = Vector1Arrow<any> | Vector2Arrow<any, any>;
-
-interface Vector1Scope<T> {
-  (key: string): T;
+  values(bundle: PrimitiveBundle): string[] {
+    const len = this.len;
+    const offset = this.offset;
+    const res: string[] = [];
+    for (let i = 0; i < len; i++) {
+      const s = bundle.get(offset + i);
+      if (s) {
+        res.push(s);
+      }
+    }
+    return res;
+  }
 }
 
-const vector1Scope = (offset: number, index: KeyIndex, arrows: any[], unk: any): Vector1Scope<any> => {
-  return (key: string): any => {
-    const i = index.get(key);
-    return i === -1 ? unk : arrows[i];
-  };
-};
+export class Vector2Arrow<T extends string, S extends string> {
+
+  readonly size: number;
+  readonly size2: number;
+
+  constructor(readonly offset: number, readonly index1: KeyIndex<T>, readonly index2: KeyIndex<S>) {
+    this.size = index1.size * index2.size;
+    this.size2 = index2.size;
+  }
+
+  get(bundle: PrimitiveBundle, key1: T, key2: S): string {
+    const i = this.index1.get(key1);
+    if (i !== -1) {
+      const j = this.index2.get(key2);
+      if (j !== -1) {
+        const k = this.offset + (i * this.size2) + j;
+        return bundle.get(k);
+      }
+    }
+    return '';
+  }
+
+  mapping(bundle: PrimitiveBundle, keyopt?: T): any {
+    const size2 = this.size2;
+    const keys1 = this.index1.keys;
+    const keys2 = this.index2.keys;
+    const offset = this.offset;
+    const res: any = {};
+
+    if (keyopt) {
+      const i = this.index1.get(keyopt);
+      if (i !== -1) {
+        for (let j = 0; j < keys2.length; j++) {
+          const k = offset + (i * size2) + j;
+          const s = bundle.get(k);
+          if (s) {
+            const key2 = keys2[j];
+            res[key2] = s;
+          }
+        }
+      }
+
+    } else {
+      for (let i = 0; i < keys1.length; i++) {
+        let exists = false;
+        const o: any = {};
+        for (let j = 0; j < keys2.length; j++) {
+          const k = offset + (i * size2) + j;
+          const s = bundle.get(k);
+          if (s) {
+            exists = true;
+            const key2 = keys2[j];
+            o[key2] = s;
+          }
+        }
+        if (exists) {
+          const key1 = keys1[i];
+          res[key1] = o;
+        }
+      }
+    }
+    return res;
+  }
+}
+
+export const vector1Arrow = (offset: number, index: KeyIndex<string>): Vector1Arrow<string> =>
+  new Vector1Arrow(offset, index);
+
+export const vector2Arrow = (offset: number, index1: KeyIndex<string>, index2: KeyIndex<string>) =>
+  new Vector2Arrow(offset, index1, index2);

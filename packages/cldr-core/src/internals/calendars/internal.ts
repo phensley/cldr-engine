@@ -209,7 +209,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   }
 
   intervalFormats(bundle: Bundle, skeleton: string, field: DateTimePatternFieldType): string {
-    return this.Gregorian.intervalFormats(bundle, field, skeleton);
+    return this.Gregorian.intervalFormats.get(bundle, field, skeleton);
   }
 
   // TODO: unify string and parts format loops
@@ -271,11 +271,11 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const key = date.getHour() < 12 ? 'am' : 'pm';
     switch (width) {
     case 5:
-      return dayPeriods(bundle, 'narrow', key);
+      return dayPeriods.get(bundle, 'narrow', key);
     case 4:
-      return dayPeriods(bundle, 'wide', key);
+      return dayPeriods.get(bundle, 'wide', key);
     default:
-      return dayPeriods(bundle, 'abbreviated', key);
+      return dayPeriods.get(bundle, 'abbreviated', key);
     }
   }
 
@@ -298,7 +298,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const widthKey = width === 5 ? 'narrow' : width === 4 ? 'wide' : 'abbreviated';
 
     // Try extended and fall back to normal.
-    return dayPeriods(bundle, widthKey, extkey) || dayPeriods(bundle, widthKey, key);
+    return dayPeriods.get(bundle, widthKey, extkey) || dayPeriods.get(bundle, widthKey, key);
   }
 
   protected dayPeriodFlex(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
@@ -310,7 +310,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     }
     const dayPeriods = this.format.dayPeriods;
     const widthKey = width === 5 ? 'narrow' : width === 4 ? 'wide' : 'abbreviated';
-    return dayPeriods(bundle, widthKey, extkey) || this.dayPeriodExt(bundle, date, field, width);
+    return dayPeriods.get(bundle, widthKey, extkey) || this.dayPeriodExt(bundle, date, field, width);
   }
 
   protected era(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
@@ -319,11 +319,11 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const key = GregorianInfo.eras[year < 0 ? 0 : 1];
     switch (width) {
     case 5:
-      return eras(bundle, 'narrow', key);
+      return eras.get(bundle, 'narrow', key);
     case 4:
-      return eras(bundle, 'names', key);
+      return eras.get(bundle, 'names', key);
     default:
-      return eras(bundle, 'abbr', key);
+      return eras.get(bundle, 'abbr', key);
     }
   }
 
@@ -384,11 +384,11 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const key = GregorianInfo.months[index];
     switch (width) {
     case 5:
-      return months(bundle, 'narrow', key);
+      return months.get(bundle, 'narrow', key);
     case 4:
-      return months(bundle, 'wide', key);
+      return months.get(bundle, 'wide', key);
     case 3:
-      return months(bundle, 'abbreviated', key);
+      return months.get(bundle, 'abbreviated', key);
     default:
       return zeroPad2(index + 1, width);
     }
@@ -405,11 +405,11 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const key = QuarterValues[index] as QuarterType;
     switch (width) {
     case 5:
-      return quarters(bundle, 'narrow', key);
+      return quarters.get(bundle, 'narrow', key);
     case 4:
-      return quarters(bundle, 'wide', key);
+      return quarters.get(bundle, 'wide', key);
     case 3:
-      return quarters(bundle, 'abbreviated', key);
+      return quarters.get(bundle, 'abbreviated', key);
     default:
       return width === 2 ? `0${key}` : `${key}`;
     }
@@ -447,13 +447,13 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const key = WeekdayValues[index] as WeekdayType;
     switch (width) {
     case 6:
-      return format(bundle, 'short', key);
+      return format.get(bundle, 'short', key);
     case 5:
-      return format(bundle, 'narrow', key);
+      return format.get(bundle, 'narrow', key);
     case 4:
-      return format(bundle, 'wide', key);
+      return format.get(bundle, 'wide', key);
     default:
-      return format(bundle, 'abbreviated', key);
+      return format.get(bundle, 'abbreviated', key);
     }
   }
 
@@ -529,7 +529,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const metaZoneId = date.metaZoneId();
     if (metaZoneId !== undefined) {
       const format = width === 4 ? this.TimeZoneNames.metaZones.long : this.TimeZoneNames.metaZones.short;
-      const name = format(bundle, isDST ? 'daylight' : 'standard', metaZoneId as MetaZoneType);
+      const name = format.get(bundle, isDST ? 'daylight' : 'standard', metaZoneId as MetaZoneType);
       if (name !== '') {
         return name;
       }
@@ -592,7 +592,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     const metaZoneId = date.metaZoneId();
     if (metaZoneId) {
       const format = width === 1 ? this.TimeZoneNames.metaZones.short : this.TimeZoneNames.metaZones.long;
-      name = format(bundle, 'generic', metaZoneId as MetaZoneType);
+      name = format.get(bundle, 'generic', metaZoneId as MetaZoneType);
     }
     if (name !== '') {
       return name;
@@ -612,7 +612,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     case 4:
     {
       // Generic location format, e.g. "Los Angeles Time"
-      const city = this.TimeZoneNames.exemplarCity(bundle, zoneId as TimeZoneType);
+      const city = this.TimeZoneNames.exemplarCity.get(bundle, zoneId as TimeZoneType);
       if (city === '') {
         // TODO: docs say fallback to 'OOOO' only necessary for GMT-style
         // timezone ids. Need to create a mapping
@@ -625,8 +625,8 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     case 3:
     {
       // Exemplar city for the time zone, e.g. "Los Angeles"
-      const city = this.TimeZoneNames.exemplarCity(bundle, zoneId as TimeZoneType);
-      return city !== '' ? city : this.TimeZoneNames.exemplarCity(bundle, 'Etc/Unknown');
+      const city = this.TimeZoneNames.exemplarCity.get(bundle, zoneId as TimeZoneType);
+      return city !== '' ? city : this.TimeZoneNames.exemplarCity.get(bundle, 'Etc/Unknown');
     }
 
     case 2:

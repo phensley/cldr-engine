@@ -31,7 +31,7 @@ export class UnitsInternalImpl implements UnitInternals {
   }
 
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string {
-    return this.getUnitInfo(length).displayName(bundle, name);
+    return this.getUnitInfo(length).displayName.get(bundle, name);
   }
 
   format<T>(bundle: Bundle, renderer: NumberRenderer<T>, q: Quantity,
@@ -44,7 +44,7 @@ export class UnitsInternalImpl implements UnitInternals {
     }
 
     const info = this.getUnitInfo(options.length || '');
-    const pattern = info.unitPattern(bundle, plural, q.unit);
+    const pattern = info.unitPattern.get(bundle, plural, q.unit);
     return renderer.wrap(this.wrapper, pattern, num);
   }
 

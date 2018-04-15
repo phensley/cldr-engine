@@ -65,14 +65,14 @@ export class GeneralInternalsImpl implements GeneralInternals {
 
   getScriptDisplayName(bundle: Bundle, code: string): string {
     const id = code as ScriptIdType;
-    return this.names.scripts.displayName(bundle, id);
+    return this.names.scripts.displayName.get(bundle, id);
   }
 
   getRegionDisplayName(bundle: Bundle, code: string, alt: AltType = 'none'): string {
     const id = code as RegionIdType;
-    const name = this.names.regions.displayName(bundle, alt, id);
+    const name = this.names.regions.displayName.get(bundle, alt, id);
     // Fall back if preferred form is not available
-    return name === '' ? this.names.regions.displayName(bundle, 'none', id) : name;
+    return name === '' ? this.names.regions.displayName.get(bundle, 'none', id) : name;
   }
 
   formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[] {

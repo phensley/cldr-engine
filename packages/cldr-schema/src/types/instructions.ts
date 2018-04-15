@@ -1,7 +1,7 @@
 /**
  * Inverse mapping of a key to its index in an array.
  */
-export class KeyIndex {
+export class KeyIndex<T> {
   readonly index: { [x: string]: number } = {};
   readonly size: number;
   constructor(readonly keys: string[]) {
@@ -76,29 +76,29 @@ export interface ScopeMap {
   readonly block: Instruction[];
 }
 
-export interface Vector1 {
+export interface Vector1<T extends string> {
   readonly type: 'vector1';
   readonly name: string;
-  readonly dim0: KeyIndex;
+  readonly dim0: KeyIndex<T>;
 }
 
-export interface Vector2 {
+export interface Vector2<T extends string, S extends string> {
   readonly type: 'vector2';
   readonly name: string;
-  readonly dim0: KeyIndex;
-  readonly dim1: KeyIndex;
+  readonly dim0: KeyIndex<T>;
+  readonly dim1: KeyIndex<S>;
 }
 
-export interface Vector3 {
-  readonly type: 'vector3';
-  readonly name: string;
-  readonly dim0: KeyIndex;
-  readonly dim1: KeyIndex;
-  readonly dim2: KeyIndex;
-}
+// export interface Vector3 {
+//   readonly type: 'vector3';
+//   readonly name: string;
+//   readonly dim0: KeyIndex;
+//   readonly dim1: KeyIndex;
+//   readonly dim2: KeyIndex;
+// }
 
 export type Instruction = Digits | Field | FieldMap | ObjectMap | Origin | Scope | ScopeField | ScopeMap
-  | Vector1 | Vector2 | Vector3;
+  | Vector1<string> | Vector2<string, string>;
 
 export const digits = (name: string) =>
   ({ type: 'digits', name } as Digits);
@@ -125,11 +125,11 @@ export const scopefield = (name: string, fields: string[]) =>
 export const scopemap = (name: string, fields: string[], block: Instruction[]) =>
   ({ type: 'scopemap', name, fields, block } as ScopeMap);
 
-export const vector1 = (name: string, dim0: KeyIndex): Vector1 =>
+export const vector1 = <T extends string>(name: string, dim0: KeyIndex<T>): Vector1<T> =>
   ({ type: 'vector1', name, dim0 });
 
-export const vector2 = (name: string, dim0: KeyIndex, dim1: KeyIndex): Vector2 =>
-  ({ type: 'vector2', name, dim0, dim1 });
+export const vector2 = <T extends string, S extends string>(name: string, dim0: KeyIndex<T>, dim1: KeyIndex<S>):
+  Vector2<T, S> => ({ type: 'vector2', name, dim0, dim1 });
 
-export const vector3 = (name: string, dim0: KeyIndex, dim1: KeyIndex, dim2: KeyIndex): Vector3 =>
-  ({ type: 'vector3', name, dim0, dim1, dim2 });
+// export const vector3 = (name: string, dim0: KeyIndex, dim1: KeyIndex, dim2: KeyIndex): Vector3 =>
+//   ({ type: 'vector3', name, dim0, dim1, dim2 });

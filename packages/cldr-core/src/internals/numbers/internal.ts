@@ -76,16 +76,15 @@ export class NumberInternalsImpl implements NumberInternals {
 
   getCurrencySymbol(bundle: Bundle, code: CurrencyType, width?: CurrencySymbolWidthType): string {
     const alt = width === 'narrow' ? 'narrow' : 'none';
-    return this.currencies.symbol(bundle, alt, code) || this.currencies.symbol(bundle, 'none', code);
+    return this.currencies.symbol.get(bundle, alt, code) || this.currencies.symbol.get(bundle, 'none', code);
   }
 
   getCurrencyDisplayName(bundle: Bundle, code: CurrencyType): string {
-    return this.currencies.displayName(bundle, code);
+    return this.currencies.displayName.get(bundle, code);
   }
 
   getCurrencyPluralName(bundle: Bundle, code: string, plural: PluralType): string {
-    return this.currencies.pluralName(bundle, plural, code as CurrencyType);
-    // return this.currencies(code as CurrencyType).pluralName(bundle, plural);
+    return this.currencies.pluralName.get(bundle, plural, code as CurrencyType);
   }
 
   getNumberPattern(raw: string, negative: boolean): NumberPattern {
@@ -240,7 +239,7 @@ export class NumberInternalsImpl implements NumberInternals {
       const patternImpl = currencyFormats.short.standard;
       const ctx = new NumberContext(options, true, fractions.digits);
       // const symbol = this.currencies(code as CurrencyType).symbol(bundle, width);
-      const symbol = this.currencies.symbol(bundle, width, code as CurrencyType);
+      const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
 
       // Adjust the number using the compact pattern and divisor.
       const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl, divisorImpl);
@@ -271,8 +270,7 @@ export class NumberInternalsImpl implements NumberInternals {
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
-      // const symbol = this.currencies(code as CurrencyType).symbol(bundle, width);
-      const symbol = this.currencies.symbol(bundle, width, code as CurrencyType);
+      const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
       return renderer.render(n, pattern, params, symbol, '', options.group, ctx.minInt);
     }
     }

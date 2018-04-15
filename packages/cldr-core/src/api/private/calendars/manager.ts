@@ -134,18 +134,18 @@ export class DatePatternManager {
     let wrapKey: string | undefined = options.wrap;
     let wrapper = '';
     if (wrapKey) {
-      wrapper = this.Gregorian.dateTimeFormats(this.bundle, (wrapKey || 'short') as FormatWidthType);
+      wrapper = this.Gregorian.dateTimeFormats.get(this.bundle, (wrapKey || 'short') as FormatWidthType);
     }
 
     const req: DateFormatRequest = { wrapper, params };
 
     // Handle standard named patterns
     if (dateKey !== '') {
-      const raw = this.Gregorian.dateFormats(this.bundle, dateKey as FormatWidthType);
+      const raw = this.Gregorian.dateFormats.get(this.bundle, dateKey as FormatWidthType);
       req.date = this.patternCache.get(raw);
     }
     if (timeKey !== '') {
-      const raw = this.Gregorian.timeFormats(this.bundle, timeKey as FormatWidthType);
+      const raw = this.Gregorian.timeFormats.get(this.bundle, timeKey as FormatWidthType);
       req.time = this.patternCache.get(raw);
     }
 
@@ -153,7 +153,7 @@ export class DatePatternManager {
       if (!wrapKey) {
         wrapKey = dateKey;
       }
-      req.wrapper = this.Gregorian.dateTimeFormats(this.bundle, wrapKey as FormatWidthType);
+      req.wrapper = this.Gregorian.dateTimeFormats.get(this.bundle, wrapKey as FormatWidthType);
     }
 
     if (req.date || req.time) {
@@ -212,7 +212,7 @@ export class DatePatternManager {
 
     // Determine wrapper using the date fields.
     if (wrapKey) {
-      req.wrapper = this.Gregorian.dateTimeFormats(this.bundle, wrapKey as FormatWidthType);
+      req.wrapper = this.Gregorian.dateTimeFormats.get(this.bundle, wrapKey as FormatWidthType);
     } else if (dateSkel && date && time) {
       req.wrapper = this.getWrapper(dateSkel, date, time);
     }
@@ -410,7 +410,7 @@ export class DatePatternManager {
     } else if (monthWidth === 3) {
       wrapKey = 'medium';
     }
-    return this.Gregorian.dateTimeFormats(this.bundle, wrapKey as FormatWidthType);
+    return this.Gregorian.dateTimeFormats.get(this.bundle, wrapKey as FormatWidthType);
   }
 
   protected getSkeletonPattern(d: ZonedDateTime, skeleton: string): DateTimeNode[] {
@@ -434,13 +434,13 @@ export class DatePatternManager {
       break;
     }
 
-    const raw = this.Gregorian.availableFormats(this.bundle, plural, skeleton)
-      || this.Gregorian.availableFormats(this.bundle, 'other', skeleton);
+    const raw = this.Gregorian.availableFormats.get(this.bundle, plural, skeleton)
+      || this.Gregorian.availableFormats.get(this.bundle, 'other', skeleton);
     return this.patternCache.get(raw);
   }
 
   protected getIntervalPattern(skeleton: string, field: DateTimePatternFieldType): DateTimeNode[] | undefined {
-    const raw = this.Gregorian.intervalFormats(this.bundle, field, skeleton);
+    const raw = this.Gregorian.intervalFormats.get(this.bundle, field, skeleton);
     return raw ? this.patternCache.get(raw) : undefined;
   }
 
@@ -464,12 +464,12 @@ export class DatePatternManager {
 
     for (const k of FormatWidthValues) {
       // Indicate these skeletons are actually patterns
-      let raw = this.Gregorian.dateFormats(this.bundle, k as FormatWidthType);
+      let raw = this.Gregorian.dateFormats.get(this.bundle, k as FormatWidthType);
       let s = DateSkeleton.parsePattern(raw);
       let p = parseDatePattern(raw);
       dm.add(s, p);
 
-      raw = this.Gregorian.timeFormats(this.bundle, k as FormatWidthType);
+      raw = this.Gregorian.timeFormats.get(this.bundle, k as FormatWidthType);
       s = DateSkeleton.parsePattern(raw);
       p = parseDatePattern(raw);
       dm.add(s, p);

@@ -69,7 +69,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
       n = n.negate();
     }
     if (n.compare(DecimalConstants.ZERO) === 0) {
-      return format.current(bundle, field);
+      return format.current.get(bundle, field);
     }
 
     switch (field) {
@@ -79,13 +79,13 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
         break;
       default:
         if (n.compare(DecimalConstants.TWO) === 0) {
-          const p = negative ? format.previous2(bundle, field) : format.next2(bundle, field);
+          const p = negative ? format.previous2.get(bundle, field) : format.next2.get(bundle, field);
           if (p !== '') {
             return p;
           }
           // Fall through
         } else if (n.compare(DecimalConstants.ONE) === 0) {
-          return negative ? format.previous(bundle, field) : format.next(bundle, field);
+          return negative ? format.previous.get(bundle, field) : format.next.get(bundle, field);
         }
         break;
     }
@@ -94,7 +94,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     const operands = n.operands();
     const plural = this.plurals.cardinal(bundle.language(), operands);
     const arrow = negative ? format.past : format.future;
-    const raw = arrow(bundle, plural, field);
+    const raw = arrow.get(bundle, plural, field);
     return this.wrapper.format(raw, [n.toString()]);
   }
 }

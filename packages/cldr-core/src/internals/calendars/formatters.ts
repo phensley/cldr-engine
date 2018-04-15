@@ -48,11 +48,11 @@ export class PersianFormatter extends CalendarFormatter<PersianDate> {
     return '';
   }
 
-  year(ctx: CalendarContext<PersianDate>, field: [string, number]): string {
+  year(ctx: CalendarContext<PersianDate>, width: number): string {
     return '';
   }
 
-  yearOfWeekYear(ctx: CalendarContext<PersianDate>, field: [string, number]): string {
+  yearOfWeekYear(ctx: CalendarContext<PersianDate>, width: number): string {
     return '';
   }
 }

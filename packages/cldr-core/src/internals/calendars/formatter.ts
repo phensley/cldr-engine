@@ -81,8 +81,8 @@ export abstract class CalendarFormatter<T extends CalendarDate> {
       }
       switch (n[0]) {
         case 'G': renderer.add('era', this.era(ctx, n[1])); break;
-        case 'y': renderer.add('year', this.year(ctx, n)); break;
-        case 'Y': renderer.add('year', this.yearOfWeekYear(ctx, n)); break;
+        case 'y': renderer.add('year', this.year(ctx, n[1])); break;
+        case 'Y': renderer.add('year', this.yearOfWeekYear(ctx, n[1])); break;
 
         // TODO: 'u;
         // TODO: 'U'
@@ -141,13 +141,27 @@ export abstract class CalendarFormatter<T extends CalendarDate> {
     return '';
   }
 
-  year(ctx: CalendarContext<T>, node: [string, number]): string {
-    const era = ctx.date.era();
-    return '';
+  year(ctx: CalendarContext<T>, width: number): string {
+    return this._year(ctx.date.year(), width);
   }
 
-  yearOfWeekYear(ctx: CalendarContext<T>, node: [string, number]): string {
-    return '';
+  yearOfWeekYear(ctx: CalendarContext<T>, width: number): string {
+    return this._year(ctx.date.yearOfWeekOfYear(), width);
+  }
+
+  _year(year: number, width: number): string {
+    if (width === 2) {
+      year %= 100;
+    }
+    const digits = year >= 1000 ? 4 : year >= 100 ? 3 : year >= 10 ? 2 : 1;
+    if (width > 1) {
+      const zeros = width - digits;
+      if (zeros > 0) {
+        const z = new Array(zeros).fill('0').join('');
+        return `${z}${year}`;
+      }
+    }
+    return String(year);
   }
 
   quarter(ctx: CalendarContext<T>, node: [string, number]): string {
@@ -260,15 +274,16 @@ export abstract class CalendarFormatter<T extends CalendarDate> {
     const eras = this.schema.Gregorian.eras;
     switch (width) {
     case 5:
-      return eras(bundle, 'narrow', key);
+      return eras.get(bundle, 'narrow', key);
     case 4:
-      return eras(bundle, 'names', key);
+      return eras.get(bundle, 'names', key);
     default:
-      return eras(bundle, 'abbr', key);
+      return eras.get(bundle, 'abbr', key);
     }
   }
 
   monthField(bundle: Bundle, key: string, width: number, isLeap: boolean = false): string {
     return '';
   }
+
 }
