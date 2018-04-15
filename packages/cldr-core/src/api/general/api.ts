@@ -1,5 +1,5 @@
 import {
-  Alt,
+  AltType,
   CharacterOrderType,
   LineOrderType,
   ScriptIdType,
@@ -44,9 +44,8 @@ export class GeneralImpl implements General {
   }
 
   getRegionDisplayName(code: RegionIdType | string, type?: string): string {
-    const alt = type === 'short' ? Alt.SHORT : type === 'variant' ? Alt.VARIANT : Alt.NONE;
-    const name = this.general.getRegionDisplayName(this.bundle, code, alt);
-    return name !== '' ? name : this.general.getRegionDisplayName(this.bundle, code, Alt.NONE);
+    const name = this.general.getRegionDisplayName(this.bundle, code, (type || 'none') as AltType);
+    return name !== '' ? name : this.general.getRegionDisplayName(this.bundle, code, 'none');
   }
 
 }

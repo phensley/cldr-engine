@@ -1,5 +1,5 @@
 const plurals = ['other', 'zero', 'one', 'two', 'few', 'many'];
-const alts = ['none', 'short', 'variant', 'narrow'];
+const alts = ['none', 'short', 'variant', 'narrow', 'stand-alone'];
 
 /**
  * Map a plural key and transform it.
@@ -57,6 +57,13 @@ export interface KeysSpec {
 }
 
 /**
+ * Map all keys at the current level, splitting off the alt category if any.
+ */
+export interface AltKeysSpec {
+  readonly kind: 'altkeys';
+}
+
+/**
  * Map a single field.
  */
 export interface FieldSpec {
@@ -73,7 +80,7 @@ export interface FieldsSpec {
   fields: (string | [string, string])[];
 }
 
-export type Spec = PluralSpec | AltSpec | KeysSpec | FieldSpec | FieldsSpec;
+export type Spec = PluralSpec | AltSpec | KeysSpec | AltKeysSpec | FieldSpec | FieldsSpec;
 
 /**
  * Apply the field mapping specs to the object, converting hierarchy of keys
@@ -168,6 +175,26 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       }
       break;
     }
+
+    case 'altkeys':
+    {
+      const orig = Object.keys(obj).filter(k => k.indexOf('-alt-') === -1);
+      for (const raw of orig) {
+        for (const keys of altKeys(raw)) {
+          const [key, rkey, c] = keys;
+          const v = obj[key];
+          const pfx = [rkey, c];
+          if (typeof v === 'string') {
+            res.push(pfx.concat([v]));
+          } else {
+            for (const row of tabular(rest, v)) {
+              res.push(pfx.concat(row));
+            }
+          }
+        }
+      }
+      break;
+    }
   }
 
   return res;
@@ -213,6 +240,11 @@ export class MappingBuilder {
     return this;
   }
 
+  altKeys(): this {
+    this.specs.push({ kind: 'altkeys' });
+    return this;
+  }
+
   remap(...indices: number[]): Mapping {
     return { specs: this.specs, remap: indices };
   }
@@ -241,6 +273,10 @@ export class Mappings {
 
   static alt(field: string, replace?: string): MappingBuilder {
     return new MappingBuilder().alt(field, replace);
+  }
+
+  static altKeys(): MappingBuilder {
+    return new MappingBuilder().altKeys();
   }
 }
 

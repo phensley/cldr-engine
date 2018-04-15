@@ -12,7 +12,10 @@ import * as L from 'partial.lenses';
 import {
   transformCurrencies,
   transformDatefields,
+  // transformLanguages,
   transformNumbers,
+  // transformScripts,
+  transformTerritories,
   transformTimezones,
   transformUnits
 } from './data';
@@ -481,7 +484,8 @@ export const getMain = (language: string) => {
         ...access({ displayName: get(['localeDisplayNames', 'scripts']) }, 'scripts'),
       },
       territories: {
-        ...access({ displayName: get(['localeDisplayNames', 'territories']) }, 'territories')
+        ...access({ displayName: get(['localeDisplayNames', 'territories']) }, 'territories',
+          false, transformTerritories)
       }
     },
 

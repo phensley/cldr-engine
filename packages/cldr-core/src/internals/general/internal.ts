@@ -1,5 +1,5 @@
 import {
-  Alt,
+  AltType,
   CharacterOrderType,
   LayoutSchema,
   LineOrderType,
@@ -68,11 +68,11 @@ export class GeneralInternalsImpl implements GeneralInternals {
     return this.names.scripts.displayName(bundle, id);
   }
 
-  getRegionDisplayName(bundle: Bundle, code: string, alt: Alt = Alt.NONE): string {
+  getRegionDisplayName(bundle: Bundle, code: string, alt: AltType = 'none'): string {
     const id = code as RegionIdType;
-    const name = this.names.regions.displayName(bundle, id, alt);
+    const name = this.names.regions.displayName(bundle, alt, id);
     // Fall back if preferred form is not available
-    return name === '' ? this.names.regions.displayName(bundle, id, Alt.NONE) : name;
+    return name === '' ? this.names.regions.displayName(bundle, 'none', id) : name;
   }
 
   formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[] {

@@ -1,5 +1,6 @@
 import {
   Alt,
+  AltType,
   CurrencyType,
   DateFieldType,
   DateTimePatternFieldType,
@@ -60,7 +61,7 @@ export interface GeneralInternals {
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[];
   formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[];
   getScriptDisplayName(bundle: Bundle, code: string): string;
-  getRegionDisplayName(bundle: Bundle, code: string, alt?: Alt): string;
+  getRegionDisplayName(bundle: Bundle, code: string, alt?: AltType): string;
 }
 
 export interface NumberRenderer<T> {

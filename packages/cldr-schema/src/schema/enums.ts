@@ -43,9 +43,9 @@ export enum Alt {
 
 export const AltValues = '|-alt-variant|-alt-short|-alt-narrow'.split('|');
 
-export const AltIndex = new KeyIndex(['none', 'short', 'narrow', 'variant']);
+export const AltIndex = new KeyIndex(['none', 'short', 'narrow', 'variant', 'stand-alone']);
 
-export type AltType = 'none' | 'short' | 'narrow' | 'variant';
+export type AltType = 'none' | 'short' | 'narrow' | 'variant' | 'stand-alone';
 
 export enum Yeartype {
   NONE = 0,
