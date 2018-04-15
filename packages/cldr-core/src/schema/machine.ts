@@ -254,12 +254,12 @@ export class SchemaBuilder {
 
   private constructVector1(obj: any, inst: Vector1): void {
     const offset = this.generator.vector1(inst.dim0.size);
-    obj[inst.identifier] = vector1Arrow(offset, inst.dim0);
+    obj[inst.name] = vector1Arrow(offset, inst.dim0);
   }
 
   private constructVector2(obj: any, inst: Vector2): void {
     const offset = this.generator.vector2(inst.dim0.size, inst.dim1.size);
-    obj[inst.identifier] = vector2Arrow(offset, inst.dim0, inst.dim1);
+    obj[inst.name] = vector2Arrow(offset, inst.dim0, inst.dim1);
   }
 }
 

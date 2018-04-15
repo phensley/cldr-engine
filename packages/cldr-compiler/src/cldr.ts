@@ -10,6 +10,7 @@ import * as cldr from 'cldr-data';
 import * as L from 'partial.lenses';
 
 import {
+  transformCalendar,
   transformCurrencies,
   transformDatefields,
   // transformLanguages,
@@ -469,7 +470,6 @@ export const getMain = (language: string) => {
 
   return {
     Chinese: access(Chinese, 'ca-chinese'),
-    Gregorian: access(Gregorian, 'ca-gregorian'),
     Hebrew: access(Hebrew, 'ca-hebrew'),
     Japanese: access(Japanese, 'ca-japanese'),
     Persian: access(Persian, 'ca-persian'),
@@ -497,9 +497,10 @@ export const getMain = (language: string) => {
     // New vector-based transformers
 
     ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies', false, transformCurrencies),
-    TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
     DateFields: access(DateFields, 'dateFields', false, transformDatefields),
+    TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
     Units: access(Units, 'units', false, transformUnits),
+    Gregorian: access(Gregorian, 'ca-gregorian', false, transformCalendar),
 
     // In progress..
     // Numbers2: access(Numbers, 'numbers', false, transformNumbers),

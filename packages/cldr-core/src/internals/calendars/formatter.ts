@@ -259,9 +259,12 @@ export abstract class CalendarFormatter<T extends CalendarDate> {
   eraField(bundle: Bundle, key: string, width: number): string {
     const eras = this.schema.Gregorian.eras;
     switch (width) {
-    case 5: return eras.narrow(bundle, key);
-    case 4: return eras.names(bundle, key);
-    default: return eras.abbr(bundle, key);
+    case 5:
+      return eras(bundle, 'narrow', key);
+    case 4:
+      return eras(bundle, 'names', key);
+    default:
+      return eras(bundle, 'abbr', key);
     }
   }
 

@@ -49,6 +49,11 @@ export const pluralKeys = (field: string, replace?: string): [string, string, st
 export const altKeys = (field: string, replace?: string): [string, string, string][] =>
   categoryKeys('alt', alts, field, replace);
 
+export const stripPlural = (k: string) => {
+  const i = k.indexOf('-count-');
+  return i === -1 ? k : k.substring(0, i);
+};
+
 /**
  * Map all keys at the current level.
  */
@@ -61,6 +66,13 @@ export interface KeysSpec {
  */
 export interface AltKeysSpec {
   readonly kind: 'altkeys';
+}
+
+/**
+ * Map all keys at the current level, splitting off the plural category if any.
+ */
+export interface PluralKeysSpec {
+  readonly kind: 'pluralkeys';
 }
 
 /**
@@ -80,7 +92,7 @@ export interface FieldsSpec {
   fields: (string | [string, string])[];
 }
 
-export type Spec = PluralSpec | AltSpec | KeysSpec | AltKeysSpec | FieldSpec | FieldsSpec;
+export type Spec = PluralSpec | AltSpec | KeysSpec | AltKeysSpec | FieldSpec | FieldsSpec | PluralKeysSpec;
 
 /**
  * Apply the field mapping specs to the object, converting hierarchy of keys
@@ -195,6 +207,41 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       }
       break;
     }
+
+    case 'pluralkeys':
+    {
+      const orig = Object.keys(obj);
+
+      const normal = orig.filter(k => k.indexOf('-count-') === -1);
+      for (const key of normal) {
+        const v = obj[key];
+        const pfx = [key, 'other'];
+        if (typeof v === 'string') {
+          res.push(pfx.concat([v]));
+        } else {
+          for (const row of tabular(rest, v)) {
+            res.push(pfx.concat(row));
+          }
+        }
+      }
+
+      const plural = orig.filter(k => k.indexOf('-count-') !== -1).map(stripPlural);
+      for (const raw of plural) {
+        for (const keys of pluralKeys(raw)) {
+          const [key, rkey, c] = keys;
+          const v = obj[key];
+          const pfx = [rkey, c];
+          if (typeof v === 'string') {
+            res.push(pfx.concat([v]));
+          } else {
+            for (const row of tabular(rest, v)) {
+              res.push(pfx.concat(row));
+            }
+          }
+        }
+      }
+      break;
+    }
   }
 
   return res;
@@ -235,6 +282,11 @@ export class MappingBuilder {
     return this;
   }
 
+  pluralKeys(): this {
+    this.specs.push({ kind: 'pluralkeys' });
+    return this;
+  }
+
   alt(field: string, replace?: string): this {
     this.specs.push({ kind: 'alt', keys: altKeys(field, replace) });
     return this;
@@ -269,6 +321,10 @@ export class Mappings {
 
   static plural(field: string, replace?: string): MappingBuilder {
     return new MappingBuilder().plural(field, replace);
+  }
+
+  static pluralKeys(): MappingBuilder {
+    return new MappingBuilder().pluralKeys();
   }
 
   static alt(field: string, replace?: string): MappingBuilder {

@@ -9,8 +9,8 @@ export const NUMBERS2: Scope = scope('Numbers2', 'Numbers2', [
 
   field('minimumGroupingDigits', 'minimumGroupingDigits'),
 
-  vector1('numberSystem', 'numberSystem', NumberSystemTypeIndex),
-  vector2('symbols', 'symbols', NumberSystemNameIndex, NumberSymbolIndex)
+  vector1('numberSystem', NumberSystemTypeIndex),
+  vector2('symbols', NumberSystemNameIndex, NumberSymbolIndex)
 
   // vector2('currencyBefore', )
   // vector2('unitPattern', NumberSystemNameIndex, PluralIndex)

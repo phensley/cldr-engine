@@ -79,14 +79,12 @@ export interface ScopeMap {
 export interface Vector1 {
   readonly type: 'vector1';
   readonly name: string;
-  readonly identifier: string;
   readonly dim0: KeyIndex;
 }
 
 export interface Vector2 {
   readonly type: 'vector2';
   readonly name: string;
-  readonly identifier: string;
   readonly dim0: KeyIndex;
   readonly dim1: KeyIndex;
 }
@@ -94,7 +92,6 @@ export interface Vector2 {
 export interface Vector3 {
   readonly type: 'vector3';
   readonly name: string;
-  readonly identifier: string;
   readonly dim0: KeyIndex;
   readonly dim1: KeyIndex;
   readonly dim2: KeyIndex;
@@ -128,11 +125,11 @@ export const scopefield = (name: string, fields: string[]) =>
 export const scopemap = (name: string, fields: string[], block: Instruction[]) =>
   ({ type: 'scopemap', name, fields, block } as ScopeMap);
 
-export const vector1 = (name: string, identifier: string, dim0: KeyIndex): Vector1 =>
-  ({ type: 'vector1', name, identifier, dim0 });
+export const vector1 = (name: string, dim0: KeyIndex): Vector1 =>
+  ({ type: 'vector1', name, dim0 });
 
-export const vector2 = (name: string, identifier: string, dim0: KeyIndex, dim1: KeyIndex): Vector2 =>
-  ({ type: 'vector2', name, identifier, dim0, dim1 });
+export const vector2 = (name: string, dim0: KeyIndex, dim1: KeyIndex): Vector2 =>
+  ({ type: 'vector2', name, dim0, dim1 });
 
-export const vector3 = (name: string, identifier: string, dim0: KeyIndex, dim1: KeyIndex, dim2: KeyIndex): Vector3 =>
-  ({ type: 'vector3', name, identifier, dim0, dim1, dim2 });
+export const vector3 = (name: string, dim0: KeyIndex, dim1: KeyIndex, dim2: KeyIndex): Vector3 =>
+  ({ type: 'vector3', name, dim0, dim1, dim2 });

@@ -5,6 +5,7 @@ import {
   FormatWidthValues,
   GregorianSchema,
   Plural,
+  PluralType,
   Schema,
   pluralCategory
 } from '@phensley/cldr-schema';
@@ -413,44 +414,33 @@ export class DatePatternManager {
   }
 
   protected getSkeletonPattern(d: ZonedDateTime, skeleton: string): DateTimeNode[] {
-    let plural: Plural | undefined;
+    let plural: PluralType = 'other';
     // Determine plural category for each skeleton that requires it.
     switch (skeleton) {
     case 'MMMMW':
     {
-      plural = Plural.OTHER;
       // TODO: implement 'W' and complete
       break;
     }
+
     case 'yw':
     {
-      plural = Plural.OTHER;
       const week = coerceDecimal(d.getISOWeek());
-
-      // TODO: use plural type directly
-      const pl = this.internals.plurals.ordinal(this.bundle.language(), week.operands());
-      plural = pluralCategory(pl);
+      plural = this.internals.plurals.ordinal(this.bundle.language(), week.operands());
       break;
     }
+
     default:
       break;
     }
 
-    let raw = '';
-    if (plural !== undefined) {
-      raw = this.Gregorian.pluralAvailableFormats(this.bundle, skeleton, plural);
-    } else {
-      raw = this.Gregorian.availableFormats(this.bundle, skeleton);
-    }
+    const raw = this.Gregorian.availableFormats(this.bundle, plural, skeleton)
+      || this.Gregorian.availableFormats(this.bundle, 'other', skeleton);
     return this.patternCache.get(raw);
   }
 
   protected getIntervalPattern(skeleton: string, field: DateTimePatternFieldType): DateTimeNode[] | undefined {
-    const formats = this.Gregorian.intervalFormats(skeleton);
-    let raw = '';
-    if (formats) {
-      raw = formats.field(this.bundle, field);
-    }
+    const raw = this.Gregorian.intervalFormats(this.bundle, field, skeleton);
     return raw ? this.patternCache.get(raw) : undefined;
   }
 

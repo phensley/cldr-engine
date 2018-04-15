@@ -1,4 +1,5 @@
-import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap } from '../types';
+import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap,
+  KeyIndex, vector1, vector2 } from '../types';
 
 import {
   DateTimePatternFieldValues,
@@ -6,46 +7,40 @@ import {
   FieldWidthValues,
   FormatWidthValues,
   GregorianInfo,
+  PluralIndex,
   QuarterValues,
   WeekdayValues,
 } from '../schema';
 
-const weekdays = FieldWidthValues.map(n => fieldmap(n, n, WeekdayValues));
-const months = FieldWidthValues.map(n => fieldmap(n, n, GregorianInfo.months));
-const quarters = FieldWidthValues.map(n => fieldmap(n, n, QuarterValues));
-const dayPeriods = FieldWidthValues.map(n => fieldmap(n, n, DayPeriodValues, Choice.ALT));
+const DateTimePatternFieldIndex = new KeyIndex(DateTimePatternFieldValues);
+const AvailableFormatIndex = new KeyIndex(GregorianInfo.availableFormats);
+const IntervalFormatIndex = new KeyIndex(GregorianInfo.intervalFormats);
+const FormatWidthIndex = new KeyIndex(FormatWidthValues);
 
-const eras = (n: string) => fieldmap(n, n, GregorianInfo.eras);
+const EraTypeIndex = new KeyIndex(['names', 'abbr', 'narrow']);
+const WidthIndex = new KeyIndex(['short', 'wide', 'narrow', 'abbreviated']);
 
-const scopeFormat = (map: FieldMap[]) => [
-  scope('format', 'format', map),
-  scope('stand-alone', 'standAlone', map)
-];
+const DayPeriodIndex = new KeyIndex(DayPeriodValues);
+const EraIndex = new KeyIndex(GregorianInfo.eras);
+const MonthsIndex = new KeyIndex(GregorianInfo.months);
+const QuartersIndex = new KeyIndex(QuarterValues);
+const WeekdaysIndex = new KeyIndex(WeekdayValues);
 
-const formatWidths = (n: string) => fieldmap(n, n, FormatWidthValues);
+const formats = (name: string, rename: string) => scope(name, rename, [
+  vector2('weekdays', WidthIndex, WeekdaysIndex),
+  vector2('months', WidthIndex, MonthsIndex),
+  vector2('quarters', WidthIndex, QuartersIndex),
+  vector2('dayPeriods', WidthIndex, DayPeriodIndex),
+]);
 
 export const GREGORIAN: Scope = scope('Gregorian', 'Gregorian', [
-  scope('eras', 'eras', [
-    eras('names'),
-    eras('abbr'),
-    eras('narrow')
-  ]),
-
-  scope('weekdays', 'weekdays', scopeFormat(weekdays)),
-  scope('months', 'months', scopeFormat(months)),
-  scope('quarters', 'quarters', scopeFormat(quarters)),
-  scope('dayPeriods', 'dayPeriods', scopeFormat(dayPeriods)),
-
-  formatWidths('dateFormats'),
-  formatWidths('dateTimeFormats'),
-  formatWidths('timeFormats'),
-
-  fieldmap('availableFormats', 'availableFormats', GregorianInfo.availableFormats),
-  fieldmap('availableFormats', 'pluralAvailableFormats', GregorianInfo.pluralAvailableFormats, Choice.PLURAL),
-
-  scopemap('intervalFormats', GregorianInfo.intervalFormats, [
-    scopefield('field', DateTimePatternFieldValues)
-  ]),
-
+  vector2('eras', EraTypeIndex, EraIndex),
+  formats('format', 'format'),
+  formats('standAlone', 'standAlone'),
+  vector2('availableFormats', PluralIndex, AvailableFormatIndex),
+  vector2('intervalFormats', DateTimePatternFieldIndex, IntervalFormatIndex),
+  vector1('dateFormats', FormatWidthIndex),
+  vector1('timeFormats', FormatWidthIndex),
+  vector1('dateTimeFormats', FormatWidthIndex),
   field('intervalFormatFallback', 'intervalFormatFallback')
 ]);

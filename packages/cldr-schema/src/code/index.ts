@@ -19,7 +19,7 @@ export const ORIGIN: Origin = origin([
   GREGORIAN,
   JAPANESE,
   PERSIAN,
-  CURRENCIES,
   TIMEZONE,
+  CURRENCIES,
   UNITS
 ]);

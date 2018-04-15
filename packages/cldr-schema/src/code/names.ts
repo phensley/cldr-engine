@@ -5,11 +5,11 @@ import { AltIndex } from '../schema';
 export const NAMES: Scope = scope('Names', 'Names', [
 
   scope('scripts', 'scripts', [
-    vector1('displayName', 'displayName', ScriptIdIndex)
+    vector1('displayName', ScriptIdIndex)
   ]),
 
   scope('territories', 'regions', [
-    vector2('displayName', 'displayName', AltIndex, RegionIdIndex)
+    vector2('displayName', AltIndex, RegionIdIndex)
   ])
 
 ]);

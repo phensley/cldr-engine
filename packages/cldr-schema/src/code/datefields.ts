@@ -2,12 +2,12 @@ import { Instruction, Scope, scope, vector1, vector2 } from '../types';
 import { DateFieldIndex, PluralIndex, RelativeTimeFieldIndex } from '../schema';
 
 const prevNext: Instruction[] = ['previous2', 'previous', 'current', 'next', 'next2']
-  .map(k => vector1(k, k, RelativeTimeFieldIndex));
+  .map(k => vector1(k, RelativeTimeFieldIndex));
 
 const futurePast: Instruction[] = ['future', 'past']
-  .map(k => vector2(k, k, PluralIndex, RelativeTimeFieldIndex));
+  .map(k => vector2(k, PluralIndex, RelativeTimeFieldIndex));
 
-const displayName = vector1('displayName', 'displayName', DateFieldIndex);
+const displayName = vector1('displayName', DateFieldIndex);
 
 const relativeTimeBody = prevNext.concat(futurePast).concat([displayName]);
 

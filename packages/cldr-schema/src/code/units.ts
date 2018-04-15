@@ -3,8 +3,8 @@ import { PluralIndex } from '../schema';
 import { UnitNameIndex, UnitValues } from '../schema/units';
 
 const unitInfo = (width: string) => scope(width, width, [
-  vector2('unitPattern', 'unitPattern', PluralIndex, UnitNameIndex),
-  vector1('displayName', 'displayName', UnitNameIndex)
+  vector2('unitPattern', PluralIndex, UnitNameIndex),
+  vector1('displayName', UnitNameIndex)
 ]);
 
 export const UNITS: Scope = scope('Units', 'Units', [

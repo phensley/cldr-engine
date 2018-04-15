@@ -3,11 +3,12 @@ import {
   DateTimePatternFieldType,
   DayPeriodsFormats,
   DayPeriodType,
-  GregorianSchema,
   ErasFormat,
   FormatWidthType,
   FormatWidthValues,
+  GregorianFields,
   GregorianInfo,
+  GregorianSchema,
   Plural,
   QuarterType,
   QuarterValues,
@@ -16,11 +17,12 @@ import {
   MonthsFormats,
   Schema,
   TimeZoneNames,
+  TimeZoneType,
+  Vector2Arrow,
   WeekdayType,
   WeekdaysFormat,
   WeekdaysFormats,
   WeekdayValues,
-  TimeZoneType
 } from '@phensley/cldr-schema';
 
 import { weekMinDays, weekFirstDay } from './autogen.weekdata';
@@ -74,11 +76,9 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
  export class CalendarInternalsImpl implements CalendarInternals {
 
   readonly Gregorian: GregorianSchema;
-  readonly dayPeriods: DayPeriodsFormats;
-  readonly eras: ErasFormat;
-  readonly months: MonthsFormats;
-  readonly quarters: QuartersFormats;
-  readonly weekdays: WeekdaysFormats;
+  readonly format: GregorianFields;
+  readonly standAlone: GregorianFields;
+
   readonly TimeZoneNames: TimeZoneNames;
   readonly datePatternCache: Cache<DateTimeNode[]>;
   readonly hourFormatCache: Cache<[DateTimeNode[], DateTimeNode[]]>;
@@ -136,11 +136,8 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     readonly cacheSize: number = 50) {
 
     this.Gregorian = root.Gregorian;
-    this.dayPeriods = root.Gregorian.dayPeriods;
-    this.eras = root.Gregorian.eras;
-    this.months = root.Gregorian.months;
-    this.quarters = root.Gregorian.quarters;
-    this.weekdays = root.Gregorian.weekdays;
+    this.format = root.Gregorian.format;
+    this.standAlone = root.Gregorian.standAlone;
     this.TimeZoneNames = root.TimeZoneNames;
 
     this.datePatternCache = new Cache(parseDatePattern, cacheSize);
@@ -212,7 +209,7 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   }
 
   intervalFormats(bundle: Bundle, skeleton: string, field: DateTimePatternFieldType): string {
-    return this.Gregorian.intervalFormats(skeleton).field(bundle, field);
+    return this.Gregorian.intervalFormats(bundle, field, skeleton);
   }
 
   // TODO: unify string and parts format loops
@@ -270,21 +267,20 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   }
 
   protected dayPeriod(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const format = this.dayPeriods.format;
+    const dayPeriods = this.format.dayPeriods;
     const key = date.getHour() < 12 ? 'am' : 'pm';
-    const alt = Alt.NONE;
     switch (width) {
     case 5:
-      return format.narrow(bundle, key, alt);
+      return dayPeriods(bundle, 'narrow', key);
     case 4:
-      return format.wide(bundle, key, alt);
+      return dayPeriods(bundle, 'wide', key);
     default:
-    return format.abbreviated(bundle, key, alt);
+      return dayPeriods(bundle, 'abbreviated', key);
     }
   }
 
   protected dayPeriodExt(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const format = this.dayPeriods.format;
+    const dayPeriods = this.format.dayPeriods;
     const hour = date.getHour();
     const minute = date.getMinute();
     const key: DayPeriodType = hour < 12 ? 'am' : 'pm';
@@ -299,48 +295,35 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
         extkey = 'noon';
       }
     }
-    const alt = Alt.NONE;
-    switch (width) {
-    case 5:
-      return format.narrow(bundle, extkey, Alt.NONE) || format.narrow(bundle, key, alt);
-    case 4:
-      return format.wide(bundle, extkey, Alt.NONE) || format.wide(bundle, key, alt);
-    default:
-      return format.abbreviated(bundle, extkey, Alt.NONE) || format.abbreviated(bundle, key, alt);
-    }
+    const widthKey = width === 5 ? 'narrow' : width === 4 ? 'wide' : 'abbreviated';
+
+    // Try extended and fall back to normal.
+    return dayPeriods(bundle, widthKey, extkey) || dayPeriods(bundle, widthKey, key);
   }
 
   protected dayPeriodFlex(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     const minutes = (date.getHour() * 60) + date.getMinute();
-    const key = this.dayPeriodRules.get(bundle, minutes) as DayPeriodType;
-    if (key === undefined) {
+    const extkey = this.dayPeriodRules.get(bundle, minutes) as DayPeriodType;
+    if (extkey === undefined) {
       // Fallback to extended day period
       return this.dayPeriodExt(bundle, date, field, width);
     }
-    const alt = Alt.NONE;
-    const format = this.dayPeriods.format;
-    switch (width) {
-    case 5:
-      return format.narrow(bundle, key, alt);
-    case 4:
-      return format.wide(bundle, key, alt);
-    default:
-      return format.abbreviated(bundle, key, alt);
-    }
+    const dayPeriods = this.format.dayPeriods;
+    const widthKey = width === 5 ? 'narrow' : width === 4 ? 'wide' : 'abbreviated';
+    return dayPeriods(bundle, widthKey, extkey) || this.dayPeriodExt(bundle, date, field, width);
   }
 
   protected era(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const format = this.eras;
+    const eras = this.Gregorian.eras;
     const year = date.getYear();
-    const e = year < 0 ? 0 : 1;
-    const era = GregorianInfo.eras[e];
+    const key = GregorianInfo.eras[year < 0 ? 0 : 1];
     switch (width) {
     case 5:
-      return format.narrow(bundle, era);
+      return eras(bundle, 'narrow', key);
     case 4:
-      return format.names(bundle, era);
+      return eras(bundle, 'names', key);
     default:
-      return format.abbr(bundle, era);
+      return eras(bundle, 'abbr', key);
     }
   }
 
@@ -396,16 +379,16 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   }
 
   protected month(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const format = field === 'M' ? this.months.format : this.months.standAlone;
+    const months = field === 'M' ? this.format.months : this.standAlone.months;
     const index = date.getMonth();
-    const month = GregorianInfo.months[index];
+    const key = GregorianInfo.months[index];
     switch (width) {
     case 5:
-      return format.narrow(bundle, month);
+      return months(bundle, 'narrow', key);
     case 4:
-      return format.wide(bundle, month);
+      return months(bundle, 'wide', key);
     case 3:
-      return format.abbreviated(bundle, month);
+      return months(bundle, 'abbreviated', key);
     default:
       return zeroPad2(index + 1, width);
     }
@@ -417,18 +400,18 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   }
 
   protected quarter(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    const format = field === 'Q' ? this.quarters.format : this.quarters.standAlone;
+    const quarters = field === 'Q' ? this.format.quarters : this.standAlone.quarters;
     const index = Math.floor(date.getMonth() / 3);
-    const quarter = QuarterValues[index] as QuarterType;
+    const key = QuarterValues[index] as QuarterType;
     switch (width) {
     case 5:
-      return format.narrow(bundle, quarter);
+      return quarters(bundle, 'narrow', key);
     case 4:
-      return format.wide(bundle, quarter);
+      return quarters(bundle, 'wide', key);
     case 3:
-      return format.abbreviated(bundle, quarter);
+      return quarters(bundle, 'abbreviated', key);
     default:
-      return width === 2 ? `0${quarter}` : `${quarter}`;
+      return width === 2 ? `0${key}` : `${key}`;
     }
   }
 
@@ -437,12 +420,12 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
   }
 
   protected weekday(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
-    return this._weekday(bundle, date, field, width, this.weekdays.format);
+    return this._weekday(bundle, date, field, width, this.format.weekdays);
   }
 
   protected weekdayLocal(bundle: Bundle, date: ZonedDateTime, field: string, width: number): string {
     if (width > 2) {
-      return this._weekday(bundle, date, field, width, this.weekdays.format);
+      return this._weekday(bundle, date, field, width, this.format.weekdays);
     }
     const weekday = this._weekdayNumeric(bundle, date);
     return width === 2 ? `0${weekday}` : `${weekday}`;
@@ -452,25 +435,25 @@ const parseHourFormat = (raw: string): [DateTimeNode[], DateTimeNode[]] => {
     bundle: Bundle, date: ZonedDateTime, field: string, width: number
   ): string {
     if (width > 2) {
-      return this._weekday(bundle, date, field, width, this.weekdays.standAlone);
+      return this._weekday(bundle, date, field, width, this.standAlone.weekdays);
     }
     return `${this._weekdayNumeric(bundle, date)}`;
   }
 
   protected _weekday(
-    bundle: Bundle, date: ZonedDateTime, field: string, width: number, format: WeekdaysFormat): string {
+    bundle: Bundle, date: ZonedDateTime, field: string, width: number, format: Vector2Arrow<string, string>): string {
 
     const index = date.getDayOfWeek() % 7;
-    const weekday = WeekdayValues[index] as WeekdayType;
+    const key = WeekdayValues[index] as WeekdayType;
     switch (width) {
     case 6:
-      return format.short(bundle, weekday);
+      return format(bundle, 'short', key);
     case 5:
-      return format.narrow(bundle, weekday);
+      return format(bundle, 'narrow', key);
     case 4:
-      return format.wide(bundle, weekday);
+      return format(bundle, 'wide', key);
     default:
-      return format.abbreviated(bundle, weekday);
+      return format(bundle, 'abbreviated', key);
     }
   }
 
