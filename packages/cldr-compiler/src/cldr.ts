@@ -434,7 +434,12 @@ const WeekData = {
 
 // ===============================
 
-import { transformCurrencies, transformNumbers, transformTimezones } from './data';
+import {
+  transformCurrencies,
+  transformDatefields,
+  transformNumbers,
+  transformTimezones
+} from './data';
 
 /**
  * Iterate over keys in the group, populating an object with the values
@@ -475,7 +480,6 @@ export const getMain = (language: string) => {
 
   return {
     Chinese: access(Chinese, 'ca-chinese'),
-    DateFields: access(DateFields, 'dateFields'),
     Gregorian: access(Gregorian, 'ca-gregorian'),
     Hebrew: access(Hebrew, 'ca-hebrew'),
     Japanese: access(Japanese, 'ca-japanese'),
@@ -505,8 +509,10 @@ export const getMain = (language: string) => {
 
     ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies', false, transformCurrencies),
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
+    DateFields: access(DateFields, 'dateFields', false, transformDatefields),
 
-    Numbers2: access(Numbers, 'numbers', false, transformNumbers),
+    // In progress..
+    // Numbers2: access(Numbers, 'numbers', false, transformNumbers),
   };
 };
 

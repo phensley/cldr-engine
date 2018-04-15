@@ -9,8 +9,4 @@ const mappings: Mapping[] = [
   Mappings.field('regionFormat').remap(0, 1),
 ];
 
-export const transformTimezones = (o: any): any => {
-  const r = applyMappings(o, mappings);
-  // console.log(JSON.stringify(r, undefined, '  '));
-  return r;
-};
+export const transformTimezones = (o: any): any => applyMappings(o, mappings);

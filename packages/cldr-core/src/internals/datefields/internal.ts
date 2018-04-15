@@ -2,6 +2,9 @@ import {
   DateField,
   DateFieldType,
   DateFieldsSchema,
+  RelativeTimes,
+  RelativeTimeFields,
+  RelativeTimeFieldType,
   Schema,
   pluralCategory
 } from '@phensley/cldr-schema';
@@ -34,26 +37,30 @@ import { Bundle } from '../../resource';
 
 export class DateFieldInternalsImpl implements DateFieldInternals {
 
-  readonly DateFields: DateFieldsSchema;
+  readonly relativeTimes: RelativeTimes;
 
   constructor(
     readonly root: Schema,
     readonly plurals: PluralInternals,
     readonly wrapper: WrapperInternals
   ) {
-    this.DateFields = root.DateFields;
+    this.relativeTimes = root.DateFields.relativeTimes;
   }
 
-  formatRelativeTime(
-    bundle: Bundle, value: DecimalArg, field: DateFieldType, options: RelativeTimeFormatOptions): string {
-    const relative = this.DateFields.relativeTimes(field);
-    if (relative === undefined) {
-      return '';
-    }
-    const width = options.width || 'wide';
-    const format = relative[width];
-    if (format === undefined) {
-      return '';
+  formatRelativeTime(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType,
+      options: RelativeTimeFormatOptions): string {
+
+    let format: RelativeTimeFields;
+    switch (options.width) {
+    case 'narrow':
+      format = this.relativeTimes.narrow;
+      break;
+    case 'short':
+      format = this.relativeTimes.short;
+      break;
+    default:
+      format = this.relativeTimes.wide;
+      break;
     }
 
     let n = coerceDecimal(value);
@@ -61,37 +68,33 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     if (negative) {
       n = n.negate();
     }
-
     if (n.compare(DecimalConstants.ZERO) === 0) {
-      return format.current(bundle);
+      return format.current(bundle, field);
     }
 
     switch (field) {
-    case 'hour':
-    case 'minute':
-    case 'second':
-      break;
-    default:
-      if (n.compare(DecimalConstants.TWO) === 0) {
-        const p = negative ? format.previous2(bundle) : format.next2(bundle);
-        if (p !== '') {
-          return p;
+      case 'hour':
+      case 'minute':
+      case 'second':
+        break;
+      default:
+        if (n.compare(DecimalConstants.TWO) === 0) {
+          const p = negative ? format.previous2(bundle, field) : format.next2(bundle, field);
+          if (p !== '') {
+            return p;
+          }
+          // Fall through
+        } else if (n.compare(DecimalConstants.ONE) === 0) {
+          return negative ? format.previous(bundle, field) : format.next(bundle, field);
         }
-        // Fall through
-      } else if (n.compare(DecimalConstants.ONE) === 0) {
-        return negative ? format.previous(bundle) : format.next(bundle);
-      }
-      break;
+        break;
     }
 
+    // Format a pluralized future / past.
     const operands = n.operands();
     const plural = this.plurals.cardinal(bundle.language(), operands);
-    const arrow = negative ? format.past.pattern : format.future.pattern;
-
-    // TODO: use plural type directly
-    const pl = pluralCategory(plural);
-    const raw = arrow(bundle, pl);
+    const arrow = negative ? format.past : format.future;
+    const raw = arrow(bundle, plural, field);
     return this.wrapper.format(raw, [n.toString()]);
   }
-
 }

@@ -110,6 +110,14 @@ const elapsed = (start: [number, number]): string => {
   return time(end).subtract(time(start)).movePoint(6).toString();
 };
 
+// Capture construction times for top-level scopes.
+// const times: [string, string][] = [];
+// export const dumpTimes = () => {
+//   for (const t of times) {
+//     console.log(t[1], t[0]);
+//   }
+// };
+
 /**
  * Builds the schema accessor singleton.
  */
@@ -135,11 +143,17 @@ export class SchemaBuilder {
         this.constructOrigin(obj, inst);
         break;
       case 'scope':
+      {
         // const s = process.hrtime();
         this.constructScope(obj, inst);
-        // const e = elapsed(s);
-        // console.log(`${e} scope ${inst.identifier}`);
+
+        // const cp = inst.identifier.charCodeAt(0);
+        // if (cp >= 0x41 && cp <= 0x5a) {
+        //   const e = elapsed(s);
+        //   times.push([inst.identifier, e]);
+        // }
         break;
+      }
       case 'scopefield':
         this.constructScopeField(obj, inst);
         break;

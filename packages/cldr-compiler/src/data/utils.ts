@@ -65,7 +65,15 @@ export interface FieldSpec {
   replace?: string;
 }
 
-export type Spec = PluralSpec | AltSpec | KeysSpec | FieldSpec;
+/**
+ * Map multiple fields with optional renaming.
+ */
+export interface FieldsSpec {
+  kind: 'fields';
+  fields: (string | [string, string])[];
+}
+
+export type Spec = PluralSpec | AltSpec | KeysSpec | FieldSpec | FieldsSpec;
 
 /**
  * Apply the field mapping specs to the object, converting hierarchy of keys
@@ -121,6 +129,30 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       break;
     }
 
+    case 'fields':
+    {
+      let key: string;
+      let rkey: string;
+      for (const field of spec.fields) {
+        if (Array.isArray(field)) {
+          [key, rkey] = field;
+        } else {
+          key = field;
+          rkey = field;
+        }
+        const v = obj[key];
+        const pfx = [rkey];
+        if (typeof v === 'string') {
+          res.push(pfx.concat([v]));
+        } else {
+          for (const row of tabular(rest, v)) {
+            res.push(pfx.concat(row));
+          }
+        }
+      }
+      break;
+    }
+
     case 'keys':
     {
       for (const key of Object.keys(obj)) {
@@ -166,6 +198,11 @@ export class MappingBuilder {
     return this;
   }
 
+  fields(fields: (string | [string, string])[]): this {
+    this.specs.push({ kind: 'fields', fields });
+    return this;
+  }
+
   plural(field: string, replace?: string): this {
     this.specs.push({ kind: 'plural', keys: pluralKeys(field, replace) });
     return this;
@@ -192,6 +229,10 @@ export class Mappings {
 
   static field(field: string, replace?: string): MappingBuilder {
     return new MappingBuilder().field(field, replace);
+  }
+
+  static fields(fields: (string | [string, string])[]): MappingBuilder {
+    return new MappingBuilder().fields(fields);
   }
 
   static plural(field: string, replace?: string): MappingBuilder {

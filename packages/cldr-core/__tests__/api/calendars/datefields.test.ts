@@ -1,7 +1,7 @@
 import { RelativeTimeFieldType, RelativeTimeWidthType } from '@phensley/cldr-schema';
 import { EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
-import { Bundle, CalendarsImpl, InternalsImpl } from '../../../src';
+import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
 import { Decimal, ZonedDateTime } from '../../../src/types';
 
 const datetime = (e: number, z: string) => new ZonedDateTime(e, z);
@@ -14,7 +14,8 @@ const LOS_ANGELES = 'America/Los_Angeles';
 
 const INTERNALS = new InternalsImpl();
 
-const calendarsApi = (bundle: Bundle) => new CalendarsImpl(bundle, INTERNALS);
+const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
+const calendarsApi = (bundle: Bundle) => new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 
 test('relative time', () => {
   const api = calendarsApi(EN);
@@ -107,9 +108,9 @@ test('relative time options', () => {
   s = api.formatRelativeTimeField(5, 'weekXX' as RelativeTimeFieldType);
   expect(s).toEqual('');
 
-  // Invalid width
+  // Invalid width defaults to wide
   s = api.formatRelativeTimeField(5, 'week', { width: 'wideXX' as RelativeTimeWidthType });
-  expect(s).toEqual('');
+  expect(s).toEqual('in 5 weeks');
 
   // Invalid number
   expect(() => api.formatRelativeTimeField('xyz', 'week')).toThrowError();

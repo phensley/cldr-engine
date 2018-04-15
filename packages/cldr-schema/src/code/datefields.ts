@@ -1,47 +1,22 @@
-import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap } from '../types';
+import { Instruction, Scope, scope, vector1, vector2 } from '../types';
+import { DateFieldIndex, PluralIndex, RelativeTimeFieldIndex } from '../schema';
 
-import { DateFieldValues, RelativeTimeFieldValues, WeekdayValues } from '../schema';
+const prevNext: Instruction[] = ['previous2', 'previous', 'current', 'next', 'next2']
+  .map(k => vector1(k, k, RelativeTimeFieldIndex));
 
-const relativeTimes = (width: string) => scope(width, width, [
-  field('relative-type--2', 'previous2'),
-  field('relative-type--1', 'previous'),
-  field('relative-type-0', 'current'),
-  field('relative-type-1', 'next'),
-  field('relative-type-2', 'next2'),
-  scope('relativeTime-type-future', 'future', [
-    field('relativeTimePattern', 'pattern', Choice.PLURAL)
-  ]),
-  scope('relativeTime-type-past', 'past', [
-    field('relativeTimePattern', 'pattern', Choice.PLURAL)
-  ])
-]);
+const futurePast: Instruction[] = ['future', 'past']
+  .map(k => vector2(k, k, PluralIndex, RelativeTimeFieldIndex));
+
+const displayName = vector1('displayName', 'displayName', DateFieldIndex);
+
+const relativeTimeBody = prevNext.concat(futurePast).concat([displayName]);
+
+const relativeTimes = (width: string) => scope(width, width, relativeTimeBody);
 
 export const DATEFIELDS: Scope = scope('DateFields', 'DateFields', [
-  scopemap('relativeTimes', RelativeTimeFieldValues, [
+  scope('relativeTimes', 'relativeTimes', [
     relativeTimes('wide'),
     relativeTimes('short'),
-    relativeTimes('narrow')
+    relativeTimes('narrow'),
   ]),
-  fieldmap('displayName', 'displayName', DateFieldValues)
 ]);
-
-/**
-
-VectorArrow1<RelativeTimeFieldValues, RelativeTimePatternWidth>
-  vector arrow1: 'relative'
-  key index: RelativeTimeFieldValues
-  dim0: 'wide' | 'short' | 'narrow'
-
-VectorArrow2<RelativeTimeFieldType, RelativeTimeFuturePast, PluralValues>
-
-  name: 'relativeTimes'
-  key index: RelativeTimeFieldValues
-  dim0: 'future' | 'past'
-  dim2: <plural>
-
-VectorArrow<DateTimeFieldType>
-
-  vector arrow0: 'displayName'
-  key index: DateFieldValues
-
-  */
