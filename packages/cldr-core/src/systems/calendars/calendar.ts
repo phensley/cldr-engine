@@ -168,9 +168,14 @@ export abstract class CalendarDate {
   }
 
   isDaylightSavings(): boolean {
-    return this._fields[DateField.IS_DST] === 1;
+    return this._zoneInfo.dst;
   }
 
+  /**
+   * Computes the field of greatest difference between the two dates.
+   * Note: This assumes the dates are of the same type and have the same
+   * timezone offset.
+   */
   fieldOfGreatestDifference(other: CalendarDate): DateTimePatternFieldType {
     const a = this._fields;
     const b = other._fields;

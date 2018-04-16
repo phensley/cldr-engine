@@ -24,6 +24,9 @@ test('relative time', () => {
   s = api.formatRelativeTimeField(1, 'hour');
   expect(s).toEqual('in 1 hour');
 
+  s = api.formatRelativeTimeField(2, 'hour');
+  expect(s).toEqual('in 2 hours');
+
   s = api.formatRelativeTimeField(0, 'day');
   expect(s).toEqual('today');
 
@@ -41,6 +44,9 @@ test('relative time', () => {
 
   s = api.formatRelativeTimeField('-6.3', 'day');
   expect(s).toEqual('6.3 days ago');
+
+  s = api.formatRelativeTimeField(1, 'sun');
+  expect(s).toEqual('next Sunday');
 
   s = api.formatRelativeTimeField(4, 'sun');
   expect(s).toEqual('in 4 Sundays');

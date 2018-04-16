@@ -8,8 +8,8 @@ import { PersianDate } from './persian';
 export class Calendars {
 
   static fieldOfGreatestDifference(a: CalendarDate, b: CalendarDate): DateTimePatternFieldType {
-    if (a.type() !== b.type()) {
-      b = Calendars.convertTo(b, a.type());
+    if (a.type() !== b.type() || a.timeZoneOffset() !== b.timeZoneOffset()) {
+      b = Calendars.convertTo(b, a.type(), a.timeZoneId());
     }
     return a.fieldOfGreatestDifference(b);
   }
@@ -17,43 +17,43 @@ export class Calendars {
   /**
    * Convert a calendar object to the target type.
    */
-  static convertTo(d: CalendarDate, target: CalendarType): CalendarDate {
+  static convertTo(d: CalendarDate, target: CalendarType, zoneId?: string): CalendarDate {
     if (target === d.type()) {
       return d;
     }
     switch (target) {
     case 'gregory':
-      return Calendars.toGregorianDate(d);
+      return Calendars.toGregorianDate(d, zoneId);
     case 'iso8601':
-      return Calendars.toISO8601Date(d);
+      return Calendars.toISO8601Date(d, zoneId);
     case 'japanese':
-      return Calendars.toJapaneseDate(d);
+      return Calendars.toJapaneseDate(d, zoneId);
     case 'persian':
-      return Calendars.toPersianDate(d);
+      return Calendars.toPersianDate(d, zoneId);
     default:
       return d;
     }
   }
 
-  static toGregorianDate(d: CalendarDate): GregorianDate {
+  static toGregorianDate(d: CalendarDate, zoneId?: string): GregorianDate {
     return GregorianDate.fromUnixEpoch(
-      d.unixEpoch(), d.timeZoneId(), d.firstDayOfWeek(), d.minDaysInFirstWeek()
+      d.unixEpoch(), zoneId ? zoneId : d.timeZoneId(), d.firstDayOfWeek(), d.minDaysInFirstWeek()
     );
   }
 
-  static toISO8601Date(d: CalendarDate): ISO8601Date {
-    return ISO8601Date.fromUnixEpoch(d.unixEpoch(), d.timeZoneId());
+  static toISO8601Date(d: CalendarDate, zoneId?: string): ISO8601Date {
+    return ISO8601Date.fromUnixEpoch(d.unixEpoch(), zoneId ? zoneId : d.timeZoneId());
   }
 
-  static toJapaneseDate(d: CalendarDate): JapaneseDate {
+  static toJapaneseDate(d: CalendarDate, zoneId?: string): JapaneseDate {
     return JapaneseDate.fromUnixEpoch(
-      d.unixEpoch(), d.timeZoneId(), d.firstDayOfWeek(), d.minDaysInFirstWeek()
+      d.unixEpoch(), zoneId ? zoneId : d.timeZoneId(), d.firstDayOfWeek(), d.minDaysInFirstWeek()
     );
   }
 
-  static toPersianDate(d: CalendarDate): PersianDate {
+  static toPersianDate(d: CalendarDate, zoneId?: string): PersianDate {
     return PersianDate.fromUnixEpoch(
-      d.unixEpoch(), d.timeZoneId(), d.firstDayOfWeek(), d.minDaysInFirstWeek()
+      d.unixEpoch(), zoneId ? zoneId : d.timeZoneId(), d.firstDayOfWeek(), d.minDaysInFirstWeek()
     );
   }
 

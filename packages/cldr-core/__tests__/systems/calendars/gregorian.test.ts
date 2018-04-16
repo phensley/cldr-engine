@@ -1,5 +1,5 @@
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
-import { GregorianDate } from '../../../src/systems/calendars/gregorian';
+import { Calendars, CalendarDate, CalendarType, GregorianDate } from '../../../src/systems/calendars';
 import { Constants } from '../../../src/systems/calendars/constants';
 
 const make = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
@@ -16,6 +16,10 @@ test('gregorian date', () => {
 
   // 7:59 PM NY time
   d = make(n, NEW_YORK);
+  expect(d.toString()).toEqual('GregorianDate(epoch=1523491199123, zone=America/New_York)');
+  expect(d.type()).toEqual(CalendarType.GREGORIAN);
+  expect(d.unixEpoch()).toEqual(1523491199123);
+
   expect(d.julianDay()).toEqual(2458220);
   expect(d.era()).toEqual(1);
   expect(d.year()).toEqual(2018);
@@ -30,6 +34,12 @@ test('gregorian date', () => {
   expect(d.minute()).toEqual(59);
   expect(d.second()).toEqual(59);
   expect(d.milliseconds()).toEqual(123);
+
+  expect(d.metaZoneId()).toEqual('America_Eastern');
+  expect(d.timeZoneId()).toEqual('America/New_York');
+  expect(d.isLeapYear()).toEqual(false);
+  expect(d.isDaylightSavings()).toEqual(true);
+  expect(d.timeZoneOffset()).toEqual(14400000);
 
   // + 1 second
   d = make(n + 1000, NEW_YORK);
@@ -106,4 +116,85 @@ test('min / max date', () => {
 
   // Attempt to represent Jan  1 8653 AD
   expect(() => make(n + Constants.ONE_DAY_MS, NEW_YORK)).toThrowError();
+});
+
+test('leap years 1584-1808', () => {
+  const oneYear = Constants.ONE_DAY_MS * 365;
+  let base: number;
+  let d: GregorianDate;
+
+  base = -12235430175000;
+
+  const leaps: number[] = [];
+
+  for (let i = 0; i < 230; i++) {
+    d = make(base + (oneYear * i), NEW_YORK);
+    if (d.isLeapYear()) {
+      leaps.push(d.year());
+    }
+  }
+
+  expect(leaps).toEqual([
+    1584, 1588, 1592, 1596, 1600, 1604, 1608, 1612, 1616, 1620, 1624, 1628, 1632, 1636,
+    1640, 1644, 1648, 1652, 1656, 1660, 1664, 1668, 1672, 1676, 1680, 1684, 1688, 1692, 1696,
+    1704, 1708, 1712, 1716, 1720, 1724, 1728, 1732, 1736, 1740, 1744, 1748, 1752, 1756, 1760,
+    1764, 1768, 1772, 1776, 1780, 1784, 1788, 1792, 1796,
+    1804, 1808
+  ]);
+});
+
+test('leap years 1982-2208', () => {
+  const oneYear = Constants.ONE_DAY_MS * 365;
+  let base: number;
+  let d: GregorianDate;
+
+  base = 387350625000;
+  const leaps: number[] = [];
+
+  for (let i = 0; i < 230; i++) {
+    d = make(base + (oneYear * i), NEW_YORK);
+    if (d.isLeapYear()) {
+      leaps.push(d.year());
+    }
+  }
+
+  expect(leaps).toEqual([
+    1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016, 2020, 2024, 2028, 2032, 2036,
+    2040, 2044, 2048, 2052, 2056, 2060, 2064, 2068, 2072, 2076, 2080, 2084, 2088, 2092, 2096,
+    2104, 2108, 2112, 2116, 2120, 2124, 2128, 2132, 2136, 2140, 2144, 2148, 2152, 2156, 2160,
+    2164, 2168, 2172, 2176, 2180, 2184, 2188, 2192, 2196,
+    2204, 2208
+  ]);
+});
+
+test('field of greatest difference', () => {
+  let end: CalendarDate;
+  let n: number;
+
+  // Wednesday, April 11, 2018 5:23:45 AM UTC
+  n = 1523424225000;
+
+  // 7:59 PM NY time
+  const base = make(n, NEW_YORK);
+  end = make(n + 5000, NEW_YORK);
+
+  expect(base.fieldOfGreatestDifference(end)).toEqual('s');
+
+  end = make(n + (Constants.ONE_MIN_MS * 5), NEW_YORK);
+  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('m');
+
+  end = make(n + (Constants.ONE_HOUR_MS * 5), NEW_YORK);
+  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('H');
+
+  end = make(n + (Constants.ONE_HOUR_MS * 15), NEW_YORK);
+  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('a');
+
+  end = make(n + (Constants.ONE_DAY_MS * 2), NEW_YORK);
+  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('d');
+
+  end = make(n + (Constants.ONE_DAY_MS * 45), NEW_YORK);
+  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('M');
+
+  end = make(n + (Constants.ONE_DAY_MS * 450), NEW_YORK);
+  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('y');
 });
