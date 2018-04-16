@@ -1,5 +1,5 @@
 import { CurrencyType } from '@phensley/cldr-schema';
-import { EN, EN_GB, ES_419, FR, DE, KM, PL } from '../../_helpers';
+import { languageBundle } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import {
   Bundle,
@@ -14,19 +14,21 @@ import {
 
 const INTERNALS = new InternalsImpl();
 
-const numbersApi = (bundle: Bundle) =>
-  new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
+const numbersApi = (tag: string) => {
+  const bundle = languageBundle(tag);
+  return new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
+};
 
 test('decimals unknown style', () => {
   const opts: DecimalFormatOptions = { style: 'UNKNOWN' as DecimalFormatStyleType };
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
 
   const s = api.formatDecimal('1000000000', opts);
   expect(s).toEqual('');
 });
 
 test('minimum grouping digits', () => {
-  const api = numbersApi(PL);
+  const api = numbersApi('pl');
   let s: string;
 
   s = api.formatDecimal('9999', { group: true });
@@ -37,7 +39,7 @@ test('minimum grouping digits', () => {
 });
 
 test('decimals short', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let s: string;
 
   s = api.formatDecimal('1000000000', { style: 'short' });
@@ -60,7 +62,7 @@ test('decimals short', () => {
 });
 
 test('decimals long', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let s: string;
 
   s = api.formatDecimal('1000000000', { style: 'long' });
@@ -83,7 +85,7 @@ test('decimals long', () => {
 });
 
 test('significant digits', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let s: string;
 
   const d = new Decimal('100599.99');
@@ -96,7 +98,7 @@ test('significant digits', () => {
 });
 
 test('decimal compact', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let s: string;
 
   s = api.formatDecimal('12345.234',  { style: 'short' });
@@ -168,7 +170,7 @@ test('decimal compact', () => {
 });
 
 test('decimal compact significant digits', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let s: string;
 
   s = api.formatDecimal('1200', { style: 'short' });
@@ -194,7 +196,7 @@ test('decimal compact significant digits', () => {
 });
 
 test('decimal percents', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
 
   let s = api.formatDecimal('1.234', { style: 'percent' });
   expect(s).toEqual('123%');
@@ -216,7 +218,7 @@ test('decimal percents', () => {
 });
 
 test('decimal rounding', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let s: string;
 
   s = api.formatDecimal('0.998', { round: 'floor', maximumFractionDigits: 0 });
@@ -258,7 +260,7 @@ test('decimal rounding', () => {
 
 test('decimal parts', () => {
   const opts: DecimalFormatOptions = { group: true };
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let p = api.formatDecimalToParts('12345.1234', opts);
 
   expect(p).toEqual([
@@ -280,7 +282,7 @@ test('decimal parts', () => {
 
 test('decimal invalid', () => {
   const opts: DecimalFormatOptions = { style: 'invalid' as DecimalFormatStyleType };
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   const s = api.formatDecimal('12345.1234', opts);
   expect(s).toEqual('');
 });

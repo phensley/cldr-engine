@@ -119,29 +119,16 @@ export class Vector1Arrow<T extends string> {
     return i === -1 ? '' : bundle.get(this.offset + i);
   }
 
-  mapping(bundle: PrimitiveBundle): any {
+  mapping(bundle: PrimitiveBundle): { [x: string]: string } {
     const len = this.len;
     const offset = this.offset;
     const keys = this.index.keys;
-    const res: any = {};
+    const res: { [x: string]: string }  = {};
     for (let i = 0; i < len; i++) {
       const s = bundle.get(offset + i);
       if (s) {
         const k = keys[i];
         res[k] = s;
-      }
-    }
-    return res;
-  }
-
-  values(bundle: PrimitiveBundle): string[] {
-    const len = this.len;
-    const offset = this.offset;
-    const res: string[] = [];
-    for (let i = 0; i < len; i++) {
-      const s = bundle.get(offset + i);
-      if (s) {
-        res.push(s);
       }
     }
     return res;
@@ -170,43 +157,28 @@ export class Vector2Arrow<T extends string, S extends string> {
     return '';
   }
 
-  mapping(bundle: PrimitiveBundle, keyopt?: T): any {
+  mapping(bundle: PrimitiveBundle): { [x: string]: { [y: string]: string }} {
     const size2 = this.size2;
     const keys1 = this.index1.keys;
     const keys2 = this.index2.keys;
     const offset = this.offset;
-    const res: any = {};
+    const res: { [x: string]: { [y: string]: string } } = {};
 
-    if (keyopt) {
-      const i = this.index1.get(keyopt);
-      if (i !== -1) {
-        for (let j = 0; j < keys2.length; j++) {
-          const k = offset + (i * size2) + j;
-          const s = bundle.get(k);
-          if (s) {
-            const key2 = keys2[j];
-            res[key2] = s;
-          }
+    for (let i = 0; i < keys1.length; i++) {
+      let exists = false;
+      const o: { [y: string]: string } = {};
+      for (let j = 0; j < keys2.length; j++) {
+        const k = offset + (i * size2) + j;
+        const s = bundle.get(k);
+        if (s) {
+          exists = true;
+          const key2 = keys2[j];
+          o[key2] = s;
         }
       }
-
-    } else {
-      for (let i = 0; i < keys1.length; i++) {
-        let exists = false;
-        const o: any = {};
-        for (let j = 0; j < keys2.length; j++) {
-          const k = offset + (i * size2) + j;
-          const s = bundle.get(k);
-          if (s) {
-            exists = true;
-            const key2 = keys2[j];
-            o[key2] = s;
-          }
-        }
-        if (exists) {
-          const key1 = keys1[i];
-          res[key1] = o;
-        }
+      if (exists) {
+        const key1 = keys1[i];
+        res[key1] = o;
       }
     }
     return res;

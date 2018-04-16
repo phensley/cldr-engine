@@ -1,5 +1,14 @@
 import { FormatWidthType, RelativeTimeWidthType } from '@phensley/cldr-schema';
 import { NumberSystemType } from './numbers';
+import { CalendarType } from '../systems/calendars/calendar';
+
+/**
+ * @alpha
+ */
+export interface UnixEpochTime {
+  epoch: number | Date;
+  zoneId?: string;
+}
 
 /**
  * @alpha
@@ -7,28 +16,40 @@ import { NumberSystemType } from './numbers';
 export interface DateFormatOptions {
 
   // Set format for both date and time.
-  readonly datetime?: FormatWidthType;
+  datetime?: FormatWidthType;
 
   // Date format.
-  readonly date?: FormatWidthType;
+  date?: FormatWidthType;
 
   // Time format.
-  readonly time?: FormatWidthType;
+  time?: FormatWidthType;
 
   // Wrapper format to use, if both a date and time are being formatted.
-  readonly wrap?: FormatWidthType;
+  wrap?: FormatWidthType;
 
   // A skeleton format containing date, time fields.
-  readonly skeleton?: string;
+  skeleton?: string;
 
   // Specify the calendar to use.
-  readonly ca?: string;
+  ca?: CalendarType;
 
   // Specify the number system to use.
-  readonly nu?: NumberSystemType;
+  nu?: NumberSystemType;
 
   // TODO: add context
   // readonly context: FormatContextType;
+}
+
+/**
+ * @alpha
+ */
+export interface RawDateFormatOptions {
+
+  readonly pattern?: string;
+
+  ca?: CalendarType;
+
+  nu?: NumberSystemType;
 }
 
 /**
@@ -39,7 +60,7 @@ export interface DateIntervalFormatOptions {
   readonly skeleton: string;
 
   // Specify the calendar to use
-  readonly ca?: string;
+  readonly ca?: CalendarType;
 
   // Specify the number system to use
   readonly nu?: NumberSystemType;

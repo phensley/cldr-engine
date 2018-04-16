@@ -27,6 +27,9 @@ export interface RelativeTimeFields {
   readonly past: Vector2Arrow<PluralType, RelativeTimeFieldType>;
 }
 
+// TODO: Consider moving these down and using Vector2Arrow including the width.
+// it will make some code more compact.
+
 export interface RelativeTimes {
   readonly wide: RelativeTimeFields;
   readonly narrow: RelativeTimeFields;

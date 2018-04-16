@@ -4,49 +4,48 @@ import {
   CurrencyType,
   DateFieldType,
   DateTimePatternFieldType,
+  DayPeriodType,
   PluralType,
   Schema,
   UnitInfo,
-  UnitType
+  UnitType,
 } from '@phensley/cldr-schema';
 
 import {
   CurrencyFormatOptions,
+  CurrencySymbolWidthType,
   DecimalFormatOptions,
   ListPatternType,
   NumberSystemType,
   Quantity,
   RelativeTimeFormatOptions,
   UnitFormatOptions,
-  CurrencySymbolWidthType
 } from '../common';
 
 import { DateFormatRequest, NumberParams, DateIntervalFormatRequest } from '../common/private';
 import { Bundle } from '../resource';
-import { DateTimeNode } from '../parsing/patterns/date';
+import { DateTimeNode, parseDatePattern } from '../parsing/patterns/date';
 import { NumberPattern } from '../parsing/patterns/number';
-import { Decimal, DecimalArg, NumberOperands, Part, ZonedDateTime } from '../types';
+import { WrapperNode } from '../parsing/patterns/wrapper';
+import { CalendarDate, CalendarType } from '../systems/calendars';
+import { CalendarPatterns } from './calendars/patterns';
+import { CalendarContext, CalendarFormatter } from './calendars/formatter';
+import { Renderer } from './calendars/render';
+import { Decimal, DecimalArg, NumberOperands, Part } from '../types';
 
 export interface CalendarInternals {
-
-  formatDate(bundle: Bundle, date: ZonedDateTime, request: DateFormatRequest): string;
-  formatDateToParts(bundle: Bundle, date: ZonedDateTime, request: DateFormatRequest): Part[];
-
-  formatDateInterval(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
-    pattern: DateTimeNode[]): string;
-
-  formatDateIntervalToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
-    pattern: DateTimeNode[]): Part[];
-
-  formatDateIntervalFallback(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
-    request: DateFormatRequest, wrapper: string): string;
-
-  formatDateIntervalFallbackToParts(bundle: Bundle, start: ZonedDateTime, end: ZonedDateTime,
-    request: DateFormatRequest, wrapper: string): Part[];
-
-  formatDateRaw(bundle: Bundle, date: ZonedDateTime, pattern: string): string;
-  formatDateRawToParts(bundle: Bundle, date: ZonedDateTime, pattern: string): Part[];
-  intervalFormats(bundle: Bundle, skeleton: string, field: DateTimePatternFieldType): string;
+  getCalendarFormatter(type: CalendarType): CalendarFormatter<CalendarDate>;
+  flexDayPeriod(bundle: Bundle, minutes: number): DayPeriodType | undefined;
+  parseDatePattern(raw: string): DateTimeNode[];
+  getHourPattern(raw: string, negative: boolean): DateTimeNode[];
+  weekFirstDay(region: string): number;
+  weekMinDays(region: string): number;
+  selectCalendar(bundle: Bundle, ca?: CalendarType): CalendarType;
+  formatDateTime<R>(
+    calendar: CalendarType, ctx: CalendarContext<CalendarDate>, renderer: Renderer<R>,
+    date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
+  formatInterval<R>(calendar: CalendarType, bundle: Bundle, params: NumberParams, renderer: Renderer<R>,
+      start: CalendarDate, end: CalendarDate, pattern: DateTimeNode[]): R;
 }
 
 export interface DateFieldInternals {
@@ -116,12 +115,15 @@ export interface UnitInternals {
 export interface WrapperInternals {
   format(format: string, args: string[]): string;
   formatParts(format: string, args: Part[][]): Part[];
+  parseWrapper(format: string): WrapperNode[];
 }
 
 /**
  * Unified interface for accessing internal functionality.
  */
 export interface Internals {
+  // readonly calendarsold: CalendarInternalsOld;
+
   readonly calendars: CalendarInternals;
   readonly dateFields: DateFieldInternals;
   readonly general: GeneralInternals;

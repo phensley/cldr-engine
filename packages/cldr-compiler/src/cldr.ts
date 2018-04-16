@@ -131,6 +131,16 @@ const fixEras = (obj: any) => {
 };
 
 /**
+ * Get the full unit names.
+ */
+const getUnitNames = (obj: any) => {
+  return Object.keys(obj).reduce((o: any, k) => {
+    o[k] = {};
+    return o;
+  }, {});
+};
+
+/**
  * Split the category off the unit names.
  */
 const fixUnitNames = (obj: any) => {
@@ -408,6 +418,8 @@ const TimeZoneNames = {
  * Unit names and formats.
  */
 const Units = {
+  names: get(['units', 'long', _pruneUnitFormats, getUnitNames]),
+
   long: get(['units', 'long', _pruneUnitFormats, fixUnitNames]),
   longPer: get(['units', 'long', 'per']),
   longCoordinate: get(['units', 'long', 'coordinateUnit']),
@@ -492,7 +504,8 @@ export const getMain = (language: string) => {
     ...access({ ListPatterns: get(['listPatterns', listPattern]) }, 'listPatterns'),
     ...access({ Territories: get(['localeDisplayNames']) }, 'territories'),
 
-    // New vector-based transformers
+    // New vector-based transformers. These reorganize the nesting of keys to match
+    // how our schema is designed.
 
     ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies', false, transformCurrencies),
     DateFields: access(DateFields, 'dateFields', false, transformDatefields),
@@ -522,6 +535,7 @@ export const getSupplemental = () => {
     MetaZones: access(MetaZones, 'metaZones'),
     WeekData: access(WeekData, 'weekData'),
 
+    ...access({ CalendarPreferences: get(['calendarPreferenceData']) }, 'calendarPreferenceData'),
     ...access({ Cardinals: get(['plurals-type-cardinal']) }, 'plurals'),
     ...access({ CurrencyFractions: get(['currencyData', 'fractions']) }, 'currencyData'),
     ...access({ DayPeriods: get(['dayPeriodRuleSet']) }, 'dayPeriods'),

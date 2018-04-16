@@ -4,6 +4,7 @@ import * as yargs from 'yargs';
 import { Code } from './util';
 
 import { getAliases } from './aliases';
+import { getCalendarPrefs } from './calendar';
 import { getCurrencies } from './currencies';
 import { getDayPeriods } from './dayperiods';
 import { getDistance } from './distance';
@@ -20,6 +21,7 @@ import { getZones } from './zones';
 
 const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   aliases: getAliases,
+  calendar: getCalendarPrefs,
   currencies: getCurrencies,
   dayperiods: getDayPeriods,
   distance: getDistance,
@@ -37,8 +39,8 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
 
 // Names of pre-processed data files
 const DATA_FILES = [
-  'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals', 'subtags', 'symbols',
-  'timedata', 'weekdata', 'zonedst'
+  'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals',
+  'subtags', 'symbols', 'timedata', 'weekdata', 'zonedst'
 ];
 
 const load = (): any => {

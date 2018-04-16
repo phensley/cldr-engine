@@ -12,7 +12,7 @@ export interface MetaZoneInfo {
   readonly long: Vector2Arrow<TimeZoneNameType, MetaZoneType>;
 }
 
-export interface TimeZoneNames {
+export interface TimeZoneSchema {
   readonly gmtFormat: FieldArrow;
   readonly gmtZeroFormat: FieldArrow;
   readonly hourFormat: FieldArrow;

@@ -1,10 +1,13 @@
-import { EN, FR, TH } from '../../_helpers';
+import { languageBundle } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import { Bundle, GeneralImpl, InternalsImpl } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
-const generalApi = (bundle: Bundle) => new GeneralImpl(bundle, INTERNALS);
+const generalApi = (tag: string) => {
+  const bundle = languageBundle(tag);
+  return new GeneralImpl(bundle, INTERNALS);
+};
 
 const ZERO: string[] = [];
 const ONE = ['1'];
@@ -15,7 +18,7 @@ const FIVE = FOUR.concat(['5']);
 const SIX = FIVE.concat(['6']);
 
 test('list patterns and', () => {
-  let api = generalApi(EN);
+  let api = generalApi('en');
 
   expect(api.formatList(ZERO)).toEqual('');
   expect(api.formatList(ONE)).toEqual('1');
@@ -25,7 +28,7 @@ test('list patterns and', () => {
   expect(api.formatList(FIVE)).toEqual('1, 2, 3, 4, and 5');
   expect(api.formatList(SIX)).toEqual('1, 2, 3, 4, 5, and 6');
 
-  api = generalApi(FR);
+  api = generalApi('fr');
 
   expect(api.formatList(ZERO)).toEqual('');
   expect(api.formatList(ONE)).toEqual('1');
@@ -35,7 +38,7 @@ test('list patterns and', () => {
   expect(api.formatList(FIVE)).toEqual('1, 2, 3, 4 et 5');
   expect(api.formatList(SIX)).toEqual('1, 2, 3, 4, 5 et 6');
 
-  api = generalApi(TH);
+  api = generalApi('th');
 
   expect(api.formatList(ZERO)).toEqual('');
   expect(api.formatList(ONE)).toEqual('1');
@@ -47,7 +50,7 @@ test('list patterns and', () => {
 });
 
 test('list patterns and parts', () => {
-  const api = generalApi(EN);
+  const api = generalApi('en');
 
   expect(api.formatListToParts(ONE)).toEqual([
     { type: 'item', value: '1' }
@@ -105,7 +108,7 @@ test('list patterns and parts', () => {
 });
 
 test('list patterns and-short', () => {
-  let api = generalApi(EN);
+  let api = generalApi('en');
 
   expect(api.formatList(ZERO, 'and-short')).toEqual('');
   expect(api.formatList(ONE, 'and-short')).toEqual('1');
@@ -115,7 +118,7 @@ test('list patterns and-short', () => {
   expect(api.formatList(FIVE, 'and-short')).toEqual('1, 2, 3, 4, and 5');
   expect(api.formatList(SIX, 'and-short')).toEqual('1, 2, 3, 4, 5, and 6');
 
-  api = generalApi(FR);
+  api = generalApi('fr');
 
   expect(api.formatList(ZERO, 'and-short')).toEqual('');
   expect(api.formatList(ONE, 'and-short')).toEqual('1');
@@ -125,7 +128,7 @@ test('list patterns and-short', () => {
   expect(api.formatList(FIVE, 'and-short')).toEqual('1, 2, 3, 4 et 5');
   expect(api.formatList(SIX, 'and-short')).toEqual('1, 2, 3, 4, 5 et 6');
 
-  api = generalApi(TH);
+  api = generalApi('th');
 
   expect(api.formatList(ZERO, 'and-short')).toEqual('');
   expect(api.formatList(ONE, 'and-short')).toEqual('1');
@@ -137,7 +140,7 @@ test('list patterns and-short', () => {
 });
 
 test('list patterns or', () => {
-  let api = generalApi(EN);
+  let api = generalApi('en');
 
   expect(api.formatList(ZERO, 'or')).toEqual('');
   expect(api.formatList(ONE, 'or')).toEqual('1');
@@ -147,7 +150,7 @@ test('list patterns or', () => {
   expect(api.formatList(FIVE, 'or')).toEqual('1, 2, 3, 4, or 5');
   expect(api.formatList(SIX, 'or')).toEqual('1, 2, 3, 4, 5, or 6');
 
-  api = generalApi(FR);
+  api = generalApi('fr');
 
   expect(api.formatList(ZERO, 'or')).toEqual('');
   expect(api.formatList(ONE, 'or')).toEqual('1');
@@ -157,7 +160,7 @@ test('list patterns or', () => {
   expect(api.formatList(FIVE, 'or')).toEqual('1, 2, 3, 4 ou 5');
   expect(api.formatList(SIX, 'or')).toEqual('1, 2, 3, 4, 5 ou 6');
 
-  api = generalApi(TH);
+  api = generalApi('th');
 
   expect(api.formatList(ZERO, 'or')).toEqual('');
   expect(api.formatList(ONE, 'or')).toEqual('1');

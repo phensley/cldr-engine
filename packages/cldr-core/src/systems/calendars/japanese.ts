@@ -8,7 +8,7 @@ import { GregorianDate } from './gregorian';
 export class JapaneseDate extends GregorianDate {
 
   constructor(epoch: number, zoneId: string, firstDay: number, minDays: number) {
-    super(CalendarType.JAPANESE, epoch, zoneId, firstDay, minDays);
+    super('japanese', epoch, zoneId, firstDay, minDays);
     computeJapaneseFields(this._fields);
   }
 

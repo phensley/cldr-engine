@@ -18,6 +18,7 @@ import {
   Units,
   UnitsImpl
 } from '@phensley/cldr-core';
+import { deflateRawSync } from 'zlib';
 
 /**
  * Parse a locale identifier into a locale object that includes the original
@@ -68,32 +69,77 @@ export class Locales {
  *
  * @alpha
  */
-export interface CLDR {
+export class CLDR {
+
+  private _calendars?: Calendars;
+  private _general?: General;
+  private _locales?: Locales;
+  private _numbers?: Numbers;
+  private _privateApi?: PrivateApiImpl;
+  private _units?: Units;
+
+  constructor(
+    private readonly locale: Locale,
+    private readonly bundle: Bundle,
+    private readonly internals: Internals
+  ) {}
 
   /**
    * Locale functions.
    */
-  readonly Locales: Locales;
+  get Locales(): Locales {
+    if (this._locales === undefined) {
+      this._locales = new Locales(this.locale, this.bundle);
+    }
+    return this._locales;
+  }
 
   /**
    * Calendar functions.
    */
-  readonly Calendars: Calendars;
+  get Calendars(): Calendars {
+    if (this._calendars === undefined) {
+      this._calendars = new CalendarsImpl(this.bundle, this.internals, this.privateApi);
+    }
+    return this._calendars;
+  }
 
   /**
    * General functions.
    */
-  readonly General: General;
+  get General(): General {
+    if (this._general === undefined) {
+      this._general = new GeneralImpl(this.bundle, this.internals);
+    }
+    return this._general;
+  }
 
   /**
    * Number and currency functions.
    */
-  readonly Numbers: Numbers;
+  get Numbers(): Numbers {
+    if (this._numbers === undefined) {
+      this._numbers = new NumbersImpl(this.bundle, this.internals, this.privateApi);
+    }
+    return this._numbers;
+  }
 
   /**
    * Unit quantity functions.
    */
-  readonly Units: Units;
+  get Units(): Units {
+    if (this._units === undefined) {
+      this._units = new UnitsImpl(this.bundle, this.internals, this.privateApi);
+    }
+    return this._units;
+  }
+
+  private get privateApi(): PrivateApiImpl {
+    if (this._privateApi === undefined) {
+      this._privateApi = new PrivateApiImpl(this.bundle, this.internals);
+    }
+    return this._privateApi;
+  }
 }
 
 /**
@@ -210,14 +256,6 @@ export class CLDRFramework {
    */
   protected build(locale: Locale, pack: Pack): CLDR {
     const bundle = pack.get(locale.tag);
-    const privateApi = new PrivateApiImpl(bundle, this.internals);
-
-    return {
-      Calendars: new CalendarsImpl(bundle, this.internals, privateApi),
-      General: new GeneralImpl(bundle, this.internals),
-      Locales: new Locales(locale, bundle),
-      Numbers: new NumbersImpl(bundle, this.internals, privateApi),
-      Units: new UnitsImpl(bundle, this.internals, privateApi)
-    };
+    return new CLDR(locale, bundle, this.internals);
   }
 }

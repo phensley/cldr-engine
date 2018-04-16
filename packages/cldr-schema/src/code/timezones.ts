@@ -1,7 +1,7 @@
 import { KeyIndex, Scope, field, scope, scopemap, vector1, vector2 } from '../types';
 import { MetaZoneIndex, MetaZoneValues, TimeZoneIndex, TimeZoneTypeIndex, TimeZoneValues } from '../schema/timezones';
 
-export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZoneNames', [
+export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZones', [
   scope('metaZones', 'metaZones', [
     vector2('long', TimeZoneTypeIndex, MetaZoneIndex),
     vector2('short', TimeZoneTypeIndex, MetaZoneIndex)

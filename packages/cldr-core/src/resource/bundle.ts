@@ -15,10 +15,12 @@ export class StringBundle implements Bundle {
   // Properties for fast internal lookups into maps.
   // For example, extended day periods cover all of 'es' except for 'es-CO'.
   // Pre-computing these to avoid string creation for lookups at runtime.
-  private _calendarSystem: string = 'gregory';
-  private _numberSystem: string = 'default';
   private _languageRegion: string;
   private _languageScript: string;
+
+  // Empty string will select the preferred calendar for the region.
+  private _calendarSystem: string = '';
+  private _numberSystem: string = 'default';
 
   constructor(
     readonly _id: string,

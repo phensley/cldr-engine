@@ -36,25 +36,19 @@ export const getSymbols = (): any => {
   const territories = new Set();
   const unitsRaw = new Set();
 
-  // TODO: once non-gregorian calendars are supported we should namespace these
-  const availableFormats = new Set();
-  const intervalFormats = new Set();
-
   locales.forEach(lang => {
     console.warn(`Scanning '${lang}'..`);
 
     // Add keys for nested objects to their corresponding sets.
     const main = getMain(lang);
-    addKeys(main.TimeZoneNames.timeZones, timeZoneIds);
-    addKeys(main.TimeZoneNames.metaZones, metaZoneIds);
-    addKeys(main.Currencies, currencies);
-    addKeys(main.Gregorian.availableFormats, availableFormats);
-    addKeys(main.Gregorian.intervalFormats, intervalFormats);
-    addKeys(main.Units.names, unitsRaw);
 
+    addKeys(main.Currencies.currencyIds, currencies);
+    addKeys(main.Units.unitIds, unitsRaw);
     addKeys(main.Names.languages.displayName, languages);
     addKeys(main.Names.scripts.displayName, scripts);
-    addKeys(main.Names.territories.displayName, territories);
+    addKeys(main.Names.territories.territoryIds, territories);
+    addKeys(main.TimeZoneNames.timeZoneIds, timeZoneIds);
+    addKeys(main.TimeZoneNames.metaZoneIds, metaZoneIds);
   });
 
   const unitCategories = unique(sorted(unitsRaw).map(u => u.split('-')[0]));
@@ -64,8 +58,6 @@ export const getSymbols = (): any => {
     units: sorted(unitsRaw),
     unitCategories: unitCategories,
     currencies: sorted(currencies),
-    availableFormats: sorted(availableFormats),
-    intervalFormats: sorted(intervalFormats),
     languages: sorted(languages),
     scripts: sorted(scripts),
     territories: sorted(territories),

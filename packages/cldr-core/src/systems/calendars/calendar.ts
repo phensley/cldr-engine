@@ -1,8 +1,8 @@
-import { DateTimePatternField, DateTimePatternFieldType } from '@phensley/cldr-schema';
-import { ZonedDateTime } from '../..';
+import { DateTimePatternField, DateTimePatternFieldType, MetaZoneType } from '@phensley/cldr-schema';
 import { DateField, dateFields, DayOfWeek } from './fields';
-import { Constants, ConstantsDesc } from './constants';
-import { ZoneInfo, ZoneInfoCache } from './timezone';
+import { CalendarConstants, ConstantsDesc } from './constants';
+import { ZoneInfo, zoneInfoCache, substituteZoneAlias } from './timezone';
+import { CLIENT_RENEG_LIMIT } from 'tls';
 
 /**
  * Implementation order, based on calendar preference data and ease of implementation.
@@ -22,21 +22,22 @@ import { ZoneInfo, ZoneInfoCache } from './timezone';
  *  dangi               - secondary in KO
  *
  * Rest TBD
+ *
+ * Calendar calculations are compatible with those in the Unicode ICU project.
  */
 
 // Indicates a null field to support computing on demand
 const NULL = Number.MAX_SAFE_INTEGER;
 
-const zoneInfoCache = new ZoneInfoCache();
-
 const floor = Math.floor;
 
-export const enum CalendarType {
-  GREGORIAN = 'gregory',
-  ISO8601 = 'iso8601',
-  JAPANESE = 'japanese',
-  PERSIAN = 'persian',
-}
+// The internal type name for Gregorian calendar is "gregory" so that it can fit
+// into a language tag ("zh-u-ca-gregory") as "gregorian" exceeds the 8-char
+// limit.
+// See https://www.unicode.org/reports/tr35/#Key_And_Type_Definitions_
+export type CalendarType = 'gregory' | 'iso8601' | 'japanese' | 'persian';
+
+export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
 
 const differenceFields: [number, DateTimePatternFieldType][] = [
   [DateField.YEAR, DateTimePatternField.YEAR],
@@ -65,6 +66,7 @@ export abstract class CalendarDate {
     protected readonly _firstDay: number,
     protected readonly _minDays: number) {
 
+    _zoneId = substituteZoneAlias(_zoneId);
     this._zoneInfo = zoneInfoCache.get(_unixEpoch, _zoneId);
     computeBaseFields(_unixEpoch - this._zoneInfo.offset, this._fields);
 
@@ -119,16 +121,43 @@ export abstract class CalendarDate {
     return this._fields[DateField.MONTH];
   }
 
+  weekOfMonth(): number {
+    this.computeWeekFields();
+    return this._fields[DateField.WEEK_OF_MONTH];
+  }
+
   dayOfYear(): number {
     return this._fields[DateField.DAY_OF_YEAR];
   }
 
+  /**
+   * Day of the week. 1 = SUNDAY, 2 = MONDAY, ..., 7 = SATURDAY
+   */
   dayOfWeek(): number {
     return this._fields[DateField.DAY_OF_WEEK];
   }
 
+  /**
+   * Ordinal day of the week. 1 if this is the 1st day of the week,
+   * 2 if the 2nd, etc. Depends on the local starting day of the week.
+   */
+  ordinalDayOfWeek(): number {
+    const weekday = this.dayOfWeek();
+    const firstDay = this.firstDayOfWeek();
+    return (7 - firstDay + weekday) % 7 + 1;
+  }
+
+  dayOfWeekInMonth(): number {
+    this.computeWeekFields();
+    return this._fields[DateField.DAY_OF_WEEK_IN_MONTH];
+  }
+
   dayOfMonth(): number {
     return this._fields[DateField.DAY_OF_MONTH];
+  }
+
+  isAM(): boolean {
+    return this._fields[DateField.AM_PM] === 0;
   }
 
   hour(): number {
@@ -151,7 +180,11 @@ export abstract class CalendarDate {
     return this._fields[DateField.MILLIS];
   }
 
-  metaZoneId(): string {
+  millisecondsInDay(): number {
+    return this._fields[DateField.MILLIS_IN_DAY];
+  }
+
+  metaZoneId(): MetaZoneType {
     return this._zoneInfo.metaZoneId;
   }
 
@@ -203,6 +236,7 @@ export abstract class CalendarDate {
 
     const eyear = f[DateField.EXTENDED_YEAR];
     const dow = f[DateField.DAY_OF_WEEK];
+    const dom = f[DateField.DAY_OF_MONTH];
     const doy = f[DateField.DAY_OF_YEAR];
 
     let ywoy = eyear;
@@ -230,8 +264,10 @@ export abstract class CalendarDate {
         }
       }
     }
+    f[DateField.WEEK_OF_MONTH] = this.weekNumber(dom, dom, dow);
     f[DateField.WEEK_OF_YEAR] = woy;
     f[DateField.YEAR_WOY] = ywoy;
+    f[DateField.DAY_OF_WEEK_IN_MONTH] = ((dom - 1) / 7 | 0) + 1;
   }
 
   protected yearLength(y: number): number {
@@ -254,15 +290,15 @@ export abstract class CalendarDate {
  * Compute fields common to all calendars.
  */
 const computeBaseFields = (ms: number, f: number[]): void => {
-  const days = floor(ms / Constants.ONE_DAY_MS);
-  const jd = days + Constants.JD_UNIX_EPOCH;
-  if (jd < Constants.JD_MIN || jd > Constants.JD_MAX) {
+  const days = floor(ms / CalendarConstants.ONE_DAY_MS);
+  const jd = days + CalendarConstants.JD_UNIX_EPOCH;
+  if (jd < CalendarConstants.JD_MIN || jd > CalendarConstants.JD_MAX) {
     throw new Error(
       `Julian day ${jd} is outside the supported range of this library: ` +
       `${ConstantsDesc.JD_MIN} to ${ConstantsDesc.JD_MAX}`);
   }
 
-  let msDay = ms - (days * Constants.ONE_DAY_MS);
+  let msDay = ms - (days * CalendarConstants.ONE_DAY_MS);
 
   f[DateField.LOCAL_MILLIS] = ms;
   f[DateField.JULIAN_DAY] = jd;

@@ -1,12 +1,12 @@
 import { CalendarDate, CalendarType } from './calendar';
-import { Constants } from './constants';
+import { CalendarConstants } from './constants';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
 
 export class PersianDate extends CalendarDate {
 
   protected constructor(epoch: number, zoneId: string, firstDay: number, minDays: number) {
-    super(CalendarType.PERSIAN, epoch, zoneId, firstDay, minDays);
+    super('persian', epoch, zoneId, firstDay, minDays);
     computePersianFields(this._fields);
   }
 
@@ -19,7 +19,7 @@ export class PersianDate extends CalendarDate {
   }
 
   protected monthStart(eyear: number, month: number, useMonth: boolean): number {
-    return Constants.JD_PERSIAN_EPOCH - 1 + 365 * (eyear - 1) + floor((8 * eyear + 21) / 33);
+    return CalendarConstants.JD_PERSIAN_EPOCH - 1 + 365 * (eyear - 1) + floor((8 * eyear + 21) / 33);
   }
 }
 
@@ -42,7 +42,7 @@ const MONTH_COUNT = [
 
 const computePersianFields = (f: number[]): void => {
   const jd = f[DateField.JULIAN_DAY];
-  const days = jd - Constants.JD_PERSIAN_EPOCH;
+  const days = jd - CalendarConstants.JD_PERSIAN_EPOCH;
   const year = 1 + floor((33 * days + 3) / 12053);
   const favardin1 = 365 * (year - 1) + floor((8 * year + 21) / 33);
   const doy = days - favardin1;

@@ -1,4 +1,4 @@
-export const enum Constants {
+export const enum CalendarConstants {
   ISO8601_MIN_DAYS = 4,
 
   // TODO: revisit to expand range of julian days
@@ -19,10 +19,11 @@ export const enum Constants {
   // Julian day for Mar 21, 622 first day of the Persian calendar
   JD_PERSIAN_EPOCH = 1948320,
 
-  ONE_MIN_MS = 60 * 1000,
-  ONE_HOUR_MS = Constants.ONE_MIN_MS * 60,
-  ONE_DAY_MS = Constants.ONE_HOUR_MS * 24,
-  ONE_WEEK_MS = Constants.ONE_DAY_MS * 7,
+  ONE_SECOND_MS = 1000,
+  ONE_MINUTE_MS = CalendarConstants.ONE_SECOND_MS * 60,
+  ONE_HOUR_MS = CalendarConstants.ONE_MINUTE_MS * 60,
+  ONE_DAY_MS = CalendarConstants.ONE_HOUR_MS * 24,
+  ONE_WEEK_MS = CalendarConstants.ONE_DAY_MS * 7,
 }
 
 export const enum ConstantsDesc {

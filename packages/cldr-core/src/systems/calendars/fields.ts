@@ -17,9 +17,11 @@ export const enum DateField {
   YEAR_WOY,
   WEEK_OF_YEAR,
   MONTH,
+  WEEK_OF_MONTH,
   DAY_OF_YEAR,
   DAY_OF_MONTH,
   DAY_OF_WEEK,
+  DAY_OF_WEEK_IN_MONTH,
   MILLIS_IN_DAY,
   AM_PM,
   HOUR_OF_DAY,
@@ -29,8 +31,8 @@ export const enum DateField {
   MILLIS,
   TZ_OFFSET,
   IS_LEAP,
-  IS_DST // 20
+  IS_DST // 21
 }
 
-// 21 fields
-export const dateFields = () => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+// 22 fields
+export const dateFields = () => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

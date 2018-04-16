@@ -1,8 +1,9 @@
 import { getCLDR, loader, asyncLoader } from './helpers';
 
-test('loaders', () => {
+test('init framework', () => {
   const framework = getCLDR();
   let api = framework.get('en');
+  expect(framework.info()).toEqual('packs loaded: 1');
 
   expect(() => framework.get('xx')).toThrowError();
 
@@ -16,16 +17,10 @@ test('loaders', () => {
   // TODO:
   // expect(api.Calendars.getMonth('3')).toEqual('March');
 
-  expect(framework.getAsync('en')).resolves.toEqual(api);
-  expect(framework.info()).toEqual('packs loaded: 1');
-
   framework.get('es');
   expect(framework.info()).toEqual('packs loaded: 2');
   framework.get('es');
   expect(framework.info()).toEqual('packs loaded: 2');
-
-  expect(framework.getAsync('xx')).rejects.toContain('no such file');
-  expect(framework.getAsync('de')).resolves.toBeTruthy();
 
   // Bundle with invalid region
   api = framework.get('ar-Arab-XX');
@@ -38,4 +33,18 @@ test('loaders', () => {
   expect(api.Locales.bundle().language()).toEqual('ar');
   expect(api.Locales.bundle().languageRegion()).toEqual('ar-EG');
   expect(api.Locales.bundle().languageScript()).toEqual('ar-Arab');
+});
+
+test('async loader', () => {
+  const framework = getCLDR();
+  const en = framework.get('en');
+  const es = framework.get('es');
+
+  expect(framework.getAsync('en')).resolves.toEqual(en);
+  expect(framework.getAsync('es')).resolves.toEqual(es);
+
+  expect(framework.getAsync('xx')).rejects.toContain('no such file');
+
+  expect(framework.getAsync('de')).resolves.toBeTruthy();
+  expect(framework.getAsync('zh-TW')).resolves.toBeTruthy();
 });

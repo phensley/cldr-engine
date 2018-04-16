@@ -16,13 +16,15 @@ import {
   DateIntervalFormatOptions,
   ListPatternType,
   Quantity,
+  RawDateFormatOptions,
   RelativeTimeFormatOptions,
   UnitFormatOptions,
-  UnitLength
+  UnitLength,
+  UnixEpochTime
 } from '../common';
 
 import { CalendarDate } from '../systems/calendars';
-import { DecimalArg, Part, ZonedDateTime } from '../types';
+import { DecimalArg, Part } from '../types';
 
 /**
  * Calendar, date and time functions.
@@ -32,60 +34,45 @@ import { DecimalArg, Part, ZonedDateTime } from '../types';
 export interface Calendars {
 
   /**
-   * Format a date to a string.
-   */
-  newFormatDate(date: CalendarDate, options?: DateFormatOptions): string;
-
-  /**
    * Formats a date-time value to string.
    */
-  formatDate(date: ZonedDateTime, options?: DateFormatOptions): string;
+  formatDate(date: CalendarDate | UnixEpochTime, options?: DateFormatOptions): string;
 
   /**
    * Formats a date-time value to an array of parts.
    */
-  formatDateToParts(date: ZonedDateTime, options?: DateFormatOptions): Part[];
-
-  /**
-   * Formats a date-time value to string using a raw date-time pattern.
-   *
-   * Warning: You should not use this for general formatting.
-   */
-  formatDateRaw(date: ZonedDateTime, pattern: string): string;
-
-  /**
-   * Formats a date-time value to an array of parts using a raw date-time pattern.
-   *
-   * Warning: You should not use this for general formatting.
-   */
-  formatDateRawToParts(date: ZonedDateTime, pattern: string): Part[];
+  formatDateToParts(date: CalendarDate | UnixEpochTime, options?: DateFormatOptions): Part[];
 
   /**
    * Formats a date-time interval for the given skeleton to string.
    */
-  formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): string;
+  formatDateInterval(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
+    options?: DateIntervalFormatOptions): string;
 
   /**
    * Formats a date-time interval for the given skeleton to an array of parts.
    */
-  formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, options?: DateIntervalFormatOptions): Part[];
-
-  /**
-   * Formats a date-time interval for the given skeleton to string.
-   */
-  // formatDateInterval(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): string;
-
-  /**
-   * Formats a date-time interval for the given skeleton to an array of parts.
-   */
-  // formatDateIntervalToParts(start: ZonedDateTime, end: ZonedDateTime, skeleton: string): Part[];
+  formatDateIntervalToParts(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
+    options?: DateIntervalFormatOptions): Part[];
 
   /**
    * Formats a relative time field to string.
    */
   formatRelativeTimeField(value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string;
 
-  // TODO: formatRelativeTimeFieldToParts
+    /**
+   * Formats a date-time value to string using a raw date-time pattern.
+   *
+   * Warning: You should not use this for general formatting.
+   */
+  formatDateRaw(date: CalendarDate | UnixEpochTime, options?: RawDateFormatOptions): string;
+
+  /**
+   * Formats a date-time value to an array of parts using a raw date-time pattern.
+   *
+   * Warning: You should not use this for general formatting.
+   */
+  formatDateRawToParts(date: CalendarDate | UnixEpochTime, options?: RawDateFormatOptions): Part[];
 
 }
 

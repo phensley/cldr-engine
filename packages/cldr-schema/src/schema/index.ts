@@ -20,7 +20,7 @@ import {
   NamesSchema,
   NumbersSchema,
   PersianSchema,
-  TimeZoneNames,
+  TimeZoneSchema,
   UnitsSchema,
 } from '.';
 
@@ -34,6 +34,6 @@ export interface Schema {
   readonly Names: NamesSchema;
   readonly Numbers: NumbersSchema;
   readonly Currencies: CurrenciesSchema;
-  readonly TimeZoneNames: TimeZoneNames;
+  readonly TimeZones: TimeZoneSchema;
   readonly Units: UnitsSchema;
 }

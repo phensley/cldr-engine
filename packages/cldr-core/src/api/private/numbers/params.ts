@@ -10,13 +10,15 @@ import {
 import { Internals } from '../../../internals';
 import { NumberSystemType } from '../../../common';
 import { NumberParams } from '../../../common/private';
-import { numericNumberingDigits } from '../../../systems';
-import { LRU } from './../../../utils/lru';
+import { NumericNumberSystem, numericNumberingDigits } from '../../../systems';
+import { Cache } from '../../../utils/cache';
 import { Bundle } from '../../../resource';
+
+// TODO: rebuild this using a new schema based on vector arrows
 
 export class NumberParamsCache {
 
-  private numberParamsCache: LRU<string, NumberParams>;
+  private numberParamsCache: Cache<NumberParams>;
   private numberSystems: NumberSystemNames;
   private numberSchema: NumbersSchema;
 
@@ -24,7 +26,7 @@ export class NumberParamsCache {
     protected bundle: Bundle,
     protected internals: Internals
   ) {
-    this.numberParamsCache = new LRU();
+    this.numberParamsCache = new Cache((s: string) => this.build(s as NumberSystemName), 10);
     this.numberSchema = internals.schema.Numbers;
     this.numberSystems = this.numberSchema.numberSystems(bundle);
   }
@@ -53,7 +55,7 @@ export class NumberParamsCache {
       }
     }
 
-    return this.lookup(realName);
+    return this.numberParamsCache.get(realName);
   }
 
   protected select(numberSystem: NumberSystemType): NumberSystemName {
@@ -70,15 +72,6 @@ export class NumberParamsCache {
     }
   }
 
-  protected lookup(numberSystem: NumberSystemName): NumberParams {
-    let params = this.numberParamsCache.get(numberSystem);
-    if (params === undefined) {
-      params = this.build(numberSystem);
-      this.numberParamsCache.set(numberSystem, params);
-    }
-    return params;
-  }
-
   protected build(numberSystemName: NumberSystemName): NumberParams {
     const info = this.internals.schema.Numbers.numberSystem(numberSystemName);
     const currencySpacing = info.currencyFormats.currencySpacing;
@@ -87,12 +80,16 @@ export class NumberParamsCache {
     const standardRaw = info.decimalFormats.standard(this.bundle);
     const standard = this.internals.numbers.getNumberPattern(standardRaw, false);
 
-    // Decimal digits for the number system
-    const digits = numericNumberingDigits[numberSystemName];
+    const numberSystem: NumericNumberSystem = {
+      type: 'numeric',
+      digits: numericNumberingDigits[numberSystemName]
+    };
 
     return {
       numberSystemName,
-      digits,
+      numberSystem,
+      digits: numericNumberingDigits[numberSystemName],
+      latinDigits: numericNumberingDigits.latn,
       symbols: info.symbols(this.bundle),
       minimumGroupingDigits: Number(this.internals.schema.Numbers.minimumGroupingDigits(this.bundle)),
       primaryGroupingSize: standard.priGroup,

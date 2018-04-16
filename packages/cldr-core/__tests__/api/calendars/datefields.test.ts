@@ -1,5 +1,5 @@
 import { RelativeTimeFieldType, RelativeTimeWidthType } from '@phensley/cldr-schema';
-import { EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
+import { languageBundle } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
 import { Decimal, ZonedDateTime } from '../../../src/types';
@@ -15,10 +15,13 @@ const LOS_ANGELES = 'America/Los_Angeles';
 const INTERNALS = new InternalsImpl();
 
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (bundle: Bundle) => new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
+const calendarsApi = (tag: string) => {
+  const bundle = languageBundle(tag);
+  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
+};
 
 test('relative time', () => {
-  const api = calendarsApi(EN);
+  const api = calendarsApi('en');
   let s: string;
 
   s = api.formatRelativeTimeField(1, 'hour');
@@ -66,7 +69,7 @@ test('relative time', () => {
 
 test('relative time 2', () => {
   // German for -2 and +2 days
-  const api = calendarsApi(DE);
+  const api = calendarsApi('de');
   let s: string;
 
   s = api.formatRelativeTimeField('-3', 'day');
@@ -92,7 +95,7 @@ test('relative time 2', () => {
 });
 
 test('relative time options', () => {
-  const api = calendarsApi(EN);
+  const api = calendarsApi('en');
   let s: string;
 
   s = api.formatRelativeTimeField(new Decimal('-3.2'), 'week');
@@ -123,7 +126,7 @@ test('relative time options', () => {
 });
 
 test('relative time locales', () => {
-  let api = calendarsApi(ES);
+  let api = calendarsApi('es');
   let s: string;
 
   s = api.formatRelativeTimeField(1, 'day');
@@ -132,7 +135,7 @@ test('relative time locales', () => {
   s = api.formatRelativeTimeField(-1, 'week');
   expect(s).toEqual('la semana pasada');
 
-  api = calendarsApi(DE);
+  api = calendarsApi('de');
   s = api.formatRelativeTimeField(1, 'day');
   expect(s).toEqual('morgen');
 

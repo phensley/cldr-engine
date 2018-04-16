@@ -28,6 +28,5 @@ export {
   ScriptIdType,
   UnitFormatOptions,
   UnitLength,
-  UnitType,
-  ZonedDateTime
+  UnitType
 } from '@phensley/cldr-core';

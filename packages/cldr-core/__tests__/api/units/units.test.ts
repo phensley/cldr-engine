@@ -1,22 +1,24 @@
-import { AR, EN, EN_GB, ES, ES_419, DE, FR, LT, SR, ZH } from '../../_helpers';
+import { languageBundle } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import { Bundle, InternalsImpl, PrivateApiImpl, Quantity, UnitsImpl } from '../../../src';
 import { Part } from '../../../src/types';
 
 const INTERNALS = new InternalsImpl();
 
-const unitsApi = (bundle: Bundle) =>
-  new UnitsImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
+const unitsApi = (tag: string) => {
+  const bundle = languageBundle(tag);
+  return new UnitsImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
+};
 
 test('display name', () => {
-  const api = unitsApi(EN);
+  const api = unitsApi('en');
 
   expect(api.getUnitDisplayName('g-force')).toEqual('g-force');
   expect(api.getUnitDisplayName('meter-per-second')).toEqual('meters per second');
 });
 
 test('significant', () => {
-  const api = unitsApi(EN);
+  const api = unitsApi('en');
   let s: string;
 
   s = api.formatQuantity({ value: '12345.6789', unit: 'mile' }, { maximumSignificantDigits: 3 });
@@ -24,7 +26,7 @@ test('significant', () => {
 });
 
 test('number systems', () => {
-  let api = unitsApi(AR);
+  let api = unitsApi('ar');
   let s: string;
 
   s = api.formatQuantity({ value: '123', unit: 'meter' });
@@ -33,7 +35,7 @@ test('number systems', () => {
   s = api.formatQuantity({ value: '123', unit: 'meter' }, { nu: 'latn' });
   expect(s).toEqual('123 مترًا');
 
-  api = unitsApi(ZH);
+  api = unitsApi('zh');
 
   s = api.formatQuantity({ value: '123', unit: 'meter' }, { nu: 'native' });
   expect(s).toEqual('一二三米');
@@ -52,7 +54,7 @@ test('number systems', () => {
 });
 
 test('format string', () => {
-  const api = unitsApi(EN);
+  const api = unitsApi('en');
   let s: string;
 
   s = api.formatQuantity({ value: '123', unit: 'meter'});
@@ -73,7 +75,7 @@ test('format string', () => {
 });
 
 test('unit lengths', () => {
-  const api = unitsApi(EN);
+  const api = unitsApi('en');
   let s: string;
 
   const q: Quantity = { value: '1', unit: 'meter' };
@@ -92,7 +94,7 @@ test('unit lengths', () => {
 });
 
 test('format parts', () => {
-  const api = unitsApi(EN);
+  const api = unitsApi('en');
   let p: Part[];
 
   p = api.formatQuantityToParts({ value: '123', unit: 'meter' });
@@ -113,7 +115,7 @@ test('format parts', () => {
 });
 
 test('format sequence string', () => {
-  const api = unitsApi(EN);
+  const api = unitsApi('en');
   let s: string;
   let u: Quantity[];
 
@@ -154,7 +156,7 @@ test('format sequence string', () => {
 });
 
 test('format sequence parts', () => {
-  const api = unitsApi(EN);
+  const api = unitsApi('en');
   let p: Part[];
   let u: Quantity[];
 

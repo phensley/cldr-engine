@@ -1,5 +1,4 @@
-import { ZonedDateTime } from '../../types';
-import { Constants } from './constants';
+import { CalendarConstants } from './constants';
 import { CalendarType, CalendarDate } from './calendar';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
@@ -13,7 +12,7 @@ export class GregorianDate extends CalendarDate {
     super(type, epoch, zoneId, firstDay, minDays);
 
     const f = this._fields;
-    if (f[DateField.JULIAN_DAY] >= Constants.JD_GREGORIAN_CUTOVER) {
+    if (f[DateField.JULIAN_DAY] >= CalendarConstants.JD_GREGORIAN_CUTOVER) {
       computeGregorianFields(f);
     } else {
       // We use Julian calendar for dates before the Gregorian cutover
@@ -35,15 +34,15 @@ export class GregorianDate extends CalendarDate {
     return this._toString('Gregorian');
   }
 
-  static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): GregorianDate {
-    return new GregorianDate(CalendarType.GREGORIAN, epoch, zoneId, firstDay, minDays);
+  static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number = 1, minDays: number = 1): GregorianDate {
+    return new GregorianDate('gregory', epoch, zoneId, firstDay, minDays);
   }
 
   protected monthStart(eyear: number, month: number, useMonth: boolean): number {
     let isLeap = eyear % 4 === 0;
     const y = eyear - 1;
-    let jd = 365 * y + floor(y / 4) + (Constants.JD_GREGORIAN_EPOCH - 3);
-    if (eyear >= Constants.JD_GREGORIAN_CUTOVER_YEAR) {
+    let jd = 365 * y + floor(y / 4) + (CalendarConstants.JD_GREGORIAN_EPOCH - 3);
+    if (eyear >= CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR) {
       isLeap = isLeap && ((eyear % 100 !== 0) || (eyear % 400 === 0));
       jd += floor(y / 400) - floor(y / 100) + 2;
     }
@@ -75,7 +74,7 @@ const MONTH_COUNT = [
  * Compute fields for dates on or after the Gregorian cutover.
  */
 const computeGregorianFields = (f: number[]): void => {
-  const ged = f[DateField.JULIAN_DAY] - Constants.JD_GREGORIAN_EPOCH;
+  const ged = f[DateField.JULIAN_DAY] - CalendarConstants.JD_GREGORIAN_EPOCH;
   const rem: [number] = [0];
   const n400 = floorDiv(ged, 146097, rem);
   const n100 = floorDiv(rem[0], 36524, rem);
@@ -111,7 +110,7 @@ const computeGregorianFields = (f: number[]): void => {
  * date on the proleptic Julian calendar, with leap years every 4 years.
  */
 const computeJulianFields = (f: number[]): void => {
-  const jed = f[DateField.JULIAN_DAY] - (Constants.JD_GREGORIAN_EPOCH - 2);
+  const jed = f[DateField.JULIAN_DAY] - (CalendarConstants.JD_GREGORIAN_EPOCH - 2);
   const eyear = floor((4 * jed + 1464) / 1461);
   const jan1 = 365 * (eyear - 1) + floor((eyear - 1) / 4);
   const doy = jed - jan1;

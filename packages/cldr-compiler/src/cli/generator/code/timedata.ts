@@ -38,6 +38,6 @@ export const getTimeData = (data: any): Code[] => {
   code += '};\n';
 
   return [
-    Code.core(['api', 'private', 'calendars', 'autogen.timedata.ts'], code)
+    Code.core(['internals', 'calendars', 'autogen.timedata.ts'], code)
   ];
 };

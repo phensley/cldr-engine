@@ -1,5 +1,5 @@
 import { CurrencyType } from '@phensley/cldr-schema';
-import { EN, EN_GB, ES_419, FR, DE, KM, ZH } from '../../_helpers';
+import { languageBundle } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import { Part } from '../../../src/types';
 import {
@@ -15,12 +15,14 @@ import {
 
 const INTERNALS = new InternalsImpl();
 
-const numbersApi = (bundle: Bundle) =>
-  new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
+const numbersApi = (tag: string) => {
+  const bundle = languageBundle(tag);
+  return new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
+};
 
 test('currency unknown style', () => {
   const opts: CurrencyFormatOptions = { style: 'UNKNOWN' as CurrencyFormatStyleType };
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let actual: string;
 
   actual = api.formatCurrency('12345.234', 'USD', opts);
@@ -29,7 +31,7 @@ test('currency unknown style', () => {
 
 test('currency', () => {
   const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let s: string;
 
   s = api.formatCurrency('12345.234', 'USD', opts);
@@ -42,7 +44,7 @@ test('currency', () => {
 
 test('currency accounting', () => {
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
-  let api = numbersApi(EN);
+  let api = numbersApi('en');
   let s: string;
 
   s = api.formatCurrency('-12345.6789', 'EUR', opts);
@@ -54,7 +56,7 @@ test('currency accounting', () => {
   s = api.formatCurrency('-12345.6789', 'JPY', opts);
   expect(s).toEqual('(¥12,346)');
 
-  api = numbersApi(DE);
+  api = numbersApi('de');
   s = api.formatCurrency('-12345.6789', 'EUR', opts);
   expect(s).toEqual('-12.345,68 €');
 
@@ -64,7 +66,7 @@ test('currency accounting', () => {
   s = api.formatCurrency('-12345.6789', 'JPY', opts);
   expect(s).toEqual('-12.346 ¥');
 
-  api = numbersApi(ES_419);
+  api = numbersApi('es-419');
   s = api.formatCurrency('-12345.6789', 'EUR', opts);
   expect(s).toEqual('-EUR 12,345.68');
 
@@ -77,7 +79,7 @@ test('currency accounting', () => {
 
 test('currency name', () => {
   const opts: CurrencyFormatOptions = { style: 'name', group: true };
-  let api = numbersApi(EN);
+  let api = numbersApi('en');
   let s: string;
 
   s = api.formatCurrency('-12345.6789', 'EUR', opts);
@@ -89,7 +91,7 @@ test('currency name', () => {
   s = api.formatCurrency('-12345.6789', 'JPY', opts);
   expect(s).toEqual('-12,346 Japanese yen');
 
-  api = numbersApi(DE);
+  api = numbersApi('de');
   s = api.formatCurrency('-12345.6789', 'EUR', opts);
   expect(s).toEqual('-12.345,68 Euro');
 
@@ -99,7 +101,7 @@ test('currency name', () => {
   s = api.formatCurrency('-12345.6789', 'JPY', opts);
   expect(s).toEqual('-12.346 Japanische Yen');
 
-  api = numbersApi(ES_419);
+  api = numbersApi('es-419');
   s = api.formatCurrency('-12345.6789', 'EUR', opts);
   expect(s).toEqual('-12,345.68 euros');
 
@@ -112,7 +114,7 @@ test('currency name', () => {
 
 test('currency short', () => {
   let opts: CurrencyFormatOptions = { style: 'short', group: true };
-  let e = numbersApi(EN);
+  let e = numbersApi('en');
   let s: string;
 
   s = e.formatCurrency('-12345.6789', 'EUR', opts);
@@ -151,7 +153,7 @@ test('currency short', () => {
   expect(s).toEqual('$1M');
 
   opts = { style: 'short', group: true };
-  e = numbersApi(DE);
+  e = numbersApi('de');
   s = e.formatCurrency('-12345.6789', 'EUR', opts);
   expect(s).toEqual('-12 Tsd. €');
 
@@ -161,7 +163,7 @@ test('currency short', () => {
   s = e.formatCurrency('-12345.6789', 'JPY', opts);
   expect(s).toEqual('-12 Tsd. ¥');
 
-  e = numbersApi(ES_419);
+  e = numbersApi('es-419');
   s = e.formatCurrency('-12345.6789', 'EUR', opts);
   expect(s).toEqual('-12 mil EUR');
 
@@ -171,7 +173,7 @@ test('currency short', () => {
   s = e.formatCurrency('-12345.6789', 'JPY', opts);
   expect(s).toEqual('-12 mil JPY');
 
-  e = numbersApi(ZH);
+  e = numbersApi('zh');
   s = e.formatCurrency('999999.987', 'USD', opts);
   // TODO: support algorithmic numbering for chinese finance
   expect(s).toEqual('US$100万');
@@ -179,7 +181,7 @@ test('currency short', () => {
 
 test('currency fractions', () => {
   const opts: CurrencyFormatOptions = { style: 'symbol' };
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let s: string;
 
   s = api.formatCurrency('12345.019999', 'JPY', opts);
@@ -191,7 +193,7 @@ test('currency fractions', () => {
 });
 
 test('currency spacing', () => {
-  let api = numbersApi(EN);
+  let api = numbersApi('en');
   let opts: CurrencyFormatOptions;
   let s: string;
 
@@ -206,7 +208,7 @@ test('currency spacing', () => {
   s = api.formatCurrency('12345.234', 'AUD', opts);
   expect(s).toEqual('$12,345.23');
 
-  api = numbersApi(DE);
+  api = numbersApi('de');
   opts.symbolWidth = 'default';
 
   s = api.formatCurrency('12345.234', 'BAD', opts);
@@ -215,7 +217,7 @@ test('currency spacing', () => {
   s = api.formatCurrency('12345.234', 'USD', opts);
   expect(s).toEqual('12.345,23\u00a0$');
 
-  api = numbersApi(KM);
+  api = numbersApi('km');
   s = api.formatCurrency('12345.234', 'USD', opts);
   expect(s).toEqual('12.345,23$');
 
@@ -228,7 +230,7 @@ test('currency spacing', () => {
 });
 
 test('currency parts', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
   let p: Part[];
 
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
@@ -266,7 +268,7 @@ test('currency parts', () => {
 });
 
 test('currency parts spacing', () => {
-  let api = numbersApi(EN);
+  let api = numbersApi('en');
   let s: Part[];
 
   s = api.formatCurrencyToParts('12345.234', 'BAD', { group: true });
@@ -280,7 +282,7 @@ test('currency parts spacing', () => {
     { type: 'digits', value: '23' }
   ]);
 
-  api = numbersApi(KM);
+  api = numbersApi('km');
   s = api.formatCurrencyToParts('12345.234', 'BAD', { group: true, nu: 'native' });
   expect(s).toEqual([
     { type: 'digits', value: '១២' },
@@ -315,7 +317,7 @@ test('currency parts spacing', () => {
 // });
 
 test('currency symbols', () => {
-  const api = numbersApi(EN);
+  const api = numbersApi('en');
 
   let s = api.getCurrencySymbol('USD');
   expect(s).toEqual('$');
@@ -340,7 +342,7 @@ test('currency symbols', () => {
 });
 
 test('currency display names', () => {
-  let api = numbersApi(EN);
+  let api = numbersApi('en');
 
   let s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('US Dollar');
@@ -354,15 +356,15 @@ test('currency display names', () => {
   s = api.getCurrencyPluralName('USD', 'other');
   expect(s).toEqual('US dollars');
 
-  api = numbersApi(EN_GB);
+  api = numbersApi('en-GB');
   s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('US Dollar');
 
-  api = numbersApi(ES_419);
+  api = numbersApi('es-419');
   s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('dólar estadounidense');
 
-  api = numbersApi(FR);
+  api = numbersApi('fr');
   s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('dollar des États-Unis');
 });

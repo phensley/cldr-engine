@@ -75,6 +75,11 @@ export interface PluralKeysSpec {
   readonly kind: 'pluralkeys';
 }
 
+export interface PointSpec {
+  readonly kind: 'point';
+  name: string;
+}
+
 /**
  * Map a single field.
  */
@@ -92,7 +97,8 @@ export interface FieldsSpec {
   fields: (string | [string, string])[];
 }
 
-export type Spec = PluralSpec | AltSpec | KeysSpec | AltKeysSpec | FieldSpec | FieldsSpec | PluralKeysSpec;
+export type Spec = PluralSpec | AltSpec | KeysSpec | AltKeysSpec |
+  FieldSpec | FieldsSpec | PluralKeysSpec | PointSpec;
 
 /**
  * Apply the field mapping specs to the object, converting hierarchy of keys
@@ -167,6 +173,19 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
           for (const row of tabular(rest, v)) {
             res.push(pfx.concat(row));
           }
+        }
+      }
+      break;
+    }
+
+    case 'point':
+    {
+      const pfx = [spec.name];
+      if (rest.length === 0) {
+        res.push(pfx);
+      } else {
+        for (const row of tabular(rest, obj)) {
+          res.push(pfx.concat(row));
         }
       }
       break;
@@ -287,6 +306,11 @@ export class MappingBuilder {
     return this;
   }
 
+  point(name: string): this {
+    this.specs.push({ kind: 'point', name });
+    return this;
+  }
+
   alt(field: string, replace?: string): this {
     this.specs.push({ kind: 'alt', keys: altKeys(field, replace) });
     return this;
@@ -325,6 +349,10 @@ export class Mappings {
 
   static pluralKeys(): MappingBuilder {
     return new MappingBuilder().pluralKeys();
+  }
+
+  static point(name: string): MappingBuilder {
+    return new MappingBuilder().point(name);
   }
 
   static alt(field: string, replace?: string): MappingBuilder {
@@ -370,12 +398,14 @@ export const rewire = (res: any, path: string[]): void => {
  * Each mapping will convert an object into tabular form, reposition the
  * keys, then convert back to a tree.
  */
-export const applyMappings = (root: any, mappings: Mapping[]): any => {
+export const applyMappings = (root: any, mappings: Mapping[], debug = false): any => {
   const result: any = {};
   for (const m of mappings) {
     for (let row of tabular(m.specs, root)) {
       row = m.remap.map(i => row[i]);
-      // console.log('>', JSON.stringify(row));
+      if (debug) {
+        console.log('>', JSON.stringify(row));
+      }
       rewire(result, row);
     }
   }

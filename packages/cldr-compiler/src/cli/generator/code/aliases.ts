@@ -24,7 +24,7 @@ export const getAliases = (data: any): Code[] => {
   code = HEADER + NOLINT_MAXLINE;
   code += `export const zoneAliasRaw = '${zones}';\n`;
 
-  result.push(Code.core(['types', 'datetime', 'autogen.aliases.ts'], code));
+  result.push(Code.core(['systems', 'calendars', 'autogen.aliases.ts'], code));
 
   return result;
 };

@@ -1,10 +1,11 @@
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
-import { Calendars, CalendarDate, CalendarType, GregorianDate } from '../../../src/systems/calendars';
-import { Constants } from '../../../src/systems/calendars/constants';
+import { CalendarDate, CalendarType, GregorianDate } from '../../../src/systems/calendars';
+import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
 const make = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
 const NEW_YORK = 'America/New_York';
+const LOS_ANGELES = 'America/Los_Angeles';
 const PARIS = 'Europe/Paris';
 
 test('gregorian date', () => {
@@ -17,8 +18,11 @@ test('gregorian date', () => {
   // 7:59 PM NY time
   d = make(n, NEW_YORK);
   expect(d.toString()).toEqual('GregorianDate(epoch=1523491199123, zone=America/New_York)');
-  expect(d.type()).toEqual(CalendarType.GREGORIAN);
+  expect(d.type()).toEqual('gregory');
   expect(d.unixEpoch()).toEqual(1523491199123);
+
+  expect(d.firstDayOfWeek()).toEqual(DayOfWeek.SUNDAY);
+  expect(d.minDaysInFirstWeek()).toEqual(1);
 
   expect(d.julianDay()).toEqual(2458220);
   expect(d.era()).toEqual(1);
@@ -93,9 +97,9 @@ test('min / max date', () => {
   let d: GregorianDate;
   let n: number;
 
-  const unix = Constants.JD_UNIX_EPOCH;
+  const unix = CalendarConstants.JD_UNIX_EPOCH;
 
-  n = (unix - 1) * Constants.ONE_DAY_MS;
+  n = (unix - 1) * CalendarConstants.ONE_DAY_MS;
   d = make(-n, NEW_YORK);
   expect(d.era()).toEqual(0);
   expect(d.extendedYear()).toEqual(-4712);
@@ -104,9 +108,9 @@ test('min / max date', () => {
   expect(d.dayOfMonth()).toEqual(1);
 
   // Attempting to represent Dec 31 4714 BC
-  expect(() => make(-n - Constants.ONE_DAY_MS, NEW_YORK)).toThrowError();
+  expect(() => make(-n - CalendarConstants.ONE_DAY_MS, NEW_YORK)).toThrowError();
 
-  n = (Constants.JD_MAX - unix + 1) * Constants.ONE_DAY_MS;
+  n = (CalendarConstants.JD_MAX - unix + 1) * CalendarConstants.ONE_DAY_MS;
   d = make(n, NEW_YORK);
   expect(d.era()).toEqual(1);
   expect(d.extendedYear()).toEqual(8652);
@@ -115,11 +119,11 @@ test('min / max date', () => {
   expect(d.dayOfMonth()).toEqual(31);
 
   // Attempt to represent Jan  1 8653 AD
-  expect(() => make(n + Constants.ONE_DAY_MS, NEW_YORK)).toThrowError();
+  expect(() => make(n + CalendarConstants.ONE_DAY_MS, NEW_YORK)).toThrowError();
 });
 
 test('leap years 1584-1808', () => {
-  const oneYear = Constants.ONE_DAY_MS * 365;
+  const oneYear = CalendarConstants.ONE_DAY_MS * 365;
   let base: number;
   let d: GregorianDate;
 
@@ -144,7 +148,7 @@ test('leap years 1584-1808', () => {
 });
 
 test('leap years 1982-2208', () => {
-  const oneYear = Constants.ONE_DAY_MS * 365;
+  const oneYear = CalendarConstants.ONE_DAY_MS * 365;
   let base: number;
   let d: GregorianDate;
 
@@ -180,21 +184,78 @@ test('field of greatest difference', () => {
 
   expect(base.fieldOfGreatestDifference(end)).toEqual('s');
 
-  end = make(n + (Constants.ONE_MIN_MS * 5), NEW_YORK);
-  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('m');
+  // end = make(n + (CalendarConstants.ONE_MINUTE_MS * 5), NEW_YORK);
+  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('m');
 
-  end = make(n + (Constants.ONE_HOUR_MS * 5), NEW_YORK);
-  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('H');
+  // end = make(n + (CalendarConstants.ONE_HOUR_MS * 5), NEW_YORK);
+  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('H');
 
-  end = make(n + (Constants.ONE_HOUR_MS * 15), NEW_YORK);
-  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('a');
+  // end = make(n + (CalendarConstants.ONE_HOUR_MS * 15), NEW_YORK);
+  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('a');
 
-  end = make(n + (Constants.ONE_DAY_MS * 2), NEW_YORK);
-  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('d');
+  // end = make(n + (CalendarConstants.ONE_DAY_MS * 2), NEW_YORK);
+  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('d');
 
-  end = make(n + (Constants.ONE_DAY_MS * 45), NEW_YORK);
-  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('M');
+  // end = make(n + (CalendarConstants.ONE_DAY_MS * 45), NEW_YORK);
+  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('M');
 
-  end = make(n + (Constants.ONE_DAY_MS * 450), NEW_YORK);
-  expect(Calendars.fieldOfGreatestDifference(base, end)).toEqual('y');
+  // end = make(n + (CalendarConstants.ONE_DAY_MS * 450), NEW_YORK);
+  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('y');
+});
+
+test('week of month', () => {
+  // Sunday, January 1, 1984 6:50:41 PM UTC
+  const base = 441831041000;
+  const day = CalendarConstants.ONE_DAY_MS;
+  let d: CalendarDate;
+
+  d = make(base, NEW_YORK);
+  expect(d.month()).toEqual(0);
+  expect(d.weekOfMonth()).toEqual(1);
+
+  d = make(base + (6 * day), NEW_YORK);
+  expect(d.weekOfMonth()).toEqual(1);
+
+  d = make(base + (7 * day), NEW_YORK);
+  expect(d.weekOfMonth()).toEqual(2);
+
+  d = make(base + (13 * day), NEW_YORK);
+  expect(d.weekOfMonth()).toEqual(2);
+
+  d = make(base + (14 * day), NEW_YORK);
+  expect(d.weekOfMonth()).toEqual(3);
+
+  d = make(base + (20 * day), NEW_YORK);
+  expect(d.weekOfMonth()).toEqual(3);
+
+  d = make(base + (21 * day), NEW_YORK);
+  expect(d.dayOfMonth()).toEqual(22);
+  expect(d.weekOfMonth()).toEqual(4);
+
+  d = make(base + (28 * day), NEW_YORK);
+  expect(d.dayOfMonth()).toEqual(29);
+  expect(d.weekOfMonth()).toEqual(5);
+
+  d = make(base + (30 * day), NEW_YORK);
+  expect(d.dayOfMonth()).toEqual(31);
+  expect(d.weekOfMonth()).toEqual(5);
+
+  d = make(base + (32 * day), NEW_YORK);
+  expect(d.month()).toEqual(1);
+  expect(d.dayOfMonth()).toEqual(2);
+  expect(d.weekOfMonth()).toEqual(1);
+});
+
+test('week of year', () => {
+  const base = 1520751625000;
+  let d: CalendarDate;
+
+  d = GregorianDate.fromUnixEpoch(base, LOS_ANGELES, 1, 1);
+  expect(d.dayOfWeek()).toEqual(7); // saturday
+  expect(d.weekOfYear()).toEqual(10);
+
+  d = GregorianDate.fromUnixEpoch(base, NEW_YORK, 1, 1);
+  expect(d.dayOfWeek()).toEqual(1); // sunday
+  expect(d.weekOfYear()).toEqual(11);
+
 });

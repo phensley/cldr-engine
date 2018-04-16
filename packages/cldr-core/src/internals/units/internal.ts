@@ -7,6 +7,7 @@ import {
   UnitType
 } from '@phensley/cldr-schema';
 
+import { Internals } from '../internals';
 import { NumberInternals, NumberRenderer, UnitInternals, WrapperInternals } from '..';
 import { NumberContext } from '../numbers/context';
 import { Quantity, UnitFormatOptions } from '../../common';
@@ -20,14 +21,10 @@ export class UnitsInternalImpl implements UnitInternals {
   readonly numbersSchema: NumbersSchema;
   readonly unitsSchema: UnitsSchema;
 
-  constructor(
-    readonly root: Schema,
-    readonly numbers: NumberInternals,
-    readonly wrapper: WrapperInternals,
-    readonly cacheSize: number = 50
-  ) {
-    this.unitsSchema = root.Units;
-    this.numbersSchema = root.Numbers;
+  constructor(readonly internals: Internals) {
+    const schema = internals.schema;
+    this.unitsSchema = schema.Units;
+    this.numbersSchema = schema.Numbers;
   }
 
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string {
@@ -38,14 +35,14 @@ export class UnitsInternalImpl implements UnitInternals {
     options: UnitFormatOptions, params: NumberParams): T {
 
     const n = coerceDecimal(q.value);
-    const [num, plural] = this.numbers.formatDecimal(bundle, renderer, n, options, params);
+    const [num, plural] = this.internals.numbers.formatDecimal(bundle, renderer, n, options, params);
     if (q.unit === undefined) {
       return num;
     }
 
     const info = this.getUnitInfo(options.length || '');
     const pattern = info.unitPattern.get(bundle, plural, q.unit);
-    return renderer.wrap(this.wrapper, pattern, num);
+    return renderer.wrap(this.internals.wrapper, pattern, num);
   }
 
   getUnitInfo(length: string): UnitInfo {

@@ -8,7 +8,7 @@ test('load missing', () => {
 test('main', () => {
   const en = getMain('en-001');
   expect(en.Numbers.numberSystem.latn.currencyFormats.standard).toEqual('¤#,##0.00');
-  expect(en.Gregorian.format.weekdays.wide.sun).toEqual('Sunday');
+  expect(en.Gregorian.format.weekdays.wide['1']).toEqual('Sunday');
 });
 
 test('supplemental', () => {

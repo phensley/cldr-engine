@@ -1,3 +1,4 @@
+import { DayPeriodType } from '@phensley/cldr-schema';
 import { base100decode } from '../../resource/encoding';
 import { Bundle } from '../../resource';
 import { Cache } from '../../utils/cache';
@@ -7,7 +8,7 @@ import { dayPeriodKeys, dayPeriodRules } from './autogen.dayperiods';
 
 interface Rule {
   minutes: number[];
-  keys: string[];
+  keys: DayPeriodType[];
 }
 
 const parseRule = (raw: string): Rule => {
@@ -25,7 +26,7 @@ export class DayPeriodRules {
     this.cache = new Cache(parseRule, cacheSize);
   }
 
-  get(bundle: Bundle, minutes: number): string | undefined {
+  get(bundle: Bundle, minutes: number): DayPeriodType | undefined {
     const raw = dayPeriodRules[bundle.languageRegion()] || dayPeriodRules[bundle.language()];
     if (raw === undefined) {
       return undefined;

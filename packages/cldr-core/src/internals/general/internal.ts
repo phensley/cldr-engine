@@ -11,6 +11,7 @@ import {
   RegionIdType
 } from '@phensley/cldr-schema';
 
+import { Internals } from '../../internals';
 import { Bundle } from '../../resource';
 import { ListPatternType } from '../../common';
 import { Part } from '../../types';
@@ -22,14 +23,11 @@ export class GeneralInternalsImpl implements GeneralInternals {
   protected listPatterns: ListPatternsSchema;
   protected names: NamesSchema;
 
-  constructor(
-    readonly root: Schema,
-    readonly wrapper: WrapperInternals,
-    readonly cacheSize: number = 50) {
-
-    this.layout = root.Layout;
-    this.names = root.Names;
-    this.listPatterns = root.ListPatterns;
+  constructor(readonly internals: Internals) {
+    const schema = internals.schema;
+    this.layout = schema.Layout;
+    this.names = schema.Names;
+    this.listPatterns = schema.ListPatterns;
   }
 
   characterOrder(bundle: Bundle): string {
@@ -46,16 +44,17 @@ export class GeneralInternalsImpl implements GeneralInternals {
     if (len < 2) {
       return len === 1 ? items[0] : '';
     }
+    const wrapper = this.internals.wrapper;
     if (len === 2) {
-      return this.wrapper.format(pattern.two, items);
+      return wrapper.format(pattern.two, items);
     }
     // We have at least 3 items. Format from tail to head.
-    let res = this.wrapper.format(pattern.end, [items[len - 2], items[len - 1]]);
+    let res = wrapper.format(pattern.end, [items[len - 2], items[len - 1]]);
     len -= 2;
     while (len-- > 1) {
-      res = this.wrapper.format(pattern.middle, [items[len], res]);
+      res = wrapper.format(pattern.middle, [items[len], res]);
     }
-    return this.wrapper.format(pattern.start, [items[0], res]);
+    return wrapper.format(pattern.start, [items[0], res]);
   }
 
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[] {
@@ -82,17 +81,18 @@ export class GeneralInternalsImpl implements GeneralInternals {
       return len === 1 ? items[0] : [];
     }
 
+    const wrapper = this.internals.wrapper;
     if (len === 2) {
-      return this.wrapper.formatParts(pattern.two, [items[0], items[1]]);
+      return wrapper.formatParts(pattern.two, [items[0], items[1]]);
     }
 
     // We have at least 3 items. Format from tail to head.
-    let res = this.wrapper.formatParts(pattern.end, [items[len - 2], items[len - 1]]);
+    let res = wrapper.formatParts(pattern.end, [items[len - 2], items[len - 1]]);
     len -= 2;
     while (len-- > 1) {
-      res = this.wrapper.formatParts(pattern.middle, [items[len], res]);
+      res = wrapper.formatParts(pattern.middle, [items[len], res]);
     }
-    return this.wrapper.formatParts(pattern.start, [items[0], res]);
+    return wrapper.formatParts(pattern.start, [items[0], res]);
   }
 
   protected selectListPattern(bundle: Bundle, type: ListPatternType): ListPattern {

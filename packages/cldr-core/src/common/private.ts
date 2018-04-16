@@ -2,12 +2,16 @@ import { CurrencySpacing, NumberSymbols, NumberSystemName } from '@phensley/cldr
 import { NumberSystem } from '../systems';
 import { DateTimeNode } from '../parsing/patterns/date';
 
+// TODO: move these
+
 /**
  * @internal
  */
 export interface NumberParams {
   numberSystemName: NumberSystemName;
+  numberSystem: NumberSystem;
   digits: string[];
+  latinDigits: string[];
   symbols: NumberSymbols;
   minimumGroupingDigits: number;
   primaryGroupingSize: number;

@@ -4,12 +4,18 @@ import { LRU } from './lru';
  * Links an arrow function to an LRU cache. The function converts
  * a string to a value of type T. The string itself is used as
  * the cache key.
+ *
+ * Examples:
+ *  * Caching a number or date pattern. The cache key is the string
+ *    representation of the pattern.
+ *  * Caching any object that is expensive to create, where the cache
+ *    key identifies the type of object to cache.
  */
 export class Cache<T> {
 
   private storage: LRU<string, T>;
 
-  constructor(private parser: (s: string) => T, capacity: number) {
+  constructor(private builder: (s: string) => T, capacity: number) {
     this.storage = new LRU(capacity);
   }
 
@@ -18,12 +24,12 @@ export class Cache<T> {
   }
 
   get(raw: string): T {
-    let pattern = this.storage.get(raw);
-    if (pattern === undefined) {
-      pattern = this.parser(raw);
-      this.storage.set(raw, pattern);
+    let o = this.storage.get(raw);
+    if (o === undefined) {
+      o = this.builder(raw);
+      this.storage.set(raw, o);
     }
-    return pattern;
+    return o;
   }
 
 }

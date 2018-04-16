@@ -9,42 +9,22 @@ import {
   pluralCategory
 } from '@phensley/cldr-schema';
 
-import { coerceDecimal, Decimal, DecimalArg, DecimalConstants, ZonedDateTime } from '../../types';
+import { coerceDecimal, Decimal, DecimalArg, DecimalConstants } from '../../types';
 import { DateFieldInternals, Internals, PluralInternals, WrapperInternals } from '..';
 import { RelativeTimeFormatOptions } from '../../common';
 import { Bundle } from '../../resource';
 
-// TODO: expose a method to calculate field difference with different options
-// export const fieldDifference = (a: ZonedDateTime, b: ZonedDateTime): [DateFieldType, number] => {
-//   if (a.zoneId() !== b.zoneId()) {
-//     b = new ZonedDateTime(b.epochUTC(), a.zoneId());
-//   }
-
-//   let diff = a.getYear() - b.getYear();
-//   if (diff !== 0) {
-//     return ['year', diff];
-//   }
-
-//   // TODO:
-//   // diff = a.getMonth() - b.getMonth();
-//   // if (diff !== 0) {
-
-//   // }
-
-//   diff = a.getSecond() - b.getSecond();
-//   return ['second', diff];
-// };
+// TODO: expose a method to calculate field difference with different options, e.g.
+// include weekdays
 
 export class DateFieldInternalsImpl implements DateFieldInternals {
 
   readonly relativeTimes: RelativeTimes;
 
   constructor(
-    readonly root: Schema,
-    readonly plurals: PluralInternals,
-    readonly wrapper: WrapperInternals
+    readonly internals: Internals
   ) {
-    this.relativeTimes = root.DateFields.relativeTimes;
+    this.relativeTimes = internals.schema.DateFields.relativeTimes;
   }
 
   formatRelativeTime(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType,
@@ -92,9 +72,9 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
 
     // Format a pluralized future / past.
     const operands = n.operands();
-    const plural = this.plurals.cardinal(bundle.language(), operands);
+    const plural = this.internals.plurals.cardinal(bundle.language(), operands);
     const arrow = negative ? format.past : format.future;
     const raw = arrow.get(bundle, plural, field);
-    return this.wrapper.format(raw, [n.toString()]);
+    return this.internals.wrapper.format(raw, [n.toString()]);
   }
 }

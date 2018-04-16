@@ -17,7 +17,7 @@ const encode = (map: MapType): string => {
   return raw;
 };
 
-const DAYS: MapType = { mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7 };
+const DAYS: MapType = { sun: 1, mon: 2, tue: 3, wed: 4, thu: 5, fri: 6, sat: 7 };
 
 export const getWeekData = (data: any): Code[] => {
   const minDays: MapType = {};

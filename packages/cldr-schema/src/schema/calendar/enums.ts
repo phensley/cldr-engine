@@ -66,14 +66,14 @@ export const [ Quarter, QuarterValues ] = makeKeyedEnum<string, QuarterType>([
   ['Q4', '4']
 ]);
 
-export type WeekdayType = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
+export type WeekdayType = '1' | '2' | '3' | '4' | '5' | '6' | '7';
 
 export const [ Weekday, WeekdayValues ] = makeKeyedEnum<string, WeekdayType>([
-  ['SUN', 'sun'],
-  ['MON', 'mon'],
-  ['TUE', 'tue'],
-  ['WED', 'wed'],
-  ['THU', 'thu'],
-  ['FRI', 'fri'],
-  ['SAT', 'sat']
+  ['SUN', '1'],
+  ['MON', '2'],
+  ['TUE', '3'],
+  ['WED', '4'],
+  ['THU', '5'],
+  ['FRI', '6'],
+  ['SAT', '7']
 ]);
