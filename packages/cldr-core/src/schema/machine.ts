@@ -104,21 +104,21 @@ class Generator {
   }
 }
 
-const time = (n: [number, number]) =>
-  new Decimal(n[0]).add(new Decimal(n[1]).movePoint(-9));
+// const time = (n: [number, number]) =>
+//   new Decimal(n[0]).add(new Decimal(n[1]).movePoint(-9));
 
-const elapsed = (start: [number, number]): string => {
-  const end = process.hrtime();
-  return time(end).subtract(time(start)).movePoint(6).toString();
-};
+// const elapsed = (start: [number, number]): string => {
+//   const end = process.hrtime();
+//   return time(end).subtract(time(start)).movePoint(6).toString();
+// };
 
 // Capture construction times for top-level scopes.
-const times: [string, string][] = [];
-export const dumpTimes = () => {
-  for (const t of times) {
-    console.log(t[1], t[0]);
-  }
-};
+// const times: [string, string][] = [];
+// export const dumpTimes = () => {
+//   for (const t of times) {
+//     console.log(t[1], t[0]);
+//   }
+// };
 
 /**
  * Builds the schema accessor singleton.
@@ -146,14 +146,15 @@ export class SchemaBuilder {
         break;
       case 'scope':
       {
-        const s = process.hrtime();
+        // const s = process.hrtime();
         this.constructScope(obj, inst);
 
-        const cp = inst.identifier.charCodeAt(0);
-        if (cp >= 0x41 && cp <= 0x5a) {
-          const e = elapsed(s);
-          times.push([inst.identifier, e]);
-        }
+        // const cp = inst.identifier.charCodeAt(0);
+        // if (cp >= 0x41 && cp <= 0x5a) {
+        //   const e = elapsed(s);
+        //   times.push([inst.identifier, e]);
+        // }
+
         break;
       }
       case 'scopefield':
@@ -256,13 +257,11 @@ export class SchemaBuilder {
 
   private constructVector1<T extends string>(obj: any, inst: Vector1<T>): void {
     const offset = this.generator.vector1(inst.dim0.size);
-    // obj[inst.name] = vector1Arrow(offset, inst.dim0);
     obj[inst.name] = new Vector1Arrow(offset, inst.dim0);
   }
 
   private constructVector2<T extends string, S extends string>(obj: any, inst: Vector2<T, S>): void {
     const offset = this.generator.vector2(inst.dim0.size, inst.dim1.size);
-    // obj[inst.name] = vector2Arrow(offset, inst.dim0, inst.dim1);
     obj[inst.name] = new Vector2Arrow(offset, inst.dim0, inst.dim1);
   }
 }

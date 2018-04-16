@@ -481,10 +481,10 @@ export class DatePatternManager {
       const s = DateSkeleton.parse(k, this.preferredFlex, this.allowedFlex[0]);
       dm.add(s);
     }
-    for (const k of GregorianInfo.pluralAvailableFormats) {
-      const s = DateSkeleton.parse(k, this.preferredFlex, this.allowedFlex[0]);
-      dm.add(s);
-    }
+    // for (const k of GregorianInfo.pluralAvailableFormats) {
+    //   const s = DateSkeleton.parse(k, this.preferredFlex, this.allowedFlex[0]);
+    //   dm.add(s);
+    // }
 
     m = { matcher: dm, cache: new LRU(this.cacheSize) };
     this.dateMatchers.set(calendar, m);

@@ -1,86 +1,35 @@
-import { Alt, Plural } from '../enums';
-import { FieldArrow, FieldMapArrow, FieldMapIndexedArrow, ScopeArrow } from '../arrows';
-import { DateTimePatternFieldType, DayPeriodType, FormatWidthType, QuarterType, WeekdayType } from './enums';
+import { PluralType } from '../enums';
+import { FieldArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
+import {
+  DateTimePatternFieldType,
+  DayPeriodType,
+  EraWidthType,
+  FormatWidthType
+} from './enums';
 
-// Types common to all calendars
-
-export interface DayPeriodsFormat {
-  readonly abbreviated: FieldMapIndexedArrow<DayPeriodType, Alt>;
-  readonly narrow: FieldMapIndexedArrow<DayPeriodType, Alt>;
-  readonly wide: FieldMapIndexedArrow<DayPeriodType, Alt>;
-  readonly short: FieldMapIndexedArrow<DayPeriodType, Alt>;
-}
-
-export interface DayPeriodsFormats {
-  readonly format: DayPeriodsFormat;
-  readonly standAlone: DayPeriodsFormat;
-}
-
-export interface ErasFormat {
-  readonly names: FieldMapArrow<string>;
-  readonly abbr: FieldMapArrow<string>;
-  readonly narrow: FieldMapArrow<string>;
-}
-
-export interface MonthsFormat {
-  readonly abbreviated: FieldMapArrow<string>;
-  readonly narrow: FieldMapArrow<string>;
-  readonly wide: FieldMapArrow<string>;
-  readonly short: FieldMapArrow<string>;
-}
-
-export interface MonthsFormats {
-  readonly format: MonthsFormat;
-  readonly standAlone: MonthsFormat;
-}
-
-export interface QuartersFormat {
-  readonly abbreviated: FieldMapArrow<QuarterType>;
-  readonly narrow: FieldMapArrow<QuarterType>;
-  readonly wide: FieldMapArrow<QuarterType>;
-  readonly short: FieldMapArrow<QuarterType>;
-}
-
-export interface QuartersFormats {
-  readonly format: QuartersFormat;
-  readonly standAlone: QuartersFormat;
-}
-
-export interface WeekdaysFormat {
-  readonly abbreviated: FieldMapArrow<WeekdayType>;
-  readonly narrow: FieldMapArrow<WeekdayType>;
-  readonly wide: FieldMapArrow<WeekdayType>;
-  readonly short: FieldMapArrow<WeekdayType>;
-}
-
-export interface WeekdaysFormats {
-  readonly format: WeekdaysFormat;
-  readonly standAlone: WeekdaysFormat;
-}
-
+// TODO: add function to determine plural category based on skeleton and date
 export interface CalendarInfo {
   eras: string[];
   months: string[];
   availableFormats: string[];
-  pluralAvailableFormats: string[];
   intervalFormats: string[];
 }
 
-export interface IntervalFormats {
-  readonly field: FieldMapArrow<DateTimePatternFieldType>;
+export interface CalendarFields {
+  readonly weekdays: Vector2Arrow<string, string>;
+  readonly months: Vector2Arrow<string, string>;
+  readonly quarters: Vector2Arrow<string, string>;
+  readonly dayPeriods: Vector2Arrow<string, string>;
 }
 
 export interface CalendarSchema {
-  readonly eras: ErasFormat;
-  readonly weekdays: WeekdaysFormats;
-  readonly months: MonthsFormats;
-  readonly quarters: QuartersFormats;
-  readonly dayPeriods: DayPeriodsFormats;
-  readonly dateFormats: FieldMapArrow<FormatWidthType>;
-  readonly dateTimeFormats: FieldMapArrow<FormatWidthType>;
-  readonly timeFormats: FieldMapArrow<FormatWidthType>;
-  readonly availableFormats: FieldMapArrow<string>;
-  readonly pluralAvailableFormats: FieldMapIndexedArrow<string, Plural>;
-  readonly intervalFormats: ScopeArrow<string, IntervalFormats>;
+  readonly eras: Vector2Arrow<EraWidthType, string>;
+  readonly format: CalendarFields;
+  readonly standAlone: CalendarFields;
+  readonly availableFormats: Vector2Arrow<PluralType, string>;
+  readonly intervalFormats: Vector2Arrow<DateTimePatternFieldType, string>;
+  readonly dateFormats: Vector1Arrow<FormatWidthType>;
+  readonly timeFormats: Vector1Arrow<FormatWidthType>;
+  readonly dateTimeFormats: Vector1Arrow<FormatWidthType>;
   readonly intervalFormatFallback: FieldArrow;
 }

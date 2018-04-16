@@ -31,6 +31,14 @@ export const [ DayPeriod, DayPeriodValues ] = makeKeyedEnum<string, DayPeriodTyp
   ['NIGHT2', 'night2']
 ]);
 
+export type EraWidthType = 'names' | 'abbr' | 'narrow';
+
+export const [ EraWidth, EraWidthValues ] = makeKeyedEnum<string, EraWidthType>([
+  ['NAMES', 'names'],
+  ['ABBR', 'abbr'],
+  ['NARROW', 'narrow']
+]);
+
 export type FieldWidthType = 'abbreviated' | 'narrow' | 'short' | 'wide';
 
 export const [ FieldWidth, FieldWidthValues ] = makeKeyedEnum<string, FieldWidthType>([

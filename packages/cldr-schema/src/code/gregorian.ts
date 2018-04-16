@@ -12,25 +12,26 @@ import {
   WeekdayValues,
 } from '../schema';
 
-const DateTimePatternFieldIndex = new KeyIndex(DateTimePatternFieldValues);
+import {
+  DateTimePatternFieldIndex,
+  DayPeriodIndex,
+  EraTypeIndex,
+  FormatWidthIndex,
+  QuartersIndex,
+  WeekdaysIndex,
+  FieldWidthIndex
+} from './calendars';
+
 const AvailableFormatIndex = new KeyIndex(GregorianInfo.availableFormats);
-const IntervalFormatIndex = new KeyIndex(GregorianInfo.intervalFormats);
-const FormatWidthIndex = new KeyIndex(FormatWidthValues);
-
-const EraTypeIndex = new KeyIndex(['names', 'abbr', 'narrow']);
-const WidthIndex = new KeyIndex(['short', 'wide', 'narrow', 'abbreviated']);
-
-const DayPeriodIndex = new KeyIndex(DayPeriodValues);
 const EraIndex = new KeyIndex(GregorianInfo.eras);
+const IntervalFormatIndex = new KeyIndex(GregorianInfo.intervalFormats);
 const MonthsIndex = new KeyIndex(GregorianInfo.months);
-const QuartersIndex = new KeyIndex(QuarterValues);
-const WeekdaysIndex = new KeyIndex(WeekdayValues);
 
 const formats = (name: string, rename: string) => scope(name, rename, [
-  vector2('weekdays', WidthIndex, WeekdaysIndex),
-  vector2('months', WidthIndex, MonthsIndex),
-  vector2('quarters', WidthIndex, QuartersIndex),
-  vector2('dayPeriods', WidthIndex, DayPeriodIndex),
+  vector2('weekdays', FieldWidthIndex, WeekdaysIndex),
+  vector2('months', FieldWidthIndex, MonthsIndex),
+  vector2('quarters', FieldWidthIndex, QuartersIndex),
+  vector2('dayPeriods', FieldWidthIndex, DayPeriodIndex),
 ]);
 
 export const GREGORIAN: Scope = scope('Gregorian', 'Gregorian', [

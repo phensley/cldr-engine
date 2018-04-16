@@ -471,8 +471,6 @@ export const getMain = (language: string) => {
   return {
     Chinese: access(Chinese, 'ca-chinese'),
     Hebrew: access(Hebrew, 'ca-hebrew'),
-    Japanese: access(Japanese, 'ca-japanese'),
-    Persian: access(Persian, 'ca-persian'),
     Layout: access(Layout, 'layout'),
     Numbers: access(Numbers, 'numbers'),
 
@@ -501,6 +499,8 @@ export const getMain = (language: string) => {
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
     Units: access(Units, 'units', false, transformUnits),
     Gregorian: access(Gregorian, 'ca-gregorian', false, transformCalendar),
+    Japanese: access(Japanese, 'ca-japanese', false, transformCalendar),
+    Persian: access(Persian, 'ca-persian', false, transformCalendar),
 
     // In progress..
     // Numbers2: access(Numbers, 'numbers', false, transformNumbers),

@@ -1,14 +1,8 @@
-import { FieldArrow, FieldMapArrow, FieldMapIndexedArrow, ScopeArrow } from '../arrows';
-import { Plural } from '../enums';
-
 import {
   CalendarInfo,
   CalendarSchema,
   DateTimePatternFieldType,
-  DayPeriodsFormats,
   FormatWidthType,
-  QuartersFormats,
-  WeekdaysFormats
 } from '.';
 
 export const PersianInfo: CalendarInfo = {
@@ -20,7 +14,6 @@ export const PersianInfo: CalendarInfo = {
   'ms y yM yMEd yMM yMMM yMMMEd yMMMM yMMMd yMd yQQQ yQQQQ yyyy yyyyM yyyyMEEEEd yyyyMEd ' +
   'yyyyMM yyyyMMM yyyyMMMEEEEd yyyyMMMEd yyyyMMMM yyyyMMMMEd yyyyMMMMccccd yyyyMMMMd yyyyMMMd ' +
   'yyyyMMdd yyyyMd yyyyQQQ yyyyQQQQ').split(' '),
-  pluralAvailableFormats: [],
   intervalFormats: ('H Hm Hmv Hv M MEd MMM MMMEEEEd MMMEd MMMM MMMMEd MMMMd MMMd Md d h hm ' +
     'hmv hv y yM yMEd yMMM yMMMEEEEd yMMMEd yMMMM yMMMMEd yMMMMd yMMMd yMd').split(' ')
 };

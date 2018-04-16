@@ -1,4 +1,5 @@
-import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap } from '../types';
+import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap,
+  KeyIndex, vector1, vector2 } from '../types';
 
 import {
   DateTimePatternFieldValues,
@@ -6,46 +7,41 @@ import {
   FieldWidthValues,
   FormatWidthValues,
   PersianInfo,
+  PluralIndex,
   QuarterValues,
   WeekdayValues,
 } from '../schema';
 
-const weekdays = FieldWidthValues.map(n => fieldmap(n, n, WeekdayValues));
-const months = FieldWidthValues.map(n => fieldmap(n, n, PersianInfo.months));
-const quarters = FieldWidthValues.map(n => fieldmap(n, n, QuarterValues));
-const dayPeriods = FieldWidthValues.map(n => fieldmap(n, n, DayPeriodValues, Choice.ALT));
+import {
+  DateTimePatternFieldIndex,
+  DayPeriodIndex,
+  EraTypeIndex,
+  FormatWidthIndex,
+  QuartersIndex,
+  WeekdaysIndex,
+  FieldWidthIndex
+} from './calendars';
 
-const eras = (n: string) => fieldmap(n, n, PersianInfo.eras);
+const AvailableFormatIndex = new KeyIndex(PersianInfo.availableFormats);
+const EraIndex = new KeyIndex(PersianInfo.eras);
+const IntervalFormatIndex = new KeyIndex(PersianInfo.intervalFormats);
+const MonthsIndex = new KeyIndex(PersianInfo.months);
 
-const scopeFormat = (map: FieldMap[]) => [
-  scope('format', 'format', map),
-  scope('stand-alone', 'standAlone', map)
-];
-
-const formatWidths = (n: string) => fieldmap(n, n, FormatWidthValues);
+const formats = (name: string, rename: string) => scope(name, rename, [
+  vector2('weekdays', FieldWidthIndex, WeekdaysIndex),
+  vector2('months', FieldWidthIndex, MonthsIndex),
+  vector2('quarters', FieldWidthIndex, QuartersIndex),
+  vector2('dayPeriods', FieldWidthIndex, DayPeriodIndex),
+]);
 
 export const PERSIAN: Scope = scope('Persian', 'Persian', [
-  scope('eras', 'eras', [
-    eras('names'),
-    eras('abbr'),
-    eras('narrow')
-  ]),
-
-  scope('weekdays', 'weekdays', scopeFormat(weekdays)),
-  scope('months', 'months', scopeFormat(months)),
-  scope('quarters', 'quarters', scopeFormat(quarters)),
-  scope('dayPeriods', 'dayPeriods', scopeFormat(dayPeriods)),
-
-  formatWidths('dateFormats'),
-  formatWidths('dateTimeFormats'),
-  formatWidths('timeFormats'),
-
-  fieldmap('availableFormats', 'availableFormats', PersianInfo.availableFormats),
-  fieldmap('availableFormats', 'pluralAvailableFormats', PersianInfo.pluralAvailableFormats, Choice.PLURAL),
-
-  scopemap('intervalFormats', PersianInfo.intervalFormats, [
-    scopefield('field', DateTimePatternFieldValues)
-  ]),
-
+  vector2('eras', EraTypeIndex, EraIndex),
+  formats('format', 'format'),
+  formats('standAlone', 'standAlone'),
+  vector2('availableFormats', PluralIndex, AvailableFormatIndex),
+  vector2('intervalFormats', DateTimePatternFieldIndex, IntervalFormatIndex),
+  vector1('dateFormats', FormatWidthIndex),
+  vector1('timeFormats', FormatWidthIndex),
+  vector1('dateTimeFormats', FormatWidthIndex),
   field('intervalFormatFallback', 'intervalFormatFallback')
 ]);
