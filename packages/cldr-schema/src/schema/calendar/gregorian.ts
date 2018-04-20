@@ -1,4 +1,4 @@
-import { FieldArrow, FieldMapArrow, FieldMapIndexedArrow, ScopeArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
+import { FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
 import { Plural, PluralType} from '../enums';
 
 import {

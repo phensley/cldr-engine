@@ -7,7 +7,6 @@ import {
   DecimalFormats,
   DigitsArrow,
   DivisorArrow,
-  FieldMapArrow,
   NumbersSchema,
   NumberSymbol,
   NumberSystemName,

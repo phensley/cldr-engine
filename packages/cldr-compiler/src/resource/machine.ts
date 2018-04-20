@@ -2,12 +2,12 @@ import {
   Choice,
   Digits,
   Field,
-  FieldMap,
+  // FieldMap,
   Instruction,
   ObjectMap,
   Origin,
   Scope,
-  ScopeField,
+  // ScopeField,
   ScopeMap,
   Vector1,
   Vector2
@@ -81,9 +81,9 @@ export class EncoderMachine {
     case 'field':
       this.encodeField(obj, inst);
       break;
-    case 'fieldmap':
-      this.encodeFieldMap(obj, inst);
-      break;
+    // case 'fieldmap':
+    //   this.encodeFieldMap(obj, inst);
+    //   break;
     case 'objectmap':
       this.encodeObjectMap(obj, inst);
       break;
@@ -93,9 +93,9 @@ export class EncoderMachine {
     case 'scope':
       this.encodeScope(obj, inst);
       break;
-    case 'scopefield':
-      this.encodeScopeField(obj, inst);
-      break;
+    // case 'scopefield':
+    //   this.encodeScopeField(obj, inst);
+    //   break;
     case 'scopemap':
       this.encodeScopeMap(obj, inst);
       break;
@@ -159,13 +159,13 @@ export class EncoderMachine {
     this._encodeField(obj, inst.name, inst.choice);
   }
 
-  private encodeFieldMap(obj: any, inst: FieldMap): void {
-    const curr = obj[inst.name] || {};
-    const choice = inst.choice;
-    for (const field of inst.fields) {
-      this._encodeField(curr, field, choice);
-    }
-  }
+  // private encodeFieldMap(obj: any, inst: FieldMap): void {
+  //   const curr = obj[inst.name] || {};
+  //   const choice = inst.choice;
+  //   for (const field of inst.fields) {
+  //     this._encodeField(curr, field, choice);
+  //   }
+  // }
 
   private encodeObjectMap(obj: any, inst: ObjectMap): void {
     const curr = obj[inst.name] || {};
@@ -187,11 +187,11 @@ export class EncoderMachine {
     }
   }
 
-  private encodeScopeField(obj: any, inst: ScopeField): void {
-    for (const field of inst.fields) {
-      this.encoder.encode(obj[field]);
-    }
-  }
+  // private encodeScopeField(obj: any, inst: ScopeField): void {
+  //   for (const field of inst.fields) {
+  //     this.encoder.encode(obj[field]);
+  //   }
+  // }
 
   private encodeScopeMap(obj: any, inst: ScopeMap): void {
     const curr = obj[inst.name] || {};

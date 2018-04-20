@@ -1,8 +1,6 @@
 import {
   FieldArrow,
   FieldIndexedArrow,
-  FieldMapArrow,
-  FieldMapIndexedArrow,
   ScopeArrow,
   Vector1Arrow,
   Vector2Arrow

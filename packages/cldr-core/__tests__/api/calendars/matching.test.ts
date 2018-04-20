@@ -1,7 +1,5 @@
 import { languageBundle } from '../../_helpers';
 import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl, UnixEpochTime } from '../../../src';
-import { DatePatternManager } from '../../../src/api/private/calendars/manager';
-import { ZonedDateTime } from '../../../src/types/datetime';
 import { CalendarManager } from '../../../src/internals/calendars/manager';
 
 const INTERNALS = new InternalsImpl();

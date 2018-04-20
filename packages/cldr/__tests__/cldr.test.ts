@@ -1,4 +1,5 @@
 import { getCLDR, loader, asyncLoader } from './helpers';
+import { Quantity } from '@phensley/cldr-core';
 
 test('init framework', () => {
   const framework = getCLDR();
@@ -16,6 +17,23 @@ test('init framework', () => {
 
   // TODO:
   // expect(api.Calendars.getMonth('3')).toEqual('March');
+  let s: string;
+
+  const ux = { epoch: 1109934428000, zoneId: 'America/New_York'};
+  s = api.Calendars.formatDate(ux, { datetime: 'full' });
+  s = api.Calendars.formatDate(ux, { datetime: 'full' });
+  expect(s).toEqual('Friday, March 4, 2005 at 6:07:08 AM Eastern Standard Time');
+
+  const currOpts: CurrencyFormatOptions = { style: 'short' };
+  s = api.Numbers.formatCurrency('345678', 'USD', currOpts);
+  s = api.Numbers.formatCurrency('345678', 'USD', currOpts);
+  expect(s).toEqual('$346K');
+
+  const qty: Quantity = { value: '17.69', unit: 'pound' };
+  const unitOpts = { maximumFractionDigits: 1 };
+  s = api.Units.formatQuantity(qty, unitOpts);
+  s = api.Units.formatQuantity(qty, unitOpts);
+  expect(s).toEqual('17.7 pounds');
 
   framework.get('es');
   expect(framework.info()).toEqual('packs loaded: 2');
@@ -44,6 +62,9 @@ test('async loader', () => {
   expect(framework.getAsync('es')).resolves.toEqual(es);
 
   expect(framework.getAsync('xx')).rejects.toContain('no such file');
+
+  expect(framework.getAsync('de')).resolves.toBeTruthy();
+  expect(framework.getAsync('zh-TW')).resolves.toBeTruthy();
 
   expect(framework.getAsync('de')).resolves.toBeTruthy();
   expect(framework.getAsync('zh-TW')).resolves.toBeTruthy();

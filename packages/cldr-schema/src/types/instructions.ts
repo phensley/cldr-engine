@@ -37,13 +37,13 @@ export interface Field {
   readonly choice: Choice;
 }
 
-export interface FieldMap {
-  readonly type: 'fieldmap';
-  readonly name: string;
-  readonly identifier: string;
-  readonly fields: string[];
-  readonly choice: Choice;
-}
+// export interface FieldMap {
+//   readonly type: 'fieldmap';
+//   readonly name: string;
+//   readonly identifier: string;
+//   readonly fields: string[];
+//   readonly choice: Choice;
+// }
 
 export interface ObjectMap {
   readonly type: 'objectmap';
@@ -63,11 +63,11 @@ export interface Scope {
   readonly block: Instruction[];
 }
 
-export interface ScopeField {
-  readonly type: 'scopefield';
-  readonly name: string;
-  readonly fields: string[];
-}
+// export interface ScopeField {
+//   readonly type: 'scopefield';
+//   readonly name: string;
+//   readonly fields: string[];
+// }
 
 export interface ScopeMap {
   readonly type: 'scopemap';
@@ -97,8 +97,16 @@ export interface Vector2<T extends string, S extends string> {
 //   readonly dim2: KeyIndex;
 // }
 
-export type Instruction = Digits | Field | FieldMap | ObjectMap | Origin | Scope | ScopeField | ScopeMap
-  | Vector1<string> | Vector2<string, string>;
+export type Instruction =
+  Digits |
+  Field |
+  // FieldMap |
+  ObjectMap |
+  Origin |
+  Scope |
+  ScopeMap |
+  Vector1<string> |
+  Vector2<string, string>;
 
 export const digits = (name: string) =>
   ({ type: 'digits', name } as Digits);
@@ -106,9 +114,9 @@ export const digits = (name: string) =>
 export const field = (name: string, identifier: string, choice: Choice = Choice.NONE) =>
   ({ type: 'field', name, identifier, choice } as Field);
 
-export const fieldmap =
-  (name: string, identifier: string, fields: string[], choice: Choice = Choice.NONE) =>
-  ({ type: 'fieldmap', name, identifier, fields, choice } as FieldMap);
+// export const fieldmap =
+//   (name: string, identifier: string, fields: string[], choice: Choice = Choice.NONE) =>
+//   ({ type: 'fieldmap', name, identifier, fields, choice } as FieldMap);
 
 export const objectmap = (name: string, fields: string[]) =>
   ({ type: 'objectmap', name, fields } as ObjectMap);
@@ -119,8 +127,8 @@ export const origin = (block: Instruction[]) =>
 export const scope = (name: string, identifier: string, block: Instruction[]) =>
   ({ type: 'scope', name, identifier, block } as Scope);
 
-export const scopefield = (name: string, fields: string[]) =>
-  ({ type: 'scopefield', name, fields } as ScopeField);
+// export const scopefield = (name: string, fields: string[]) =>
+//   ({ type: 'scopefield', name, fields } as ScopeField);
 
 export const scopemap = (name: string, fields: string[], block: Instruction[]) =>
   ({ type: 'scopemap', name, fields, block } as ScopeMap);

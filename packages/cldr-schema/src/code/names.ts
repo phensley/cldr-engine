@@ -1,4 +1,4 @@
-import { Choice, Scope, scope, fieldmap, vector1, vector2 } from '../types';
+import { Scope, scope, vector1, vector2 } from '../types';
 import { ScriptIdIndex, RegionIdIndex } from '../schema/names';
 import { AltIndex } from '../schema';
 

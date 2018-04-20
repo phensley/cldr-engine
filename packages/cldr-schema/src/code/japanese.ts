@@ -1,5 +1,4 @@
-import { Choice, Scope, FieldMap, field, fieldmap, scope, scopefield, scopemap,
-  KeyIndex, vector1, vector2 } from '../types';
+import { KeyIndex, Scope, field, scope, vector1, vector2 } from '../types';
 
 import {
   DateTimePatternFieldValues,

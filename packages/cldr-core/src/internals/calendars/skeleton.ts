@@ -6,7 +6,7 @@ import {
   parseDatePattern
 } from '../../parsing/patterns/date';
 
-import { Field, C, FIELD_INDEX, FIELD_TYPES, FieldType, getFieldType } from './fields';
+import { Field, C, FIELD_INDEX, FIELD_TYPES, FieldType, getFieldType, skeletonFields } from './fields';
 
 export interface SkeletonField {
   input: string;
@@ -21,7 +21,7 @@ export interface SkeletonField {
  */
 export class DateSkeleton {
 
-  type: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  type: number[] = skeletonFields();
   info: (SkeletonField | undefined)[] = [];
 
   skeleton: string = '';

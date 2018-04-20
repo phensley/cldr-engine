@@ -31,13 +31,13 @@ export interface FieldIndexedArrow<X extends number> {
   (bundle: PrimitiveBundle, index: X): string;
 }
 
-export interface FieldMapArrow<T extends string> {
-  (bundle: PrimitiveBundle, field: T): string;
-}
+// export interface FieldMapArrow<T extends string> {
+//   (bundle: PrimitiveBundle, field: T): string;
+// }
 
-export interface FieldMapIndexedArrow<T extends string, X extends number> {
-  (bundle: PrimitiveBundle, field: T, index: X): string;
-}
+// export interface FieldMapIndexedArrow<T extends string, X extends number> {
+//   (bundle: PrimitiveBundle, field: T, index: X): string;
+// }
 
 export interface ObjectArrow<T> {
   (bundle: PrimitiveBundle): T;
@@ -77,19 +77,19 @@ export const fieldIndexedArrow = (offsets: number[]): FieldIndexedArrow<number> 
   return (bundle: PrimitiveBundle, index: number): string => bundle.get(offsets[index]);
 };
 
-export const fieldMapArrow = (map: OffsetMap): FieldMapArrow<string> => {
-  return (bundle: PrimitiveBundle, field: string): string => {
-    const offset = map[field];
-    return offset === undefined ? '' : bundle.get(offset);
-  };
-};
+// export const fieldMapArrow = (map: OffsetMap): FieldMapArrow<string> => {
+//   return (bundle: PrimitiveBundle, field: string): string => {
+//     const offset = map[field];
+//     return offset === undefined ? '' : bundle.get(offset);
+//   };
+// };
 
-export const fieldMapIndexedArrow = (map: OffsetsMap): FieldMapIndexedArrow<string, number> => {
-  return (bundle: PrimitiveBundle, field: string, index: number): string => {
-    const offsets = map[field];
-    return offsets === undefined ? '' : bundle.get(offsets[index]);
-  };
-};
+// export const fieldMapIndexedArrow = (map: OffsetsMap): FieldMapIndexedArrow<string, number> => {
+//   return (bundle: PrimitiveBundle, field: string, index: number): string => {
+//     const offsets = map[field];
+//     return offsets === undefined ? '' : bundle.get(offsets[index]);
+//   };
+// };
 
 export const objectMapArrow = (index: KeyIndexMap): ObjectArrow<any> => {
   return (bundle: PrimitiveBundle): any => {

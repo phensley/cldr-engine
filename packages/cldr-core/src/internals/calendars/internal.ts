@@ -79,7 +79,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
   }
 
   weekMinDays(region: string): number {
-    return weekMinDays[region] || weekFirstDay['001'];
+    return weekMinDays[region] || weekMinDays['001'];
   }
 
   formatDateTime<R>(
@@ -114,24 +114,6 @@ export class CalendarInternalsImpl implements CalendarInternals {
     ctx.date = end;
     const e = this.formatDateTime(calendar, ctx, renderer, pattern.slice(idx));
     return renderer.join(s, e);
-  }
-
-  /**
-   * Get the field types for date, time and skeleton.
-   */
-  getPatternTypes(options: DateFormatOptions): [string, string, string] {
-    let timeKey = options.datetime || options.time || '';
-    let dateKey = options.datetime || options.date || '';
-    let skelKey = options.skeleton || '';
-    if (timeKey === undefined && dateKey === undefined) {
-      if (skelKey !== undefined) {
-        dateKey = '';
-        timeKey = '';
-      } else {
-        skelKey = 'yMd';
-      }
-    }
-    return [dateKey, timeKey, skelKey];
   }
 
   selectCalendar(bundle: Bundle, ca?: CalendarType): CalendarType {
