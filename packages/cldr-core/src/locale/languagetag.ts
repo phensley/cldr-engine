@@ -47,6 +47,8 @@ export class LanguageTag {
   protected core: (undefined | string)[];
   protected _extensions?: { [x: string]: string[] };
   protected _privateUse?: string;
+  protected _compact?: string;
+  protected _expanded?: string;
 
   constructor(
     language?: string,
@@ -149,7 +151,10 @@ export class LanguageTag {
    * fields will be omitted.
    */
   compact(): string {
-    return this.render(false);
+    if (!this._compact) {
+      this._compact = this.render(false);
+    }
+    return this._compact;
   }
 
   /**
@@ -157,7 +162,10 @@ export class LanguageTag {
    * fields will emit their undefined value.
    */
   expanded(): string {
-    return this.render(true);
+    if (!this._expanded) {
+      this._expanded = this.render(true);
+    }
+    return this._expanded;
   }
 
   /**

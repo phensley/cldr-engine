@@ -1,21 +1,30 @@
 import { LanguageResolver } from '../../src/locale/resolver';
-import { LocaleMatcher } from '../../src/locale/matcher';
+import { LocaleMatcher, LanguageMatch } from '../../src/locale/matcher';
 import { loadMatchCases } from './util';
 
 const resolve = LanguageResolver.resolve;
 
 test('basics', () => {
-  const m = new LocaleMatcher('en, en_GB, zh, pt_AR, es-419');
-  expect(m.match('en-AU')).toEqual({ locale: { id: 'en_GB', tag: resolve('en-GB') }, distance: 3 });
+  const matcher = new LocaleMatcher('en, en_GB, zh, pt_AR, es-419');
+  const m: LanguageMatch = matcher.match('en-AU');
+  expect(m.distance).toEqual(3);
+  expect(m.locale.id).toEqual('en_GB');
 });
 
 test('constructor args', () => {
   const expected = { locale: { id: 'en_GB', tag: resolve('en_GB') }, distance: 3 };
-  let m = new LocaleMatcher('en \t en_GB \n , zh');
-  expect(m.match('en-AU')).toEqual(expected);
+  let matcher: LocaleMatcher;
+  let m: LanguageMatch;
 
-  m = new LocaleMatcher([' en, pt_AR ', '\t en_GB']);
-  expect(m.match('en-AU')).toEqual(expected);
+  matcher = new LocaleMatcher('en \t en_GB \n , zh');
+  m = matcher.match('en-AU');
+  expect(m.distance).toEqual(3);
+  expect(m.locale.id).toEqual('en_GB');
+
+  matcher = new LocaleMatcher([' en, pt_AR ', '\t en_GB']);
+  m = matcher.match('en-AU');
+  expect(m.distance).toEqual(3);
+  expect(m.locale.id).toEqual('en_GB');
 });
 
 test('extensions', () => {
