@@ -1,10 +1,11 @@
 /**
  * Inverse mapping of a key to its index in an array.
  */
-export class KeyIndex<T> {
-  readonly index: { [x: string]: number } = {};
+export class KeyIndex<T extends string> {
+  /* tslint:disable-next-line */
+  readonly index: { [P in T]: number } = Object.create(null);
   readonly size: number;
-  constructor(readonly keys: string[]) {
+  constructor(readonly keys: T[]) {
     this.size = keys.length;
     let i = 0;
     while (i < keys.length) {
@@ -12,40 +13,27 @@ export class KeyIndex<T> {
       i++;
     }
   }
-  get(key: string): number {
+  get(key: T): number {
     const i = this.index[key];
     return i === undefined ? -1 : i;
   }
 }
 
-export enum Choice {
-  NONE = 0,
-  PLURAL = 1,
-  ALT = 2,
-  YEARTYPE = 3
-}
-
-export interface Digits {
+export interface Digits<T extends string> {
   readonly type: 'digits';
   readonly name: string;
+  readonly dim0: KeyIndex<T>;
+  readonly values: number[];
 }
 
 export interface Field {
   readonly type: 'field';
   readonly name: string;
-  readonly identifier: string;
-  readonly choice: Choice;
-}
-
-export interface ObjectMap {
-  readonly type: 'objectmap';
-  readonly name: string;
-  readonly fields: string[];
 }
 
 export interface Origin {
   readonly type: 'origin';
-  readonly block: Instruction[];
+  readonly block: Scope[];
 }
 
 export interface Scope {
@@ -84,33 +72,28 @@ export interface Vector2<T extends string, S extends string> {
 // }
 
 export type Instruction =
-  Digits |
+  Digits<any> |
   Field |
-  // FieldMap |
-  ObjectMap |
   Origin |
   Scope |
   ScopeMap |
-  Vector1<string> |
-  Vector2<string, string>;
+  Vector1<any> |
+  Vector2<any, any>;
 
-export const digits = (name: string) =>
-  ({ type: 'digits', name } as Digits);
+export const digits = <T extends string>(name: string, dim0: KeyIndex<T>, values: number[]): Digits<T> =>
+  ({ type: 'digits', name, dim0, values });
 
-export const field = (name: string, identifier: string, choice: Choice = Choice.NONE) =>
-  ({ type: 'field', name, identifier, choice } as Field);
+export const field = (name: string): Field =>
+  ({ type: 'field', name });
 
-export const objectmap = (name: string, fields: string[]) =>
-  ({ type: 'objectmap', name, fields } as ObjectMap);
+export const origin = (block: Scope[]): Origin =>
+  ({ type: 'origin', block });
 
-export const origin = (block: Instruction[]) =>
-  ({ type: 'origin', block } as Origin);
+export const scope = (name: string, identifier: string, block: Instruction[]): Scope =>
+  ({ type: 'scope', name, identifier, block });
 
-export const scope = (name: string, identifier: string, block: Instruction[]) =>
-  ({ type: 'scope', name, identifier, block } as Scope);
-
-export const scopemap = (name: string, fields: string[], block: Instruction[]) =>
-  ({ type: 'scopemap', name, fields, block } as ScopeMap);
+export const scopemap = (name: string, fields: string[], block: Instruction[]): ScopeMap =>
+  ({ type: 'scopemap', name, fields, block });
 
 export const vector1 = <T extends string>(name: string, dim0: KeyIndex<T>): Vector1<T> =>
   ({ type: 'vector1', name, dim0 });

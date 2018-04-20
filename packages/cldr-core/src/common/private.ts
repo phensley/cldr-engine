@@ -1,8 +1,12 @@
-import { CurrencySpacing, NumberSymbols, NumberSystemName } from '@phensley/cldr-schema';
+import { CurrencySpacingPattern, CurrencySpacingPos, NumberSymbolType, NumberSystemName } from '@phensley/cldr-schema';
 import { NumberSystem } from '../systems';
 import { DateTimeNode } from '../parsing/patterns/date';
 
 // TODO: move these
+
+export type CurrencySpacingPatterns = { [Q in CurrencySpacingPattern]: string };
+export type CurrencySpacing = { [P in CurrencySpacingPos]: CurrencySpacingPatterns };
+export type NumberSymbols =  { [P in NumberSymbolType]: string };
 
 /**
  * @internal
@@ -16,8 +20,7 @@ export interface NumberParams {
   minimumGroupingDigits: number;
   primaryGroupingSize: number;
   secondaryGroupingSize: number;
-  beforeCurrency: CurrencySpacing;
-  afterCurrency: CurrencySpacing;
+  currencySpacing: CurrencySpacing;
 }
 
 /**

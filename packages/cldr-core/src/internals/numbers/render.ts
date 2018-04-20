@@ -1,5 +1,4 @@
-import { CurrencySpacing } from '@phensley/cldr-schema';
-import { NumberParams } from '../../common/private';
+import { CurrencySpacingPatterns, NumberParams } from '../../common/private';
 import { Decimal, Part } from '../../types';
 import { NumberPattern, NumberField } from '../../parsing/patterns/number';
 import { NumberRenderer, WrapperInternals } from '..';
@@ -61,16 +60,17 @@ export class StringNumberRenderer implements NumberRenderer<string> {
       return r.join('');
     }
 
+    const spacing = params.currencySpacing;
     // Track relative position of the currency symbol and formatted number.
     if (currencyIdx < numberIdx) {
       const next = r[currencyIdx + 1];
-      if (insertBetween(params.afterCurrency, currency[currency.length - 1], next[0])) {
-        r.splice(currencyIdx + 1, 0, params.afterCurrency.insertBetween);
+      if (insertBetween(spacing.after, currency[currency.length - 1], next[0])) {
+        r.splice(currencyIdx + 1, 0, spacing.after.insertBetween);
       }
     } else {
       const prev = r[currencyIdx - 1];
-      if (insertBetween(params.beforeCurrency, currency[0], prev[prev.length - 1])) {
-        r.splice(currencyIdx, 0, params.beforeCurrency.insertBetween);
+      if (insertBetween(spacing.before, currency[0], prev[prev.length - 1])) {
+        r.splice(currencyIdx, 0, spacing.before.insertBetween);
       }
     }
 
@@ -143,17 +143,19 @@ export class PartsNumberRenderer implements NumberRenderer<Part[]> {
       return r;
     }
 
+    const spacing = params.currencySpacing;
+
     // Currency spacing logic.
     if (currencyIdx < numberIdx) {
       const next = r[currencyIdx + 1].value;
-      if (insertBetween(params.afterCurrency, currency[currency.length - 1], next[0])) {
-        const elem = { type: 'spacer', value: params.afterCurrency.insertBetween };
+      if (insertBetween(spacing.after, currency[currency.length - 1], next[0])) {
+        const elem = { type: 'spacer', value: spacing.after.insertBetween };
         r.splice(currencyIdx + 1, 0, elem);
       }
     } else {
       const prev = r[currencyIdx - 1].value;
-      if (insertBetween(params.beforeCurrency, currency[0], prev[prev.length - 1])) {
-        const elem = { type: 'spacer', value: params.beforeCurrency.insertBetween };
+      if (insertBetween(spacing.before, currency[0], prev[prev.length - 1])) {
+        const elem = { type: 'spacer', value: spacing.before.insertBetween };
         r.splice(currencyIdx, 0, elem);
       }
     }
@@ -236,7 +238,7 @@ export const CURRENCY_SPACING_MATCHERS: { [x: string]: (s: string) => boolean } 
   '[:^S:]': (s: string) => !RE_SYMBOL.test(s)
 };
 
-const insertBetween = (spacing: CurrencySpacing, currency: string, surrounding: string): boolean => {
+const insertBetween = (spacing: CurrencySpacingPatterns, currency: string, surrounding: string): boolean => {
   return CURRENCY_SPACING_MATCHERS[spacing.currencyMatch](currency) &&
     CURRENCY_SPACING_MATCHERS[spacing.surroundingMatch](surrounding);
 };

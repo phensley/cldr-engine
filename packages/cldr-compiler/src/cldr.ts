@@ -13,10 +13,8 @@ import {
   transformCalendar,
   transformCurrencies,
   transformDatefields,
-  // transformLanguages,
   transformNumbers,
-  // transformScripts,
-  transformTerritories,
+  transformRegion,
   transformTimezones,
   transformUnits
 } from './data';
@@ -352,7 +350,9 @@ const MetaZones = {
   ranges: get(['metaZones', 'metazoneInfo', 'timezone', flattenMetaZones]),
 };
 
-const numberSystemKeys = ['currencyFormats', 'decimalFormats', 'percentFormats', 'symbols'];
+const numberSystemKeys = [
+  'currencyFormats', 'decimalFormats', 'percentFormats', 'scientificFormats', 'symbols'
+];
 
 /**
  * Restructure the formats by numbering system.
@@ -484,7 +484,7 @@ export const getMain = (language: string) => {
     Chinese: access(Chinese, 'ca-chinese'),
     Hebrew: access(Hebrew, 'ca-hebrew'),
     Layout: access(Layout, 'layout'),
-    Numbers: access(Numbers, 'numbers'),
+    Numbers: access(Numbers, 'numbers', false, transformNumbers),
 
     Names: {
       languages: {
@@ -493,30 +493,24 @@ export const getMain = (language: string) => {
       scripts: {
         ...access({ displayName: get(['localeDisplayNames', 'scripts']) }, 'scripts'),
       },
-      territories: {
+      regions: {
         ...access({ displayName: get(['localeDisplayNames', 'territories']) }, 'territories',
-          false, transformTerritories)
+          false, transformRegion)
       }
     },
 
     ...access({ Characters: get(['characters']) }, 'characters'),
     ...access({ ContextTransforms: get(['contextTransforms']) }, 'contextTransforms', true),
+    ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies', false, transformCurrencies),
     ...access({ ListPatterns: get(['listPatterns', listPattern]) }, 'listPatterns'),
     ...access({ Territories: get(['localeDisplayNames']) }, 'territories'),
 
-    // New vector-based transformers. These reorganize the nesting of keys to match
-    // how our schema is designed.
-
-    ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies', false, transformCurrencies),
     DateFields: access(DateFields, 'dateFields', false, transformDatefields),
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
     Units: access(Units, 'units', false, transformUnits),
     Gregorian: access(Gregorian, 'ca-gregorian', false, transformCalendar),
     Japanese: access(Japanese, 'ca-japanese', false, transformCalendar),
     Persian: access(Persian, 'ca-persian', false, transformCalendar),
-
-    // In progress..
-    // Numbers2: access(Numbers, 'numbers', false, transformNumbers),
   };
 };
 

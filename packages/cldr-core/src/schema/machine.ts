@@ -1,11 +1,6 @@
 import {
-  digitsArrow,
-  divisorArrow,
   fieldArrow,
   fieldIndexedArrow,
-  // fieldMapArrow,
-  // fieldMapIndexedArrow,
-  objectMapArrow,
   scopeArrow,
   vector1Arrow,
   vector2Arrow,
@@ -14,23 +9,15 @@ import {
   PluralValues,
   YeartypeValues,
 
-  Choice,
   Digits,
+  DigitsArrow,
   Field,
   FieldArrow,
   FieldIndexedArrow,
-  // FieldMap,
-  // FieldMapArrow,
-  // FieldMapIndexedArrow,
   Instruction,
-  KeyIndexMap,
-  ObjectMap,
-  OffsetMap,
-  OffsetsMap,
   Origin,
   Schema,
   Scope,
-  // ScopeField,
   ScopeMap,
 
   Vector1,
@@ -41,7 +28,7 @@ import {
   ORIGIN,
 } from '@phensley/cldr-schema';
 
-import { Decimal } from '../types';
+// import { Decimal } from '../types';
 
 /**
  * Generates field offsets for the schema builder.
@@ -52,19 +39,6 @@ class Generator {
 
   field(): number {
     return this.offset++;
-  }
-
-  choiceField(choice: Choice): number[] {
-    switch (choice) {
-    case Choice.ALT:
-      return this._field(AltValues);
-    case Choice.PLURAL:
-      return this._field(PluralValues);
-    case Choice.YEARTYPE:
-      return this._field(YeartypeValues);
-    default:
-      return [];
-    }
   }
 
   pluralDigits(): number[][] {
@@ -135,9 +109,6 @@ export class SchemaBuilder {
       case 'field':
         this.constructField(obj, inst);
         break;
-      case 'objectmap':
-        this.constructObjectMap(obj, inst);
-        break;
       case 'origin':
         this.constructOrigin(obj, inst);
         break;
@@ -166,30 +137,14 @@ export class SchemaBuilder {
     }
   }
 
-  private constructDigits(obj: any, inst: Digits): void {
-    const offsets = this.generator.pluralDigits();
-    obj[inst.name] = digitsArrow(offsets);
-    const divisorName = `${inst.name}Divisor`;
-    obj[divisorName] = divisorArrow(this.generator.divisorDigits());
+  private constructDigits<T extends string>(obj: any, inst: Digits<T>): void {
+    const offset = this.generator.vector2(inst.dim0.size, inst.values.length * 2);
+    obj[inst.name] = new DigitsArrow(offset, inst.dim0, inst.values);
   }
 
   private constructField(obj: any, inst: Field): void {
-    const choice = inst.choice;
-    if (choice === Choice.NONE) {
-      const offset = this.generator.field();
-      obj[inst.identifier] = fieldArrow(offset);
-    } else {
-      const offsets = this.generator.choiceField(choice);
-      obj[inst.identifier] = fieldIndexedArrow(offsets);
-    }
-  }
-
-  private constructObjectMap(obj: any, inst: ObjectMap): void {
-    const index: KeyIndexMap = [];
-    for (const field of inst.fields) {
-      index.push([field, this.generator.field()]);
-    }
-    obj[inst.name] = objectMapArrow(index);
+    const offset = this.generator.field();
+    obj[inst.name] = fieldArrow(offset);
   }
 
   private constructOrigin(obj: any, inst: Origin): void {
@@ -224,12 +179,14 @@ export class SchemaBuilder {
   }
 
   private constructVector1<T extends string>(obj: any, inst: Vector1<T>): void {
-    const offset = this.generator.vector1(inst.dim0.size);
+    const offset = this.generator.field(); // header
+    this.generator.vector1(inst.dim0.size);
     obj[inst.name] = new Vector1Arrow(offset, inst.dim0);
   }
 
   private constructVector2<T extends string, S extends string>(obj: any, inst: Vector2<T, S>): void {
-    const offset = this.generator.vector2(inst.dim0.size, inst.dim1.size);
+    const offset = this.generator.field(); // header
+    this.generator.vector2(inst.dim0.size, inst.dim1.size);
     obj[inst.name] = new Vector2Arrow(offset, inst.dim0, inst.dim1);
   }
 }

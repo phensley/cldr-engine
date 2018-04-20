@@ -1,11 +1,41 @@
 import { Mappings, applyMappings } from './utils';
 
 const mappings = [
-  Mappings.field('numberSystem').keys().field('symbols').keys().keys().remap(2, 1, 3, 4),
+  Mappings.field('minimumGroupingDigits').remap(0, 1),
+
+  Mappings.field('numberSystems').keys().remap(0, 1, 2),
+
+  Mappings.field('numberSystem').keys().field('symbols').keys().keys().remap(0, 1, 2, 3, 4),
+
   Mappings.field('numberSystem').keys().field('currencyFormats')
-    .field('currencySpacing').keys().keys().keys().remap(3, 1, 4, 5, 6)
+    .fields(['standard', 'accounting']).remap(0, 1, 2, 3, 4),
+
+  Mappings.field('numberSystem').keys().field('currencyFormats')
+    .fields([ ['currencySpacing', 'spacing'] ])
+    .fields([ ['beforeCurrency', 'before'], ['afterCurrency', 'after'] ])
+    .keys().keys().remap(0, 1, 2, 3, 4, 5, 6),
+
+  Mappings.field('numberSystem').keys().field('currencyFormats')
+    .field('short').field('standard').digits().remap(0, 1, 2, 3, 6, 5, 7),
+
+  Mappings.field('numberSystem').keys().field('currencyFormats')
+    .plural('unitPattern').remap(0, 1, 2, 3, 4, 5),
+
+  Mappings.field('numberSystem').keys().field('decimalFormats')
+    .field('standard').remap(0, 1, 2, 3, 4),
+
+  Mappings.field('numberSystem').keys().field('decimalFormats')
+    .field('short').field('decimalFormat').digits().remap(0, 1, 2, 3, 6, 5, 7),
+
+  Mappings.field('numberSystem').keys().field('decimalFormats')
+    .field('long').field('decimalFormat').digits().remap(0, 1, 2, 3, 6, 5, 7),
+
+  Mappings.field('numberSystem').keys().fields([
+      ['percentFormats', 'percentFormat'],
+      ['scientificFormats', 'scientificFormat']
+    ]).field('standard').remap(0, 1, 2, 4),
 ];
 
 export const transformNumbers = (o: any): any => {
-  return applyMappings(o, mappings);
+  return applyMappings(o, mappings, false);
 };

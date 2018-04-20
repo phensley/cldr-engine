@@ -1,3 +1,16 @@
+
+import { pluralDigit } from '../utils';
+
+const countChars = (s: string, ch: string): number => {
+  let res = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === ch) {
+      res++;
+    }
+  }
+  return res;
+};
+
 const plurals = ['other', 'zero', 'one', 'two', 'few', 'many'];
 const alts = ['none', 'short', 'variant', 'narrow', 'stand-alone'];
 
@@ -55,6 +68,13 @@ export const stripPlural = (k: string) => {
 };
 
 /**
+ * Pluralized digits formats.
+ */
+export interface DigitsSpec {
+  readonly kind: 'digits';
+}
+
+/**
  * Map all keys at the current level.
  */
 export interface KeysSpec {
@@ -97,7 +117,7 @@ export interface FieldsSpec {
   fields: (string | [string, string])[];
 }
 
-export type Spec = PluralSpec | AltSpec | KeysSpec | AltKeysSpec |
+export type Spec = DigitsSpec | PluralSpec | AltSpec | KeysSpec | AltKeysSpec |
   FieldSpec | FieldsSpec | PluralKeysSpec | PointSpec;
 
 /**
@@ -114,12 +134,30 @@ export type Spec = PluralSpec | AltSpec | KeysSpec | AltKeysSpec |
 const tabular = (specs: Spec[], obj: any): string[][] => {
   const res: string[][] = [];
   const spec = specs[0];
-  if (spec === undefined) {
+  if (spec === undefined || obj === undefined) {
     return res;
   }
 
   const rest = specs.slice(1);
   switch (spec.kind) {
+    case 'digits':
+    {
+      for (let i = 1; i <= 15; i++) {
+        const base = pluralDigit(i);
+        for (const c of plurals) {
+          const key = `${base}-count-${c}`;
+          const pfx = [`${base.length}`, c];
+          const v = obj[key];
+          if (typeof v === undefined) {
+            res.push(pfx);
+          } else if (typeof v === 'string') {
+            res.push(pfx.concat([v]));
+          }
+        }
+      }
+      break;
+    }
+
     case 'plural':
     case 'alt':
     {
@@ -127,7 +165,9 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
         const [key, rkey, c] = keys;
         const v = obj[key];
         const pfx = [rkey, c];
-        if (typeof v === 'string') {
+        if (typeof v === undefined) {
+          res.push(pfx);
+        } else if (typeof v === 'string') {
           res.push(pfx.concat([v]));
         } else {
           for (const row of tabular(rest, v)) {
@@ -144,7 +184,9 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       const key = spec.field;
       const v = obj[key];
       const pfx = [rkey];
-      if (typeof v === 'string') {
+      if (typeof v === undefined) {
+        res.push(pfx);
+      } else if (typeof v === 'string') {
         res.push(pfx.concat([v]));
       } else {
         for (const row of tabular(rest, v)) {
@@ -167,7 +209,9 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
         }
         const v = obj[key];
         const pfx = [rkey];
-        if (typeof v === 'string') {
+        if (typeof v === undefined) {
+          res.push(pfx);
+        } else if (typeof v === 'string') {
           res.push(pfx.concat([v]));
         } else {
           for (const row of tabular(rest, v)) {
@@ -196,7 +240,9 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       for (const key of Object.keys(obj)) {
         const pfx = [key];
         const v = obj[key];
-        if (typeof v === 'string') {
+        if (typeof v === undefined) {
+          res.push(pfx);
+        } else if (typeof v === 'string') {
           res.push(pfx.concat([v]));
         } else {
           for (const row of tabular(rest, v)) {
@@ -215,7 +261,9 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
           const [key, rkey, c] = keys;
           const v = obj[key];
           const pfx = [rkey, c];
-          if (typeof v === 'string') {
+          if (typeof v === undefined) {
+            res.push(pfx);
+          } else if (typeof v === 'string') {
             res.push(pfx.concat([v]));
           } else {
             for (const row of tabular(rest, v)) {
@@ -235,7 +283,9 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       for (const key of normal) {
         const v = obj[key];
         const pfx = [key, 'other'];
-        if (typeof v === 'string') {
+        if (typeof v === undefined) {
+          res.push(pfx);
+        } else if (typeof v === 'string') {
           res.push(pfx.concat([v]));
         } else {
           for (const row of tabular(rest, v)) {
@@ -250,7 +300,9 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
           const [key, rkey, c] = keys;
           const v = obj[key];
           const pfx = [rkey, c];
-          if (typeof v === 'string') {
+          if (typeof v === undefined) {
+            res.push(pfx);
+          } else if (typeof v === 'string') {
             res.push(pfx.concat([v]));
           } else {
             for (const row of tabular(rest, v)) {
@@ -280,6 +332,11 @@ export interface Mapping {
  */
 export class MappingBuilder {
   readonly specs: Spec[] = [];
+
+  digits(): this {
+    this.specs.push({ kind: 'digits' });
+    return this;
+  }
 
   keys(): this {
     this.specs.push({ kind: 'keys' });
@@ -330,6 +387,10 @@ export class MappingBuilder {
  * Entry points to Mapping builder.
  */
 export class Mappings {
+
+  static digits(): MappingBuilder {
+    return new MappingBuilder().digits();
+  }
 
   static keys(): MappingBuilder {
     return new MappingBuilder().keys();
@@ -402,9 +463,12 @@ export const applyMappings = (root: any, mappings: Mapping[], debug = false): an
   const result: any = {};
   for (const m of mappings) {
     for (let row of tabular(m.specs, root)) {
+      if (debug) {
+        console.log('I>', JSON.stringify(row));
+      }
       row = m.remap.map(i => row[i]);
       if (debug) {
-        console.log('>', JSON.stringify(row));
+        console.log('O>', JSON.stringify(row));
       }
       rewire(result, row);
     }

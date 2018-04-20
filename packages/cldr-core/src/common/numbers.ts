@@ -1,8 +1,7 @@
-import { NumberSystemName } from '@phensley/cldr-schema';
+import { NumberSystemCategory, NumberSystemName } from '@phensley/cldr-schema';
 import { RoundingModeType } from '../types';
 
-export type NumberSystemType =
-  'default' | 'native' | 'finance' | 'traditional' | NumberSystemName;
+export type NumberSystemType = NumberSystemCategory | NumberSystemName;
 
 export interface NumberFormatOptions {
   nu?: NumberSystemType;

@@ -8,7 +8,7 @@ export const NAMES: Scope = scope('Names', 'Names', [
     vector1('displayName', ScriptIdIndex)
   ]),
 
-  scope('territories', 'regions', [
+  scope('regions', 'regions', [
     vector2('displayName', AltIndex, RegionIdIndex)
   ])
 

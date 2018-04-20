@@ -3,7 +3,7 @@
 //
 
 /* tslint:disable:max-line-length */
-export const numericNumberingDigits: { [x: string]: string[] } = {
+export const decimalNumberingDigits: { [x: string]: string[] } = {
   adlm: ['\u{1e950}', '\u{1e951}', '\u{1e952}', '\u{1e953}', '\u{1e954}', '\u{1e955}', '\u{1e956}', '\u{1e957}', '\u{1e958}', '\u{1e959}'],
   ahom: ['\u{11730}', '\u{11731}', '\u{11732}', '\u{11733}', '\u{11734}', '\u{11735}', '\u{11736}', '\u{11737}', '\u{11738}', '\u{11739}'],
   arab: ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],

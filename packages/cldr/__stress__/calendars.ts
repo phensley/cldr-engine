@@ -1,9 +1,8 @@
 import {
   availableLocales,
-  AvailableFormatType,
   FormatWidthType,
   DateFormatOptions,
-  ZonedDateTime
+  UnixEpochTime
 } from '../src';
 
 import { getCLDR } from '../__tests__/helpers';
@@ -25,17 +24,17 @@ const dateOptions = (): DateFormatOptions[] => {
     res.push({ time: width });
     res.push({ datetime: width });
   }
-  res.push({ date: 'yMMMd' });
-  res.push({ time: 'Hms' });
-  res.push({ date: 'yMMMd', time: 'Hms' });
+  res.push({ skeleton: 'yMMMd' });
+  res.push({ skeleton: 'Hms' });
+  res.push({ skeleton: 'yMMMdjms' });
   return res;
 };
 
-const buildDatetimes = (): ZonedDateTime[] => {
-  const res: ZonedDateTime[] = [];
+const buildDatetimes = (): UnixEpochTime[] => {
+  const res: UnixEpochTime[] = [];
   for (const epoch of DATETIMES) {
     for (const zoneId of ZONES) {
-      res.push(new ZonedDateTime(epoch, zoneId));
+      res.push({ epoch, zoneId });
     }
   }
   return res;

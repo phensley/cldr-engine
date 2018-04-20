@@ -41,4 +41,6 @@ export const [ NumberSystemName, NumberSystemNameValues ] = makeEnum([
 export type NumberSystemName = 'arab' | 'arabext' | 'beng' | 'deva' | 'gujr' | 'guru' |
   'hanidec' | 'khmr' | 'knda' | 'laoo' | 'latn' | 'mlym' | 'mymr' | 'tamldec' | 'telu' | 'thai';
 
-export const NumberSystemTypes = ['default', 'native', 'finance', 'traditional'];
+export const NumberSystems = ['default', 'native', 'finance', 'traditional'];
+
+export type NumberSystemCategory = 'default' | 'native' | 'finance' | 'traditional';

@@ -1,5 +1,5 @@
 import { DateTimeNode } from '../../parsing/patterns/date';
-import { NumberParams } from '../numbers';
+import { NumberParams } from '../../common/private';
 
 export interface DateFormatRequest {
   wrapper?: string;

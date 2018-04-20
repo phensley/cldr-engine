@@ -13,8 +13,8 @@ export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZones', [
     vector2('short', TimeZoneTypeIndex, MetaZoneIndex)
   ]),
   vector1('exemplarCity', TimeZoneIndex),
-  field('gmtFormat', 'gmtFormat'),
-  field('hourFormat', 'hourFormat'),
-  field('gmtZeroFormat', 'gmtZeroFormat'),
-  field('regionFormat', 'regionFormat')
+  field('gmtFormat'),
+  field('hourFormat'),
+  field('gmtZeroFormat'),
+  field('regionFormat')
 ]);

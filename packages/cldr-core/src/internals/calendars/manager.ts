@@ -4,7 +4,7 @@ import { Cache } from '../../utils/cache';
 import { DateFormatOptions, DateIntervalFormatOptions } from '../../common';
 import { DateTimeNode } from '../../parsing/patterns/date';
 import { CalendarDate } from '../../systems/calendars';
-import { NumberParams } from '../numbers';
+import { NumberParams } from '../../common/private';
 import { CalendarPatterns, GregorianPatterns } from './patterns';
 import { DateSkeleton } from './skeleton';
 import { DateFormatRequest, DateIntervalFormatRequest } from './types';

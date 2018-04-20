@@ -42,5 +42,5 @@ export const GREGORIAN: Scope = scope('Gregorian', 'Gregorian', [
   vector1('dateFormats', FormatWidthIndex),
   vector1('timeFormats', FormatWidthIndex),
   vector1('dateTimeFormats', FormatWidthIndex),
-  field('intervalFormatFallback', 'intervalFormatFallback')
+  field('intervalFormatFallback')
 ]);

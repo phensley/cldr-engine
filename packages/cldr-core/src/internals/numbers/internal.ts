@@ -10,11 +10,12 @@ import {
   NumbersSchema,
   NumberSymbol,
   NumberSystemName,
-  PercentFormats,
   Plural,
+  PluralDigitsType,
   PluralType,
   Schema,
   ScopeArrow,
+  Vector2Arrow,
   pluralCategory
 } from '@phensley/cldr-schema';
 
@@ -31,13 +32,14 @@ import { Decimal, Part, RoundingModeType } from '../../types';
 import { NumberContext } from './context';
 import { NumberParams } from '../../common/private';
 import { NumberPattern, parseNumberPattern, NumberField } from '../../parsing/patterns/number';
+import { DecimalNumberingSystem, NumberingSystem } from '../../systems/numbering';
 import { Cache } from '../../utils/cache';
 import { getCurrencyFractions } from './util';
 import { Bundle } from '../../resource';
 import { Internals, NumberRenderer, NumberInternals, PluralInternals, WrapperInternals } from '..';
 import { PartsNumberRenderer, StringNumberRenderer } from './render';
 
-// TODO: unify these with calendar start/part renderers
+// TODO: unify these with calendar renderers
 const PARTS_RENDERER = new PartsNumberRenderer();
 const STRING_RENDERER = new StringNumberRenderer();
 
@@ -93,9 +95,14 @@ export class NumberInternalsImpl implements NumberInternals {
     const style = options.style === undefined ? 'decimal' : options.style;
     let result: T;
     let plural: PluralType = 'other';
-    let pl: number;
 
-    const decimalFormats = this.numbers.numberSystem(params.numberSystemName).decimalFormats;
+    // let pl: number;
+
+    const numberInfo = this.numbers.numberSystem(params.numberSystemName);
+    if (numberInfo === undefined) {
+      return [renderer.empty(), plural];
+    }
+    const decimalFormats = numberInfo.decimalFormats;
 
     switch (style) {
     case 'long':
@@ -103,14 +110,11 @@ export class NumberInternalsImpl implements NumberInternals {
     {
       const standardRaw = decimalFormats.standard(bundle);
       const isShort = style === 'short';
-      const divisorImpl = isShort ? decimalFormats.short.decimalFormatDivisor
-        : decimalFormats.long.decimalFormatDivisor;
-      const patternImpl = isShort ? decimalFormats.short.decimalFormat
-        : decimalFormats.long.decimalFormat;
+      const patternImpl = isShort ? decimalFormats.short : decimalFormats.long;
       const ctx = new NumberContext(options, true);
 
       // Adjust the number using the compact pattern and divisor.
-      const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl, divisorImpl);
+      const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
 
       // Compute the plural category for the final q2.
       const operands = q2.operands();
@@ -118,10 +122,8 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Select the final pluralized compact pattern based on the integer
       // digits of n and the plural category of the rounded / shifted number q2.
+      const raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
 
-      // TODO: switch to vectors and use plural type directly
-      pl = pluralCategory(plural);
-      const raw = patternImpl(bundle, ndigits, pl) || standardRaw;
       const pattern = this.getNumberPattern(raw, q2.isNegative());
       result = renderer.render(q2, pattern, params, '', '', options.group, ctx.minInt);
       break;
@@ -133,8 +135,7 @@ export class NumberInternalsImpl implements NumberInternals {
     case 'permille-scaled':
     {
       // Get percent pattern.
-      const percentFormats = this.numbers.numberSystem(params.numberSystemName).percentFormats;
-      const raw = percentFormats.standard(bundle);
+      const raw = this.numbers.numberSystem(params.numberSystemName).percentFormat(bundle);
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Scale the number to a percent or permille form as needed.
@@ -196,6 +197,10 @@ export class NumberInternalsImpl implements NumberInternals {
     const style = options.style === undefined ? 'symbol' : options.style;
 
     const info = this.numbers.numberSystem(params.numberSystemName);
+    if (info === undefined) {
+      return renderer.empty();
+    }
+
     const currencyFormats = info.currencyFormats;
     const standardRaw = currencyFormats.standard(bundle);
 
@@ -220,10 +225,7 @@ export class NumberInternalsImpl implements NumberInternals {
       const unit = style === 'code' ? code : this.getCurrencyPluralName(bundle, code, plural);
 
       // Wrap number and unit together.
-
-      // TODO: use plural type directly
-      const pl = pluralCategory(plural);
-      const unitWrapper = currencyFormats.unitPattern(bundle, pl);
+      const unitWrapper = currencyFormats.unitPattern.get(bundle, plural);
       return renderer.wrap(this.internals.wrapper, unitWrapper, num, renderer.part('unit', unit));
     }
 
@@ -231,14 +233,13 @@ export class NumberInternalsImpl implements NumberInternals {
     {
       // The extra complexity here is to deal with rounding up and selecting the
       // correct pluralized pattern for the final rounded form.
-      const divisorImpl = currencyFormats.short.standardDivisor;
-      const patternImpl = currencyFormats.short.standard;
+      const patternImpl = currencyFormats.short;
+
       const ctx = new NumberContext(options, true, fractions.digits);
-      // const symbol = this.currencies(code as CurrencyType).symbol(bundle, width);
       const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
 
       // Adjust the number using the compact pattern and divisor.
-      const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl, divisorImpl);
+      const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
 
       // Compute the plural category for the final q2.
       const operands = q2.operands();
@@ -246,9 +247,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Select the final pluralized compact pattern based on the integer
       // digits of n and the plural category of the rounded / shifted number q2.
-      // TODO: use plural type directly
-      const pl = pluralCategory(plural);
-      const raw = patternImpl(bundle, ndigits, pl) || standardRaw;
+      const raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
       const pattern = this.getNumberPattern(raw, q2.isNegative());
       return renderer.render(q2, pattern, params, symbol, '', options.group, ctx.minInt);
     }
@@ -284,12 +283,18 @@ export class NumberInternalsImpl implements NumberInternals {
    */
   protected setupCompact(
       bundle: Bundle, n: Decimal, ctx: NumberContext, standardRaw: string,
-      patternImpl: DigitsArrow, divisorImpl: DivisorArrow): [Decimal, number] {
+      patternImpl: DigitsArrow<PluralType>): [Decimal, number] {
 
     // Select the correct divisor based on the number of integer digits in n.
     const negative = n.isNegative();
     let ndigits = n.integerDigits();
-    const ndivisor = divisorImpl(bundle, ndigits);
+
+    // Select the initial compact pattern based on the integer digits of n.
+    // The plural category doesn't matter until the final pattern is selected.
+    let raw: string;
+    let ndivisor = 0;
+    [raw, ndivisor] = patternImpl.get(bundle, 'other', ndigits);
+    let pattern = this.getNumberPattern(raw || standardRaw, negative);
 
     const fracDigits = ctx.useSignificant ? -1 : 0;
 
@@ -299,11 +304,6 @@ export class NumberInternalsImpl implements NumberInternals {
     if (ndivisor > 0) {
       q1 = q1.movePoint(-ndivisor);
     }
-
-    // Select the initial compact pattern based on the integer digits of n.
-    // The plural category doesn't matter until the final pattern is selected.
-    let raw = patternImpl(bundle, ndigits, Plural.OTHER) || standardRaw;
-    let pattern = this.getNumberPattern(raw, negative);
 
     // Adjust q1 using the compact pattern's parameters, to produce q2.
     const q1digits = q1.integerDigits();
@@ -316,9 +316,10 @@ export class NumberInternalsImpl implements NumberInternals {
     if (q2digits > q1digits) {
       // Select a new divisor and pattern.
       ndigits++;
-      const divisor = divisorImpl(bundle, ndigits);
-      raw = patternImpl(bundle, ndigits, Plural.OTHER) || standardRaw;
-      pattern = this.getNumberPattern(raw, negative);
+
+      let divisor = 0;
+      [raw, divisor] = patternImpl.get(bundle, 'other', ndigits);
+      pattern = this.getNumberPattern(raw || standardRaw, negative);
 
       // If divisor changed we need to divide and adjust again. We don't divide,
       // we just move the decimal point, since our Decimal type uses a radix that
@@ -337,5 +338,4 @@ export class NumberInternalsImpl implements NumberInternals {
 
     return [q2, ndigits];
   }
-
 }

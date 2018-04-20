@@ -1,6 +1,7 @@
 import { coerceDecimal, DecimalArg } from '../../types/numbers';
-export { numericNumberingDigits } from './autogen.numeric';
+export * from './decimal';
 
+// TODO: replace with instances
 export interface NumericNumberSystem {
   readonly type: 'numeric';
   readonly digits: string[];

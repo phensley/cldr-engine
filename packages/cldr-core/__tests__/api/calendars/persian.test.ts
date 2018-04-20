@@ -45,3 +45,11 @@ test('persian', () => {
   s = api.formatDate(mar11, { datetime: 'full', ca: 'persian' });
   expect(s).toEqual('Saturday, Esfand 19, 1396 AP at 11:00:25 PM Pacific Standard Time');
 });
+
+test('persian unicode extension', () => {
+  const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const api = calendarsApi('en-u-ca-persian');
+  let s: string;
+  s = api.formatDate(mar11, { datetime: 'full', ca: 'persian' });
+  expect(s).toEqual('Saturday, Esfand 19, 1396 AP at 11:00:25 PM Pacific Standard Time');
+});

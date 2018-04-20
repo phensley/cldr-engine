@@ -1,13 +1,13 @@
 import {
-  Choice,
+  KeyIndex,
   Origin,
   Scope,
-  digits,
+
   field,
-  objectmap,
   origin,
   scope,
-  scopemap
+  scopemap,
+  vector1,
 } from '@phensley/cldr-schema';
 
 import { Locale, LanguageResolver } from '@phensley/cldr-core';
@@ -21,13 +21,13 @@ const EN_DE = parseLocale('en-DE');
 const EN_CA = parseLocale('en-CA');
 
 const NumberSymbolValues = ['decimal', 'group'];
+const NumberSymbolIndex = new KeyIndex(NumberSymbolValues);
 
 const NUMBERS: Scope = scope('Numbers', 'Numbers', [
-  objectmap('symbols', NumberSymbolValues),
-
+  vector1('symbols', NumberSymbolIndex),
   scope('currencyFormats', 'currencyFormats', [
-    field('standard', 'standard')
-  ])
+    field('standard')
+  ]),
 ]);
 
 const ORIGIN: Origin = origin([
@@ -77,12 +77,20 @@ class PackEncoder implements Encoder {
   encode(f: string | undefined): number {
     return this.pack.add(f === undefined ? '' : f);
   }
+
+  count(): number {
+    return 0;
+  }
+
+  size(): number {
+    return 0;
+  }
 }
 
 test('encoding', () => {
   const pack = new ResourcePack('en', '0.1.0', '32.0.1');
   const encoder = new PackEncoder(pack);
-  const machine = new EncoderMachine(encoder);
+  const machine = new EncoderMachine(encoder, false);
 
   pack.push(EN_US);
   machine.encode(SOURCE_EN_US, ORIGIN);
@@ -98,6 +106,6 @@ test('encoding', () => {
 
   expect(Object.keys(p.scripts)).toEqual(['Latn']);
   const { strings, exceptions, regions } = p.scripts.Latn;
-  expect(strings).toEqual('.\t,\t¤#,##0.00');
+  expect(strings).toEqual('E\t.\t,\t¤#,##0.00');
   expect(exceptions).toEqual(',\t.\t#,##0.00 ¤');
 });

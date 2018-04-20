@@ -28,6 +28,7 @@ import { DateTimeNode, parseDatePattern } from '../parsing/patterns/date';
 import { NumberPattern } from '../parsing/patterns/number';
 import { WrapperNode } from '../parsing/patterns/wrapper';
 import { CalendarDate, CalendarType } from '../systems/calendars';
+import { DecimalNumberingSystem, NumberingSystem } from '../systems/numbering';
 import { CalendarPatterns } from './calendars/patterns';
 import { CalendarContext, CalendarFormatter } from './calendars/formatter';
 import { Renderer } from './calendars/render';
@@ -64,7 +65,7 @@ export interface GeneralInternals {
 }
 
 export interface NumberRenderer<T> {
-    /**
+  /**
    * Render a number pattern to final form T.
    */
   render(n: Decimal, pattern: NumberPattern, params: NumberParams,

@@ -22,7 +22,7 @@ export const getSystems = (data: any): Code[] => {
 
   let code = HEADER + NOLINT_MAXLINE;
 
-  code += `export const numericNumberingDigits: { [x: string]: string[] } = {\n`;
+  code += `export const decimalNumberingDigits: { [x: string]: string[] } = {\n`;
   Object.keys(supp.NumberingSystems).forEach(k => {
     const o = supp.NumberingSystems[k];
     if (o._type === 'numeric') {
@@ -33,6 +33,6 @@ export const getSystems = (data: any): Code[] => {
   code += '};\n';
 
   return [
-    Code.core(['systems', 'numbering', 'autogen.numeric.ts'], code)
+    Code.core(['systems', 'numbering', 'autogen.decimal.ts'], code)
   ];
 };

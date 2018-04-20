@@ -2,8 +2,8 @@ import { Scope, field, scope, vector1 } from '../types';
 import { ListPatternPositionIndex } from '../schema/general';
 
 export const LAYOUT: Scope = scope('Layout', 'Layout', [
-  field('characterOrder', 'characterOrder'),
-  field('lineOrder', 'lineOrder')
+  field('characterOrder'),
+  field('lineOrder')
 ]);
 
 const listPattern = (name: string) => vector1(name, ListPatternPositionIndex);

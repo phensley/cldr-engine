@@ -1,50 +1,41 @@
 import {
-  Choice,
   Digits,
   Field,
-  // FieldMap,
   Instruction,
-  ObjectMap,
   Origin,
   Scope,
-  // ScopeField,
   ScopeMap,
   Vector1,
   Vector2
 } from '@phensley/cldr-schema';
 
+import {
+  pluralDigit,
+  pluralDigitFields,
+  pluralFields
+} from '../utils';
+
 export interface Encoder {
   encode(name: string): number;
+  count(): number;
+  size(): number;
 }
 
-const pluralValues = ['other', 'zero', 'one', 'two', 'few', 'many'];
+const leftPad = (s: string | number, w: number): string => {
+  s = typeof s === 'number' ? String(s) : s;
+  let d = w - s.length;
+  let r = '';
+  while (d-- > 0) {
+    r += ' ';
+  }
+  return r + s;
+};
+
 const altValues = ['', '-alt-variant', '-alt-short', '-alt-narrow'];
 const yeartypeValues = ['', '-yeartype-leap'];
 
-export const pluralFields = (key: string) => pluralValues.map(v => `${key}-count-${v}`);
 export const altField = (key: string) => altValues.map(v => `${key}${v}`);
 export const yeartypeField = (key: string) => yeartypeValues.map(v => `${key}-yeartype-${v}`);
-
-const pluralDigit = (n: number): string => {
-  let r = '1';
-  for (let i = 0; i < n - 1; i++) {
-    r += '0';
-  }
-  return r;
-};
-
-// Produces a list of pluralized digits to for long/short formats.
-// e.g. 1000-count-zero, 1000-count-one, ..., etc.
-export const pluralDigitFields = (() => {
-  const res = [];
-  for (let i = 1; i <= 15; i++) {
-    const base = pluralDigit(i);
-    for (const key of pluralFields(base)) {
-      res.push(key);
-    }
-  }
-  return res;
-})();
 
 export const pluralDivisorFields = (() => {
   const res: [number, string][] = [];
@@ -66,12 +57,14 @@ const countChars = (s: string, ch: string): number => {
   return res;
 };
 
+const PADDING = 8;
+
 /**
  * Executes the instructions to encode strings.
  */
 export class EncoderMachine {
 
-  constructor(private encoder: Encoder) {}
+  constructor(private encoder: Encoder, private verbose: boolean) {}
 
   encode(obj: any, inst: Instruction): void {
     switch (inst.type) {
@@ -80,9 +73,6 @@ export class EncoderMachine {
       break;
     case 'field':
       this.encodeField(obj, inst);
-      break;
-    case 'objectmap':
-      this.encodeObjectMap(obj, inst);
       break;
     case 'origin':
       this.encodeOrigin(obj, inst);
@@ -102,67 +92,47 @@ export class EncoderMachine {
     }
   }
 
-  private _encodeField(obj: any, name: string, choice: Choice = Choice.NONE): void {
-    switch (choice) {
-    case Choice.PLURAL:
-      for (const f1 of pluralFields(name)) {
-        this.encoder.encode(obj[f1]);
-      }
-      break;
-
-    case Choice.ALT:
-      for (const f2 of altField(name)) {
-        this.encoder.encode(obj[f2]);
-      }
-      break;
-
-    case Choice.YEARTYPE:
-      for (const f3 of yeartypeField(name)) {
-        this.encoder.encode(obj[f3]);
-      }
-      break;
-
-    case Choice.NONE:
-    default:
-      this.encoder.encode(obj[name]);
-      break;
-    }
-  }
-
-  private encodeDigits(obj: any, inst: Digits): void {
-    const curr = obj[inst.name] || {};
-    for (const field of pluralDigitFields) {
-      this.encoder.encode(curr[field]);
-    }
-
-    // Compute divisors for pluralized digit formats
-    for (const entry of pluralDivisorFields) {
-      const [digits, field] = entry;
-      const value = curr[field];
-      if (value === undefined || value === '0') {
-        this.encoder.encode('0');
-      } else {
-        const count = countChars(value, '0');
-        const divisor = digits - count;
+  private encodeDigits<T extends string>(obj: any, inst: Digits<T>): void {
+    const o0 = obj[inst.name] || {};
+    for (const k1 of inst.dim0.keys) {
+      const o1 = o0[k1] || {};
+      for (const n of inst.values) {
+        const field = o1[n];
+        let divisor = 0;
+        if (field !== undefined && field !== '0') {
+          const count = countChars(field, '0');
+          divisor = n - count;
+        }
+        this.encoder.encode(field);
         this.encoder.encode(String(divisor));
       }
     }
   }
 
   private encodeField(obj: any, inst: Field): void {
-    this._encodeField(obj, inst.name, inst.choice);
-  }
-
-  private encodeObjectMap(obj: any, inst: ObjectMap): void {
-    const curr = obj[inst.name] || {};
-    for (const field of inst.fields) {
-      this._encodeField(curr, field);
-    }
+    this.encoder.encode(obj[inst.name]);
   }
 
   private encodeOrigin(obj: any, inst: Origin): void {
+    let totalCount = 0;
+    let totalSize = 0;
     for (const i of inst.block) {
+      const saveCount = this.encoder.count();
+      const saveSize = this.encoder.size();
       this.encode(obj, i);
+      const count = this.encoder.count() - saveCount;
+      const size = this.encoder.size() - saveSize;
+      totalCount += count;
+      totalSize += size;
+      if (this.verbose) {
+        console.warn(`      ${leftPad(i.identifier, 20)}  ` +
+          `${leftPad(count, PADDING)} fields   ${leftPad(size, PADDING)} chars`);
+      }
+    }
+    if (this.verbose) {
+      console.warn('      --------------------   --------------   --------------');
+      console.warn(`      ${leftPad('Total', 20)}  ` +
+        `${leftPad(totalCount, PADDING)} fields   ${leftPad(totalSize, PADDING)} chars`);
     }
   }
 
@@ -189,19 +159,37 @@ export class EncoderMachine {
   }
 
   private encodeVector1<T extends string>(obj: any, inst: Vector1<T>): void {
+    const values: string[] = [];
+    let exists = false;
     const o0 = obj[inst.name] || {};
     for (const k of inst.dim0.keys) {
-      this.encoder.encode(o0[k]);
+      const v = o0[k];
+      exists = exists || v !== undefined && v !== '';
+      values.push(v);
+    }
+    // header
+    this.encoder.encode(exists ? 'E' : 'N');
+    for (const v of values) {
+      this.encoder.encode(v);
     }
   }
 
   private encodeVector2<T extends string, S extends string>(obj: any, inst: Vector2<T, S>): void {
+    const values: string[] = [];
+    let exists = false;
     const o0 = obj[inst.name] || {};
     for (const k1 of inst.dim0.keys) {
       const o1 = o0[k1] || {};
       for (const k2 of inst.dim1.keys) {
-        this.encoder.encode(o1[k2]);
+        const v = o1[k2];
+        exists = exists || v !== undefined && v !== '';
+        values.push(v);
       }
+    }
+    // header
+    this.encoder.encode(exists ? 'E' : 'N');
+    for (const v of values) {
+      this.encoder.encode(v);
     }
   }
 }

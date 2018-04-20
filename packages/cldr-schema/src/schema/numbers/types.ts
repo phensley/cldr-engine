@@ -1,77 +1,56 @@
-import { DigitsArrow, DivisorArrow, FieldArrow, FieldIndexedArrow, ObjectArrow, ScopeArrow } from '../arrows';
-import { Plural } from '../enums';
-import { NumberSystemName } from './enums';
+import { DigitsArrow, FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow  } from '../arrows';
+import { PluralDigitsType, PluralType } from '../enums';
+import {
+  NumberSymbolType,
+  NumberSymbolValues,
+  NumberSystemCategory,
+  NumberSystemName,
+  NumberSystemNameValues,
+  NumberSystems,
+} from './enums';
+import { KeyIndex } from '../../types';
 
-export interface CurrencySpacing {
-  readonly currencyMatch: string;
-  readonly surroundingMatch: string;
-  readonly insertBetween: string;
-}
+export const DigitsIndex = new KeyIndex<PluralDigitsType>(
+  ['4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']);
 
-export interface CurrencySpacingInfo {
-  readonly beforeCurrency: ObjectArrow<CurrencySpacing>;
-  readonly afterCurrency: ObjectArrow<CurrencySpacing>;
-}
+export type CurrencySpacingPos = 'before' | 'after';
+
+export const CurrencySpacingPosIndex = new KeyIndex<CurrencySpacingPos>(['before', 'after']);
+
+export type CurrencySpacingPattern = 'currencyMatch' | 'surroundingMatch' | 'insertBetween';
+
+export const CurrencySpacingPatternIndex = new KeyIndex<CurrencySpacingPattern>(
+  ['currencyMatch', 'surroundingMatch', 'insertBetween']
+);
+
+export const NumberSystemsIndex = new KeyIndex(NumberSystems);
+export const NumberSystemNameIndex = new KeyIndex(NumberSystemNameValues);
+export const NumberSymbolIndex = new KeyIndex(NumberSymbolValues);
 
 export interface CurrencyFormats {
-  readonly accounting: FieldArrow;
-  readonly short: CurrencyShortFormat;
   readonly standard: FieldArrow;
-  readonly currencySpacing: CurrencySpacingInfo;
-  readonly unitPattern: FieldIndexedArrow<Plural>;
-}
-
-export interface CurrencyShortFormat {
-  readonly standard: DigitsArrow;
-  readonly standardDivisor: DivisorArrow;
-}
-
-export interface DecimalPluralFormat {
-  readonly decimalFormat: DigitsArrow;
-  readonly decimalFormatDivisor: DivisorArrow;
+  readonly accounting: FieldArrow;
+  readonly short: DigitsArrow<PluralType>;
+  readonly spacing: Vector2Arrow<CurrencySpacingPos, CurrencySpacingPattern>;
+  readonly unitPattern: Vector1Arrow<PluralType>;
 }
 
 export interface DecimalFormats {
-  readonly long: DecimalPluralFormat;
-  readonly short: DecimalPluralFormat;
   readonly standard: FieldArrow;
-}
-
-export interface PercentFormats {
-  readonly standard: FieldArrow;
-}
-
-export interface NumberSymbols {
-  readonly decimal: string;
-  readonly exponential: string;
-  readonly group: string;
-  readonly infinity: string;
-  readonly list: string;
-  readonly minusSign: string;
-  readonly nan: string;
-  readonly perMille: string;
-  readonly percentSign: string;
-  readonly plusSign: string;
-  readonly superscriptingExponent: string;
-  readonly timeSeparator: string;
+  readonly short: DigitsArrow<PluralType>;
+  readonly long: DigitsArrow<PluralType>;
 }
 
 export interface NumberSystemInfo {
+  readonly symbols: Vector1Arrow<NumberSymbolType>;
   readonly currencyFormats: CurrencyFormats;
   readonly decimalFormats: DecimalFormats;
-  readonly percentFormats: PercentFormats;
-  readonly symbols: ObjectArrow<NumberSymbols>;
-}
-
-export interface NumberSystemNames {
-  readonly native: NumberSystemName;
-  readonly default: NumberSystemName;
-  readonly finance: NumberSystemName;
-  readonly traditional: NumberSystemName;
+  readonly percentFormat: FieldArrow;
+  readonly scientificFormat: FieldArrow;
 }
 
 export interface NumbersSchema {
   readonly minimumGroupingDigits: FieldArrow;
-  readonly numberSystems: ObjectArrow<NumberSystemNames>;
   readonly numberSystem: ScopeArrow<NumberSystemName, NumberSystemInfo>;
+  readonly numberSystems: Vector1Arrow<NumberSystemCategory>;
 }

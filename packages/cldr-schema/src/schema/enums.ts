@@ -9,9 +9,11 @@ export enum Plural {
   MANY = 5,
 }
 
-export const PluralValues = 'other zero one two few many'.split(' ');
+export type PluralType = 'other' | 'zero' | 'one' | 'two' | 'few' | 'many';
 
-export const PluralIndex = new KeyIndex(PluralValues);
+export const PluralValues: PluralType[] = ['other', 'zero', 'one', 'two', 'few', 'many'];
+
+export const PluralIndex = new KeyIndex<PluralType>(PluralValues);
 
 export const pluralCategory = (s: string): Plural => {
   switch (s) {
@@ -32,7 +34,7 @@ export const pluralCategory = (s: string): Plural => {
 
 export const pluralString = (c: Plural): string => PluralValues[c] || 'other';
 
-export type PluralType = 'other' | 'zero' | 'one' | 'two' | 'few' | 'many';
+export type PluralDigitsType = '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14' | '15';
 
 export enum Alt {
   NONE = 0,

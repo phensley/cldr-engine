@@ -19,10 +19,25 @@ import { Locale, LanguageResolver } from '@phensley/cldr-core';
  */
 export class PackEncoder implements Encoder {
 
+  private _count: number = 0;
+  private _size: number = 0;
+
   constructor(private pack: ResourcePack) { }
 
   encode(field: string | undefined): number {
+    this._count++;
+    if (field !== undefined) {
+      this._size += field.length;
+    }
     return this.pack.add(field === undefined ? '' : field);
+  }
+
+  count(): number {
+    return this._count;
+  }
+
+  size(): number {
+    return this._size;
   }
 }
 
@@ -48,6 +63,8 @@ export const runPack = (argv: yargs.Arguments) => {
   const pkghash = crypto.createHash('sha256');
   const pkg = getPackageInfo();
   langs.forEach(lang => {
+    console.warn(`processing:  ${lang}`);
+
     // Get the list of languages that should live together in this bundle.
     const locales = localeMap[lang];
 
@@ -55,13 +72,19 @@ export const runPack = (argv: yargs.Arguments) => {
     const pack = new ResourcePack(lang, pkg.version, pkg.cldrVersion);
 
     const encoder = new PackEncoder(pack);
-    const machine = new EncoderMachine(encoder);
+    const machine = new EncoderMachine(encoder, argv.verbose);
 
     // For each locale, fetch its data from the JSON files and execute an encoder.
     locales.forEach(locale => {
+      if (argv.verbose) {
+        console.warn(`   locale: ${locale.id}`);
+      }
       pack.push(locale);
       const main = getMain(locale.id);
       machine.encode(main, ORIGIN);
+      if (argv.verbose) {
+        console.warn('');
+      }
     });
 
     // Pack all strings appended by the encoder.
@@ -70,14 +93,14 @@ export const runPack = (argv: yargs.Arguments) => {
     // Write uncompressed pack
     let name = `${lang}.json`;
     path = join(dest, name);
-    console.warn(`writing:  ${path}`);
+    console.warn(`writing:     ${path}`);
     fs.writeFileSync(path, raw, { encoding: 'utf-8' });
     hashes[name] = sha256(raw);
 
     // Write compressed
     name = `${lang}.json.gz`;
     path = join(dest, name);
-    console.warn(`writing:  ${path}`);
+    console.warn(`writing:     ${path}`);
     const data = zlib.gzipSync(raw, { level: zlib.constants.Z_BEST_COMPRESSION });
     fs.writeFileSync(path, data, { encoding: 'binary' });
     hashes[name] = sha256(data);
@@ -86,12 +109,12 @@ export const runPack = (argv: yargs.Arguments) => {
 
   // Write hashes file
   path = join(dest, 'sha256sums.txt');
-  console.warn(`writing: ${path}`);
+  console.warn(`writing:     ${path}`);
 
   fs.writeFileSync(path, Object.keys(hashes).sort().map(k => `${hashes[k]}  ${k}`).join('\n') + '\n');
 
   path = join(dest, 'resource.json');
-  console.warn(`writing: ${path}`);
+  console.warn(`writing:     ${path}`);
 
   fs.writeFileSync(path, JSON.stringify({ sha256: pkghash.digest('hex') }));
 };

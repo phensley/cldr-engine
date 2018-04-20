@@ -42,5 +42,5 @@ export const PERSIAN: Scope = scope('Persian', 'Persian', [
   vector1('dateFormats', FormatWidthIndex),
   vector1('timeFormats', FormatWidthIndex),
   vector1('dateTimeFormats', FormatWidthIndex),
-  field('intervalFormatFallback', 'intervalFormatFallback')
+  field('intervalFormatFallback')
 ]);

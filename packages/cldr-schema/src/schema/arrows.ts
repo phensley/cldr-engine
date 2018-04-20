@@ -1,8 +1,5 @@
 import { KeyIndex } from '../types';
-
-export type OffsetMap = { [x: string]: number };
-export type OffsetsMap = { [x: string]: number[] };
-export type KeyIndexMap = [string, number][];
+import { PluralDigitsType, PluralType } from './enums';
 
 /**
  * Very low-level access to strings in a bundle. Includes properties
@@ -13,10 +10,6 @@ export interface PrimitiveBundle {
   language(): string;
   region(): string;
   get(offset: number): string;
-}
-
-export interface DigitsArrow {
-  (bundle: PrimitiveBundle, digits: number, index: number): string;
 }
 
 export interface DivisorArrow {
@@ -31,14 +24,6 @@ export interface FieldIndexedArrow<X extends number> {
   (bundle: PrimitiveBundle, index: X): string;
 }
 
-// export interface FieldMapArrow<T extends string> {
-//   (bundle: PrimitiveBundle, field: T): string;
-// }
-
-// export interface FieldMapIndexedArrow<T extends string, X extends number> {
-//   (bundle: PrimitiveBundle, field: T, index: X): string;
-// }
-
 export interface ObjectArrow<T> {
   (bundle: PrimitiveBundle): T;
 }
@@ -46,28 +31,6 @@ export interface ObjectArrow<T> {
 export interface ScopeArrow<T extends string, R> {
   (name: T): R;
 }
-
-export const digitsArrow = (table: number[][]): DigitsArrow => {
-  return (bundle: PrimitiveBundle, digits: number, index: number): string => {
-    if (digits < 1) {
-      return '';
-    }
-    digits -= 1;
-    const offsets = digits >= table.length ? table[table.length - 1] : table[digits];
-    return offsets === undefined ? '' : bundle.get(offsets[index]);
-  };
-};
-
-export const divisorArrow = (table: number[]): DivisorArrow => {
-  return (bundle: PrimitiveBundle, digits: number): number => {
-    if (digits < 1) {
-      return 0;
-    }
-    digits -= 1;
-    const offset = digits >= table.length ? table[table.length - 1] : table[digits];
-    return Number(bundle.get(offset));
-  };
-};
 
 export const fieldArrow = (offset: number): FieldArrow => {
   return (bundle): string => bundle.get(offset);
@@ -77,53 +40,72 @@ export const fieldIndexedArrow = (offsets: number[]): FieldIndexedArrow<number> 
   return (bundle: PrimitiveBundle, index: number): string => bundle.get(offsets[index]);
 };
 
-// export const fieldMapArrow = (map: OffsetMap): FieldMapArrow<string> => {
-//   return (bundle: PrimitiveBundle, field: string): string => {
-//     const offset = map[field];
-//     return offset === undefined ? '' : bundle.get(offset);
-//   };
-// };
-
-// export const fieldMapIndexedArrow = (map: OffsetsMap): FieldMapIndexedArrow<string, number> => {
-//   return (bundle: PrimitiveBundle, field: string, index: number): string => {
-//     const offsets = map[field];
-//     return offsets === undefined ? '' : bundle.get(offsets[index]);
-//   };
-// };
-
-export const objectMapArrow = (index: KeyIndexMap): ObjectArrow<any> => {
-  return (bundle: PrimitiveBundle): any => {
-    const o: any = {};
-    for (let i = 0; i < index.length; i++) {
-      const [key, offset] = index[i];
-      o[key] = bundle.get(offset);
-    }
-    return o;
-  };
-};
-
 export const scopeArrow = (map: any, undef: any): ScopeArrow<string, any> => {
   return (field: string): any => map[field] || undef;
 };
 
+/**
+ * Special vector to store a pluralized number pattern and its divisor together.
+ */
+export class DigitsArrow<T extends string> {
+
+  static EMPTY: [string, number] = ['', 0];
+
+  readonly size2: number;
+
+  constructor(readonly offset: number, readonly index: KeyIndex<T>, readonly values: number[]) {
+    this.size2 = values.length * 2; // store pattern and divisor as a pair
+  }
+
+  get(bundle: PrimitiveBundle, key: T, digits: number): [string, number] {
+    if (digits > this.values.length) {
+      digits = this.values.length;
+    }
+    if (digits > 0) {
+      const i = this.index.get(key);
+      if (i !== -1) {
+        const k = this.offset + (i * this.size2) + ((digits - 1) * 2);
+        const p = bundle.get(k);
+        const d = bundle.get(k + 1);
+        return [p, Number(d)];
+      }
+    }
+    return DigitsArrow.EMPTY;
+  }
+}
+
 export class Vector1Arrow<T extends string> {
 
   readonly len: number;
-
-  constructor(readonly offset: number, readonly index: KeyIndex<T>) {
+  readonly offset: number;
+  constructor(offset: number, readonly index: KeyIndex<T>) {
     this.len = index.keys.length;
+    this.offset = offset + 1; // skip header
+  }
+
+  exists(bundle: PrimitiveBundle): boolean {
+    return bundle.get(this.offset - 1) === 'E';
   }
 
   get(bundle: PrimitiveBundle, key: T): string {
-    const i = this.index.get(key);
-    return i === -1 ? '' : bundle.get(this.offset + i);
+    const exists = bundle.get(this.offset - 1) === 'E';
+    if (exists) {
+      const i = this.index.get(key);
+      return i === -1 ? '' : bundle.get(this.offset + i);
+    }
+    return '';
   }
 
-  mapping(bundle: PrimitiveBundle): { [x: string]: string } {
+  mapping(bundle: PrimitiveBundle): { [P in T]: string } {
     const len = this.len;
     const offset = this.offset;
     const keys = this.index.keys;
-    const res: { [x: string]: string }  = {};
+    /* tslint:disable-next-line */
+    const res: { [P in T]: string } = Object.create(null);
+    const exists = bundle.get(offset - 1) === 'E';
+    if (!exists) {
+      return res;
+    }
     for (let i = 0; i < len; i++) {
       const s = bundle.get(offset + i);
       if (s) {
@@ -139,34 +121,49 @@ export class Vector2Arrow<T extends string, S extends string> {
 
   readonly size: number;
   readonly size2: number;
+  readonly offset: number;
 
-  constructor(readonly offset: number, readonly index1: KeyIndex<T>, readonly index2: KeyIndex<S>) {
+  constructor(offset: number, readonly index1: KeyIndex<T>, readonly index2: KeyIndex<S>) {
     this.size = index1.size * index2.size;
     this.size2 = index2.size;
+    this.offset = offset + 1; // skip header
+  }
+
+  exists(bundle: PrimitiveBundle): boolean {
+    return bundle.get(this.offset - 1) === 'E';
   }
 
   get(bundle: PrimitiveBundle, key1: T, key2: S): string {
-    const i = this.index1.get(key1);
-    if (i !== -1) {
-      const j = this.index2.get(key2);
-      if (j !== -1) {
-        const k = this.offset + (i * this.size2) + j;
-        return bundle.get(k);
+    const exists = bundle.get(this.offset - 1) === 'E';
+    if (exists) {
+      const i = this.index1.get(key1);
+      if (i !== -1) {
+        const j = this.index2.get(key2);
+        if (j !== -1) {
+          const k = this.offset + (i * this.size2) + j;
+          return bundle.get(k);
+        }
       }
     }
     return '';
   }
 
-  mapping(bundle: PrimitiveBundle): { [x: string]: { [y: string]: string }} {
+  mapping(bundle: PrimitiveBundle): { [P in T]: { [Q in S]: string }} {
+    const offset = this.offset;
+    /* tslint:disable-next-line */
+    const res: { [P in T]: { [Q in S]: string } } = Object.create(null);
+    let exists = bundle.get(offset - 1) === 'E';
+    if (!exists) {
+      return res;
+    }
+
     const size2 = this.size2;
     const keys1 = this.index1.keys;
     const keys2 = this.index2.keys;
-    const offset = this.offset;
-    const res: { [x: string]: { [y: string]: string } } = {};
-
     for (let i = 0; i < keys1.length; i++) {
-      let exists = false;
-      const o: { [y: string]: string } = {};
+      exists = false;
+      /* tslint:disable-next-line */
+      const o: { [Q in S]: string } = Object.create(null);
       for (let j = 0; j < keys2.length; j++) {
         const k = offset + (i * size2) + j;
         const s = bundle.get(k);
