@@ -1,39 +1,52 @@
 import { languageBundle } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
+import {
+  Bundle,
+  CalendarsImpl,
+  InternalsImpl,
+  PrivateApiImpl
+} from '../../../src';
 
-// const datetime = (e: number, z: string) => new ZonedDateTime(e, z);
+const INTERNALS = new InternalsImpl();
 
-// March 11, 2018 7:00:25 AM UTC
-const MARCH_11_2018_070025_UTC = 1520751625000;
+const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
+const calendarsApi = (tag: string) => {
+  const bundle = languageBundle(tag);
+  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
+};
 
-const DAY = 86400000;
-const NEW_YORK = 'America/New_York';
-const LOS_ANGELES = 'America/Los_Angeles';
-const LONDON = 'Europe/London';
+test('month', () => {
+  const en = calendarsApi('en');
+  let m = en.months();
+  expect(m[2]).toEqual('February');
 
-test('quarter', () => {
-  // TODO:
-  // let e = new GregorianEngine(INTERNAL, EN);
-  // let s: string;
-
-  // s = e.getQuarter('1');
-  // expect(s).toEqual('1st quarter');
-
-  // e = new GregorianEngine(INTERNAL, DE);
-
-  // s = e.getQuarter('1');
-  // expect(s).toEqual('1. Quartal');
+  m = en.months('persian');
+  expect(m[2]).toEqual('Ordibehesht');
 });
 
-test('day period', () => {
-  // TODO:
-  // let e = new GregorianEngine(INTERNAL, EN);
-  // let s: string;
+test('weekdays', () => {
+  const en = calendarsApi('en');
+  let w = en.weekdays();
+  expect(w[2]).toEqual('Monday');
 
-  // s = e.getDayPeriod('midnight');
-  // expect(s).toEqual('midnight');
+  w = en.weekdays('persian');
+  expect(w[2]).toEqual('Monday');
+});
 
-  // e = new GregorianEngine(INTERNAL, DE);
-  // s = e.getDayPeriod('noon');
-  // expect(s).toEqual('');
+test('day periods', () => {
+  const en = calendarsApi('en');
+  let d = en.dayPeriods();
+  expect(d.noon).toEqual('noon');
+
+  d = en.dayPeriods('persian');
+  expect(d.noon).toEqual('noon');
+});
+
+test('quarter', () => {
+  const en = calendarsApi('en');
+  let q = en.quarters();
+  expect(q[2]).toEqual('2nd quarter');
+
+  q = en.quarters('persian');
+  expect(q[2]).toEqual('2nd quarter');
 });

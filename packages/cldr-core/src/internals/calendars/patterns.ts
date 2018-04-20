@@ -22,6 +22,8 @@ export interface CachedIntervalRequest {
   skeleton?: string;
 }
 
+export type StandaloneFieldType = 'dayPeriods' | 'months' | 'quarters' | 'weekdays';
+
 /**
  * Caches all available date formatting patterns for a given calendar schema.
  * We must cache all available skeletons in order to perform best-fit matching
@@ -32,6 +34,7 @@ export class CalendarPatterns {
 
   protected language: string;
   protected region: string;
+  protected namesCache: LRU<string, { [x: string]: { [y: string]: string }}>;
   protected skeletonParser: DateSkeletonParser;
   protected skeletonRequestCache: LRU<string, CachedSkeletonRequest>;
   protected intervalRequestCache: LRU<string, CachedIntervalRequest>;
@@ -58,6 +61,7 @@ export class CalendarPatterns {
     this.skeletonParser = this.buildSkeletonParser();
     this.skeletonRequestCache = new LRU(cacheSize);
     this.intervalRequestCache = new LRU(cacheSize);
+    this.namesCache = new LRU(cacheSize);
 
     // Fetch this locale's main formats
     this.dateFormats = schema.dateFormats.mapping(bundle);
@@ -71,6 +75,31 @@ export class CalendarPatterns {
     this.buildIntervalMatcher();
 
     this.intervalFallback = this.schema.intervalFormatFallback(bundle);
+  }
+
+  dayPeriods(): { [x: string]: string } {
+    return this._getStandalone('dayPeriods', 'wide');
+  }
+
+  months(): { [x: string]: string } {
+    return this._getStandalone('months', 'wide');
+  }
+
+  weekdays(): { [x: string]: string } {
+    return this._getStandalone('weekdays', 'wide');
+  }
+
+  quarters(): { [x: string]: string } {
+    return this._getStandalone('quarters', 'wide');
+  }
+
+  _getStandalone(key: StandaloneFieldType, width: string): { [x: string]: string } {
+    let entry = this.namesCache.get(key);
+    if (entry === undefined) {
+      entry = this.schema.standAlone[key].mapping(this.bundle);
+      this.namesCache.set(key, entry);
+    }
+    return entry[width];
   }
 
   parseSkeleton(raw: string): DateSkeleton {

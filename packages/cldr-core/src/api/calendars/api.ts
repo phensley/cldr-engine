@@ -58,8 +58,41 @@ export class CalendarsImpl implements Calendars {
     this.minDays = internals.calendars.weekMinDays(region);
   }
 
-  // months(width: string, type?: CalendarType): { [x: string]: string } {
-  // }
+  /**
+   * @alpha
+   */
+  dayPeriods(type?: CalendarType): { [x: string]: string } {
+    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
+    const patterns = this.manager.getCalendarPatterns(calendar);
+    return patterns.dayPeriods();
+  }
+
+  /**
+   * @alpha
+   */
+  months(type?: CalendarType): { [x: string]: string } {
+    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
+    const patterns = this.manager.getCalendarPatterns(calendar);
+    return patterns.months();
+  }
+
+  /**
+   * @alpha
+   */
+  quarters(type?: CalendarType): { [x: string]: string } {
+    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
+    const patterns = this.manager.getCalendarPatterns(calendar);
+    return patterns.quarters();
+  }
+
+  /**
+   * @alpha
+   */
+  weekdays(type?: CalendarType): { [x: string]: string } {
+    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
+    const patterns = this.manager.getCalendarPatterns(calendar);
+    return patterns.weekdays();
+  }
 
   /**
    * Construct a Gregorian date for this locale.

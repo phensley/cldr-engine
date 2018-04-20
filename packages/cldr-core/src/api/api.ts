@@ -24,7 +24,15 @@ import {
   UnixEpochTime
 } from '../common';
 
-import { CalendarDate, GregorianDate, ISO8601Date, JapaneseDate, PersianDate } from '../systems/calendars';
+import {
+  CalendarDate,
+  CalendarType,
+  GregorianDate,
+  ISO8601Date,
+  JapaneseDate,
+  PersianDate
+} from '../systems/calendars';
+
 import { DecimalArg, Part } from '../types';
 
 /**
@@ -33,6 +41,10 @@ import { DecimalArg, Part } from '../types';
  * @alpha
  */
 export interface Calendars {
+
+  dayPeriods(type: CalendarType): { [x: string]: string };
+  months(type: CalendarType): { [x: string]: string };
+  weekdays(type: CalendarType): { [x: string]: string };
 
   newGregorianDate(epoch: number, zoneId: string): GregorianDate;
   newISO8601Date(epoch: number, zoneId: string): ISO8601Date;
