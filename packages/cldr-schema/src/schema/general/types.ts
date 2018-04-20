@@ -1,4 +1,5 @@
-import { FieldArrow, ObjectArrow } from '../arrows';
+import { FieldArrow, Vector1Arrow } from '../arrows';
+import { ListPatternPositionType } from './enums';
 
 export type LineOrderType = 'ltr' | 'rtl';
 export type CharacterOrderType = 'ttb' | 'btt';
@@ -8,18 +9,11 @@ export interface LayoutSchema {
   readonly lineOrder: FieldArrow;
 }
 
-export interface ListPattern {
-  start: string;
-  middle: string;
-  end: string;
-  two: string;
-}
-
 export interface ListPatternsSchema {
-  readonly and: ObjectArrow<ListPattern>;
-  readonly andShort: ObjectArrow<ListPattern>;
-  readonly or: ObjectArrow<ListPattern>;
-  readonly unitLong: ObjectArrow<ListPattern>;
-  readonly unitNarrow: ObjectArrow<ListPattern>;
-  readonly unitShort: ObjectArrow<ListPattern>;
+  readonly and: Vector1Arrow<ListPatternPositionType>;
+  readonly andShort: Vector1Arrow<ListPatternPositionType>;
+  readonly or: Vector1Arrow<ListPatternPositionType>;
+  readonly unitLong: Vector1Arrow<ListPatternPositionType>;
+  readonly unitNarrow: Vector1Arrow<ListPatternPositionType>;
+  readonly unitShort: Vector1Arrow<ListPatternPositionType>;
 }

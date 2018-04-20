@@ -3,12 +3,13 @@ import {
   CharacterOrderType,
   LayoutSchema,
   LineOrderType,
-  ListPattern,
   ListPatternsSchema,
+  ListPatternPositionType,
   NamesSchema,
   Schema,
   ScriptIdType,
-  RegionIdType
+  RegionIdType,
+  Vector1Arrow,
 } from '@phensley/cldr-schema';
 
 import { Internals } from '../../internals';
@@ -39,7 +40,8 @@ export class GeneralInternalsImpl implements GeneralInternals {
   }
 
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string {
-    const pattern = this.selectListPattern(bundle, type);
+    const arrow = this.selectListPattern(type);
+    const pattern = arrow.mapping(bundle);
     let len = items.length;
     if (len < 2) {
       return len === 1 ? items[0] : '';
@@ -75,7 +77,8 @@ export class GeneralInternalsImpl implements GeneralInternals {
   }
 
   formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[] {
-    const pattern = this.selectListPattern(bundle, type);
+    const arrow = this.selectListPattern(type);
+    const pattern = arrow.mapping(bundle);
     let len = items.length;
     if (len < 2) {
       return len === 1 ? items[0] : [];
@@ -95,21 +98,22 @@ export class GeneralInternalsImpl implements GeneralInternals {
     return wrapper.formatParts(pattern.start, [items[0], res]);
   }
 
-  protected selectListPattern(bundle: Bundle, type: ListPatternType): ListPattern {
+  protected selectListPattern(type: ListPatternType): Vector1Arrow<ListPatternPositionType> {
+    const p = this.listPatterns;
     switch (type) {
       case 'unit-long':
-        return this.listPatterns.unitLong(bundle);
+        return p.unitLong;
       case 'unit-narrow':
-        return this.listPatterns.unitNarrow(bundle);
+        return p.unitNarrow;
       case 'unit-short':
-        return this.listPatterns.unitShort(bundle);
+        return p.unitShort;
       case 'or':
-        return this.listPatterns.or(bundle);
+        return p.or;
       case 'and-short':
-        return this.listPatterns.andShort(bundle);
+        return p.andShort;
       case 'and':
       default:
-        return this.listPatterns.and(bundle);
+        return p.and;
     }
   }
 

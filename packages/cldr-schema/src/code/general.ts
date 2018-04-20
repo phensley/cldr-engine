@@ -1,11 +1,12 @@
-import { field, objectmap, scope, Scope } from '../types';
+import { Scope, field, scope, vector1 } from '../types';
+import { ListPatternPositionIndex } from '../schema/general';
 
 export const LAYOUT: Scope = scope('Layout', 'Layout', [
   field('characterOrder', 'characterOrder'),
   field('lineOrder', 'lineOrder')
 ]);
 
-const listPattern = (name: string) => objectmap(name, ['start', 'end', 'middle', 'two']);
+const listPattern = (name: string) => vector1(name, ListPatternPositionIndex);
 
 export const LIST_PATTERNS: Scope = scope('ListPatterns', 'ListPatterns', [
   listPattern('and'),
