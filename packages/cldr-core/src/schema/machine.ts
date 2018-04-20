@@ -135,9 +135,6 @@ export class SchemaBuilder {
       case 'field':
         this.constructField(obj, inst);
         break;
-      // case 'fieldmap':
-      //   this.constructFieldMap(obj, inst);
-      //   break;
       case 'objectmap':
         this.constructObjectMap(obj, inst);
         break;
@@ -157,9 +154,6 @@ export class SchemaBuilder {
 
         break;
       }
-      // case 'scopefield':
-      //   this.constructScopeField(obj, inst);
-      //   break;
       case 'scopemap':
         this.constructScopeMap(obj, inst);
         break;
@@ -190,23 +184,6 @@ export class SchemaBuilder {
     }
   }
 
-  // private constructFieldMap(obj: any, inst: FieldMap): void {
-  //   const choice = inst.choice;
-  //   if (choice === Choice.NONE) {
-  //     const map: OffsetMap = {};
-  //     for (const field of inst.fields) {
-  //       map[field] = this.generator.field();
-  //     }
-  //     obj[inst.identifier] = fieldMapArrow(map);
-  //   } else {
-  //    const map: OffsetsMap = {};
-  //     for (const field of inst.fields) {
-  //       map[field] = this.generator.choiceField(choice);
-  //     }
-  //     obj[inst.identifier] = fieldMapIndexedArrow(map);
-  //   }
-  // }
-
   private constructObjectMap(obj: any, inst: ObjectMap): void {
     const index: KeyIndexMap = [];
     for (const field of inst.fields) {
@@ -228,15 +205,6 @@ export class SchemaBuilder {
       this.construct(curr, i);
     }
   }
-
-  // private constructScopeField(obj: any, inst: ScopeField): void {
-  //   const map: any = {};
-  //   for (const field of inst.fields) {
-  //     const offset = this.generator.field();
-  //     map[field] = [offset];
-  //   }
-  //   obj[inst.name] = fieldMapArrow(map);
-  // }
 
   private constructScopeMap(obj: any, inst: ScopeMap): void {
     const map: any = {};
