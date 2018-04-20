@@ -1,5 +1,6 @@
 export {
   availableLocales,
+  CalendarDate,
   CharacterOrderType,
   CurrencyType,
   CurrencyFormatOptions,
@@ -13,6 +14,8 @@ export {
   DecimalFormatOptions,
   DecimalFormatStyleType,
   FormatWidthType,
+  GregorianDate,
+  ISO8601Date,
   LanguageResolver,
   LanguageTag,
   ListPatternType,
@@ -20,6 +23,7 @@ export {
   LocaleMatcher,
   MathContext,
   Pack,
+  PersianDate,
   Quantity,
   Rational,
   RationalArg,
@@ -28,5 +32,6 @@ export {
   ScriptIdType,
   UnitFormatOptions,
   UnitLength,
-  UnitType
+  UnitType,
+  UnixEpochTime
 } from '@phensley/cldr-core';

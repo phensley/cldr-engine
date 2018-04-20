@@ -2,10 +2,11 @@ import {
   CharacterOrderType,
   CurrencyType,
   DateFieldType,
+  DateTimePatternFieldType,
   LineOrderType,
   RegionIdType,
   ScriptIdType,
-  UnitType
+  UnitType,
 } from '@phensley/cldr-schema';
 
 import {
@@ -23,7 +24,7 @@ import {
   UnixEpochTime
 } from '../common';
 
-import { CalendarDate } from '../systems/calendars';
+import { CalendarDate, GregorianDate, ISO8601Date, JapaneseDate, PersianDate } from '../systems/calendars';
 import { DecimalArg, Part } from '../types';
 
 /**
@@ -32,6 +33,18 @@ import { DecimalArg, Part } from '../types';
  * @alpha
  */
 export interface Calendars {
+
+  newGregorianDate(epoch: number, zoneId: string): GregorianDate;
+  newISO8601Date(epoch: number, zoneId: string): ISO8601Date;
+  newJapaneseDate(epoch: number, zoneId: string): JapaneseDate;
+  newPersianDate(epoch: number, zoneId: string): PersianDate;
+
+  toGregorianDate(date: CalendarDate | UnixEpochTime): GregorianDate;
+  toISO8601Date(date: CalendarDate | UnixEpochTime): ISO8601Date;
+  toJapaneseDate(date: CalendarDate | UnixEpochTime): JapaneseDate;
+  toPersianDate(date: CalendarDate | UnixEpochTime): PersianDate;
+
+  fieldOfGreatestDifference(a: CalendarDate, b: CalendarDate): DateTimePatternFieldType;
 
   /**
    * Formats a date-time value to string.
