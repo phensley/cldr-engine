@@ -3,6 +3,11 @@ import { CalendarType } from './calendar';
 import { CalendarConstants } from './constants';
 import { GregorianDate } from './gregorian';
 
+/**
+ * Gregorian calendar with ISO-8601 first day of week and minimum days in week.
+ *
+ * type: iso8601
+ */
 export class ISO8601Date extends GregorianDate {
 
   private constructor(epoch: number, zoneId: string) {

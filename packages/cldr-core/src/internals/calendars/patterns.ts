@@ -42,7 +42,6 @@ export class CalendarPatterns {
   protected timeFormats: { [x: string]: string };
   protected wrapperFormats: { [x: string]: string };
 
-  protected initialized: boolean = false;
   protected availableMatcher: DatePatternMatcher = new DatePatternMatcher();
   protected intervalMatcher: { [x: string]: DatePatternMatcher } = {};
 
@@ -172,12 +171,21 @@ export class CalendarPatterns {
   }
 
   protected buildAvailableMatcher(): void {
-    for (const width of Object.keys(this.dateFormats)) {
+    let formats = this.dateFormats;
+    for (const width of Object.keys(formats)) {
       this.availableMatcher.add(this.skeletonParser.parse(this.dateFormats[width], true));
       this.availableMatcher.add(this.skeletonParser.parse(this.timeFormats[width], true));
     }
-    for (const skeleton of Object.keys(this.rawAvailableFormats.other)) {
-      this.availableMatcher.add(this.skeletonParser.parse(skeleton));
+
+    // These formats are pluralized, so use the 'other' category which will
+    // be populated for every locale.
+    formats = this.rawAvailableFormats.other;
+    for (const skeleton of Object.keys(formats)) {
+      // Only add skeletons which point to valid formats for this locale. Not all
+      // skeletons are implemented for all locales.
+      if (formats[skeleton]) {
+        this.availableMatcher.add(this.skeletonParser.parse(skeleton));
+      }
     }
   }
 
@@ -186,7 +194,11 @@ export class CalendarPatterns {
       const group = this.rawIntervalFormats[field];
       const m = new DatePatternMatcher();
       for (const skeleton of Object.keys(group)) {
-        m.add(this.skeletonParser.parse(skeleton));
+        // Only add skeletons which point to valid formats for this locale. Not all
+        // skeletons are implemented for all locales.
+        if (group[skeleton]) {
+          m.add(this.skeletonParser.parse(skeleton));
+        }
       }
       this.intervalMatcher[field] = m;
     }

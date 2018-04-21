@@ -19,6 +19,8 @@ export const enum CalendarConstants {
   // Julian day for Mar 21, 622 first day of the Persian calendar
   JD_PERSIAN_EPOCH = 1948320,
 
+  BUDDHIST_ERA_START = -543,
+
   ONE_SECOND_MS = 1000,
   ONE_MINUTE_MS = CalendarConstants.ONE_SECOND_MS * 60,
   ONE_HOUR_MS = CalendarConstants.ONE_MINUTE_MS * 60,

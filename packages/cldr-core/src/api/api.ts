@@ -25,12 +25,13 @@ import {
 } from '../common';
 
 import {
+  BuddhistDate,
   CalendarDate,
   CalendarType,
   GregorianDate,
   ISO8601Date,
   JapaneseDate,
-  PersianDate
+  PersianDate,
 } from '../systems/calendars';
 
 import { DecimalArg, Part } from '../types';
@@ -46,11 +47,13 @@ export interface Calendars {
   months(type: CalendarType): { [x: string]: string };
   weekdays(type: CalendarType): { [x: string]: string };
 
+  newBuddhistDate(epoch: number, zoneId: string): BuddhistDate;
   newGregorianDate(epoch: number, zoneId: string): GregorianDate;
   newISO8601Date(epoch: number, zoneId: string): ISO8601Date;
   newJapaneseDate(epoch: number, zoneId: string): JapaneseDate;
   newPersianDate(epoch: number, zoneId: string): PersianDate;
 
+  toBuddhistDate(date: BuddhistDate | UnixEpochTime): BuddhistDate;
   toGregorianDate(date: CalendarDate | UnixEpochTime): GregorianDate;
   toISO8601Date(date: CalendarDate | UnixEpochTime): ISO8601Date;
   toJapaneseDate(date: CalendarDate | UnixEpochTime): JapaneseDate;

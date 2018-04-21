@@ -1,4 +1,5 @@
 import { origin, Origin } from '../types';
+import { BUDDHIST } from './buddhist';
 import { CURRENCIES } from './currencies';
 import { DATEFIELDS } from './datefields';
 import { LAYOUT, LIST_PATTERNS } from './general';
@@ -16,6 +17,7 @@ export const ORIGIN: Origin = origin([
   DATEFIELDS,
   LAYOUT,
   LIST_PATTERNS,
+  BUDDHIST,
   GREGORIAN,
   JAPANESE,
   PERSIAN,

@@ -121,6 +121,9 @@ const fixIntervals = (obj: any) => {
  * Rename era formats from 'eraNames' to 'names', etc.
  */
 const fixEras = (obj: any) => {
+  if (obj === undefined) {
+    return {};
+  }
   return Object.keys(obj).reduce((o: any, key) => {
     const k = key.toLowerCase().substring(3);
     o[k] = obj[key];
@@ -182,29 +185,6 @@ const Layout = {
   lineOrder: get([_orientation, 'lineOrder', layoutKey])
 };
 
-const chinese = (...keys: string[]) => ['dates', 'calendars', 'chinese', ...keys];
-const chineseIntervals = chinese('dateTimeFormats', 'intervalFormats');
-
-/**
- * Chinese calendar data.
- */
-const Chinese = {
-  availableFormats: get(chinese('dateTimeFormats', 'availableFormats')),
-  cyclicDayParts: get(chinese('cyclicNameSets', 'dayParts', _formats)),
-  cyclicDays: get(chinese('cyclicNameSets', 'days', _formats)),
-  dateFormats: get(chinese('dateFormats', ..._sizeProps)),
-  dayPeriods: get(chinese('dayPeriods', ..._formats)),
-  dateTimeFormats: get(chinese('dateTimeFormats', ..._sizeProps)),
-  intervalFormats: get([L.compose(chineseIntervals, L.remove(L.props('intervalFormatFallback')), fixIntervals)]),
-  intervalFormatFallback: get(L.compose(chineseIntervals, 'intervalFormatFallback')),
-  months: get(chinese('months', ..._formats)),
-  quarters: get(chinese('quarters', ..._formats)),
-  solarTerms: get(chinese('solarTerms', _formats)),
-  timeFormats: get(chinese('timeFormats', ..._sizeProps)),
-  weekdays: get(chinese('days', ..._formats)),
-  zodiacs: get(chinese('cyclicNameSets', 'zodiacs', _formats))
-};
-
 const relativeFields = [
   'year', 'quarter', 'month', 'week', 'day',
   'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat',
@@ -234,84 +214,78 @@ const DateFields = {
   relativeTimes: get([_dateFields, relativeTimes]),
 };
 
+const coreCalendarSchema = (name: string) => {
+  const prefix = (...keys: string[]) => ['dates', 'calendars', name, ...keys];
+  const intervals = prefix('dateTimeFormats', 'intervalFormats');
+
+  return {
+    availableFormats: get(prefix('dateTimeFormats', 'availableFormats')),
+    dateFormats: get(prefix('dateFormats', ..._sizeProps)),
+    dayPeriods: get(prefix('dayPeriods', ..._formats)),
+    dateTimeFormats: get(prefix('dateTimeFormats', ..._sizeProps)),
+    eras: get([prefix('eras'), fixEras]),
+    intervalFormats: get([L.compose(intervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
+    intervalFormatFallback: get(L.compose(intervals, 'intervalFormatFallback')),
+    months: get(prefix('months', ..._formats)),
+    quarters: get(prefix('quarters', ..._formats)),
+    timeFormats: get(prefix('timeFormats', ..._sizeProps)),
+    weekdays: get(prefix('days', ..._formats))
+  };
+};
+
+const buddhist = (...keys: string[]) => ['dates', 'calendars', 'buddhist', ...keys];
+
+const Buddhist = {
+  ...coreCalendarSchema('buddhist'),
+};
+
+const chinese = (...keys: string[]) => ['dates', 'calendars', 'chinese', ...keys];
+
+/**
+ * Chinese calendar data.
+ */
+const Chinese = {
+  ...coreCalendarSchema('chinese'),
+  cyclicDayParts: get(chinese('cyclicNameSets', 'dayParts', _formats)),
+  cyclicDays: get(chinese('cyclicNameSets', 'days', _formats)),
+  solarTerms: get(chinese('solarTerms', _formats)),
+  zodiacs: get(chinese('cyclicNameSets', 'zodiacs', _formats))
+};
+
 const gregorian = (...keys: string[]) => ['dates', 'calendars', 'gregorian', ...keys];
-const gregorianIntervals = gregorian('dateTimeFormats', 'intervalFormats');
 
 /**
  * Gregorian calendar data.
  */
 const Gregorian = {
-  availableFormats: get(gregorian('dateTimeFormats', 'availableFormats')),
-  dateFormats: get(gregorian('dateFormats', ..._sizeProps)),
-  dayPeriods: get(gregorian('dayPeriods', ..._formats)),
-  dateTimeFormats: get(gregorian('dateTimeFormats', ..._sizeProps)),
-  intervalFormats: get([L.compose(gregorianIntervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
-  intervalFormatFallback: get(L.compose(gregorianIntervals, 'intervalFormatFallback')),
-  eras: get([gregorian('eras'), fixEras]),
-  months: get(gregorian('months', ..._formats)),
-  quarters: get(gregorian('quarters', ..._formats)),
-  timeFormats: get(gregorian('timeFormats', ..._sizeProps)),
-  weekdays: get(gregorian('days', ..._formats))
+  ...coreCalendarSchema('gregorian'),
 };
 
 const hebrew = (...keys: string[]) => ['dates', 'calendars', 'hebrew', ...keys];
-const hebrewIntervals = hebrew('dateTimeFormats', 'intervalFormats');
 
 /**
  * Hebrew calendar data.
  */
 const Hebrew = {
-  availableFormats: get(hebrew('dateTimeFormats', 'availableFormats')),
-  dateFormats: get(hebrew('dateFormats', ..._sizeProps)),
-  dayPeriods: get(hebrew('dayPeriods', ..._formats)),
-  dateTimeFormats: get(hebrew('dateTimeFormats', ..._sizeProps)),
-  intervalFormats: get([L.compose(hebrewIntervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
-  intervalFormatFallback: get(L.compose(hebrewIntervals, 'intervalFormatFallback')),
-  eras: get([hebrew('eras'), fixEras]),
-  months: get(hebrew('months', ..._formats)),
-  quarters: get(hebrew('quarters', ..._formats)),
-  timeFormats: get(hebrew('timeFormats', ..._sizeProps)),
-  weekdays: get(hebrew('days', ..._formats))
+  ...coreCalendarSchema('hebrew'),
 };
 
 const japanese = (...keys: string[]) => ['dates', 'calendars', 'japanese', ...keys];
-const japaneseIntervals = japanese('dateTimeFormats', 'intervalFormats');
 
 /**
  * Japanese calendar data.
  */
 const Japanese = {
-  availableFormats: get(japanese('dateTimeFormats', 'availableFormats')),
-  dateFormats: get(japanese('dateFormats', ..._sizeProps)),
-  dayPeriods: get(japanese('dayPeriods', ..._formats)),
-  dateTimeFormats: get(japanese('dateTimeFormats', ..._sizeProps)),
-  intervalFormats: get([L.compose(japaneseIntervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
-  intervalFormatFallback: get(L.compose(japaneseIntervals, 'intervalFormatFallback')),
-  eras: get([japanese('eras'), fixEras]),
-  months: get(japanese('months', ..._formats)),
-  quarters: get(japanese('quarters', ..._formats)),
-  timeFormats: get(japanese('timeFormats', ..._sizeProps)),
-  weekdays: get(japanese('days', ..._formats))
+  ...coreCalendarSchema('japanese'),
 };
 
 const persian = (...keys: string[]) => ['dates', 'calendars', 'persian', ...keys];
-const persianIntervals = persian('dateTimeFormats', 'intervalFormats');
 
 /**
  * Persian calendar data.
  */
 const Persian = {
-  availableFormats: get(persian('dateTimeFormats', 'availableFormats')),
-  dateFormats: get(persian('dateFormats', ..._sizeProps)),
-  dayPeriods: get(persian('dayPeriods', ..._formats)),
-  dateTimeFormats: get(persian('dateTimeFormats', ..._sizeProps)),
-  intervalFormats: get([L.compose(persianIntervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
-  intervalFormatFallback: get(L.compose(persianIntervals, 'intervalFormatFallback')),
-  eras: get([persian('eras'), fixEras]),
-  months: get(persian('months', ..._formats)),
-  quarters: get(persian('quarters', ..._formats)),
-  timeFormats: get(persian('timeFormats', ..._sizeProps)),
-  weekdays: get(persian('days', ..._formats))
+  ...coreCalendarSchema('persian'),
 };
 
 /**
@@ -472,16 +446,16 @@ export const load = (path: string, optional = false) => {
 /**
  * Flattens and exports the main hierarchy for a given language.
  */
-export const getMain = (language: string) => {
+export const getMain = (language: string, transform: boolean = true) => {
   const access = (group: {}, fileName: string, optional = false, transformer?: (o: any) => any) => {
     const data = load(`main/${language}/${fileName}`, optional);
     const root = L.get(['main', language], data);
     const converted = convert(group, root);
-    return transformer === undefined ? converted : transformer(converted);
+    return transform && transformer ? transformer(converted) : converted;
   };
 
   return {
-    Chinese: access(Chinese, 'ca-chinese'),
+    // Chinese: access(Chinese, 'ca-chinese'),
     Hebrew: access(Hebrew, 'ca-hebrew'),
     Layout: access(Layout, 'layout'),
     Numbers: access(Numbers, 'numbers', false, transformNumbers),
@@ -508,6 +482,8 @@ export const getMain = (language: string) => {
     DateFields: access(DateFields, 'dateFields', false, transformDatefields),
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
     Units: access(Units, 'units', false, transformUnits),
+    Buddhist: access(Buddhist, 'ca-buddhist', false, transformCalendar),
+    Chinese: access(Chinese, 'ca-chinese'),
     Gregorian: access(Gregorian, 'ca-gregorian', false, transformCalendar),
     Japanese: access(Japanese, 'ca-japanese', false, transformCalendar),
     Persian: access(Persian, 'ca-persian', false, transformCalendar),

@@ -11,6 +11,7 @@ export * from './timezones';
 export * from './units';
 
 import {
+  BuddhistSchema,
   CurrenciesSchema,
   DateFieldsSchema,
   GregorianSchema,
@@ -25,6 +26,7 @@ import {
 } from '.';
 
 export interface Schema {
+  readonly Buddhist: BuddhistSchema;
   readonly DateFields: DateFieldsSchema;
   readonly Gregorian: GregorianSchema;
   readonly Japanese: JapaneseSchema;

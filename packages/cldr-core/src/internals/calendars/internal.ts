@@ -41,6 +41,9 @@ export class CalendarInternalsImpl implements CalendarInternals {
     this.calendarFormatterCache = new Cache((calendar: string) => {
       let s: CalendarSchema;
       switch (calendar) {
+        case 'buddhist':
+          s = this.schema.Buddhist;
+          break;
         case 'japanese':
           s = this.schema.Japanese;
           break;
@@ -136,6 +139,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
    */
   protected supportedCalendar(c: string | undefined): CalendarType | undefined {
     switch (c) {
+    case 'buddhist':
     case 'iso8601':
     case 'japanese':
     case 'persian':

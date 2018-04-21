@@ -35,12 +35,12 @@ const calendarsApi = (tag: string) => {
   return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 };
 
-test('persian', () => {
+test('buddhist', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
 
   const api = calendarsApi('en');
   let s: string;
 
-  s = api.formatDate(mar11, { datetime: 'full', ca: 'japanese' });
-  expect(s).toEqual('Saturday, March 10, 30 Heisei at 11:00:25 PM Pacific Standard Time');
+  s = api.formatDate(mar11, { datetime: 'full', ca: 'buddhist' });
+  expect(s).toEqual('Saturday, March 10, 2561 BE at 11:00:25 PM Pacific Standard Time');
 });

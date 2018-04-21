@@ -1,8 +1,6 @@
 import {
   CalendarInfo,
   CalendarSchema,
-  DateTimePatternFieldType,
-  FormatWidthType,
 } from '.';
 
 export const PersianInfo: CalendarInfo = {

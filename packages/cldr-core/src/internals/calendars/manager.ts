@@ -22,6 +22,8 @@ export class CalendarManager {
     const schema = internals.schema;
     this.patternCache = new Cache((calendar: string) => {
       switch (calendar) {
+      case 'buddhist':
+        return new CalendarPatterns(bundle, internals, schema.Buddhist);
       case 'japanese':
         return new CalendarPatterns(bundle, internals, schema.Japanese);
       case 'persian':

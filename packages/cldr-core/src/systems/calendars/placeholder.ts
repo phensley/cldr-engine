@@ -2,15 +2,6 @@
 // Placeholder for remaining calendars to implement
 
 /**
- * A date in the Buddhist calendar.
- *
- * type: buddhist
- */
-export class BuddhistDate {
-
-}
-
-/**
  * A date in the Traditional Chinese calendar.
  *
  * type: chinese

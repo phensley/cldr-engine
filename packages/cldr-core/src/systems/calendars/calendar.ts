@@ -13,13 +13,13 @@ import { CLIENT_RENEG_LIMIT } from 'tls';
  *  persian             - primary in AF, IR
  *  japanese            - secondary in JP, based on gregorian
  *  iso8601             - based on gregorian
+ *  buddhist            - primary in TH
  *
  * Next:
- *  buddhist            - primary in TH
  *  islamic-umalqura    - primary in SA
  *  chinese             - secondary in CN, CX, HK, MO, SG, TW
  *  islamic             - secondary in many locales
- *  dangi               - secondary in KO
+ *  dangi               - secondary in KO, based on chinese
  *
  * Rest TBD
  *
@@ -35,7 +35,7 @@ const floor = Math.floor;
 // into a language tag ("zh-u-ca-gregory") as "gregorian" exceeds the 8-char
 // limit.
 // See https://www.unicode.org/reports/tr35/#Key_And_Type_Definitions_
-export type CalendarType = 'gregory' | 'iso8601' | 'japanese' | 'persian';
+export type CalendarType = 'buddhist' | 'gregory' | 'iso8601' | 'japanese' | 'persian';
 
 export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
 

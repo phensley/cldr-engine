@@ -65,7 +65,7 @@ const run = (args: yargs.Arguments): void => {
   const sections: any = {};
   locales.forEach(locale => {
     console.warn(`Scanning ${locale}..`);
-    const main = getMain(locale);
+    const main = getMain(locale, args.transform);
     Object.keys(main).forEach(key => {
       const prefix = `Main.${key}`;
       const dst = sections[prefix] || {};
@@ -87,6 +87,9 @@ const run = (args: yargs.Arguments): void => {
 
   Object.keys(sections).forEach(key => {
     const obj = sections[key];
+    if (!fs.existsSync(args.out)) {
+      fs.mkdirSync(args.out);
+    }
     writeJSON(join(args.out, `${key}.json`), obj);
   });
 };
@@ -95,5 +98,6 @@ export const schemaOptions = (argv: yargs.Argv) =>
   argv.command('schema', 'Generate schema', (y: yargs.Argv) => y
     .option('l', { alias: 'lang', description: 'List of languages' })
     .option('n', { alias: 'dry-run' })
-    .option('o', { alias: 'out', description: 'Output dir', required: true }),
+    .option('o', { alias: 'out', description: 'Output dir', required: true })
+    .option('t', { alias: 'transform', description: 'Apply transforms' }),
     run);

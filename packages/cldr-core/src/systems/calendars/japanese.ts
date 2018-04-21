@@ -4,6 +4,8 @@ import { GregorianDate } from './gregorian';
 
 /**
  * A date in the Japanese Imperial calendar.
+ *
+ * type: japanese
  */
 export class JapaneseDate extends GregorianDate {
 

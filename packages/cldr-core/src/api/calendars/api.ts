@@ -16,6 +16,7 @@ import {
 import { Internals } from '../../internals';
 
 import {
+  BuddhistDate,
   CalendarDate,
   CalendarFromUnixEpoch,
   CalendarType,
@@ -95,6 +96,13 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
+   * Construct a Buddhist date for this locale.
+   */
+  newBuddhistDate(epoch: number, zoneId: string = 'UTC'): BuddhistDate {
+    return this.convertEpoch(BuddhistDate.fromUnixEpoch, epoch, zoneId);
+  }
+
+  /**
    * Construct a Gregorian date for this locale.
    */
   newGregorianDate(epoch: number, zoneId: string = 'UTC'): GregorianDate {
@@ -123,6 +131,13 @@ export class CalendarsImpl implements Calendars {
    */
   newPersianDate(epoch: number, zoneId: string = 'UTC'): PersianDate {
     return this.convertEpoch(PersianDate.fromUnixEpoch, epoch, zoneId);
+  }
+
+  /**
+   * Convert the given date to the Buddhist calendar.
+   */
+  toBuddhistDate(date: CalendarDate | UnixEpochTime): BuddhistDate {
+    return this.convertDate(BuddhistDate.fromUnixEpoch, date);
   }
 
   /**
@@ -293,6 +308,8 @@ export class CalendarsImpl implements Calendars {
       return date;
     }
     switch (target) {
+    case 'buddhist':
+      return this.toBuddhistDate(date);
     case 'gregory':
       return this.toGregorianDate(date);
     case 'iso8601':
