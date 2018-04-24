@@ -31,22 +31,6 @@ class Generator {
     return this.offset++;
   }
 
-  // pluralDigits(): number[][] {
-  //   const res: number[][] = [];
-  //   for (let i = 1; i <= 15; i++) {
-  //     res.push(this._field(PluralValues));
-  //   }
-  //   return res;
-  // }
-
-  // divisorDigits(): number[] {
-  //   const res: number[] = [];
-  //   for (let i = 1; i <= 15; i++) {
-  //     res.push(this.offset++);
-  //   }
-  //   return res;
-  // }
-
   vector1(dim: number): number {
     const off = this.offset;
     this.offset += dim;
