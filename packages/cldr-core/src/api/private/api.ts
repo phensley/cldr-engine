@@ -6,7 +6,6 @@ import {
   NumberSystemInfo,
   NumberSystemName,
   PluralType,
-  PluralDigitsType,
 } from '@phensley/cldr-schema';
 
 import { Bundle } from '../../resource';
@@ -48,8 +47,8 @@ export class PrivateApiImpl {
     protected internals: Internals
   ) {
     this.numbers = internals.schema.Numbers;
-    this.minimumGroupingDigits = Number(this.numbers.minimumGroupingDigits(bundle));
-    this.latnNumberSystemInfo = this.numbers.numberSystem('latn');
+    this.minimumGroupingDigits = Number(this.numbers.minimumGroupingDigits.get(bundle));
+    this.latnNumberSystemInfo = this.numbers.numberSystem.get('latn');
 
     this.numberParamsCache = new NumberParamsCache(bundle, internals);
 

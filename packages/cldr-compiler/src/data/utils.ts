@@ -1,16 +1,6 @@
 
 import { pluralDigit } from '../utils';
 
-const countChars = (s: string, ch: string): number => {
-  let res = 0;
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === ch) {
-      res++;
-    }
-  }
-  return res;
-};
-
 const plurals = ['other', 'zero', 'one', 'two', 'few', 'many'];
 const alts = ['none', 'short', 'variant', 'narrow', 'stand-alone'];
 
@@ -23,24 +13,12 @@ export interface PluralSpec {
 }
 
 /**
- * Plural spec constructor.
- */
-export const pluralSpec = (keys: [string, string, string][]): PluralSpec =>
-  ({ kind: 'plural', keys });
-
-/**
  * Map an alt key and transform it.
  */
 export interface AltSpec {
   readonly kind: 'alt';
   readonly keys: [string, string, string][];
 }
-
-/**
- * Alt spec constructor
- */
-export const altSpec = (keys: [string, string, string][]): AltSpec =>
-  ({ kind: 'alt', keys });
 
 /**
  * Generate tuple of keys for plural and alt.

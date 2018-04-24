@@ -233,8 +233,6 @@ const coreCalendarSchema = (name: string) => {
   };
 };
 
-const buddhist = (...keys: string[]) => ['dates', 'calendars', 'buddhist', ...keys];
-
 const Buddhist = {
   ...coreCalendarSchema('buddhist'),
 };
@@ -252,16 +250,12 @@ const Chinese = {
   zodiacs: get(chinese('cyclicNameSets', 'zodiacs', _formats))
 };
 
-const gregorian = (...keys: string[]) => ['dates', 'calendars', 'gregorian', ...keys];
-
 /**
  * Gregorian calendar data.
  */
 const Gregorian = {
   ...coreCalendarSchema('gregorian'),
 };
-
-const hebrew = (...keys: string[]) => ['dates', 'calendars', 'hebrew', ...keys];
 
 /**
  * Hebrew calendar data.
@@ -270,16 +264,12 @@ const Hebrew = {
   ...coreCalendarSchema('hebrew'),
 };
 
-const japanese = (...keys: string[]) => ['dates', 'calendars', 'japanese', ...keys];
-
 /**
  * Japanese calendar data.
  */
 const Japanese = {
   ...coreCalendarSchema('japanese'),
 };
-
-const persian = (...keys: string[]) => ['dates', 'calendars', 'persian', ...keys];
 
 /**
  * Persian calendar data.

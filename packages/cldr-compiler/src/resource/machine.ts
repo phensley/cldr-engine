@@ -31,22 +31,6 @@ const leftPad = (s: string | number, w: number): string => {
   return r + s;
 };
 
-const altValues = ['', '-alt-variant', '-alt-short', '-alt-narrow'];
-const yeartypeValues = ['', '-yeartype-leap'];
-
-export const altField = (key: string) => altValues.map(v => `${key}${v}`);
-export const yeartypeField = (key: string) => yeartypeValues.map(v => `${key}-yeartype-${v}`);
-
-export const pluralDivisorFields = (() => {
-  const res: [number, string][] = [];
-  for (let i = 1; i <= 15; i++) {
-    const base = pluralDigit(i);
-    const field = `${base}-count-other`;
-    res.push([i, field]);
-  }
-  return res;
-})();
-
 const countChars = (s: string, ch: string): number => {
   let res = 0;
   for (let i = 0; i < s.length; i++) {

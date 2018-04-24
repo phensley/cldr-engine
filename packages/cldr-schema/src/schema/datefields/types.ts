@@ -1,12 +1,11 @@
 import {
   FieldArrow,
-  FieldIndexedArrow,
   ScopeArrow,
   Vector1Arrow,
   Vector2Arrow
 } from '../arrows';
 
-import { Alt, Plural, PluralType } from '../enums';
+import { PluralType } from '../enums';
 import { DateFieldType, DateFieldValues,
   RelativeTimeFieldValues, RelativeTimeFieldType } from './enums';
 import { KeyIndex } from '../../types';

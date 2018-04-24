@@ -6,7 +6,6 @@ import {
   RelativeTimeFields,
   RelativeTimeFieldType,
   Schema,
-  pluralCategory
 } from '@phensley/cldr-schema';
 
 import { coerceDecimal, Decimal, DecimalArg, DecimalConstants } from '../../types';

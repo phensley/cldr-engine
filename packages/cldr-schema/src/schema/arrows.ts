@@ -1,5 +1,5 @@
 import { KeyIndex } from '../types';
-import { PluralDigitsType, PluralType } from './enums';
+import { PluralType } from './enums';
 
 /**
  * Very low-level access to strings in a bundle. Includes properties
@@ -12,37 +12,24 @@ export interface PrimitiveBundle {
   get(offset: number): string;
 }
 
-export interface DivisorArrow {
-  (bundle: PrimitiveBundle, digits: number): number;
+export class FieldArrow {
+  constructor(readonly offset: number) {}
+
+  get(bundle: PrimitiveBundle): string {
+    return bundle.get(this.offset);
+  }
 }
 
-export interface FieldArrow {
-  (bundle: PrimitiveBundle): string;
+export class ScopeArrow<T extends string, R> {
+
+  constructor(
+    readonly map: { [P in T]: R },
+    readonly undef: { [P in T]: R }) {}
+
+  get(key: T): R {
+    return this.map[key] || this.undef[key];
+  }
 }
-
-export interface FieldIndexedArrow<X extends number> {
-  (bundle: PrimitiveBundle, index: X): string;
-}
-
-export interface ObjectArrow<T> {
-  (bundle: PrimitiveBundle): T;
-}
-
-export interface ScopeArrow<T extends string, R> {
-  (name: T): R;
-}
-
-export const fieldArrow = (offset: number): FieldArrow => {
-  return (bundle): string => bundle.get(offset);
-};
-
-export const fieldIndexedArrow = (offsets: number[]): FieldIndexedArrow<number> => {
-  return (bundle: PrimitiveBundle, index: number): string => bundle.get(offsets[index]);
-};
-
-export const scopeArrow = (map: any, undef: any): ScopeArrow<string, any> => {
-  return (field: string): any => map[field] || undef;
-};
 
 /**
  * Special vector to store a pluralized number pattern and its divisor together.
@@ -181,9 +168,3 @@ export class Vector2Arrow<T extends string, S extends string> {
     return res;
   }
 }
-
-export const vector1Arrow = (offset: number, index: KeyIndex<string>): Vector1Arrow<string> =>
-  new Vector1Arrow(offset, index);
-
-export const vector2Arrow = (offset: number, index1: KeyIndex<string>, index2: KeyIndex<string>) =>
-  new Vector2Arrow(offset, index1, index2);

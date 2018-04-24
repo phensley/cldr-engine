@@ -1,6 +1,6 @@
-import { FieldArrow, FieldIndexedArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
+import { FieldArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
 import { CurrencyType, CurrencyValues } from './autogen.currencies';
-import { Alt, AltIndex, AltType, Plural, PluralIndex, PluralType } from '../enums';
+import { AltIndex, AltType, PluralIndex, PluralType } from '../enums';
 import { KeyIndex } from '../../types';
 
 export const CurrencyIdIndex = new KeyIndex(CurrencyValues);

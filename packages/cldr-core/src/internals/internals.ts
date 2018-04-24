@@ -1,5 +1,4 @@
 import {
-  Alt,
   AltType,
   CurrencyType,
   DateFieldType,

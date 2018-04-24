@@ -1,13 +1,8 @@
 import {
-  pluralCategory,
-  pluralString,
-  Alt,
   CurrencyType,
   NumberSystemInfo,
   NumberSystemName,
-  Plural,
   PluralType,
-  PluralValues,
   Schema
 } from '@phensley/cldr-schema';
 

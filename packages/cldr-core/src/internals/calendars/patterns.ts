@@ -73,7 +73,7 @@ export class CalendarPatterns {
     this.buildAvailableMatcher();
     this.buildIntervalMatcher();
 
-    this.intervalFallback = this.schema.intervalFormatFallback(bundle);
+    this.intervalFallback = this.schema.intervalFormatFallback.get(bundle);
   }
 
   dayPeriods(): { [x: string]: string } {

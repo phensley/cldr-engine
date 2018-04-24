@@ -1,9 +1,8 @@
 import { Scope, digits, field, scope, scopemap, vector1, vector2 } from '../types';
-import { PluralIndex, Plural } from '../schema';
+import { PluralIndex } from '../schema';
 import {
   CurrencySpacingPosIndex,
   CurrencySpacingPatternIndex,
-  DigitsIndex,
   NumberSystemsIndex,
   NumberSystemNameValues,
   NumberSymbolIndex,

@@ -1,23 +1,13 @@
 import {
-  fieldArrow,
-  fieldIndexedArrow,
-  scopeArrow,
-  vector1Arrow,
-  vector2Arrow,
-
-  AltValues,
-  PluralValues,
-  YeartypeValues,
-
   Digits,
   DigitsArrow,
   Field,
   FieldArrow,
-  FieldIndexedArrow,
   Instruction,
   Origin,
   Schema,
   Scope,
+  ScopeArrow,
   ScopeMap,
 
   Vector1,
@@ -41,21 +31,21 @@ class Generator {
     return this.offset++;
   }
 
-  pluralDigits(): number[][] {
-    const res: number[][] = [];
-    for (let i = 1; i <= 15; i++) {
-      res.push(this._field(PluralValues));
-    }
-    return res;
-  }
+  // pluralDigits(): number[][] {
+  //   const res: number[][] = [];
+  //   for (let i = 1; i <= 15; i++) {
+  //     res.push(this._field(PluralValues));
+  //   }
+  //   return res;
+  // }
 
-  divisorDigits(): number[] {
-    const res: number[] = [];
-    for (let i = 1; i <= 15; i++) {
-      res.push(this.offset++);
-    }
-    return res;
-  }
+  // divisorDigits(): number[] {
+  //   const res: number[] = [];
+  //   for (let i = 1; i <= 15; i++) {
+  //     res.push(this.offset++);
+  //   }
+  //   return res;
+  // }
 
   vector1(dim: number): number {
     const off = this.offset;
@@ -144,7 +134,7 @@ export class SchemaBuilder {
 
   private constructField(obj: any, inst: Field): void {
     const offset = this.generator.field();
-    obj[inst.name] = fieldArrow(offset);
+    obj[inst.name] = new FieldArrow(offset);
   }
 
   private constructOrigin(obj: any, inst: Origin): void {
@@ -175,7 +165,7 @@ export class SchemaBuilder {
     for (const i of inst.block) {
       this.construct(undef, i);
     }
-    obj[inst.name] = scopeArrow(map, undef);
+    obj[inst.name] = new ScopeArrow(map, undef);
   }
 
   private constructVector1<T extends string>(obj: any, inst: Vector1<T>): void {

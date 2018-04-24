@@ -412,7 +412,7 @@ export class CalendarFormatter<T extends CalendarDate> {
       if (!city) {
         return this.timezone_O(ctx, ['O', 4]);
       }
-      const pattern = this.tz.regionFormat(bundle);
+      const pattern = this.tz.regionFormat.get(bundle);
       return this.wrapper.format(pattern, [city]);
 
     case 3:
@@ -457,7 +457,7 @@ export class CalendarFormatter<T extends CalendarDate> {
     const { bundle, date } = ctx;
     const _offset = date.timeZoneOffset();
     if (_offset === 0) {
-      return this.tz.gmtZeroFormat(bundle);
+      return this.tz.gmtZeroFormat.get(bundle);
     }
     const [offset, negative, hours, minutes] = getTZC(_offset);
     const emitMins = !short || minutes > 0;
@@ -479,12 +479,12 @@ export class CalendarFormatter<T extends CalendarDate> {
       }
     }
 
-    const wrap = this.tz.gmtFormat(bundle);
+    const wrap = this.tz.gmtFormat.get(bundle);
     return this.wrapper.format(wrap, [fmt]);
   }
 
   _hourPattern(bundle: Bundle, negative: boolean): DateTimeNode[] {
-    const raw = this.tz.hourFormat(bundle);
+    const raw = this.tz.hourFormat.get(bundle);
     return this.internals.calendars.getHourPattern(raw, negative);
   }
 }

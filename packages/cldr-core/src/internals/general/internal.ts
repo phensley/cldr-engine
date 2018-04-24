@@ -32,11 +32,11 @@ export class GeneralInternalsImpl implements GeneralInternals {
   }
 
   characterOrder(bundle: Bundle): string {
-    return this.layout.characterOrder(bundle);
+    return this.layout.characterOrder.get(bundle);
   }
 
   lineOrder(bundle: Bundle): string {
-    return this.layout.lineOrder(bundle);
+    return this.layout.lineOrder.get(bundle);
   }
 
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string {

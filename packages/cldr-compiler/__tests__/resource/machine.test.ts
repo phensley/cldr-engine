@@ -3,11 +3,13 @@ import {
   Origin,
   Scope,
 
+  digits,
   field,
   origin,
   scope,
   scopemap,
   vector1,
+  vector2
 } from '@phensley/cldr-schema';
 
 import { Locale, LanguageResolver } from '@phensley/cldr-core';
@@ -23,11 +25,20 @@ const EN_CA = parseLocale('en-CA');
 const NumberSymbolValues = ['decimal', 'group'];
 const NumberSymbolIndex = new KeyIndex(NumberSymbolValues);
 
+const PluralIndex = new KeyIndex(['other', 'one']);
+const DigitValues = [4, 5, 6];
+const FooIndex = new KeyIndex(['foo', 'bar']);
+
 const NUMBERS: Scope = scope('Numbers', 'Numbers', [
   vector1('symbols', NumberSymbolIndex),
   scope('currencyFormats', 'currencyFormats', [
     field('standard')
   ]),
+  digits('short', PluralIndex, DigitValues),
+  scopemap('group', ['foo', 'bar'], [
+    field('name')
+  ]),
+  vector2('plurals', PluralIndex, FooIndex)
 ]);
 
 const ORIGIN: Origin = origin([
@@ -43,6 +54,36 @@ const SOURCE_EN_US = {
       decimal: '.',
       group: ','
     },
+    short: {
+      other: {
+        4: '0K',
+        5: '00K',
+        6: '000K',
+      },
+      one: {
+        4: '0K',
+        5: '00K',
+        6: '000K',
+      }
+    },
+    group: {
+      foo: {
+        name: 'Foo'
+      },
+      bar: {
+        name: 'Bar'
+      }
+    },
+    plurals: {
+      other: {
+        foo: 'Foos',
+        bar: 'Bars'
+      },
+      one: {
+        foo: 'Foo',
+        bar: 'Bar'
+      }
+    }
   }
 };
 
@@ -54,6 +95,36 @@ const SOURCE_EN_DE = {
     symbols: {
       decimal: ',',
       group: '.'
+    },
+    short: {
+      other: {
+        4: '0Q',
+        5: '00Q',
+        6: '000Q',
+      },
+      one: {
+        4: '0R',
+        5: '00R',
+        6: '000R',
+      }
+    },
+    group: {
+      foo: {
+        name: 'Foo 2'
+      },
+      bar: {
+        name: 'Bar'
+      }
+    },
+    plurals: {
+      other: {
+        foo: 'Foos',
+        bar: 'Bars'
+      },
+      one: {
+        foo: 'Foo',
+        bar: 'Bar'
+      }
     }
   }
 };
@@ -66,31 +137,68 @@ const SOURCE_EN_CA = {
     symbols: {
       decimal: '.',
       group: ','
+    },
+    short: {
+      other: {
+        4: '0K',
+        5: '00K',
+        6: '000K',
+      },
+      one: {
+        4: '0R',
+        5: '00R',
+        6: '000R',
+      }
+    },
+    group: {
+      foo: {
+        name: 'Foo'
+      },
+      bar: {
+        name: 'Bar 2'
+      }
+    },
+    plurals: {
+      other: {
+        foo: 'Foos',
+        bar: 'Bars'
+      },
+      one: {
+        foo: 'Foo',
+        bar: 'Bar'
+      }
     }
   }
 };
 
 class PackEncoder implements Encoder {
 
+  _count: number = 0;
+  _size: number = 0;
+
   constructor(private pack: ResourcePack) { }
 
   encode(f: string | undefined): number {
+    this._count++;
+    if (f !== undefined) {
+      this._size += f.length;
+    }
     return this.pack.add(f === undefined ? '' : f);
   }
 
   count(): number {
-    return 0;
+    return this._count;
   }
 
   size(): number {
-    return 0;
+    return this._size;
   }
 }
 
 test('encoding', () => {
   const pack = new ResourcePack('en', '0.1.0', '32.0.1');
   const encoder = new PackEncoder(pack);
-  const machine = new EncoderMachine(encoder, false);
+  const machine = new EncoderMachine(encoder, true);
 
   pack.push(EN_US);
   machine.encode(SOURCE_EN_US, ORIGIN);
@@ -106,6 +214,19 @@ test('encoding', () => {
 
   expect(Object.keys(p.scripts)).toEqual(['Latn']);
   const { strings, exceptions, regions } = p.scripts.Latn;
-  expect(strings).toEqual('E\t.\t,\t¤#,##0.00');
-  expect(exceptions).toEqual(',\t.\t#,##0.00 ¤');
+
+  expect(strings).toEqual(
+    // vector1 symbols
+    'E\t.\t,\t' +
+    // scope currency
+    '¤#,##0.00\t' +
+    // digits short
+    '0K\t3\t00K\t3\t000K\t3\t0R\t3\t00R\t3\t000R\t3\t' +
+    // scopemap plus undefined
+    'Foo\tBar 2\t\t' +
+    // vector2 plurals
+    'E\tFoos\tBars\tFoo\tBar');
+
+  expect(exceptions).toEqual(
+    '0K\t00K\t000K\tBar\t,\t.\t#,##0.00 ¤\t0Q\t00Q\t000Q\tFoo 2');
 });

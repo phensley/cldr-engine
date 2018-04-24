@@ -70,15 +70,15 @@ export class NumberParamsCache {
   }
 
   protected build(numberSystemName: NumberSystemName): NumberParams {
-    const info = this.numbers.numberSystem(numberSystemName);
+    const info = this.numbers.numberSystem.get(numberSystemName);
     const symbols = info.symbols.mapping(this.bundle);
     const currencySpacing = info.currencyFormats.spacing.mapping(this.bundle);
 
     // Fetch standard pattern to determine grouping digits
-    const standardRaw = info.decimalFormats.standard(this.bundle);
+    const standardRaw = info.decimalFormats.standard.get(this.bundle);
     const standard = this.internals.numbers.getNumberPattern(standardRaw, false);
 
-    const minimumGroupingDigits = Number(this.numbers.minimumGroupingDigits(this.bundle));
+    const minimumGroupingDigits = Number(this.numbers.minimumGroupingDigits.get(this.bundle));
     const numberSystem: NumericNumberSystem = {
       type: 'numeric',
       digits: decimalNumberingDigits[numberSystemName]
