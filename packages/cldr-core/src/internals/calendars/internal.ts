@@ -6,7 +6,7 @@ import { Bundle } from '../../resource';
 import { DateFormatOptions, DateIntervalFormatOptions } from '../../common/calendars';
 import { DateFormatRequest, DateIntervalFormatRequest, NumberParams } from '../../common/private';
 import { CalendarDate, CalendarType } from '../../systems/calendars';
-import { Renderer } from './render';
+import { Renderer } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
 import { CalendarManager } from './manager';
 import { Internals } from '../internals';

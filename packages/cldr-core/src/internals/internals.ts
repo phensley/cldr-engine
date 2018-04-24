@@ -30,7 +30,7 @@ import { CalendarDate, CalendarType } from '../systems/calendars';
 import { DecimalNumberingSystem, NumberingSystem } from '../systems/numbering';
 import { CalendarPatterns } from './calendars/patterns';
 import { CalendarContext, CalendarFormatter } from './calendars/formatter';
-import { Renderer } from './calendars/render';
+import { Renderer } from '../utils/render';
 import { Decimal, DecimalArg, NumberOperands, Part } from '../types';
 
 export interface CalendarInternals {

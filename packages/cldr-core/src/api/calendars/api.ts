@@ -33,7 +33,7 @@ import { Part } from '../../types/parts';
 
 import { CalendarManager } from '../../internals/calendars/manager';
 import { CalendarFormatter } from '../../internals/calendars/formatter';
-import { StringRenderer, Renderer, PartsRenderer } from '../../internals/calendars/render';
+import { StringRenderer, Renderer, PartsRenderer } from '../../utils/render';
 import { DayPeriodRules } from '../../internals/calendars/rules';
 import { PrivateApiImpl } from '../private';
 

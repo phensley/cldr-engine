@@ -2,9 +2,7 @@ import { WrapperInternals } from '..';
 import { Cache } from '../../utils/cache';
 import { WrapperNode, parseWrapperPattern } from '../../parsing/patterns/wrapper';
 import { Part } from '../../types';
-
-// TODO: move this to a shared location
-import { Renderer } from '../calendars/render';
+import { Renderer } from '../../utils/render';
 
 export class WrapperInternalsImpl implements WrapperInternals {
 

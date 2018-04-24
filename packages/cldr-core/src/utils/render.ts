@@ -1,10 +1,9 @@
-import { Part } from '../../types';
-import { WrapperNode } from '../../parsing/patterns/wrapper';
-
-// TODO: generalize to work with number formatters
+import { Part } from '../types/parts';
+import { WrapperNode } from '../parsing/patterns/wrapper';
 
 export interface Renderer<R> {
   add(type: string, value: string): void;
+  append(rendered: R): void;
   literal(value: string): void;
   get(): R;
   join(...elems: R[]): R;
@@ -22,6 +21,10 @@ export class StringRenderer implements Renderer<string> {
 
   add(type: string, value: string): void {
     this.str += value;
+  }
+
+  append(rendered: string): void {
+    this.str += rendered;
   }
 
   get(): string {
@@ -43,7 +46,10 @@ export class StringRenderer implements Renderer<string> {
       if (typeof n === 'string') {
         this.literal(n);
       } else {
-        this.str += args[n] || '';
+        const arg = args[n];
+        if (arg) {
+          this.str += arg;
+        }
       }
     }
   }
@@ -59,6 +65,10 @@ export class PartsRenderer implements Renderer<Part[]> {
 
   add(type: string, value: string): void {
     this.parts.push({ type, value });
+  }
+
+  append(rendered: Part[]): void {
+    this.parts = this.parts.concat(rendered);
   }
 
   get(): Part[] {

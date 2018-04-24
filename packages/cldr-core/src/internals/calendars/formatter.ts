@@ -4,7 +4,7 @@ import { Internals } from '../internals';
 import { CalendarDate } from '../../systems/calendars';
 import { NumberSystem } from '../../systems/numbering';
 import { DateTimeNode, parseDatePattern } from '../../parsing/patterns/date';
-import { Renderer } from './render';
+import { Renderer } from '../../utils/render';
 import { DayPeriodRules } from './rules';
 import { zeroPad2 } from '../../utils/string';
 import { Cache } from '../../utils/cache';
