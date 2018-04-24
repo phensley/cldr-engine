@@ -18,6 +18,16 @@ test('constructor args', () => {
   expect(m.match('en-AU')).toEqual(expected);
 });
 
+test('extensions', () => {
+  const m = new LocaleMatcher('en, fr, fa, es');
+  const r = m.match('en-AU-u-ca-persian');
+  expect(r.distance).toEqual(5);
+  const { id, tag } = r.locale;
+  expect(id).toEqual('en');
+  expect(tag.region()).toEqual('US');
+  expect(tag.extensions()).toEqual({ u: ['ca-persian'] });
+});
+
 loadMatchCases().forEach((c, i) => {
   test(`locale-match-cases.txt - line ${c.lineno}`, () => {
     const m = new LocaleMatcher(c.supported);

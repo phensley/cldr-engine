@@ -133,28 +133,32 @@ export class LocaleMatcher {
    * as having maximum distance.
    */
   match(desiredLocales: string | string[], threshold: number = DEFAULT_THRESHOLD): LanguageMatch {
-    const desired = parse(desiredLocales);
+    const desireds = parse(desiredLocales);
+    const len = desireds.length;
     let bestDistance = MAX_DISTANCE;
     let bestMatch = undefined;
-    for (let i = 0; i < desired.length; i++) {
-      const current = desired[i];
-      const exact = this.exactMap[current.compact];
+    let bestDesired = len === 0 ? this.default : desireds[0];
+    for (let i = 0; i < len; i++) {
+      const desired = desireds[i];
+      const exact = this.exactMap[desired.compact];
       if (exact !== undefined) {
         return new LanguageMatch({ id: exact[0].id, tag: exact[0].tag }, 0);
       }
 
       for (let j = 0; j < this.count; j++) {
         const supported = this.supported[j];
-        const distance = getDistance(current.tag, supported.tag, threshold);
+        const distance = getDistance(desired.tag, supported.tag, threshold);
         if (bestDistance === undefined || distance < bestDistance) {
           bestDistance = distance;
           bestMatch = supported;
+          bestDesired = desired;
         }
       }
     }
-    return bestMatch === undefined ?
-      new LanguageMatch({ id: this.default.id, tag: this.default.tag }, MAX_DISTANCE) :
-      new LanguageMatch({ id: bestMatch.id, tag: bestMatch.tag }, bestDistance);
+    const extensions = bestDesired.tag.extensions();
+    const privateUse = bestDesired.tag.privateUse();
+    const { id, tag } = bestMatch === undefined ? this.default : bestMatch;
+    const result = new LanguageTag(tag.language(), tag.script(), tag.region(), tag.variant(), extensions, privateUse);
+    return new LanguageMatch({ id, tag: result }, bestMatch === undefined ? MAX_DISTANCE : bestDistance);
   }
-
 }

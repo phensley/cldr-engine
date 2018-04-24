@@ -4,11 +4,9 @@ import {
   Scope,
   digits,
   field,
-  fieldmap,
   objectmap,
   origin,
   scope,
-  scopefield,
   scopemap
 } from '@phensley/cldr-schema';
 
