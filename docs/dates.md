@@ -15,13 +15,13 @@ const date = en.Calendars.newGregorianDate(1109916428000, 'America/New_York');
 date.year();
 // > 2005
 
-date.month(); // zero-based month, 2 = March
-// > 2
+date.month(); // one-based month, 3 = March
+// > 3
 
 date.dayOfMonth(); // one-based day of month
 // > 4
 
-date.dayOfWeek(); // 1 = Sunday, 2 = Monday, ... 6 = Friday, 7 = Saturday
+date.dayOfWeek(); // one-based day of week, 1 = Sunday, .. 6 = Saturday
 // > 6
 ```
 

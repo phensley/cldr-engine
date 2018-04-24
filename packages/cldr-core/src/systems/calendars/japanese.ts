@@ -38,7 +38,7 @@ const computeJapaneseFields = (f: number[]): void => {
       const j = i * 3;
       let diff = year - ERAS[j];
       if (diff === 0) {
-        diff = f[DateField.MONTH] - (ERAS[j + 1] - 1);
+        diff = (f[DateField.MONTH] - 1) - (ERAS[j + 1] - 1);
         if (diff === 0) {
           diff = f[DateField.DAY_OF_MONTH] - ERAS[j + 2];
         }

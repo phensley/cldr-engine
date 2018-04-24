@@ -27,7 +27,7 @@ test('gregorian date', () => {
   expect(d.julianDay()).toEqual(2458220);
   expect(d.era()).toEqual(1);
   expect(d.year()).toEqual(2018);
-  expect(d.month()).toEqual(3);
+  expect(d.month()).toEqual(4);
   expect(d.dayOfMonth()).toEqual(11);
   expect(d.dayOfYear()).toEqual(101);
   expect(d.weekOfYear()).toEqual(15);
@@ -51,7 +51,7 @@ test('gregorian date', () => {
   expect(d.julianDay()).toEqual(2458220);
   expect(d.era()).toEqual(1);
   expect(d.year()).toEqual(2018);
-  expect(d.month()).toEqual(3);
+  expect(d.month()).toEqual(4);
   expect(d.dayOfMonth()).toEqual(11);
   expect(d.dayOfYear()).toEqual(101);
   expect(d.weekOfYear()).toEqual(15);
@@ -69,7 +69,7 @@ test('gregorian date', () => {
   expect(d.julianDay()).toEqual(2458221);
   expect(d.era()).toEqual(1);
   expect(d.year()).toEqual(2018);
-  expect(d.month()).toEqual(3);
+  expect(d.month()).toEqual(4);
   expect(d.dayOfMonth()).toEqual(12);
   expect(d.dayOfYear()).toEqual(102);
 
@@ -86,7 +86,7 @@ test('gregorian date', () => {
 
   expect(d.julianDay()).toEqual(2458407);
   expect(d.year()).toEqual(2018);
-  expect(d.month()).toEqual(9);
+  expect(d.month()).toEqual(10);
   expect(d.dayOfMonth()).toEqual(15);
   expect(d.dayOfYear()).toEqual(288);
   expect(d.weekOfYear()).toEqual(42);
@@ -104,7 +104,7 @@ test('min / max date', () => {
   expect(d.era()).toEqual(0);
   expect(d.extendedYear()).toEqual(-4712);
   expect(d.year()).toEqual(4713);
-  expect(d.month()).toEqual(0); // Jan
+  expect(d.month()).toEqual(1); // Jan
   expect(d.dayOfMonth()).toEqual(1);
 
   // Attempting to represent Dec 31 4714 BC
@@ -115,7 +115,7 @@ test('min / max date', () => {
   expect(d.era()).toEqual(1);
   expect(d.extendedYear()).toEqual(8652);
   expect(d.year()).toEqual(8652);
-  expect(d.month()).toEqual(11); // Dec
+  expect(d.month()).toEqual(12); // Dec
   expect(d.dayOfMonth()).toEqual(31);
 
   // Attempt to represent Jan  1 8653 AD
@@ -210,7 +210,7 @@ test('week of month', () => {
   let d: CalendarDate;
 
   d = make(base, NEW_YORK);
-  expect(d.month()).toEqual(0);
+  expect(d.month()).toEqual(1);
   expect(d.weekOfMonth()).toEqual(1);
 
   d = make(base + (6 * day), NEW_YORK);
@@ -241,7 +241,7 @@ test('week of month', () => {
   expect(d.weekOfMonth()).toEqual(5);
 
   d = make(base + (32 * day), NEW_YORK);
-  expect(d.month()).toEqual(1);
+  expect(d.month()).toEqual(2);
   expect(d.dayOfMonth()).toEqual(2);
   expect(d.weekOfMonth()).toEqual(1);
 });

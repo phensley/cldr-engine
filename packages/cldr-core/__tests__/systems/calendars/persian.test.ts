@@ -19,7 +19,7 @@ test('persian calendar', () => {
   expect(d.julianDay()).toEqual(2458220);
   expect(d.era()).toEqual(0);
   expect(d.year()).toEqual(1397);
-  expect(d.month()).toEqual(0); // Farvardin
+  expect(d.month()).toEqual(1); // Farvardin
   expect(d.dayOfMonth()).toEqual(22);
   expect(d.dayOfWeek()).toEqual(4);
   expect(d.weekOfYear()).toEqual(4);
@@ -31,7 +31,7 @@ test('persian calendar', () => {
   expect(d.julianDay()).toEqual(1947533);
   expect(d.era()).toEqual(0);
   expect(d.year()).toEqual(-2);
-  expect(d.month()).toEqual(10); // Bahman
+  expect(d.month()).toEqual(11); // Bahman
   expect(d.dayOfMonth()).toEqual(3);
   expect(d.dayOfWeek()).toEqual(2);
   expect(d.weekOfYear()).toEqual(45);

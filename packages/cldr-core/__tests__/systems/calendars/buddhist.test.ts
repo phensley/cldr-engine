@@ -17,7 +17,7 @@ test('buddhist calendar', () => {
   expect(d.julianDay()).toEqual(2458220);
   expect(d.era()).toEqual(0);
   expect(d.year()).toEqual(2561);
-  expect(d.month()).toEqual(3); // April
+  expect(d.month()).toEqual(4); // April
   expect(d.dayOfMonth()).toEqual(11);
 
   // Year of Buddha's birth
@@ -27,6 +27,6 @@ test('buddhist calendar', () => {
   expect(d.julianDay()).toEqual(1522834);
   expect(d.era()).toEqual(0);
   expect(d.year()).toEqual(0);
-  expect(d.month()).toEqual(3); // April
+  expect(d.month()).toEqual(4); // April
   expect(d.dayOfMonth()).toEqual(17);
 });

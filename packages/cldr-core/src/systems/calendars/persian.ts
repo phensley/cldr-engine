@@ -52,7 +52,7 @@ const computePersianFields = (f: number[]): void => {
   f[DateField.ERA] = 0;
   f[DateField.YEAR] = year;
   f[DateField.EXTENDED_YEAR] = year;
-  f[DateField.MONTH] = month;
+  f[DateField.MONTH] = month + 1;
   f[DateField.DAY_OF_MONTH] = dom;
   f[DateField.DAY_OF_YEAR] = doy + 1;
   f[DateField.IS_LEAP] = leapPersian(year) ? 1 : 0;

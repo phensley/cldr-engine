@@ -175,13 +175,13 @@ export class CalendarFormatter<T extends CalendarDate> {
     const [field, width] = node;
     const format = field === 'Q' ? this.cal.format : this.cal.standAlone;
     const quarters = format.quarters;
-    const quarter = (ctx.date.month() / 3 | 0) + 1;
+    const quarter = ((ctx.date.month() - 1 ) / 3 | 0) + 1;
     return this._formatQuarterOrMonth(ctx.bundle, quarters, quarter, width);
   }
 
   month(ctx: CalendarContext<T>, node: [string, number]): string {
     const format = node[0] === 'M' ? this.cal.format : this.cal.standAlone;
-    return this._formatQuarterOrMonth(ctx.bundle, format.months, ctx.date.month() + 1, node[1]);
+    return this._formatQuarterOrMonth(ctx.bundle, format.months, ctx.date.month(), node[1]);
   }
 
   weekOfWeekYear(ctx: CalendarContext<T>, node: [string, number]): string {

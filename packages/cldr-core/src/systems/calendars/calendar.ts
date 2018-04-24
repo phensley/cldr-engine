@@ -117,6 +117,9 @@ export abstract class CalendarDate {
     return this._fields[DateField.WEEK_OF_YEAR];
   }
 
+  /**
+   * Ordinal month, one-based, e.g. Gregorian JANUARY = 1.
+   */
   month(): number {
     return this._fields[DateField.MONTH];
   }

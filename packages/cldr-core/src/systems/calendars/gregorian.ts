@@ -100,7 +100,7 @@ const computeGregorianFields = (f: number[]): void => {
   const dom = doy - MONTH_COUNT[month][isLeap ? 3 : 2] + 1;
 
   f[DateField.EXTENDED_YEAR] = year;
-  f[DateField.MONTH] = month;
+  f[DateField.MONTH] = month + 1;
   f[DateField.DAY_OF_MONTH] = dom;
   f[DateField.DAY_OF_YEAR] = doy + 1;
   f[DateField.IS_LEAP] = isLeap ? 1 : 0;
@@ -126,7 +126,7 @@ const computeJulianFields = (f: number[]): void => {
   const dom = doy - MONTH_COUNT[month][isLeap ? 3 : 2] + 1;
 
   f[DateField.EXTENDED_YEAR] = eyear;
-  f[DateField.MONTH] = month;
+  f[DateField.MONTH] = month + 1;
   f[DateField.DAY_OF_MONTH] = dom;
   f[DateField.DAY_OF_YEAR] = doy + 1;
   f[DateField.IS_LEAP] = isLeap ? 1 : 0;
