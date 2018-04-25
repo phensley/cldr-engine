@@ -31,8 +31,8 @@ export class InternalsImpl implements Internals {
   readonly units: UnitInternals;
   readonly wrapper: WrapperInternals;
 
-  constructor(patternCacheSize: number = 50) {
-    this.schema = buildSchema();
+  constructor(debug: boolean = false, patternCacheSize: number = 50) {
+    this.schema = buildSchema(debug);
 
     this.plurals = new PluralInternalsImpl();
     this.wrapper = new WrapperInternalsImpl();

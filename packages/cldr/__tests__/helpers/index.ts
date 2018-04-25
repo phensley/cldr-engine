@@ -30,10 +30,20 @@ export const asyncLoader = (language: string): Promise<any> => {
 };
 
 const defaultOptions: CLDROptions = {
+  debug: false,
   loader,
   asyncLoader,
   packCacheSize: 3,
   patternCacheSize: 50
 };
 
-export const getCLDR = (options: CLDROptions = defaultOptions): CLDRFramework => new CLDRFramework(options);
+type OptKey = keyof CLDROptions;
+
+export const getCLDR = (options: CLDROptions = defaultOptions): CLDRFramework => {
+  const merged: CLDROptions = {};
+  const keys: OptKey[] = Object.keys(defaultOptions) as OptKey[];
+  for (const key of keys) {
+    merged[key] = options[key] || defaultOptions[key];
+  }
+  return new CLDRFramework(merged);
+};

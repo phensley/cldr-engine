@@ -18,7 +18,8 @@ import {
   ORIGIN,
 } from '@phensley/cldr-schema';
 
-// import { Decimal } from '../types';
+import { Decimal } from '../types';
+import { leftPad } from '../utils/string';
 
 /**
  * Generates field offsets for the schema builder.
@@ -52,21 +53,11 @@ class Generator {
   }
 }
 
-// const time = (n: [number, number]) =>
-//   new Decimal(n[0]).add(new Decimal(n[1]).movePoint(-9));
+const time = (n: [number, number]) =>
+  new Decimal(n[0]).add(new Decimal(n[1]).movePoint(-9));
 
-// const elapsed = (start: [number, number]): string => {
-//   const end = process.hrtime();
-//   return time(end).subtract(time(start)).movePoint(6).toString();
-// };
-
-// Capture construction times for top-level scopes.
-// const times: [string, string][] = [];
-// export const dumpTimes = () => {
-//   for (const t of times) {
-//     console.log(t[1], t[0]);
-//   }
-// };
+const elapsed = (start: [number, number], end: [number, number]): string =>
+  time(end).subtract(time(start)).movePoint(6).toString();
 
 /**
  * Builds the schema accessor singleton.
@@ -74,6 +65,16 @@ class Generator {
 export class SchemaBuilder {
 
   private generator: Generator = new Generator();
+  private captureTimes: boolean;
+  private _times: [string, string][] = [];
+
+  constructor(debug: boolean = false) {
+    this.captureTimes = debug && process !== undefined && process.hrtime !== undefined;
+  }
+
+  times(): [string, string][] {
+    return this._times;
+  }
 
   construct(obj: any, inst: Instruction): void {
     switch (inst.type) {
@@ -87,18 +88,8 @@ export class SchemaBuilder {
         this.constructOrigin(obj, inst);
         break;
       case 'scope':
-      {
-        // const s = process.hrtime();
         this.constructScope(obj, inst);
-
-        // const cp = inst.identifier.charCodeAt(0);
-        // if (cp >= 0x41 && cp <= 0x5a) {
-        //   const e = elapsed(s);
-        //   times.push([inst.identifier, e]);
-        // }
-
         break;
-      }
       case 'scopemap':
         this.constructScopeMap(obj, inst);
         break;
@@ -122,8 +113,20 @@ export class SchemaBuilder {
   }
 
   private constructOrigin(obj: any, inst: Origin): void {
+    const capture = this.captureTimes;
     for (const i of inst.block) {
+      const start: [number, number] = capture ? process.hrtime() : [0, 0];
       this.construct(obj, i);
+      const end: [number, number] = capture ? process.hrtime() : [0, 0];
+      if (capture) {
+        this._times.push([i.identifier, elapsed(start, end)]);
+      }
+    }
+    if (capture) {
+      console.log('Scope construct times (microseconds):');
+      for (const t of this._times) {
+        console.log(leftPad(t[0], 20), t[1]);
+      }
     }
   }
 
@@ -167,9 +170,9 @@ export class SchemaBuilder {
 
 let SCHEMA: Schema;
 
-export const buildSchema = (): Schema => {
+export const buildSchema = (debug: boolean = false): Schema => {
   if (SCHEMA === undefined) {
-    const builder = new SchemaBuilder();
+    const builder = new SchemaBuilder(debug);
     SCHEMA = ({} as any) as Schema;
     builder.construct(SCHEMA, ORIGIN);
   }

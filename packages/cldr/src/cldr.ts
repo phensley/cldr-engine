@@ -150,6 +150,11 @@ export class CLDR {
 export class CLDROptions {
 
   /**
+   * Log some messages.
+   */
+  debug?: boolean;
+
+  /**
    * Given a language identifier, fetch the resource pack from the
    * filesystem, webserver, etc, and return the raw decompressed string.
    */
@@ -192,8 +197,8 @@ export class CLDRFramework {
     this.loader = options.loader;
     this.asyncLoader = options.asyncLoader;
 
-    this.internals = new InternalsImpl();
     const patternCacheSize = options.patternCacheSize || 50;
+    this.internals = new InternalsImpl(options.debug || false, patternCacheSize);
   }
 
   info(): string {

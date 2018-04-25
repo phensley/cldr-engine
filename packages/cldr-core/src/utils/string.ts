@@ -9,3 +9,13 @@ export const stringToObject = (raw: string, d1: string, d2: string): { [x: strin
 
 // TODO: REMOVE and replace with general zeroPad method on numbering system instance
 export const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` : `${n}`;
+
+export const leftPad = (s: string | number, w: number): string => {
+  s = typeof s === 'number' ? String(s) : s;
+  let d = w - s.length;
+  let r = '';
+  while (d-- > 0) {
+    r += ' ';
+  }
+  return r + s;
+};

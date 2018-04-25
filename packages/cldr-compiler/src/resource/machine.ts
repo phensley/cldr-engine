@@ -9,6 +9,8 @@ import {
   Vector2
 } from '@phensley/cldr-schema';
 
+import { leftPad } from '@phensley/cldr-core';
+
 import {
   pluralDigit,
   pluralDigitFields,
@@ -20,16 +22,6 @@ export interface Encoder {
   count(): number;
   size(): number;
 }
-
-const leftPad = (s: string | number, w: number): string => {
-  s = typeof s === 'number' ? String(s) : s;
-  let d = w - s.length;
-  let r = '';
-  while (d-- > 0) {
-    r += ' ';
-  }
-  return r + s;
-};
 
 const countChars = (s: string, ch: string): number => {
   let res = 0;
