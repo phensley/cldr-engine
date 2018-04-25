@@ -1,6 +1,6 @@
 import {
-  datetimeSuite
-} from './datetime';
+  calendarsSuite
+} from './calendars';
 
 import {
   numberEngineSuite,
@@ -11,7 +11,7 @@ import {
 
 const options = { async: false, delay: 0.5 };
 
-datetimeSuite.run(options);
+calendarsSuite.run(options);
 numberEngineSuite.run(options);
 numberFormatBaselineSuite.run(options);
 numberFormatSuite.run(options);
