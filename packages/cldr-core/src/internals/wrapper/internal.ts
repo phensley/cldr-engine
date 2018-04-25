@@ -19,7 +19,10 @@ export class WrapperInternalsImpl implements WrapperInternals {
       if (typeof node === 'string') {
         res += node;
       } else {
-        res += args[node] || '';
+        const s = args[node];
+        if (s) {
+          res += s;
+        }
       }
     }
     return res;
@@ -44,19 +47,4 @@ export class WrapperInternalsImpl implements WrapperInternals {
   parseWrapper(raw: string): WrapperNode[] {
     return this.wrapperPatternCache.get(raw);
   }
-}
-
-export class WrapperInternalsImpl2 {
-
-  private readonly wrapperPatternCache: Cache<WrapperNode[]>;
-
-  constructor(cacheSize: number = 50) {
-    this.wrapperPatternCache = new Cache(parseWrapperPattern, cacheSize);
-  }
-
-  format<R>(renderer: Renderer<R>, format: string, args: R[]): void {
-    const pattern = this.wrapperPatternCache.get(format);
-    renderer.wrap(pattern, args);
-  }
-
 }

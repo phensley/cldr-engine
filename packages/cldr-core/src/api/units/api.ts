@@ -32,14 +32,14 @@ export class UnitsImpl implements Units {
   formatQuantity(q: Quantity, options?: UnitFormatOptions): string {
     options = options || defaultOptions;
     const params = this.privateApi.getNumberParams(options.nu);
-    const renderer = this.numbers.stringRenderer();
+    const renderer = this.numbers.stringRenderer(params);
     return this.units.format(this.bundle, renderer, q, options, params);
   }
 
   formatQuantityToParts(q: Quantity, options?: UnitFormatOptions): Part[] {
     options = options || defaultOptions;
     const params = this.privateApi.getNumberParams(options.nu);
-    const renderer = this.numbers.partsRenderer();
+    const renderer = this.numbers.partsRenderer(params);
     return this.units.format(this.bundle, renderer, q, options, params);
   }
 

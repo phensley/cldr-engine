@@ -1,7 +1,7 @@
 import { DivMod, add, subtract, multiply, trimLeadingZeros, divide } from './math';
 import { allzero, compare, digitCount } from './operations';
 import { NumberOperands, decimalOperands } from './operands';
-import { Formatter, StringFormatter, PartsFormatter } from './format';
+import { DecimalFormatter, StringDecimalFormatter, PartsDecimalFormatter } from './format';
 import { Part } from '../parts';
 import {
   Chars,
@@ -473,52 +473,30 @@ export class Decimal {
    * Format the number to a string, using fixed point.
    */
   toString(): string {
-    const r = this.format('.', '', 1, 1, 3, 3);
+    const f = new StringDecimalFormatter();
+    this.format(f, '.', '', 1, 1, 3, 3);
+    const r = f.render();
     return this.sign === -1 ? '-' + r : r;
+  }
+
+  /**
+   * Format this number to an array of parts.
+   */
+  toParts(): Part[] {
+    const f = new PartsDecimalFormatter('.', '');
+    this.format(f, '.', '', 1, 1, 3, 3);
+    const r = f.render();
+    return this.sign === -1 ? [{ type: 'minus', value: '-'}].concat(r) : r;
   }
 
   // TODO: support scientific formats
 
   /**
-   * Render this number to a string, using the given formatting options.
-   *
-   *   decimal   - decimal point character to use
-   *    group    - digit grouping character to use, or '' for no grouping
-   *   minInt    - minimum integer digits
-   *   minGroup  - minimum grouping digits
-   *   priGroup  - primary grouping size
-   *   secGroup  - secondary digit grouping size
-   *   digits    - digit symbols to use
-   *
-   * TODO: support alternate digit systems, algorithmic / spellout
-   */
-  format(
-    decimal: string, group: string, minInt: number, minGroup: number,
-    priGroup: number, secGroup: number, digits: string[] = DECIMAL_DIGITS): string {
-
-    const formatter = new StringFormatter();
-    this._format(formatter, decimal, group, minInt, minGroup, priGroup, secGroup, digits);
-    return formatter.render();
-  }
-
-  /**
-   * Render this number to an array of parts.
-   */
-  formatParts(
-    decimal: string, group: string, minInt: number, minGroup: number,
-    priGroup: number, secGroup: number, digits: string[] = DECIMAL_DIGITS): Part[] {
-
-    const formatter = new PartsFormatter(decimal, group);
-    this._format(formatter, decimal, group, minInt, minGroup, priGroup, secGroup, digits);
-    return formatter.render();
-  }
-
-  /**
    * Low-level formatting of string and Part[] forms.
    */
-  protected _format(
-    formatter: Formatter<any>, decimal: string, group: string, minInt: number,
-    minGroup: number, priGroup: number, secGroup: number, digits: string[]): void {
+  format<R>(
+    formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number,
+    minGroup: number, priGroup: number, secGroup: number, digits: string[] = DECIMAL_DIGITS): void {
 
     // Determine if grouping is enabled, and set the primary and
     // secondary group sizes.

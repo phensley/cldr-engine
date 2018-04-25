@@ -1,6 +1,8 @@
 import { makeEnum } from '../../types';
 
 export const [ NumberSymbol, NumberSymbolValues ] = makeEnum([
+  'currencyDecimal',
+  'currencyGroup',
   'decimal',
   'exponential',
   'group',
@@ -15,9 +17,9 @@ export const [ NumberSymbol, NumberSymbolValues ] = makeEnum([
   'timeSeparator'
 ]);
 
-export type NumberSymbolType = 'decimal' | 'exponential' | 'group' | 'infinity' |
-  'list' | 'minusSign' | 'nan' | 'perMille' | 'percentSign' | 'plusSign' |
-  'superscriptingExponent' | 'timeSeparator';
+export type NumberSymbolType = 'currencyDecimal' | 'currencyGroup' | 'decimal' |
+  'exponential' | 'group' | 'infinity' | 'list' | 'minusSign' | 'nan' | 'perMille' |
+  'percentSign' | 'plusSign' | 'superscriptingExponent' | 'timeSeparator';
 
 export const [ NumberSystemName, NumberSystemNameValues ] = makeEnum([
   'arab',

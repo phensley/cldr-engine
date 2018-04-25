@@ -41,9 +41,11 @@ export interface CalendarInternals {
   weekFirstDay(region: string): number;
   weekMinDays(region: string): number;
   selectCalendar(bundle: Bundle, ca?: CalendarType): CalendarType;
+
   formatDateTime<R>(
     calendar: CalendarType, ctx: CalendarContext<CalendarDate>, renderer: Renderer<R>,
     date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
+
   formatInterval<R>(calendar: CalendarType, bundle: Bundle, params: NumberParams, renderer: Renderer<R>,
       start: CalendarDate, end: CalendarDate, pattern: DateTimeNode[]): R;
 }
@@ -63,37 +65,16 @@ export interface GeneralInternals {
   getRegionDisplayName(bundle: Bundle, code: string, alt?: AltType): string;
 }
 
-export interface NumberRenderer<T> {
-  /**
-   * Render a number pattern to final form T.
-   */
-  render(n: Decimal, pattern: NumberPattern, params: NumberParams,
-    currency: string, percent: string, group: boolean | undefined, minInt: number): T;
-
-  /**
-   * Render a wrapper pattern to final form T using the given args.
-   */
-  wrap(internal: WrapperInternals, pattern: string, ...args: T[]): T;
-
-  /**
-   * Construct a part of type T from a type and value.
-   */
-  part(type: string, value: string): T;
-
-  /**
-   * Return the empty value for T.
-   */
-  empty(): T;
-}
-
 export interface NumberInternals {
-  stringRenderer(): NumberRenderer<string>;
-  partsRenderer(): NumberRenderer<Part[]>;
+  stringRenderer(params: NumberParams): NumberRenderer<string>;
+  partsRenderer(params: NumberParams): NumberRenderer<Part[]>;
+
   formatDecimal<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal,
     options: DecimalFormatOptions, params: NumberParams): [T, PluralType];
+
   formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal, code: string,
     options: CurrencyFormatOptions, params: NumberParams): T;
-  // getCurrency(code: CurrencyType): CurrencyInfo;
+
   getCurrencySymbol(bundle: Bundle, code: CurrencyType, width?: CurrencySymbolWidthType): string;
   getCurrencyDisplayName(bundle: Bundle, code: CurrencyType): string;
   getCurrencyPluralName(bundle: Bundle, code: string, plural: PluralType): string;
@@ -107,9 +88,10 @@ export interface PluralInternals {
 
 export interface UnitInternals {
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string;
+  getUnitInfo(length: string): UnitInfo;
+
   format<T>(bundle: Bundle, renderer: NumberRenderer<T>, q: Quantity,
     options: UnitFormatOptions, params: NumberParams): T;
-  getUnitInfo(length: string): UnitInfo;
 }
 
 export interface WrapperInternals {
@@ -118,12 +100,18 @@ export interface WrapperInternals {
   parseWrapper(format: string): WrapperNode[];
 }
 
+export interface NumberRenderer<R> {
+  empty(): R;
+  make(type: string, value: string): R;
+  render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
+    minInt: number, grouping?: boolean): R;
+  wrap(internal: WrapperInternals, raw: string, ...args: R[]): R;
+}
+
 /**
  * Unified interface for accessing internal functionality.
  */
 export interface Internals {
-  // readonly calendarsold: CalendarInternalsOld;
-
   readonly calendars: CalendarInternals;
   readonly dateFields: DateFieldInternals;
   readonly general: GeneralInternals;

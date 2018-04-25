@@ -1,177 +1,231 @@
 import { CurrencySpacingPatterns, NumberParams } from '../../common/private';
-import { Decimal, Part } from '../../types';
 import { NumberPattern, NumberField } from '../../parsing/patterns/number';
+import { Decimal, DecimalFormatter, StringDecimalFormatter, PartsDecimalFormatter } from '../../types/numbers';
+import { Part } from '../../types/parts';
 import { NumberRenderer, WrapperInternals } from '..';
 
-/**
- * Renders each node in the NumberPattern to a string.
- */
-export class StringNumberRenderer implements NumberRenderer<string> {
+export interface AbstractValue<R> {
+  length(): number;
+  add(type: string, value: string): void;
+  get(i: number): string;
+  append(value: R): void;
+  insert(i: number, type: string, value: string): void;
+  render(): R;
+  reset(): void;
+}
 
-  render(n: Decimal, pattern: NumberPattern, params: NumberParams,
-    currency: string, percent: string, group: boolean | undefined, minInt: number): string {
+export class StringValue implements AbstractValue<string> {
 
-    const formatted = n.format(
-      params.symbols.decimal,
-      group ? params.symbols.group : '',
-      minInt,
-      params.minimumGroupingDigits,
-      pattern.priGroup <= 0 ? params.primaryGroupingSize : pattern.priGroup,
-      pattern.secGroup <= 0 ? params.secondaryGroupingSize : pattern.secGroup,
-      params.digits
-    );
+  private str: string = '';
 
-    // Track relative position of the currency symbol and formatted number.
-    let currencyIdx = -1;
-    let numberIdx = -1;
-
-    const r: string[] = [];
-    const len = pattern.nodes.length;
-    for (let i = 0; i < len; i++) {
-      const node = pattern.nodes[i];
-
-      if (typeof node === 'string') {
-        r.push(node);
-
-      } else {
-        switch (node) {
-        case NumberField.CURRENCY:
-          currencyIdx = i;
-          r.push(currency);
-          break;
-
-        case NumberField.MINUS:
-          r.push(params.symbols.minusSign);
-          break;
-
-        case NumberField.NUMBER:
-          numberIdx = i;
-          r.push(formatted);
-          break;
-
-        case NumberField.PERCENT:
-          r.push(percent);
-          break;
-        }
-      }
-    }
-
-    if (currencyIdx === -1) {
-      return r.join('');
-    }
-
-    const spacing = params.currencySpacing;
-    // Track relative position of the currency symbol and formatted number.
-    if (currencyIdx < numberIdx) {
-      const next = r[currencyIdx + 1];
-      if (insertBetween(spacing.after, currency[currency.length - 1], next[0])) {
-        r.splice(currencyIdx + 1, 0, spacing.after.insertBetween);
-      }
-    } else {
-      const prev = r[currencyIdx - 1];
-      if (insertBetween(spacing.before, currency[0], prev[prev.length - 1])) {
-        r.splice(currencyIdx, 0, spacing.before.insertBetween);
-      }
-    }
-
-    return r.join('');
+  length(): number {
+    return this.str.length;
   }
 
-  wrap(internal: WrapperInternals, pattern: string, ...args: string[]): string {
-    return internal.format(pattern, args);
+  get(i: number): string {
+    return this.str[i] || '';
   }
 
-  part(type: string, value: string): string {
-    return value;
+  add(type: string, value: string): void {
+    this.str += value;
   }
 
-  empty(): string {
-    return '';
+  append(value: string): void {
+    this.str += value;
+  }
+
+  insert(i: number, type: string, value: string): void {
+    const prefix = this.str.substring(0, i);
+    const suffix = this.str.substring(i);
+    this.str = `${prefix}${value}${suffix}`;
+  }
+
+  render(): string {
+    return this.str;
+  }
+
+  reset(): void {
+    this.str = '';
   }
 }
 
-export class PartsNumberRenderer implements NumberRenderer<Part[]> {
-  render(n: Decimal, pattern: NumberPattern, params: NumberParams,
-    currency: string, percent: string, group: boolean | undefined, minInt: number): Part[] {
+export class PartsValue implements AbstractValue<Part[]> {
 
-    const formatted = n.formatParts(
-      params.symbols.decimal,
-      group ? params.symbols.group : '',
+  private parts: Part[] = [];
+
+  length(): number {
+    return this.parts.length;
+  }
+
+  get(i: number): string {
+    const p = this.parts[i];
+    return p ? p.value : '';
+  }
+
+  add(type: string, value: string): void {
+    this.parts.push({ type, value });
+  }
+
+  append(value: Part[]): void {
+    for (const p of value) {
+      this.parts.push(p);
+    }
+  }
+
+  insert(i: number, type: string, value: string): void {
+    this.parts.splice(i, 0, { type, value });
+  }
+
+  render(): Part[] {
+    return this.parts;
+  }
+
+  reset(): void {
+    this.parts = [];
+  }
+}
+
+export abstract class NumberFormatter<R> implements NumberRenderer<R> {
+
+  constructor(readonly params: NumberParams) { }
+
+  render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
+      minInt: number, grouping: boolean = false): R {
+
+    const symbols = this.params.symbols;
+    const currency: boolean = currencySymbol !== '';
+
+    const decimal = currency ? symbols.currencyDecimal || symbols.decimal : symbols.decimal;
+    let group = '';
+    if (grouping) {
+      group = symbols.group;
+      if (currency) {
+        group = symbols.currencyGroup || group;
+      }
+    }
+
+    let { priGroup, secGroup } = pattern;
+    if (priGroup <= 0) {
+      priGroup = this.params.primaryGroupingSize;
+    }
+    if (secGroup <= 0) {
+      secGroup = this.params.secondaryGroupingSize;
+    }
+
+    const formatter = this.formatter(decimal, group);
+    n.format(
+      formatter,
+      decimal,
+      group,
       minInt,
-      params.minimumGroupingDigits,
-      pattern.priGroup <= 0 ? params.primaryGroupingSize : pattern.priGroup,
-      pattern.secGroup <= 0 ? params.secondaryGroupingSize : pattern.secGroup,
-      params.digits
+      this.params.minimumGroupingDigits,
+      priGroup,
+      secGroup,
+      this.params.digits
     );
+    const formatted = formatter.render();
 
-    // Track relative position of the currency symbol and formatted number.
+    const res: AbstractValue<R> = this.value();
+
+    let haveNumber = false;
+    let currencyBefore = false;
     let currencyIdx = -1;
-    let numberIdx = -1;
-
-    let r: Part[] = [];
-    const len = pattern.nodes.length;
-    for (let i = 0; i < len; i++) {
-      const node = pattern.nodes[i];
-
+    for (const node of pattern.nodes) {
       if (typeof node === 'string') {
-        r.push({ type: 'literal', value: node });
-
+        res.add('literal', node);
       } else {
         switch (node) {
-        case NumberField.CURRENCY:
-          currencyIdx = r.length;
-          r.push({ type: 'currency', value: currency });
-          break;
 
-        case NumberField.MINUS:
-          r.push({ type: 'minus', value: params.symbols.minusSign });
-          break;
+          case NumberField.CURRENCY:
+          {
+            // Save the offset to the segment before or after the currency symbol.
+            currencyBefore = !haveNumber;
+            const i = res.length();
+            res.add('currency', currencySymbol);
+            const j = res.length();
+            currencyIdx = currencyBefore ? j : i - 1;
+            break;
+          }
 
-        case NumberField.NUMBER:
-          numberIdx = r.length;
-          r = r.concat(formatted);
-          break;
+          case NumberField.MINUS:
+            res.add('minus', this.params.symbols.minusSign);
+            break;
 
-        case NumberField.PERCENT:
-          r.push({ type: 'percent', value: percent });
-          break;
+          case NumberField.NUMBER:
+            res.append(formatted);
+            haveNumber = true;
+            break;
+
+          case NumberField.PERCENT:
+            res.add('percent', percentSymbol);
+            break;
         }
       }
     }
 
-    if (currencyIdx === -1) {
-      return r;
-    }
-
-    const spacing = params.currencySpacing;
-
-    // Currency spacing logic.
-    if (currencyIdx < numberIdx) {
-      const next = r[currencyIdx + 1].value;
-      if (insertBetween(spacing.after, currency[currency.length - 1], next[0])) {
-        const elem = { type: 'spacer', value: spacing.after.insertBetween };
-        r.splice(currencyIdx + 1, 0, elem);
-      }
-    } else {
-      const prev = r[currencyIdx - 1].value;
-      if (insertBetween(spacing.before, currency[0], prev[prev.length - 1])) {
-        const elem = { type: 'spacer', value: spacing.before.insertBetween };
-        r.splice(currencyIdx, 0, elem);
+    // Adjust spacing between currency symbol based on surrounding characters.
+    if (currencyIdx !== -1) {
+      const spacing = this.params.currencySpacing;
+      const curr = res.get(currencyIdx);
+      if (currencyBefore) {
+        if (insertBetween(spacing.after, currencySymbol[currencySymbol.length - 1], curr[0])) {
+          res.insert(currencyIdx, 'spacer', spacing.after.insertBetween);
+        }
+      } else {
+        if (insertBetween(spacing.before, currencySymbol[0], curr[curr.length - 1])) {
+          res.insert(currencyIdx + 1, 'spacer', spacing.before.insertBetween);
+        }
       }
     }
-    return r;
+
+    return res.render();
   }
 
-  wrap(internal: WrapperInternals, pattern: string, ...args: Part[][]): Part[] {
-    return internal.formatParts(pattern, args);
+  empty(): R {
+    return this.value().render();
   }
 
-  part(type: string, value: string): Part[] {
-    return [{ type, value }];
+  make(type: string, value: string): R {
+    const v = this.value();
+    v.add(type, value);
+    return v.render();
   }
 
-  empty(): Part[] {
-    return [];
+  wrap(internal: WrapperInternals, raw: string, ...args: R[]): R {
+    const res: AbstractValue<R> = this.value();
+    const pattern = internal.parseWrapper(raw);
+    for (const n of pattern) {
+      if (typeof n === 'string') {
+        res.add('literal', n);
+      } else {
+        const v = args[n];
+        if (v !== undefined) {
+          res.append(v);
+        }
+      }
+    }
+    return res.render();
+  }
+
+  abstract value(): AbstractValue<R>;
+  abstract formatter(decimal: string, group: string): DecimalFormatter<R>;
+}
+
+export class StringNumberFormatter extends NumberFormatter<string> {
+  value(): AbstractValue<string> {
+    return new StringValue();
+  }
+  formatter(decimal: string, group: string): DecimalFormatter<string> {
+    return new StringDecimalFormatter();
+  }
+}
+
+export class PartsNumberFormatter extends NumberFormatter<Part[]> {
+  value(): AbstractValue<Part[]> {
+    return new PartsValue();
+  }
+  formatter(decimal: string, group: string): DecimalFormatter<Part[]> {
+    return new PartsDecimalFormatter(decimal, group);
   }
 }
 

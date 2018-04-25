@@ -7,8 +7,7 @@ import {
   UnitType
 } from '@phensley/cldr-schema';
 
-import { Internals } from '../internals';
-import { NumberInternals, NumberRenderer, UnitInternals, WrapperInternals } from '..';
+import { Internals, NumberInternals, NumberRenderer, UnitInternals, WrapperInternals } from '../internals';
 import { NumberContext } from '../numbers/context';
 import { Quantity, UnitFormatOptions } from '../../common';
 import { NumberParams } from '../../common/private';

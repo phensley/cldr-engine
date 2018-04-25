@@ -8,6 +8,7 @@ import { Bundle } from '../../src/resource';
 export const numberEngineSuite = makeSuite('Number Engine');
 
 const CASES = ['1.2', '123.45', '12345.678', '69900.12', '9876543210.12345', '100000000000000'];
+
 const STYLES: DecimalFormatStyleType[] = ['decimal', 'percent', 'short', 'long'];
 const INTERNALS = new InternalsImpl();
 const BUNDLES: { [x: string]: Bundle} = {

@@ -1,11 +1,11 @@
 import { Part } from '../../types';
 
-export interface Formatter<T> {
+export interface DecimalFormatter<T> {
   add(c: string): void;
   render(): T;
 }
 
-export class StringFormatter implements Formatter<string> {
+export class StringDecimalFormatter implements DecimalFormatter<string> {
 
   protected parts: string[] = [];
 
@@ -19,7 +19,7 @@ export class StringFormatter implements Formatter<string> {
 
 }
 
-export class PartsFormatter implements Formatter<Part[]> {
+export class PartsDecimalFormatter implements DecimalFormatter<Part[]> {
 
   protected parts: Part[] = [];
   protected curr: string[] = [];

@@ -1,16 +1,20 @@
-import { Decimal } from '../../../src';
+import { Decimal, StringDecimalFormatter, PartsDecimalFormatter } from '../../../src';
 import { Part } from '../../../src';
 
 const parse = (s: string) => new Decimal(s);
 
 const format = (s: string, opts: any[]): string => {
   const n = parse(s);
-  return n.format.apply(n, opts);
+  const f = new StringDecimalFormatter();
+  n.format.apply(n, [f].concat(opts));
+  return f.render();
 };
 
 const formatParts = (s: string, opts: any[]): Part[] => {
   const n = parse(s);
-  return n.formatParts.apply(n, opts);
+  const f = new PartsDecimalFormatter(opts[0], opts[1]);
+  n.format.apply(n, [f].concat(opts));
+  return f.render();
 };
 
 test('string', () => {

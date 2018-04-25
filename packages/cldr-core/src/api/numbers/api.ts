@@ -18,7 +18,12 @@ import { Cache } from '../../utils/cache';
 import { NumberParams } from '../../common/private';
 import { Numbers } from '../api';
 import { PrivateApiImpl } from '../private';
-import { Internals, NumberRenderer, NumberInternals, PluralInternals } from '../../internals';
+import {
+  Internals,
+  NumberRenderer,
+  NumberInternals,
+  PluralInternals,
+} from '../../internals';
 import { NumberingSystem } from '../../systems/numbering';
 import { coerceDecimal, Decimal, DecimalArg, Part } from '../../types';
 
@@ -41,20 +46,13 @@ export class NumbersImpl implements Numbers {
 
   getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string {
     return this.numbers.getCurrencySymbol(this.bundle, code, width);
-    // const currencies = this.numbers.getCurrency(code as CurrencyType);
-
-    // const alt = width === 'narrow' ? Alt.NARROW : Alt.NONE;
-    // return currencies.symbol(this.bundle, alt) || currencies.symbol(this.bundle, Alt.NONE);
   }
 
   getCurrencyDisplayName(code: CurrencyType): string {
     return this.numbers.getCurrencyDisplayName(this.bundle, code);
-    // const currencies = this.numbers.getCurrency(code as CurrencyType);
-    // return currencies.displayName(this.bundle);
   }
 
   getCurrencyPluralName(code: CurrencyType, plural: PluralType): string {
-    // const category = pluralCategory(plural);
     const name = this.numbers.getCurrencyPluralName(this.bundle, code, plural);
     return name !== '' ? name : this.numbers.getCurrencyPluralName(this.bundle, code, 'other');
   }
@@ -70,38 +68,42 @@ export class NumbersImpl implements Numbers {
   }
 
   formatDecimal(n: DecimalArg, options?: DecimalFormatOptions): string {
-    const renderer = this.numbers.stringRenderer();
-    return this.formatDecimalImpl(n, renderer, options || {});
+    options = options || {};
+    const params = this.privateApi.getNumberParams(options.nu);
+    const renderer = this.numbers.stringRenderer(params);
+    return this.formatDecimalImpl(renderer, params, n, options);
   }
 
   formatDecimalToParts(n: DecimalArg, options?: DecimalFormatOptions): Part[] {
-    const renderer = this.numbers.partsRenderer();
-    return this.formatDecimalImpl(n, renderer, options || {});
+    options = options || {};
+    const params = this.privateApi.getNumberParams(options.nu);
+    const renderer = this.numbers.partsRenderer(params);
+    return this.formatDecimalImpl(renderer, params, n, options);
   }
 
   formatCurrency(n: DecimalArg, code: CurrencyType, options?: CurrencyFormatOptions): string {
-    const renderer = this.numbers.stringRenderer();
-    return this.formatCurrencyImpl(renderer, n, code, options || {});
+    options = options || {};
+    const params = this.privateApi.getNumberParams(options.nu, 'finance');
+    const renderer = this.numbers.stringRenderer(params);
+    return this.formatCurrencyImpl(renderer, params, n, code, options);
   }
 
   formatCurrencyToParts(n: DecimalArg, code: CurrencyType, options?: CurrencyFormatOptions): Part[] {
-    const renderer = this.numbers.partsRenderer();
-    return this.formatCurrencyImpl(renderer, n, code, options || {});
+    options = options || {};
+    const params = this.privateApi.getNumberParams(options.nu, 'finance');
+    const renderer = this.numbers.partsRenderer(params);
+    return this.formatCurrencyImpl(renderer, params, n, code, options || {});
   }
 
-  protected formatDecimalImpl<T>(n: DecimalArg, renderer: NumberRenderer<T>, options: DecimalFormatOptions): T {
-    const d = coerceDecimal(n);
-    const params = this.privateApi.getNumberParams(options.nu);
-    const [result, plural] = this.numbers.formatDecimal(this.bundle, renderer, d, options, params);
+  protected formatDecimalImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
+      n: DecimalArg, options: DecimalFormatOptions): T {
+    const [result, plural] = this.numbers.formatDecimal(this.bundle, renderer, coerceDecimal(n), options, params);
     return result;
   }
 
-  protected formatCurrencyImpl<T>(renderer: NumberRenderer<T>, n: DecimalArg,
-      code: CurrencyType, options: CurrencyFormatOptions): T {
-
-    const d = coerceDecimal(n);
-    const params = this.privateApi.getNumberParams(options.nu, 'finance');
-    return this.numbers.formatCurrency(this.bundle, renderer, d, code, options, params);
+  protected formatCurrencyImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
+      n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): T {
+    return this.numbers.formatCurrency(this.bundle, renderer, coerceDecimal(n), code, options, params);
   }
 
 }
