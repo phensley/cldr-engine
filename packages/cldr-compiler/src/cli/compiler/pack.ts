@@ -19,6 +19,7 @@ import { Locale, LanguageResolver } from '@phensley/cldr-core';
  */
 export class PackEncoder implements Encoder {
 
+  private _distinct: { [x: string]: number } = {};
   private _count: number = 0;
   private _size: number = 0;
 
@@ -27,6 +28,8 @@ export class PackEncoder implements Encoder {
   encode(field: string | undefined): number {
     this._count++;
     if (field !== undefined) {
+      const c = this._distinct[field] || 0;
+      this._distinct[field] = c + 1;
       this._size += field.length;
     }
     return this.pack.add(field === undefined ? '' : field);
@@ -38,6 +41,10 @@ export class PackEncoder implements Encoder {
 
   size(): number {
     return this._size;
+  }
+
+  distinct(): number {
+    return Object.keys(this._distinct).length;
   }
 }
 

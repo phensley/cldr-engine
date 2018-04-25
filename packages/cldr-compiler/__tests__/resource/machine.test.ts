@@ -173,6 +173,7 @@ const SOURCE_EN_CA = {
 
 class PackEncoder implements Encoder {
 
+  _distinct: { [x: string]: number } = {};
   _count: number = 0;
   _size: number = 0;
 
@@ -181,6 +182,8 @@ class PackEncoder implements Encoder {
   encode(f: string | undefined): number {
     this._count++;
     if (f !== undefined) {
+      const c = this._distinct[f] || 0;
+      this._distinct[f] = c + 1;
       this._size += f.length;
     }
     return this.pack.add(f === undefined ? '' : f);
@@ -192,6 +195,10 @@ class PackEncoder implements Encoder {
 
   size(): number {
     return this._size;
+  }
+
+  distinct(): number {
+    return Object.keys(this._distinct).length;
   }
 }
 

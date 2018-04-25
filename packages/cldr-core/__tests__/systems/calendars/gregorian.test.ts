@@ -122,6 +122,35 @@ test('min / max date', () => {
   expect(() => make(n + CalendarConstants.ONE_DAY_MS, NEW_YORK)).toThrowError();
 });
 
+test('millis in day', () => {
+  let d: CalendarDate;
+  let n: number;
+
+  // March 10, 2018 5:20:30 AM EST
+  n = 1520677230000;
+  d = make(n, NEW_YORK);
+
+  expect(d.millisecondsInDay()).toEqual(19230000); // 5 hour, 20 min, 30 sec
+
+  // March 11, 2018 1:59:59 AM EST
+  n = 1520751599000;
+  d = make(n, NEW_YORK);
+
+  expect(d.millisecondsInDay()).toEqual(7199000); // 1 hour, 59 min, 59 sec
+
+  // March 11, 2018 3:00:00 AM EST
+  n += 1000;
+  d = make(n, NEW_YORK);
+
+  expect(d.millisecondsInDay()).toEqual(10800000); // 3 hours
+
+  // March 11, 2018 6:20:30 AM EDT
+  n = 1520763630000;
+  d = make(n, NEW_YORK);
+
+  expect(d.millisecondsInDay()).toEqual(22830000); // 6 hours, 20 min, 30 sec
+});
+
 test('leap years 1584-1808', () => {
   const oneYear = CalendarConstants.ONE_DAY_MS * 365;
   let base: number;
@@ -247,7 +276,8 @@ test('week of month', () => {
 });
 
 test('week of year', () => {
-  const base = 1520751625000;
+  // March 11, 2018 3:00:25 AM EDT
+  let base = 1520751625000;
   let d: CalendarDate;
 
   d = GregorianDate.fromUnixEpoch(base, LOS_ANGELES, 1, 1);
@@ -258,4 +288,11 @@ test('week of year', () => {
   expect(d.dayOfWeek()).toEqual(1); // sunday
   expect(d.weekOfYear()).toEqual(11);
 
+  // March 11, 2000 3:00:25 AM EST
+  base = 952761625000;
+
+  d = GregorianDate.fromUnixEpoch(base, NEW_YORK, 1, 1);
+  expect(d.dayOfWeek()).toEqual(7); // saturday
+  expect(d.weekOfYear()).toEqual(11);
+  expect(d.isLeapYear()).toEqual(true);
 });

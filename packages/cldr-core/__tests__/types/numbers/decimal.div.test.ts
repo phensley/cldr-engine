@@ -82,6 +82,12 @@ test('divide by one', () => {
   expect(div('10', '1', { scale: 10 })).toEqual(parse('10.0000000000'));
 });
 
+test('divide small with large', () => {
+  expect(div('1e-100', '1e50')).toEqual(parse('1e-150'));
+  expect(div('1e-100', '3e50', { precision: 10 })).toEqual(parse('3.333333333e-151'));
+  expect(div('3e-20', '2e20')).toEqual(parse('15e-41'));
+});
+
 test('divide with precision', () => {
   expect(div('10', '3', { precision: 0 })).toEqual(parse('0e1'));
   expect(div('10', '3', { precision: 1 })).toEqual(parse('3'));

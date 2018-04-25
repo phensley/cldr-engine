@@ -11,20 +11,6 @@ export const DATE_PATTERN_CHARS = [
     return o;
   }, {});
 
-export const datePatternToString = (pattern: DateTimeNode[]): string => {
-  let r = '';
-  for (const n of pattern) {
-    if (typeof n === 'string') {
-      r += n;
-    } else {
-      for (let i = 0; i < n[1]; i++) {
-        r += n[0];
-      }
-    }
-  }
-  return r;
-};
-
 /**
  * Parse a datetime pattern into an array of nodes.
  */

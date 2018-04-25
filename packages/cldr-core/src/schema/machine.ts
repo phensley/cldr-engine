@@ -43,14 +43,6 @@ class Generator {
     this.offset += (dim1 * dim2);
     return off;
   }
-
-  private _field(fields: any[]): number[] {
-    const res: number[] = [];
-    for (let i = 0; i < fields.length; i++) {
-      res.push(this.offset++);
-    }
-    return res;
-  }
 }
 
 const time = (n: [number, number]) =>
@@ -70,10 +62,6 @@ export class SchemaBuilder {
 
   constructor(debug: boolean = false) {
     this.captureTimes = debug && process !== undefined && process.hrtime !== undefined;
-  }
-
-  times(): [string, string][] {
-    return this._times;
   }
 
   construct(obj: any, inst: Instruction): void {

@@ -137,3 +137,25 @@ test('user-supplied', () => {
     }
   ]);
 });
+
+test('multiple boundaries', () => {
+  const pos1 = {
+    nodes: [NumberField.NUMBER, 'M'],
+    minInt: 3,
+    maxFrac: 0,
+    minFrac: 0,
+    priGroup: 0,
+    secGroup: 0
+  };
+
+  const neg1 = {
+    nodes: [NumberField.MINUS, NumberField.NUMBER, 'M'],
+    minInt: 3,
+    maxFrac: 0,
+    minFrac: 0,
+    priGroup: 0,
+    secGroup: 0
+  };
+
+  expect(parse('000M;-000M;foo')).toEqual([pos1, neg1]);
+});

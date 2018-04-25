@@ -21,6 +21,7 @@ export interface Encoder {
   encode(name: string): number;
   count(): number;
   size(): number;
+  distinct(): number;
 }
 
 const countChars = (s: string, ch: string): number => {
@@ -109,6 +110,7 @@ export class EncoderMachine {
       console.warn('      --------------------   --------------   --------------');
       console.warn(`      ${leftPad('Total', 20)}  ` +
         `${leftPad(totalCount, PADDING)} fields   ${leftPad(totalSize, PADDING)} chars`);
+      console.warn(`      ${leftPad('', 20)}  ${leftPad(this.encoder.distinct(), PADDING)} distinct strings`);
     }
   }
 
