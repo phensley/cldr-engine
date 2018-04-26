@@ -47,3 +47,28 @@ date.dayOfMonth();
 date.dayOfWeek();
 
 // > 6
+```
+
+## Calendar math
+
+You can adjust any calendar date by using the `add(CalendarDateFields)` method.
+
+```typescript
+const d = en.Calendars.newGregorianDate(1109916428000, 'America/New_York');
+
+d.toString();
+// "Gregorian 2005-03-04 01:07:08.000 America/New_York"
+
+d.add({ year: 1 }).toString();
+
+// > "Gregorian 2006-03-04 01:07:08.000 America/New_York"
+```
+
+
+Add 2 years and subtract 2 months, 3 weeks:
+
+```typescript
+d.add({ year: 2, month: -2, week: -3 }).toString();
+
+// > "Gregorian 2006-12-14 01:07:08.000 America/New_York"
+```

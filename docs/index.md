@@ -5,7 +5,7 @@ A more complete documentation site is being planned.
 * [Integration](integration.md) of @phensley/cldr into an application
 * [Locales](locale.md) parsing, resolving, distance-based matching
 * [Arbitrary precision math](math.md)
-* [Dates in various calendars](dates.md) Gregorian, Persian, Japanese, ISO-8601, etc.
+* [Calendars dates, calendar math](dates.md) Gregorian, Persian, Japanese, ISO-8601, etc.
 * [Number](numbers.md) formatting to strings, parts, arbitrary precision
 * [Currency](currencies.md) formatting to strings, parts, arbitrary precision
 * [Calendar](calendars.md) date time, formatting to strings, parts

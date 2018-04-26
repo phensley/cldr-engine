@@ -31,7 +31,7 @@ This project is **currently in pre-ALPHA** and under active development, with th
 * [Integration](docs/integration.md) of @phensley/cldr into an application
 * [Locales](docs/locale.md) parsing, resolving, distance-based matching
 * [Arbitrary precision math](docs/math.md) manipulate numbers of any number of digits
-* [Dates in various calendars](docs/dates.md) Gregorian, Persian, Japanese, ISO-8601, etc.
+* [Calendars dates, calendar math](docs/dates.md) Gregorian, Persian, Japanese, ISO-8601, etc.
 * [Number](docs/numbers.md) formatting to strings, parts, arbitrary precision
 * [Currency](docs/currencies.md) formatting to strings, parts, arbitrary precision
 * [Calendar](docs/calendars.md) date time, formatting to strings, parts
