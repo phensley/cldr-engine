@@ -91,7 +91,15 @@ export abstract class CalendarDate {
     return this._minDays;
   }
 
+  /**
+   * Returns a floating point number representing the Julian Day, UTC.
+   */
   julianDay(): number {
+    const ms = (this._fields[DateField.MILLIS_IN_DAY] + this._zoneInfo.offset) / CalendarConstants.ONE_DAY_MS;
+    return (this._fields[DateField.JULIAN_DAY] - 0.5) + ms;
+  }
+
+  modifiedJulianDay(): number {
     return this._fields[DateField.JULIAN_DAY];
   }
 

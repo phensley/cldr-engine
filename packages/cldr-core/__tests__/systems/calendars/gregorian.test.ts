@@ -24,7 +24,7 @@ test('gregorian date', () => {
   expect(d.firstDayOfWeek()).toEqual(DayOfWeek.SUNDAY);
   expect(d.minDaysInFirstWeek()).toEqual(1);
 
-  expect(d.julianDay()).toEqual(2458220);
+  expect(d.modifiedJulianDay()).toEqual(2458220);
   expect(d.era()).toEqual(1);
   expect(d.year()).toEqual(2018);
   expect(d.month()).toEqual(4);
@@ -48,7 +48,7 @@ test('gregorian date', () => {
   // + 1 second
   d = make(n + 1000, NEW_YORK);
 
-  expect(d.julianDay()).toEqual(2458220);
+  expect(d.modifiedJulianDay()).toEqual(2458220);
   expect(d.era()).toEqual(1);
   expect(d.year()).toEqual(2018);
   expect(d.month()).toEqual(4);
@@ -66,7 +66,7 @@ test('gregorian date', () => {
   // 1:59 AM Paris time
   d = make(n, PARIS);
 
-  expect(d.julianDay()).toEqual(2458221);
+  expect(d.modifiedJulianDay()).toEqual(2458221);
   expect(d.era()).toEqual(1);
   expect(d.year()).toEqual(2018);
   expect(d.month()).toEqual(4);
@@ -84,12 +84,25 @@ test('gregorian date', () => {
 
   d = make(n, NEW_YORK);
 
-  expect(d.julianDay()).toEqual(2458407);
+  expect(d.modifiedJulianDay()).toEqual(2458407);
   expect(d.year()).toEqual(2018);
   expect(d.month()).toEqual(10);
   expect(d.dayOfMonth()).toEqual(15);
   expect(d.dayOfYear()).toEqual(288);
   expect(d.weekOfYear()).toEqual(42);
+  expect(d.yearOfWeekOfYear()).toEqual(2018);
+
+  // March 11, 2018 3:00:25 AM EDT
+  n = 1520751625000;
+
+  d = make(n, NEW_YORK);
+  expect(d.julianDay()).toEqual(2458188.7919560187); // Real Julian day UTC
+  expect(d.modifiedJulianDay()).toEqual(2458189);    // CLDR's modified Julian day, midnight local time.
+  expect(d.year()).toEqual(2018);
+  expect(d.month()).toEqual(3);
+  expect(d.dayOfMonth()).toEqual(11);
+  expect(d.dayOfYear()).toEqual(70);
+  expect(d.weekOfYear()).toEqual(11);
   expect(d.yearOfWeekOfYear()).toEqual(2018);
 });
 
@@ -213,23 +226,23 @@ test('field of greatest difference', () => {
 
   expect(base.fieldOfGreatestDifference(end)).toEqual('s');
 
-  // end = make(n + (CalendarConstants.ONE_MINUTE_MS * 5), NEW_YORK);
-  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('m');
+  end = make(n + (CalendarConstants.ONE_MINUTE_MS * 5), NEW_YORK);
+  expect(base.fieldOfGreatestDifference(end)).toEqual('m');
 
-  // end = make(n + (CalendarConstants.ONE_HOUR_MS * 5), NEW_YORK);
-  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('H');
+  end = make(n + (CalendarConstants.ONE_HOUR_MS * 5), NEW_YORK);
+  expect(base.fieldOfGreatestDifference(end)).toEqual('H');
 
-  // end = make(n + (CalendarConstants.ONE_HOUR_MS * 15), NEW_YORK);
-  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('a');
+  end = make(n + (CalendarConstants.ONE_HOUR_MS * 15), NEW_YORK);
+  expect(base.fieldOfGreatestDifference(end)).toEqual('a');
 
-  // end = make(n + (CalendarConstants.ONE_DAY_MS * 2), NEW_YORK);
-  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('d');
+  end = make(n + (CalendarConstants.ONE_DAY_MS * 2), NEW_YORK);
+  expect(base.fieldOfGreatestDifference(end)).toEqual('d');
 
-  // end = make(n + (CalendarConstants.ONE_DAY_MS * 45), NEW_YORK);
-  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('M');
+  end = make(n + (CalendarConstants.ONE_DAY_MS * 45), NEW_YORK);
+  expect(base.fieldOfGreatestDifference(end)).toEqual('M');
 
-  // end = make(n + (CalendarConstants.ONE_DAY_MS * 450), NEW_YORK);
-  // expect(CalendarUtils.fieldOfGreatestDifference(base, end)).toEqual('y');
+  end = make(n + (CalendarConstants.ONE_DAY_MS * 450), NEW_YORK);
+  expect(base.fieldOfGreatestDifference(end)).toEqual('y');
 });
 
 test('week of month', () => {

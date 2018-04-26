@@ -10,6 +10,7 @@ import {
   UnixEpochTime,
   RawDateFormatOptions
 } from '../../../src';
+import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
 const INTERNALS = new InternalsImpl();
 
@@ -331,6 +332,59 @@ test('day of week in month', () => {
 
   s = api.formatDateRaw(mk(14 * DAY), opts);
   expect(s).toEqual('3');
+});
+
+test('millis in day', () => {
+  const mk = (o: number, z: string) => unix(MARCH_11_2018_070025_UTC + o, z);
+  const api = calendarsApi('en');
+  let s: string;
+  const opts = { pattern: 'A' };
+
+  s = api.formatDateRaw(mk(0, NEW_YORK), opts);
+  expect(s).toEqual('10825000');
+
+  s = api.formatDateRaw(mk(0, LOS_ANGELES), opts);
+  expect(s).toEqual('82825000');
+});
+
+test('weekday standalone', () => {
+  const mk = (o: number, z: string) => unix(MARCH_11_2018_070025_UTC + o, z);
+  const api = calendarsApi('en');
+  let s: string;
+  const opts = { pattern: 'cccc' };
+
+  s = api.formatDateRaw(mk(0, NEW_YORK), opts);
+  expect(s).toEqual('Sunday');
+
+  s = api.formatDateRaw(mk(0, LOS_ANGELES), opts);
+  expect(s).toEqual('Saturday');
+
+  s = api.formatDateRaw(mk(CalendarConstants.ONE_HOUR_MS * 3, LOS_ANGELES), opts);
+  expect(s).toEqual('Sunday');
+});
+
+test('day of year', () => {
+  const mk = (o: number, z: string) => unix(MARCH_11_2018_070025_UTC + o, z);
+  const api = calendarsApi('en');
+  let s: string;
+  const opts = { pattern: 'D' };
+
+  s = api.formatDateRaw(mk(0, NEW_YORK), opts);
+  expect(s).toEqual('70');
+});
+
+test('julian day', () => {
+  const mk = (o: number, z: string) => unix(MARCH_11_2018_070025_UTC + o, z);
+  const api = calendarsApi('en');
+  let s: string;
+  const opts = { pattern: 'g' };
+
+  const g = api.toGregorianDate(mk(0, NEW_YORK));
+  expect(g.julianDay()).toEqual(2458188.7919560187); // Real Julian day UTC
+  expect(g.modifiedJulianDay()).toEqual(2458189);    // CLDR's modified Julian day, midnight local time.
+
+  s = api.formatDateRaw(mk(0, NEW_YORK), opts);
+  expect(s).toEqual('2458189');
 });
 
 test('week in month', () => {

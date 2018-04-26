@@ -15,7 +15,7 @@ test('buddhist calendar', () => {
   d = make(n, NEW_YORK);
   expect(d.toString()).toEqual('BuddhistDate(epoch=1523491199123, zone=America/New_York)');
   expect(d.type()).toEqual('buddhist');
-  expect(d.julianDay()).toEqual(2458220);
+  expect(d.modifiedJulianDay()).toEqual(2458220);
   expect(d.era()).toEqual(0);
   expect(d.year()).toEqual(2561);
   expect(d.month()).toEqual(4); // April
@@ -25,7 +25,7 @@ test('buddhist calendar', () => {
   n = -79293887631000;
   d = make(n, NEW_YORK);
   expect(d.type()).toEqual('buddhist');
-  expect(d.julianDay()).toEqual(1522834);
+  expect(d.modifiedJulianDay()).toEqual(1522834);
   expect(d.era()).toEqual(0);
   expect(d.year()).toEqual(0);
   expect(d.month()).toEqual(4); // April

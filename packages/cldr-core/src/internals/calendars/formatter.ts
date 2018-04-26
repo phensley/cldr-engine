@@ -214,8 +214,8 @@ export class CalendarFormatter<T extends CalendarDate> {
   }
 
   modifiedJulianDay(ctx: CalendarContext<T>, node: [string, number]): string {
-    // TODO:
-    return '';
+    // TODO: pad with zeros to format width
+    return `${ctx.date.modifiedJulianDay()}`;
   }
 
   weekday(ctx: CalendarContext<T>, node: [string, number]): string {

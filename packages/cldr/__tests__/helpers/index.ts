@@ -30,7 +30,7 @@ export const asyncLoader = (language: string): Promise<any> => {
 };
 
 const defaultOptions: CLDROptions = {
-  debug: false,
+  debug: true,
   loader,
   asyncLoader,
   packCacheSize: 3,

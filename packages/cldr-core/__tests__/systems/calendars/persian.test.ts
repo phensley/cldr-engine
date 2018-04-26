@@ -16,7 +16,7 @@ test('persian calendar', () => {
   d = make(n, NEW_YORK);
   expect(d.toString()).toEqual('PersianDate(epoch=1523491199123, zone=America/New_York)');
   expect(d.type()).toEqual('persian');
-  expect(d.julianDay()).toEqual(2458220);
+  expect(d.modifiedJulianDay()).toEqual(2458220);
   expect(d.era()).toEqual(0);
   expect(d.year()).toEqual(1397);
   expect(d.month()).toEqual(1); // Farvardin
@@ -28,7 +28,7 @@ test('persian calendar', () => {
   n = -42599935200000;
 
   d = make(n, 'UTC');
-  expect(d.julianDay()).toEqual(1947533);
+  expect(d.modifiedJulianDay()).toEqual(1947533);
   expect(d.era()).toEqual(0);
   expect(d.year()).toEqual(-2);
   expect(d.month()).toEqual(11); // Bahman
