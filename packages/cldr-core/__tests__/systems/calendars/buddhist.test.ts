@@ -13,7 +13,7 @@ test('buddhist calendar', () => {
   n = 1523491199123;
 
   d = make(n, NEW_YORK);
-  expect(d.toString()).toEqual('BuddhistDate(epoch=1523491199123, zone=America/New_York)');
+  expect(d.toString()).toEqual('Buddhist 2561-04-11 19:59:59.123 America/New_York');
   expect(d.type()).toEqual('buddhist');
   expect(d.modifiedJulianDay()).toEqual(2458220);
   expect(d.era()).toEqual(0);

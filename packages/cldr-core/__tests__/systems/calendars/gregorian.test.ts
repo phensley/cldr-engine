@@ -17,7 +17,7 @@ test('gregorian date', () => {
 
   // 7:59 PM NY time
   d = make(n, NEW_YORK);
-  expect(d.toString()).toEqual('GregorianDate(epoch=1523491199123, zone=America/New_York)');
+  expect(d.toString()).toEqual('Gregorian 2018-04-11 19:59:59.123 America/New_York');
   expect(d.type()).toEqual('gregory');
   expect(d.unixEpoch()).toEqual(1523491199123);
 

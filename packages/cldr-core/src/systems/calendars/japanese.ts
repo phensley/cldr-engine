@@ -1,4 +1,4 @@
-import { CalendarDate, CalendarType } from './calendar';
+import { CalendarDate, CalendarDateFields, CalendarType } from './calendar';
 import { DateField } from './fields';
 import { GregorianDate } from './gregorian';
 
@@ -9,19 +9,35 @@ import { GregorianDate } from './gregorian';
  */
 export class JapaneseDate extends GregorianDate {
 
-  constructor(epoch: number, zoneId: string, firstDay: number, minDays: number) {
-    super('japanese', epoch, zoneId, firstDay, minDays);
-    computeJapaneseFields(this._fields);
+  private constructor(firstDay: number, minDays: number) {
+    super('japanese', firstDay, minDays);
+  }
+
+  add(fields: CalendarDateFields): JapaneseDate {
+    const zoneId = fields.zoneId || this.timeZoneId();
+    const [jd, ms] = this._add(fields);
+    return new JapaneseDate(this._firstDay, this._minDays).initFromJD(jd, ms, zoneId);
   }
 
   toString(): string {
-    return this._toString('Japanese');
+    return this._toString('Japanese', `${this.extendedYear()}`);
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): JapaneseDate {
-    return new JapaneseDate(epoch, zoneId, firstDay, minDays);
+    return new JapaneseDate(firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
   }
 
+  protected initFromUnixEpoch(epoch: number, zoneId: string): JapaneseDate {
+    super.initFromUnixEpoch(epoch, zoneId);
+    computeJapaneseFields(this._fields);
+    return this;
+  }
+
+  protected initFromJD(jd: number, msDay: number, zoneId: string): JapaneseDate {
+    super.initFromJD(jd, msDay, zoneId);
+    computeJapaneseFields(this._fields);
+    return this;
+  }
 }
 
 const computeJapaneseFields = (f: number[]): void => {

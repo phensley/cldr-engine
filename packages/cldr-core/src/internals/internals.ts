@@ -19,6 +19,7 @@ import {
   Quantity,
   RelativeTimeFormatOptions,
   UnitFormatOptions,
+  UnixEpochTime,
 } from '../common';
 
 import { DateFormatRequest, NumberParams, DateIntervalFormatRequest } from '../common/private';
@@ -51,7 +52,10 @@ export interface CalendarInternals {
 }
 
 export interface DateFieldInternals {
-  formatRelativeTime(bundle: Bundle, value: DecimalArg, field: DateFieldType,
+  formatRelativeTime(bundle: Bundle, start: CalendarDate, end: CalendarDate,
+    options: RelativeTimeFormatOptions): string;
+
+  formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: DateFieldType,
     options: RelativeTimeFormatOptions): string;
 }
 

@@ -14,7 +14,7 @@ test('persian calendar', () => {
   n = 1523491199123;
 
   d = make(n, NEW_YORK);
-  expect(d.toString()).toEqual('PersianDate(epoch=1523491199123, zone=America/New_York)');
+  expect(d.toString()).toEqual('Persian 1397-01-22 19:59:59.123 America/New_York');
   expect(d.type()).toEqual('persian');
   expect(d.modifiedJulianDay()).toEqual(2458220);
   expect(d.era()).toEqual(0);

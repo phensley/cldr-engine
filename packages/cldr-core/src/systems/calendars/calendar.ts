@@ -2,7 +2,7 @@ import { DateTimePatternField, DateTimePatternFieldType, MetaZoneType } from '@p
 import { DateField, dateFields, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
 import { ZoneInfo, zoneInfoCache, substituteZoneAlias } from './timezone';
-import { CLIENT_RENEG_LIMIT } from 'tls';
+import { zeropad } from '../../utils/string';
 
 /**
  * Implementation order, based on calendar preference data and ease of implementation.
@@ -39,6 +39,21 @@ export type CalendarType = 'buddhist' | 'gregory' | 'iso8601' | 'japanese' | 'pe
 
 export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
 
+/**
+ * Generic structure used to add one or more fields to a date.
+ */
+export interface CalendarDateFields {
+  year?: number;
+  month?: number;
+  week?: number;
+  day?: number;
+  hour?: number;
+  minute?: number;
+  second?: number;
+  millis?: number;
+  zoneId?: string;
+}
+
 const differenceFields: [number, DateTimePatternFieldType][] = [
   [DateField.YEAR, DateTimePatternField.YEAR],
   [DateField.MONTH, DateTimePatternField.MONTH],
@@ -54,21 +69,15 @@ const differenceFields: [number, DateTimePatternFieldType][] = [
 export abstract class CalendarDate {
 
   protected _fields: number[] = dateFields();
-  protected _zoneInfo: ZoneInfo;
+  protected _zoneInfo!: ZoneInfo;
 
   /**
    * Minimal fields required to construct any calendar date.
    */
-  constructor(
+  protected constructor(
     protected readonly _type: CalendarType,
-    protected readonly _unixEpoch: number,
-    _zoneId: string,
     protected readonly _firstDay: number,
     protected readonly _minDays: number) {
-
-    _zoneId = substituteZoneAlias(_zoneId);
-    this._zoneInfo = zoneInfoCache.get(_unixEpoch, _zoneId);
-    computeBaseFields(_unixEpoch - this._zoneInfo.offset, this._fields);
 
     // Compute week fields on demand.
     this._fields[DateField.WEEK_OF_YEAR] = NULL;
@@ -79,8 +88,11 @@ export abstract class CalendarDate {
     return this._type;
   }
 
+  /**
+   * Unix epoch with no timezone offset.
+   */
   unixEpoch(): number {
-    return this._unixEpoch;
+    return this._fields[DateField.LOCAL_MILLIS] + this._zoneInfo.offset;
   }
 
   firstDayOfWeek(): number {
@@ -92,13 +104,16 @@ export abstract class CalendarDate {
   }
 
   /**
-   * Returns a floating point number representing the Julian Day, UTC.
+   * Returns a floating point number representing the real Julian Day, UTC.
    */
   julianDay(): number {
     const ms = (this._fields[DateField.MILLIS_IN_DAY] + this._zoneInfo.offset) / CalendarConstants.ONE_DAY_MS;
     return (this._fields[DateField.JULIAN_DAY] - 0.5) + ms;
   }
 
+  /**
+   * CLDR's modified Julian day used as the basis for all date calculations.
+   */
   modifiedJulianDay(): number {
     return this._fields[DateField.JULIAN_DAY];
   }
@@ -113,6 +128,10 @@ export abstract class CalendarDate {
 
   year(): number {
     return this._fields[DateField.YEAR];
+  }
+
+  relatedYear(): number {
+    return this._fields[DateField.EXTENDED_YEAR];
   }
 
   yearOfWeekOfYear(): number {
@@ -232,8 +251,62 @@ export abstract class CalendarDate {
     return DateTimePatternField.SECOND;
   }
 
-  protected _toString(type: string): string {
-    return `${type}Date(epoch=${this._unixEpoch}, zone=${this._zoneInfo.timeZoneId})`;
+  abstract add(fields: CalendarDateFields): CalendarDate;
+
+  /**
+   * Compute a new Julian day and milliseconds UTC by updating one or more fields.
+   */
+  protected _add(fields: CalendarDateFields): [number, number] {
+    const [days, ms] = this._addTime(fields);
+
+    // All day calculations will be relative to the current day of the month.
+    const dom = this._fields[DateField.DAY_OF_MONTH] + (fields.day || 0) + ((fields.week || 0) * 7);
+
+    // Adjust the extended year and month.
+    // TODO: move month overflow into monthStart()
+    let month = (this._fields[DateField.MONTH] - 1) + (fields.month || 0);
+    const yadd = floor(month / 12);
+    const year = this._fields[DateField.EXTENDED_YEAR] + (fields.year || 0) + yadd;
+    month -= yadd * 12;
+
+    // Calculate the Julian day for the adjusted year/month then add back the days.
+    const jd = this.monthStart(year, month, false) + dom + days;
+    return [jd, ms];
+  }
+
+  /**
+   * Converts all time fields into [days, milliseconds].
+   */
+  protected _addTime(fields: CalendarDateFields): [number, number] {
+    // Calculate the time difference in days and milliseconds
+    let msDay = this._fields[DateField.MILLIS_IN_DAY] + this.timeZoneOffset();
+    msDay += (floor(fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
+             (floor(fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
+             (floor(fields.second || 0) * CalendarConstants.ONE_SECOND_MS) +
+             (floor(fields.millis || 0));
+
+    const oneDay = CalendarConstants.ONE_DAY_MS;
+    const days = floor(msDay / oneDay);
+    const ms = msDay - (days * oneDay);
+    return [days, ms];
+  }
+
+  protected initFromUnixEpoch(ms: number, zoneId: string = 'UTC'): void {
+    zoneId = substituteZoneAlias(zoneId);
+    this._zoneInfo = zoneInfoCache.get(ms, zoneId);
+    jdFromUnixEpoch(ms - this._zoneInfo.offset, this._fields);
+    computeBaseFields(this._fields);
+  }
+
+  protected initFromJD(jd: number, msDay: number, zoneId: string = 'UTC'): void {
+    const unixEpoch = unixEpochFromJD(jd, msDay);
+    this.initFromUnixEpoch(unixEpoch, zoneId);
+  }
+
+  protected _toString(type: string, year?: string): string {
+    return `${type} ${year || this.year()}-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)} ` +
+      `${zeropad(this.hourOfDay(), 2)}:${zeropad(this.minute(), 2)}:${zeropad(this.second(), 2)}` +
+      `.${zeropad(this.milliseconds(), 3)} ${this._zoneInfo.timeZoneId}`;
   }
 
   /**
@@ -298,18 +371,38 @@ export abstract class CalendarDate {
 }
 
 /**
- * Compute fields common to all calendars.
+ * Compute Julian day from timezone-adjusted Unix epoch milliseconds.
  */
-const computeBaseFields = (ms: number, f: number[]): void => {
-  const days = floor(ms / CalendarConstants.ONE_DAY_MS);
+const jdFromUnixEpoch = (ms: number, f: number[]): void => {
+  const oneDayMS = CalendarConstants.ONE_DAY_MS;
+  const days = floor(ms / oneDayMS);
   const jd = days + CalendarConstants.JD_UNIX_EPOCH;
-  if (jd < CalendarConstants.JD_MIN || jd > CalendarConstants.JD_MAX) {
-    throw new Error(
-      `Julian day ${jd} is outside the supported range of this library: ` +
-      `${ConstantsDesc.JD_MIN} to ${ConstantsDesc.JD_MAX}`);
-  }
+  const msDay = ms - (days * oneDayMS);
 
-  let msDay = ms - (days * CalendarConstants.ONE_DAY_MS);
+  f[DateField.JULIAN_DAY] = jd;
+  f[DateField.MILLIS_IN_DAY] = msDay;
+};
+
+/**
+ * Given a Julian day and local milliseconds (in UTC), return the Unix
+ * epoch milliseconds UTC.
+ */
+const unixEpochFromJD = (jd: number, msDay: number): number => {
+  const days = jd - CalendarConstants.JD_UNIX_EPOCH;
+  return (days * CalendarConstants.ONE_DAY_MS) + msDay;
+};
+
+/**
+ * Compute fields common to all calendars. Before calling this, we must
+ * have the JULIAN_DAY and MILLIS_IN_DAY fields set. Every calculation
+ * is relative to these.
+ */
+const computeBaseFields = (f: number[]): void => {
+  const jd = f[DateField.JULIAN_DAY];
+  checkJDRange(jd);
+
+  let msDay = f[DateField.MILLIS_IN_DAY];
+  const ms = msDay + ((jd - CalendarConstants.JD_UNIX_EPOCH) * CalendarConstants.ONE_DAY_MS);
 
   f[DateField.LOCAL_MILLIS] = ms;
   f[DateField.JULIAN_DAY] = jd;
@@ -332,4 +425,12 @@ const computeBaseFields = (ms: number, f: number[]): void => {
     dow += 7;
   }
   f[DateField.DAY_OF_WEEK] = dow;
+};
+
+const checkJDRange = (jd: number): void => {
+  if (jd < CalendarConstants.JD_MIN || jd > CalendarConstants.JD_MAX) {
+    throw new Error(
+      `Julian day ${jd} is outside the supported range of this library: ` +
+      `${ConstantsDesc.JD_MIN} to ${ConstantsDesc.JD_MAX}`);
+  }
 };

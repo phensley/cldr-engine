@@ -17,7 +17,7 @@ test('iso week', () => {
 
   // Tue, Dec 28, 2004
   d = make(1104238984000, zoneId);
-  expect(d.toString()).toEqual('ISO8601Date(epoch=1104238984000, zone=America/New_York)');
+  expect(d.toString()).toEqual('ISO8601 2004-12-28 08:03:04.000 America/New_York');
   expect(d.weekOfYear()).toEqual(53);
   expect(d.yearOfWeekOfYear()).toEqual(2004);
   expect(d.isLeapYear()).toEqual(true);

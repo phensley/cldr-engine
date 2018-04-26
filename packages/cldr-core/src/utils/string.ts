@@ -7,8 +7,29 @@ export const stringToObject = (raw: string, d1: string, d2: string): { [x: strin
   return o;
 };
 
-// TODO: REMOVE and replace with general zeroPad method on numbering system instance
+const ZEROS = '0000000000';
+
 export const zeroPad2 = (n: number, w: number): string => w === 2 && n < 10 ? `0${n}` : `${n}`;
+
+export const zeropad = (n: number, w: number): string => {
+  const neg = n < 0;
+  const s = String(Math.abs(n));
+  const d = w - s.length - (neg ? 1 : 0);
+  if (d <= 0) {
+    return s;
+  }
+
+  let r = neg ? '-' : '';
+  let i = (d / 10) | 0;
+  const j = d - (i * 10);
+  while (i-- > 0) {
+    r += ZEROS;
+  }
+  if (j > 0) {
+    r += ZEROS.slice(0, j);
+  }
+  return r + s;
+};
 
 export const leftPad = (s: string | number, w: number): string => {
   s = typeof s === 'number' ? String(s) : s;

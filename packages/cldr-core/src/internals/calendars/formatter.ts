@@ -74,7 +74,7 @@ export class CalendarFormatter<T extends CalendarDate> {
         case 'Y': rnd.add('year', this.yearOfWeekYear(ctx, n[1])); break;
         case 'u': rnd.add('year', this.extendedYear(ctx)); break;
         case 'U': rnd.add('cyclic-year', this.cyclicYear(ctx, n[1])); break;
-        case 'r': rnd.add('related-year', this.relatedYear(ctx)); break;
+        case 'r': rnd.add('related-year', this.relatedYear(ctx, n[1])); break;
 
         case 'Q':
         case 'q': rnd.add('quarter', this.quarter(ctx, n)); break;
@@ -152,9 +152,10 @@ export class CalendarFormatter<T extends CalendarDate> {
   /**
    * Related Gregorian year.
    */
-  relatedYear(ctx: CalendarContext<T>): string {
+  relatedYear(ctx: CalendarContext<T>, width: number): string {
     // Note: this is always rendered using 'latn' digits
-    return this.extendedYear(ctx);
+    // TODO: zero pad to field width.
+    return `${ctx.date.relatedYear()}`;
   }
 
   _year(year: number, width: number): string {

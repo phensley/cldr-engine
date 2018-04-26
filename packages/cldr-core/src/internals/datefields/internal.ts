@@ -9,9 +9,10 @@ import {
 } from '@phensley/cldr-schema';
 
 import { coerceDecimal, Decimal, DecimalArg, DecimalConstants } from '../../types';
-import { DateFieldInternals, Internals, PluralInternals, WrapperInternals } from '..';
+import { DateFieldInternals, Internals, PluralInternals, WrapperInternals } from '../internals';
 import { RelativeTimeFormatOptions } from '../../common';
 import { Bundle } from '../../resource';
+import { CalendarDate } from '../../systems/calendars';
 
 // TODO: expose a method to calculate field difference with different options, e.g.
 // include weekdays
@@ -26,7 +27,15 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     this.relativeTimes = internals.schema.DateFields.relativeTimes;
   }
 
-  formatRelativeTime(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType,
+  formatRelativeTime(bundle: Bundle, start: CalendarDate, end: CalendarDate,
+    options: RelativeTimeFormatOptions): string {
+      // TODO: need to compute integral difference for multiple fields. for example, year
+      // may differ between 2017-12-01 and 2018-02-02 but they are only 3 months apart, so
+      // we might format "3 months" or "9 weeks" or "9 Fridays" or "63 days".
+      return '';
+  }
+
+  formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType,
       options: RelativeTimeFormatOptions): string {
 
     let format: RelativeTimeFields;

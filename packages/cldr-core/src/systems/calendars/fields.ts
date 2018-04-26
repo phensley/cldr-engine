@@ -9,7 +9,9 @@ export const enum DayOfWeek {
 }
 
 export const enum DateField {
+  // Milliseconds from Unix epoch, adjusted by local timezone offset
   LOCAL_MILLIS = 0,
+  // Date in Julian days
   JULIAN_DAY,
   ERA,
   EXTENDED_YEAR,
@@ -31,8 +33,8 @@ export const enum DateField {
   MILLIS,
   TZ_OFFSET,
   IS_LEAP,
-  IS_DST // 21
+  IS_DST // 22
 }
 
 // 22 fields
-export const dateFields = () => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+export const dateFields = () => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

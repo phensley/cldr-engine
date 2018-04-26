@@ -71,4 +71,6 @@ export interface DateIntervalFormatOptions {
  */
 export interface RelativeTimeFormatOptions {
   width?: RelativeTimeWidthType;
+
+  readonly nu?: NumberSystemType;
 }

@@ -1,5 +1,5 @@
 import { DayOfWeek } from './fields';
-import { CalendarType } from './calendar';
+import { CalendarDateFields, CalendarType } from './calendar';
 import { CalendarConstants } from './constants';
 import { GregorianDate } from './gregorian';
 
@@ -10,8 +10,15 @@ import { GregorianDate } from './gregorian';
  */
 export class ISO8601Date extends GregorianDate {
 
-  private constructor(epoch: number, zoneId: string) {
-    super('iso8601', epoch, zoneId, DayOfWeek.MONDAY, CalendarConstants.ISO8601_MIN_DAYS);
+  private constructor() {
+    // ISO-8601 dates use hard-coded firstDay and minDays
+    super('iso8601', DayOfWeek.MONDAY, CalendarConstants.ISO8601_MIN_DAYS);
+  }
+
+  add(fields: CalendarDateFields): ISO8601Date {
+    const zoneId = fields.zoneId || this.timeZoneId();
+    const [jd, ms] = this._add(fields);
+    return new ISO8601Date().initFromJD(jd, ms, zoneId) as ISO8601Date;
   }
 
   toString(): string {
@@ -19,8 +26,10 @@ export class ISO8601Date extends GregorianDate {
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): ISO8601Date {
-    // ISO-8601 dates use hard-coded firstDay and minDays
-    return new ISO8601Date(epoch, zoneId);
+    return new ISO8601Date().initFromUnixEpoch(epoch, zoneId);
   }
 
+  protected initFromUnixEpoch(epoch: number, zoneId: string): ISO8601Date {
+    return super.initFromUnixEpoch(epoch, zoneId) as ISO8601Date;
+  }
 }

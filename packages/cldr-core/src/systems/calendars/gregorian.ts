@@ -1,7 +1,28 @@
 import { CalendarConstants } from './constants';
-import { CalendarType, CalendarDate } from './calendar';
+import { CalendarType, CalendarDate, CalendarDateFields } from './calendar';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
+
+// TODO: helpers to compute fields from partial information
+// export class GregorianInfo {
+
+//   daysInYear(year: number): number {
+//     const isLeap = leapGregorian(year);
+//     const m = MONTH_COUNT[11];
+//     return m[isLeap ? 1 : 0] + m[isLeap ? 3 : 2];
+//   }
+
+//   monthsInYear(year: number): number {
+//     return MONTH_COUNT.length;
+//   }
+
+//   daysInMonth(year: number, month: number): number {
+//     const i = clamp(month - 1, 0, 11);
+//     const isLeap = leapGregorian(year);
+//     return MONTH_COUNT[month][isLeap ? 1 : 0];
+//   }
+
+// }
 
 /**
  * Construct a date using the rules of the Gregorian calendar.
@@ -10,9 +31,39 @@ import { floorDiv } from './utils';
  */
 export class GregorianDate extends CalendarDate {
 
-  protected constructor(type: CalendarType, epoch: number, zoneId: string, firstDay: number, minDays: number) {
-    super(type, epoch, zoneId, firstDay, minDays);
+  protected constructor(type: CalendarType, firstDay: number, minDays: number) {
+    super(type, firstDay, minDays);
+  }
 
+  add(fields: CalendarDateFields): GregorianDate {
+    const zoneId = fields.zoneId || this.timeZoneId();
+    const [jd, ms] = this._add(fields);
+    return new GregorianDate('gregory', this._firstDay, this._minDays).initFromJD(jd, ms, zoneId);
+  }
+
+  toString(): string {
+    return this._toString('Gregorian');
+  }
+
+  static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number = 1, minDays: number = 1): GregorianDate {
+    return new GregorianDate('gregory', firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
+  }
+
+  protected create(firstDay: number, minDays: number): GregorianDate {
+    return new GregorianDate('gregory', firstDay, minDays);
+  }
+
+  protected initFromUnixEpoch(epoch: number, zoneId: string): GregorianDate {
+    super.initFromUnixEpoch(epoch, zoneId);
+    return this.initGregorian();
+  }
+
+  protected initFromJD(jd: number, msDay: number, zoneId: string): GregorianDate {
+    super.initFromJD(jd, msDay, zoneId);
+    return this.initGregorian();
+  }
+
+  protected initGregorian(): GregorianDate {
     const f = this._fields;
     if (f[DateField.JULIAN_DAY] >= CalendarConstants.JD_GREGORIAN_CUTOVER) {
       computeGregorianFields(f);
@@ -30,14 +81,7 @@ export class GregorianDate extends CalendarDate {
     }
     f[DateField.ERA] = era;
     f[DateField.YEAR] = year;
-  }
-
-  toString(): string {
-    return this._toString('Gregorian');
-  }
-
-  static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number = 1, minDays: number = 1): GregorianDate {
-    return new GregorianDate('gregory', epoch, zoneId, firstDay, minDays);
+    return this;
   }
 
   protected monthStart(eyear: number, month: number, useMonth: boolean): number {
@@ -134,5 +178,13 @@ const computeJulianFields = (f: number[]): void => {
 
 /**
  * Return true if the given year is a leap year in the Gregorian calendar; false otherwise.
+ * Note that we switch to the Julian calendar at the Gregorian cutover year.
  */
-const leapGregorian = (y: number): boolean => y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0);
+
+const leapGregorian = (y: number): boolean => {
+  let r = y % 4 === 0;
+  if (y >= CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR) {
+    r = r && ((y % 100 !== 0) || (y % 400 === 0));
+  }
+  return r;
+};

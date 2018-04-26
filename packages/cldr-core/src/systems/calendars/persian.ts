@@ -1,13 +1,22 @@
-import { CalendarDate, CalendarType } from './calendar';
+import { CalendarDate, CalendarDateFields, CalendarType } from './calendar';
 import { CalendarConstants } from './constants';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
 
 export class PersianDate extends CalendarDate {
 
-  protected constructor(epoch: number, zoneId: string, firstDay: number, minDays: number) {
-    super('persian', epoch, zoneId, firstDay, minDays);
-    computePersianFields(this._fields);
+  private constructor(firstDay: number, minDays: number) {
+    super('persian', firstDay, minDays);
+  }
+
+  relatedYear(): number {
+    return this._fields[DateField.EXTENDED_YEAR] + 622;
+  }
+
+  add(fields: CalendarDateFields): PersianDate {
+    const zoneId = fields.zoneId || this.timeZoneId();
+    const [jd, ms] = this._add(fields);
+    return new PersianDate(this._firstDay, this._minDays).initFromJD(jd, ms, zoneId);
   }
 
   toString(): string {
@@ -15,11 +24,27 @@ export class PersianDate extends CalendarDate {
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): PersianDate {
-    return new PersianDate(epoch, zoneId, firstDay, minDays);
+    return new PersianDate(firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
+  }
+
+  protected initFromUnixEpoch(epoch: number, zoneId: string): PersianDate {
+    super.initFromUnixEpoch(epoch, zoneId);
+    computePersianFields(this._fields);
+    return this;
+  }
+
+  protected initFromJD(jd: number, msDay: number, zoneId: string): PersianDate {
+    super.initFromJD(jd, msDay, zoneId);
+    computePersianFields(this._fields);
+    return this;
   }
 
   protected monthStart(eyear: number, month: number, useMonth: boolean): number {
-    return CalendarConstants.JD_PERSIAN_EPOCH - 1 + 365 * (eyear - 1) + floor((8 * eyear + 21) / 33);
+    let jd = CalendarConstants.JD_PERSIAN_EPOCH - 1 + 365 * (eyear - 1) + floor((8 * eyear + 21) / 33);
+    if (month !== 0) {
+      jd += MONTH_COUNT[month][2];
+    }
+    return jd;
   }
 }
 

@@ -6,3 +6,7 @@ export const floorDiv = (n: number, d: number, r: [number]) => {
   r[0] = n % d;
   return q;
 };
+
+// TODO: used for min/max in date computations
+// export const clamp = (v: number, min: number, max: number): number =>
+//   Math.min(max, Math.max(min, v));

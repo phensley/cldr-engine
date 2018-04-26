@@ -204,8 +204,18 @@ export class CalendarsImpl implements Calendars {
     return this._formatInterval(new PartsRenderer(), start, end, options);
   }
 
+  formatRelativeTime(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
+      options?: RelativeTimeFormatOptions): string {
+    const calendar = this.internals.calendars.selectCalendar(this.bundle);
+    start = this.convertDateTo(calendar, start);
+    end = this.convertDateTo(calendar, end, start.timeZoneId());
+    return this.internals.dateFields.formatRelativeTime(
+      this.bundle, start, end, options || DEFAULT_RELTIME_OPTIONS);
+  }
+
   formatRelativeTimeField(value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string {
-    return this.internals.dateFields.formatRelativeTime(this.bundle, value, field, options || DEFAULT_RELTIME_OPTIONS);
+    return this.internals.dateFields.formatRelativeTimeField(
+      this.bundle, value, field, options || DEFAULT_RELTIME_OPTIONS);
   }
 
   /**
