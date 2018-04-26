@@ -32,7 +32,7 @@
   "dependencies": {
     "@phensley/cldr-core": "^0.4.5",
     "@phensley/cldr-schema": "^0.4.5",
-    "@types/node": "8.10.1",
+    "@types/node": "8.10.10",
     "@types/prettier": "^1.10.0",
     "@types/yargs": "^10.0.1",
     "cldr-data": "32.0.1",
@@ -49,7 +49,7 @@
     "rimraf": "^2.6.2",
     "tslint": "5.9.1",
     "tslint-no-circular-imports": "^0.2.1",
-    "typescript": "~2.8.1"
+    "typescript": "~2.8.3"
   },
   "jest": {
     "moduleFileExtensions": [

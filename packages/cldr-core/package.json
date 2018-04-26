@@ -30,7 +30,7 @@
     "@phensley/cldr-schema": "^0.4.5"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.2",
+    "@types/jest": "^22.2.3",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
     "chalk": "^2.3.2",
@@ -38,7 +38,7 @@
     "rimraf": "^2.6.2",
     "tslint": "5.9.1",
     "tslint-no-circular-imports": "^0.2.1",
-    "typescript": "~2.8.1"
+    "typescript": "~2.8.3"
   },
   "jest": {
     "moduleFileExtensions": [
