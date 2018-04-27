@@ -1,3 +1,4 @@
+import { CLDRFramework } from '../src';
 import { getCLDR, loader, asyncLoader } from './helpers';
 import { CurrencyFormatOptions, Quantity } from '@phensley/cldr-core';
 
@@ -58,14 +59,22 @@ test('async loader', () => {
   const en = framework.get('en');
   const es = framework.get('es');
 
+  const path = ['bundle', '_id'];
+
   expect(framework.getAsync('en')).resolves.toEqual(en);
   expect(framework.getAsync('es')).resolves.toEqual(es);
 
   expect(framework.getAsync('xx')).rejects.toContain('no such file');
 
-  expect(framework.getAsync('de')).resolves.toBeTruthy();
-  expect(framework.getAsync('zh-TW')).resolves.toBeTruthy();
+  expect(framework.getAsync('de')).resolves.toHaveProperty(path, 'de-Latn-DE');
+  expect(framework.getAsync('zh-TW')).resolves.toHaveProperty(path, 'zh-Hant-TW');
 
-  expect(framework.getAsync('de')).resolves.toBeTruthy();
-  expect(framework.getAsync('zh-TW')).resolves.toBeTruthy();
+  expect(framework.getAsync('de')).resolves.toHaveProperty(path, 'de-Latn-DE');
+  expect(framework.getAsync('zh-TW')).resolves.toHaveProperty(path, 'zh-Hant-TW');
+});
+
+test('loader errors', () => {
+  const framework = new CLDRFramework({});
+  expect(() => framework.get('en')).toThrowError();
+  expect(() => framework.getAsync('en')).toThrowError();
 });
