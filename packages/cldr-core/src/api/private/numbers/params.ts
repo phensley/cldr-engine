@@ -79,7 +79,10 @@ export class NumberParamsCache {
     const system = name === 'latn' ? latnSystem : this.buildNumberSystem(name);
 
     const info = this.numbers.numberSystem.get(name) || this.latnSystemInfo;
-    const currencySpacing = info.currencyFormats.spacing.mapping(this.bundle);
+
+    const currencySpacing = info.currencyFormats.spacing.exists(this.bundle)
+      ? info.currencyFormats.spacing.mapping(this.bundle)
+      : this.latnSystemInfo.currencyFormats.spacing.mapping(this.bundle);
 
     const { minimumGroupingDigits, primaryGroupingSize, secondaryGroupingSize, symbols } = system;
 

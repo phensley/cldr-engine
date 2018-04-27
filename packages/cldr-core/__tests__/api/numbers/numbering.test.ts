@@ -59,11 +59,44 @@ test('numbers defaulting', () => {
   s = api.formatCurrency('12345', 'USD', { style: 'code' });
   expect(s).toEqual('１２３４５.００ USD');
 
+  s = api.formatCurrency('12345', 'USD', { style: 'name' });
+  expect(s).toEqual('１２３４５.００ US dollars');
+
   s = api.formatCurrency('12345', 'USD', { style: 'short' });
   expect(s).toEqual('$１２K');
 
   s = api.formatCurrency('-12345', 'USD', { style: 'accounting' });
   expect(s).toEqual('($１２３４５.００)');
+
+  s = api.formatDecimal('123.45', { nu: 'arab', style: 'long' });
+  expect(s).toEqual('١٢٣');
+
+  s = api.formatDecimal('123.45', { nu: 'arab', style: 'percent' });
+  expect(s).toEqual('١٢٣٤٥%');
+
+  s = api.formatDecimal('1234567', { nu: 'arab', style: 'long' });
+  expect(s).toEqual('١.٢ million');
+
+  s = api.formatDecimal('1234567', { nu: 'arab', style: 'short' });
+  expect(s).toEqual('١.٢M');
+
+  s = api.formatDecimal('1234567', { nu: 'arab', style: 'decimal', group: true });
+  expect(s).toEqual('١,٢٣٤,٥٦٧');
+
+  s = api.formatCurrency('12345', 'USD', { style: 'code', nu: 'arab' });
+  expect(s).toEqual('١٢٣٤٥.٠٠ USD');
+
+  s = api.formatCurrency('12345', 'USD', { style: 'name', nu: 'arab' });
+  expect(s).toEqual('١٢٣٤٥.٠٠ US dollars');
+
+  s = api.formatCurrency('12345', 'USD', { style: 'short', nu: 'arab' });
+  expect(s).toEqual('١٢٣٤٥');
+
+  s = api.formatCurrency('12345', 'USD', { style: 'symbol', nu: 'arab' });
+  expect(s).toEqual('$١٢٣٤٥.٠٠');
+
+  s = api.formatCurrency('-12345', 'USD', { style: 'accounting', nu: 'arab' });
+  expect(s).toEqual('($١٢٣٤٥.٠٠)');
 
   api = numbersApi('en-u-nu-orya');
 

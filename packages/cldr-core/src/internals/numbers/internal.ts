@@ -79,27 +79,28 @@ export class NumberInternalsImpl implements NumberInternals {
   formatDecimal<T>(bundle: Bundle, renderer: NumberRenderer<T>,
     n: Decimal, options: DecimalFormatOptions, params: NumberParams): [T, PluralType] {
 
+    // TODO: abstract away pattern selection defaulting
+
     const style = options.style === undefined ? 'decimal' : options.style;
     let result: T;
     let plural: PluralType = 'other';
 
-    const info = this.numbers.numberSystem.get(params.numberSystemName)
-      || this.numbers.numberSystem.get('latn');
-
-    if (info === undefined) {
-      return [renderer.empty(), plural];
-    }
+    const latnInfo = this.numbers.numberSystem.get('latn');
+    const info = this.numbers.numberSystem.get(params.numberSystemName) || latnInfo;
 
     const decimalFormats = info.decimalFormats;
     const latnDecimalFormats = this.numbers.numberSystem.get('latn').decimalFormats;
+    const standardRaw = decimalFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
 
     switch (style) {
     case 'long':
     case 'short':
     {
-      const standardRaw = decimalFormats.standard.get(bundle);
       const isShort = style === 'short';
-      const patternImpl = isShort ? decimalFormats.short : decimalFormats.long;
+      const useLatn = decimalFormats.short.get(bundle, 'other', 4);
+      const patternImpl = isShort ? (useLatn ? latnInfo.decimalFormats.short : decimalFormats.short)
+        : (useLatn ? latnInfo.decimalFormats.long : decimalFormats.long);
+
       const ctx = new NumberContext(options, true);
 
       // Adjust the number using the compact pattern and divisor.
@@ -113,6 +114,7 @@ export class NumberInternalsImpl implements NumberInternals {
       // digits of n and the plural category of the rounded / shifted number q2.
       const raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
 
+      // Re-select pattern as number may have changed sign due to rounding.
       const pattern = this.getNumberPattern(raw, q2.isNegative());
       result = renderer.render(q2, pattern, '', '', ctx.minInt, options.group);
       break;
@@ -124,7 +126,7 @@ export class NumberInternalsImpl implements NumberInternals {
     case 'permille-scaled':
     {
       // Get percent pattern.
-      const raw = info.percentFormat.get(bundle);
+      const raw = info.percentFormat.get(bundle) || latnInfo.percentFormat.get(bundle);
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Scale the number to a percent or permille form as needed.
@@ -145,6 +147,7 @@ export class NumberInternalsImpl implements NumberInternals {
       const operands = n.operands();
       plural = this.internals.plurals.cardinal(bundle.language(), operands);
 
+      // Re-select pattern as number may have changed sign due to rounding.
       pattern = this.getNumberPattern(raw, n.isNegative());
       result = renderer.render(n, pattern, '', symbol, ctx.minInt, options.group);
       break;
@@ -153,8 +156,7 @@ export class NumberInternalsImpl implements NumberInternals {
     case 'decimal':
     {
       // Get decimal pattern.
-      const raw = decimalFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
-      let pattern = this.getNumberPattern(raw, n.isNegative());
+      let pattern = this.getNumberPattern(standardRaw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
       const ctx = new NumberContext(options, false, -1);
@@ -163,7 +165,8 @@ export class NumberInternalsImpl implements NumberInternals {
       const operands = n.operands();
       plural = this.internals.plurals.cardinal(bundle.language(), operands);
 
-      pattern = this.getNumberPattern(raw, n.isNegative());
+      // Re-select pattern as number may have changed sign due to rounding.
+      pattern = this.getNumberPattern(standardRaw, n.isNegative());
       result = renderer.render(n, pattern, '', '', ctx.minInt, options.group);
       break;
     }
@@ -181,17 +184,15 @@ export class NumberInternalsImpl implements NumberInternals {
     n: Decimal, code: string, options: CurrencyFormatOptions, params: NumberParams): T {
 
     const fractions = getCurrencyFractions(code);
+
     // TODO: display context support
     // const width = options.symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
+
     const width = options.symbolWidth === 'narrow' ? 'narrow' : 'none';
     const style = options.style === undefined ? 'symbol' : options.style;
 
-    const info = this.numbers.numberSystem.get(params.numberSystemName)
-      || this.numbers.numberSystem.get('latn');
-
-    if (info === undefined) {
-      return renderer.empty();
-    }
+    const latnInfo = this.numbers.numberSystem.get('latn');
+    const info = this.numbers.numberSystem.get(params.numberSystemName) || latnInfo;
 
     const currencyFormats = info.currencyFormats;
     const latnDecimalFormats = this.numbers.numberSystem.get('latn').decimalFormats;
@@ -203,13 +204,15 @@ export class NumberInternalsImpl implements NumberInternals {
     case 'code':
     case 'name':
     {
-      const raw = info.decimalFormats.standard.get(bundle);
+      const raw = info.decimalFormats.standard.get(bundle) || latnInfo.decimalFormats.standard.get(bundle);
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
       const ctx = new NumberContext(options, false, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
+
+      // Re-select pattern as number may have changed sign due to rounding.
       pattern = this.getNumberPattern(raw, n.isNegative());
       const num = renderer.render(n, pattern, '', '', ctx.minInt, options.group);
 
@@ -219,7 +222,8 @@ export class NumberInternalsImpl implements NumberInternals {
       const unit = style === 'code' ? code : this.getCurrencyPluralName(bundle, code, plural);
 
       // Wrap number and unit together.
-      const unitWrapper = currencyFormats.unitPattern.get(bundle, plural);
+      const unitWrapper = currencyFormats.unitPattern.get(bundle, plural)
+        || latnInfo.currencyFormats.unitPattern.get(bundle, plural);
       return renderer.wrap(this.internals.wrapper, unitWrapper, num, renderer.make('unit', unit));
     }
 
@@ -250,14 +254,20 @@ export class NumberInternalsImpl implements NumberInternals {
     case 'symbol':
     {
       // Select standard or accounting pattern based on style.
-      const styleArrow = style === 'symbol' ? currencyFormats.standard : currencyFormats.accounting;
-      const raw = styleArrow.get(bundle);
+      let styleArrow = style === 'symbol' ? currencyFormats.standard : currencyFormats.accounting;
+      let raw = styleArrow.get(bundle);
+      if (!raw) {
+        styleArrow = style === 'symbol' ? latnInfo.currencyFormats.standard : latnInfo.currencyFormats.accounting;
+        raw = styleArrow.get(bundle);
+      }
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
       const ctx = new NumberContext(options, false, fractions.digits);
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
+
+      // Re-select pattern as number may have changed sign due to rounding.
       pattern = this.getNumberPattern(raw, n.isNegative());
       const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
       return renderer.render(n, pattern, symbol, '', ctx.minInt, options.group);
