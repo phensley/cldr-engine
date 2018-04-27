@@ -3,9 +3,9 @@ import { decimalNumberingDigits } from './autogen.decimal';
 import { NumberPattern } from '../../parsing/patterns/number';
 import { NumberFormatter } from '../../internals/numbers';
 import { NumberParams, NumberSymbols } from '../../common/private';
+import { Chars } from '../../types/numbers/types';
 
-// const isInteger: (x: any) => boolean = Number.isInteger ||
-//   ((n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n);
+const isInteger = ((n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n);
 
 export interface NumberingSystemParams {
   readonly decimal: string;
@@ -47,6 +47,9 @@ export class DecimalNumberingSystem extends NumberingSystem {
   }
 
   formatString(n: DecimalArg, groupDigits?: boolean, minInt: number = 1): string {
+    if (!groupDigits && isInteger(n)) {
+      return this._fastFormatDecimal(String(n), minInt);
+    }
     return this._formatDecimal(new StringDecimalFormatter(), n, groupDigits, minInt);
   }
 
@@ -67,7 +70,7 @@ export class DecimalNumberingSystem extends NumberingSystem {
     const d = coerceDecimal(n);
     const group = groupDigits ? this.symbols.group : '';
     d.format(f,
-      this.symbols.decimal,
+      this.symbols.decimal || '.',
       group,
       minInt,
       this.minimumGroupingDigits,
@@ -77,4 +80,56 @@ export class DecimalNumberingSystem extends NumberingSystem {
     return f.render();
   }
 
+  protected _fastFormatDecimal(n: string, minInt: number): string {
+    let r = '';
+    const dg = this.digits;
+    const len = n.length;
+    for (let i = 0; i < len; i++) {
+      const c = n.charCodeAt(i);
+      switch (c) {
+        case Chars.DIGIT0:
+        case Chars.DIGIT1:
+        case Chars.DIGIT2:
+        case Chars.DIGIT3:
+        case Chars.DIGIT4:
+        case Chars.DIGIT5:
+        case Chars.DIGIT6:
+        case Chars.DIGIT7:
+        case Chars.DIGIT8:
+        case Chars.DIGIT9:
+          r += dg[c - Chars.DIGIT0];
+          break;
+      }
+    }
+    // Left pad zeros if minimum integer digits > formatted length
+    let diff = minInt - r.length;
+    if (diff > 0) {
+      let p = '';
+      while (diff-- > 0) {
+        p += dg[0];
+      }
+      return p + r;
+    }
+    return r;
+  }
 }
+
+const INTERNAL_SYMBOLS: NumberSymbols = {
+  decimal: '.',
+  group: ',',
+  list: ';',
+  percentSign: '%',
+  plusSign: '+',
+  minusSign: '-',
+  exponential: 'E',
+  currencyDecimal: '.',
+  currencyGroup: ',',
+  superscriptingExponent: '×',
+  perMille: '‰',
+  infinity: '∞',
+  nan: 'NaN',
+  timeSeparator: ':'
+};
+
+export const INTERNAL_NUMBERING = new DecimalNumberingSystem(
+  'internal', '0123456789'.split(''), INTERNAL_SYMBOLS, 1, 3, 3);
