@@ -9,7 +9,7 @@ import {
   NumberSystemType,
   PrivateApiImpl,
   UnixEpochTime,
-  RawDateFormatOptions
+  DateRawFormatOptions
 } from '../../../src';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
 

@@ -2,9 +2,7 @@ import { RelativeTimeFieldType, RelativeTimeWidthType } from '@phensley/cldr-sch
 import { languageBundle } from '../../_helpers';
 import { buildSchema } from '../../../src/schema';
 import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
-import { Decimal, ZonedDateTime } from '../../../src/types';
-
-const datetime = (e: number, z: string) => new ZonedDateTime(e, z);
+import { Decimal } from '../../../src/types';
 
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
@@ -141,4 +139,12 @@ test('relative time locales', () => {
 
   s = api.formatRelativeTimeField(-1, 'week');
   expect(s).toEqual('letzte Woche');
+});
+
+test('numbering', () => {
+  const api = calendarsApi('en');
+  let s: string;
+
+  s = api.formatRelativeTimeField(3, 'week', { width: 'short', nu: 'arab' });
+  expect(s).toEqual('in ٣ wk.');
 });

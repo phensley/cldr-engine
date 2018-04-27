@@ -8,7 +8,7 @@ import {
   InternalsImpl,
   PrivateApiImpl,
   UnixEpochTime,
-  RawDateFormatOptions
+  DateRawFormatOptions
 } from '../../../src';
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
 

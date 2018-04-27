@@ -43,7 +43,7 @@ export interface DateFormatOptions {
 /**
  * @alpha
  */
-export interface RawDateFormatOptions {
+export interface DateRawFormatOptions {
 
   readonly pattern?: string;
 

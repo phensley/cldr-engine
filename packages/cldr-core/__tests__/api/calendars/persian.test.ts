@@ -8,7 +8,7 @@ import {
   InternalsImpl,
   PrivateApiImpl,
   UnixEpochTime,
-  RawDateFormatOptions
+  DateRawFormatOptions
 } from '../../../src';
 
 const INTERNALS = new InternalsImpl();

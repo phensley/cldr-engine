@@ -8,7 +8,7 @@ import {
   InternalsImpl,
   PrivateApiImpl,
   UnixEpochTime,
-  RawDateFormatOptions
+  DateRawFormatOptions
 } from '../../../src';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
@@ -693,7 +693,7 @@ test('flexible day periods', () => {
 
   let api = calendarsApi('en');
   let d: UnixEpochTime;
-  const opts: RawDateFormatOptions = { pattern: 'B' };
+  const opts: DateRawFormatOptions = { pattern: 'B' };
 
   // 11 pm
   d = losangeles(0);

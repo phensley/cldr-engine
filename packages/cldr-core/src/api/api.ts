@@ -17,7 +17,7 @@ import {
   DateIntervalFormatOptions,
   ListPatternType,
   Quantity,
-  RawDateFormatOptions,
+  DateRawFormatOptions,
   RelativeTimeFormatOptions,
   UnitFormatOptions,
   UnitLength,
@@ -93,14 +93,14 @@ export interface Calendars {
    *
    * Warning: You should not use this for general formatting.
    */
-  formatDateRaw(date: CalendarDate | UnixEpochTime, options?: RawDateFormatOptions): string;
+  formatDateRaw(date: CalendarDate | UnixEpochTime, options?: DateRawFormatOptions): string;
 
   /**
    * Formats a date-time value to an array of parts using a raw date-time pattern.
    *
    * Warning: You should not use this for general formatting.
    */
-  formatDateRawToParts(date: CalendarDate | UnixEpochTime, options?: RawDateFormatOptions): Part[];
+  formatDateRawToParts(date: CalendarDate | UnixEpochTime, options?: DateRawFormatOptions): Part[];
 
 }
 

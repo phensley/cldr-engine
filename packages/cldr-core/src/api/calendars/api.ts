@@ -8,7 +8,7 @@ import { weekFirstDay, weekMinDays } from '../../internals/calendars/autogen.wee
 import {
   DateFormatOptions,
   DateIntervalFormatOptions,
-  RawDateFormatOptions,
+  DateRawFormatOptions,
   RelativeTimeFormatOptions,
   UnixEpochTime
 } from '../../common';
@@ -38,7 +38,7 @@ import { PrivateApiImpl } from '../private';
 
 const DEFAULT_OPTIONS: DateFormatOptions = { date: 'full' };
 const DEFAULT_INTERVAL_OPTIONS: DateIntervalFormatOptions = { skeleton: 'yMd' };
-const DEFAULT_RAW_OPTIONS: RawDateFormatOptions = { };
+const DEFAULT_RAW_OPTIONS: DateRawFormatOptions = { };
 const DEFAULT_RELTIME_OPTIONS: RelativeTimeFormatOptions = { width: 'wide' };
 
 export class CalendarsImpl implements Calendars {
@@ -205,27 +205,31 @@ export class CalendarsImpl implements Calendars {
 
   formatRelativeTime(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
       options?: RelativeTimeFormatOptions): string {
+    options = options || DEFAULT_RELTIME_OPTIONS;
+    const params = this.privateApi.getNumberParams(options.nu);
     const calendar = this.internals.calendars.selectCalendar(this.bundle);
     start = this.convertDateTo(calendar, start);
     end = this.convertDateTo(calendar, end, start.timeZoneId());
     return this.internals.dateFields.formatRelativeTime(
-      this.bundle, start, end, options || DEFAULT_RELTIME_OPTIONS);
+      this.bundle, start, end, options, params);
   }
 
   formatRelativeTimeField(value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string {
+    options = options || DEFAULT_RELTIME_OPTIONS;
+    const params = this.privateApi.getNumberParams(options.nu);
     return this.internals.dateFields.formatRelativeTimeField(
-      this.bundle, value, field, options || DEFAULT_RELTIME_OPTIONS);
+      this.bundle, value, field, options, params);
   }
 
   /**
    * Format a raw date pattern. Note: This should not be used, but is available for debugging or
    * extreme cases where an application must implement a custom format.
    */
-  formatDateRaw(date: CalendarDate | UnixEpochTime, options?: RawDateFormatOptions): string {
+  formatDateRaw(date: CalendarDate | UnixEpochTime, options?: DateRawFormatOptions): string {
     return this._formatDateRaw(new StringRenderer(), date, options || DEFAULT_RAW_OPTIONS);
   }
 
-  formatDateRawToParts(date: CalendarDate | UnixEpochTime, options?: RawDateFormatOptions): Part[] {
+  formatDateRawToParts(date: CalendarDate | UnixEpochTime, options?: DateRawFormatOptions): Part[] {
     return this._formatDateRaw(new PartsRenderer(), date, options || DEFAULT_RAW_OPTIONS);
   }
 
@@ -290,7 +294,7 @@ export class CalendarsImpl implements Calendars {
   }
 
   private _formatDateRaw<R>(renderer: Renderer<R>,
-      date: CalendarDate | UnixEpochTime, options: RawDateFormatOptions): R {
+      date: CalendarDate | UnixEpochTime, options: DateRawFormatOptions): R {
 
     if (!options.pattern) {
       return renderer.empty();

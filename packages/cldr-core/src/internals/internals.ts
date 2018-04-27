@@ -53,10 +53,10 @@ export interface CalendarInternals {
 
 export interface DateFieldInternals {
   formatRelativeTime(bundle: Bundle, start: CalendarDate, end: CalendarDate,
-    options: RelativeTimeFormatOptions): string;
+    options: RelativeTimeFormatOptions, params: NumberParams): string;
 
   formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: DateFieldType,
-    options: RelativeTimeFormatOptions): string;
+    options: RelativeTimeFormatOptions, params: NumberParams): string;
 }
 
 export interface GeneralInternals {
