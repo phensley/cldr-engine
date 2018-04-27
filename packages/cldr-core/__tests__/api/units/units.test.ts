@@ -93,6 +93,16 @@ test('unit lengths', () => {
   expect(s).toEqual('1m');
 });
 
+test('no unit', () => {
+  const api = unitsApi('en');
+  let s: string;
+  let q: Quantity;
+
+  q = { value: '1' };
+  s = api.formatQuantity(q, { length: 'long', minimumFractionDigits: 2 });
+  expect(s).toEqual('1.00');
+});
+
 test('format parts', () => {
   const api = unitsApi('en');
   let p: Part[];

@@ -49,10 +49,6 @@ export class GregorianDate extends CalendarDate {
     return new GregorianDate('gregory', firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
   }
 
-  protected create(firstDay: number, minDays: number): GregorianDate {
-    return new GregorianDate('gregory', firstDay, minDays);
-  }
-
   protected initFromUnixEpoch(epoch: number, zoneId: string): GregorianDate {
     super.initFromUnixEpoch(epoch, zoneId);
     return this.initGregorian();

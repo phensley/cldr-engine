@@ -27,6 +27,7 @@ test('gregorian date', () => {
   expect(d.modifiedJulianDay()).toEqual(2458220);
   expect(d.era()).toEqual(1);
   expect(d.year()).toEqual(2018);
+  expect(d.relatedYear()).toEqual(2018);
   expect(d.month()).toEqual(4);
   expect(d.dayOfMonth()).toEqual(11);
   expect(d.dayOfYear()).toEqual(101);
@@ -293,19 +294,297 @@ test('week of year', () => {
   let base = 1520751625000;
   let d: CalendarDate;
 
-  d = GregorianDate.fromUnixEpoch(base, LOS_ANGELES, 1, 1);
+  d = make(base, LOS_ANGELES);
   expect(d.dayOfWeek()).toEqual(7); // saturday
   expect(d.weekOfYear()).toEqual(10);
 
-  d = GregorianDate.fromUnixEpoch(base, NEW_YORK, 1, 1);
+  d = make(base, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(1); // sunday
   expect(d.weekOfYear()).toEqual(11);
 
   // March 11, 2000 3:00:25 AM EST
   base = 952761625000;
 
-  d = GregorianDate.fromUnixEpoch(base, NEW_YORK, 1, 1);
+  // Jan 2000 31 days
+  // Feb 2000 29 days
+  //
+  //      March 2000
+  // Su Mo Tu We Th Fr Sa
+  //           1  2  3  4
+  //  5  6  7  8  9 10 11
+  // 12 13 14 15 16 17 18
+  // 19 20 21 22 23 24 25
+  // 26 27 28 29 30 31
+
+  const day = CalendarConstants.ONE_DAY_MS;
+
+  d = make(base, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(7); // saturday
+  expect(d.dayOfMonth()).toEqual(11);
+  expect(d.dayOfYear()).toEqual(71);
   expect(d.weekOfYear()).toEqual(11);
   expect(d.isLeapYear()).toEqual(true);
+
+  d = make(base + day, NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(1); // sunday
+  expect(d.dayOfMonth()).toEqual(12);
+  expect(d.dayOfYear()).toEqual(72);
+  expect(d.weekOfYear()).toEqual(12);
+
+  d = make(base + (2 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(2); // monday
+  expect(d.dayOfMonth()).toEqual(13);
+  expect(d.dayOfYear()).toEqual(73);
+  expect(d.weekOfYear()).toEqual(12);
+
+  d = make(base + (3 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(3); // tuesday
+  expect(d.dayOfMonth()).toEqual(14);
+  expect(d.dayOfYear()).toEqual(74);
+  expect(d.weekOfYear()).toEqual(12);
+
+  d = make(base + (4 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(4); // wednesday
+  expect(d.dayOfMonth()).toEqual(15);
+  expect(d.dayOfYear()).toEqual(75);
+  expect(d.weekOfYear()).toEqual(12);
+
+  d = make(base + (5 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(5); // thursday
+  expect(d.dayOfMonth()).toEqual(16);
+  expect(d.dayOfYear()).toEqual(76);
+  expect(d.weekOfYear()).toEqual(12);
+
+  d = make(base + (6 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(6); // friday
+  expect(d.dayOfMonth()).toEqual(17);
+  expect(d.dayOfYear()).toEqual(77);
+  expect(d.weekOfYear()).toEqual(12);
+
+  d = make(base + (7 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(7); // saturday
+  expect(d.dayOfMonth()).toEqual(18);
+  expect(d.dayOfYear()).toEqual(78);
+  expect(d.weekOfYear()).toEqual(12);
+
+  d = make(base + (8 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(1); // sunday
+  expect(d.dayOfMonth()).toEqual(19);
+  expect(d.dayOfYear()).toEqual(79);
+  expect(d.weekOfYear()).toEqual(13);
+
+  d = make(base + (9 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(2); // monday
+  expect(d.dayOfMonth()).toEqual(20);
+  expect(d.dayOfYear()).toEqual(80);
+  expect(d.weekOfYear()).toEqual(13);
+
+  d = make(base + (10 * day), NEW_YORK);
+  expect(d.dayOfWeek()).toEqual(3); // tuesday
+  expect(d.dayOfMonth()).toEqual(21);
+  expect(d.dayOfYear()).toEqual(81);
+  expect(d.weekOfYear()).toEqual(13);
+});
+
+type WeekCase = [number, number, number];
+
+test('first/last week of year 2000', () => {
+  const day = CalendarConstants.ONE_DAY_MS;
+
+  const check = (c: WeekCase, i: number) => {
+    const [dom, woy, ywoy] = c;
+    const d = make(base + (i * day), NEW_YORK);
+    try {
+      expect(d.dayOfMonth()).toEqual(dom);
+      expect(d.weekOfYear()).toEqual(woy);
+      expect(d.yearOfWeekOfYear()).toEqual(ywoy);
+    } catch (e) {
+      console.log(`failure: ${c}`);
+      throw e;
+    }
+  };
+
+  // Dec 24 1999 12:00:00 UTC
+  let base = 946036800000;
+
+  let cases: WeekCase[] = [
+    [24, 52, 1999],
+    [25, 52, 1999],
+    [26,  1, 2000],
+    [27,  1, 2000],
+    [28,  1, 2000],
+    [29,  1, 2000],
+    [30,  1, 2000],
+    [31,  1, 2000],
+    [ 1,  1, 2000],
+    [ 2,  2, 2000],
+    [ 3,  2, 2000]
+  ];
+
+  cases.forEach(check);
+
+  // Dec 26 2000 12:00:00 UTC
+  base = 977832000000;
+
+  cases = [
+    [26, 53, 2000],
+    [27, 53, 2000],
+    [28, 53, 2000],
+    [29, 53, 2000],
+    [30, 53, 2000],
+    [31,  1, 2001],
+    [ 1,  1, 2001],
+    [ 2,  1, 2001],
+    [ 3,  1, 2001],
+    [ 4,  1, 2001],
+    [ 5,  1, 2001],
+    [ 6,  1, 2001],
+    [ 7,  2, 2001]
+  ];
+  cases.forEach(check);
+
+  // Dec 26 2001 12:00:00 UTC
+  base = 1009368000000;
+
+  cases = [
+    [26, 52, 2001],
+    [27, 52, 2001],
+    [28, 52, 2001],
+    [29, 52, 2001],
+    [30,  1, 2002],
+    [31,  1, 2002],
+    [ 1,  1, 2002],
+    [ 2,  1, 2002],
+    [ 3,  1, 2002],
+    [ 4,  1, 2002],
+    [ 5,  1, 2002],
+    [ 6,  2, 2002],
+    [ 7,  2, 2002]
+  ];
+  cases.forEach(check);
+
+  // Dec 26 2002 12:00:00 UTC
+  base = 1040904000000;
+
+  cases = [
+    [26, 52, 2002],
+    [27, 52, 2002],
+    [28, 52, 2002],
+    [29,  1, 2003],
+    [30,  1, 2003],
+    [31,  1, 2003],
+    [ 1,  1, 2003],
+    [ 2,  1, 2003],
+    [ 3,  1, 2003],
+    [ 4,  1, 2003],
+    [ 5,  2, 2003],
+    [ 6,  2, 2003]
+  ];
+  cases.forEach(check);
+
+  // Dec 26 2003 12:00:00 UTC
+  base = 1072440000000;
+
+  cases = [
+    [26, 52, 2003],
+    [27, 52, 2003],
+    [28,  1, 2004],
+    [29,  1, 2004],
+    [30,  1, 2004],
+    [31,  1, 2004],
+    [ 1,  1, 2004],
+    [ 2,  1, 2004],
+    [ 3,  1, 2004],
+    [ 4,  2, 2004],
+    [ 5,  2, 2004]
+  ];
+  cases.forEach(check);
+
+  // Dec 24 2004 12:00:00 UTC
+  base = 1103889600000;
+
+  cases = [
+    [24, 52, 2004],
+    [25, 52, 2004],
+    [26,  1, 2005],
+    [27,  1, 2005],
+    [28,  1, 2005],
+    [29,  1, 2005],
+    [30,  1, 2005],
+    [31,  1, 2005],
+    [ 1,  1, 2005],
+    [ 2,  2, 2005],
+    [ 3,  2, 2005],
+    [ 4,  2, 2005]
+  ];
+  cases.forEach(check);
+
+  // Dec 24 2005 12:00:00 UTC
+  base = 1135425600000;
+
+  cases = [
+    [24, 52, 2005],
+    [25, 53, 2005],
+    [26, 53, 2005],
+    [27, 53, 2005],
+    [28, 53, 2005],
+    [29, 53, 2005],
+    [30, 53, 2005],
+    [31, 53, 2005],
+    [ 1,  1, 2006],
+    [ 2,  1, 2006],
+    [ 3,  1, 2006],
+    [ 4,  1, 2006]
+  ];
+  cases.forEach(check);
+
+  // Dec 24 2006 12:00:00 UTC
+  base = 1166961600000;
+
+  cases = [
+    [24, 52, 2006],
+    [25, 52, 2006],
+    [26, 52, 2006],
+    [27, 52, 2006],
+    [28, 52, 2006],
+    [29, 52, 2006],
+    [30, 52, 2006],
+    [31,  1, 2007],
+    [ 1,  1, 2007],
+    [ 2,  1, 2007],
+    [ 3,  1, 2007]
+  ];
+  cases.forEach(check);
+
+  // Dec 26 2007 12:00:00 UTC
+  base = 1198670400000;
+
+  cases = [
+    [26, 52, 2007],
+    [27, 52, 2007],
+    [28, 52, 2007],
+    [29, 52, 2007],
+    [30,  1, 2008],
+    [31,  1, 2008],
+    [ 1,  1, 2008],
+    [ 2,  1, 2008],
+    [ 3,  1, 2008]
+  ];
+  cases.forEach(check);
+
+  // Dec 26 2008 12:00:00 UTC
+  base = 1230292800000;
+
+  cases = [
+    [26, 52, 2008],
+    [27, 52, 2008],
+    [28,  1, 2009],
+    [29,  1, 2009],
+    [30,  1, 2009],
+    [31,  1, 2009],
+    [ 1,  1, 2009],
+    [ 2,  1, 2009],
+    [ 3,  1, 2009]
+  ];
+  cases.forEach(check);
 });

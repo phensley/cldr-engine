@@ -15,11 +15,11 @@ export const zeropad = (n: number, w: number): string => {
   const neg = n < 0;
   const s = String(Math.abs(n));
   const d = w - s.length - (neg ? 1 : 0);
+  let r = neg ? '-' : '';
   if (d <= 0) {
-    return s;
+    return r + s;
   }
 
-  let r = neg ? '-' : '';
   let i = (d / 10) | 0;
   const j = d - (i * 10);
   while (i-- > 0) {
