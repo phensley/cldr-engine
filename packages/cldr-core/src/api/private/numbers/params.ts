@@ -1,8 +1,9 @@
 import {
   NumbersSchema,
   NumberSystemName,
-  Schema,
+  NumberSystemInfo,
   NumberSystemCategory,
+  Schema,
 } from '@phensley/cldr-schema';
 
 import { Internals } from '../../../internals';
@@ -13,20 +14,20 @@ import { decimalNumberingDigits } from '../../../systems/numbering/autogen.decim
 import { Cache } from '../../../utils/cache';
 import { Bundle } from '../../../resource';
 
-// TODO: rebuild this using a new schema based on vector arrows
-
 export class NumberParamsCache {
 
   private numberParamsCache: Cache<NumberParams>;
   private numbers: NumbersSchema;
   private latnSystem: NumberingSystem;
+  private latnSystemInfo: NumberSystemInfo;
 
   constructor(
     protected bundle: Bundle,
     protected internals: Internals
   ) {
-    this.numberParamsCache = new Cache((s: string) => this.build(s as NumberSystemName), 10);
+    this.numberParamsCache = new Cache((s: string) => this.build(s as NumberSystemName), 20);
     this.numbers = internals.schema.Numbers;
+    this.latnSystemInfo = this.numbers.numberSystem.get('latn');
     this.latnSystem = this.buildNumberSystem('latn');
   }
 
@@ -37,7 +38,8 @@ export class NumberParamsCache {
       defaultSystem = 'default';
     }
     if (numberSystem === undefined) {
-      numberSystem = defaultSystem;
+      const bundle = this.bundle.numberSystem();
+      numberSystem = bundle as NumberSystemType || defaultSystem;
     }
 
     let realName: NumberSystemName = this.select(numberSystem);
@@ -73,9 +75,10 @@ export class NumberParamsCache {
 
   protected build(name: NumberSystemName): NumberParams {
     const { latnSystem } = this;
+
     const system = name === 'latn' ? latnSystem : this.buildNumberSystem(name);
 
-    const info = this.numbers.numberSystem.get(name);
+    const info = this.numbers.numberSystem.get(name) || this.latnSystemInfo;
     const currencySpacing = info.currencyFormats.spacing.mapping(this.bundle);
 
     const { minimumGroupingDigits, primaryGroupingSize, secondaryGroupingSize, symbols } = system;
@@ -95,11 +98,18 @@ export class NumberParamsCache {
   }
 
   protected buildNumberSystem(name: NumberSystemName): NumberingSystem {
-    const info = this.numbers.numberSystem.get(name);
-    const symbols = info.symbols.mapping(this.bundle);
+    const { bundle } = this;
+    const system = this.numbers.numberSystem;
+    const info = system.get(name) || this.latnSystemInfo;
+
+    const symbols = info.symbols.exists(bundle)
+      ? info.symbols.mapping(bundle)
+      : this.latnSystemInfo.symbols.mapping(bundle);
+
+    const standardRaw = info.decimalFormats.standard.get(bundle)
+      || this.latnSystemInfo.decimalFormats.standard.get(bundle);
 
     // Fetch standard pattern to determine grouping digits
-    const standardRaw = info.decimalFormats.standard.get(this.bundle);
     const standard = this.internals.numbers.getNumberPattern(standardRaw, false);
     const minimumGroupingDigits = Number(this.numbers.minimumGroupingDigits.get(this.bundle));
     return new DecimalNumberingSystem(

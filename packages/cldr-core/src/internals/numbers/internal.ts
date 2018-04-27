@@ -83,11 +83,15 @@ export class NumberInternalsImpl implements NumberInternals {
     let result: T;
     let plural: PluralType = 'other';
 
-    const numberInfo = this.numbers.numberSystem.get(params.numberSystemName);
-    if (numberInfo === undefined) {
+    const info = this.numbers.numberSystem.get(params.numberSystemName)
+      || this.numbers.numberSystem.get('latn');
+
+    if (info === undefined) {
       return [renderer.empty(), plural];
     }
-    const decimalFormats = numberInfo.decimalFormats;
+
+    const decimalFormats = info.decimalFormats;
+    const latnDecimalFormats = this.numbers.numberSystem.get('latn').decimalFormats;
 
     switch (style) {
     case 'long':
@@ -120,7 +124,7 @@ export class NumberInternalsImpl implements NumberInternals {
     case 'permille-scaled':
     {
       // Get percent pattern.
-      const raw = numberInfo.percentFormat.get(bundle);
+      const raw = info.percentFormat.get(bundle);
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Scale the number to a percent or permille form as needed.
@@ -149,7 +153,7 @@ export class NumberInternalsImpl implements NumberInternals {
     case 'decimal':
     {
       // Get decimal pattern.
-      const raw = decimalFormats.standard.get(bundle);
+      const raw = decimalFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
       let pattern = this.getNumberPattern(raw, n.isNegative());
 
       // Adjust number using pattern and options, then render.
@@ -182,13 +186,17 @@ export class NumberInternalsImpl implements NumberInternals {
     const width = options.symbolWidth === 'narrow' ? 'narrow' : 'none';
     const style = options.style === undefined ? 'symbol' : options.style;
 
-    const info = this.numbers.numberSystem.get(params.numberSystemName);
+    const info = this.numbers.numberSystem.get(params.numberSystemName)
+      || this.numbers.numberSystem.get('latn');
+
     if (info === undefined) {
       return renderer.empty();
     }
 
     const currencyFormats = info.currencyFormats;
-    const standardRaw = currencyFormats.standard.get(bundle);
+    const latnDecimalFormats = this.numbers.numberSystem.get('latn').decimalFormats;
+
+    const standardRaw = currencyFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
 
     switch (style) {
 
