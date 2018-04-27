@@ -1,5 +1,5 @@
 import { CurrencySpacingPattern, CurrencySpacingPos, NumberSymbolType, NumberSystemName } from '@phensley/cldr-schema';
-import { NumberSystem } from '../systems';
+import { NumberingSystem } from '../systems';
 import { DateTimeNode } from '../parsing/patterns/date';
 
 // TODO: move these
@@ -13,7 +13,8 @@ export type NumberSymbols =  { [P in NumberSymbolType]: string };
  */
 export interface NumberParams {
   numberSystemName: NumberSystemName;
-  numberSystem: NumberSystem;
+  system: NumberingSystem;
+  latnSystem: NumberingSystem;
   digits: string[];
   latinDigits: string[];
   symbols: NumberSymbols;

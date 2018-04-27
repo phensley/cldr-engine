@@ -43,4 +43,11 @@ test('buddhist', () => {
 
   s = api.formatDate(mar11, { datetime: 'full', ca: 'buddhist' });
   expect(s).toEqual('Saturday, March 10, 2561 BE at 11:00:25 PM Pacific Standard Time');
+
+  // April 27, 500 1:38:09 PM
+  const fiveh = unix(-46378606911000, LOS_ANGELES);
+
+  // Extended year
+  s = api.formatDateRaw(fiveh, { pattern: 'uuuuuuuuuu', ca: 'buddhist' });
+  expect(s).toEqual('0000000500');
 });

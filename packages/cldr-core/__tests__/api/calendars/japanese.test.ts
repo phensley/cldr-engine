@@ -35,7 +35,7 @@ const calendarsApi = (tag: string) => {
   return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 };
 
-test('persian', () => {
+test('japanese', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
 
   const api = calendarsApi('en');

@@ -26,7 +26,6 @@ import {
   PersianDate,
 } from '../../systems/calendars';
 
-import { NumericNumberSystem } from '../..//systems/numbering';
 import { coerceDecimal, DecimalArg } from '../../types/numbers';
 import { Cache } from '../../utils/cache';
 import { Part } from '../../types/parts';
@@ -238,7 +237,7 @@ export class CalendarsImpl implements Calendars {
 
     date = this.convertDateTo(calendar, date);
     const req = this.manager.getDateFormatRequest(date, options, params);
-    const ctx = { date, bundle: this.bundle, numberSystem: params.numberSystem };
+    const ctx = { date, bundle: this.bundle, system: params.system, latnSystem: params.latnSystem };
     return calendars.formatDateTime(calendar, ctx, renderer, req.date, req.time, req.wrapper);
   }
 
@@ -258,7 +257,7 @@ export class CalendarsImpl implements Calendars {
     if (req.skeleton) {
       const { ca, nu } = options;
       const r = this.manager.getDateFormatRequest(start, { ca, nu, skeleton: req.skeleton }, params);
-      const ctx = { date: start, bundle: this.bundle, numberSystem: params.numberSystem };
+      const ctx = { date: start, bundle: this.bundle, system: params.system, latnSystem: params.latnSystem };
       const _start = this.internals.calendars.formatDateTime(calendar, ctx, renderer, r.date, r.time, r.wrapper);
       ctx.date = end;
       const _end = this.internals.calendars.formatDateTime(calendar, ctx, renderer, r.date, r.time, r.wrapper);
@@ -270,7 +269,7 @@ export class CalendarsImpl implements Calendars {
     let _date: R | undefined;
     if (req.date) {
       const { ca, nu } = options;
-      const ctx = { date: start, bundle: this.bundle, numberSystem: params.numberSystem };
+      const ctx = { date: start, bundle: this.bundle, system: params.system, latnSystem: params.latnSystem};
       _date = this.internals.calendars.formatDateTime(calendar, ctx, renderer, req.date);
     }
 
@@ -299,7 +298,8 @@ export class CalendarsImpl implements Calendars {
     const pattern = this.internals.calendars.parseDatePattern(options.pattern);
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     const params = this.privateApi.getNumberParams(options.nu, 'default');
-    const ctx = { date: this.convertDateTo(calendar, date), bundle: this.bundle, numberSystem: params.numberSystem };
+    const ctx = { date: this.convertDateTo(calendar, date), bundle: this.bundle,
+      system: params.system, latnSystem: params.latnSystem };
     return this.internals.calendars.formatDateTime(calendar, ctx, renderer, pattern);
   }
 

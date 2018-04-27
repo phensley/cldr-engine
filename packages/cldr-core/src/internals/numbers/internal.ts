@@ -83,8 +83,6 @@ export class NumberInternalsImpl implements NumberInternals {
     let result: T;
     let plural: PluralType = 'other';
 
-    // let pl: number;
-
     const numberInfo = this.numbers.numberSystem.get(params.numberSystemName);
     if (numberInfo === undefined) {
       return [renderer.empty(), plural];
@@ -112,7 +110,6 @@ export class NumberInternalsImpl implements NumberInternals {
       const raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
 
       const pattern = this.getNumberPattern(raw, q2.isNegative());
-      // result = renderer.render(q2, pattern, params, '', '', options.group, ctx.minInt);
       result = renderer.render(q2, pattern, '', '', ctx.minInt, options.group);
       break;
     }
@@ -145,7 +142,6 @@ export class NumberInternalsImpl implements NumberInternals {
       plural = this.internals.plurals.cardinal(bundle.language(), operands);
 
       pattern = this.getNumberPattern(raw, n.isNegative());
-      // result = renderer.render(n, pattern, params, '', symbol, options.group, ctx.minInt);
       result = renderer.render(n, pattern, '', symbol, ctx.minInt, options.group);
       break;
     }
@@ -164,7 +160,6 @@ export class NumberInternalsImpl implements NumberInternals {
       plural = this.internals.plurals.cardinal(bundle.language(), operands);
 
       pattern = this.getNumberPattern(raw, n.isNegative());
-      // result = renderer.render(n, pattern, params, '', '', options.group, ctx.minInt);
       result = renderer.render(n, pattern, '', '', ctx.minInt, options.group);
       break;
     }
@@ -208,7 +203,6 @@ export class NumberInternalsImpl implements NumberInternals {
       ctx.setPattern(pattern);
       n = ctx.adjust(n);
       pattern = this.getNumberPattern(raw, n.isNegative());
-      // const num = renderer.render(n, pattern, params, '', '', options.group, ctx.minInt);
       const num = renderer.render(n, pattern, '', '', ctx.minInt, options.group);
 
       // Compute plural category and select pluralized unit.
@@ -219,7 +213,6 @@ export class NumberInternalsImpl implements NumberInternals {
       // Wrap number and unit together.
       const unitWrapper = currencyFormats.unitPattern.get(bundle, plural);
       return renderer.wrap(this.internals.wrapper, unitWrapper, num, renderer.make('unit', unit));
-      // return renderer.wrap(this.internals.wrapper, unitWrapper, num, renderer.part('unit', unit));
     }
 
     case 'short':
@@ -243,7 +236,6 @@ export class NumberInternalsImpl implements NumberInternals {
       const raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
       const pattern = this.getNumberPattern(raw, q2.isNegative());
       return renderer.render(q2, pattern, symbol, '', ctx.minInt, options.group);
-      // return renderer.render(q2, pattern, params, symbol, '', options.group, ctx.minInt);
     }
 
     case 'accounting':
@@ -261,7 +253,6 @@ export class NumberInternalsImpl implements NumberInternals {
       pattern = this.getNumberPattern(raw, n.isNegative());
       const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
       return renderer.render(n, pattern, symbol, '', ctx.minInt, options.group);
-      // return renderer.render(n, pattern, params, symbol, '', options.group, ctx.minInt);
     }
     }
 

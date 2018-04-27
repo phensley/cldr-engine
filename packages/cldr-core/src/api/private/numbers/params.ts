@@ -8,7 +8,7 @@ import {
 import { Internals } from '../../../internals';
 import { NumberSystemType } from '../../../common';
 import { NumberParams } from '../../../common/private';
-import { NumericNumberSystem } from '../../../systems';
+import { DecimalNumberingSystem, NumberingSystem } from '../../../systems';
 import { decimalNumberingDigits } from '../../../systems/numbering/autogen.decimal';
 import { Cache } from '../../../utils/cache';
 import { Bundle } from '../../../resource';
@@ -19,6 +19,7 @@ export class NumberParamsCache {
 
   private numberParamsCache: Cache<NumberParams>;
   private numbers: NumbersSchema;
+  private latnSystem: NumberingSystem;
 
   constructor(
     protected bundle: Bundle,
@@ -26,6 +27,7 @@ export class NumberParamsCache {
   ) {
     this.numberParamsCache = new Cache((s: string) => this.build(s as NumberSystemName), 10);
     this.numbers = internals.schema.Numbers;
+    this.latnSystem = this.buildNumberSystem('latn');
   }
 
   getNumberParams(numberSystem?: NumberSystemType, defaultSystem?: NumberSystemType): NumberParams {
@@ -69,31 +71,44 @@ export class NumberParamsCache {
     }
   }
 
-  protected build(numberSystemName: NumberSystemName): NumberParams {
-    const info = this.numbers.numberSystem.get(numberSystemName);
-    const symbols = info.symbols.mapping(this.bundle);
+  protected build(name: NumberSystemName): NumberParams {
+    const { latnSystem } = this;
+    const system = name === 'latn' ? latnSystem : this.buildNumberSystem(name);
+
+    const info = this.numbers.numberSystem.get(name);
     const currencySpacing = info.currencyFormats.spacing.mapping(this.bundle);
+
+    const { minimumGroupingDigits, primaryGroupingSize, secondaryGroupingSize, symbols } = system;
+
+    return {
+      numberSystemName: name,
+      system,
+      latnSystem,
+      digits: decimalNumberingDigits[name],
+      latinDigits: decimalNumberingDigits.latn,
+      symbols,
+      minimumGroupingDigits,
+      primaryGroupingSize,
+      secondaryGroupingSize,
+      currencySpacing
+    };
+  }
+
+  protected buildNumberSystem(name: NumberSystemName): NumberingSystem {
+    const info = this.numbers.numberSystem.get(name);
+    const symbols = info.symbols.mapping(this.bundle);
 
     // Fetch standard pattern to determine grouping digits
     const standardRaw = info.decimalFormats.standard.get(this.bundle);
     const standard = this.internals.numbers.getNumberPattern(standardRaw, false);
-
     const minimumGroupingDigits = Number(this.numbers.minimumGroupingDigits.get(this.bundle));
-    const numberSystem: NumericNumberSystem = {
-      type: 'numeric',
-      digits: decimalNumberingDigits[numberSystemName]
-    };
-
-    return {
-      numberSystemName,
-      numberSystem,
-      digits: decimalNumberingDigits[numberSystemName],
-      latinDigits: decimalNumberingDigits.latn,
+    return new DecimalNumberingSystem(
+      name,
+      decimalNumberingDigits[name],
       symbols,
       minimumGroupingDigits,
-      primaryGroupingSize: standard.priGroup,
-      secondaryGroupingSize: standard.secGroup,
-      currencySpacing
-    };
+      standard.priGroup,
+      standard.secGroup
+    );
   }
 }

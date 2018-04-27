@@ -79,13 +79,16 @@ test('formats', () => {
   expect(s).toEqual('3/10/18, 11:00 PM');
 });
 
-test('foo', () => {
+test('year padding', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
   const api = calendarsApi('en');
   let s: string;
 
-  s = api.formatDate(mar11, { skeleton: 'yyyyMMddjjmmssSSS' });
-  expect(s).toEqual('03/10/2018, 11:00:25.123 PM');
+  s = api.formatDate(mar11, { skeleton: 'yyyyy' });
+  expect(s).toEqual('02018');
+
+  s = api.formatDate(mar11, { skeleton: 'yyyyyyyyyy' });
+  expect(s).toEqual('0000002018');
 });
 
 test('skeletons', () => {

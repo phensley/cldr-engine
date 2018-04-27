@@ -89,7 +89,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
       calendar: CalendarType, ctx: CalendarContext<CalendarDate>, renderer: Renderer<R>,
       date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R {
 
-    const formatter = this.internals.calendars.getCalendarFormatter(calendar);
+    const formatter = this.getCalendarFormatter(calendar);
     let _date: R | undefined;
     let _time: R | undefined;
     if (date) {
@@ -112,7 +112,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
     start: CalendarDate, end: CalendarDate, pattern: DateTimeNode[]): R {
 
     const idx = intervalPatternBoundary(pattern);
-    const ctx = { date: start, bundle, numberSystem: params.numberSystem };
+    const ctx = { date: start, bundle, system: params.system, latnSystem: params.latnSystem };
     const s = this.formatDateTime(calendar, ctx, renderer, pattern.slice(0, idx));
     ctx.date = end;
     const e = this.formatDateTime(calendar, ctx, renderer, pattern.slice(idx));

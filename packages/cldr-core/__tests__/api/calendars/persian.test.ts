@@ -48,6 +48,9 @@ test('persian', () => {
   // Related Gregorian year
   s = api.formatDateRaw(mar11, { pattern: 'r', ca: 'persian' });
   expect(s).toEqual('2018');
+
+  s = api.formatDateRaw(mar11, { pattern: 'rrrrrrrrrr', ca: 'persian' });
+  expect(s).toEqual('0000002018');
 });
 
 test('persian unicode extension', () => {
