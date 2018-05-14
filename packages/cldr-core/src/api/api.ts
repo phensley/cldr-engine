@@ -11,6 +11,7 @@ import {
 
 import {
   CurrencyFormatOptions,
+  CurrencyFractions,
   CurrencySymbolWidthType,
   DecimalFormatOptions,
   DateFormatOptions,
@@ -185,6 +186,11 @@ export interface Numbers {
    * Returns the pluralized display name of the currency.
    */
   getCurrencyPluralName(code: CurrencyType, plural: string): string;
+
+  /**
+   * Return the currency fraction info for a given currency code.
+   */
+  getCurrencyFractions(code: CurrencyType): CurrencyFractions;
 
   /**
    * Returns the plural cardinal category of the given decimal number.

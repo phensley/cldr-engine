@@ -1,11 +1,5 @@
 import { currencyFractionsRaw } from './autogen.currencies';
-
-export interface CurrencyFractions {
-  digits: number;
-  rounding: number;
-  cashDigits: number;
-  cashRounding: number;
-}
+import { CurrencyFractions } from '../../common';
 
 type CurrencyFractionMap = { [x: string]: CurrencyFractions };
 

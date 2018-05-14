@@ -43,7 +43,8 @@ export const getCLDR = (options: CLDROptions = defaultOptions): CLDRFramework =>
   const merged: CLDROptions = {};
   const keys: OptKey[] = Object.keys(defaultOptions) as OptKey[];
   for (const key of keys) {
-    merged[key] = options[key] || defaultOptions[key];
+    const val = options[key];
+    merged[key] = val === undefined ? defaultOptions[key] : val;
   }
   return new CLDRFramework(merged);
 };

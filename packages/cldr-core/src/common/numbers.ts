@@ -36,3 +36,13 @@ export interface CurrencyFormatOptions extends NumberFormatOptions {
   style?: CurrencyFormatStyleType;
   symbolWidth?: CurrencySymbolWidthType;
 }
+
+/**
+ * Information on rounding and number of decimal digits for a given currency.
+ */
+export interface CurrencyFractions {
+  digits: number;
+  rounding: number;
+  cashDigits: number;
+  cashRounding: number;
+}

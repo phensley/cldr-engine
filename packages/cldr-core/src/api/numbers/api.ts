@@ -8,6 +8,7 @@ import {
 
 import {
   CurrencyFormatOptions,
+  CurrencyFractions,
   CurrencySymbolWidthType,
   DecimalFormatOptions,
   NumberSystemType
@@ -19,6 +20,7 @@ import { NumberParams } from '../../common/private';
 import { Numbers } from '../api';
 import { PrivateApiImpl } from '../private';
 import {
+  getCurrencyFractions,
   Internals,
   NumberRenderer,
   NumberInternals,
@@ -50,6 +52,10 @@ export class NumbersImpl implements Numbers {
 
   getCurrencyDisplayName(code: CurrencyType): string {
     return this.numbers.getCurrencyDisplayName(this.bundle, code);
+  }
+
+  getCurrencyFractions(code: CurrencyType): CurrencyFractions {
+    return getCurrencyFractions(code);
   }
 
   getCurrencyPluralName(code: CurrencyType, plural: PluralType): string {
