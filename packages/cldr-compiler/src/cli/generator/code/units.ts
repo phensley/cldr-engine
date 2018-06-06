@@ -1,4 +1,4 @@
-import { HEADER, Code, lineWrap, enumName } from './util';
+import { enumName, lineWrap, Code, HEADER } from './util';
 
 export const getUnits = (data: any): Code[] => {
   let code = `${HEADER}import { makeKeyedEnum } from '../../types/enum';\n\n`;

@@ -1,7 +1,4 @@
-import {
-  LanguageResolver,
-  parseLanguageTag,
-} from '../../src/locale';
+import { parseLanguageTag, LanguageResolver } from '../../src/locale';
 
 const { resolve, addLikelySubtags, removeLikelySubtags } = LanguageResolver;
 

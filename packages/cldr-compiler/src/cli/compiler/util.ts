@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { join } from 'path';
 import { availableLocales } from '../../cldr';
-import { Locale, LanguageResolver } from '@phensley/cldr-core';
+import { LanguageResolver, Locale } from '@phensley/cldr-core';
 
 /**
  * Write data to a file.

@@ -1,5 +1,5 @@
 import { getSupplemental } from '../../../cldr';
-import { HEADER, NOLINT_MAXLINE, Code } from './util';
+import { Code, HEADER, NOLINT_MAXLINE } from './util';
 
 const escape = (digits: string[]): string => {
   let r = '';

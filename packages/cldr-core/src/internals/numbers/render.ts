@@ -1,6 +1,6 @@
 import { CurrencySpacingPatterns, NumberParams } from '../../common/private';
-import { NumberPattern, NumberField } from '../../parsing/patterns/number';
-import { Decimal, DecimalFormatter, StringDecimalFormatter, PartsDecimalFormatter } from '../../types/numbers';
+import { NumberField, NumberPattern } from '../../parsing/patterns/number';
+import { Decimal, DecimalFormatter, PartsDecimalFormatter, StringDecimalFormatter } from '../../types/numbers';
 import { Part } from '../../types/parts';
 import { NumberRenderer, WrapperInternals } from '../internals';
 

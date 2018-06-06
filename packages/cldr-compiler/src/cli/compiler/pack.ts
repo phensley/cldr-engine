@@ -5,13 +5,13 @@ import * as yargs from 'yargs';
 import * as zlib from 'zlib';
 
 import { availableLocales, getMain  } from '../../cldr';
-import { EncoderMachine, Encoder } from '../../resource/machine';
+import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
 import { getPackageInfo } from './util';
-import { localeMap, checkLanguages, writeJSON } from './util';
+import { checkLanguages, localeMap, writeJSON } from './util';
 
 import { ORIGIN } from '@phensley/cldr-schema';
-import { Locale, LanguageResolver } from '@phensley/cldr-core';
+import { LanguageResolver, Locale } from '@phensley/cldr-core';
 
 /**
  * Encodes fields into a resource pack and returns the offset

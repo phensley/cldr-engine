@@ -1,4 +1,4 @@
-import { Scope, scope, vector1, vector2 } from '../types';
+import { scope, vector1, vector2, Scope } from '../types';
 import { PluralIndex } from '../schema';
 import { UnitNameIndex, UnitValues } from '../schema/units';
 

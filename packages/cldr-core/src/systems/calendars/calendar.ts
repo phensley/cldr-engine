@@ -1,7 +1,7 @@
 import { DateTimePatternField, DateTimePatternFieldType, MetaZoneType } from '@phensley/cldr-schema';
-import { DateField, dateFields, DayOfWeek } from './fields';
+import { dateFields, DateField, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
-import { ZoneInfo, zoneInfoCache, substituteZoneAlias } from './timezone';
+import { substituteZoneAlias, zoneInfoCache, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);

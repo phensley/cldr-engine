@@ -1,4 +1,4 @@
-import { KeyIndex, Scope, field, scope, vector1, vector2 } from '../types';
+import { field, scope, vector1, vector2, KeyIndex, Scope } from '../types';
 import {
   MetaZoneIndex,
   MetaZoneValues,

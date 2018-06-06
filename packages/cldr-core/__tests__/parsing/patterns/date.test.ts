@@ -1,4 +1,4 @@
-import { parseDatePattern, DateTimeField, intervalPatternBoundary } from '../../../src/parsing/patterns/date';
+import { intervalPatternBoundary, parseDatePattern, DateTimeField } from '../../../src/parsing/patterns/date';
 
 const datefield = (field: string, width: number) => ({ field, width });
 

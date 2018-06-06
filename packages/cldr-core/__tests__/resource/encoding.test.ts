@@ -1,6 +1,6 @@
 import {
-  base100encode,
   base100decode,
+  base100encode,
   bitarrayCreate,
   bitarrayGet } from '../../src/resource/encoding';
 

@@ -1,11 +1,11 @@
 import {
+  parseDatePattern,
   DateTimeField,
   DateTimeNode,
-  DATE_PATTERN_CHARS,
-  parseDatePattern
+  DATE_PATTERN_CHARS
 } from '../../parsing/patterns/date';
 
-import { Field, C, FIELD_INDEX, FIELD_TYPES, FieldType, getFieldType, skeletonFields } from './fields';
+import { getFieldType, skeletonFields, C, Field, FieldType, FIELD_INDEX, FIELD_TYPES } from './fields';
 
 export interface SkeletonField {
   input: string;

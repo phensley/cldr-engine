@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 import * as zlib from 'zlib';
 import { getSupplemental } from '../../../cldr';
-import { HEADER, Code, objectToString, NOLINT_MAXLINE } from './util';
+import { objectToString, Code, HEADER, NOLINT_MAXLINE } from './util';
 
 /**
  * Split string into lines and split each line into a colon-delimited

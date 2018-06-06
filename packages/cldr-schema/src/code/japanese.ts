@@ -1,4 +1,4 @@
-import { KeyIndex, Scope, field, scope, vector1, vector2 } from '../types';
+import { field, scope, vector1, vector2, KeyIndex, Scope } from '../types';
 
 import {
   DateTimePatternFieldValues,
@@ -15,10 +15,10 @@ import {
   DateTimePatternFieldIndex,
   DayPeriodIndex,
   EraTypeIndex,
+  FieldWidthIndex,
   FormatWidthIndex,
   QuartersIndex,
-  WeekdaysIndex,
-  FieldWidthIndex
+  WeekdaysIndex
 } from './calendars';
 
 const AvailableFormatIndex = new KeyIndex(JapaneseInfo.availableFormats);

@@ -1,4 +1,4 @@
-import { HEADER, Code, lineWrap, formatSource } from './util';
+import { formatSource, lineWrap, Code, HEADER } from './util';
 
 const DEFAULT_DIGITS = '2';
 const DEFAULT_ROUNDING = '0';

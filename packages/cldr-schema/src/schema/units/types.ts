@@ -1,4 +1,4 @@
-import { FieldArrow, ScopeArrow, Vector2Arrow, Vector1Arrow } from '../arrows';
+import { FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
 import { PluralType } from '../enums';
 import { UnitValues } from './autogen.units';
 import { UnitType } from './autogen.units';

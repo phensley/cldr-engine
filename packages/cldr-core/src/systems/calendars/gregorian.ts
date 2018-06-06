@@ -1,5 +1,5 @@
 import { CalendarConstants } from './constants';
-import { CalendarType, CalendarDate, CalendarDateFields } from './calendar';
+import { CalendarDate, CalendarDateFields, CalendarType } from './calendar';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
 

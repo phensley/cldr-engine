@@ -4,8 +4,8 @@ import {
 
 import {
   numberEngineSuite,
-  numberFormatSuite,
   numberFormatBaselineSuite,
+  numberFormatSuite,
   numberParseSuite
 } from './numbers';
 

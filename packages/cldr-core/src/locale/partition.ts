@@ -1,4 +1,4 @@
-import { regions, macroRegions, variables } from './autogen.partition';
+import { macroRegions, regions, variables } from './autogen.partition';
 
 type MapSet = { [x: string]: Set<string> };
 

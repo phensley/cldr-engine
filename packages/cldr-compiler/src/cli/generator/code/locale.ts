@@ -1,4 +1,4 @@
-import { HEADER, Code, NOLINT_MAXLINE } from './util';
+import { Code, HEADER, NOLINT_MAXLINE } from './util';
 import { availableLocales } from '../../../cldr';
 
 export const getLocale = (data: any): Code[] => {

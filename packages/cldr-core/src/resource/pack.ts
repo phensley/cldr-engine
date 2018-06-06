@@ -1,5 +1,5 @@
 import { base100decode } from './encoding';
-import { Locale, LanguageTag, LanguageResolver } from '../locale';
+import { LanguageResolver, LanguageTag, Locale } from '../locale';
 import { Bundle, ExceptionIndex, StringBundle } from './bundle';
 
 const DELIMITER = '\t';

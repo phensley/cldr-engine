@@ -1,5 +1,5 @@
 import { CLDRFramework } from '../src';
-import { getCLDR, loader, asyncLoader } from './helpers';
+import { asyncLoader, getCLDR, loader } from './helpers';
 import { CurrencyFormatOptions, Quantity } from '@phensley/cldr-core';
 
 test('init framework', () => {

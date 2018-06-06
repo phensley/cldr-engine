@@ -1,15 +1,15 @@
-import { DivMod, add, subtract, multiply, trimLeadingZeros, divide } from './math';
+import { add, divide, multiply, subtract, trimLeadingZeros, DivMod } from './math';
 import { allzero, compare, digitCount } from './operations';
-import { NumberOperands, decimalOperands } from './operands';
-import { DecimalFormatter, StringDecimalFormatter, PartsDecimalFormatter } from './format';
+import { decimalOperands, NumberOperands } from './operands';
+import { DecimalFormatter, PartsDecimalFormatter, StringDecimalFormatter } from './format';
 import { Part } from '../parts';
 import {
   Chars,
   Constants,
-  ParseState,
-  ParseFlags,
-  POWERS10,
   MathContext,
+  ParseFlags,
+  ParseState,
+  POWERS10,
   RoundingModeType
 } from './types';
 

@@ -2,12 +2,12 @@ import { languageBundle } from '../../_helpers';
 
 import {
   Bundle,
-  CalendarDate,
   CalendarsImpl,
+  CalendarDate,
+  DateRawFormatOptions,
   InternalsImpl,
   PrivateApiImpl,
-  UnixEpochTime,
-  DateRawFormatOptions
+  UnixEpochTime
 } from '../../../src';
 
 const INTERNALS = new InternalsImpl();

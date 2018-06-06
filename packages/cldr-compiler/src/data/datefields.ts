@@ -1,4 +1,4 @@
-import { Mapping, Mappings, applyMappings } from './utils';
+import { applyMappings, Mapping, Mappings } from './utils';
 
 const mappings: Mapping[] = [
   Mappings.field('relativeTimes').keys().keys().fields([

@@ -1,5 +1,5 @@
 import { getSupplemental} from '../../../cldr';
-import { HEADER, Code, objectToString, NOLINT } from './util';
+import { objectToString, Code, HEADER, NOLINT } from './util';
 
 const DIGIT = /\d/g;
 

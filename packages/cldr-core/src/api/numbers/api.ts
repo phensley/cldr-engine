@@ -22,8 +22,8 @@ import { PrivateApiImpl } from '../private';
 import {
   getCurrencyFractions,
   Internals,
-  NumberRenderer,
   NumberInternals,
+  NumberRenderer,
   PluralInternals,
 } from '../../internals';
 import { NumberingSystem } from '../../systems/numbering';

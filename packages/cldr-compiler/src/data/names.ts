@@ -1,4 +1,4 @@
-import { Mapping, Mappings, applyMappings } from './utils';
+import { applyMappings, Mapping, Mappings } from './utils';
 
 const displayName = [
   Mappings.field('displayName').keys().remap(0, 1, 2)

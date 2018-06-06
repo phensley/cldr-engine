@@ -70,6 +70,13 @@
       "check-else",
       "check-whitespace"
     ],
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "named-imports-order": "lowercase-first"
+      }
+    ],
     "quotemark": [true, "single", "avoid-escape"],
     "prefer-const": true,
     "radix": true,

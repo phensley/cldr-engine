@@ -6,9 +6,9 @@ import {
   ListPatternsSchema,
   ListPatternPositionType,
   NamesSchema,
+  RegionIdType,
   Schema,
   ScriptIdType,
-  RegionIdType,
   Vector1Arrow,
 } from '@phensley/cldr-schema';
 

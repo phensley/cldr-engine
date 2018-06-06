@@ -1,4 +1,4 @@
-import { HEADER, NOLINT, Code, lineWrap, repeat, pad } from './util';
+import { lineWrap, pad, repeat, Code, HEADER, NOLINT } from './util';
 import { buildPartitions, MapSet } from './partition';
 
 // ANY character used to represent a wildcard in the distance table, so all

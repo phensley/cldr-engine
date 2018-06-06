@@ -6,8 +6,7 @@ import {
 } from '../arrows';
 
 import { PluralType } from '../enums';
-import { DateFieldType, DateFieldValues,
-  RelativeTimeFieldValues, RelativeTimeFieldType } from './enums';
+import { DateFieldType, DateFieldValues, RelativeTimeFieldType, RelativeTimeFieldValues } from './enums';
 import { KeyIndex } from '../../types';
 
 export const DateFieldIndex = new KeyIndex(DateFieldValues);

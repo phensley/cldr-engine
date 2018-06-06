@@ -1,6 +1,6 @@
 import { getSupplemental } from '../../../cldr';
 import { parsePluralRule } from '../../../parsing/parser.plural';
-import { HEADER, Code, lineWrap, formatSource } from './util';
+import { formatSource, lineWrap, Code, HEADER } from './util';
 
 // Single-character names for the plural categories.
 const categories: any = {

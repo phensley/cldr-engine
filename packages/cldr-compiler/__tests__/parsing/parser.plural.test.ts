@@ -1,8 +1,8 @@
 import {
   parsePluralRule,
   AndCondition,
-  OrCondition,
   Expr,
+  OrCondition,
   Range,
   Rule
 } from '../../src/parsing';

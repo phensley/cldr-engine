@@ -1,4 +1,4 @@
-import { Mappings, applyMappings } from './utils';
+import { applyMappings, Mappings } from './utils';
 
 const mappings = [
   Mappings.field('minimumGroupingDigits').remap(0, 1),
@@ -36,6 +36,4 @@ const mappings = [
     ]).field('standard').remap(0, 1, 2, 4),
 ];
 
-export const transformNumbers = (o: any): any => {
-  return applyMappings(o, mappings, false);
-};
+export const transformNumbers = (o: any): any => applyMappings(o, mappings, false);

@@ -15,6 +15,7 @@ yarn.lock
 yarn-error.log
 lerna-debug.log
 package-deps.json
+package-lock.json
 
 *.swp
 *.build.log

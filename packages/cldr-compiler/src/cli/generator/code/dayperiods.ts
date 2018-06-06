@@ -1,4 +1,4 @@
-import { HEADER, Code } from './util';
+import { Code, HEADER } from './util';
 import { getSupplemental } from '../../../cldr';
 import { encoding } from '@phensley/cldr-core';
 

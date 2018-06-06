@@ -1,5 +1,5 @@
 import { LanguageResolver } from '../../src/locale/resolver';
-import { LocaleMatcher, LanguageMatch } from '../../src/locale/matcher';
+import { LanguageMatch, LocaleMatcher } from '../../src/locale/matcher';
 import { loadMatchCases } from './util';
 
 const resolve = LanguageResolver.resolve;

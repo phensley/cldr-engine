@@ -3,7 +3,7 @@ import { Bundle, WrapperInternals } from '../..';
 import { Internals } from '../internals';
 import { CalendarDate } from '../../systems/calendars';
 import { NumberingSystem } from '../../systems/numbering';
-import { DateTimeNode, parseDatePattern } from '../../parsing/patterns/date';
+import { parseDatePattern, DateTimeNode } from '../../parsing/patterns/date';
 import { Renderer } from '../../utils/render';
 import { DayPeriodRules } from './rules';
 import { Cache } from '../../utils/cache';

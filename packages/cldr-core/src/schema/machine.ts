@@ -5,17 +5,15 @@ import {
   FieldArrow,
   Instruction,
   Origin,
+  ORIGIN,
   Schema,
   Scope,
   ScopeArrow,
   ScopeMap,
-
   Vector1,
-  Vector2,
   Vector1Arrow,
+  Vector2,
   Vector2Arrow,
-
-  ORIGIN,
 } from '@phensley/cldr-schema';
 
 import { Decimal } from '../types';

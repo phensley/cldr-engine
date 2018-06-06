@@ -1,5 +1,5 @@
 import { ResourcePack } from '../../src/resource/pack';
-import { Locale, LanguageResolver, encoding } from '@phensley/cldr-core';
+import { encoding, LanguageResolver, Locale } from '@phensley/cldr-core';
 
 const { base100encode, base100decode } = encoding;
 const parseLocale = (id: string) => ({ id, tag: LanguageResolver.resolve(id) });

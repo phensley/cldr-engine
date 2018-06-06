@@ -1,4 +1,4 @@
-import { Mapping, Mappings, applyMappings } from './utils';
+import { applyMappings, Mapping, Mappings } from './utils';
 
 const mappings: Mapping[] = [
   Mappings.field('metaZones').keys().keys().keys().keys().remap(0, 2, 3, 1, 4),

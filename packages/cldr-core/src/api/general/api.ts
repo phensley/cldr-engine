@@ -2,8 +2,8 @@ import {
   AltType,
   CharacterOrderType,
   LineOrderType,
-  ScriptIdType,
-  RegionIdType
+  RegionIdType,
+  ScriptIdType
 } from '@phensley/cldr-schema';
 
 import { General } from '../api';

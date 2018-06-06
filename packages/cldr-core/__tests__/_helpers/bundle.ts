@@ -5,7 +5,7 @@ import * as child from 'child_process';
 import * as zlib from 'zlib';
 
 import { LanguageResolver } from '../../src/locale/resolver';
-import { Pack, Bundle } from '../../src/resource';
+import { Bundle, Pack } from '../../src/resource';
 import { Cache } from '../../src/utils/cache';
 
 /**

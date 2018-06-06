@@ -1,4 +1,4 @@
-import { Scope, field, scope, vector1 } from '../types';
+import { field, scope, vector1, Scope } from '../types';
 import { ListPatternPositionIndex } from '../schema/general';
 
 export const LAYOUT: Scope = scope('Layout', 'Layout', [

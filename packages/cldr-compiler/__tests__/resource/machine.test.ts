@@ -1,18 +1,17 @@
 import {
-  KeyIndex,
-  Origin,
-  Scope,
-
   digits,
   field,
   origin,
   scope,
   scopemap,
   vector1,
-  vector2
+  vector2,
+  KeyIndex,
+  Origin,
+  Scope
 } from '@phensley/cldr-schema';
 
-import { Locale, LanguageResolver } from '@phensley/cldr-core';
+import { LanguageResolver, Locale } from '@phensley/cldr-core';
 import { Encoder, EncoderMachine } from '../../src/resource/machine';
 import { ResourcePack } from '../../src/resource/pack';
 

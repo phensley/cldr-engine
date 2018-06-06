@@ -2,7 +2,7 @@ import { UnitType } from '@phensley/cldr-schema';
 
 import { Units } from '../api';
 import { GeneralInternals, Internals, NumberInternals, UnitInternals } from '../../internals';
-import { Quantity, ListPatternType, UnitFormatOptions, UnitLength } from '../../common';
+import { ListPatternType, Quantity, UnitFormatOptions, UnitLength } from '../../common';
 import { Part } from '../../types';
 import { Bundle } from '../../resource';
 import { PrivateApiImpl } from '../private';

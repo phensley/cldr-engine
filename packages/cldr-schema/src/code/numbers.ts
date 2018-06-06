@@ -1,11 +1,11 @@
-import { Scope, digits, field, scope, scopemap, vector1, vector2 } from '../types';
+import { digits, field, scope, scopemap, vector1, vector2, Scope } from '../types';
 import { PluralIndex } from '../schema';
 import {
-  CurrencySpacingPosIndex,
   CurrencySpacingPatternIndex,
+  CurrencySpacingPosIndex,
+  NumberSymbolIndex,
   NumberSystemsIndex,
   NumberSystemNameValues,
-  NumberSymbolIndex,
 } from '../schema/numbers';
 
 const PluralDigitValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];

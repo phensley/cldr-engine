@@ -1,8 +1,8 @@
 import {
-  CurrencyType,
-  CurrencyFormats,
-  CurrencyValues,
   CurrenciesSchema,
+  CurrencyFormats,
+  CurrencyType,
+  CurrencyValues,
   DecimalFormats,
   DigitsArrow,
   NumbersSchema,
@@ -26,13 +26,13 @@ import {
 import { Decimal, Part, RoundingModeType } from '../../types';
 import { NumberContext } from './context';
 import { NumberParams } from '../../common/private';
-import { NumberPattern, parseNumberPattern, NumberField } from '../../parsing/patterns/number';
+import { parseNumberPattern, NumberField, NumberPattern } from '../../parsing/patterns/number';
 import { DecimalNumberingSystem, NumberingSystem } from '../../systems/numbering';
 import { Cache } from '../../utils/cache';
 import { getCurrencyFractions } from './util';
 import { Bundle } from '../../resource';
-import { Internals, NumberInternals, PluralInternals, WrapperInternals, NumberRenderer } from '..';
-import { StringNumberFormatter, PartsNumberFormatter } from './render';
+import { Internals, NumberInternals, NumberRenderer, PluralInternals, WrapperInternals } from '..';
+import { PartsNumberFormatter, StringNumberFormatter } from './render';
 
 /**
  * Number internal engine singleton, shared across all locales.

@@ -1,8 +1,7 @@
-import { LanguageTag, LANGUAGE, SCRIPT, REGION } from './languagetag';
+import { LanguageTag, LANGUAGE, REGION, SCRIPT } from './languagetag';
 import { parseLanguageTag } from './parser';
 import { substituteRegionAliases, FastTag, LanguageAliasMap } from './util';
 import { stringToObject } from '../utils/string';
-
 import { languageAliasRaw } from './autogen.aliases';
 import * as subtags from './autogen.subtags';
 

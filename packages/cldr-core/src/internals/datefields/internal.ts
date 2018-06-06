@@ -1,7 +1,7 @@
 import {
   DateField,
-  DateFieldType,
   DateFieldsSchema,
+  DateFieldType,
   RelativeTimes,
   RelativeTimeFields,
   RelativeTimeFieldType,

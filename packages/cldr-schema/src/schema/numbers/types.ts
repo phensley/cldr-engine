@@ -3,10 +3,10 @@ import { PluralType } from '../enums';
 import {
   NumberSymbolType,
   NumberSymbolValues,
+  NumberSystems,
   NumberSystemCategory,
   NumberSystemName,
   NumberSystemNameValues,
-  NumberSystems,
 } from './enums';
 import { KeyIndex } from '../../types';
 

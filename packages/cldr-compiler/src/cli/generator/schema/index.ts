@@ -4,7 +4,7 @@ import * as yargs from 'yargs';
 
 import { Entry } from '../types';
 import { getMain, getSupplemental } from '../../../cldr';
-import { localeMap, checkLanguages, writeJSON } from '../../compiler/util';
+import { checkLanguages, localeMap, writeJSON } from '../../compiler/util';
 
 const isObject = (o: any): boolean =>
   typeof o === 'object' ? o !== null && !Array.isArray(o) : false;

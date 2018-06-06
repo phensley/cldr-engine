@@ -1,6 +1,6 @@
 import { Vector1Arrow, Vector2Arrow } from '../arrows';
 import { AltType } from '../enums';
-import { ScriptIdType, ScriptIdValues, RegionIdType, RegionIdValues } from './autogen.identifiers';
+import { RegionIdType, RegionIdValues, ScriptIdType, ScriptIdValues } from './autogen.identifiers';
 import { KeyIndex } from '../../types';
 
 export const ScriptIdIndex = new KeyIndex(ScriptIdValues);

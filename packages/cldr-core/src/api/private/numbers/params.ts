@@ -1,8 +1,8 @@
 import {
   NumbersSchema,
-  NumberSystemName,
-  NumberSystemInfo,
   NumberSystemCategory,
+  NumberSystemInfo,
+  NumberSystemName,
   Schema,
 } from '@phensley/cldr-schema';
 

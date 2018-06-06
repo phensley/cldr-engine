@@ -1,4 +1,4 @@
-import { KeyIndex, Scope, scope, vector1, vector2 } from '../types';
+import { scope, vector1, vector2, KeyIndex, Scope } from '../types';
 import { AltIndex, CurrencyIdIndex, CurrencyValues, PluralIndex } from '../schema';
 
 export const CURRENCIES: Scope = scope('Currencies', 'Currencies', [

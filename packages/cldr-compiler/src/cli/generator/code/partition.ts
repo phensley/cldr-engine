@@ -1,4 +1,4 @@
-import { HEADER, NOLINT_MAXLINE, Code, sortSet } from './util';
+import { sortSet, Code, HEADER, NOLINT_MAXLINE } from './util';
 
 type StringMap = { [x: string]: string };
 export type MapSet = { [x: string]: Set<string> };

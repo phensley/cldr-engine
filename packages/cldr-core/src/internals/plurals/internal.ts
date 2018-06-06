@@ -1,6 +1,6 @@
 import { PluralType } from '@phensley/cldr-schema';
 import { PluralInternals } from '..';
-import { expressions, cardinalRules, ordinalRules } from './autogen.rules';
+import { cardinalRules, expressions, ordinalRules } from './autogen.rules';
 import { PluralRules } from './types';
 import { NumberOperands } from '../../types/numbers';
 

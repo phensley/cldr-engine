@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 import { encoding } from '@phensley/cldr-core';
 import { getSupplemental } from '../../../cldr';
-import { HEADER, Code, lineWrap, escapeString, formatSource, enumName } from './util';
+import { enumName, escapeString, formatSource, lineWrap, Code, HEADER } from './util';
 
 const { base100encode, bitarrayCreate } = encoding;
 

@@ -1,4 +1,4 @@
-import { encoding, Locale, LanguageResolver, LanguageTag } from '@phensley/cldr-core';
+import { encoding, LanguageResolver, LanguageTag, Locale } from '@phensley/cldr-core';
 import { getOther } from '../cldr';
 
 // Index default content for each language and language+script combination.

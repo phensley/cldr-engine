@@ -1,8 +1,8 @@
 import {
   CurrencySpacingPattern,
   CurrencySpacingPos,
-  NumberSymbolType,
   NumbersSchema,
+  NumberSymbolType,
   NumberSystemInfo,
   NumberSystemName,
   PluralType,
@@ -10,9 +10,9 @@ import {
 
 import { Bundle } from '../../resource';
 import { Cache } from '../../utils/cache';
-import { NumberingSystem, DecimalNumberingSystem, NumberSystem } from '../../systems/numbering';
+import { DecimalNumberingSystem, NumberingSystem, NumberSystem } from '../../systems/numbering';
 import { Internals } from '../../internals';
-import { NumberSystemType, DateFormatOptions, DateIntervalFormatOptions } from '../../common';
+import { DateFormatOptions, DateIntervalFormatOptions, NumberSystemType } from '../../common';
 import { NumberParams } from '../../common/private';
 import { NumberParamsCache } from './numbers/params';
 

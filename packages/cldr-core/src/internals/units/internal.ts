@@ -2,8 +2,8 @@ import {
   FieldArrow,
   NumbersSchema,
   Schema,
-  UnitInfo,
   UnitsSchema,
+  UnitInfo,
   UnitType
 } from '@phensley/cldr-schema';
 
