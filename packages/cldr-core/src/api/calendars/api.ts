@@ -283,10 +283,15 @@ export class CalendarsImpl implements Calendars {
       if (!_date) {
         return _range;
       }
-      // TODO: CLDR doesn't include a pattern to join a date with a time range.
-      // This exists in ICU but isn't present in the CLDR data. Create a patch file for it.
-      const wrapper = this.internals.wrapper.parseWrapper('{0} {1}');
-      renderer.wrap(wrapper, [_date, _range]);
+      // Note: This case is covered in ICU but not mentioned in the CLDR docs. Use the MEDIUM
+      // dateTimeFormat to join a common date with a time range.
+      // Ticket referencing the discrepancy:
+      // https://www.unicode.org/cldr/trac/ticket/11158
+      // Docs don't mention this edge case:
+      // https://www.unicode.org/reports/tr35/tr35-dates.html#intervalFormats
+      const patterns = this.manager.getCalendarPatterns(calendar);
+      const wrapper = this.internals.wrapper.parseWrapper(patterns.getWrapperPattern('medium'));
+      renderer.wrap(wrapper, [_range, _date]);
       return renderer.get();
     }
 

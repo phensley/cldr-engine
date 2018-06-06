@@ -427,12 +427,12 @@ test('intervals best-fit', () => {
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yyMdhms' });
-  expect(s).toEqual('3/10/18 6:00 – 11:00 PM');
+  expect(s).toEqual('3/10/18, 6:00 – 11:00 PM');
 
   start = unix(base - (HOUR * 13), LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yyMdhms' });
-  expect(s).toEqual('3/10/18 10:00 AM – 11:00 PM');
+  expect(s).toEqual('3/10/18, 10:00 AM – 11:00 PM');
 
   start = unix(base, LOS_ANGELES);
 
@@ -549,13 +549,13 @@ test('intervals best-fit', () => {
   expect(s).toEqual('9 AM – 11 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
-  expect(s).toEqual('3/10/2018 9:58 AM – 11:00 PM');
+  expect(s).toEqual('3/10/2018, 9:58 AM – 11:00 PM');
 
   start = unix(base - (HOUR * 5), LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
-  expect(s).toEqual('3/10/2018 6:00 – 11:00 PM');
+  expect(s).toEqual('3/10/2018, 6:00 – 11:00 PM');
 
   // Time skeleton, years differ
   start = unix(base, LOS_ANGELES);
