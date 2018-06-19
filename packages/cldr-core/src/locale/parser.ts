@@ -230,7 +230,4 @@ class LanguageTagParser {
 /**
  * Low-level parsing of a language tag. No resolution is performed.
  */
-export const parseLanguageTag = (str: string) => {
-  const parser = new LanguageTagParser(str);
-  return parser.parse();
-};
+export const parseLanguageTag = (str: string) => new LanguageTagParser(str).parse();

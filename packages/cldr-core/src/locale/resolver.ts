@@ -1,4 +1,4 @@
-import { LanguageTag, LANGUAGE, REGION, SCRIPT } from './languagetag';
+import { LanguageTag, Tag } from './languagetag';
 import { parseLanguageTag } from './parser';
 import { substituteRegionAliases, FastTag, LanguageAliasMap } from './util';
 import { stringToObject } from '../utils/string';
@@ -36,13 +36,13 @@ const fastTag = (real: LanguageTag): FastTag => {
   // undefined, and we don't want to use its string representation of
   // the undefined value (e.g. 'und', 'Zzzz', etc), we use the field's
   // index number to represent undefined.
-  const language = fake.core[LANGUAGE];
-  const script = fake.core[SCRIPT];
-  const region = fake.core[REGION];
+  const language = fake.core[Tag.LANGUAGE];
+  const script = fake.core[Tag.SCRIPT];
+  const region = fake.core[Tag.REGION];
   return [
-    language || LANGUAGE,
-    script || SCRIPT,
-    region || REGION
+    language || Tag.LANGUAGE,
+    script || Tag.SCRIPT,
+    region || Tag.REGION
   ];
 };
 
@@ -64,8 +64,8 @@ class LikelySubtagsMap {
       const val = parseFastTag(likely[k]);
 
       // Add the fast tag into the index.
-      const map = putMap(putMap(this.index, key[LANGUAGE]), key[SCRIPT]);
-      map[key[REGION]] = val;
+      const map = putMap(putMap(this.index, key[Tag.LANGUAGE]), key[Tag.SCRIPT]);
+      map[key[Tag.REGION]] = val;
     });
   }
 
@@ -73,13 +73,13 @@ class LikelySubtagsMap {
    * Lookup the FastTag in the index.
    */
   get(query: FastTag): FastTag | undefined {
-    const language = query[LANGUAGE];
+    const language = query[Tag.LANGUAGE];
     const node1 = this.index[language];
     if (node1 !== undefined) {
-      const script = query[SCRIPT];
+      const script = query[Tag.SCRIPT];
       const node2 = node1[script];
       if (node2 !== undefined) {
-        const region = query[REGION];
+        const region = query[Tag.REGION];
         return node2[region] || undefined;
       }
     }
@@ -104,32 +104,32 @@ const MATCH_ORDER = [
  * Clear or copy fields from src to dst depending on flags.
  */
 const setFields = (src: FastTag, dst: FastTag, flags: number): void => {
-  dst[LANGUAGE] = (flags & F_LANGUAGE) === 0 ? LANGUAGE : src[LANGUAGE];
-  dst[SCRIPT] = (flags & F_SCRIPT) === 0 ? SCRIPT : src[SCRIPT];
-  dst[REGION] = (flags & F_REGION) === 0 ? REGION : src[REGION];
+  dst[Tag.LANGUAGE] = (flags & F_LANGUAGE) === 0 ? Tag.LANGUAGE : src[Tag.LANGUAGE];
+  dst[Tag.SCRIPT] = (flags & F_SCRIPT) === 0 ? Tag.SCRIPT : src[Tag.SCRIPT];
+  dst[Tag.REGION] = (flags & F_REGION) === 0 ? Tag.REGION : src[Tag.REGION];
 };
 
 /**
  * Lookup any aliases that match this tag, and replace any undefined subtags.
  */
 const substituteLanguageAliases = (dst: FastTag): void => {
-  const aliases = LANGUAGE_ALIAS_MAP[dst[LANGUAGE]];
+  const aliases = LANGUAGE_ALIAS_MAP[dst[Tag.LANGUAGE]];
   if (aliases === undefined) {
     return;
   }
   for (let i = 0; i < aliases.length; i++) {
     const { type, repl } = aliases[i];
-    const exact = (type[LANGUAGE] === dst[LANGUAGE] &&
-    type[SCRIPT] === dst[SCRIPT] &&
-    type[REGION] === dst[REGION]);
+    const exact = (type[Tag.LANGUAGE] === dst[Tag.LANGUAGE] &&
+    type[Tag.SCRIPT] === dst[Tag.SCRIPT] &&
+    type[Tag.REGION] === dst[Tag.REGION]);
 
-    if ((type[SCRIPT] === SCRIPT && type[REGION] === REGION) || exact) {
-      dst[LANGUAGE] = repl[LANGUAGE];
-      if (dst[SCRIPT] === SCRIPT) {
-        dst[SCRIPT] = repl[SCRIPT];
+    if ((type[Tag.SCRIPT] === Tag.SCRIPT && type[Tag.REGION] === Tag.REGION) || exact) {
+      dst[Tag.LANGUAGE] = repl[Tag.LANGUAGE];
+      if (dst[Tag.SCRIPT] === Tag.SCRIPT) {
+        dst[Tag.SCRIPT] = repl[Tag.SCRIPT];
       }
-      if (dst[REGION] === REGION) {
-        dst[REGION] = repl[REGION];
+      if (dst[Tag.REGION] === Tag.REGION) {
+        dst[Tag.REGION] = repl[Tag.REGION];
       }
       break;
     }
@@ -147,14 +147,14 @@ const addLikelySubtags = (dst: FastTag): void => {
     setFields(dst, tmp, flags);
     const match = LIKELY_SUBTAGS_MAP.get(tmp);
     if (match !== undefined) {
-      if (dst[LANGUAGE] === LANGUAGE) {
-        dst[LANGUAGE] = match[LANGUAGE];
+      if (dst[Tag.LANGUAGE] === Tag.LANGUAGE) {
+        dst[Tag.LANGUAGE] = match[Tag.LANGUAGE];
       }
-      if (dst[SCRIPT] === SCRIPT) {
-        dst[SCRIPT] = match[SCRIPT];
+      if (dst[Tag.SCRIPT] === Tag.SCRIPT) {
+        dst[Tag.SCRIPT] = match[Tag.SCRIPT];
       }
-      if (dst[REGION] === REGION) {
-        dst[REGION] = match[REGION];
+      if (dst[Tag.REGION] === Tag.REGION) {
+        dst[Tag.REGION] = match[Tag.REGION];
       }
       break;
     }
@@ -166,9 +166,9 @@ const addLikelySubtags = (dst: FastTag): void => {
  * original's additional subtags.
  */
 const returnTag = (real: LanguageTag, fast: FastTag): LanguageTag => {
-  const language = fast[LANGUAGE];
-  const script = fast[SCRIPT];
-  const region = fast[REGION];
+  const language = fast[Tag.LANGUAGE];
+  const script = fast[Tag.SCRIPT];
+  const region = fast[Tag.REGION];
 
   return new LanguageTag(
     typeof language === 'number' ? undefined : language,
@@ -181,7 +181,7 @@ const returnTag = (real: LanguageTag, fast: FastTag): LanguageTag => {
 };
 
 // Undefined tag to be copied for use in resolution below.
-const UNDEFINED: FastTag = [LANGUAGE, SCRIPT, REGION];
+const UNDEFINED: FastTag = [Tag.LANGUAGE, Tag.SCRIPT, Tag.REGION];
 
 /**
  * Compare two fast tags for equality. These always have identical length.
@@ -202,7 +202,7 @@ const buildLanguageAliasMap = (): LanguageAliasMap => {
   return Object.keys(languageAlias).reduce((o: LanguageAliasMap, k) => {
     const type = parseFastTag(k);
     const repl = parseFastTag(languageAlias[k]);
-    const language = type[LANGUAGE];
+    const language = type[Tag.LANGUAGE];
     let aliases = o[language];
     if (aliases === undefined) {
       aliases = [];
@@ -256,14 +256,14 @@ export class LanguageResolver {
   static removeLikelySubtags(real: string | LanguageTag): LanguageTag {
     const tag = typeof real === 'string' ? parseLanguageTag(real) : real;
     const max = fastTag(tag);
-    if (max[LANGUAGE] === LANGUAGE || max[SCRIPT] === SCRIPT || max[REGION] === REGION) {
+    if (max[Tag.LANGUAGE] === Tag.LANGUAGE || max[Tag.SCRIPT] === Tag.SCRIPT || max[Tag.REGION] === Tag.REGION) {
       addLikelySubtags(max);
     }
     const tmp = UNDEFINED.slice(0);
 
     // Using "en-Latn-US" as an example...
     // 1. Match "en-Zzzz-ZZ"
-    tmp[LANGUAGE] = max[LANGUAGE];
+    tmp[Tag.LANGUAGE] = max[Tag.LANGUAGE];
     let match = tmp.slice(0);
     addLikelySubtags(match);
     if (fastTagEquals(match, max)) {
@@ -271,17 +271,17 @@ export class LanguageResolver {
     }
 
     // 2. Match "en-Zzzz-US"
-    tmp[REGION] = max[REGION];
+    tmp[Tag.REGION] = max[Tag.REGION];
     match = tmp.slice(0);
     addLikelySubtags(match);
     if (fastTagEquals(match, max)) {
-      tmp[LANGUAGE] = max[LANGUAGE];
+      tmp[Tag.LANGUAGE] = max[Tag.LANGUAGE];
       return returnTag(tag, tmp);
     }
 
     // 3. Match "en-Latn-ZZ"
-    tmp[REGION] = REGION;
-    tmp[SCRIPT] = max[SCRIPT];
+    tmp[Tag.REGION] = Tag.REGION;
+    tmp[Tag.SCRIPT] = max[Tag.SCRIPT];
     match = tmp.slice(0);
     addLikelySubtags(match);
     if (fastTagEquals(match, max)) {

@@ -1,4 +1,4 @@
-import { REGION } from './languagetag';
+import { Tag } from './languagetag';
 import { territoryAliasRaw } from './autogen.aliases';
 
 export type FastTag = (string | number)[];
@@ -30,14 +30,14 @@ export const replaceRegion = (region: string): string | undefined => {
  * Substitute territory subtag aliases, if any.
  */
 export const substituteRegionAliases = (dst: FastTag): void => {
-  const region = dst[REGION];
-  const replacement = region === REGION ? undefined : TERRITORY_ALIAS_MAP[region];
+  const region = dst[Tag.REGION];
+  const replacement = region === Tag.REGION ? undefined : TERRITORY_ALIAS_MAP[region];
   if (replacement === undefined) {
     return;
   }
 
   // Hack: for now we just use the first region in the list.
-  dst[REGION] = replacement[0];
+  dst[Tag.REGION] = replacement[0];
 
   // TODO: get the best regions for this language / script combiantion, and if
   // one is found in the replacement set, use it. Otherwise use the first in the list.
