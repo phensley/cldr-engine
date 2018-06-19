@@ -25,6 +25,14 @@ const getIanaSubtags = () => {
   return data.split('%%').map(parseSubtagBlock).filter(r => r.Type);
 };
 
+const pruneRegion = (m: { [x: string]: string }): void =>
+  Object.keys(m).forEach(k => {
+    const v = m[k];
+    if (v.endsWith('-ZZ')) {
+      m[k] = v.substring(0, -3);
+    }
+  });
+
 export const getSubtags = (data: any): Code[] => {
   const supplemental = getSupplemental();
   const ianaSubtags = getIanaSubtags();
@@ -35,6 +43,7 @@ export const getSubtags = (data: any): Code[] => {
     return o;
   }, {}));
 
+  pruneRegion(supplemental.LikelySubtags);
   const likely = objectToString(supplemental.LikelySubtags);
 
   let code = HEADER + NOLINT_MAXLINE;

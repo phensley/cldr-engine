@@ -46,9 +46,7 @@ const fastTag = (real: LanguageTag): FastTag => {
   ];
 };
 
-const parseFastTag = (raw: string): FastTag => {
-  return fastTag(parseLanguageTag(raw));
-};
+const parseFastTag = (raw: string): FastTag => fastTag(parseLanguageTag(raw));
 
 /**
  * Index holding likely subtags matches.
