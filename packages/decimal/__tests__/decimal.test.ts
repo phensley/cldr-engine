@@ -1,5 +1,5 @@
-import { Decimal, RoundingModeType } from '../../../src/types/numbers';
-import { DivMod } from '../../../src/types/numbers/math';
+import { Decimal, RoundingModeType } from '../src';
+import { DivMod } from '../src/math';
 
 const parse = (s: string) => new Decimal(s);
 const cmp = (u: string, v: string, abs: boolean = false) => parse(u).compare(parse(v), abs);

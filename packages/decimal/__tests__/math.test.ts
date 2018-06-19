@@ -1,4 +1,4 @@
-import { divide } from '../../../src/types/numbers/math';
+import { divide } from '../src/math';
 
 test('divide internal error', () => {
   // Ensure we cover the case where a length mismatch throws.

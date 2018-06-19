@@ -1,4 +1,4 @@
-import { Decimal, MathContext } from '../../../src/types/numbers';
+import { Decimal, MathContext } from '../src';
 
 const parse = (s: string) => new Decimal(s);
 const div = (u: string, v: string, c?: MathContext) => parse(u).divide(parse(v), c);

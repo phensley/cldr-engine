@@ -1,7 +1,7 @@
 import { CurrencySpacingPatterns, NumberParams } from '../../common/private';
 import { NumberField, NumberPattern } from '../../parsing/patterns/number';
 import { Decimal, DecimalFormatter, PartsDecimalFormatter, StringDecimalFormatter } from '../../types/numbers';
-import { Part } from '../../types/parts';
+import { Part } from '../../types';
 import { NumberRenderer, WrapperInternals } from '../internals';
 
 export interface AbstractValue<R> {

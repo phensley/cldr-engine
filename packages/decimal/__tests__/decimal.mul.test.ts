@@ -1,4 +1,4 @@
-import { Decimal, DecimalConstants, MathContext } from '../../../src';
+import { Decimal, DecimalConstants, MathContext } from '../src';
 
 const parse = (s: string) => new Decimal(s);
 const mul = (u: string, v: string, c?: MathContext) =>

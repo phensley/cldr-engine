@@ -1,4 +1,7 @@
-import { Part } from '../../types';
+export interface Part {
+  type: string;
+  value: string;
+}
 
 export interface DecimalFormatter<T> {
   add(c: string): void;

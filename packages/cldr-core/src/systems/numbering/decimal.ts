@@ -1,9 +1,6 @@
 import { coerceDecimal, Decimal, DecimalArg, DecimalFormatter, StringDecimalFormatter } from '../../types/numbers';
-import { decimalNumberingDigits } from './autogen.decimal';
-import { NumberPattern } from '../../parsing/patterns/number';
-import { NumberFormatter } from '../../internals/numbers';
-import { NumberParams, NumberSymbols } from '../../common/private';
-import { Chars } from '../../types/numbers/types';
+import { NumberSymbols } from '../../common/private';
+import { Chars } from '../../types';
 
 const isInteger = ((n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n);
 

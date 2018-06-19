@@ -1,4 +1,4 @@
-import { Decimal } from '../../../src';
+import { Decimal } from '../src';
 
 const parse = (n: string) => new Decimal(n);
 const sub = (u: string, v: string) => new Decimal(u).subtract(new Decimal(v));

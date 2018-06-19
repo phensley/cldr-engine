@@ -1,4 +1,4 @@
-import { Part } from '../types/parts';
+import { Part } from '../types';
 import { WrapperNode } from '../parsing/patterns/wrapper';
 
 export interface Renderer<R> {

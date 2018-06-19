@@ -1,4 +1,4 @@
-import { Decimal, DecimalArg, DecimalConstants, Rational } from '../../../src/types/numbers';
+import { Decimal, DecimalArg, DecimalConstants, Rational } from '../src';
 
 const rat = (a: DecimalArg, b: DecimalArg): Rational => new Rational(a, b);
 const parse = (s: string) => new Rational(s);
