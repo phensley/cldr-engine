@@ -32,22 +32,22 @@
   "dependencies": {
     "@phensley/cldr-core": "^0.5.7",
     "@phensley/cldr-schema": "^0.5.7",
-    "@types/node": "8.10.10",
+    "@types/node": "10.3.4",
     "@types/prettier": "^1.10.0",
-    "@types/yargs": "^10.0.1",
+    "@types/yargs": "^11.0.0",
     "cldr-data": "32.0.1",
     "partial.lenses": "^13.7.4",
     "prettier": "^1.11.1",
-    "yargs": "^10.0.1"
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^22.1.3",
+    "@types/jest": "^23.1.1",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
     "chalk": "^2.3.1",
-    "jest": "^22.4.2",
+    "jest": "^23.1.0",
     "rimraf": "^2.6.2",
-    "tslint": "5.9.1",
+    "tslint": "5.10.0",
     "tslint-no-circular-imports": "^0.2.1",
     "typescript": "~2.8.3"
   },

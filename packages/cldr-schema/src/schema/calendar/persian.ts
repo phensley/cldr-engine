@@ -1,7 +1,7 @@
 import {
   CalendarInfo,
   CalendarSchema,
-} from '.';
+} from './types';
 
 export const PersianInfo: CalendarInfo = {
   eras: ['0'],

@@ -1,7 +1,7 @@
 import {
   CalendarInfo,
   CalendarSchema,
-} from '.';
+} from './types';
 
 export const GregorianInfo: CalendarInfo = {
   eras: ['0', '1'],

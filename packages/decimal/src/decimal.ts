@@ -342,8 +342,7 @@ export class Decimal {
    * Divide by v and return the remainder.
    */
   mod(v: DecimalArg): Decimal {
-    const [q, r] = this.divmod(v);
-    return r;
+    return this.divmod(v)[1];
   }
 
   /**

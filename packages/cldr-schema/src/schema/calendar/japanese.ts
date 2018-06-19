@@ -1,7 +1,7 @@
 import {
   CalendarInfo,
   CalendarSchema,
-} from '.';
+} from './types';
 
 export const JapaneseInfo: CalendarInfo = {
   // TODO: rework KeyIndex to support integer ranges
