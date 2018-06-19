@@ -1,0 +1,10 @@
+#!/bin/bash
+
+REG=$(npm config get registry)
+if [[ $REG != *"registry.npmjs.org"* ]] ; then
+    echo "Please configure the official NPM registry. Found $REG"
+    exit 1
+fi
+
+yarn release
+
