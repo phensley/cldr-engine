@@ -44,9 +44,10 @@ import { DecimalArg, Part } from '../types';
  */
 export interface Calendars {
 
-  dayPeriods(type: CalendarType): { [x: string]: string };
-  months(type: CalendarType): { [x: string]: string };
-  weekdays(type: CalendarType): { [x: string]: string };
+  dayPeriods(type?: CalendarType): { [x: string]: string };
+  months(type?: CalendarType): { [x: string]: string };
+  quarters(type?: CalendarType): { [x: string]: string };
+  weekdays(type?: CalendarType): { [x: string]: string };
 
   newBuddhistDate(epoch: number, zoneId: string): BuddhistDate;
   newGregorianDate(epoch: number, zoneId: string): GregorianDate;
