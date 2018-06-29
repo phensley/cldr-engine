@@ -18,7 +18,6 @@ import {
   Units,
   UnitsImpl
 } from '@phensley/cldr-core';
-import { deflateRawSync } from 'zlib';
 
 /**
  * Parse a locale identifier into a locale object that includes the original

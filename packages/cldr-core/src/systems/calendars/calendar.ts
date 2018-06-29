@@ -153,6 +153,23 @@ export abstract class CalendarDate {
     return this._fields[DateField.MONTH];
   }
 
+  /**
+   * Returns the week of the month computed using the locale's 'first day
+   * of week' and 'minimal days in first week' where applicable.
+   *
+   * For example, for the United States, weeks start on Sunday.
+   * Saturday 9/1/2018 would be in week 1, and Sunday 9/2/2018 would
+   * begin week 2.
+   *
+   *         September
+   *   Su Mo Tu We Th Fr Sa
+   *                      1
+   *    2  3  4  5  6  7  8
+   *    9 10 11 12 13 14 15
+   *   16 17 18 19 20 21 22
+   *   23 24 25 26 27 28 29
+   *   30
+   */
   weekOfMonth(): number {
     this.computeWeekFields();
     return this._fields[DateField.WEEK_OF_MONTH];
@@ -179,6 +196,11 @@ export abstract class CalendarDate {
     return (7 - firstDay + weekday) % 7 + 1;
   }
 
+  /**
+   * Ordinal number indicating the day of the week in the current month.
+   * The result of this method can be used to format messages like
+   * "2nd Sunday in August".
+   */
   dayOfWeekInMonth(): number {
     this.computeWeekFields();
     return this._fields[DateField.DAY_OF_WEEK_IN_MONTH];

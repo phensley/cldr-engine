@@ -9,7 +9,7 @@ import { CalendarPatterns, GregorianPatterns } from './patterns';
 import { DateSkeleton } from './skeleton';
 import { DateFormatRequest, DateIntervalFormatRequest } from './types';
 import { Field } from './fields';
-import { DateTimePatternFieldType } from '../../../../cldr-schema/lib';
+import { DateTimePatternFieldType } from '@phensley/cldr-schema';
 
 export class CalendarManager {
 
