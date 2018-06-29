@@ -1,6 +1,6 @@
 {
   "name": "@phensley/decimal",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Arbitrary precision decimal math",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
