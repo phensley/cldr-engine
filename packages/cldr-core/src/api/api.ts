@@ -49,12 +49,6 @@ export interface Calendars {
   quarters(type?: CalendarType): { [x: string]: string };
   weekdays(type?: CalendarType): { [x: string]: string };
 
-  newBuddhistDate(epoch: number, zoneId: string): BuddhistDate;
-  newGregorianDate(epoch: number, zoneId: string): GregorianDate;
-  newISO8601Date(epoch: number, zoneId: string): ISO8601Date;
-  newJapaneseDate(epoch: number, zoneId: string): JapaneseDate;
-  newPersianDate(epoch: number, zoneId: string): PersianDate;
-
   toBuddhistDate(date: BuddhistDate | UnixEpochTime): BuddhistDate;
   toGregorianDate(date: CalendarDate | UnixEpochTime): GregorianDate;
   toISO8601Date(date: CalendarDate | UnixEpochTime): ISO8601Date;

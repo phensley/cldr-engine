@@ -75,7 +75,8 @@ test('matching skeletons', () => {
   const params = privateApi(en).getNumberParams('latn');
 
   const m = new CalendarManager(en, INTERNALS);
-  const d = calendarsApi('en').newGregorianDate(MARCH_11_2018_070025_UTC, 'America/New_York');
+  const d = calendarsApi('en').toGregorianDate({
+    epoch: MARCH_11_2018_070025_UTC, zoneId: 'America/New_York' });
 
   let r = m.getDateFormatRequest(d, { skeleton: 'Yw' }, params);
   expect(r.date).toEqual(['week ', ['w', 1], ' of ', ['Y', 1]]);

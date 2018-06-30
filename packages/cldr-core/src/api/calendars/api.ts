@@ -89,44 +89,6 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
-   * Construct a Buddhist date for this locale.
-   */
-  newBuddhistDate(epoch: number, zoneId: string = 'UTC'): BuddhistDate {
-    return this.convertEpoch(BuddhistDate.fromUnixEpoch, epoch, zoneId);
-  }
-
-  /**
-   * Construct a Gregorian date for this locale.
-   */
-  newGregorianDate(epoch: number, zoneId: string = 'UTC'): GregorianDate {
-    return this.convertEpoch(GregorianDate.fromUnixEpoch, epoch, zoneId);
-  }
-
-  /**
-   * Construct an ISO-8601 date for this locale. This is a Gregorian date,
-   * but with the first day of the week set to MONDAY and the minimum days
-   * in the first week set to 4.
-   */
-  newISO8601Date(epoch: number, zoneId: string = 'UTC'): ISO8601Date {
-    return this.convertEpoch(ISO8601Date.fromUnixEpoch, epoch, zoneId);
-  }
-
-  /**
-   * Construct date in the Japanese calendar for this locale. This is a Gregorian
-   * date but with different calculations for the YEAR and ERA fields.
-   */
-  newJapaneseDate(epoch: number, zoneId: string = 'UTC'): JapaneseDate {
-    return this.convertEpoch(JapaneseDate.fromUnixEpoch, epoch, zoneId);
-  }
-
-  /**
-   * Construct a date in the Persian calendar for this locale.
-   */
-  newPersianDate(epoch: number, zoneId: string = 'UTC'): PersianDate {
-    return this.convertEpoch(PersianDate.fromUnixEpoch, epoch, zoneId);
-  }
-
-  /**
    * Convert the given date to the Buddhist calendar.
    */
   toBuddhistDate(date: CalendarDate | UnixEpochTime): BuddhistDate {
