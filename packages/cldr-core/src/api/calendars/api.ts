@@ -309,7 +309,7 @@ export class CalendarsImpl implements Calendars {
   private convertDate<T>(cons: CalendarFromUnixEpoch<T>, date: CalendarDate | UnixEpochTime, zoneId?: string): T {
     return date instanceof CalendarDate ?
       this.convertEpoch(cons, date.unixEpoch(), zoneId ? zoneId : date.timeZoneId()) :
-      this.convertEpoch(cons, +date.epoch, date.zoneId || 'UTC');
+      this.convertEpoch(cons, getEpochUTC(date.epoch), date.zoneId || 'UTC');
   }
 
   private convertEpoch<T>(cons: CalendarFromUnixEpoch<T>, epoch: number, zoneId: string): T {
@@ -334,3 +334,6 @@ export class CalendarsImpl implements Calendars {
     }
   }
 }
+
+const getEpochUTC = (date: Date | number): number =>
+  typeof date === 'number' ? date : (+date) - date.getTimezoneOffset() * 60000;
