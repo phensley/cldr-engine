@@ -49,7 +49,7 @@ test('best-fit skeleton matching', () => {
   api = calendarsApi('de');
 
   s = api.formatDate(mar11, { skeleton: 'hmmssv' });
-  expect(s).toEqual('11:00:25 PM GMT+8');
+  expect(s).toEqual('11:00:25 PM GMT-8');
 
   s = api.formatDate(mar11, { skeleton: 'yMMdhmms' });
   expect(s).toEqual('10.03.2018, 11:00:25 PM');
@@ -58,7 +58,7 @@ test('best-fit skeleton matching', () => {
   expect(s).toEqual('10.03.2018, 11:00 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMdhmmsv' });
-  expect(s).toEqual('10.03.2018, 11:00:25 PM GMT+8');
+  expect(s).toEqual('10.03.2018, 11:00:25 PM GMT-8');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMM' });
   expect(s).toEqual('März 2018');

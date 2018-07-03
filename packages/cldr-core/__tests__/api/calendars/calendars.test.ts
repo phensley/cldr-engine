@@ -872,13 +872,13 @@ test('timezone iso8601 basic/extended', () => {
   d = unix(base, NEW_YORK);
 
   s = en.formatDateRaw(d, { pattern: 'Z' });
-  expect(s).toEqual('+0400');
+  expect(s).toEqual('-0400');
 
   s = en.formatDateRaw(d, { pattern: 'ZZZZ' }); // Same as 'OOOO'
-  expect(s).toEqual('GMT+04:00');
+  expect(s).toEqual('GMT-04:00');
 
   s = en.formatDateRaw(d, { pattern: 'ZZZZZ' });
-  expect(s).toEqual('+04:00');
+  expect(s).toEqual('-04:00');
 });
 
 test('timezone short/long localized gmt', () => {
@@ -890,10 +890,10 @@ test('timezone short/long localized gmt', () => {
   d = unix(base, NEW_YORK);
 
   s = en.formatDateRaw(d, { pattern: 'O' });
-  expect(s).toEqual('GMT+4');
+  expect(s).toEqual('GMT-4');
 
   s = en.formatDateRaw(d, { pattern: 'OOOO' });
-  expect(s).toEqual('GMT+04:00');
+  expect(s).toEqual('GMT-04:00');
 });
 
 test('timezone short/long generic non-location format', () => {
@@ -916,13 +916,13 @@ test('timezone short/long generic non-location format', () => {
   expect(s).toEqual('Eastern Time');
 
   s = es419.formatDateRaw(d, short);
-  expect(s).toEqual('GMT+4');
+  expect(s).toEqual('GMT-4');
 
   s = es419.formatDateRaw(d, long);
   expect(s).toEqual('hora oriental');
 
   s = de.formatDateRaw(d, short);
-  expect(s).toEqual('GMT+4');
+  expect(s).toEqual('GMT-4');
 
   s = de.formatDateRaw(d, long);
   expect(s).toEqual('Nordamerikanische Ostküstenzeit');

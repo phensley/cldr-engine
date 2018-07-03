@@ -356,7 +356,7 @@ export class CalendarFormatter<T extends CalendarDate> {
     let fmt = '';
     if (width <= 5) {
       // TODO: use number params
-      fmt += negative ? '-' : '+';
+      fmt += negative ? '+' : '-' ;
       fmt += this._num(ctx, hours, 2);
       if (width === 5) {
         fmt += ':';
@@ -454,6 +454,7 @@ export class CalendarFormatter<T extends CalendarDate> {
       return this.tz.gmtZeroFormat.get(bundle);
     }
     const [offset, negative, hours, minutes] = getTZC(_offset);
+
     const emitMins = !short || minutes > 0;
     const hourPattern =  this._hourPattern(bundle, negative);
     let fmt = '';
