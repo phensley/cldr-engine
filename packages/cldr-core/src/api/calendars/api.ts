@@ -159,16 +159,17 @@ export class CalendarsImpl implements Calendars {
     return this._formatInterval(new PartsRenderer(), start, end, options);
   }
 
-  formatRelativeTime(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
-      options?: RelativeTimeFormatOptions): string {
-    options = options || DEFAULT_RELTIME_OPTIONS;
-    const params = this.privateApi.getNumberParams(options.nu);
-    const calendar = this.internals.calendars.selectCalendar(this.bundle);
-    start = this.convertDateTo(calendar, start);
-    end = this.convertDateTo(calendar, end, start.timeZoneId());
-    return this.internals.dateFields.formatRelativeTime(
-      this.bundle, start, end, options, params);
-  }
+  // TODO: need to sort out the options
+  // formatRelativeTime(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
+  //     options?: RelativeTimeFormatOptions): string {
+  //   options = options || DEFAULT_RELTIME_OPTIONS;
+  //   const params = this.privateApi.getNumberParams(options.nu);
+  //   const calendar = this.internals.calendars.selectCalendar(this.bundle);
+  //   start = this.convertDateTo(calendar, start);
+  //   end = this.convertDateTo(calendar, end, start.timeZoneId());
+  //   return this.internals.dateFields.formatRelativeTime(
+  //     this.bundle, start, end, options, params);
+  // }
 
   formatRelativeTimeField(value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string {
     options = options || DEFAULT_RELTIME_OPTIONS;

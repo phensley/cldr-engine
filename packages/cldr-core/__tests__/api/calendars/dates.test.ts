@@ -167,4 +167,11 @@ test('conversions', () => {
 
   expect(d.year()).toEqual(2018);
   expect(d.extendedYear()).toEqual(2018);
+
+  expect(d).toEqual(orig);
+
+  d = EN.toGregorianDate({ epoch: d.unixEpoch() });
+  expect(d.hour()).toEqual(7);
+  expect(d.year()).toEqual(2018);
+  expect(d.extendedYear()).toEqual(2018);
 });

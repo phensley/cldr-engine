@@ -291,6 +291,9 @@ test('day of week in month', () => {
   let s: string;
   const opts = { pattern: 'F' };
 
+  s = api.formatDateRaw(mk(0));
+  expect(s).toEqual('');
+
   s = api.formatDateRaw(mk(0), opts);
   expect(s).toEqual('1');
 
