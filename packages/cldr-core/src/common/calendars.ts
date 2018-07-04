@@ -5,8 +5,16 @@ import { CalendarType } from '../systems/calendars/calendar';
 /**
  * @alpha
  */
-export interface UnixEpochTime {
-  epoch: number | Date;
+export interface ZonedDateTime {
+  /**
+   * Can be either a Date object or Unix epoch time in milliseconds.
+   * Both are interpreted as being relative to UTC.
+   */
+  date: number | Date;
+
+  /**
+   * Optional timezone identifier, defaulting to UTC.
+   */
   zoneId?: string;
 }
 

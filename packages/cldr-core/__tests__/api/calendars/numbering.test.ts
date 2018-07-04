@@ -9,13 +9,13 @@ import {
   InternalsImpl,
   NumberSystemType,
   PrivateApiImpl,
-  UnixEpochTime
+  ZonedDateTime
 } from '../../../src';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
 const INTERNALS = new InternalsImpl();
 
-const unix = (epoch: number, zoneId: string): UnixEpochTime => ({ epoch, zoneId });
+const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 // Jan 01, 2018 19:00:25 PM UTC
 const JAN_01_2018_070025_UTC = 1514833225000;

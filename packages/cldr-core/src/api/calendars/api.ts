@@ -7,7 +7,7 @@ import {
   DateIntervalFormatOptions,
   DateRawFormatOptions,
   RelativeTimeFormatOptions,
-  UnixEpochTime
+  ZonedDateTime
 } from '../../common';
 
 import { Internals } from '../../internals';
@@ -91,35 +91,35 @@ export class CalendarsImpl implements Calendars {
   /**
    * Convert the given date to the Buddhist calendar.
    */
-  toBuddhistDate(date: CalendarDate | UnixEpochTime): BuddhistDate {
+  toBuddhistDate(date: CalendarDate | ZonedDateTime): BuddhistDate {
     return this.convertDate(BuddhistDate.fromUnixEpoch, date);
   }
 
   /**
    * Convert the given date to the Gregorian calendar.
    */
-  toGregorianDate(date: CalendarDate | UnixEpochTime): GregorianDate {
+  toGregorianDate(date: CalendarDate | ZonedDateTime): GregorianDate {
     return this.convertDate(GregorianDate.fromUnixEpoch, date);
   }
 
   /**
    * Convert the given date to the ISO-8601 calendar.
    */
-  toISO8601Date(date: CalendarDate | UnixEpochTime): ISO8601Date {
+  toISO8601Date(date: CalendarDate | ZonedDateTime): ISO8601Date {
     return this.convertDate(ISO8601Date.fromUnixEpoch, date);
   }
 
   /**
    * Convert the given date to the Japanese calendar.
    */
-  toJapaneseDate(date: CalendarDate | UnixEpochTime): JapaneseDate {
+  toJapaneseDate(date: CalendarDate | ZonedDateTime): JapaneseDate {
     return this.convertDate(JapaneseDate.fromUnixEpoch, date);
   }
 
   /**
    * Convert the given date to the Persian calendar.
    */
-  toPersianDate(date: CalendarDate | UnixEpochTime): PersianDate {
+  toPersianDate(date: CalendarDate | ZonedDateTime): PersianDate {
     return this.convertDate(PersianDate.fromUnixEpoch, date);
   }
 
@@ -138,29 +138,29 @@ export class CalendarsImpl implements Calendars {
   /**
    * Format a calendar date to string using the given options.
    */
-  formatDate(date: CalendarDate | UnixEpochTime, options?: DateFormatOptions): string {
+  formatDate(date: CalendarDate | ZonedDateTime, options?: DateFormatOptions): string {
     return this._formatDate(new StringRenderer(), date, options);
   }
 
   /**
    * Format a calendar date to a parts array using the given options.
    */
-  formatDateToParts(date: CalendarDate | UnixEpochTime, options?: DateFormatOptions): Part[] {
+  formatDateToParts(date: CalendarDate | ZonedDateTime, options?: DateFormatOptions): Part[] {
     return this._formatDate(new PartsRenderer(), date, options);
   }
 
-  formatDateInterval(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
+  formatDateInterval(start: CalendarDate | ZonedDateTime, end: CalendarDate | ZonedDateTime,
       options?: DateIntervalFormatOptions): string {
     return this._formatInterval(new StringRenderer(), start, end, options);
   }
 
-  formatDateIntervalToParts(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
+  formatDateIntervalToParts(start: CalendarDate | ZonedDateTime, end: CalendarDate | ZonedDateTime,
       options?: DateIntervalFormatOptions): Part[] {
     return this._formatInterval(new PartsRenderer(), start, end, options);
   }
 
   // TODO: need to sort out the options
-  // formatRelativeTime(start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
+  // formatRelativeTime(start: CalendarDate | ZonedDateTime, end: CalendarDate | ZonedDateTime,
   //     options?: RelativeTimeFormatOptions): string {
   //   options = options || DEFAULT_RELTIME_OPTIONS;
   //   const params = this.privateApi.getNumberParams(options.nu);
@@ -182,15 +182,15 @@ export class CalendarsImpl implements Calendars {
    * Format a raw date pattern. Note: This should not be used, but is available for debugging or
    * extreme cases where an application must implement a custom format.
    */
-  formatDateRaw(date: CalendarDate | UnixEpochTime, options?: DateRawFormatOptions): string {
+  formatDateRaw(date: CalendarDate | ZonedDateTime, options?: DateRawFormatOptions): string {
     return this._formatDateRaw(new StringRenderer(), date, options || DEFAULT_RAW_OPTIONS);
   }
 
-  formatDateRawToParts(date: CalendarDate | UnixEpochTime, options?: DateRawFormatOptions): Part[] {
+  formatDateRawToParts(date: CalendarDate | ZonedDateTime, options?: DateRawFormatOptions): Part[] {
     return this._formatDateRaw(new PartsRenderer(), date, options || DEFAULT_RAW_OPTIONS);
   }
 
-  private _formatDate<R>(renderer: Renderer<R>, date: CalendarDate | UnixEpochTime, options?: DateFormatOptions): R {
+  private _formatDate<R>(renderer: Renderer<R>, date: CalendarDate | ZonedDateTime, options?: DateFormatOptions): R {
     const calendars = this.internals.calendars;
     options = options || DEFAULT_OPTIONS;
     const calendar = calendars.selectCalendar(this.bundle, options.ca);
@@ -203,7 +203,7 @@ export class CalendarsImpl implements Calendars {
   }
 
   private _formatInterval<R>(renderer: Renderer<R>,
-      start: CalendarDate | UnixEpochTime, end: CalendarDate | UnixEpochTime,
+      start: CalendarDate | ZonedDateTime, end: CalendarDate | ZonedDateTime,
       options?: DateIntervalFormatOptions): R {
 
     options = options || DEFAULT_INTERVAL_OPTIONS;
@@ -256,7 +256,7 @@ export class CalendarsImpl implements Calendars {
   }
 
   private _formatDateRaw<R>(renderer: Renderer<R>,
-      date: CalendarDate | UnixEpochTime, options: DateRawFormatOptions): R {
+      date: CalendarDate | ZonedDateTime, options: DateRawFormatOptions): R {
 
     if (!options.pattern) {
       return renderer.empty();
@@ -269,17 +269,17 @@ export class CalendarsImpl implements Calendars {
     return this.internals.calendars.formatDateTime(calendar, ctx, renderer, pattern);
   }
 
-  private convertDate<T>(cons: CalendarFromUnixEpoch<T>, date: CalendarDate | UnixEpochTime, zoneId?: string): T {
+  private convertDate<T>(cons: CalendarFromUnixEpoch<T>, date: CalendarDate | ZonedDateTime, zoneId?: string): T {
     return date instanceof CalendarDate ?
       this.convertEpoch(cons, date.unixEpoch(), zoneId ? zoneId : date.timeZoneId()) :
-      this.convertEpoch(cons, getEpochUTC(date.epoch), date.zoneId || 'UTC');
+      this.convertEpoch(cons, getEpochUTC(date.date), date.zoneId || 'UTC');
   }
 
   private convertEpoch<T>(cons: CalendarFromUnixEpoch<T>, epoch: number, zoneId: string): T {
     return cons(epoch, zoneId, this.firstDay, this.minDays);
   }
 
-  private convertDateTo(target: CalendarType, date: CalendarDate | UnixEpochTime, zoneId?: string): CalendarDate {
+  private convertDateTo(target: CalendarType, date: CalendarDate | ZonedDateTime, zoneId?: string): CalendarDate {
     if (date instanceof CalendarDate && target === date.type() && zoneId === date.timeZoneId()) {
       return date;
     }

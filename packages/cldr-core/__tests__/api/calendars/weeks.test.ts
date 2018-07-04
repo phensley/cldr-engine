@@ -1,9 +1,9 @@
 import { languageBundle } from '../../_helpers';
-import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl, UnixEpochTime } from '../../../src';
+import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl, ZonedDateTime } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
-const make = (epoch: number, zoneId: string): UnixEpochTime => ({ epoch, zoneId });
+const make = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 const DAY = 86400000;
 const NEW_YORK = 'America/New_York';
@@ -17,7 +17,7 @@ const calendarsApi = (tag: string) => {
 test('week of month', () => {
   const en = calendarsApi('en');
   const fr = calendarsApi('fr');
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
   let base: number;
 
   // Sunday, April 1, 2018 11:23:34 AM UTC
@@ -261,7 +261,7 @@ test('week of month', () => {
 test('week of year', () => {
   const en = calendarsApi('en');
   const fr = calendarsApi('fr');
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
 
   const opts = { pattern: 'Y w' };
   const iso = { pattern: 'Y w', ca: 'iso8601' };

@@ -34,5 +34,5 @@ export {
   UnitFormatOptions,
   UnitLength,
   UnitType,
-  UnixEpochTime
+  ZonedDateTime
 } from '@phensley/cldr-core';

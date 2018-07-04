@@ -1,9 +1,7 @@
 import { languageBundle } from '../../_helpers';
-import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
+import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl, ZonedDateTime } from '../../../src';
 
 import { parseDatePattern } from '../../../src/parsing/patterns/date';
-import { DatePatternManager } from '../../../src/api/private/calendars/manager';
-import { ZonedDateTime } from '../../../src';
 import { DateSkeleton, DateSkeletonParser } from '../../../src/internals/calendars/skeleton';
 
 const INTERNALS = new InternalsImpl();
@@ -13,7 +11,7 @@ const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 const PARSER = new DateSkeletonParser([], []);
 const parse = (s: string, isPattern: boolean = false) => PARSER.parse(s, isPattern);
 
-const datetime = (e: number, z: string) => new ZonedDateTime(e, z);
+const datetime = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;

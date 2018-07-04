@@ -9,13 +9,13 @@ import {
   InternalsImpl,
   NumberSystemType,
   PrivateApiImpl,
-  UnixEpochTime
+  ZonedDateTime
 } from '../../../src';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
 const INTERNALS = new InternalsImpl();
 
-const unix = (epoch: number, zoneId: string): UnixEpochTime => ({ epoch, zoneId });
+const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 const NEW_YORK = 'America/New_York';
 

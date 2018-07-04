@@ -7,12 +7,12 @@ import {
   GregorianDate,
   InternalsImpl,
   PrivateApiImpl,
-  UnixEpochTime,
+  ZonedDateTime,
 } from '../../../src/';
 
 const INTERNALS = new InternalsImpl();
 
-const unix = (epoch: number, zoneId: string): UnixEpochTime => ({ epoch, zoneId });
+const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 const NEW_YORK = 'America/New_York';
 const ROME = 'Europe/Rome';
@@ -26,11 +26,11 @@ const calendarsApi = (tag: string) => {
 test('javascript date', () => {
   const api = calendarsApi('en');
   let d: GregorianDate;
-  let epoch: Date;
+  let date: Date;
 
   // 1514810096789 UTC
-  epoch = new Date(2018, 0, 1, 12, 34, 56, 789);
-  d = api.toGregorianDate({ epoch, zoneId: NEW_YORK});
+  date = new Date(2018, 0, 1, 12, 34, 56, 789);
+  d = api.toGregorianDate({ date, zoneId: NEW_YORK});
   expect(d.toString()).toEqual('Gregorian 2018-01-01 07:34:56.789 America/New_York');
   expect(d.unixEpoch()).toEqual(1514810096789);
   expect(d.year()).toEqual(2018);
@@ -44,8 +44,8 @@ test('javascript date', () => {
 
     // -12219333903211 UTC
   // Gregorian cutover Thurs Oct 4, 1582 - Fri Oct 15, 1582
-  epoch = new Date(1582, 9, 14, 12, 34, 56, 789);
-  d = api.toGregorianDate({ epoch, zoneId: ROME });
+  date = new Date(1582, 9, 14, 12, 34, 56, 789);
+  d = api.toGregorianDate({ date, zoneId: ROME });
   expect(d.toString()).toEqual('Gregorian 1582-10-04 13:34:56.789 Europe/Rome');
   expect(d.unixEpoch()).toEqual(-12219333903211);
   expect(d.year()).toEqual(1582);
@@ -57,8 +57,8 @@ test('javascript date', () => {
   expect(d.milliseconds()).toEqual(789);
 
   // -12219247503211 UTC
-  epoch = new Date(1582, 9, 15, 12, 34, 56, 789);
-  d = api.toGregorianDate({ epoch, zoneId: ROME });
+  date = new Date(1582, 9, 15, 12, 34, 56, 789);
+  d = api.toGregorianDate({ date, zoneId: ROME });
   expect(d.toString()).toEqual('Gregorian 1582-10-15 13:34:56.789 Europe/Rome');
   expect(d.unixEpoch()).toEqual(-12219247503211);
   expect(d.year()).toEqual(1582);

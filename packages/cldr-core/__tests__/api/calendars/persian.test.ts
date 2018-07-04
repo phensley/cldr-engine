@@ -8,12 +8,12 @@ import {
   GregorianDate,
   InternalsImpl,
   PrivateApiImpl,
-  UnixEpochTime
+  ZonedDateTime
 } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
-const unix = (epoch: number, zoneId: string): UnixEpochTime => ({ epoch, zoneId });
+const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;

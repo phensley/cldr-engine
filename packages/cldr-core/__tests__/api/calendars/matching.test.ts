@@ -1,10 +1,10 @@
 import { languageBundle } from '../../_helpers';
-import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl, UnixEpochTime } from '../../../src';
+import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl, ZonedDateTime } from '../../../src';
 import { CalendarManager } from '../../../src/internals/calendars/manager';
 
 const INTERNALS = new InternalsImpl();
 
-const unix = (epoch: number, zoneId: string): UnixEpochTime => ({ epoch, zoneId });
+const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
@@ -76,7 +76,7 @@ test('matching skeletons', () => {
 
   const m = new CalendarManager(en, INTERNALS);
   const d = calendarsApi('en').toGregorianDate({
-    epoch: MARCH_11_2018_070025_UTC, zoneId: 'America/New_York' });
+    date: MARCH_11_2018_070025_UTC, zoneId: 'America/New_York' });
 
   let r = m.getDateFormatRequest(d, { skeleton: 'Yw' }, params);
   expect(r.date).toEqual(['week ', ['w', 1], ' of ', ['Y', 1]]);

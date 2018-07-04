@@ -8,13 +8,13 @@ import {
   GregorianDate,
   InternalsImpl,
   PrivateApiImpl,
-  UnixEpochTime
+  ZonedDateTime
 } from '../../../src';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
 const INTERNALS = new InternalsImpl();
 
-const unix = (epoch: number, zoneId: string): UnixEpochTime => ({ epoch, zoneId });
+const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
@@ -172,7 +172,7 @@ test('fractional seconds', () => {
   const base = MARCH_11_2018_070025_UTC;
   let api = calendarsApi('en');
   let s: string;
-  let date: UnixEpochTime;
+  let date: ZonedDateTime;
 
   date = unix(base, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsS' });
@@ -408,8 +408,8 @@ test('intervals best-fit', () => {
   const api = calendarsApi('en');
   let s: string;
 
-  let start: UnixEpochTime;
-  let end: UnixEpochTime;
+  let start: ZonedDateTime;
+  let end: ZonedDateTime;
 
   start = unix(base - ((HOUR * 13) + 123456), LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
@@ -695,7 +695,7 @@ test('flexible day periods', () => {
   const hour = 3600 * 1000;
 
   let api = calendarsApi('en');
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
   const opts: DateRawFormatOptions = { pattern: 'B' };
 
   // 11 pm
@@ -795,7 +795,7 @@ test('weekday firstday raw', () => {
   const base = MARCH_11_2018_070025_UTC;
 
   const opts = { pattern: 'e' };
-  let ux: UnixEpochTime;
+  let ux: ZonedDateTime;
   let gr: GregorianDate;
   let s: string;
 
@@ -852,7 +852,7 @@ test('timezone short/long specific non-location format', () => {
   const en = calendarsApi('en');
   const base = MARCH_11_2018_070025_UTC;
   let s: string;
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
 
   d = unix(base, NEW_YORK);
 
@@ -867,7 +867,7 @@ test('timezone iso8601 basic/extended', () => {
   const en = calendarsApi('en');
   const base = MARCH_11_2018_070025_UTC;
   let s: string;
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
 
   d = unix(base, NEW_YORK);
 
@@ -885,7 +885,7 @@ test('timezone short/long localized gmt', () => {
   const en = calendarsApi('en');
   const base = MARCH_11_2018_070025_UTC;
   let s: string;
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
 
   d = unix(base, NEW_YORK);
 
@@ -902,7 +902,7 @@ test('timezone short/long generic non-location format', () => {
   const de = calendarsApi('de');
   const base = MARCH_11_2018_070025_UTC;
   let s: string;
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
 
   const short = { pattern: 'v' };
   const long = { pattern: 'vvvv' };
@@ -932,7 +932,7 @@ test('timezone short/long zone id, exemplar city, generic location format', () =
   const en = calendarsApi('en');
   const base = MARCH_11_2018_070025_UTC;
   let s: string;
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
 
   d = unix(base, NEW_YORK);
 
@@ -953,7 +953,7 @@ test('timezone iso8601 basic format', () => {
   const en = calendarsApi('en');
   const base = MARCH_11_2018_070025_UTC;
   let s: string;
-  let d: UnixEpochTime;
+  let d: ZonedDateTime;
 
   d = unix(base, NEW_YORK);
 
