@@ -1,5 +1,6 @@
 export {
   availableLocales,
+  parseLanguageTag,
   CalendarDate,
   CharacterOrderType,
   CurrencyType,

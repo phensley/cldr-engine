@@ -20,10 +20,10 @@ import {
 } from '@phensley/cldr-core';
 
 /**
- * Parse a locale identifier into a locale object that includes the original
- * id plus a resolved LanguageTag.
+ * Parse a locale identifier and resolve it. This returns a Locale object
+ * that includes the original id that was parsed, and a resolved LanguageTag.
  */
-export const parseLocale = (id: string): Locale => {
+export const resolveLocale = (id: string): Locale => {
   const tag = LanguageResolver.resolve(id);
   return { id, tag };
 };
@@ -58,7 +58,7 @@ export class Locales {
    * Resolve a language tag to a Locale.
    */
   resolve(tag: string): Locale {
-    return parseLocale(tag);
+    return resolveLocale(tag);
   }
 
 }
@@ -213,7 +213,7 @@ export class CLDRFramework {
     if (this.loader === undefined) {
       throw new Error('a synchronous resource loader is not defined');
     }
-    const resolved = typeof locale === 'string' ? parseLocale(locale) : locale;
+    const resolved = typeof locale === 'string' ? resolveLocale(locale) : locale;
     const language = resolved.tag.language();
 
     let pack = this.packCache.get(language);
@@ -234,7 +234,7 @@ export class CLDRFramework {
     if (asyncLoader === undefined) {
       throw new Error('a Promise-based resource loader is not defined');
     }
-    const resolved = typeof locale === 'string' ? parseLocale(locale) : locale;
+    const resolved = typeof locale === 'string' ? resolveLocale(locale) : locale;
     const language = resolved.tag.language();
 
     const promise = new Promise<CLDR>((resolve, reject) => {

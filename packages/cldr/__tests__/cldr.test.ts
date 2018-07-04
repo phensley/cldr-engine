@@ -1,4 +1,4 @@
-import { CLDRFramework } from '../src';
+import { parseLanguageTag, resolveLocale, CLDRFramework } from '../src';
 import { asyncLoader, getCLDR, loader } from './helpers';
 import { CurrencyFormatOptions, Quantity } from '@phensley/cldr-core';
 
@@ -52,6 +52,20 @@ test('init framework', () => {
   expect(api.Locales.bundle().language()).toEqual('ar');
   expect(api.Locales.bundle().languageRegion()).toEqual('ar-EG');
   expect(api.Locales.bundle().languageScript()).toEqual('ar-Arab');
+});
+
+test('parsing', () => {
+  let r = parseLanguageTag('und-Zzzz-BR');
+  expect(r.compact()).toEqual('und-BR');
+
+  r = parseLanguageTag('und');
+  expect(r.compact()).toEqual('und');
+
+  let l = resolveLocale('und-Zzzz-BR');
+  expect(l.tag.compact()).toEqual('pt-Latn-BR');
+
+  l = resolveLocale('und');
+  expect(l.tag.compact()).toEqual('en-Latn-US');
 });
 
 test('async loader', () => {
