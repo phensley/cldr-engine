@@ -21,11 +21,13 @@ import {
 
 /**
  * Parse a locale identifier and resolve it. This returns a Locale object
- * that includes the original id that was parsed, and a resolved LanguageTag.
+ * that includes the original id string or tag's compact form, and
+ * a resolved LanguageTag.
  */
-export const resolveLocale = (id: string): Locale => {
+export const resolveLocale = (id: string | LanguageTag): Locale => {
+  const _id = typeof id === 'string' ? id : id.compact();
   const tag = LanguageResolver.resolve(id);
-  return { id, tag };
+  return { id: _id, tag };
 };
 
 /**

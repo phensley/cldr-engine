@@ -54,7 +54,7 @@ test('init framework', () => {
   expect(api.Locales.bundle().languageScript()).toEqual('ar-Arab');
 });
 
-test('parsing', () => {
+test('parsing language tags', () => {
   let r = parseLanguageTag('und-Zzzz-BR');
   expect(r.compact()).toEqual('und-BR');
 
@@ -66,6 +66,18 @@ test('parsing', () => {
 
   l = resolveLocale('und');
   expect(l.tag.compact()).toEqual('en-Latn-US');
+});
+
+test('resolving locales', () => {
+  let r = parseLanguageTag('und-Zzzz-US');
+  let { id, tag } = resolveLocale(r);
+  expect(id).toEqual('und-US');
+  expect(tag.compact()).toEqual('en-Latn-US');
+
+  r = parseLanguageTag('es');
+  ({ id, tag } = resolveLocale(r));
+  expect(id).toEqual('es');
+  expect(tag.compact()).toEqual('es-Latn-ES');
 });
 
 test('async loader', () => {
