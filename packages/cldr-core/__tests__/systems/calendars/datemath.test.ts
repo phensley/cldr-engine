@@ -22,6 +22,10 @@ test('years', () => {
   q = date.add({ year: 1 });
   expect(q.toString()).toEqual('Gregorian 2001-03-11 03:00:25.000 America/New_York');
 
+  // TODO: check fractional years
+  q = date.add({ year: 1.5 });
+  expect(q.toString()).toEqual('Gregorian 2001-09-09 16:00:25.000 America/New_York');
+
   q = date.add({ year: -3 });
   expect(q.toString()).toEqual('Gregorian 1997-03-11 03:00:25.000 America/New_York');
 
@@ -94,6 +98,10 @@ test('months', () => {
   q = date.add({ month: 1 });
   expect(q.toString()).toEqual('Gregorian 2000-04-11 04:00:25.000 America/New_York');
 
+  // TODO: support fractional months
+  // q = date.add({ month: 1.5 });
+  // expect(q.toString()).toEqual('Gregorian 2000-04-11 04:00:25.000 America/New_York');
+
   q = date.add({ month: 7 });
   expect(q.toString()).toEqual('Gregorian 2000-10-11 04:00:25.000 America/New_York');
 
@@ -118,6 +126,9 @@ test('days', () => {
   q = date.add({ day: 1 });
   expect(q.toString()).toEqual('Gregorian 2000-03-12 03:00:25.000 America/New_York');
 
+  q = date.add({ day: 1.5 });
+  expect(q.toString()).toEqual('Gregorian 2000-03-12 15:00:25.000 America/New_York');
+
   q = date.add({ day: 15 });
   expect(q.toString()).toEqual('Gregorian 2000-03-26 03:00:25.000 America/New_York');
 
@@ -140,6 +151,10 @@ test('weeks', () => {
   q = date.add({ week: 1 });
   expect(q.toString()).toEqual('Gregorian 2000-03-18 03:00:25.000 America/New_York');
   expect(q.dayOfWeek()).toEqual(DayOfWeek.SATURDAY);
+
+  q = date.add({ week: 1.5 }); // 10 days 12 hours
+  expect(q.toString()).toEqual('Gregorian 2000-03-21 15:00:25.000 America/New_York');
+  expect(q.dayOfWeek()).toEqual(DayOfWeek.TUESDAY);
 
   q = date.add({ week: 10 });
   expect(q.toString()).toEqual('Gregorian 2000-05-20 04:00:25.000 America/New_York');
@@ -174,6 +189,9 @@ test('hours', () => {
   q = date.add({ hour: 5 });
   expect(q.toString()).toEqual('Gregorian 2000-03-11 08:00:25.000 America/New_York');
 
+  q = date.add({ hour: 10.5 });
+  expect(q.toString()).toEqual('Gregorian 2000-03-11 13:30:25.000 America/New_York');
+
   q = date.add({ hour: -24 });
   expect(q.toString()).toEqual('Gregorian 2000-03-10 03:00:25.000 America/New_York');
 
@@ -194,4 +212,7 @@ test('minute', () => {
 
   q = date.add({ minute: 60 });
   expect(q.toString()).toEqual('Gregorian 2000-03-11 04:00:25.000 America/New_York');
+
+  q = date.add({ minute: 5.505 });
+  expect(q.toString()).toEqual('Gregorian 2000-03-11 03:05:55.300 America/New_York');
 });

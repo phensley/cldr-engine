@@ -2,6 +2,7 @@ export {
   availableLocales,
   parseLanguageTag,
   CalendarDate,
+  CalendarDateFields,
   CharacterOrderType,
   CurrencyType,
   CurrencyFormatOptions,

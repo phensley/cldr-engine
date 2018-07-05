@@ -304,10 +304,10 @@ export abstract class CalendarDate {
   protected _addTime(fields: CalendarDateFields): [number, number] {
     // Calculate the time difference in days and milliseconds
     let msDay = this._fields[DateField.MILLIS_IN_DAY] + this.timeZoneOffset();
-    msDay += (floor(fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
-             (floor(fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
-             (floor(fields.second || 0) * CalendarConstants.ONE_SECOND_MS) +
-             (floor(fields.millis || 0));
+    msDay += ((fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
+             ((fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
+             ((fields.second || 0) * CalendarConstants.ONE_SECOND_MS) +
+             ((fields.millis || 0));
 
     const oneDay = CalendarConstants.ONE_DAY_MS;
     const days = floor(msDay / oneDay);
