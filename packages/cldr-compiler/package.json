@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-compiler",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "description": "Compiler for @phensley/cldr",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -31,8 +31,8 @@
     "lib/"
   ],
   "dependencies": {
-    "@phensley/cldr-core": "^0.6.8",
-    "@phensley/cldr-schema": "^0.6.8",
+    "@phensley/cldr-core": "^0.6.9",
+    "@phensley/cldr-schema": "^0.6.9",
     "@types/node": "10.3.4",
     "@types/prettier": "^1.10.0",
     "@types/yargs": "^11.0.0",
