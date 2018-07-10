@@ -281,8 +281,6 @@ export abstract class CalendarDate {
    * Compute a new Julian day and milliseconds UTC by updating one or more fields.
    */
   protected _add(fields: CalendarDateFields): [number, number] {
-    const [days, ms] = this._addTime(fields);
-
     // All day calculations will be relative to the current day of the month.
     const dom = this._fields[DateField.DAY_OF_MONTH] + (fields.day || 0) + ((fields.week || 0) * 7);
 
@@ -292,6 +290,9 @@ export abstract class CalendarDate {
     const yadd = floor(month / 12);
     const year = this._fields[DateField.EXTENDED_YEAR] + (fields.year || 0) + yadd;
     month -= yadd * 12;
+
+    // Calculate days and milliseconds from the time-oriented fields.
+    const [days, ms] = this._addTime(fields);
 
     // Calculate the Julian day for the adjusted year/month then add back the days.
     const jd = this.monthStart(year, month, false) + dom + days;

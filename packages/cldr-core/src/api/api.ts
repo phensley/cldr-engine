@@ -49,34 +49,36 @@ export interface Calendars {
   quarters(type?: CalendarType): { [x: string]: string };
   weekdays(type?: CalendarType): { [x: string]: string };
 
-  toBuddhistDate(date: BuddhistDate | ZonedDateTime): BuddhistDate;
-  toGregorianDate(date: CalendarDate | ZonedDateTime): GregorianDate;
-  toISO8601Date(date: CalendarDate | ZonedDateTime): ISO8601Date;
-  toJapaneseDate(date: CalendarDate | ZonedDateTime): JapaneseDate;
-  toPersianDate(date: CalendarDate | ZonedDateTime): PersianDate;
+  toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
+  toGregorianDate(date: CalendarDate | ZonedDateTime | Date): GregorianDate;
+  toISO8601Date(date: CalendarDate | ZonedDateTime | Date): ISO8601Date;
+  toJapaneseDate(date: CalendarDate | ZonedDateTime | Date): JapaneseDate;
+  toPersianDate(date: CalendarDate | ZonedDateTime | Date): PersianDate;
 
-  fieldOfGreatestDifference(a: CalendarDate, b: CalendarDate): DateTimePatternFieldType;
+  fieldOfGreatestDifference(
+    a: CalendarDate | ZonedDateTime | Date,
+    b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
 
   /**
    * Formats a date-time value to string.
    */
-  formatDate(date: CalendarDate | ZonedDateTime, options?: DateFormatOptions): string;
+  formatDate(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): string;
 
   /**
    * Formats a date-time value to an array of parts.
    */
-  formatDateToParts(date: CalendarDate | ZonedDateTime, options?: DateFormatOptions): Part[];
+  formatDateToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): Part[];
 
   /**
    * Formats a date-time interval for the given skeleton to string.
    */
-  formatDateInterval(start: CalendarDate | ZonedDateTime, end: CalendarDate | ZonedDateTime,
+  formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
     options?: DateIntervalFormatOptions): string;
 
   /**
    * Formats a date-time interval for the given skeleton to an array of parts.
    */
-  formatDateIntervalToParts(start: CalendarDate | ZonedDateTime, end: CalendarDate | ZonedDateTime,
+  formatDateIntervalToParts(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
     options?: DateIntervalFormatOptions): Part[];
 
   /**
@@ -89,14 +91,14 @@ export interface Calendars {
    *
    * Warning: You should not use this for general formatting.
    */
-  formatDateRaw(date: CalendarDate | ZonedDateTime, options?: DateRawFormatOptions): string;
+  formatDateRaw(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): string;
 
   /**
    * Formats a date-time value to an array of parts using a raw date-time pattern.
    *
    * Warning: You should not use this for general formatting.
    */
-  formatDateRawToParts(date: CalendarDate | ZonedDateTime, options?: DateRawFormatOptions): Part[];
+  formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[];
 
 }
 

@@ -8,7 +8,7 @@ import {
   InternalsImpl,
   PrivateApiImpl,
   ZonedDateTime,
-} from '../../../src/';
+} from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
@@ -23,7 +23,7 @@ const calendarsApi = (tag: string) => {
   return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 };
 
-test('javascript date', () => {
+test('zoned date time', () => {
   const api = calendarsApi('en');
   let d: GregorianDate;
   let date: Date;
@@ -69,4 +69,32 @@ test('javascript date', () => {
   expect(d.minute()).toEqual(34);
   expect(d.second()).toEqual(56);
   expect(d.milliseconds()).toEqual(789);
+});
+
+test('bare date', () => {
+  const api = calendarsApi('en');
+  let d: CalendarDate;
+
+  d = api.toGregorianDate(new Date(2018, 1, 20, 12, 34));
+  expect(d.year()).toEqual(2018);
+  expect(d.month()).toEqual(2);
+  expect(d.dayOfMonth()).toEqual(20);
+  expect(d.hour()).toEqual(0);
+  expect(d.hourOfDay()).toEqual(12);
+  expect(d.minute()).toEqual(34);
+  expect(d.second()).toEqual(0);
+
+  d = d.add({ zoneId: NEW_YORK });
+  expect(d.hour()).toEqual(7);
+  expect(d.hourOfDay()).toEqual(7);
+});
+
+test('noop conversions', () => {
+  const api = calendarsApi('en');
+  let d: CalendarDate;
+  let r: CalendarDate;
+
+  d = api.toGregorianDate(new Date(2018, 1, 1));
+  r = api.toGregorianDate(d);
+  expect(d).toEqual(r);
 });

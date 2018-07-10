@@ -40,9 +40,14 @@ const calendarsApi = (tag: string) => {
 test('formats', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
   const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  let s: string;
 
   const api = calendarsApi('en');
-  let s = api.formatDate(mar11, { date: 'full' });
+
+  s = api.formatDate(mar11);
+  expect(s).toEqual('Saturday, March 10, 2018');
+
+  s = api.formatDate(mar11, { date: 'full' });
   expect(s).toEqual('Saturday, March 10, 2018');
 
   s = api.formatDate(mar11, { date: 'long' });
@@ -77,6 +82,15 @@ test('formats', () => {
 
   s = api.formatDate(mar11, { datetime: 'short' });
   expect(s).toEqual('3/10/18, 11:00 PM');
+});
+
+test('formats bare date', () => {
+  const api = calendarsApi('en');
+  let s = api.formatDate(new Date(2018, 5, 15, 12, 34, 56, 789), { datetime: 'full' });
+  expect(s).toEqual('Friday, June 15, 2018 at 12:34:56 PM Greenwich Mean Time');
+
+  s = api.formatDate(new Date(1977, 4, 25, 14, 30, 0), { datetime: 'full' });
+  expect(s).toEqual('Wednesday, May 25, 1977 at 2:30:00 PM Greenwich Mean Time');
 });
 
 test('year padding', () => {
@@ -632,6 +646,15 @@ test('intervals', () => {
   expect(s).toEqual('2018年3月10日星期六');
 });
 
+test('intervals bare date', () => {
+  const api = calendarsApi('en');
+  let s = api.formatDateInterval(new Date(2018, 1, 20), new Date(2018, 5, 13));
+  expect(s).toEqual('2/20/2018 – 6/13/2018');
+
+  s = api.formatDateInterval(new Date(2018, 1, 20, 5, 10), new Date(2018, 1, 20, 22), { skeleton: 'hms' });
+  expect(s).toEqual('5:10 AM – 10:00 PM');
+});
+
 test('interval parts', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
   const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
@@ -657,6 +680,7 @@ test('day periods', () => {
   const api = calendarsApi('en');
 
   let d = losangeles(0);
+  expect(api.formatDateRaw(d)).toEqual('');
   expect(api.formatDateRaw(d, { pattern: 'a' })).toEqual('PM');
   expect(api.formatDateRaw(d, { pattern: 'aaaa' })).toEqual('PM');
   expect(api.formatDateRaw(d, { pattern: 'aaaaa' })).toEqual('p');
@@ -685,6 +709,8 @@ test('day periods', () => {
   expect(api.formatDateRawToParts(d, { pattern: 'b' })).toEqual([
     { type: 'dayperiod', value: 'noon'}
   ]);
+
+  expect(api.formatDateRawToParts(d)).toEqual([]);
 });
 
 test('flexible day periods', () => {
