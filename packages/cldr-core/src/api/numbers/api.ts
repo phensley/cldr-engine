@@ -98,7 +98,7 @@ export class NumbersImpl implements Numbers {
     options = options || {};
     const params = this.privateApi.getNumberParams(options.nu, 'finance');
     const renderer = this.numbers.partsRenderer(params);
-    return this.formatCurrencyImpl(renderer, params, n, code, options || {});
+    return this.formatCurrencyImpl(renderer, params, n, code, options);
   }
 
   protected formatDecimalImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,

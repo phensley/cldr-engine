@@ -19,6 +19,20 @@ const numbersApi = (tag: string) => {
   return new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
 };
 
+test('format', () => {
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatDecimal('9999');
+  expect(s).toEqual('9999');
+
+  s = api.formatDecimal('9999.999');
+  expect(s).toEqual('9999.999');
+
+  s = api.formatDecimal('9999.9999');
+  expect(s).toEqual('10000');
+});
+
 test('decimals unknown style', () => {
   const opts: DecimalFormatOptions = { style: 'UNKNOWN' as DecimalFormatStyleType };
   const api = numbersApi('en');
@@ -277,6 +291,18 @@ test('decimal parts', () => {
     { type: 'minus', value: '-' },
     { type: 'digits', value: '123' },
     { type: 'percent', value: '%' }
+  ]);
+
+  p = api.formatDecimalToParts('9999.999');
+  expect(p).toEqual([
+    { type: 'digits', value: '9999' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '999' }
+  ]);
+
+  p = api.formatDecimalToParts('9999.9999');
+  expect(p).toEqual([
+    { type: 'digits', value: '10000' }
   ]);
 });
 

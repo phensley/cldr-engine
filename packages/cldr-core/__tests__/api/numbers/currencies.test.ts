@@ -20,6 +20,12 @@ const numbersApi = (tag: string) => {
   return new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
 };
 
+test('currency fractions', () => {
+  const api = numbersApi('en');
+  expect(api.getCurrencyFractions('USD').digits).toEqual(2);
+  expect(api.getCurrencyFractions('JPY').digits).toEqual(0);
+});
+
 test('currency unknown style', () => {
   const opts: CurrencyFormatOptions = { style: 'UNKNOWN' as CurrencyFormatStyleType };
   const api = numbersApi('en');
@@ -46,6 +52,9 @@ test('currency accounting', () => {
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
   let api = numbersApi('en');
   let s: string;
+
+  s = api.formatCurrency('-12345.6789', 'EUR');
+  expect(s).toEqual('-€12345.68');
 
   s = api.formatCurrency('-12345.6789', 'EUR', opts);
   expect(s).toEqual('(€12,345.68)');
@@ -232,6 +241,14 @@ test('currency spacing', () => {
 test('currency parts', () => {
   const api = numbersApi('en');
   let p: Part[];
+
+  p = api.formatCurrencyToParts('12345.234', 'USD');
+  expect(p).toEqual([
+    { type: 'currency', value: '$' },
+    { type: 'digits', value: '12345' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '23' }
+  ]);
 
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
   p = api.formatCurrencyToParts('12345.234', 'USD', opts);
