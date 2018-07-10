@@ -18,7 +18,7 @@ const KEYS = [Tag.LANGUAGE, Tag.SCRIPT, Tag.REGION, Tag.VARIANT];
 
 const TRANSFORMS: ((s: string) => string)[] = [
   s => s.toLowerCase(),
-  s => s[0].toUpperCase() + s.substring(1),
+  s => s[0].toUpperCase() + s.substring(1).toLowerCase(),
   s => s.toUpperCase(),
   s => s.toLowerCase(),
 ];

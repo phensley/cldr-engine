@@ -14,6 +14,13 @@ test('basics', () => {
   expect(tag.expanded()).toEqual('en-Zzzz-US');
 });
 
+test('canonicalization', () => {
+  // NOTE: we may add deeper validation later, but for now
+  // only basic subtag canonicalization is done.
+  const tag = new LanguageTag('en', 'US');
+  expect(tag.script()).toEqual('Us');
+});
+
 test('defaults', () => {
   let tag = new LanguageTag();
   expect(tag.compact()).toEqual('und');
