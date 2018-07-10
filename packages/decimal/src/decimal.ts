@@ -11,6 +11,8 @@ import {
   RoundingModeType
 } from './types';
 
+const { floor } = Math;
+
 type GroupFunc = () => void;
 const GROUP_NOOP: GroupFunc = (): void => {
   // nothing
@@ -405,7 +407,7 @@ export class Decimal {
    */
   setScale(scale: number, roundingMode: RoundingModeType = 'half-even'): Decimal {
     const r: Decimal = new Decimal(this);
-    r._setScale(scale, roundingMode);
+    r._setScale(floor(scale), roundingMode);
     return r;
   }
 
@@ -424,7 +426,7 @@ export class Decimal {
    */
   movePoint(n: number): Decimal {
     const w = new Decimal(this);
-    w.exp += n;
+    w.exp += floor(n);
     return w;
   }
 
@@ -433,7 +435,7 @@ export class Decimal {
    */
   shiftleft(shift: number): Decimal {
     const w = new Decimal(this);
-    w._shiftleft(shift);
+    w._shiftleft(floor(shift));
     return w;
   }
 
@@ -443,7 +445,7 @@ export class Decimal {
    */
   shiftright(shift: number, mode: RoundingModeType = 'half-even'): Decimal {
     const w = new Decimal(this);
-    w._shiftright(shift, mode);
+    w._shiftright(floor(shift), mode);
     return w;
   }
 
