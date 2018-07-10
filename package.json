@@ -11,7 +11,7 @@
     "clean": "lerna run clean && rimraf ./coverage && jest --clearCache",
     "clean:full": "yarn clean && rimraf ./node_modules",
     "lint": "lerna run build && lerna run lint",
-    "release": "lerna run clean && lerna run build && lerna publish --force-publish=* --npm-client=npm",
+    "release": "lerna run clean && lerna run lint && lerna publish --force-publish=* --npm-client=npm",
     "stress": "lerna run --stream --concurrency=1 stress",
     "test": "rimraf ./coverage && jest --coverage --verbose -i --no-cache",
     "test:codecov": "rimraf ./coverage && jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache",
