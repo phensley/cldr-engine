@@ -41,6 +41,11 @@ test('multiply context', () => {
   expect(circ).toEqual(parse('2764601535159018049847126177.285962538094'));
 });
 
+test('multiply by zero', () => {
+  expect(mul('0', '15.35', { scale: 4 })).toEqual(parse('0e-4'));
+  expect(mul('0', '15.35', { precision: 4 })).toEqual(parse('0e-2'));
+});
+
 test('multiply with precision', () => {
   expect(mul('10', '.33333', { precision: 0 })).toEqual(parse('0e1'));
   expect(mul('10', '.33333', { precision: 1 })).toEqual(parse('3'));

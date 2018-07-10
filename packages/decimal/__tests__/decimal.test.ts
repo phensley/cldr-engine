@@ -311,6 +311,24 @@ test('aligned exponent', () => {
 test('to string', () => {
   expect(parse('-1.3e-5').toString()).toEqual('-0.000013');
   expect(parse('-2.9999998e-23').toString()).toEqual('-0.000000000000000000000029999998');
+
+  expect(parse('0e10').toString()).toEqual('0');
+  expect(parse('0e-10').toString()).toEqual('0');
+});
+
+test('to parts', () => {
+  expect(parse('-15.1234e2').toParts()).toEqual([
+    { type: 'minus', value: '-' },
+    { type: 'digits', value: '1512' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '34' }
+  ]);
+
+  expect(parse('1.3e-5').toParts()).toEqual([
+    { type: 'digits', value: '0' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '000013' }
+  ]);
 });
 
 test('move point', () => {

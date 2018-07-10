@@ -485,7 +485,7 @@ export class Decimal {
     const f = new PartsDecimalFormatter('.', '');
     this.format(f, '.', '', 1, 1, 3, 3);
     const r = f.render();
-    return this.sign === -1 ? [{ type: 'minus', value: '-'}].concat(r) : r;
+    return this.sign === -1 ? [{ type: 'minus', value: '-' }].concat(r) : r;
   }
 
   // TODO: support scientific formats
@@ -536,16 +536,19 @@ export class Decimal {
       };
     }
 
-    // Push trailing zeros for a positive exponent
+    // Push trailing zeros for a positive exponent, only if the number
+    // is non-zero
     let zeros = exp;
-    while (zeros > 0) {
-      formatter.add(digits[0]);
-      emitted++;
-      int--;
-      if (int > 0) {
-        groupFunc();
+    if (this.sign !== 0) {
+      while (zeros > 0) {
+        formatter.add(digits[0]);
+        emitted++;
+        int--;
+        if (int > 0) {
+          groupFunc();
+        }
+        zeros--;
       }
-      zeros--;
     }
 
     // Scan coefficient from least- to most-significant digit.
@@ -581,13 +584,15 @@ export class Decimal {
     }
 
     // If exponent still negative, emit leading decimal zeros
-    while (exp < 0) {
-      formatter.add(digits[0]);
+    if (this.sign !== 0) {
+      while (exp < 0) {
+        formatter.add(digits[0]);
 
-      // When we've reached exponent of 0, push the decimal point
-      exp++;
-      if (exp === 0) {
-        formatter.add(decimal);
+        // When we've reached exponent of 0, push the decimal point
+        exp++;
+        if (exp === 0) {
+          formatter.add(decimal);
+        }
       }
     }
 
@@ -1020,12 +1025,12 @@ const ZERO = new Decimal('0');
 const ONE = new Decimal('1');
 const TWO = new Decimal('2');
 
-// https://oeis.org/A000796/constant
+// 105 digits of pi - https://oeis.org/A000796/constant
 const PI = new Decimal(
   '3.141592653589793238462643383279502884197169399375105' +
   '82097494459230781640628620899862803482534211706798214');
 
-// https://oeis.org/A001113/constant
+// 105 digits of e - https://oeis.org/A001113/constant
 const E = new Decimal(
   '2.718281828459045235360287471352662497757247093699959' +
   '57496696762772407663035354759457138217852516642742746'
