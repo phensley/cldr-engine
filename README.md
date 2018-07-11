@@ -4,13 +4,18 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 
 [![build](https://api.travis-ci.org/phensley/cldr-engine.svg?branch=master)](https://travis-ci.org/phensley/cldr-engine) [![codecov](https://codecov.io/gh/phensley/cldr-engine/branch/master/graph/badge.svg)](https://codecov.io/gh/phensley/cldr-engine) [![npm version](https://badge.fury.io/js/%40phensley%2Fcldr.svg)](https://www.npmjs.com/package/@phensley/cldr)
 
+## Documentation
+
+The [documentation](https://phensley.github.io/cldr-engine/) is mostly complete but under development in advance of a 1.0 release.
+
 ## Demonstration
 
-[React-based demonstration app](https://phensley.github.io/cldr-engine-react-demo/)
+ * [CodeSandbox example](https://codesandbox.io/s/qqr1rl40r6) can be used to experiment, report bugs, etc.
+ * [Demonstration app](https://phensley.github.io/cldr-engine-react-demo/) provides an example using React and Redux. ([source code](https://github.com/phensley/cldr-engine-react-demo))
 
 ## Status
 
-**The project is currently pre-ALPHA. Working on stabilizing the public API for an initial 1.0 release.**
+**The project is currently BETA. Working on stabilizing the public API and feature set for an initial 1.0 release.**
 
 ## Install
 
@@ -23,34 +28,6 @@ npm install --save @phensley/cldr
 
 yarn add @phensley/cldr
 ```
-
-## Documentation
-
-This project is **currently in pre-ALPHA** and under active development, with the potential for major changes to APIs before the initial release.
-
-* [Integration](docs/integration.md) of @phensley/cldr into an application
-* [Locales](docs/locale.md) parsing, resolving, distance-based matching
-* [Arbitrary precision math](docs/math.md) manipulate numbers of any number of digits
-* [Calendars dates, calendar math](docs/dates.md) Gregorian, Persian, Japanese, ISO-8601, etc.
-* [Number](docs/numbers.md) formatting to strings, parts, arbitrary precision
-* [Currency](docs/currencies.md) formatting to strings, parts, arbitrary precision
-* [Calendar](docs/calendars.md) date time, formatting to strings, parts
-* [Relative time](docs/relative-times.md) formatting, e.g. "1 month ago", "tomorrow", "in 1 hour", etc.
-* [Names of things](docs/names.md), languages, places, etc
-* [Units](docs/units.md) formatting quantities in units (e.g. meters, pounds, etc), sequences
-* [Lists](docs/lists.md) of items with AND and OR
-
-#### Upcoming
-
-* Unit conversions
-* Message formatter
-* Timezone-related info
-  * Exemplar cities with lat/long mapping to timezone id
-
-#### Notes
-
-* [Testing](docs/testing.md) plan, browser compatibility
-
 
 ## Goals
 

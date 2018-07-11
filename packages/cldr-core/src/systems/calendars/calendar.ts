@@ -214,18 +214,32 @@ export abstract class CalendarDate {
     return this._fields[DateField.AM_PM] === 0;
   }
 
+  /**
+   * Indicates the hour of the morning or afternoon, used for the 12-hour
+   * clock (0 - 11). Noon and midnight are 0, not 12.
+   */
   hour(): number {
     return this._fields[DateField.HOUR];
   }
 
+  /**
+   * Indicates the hour of the day, used for the 24-hour clock (0 - 23).
+   * Noon is 12 and midnight is 0.
+   */
   hourOfDay(): number {
     return this._fields[DateField.HOUR_OF_DAY];
   }
 
+  /**
+   * Indicates the minute of the hour (0 - 59).
+   */
   minute(): number {
     return this._fields[DateField.MINUTE];
   }
 
+  /**
+   * Indicates the second of the minute (0 - 59).
+   */
   second(): number {
     return this._fields[DateField.SECOND];
   }
