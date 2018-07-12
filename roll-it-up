@@ -1,0 +1,4 @@
+#!/bin/bash
+
+BUILD_PKG=cldr-core rollup -c node:@zerollup/rollup-preset-ts -f umd -n cldrengine -o ./foo.js
+

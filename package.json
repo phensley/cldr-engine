@@ -63,5 +63,9 @@
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     }
+  },
+  "devDependencies": {
+    "@zerollup/rollup-preset-ts": "^1.4.5",
+    "rollup": "^0.62.0"
   }
 }
