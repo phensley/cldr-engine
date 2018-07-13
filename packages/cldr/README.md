@@ -6,6 +6,15 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 
 Visit [the Github project page](https://github.com/phensley/cldr-engine) for details.
 
+## Documentation
+
+The [documentation](https://phensley.github.io/cldr-engine/) is mostly complete but under development in advance of a 1.0 release.
+
+## Demonstration
+
+ * [CodeSandbox example](https://codesandbox.io/s/qqr1rl40r6) can be used to experiment, report bugs, etc.
+ * [Demonstration app](https://phensley.github.io/cldr-engine-react-demo/) provides an example using React and Redux. ([source code](https://github.com/phensley/cldr-engine-react-demo))
+
 ## Goals
 
 * Support a broad set of CLDR features in the browser "out of the box".
