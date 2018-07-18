@@ -59,10 +59,11 @@ const parse = (locales: string | string[]): Entry[] => {
 };
 
 /**
- * A result returned by the LanguageMatcher.
+ * A result returned by the LocaleMatcher.
  */
-export class LanguageMatch {
-  constructor(readonly locale: Locale, readonly distance: number) {}
+export interface LocaleMatch {
+  locale: Locale;
+  distance: number;
 }
 
 /**
@@ -132,7 +133,7 @@ export class LocaleMatcher {
    * the given threshold. Any matches whose distance is >= threshold will be treated
    * as having maximum distance.
    */
-  match(desiredLocales: string | string[], threshold: number = DEFAULT_THRESHOLD): LanguageMatch {
+  match(desiredLocales: string | string[], threshold: number = DEFAULT_THRESHOLD): LocaleMatch {
     const desireds = parse(desiredLocales);
     const len = desireds.length;
     let bestDistance = MAX_DISTANCE;
@@ -142,7 +143,7 @@ export class LocaleMatcher {
       const desired = desireds[i];
       const exact = this.exactMap[desired.compact];
       if (exact !== undefined) {
-        return new LanguageMatch({ id: exact[0].id, tag: exact[0].tag }, 0);
+        return { locale: { id: exact[0].id, tag: exact[0].tag }, distance: 0 };
       }
 
       for (let j = 0; j < this.count; j++) {
@@ -159,6 +160,9 @@ export class LocaleMatcher {
     const privateUse = bestDesired.tag.privateUse();
     const { id, tag } = bestMatch === undefined ? this.default : bestMatch;
     const result = new LanguageTag(tag.language(), tag.script(), tag.region(), tag.variant(), extensions, privateUse);
-    return new LanguageMatch({ id, tag: result }, bestMatch === undefined ? MAX_DISTANCE : bestDistance);
+    return {
+      locale: { id, tag: result },
+      distance: bestMatch === undefined ? MAX_DISTANCE : bestDistance
+    };
   }
 }

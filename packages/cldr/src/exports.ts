@@ -22,6 +22,7 @@ export {
   LanguageTag,
   ListPatternType,
   Locale,
+  LocaleMatch,
   LocaleMatcher,
   MathContext,
   Pack,
