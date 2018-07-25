@@ -282,8 +282,8 @@ const DECIMAL_DIGIT_NUMBER = (
   '\ua620-\ua629\ua8d0-\ua8d9\ua900-\ua909\ua9d0-\ua9d9\uaa50-\uaa59\uabf0-\uabf9\uff10-\uff19'
 );
 
-const RE_SYMBOL = new RegExp(`^[${MATH_SYMBOL}${CURRENCY_SYMBOL}${MODIFIER_SYMBOL}${OTHER_SYMBOL}]`, 'u');
-const RE_DIGIT = new RegExp(`^[${DECIMAL_DIGIT_NUMBER}]`, 'u');
+const RE_SYMBOL = new RegExp(`^[${MATH_SYMBOL}${CURRENCY_SYMBOL}${MODIFIER_SYMBOL}${OTHER_SYMBOL}]`);
+const RE_DIGIT = new RegExp(`^[${DECIMAL_DIGIT_NUMBER}]`);
 
 // Exhaustive list of currency spacing matchers from scanning.
 // find cldr-data -name numbers.json -exec egrep -e '(currencyMatch|surroundingMatch)' {} \;|sort |uniq -c
