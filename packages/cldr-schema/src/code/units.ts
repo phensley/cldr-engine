@@ -1,10 +1,10 @@
-import { scope, vector1, vector2, Scope } from '../types';
+import { scope, vector1, vector2, KeyIndex, Scope } from '../types';
 import { PluralIndex } from '../schema';
 import { UnitNameIndex, UnitValues } from '../schema/units';
 
 const unitInfo = (width: string) => scope(width, width, [
-  vector2('unitPattern', PluralIndex, UnitNameIndex),
-  vector1('displayName', UnitNameIndex)
+  vector2('unitPattern', 'plural-key', 'unit-name'),
+  vector1('displayName', 'unit-name')
 ]);
 
 export const UNITS: Scope = scope('Units', 'Units', [
@@ -12,3 +12,11 @@ export const UNITS: Scope = scope('Units', 'Units', [
   unitInfo('narrow'),
   unitInfo('short')
 ]);
+
+export const UNITS_INDICES = {
+  'unit-name': UnitNameIndex,
+};
+
+export const UNITS_VALUES = {
+  'unit-name': UnitValues
+};

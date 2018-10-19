@@ -1,13 +1,13 @@
-import { scope, vector1, vector2, Instruction, Scope } from '../types';
+import { scope, vector1, vector2, Instruction, KeyIndex, Scope } from '../types';
 import { DateFieldIndex, PluralIndex, RelativeTimeFieldIndex } from '../schema';
 
 const prevNext: Instruction[] = ['previous2', 'previous', 'current', 'next', 'next2']
-  .map(k => vector1(k, RelativeTimeFieldIndex));
+  .map(k => vector1(k, 'relative-time-field'));
 
 const futurePast: Instruction[] = ['future', 'past']
-  .map(k => vector2(k, PluralIndex, RelativeTimeFieldIndex));
+  .map(k => vector2(k, 'plural-key', 'relative-time-field'));
 
-const displayName = vector1('displayName', DateFieldIndex);
+const displayName = vector1('displayName', 'date-field');
 
 const relativeTimeBody = prevNext.concat(futurePast).concat([displayName]);
 
@@ -20,3 +20,8 @@ export const DATEFIELDS: Scope = scope('DateFields', 'DateFields', [
     relativeTimes('narrow'),
   ]),
 ]);
+
+export const DATEFIELDS_INDICES = {
+  'date-field': DateFieldIndex,
+  'relative-time-field': RelativeTimeFieldIndex
+};

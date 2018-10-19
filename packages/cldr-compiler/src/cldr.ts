@@ -33,13 +33,6 @@ const _sizeProps = L.props('short', 'medium', 'long', 'full');
 const _timeZoneNames = ['dates', 'timeZoneNames'];
 
 const _dateFields = ['dates', 'fields'];
-const _relativeTypes = [
-  'relative-type--1',
-  'relative-type-0',
-  'relative-type-1',
-  'relativeTime-type-future',
-  'relativeTime-type-past'
-];
 
 const isTimeZone = (o: any) => typeof o === 'object' &&
   ('exemplarCity' in o || 'short' in o || 'long' in o);
@@ -445,8 +438,13 @@ export const getMain = (language: string, transform: boolean = true) => {
   };
 
   return {
+    Buddhist: access(Buddhist, 'ca-buddhist', false, transformCalendar),
     // Chinese: access(Chinese, 'ca-chinese'),
-    Hebrew: access(Hebrew, 'ca-hebrew'),
+    // Hebrew: access(Hebrew, 'ca-hebrew'),
+    Gregorian: access(Gregorian, 'ca-gregorian', false, transformCalendar),
+    Japanese: access(Japanese, 'ca-japanese', false, transformCalendar),
+    Persian: access(Persian, 'ca-persian', false, transformCalendar),
+
     Layout: access(Layout, 'layout'),
     Numbers: access(Numbers, 'numbers', false, transformNumbers),
 
@@ -472,11 +470,6 @@ export const getMain = (language: string, transform: boolean = true) => {
     DateFields: access(DateFields, 'dateFields', false, transformDatefields),
     TimeZoneNames: access(TimeZoneNames, 'timeZoneNames', false, transformTimezones),
     Units: access(Units, 'units', false, transformUnits),
-    Buddhist: access(Buddhist, 'ca-buddhist', false, transformCalendar),
-    Chinese: access(Chinese, 'ca-chinese'),
-    Gregorian: access(Gregorian, 'ca-gregorian', false, transformCalendar),
-    Japanese: access(Japanese, 'ca-japanese', false, transformCalendar),
-    Persian: access(Persian, 'ca-persian', false, transformCalendar),
   };
 };
 

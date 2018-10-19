@@ -5,7 +5,10 @@ import {
   DayPeriodValues,
   FieldWidthValues,
   FormatWidthValues,
-  GregorianInfo,
+  GregorianAvailableFormatIndex,
+  GregorianEraIndex,
+  GregorianIntervalFormatIndex,
+  GregorianMonthsIndex,
   PluralIndex,
   QuarterValues,
   WeekdayValues,
@@ -21,26 +24,28 @@ import {
   WeekdaysIndex
 } from './calendars';
 
-const AvailableFormatIndex = new KeyIndex(GregorianInfo.availableFormats);
-const EraIndex = new KeyIndex(GregorianInfo.eras);
-const IntervalFormatIndex = new KeyIndex(GregorianInfo.intervalFormats);
-const MonthsIndex = new KeyIndex(GregorianInfo.months);
-
 const formats = (name: string, rename: string) => scope(name, rename, [
-  vector2('weekdays', FieldWidthIndex, WeekdaysIndex),
-  vector2('months', FieldWidthIndex, MonthsIndex),
-  vector2('quarters', FieldWidthIndex, QuartersIndex),
-  vector2('dayPeriods', FieldWidthIndex, DayPeriodIndex),
+  vector2('weekdays', 'field-width', 'weekday'),
+  vector2('months', 'field-width', 'gregorian-month'),
+  vector2('quarters', 'field-width', 'quarter'),
+  vector2('dayPeriods', 'field-width', 'day-period'),
 ]);
 
 export const GREGORIAN: Scope = scope('Gregorian', 'Gregorian', [
-  vector2('eras', EraTypeIndex, EraIndex),
+  vector2('eras', 'era-type', 'gregorian-era'),
   formats('format', 'format'),
   formats('standAlone', 'standAlone'),
-  vector2('availableFormats', PluralIndex, AvailableFormatIndex),
-  vector2('intervalFormats', DateTimePatternFieldIndex, IntervalFormatIndex),
-  vector1('dateFormats', FormatWidthIndex),
-  vector1('timeFormats', FormatWidthIndex),
-  vector1('dateTimeFormats', FormatWidthIndex),
+  vector2('availableFormats', 'plural-key', 'gregorian-available-format'),
+  vector2('intervalFormats', 'date-time-pattern-field', 'gregorian-interval-format'),
+  vector1('dateFormats', 'format-width'),
+  vector1('timeFormats', 'format-width'),
+  vector1('dateTimeFormats', 'format-width'),
   field('intervalFormatFallback')
 ]);
+
+export const GREGORIAN_INDICES = {
+  'gregorian-available-format': GregorianAvailableFormatIndex,
+  'gregorian-era': GregorianEraIndex,
+  'gregorian-interval-format': GregorianIntervalFormatIndex,
+  'gregorian-month': GregorianMonthsIndex
+};

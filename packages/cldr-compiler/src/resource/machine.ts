@@ -2,6 +2,7 @@ import {
   Digits,
   Field,
   Instruction,
+  KeyIndex,
   Origin,
   Scope,
   ScopeMap,
@@ -41,6 +42,8 @@ const PADDING = 8;
  */
 export class EncoderMachine {
 
+  private origin!: Origin;
+
   constructor(private encoder: Encoder, private verbose: boolean) {}
 
   encode(obj: any, inst: Instruction): void {
@@ -69,9 +72,11 @@ export class EncoderMachine {
     }
   }
 
-  private encodeDigits<T extends string>(obj: any, inst: Digits<T>): void {
+  private encodeDigits(obj: any, inst: Digits): void {
+    const dim0 = this.origin.getIndex(inst.dim0);
+
     const o0 = obj[inst.name] || {};
-    for (const k1 of inst.dim0.keys) {
+    for (const k1 of dim0.keys) {
       const o1 = o0[k1] || {};
       for (const n of inst.values) {
         const field = o1[n];
@@ -91,6 +96,8 @@ export class EncoderMachine {
   }
 
   private encodeOrigin(obj: any, inst: Origin): void {
+    this.origin = inst;
+
     let totalCount = 0;
     let totalSize = 0;
     for (const i of inst.block) {
@@ -122,8 +129,9 @@ export class EncoderMachine {
   }
 
   private encodeScopeMap(obj: any, inst: ScopeMap): void {
+    const fields = this.origin.getValues(inst.fields);
     const curr = obj[inst.name] || {};
-    for (const field of inst.fields) {
+    for (const field of fields) {
       const child = curr[field] || {};
       for (const i of inst.block) {
         this.encode(child, i);
@@ -136,11 +144,12 @@ export class EncoderMachine {
     }
   }
 
-  private encodeVector1<T extends string>(obj: any, inst: Vector1<T>): void {
+  private encodeVector1(obj: any, inst: Vector1): void {
+    const dim0 = this.origin.getIndex(inst.dim0);
     const values: string[] = [];
     let exists = false;
     const o0 = obj[inst.name] || {};
-    for (const k of inst.dim0.keys) {
+    for (const k of dim0.keys) {
       const v = o0[k];
       exists = exists || v !== undefined && v !== '';
       values.push(v);
@@ -152,13 +161,15 @@ export class EncoderMachine {
     }
   }
 
-  private encodeVector2<T extends string, S extends string>(obj: any, inst: Vector2<T, S>): void {
+  private encodeVector2(obj: any, inst: Vector2): void {
+    const dim0 = this.origin.getIndex(inst.dim0);
+    const dim1 = this.origin.getIndex(inst.dim1);
     const values: string[] = [];
     let exists = false;
     const o0 = obj[inst.name] || {};
-    for (const k1 of inst.dim0.keys) {
+    for (const k1 of dim0.keys) {
       const o1 = o0[k1] || {};
-      for (const k2 of inst.dim1.keys) {
+      for (const k2 of dim1.keys) {
         const v = o1[k2];
         exists = exists || v !== undefined && v !== '';
         values.push(v);

@@ -1,3 +1,4 @@
+import { KeyIndex } from '../../types';
 import {
   CalendarInfo,
   CalendarSchema,
@@ -30,3 +31,8 @@ export const JapaneseInfo: CalendarInfo = {
 export interface JapaneseSchema extends CalendarSchema {
 
 }
+
+export const JapaneseAvailableFormatIndex = new KeyIndex(JapaneseInfo.availableFormats);
+export const JapaneseEraIndex = new KeyIndex(JapaneseInfo.eras);
+export const JapaneseIntervalFormatIndex = new KeyIndex(JapaneseInfo.intervalFormats);
+export const JapaneseMonthsIndex = new KeyIndex(JapaneseInfo.months);

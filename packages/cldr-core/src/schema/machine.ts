@@ -4,8 +4,10 @@ import {
   Field,
   FieldArrow,
   Instruction,
+  KeyIndex,
   Origin,
   ORIGIN,
+  PluralDigitValues,
   Schema,
   Scope,
   ScopeArrow,
@@ -57,6 +59,7 @@ export class SchemaBuilder {
   private generator: Generator = new Generator();
   private captureTimes: boolean;
   private _times: [string, string][] = [];
+  private origin!: Origin;
 
   constructor(debug: boolean = false) {
     this.captureTimes = debug && process !== undefined && process.hrtime !== undefined;
@@ -88,9 +91,10 @@ export class SchemaBuilder {
     }
   }
 
-  private constructDigits<T extends string>(obj: any, inst: Digits<T>): void {
-    const offset = this.generator.vector2(inst.dim0.size, inst.values.length * 2);
-    obj[inst.name] = new DigitsArrow(offset, inst.dim0, inst.values);
+  private constructDigits(obj: any, inst: Digits): void {
+    const dim0 = this.origin.getIndex(inst.dim0);
+    const offset = this.generator.vector2(dim0.size, inst.values.length * 2);
+    obj[inst.name] = new DigitsArrow(offset, dim0, inst.values);
   }
 
   private constructField(obj: any, inst: Field): void {
@@ -99,6 +103,8 @@ export class SchemaBuilder {
   }
 
   private constructOrigin(obj: any, inst: Origin): void {
+    this.origin = inst;
+
     const capture = this.captureTimes;
     for (const i of inst.block) {
       const start: [number, number] = capture ? process.hrtime() : [0, 0];
@@ -125,8 +131,9 @@ export class SchemaBuilder {
   }
 
   private constructScopeMap(obj: any, inst: ScopeMap): void {
+    const fields = this.origin.getValues(inst.fields);
     const map: any = {};
-    for (const field of inst.fields) {
+    for (const field of fields) {
       const child: any = {};
       for (const i of inst.block) {
         this.construct(child, i);
@@ -141,16 +148,19 @@ export class SchemaBuilder {
     obj[inst.name] = new ScopeArrow(map, undef);
   }
 
-  private constructVector1<T extends string>(obj: any, inst: Vector1<T>): void {
+  private constructVector1(obj: any, inst: Vector1): void {
+    const dim0 = this.origin.getIndex(inst.dim0);
     const offset = this.generator.field(); // header
-    this.generator.vector1(inst.dim0.size);
-    obj[inst.name] = new Vector1Arrow(offset, inst.dim0);
+    this.generator.vector1(dim0.size);
+    obj[inst.name] = new Vector1Arrow(offset, dim0);
   }
 
-  private constructVector2<T extends string, S extends string>(obj: any, inst: Vector2<T, S>): void {
+  private constructVector2(obj: any, inst: Vector2): void {
+    const dim0 = this.origin.getIndex(inst.dim0);
+    const dim1 = this.origin.getIndex(inst.dim1);
     const offset = this.generator.field(); // header
-    this.generator.vector2(inst.dim0.size, inst.dim1.size);
-    obj[inst.name] = new Vector2Arrow(offset, inst.dim0, inst.dim1);
+    this.generator.vector2(dim0.size, dim1.size);
+    obj[inst.name] = new Vector2Arrow(offset, dim0, dim1);
   }
 }
 

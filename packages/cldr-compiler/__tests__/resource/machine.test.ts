@@ -28,21 +28,31 @@ const PluralIndex = new KeyIndex(['other', 'one']);
 const DigitValues = [4, 5, 6];
 const FooIndex = new KeyIndex(['foo', 'bar']);
 
+const INDICES = {
+  'foo': FooIndex,
+  'plural-key': PluralIndex,
+  'number-symbol': NumberSymbolIndex,
+};
+
 const NUMBERS: Scope = scope('Numbers', 'Numbers', [
-  vector1('symbols', NumberSymbolIndex),
+  vector1('symbols', 'number-symbol'),
   scope('currencyFormats', 'currencyFormats', [
     field('standard')
   ]),
-  digits('short', PluralIndex, DigitValues),
-  scopemap('group', ['foo', 'bar'], [
+  digits('short', 'plural-key', DigitValues),
+  scopemap('group', 'foo-bar', [
     field('name')
   ]),
-  vector2('plurals', PluralIndex, FooIndex)
+  vector2('plurals', 'plural-key', 'foo')
 ]);
 
-const ORIGIN: Origin = origin([
-  NUMBERS
-]);
+const VALUES = {
+  'foo-bar': ['foo', 'bar']
+};
+
+const CODE = [NUMBERS];
+
+const ORIGIN: Origin = origin(CODE, INDICES, VALUES);
 
 const SOURCE_EN_US = {
   Numbers: {

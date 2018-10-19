@@ -1,3 +1,4 @@
+import { KeyIndex } from '../../types';
 import {
   CalendarInfo,
   CalendarSchema,
@@ -19,3 +20,8 @@ export const BuddhistInfo: CalendarInfo = {
 export interface BuddhistSchema extends CalendarSchema {
 
 }
+
+export const BuddhistAvailableFormatIndex = new KeyIndex(BuddhistInfo.availableFormats);
+export const BuddhistEraIndex = new KeyIndex(BuddhistInfo.eras);
+export const BuddhistIntervalFormatIndex = new KeyIndex(BuddhistInfo.intervalFormats);
+export const BuddhistMonthIndex = new KeyIndex(BuddhistInfo.months);

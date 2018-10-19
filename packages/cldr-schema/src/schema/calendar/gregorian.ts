@@ -1,3 +1,4 @@
+import { KeyIndex } from '../../types';
 import {
   CalendarInfo,
   CalendarSchema,
@@ -16,3 +17,8 @@ export const GregorianInfo: CalendarInfo = {
 export interface GregorianSchema extends CalendarSchema {
 
 }
+
+export const GregorianAvailableFormatIndex = new KeyIndex(GregorianInfo.availableFormats);
+export const GregorianEraIndex = new KeyIndex(GregorianInfo.eras);
+export const GregorianIntervalFormatIndex = new KeyIndex(GregorianInfo.intervalFormats);
+export const GregorianMonthsIndex = new KeyIndex(GregorianInfo.months);

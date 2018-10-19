@@ -17,3 +17,23 @@ export const FieldWidthIndex = new KeyIndex(FieldWidthValues);
 export const FormatWidthIndex = new KeyIndex(FormatWidthValues);
 export const QuartersIndex = new KeyIndex(QuarterValues);
 export const WeekdaysIndex = new KeyIndex(WeekdayValues);
+
+export const CALENDAR_INDICES = {
+  'date-time-pattern-field': DateTimePatternFieldIndex,
+  'day-period': DayPeriodIndex,
+  'era-type': EraTypeIndex,
+  'field-width': FieldWidthIndex,
+  'format-width': FormatWidthIndex,
+  'quarter': QuartersIndex,
+  'weekday': WeekdaysIndex
+};
+
+export const CALENDAR_VALUES = {
+  'date-time-pattern-field': DateTimePatternFieldValues,
+  'day-period': DayPeriodValues,
+  'era-width': EraWidthValues,
+  'field-width': FieldWidthValues,
+  'format-width': FormatWidthValues,
+  'quarter': QuarterValues,
+  'weekday': WeekdayValues
+};
