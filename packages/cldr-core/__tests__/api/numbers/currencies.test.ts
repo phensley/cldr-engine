@@ -164,23 +164,23 @@ test('currency short', () => {
   opts = { style: 'short', group: true };
   e = numbersApi('de');
   s = e.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(s).toEqual('-12 Tsd. €');
+  expect(s).toEqual('-12.346 €');
 
   s = e.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(s).toEqual('-12 Tsd. £');
+  expect(s).toEqual('-12.346 £');
 
   s = e.formatCurrency('-12345.6789', 'JPY', opts);
-  expect(s).toEqual('-12 Tsd. ¥');
+  expect(s).toEqual('-12.346 ¥');
 
   e = numbersApi('es-419');
   s = e.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(s).toEqual('-12 mil EUR');
+  expect(s).toEqual('-EUR 12 K');
 
   s = e.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(s).toEqual('-12 mil GBP');
+  expect(s).toEqual('-GBP 12 K');
 
   s = e.formatCurrency('-12345.6789', 'JPY', opts);
-  expect(s).toEqual('-12 mil JPY');
+  expect(s).toEqual('-JPY 12 K');
 
   e = numbersApi('zh');
   s = e.formatCurrency('999999.987', 'USD', opts);

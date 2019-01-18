@@ -112,7 +112,10 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Select the final pluralized compact pattern based on the integer
       // digits of n and the plural category of the rounded / shifted number q2.
-      const raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
+      let raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
+      if (raw === '0') {
+        raw = standardRaw;
+      }
 
       // Re-select pattern as number may have changed sign due to rounding.
       const pattern = this.getNumberPattern(raw, q2.isNegative());
@@ -245,7 +248,11 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Select the final pluralized compact pattern based on the integer
       // digits of n and the plural category of the rounded / shifted number q2.
-      const raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
+      let raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
+      if (raw === '0') {
+        raw = standardRaw;
+      }
+
       const pattern = this.getNumberPattern(raw, q2.isNegative());
       return renderer.render(q2, pattern, symbol, '', ctx.minInt, options.group);
     }
