@@ -46,7 +46,7 @@ export const getSymbols = (): any => {
     addKeys(main.Units.unitIds, unitsRaw);
     addKeys(main.Names.languages.displayName, languages);
     addKeys(main.Names.scripts.displayName, scripts);
-    addKeys(main.Names.territories.territoryIds, territories);
+    addKeys(main.Territories.territories, territories);
     addKeys(main.TimeZoneNames.timeZoneIds, timeZoneIds);
     addKeys(main.TimeZoneNames.metaZoneIds, metaZoneIds);
   });

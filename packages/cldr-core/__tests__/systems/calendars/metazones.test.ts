@@ -59,7 +59,7 @@ test('metazones, dst, offsets', () => {
 
 test('metazone ids', () => {
   // Uses 3 different metazones.
-  // See https://github.com/unicode-cldr/cldr-core/blob/master/supplemental/metaZones.json#L495
+  // See https://github.com/unicode-cldr/cldr-core/blob/34.0.0/supplemental/metaZones.json#L502
   const zoneId = 'Africa/Windhoek';
 
   // Tuesday, January 19, 2100 12:00:00 AM UTC
@@ -87,8 +87,8 @@ test('metazone ids', () => {
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('Africa_Western');
 
-  // Sunday, September 3, 2017 12:30:00 AM UTC
-  epoch = 1504398600000;
+  // Sunday, October 23, 2017 21:30:00 PM UTC
+  epoch = 1508794200000;
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('Africa_Western');
 
@@ -97,8 +97,8 @@ test('metazone ids', () => {
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('Africa_Central');
 
-  // Tuesday, September 3, 2019 12:30:00 AM UTC
-  epoch = 1567470600000;
+  // Tuesday, October 23, 2019 22:30:00 AM UTC
+  epoch = 1571869800000;
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('Africa_Central');
 });
