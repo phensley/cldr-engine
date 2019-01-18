@@ -6,7 +6,7 @@ const make = (e: number, z: string) => JapaneseDate.fromUnixEpoch(e, z, DayOfWee
 const NEW_YORK = 'America/New_York';
 const PARIS = 'Europe/Paris';
 
-test('persian calendar', () => {
+test('japanese calendar', () => {
   let d: JapaneseDate;
   let n: number;
 
@@ -54,4 +54,11 @@ test('persian calendar', () => {
   expect(d.era()).toEqual(235); // Heisei 1989-01-08
   expect(d.year()).toEqual(30);
   expect(d.extendedYear()).toEqual(2018);
+
+  // Saturday, June 1, 2019 05:00:00.000 PM UTC
+  n = 1559365200000;
+  d = make(n, 'UTC');
+  expect(d.era()).toEqual(236); // <not yet named> 2019-05-01
+  expect(d.year()).toEqual(1);
+  expect(d.extendedYear()).toEqual(2019);
 });
