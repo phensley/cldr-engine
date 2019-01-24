@@ -15,7 +15,7 @@
     "release": "lerna run clean && lerna run lint && lerna publish --force-publish=* --npm-client=npm",
     "stress": "lerna run --stream --concurrency=1 stress",
     "test": "rimraf ./coverage && jest --coverage --verbose -i --no-cache",
-    "test:codecov": "rimraf ./coverage && jest --coverage --verbose -i --no-cache",
+    "test:codecov": "rimraf ./coverage && jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache",
     "test:watch": "jest --watch --runInBand"
   },
   "cldr-data-urls-json": "../../config/cldr-data-urls.json",
