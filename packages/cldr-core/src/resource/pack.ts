@@ -72,7 +72,7 @@ export class Pack {
   constructor(data: any) {
     const raw: any = typeof data === 'string' ? JSON.parse(data) : data;
     const { version, cldr, language } = raw;
-    if (typeof version === undefined) {
+    if (version === undefined) {
       throw new Error('Severe error: data does not look like a valid resource pack.');
     }
 
