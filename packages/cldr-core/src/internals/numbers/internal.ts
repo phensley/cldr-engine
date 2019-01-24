@@ -119,7 +119,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Re-select pattern as number may have changed sign due to rounding.
       const pattern = this.getNumberPattern(raw, q2.isNegative());
-      result = renderer.render(q2, pattern, '', '', ctx.minInt, options.group);
+      result = renderer.render(q2, pattern, '', '', '', ctx.minInt, options.group);
       break;
     }
 
@@ -152,7 +152,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Re-select pattern as number may have changed sign due to rounding.
       pattern = this.getNumberPattern(raw, n.isNegative());
-      result = renderer.render(n, pattern, '', symbol, ctx.minInt, options.group);
+      result = renderer.render(n, pattern, '', symbol, '', ctx.minInt, options.group);
       break;
     }
 
@@ -170,7 +170,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Re-select pattern as number may have changed sign due to rounding.
       pattern = this.getNumberPattern(standardRaw, n.isNegative());
-      result = renderer.render(n, pattern, '', '', ctx.minInt, options.group);
+      result = renderer.render(n, pattern, '', '', '', ctx.minInt, options.group);
       break;
     }
 
@@ -202,6 +202,9 @@ export class NumberInternalsImpl implements NumberInternals {
 
     const standardRaw = currencyFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
 
+    // Some locales have a special decimal symbol for certain currencies, e.g. pt-PT and PTE
+    const decimal = this.currencies.decimal.get(bundle, code as CurrencyType) || '';
+
     switch (style) {
 
     case 'code':
@@ -217,7 +220,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
       // Re-select pattern as number may have changed sign due to rounding.
       pattern = this.getNumberPattern(raw, n.isNegative());
-      const num = renderer.render(n, pattern, '', '', ctx.minInt, options.group);
+      const num = renderer.render(n, pattern, '', '', decimal, ctx.minInt, options.group);
 
       // Compute plural category and select pluralized unit.
       const operands = n.operands();
@@ -254,7 +257,7 @@ export class NumberInternalsImpl implements NumberInternals {
       }
 
       const pattern = this.getNumberPattern(raw, q2.isNegative());
-      return renderer.render(q2, pattern, symbol, '', ctx.minInt, options.group);
+      return renderer.render(q2, pattern, symbol, '', decimal, ctx.minInt, options.group);
     }
 
     case 'accounting':
@@ -277,7 +280,7 @@ export class NumberInternalsImpl implements NumberInternals {
       // Re-select pattern as number may have changed sign due to rounding.
       pattern = this.getNumberPattern(raw, n.isNegative());
       const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
-      return renderer.render(n, pattern, symbol, '', ctx.minInt, options.group);
+      return renderer.render(n, pattern, symbol, '', decimal, ctx.minInt, options.group);
     }
     }
 

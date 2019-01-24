@@ -385,3 +385,13 @@ test('currency display names', () => {
   s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('dollar des États-Unis');
 });
+
+test('currency special decimal', () => {
+  let api = numbersApi('pt-PT');
+  let s = api.formatCurrency(100.50, 'PTE');
+  expect(s).toEqual('100$50\xa0\u200b');
+
+  api = numbersApi('pt-CV');
+  s = api.formatCurrency(100.50, 'CVE');
+  expect(s).toEqual('100$50\xa0\u200b');
+});

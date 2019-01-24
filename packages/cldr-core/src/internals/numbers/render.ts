@@ -90,12 +90,13 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
   constructor(readonly params: NumberParams) { }
 
   render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
-      minInt: number, grouping: boolean = false): R {
+      decimalSymbol: string, minInt: number, grouping: boolean = false): R {
 
     const symbols = this.params.symbols;
     const currency: boolean = currencySymbol !== '';
 
-    const decimal = currency ? symbols.currencyDecimal || symbols.decimal : symbols.decimal;
+    const decimal = decimalSymbol ? decimalSymbol
+      : currency ? symbols.currencyDecimal || symbols.decimal : symbols.decimal;
     let group = '';
     if (grouping) {
       group = symbols.group;

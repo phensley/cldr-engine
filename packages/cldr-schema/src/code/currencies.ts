@@ -3,6 +3,7 @@ import { AltIndex, CurrencyIdIndex, CurrencyValues, PluralIndex } from '../schem
 
 export const CURRENCIES: Scope = scope('Currencies', 'Currencies', [
   vector1('displayName', 'currency-id'),
+  vector1('decimal', 'currency-id'),
   vector2('pluralName', 'plural-key', 'currency-id'),
   vector2('symbol', 'alt-key', 'currency-id')
 ]);
