@@ -391,6 +391,9 @@ test('currency special decimal', () => {
   let s = api.formatCurrency(100.50, 'PTE');
   expect(s).toEqual('100$50\xa0\u200b');
 
+  s = api.formatCurrency(10689.50, 'PTE', { group: true });
+  expect(s).toEqual('10\xa0689$50\xa0\u200b');
+
   api = numbersApi('pt-CV');
   s = api.formatCurrency(100.50, 'CVE');
   expect(s).toEqual('100$50\xa0\u200b');
