@@ -1,5 +1,111 @@
 // @alpha
-interface CLDR {
+class CalendarDate {
+  protected constructor(_type: CalendarType, _firstDay: number, _minDays: number);
+  protected _add(fields: CalendarDateFields): [number, number];
+  protected _addTime(fields: CalendarDateFields): [number, number];
+  // (undocumented)
+  protected _fields: number[];
+  // (undocumented)
+  protected readonly _firstDay: number;
+  // (undocumented)
+  protected readonly _minDays: number;
+  // (undocumented)
+  protected _toString(type: string, year?: string): string;
+  // (undocumented)
+  protected readonly _type: CalendarType;
+  // (undocumented)
+  protected _zoneInfo: ZoneInfo;
+  // (undocumented)
+  abstract add(fields: CalendarDateFields): CalendarDate;
+  protected computeWeekFields(): void;
+  // (undocumented)
+  dayOfMonth(): number;
+  dayOfWeek(): number;
+  dayOfWeekInMonth(): number;
+  // (undocumented)
+  dayOfYear(): number;
+  // (undocumented)
+  era(): number;
+  // (undocumented)
+  extendedYear(): number;
+  fieldOfGreatestDifference(other: CalendarDate): DateTimePatternFieldType;
+  // (undocumented)
+  firstDayOfWeek(): number;
+  hour(): number;
+  hourOfDay(): number;
+  // (undocumented)
+  protected initFromJD(jd: number, msDay: number, zoneId?: string): void;
+  // (undocumented)
+  protected initFromUnixEpoch(ms: number, zoneId?: string): void;
+  // (undocumented)
+  isAM(): boolean;
+  // (undocumented)
+  isDaylightSavings(): boolean;
+  // (undocumented)
+  isLeapYear(): boolean;
+  julianDay(): number;
+  // (undocumented)
+  metaZoneId(): MetaZoneType;
+  // (undocumented)
+  milliseconds(): number;
+  // (undocumented)
+  millisecondsInDay(): number;
+  // (undocumented)
+  minDaysInFirstWeek(): number;
+  minute(): number;
+  modifiedJulianDay(): number;
+  month(): number;
+  // (undocumented)
+  protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
+  ordinalDayOfWeek(): number;
+  // (undocumented)
+  relatedYear(): number;
+  second(): number;
+  // (undocumented)
+  timeZoneId(): string;
+  // (undocumented)
+  timeZoneOffset(): number;
+  // (undocumented)
+  type(): CalendarType;
+  unixEpoch(): number;
+  // (undocumented)
+  protected weekNumber(desiredDay: number, dayOfPeriod: number, dayOfWeek: number): number;
+  weekOfMonth(): number;
+  // (undocumented)
+  weekOfYear(): number;
+  // (undocumented)
+  year(): number;
+  // (undocumented)
+  protected yearLength(y: number): number;
+  // (undocumented)
+  yearOfWeekOfYear(): number;
+}
+
+// @alpha
+interface CalendarDateFields {
+  // (undocumented)
+  day?: number;
+  // (undocumented)
+  hour?: number;
+  // (undocumented)
+  millis?: number;
+  // (undocumented)
+  minute?: number;
+  // (undocumented)
+  month?: number;
+  // (undocumented)
+  second?: number;
+  // (undocumented)
+  week?: number;
+  // (undocumented)
+  year?: number;
+  // (undocumented)
+  zoneId?: string;
+}
+
+// @alpha
+class CLDR {
+  constructor(locale: Locale, bundle: Bundle, internals: Internals);
   readonly Calendars: Calendars;
   readonly General: General;
   readonly Locales: Locales;
@@ -31,6 +137,7 @@ class CLDRFramework {
 class CLDROptions {
   // (undocumented)
   asyncLoader?: (language: string) => Promise<any>;
+  debug?: boolean;
   loader?: (language: string) => any;
   packCacheSize?: number;
   patternCacheSize?: number;
@@ -47,21 +154,32 @@ interface CurrencyFormatOptions extends NumberFormatOptions {
 // @alpha (undocumented)
 interface DateFormatOptions {
   // (undocumented)
-  readonly date?: FormatWidthType | AvailableFormatType;
+  ca?: CalendarType;
   // (undocumented)
-  readonly datetime?: FormatWidthType;
+  date?: FormatWidthType;
   // (undocumented)
-  readonly time?: FormatWidthType | AvailableFormatType;
+  datetime?: FormatWidthType;
   // (undocumented)
-  readonly wrap?: FormatWidthType;
+  nu?: NumberSystemType;
+  // (undocumented)
+  skeleton?: string;
+  // (undocumented)
+  time?: FormatWidthType;
+  // (undocumented)
+  wrap?: FormatWidthType;
 }
 
 // @alpha
 class Decimal {
   constructor(num: DecimalArg);
-  protected _format(formatter: Formatter<any>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, digits: string[]): void;
   protected _increment(): void;
   protected _parse(str: string): string | undefined;
+  // (undocumented)
+  protected _setScale(scale: number, roundingMode?: RoundingModeType): void;
+  protected _shiftleft(shift: number): void;
+  protected _shiftright(shift: number, mode?: RoundingModeType): void;
+  // (undocumented)
+  protected _stripTrailingZeros(): void;
   abs(): Decimal;
   // (undocumented)
   add(v: DecimalArg): Decimal;
@@ -76,8 +194,7 @@ class Decimal {
   divmod(v: DecimalArg): [Decimal, Decimal];
   // (undocumented)
   protected exp: number;
-  format(decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, digits?: string[]): string;
-  formatParts(decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, digits?: string[]): Part[];
+  format<R>(formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, digits?: string[]): void;
   // (undocumented)
   protected static fromRaw(sign: number, exp: number, data: number[]): Decimal;
   increment(): Decimal;
@@ -104,6 +221,7 @@ class Decimal {
   stripTrailingZeros(): Decimal;
   subtract(v: DecimalArg): Decimal;
   toInteger(): Decimal;
+  toParts(): Part[];
   toString(): string;
   trailingZeros(): number;
   protected trim(): Decimal;
@@ -113,6 +231,37 @@ class Decimal {
 interface DecimalFormatOptions extends NumberFormatOptions {
   // (undocumented)
   style?: DecimalFormatStyleType;
+}
+
+// @alpha
+class GregorianDate extends CalendarDate {
+  protected constructor(type: CalendarType, firstDay: number, minDays: number);
+  // (undocumented)
+  add(fields: CalendarDateFields): GregorianDate;
+  // (undocumented)
+  static fromUnixEpoch(epoch: number, zoneId: string, firstDay?: number, minDays?: number): GregorianDate;
+  // (undocumented)
+  protected initFromJD(jd: number, msDay: number, zoneId: string): GregorianDate;
+  // (undocumented)
+  protected initFromUnixEpoch(epoch: number, zoneId: string): GregorianDate;
+  // (undocumented)
+  protected initGregorian(): GregorianDate;
+  // (undocumented)
+  protected monthStart(eyear: number, month: number, useMonth: boolean): number;
+  // (undocumented)
+  toString(): string;
+}
+
+// @alpha
+class ISO8601Date extends GregorianDate {
+  // (undocumented)
+  add(fields: CalendarDateFields): ISO8601Date;
+  // (undocumented)
+  static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): ISO8601Date;
+  // (undocumented)
+  protected initFromUnixEpoch(epoch: number, zoneId: string): ISO8601Date;
+  // (undocumented)
+  toString(): string;
 }
 
 // @alpha
@@ -127,6 +276,10 @@ class LanguageTag {
   constructor(language?: string, script?: string, region?: string, variant?: string, extensions?: {
           [x: string]: string[];
       }, privateUse?: string);
+  // (undocumented)
+  protected _compact?: string;
+  // (undocumented)
+  protected _expanded?: string;
   // (undocumented)
   protected _extensions?: {
     [x: string]: string[];
@@ -159,9 +312,17 @@ interface Locale {
 }
 
 // @alpha
+interface LocaleMatch {
+  // (undocumented)
+  distance: number;
+  // (undocumented)
+  locale: Locale;
+}
+
+// @alpha
 class LocaleMatcher {
   constructor(supportedLocales: string | string[]);
-  match(desiredLocales: string | string[], threshold?: number): LanguageMatch;
+  match(desiredLocales: string | string[], threshold?: number): LocaleMatch;
 }
 
 // @alpha
@@ -192,6 +353,8 @@ class Pack {
   // (undocumented)
   readonly cldrVersion: string;
   // (undocumented)
+  readonly defaultTag: LanguageTag;
+  // (undocumented)
   get(tag: LanguageTag): Bundle;
   // (undocumented)
   readonly language: string;
@@ -201,6 +364,24 @@ class Pack {
   }
   // (undocumented)
   readonly version: string;
+}
+
+// @alpha
+class PersianDate extends CalendarDate {
+  // (undocumented)
+  add(fields: CalendarDateFields): PersianDate;
+  // (undocumented)
+  static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): PersianDate;
+  // (undocumented)
+  protected initFromJD(jd: number, msDay: number, zoneId: string): PersianDate;
+  // (undocumented)
+  protected initFromUnixEpoch(epoch: number, zoneId: string): PersianDate;
+  // (undocumented)
+  protected monthStart(eyear: number, month: number, useMonth: boolean): number;
+  // (undocumented)
+  relatedYear(): number;
+  // (undocumented)
+  toString(): string;
 }
 
 // @alpha (undocumented)
@@ -239,6 +420,8 @@ class Rational {
 // @alpha (undocumented)
 interface RelativeTimeFormatOptions {
   // (undocumented)
+  readonly nu?: NumberSystemType;
+  // (undocumented)
   width?: RelativeTimeWidthType;
 }
 
@@ -248,45 +431,15 @@ interface UnitFormatOptions extends DecimalFormatOptions {
   length?: UnitLength;
 }
 
-// @alpha
-class ZonedDateTime {
-  constructor(date: number | Date | ZonedDateTime, zoneId?: string);
-  // (undocumented)
-  epochUTC(): number;
-  // (undocumented)
-  fieldOfGreatestDifference(other: ZonedDateTime): DateTimePatternFieldType;
-  getDayOfMonth(): number;
-  getDayOfWeek(): number;
-  getDayOfYear(): number;
-  getHour(): number;
-  getISOWeek(): number;
-  getISOYear(): number;
-  getMillisecond(): number;
-  getMinute(): number;
-  getMonth(): number;
-  getSecond(): number;
-  getUTCDayOfMonth(): number;
-  getUTCDayOfWeek(): number;
-  getUTCHour(): number;
-  getUTCMinute(): number;
-  getUTCMonth(): number;
-  getUTCYear(): number;
-  getYear(): number;
-  isDaylightSavings(): boolean;
-  // (undocumented)
-  isLeapYear(): boolean;
-  // (undocumented)
-  isUTCLeapYear(): boolean;
-  metaZoneId(): string | undefined;
-  timezoneOffset(): number;
-  // (undocumented)
-  toISOString(): string;
-  zoneId(): string;
+// @alpha (undocumented)
+interface ZonedDateTime {
+  date: number | Date;
+  zoneId?: string;
 }
 
-// WARNING: Unsupported export: parseLocale
+// WARNING: Unsupported export: resolveLocale
 // WARNING: Unsupported export: availableLocales
-// WARNING: Unsupported export: AvailableFormatType
+// WARNING: Unsupported export: parseLanguageTag
 // WARNING: Unsupported export: CharacterOrderType
 // WARNING: Unsupported export: CurrencyType
 // WARNING: Unsupported export: CurrencyFormatStyleType

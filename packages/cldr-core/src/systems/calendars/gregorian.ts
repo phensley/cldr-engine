@@ -28,6 +28,8 @@ import { floorDiv } from './utils';
  * Construct a date using the rules of the Gregorian calendar.
  *
  * type: gregory
+ *
+ * @alpha
  */
 export class GregorianDate extends CalendarDate {
 

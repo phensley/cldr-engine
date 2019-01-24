@@ -43,6 +43,8 @@ export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay:
 
 /**
  * Generic structure used to add one or more fields to a date.
+ *
+ * @alpha
  */
 export interface CalendarDateFields {
   year?: number;
@@ -67,6 +69,8 @@ const differenceFields: [number, DateTimePatternFieldType][] = [
 
 /**
  * Base class for dates in supported calendars.
+ *
+ * @alpha
  */
 export abstract class CalendarDate {
 

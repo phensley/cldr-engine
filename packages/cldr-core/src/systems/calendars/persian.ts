@@ -3,6 +3,13 @@ import { CalendarConstants } from './constants';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
 
+/**
+ * Construct a date using the rules of the Persian calendar.
+ *
+ * type: persian
+ *
+ * @alpha
+ */
 export class PersianDate extends CalendarDate {
 
   private constructor(firstDay: number, minDays: number) {

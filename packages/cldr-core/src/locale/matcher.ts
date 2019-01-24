@@ -60,6 +60,8 @@ const parse = (locales: string | string[]): Entry[] => {
 
 /**
  * A result returned by the LocaleMatcher.
+ *
+ * @alpha
  */
 export interface LocaleMatch {
   locale: Locale;
@@ -130,8 +132,8 @@ export class LocaleMatcher {
 
   /**
    * Find the desired locale that is the closed match to a supported locale, within
-   * the given threshold. Any matches whose distance is >= threshold will be treated
-   * as having maximum distance.
+   * the given threshold. Any matches whose distance is greater than or equal to the
+   * threshold will be treated as having maximum distance.
    */
   match(desiredLocales: string | string[], threshold: number = DEFAULT_THRESHOLD): LocaleMatch {
     const desireds = parse(desiredLocales);

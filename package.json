@@ -4,6 +4,7 @@
   "author": "Patrick Hensley <pathensley@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
+    "api": "lerna run api",
     "bench": "lerna run --stream --concurrency=1 bench",
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",

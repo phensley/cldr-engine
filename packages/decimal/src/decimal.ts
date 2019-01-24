@@ -82,9 +82,9 @@ export class Decimal {
   /**
    * Compare decimal u to v, returning the following:
    *
-   *  -1   if  u < v
+   *  -1   if  u &lt; v
    *   0   if  u = v
-   *   1   if  u > v
+   *   1   if  u &gt; v
    *
    * If the abs flag is true compare the absolute values.
    */
