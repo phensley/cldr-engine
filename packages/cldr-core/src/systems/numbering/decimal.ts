@@ -1,33 +1,11 @@
 import { coerceDecimal, DecimalArg, DecimalFormatter, StringDecimalFormatter } from '../../types/numbers';
-import { NumberSymbols } from '../../common/private';
+import { NumberingSystem, NumberSymbols } from '../../common/private';
 import { Chars } from '../../types';
 
 const isInteger = ((n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n);
 
 export interface NumberingSystemParams {
   readonly decimal: string;
-}
-
-export abstract class NumberingSystem {
-
-  constructor(
-    readonly name: string,
-    readonly symbols: NumberSymbols,
-    readonly minimumGroupingDigits: number,
-    readonly primaryGroupingSize: number,
-    readonly secondaryGroupingSize: number
-  ) {}
-
-  /**
-   * Format a number directly to a string. This is used for things like low-level field
-   * formatting for Calendars.
-   */
-  abstract formatString(n: DecimalArg, groupDigits?: boolean, minInt?: number): string;
-
-  // abstract format<R>(formatter: NumberFormatter<R>, n: DecimalArg, groupDigits?: boolean, minInt?: number): R;
-
-  // abstract formatPattern<R>(formatter: NumberFormatter<R>, pattern: NumberPattern, n: DecimalArg,
-  //   groupDigits: boolean, currencySymbol: string, percentSymbol: string, minInt: number): R;
 }
 
 export class DecimalNumberingSystem extends NumberingSystem {

@@ -1,7 +1,7 @@
 import { Bundle } from '../../resource';
 import { DateTimeNode } from '../../parsing/patterns/date';
 import { CalendarDate } from '../../systems/calendars';
-import { NumberingSystem } from '../../systems/numbering';
+import { NumberingSystem } from '../../common/private';
 import { Renderer } from '../../utils/render';
 
 /**

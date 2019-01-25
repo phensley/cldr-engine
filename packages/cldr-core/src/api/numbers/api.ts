@@ -26,7 +26,6 @@ import {
   NumberRenderer,
   PluralInternals,
 } from '../../internals';
-import { NumberingSystem } from '../../systems/numbering';
 import { coerceDecimal, Decimal, DecimalArg, Part } from '../../types';
 
 /**

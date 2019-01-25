@@ -8,8 +8,8 @@ import {
 
 import { Internals } from '../../../internals';
 import { NumberSystemType } from '../../../common';
-import { NumberParams } from '../../../common/private';
-import { DecimalNumberingSystem, NumberingSystem } from '../../../systems';
+import { NumberingSystem, NumberParams } from '../../../common/private';
+import { DecimalNumberingSystem } from '../../../systems';
 import { decimalNumberingDigits } from '../../../systems/numbering/autogen.decimal';
 import { Cache } from '../../../utils/cache';
 import { Bundle } from '../../../resource';

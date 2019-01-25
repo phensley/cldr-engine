@@ -1,8 +1,8 @@
 import { CalendarSchema, TimeZoneSchema, TimeZoneType, Vector2Arrow } from '@phensley/cldr-schema';
-import { Bundle, WrapperInternals } from '../..';
+import { WrapperInternals } from '../../internals/internals';
+import { Bundle } from '../../resource/bundle';
 import { Internals } from '../internals';
 import { CalendarDate } from '../../systems/calendars';
-import { NumberingSystem } from '../../systems/numbering';
 import { DateTimeNode } from '../../parsing/patterns/date';
 import { Renderer } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
