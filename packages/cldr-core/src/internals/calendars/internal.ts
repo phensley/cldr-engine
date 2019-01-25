@@ -7,6 +7,7 @@ import { NumberParams } from '../../common/private';
 import { CalendarInternals } from '../internals';
 import { Renderer } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
+import { CalendarFormatterImpl } from './formatterimpl';
 import { Internals } from '../internals';
 import { Cache } from '../../utils/cache';
 import { intervalPatternBoundary, parseDatePattern, DateTimeNode } from '../../parsing/patterns/date';
@@ -54,7 +55,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
           s = this.schema.Gregorian;
           break;
       }
-      return new CalendarFormatter(this.internals, s);
+      return new CalendarFormatterImpl(this.internals, s);
     }, cacheSize);
   }
 
