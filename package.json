@@ -31,7 +31,7 @@
     "ts-jest": "22.4.6",
     "ts-node": "6.1.1",
     "tslint": "5.10.0",
-    "tslint-no-circular-imports": "^0.2.1",
+    "tslint-no-circular-imports": "^0.6.1",
     "typedoc": "^0.11.1",
     "typescript": "~2.8.3"
   },
@@ -45,7 +45,12 @@
       "!packages/*/src/cli/**/*.ts",
       "!packages/*/src/**/*.d.ts"
     ],
-    "coverageReporters": ["json", "lcov", "text", "html"],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ],
     "moduleFileExtensions": [
       "js",
       "ts",

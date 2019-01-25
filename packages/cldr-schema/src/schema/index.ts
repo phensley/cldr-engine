@@ -12,18 +12,18 @@ export * from './units';
 
 import {
   BuddhistSchema,
-  CurrenciesSchema,
-  DateFieldsSchema,
   GregorianSchema,
   JapaneseSchema,
-  LayoutSchema,
-  ListPatternsSchema,
-  NamesSchema,
-  NumbersSchema,
   PersianSchema,
-  TimeZoneSchema,
-  UnitsSchema,
-} from '.';
+ } from './calendar';
+
+import { CurrenciesSchema } from './currencies';
+import { DateFieldsSchema } from './datefields';
+import { LayoutSchema, ListPatternsSchema } from './general';
+import { NamesSchema } from './names';
+import { NumbersSchema } from './numbers';
+import { TimeZoneSchema } from './timezones';
+import { UnitsSchema } from './units';
 
 export interface Schema {
   readonly Buddhist: BuddhistSchema;
