@@ -1,5 +1,5 @@
 import { DayOfWeek } from './fields';
-import { CalendarDateFields, CalendarType } from './calendar';
+import { CalendarDateFields } from './calendar';
 import { CalendarConstants } from './constants';
 import { GregorianDate } from './gregorian';
 

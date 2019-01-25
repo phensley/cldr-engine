@@ -6,7 +6,6 @@ import { DatePatternMatcher, DateSkeleton, DateSkeletonParser } from './skeleton
 import { parseDatePattern, DateTimeNode } from '../../parsing/patterns/date';
 import { CalendarDate } from '../../systems/calendars';
 import { coerceDecimal } from '../../types';
-import { Cache } from '../../utils/cache';
 import { LRU } from '../../utils/lru';
 
 export interface CachedSkeletonRequest {

@@ -1,4 +1,4 @@
-import { coerceDecimal, Decimal, DecimalArg, DecimalFormatter, StringDecimalFormatter } from '../../types/numbers';
+import { coerceDecimal, DecimalArg, DecimalFormatter, StringDecimalFormatter } from '../../types/numbers';
 import { NumberSymbols } from '../../common/private';
 import { Chars } from '../../types';
 

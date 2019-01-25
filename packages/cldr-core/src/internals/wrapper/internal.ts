@@ -2,7 +2,6 @@ import { WrapperInternals } from '..';
 import { Cache } from '../../utils/cache';
 import { parseWrapperPattern, WrapperNode } from '../../parsing/patterns/wrapper';
 import { Part } from '../../types';
-import { Renderer } from '../../utils/render';
 
 export class WrapperInternalsImpl implements WrapperInternals {
 

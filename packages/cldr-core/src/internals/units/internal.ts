@@ -1,18 +1,14 @@
 import {
-  FieldArrow,
   NumbersSchema,
-  Schema,
   UnitsSchema,
   UnitInfo,
   UnitType
 } from '@phensley/cldr-schema';
 
-import { Internals, NumberInternals, NumberRenderer, UnitInternals, WrapperInternals } from '../internals';
-import { NumberContext } from '../numbers/context';
+import { Internals, NumberRenderer, UnitInternals } from '../internals';
 import { Quantity, UnitFormatOptions } from '../../common';
 import { NumberParams } from '../../common/private';
-import { coerceDecimal, Decimal } from '../../types';
-import { Cache } from '../../utils/cache';
+import { coerceDecimal } from '../../types';
 import { Bundle } from '../../resource';
 
 export class UnitsInternalImpl implements UnitInternals {

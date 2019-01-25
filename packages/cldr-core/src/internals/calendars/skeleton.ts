@@ -1,6 +1,4 @@
 import {
-  parseDatePattern,
-  DateTimeField,
   DateTimeNode,
   DATE_PATTERN_CHARS
 } from '../../parsing/patterns/date';

@@ -1,13 +1,10 @@
 import {
   AltType,
-  CharacterOrderType,
   LayoutSchema,
-  LineOrderType,
   ListPatternsSchema,
   ListPatternPositionType,
   NamesSchema,
   RegionIdType,
-  Schema,
   ScriptIdType,
   Vector1Arrow,
 } from '@phensley/cldr-schema';
@@ -16,7 +13,7 @@ import { Internals } from '../../internals';
 import { Bundle } from '../../resource';
 import { ListPatternType } from '../../common';
 import { Part } from '../../types';
-import { GeneralInternals, WrapperInternals } from '..';
+import { GeneralInternals } from '..';
 
 export class GeneralInternalsImpl implements GeneralInternals {
 

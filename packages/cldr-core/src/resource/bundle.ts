@@ -1,5 +1,5 @@
 import { PrimitiveBundle } from '@phensley/cldr-schema';
-import { LanguageResolver, LanguageTag, Locale } from '../locale';
+import { LanguageTag } from '../locale';
 
 export type ExceptionIndex = { [y: number]: number };
 

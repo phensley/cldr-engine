@@ -1,4 +1,4 @@
-import { coerceDecimal, DecimalArg } from '../../types/numbers';
+import { DecimalArg } from '../../types/numbers';
 export * from './decimal';
 
 // TODO: replace with instances
