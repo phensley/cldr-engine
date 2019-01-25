@@ -1,4 +1,4 @@
-import { WrapperInternals } from '..';
+import { WrapperInternals } from '../../internals/internals';
 import { Cache } from '../../utils/cache';
 import { parseWrapperPattern, WrapperNode } from '../../parsing/patterns/wrapper';
 import { Part } from '../../types';

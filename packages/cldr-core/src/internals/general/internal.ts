@@ -9,11 +9,10 @@ import {
   Vector1Arrow,
 } from '@phensley/cldr-schema';
 
-import { Internals } from '../../internals';
+import { GeneralInternals, Internals } from '../../internals/internals';
 import { Bundle } from '../../resource';
 import { ListPatternType } from '../../common';
 import { Part } from '../../types';
-import { GeneralInternals } from '..';
 
 export class GeneralInternalsImpl implements GeneralInternals {
 

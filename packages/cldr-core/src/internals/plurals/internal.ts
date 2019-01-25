@@ -1,5 +1,5 @@
 import { PluralType } from '@phensley/cldr-schema';
-import { PluralInternals } from '..';
+import { PluralInternals } from '../../internals/internals';
 import { cardinalRules, expressions, ordinalRules } from './autogen.rules';
 import { PluralRules } from './types';
 import { NumberOperands } from '../../types/numbers';
