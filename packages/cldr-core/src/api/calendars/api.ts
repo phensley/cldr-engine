@@ -1,4 +1,4 @@
-import { DateFieldType, DateTimePatternFieldType, DayPeriod, Schema } from '@phensley/cldr-schema';
+import { DateFieldType, DateTimePatternFieldType } from '@phensley/cldr-schema';
 import { Calendars } from '../api';
 import { Bundle } from '../../resource';
 

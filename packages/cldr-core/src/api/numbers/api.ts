@@ -1,9 +1,6 @@
 import {
   CurrencyType,
-  NumberSystemInfo,
-  NumberSystemName,
   PluralType,
-  Schema
 } from '@phensley/cldr-schema';
 
 import {
@@ -11,11 +8,9 @@ import {
   CurrencyFractions,
   CurrencySymbolWidthType,
   DecimalFormatOptions,
-  NumberSystemType
 } from '../../common';
 
 import { Bundle } from '../../resource';
-import { Cache } from '../../utils/cache';
 import { NumberParams } from '../../common/private';
 import { Numbers } from '../api';
 import { PrivateApiImpl } from '../private';
@@ -26,7 +21,7 @@ import {
   NumberRenderer,
   PluralInternals,
 } from '../../internals';
-import { coerceDecimal, Decimal, DecimalArg, Part } from '../../types';
+import { coerceDecimal, DecimalArg, Part } from '../../types';
 
 /**
  * Number and currency formatting.
