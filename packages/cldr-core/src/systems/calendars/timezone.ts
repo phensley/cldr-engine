@@ -1,5 +1,5 @@
 import { MetaZoneType } from '@phensley/cldr-schema';
-import { base100decode, bitarrayGet } from '../../resource/encoding';
+import { base100decode, bitarrayGet } from '../../utils/encoding';
 import { LRU } from '../../utils/lru';
 import { binarySearch } from '../../utils/search';
 

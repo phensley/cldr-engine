@@ -1,4 +1,4 @@
-import { base100decode } from './encoding';
+import { vuintDecode, z85Decode } from '../utils/encoding';
 import { LanguageResolver, LanguageTag } from '../locale';
 import { Bundle, ExceptionIndex, StringBundle } from './bundle';
 
@@ -44,7 +44,8 @@ export class PackScript {
       return undefined;
     }
 
-    const decoded = raw.split(' ').map(base100decode);
+    const decoded = z85Decode(raw);
+    vuintDecode(decoded);
     const index: ExceptionIndex = {};
     for (let i = 0; i < decoded.length; i += 2) {
       const k = decoded[i];

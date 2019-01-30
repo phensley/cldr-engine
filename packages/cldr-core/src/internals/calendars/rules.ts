@@ -1,6 +1,6 @@
 import { DayPeriodType } from '@phensley/cldr-schema';
-import { base100decode } from '../../resource/encoding';
-import { Bundle } from '../../resource';
+import { vuintDecode, z85Decode } from '../../utils/encoding';
+import { Bundle } from '../../resource/bundle';
 import { Cache } from '../../utils/cache';
 import { binarySearch } from '../../utils/search';
 
@@ -13,7 +13,8 @@ interface Rule {
 
 const parseRule = (raw: string): Rule => {
   const parts = raw.split('|');
-  const minutes = parts[1].split(' ').map(base100decode);
+  const minutes = z85Decode(parts[1]);
+  vuintDecode(minutes);
   const keys = parts[0].split(' ').map(s => dayPeriodKeys[Number(s)]);
   return { keys, minutes };
 };

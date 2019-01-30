@@ -9,7 +9,7 @@ getOther().DefaultContent.forEach((s: string) => {
   defaultContent.add(tag.expanded());
 });
 
-const { base100encode } = encoding;
+const { vuintEncode, z85Encode } = encoding;
 
 // TAB delimiter selected as it is (a) a single character, (b) does not occur in
 // the CLDR JSON data, (c) is safe to encode in JSON, (d) separates strings
@@ -177,7 +177,10 @@ export class ResourcePack {
     // Pack all regions together with their exception indices.
     let defaultRegion = '';
     const regions = layers.map(curr => {
-      const idx = curr.index.map(base100encode).join(' ');
+      const idxarr: number[] = [];
+      curr.index.map(n => vuintEncode(n, idxarr));
+      const idx = z85Encode(idxarr);
+
       let id = curr.tag.region();
       if (curr.isDefault) {
         defaultRegion = id;

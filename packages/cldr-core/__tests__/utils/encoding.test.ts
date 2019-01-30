@@ -1,8 +1,28 @@
 import {
+  base100decode, base100encode,
+  bitarrayCreate, bitarrayGet,
   vuintDecode, vuintEncode,
   z85Decode, z85Encode,
   zigzag32Decode, zigzag32Encode
 } from '../../src/utils/encoding';
+
+// TODO: base-100 is deprecated and will be removed
+test('base100 encoding', () => {
+  expect(base100encode(0)).toEqual('!');
+
+  const nums = [Number.MIN_SAFE_INTEGER, -135, -1, 0, 1, 135, Number.MAX_SAFE_INTEGER];
+  const encoded = nums.map(base100encode).join(' ');
+  const decoded = encoded.split(' ').map(base100decode);
+  expect(decoded).toEqual(nums);
+});
+
+test('bit array', () => {
+  const bits = [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1];
+  const data = bitarrayCreate(bits);
+  for (let i = 0; i < bits.length; i++) {
+    expect(bitarrayGet(data, i)).toEqual(bits[i] === 1 ? true : false);
+  }
+});
 
 test('variable uint encode', () => {
   const enc = vuintEncode;

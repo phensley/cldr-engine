@@ -2,7 +2,7 @@ import { Code, HEADER } from './util';
 import { getSupplemental } from '../../../cldr';
 import { encoding } from '@phensley/cldr-core';
 
-const { base100encode } = encoding;
+const { vuintEncodeArray, z85Encode } = encoding;
 
 const KEYS: string[] = ['afternoon1', 'evening1', 'midnight', 'morning1', 'morning2', 'night1', 'noon'];
 
@@ -132,9 +132,9 @@ export const getDayPeriods = (data: any): Code[] => {
 
     untils = expand(untils);
 
-    const times = untils.map(u => u.type === 'exact' ? u.at : u.from).map(base100encode);
+    const times = z85Encode(vuintEncodeArray(untils.map(u => u.type === 'exact' ? u.at : u.from)));
     const keys = untils.map(u => INDEX[u.key]);
-    const value = `${keys.join(' ')}|${times.join(' ')}`;
+    const value = `${keys.join(' ')}|${times}`;
 
     if (id.indexOf('-') !== -1) {
       id = `'${id}'`;
