@@ -55,20 +55,17 @@ const Z85DECBYTES = new Uint8Array([
   0x21, 0x22, 0x23, 0x4F, 0x00, 0x50, 0x00, 0x00
 ]);
 
-const Z85DECDIVS = [3, 2, 1, 0].map(n => pow(256, n));
-
 /**
  * Decode a Z85-encoded string into an array of byte values. This decodes
  * 5 characters as 4 bytes.
  */
 export const z85Decode = (s: string): number[] => {
-  const res: number[] = [];
+  const len = s.length - 1;
+  const res: number[] = new Array((len / 5) * 4);
 
-  const pad = parseInt(s[0], 10);
-
+  const pad = s.charCodeAt(0) - 0x30;
   let i = 0; // input index
   let j = 0; // output index
-  const len = s.length - 1;
   let v = 0, ix = 0;
 
   while (i < len) {
@@ -80,9 +77,10 @@ export const z85Decode = (s: string): number[] => {
     }
 
     // decode v as 4 bytes
-    for (const d of Z85DECDIVS) {
-      res[j++] = floor(v / d) % 256;
-    }
+    res[j++] = ((v >> 24) | 0) & 0xff;
+    res[j++] = ((v >> 16) | 0) & 0xff;
+    res[j++] = ((v >> 8) | 0) & 0xff;
+    res[j++] = v & 0xff;
     v = 0;
   }
 
@@ -99,10 +97,10 @@ export const zigzag32Decode = (n: number) => (n >>> 1) ^ -(n & 1);
 /**
  * Helper to vuintEncode an entire array.
  */
-export const vuintEncodeArray = (arr: number[]): number[] => {
+export const vuintEncodeArray = (arr: number[], f?: (x: number) => number): number[] => {
   const r: number[] = [];
   for (const n of arr) {
-    vuintEncode(n, r);
+    vuintEncode(f ? f(n) : n, r);
   }
   return r;
 };

@@ -2,6 +2,7 @@ import {
   base100decode, base100encode,
   bitarrayCreate, bitarrayGet,
   vuintDecode, vuintEncode,
+  vuintEncodeArray,
   z85Decode, z85Encode,
   zigzag32Decode, zigzag32Encode
 } from '../../src/utils/encoding';
@@ -70,6 +71,15 @@ test('variable uint decode w/ mapping', () => {
   nums.forEach(n => vuintEncode(n, arr));
   vuintDecode(arr, n => n * 2);
   expect(arr).toEqual([2, 4, 8, 10, 14, 22, 34]);
+});
+
+test('variable uint array encode', () => {
+  const enc = vuintEncodeArray;
+  const dec = vuintDecode;
+  const nums = [-16, 5, 0, 17, 32];
+  const tmp = enc(nums, zigzag32Encode);
+  dec(tmp, zigzag32Decode);
+  expect(tmp).toEqual(nums);
 });
 
 test('z85 encode', () => {
