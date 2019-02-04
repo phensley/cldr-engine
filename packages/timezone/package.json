@@ -1,7 +1,7 @@
 {
-  "name": "@phensley/cldr-core",
+  "name": "@phensley/timezone",
   "version": "0.10.1-alpha.0",
-  "description": "Core library for @phensley/cldr",
+  "description": "Compact timezone lib based on tz database",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
   "types": "lib/index.d.ts",
@@ -24,6 +24,10 @@
     "clean": "rimraf ./lib ./lib-es ./.scratch",
     "clean:full": "yarn clean && rimraf ./node_modules",
     "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
+    "data": "./bin/tztool data -t 2018i",
+    "generate": "./bin/tztool generate -o ./src/autogen.zonedata.ts",
+    "generate:real": "./bin/tztool generate -o ./src/autogen.zonedata.ts ./data/2018i.zi",
+    "generate:fake": "./bin/tztool generate -o __tests__/autogen.zonedata.ts ./data/fakezones.zi",
     "lint": "tslint -p ./tsconfig.json",
     "prepublish": "yarn build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
@@ -33,23 +37,24 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "^0.10.1-alpha.0",
-    "@phensley/cldr-utils": "^0.10.1-alpha.0",
-    "@phensley/decimal": "^0.10.1-alpha.0",
-    "@phensley/timezone": "^0.10.1-alpha.0"
+    "@phensley/cldr-utils": "0.10.1-alpha.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.14",
     "@types/node": "^10.12.21",
+    "@types/rimraf": "^2.0.2",
+    "@types/yargs": "^11.0.0",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
     "chalk": "^2.3.2",
     "jest": "^23.6.0",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
-    "tslint": "5.14.0",
+    "ts-node": "6.1.1",
+    "tslint": "5.10.0",
     "tslint-no-circular-imports": "^0.6.1",
-    "typescript": "3.x"
+    "typescript": "3.x",
+    "yargs": "^11.0.0"
   },
   "jest": {
     "moduleFileExtensions": [

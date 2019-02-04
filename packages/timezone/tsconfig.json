@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": ".scratch"
+  },
+  "include": [
+    "src/**/*",
+		"tztool/**/*",
+    "__benchmarks__/**/*",
+    "__tests__/**/*"
+  ]
+}
