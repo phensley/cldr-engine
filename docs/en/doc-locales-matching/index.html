@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Language matching · @phensley/cldr</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The CLDR [enhanced language matching](https://www.unicode.org/reports/tr35/tr35.html#EnhancedLanguageMatching) algorithm matches one or more desired locales against a list of supported locales."/><meta name="docsearch:version" content="0.25.16"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Language matching · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="The CLDR [enhanced language matching](https://www.unicode.org/reports/tr35/tr35.html#EnhancedLanguageMatching) algorithm matches one or more desired locales against a list of supported locales."/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>0.25.16</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/doc-index" target="_self">Docs</a></li><li class=""><a href="/cldr-engine/docs/en/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Locales</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-index">Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-goals">Goals</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-faq">Rationale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-quickstart">Quick start</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-locales-parsing">Locale parsing</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-locales-resolution">Locale resolution</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/doc-locales-matching">Language matching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-calendar-overview">Calendar Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-calendar-examples">Example: date formatting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-math">Arbitrary Precision</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-math-example-factorial">Example: factorial</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-math-example-rational-approx">Math: rational approximation</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-math-example-contd-fractions">Math: continued fractions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Message Formatting</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-messageformatting">Usage</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-messageformatting-custom">Customization</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Design</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-design-bundles">Resource bundles</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/doc-design-caching">Caching</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Language matching</h1></header><article><div><span><p>The CLDR <a href="https://www.unicode.org/reports/tr35/tr35.html#EnhancedLanguageMatching">enhanced language matching</a> algorithm matches one or more desired locales against a list of supported locales.</p>
+<p>An application defines its list of supported locales, sorted in the order of most- to least-supported, with the default locale first. Given a list of a user's desired locales (sorted in a similar way) it returns the best supported locale to use.</p>
+<h2><a class="anchor" aria-hidden="true" id="basics"></a><a href="#basics" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basics</h2>
+<p>In the example below the application supports a finite list of locales. These are locales for which it has translations for all of its message strings.</p>
+<p>Since the locale <code>pt</code> is equivalent to <code>pt-BR</code> it matches with a distance of 0.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">import</span> { LocaleMatcher } <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr'</span>;
+
+<span class="hljs-keyword">const</span> matcher = <span class="hljs-keyword">new</span> LocaleMatcher(<span class="hljs-string">'en, es-419, en-GB, pt-BR, es'</span>);
+
+<span class="hljs-keyword">const</span> match = <span class="hljs-function">(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> { distance, locale } = matcher.match(s);
+  log(<span class="hljs-string">`<span class="hljs-subst">${locale.id}</span> distance <span class="hljs-subst">${distance}</span>`</span>);
+};
+
+match(<span class="hljs-string">'pt'</span>);
+</code></pre>
+<pre class="output">
+pt-BR distance 0
+</pre>
+<p>If a user selects <code>es-MX</code> there is no supported locale that is an exact match. This is where the distance-based algorithm can provide a better result than simply truncating the locale id to <code>es</code>. Using language distance, it finds that <code>es-419</code> (Latin American Spanish) is a better match.</p>
+<pre><code class="hljs css language-typescript">match(<span class="hljs-string">'es-MX'</span>));
+</code></pre>
+<pre class="output">
+es-419 distance 4
+</pre>
+<p>Similarly the algorithm matches <code>en-ZA</code> (South African English) is a closer match to <code>en-GB</code> (Great British English) than <code>en</code> (American English).</p>
+<pre><code class="hljs css language-typescript">match(<span class="hljs-string">'en-ZA'</span>);
+</code></pre>
+<pre class="output">
+en-GB distance 3
+</pre>
+<p>If a user speaks both <code>en-ZA</code> and <code>es</code> the algorithm will return <code>es</code> since it is closer.</p>
+<pre><code class="hljs css language-typescript">match(<span class="hljs-string">'en-ZA, es'</span>);
+</code></pre>
+<pre class="output">
+es distance 0
+</pre>
+<p>A language that has no match within a given threshold will return the default locale with maximum distance of 100.</p>
+<pre><code class="hljs css language-typescript">match(<span class="hljs-string">'zh'</span>);
+</code></pre>
+<pre class="output">
+en distance 100
+</pre>
+<p>Likewise an undefined tag will match the default locale with maximum distance.</p>
+<pre><code class="hljs css language-typescript">match(<span class="hljs-string">'und'</span>);
+</code></pre>
+<pre class="output">
+en distance 100
+</pre>
+<p>The default distance threshold is 50. You can pass in your own desired threshold, but make sure you know what you're doing. Consult the documentation on <a href="https://www.unicode.org/reports/tr35/tr35.html#EnhancedLanguageMatching">enhanced language matching</a> and the <a href="https://github.com/phensley/cldr-engine/blob/master/notes/language-distance-table.txt">language distance table</a> to better understand how distance works.</p>
+<h2><a class="anchor" aria-hidden="true" id="matching-against-all-available-locales"></a><a href="#matching-against-all-available-locales" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Matching against all available locales</h2>
+<p>This ensures we always resolve to a valid, best-fit supported locale. We sort English to the front so it becomes the default locale, and will be returned when a match fails to meet the distance threshold.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">import</span> { CLDRFramework, LocaleMatcher } <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr'</span>;
+
+<span class="hljs-keyword">const</span> allLocales = CLDRFramework.availableLocales();
+
+<span class="hljs-keyword">const</span> supported = allLocales.sort(
+  <span class="hljs-function"><span class="hljs-params">l</span> =&gt;</span> l.tag.expanded() === <span class="hljs-string">'en-Latn-US'</span> ? <span class="hljs-number">-1</span> : <span class="hljs-number">1</span>
+).map(<span class="hljs-function"><span class="hljs-params">l</span> =&gt;</span> l.id);
+
+<span class="hljs-keyword">const</span> cldrMatcher = <span class="hljs-keyword">new</span> LocaleMatcher(supported);
+
+<span class="hljs-comment">// We don't support Klingon, unfortunately</span>
+<span class="hljs-keyword">const</span> { distance, locale } = cldrMatcher.match(<span class="hljs-string">'i-klingon'</span>);
+log(<span class="hljs-string">`<span class="hljs-subst">${locale.id}</span> distance <span class="hljs-subst">${distance}</span>`</span>);
+</code></pre>
+<pre class="output">
+en distance 10
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="separate-matchers-for-messages-and-formats"></a><a href="#separate-matchers-for-messages-and-formats" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Separate matchers for messages and formats</h2>
+<p>Applications may use more than one matcher, to handle situations where an application may only have message translations for a few regions for a language, but wants to ensure all number and date formatting is the best fit for the user's desired locale.</p>
+<p>In the example below we match <code>es-419</code> for messages and <code>es-MX</code> for CLDR-based localization.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-comment">// import cldrMatcher from above example</span>
+
+<span class="hljs-comment">// Locales for which the application has message translations</span>
+<span class="hljs-keyword">const</span> appLocales = [<span class="hljs-string">'es'</span>, <span class="hljs-string">'es-419'</span>, <span class="hljs-string">'en'</span>, <span class="hljs-string">'en-CA'</span>];
+<span class="hljs-keyword">const</span> messageMatcher = <span class="hljs-keyword">new</span> LocaleMatcher(appLocales);
+
+<span class="hljs-keyword">const</span> userLocale = <span class="hljs-string">'es-MX'</span>;
+
+<span class="hljs-keyword">const</span> messageMatch = messageMatcher.match(userLocale);
+log(<span class="hljs-string">`messages: <span class="hljs-subst">${messageMatch.locale.tag.expanded()}</span> distance <span class="hljs-subst">${messageMatch.distance}</span>`</span>);
+
+<span class="hljs-keyword">const</span> cldrMatch = cldrMatcher.match(userLocale);
+log(<span class="hljs-string">`    cldr: <span class="hljs-subst">${cldrMatch.locale.tag.expanded()}</span> distance <span class="hljs-subst">${cldrMatch.distance}</span>`</span>);
+</code></pre>
+<pre class="output">
+messages: es-Latn-419 distance 4
+    cldr: es-Latn-MX distance 0
+</pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/doc-locales-resolution"><span class="arrow-prev">← </span><span>Locale resolution</span></a><a class="docs-next button" href="/cldr-engine/docs/en/doc-calendar-overview"><span>Calendar Overview</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#basics">Basics</a></li><li><a href="#matching-against-all-available-locales">Matching against all available locales</a></li><li><a href="#separate-matchers-for-messages-and-formats">Separate matchers for messages and formats</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>

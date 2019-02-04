@@ -1,0 +1,1299 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>CurrencyType · @phensley/cldr</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="A 3-letter [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for a currency."/><meta name="docsearch:version" content="next"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="CurrencyType · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="A 3-letter [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for a currency."/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>next</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/cldr-engine/docs/en/next/doc-index" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/next/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Numbers</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-cldrframework">CLDRFramework</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-cldroptions">CLDROptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-cldr">CLDR</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-cldr-calendars">CLDR.Calendars</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-cldr-general">CLDR.General</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-cldr-numbers">CLDR.Numbers</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-cldr-units">CLDR.Units</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-schemaconfig">SchemaConfig</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-buddhistdate">BuddhistDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-calendardate">CalendarDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-calendardatefields">CalendarDateFields</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-calendarfieldoptions">CalendarFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-calendartype">CalendarType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-datefieldtype">DateFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-datefieldformatoptions">DateFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-dateformatoptions">DateFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-dateintervalformatoptions">DateIntervalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-daterawformatoptions">DateRawFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-dateskeleton">DateSkeleton</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-datetimepatternfieldtype">DateTimePatternFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-erafieldoptions">EraFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-erawidthtype">EraWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-exemplarcity">ExemplarCity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-fieldwidthtype">FieldWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-formatwidthtype">FormatWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-gregoriandate">GregorianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-iso8601date">ISO8601Date</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-japanesedate">JapaneseDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-persiandate">PersianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-relativetimefieldtype">RelativeTimeFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-relativetimeformatoptions">RelativeTimeFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-relativetimefieldformatoptions">RelativeTimeFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-timeperiod">TimePeriod</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-timeperiodfield">TimePeriodField</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-timezoneinfo">TimeZoneInfo</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-timezonetype">TimeZoneType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-zoneddatetime">ZonedDateTime</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-contexttype">ContextType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-displaynameoptions">DisplayNameOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-languageidtype">LanguageIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-listpatterntype">ListPatternType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-measurementcategory">MeasurementCategory</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-measurementsystem">MeasurementSystem</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-regionidtype">RegionIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-scriptidtype">ScriptIdType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-bundle">Bundle</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-languagetag">LanguageTag</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-locale">Locale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-localematcher">LocaleMatcher</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-decimal">Decimal</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-decimalconstants">DecimalConstants</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-mathcontext">MathContext</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-rational">Rational</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-roundingmodetype">RoundingModeType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Messages</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-buildmessagematcher">buildMessageMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-parsemessagepattern">parseMessagePattern</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-messagecode">MessageCode</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-messageengine">MessageEngine</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-messageformatfuncmap">MessageFormatFuncMap</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-messageformatter">MessageFormatter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-messageformatteroptions">MessageFormatterOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-messagematcher">MessageMatcher</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Numbers</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-currencyformatoptions">CurrencyFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-currencyformatstyletype">CurrencyFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-currencysymbolwidthtype">CurrencySymbolWidthType</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/next/api-currencytype">CurrencyType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-decimaladjustoptions">DecimalAdjustOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-decimalformatoptions">DecimalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-decimalformatstyletype">DecimalFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-numberformaterrortype">NumberFormatErrorType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-numbersystemtype">NumberSystemType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Units</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-quantity">Quantity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-unitformatoptions">UnitFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-unitformatstyletype">UnitFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-unitlength">UnitLength</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/next/api-unittype">UnitType</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">CurrencyType</h1></header><article><div><span><p>A 3-letter <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> code for a currency.</p>
+<h3><a class="anchor" aria-hidden="true" id="syntax"></a><a href="#syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h3>
+<pre class="syntax">
+'ADP' | 'AED' | 'AFA' | 'AFN' ... 'ZRZ' | 'ZWD' | 'ZWL' | 'ZWR'
+</pre>
+<h3><a class="anchor" aria-hidden="true" id="values"></a><a href="#values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Values</h3>
+<ul>
+<li>'ADP'
+<ul>
+<li>Andorran Peseta</li>
+</ul></li>
+<li>'AED'
+<ul>
+<li>United Arab Emirates Dirham</li>
+</ul></li>
+<li>'AFA'
+<ul>
+<li>Afghan Afghani (1927–2002)</li>
+</ul></li>
+<li>'AFN'
+<ul>
+<li>Afghan Afghani</li>
+</ul></li>
+<li>'ALK'
+<ul>
+<li>Albanian Lek (1946–1965)</li>
+</ul></li>
+<li>'ALL'
+<ul>
+<li>Albanian Lek</li>
+</ul></li>
+<li>'AMD'
+<ul>
+<li>Armenian Dram</li>
+</ul></li>
+<li>'ANG'
+<ul>
+<li>Netherlands Antillean Guilder</li>
+</ul></li>
+<li>'AOA'
+<ul>
+<li>Angolan Kwanza</li>
+</ul></li>
+<li>'AOK'
+<ul>
+<li>Angolan Kwanza (1977–1991)</li>
+</ul></li>
+<li>'AON'
+<ul>
+<li>Angolan New Kwanza (1990–2000)</li>
+</ul></li>
+<li>'AOR'
+<ul>
+<li>Angolan Readjusted Kwanza (1995–1999)</li>
+</ul></li>
+<li>'ARA'
+<ul>
+<li>Argentine Austral</li>
+</ul></li>
+<li>'ARL'
+<ul>
+<li>Argentine Peso Ley (1970–1983)</li>
+</ul></li>
+<li>'ARM'
+<ul>
+<li>Argentine Peso (1881–1970)</li>
+</ul></li>
+<li>'ARP'
+<ul>
+<li>Argentine Peso (1983–1985)</li>
+</ul></li>
+<li>'ARS'
+<ul>
+<li>Argentine Peso</li>
+</ul></li>
+<li>'ATS'
+<ul>
+<li>Austrian Schilling</li>
+</ul></li>
+<li>'AUD'
+<ul>
+<li>Australian Dollar</li>
+</ul></li>
+<li>'AWG'
+<ul>
+<li>Aruban Florin</li>
+</ul></li>
+<li>'AZM'
+<ul>
+<li>Azerbaijani Manat (1993–2006)</li>
+</ul></li>
+<li>'AZN'
+<ul>
+<li>Azerbaijani Manat</li>
+</ul></li>
+<li>'BAD'
+<ul>
+<li>Bosnia-Herzegovina Dinar (1992–1994)</li>
+</ul></li>
+<li>'BAM'
+<ul>
+<li>Bosnia-Herzegovina Convertible Mark</li>
+</ul></li>
+<li>'BAN'
+<ul>
+<li>Bosnia-Herzegovina New Dinar (1994–1997)</li>
+</ul></li>
+<li>'BBD'
+<ul>
+<li>Barbadian Dollar</li>
+</ul></li>
+<li>'BDT'
+<ul>
+<li>Bangladeshi Taka</li>
+</ul></li>
+<li>'BEC'
+<ul>
+<li>Belgian Franc (convertible)</li>
+</ul></li>
+<li>'BEF'
+<ul>
+<li>Belgian Franc</li>
+</ul></li>
+<li>'BEL'
+<ul>
+<li>Belgian Franc (financial)</li>
+</ul></li>
+<li>'BGL'
+<ul>
+<li>Bulgarian Hard Lev</li>
+</ul></li>
+<li>'BGM'
+<ul>
+<li>Bulgarian Socialist Lev</li>
+</ul></li>
+<li>'BGN'
+<ul>
+<li>Bulgarian Lev</li>
+</ul></li>
+<li>'BGO'
+<ul>
+<li>Bulgarian Lev (1879–1952)</li>
+</ul></li>
+<li>'BHD'
+<ul>
+<li>Bahraini Dinar</li>
+</ul></li>
+<li>'BIF'
+<ul>
+<li>Burundian Franc</li>
+</ul></li>
+<li>'BMD'
+<ul>
+<li>Bermudan Dollar</li>
+</ul></li>
+<li>'BND'
+<ul>
+<li>Brunei Dollar</li>
+</ul></li>
+<li>'BOB'
+<ul>
+<li>Bolivian Boliviano</li>
+</ul></li>
+<li>'BOL'
+<ul>
+<li>Bolivian Boliviano (1863–1963)</li>
+</ul></li>
+<li>'BOP'
+<ul>
+<li>Bolivian Peso</li>
+</ul></li>
+<li>'BOV'
+<ul>
+<li>Bolivian Mvdol</li>
+</ul></li>
+<li>'BRB'
+<ul>
+<li>Brazilian New Cruzeiro (1967–1986)</li>
+</ul></li>
+<li>'BRC'
+<ul>
+<li>Brazilian Cruzado (1986–1989)</li>
+</ul></li>
+<li>'BRE'
+<ul>
+<li>Brazilian Cruzeiro (1990–1993)</li>
+</ul></li>
+<li>'BRL'
+<ul>
+<li>Brazilian Real</li>
+</ul></li>
+<li>'BRN'
+<ul>
+<li>Brazilian New Cruzado (1989–1990)</li>
+</ul></li>
+<li>'BRR'
+<ul>
+<li>Brazilian Cruzeiro (1993–1994)</li>
+</ul></li>
+<li>'BRZ'
+<ul>
+<li>Brazilian Cruzeiro (1942–1967)</li>
+</ul></li>
+<li>'BSD'
+<ul>
+<li>Bahamian Dollar</li>
+</ul></li>
+<li>'BTN'
+<ul>
+<li>Bhutanese Ngultrum</li>
+</ul></li>
+<li>'BUK'
+<ul>
+<li>Burmese Kyat</li>
+</ul></li>
+<li>'BWP'
+<ul>
+<li>Botswanan Pula</li>
+</ul></li>
+<li>'BYB'
+<ul>
+<li>Belarusian Ruble (1994–1999)</li>
+</ul></li>
+<li>'BYN'
+<ul>
+<li>Belarusian Ruble</li>
+</ul></li>
+<li>'BYR'
+<ul>
+<li>Belarusian Ruble (2000–2016)</li>
+</ul></li>
+<li>'BZD'
+<ul>
+<li>Belize Dollar</li>
+</ul></li>
+<li>'CAD'
+<ul>
+<li>Canadian Dollar</li>
+</ul></li>
+<li>'CDF'
+<ul>
+<li>Congolese Franc</li>
+</ul></li>
+<li>'CHE'
+<ul>
+<li>WIR Euro</li>
+</ul></li>
+<li>'CHF'
+<ul>
+<li>Swiss Franc</li>
+</ul></li>
+<li>'CHW'
+<ul>
+<li>WIR Franc</li>
+</ul></li>
+<li>'CLE'
+<ul>
+<li>Chilean Escudo</li>
+</ul></li>
+<li>'CLF'
+<ul>
+<li>Chilean Unit of Account (UF)</li>
+</ul></li>
+<li>'CLP'
+<ul>
+<li>Chilean Peso</li>
+</ul></li>
+<li>'CNH'
+<ul>
+<li>Chinese Yuan (offshore)</li>
+</ul></li>
+<li>'CNX'
+<ul>
+<li>Chinese People’s Bank Dollar</li>
+</ul></li>
+<li>'CNY'
+<ul>
+<li>Chinese Yuan</li>
+</ul></li>
+<li>'COP'
+<ul>
+<li>Colombian Peso</li>
+</ul></li>
+<li>'COU'
+<ul>
+<li>Colombian Real Value Unit</li>
+</ul></li>
+<li>'CRC'
+<ul>
+<li>Costa Rican Colón</li>
+</ul></li>
+<li>'CSD'
+<ul>
+<li>Serbian Dinar (2002–2006)</li>
+</ul></li>
+<li>'CSK'
+<ul>
+<li>Czechoslovak Hard Koruna</li>
+</ul></li>
+<li>'CUC'
+<ul>
+<li>Cuban Convertible Peso</li>
+</ul></li>
+<li>'CUP'
+<ul>
+<li>Cuban Peso</li>
+</ul></li>
+<li>'CVE'
+<ul>
+<li>Cape Verdean Escudo</li>
+</ul></li>
+<li>'CYP'
+<ul>
+<li>Cypriot Pound</li>
+</ul></li>
+<li>'CZK'
+<ul>
+<li>Czech Koruna</li>
+</ul></li>
+<li>'DDM'
+<ul>
+<li>East German Mark</li>
+</ul></li>
+<li>'DEM'
+<ul>
+<li>German Mark</li>
+</ul></li>
+<li>'DJF'
+<ul>
+<li>Djiboutian Franc</li>
+</ul></li>
+<li>'DKK'
+<ul>
+<li>Danish Krone</li>
+</ul></li>
+<li>'DOP'
+<ul>
+<li>Dominican Peso</li>
+</ul></li>
+<li>'DZD'
+<ul>
+<li>Algerian Dinar</li>
+</ul></li>
+<li>'ECS'
+<ul>
+<li>Ecuadorian Sucre</li>
+</ul></li>
+<li>'ECV'
+<ul>
+<li>Ecuadorian Unit of Constant Value</li>
+</ul></li>
+<li>'EEK'
+<ul>
+<li>Estonian Kroon</li>
+</ul></li>
+<li>'EGP'
+<ul>
+<li>Egyptian Pound</li>
+</ul></li>
+<li>'ERN'
+<ul>
+<li>Eritrean Nakfa</li>
+</ul></li>
+<li>'ESA'
+<ul>
+<li>Spanish Peseta (A account)</li>
+</ul></li>
+<li>'ESB'
+<ul>
+<li>Spanish Peseta (convertible account)</li>
+</ul></li>
+<li>'ESP'
+<ul>
+<li>Spanish Peseta</li>
+</ul></li>
+<li>'ETB'
+<ul>
+<li>Ethiopian Birr</li>
+</ul></li>
+<li>'EUR'
+<ul>
+<li>Euro</li>
+</ul></li>
+<li>'FIM'
+<ul>
+<li>Finnish Markka</li>
+</ul></li>
+<li>'FJD'
+<ul>
+<li>Fijian Dollar</li>
+</ul></li>
+<li>'FKP'
+<ul>
+<li>Falkland Islands Pound</li>
+</ul></li>
+<li>'FRF'
+<ul>
+<li>French Franc</li>
+</ul></li>
+<li>'GBP'
+<ul>
+<li>British Pound</li>
+</ul></li>
+<li>'GEK'
+<ul>
+<li>Georgian Kupon Larit</li>
+</ul></li>
+<li>'GEL'
+<ul>
+<li>Georgian Lari</li>
+</ul></li>
+<li>'GHC'
+<ul>
+<li>Ghanaian Cedi (1979–2007)</li>
+</ul></li>
+<li>'GHS'
+<ul>
+<li>Ghanaian Cedi</li>
+</ul></li>
+<li>'GIP'
+<ul>
+<li>Gibraltar Pound</li>
+</ul></li>
+<li>'GMD'
+<ul>
+<li>Gambian Dalasi</li>
+</ul></li>
+<li>'GNF'
+<ul>
+<li>Guinean Franc</li>
+</ul></li>
+<li>'GNS'
+<ul>
+<li>Guinean Syli</li>
+</ul></li>
+<li>'GQE'
+<ul>
+<li>Equatorial Guinean Ekwele</li>
+</ul></li>
+<li>'GRD'
+<ul>
+<li>Greek Drachma</li>
+</ul></li>
+<li>'GTQ'
+<ul>
+<li>Guatemalan Quetzal</li>
+</ul></li>
+<li>'GWE'
+<ul>
+<li>Portuguese Guinea Escudo</li>
+</ul></li>
+<li>'GWP'
+<ul>
+<li>Guinea-Bissau Peso</li>
+</ul></li>
+<li>'GYD'
+<ul>
+<li>Guyanaese Dollar</li>
+</ul></li>
+<li>'HKD'
+<ul>
+<li>Hong Kong Dollar</li>
+</ul></li>
+<li>'HNL'
+<ul>
+<li>Honduran Lempira</li>
+</ul></li>
+<li>'HRD'
+<ul>
+<li>Croatian Dinar</li>
+</ul></li>
+<li>'HRK'
+<ul>
+<li>Croatian Kuna</li>
+</ul></li>
+<li>'HTG'
+<ul>
+<li>Haitian Gourde</li>
+</ul></li>
+<li>'HUF'
+<ul>
+<li>Hungarian Forint</li>
+</ul></li>
+<li>'IDR'
+<ul>
+<li>Indonesian Rupiah</li>
+</ul></li>
+<li>'IEP'
+<ul>
+<li>Irish Pound</li>
+</ul></li>
+<li>'ILP'
+<ul>
+<li>Israeli Pound</li>
+</ul></li>
+<li>'ILR'
+<ul>
+<li>Israeli Shekel (1980–1985)</li>
+</ul></li>
+<li>'ILS'
+<ul>
+<li>Israeli New Shekel</li>
+</ul></li>
+<li>'INR'
+<ul>
+<li>Indian Rupee</li>
+</ul></li>
+<li>'IQD'
+<ul>
+<li>Iraqi Dinar</li>
+</ul></li>
+<li>'IRR'
+<ul>
+<li>Iranian Rial</li>
+</ul></li>
+<li>'ISJ'
+<ul>
+<li>Icelandic Króna (1918–1981)</li>
+</ul></li>
+<li>'ISK'
+<ul>
+<li>Icelandic Króna</li>
+</ul></li>
+<li>'ITL'
+<ul>
+<li>Italian Lira</li>
+</ul></li>
+<li>'JMD'
+<ul>
+<li>Jamaican Dollar</li>
+</ul></li>
+<li>'JOD'
+<ul>
+<li>Jordanian Dinar</li>
+</ul></li>
+<li>'JPY'
+<ul>
+<li>Japanese Yen</li>
+</ul></li>
+<li>'KES'
+<ul>
+<li>Kenyan Shilling</li>
+</ul></li>
+<li>'KGS'
+<ul>
+<li>Kyrgystani Som</li>
+</ul></li>
+<li>'KHR'
+<ul>
+<li>Cambodian Riel</li>
+</ul></li>
+<li>'KMF'
+<ul>
+<li>Comorian Franc</li>
+</ul></li>
+<li>'KPW'
+<ul>
+<li>North Korean Won</li>
+</ul></li>
+<li>'KRH'
+<ul>
+<li>South Korean Hwan (1953–1962)</li>
+</ul></li>
+<li>'KRO'
+<ul>
+<li>South Korean Won (1945–1953)</li>
+</ul></li>
+<li>'KRW'
+<ul>
+<li>South Korean Won</li>
+</ul></li>
+<li>'KWD'
+<ul>
+<li>Kuwaiti Dinar</li>
+</ul></li>
+<li>'KYD'
+<ul>
+<li>Cayman Islands Dollar</li>
+</ul></li>
+<li>'KZT'
+<ul>
+<li>Kazakhstani Tenge</li>
+</ul></li>
+<li>'LAK'
+<ul>
+<li>Laotian Kip</li>
+</ul></li>
+<li>'LBP'
+<ul>
+<li>Lebanese Pound</li>
+</ul></li>
+<li>'LKR'
+<ul>
+<li>Sri Lankan Rupee</li>
+</ul></li>
+<li>'LRD'
+<ul>
+<li>Liberian Dollar</li>
+</ul></li>
+<li>'LSL'
+<ul>
+<li>Lesotho Loti</li>
+</ul></li>
+<li>'LTL'
+<ul>
+<li>Lithuanian Litas</li>
+</ul></li>
+<li>'LTT'
+<ul>
+<li>Lithuanian Talonas</li>
+</ul></li>
+<li>'LUC'
+<ul>
+<li>Luxembourgian Convertible Franc</li>
+</ul></li>
+<li>'LUF'
+<ul>
+<li>Luxembourgian Franc</li>
+</ul></li>
+<li>'LUL'
+<ul>
+<li>Luxembourg Financial Franc</li>
+</ul></li>
+<li>'LVL'
+<ul>
+<li>Latvian Lats</li>
+</ul></li>
+<li>'LVR'
+<ul>
+<li>Latvian Ruble</li>
+</ul></li>
+<li>'LYD'
+<ul>
+<li>Libyan Dinar</li>
+</ul></li>
+<li>'MAD'
+<ul>
+<li>Moroccan Dirham</li>
+</ul></li>
+<li>'MAF'
+<ul>
+<li>Moroccan Franc</li>
+</ul></li>
+<li>'MCF'
+<ul>
+<li>Monegasque Franc</li>
+</ul></li>
+<li>'MDC'
+<ul>
+<li>Moldovan Cupon</li>
+</ul></li>
+<li>'MDL'
+<ul>
+<li>Moldovan Leu</li>
+</ul></li>
+<li>'MGA'
+<ul>
+<li>Malagasy Ariary</li>
+</ul></li>
+<li>'MGF'
+<ul>
+<li>Malagasy Franc</li>
+</ul></li>
+<li>'MKD'
+<ul>
+<li>Macedonian Denar</li>
+</ul></li>
+<li>'MKN'
+<ul>
+<li>Macedonian Denar (1992–1993)</li>
+</ul></li>
+<li>'MLF'
+<ul>
+<li>Malian Franc</li>
+</ul></li>
+<li>'MMK'
+<ul>
+<li>Myanmar Kyat</li>
+</ul></li>
+<li>'MNT'
+<ul>
+<li>Mongolian Tugrik</li>
+</ul></li>
+<li>'MOP'
+<ul>
+<li>Macanese Pataca</li>
+</ul></li>
+<li>'MRO'
+<ul>
+<li>Mauritanian Ouguiya (1973–2017)</li>
+</ul></li>
+<li>'MRU'
+<ul>
+<li>Mauritanian Ouguiya</li>
+</ul></li>
+<li>'MTL'
+<ul>
+<li>Maltese Lira</li>
+</ul></li>
+<li>'MTP'
+<ul>
+<li>Maltese Pound</li>
+</ul></li>
+<li>'MUR'
+<ul>
+<li>Mauritian Rupee</li>
+</ul></li>
+<li>'MVP'
+<ul>
+<li>Maldivian Rupee (1947–1981)</li>
+</ul></li>
+<li>'MVR'
+<ul>
+<li>Maldivian Rufiyaa</li>
+</ul></li>
+<li>'MWK'
+<ul>
+<li>Malawian Kwacha</li>
+</ul></li>
+<li>'MXN'
+<ul>
+<li>Mexican Peso</li>
+</ul></li>
+<li>'MXP'
+<ul>
+<li>Mexican Silver Peso (1861–1992)</li>
+</ul></li>
+<li>'MXV'
+<ul>
+<li>Mexican Investment Unit</li>
+</ul></li>
+<li>'MYR'
+<ul>
+<li>Malaysian Ringgit</li>
+</ul></li>
+<li>'MZE'
+<ul>
+<li>Mozambican Escudo</li>
+</ul></li>
+<li>'MZM'
+<ul>
+<li>Mozambican Metical (1980–2006)</li>
+</ul></li>
+<li>'MZN'
+<ul>
+<li>Mozambican Metical</li>
+</ul></li>
+<li>'NAD'
+<ul>
+<li>Namibian Dollar</li>
+</ul></li>
+<li>'NGN'
+<ul>
+<li>Nigerian Naira</li>
+</ul></li>
+<li>'NIC'
+<ul>
+<li>Nicaraguan Córdoba (1988–1991)</li>
+</ul></li>
+<li>'NIO'
+<ul>
+<li>Nicaraguan Córdoba</li>
+</ul></li>
+<li>'NLG'
+<ul>
+<li>Dutch Guilder</li>
+</ul></li>
+<li>'NOK'
+<ul>
+<li>Norwegian Krone</li>
+</ul></li>
+<li>'NPR'
+<ul>
+<li>Nepalese Rupee</li>
+</ul></li>
+<li>'NZD'
+<ul>
+<li>New Zealand Dollar</li>
+</ul></li>
+<li>'OMR'
+<ul>
+<li>Omani Rial</li>
+</ul></li>
+<li>'PAB'
+<ul>
+<li>Panamanian Balboa</li>
+</ul></li>
+<li>'PEI'
+<ul>
+<li>Peruvian Inti</li>
+</ul></li>
+<li>'PEN'
+<ul>
+<li>Peruvian Sol</li>
+</ul></li>
+<li>'PES'
+<ul>
+<li>Peruvian Sol (1863–1965)</li>
+</ul></li>
+<li>'PGK'
+<ul>
+<li>Papua New Guinean Kina</li>
+</ul></li>
+<li>'PHP'
+<ul>
+<li>Philippine Piso</li>
+</ul></li>
+<li>'PKR'
+<ul>
+<li>Pakistani Rupee</li>
+</ul></li>
+<li>'PLN'
+<ul>
+<li>Polish Zloty</li>
+</ul></li>
+<li>'PLZ'
+<ul>
+<li>Polish Zloty (1950–1995)</li>
+</ul></li>
+<li>'PTE'
+<ul>
+<li>Portuguese Escudo</li>
+</ul></li>
+<li>'PYG'
+<ul>
+<li>Paraguayan Guarani</li>
+</ul></li>
+<li>'QAR'
+<ul>
+<li>Qatari Rial</li>
+</ul></li>
+<li>'RHD'
+<ul>
+<li>Rhodesian Dollar</li>
+</ul></li>
+<li>'ROL'
+<ul>
+<li>Romanian Leu (1952–2006)</li>
+</ul></li>
+<li>'RON'
+<ul>
+<li>Romanian Leu</li>
+</ul></li>
+<li>'RSD'
+<ul>
+<li>Serbian Dinar</li>
+</ul></li>
+<li>'RUB'
+<ul>
+<li>Russian Ruble</li>
+</ul></li>
+<li>'RUR'
+<ul>
+<li>Russian Ruble (1991–1998)</li>
+</ul></li>
+<li>'RWF'
+<ul>
+<li>Rwandan Franc</li>
+</ul></li>
+<li>'SAR'
+<ul>
+<li>Saudi Riyal</li>
+</ul></li>
+<li>'SBD'
+<ul>
+<li>Solomon Islands Dollar</li>
+</ul></li>
+<li>'SCR'
+<ul>
+<li>Seychellois Rupee</li>
+</ul></li>
+<li>'SDD'
+<ul>
+<li>Sudanese Dinar (1992–2007)</li>
+</ul></li>
+<li>'SDG'
+<ul>
+<li>Sudanese Pound</li>
+</ul></li>
+<li>'SDP'
+<ul>
+<li>Sudanese Pound (1957–1998)</li>
+</ul></li>
+<li>'SEK'
+<ul>
+<li>Swedish Krona</li>
+</ul></li>
+<li>'SGD'
+<ul>
+<li>Singapore Dollar</li>
+</ul></li>
+<li>'SHP'
+<ul>
+<li>St. Helena Pound</li>
+</ul></li>
+<li>'SIT'
+<ul>
+<li>Slovenian Tolar</li>
+</ul></li>
+<li>'SKK'
+<ul>
+<li>Slovak Koruna</li>
+</ul></li>
+<li>'SLL'
+<ul>
+<li>Sierra Leonean Leone</li>
+</ul></li>
+<li>'SOS'
+<ul>
+<li>Somali Shilling</li>
+</ul></li>
+<li>'SRD'
+<ul>
+<li>Surinamese Dollar</li>
+</ul></li>
+<li>'SRG'
+<ul>
+<li>Surinamese Guilder</li>
+</ul></li>
+<li>'SSP'
+<ul>
+<li>South Sudanese Pound</li>
+</ul></li>
+<li>'STD'
+<ul>
+<li>São Tomé &amp; Príncipe Dobra (1977–2017)</li>
+</ul></li>
+<li>'STN'
+<ul>
+<li>São Tomé &amp; Príncipe Dobra</li>
+</ul></li>
+<li>'SUR'
+<ul>
+<li>Soviet Rouble</li>
+</ul></li>
+<li>'SVC'
+<ul>
+<li>Salvadoran Colón</li>
+</ul></li>
+<li>'SYP'
+<ul>
+<li>Syrian Pound</li>
+</ul></li>
+<li>'SZL'
+<ul>
+<li>Swazi Lilangeni</li>
+</ul></li>
+<li>'THB'
+<ul>
+<li>Thai Baht</li>
+</ul></li>
+<li>'TJR'
+<ul>
+<li>Tajikistani Ruble</li>
+</ul></li>
+<li>'TJS'
+<ul>
+<li>Tajikistani Somoni</li>
+</ul></li>
+<li>'TMM'
+<ul>
+<li>Turkmenistani Manat (1993–2009)</li>
+</ul></li>
+<li>'TMT'
+<ul>
+<li>Turkmenistani Manat</li>
+</ul></li>
+<li>'TND'
+<ul>
+<li>Tunisian Dinar</li>
+</ul></li>
+<li>'TOP'
+<ul>
+<li>Tongan Paʻanga</li>
+</ul></li>
+<li>'TPE'
+<ul>
+<li>Timorese Escudo</li>
+</ul></li>
+<li>'TRL'
+<ul>
+<li>Turkish Lira (1922–2005)</li>
+</ul></li>
+<li>'TRY'
+<ul>
+<li>Turkish Lira</li>
+</ul></li>
+<li>'TTD'
+<ul>
+<li>Trinidad &amp; Tobago Dollar</li>
+</ul></li>
+<li>'TWD'
+<ul>
+<li>New Taiwan Dollar</li>
+</ul></li>
+<li>'TZS'
+<ul>
+<li>Tanzanian Shilling</li>
+</ul></li>
+<li>'UAH'
+<ul>
+<li>Ukrainian Hryvnia</li>
+</ul></li>
+<li>'UAK'
+<ul>
+<li>Ukrainian Karbovanets</li>
+</ul></li>
+<li>'UGS'
+<ul>
+<li>Ugandan Shilling (1966–1987)</li>
+</ul></li>
+<li>'UGX'
+<ul>
+<li>Ugandan Shilling</li>
+</ul></li>
+<li>'USD'
+<ul>
+<li>US Dollar</li>
+</ul></li>
+<li>'USN'
+<ul>
+<li>US Dollar (Next day)</li>
+</ul></li>
+<li>'USS'
+<ul>
+<li>US Dollar (Same day)</li>
+</ul></li>
+<li>'UYI'
+<ul>
+<li>Uruguayan Peso (Indexed Units)</li>
+</ul></li>
+<li>'UYP'
+<ul>
+<li>Uruguayan Peso (1975–1993)</li>
+</ul></li>
+<li>'UYU'
+<ul>
+<li>Uruguayan Peso</li>
+</ul></li>
+<li>'UYW'
+<ul>
+<li>Uruguayan Nominal Wage Index Unit</li>
+</ul></li>
+<li>'UZS'
+<ul>
+<li>Uzbekistani Som</li>
+</ul></li>
+<li>'VEB'
+<ul>
+<li>Venezuelan Bolívar (1871–2008)</li>
+</ul></li>
+<li>'VEF'
+<ul>
+<li>Venezuelan Bolívar (2008–2018)</li>
+</ul></li>
+<li>'VES'
+<ul>
+<li>Venezuelan Bolívar</li>
+</ul></li>
+<li>'VND'
+<ul>
+<li>Vietnamese Dong</li>
+</ul></li>
+<li>'VNN'
+<ul>
+<li>Vietnamese Dong (1978–1985)</li>
+</ul></li>
+<li>'VUV'
+<ul>
+<li>Vanuatu Vatu</li>
+</ul></li>
+<li>'WST'
+<ul>
+<li>Samoan Tala</li>
+</ul></li>
+<li>'XAF'
+<ul>
+<li>Central African CFA Franc</li>
+</ul></li>
+<li>'XAG'
+<ul>
+<li>Silver</li>
+</ul></li>
+<li>'XAU'
+<ul>
+<li>Gold</li>
+</ul></li>
+<li>'XBA'
+<ul>
+<li>European Composite Unit</li>
+</ul></li>
+<li>'XBB'
+<ul>
+<li>European Monetary Unit</li>
+</ul></li>
+<li>'XBC'
+<ul>
+<li>European Unit of Account (XBC)</li>
+</ul></li>
+<li>'XBD'
+<ul>
+<li>European Unit of Account (XBD)</li>
+</ul></li>
+<li>'XCD'
+<ul>
+<li>East Caribbean Dollar</li>
+</ul></li>
+<li>'XDR'
+<ul>
+<li>Special Drawing Rights</li>
+</ul></li>
+<li>'XEU'
+<ul>
+<li>European Currency Unit</li>
+</ul></li>
+<li>'XFO'
+<ul>
+<li>French Gold Franc</li>
+</ul></li>
+<li>'XFU'
+<ul>
+<li>French UIC-Franc</li>
+</ul></li>
+<li>'XOF'
+<ul>
+<li>West African CFA Franc</li>
+</ul></li>
+<li>'XPD'
+<ul>
+<li>Palladium</li>
+</ul></li>
+<li>'XPF'
+<ul>
+<li>CFP Franc</li>
+</ul></li>
+<li>'XPT'
+<ul>
+<li>Platinum</li>
+</ul></li>
+<li>'XRE'
+<ul>
+<li>RINET Funds</li>
+</ul></li>
+<li>'XSU'
+<ul>
+<li>Sucre</li>
+</ul></li>
+<li>'XTS'
+<ul>
+<li>Testing Currency Code</li>
+</ul></li>
+<li>'XUA'
+<ul>
+<li>ADB Unit of Account</li>
+</ul></li>
+<li>'XXX'
+<ul>
+<li>Unknown Currency</li>
+</ul></li>
+<li>'YDD'
+<ul>
+<li>Yemeni Dinar</li>
+</ul></li>
+<li>'YER'
+<ul>
+<li>Yemeni Rial</li>
+</ul></li>
+<li>'YUD'
+<ul>
+<li>Yugoslavian Hard Dinar (1966–1990)</li>
+</ul></li>
+<li>'YUM'
+<ul>
+<li>Yugoslavian New Dinar (1994–2002)</li>
+</ul></li>
+<li>'YUN'
+<ul>
+<li>Yugoslavian Convertible Dinar (1990–1992)</li>
+</ul></li>
+<li>'YUR'
+<ul>
+<li>Yugoslavian Reformed Dinar (1992–1993)</li>
+</ul></li>
+<li>'ZAL'
+<ul>
+<li>South African Rand (financial)</li>
+</ul></li>
+<li>'ZAR'
+<ul>
+<li>South African Rand</li>
+</ul></li>
+<li>'ZMK'
+<ul>
+<li>Zambian Kwacha (1968–2012)</li>
+</ul></li>
+<li>'ZMW'
+<ul>
+<li>Zambian Kwacha</li>
+</ul></li>
+<li>'ZRN'
+<ul>
+<li>Zairean New Zaire (1993–1998)</li>
+</ul></li>
+<li>'ZRZ'
+<ul>
+<li>Zairean Zaire (1971–1993)</li>
+</ul></li>
+<li>'ZWD'
+<ul>
+<li>Zimbabwean Dollar (1980–2008)</li>
+</ul></li>
+<li>'ZWL'
+<ul>
+<li>Zimbabwean Dollar (2009)</li>
+</ul></li>
+<li>'ZWR'
+<ul>
+<li>Zimbabwean Dollar (2008)</li>
+</ul></li>
+</ul>
+<p><h3><a class="anchor" aria-hidden="true" id="references"></a><a href="#references" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>References</h3>
+<ul>
+<li class="list"><a href="api-cldr-numbers.html">CLDR.Numbers</a>
+<ul>
+<li>.<a href="api-cldr-numbers.html#formatcurrency">formatCurrency</a></li>
+<li>.<a href="api-cldr-numbers.html#formatcurrencytoparts">formatCurrencyToParts</a></li>
+<li>.<a href="api-cldr-numbers.html#getcurrencydisplayname">getCurrencyDisplayName</a></li>
+<li>.<a href="api-cldr-numbers.html#getcurrencyforregion">getCurrencyForRegion</a></li>
+<li>.<a href="api-cldr-numbers.html#getcurrencyfractions">getCurrencyFractions</a></li>
+<li>.<a href="api-cldr-numbers.html#getcurrencypluralname">getCurrencyPluralName</a></li>
+<li>.<a href="api-cldr-numbers.html#getcurrencysymbol">getCurrencySymbol</a></li>
+</ul></li>
+</ul>
+</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/next/api-currencysymbolwidthtype"><span class="arrow-prev">← </span><span class="function-name-prevnext">CurrencySymbolWidthType</span></a><a class="docs-next button" href="/cldr-engine/docs/en/next/api-decimaladjustoptions"><span class="function-name-prevnext">DecimalAdjustOptions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>
