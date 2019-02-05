@@ -90,6 +90,9 @@ export abstract class CalendarDate {
     this._fields[DateField.YEAR_WOY] = NULL;
   }
 
+  /**
+   * Calendar type for this date, e.g. 'gregory' for Gregorian.
+   */
   type(): CalendarType {
     return this._type;
   }

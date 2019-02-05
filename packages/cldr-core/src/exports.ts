@@ -2,6 +2,7 @@ export {
   CharacterOrderType,
   CurrencyType,
   DateFieldType,
+  EraWidthType,
   FieldWidthType,
   FormatWidthType,
   LineOrderType,

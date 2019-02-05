@@ -1,5 +1,5 @@
-import { DateFieldType, DateTimePatternFieldType } from '@phensley/cldr-schema';
-import { Calendars } from '../api';
+import { DateFieldType, DateTimePatternFieldType, EraWidthType, FieldWidthType } from '@phensley/cldr-schema';
+import { Calendars, EraWidthMap, FieldWidthMap } from '../api';
 import { Bundle } from '../../resource';
 
 import {
@@ -55,37 +55,46 @@ export class CalendarsImpl implements Calendars {
   /**
    * @alpha
    */
-  dayPeriods(type?: CalendarType): { [x: string]: string } {
+  dayPeriods(type?: CalendarType): FieldWidthMap {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
     const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.dayPeriods();
+    return patterns.dayPeriods() as FieldWidthMap;
   }
 
   /**
    * @alpha
    */
-  months(type?: CalendarType): { [x: string]: string } {
+  eras(type?: CalendarType, width: EraWidthType = 'names'): EraWidthMap {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
     const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.months();
+    return patterns.eras() as EraWidthMap;
   }
 
   /**
    * @alpha
    */
-  quarters(type?: CalendarType): { [x: string]: string } {
+  months(type?: CalendarType, width: FieldWidthType = 'wide'): FieldWidthMap {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
     const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.quarters();
+    return patterns.months() as FieldWidthMap;
   }
 
   /**
    * @alpha
    */
-  weekdays(type?: CalendarType): { [x: string]: string } {
+  quarters(type?: CalendarType, width: FieldWidthType = 'wide'): FieldWidthMap {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
     const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.weekdays();
+    return patterns.quarters() as FieldWidthMap;
+  }
+
+  /**
+   * @alpha
+   */
+  weekdays(type?: CalendarType, width: FieldWidthType = 'wide'): FieldWidthMap {
+    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
+    const patterns = this.manager.getCalendarPatterns(calendar);
+    return patterns.weekdays() as FieldWidthMap;
   }
 
   /**

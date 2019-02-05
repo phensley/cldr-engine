@@ -1,4 +1,4 @@
-import { CalendarSchema, PluralType } from '@phensley/cldr-schema';
+import { CalendarSchema, EraWidthType, PluralType } from '@phensley/cldr-schema';
 import { timeData } from './autogen.timedata';
 import { Internals } from '../../internals';
 import { Bundle } from '../../resource';
@@ -21,7 +21,9 @@ export interface CachedIntervalRequest {
   skeleton?: string;
 }
 
-export type StandaloneFieldType = 'dayPeriods' | 'months' | 'quarters' | 'weekdays';
+export type StandaloneFieldType = 'dayPeriods' | 'eras' | 'months' | 'quarters' | 'weekdays';
+
+export type TwoLevelMap = { [x: string]:  |{ [y: string]: string } };
 
 /**
  * Caches all available date formatting patterns for a given calendar schema.
@@ -75,29 +77,40 @@ export class CalendarPatterns {
     this.intervalFallback = this.schema.intervalFormatFallback.get(bundle);
   }
 
-  dayPeriods(): { [x: string]: string } {
-    return this._getStandalone('dayPeriods', 'wide');
+  dayPeriods(): TwoLevelMap {
+    return this._getStandalone('dayPeriods');
   }
 
-  months(): { [x: string]: string } {
-    return this._getStandalone('months', 'wide');
+  eras(): TwoLevelMap {
+    return this._getStandalone('eras');
   }
 
-  weekdays(): { [x: string]: string } {
-    return this._getStandalone('weekdays', 'wide');
+  months(): TwoLevelMap {
+    return this._getStandalone('months');
   }
 
-  quarters(): { [x: string]: string } {
-    return this._getStandalone('quarters', 'wide');
+  weekdays(): TwoLevelMap {
+    return this._getStandalone('weekdays');
   }
 
-  _getStandalone(key: StandaloneFieldType, width: string): { [x: string]: string } {
+  quarters(): TwoLevelMap {
+    return this._getStandalone('quarters');
+  }
+
+  _getStandalone(key: StandaloneFieldType): TwoLevelMap {
     let entry = this.namesCache.get(key);
     if (entry === undefined) {
-      entry = this.schema.standAlone[key].mapping(this.bundle);
+      switch (key) {
+        case 'eras':
+          entry = this.schema.eras.mapping(this.bundle);
+          break;
+        default:
+          entry = this.schema.standAlone[key].mapping(this.bundle);
+          break;
+      }
       this.namesCache.set(key, entry);
     }
-    return entry[width];
+    return entry;
   }
 
   parseSkeleton(raw: string): DateSkeleton {

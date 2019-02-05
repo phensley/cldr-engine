@@ -3,6 +3,8 @@ import {
   CurrencyType,
   DateFieldType,
   DateTimePatternFieldType,
+  EraWidthType,
+  FieldWidthType,
   LineOrderType,
   RegionIdType,
   ScriptIdType,
@@ -38,16 +40,31 @@ import {
 import { DecimalArg, Part } from '../types';
 
 /**
+ * @alpha
+ */
+export type FieldWidthMap = {
+  [k in FieldWidthType]: { [x: string]: string };
+};
+
+/**
+ * @alpha
+ */
+export type EraWidthMap = {
+  [k in EraWidthType]: { [x: string]: string };
+};
+
+/**
  * Calendar, date and time functions.
  *
  * @alpha
  */
 export interface Calendars {
 
-  dayPeriods(type?: CalendarType): { [x: string]: string };
-  months(type?: CalendarType): { [x: string]: string };
-  quarters(type?: CalendarType): { [x: string]: string };
-  weekdays(type?: CalendarType): { [x: string]: string };
+  dayPeriods(type?: CalendarType): FieldWidthMap;
+  eras(type?: CalendarType): EraWidthMap;
+  months(type?: CalendarType): FieldWidthMap;
+  quarters(type?: CalendarType): FieldWidthMap;
+  weekdays(type?: CalendarType): FieldWidthMap;
 
   toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
   toGregorianDate(date: CalendarDate | ZonedDateTime | Date): GregorianDate;
