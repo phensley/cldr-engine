@@ -1,7 +1,5 @@
 import { languageBundle } from '../../_helpers';
-import { buildSchema } from '../../../src/schema';
-import { Bundle, GeneralImpl, InternalsImpl } from '../../../src';
-import { Alt } from '@phensley/cldr-schema';
+import { GeneralImpl, InternalsImpl } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
@@ -15,6 +13,9 @@ test('territories', () => {
   expect(api.getRegionDisplayName('US')).toEqual('United States');
   expect(api.getRegionDisplayName('US', 'short')).toEqual('US');
   expect(api.getRegionDisplayName('ZZ')).toEqual('Unknown Region');
+
+  expect(api.getRegionDisplayName('DE', 'variant')).toEqual('Germany');
+  expect(api.getRegionDisplayName('DE', 'narrow')).toEqual('Germany');
 
   api = generalApi('es');
   expect(api.getRegionDisplayName('US')).toEqual('Estados Unidos');

@@ -33,6 +33,6 @@ test('temperature', () => {
   expect(api('en-PW').measurementSystem(c)).toEqual('us');
 
   // Metric
-  expect(api('und-001').measurementSystem()).toEqual('metric');
-  expect(api('de').measurementSystem()).toEqual('metric');
+  expect(api('und-001').measurementSystem(c)).toEqual('metric');
+  expect(api('de').measurementSystem(c)).toEqual('metric');
 });
