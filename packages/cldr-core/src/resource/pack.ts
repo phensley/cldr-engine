@@ -44,8 +44,7 @@ export class PackScript {
       return undefined;
     }
 
-    const decoded = z85Decode(raw);
-    vuintDecode(decoded);
+    const decoded = vuintDecode(z85Decode(raw));
     const index: ExceptionIndex = {};
     for (let i = 0; i < decoded.length; i += 2) {
       const k = decoded[i];

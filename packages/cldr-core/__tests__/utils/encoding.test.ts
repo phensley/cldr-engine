@@ -2,10 +2,11 @@ import {
   base100decode, base100encode,
   bitarrayCreate, bitarrayGet,
   vuintDecode, vuintEncode,
-  vuintEncodeArray,
   z85Decode, z85Encode,
   zigzag32Decode, zigzag32Encode
 } from '../../src/utils/encoding';
+
+const uint8 = (n: number[]) => new Uint8Array(n);
 
 // TODO: base-100 is deprecated and will be removed
 test('base100 encoding', () => {
@@ -30,21 +31,18 @@ test('variable uint encode', () => {
 
   // encoding for numbers < 128 is identity
   let nums = [0, 1, 4, 8, 32, 64];
-  let arr: number[] = [];
-  nums.forEach(n => enc(n, arr));
-  expect(arr).toEqual(nums);
+  let res = enc(nums);
+  expect(res).toEqual(uint8(nums));
 
   // encoding for numbers >= 128 uses 2 or more bytes
   nums = [128, 256, 512, 1024, 2048, 4096];
-  arr = [];
-  nums.forEach(n => enc(n, arr));
-  expect(arr).toEqual([128, 1, 128, 2, 128, 4, 128, 8, 128, 16, 128, 32]);
+  res = enc(nums);
+  expect(res).toEqual(uint8([128, 1, 128, 2, 128, 4, 128, 8, 128, 16, 128, 32]));
 
   // if negative numbers are passed in, they become zeros
   nums = [-1, -2, -3, -4, -5];
-  arr = [];
-  nums.forEach(n => enc(n, arr));
-  expect(arr).toEqual([0, 0, 0, 0, 0]);
+  res = enc(nums);
+  expect(res).toEqual(uint8([0, 0, 0, 0, 0]));
 });
 
 test('variable uint decode', () => {
@@ -52,40 +50,39 @@ test('variable uint decode', () => {
 
   // encode some random positive integers in a range
   const nums: number[] = [0];
-  for (let i = 0; i < 1000; i++) {
-    const n = Math.floor(Math.random() * 10000000);
+  for (let i = 0; i < 100000; i++) {
+    const n = Math.floor(Math.random() * 1000000000);
     nums.push(n);
   }
 
   // encode, then decode in-place and check
-  const arr: number[] = [];
-  nums.forEach(n => vuintEncode(n, arr));
-  vuintDecode(arr);
-  expect(arr).toEqual(nums);
+  const tmp = vuintEncode(nums);
+  const res = vuintDecode(tmp);
+  expect(res).toEqual(nums);
 });
 
 test('variable uint decode w/ mapping', () => {
-  const dec = vuintDecode;
   const nums: number[] = [1, 2, 4, 5, 7, 11, 17];
-  const arr: number[] = [];
-  nums.forEach(n => vuintEncode(n, arr));
-  vuintDecode(arr, n => n * 2);
-  expect(arr).toEqual([2, 4, 8, 10, 14, 22, 34]);
+  const tmp = vuintEncode(nums);
+  const res = vuintDecode(tmp, n => n * 2);
+  expect(res).toEqual([2, 4, 8, 10, 14, 22, 34]);
 });
 
-test('variable uint array encode', () => {
-  const enc = vuintEncodeArray;
-  const dec = vuintDecode;
-  const nums = [-16, 5, 0, 17, 32];
-  const tmp = enc(nums, zigzag32Encode);
-  dec(tmp, zigzag32Decode);
-  expect(tmp).toEqual(nums);
-});
+// test('variable uint array encode', () => {
+//   const enc = vuintEncodeArray;
+//   const dec = vuintDecode;
+//   const nums = [-16, 5, 0, 17, 32];
+//   const tmp = enc(nums, zigzag32Encode);
+//   const res = dec(tmp, zigzag32Decode);
+//   expect(res).toEqual(nums);
+// });
 
 test('z85 encode', () => {
   const enc = z85Encode;
 
   expect(enc([0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3])).toEqual('0000010000200003');
+  expect(
+    enc(uint8([0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3]))).toEqual('0000010000200003');
 
   // play with powers of 256 / 85
   expect(enc([3, 38, 0, 45])).toEqual('011111');
@@ -103,10 +100,10 @@ test('z85 decode', () => {
   const enc = z85Encode;
   const dec = z85Decode;
 
-  const nums: number[] = [];
-  for (let i = 0; i < 10; i++) {
-    const n = Math.floor(Math.random() * 255);
-    nums.push(n);
+  const lim = 100000;
+  const nums = new Uint8Array(lim);
+  for (let i = 0; i < lim; i++) {
+    nums[i] = Math.floor(Math.random() * 255);
   }
 
   const s = enc(nums);
@@ -114,10 +111,10 @@ test('z85 decode', () => {
   expect(d).toEqual(nums);
 
   // padding
-  expect(dec(enc([0]))).toEqual([0]);
-  expect(dec(enc([0, 0]))).toEqual([0, 0]);
-  expect(dec(enc([0, 0, 0]))).toEqual([0, 0, 0]);
-  expect(dec(enc([0, 0, 0, 0]))).toEqual([0, 0, 0, 0]);
+  expect(dec(enc([0]))).toEqual(uint8([0]));
+  expect(dec(enc([0, 0]))).toEqual(uint8([0, 0]));
+  expect(dec(enc([0, 0, 0]))).toEqual(uint8([0, 0, 0]));
+  expect(dec(enc([0, 0, 0, 0]))).toEqual(uint8([0, 0, 0, 0]));
 });
 
 test('zigzag encode', () => {

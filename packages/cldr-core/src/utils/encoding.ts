@@ -7,16 +7,11 @@ const PAD = [0, 0, 0];
  * Z85 converts an array of bytes to a string, encoding 4 bytes as 5 ASCII characters.
  * The result is 8-bit safe and can be embedded in JSON without escaping.
  */
-export const z85Encode = (arr: number[]): string => {
+export const z85Encode = (arr: Uint8Array | number[]): string => {
   // add padding to ensure length is evenly disible by 4
-  let buf = arr;
-  let len = buf.length;
+  let len = arr.length;
   const pad = len % 4 ? 4 - (len % 4) : 0;
   len += pad;
-  if (pad) {
-    buf = [...arr, ...PAD.slice(0, pad)];
-    len = buf.length;
-  }
 
   let v = 0;
   let res = '' + pad; // first character indicates number of padding bytes
@@ -24,7 +19,7 @@ export const z85Encode = (arr: number[]): string => {
   let i = 0;
   while (i < len) {
     // accumulate 4 bytes in v
-    v = (v * 256) + buf[i++];
+    v = (v * 256) + (arr[i++] || 0);
     if (i % 4) {
       continue;
     }
@@ -59,9 +54,9 @@ const Z85DECBYTES = new Uint8Array([
  * Decode a Z85-encoded string into an array of byte values. This decodes
  * 5 characters as 4 bytes.
  */
-export const z85Decode = (s: string): number[] => {
+export const z85Decode = (s: string): Uint8Array => {
   const len = s.length - 1;
-  const res: number[] = new Array((len / 5) * 4);
+  const res = new Uint8Array((len / 5) * 4);
 
   const pad = s.charCodeAt(0) - 0x30;
   let i = 0; // input index
@@ -85,7 +80,7 @@ export const z85Decode = (s: string): number[] => {
   }
 
   // remove padding bytes
-  return pad > 0 ? res.slice(0, res.length - pad) : res;
+  return pad > 0 ? res.subarray(0, res.length - pad) : res;
 };
 
 /** Encode a 32-bit signed integer into a 32-bit unsigned integer. */
@@ -95,36 +90,31 @@ export const zigzag32Encode = (n: number) => (n << 1) ^ (n >> 31);
 export const zigzag32Decode = (n: number) => (n >>> 1) ^ -(n & 1);
 
 /**
- * Helper to vuintEncode an entire array.
- */
-export const vuintEncodeArray = (arr: number[], f?: (x: number) => number): number[] => {
-  const r: number[] = [];
-  for (const n of arr) {
-    vuintEncode(f ? f(n) : n, r);
-  }
-  return r;
-};
-
-/**
  * Encode an unsigned 32-bit integer using a variable-length encoding,
- * appending the bytes to the given array.
+ * returning an array of uint8
  */
-export const vuintEncode = (n: number, arr: number[]) => {
-  // ensure we make at least 1 pass through the whlie body to ensure we
-  // correctly encode zero
-  if (n > 0) {
-    // encode a positive unsigned integer
-    while (n) {
-      let v = n & 0x7f;
-      if ((n >>= 7) > 0) {
-        v |= 0x80;
+export const vuintEncode = (nums: number[] | Uint8Array, f?: (x: number) => number): Uint8Array => {
+  const len = nums.length;
+   // over-allocate result array, as each 32-bit value can use up to 5 bytes
+  const res = new Uint8Array(len * 5);
+  let j = 0;
+  for (let i = 0; i < len; i++) {
+    let n = f ? f(nums[i]) : nums[i];
+    if (n > 0) {
+      // encode a positive integer
+      while (n) {
+        let v = n & 0x7f;
+        if ((n >>= 7) > 0) {
+          v |= 0x80;
+        }
+        res[j++] = v;
       }
-      arr.push(v);
+    } else {
+      // everything else is treated as zero
+      res[j++] = 0;
     }
-  } else {
-    // everything else is treated as zero
-    arr.push(0);
   }
+  return res.subarray(0, j);
 };
 
 /**
@@ -133,9 +123,10 @@ export const vuintEncode = (n: number, arr: number[]) => {
  * An optional mapping function can be supplied to transform each
  * integer before it is appended to the buffer.
  */
-export const vuintDecode = (arr: number[], f?: (x: number) => number) => {
+export const vuintDecode = (arr: number[] | Uint8Array, f?: (x: number) => number): number[] => {
   let i = 0, j = 0, k = 0, n = 0;
   const len = arr.length;
+  const res: number[] = new Array(len);
   while (i < len) {
     n += (arr[i] & 0x7f) << k;
     k += 7;
@@ -143,13 +134,14 @@ export const vuintDecode = (arr: number[], f?: (x: number) => number) => {
     if (!(arr[i] & 0x80)) {
       // write the decoded integer to the same buffer and
       // reset the state
-      arr[j++] = f ? f(n) : n;
+      res[j++] = f ? f(n) : n;
       n = k = 0;
     }
     i++;
   }
-  // truncate buffer to hold only the decoded integers
-  arr.length = j;
+  // truncate array to hold only the decoded integers
+  res.length = j;
+  return res;
 };
 
 export const bitarrayCreate = (bits: number[]): number[] => {

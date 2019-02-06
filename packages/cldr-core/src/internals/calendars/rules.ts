@@ -13,8 +13,7 @@ interface Rule {
 
 const parseRule = (raw: string): Rule => {
   const parts = raw.split('|');
-  const minutes = z85Decode(parts[1]);
-  vuintDecode(minutes);
+  const minutes = vuintDecode(z85Decode(parts[1]));
   const keys = parts[0].split(' ').map(s => dayPeriodKeys[Number(s)]);
   return { keys, minutes };
 };

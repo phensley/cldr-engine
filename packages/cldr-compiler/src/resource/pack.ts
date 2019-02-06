@@ -177,9 +177,7 @@ export class ResourcePack {
     // Pack all regions together with their exception indices.
     let defaultRegion = '';
     const regions = layers.map(curr => {
-      const idxarr: number[] = [];
-      curr.index.map(n => vuintEncode(n, idxarr));
-      const idx = z85Encode(idxarr);
+      const idx = z85Encode(vuintEncode(curr.index));
 
       let id = curr.tag.region();
       if (curr.isDefault) {
