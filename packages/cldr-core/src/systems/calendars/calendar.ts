@@ -305,10 +305,10 @@ export abstract class CalendarDate {
     // All day calculations will be relative to the current day of the month.
     const dom = this._fields[DateField.DAY_OF_MONTH] + (fields.day || 0) + ((fields.week || 0) * 7);
 
-    // Adjust the extended year and month.
-    // TODO: move month overflow into monthStart()
+    // Adjust the extended year and month. Note: month may be fractional here,
+    // but will be <= 12 after modulus the year
     let month = (this._fields[DateField.MONTH] - 1) + (fields.month || 0);
-    const yadd = floor(month / 12);
+    const yadd = floor(month / 12); // TODO: support calendars != 12 months
     const year = this._fields[DateField.EXTENDED_YEAR] + (fields.year || 0) + yadd;
     month -= yadd * 12;
 
@@ -317,7 +317,9 @@ export abstract class CalendarDate {
 
     // Calculate the Julian day for the adjusted year/month then add back the days.
     const jd = this.monthStart(year, month, false) + dom + days;
-    return [jd, ms];
+    const ijd = floor(jd);
+    const djd = jd - ijd;
+    return [ijd, ms + (djd * CalendarConstants.ONE_DAY_MS)];
   }
 
   /**

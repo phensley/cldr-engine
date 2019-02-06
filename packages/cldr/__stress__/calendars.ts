@@ -15,6 +15,8 @@ const DATETIMES = [
   1520873594000
 ];
 
+const FRACTIONS = 10;
+
 const WIDTHS: FormatWidthType[] = ['full', 'long', 'medium', 'short'];
 
 const dateOptions = (): DateFormatOptions[] => {
@@ -35,6 +37,10 @@ const buildDatetimes = (): ZonedDateTime[] => {
   for (const date of DATETIMES) {
     for (const zoneId of ZONES) {
       res.push({ date, zoneId });
+      for (let i = 0; i < FRACTIONS; i++) {
+        const d = date + Math.random() * 10000000;
+        res.push({ date: d, zoneId });
+      }
     }
   }
   return res;

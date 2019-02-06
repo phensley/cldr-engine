@@ -48,8 +48,27 @@ export class PersianDate extends CalendarDate {
 
   protected monthStart(eyear: number, month: number, useMonth: boolean): number {
     let jd = CalendarConstants.JD_PERSIAN_EPOCH - 1 + 365 * (eyear - 1) + floor((8 * eyear + 21) / 33);
+
     if (month !== 0) {
-      jd += MONTH_COUNT[month][2];
+      const mc = MONTH_COUNT;
+      const m = floor(month);
+      const d = month - m;
+
+      jd += mc[m][2];
+
+      // Check if there is a fractional month part, and if so add the number
+      // of the days in the next month multiplied by the fraction
+      if (d !== 0) {
+        // number of days in Esfand determined by:
+        // "number of days between two vernal equinoxes"
+        const r: [number] = [0];
+        floorDiv(25 * (eyear - 1) + 11, 33, r);
+        const isLeap = r[0] < 8;
+
+        // note: the 'month' parameter must always be <= # months in the calendar
+        // year, so <= 12 in this case.
+        jd += d * mc[m + 1][isLeap ? 1 : 0];
+      }
     }
     return jd;
   }

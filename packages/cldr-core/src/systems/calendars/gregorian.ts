@@ -91,7 +91,18 @@ export class GregorianDate extends CalendarDate {
       jd += floor(y / 400) - floor(y / 100) + 2;
     }
     if (month !== 0) {
-      jd += MONTH_COUNT[month][isLeap ? 3 : 2];
+      const mc = MONTH_COUNT;
+      const m = floor(month);
+      const d = month - m;
+      jd += mc[m][isLeap ? 3 : 2];
+
+      // Check if there is a fractional month part, and if so add the number
+      // of the days in the next month multiplied by the fraction
+      if (d !== 0) {
+        // note: the 'month' parameter must always be <= # months in the calendar
+        // year, so <= 12 in this case.
+        jd += d * mc[m + 1][isLeap ? 1 : 0];
+      }
     }
     return jd;
   }

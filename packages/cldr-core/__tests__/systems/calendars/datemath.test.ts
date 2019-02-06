@@ -98,9 +98,8 @@ test('months', () => {
   q = date.add({ month: 1 });
   expect(q.toString()).toEqual('Gregorian 2000-04-11 04:00:25.000 America/New_York');
 
-  // TODO: support fractional months
-  // q = date.add({ month: 1.5 });
-  // expect(q.toString()).toEqual('Gregorian 2000-04-11 04:00:25.000 America/New_York');
+  q = date.add({ month: 1.5 });
+  expect(q.toString()).toEqual('Gregorian 2000-04-26 16:00:25.000 America/New_York');
 
   q = date.add({ month: 7 });
   expect(q.toString()).toEqual('Gregorian 2000-10-11 04:00:25.000 America/New_York');
@@ -116,6 +115,22 @@ test('months', () => {
 
   q = date.add({ month: 900 });
   expect(q.toString()).toEqual('Gregorian 2075-03-11 03:00:25.000 America/New_York');
+});
+
+test('persian months', () => {
+  const date: PersianDate = persian(BASE, NEW_YORK);
+  let q: PersianDate;
+  expect(date.toString()).toEqual('Persian 1378-12-21 03:00:25.000 America/New_York');
+
+  // Oddities show up with time and non-gregorian calendars, since the timezone
+  // rules are based on the gregorian calendar. So adding 1 month below shifts
+  // to the next persian year, but in gregorian calendar it crosses a daylight
+  // savings boundary for America/New_York, so the hour changes.
+  q = date.add({ month: 1 });
+  expect(q.toString()).toEqual('Persian 1379-01-21 04:00:25.000 America/New_York');
+
+  q = date.add({ month: 1.5 });
+  expect(q.toString()).toEqual('Persian 1379-02-05 16:00:25.000 America/New_York');
 });
 
 test('days', () => {
