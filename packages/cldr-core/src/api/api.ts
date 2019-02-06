@@ -20,6 +20,8 @@ import {
   DateRawFormatOptions,
   DecimalFormatOptions,
   ListPatternType,
+  MeasurementCategory,
+  MeasurementSystem,
   Quantity,
   RelativeTimeFormatOptions,
   UnitFormatOptions,
@@ -137,6 +139,13 @@ export interface General {
    * or "btt" for bottom-to-top.
    */
   lineOrder(): LineOrderType;
+
+  /**
+   * Returns the measurement system in use for the current locale generally,
+   * or for a specific measurement category. For example, to get the correct
+   * measurement system for temperature you must pass in the category 'temperature'.
+   */
+  measurementSystem(category?: MeasurementCategory): MeasurementSystem;
 
   /**
    * Format a list of items to string using the given list type.

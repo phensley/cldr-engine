@@ -7,7 +7,7 @@ import {
 } from '@phensley/cldr-schema';
 
 import { General } from '../api';
-import { ListPatternType } from '../../common';
+import { ListPatternType, MeasurementCategory, MeasurementSystem } from '../../common';
 import { Bundle } from '../../resource';
 import { Part } from '../../types';
 import { GeneralInternals, Internals } from '../../internals';
@@ -29,6 +29,34 @@ export class GeneralImpl implements General {
 
   lineOrder(): LineOrderType {
     return this.general.lineOrder(this.bundle) as LineOrderType;
+  }
+
+  measurementSystem(category?: MeasurementCategory): MeasurementSystem {
+    const region = this.bundle.region();
+    switch (category) {
+      case 'temperature':
+        switch (region) {
+          case 'BS':
+          case 'BZ':
+          case 'PR':
+          case 'PW':
+            return 'us';
+          default:
+            return 'metric';
+        }
+
+      default:
+        switch (region) {
+          case 'GB':
+            return 'uk';
+          case 'LR':
+          case 'MM':
+          case 'US':
+            return 'us';
+          default:
+            return 'metric';
+        }
+    }
   }
 
   formatList(items: string[], type?: ListPatternType): string {
