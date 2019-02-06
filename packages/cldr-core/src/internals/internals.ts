@@ -109,7 +109,8 @@ export interface NumberRenderer<R> {
   empty(): R;
   make(type: string, value: string): R;
   render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
-    decimalSymbol: string, minInt: number, grouping?: boolean): R;
+    decimalSymbol: string, minInt: number, grouping?: boolean,
+    exponent?: number): R;
   wrap(internal: WrapperInternals, raw: string, ...args: R[]): R;
 }
 

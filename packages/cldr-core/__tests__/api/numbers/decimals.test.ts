@@ -5,6 +5,7 @@ import {
   DecimalFormatStyleType,
   InternalsImpl,
   NumbersImpl,
+  Part,
   PrivateApiImpl
 } from '../../../src';
 
@@ -265,6 +266,32 @@ test('decimal percents', () => {
   expect(s).toEqual('-1‰');
 });
 
+test('decimal scientific', () => {
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatDecimal('5', { style: 'scientific' });
+  expect(s).toEqual('5');
+
+  s = api.formatDecimal('5', { style: 'scientific', minimumSignificantDigits: 2 });
+  expect(s).toEqual('5.0');
+
+  s = api.formatDecimal('123.456', { style: 'scientific', minimumSignificantDigits: 3 });
+  expect(s).toEqual('1.23E+2');
+
+  s = api.formatDecimal('21', { style: 'scientific', minimumSignificantDigits: 2 });
+  expect(s).toEqual('2.1E+1');
+
+  s = api.formatDecimal('1578000', { style: 'scientific', minimumSignificantDigits: 2 });
+  expect(s).toEqual('1.6E+6');
+
+  s = api.formatDecimal('-1.234567', { style: 'scientific', minimumSignificantDigits: 4 });
+  expect(s).toEqual('-1.235');
+
+  s = api.formatDecimal('-0.00012345', { style: 'scientific', minimumSignificantDigits: 3 });
+  expect(s).toEqual('-1.23E-4');
+});
+
 test('decimal rounding', () => {
   const api = numbersApi('en');
   let s: string;
@@ -322,7 +349,7 @@ test('decimal parts', () => {
   opts.style = 'percent';
   p = api.formatDecimalToParts('-1.234', opts);
   expect(p).toEqual([
-    { type: 'minus', value: '-' },
+    { type: 'sign', value: '-' },
     { type: 'digits', value: '123' },
     { type: 'percent', value: '%' }
   ]);
@@ -341,6 +368,72 @@ test('decimal parts', () => {
     { type: 'digits', value: '10' },
     { type: 'group', value: ',' },
     { type: 'digits', value: '000' }
+  ]);
+});
+
+test('decimal scientific parts', () => {
+  const api = numbersApi('en');
+  let p: Part[];
+
+  p = api.formatDecimalToParts('5', { style: 'scientific' });
+  expect(p).toEqual([
+    { type: 'digits', value: '5' }
+  ]);
+
+  p = api.formatDecimalToParts('5', { style: 'scientific', minimumSignificantDigits: 2 });
+  expect(p).toEqual([
+    { type: 'digits', value: '5' },
+    { type: 'decimal', value: '.' },
+    { type: 'digits', value: '0' }
+  ]);
+
+  p = api.formatDecimalToParts('123.456', { style: 'scientific', minimumSignificantDigits: 3 });
+  expect(p).toEqual([
+    {type: 'digits', value: '1'},
+    {type: 'decimal', value: '.'},
+    {type: 'digits', value: '23'},
+    {type: 'exponent', value: 'E'},
+    {type: 'sign', value: '+'},
+    {type: 'digits', value: '2'}
+  ]);
+
+  p = api.formatDecimalToParts('21', { style: 'scientific', minimumSignificantDigits: 2 });
+  expect(p).toEqual([
+    {type: 'digits', value: '2'},
+    {type: 'decimal', value: '.'},
+    {type: 'digits', value: '1'},
+    {type: 'exponent', value: 'E'},
+    {type: 'sign', value: '+'},
+    {type: 'digits', value: '1'}
+  ]);
+
+  p = api.formatDecimalToParts('1578000', { style: 'scientific', minimumSignificantDigits: 2 });
+  expect(p).toEqual([
+    {type: 'digits', value: '1'},
+    {type: 'decimal', value: '.'},
+    {type: 'digits', value: '6'},
+    {type: 'exponent', value: 'E'},
+    {type: 'sign', value: '+'},
+    {type: 'digits', value: '6'}
+  ]);
+
+  p = api.formatDecimalToParts('-1.234567', { style: 'scientific', minimumSignificantDigits: 4 });
+  expect(p).toEqual([
+    {type: 'sign', value: '-'},
+    {type: 'digits', value: '1'},
+    {type: 'decimal', value: '.'},
+    {type: 'digits', value: '235'}
+  ]);
+
+  p = api.formatDecimalToParts('-0.00012345', { style: 'scientific', minimumSignificantDigits: 3 });
+  expect(p).toEqual([
+    {type: 'sign', value: '-'},
+    {type: 'digits', value: '1'},
+    {type: 'decimal', value: '.'},
+    {type: 'digits', value: '23'},
+    {type: 'exponent', value: 'E'},
+    {type: 'sign', value: '-'},
+    {type: 'digits', value: '4'}
   ]);
 });
 

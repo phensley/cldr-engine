@@ -19,7 +19,7 @@ export class NumberContext {
   minSig: number = -1;
   currencyDigits: number = -1;
 
-  constructor(options: NumberFormatOptions, compact: boolean, currencyDigits: number = -1) {
+  constructor(options: NumberFormatOptions, compact: boolean, scientific: boolean, currencyDigits: number = -1) {
     const o = options;
     this.options = o;
     this.roundingMode = options.round || 'half-even';
@@ -30,14 +30,15 @@ export class NumberContext {
     // significant digits if any significant digit option is set.
     const optFrac = o.minimumFractionDigits !== undefined || o.maximumFractionDigits !== undefined;
     const optSig = o.minimumSignificantDigits !== undefined || o.maximumSignificantDigits !== undefined;
-    this.useSignificant = (compact && !optFrac) || optSig;
+    this.useSignificant = (scientific && !optFrac) || (compact && !optFrac) || optSig;
   }
 
   /**
-   * Set a pattern.
+   * Set a pattern. The 'scientific' flag indicates the pattern uses significant
+   * digits, which we will copy from the pattern's min/max fractions.
    */
-  setPattern(pattern: NumberPattern): void {
-    this._setPattern(pattern, -1, -1, -1);
+  setPattern(pattern: NumberPattern, scientific: boolean = false): void {
+    this._setPattern(pattern, scientific, -1, -1, -1);
   }
 
   /**
@@ -48,13 +49,27 @@ export class NumberContext {
     if (integerDigits === 1) {
       maxSigDigits++;
     }
-    this._setPattern(pattern, maxSigDigits, 1, maxFracDigits);
+    this._setPattern(pattern, false, maxSigDigits, 1, maxFracDigits);
   }
 
   /**
    * Adjust the scale of the number using the resolved parameters.
    */
-  adjust(n: Decimal): Decimal {
+  adjust(n: Decimal, scientific: boolean = false): Decimal {
+
+    // TODO: consider moving this logic into Decimal since it could be useful
+    // to adjust a number using several options in a single pass. Could be
+    // more efficient, making fewer copies.
+
+    if (this.useSignificant && scientific) {
+      if (this.minSig <= 0) {
+        this.minSig = 1;
+      }
+      if (this.maxSig <= 0) {
+        this.maxSig = 1;
+      }
+    }
+
     if (this.useSignificant && this.minSig > 0 && this.maxSig > 0) {
       if (n.precision() > this.maxSig) {
         // Scale the number to have at most the maximum significant digits.
@@ -76,6 +91,27 @@ export class NumberContext {
         n = n.setScale(scale, this.roundingMode);
       }
 
+      // in scientific mode, alter the exponent so that we have a single
+      // non-zero integer digit.
+      // console.log(`int digits ${n.integerDigits()} prec ${n.precision()} scale ${n.scale()}`);
+      // console.log(`prec`, n.precision(), n.scale());
+      // if (scientific) {
+        // if (n.integerDigits() > 1) {
+          // n = n.setScale(n.integerDigits() - 1);
+          // n = n.movePoint(1 - n.integerDigits());
+          // console.log(n.toString());
+          // n = n.shiftright(n.integerDigits() - 1);
+          // console.log(n.toString());
+          // n = n.shiftright()
+          // n = n.movePoint(1 - n.integerDigits());
+          // n = n.setScale(1 - precision);
+          // console.log('here', n.toString());
+          // n = n.shiftright(n.integerDigits() - 1);
+          // n = n.movePoint(-(n.integerDigits() - 1));
+          // console.log(n.exponent(), n.alignexp());
+      //   }
+      // }
+
     } else {
       // Precise control over number of integer and decimal digits to include, e.g. when
       // formatting exact currency values.
@@ -96,7 +132,8 @@ export class NumberContext {
   /**
    * Set context parameters from options, pattern and significant digit arguments.
    */
-  private _setPattern(pattern: NumberPattern, maxSigDigits: number, minSigDigits: number, maxFracDigits: number): void {
+  private _setPattern(pattern: NumberPattern,
+      scientific: boolean, maxSigDigits: number, minSigDigits: number, maxFracDigits: number): void {
 
     const o = this.options;
 
@@ -127,9 +164,12 @@ export class NumberContext {
       }
     }
 
-    if (this.useSignificant) {
-      let minSig = orDefault(o.minimumSignificantDigits, minSigDigits);
-      let maxSig = orDefault(o.maximumSignificantDigits, maxSigDigits);
+    if (this.useSignificant || scientific) {
+      const optMinSig = o.minimumSignificantDigits;
+      const optMaxSig = o.maximumSignificantDigits;
+
+      let minSig = scientific ? orDefault(optMinSig, pattern.minFrac) : orDefault(optMinSig, minSigDigits);
+      let maxSig = scientific ? orDefault(optMaxSig, pattern.maxFrac) : orDefault(optMaxSig, maxSigDigits);
 
       if (minSig !== -1 && minSig > maxSig) {
         maxSig = minSig;

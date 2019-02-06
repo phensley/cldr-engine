@@ -23,7 +23,7 @@ export class DecimalNumberingSystem extends NumberingSystem {
 
   formatString(n: DecimalArg, groupDigits?: boolean, minInt: number = 1): string {
     if (!groupDigits && isInteger(n)) {
-      return this._fastFormatDecimal(String(n), minInt);
+      return fastFormatDecimal(String(n), this.digits, minInt);
     }
     return this._formatDecimal(new StringDecimalFormatter(), n, groupDigits, minInt);
   }
@@ -56,39 +56,42 @@ export class DecimalNumberingSystem extends NumberingSystem {
     return f.render();
   }
 
-  protected _fastFormatDecimal(n: string, minInt: number): string {
-    let r = '';
-    const dg = this.digits;
-    const len = n.length;
-    for (let i = 0; i < len; i++) {
-      const c = n.charCodeAt(i);
-      switch (c) {
-        case Chars.DIGIT0:
-        case Chars.DIGIT1:
-        case Chars.DIGIT2:
-        case Chars.DIGIT3:
-        case Chars.DIGIT4:
-        case Chars.DIGIT5:
-        case Chars.DIGIT6:
-        case Chars.DIGIT7:
-        case Chars.DIGIT8:
-        case Chars.DIGIT9:
-          r += dg[c - Chars.DIGIT0];
-          break;
-      }
-    }
-    // Left pad zeros if minimum integer digits > formatted length
-    let diff = minInt - r.length;
-    if (diff > 0) {
-      let p = '';
-      while (diff-- > 0) {
-        p += dg[0];
-      }
-      return p + r;
-    }
-    return r;
-  }
 }
+
+/**
+ * Fast formatter for integers, no grouping, etc.
+ */
+export const fastFormatDecimal = (n: string, digits: string[], minInt: number): string => {
+  let r = '';
+  const len = n.length;
+  for (let i = 0; i < len; i++) {
+    const c = n.charCodeAt(i);
+    switch (c) {
+      case Chars.DIGIT0:
+      case Chars.DIGIT1:
+      case Chars.DIGIT2:
+      case Chars.DIGIT3:
+      case Chars.DIGIT4:
+      case Chars.DIGIT5:
+      case Chars.DIGIT6:
+      case Chars.DIGIT7:
+      case Chars.DIGIT8:
+      case Chars.DIGIT9:
+        r += digits[c - Chars.DIGIT0];
+        break;
+    }
+  }
+  // Left pad zeros if minimum integer digits > formatted length
+  let diff = minInt - r.length;
+  if (diff > 0) {
+    let p = '';
+    while (diff-- > 0) {
+      p += digits[0];
+    }
+    return p + r;
+  }
+  return r;
+};
 
 const INTERNAL_SYMBOLS: NumberSymbols = {
   decimal: '.',

@@ -3,6 +3,7 @@ import { NumberField, NumberPattern } from '../../parsing/patterns/number';
 import { Decimal, DecimalFormatter, PartsDecimalFormatter, StringDecimalFormatter } from '../../types/numbers';
 import { Part } from '../../types';
 import { NumberRenderer, WrapperInternals } from '../internals';
+import { fastFormatDecimal } from '../../systems/numbering';
 
 export interface AbstractValue<R> {
   length(): number;
@@ -87,12 +88,14 @@ export class PartsValue implements AbstractValue<Part[]> {
 
 export abstract class NumberFormatter<R> implements NumberRenderer<R> {
 
-  constructor(readonly params: NumberParams) { }
+  constructor(
+    readonly params: NumberParams) { }
 
   render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
-      decimalSymbol: string, minInt: number, grouping: boolean = true): R {
+      decimalSymbol: string, minInt: number, grouping: boolean = true,
+      exponent?: number): R {
 
-    const symbols = this.params.symbols;
+    const { symbols } = this.params;
     const currency: boolean = currencySymbol !== '';
 
     const decimal = decimalSymbol ? decimalSymbol
@@ -149,7 +152,7 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
           }
 
           case NumberField.MINUS:
-            res.add('minus', this.params.symbols.minusSign);
+            res.add('sign', symbols.minusSign);
             break;
 
           case NumberField.NUMBER:
@@ -160,6 +163,17 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
           case NumberField.PERCENT:
             res.add('percent', percentSymbol);
             break;
+
+          case NumberField.EXPONENT:
+            // Don't emit the exponent if undefined or zero
+            if (exponent) {
+              res.add('exponent', symbols.exponential);
+              const sign = exponent < 0 ? symbols.minusSign : symbols.plusSign;
+              res.add('sign', sign);
+              const exp = fastFormatDecimal(`${exponent}`, this.params.digits, 1);
+              res.add('digits', exp);
+              break;
+            }
         }
       }
     }

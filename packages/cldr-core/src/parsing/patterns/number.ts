@@ -2,7 +2,9 @@ export const enum NumberField {
   MINUS = 0,
   PERCENT = 1,
   CURRENCY = 2,
-  NUMBER = 3
+  NUMBER = 3,
+  EXPONENT = 4,
+  PLUS = 5
 }
 
 export interface NumberPattern {
@@ -79,6 +81,16 @@ class NumberPatternParser {
       case '\u00a4':
         this.pushText();
         curr.nodes.push(NumberField.CURRENCY);
+        break;
+
+      case 'E':
+        this.pushText();
+        curr.nodes.push(NumberField.EXPONENT);
+        break;
+
+      case '+':
+        this.pushText();
+        curr.nodes.push(NumberField.PLUS);
         break;
 
       case '#':

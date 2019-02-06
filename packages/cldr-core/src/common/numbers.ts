@@ -17,7 +17,7 @@ export interface NumberFormatOptions {
 }
 
 export type DecimalFormatStyleType =
-  'decimal' | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled' | 'short' | 'long';
+  'decimal' | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled' | 'short' | 'long' | 'scientific';
 
 export type CurrencyFormatStyleType =
   'symbol' | 'accounting' | 'code' | 'name' | 'short';

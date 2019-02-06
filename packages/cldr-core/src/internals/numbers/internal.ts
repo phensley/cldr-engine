@@ -88,7 +88,7 @@ export class NumberInternalsImpl implements NumberInternals {
         const patternImpl = isShort ? (useLatn ? latnInfo.decimalFormats.short : decimalFormats.short)
           : (useLatn ? latnInfo.decimalFormats.long : decimalFormats.long);
 
-        const ctx = new NumberContext(options, true);
+        const ctx = new NumberContext(options, true, false);
 
         // Adjust the number using the compact pattern and divisor.
         const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
@@ -130,7 +130,7 @@ export class NumberInternalsImpl implements NumberInternals {
           params.symbols.percentSign : params.symbols.perMille;
 
         // Adjust number using pattern and options, then render.
-        const ctx = new NumberContext(options, false, -1);
+        const ctx = new NumberContext(options, false, false, -1);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         const operands = n.operands();
@@ -147,7 +147,7 @@ export class NumberInternalsImpl implements NumberInternals {
         let pattern = this.getNumberPattern(standardRaw, n.isNegative());
 
         // Adjust number using pattern and options, then render.
-        const ctx = new NumberContext(options, false, -1);
+        const ctx = new NumberContext(options, false, false, -1);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         const operands = n.operands();
@@ -159,9 +159,24 @@ export class NumberInternalsImpl implements NumberInternals {
         break;
       }
 
-      default:
-        result = renderer.empty();
-        break;
+    case 'scientific': {
+      const sciFormat = info.scientificFormat;
+      const ctx = new NumberContext(options, false, true, -1);
+      const latnSciFormat = this.numbers.numberSystem.get('latn').scientificFormat;
+      const format = sciFormat.get(bundle) || latnSciFormat.get(bundle);
+      const pattern = this.getNumberPattern(format, n.isNegative());
+      ctx.setPattern(pattern, true);
+      n = ctx.adjust(n, true);
+
+      // Split number into coeffcient and exponent
+      const [coeff, exponent] = n.scientific();
+      result = renderer.render(coeff, pattern, '', '', '', 1, false, exponent);
+      break;
+    }
+
+    default:
+      result = renderer.empty();
+      break;
     }
 
     // No valid style matched
@@ -174,8 +189,6 @@ export class NumberInternalsImpl implements NumberInternals {
     const fractions = getCurrencyFractions(code);
 
     // TODO: display context support
-    // const width = options.symbolWidth === 'narrow' ? Alt.NARROW : Alt.NONE;
-
     const width = options.symbolWidth === 'narrow' ? 'narrow' : 'none';
     const style = options.style === undefined ? 'symbol' : options.style;
 
@@ -198,7 +211,7 @@ export class NumberInternalsImpl implements NumberInternals {
         let pattern = this.getNumberPattern(raw, n.isNegative());
 
         // Adjust number using pattern and options, then render.
-        const ctx = new NumberContext(options, false, fractions.digits);
+        const ctx = new NumberContext(options, false, false, fractions.digits);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
 
@@ -222,7 +235,7 @@ export class NumberInternalsImpl implements NumberInternals {
         // correct pluralized pattern for the final rounded form.
         const patternImpl = currencyFormats.short;
 
-        const ctx = new NumberContext(options, true, fractions.digits);
+        const ctx = new NumberContext(options, true, false, fractions.digits);
         const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
 
         // Adjust the number using the compact pattern and divisor.
@@ -255,7 +268,7 @@ export class NumberInternalsImpl implements NumberInternals {
         let pattern = this.getNumberPattern(raw, n.isNegative());
 
         // Adjust number using pattern and options, then render.
-        const ctx = new NumberContext(options, false, fractions.digits);
+        const ctx = new NumberContext(options, false, false, fractions.digits);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
 
