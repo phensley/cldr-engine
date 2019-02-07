@@ -1,10 +1,7 @@
 import * as fs from 'fs';
 import { join } from 'path';
-import { encoding } from '@phensley/cldr-core';
-import { getSupplemental } from '../../../cldr';
-import { enumName, escapeString, formatSource, lineWrap, Code, HEADER } from './util';
-
-const { base100encode, bitarrayCreate } = encoding;
+import { base100encode, bitarrayCreate } from '@phensley/cldr-utils';
+import { enumName, escapeString, lineWrap, Code, HEADER } from './util';
 
 class IdArray {
 

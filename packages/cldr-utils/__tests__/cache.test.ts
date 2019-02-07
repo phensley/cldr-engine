@@ -1,4 +1,4 @@
-import { Cache } from '../../src/utils/cache';
+import { Cache } from '../src/cache';
 
 interface Foo {
   key: string;

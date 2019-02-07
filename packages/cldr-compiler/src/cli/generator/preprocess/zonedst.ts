@@ -1,9 +1,6 @@
 import * as fs from 'fs';
 import { join } from 'path';
-import { encoding } from '@phensley/cldr-core';
-import { getSupplemental } from '../../../cldr';
-
-const { base100encode, bitarrayCreate } = encoding;
+import { base100encode, bitarrayCreate } from '@phensley/cldr-utils';
 
 export const getZoneDST = (): any => {
   const path = join(__dirname, '..', '..', '..', '..', 'data', 'timezones', 'temp', 'tzdata.json');

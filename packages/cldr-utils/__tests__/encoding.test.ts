@@ -1,10 +1,7 @@
-import {
-  base100decode, base100encode,
-  bitarrayCreate, bitarrayGet,
-  vuintDecode, vuintEncode,
-  z85Decode, z85Encode,
-  zigzag32Decode, zigzag32Encode
-} from '../../src/utils/encoding';
+import { base100decode, base100encode } from '../src/base100';
+import { bitarrayCreate, bitarrayGet } from '../src/bitarray';
+import { vuintDecode, z85Decode, zigzag32Decode } from '../src/decoding';
+import { vuintEncode, z85Encode, zigzag32Encode } from '../src/encoding';
 
 const uint8 = (n: number[]) => new Uint8Array(n);
 

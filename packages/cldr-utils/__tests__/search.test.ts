@@ -1,4 +1,4 @@
-import { binarySearch } from '../../src/utils/search';
+import { binarySearch } from '../src/search';
 
 test('binary search', () => {
   let nums: number[] = [];

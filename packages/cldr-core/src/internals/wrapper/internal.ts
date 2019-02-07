@@ -1,5 +1,6 @@
+import { Cache } from '@phensley/cldr-utils';
+
 import { WrapperInternals } from '../../internals/internals';
-import { Cache } from '../../utils/cache';
 import { parseWrapperPattern, WrapperNode } from '../../parsing/patterns/wrapper';
 import { Part } from '../../types';
 

@@ -1,7 +1,7 @@
 {
-  "name": "@phensley/cldr-core",
+  "name": "@phensley/cldr-utils",
   "version": "0.7.5",
-  "description": "Core library for @phensley/cldr",
+  "description": "Utilities for cldr-engine packages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "Patrick Hensley <pathensley@gmail.com>",
@@ -15,7 +15,7 @@
     "access": "public"
   },
   "scripts": {
-    "bench": "ts-node __benchmarks__/",
+    "bench:off": "ts-node __benchmarks__/",
     "build": "tsc -p ./tsconfig.build.json",
     "build:watch": "tsc -p ./tsconfig.build.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./.scratch",
@@ -27,11 +27,6 @@
   "files": [
     "lib/"
   ],
-  "dependencies": {
-    "@phensley/cldr-schema": "^0.7.5",
-    "@phensley/cldr-utils": "^0.7.5",
-    "@phensley/decimal": "^0.7.5"
-  },
   "devDependencies": {
     "@types/jest": "^23.1.1",
     "beautify-benchmark": "^0.2.4",

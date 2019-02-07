@@ -6,6 +6,8 @@ import {
   PluralType,
 } from '@phensley/cldr-schema';
 
+import { Cache } from '@phensley/cldr-utils';
+
 import {
   CurrencyFormatOptions,
   CurrencySymbolWidthType,
@@ -16,7 +18,6 @@ import { Decimal, Part } from '../../types';
 import { NumberContext } from './context';
 import { NumberParams } from '../../common/private';
 import { parseNumberPattern, NumberPattern } from '../../parsing/patterns/number';
-import { Cache } from '../../utils/cache';
 import { getCurrencyFractions } from './util';
 import { Bundle } from '../../resource';
 import { Internals, NumberInternals, NumberRenderer } from '../../internals/internals';

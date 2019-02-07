@@ -1,8 +1,6 @@
+import { vuintEncode, z85Encode } from '@phensley/cldr-utils';
 import { Code, HEADER } from './util';
 import { getSupplemental } from '../../../cldr';
-import { encoding } from '@phensley/cldr-core';
-
-const { vuintEncode, z85Encode } = encoding;
 
 const KEYS: string[] = ['afternoon1', 'evening1', 'midnight', 'morning1', 'morning2', 'night1', 'noon'];
 

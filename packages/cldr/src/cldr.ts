@@ -9,8 +9,6 @@ import {
   LanguageResolver,
   LanguageTag,
   Locale,
-  LocaleMatcher,
-  LRU,
   Numbers,
   NumbersImpl,
   Pack,
@@ -18,6 +16,7 @@ import {
   Units,
   UnitsImpl
 } from '@phensley/cldr-core';
+import { LRU } from '@phensley/cldr-utils';
 
 /**
  * Parse a locale identifier and resolve it. This returns a Locale object

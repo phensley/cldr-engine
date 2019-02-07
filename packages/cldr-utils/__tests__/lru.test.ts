@@ -1,4 +1,4 @@
-import { LRU } from '../../src/utils/lru';
+import { LRU } from '../src/lru';
 
 test('basics', () => {
   const cache = new LRU<string, number>(5);

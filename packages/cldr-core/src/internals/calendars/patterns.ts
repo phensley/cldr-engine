@@ -1,3 +1,5 @@
+import { LRU } from '@phensley/cldr-utils';
+
 import { CalendarSchema, EraWidthType, PluralType } from '@phensley/cldr-schema';
 import { timeData } from './autogen.timedata';
 import { Internals } from '../../internals';
@@ -6,7 +8,6 @@ import { DatePatternMatcher, DateSkeleton, DateSkeletonParser } from './skeleton
 import { parseDatePattern, DateTimeNode } from '../../parsing/patterns/date';
 import { CalendarDate } from '../../systems/calendars';
 import { coerceDecimal } from '../../types';
-import { LRU } from '../../utils/lru';
 
 export interface CachedSkeletonRequest {
   dateSkel?: DateSkeleton;

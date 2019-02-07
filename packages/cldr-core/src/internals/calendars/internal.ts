@@ -1,3 +1,5 @@
+import { Cache } from '@phensley/cldr-utils';
+
 import { CalendarDate, CalendarType } from '../../systems/calendars';
 import { CalendarSchema, DayPeriodType, Schema } from '@phensley/cldr-schema';
 import { calendarIds, calendarPrefData } from './autogen.calprefs';
@@ -9,7 +11,6 @@ import { Renderer } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
 import { CalendarFormatterImpl } from './formatterimpl';
 import { Internals } from '../internals';
-import { Cache } from '../../utils/cache';
 import { intervalPatternBoundary, parseDatePattern, DateTimeNode } from '../../parsing/patterns/date';
 import { DayPeriodRules } from './rules';
 

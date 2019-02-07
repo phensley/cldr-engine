@@ -2,9 +2,9 @@ import * as fs from 'fs';
 import { join } from 'path';
 import * as zlib from 'zlib';
 
+import { Cache } from '@phensley/cldr-utils';
 import { LanguageResolver } from '../../src/locale/resolver';
 import { Bundle, Pack } from '../../src/resource';
-import { Cache } from '../../src/utils/cache';
 
 /**
  * Load a resource pack for a given language.

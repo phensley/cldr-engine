@@ -1,6 +1,7 @@
+import { Cache } from '@phensley/cldr-utils';
+
 import { Internals } from '../internals';
 import { Bundle } from '../../resource';
-import { Cache } from '../../utils/cache';
 import { DateFormatOptions, DateIntervalFormatOptions } from '../../common';
 import { DateTimeNode } from '../../parsing/patterns/date';
 import { CalendarDate } from '../../systems/calendars';

@@ -1,4 +1,5 @@
-import { vuintDecode, z85Decode } from '../utils/encoding';
+import { vuintDecode, z85Decode } from '@phensley/cldr-utils';
+
 import { LanguageResolver, LanguageTag } from '../locale';
 import { Bundle, ExceptionIndex, StringBundle } from './bundle';
 

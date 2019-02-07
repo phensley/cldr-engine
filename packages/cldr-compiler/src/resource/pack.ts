@@ -1,4 +1,5 @@
-import { encoding, LanguageResolver, LanguageTag, Locale } from '@phensley/cldr-core';
+import { LanguageResolver, LanguageTag, Locale } from '@phensley/cldr-core';
+import { vuintEncode, z85Encode } from '@phensley/cldr-utils';
 import { getOther } from '../cldr';
 
 // Index default content for each language and language+script combination.
@@ -8,8 +9,6 @@ getOther().DefaultContent.forEach((s: string) => {
   const { id, tag } = Locale.resolve(s);
   defaultContent.add(tag.expanded());
 });
-
-const { vuintEncode, z85Encode } = encoding;
 
 // TAB delimiter selected as it is (a) a single character, (b) does not occur in
 // the CLDR JSON data, (c) is safe to encode in JSON, (d) separates strings

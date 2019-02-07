@@ -10,12 +10,4 @@ export * from './resource';
 export * from './systems';
 export * from './types';
 
-export { LRU } from './utils/lru';
 export { leftPad } from './utils/string';
-
-// Used by cldr-compiler
-import * as encoding from './utils/encoding';
-
-export {
-  encoding
-};
