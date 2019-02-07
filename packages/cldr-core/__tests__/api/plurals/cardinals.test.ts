@@ -1,4 +1,3 @@
-import { Plural } from '@phensley/cldr-schema';
 import { Decimal } from '../../../src/types/numbers';
 import { InternalsImpl } from '../../../src';
 

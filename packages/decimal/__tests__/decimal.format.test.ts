@@ -2,17 +2,21 @@ import { Decimal, Part, PartsDecimalFormatter, StringDecimalFormatter } from '..
 
 const parse = (s: string) => new Decimal(s);
 
-const format = (s: string, opts: any[]): string => {
+type FormatArgs = [string, string, number, number, number, number];
+
+const format = (s: string, opts: FormatArgs): string => {
   const n = parse(s);
   const f = new StringDecimalFormatter();
-  n.format.apply(n, [f].concat(opts));
+  const [ d, g, mi, mg, pg, sg ] = opts;
+  n.format(f, d, g, mi, mg, pg, sg);
   return f.render();
 };
 
 const formatParts = (s: string, opts: any[]): Part[] => {
   const n = parse(s);
   const f = new PartsDecimalFormatter(opts[0], opts[1]);
-  n.format.apply(n, [f].concat(opts));
+  const [ d, g, mi, mg, pg, sg ] = opts;
+  n.format(f, d, g, mi, mg, pg, sg);
   return f.render();
 };
 
@@ -34,7 +38,7 @@ test('string', () => {
 });
 
 test('format', () => {
-  const opts = ['.', ',', 1, 1, 3, 4];
+  const opts: FormatArgs = ['.', ',', 1, 1, 3, 4];
   expect(format('.00123', opts)).toEqual('0.00123');
   expect(format('.00123', opts)).toEqual('0.00123');
 
@@ -57,7 +61,7 @@ test('format', () => {
 });
 
 test('leading integer zeros', () => {
-  let opts = ['.', ',', 5, 1, 3, -1];
+  let opts: FormatArgs = ['.', ',', 5, 1, 3, -1];
   expect(format('0', opts)).toEqual('00,000');
   expect(format('0.0', opts)).toEqual('00,000');
   expect(format('0e10', opts)).toEqual('00,000');

@@ -1,12 +1,12 @@
 import { LanguageResolver } from '../../src/locale/resolver';
-import { LanguageMatch, LocaleMatcher } from '../../src/locale/matcher';
+import { LocaleMatch, LocaleMatcher } from '../../src/locale/matcher';
 import { loadMatchCases } from './util';
 
 const resolve = LanguageResolver.resolve;
 
 test('basics', () => {
   const matcher = new LocaleMatcher('en, en_GB, zh, pt_AR, es-419');
-  const m: LanguageMatch = matcher.match('en-AU');
+  const m: LocaleMatch = matcher.match('en-AU');
   expect(m.distance).toEqual(3);
   expect(m.locale.id).toEqual('en_GB');
 });
@@ -14,7 +14,7 @@ test('basics', () => {
 test('constructor args', () => {
   const expected = { locale: { id: 'en_GB', tag: resolve('en_GB') }, distance: 3 };
   let matcher: LocaleMatcher;
-  let m: LanguageMatch;
+  let m: LocaleMatch;
 
   matcher = new LocaleMatcher('en \t en_GB \n , zh');
   m = matcher.match('en-AU');

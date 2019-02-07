@@ -1,4 +1,3 @@
-import { Plural } from '@phensley/cldr-schema';
 import { PluralCond, PluralExpr } from '../../../src/internals/plurals/types';
 
 test('parse compact', () => {
