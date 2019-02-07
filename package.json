@@ -22,7 +22,7 @@
   "cldr-data-urls-json": "../../config/cldr-data-urls.json",
   "devDependencies": {
     "@types/glob": "^5.0.34",
-    "@types/jest": "^23.1.1",
+    "@types/jest": "^23.3.14",
     "@types/lodash": "4.14.110",
     "@types/node": "^10.12.21",
     "dependency-cruiser": "^4.12.0",

@@ -44,7 +44,7 @@
   "devDependencies": {
     "@microsoft/api-extractor": "^6.3.0",
     "@phensley/cldr-compiler": "^0.7.6",
-    "@types/jest": "^23.1.1",
+    "@types/jest": "^23.3.14",
     "@types/node": "^10.12.21",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",

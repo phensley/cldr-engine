@@ -1,6 +1,4 @@
-import { Suite } from 'benchmark';
-import { join } from 'path';
-import { makeSuite, readLines } from '../util';
+import { makeSuite } from '../util';
 import { DecimalFormatStyleType, InternalsImpl, NumbersImpl, PrivateApiImpl } from '../../src';
 import { EN, ES } from '../bundles';
 import { Bundle } from '../../src/resource';
