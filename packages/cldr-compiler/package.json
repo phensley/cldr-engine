@@ -3,6 +3,7 @@
   "version": "0.7.6",
   "description": "Compiler for @phensley/cldr",
   "main": "lib/index.js",
+  "module": "lib-es/index.js",
   "types": "lib/index.d.ts",
   "author": "Patrick Hensley <pathensley@gmail.com>",
   "license": "Apache-2.0",
@@ -18,7 +19,9 @@
     "cldr-compiler": "./bin/compiler.js"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.build.json",
+    "build": "yarn build:cj && yarn build:es",
+    "build:cj": "tsc -p ./tsconfig.build.json",
+    "build:es": "tsc -p ./tsconfig.build.json --module esnext --outDir lib-es",
     "build:watch": "tsc -p ./tsconfig.build.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib",
     "coverage": "jest --coverage --runInBand --no-cache",
@@ -28,7 +31,8 @@
   },
   "files": [
     "bin",
-    "lib/"
+    "lib/",
+    "lib-es/"
   ],
   "dependencies": {
     "@phensley/cldr-core": "^0.7.6",

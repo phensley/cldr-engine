@@ -3,6 +3,7 @@
   "version": "0.7.6",
   "description": "Arbitrary precision decimal math",
   "main": "lib/index.js",
+  "module": "lib-es/index.js",
   "types": "lib/index.d.ts",
   "author": "Patrick Hensley <pathensley@gmail.com>",
   "license": "Apache-2.0",
@@ -16,7 +17,9 @@
   },
   "scripts": {
     "bench:off": "ts-node __benchmarks__/",
-    "build": "tsc -p ./tsconfig.build.json",
+    "build": "yarn build:cj && yarn build:es",
+    "build:cj": "tsc -p ./tsconfig.build.json",
+    "build:es": "tsc -p ./tsconfig.build.json --module esnext --outDir lib-es",
     "build:watch": "tsc -p ./tsconfig.build.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./.scratch",
     "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
@@ -25,7 +28,8 @@
     "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
   "files": [
-    "lib/"
+    "lib/",
+    "lib-es/"
   ],
   "devDependencies": {
     "@types/jest": "^23.3.14",

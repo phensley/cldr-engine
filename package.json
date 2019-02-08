@@ -7,17 +7,19 @@
     "api": "lerna run api",
     "bench": "lerna run --stream --concurrency=1 bench",
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
+    "build": "lerna run build build:es",
     "build:watch": "lerna run build:watch --parallel",
     "clean": "lerna run clean && rimraf ./coverage && jest --clearCache",
     "clean:full": "yarn clean && rimraf ./node_modules",
     "depgraph": "depcruise -T dot packages/cldr/lib | dot -T pdf > depgraph.pdf",
+    "link-all": "lerna exec yarn link",
     "lint": "lerna run build && lerna run lint",
     "release": "lerna run clean && lerna run lint && lerna publish --force-publish=* --npm-client=npm",
     "stress": "lerna run --stream --concurrency=1 stress",
     "test": "rimraf ./coverage && jest --coverage --verbose -i --no-cache",
     "test:codecov": "rimraf ./coverage && jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache",
-    "test:watch": "jest --watch --runInBand"
+    "test:watch": "jest --watch --runInBand",
+    "unlink-all": "lerna exec yarn unlink"
   },
   "cldr-data-urls-json": "../../config/cldr-data-urls.json",
   "devDependencies": {
