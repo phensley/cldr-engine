@@ -129,7 +129,7 @@ class CLDRFramework {
   // (undocumented)
   protected readonly options: CLDROptions;
   // (undocumented)
-  protected readonly packCache: LRU<string, Pack>;
+  protected readonly packCache: LRU<Pack>;
 }
 
 // @alpha
