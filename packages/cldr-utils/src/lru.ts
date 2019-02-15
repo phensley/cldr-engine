@@ -1,20 +1,21 @@
 
 const DEFAULT_CAPACITY = 100;
 
-export type Node<K, V> = { key: K, val: V, next?: Node<K, V>, prev?: Node<K, V> };
+export type Key = string | number;
+type Node<V> = { key: Key, val: V, next?: Node<V>, prev?: Node<V> };
 
 /**
  * Cache evicts the least-recently-used key when capacity is exceeded.
  */
-export class LRU<K, V> {
+export class LRU<V> {
 
-  private readonly storage: Map<K, Node<K, V>> = new Map();
-  private readonly root: Node<K, V>;
+  private readonly storage: Map<Key, Node<V>> = new Map();
+  private readonly root: Node<V>;
   private readonly capacity: number;
 
   constructor(capacity: number = DEFAULT_CAPACITY) {
     this.capacity = capacity;
-    const root = { } as Node<K, V>;
+    const root = { } as Node<V>;
     root.next = root;
     root.prev = root;
     this.root = root;
@@ -24,31 +25,48 @@ export class LRU<K, V> {
     return this.storage.size;
   }
 
-  get(key: K): V | undefined {
+  get(key: Key): V | undefined {
     const n = this.storage.get(key);
-    if (n === undefined) {
-      return n;
+    if (!n) {
+      return undefined;
     }
     this.moveFront(n);
     return n.val;
   }
 
-  set(key: K, val: V): void {
+  set(key: Key, val: V): void {
+    if (this.capacity === 0) {
+      return;
+    }
+
     let n = this.storage.get(key);
-    if (n === undefined) {
-      n = { key, val };
-      this.storage.set(key, n);
-    } else {
+
+    // Key already exists, so replace its value and bump it
+    // to the front. Size does not change.
+    if (n) {
       n.val = val;
+      this.moveFront(n);
+      return;
     }
-    this.moveFront(n);
-    if (this.storage.size > this.capacity) {
-      const oldest = this.root.prev;
-      if (oldest) {
-        this.storage.delete(oldest.key);
-        this.remove(oldest);
+
+    // The lru is full, so reuse the oldest node to keep the
+    // total node allocation stable.
+    if (this.storage.size === this.capacity) {
+      const old = this.root.prev;
+      if (old !== undefined) {
+        this.storage.delete(old.key);
+        this.storage.set(key, old);
+        old.key = key;
+        old.val = val;
+        this.moveFront(old);
       }
+      return;
     }
+
+    // The lru is not full, so allocate a new node.
+    n = { key, val };
+    this.storage.set(key, n);
+    this.insert(n, this.root);
   }
 
   toString(): string {
@@ -64,11 +82,11 @@ export class LRU<K, V> {
     return res;
   }
 
-  protected moveFront(n: Node<K, V>): void {
+  protected moveFront(n: Node<V>): void {
     this.insert(this.remove(n), this.root);
   }
 
-  protected insert(e: Node<K, V>, at: Node<K, V>): Node<K, V> {
+  protected insert(e: Node<V>, at: Node<V>): Node<V> {
     const n = at.next;
     at.next = e;
     e.prev = at;
@@ -79,7 +97,7 @@ export class LRU<K, V> {
     return e;
   }
 
-  protected remove(n: Node<K, V>): Node<K, V> {
+  protected remove(n: Node<V>): Node<V> {
     if (n.prev) {
       n.prev.next = n.next;
     }

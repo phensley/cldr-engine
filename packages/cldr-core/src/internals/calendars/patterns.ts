@@ -36,10 +36,10 @@ export class CalendarPatterns {
 
   protected language: string;
   protected region: string;
-  protected namesCache: LRU<string, { [x: string]: { [y: string]: string }}>;
+  protected namesCache: LRU<{ [x: string]: { [y: string]: string }}>;
   protected skeletonParser: DateSkeletonParser;
-  protected skeletonRequestCache: LRU<string, CachedSkeletonRequest>;
-  protected intervalRequestCache: LRU<string, CachedIntervalRequest>;
+  protected skeletonRequestCache: LRU<CachedSkeletonRequest>;
+  protected intervalRequestCache: LRU<CachedIntervalRequest>;
   protected dateFormats: { [x: string]: string };
   protected timeFormats: { [x: string]: string };
   protected wrapperFormats: { [x: string]: string };

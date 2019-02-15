@@ -187,7 +187,7 @@ export class CLDROptions {
  */
 export class CLDRFramework {
 
-  protected readonly packCache: LRU<string, Pack>;
+  protected readonly packCache: LRU<Pack>;
   protected readonly loader?: (language: string) => any;
   protected readonly asyncLoader?: (language: string) => Promise<any>;
   protected readonly internals: Internals;

@@ -24,7 +24,7 @@ interface ZoneData {
 
 export class ZoneInfoCache {
 
-  private zoneData: LRU<string, ZoneData>;
+  private zoneData: LRU<ZoneData>;
 
   constructor() {
     this.zoneData = new LRU(50);

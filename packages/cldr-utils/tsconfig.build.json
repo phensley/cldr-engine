@@ -7,6 +7,7 @@
     "src/**/*.ts"
   ],
   "exclude": [
+    "__benchmarks__/**/*",
     "__tests__/**/*"
   ]
 }

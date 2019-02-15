@@ -5,6 +5,7 @@
   },
   "include": [
     "src/**/*",
+    "__benchmarks__/**/*",
     "__tests__/**/*"
   ]
 }

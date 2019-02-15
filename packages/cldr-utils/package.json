@@ -16,7 +16,7 @@
     "access": "public"
   },
   "scripts": {
-    "bench:off": "ts-node __benchmarks__/",
+    "bench": "ts-node __benchmarks__/",
     "build": "yarn build:cj && yarn build:es",
     "build:cj": "tsc -p ./tsconfig.build.json",
     "build:es": "tsc -p ./tsconfig.build.json --module esnext --outDir lib-es",

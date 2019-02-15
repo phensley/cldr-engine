@@ -1,7 +1,7 @@
 import { LRU } from '../src/lru';
 
 test('basics', () => {
-  const cache = new LRU<string, number>(5);
+  const cache = new LRU<number>(5);
   cache.set('aaa', 1);
   cache.set('bbb', 2);
   cache.set('ccc', 3);
@@ -25,7 +25,7 @@ test('basics', () => {
 });
 
 test('defaults', () => {
-  const cache = new LRU<number, string>();
+  const cache = new LRU<string>();
   for (let i = 0; i < 200; i++) {
     cache.set(i, String(i));
   }
@@ -43,7 +43,7 @@ test('zero capacity', () => {
   // Special case where nothing is retained in the lru. This is used
   // to performance test code that depends on a cache, in order to
   // factor out the caching itself.
-  const cache = new LRU<string, number>(0);
+  const cache = new LRU<number>(0);
   cache.set('aaa', 1);
   expect(cache.size()).toEqual(0);
   expect(cache.get('aaa')).toEqual(undefined);
