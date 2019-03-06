@@ -45,7 +45,6 @@ test('zoned date time gregorian epoch', () => {
 
   // 1514810096789 UTC
   date = new Date(2018, 0, 1, 12, 34, 56, 789);
-  console.log(date.getTime() / 1000);
   d = api.toGregorianDate({ date, zoneId: NEW_YORK});
   expect(d.toString()).toEqual('Gregorian 2018-01-01 07:34:56.789 America/New_York');
   expect(d.unixEpoch()).toEqual(1514810096789);

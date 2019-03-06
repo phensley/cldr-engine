@@ -3,8 +3,8 @@ import { PluralType } from '../enums';
 import {
   NumberSymbolType,
   NumberSymbolValues,
-  NumberSystems,
   NumberSystemCategory,
+  NumberSystemCategoryValues,
   NumberSystemName,
   NumberSystemNameValues,
 } from './enums';
@@ -22,7 +22,7 @@ export const CurrencySpacingPatternIndex = new KeyIndex<CurrencySpacingPattern>(
   ['currencyMatch', 'surroundingMatch', 'insertBetween']
 );
 
-export const NumberSystemsIndex = new KeyIndex(NumberSystems);
+export const NumberSystemsIndex = new KeyIndex(NumberSystemCategoryValues);
 export const NumberSystemNameIndex = new KeyIndex(NumberSystemNameValues);
 export const NumberSymbolIndex = new KeyIndex(NumberSymbolValues);
 

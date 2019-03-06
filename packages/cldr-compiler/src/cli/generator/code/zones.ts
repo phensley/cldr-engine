@@ -118,25 +118,30 @@ export const getZones = (data: any): Code[] => {
   result.push(Code.core(['systems', 'calendars', 'autogen.zonedata.ts'], code));
 
   // Build autogen.timezones.ts source
-  code = `${HEADER}import { makeEnum, makeKeyedEnum } from '../../types/enum';\n\n`;
-  code += 'export const [ TimeZone, TimeZoneValues ] = makeKeyedEnum([';
-  data.timeZoneIds.forEach((k: string) => {
-    const name = enumName(k);
-    code += `\n  ['${name}', '${k}'],`;
-  });
-  code += '\n]);\n\n';
+  code = `${HEADER}`;
 
   const timeZoneType = lineWrap(60, ' | ', data.timeZoneIds.map((k: string) => `'${k}'`));
-  code += `export type TimeZoneType = ${timeZoneType};\n\n`;
+  code += `export type TimeZoneType = (\n${timeZoneType});\n\n`;
 
-  code += 'export const [ MetaZone, MetaZoneValues ] = makeEnum([';
+  code += 'export const TimeZoneValues: TimeZoneType[] = [\n';
+  code += lineWrap(60, ',', data.timeZoneIds.map((id: string) => `'${id}'`));
+  code += '\n];\n\n';
+
+  code += 'export const enum TimeZone {';
+  data.timeZoneIds.forEach((k: string) => {
+    const name = enumName(k);
+    code += `\n  ${name} = '${k}',`;
+  });
+  code += '\n}\n\n';
+
+  const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
+  code += `export type MetaZoneType = ${metaZoneType};\n\n`;
+
+  code += 'export const MetaZoneValues: MetaZoneType[] = [';
   data.metaZoneIds.forEach((k: string) => {
     code += `\n  '${k}',`;
   });
-  code += '\n]);\n\n';
-
-  const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
-  code += `export type MetaZoneType = ${metaZoneType};\n`;
+  code += '\n];\n';
 
   result.push(Code.schema(['schema', 'timezones', 'autogen.timezones.ts'], code));
 

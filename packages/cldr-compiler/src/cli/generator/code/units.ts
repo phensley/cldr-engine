@@ -1,9 +1,7 @@
 import { enumName, lineWrap, Code, HEADER } from './util';
 
 export const getUnits = (data: any): Code[] => {
-  let code = `${HEADER}import { makeKeyedEnum } from '../../types/enum';\n\n`;
-
-  code += 'export const [ Unit, UnitValues ] = makeKeyedEnum([';
+  let code = `${HEADER}`;
 
   const values: string[] = [];
   data.units.forEach((s: string) => {
@@ -11,10 +9,13 @@ export const getUnits = (data: any): Code[] => {
     const category = s.substring(0, index);
     const value = s.substring(index + 1);
     const name = enumName(value);
-    code += `\n  ['${name}', '${value}'],`;
+    // code += `\n  ['${name}', '${value}'],`;
     values.push(`'${value}'`);
   });
-  code += '\n]);\n\n';
+
+  code += 'export const UnitValues: UnitType[] = [\n';
+  code += lineWrap(60, ',', values);
+  code += '\n];\n\n';
 
   const unitType = lineWrap(60, ' | ', values);
   code += `export type UnitType = ${unitType};`;
