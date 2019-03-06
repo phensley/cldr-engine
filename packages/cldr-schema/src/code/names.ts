@@ -1,6 +1,5 @@
-import { scope, vector1, vector2, KeyIndex, Scope } from '../types';
+import { scope, vector1, vector2, Scope } from '../types';
 import { RegionIdIndex, ScriptIdIndex } from '../schema/names';
-import { AltIndex } from '../schema';
 
 export const NAMES: Scope = scope('Names', 'Names', [
 

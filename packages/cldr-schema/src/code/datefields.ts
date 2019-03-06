@@ -1,5 +1,5 @@
-import { scope, vector1, vector2, Instruction, KeyIndex, Scope } from '../types';
-import { DateFieldIndex, PluralIndex, RelativeTimeFieldIndex } from '../schema';
+import { scope, vector1, vector2, Instruction, Scope } from '../types';
+import { DateFieldIndex, RelativeTimeFieldIndex } from '../schema';
 
 const prevNext: Instruction[] = ['previous2', 'previous', 'current', 'next', 'next2']
   .map(k => vector1(k, 'relative-time-field'));

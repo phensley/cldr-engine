@@ -1,5 +1,4 @@
-import { digits, field, scope, scopemap, vector1, vector2, KeyIndex, Scope } from '../types';
-import { PluralIndex } from '../schema';
+import { digits, field, scope, scopemap, vector1, vector2, Scope } from '../types';
 import {
   CurrencySpacingPatternIndex,
   CurrencySpacingPosIndex,

@@ -1,4 +1,4 @@
-import { origin, KeyIndex, Origin } from '../types';
+import { origin, Origin } from '../types';
 import { BUDDHIST, BUDDHIST_INDICES } from './buddhist';
 import { CALENDAR_INDICES, CALENDAR_VALUES } from './calendars';
 import { CURRENCIES, CURRENCIES_INDICES, CURRENCIES_VALUES } from './currencies';

@@ -1,5 +1,5 @@
-import { scope, vector1, vector2, KeyIndex, Scope } from '../types';
-import { AltIndex, CurrencyIdIndex, CurrencyValues, PluralIndex } from '../schema';
+import { scope, vector1, vector2, Scope } from '../types';
+import { CurrencyIdIndex, CurrencyValues } from '../schema';
 
 export const CURRENCIES: Scope = scope('Currencies', 'Currencies', [
   vector1('displayName', 'currency-id'),

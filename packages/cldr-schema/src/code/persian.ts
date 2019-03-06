@@ -1,28 +1,11 @@
-import { field, scope, vector1, vector2, KeyIndex, Scope } from '../types';
+import { field, scope, vector1, vector2, Scope } from '../types';
 
 import {
-  DateTimePatternFieldValues,
-  DayPeriodValues,
-  FieldWidthValues,
-  FormatWidthValues,
   PersianAvailableFormatIndex,
   PersianEraIndex,
   PersianIntervalFormatIndex,
-  PersianMonthIndex,
-  PluralIndex,
-  QuarterValues,
-  WeekdayValues,
+  PersianMonthIndex
 } from '../schema';
-
-import {
-  DateTimePatternFieldIndex,
-  DayPeriodIndex,
-  EraTypeIndex,
-  FieldWidthIndex,
-  FormatWidthIndex,
-  QuartersIndex,
-  WeekdaysIndex
-} from './calendars';
 
 const formats = (name: string, rename: string) => scope(name, rename, [
   vector2('weekdays', 'field-width', 'weekday'),

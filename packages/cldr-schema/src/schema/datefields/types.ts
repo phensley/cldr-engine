@@ -1,6 +1,4 @@
 import {
-  FieldArrow,
-  ScopeArrow,
   Vector1Arrow,
   Vector2Arrow
 } from '../arrows';

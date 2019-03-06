@@ -1,4 +1,4 @@
-import { FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
+import { FieldArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
 import { MetaZoneType, MetaZoneValues, TimeZoneType, TimeZoneValues } from './autogen.timezones';
 import { KeyIndex } from '../../types';
 

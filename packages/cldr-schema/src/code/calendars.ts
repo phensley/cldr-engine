@@ -1,4 +1,4 @@
-import { Instruction, KeyIndex } from '../types';
+import { KeyIndex } from '../types';
 
 import {
   DateTimePatternFieldValues,

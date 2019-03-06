@@ -4,25 +4,8 @@ import {
   BuddhistAvailableFormatIndex,
   BuddhistEraIndex,
   BuddhistIntervalFormatIndex,
-  BuddhistMonthIndex,
-  DateTimePatternFieldValues,
-  DayPeriodValues,
-  FieldWidthValues,
-  FormatWidthValues,
-  PluralIndex,
-  QuarterValues,
-  WeekdayValues,
+  BuddhistMonthIndex
 } from '../schema';
-
-import {
-  DateTimePatternFieldIndex,
-  DayPeriodIndex,
-  EraTypeIndex,
-  FieldWidthIndex,
-  FormatWidthIndex,
-  QuartersIndex,
-  WeekdaysIndex
-} from './calendars';
 
 const formats = (name: string, rename: string) => scope(name, rename, [
   vector2('weekdays', 'field-width', 'weekday'),

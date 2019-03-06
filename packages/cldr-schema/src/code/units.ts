@@ -1,5 +1,4 @@
-import { scope, vector1, vector2, KeyIndex, Scope } from '../types';
-import { PluralIndex } from '../schema';
+import { scope, vector1, vector2, Scope } from '../types';
 import { UnitNameIndex, UnitValues } from '../schema/units';
 
 const unitInfo = (width: string) => scope(width, width, [

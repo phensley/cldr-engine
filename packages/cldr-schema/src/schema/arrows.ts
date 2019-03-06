@@ -1,5 +1,4 @@
 import { KeyIndex } from '../types';
-import { PluralType } from './enums';
 
 /**
  * Very low-level access to strings in a bundle. Includes properties

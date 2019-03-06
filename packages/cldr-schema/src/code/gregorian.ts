@@ -8,21 +8,8 @@ import {
   GregorianAvailableFormatIndex,
   GregorianEraIndex,
   GregorianIntervalFormatIndex,
-  GregorianMonthsIndex,
-  PluralIndex,
-  QuarterValues,
-  WeekdayValues,
+  GregorianMonthsIndex
 } from '../schema';
-
-import {
-  DateTimePatternFieldIndex,
-  DayPeriodIndex,
-  EraTypeIndex,
-  FieldWidthIndex,
-  FormatWidthIndex,
-  QuartersIndex,
-  WeekdaysIndex
-} from './calendars';
 
 const formats = (name: string, rename: string) => scope(name, rename, [
   vector2('weekdays', 'field-width', 'weekday'),
