@@ -16,8 +16,8 @@ export const UnitNameIndex = new KeyIndex(UnitValues);
 // readonly shortPer: UnitPerInfo;
 
 export interface UnitInfo {
-  readonly displayName: Vector1Arrow<UnitType>;
   readonly unitPattern: Vector2Arrow<PluralType, UnitType>;
+  readonly displayName: Vector1Arrow<UnitType>;
 }
 
 export interface UnitsSchema {

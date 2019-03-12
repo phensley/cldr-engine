@@ -50,6 +50,6 @@ export interface NumberSystemInfo {
 
 export interface NumbersSchema {
   readonly minimumGroupingDigits: FieldArrow;
-  readonly numberSystem: ScopeArrow<NumberSystemName, NumberSystemInfo>;
   readonly numberSystems: Vector1Arrow<NumberSystemCategory>;
+  readonly numberSystem: ScopeArrow<NumberSystemName, NumberSystemInfo>;
 }

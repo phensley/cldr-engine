@@ -96,14 +96,6 @@ export interface Vector2 {
   readonly dim1: string;
 }
 
-// export interface Vector3 {
-//   readonly type: 'vector3';
-//   readonly name: string;
-//   readonly dim0: KeyIndex;
-//   readonly dim1: KeyIndex;
-//   readonly dim2: KeyIndex;
-// }
-
 export type Instruction =
   Digits |
   Field |
@@ -136,6 +128,3 @@ export const vector1 = (name: string, dim0: string): Vector1 =>
 
 export const vector2 = (name: string, dim0: string, dim1: string): Vector2 =>
   ({ type: 'vector2', name, dim0, dim1 });
-
-// export const vector3 = (name: string, dim0: KeyIndex, dim1: KeyIndex, dim2: KeyIndex): Vector3 =>
-//   ({ type: 'vector3', name, dim0, dim1, dim2 });

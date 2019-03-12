@@ -26,16 +26,16 @@ import { TimeZoneSchema } from './timezones';
 import { UnitsSchema } from './units';
 
 export interface Schema {
-  readonly Buddhist: BuddhistSchema;
+  readonly Names: NamesSchema;
+  readonly Numbers: NumbersSchema;
   readonly DateFields: DateFieldsSchema;
+  readonly Layout: LayoutSchema;
+  readonly ListPatterns: ListPatternsSchema;
+  readonly Buddhist: BuddhistSchema;
   readonly Gregorian: GregorianSchema;
   readonly Japanese: JapaneseSchema;
   readonly Persian: PersianSchema;
-  readonly Layout: LayoutSchema;
-  readonly ListPatterns: ListPatternsSchema;
-  readonly Names: NamesSchema;
-  readonly Numbers: NumbersSchema;
-  readonly Currencies: CurrenciesSchema;
   readonly TimeZones: TimeZoneSchema;
+  readonly Currencies: CurrenciesSchema;
   readonly Units: UnitsSchema;
 }

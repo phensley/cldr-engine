@@ -13,10 +13,10 @@ export interface MetaZoneInfo {
 }
 
 export interface TimeZoneSchema {
-  readonly gmtFormat: FieldArrow;
-  readonly gmtZeroFormat: FieldArrow;
-  readonly hourFormat: FieldArrow;
-  readonly regionFormat: FieldArrow;
   readonly metaZones: MetaZoneInfo;
   readonly exemplarCity: Vector1Arrow<TimeZoneType>;
+  readonly gmtFormat: FieldArrow;
+  readonly hourFormat: FieldArrow;
+  readonly gmtZeroFormat: FieldArrow;
+  readonly regionFormat: FieldArrow;
 }
