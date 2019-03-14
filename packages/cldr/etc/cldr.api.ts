@@ -117,6 +117,7 @@ class CLDRFramework {
   constructor(options: CLDROptions);
   // (undocumented)
   protected readonly asyncLoader?: (language: string) => Promise<any>;
+  static availableLocales(): Locale[];
   protected build(locale: Locale, pack: Pack): CLDR;
   get(locale: Locale | string): CLDR;
   getAsync(locale: Locale | string): Promise<CLDR>;
@@ -130,6 +131,8 @@ class CLDRFramework {
   protected readonly options: CLDROptions;
   // (undocumented)
   protected readonly packCache: LRU<Pack>;
+  static parseLanguageTag(s: string): LanguageTag;
+  static resolveLocale(id: string | LanguageTag): Locale;
 }
 
 // @alpha
@@ -436,9 +439,6 @@ interface ZonedDateTime {
   zoneId?: string;
 }
 
-// WARNING: Unsupported export: resolveLocale
-// WARNING: Unsupported export: availableLocales
-// WARNING: Unsupported export: parseLanguageTag
 // WARNING: Unsupported export: CharacterOrderType
 // WARNING: Unsupported export: CurrencyType
 // WARNING: Unsupported export: CurrencyFormatStyleType

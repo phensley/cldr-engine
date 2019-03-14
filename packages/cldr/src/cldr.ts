@@ -1,4 +1,6 @@
 import {
+  availableLocales,
+  parseLanguageTag,
   Bundle,
   Calendars,
   CalendarsImpl,
@@ -17,17 +19,6 @@ import {
   UnitsImpl
 } from '@phensley/cldr-core';
 import { LRU } from '@phensley/cldr-utils';
-
-/**
- * Parse a locale identifier and resolve it. This returns a Locale object
- * that includes the original id string or tag's compact form, and
- * a resolved LanguageTag.
- */
-export const resolveLocale = (id: string | LanguageTag): Locale => {
-  const _id = typeof id === 'string' ? id : id.compact();
-  const tag = LanguageResolver.resolve(id);
-  return { id: _id, tag };
-};
 
 /**
  * Top-level namespace to expose info about the current locale and bundle,
@@ -59,7 +50,7 @@ export class Locales {
    * Resolve a language tag to a Locale.
    */
   resolve(tag: string): Locale {
-    return resolveLocale(tag);
+    return CLDRFramework.resolveLocale(tag);
   }
 
 }
@@ -206,6 +197,31 @@ export class CLDRFramework {
   }
 
   /**
+   * Return an array of the available locales.
+   */
+  static availableLocales(): Locale[] {
+    return availableLocales();
+  }
+
+  /**
+   * Parse a locale identifier and resolve it. This returns a Locale object
+   * that includes the original id string or tag's compact form, and
+   * a resolved LanguageTag.
+   */
+  static resolveLocale(id: string | LanguageTag): Locale {
+    const _id = typeof id === 'string' ? id : id.compact();
+    const tag = LanguageResolver.resolve(id);
+    return { id: _id, tag };
+  }
+
+  /**
+   * Parses a string into a BCP47 language tag
+   */
+  static parseLanguageTag(s: string): LanguageTag {
+    return parseLanguageTag(s);
+  }
+
+  /**
    * Synchronously load a bundle and construct an instance of an API for
    * a given locale. Mainly used when you want to load a language statically
    * when your application's state store is initialized.
@@ -214,7 +230,7 @@ export class CLDRFramework {
     if (this.loader === undefined) {
       throw new Error('a synchronous resource loader is not defined');
     }
-    const resolved = typeof locale === 'string' ? resolveLocale(locale) : locale;
+    const resolved = typeof locale === 'string' ? CLDRFramework.resolveLocale(locale) : locale;
     const language = resolved.tag.language();
 
     let pack = this.packCache.get(language);
@@ -235,7 +251,7 @@ export class CLDRFramework {
     if (asyncLoader === undefined) {
       throw new Error('a Promise-based resource loader is not defined');
     }
-    const resolved = typeof locale === 'string' ? resolveLocale(locale) : locale;
+    const resolved = typeof locale === 'string' ? CLDRFramework.resolveLocale(locale) : locale;
     const language = resolved.tag.language();
 
     const promise = new Promise<CLDR>((resolve, reject) => {

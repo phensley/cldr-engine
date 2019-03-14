@@ -1,6 +1,8 @@
-import { parseLanguageTag, resolveLocale, CLDRFramework } from '../src';
-import { asyncLoader, getCLDR, loader } from './helpers';
+import { CLDRFramework } from '../src';
+import { getCLDR } from './helpers';
 import { CurrencyFormatOptions, Quantity } from '@phensley/cldr-core';
+
+const { parseLanguageTag, resolveLocale } = CLDRFramework;
 
 test('init framework', () => {
   const framework = getCLDR();
