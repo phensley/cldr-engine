@@ -398,7 +398,12 @@ test('currency display names', () => {
 
 test('currency special decimal', () => {
   let api = numbersApi('pt-PT');
-  let s = api.formatCurrency(100.50, 'PTE');
+
+  // Special decimal for the PTE currency in pt-PT
+  let s = api.formatCurrency(1, 'PTE');
+  expect(s).toEqual('1$00\xa0\u200b');
+
+  s = api.formatCurrency(100.50, 'PTE');
   expect(s).toEqual('100$50\xa0\u200b');
 
   s = api.formatCurrency(10689.50, 'PTE', { group: true });
@@ -407,4 +412,12 @@ test('currency special decimal', () => {
   api = numbersApi('pt-CV');
   s = api.formatCurrency(100.50, 'CVE');
   expect(s).toEqual('100$50\xa0\u200b');
+
+  // fr-CH different decimal for currency values
+  api = numbersApi('fr-CH');
+  s = api.formatDecimal(100.50);
+  expect(s).toEqual('100,5');
+
+  s = api.formatCurrency(100.50, 'CHF');
+  expect(s).toEqual('100.50\xa0CHF');
 });
