@@ -216,6 +216,11 @@ export interface Numbers {
   getCurrencyFractions(code: CurrencyType): CurrencyFractions;
 
   /**
+   * Return the currency code to use for a given region.
+   */
+  getCurrencyForRegion(region: string): CurrencyType;
+
+  /**
    * Returns the plural cardinal category of the given decimal number.
    */
   getPluralCardinal(num: DecimalArg): string;

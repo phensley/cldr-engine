@@ -47,7 +47,14 @@ export const getCurrencies = (data: any): Code[] => {
     }).join('|');
 
   code += '/* tslint:disable-next-line:max-line-length */\n';
-  code += `export const currencyFractionsRaw = '${fractions}';\n`;
+  code += `export const currencyFractionsRaw = '${fractions}';\n\n`;
+
+  const regions = Object.keys(data.currencyRegions)
+    .map((r: string) => `${r}:${data.currencyRegions[r]}`)
+    .join('|');
+
+  code += '/* tslint:disable-next-line:max-line-length */\n';
+  code += `export const currencyRegionsRaw = '${regions}';\n`;
 
   result.push(Code.core(['internals', 'numbers', 'autogen.currencies.ts'], code));
 

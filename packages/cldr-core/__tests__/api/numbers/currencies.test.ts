@@ -26,6 +26,16 @@ test('currency fractions', () => {
   expect(api.getCurrencyFractions('JPY').digits).toEqual(0);
 });
 
+test('currency regions', () => {
+  const api = numbersApi('en');
+  expect(api.getCurrencyForRegion('')).toEqual('USD');
+  expect(api.getCurrencyForRegion('ZZ')).toEqual('USD');
+  expect(api.getCurrencyForRegion('US')).toEqual('USD');
+  expect(api.getCurrencyForRegion('AC')).toEqual('SHP');
+  expect(api.getCurrencyForRegion('AR')).toEqual('ARS');
+  expect(api.getCurrencyForRegion('EE')).toEqual('EUR');
+});
+
 test('currency unknown style', () => {
   const opts: CurrencyFormatOptions = { style: 'UNKNOWN' as CurrencyFormatStyleType };
   const api = numbersApi('en');

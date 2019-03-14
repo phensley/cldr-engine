@@ -15,6 +15,7 @@ import { NumberParams } from '../../common/private';
 import { Numbers } from '../api';
 import { PrivateApiImpl } from '../private';
 import {
+  getCurrencyForRegion,
   getCurrencyFractions,
   Internals,
   NumberInternals,
@@ -50,6 +51,10 @@ export class NumbersImpl implements Numbers {
 
   getCurrencyFractions(code: CurrencyType): CurrencyFractions {
     return getCurrencyFractions(code);
+  }
+
+  getCurrencyForRegion(region: string): CurrencyType {
+    return getCurrencyForRegion(region);
   }
 
   getCurrencyPluralName(code: CurrencyType, plural: PluralType): string {

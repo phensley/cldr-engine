@@ -1,11 +1,13 @@
-import { currencyFractionsRaw } from './autogen.currencies';
+import { CurrencyType } from '@phensley/cldr-schema';
+import { currencyFractionsRaw, currencyRegionsRaw } from './autogen.currencies';
 import { CurrencyFractions } from '../../common';
+import { stringToObject } from '../../utils/string';
 
 type CurrencyFractionMap = { [x: string]: CurrencyFractions };
 
 const currencyFractions = ((): CurrencyFractionMap => {
   const map: CurrencyFractionMap = {};
-  const raw = currencyFractionsRaw.split('|').forEach(r => {
+  currencyFractionsRaw.split('|').forEach(r => {
     const parts = r.split(':');
     const code = parts[0];
     const values = parts[1].split(' ').map(Number);
@@ -26,5 +28,10 @@ const defaultCurrencyFractions: CurrencyFractions = {
   cashRounding: 0
 };
 
+const currencyRegions = stringToObject(currencyRegionsRaw, '|', ':');
+
 export const getCurrencyFractions = (code: string): CurrencyFractions =>
   currencyFractions[code] || defaultCurrencyFractions;
+
+export const getCurrencyForRegion = (region: string): CurrencyType =>
+  currencyRegions[region] as CurrencyType || 'USD';

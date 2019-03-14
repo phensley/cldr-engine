@@ -157,6 +157,32 @@ const Aliases = {
   zoneAlias: get([_alias, 'zoneAlias', flattenZoneAliases])
 };
 
+/**
+ * Map each region to the currency code to use.
+ */
+const currencyRegion = (o: any): any => {
+  const res: any = {};
+  const keys = Object.keys(o);
+  keys.forEach(k => {
+    for (const e of o[k]) {
+      const code = Object.keys(e)[0];
+      const r = e[code];
+      if (r['_from'] && !r['_to']) {
+        res[k] = code;
+        break;
+      }
+    }
+  });
+  return res;
+};
+
+/**
+ * Currency regions
+ */
+const CurrencyRegions = {
+  regions: get(['currencyData', 'region', currencyRegion])
+};
+
 const _orientation = ['layout', 'orientation'];
 
 const LAYOUT_KEY: any = {
@@ -485,6 +511,7 @@ export const getSupplemental = () => {
 
   return {
     Aliases: access(Aliases, 'aliases'),
+    CurrencyRegions: access(CurrencyRegions, 'currencyData'),
     MetaZones: access(MetaZones, 'metaZones'),
     WeekData: access(WeekData, 'weekData'),
 
