@@ -1,3 +1,4 @@
+import * as pkg from '../package.json';
 import {
   availableLocales,
   parseLanguageTag,
@@ -19,6 +20,8 @@ import {
   UnitsImpl
 } from '@phensley/cldr-core';
 import { LRU } from '@phensley/cldr-utils';
+
+const { version } = pkg;
 
 /**
  * Top-level namespace to expose info about the current locale and bundle,
@@ -194,6 +197,13 @@ export class CLDRFramework {
 
   info(): string {
     return `packs loaded: ${this.packCache.size()}`;
+  }
+
+  /**
+   * Return the @phensley/cldr version.
+   */
+  static version(): string {
+    return version;
   }
 
   /**

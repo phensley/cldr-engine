@@ -106,3 +106,8 @@ test('loader errors', () => {
   expect(() => framework.get('en')).toThrowError();
   expect(() => framework.getAsync('en')).toThrowError();
 });
+
+test('version', () => {
+  const version = CLDRFramework.version().split(/\./g);
+  expect(version.length).toEqual(3);
+});
