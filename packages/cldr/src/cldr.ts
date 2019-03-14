@@ -1,4 +1,4 @@
-import * as pkg from '../package.json';
+const pkg = require('../package.json');
 import {
   availableLocales,
   parseLanguageTag,
