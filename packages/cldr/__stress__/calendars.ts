@@ -1,5 +1,5 @@
 import {
-  availableLocales,
+  CLDRFramework,
   DateFormatOptions,
   FormatWidthType,
   ZonedDateTime
@@ -7,6 +7,8 @@ import {
 
 import { getCLDR } from '../__tests__/helpers';
 import { Timer } from './timer';
+
+const { availableLocales } = CLDRFramework;
 
 const ZONES = ['America/New_York', 'Europe/London', 'Africa/Timbuktu'];
 

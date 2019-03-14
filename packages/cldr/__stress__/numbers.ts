@@ -1,16 +1,16 @@
 import {
-  availableLocales,
-  CLDR,
-  CLDROptions,
   CurrencyFormatOptions,
   CurrencyFormatStyleType,
   CurrencyType,
+  CLDRFramework,
   Decimal,
   DecimalConstants,
   DecimalFormatOptions,
   DecimalFormatStyleType } from '../src';
 import { getCLDR } from '../__tests__/helpers';
 import { Timer } from './timer';
+
+const { availableLocales } = CLDRFramework;
 
 const MAX = String(Number.MAX_SAFE_INTEGER);
 
