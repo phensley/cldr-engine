@@ -133,6 +133,7 @@ class CLDRFramework {
   protected readonly packCache: LRU<Pack>;
   static parseLanguageTag(s: string): LanguageTag;
   static resolveLocale(id: string | LanguageTag): Locale;
+  static version(): string;
 }
 
 // @alpha

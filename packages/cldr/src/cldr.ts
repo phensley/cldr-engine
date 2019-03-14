@@ -200,7 +200,7 @@ export class CLDRFramework {
   }
 
   /**
-   * Return the @phensley/cldr version.
+   * Return the library version.
    */
   static version(): string {
     return version;
