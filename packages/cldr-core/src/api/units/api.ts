@@ -7,7 +7,7 @@ import { Part } from '../../types';
 import { Bundle } from '../../resource';
 import { PrivateApiImpl } from '../private';
 
-const defaultOptions: UnitFormatOptions = { length: 'long', style: 'decimal' };
+const DEFAULT_OPTIONS: UnitFormatOptions = { length: 'long', style: 'decimal' };
 
 export class UnitsImpl implements Units {
 
@@ -30,28 +30,28 @@ export class UnitsImpl implements Units {
   }
 
   formatQuantity(q: Quantity, options?: UnitFormatOptions): string {
-    options = options || defaultOptions;
+    options = options || DEFAULT_OPTIONS;
     const params = this.privateApi.getNumberParams(options.nu);
     const renderer = this.numbers.stringRenderer(params);
     return this.units.format(this.bundle, renderer, q, options, params);
   }
 
   formatQuantityToParts(q: Quantity, options?: UnitFormatOptions): Part[] {
-    options = options || defaultOptions;
+    options = options || DEFAULT_OPTIONS;
     const params = this.privateApi.getNumberParams(options.nu);
     const renderer = this.numbers.partsRenderer(params);
     return this.units.format(this.bundle, renderer, q, options, params);
   }
 
   formatQuantitySequence(qs: Quantity[], options?: UnitFormatOptions): string {
-    options = options || defaultOptions;
+    options = options || DEFAULT_OPTIONS;
     const items = qs.map(q => this.formatQuantity(q, options));
     const type = this.selectListType(options);
     return this.general.formatList(this.bundle, items, type);
   }
 
   formatQuantitySequenceToParts(qs: Quantity[], options?: UnitFormatOptions): Part[] {
-    options = options || defaultOptions;
+    options = options || DEFAULT_OPTIONS;
     const parts: Part[][] = qs.map(q => this.formatQuantityToParts(q, options));
     const type = this.selectListType(options);
     return this.general.formatListToPartsImpl(this.bundle, parts, type);

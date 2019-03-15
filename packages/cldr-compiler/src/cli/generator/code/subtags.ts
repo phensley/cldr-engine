@@ -48,6 +48,8 @@ export const getSubtags = (data: any): Code[] => {
 
   let code = HEADER + NOLINT_MAXLINE;
   code += `export const grandfatheredRaw = '${grandfathered}';\n\n`;
+
+  code += NOLINT_MAXLINE;
   code += `export const likelyRaw = '${likely}';\n`;
 
   return [

@@ -11,15 +11,12 @@ import { NumberParamsCache } from './numbers/params';
  */
 export class PrivateApiImpl {
 
-  private numbers: NumbersSchema;
-
   private numberParamsCache: NumberParamsCache;
 
   constructor(
     protected bundle: Bundle,
     protected internals: Internals
   ) {
-    this.numbers = internals.schema.Numbers;
     this.numberParamsCache = new NumberParamsCache(bundle, internals);
  }
 

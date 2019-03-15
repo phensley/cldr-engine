@@ -30,11 +30,6 @@ import { CalendarManager } from '../../internals/calendars/manager';
 import { PartsRenderer, Renderer, StringRenderer } from '../../utils/render';
 import { PrivateApiImpl } from '../private';
 
-const DEFAULT_OPTIONS: DateFormatOptions = { date: 'full' };
-const DEFAULT_INTERVAL_OPTIONS: DateIntervalFormatOptions = { skeleton: 'yMd' };
-const DEFAULT_RAW_OPTIONS: DateRawFormatOptions = { };
-const DEFAULT_RELTIME_OPTIONS: RelativeTimeFormatOptions = { width: 'wide' };
-
 export class CalendarsImpl implements Calendars {
 
   readonly manager: CalendarManager;
@@ -200,7 +195,7 @@ export class CalendarsImpl implements Calendars {
   // }
 
   formatRelativeTimeField(value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string {
-    options = options || DEFAULT_RELTIME_OPTIONS;
+    options = options || { width: 'wide' };
     const params = this.privateApi.getNumberParams(options.nu);
     return this.internals.dateFields.formatRelativeTimeField(
       this.bundle, value, field, options, params);
@@ -211,18 +206,18 @@ export class CalendarsImpl implements Calendars {
    * extreme cases where an application must implement a custom format.
    */
   formatDateRaw(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): string {
-    return this._formatDateRaw(new StringRenderer(), date, options || DEFAULT_RAW_OPTIONS);
+    return this._formatDateRaw(new StringRenderer(), date, options || {});
   }
 
   formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[] {
-    return this._formatDateRaw(new PartsRenderer(), date, options || DEFAULT_RAW_OPTIONS);
+    return this._formatDateRaw(new PartsRenderer(), date, options || {});
   }
 
   private _formatDate<R>(renderer: Renderer<R>,
       date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): R {
 
     const calendars = this.internals.calendars;
-    options = options || DEFAULT_OPTIONS;
+    options = options || { date: 'full' };
     const calendar = calendars.selectCalendar(this.bundle, options.ca);
     const params = this.privateApi.getNumberParams(options.nu, 'default');
 
@@ -236,7 +231,7 @@ export class CalendarsImpl implements Calendars {
       start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
       options?: DateIntervalFormatOptions): R {
 
-    options = options || DEFAULT_INTERVAL_OPTIONS;
+    options = options || { skeleton: 'yMd' };
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     start = this.convertDateTo(calendar, start);
     end = this.convertDateTo(calendar, end);

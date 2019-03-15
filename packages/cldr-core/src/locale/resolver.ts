@@ -195,6 +195,7 @@ const fastTagEquals = (a: FastTag, b: FastTag): boolean => {
 };
 
 const languageAlias = stringToObject(languageAliasRaw, '|', ':');
+const likelySubtags = stringToObject(subtags.likelyRaw, '|', ':');
 
 const buildLanguageAliasMap = (): LanguageAliasMap => {
   return Object.keys(languageAlias).reduce((o: LanguageAliasMap, k) => {
@@ -210,8 +211,6 @@ const buildLanguageAliasMap = (): LanguageAliasMap => {
     return o;
   }, {});
 };
-
-const likelySubtags = stringToObject(subtags.likelyRaw, '|', ':');
 
 // Singleton maps.
 const LANGUAGE_ALIAS_MAP: LanguageAliasMap = buildLanguageAliasMap();
