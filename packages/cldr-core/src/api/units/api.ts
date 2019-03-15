@@ -1,4 +1,4 @@
-import { UnitType } from '@phensley/cldr-schema';
+import { UnitType, UnitValues } from '@phensley/cldr-schema';
 
 import { Units } from '../api';
 import { GeneralInternals, Internals, NumberInternals, UnitInternals } from '../../internals';
@@ -23,6 +23,10 @@ export class UnitsImpl implements Units {
     this.general = internal.general;
     this.numbers = internal.numbers;
     this.units = internal.units;
+  }
+
+  availableUnits(): UnitType[] {
+    return UnitValues.slice(0);
   }
 
   getUnitDisplayName(name: UnitType, length?: UnitLength): string {

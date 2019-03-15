@@ -240,6 +240,11 @@ export interface Numbers {
 export interface Units {
 
   /**
+   * Returns an array of available units.
+   */
+  availableUnits(): UnitType[];
+
+  /**
    * Formats the given unit quantity to string.
    */
   formatQuantity(qty: Quantity, options?: UnitFormatOptions): string;

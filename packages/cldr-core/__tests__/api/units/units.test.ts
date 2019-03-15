@@ -10,6 +10,14 @@ const unitsApi = (tag: string) => {
   return new UnitsImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
 };
 
+test('available units', () => {
+  const api = unitsApi('en');
+
+  expect(api.availableUnits()).toContain('light-year');
+  expect(api.availableUnits()).toContain('kilogram');
+  expect(api.availableUnits()).toContain('terabyte');
+});
+
 test('display name', () => {
   const api = unitsApi('en');
 
