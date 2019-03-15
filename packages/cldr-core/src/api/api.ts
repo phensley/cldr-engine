@@ -8,7 +8,8 @@ import {
   LineOrderType,
   RegionIdType,
   ScriptIdType,
-  UnitType,
+  TimeZoneType,
+  UnitType
 } from '@phensley/cldr-schema';
 
 import {
@@ -119,6 +120,10 @@ export interface Calendars {
    */
   formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[];
 
+  /**
+   * Return an array containing the available timezone identifiers, e.g. "America/New_York"
+   */
+  timeZoneIds(): TimeZoneType[];
 }
 
 /**

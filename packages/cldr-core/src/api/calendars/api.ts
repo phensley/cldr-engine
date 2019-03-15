@@ -1,4 +1,11 @@
-import { DateFieldType, DateTimePatternFieldType, EraWidthType, FieldWidthType } from '@phensley/cldr-schema';
+import {
+  DateFieldType,
+  DateTimePatternFieldType,
+  EraWidthType,
+  FieldWidthType,
+  TimeZoneType,
+  TimeZoneValues
+} from '@phensley/cldr-schema';
 import { Calendars, EraWidthMap, FieldWidthMap } from '../api';
 import { Bundle } from '../../resource';
 
@@ -211,6 +218,10 @@ export class CalendarsImpl implements Calendars {
 
   formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[] {
     return this._formatDateRaw(new PartsRenderer(), date, options || {});
+  }
+
+  timeZoneIds(): TimeZoneType[] {
+    return TimeZoneValues.slice(0);
   }
 
   private _formatDate<R>(renderer: Renderer<R>,
