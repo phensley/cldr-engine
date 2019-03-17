@@ -18,7 +18,7 @@
   "scripts": {
     "api": "api-extractor run -c ./etc/api-extractor.json",
     "api:local": "yarn api -l",
-    "build": "yarn build:cj && yarn build:es && yarn build:packs",
+    "build": "yarn build:cj && yarn build:es && rimraf lib/package.json lib-es/package.json && yarn build:packs",
     "build:cj": "tsc -p ./tsconfig.build.json",
     "build:es": "tsc -p ./tsconfig.build.json --module esnext --outDir lib-es",
     "build:packs": "cldr-compiler pack -o ./packs",
