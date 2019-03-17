@@ -6,7 +6,11 @@ import {
   Decimal,
   DecimalConstants,
   DecimalFormatOptions,
-  DecimalFormatStyleType } from '../src';
+  DecimalFormatStyleType,
+  UnitFormatOptions,
+  UnitLength,
+  UnitType
+} from '../src';
 import { getCLDR } from '../__tests__/helpers';
 import { Timer } from './timer';
 
@@ -33,6 +37,18 @@ const CURRENCY_STYLES: CurrencyFormatStyleType[] = [
 
 const CURRENCIES: CurrencyType[] = [
   'USD', 'JPY', 'EUR', 'GBP'
+];
+
+const UNITS: UnitType[] = [
+  'kilogram', 'kilohertz', 'kilobyte'
+];
+
+const UNIT_STYLES: DecimalFormatStyleType[] = [
+  'decimal', 'long', 'short'
+];
+
+const UNIT_LENGTHS: UnitLength[] = [
+  'long', 'short', 'narrow'
 ];
 
 /**
@@ -66,7 +82,20 @@ const currencyOptions = (): CurrencyFormatOptions[] => {
   return res;
 };
 
+const unitOptions = (): UnitFormatOptions[] => {
+  const res: UnitFormatOptions[] = [];
+  for (const style of UNIT_STYLES) {
+    for (const length of UNIT_LENGTHS) {
+      res.push({ length });
+      res.push({ style, length });
+      res.push({ style, group: true, length });
+    }
+  }
+  return res;
+};
+
 export const numberStress = () => {
+  let total = 0;
   let elapsed: string;
   const timer = new Timer();
   const cldr = getCLDR();
@@ -74,6 +103,7 @@ export const numberStress = () => {
 
   const dopts = decimalOptions();
   const copts = currencyOptions();
+  const uopts = unitOptions();
   let i = 0;
 
   for (const locale of locales) {
@@ -90,6 +120,7 @@ export const numberStress = () => {
       }
     }
     elapsed = timer.micros();
+    total += i;
     console.log(`format ${i} number permutations: ${elapsed} micros`);
 
     i = 0;
@@ -103,6 +134,24 @@ export const numberStress = () => {
       }
     }
     elapsed = timer.micros();
+    total += i;
     console.log(`format ${i} currency permutations: ${elapsed} micros`);
+
+    i = 0;
+    timer.start();
+    for (const n of NUMBERS) {
+      for (const o of uopts) {
+        for (const unit of UNITS) {
+          let res = engine.Units.formatQuantity({ value: n, unit }, o);
+          i++;
+          res = engine.Units.formatQuantity({ value: n, unit, per: 'second' }, o);
+          i++;
+        }
+      }
+    }
+    elapsed = timer.micros();
+    total += i;
+    console.log(`format ${i} unit permutations: ${elapsed} micros`);
   }
+  console.log(`executed ${total} total number and unit permutations`);
 };
