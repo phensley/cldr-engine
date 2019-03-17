@@ -390,6 +390,8 @@ class PersianDate extends CalendarDate {
 // @alpha (undocumented)
 interface Quantity {
   // (undocumented)
+  per?: UnitType;
+  // (undocumented)
   unit?: UnitType;
   // (undocumented)
   value: number | string | Decimal;
