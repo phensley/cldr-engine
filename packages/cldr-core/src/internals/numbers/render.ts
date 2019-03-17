@@ -137,8 +137,7 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
       } else {
         switch (node) {
 
-          case NumberField.CURRENCY:
-          {
+          case NumberField.CURRENCY: {
             // Save the offset to the segment before or after the currency symbol.
             currencyBefore = !haveNumber;
             const i = res.length();

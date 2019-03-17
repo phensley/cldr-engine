@@ -187,15 +187,13 @@ const addRule = (variables: MapSet, desired: string[], supported: string[], dist
     distanceMap.put(key(desired[0]), key(supported[0]), distance);
     break;
 
-  case 2:
-  {
+  case 2: {
     const node = distanceMap.put(key(desired[0]), key(supported[0]), 0);
     node.map.put(key(desired[1]), key(supported[1]), distance);
     break;
   }
 
-  case 3:
-  {
+  case 3: {
     let node = distanceMap.put(key(desired[0]), key(supported[0]), 0);
     node = node.map.put(key(desired[1]), key(supported[1]), desired[1] === WILDCARD ? DEFAULT_THRESHOLD : 0);
     if (desired[2] === WILDCARD) {

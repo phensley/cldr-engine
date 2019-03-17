@@ -24,7 +24,7 @@ export interface CachedIntervalRequest {
 
 export type StandaloneFieldType = 'dayPeriods' | 'eras' | 'months' | 'quarters' | 'weekdays';
 
-export type TwoLevelMap = { [x: string]:  |{ [y: string]: string } };
+export type TwoLevelMap = { [x: string]: |{ [y: string]: string } };
 
 /**
  * Caches all available date formatting patterns for a given calendar schema.
@@ -36,7 +36,7 @@ export class CalendarPatterns {
 
   protected language: string;
   protected region: string;
-  protected namesCache: LRU<{ [x: string]: { [y: string]: string }}>;
+  protected namesCache: LRU<{ [x: string]: { [y: string]: string } }>;
   protected skeletonParser: DateSkeletonParser;
   protected skeletonRequestCache: LRU<CachedSkeletonRequest>;
   protected intervalRequestCache: LRU<CachedIntervalRequest>;
@@ -47,7 +47,7 @@ export class CalendarPatterns {
   protected availableMatcher: DatePatternMatcher = new DatePatternMatcher();
   protected intervalMatcher: { [x: string]: DatePatternMatcher } = {};
 
-  protected rawAvailableFormats: { [x: string]: { [y: string]: string }} = {};
+  protected rawAvailableFormats: { [x: string]: { [y: string]: string } } = {};
   protected rawIntervalFormats: { [x: string]: { [y: string]: string } } = {};
   protected intervalFallback: string;
 
@@ -238,14 +238,12 @@ export class GregorianPatterns extends CalendarPatterns {
     let pattern = s.pattern;
     if (!pattern) {
       switch (s.skeleton) {
-        case 'MMMMW':
-        {
+        case 'MMMMW': {
           const week = coerceDecimal(d.weekOfMonth());
           plural = this.internals.plurals.cardinal(this.language, week.operands());
           break;
         }
-        case 'yw':
-        {
+        case 'yw': {
           const week = coerceDecimal(d.weekOfYear());
           plural = this.internals.plurals.cardinal(this.language, week.operands());
           break;

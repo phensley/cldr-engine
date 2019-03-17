@@ -660,7 +660,7 @@ export class Decimal {
     m--;
 
     // Divmod each element of u, copying the hi/lo parts to w.
-    for (; m >= 0; m--, n--) {
+    for (; m >= 0; m-- , n--) {
       hi = (data[m] / powhi) | 0;
       lo = data[m] - hi * powhi;
       w.data[n] = powlo * loprev + hi;
@@ -713,7 +713,7 @@ export class Decimal {
       rest = allzero(data, q) === 0 ? 1 : 0;
     }
 
-    for (j = 0, i = q + 1; i < data.length; i++, j++) {
+    for (j = 0, i = q + 1; i < data.length; i++ , j++) {
       const [hi, lo] = div.pow10(data[i], r);
       w.data[j] = ph * lo + hiprev;
       hiprev = hi;
@@ -797,37 +797,36 @@ export class Decimal {
       rnd++;
     }
     switch (mode) {
-    case 'up':
-      // round away from zero
-      return Number(rnd !== 0);
-    case 'down':
-    case 'truncate':
-      // round towards zero
-      return 0;
-    case 'ceiling':
-      // round towards positive infinity
-      return Number(!(rnd === 0 || this.sign === -1));
-    case 'floor':
-      // round towards negative infinity
-      return Number(!(rnd === 0 || this.sign >= 0));
-    case 'half-up':
-      // if n >= 5 round up; otherwise round down
-      return Number(rnd >= 5);
-    case 'half-down':
-      // if n > 5 round up; otherwise round down
-      return Number(rnd > 5);
-    case 'half-even':
-      // if n = 5 and digit to left of n is odd round up; if even round down
-      return Number((rnd > 5) || ((rnd === 5 && this.isodd())));
-    case '05up':
-    {
-      // round away from zero if digit to left is is 0 or 5
-      // otherwise round towards zero
-      const lsd = this.data.length > 0 ? this.data[0] % 10 : 0;
-      return Number(!(rnd === 0) && (lsd === 0 || lsd === 5));
-    }
-    default:
-      return 0;
+      case 'up':
+        // round away from zero
+        return Number(rnd !== 0);
+      case 'down':
+      case 'truncate':
+        // round towards zero
+        return 0;
+      case 'ceiling':
+        // round towards positive infinity
+        return Number(!(rnd === 0 || this.sign === -1));
+      case 'floor':
+        // round towards negative infinity
+        return Number(!(rnd === 0 || this.sign >= 0));
+      case 'half-up':
+        // if n >= 5 round up; otherwise round down
+        return Number(rnd >= 5);
+      case 'half-down':
+        // if n > 5 round up; otherwise round down
+        return Number(rnd > 5);
+      case 'half-even':
+        // if n = 5 and digit to left of n is odd round up; if even round down
+        return Number((rnd > 5) || ((rnd === 5 && this.isodd())));
+      case '05up': {
+          // round away from zero if digit to left is is 0 or 5
+          // otherwise round towards zero
+          const lsd = this.data.length > 0 ? this.data[0] % 10 : 0;
+          return Number(!(rnd === 0) && (lsd === 0 || lsd === 5));
+        }
+      default:
+        return 0;
     }
   }
 
@@ -931,75 +930,75 @@ export class Decimal {
 
     // We parse from the end to avoid multiple passes or splitting of the
     // input string.
-     while (i >= 0) {
+    while (i >= 0) {
       const code = str.charCodeAt(i);
       switch (code) {
-      case Chars.ELOWER:
-      case Chars.EUPPER:
-        if (flags & ParseFlags.EXP) {
-          return `Extra exponent character at ${i}`;
-        }
-        if (data.length > 0) {
-          // Exponent is currently limited to the size of Constants.RADIX
-          return 'Exponent too large';
-        }
-        if (dig === 0) {
-          return 'Exponent not provided';
-        }
-        // Indicate we have an exponent, and clear the sign flag.
-        flags |= ParseFlags.EXP;
-        flags &= ~ParseFlags.SIGN;
+        case Chars.ELOWER:
+        case Chars.EUPPER:
+          if (flags & ParseFlags.EXP) {
+            return `Extra exponent character at ${i}`;
+          }
+          if (data.length > 0) {
+            // Exponent is currently limited to the size of Constants.RADIX
+            return 'Exponent too large';
+          }
+          if (dig === 0) {
+            return 'Exponent not provided';
+          }
+          // Indicate we have an exponent, and clear the sign flag.
+          flags |= ParseFlags.EXP;
+          flags &= ~ParseFlags.SIGN;
 
-        // Copy the parsed number to the exponent and reset the digit count.
-        dig = 0;
-        exp = sign === -1 ? -n : n;
-        sign = 0;
-        n = 0;
-        z = 0;
-        break;
-
-      case Chars.MINUS:
-      case Chars.PLUS:
-        if (dig === 0) {
-          return 'Found a bare sign symbol';
-        }
-        if (flags & ParseFlags.SIGN) {
-          return `Duplicate sign character at ${i}`;
-        }
-        sign = code === Chars.MINUS ? -1 : 0;
-        flags |= ParseFlags.SIGN;
-        break;
-
-      case Chars.DOT:
-        if (flags & ParseFlags.POINT) {
-          return `Extra radix point seen at ${i}`;
-        }
-        flags |= ParseFlags.POINT;
-        exp -= dig;
-        break;
-
-      case Chars.DIGIT0:
-      case Chars.DIGIT1:
-      case Chars.DIGIT2:
-      case Chars.DIGIT3:
-      case Chars.DIGIT4:
-      case Chars.DIGIT5:
-      case Chars.DIGIT6:
-      case Chars.DIGIT7:
-      case Chars.DIGIT8:
-      case Chars.DIGIT9:
-        n += (code - Chars.DIGIT0) * POWERS10[z];
-        z++;
-        dig++;
-        if (z === Constants.RDIGITS) {
-          data.push(n);
+          // Copy the parsed number to the exponent and reset the digit count.
+          dig = 0;
+          exp = sign === -1 ? -n : n;
+          sign = 0;
           n = 0;
           z = 0;
-        }
-        break;
+          break;
 
-      default:
-        return `Unexpected character at ${i}: ${str[i]}`;
+        case Chars.MINUS:
+        case Chars.PLUS:
+          if (dig === 0) {
+            return 'Found a bare sign symbol';
+          }
+          if (flags & ParseFlags.SIGN) {
+            return `Duplicate sign character at ${i}`;
+          }
+          sign = code === Chars.MINUS ? -1 : 0;
+          flags |= ParseFlags.SIGN;
+          break;
+
+        case Chars.DOT:
+          if (flags & ParseFlags.POINT) {
+            return `Extra radix point seen at ${i}`;
+          }
+          flags |= ParseFlags.POINT;
+          exp -= dig;
+          break;
+
+        case Chars.DIGIT0:
+        case Chars.DIGIT1:
+        case Chars.DIGIT2:
+        case Chars.DIGIT3:
+        case Chars.DIGIT4:
+        case Chars.DIGIT5:
+        case Chars.DIGIT6:
+        case Chars.DIGIT7:
+        case Chars.DIGIT8:
+        case Chars.DIGIT9:
+          n += (code - Chars.DIGIT0) * POWERS10[z];
+          z++;
+          dig++;
+          if (z === Constants.RDIGITS) {
+            data.push(n);
+            n = 0;
+            z = 0;
+          }
+          break;
+
+        default:
+          return `Unexpected character at ${i}: ${str[i]}`;
       }
       i--;
     }

@@ -118,8 +118,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
 
   const rest = specs.slice(1);
   switch (spec.kind) {
-    case 'digits':
-    {
+    case 'digits': {
       for (let i = 1; i <= 15; i++) {
         const base = pluralDigit(i);
         for (const c of plurals) {
@@ -137,8 +136,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
     }
 
     case 'plural':
-    case 'alt':
-    {
+    case 'alt': {
       for (const keys of spec.keys) {
         const [key, rkey, c] = keys;
         const v = obj[key];
@@ -156,8 +154,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       break;
     }
 
-    case 'field':
-    {
+    case 'field': {
       const rkey = spec.replace || spec.field;
       const key = spec.field;
       const v = obj[key];
@@ -174,8 +171,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       break;
     }
 
-    case 'fields':
-    {
+    case 'fields': {
       let key: string;
       let rkey: string;
       for (const field of spec.fields) {
@@ -200,8 +196,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       break;
     }
 
-    case 'point':
-    {
+    case 'point': {
       const pfx = [spec.name];
       if (rest.length === 0) {
         res.push(pfx);
@@ -213,8 +208,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       break;
     }
 
-    case 'keys':
-    {
+    case 'keys': {
       for (const key of Object.keys(obj)) {
         const pfx = [key];
         const v = obj[key];
@@ -231,8 +225,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       break;
     }
 
-    case 'altkeys':
-    {
+    case 'altkeys': {
       const orig = Object.keys(obj).filter(k => k.indexOf('-alt-') === -1);
       for (const raw of orig) {
         for (const keys of altKeys(raw)) {
@@ -253,8 +246,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
       break;
     }
 
-    case 'pluralkeys':
-    {
+    case 'pluralkeys': {
       const orig = Object.keys(obj);
 
       const normal = orig.filter(k => k.indexOf('-count-') === -1);
