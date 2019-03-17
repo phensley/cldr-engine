@@ -17,8 +17,10 @@ import {
   DateIntervalFormatOptions,
   DateRawFormatOptions,
   EraFieldOptions,
+  ExemplarCity,
   RelativeTimeFormatOptions,
-  ZonedDateTime
+  TimeZoneInfo,
+  ZonedDateTime,
 } from '../../common';
 
 import { Internals } from '../../internals';
@@ -247,6 +249,16 @@ export class CalendarsImpl implements Calendars {
 
   timeZoneIds(): TimeZoneType[] {
     return TimeZoneValues.slice(0);
+  }
+
+  timeZoneInfo(): TimeZoneInfo[] {
+    const cities = this.internals.schema.TimeZones.exemplarCity.mapping(this.bundle);
+    const res: TimeZoneInfo[] = [];
+    for (const id of TimeZoneValues) {
+      const cityName = cities[id] || cities['Etc/Unknown'];
+      res.push({ id, city: { name: cityName } });
+    }
+    return res;
   }
 
   private _getPatterns(type?: CalendarType): CalendarPatterns {

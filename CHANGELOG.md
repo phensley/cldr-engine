@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Options for date formatting now have an optional `context: ContextType` property
 - Date, interval, raw pattern, and relative time formatters now use context transforms
 - Added `dateField` method to `Calendars` api
+- Added `timeZoneInfo` to `Calendars` api, includes the exemplar city for each zone
 
 ### Fixed/Changed
 - Revised calendar fields api (e.g. `eras()`, `dayPeriods()`, etc) to accept options

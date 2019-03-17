@@ -1,10 +1,10 @@
 import {
   ContextType,
-  DateFieldType,
   DateFieldWidthType,
   EraWidthType,
   FieldWidthType,
   FormatWidthType,
+  TimeZoneType,
 } from '@phensley/cldr-schema';
 
 import { NumberSystemType } from './numbers';
@@ -163,4 +163,19 @@ export interface RelativeTimeFormatOptions {
 
   // Context in which the formatted string will be used
   context?: ContextType;
+}
+
+/**
+ * @alpha
+ */
+export interface ExemplarCity {
+  name: string;
+}
+
+/**
+ * @alpha
+ */
+export interface TimeZoneInfo {
+  id: TimeZoneType;
+  city: ExemplarCity;
 }

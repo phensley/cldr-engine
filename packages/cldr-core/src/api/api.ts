@@ -27,6 +27,7 @@ import {
   MeasurementSystem,
   Quantity,
   RelativeTimeFormatOptions,
+  TimeZoneInfo,
   UnitFormatOptions,
   UnitLength,
   ZonedDateTime,
@@ -129,6 +130,12 @@ export interface Calendars {
    * Return an array containing the available timezone identifiers, e.g. "America/New_York"
    */
   timeZoneIds(): TimeZoneType[];
+
+  /**
+   * Return an array of time zone identifiers with additional information, including the
+   * localized exemplar city, e.g. { id: "America/New_York", city: { name: "New York" } }
+   */
+  timeZoneInfo(): TimeZoneInfo[];
 }
 
 /**
