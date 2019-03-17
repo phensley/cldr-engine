@@ -8,7 +8,7 @@ import {
 import { Internals, NumberRenderer, UnitInternals } from '../internals';
 import { Quantity, UnitFormatOptions } from '../../common';
 import { NumberParams } from '../../common/private';
-import { coerceDecimal } from '../../types';
+import { coerceDecimal, DecimalConstants } from '../../types';
 import { Bundle } from '../../resource';
 
 export class UnitsInternalImpl implements UnitInternals {
@@ -20,6 +20,7 @@ export class UnitsInternalImpl implements UnitInternals {
     const schema = internals.schema;
     this.unitsSchema = schema.Units;
     this.numbersSchema = schema.Numbers;
+
   }
 
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string {
@@ -35,9 +36,39 @@ export class UnitsInternalImpl implements UnitInternals {
       return num;
     }
 
+    const { plurals, wrapper } = this.internals;
     const info = this.getUnitInfo(options.length || '');
     const pattern = info.unitPattern.get(bundle, plural, q.unit);
-    return renderer.wrap(this.internals.wrapper, pattern, num);
+
+    // Format argument '{0}' here. If no 'per' unit is defined, we
+    // return it. Otherwise we join it with the denominator unit below.
+    const zero = renderer.wrap(wrapper, pattern, num);
+    if (q.per) {
+      // Check if the 'per' unit has a perUnitPattern defined and use it.
+      const perPattern = info.perUnitPattern.get(bundle, q.per);
+      if (perPattern) {
+        return renderer.wrap(wrapper, perPattern, zero);
+      }
+
+      // Fall back to use the compoundUnit pattern. See notes here:
+      // https://www.unicode.org/reports/tr35/tr35-general.html#perUnitPatterns
+      const compound = info.compoundUnitPattern.get(bundle);
+
+      // Compute plural category for the value '1'
+      const singular = plurals.cardinal(
+        bundle.language(), DecimalConstants.ONE.operands());
+
+      // Fetch the denominator's singular unit pattern, strip off the '{0}'
+      // and any surrounding whitespace.
+      let denom = info.unitPattern.get(bundle, singular, q.per);
+      denom = denom.replace(/\s*\{0\}\s*/, '');
+      const one = renderer.make('per', denom);
+
+      // Wrap the numerator and denominator together
+      return renderer.wrap(wrapper, compound, zero, one);
+    }
+
+    return zero;
   }
 
   getUnitInfo(length: string): UnitInfo {

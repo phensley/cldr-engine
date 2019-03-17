@@ -36,6 +36,23 @@ test('per unit pattern schema', () => {
   expect(p).toEqual('{0} per {1}');
 });
 
+test('per unit', () => {
+  const api = unitsApi('en');
+  let s: string;
+
+  s = api.formatQuantity({ value: '12345.6789', unit: 'kilogram', per: 'second' });
+  expect(s).toEqual('12345.679 kilograms per second');
+
+  s = api.formatQuantity({ value: '17.9887', unit: 'terabit', per: 'minute' });
+  expect(s).toEqual('17.989 terabits per minute');
+
+  s = api.formatQuantity({ value: '17.9887', unit: 'terabit', per: 'minute' }, { length: 'narrow' });
+  expect(s).toEqual('17.989Tb/min');
+
+  s = api.formatQuantity({ value: '30.7899', unit: 'kilogram', per: 'lux' });
+  expect(s).toEqual('30.79 kilograms per lux');
+});
+
 test('significant', () => {
   const api = unitsApi('en');
   let s: string;

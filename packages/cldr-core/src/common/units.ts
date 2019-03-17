@@ -8,6 +8,7 @@ import { Decimal } from '../types/numbers';
 export interface Quantity {
   value: number | string | Decimal;
   unit?: UnitType;
+  per?: UnitType;
 }
 
 export type UnitLength = 'short' | 'narrow' | 'long';
