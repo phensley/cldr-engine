@@ -28,7 +28,6 @@ const _formats = L.pickIn({ 'format': _widthTemplate, 'stand-alone': _widthTempl
 
 const _chinese = ['dates', 'calendars', 'chinese'];
 const _languageMatching = ['languageMatching', 'written_new'];
-const _pruneUnitFormats = L.remove(L.props('per', 'coordinateUnit'));
 const _sizeProps = L.props('short', 'medium', 'long', 'full');
 const _timeZoneNames = ['dates', 'timeZoneNames'];
 
@@ -120,28 +119,6 @@ const fixEras = (obj: any) => {
   return Object.keys(obj).reduce((o: any, key) => {
     const k = key.toLowerCase().substring(3);
     o[k] = obj[key];
-    return o;
-  }, {});
-};
-
-/**
- * Get the full unit names.
- */
-const getUnitNames = (obj: any) => {
-  return Object.keys(obj).reduce((o: any, k) => {
-    o[k] = {};
-    return o;
-  }, {});
-};
-
-/**
- * Split the category off the unit names.
- */
-const fixUnitNames = (obj: any) => {
-  return Object.keys(obj).reduce((o: any, key) => {
-    const index = key.indexOf('-');
-    const name = key.substring(index + 1);
-    o[name] = obj[key];
     return o;
   }, {});
 };
@@ -397,23 +374,42 @@ const TimeZoneNames = {
   timeZones: get([_timeZoneNames, 'zone', flattenTimeZones])
 };
 
+// const _pruneUnitFormats = L.remove(L.props('per', 'coordinateUnit'));
+
+/**
+ * Get the full unit names.
+ */
+const getUnitNames = (obj: any) => {
+  return Object.keys(obj).reduce((o: any, k) => {
+    if (k !== 'per' && k !== 'coordinateUnit') {
+      o[k] = {};
+    }
+    return o;
+  }, {});
+};
+
+/**
+ * Split the category off the unit names.
+ */
+const splitUnitNames = (obj: any) => {
+  const keys = Object.keys(obj);
+  return keys.reduce((o: any, key) => {
+    const index = key.indexOf('-');
+    const name = index === -1 ? key : key.substring(index + 1);
+    o[name] = obj[key];
+    return o;
+  }, {});
+};
+
 /**
  * Unit names and formats.
  */
 const Units = {
-  names: get(['units', 'long', _pruneUnitFormats, getUnitNames]),
+  names: get(['units', 'long', getUnitNames]),
 
-  long: get(['units', 'long', _pruneUnitFormats, fixUnitNames]),
-  longPer: get(['units', 'long', 'per']),
-  longCoordinate: get(['units', 'long', 'coordinateUnit']),
-
-  short: get(['units', 'short', _pruneUnitFormats, fixUnitNames]),
-  shortPer: get(['units', 'short', 'per']),
-  shortCoordinate: get(['units', 'short', 'coordinateUnit']),
-
-  narrow: get(['units', 'narrow', _pruneUnitFormats, fixUnitNames]),
-  narrowPer: get(['units', 'narrow', 'per']),
-  narrowCoordinate: get(['units', 'narrow', 'coordinateUnit'])
+  long: get(['units', 'long', splitUnitNames]),
+  short: get(['units', 'short', splitUnitNames]),
+  narrow: get(['units', 'narrow', splitUnitNames]),
 };
 
 /**

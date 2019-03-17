@@ -1,9 +1,11 @@
-import { scope, vector1, vector2, Scope } from '../types';
+import { field, scope, vector1, vector2, Scope } from '../types';
 import { UnitNameIndex, UnitValues } from '../schema/units';
 
 const unitInfo = (width: string) => scope(width, width, [
   vector2('unitPattern', 'plural-key', 'unit-name'),
-  vector1('displayName', 'unit-name')
+  vector1('displayName', 'unit-name'),
+  vector1('perUnitPattern', 'unit-name'),
+  field('compoundUnitPattern')
 ]);
 
 export const UNITS: Scope = scope('Units', 'Units', [

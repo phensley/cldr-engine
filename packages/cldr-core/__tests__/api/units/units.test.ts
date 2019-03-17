@@ -25,6 +25,17 @@ test('display name', () => {
   expect(api.getUnitDisplayName('meter-per-second')).toEqual('meters per second');
 });
 
+test('per unit pattern schema', () => {
+  const units = INTERNALS.schema.Units;
+  const en = languageBundle('en');
+
+  let p = units.long.perUnitPattern.get(en, 'kilogram');
+  expect(p).toEqual('{0} per kilogram');
+
+  p = units.long.compoundUnitPattern.get(en);
+  expect(p).toEqual('{0} per {1}');
+});
+
 test('significant', () => {
   const api = unitsApi('en');
   let s: string;
