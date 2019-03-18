@@ -8,6 +8,7 @@ export {
   LineOrderType,
   RegionIdType,
   RelativeTimeWidthType,
+  Schema,
   ScriptIdType,
   UnitType
 } from '@phensley/cldr-schema';

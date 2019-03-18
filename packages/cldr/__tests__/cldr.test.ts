@@ -75,6 +75,31 @@ test('enumerating locales', () => {
   expect(locales).toContainEqual(CLDRFramework.resolveLocale('en'));
 });
 
+test('accessing schema', () => {
+  const framework = getCLDR();
+  let api = framework.get('en');
+  let bundle = api.Locales.bundle();
+
+  let system = api.Schema.Numbers.numberSystem.get('latn');
+  let symbols = system.symbols.mapping(bundle);
+  expect(symbols.group).toEqual(',');
+  expect(symbols.decimal).toEqual('.');
+
+  let pattern = system.decimalFormats.standard.get(bundle);
+  expect(pattern).toEqual('#,##0.###');
+
+  api = framework.get('de');
+  bundle = api.Locales.bundle();
+
+  system = api.Schema.Numbers.numberSystem.get('latn');
+  symbols = system.symbols.mapping(bundle);
+  expect(symbols.group).toEqual('.');
+  expect(symbols.decimal).toEqual(',');
+
+  pattern = system.currencyFormats.standard.get(bundle);
+  expect(pattern).toEqual('#,##0.00\u00a0\u00a4');
+});
+
 test('resolving locales', () => {
   let r = parseLanguageTag('und-Zzzz-US');
   let { id, tag } = resolveLocale(r);

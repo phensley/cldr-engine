@@ -107,8 +107,14 @@ class CLDR {
   constructor(locale: Locale, bundle: Bundle, internals: Internals);
   readonly Calendars: Calendars;
   readonly General: General;
+  // WARNING: Because this definition is explicitly marked as @internal, an underscore prefix ("_") should be added to its name
+  // @internal
+  readonly Internals: Internals;
   readonly Locales: Locales;
   readonly Numbers: Numbers;
+  // WARNING: Because this definition is explicitly marked as @internal, an underscore prefix ("_") should be added to its name
+  // @internal
+  readonly Schema: Schema;
   readonly Units: Units;
 }
 

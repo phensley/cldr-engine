@@ -16,6 +16,7 @@ import {
   NumbersImpl,
   Pack,
   PrivateApiImpl,
+  Schema,
   Units,
   UnitsImpl
 } from '@phensley/cldr-core';
@@ -126,6 +127,31 @@ export class CLDR {
       this._units = new UnitsImpl(this.bundle, this.internals, this.privateApi);
     }
     return this._units;
+  }
+
+  /**
+   * UNDOCUMENTED AND EXPERIMENTAL
+   *
+   * Provides access to the low-level schema for accessing CLDR fields.
+   *
+   * Currently undocumented. In the future an internal api can be
+   * exposed allowing access to low-level functions of the library.
+   *
+   * @internal
+   */
+  get Schema(): Schema {
+    return this.internals.schema;
+  }
+
+  /**
+   * UNDOCUMENTED AND EXPERIMENTAL
+   *
+   * Provides access to the low-level library internals.
+   *
+   * @internal
+   */
+  get Internals(): Internals {
+    return this.internals;
   }
 
   private get privateApi(): PrivateApiImpl {
