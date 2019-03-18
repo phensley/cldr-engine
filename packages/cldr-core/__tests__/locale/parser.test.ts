@@ -17,6 +17,10 @@ test('basics', () => {
   expect(expanded('en-US')).toEqual('en-Zzzz-US');
 });
 
+test('case / underscore', () => {
+  expect(compact('FR_latn_fr')).toEqual('fr-Latn-FR');
+});
+
 test('grandfathered', () => {
   expect(compact('i-klingon')).toEqual('tlh');
 });

@@ -8,7 +8,7 @@ const SEP = '-';
 const UNDERSCORE = /_/g;
 
 // ISO 639 language code
-const LANGUAGE = /^[a-z]{2,8}$/;
+const LANGUAGE = /^[a-z]{2,8}$/i;
 
 // Selected ISO 639 codes
 const EXTLANG = /^[a-z]{3}$/i;
