@@ -3,6 +3,8 @@ import { RoundingModeType } from '../types';
 
 export type NumberSystemType = NumberSystemCategory | NumberSystemName;
 
+export type NumberFormatErrorType = 'nan' | 'infinity';
+
 export interface NumberFormatOptions {
   nu?: NumberSystemType;
   round?: RoundingModeType;
@@ -12,6 +14,7 @@ export interface NumberFormatOptions {
   minimumFractionDigits?: number;
   maximumSignificantDigits?: number;
   minimumSignificantDigits?: number;
+  errors?: NumberFormatErrorType[];
 }
 
 export type DecimalFormatStyleType =

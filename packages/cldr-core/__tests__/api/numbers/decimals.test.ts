@@ -1,9 +1,5 @@
-import { CurrencyType } from '@phensley/cldr-schema';
 import { languageBundle } from '../../_helpers';
-import { buildSchema } from '../../../src/schema';
 import {
-  Bundle,
-  CurrencyFormatOptions,
   Decimal,
   DecimalFormatOptions,
   DecimalFormatStyleType,
@@ -39,6 +35,33 @@ test('decimals unknown style', () => {
 
   const s = api.formatDecimal('1000000000', opts);
   expect(s).toEqual('');
+});
+
+test('nan or infinity', () => {
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatDecimal(NaN, {});
+  expect(s).toEqual('NaN');
+
+  s = api.formatDecimal(NaN, { errors: [] });
+  expect(s).toEqual('NaN');
+
+  s = api.formatDecimal(NaN, { errors: ['infinity'] });
+  expect(s).toEqual('NaN');
+
+  expect(() => api.formatDecimal(NaN, { errors: ['nan'] })).toThrowError();
+
+  s = api.formatDecimal(Infinity, {});
+  expect(s).toEqual('∞');
+
+  s = api.formatDecimal(Infinity, { errors: [] });
+  expect(s).toEqual('∞');
+
+  s = api.formatDecimal(Infinity, { errors: ['nan'] });
+  expect(s).toEqual('∞');
+
+  expect(() => api.formatDecimal(Infinity, { errors: ['infinity'] })).toThrowError();
 });
 
 test('minimum grouping digits', () => {

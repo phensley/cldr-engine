@@ -8,6 +8,7 @@ import {
   CurrencyFractions,
   CurrencySymbolWidthType,
   DecimalFormatOptions,
+  NumberFormatOptions,
 } from '../../common';
 
 import { Bundle } from '../../resource';
@@ -102,13 +103,56 @@ export class NumbersImpl implements Numbers {
 
   protected formatDecimalImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
       n: DecimalArg, options: DecimalFormatOptions): T {
+
+    const v = validate(n, options, renderer, params);
+    if (v !== undefined) {
+      return v;
+    }
     const [result, plural] = this.numbers.formatDecimal(this.bundle, renderer, coerceDecimal(n), options, params);
     return result;
   }
 
   protected formatCurrencyImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
       n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): T {
+
+    const v = validate(n, options, renderer, params);
+    if (v !== undefined) {
+      return v;
+    }
     return this.numbers.formatCurrency(this.bundle, renderer, coerceDecimal(n), code, options, params);
   }
 
 }
+
+/**
+ * Check if the number is a NaN or Infinity and whether this should throw
+ * an error, or return the locale's string representation.
+ */
+const validate = <T>(
+  n: DecimalArg,
+  opts: NumberFormatOptions,
+  renderer: NumberRenderer<T>,
+  params: NumberParams): T | undefined => {
+
+  if (typeof n !== 'number' || isFinite(n)) {
+    return undefined;
+  }
+
+  // Check if we have NaN or Infinity
+  const isnan = isNaN(n);
+  const isinfinity = !isnan && !isFinite(n);
+
+  if (Array.isArray(opts.errors)) {
+    // Check if we should throw an error on either of these
+    if (isnan && opts.errors.indexOf('nan') !== -1) {
+      throw Error(`Invalid argument: NaN`);
+    }
+    if (isinfinity && opts.errors.indexOf('infinity') !== -1) {
+      throw Error(`Invalid argument: Infinity`);
+    }
+  }
+
+  return isnan ? renderer.make('nan', params.symbols.nan)
+    : isinfinity ? renderer.make('infinity', params.symbols.infinity)
+    : undefined;
+};

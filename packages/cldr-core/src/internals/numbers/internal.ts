@@ -69,7 +69,6 @@ export class NumberInternalsImpl implements NumberInternals {
     n: Decimal, options: DecimalFormatOptions, params: NumberParams): [T, PluralType] {
 
     // TODO: abstract away pattern selection defaulting
-
     const style = options.style === undefined ? 'decimal' : options.style;
     let result: T;
     let plural: PluralType = 'other';
