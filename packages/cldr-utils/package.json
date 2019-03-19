@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-utils",
-  "version": "0.8.14",
+  "version": "0.8.15",
   "description": "Utilities for cldr-engine packages",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
