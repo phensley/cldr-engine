@@ -239,6 +239,8 @@ class Decimal {
 // @alpha (undocumented)
 interface DecimalFormatOptions extends NumberFormatOptions {
   // (undocumented)
+  errors?: NumberFormatErrorType[];
+  // (undocumented)
   style?: DecimalFormatStyleType;
 }
 
