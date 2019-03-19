@@ -11,6 +11,7 @@ before_install:
 install:
   - yarn
 script:
+  - yarn clean
   - yarn lint
   - yarn api
   - yarn test:codecov

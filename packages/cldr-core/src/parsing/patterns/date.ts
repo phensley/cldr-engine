@@ -68,9 +68,11 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
     i++;
   }
 
+  // In the final state we'll either have a field+width or
+  // some characters in the buf.
   if (width > 0 && field !== '') {
     nodes.push([field, width]);
-  } else if (buf.length > 0) {
+  } else {
     nodes.push(buf);
   }
   return nodes;

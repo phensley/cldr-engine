@@ -25,6 +25,20 @@ test('parse', () => {
   expect(parseDatePattern("yMMMd 'yMd'")).toEqual([
     ['y', 1], ['M', 3], ['d', 1], ' yMd'
   ]);
+
+  expect(parseDatePattern('h:mm !!')).toEqual([
+    ['h', 1],
+    ':',
+    ['m', 2],
+    ' !!'
+  ]);
+
+  expect(parseDatePattern('yMd')).toEqual([
+    ['y', 1],
+    ['M', 1],
+    ['d', 1]
+  ]);
+
 });
 
 test('interval boundary', () => {
