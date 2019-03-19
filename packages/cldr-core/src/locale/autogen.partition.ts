@@ -3,9 +3,6 @@
 //
 
 /* tslint:disable:max-line-length */
-export const variables = '$!americas:αγδε|$!cnsar:αβγδζ|$!enUS:αβδε|$!maghreb:αβγεζ|$americas:βζ|$enUS:γζ|$maghreb:δ|$cnsar:ε';
-
-/* tslint:disable:max-line-length */
 export const regions = 'AC:α|AD:α|AE:α|AF:α|AG:β|AI:β|AL:α|AM:α|AO:α|AQ:α|AR:β|AS:γ|AT:α|AU:α|AW:β|AX:α|AZ:α|BA:α|BB:β|BD:α|BE:α|BF:α|BG:α|BH:α|BI:α|BJ:α|BL:β|BM:β|BN:α|BO:β|BQ:β|BR:β|BS:β|BT:α|BV:β|BW:α|BY:α|BZ:β|CA:β|CC:α|CD:α|CF:α|CG:α|CH:α|CI:α|CK:α|CL:β|CM:α|CN:α|CO:β|CP:α|CR:β|CU:β|CV:α|CW:β|CX:α|CY:α|CZ:α|DE:α|DG:α|DJ:α|DK:α|DM:β|DO:β|DZ:δ|EA:α|EC:β|EE:α|EG:α|EH:δ|ER:α|ES:α|ET:α|FI:α|FJ:α|FK:β|FM:α|FO:α|FR:α|GA:α|GB:α|GD:β|GE:α|GF:β|GG:α|GH:α|GI:α|GL:β|GM:α|GN:α|GP:β|GQ:α|GR:α|GS:β|GT:β|GU:γ|GW:α|GY:β|HK:ε|HM:α|HN:β|HR:α|HT:β|HU:α|IC:α|ID:α|IE:α|IL:α|IM:α|IN:α|IO:α|IQ:α|IR:α|IS:α|IT:α|JE:α|JM:β|JO:α|JP:α|KE:α|KG:α|KH:α|KI:α|KM:α|KN:β|KP:α|KR:α|KW:α|KY:β|KZ:α|LA:α|LB:α|LC:β|LI:α|LK:α|LR:α|LS:α|LT:α|LU:α|LV:α|LY:δ|MA:δ|MC:α|MD:α|ME:α|MF:β|MG:α|MH:γ|MK:α|ML:α|MM:α|MN:α|MO:ε|MP:γ|MQ:β|MR:δ|MS:β|MT:α|MU:α|MV:α|MW:α|MX:β|MY:α|MZ:α|NA:α|NC:α|NE:α|NF:α|NG:α|NI:β|NL:α|NO:α|NP:α|NR:α|NU:α|NZ:α|OM:α|PA:β|PE:β|PF:α|PG:α|PH:α|PK:α|PL:α|PM:β|PN:α|PR:ζ|PS:α|PT:α|PW:α|PY:β|QA:α|RE:α|RO:α|RS:α|RU:α|RW:α|SA:α|SB:α|SC:α|SD:α|SE:α|SG:α|SH:α|SI:α|SJ:α|SK:α|SL:α|SM:α|SN:α|SO:α|SR:β|SS:α|ST:α|SV:β|SX:β|SY:α|SZ:α|TA:α|TC:β|TD:α|TF:α|TG:α|TH:α|TJ:α|TK:α|TL:α|TM:α|TN:δ|TO:α|TR:α|TT:β|TV:α|TW:α|TZ:α|UA:α|UG:α|UM:γ|US:ζ|UY:β|UZ:α|VA:α|VC:β|VE:β|VG:β|VI:ζ|VN:α|VU:α|WF:α|WS:α|XK:α|YE:α|YT:α|ZA:α|ZM:α|ZW:α';
 
 /* tslint:disable:max-line-length */
