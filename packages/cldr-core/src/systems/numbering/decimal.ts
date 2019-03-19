@@ -51,6 +51,7 @@ export class DecimalNumberingSystem extends NumberingSystem {
       this.minimumGroupingDigits,
       this.primaryGroupingSize,
       this.secondaryGroupingSize,
+      true, // zeroScale
       this.digits);
     return f.render();
   }

@@ -473,7 +473,7 @@ export class Decimal {
    */
   toString(): string {
     const f = new StringDecimalFormatter();
-    this.format(f, '.', '', 1, 1, 3, 3);
+    this.format(f, '.', '', 1, 1, 3, 3, false);
     const r = f.render();
     return this.sign === -1 ? '-' + r : r;
   }
@@ -483,7 +483,7 @@ export class Decimal {
    */
   toParts(): Part[] {
     const f = new PartsDecimalFormatter('.', '');
-    this.format(f, '.', '', 1, 1, 3, 3);
+    this.format(f, '.', '', 1, 1, 3, 3, false);
     const r = f.render();
     return this.sign === -1 ? [{ type: 'minus', value: '-' }].concat(r) : r;
   }
@@ -495,7 +495,7 @@ export class Decimal {
    */
   format<R>(
     formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number,
-    minGroup: number, priGroup: number, secGroup: number, digits: string[] = DECIMAL_DIGITS): void {
+    minGroup: number, priGroup: number, secGroup: number, zeroScale: boolean, digits: string[] = DECIMAL_DIGITS): void {
 
     // Determine if grouping is enabled, and set the primary and
     // secondary group sizes.
@@ -509,6 +509,7 @@ export class Decimal {
     // Determine how many integer digits to emit. If integer digits is
     // larger than the integer coefficient we emit leading zeros.
     let int = this.data.length === 0 ? 1 : this.precision() + exp;
+
     if (minInt <= 0 && this.compare(ONE, true) === -1) {
       // If the number is between 0 and 1 and format requested minimum
       // integer digits of zero, don't emit a leading zero digit.
@@ -549,6 +550,15 @@ export class Decimal {
         }
         zeros--;
       }
+    } else if (zeroScale && exp < 0) {
+      // Handle sign of zero which means we have exactly '0'. If we
+      // have the 'zeroScale' flag set, a negative exponent here will
+      // emit zeros after the decimal point.
+      while (exp < 0) {
+        exp++;
+        formatter.add(digits[0]);
+      }
+      formatter.add(decimal);
     }
 
     // Scan coefficient from least- to most-significant digit.
@@ -674,7 +684,11 @@ export class Decimal {
    * Mutating in-place shift right.
    */
   protected _shiftright(shift: number, mode: RoundingModeType = 'half-even'): void {
-    if (shift <= 0 || this.sign === 0) {
+    if (shift <= 0) {
+      return;
+    }
+    if (this.sign === 0) {
+      this.exp += shift;
       return;
     }
     const w: Decimal = this;
@@ -740,7 +754,13 @@ export class Decimal {
   }
 
   protected _stripTrailingZeros(): void {
-    const n = this.trailingZeros();
+    let n = 0;
+    // Special case for zero with negative exponent
+    if (this.sign === 0 && this.exp < 0) {
+      n = -this.exp;
+    } else {
+      n = this.trailingZeros();
+    }
     if (n > 0) {
       this._shiftright(n, 'truncate');
     }

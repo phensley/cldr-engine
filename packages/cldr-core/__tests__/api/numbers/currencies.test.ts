@@ -40,7 +40,7 @@ test('currency nan and infinity', () => {
   const api = numbersApi('en');
 
   expect(() => api.formatCurrency(NaN, 'USD')).toThrowError();
-
+  expect(() => api.formatCurrency(Infinity, 'USD')).toThrowError();
 });
 
 test('currency unknown style', () => {
@@ -52,10 +52,37 @@ test('currency unknown style', () => {
   expect(actual).toEqual('');
 });
 
+test('minimum grouping digits', () => {
+  const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
+  const api = numbersApi('es-ES');
+  let s: string;
+
+  s = api.formatCurrency('1234.567', 'EUR', opts);
+  expect(s).toEqual('1234,57 €');
+});
+
+test('zero currency', () => {
+  const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatCurrency('0', 'USD', opts);
+  expect(s).toEqual('$0.00');
+
+  s = api.formatCurrency('0', 'JPY', opts);
+  expect(s).toEqual('¥0');
+});
+
 test('currency', () => {
   const opts: CurrencyFormatOptions = { style: 'symbol', group: true };
   const api = numbersApi('en');
   let s: string;
+
+  s = api.formatCurrency('0', 'USD', opts);
+  expect(s).toEqual('$0.00');
+
+  s = api.formatCurrency('-1', 'USD', opts);
+  expect(s).toEqual('-$1.00');
 
   s = api.formatCurrency('12345.234', 'USD', opts);
   expect(s).toEqual('$12,345.23');

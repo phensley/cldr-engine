@@ -29,6 +29,17 @@ test('format', () => {
   expect(s).toEqual('10000');
 });
 
+test('zeros', () => {
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatDecimal('0');
+  expect(s).toEqual('0');
+
+  s = api.formatDecimal('0', { minimumFractionDigits: 2});
+  expect(s).toEqual('0.00');
+});
+
 test('decimals unknown style', () => {
   const opts: DecimalFormatOptions = { style: 'UNKNOWN' as DecimalFormatStyleType };
   const api = numbersApi('en');

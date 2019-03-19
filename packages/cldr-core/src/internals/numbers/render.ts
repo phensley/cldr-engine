@@ -122,6 +122,7 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
       this.params.minimumGroupingDigits,
       priGroup,
       secGroup,
+      true, // zeroScale
       this.params.digits
     );
     const formatted = formatter.render();

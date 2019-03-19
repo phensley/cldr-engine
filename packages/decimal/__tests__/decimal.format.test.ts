@@ -8,7 +8,7 @@ const format = (s: string, opts: FormatArgs): string => {
   const n = parse(s);
   const f = new StringDecimalFormatter();
   const [ d, g, mi, mg, pg, sg ] = opts;
-  n.format(f, d, g, mi, mg, pg, sg);
+  n.format(f, d, g, mi, mg, pg, sg, false);
   return f.render();
 };
 
@@ -16,7 +16,7 @@ const formatParts = (s: string, opts: any[]): Part[] => {
   const n = parse(s);
   const f = new PartsDecimalFormatter(opts[0], opts[1]);
   const [ d, g, mi, mg, pg, sg ] = opts;
-  n.format(f, d, g, mi, mg, pg, sg);
+  n.format(f, d, g, mi, mg, pg, sg, false);
   return f.render();
 };
 
