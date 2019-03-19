@@ -554,4 +554,5 @@ test('trailing zeros strip', () => {
   expect(parse('100e10').stripTrailingZeros()).toEqual(parse('1e12'));
   expect(parse('1.00e-10').stripTrailingZeros()).toEqual(parse('1e-10'));
   expect(parse('0e-2').stripTrailingZeros()).toEqual(parse('0'));
+  expect(parse('0.000e-2').stripTrailingZeros()).toEqual(parse('0'));
 });
