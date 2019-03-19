@@ -203,7 +203,7 @@ class Decimal {
   divmod(v: DecimalArg): [Decimal, Decimal];
   // (undocumented)
   protected exp: number;
-  format<R>(formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, digits?: string[]): void;
+  format<R>(formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, zeroScale: boolean, digits?: string[]): void;
   // (undocumented)
   protected static fromRaw(sign: number, exp: number, data: number[]): Decimal;
   increment(): Decimal;
