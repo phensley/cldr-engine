@@ -290,11 +290,11 @@ class LanguageTag {
   // (undocumented)
   protected _expanded?: string;
   // (undocumented)
-  protected _extensions?: {
+  protected _extensions: {
     [x: string]: string[];
   }
   // (undocumented)
-  protected _privateUse?: string;
+  protected _privateUse: string;
   compact(): string;
   // (undocumented)
   protected core: (undefined | string)[];
