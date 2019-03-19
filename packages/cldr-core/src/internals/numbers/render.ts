@@ -90,7 +90,7 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
   constructor(readonly params: NumberParams) { }
 
   render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
-      decimalSymbol: string, minInt: number, grouping: boolean = false): R {
+      decimalSymbol: string, minInt: number, grouping: boolean = true): R {
 
     const symbols = this.params.symbols;
     const currency: boolean = currencySymbol !== '';

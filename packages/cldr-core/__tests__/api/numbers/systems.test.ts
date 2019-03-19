@@ -44,5 +44,5 @@ test('numbering systems', () => {
 
   // Invalid number system names will use the default system.
   s = api.formatDecimal('12345.678', { nu: 'xxx' as NumberSystemType });
-  expect(s).toEqual('١٢٣٤٥٫٦٧٨');
+  expect(s).toEqual('١٢٬٣٤٥٫٦٧٨');
 });

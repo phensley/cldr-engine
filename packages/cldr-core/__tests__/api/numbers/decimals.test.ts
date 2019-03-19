@@ -20,13 +20,13 @@ test('format', () => {
   let s: string;
 
   s = api.formatDecimal('9999');
-  expect(s).toEqual('9999');
+  expect(s).toEqual('9,999');
 
   s = api.formatDecimal('9999.999');
-  expect(s).toEqual('9999.999');
+  expect(s).toEqual('9,999.999');
 
   s = api.formatDecimal('9999.9999');
-  expect(s).toEqual('10000');
+  expect(s).toEqual('10,000');
 });
 
 test('zeros', () => {
@@ -139,10 +139,10 @@ test('significant digits', () => {
   const d = new Decimal('100599.99');
 
   s = api.formatDecimal('100599.99', { maximumSignificantDigits: 3, round: 'half-even' });
-  expect(s).toEqual('101000');
+  expect(s).toEqual('101,000');
 
   s = api.formatDecimal('101599.99', { maximumSignificantDigits: 3, round: 'half-even' });
-  expect(s).toEqual('102000');
+  expect(s).toEqual('102,000');
 });
 
 test('decimal compact', () => {
@@ -259,7 +259,7 @@ test('decimal percents', () => {
   expect(s).toEqual('1.23%');
 
   s = api.formatDecimal('-1.234', { style: 'permille' });
-  expect(s).toEqual('-1234‰');
+  expect(s).toEqual('-1,234‰');
 
   s = api.formatDecimal('-1.234', { style: 'permille-scaled' });
   expect(s).toEqual('-1‰');
@@ -329,14 +329,18 @@ test('decimal parts', () => {
 
   p = api.formatDecimalToParts('9999.999');
   expect(p).toEqual([
-    { type: 'digits', value: '9999' },
+    { type: 'digits', value: '9' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '999' },
     { type: 'decimal', value: '.' },
     { type: 'digits', value: '999' }
   ]);
 
   p = api.formatDecimalToParts('9999.9999');
   expect(p).toEqual([
-    { type: 'digits', value: '10000' }
+    { type: 'digits', value: '10' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '000' }
   ]);
 });
 

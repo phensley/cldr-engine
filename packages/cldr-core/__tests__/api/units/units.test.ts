@@ -41,7 +41,7 @@ test('per unit', () => {
   let s: string;
 
   s = api.formatQuantity({ value: '12345.6789', unit: 'kilogram', per: 'second' });
-  expect(s).toEqual('12345.679 kilograms per second');
+  expect(s).toEqual('12,345.679 kilograms per second');
 
   s = api.formatQuantity({ value: '17.9887', unit: 'terabit', per: 'minute' });
   expect(s).toEqual('17.989 terabits per minute');
@@ -58,7 +58,7 @@ test('significant', () => {
   let s: string;
 
   s = api.formatQuantity({ value: '12345.6789', unit: 'mile' }, { maximumSignificantDigits: 3 });
-  expect(s).toEqual('12300 miles');
+  expect(s).toEqual('12,300 miles');
 });
 
 test('number systems', () => {

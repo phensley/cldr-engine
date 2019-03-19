@@ -1,13 +1,9 @@
 import { CurrencyType } from '@phensley/cldr-schema';
 import { languageBundle } from '../../_helpers';
-import { buildSchema } from '../../../src/schema';
 import { Part } from '../../../src/types';
 import {
-  Bundle,
   CurrencyFormatOptions,
   CurrencyFormatStyleType,
-  DecimalFormatOptions,
-  DecimalFormatStyleType,
   InternalsImpl,
   NumbersImpl,
   PrivateApiImpl
@@ -97,7 +93,7 @@ test('currency accounting', () => {
   let api = numbersApi('en');
   let s: string;
 
-  s = api.formatCurrency('-12345.6789', 'EUR');
+  s = api.formatCurrency('-12345.6789', 'EUR', { group: false });
   expect(s).toEqual('-€12345.68');
 
   s = api.formatCurrency('-12345.6789', 'EUR', opts);
@@ -238,11 +234,11 @@ test('currency fractions', () => {
   let s: string;
 
   s = api.formatCurrency('12345.019999', 'JPY', opts);
-  expect(s).toEqual('¥12345');
+  expect(s).toEqual('¥12,345');
 
   opts.minimumFractionDigits = 2;
   s = api.formatCurrency('12345.019999', 'JPY', opts);
-  expect(s).toEqual('¥12345.02');
+  expect(s).toEqual('¥12,345.02');
 });
 
 test('currency spacing', () => {
@@ -289,7 +285,9 @@ test('currency parts', () => {
   p = api.formatCurrencyToParts('12345.234', 'USD');
   expect(p).toEqual([
     { type: 'currency', value: '$' },
-    { type: 'digits', value: '12345' },
+    { type: 'digits', value: '12' },
+    { type: 'group', value: ',' },
+    { type: 'digits', value: '345' },
     { type: 'decimal', value: '.' },
     { type: 'digits', value: '23' }
   ]);
