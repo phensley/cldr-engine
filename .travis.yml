@@ -12,8 +12,8 @@ install:
   - yarn
 script:
   - yarn lint
-  - yarn test:codecov
   - yarn api
+  - yarn test:codecov
 after_success:
   - codecov
 
