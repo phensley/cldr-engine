@@ -47,8 +47,8 @@ const canonicalize = (field: number, value?: string): string | undefined => {
 export class LanguageTag {
 
   protected core: (undefined | string)[];
-  protected _extensions?: { [x: string]: string[] };
-  protected _privateUse?: string;
+  protected _extensions: { [x: string]: string[] };
+  protected _privateUse: string;
   protected _compact?: string;
   protected _expanded?: string;
 
@@ -124,11 +124,9 @@ export class LanguageTag {
   extensions(): { [x: string]: string[] } {
     const exts = this._extensions;
     const res: { [x: string]: string[] } = {};
-    if (exts !== undefined) {
-      Object.keys(exts).forEach(k => {
-        res[k] = exts[k];
-      });
-    }
+    Object.keys(exts).forEach(k => {
+      res[k] = exts[k];
+    });
     return res;
   }
 
@@ -137,15 +135,15 @@ export class LanguageTag {
    * and 't' for Transforms.
    */
   extensionSubtags(key: string): string[] {
-    const exts = this._extensions === undefined ? [] : this._extensions[key];
-    return exts === undefined ? [] : exts.slice(0);
+    const exts = this._extensions[key];
+    return exts || [];
   }
 
   /**
    * Private use subtag.
    */
   privateUse(): string {
-    return this._privateUse === undefined ? '' : this._privateUse;
+    return this._privateUse;
   }
 
   /**
@@ -194,15 +192,16 @@ export class LanguageTag {
       }
     });
     const exts = this._extensions;
-    if (exts !== undefined) {
-      Object.keys(exts).sort().forEach(k => {
+    const keys = Object.keys(exts);
+    if (keys.length) {
+      keys.sort().forEach(k => {
         const vals = exts[k];
         if (vals !== undefined && vals.length > 0) {
           buf += SEP + k + SEP + exts[k].join(SEP);
         }
       });
     }
-    if (typeof this._privateUse === 'string' && this._privateUse.length > 0) {
+    if (this._privateUse.length > 0) {
       buf += SEP + this._privateUse;
     }
     return buf;

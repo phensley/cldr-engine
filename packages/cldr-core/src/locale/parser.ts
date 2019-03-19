@@ -2,6 +2,7 @@ import { LanguageTag } from './languagetag';
 import { replaceRegion } from './util';
 import { stringToObject } from '../utils/string';
 import * as subtags from './autogen.subtags';
+import { parse } from 'querystring';
 
 // Subtag separator
 const SEP = '-';
@@ -204,6 +205,7 @@ class LanguageTagParser {
   }
 
   private parsePrivateUse(parts: string[]): boolean {
+    let parsed = false;
     while (parts.length > 0) {
       const prefix = match(parts, PRIVATEUSE_PREFIX);
       if (prefix === undefined) {
@@ -220,9 +222,10 @@ class LanguageTagParser {
 
       if (subs.length > 0) {
         this.privateUse += `${prefix}${SEP}${subs.join(SEP)}`;
+        parsed = true;
       }
     }
-    return this.privateUse !== undefined;
+    return parsed;
   }
 
 }
