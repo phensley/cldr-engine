@@ -100,6 +100,26 @@ test('accessing schema', () => {
   expect(pattern).toEqual('#,##0.00\u00a0\u00a4');
 });
 
+test('accessing internals', () => {
+  const framework = getCLDR();
+  const api = framework.get('en');
+
+  const p = api.Internals.calendars.parseDatePattern('yyyy/MM/dd h:m:s');
+  expect(p).toEqual([
+    ['y', 4],
+    '/',
+    ['M', 2],
+    '/',
+    ['d', 2],
+    ' ',
+    ['h', 1],
+    ':',
+    ['m', 1],
+    ':',
+    ['s', 1]
+  ]);
+});
+
 test('resolving locales', () => {
   let r = parseLanguageTag('und-Zzzz-US');
   let { id, tag } = resolveLocale(r);
@@ -129,6 +149,17 @@ test('async loader', () => {
 
   expect(framework.getAsync('de')).resolves.toHaveProperty(path, 'de-Latn-DE');
   expect(framework.getAsync('zh-TW')).resolves.toHaveProperty(path, 'zh-Hant-TW');
+});
+
+test('async await loader', async () => {
+  const framework = getCLDR();
+  const path = ['bundle', '_id'];
+
+  const de = await framework.getAsync('de');
+  expect(de).toHaveProperty(path, 'de-Latn-DE');
+
+  const zh = await framework.getAsync('zh-TW');
+  expect(zh).toHaveProperty(path, 'zh-Hant-TW');
 });
 
 test('loader errors', () => {

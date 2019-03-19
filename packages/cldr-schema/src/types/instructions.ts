@@ -60,6 +60,7 @@ export class OriginImpl implements Origin {
 
   private get<T>(name: string, map: { [x: string]: T }): T {
     const r = map[name];
+    /* istanbul ignore if */
     if (r === undefined) {
       // NOTE: This should only occur during development.
       throw new Error(`Severe error: failed to locate index/value set named "${name}"`);
