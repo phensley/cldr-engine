@@ -44,4 +44,7 @@ test('interval boundary', () => {
 
   pattern = parseDatePattern('h:mm a – h:mm a');
   expect(intervalPatternBoundary(pattern)).toEqual(6);
+
+  pattern = parseDatePattern('h:mm a');
+  expect(intervalPatternBoundary(pattern)).toEqual(-1);
 });
