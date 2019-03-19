@@ -24,13 +24,13 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     this.relativeTimes = internals.schema.DateFields.relativeTimes;
   }
 
-  formatRelativeTime(bundle: Bundle, start: CalendarDate, end: CalendarDate,
-    options: RelativeTimeFormatOptions, params: NumberParams): string {
+  // formatRelativeTime(bundle: Bundle, start: CalendarDate, end: CalendarDate,
+    // options: RelativeTimeFormatOptions, params: NumberParams): string {
       // TODO: need to compute integral difference for multiple fields. for example, year
       // may differ between 2017-12-01 and 2018-02-02 but they are only 3 months apart, so
       // we might format "3 months" or "9 weeks" or "9 Fridays" or "63 days".
-      return '';
-  }
+      // return '';
+  // }
 
   formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType,
       options: RelativeTimeFormatOptions, params: NumberParams): string {

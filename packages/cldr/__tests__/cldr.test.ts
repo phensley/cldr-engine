@@ -70,6 +70,11 @@ test('parsing language tags', () => {
   expect(l.tag.compact()).toEqual('en-Latn-US');
 });
 
+test('enumerating locales', () => {
+  const locales = CLDRFramework.availableLocales();
+  expect(locales).toContainEqual(CLDRFramework.resolveLocale('en'));
+});
+
 test('resolving locales', () => {
   let r = parseLanguageTag('und-Zzzz-US');
   let { id, tag } = resolveLocale(r);

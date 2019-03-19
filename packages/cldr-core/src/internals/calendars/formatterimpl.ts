@@ -404,7 +404,8 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     const [offset, negative, hours, minutes] = getTZC(ctx.date.timeZoneOffset());
     let fmt = '';
     if (width >= 1 && width <= 5) {
-      fmt += negative ? '-' : '+';
+      const zero = hours === 0 && minutes === 0;
+      fmt += zero ? '+' : negative ? '+' : '-' ;
       fmt += this._num(ctx, hours, 2);
       if (width === 3 || width === 5) {
         fmt += ':';
@@ -425,7 +426,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     if (_offset === 0) {
       return this.tz.gmtZeroFormat.get(bundle);
     }
-    const [offset, negative, hours, minutes] = getTZC(_offset);
+    const [_, negative, hours, minutes] = getTZC(_offset);
 
     const emitMins = !short || minutes > 0;
     const hourPattern =  this._hourPattern(bundle, negative);

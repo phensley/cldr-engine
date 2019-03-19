@@ -35,6 +35,10 @@ test('weekdays', () => {
   let w = en.weekdays();
   expect(w.wide[2]).toEqual('Monday');
 
+  // fetch twice to exercise caching
+  w = en.weekdays();
+  expect(w.short[6]).toEqual('Fr');
+
   w = en.weekdays('persian');
   expect(w.wide[2]).toEqual('Monday');
 });
