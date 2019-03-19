@@ -14,7 +14,6 @@ export interface NumberFormatOptions {
   minimumFractionDigits?: number;
   maximumSignificantDigits?: number;
   minimumSignificantDigits?: number;
-  errors?: NumberFormatErrorType[];
 }
 
 export type DecimalFormatStyleType =
@@ -30,6 +29,7 @@ export type CurrencyFormatStyleType =
  */
 export interface DecimalFormatOptions extends NumberFormatOptions {
   style?: DecimalFormatStyleType;
+  errors?: NumberFormatErrorType[];
 }
 
 /**

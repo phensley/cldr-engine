@@ -36,6 +36,13 @@ test('currency regions', () => {
   expect(api.getCurrencyForRegion('EE')).toEqual('EUR');
 });
 
+test('currency nan and infinity', () => {
+  const api = numbersApi('en');
+
+  expect(() => api.formatCurrency(NaN, 'USD')).toThrowError();
+
+});
+
 test('currency unknown style', () => {
   const opts: CurrencyFormatOptions = { style: 'UNKNOWN' as CurrencyFormatStyleType };
   const api = numbersApi('en');

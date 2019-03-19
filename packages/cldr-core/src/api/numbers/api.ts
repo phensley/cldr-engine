@@ -104,6 +104,7 @@ export class NumbersImpl implements Numbers {
   protected formatDecimalImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
       n: DecimalArg, options: DecimalFormatOptions): T {
 
+    // A NaN or Infinity value will just return the locale's representation
     const v = validate(n, options, renderer, params);
     if (v !== undefined) {
       return v;
@@ -115,14 +116,14 @@ export class NumbersImpl implements Numbers {
   protected formatCurrencyImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
       n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): T {
 
-    const v = validate(n, options, renderer, params);
-    if (v !== undefined) {
-      return v;
-    }
+    // Not much to be done with NaN and Infinity with currencies, so we always
+    // throw an error.
+    validate(n, FORCE_ERRORS, renderer, params);
     return this.numbers.formatCurrency(this.bundle, renderer, coerceDecimal(n), code, options, params);
   }
 
 }
+const FORCE_ERRORS: DecimalFormatOptions = { errors: ['nan', 'infinity' ]};
 
 /**
  * Check if the number is a NaN or Infinity and whether this should throw
@@ -130,7 +131,7 @@ export class NumbersImpl implements Numbers {
  */
 const validate = <T>(
   n: DecimalArg,
-  opts: NumberFormatOptions,
+  opts: DecimalFormatOptions,
   renderer: NumberRenderer<T>,
   params: NumberParams): T | undefined => {
 
