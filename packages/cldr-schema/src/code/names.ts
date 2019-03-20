@@ -1,7 +1,11 @@
 import { scope, vector1, vector2, Scope } from '../types';
-import { RegionIdIndex, ScriptIdIndex } from '../schema/names';
+import { LanguageIdIndex, RegionIdIndex, ScriptIdIndex } from '../schema/names';
 
 export const NAMES: Scope = scope('Names', 'Names', [
+
+  scope('languages', 'languages', [
+    vector1('displayName', 'language-id')
+  ]),
 
   scope('scripts', 'scripts', [
     vector1('displayName', 'script-id')
@@ -14,6 +18,7 @@ export const NAMES: Scope = scope('Names', 'Names', [
 ]);
 
 export const NAMES_INDICES = {
+  'language-id': LanguageIdIndex,
   'region-id': RegionIdIndex,
   'script-id': ScriptIdIndex
 };

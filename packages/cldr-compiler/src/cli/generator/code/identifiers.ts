@@ -6,10 +6,21 @@ const process = (symbols: any): string[] => {
 };
 
 export const getIdentifiers = (data: any): Code[] => {
+  const languages = process(data.languages);
   const scripts = process(data.scripts);
   const regions = process(data.territories);
 
   let code = `${HEADER}`;
+
+  const _languages = languages.map((c: string) => `'${c}'`);
+
+  code += 'export type LanguageIdType = (\n';
+  code += lineWrap(80, '|', _languages);
+  code += ');\n\n';
+
+  code += 'export const LanguageIdValues: LanguageIdType[] = [\n';
+  code += lineWrap(80, ',', _languages);
+  code += '\n];\n\n';
 
   const _scripts = scripts.map((c: string) => `'${c}'`);
 
