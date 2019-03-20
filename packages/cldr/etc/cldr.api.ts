@@ -103,8 +103,7 @@ interface CalendarDateFields {
 }
 
 // @alpha
-class CLDR {
-  constructor(locale: Locale, bundle: Bundle, internals: Internals);
+interface CLDR {
   readonly Calendars: Calendars;
   readonly General: General;
   // WARNING: Because this definition is explicitly marked as @internal, an underscore prefix ("_") should be added to its name

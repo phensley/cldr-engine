@@ -64,7 +64,61 @@ export class Locales {
  *
  * @alpha
  */
-export class CLDR {
+export interface CLDR {
+  /**
+   * Locale functions.
+   */
+  readonly Locales: Locales;
+
+  /**
+   * Calendar functions.
+   */
+  readonly Calendars: Calendars;
+
+  /**
+   * General functions.
+   */
+  readonly General: General;
+
+  /**
+   * Number and currency functions.
+   */
+  readonly Numbers: Numbers;
+
+  /**
+   * Unit quantity functions.
+   */
+  readonly Units: Units;
+
+ /**
+   * UNDOCUMENTED AND EXPERIMENTAL
+   *
+   * Provides access to the low-level schema for accessing CLDR fields.
+   *
+   * Currently undocumented. In the future an internal api can be
+   * exposed allowing access to low-level functions of the library.
+   *
+   * @internal
+   */
+  readonly Schema: Schema;
+
+ /**
+   * UNDOCUMENTED AND EXPERIMENTAL
+   *
+   * Provides access to the low-level library internals.
+   *
+   * @internal
+   */
+  readonly Internals: Internals;
+
+}
+
+/**
+ * Implements CLDR
+ *
+ * @alpha
+ */
+class CLDRImpl implements CLDR {
 
   private _calendars?: Calendars;
   private _general?: General;
@@ -313,6 +367,6 @@ export class CLDRFramework {
    */
   protected build(locale: Locale, pack: Pack): CLDR {
     const bundle = pack.get(locale.tag);
-    return new CLDR(locale, bundle, this.internals);
+    return new CLDRImpl(locale, bundle, this.internals);
   }
 }
