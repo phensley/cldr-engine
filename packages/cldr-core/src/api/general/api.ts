@@ -8,6 +8,7 @@ import {
 } from '@phensley/cldr-schema';
 
 import { General } from '../api';
+import { LanguageResolver, LanguageTag, Locale } from '../../locale';
 import { ListPatternType, MeasurementCategory, MeasurementSystem } from '../../common';
 import { Bundle } from '../../resource';
 import { Part } from '../../types';
@@ -18,22 +19,37 @@ export class GeneralImpl implements General {
   protected general: GeneralInternals;
 
   constructor(
-    protected bundle: Bundle,
+    protected _bundle: Bundle,
+    protected _locale: Locale,
     protected internal: Internals
   ) {
     this.general = internal.general;
   }
 
   characterOrder(): CharacterOrderType {
-    return this.general.characterOrder(this.bundle) as CharacterOrderType;
+    return this.general.characterOrder(this._bundle) as CharacterOrderType;
   }
 
   lineOrder(): LineOrderType {
-    return this.general.lineOrder(this.bundle) as LineOrderType;
+    return this.general.lineOrder(this._bundle) as LineOrderType;
+  }
+
+  bundle(): Bundle {
+    return this._bundle;
+  }
+
+  locale(): Locale {
+    return this._locale;
+  }
+
+  resolveLocale(id: string | LanguageTag): Locale {
+    const _id = typeof id === 'string' ? id : id.compact();
+    const tag = LanguageResolver.resolve(id);
+    return { id: _id, tag };
   }
 
   measurementSystem(category?: MeasurementCategory): MeasurementSystem {
-    const region = this.bundle.region();
+    const region = this._bundle.region();
     switch (category) {
       case 'temperature':
         switch (region) {
@@ -61,24 +77,23 @@ export class GeneralImpl implements General {
   }
 
   formatList(items: string[], type?: ListPatternType): string {
-    return this.general.formatList(this.bundle, items, type || 'and');
+    return this.general.formatList(this._bundle, items, type || 'and');
   }
 
   formatListToParts(items: string[], type?: ListPatternType): Part[] {
-    return this.general.formatListToParts(this.bundle, items, type || 'and');
+    return this.general.formatListToParts(this._bundle, items, type || 'and');
   }
 
   getLanguageDisplayName(code: LanguageIdType | string): string {
-    return this.general.getLanguageDisplayName(this.bundle, code);
+    return this.general.getLanguageDisplayName(this._bundle, code);
   }
 
   getScriptDisplayName(code: ScriptIdType | string): string {
-    return this.general.getScriptDisplayName(this.bundle, code);
+    return this.general.getScriptDisplayName(this._bundle, code);
   }
 
   getRegionDisplayName(code: RegionIdType | string, type?: string): string {
-    const name = this.general.getRegionDisplayName(this.bundle, code, (type || 'none') as AltType);
-    return name !== '' ? name : this.general.getRegionDisplayName(this.bundle, code, 'none');
+    return this.general.getRegionDisplayName(this._bundle, code, (type || 'none') as AltType);
   }
 
 }

@@ -11,9 +11,9 @@ test('init framework', () => {
 
   expect(() => framework.get('xx')).toThrowError();
 
-  expect(api.Locales.current().id).toEqual('en');
-  expect(api.Locales.resolve('zh').tag.expanded()).toEqual('zh-Hans-CN');
-  expect(api.Locales.bundle().id()).toEqual('en-Latn-US');
+  expect(api.General.bundle().id()).toEqual('en-Latn-US');
+  expect(api.General.locale().id).toEqual('en');
+  expect(api.General.resolveLocale('zh').tag.expanded()).toEqual('zh-Hans-CN');
 
   expect(api.General.characterOrder()).toEqual('ltr');
   expect(api.General.lineOrder()).toEqual('ttb');
@@ -45,15 +45,15 @@ test('init framework', () => {
 
   // Bundle with invalid region
   api = framework.get('ar-Arab-XX');
-  expect(api.Locales.bundle().language()).toEqual('ar');
-  expect(api.Locales.bundle().languageRegion()).toEqual('ar-EG');
-  expect(api.Locales.bundle().languageScript()).toEqual('ar-Arab');
+  expect(api.General.bundle().language()).toEqual('ar');
+  expect(api.General.bundle().languageRegion()).toEqual('ar-EG');
+  expect(api.General.bundle().languageScript()).toEqual('ar-Arab');
 
   // Bundle with invalid script
   api = framework.get('ar-Cyrl-SA');
-  expect(api.Locales.bundle().language()).toEqual('ar');
-  expect(api.Locales.bundle().languageRegion()).toEqual('ar-EG');
-  expect(api.Locales.bundle().languageScript()).toEqual('ar-Arab');
+  expect(api.General.bundle().language()).toEqual('ar');
+  expect(api.General.bundle().languageRegion()).toEqual('ar-EG');
+  expect(api.General.bundle().languageScript()).toEqual('ar-Arab');
 });
 
 test('parsing language tags', () => {
@@ -78,7 +78,7 @@ test('enumerating locales', () => {
 test('accessing schema', () => {
   const framework = getCLDR();
   let api = framework.get('en');
-  let bundle = api.Locales.bundle();
+  let bundle = api.General.bundle();
 
   let system = api.Schema.Numbers.numberSystem.get('latn');
   let symbols = system.symbols.mapping(bundle);
@@ -89,7 +89,7 @@ test('accessing schema', () => {
   expect(pattern).toEqual('#,##0.###');
 
   api = framework.get('de');
-  bundle = api.Locales.bundle();
+  bundle = api.General.bundle();
 
   system = api.Schema.Numbers.numberSystem.get('latn');
   symbols = system.symbols.mapping(bundle);

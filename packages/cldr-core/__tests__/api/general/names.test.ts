@@ -1,11 +1,11 @@
 import { languageBundle } from '../../_helpers';
-import { General, GeneralImpl, InternalsImpl } from '../../../src';
+import { General, GeneralImpl, InternalsImpl, Locale } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
 const generalApi = (tag: string): General => {
   const bundle = languageBundle(tag);
-  return new GeneralImpl(bundle, INTERNALS);
+  return new GeneralImpl(bundle, Locale.resolve(tag), INTERNALS);
 };
 
 test('languages', () => {
@@ -38,6 +38,8 @@ test('territories', () => {
   let api = generalApi('en');
   expect(api.getRegionDisplayName('US')).toEqual('United States');
   expect(api.getRegionDisplayName('US', 'short')).toEqual('US');
+  expect(api.getRegionDisplayName('US', 'INVALID')).toEqual('United States');
+
   expect(api.getRegionDisplayName('ZZ')).toEqual('Unknown Region');
 
   expect(api.getRegionDisplayName('DE', 'variant')).toEqual('Germany');

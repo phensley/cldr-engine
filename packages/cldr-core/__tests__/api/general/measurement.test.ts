@@ -1,14 +1,14 @@
 import { languageBundle } from '../../_helpers';
-import { GeneralImpl, InternalsImpl, MeasurementCategory } from '../../../src';
+import { GeneralImpl, InternalsImpl, Locale, MeasurementCategory } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
 const api = (tag: string) => {
   const bundle = languageBundle(tag);
-  return new GeneralImpl(bundle, INTERNALS);
+  return new GeneralImpl(bundle, Locale.resolve(tag), INTERNALS);
 };
 
-test('general', () => {
+test('measurement system', () => {
   // US
   expect(api('en').measurementSystem()).toEqual('us');
   expect(api('und-LR').measurementSystem()).toEqual('us');

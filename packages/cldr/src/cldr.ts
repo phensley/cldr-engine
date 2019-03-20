@@ -25,50 +25,11 @@ import { LRU } from '@phensley/cldr-utils';
 const { version } = pkg;
 
 /**
- * Top-level namespace to expose info about the current locale and bundle,
- * and attach helper methods for dealing with locales.
- *
- * @alpha
- */
-export class Locales {
-
-  constructor(
-    protected readonly _locale: Locale,
-    protected readonly _bundle: Bundle) {}
-
-  /**
-   * The current language bundle.
-   */
-  bundle(): Bundle {
-    return this._bundle;
-  }
-
-  /**
-   * The current locale.
-   */
-  current(): Locale {
-    return this._locale;
-  }
-
-  /**
-   * Resolve a language tag to a Locale.
-   */
-  resolve(tag: string): Locale {
-    return CLDRFramework.resolveLocale(tag);
-  }
-
-}
-
-/**
  * Interface exporting all functionality for a given locale.
  *
  * @alpha
  */
 export interface CLDR {
-  /**
-   * Locale functions.
-   */
-  readonly Locales: Locales;
 
   /**
    * Calendar functions.
@@ -122,7 +83,6 @@ class CLDRImpl implements CLDR {
 
   private _calendars?: Calendars;
   private _general?: General;
-  private _locales?: Locales;
   private _numbers?: Numbers;
   private _privateApi?: PrivateApiImpl;
   private _units?: Units;
@@ -132,16 +92,6 @@ class CLDRImpl implements CLDR {
     private readonly bundle: Bundle,
     private readonly internals: Internals
   ) {}
-
-  /**
-   * Locale functions.
-   */
-  get Locales(): Locales {
-    if (this._locales === undefined) {
-      this._locales = new Locales(this.locale, this.bundle);
-    }
-    return this._locales;
-  }
 
   /**
    * Calendar functions.
@@ -158,7 +108,7 @@ class CLDRImpl implements CLDR {
    */
   get General(): General {
     if (this._general === undefined) {
-      this._general = new GeneralImpl(this.bundle, this.internals);
+      this._general = new GeneralImpl(this.bundle, this.locale, this.internals);
     }
     return this._general;
   }

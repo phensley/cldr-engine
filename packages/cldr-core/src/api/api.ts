@@ -31,6 +31,9 @@ import {
   ZonedDateTime
 } from '../common';
 
+import { Bundle } from '../resource';
+import { LanguageTag, Locale } from '../locale';
+
 import {
   BuddhistDate,
   CalendarDate,
@@ -145,6 +148,21 @@ export interface General {
    * or "btt" for bottom-to-top.
    */
   lineOrder(): LineOrderType;
+
+  /**
+   * Returns the resource bundle for the current locale.
+   */
+  bundle(): Bundle;
+
+  /**
+   * Returns the current locale.
+   */
+  locale(): Locale;
+
+  /**
+   * Resolves the given language tag into a locale.
+   */
+  resolveLocale(id: string | LanguageTag): Locale;
 
   /**
    * Returns the measurement system in use for the current locale generally,
