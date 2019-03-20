@@ -458,6 +458,7 @@ interface ZonedDateTime {
 // WARNING: Unsupported export: DecimalConstants
 // WARNING: Unsupported export: DecimalFormatStyleType
 // WARNING: Unsupported export: FormatWidthType
+// WARNING: Unsupported export: LanguageIdType
 // WARNING: Unsupported export: ListPatternType
 // WARNING: Unsupported export: RationalArg
 // WARNING: Unsupported export: RegionIdType
