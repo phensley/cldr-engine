@@ -5,6 +5,7 @@ export {
   EraWidthType,
   FieldWidthType,
   FormatWidthType,
+  LanguageIdType,
   LineOrderType,
   RegionIdType,
   RelativeTimeWidthType,

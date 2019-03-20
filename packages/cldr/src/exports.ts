@@ -16,6 +16,7 @@ export {
   FormatWidthType,
   GregorianDate,
   ISO8601Date,
+  LanguageIdType,
   LanguageResolver,
   LanguageTag,
   ListPatternType,
