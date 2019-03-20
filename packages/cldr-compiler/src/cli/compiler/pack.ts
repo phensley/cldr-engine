@@ -4,14 +4,13 @@ import { join } from 'path';
 import * as yargs from 'yargs';
 import * as zlib from 'zlib';
 
-import { availableLocales, getMain  } from '../../cldr';
+import { getMain  } from '../../cldr';
 import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
 import { getPackageInfo } from './util';
-import { checkLanguages, localeMap, writeJSON } from './util';
+import { checkLanguages, localeMap } from './util';
 
 import { ORIGIN } from '@phensley/cldr-schema';
-import { LanguageResolver, Locale } from '@phensley/cldr-core';
 
 /**
  * Encodes fields into a resource pack and returns the offset
@@ -60,6 +59,8 @@ export const runPack = (argv: yargs.Arguments) => {
     langs = checkLanguages(argv.lang.split(','));
   }
 
+  const regions = new Set(argv.regions ? argv.regions.split(',') : []);
+
   const dest = argv.out;
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest);
@@ -73,7 +74,11 @@ export const runPack = (argv: yargs.Arguments) => {
     console.warn(`processing:  ${lang}`);
 
     // Get the list of languages that should live together in this bundle.
-    const locales = localeMap[lang];
+    let locales = localeMap[lang];
+
+    if (regions.size > 0) {
+      locales = locales.filter(l => l.id === lang || regions.has(l.tag.region()));
+    }
 
     // Construct a pack that will contain all strings across all regions for this language.
     const pack = new ResourcePack(lang, pkg.version, pkg.cldrVersion);
