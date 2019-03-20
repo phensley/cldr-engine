@@ -109,7 +109,6 @@ interface CLDR {
   // WARNING: Because this definition is explicitly marked as @internal, an underscore prefix ("_") should be added to its name
   // @internal
   readonly Internals: Internals;
-  readonly Locales: Locales;
   readonly Numbers: Numbers;
   // WARNING: Because this definition is explicitly marked as @internal, an underscore prefix ("_") should be added to its name
   // @internal
@@ -333,18 +332,6 @@ interface LocaleMatch {
 class LocaleMatcher {
   constructor(supportedLocales: string | string[]);
   match(desiredLocales: string | string[], threshold?: number): LocaleMatch;
-}
-
-// @alpha
-class Locales {
-  constructor(_locale: Locale, _bundle: Bundle);
-  // (undocumented)
-  protected readonly _bundle: Bundle;
-  // (undocumented)
-  protected readonly _locale: Locale;
-  bundle(): Bundle;
-  current(): Locale;
-  resolve(tag: string): Locale;
 }
 
 // @alpha
