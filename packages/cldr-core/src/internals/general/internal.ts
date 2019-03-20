@@ -1,5 +1,6 @@
 import {
   AltType,
+  LanguageIdType,
   LayoutSchema,
   ListPatternsSchema,
   ListPatternPositionType,
@@ -58,6 +59,11 @@ export class GeneralInternalsImpl implements GeneralInternals {
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[] {
     const parts: Part[][] = items.map(i => ([{ type: 'item', value: i }]));
     return this.formatListToPartsImpl(bundle, parts, type);
+  }
+
+  getLanguageDisplayName(bundle: Bundle, code: string): string {
+    const id = code as LanguageIdType;
+    return this.names.languages.displayName.get(bundle, id);
   }
 
   getScriptDisplayName(bundle: Bundle, code: string): string {

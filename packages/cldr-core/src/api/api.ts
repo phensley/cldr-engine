@@ -5,6 +5,7 @@ import {
   DateTimePatternFieldType,
   EraWidthType,
   FieldWidthType,
+  LanguageIdType,
   LineOrderType,
   RegionIdType,
   ScriptIdType,
@@ -161,6 +162,11 @@ export interface General {
    * Format a list of items to an array of parts using the given list type.
    */
   formatListToParts(items: string[], type?: ListPatternType): Part[];
+
+  /**
+   * Returns the display name for the given language code.
+   */
+  getLanguageDisplayName(code: LanguageIdType): string;
 
   /**
    * Returns the display name for the given script code.

@@ -60,6 +60,7 @@ export interface GeneralInternals {
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string;
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[];
   formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[];
+  getLanguageDisplayName(bundle: Bundle, code: string): string;
   getScriptDisplayName(bundle: Bundle, code: string): string;
   getRegionDisplayName(bundle: Bundle, code: string, alt?: AltType): string;
 }

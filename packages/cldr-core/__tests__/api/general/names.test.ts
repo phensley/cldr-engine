@@ -1,12 +1,38 @@
 import { languageBundle } from '../../_helpers';
-import { GeneralImpl, InternalsImpl } from '../../../src';
+import { General, GeneralImpl, InternalsImpl } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
-const generalApi = (tag: string) => {
+const generalApi = (tag: string): General => {
   const bundle = languageBundle(tag);
   return new GeneralImpl(bundle, INTERNALS);
 };
+
+test('languages', () => {
+  let api = generalApi('en');
+  expect(api.getLanguageDisplayName('en')).toEqual('English');
+  expect(api.getLanguageDisplayName('de')).toEqual('German');
+  expect(api.getLanguageDisplayName('fr')).toEqual('French');
+  expect(api.getLanguageDisplayName('ko')).toEqual('Korean');
+
+  api = generalApi('es');
+  expect(api.getLanguageDisplayName('en')).toEqual('inglés');
+  expect(api.getLanguageDisplayName('de')).toEqual('alemán');
+  expect(api.getLanguageDisplayName('fr')).toEqual('francés');
+  expect(api.getLanguageDisplayName('ko')).toEqual('coreano');
+
+  api = generalApi('de');
+  expect(api.getLanguageDisplayName('en')).toEqual('Englisch');
+  expect(api.getLanguageDisplayName('de')).toEqual('Deutsch');
+  expect(api.getLanguageDisplayName('fr')).toEqual('Französisch');
+  expect(api.getLanguageDisplayName('ko')).toEqual('Koreanisch');
+
+  api = generalApi('ko');
+  expect(api.getLanguageDisplayName('en')).toEqual('영어');
+  expect(api.getLanguageDisplayName('de')).toEqual('독일어');
+  expect(api.getLanguageDisplayName('fr')).toEqual('프랑스어');
+  expect(api.getLanguageDisplayName('ko')).toEqual('한국어');
+});
 
 test('territories', () => {
   let api = generalApi('en');

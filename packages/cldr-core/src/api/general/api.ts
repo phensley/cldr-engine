@@ -1,6 +1,7 @@
 import {
   AltType,
   CharacterOrderType,
+  LanguageIdType,
   LineOrderType,
   RegionIdType,
   ScriptIdType
@@ -65,6 +66,10 @@ export class GeneralImpl implements General {
 
   formatListToParts(items: string[], type?: ListPatternType): Part[] {
     return this.general.formatListToParts(this.bundle, items, type || 'and');
+  }
+
+  getLanguageDisplayName(code: LanguageIdType | string): string {
+    return this.general.getLanguageDisplayName(this.bundle, code);
   }
 
   getScriptDisplayName(code: ScriptIdType | string): string {
