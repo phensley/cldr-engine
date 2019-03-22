@@ -187,8 +187,6 @@ const relativeFields = [
   'hour', 'minute', 'second'
 ];
 
-const relativeKey = (k: string) => [k, `${k}-short`, `${k}-narrow`];
-
 // Restructure relative times under 'short', 'narrow', 'wide' subkeys
 const relativeTimes = (obj: any): any => {
   const r: any = {};
@@ -201,6 +199,51 @@ const relativeTimes = (obj: any): any => {
     r[key] = o;
   });
   return r;
+};
+
+const contextRename = (s: string) => {
+  switch (s) {
+    case 'titlecase-firstword':
+      return 'T';
+    case 'no-change':
+    case undefined:
+      return 'N';
+    default:
+      throw new Error(`Unexpected context transform value ${s}`);
+  }
+};
+
+const contextKeys = ['stand-alone', 'uiListOrMenu'];
+const contextKeySet = new Set(contextKeys);
+
+/**
+ * Rewrite structure in compact positional form. Field 1 is 'stand-alone' and
+ * field 2 is 'uiListOrMenu', and values can be 'T' or 'N'.
+ */
+const contextCategories = (obj: any): any => {
+  const r: any = {};
+  if (obj === undefined) {
+    return r;
+  }
+
+  for (const cat of Object.keys(obj)) {
+    const sub = obj[cat];
+    for (const key of Object.keys(sub)) {
+      if (!contextKeySet.has(key)) {
+        throw new Error(`Found unexpected context key ${key}`);
+      }
+    }
+    const vals = contextKeys.map(c => contextRename(sub[c])).join('');
+    r[cat] = vals;
+  }
+  return r;
+};
+
+/**
+ * Context transforms.
+ */
+const ContextTransforms = {
+  contextTransforms: get(['contextTransforms', contextCategories]),
 };
 
 /**
@@ -469,6 +512,7 @@ export const getMain = (language: string, transform: boolean = true) => {
 
     Layout: access(Layout, 'layout'),
     Numbers: access(Numbers, 'numbers', false, transformNumbers),
+    ContextTransforms: access(ContextTransforms, 'contextTransforms', true),
 
     Names: {
       languages: {
@@ -484,7 +528,6 @@ export const getMain = (language: string, transform: boolean = true) => {
     },
 
     ...access({ Characters: get(['characters']) }, 'characters'),
-    ...access({ ContextTransforms: get(['contextTransforms']) }, 'contextTransforms', true),
     ...access({ Currencies: get(['numbers', 'currencies']) }, 'currencies', false, transformCurrencies),
     ...access({ ListPatterns: get(['listPatterns', listPattern]) }, 'listPatterns'),
     ...access({ Territories: get(['localeDisplayNames']) }, 'territories'),

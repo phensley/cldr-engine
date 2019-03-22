@@ -2,7 +2,6 @@ import * as fs from 'fs';
 import { join } from 'path';
 import * as yargs from 'yargs';
 
-import { Entry } from '../types';
 import { getMain, getSupplemental } from '../../../cldr';
 import { checkLanguages, localeMap, writeJSON } from '../../compiler/util';
 

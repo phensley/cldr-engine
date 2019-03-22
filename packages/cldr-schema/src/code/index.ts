@@ -3,7 +3,7 @@ import { BUDDHIST, BUDDHIST_INDICES } from './buddhist';
 import { CALENDAR_INDICES, CALENDAR_VALUES } from './calendars';
 import { CURRENCIES, CURRENCIES_INDICES, CURRENCIES_VALUES } from './currencies';
 import { DATEFIELDS, DATEFIELDS_INDICES } from './datefields';
-import { LAYOUT, LIST_PATTERNS, LIST_PATTERNS_INDICES } from './general';
+import { CONTEXT_TRANSFORM, GENERAL_INDICES, LAYOUT, LIST_PATTERNS } from './general';
 import { GREGORIAN, GREGORIAN_INDICES } from './gregorian';
 import { JAPANESE, JAPANESE_INDICES } from './japanese';
 import { NAMES, NAMES_INDICES } from './names';
@@ -27,6 +27,7 @@ const CODE = [
   TIMEZONE,
   CURRENCIES,
   UNITS,
+  CONTEXT_TRANSFORM
 ];
 
 const INDICES = {
@@ -41,7 +42,7 @@ const INDICES = {
 
   ...CURRENCIES_INDICES,
   ...DATEFIELDS_INDICES,
-  ...LIST_PATTERNS_INDICES,
+  ...GENERAL_INDICES,
   ...NAMES_INDICES,
   ...NUMBERS_INDICES,
   ...TIMEZONE_INDICES,

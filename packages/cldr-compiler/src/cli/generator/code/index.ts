@@ -5,6 +5,7 @@ import { Code } from './util';
 
 import { getAliases } from './aliases';
 import { getCalendarPrefs } from './calendar';
+import { getContexts } from './contexts';
 import { getCurrencies } from './currencies';
 import { getDayPeriods } from './dayperiods';
 import { getDistance } from './distance';
@@ -22,6 +23,7 @@ import { getZones } from './zones';
 const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   aliases: getAliases,
   calendar: getCalendarPrefs,
+  contexts: getContexts,
   currencies: getCurrencies,
   dayperiods: getDayPeriods,
   distance: getDistance,
@@ -68,7 +70,6 @@ const run = (args: yargs.Arguments) => {
 
   // Path to root of monorepo
   const root = join(__dirname, '..', '..', '..', '..', '..', '..');
-  const results = [];
   for (const key of keys) {
     const impl = OUTPUTS[key];
     for (const code of impl(data)) {

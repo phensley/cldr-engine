@@ -30,6 +30,7 @@ export const getSymbols = (): any => {
   // Containers for extracted values.
   const timeZoneIds = new Set();
   const metaZoneIds = new Set();
+  const contextCategories = new Set();
   const currencies = new Set();
   const languages = new Set();
   const scripts = new Set();
@@ -42,6 +43,7 @@ export const getSymbols = (): any => {
     // Add keys for nested objects to their corresponding sets.
     const main = getMain(lang);
 
+    addKeys(main.ContextTransforms.contextCategories, contextCategories);
     addKeys(main.Currencies.currencyIds, currencies);
     addKeys(main.Units.unitIds, unitsRaw);
     addKeys(main.Names.languages.displayName, languages);
@@ -57,6 +59,7 @@ export const getSymbols = (): any => {
     timeZoneIds: sorted(timeZoneIds),
     units: sorted(unitsRaw),
     unitCategories: unitCategories,
+    contextCategories: sorted(contextCategories),
     currencies: sorted(currencies),
     languages: sorted(languages),
     scripts: sorted(scripts),
