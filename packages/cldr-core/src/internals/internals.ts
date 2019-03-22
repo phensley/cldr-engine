@@ -1,5 +1,7 @@
 import {
   AltType,
+  ContextTransformFieldType,
+  ContextType,
   CurrencyType,
   DateFieldType,
   DayPeriodType,
@@ -20,7 +22,7 @@ import {
 } from '../common';
 
 import { CalendarDate, CalendarType } from '../systems/calendars';
-import { NumberParams } from '../common/private';
+import { ContextTransformInfo, NumberParams } from '../common/private';
 import { DateTimeNode } from '../parsing/patterns/date';
 import { NumberPattern } from '../parsing/patterns/number';
 import { WrapperNode } from '../parsing/patterns/wrapper';
@@ -42,8 +44,8 @@ export interface CalendarInternals {
     calendar: CalendarType, ctx: CalendarContext<CalendarDate>, renderer: Renderer<R>,
     date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
 
-  formatInterval<R>(calendar: CalendarType, bundle: Bundle, params: NumberParams, renderer: Renderer<R>,
-      start: CalendarDate, end: CalendarDate, pattern: DateTimeNode[]): R;
+  formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>,
+    renderer: Renderer<R>, end: CalendarDate, pattern: DateTimeNode[]): R;
 }
 
 export interface DateFieldInternals {
@@ -51,12 +53,15 @@ export interface DateFieldInternals {
   //   options: RelativeTimeFormatOptions, params: NumberParams): string;
 
   formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: DateFieldType,
-    options: RelativeTimeFormatOptions, params: NumberParams): string;
+    options: RelativeTimeFormatOptions, params: NumberParams,
+    transform: ContextTransformInfo): string;
 }
 
 export interface GeneralInternals {
   characterOrder(bundle: Bundle): string;
   lineOrder(bundle: Bundle): string;
+  contextTransform(value: string, context: ContextType,
+    field: ContextTransformFieldType, info: ContextTransformInfo): string;
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string;
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[];
   formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[];

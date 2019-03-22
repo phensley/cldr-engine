@@ -1,6 +1,6 @@
 import { field, scope, vector1, vector2, Scope } from '../types';
 import {
-  ContextTransformIndex,
+  ContextTransformFieldIndex,
   ListPatternPositionIndex
 } from '../schema/general';
 
@@ -21,10 +21,10 @@ export const LIST_PATTERNS: Scope = scope('ListPatterns', 'ListPatterns', [
 ]);
 
 export const GENERAL_INDICES = {
-  'context-transform': ContextTransformIndex,
+  'context-transform-field': ContextTransformFieldIndex,
   'list-pattern-position': ListPatternPositionIndex
 };
 
 export const CONTEXT_TRANSFORM: Scope = scope('ContextTransforms', 'ContextTransforms', [
-  vector1('contextTransforms', 'context-transform')
+  vector1('contextTransforms', 'context-transform-field')
 ]);

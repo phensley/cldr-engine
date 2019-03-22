@@ -1,5 +1,7 @@
 import {
   AltType,
+  ContextTransformFieldType,
+  ContextType,
   LanguageIdType,
   LayoutSchema,
   ListPatternsSchema,
@@ -13,6 +15,7 @@ import {
 import { GeneralInternals, Internals } from '../../internals/internals';
 import { Bundle } from '../../resource';
 import { ListPatternType } from '../../common';
+import { ContextTransformInfo } from '../../common/private';
 import { Part } from '../../types';
 
 export class GeneralInternalsImpl implements GeneralInternals {
@@ -34,6 +37,35 @@ export class GeneralInternalsImpl implements GeneralInternals {
 
   lineOrder(bundle: Bundle): string {
     return this.layout.lineOrder.get(bundle);
+  }
+
+  /**
+   * Contextually transform a string,
+   */
+  contextTransform(value: string, context: ContextType,
+      field: ContextTransformFieldType, info: ContextTransformInfo): string {
+
+    if (!value) {
+      return value;
+    }
+
+    const flag = info[field];
+    let title = false;
+    switch (context) {
+      case 'begin-sentence':
+        title = true;
+        break;
+      case 'standalone':
+        title = flag !== undefined && (flag[0] === 'T');
+        break;
+      case 'ui-list-or-menu':
+        title = flag !== undefined && flag[1] === 'T';
+        break;
+    }
+
+    // TODO: in Unicode "title case" is slightly different than "upper case"
+    // but for now we use `toUpperCase` the first character.
+    return title ? value[0].toUpperCase() + value.slice(1) : value;
   }
 
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string {

@@ -108,11 +108,10 @@ export class CalendarInternalsImpl implements CalendarInternals {
     return _date ? _date : _time ? _time : renderer.empty();
   }
 
-  formatInterval<R>(calendar: CalendarType, bundle: Bundle, params: NumberParams, renderer: Renderer<R>,
-    start: CalendarDate, end: CalendarDate, pattern: DateTimeNode[]): R {
+  formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>,
+    renderer: Renderer<R>, end: CalendarDate, pattern: DateTimeNode[]): R {
 
     const idx = intervalPatternBoundary(pattern);
-    const ctx = { date: start, bundle, system: params.system, latnSystem: params.latnSystem };
     const s = this.formatDateTime(calendar, ctx, renderer, pattern.slice(0, idx));
     ctx.date = end;
     const e = this.formatDateTime(calendar, ctx, renderer, pattern.slice(idx));

@@ -9,7 +9,7 @@ import { DateFieldInternals, Internals } from '../internals';
 import { RelativeTimeFormatOptions } from '../../common';
 import { Bundle } from '../../resource';
 import { CalendarDate } from '../../systems/calendars';
-import { NumberParams } from '../../common/private';
+import { ContextTransformInfo, NumberParams } from '../../common/private';
 
 // TODO: expose a method to calculate field difference with different options, e.g.
 // include weekdays
@@ -33,7 +33,8 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
   // }
 
   formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType,
-      options: RelativeTimeFormatOptions, params: NumberParams): string {
+      options: RelativeTimeFormatOptions, params: NumberParams,
+      transform: ContextTransformInfo): string {
 
     let format: RelativeTimeFields;
     switch (options.width) {
@@ -53,34 +54,50 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     if (negative) {
       n = n.negate();
     }
+
+    let res = '';
     if (n.compare(DecimalConstants.ZERO) === 0) {
-      return format.current.get(bundle, field);
+      res = format.current.get(bundle, field);
+
+    } else {
+      switch (field) {
+        case 'hour':
+        case 'minute':
+        case 'second':
+          break;
+        default:
+          if (n.compare(DecimalConstants.TWO) === 0) {
+            const p = negative ? format.previous2.get(bundle, field) : format.next2.get(bundle, field);
+            if (p !== '') {
+              res = p;
+            }
+            // Fall through
+          } else if (n.compare(DecimalConstants.ONE) === 0) {
+            res = negative ? format.previous.get(bundle, field) : format.next.get(bundle, field);
+          }
+          break;
+      }
     }
 
-    switch (field) {
-      case 'hour':
-      case 'minute':
-      case 'second':
-        break;
-      default:
-        if (n.compare(DecimalConstants.TWO) === 0) {
-          const p = negative ? format.previous2.get(bundle, field) : format.next2.get(bundle, field);
-          if (p !== '') {
-            return p;
-          }
-          // Fall through
-        } else if (n.compare(DecimalConstants.ONE) === 0) {
-          return negative ? format.previous.get(bundle, field) : format.next.get(bundle, field);
+    if (res) {
+      if (options.context) {
+        res = this.internals.general.contextTransform(res, options.context,
+          'relative', transform);
         }
-        break;
+        return res;
     }
 
     // Format a pluralized future / past.
     const operands = n.operands();
     const plural = this.internals.plurals.cardinal(bundle.language(), operands);
     const arrow = negative ? format.past : format.future;
-    const raw = arrow.get(bundle, plural, field);
+    let raw = arrow.get(bundle, plural, field);
+    if (options.context) {
+      raw = this.internals.general.contextTransform(raw, options.context,
+        'relative', transform);
+    }
     const num = params.system.formatString(n, false, 1);
     return this.internals.wrapper.format(raw, [num]);
+
   }
 }

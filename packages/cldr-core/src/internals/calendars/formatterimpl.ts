@@ -1,4 +1,9 @@
-import { CalendarSchema, TimeZoneSchema, TimeZoneType, Vector2Arrow } from '@phensley/cldr-schema';
+import {
+  CalendarSchema,
+  ContextTransformFieldType,
+  TimeZoneSchema, TimeZoneType, Vector2Arrow
+} from '@phensley/cldr-schema';
+
 import { WrapperInternals } from '../../internals/internals';
 import { Bundle } from '../../resource/bundle';
 import { Internals } from '../internals';
@@ -38,62 +43,222 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
   }
 
   format<R>(rnd: Renderer<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[]): void {
-    for (const n of nodes) {
+    const len = nodes.length;
+    for (let i = 0; i < len; i++) {
+      const n = nodes[i];
       if (typeof n === 'string') {
         rnd.add('literal', n);
         continue;
       }
+
+      const w = n[1];
+      let field: ContextTransformFieldType | undefined;
+      let type = '';
+      let value = '';
       switch (n[0]) {
-        case 'G': rnd.add('era', this.era(ctx, n[1])); break;
-        case 'y': rnd.add('year', this.year(ctx, n[1])); break;
-        case 'Y': rnd.add('year', this.yearOfWeekYear(ctx, n[1])); break;
-        case 'u': rnd.add('year', this.extendedYear(ctx, n[1])); break;
-        case 'U': rnd.add('cyclic-year', this.cyclicYear(ctx, n[1])); break;
-        case 'r': rnd.add('related-year', this.relatedYear(ctx, n[1])); break;
+
+        case 'G':
+          type = 'era';
+          value = this.era(ctx, w);
+          if (w !== 5) {
+            field = w === 4 ? 'era-name' : 'era-abbr';
+          }
+          break;
+
+        case 'y':
+          type = 'year';
+          value = this.year(ctx, w);
+          break;
+
+        case 'Y':
+          type = 'year';
+          value = this.yearOfWeekYear(ctx, w);
+          break;
+
+        case 'u':
+          type = 'year';
+          value = this.extendedYear(ctx, w);
+          break;
+
+        case 'U':
+          type = 'cyclic-year';
+          value = this.cyclicYear(ctx, w);
+          break;
+
+        case 'r':
+          type = 'related-year';
+          value = this.relatedYear(ctx, w);
+          break;
 
         case 'Q':
-        case 'q': rnd.add('quarter', this.quarter(ctx, n)); break;
+        case 'q':
+          type = 'quarter';
+          value = this.quarter(ctx, n);
+          break;
 
         case 'M':
-        case 'L': rnd.add('month', this.month(ctx, n)); break;
+          type = 'month';
+          value = this.month(ctx, n);
+          switch (w) {
+            case 3:
+            case 4:
+              field = 'month-format-except-narrow';
+              break;
+          }
+          break;
+
+        case 'L':
+          type = 'month';
+          value = this.month(ctx, n);
+          switch (w) {
+            case 3:
+            case 4:
+              field = 'month-standalone-except-narrow';
+              break;
+          }
+          break;
 
         // 'l' - deprecated
 
-        case 'w': rnd.add('week', this.weekOfWeekYear(ctx, n)); break;
-        case 'W': rnd.add('week', this.weekOfMonth(ctx, n)); break;
-        case 'd': rnd.add('day', this.dayOfMonth(ctx, n)); break;
-        case 'D': rnd.add('day', this.dayOfYear(ctx, n)); break;
-        case 'F': rnd.add('day', this.dayOfWeekInMonth(ctx, n)); break;
-        case 'g': rnd.add('mjulian-day', this.modifiedJulianDay(ctx, n)); break;
-        case 'E': rnd.add('weekday', this.weekday(ctx, n)); break;
-        case 'e': rnd.add('weekday', this.weekdayLocal(ctx, n)); break;
-        case 'c': rnd.add('weekday', this.weekdayLocalStandalone(ctx, n)); break;
-        case 'a': rnd.add('dayperiod', this.dayPeriod(ctx, n)); break;
-        case 'b': rnd.add('dayperiod', this.dayPeriodExt(ctx, n)); break;
-        case 'B': rnd.add('dayperiod', this.dayPeriodFlex(ctx, n)); break;
+        case 'w':
+          type = 'week';
+          value = this.weekOfWeekYear(ctx, n);
+          break;
+
+        case 'W':
+          type = 'week';
+          value = this.weekOfMonth(ctx, n);
+          break;
+
+        case 'd':
+          type = 'day';
+          value = this.dayOfMonth(ctx, n);
+          break;
+
+        case 'D':
+          type = 'day';
+          value = this.dayOfYear(ctx, n);
+          break;
+
+        case 'F':
+          type = 'day';
+          value = this.dayOfWeekInMonth(ctx, n);
+          break;
+
+        case 'g':
+          type = 'mjulian-day';
+          value = this.modifiedJulianDay(ctx, n);
+          break;
+
+        case 'E':
+          type = 'weekday';
+          value = this.weekday(ctx, n);
+          if (w !== 5) {
+            field = 'day-format-except-narrow';
+          }
+          break;
+
+        case 'e':
+          type = 'weekday';
+          value = this.weekdayLocal(ctx, n);
+          break;
+
+        case 'c':
+          type = 'weekday';
+          value = this.weekdayLocalStandalone(ctx, n);
+          if (w !== 5) {
+            field = 'day-standalone-except-narrow';
+          }
+          break;
+
+        case 'a':
+          type = 'dayperiod';
+          value = this.dayPeriod(ctx, n);
+          break;
+
+        case 'b':
+          type = 'dayperiod';
+          value = this.dayPeriodExt(ctx, n);
+          break;
+
+        case 'B':
+          type = 'dayperiod';
+          value = this.dayPeriodFlex(ctx, n);
+          break;
 
         case 'h':
-        case 'H': rnd.add('hour', this.hour(ctx, n)); break;
+        case 'H':
+          type = 'hour';
+          value = this.hour(ctx, n);
+          break;
 
         case 'K':
-        case 'k': rnd.add('hour', this.hourAlt(ctx, n)); break;
+        case 'k':
+          type = 'hour';
+          value = this.hourAlt(ctx, n);
+          break;
 
         // 'j', 'J', 'C' - input skeleton symbols, not present in formats
 
-        case 'm': rnd.add('minute', this.minute(ctx, n)); break;
-        case 's': rnd.add('second', this.second(ctx, n)); break;
-        case 'S': rnd.add('fracsec', this.fractionalSecond(ctx, n)); break;
-        case 'A': rnd.add('millis-in-day', this.millisInDay(ctx, n)); break;
+        case 'm':
+          type = 'minute';
+          value = this.minute(ctx, n);
+          break;
 
-        case 'z': rnd.add('timezone', this.timezone_z(ctx, n)); break;
-        case 'Z': rnd.add('timezone', this.timezone_Z(ctx, n)); break;
-        case 'O': rnd.add('timezone', this.timezone_O(ctx, n)); break;
-        case 'v': rnd.add('timezone', this.timezone_v(ctx, n)); break;
-        case 'V': rnd.add('timezone', this.timezone_V(ctx, n)); break;
+        case 's':
+          type = 'second';
+          value = this.second(ctx, n);
+          break;
+
+        case 'S':
+          type = 'fracsec';
+          value = this.fractionalSecond(ctx, n);
+          break;
+
+        case 'A':
+          type = 'millis-in-day';
+          value = this.millisInDay(ctx, n);
+          break;
+
+        case 'z':
+          type = 'timezone';
+          value = this.timezone_z(ctx, n);
+          break;
+
+        case 'Z':
+          type = 'timezone';
+          value = this.timezone_Z(ctx, n);
+          break;
+
+        case 'O':
+          type = 'timezone';
+          value = this.timezone_O(ctx, n);
+          break;
+
+        case 'v':
+          type = 'timezone';
+          value = this.timezone_v(ctx, n);
+          break;
+
+        case 'V':
+          type = 'timezone';
+          value = this.timezone_V(ctx, n);
+          break;
 
         case 'X':
-        case 'x': rnd.add('timezone', this.timezone_x(ctx, n)); break;
+        case 'x':
+          type = 'timezone';
+          value = this.timezone_x(ctx, n);
+          break;
+
+        default:
+          continue;
       }
+
+      if (i === 0 && ctx.context && field) {
+        value = this.internals.general.contextTransform(value, ctx.context, field, ctx.transform);
+      }
+      rnd.add(type, value);
     }
   }
 
@@ -143,7 +308,9 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
   _formatQuarterOrMonth(ctx: CalendarContext<T>,
       format: Vector2Arrow<string, string>, value: number, width: number): string {
-    return width >= 3 ? format.get(ctx.bundle, widthKey1(width), String(value)) : this._num(ctx, value, width);
+    return width >= 3 ?
+      format.get(ctx.bundle, widthKey1(width), String(value)) :
+      this._num(ctx, value, width);
   }
 
   quarter(ctx: CalendarContext<T>, node: [string, number]): string {

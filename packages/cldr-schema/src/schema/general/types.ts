@@ -1,10 +1,10 @@
 import { FieldArrow, Vector1Arrow } from '../arrows';
 import { ListPatternPositionType } from './enums';
-import { ContextTransformType } from './autogen.context';
+import { ContextTransformFieldType } from './autogen.context';
 
 export type LineOrderType = 'ltr' | 'rtl';
 export type CharacterOrderType = 'ttb' | 'btt';
-export type ContextType = 'standalone' | 'ui-list-or-menu';
+export type ContextType = 'begin-sentence' | 'standalone' | 'ui-list-or-menu';
 
 export interface LayoutSchema {
   readonly characterOrder: FieldArrow;
@@ -20,6 +20,6 @@ export interface ListPatternsSchema {
   readonly unitShort: Vector1Arrow<ListPatternPositionType>;
 }
 
-export interface ContextTransformSchema {
-  readonly contextTransforms: Vector1Arrow<ContextTransformType>;
+export interface ContextTransformsSchema {
+  readonly contextTransforms: Vector1Arrow<ContextTransformFieldType>;
 }

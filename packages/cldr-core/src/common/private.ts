@@ -1,4 +1,11 @@
-import { CurrencySpacingPattern, CurrencySpacingPos, NumberSymbolType, NumberSystemName } from '@phensley/cldr-schema';
+import {
+  ContextTransformFieldType,
+  CurrencySpacingPattern,
+  CurrencySpacingPos,
+  NumberSymbolType,
+  NumberSystemName,
+} from '@phensley/cldr-schema';
+
 import { DecimalArg } from '../types/numbers';
 import { DateTimeNode } from '../parsing/patterns/date';
 
@@ -29,6 +36,13 @@ export abstract class NumberingSystem {
   // abstract formatPattern<R>(formatter: NumberFormatter<R>, pattern: NumberPattern, n: DecimalArg,
   //   groupDigits: boolean, currencySymbol: string, percentSymbol: string, minInt: number): R;
 }
+
+/**
+ * @internal
+ */
+export type ContextTransformInfo = {
+  [x in ContextTransformFieldType]: string;
+};
 
 /**
  * @internal

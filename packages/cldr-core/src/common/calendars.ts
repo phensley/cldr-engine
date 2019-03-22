@@ -1,4 +1,4 @@
-import { FormatWidthType, RelativeTimeWidthType } from '@phensley/cldr-schema';
+import { ContextType, FormatWidthType, RelativeTimeWidthType } from '@phensley/cldr-schema';
 import { NumberSystemType } from './numbers';
 import { CalendarType } from '../systems/calendars/calendar';
 
@@ -44,6 +44,9 @@ export interface DateFormatOptions {
   // Specify the number system to use.
   nu?: NumberSystemType;
 
+  // Context in which the formatted string will be used
+  context?: ContextType;
+
   // TODO: add context
   // readonly context: FormatContextType;
 }
@@ -58,6 +61,9 @@ export interface DateRawFormatOptions {
   ca?: CalendarType;
 
   nu?: NumberSystemType;
+
+  // Context in which the formatted string will be used
+  context?: ContextType;
 }
 
 /**
@@ -72,6 +78,9 @@ export interface DateIntervalFormatOptions {
 
   // Specify the number system to use
   readonly nu?: NumberSystemType;
+
+  // Context in which the formatted string will be used
+  context?: ContextType;
 }
 
 /**
@@ -81,4 +90,7 @@ export interface RelativeTimeFormatOptions {
   width?: RelativeTimeWidthType;
 
   readonly nu?: NumberSystemType;
+
+  // Context in which the formatted string will be used
+  context?: ContextType;
 }

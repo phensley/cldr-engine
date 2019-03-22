@@ -5,15 +5,15 @@ export const getContexts = (data: any): Code[] => {
 
   const transforms = data.contextTransforms;
   const _transforms = data.contextTransforms.map((c: string) => `'${c}'`);
-  code += `export type ContextTransformType = (\n`;
+  code += `export type ContextTransformFieldType = (\n`;
   code += lineWrap(80, '|', _transforms);
   code += ');\n\n';
 
-  code += `export const ContextTransformValues: ContextTransformType[] = [\n`;
+  code += `export const ContextTransformFieldValues: ContextTransformFieldType[] = [\n`;
   code += lineWrap(80, ',', _transforms);
   code += '\n];\n\n';
 
-  code += `export const enum ContextTransform {\n`;
+  code += `export const enum ContextTransformField {\n`;
   code += transforms.map((c: string) => {
     return `  ${c.replace(/-/g, '_').toUpperCase()} = '${c}'`;
   }).join(',\n');

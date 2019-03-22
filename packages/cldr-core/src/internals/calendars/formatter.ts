@@ -1,7 +1,8 @@
+import { ContextType } from '@phensley/cldr-schema';
 import { Bundle } from '../../resource';
 import { DateTimeNode } from '../../parsing/patterns/date';
 import { CalendarDate } from '../../systems/calendars';
-import { NumberingSystem } from '../../common/private';
+import { ContextTransformInfo, NumberingSystem } from '../../common/private';
 import { Renderer } from '../../utils/render';
 
 /**
@@ -29,6 +30,16 @@ export interface CalendarContext<T extends CalendarDate> {
    * Latin decimal digit numbering system.
    */
   latnSystem: NumberingSystem;
+
+  /**
+   * Context in which we're formatting.
+   */
+  context?: ContextType;
+
+  /**
+   * Context transform info.
+   */
+  transform: ContextTransformInfo;
 }
 
 export interface CalendarFormatter<T extends CalendarDate> {

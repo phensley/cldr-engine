@@ -19,7 +19,7 @@ import {
 
 import { CurrenciesSchema } from './currencies';
 import { DateFieldsSchema } from './datefields';
-import { LayoutSchema, ListPatternsSchema } from './general';
+import { ContextTransformsSchema, LayoutSchema, ListPatternsSchema } from './general';
 import { NamesSchema } from './names';
 import { NumbersSchema } from './numbers';
 import { TimeZoneSchema } from './timezones';
@@ -38,4 +38,5 @@ export interface Schema {
   readonly TimeZones: TimeZoneSchema;
   readonly Currencies: CurrenciesSchema;
   readonly Units: UnitsSchema;
+  readonly ContextTransforms: ContextTransformsSchema;
 }

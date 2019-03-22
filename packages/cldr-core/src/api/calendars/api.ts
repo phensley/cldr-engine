@@ -204,9 +204,10 @@ export class CalendarsImpl implements Calendars {
 
   formatRelativeTimeField(value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string {
     options = options || { width: 'wide' };
+    const transform = this.privateApi.getContextTransformInfo();
     const params = this.privateApi.getNumberParams(options.nu);
     return this.internals.dateFields.formatRelativeTimeField(
-      this.bundle, value, field, options, params);
+      this.bundle, value, field, options, params, transform);
   }
 
   /**
@@ -235,7 +236,14 @@ export class CalendarsImpl implements Calendars {
 
     date = this.convertDateTo(calendar, date);
     const req = this.manager.getDateFormatRequest(date, options, params);
-    const ctx = { date, bundle: this.bundle, system: params.system, latnSystem: params.latnSystem };
+    const ctx = {
+      date,
+      bundle: this.bundle,
+      system: params.system,
+      latnSystem: params.latnSystem,
+      context: options.context,
+      transform: this.privateApi.getContextTransformInfo()
+    };
     return calendars.formatDateTime(calendar, ctx, renderer, req.date, req.time, req.wrapper);
   }
 
@@ -255,7 +263,14 @@ export class CalendarsImpl implements Calendars {
     if (req.skeleton) {
       const { ca, nu } = options;
       const r = this.manager.getDateFormatRequest(start, { ca, nu, skeleton: req.skeleton }, params);
-      const ctx = { date: start, bundle: this.bundle, system: params.system, latnSystem: params.latnSystem };
+      const ctx = {
+        date: start,
+        bundle: this.bundle,
+        system: params.system,
+        latnSystem: params.latnSystem,
+        context: options.context,
+        transform: this.privateApi.getContextTransformInfo()
+      };
       const _start = this.internals.calendars.formatDateTime(calendar, ctx, renderer, r.date, r.time, r.wrapper);
       ctx.date = end;
       const _end = this.internals.calendars.formatDateTime(calendar, ctx, renderer, r.date, r.time, r.wrapper);
@@ -267,13 +282,29 @@ export class CalendarsImpl implements Calendars {
     let _date: R | undefined;
     if (req.date) {
       const { ca, nu } = options;
-      const ctx = { date: start, bundle: this.bundle, system: params.system, latnSystem: params.latnSystem};
+      const ctx = {
+        date: start,
+        bundle: this.bundle,
+        system: params.system,
+        latnSystem: params.latnSystem,
+        context: options.context,
+        transform: this.privateApi.getContextTransformInfo()
+      };
       _date = this.internals.calendars.formatDateTime(calendar, ctx, renderer, req.date);
     }
 
     if (req.range) {
+      const ctx = {
+        date: start,
+        bundle: this.bundle,
+        system: params.system,
+        latnSystem: params.latnSystem,
+        context: options.context,
+        transform: this.privateApi.getContextTransformInfo()
+      };
+
       const _range = this.internals.calendars.formatInterval(
-        calendar, this.bundle, params, renderer, start, end, req.range);
+        calendar, ctx, renderer, end, req.range);
       if (!_date) {
         return _range;
       }
@@ -301,8 +332,14 @@ export class CalendarsImpl implements Calendars {
     const pattern = this.internals.calendars.parseDatePattern(options.pattern);
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     const params = this.privateApi.getNumberParams(options.nu, 'default');
-    const ctx = { date: this.convertDateTo(calendar, date), bundle: this.bundle,
-      system: params.system, latnSystem: params.latnSystem };
+    const ctx = {
+      date: this.convertDateTo(calendar, date),
+      bundle: this.bundle,
+      system: params.system,
+      latnSystem: params.latnSystem,
+      context: options.context,
+      transform: this.privateApi.getContextTransformInfo()
+    };
     return this.internals.calendars.formatDateTime(calendar, ctx, renderer, pattern);
   }
 
