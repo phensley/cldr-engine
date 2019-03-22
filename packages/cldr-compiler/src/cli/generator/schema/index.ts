@@ -12,10 +12,14 @@ const isObject = (o: any): boolean =>
 /**
  * Recurse into an object, replacing all nested leaf values with integer 1.
  */
-const keyCounts = (obj: any) => {
+const keyCounts = (obj: any, includeValues = false) => {
   return Object.keys(obj).reduce((o: any, k) => {
     const v = obj[k];
-    o[k] = isObject(v) ? keyCounts(v) : 1;
+    if (isObject(v)) {
+      o[k] = keyCounts(v, includeValues);
+    } else {
+      o[k] = includeValues ? { [v]: 1 } : 1;
+    }
     return o;
   }, {});
 };
@@ -73,7 +77,7 @@ const run = (args: yargs.Arguments): void => {
       if (!src) {
         return;
       }
-      const counts = keyCounts(src);
+      const counts = keyCounts(src, args.withValues);
       mergeKeyCounts(dst, counts);
       sections[prefix] = dst;
     });
@@ -82,7 +86,7 @@ const run = (args: yargs.Arguments): void => {
   const supplemental = getSupplemental();
   Object.keys(supplemental).forEach(key => {
     const src = supplemental[key];
-    sections[`Supplemental.${key}`] = keyCounts(src);
+    sections[`Supplemental.${key}`] = keyCounts(src, args.withValues);
   });
 
   Object.keys(sections).forEach(key => {
@@ -99,5 +103,6 @@ export const schemaOptions = (argv: yargs.Argv) =>
     .option('l', { alias: 'lang', description: 'List of languages' })
     .option('n', { alias: 'dry-run' })
     .option('o', { alias: 'out', description: 'Output dir', required: true })
-    .option('t', { alias: 'transform', description: 'Apply transforms' }),
+    .option('t', { alias: 'transform', description: 'Apply transforms' })
+    .option('w', { alias: 'with-values', description: 'With value leaf nodes' }),
     run);
