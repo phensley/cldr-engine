@@ -27,3 +27,7 @@ test('locales', () => {
   expect(locale.id).toEqual('en-Latn-US');
   expect(locale.tag.compact()).toEqual('en-Latn-US');
 });
+
+test('language tags', () => {
+  expect(api('en').parseLanguageTag('en').expanded()).toEqual('en-Zzzz-ZZ');
+});

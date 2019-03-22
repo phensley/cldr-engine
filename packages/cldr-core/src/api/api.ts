@@ -165,6 +165,11 @@ export interface General {
   resolveLocale(id: string | LanguageTag): Locale;
 
   /**
+   * Parses a language tag and canonicalizes its fields.
+   */
+  parseLanguageTag(tag: string): LanguageTag;
+
+  /**
    * Returns the measurement system in use for the current locale generally,
    * or for a specific measurement category. For example, to get the correct
    * measurement system for temperature you must pass in the category 'temperature'.

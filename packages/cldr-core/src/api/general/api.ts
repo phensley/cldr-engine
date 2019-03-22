@@ -8,7 +8,7 @@ import {
 } from '@phensley/cldr-schema';
 
 import { General } from '../api';
-import { LanguageResolver, LanguageTag, Locale } from '../../locale';
+import { parseLanguageTag, LanguageResolver, LanguageTag, Locale } from '../../locale';
 import { ListPatternType, MeasurementCategory, MeasurementSystem } from '../../common';
 import { Bundle } from '../../resource';
 import { Part } from '../../types';
@@ -46,6 +46,10 @@ export class GeneralImpl implements General {
     const _id = typeof id === 'string' ? id : id.compact();
     const tag = LanguageResolver.resolve(id);
     return { id: _id, tag };
+  }
+
+  parseLanguageTag(tag: string): LanguageTag {
+    return parseLanguageTag(tag);
   }
 
   measurementSystem(category?: MeasurementCategory): MeasurementSystem {
