@@ -16,9 +16,10 @@ const calendarsApi = (tag: string) => {
 };
 
 test('context transforms', () => {
-  const api = calendarsApi('es');
   const date = { date: 123456666666, zoneId: 'America/New_York' };
   let s: string;
+
+  let api = calendarsApi('es');
 
   s = api.formatDate(date, { date: 'full' });
   expect(s).toEqual('jueves, 29 de noviembre de 1973');
@@ -34,4 +35,12 @@ test('context transforms', () => {
 
   s = api.formatRelativeTimeField(2, 'day', { context: 'begin-sentence' });
   expect(s).toEqual('Pasado mañana');
+
+  api = calendarsApi('en');
+
+  s = api.formatRelativeTimeField(12, 'day');
+  expect(s).toEqual('in 12 days');
+
+  s = api.formatRelativeTimeField(12, 'day', { context: 'begin-sentence' });
+  expect(s).toEqual('In 12 days');
 });
