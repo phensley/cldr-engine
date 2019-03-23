@@ -170,5 +170,5 @@ test('loader errors', () => {
 
 test('version', () => {
   const version = CLDRFramework.version().split(/\./g);
-  expect(version.length).toEqual(3);
+  expect(version.length).toBeGreaterThanOrEqual(3);
 });
