@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Revised calendar fields api (e.g. `eras()`, `dayPeriods()`, etc) to accept options
 - Calendar field methods now accept `context: ContextType` option
 
-## (0.9.1) - 2018-03-21
+## [0.9.1] - 2018-03-21
 ### Added
 - Added `CLDR.General.parseLanguageTag` method
 
