@@ -1,19 +1,21 @@
 import {
+  ContextTransformFieldType,
+  ContextType,
   DateFieldType,
   DateTimePatternFieldType,
-  EraWidthType,
-  FieldWidthType,
   TimeZoneType,
-  TimeZoneValues
+  TimeZoneValues,
 } from '@phensley/cldr-schema';
 
-import { Calendars, EraWidthMap, FieldWidthMap } from '../api';
+import { Calendars } from '../api';
 import { Bundle } from '../../resource';
 
 import {
+  CalendarFieldsOptions,
   DateFormatOptions,
   DateIntervalFormatOptions,
   DateRawFormatOptions,
+  EraFieldOptions,
   RelativeTimeFormatOptions,
   ZonedDateTime
 } from '../../common';
@@ -35,6 +37,7 @@ import { DecimalArg } from '../../types/numbers';
 import { Part } from '../../types';
 
 import { CalendarManager } from '../../internals/calendars/manager';
+import { CalendarPatterns } from '../../internals/calendars/patterns';
 import { PartsRenderer, Renderer, StringRenderer } from '../../utils/render';
 import { PrivateApiImpl } from '../private';
 
@@ -55,49 +58,59 @@ export class CalendarsImpl implements Calendars {
     this.minDays = internals.calendars.weekMinDays(region);
   }
 
+  // TODO: implement with context transform
+  // dateField(field: DateFieldType, options?: DateFieldFormatOptions): string {
+  // }
+
   /**
    * @alpha
    */
-  dayPeriods(type?: CalendarType): FieldWidthMap {
-    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
-    const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.dayPeriods() as FieldWidthMap;
+  dayPeriods(opt?: CalendarFieldsOptions): any {
+    opt = opt || {};
+    const fields = this._getPatterns(opt.ca).dayPeriods()[opt.width || 'wide'];
+    return this._transformFields(fields, undefined, opt.context);
   }
 
   /**
    * @alpha
    */
-  eras(type?: CalendarType, width: EraWidthType = 'names'): EraWidthMap {
-    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
-    const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.eras() as EraWidthMap;
+  eras(opt?: EraFieldOptions): any {
+    opt = opt || {};
+    const w = opt.width || 'names';
+    const fields = this._getPatterns(opt.ca).eras()[w];
+    const tx = w === 'abbr' ? 'era-abbr' : w === 'names' ? 'era-name' : undefined;
+    return this._transformFields(fields, tx, opt.context);
   }
 
   /**
    * @alpha
    */
-  months(type?: CalendarType, width: FieldWidthType = 'wide'): FieldWidthMap {
-    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
-    const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.months() as FieldWidthMap;
+  months(opt?: CalendarFieldsOptions): any {
+    opt = opt || {};
+    const w = opt.width || 'wide';
+    const fields = this._getPatterns(opt.ca).months()[w];
+    const tx = w !== 'narrow' ? 'month-standalone-except-narrow' : undefined;
+    return this._transformFields(fields, tx, opt.context);
   }
 
   /**
    * @alpha
    */
-  quarters(type?: CalendarType, width: FieldWidthType = 'wide'): FieldWidthMap {
-    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
-    const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.quarters() as FieldWidthMap;
+  quarters(opt?: CalendarFieldsOptions): any {
+    opt = opt || {};
+    const fields = (this._getPatterns(opt.ca).quarters()[opt.width || 'wide']);
+    return this._transformFields(fields, undefined, opt.context);
   }
 
   /**
    * @alpha
    */
-  weekdays(type?: CalendarType, width: FieldWidthType = 'wide'): FieldWidthMap {
-    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
-    const patterns = this.manager.getCalendarPatterns(calendar);
-    return patterns.weekdays() as FieldWidthMap;
+  weekdays(opt?: CalendarFieldsOptions): any {
+    opt = opt || {};
+    const w = opt.width || 'wide';
+    const fields = this._getPatterns(opt.ca).weekdays()[w];
+    const tx = w !== 'narrow' ? 'day-standalone-except-narrow' : undefined;
+    return this._transformFields(fields, tx, opt.context);
   }
 
   /**
@@ -224,6 +237,32 @@ export class CalendarsImpl implements Calendars {
 
   timeZoneIds(): TimeZoneType[] {
     return TimeZoneValues.slice(0);
+  }
+
+  private _getPatterns(type?: CalendarType): CalendarPatterns {
+    const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
+    return this.manager.getCalendarPatterns(calendar);
+  }
+
+  /**
+   * Copy fields, applying an optional context transform to the values.
+   */
+  private _transformFields(fields: any, type?: ContextTransformFieldType, context?: ContextType): any {
+
+    const res: any = {};
+    if (fields === undefined) {
+      return res;
+    }
+
+    const info = this.privateApi.getContextTransformInfo();
+    for (const key of Object.keys(fields)) {
+      let value = fields[key];
+      if (context) {
+        value = this.internals.general.contextTransform(value, context, info, type);
+      }
+      res[key] = value;
+    }
+    return res;
   }
 
   private _formatDate<R>(renderer: Renderer<R>,

@@ -1,4 +1,11 @@
-import { ContextType, FormatWidthType, RelativeTimeWidthType } from '@phensley/cldr-schema';
+import {
+  ContextType,
+  EraWidthType,
+  FieldWidthType,
+  FormatWidthType,
+  RelativeTimeWidthType
+} from '@phensley/cldr-schema';
+
 import { NumberSystemType } from './numbers';
 import { CalendarType } from '../systems/calendars/calendar';
 
@@ -16,6 +23,48 @@ export interface ZonedDateTime {
    * Optional timezone identifier, defaulting to UTC.
    */
   zoneId?: string;
+}
+
+/**
+ * @alpha
+ */
+export interface CalendarFieldsOptions {
+
+  /**
+   * Overrides which calendar to use
+   */
+  ca?: CalendarType;
+
+  /**
+   * Width of the fields.
+   */
+  width?: FieldWidthType;
+
+  /**
+   * Context in which the fields will be used
+   */
+  context?: ContextType;
+}
+
+/**
+ * @alpha
+ */
+export interface EraFieldOptions {
+
+  /**
+   * Overrides which calendar to use
+   */
+  ca?: CalendarType;
+
+  /**
+   * Width of the fields.
+   */
+  width?: EraWidthType;
+
+  /**
+   * Context in which the fields will be used
+   */
+  context?: ContextType;
 }
 
 /**

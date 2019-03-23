@@ -61,7 +61,7 @@ export interface GeneralInternals {
   characterOrder(bundle: Bundle): string;
   lineOrder(bundle: Bundle): string;
   contextTransform(value: string, context: ContextType,
-    field: ContextTransformFieldType, info: ContextTransformInfo): string;
+    info: ContextTransformInfo, field?: ContextTransformFieldType): string;
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string;
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[];
   formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[];

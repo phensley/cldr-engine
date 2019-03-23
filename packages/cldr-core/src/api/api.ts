@@ -3,8 +3,6 @@ import {
   CurrencyType,
   DateFieldType,
   DateTimePatternFieldType,
-  EraWidthType,
-  FieldWidthType,
   LanguageIdType,
   LineOrderType,
   RegionIdType,
@@ -14,6 +12,7 @@ import {
 } from '@phensley/cldr-schema';
 
 import {
+  CalendarFieldsOptions,
   CurrencyFormatOptions,
   CurrencyFractions,
   CurrencySymbolWidthType,
@@ -21,6 +20,7 @@ import {
   DateIntervalFormatOptions,
   DateRawFormatOptions,
   DecimalFormatOptions,
+  EraFieldOptions,
   ListPatternType,
   MeasurementCategory,
   MeasurementSystem,
@@ -37,7 +37,6 @@ import { LanguageTag, Locale } from '../locale';
 import {
   BuddhistDate,
   CalendarDate,
-  CalendarType,
   GregorianDate,
   ISO8601Date,
   JapaneseDate,
@@ -49,16 +48,16 @@ import { DecimalArg, Part } from '../types';
 /**
  * @alpha
  */
-export type FieldWidthMap = {
-  [k in FieldWidthType]: { [x: string]: string };
-};
+// export type FieldWidthMap = {
+//   [k in FieldWidthType]: { [x: string]: string };
+// };
 
 /**
  * @alpha
  */
-export type EraWidthMap = {
-  [k in EraWidthType]: { [x: string]: string };
-};
+// export type EraWidthMap = {
+//   [k in EraWidthType]: { [x: string]: string };
+// };
 
 /**
  * Calendar, date and time functions.
@@ -67,11 +66,11 @@ export type EraWidthMap = {
  */
 export interface Calendars {
 
-  dayPeriods(type?: CalendarType): FieldWidthMap;
-  eras(type?: CalendarType): EraWidthMap;
-  months(type?: CalendarType): FieldWidthMap;
-  quarters(type?: CalendarType): FieldWidthMap;
-  weekdays(type?: CalendarType): FieldWidthMap;
+  dayPeriods(options?: CalendarFieldsOptions): any;
+  eras(options?: EraFieldOptions): any;
+  months(options?: CalendarFieldsOptions): any;
+  quarters(options?: CalendarFieldsOptions): any;
+  weekdays(options?: CalendarFieldsOptions): any;
 
   toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
   toGregorianDate(date: CalendarDate | ZonedDateTime | Date): GregorianDate;

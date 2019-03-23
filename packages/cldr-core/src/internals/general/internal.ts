@@ -43,13 +43,13 @@ export class GeneralInternalsImpl implements GeneralInternals {
    * Contextually transform a string,
    */
   contextTransform(value: string, context: ContextType,
-      field: ContextTransformFieldType, info: ContextTransformInfo): string {
+      info: ContextTransformInfo, field?: ContextTransformFieldType): string {
 
     if (!value) {
       return value;
     }
 
-    const flag = info[field];
+    const flag = field ? info[field] : '';
     let title = false;
     switch (context) {
       case 'begin-sentence':

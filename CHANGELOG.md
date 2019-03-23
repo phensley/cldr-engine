@@ -9,6 +9,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [UNRELEASED]
 ### Added
 - Added context transform data to schema
+- Options for date formatting now have an optional `context: ContextType` property
+- Date, interval, raw pattern, and relative time formatters now use context transforms
+
+### Fixed/Changed
+- Revised calendar fields api (e.g. `eras()`, `dayPeriods()`, etc) to accept options
+- Calendar field methods now accept `context: ContextType` option
 
 ## (0.9.1) - 2018-03-21
 ### Added
