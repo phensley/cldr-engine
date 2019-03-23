@@ -14,7 +14,6 @@
     "depgraph": "depcruise -T dot packages/cldr/lib | dot -T pdf > depgraph.pdf",
     "link-all": "lerna exec --concurrency=1 yarn link",
     "lint": "lerna run build && lerna run lint",
-    "release": "lerna run clean && lerna run lint && lerna publish --force-publish=* --npm-client=npm",
     "stress": "lerna run --stream --concurrency=1 stress",
     "test": "rimraf ./coverage && jest --coverage --verbose -i --no-cache",
     "test:runtime": "rimraf ./coverage && jest --coverage --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-compiler/.*\"",

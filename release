@@ -6,5 +6,7 @@ if [[ $REG != *"registry.npmjs.org"* ]] ; then
     exit 1
 fi
 
-yarn release
+lerna run clean
+lerna run lint
+lerna publish --force-publish=* --npm-client=npm $*
 
