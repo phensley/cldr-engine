@@ -102,6 +102,13 @@ interface CalendarDateFields {
   zoneId?: string;
 }
 
+// @alpha (undocumented)
+interface CalendarFieldsOptions {
+  ca?: CalendarType;
+  context?: ContextType;
+  width?: FieldWidthType;
+}
+
 // @alpha
 interface CLDR {
   readonly Calendars: Calendars;
@@ -162,6 +169,8 @@ interface CurrencyFormatOptions extends NumberFormatOptions {
 interface DateFormatOptions {
   // (undocumented)
   ca?: CalendarType;
+  // (undocumented)
+  context?: ContextType;
   // (undocumented)
   date?: FormatWidthType;
   // (undocumented)
@@ -240,6 +249,13 @@ interface DecimalFormatOptions extends NumberFormatOptions {
   errors?: NumberFormatErrorType[];
   // (undocumented)
   style?: DecimalFormatStyleType;
+}
+
+// @alpha (undocumented)
+interface EraFieldOptions {
+  ca?: CalendarType;
+  context?: ContextType;
+  width?: EraWidthType;
 }
 
 // @alpha
@@ -419,6 +435,8 @@ class Rational {
 // @alpha (undocumented)
 interface RelativeTimeFormatOptions {
   // (undocumented)
+  context?: ContextType;
+  // (undocumented)
   readonly nu?: NumberSystemType;
   // (undocumented)
   width?: RelativeTimeWidthType;
@@ -437,6 +455,8 @@ interface ZonedDateTime {
 }
 
 // WARNING: Unsupported export: CharacterOrderType
+// WARNING: Unsupported export: ContextType
+// WARNING: Unsupported export: ContextTransformFieldType
 // WARNING: Unsupported export: CurrencyType
 // WARNING: Unsupported export: CurrencyFormatStyleType
 // WARNING: Unsupported export: CurrencySymbolWidthType
@@ -444,6 +464,8 @@ interface ZonedDateTime {
 // WARNING: Unsupported export: DecimalArg
 // WARNING: Unsupported export: DecimalConstants
 // WARNING: Unsupported export: DecimalFormatStyleType
+// WARNING: Unsupported export: EraWidthType
+// WARNING: Unsupported export: FieldWidthType
 // WARNING: Unsupported export: FormatWidthType
 // WARNING: Unsupported export: LanguageIdType
 // WARNING: Unsupported export: ListPatternType

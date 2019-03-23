@@ -1,5 +1,7 @@
 export {
   CharacterOrderType,
+  ContextType,
+  ContextTransformFieldType,
   CurrencyType,
   DateFieldType,
   EraWidthType,
