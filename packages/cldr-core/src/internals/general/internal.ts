@@ -42,8 +42,8 @@ export class GeneralInternalsImpl implements GeneralInternals {
   /**
    * Contextually transform a string,
    */
-  contextTransform(value: string, context: ContextType,
-      info: ContextTransformInfo, field?: ContextTransformFieldType): string {
+  contextTransform(value: string,  info: ContextTransformInfo,
+      context?: ContextType, field?: ContextTransformFieldType): string {
 
     if (!value) {
       return value;

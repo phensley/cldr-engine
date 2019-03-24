@@ -2,7 +2,6 @@ import { applyMappings, Mapping, Mappings } from './utils';
 
 const mappings: Mapping[] = [
   Mappings.field('relativeTimes').keys().keys().fields([
-    'displayName',
     ['relative-type--2', 'previous2'],
     ['relative-type--1', 'previous'],
     ['relative-type-0', 'current'],
@@ -16,6 +15,10 @@ const mappings: Mapping[] = [
     ['relativeTime-type-past', 'past']
   ]).plural('relativeTimePattern', 'pattern').remap(0, 2, 3, 5, 1, 6),
   // "relativeTimes", "wide", "future", "one", "year", <value>
+
+  Mappings.field('relativeTimes').keys().keys()
+    .field('displayName').remap(3, 1, 2, 4)
+    // "displayName", "year", "wide", <value>
 ];
 
 export const transformDatefields = (o: any): any => applyMappings(o, mappings);

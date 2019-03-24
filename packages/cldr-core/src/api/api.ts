@@ -16,6 +16,7 @@ import {
   CurrencyFormatOptions,
   CurrencyFractions,
   CurrencySymbolWidthType,
+  DateFieldFormatOptions,
   DateFormatOptions,
   DateIntervalFormatOptions,
   DateRawFormatOptions,
@@ -28,7 +29,7 @@ import {
   RelativeTimeFormatOptions,
   UnitFormatOptions,
   UnitLength,
-  ZonedDateTime
+  ZonedDateTime,
 } from '../common';
 
 import { Bundle } from '../resource';
@@ -66,6 +67,7 @@ import { DecimalArg, Part } from '../types';
  */
 export interface Calendars {
 
+  dateField(type: DateFieldType, options?: DateFieldFormatOptions): string;
   dayPeriods(options?: CalendarFieldsOptions): any;
   eras(options?: EraFieldOptions): any;
   months(options?: CalendarFieldsOptions): any;

@@ -65,10 +65,11 @@ const run = (args: yargs.Arguments): void => {
     localeMap[lang].forEach(r => locales.push(r.id));
   });
 
+  const transform = !args.preTransform;
   const sections: any = {};
   locales.forEach(locale => {
     console.warn(`Scanning ${locale}..`);
-    const main = getMain(locale, args.transform);
+    const main = getMain(locale, transform);
     Object.keys(main).forEach(key => {
       const prefix = `Main.${key}`;
       const dst = sections[prefix] || {};
@@ -102,6 +103,6 @@ export const schemaOptions = (argv: yargs.Argv) =>
     .option('l', { alias: 'lang', description: 'List of languages' })
     .option('n', { alias: 'dry-run' })
     .option('o', { alias: 'out', description: 'Output dir', required: true })
-    .option('t', { alias: 'transform', description: 'Apply transforms' })
+    .option('p', { alias: 'pre-transform', description: 'Pre transform' })
     .option('w', { alias: 'with-values', description: 'With value leaf nodes' }),
     run);

@@ -81,8 +81,8 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
 
     if (res) {
       if (options.context) {
-        res = this.internals.general.contextTransform(res, options.context,
-          transform, 'relative');
+        res = this.internals.general.contextTransform(res, transform,
+          options.context, 'relative');
         }
         return res;
     }
@@ -93,8 +93,8 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     const arrow = negative ? format.past : format.future;
     let raw = arrow.get(bundle, plural, field);
     if (options.context) {
-      raw = this.internals.general.contextTransform(raw, options.context,
-        transform, 'relative');
+      raw = this.internals.general.contextTransform(raw, transform,
+        options.context, 'relative');
     }
     const num = params.system.formatString(n, false, 1);
     return this.internals.wrapper.format(raw, [num]);

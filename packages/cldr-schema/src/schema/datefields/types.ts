@@ -4,10 +4,18 @@ import {
 } from '../arrows';
 
 import { PluralType } from '../enums';
-import { DateFieldType, DateFieldValues, RelativeTimeFieldType, RelativeTimeFieldValues } from './enums';
+import {
+  DateFieldType,
+  DateFieldValues,
+  DateFieldWidthType,
+  DateFieldWidthValues,
+  RelativeTimeFieldType,
+  RelativeTimeFieldValues
+} from './enums';
 import { KeyIndex } from '../../types';
 
 export const DateFieldIndex = new KeyIndex(DateFieldValues);
+export const DateFieldWidthIndex = new KeyIndex(DateFieldWidthValues);
 export const RelativeTimeFieldIndex = new KeyIndex(RelativeTimeFieldValues);
 
 export interface RelativeTimeFields {
@@ -18,7 +26,6 @@ export interface RelativeTimeFields {
   readonly next2: Vector1Arrow<RelativeTimeFieldType>;
   readonly future: Vector2Arrow<PluralType, RelativeTimeFieldType>;
   readonly past: Vector2Arrow<PluralType, RelativeTimeFieldType>;
-  readonly displayName: Vector1Arrow<DateFieldType>;
 }
 
 // TODO: Consider moving these down and using Vector2Arrow including the width.
@@ -32,4 +39,5 @@ export interface RelativeTimes {
 
 export interface DateFieldsSchema {
   readonly relativeTimes: RelativeTimes;
+  readonly displayName: Vector2Arrow<DateFieldType, DateFieldWidthType>;
 }

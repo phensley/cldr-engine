@@ -1,6 +1,5 @@
-import { RelativeTimeFieldType, RelativeTimeWidthType } from '@phensley/cldr-schema';
+import { DateFieldWidthType, RelativeTimeFieldType } from '@phensley/cldr-schema';
 import { languageBundle } from '../../_helpers';
-import { buildSchema } from '../../../src/schema';
 import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
 import { Decimal } from '../../../src/types';
 
@@ -17,6 +16,60 @@ const calendarsApi = (tag: string) => {
   const bundle = languageBundle(tag);
   return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 };
+
+test('display name', () => {
+  let api = calendarsApi('en');
+  let s: string;
+
+  s = api.dateField('era');
+  expect(s).toEqual('era');
+
+  s = api.dateField('era', { context: 'middle-of-text' });
+  expect(s).toEqual('era');
+
+  s = api.dateField('era', { context: 'standalone' });
+  expect(s).toEqual('Era');
+
+  s = api.dateField('era', { context: 'begin-sentence' });
+  expect(s).toEqual('Era');
+
+  s = api.dateField('year');
+  expect(s).toEqual('year');
+
+  s = api.dateField('year', { context: 'middle-of-text' });
+  expect(s).toEqual('year');
+
+  s = api.dateField('year', { context: 'standalone' });
+  expect(s).toEqual('Year');
+
+  // Spanish
+
+  api = calendarsApi('es');
+
+  s = api.dateField('era');
+  expect(s).toEqual('era');
+
+  s = api.dateField('era', { context: 'middle-of-text' });
+  expect(s).toEqual('era');
+
+  s = api.dateField('era', { context: 'standalone' });
+  expect(s).toEqual('era');
+
+  s = api.dateField('era', { context: 'begin-sentence' });
+  expect(s).toEqual('Era');
+
+  s = api.dateField('year');
+  expect(s).toEqual('año');
+
+  s = api.dateField('year', { context: 'middle-of-text' });
+  expect(s).toEqual('año');
+
+  s = api.dateField('year', { context: 'standalone' });
+  expect(s).toEqual('año');
+
+  s = api.dateField('year', { context: 'begin-sentence' });
+  expect(s).toEqual('Año');
+});
 
 test('relative time', () => {
   const api = calendarsApi('en');
@@ -116,7 +169,7 @@ test('relative time options', () => {
   expect(s).toEqual('');
 
   // Invalid width defaults to wide
-  s = api.formatRelativeTimeField(5, 'week', { width: 'wideXX' as RelativeTimeWidthType });
+  s = api.formatRelativeTimeField(5, 'week', { width: 'wideXX' as DateFieldWidthType });
   expect(s).toEqual('in 5 weeks');
 
   // Invalid number

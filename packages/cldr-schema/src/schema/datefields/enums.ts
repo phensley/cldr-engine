@@ -33,6 +33,18 @@ export const enum DateField {
   ZONE = 'zone'
 }
 
+export type DateFieldWidthType = 'short' | 'narrow' | 'wide';
+
+export const DateFieldWidthValues: DateFieldWidthType[] = [
+  'short', 'narrow', 'wide'
+];
+
+export const enum DateFieldWidth {
+  SHORT = 'short',
+  NARROW = 'narrow',
+  WIDE = 'wide'
+}
+
 export type RelativeTimeFieldType = 'year' | 'quarter' | 'month' | 'week' | 'day' |
   'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'hour' | 'minute' | 'second';
 
@@ -57,16 +69,4 @@ export const enum RelativeTimeField {
   HOUR = 'hour',
   MINUTE = 'minute',
   SECOND = 'second'
-}
-
-export type RelativeTimeWidthType = 'short' | 'narrow' | 'wide';
-
-export const RelativeTimeWidthValues: RelativeTimeWidthType[] = [
-  'short', 'narrow', 'wide'
-];
-
-export const enum RelativeTimeWidth {
-  SHORT = 'short',
-  NARROW = 'narrow',
-  WIDE = 'wide'
 }

@@ -1,9 +1,10 @@
 import {
   ContextType,
+  DateFieldType,
+  DateFieldWidthType,
   EraWidthType,
   FieldWidthType,
   FormatWidthType,
-  RelativeTimeWidthType
 } from '@phensley/cldr-schema';
 
 import { NumberSystemType } from './numbers';
@@ -62,11 +63,31 @@ export interface EraFieldOptions {
   width?: EraWidthType;
 
   /**
-   * Context in which the fields will be used
+   * Context in which the fields will be displayed
    */
   context?: ContextType;
 }
 
+/**
+ * @alpha
+ */
+export interface DateFieldFormatOptions {
+
+  /**
+   * Overrides which calendar to use
+   */
+  ca?: CalendarType;
+
+  /**
+   * Width of the field.
+   */
+  width?: DateFieldWidthType;
+
+  /**
+   * Context in which field will be displayed
+   */
+  context?: ContextType;
+}
 /**
  * @alpha
  */
@@ -136,7 +157,7 @@ export interface DateIntervalFormatOptions {
  * @alpha
  */
 export interface RelativeTimeFormatOptions {
-  width?: RelativeTimeWidthType;
+  width?: DateFieldWidthType;
 
   readonly nu?: NumberSystemType;
 

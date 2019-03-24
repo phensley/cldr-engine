@@ -256,7 +256,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       }
 
       if (i === 0 && ctx.context && field) {
-        value = this.internals.general.contextTransform(value, ctx.context, ctx.transform, field);
+        value = this.internals.general.contextTransform(value, ctx.transform, ctx.context, field);
       }
       rnd.add(type, value);
     }

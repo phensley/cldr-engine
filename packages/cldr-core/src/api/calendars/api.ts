@@ -12,6 +12,7 @@ import { Bundle } from '../../resource';
 
 import {
   CalendarFieldsOptions,
+  DateFieldFormatOptions,
   DateFormatOptions,
   DateIntervalFormatOptions,
   DateRawFormatOptions,
@@ -58,9 +59,18 @@ export class CalendarsImpl implements Calendars {
     this.minDays = internals.calendars.weekMinDays(region);
   }
 
-  // TODO: implement with context transform
-  // dateField(field: DateFieldType, options?: DateFieldFormatOptions): string {
-  // }
+  /**
+   * @alpha
+   */
+  dateField(type: DateFieldType, opt?: DateFieldFormatOptions): string {
+    opt = opt || {};
+    const field = this.internals.schema.DateFields.displayName.get(this.bundle, type, opt.width || 'wide');
+    const info = this.privateApi.getContextTransformInfo();
+    if (!opt.context) {
+      return field;
+    }
+    return this.internals.general.contextTransform(field, info, opt.context, 'calendar-field');
+  }
 
   /**
    * @alpha
@@ -258,7 +268,7 @@ export class CalendarsImpl implements Calendars {
     for (const key of Object.keys(fields)) {
       let value = fields[key];
       if (context) {
-        value = this.internals.general.contextTransform(value, context, info, type);
+        value = this.internals.general.contextTransform(value, info, context, type);
       }
       res[key] = value;
     }

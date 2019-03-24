@@ -181,26 +181,6 @@ const Layout = {
   lineOrder: get([_orientation, 'lineOrder', layoutKey])
 };
 
-const relativeFields = [
-  'year', 'quarter', 'month', 'week', 'day',
-  'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat',
-  'hour', 'minute', 'second'
-];
-
-// Restructure relative times under 'short', 'narrow', 'wide' subkeys
-const relativeTimes = (obj: any): any => {
-  const r: any = {};
-  relativeFields.forEach(key => {
-    const o: any = {};
-    ['', 'short', 'narrow'].forEach(ext => {
-      const k = `${key}${ext ? '-' : ''}${ext}`;
-      o[ext || 'wide'] = obj[k];
-    });
-    r[key] = o;
-  });
-  return r;
-};
-
 const contextRename = (s: string) => {
   switch (s) {
     case 'titlecase-firstword':
@@ -246,11 +226,24 @@ const ContextTransforms = {
   contextTransforms: get(['contextTransforms', contextCategories]),
 };
 
+const dateFieldNames = (obj: any): any => {
+  const r: any = {};
+  Object.keys(obj).forEach(k => {
+    const parts = k.split('-');
+    const name = parts[0];
+    const width = parts[1] || 'wide';
+    const o = r[name] || {};
+    o[width] = obj[k];
+    r[name] = o;
+  });
+  return r;
+};
+
 /**
  * Date fields, relative times.
  */
 const DateFields = {
-  relativeTimes: get([_dateFields, relativeTimes]),
+  relativeTimes: get([_dateFields, dateFieldNames])
 };
 
 const coreCalendarSchema = (name: string) => {
