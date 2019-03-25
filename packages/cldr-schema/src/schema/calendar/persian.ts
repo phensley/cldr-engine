@@ -3,10 +3,11 @@ import {
   CalendarInfo,
   CalendarSchema,
 } from './types';
+import { GregorianInfo } from './gregorian';
 
 export const PersianInfo: CalendarInfo = {
   eras: ['0'],
-  months: '1 2 3 4 5 6 7 8 9 10 11 12'.split(' '),
+  months: GregorianInfo.months,
   availableFormats: ('Bh Bhm Bhms E EBhm EBhms EEEEd EHm EHms Ed Ehm Ehms Gy GyM GyMMM ' +
     'GyMMMEEEEd GyMMMEd GyMMMM GyMMMMEd GyMMMMd GyMMMd H HHmm HHmmZ HHmmss Hm Hms M MEEEEd ' +
     'MEd MMM MMMEEEEd MMMEd MMMM MMMMEd MMMMd MMMMdd MMMd MMMdd MMd MMdd Md d h hm hms mmss ' +
@@ -24,4 +25,3 @@ export interface PersianSchema extends CalendarSchema {
 export const PersianAvailableFormatIndex = new KeyIndex(PersianInfo.availableFormats);
 export const PersianEraIndex = new KeyIndex(PersianInfo.eras);
 export const PersianIntervalFormatIndex = new KeyIndex(PersianInfo.intervalFormats);
-export const PersianMonthIndex = new KeyIndex(PersianInfo.months);

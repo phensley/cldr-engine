@@ -3,6 +3,7 @@ import {
   CalendarInfo,
   CalendarSchema,
 } from './types';
+import { GregorianInfo } from './gregorian';
 
 export const JapaneseInfo: CalendarInfo = {
   // TODO: rework KeyIndex to support integer ranges
@@ -16,7 +17,7 @@ export const JapaneseInfo: CalendarInfo = {
     '185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 ' +
     '208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 ' +
     '231 232 233 234 235 236').split(' '),
-  months: '1 2 3 4 5 6 7 8 9 10 11 12'.split(' '),
+  months: GregorianInfo.months,
   availableFormats: ('Bh Bhm Bhms E EBhm EBhms EEEEd EHm EHms Ed Ehm Ehms Gy GyM GyMMM ' +
     'GyMMMEEEEd GyMMMEd GyMMMM GyMMMMEd GyMMMMd GyMMMd H HHmm HHmmZ HHmmss Hm Hms M ' +
     'MEEEEd MEd MMM MMMEEEEd MMMEd MMMM MMMMEd MMMMd MMMMdd MMMd MMMdd MMd MMdd Md d h ' +
@@ -35,4 +36,3 @@ export interface JapaneseSchema extends CalendarSchema {
 export const JapaneseAvailableFormatIndex = new KeyIndex(JapaneseInfo.availableFormats);
 export const JapaneseEraIndex = new KeyIndex(JapaneseInfo.eras);
 export const JapaneseIntervalFormatIndex = new KeyIndex(JapaneseInfo.intervalFormats);
-export const JapaneseMonthsIndex = new KeyIndex(JapaneseInfo.months);

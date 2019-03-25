@@ -3,10 +3,11 @@ import {
   CalendarInfo,
   CalendarSchema,
 } from './types';
+import { GregorianInfo } from './gregorian';
 
 export const BuddhistInfo: CalendarInfo = {
   eras: ['0'],
-  months: '1 2 3 4 5 6 7 8 9 10 11 12'.split(' '),
+  months: GregorianInfo.months,
   availableFormats: ('Bh Bhm Bhms E EBhm EBhms EEEEd EHm EHms Ed Ehm Ehms Gy GyM GyMMM GyMMMEEEEd ' +
     'GyMMMEd GyMMMM GyMMMMEd GyMMMMd GyMMMd GyMd H HHmm HHmmZ HHmmss Hm Hms Hmsv Hmv M MEEEEd MEd ' +
     'MMM MMMEEEEd MMMEd MMMM MMMMEEEEd MMMMEd MMMMd MMMMdd MMMd MMMdd MMd MMdd Md d h hm hms hmsv ' +
@@ -24,4 +25,3 @@ export interface BuddhistSchema extends CalendarSchema {
 export const BuddhistAvailableFormatIndex = new KeyIndex(BuddhistInfo.availableFormats);
 export const BuddhistEraIndex = new KeyIndex(BuddhistInfo.eras);
 export const BuddhistIntervalFormatIndex = new KeyIndex(BuddhistInfo.intervalFormats);
-export const BuddhistMonthIndex = new KeyIndex(BuddhistInfo.months);

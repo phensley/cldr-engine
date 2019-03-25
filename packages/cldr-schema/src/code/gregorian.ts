@@ -1,10 +1,6 @@
-import { field, scope, vector1, vector2, KeyIndex, Scope } from '../types';
+import { field, scope, vector1, vector2, Scope } from '../types';
 
 import {
-  DateTimePatternFieldValues,
-  DayPeriodValues,
-  FieldWidthValues,
-  FormatWidthValues,
   GregorianAvailableFormatIndex,
   GregorianEraIndex,
   GregorianIntervalFormatIndex,
