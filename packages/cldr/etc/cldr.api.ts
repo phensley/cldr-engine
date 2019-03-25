@@ -439,7 +439,7 @@ interface RelativeTimeFormatOptions {
   // (undocumented)
   readonly nu?: NumberSystemType;
   // (undocumented)
-  width?: RelativeTimeWidthType;
+  width?: DateFieldWidthType;
 }
 
 // @alpha (undocumented)
