@@ -33,13 +33,13 @@ export class ZoneInfoCache {
   get(epoch: number, timeZoneId: string): ZoneInfo {
     const data = this.getZoneData(timeZoneId);
     const len = data.untils.length;
-    let index = binarySearch(data.untils, epoch);
+    let index = binarySearch(data.untils, true, epoch);
     if (index === -1) {
       index++;
     }
     const dst = bitarrayGet(data.dsts, index);
     const offset = index < len ? data.offsets[index] : data.offsets[len - 1];
-    index = binarySearch(data.metaZoneUntils, epoch);
+    index = binarySearch(data.metaZoneUntils, true, epoch);
     if (index === -1) {
       index++;
     }

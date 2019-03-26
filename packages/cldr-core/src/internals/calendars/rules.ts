@@ -31,7 +31,7 @@ export class DayPeriodRules {
       return undefined;
     }
     const rule = this.cache.get(raw);
-    const i = binarySearch(rule.minutes, minutes);
+    const i = binarySearch(rule.minutes, true, minutes);
     return rule.keys[i];
   }
 
