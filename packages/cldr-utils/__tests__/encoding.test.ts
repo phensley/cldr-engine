@@ -1,7 +1,7 @@
 import { base100decode, base100encode } from '../src/base100';
 import { bitarrayCreate, bitarrayGet } from '../src/bitarray';
-import { vuintDecode, z85Decode, zigzag32Decode } from '../src/decoding';
-import { vuintEncode, z85Encode, zigzag32Encode } from '../src/encoding';
+import { vuintDecode, z85Decode, zigzagDecode } from '../src/decoding';
+import { vuintEncode, z85Encode, zigzagEncode } from '../src/encoding';
 
 const uint8 = (n: number[]) => new Uint8Array(n);
 
@@ -48,7 +48,7 @@ test('variable uint decode', () => {
   // encode some random positive integers in a range
   const nums: number[] = [0];
   for (let i = 0; i < 100000; i++) {
-    const n = Math.floor(Math.random() * 1000000000);
+    const n = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
     nums.push(n);
   }
 
@@ -115,7 +115,7 @@ test('z85 decode', () => {
 });
 
 test('zigzag encode', () => {
-  const enc = zigzag32Encode;
+  const enc = zigzagEncode;
   expect(enc(0)).toEqual(0);
   expect(enc(-1)).toEqual(1);
   expect(enc(1)).toEqual(2);
@@ -124,7 +124,7 @@ test('zigzag encode', () => {
 });
 
 test('zigzag decode', () => {
-  const dec = zigzag32Decode;
+  const dec = zigzagDecode;
   expect(dec(0)).toEqual(0);
   expect(dec(1)).toEqual(-1);
   expect(dec(2)).toEqual(1);

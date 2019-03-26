@@ -35,25 +35,27 @@ export const z85Encode = (arr: Uint8Array | number[]): string => {
   return res;
 };
 
-/** Encode a 32-bit signed integer into a 32-bit unsigned integer. */
-export const zigzag32Encode = (n: number) => (n << 1) ^ (n >> 31);
+/** Encode a number up to (MAX_SAFE_INTEGER / 2) as a 64-bit unsigned integer */
+export const zigzagEncode = (n: number) => n === 0 ? 0 : n < 0 ? ((n * -2) - 1) : (n * 2);
 
 /**
- * Encode an unsigned 32-bit integer using a variable-length encoding,
- * returning an array of uint8
+ * Encode a 64-bit unsigned integer using a variable-length encoding,
+ * returning an array of uint8. Supports up to Number.MAX_SAFE_INTEGER
  */
 export const vuintEncode = (nums: number[] | Uint8Array, f?: (x: number) => number): Uint8Array => {
   const len = nums.length;
-   // over-allocate result array, as each 32-bit value can use up to 5 bytes
-  const res = new Uint8Array(len * 5);
+   // over-allocate result array, as each 64-bit value can use up to 8 bytes
+  const res = new Uint8Array(len * 8);
   let j = 0;
   for (let i = 0; i < len; i++) {
     let n = f ? f(nums[i]) : nums[i];
     if (n > 0) {
       // encode a positive integer
       while (n) {
-        let v = n & 0x7f;
-        if ((n >>= 7) > 0) {
+        const p = 0x80 * floor(n / 0x80);
+        let v = n - p;
+        n = floor(p / 0x80);
+        if (n > 0) {
           v |= 0x80;
         }
         res[j++] = v;
