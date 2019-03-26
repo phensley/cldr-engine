@@ -1,6 +1,6 @@
 import { ResourcePack } from '../../src/resource/pack';
 import { LanguageResolver } from '@phensley/cldr-core';
-import { vuintEncode, z85Encode } from '@phensley/cldr-utils';
+import { vuintDecode, vuintEncode, z85Decode, z85Encode } from '@phensley/cldr-utils';
 
 const parseLocale = (id: string) => ({ id, tag: LanguageResolver.resolve(id) });
 
@@ -48,10 +48,10 @@ test('creation', () => {
   expect(strings).toEqual('foo\tbar\tbaz\tquux');
   expect(exceptions).toEqual('bar.gb\tquux.gb\tquux.ca\tfoo.de\tbar.de\tquux.de');
 
-  // US is the base since it has the minimum distance to the other regions.
-  expect(regions.US).toEqual('0'); // z85 string starts with padding indicator
-
   const enc = (n: number[]) => z85Encode(vuintEncode(n));
+
+  // US is the base since it has the minimum distance to the other regions.
+  expect(regions.US).toEqual(enc([]));
 
   // GB exception index:  {1: 0, 3: 1}
   expect(regions.GB).toEqual(enc([1, 0, 3, 1]));

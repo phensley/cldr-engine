@@ -46,7 +46,11 @@ export const z85Decode = (s: string): Uint8Array => {
   return pad > 0 ? res.subarray(0, res.length - pad) : res;
 };
 
-/** Decode a 64-bit unsigned integer into a 64-bit signed integer. */
+/**
+ * Decode a 64-bit unsigned integer into a 64-bit signed integer.
+ *
+ * We avoid bitwise operations which fail for numbers >= 2^31.
+ */
 export const zigzagDecode = (n: number) => n === 0 ? 0 : n % 2 === 1 ? (n + 1) / -2 : n / 2;
 
 const FACTORS = [
@@ -66,25 +70,28 @@ const FACTORS = [
  * byte array, writing the decoded integers back to the same array.
  * An optional mapping function can be supplied to transform each
  * integer before it is appended to the buffer.
+ *
+ * We avoid bitwise operations which fail for numbers >= 2^31.
  */
 export const vuintDecode = (arr: number[] | Uint8Array, f?: (x: number) => number): number[] => {
   let i = 0, j = 0, k = 0, n = 0;
   const len = arr.length;
-  const res: number[] = new Array(len);
-  console.log('length:', len);
+  let res!: number[];
   while (i < len) {
     n += (arr[i] & 0x7f) * FACTORS[k];
     k++;
     // detect last byte for this variable int
     if (!(arr[i] & 0x80)) {
-      // write the decoded integer to the same buffer and
-      // reset the state
-      res[j++] = f ? f(n) : n;
+      if (!res) {
+        // allocate the output buffer using the first decoded integer
+        res = new Array(n);
+      } else {
+        // write the decoded integer to the output buffer
+        res[j++] = f ? f(n) : n;
+      }
       n = k = 0;
     }
     i++;
   }
-  // truncate array to hold only the decoded integers
-  res.length = j;
   return res;
 };

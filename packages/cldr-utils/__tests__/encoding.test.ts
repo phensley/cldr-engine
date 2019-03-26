@@ -29,17 +29,18 @@ test('variable uint encode', () => {
   // encoding for numbers < 128 is identity
   let nums = [0, 1, 4, 8, 32, 64];
   let res = enc(nums);
-  expect(res).toEqual(uint8(nums));
+  expect(res).toEqual(uint8([6, 0, 1, 4, 8, 32, 64]));
 
   // encoding for numbers >= 128 uses 2 or more bytes
   nums = [128, 256, 512, 1024, 2048, 4096];
   res = enc(nums);
-  expect(res).toEqual(uint8([128, 1, 128, 2, 128, 4, 128, 8, 128, 16, 128, 32]));
+  expect(res).toEqual(uint8(
+    [6, 128, 1, 128, 2, 128, 4, 128, 8, 128, 16, 128, 32]));
 
   // if negative numbers are passed in, they become zeros
   nums = [-1, -2, -3, -4, -5];
   res = enc(nums);
-  expect(res).toEqual(uint8([0, 0, 0, 0, 0]));
+  expect(res).toEqual(uint8([5, 0, 0, 0, 0, 0]));
 });
 
 test('variable uint decode', () => {
