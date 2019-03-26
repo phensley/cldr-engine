@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
 import { makeSuite } from './util';
-import { Tz } from '../src';
+import { TZ } from '../src';
 
 const asUTC = (d: number | Date) =>
   typeof d === 'number' ? d : (+d) - d.getTimezoneOffset() * 60000;
@@ -17,17 +17,18 @@ const DATES = [
 const ZONES = [
   'UTC',
   'America/New_York',
-  'Asia/Qyzylorda'
+  'Asia/Qyzylorda',
+  'Europe/Istanbul',
+  'Asia/Beijing'
 ];
 
 export const timezoneSuite: Suite = makeSuite('Timezone');
 
-const tz = new Tz();
 ZONES.forEach(zid => {
   DATES.forEach(date => {
     const utc = asUTC(date);
     timezoneSuite.add(`lookup ${zid} ${date.toUTCString()}`, () => {
-      tz.get(zid, utc);
+      TZ.fromUTC(zid, utc);
     });
   });
 });

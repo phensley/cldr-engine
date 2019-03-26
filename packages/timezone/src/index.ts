@@ -8,16 +8,33 @@ export interface ZoneInfo {
   offset: number;
 }
 
-export class ZoneCache {
+export interface Tz {
+  fromUTC(zoneid: string, utc: number): ZoneInfo | undefined;
+  fromWall(zoneid: string, utc: number): ZoneInfo | undefined;
+}
 
-  /** Arra of proper- and lower-cased time zone ids */
-  private zoneids: Map<string, number> = new Map();
-  private links: Map<string, string> = new Map();
-  private index: number[];
+export class TzImpl {
+
+  /** Mapping of proper- and lower-cased time zone ids to index */
+  private zoneindex: Map<string, number> = new Map();
+
+  /** Mapping of proper- and lower-cased alias ids to time zone id */
+  private linkindex: Map<string, string> = new Map();
+
+  /** Array of time zone ids */
+  private zoneids: string[];
+
+  /** Array of untils and deltas */
+  private untilindex: number[];
+
+  /** Raw un-decoded zone info */
   private rawzoneinfo: string[];
+
+  /** Decoded zone records */
   private zonerecords: ZoneRecord[];
 
-  private utcindex!: number;
+  /** Default UTC zone here for quick access */
+  private utcinfo: ZoneInfo = { abbr: 'UTC', dst: 0, offset: 0 };
 
   constructor(raw: RawData = rawdata) {
 
@@ -27,26 +44,22 @@ export class ZoneCache {
     const links = raw.links.split('|')
       .map(e => { const [k, j] = e.split(':'); return [k, Number(j)] as [string, number]; });
 
+    this.zoneids = [];
     zoneids.forEach(i => {
       const id = i[0];
-      if (id === 'Etc/UTC') {
-        // Create shorter 'UTC' alias
-        this.utcindex = i[1];
-        this.zoneids.set('UTC', i[1]);
-        this.zoneids.set('utc', i[1]);
-      }
-      this.zoneids.set(id, i[1]);
-      this.zoneids.set(id.toLocaleLowerCase(), i[1]);
+      this.zoneids.push(id);
+      this.zoneindex.set(id, i[1]);
+      this.zoneindex.set(id.toLocaleLowerCase(), i[1]);
     });
 
     links.forEach(i => {
       const alias = i[0];
       const id = zoneids[i[1]][0];
-      this.links.set(alias, id);
-      this.links.set(alias.toLowerCase(), id);
+      this.linkindex.set(alias, id);
+      this.linkindex.set(alias.toLowerCase(), id);
     });
 
-    this.index = vuintDecode(z85Decode(raw.index), zigzagDecode);
+    this.untilindex = vuintDecode(z85Decode(raw.index), zigzagDecode);
     this.rawzoneinfo = raw.zoneinfo;
     this.zonerecords = new Array(raw.zoneinfo.length);
 
@@ -55,23 +68,46 @@ export class ZoneCache {
     raw.index = '';
   }
 
-  get(zoneid: string, utc: number): ZoneInfo {
+  /**
+   * Get the info for a time zone using a UTC timestamp.
+   */
+  fromUTC(zoneid: string, utc: number): ZoneInfo | undefined {
+    const r = this.record(zoneid);
+    return r ? r.fromUTC(utc) : r;
+  }
+
+  /**
+   * Get the info for a time zone using a local "wall clock" timestamp.
+   */
+  fromWall(zoneid: string, wall: number): ZoneInfo | undefined {
+    const r = this.record(zoneid);
+    return r ? r.fromWall(wall) : r;
+  }
+
+  /**
+   * UTC zone info.
+   */
+  utcZone(): ZoneInfo {
+    return this.utcinfo;
+  }
+
+  private record(zoneid: string): ZoneRecord | undefined {
     let id: string | undefined = zoneid;
-    let i = this.zoneids.get(id);
+    let i = this.zoneindex.get(id);
 
     // If time zone id lookup failed, try to find an alias
     if (i === undefined) {
-      id = this.links.get(zoneid);
+      id = this.linkindex.get(zoneid);
 
       // id found, set the index
       if (id) {
-        i = this.zoneids.get(id);
+        i = this.zoneindex.get(id);
       }
     }
 
-    // Failed to match a time zone id or alias, so default to UTC
+    // Failed to match a time zone id or alias
     if (i === undefined) {
-      i = this.utcindex;
+      return undefined;
     }
 
     // See if we've already decoded this zone
@@ -79,36 +115,83 @@ export class ZoneCache {
     if (rec === undefined) {
       // Decode raw data then clear the reference to release the memory
       const raw = this.rawzoneinfo[i];
-      rec = this.decode(raw);
+      rec = new ZoneRecord(raw, this.untilindex);
       this.zonerecords[i] = rec;
       this.rawzoneinfo[i] = '';
     }
-    const j = binarySearch(rec.untils, utc);
-    const type = rec.types[j];
-    return rec.localtime[type];
+    return rec;
   }
 
-  /**
-   * Decode a time zone record.
-   */
-  private decode(raw: string): ZoneRecord {
+}
+
+/**
+ * Information related to a single timezone.
+ */
+class ZoneRecord {
+
+  readonly localtime: ZoneInfo[];
+  readonly types: number[];
+  readonly untils: number[];
+  readonly len: number;
+
+  constructor(raw: string, index: number[]) {
     const [ _info, _types, _untils ] = raw.split('\t');
     const untils = vuintDecode(z85Decode(_untils), zigzagDecode);
 
     // Decode initial until and the deltas
     const len = untils.length;
     if (len > 0) {
-      untils[0] = this.index[untils[0]] * 1000;
+      untils[0] = index[untils[0]] * 1000;
       for (let i = 1; i < len; i++) {
-        untils[i] = untils[i - 1] + (this.index[untils[i]] * 1000);
+        untils[i] = untils[i - 1] + (index[untils[i]] * 1000);
       }
     }
 
-    return {
-      localtime: _info.split('|').map(this.decodeInfo),
-      types: _types.split('').map(Number),
-      untils
-    };
+    this.localtime = _info.split('|').map(this.decodeInfo);
+    this.types = _types.split('').map(Number);
+    this.untils = untils;
+    this.len = untils.length;
+  }
+
+  /**
+   * Resolve the zone info using a UTC timestamp.
+   */
+  fromUTC(utc: number): ZoneInfo {
+    const i = binarySearch(this.untils, true, utc);
+    const type = i === -1 ? 0 : this.types[i];
+    return this.localtime[type];
+  }
+
+  /**
+   * Resolve the zone info using a local "wall clock" timestamp.
+   */
+  fromWall(wall: number): ZoneInfo {
+    let i = binarySearch(this.untils, false, wall);
+    let type: number;
+
+    if (i === this.len) {
+      // went off the top end, so return the last info
+      type = this.types[this.len - 1];
+      return this.localtime[type];
+    }
+
+    // check if the adjusted time is <= wall time
+    type = this.types[i];
+    const loc = this.localtime[type];
+    if (this.untils[i] + loc.offset <= wall) {
+      return loc;
+    }
+
+    // select the next until down and retry
+    i--;
+
+    // went off the bottom end, return the first info
+    if (i === -1) {
+      return this.localtime[0];
+    }
+
+    type = this.types[i];
+    return this.localtime[type];
   }
 
   /**
@@ -119,13 +202,10 @@ export class ZoneCache {
     return {
       abbr,
       dst: Number(_dst),
-      offset: Number(_offset)
+      offset: Number(_offset) * 1000
     };
   }
+
 }
 
-interface ZoneRecord {
-  localtime: ZoneInfo[];
-  types: number[];
-  untils: number[];
-}
+export const TZ = new TzImpl();
