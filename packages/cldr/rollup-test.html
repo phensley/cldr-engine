@@ -1,0 +1,35 @@
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+  <script src="./dist/cldrengine.umd.js"></script>
+</head>
+<body>
+<script>
+function asyncLoader(language) {
+  const baseurl = './packs/';
+  return new Promise(function(resolve, reject) {
+    fetch(`${baseurl}${language}.json`)
+    .then(function(r) {
+      return resolve(r.json());
+    }).catch(function(e) {
+      reject(e);
+    });
+  });
+};
+
+const options = { asyncLoader };
+const framework = new cldrengine.CLDRFramework(options);
+framework.getAsync('en').then(function(cldr) {
+  const s = cldr.Numbers.formatDecimal('15133.2553559999', { maximumFractionDigits: 1 });
+  document.getElementById('out').innerText = s;
+});
+</script>
+
+<div id="out"></div>
+</body>
+</html>
