@@ -37,7 +37,7 @@ export class TzImpl {
   /** Default UTC zone here for quick access */
   private utcinfo: ZoneInfo = { zoneid: 'Etc/UTC', abbr: 'UTC', dst: 0, offset: 0 };
 
-  constructor(raw: RawData = rawdata) {
+  constructor(raw: RawData) {
 
     const zoneids = raw.zoneids.split('|')
       .map((e, i) => [e, i] as [string, number]);
@@ -256,4 +256,4 @@ interface ZoneInfoRec {
   offset: number;
 }
 
-export const TZ = new TzImpl();
+export const TZ = new TzImpl(rawdata);
