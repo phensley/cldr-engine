@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Date, interval, raw pattern, and relative time formatters now use context transforms
 - Added `dateField` method to `Calendars` api
 - Added `timeZoneInfo` to `Calendars` api, includes the exemplar city for each zone
-- New package: `@phensley/timezone` provides timezone calculations over the full range of tzdb data.
+- New package: @phensley/timezone provides timezone calculations over the full range of tzdb data.
 
 ### Fixed/Changed
 - Revised calendar fields api (e.g. `eras()`, `dayPeriods()`, etc) to accept options
@@ -23,6 +23,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - vuint encode/decode now support 64-bit integers
 - zigzag encoder now supports 64-bit signed integers
 - binary search is now more general, letting caller control direction of match
+- `Calendar.timeZoneOffset` now has the correct sign
+- tzdb updated to 2019a
+- Rebuilt metazone and timezone subsystem to use new timezone package
+- Removed deprecated base-100 and bitarray encoders from cldr-utils package
 
 ## [0.9.1] - 2018-03-21
 ### Added
