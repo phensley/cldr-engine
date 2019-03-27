@@ -1,27 +1,7 @@
-import { base100decode, base100encode } from '../src/base100';
-import { bitarrayCreate, bitarrayGet } from '../src/bitarray';
 import { vuintDecode, z85Decode, zigzagDecode } from '../src/decoding';
 import { vuintEncode, z85Encode, zigzagEncode } from '../src/encoding';
 
 const uint8 = (n: number[]) => new Uint8Array(n);
-
-// TODO: base-100 is deprecated and will be removed
-test('base100 encoding', () => {
-  expect(base100encode(0)).toEqual('!');
-
-  const nums = [Number.MIN_SAFE_INTEGER, -135, -1, 0, 1, 135, Number.MAX_SAFE_INTEGER];
-  const encoded = nums.map(base100encode).join(' ');
-  const decoded = encoded.split(' ').map(base100decode);
-  expect(decoded).toEqual(nums);
-});
-
-test('bit array', () => {
-  const bits = [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1];
-  const data = bitarrayCreate(bits);
-  for (let i = 0; i < bits.length; i++) {
-    expect(bitarrayGet(data, i)).toEqual(bits[i] === 1 ? true : false);
-  }
-});
 
 test('variable uint encode', () => {
   const enc = vuintEncode;
@@ -65,15 +45,6 @@ test('variable uint decode w/ mapping', () => {
   const res = vuintDecode(tmp, n => n * 2);
   expect(res).toEqual([2, 4, 8, 10, 14, 22, 34]);
 });
-
-// test('variable uint array encode', () => {
-//   const enc = vuintEncodeArray;
-//   const dec = vuintDecode;
-//   const nums = [-16, 5, 0, 17, 32];
-//   const tmp = enc(nums, zigzag32Encode);
-//   const res = dec(tmp, zigzag32Decode);
-//   expect(res).toEqual(nums);
-// });
 
 test('z85 encode', () => {
   const enc = z85Encode;
