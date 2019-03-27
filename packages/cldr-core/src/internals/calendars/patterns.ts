@@ -1,7 +1,7 @@
 import { LRU } from '@phensley/cldr-utils';
 
 import { CalendarSchema, EraWidthType, PluralType } from '@phensley/cldr-schema';
-import { timeData } from './autogen.timedata';
+import { timeData, timeStrings } from './autogen.timedata';
 import { Internals } from '../../internals';
 import { Bundle } from '../../resource';
 import { DatePatternMatcher, DateSkeleton, DateSkeletonParser } from './skeleton';
@@ -220,7 +220,7 @@ export class CalendarPatterns {
   protected getTimeData(): [string, string] {
     const w = timeData['']['001'];
     const t = timeData[''][this.region] || (timeData[this.language] || {})[this.region];
-    return (t ? t : w).split('|') as [string, string];
+    return timeStrings[(t !== undefined ? t : w)].split('|') as [string, string];
   }
 
 }

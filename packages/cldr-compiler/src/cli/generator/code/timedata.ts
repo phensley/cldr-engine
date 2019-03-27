@@ -1,8 +1,11 @@
 import { parseLanguageTag } from '@phensley/cldr-core';
-import { Code, HEADER, NOLINT } from './util';
+import { escapeString, Code, HEADER, NOLINT } from './util';
+
+const char = (n: number) => String.fromCharCode('A'.charCodeAt(0) + n);
 
 export const getTimeData = (data: any): Code[] => {
   const timeData: { [x: string]: { [y: string]: string } } = {};
+
   Object.keys(data.timeData).forEach(k => {
     let tag = parseLanguageTag(k);
     if (!tag.hasRegion()) {
@@ -17,8 +20,10 @@ export const getTimeData = (data: any): Code[] => {
     timeData[language] = record;
   });
 
+  const strings: string[] = [];
+
   let code = HEADER + NOLINT;
-  code += 'export const timeData: { [x: string]: { [y: string]: string } } = {';
+  code += 'export const timeData: { [x: string]: { [y: string]: number } } = {';
   Object.keys(timeData).forEach((language, i) => {
     if (i > 0) {
       code += ',';
@@ -27,15 +32,27 @@ export const getTimeData = (data: any): Code[] => {
     code += ':{';
     Object.keys(timeData[language]).forEach((region, j) => {
       const s = timeData[language][region];
+
+      let k = strings.indexOf(s);
+      if (k === -1) {
+        k = strings.length;
+        strings.push(s);
+      }
+
       if (j > 0) {
         code += ',';
       }
       region = /\d/.test(region[0]) ? `'${region}'` : region;
-      code += `${region}:'${s}'`;
+      code += `${region}:${k}`;
     });
     code += '}';
   });
-  code += '};\n';
+  code += '};\n\n';
+
+  code += NOLINT;
+  code += `export const timeStrings: string[] = [`;
+  code += `  ${strings.map(s => escapeString(s, "'")).join(',')}`;
+  code += `];\n`;
 
   return [
     Code.core(['internals', 'calendars', 'autogen.timedata.ts'], code)

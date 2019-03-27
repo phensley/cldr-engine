@@ -3,7 +3,6 @@ import { languageBundle } from '../../_helpers';
 import {
   Bundle,
   CalendarsImpl,
-  GregorianDate,
   InternalsImpl,
   PrivateApiImpl
 } from '../../../src';
