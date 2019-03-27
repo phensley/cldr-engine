@@ -46,6 +46,8 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
     }
   });
 
+  const TYPES = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
   const zoneinfo: string[] = [];
 
   for (const id of ids) {
@@ -74,8 +76,15 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
     const localtime = info.localtimetype.map(
       t => `${info.zoneabbr(t.idx)}:${t.dst}:${t.utoff}`).join('|');
 
+    const types = info.transtypes.map((t: number) => TYPES[t]);
+    for (const t of types) {
+      if (t === undefined) {
+        throw new Error(`timezone types characters need to be expanded!`);
+      }
+    }
+
     zoneinfo.push(`    '${localtime}\\t` +
-      `${info.transtypes.join('')}\\t` +
+      `${types.join('')}\\t` +
       `${z85Encode(vuintEncode(untils, zigzagEncode))}'`
     );
   }

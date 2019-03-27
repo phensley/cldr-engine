@@ -23,20 +23,17 @@ const calendarsApi = (tag: string) => {
   return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
 };
 
+// NOTE: We have two problems using Date for dates way in the past:
 //
-// NOTE: the Gregorian epoch tests are modified since they break on Node v10
-// when the tests are run in certain local timezones.
-// We usually get UTC for a date by using:
-//    (date.getTime() - (date.getTimezoneOffset() * 60000))
-//
-// As of Node v10 we can no longer get UTC precisely using this method since
-// the Date.getTimezoneOffset() returns integer minutes but the timestamp is
-// corrected inside Date using seconds.
-
-// For example, before 1883 the GMT offset for America/New_York LMT was
-// -4:56:02 -- the 2 seconds are truncated by getTimezoneOffset().
-
-const version = Number(process.version.slice(1).split('.')[0]);
+// 1. The tzdb defines early timezone offsets in LMT (local mean time)
+//    and many of these offsets include a seconds component. The JavaScript
+//    spec defines getTimezoneOffset() as returning minutes, so we lose
+//    this precision.
+// 2. Node v8 did not use the LMT offsets in seconds but Node v10 does.
+//    This means that we have a problem trying to run tests on Node v10 that
+//    depend on the seconds component of the time zone offset.  Consequently
+//    we can't accurately construct a UTC timestamp from a Date object for
+//    very old dates whose LMT offset has a seconds component.
 
 test('zoned date time gregorian epoch', () => {
   const api = calendarsApi('en');
@@ -59,42 +56,46 @@ test('zoned date time gregorian epoch', () => {
 
   // -12219333903211 UTC
   // Gregorian cutover Thurs Oct 4, 1582 - Fri Oct 15, 1582
-  date = new Date(1582, 9, 14, 12, 34, 56, 789);
-  d = api.toGregorianDate({ date, zoneId: ROME });
+  // date = new Date(1582, 9, 14, 12, 34, 56, 789);
+
+  // NOTE: can't use new Date here, see note at top.
+  let utc = -12219333903211;
+  d = api.toGregorianDate({ date: utc, zoneId: ROME });
+
+  // Rome's LMT offset is 0:49:56
+  expect(d.timeZoneOffset()).toEqual(2996000);
 
   // Skip checking seconds for Node > v8
-  if (version <= 8) {
-    expect(d.toString()).toEqual('Gregorian 1582-10-04 13:34:56.789 Europe/Rome');
-    expect(d.unixEpoch()).toEqual(-12219333903211);
-  }
+  expect(d.toString()).toEqual('Gregorian 1582-10-04 13:24:52.789 Europe/Rome');
+  expect(d.unixEpoch()).toEqual(-12219333903211);
   expect(d.year()).toEqual(1582);
   expect(d.month()).toEqual(10);
   expect(d.hour()).toEqual(1);
   expect(d.hourOfDay()).toEqual(13);
-  expect(d.minute()).toEqual(34);
-  if (version <= 8) {
-    expect(d.second()).toEqual(56);
-  }
+  expect(d.minute()).toEqual(24);
+  expect(d.second()).toEqual(52);
   expect(d.milliseconds()).toEqual(789);
 
   // -12219247503211 UTC
-  date = new Date(1582, 9, 15, 12, 34, 56, 789);
-  d = api.toGregorianDate({ date, zoneId: ROME });
+  // date = new Date(1582, 9, 15, 12, 34, 56, 789);
+
+  // NOTE: can't use new Date here, see note at top.
+  utc = -12219247503211;
+  d = api.toGregorianDate({ date: utc, zoneId: ROME });
+
+  // Rome's LMT offset is 0:49:56
+  expect(d.timeZoneOffset()).toEqual(2996000);
 
   // Skip checking seconds for Node > v8
-  if (version <= 8) {
-    expect(d.toString()).toEqual('Gregorian 1582-10-15 13:34:56.789 Europe/Rome');
-    expect(d.unixEpoch()).toEqual(-12219247503211);
-  }
+  expect(d.toString()).toEqual('Gregorian 1582-10-15 13:24:52.789 Europe/Rome');
+  expect(d.unixEpoch()).toEqual(-12219247503211);
   expect(d.year()).toEqual(1582);
   expect(d.month()).toEqual(10);
   expect(d.dayOfMonth()).toEqual(15);
   expect(d.hour()).toEqual(1);
   expect(d.hourOfDay()).toEqual(13);
-  expect(d.minute()).toEqual(34);
-  if (version <= 8) {
-    expect(d.second()).toEqual(56);
-  }
+  expect(d.minute()).toEqual(24);
+  expect(d.second()).toEqual(52);
   expect(d.milliseconds()).toEqual(789);
 });
 

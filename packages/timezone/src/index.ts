@@ -3,6 +3,7 @@ import { RawData } from './types';
 import { binarySearch, vuintDecode, z85Decode, zigzagDecode } from '@phensley/cldr-utils';
 
 export interface ZoneInfo {
+  zoneid: string;
   abbr: string;
   dst: number;
   offset: number;
@@ -15,14 +16,14 @@ export interface Tz {
 
 export class TzImpl {
 
-  /** Mapping of proper- and lower-cased time zone ids to index */
+  /** Mapping of canonical time zone ids to index */
   private zoneindex: Map<string, number> = new Map();
 
-  /** Mapping of proper- and lower-cased alias ids to time zone id */
+  /** Mapping of proper- and lower-cased time zone and alias ids to canonical time zone id */
   private linkindex: Map<string, string> = new Map();
 
   /** Array of time zone ids */
-  private zoneids: string[];
+  private _zoneids: string[];
 
   /** Array of untils and deltas */
   private untilindex: number[];
@@ -34,7 +35,7 @@ export class TzImpl {
   private zonerecords: ZoneRecord[];
 
   /** Default UTC zone here for quick access */
-  private utcinfo: ZoneInfo = { abbr: 'UTC', dst: 0, offset: 0 };
+  private utcinfo: ZoneInfo = { zoneid: 'Etc/UTC', abbr: 'UTC', dst: 0, offset: 0 };
 
   constructor(raw: RawData = rawdata) {
 
@@ -44,19 +45,28 @@ export class TzImpl {
     const links = raw.links.split('|')
       .map(e => { const [k, j] = e.split(':'); return [k, Number(j)] as [string, number]; });
 
-    this.zoneids = [];
+    const addlink = (src: string, dst: string) => {
+      // index a few supported forms of the time zone id or alias
+      // Ex:  America/New_York, Ameirca_New_York
+      const lowersrc = src.toLowerCase();
+      this.linkindex.set(src, dst);
+      this.linkindex.set(lowersrc, dst);
+    };
+
+    this._zoneids = [];
     zoneids.forEach(i => {
       const id = i[0];
-      this.zoneids.push(id);
+      this._zoneids.push(id);
       this.zoneindex.set(id, i[1]);
-      this.zoneindex.set(id.toLocaleLowerCase(), i[1]);
+
+      // index the zone id as a link to itself, including the lowercase form.
+      addlink(id, id);
     });
 
     links.forEach(i => {
       const alias = i[0];
       const id = zoneids[i[1]][0];
-      this.linkindex.set(alias, id);
-      this.linkindex.set(alias.toLowerCase(), id);
+      addlink(alias, id);
     });
 
     this.untilindex = vuintDecode(z85Decode(raw.index), zigzagDecode);
@@ -72,16 +82,14 @@ export class TzImpl {
    * Get the info for a time zone using a UTC timestamp.
    */
   fromUTC(zoneid: string, utc: number): ZoneInfo | undefined {
-    const r = this.record(zoneid);
-    return r ? r.fromUTC(utc) : r;
+    return this.lookup(zoneid, utc, true);
   }
 
   /**
    * Get the info for a time zone using a local "wall clock" timestamp.
    */
   fromWall(zoneid: string, wall: number): ZoneInfo | undefined {
-    const r = this.record(zoneid);
-    return r ? r.fromWall(wall) : r;
+    return this.lookup(zoneid, wall, false);
   }
 
   /**
@@ -91,24 +99,49 @@ export class TzImpl {
     return this.utcinfo;
   }
 
-  private record(zoneid: string): ZoneRecord | undefined {
-    let id: string | undefined = zoneid;
-    let i = this.zoneindex.get(id);
+  /**
+   * Resolve a lowercase time zone id or alias into the canonical proper-cased id.
+   */
+  resolveId(id: string): string | undefined {
+    return this.linkindex.get(id);
+  }
 
-    // If time zone id lookup failed, try to find an alias
-    if (i === undefined) {
-      id = this.linkindex.get(zoneid);
+  /**
+   * Returns an array of time zone ids.
+   */
+  zoneIds(): string[] {
+    return this._zoneids;
+  }
 
-      // id found, set the index
-      if (id) {
-        i = this.zoneindex.get(id);
-      }
+  /**
+   * Lookup the time zone record and return the zone info.
+   */
+  private lookup(id: string, t: number, isutc: boolean): ZoneInfo | undefined {
+    const rec = this.record(id);
+    if (rec) {
+      const [zoneid, r] = rec;
+      const res = isutc ? r.fromUTC(t) : r.fromWall(t);
+      return {
+        ...res,
+        zoneid
+      };
     }
+    return undefined;
+  }
 
-    // Failed to match a time zone id or alias
-    if (i === undefined) {
+  /**
+   * Find a record for a time zone id or alias.
+   */
+  private record(zoneid: string): [string, ZoneRecord] | undefined {
+    const id = this.linkindex.get(zoneid);
+    // console.log('record lookup', zoneid, '->', id);
+    // Failed to match a time zone or alias in any of the supported forms
+    if (id === undefined) {
       return undefined;
     }
+
+    // Find the offset to the record for this zone.
+    const i = this.zoneindex.get(id)!;
 
     // See if we've already decoded this zone
     let rec = this.zonerecords[i];
@@ -119,7 +152,9 @@ export class TzImpl {
       this.zonerecords[i] = rec;
       this.rawzoneinfo[i] = '';
     }
-    return rec;
+
+    // Return canonical time zone id with its record
+    return [id, rec];
   }
 
 }
@@ -129,7 +164,7 @@ export class TzImpl {
  */
 class ZoneRecord {
 
-  readonly localtime: ZoneInfo[];
+  readonly localtime: ZoneInfoRec[];
   readonly types: number[];
   readonly untils: number[];
   readonly len: number;
@@ -137,6 +172,7 @@ class ZoneRecord {
   constructor(raw: string, index: number[]) {
     const [ _info, _types, _untils ] = raw.split('\t');
     const untils = vuintDecode(z85Decode(_untils), zigzagDecode);
+    const types = _types.split('').map(t => TYPES[t]);
 
     // Decode initial until and the deltas
     const len = untils.length;
@@ -148,7 +184,7 @@ class ZoneRecord {
     }
 
     this.localtime = _info.split('|').map(this.decodeInfo);
-    this.types = _types.split('').map(Number);
+    this.types = types;
     this.untils = untils;
     this.len = untils.length;
   }
@@ -156,7 +192,7 @@ class ZoneRecord {
   /**
    * Resolve the zone info using a UTC timestamp.
    */
-  fromUTC(utc: number): ZoneInfo {
+  fromUTC(utc: number): ZoneInfoRec {
     const i = binarySearch(this.untils, true, utc);
     const type = i === -1 ? 0 : this.types[i];
     return this.localtime[type];
@@ -165,7 +201,7 @@ class ZoneRecord {
   /**
    * Resolve the zone info using a local "wall clock" timestamp.
    */
-  fromWall(wall: number): ZoneInfo {
+  fromWall(wall: number): ZoneInfoRec {
     let i = binarySearch(this.untils, false, wall);
     let type: number;
 
@@ -197,7 +233,7 @@ class ZoneRecord {
   /**
    * Decode a single zone info record.
    */
-  private decodeInfo(raw: string): ZoneInfo {
+  private decodeInfo(raw: string): ZoneInfoRec {
     const [ abbr, _dst, _offset ] = raw.split(':');
     return {
       abbr,
@@ -206,6 +242,18 @@ class ZoneRecord {
     };
   }
 
+}
+
+const TYPES = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  .reduce((p, c, i) => {
+    p[c] = i;
+    return p;
+  }, {} as { [x: string]: number });
+
+interface ZoneInfoRec {
+  abbr: string;
+  dst: number;
+  offset: number;
 }
 
 export const TZ = new TzImpl();

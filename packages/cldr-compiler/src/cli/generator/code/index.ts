@@ -42,7 +42,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
 // Names of pre-processed data files
 const DATA_FILES = [
   'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals',
-  'subtags', 'symbols', 'timedata', 'weekdata', 'zonedst'
+  'subtags', 'symbols', 'timedata', 'weekdata'
 ];
 
 const load = (): any => {

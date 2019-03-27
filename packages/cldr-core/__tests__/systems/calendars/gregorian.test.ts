@@ -44,7 +44,7 @@ test('gregorian date', () => {
   expect(d.timeZoneId()).toEqual('America/New_York');
   expect(d.isLeapYear()).toEqual(false);
   expect(d.isDaylightSavings()).toEqual(true);
-  expect(d.timeZoneOffset()).toEqual(14400000);
+  expect(d.timeZoneOffset()).toEqual(-14400000);
 
   // + 1 second
   d = make(n + 1000, NEW_YORK);

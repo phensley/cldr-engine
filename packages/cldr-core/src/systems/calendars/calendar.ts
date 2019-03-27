@@ -1,7 +1,7 @@
 import { DateTimePatternField, DateTimePatternFieldType, MetaZoneType } from '@phensley/cldr-schema';
 import { dateFields, DateField, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
-import { substituteZoneAlias, zoneInfoCache, ZoneInfo } from './timezone';
+import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
@@ -101,7 +101,7 @@ export abstract class CalendarDate {
    * Unix epoch with no timezone offset.
    */
   unixEpoch(): number {
-    return this._fields[DateField.LOCAL_MILLIS] + this._zoneInfo.offset;
+    return this._fields[DateField.LOCAL_MILLIS] - this._zoneInfo.offset;
   }
 
   firstDayOfWeek(): number {
@@ -116,7 +116,7 @@ export abstract class CalendarDate {
    * Returns a floating point number representing the real Julian Day, UTC.
    */
   julianDay(): number {
-    const ms = (this._fields[DateField.MILLIS_IN_DAY] + this._zoneInfo.offset) / CalendarConstants.ONE_DAY_MS;
+    const ms = (this._fields[DateField.MILLIS_IN_DAY] - this._zoneInfo.offset) / CalendarConstants.ONE_DAY_MS;
     return (this._fields[DateField.JULIAN_DAY] - 0.5) + ms;
   }
 
@@ -260,11 +260,11 @@ export abstract class CalendarDate {
   }
 
   metaZoneId(): MetaZoneType {
-    return this._zoneInfo.metaZoneId;
+    return this._zoneInfo.metazoneid as MetaZoneType;
   }
 
   timeZoneId(): string {
-    return this._zoneInfo.timeZoneId;
+    return this._zoneInfo.zoneid;
   }
 
   timeZoneOffset(): number {
@@ -276,7 +276,7 @@ export abstract class CalendarDate {
   }
 
   isDaylightSavings(): boolean {
-    return this._zoneInfo.dst;
+    return this._zoneInfo.dst === 1;
   }
 
   /**
@@ -327,7 +327,7 @@ export abstract class CalendarDate {
    */
   protected _addTime(fields: CalendarDateFields): [number, number] {
     // Calculate the time difference in days and milliseconds
-    let msDay = this._fields[DateField.MILLIS_IN_DAY] + this.timeZoneOffset();
+    let msDay = this._fields[DateField.MILLIS_IN_DAY] - this.timeZoneOffset();
     msDay += ((fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
              ((fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
              ((fields.second || 0) * CalendarConstants.ONE_SECOND_MS) +
@@ -341,8 +341,8 @@ export abstract class CalendarDate {
 
   protected initFromUnixEpoch(ms: number, zoneId: string = 'UTC'): void {
     zoneId = substituteZoneAlias(zoneId);
-    this._zoneInfo = zoneInfoCache.get(ms, zoneId);
-    jdFromUnixEpoch(ms - this._zoneInfo.offset, this._fields);
+    this._zoneInfo = zoneInfoFromUTC(zoneId, ms);
+    jdFromUnixEpoch(ms + this._zoneInfo.offset, this._fields);
     computeBaseFields(this._fields);
   }
 
@@ -354,7 +354,7 @@ export abstract class CalendarDate {
   protected _toString(type: string, year?: string): string {
     return `${type} ${year || this.year()}-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)} ` +
       `${zeropad(this.hourOfDay(), 2)}:${zeropad(this.minute(), 2)}:${zeropad(this.second(), 2)}` +
-      `.${zeropad(this.milliseconds(), 3)} ${this._zoneInfo.timeZoneId}`;
+      `.${zeropad(this.milliseconds(), 3)} ${this._zoneInfo.zoneid}`;
   }
 
   /**

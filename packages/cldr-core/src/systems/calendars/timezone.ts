@@ -1,95 +1,110 @@
 import { MetaZoneType } from '@phensley/cldr-schema';
-import { base100decode, binarySearch, bitarrayGet, LRU } from '@phensley/cldr-utils';
+import { vuintDecode, z85Decode, zigzagDecode } from '@phensley/cldr-utils';
+import { TZ } from '@phensley/timezone';
 
 import { zoneAliasRaw } from './autogen.aliases';
-import { metaZoneIds, untilsLookup, zoneDST, zoneLinks } from './autogen.zonedata';
+import { metazoneData } from './autogen.zonedata';
 import { stringToObject } from '../../utils/string';
 
-const untilsIndex = untilsLookup.map(base100decode);
-
 export interface ZoneInfo {
-  timeZoneId: string;
-  metaZoneId: MetaZoneType;
-  dst: boolean;
+  zoneid: string;
+  abbr: string;
+  dst: number;
   offset: number;
+  metazoneid: string;
 }
 
-interface ZoneData {
-  readonly offsets: number[];
-  readonly untils: number[];
-  readonly dsts: number[];
-  readonly metaZoneIds: string[];
-  readonly metaZoneUntils: number[];
+interface MetazoneRecord {
+  offsets: number[];
+  untils: number[];
 }
 
-export class ZoneInfoCache {
-
-  private zoneData: LRU<ZoneData>;
-
-  constructor() {
-    this.zoneData = new LRU(50);
+export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
+  // zoneid = TZ.resolveId(zoneid);
+  let tzinfo = TZ.fromUTC(zoneid, utc);
+  if (tzinfo === undefined) {
+    tzinfo = TZ.utcZone();
   }
-
-  get(epoch: number, timeZoneId: string): ZoneInfo {
-    const data = this.getZoneData(timeZoneId);
-    const len = data.untils.length;
-    let index = binarySearch(data.untils, true, epoch);
-    if (index === -1) {
-      index++;
-    }
-    const dst = bitarrayGet(data.dsts, index);
-    const offset = index < len ? data.offsets[index] : data.offsets[len - 1];
-    index = binarySearch(data.metaZoneUntils, true, epoch);
-    if (index === -1) {
-      index++;
-    }
-    const metaZoneId = data.metaZoneIds[index] as MetaZoneType;
-    return { timeZoneId, metaZoneId, dst, offset: offset * 60000 };
-  }
-
-  private getZoneData(zoneId: string): ZoneData {
-    let zone = this.zoneData.get(zoneId);
-    if (zone !== undefined) {
-      return zone;
-    }
-    const link = zoneLinks[zoneId];
-    const raw = link === undefined ? zoneDST[zoneId] : zoneDST[link];
-    if (raw !== undefined) {
-      zone = parseZoneData(raw);
-      this.zoneData.set(zoneId, zone);
-      return zone;
-    }
-    return UTC;
-  }
-}
-
-const parseZoneData = (raw: string): ZoneData => {
-  const parts = raw.split('\t');
-  const _offsets = parts[0].split(' ').map(o => parseInt(o, 10));
-  const index = parts[1].split('').map(Number);
-  const offsets = index.map(i => _offsets[i]);
-  const _untils = parts[2].split(' ').map(base100decode);
-  const dsts = parts[3].split(' ').map(base100decode);
-  const _metaZoneIds = parts[4].split(' ').map(base100decode).map(i => metaZoneIds[i]);
-  const metaZoneUntils = parts[5].split(' ').map(base100decode);
-
-  const untils: number[] = _untils.map(i => untilsIndex[i]);
-
-  // Expand untils deltas
-  const len = untils.length;
-  if (len > 0) {
-    untils[0] *= 1000;
-    for (let i = 1; i < len; i++) {
-      untils[i] = untils[i - 1] + (untils[i] * 1000);
-    }
-  }
-
-  return { offsets, untils, dsts, metaZoneIds: _metaZoneIds, metaZoneUntils };
+  // Use the corrected zone id to lookup the metazone
+  const metazoneid = metazones.get(tzinfo.zoneid, utc);
+  return {
+    ...tzinfo,
+    metazoneid: metazoneid || ('' as MetaZoneType)
+  };
 };
 
-const UTC: ZoneData = parseZoneData(zoneDST['Etc/GMT']);
+/**
+ * Index all metazone information for quick access.
+ */
+class Metazones {
 
-export const zoneInfoCache = new ZoneInfoCache();
+  readonly metazoneids: string[];
+  readonly metazones: MetazoneRecord[] = [];
+  readonly zoneToMetazone: Map<string, number> = new Map();
+
+  constructor(raw: any) {
+    this.metazoneids = raw.metazoneids;
+    const index = vuintDecode(z85Decode(raw.index));
+    const offsets = vuintDecode(z85Decode(raw.offsets));
+    const untils = vuintDecode(z85Decode(raw.untils), zigzagDecode);
+
+    for (let i = 0; i < index.length; i += 2) {
+      const s = index[i];
+      const e = index[i + 1];
+      const rec = {
+        offsets: offsets.slice(s, e),
+        untils: untils.slice(s, e)
+      };
+      this.metazones.push(rec);
+    }
+
+    // mapping of zoneid to metazone records
+    const zoneids = TZ.zoneIds();
+    const zoneindex = vuintDecode(z85Decode(raw.zoneindex));
+
+    // Sanity-check, since the zoneindex is based off the canonical
+    // zoneids array, but could be generated at different times. our test
+    // cases should ensure they're in sync, but warn of a discrepancy
+    if (zoneids.length !== zoneindex.length) {
+      console.log(`Error: time zone ids and zone index are not in sync!`);
+    }
+
+    for (let i = 0; i < zoneindex.length; i++) {
+      const mi = zoneindex[i];
+      if (mi !== -1) {
+        this.zoneToMetazone.set(zoneids[i], mi);
+        this.zoneToMetazone.set(zoneids[i].toLowerCase(), mi);
+      }
+    }
+  }
+
+  get(zoneid: string, utc: number): string | undefined {
+    const i = this.zoneToMetazone.get(zoneid);
+    if (i !== undefined) {
+      const rec = this.metazones[i];
+      if (rec !== undefined) {
+
+        // Note: we don't bother with binary search here since the metazone
+        // until arrays are quite short.
+        const { offsets, untils } = rec;
+        const len = untils.length;
+        for (let j = len - 1; j > 0; j--) {
+          if (untils[j] <= utc) {
+            return this.metazoneids[offsets[j]];
+          }
+        }
+
+        // Hit the end, return the initial metazone id
+        return this.metazoneids[offsets[0]];
+      }
+    }
+
+    // This zone has no metazoneid, e.g. "Etc/GMT+1"
+    return undefined;
+  }
+}
+
+const metazones = new Metazones(metazoneData);
 
 /**
  * Checks if this timezone id is an alias.
@@ -109,7 +124,7 @@ const zoneAlias = stringToObject(zoneAliasRaw, '|', ':');
  * TODO: revisit to translate tz database aliases automatically and merge with
  * cldr aliases.
  */
-const timeZoneAliases: { [x: string]: string } = {
+export const timeZoneAliases: { [x: string]: string } = {
   // Import generated zone aliases from CLDR
   ...zoneAlias,
 

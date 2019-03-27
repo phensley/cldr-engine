@@ -12,7 +12,7 @@ test('metazones, dst, offsets', () => {
   let date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('America_Eastern');
   expect(date.isDaylightSavings()).toEqual(true);
-  expect(date.timeZoneOffset() / 60000).toEqual(240);
+  expect(date.timeZoneOffset() / 60000).toEqual(-240);
 
   // Sun, Oct 31, 2004 05:55:00 UTC
   // Sun, Oct 31, 2004 01:55:00 EDT (UTC-4)
@@ -20,7 +20,7 @@ test('metazones, dst, offsets', () => {
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('America_Eastern');
   expect(date.isDaylightSavings()).toEqual(true);
-  expect(date.timeZoneOffset() / 60000).toEqual(240);
+  expect(date.timeZoneOffset() / 60000).toEqual(-240);
 
   // Sun, Oct 31, 2004 06:06:40 UTC
   // Sun, Oct 31, 2004 01:06:40 EST (UTC-5)
@@ -28,7 +28,7 @@ test('metazones, dst, offsets', () => {
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('America_Eastern');
   expect(date.isDaylightSavings()).toEqual(false);
-  expect(date.timeZoneOffset() / 60000).toEqual(300);
+  expect(date.timeZoneOffset() / 60000).toEqual(-300);
 
   // Wed, Jan 24, 2018 03:13:55 UTC
   // Wed, Jan 23, 2018 22:13:55 EST (UTC-5)
@@ -36,7 +36,7 @@ test('metazones, dst, offsets', () => {
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('America_Eastern');
   expect(date.isDaylightSavings()).toEqual(false);
-  expect(date.timeZoneOffset() / 60000).toEqual(300);
+  expect(date.timeZoneOffset() / 60000).toEqual(-300);
 
   // Sun, Mar 11, 2018 01:15:25 UTC
   // Sun, Mar 10, 2018 20:15:25 EST (UTC-5)
@@ -44,7 +44,7 @@ test('metazones, dst, offsets', () => {
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('America_Eastern');
   expect(date.isDaylightSavings()).toEqual(false);
-  expect(date.timeZoneOffset() / 60000).toEqual(300);
+  expect(date.timeZoneOffset() / 60000).toEqual(-300);
 
   // Sun, Mar, 11, 2018 07:00:25 UTC
   // Sun, Mar, 11, 2018 03:00:25 EDT (UTC-4)
@@ -52,7 +52,7 @@ test('metazones, dst, offsets', () => {
   date = make(epoch, zoneId);
   expect(date.metaZoneId()).toEqual('America_Eastern');
   expect(date.isDaylightSavings()).toEqual(true);
-  expect(date.timeZoneOffset() / 60000).toEqual(240);
+  expect(date.timeZoneOffset() / 60000).toEqual(-240);
 
   // TODO: november 2018
 });

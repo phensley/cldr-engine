@@ -74,7 +74,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
 
   getHourPattern(raw: string, negative: boolean): DateTimeNode[] {
     const patterns = this.hourPatternCache.get(raw);
-    return patterns[negative ? 0 : 1];
+    return patterns[negative ? 1 : 0];
   }
 
   weekFirstDay(region: string): number {

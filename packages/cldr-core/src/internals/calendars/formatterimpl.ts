@@ -55,6 +55,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       let field: ContextTransformFieldType | undefined;
       let type = '';
       let value = '';
+
       switch (n[0]) {
 
         case 'G':
@@ -495,7 +496,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     let fmt = '';
     if (width <= 5) {
       // TODO: use number params
-      fmt += negative ? '+' : '-' ;
+      fmt += negative ? '-' : '+' ;
       fmt += this._num(ctx, hours, 2);
       if (width === 5) {
         fmt += ':';
@@ -572,7 +573,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     let fmt = '';
     if (width >= 1 && width <= 5) {
       const zero = hours === 0 && minutes === 0;
-      fmt += zero ? '+' : negative ? '+' : '-' ;
+      fmt += zero ? '+' : negative ? '-' : '+';
       fmt += this._num(ctx, hours, 2);
       if (width === 3 || width === 5) {
         fmt += ':';

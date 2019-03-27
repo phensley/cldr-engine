@@ -95,7 +95,7 @@ test('raw formats', () => {
 
   res = format(utc, 'V');
   expect(res).toEqual([
-    'unk', 'UTC', 'Unknown City', 'GMT', '', ''
+    'unk', 'Etc/UTC', 'Unknown City', 'GMT', '', ''
   ]);
 
   res = format(wallis, 'V');

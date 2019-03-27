@@ -1,7 +1,7 @@
-import * as fs from 'fs';
-import { join } from 'path';
-import { base100encode, bitarrayCreate } from '@phensley/cldr-utils';
-import { enumName, escapeString, lineWrap, Code, HEADER } from './util';
+import { TZ } from '@phensley/timezone';
+import { vuintEncode, z85Encode, zigzagEncode } from '@phensley/cldr-utils';
+import { enumName, lineWrap, Code, HEADER } from './util';
+import chalk from 'chalk';
 
 class IdArray {
 
@@ -9,10 +9,10 @@ class IdArray {
   private index: any = {};
   private sequence: number = 0;
 
-  add(key: string): string {
+  add(key: string): number {
     let id = this.index[key];
     if (id === undefined) {
-      id = base100encode(this.sequence++);
+      id = this.sequence++;
       this.index[key] = id;
       this.array.push(key);
     }
@@ -20,68 +20,141 @@ class IdArray {
   }
 }
 
-/**
- * Process tzdata and encode into a compact form.
- */
-const buildZoneDST = (metazones: any): [any, any, any] => {
-  const path = join(__dirname, '..', '..', '..', '..', 'data', 'timezones', 'temp', 'tzdata.json');
-  const raw = fs.readFileSync(path);
-  const tzdata = JSON.parse(raw.toString());
+class FrequencySet<T> {
 
-  const untilsIndex = new IdArray();
-  const inverted: any = {};
-  for (const row of tzdata) {
-    const [ name, _indexed, _untils, _dsts ] = row;
-    const metazone = metazones[name];
-    if (metazone === undefined) {
-      continue;
+  private elems: T[] = [];
+  private freq: Map<T, number> = new Map();
+
+  /**
+   * Add an element to the set or update its frequency.
+   */
+  add(elem: T): void {
+    const freq = this.freq.get(elem) || 0;
+    if (freq === 0) {
+      this.elems.push(elem);
     }
-    const [ _offsets, _index ] = _indexed;
-
-    const offsets = _offsets.join(' ');
-    const index = _index.join('');
-    const untils = _untils.map(base100encode).map((k: string) => untilsIndex.add(k)).join(' ');
-    const dsts = bitarrayCreate(_dsts).map(base100encode).join(' ');
-
-    const key = [offsets, index, untils, dsts, metazone].join('\t');
-    const ids = inverted[key] || [];
-    ids.push(name);
-    inverted[key] = ids;
+    this.freq.set(elem, freq + 1);
   }
 
-  const zoneDST: any = {};
-  const zoneLinks: any = {};
-  Object.keys(inverted).forEach(info => {
-    const keys = inverted[info];
-    const first = keys[0];
-    zoneDST[first] = info;
-    keys.slice(1).forEach((k: string) => {
-      zoneLinks[k] = first;
+  /**
+   * Return the elements, sorted by frequency MOST to LEAST.
+   */
+  sort(): T[] {
+    const res = this.elems.slice();
+    res.sort((a: T, b: T) => {
+      const fa = this.freq.get(a) || -1;
+      const fb = this.freq.get(b) || -1;
+      return fb < fa ? -1 : fa === fb ? 0 : 1;
     });
-  });
-  return [zoneDST, zoneLinks, untilsIndex.array];
-};
+    return res;
+  }
+}
 
-/**
- * Process cldr metazone time ranges into a compact form.
- */
-const buildMetaZones = (data: any): [any, any] => {
-  const zoneIdIndex = new IdArray();
+interface Metazones {
+  zoneindex: string;
+  metazoneids: string;
+  index: string;
+  offsets: string;
+  untils: string;
+}
+
+interface ZoneMapping {
+  zi: number; // index of time zone id
+  mi: number; // index of metazone record
+}
+
+// These zones have no metazone mapping intentionally.
+const IGNORED_ZONES = new Set<string>([
+  'Etc/GMT+1',
+  'Etc/GMT+2',
+  'Etc/GMT+3',
+  'Etc/GMT+4',
+  'Etc/GMT+5',
+  'Etc/GMT+6',
+  'Etc/GMT+7',
+  'Etc/GMT+8',
+  'Etc/GMT+9',
+  'Etc/GMT+10',
+  'Etc/GMT+11',
+  'Etc/GMT+12',
+  'Etc/GMT-1',
+  'Etc/GMT-2',
+  'Etc/GMT-3',
+  'Etc/GMT-4',
+  'Etc/GMT-5',
+  'Etc/GMT-6',
+  'Etc/GMT-7',
+  'Etc/GMT-8',
+  'Etc/GMT-9',
+  'Etc/GMT-10',
+  'Etc/GMT-11',
+  'Etc/GMT-12',
+  'Etc/GMT-13',
+  'Etc/GMT-14',
+  'Etc/UTC'
+]);
+
+const buildMetaZones2 = (data: any): Metazones => {
   const metazoneIndex = new IdArray();
-  const metazones: any = {};
-  Object.keys(data).forEach(zoneId => {
-    const ranges = data[zoneId].reverse();
-    const offsets: string[] = [];
-    const untils: string[] = [];
-    ranges.forEach((range: [string, number, number]) => {
-      const [ metazoneId, from, to ] = range;
-      const offset = metazoneIndex.add(metazoneId);
-      offsets.push(offset);
-      untils.push(base100encode(from));
-    });
-    metazones[zoneId] = [offsets.join(' '), untils.join(' ')].join('\t');
+
+  const offsets: number[] = [];
+  const untils: number[] = [];
+  const index: number[] = [];
+
+  const zonemap = new Map<number, number>();
+
+  // Array of canonical time zone ids
+  const zoneids = TZ.zoneIds();
+
+  Object.keys(data).forEach((id, mi) => {
+    // Map the metazone id to the index of the time zone id in the TZ data.
+    let zi = zoneids.indexOf(id);
+    if (zi === -1) {
+      // We have an alias, e.g. Africa/Addis_Ababa, so follow the link to
+      // get the correct tzdb id.
+      const zid = TZ.resolveId(id);
+      if (zid === undefined) {
+        throw new Error(`${chalk.red('Error')} tzdb / cldr mismatch. zone id failed ${id}`);
+      }
+      zi = zoneids.indexOf(zid);
+    }
+
+    zonemap.set(zi, mi);
   });
-  return [metazoneIndex.array.join(' '), metazones];
+
+  const zoneindex: number[] = [];
+  zoneids.forEach((id, zi) => {
+    const mi = zonemap.get(zi);
+    if (mi === undefined && !IGNORED_ZONES.has(id)) {
+      console.log(`${chalk.red('Warning')}: ${id} has no metazone`);
+    }
+    zoneindex.push(mi === undefined ? -1 : mi);
+  });
+
+  // Metazone time zone ids
+  Object.keys(data).forEach(id => {
+    const start = offsets.length;
+    const ranges = data[id].reverse();
+    ranges.forEach((range: [string, number, number]) => {
+      const [ mzid, from, _] = range;
+      const offset = metazoneIndex.add(mzid);
+      offsets.push(offset);
+      untils.push(from);
+    });
+
+    const end = offsets.length;
+    index.push(start);
+    index.push(end);
+  });
+
+  return {
+    zoneindex: z85Encode(vuintEncode(zoneindex)),
+    // zoneids: zoneids.join('\\t'),
+    metazoneids: metazoneIndex.array.join('\\t'),
+    index: z85Encode(vuintEncode(index)),
+    offsets: z85Encode(vuintEncode(offsets)),
+    untils: z85Encode(vuintEncode(untils, zigzagEncode))
+  };
 };
 
 /**
@@ -90,30 +163,26 @@ const buildMetaZones = (data: any): [any, any] => {
 export const getZones = (data: any): Code[] => {
   const result: Code[] = [];
 
-  // Build autogen.zones.ts source
-  const [metazoneIds, metazones] = buildMetaZones(data.metaZoneRanges);
-  const [ zoneDST, zoneLinks, untilsArray ] = buildZoneDST(metazones);
+  const metazonedata = buildMetaZones2(data.metaZoneRanges);
 
   let code = HEADER + '/* tslint:disable:max-line-length */\n';
-  code += `export const untilsLookup: string[] = '`;
-  code += untilsArray.join(' ');
-  code += `'.split(' ');\n\n`;
 
-  code += `export const zoneDST: { [x: string]: string } = {\n`;
-  Object.keys(zoneDST).forEach(k => {
-    const str = escapeString(zoneDST[k]);
-    code += `  '${k}': ${str},\n`;
-  });
-  code += '};\n\n';
+  code += `export const metazoneData = {\n`;
+  code += `  // mapping of time zone's array index to metazone's array index\n`;
+  code += `  zoneindex: '${metazonedata.zoneindex}',\n\n`;
 
-  code += `export const zoneLinks: { [x: string]: string } = {\n`;
-  Object.keys(zoneLinks).forEach(k => {
-    const str = escapeString(zoneLinks[k]);
-    code += `  '${k}': ${str},\n`;
-  });
-  code += '};\n\n';
+  code += `  // array of metazone ids\n`;
+  code += `  metazoneids: '${metazonedata.metazoneids}'.split('\\t'),\n\n`;
 
-  code += `export const metaZoneIds: string[] = '${metazoneIds}'.split(' ');\n`;
+  code += `  // array of start/end slice indices into offsets and untils arrays\n`;
+  code += `  index: '${metazonedata.index}',\n\n`;
+
+  code += `  // offset indicating which metazone id to use at a given until\n`;
+  code += `  offsets: '${metazonedata.offsets}',\n`;
+
+  code += `  // until timestamps\n`;
+  code += `  untils: '${metazonedata.untils}'\n`;
+  code += `};\n`;
 
   result.push(Code.core(['systems', 'calendars', 'autogen.zonedata.ts'], code));
 

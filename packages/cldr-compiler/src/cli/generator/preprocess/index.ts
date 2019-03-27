@@ -10,7 +10,6 @@ import { getPlurals } from './plurals';
 import { getSubtags } from './subtags';
 import { getSymbols } from './symbols';
 import { getTimeData } from './timedata';
-import { getZoneDST } from './zonedst';
 import { getWeekData } from './weekdata';
 
 const supplemental = getSupplemental();
@@ -26,7 +25,6 @@ const OUTPUTS: { [x: string]: () => string } = {
   subtags: getSubtags,
   symbols: getSymbols,
   timedata: getTimeData,
-  zonedst: getZoneDST,
   weekdata: getWeekData,
 };
 

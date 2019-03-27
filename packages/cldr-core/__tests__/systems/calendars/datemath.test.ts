@@ -29,11 +29,12 @@ test('years', () => {
   q = date.add({ year: -3 });
   expect(q.toString()).toEqual('Gregorian 1997-03-11 03:00:25.000 America/New_York');
 
+  // Earliest timezone offset for NY is LMT -4:56:2
   q = date.add({ year: -305 });
-  expect(q.toString()).toEqual('Gregorian 1695-03-11 03:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 1695-03-11 03:04:23.000 America/New_York');
 
   q = date.add({ year: -1000 });
-  expect(q.toString()).toEqual('Gregorian 1000-03-11 03:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 1000-03-11 03:04:23.000 America/New_York');
 
   q = date.add({ year: 1100 });
   expect(q.toString()).toEqual('Gregorian 3100-03-11 03:00:25.000 America/New_York');
