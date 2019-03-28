@@ -30,6 +30,11 @@
           "start": "one"
         }, 
         {
+          "end": "one", 
+          "result": "one", 
+          "start": "other"
+        }, 
+        {
           "end": "other", 
           "result": "other", 
           "start": "other"
@@ -693,6 +698,11 @@
           "start": "one"
         }, 
         {
+          "end": "one", 
+          "result": "one", 
+          "start": "other"
+        }, 
+        {
           "end": "other", 
           "result": "other", 
           "start": "other"
@@ -1040,6 +1050,23 @@
           "end": "other", 
           "result": "other", 
           "start": "one"
+        }, 
+        {
+          "end": "other", 
+          "result": "other", 
+          "start": "other"
+        }
+      ], 
+      "ia": [
+        {
+          "end": "other", 
+          "result": "other", 
+          "start": "one"
+        }, 
+        {
+          "end": "one", 
+          "result": "other", 
+          "start": "other"
         }, 
         {
           "end": "other", 
@@ -1485,6 +1512,11 @@
           "start": "one"
         }, 
         {
+          "end": "one", 
+          "result": "one", 
+          "start": "other"
+        }, 
+        {
           "end": "other", 
           "result": "other", 
           "start": "other"
@@ -1737,6 +1769,40 @@
           "start": "other"
         }
       ], 
+      "sc": [
+        {
+          "end": "other", 
+          "result": "other", 
+          "start": "one"
+        }, 
+        {
+          "end": "one", 
+          "result": "one", 
+          "start": "other"
+        }, 
+        {
+          "end": "other", 
+          "result": "other", 
+          "start": "other"
+        }
+      ], 
+      "scn": [
+        {
+          "end": "other", 
+          "result": "other", 
+          "start": "one"
+        }, 
+        {
+          "end": "one", 
+          "result": "one", 
+          "start": "other"
+        }, 
+        {
+          "end": "other", 
+          "result": "other", 
+          "start": "other"
+        }
+      ], 
       "sd": [
         {
           "end": "one", 
@@ -1747,6 +1813,11 @@
           "end": "other", 
           "result": "other", 
           "start": "one"
+        }, 
+        {
+          "end": "one", 
+          "result": "one", 
+          "start": "other"
         }, 
         {
           "end": "other", 
