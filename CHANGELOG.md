@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Fixed/Changed
  - Removed dependency on NPM cldr-data package.
+ - Upgraded [cldr 35](http://cldr.unicode.org/index/downloads/cldr-35).
 
 ## [0.10.2]
 ### Added
