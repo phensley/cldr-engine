@@ -16,6 +16,33 @@ test('available units', () => {
   expect(api.availableUnits()).toContain('light-year');
   expect(api.availableUnits()).toContain('kilogram');
   expect(api.availableUnits()).toContain('terabyte');
+
+  // Added in cldr v35
+  expect(api.availableUnits()).toContain('solar-radius');
+  expect(api.availableUnits()).toContain('permyriad');
+  expect(api.availableUnits()).toContain('british-thermal-unit');
+  expect(api.availableUnits()).toContain('newton-meter');
+
+});
+
+test('cldr v35 units', () => {
+  const api = unitsApi('en');
+  let s: string;
+
+  const q: Quantity = { value: 10.7599, unit: 'permyriad' };
+  s = api.formatQuantity(q, { length: 'long' });
+  expect(s).toEqual('10.76 permyriad');
+
+  s = api.formatQuantity(q, { length: 'narrow' });
+  expect(s).toEqual('10.76‱');
+
+  q.unit = 'british-thermal-unit';
+
+  s = api.formatQuantity(q, { length: 'long' });
+  expect(s).toEqual('10.76 British thermal units');
+
+  s = api.formatQuantity(q, { length: 'narrow' });
+  expect(s).toEqual('10.76Btu');
 });
 
 test('display name', () => {
