@@ -11,7 +11,7 @@ import pluralrange
 
 TAG = 'release-35'
 BASEURL = 'https://unicode.org/repos/cldr/tags'
-TEMPDIR = os.path.join(CWD, '..', '..', '.cldrtrunk')
+TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')
 
 FILES = [
     ('common/supplemental/languageInfo.xml', 

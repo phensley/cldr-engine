@@ -1,3 +1,4 @@
 /.cldr/
+/.cldrpatches/
 *.pyc
 
