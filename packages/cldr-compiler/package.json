@@ -20,7 +20,7 @@
   },
   "cldrversion": "34.0.0",
   "scripts": {
-    "build": "yarn download && yarn build:cj && yarn build:es",
+    "build": "yarn build:cj && yarn build:es && yarn download",
     "build:cj": "tsc -p ./tsconfig.build.json",
     "build:es": "tsc -p ./tsconfig.build.json --module esnext --outDir lib-es",
     "build:watch": "tsc -p ./tsconfig.build.json -w --preserveWatchOutput",
