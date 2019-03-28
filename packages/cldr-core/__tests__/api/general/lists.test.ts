@@ -111,11 +111,11 @@ test('list patterns and-short', () => {
 
   expect(api.formatList(ZERO, 'and-short')).toEqual('');
   expect(api.formatList(ONE, 'and-short')).toEqual('1');
-  expect(api.formatList(TWO, 'and-short')).toEqual('1 and 2');
-  expect(api.formatList(THREE, 'and-short')).toEqual('1, 2, and 3');
-  expect(api.formatList(FOUR, 'and-short')).toEqual('1, 2, 3, and 4');
-  expect(api.formatList(FIVE, 'and-short')).toEqual('1, 2, 3, 4, and 5');
-  expect(api.formatList(SIX, 'and-short')).toEqual('1, 2, 3, 4, 5, and 6');
+  expect(api.formatList(TWO, 'and-short')).toEqual('1 & 2');
+  expect(api.formatList(THREE, 'and-short')).toEqual('1, 2, & 3');
+  expect(api.formatList(FOUR, 'and-short')).toEqual('1, 2, 3, & 4');
+  expect(api.formatList(FIVE, 'and-short')).toEqual('1, 2, 3, 4, & 5');
+  expect(api.formatList(SIX, 'and-short')).toEqual('1, 2, 3, 4, 5, & 6');
 
   api = generalApi('fr');
 
@@ -131,7 +131,7 @@ test('list patterns and-short', () => {
 
   expect(api.formatList(ZERO, 'and-short')).toEqual('');
   expect(api.formatList(ONE, 'and-short')).toEqual('1');
-  expect(api.formatList(TWO, 'and-short')).toEqual('1 และ 2');
+  expect(api.formatList(TWO, 'and-short')).toEqual('1และ2');
   expect(api.formatList(THREE, 'and-short')).toEqual('1 2 และ3');
   expect(api.formatList(FOUR, 'and-short')).toEqual('1 2 3 และ4');
   expect(api.formatList(FIVE, 'and-short')).toEqual('1 2 3 4 และ5');
