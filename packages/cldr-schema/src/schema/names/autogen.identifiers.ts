@@ -120,46 +120,48 @@ export type ScriptIdType = (
 | 'Bamu'| 'Bass'| 'Batk'| 'Beng'| 'Bhks'| 'Blis'| 'Bopo'| 'Brah'| 'Brai'
 | 'Bugi'| 'Buhd'| 'Cakm'| 'Cans'| 'Cari'| 'Cham'| 'Cher'| 'Cirt'| 'Copt'
 | 'Cprt'| 'Cyrl'| 'Cyrs'| 'Deva'| 'Dogr'| 'Dsrt'| 'Dupl'| 'Egyd'| 'Egyh'
-| 'Egyp'| 'Elba'| 'Ethi'| 'Geok'| 'Geor'| 'Glag'| 'Gong'| 'Gonm'| 'Goth'
-| 'Gran'| 'Grek'| 'Gujr'| 'Guru'| 'Hanb'| 'Hang'| 'Hani'| 'Hano'| 'Hans'
-| 'Hant'| 'Hatr'| 'Hebr'| 'Hira'| 'Hluw'| 'Hmng'| 'Hrkt'| 'Hung'| 'Inds'
-| 'Ital'| 'Jamo'| 'Java'| 'Jpan'| 'Jurc'| 'Kali'| 'Kana'| 'Khar'| 'Khmr'
-| 'Khoj'| 'Knda'| 'Kore'| 'Kpel'| 'Kthi'| 'Lana'| 'Laoo'| 'Latf'| 'Latg'
-| 'Latn'| 'Lepc'| 'Limb'| 'Lina'| 'Linb'| 'Lisu'| 'Loma'| 'Lyci'| 'Lydi'
-| 'Mahj'| 'Maka'| 'Mand'| 'Mani'| 'Marc'| 'Maya'| 'Medf'| 'Mend'| 'Merc'
-| 'Mero'| 'Mlym'| 'Modi'| 'Mong'| 'Moon'| 'Mroo'| 'Mtei'| 'Mult'| 'Mymr'
-| 'Narb'| 'Nbat'| 'Newa'| 'Nkgb'| 'Nkoo'| 'Nshu'| 'Ogam'| 'Olck'| 'Orkh'
-| 'Orya'| 'Osge'| 'Osma'| 'Palm'| 'Pauc'| 'Perm'| 'Phag'| 'Phli'| 'Phlp'
-| 'Phlv'| 'Phnx'| 'Plrd'| 'Prti'| 'Qaag'| 'Rjng'| 'Rohg'| 'Roro'| 'Runr'
-| 'Samr'| 'Sara'| 'Sarb'| 'Saur'| 'Sgnw'| 'Shaw'| 'Shrd'| 'Sidd'| 'Sind'
-| 'Sinh'| 'Sogd'| 'Sogo'| 'Sora'| 'Soyo'| 'Sund'| 'Sylo'| 'Syrc'| 'Syre'
-| 'Syrj'| 'Syrn'| 'Tagb'| 'Takr'| 'Tale'| 'Talu'| 'Taml'| 'Tang'| 'Tavt'
-| 'Telu'| 'Teng'| 'Tfng'| 'Tglg'| 'Thaa'| 'Thai'| 'Tibt'| 'Tirh'| 'Ugar'
-| 'Vaii'| 'Visp'| 'Wara'| 'Wole'| 'Xpeo'| 'Xsux'| 'Yiii'| 'Zanb'| 'Zinh'
-| 'Zmth'| 'Zsye'| 'Zsym'| 'Zxxx'| 'Zyyy'| 'Zzzz');
+| 'Egyp'| 'Elba'| 'Elym'| 'Ethi'| 'Geok'| 'Geor'| 'Glag'| 'Gong'| 'Gonm'
+| 'Goth'| 'Gran'| 'Grek'| 'Gujr'| 'Guru'| 'Hanb'| 'Hang'| 'Hani'| 'Hano'
+| 'Hans'| 'Hant'| 'Hatr'| 'Hebr'| 'Hira'| 'Hluw'| 'Hmng'| 'Hmnp'| 'Hrkt'
+| 'Hung'| 'Inds'| 'Ital'| 'Jamo'| 'Java'| 'Jpan'| 'Jurc'| 'Kali'| 'Kana'
+| 'Khar'| 'Khmr'| 'Khoj'| 'Knda'| 'Kore'| 'Kpel'| 'Kthi'| 'Lana'| 'Laoo'
+| 'Latf'| 'Latg'| 'Latn'| 'Lepc'| 'Limb'| 'Lina'| 'Linb'| 'Lisu'| 'Loma'
+| 'Lyci'| 'Lydi'| 'Mahj'| 'Maka'| 'Mand'| 'Mani'| 'Marc'| 'Maya'| 'Medf'
+| 'Mend'| 'Merc'| 'Mero'| 'Mlym'| 'Modi'| 'Mong'| 'Moon'| 'Mroo'| 'Mtei'
+| 'Mult'| 'Mymr'| 'Nand'| 'Narb'| 'Nbat'| 'Newa'| 'Nkgb'| 'Nkoo'| 'Nshu'
+| 'Ogam'| 'Olck'| 'Orkh'| 'Orya'| 'Osge'| 'Osma'| 'Palm'| 'Pauc'| 'Perm'
+| 'Phag'| 'Phli'| 'Phlp'| 'Phlv'| 'Phnx'| 'Plrd'| 'Prti'| 'Qaag'| 'Rjng'
+| 'Rohg'| 'Roro'| 'Runr'| 'Samr'| 'Sara'| 'Sarb'| 'Saur'| 'Sgnw'| 'Shaw'
+| 'Shrd'| 'Sidd'| 'Sind'| 'Sinh'| 'Sogd'| 'Sogo'| 'Sora'| 'Soyo'| 'Sund'
+| 'Sylo'| 'Syrc'| 'Syre'| 'Syrj'| 'Syrn'| 'Tagb'| 'Takr'| 'Tale'| 'Talu'
+| 'Taml'| 'Tang'| 'Tavt'| 'Telu'| 'Teng'| 'Tfng'| 'Tglg'| 'Thaa'| 'Thai'
+| 'Tibt'| 'Tirh'| 'Ugar'| 'Vaii'| 'Visp'| 'Wara'| 'Wcho'| 'Wole'| 'Xpeo'
+| 'Xsux'| 'Yiii'| 'Zanb'| 'Zinh'| 'Zmth'| 'Zsye'| 'Zsym'| 'Zxxx'| 'Zyyy'
+| 'Zzzz');
 
 export const ScriptIdValues: ScriptIdType[] = [
   'Adlm', 'Afak', 'Aghb', 'Ahom', 'Arab', 'Armi', 'Armn', 'Avst', 'Bali'
 , 'Bamu', 'Bass', 'Batk', 'Beng', 'Bhks', 'Blis', 'Bopo', 'Brah', 'Brai'
 , 'Bugi', 'Buhd', 'Cakm', 'Cans', 'Cari', 'Cham', 'Cher', 'Cirt', 'Copt'
 , 'Cprt', 'Cyrl', 'Cyrs', 'Deva', 'Dogr', 'Dsrt', 'Dupl', 'Egyd', 'Egyh'
-, 'Egyp', 'Elba', 'Ethi', 'Geok', 'Geor', 'Glag', 'Gong', 'Gonm', 'Goth'
-, 'Gran', 'Grek', 'Gujr', 'Guru', 'Hanb', 'Hang', 'Hani', 'Hano', 'Hans'
-, 'Hant', 'Hatr', 'Hebr', 'Hira', 'Hluw', 'Hmng', 'Hrkt', 'Hung', 'Inds'
-, 'Ital', 'Jamo', 'Java', 'Jpan', 'Jurc', 'Kali', 'Kana', 'Khar', 'Khmr'
-, 'Khoj', 'Knda', 'Kore', 'Kpel', 'Kthi', 'Lana', 'Laoo', 'Latf', 'Latg'
-, 'Latn', 'Lepc', 'Limb', 'Lina', 'Linb', 'Lisu', 'Loma', 'Lyci', 'Lydi'
-, 'Mahj', 'Maka', 'Mand', 'Mani', 'Marc', 'Maya', 'Medf', 'Mend', 'Merc'
-, 'Mero', 'Mlym', 'Modi', 'Mong', 'Moon', 'Mroo', 'Mtei', 'Mult', 'Mymr'
-, 'Narb', 'Nbat', 'Newa', 'Nkgb', 'Nkoo', 'Nshu', 'Ogam', 'Olck', 'Orkh'
-, 'Orya', 'Osge', 'Osma', 'Palm', 'Pauc', 'Perm', 'Phag', 'Phli', 'Phlp'
-, 'Phlv', 'Phnx', 'Plrd', 'Prti', 'Qaag', 'Rjng', 'Rohg', 'Roro', 'Runr'
-, 'Samr', 'Sara', 'Sarb', 'Saur', 'Sgnw', 'Shaw', 'Shrd', 'Sidd', 'Sind'
-, 'Sinh', 'Sogd', 'Sogo', 'Sora', 'Soyo', 'Sund', 'Sylo', 'Syrc', 'Syre'
-, 'Syrj', 'Syrn', 'Tagb', 'Takr', 'Tale', 'Talu', 'Taml', 'Tang', 'Tavt'
-, 'Telu', 'Teng', 'Tfng', 'Tglg', 'Thaa', 'Thai', 'Tibt', 'Tirh', 'Ugar'
-, 'Vaii', 'Visp', 'Wara', 'Wole', 'Xpeo', 'Xsux', 'Yiii', 'Zanb', 'Zinh'
-, 'Zmth', 'Zsye', 'Zsym', 'Zxxx', 'Zyyy', 'Zzzz'
+, 'Egyp', 'Elba', 'Elym', 'Ethi', 'Geok', 'Geor', 'Glag', 'Gong', 'Gonm'
+, 'Goth', 'Gran', 'Grek', 'Gujr', 'Guru', 'Hanb', 'Hang', 'Hani', 'Hano'
+, 'Hans', 'Hant', 'Hatr', 'Hebr', 'Hira', 'Hluw', 'Hmng', 'Hmnp', 'Hrkt'
+, 'Hung', 'Inds', 'Ital', 'Jamo', 'Java', 'Jpan', 'Jurc', 'Kali', 'Kana'
+, 'Khar', 'Khmr', 'Khoj', 'Knda', 'Kore', 'Kpel', 'Kthi', 'Lana', 'Laoo'
+, 'Latf', 'Latg', 'Latn', 'Lepc', 'Limb', 'Lina', 'Linb', 'Lisu', 'Loma'
+, 'Lyci', 'Lydi', 'Mahj', 'Maka', 'Mand', 'Mani', 'Marc', 'Maya', 'Medf'
+, 'Mend', 'Merc', 'Mero', 'Mlym', 'Modi', 'Mong', 'Moon', 'Mroo', 'Mtei'
+, 'Mult', 'Mymr', 'Nand', 'Narb', 'Nbat', 'Newa', 'Nkgb', 'Nkoo', 'Nshu'
+, 'Ogam', 'Olck', 'Orkh', 'Orya', 'Osge', 'Osma', 'Palm', 'Pauc', 'Perm'
+, 'Phag', 'Phli', 'Phlp', 'Phlv', 'Phnx', 'Plrd', 'Prti', 'Qaag', 'Rjng'
+, 'Rohg', 'Roro', 'Runr', 'Samr', 'Sara', 'Sarb', 'Saur', 'Sgnw', 'Shaw'
+, 'Shrd', 'Sidd', 'Sind', 'Sinh', 'Sogd', 'Sogo', 'Sora', 'Soyo', 'Sund'
+, 'Sylo', 'Syrc', 'Syre', 'Syrj', 'Syrn', 'Tagb', 'Takr', 'Tale', 'Talu'
+, 'Taml', 'Tang', 'Tavt', 'Telu', 'Teng', 'Tfng', 'Tglg', 'Thaa', 'Thai'
+, 'Tibt', 'Tirh', 'Ugar', 'Vaii', 'Visp', 'Wara', 'Wcho', 'Wole', 'Xpeo'
+, 'Xsux', 'Yiii', 'Zanb', 'Zinh', 'Zmth', 'Zsye', 'Zsym', 'Zxxx', 'Zyyy'
+, 'Zzzz'
 ];
 
 export const enum ScriptId {
@@ -201,6 +203,7 @@ export const enum ScriptId {
   Egyh = 'Egyh',
   Egyp = 'Egyp',
   Elba = 'Elba',
+  Elym = 'Elym',
   Ethi = 'Ethi',
   Geok = 'Geok',
   Geor = 'Geor',
@@ -223,6 +226,7 @@ export const enum ScriptId {
   Hira = 'Hira',
   Hluw = 'Hluw',
   Hmng = 'Hmng',
+  Hmnp = 'Hmnp',
   Hrkt = 'Hrkt',
   Hung = 'Hung',
   Inds = 'Inds',
@@ -271,6 +275,7 @@ export const enum ScriptId {
   Mtei = 'Mtei',
   Mult = 'Mult',
   Mymr = 'Mymr',
+  Nand = 'Nand',
   Narb = 'Narb',
   Nbat = 'Nbat',
   Newa = 'Newa',
@@ -337,6 +342,7 @@ export const enum ScriptId {
   Vaii = 'Vaii',
   Visp = 'Visp',
   Wara = 'Wara',
+  Wcho = 'Wcho',
   Wole = 'Wole',
   Xpeo = 'Xpeo',
   Xsux = 'Xsux',

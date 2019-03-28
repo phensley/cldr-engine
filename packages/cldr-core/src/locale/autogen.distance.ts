@@ -3,7 +3,7 @@
 //
 
 export const paradigmLocales = [
-  'en', 'en-GB', 'es', 'es-419', 'pt-BR', 'pt-PT'
+  'en', 'en_GB', 'es', 'es_419', 'pt_BR', 'pt_PT'
 ];
 
 export type DistanceMap = { [x: string]: { [y: string]: DistanceNode | undefined } | undefined };

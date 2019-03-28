@@ -30,7 +30,7 @@ export const dayPeriodRules: { [x: string]: string } = {
   'es-CO': '4 6 1 5|01ou^L^fl-X',
   et: '2 5 3 6 0 1 5|32lj!a0)?a#1?j<03ig5a',
   eu: '2 3 4 0 1 5|11][X/0)?by2<.&$',
-  fa: '2 5 3 6 0 1 5|32lj!]0NI1$1]FR$2MK&8',
+  fa: '3 4 0 5|01u=eO=&%4E',
   fi: '2 5 3 4 6 0 1 5|12MK[b0[WU51<)H-2&(r)',
   fil: '2 3 4 6 0 1 5|32lj!*0)?a#1&7wM2MK&8',
   fr: '2 5 3 6 0 1|11][X[0NI1$1?j*r',
