@@ -3,2275 +3,2275 @@
     "pluralRanges": {
       "af": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ak": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "am": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ar": [
         {
-          "start": "zero", 
           "end": "one", 
-          "result": "zero"
+          "result": "zero", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "two", 
-          "result": "zero"
+          "result": "zero", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "zero"
         }, 
         {
-          "start": "one", 
           "end": "two", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "two", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "two"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "two", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "as": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "az": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "be": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "bg": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "bn": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "bs": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ca": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "cs": [
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "cy": [
         {
-          "start": "zero", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "zero"
         }, 
         {
-          "start": "one", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "two", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "two"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "da": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "de": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "el": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "en": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "es": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "et": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "eu": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "fa": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "fi": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "fil": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "fr": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ga": [
         {
-          "start": "one", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "two", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "two"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "gl": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "gsw": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "gu": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "he": [
         {
-          "start": "one", 
           "end": "two", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "two", 
           "end": "many", 
-          "result": "other"
+          "result": "other", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "two"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "two", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "hi": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "hr": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "hu": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "hy": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "id": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "io": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "is": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "it": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ja": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ka": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "kk": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "km": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "kn": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ko": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ky": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "lo": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "lt": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "lv": [
         {
-          "start": "zero", 
           "end": "zero", 
-          "result": "other"
+          "result": "other", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "zero"
         }, 
         {
-          "start": "zero", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "zero"
         }, 
         {
-          "start": "one", 
           "end": "zero", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "zero", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "mk": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ml": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "mn": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "mr": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ms": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "my": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "nb": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ne": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "nl": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "or": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "pa": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "pl": [
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ps": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "pt": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ro": [
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ru": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "sd": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "si": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "sk": [
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "sl": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "two", 
           "end": "one", 
-          "result": "few"
+          "result": "few", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "two"
         }, 
         {
-          "start": "two", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "two"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "two", 
-          "result": "two"
+          "result": "two", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "sq": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "sr": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "sv": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "sw": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ta": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "te": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "th": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "tk": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "tr": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ug": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "uk": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "few", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "few"
         }, 
         {
-          "start": "few", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "few"
         }, 
         {
-          "start": "many", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "many"
         }, 
         {
-          "start": "many", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "many"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "few", 
-          "result": "few"
+          "result": "few", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "many", 
-          "result": "many"
+          "result": "many", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "ur": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "uz": [
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "other"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "vi": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "yue": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "zh": [
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ], 
       "zu": [
         {
-          "start": "one", 
           "end": "one", 
-          "result": "one"
+          "result": "one", 
+          "start": "one"
         }, 
         {
-          "start": "one", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "one"
         }, 
         {
-          "start": "other", 
           "end": "other", 
-          "result": "other"
+          "result": "other", 
+          "start": "other"
         }
       ]
     }
