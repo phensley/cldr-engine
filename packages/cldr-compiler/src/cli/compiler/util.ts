@@ -27,8 +27,8 @@ export interface ProjectInfo {
 export const getPackageInfo = (): ProjectInfo => {
   const path = join(__dirname, '..', '..', '..', 'package.json');
   const raw = fs.readFileSync(path, { encoding: 'utf-8' });
-  const { version, dependencies } = JSON.parse(raw);
-  const cldrVersion = dependencies['cldr-data'].replace(/[^\d.]+/, '');
+  const { version, cldrversion } = JSON.parse(raw);
+  const cldrVersion = cldrversion.replace(/[^\d.]+/, '');
   return { version, cldrVersion };
 };
 

@@ -5,8 +5,7 @@
  */
 
 import * as fs from 'fs';
-import { join } from 'path';
-import * as cldr from 'cldr-data';
+import { join, resolve } from 'path';
 import * as L from 'partial.lenses';
 
 import {
@@ -18,6 +17,8 @@ import {
   transformTimezones,
   transformUnits
 } from './data';
+
+const DATAROOT = resolve(join(__dirname, '../.cldr'));
 
 const get = (optic: any) => (o: any) => L.get(optic, o);
 
@@ -475,7 +476,7 @@ const convert = (group: any, root: any) => {
  */
 export const load = (path: string, optional = false) => {
   try {
-    return cldr(path);
+    return cldrjson(path);
   } catch (e) {
     if (!optional) {
       throw e;
@@ -560,11 +561,11 @@ export const getSupplemental = () => {
 };
 
 /**
- * Supplemental files that live at the top level.
+ * Files that did not originate under supplemental.
  */
 export const getOther = () => {
   const access = (group: {}, fileName: string) => {
-    const root = load(fileName);
+    const root = load(`supplemental/${fileName}`);
     return convert(group, root);
   };
 
@@ -594,4 +595,19 @@ export const getExtensions = () => {
 /**
  * Available locales.
  */
-export const availableLocales = () => cldr.availableLocales.filter(v => v !== 'root');
+export const availableLocales = () =>
+  _availableLocales('modern').filter(v => v !== 'root');
+
+const _availableLocales = (group: string): string[] =>
+   cldrjson('supplemental', 'availableLocales')['availableLocales'][group];
+
+export const cldrjson = (...relpath: string[]): any => {
+  const { cldrversion } = readjson(join(__dirname, '..', 'package.json'));
+  const path = join(DATAROOT, cldrversion, ...relpath) + '.json';
+  return readjson(path);
+};
+
+const readjson = (path: string): any => {
+  const data = fs.readFileSync(path, { encoding: 'utf-8' });
+  return JSON.parse(data);
+};

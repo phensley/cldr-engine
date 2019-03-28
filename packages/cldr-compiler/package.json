@@ -18,14 +18,16 @@
   "bin": {
     "cldr-compiler": "./bin/compiler.js"
   },
+  "cldrversion": "34.0.0",
   "scripts": {
-    "build": "yarn build:cj && yarn build:es",
+    "build": "yarn download && yarn build:cj && yarn build:es",
     "build:cj": "tsc -p ./tsconfig.build.json",
     "build:es": "tsc -p ./tsconfig.build.json --module esnext --outDir lib-es",
     "build:watch": "tsc -p ./tsconfig.build.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./lib-es",
     "clean:full": "yarn clean && rimraf ./node_modules",
     "coverage": "jest --coverage --runInBand --no-cache",
+    "download": "node ./scripts/downloader.js",
     "lint": "tslint -p ./tsconfig.json",
     "prepublish": "yarn build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
@@ -42,7 +44,6 @@
     "@phensley/timezone": "^0.10.2",
     "@types/prettier": "^1.10.0",
     "@types/yargs": "^11.0.0",
-    "cldr-data": "34.0.0",
     "partial.lenses": "^13.7.4",
     "prettier": "^1.11.1",
     "yargs": "^11.0.0"
@@ -50,11 +51,15 @@
   "devDependencies": {
     "@types/jest": "^23.3.14",
     "@types/node": "^10.12.21",
+    "@types/request": "^2.48.1",
+    "@types/tar": "^4.0.0",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
-    "chalk": "^2.3.1",
+    "chalk": "^2.4.2",
     "jest": "^23.6.0",
+    "request": "^2.88.0",
     "rimraf": "^2.6.2",
+    "tar": "^4.4.8",
     "ts-jest": "^23.10.5",
     "tslint": "5.14.0",
     "tslint-no-circular-imports": "^0.6.1",
