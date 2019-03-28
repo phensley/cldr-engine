@@ -1,10 +1,9 @@
 /// <reference path="../../../typings.d.ts" />
 
 import * as fs from 'fs';
-import { join } from 'path';
 import * as yargs from 'yargs';
 
-import * as cldr from 'cldr-data';
+import { availableLocales, load } from '../../../cldr';
 
 const MAIN = [
   'ca-buddhist',
@@ -41,16 +40,8 @@ const extractValues = (o: any): string[] => {
   return r;
 };
 
-const load = (path: string): any => {
-  try {
-    return cldr(path);
-  } catch (e) {
-    return {};
-  }
-};
-
 const run = (args: yargs.Arguments): void => {
-  let locales = cldr.availableLocales;
+  let locales = availableLocales();
   if (args.lang) {
     locales = (args.lang as string).split(',').map(a => a.trim());
   }
@@ -62,7 +53,7 @@ const run = (args: yargs.Arguments): void => {
     const totalJson = [0];
     MAIN.forEach(filename => {
       const path = `main/${lang}/${filename}`;
-      const main = load(path);
+      const main = load(path, true);
       const compressed = JSON.stringify(main, undefined, 0);
       const values = extractValues(main);
       const sum = values.reduce((p, c) => p + c.length + 1, 0);

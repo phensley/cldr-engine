@@ -1,11 +1,3 @@
-declare module 'cldr-data' {
-  function cldrData(path: string): any;
-  namespace cldrData {
-    export const availableLocales: string[];
-  }
-  export = cldrData;
-}
-
 declare module 'partial.lenses' {
   export const compose: (...optic: any[]) => any;
   export const get: (lens: any, maybeData: any) => any;

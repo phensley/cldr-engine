@@ -21,7 +21,6 @@
     "test:watch": "jest --watch --runInBand --no-cache",
     "unlink-all": "lerna exec --concurrency=1 yarn unlink"
   },
-  "cldr-data-urls-json": "../../config/cldr-data-urls.json",
   "devDependencies": {
     "@types/jest": "^23.3.14",
     "@types/node": "^10.12.21",
@@ -58,11 +57,7 @@
     ],
     "moduleNameMapper": {
       "@phensley/(.+?)/(.*)": "<rootDir>/packages/$1/src/$2",
-      "@phensley/(.+)": "<rootDir>/packages/$1/src",
-      "./main/(.+)": "<rootDir>/node_modules/cldr-data/main/$1.json",
-      "./supplemental/(.+)": "<rootDir>/node_modules/cldr-data/supplemental/$1.json",
-      "./availableLocales": "<rootDir>/node_modules/cldr-data/availableLocales.json",
-      "./defaultContent": "<rootDir>/node_modules/cldr-data/defaultContent.json"
+      "@phensley/(.+)": "<rootDir>/packages/$1/src"
     },
     "testMatch": [
       "**/__tests__/**/*.test.ts"
