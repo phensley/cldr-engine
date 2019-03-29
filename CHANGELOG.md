@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [UNRELEASED]
 ### Added
  - Fast, simple CLDR data downloader.
- - Decimal number format options new style `'scientific'`
+ - Decimal number format options new style `'scientific'`.
 
 ### Fixed/Changed
  - Removed dependency on NPM cldr-data package.

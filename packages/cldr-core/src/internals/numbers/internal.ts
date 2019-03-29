@@ -161,6 +161,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
     case 'scientific': {
       const sciFormat = info.scientificFormat;
+
       const ctx = new NumberContext(options, false, true, -1);
       const latnSciFormat = this.numbers.numberSystem.get('latn').scientificFormat;
       const format = sciFormat.get(bundle) || latnSciFormat.get(bundle);
@@ -169,7 +170,7 @@ export class NumberInternalsImpl implements NumberInternals {
       n = ctx.adjust(n, true);
 
       // Split number into coeffcient and exponent
-      const [coeff, exponent] = n.scientific();
+      const [coeff, exponent] = n.scientific(ctx.minInt || 1);
       result = renderer.render(coeff, pattern, '', '', '', 1, false, exponent);
       break;
     }

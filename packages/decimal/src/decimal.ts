@@ -391,8 +391,9 @@ export class Decimal {
    * Return a scientific representation of the number,
    * Decimal coefficient and adjusted exponent.
    */
-  scientific(): [Decimal, number] {
-    const exp = -(this.precision() - 1);
+  scientific(minIntDigits: number = 1): [Decimal, number] {
+    minIntDigits = minIntDigits <= 1 ? 1 : minIntDigits;
+    const exp = -(this.precision() - 1) + (minIntDigits - 1);
     const coeff = new Decimal({
       data: this.data,
       sign: this.sign,

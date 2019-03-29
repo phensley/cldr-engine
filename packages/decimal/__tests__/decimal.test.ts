@@ -378,6 +378,11 @@ test('scientific', () => {
   expect(parse('210').scientific()).toEqual([parse('2.10'), 2]);
   expect(parse('100000').scientific()).toEqual([parse('1.00000'), 5]);
   expect(parse('199999').scientific()).toEqual([parse('1.99999'), 5]);
+
+  // alter minimum number of integer digits
+  expect(parse('0').scientific(1)).toEqual([parse('0'), 0]);
+  expect(parse('0').scientific(2)).toEqual([parse('0e1'), -1]);
+  expect(parse('0').scientific(3)).toEqual([parse('0e2'), -2]);
 });
 
 test('shift left', () => {
