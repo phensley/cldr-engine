@@ -155,6 +155,10 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
             res.add('sign', symbols.minusSign);
             break;
 
+          case NumberField.PLUS:
+            res.add('sign', symbols.plusSign);
+            break;
+
           case NumberField.NUMBER:
             res.append(formatted);
             haveNumber = true;
