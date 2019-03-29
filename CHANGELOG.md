@@ -9,10 +9,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [UNRELEASED]
 ### Added
  - Fast, simple CLDR data downloader.
+ - Decimal number format options new style `'scientific'`
 
 ### Fixed/Changed
  - Removed dependency on NPM cldr-data package.
  - Upgraded [cldr 35](http://cldr.unicode.org/index/downloads/cldr-35).
+ - Parts formatting changed the minus sign type from `'minus'` to `'sign'`
 
 ## [0.10.2]
 ### Added

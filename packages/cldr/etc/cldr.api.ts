@@ -187,7 +187,7 @@ interface DateFormatOptions {
 
 // @alpha
 class Decimal {
-  constructor(num: DecimalArg);
+  constructor(num: DecimalArg | DecimalParts);
   protected _increment(): void;
   protected _parse(str: string): string | undefined;
   // (undocumented)
@@ -227,6 +227,7 @@ class Decimal {
   precision(): number;
   protected round(rnd: number, rest: number, mode: RoundingModeType): number;
   scale(): number;
+  scientific(): [Decimal, number];
   setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
   shiftleft(shift: number): Decimal;
   shiftright(shift: number, mode?: RoundingModeType): Decimal;
