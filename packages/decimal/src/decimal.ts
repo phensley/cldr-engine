@@ -58,6 +58,12 @@ const size = (n: number): number => {
   return r === 0 ? q : q + 1;
 };
 
+export interface DecimalParts {
+  data: number[];
+  sign: number;
+  exp: number;
+}
+
 /**
  * Arbitrary precision decimal type.
  *
@@ -69,11 +75,15 @@ export class Decimal {
   protected sign!: number;
   protected exp!: number;
 
-  constructor(num: DecimalArg) {
+  constructor(num: DecimalArg | DecimalParts) {
     if (typeof num === 'string' || typeof num === 'number') {
       this.parse(num);
-    } else {
+    } else if (num instanceof Decimal) {
       this.data = num.data.slice();
+      this.sign = num.sign;
+      this.exp = num.exp;
+    } else {
+      this.data = num.data;
       this.sign = num.sign;
       this.exp = num.exp;
     }
@@ -375,6 +385,24 @@ export class Decimal {
     const r = new Decimal(this);
     r._stripTrailingZeros();
     return r;
+  }
+
+  /**
+   * Return a scientific representation of the number,
+   * Decimal coefficient and adjusted exponent.
+   */
+  scientific(): [Decimal, number] {
+    const exp = -(this.precision() - 1);
+    const coeff = new Decimal({
+      data: this.data,
+      sign: this.sign,
+      // removed signed-ness from zero
+      exp: exp === 0 ? 0 : exp
+    });
+    return [
+      coeff,
+      this.exp - coeff.exp
+    ];
   }
 
   /**

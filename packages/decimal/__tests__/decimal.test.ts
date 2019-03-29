@@ -93,6 +93,8 @@ test('integer digits', () => {
   expect(parse('1e4').integerDigits()).toEqual(5);
   expect(parse('1e5').integerDigits()).toEqual(6);
   expect(parse('12345.999999').integerDigits()).toEqual(5);
+  expect(parse('20000').integerDigits()).toEqual(5);
+  expect(parse('2e5').integerDigits()).toEqual(6);
 });
 
 test('operands', () => {
@@ -363,6 +365,19 @@ test('decrement', () => {
   expect(parse('-1').decrement()).toEqual(parse('-2'));
   expect(parse('1').decrement()).toEqual(parse('0'));
   expect(parse('1.9').decrement()).toEqual(parse('0.9'));
+});
+
+test('scientific', () => {
+  expect(parse('0').scientific()).toEqual([parse('0'), 0]);
+  expect(parse('1').scientific()).toEqual([parse('1'), 0]);
+  expect(parse('-1.2').scientific()).toEqual([parse('-1.2'), 0]);
+
+  expect(parse('0.0012').scientific()).toEqual([parse('1.2'), -3]);
+  expect(parse('0.0001234').scientific()).toEqual([parse('1.234'), -4]);
+
+  expect(parse('210').scientific()).toEqual([parse('2.10'), 2]);
+  expect(parse('100000').scientific()).toEqual([parse('1.00000'), 5]);
+  expect(parse('199999').scientific()).toEqual([parse('1.99999'), 5]);
 });
 
 test('shift left', () => {
