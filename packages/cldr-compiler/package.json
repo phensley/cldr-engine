@@ -21,14 +21,14 @@
   "cldrversion": "35.0.0",
   "scripts": {
     "build": "yarn build:cj && yarn build:es && yarn download",
-    "build:cj": "tsc -p ./tsconfig.build.json",
-    "build:es": "tsc -p ./tsconfig.build.json --module esnext --outDir lib-es",
-    "build:watch": "tsc -p ./tsconfig.build.json -w --preserveWatchOutput",
+    "build:cj": "tsc -p ./tsconfig.json",
+    "build:es": "tsc -p ./tsconfig.json --module esnext --outDir lib-es",
+    "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./lib-es",
     "clean:full": "yarn clean && rimraf ./node_modules",
     "coverage": "jest --coverage --runInBand --no-cache",
     "download": "node ./scripts/downloader.js",
-    "lint": "tslint -p ./tsconfig.json",
+    "lint": "tslint -p ./tsconfig.lint.json",
     "prepublish": "yarn build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
