@@ -145,7 +145,7 @@ const encode = (ms: MapSet): string => Object.keys(ms).map(k =>
     .join('|');
 
 export const getPartition = (data: any): Code[] => {
-  const { variables, macroRegions, regions, table } = buildPartitions(data);
+  const { /* variables, */ macroRegions, regions, table } = buildPartitions(data);
 
   let code = HEADER;
   let str = '';

@@ -1,8 +1,4 @@
-import { applyMappings, Mapping, Mappings } from './utils';
-
-const displayName = [
-  Mappings.field('displayName').keys().remap(0, 1, 2)
-];
+import { applyMappings, Mappings } from './utils';
 
 const regionMappings = [
   Mappings.field('displayName').altKeys().remap(0, 2, 1, 3),

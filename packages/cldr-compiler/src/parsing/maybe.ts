@@ -27,11 +27,11 @@ export class Nothing<T> implements IMaybe<T> {
     throw new Error('Cannot invoke get() on Nothing');
   }
 
-  map<R>(f: (v: T) => R): IMaybe<R> {
+  map<R>(_f: (v: T) => R): IMaybe<R> {
     return (this as any) as Nothing<R>;
   }
 
-  flatMap<R>(f: (v: T) => IMaybe<R>): IMaybe<R> {
+  flatMap<R>(_f: (v: T) => IMaybe<R>): IMaybe<R> {
     return (this as any) as Nothing<R>;
   }
 
@@ -68,7 +68,7 @@ export class Just<T> implements IMaybe<T> {
     return f(this.get());
   }
 
-  orElse<R>(f: () => IMaybe<R>): IMaybe<T | R> {
+  orElse<R>(_f: () => IMaybe<R>): IMaybe<T | R> {
     return this;
   }
 }

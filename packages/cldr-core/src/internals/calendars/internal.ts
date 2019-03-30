@@ -1,11 +1,10 @@
 import { Cache } from '@phensley/cldr-utils';
 
 import { CalendarDate, CalendarType } from '../../systems/calendars';
-import { CalendarSchema, DayPeriodType, Schema, TimeZoneType } from '@phensley/cldr-schema';
+import { CalendarSchema, DayPeriodType, Schema } from '@phensley/cldr-schema';
 import { calendarIds, calendarPrefData } from './autogen.calprefs';
 import { weekFirstDay, weekMinDays } from './autogen.weekdata';
 import { Bundle } from '../../resource';
-import { NumberParams } from '../../common/private';
 import { CalendarInternals } from '../internals';
 import { Renderer } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';

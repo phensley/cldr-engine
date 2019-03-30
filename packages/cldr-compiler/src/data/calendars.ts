@@ -1,4 +1,4 @@
-import { applyMappings, Mapping, Mappings } from './utils';
+import { applyMappings, Mappings } from './utils';
 
 const formats: (string | [string, string])[] = ['format', ['stand-alone', 'standAlone']];
 

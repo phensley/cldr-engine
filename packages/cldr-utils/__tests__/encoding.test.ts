@@ -24,8 +24,6 @@ test('variable uint encode', () => {
 });
 
 test('variable uint decode', () => {
-  const dec = vuintDecode;
-
   // encode some random positive integers in a range
   const nums: number[] = [0];
   for (let i = 0; i < 100000; i++) {

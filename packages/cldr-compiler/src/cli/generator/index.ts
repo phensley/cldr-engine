@@ -1,5 +1,4 @@
 import * as yargs from 'yargs';
-import { Entry } from './types';
 import { preprocessOptions } from './preprocess';
 import { codeOptions } from './code';
 import { schemaOptions } from './schema';

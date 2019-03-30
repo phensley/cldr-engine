@@ -34,8 +34,6 @@ export const getSubtags = (): any => {
     return o;
   }, {});
 
-  const { LikelySubtags } = supplemental;
-
   return {
     grandfatheredTags,
     likelySubtags: supplemental.LikelySubtags

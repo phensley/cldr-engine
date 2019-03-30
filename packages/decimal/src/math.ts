@@ -323,7 +323,7 @@ export const divpow10 = (d: number[], n: number, exp: number): number[] => {
 /**
  * Divide and modulus by w. Store result in d = [quotient, remainder].
  */
-export const divword = (d: number[], n: number, div: number): number[] => {
+export const divword = (_d: number[], n: number, div: number): number[] => {
   const q = (n / div) | 0;
   const r = n - q * div;
   return [q, r];

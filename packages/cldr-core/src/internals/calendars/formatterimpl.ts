@@ -128,7 +128,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
         case 'W':
           type = 'week';
-          value = this.weekOfMonth(ctx, n);
+          value = this.weekOfMonth(ctx);
           break;
 
         case 'd':
@@ -143,7 +143,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
         case 'F':
           type = 'day';
-          value = this.dayOfWeekInMonth(ctx, n);
+          value = this.dayOfWeekInMonth(ctx);
           break;
 
         case 'g':
@@ -290,7 +290,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
   /**
    * Cyclic year.
    */
-  cyclicYear(ctx: CalendarContext<T>, width: number): string {
+  cyclicYear(_ctx: CalendarContext<T>, _width: number): string {
     // TODO: Supported in Chinese calendar.
     return '';
   }
@@ -331,7 +331,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return this._num(ctx, ctx.date.weekOfYear(), min(node[1], 2));
   }
 
-  weekOfMonth(ctx: CalendarContext<T>, node: [string, number]): string {
+  weekOfMonth(ctx: CalendarContext<T>): string {
     return this._num(ctx, ctx.date.weekOfMonth(), 1);
   }
 
@@ -343,7 +343,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return this._num(ctx, ctx.date.dayOfYear(), min(node[1], 3));
   }
 
-  dayOfWeekInMonth(ctx: CalendarContext<T>, node: [string, number]): string {
+  dayOfWeekInMonth(ctx: CalendarContext<T>): string {
     return this._num(ctx, ctx.date.dayOfWeekInMonth(), 1);
   }
 
@@ -492,7 +492,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       return this.timezone_O(ctx, ['O', width]);
     }
 
-    const [_, negative, hours, minutes] = getTZC(ctx.date.timeZoneOffset());
+    const [ , negative, hours, minutes] = getTZC(ctx.date.timeZoneOffset());
     let fmt = '';
     if (width <= 5) {
       // TODO: use number params
@@ -594,7 +594,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     if (_offset === 0) {
       return this.tz.gmtZeroFormat.get(bundle);
     }
-    const [_, negative, hours, minutes] = getTZC(_offset);
+    const [ , negative, hours, minutes] = getTZC(_offset);
 
     const emitMins = !short || minutes > 0;
     const hourPattern =  this._hourPattern(bundle, negative);

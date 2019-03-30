@@ -46,7 +46,7 @@ export class PersianDate extends CalendarDate {
     return this;
   }
 
-  protected monthStart(eyear: number, month: number, useMonth: boolean): number {
+  protected monthStart(eyear: number, month: number, _useMonth: boolean): number {
     let jd = CalendarConstants.JD_PERSIAN_EPOCH - 1 + 365 * (eyear - 1) + floor((8 * eyear + 21) / 33);
 
     if (month !== 0) {

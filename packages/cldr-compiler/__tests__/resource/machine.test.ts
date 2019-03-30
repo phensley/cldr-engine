@@ -11,7 +11,7 @@ import {
   Scope
 } from '@phensley/cldr-schema';
 
-import { LanguageResolver, Locale } from '@phensley/cldr-core';
+import { LanguageResolver } from '@phensley/cldr-core';
 import { Encoder, EncoderMachine } from '../../src/resource/machine';
 import { ResourcePack } from '../../src/resource/pack';
 
@@ -229,7 +229,7 @@ test('encoding', () => {
   const p = JSON.parse(raw);
 
   expect(Object.keys(p.scripts)).toEqual(['Latn']);
-  const { strings, exceptions, regions } = p.scripts.Latn;
+  const { strings, exceptions } = p.scripts.Latn;
 
   expect(strings).toEqual(
     // vector1 symbols

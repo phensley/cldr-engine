@@ -256,7 +256,7 @@ export class CalendarManager {
    * Select appropriate wrapper based on fields in the date skeleton.
    */
   protected selectWrapper(
-    patterns: CalendarPatterns, dateSkel: DateSkeleton, date: DateTimeNode[]): string {
+    patterns: CalendarPatterns, dateSkel: DateSkeleton, _date: DateTimeNode[]): string {
 
     let wrapKey = 'short';
     const monthWidth = dateSkel.monthWidth();

@@ -27,7 +27,6 @@ const _widthTemplate = { 'wide': [], 'narrow': [], 'abbreviated': [], 'short': [
 const _alias = ['metadata', 'alias'];
 const _formats = L.pickIn({ 'format': _widthTemplate, 'stand-alone': _widthTemplate });
 
-const _chinese = ['dates', 'calendars', 'chinese'];
 const _languageMatching = ['languageMatching', 'written_new'];
 const _sizeProps = L.props('short', 'medium', 'long', 'full');
 const _timeZoneNames = ['dates', 'timeZoneNames'];
@@ -270,18 +269,18 @@ const Buddhist = {
   ...coreCalendarSchema('buddhist'),
 };
 
-const chinese = (...keys: string[]) => ['dates', 'calendars', 'chinese', ...keys];
+// const chinese = (...keys: string[]) => ['dates', 'calendars', 'chinese', ...keys];
 
 /**
  * Chinese calendar data.
  */
-const Chinese = {
-  ...coreCalendarSchema('chinese'),
-  cyclicDayParts: get(chinese('cyclicNameSets', 'dayParts', _formats)),
-  cyclicDays: get(chinese('cyclicNameSets', 'days', _formats)),
-  solarTerms: get(chinese('solarTerms', _formats)),
-  zodiacs: get(chinese('cyclicNameSets', 'zodiacs', _formats))
-};
+// const Chinese = {
+//   ...coreCalendarSchema('chinese'),
+//   cyclicDayParts: get(chinese('cyclicNameSets', 'dayParts', _formats)),
+//   cyclicDays: get(chinese('cyclicNameSets', 'days', _formats)),
+//   solarTerms: get(chinese('solarTerms', _formats)),
+//   zodiacs: get(chinese('cyclicNameSets', 'zodiacs', _formats))
+// };
 
 /**
  * Gregorian calendar data.
@@ -293,9 +292,9 @@ const Gregorian = {
 /**
  * Hebrew calendar data.
  */
-const Hebrew = {
-  ...coreCalendarSchema('hebrew'),
-};
+// const Hebrew = {
+//   ...coreCalendarSchema('hebrew'),
+// };
 
 /**
  * Japanese calendar data.

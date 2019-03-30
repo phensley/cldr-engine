@@ -17,7 +17,7 @@ const escape = (digits: string[]): string => {
   return r;
 };
 
-export const getSystems = (data: any): Code[] => {
+export const getSystems = (_data: any): Code[] => {
   const supp = getSupplemental();
 
   let code = HEADER + NOLINT_MAXLINE;

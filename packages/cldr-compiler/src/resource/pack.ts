@@ -6,7 +6,7 @@ import { getOther } from '../cldr';
 const defaultContent = new Set();
 
 getOther().DefaultContent.forEach((s: string) => {
-  const { id, tag } = Locale.resolve(s);
+  const { tag } = Locale.resolve(s);
   defaultContent.add(tag.expanded());
 });
 
@@ -59,7 +59,7 @@ export class ResourcePack {
    * Push a new language layer.
    */
   push(locale: Locale): void {
-    const { id, tag } = locale;
+    const { tag } = locale;
     const script = tag.script();
     let layers = this.layers[script];
     if (layers === undefined) {

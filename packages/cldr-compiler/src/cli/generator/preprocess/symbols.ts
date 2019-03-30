@@ -1,4 +1,4 @@
-import { availableLocales, getMain, getSupplemental } from '../../../cldr';
+import { availableLocales, getMain } from '../../../cldr';
 
 /**
  * Copy an object's keys into a set.

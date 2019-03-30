@@ -2,7 +2,6 @@ import {
   Digits,
   Field,
   Instruction,
-  KeyIndex,
   Origin,
   Scope,
   ScopeMap,
@@ -11,12 +10,6 @@ import {
 } from '@phensley/cldr-schema';
 
 import { leftPad } from '@phensley/cldr-core';
-
-import {
-  pluralDigit,
-  pluralDigitFields,
-  pluralFields
-} from '../utils';
 
 export interface Encoder {
   encode(name: string): number;

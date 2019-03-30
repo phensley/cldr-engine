@@ -17,7 +17,6 @@ import {
   DateIntervalFormatOptions,
   DateRawFormatOptions,
   EraFieldOptions,
-  ExemplarCity,
   RelativeTimeFormatOptions,
   TimeZoneInfo,
   ZonedDateTime,
@@ -342,7 +341,7 @@ export class CalendarsImpl implements Calendars {
 
     let _date: R | undefined;
     if (req.date) {
-      const { ca, nu } = options;
+      // const { ca, nu } = options;
       const ctx = {
         date: start,
         bundle: this.bundle,

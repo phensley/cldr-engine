@@ -1,4 +1,4 @@
-import { lineWrap, sortSet, Code, HEADER, NOLINT_MAXLINE } from './util';
+import { lineWrap, sortSet, Code, HEADER } from './util';
 
 const process = (symbols: any): string[] => {
   const temp = symbols.map((s: string) => s.split('-')[0]);

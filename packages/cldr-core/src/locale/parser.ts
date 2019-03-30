@@ -2,7 +2,6 @@ import { LanguageTag } from './languagetag';
 import { replaceRegion } from './util';
 import { stringToObject } from '../utils/string';
 import * as subtags from './autogen.subtags';
-import { parse } from 'querystring';
 
 // Subtag separator
 const SEP = '-';

@@ -33,7 +33,7 @@ const pruneRegion = (m: { [x: string]: string }): void =>
     }
   });
 
-export const getSubtags = (data: any): Code[] => {
+export const getSubtags = (_data: any): Code[] => {
   const supplemental = getSupplemental();
   const ianaSubtags = getIanaSubtags();
 

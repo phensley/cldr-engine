@@ -7,8 +7,7 @@ import {
   CurrencyFormatOptions,
   CurrencyFractions,
   CurrencySymbolWidthType,
-  DecimalFormatOptions,
-  NumberFormatOptions,
+  DecimalFormatOptions
 } from '../../common';
 
 import { Bundle } from '../../resource';
@@ -109,7 +108,7 @@ export class NumbersImpl implements Numbers {
     if (v !== undefined) {
       return v;
     }
-    const [result, plural] = this.numbers.formatDecimal(this.bundle, renderer, coerceDecimal(n), options, params);
+    const [result] = this.numbers.formatDecimal(this.bundle, renderer, coerceDecimal(n), options, params);
     return result;
   }
 

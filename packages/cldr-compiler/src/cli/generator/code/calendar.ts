@@ -1,5 +1,5 @@
 import { getSupplemental} from '../../../cldr';
-import { objectToString, Code, HEADER, NOLINT } from './util';
+import { Code, HEADER, NOLINT } from './util';
 
 const DIGIT = /\d/g;
 
@@ -16,7 +16,7 @@ const encode = (map: { [x: string]: number[] }): string => {
   return raw;
 };
 
-export const getCalendarPrefs = (data: any): Code[] => {
+export const getCalendarPrefs = (_data: any): Code[] => {
   const supplemental = getSupplemental();
   const prefsData = supplemental.CalendarPreferences;
 
@@ -33,7 +33,7 @@ export const getCalendarPrefs = (data: any): Code[] => {
   };
 
   const calendarPrefs: { [x: string]: number[] } = {};
-  const ids = Object.keys(prefsData).forEach(id => {
+  Object.keys(prefsData).forEach(id => {
     const prefs = prefsData[id].split(' ').map(getId);
     calendarPrefs[id] = prefs;
   });

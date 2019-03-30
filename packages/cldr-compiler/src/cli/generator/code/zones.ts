@@ -20,35 +20,36 @@ class IdArray {
   }
 }
 
-class FrequencySet<T> {
+// TODO: move this or remove it
+// class FrequencySet<T> {
 
-  private elems: T[] = [];
-  private freq: Map<T, number> = new Map();
+//   private elems: T[] = [];
+//   private freq: Map<T, number> = new Map();
 
-  /**
-   * Add an element to the set or update its frequency.
-   */
-  add(elem: T): void {
-    const freq = this.freq.get(elem) || 0;
-    if (freq === 0) {
-      this.elems.push(elem);
-    }
-    this.freq.set(elem, freq + 1);
-  }
+//   /**
+//    * Add an element to the set or update its frequency.
+//    */
+//   add(elem: T): void {
+//     const freq = this.freq.get(elem) || 0;
+//     if (freq === 0) {
+//       this.elems.push(elem);
+//     }
+//     this.freq.set(elem, freq + 1);
+//   }
 
-  /**
-   * Return the elements, sorted by frequency MOST to LEAST.
-   */
-  sort(): T[] {
-    const res = this.elems.slice();
-    res.sort((a: T, b: T) => {
-      const fa = this.freq.get(a) || -1;
-      const fb = this.freq.get(b) || -1;
-      return fb < fa ? -1 : fa === fb ? 0 : 1;
-    });
-    return res;
-  }
-}
+//   /**
+//    * Return the elements, sorted by frequency MOST to LEAST.
+//    */
+//   sort(): T[] {
+//     const res = this.elems.slice();
+//     res.sort((a: T, b: T) => {
+//       const fa = this.freq.get(a) || -1;
+//       const fb = this.freq.get(b) || -1;
+//       return fb < fa ? -1 : fa === fb ? 0 : 1;
+//     });
+//     return res;
+//   }
+// }
 
 interface Metazones {
   zoneindex: string;
@@ -56,11 +57,6 @@ interface Metazones {
   index: string;
   offsets: string;
   untils: string;
-}
-
-interface ZoneMapping {
-  zi: number; // index of time zone id
-  mi: number; // index of metazone record
 }
 
 // These zones have no metazone mapping intentionally.
@@ -136,7 +132,7 @@ const buildMetaZones2 = (data: any): Metazones => {
     const start = offsets.length;
     const ranges = data[id].reverse();
     ranges.forEach((range: [string, number, number]) => {
-      const [ mzid, from, _] = range;
+      const [ mzid, from ] = range;
       const offset = metazoneIndex.add(mzid);
       offsets.push(offset);
       untils.push(from);
@@ -149,7 +145,6 @@ const buildMetaZones2 = (data: any): Metazones => {
 
   return {
     zoneindex: z85Encode(vuintEncode(zoneindex)),
-    // zoneids: zoneids.join('\\t'),
     metazoneids: metazoneIndex.array.join('\\t'),
     index: z85Encode(vuintEncode(index)),
     offsets: z85Encode(vuintEncode(offsets)),

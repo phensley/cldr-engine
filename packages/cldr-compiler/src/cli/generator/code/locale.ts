@@ -1,7 +1,7 @@
 import { Code, HEADER, NOLINT_MAXLINE } from './util';
 import { availableLocales } from '../../../cldr';
 
-export const getLocale = (data: any): Code[] => {
+export const getLocale = (_data: any): Code[] => {
   const locales = availableLocales().sort().join('|');
 
   let code = HEADER + NOLINT_MAXLINE;

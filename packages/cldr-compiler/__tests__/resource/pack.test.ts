@@ -1,6 +1,6 @@
 import { ResourcePack } from '../../src/resource/pack';
 import { LanguageResolver } from '@phensley/cldr-core';
-import { vuintDecode, vuintEncode, z85Decode, z85Encode } from '@phensley/cldr-utils';
+import { vuintEncode, z85Encode } from '@phensley/cldr-utils';
 
 const parseLocale = (id: string) => ({ id, tag: LanguageResolver.resolve(id) });
 

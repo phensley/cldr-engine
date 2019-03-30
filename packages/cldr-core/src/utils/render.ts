@@ -19,7 +19,7 @@ export class StringRenderer implements Renderer<string> {
     this.str += value;
   }
 
-  add(type: string, value: string): void {
+  add(_type: string, value: string): void {
     this.str += value;
   }
 

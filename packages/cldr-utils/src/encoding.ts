@@ -1,7 +1,6 @@
 const { floor, pow } = Math;
 const Z85CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#';
 const Z85ENCDIVS = [4, 3, 2, 1, 0].map(n => pow(85, n));
-const PAD = [0, 0, 0];
 
 /**
  * Z85 converts an array of bytes to a string, encoding 4 bytes as

@@ -1,5 +1,3 @@
-import { NumbersSchema } from '@phensley/cldr-schema';
-
 import { Bundle } from '../../resource';
 import { Internals } from '../../internals';
 import { NumberSystemType } from '../../common';

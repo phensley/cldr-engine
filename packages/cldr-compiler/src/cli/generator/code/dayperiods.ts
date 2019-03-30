@@ -24,13 +24,13 @@ interface Range {
 
 type Until = Exact | Range;
 
-const zeropad2 = (n: number): string => n < 10 ? `0${n}` : `${n}`;
+// const zeropad2 = (n: number): string => n < 10 ? `0${n}` : `${n}`;
 
-const display = (v: number): string => {
-  const hour = Math.floor(v / 60);
-  const minute = v - (hour * 60);
-  return `${zeropad2(hour)}:${zeropad2(minute)}`;
-};
+// const display = (v: number): string => {
+//   const hour = Math.floor(v / 60);
+//   const minute = v - (hour * 60);
+//   return `${zeropad2(hour)}:${zeropad2(minute)}`;
+// };
 
 const parseTime = (s: string): number => {
   const parts = s.split(':');
@@ -88,7 +88,7 @@ const expand = (untils: Until[]): Until[] => {
   return res;
 };
 
-export const getDayPeriods = (data: any): Code[] => {
+export const getDayPeriods = (_data: any): Code[] => {
   let code = HEADER;
 
   code += `import { DayPeriodType } from '@phensley/cldr-schema';\n\n`;

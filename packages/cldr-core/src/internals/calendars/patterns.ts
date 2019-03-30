@@ -1,6 +1,6 @@
 import { LRU } from '@phensley/cldr-utils';
 
-import { CalendarSchema, EraWidthType, PluralType } from '@phensley/cldr-schema';
+import { CalendarSchema, PluralType } from '@phensley/cldr-schema';
 import { timeData, timeStrings } from './autogen.timedata';
 import { Internals } from '../../internals';
 import { Bundle } from '../../resource';
@@ -148,7 +148,7 @@ export class CalendarPatterns {
     return this.wrapperFormats[width] || '';
   }
 
-  getAvailablePattern(d: CalendarDate, s: DateSkeleton): DateTimeNode[] {
+  getAvailablePattern(_d: CalendarDate, s: DateSkeleton): DateTimeNode[] {
     const pattern = s.pattern ? s.pattern : this.rawAvailableFormats.other[s.skeleton];
     return pattern ? this.internals.calendars.parseDatePattern(pattern) : [];
   }

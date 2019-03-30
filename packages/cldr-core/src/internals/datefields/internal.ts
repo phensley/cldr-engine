@@ -8,7 +8,6 @@ import { coerceDecimal, DecimalArg, DecimalConstants } from '../../types';
 import { DateFieldInternals, Internals } from '../internals';
 import { RelativeTimeFormatOptions } from '../../common';
 import { Bundle } from '../../resource';
-import { CalendarDate } from '../../systems/calendars';
 import { ContextTransformInfo, NumberParams } from '../../common/private';
 
 // TODO: expose a method to calculate field difference with different options, e.g.

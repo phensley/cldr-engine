@@ -1,6 +1,4 @@
-import { matcher, Parser } from './parser';
-import { IMaybe } from './maybe';
-import { Pair } from './pair';
+import { matcher } from './parser';
 
 // Minimal parser for CLDR plural rules.
 // https://www.unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules

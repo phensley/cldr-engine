@@ -1,7 +1,7 @@
 import { getSupplemental} from '../../../cldr';
 import { objectToString, Code, HEADER, NOLINT_MAXLINE } from './util';
 
-export const getAliases = (data: any): Code[] => {
+export const getAliases = (_data: any): Code[] => {
   const supplemental = getSupplemental();
 
   const { languageAlias, scriptAlias, territoryAlias, zoneAlias } = supplemental.Aliases;

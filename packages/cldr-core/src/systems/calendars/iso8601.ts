@@ -27,7 +27,7 @@ export class ISO8601Date extends GregorianDate {
     return this._toString('ISO8601');
   }
 
-  static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): ISO8601Date {
+  static fromUnixEpoch(epoch: number, zoneId: string, _firstDay: number, _minDays: number): ISO8601Date {
     return new ISO8601Date().initFromUnixEpoch(epoch, zoneId);
   }
 

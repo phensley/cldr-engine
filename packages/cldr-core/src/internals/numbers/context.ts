@@ -44,7 +44,7 @@ export class NumberContext {
   /**
    * Set a compact pattern.
    */
-  setCompact(pattern: NumberPattern, integerDigits: number, divisor: number, maxFracDigits: number = -1): void {
+  setCompact(pattern: NumberPattern, integerDigits: number, _divisor: number, maxFracDigits: number = -1): void {
     let maxSigDigits = Math.max(pattern.minInt, integerDigits);
     if (integerDigits === 1) {
       maxSigDigits++;

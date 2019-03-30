@@ -51,8 +51,8 @@ export class PluralRules {
 
   constructor(
     private expressionsRaw: string[],
-    private cardinalsRaw: StringMap,
-    private ordinalsRaw: StringMap) {
+    cardinalsRaw: StringMap,
+    ordinalsRaw: StringMap) {
 
       this.expressions = new Array(expressionsRaw.length);
       this.cardinals = new RuleCache(cardinalsRaw);

@@ -27,7 +27,7 @@ export class StringValue implements AbstractValue<string> {
     return this.str[i] || '';
   }
 
-  add(type: string, value: string): void {
+  add(_type: string, value: string): void {
     this.str += value;
   }
 
@@ -35,7 +35,7 @@ export class StringValue implements AbstractValue<string> {
     this.str += value;
   }
 
-  insert(i: number, type: string, value: string): void {
+  insert(i: number, _type: string, value: string): void {
     const prefix = this.str.substring(0, i);
     const suffix = this.str.substring(i);
     this.str = `${prefix}${value}${suffix}`;
@@ -234,7 +234,7 @@ export class StringNumberFormatter extends NumberFormatter<string> {
   value(): AbstractValue<string> {
     return new StringValue();
   }
-  formatter(decimal: string, group: string): DecimalFormatter<string> {
+  formatter(_decimal: string, _group: string): DecimalFormatter<string> {
     return new StringDecimalFormatter();
   }
 }

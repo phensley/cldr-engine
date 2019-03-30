@@ -1,4 +1,4 @@
-import { field, scope, vector1, vector2, Scope } from '../types';
+import { field, scope, vector1, vector2 } from '../types';
 
 const formats = (name: string, rename: string, month: string) => scope(name, rename, [
   vector2('weekdays', 'field-width', 'weekday'),

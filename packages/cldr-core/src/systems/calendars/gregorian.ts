@@ -82,7 +82,7 @@ export class GregorianDate extends CalendarDate {
     return this;
   }
 
-  protected monthStart(eyear: number, month: number, useMonth: boolean): number {
+  protected monthStart(eyear: number, month: number, _useMonth: boolean): number {
     let isLeap = eyear % 4 === 0;
     const y = eyear - 1;
     let jd = 365 * y + floor(y / 4) + (CalendarConstants.JD_GREGORIAN_EPOCH - 3);

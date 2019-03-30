@@ -1,8 +1,6 @@
 import { parseLanguageTag } from '@phensley/cldr-core';
 import { escapeString, Code, HEADER, NOLINT } from './util';
 
-const char = (n: number) => String.fromCharCode('A'.charCodeAt(0) + n);
-
 export const getTimeData = (data: any): Code[] => {
   const timeData: { [x: string]: { [y: string]: string } } = {};
 

@@ -22,11 +22,11 @@ export class Parser<T> {
   }
 
   prefix<R>(parser: Parser<R>): Parser<T> {
-    return parser.flatMap(o => this);
+    return parser.flatMap(_o => this);
   }
 
   suffix(parser: Parser<any>): Parser<T> {
-    return this.flatMap(t => parser.map(o => t));
+    return this.flatMap(t => parser.map(_o => t));
   }
 
   map<R>(f: (value: T) => R): Parser<R> {

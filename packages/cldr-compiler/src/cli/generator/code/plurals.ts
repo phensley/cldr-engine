@@ -1,6 +1,6 @@
 import { getSupplemental } from '../../../cldr';
 import { parsePluralRule } from '../../../parsing/parser.plural';
-import { formatSource, lineWrap, Code, HEADER } from './util';
+import { formatSource, Code, HEADER } from './util';
 
 // Single-character names for the plural categories.
 const categories: any = {
@@ -54,7 +54,7 @@ const parseRules = (pluralSet: any): StringMap => {
   return map;
 };
 
-export const getPlurals = (data: any): Code[] => {
+export const getPlurals = (_data: any): Code[] => {
   const tree = getSupplemental();
   const { Cardinals, Ordinals } = tree;
 

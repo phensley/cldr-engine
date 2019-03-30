@@ -1,4 +1,4 @@
-import { enumName, lineWrap, Code, HEADER } from './util';
+import { lineWrap, Code, HEADER } from './util';
 
 export const getUnits = (data: any): Code[] => {
   let code = `${HEADER}`;
@@ -6,10 +6,10 @@ export const getUnits = (data: any): Code[] => {
   const values: string[] = [];
   data.units.forEach((s: string) => {
     const index = s.indexOf('-');
-    const category = s.substring(0, index);
+    // unit categories not yet used
+    // const category = s.substring(0, index);
     const value = s.substring(index + 1);
-    const name = enumName(value);
-    // code += `\n  ['${name}', '${value}'],`;
+    // const name = enumName(value);
     values.push(`'${value}'`);
   });
 

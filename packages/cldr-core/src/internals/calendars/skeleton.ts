@@ -228,7 +228,7 @@ export class DatePatternMatcher {
   // Array for matching by distances
   private entries: DateSkeleton[] = [];
 
-  add(skeleton: DateSkeleton, pattern?: DateTimeNode[]): void {
+  add(skeleton: DateSkeleton, _pattern?: DateTimeNode[]): void {
     const key = skeleton.skeleton;
     // Avoid adding patterns with duplicate skeletons
     if (this.exact[key] === undefined) {

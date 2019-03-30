@@ -1,14 +1,7 @@
-import { formatSource, lineWrap, Code, HEADER } from './util';
+import { lineWrap, Code, HEADER } from './util';
 
 const DEFAULT_DIGITS = '2';
 const DEFAULT_ROUNDING = '0';
-
-const DEFAULT = {
-  _digits: '2',
-  _rounding: '0',
-  _cashDigits: '2',
-  _cashRounding: '0'
-};
 
 const convert = (s: any): string[] => {
   const digits = s._digits || DEFAULT_DIGITS;
