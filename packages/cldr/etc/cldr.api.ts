@@ -227,7 +227,7 @@ class Decimal {
   precision(): number;
   protected round(rnd: number, rest: number, mode: RoundingModeType): number;
   scale(): number;
-  scientific(): [Decimal, number];
+  scientific(minIntDigits?: number): [Decimal, number];
   setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
   shiftleft(shift: number): Decimal;
   shiftright(shift: number, mode?: RoundingModeType): Decimal;
@@ -273,7 +273,7 @@ class GregorianDate extends CalendarDate {
   // (undocumented)
   protected initGregorian(): GregorianDate;
   // (undocumented)
-  protected monthStart(eyear: number, month: number, useMonth: boolean): number;
+  protected monthStart(eyear: number, month: number, _useMonth: boolean): number;
   // (undocumented)
   toString(): string;
 }
@@ -283,7 +283,7 @@ class ISO8601Date extends GregorianDate {
   // (undocumented)
   add(fields: CalendarDateFields): ISO8601Date;
   // (undocumented)
-  static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): ISO8601Date;
+  static fromUnixEpoch(epoch: number, zoneId: string, _firstDay: number, _minDays: number): ISO8601Date;
   // (undocumented)
   protected initFromUnixEpoch(epoch: number, zoneId: string): ISO8601Date;
   // (undocumented)
@@ -391,7 +391,7 @@ class PersianDate extends CalendarDate {
   // (undocumented)
   protected initFromUnixEpoch(epoch: number, zoneId: string): PersianDate;
   // (undocumented)
-  protected monthStart(eyear: number, month: number, useMonth: boolean): number;
+  protected monthStart(eyear: number, month: number, _useMonth: boolean): number;
   // (undocumented)
   relatedYear(): number;
   // (undocumented)
