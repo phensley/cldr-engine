@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# show stats for generated javascript
+
+# provides an estimate for final bundle size for each package
+# and targets for further code size reduction
+
+CWD=$(cd `dirname $0`; pwd)
+
+cd $CWD/..
+DIRS=`ls -1 packages|grep -v compiler`
+
+TMP=./temp
+mkdir -p $TMP
+
+for d in $DIRS ; do
+    echo "Package: $d"
+    echo
+
+    cloc packages/$d/lib | grep '^JavaScript'
+    echo
+
+    gfind packages/$d/lib -name '*.js' -printf '%10s  %P\n' |sort -nr
+    echo
+    
+    echo -n '            uglified size:  '
+    uglifyjs -o $TMP/$d.js `gfind packages/$d/lib -name '*.js'|xargs`
+    wc -c $TMP/$d.js
+
+    echo -n 'uglified and gzipped size:  '
+    gzip -c -9 $TMP/$d.js >$TMP/$d.js.gz
+    wc -c $TMP/$d.js.gz
+
+    echo
+    echo '--------------------------------------------------------------------'
+done
+
