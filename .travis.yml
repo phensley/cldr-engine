@@ -6,6 +6,7 @@ cache:
   yarn: true
   directories:
     - 'node_modules'
+    - 'packages/cldr-compiler/.cldr'
 before_install:
   - npm install -g codecov yarn
 install:
