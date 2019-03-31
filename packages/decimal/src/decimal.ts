@@ -58,12 +58,6 @@ const size = (n: number): number => {
   return r === 0 ? q : q + 1;
 };
 
-export interface DecimalParts {
-  data: number[];
-  sign: number;
-  exp: number;
-}
-
 /**
  * Arbitrary precision decimal type.
  *
@@ -75,15 +69,11 @@ export class Decimal {
   protected sign!: number;
   protected exp!: number;
 
-  constructor(num: DecimalArg | DecimalParts) {
+  constructor(num: DecimalArg) {
     if (typeof num === 'string' || typeof num === 'number') {
       this.parse(num);
-    } else if (num instanceof Decimal) {
-      this.data = num.data.slice();
-      this.sign = num.sign;
-      this.exp = num.exp;
     } else {
-      this.data = num.data;
+      this.data = num.data.slice();
       this.sign = num.sign;
       this.exp = num.exp;
     }
@@ -394,12 +384,8 @@ export class Decimal {
   scientific(minIntDigits: number = 1): [Decimal, number] {
     minIntDigits = minIntDigits <= 1 ? 1 : minIntDigits;
     const exp = -(this.precision() - 1) + (minIntDigits - 1);
-    const coeff = new Decimal({
-      data: this.data,
-      sign: this.sign,
-      // removed signed-ness from zero
-      exp: exp === 0 ? 0 : exp
-    });
+    // ensure exponent is not negative zero
+    const coeff = Decimal.fromRaw(this.sign, exp === 0 ? 0 : exp, this.data);
     return [
       coeff,
       this.exp - coeff.exp
@@ -508,16 +494,36 @@ export class Decimal {
   }
 
   /**
+   * Format this number to scientific notation as a string.
+   */
+  toScientificString(minIntegers: number): string {
+    const [coeff, exp] = this.scientific(minIntegers);
+    const r = this.formatString(coeff, minIntegers);
+    return coeff.sign === 0 ? r :
+      exp === 0 ? r : r + `E${exp > 0 ? '+' : ''}${exp}`;
+  }
+
+  /**
    * Format this number to an array of parts.
    */
   toParts(): Part[] {
-    const f = new PartsDecimalFormatter('.', '');
-    this.format(f, '.', '', 1, 1, 3, 3, false);
-    const r = f.render();
-    return this.sign === -1 ? [{ type: 'minus', value: '-' }].concat(r) : r;
+    return this.formatParts(this);
   }
 
-  // TODO: support scientific formats
+  /**
+   * Format this number to scientific notation as an array of parts.
+   */
+  toScientificParts(minIntegers: number = 1): Part[] {
+    const [coeff, exp] = this.scientific(minIntegers);
+    const r = this.formatParts(coeff, minIntegers);
+    if (coeff.sign === 0 || exp === 0) {
+      return r;
+    }
+    return r.concat([
+      { type: 'e', value: 'E' },
+      { type: 'digits', value: `${exp}`}
+    ]);
+  }
 
   /**
    * Low-level formatting of string and Part[] forms.
@@ -644,6 +650,20 @@ export class Decimal {
         groupFunc();
       }
     }
+  }
+
+  protected formatString(d: Decimal, minInt: number = 1): string {
+    const f = new StringDecimalFormatter();
+    d.format(f, '.', '', minInt, 1, 3, 3, false);
+    const r = f.render();
+    return d.sign === -1 ? '-' + r : r;
+  }
+
+  protected formatParts(d: Decimal, minInt: number = 1): Part[] {
+    const f = new PartsDecimalFormatter('.', '');
+    d.format(f, '.', '', minInt, 1, 3, 3, false);
+    const r = f.render();
+    return d.sign === -1 ? [{ type: 'minus', value: '-' }].concat(r) : r;
   }
 
   protected static fromRaw(sign: number, exp: number, data: number[]): Decimal {
