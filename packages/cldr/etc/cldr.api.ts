@@ -187,7 +187,7 @@ interface DateFormatOptions {
 
 // @alpha
 class Decimal {
-  constructor(num: DecimalArg | DecimalParts);
+  constructor(num: DecimalArg);
   protected _increment(): void;
   protected _parse(str: string): string | undefined;
   // (undocumented)
@@ -211,6 +211,10 @@ class Decimal {
   // (undocumented)
   protected exp: number;
   format<R>(formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, zeroScale: boolean, digits?: string[]): void;
+  // (undocumented)
+  protected formatParts(d: Decimal, minInt?: number): Part[];
+  // (undocumented)
+  protected formatString(d: Decimal, minInt?: number): string;
   // (undocumented)
   protected static fromRaw(sign: number, exp: number, data: number[]): Decimal;
   increment(): Decimal;
@@ -239,6 +243,8 @@ class Decimal {
   subtract(v: DecimalArg): Decimal;
   toInteger(): Decimal;
   toParts(): Part[];
+  toScientificParts(minIntegers?: number): Part[];
+  toScientificString(minIntegers: number): string;
   toString(): string;
   trailingZeros(): number;
   protected trim(): Decimal;
