@@ -11,7 +11,11 @@ export interface ZoneInfo {
 
 export interface Tz {
   fromUTC(zoneid: string, utc: number): ZoneInfo | undefined;
-  fromWall(zoneid: string, utc: number): ZoneInfo | undefined;
+  // TODO:
+  // fromWall(zoneid: string, utc: number): ZoneInfo | undefined;
+  resolveId(id: string): string | undefined;
+  utcZone(): ZoneInfo;
+  zoneIds(): string[];
 }
 
 export class TzImpl {
@@ -88,9 +92,9 @@ export class TzImpl {
   /**
    * Get the info for a time zone using a local "wall clock" timestamp.
    */
-  fromWall(zoneid: string, wall: number): ZoneInfo | undefined {
-    return this.lookup(zoneid, wall, false);
-  }
+  // fromWall(zoneid: string, wall: number): ZoneInfo | undefined {
+  //   return this.lookup(zoneid, wall, false);
+  // }
 
   /**
    * UTC zone info.
@@ -116,11 +120,13 @@ export class TzImpl {
   /**
    * Lookup the time zone record and return the zone info.
    */
-  private lookup(id: string, t: number, isutc: boolean): ZoneInfo | undefined {
+  private lookup(id: string, t: number, _isutc: boolean): ZoneInfo | undefined {
     const rec = this.record(id);
     if (rec) {
       const [zoneid, r] = rec;
-      const res = isutc ? r.fromUTC(t) : r.fromWall(t);
+      const res = r.fromUTC(t);
+      // TODO: rework wall -> utc since it can require some guessing
+      // const res = isutc ? r.fromUTC(t) : r.fromWall(t);
       return {
         ...res,
         zoneid
@@ -199,38 +205,6 @@ class ZoneRecord {
   }
 
   /**
-   * Resolve the zone info using a local "wall clock" timestamp.
-   */
-  fromWall(wall: number): ZoneInfoRec {
-    let i = binarySearch(this.untils, false, wall);
-    let type: number;
-
-    if (i === this.len) {
-      // went off the top end, so return the last info
-      type = this.types[this.len - 1];
-      return this.localtime[type];
-    }
-
-    // check if the adjusted time is <= wall time
-    type = this.types[i];
-    const loc = this.localtime[type];
-    if (this.untils[i] + loc.offset <= wall) {
-      return loc;
-    }
-
-    // select the next until down and retry
-    i--;
-
-    // went off the bottom end, return the first info
-    if (i === -1) {
-      return this.localtime[0];
-    }
-
-    type = this.types[i];
-    return this.localtime[type];
-  }
-
-  /**
    * Decode a single zone info record.
    */
   private decodeInfo(raw: string): ZoneInfoRec {
@@ -256,4 +230,4 @@ interface ZoneInfoRec {
   offset: number;
 }
 
-export const TZ = new TzImpl(rawdata);
+export const TZ: Tz = new TzImpl(rawdata);

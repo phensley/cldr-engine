@@ -3,17 +3,19 @@ import { TZ } from '../src';
 /**
  * Test whether we can go from UTC -> WALL -> UTC successfully.
  */
-export const roundtrip = (id: string, utc: number): boolean => {
-  let info = TZ.fromUTC(id, utc);
-  if (info) {
-    const wall = utc + info.offset;
-    info = TZ.fromWall(id, wall);
-    if (info) {
-      return utc === (wall - info.offset);
-    }
-  }
-  throw new Error(`failed to resolve ${id}`);
-};
+
+// TODO:
+// export const roundtrip = (id: string, utc: number): boolean => {
+//   let info = TZ.fromUTC(id, utc);
+//   if (info) {
+//     const wall = utc + info.offset;
+//     info = TZ.fromWall(id, wall);
+//     if (info) {
+//       return utc === (wall - info.offset);
+//     }
+//   }
+//   throw new Error(`failed to resolve ${id}`);
+// };
 
 const SEC = 1000;
 const MIN = 60 * SEC;
