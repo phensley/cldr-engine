@@ -17,7 +17,7 @@ export class Timer {
     return time(_end).subtract(time(this._start)).movePoint(6).toString();
   }
 
-  private asDecimal(hrtime: [number, number]): Decimal {
-    return new Decimal(hrtime[0]).add(new Decimal(hrtime[1]).movePoint(-9));
-  }
+  // private asDecimal(hrtime: [number, number]): Decimal {
+  //   return new Decimal(hrtime[0]).add(new Decimal(hrtime[1]).movePoint(-9));
+  // }
 }

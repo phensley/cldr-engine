@@ -67,7 +67,7 @@ export const calendarStress = () => {
     timer.start();
     for (const datetime of datetimes) {
       for (const o of dopts) {
-        const res = engine.Calendars.formatDate(datetime, o);
+        engine.Calendars.formatDate(datetime, o);
         i++;
       }
     }

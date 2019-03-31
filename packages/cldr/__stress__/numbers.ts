@@ -115,7 +115,7 @@ export const numberStress = () => {
     timer.start();
     for (const n of NUMBERS) {
       for (const o of dopts) {
-        const res = engine.Numbers.formatDecimal(n, o);
+        engine.Numbers.formatDecimal(n, o);
         i++;
       }
     }
@@ -128,7 +128,7 @@ export const numberStress = () => {
     for (const n of NUMBERS) {
       for (const currency of CURRENCIES) {
         for (const o of copts) {
-          const res = engine.Numbers.formatCurrency(n, currency, o);
+          engine.Numbers.formatCurrency(n, currency, o);
           i++;
         }
       }
@@ -142,9 +142,9 @@ export const numberStress = () => {
     for (const n of NUMBERS) {
       for (const o of uopts) {
         for (const unit of UNITS) {
-          let res = engine.Units.formatQuantity({ value: n, unit }, o);
+          engine.Units.formatQuantity({ value: n, unit }, o);
           i++;
-          res = engine.Units.formatQuantity({ value: n, unit, per: 'second' }, o);
+          engine.Units.formatQuantity({ value: n, unit, per: 'second' }, o);
           i++;
         }
       }
