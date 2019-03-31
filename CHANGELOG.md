@@ -10,11 +10,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
  - Fast, simple CLDR data downloader.
  - Decimal number format options new style `'scientific'`.
+ - Decimal api supports scientific formatting to string and parts.
 
 ### Fixed/Changed
  - Removed dependency on NPM cldr-data package.
  - Upgraded [cldr 35](http://cldr.unicode.org/index/downloads/cldr-35).
  - Parts formatting changed the minus sign type from `'minus'` to `'sign'`
+ - Removed timezone `fromWall` methods until stable
 
 ## [0.10.2]
 ### Added
