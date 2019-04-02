@@ -17,6 +17,7 @@ import { Bundle } from '../../resource';
 import { ListPatternType } from '../../common';
 import { ContextTransformInfo } from '../../common/private';
 import { Part } from '../../types';
+import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
 
 export class GeneralInternalsImpl implements GeneralInternals {
 
@@ -69,28 +70,12 @@ export class GeneralInternalsImpl implements GeneralInternals {
   }
 
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string {
-    const arrow = this.selectListPattern(type);
-    const pattern = arrow.mapping(bundle);
-    let len = items.length;
-    if (len < 2) {
-      return len === 1 ? items[0] : '';
-    }
-    const wrapper = this.internals.wrapper;
-    if (len === 2) {
-      return wrapper.format(pattern.two, items);
-    }
-    // We have at least 3 items. Format from tail to head.
-    let res = wrapper.format(pattern.end, [items[len - 2], items[len - 1]]);
-    len -= 2;
-    while (len-- > 1) {
-      res = wrapper.format(pattern.middle, [items[len], res]);
-    }
-    return wrapper.format(pattern.start, [items[0], res]);
+    return this.formatListImpl(bundle, new StringValue(), items, type);
   }
 
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[] {
     const parts: Part[][] = items.map(i => ([{ type: 'item', value: i }]));
-    return this.formatListToPartsImpl(bundle, parts, type);
+    return this.formatListImpl(bundle, new PartsValue(), parts, type);
   }
 
   getLanguageDisplayName(bundle: Bundle, code: string): string {
@@ -110,26 +95,29 @@ export class GeneralInternalsImpl implements GeneralInternals {
     return name === '' ? this.names.regions.displayName.get(bundle, 'none', id) : name;
   }
 
-  formatListToPartsImpl(bundle: Bundle, items: Part[][], type: ListPatternType): Part[] {
-    const arrow = this.selectListPattern(type);
-    const pattern = arrow.mapping(bundle);
+  formatListImpl<R>(bundle: Bundle, value: AbstractValue<R>, items: R[], type: ListPatternType): R {
+    const pattern = this.selectListPattern(type).mapping(bundle);
     let len = items.length;
     if (len < 2) {
-      return len === 1 ? items[0] : [];
+      return len === 1 ? items[0] : value.empty();
     }
 
-    const wrapper = this.internals.wrapper;
     if (len === 2) {
-      return wrapper.formatParts(pattern.two, [items[0], items[1]]);
+      return this._wrap(pattern.two, value, [items[0], items[1]]);
     }
 
-    // We have at least 3 items. Format from tail to head.
-    let res = wrapper.formatParts(pattern.end, [items[len - 2], items[len - 1]]);
+    let res = this._wrap(pattern.end, value, [items[len - 2], items[len - 1]]);
     len -= 2;
     while (len-- > 1) {
-      res = wrapper.formatParts(pattern.middle, [items[len], res]);
+      res = this._wrap(pattern.middle, value, [items[len], res]);
     }
-    return wrapper.formatParts(pattern.start, [items[0], res]);
+    return this._wrap(pattern.start, value, [items[0], res]);
+  }
+
+  protected _wrap<R>(pattern: string, value: AbstractValue<R>, args: R[]): R {
+    const wrapper = this.internals.wrapper.parseWrapper(pattern);
+    value.wrap(wrapper, args);
+    return value.render();
   }
 
   protected selectListPattern(type: ListPatternType): Vector1Arrow<ListPatternPositionType> {

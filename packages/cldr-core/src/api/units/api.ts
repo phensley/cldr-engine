@@ -6,6 +6,7 @@ import { ListPatternType, Quantity, UnitFormatOptions, UnitLength } from '../../
 import { Part } from '../../types';
 import { Bundle } from '../../resource';
 import { PrivateApiImpl } from '../private';
+import { PartsValue } from '../../utils/render';
 
 const DEFAULT_OPTIONS: UnitFormatOptions = { length: 'long', style: 'decimal' };
 
@@ -58,7 +59,7 @@ export class UnitsImpl implements Units {
     options = options || DEFAULT_OPTIONS;
     const parts: Part[][] = qs.map(q => this.formatQuantityToParts(q, options));
     const type = this.selectListType(options);
-    return this.general.formatListToPartsImpl(this.bundle, parts, type);
+    return this.general.formatListImpl(this.bundle, new PartsValue(), parts, type);
   }
 
   protected selectListType(options: UnitFormatOptions): ListPatternType {
