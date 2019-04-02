@@ -40,7 +40,7 @@ import { Part } from '../../types';
 
 import { CalendarManager } from '../../internals/calendars/manager';
 import { CalendarPatterns } from '../../internals/calendars/patterns';
-import { PartsRenderer, Renderer, StringRenderer } from '../../utils/render';
+import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
 import { PrivateApiImpl } from '../private';
 
 export class CalendarsImpl implements Calendars {
@@ -194,24 +194,24 @@ export class CalendarsImpl implements Calendars {
    * Format a calendar date to string using the given options.
    */
   formatDate(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): string {
-    return this._formatDate(new StringRenderer(), date, options);
+    return this._formatDate(new StringValue(), date, options);
   }
 
   /**
    * Format a calendar date to a parts array using the given options.
    */
   formatDateToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): Part[] {
-    return this._formatDate(new PartsRenderer(), date, options);
+    return this._formatDate(new PartsValue(), date, options);
   }
 
   formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
       options?: DateIntervalFormatOptions): string {
-    return this._formatInterval(new StringRenderer(), start, end, options);
+    return this._formatInterval(new StringValue(), start, end, options);
   }
 
   formatDateIntervalToParts(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
       options?: DateIntervalFormatOptions): Part[] {
-    return this._formatInterval(new PartsRenderer(), start, end, options);
+    return this._formatInterval(new PartsValue(), start, end, options);
   }
 
   // TODO: need to sort out the options
@@ -239,11 +239,11 @@ export class CalendarsImpl implements Calendars {
    * extreme cases where an application must implement a custom format.
    */
   formatDateRaw(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): string {
-    return this._formatDateRaw(new StringRenderer(), date, options || {});
+    return this._formatDateRaw(new StringValue(), date, options || {});
   }
 
   formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[] {
-    return this._formatDateRaw(new PartsRenderer(), date, options || {});
+    return this._formatDateRaw(new PartsValue(), date, options || {});
   }
 
   timeZoneIds(): TimeZoneType[] {
@@ -286,7 +286,7 @@ export class CalendarsImpl implements Calendars {
     return res;
   }
 
-  private _formatDate<R>(renderer: Renderer<R>,
+  private _formatDate<R>(value: AbstractValue<R>,
       date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): R {
 
     const calendars = this.internals.calendars;
@@ -304,10 +304,10 @@ export class CalendarsImpl implements Calendars {
       context: options.context,
       transform: this.privateApi.getContextTransformInfo()
     };
-    return calendars.formatDateTime(calendar, ctx, renderer, req.date, req.time, req.wrapper);
+    return calendars.formatDateTime(calendar, ctx, value, req.date, req.time, req.wrapper);
   }
 
-  private _formatInterval<R>(renderer: Renderer<R>,
+  private _formatInterval<R>(value: AbstractValue<R>,
       start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
       options?: DateIntervalFormatOptions): R {
 
@@ -331,12 +331,12 @@ export class CalendarsImpl implements Calendars {
         context: options.context,
         transform: this.privateApi.getContextTransformInfo()
       };
-      const _start = this.internals.calendars.formatDateTime(calendar, ctx, renderer, r.date, r.time, r.wrapper);
+      const _start = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
       ctx.date = end;
-      const _end = this.internals.calendars.formatDateTime(calendar, ctx, renderer, r.date, r.time, r.wrapper);
+      const _end = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
       const wrapper = this.internals.wrapper.parseWrapper(req.wrapper);
-      renderer.wrap(wrapper, [_start, _end]);
-      return renderer.get();
+      value.wrap(wrapper, [_start, _end]);
+      return value.render();
     }
 
     let _date: R | undefined;
@@ -350,7 +350,7 @@ export class CalendarsImpl implements Calendars {
         context: options.context,
         transform: this.privateApi.getContextTransformInfo()
       };
-      _date = this.internals.calendars.formatDateTime(calendar, ctx, renderer, req.date);
+      _date = this.internals.calendars.formatDateTime(calendar, ctx, value, req.date);
     }
 
     if (req.range) {
@@ -364,7 +364,7 @@ export class CalendarsImpl implements Calendars {
       };
 
       const _range = this.internals.calendars.formatInterval(
-        calendar, ctx, renderer, end, req.range);
+        calendar, ctx, value, end, req.range);
       if (!_date) {
         return _range;
       }
@@ -376,18 +376,18 @@ export class CalendarsImpl implements Calendars {
       // https://www.unicode.org/reports/tr35/tr35-dates.html#intervalFormats
       const patterns = this.manager.getCalendarPatterns(calendar);
       const wrapper = this.internals.wrapper.parseWrapper(patterns.getWrapperPattern('medium'));
-      renderer.wrap(wrapper, [_range, _date]);
-      return renderer.get();
+      value.wrap(wrapper, [_range, _date]);
+      return value.render();
     }
 
-    return _date ? _date : renderer.empty();
+    return _date ? _date : value.empty();
   }
 
-  private _formatDateRaw<R>(renderer: Renderer<R>,
+  private _formatDateRaw<R>(value: AbstractValue<R>,
       date: CalendarDate | ZonedDateTime | Date, options: DateRawFormatOptions): R {
 
     if (!options.pattern) {
-      return renderer.empty();
+      return value.empty();
     }
     const pattern = this.internals.calendars.parseDatePattern(options.pattern);
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
@@ -400,7 +400,7 @@ export class CalendarsImpl implements Calendars {
       context: options.context,
       transform: this.privateApi.getContextTransformInfo()
     };
-    return this.internals.calendars.formatDateTime(calendar, ctx, renderer, pattern);
+    return this.internals.calendars.formatDateTime(calendar, ctx, value, pattern);
   }
 
   private convertDate<T>(cons: CalendarFromUnixEpoch<T>,

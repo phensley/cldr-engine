@@ -1,50 +1,63 @@
 import { Part } from '../types';
 import { WrapperNode } from '../parsing/patterns/wrapper';
 
-export interface Renderer<R> {
+export interface AbstractValue<R> {
+  length(): number;
   add(type: string, value: string): void;
-  append(rendered: R): void;
-  literal(value: string): void;
-  get(): R;
+  get(i: number): string;
+  append(value: R): void;
+  insert(i: number, type: string, value: string): void;
+  render(): R;
+  reset(): void;
   join(...elems: R[]): R;
-  wrap(format: WrapperNode[], args: R[]): void;
+  wrap(pattern: WrapperNode[], args: R[]): void;
   empty(): R;
 }
 
-export class StringRenderer implements Renderer<string> {
+export class StringValue implements AbstractValue<string> {
 
-  protected str: string = '';
+  private str: string = '';
 
-  literal(value: string): void {
-    this.str += value;
+  length(): number {
+    return this.str.length;
+  }
+
+  get(i: number): string {
+    return this.str[i] || '';
   }
 
   add(_type: string, value: string): void {
     this.str += value;
   }
 
-  append(rendered: string): void {
-    this.str += rendered;
+  append(value: string): void {
+    this.str += value;
   }
 
-  get(): string {
+  insert(i: number, _type: string, value: string): void {
+    const prefix = this.str.substring(0, i);
+    const suffix = this.str.substring(i);
+    this.str = `${prefix}${value}${suffix}`;
+  }
+
+  render(): string {
     const s = this.str;
     this.str = '';
     return s;
+  }
+
+  reset(): void {
+    this.str = '';
   }
 
   join(...str: string[]): string {
     return str.join('');
   }
 
-  empty(): string {
-    return '';
-  }
-
   wrap(pattern: WrapperNode[], args: string[]): void {
     for (const n of pattern) {
       if (typeof n === 'string') {
-        this.literal(n);
+        this.add('literal', n);
       } else {
         const arg = args[n];
         if (arg) {
@@ -53,48 +66,68 @@ export class StringRenderer implements Renderer<string> {
       }
     }
   }
+
+  empty(): string {
+    return '';
+  }
+
 }
 
-export class PartsRenderer implements Renderer<Part[]> {
+export class PartsValue implements AbstractValue<Part[]> {
 
-  protected parts: Part[] = [];
+  private parts: Part[] = [];
 
-  literal(value: string): void {
-    this.parts.push({ type: 'literal', value });
+  length(): number {
+    return this.parts.length;
+  }
+
+  get(i: number): string {
+    const p = this.parts[i];
+    return p ? p.value : '';
   }
 
   add(type: string, value: string): void {
     this.parts.push({ type, value });
   }
 
-  append(rendered: Part[]): void {
-    this.parts = this.parts.concat(rendered);
+  append(value: Part[]): void {
+    for (const p of value) {
+      this.parts.push(p);
+    }
   }
 
-  get(): Part[] {
+  insert(i: number, type: string, value: string): void {
+    this.parts.splice(i, 0, { type, value });
+  }
+
+  render(): Part[] {
     const p = this.parts;
     this.parts = [];
     return p;
+  }
+
+  reset(): void {
+    this.parts = [];
   }
 
   join(...parts: Part[][]): Part[] {
     return ([] as Part[]).concat(...parts);
   }
 
-  empty(): Part[] {
-    return [];
-  }
-
   wrap(pattern: WrapperNode[], args: Part[][]): void {
     for (const n of pattern) {
       if (typeof n === 'string') {
-        this.literal(n);
+        this.add('literal', n);
       } else {
         for (const p of args[n] || []) {
           this.parts.push(p);
         }
       }
     }
+  }
+
+  empty(): Part[] {
+    return [];
   }
 
 }

@@ -6,7 +6,7 @@ import { calendarIds, calendarPrefData } from './autogen.calprefs';
 import { weekFirstDay, weekMinDays } from './autogen.weekdata';
 import { Bundle } from '../../resource';
 import { CalendarInternals } from '../internals';
-import { Renderer } from '../../utils/render';
+import { AbstractValue } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
 import { CalendarFormatterImpl } from './formatterimpl';
 import { Internals } from '../internals';
@@ -85,36 +85,36 @@ export class CalendarInternalsImpl implements CalendarInternals {
   }
 
   formatDateTime<R>(
-      calendar: CalendarType, ctx: CalendarContext<CalendarDate>, renderer: Renderer<R>,
+      calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>,
       date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R {
 
     const formatter = this.getCalendarFormatter(calendar);
     let _date: R | undefined;
     let _time: R | undefined;
     if (date) {
-      formatter.format(renderer, ctx, date);
-      _date = renderer.get();
+      formatter.format(value, ctx, date);
+      _date = value.render();
     }
     if (time) {
-      formatter.format(renderer, ctx, time);
-      _time = renderer.get();
+      formatter.format(value, ctx, time);
+      _time = value.render();
     }
     if (_date && _time && wrapper) {
       const pattern = this.internals.wrapper.parseWrapper(wrapper);
-      renderer.wrap(pattern, [_time, _date]);
-      return renderer.get();
+      value.wrap(pattern, [_time, _date]);
+      return value.render();
     }
-    return _date ? _date : _time ? _time : renderer.empty();
+    return _date ? _date : _time ? _time : value.empty();
   }
 
   formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>,
-    renderer: Renderer<R>, end: CalendarDate, pattern: DateTimeNode[]): R {
+    value: AbstractValue<R>, end: CalendarDate, pattern: DateTimeNode[]): R {
 
     const idx = intervalPatternBoundary(pattern);
-    const s = this.formatDateTime(calendar, ctx, renderer, pattern.slice(0, idx));
+    const s = this.formatDateTime(calendar, ctx, value, pattern.slice(0, idx));
     ctx.date = end;
-    const e = this.formatDateTime(calendar, ctx, renderer, pattern.slice(idx));
-    return renderer.join(s, e);
+    const e = this.formatDateTime(calendar, ctx, value, pattern.slice(idx));
+    return value.join(s, e);
   }
 
   selectCalendar(bundle: Bundle, ca?: CalendarType): CalendarType {

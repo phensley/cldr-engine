@@ -9,7 +9,7 @@ import { Bundle } from '../../resource/bundle';
 import { Internals } from '../internals';
 import { CalendarDate } from '../../systems/calendars';
 import { DateTimeNode } from '../../parsing/patterns/date';
-import { Renderer } from '../../utils/render';
+import { AbstractValue } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
 
 const min = Math.min;
@@ -42,12 +42,12 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     this.tz = internals.schema.TimeZones;
   }
 
-  format<R>(rnd: Renderer<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[]): void {
+  format<R>(val: AbstractValue<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[]): void {
     const len = nodes.length;
     for (let i = 0; i < len; i++) {
       const n = nodes[i];
       if (typeof n === 'string') {
-        rnd.add('literal', n);
+        val.add('literal', n);
         continue;
       }
 
@@ -259,7 +259,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       if (i === 0 && ctx.context && field) {
         value = this.internals.general.contextTransform(value, ctx.transform, ctx.context, field);
       }
-      rnd.add(type, value);
+      val.add(type, value);
     }
   }
 

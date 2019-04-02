@@ -3,7 +3,7 @@ import { Bundle } from '../../resource';
 import { DateTimeNode } from '../../parsing/patterns/date';
 import { CalendarDate } from '../../systems/calendars';
 import { ContextTransformInfo, NumberingSystem } from '../../common/private';
-import { Renderer } from '../../utils/render';
+import { AbstractValue } from '../../utils/render';
 
 /**
  * All context needed for a single format operation.
@@ -44,6 +44,6 @@ export interface CalendarContext<T extends CalendarDate> {
 
 export interface CalendarFormatter<T extends CalendarDate> {
 
-  format<R>(rnd: Renderer<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[]): void;
+  format<R>(val: AbstractValue<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[]): void;
 
 }

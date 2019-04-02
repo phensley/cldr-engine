@@ -1,38 +1,38 @@
-import { PartsRenderer, Renderer, StringRenderer } from '../../src/utils/render';
+import { AbstractValue, PartsValue, StringValue } from '../../src/utils/render';
 import { parseWrapperPattern } from '../../src/parsing/patterns/wrapper';
 
 test('string', () => {
-  const r = new StringRenderer();
-  r.literal('A');
-  r.literal('B');
-  r.add('foo', 'C');
-  r.append('D');
-  expect(r.get()).toEqual('ABCD');
-  expect(r.get()).toEqual('');
-  expect(r.empty()).toEqual('');
-  expect(r.join('A', 'B', 'C')).toEqual('ABC');
+  const v = new StringValue();
+  v.add('literal', 'A');
+  v.add('literal', 'B');
+  v.add('foo', 'C');
+  v.append('D');
+  expect(v.render()).toEqual('ABCD');
+  expect(v.render()).toEqual('');
+  expect(v.empty()).toEqual('');
+  expect(v.join('A', 'B', 'C')).toEqual('ABC');
 
   const p = parseWrapperPattern('{3}, {1} - {0}, {2}');
-  r.wrap(p, ['A', 'B', 'C', 'D', 'E', 'F']);
-  expect(r.get()).toEqual('D, B - A, C');
+  v.wrap(p, ['A', 'B', 'C', 'D', 'E', 'F']);
+  expect(v.render()).toEqual('D, B - A, C');
 });
 
 test('parts', () => {
-  const r = new PartsRenderer();
-  r.literal('A');
-  r.literal('B');
-  r.add('foo', 'C');
-  r.append([{ type: 'bar', value: 'D' }]);
-  expect(r.get()).toEqual([
+  const v = new PartsValue();
+  v.add('literal', 'A');
+  v.add('literal', 'B');
+  v.add('foo', 'C');
+  v.append([{ type: 'bar', value: 'D' }]);
+  expect(v.render()).toEqual([
     { type: 'literal', value: 'A' },
     { type: 'literal', value: 'B' },
     { type: 'foo', value: 'C' },
     { type: 'bar', value: 'D' }
   ]);
 
-  expect(r.get()).toEqual([]);
-  expect(r.empty()).toEqual([]);
-  expect(r.join([
+  expect(v.render()).toEqual([]);
+  expect(v.empty()).toEqual([]);
+  expect(v.join([
     { type: 'foo', value: 'A' },
     { type: 'bar', value: 'B' },
     { type: 'baz', value: 'C' }
@@ -43,7 +43,7 @@ test('parts', () => {
   ]);
 
   const p = parseWrapperPattern('{3}, {1} - {0}, {2}');
-  r.wrap(p, [
+  v.wrap(p, [
     [{ type: 'aaa', value: 'A' }],
     [{ type: 'bbb', value: 'B' }],
     [{ type: 'ccc', value: 'C' }],
@@ -51,7 +51,7 @@ test('parts', () => {
     [{ type: 'eee', value: 'E' }],
     [{ type: 'fff', value: 'F' }]
   ]);
-  expect(r.get()).toEqual([
+  expect(v.render()).toEqual([
     { type: 'ddd', value: 'D' },
     { type: 'literal', value: ', ' },
     { type: 'bbb', value: 'B' },

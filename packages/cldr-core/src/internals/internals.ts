@@ -28,7 +28,7 @@ import { NumberPattern } from '../parsing/patterns/number';
 import { WrapperNode } from '../parsing/patterns/wrapper';
 import { Bundle } from '../resource';
 import { CalendarContext, CalendarFormatter } from './calendars/formatter';
-import { Renderer } from '../utils/render';
+import { AbstractValue } from '../utils/render';
 import { Decimal, DecimalArg, NumberOperands, Part } from '../types';
 
 export interface CalendarInternals {
@@ -41,11 +41,11 @@ export interface CalendarInternals {
   selectCalendar(bundle: Bundle, ca?: CalendarType): CalendarType;
 
   formatDateTime<R>(
-    calendar: CalendarType, ctx: CalendarContext<CalendarDate>, renderer: Renderer<R>,
+    calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>,
     date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
 
   formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>,
-    renderer: Renderer<R>, end: CalendarDate, pattern: DateTimeNode[]): R;
+    value: AbstractValue<R>, end: CalendarDate, pattern: DateTimeNode[]): R;
 }
 
 export interface DateFieldInternals {
