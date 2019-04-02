@@ -29,6 +29,12 @@ npm install --save @phensley/cldr
 yarn add @phensley/cldr
 ```
 
+## Rationale
+
+I needed a library that included as much CLDR functionality as possible, while still meeting all of my requirements for performance, static and runtime code size, simplicity of integration, etc.
+
+I'm gradually [comparing this library with current alternatives](https://github.com/phensley/cldr-bakeoff) here.
+
 ## Goals
 
 * Support a broad set of CLDR features in the browser "out of the box".
