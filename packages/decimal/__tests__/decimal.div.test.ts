@@ -24,6 +24,14 @@ test('divide default', () => {
     .toEqual(parse('1000.0000000000000000999'));
 });
 
+test('divide near radix', () => {
+  expect(div('10000000', '99999999999999')).toEqual(parse('1.00000000000001E-7'));
+});
+
+test('D3 coverage', () => {
+  expect(div('1000000000', '1000112808')).toEqual(parse('0.9998872047242094713779527959'));
+});
+
 test('divide half even', () => {
   const halfEven = (precision: number): MathContext => ({ precision, round: 'half-even' });
 
