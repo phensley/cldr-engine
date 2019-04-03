@@ -7,16 +7,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [UNRELEASED]
+
+## [0.11.3]
 ### Added
  - Fast, simple CLDR data downloader.
  - Decimal number format options new style `'scientific'`.
  - Decimal api supports scientific formatting to string and parts.
+ - Depend on [tslib](https://github.com/Microsoft/tslib)
 
 ### Fixed/Changed
  - Removed dependency on NPM cldr-data package.
  - Upgraded [cldr 35](http://cldr.unicode.org/index/downloads/cldr-35).
  - Parts formatting changed the minus sign type from `'minus'` to `'sign'`
  - Removed timezone `fromWall` methods until stable
+ - Decimal division simplification.
 
 ## [0.10.2]
 ### Added
@@ -61,7 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
-
+[0.11.3]: https://github.com/phensley/cldr-engine/compare/v0.10.2...v0.11.3
 [0.10.2]: https://github.com/phensley/cldr-engine/compare/v0.9.1...v0.10.2
 [0.9.1]: https://github.com/phensley/cldr-engine/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/phensley/cldr-engine/compare/v0.8.17...v0.9.0
