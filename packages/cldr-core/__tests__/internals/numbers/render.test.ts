@@ -11,7 +11,7 @@ import {
 const INTERNALS = new InternalsImpl();
 
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const numbersImpl = (lang: string) => new NumberInternalsImpl(INTERNALS, 5);
+const numbersImpl = (_lang: string) => new NumberInternalsImpl(INTERNALS, 5);
 
 test('number renderer', () => {
   const en = languageBundle('en');
