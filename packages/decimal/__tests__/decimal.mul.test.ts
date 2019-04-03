@@ -41,6 +41,12 @@ test('multiply context', () => {
   expect(circ).toEqual(parse('2764601535159018049847126177.285962538094'));
 });
 
+test('multiply empty context', () => {
+  const n = parse('123e10');
+  const r = n.multiply(2, {});
+  expect(r).toEqual(parse('246e10'));
+});
+
 test('multiply by zero', () => {
   expect(mul('0', '15.35', { scale: 4 })).toEqual(parse('0e-4'));
   expect(mul('0', '15.35', { precision: 4 })).toEqual(parse('0e-2'));

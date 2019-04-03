@@ -49,6 +49,8 @@ test('digits arrow', () => {
   const bundle = new DummyBundle(true, false);
   const a = new DigitsArrow(0, PluralIndex, PluralDigitValues);
 
+  expect(a.get(bundle, 'other', -1)).toEqual(['', 0]);
+
   expect(a.get(bundle, 'other', 1)).toEqual(['0', 1]);
   expect(a.get(bundle, 'other', 2)).toEqual(['2', 3]);
   expect(a.get(bundle, 'other', 3)).toEqual(['4', 5]);

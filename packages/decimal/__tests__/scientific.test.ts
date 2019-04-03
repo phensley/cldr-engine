@@ -1,9 +1,9 @@
 import { Decimal } from '../src';
 
-const sci = (d: string, m: number = 1) =>
+const sci = (d: string, m?: number) =>
   new Decimal(d).toScientificString(m);
 
-const scip = (d: string, m: number = 1) =>
+const scip = (d: string, m?: number) =>
   new Decimal(d).toScientificParts(m);
 
 test('scientific string', () => {
@@ -23,6 +23,10 @@ test('scientific string', () => {
 });
 
 test('scientific parts', () => {
+  expect(scip('0')).toEqual([
+    { type: 'digits', value: '0' }
+  ]);
+
   expect(scip('123', 2)).toEqual([
     { type: 'digits', value: '12' },
     { type: 'decimal', value: '.' },

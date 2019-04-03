@@ -50,9 +50,6 @@ const parseMathContext = (rounding: RoundingModeType, context?: MathContext): [b
  * Return the storage space needed to hold a given number of digits.
  */
 const size = (n: number): number => {
-  if (n <= 0) {
-    throw new Error(`Cannot represent a coefficient with ${n} digits`);
-  }
   const q = (n / Constants.RDIGITS) | 0;
   const r = n - q * Constants.RDIGITS;
   return r === 0 ? q : q + 1;
@@ -487,16 +484,13 @@ export class Decimal {
    * Format the number to a string, using fixed point.
    */
   toString(): string {
-    const f = new StringDecimalFormatter();
-    this.format(f, '.', '', 1, 1, 3, 3, false);
-    const r = f.render();
-    return this.sign === -1 ? '-' + r : r;
+    return this.formatString(this, 1);
   }
 
   /**
    * Format this number to scientific notation as a string.
    */
-  toScientificString(minIntegers: number): string {
+  toScientificString(minIntegers: number = 1): string {
     const [coeff, exp] = this.scientific(minIntegers);
     const r = this.formatString(coeff, minIntegers);
     return coeff.sign === 0 ? r :
@@ -507,7 +501,7 @@ export class Decimal {
    * Format this number to an array of parts.
    */
   toParts(): Part[] {
-    return this.formatParts(this);
+    return this.formatParts(this, 1);
   }
 
   /**
@@ -652,14 +646,14 @@ export class Decimal {
     }
   }
 
-  protected formatString(d: Decimal, minInt: number = 1): string {
+  protected formatString(d: Decimal, minInt: number): string {
     const f = new StringDecimalFormatter();
     d.format(f, '.', '', minInt, 1, 3, 3, false);
     const r = f.render();
     return d.sign === -1 ? '-' + r : r;
   }
 
-  protected formatParts(d: Decimal, minInt: number = 1): Part[] {
+  protected formatParts(d: Decimal, minInt: number): Part[] {
     const f = new PartsDecimalFormatter('.', '');
     d.format(f, '.', '', minInt, 1, 3, 3, false);
     const r = f.render();
