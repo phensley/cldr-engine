@@ -2,6 +2,9 @@
 const DEFAULT_CAPACITY = 100;
 
 export type Key = string | number;
+
+// Note next / prev will always be set internally, but are undefined
+// temporarily when inserting a new node into the list.
 type Node<V> = { key: Key, val: V, next?: Node<V>, prev?: Node<V> };
 
 /**
@@ -53,6 +56,8 @@ export class LRU<V> {
     // total node allocation stable.
     if (this.storage.size === this.capacity) {
       const old = this.root.prev;
+
+      /* istanbul ignore else */
       if (old !== undefined) {
         this.storage.delete(old.key);
         this.storage.set(key, old);
@@ -91,6 +96,7 @@ export class LRU<V> {
     at.next = e;
     e.prev = at;
     e.next = n;
+    /* istanbul ignore else */
     if (n) {
       n.prev = e;
     }
@@ -98,9 +104,11 @@ export class LRU<V> {
   }
 
   protected remove(n: Node<V>): Node<V> {
+    /* istanbul ignore else */
     if (n.prev) {
       n.prev.next = n.next;
     }
+    /* istanbul ignore else */
     if (n.next) {
       n.next.prev = n.prev;
     }

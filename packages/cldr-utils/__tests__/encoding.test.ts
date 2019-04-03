@@ -37,6 +37,13 @@ test('variable uint decode', () => {
   expect(res).toEqual(nums);
 });
 
+test('variable uint encode w/mapping', () => {
+  const nums: number[] = [1, 2, 4, 5, 7, 11, 17];
+  const tmp = vuintEncode(nums, n => n * 2);
+  const res = vuintDecode(tmp);
+  expect(res).toEqual([2, 4, 8, 10, 14, 22, 34]);
+});
+
 test('variable uint decode w/ mapping', () => {
   const nums: number[] = [1, 2, 4, 5, 7, 11, 17];
   const tmp = vuintEncode(nums);
