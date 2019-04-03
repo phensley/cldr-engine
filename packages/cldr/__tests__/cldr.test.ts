@@ -18,8 +18,8 @@ test('init framework', () => {
   expect(api.General.characterOrder()).toEqual('ltr');
   expect(api.General.lineOrder()).toEqual('ttb');
 
-  // TODO:
-  // expect(api.Calendars.getMonth('3')).toEqual('March');
+  expect(api.Calendars.months({ width: 'wide' })[3]).toEqual('March');
+
   let s: string;
 
   const ux = { date: 1109934428000, zoneId: 'America/New_York'};
@@ -54,6 +54,11 @@ test('init framework', () => {
   expect(api.General.bundle().language()).toEqual('ar');
   expect(api.General.bundle().languageRegion()).toEqual('ar-EG');
   expect(api.General.bundle().languageScript()).toEqual('ar-Arab');
+
+  // Load with a locale object
+  const l = resolveLocale('gu');
+  api = framework.get(l);
+  expect(api.General.bundle().language()).toEqual('gu');
 });
 
 test('parsing language tags', () => {
@@ -149,6 +154,9 @@ test('async loader', () => {
 
   expect(framework.getAsync('de')).resolves.toHaveProperty(path, 'de-Latn-DE');
   expect(framework.getAsync('zh-TW')).resolves.toHaveProperty(path, 'zh-Hant-TW');
+
+  const l = resolveLocale('gu');
+  expect(framework.getAsync(l)).resolves.toHaveProperty(path, 'gu-Gujr-IN');
 });
 
 test('async await loader', async () => {
