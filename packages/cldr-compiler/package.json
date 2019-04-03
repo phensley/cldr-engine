@@ -46,6 +46,7 @@
     "@types/yargs": "^11.0.0",
     "partial.lenses": "^13.7.4",
     "prettier": "^1.11.1",
+    "tslib": "^1.9.3",
     "yargs": "^11.0.0"
   },
   "devDependencies": {

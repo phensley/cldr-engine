@@ -57,5 +57,8 @@
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     }
+  },
+  "dependencies": {
+    "tslib": "^1.9.3"
   }
 }

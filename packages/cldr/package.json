@@ -43,7 +43,8 @@
   ],
   "dependencies": {
     "@phensley/cldr-core": "^0.11.3-alpha.0",
-    "@phensley/cldr-utils": "^0.11.3-alpha.0"
+    "@phensley/cldr-utils": "^0.11.3-alpha.0",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^6.3.0",
