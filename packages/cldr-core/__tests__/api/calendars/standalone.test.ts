@@ -2,8 +2,10 @@ import { languageBundle } from '../../_helpers';
 import {
   Bundle,
   CalendarsImpl,
+  EraWidthType,
+  FieldWidthType,
   InternalsImpl,
-  PrivateApiImpl
+  PrivateApiImpl,
 } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
@@ -21,6 +23,22 @@ test('era', () => {
   expect(e[0]).toEqual('Before Christ');
   expect(e[1]).toEqual('Anno Domini');
 
+  e = en.eras({ width: 'abbr' });
+  expect(e[0]).toEqual('BC');
+  expect(e[1]).toEqual('AD');
+
+  e = en.eras({ width: 'narrow' });
+  expect(e[0]).toEqual('B');
+  expect(e[1]).toEqual('A');
+
+  e = en.eras({ width: 'names' });
+  expect(e[0]).toEqual('Before Christ');
+  expect(e[1]).toEqual('Anno Domini');
+
+  e = en.eras({ width: 'invalid' as EraWidthType });
+  expect(e[0]).toEqual(undefined);
+  expect(e[1]).toEqual(undefined);
+
   const es = calendarsApi('es');
   e = es.eras();
   expect(e[0]).toEqual('antes de Cristo');
@@ -32,7 +50,27 @@ test('era', () => {
 test('month', () => {
   const en = calendarsApi('en');
   let m = en.months();
-  expect(m[2]).toEqual('February');
+
+  m = en.months({ width: 'narrow' });
+  expect(m[1]).toEqual('J');
+  expect(m[10]).toEqual('O');
+
+  // short same as narrow for months
+  m = en.months({ width: 'short' });
+  expect(m[1]).toEqual('J');
+  expect(m[10]).toEqual('O');
+
+  m = en.months({ width: 'abbreviated' });
+  expect(m[1]).toEqual('Jan');
+  expect(m[10]).toEqual('Oct');
+
+  m = en.months({ width: 'wide' });
+  expect(m[1]).toEqual('January');
+  expect(m[10]).toEqual('October');
+
+  m = en.months({ width: 'invalid' as FieldWidthType });
+  expect(m[1]).toEqual(undefined);
+  expect(m[10]).toEqual(undefined);
 
   m = en.months({ ca: 'persian' });
   expect(m[2]).toEqual('Ordibehesht');
@@ -46,6 +84,12 @@ test('weekdays', () => {
   // fetch twice to exercise caching
   w = en.weekdays({ width: 'short' });
   expect(w[6]).toEqual('Fr');
+
+  w = en.weekdays({ width: 'narrow' });
+  expect(w[6]).toEqual('F');
+
+  w = en.weekdays({ width: 'wide' });
+  expect(w[6]).toEqual('Friday');
 
   w = en.weekdays({ ca: 'persian' });
   expect(w[2]).toEqual('Monday');

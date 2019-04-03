@@ -16,7 +16,7 @@ const zoned = (date: number | Date, zoneId?: string): ZonedDateTime => ({ date, 
 
 const NEW_YORK = 'America/New_York';
 const LONDON = 'Europe/London';
-const PARIS = 'Europe/Paris';
+// const PARIS = 'Europe/Paris';
 
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 const calendarsApi = (tag: string) => {

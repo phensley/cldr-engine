@@ -98,7 +98,7 @@ export class CalendarsImpl implements Calendars {
    */
   months(opt?: CalendarFieldsOptions): any {
     opt = opt || {};
-    const w = opt.width || 'wide';
+    const w = opt.width === 'short' ? 'narrow' : opt.width || 'wide';
     const fields = this._getPatterns(opt.ca).months()[w];
     const tx = w !== 'narrow' ? 'month-standalone-except-narrow' : undefined;
     return this._transformFields(fields, tx, opt.context);
