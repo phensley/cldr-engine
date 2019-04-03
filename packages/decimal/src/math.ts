@@ -211,7 +211,7 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
     if (k > 0) {
       // D6. Add back. Quotient digit is too large by 1.
       q[j] -= 1;
-      _add(u, j, u, j, v, n + 1, n);
+      addhelper(u, j, v, n + 1, n);
     }
 
     // D7. Loop on j.
@@ -250,33 +250,28 @@ const divideword = (u: number[], v: number): [number[], number[]] => {
 };
 
 /**
- * divide() helper, to add u + v and store the result in w.
+ * divide() "add back" helper, adds v to u.
  */
-const _add = (w: number[], j0: number, u: number[], j1: number, v: number[], m: number, n: number): number => {
+const addhelper = (u: number[], j: number, v: number[], m: number, n: number): void => {
   let i = 0;
   let k = 0;
   let s = 0;
 
   while (i < n) {
-    s = u[i + j1] + (v[i] + k);
+    s = u[i + j] + (v[i] + k);
     k = (s < u[i] || s >= Constants.RADIX) ? 1 : 0;
-    w[i + j0] = k ? s - Constants.RADIX : s;
+    u[i + j] = k ? s - Constants.RADIX : s;
     i++;
   }
 
   while (k && i < m) {
-    s = u[i + j1] + k;
+    s = u[i + j] + k;
     k = s === Constants.RADIX ? 1 : 0;
-    w[i + j0] = k === 1 ? s - Constants.RADIX : s;
+    u[i + j] = k === 1 ? s - Constants.RADIX : s;
     i++;
   }
 
-  while (i < m) {
-    w[i + j0] = u[i + j1];
-    i++;
-  }
-
-  return k;
+  // Final carry is ignored
 };
 
 /**
