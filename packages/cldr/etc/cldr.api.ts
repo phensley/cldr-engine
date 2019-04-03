@@ -212,9 +212,9 @@ class Decimal {
   protected exp: number;
   format<R>(formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, zeroScale: boolean, digits?: string[]): void;
   // (undocumented)
-  protected formatParts(d: Decimal, minInt?: number): Part[];
+  protected formatParts(d: Decimal, minInt: number): Part[];
   // (undocumented)
-  protected formatString(d: Decimal, minInt?: number): string;
+  protected formatString(d: Decimal, minInt: number): string;
   // (undocumented)
   protected static fromRaw(sign: number, exp: number, data: number[]): Decimal;
   increment(): Decimal;
@@ -244,7 +244,7 @@ class Decimal {
   toInteger(): Decimal;
   toParts(): Part[];
   toScientificParts(minIntegers?: number): Part[];
-  toScientificString(minIntegers: number): string;
+  toScientificString(minIntegers?: number): string;
   toString(): string;
   trailingZeros(): number;
   protected trim(): Decimal;
