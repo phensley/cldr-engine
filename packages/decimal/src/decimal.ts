@@ -269,11 +269,19 @@ export class Decimal {
     }
 
     // Perform the division.
-    const [q] = divide(u.data, v.data, false);
+    const [q, rem] = divide(u.data, v.data, false);
     w.data = q;
     w.sign = u.sign === v.sign ? 1 : -1;
     w.exp = exp;
     w.trim();
+
+    const hasrem = rem.length && rem[rem.length - 1] !== 0;
+    if (hasrem) {
+      const lsd = w.data[0] % 10;
+      if (lsd === 0 || lsd === 5) {
+        w.data[0]++;
+      }
+    }
 
     if (usePrecision) {
       // Adjust precision to match context
