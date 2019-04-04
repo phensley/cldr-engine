@@ -155,7 +155,7 @@ class Downloader {
   }
 
   private loadstate(): State {
-    const path = filepath.join(DATAROOT, STATEFILE);
+    const path = filepath.join(DATAROOT, this.version, STATEFILE);
     if (fs.existsSync(path)) {
       const data = fs.readFileSync(path, { encoding: 'utf-8' }).toString();
       return JSON.parse(data);
@@ -164,8 +164,9 @@ class Downloader {
   }
 
   private savestate(): void {
-    makedirs(DATAROOT, STATEFILE);
-    const path = filepath.join(DATAROOT, STATEFILE);
+    const name = filepath.join(this.version, STATEFILE);
+    makedirs(DATAROOT, name);
+    const path = filepath.join(DATAROOT, name);
     const data = JSON.stringify(this.state, undefined, '  ');
     fs.writeFileSync(path, data, { encoding: 'utf-8' });
   }
