@@ -36,6 +36,12 @@ test('context transforms', () => {
   s = api.formatRelativeTimeField(2, 'day', { context: 'begin-sentence' });
   expect(s).toEqual('Pasado mañana');
 
+  s = api.formatDate(date, { skeleton: 'LLLL' });
+  expect(s).toEqual('noviembre');
+
+  s = api.formatDate(date, { skeleton: 'LLLL', context: 'standalone' });
+  expect(s).toEqual('Noviembre');
+
   api = calendarsApi('en');
 
   s = api.formatRelativeTimeField(12, 'day');
@@ -43,4 +49,7 @@ test('context transforms', () => {
 
   s = api.formatRelativeTimeField(12, 'day', { context: 'begin-sentence' });
   expect(s).toEqual('In 12 days');
+
+  s = api.formatDate(date, { skeleton: 'MMM' });
+  expect(s).toEqual('Nov');
 });
