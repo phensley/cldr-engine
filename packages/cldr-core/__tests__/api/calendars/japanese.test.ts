@@ -3,7 +3,9 @@ import { languageBundle } from '../../_helpers';
 import {
   Bundle,
   CalendarsImpl,
+  CalendarDate,
   InternalsImpl,
+  JapaneseDate,
   PrivateApiImpl,
   ZonedDateTime
 } from '../../../src';
@@ -43,4 +45,13 @@ test('japanese', () => {
 
   s = api.formatDate(may01, { datetime: 'full', ca: 'japanese' });
   expect(s).toEqual('Wednesday, May 1, 1 Qqqq at 8:00:00 AM Eastern Daylight Time');
+});
+
+test('japanese date', () => {
+  const api = calendarsApi('en-u-ca-japanese');
+  let s: string;
+  const date = api.toJapaneseDate({ date: MARCH_11_2018_070025_UTC });
+
+  s = api.formatDate(date);
+  expect(s).toEqual('Sunday, March 11, 30 Heisei');
 });

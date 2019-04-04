@@ -74,6 +74,9 @@ test('nan or infinity', () => {
   expect(s).toEqual('∞');
 
   expect(() => api.formatDecimal(Infinity, { errors: ['infinity'] })).toThrowError();
+
+  s = api.formatDecimal(12.345, { errors: ['nan', 'infinity'] });
+  expect(s).toEqual('12.345');
 });
 
 test('minimum grouping digits', () => {

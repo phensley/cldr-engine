@@ -39,7 +39,7 @@ const calendarsApi = (tag: string) => {
 
 test('formats', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-  const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  // const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
   let s: string;
 
   const api = calendarsApi('en');
