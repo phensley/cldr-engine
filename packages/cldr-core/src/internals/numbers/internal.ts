@@ -166,12 +166,15 @@ export class NumberInternalsImpl implements NumberInternals {
       const latnSciFormat = this.numbers.numberSystem.get('latn').scientificFormat;
       const format = sciFormat.get(bundle) || latnSciFormat.get(bundle);
       const pattern = this.getNumberPattern(format, n.isNegative());
+
       ctx.setPattern(pattern, true);
       n = ctx.adjust(n, true);
 
       // Split number into coeffcient and exponent
       const [coeff, exponent] = n.scientific(ctx.minInt || 1);
-      result = renderer.render(coeff, pattern, '', '', '', 1, false, exponent);
+      const adjcoeff = ctx.adjust(coeff, true);
+
+      result = renderer.render(adjcoeff, pattern, '', '', '', 1, false, exponent);
       break;
     }
 

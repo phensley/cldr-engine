@@ -292,7 +292,7 @@ test('decimal scientific', () => {
   expect(s).toEqual('-1.23E-4');
 
   // minimum integer digits
-  const opts: DecimalFormatOptions = { style: 'scientific', minimumSignificantDigits: 5 };
+  let opts: DecimalFormatOptions = { style: 'scientific', minimumSignificantDigits: 5 };
   s = api.formatDecimal('1.2345', opts);
   expect(s).toEqual('1.2345');
 
@@ -317,15 +317,13 @@ test('decimal scientific', () => {
   expect(s).toEqual('123450E-5');
 
   // specify fractions + scientific
-  // TODO: not yet supported
+  opts = { style: 'scientific', minimumFractionDigits: 4 };
+  s = api.formatDecimal('12345', opts);
+  expect(s).toEqual('1.2345E+4');
 
-  // opts = { style: 'scientific', minimumFractionDigits: 4 };
-  // s = api.formatDecimal('12345', opts);
-  // expect(s).toEqual('1.2345');
-
-  // opts = { style: 'scientific', minimumFractionDigits: 3 };
-  // s = api.formatDecimal('1.2345', opts);
-  // expect(s).toEqual('1.234');
+  opts = { style: 'scientific', minimumFractionDigits: 3 };
+  s = api.formatDecimal('12.3456', opts);
+  expect(s).toEqual('1.235E+1');
 });
 
 test('decimal rounding', () => {
