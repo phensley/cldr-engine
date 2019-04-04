@@ -91,27 +91,6 @@ export class NumberContext {
         n = n.setScale(scale, this.roundingMode);
       }
 
-      // in scientific mode, alter the exponent so that we have a single
-      // non-zero integer digit.
-      // console.log(`int digits ${n.integerDigits()} prec ${n.precision()} scale ${n.scale()}`);
-      // console.log(`prec`, n.precision(), n.scale());
-      // if (scientific) {
-        // if (n.integerDigits() > 1) {
-          // n = n.setScale(n.integerDigits() - 1);
-          // n = n.movePoint(1 - n.integerDigits());
-          // console.log(n.toString());
-          // n = n.shiftright(n.integerDigits() - 1);
-          // console.log(n.toString());
-          // n = n.shiftright()
-          // n = n.movePoint(1 - n.integerDigits());
-          // n = n.setScale(1 - precision);
-          // console.log('here', n.toString());
-          // n = n.shiftright(n.integerDigits() - 1);
-          // n = n.movePoint(-(n.integerDigits() - 1));
-          // console.log(n.exponent(), n.alignexp());
-      //   }
-      // }
-
     } else {
       // Precise control over number of integer and decimal digits to include, e.g. when
       // formatting exact currency values.

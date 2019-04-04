@@ -12,6 +12,19 @@
     "type": "git",
     "url": "https://github.com/phensley/cldr-engine"
   },
+  "keywords": [
+    "cldr",
+    "unicode",
+    "i18n",
+    "intl",
+    "internationalization",
+    "locale",
+    "math",
+    "arbitrary-precision",
+    "pluralization",
+    "decimal",
+    "globalize"
+  ],
   "publishConfig": {
     "access": "public"
   },
