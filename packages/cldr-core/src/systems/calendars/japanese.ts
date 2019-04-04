@@ -307,5 +307,5 @@ const ERAS: number[] = [
   1912,    7, 30,     // Taisho
   1926,   12, 25,     // Showa
   1989,    1,  8,     // Heisei
-  2019,    5,  1,     // <not yet named>
+  2019,    5,  1,     // Reiwa
 ];
