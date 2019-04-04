@@ -3,8 +3,6 @@ import { languageBundle } from '../../_helpers';
 import {
   Bundle,
   CalendarsImpl,
-  CalendarDate,
-  DateRawFormatOptions,
   InternalsImpl,
   PrivateApiImpl,
   ZonedDateTime
@@ -17,11 +15,8 @@ const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId })
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
 
-// March 1, 2018 6:45:17 PM UTC
-const MARCH_01_2018_184517_UTC = 1519929917000;
-
-// April, 1, 2018 11:23:34 AM UTC
-const APRIL_01_2018_112334_UTC = 1522581814000;
+// May 01, 2019 12:00:00 PM UTC
+const MAY_01_2019_120000_UTC = 1556712000000;
 
 const HOUR = 3600000;
 const DAY = 86400000;
@@ -43,4 +38,9 @@ test('japanese', () => {
 
   s = api.formatDate(mar11, { datetime: 'full', ca: 'japanese' });
   expect(s).toEqual('Saturday, March 10, 30 Heisei at 11:00:25 PM Pacific Standard Time');
+
+  const may01 = unix(MAY_01_2019_120000_UTC, NEW_YORK);
+
+  s = api.formatDate(may01, { datetime: 'full', ca: 'japanese' });
+  expect(s).toEqual('Wednesday, May 1, 1 Qqqq at 8:00:00 AM Eastern Daylight Time');
 });
