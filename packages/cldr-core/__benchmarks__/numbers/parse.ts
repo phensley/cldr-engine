@@ -8,6 +8,6 @@ const CASES = readLines(join(__dirname, './numbers.txt'));
 
 CASES.forEach(n => {
   numberParseSuite.add(`parse ${n}`, () => {
-    const d = new Decimal(n);
+    new Decimal(n);
   });
 });

@@ -1,10 +1,8 @@
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
 import { JapaneseDate } from '../../../src/systems/calendars/japanese';
 
-const make = (e: number, z: string) => JapaneseDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
-
-const NEW_YORK = 'America/New_York';
-const PARIS = 'Europe/Paris';
+const make = (e: number, z: string) =>
+  JapaneseDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
 test('japanese calendar', () => {
   let d: JapaneseDate;

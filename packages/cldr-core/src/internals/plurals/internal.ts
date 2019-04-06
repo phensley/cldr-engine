@@ -1,8 +1,9 @@
 import { PluralType } from '@phensley/cldr-schema';
+import { NumberOperands } from '@phensley/decimal';
+
 import { PluralInternals } from '../../internals/internals';
 import { cardinalRules, expressions, ordinalRules } from './autogen.rules';
 import { PluralRules } from './types';
-import { NumberOperands } from '../../types/numbers';
 
 const pluralRules = new PluralRules(expressions, cardinalRules, ordinalRules);
 

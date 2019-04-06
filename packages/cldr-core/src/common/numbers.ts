@@ -1,5 +1,5 @@
 import { NumberSystemCategory, NumberSystemName } from '@phensley/cldr-schema';
-import { RoundingModeType } from '../types';
+import { RoundingModeType } from '@phensley/decimal';
 
 export type NumberSystemType = NumberSystemCategory | NumberSystemName;
 

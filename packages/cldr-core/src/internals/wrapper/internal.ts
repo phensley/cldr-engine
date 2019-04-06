@@ -1,8 +1,8 @@
+import { Part } from '@phensley/decimal';
 import { Cache } from '@phensley/cldr-utils';
 
 import { WrapperInternals } from '../../internals/internals';
-import { parseWrapperPattern, WrapperNode } from '../../parsing/patterns/wrapper';
-import { Part } from '../../types';
+import { parseWrapperPattern, WrapperNode } from '../../parsing/wrapper';
 
 export class WrapperInternalsImpl implements WrapperInternals {
 

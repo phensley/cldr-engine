@@ -3,9 +3,7 @@ import { languageBundle } from '../../_helpers';
 import {
   Bundle,
   CalendarsImpl,
-  CalendarDate,
   InternalsImpl,
-  JapaneseDate,
   PrivateApiImpl,
   ZonedDateTime
 } from '../../../src';
@@ -20,11 +18,8 @@ const MARCH_11_2018_070025_UTC = 1520751625000;
 // May 01, 2019 12:00:00 PM UTC
 const MAY_01_2019_120000_UTC = 1556712000000;
 
-const HOUR = 3600000;
-const DAY = 86400000;
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
-const LONDON = 'Europe/London';
 
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 const calendarsApi = (tag: string) => {

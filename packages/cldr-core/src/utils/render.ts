@@ -1,5 +1,5 @@
-import { Part } from '../types';
-import { WrapperNode } from '../parsing/patterns/wrapper';
+import { Part } from '@phensley/decimal';
+import { WrapperNode } from '../parsing/wrapper';
 
 export interface AbstractValue<R> {
   length(): number;

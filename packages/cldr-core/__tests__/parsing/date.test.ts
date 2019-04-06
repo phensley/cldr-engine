@@ -1,6 +1,4 @@
-import { intervalPatternBoundary, parseDatePattern, DateTimeField } from '../../../src/parsing/patterns/date';
-
-const datefield = (field: string, width: number) => ({ field, width });
+import { intervalPatternBoundary, parseDatePattern } from '../../src/parsing/date';
 
 test('parse', () => {
   expect(parseDatePattern("'week' W 'of' MMMM")).toEqual([

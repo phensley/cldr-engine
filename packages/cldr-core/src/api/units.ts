@@ -1,12 +1,13 @@
 import { UnitType, UnitValues } from '@phensley/cldr-schema';
+import { Part } from '@phensley/decimal';
 
-import { Units } from '../api';
-import { GeneralInternals, Internals, NumberInternals, UnitInternals } from '../../internals';
-import { ListPatternType, Quantity, UnitFormatOptions, UnitLength } from '../../common';
-import { Part } from '../../types';
-import { Bundle } from '../../resource';
-import { PrivateApiImpl } from '../private';
-import { PartsValue } from '../../utils/render';
+import { GeneralInternals, Internals, NumberInternals, UnitInternals } from '../internals';
+import { ListPatternType, Quantity, UnitFormatOptions, UnitLength } from '../common';
+import { Bundle } from '../resource';
+import { PartsValue } from '../utils/render';
+
+import { Units } from './api';
+import { PrivateApiImpl } from './private';
 
 const DEFAULT_OPTIONS: UnitFormatOptions = { length: 'long', style: 'decimal' };
 

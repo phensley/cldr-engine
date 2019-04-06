@@ -3,15 +3,11 @@ import { languageBundle } from '../../_helpers';
 import {
   Bundle,
   CalendarsImpl,
-  CalendarDate,
-  DateRawFormatOptions,
-  GregorianDate,
   InternalsImpl,
   NumberSystemType,
   PrivateApiImpl,
   ZonedDateTime
 } from '../../../src';
-import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
 const INTERNALS = new InternalsImpl();
 
@@ -25,7 +21,7 @@ const MARCH_11_2018_070025_UTC = 1520751625000;
 
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
-const LONDON = 'Europe/London';
+// const LONDON = 'Europe/London';
 
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 const calendarsApi = (tag: string) => {

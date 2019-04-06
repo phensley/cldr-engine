@@ -1,4 +1,4 @@
-import { Decimal } from '../../../src/types/numbers';
+import { Decimal } from '@phensley/decimal';
 
 const operands = (n: string) => new Decimal(n).operands();
 

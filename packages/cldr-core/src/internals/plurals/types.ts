@@ -1,5 +1,5 @@
 import { PluralType } from '@phensley/cldr-schema';
-import { NumberOperands } from '../../types/numbers';
+import { NumberOperands } from '@phensley/decimal';
 
 // TODO: needs a bit of cleanup.
 

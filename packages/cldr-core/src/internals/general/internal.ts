@@ -11,12 +11,12 @@ import {
   ScriptIdType,
   Vector1Arrow,
 } from '@phensley/cldr-schema';
+import { Part } from '@phensley/decimal';
 
 import { GeneralInternals, Internals } from '../../internals/internals';
 import { Bundle } from '../../resource';
 import { ListPatternType } from '../../common';
 import { ContextTransformInfo } from '../../common/private';
-import { Part } from '../../types';
 import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
 
 export class GeneralInternalsImpl implements GeneralInternals {

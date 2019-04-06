@@ -4,7 +4,6 @@ import { PersianDate } from '../../../src/systems/calendars/persian';
 const make = (e: number, z: string) => PersianDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
 const NEW_YORK = 'America/New_York';
-const PARIS = 'Europe/Paris';
 
 test('persian calendar', () => {
   let d: PersianDate;

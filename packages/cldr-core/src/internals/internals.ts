@@ -10,6 +10,7 @@ import {
   UnitInfo,
   UnitType
 } from '@phensley/cldr-schema';
+import { Decimal, DecimalArg, NumberOperands, Part } from '@phensley/decimal';
 
 import {
   CurrencyFormatOptions,
@@ -23,13 +24,12 @@ import {
 
 import { CalendarDate, CalendarType } from '../systems/calendars';
 import { ContextTransformInfo, NumberParams } from '../common/private';
-import { DateTimeNode } from '../parsing/patterns/date';
-import { NumberPattern } from '../parsing/patterns/number';
-import { WrapperNode } from '../parsing/patterns/wrapper';
+import { DateTimeNode } from '../parsing/date';
+import { NumberPattern } from '../parsing/number';
+import { WrapperNode } from '../parsing/wrapper';
 import { Bundle } from '../resource';
 import { CalendarContext, CalendarFormatter } from './calendars/formatter';
 import { AbstractValue } from '../utils/render';
-import { Decimal, DecimalArg, NumberOperands, Part } from '../types';
 
 export interface CalendarInternals {
   getCalendarFormatter(type: CalendarType): CalendarFormatter<CalendarDate>;

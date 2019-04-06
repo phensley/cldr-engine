@@ -1,4 +1,3 @@
-import { Suite } from 'benchmark';
 import { join } from 'path';
 import { makeSuite, readLines } from '../util';
 import { Decimal } from '../../src';
@@ -17,6 +16,6 @@ CASES.forEach(n => {
     for (const c of raw) {
       r.push(c);
     }
-    const s = r.reverse().join('');
+    r.reverse().join('');
   });
 });

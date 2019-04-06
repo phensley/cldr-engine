@@ -1,6 +1,6 @@
+import { Decimal, RoundingModeType } from  '@phensley/decimal';
 import { NumberFormatOptions } from '../../common';
-import { Decimal, RoundingModeType } from  '../../types/numbers';
-import { NumberPattern } from '../../parsing/patterns/number';
+import { NumberPattern } from '../../parsing/number';
 
 /**
  * Provides a context to set number formatting parameters, combining user-supplied

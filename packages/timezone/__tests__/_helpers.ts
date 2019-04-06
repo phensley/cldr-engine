@@ -1,5 +1,3 @@
-import { TZ } from '../src';
-
 /**
  * Test whether we can go from UTC -> WALL -> UTC successfully.
  */

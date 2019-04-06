@@ -48,9 +48,9 @@ Object.keys(BUNDLES).forEach(k => {
       const privateApi = new PrivateApiImpl(BUNDLES[k], INTERNALS);
       const engine = new CalendarsImpl(BUNDLES[k], INTERNALS, privateApi);
       const date = { date: e, zoneId: z };
-      let s = engine.formatDate(date, opts);
+      engine.formatDate(date, opts);
       formatDateSuite.add(`format ${k} ${e} ${z}`, () => {
-        s = engine.formatDate(date, opts);
+        engine.formatDate(date, opts);
       });
     });
   });

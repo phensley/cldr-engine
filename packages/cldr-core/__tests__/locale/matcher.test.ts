@@ -1,8 +1,5 @@
-import { LanguageResolver } from '../../src/locale/resolver';
 import { LocaleMatch, LocaleMatcher } from '../../src/locale/matcher';
 import { loadMatchCases } from './util';
-
-const resolve = LanguageResolver.resolve;
 
 test('basics', () => {
   const matcher = new LocaleMatcher('en, en_GB, zh, pt_AR, es-419');
@@ -12,7 +9,6 @@ test('basics', () => {
 });
 
 test('constructor args', () => {
-  const expected = { locale: { id: 'en_GB', tag: resolve('en_GB') }, distance: 3 };
   let matcher: LocaleMatcher;
   let m: LocaleMatch;
 
@@ -37,7 +33,7 @@ test('extensions', () => {
   expect(tag.extensions()).toEqual({ u: ['ca-persian'] });
 });
 
-loadMatchCases().forEach((c, i) => {
+loadMatchCases().forEach(c => {
   test(`locale-match-cases.txt - line ${c.lineno}`, () => {
     const m = new LocaleMatcher(c.supported);
     const result = m.match(c.desired);

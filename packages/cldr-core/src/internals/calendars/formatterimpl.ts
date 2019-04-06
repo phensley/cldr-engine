@@ -8,7 +8,7 @@ import { WrapperInternals } from '../../internals/internals';
 import { Bundle } from '../../resource/bundle';
 import { Internals } from '../internals';
 import { CalendarDate } from '../../systems/calendars';
-import { DateTimeNode } from '../../parsing/patterns/date';
+import { DateTimeNode } from '../../parsing/date';
 import { AbstractValue } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
 

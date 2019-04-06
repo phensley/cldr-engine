@@ -10,6 +10,7 @@ import {
   TimeZoneType,
   UnitType
 } from '@phensley/cldr-schema';
+import { DecimalArg, Part } from '@phensley/decimal';
 
 import {
   CalendarFieldsOptions,
@@ -44,8 +45,6 @@ import {
   JapaneseDate,
   PersianDate,
 } from '../systems/calendars';
-
-import { DecimalArg, Part } from '../types';
 
 /**
  * @alpha

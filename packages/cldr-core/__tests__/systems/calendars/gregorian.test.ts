@@ -1,5 +1,5 @@
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
-import { CalendarDate, CalendarType, GregorianDate } from '../../../src/systems/calendars';
+import { CalendarDate, GregorianDate } from '../../../src/systems/calendars';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
 const make = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);

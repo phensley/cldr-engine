@@ -1,4 +1,5 @@
 import { languageBundle } from '../../_helpers';
+import { DateTimePatternFieldType } from '@phensley/cldr-schema';
 
 import {
   Bundle,
@@ -8,7 +9,6 @@ import {
   PrivateApiImpl,
   ZonedDateTime
 } from '../../../src';
-import { DateTimePatternFieldType } from '../../../../cldr-schema/lib';
 
 const INTERNALS = new InternalsImpl();
 

@@ -1,4 +1,4 @@
-import { DecimalArg } from '../../types/numbers';
+import { DecimalArg } from '@phensley/decimal';
 export * from './decimal';
 
 // TODO: replace with instances

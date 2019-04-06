@@ -3,8 +3,8 @@ import {
   RelativeTimeFields,
   RelativeTimeFieldType,
 } from '@phensley/cldr-schema';
+import { coerceDecimal, DecimalArg, DecimalConstants } from '@phensley/decimal';
 
-import { coerceDecimal, DecimalArg, DecimalConstants } from '../../types';
 import { DateFieldInternals, Internals } from '../internals';
 import { RelativeTimeFormatOptions } from '../../common';
 import { Bundle } from '../../resource';

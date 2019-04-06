@@ -23,6 +23,7 @@
     "build": "yarn build:cj && yarn build:es && yarn download",
     "build:cj": "tsc -p ./tsconfig.json",
     "build:es": "tsc -p ./tsconfig.json --module esnext --outDir lib-es",
+    "build:lint": "tsc -p ./tsconfig.lint.json",
     "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./lib-es",
     "clean:full": "yarn clean && rimraf ./node_modules",

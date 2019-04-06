@@ -1,4 +1,4 @@
-import { Decimal } from '../../../src/types/numbers';
+import { Decimal } from '@phensley/decimal';
 import { InternalsImpl } from '../../../src';
 
 const INTERNALS = new InternalsImpl();

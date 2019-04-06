@@ -1,4 +1,4 @@
-import { parseWrapperPattern } from '../../../src/parsing/patterns/wrapper';
+import { parseWrapperPattern } from '../../src/parsing/wrapper';
 
 const parse = parseWrapperPattern;
 

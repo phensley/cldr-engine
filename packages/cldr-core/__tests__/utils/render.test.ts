@@ -1,5 +1,5 @@
 import { PartsValue, StringValue } from '../../src/utils/render';
-import { parseWrapperPattern } from '../../src/parsing/patterns/wrapper';
+import { parseWrapperPattern } from '../../src/parsing/wrapper';
 
 test('string', () => {
   const v = new StringValue();

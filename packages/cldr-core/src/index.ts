@@ -8,6 +8,5 @@ export * from './internals';
 export * from './locale';
 export * from './resource';
 export * from './systems';
-export * from './types';
 
 export { leftPad } from './utils/string';

@@ -1,6 +1,7 @@
 import { UnitType } from '@phensley/cldr-schema';
+import { Decimal } from '@phensley/decimal';
+
 import { DecimalFormatOptions } from './numbers';
-import { Decimal } from '../types/numbers';
 
 /**
  * @alpha

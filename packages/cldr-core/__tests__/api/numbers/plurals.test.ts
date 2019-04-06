@@ -1,6 +1,5 @@
 import { languageBundle } from '../../_helpers';
-import { buildSchema } from '../../../src/schema';
-import { Bundle, InternalsImpl, NumbersImpl, PrivateApiImpl } from '../../../src';
+import { InternalsImpl, NumbersImpl, PrivateApiImpl } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 

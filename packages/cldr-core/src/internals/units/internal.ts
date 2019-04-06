@@ -4,11 +4,11 @@ import {
   UnitInfo,
   UnitType
 } from '@phensley/cldr-schema';
+import { coerceDecimal, DecimalConstants } from '@phensley/decimal';
 
 import { Internals, NumberRenderer, UnitInternals } from '../internals';
 import { Quantity, UnitFormatOptions } from '../../common';
 import { NumberParams } from '../../common/private';
-import { coerceDecimal, DecimalConstants } from '../../types';
 import { Bundle } from '../../resource';
 
 export class UnitsInternalImpl implements UnitInternals {

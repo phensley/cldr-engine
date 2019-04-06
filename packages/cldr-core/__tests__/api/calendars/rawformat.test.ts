@@ -15,12 +15,7 @@ const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId })
 // Jan 01, 2018 19:00:25 PM UTC
 const JAN_01_2018_070025_UTC = 1514833225000;
 
-// March 11, 2018 7:00:25 AM UTC
-const MARCH_11_2018_070025_UTC = 1520751625000;
-
 const NEW_YORK = 'America/New_York';
-const LOS_ANGELES = 'America/Los_Angeles';
-const LONDON = 'Europe/London';
 
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 const calendarsApi = (tag: string) => {
@@ -30,13 +25,12 @@ const calendarsApi = (tag: string) => {
 
 test('raw formats', () => {
   const jan01 = unix(JAN_01_2018_070025_UTC, NEW_YORK);
-  const mar11 = unix(MARCH_11_2018_070025_UTC, NEW_YORK);
 
   const api = calendarsApi('en');
 
   const widths = [1, 2, 3, 4, 5, 6];
   const format = (date: ZonedDateTime, ch: string): string[] =>
-    widths.map((w, i) => api.formatDateRaw(date, { pattern: ch.repeat(widths[i]) }));
+    widths.map((_, i) => api.formatDateRaw(date, { pattern: ch.repeat(widths[i]) }));
 
   // EEEE
 

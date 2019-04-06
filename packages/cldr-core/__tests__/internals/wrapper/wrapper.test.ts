@@ -1,4 +1,5 @@
-import { Part, WrapperInternalsImpl } from '../../../src';
+import { Part } from '@phensley/decimal';
+import { WrapperInternalsImpl } from '../../../src';
 
 const wrapper = new WrapperInternalsImpl();
 

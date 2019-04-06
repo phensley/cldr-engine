@@ -264,7 +264,7 @@ test('week of year', () => {
   let d: ZonedDateTime;
 
   const opts = { pattern: 'Y w' };
-  const iso = { pattern: 'Y w', ca: 'iso8601' };
+  // const iso = { pattern: 'Y w', ca: 'iso8601' };
 
   // Jan 1, 2003
   d = make(1041414129000, NEW_YORK);

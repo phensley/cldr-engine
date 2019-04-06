@@ -1,5 +1,5 @@
 import { Schema } from '@phensley/cldr-schema';
-import { buildSchema } from '../schema';
+import { buildSchema } from './schema';
 import {
   CalendarInternals,
   DateFieldInternals,

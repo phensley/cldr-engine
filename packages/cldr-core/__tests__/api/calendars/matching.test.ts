@@ -9,10 +9,10 @@ const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId })
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
 
-const DAY = 86400000;
-const NEW_YORK = 'America/New_York';
+// const DAY = 86400000;
+// const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
-const LONDON = 'Europe/London';
+// const LONDON = 'Europe/London';
 
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 const calendarsApi = (tag: string) => {

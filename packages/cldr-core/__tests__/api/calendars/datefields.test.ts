@@ -1,13 +1,8 @@
 import { DateFieldWidthType, RelativeTimeFieldType } from '@phensley/cldr-schema';
+import { Decimal } from '@phensley/decimal';
+
 import { languageBundle } from '../../_helpers';
 import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl } from '../../../src';
-import { Decimal } from '../../../src/types';
-
-// March 11, 2018 7:00:25 AM UTC
-const MARCH_11_2018_070025_UTC = 1520751625000;
-
-const DAY = 86400000;
-const LOS_ANGELES = 'America/Los_Angeles';
 
 const INTERNALS = new InternalsImpl();
 

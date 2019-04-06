@@ -15,8 +15,7 @@ import {
   Vector2,
   Vector2Arrow,
 } from '@phensley/cldr-schema';
-
-import { Decimal } from '../types';
+import { Decimal } from '@phensley/decimal';
 import { leftPad } from '../utils/string';
 
 /**

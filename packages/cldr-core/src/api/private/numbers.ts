@@ -5,12 +5,12 @@ import {
 } from '@phensley/cldr-schema';
 import { Cache } from '@phensley/cldr-utils';
 
-import { Internals } from '../../../internals';
-import { NumberSystemType } from '../../../common';
-import { NumberingSystem, NumberParams } from '../../../common/private';
-import { DecimalNumberingSystem } from '../../../systems';
-import { decimalNumberingDigits } from '../../../systems/numbering/autogen.decimal';
-import { Bundle } from '../../../resource';
+import { Internals } from '../../internals';
+import { NumberSystemType } from '../../common';
+import { NumberingSystem, NumberParams } from '../../common/private';
+import { DecimalNumberingSystem } from '../../systems';
+import { decimalNumberingDigits } from '../../systems/numbering/autogen.decimal';
+import { Bundle } from '../../resource';
 
 export class NumberParamsCache {
 

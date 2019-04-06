@@ -7,12 +7,9 @@ import {
   GregorianDate,
   InternalsImpl,
   PrivateApiImpl,
-  ZonedDateTime,
 } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
-
-const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 const NEW_YORK = 'America/New_York';
 const ROME = 'Europe/Rome';

@@ -1,4 +1,4 @@
-import { DateTimeNode } from '../../parsing/patterns/date';
+import { DateTimeNode } from '../../parsing/date';
 import { NumberParams } from '../../common/private';
 
 export interface DateFormatRequest {

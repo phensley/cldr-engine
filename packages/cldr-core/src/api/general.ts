@@ -6,13 +6,14 @@ import {
   RegionIdType,
   ScriptIdType
 } from '@phensley/cldr-schema';
+import { Part } from '@phensley/decimal';
 
-import { General } from '../api';
-import { parseLanguageTag, LanguageResolver, LanguageTag, Locale } from '../../locale';
-import { ListPatternType, MeasurementCategory, MeasurementSystem } from '../../common';
-import { Bundle } from '../../resource';
-import { Part } from '../../types';
-import { GeneralInternals, Internals } from '../../internals';
+import { parseLanguageTag, LanguageResolver, LanguageTag, Locale } from '../locale';
+import { ListPatternType, MeasurementCategory, MeasurementSystem } from '../common';
+import { Bundle } from '../resource';
+import { GeneralInternals, Internals } from '../internals';
+
+import { General } from './api';
 
 export class GeneralImpl implements General {
 

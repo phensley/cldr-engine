@@ -1,6 +1,6 @@
 import { ContextType } from '@phensley/cldr-schema';
 import { Bundle } from '../../resource';
-import { DateTimeNode } from '../../parsing/patterns/date';
+import { DateTimeNode } from '../../parsing/date';
 import { CalendarDate } from '../../systems/calendars';
 import { ContextTransformInfo, NumberingSystem } from '../../common/private';
 import { AbstractValue } from '../../utils/render';

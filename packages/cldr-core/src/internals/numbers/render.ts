@@ -1,7 +1,7 @@
+import { Decimal, DecimalFormatter, Part, PartsDecimalFormatter, StringDecimalFormatter } from '@phensley/decimal';
+
 import { CurrencySpacingPatterns, NumberParams } from '../../common/private';
-import { NumberField, NumberPattern } from '../../parsing/patterns/number';
-import { Decimal, DecimalFormatter, PartsDecimalFormatter, StringDecimalFormatter } from '../../types/numbers';
-import { Part } from '../../types';
+import { NumberField, NumberPattern } from '../../parsing/number';
 import { NumberRenderer, WrapperInternals } from '../internals';
 import { fastFormatDecimal } from '../../systems/numbering';
 import { AbstractValue, PartsValue, StringValue } from '../../utils/render';

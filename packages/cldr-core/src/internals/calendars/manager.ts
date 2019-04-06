@@ -3,7 +3,7 @@ import { Cache } from '@phensley/cldr-utils';
 import { Internals } from '../internals';
 import { Bundle } from '../../resource';
 import { DateFormatOptions, DateIntervalFormatOptions } from '../../common';
-import { DateTimeNode } from '../../parsing/patterns/date';
+import { DateTimeNode } from '../../parsing/date';
 import { CalendarDate } from '../../systems/calendars';
 import { NumberParams } from '../../common/private';
 import { CalendarPatterns, GregorianPatterns } from './patterns';

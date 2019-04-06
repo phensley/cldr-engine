@@ -1,7 +1,7 @@
 import {
   DateTimeNode,
   DATE_PATTERN_CHARS
-} from '../../parsing/patterns/date';
+} from '../../parsing/date';
 
 import { getFieldType, skeletonFields, C, Field, FieldType, FIELD_INDEX, FIELD_TYPES } from './fields';
 

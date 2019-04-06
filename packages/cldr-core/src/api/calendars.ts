@@ -6,9 +6,9 @@ import {
   TimeZoneType,
   TimeZoneValues,
 } from '@phensley/cldr-schema';
+import { DecimalArg, Part } from '@phensley/decimal';
 
-import { Calendars } from '../api';
-import { Bundle } from '../../resource';
+import { Bundle } from '../resource';
 
 import {
   CalendarFieldsOptions,
@@ -20,9 +20,9 @@ import {
   RelativeTimeFormatOptions,
   TimeZoneInfo,
   ZonedDateTime,
-} from '../../common';
+} from '../common';
 
-import { Internals } from '../../internals';
+import { Internals } from '../internals';
 
 import {
   BuddhistDate,
@@ -33,15 +33,14 @@ import {
   ISO8601Date,
   JapaneseDate,
   PersianDate,
-} from '../../systems/calendars';
+} from '../systems/calendars';
 
-import { DecimalArg } from '../../types/numbers';
-import { Part } from '../../types';
+import { CalendarManager } from '../internals/calendars/manager';
+import { CalendarPatterns } from '../internals/calendars/patterns';
+import { AbstractValue, PartsValue, StringValue } from '../utils/render';
 
-import { CalendarManager } from '../../internals/calendars/manager';
-import { CalendarPatterns } from '../../internals/calendars/patterns';
-import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
-import { PrivateApiImpl } from '../private';
+import { Calendars } from './api';
+import { PrivateApiImpl } from './private';
 
 export class CalendarsImpl implements Calendars {
 

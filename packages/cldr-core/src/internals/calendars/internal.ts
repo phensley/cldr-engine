@@ -10,7 +10,7 @@ import { AbstractValue } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
 import { CalendarFormatterImpl } from './formatterimpl';
 import { Internals } from '../internals';
-import { intervalPatternBoundary, parseDatePattern, DateTimeNode } from '../../parsing/patterns/date';
+import { intervalPatternBoundary, parseDatePattern, DateTimeNode } from '../../parsing/date';
 import { DayPeriodRules } from './rules';
 
 /**

@@ -2,7 +2,7 @@ import { Bundle } from '../../resource';
 import { Internals } from '../../internals';
 import { NumberSystemType } from '../../common';
 import { ContextTransformInfo, NumberParams } from '../../common/private';
-import { NumberParamsCache } from './numbers/params';
+import { NumberParamsCache } from './numbers';
 
 /**
  * Private API only visible internally.

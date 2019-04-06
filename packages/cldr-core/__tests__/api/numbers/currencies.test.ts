@@ -1,6 +1,7 @@
 import { CurrencyType } from '@phensley/cldr-schema';
+import { Part } from '@phensley/decimal';
+
 import { languageBundle } from '../../_helpers';
-import { Part } from '../../../src/types';
 import {
   CurrencyFormatOptions,
   CurrencyFormatStyleType,

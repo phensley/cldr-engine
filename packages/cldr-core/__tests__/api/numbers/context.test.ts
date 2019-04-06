@@ -1,11 +1,10 @@
 import {
   CurrencyFormatOptions,
   DecimalFormatOptions,
-  NumberFormatOptions
 } from '../../../src';
 
 import { NumberContext } from '../../../src/internals/numbers/context';
-import { parseNumberPattern, NumberPattern } from '../../../src/parsing/patterns/number';
+import { parseNumberPattern, NumberPattern } from '../../../src/parsing/number';
 
 test('decimal default', () => {
   let opts: DecimalFormatOptions;

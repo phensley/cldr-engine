@@ -1,6 +1,5 @@
 import { languageBundle } from '../../_helpers';
 import {
-  Decimal,
   DecimalFormatOptions,
   DecimalFormatStyleType,
   InternalsImpl,
@@ -139,8 +138,6 @@ test('decimals long', () => {
 test('significant digits', () => {
   const api = numbersApi('en');
   let s: string;
-
-  const d = new Decimal('100599.99');
 
   s = api.formatDecimal('100599.99', { maximumSignificantDigits: 3, round: 'half-even' });
   expect(s).toEqual('101,000');

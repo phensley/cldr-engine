@@ -2,18 +2,19 @@ import {
   CurrencyType,
   PluralType,
 } from '@phensley/cldr-schema';
+import { coerceDecimal, DecimalArg, Part } from '@phensley/decimal';
 
 import {
   CurrencyFormatOptions,
   CurrencyFractions,
   CurrencySymbolWidthType,
   DecimalFormatOptions
-} from '../../common';
+} from '../common';
 
-import { Bundle } from '../../resource';
-import { NumberParams } from '../../common/private';
-import { Numbers } from '../api';
-import { PrivateApiImpl } from '../private';
+import { Bundle } from '../resource';
+import { NumberParams } from '../common/private';
+import { Numbers } from './api';
+import { PrivateApiImpl } from './private';
 import {
   getCurrencyForRegion,
   getCurrencyFractions,
@@ -21,8 +22,7 @@ import {
   NumberInternals,
   NumberRenderer,
   PluralInternals,
-} from '../../internals';
-import { coerceDecimal, DecimalArg, Part } from '../../types';
+} from '../internals';
 
 /**
  * Number and currency formatting.

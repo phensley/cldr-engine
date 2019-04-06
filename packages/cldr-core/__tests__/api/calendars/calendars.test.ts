@@ -3,7 +3,6 @@ import { languageBundle } from '../../_helpers';
 import {
   Bundle,
   CalendarsImpl,
-  CalendarDate,
   DateRawFormatOptions,
   GregorianDate,
   InternalsImpl,
@@ -23,7 +22,7 @@ const MARCH_11_2018_070025_UTC = 1520751625000;
 const MARCH_01_2018_184517_UTC = 1519929917000;
 
 // April, 1, 2018 11:23:34 AM UTC
-const APRIL_01_2018_112334_UTC = 1522581814000;
+// const APRIL_01_2018_112334_UTC = 1522581814000;
 
 const HOUR = 3600000;
 const DAY = 86400000;
@@ -107,7 +106,7 @@ test('year padding', () => {
 
 test('skeletons', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
-  const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  // const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
   const jun09 = unix(MARCH_11_2018_070025_UTC + (DAY * 90), LOS_ANGELES);
   const sep07 = unix(MARCH_11_2018_070025_UTC + (DAY * 180), LOS_ANGELES);
   const api = calendarsApi('en');
@@ -251,7 +250,7 @@ test('skeleton metacharacters', () => {
 
 test('parts', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-  const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  // const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   const api = calendarsApi('en');
   let p = api.formatDateToParts(mar11, { date: 'full' });
@@ -716,7 +715,7 @@ test('day periods', () => {
 test('flexible day periods', () => {
   const base = MARCH_11_2018_070025_UTC;
   const losangeles = (n: number) => unix(base + n, LOS_ANGELES);
-  const london = (n: number) => unix(base + n, LONDON);
+  // const london = (n: number) => unix(base + n, LONDON);
 
   const hour = 3600 * 1000;
 

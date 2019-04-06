@@ -1,11 +1,6 @@
 import { languageBundle} from '../../_helpers';
-import { buildSchema } from '../../../src/schema';
 
 import {
-  Bundle,
-  CurrencyFormatOptions,
-  DecimalFormatOptions,
-  DecimalFormatStyleType,
   InternalsImpl,
   NumbersImpl,
   NumberSystemType,

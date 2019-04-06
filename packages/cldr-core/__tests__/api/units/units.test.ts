@@ -1,7 +1,7 @@
+import { Part } from '@phensley/decimal';
+
 import { languageBundle } from '../../_helpers';
-import { buildSchema } from '../../../src/schema';
-import { Bundle, InternalsImpl, PrivateApiImpl, Quantity, UnitsImpl } from '../../../src';
-import { Part } from '../../../src/types';
+import { InternalsImpl, PrivateApiImpl, Quantity, UnitsImpl } from '../../../src';
 
 const INTERNALS = new InternalsImpl();
 
