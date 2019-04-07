@@ -893,12 +893,6 @@ export class Decimal {
       case 'half-even':
         // if n = 5 and digit to left of n is odd round up; if even round down
         return Number((rnd > 5) || ((rnd === 5 && this.isodd())));
-      case '05up': {
-          // round away from zero if digit to left is is 0 or 5
-          // otherwise round towards zero
-          const lsd = this.data.length > 0 ? this.data[0] % 10 : 0;
-          return Number(!(rnd === 0) && (lsd === 0 || lsd === 5));
-        }
       default:
         return 0;
     }

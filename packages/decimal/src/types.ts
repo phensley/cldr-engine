@@ -1,5 +1,5 @@
 export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor'
-  | 'half-up' | 'half-down' | 'half-even' | '05up' | 'truncate';
+  | 'half-up' | 'half-down' | 'half-even' | 'truncate';
 
 /**
  * Sets the scale or precision, and the rounding mode for a math operation.

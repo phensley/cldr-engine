@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
    - Identify `'integer'` and `'fraction'` digit types.
    - Identify signs as `'minus'` or `'plus'`.
    - Scientific exponent marker is `'exp'`.
+ - Removed non-ICU rounding mode `05up`
 
 ## [0.11.4]
 ### Fixed/Changed
