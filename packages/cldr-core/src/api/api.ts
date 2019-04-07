@@ -47,20 +47,6 @@ import {
 } from '../systems/calendars';
 
 /**
- * @alpha
- */
-// export type FieldWidthMap = {
-//   [k in FieldWidthType]: { [x: string]: string };
-// };
-
-/**
- * @alpha
- */
-// export type EraWidthMap = {
-//   [k in EraWidthType]: { [x: string]: string };
-// };
-
-/**
  * Calendar, date and time functions.
  *
  * @alpha
@@ -74,12 +60,39 @@ export interface Calendars {
   quarters(options?: CalendarFieldsOptions): any;
   weekdays(options?: CalendarFieldsOptions): any;
 
+  /**
+   * Convert a date time into a date in the Buddhist calendar, with locale-specific
+   * week data.
+   */
   toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
+
+  /**
+   * Convert a date time into a date in the Gregorian calendar, with locale-specific
+   * week data.
+   */
   toGregorianDate(date: CalendarDate | ZonedDateTime | Date): GregorianDate;
+
+  /**
+   * Convert a date time into a date in the ISO-8601 calendar, with ISO week data.
+   */
   toISO8601Date(date: CalendarDate | ZonedDateTime | Date): ISO8601Date;
+
+  /**
+   * Convert a date time into a date in the Japanese calendar, with locale-specific
+   * week data.
+   */
   toJapaneseDate(date: CalendarDate | ZonedDateTime | Date): JapaneseDate;
+
+  /**
+   * Convert a date time into a date in the Persian calendar, with locale-specific
+   * week data.
+   */
   toPersianDate(date: CalendarDate | ZonedDateTime | Date): PersianDate;
 
+  /**
+   * Calculate the field of greatest difference between two dates. This can be used
+   * to choose an appropriate date or time skeleton for interval formatting.
+   */
   fieldOfGreatestDifference(
     a: CalendarDate | ZonedDateTime | Date,
     b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
