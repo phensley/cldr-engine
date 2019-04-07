@@ -13,7 +13,7 @@
     "clean:full": "lerna run clean:full && rimraf ./node_modules",
     "depgraph": "depcruise -T dot -x tslib packages/cldr/src | dot -T pdf > depgraph.pdf",
     "link-all": "lerna exec --concurrency=1 yarn link",
-    "lint": "lerna run build:lint && lerna run lint",
+    "lint": "lerna run build && lerna run build:lint && lerna run lint",
     "stress": "lerna run --stream --concurrency=1 stress",
     "test": "rimraf ./coverage && jest --coverage --verbose -i --no-cache",
     "test:runtime": "rimraf ./coverage && jest --coverage --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-compiler/.*\"",
