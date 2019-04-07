@@ -477,18 +477,6 @@ test('shift right rounding modes', () => {
   expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
   expect(shr('-5.5', 1, m)).toEqual(parse('-5'));
 
-  m = 'truncate';
-  expect(shr('5.5', 1, m)).toEqual(parse('5'));
-  expect(shr('2.5', 1, m)).toEqual(parse('2'));
-  expect(shr('1.6', 1, m)).toEqual(parse('1'));
-  expect(shr('1.1', 1, m)).toEqual(parse('1'));
-  expect(shr('1.0', 1, m)).toEqual(parse('1'));
-  expect(shr('-1.0', 1, m)).toEqual(parse('-1'));
-  expect(shr('-1.1', 1, m)).toEqual(parse('-1'));
-  expect(shr('-1.6', 1, m)).toEqual(parse('-1'));
-  expect(shr('-2.5', 1, m)).toEqual(parse('-2'));
-  expect(shr('-5.5', 1, m)).toEqual(parse('-5'));
-
   m = 'ceiling';
   expect(shr('5.5', 1, m)).toEqual(parse('6'));
   expect(shr('2.5', 1, m)).toEqual(parse('3'));

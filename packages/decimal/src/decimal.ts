@@ -174,7 +174,7 @@ export class Decimal {
    * Return the integer part.
    */
   toInteger(): Decimal {
-    return this.setScale(0, 'truncate');
+    return this.setScale(0, 'down');
   }
 
   /**
@@ -816,7 +816,7 @@ export class Decimal {
       n = this.trailingZeros();
     }
     if (n > 0) {
-      this._shiftright(n, 'truncate');
+      this._shiftright(n, 'down');
     }
   }
 
@@ -875,7 +875,6 @@ export class Decimal {
         // round away from zero
         return Number(rnd !== 0);
       case 'down':
-      case 'truncate':
         // round towards zero
         return 0;
       case 'ceiling':
