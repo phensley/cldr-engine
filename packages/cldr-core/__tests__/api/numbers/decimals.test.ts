@@ -112,6 +112,47 @@ test('decimals short', () => {
   expect(s).toEqual('10,000T');
 });
 
+test('decimals short fractions', () => {
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatDecimal('1.234567', { style: 'short' });
+  expect(s).toEqual('1.2');
+
+  s = api.formatDecimal('12.34567', { style: 'short' });
+  expect(s).toEqual('12');
+
+  s = api.formatDecimal('123.4567', { style: 'short' });
+  expect(s).toEqual('123');
+
+  s = api.formatDecimal('1234.567', { style: 'short' });
+  expect(s).toEqual('1.2K');
+
+  s = api.formatDecimal('1.234567', { style: 'short', minimumFractionDigits: 1 });
+  expect(s).toEqual('1.2');
+
+  s = api.formatDecimal('12.34567', { style: 'short', minimumFractionDigits: 1 });
+  expect(s).toEqual('12.3');
+
+  s = api.formatDecimal('123.4567', { style: 'short', minimumFractionDigits: 1 });
+  expect(s).toEqual('123.5');
+
+  s = api.formatDecimal('1234.567', { style: 'short', minimumFractionDigits: 1 });
+  expect(s).toEqual('1.2K');
+
+  s = api.formatDecimal('1.234567', { style: 'short', minimumFractionDigits: 2 });
+  expect(s).toEqual('1.23');
+
+  s = api.formatDecimal('12.34567', { style: 'short', minimumFractionDigits: 2 });
+  expect(s).toEqual('12.35');
+
+  s = api.formatDecimal('123.4567', { style: 'short', minimumFractionDigits: 2 });
+  expect(s).toEqual('123.46');
+
+  s = api.formatDecimal('1234.567', { style: 'short', minimumFractionDigits: 2 });
+  expect(s).toEqual('1.23K');
+});
+
 test('decimals long', () => {
   const api = numbersApi('en');
   let s: string;
@@ -234,8 +275,17 @@ test('decimal compact significant digits', () => {
   s = api.formatDecimal('1500000000', { style: 'short' });
   expect(s).toEqual('1.5B');
 
+  s = api.formatDecimal('1500000000', { style: 'short', minimumFractionDigits: 1 });
+  expect(s).toEqual('1.5B');
+
   s = api.formatDecimal('1590000000', { style: 'short' });
   expect(s).toEqual('1.6B');
+
+  s = api.formatDecimal('1590000000', { style: 'short', minimumFractionDigits: 1 });
+  expect(s).toEqual('1.6B');
+
+  s = api.formatDecimal('1590000000', { style: 'short', minimumFractionDigits: 2 });
+  expect(s).toEqual('1.59B');
 
   s = api.formatDecimal('12345', { style: 'short' });
   expect(s).toEqual('12K');

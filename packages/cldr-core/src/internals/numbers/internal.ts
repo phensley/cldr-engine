@@ -98,10 +98,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
         // Select the final pluralized compact pattern based on the integer
         // digits of n and the plural category of the rounded / shifted number q2.
-        let raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
-        if (raw === '0') {
-          raw = standardRaw;
-        }
+        const raw = patternImpl.get(bundle, plural, ndigits)[0] || standardRaw;
 
         // Re-select pattern as number may have changed sign due to rounding.
         const pattern = this.getNumberPattern(raw, q2.isNegative());
@@ -298,7 +295,7 @@ export class NumberInternalsImpl implements NumberInternals {
     patternImpl: DigitsArrow<PluralType>): [Decimal, number] {
 
     // Select the correct divisor based on the number of integer digits in n.
-    const negative = n.isNegative();
+    let negative = n.isNegative();
     let ndigits = n.integerDigits();
 
     // Select the initial compact pattern based on the integer digits of n.
@@ -306,7 +303,13 @@ export class NumberInternalsImpl implements NumberInternals {
     let raw: string;
     let ndivisor = 0;
     [raw, ndivisor] = patternImpl.get(bundle, 'other', ndigits);
-    let pattern = this.getNumberPattern(raw || standardRaw, negative);
+    let pattern: NumberPattern;
+    if (raw) {
+      pattern = this.getNumberPattern(raw, negative);
+    } else {
+      pattern = this.getNumberPattern(standardRaw, negative);
+      pattern = { ...pattern, minFrac: 0, maxFrac: 0 };
+    }
 
     const fracDigits = ctx.useSignificant ? -1 : 0;
 
@@ -323,6 +326,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
     let q2 = ctx.adjust(q1);
     const q2digits = q2.integerDigits();
+    negative = q2.isNegative();
 
     // Check if the number rounded up, adding another integer digit.
     if (q2digits > q1digits) {
@@ -331,7 +335,13 @@ export class NumberInternalsImpl implements NumberInternals {
 
       let divisor = 0;
       [raw, divisor] = patternImpl.get(bundle, 'other', ndigits);
-      pattern = this.getNumberPattern(raw || standardRaw, negative);
+      if (raw) {
+        pattern = this.getNumberPattern(raw, negative);
+      } else {
+        // Adjust standard pattern to have same fraction settings as compact
+        pattern = this.getNumberPattern(standardRaw, negative);
+        pattern = { ...pattern, minFrac: 0, maxFrac: 0 };
+      }
 
       // If divisor changed we need to divide and adjust again. We don't divide,
       // we just move the decimal point, since our Decimal type uses a radix that
