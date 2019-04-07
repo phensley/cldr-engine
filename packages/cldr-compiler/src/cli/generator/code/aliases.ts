@@ -1,3 +1,4 @@
+import { TZ } from '@phensley/timezone';
 import { getSupplemental} from '../../../cldr';
 import { objectToString, Code, HEADER, NOLINT_MAXLINE } from './util';
 
@@ -19,7 +20,18 @@ export const getAliases = (_data: any): Code[] => {
 
   result.push(Code.core(['locale', 'autogen.aliases.ts'], code));
 
-  const zones = Object.keys(zoneAlias).sort().map(k => [k, zoneAlias[k]].join(':')).join('|');
+  // Find time zone aliases that are not already handled in the @phensley/timezone package
+  const zoneids = TZ.zoneIds();
+  const zones = Object.keys(zoneAlias).filter(alias => {
+    const zi = zoneids.indexOf(alias);
+    if (zi !== -1) {
+      // alias is in list of valid tzdb ids, ignore
+      return false;
+    }
+
+    // if alias fails to resolve, include in this list
+    return TZ.resolveId(alias) === undefined;
+  }).sort().map(k => [k, zoneAlias[k]].join(':')).join('|');
 
   code = HEADER + NOLINT_MAXLINE;
   code += `export const zoneAliasRaw = '${zones}';\n`;
