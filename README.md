@@ -38,15 +38,16 @@ I'm gradually [comparing this library with current alternatives](https://github.
 ## Goals
 
 * Support a broad set of CLDR features in the browser "out of the box".
-* Resolve the CLDR "data explosion" problem.
-* Support all scripts and regions for a given language in a single compact resource pack.
+* Support all scripts and regions for a language in a single compact resource pack.
+* Resolve the CLDR data size and dimensionality problems.
+  - In the case of English: ~40MB of JSON for 105 locales is compressed to a 194KB resource pack (44KB gzip).
 * No additional library dependencies required.
 * No custom extraction of CLDR data or precompilation of formatters required.
 * Correctness and consistency across browsers and Javascript runtime environments.
 * Provide type-safety, reducing programming errors.
 * No familiarity with CLDR structure is required for developers to use this library.
 * High performance.
-* Enhance functionality with arbitrary precision decimal math.
+* Arbitrary precision decimal math, to achieve the same accuracy in the browser as on the server.
 
 ## License
 
