@@ -286,34 +286,34 @@ test('currency parts', () => {
   p = api.formatCurrencyToParts('12345.234', 'USD');
   expect(p).toEqual([
     { type: 'currency', value: '$' },
-    { type: 'digits', value: '12' },
+    { type: 'integer', value: '12' },
     { type: 'group', value: ',' },
-    { type: 'digits', value: '345' },
+    { type: 'integer', value: '345' },
     { type: 'decimal', value: '.' },
-    { type: 'digits', value: '23' }
+    { type: 'fraction', value: '23' }
   ]);
 
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
   p = api.formatCurrencyToParts('12345.234', 'USD', opts);
   expect(p).toEqual([
     { type: 'currency', value: '$' },
-    { type: 'digits', value: '12' },
+    { type: 'integer', value: '12' },
     { type: 'group', value: ',' },
-    { type: 'digits', value: '345' },
+    { type: 'integer', value: '345' },
     { type: 'decimal', value: '.' },
-    { type: 'digits', value: '23' }
+    { type: 'fraction', value: '23' }
   ]);
 
   opts.style = 'code';
   p = api.formatCurrencyToParts('1002123.0166', 'AUD', opts);
   expect(p).toEqual([
-    { type: 'digits', value: '1' },
+    { type: 'integer', value: '1' },
     { type: 'group', value: ',' },
-    { type: 'digits', value: '002' },
+    { type: 'integer', value: '002' },
     { type: 'group', value: ',' },
-    { type: 'digits', value: '123' },
+    { type: 'integer', value: '123' },
     { type: 'decimal', value: '.' },
-    { type: 'digits', value: '02' },
+    { type: 'fraction', value: '02' },
     { type: 'literal', value: ' ' },
     { type: 'unit', value: 'AUD' }
   ]);
@@ -322,7 +322,7 @@ test('currency parts', () => {
   p = api.formatCurrencyToParts('123456789.123', 'EUR', opts);
   expect(p).toEqual([
     { type: 'currency', value: '€' },
-    { type: 'digits', value: '123' },
+    { type: 'integer', value: '123' },
     { type: 'literal', value: 'M' }
   ]);
 });
@@ -335,32 +335,32 @@ test('currency parts spacing', () => {
   expect(s).toEqual([
     { type: 'currency', value: 'BAD' },
     { type: 'spacer', value: '\u00a0' },
-    { type: 'digits', value: '12' },
+    { type: 'integer', value: '12' },
     { type: 'group', value: ',' },
-    { type: 'digits', value: '345' },
+    { type: 'integer', value: '345' },
     { type: 'decimal', value: '.' },
-    { type: 'digits', value: '23' }
+    { type: 'fraction', value: '23' }
   ]);
 
   api = numbersApi('km');
   s = api.formatCurrencyToParts('12345.234', 'BAD', { group: true, nu: 'native' });
   expect(s).toEqual([
-    { type: 'digits', value: '១២' },
+    { type: 'integer', value: '១២' },
     { type: 'group', value: '.' },
-    { type: 'digits', value: '៣៤៥' },
+    { type: 'integer', value: '៣៤៥' },
     { type: 'decimal', value: ',' },
-    { type: 'digits', value: '២៣' },
+    { type: 'fraction', value: '២៣' },
     { type: 'spacer', value: '\u00a0' },
     { type: 'currency', value: 'BAD' }
   ]);
 
   s = api.formatCurrencyToParts('12345.234', 'BAD', { group: true });
   expect(s).toEqual([
-    { type: 'digits', value: '12' },
+    { type: 'integer', value: '12' },
     { type: 'group', value: '.' },
-    { type: 'digits', value: '345' },
+    { type: 'integer', value: '345' },
     { type: 'decimal', value: ',' },
-    { type: 'digits', value: '23' },
+    { type: 'fraction', value: '23' },
     { type: 'spacer', value: '\u00a0' },
     { type: 'currency', value: 'BAD' }
   ]);

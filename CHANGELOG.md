@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [UNRELEASED]
 ### Fixed/Changed
  - Removed unused timezone aliases already covered in tzdb / `@phensley/timezone`
+ - Changed types used in number parts representations:
+   - Identify `'integer'` and `'fraction'` digit types.
+   - Identify signs as `'minus'` or `'plus'`.
+   - Scientific exponent marker is `'exp'`.
 
 ## [0.11.4]
 ### Fixed/Changed

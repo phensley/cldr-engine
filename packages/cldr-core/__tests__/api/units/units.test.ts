@@ -172,16 +172,16 @@ test('format parts', () => {
 
   p = api.formatQuantityToParts({ value: '123', unit: 'meter' });
   expect(p).toEqual([
-    { type: 'digits', value: '123'},
+    { type: 'integer', value: '123'},
     { type: 'literal', value: ' meters'}
   ]);
 
   p = api.formatQuantityToParts({ value: '12345000', unit: 'pound'},
     { length: 'short', style: 'short', minimumFractionDigits: 1 });
   expect(p).toEqual([
-    { type: 'digits', value: '12'},
+    { type: 'integer', value: '12'},
     { type: 'decimal', value: '.'},
-    { type: 'digits', value: '3'},
+    { type: 'fraction', value: '3'},
     { type: 'literal', value: 'M'},
     { type: 'literal', value: ' lb'}
   ]);
@@ -236,22 +236,22 @@ test('format sequence parts', () => {
   u = [{ value: '123', unit: 'meter'}, { value: '17.2', unit: 'centimeter' }];
   p = api.formatQuantitySequenceToParts(u);
   expect(p).toEqual([
-    { type: 'digits', value: '123' },
+    { type: 'integer', value: '123' },
     { type: 'literal', value: ' meters'},
     { type: 'literal', value: ', '},
-    { type: 'digits', value: '17' },
+    { type: 'integer', value: '17' },
     { type: 'decimal', value: '.'},
-    { type: 'digits', value: '2'},
+    { type: 'fraction', value: '2'},
     { type: 'literal', value: ' centimeters'}
   ]);
 
   u = [{ value: '312', unit: 'foot' }, { value: '59', unit: 'inch' }];
   p = api.formatQuantitySequenceToParts(u, { length: 'narrow' });
   expect(p).toEqual([
-    { type: 'digits', value: '312' },
+    { type: 'integer', value: '312' },
     { type: 'literal', value: '′' },
     { type: 'literal', value: ' '},
-    { type: 'digits', value: '59' },
+    { type: 'integer', value: '59' },
     { type: 'literal', value: '″' }
   ]);
 });

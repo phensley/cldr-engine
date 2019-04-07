@@ -521,9 +521,12 @@ export class Decimal {
     if (coeff.sign === 0 || exp === 0) {
       return r;
     }
+    const sign = exp < 0 ?
+      { type: 'minus', value: '-' } : { type: 'plus', value: '+' };
     return r.concat([
-      { type: 'e', value: 'E' },
-      { type: 'digits', value: `${exp}`}
+      { type: 'exp', value: 'E' },
+      sign,
+      { type: 'integer', value: `${Math.abs(exp)}`}
     ]);
   }
 

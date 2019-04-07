@@ -35,13 +35,13 @@ export class PartsDecimalFormatter implements DecimalFormatter<Part[]> {
   add(c: string): void {
     switch (c) {
     case this.decimal:
-      this.parts.push({ type: 'digits', value: this.curr.reverse().join('') });
+      this.parts.push({ type: 'fraction', value: this.curr.reverse().join('') });
       this.parts.push({ type: 'decimal', value: c });
       this.curr = [];
       break;
 
     case this.group:
-      this.parts.push({ type: 'digits', value: this.current() });
+      this.parts.push({ type: 'integer', value: this.current() });
       this.parts.push({ type: 'group', value: c });
       this.curr = [];
       break;
@@ -54,7 +54,7 @@ export class PartsDecimalFormatter implements DecimalFormatter<Part[]> {
 
   render(): Part[] {
     if (this.curr.length > 0) {
-      this.parts.push({ type: 'digits', value: this.current() });
+      this.parts.push({ type: 'integer', value: this.current() });
     }
     return this.parts.reverse();
   }

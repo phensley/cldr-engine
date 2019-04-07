@@ -72,11 +72,11 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
           }
 
           case NumberField.MINUS:
-            res.add('sign', symbols.minusSign);
+            res.add('minus', symbols.minusSign);
             break;
 
           case NumberField.PLUS:
-            res.add('sign', symbols.plusSign);
+            res.add('plus', symbols.plusSign);
             break;
 
           case NumberField.NUMBER:
@@ -92,10 +92,13 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
             // Don't emit the exponent if undefined or zero
             if (exponent) {
               res.add('exponent', symbols.exponential);
-              const sign = exponent < 0 ? symbols.minusSign : symbols.plusSign;
-              res.add('sign', sign);
+              if (exponent < 0) {
+                res.add('minus', symbols.minusSign);
+              } else {
+                res.add('plus', symbols.plusSign);
+              }
               const exp = fastFormatDecimal(`${exponent}`, this.params.digits, 1);
-              res.add('digits', exp);
+              res.add('integer', exp);
               break;
             }
         }

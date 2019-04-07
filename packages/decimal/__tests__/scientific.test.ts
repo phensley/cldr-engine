@@ -24,14 +24,15 @@ test('scientific string', () => {
 
 test('scientific parts', () => {
   expect(scip('0')).toEqual([
-    { type: 'digits', value: '0' }
+    { type: 'integer', value: '0' }
   ]);
 
   expect(scip('123', 2)).toEqual([
-    { type: 'digits', value: '12' },
+    { type: 'integer', value: '12' },
     { type: 'decimal', value: '.' },
-    { type: 'digits', value: '3' },
-    { type: 'e', value: 'E' },
-    { type: 'digits', value: '1' }
+    { type: 'fraction', value: '3' },
+    { type: 'exp', value: 'E' },
+    { type: 'plus', value: '+' },
+    { type: 'integer', value: '1' }
   ]);
 });

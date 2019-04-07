@@ -99,9 +99,9 @@ test('numbers defaulting', () => {
 
   p = api.formatDecimalToParts('123.45', { });
   expect(p).toEqual([
-    { type: 'digits', value: '୧୨୩' },
+    { type: 'integer', value: '୧୨୩' },
     { type: 'decimal', value: '.' },
-    { type: 'digits', value: '୪୫' }
+    { type: 'fraction', value: '୪୫' }
   ]);
 });
 
@@ -116,9 +116,9 @@ test('units defaulting', () => {
 
   p = api.formatQuantityToParts({ value: '17.6789', unit: 'meter' });
   expect(p).toEqual([
-    { type: 'digits', value: '１７' },
+    { type: 'integer', value: '１７' },
     { type: 'decimal', value: '.' },
-    { type: 'digits', value: '６７９' },
+    { type: 'fraction', value: '６７９' },
     { type: 'literal', value: ' meters' }
   ]);
 });

@@ -85,10 +85,10 @@ test('leading integer zeros', () => {
 test('format parts', () => {
   const opts = ['.', ',', 1, 1, 3, -1];
   expect(formatParts('12345.12300', opts)).toEqual([
-    { type: 'digits', value: '12' },
+    { type: 'integer', value: '12' },
     { type: 'group', value: ',' },
-    { type: 'digits', value: '345' },
+    { type: 'integer', value: '345' },
     { type: 'decimal', value: '.' },
-    { type: 'digits', value: '12300' }
+    { type: 'fraction', value: '12300' }
   ]);
 });
