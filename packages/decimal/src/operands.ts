@@ -18,6 +18,8 @@ const LIMIT = 10000000000000;
  *   w       number of visible fraction digits in n, without trailing zeros
  *   f       visible fractional digits in n, with trailing zeros
  *   t       visible fractional digits in n, without trailing zeros
+ *
+ * @alpha
  */
 export interface NumberOperands {
 

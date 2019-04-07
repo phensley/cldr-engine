@@ -1,3 +1,8 @@
+/**
+ * A single part of a multi-part value.
+ *
+ * @alpha
+ */
 export interface Part {
   type: string;
   value: string;

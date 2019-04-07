@@ -368,6 +368,26 @@ interface MathContext {
 }
 
 // @alpha
+interface NumberOperands {
+  // (undocumented)
+  dec: boolean;
+  // (undocumented)
+  f: number;
+  // (undocumented)
+  i: number;
+  // (undocumented)
+  n: number;
+  // (undocumented)
+  neg: boolean;
+  // (undocumented)
+  t: number;
+  // (undocumented)
+  v: number;
+  // (undocumented)
+  w: number;
+}
+
+// @alpha
 class Pack {
   constructor(data: any);
   // (undocumented)
@@ -384,6 +404,14 @@ class Pack {
   }
   // (undocumented)
   readonly version: string;
+}
+
+// @alpha
+interface Part {
+  // (undocumented)
+  type: string;
+  // (undocumented)
+  value: string;
 }
 
 // @alpha
@@ -478,6 +506,7 @@ interface ZonedDateTime {
 // WARNING: Unsupported export: ListPatternType
 // WARNING: Unsupported export: RationalArg
 // WARNING: Unsupported export: RegionIdType
+// WARNING: Unsupported export: RoundingModeType
 // WARNING: Unsupported export: ScriptIdType
 // WARNING: Unsupported export: UnitLength
 // WARNING: Unsupported export: UnitType
