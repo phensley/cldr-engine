@@ -267,6 +267,10 @@ export abstract class CalendarDate {
     return this._zoneInfo.zoneid;
   }
 
+  timeZoneStableId(): string {
+    return this._zoneInfo.stableid;
+  }
+
   timeZoneOffset(): number {
     return this._zoneInfo.offset;
   }

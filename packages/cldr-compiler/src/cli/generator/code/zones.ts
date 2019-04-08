@@ -152,6 +152,22 @@ const buildMetaZones2 = (data: any): Metazones => {
   };
 };
 
+const buildStableIdMapping = (data: any): string => {
+  const tzids = TZ.zoneIds();
+  const stableids = data.timeZoneIds;
+  const res: string[] = [];
+  for (const stableid of stableids) {
+    const resolved = TZ.resolveId(stableid);
+    if (resolved === undefined || stableid === resolved) {
+      continue;
+    }
+    const i = tzids.indexOf(resolved);
+    const j = stableids.indexOf(stableid);
+    res.push(`${i}:${j}`);
+  }
+  return res.join('|');
+};
+
 /**
  * Construct timezone source.
  */
@@ -159,6 +175,9 @@ export const getZones = (data: any): Code[] => {
   const result: Code[] = [];
 
   const metazonedata = buildMetaZones2(data.metaZoneRanges);
+
+  // Map canoical tzdb identifier to cldr stable id.
+  const stableids = buildStableIdMapping(data);
 
   let code = HEADER + '/* tslint:disable:max-line-length */\n';
 
@@ -176,7 +195,10 @@ export const getZones = (data: any): Code[] => {
   code += `  offsets: '${metazonedata.offsets}',\n`;
 
   code += `  // until timestamps\n`;
-  code += `  untils: '${metazonedata.untils}'\n`;
+  code += `  untils: '${metazonedata.untils}',\n`;
+
+  code += `  // mapping of tzdb id back to cldr stable id used for schema lookups\n`;
+  code += `  stableids: '${stableids}'\n`;
   code += `};\n`;
 
   result.push(Code.core(['systems', 'calendars', 'autogen.zonedata.ts'], code));

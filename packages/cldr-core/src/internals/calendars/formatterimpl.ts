@@ -537,12 +537,12 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
    */
   timezone_V(ctx: CalendarContext<T>, node: [string, number]): string {
     const { bundle } = ctx;
-    const zoneId = ctx.date.timeZoneId() as TimeZoneType;
+    const stableId = ctx.date.timeZoneStableId() as TimeZoneType;
     const exemplarCity = this.tz.exemplarCity;
     let city = '';
     switch (node[1]) {
     case 4:
-      city = exemplarCity.get(bundle, zoneId);
+      city = exemplarCity.get(bundle, stableId);
       if (!city) {
         return this.timezone_O(ctx, ['O', 4]);
       }
@@ -551,10 +551,11 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
     case 3:
       // Exemplar city for the timezone.
-      city = exemplarCity.get(bundle, zoneId);
+      city = exemplarCity.get(bundle, stableId);
       return city ? city : exemplarCity.get(bundle, 'Etc/Unknown');
 
     case 2:
+      const zoneId = ctx.date.timeZoneId();
       return zoneId;
 
     case 1:

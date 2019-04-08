@@ -1,4 +1,4 @@
-import { MetaZoneType } from '@phensley/cldr-schema';
+import { MetaZoneType, TimeZoneIndex, TimeZoneType, TimeZoneValues } from '@phensley/cldr-schema';
 import { vuintDecode, z85Decode, zigzagDecode } from '@phensley/cldr-utils';
 import { TZ } from '@phensley/timezone';
 
@@ -8,6 +8,7 @@ import { stringToObject } from '../../utils/string';
 
 export interface ZoneInfo {
   zoneid: string;
+  stableid: string;
   abbr: string;
   dst: number;
   offset: number;
@@ -24,11 +25,17 @@ export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
   if (tzinfo === undefined) {
     tzinfo = TZ.utcZone();
   }
+
+  // Check if the id passed in is stable.
+  const stableid = TimeZoneIndex.get(zoneid as TimeZoneType) === -1 ?
+    metazones.getStableId(tzinfo.zoneid) : zoneid;
+
   // Use the corrected zone id to lookup the metazone
-  const metazoneid = metazones.get(tzinfo.zoneid, utc);
+  const metazoneid = metazones.getMetazone(tzinfo.zoneid, utc);
   return {
     ...tzinfo,
-    metazoneid: metazoneid || ('' as MetaZoneType)
+    metazoneid: metazoneid || ('' as MetaZoneType),
+    stableid
   };
 };
 
@@ -40,6 +47,8 @@ class Metazones {
   readonly metazoneids: string[];
   readonly metazones: MetazoneRecord[] = [];
   readonly zoneToMetazone: Map<string, number> = new Map();
+
+  readonly stableids: Map<string, string> = new Map();
 
   constructor(raw: any) {
     this.metazoneids = raw.metazoneids;
@@ -61,6 +70,16 @@ class Metazones {
     const zoneids = TZ.zoneIds();
     const zoneindex = vuintDecode(z85Decode(raw.zoneindex));
 
+    // Mapping of tzdb id back to cldr stable id used for schema lookups
+    raw.stableids.split('|').forEach((d: string) => {
+      const p = d.split(':');
+      const i = Number(p[0]);
+      const j = Number(p[1]);
+      this.stableids.set(zoneids[i], TimeZoneValues[j]);
+    });
+
+    // console.log(this.stableids);
+
     // Sanity-check, since the zoneindex is based off the canonical
     // zoneids array, but could be generated at different times. our test
     // cases should ensure they're in sync, but warn of a discrepancy
@@ -78,7 +97,7 @@ class Metazones {
     }
   }
 
-  get(zoneid: string, utc: number): string | undefined {
+  getMetazone(zoneid: string, utc: number): string | undefined {
     const i = this.zoneToMetazone.get(zoneid);
     if (i !== undefined) {
       const rec = this.metazones[i];
@@ -101,6 +120,10 @@ class Metazones {
 
     // This zone has no metazoneid, e.g. "Etc/GMT+1"
     return undefined;
+  }
+
+  getStableId(zoneid: string): string {
+    return this.stableids.get(zoneid) || zoneid;
   }
 }
 
