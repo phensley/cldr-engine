@@ -65,6 +65,8 @@ class CalendarDate {
   timeZoneId(): string;
   // (undocumented)
   timeZoneOffset(): number;
+  // (undocumented)
+  timeZoneStableId(): string;
   type(): CalendarType;
   unixEpoch(): number;
   // (undocumented)
