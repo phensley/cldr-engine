@@ -1,3 +1,7 @@
+export interface KeyIndexMap {
+  [name: string]: KeyIndex<string>;
+}
+
 /**
  * Inverse mapping of a key to its index in an array.
  */
@@ -35,37 +39,36 @@ export interface Origin {
   readonly type: 'origin';
   readonly block: Scope[];
   readonly indices: { [x: string]: KeyIndex<any> };
-  readonly values: { [x: string]: string[] };
 
   getIndex(name: string): KeyIndex<any>;
   getValues(name: string): string[];
 }
+
+const NULL_KEYINDEX = new KeyIndex<string>([]);
+let WARNED: boolean = false;
 
 export class OriginImpl implements Origin {
   readonly type: 'origin' = 'origin';
 
   constructor(
     readonly block: Scope[],
-    readonly indices: { [x: string]: KeyIndex<any> },
-    readonly values: { [x: string]: string[] }) {
-  }
+    readonly indices: { [x: string]: KeyIndex<string> }) {}
 
-  getIndex(name: string): KeyIndex<any> {
-    return this.get(name, this.indices);
+  getIndex(name: string): KeyIndex<string> {
+    const r = this.indices[name];
+    if (r === undefined) {
+      if (!WARNED) {
+        // NOTE: Unless something went horribly wrong, this should only occur during development.
+        console.log(`Severe error: failed to locate index/value set named "${name}"`);
+        WARNED = true;
+      }
+      return NULL_KEYINDEX;
+    }
+    return r;
   }
 
   getValues(name: string): string[] {
-    return this.get(name, this.values);
-  }
-
-  private get<T>(name: string, map: { [x: string]: T }): T {
-    const r = map[name];
-    /* istanbul ignore if */
-    if (r === undefined) {
-      // NOTE: This should only occur during development.
-      throw new Error(`Severe error: failed to locate index/value set named "${name}"`);
-    }
-    return r;
+    return this.getIndex(name).keys;
   }
 
 }
@@ -114,9 +117,8 @@ export const field = (name: string): Field =>
 
 export const origin = (
     block: Scope[],
-    indices: { [x: string]: KeyIndex<any> },
-    values: { [x: string]: string[] }): Origin =>
-  new OriginImpl(block, indices, values);
+    indices: { [x: string]: KeyIndex<any> }): Origin =>
+  new OriginImpl(block, indices);
 
 export const scope = (name: string, identifier: string, block: Instruction[]): Scope =>
   ({ type: 'scope', name, identifier, block });

@@ -11,6 +11,7 @@ export const main = () => {
     .command('pack', 'Compile resource packs', (y: yargs.Argv) => y
         .option('o', { alias: 'out', required: true, description: 'Output directory' })
         .option('l', { alias: 'lang', description: 'Comma-delimited list of languages to include' })
+        .option('c', { alias: 'config', description: 'Config to customize generated resource packs' })
         .option('r', { alias: 'regions', description: 'Optional comma-delimited list of region codes to include'})
         .option('v', { alias: 'verbose', description: 'Verbose mode' }),
       runPack)

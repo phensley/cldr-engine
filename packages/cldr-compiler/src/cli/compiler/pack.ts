@@ -4,13 +4,13 @@ import { join } from 'path';
 import * as yargs from 'yargs';
 import * as zlib from 'zlib';
 
+import { CodeBuilder } from '@phensley/cldr-schema';
 import { getMain  } from '../../cldr';
+import { DEFAULT_CONFIG } from './config';
 import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
 import { getPackageInfo } from './util';
 import { checkLanguages, localeMap } from './util';
-
-import { ORIGIN } from '@phensley/cldr-schema';
 
 /**
  * Encodes fields into a resource pack and returns the offset
@@ -66,6 +66,11 @@ export const runPack = (argv: yargs.Arguments) => {
     fs.mkdirSync(dest);
   }
 
+  // Configure the schema accessor builder
+  const builder = new CodeBuilder(DEFAULT_CONFIG);
+  const origin = builder.origin();
+  console.log(DEFAULT_CONFIG);
+
   let path: string;
   const hashes: { [x: string]: string } = {};
   const pkghash = crypto.createHash('sha256');
@@ -93,7 +98,7 @@ export const runPack = (argv: yargs.Arguments) => {
       }
       pack.push(locale);
       const main = getMain(locale.id);
-      machine.encode(main, ORIGIN);
+      machine.encode(main, origin);
       if (argv.verbose) {
         console.warn('');
       }

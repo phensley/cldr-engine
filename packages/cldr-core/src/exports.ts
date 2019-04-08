@@ -12,6 +12,7 @@ export {
   LineOrderType,
   RegionIdType,
   Schema,
+  SchemaConfig,
   ScriptIdType,
   UnitType
 } from '@phensley/cldr-schema';

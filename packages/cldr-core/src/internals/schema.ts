@@ -1,12 +1,13 @@
 import {
+  CodeBuilder,
   Digits,
   DigitsArrow,
   Field,
   FieldArrow,
   Instruction,
   Origin,
-  ORIGIN,
   Schema,
+  SchemaConfig,
   Scope,
   ScopeArrow,
   ScopeMap,
@@ -163,11 +164,13 @@ export class SchemaBuilder {
 
 let SCHEMA: Schema;
 
-export const buildSchema = (debug: boolean = false): Schema => {
+export const buildSchema = (config: SchemaConfig, debug: boolean = false): Schema => {
   if (SCHEMA === undefined) {
-    const builder = new SchemaBuilder(debug);
+    const code = new CodeBuilder(config);
+    const origin = code.origin();
+      const builder = new SchemaBuilder(debug);
     SCHEMA = ({} as any) as Schema;
-    builder.construct(SCHEMA, ORIGIN);
+    builder.construct(SCHEMA, origin);
   }
   return SCHEMA;
 };

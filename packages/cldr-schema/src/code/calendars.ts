@@ -1,4 +1,4 @@
-import { KeyIndex } from '../types';
+import { KeyIndex, KeyIndexMap } from '../types';
 
 import {
   DateTimePatternFieldValues,
@@ -18,7 +18,7 @@ export const FormatWidthIndex = new KeyIndex(FormatWidthValues);
 export const QuartersIndex = new KeyIndex(QuarterValues);
 export const WeekdaysIndex = new KeyIndex(WeekdayValues);
 
-export const CALENDAR_INDICES = {
+export const CALENDAR_INDICES: KeyIndexMap = {
   'date-time-pattern-field': DateTimePatternFieldIndex,
   'day-period': DayPeriodIndex,
   'era-type': EraTypeIndex,

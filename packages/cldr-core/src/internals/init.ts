@@ -1,4 +1,4 @@
-import { Schema } from '@phensley/cldr-schema';
+import { Schema, SchemaConfig } from '@phensley/cldr-schema';
 import { buildSchema } from './schema';
 import {
   CalendarInternals,
@@ -31,8 +31,8 @@ export class InternalsImpl implements Internals {
   readonly units: UnitInternals;
   readonly wrapper: WrapperInternals;
 
-  constructor(debug: boolean = false, patternCacheSize: number = 50) {
-    this.schema = buildSchema(debug);
+  constructor(config: SchemaConfig, debug: boolean = false, patternCacheSize: number = 50) {
+    this.schema = buildSchema(config, debug);
 
     this.plurals = new PluralInternalsImpl();
     this.wrapper = new WrapperInternalsImpl();

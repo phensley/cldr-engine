@@ -17,6 +17,7 @@ import {
   Pack,
   PrivateApiImpl,
   Schema,
+  SchemaConfig,
   Units,
   UnitsImpl
 } from '@phensley/cldr-core';
@@ -171,12 +172,17 @@ class CLDRImpl implements CLDR {
  *
  * @alpha
  */
-export class CLDROptions {
+export interface CLDROptions {
 
   /**
    * Log some messages.
    */
   debug?: boolean;
+
+  /**
+   * Customizing of the schema.
+   */
+  config: SchemaConfig;
 
   /**
    * Given a language identifier, fetch the resource pack from the
@@ -222,7 +228,7 @@ export class CLDRFramework {
     this.asyncLoader = options.asyncLoader;
 
     const patternCacheSize = options.patternCacheSize || 50;
-    this.internals = new InternalsImpl(options.debug || false, patternCacheSize);
+    this.internals = new InternalsImpl(options.config, options.debug || false, patternCacheSize);
   }
 
   info(): string {
