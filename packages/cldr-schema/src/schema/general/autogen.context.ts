@@ -14,4 +14,3 @@ export const ContextTransformFieldValues: ContextTransformFieldType[] = [
 , 'languages', 'month-format-except-narrow', 'month-standalone-except-narrow'
 , 'number-spellout', 'relative', 'script', 'typographicNames'
 ];
-

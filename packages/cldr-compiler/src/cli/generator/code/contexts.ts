@@ -11,7 +11,7 @@ export const getContexts = (data: any): Code[] => {
 
   code += `export const ContextTransformFieldValues: ContextTransformFieldType[] = [\n`;
   code += lineWrap(80, ',', _transforms);
-  code += '\n];\n\n';
+  code += '\n];\n';
 
   // code += `export const enum ContextTransformField {\n`;
   // code += transforms.map((c: string) => {
