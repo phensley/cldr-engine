@@ -125,32 +125,13 @@ interface CLDR {
   readonly Units: Units;
 }
 
-// @alpha
-class CLDRFramework {
+// @alpha (undocumented)
+class CLDRFramework extends CLDRFrameworkBase {
   constructor(options: CLDROptions);
-  // (undocumented)
-  protected readonly asyncLoader?: (language: string) => Promise<any>;
-  static availableLocales(): Locale[];
-  protected build(locale: Locale, pack: Pack): CLDR;
-  get(locale: Locale | string): CLDR;
-  getAsync(locale: Locale | string): Promise<CLDR>;
-  // (undocumented)
-  info(): string;
-  // (undocumented)
-  protected readonly internals: Internals;
-  // (undocumented)
-  protected readonly loader?: (language: string) => any;
-  // (undocumented)
-  protected readonly options: CLDROptions;
-  // (undocumented)
-  protected readonly packCache: LRU<Pack>;
-  static parseLanguageTag(s: string): LanguageTag;
-  static resolveLocale(id: string | LanguageTag): Locale;
-  static version(): string;
 }
 
-// @alpha
-class CLDROptions {
+// @alpha (undocumented)
+interface CLDROptions {
   // (undocumented)
   asyncLoader?: (language: string) => Promise<any>;
   debug?: boolean;

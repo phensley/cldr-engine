@@ -6,6 +6,9 @@ import {
   CLDRFramework as CLDRFrameworkBase,
 } from '@phensley/cldr-core';
 
+/**
+ * @alpha
+ */
 export interface CLDROptions {
   /**
    * Log some messages.
@@ -36,6 +39,9 @@ export interface CLDROptions {
 
 }
 
+/**
+ * @alpha
+ */
 export class CLDRFramework extends CLDRFrameworkBase {
 
   constructor(options: CLDROptions) {
