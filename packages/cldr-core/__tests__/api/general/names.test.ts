@@ -62,7 +62,8 @@ test('scripts', () => {
 test('internals', () => {
   const en = languageBundle('en');
   const es = languageBundle('es');
-  const { schema } = INTERNALS;
+
+  const { schema } = INTERNALS();
   let s: string;
   s = schema.Names.regions.displayName.get(en, 'none', '001');
   expect(s).toEqual('World');

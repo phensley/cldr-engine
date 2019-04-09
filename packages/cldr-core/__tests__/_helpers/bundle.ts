@@ -75,10 +75,9 @@ export const loadPack = (language: string, spec?: PackSpec): Pack => {
 export const languageBundle = (tag: string, config?: SchemaConfig): Bundle => {
   const locale = LanguageResolver.resolve(tag);
   const language = locale.language();
-  let spec: PackSpec = { hash: '', config: undefined };
+  let spec: PackSpec | undefined;
   let key = tag;
   if (config !== undefined) {
-    console.log(config.calendars);
     const raw = JSON.stringify(config);
     const hash = crypto.createHash('sha256').update(raw).digest('hex');
     spec = { hash, config: raw };
@@ -90,8 +89,6 @@ export const languageBundle = (tag: string, config?: SchemaConfig): Bundle => {
     const pack = loadPack(language, spec);
     bundle = pack.get(locale);
     bundleCache.set(key, bundle);
-  } else {
-    console.log('found cached, tag');
   }
   return bundle;
 };

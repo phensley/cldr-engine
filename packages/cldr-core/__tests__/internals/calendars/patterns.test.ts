@@ -9,8 +9,9 @@ test('calendar patterns', () => {
   const bundle = languageBundle('en');
   const api = calendarsApi('en');
 
-  const { schema } = INTERNALS;
-  const impl = new CalendarPatterns(bundle, INTERNALS, schema.Buddhist);
+  const internals = INTERNALS();
+  const { schema } = internals;
+  const impl = new CalendarPatterns(bundle, internals, schema.Buddhist);
 
   const date = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: 'America/New_York' });
   const skel = impl.parseSkeleton('y');

@@ -30,6 +30,7 @@ const FooIndex = new KeyIndex(['foo', 'bar']);
 
 const INDICES = {
   'foo': FooIndex,
+  'foo-bar': FooIndex,
   'plural-key': PluralIndex,
   'number-symbol': NumberSymbolIndex,
 };
@@ -46,13 +47,9 @@ const NUMBERS: Scope = scope('Numbers', 'Numbers', [
   vector2('plurals', 'plural-key', 'foo')
 ]);
 
-const VALUES = {
-  'foo-bar': ['foo', 'bar']
-};
-
 const CODE = [NUMBERS];
 
-const ORIGIN: Origin = origin(CODE, INDICES, VALUES);
+const ORIGIN: Origin = origin(CODE, INDICES);
 
 const SOURCE_EN_US = {
   Numbers: {

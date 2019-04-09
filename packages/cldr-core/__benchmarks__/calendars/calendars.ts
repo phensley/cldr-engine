@@ -1,13 +1,11 @@
 import { Suite } from 'benchmark';
 import { makeSuite } from '../util';
-import { CalendarsImpl, DateFormatOptions, GregorianDate, InternalsImpl, PrivateApiImpl } from '../../src';
-import { EN, ES } from '../bundles';
-import { Bundle } from '../../src/resource';
+import { calendarsApi } from '../../__tests__/_helpers';
+import { CalendarsImpl, DateFormatOptions, GregorianDate } from '../../src';
 
-const INTERNALS = new InternalsImpl();
-const BUNDLES: { [x: string]: Bundle} = {
-  'en': EN,
-  'es': ES
+const BUNDLES: { [x: string]: CalendarsImpl} = {
+  'en': calendarsApi('en'),
+  'es': calendarsApi('es')
 };
 
 export const gregorianSuite: Suite = makeSuite('GregorianDate');
@@ -45,8 +43,7 @@ Object.keys(BUNDLES).forEach(k => {
   ZONES.forEach(z => {
     EPOCHS.forEach(e => {
       const opts: DateFormatOptions = { datetime: 'full' };
-      const privateApi = new PrivateApiImpl(BUNDLES[k], INTERNALS);
-      const engine = new CalendarsImpl(BUNDLES[k], INTERNALS, privateApi);
+      const engine = BUNDLES[k];
       const date = { date: e, zoneId: z };
       engine.formatDate(date, opts);
       formatDateSuite.add(`format ${k} ${e} ${z}`, () => {

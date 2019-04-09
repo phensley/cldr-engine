@@ -7,8 +7,9 @@ import {
   PrivateApiImpl
 } from '../../../src';
 
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const numbersImpl = (_lang: string) => new NumberInternalsImpl(INTERNALS, 5);
+const internals = INTERNALS();
+const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, internals);
+const numbersImpl = (_lang: string) => new NumberInternalsImpl(internals, 5);
 
 test('number renderer', () => {
   const en = languageBundle('en');

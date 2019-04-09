@@ -63,7 +63,8 @@ test('matching skeletons', () => {
   const en = languageBundle('en');
   const params = privateApi(en).getNumberParams('latn');
 
-  const m = new CalendarManager(en, INTERNALS);
+  const internals = INTERNALS();
+  const m = new CalendarManager(en, internals);
   const d = calendarsApi('en').toGregorianDate({
     date: MARCH_11_2018_070025_UTC, zoneId: 'America/New_York' });
 

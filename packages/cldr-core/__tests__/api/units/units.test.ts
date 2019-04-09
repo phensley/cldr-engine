@@ -46,7 +46,8 @@ test('display name', () => {
 });
 
 test('per unit pattern schema', () => {
-  const units = INTERNALS.schema.Units;
+  const internals = INTERNALS();
+  const units = internals.schema.Units;
   const en = languageBundle('en');
 
   let p = units.long.perUnitPattern.get(en, 'kilogram');

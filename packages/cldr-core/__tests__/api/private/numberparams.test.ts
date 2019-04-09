@@ -4,12 +4,13 @@ import { NumberParamsCache } from '../../../src/api/private';
 
 const LATN_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
+const internals = INTERNALS();
 const getCache = (tag: string) =>
-  new NumberParamsCache(languageBundle(tag), INTERNALS);
+  new NumberParamsCache(languageBundle(tag), internals);
 
 test('number systems', () => {
   const bundle = languageBundle('zh');
-  const res = INTERNALS.schema.Numbers.numberSystems.mapping(bundle);
+  const res = internals.schema.Numbers.numberSystems.mapping(bundle);
   expect(res.finance).toEqual('hansfin');
 });
 
