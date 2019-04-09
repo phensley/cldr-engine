@@ -1,27 +1,41 @@
 const pkg = require('../package.json');
+
 import {
-  availableLocales,
-  parseLanguageTag,
-  Bundle,
+  Schema,
+  SchemaConfig
+} from '@phensley/cldr-schema';
+
+import { LRU } from '@phensley/cldr-utils';
+
+import {
   Calendars,
   CalendarsImpl,
   General,
   GeneralImpl,
-  Internals,
-  InternalsImpl,
-  LanguageResolver,
-  LanguageTag,
-  Locale,
   Numbers,
   NumbersImpl,
-  Pack,
   PrivateApiImpl,
-  Schema,
-  SchemaConfig,
   Units,
   UnitsImpl
-} from '@phensley/cldr-core';
-import { LRU } from '@phensley/cldr-utils';
+} from './api';
+
+import {
+  Internals,
+  InternalsImpl
+} from './internals';
+
+import {
+  availableLocales,
+  parseLanguageTag,
+  LanguageResolver,
+  LanguageTag,
+  Locale
+} from './locale';
+
+import {
+  Bundle,
+  Pack
+} from './resource';
 
 const { version } = pkg;
 

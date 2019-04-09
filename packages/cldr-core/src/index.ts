@@ -9,4 +9,6 @@ export * from './locale';
 export * from './resource';
 export * from './systems';
 
+export * from './cldr';
+
 export { leftPad } from './utils/string';

@@ -9,6 +9,7 @@ export {
   CurrencyFormatOptions,
   CurrencyFormatStyleType,
   CurrencySymbolWidthType,
+  CLDR,
   DateFieldType,
   DateFormatOptions,
   Decimal,
