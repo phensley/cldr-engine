@@ -55,7 +55,6 @@
     "@types/jest": "^23.3.14",
     "@types/node": "^10.12.21",
     "@types/request": "^2.48.1",
-    "@types/tar": "^4.0.0",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
     "chalk": "^2.4.2",
