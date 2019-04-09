@@ -3,6 +3,7 @@ import {
   CurrencyType,
   DigitsArrow,
   NumbersSchema,
+  NumberSystemInfo,
   PluralType,
 } from '@phensley/cldr-schema';
 import { Decimal, Part } from '@phensley/decimal';
@@ -72,11 +73,11 @@ export class NumberInternalsImpl implements NumberInternals {
     let result: T;
     let plural: PluralType = 'other';
 
-    const latnInfo = this.numbers.numberSystem.get('latn');
+    const latnInfo = this.numbers.numberSystem.get('latn') as NumberSystemInfo;
     const info = this.numbers.numberSystem.get(params.numberSystemName) || latnInfo;
 
     const decimalFormats = info.decimalFormats;
-    const latnDecimalFormats = this.numbers.numberSystem.get('latn').decimalFormats;
+    const latnDecimalFormats = latnInfo.decimalFormats;
     const standardRaw = decimalFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
 
     switch (style) {
@@ -159,7 +160,7 @@ export class NumberInternalsImpl implements NumberInternals {
       const sciFormat = info.scientificFormat;
 
       const ctx = new NumberContext(options, false, true, -1);
-      const latnSciFormat = this.numbers.numberSystem.get('latn').scientificFormat;
+      const latnSciFormat = latnInfo.scientificFormat;
       const format = sciFormat.get(bundle) || latnSciFormat.get(bundle);
       const pattern = this.getNumberPattern(format, n.isNegative());
 
@@ -192,11 +193,11 @@ export class NumberInternalsImpl implements NumberInternals {
     const width = options.symbolWidth === 'narrow' ? 'narrow' : 'none';
     const style = options.style === undefined ? 'symbol' : options.style;
 
-    const latnInfo = this.numbers.numberSystem.get('latn');
+    const latnInfo = this.numbers.numberSystem.get('latn') as NumberSystemInfo;
     const info = this.numbers.numberSystem.get(params.numberSystemName) || latnInfo;
 
     const currencyFormats = info.currencyFormats;
-    const latnDecimalFormats = this.numbers.numberSystem.get('latn').decimalFormats;
+    const latnDecimalFormats = latnInfo.decimalFormats;
 
     const standardRaw = currencyFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
 

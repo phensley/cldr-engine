@@ -25,7 +25,7 @@ export class NumberParamsCache {
   ) {
     this.numberParamsCache = new Cache((s: string) => this.build(s as NumberSystemName), 20);
     this.numbers = internals.schema.Numbers;
-    this.latnSystemInfo = this.numbers.numberSystem.get('latn');
+    this.latnSystemInfo = this.numbers.numberSystem.get('latn') as NumberSystemInfo;
     this.latnSystem = this.buildNumberSystem('latn');
   }
 
@@ -102,7 +102,6 @@ export class NumberParamsCache {
     const { bundle } = this;
     const system = this.numbers.numberSystem;
     const info = system.get(name) || this.latnSystemInfo;
-
     const symbols = info.symbols.exists(bundle)
       ? info.symbols.mapping(bundle)
       : this.latnSystemInfo.symbols.mapping(bundle);

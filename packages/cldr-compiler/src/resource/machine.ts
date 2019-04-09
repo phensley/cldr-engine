@@ -131,10 +131,10 @@ export class EncoderMachine {
       }
     }
 
-    const undef: any = {};
-    for (const i of inst.block) {
-      this.encode(undef, i);
-    }
+    // const undef: any = {};
+    // for (const i of inst.block) {
+    //   this.encode(undef, i);
+    // }
   }
 
   private encodeVector1(obj: any, inst: Vector1): void {

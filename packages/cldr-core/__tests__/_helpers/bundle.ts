@@ -10,6 +10,8 @@ import { Bundle, Pack } from '../../src/resource';
 
 import { runPack } from '../../../cldr-compiler/src/cli/compiler/pack';
 
+const pkg = require('../../package.json');
+
 const TEMPROOT = join(__dirname, '..', '..', '.custom-packs');
 
 const bundleCache = new LRU<Bundle>(15);
@@ -81,7 +83,7 @@ export const languageBundle = (tag: string, config?: SchemaConfig): Bundle => {
     const raw = JSON.stringify(config);
     const hash = crypto.createHash('sha256').update(raw).digest('hex');
     spec = { hash, config: raw };
-    key = `${hash}-${tag}`;
+    key = `${hash}-${pkg.version}-${tag}`;
   }
 
   let bundle = bundleCache.get(key);

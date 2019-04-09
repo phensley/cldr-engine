@@ -137,11 +137,11 @@ export class SchemaBuilder {
       map[field] = child;
     }
 
-    const undef: any = {};
-    for (const i of inst.block) {
-      this.construct(undef, i);
-    }
-    obj[inst.name] = new ScopeArrow(map, undef);
+    // const undef: any = {};
+    // for (const i of inst.block) {
+    //   this.construct(undef, i);
+    // }
+    obj[inst.name] = new ScopeArrow(map);
   }
 
   private constructVector1(obj: any, inst: Vector1): void {

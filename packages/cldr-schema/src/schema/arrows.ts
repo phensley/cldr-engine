@@ -22,11 +22,10 @@ export class FieldArrow {
 export class ScopeArrow<T extends string, R> {
 
   constructor(
-    readonly map: { [P in T]: R },
-    readonly undef: { [P in T]: R }) {}
+    readonly map: { [P in T]: R }) { }
 
-  get(key: T): R {
-    return this.map[key] || this.undef[key];
+  get(key: T): R | undefined {
+    return this.map[key];
   }
 }
 

@@ -91,7 +91,6 @@ const COPY: SchemaConfigKey[] = [
   'script-id',
   'region-id',
   'unit-id',
-  'number-system-name'
 ];
 
 export class CodeBuilder {
@@ -107,6 +106,13 @@ export class CodeBuilder {
     for (const key of COPY) {
       this.make(key, this.config[key] || []);
     }
+
+    // Ensure 'latn' is always defined since its our fallback
+    let numberSystemNames = this.config['number-system-name'] || [];
+    if (numberSystemNames.indexOf('latn') === -1) {
+      numberSystemNames = numberSystemNames.concat(['latn']).sort();
+    }
+    this.make('number-system-name', numberSystemNames);
 
     const code: any[] = [
       NAMES,
