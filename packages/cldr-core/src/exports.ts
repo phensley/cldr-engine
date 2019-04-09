@@ -10,6 +10,7 @@ export {
   FormatWidthType,
   LanguageIdType,
   LineOrderType,
+  NumberSystemInfo,
   RegionIdType,
   Schema,
   SchemaConfig,

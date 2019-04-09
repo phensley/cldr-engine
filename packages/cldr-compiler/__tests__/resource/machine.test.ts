@@ -235,8 +235,8 @@ test('encoding', () => {
     '¤#,##0.00\t' +
     // digits short
     '0K\t3\t00K\t3\t000K\t3\t0R\t3\t00R\t3\t000R\t3\t' +
-    // scopemap plus undefined
-    'Foo\tBar 2\t\t' +
+    // scopemap
+    'Foo\tBar 2\t' +
     // vector2 plurals
     'E\tFoos\tBars\tFoo\tBar');
 

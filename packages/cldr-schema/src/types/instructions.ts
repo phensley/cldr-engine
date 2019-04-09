@@ -57,7 +57,7 @@ export class OriginImpl implements Origin {
   getIndex(name: string): KeyIndex<string> {
     const r = this.indices[name];
     if (r === undefined) {
-      /* istanbul ignore if */
+      /* istanbul ignore next */
       if (!WARNED[name]) {
         // NOTE: Unless something went horribly wrong, this should only occur during development.
         console.log(`Error: failed to locate index/value set named "${name}"`);

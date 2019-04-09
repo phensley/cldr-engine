@@ -1,6 +1,6 @@
 import { CLDRFramework } from '../src';
 import { getCLDR } from './helpers';
-import { CurrencyFormatOptions, Quantity } from '@phensley/cldr-core';
+import { CurrencyFormatOptions, NumberSystemInfo, Quantity } from '@phensley/cldr-core';
 
 const { parseLanguageTag, resolveLocale } = CLDRFramework;
 
@@ -85,7 +85,7 @@ test('accessing schema', () => {
   let api = framework.get('en');
   let bundle = api.General.bundle();
 
-  let system = api.Schema.Numbers.numberSystem.get('latn');
+  let system = api.Schema.Numbers.numberSystem.get('latn') as NumberSystemInfo;
   let symbols = system.symbols.mapping(bundle);
   expect(symbols.group).toEqual(',');
   expect(symbols.decimal).toEqual('.');
@@ -96,7 +96,7 @@ test('accessing schema', () => {
   api = framework.get('de');
   bundle = api.General.bundle();
 
-  system = api.Schema.Numbers.numberSystem.get('latn');
+  system = api.Schema.Numbers.numberSystem.get('latn') as NumberSystemInfo;
   symbols = system.symbols.mapping(bundle);
   expect(symbols.group).toEqual('.');
   expect(symbols.decimal).toEqual(',');
