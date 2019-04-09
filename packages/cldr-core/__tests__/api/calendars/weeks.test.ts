@@ -1,18 +1,10 @@
-import { languageBundle } from '../../_helpers';
-import { Bundle, CalendarsImpl, InternalsImpl, PrivateApiImpl, ZonedDateTime } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
+import { calendarsApi } from '../../_helpers';
+import { ZonedDateTime } from '../../../src';
 
 const make = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 const DAY = 86400000;
 const NEW_YORK = 'America/New_York';
-
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
-};
 
 test('week of month', () => {
   const en = calendarsApi('en');

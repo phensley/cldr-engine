@@ -1,14 +1,11 @@
-import { languageBundle } from '../../_helpers';
+import { languageBundle, INTERNALS } from '../../_helpers';
 
 import {
   Bundle,
   Decimal,
-  InternalsImpl,
   NumberInternalsImpl,
   PrivateApiImpl
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
 
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
 const numbersImpl = (_lang: string) => new NumberInternalsImpl(INTERNALS, 5);

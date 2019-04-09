@@ -1,18 +1,8 @@
-import { languageBundle} from '../../_helpers';
+import { numbersApi } from '../../_helpers';
 
 import {
-  InternalsImpl,
-  NumbersImpl,
   NumberSystemType,
-  PrivateApiImpl
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
-
-const numbersApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
-};
 
 test('numbering systems', () => {
   let api = numbersApi('th');

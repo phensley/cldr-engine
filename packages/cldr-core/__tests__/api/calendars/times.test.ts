@@ -1,24 +1,12 @@
-import { languageBundle } from '../../_helpers';
+import { calendarsApi } from '../../_helpers';
 
 import {
-  Bundle,
-  CalendarsImpl,
-  InternalsImpl,
-  PrivateApiImpl,
   ZonedDateTime
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
 
 const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 const NEW_YORK = 'America/New_York';
-
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
-};
 
 type HourCase = [number, string, string];
 

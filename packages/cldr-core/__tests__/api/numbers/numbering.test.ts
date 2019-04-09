@@ -1,23 +1,9 @@
-import { languageBundle } from '../../_helpers';
+import { numbersApi, unitsApi } from '../../_helpers';
 import {
-  InternalsImpl,
   NumbersImpl,
   Part,
-  PrivateApiImpl,
   UnitsImpl
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
-
-const numbersApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
-};
-
-const unitsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new UnitsImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
-};
 
 test('numbers defaulting', () => {
   let api: NumbersImpl;

@@ -1,12 +1,4 @@
-import { languageBundle } from '../../_helpers';
-import { GeneralImpl, InternalsImpl, Locale } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
-
-const generalApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new GeneralImpl(bundle, Locale.resolve(tag), INTERNALS);
-};
+import { generalApi } from '../../_helpers';
 
 test('character order', () => {
   let api = generalApi('en');

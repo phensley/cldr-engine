@@ -1,12 +1,6 @@
-import { languageBundle } from '../../_helpers';
-import { GeneralImpl, InternalsImpl, Locale } from '../../../src';
+import { generalApi } from '../../_helpers';
 
-const INTERNALS = new InternalsImpl();
-
-const api = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new GeneralImpl(bundle, Locale.resolve(tag), INTERNALS);
-};
+const api = generalApi;
 
 test('locales', () => {
   expect(api('en').bundle().id()).toEqual('en-Latn-US');

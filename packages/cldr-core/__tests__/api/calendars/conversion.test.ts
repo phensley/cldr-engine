@@ -1,24 +1,12 @@
-import { languageBundle } from '../../_helpers';
+import { calendarsApi } from '../../_helpers';
 
 import {
-  Bundle,
-  CalendarsImpl,
   CalendarDate,
   GregorianDate,
-  InternalsImpl,
-  PrivateApiImpl,
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
 
 const NEW_YORK = 'America/New_York';
 const ROME = 'Europe/Rome';
-
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
-};
 
 // NOTE: We have two problems using Date for dates way in the past:
 //

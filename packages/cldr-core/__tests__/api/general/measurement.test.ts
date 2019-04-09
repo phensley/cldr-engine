@@ -1,12 +1,7 @@
-import { languageBundle } from '../../_helpers';
-import { GeneralImpl, InternalsImpl, Locale, MeasurementCategory } from '../../../src';
+import { generalApi } from '../../_helpers';
+import { MeasurementCategory } from '../../../src';
 
-const INTERNALS = new InternalsImpl();
-
-const api = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new GeneralImpl(bundle, Locale.resolve(tag), INTERNALS);
-};
+const api = generalApi;
 
 test('measurement system', () => {
   // US

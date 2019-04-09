@@ -1,28 +1,15 @@
-import { languageBundle } from '../../_helpers';
+import { calendarsApi } from '../../_helpers';
 import { DateTimePatternFieldType } from '@phensley/cldr-schema';
 
 import {
-  Bundle,
-  CalendarsImpl,
   CalendarDate,
-  InternalsImpl,
-  PrivateApiImpl,
   ZonedDateTime
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
 
 const zoned = (date: number | Date, zoneId?: string): ZonedDateTime => ({ date, zoneId });
 
 const NEW_YORK = 'America/New_York';
 const LONDON = 'Europe/London';
-// const PARIS = 'Europe/Paris';
-
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
-};
 
 test('field difference', () => {
   const api = calendarsApi('en');

@@ -1,7 +1,5 @@
+import { INTERNALS } from '../../_helpers';
 import { Decimal } from '@phensley/decimal';
-import { InternalsImpl } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
 
 const operands = (n: string) => new Decimal(n).operands();
 const cardinal = (lang: string, n: string) => INTERNALS.plurals.cardinal(lang, operands(n));

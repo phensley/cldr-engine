@@ -1,26 +1,12 @@
-import { languageBundle } from '../../_helpers';
+import { calendarsApi } from '../../_helpers';
 
-import {
-  Bundle,
-  CalendarsImpl,
-  CalendarDate,
-  InternalsImpl,
-  PrivateApiImpl,
-} from '../../../src';
+import { CalendarDate } from '../../../src';
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
-
-const INTERNALS = new InternalsImpl();
 
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
 
 const NEW_YORK = 'America/New_York';
-
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
-};
 
 const EN = calendarsApi('en-US');
 const DE = calendarsApi('de-DE');

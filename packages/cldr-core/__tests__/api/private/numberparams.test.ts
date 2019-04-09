@@ -1,10 +1,8 @@
-import { languageBundle } from '../../_helpers';
-import { InternalsImpl } from '../../../src/internals';
+import { languageBundle, INTERNALS } from '../../_helpers';
 import { NumberParams } from '../../../src/common/private';
 import { NumberParamsCache } from '../../../src/api/private';
 
 const LATN_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const INTERNALS = new InternalsImpl();
 
 const getCache = (tag: string) =>
   new NumberParamsCache(languageBundle(tag), INTERNALS);

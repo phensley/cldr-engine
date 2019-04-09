@@ -1,14 +1,6 @@
-import { languageBundle } from '../../_helpers';
+import { calendarsApi } from '../../_helpers';
 
-import {
-  Bundle,
-  CalendarsImpl,
-  InternalsImpl,
-  PrivateApiImpl,
-  ZonedDateTime
-} from '../../../src';
-
-const INTERNALS = new InternalsImpl();
+import { ZonedDateTime } from '../../../src';
 
 const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
@@ -20,12 +12,6 @@ const MAY_01_2019_120000_UTC = 1556712000000;
 
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
-
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
-};
 
 test('japanese', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);

@@ -1,14 +1,8 @@
-import { languageBundle } from '../../_helpers';
+import { calendarsApi } from '../../_helpers';
 
 import {
-  Bundle,
-  CalendarsImpl,
-  InternalsImpl,
-  PrivateApiImpl,
   ZonedDateTime
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
 
 const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
@@ -16,12 +10,6 @@ const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId })
 const JAN_01_2018_070025_UTC = 1514833225000;
 
 const NEW_YORK = 'America/New_York';
-
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
-};
 
 test('raw formats', () => {
   const jan01 = unix(JAN_01_2018_070025_UTC, NEW_YORK);

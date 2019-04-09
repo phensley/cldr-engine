@@ -1,19 +1,9 @@
-import { languageBundle } from '../../_helpers';
+import { numbersApi } from '../../_helpers';
 import {
   DecimalFormatOptions,
   DecimalFormatStyleType,
-  InternalsImpl,
-  NumbersImpl,
   Part,
-  PrivateApiImpl
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
-
-const numbersApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
-};
 
 test('format', () => {
   const api = numbersApi('en');

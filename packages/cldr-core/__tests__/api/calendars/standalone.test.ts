@@ -1,20 +1,8 @@
-import { languageBundle } from '../../_helpers';
+import { calendarsApi } from '../../_helpers';
 import {
-  Bundle,
-  CalendarsImpl,
   EraWidthType,
   FieldWidthType,
-  InternalsImpl,
-  PrivateApiImpl,
 } from '../../../src';
-
-const INTERNALS = new InternalsImpl();
-
-const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
-const calendarsApi = (tag: string) => {
-  const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
-};
 
 test('era', () => {
   const en = calendarsApi('en');
