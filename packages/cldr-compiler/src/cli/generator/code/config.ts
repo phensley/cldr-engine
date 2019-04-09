@@ -51,6 +51,7 @@ export const getConfig = (data: any): Code[] => {
 
   const code = JSON.stringify(obj);
   return [
-    Code.top(['packages', 'cldr', 'src', 'config.json'], code)
+    Code.top(['packages', 'cldr', 'src', 'config.json'], code),
+    Code.top(['packages', 'cldr-compiler', 'src', 'cli', 'compiler', 'config.json'], code)
   ];
 };
