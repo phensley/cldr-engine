@@ -1,6 +1,6 @@
 import { TZ } from '@phensley/timezone';
 import { vuintEncode, z85Encode, zigzagEncode } from '@phensley/cldr-utils';
-import { enumName, lineWrap, Code, HEADER } from './util';
+import { lineWrap, Code, HEADER } from './util';
 import chalk from 'chalk';
 
 class IdArray {
@@ -213,12 +213,12 @@ export const getZones = (data: any): Code[] => {
   code += lineWrap(60, ',', data.timeZoneIds.map((id: string) => `'${id}'`));
   code += '\n];\n\n';
 
-  code += 'export const enum TimeZone {';
-  data.timeZoneIds.forEach((k: string) => {
-    const name = enumName(k);
-    code += `\n  ${name} = '${k}',`;
-  });
-  code += '\n}\n\n';
+  // code += 'export const enum TimeZone {';
+  // data.timeZoneIds.forEach((k: string) => {
+  //   const name = enumName(k);
+  //   code += `\n  ${name} = '${k}',`;
+  // });
+  // code += '\n}\n\n';
 
   const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
   code += `export type MetaZoneType = ${metaZoneType};\n\n`;
