@@ -3,7 +3,7 @@ import { join } from 'path';
 import * as yargs from 'yargs';
 
 import { getMain, getSupplemental } from '../../../cldr';
-import { checkLanguages, localeMap, writeJSON } from '../../compiler/util';
+import { buildLocaleMap, checkLanguages, writeJSON } from '../../compiler/util';
 
 const isObject = (o: any): boolean =>
   typeof o === 'object' ? o !== null && !Array.isArray(o) : false;
@@ -55,9 +55,10 @@ const mergeKeyCounts = (dst: any, ...sources: any[]): any => {
  * values into counts. The count indicates the number of locales having that key.
  */
 const run = (args: yargs.Arguments): void => {
+  const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
   if (args.lang) {
-    langs = checkLanguages(args.lang.split(','));
+    langs = checkLanguages(args.lang.split(','), localeMap);
   }
 
   const locales: string[] = [];

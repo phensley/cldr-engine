@@ -61,8 +61,8 @@
       "tsx"
     ],
     "moduleNameMapper": {
-      "@phensley/(.+?)/(.*)": "<rootDir>/packages/$1/src/$2",
-      "@phensley/(.+)": "<rootDir>/packages/$1/src"
+			"@phensley/(.+)": "<rootDir>/packages/$1",
+			"@phensley/(.+)/(.+)": "<rootDir>/packages/$1/$2"
     },
     "testMatch": [
       "**/__tests__/**/*.test.ts"

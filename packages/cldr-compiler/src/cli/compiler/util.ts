@@ -27,9 +27,9 @@ export interface ProjectInfo {
 export const getPackageInfo = (): ProjectInfo => {
   const path = join(__dirname, '..', '..', '..', 'package.json');
   const raw = fs.readFileSync(path, { encoding: 'utf-8' });
-  const { version, cldrversion } = JSON.parse(raw);
-  const cldrVersion = cldrversion.replace(/[^\d.]+/, '');
-  return { version, cldrVersion };
+  const pkg = JSON.parse(raw);
+  const cldrVersion = pkg.cldrversion.replace(/[^\d.]+/, '');
+  return { version: pkg.version, cldrVersion };
 };
 
 /**
@@ -42,18 +42,19 @@ export type LocaleMap = { [x: string]: Locale[] };
 /**
  * Build a mapping of language -> Locale[].
  */
-export const localeMap: LocaleMap = availableLocales().map(getLocale).reduce((o: LocaleMap, c) => {
-  const lang = c.tag.language();
-  const values = o[lang] || [];
-  values.push(c);
-  o[lang] = values;
-  return o;
-}, {});
+export const buildLocaleMap = (): LocaleMap =>
+  availableLocales().map(getLocale).reduce((o: LocaleMap, c) => {
+    const lang = c.tag.language();
+    const values = o[lang] || [];
+    values.push(c);
+    o[lang] = values;
+    return o;
+  }, {});
 
 /**
  * Ensure any languages passed on the command line are valid / known.
  */
-export const checkLanguages = (languages: string[]): string[] => {
+export const checkLanguages = (languages: string[], localeMap: LocaleMap): string[] => {
   languages.forEach(k => {
     if (localeMap[k] === undefined) {
       throw new Error(`Unknown or unsupported language '${k}'`);

@@ -8,10 +8,10 @@ import { CodeBuilder } from '@phensley/cldr-schema';
 import { getMain  } from '../../cldr';
 import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
-import { getPackageInfo } from './util';
-import { checkLanguages, localeMap } from './util';
+import { buildLocaleMap, checkLanguages, getPackageInfo } from './util';
 
-const DEFAULT_CONFIG = join(__dirname, '..', '..', '..', '..', 'cldr', 'src', 'config.json');
+import * as DEFAULT_CONFIG from '@phensley/cldr/src/config.json';
+import { Downloader } from '../downloader/downloader';
 
 /**
  * Encodes fields into a resource pack and returns the offset
@@ -51,19 +51,32 @@ export class PackEncoder implements Encoder {
 export const sha256 = (data: string | Buffer): string =>
   crypto.createHash('sha256').update(data).digest('hex');
 
+export const download = async (cldrversion: string) => {
+  const downloader = new Downloader(cldrversion);
+  await downloader.run();
+};
+
 /**
  * Generates static data that will be impored into the runtime.
  */
-export const runPack = (argv: yargs.Arguments) => {
+export const runPack = async (argv: yargs.Arguments) => {
+  const pkg = getPackageInfo();
+  await download(pkg.cldrVersion);
+
+  const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
   if (argv.lang) {
-    langs = checkLanguages(argv.lang.split(','));
+    langs = checkLanguages(argv.lang.split(','), localeMap);
   }
 
-  const configpath = argv.config || DEFAULT_CONFIG;
-  const configraw = fs.readFileSync(configpath, { encoding: 'utf-8' });
-  const config = JSON.parse(configraw);
-
+  const configpath = argv.config;
+  let config: any;
+  if (configpath) {
+    const configraw = fs.readFileSync(configpath, { encoding: 'utf-8' });
+    config = JSON.parse(configraw);
+  } else {
+    config = DEFAULT_CONFIG;
+  }
   const regions = new Set(argv.regions ? argv.regions.split(',') : []);
 
   const dest = argv.out;
@@ -78,7 +91,6 @@ export const runPack = (argv: yargs.Arguments) => {
   let path: string;
   const hashes: { [x: string]: string } = {};
   const pkghash = crypto.createHash('sha256');
-  const pkg = getPackageInfo();
   langs.forEach(lang => {
     console.warn(`processing:  ${lang}`);
 

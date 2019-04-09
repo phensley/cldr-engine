@@ -5,10 +5,11 @@ import { getOther } from '../cldr';
 // Index default content for each language and language+script combination.
 const defaultContent = new Set();
 
-getOther().DefaultContent.forEach((s: string) => {
-  const { tag } = Locale.resolve(s);
-  defaultContent.add(tag.expanded());
-});
+const loadDefaultContent = () =>
+  getOther().DefaultContent.forEach((s: string) => {
+    const { tag } = Locale.resolve(s);
+    defaultContent.add(tag.expanded());
+  });
 
 // TAB delimiter selected as it is (a) a single character, (b) does not occur in
 // the CLDR JSON data, (c) is safe to encode in JSON, (d) separates strings
@@ -59,6 +60,11 @@ export class ResourcePack {
    * Push a new language layer.
    */
   push(locale: Locale): void {
+    // ensure default content is initialized
+    if (defaultContent.size === 0) {
+      loadDefaultContent();
+    }
+
     const { tag } = locale;
     const script = tag.script();
     let layers = this.layers[script];
