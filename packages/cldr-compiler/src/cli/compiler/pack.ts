@@ -51,21 +51,20 @@ export class PackEncoder implements Encoder {
 export const sha256 = (data: string | Buffer): string =>
   crypto.createHash('sha256').update(data).digest('hex');
 
-export const download = async (cldrversion: string) => {
-  const downloader = new Downloader(cldrversion);
-  await downloader.run();
-};
-
-export const runPack = (argv: yargs.Arguments) => {
-  // Ensure download promise completes before building packs
-  const pkg = getPackageInfo();
-  download(pkg.cldrVersion).then(() => runPackImpl(argv));
-};
-
 /**
  * Generates static data that will be impored into the runtime.
  */
-export const runPackImpl = (argv: yargs.Arguments) => {
+export const runPack = (argv: yargs.Arguments) => {
+  const pkg = getPackageInfo();
+
+  // Ensure downloads happen before building
+  const downloader = new Downloader(pkg.cldrVersion);
+  try {
+    downloader.run();
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
 
   const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
@@ -91,8 +90,6 @@ export const runPackImpl = (argv: yargs.Arguments) => {
   // Configure the schema accessor builder
   const builder = new CodeBuilder(config);
   const origin = builder.origin();
-
-  const pkg = getPackageInfo();
 
   let path: string;
   const hashes: { [x: string]: string } = {};
