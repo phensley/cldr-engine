@@ -21,13 +21,13 @@ export const getCurrencies = (data: any): Code[] => {
   code += lineWrap(80, '|', currencies);
   code += ');\n\n';
 
-  code += 'export const CurrencyValues: CurrencyType[] = [\n';
-  code += lineWrap(80, ',', currencies);
-  code += '\n];\n\n';
+  // code += 'export const CurrencyValues: CurrencyType[] = [\n';
+  // code += lineWrap(80, ',', currencies);
+  // code += '\n];\n\n';
 
-  code += `export const enum Currency {\n`;
-  code += lineWrap(60, ', ', data.currencies.map((c: string) => `${c} = '${c}'`));
-  code += '\n}\n';
+  // code += `export const enum Currency {\n`;
+  // code += lineWrap(60, ', ', data.currencies.map((c: string) => `${c} = '${c}'`));
+  // code += '\n}\n';
 
   result.push(Code.schema(['schema', 'currencies', 'autogen.currencies.ts'], code));
 

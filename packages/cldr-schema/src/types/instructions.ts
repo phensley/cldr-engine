@@ -45,7 +45,7 @@ export interface Origin {
 }
 
 const NULL_KEYINDEX = new KeyIndex<string>([]);
-let WARNED: boolean = false;
+const WARNED: { [x: string]: boolean } = {};
 
 export class OriginImpl implements Origin {
   readonly type: 'origin' = 'origin';
@@ -57,10 +57,10 @@ export class OriginImpl implements Origin {
   getIndex(name: string): KeyIndex<string> {
     const r = this.indices[name];
     if (r === undefined) {
-      if (!WARNED) {
+      if (!WARNED[name]) {
         // NOTE: Unless something went horribly wrong, this should only occur during development.
         console.log(`Severe error: failed to locate index/value set named "${name}"`);
-        WARNED = true;
+        WARNED[name] = true;
       }
       return NULL_KEYINDEX;
     }

@@ -1,9 +1,6 @@
 import { Vector1Arrow, Vector2Arrow } from '../arrows';
-import { CurrencyType, CurrencyValues } from './autogen.currencies';
+import { CurrencyType } from './autogen.currencies';
 import { AltType, PluralType } from '../enums';
-import { KeyIndex } from '../../types';
-
-export const CurrencyIdIndex = new KeyIndex(CurrencyValues);
 
 export interface CurrenciesSchema {
   readonly displayName: Vector1Arrow<CurrencyType>;

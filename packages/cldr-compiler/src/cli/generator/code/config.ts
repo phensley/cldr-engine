@@ -37,12 +37,14 @@ export const getConfig = (data: any): Code[] => {
   const scripts = identifiers(data.scripts);
   const regions = identifiers(data.territories);
   const units = unitNames(data.units);
+  const { currencies } = data;
 
   const obj = {
     'calendars': ['gregorian', 'buddhist', 'japanese', 'persian'],
     'language-id': languages,
     'script-id': scripts,
     'region-id': regions,
+    'currency-id': currencies,
     'number-system-name': NUMBER_SYSTEM_NAME,
     'unit-id': units,
   };
