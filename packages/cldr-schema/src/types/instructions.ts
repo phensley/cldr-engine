@@ -59,7 +59,7 @@ export class OriginImpl implements Origin {
     if (r === undefined) {
       if (!WARNED[name]) {
         // NOTE: Unless something went horribly wrong, this should only occur during development.
-        console.log(`Severe error: failed to locate index/value set named "${name}"`);
+        console.log(`Error: failed to locate index/value set named "${name}"`);
         WARNED[name] = true;
       }
       return NULL_KEYINDEX;

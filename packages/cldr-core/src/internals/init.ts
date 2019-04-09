@@ -22,6 +22,7 @@ import { WrapperInternalsImpl } from './wrapper';
 export class InternalsImpl implements Internals {
 
   readonly schema: Schema;
+  readonly config: SchemaConfig;
   readonly indices: KeyIndexMap;
 
   readonly calendars: CalendarInternals;
@@ -34,6 +35,7 @@ export class InternalsImpl implements Internals {
 
   constructor(config: SchemaConfig, debug: boolean = false, patternCacheSize: number = 50) {
     // TODO: may move this up depending on how integration evolves
+    this.config = config;
     const code = new CodeBuilder(config);
     const origin = code.origin();
     this.indices = origin.indices;

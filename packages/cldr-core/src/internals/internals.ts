@@ -8,6 +8,7 @@ import {
   KeyIndexMap,
   PluralType,
   Schema,
+  SchemaConfig,
   UnitInfo,
   UnitType,
 } from '@phensley/cldr-schema';
@@ -119,6 +120,7 @@ export interface NumberRenderer<R> {
  * Unified interface for accessing internal functionality.
  */
 export interface Internals {
+  readonly config: SchemaConfig;
   readonly indices: KeyIndexMap;
   readonly calendars: CalendarInternals;
   readonly dateFields: DateFieldInternals;

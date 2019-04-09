@@ -23,6 +23,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
   readonly patternCache: Cache<DateTimeNode[]>;
   readonly hourPatternCache: Cache<[DateTimeNode[], DateTimeNode[]]>;
   readonly calendarFormatterCache: Cache<CalendarFormatter<CalendarDate>>;
+  readonly availableCalendars: Set<string>;
 
   constructor(
     readonly internals: Internals,
@@ -31,29 +32,29 @@ export class CalendarInternalsImpl implements CalendarInternals {
     this.schema = internals.schema;
     this.dayPeriodRules = new DayPeriodRules(cacheSize);
     this.patternCache = new Cache(parseDatePattern, cacheSize);
-
+    this.availableCalendars = new Set(internals.config.calendars || []);
     this.hourPatternCache = new Cache((raw: string): [DateTimeNode[], DateTimeNode[]] => {
       const parts = raw.split(';');
       return [this.patternCache.get(parts[0]), this.patternCache.get(parts[1])];
     }, cacheSize);
 
     this.calendarFormatterCache = new Cache((calendar: string) => {
-      let s: CalendarSchema;
-      switch (calendar) {
-        case 'buddhist':
-          s = this.schema.Buddhist;
-          break;
-        case 'japanese':
-          s = this.schema.Japanese;
-          break;
-        case 'persian':
-          s = this.schema.Persian;
-          break;
-        case 'iso8601':
-        case 'gregory':
-        default:
-          s = this.schema.Gregorian;
-          break;
+      let s: CalendarSchema | undefined;
+      if (this.availableCalendars.has(calendar)) {
+        switch (calendar) {
+          case 'buddhist':
+            s = this.schema.Buddhist;
+            break;
+          case 'japanese':
+            s = this.schema.Japanese;
+            break;
+          case 'persian':
+            s = this.schema.Persian;
+            break;
+        }
+      }
+      if (s === undefined) {
+        s = this.schema.Gregorian;
       }
       return new CalendarFormatterImpl(this.internals, s);
     }, cacheSize);

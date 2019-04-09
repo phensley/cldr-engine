@@ -15,31 +15,32 @@ import {
 
 export const buildConfig = (cfg: any) => ({ ...defaultconfig, ...cfg } as SchemaConfig);
 
-export const INTERNALS = new InternalsImpl(defaultconfig as SchemaConfig);
+export const INTERNALS = () => new InternalsImpl(defaultconfig as SchemaConfig);
 
-export const privateApi = (bundle: Bundle, config: SchemaConfig = defaultconfig) =>
-  new PrivateApiImpl(bundle, new InternalsImpl(config));
+export const privateApi = (bundle: Bundle, config?: SchemaConfig) =>
+  new PrivateApiImpl(bundle, new InternalsImpl(config || defaultconfig));
 
-export const calendarsApi = (tag: string, config: SchemaConfig = defaultconfig) => {
-  const bundle = languageBundle(tag);
-  const internals = new InternalsImpl(config);
-  return new CalendarsImpl(bundle, internals, privateApi(bundle));
+export const calendarsApi = (tag: string, config?: SchemaConfig) => {
+  const bundle = languageBundle(tag, config);
+  const internals = new InternalsImpl(config || defaultconfig);
+  const _private = new PrivateApiImpl(bundle, internals);
+  return new CalendarsImpl(bundle, internals, _private);
 };
 
-export const generalApi = (tag: string, config: SchemaConfig = defaultconfig) => {
-  const bundle = languageBundle(tag);
-  const internals = new InternalsImpl(config);
+export const generalApi = (tag: string, config?: SchemaConfig) => {
+  const bundle = languageBundle(tag, config);
+  const internals = new InternalsImpl(config || defaultconfig);
   return new GeneralImpl(bundle, Locale.resolve(tag), internals);
 };
 
-export const numbersApi = (tag: string, config: SchemaConfig = defaultconfig) => {
-  const bundle = languageBundle(tag);
-  const internals = new InternalsImpl(config);
+export const numbersApi = (tag: string, config?: SchemaConfig) => {
+  const bundle = languageBundle(tag, config);
+  const internals = new InternalsImpl(config || defaultconfig);
   return new NumbersImpl(bundle, internals, new PrivateApiImpl(bundle, internals));
 };
 
-export const unitsApi = (tag: string, config: SchemaConfig = defaultconfig) => {
-  const bundle = languageBundle(tag);
-  const internals = new InternalsImpl(config);
+export const unitsApi = (tag: string, config?: SchemaConfig) => {
+  const bundle = languageBundle(tag, config);
+  const internals = new InternalsImpl(config || defaultconfig);
   return new UnitsImpl(bundle, internals, new PrivateApiImpl(bundle, internals));
 };

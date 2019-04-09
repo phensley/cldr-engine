@@ -15,23 +15,25 @@ import { DateTimePatternFieldType } from '@phensley/cldr-schema';
 export class CalendarManager {
 
   readonly patternCache: Cache<CalendarPatterns>;
-
+  readonly availableCalendars: Set<string>;
   constructor(
     readonly bundle: Bundle,
     readonly internals: Internals
   ) {
+    this.availableCalendars = new Set(internals.config.calendars || []);
     const schema = internals.schema;
     this.patternCache = new Cache((calendar: string) => {
-      switch (calendar) {
-      case 'buddhist':
-        return new CalendarPatterns(bundle, internals, schema.Buddhist);
-      case 'japanese':
-        return new CalendarPatterns(bundle, internals, schema.Japanese);
-      case 'persian':
-        return new CalendarPatterns(bundle, internals, schema.Persian);
-      default:
-        return new GregorianPatterns(bundle, internals, schema.Gregorian);
+      if (this.availableCalendars.has(calendar)) {
+        switch (calendar) {
+        case 'buddhist':
+          return new CalendarPatterns(bundle, internals, schema.Buddhist);
+        case 'japanese':
+          return new CalendarPatterns(bundle, internals, schema.Japanese);
+        case 'persian':
+          return new CalendarPatterns(bundle, internals, schema.Persian);
+        }
       }
+      return new GregorianPatterns(bundle, internals, schema.Gregorian);
     }, 20);
   }
 

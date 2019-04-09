@@ -40,7 +40,7 @@ export const getConfig = (data: any): Code[] => {
   const { currencies } = data;
 
   const obj = {
-    'calendars': ['gregorian', 'buddhist', 'japanese', 'persian'],
+    'calendars': ['gregory', 'buddhist', 'japanese', 'persian'],
     'language-id': languages,
     'script-id': scripts,
     'region-id': regions,

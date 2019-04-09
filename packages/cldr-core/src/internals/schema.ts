@@ -160,13 +160,9 @@ export class SchemaBuilder {
   }
 }
 
-let SCHEMA: Schema;
-
 export const buildSchema = (origin: Origin, debug: boolean = false): Schema => {
-  if (SCHEMA === undefined) {
-    const builder = new SchemaBuilder(debug);
-    SCHEMA = ({} as any) as Schema;
-    builder.construct(SCHEMA, origin);
-  }
-  return SCHEMA;
+  const builder = new SchemaBuilder(debug);
+  const schema = ({} as any) as Schema;
+  builder.construct(schema, origin);
+  return schema;
 };
