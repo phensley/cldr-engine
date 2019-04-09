@@ -1,7 +1,6 @@
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import { join } from 'path';
-import * as zlib from 'zlib';
 
 import { SchemaConfig } from '@phensley/cldr-schema';
 import { LRU } from '@phensley/cldr-utils';
@@ -41,7 +40,7 @@ const buildPack = (lang: string, spec: PackSpec): string => {
   }
 
   const outdir = join(TEMPROOT, hash);
-  const path = join(outdir, `${lang}.json.gz`);
+  const path = join(outdir, `${lang}.json`);
   if (!fs.existsSync(path)) {
     // compile the pack
     runPack({
@@ -61,12 +60,11 @@ const buildPack = (lang: string, spec: PackSpec): string => {
 export const loadPack = (language: string, spec?: PackSpec): Pack => {
   let path: string;
   if (spec === undefined) {
-    path = join(__dirname, '..', '..', '..', 'cldr', 'packs', `${language}.json.gz`);
+    path = join(__dirname, '..', '..', '..', 'cldr', 'packs', `${language}.json`);
   } else {
     path = buildPack(language, spec);
   }
-  const compressed = fs.readFileSync(path);
-  const raw = zlib.gunzipSync(compressed).toString('utf-8');
+  const raw = fs.readFileSync(path).toString('utf-8');
   return new Pack(raw);
 };
 

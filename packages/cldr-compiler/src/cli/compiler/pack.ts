@@ -56,12 +56,16 @@ export const download = async (cldrversion: string) => {
   await downloader.run();
 };
 
+export const runPack = (argv: yargs.Arguments) => {
+  // Ensure download promise completes before building packs
+  const pkg = getPackageInfo();
+  download(pkg.cldrVersion).then(() => runPackImpl(argv));
+};
+
 /**
  * Generates static data that will be impored into the runtime.
  */
-export const runPack = async (argv: yargs.Arguments) => {
-  const pkg = getPackageInfo();
-  await download(pkg.cldrVersion);
+export const runPackImpl = (argv: yargs.Arguments) => {
 
   const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
@@ -87,6 +91,8 @@ export const runPack = async (argv: yargs.Arguments) => {
   // Configure the schema accessor builder
   const builder = new CodeBuilder(config);
   const origin = builder.origin();
+
+  const pkg = getPackageInfo();
 
   let path: string;
   const hashes: { [x: string]: string } = {};
