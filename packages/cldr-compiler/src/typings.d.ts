@@ -5,3 +5,9 @@ declare module 'partial.lenses' {
   export const props: (...properties: string[]) => any;
   export const remove: (optic: any) => any;
 }
+
+declare module 'tar' {
+  export class Parse {
+    constructor(props?: any);
+  }
+}
