@@ -19,7 +19,7 @@ export const getCurrencies = (data: any): Code[] => {
 
   code += 'export type CurrencyType = (\n';
   code += lineWrap(80, '|', currencies);
-  code += ');\n\n';
+  code += ');\n';
 
   // code += 'export const CurrencyValues: CurrencyType[] = [\n';
   // code += lineWrap(80, ',', currencies);
