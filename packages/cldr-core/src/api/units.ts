@@ -1,4 +1,4 @@
-import { UnitType, UnitValues } from '@phensley/cldr-schema';
+import { UnitType } from '@phensley/cldr-schema';
 import { Part } from '@phensley/decimal';
 
 import { GeneralInternals, Internals, NumberInternals, UnitInternals } from '../internals';
@@ -28,7 +28,7 @@ export class UnitsImpl implements Units {
   }
 
   availableUnits(): UnitType[] {
-    return UnitValues.slice(0);
+    return this.internal.indices['unit-id'].keys.slice(0) as UnitType[];
   }
 
   getUnitDisplayName(name: UnitType, length?: UnitLength): string {

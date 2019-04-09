@@ -1,4 +1,4 @@
-import { Schema, SchemaConfig } from '@phensley/cldr-schema';
+import { CodeBuilder, KeyIndexMap, Schema, SchemaConfig } from '@phensley/cldr-schema';
 import { buildSchema } from './schema';
 import {
   CalendarInternals,
@@ -22,6 +22,7 @@ import { WrapperInternalsImpl } from './wrapper';
 export class InternalsImpl implements Internals {
 
   readonly schema: Schema;
+  readonly indices: KeyIndexMap;
 
   readonly calendars: CalendarInternals;
   readonly dateFields: DateFieldInternals;
@@ -32,7 +33,11 @@ export class InternalsImpl implements Internals {
   readonly wrapper: WrapperInternals;
 
   constructor(config: SchemaConfig, debug: boolean = false, patternCacheSize: number = 50) {
-    this.schema = buildSchema(config, debug);
+    // TODO: may move this up depending on how integration evolves
+    const code = new CodeBuilder(config);
+    const origin = code.origin();
+    this.indices = origin.indices;
+    this.schema = buildSchema(origin, debug);
 
     this.plurals = new PluralInternalsImpl();
     this.wrapper = new WrapperInternalsImpl();

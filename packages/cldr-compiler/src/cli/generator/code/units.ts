@@ -13,9 +13,9 @@ export const getUnits = (data: any): Code[] => {
     values.push(`'${value}'`);
   });
 
-  code += 'export const UnitValues: UnitType[] = [\n';
-  code += lineWrap(60, ',', values);
-  code += '\n];\n\n';
+  // code += 'export const UnitValues: UnitType[] = [\n';
+  // code += lineWrap(60, ',', values);
+  // code += '\n];\n\n';
 
   const unitType = lineWrap(60, ' | ', values);
   code += `export type UnitType = ${unitType};`;

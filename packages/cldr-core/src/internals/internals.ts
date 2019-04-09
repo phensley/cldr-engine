@@ -5,10 +5,11 @@ import {
   CurrencyType,
   DateFieldType,
   DayPeriodType,
+  KeyIndexMap,
   PluralType,
   Schema,
   UnitInfo,
-  UnitType
+  UnitType,
 } from '@phensley/cldr-schema';
 import { Decimal, DecimalArg, NumberOperands, Part } from '@phensley/decimal';
 
@@ -118,6 +119,7 @@ export interface NumberRenderer<R> {
  * Unified interface for accessing internal functionality.
  */
 export interface Internals {
+  readonly indices: KeyIndexMap;
   readonly calendars: CalendarInternals;
   readonly dateFields: DateFieldInternals;
   readonly general: GeneralInternals;

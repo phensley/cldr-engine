@@ -8,7 +8,7 @@ import { DATEFIELDS, DATEFIELDS_INDICES } from './datefields';
 import { CONTEXT_TRANSFORM, GENERAL_INDICES, LAYOUT, LIST_PATTERNS } from './general';
 import { GREGORIAN, GREGORIAN_INDICES } from './gregorian';
 import { JAPANESE, JAPANESE_INDICES } from './japanese';
-import { NAMES, NAMES_INDICES } from './names';
+import { NAMES } from './names';
 // import { NUMBERS, NUMBERS_INDICES, NUMBERS_VALUES } from './numbers';
 import { NUMBERS, NUMBERS_INDICES } from './numbers';
 import { PERSIAN, PERSIAN_INDICES } from './persian';
@@ -17,6 +17,7 @@ import { TIMEZONE, TIMEZONE_INDICES } from './timezones';
 // import { UNITS, UNITS_INDICES, UNITS_VALUES } from './units';
 import { UNITS } from './units';
 
+// import { AltIndex, PluralIndex, Schema } from '../schema';
 import { AltIndex, PluralIndex } from '../schema';
 
 // const CODE = [
@@ -66,34 +67,59 @@ const INDICES = {
 
 export interface SchemaConfig {
   /**
-   * Array of calendar names to include.
+   * Calendar types to include.
    *
-   * Ex: ['gregory', 'buddhist', 'japanese', 'persian']
+   * Ex: ['gregorian', 'buddhist', 'japanese', 'persian']
    */
-  calendars: string[];
+  calendars?: string[];
 
   /**
-   * Array of currency codes to include.
+   * Currency codes to include.
    *
    * Ex: ['USD', 'EUR', 'GBP', 'JPY', 'CAD', ... ]
    */
-  currencies: string[];
+  ['currency-id']?: string[];
 
   /**
-   * Array of names categories to include. For example, adding 'language'
-   * will allow you to translate the locale 'en' name into "English".
-   *
-   * Ex: ['language', 'script', 'region']
+   * Language identifiers to include.
    */
-  names: string[];
+  ['language-id']?: string[];
 
   /**
-   * Array of unit identifiers to include.
+   * Script identifiers to include.
+   */
+  ['script-id']?: string[];
+
+  /**
+   * Region identifiers to include.
+   */
+  ['region-id']?: string[];
+
+  /**
+   * Units to include.
    *
    * Ex: ['meter', 'kilogram', 'foot']
    */
-  units: string[];
+  ['unit-id']?: string[];
+
+  /**
+   * Number system names to include.
+   *
+   * Ex: ['latn', 'arab', 'laoo']
+   */
+  ['number-system-name']: string[];
 }
+
+type SchemaConfigKey = keyof SchemaConfig;
+
+const COPY: SchemaConfigKey[] = [
+  'currency-id',
+  'language-id',
+  'script-id',
+  'region-id',
+  'unit-id',
+  'number-system-name'
+];
 
 export class CodeBuilder {
 
@@ -105,22 +131,26 @@ export class CodeBuilder {
    * Creates the origin of the code that builds the schema accessor instance.
    */
   origin(): Origin {
-    this.make('currency-id', this.config.currencies || []);
-    this.make('unit-name', this.config.units || []);
-
-    for (const name of this.config.names) {
-      switch (name) {
-        case 'language':
-          this.make('language-id', NAMES_INDICES['language-id'].keys);
-          break;
-        case 'script':
-          this.make('script-id', NAMES_INDICES['script-id'].keys);
-          break;
-        case 'region':
-          this.make('region-id', NAMES_INDICES['region-id'].keys);
-          break;
-      }
+    for (const key of COPY) {
+      this.make(key, this.config[key] || []);
     }
+
+    // this.make('currency-id', this.config.currencies || []);
+    // this.make('unit-name', this.config.units || []);
+
+    // for (const name of this.config.names) {
+    //   switch (name) {
+    //     case 'language':
+    //       this.make('language-id', NAMES_INDICES['language-id'].keys);
+    //       break;
+    //     case 'script':
+    //       this.make('script-id', NAMES_INDICES['script-id'].keys);
+    //       break;
+    //     case 'region':
+    //       this.make('region-id', NAMES_INDICES['region-id'].keys);
+    //       break;
+    //   }
+    // }
 
     const code: any[] = [
       NAMES,
@@ -128,19 +158,19 @@ export class CodeBuilder {
       DATEFIELDS,
       LAYOUT,
       LIST_PATTERNS,
-      TIMEZONE,
-      CURRENCIES,
-      GREGORIAN,
       BUDDHIST,
+      GREGORIAN,
       JAPANESE,
       PERSIAN,
+      TIMEZONE,
+      CURRENCIES,
       UNITS,
       CONTEXT_TRANSFORM
     ];
 
-    for (const name of this.config.calendars) {
+    for (const name of this.config.calendars || ['gregorian']) {
       switch (name) {
-        case 'gregory':
+        case 'gregorian':
           this.add(GREGORIAN_INDICES);
           break;
         case 'buddhist':

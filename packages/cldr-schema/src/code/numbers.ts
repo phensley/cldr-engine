@@ -4,7 +4,7 @@ import {
   CurrencySpacingPosIndex,
   NumberSymbolIndex,
   NumberSystemsIndex,
-  NumberSystemNameValues,
+  // NumberSystemNameValues,
   PluralDigitValues
 } from '../schema/numbers';
 
@@ -13,7 +13,7 @@ export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
   field('minimumGroupingDigits'),
   vector1('numberSystems', 'number-system'),
 
-  scopemap('numberSystem', 'number-system-names', [
+  scopemap('numberSystem', 'number-system-name', [
     vector1('symbols', 'number-symbol'),
 
     scope('currencyFormats', 'currencyFormats', [
@@ -41,8 +41,4 @@ export const NUMBERS_INDICES = {
   'currency-spacing-pos': CurrencySpacingPosIndex,
   'number-symbol': NumberSymbolIndex,
   'number-system': NumberSystemsIndex,
-};
-
-export const NUMBERS_VALUES = {
-  'number-system-names': NumberSystemNameValues
 };

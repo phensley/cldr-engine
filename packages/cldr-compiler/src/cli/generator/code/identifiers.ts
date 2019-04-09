@@ -18,9 +18,9 @@ export const getIdentifiers = (data: any): Code[] => {
   code += lineWrap(80, '|', _languages);
   code += ');\n\n';
 
-  code += 'export const LanguageIdValues: LanguageIdType[] = [\n';
-  code += lineWrap(80, ',', _languages);
-  code += '\n];\n\n';
+  // code += 'export const LanguageIdValues: LanguageIdType[] = [\n';
+  // code += lineWrap(80, ',', _languages);
+  // code += '\n];\n\n';
 
   const _scripts = scripts.map((c: string) => `'${c}'`);
 
@@ -28,16 +28,16 @@ export const getIdentifiers = (data: any): Code[] => {
   code += lineWrap(80, '|', _scripts);
   code += ');\n\n';
 
-  code += 'export const ScriptIdValues: ScriptIdType[] = [\n';
-  code += lineWrap(80, ',', _scripts);
-  code += '\n];\n\n';
+  // code += 'export const ScriptIdValues: ScriptIdType[] = [\n';
+  // code += lineWrap(80, ',', _scripts);
+  // code += '\n];\n\n';
 
-  code += `export const enum ScriptId {\n`;
-  code += scripts.map((c: string) => {
-    const pfx = /^\d/.test(c) ? '_' : '';
-    return `  ${pfx}${c} = '${c}'`;
-  }).join(',\n');
-  code += '\n}\n\n';
+  // code += `export const enum ScriptId {\n`;
+  // code += scripts.map((c: string) => {
+  //   const pfx = /^\d/.test(c) ? '_' : '';
+  //   return `  ${pfx}${c} = '${c}'`;
+  // }).join(',\n');
+  // code += '\n}\n\n';
 
   const _regions = regions.map((c: string) => `'${c}'`);
 
@@ -45,16 +45,16 @@ export const getIdentifiers = (data: any): Code[] => {
   code += lineWrap(80, '|', _regions);
   code += ');\n';
 
-  code += 'export const RegionIdValues: RegionIdType[] = [\n';
-  code += lineWrap(80, ',', _regions);
-  code += '\n];\n\n';
+  // code += 'export const RegionIdValues: RegionIdType[] = [\n';
+  // code += lineWrap(80, ',', _regions);
+  // code += '\n];\n\n';
 
-  code += `export const enum RegionId {\n`;
-  code += regions.map((c: string) => {
-    const pfx = /^\d/.test(c) ? '_' : '';
-    return `  ${pfx}${c} = '${c}'`;
-  }).join(',\n');
-  code += '\n}\n';
+  // code += `export const enum RegionId {\n`;
+  // code += regions.map((c: string) => {
+  //   const pfx = /^\d/.test(c) ? '_' : '';
+  //   return `  ${pfx}${c} = '${c}'`;
+  // }).join(',\n');
+  // code += '\n}\n';
 
   return [
     Code.schema(['schema', 'names', 'autogen.identifiers.ts'], code)

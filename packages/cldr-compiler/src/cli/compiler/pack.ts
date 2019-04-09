@@ -6,11 +6,12 @@ import * as zlib from 'zlib';
 
 import { CodeBuilder } from '@phensley/cldr-schema';
 import { getMain  } from '../../cldr';
-import { DEFAULT_CONFIG } from './config';
 import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
 import { getPackageInfo } from './util';
 import { checkLanguages, localeMap } from './util';
+
+const DEFAULT_CONFIG = join(__dirname, '..', '..', '..', '..', 'cldr', 'src', 'config.json');
 
 /**
  * Encodes fields into a resource pack and returns the offset
@@ -59,6 +60,10 @@ export const runPack = (argv: yargs.Arguments) => {
     langs = checkLanguages(argv.lang.split(','));
   }
 
+  const configpath = argv.config || DEFAULT_CONFIG;
+  const configraw = fs.readFileSync(configpath, { encoding: 'utf-8' });
+  const config = JSON.parse(configraw);
+
   const regions = new Set(argv.regions ? argv.regions.split(',') : []);
 
   const dest = argv.out;
@@ -67,9 +72,8 @@ export const runPack = (argv: yargs.Arguments) => {
   }
 
   // Configure the schema accessor builder
-  const builder = new CodeBuilder(DEFAULT_CONFIG);
+  const builder = new CodeBuilder(config);
   const origin = builder.origin();
-  console.log(DEFAULT_CONFIG);
 
   let path: string;
   const hashes: { [x: string]: string } = {};

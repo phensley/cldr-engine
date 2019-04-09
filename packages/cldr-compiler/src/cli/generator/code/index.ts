@@ -5,6 +5,7 @@ import { Code } from './util';
 
 import { getAliases } from './aliases';
 import { getCalendarPrefs } from './calendar';
+import { getConfig } from './config';
 import { getContexts } from './contexts';
 import { getCurrencies } from './currencies';
 import { getDayPeriods } from './dayperiods';
@@ -23,6 +24,7 @@ import { getZones } from './zones';
 const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   aliases: getAliases,
   calendar: getCalendarPrefs,
+  config: getConfig,
   contexts: getContexts,
   currencies: getCurrencies,
   dayperiods: getDayPeriods,
