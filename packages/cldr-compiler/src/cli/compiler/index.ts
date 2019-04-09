@@ -1,12 +1,12 @@
 import * as yargs from 'yargs';
 import { runPack } from './pack';
-import { getPackageInfo } from './util';
+import { getProjectInfo } from './util';
 
 /**
  * Entry point for cldr-compiler command line.
  */
 export const main = () => {
-  const pkg = getPackageInfo();
+  const pkg = getProjectInfo();
   yargs
     .command('pack', 'Compile resource packs', (y: yargs.Argv) => y
         .option('o', { alias: 'out', required: true, description: 'Output directory' })

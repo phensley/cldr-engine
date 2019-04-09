@@ -8,7 +8,7 @@ import { CodeBuilder } from '@phensley/cldr-schema';
 import { getMain  } from '../../cldr';
 import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
-import { buildLocaleMap, checkLanguages, getPackageInfo } from './util';
+import { buildLocaleMap, checkLanguages, getProjectInfo, ProjectInfo } from './util';
 
 import * as DEFAULT_CONFIG from './config.json';
 import { Downloader } from '../downloader/downloader';
@@ -55,17 +55,19 @@ export const sha256 = (data: string | Buffer): string =>
  * Generates static data that will be impored into the runtime.
  */
 export const runPack = (argv: yargs.Arguments) => {
-  const pkg = getPackageInfo();
+  const pkg = getProjectInfo();
 
   // Ensure downloads happen before building
   const downloader = new Downloader(pkg.cldrVersion);
-  try {
-    downloader.run();
-  } catch (e) {
-    console.log(e);
-    process.exit(1);
-  }
+  downloader.run()
+    .then(() => runPackImpl(argv, pkg))
+    .catch(e => {
+      console.log(e);
+      process.exit(1);
+  });
+};
 
+const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
   const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
   if (argv.lang) {
