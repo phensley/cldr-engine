@@ -1,4 +1,4 @@
-const config = require('../../../cldr/src/config.json');
+const defaultconfig = require('../../../cldr/src/config.json');
 
 import { SchemaConfig } from '@phensley/cldr-schema';
 import { languageBundle } from './bundle';
@@ -13,26 +13,33 @@ import {
   UnitsImpl,
 } from '../../src';
 
-export const INTERNALS = new InternalsImpl(config as SchemaConfig);
+export const buildConfig = (cfg: any) => ({ ...defaultconfig, ...cfg } as SchemaConfig);
 
-export const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, INTERNALS);
+export const INTERNALS = new InternalsImpl(defaultconfig as SchemaConfig);
 
-export const calendarsApi = (tag: string) => {
+export const privateApi = (bundle: Bundle, config: SchemaConfig = defaultconfig) =>
+  new PrivateApiImpl(bundle, new InternalsImpl(config));
+
+export const calendarsApi = (tag: string, config: SchemaConfig = defaultconfig) => {
   const bundle = languageBundle(tag);
-  return new CalendarsImpl(bundle, INTERNALS, privateApi(bundle));
+  const internals = new InternalsImpl(config);
+  return new CalendarsImpl(bundle, internals, privateApi(bundle));
 };
 
-export const generalApi = (tag: string) => {
+export const generalApi = (tag: string, config: SchemaConfig = defaultconfig) => {
   const bundle = languageBundle(tag);
-  return new GeneralImpl(bundle, Locale.resolve(tag), INTERNALS);
+  const internals = new InternalsImpl(config);
+  return new GeneralImpl(bundle, Locale.resolve(tag), internals);
 };
 
-export const numbersApi = (tag: string) => {
+export const numbersApi = (tag: string, config: SchemaConfig = defaultconfig) => {
   const bundle = languageBundle(tag);
-  return new NumbersImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
+  const internals = new InternalsImpl(config);
+  return new NumbersImpl(bundle, internals, new PrivateApiImpl(bundle, internals));
 };
 
-export const unitsApi = (tag: string) => {
+export const unitsApi = (tag: string, config: SchemaConfig = defaultconfig) => {
   const bundle = languageBundle(tag);
-  return new UnitsImpl(bundle, INTERNALS, new PrivateApiImpl(bundle, INTERNALS));
+  const internals = new InternalsImpl(config);
+  return new UnitsImpl(bundle, internals, new PrivateApiImpl(bundle, internals));
 };
