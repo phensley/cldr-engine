@@ -1,4 +1,4 @@
-const defaultconfig = require('../../../cldr/src/config.json');
+import { config as defaultconfig } from '../../../cldr/src/config';
 
 import { SchemaConfig } from '@phensley/cldr-schema';
 import { languageBundle } from './bundle';

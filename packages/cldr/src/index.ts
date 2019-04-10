@@ -1,6 +1,6 @@
 export * from './exports';
 
-import * as config from './config.json';
+import { config } from './config';
 
 import {
   CLDRFramework as CLDRFrameworkBase,
