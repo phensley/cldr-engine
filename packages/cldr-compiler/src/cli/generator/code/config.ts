@@ -37,7 +37,7 @@ export const getConfig = (data: any): Code[] => {
   const scripts = identifiers(data.scripts);
   const regions = identifiers(data.territories);
   const units = unitNames(data.units);
-  const { currencies } = data;
+  const { currencies, timeZoneIds } = data;
 
   const obj = {
     'calendars': ['gregory', 'buddhist', 'japanese', 'persian'],
@@ -47,6 +47,7 @@ export const getConfig = (data: any): Code[] => {
     'currency-id': currencies,
     'number-system-name': NUMBER_SYSTEM_NAME,
     'unit-id': units,
+    'timezone-id': timeZoneIds
   };
 
   const code = JSON.stringify(obj);

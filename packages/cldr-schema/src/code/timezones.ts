@@ -2,17 +2,15 @@ import { field, scope, vector1, vector2, Scope } from '../types';
 import {
   MetaZoneIndex,
   MetaZoneValues,
-  TimeZoneIndex,
   TimeZoneTypeIndex,
-  TimeZoneValues
 } from '../schema/timezones';
 
 export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZones', [
   scope('metaZones', 'metaZones', [
-    vector2('long', 'time-zone-type', 'meta-zone'),
-    vector2('short', 'time-zone-type', 'meta-zone')
+    vector2('long', 'timezone-type', 'metazone'),
+    vector2('short', 'timezone-type', 'metazone')
   ]),
-  vector1('exemplarCity', 'time-zone'),
+  vector1('exemplarCity', 'timezone-id'),
   field('gmtFormat'),
   field('hourFormat'),
   field('gmtZeroFormat'),
@@ -20,12 +18,10 @@ export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZones', [
 ]);
 
 export const TIMEZONE_INDICES = {
-  'meta-zone': MetaZoneIndex,
-  'time-zone': TimeZoneIndex,
-  'time-zone-type': TimeZoneTypeIndex
+  'metazone': MetaZoneIndex,
+  'timezone-type': TimeZoneTypeIndex
 };
 
 export const TIMEZONE_VALUES = {
-  'meta-zone': MetaZoneValues,
-  'time-zone': TimeZoneValues
+  'metazone': MetaZoneValues,
 };

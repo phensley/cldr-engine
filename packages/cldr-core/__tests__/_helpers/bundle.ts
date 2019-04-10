@@ -1,3 +1,4 @@
+import * as subprocess from 'child_process';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import { join } from 'path';
@@ -6,8 +7,6 @@ import { SchemaConfig } from '@phensley/cldr-schema';
 import { LRU } from '@phensley/cldr-utils';
 import { LanguageResolver } from '../../src/locale/resolver';
 import { Bundle, Pack } from '../../src/resource';
-
-import { runPack } from '../../../cldr-compiler/src/cli/compiler/pack';
 
 const pkg = require('../../package.json');
 
@@ -43,13 +42,9 @@ const buildPack = (lang: string, spec: PackSpec): string => {
   const path = join(outdir, `${lang}.json`);
   if (!fs.existsSync(path)) {
     // compile the pack
-    runPack({
-      $0: 'cldr-compiler',
-      _: [],
-      lang,
-      out: outdir,
-      config: configpath,
-    });
+    const cmd = '../../../cldr/node_modules/.bin/cldr-compiler';
+    const args = ['pack', '-l', lang, '-o', outdir, '-c', configpath];
+    subprocess.execFileSync(cmd, args, { cwd: __dirname });
   }
   return path;
 };

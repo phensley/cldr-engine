@@ -1,7 +1,7 @@
 import {
   CalendarSchema,
   ContextTransformFieldType,
-  TimeZoneSchema, TimeZoneType, Vector2Arrow
+  TimeZoneSchema, Vector2Arrow
 } from '@phensley/cldr-schema';
 
 import { WrapperInternals } from '../../internals/internals';
@@ -537,7 +537,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
    */
   timezone_V(ctx: CalendarContext<T>, node: [string, number]): string {
     const { bundle } = ctx;
-    const stableId = ctx.date.timeZoneStableId() as TimeZoneType;
+    const stableId = ctx.date.timeZoneStableId();
     const exemplarCity = this.tz.exemplarCity;
     let city = '';
     switch (node[1]) {

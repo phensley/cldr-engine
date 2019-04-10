@@ -2,9 +2,7 @@ import {
   ContextTransformFieldType,
   ContextType,
   DateFieldType,
-  DateTimePatternFieldType,
-  TimeZoneType,
-  TimeZoneValues,
+  DateTimePatternFieldType
 } from '@phensley/cldr-schema';
 import { DecimalArg, Part } from '@phensley/decimal';
 
@@ -245,14 +243,15 @@ export class CalendarsImpl implements Calendars {
     return this._formatDateRaw(new PartsValue(), date, options || {});
   }
 
-  timeZoneIds(): TimeZoneType[] {
-    return TimeZoneValues.slice(0);
+  timeZoneIds(): string[] {
+    const tzids = this.internals.config['timezone-id'];
+    return tzids ? tzids.slice(0) : [];
   }
 
   timeZoneInfo(): TimeZoneInfo[] {
     const cities = this.internals.schema.TimeZones.exemplarCity.mapping(this.bundle);
     const res: TimeZoneInfo[] = [];
-    for (const id of TimeZoneValues) {
+    for (const id of this.timeZoneIds()) {
       const cityName = cities[id] || cities['Etc/Unknown'];
       res.push({ id, city: { name: cityName } });
     }

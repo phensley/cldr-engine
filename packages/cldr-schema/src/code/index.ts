@@ -76,6 +76,13 @@ export interface SchemaConfig {
   ['unit-id']?: string[];
 
   /**
+   * CLDR stable timezone identifiers to include.
+   *
+   * Ex: ['America/New_York', 'America/Adak', ... ]
+   */
+  ['timezone-id']?: string[];
+
+  /**
    * Number system names to include.
    *
    * Ex: ['latn', 'arab', 'laoo']
@@ -91,6 +98,7 @@ const COPY: SchemaConfigKey[] = [
   'script-id',
   'region-id',
   'unit-id',
+  'timezone-id'
 ];
 
 export class CodeBuilder {

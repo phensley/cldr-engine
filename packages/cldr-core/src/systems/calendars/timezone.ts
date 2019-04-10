@@ -1,4 +1,4 @@
-import { MetaZoneType, TimeZoneIndex, TimeZoneType, TimeZoneValues } from '@phensley/cldr-schema';
+import { MetaZoneType, TimeZoneStableIdIndex } from '@phensley/cldr-schema';
 import { vuintDecode, z85Decode, zigzagDecode } from '@phensley/cldr-utils';
 import { TZ } from '@phensley/timezone';
 
@@ -26,9 +26,13 @@ export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
     tzinfo = TZ.utcZone();
   }
 
-  // Check if the id passed in is stable.
-  const stableid = TimeZoneIndex.get(zoneid as TimeZoneType) === -1 ?
-    metazones.getStableId(tzinfo.zoneid) : zoneid;
+  // For the purposes of CLDR stable timezone ids, check if the passed-in
+  // id is an alias to a current/valid tzdb id.
+  const isstable = TimeZoneStableIdIndex.get(zoneid) !== -1;
+
+  // Use the passed-in id as the stable id if it is an alias,
+  // otherwise lookup the id in the stable map.
+  const stableid = isstable ? zoneid : metazones.getStableId(tzinfo.zoneid);
 
   // Use the corrected zone id to lookup the metazone
   const metazoneid = metazones.getMetazone(tzinfo.zoneid, utc);
@@ -74,8 +78,7 @@ class Metazones {
     raw.stableids.split('|').forEach((d: string) => {
       const p = d.split(':');
       const i = Number(p[0]);
-      const j = Number(p[1]);
-      this.stableids.set(zoneids[i], TimeZoneValues[j]);
+      this.stableids.set(zoneids[i], p[1]);
     });
 
     // console.log(this.stableids);

@@ -162,8 +162,8 @@ const buildStableIdMapping = (data: any): string => {
       continue;
     }
     const i = tzids.indexOf(resolved);
-    const j = stableids.indexOf(stableid);
-    res.push(`${i}:${j}`);
+    // const j = stableids.indexOf(stableid);
+    res.push(`${i}:${stableid}`);
   }
   return res.join('|');
 };
@@ -177,7 +177,7 @@ export const getZones = (data: any): Code[] => {
   const metazonedata = buildMetaZones2(data.metaZoneRanges);
 
   // Map canoical tzdb identifier to cldr stable id.
-  const stableids = buildStableIdMapping(data);
+  const stableidmap = buildStableIdMapping(data);
 
   let code = HEADER + '/* tslint:disable:max-line-length */\n';
 
@@ -198,7 +198,7 @@ export const getZones = (data: any): Code[] => {
   code += `  untils: '${metazonedata.untils}',\n`;
 
   code += `  // mapping of tzdb id back to cldr stable id used for schema lookups\n`;
-  code += `  stableids: '${stableids}'\n`;
+  code += `  stableids: '${stableidmap}'\n`;
   code += `};\n`;
 
   result.push(Code.core(['systems', 'calendars', 'autogen.zonedata.ts'], code));
@@ -206,10 +206,10 @@ export const getZones = (data: any): Code[] => {
   // Build autogen.timezones.ts source
   code = `${HEADER}`;
 
-  const timeZoneType = lineWrap(60, ' | ', data.timeZoneIds.map((k: string) => `'${k}'`));
-  code += `export type TimeZoneType = (\n${timeZoneType});\n\n`;
+  // const timeZoneType = lineWrap(60, ' | ', data.timeZoneIds.map((k: string) => `'${k}'`));
+  // code += `export type TimeZoneType = (\n${timeZoneType});\n\n`;
 
-  code += 'export const TimeZoneValues: TimeZoneType[] = [\n';
+  code += 'export const TimeZoneStableIds: string[] = [\n';
   code += lineWrap(60, ',', data.timeZoneIds.map((id: string) => `'${id}'`));
   code += '\n];\n\n';
 

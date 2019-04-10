@@ -51,5 +51,4 @@ test('stability', () => {
 
   s = EN.formatDateRaw(date, { pattern: 'VVV' });
   expect(s).toEqual('Jersey');
-
 });

@@ -7,7 +7,6 @@ import {
   LineOrderType,
   RegionIdType,
   ScriptIdType,
-  TimeZoneType,
   UnitType
 } from '@phensley/cldr-schema';
 import { DecimalArg, Part } from '@phensley/decimal';
@@ -141,7 +140,7 @@ export interface Calendars {
   /**
    * Return an array containing the available timezone identifiers, e.g. "America/New_York"
    */
-  timeZoneIds(): TimeZoneType[];
+  timeZoneIds(): string[];
 
   /**
    * Return an array of time zone identifiers with additional information, including the

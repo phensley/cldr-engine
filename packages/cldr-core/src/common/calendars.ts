@@ -4,7 +4,6 @@ import {
   EraWidthType,
   FieldWidthType,
   FormatWidthType,
-  TimeZoneType,
 } from '@phensley/cldr-schema';
 
 import { NumberSystemType } from './numbers';
@@ -176,6 +175,6 @@ export interface ExemplarCity {
  * @alpha
  */
 export interface TimeZoneInfo {
-  id: TimeZoneType;
+  id: string;
   city: ExemplarCity;
 }
