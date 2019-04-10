@@ -4,6 +4,7 @@ import {
   DateFieldType,
   DateTimePatternFieldType
 } from '@phensley/cldr-schema';
+
 import { DecimalArg, Part } from '@phensley/decimal';
 
 import { Bundle } from '../resource';
@@ -39,6 +40,8 @@ import { AbstractValue, PartsValue, StringValue } from '../utils/render';
 
 import { Calendars } from './api';
 import { PrivateApiImpl } from './private';
+import { CalendarContext } from '../internals/calendars/formatter';
+import { NumberParams } from '../common/private';
 
 export class CalendarsImpl implements Calendars {
 
@@ -63,11 +66,7 @@ export class CalendarsImpl implements Calendars {
   dateField(type: DateFieldType, opt?: DateFieldFormatOptions): string {
     opt = opt || {};
     const field = this.internals.schema.DateFields.displayName.get(this.bundle, type, opt.width || 'wide');
-    const info = this.privateApi.getContextTransformInfo();
-    if (!opt.context) {
-      return field;
-    }
-    return this.internals.general.contextTransform(field, info, opt.context, 'calendar-field');
+    return this._transformField(field, 'calendar-field', opt.context);
   }
 
   /**
@@ -267,21 +266,19 @@ export class CalendarsImpl implements Calendars {
    * Copy fields, applying an optional context transform to the values.
    */
   private _transformFields(fields: any, type?: ContextTransformFieldType, context?: ContextType): any {
-
     const res: any = {};
-    if (fields === undefined) {
-      return res;
-    }
-
-    const info = this.privateApi.getContextTransformInfo();
-    for (const key of Object.keys(fields)) {
-      let value = fields[key];
-      if (context) {
-        value = this.internals.general.contextTransform(value, info, context, type);
+    if (fields) {
+      for (const key of Object.keys(fields)) {
+        res[key] = this._transformField(fields[key], type, context);
       }
-      res[key] = value;
     }
     return res;
+  }
+
+  private _transformField(field: string,
+    type?: ContextTransformFieldType, context?: ContextType): string {
+      const info = this.privateApi.getContextTransformInfo();
+      return context ? this.internals.general.contextTransform(field, info, context, type) : field;
   }
 
   private _formatDate<R>(value: AbstractValue<R>,
@@ -294,14 +291,7 @@ export class CalendarsImpl implements Calendars {
 
     date = this.convertDateTo(calendar, date);
     const req = this.manager.getDateFormatRequest(date, options, params);
-    const ctx = {
-      date,
-      bundle: this.bundle,
-      system: params.system,
-      latnSystem: params.latnSystem,
-      context: options.context,
-      transform: this.privateApi.getContextTransformInfo()
-    };
+    const ctx = this._context(date, params, options.context);
     return calendars.formatDateTime(calendar, ctx, value, req.date, req.time, req.wrapper);
   }
 
@@ -321,14 +311,7 @@ export class CalendarsImpl implements Calendars {
     if (req.skeleton) {
       const { ca, nu } = options;
       const r = this.manager.getDateFormatRequest(start, { ca, nu, skeleton: req.skeleton }, params);
-      const ctx = {
-        date: start,
-        bundle: this.bundle,
-        system: params.system,
-        latnSystem: params.latnSystem,
-        context: options.context,
-        transform: this.privateApi.getContextTransformInfo()
-      };
+      const ctx = this._context(start, params, options.context);
       const _start = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
       ctx.date = end;
       const _end = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
@@ -339,28 +322,12 @@ export class CalendarsImpl implements Calendars {
 
     let _date: R | undefined;
     if (req.date) {
-      // const { ca, nu } = options;
-      const ctx = {
-        date: start,
-        bundle: this.bundle,
-        system: params.system,
-        latnSystem: params.latnSystem,
-        context: options.context,
-        transform: this.privateApi.getContextTransformInfo()
-      };
+      const ctx = this._context(start, params, options.context);
       _date = this.internals.calendars.formatDateTime(calendar, ctx, value, req.date);
     }
 
     if (req.range) {
-      const ctx = {
-        date: start,
-        bundle: this.bundle,
-        system: params.system,
-        latnSystem: params.latnSystem,
-        context: options.context,
-        transform: this.privateApi.getContextTransformInfo()
-      };
-
+      const ctx = this._context(start, params, options.context);
       const _range = this.internals.calendars.formatInterval(
         calendar, ctx, value, end, req.range);
       if (!_date) {
@@ -381,6 +348,17 @@ export class CalendarsImpl implements Calendars {
     return _date ? _date : value.empty();
   }
 
+  private _context<T extends CalendarDate>(date: T, params: NumberParams, context?: ContextType): CalendarContext<T> {
+    return {
+      date,
+      bundle: this.bundle,
+      system: params.system,
+      latnSystem: params.latnSystem,
+      context,
+      transform: this.privateApi.getContextTransformInfo()
+    };
+  }
+
   private _formatDateRaw<R>(value: AbstractValue<R>,
       date: CalendarDate | ZonedDateTime | Date, options: DateRawFormatOptions): R {
 
@@ -390,14 +368,7 @@ export class CalendarsImpl implements Calendars {
     const pattern = this.internals.calendars.parseDatePattern(options.pattern);
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     const params = this.privateApi.getNumberParams(options.nu, 'default');
-    const ctx = {
-      date: this.convertDateTo(calendar, date),
-      bundle: this.bundle,
-      system: params.system,
-      latnSystem: params.latnSystem,
-      context: options.context,
-      transform: this.privateApi.getContextTransformInfo()
-    };
+    const ctx = this._context(this.convertDateTo(calendar, date), params, options.context);
     return this.internals.calendars.formatDateTime(calendar, ctx, value, pattern);
   }
 

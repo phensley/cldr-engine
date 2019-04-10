@@ -17,10 +17,10 @@ for d in $DIRS ; do
     echo "Package: $d"
     echo
 
-    cloc packages/$d/lib | grep '^JavaScript'
+    cloc packages/$d/lib | egrep -e '^(JavaScript|JSON)'
     echo
 
-    gfind packages/$d/lib -name '*.js' -printf '%10s  %P\n' |sort -nr
+    gfind packages/$d/lib \( -name '*.js' -or -name '*.json' \) -printf '%10s  %P\n' |sort -nr
     echo
     
     echo -n '            uglified size:  '
