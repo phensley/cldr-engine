@@ -8,9 +8,5 @@ export type ContextTransformFieldType = (
 | 'languages'| 'month-format-except-narrow'| 'month-standalone-except-narrow'
 | 'number-spellout'| 'relative'| 'script'| 'typographicNames');
 
-export const ContextTransformFieldValues: ContextTransformFieldType[] = [
-  'calendar-field', 'currencyName', 'day-format-except-narrow'
-, 'day-standalone-except-narrow', 'era-abbr', 'era-name', 'keyValue'
-, 'languages', 'month-format-except-narrow', 'month-standalone-except-narrow'
-, 'number-spellout', 'relative', 'script', 'typographicNames'
-];
+/* tslint:disable:max-line-length */
+export const ContextTransformFieldValues: ContextTransformFieldType[] = ('calendar-field currencyName day-format-except-narrow day-standalone-except-narrow era-abbr era-name keyValue languages month-format-except-narrow month-standalone-except-narrow number-spellout relative script typographicNames').split(' ') as ContextTransformFieldType[];

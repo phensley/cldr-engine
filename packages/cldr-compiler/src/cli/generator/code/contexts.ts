@@ -1,4 +1,4 @@
-import { lineWrap, Code, HEADER } from './util';
+import { lineWrap, Code, HEADER, NOLINT_MAXLINE } from './util';
 
 export const getContexts = (data: any): Code[] => {
   let code = HEADER;
@@ -9,9 +9,10 @@ export const getContexts = (data: any): Code[] => {
   code += lineWrap(80, '|', _transforms);
   code += ');\n\n';
 
-  code += `export const ContextTransformFieldValues: ContextTransformFieldType[] = [\n`;
-  code += lineWrap(80, ',', _transforms);
-  code += '\n];\n';
+  code += NOLINT_MAXLINE;
+  code += `export const ContextTransformFieldValues: ContextTransformFieldType[] = ('`;
+  code += transforms.join(' ');
+  code += `').split(' ') as ContextTransformFieldType[];\n`;
 
   // code += `export const enum ContextTransformField {\n`;
   // code += transforms.map((c: string) => {

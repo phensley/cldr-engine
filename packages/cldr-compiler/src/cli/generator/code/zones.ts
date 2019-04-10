@@ -1,6 +1,6 @@
 import { TZ } from '@phensley/timezone';
 import { vuintEncode, z85Encode, zigzagEncode } from '@phensley/cldr-utils';
-import { lineWrap, Code, HEADER } from './util';
+import { lineWrap, Code, HEADER, NOLINT_MAXLINE } from './util';
 import chalk from 'chalk';
 
 class IdArray {
@@ -209,9 +209,10 @@ export const getZones = (data: any): Code[] => {
   // const timeZoneType = lineWrap(60, ' | ', data.timeZoneIds.map((k: string) => `'${k}'`));
   // code += `export type TimeZoneType = (\n${timeZoneType});\n\n`;
 
-  code += 'export const TimeZoneStableIds: string[] = [\n';
-  code += lineWrap(60, ',', data.timeZoneIds.map((id: string) => `'${id}'`));
-  code += '\n];\n\n';
+  code += NOLINT_MAXLINE;
+  code += `export const TimeZoneStableIds: string[] = ('`;
+  code += data.timeZoneIds.join(' ');
+  code += `').split(' ');\n\n`;
 
   // code += 'export const enum TimeZone {';
   // data.timeZoneIds.forEach((k: string) => {
@@ -223,11 +224,10 @@ export const getZones = (data: any): Code[] => {
   const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
   code += `export type MetaZoneType = ${metaZoneType};\n\n`;
 
-  code += 'export const MetaZoneValues: MetaZoneType[] = [';
-  data.metaZoneIds.forEach((k: string) => {
-    code += `\n  '${k}',`;
-  });
-  code += '\n];\n';
+  code += NOLINT_MAXLINE;
+  code += `export const MetaZoneValues: MetaZoneType[] = ('`;
+  code += data.metaZoneIds.join(' ');
+  code += `').split(' ') as MetaZoneType[];\n`;
 
   result.push(Code.schema(['schema', 'timezones', 'autogen.timezones.ts'], code));
 
