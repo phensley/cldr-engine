@@ -1,5 +1,5 @@
 import { KeyIndexMap } from '@phensley/cldr-schema';
-import { fnv1aChecksum, utf8Encode } from '@phensley/cldr-utils';
+import { Checksum } from '@phensley/cldr-utils';
 
 /**
  * Compute a checksum on a KeyIndexMap used to configure the
@@ -7,10 +7,16 @@ import { fnv1aChecksum, utf8Encode } from '@phensley/cldr-utils';
  * was generated from the config at runtime
  */
 export const checksumIndices = (map: KeyIndexMap): string => {
-  let s = '';
+  const c = new Checksum();
+  // Visit map keys in sorted order
   const keys = Object.keys(map).sort();
   for (const key of keys) {
-    s += JSON.stringify(map[key].keys);
+    c.update(key);
+
+    // Mapped values must be visited in their existing order.
+    for (const val of map[key].keys) {
+      c.update(val);
+    }
   }
-  return fnv1aChecksum(utf8Encode(s)).toString(16);
+  return c.get().toString(16);
 };

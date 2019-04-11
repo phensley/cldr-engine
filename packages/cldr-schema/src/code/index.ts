@@ -116,7 +116,7 @@ export class CodeBuilder {
     // Ensure 'latn' is always defined since its our fallback
     let numberSystemNames = this.config['number-system-name'] || [];
     if (numberSystemNames.indexOf('latn') === -1) {
-      numberSystemNames = numberSystemNames.concat(['latn']).sort();
+      numberSystemNames = numberSystemNames.concat(['latn']);
     }
     this.make('number-system-name', numberSystemNames);
 
