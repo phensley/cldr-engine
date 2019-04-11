@@ -374,6 +374,8 @@ interface NumberOperands {
 class Pack {
   constructor(data: any);
   // (undocumented)
+  readonly checksum: string;
+  // (undocumented)
   readonly cldrVersion: string;
   // (undocumented)
   readonly defaultTag: LanguageTag;
