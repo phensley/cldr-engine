@@ -1,4 +1,4 @@
-import * as crypto from 'crypto';
+import { createHash } from 'crypto';
 import * as fs from 'fs';
 import { join } from 'path';
 import * as yargs from 'yargs';
@@ -50,7 +50,7 @@ export class PackEncoder implements Encoder {
 }
 
 export const sha256 = (data: string | Buffer): string =>
-  crypto.createHash('sha256').update(data).digest('hex');
+  createHash('sha256').update(data).digest('hex');
 
 /**
  * Generates static data that will be impored into the runtime.
@@ -98,7 +98,7 @@ const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
 
   let path: string;
   const hashes: { [x: string]: string } = {};
-  const pkghash = crypto.createHash('sha256');
+  const pkghash = createHash('sha256');
   langs.forEach(lang => {
     console.warn(`processing:  ${lang}`);
 

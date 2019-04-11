@@ -1,5 +1,5 @@
 import * as subprocess from 'child_process';
-import * as crypto from 'crypto';
+import { createHash } from 'crypto';
 import * as fs from 'fs';
 import { join } from 'path';
 
@@ -46,7 +46,7 @@ export const customPack = (tag: string, config: SchemaConfig): string => {
   const locale = LanguageResolver.resolve(tag);
   const language = locale.language();
   const json = JSON.stringify(config);
-  const hash = crypto.createHash('sha256').update(json).digest('hex');
+  const hash = createHash('sha256').update(json).digest('hex');
   return buildPack(language, { hash, config: json });
 };
 
@@ -99,7 +99,7 @@ export const languageBundle = (tag: string, config?: SchemaConfig): Bundle => {
   let key = tag;
   if (config !== undefined) {
     const raw = JSON.stringify(config);
-    const hash = crypto.createHash('sha256').update(raw).digest('hex');
+    const hash = createHash('sha256').update(raw).digest('hex');
     spec = { hash, config: raw };
     key = `${hash}-${pkg.version}-${tag}`;
   }
