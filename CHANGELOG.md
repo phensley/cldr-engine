@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.13.6]
+### Fixed/Changed
+ - Drop utf-8 encoding before checksumming the schema config.
+ - FNV-1A checksum is now incremental.
+ - Ensure schema config indices are checksummed in correct order.
+
 ## [0.13.5]
 ### Fixed/Changed
  - Compute a checksum of the schema configuration and add this to the resource packs.
@@ -87,6 +93,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.13.5]: https://github.com/phensley/cldr-engine/compare/v0.13.5...v0.13.6
 [0.13.5]: https://github.com/phensley/cldr-engine/compare/v0.13.4...v0.13.5
 [0.13.4]: https://github.com/phensley/cldr-engine/compare/v0.12.1...v0.13.4
 [0.12.1]: https://github.com/phensley/cldr-engine/compare/v0.11.4...v0.12.1
