@@ -85,6 +85,9 @@ const enum U {
 
 /**
  * Convert a JavaScript UTF-16 string to UTF-8 bytes.
+ *
+ * Note: This isn't terribly fast, so I won't use it but will
+ * leave in place for now.
  */
 export const utf8Encode = (s: string): Uint8Array => {
   const r = new Uint8Array(s.length * 4);

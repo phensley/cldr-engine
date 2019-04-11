@@ -1,17 +1,29 @@
 const enum Constants {
-  BASIS = 0x811C9DC5
+  FNV1A_BASIS = 0x811C9DC5
 }
 
 /**
- * Compute FNV-1a checksum on the input string. This assumes the
- * string has been converted to a UTF-8 Uint8Array, otherwise only the low
- * byte of each character would be summed.
+ * FNV-1A incremental checksum.
  */
-export const fnv1aChecksum = (s: Uint8Array) => {
-  let r = Constants.BASIS;
-  for (let i = 0; i < s.length; i++) {
-    r ^= s[i];
-    r += ((r << 1) + (r << 4) + (r << 7) + (r << 8) + (r << 24));
+export class Checksum {
+
+  private v: number = 0;
+
+  constructor() {
+    this.v = Constants.FNV1A_BASIS;
   }
-  return r >>> 0;
-};
+
+  update(s: string): this {
+    let r = this.v;
+    for (let i = 0; i < s.length; i++) {
+      r ^= s.charCodeAt(i);
+      r += ((r << 1) + (r << 4) + (r << 7) + (r << 8) + (r << 24));
+    }
+    this.v = r >>> 0;
+    return this;
+  }
+
+  get(): number {
+    return this.v;
+  }
+}
