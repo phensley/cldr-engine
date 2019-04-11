@@ -192,7 +192,7 @@ export class CalendarPatterns {
 
     // These formats are pluralized, so use the 'other' category which will
     // be populated for every locale.
-    formats = this.rawAvailableFormats.other;
+    formats = this.rawAvailableFormats.other || {};
     for (const skeleton of Object.keys(formats)) {
       // Only add skeletons which point to valid formats for this locale. Not all
       // skeletons are implemented for all locales.

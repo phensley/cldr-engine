@@ -18,12 +18,14 @@ import { NumberInternalsImpl } from './numbers';
 import { PluralInternalsImpl } from './plurals';
 import { UnitsInternalImpl } from './units';
 import { WrapperInternalsImpl } from './wrapper';
+import { checksumIndices } from '../resource/checksum';
 
 export class InternalsImpl implements Internals {
 
   readonly schema: Schema;
   readonly config: SchemaConfig;
   readonly indices: KeyIndexMap;
+  readonly checksum: string;
 
   readonly calendars: CalendarInternals;
   readonly dateFields: DateFieldInternals;
@@ -40,7 +42,7 @@ export class InternalsImpl implements Internals {
     const origin = code.origin();
     this.indices = origin.indices;
     this.schema = buildSchema(origin, debug);
-
+    this.checksum = checksumIndices(origin.indices);
     this.plurals = new PluralInternalsImpl();
     this.wrapper = new WrapperInternalsImpl();
 

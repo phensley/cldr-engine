@@ -1,5 +1,3 @@
-const pkg = require('../package.json');
-
 import {
   Schema,
   SchemaConfig
@@ -37,7 +35,16 @@ import {
   Pack
 } from './resource';
 
-const { version } = pkg;
+import { VERSION } from './utils/version';
+
+const enum Messages {
+  CHECKSUM = 'Checksum mismatch on resource pack! The schema config used to ' +
+    'generate the resource pack must be identical to the one used at runtime.',
+  NO_ASYNC_LOADER = 'A Promise-based resource loader is not defined',
+  NO_SYNC_LOADER = 'A synchronous resource loader is not defined',
+  VERSION_MISMATCH = 'Resource pack built with a different version than the ' +
+    'runtime library. Versions must match.'
+}
 
 /**
  * Interface exporting all functionality for a given locale.
@@ -253,7 +260,7 @@ export class CLDRFramework {
    * Return the library version.
    */
   static version(): string {
-    return version;
+    return VERSION;
   }
 
   /**
@@ -288,7 +295,7 @@ export class CLDRFramework {
    */
   get(locale: Locale | string): CLDR {
     if (this.loader === undefined) {
-      throw new Error('a synchronous resource loader is not defined');
+      throw new Error(Messages.NO_SYNC_LOADER);
     }
     const resolved = typeof locale === 'string' ? CLDRFramework.resolveLocale(locale) : locale;
     const language = resolved.tag.language();
@@ -297,6 +304,7 @@ export class CLDRFramework {
     if (pack === undefined) {
       const data = this.loader(language);
       pack = new Pack(data);
+      this.check(pack);
       this.packCache.set(language, pack);
     }
     return this.build(resolved, pack);
@@ -309,7 +317,7 @@ export class CLDRFramework {
   getAsync(locale: Locale | string): Promise<CLDR> {
     const asyncLoader = this.asyncLoader;
     if (asyncLoader === undefined) {
-      throw new Error('a Promise-based resource loader is not defined');
+      throw new Error(Messages.NO_ASYNC_LOADER);
     }
     const resolved = typeof locale === 'string' ? CLDRFramework.resolveLocale(locale) : locale;
     const language = resolved.tag.language();
@@ -324,6 +332,7 @@ export class CLDRFramework {
       // Resolve via the promise loader
       asyncLoader(language).then(raw => {
         const _pack = new Pack(raw);
+        this.check(_pack);
         this.packCache.set(language, _pack);
         resolve(this.build(resolved, _pack));
       }).catch(reject);
@@ -338,5 +347,18 @@ export class CLDRFramework {
   protected build(locale: Locale, pack: Pack): CLDR {
     const bundle = pack.get(locale.tag);
     return new CLDRImpl(locale, bundle, this.internals);
+  }
+
+  /**
+   * Verify the resource pack is compatible with the runtime library version
+   * and schema config checksum.
+   */
+  protected check(pack: Pack): void {
+    if (pack.checksum !== this.internals.checksum) {
+      throw new Error(Messages.CHECKSUM);
+    }
+    if (pack.version !== VERSION) {
+      throw new Error(Messages.VERSION_MISMATCH);
+    }
   }
 }

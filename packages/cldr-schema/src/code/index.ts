@@ -23,21 +23,6 @@ const emptyCalendarIndex = (name: string): KeyIndexMap => ({
   [`${name}-month`]: EMPTY_INDEX
 });
 
-const INDICES = {
-  'alt-key': AltIndex,
-  'plural-key': PluralIndex,
-
-  ...CALENDAR_INDICES,
-  ...GREGORIAN_INDICES,
-  ...emptyCalendarIndex('buddhist'),
-  ...emptyCalendarIndex('japanese'),
-  ...emptyCalendarIndex('persian'),
-  ...DATEFIELDS_INDICES,
-  ...GENERAL_INDICES,
-  ...NUMBERS_INDICES,
-  ...TIMEZONE_INDICES,
-};
-
 export interface SchemaConfig {
   /**
    * Calendar types to include.
@@ -83,11 +68,12 @@ export interface SchemaConfig {
   ['timezone-id']?: string[];
 
   /**
-   * Number system names to include.
+   * Number system names to include, in addition to 'latn' which
+   * must always be defined.
    *
-   * Ex: ['latn', 'arab', 'laoo']
+   * Ex: ['arab', 'laoo']
    */
-  ['number-system-name']: string[];
+  ['number-system-name']?: string[];
 }
 
 type SchemaConfigKey = keyof SchemaConfig;
@@ -103,7 +89,19 @@ const COPY: SchemaConfigKey[] = [
 
 export class CodeBuilder {
 
-  private indices: { [name: string]: KeyIndex<string> } = INDICES;
+  private indices: { [name: string]: KeyIndex<string> } = {
+    'alt-key': AltIndex,
+    'plural-key': PluralIndex,
+    ...CALENDAR_INDICES,
+    ...GREGORIAN_INDICES,
+    ...emptyCalendarIndex('buddhist'),
+    ...emptyCalendarIndex('japanese'),
+    ...emptyCalendarIndex('persian'),
+    ...DATEFIELDS_INDICES,
+    ...GENERAL_INDICES,
+    ...NUMBERS_INDICES,
+    ...TIMEZONE_INDICES,
+  };
 
   constructor(private config: SchemaConfig) { }
 

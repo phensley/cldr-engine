@@ -104,7 +104,7 @@ export class ResourcePack {
     return offset;
   }
 
-  render(): string {
+  render(checksum: string): string {
     const scripts: string[] = [];
     Object.keys(this.layers).forEach(script => {
       const json = this.renderScript(script);
@@ -117,6 +117,7 @@ export class ResourcePack {
 
     return `{"version":"${this.version}",` +
       `"cldr":"${this.cldrVersion}",` +
+      `"checksum":"${checksum}",` +
       `"language":"${this.language}",` +
       `"default":"${this.defaultLayer}",` +
       `"scripts":{${scripts.join(',')}}}`;

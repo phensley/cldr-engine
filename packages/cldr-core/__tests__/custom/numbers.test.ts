@@ -1,8 +1,7 @@
-import { buildConfig, numbersApi } from '../_helpers';
+import { numbersApi } from '../_helpers';
 
 test('custom number system', () => {
-  const cfg = buildConfig({ ['number-system-name']: ['arabext'] });
-  const api = numbersApi('en', cfg);
+  const api = numbersApi('en', { ['number-system-name']: ['arabext'] });
   let s: string;
 
   s = api.formatDecimal('1234.56789', { nu: 'arabext' });

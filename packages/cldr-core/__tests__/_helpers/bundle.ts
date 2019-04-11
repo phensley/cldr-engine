@@ -7,6 +7,7 @@ import { SchemaConfig } from '@phensley/cldr-schema';
 import { LRU } from '@phensley/cldr-utils';
 import { LanguageResolver } from '../../src/locale/resolver';
 import { Bundle, Pack } from '../../src/resource';
+import { CLDRFramework } from '../../lib';
 
 const pkg = require('../../package.json');
 
@@ -16,13 +17,37 @@ const bundleCache = new LRU<Bundle>(15);
 
 interface PackSpec {
   hash: string;
-  config: any;
+  config: string;
 }
 
 const makedir = (dir: string) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
   }
+};
+
+/**
+ * Configure a framework with a loader that will load a custom resource pack.
+ * This allows us to test purposefully-mismatched resource pack and framework
+ * checksums;
+ */
+export const customFramework = (path: string, config: SchemaConfig): CLDRFramework => {
+  const loader = (_lang: string) => fs.readFileSync(path).toString('utf-8');
+  return new CLDRFramework({
+    config,
+    loader
+  });
+};
+
+/**
+ * Ensure a custom resource pack is created and return its filesystem path.
+ */
+export const customPack = (tag: string, config: SchemaConfig): string => {
+  const locale = LanguageResolver.resolve(tag);
+  const language = locale.language();
+  const json = JSON.stringify(config);
+  const hash = crypto.createHash('sha256').update(json).digest('hex');
+  return buildPack(language, { hash, config: json });
 };
 
 /**

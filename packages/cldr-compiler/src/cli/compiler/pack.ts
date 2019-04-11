@@ -4,6 +4,7 @@ import { join } from 'path';
 import * as yargs from 'yargs';
 import * as zlib from 'zlib';
 
+import { checksumIndices } from '@phensley/cldr-core';
 import { CodeBuilder } from '@phensley/cldr-schema';
 import { getMain  } from '../../cldr';
 import { Encoder, EncoderMachine } from '../../resource/machine';
@@ -82,6 +83,7 @@ const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
   } else {
     config = DEFAULT_CONFIG;
   }
+
   const regions = new Set(argv.regions ? argv.regions.split(',') : []);
 
   const dest = argv.out;
@@ -92,6 +94,7 @@ const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
   // Configure the schema accessor builder
   const builder = new CodeBuilder(config);
   const origin = builder.origin();
+  const checksum = checksumIndices(origin.indices);
 
   let path: string;
   const hashes: { [x: string]: string } = {};
@@ -126,7 +129,7 @@ const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
     });
 
     // Pack all strings appended by the encoder.
-    const raw = pack.render();
+    const raw = pack.render(checksum);
 
     // Write uncompressed pack
     let name = `${lang}.json`;

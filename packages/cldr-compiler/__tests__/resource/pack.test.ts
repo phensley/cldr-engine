@@ -11,6 +11,7 @@ const EN_DE = parseLocale('en-DE');
 
 test('creation', () => {
   const pack = new ResourcePack('en', '0.1.0', '32.0.1');
+  const checksum = '12345';
 
   pack.push(EN_US);
   pack.add('foo');
@@ -36,7 +37,7 @@ test('creation', () => {
   pack.add('baz');
   pack.add('quux.de');
 
-  const raw = pack.render();
+  const raw = pack.render(checksum);
   const p = JSON.parse(raw);
   expect(p.language).toEqual('en');
   expect(p.version).toEqual('0.1.0');

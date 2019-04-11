@@ -1,9 +1,8 @@
-import { buildConfig, calendarsApi } from '../_helpers';
+import { calendarsApi } from '../_helpers';
 
 test('custom calendars', () => {
   const zoneId = 'America/New_York';
-  const cfg = buildConfig({ calendars: [] });
-  const api = calendarsApi('en', cfg);
+  const api = calendarsApi('en', { calendars: [] });
   let s: string;
 
   s = api.formatDate({ date: new Date(2019, 5, 10, 12, 34, 56), zoneId }, { datetime: 'full' });

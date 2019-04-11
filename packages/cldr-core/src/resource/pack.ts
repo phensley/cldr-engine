@@ -66,19 +66,21 @@ export class Pack {
 
   readonly version: string;
   readonly cldrVersion: string;
+  readonly checksum: string;
   readonly language: string;
   readonly defaultTag: LanguageTag;
   readonly scripts: { [x: string]: PackScript } = {};
 
   constructor(data: any) {
     const raw: any = typeof data === 'string' ? JSON.parse(data) : data;
-    const { version, cldr, language } = raw;
+    const { version, cldr, checksum, language } = raw;
     if (version === undefined) {
       throw new Error('Severe error: data does not look like a valid resource pack.');
     }
 
     this.version = version;
     this.cldrVersion = cldr;
+    this.checksum = checksum;
     this.language = language;
     this.defaultTag = LanguageResolver.resolve(raw.default);
 

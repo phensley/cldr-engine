@@ -212,6 +212,7 @@ test('encoding', () => {
   const pack = new ResourcePack('en', '0.1.0', '32.0.1');
   const encoder = new PackEncoder(pack);
   const machine = new EncoderMachine(encoder, true);
+  const checksum = '12345';
 
   pack.push(EN_US);
   machine.encode(SOURCE_EN_US, ORIGIN);
@@ -222,7 +223,7 @@ test('encoding', () => {
   pack.push(EN_CA);
   machine.encode(SOURCE_EN_CA, ORIGIN);
 
-  const raw = pack.render();
+  const raw = pack.render(checksum);
   const p = JSON.parse(raw);
 
   expect(Object.keys(p.scripts)).toEqual(['Latn']);

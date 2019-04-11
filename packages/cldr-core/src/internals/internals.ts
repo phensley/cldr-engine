@@ -122,6 +122,7 @@ export interface NumberRenderer<R> {
 export interface Internals {
   readonly config: SchemaConfig;
   readonly indices: KeyIndexMap;
+  readonly checksum: string;
   readonly calendars: CalendarInternals;
   readonly dateFields: DateFieldInternals;
   readonly general: GeneralInternals;
