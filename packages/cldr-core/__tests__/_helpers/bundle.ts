@@ -7,7 +7,8 @@ import { SchemaConfig } from '@phensley/cldr-schema';
 import { LRU } from '@phensley/cldr-utils';
 import { LanguageResolver } from '../../src/locale/resolver';
 import { Bundle, Pack } from '../../src/resource';
-import { CLDRFramework } from '../../lib';
+import { CLDRFramework } from '../../src';
+import { VERSION } from '../../src/utils/version';
 
 const pkg = require('../../package.json');
 
@@ -46,7 +47,7 @@ export const customPack = (tag: string, config: SchemaConfig): string => {
   const locale = LanguageResolver.resolve(tag);
   const language = locale.language();
   const json = JSON.stringify(config);
-  const hash = createHash('sha256').update(json).digest('hex');
+  const hash = createHash('sha256').update(json).update(VERSION).digest('hex');
   return buildPack(language, { hash, config: json });
 };
 
@@ -99,7 +100,7 @@ export const languageBundle = (tag: string, config?: SchemaConfig): Bundle => {
   let key = tag;
   if (config !== undefined) {
     const raw = JSON.stringify(config);
-    const hash = createHash('sha256').update(raw).digest('hex');
+    const hash = createHash('sha256').update(raw).update(VERSION).digest('hex');
     spec = { hash, config: raw };
     key = `${hash}-${pkg.version}-${tag}`;
   }
