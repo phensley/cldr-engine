@@ -5,7 +5,7 @@ export const fnv1aSuite = makeSuite('FNV1a');
 
 const makestr = (n: number, base: string) => base.repeat(n);
 
-const N = 1;
+const N = 1000;
 const BYTE1 = makestr(N, 'A');
 const BYTE2 = makestr(N, 'Ж');
 const BYTE3 = makestr(N, '€');
