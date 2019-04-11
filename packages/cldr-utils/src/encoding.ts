@@ -73,3 +73,59 @@ export const vuintEncode = (nums: number[] | Uint8Array, f?: (x: number) => numb
   }
   return res.subarray(0, j);
 };
+
+const enum U {
+  MBLEAD = 0x80, // 1000 0000
+  MBMASK = 0x3f, // 0011 1111
+
+  B2LEAD = 0xc0, // 1100 0000
+  B3LEAD = 0xe0, // 1110 0000
+  B4LEAD = 0xf0, // 1111 0000
+}
+
+/**
+ * Convert a JavaScript UTF-16 string to UTF-8 bytes.
+ */
+export const utf8Encode = (s: string): Uint8Array => {
+  const r = new Uint8Array(s.length * 4);
+  let i = 0;
+  let j = 0;
+  const len = s.length;
+  while (i < len) {
+    let c = s.charCodeAt(i);
+
+    // Decode surrogate pair
+    if (c >= 0xd800 && c <= 0xd8ff) {
+      if (++i >= len) {
+        break;
+      }
+      c = ((c - 0xD800) * 0x400) + s.charCodeAt(i) - 0xDC00 + 0x10000;
+    }
+
+    // Encode
+    if (c < 0x80) {
+      // 0zzzzzzz
+      r[j++] = c;
+
+    } else if (c < 0x800) {
+      // 110yyyyy 10zzzzzz
+      r[j++] = U.B2LEAD | c >> 6;
+      r[j++] = U.MBLEAD | (c & U.MBMASK);
+
+    } else if (c < 0x10000) {
+      // 1110xxxx 10yyyyyy 10zzzzzz
+      r[j++] = U.B3LEAD | c >> 12;
+      r[j++] = U.MBLEAD | ((c >> 6) & U.MBMASK);
+      r[j++] = U.MBLEAD | (c & U.MBMASK);
+
+    } else if (c < 0x200000) {
+      // 11110www 10xxxxxx 10yyyyyy 10zzzzzz
+      r[j++] = U.B4LEAD | (c >> 18);
+      r[j++] = U.MBLEAD | ((c >> 12) & U.MBMASK);
+      r[j++] = U.MBLEAD | ((c >> 6) & U.MBMASK);
+      r[j++] = U.MBLEAD | (c & U.MBMASK);
+    }
+    i++;
+  }
+  return r.subarray(0, j);
+};

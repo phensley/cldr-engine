@@ -1,5 +1,5 @@
 import { vuintDecode, z85Decode, zigzagDecode } from '../src/decoding';
-import { vuintEncode, z85Encode, zigzagEncode } from '../src/encoding';
+import { utf8Encode, vuintEncode, z85Encode, zigzagEncode } from '../src/encoding';
 
 const uint8 = (n: number[]) => new Uint8Array(n);
 
@@ -107,4 +107,28 @@ test('zigzag decode', () => {
   expect(dec(2)).toEqual(1);
   expect(dec(3)).toEqual(-2);
   expect(dec(4)).toEqual(2);
+});
+
+test('utf-8 encode', () => {
+  // 'Íñţĕŕňāţĩōņąļĭžę'
+  let input = '\xcd\xf1\u0163\u0115\u0155\u0148\u0101\u0163\u0129\u014d' + '\u0146\u0105\u013c\u012d\u017e\u0119';
+  expect(utf8Encode(input)).toEqual(uint8([
+    0xc3, 0x8d, 0xc3, 0xb1, 0xc5, 0xa3, 0xc4, 0x95, 0xc5, 0x95, 0xc5, 0x88, 0xc4,
+    0x81, 0xc5, 0xa3, 0xc4, 0xa9, 0xc5, 0x8d, 0xc5, 0x86, 0xc4, 0x85, 0xc4, 0xbc,
+    0xc4, 0xad, 0xc5, 0xbe, 0xc4, 0x99
+  ]));
+
+  // MDN String.fromCodePoint example '☃★♲你' inclues a surrogate pair
+  input = '\u2603 \u2605 \u2672 \ud87e\udc04';
+  expect(utf8Encode(input)).toEqual(uint8([
+    0xe2, 0x98, 0x83, 0x20, 0xe2, 0x98, 0x85, 0x20, 0xe2, 0x99, 0xb2, 0x20, 0xf0,
+    0xaf, 0xa0, 0x84
+  ]));
+
+  // Cases from Go examples
+  expect(utf8Encode('A')).toEqual(uint8([0x41]));
+  expect(utf8Encode('ö')).toEqual(uint8([0xc3, 0xb6]));
+  expect(utf8Encode('Ж')).toEqual(uint8([0xd0, 0x96]));
+  expect(utf8Encode('€')).toEqual(uint8([0xe2, 0x82, 0xac]));
+  expect(utf8Encode('𝄞')).toEqual(uint8([0xf0, 0x9d, 0x84, 0x9e]));
 });
