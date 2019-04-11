@@ -93,7 +93,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
-[0.13.5]: https://github.com/phensley/cldr-engine/compare/v0.13.5...v0.13.6
+[0.13.6]: https://github.com/phensley/cldr-engine/compare/v0.13.5...v0.13.6
 [0.13.5]: https://github.com/phensley/cldr-engine/compare/v0.13.4...v0.13.5
 [0.13.4]: https://github.com/phensley/cldr-engine/compare/v0.12.1...v0.13.4
 [0.12.1]: https://github.com/phensley/cldr-engine/compare/v0.11.4...v0.12.1
