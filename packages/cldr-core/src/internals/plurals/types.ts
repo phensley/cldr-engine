@@ -68,7 +68,10 @@ export class PluralRules {
   }
 
   private evaluate(language: string, operands: NumberOperands, cache: RuleCache): PluralType {
-    const rule = cache.get(language);
+    let rule = cache.get(language);
+    if (rule === undefined) {
+      rule = cache.get('root');
+    }
     if (rule !== undefined) {
       for (const cond of rule.conditions) {
         if (this.execute(operands, cond.conditions)) {
