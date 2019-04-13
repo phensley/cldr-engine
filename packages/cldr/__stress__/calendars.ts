@@ -31,6 +31,8 @@ const dateOptions = (): DateFormatOptions[] => {
   res.push({ skeleton: 'yMMMd' });
   res.push({ skeleton: 'Hms' });
   res.push({ skeleton: 'yMMMdjms' });
+  res.push({ datetime: 'full', context: 'standalone', ca: 'buddhist', nu: 'beng' });
+  res.push({ datetime: 'medium', context: 'begin-sentence', ca: 'japanese', nu: 'arab' });
   return res;
 };
 
