@@ -9,7 +9,6 @@ import { NumberPattern } from '../../parsing/number';
 export class NumberContext {
 
   readonly options: NumberFormatOptions;
-  roundingMode: RoundingModeType;
   useSignificant: boolean;
 
   minInt: number = -1;
@@ -19,10 +18,10 @@ export class NumberContext {
   minSig: number = -1;
   currencyDigits: number = -1;
 
-  constructor(options: NumberFormatOptions, compact: boolean, scientific: boolean, currencyDigits: number = -1) {
+  constructor(options: NumberFormatOptions, readonly roundingMode: RoundingModeType,
+      compact: boolean, scientific: boolean, currencyDigits: number = -1) {
     const o = options;
     this.options = o;
-    this.roundingMode = options.round || 'half-even';
     this.currencyDigits = currencyDigits;
 
     // Determine if we should use default or significant digit modes. If we're in compact mode

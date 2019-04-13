@@ -72,6 +72,7 @@ export class NumberInternalsImpl implements NumberInternals {
     const style = options.style === undefined ? 'decimal' : options.style;
     let result: T;
     let plural: PluralType = 'other';
+    const round = options.round || 'half-even';
 
     const latnInfo = this.numbers.numberSystem.get('latn') as NumberSystemInfo;
     const info = this.numbers.numberSystem.get(params.numberSystemName) || latnInfo;
@@ -88,7 +89,7 @@ export class NumberInternalsImpl implements NumberInternals {
         const patternImpl = isShort ? (useLatn ? latnInfo.decimalFormats.short : decimalFormats.short)
           : (useLatn ? latnInfo.decimalFormats.long : decimalFormats.long);
 
-        const ctx = new NumberContext(options, true, false);
+        const ctx = new NumberContext(options, round, true, false);
 
         // Adjust the number using the compact pattern and divisor.
         const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
@@ -127,7 +128,7 @@ export class NumberInternalsImpl implements NumberInternals {
           params.symbols.percentSign : params.symbols.perMille;
 
         // Adjust number using pattern and options, then render.
-        const ctx = new NumberContext(options, false, false, -1);
+        const ctx = new NumberContext(options, round, false, false, -1);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         const operands = n.operands();
@@ -144,7 +145,7 @@ export class NumberInternalsImpl implements NumberInternals {
         let pattern = this.getNumberPattern(standardRaw, n.isNegative());
 
         // Adjust number using pattern and options, then render.
-        const ctx = new NumberContext(options, false, false, -1);
+        const ctx = new NumberContext(options, round, false, false, -1);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         const operands = n.operands();
@@ -159,7 +160,7 @@ export class NumberInternalsImpl implements NumberInternals {
     case 'scientific': {
       const sciFormat = info.scientificFormat;
 
-      const ctx = new NumberContext(options, false, true, -1);
+      const ctx = new NumberContext(options, round, false, true, -1);
       const latnSciFormat = latnInfo.scientificFormat;
       const format = sciFormat.get(bundle) || latnSciFormat.get(bundle);
       const pattern = this.getNumberPattern(format, n.isNegative());
@@ -188,6 +189,14 @@ export class NumberInternalsImpl implements NumberInternals {
     n: Decimal, code: string, options: CurrencyFormatOptions, params: NumberParams): T {
 
     const fractions = getCurrencyFractions(code);
+    const round = options.round || 'half-even';
+
+    if (options.cash) {
+      // Simple cash rounding to nearest "cash digits" increment
+      n = n.divide(fractions.cashRounding);
+      n = n.setScale(fractions.cashDigits, round);
+      n = n.multiply(fractions.cashRounding);
+    }
 
     // TODO: display context support
     const width = options.symbolWidth === 'narrow' ? 'narrow' : 'none';
@@ -212,7 +221,7 @@ export class NumberInternalsImpl implements NumberInternals {
         let pattern = this.getNumberPattern(raw, n.isNegative());
 
         // Adjust number using pattern and options, then render.
-        const ctx = new NumberContext(options, false, false, fractions.digits);
+        const ctx = new NumberContext(options, round, false, false, fractions.digits);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
 
@@ -236,7 +245,7 @@ export class NumberInternalsImpl implements NumberInternals {
         // correct pluralized pattern for the final rounded form.
         const patternImpl = currencyFormats.short;
 
-        const ctx = new NumberContext(options, true, false, fractions.digits);
+        const ctx = new NumberContext(options, round, true, false, fractions.digits);
         const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
 
         // Adjust the number using the compact pattern and divisor.
@@ -269,7 +278,7 @@ export class NumberInternalsImpl implements NumberInternals {
         let pattern = this.getNumberPattern(raw, n.isNegative());
 
         // Adjust number using pattern and options, then render.
-        const ctx = new NumberContext(options, false, false, fractions.digits);
+        const ctx = new NumberContext(options, round, false, false, fractions.digits);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
 

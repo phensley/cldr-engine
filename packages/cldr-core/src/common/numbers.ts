@@ -36,6 +36,7 @@ export interface DecimalFormatOptions extends NumberFormatOptions {
  * @alpha
  */
 export interface CurrencyFormatOptions extends NumberFormatOptions {
+  cash?: boolean;
   style?: CurrencyFormatStyleType;
   symbolWidth?: CurrencySymbolWidthType;
 }
