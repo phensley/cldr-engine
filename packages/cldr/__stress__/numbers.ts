@@ -78,6 +78,7 @@ const currencyOptions = (): CurrencyFormatOptions[] => {
     res.push({ style, maximumFractionDigits: 10 });
     res.push({ style, minimumSignificantDigits: 3 });
     res.push({ style, maximumSignificantDigits: 3 });
+    res.push({ cash: true, round: 'down', symbolWidth: 'narrow' });
   }
   return res;
 };

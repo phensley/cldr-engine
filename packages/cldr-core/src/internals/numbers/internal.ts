@@ -191,7 +191,7 @@ export class NumberInternalsImpl implements NumberInternals {
     const fractions = getCurrencyFractions(code);
     const round = options.round || 'half-even';
 
-    if (options.cash) {
+    if (options.cash && fractions.cashRounding > 1) {
       // Simple cash rounding to nearest "cash digits" increment
       n = n.divide(fractions.cashRounding);
       n = n.setScale(fractions.cashDigits, round);
