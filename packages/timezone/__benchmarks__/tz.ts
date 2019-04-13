@@ -1,3 +1,5 @@
+/// <reference path="../../cldr-utils/__benchmarks__/typings.d.ts" />
+
 import { Suite } from 'benchmark';
 import { makeSuite } from './util';
 import { TZ } from '../src';

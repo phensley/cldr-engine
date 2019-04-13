@@ -1,5 +1,7 @@
+/// <reference path="../../../cldr-utils/__benchmarks__/typings.d.ts" />
+
 import { Suite } from 'benchmark';
-import { makeSuite } from '../util';
+import { makeSuite } from '../../../cldr-utils/__benchmarks__/util';
 import { calendarsApi } from '../../__tests__/_helpers';
 import { CalendarsImpl, DateFormatOptions, GregorianDate } from '../../src';
 

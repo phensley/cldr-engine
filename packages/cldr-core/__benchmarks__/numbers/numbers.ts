@@ -1,4 +1,6 @@
-import { makeSuite } from '../util';
+/// <reference path="../../../cldr-utils/__benchmarks__/typings.d.ts" />
+
+import { makeSuite } from '../../../cldr-utils/__benchmarks__/util';
 import { DecimalFormatStyleType, NumbersImpl } from '../../src';
 import { numbersApi } from '../../__tests__/_helpers';
 
