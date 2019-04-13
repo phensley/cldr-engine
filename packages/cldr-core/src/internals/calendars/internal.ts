@@ -137,17 +137,19 @@ export class CalendarInternalsImpl implements CalendarInternals {
    * Translates a string into a supported calendar type, or undefined if none match.
    */
   protected supportedCalendar(c: string | undefined): CalendarType | undefined {
-    switch (c) {
-    case 'buddhist':
-    case 'iso8601':
-    case 'japanese':
-    case 'persian':
-    case 'gregory':
-      return c;
-    case 'gregorian':
-      return 'gregory';
-    default:
-      return undefined;
+    if (c && this.availableCalendars.has(c)) {
+      switch (c) {
+      case 'buddhist':
+      case 'iso8601':
+      case 'japanese':
+      case 'persian':
+      case 'gregory':
+        return c;
+      case 'gregorian':
+        return 'gregory';
+      }
     }
+    return undefined;
   }
+
 }

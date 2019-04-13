@@ -4,7 +4,6 @@ import {
   CurrencySpacingPosIndex,
   NumberSymbolIndex,
   NumberSystemsIndex,
-  // NumberSystemNameValues,
   PluralDigitValues
 } from '../schema/numbers';
 
