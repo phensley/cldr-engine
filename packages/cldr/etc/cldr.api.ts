@@ -143,6 +143,8 @@ interface CLDROptions {
 // @alpha (undocumented)
 interface CurrencyFormatOptions extends NumberFormatOptions {
   // (undocumented)
+  cash?: boolean;
+  // (undocumented)
   style?: CurrencyFormatStyleType;
   // (undocumented)
   symbolWidth?: CurrencySymbolWidthType;
