@@ -2,9 +2,11 @@ import * as fs from 'fs';
 import { join } from 'path';
 import * as zlib from 'zlib';
 
+import { config as defaultconfig } from '../../../cldr/src/config';
 import { CLDRFramework, CLDROptions } from '../../src';
 
-const packPath = (language: string) => join(__dirname, '..', '..', 'packs', `${language}.json.gz`);
+const packPath = (language: string) =>
+  join(__dirname, '..', '..', '..', 'cldr', 'packs', `${language}.json.gz`);
 
 export const loader = (language: string): any => {
   const path = packPath(language);
@@ -30,6 +32,7 @@ export const asyncLoader = (language: string): Promise<any> => {
 };
 
 const defaultOptions: CLDROptions = {
+  config: defaultconfig,
   debug: true,
   loader,
   asyncLoader,
@@ -40,7 +43,7 @@ const defaultOptions: CLDROptions = {
 type OptKey = keyof CLDROptions;
 
 export const getCLDR = (options: CLDROptions = defaultOptions): CLDRFramework => {
-  const merged: CLDROptions = {};
+  const merged: CLDROptions = { config: defaultconfig };
   const keys: OptKey[] = Object.keys(defaultOptions) as OptKey[];
   for (const key of keys) {
     const val = options[key];

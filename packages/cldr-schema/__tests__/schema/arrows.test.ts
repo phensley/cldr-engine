@@ -1,9 +1,11 @@
 import {
   DigitsArrow,
+  FieldArrow,
   KeyIndex,
   PluralIndex,
   PluralType,
   PrimitiveBundle,
+  ScopeArrow,
   Vector1Arrow,
   Vector2Arrow,
 } from '../../src';
@@ -45,6 +47,16 @@ class DummyBundle implements PrimitiveBundle {
   }
 }
 
+test('field arrow', () => {
+  const bundle = new DummyBundle(true);
+
+  const a = new FieldArrow(1);
+  expect(a.get(bundle)).toEqual('1');
+
+  const b = new FieldArrow(123);
+  expect(b.get(bundle)).toEqual('123');
+});
+
 test('digits arrow', () => {
   const bundle = new DummyBundle(true, false);
   const a = new DigitsArrow(0, PluralIndex, PluralDigitValues);
@@ -68,6 +80,18 @@ test('digits arrow', () => {
   expect(a.get(bundle, 'zero', 17)).toEqual(['58', 59]);
 
   expect(a.get(bundle, 'foo' as PluralType, 10)).toEqual(['', 0]);
+});
+
+type FooScope = {
+  [k in Foo]: any
+};
+
+test('scope arrow', () => {
+  const map: FooScope = { foo1: { bar: 1 }, foo2: { bar: 2 }};
+  const a = new ScopeArrow(map);
+  expect(a.get('foo1')).toEqual({ bar: 1 });
+  expect(a.get('foo2')).toEqual({ bar: 2 });
+  expect(a.get('bar' as any as Foo)).toBe(undefined);
 });
 
 test('1d arrow', () => {
@@ -95,11 +119,12 @@ test('missing 1d arrow', () => {
 });
 
 test('2d arrow', () => {
-  const bundle = new DummyBundle(true);
+  const bundle = new DummyBundle(true, true);
   const i1 = new KeyIndex<Foo>(FOO);
   const i2 = new KeyIndex<Bar>(BAR);
   const a = new Vector2Arrow<Foo, Bar>(0, i1, i2);
 
+  expect(a.exists(bundle)).toEqual(true);
   expect(a.get(bundle, 'foo1', 'bar1')).toEqual('1');
   expect(a.get(bundle, 'foo1', 'bar2')).toEqual('2');
   expect(a.get(bundle, 'foo1', 'bar3')).toEqual('3');

@@ -1,6 +1,5 @@
-import { CLDRFramework } from '../src';
-import { getCLDR } from './helpers';
-import { CurrencyFormatOptions, NumberSystemInfo, Quantity } from '@phensley/cldr-core';
+import { CurrencyFormatOptions, CLDRFramework, NumberSystemInfo, Quantity } from '../src';
+import { getCLDR } from './_helpers';
 
 const { parseLanguageTag, resolveLocale } = CLDRFramework;
 
@@ -171,7 +170,7 @@ test('async await loader', async () => {
 });
 
 test('loader errors', () => {
-  const framework = new CLDRFramework({});
+  const framework = new CLDRFramework({ config: {} });
   expect(() => framework.get('en')).toThrowError();
   expect(() => framework.getAsync('en')).toThrowError();
 });
