@@ -18,12 +18,12 @@ export const JapaneseInfo: CalendarInfo = {
     '208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 ' +
     '231 232 233 234 235 236').split(' '),
   months: GregorianInfo.months,
-  availableFormats: ('Bh Bhm Bhms E EBhm EBhms EEEEd EHm EHms Ed Ehm Ehms Gy GyM GyMMM ' +
-    'GyMMMEEEEd GyMMMEd GyMMMM GyMMMMEd GyMMMMd GyMMMd H HHmm HHmmZ HHmmss Hm Hms M ' +
-    'MEEEEd MEd MMM MMMEEEEd MMMEd MMMM MMMMEd MMMMd MMMMdd MMMd MMMdd MMd MMdd Md d h ' +
-    'hm hms mmss ms y yM yMEd yMM yMMM yMMMEd yMMMM yMMMd yMd yQQQ yQQQQ yyyy yyyyM ' +
-    'yyyyMEEEEd yyyyMEd yyyyMM yyyyMMM yyyyMMMEEEEd yyyyMMMEd yyyyMMMM yyyyMMMMEd ' +
-    'yyyyMMMMccccd yyyyMMMMd yyyyMMMd yyyyMMdd yyyyMd yyyyQQQ yyyyQQQQ').split(' '),
+  // availableFormats: ('Bh Bhm Bhms E EBhm EBhms EEEEd EHm EHms Ed Ehm Ehms Gy GyM GyMMM ' +
+  //   'GyMMMEEEEd GyMMMEd GyMMMM GyMMMMEd GyMMMMd GyMMMd H HHmm HHmmZ HHmmss Hm Hms M ' +
+  //   'MEEEEd MEd MMM MMMEEEEd MMMEd MMMM MMMMEd MMMMd MMMMdd MMMd MMMdd MMd MMdd Md d h ' +
+  //   'hm hms mmss ms y yM yMEd yMM yMMM yMMMEd yMMMM yMMMd yMd yQQQ yQQQQ yyyy yyyyM ' +
+  //   'yyyyMEEEEd yyyyMEd yyyyMM yyyyMMM yyyyMMMEEEEd yyyyMMMEd yyyyMMMM yyyyMMMMEd ' +
+  //   'yyyyMMMMccccd yyyyMMMMd yyyyMMMd yyyyMMdd yyyyMd yyyyQQQ yyyyQQQQ').split(' '),
   // pluralAvailableFormats: [],
   intervalFormats: ('H Hm Hmv Hv M MEd MMM MMMEEEEd MMMEd MMMM MMMMEd MMMMd MMMd Md ' +
     'd h hm hmv hv y yM yMEd yMMM yMMMEEEEd yMMMEd yMMMM yMMMMEd yMMMMd yMMMd yMd').split(' ')
@@ -33,6 +33,6 @@ export interface JapaneseSchema extends CalendarSchema {
 
 }
 
-export const JapaneseAvailableFormatIndex = new KeyIndex(JapaneseInfo.availableFormats);
+// export const JapaneseAvailableFormatIndex = new KeyIndex(JapaneseInfo.availableFormats);
 export const JapaneseEraIndex = new KeyIndex(JapaneseInfo.eras);
 export const JapaneseIntervalFormatIndex = new KeyIndex(JapaneseInfo.intervalFormats);

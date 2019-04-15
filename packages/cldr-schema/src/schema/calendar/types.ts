@@ -102,7 +102,7 @@ export const enum Weekday {
 export interface CalendarInfo {
   eras: string[];
   months: string[];
-  availableFormats: string[];
+  // availableFormats: string[];
   intervalFormats: string[];
 }
 
@@ -117,7 +117,8 @@ export interface CalendarSchema {
   readonly eras: Vector2Arrow<EraWidthType, string>;
   readonly format: CalendarFields;
   readonly standAlone: CalendarFields;
-  readonly availableFormats: Vector2Arrow<PluralType, string>;
+  readonly availableFormats: Vector1Arrow<string>;
+  readonly pluralFormats: Vector2Arrow<PluralType, string>;
   readonly intervalFormats: Vector2Arrow<DateTimePatternFieldType, string>;
   readonly dateFormats: Vector1Arrow<FormatWidthType>;
   readonly timeFormats: Vector1Arrow<FormatWidthType>;

@@ -1,5 +1,5 @@
 import {
-  GregorianAvailableFormatIndex,
+  // GregorianAvailableFormatIndex,
   GregorianEraIndex,
   GregorianIntervalFormatIndex,
   GregorianMonthsIndex
@@ -11,7 +11,7 @@ import { KeyIndexMap } from '../types';
 export const GREGORIAN = calendarScope('gregorian', 'Gregorian');
 
 export const GREGORIAN_INDICES: KeyIndexMap = {
-  'gregorian-available-format': GregorianAvailableFormatIndex,
+  // 'gregorian-available-format': GregorianAvailableFormatIndex,
   'gregorian-era': GregorianEraIndex,
   'gregorian-interval-format': GregorianIntervalFormatIndex,
   'gregorian-month': GregorianMonthsIndex

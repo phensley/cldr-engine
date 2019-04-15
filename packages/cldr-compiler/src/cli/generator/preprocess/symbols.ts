@@ -3,7 +3,17 @@ import { availableLocales, getMain } from '../../../cldr';
 /**
  * Copy an object's keys into a set.
  */
-const addKeys = (obj: any, set: Set<string>) => Object.keys(obj).forEach(v => set.add(v));
+const addKeys = (obj: any, set: Set<string>) => Object.keys(obj || {}).forEach(v => set.add(v));
+
+const nestedKeys = (obj: any): any => {
+  const r: any = {};
+  Object.keys(obj || {}).forEach(k => {
+    for (const key of Object.keys(obj[k])) {
+      r[key] = 1;
+    }
+  });
+  return r;
+};
 
 const unique = (values: string[]): string[] => {
   const set = new Set<string>();
@@ -37,6 +47,16 @@ export const getSymbols = (): any => {
   const territories = new Set();
   const unitsRaw = new Set();
 
+  const gregorianAvailableFormats = new Set();
+  const buddhistAvailableFormats = new Set();
+  const persianAvailableFormats = new Set();
+  const japaneseAvailableFormats = new Set();
+
+  const gregorianPluralFormats = new Set();
+  const buddhistPluralFormats = new Set();
+  const persianPluralFormats = new Set();
+  const japanesePluralFormats = new Set();
+
   locales.forEach(lang => {
     console.warn(`Scanning '${lang}'..`);
 
@@ -51,6 +71,16 @@ export const getSymbols = (): any => {
     addKeys(main.Territories.territories, territories);
     addKeys(main.TimeZoneNames.timeZoneIds, timeZoneIds);
     addKeys(main.TimeZoneNames.metaZoneIds, metaZoneIds);
+
+    addKeys(main.Gregorian.availableFormats, gregorianAvailableFormats);
+    addKeys(main.Buddhist.availableFormats, buddhistAvailableFormats);
+    addKeys(main.Persian.availableFormats, persianAvailableFormats);
+    addKeys(main.Japanese.availableFormats, japaneseAvailableFormats);
+
+    addKeys(nestedKeys(main.Gregorian.pluralFormats), gregorianPluralFormats);
+    addKeys(nestedKeys(main.Buddhist.pluralFormats), buddhistPluralFormats);
+    addKeys(nestedKeys(main.Persian.pluralFormats), persianPluralFormats);
+    addKeys(nestedKeys(main.Japanese.pluralFormats), japanesePluralFormats);
   });
 
   const unitCategories = unique(sorted(unitsRaw).map(u => u.split('-')[0]));
@@ -64,5 +94,15 @@ export const getSymbols = (): any => {
     languages: sorted(languages),
     scripts: sorted(scripts),
     territories: sorted(territories),
+
+    gregorianAvailableFormats: sorted(gregorianAvailableFormats),
+    buddhistAvailableFormats: sorted(buddhistAvailableFormats),
+    persianAvailableFormats: sorted(persianAvailableFormats),
+    japaneseAvailableFormats: sorted(japaneseAvailableFormats),
+
+    gregorianPluralFormats: sorted(gregorianPluralFormats),
+    buddhistPluralFormats: sorted(buddhistPluralFormats),
+    persianPluralFormats: sorted(persianPluralFormats),
+    japanesePluralFormats: sorted(japanesePluralFormats),
   };
 };

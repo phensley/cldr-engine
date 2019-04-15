@@ -21,7 +21,7 @@ const objectToCode = (o: any, depth: number = 1): string => {
 
   } else if (Array.isArray(o)) {
     const vals = o.map(v => objectToCode(v, depth + 1)).join(`, `);
-    r += `[\n${indent(depth)}${vals}\n${indent(depth - 1)}]`;
+    r += `[\n${vals ? indent(depth) : ''}${vals}\n${indent(depth - 1)}]`;
 
   } else {
     const x = indent(depth);
@@ -73,6 +73,14 @@ export const getConfig = (data: any): Code[] => {
     'script-id': scripts,
     'region-id': regions,
     'currency-id': currencies,
+    'gregorian-available-format': data.gregorianAvailableFormats,
+    'gregorian-plural-format': data.gregorianPluralFormats,
+    'buddhist-available-format': data.buddhistAvailableFormats,
+    'buddhist-plural-format': data.buddhistPluralFormats,
+    'persian-available-format': data.persianAvailableFormats,
+    'persian-plural-format': data.persianPluralFormats,
+    'japanese-available-format': data.japaneseAvailableFormats,
+    'japanese-plural-format': data.japanesePluralFormats,
     'number-system-name': NUMBER_SYSTEM_NAME,
     'unit-id': units,
     'timezone-id': timeZoneIds

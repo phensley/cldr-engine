@@ -47,7 +47,8 @@ export class CalendarPatterns {
   protected availableMatcher: DatePatternMatcher = new DatePatternMatcher();
   protected intervalMatcher: { [x: string]: DatePatternMatcher } = {};
 
-  protected rawAvailableFormats: { [x: string]: { [y: string]: string } } = {};
+  protected rawAvailableFormats: { [x: string]: string } = {};
+  protected rawPluralFormats: { [x: string]: { [y: string]: string } } = {};
   protected rawIntervalFormats: { [x: string]: { [y: string]: string } } = {};
   protected intervalFallback: string;
 
@@ -71,6 +72,7 @@ export class CalendarPatterns {
 
     // Fetch skeletons and build best-fit matchers
     this.rawAvailableFormats = this.schema.availableFormats.mapping(bundle);
+    this.rawPluralFormats = this.schema.pluralFormats.mapping(bundle);
     this.rawIntervalFormats = this.schema.intervalFormats.mapping(bundle);
     this.buildAvailableMatcher();
     this.buildIntervalMatcher();
@@ -147,7 +149,8 @@ export class CalendarPatterns {
   }
 
   getAvailablePattern(_d: CalendarDate, s: DateSkeleton): DateTimeNode[] {
-    const pattern = s.pattern ? s.pattern : this.rawAvailableFormats.other[s.skeleton];
+    const pattern = s.pattern ? s.pattern :
+      this.rawAvailableFormats[s.skeleton] || (this.rawPluralFormats.other || {})[s.skeleton];
     return this.internals.calendars.parseDatePattern(pattern || '');
   }
 
@@ -182,20 +185,20 @@ export class CalendarPatterns {
   }
 
   protected buildAvailableMatcher(): void {
-    let formats = this.dateFormats;
-    for (const width of Object.keys(formats)) {
+    for (const width of Object.keys(this.dateFormats)) {
       this.availableMatcher.add(this.skeletonParser.parse(this.dateFormats[width], true));
       this.availableMatcher.add(this.skeletonParser.parse(this.timeFormats[width], true));
     }
 
-    // These formats are pluralized, so use the 'other' category which will
+    // For the pluralized formats use the 'other' category which will
     // be populated for every locale.
-    formats = this.rawAvailableFormats.other || {};
-    for (const skeleton of Object.keys(formats)) {
-      // Only add skeletons which point to valid formats for this locale. Not all
-      // skeletons are implemented for all locales.
-      if (formats[skeleton]) {
-        this.availableMatcher.add(this.skeletonParser.parse(skeleton));
+    for (const formats of [this.rawAvailableFormats, this.rawPluralFormats.other || {}]) {
+      for (const skeleton of Object.keys(formats)) {
+        // Only add skeletons which point to valid formats for this locale. Not all
+        // skeletons are implemented for all locales.
+        if (formats[skeleton]) {
+          this.availableMatcher.add(this.skeletonParser.parse(skeleton));
+        }
       }
     }
   }
@@ -239,15 +242,19 @@ export class GregorianPatterns extends CalendarPatterns {
         case 'MMMMW': {
           const week = coerceDecimal(d.weekOfMonth());
           plural = this.internals.plurals.cardinal(this.language, week.operands());
+          pattern = this.rawPluralFormats[plural][s.skeleton];
           break;
         }
         case 'yw': {
           const week = coerceDecimal(d.weekOfYear());
           plural = this.internals.plurals.cardinal(this.language, week.operands());
+          pattern = this.rawPluralFormats[plural][s.skeleton];
           break;
         }
+        default:
+          pattern = this.rawAvailableFormats[s.skeleton];
+          break;
       }
-      pattern = this.rawAvailableFormats[plural][s.skeleton];
     }
     return this.internals.calendars.parseDatePattern(pattern || '');
   }

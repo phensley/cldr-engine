@@ -13,7 +13,8 @@ const weekdays: (string | [string, string])[] = [
 ];
 
 const mappings = [
-  Mappings.field('availableFormats').pluralKeys().remap(0, 2, 1, 3),
+  Mappings.field('availableFormats').keys().remap(0, 1, 2),
+  Mappings.field('pluralFormats').pluralKeys().remap(0, 2, 1, 3),
   Mappings.field('intervalFormats').keys().keys().remap(0, 2, 1, 3),
   Mappings.fields(['dateFormats', 'timeFormats', 'dateTimeFormats']).keys().remap(0, 1, 2),
   Mappings.field('intervalFormatFallback').remap(0, 1),

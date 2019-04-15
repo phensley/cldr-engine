@@ -246,12 +246,28 @@ const DateFields = {
   relativeTimes: get([_dateFields, dateFieldNames])
 };
 
+const filterFormats = (o: any, plural: boolean) => {
+  const r: any = {};
+  for (const key of Object.keys(o)) {
+    // check if the format key is pluralized
+    const exists = key.indexOf('-count-') !== -1;
+
+    // exclude variants for now
+    const variant = key.indexOf('-alt-variant') !== -1;
+    if (!variant && ((plural && exists) || (!plural && !exists))) {
+      r[key] = o[key];
+    }
+  }
+  return r;
+};
+
 const coreCalendarSchema = (name: string) => {
   const prefix = (...keys: string[]) => ['dates', 'calendars', name, ...keys];
   const intervals = prefix('dateTimeFormats', 'intervalFormats');
 
   return {
-    availableFormats: get(prefix('dateTimeFormats', 'availableFormats')),
+    availableFormats: get([prefix('dateTimeFormats', 'availableFormats'), (o: any) => filterFormats(o, false)]),
+    pluralFormats: get([prefix('dateTimeFormats', 'availableFormats'), (o: any) => filterFormats(o, true)]),
     dateFormats: get(prefix('dateFormats', ..._sizeProps)),
     dayPeriods: get(prefix('dayPeriods', ..._formats)),
     dateTimeFormats: get(prefix('dateTimeFormats', ..._sizeProps)),

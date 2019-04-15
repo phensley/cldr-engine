@@ -8,7 +8,7 @@ test('code builder', () => {
   }).origin();
 
   for (const cal of ['gregorian', 'buddhist', 'japanese', 'persian']) {
-    const key = `${cal}-available-format`;
+    const key = `${cal}-month`;
     expect(o.getIndex(key).size).toBeGreaterThan(0);
     expect(o.getValues(key).length).toBeGreaterThan(0);
   }

@@ -1,6 +1,6 @@
 import {
   GregorianMonthsIndex,
-  PersianAvailableFormatIndex,
+  // PersianAvailableFormatIndex,
   PersianEraIndex,
   PersianIntervalFormatIndex,
 } from '../schema';
@@ -11,7 +11,7 @@ import { KeyIndexMap } from '../types';
 export const PERSIAN = calendarScope('persian', 'Persian');
 
 export const PERSIAN_INDICES: KeyIndexMap = {
-  'persian-available-format': PersianAvailableFormatIndex,
+  // 'persian-available-format': PersianAvailableFormatIndex,
   'persian-era': PersianEraIndex,
   'persian-interval-format': PersianIntervalFormatIndex,
   'persian-month': GregorianMonthsIndex
