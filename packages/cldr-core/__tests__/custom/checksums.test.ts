@@ -5,6 +5,7 @@ test('correct', () => {
   const cfg = { calendars: ['buddhist'] };
   const path = customPack(lang, cfg);
   const framework = customFramework(path, cfg);
+  framework.get(lang);
   expect(() => framework.get(lang)).not.toThrow();
 });
 
