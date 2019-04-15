@@ -11,7 +11,7 @@ import {
   UnitLength,
   UnitType
 } from '../src';
-import { getCLDR } from '../__tests__/helpers';
+import { getCLDR } from '../__tests__/_helpers';
 import { Timer } from './timer';
 
 const { availableLocales } = CLDRFramework;
@@ -65,6 +65,8 @@ const decimalOptions = (): DecimalFormatOptions[] => {
     res.push({ style, minimumSignificantDigits: 3 });
     res.push({ style, maximumSignificantDigits: 3 });
   }
+  res.push({ style: 'long', divisor: 1e4 });
+  res.push({ style: 'short', divisor: 1e6 });
   return res;
 };
 
@@ -80,7 +82,9 @@ const currencyOptions = (): CurrencyFormatOptions[] => {
     res.push({ style, maximumSignificantDigits: 3 });
     res.push({ cash: true, round: 'down', symbolWidth: 'narrow' });
   }
-  return res;
+  res.push({ style: 'short', divisor: 1e4 });
+  res.push({ style: 'short', divisor: 1e6 });
+return res;
 };
 
 const unitOptions = (): UnitFormatOptions[] => {
@@ -90,6 +94,8 @@ const unitOptions = (): UnitFormatOptions[] => {
       res.push({ length });
       res.push({ style, length });
       res.push({ style, group: true, length });
+      res.push({ divisor: 1e4 });
+      res.push({ divisor: 1e6 });
     }
   }
   return res;

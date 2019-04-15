@@ -5,7 +5,7 @@ import {
   ZonedDateTime
 } from '../src';
 
-import { getCLDR } from '../__tests__/helpers';
+import { getCLDR } from '../__tests__/_helpers';
 import { Timer } from './timer';
 
 const { availableLocales } = CLDRFramework;
