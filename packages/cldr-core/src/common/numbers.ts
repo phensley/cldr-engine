@@ -1,10 +1,19 @@
 import { NumberSystemCategory, NumberSystemName } from '@phensley/cldr-schema';
 import { RoundingModeType } from '@phensley/decimal';
 
+/**
+ * @alpha
+ */
 export type NumberSystemType = NumberSystemCategory | NumberSystemName;
 
+/**
+ * @alpha
+ */
 export type NumberFormatErrorType = 'nan' | 'infinity';
 
+/**
+ * @alpha
+ */
 export interface NumberFormatOptions {
   nu?: NumberSystemType;
   round?: RoundingModeType;
@@ -17,13 +26,22 @@ export interface NumberFormatOptions {
   minimumSignificantDigits?: number;
 }
 
+/**
+ * @alpha
+ */
 export type DecimalFormatStyleType =
   'decimal' | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled' | 'short' | 'long' | 'scientific';
 
+/**
+ * @alpha
+ */
 export type CurrencyFormatStyleType =
   'symbol' | 'accounting' | 'code' | 'name' | 'short';
 
-  export type CurrencySymbolWidthType = 'default' | 'narrow';
+/**
+ * @alpha
+ */
+export type CurrencySymbolWidthType = 'default' | 'narrow';
 
 /**
  * @alpha
@@ -44,6 +62,8 @@ export interface CurrencyFormatOptions extends NumberFormatOptions {
 
 /**
  * Information on rounding and number of decimal digits for a given currency.
+ *
+ * @alpha
  */
 export interface CurrencyFractions {
   digits: number;

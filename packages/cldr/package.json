@@ -61,7 +61,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "^6.3.0",
+    "@microsoft/api-extractor": "beta",
     "@phensley/cldr-compiler": "^0.13.6",
     "@types/jest": "^23.3.14",
     "@types/node": "^10.12.21",
