@@ -92,7 +92,14 @@ export class NumberInternalsImpl implements NumberInternals {
         const ctx = new NumberContext(options, round, true, false);
 
         // Adjust the number using the compact pattern and divisor.
-        const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
+        // const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
+        let q2: Decimal;
+        let ndigits: number;
+        if (options.divisor) {
+          [q2, ndigits] = this.setupCompactDivisor(bundle, n, ctx, standardRaw, options.divisor, patternImpl);
+        } else {
+          [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
+        }
 
         // Compute the plural category for the final q2.
         const operands = q2.operands();
@@ -249,7 +256,13 @@ export class NumberInternalsImpl implements NumberInternals {
         const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
 
         // Adjust the number using the compact pattern and divisor.
-        const [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
+        let q2: Decimal;
+        let ndigits: number;
+        if (options.divisor) {
+          [q2, ndigits] = this.setupCompactDivisor(bundle, n, ctx, standardRaw, options.divisor, patternImpl);
+        } else {
+          [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
+        }
 
         // Compute the plural category for the final q2.
         const operands = q2.operands();
@@ -313,13 +326,7 @@ export class NumberInternalsImpl implements NumberInternals {
     let raw: string;
     let ndivisor = 0;
     [raw, ndivisor] = patternImpl.get(bundle, 'other', ndigits);
-    let pattern: NumberPattern;
-    if (raw) {
-      pattern = this.getNumberPattern(raw, negative);
-    } else {
-      pattern = this.getNumberPattern(standardRaw, negative);
-      pattern = { ...pattern, minFrac: 0, maxFrac: 0 };
-    }
+    let pattern = this.getCompactPattern(raw, standardRaw, negative);
 
     const fracDigits = ctx.useSignificant ? -1 : 0;
 
@@ -345,13 +352,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
       let divisor = 0;
       [raw, divisor] = patternImpl.get(bundle, 'other', ndigits);
-      if (raw) {
-        pattern = this.getNumberPattern(raw, negative);
-      } else {
-        // Adjust standard pattern to have same fraction settings as compact
-        pattern = this.getNumberPattern(standardRaw, negative);
-        pattern = { ...pattern, minFrac: 0, maxFrac: 0 };
-      }
+      pattern = this.getCompactPattern(raw, standardRaw, negative);
 
       // If divisor changed we need to divide and adjust again. We don't divide,
       // we just move the decimal point, since our Decimal type uses a radix that
@@ -369,5 +370,32 @@ export class NumberInternalsImpl implements NumberInternals {
     }
 
     return [q2, ndigits];
+  }
+
+  private setupCompactDivisor(bundle: Bundle, n: Decimal, ctx: NumberContext,
+    standardRaw: string, divisor: number,
+    patternImpl: DigitsArrow<PluralType>): [Decimal, number] {
+
+    const negative = n.isNegative();
+    const ndigits = Math.log10(divisor) + 1;
+    // Select compact patterns based on number of digits in divisor
+    const [raw, ndivisor] = patternImpl.get(bundle, 'other', ndigits);
+    if (ndivisor > 0) {
+      n = n.movePoint(-ndivisor);
+    }
+
+    const pattern = this.getCompactPattern(raw, standardRaw, negative);
+    const fracDigits = ctx.useSignificant ? -1 : 0;
+    ctx.setCompact(pattern, n.integerDigits(), divisor, fracDigits);
+    return [ctx.adjust(n), ndigits];
+  }
+
+  private getCompactPattern(raw: string, standardRaw: string, negative: boolean): NumberPattern {
+    if (raw) {
+      return this.getNumberPattern(raw, negative);
+    }
+    // Adjust standard pattern to have same fraction settings as compact
+    const pattern = this.getNumberPattern(standardRaw, negative);
+    return { ...pattern, minFrac: 0, maxFrac: 0 };
   }
 }

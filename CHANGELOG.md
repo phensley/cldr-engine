@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
  - Implemented cash rounding for currency formatting.
  - Currency options now accepts `cash: boolean` to enable cash rounding.
+ - Decimal, currency and unit formatting options now accept a `divisor` option, used to format numbers compactly in terms of an explicit power of 10, e.g. `0.34K`, `12,456 thousand`, `2,887 billion`, etc.
 
 ## [0.13.6]
 ### Fixed/Changed

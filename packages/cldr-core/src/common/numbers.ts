@@ -9,6 +9,7 @@ export interface NumberFormatOptions {
   nu?: NumberSystemType;
   round?: RoundingModeType;
   group?: boolean;
+  divisor?: number;
   minimumIntegerDigits?: number;
   maximumFractionDigits?: number;
   minimumFractionDigits?: number;
