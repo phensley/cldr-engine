@@ -119,13 +119,11 @@ export class CalendarPatterns {
   }
 
   getDatePattern(width: string): DateTimeNode[] {
-    const pattern = this.dateFormats[width];
-    return pattern ? this.internals.calendars.parseDatePattern(pattern) : [];
+    return this.internals.calendars.parseDatePattern(this.dateFormats[width] || '');
   }
 
   getTimePattern(width: string): DateTimeNode[] {
-    const pattern = this.timeFormats[width];
-    return pattern ? this.internals.calendars.parseDatePattern(pattern) : [];
+    return this.internals.calendars.parseDatePattern(this.timeFormats[width] || '');
   }
 
   getCachedSkeletonRequest(key: string): CachedSkeletonRequest | undefined {
@@ -150,13 +148,13 @@ export class CalendarPatterns {
 
   getAvailablePattern(_d: CalendarDate, s: DateSkeleton): DateTimeNode[] {
     const pattern = s.pattern ? s.pattern : this.rawAvailableFormats.other[s.skeleton];
-    return pattern ? this.internals.calendars.parseDatePattern(pattern) : [];
+    return this.internals.calendars.parseDatePattern(pattern || '');
   }
 
   getIntervalPattern(field: string, skeleton: string): DateTimeNode[] {
     const group = this.rawIntervalFormats[field];
     const pattern = group ? group[skeleton] : '';
-    return pattern ? this.internals.calendars.parseDatePattern(pattern) : [];
+    return this.internals.calendars.parseDatePattern(pattern || '');
   }
 
   getIntervalFallback(): string {
@@ -251,7 +249,7 @@ export class GregorianPatterns extends CalendarPatterns {
       }
       pattern = this.rawAvailableFormats[plural][s.skeleton];
     }
-    return pattern ? this.internals.calendars.parseDatePattern(pattern) : [];
+    return this.internals.calendars.parseDatePattern(pattern || '');
   }
 
 }
