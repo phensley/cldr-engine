@@ -44,6 +44,31 @@ export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
 };
 
 /**
+ * Map a given timezone identifier to a CLDR stable timezone id.
+ * This is lighter-weight than going through `zoneInfoFromUTC`
+ * since it doesn't need to decode the zone data.
+ */
+export const getStableTimeZoneId = (zoneid: string): string => {
+  // Check if this is already a CLDR stable timezone id.
+  const isstable = TimeZoneStableIdIndex.get(zoneid) !== -1;
+  if (!isstable) {
+    // Resolve the passed-in string to a real tzdb zone id
+    const realid = TZ.resolveId(zoneid);
+    if (realid) {
+      // Map to a CLDR stable id
+      zoneid = metazones.getStableId(realid);
+    }
+  }
+  return zoneid;
+};
+
+/**
+ * Maps a possible timezone alias to the correct id.
+ */
+export const substituteZoneAlias = (id: string): string =>
+  timeZoneAliases[id] || id;
+
+/**
  * Index all metazone information for quick access.
  */
 class Metazones {
@@ -132,14 +157,6 @@ class Metazones {
 
 const metazones = new Metazones(metazoneData);
 
-/**
- * Checks if this timezone id is an alias.
- */
-export const substituteZoneAlias = (id: string): string => {
-  const result = timeZoneAliases[id];
-  return result === undefined ? id : result;
-};
-
 const zoneAlias = stringToObject(zoneAliasRaw, '|', ':');
 
 /**
@@ -155,4 +172,5 @@ export const timeZoneAliases: { [x: string]: string } = {
   ...zoneAlias,
 
   'Canada/East-Saskatchewan': 'America/Regina',
+  'Etc/Unknown': 'Factory'
 };

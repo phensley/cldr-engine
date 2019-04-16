@@ -6,6 +6,7 @@ import {
 } from '@phensley/cldr-schema';
 
 import { DecimalArg, Part } from '@phensley/decimal';
+import { TZ } from '@phensley/timezone';
 
 import { Bundle } from '../resource';
 
@@ -42,12 +43,14 @@ import { Calendars } from './api';
 import { PrivateApiImpl } from './private';
 import { CalendarContext } from '../internals/calendars/formatter';
 import { NumberParams } from '../common/private';
+import { getStableTimeZoneId, substituteZoneAlias } from '../systems/calendars/timezone';
 
 export class CalendarsImpl implements Calendars {
 
   readonly manager: CalendarManager;
   readonly firstDay: number;
   readonly minDays: number;
+  private exemplarCities: { [x: string]: string } | undefined;
 
   constructor(
     protected readonly bundle: Bundle,
@@ -58,6 +61,7 @@ export class CalendarsImpl implements Calendars {
     const region = bundle.region();
     this.firstDay = internals.calendars.weekFirstDay(region);
     this.minDays = internals.calendars.weekMinDays(region);
+
   }
 
   /**
@@ -243,19 +247,42 @@ export class CalendarsImpl implements Calendars {
   }
 
   timeZoneIds(): string[] {
-    const tzids = this.internals.config['timezone-id'];
-    return tzids ? tzids.slice(0) : [];
+    return TZ.zoneIds();
   }
 
-  timeZoneInfo(): TimeZoneInfo[] {
-    const cities = this.internals.schema.TimeZones.exemplarCity.mapping(this.bundle);
-    const res: TimeZoneInfo[] = [];
-    for (const id of this.timeZoneIds()) {
-      const cityName = cities[id] || cities['Etc/Unknown'];
-      res.push({ id, city: { name: cityName } });
-    }
-    return res;
+  resolveTimeZoneId(zoneid: string): string | undefined {
+    return TZ.resolveId(substituteZoneAlias(zoneid));
   }
+
+  timeZoneInfo(zoneid: string): TimeZoneInfo {
+    if (!this.exemplarCities) {
+      this.exemplarCities = this.internals.schema.TimeZones.exemplarCity.mapping(this.bundle);
+    }
+    const id = TZ.resolveId(substituteZoneAlias(zoneid)) || 'Factory';
+    const stableid = getStableTimeZoneId(id);
+    const city = this.exemplarCities[stableid] || this.exemplarCities['Etc/Unknown'];
+    return {
+      id,
+      city: { name: city }
+    };
+  }
+
+  // timeZoneStableIds(): string[] {
+  //   const tzids = this.internals.config['timezone-id'];
+  //   return tzids ? tzids.slice(0) : [];
+  // }
+
+  // timeZoneInfo(): TimeZoneInfo[] {
+  //   // TODO: cache this?
+  //   const cities = this.internals.schema.TimeZones.exemplarCity.mapping(this.bundle);
+  //   const res: TimeZoneInfo[] = [];
+  //   for (const id of TZ.zoneIds()) {
+  //     const stableid = getStableTimeZoneId(substituteZoneAlias(id));
+  //     const cityName = cities[stableid] || cities['Etc/Unknown'];
+  //     res.push({ id, city: { name: cityName } });
+  //   }
+  //   return res;
+  // }
 
   private _getPatterns(type?: CalendarType): CalendarPatterns {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, type);

@@ -138,15 +138,20 @@ export interface Calendars {
   formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[];
 
   /**
-   * Return an array containing the available timezone identifiers, e.g. "America/New_York"
+   * Return an array containing the official TZDB timezone identifiers.
    */
   timeZoneIds(): string[];
 
   /**
-   * Return an array of time zone identifiers with additional information, including the
+   * Resolve a timezone id / alias to the official TZDB identifier.
+   */
+  resolveTimeZoneId(zoneid: string): string | undefined;
+
+  /**
+   * Return additional information for a timezone id, including the
    * localized exemplar city, e.g. { id: "America/New_York", city: { name: "New York" } }
    */
-  timeZoneInfo(): TimeZoneInfo[];
+  timeZoneInfo(zoneid: string): TimeZoneInfo;
 }
 
 /**

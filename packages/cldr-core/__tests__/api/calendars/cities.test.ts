@@ -2,12 +2,12 @@ import { calendarsApi } from '../../_helpers';
 
 test('timezone exemplar cities', () => {
   const utc = 'Etc/UTC';
-  const unk = 'Etc/Unknown';
+  const unk = 'Factory';
   const newyork = 'America/New_York';
   let tz: any;
 
   const find = (lang: string, id: string) =>
-    calendarsApi(lang).timeZoneInfo().filter(i => i.id === id)[0];
+    calendarsApi(lang).timeZoneInfo(id);
 
   tz = find('en', newyork);
   expect(tz.id).toEqual(newyork);
