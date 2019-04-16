@@ -73,14 +73,23 @@ export const getConfig = (data: any): Code[] => {
     'script-id': scripts,
     'region-id': regions,
     'currency-id': currencies,
+
     'gregorian-available-format': data.gregorianAvailableFormats,
     'gregorian-plural-format': data.gregorianPluralFormats,
+    'gregorian-interval-format': data.gregorianIntervalFormats,
+
     'buddhist-available-format': data.buddhistAvailableFormats,
     'buddhist-plural-format': data.buddhistPluralFormats,
+    'buddhist-interval-format': data.buddhistIntervalFormats,
+
     'persian-available-format': data.persianAvailableFormats,
     'persian-plural-format': data.persianPluralFormats,
+    'persian-interval-format': data.persianIntervalFormats,
+
     'japanese-available-format': data.japaneseAvailableFormats,
     'japanese-plural-format': data.japanesePluralFormats,
+    'japanese-interval-format': data.japaneseIntervalFormats,
+
     'number-system-name': NUMBER_SYSTEM_NAME,
     'unit-id': units,
     'timezone-id': timeZoneIds

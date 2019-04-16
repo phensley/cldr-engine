@@ -1,14 +1,20 @@
 import { origin, KeyIndex, KeyIndexMap, Origin } from '../types';
-import { BUDDHIST, BUDDHIST_INDICES } from './buddhist';
-import { CALENDAR_INDICES } from './calendars';
+import {
+  BUDDHIST,
+  BUDDHIST_INDICES,
+  CALENDAR_INDICES,
+  GREGORIAN,
+  GREGORIAN_INDICES,
+  JAPANESE,
+  JAPANESE_INDICES,
+  PERSIAN,
+  PERSIAN_INDICES,
+} from './calendars';
 import { CURRENCIES } from './currencies';
 import { DATEFIELDS, DATEFIELDS_INDICES } from './datefields';
 import { CONTEXT_TRANSFORM, GENERAL_INDICES, LAYOUT, LIST_PATTERNS } from './general';
-import { GREGORIAN, GREGORIAN_INDICES } from './gregorian';
-import { JAPANESE, JAPANESE_INDICES } from './japanese';
 import { NAMES } from './names';
 import { NUMBERS, NUMBERS_INDICES } from './numbers';
-import { PERSIAN, PERSIAN_INDICES } from './persian';
 import { TIMEZONE, TIMEZONE_INDICES } from './timezones';
 import { UNITS } from './units';
 
@@ -37,15 +43,19 @@ export interface SchemaConfig {
    */
   ['gregorian-available-format']?: string[];
   ['gregorian-plural-format']?: string[];
+  ['gregorian-interval-format']?: string[];
 
   ['buddhist-available-format']?: string[];
   ['buddhist-plural-format']?: string[];
+  ['buddhist-interval-format']?: string[];
 
   ['japanese-available-format']?: string[];
   ['japanese-plural-format']?: string[];
+  ['japanese-interval-format']?: string[];
 
   ['persian-available-format']?: string[];
   ['persian-plural-format']?: string[];
+  ['persian-interval-format']?: string[];
 
   /**
    * Currency codes to include.
@@ -152,30 +162,32 @@ export class CodeBuilder {
       CONTEXT_TRANSFORM
     ];
 
-    // Always define at least one date and one time skeleton format.
-    const availableFormats: string[] = []; // ['yyyyMMMd', 'Hms'];
     for (const name of this.config.calendars || []) {
       switch (name) {
         case 'buddhist':
           this.add(BUDDHIST_INDICES);
-          this.copy('buddhist-available-format', availableFormats);
-          this.copy('buddhist-plural-format', availableFormats);
+          this.copy('buddhist-available-format');
+          this.copy('buddhist-plural-format');
+          this.copy('buddhist-interval-format');
           break;
         case 'japanese':
           this.add(JAPANESE_INDICES);
-          this.copy('japanese-available-format', availableFormats);
-          this.copy('japanese-plural-format', availableFormats);
+          this.copy('japanese-available-format');
+          this.copy('japanese-plural-format');
+          this.copy('japanese-interval-format');
           break;
         case 'persian':
           this.add(PERSIAN_INDICES);
-          this.copy('persian-available-format', availableFormats);
-          this.copy('persian-plural-format', availableFormats);
+          this.copy('persian-available-format');
+          this.copy('persian-plural-format');
+          this.copy('persian-interval-format');
           break;
       }
     }
 
-    this.copy('gregorian-available-format', availableFormats); // ['yMd', 'Hmsv']);
-    this.copy('gregorian-plural-format', []);
+    this.copy('gregorian-available-format');
+    this.copy('gregorian-plural-format');
+    this.copy('gregorian-interval-format');
     return origin(code, this.indices);
   }
 
@@ -186,9 +198,8 @@ export class CodeBuilder {
     this.indices[name] = new KeyIndex<string>(keys);
   }
 
-  private copy(name: SchemaConfigKey, defaults: string[]): void {
-    const vals = this.config[name];
-    this.indices[name] = new KeyIndex<string>(vals && vals.length > 0 ? vals : defaults);
+  private copy(name: SchemaConfigKey): void {
+    this.indices[name] = new KeyIndex<string>(this.config[name] || []);
   }
 
   private add(indices: KeyIndexMap): void {

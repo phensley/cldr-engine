@@ -27,11 +27,17 @@ export const config: SchemaConfig = {
   'gregorian-plural-format': [
     'MMMMW', 'yw'
   ],
+  'gregorian-interval-format': [
+    'Bh', 'Bhm', 'Gy', 'GyM', 'GyMEd', 'GyMMM', 'GyMMMEd', 'GyMMMd', 'GyMd', 'H', 'Hm', 'Hmv', 'Hv', 'M', 'MEd', 'MMM', 'MMMEEEEd', 'MMMEd', 'MMMM', 'MMMMEd', 'MMMMd', 'MMMd', 'Md', 'd', 'h', 'hm', 'hmv', 'hv', 'y', 'yM', 'yMEd', 'yMMM', 'yMMMEEEEd', 'yMMMEd', 'yMMMM', 'yMMMMEEEEd', 'yMMMMEd', 'yMMMMd', 'yMMMd', 'yMd'
+  ],
   'buddhist-available-format': [
     'Bh', 'Bhm', 'Bhms', 'E', 'EBhm', 'EBhms', 'EEEEd', 'EHm', 'EHms', 'Ed', 'Ehm', 'Ehms', 'Gy', 'GyM', 'GyMMM', 'GyMMMEEEEd', 'GyMMMEd', 'GyMMMM', 'GyMMMMEd', 'GyMMMMd', 'GyMMMd', 'GyMd', 'H', 'HHmm', 'HHmmZ', 'HHmmss', 'Hm', 'Hms', 'Hmsv', 'Hmv', 'M', 'MEEEEd', 'MEd', 'MMM', 'MMMEEEEd', 'MMMEd', 'MMMM', 'MMMMEEEEd', 'MMMMEd', 'MMMMd', 'MMMMdd', 'MMMd', 'MMMdd', 'MMd', 'MMdd', 'Md', 'd', 'h', 'hm', 'hms', 'hmsv', 'hmv', 'mmss', 'ms', 'y', 'yM', 'yMEd', 'yMM', 'yMMM', 'yMMMEd', 'yMMMM', 'yMMMd', 'yMd', 'yQQQ', 'yQQQQ', 'yyyy', 'yyyyM', 'yyyyMEEEEd', 'yyyyMEd', 'yyyyMM', 'yyyyMMM', 'yyyyMMMEEEEd', 'yyyyMMMEd', 'yyyyMMMM', 'yyyyMMMMEd', 'yyyyMMMMccccd', 'yyyyMMMMd', 'yyyyMMMd', 'yyyyMMdd', 'yyyyMd', 'yyyyQQQ', 'yyyyQQQQ'
   ],
   'buddhist-plural-format': [
 
+  ],
+  'buddhist-interval-format': [
+    'Bh', 'Bhm', 'GGGGGyM', 'GGGGGyMEd', 'GGGGGyMd', 'Gy', 'GyM', 'GyMEd', 'GyMMM', 'GyMMMEd', 'GyMMMd', 'GyMd', 'H', 'Hm', 'Hmv', 'Hv', 'M', 'MEd', 'MMM', 'MMMEEEEd', 'MMMEd', 'MMMM', 'MMMMEd', 'MMMMd', 'MMMd', 'Md', 'd', 'h', 'hm', 'hmv', 'hv', 'y', 'yM', 'yMEd', 'yMMM', 'yMMMEEEEd', 'yMMMEd', 'yMMMM', 'yMMMMEd', 'yMMMMd', 'yMMMd', 'yMd'
   ],
   'persian-available-format': [
     'Bh', 'Bhm', 'Bhms', 'E', 'EBhm', 'EBhms', 'EEEEd', 'EHm', 'EHms', 'Ed', 'Ehm', 'Ehms', 'Gy', 'GyM', 'GyMMM', 'GyMMMEEEEd', 'GyMMMEd', 'GyMMMM', 'GyMMMMEd', 'GyMMMMd', 'GyMMMd', 'H', 'HHmm', 'HHmmZ', 'HHmmss', 'Hm', 'Hms', 'Hmsv', 'Hmv', 'M', 'MEEEEd', 'MEd', 'MMM', 'MMMEEEEd', 'MMMEd', 'MMMM', 'MMMMEd', 'MMMMd', 'MMMMdd', 'MMMd', 'MMMdd', 'MMd', 'MMdd', 'Md', 'd', 'h', 'hm', 'hms', 'hmsv', 'hmv', 'mmss', 'ms', 'y', 'yM', 'yMEd', 'yMM', 'yMMM', 'yMMMEd', 'yMMMM', 'yMMMd', 'yMd', 'yQQQ', 'yQQQQ', 'yyyy', 'yyyyM', 'yyyyMEEEEd', 'yyyyMEd', 'yyyyMM', 'yyyyMMM', 'yyyyMMMEEEEd', 'yyyyMMMEd', 'yyyyMMMM', 'yyyyMMMMEd', 'yyyyMMMMccccd', 'yyyyMMMMd', 'yyyyMMMd', 'yyyyMMdd', 'yyyyMd', 'yyyyQQQ', 'yyyyQQQQ'
@@ -39,11 +45,17 @@ export const config: SchemaConfig = {
   'persian-plural-format': [
 
   ],
+  'persian-interval-format': [
+    'Bh', 'Bhm', 'GGGGGyM', 'GGGGGyMEd', 'GGGGGyMd', 'Gy', 'GyM', 'GyMEd', 'GyMMM', 'GyMMMEd', 'GyMMMd', 'GyMd', 'H', 'Hm', 'Hmv', 'Hv', 'M', 'MEd', 'MMM', 'MMMEEEEd', 'MMMEd', 'MMMM', 'MMMMEd', 'MMMMd', 'MMMd', 'Md', 'd', 'h', 'hm', 'hmv', 'hv', 'y', 'yM', 'yMEd', 'yMMM', 'yMMMEEEEd', 'yMMMEd', 'yMMMM', 'yMMMMEd', 'yMMMMd', 'yMMMd', 'yMd'
+  ],
   'japanese-available-format': [
     'Bh', 'Bhm', 'Bhms', 'E', 'EBhm', 'EBhms', 'EEEEd', 'EHm', 'EHms', 'Ed', 'Ehm', 'Ehms', 'Gy', 'GyM', 'GyMMM', 'GyMMMEEEEd', 'GyMMMEd', 'GyMMMM', 'GyMMMMEd', 'GyMMMMd', 'GyMMMd', 'H', 'HHmm', 'HHmmZ', 'HHmmss', 'Hm', 'Hms', 'Hmsv', 'Hmv', 'M', 'MEEEEd', 'MEd', 'MMM', 'MMMEEEEd', 'MMMEd', 'MMMM', 'MMMMEd', 'MMMMd', 'MMMMdd', 'MMMd', 'MMMdd', 'MMd', 'MMdd', 'Md', 'd', 'h', 'hm', 'hms', 'hmsv', 'hmv', 'mmss', 'ms', 'y', 'yM', 'yMEd', 'yMM', 'yMMM', 'yMMMEd', 'yMMMM', 'yMMMd', 'yMd', 'yQQQ', 'yQQQQ', 'yyyy', 'yyyyM', 'yyyyMEEEEd', 'yyyyMEd', 'yyyyMM', 'yyyyMMM', 'yyyyMMMEEEEd', 'yyyyMMMEd', 'yyyyMMMM', 'yyyyMMMMEd', 'yyyyMMMMccccd', 'yyyyMMMMd', 'yyyyMMMd', 'yyyyMMdd', 'yyyyMd', 'yyyyQQQ', 'yyyyQQQQ'
   ],
   'japanese-plural-format': [
 
+  ],
+  'japanese-interval-format': [
+    'Bh', 'Bhm', 'GGGGGyM', 'GGGGGyMEd', 'GGGGGyMd', 'Gy', 'GyM', 'GyMEd', 'GyMMM', 'GyMMMEd', 'GyMMMd', 'GyMd', 'H', 'Hm', 'Hmv', 'Hv', 'M', 'MEd', 'MMM', 'MMMEEEEd', 'MMMEd', 'MMMM', 'MMMMEd', 'MMMMd', 'MMMd', 'Md', 'd', 'h', 'hm', 'hmv', 'hv', 'y', 'yM', 'yMEd', 'yMMM', 'yMMMEEEEd', 'yMMMEd', 'yMMMM', 'yMMMMEd', 'yMMMMd', 'yMMMd', 'yMd'
   ],
   'number-system-name': [
     'arab', 'arabext', 'beng', 'deva', 'gujr', 'guru', 'hanidec', 'khmr', 'knda', 'laoo', 'latn', 'mlym', 'mymr', 'tamldec', 'telu', 'thai'

@@ -1,11 +1,16 @@
 import { KeyIndex, KeyIndexMap } from '../types';
-
+import { calendarScope } from './common';
 import {
+  BuddhistEraIndex,
   DateTimePatternFieldValues,
   DayPeriodValues,
   EraWidthValues,
   FieldWidthValues,
   FormatWidthValues,
+  GregorianEraIndex,
+  GregorianMonthsIndex,
+  JapaneseEraIndex,
+  PersianEraIndex,
   QuarterValues,
   WeekdayValues,
  } from '../schema';
@@ -28,12 +33,30 @@ export const CALENDAR_INDICES: KeyIndexMap = {
   'weekday': WeekdaysIndex
 };
 
-export const CALENDAR_VALUES = {
-  'date-time-pattern-field': DateTimePatternFieldValues,
-  'day-period': DayPeriodValues,
-  'era-width': EraWidthValues,
-  'field-width': FieldWidthValues,
-  'format-width': FormatWidthValues,
-  'quarter': QuarterValues,
-  'weekday': WeekdayValues
+export const BUDDHIST = calendarScope('buddhist', 'Buddhist');
+
+export const BUDDHIST_INDICES: KeyIndexMap = {
+  'buddhist-era': BuddhistEraIndex,
+  'buddhist-month': GregorianMonthsIndex
+};
+
+export const GREGORIAN = calendarScope('gregorian', 'Gregorian');
+
+export const GREGORIAN_INDICES: KeyIndexMap = {
+  'gregorian-era': GregorianEraIndex,
+  'gregorian-month': GregorianMonthsIndex
+};
+
+export const JAPANESE = calendarScope('japanese', 'Japanese');
+
+export const JAPANESE_INDICES: KeyIndexMap = {
+  'japanese-era': JapaneseEraIndex,
+  'japanese-month': GregorianMonthsIndex
+};
+
+export const PERSIAN = calendarScope('persian', 'Persian');
+
+export const PERSIAN_INDICES: KeyIndexMap = {
+  'persian-era': PersianEraIndex,
+  'persian-month': GregorianMonthsIndex
 };

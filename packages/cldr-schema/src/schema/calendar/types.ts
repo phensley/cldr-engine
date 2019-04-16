@@ -103,7 +103,7 @@ export interface CalendarInfo {
   eras: string[];
   months: string[];
   // availableFormats: string[];
-  intervalFormats: string[];
+  // intervalFormats: string[];
 }
 
 export interface CalendarFields {

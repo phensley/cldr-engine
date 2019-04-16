@@ -57,6 +57,11 @@ export const getSymbols = (): any => {
   const persianPluralFormats = new Set();
   const japanesePluralFormats = new Set();
 
+  const gregorianIntervalFormats = new Set();
+  const buddhistIntervalFormats = new Set();
+  const persianIntervalFormats = new Set();
+  const japaneseIntervalFormats = new Set();
+
   locales.forEach(lang => {
     console.warn(`Scanning '${lang}'..`);
 
@@ -81,6 +86,11 @@ export const getSymbols = (): any => {
     addKeys(nestedKeys(main.Buddhist.pluralFormats), buddhistPluralFormats);
     addKeys(nestedKeys(main.Persian.pluralFormats), persianPluralFormats);
     addKeys(nestedKeys(main.Japanese.pluralFormats), japanesePluralFormats);
+
+    addKeys(nestedKeys(main.Gregorian.intervalFormats), gregorianIntervalFormats);
+    addKeys(nestedKeys(main.Buddhist.intervalFormats), buddhistIntervalFormats);
+    addKeys(nestedKeys(main.Persian.intervalFormats), persianIntervalFormats);
+    addKeys(nestedKeys(main.Japanese.intervalFormats), japaneseIntervalFormats);
   });
 
   const unitCategories = unique(sorted(unitsRaw).map(u => u.split('-')[0]));
@@ -104,5 +114,10 @@ export const getSymbols = (): any => {
     buddhistPluralFormats: sorted(buddhistPluralFormats),
     persianPluralFormats: sorted(persianPluralFormats),
     japanesePluralFormats: sorted(japanesePluralFormats),
+
+    gregorianIntervalFormats: sorted(gregorianIntervalFormats),
+    buddhistIntervalFormats: sorted(buddhistIntervalFormats),
+    persianIntervalFormats: sorted(persianIntervalFormats),
+    japaneseIntervalFormats: sorted(japaneseIntervalFormats),
   };
 };
