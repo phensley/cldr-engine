@@ -35,14 +35,14 @@ export class InternalsImpl implements Internals {
   readonly units: UnitInternals;
   readonly wrapper: WrapperInternals;
 
-  constructor(config: SchemaConfig, debug: boolean = false, patternCacheSize: number = 50) {
+  constructor(config: SchemaConfig, version: string, debug: boolean = false, patternCacheSize: number = 50) {
     // TODO: may move this up depending on how integration evolves
     this.config = config;
     const code = new CodeBuilder(config);
     const origin = code.origin();
     this.indices = origin.indices;
     this.schema = buildSchema(origin, debug);
-    this.checksum = checksumIndices(origin.indices);
+    this.checksum = checksumIndices(version, origin.indices);
     this.plurals = new PluralInternalsImpl();
     this.wrapper = new WrapperInternalsImpl();
 

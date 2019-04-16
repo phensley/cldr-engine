@@ -94,7 +94,7 @@ const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
   // Configure the schema accessor builder
   const builder = new CodeBuilder(config);
   const origin = builder.origin();
-  const checksum = checksumIndices(origin.indices);
+  const checksum = checksumIndices(pkg.version, origin.indices);
 
   let path: string;
   const hashes: { [x: string]: string } = {};

@@ -42,8 +42,6 @@ const enum Messages {
     'generate the resource pack must be identical to the one used at runtime.',
   NO_ASYNC_LOADER = 'A Promise-based resource loader is not defined',
   NO_SYNC_LOADER = 'A synchronous resource loader is not defined',
-  VERSION_MISMATCH = 'Resource pack built with a different version than the ' +
-    'runtime library. Versions must match.'
 }
 
 /**
@@ -249,7 +247,7 @@ export class CLDRFramework {
     this.asyncLoader = options.asyncLoader;
 
     const patternCacheSize = options.patternCacheSize || 50;
-    this.internals = new InternalsImpl(options.config, options.debug || false, patternCacheSize);
+    this.internals = new InternalsImpl(options.config, VERSION, options.debug, patternCacheSize);
   }
 
   info(): string {
@@ -350,15 +348,11 @@ export class CLDRFramework {
   }
 
   /**
-   * Verify the resource pack is compatible with the runtime library version
-   * and schema config checksum.
+   * Verify the resource pack is compatible with the schema config checksum.
    */
   protected check(pack: Pack): void {
     if (pack.checksum !== this.internals.checksum) {
       throw new Error(Messages.CHECKSUM);
-    }
-    if (pack.version !== VERSION) {
-      throw new Error(Messages.VERSION_MISMATCH);
     }
   }
 }

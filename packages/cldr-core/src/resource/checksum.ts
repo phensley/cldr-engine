@@ -6,8 +6,10 @@ import { Checksum } from '@phensley/cldr-utils';
  * schema. This lets us quickly confirm that the resource pack
  * was generated from the config at runtime
  */
-export const checksumIndices = (map: KeyIndexMap): string => {
+export const checksumIndices = (version: string, map: KeyIndexMap): string => {
   const c = new Checksum();
+  c.update(version);
+
   // Visit map keys in sorted order
   const keys = Object.keys(map).sort();
   for (const key of keys) {
