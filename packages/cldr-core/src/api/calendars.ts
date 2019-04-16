@@ -258,31 +258,11 @@ export class CalendarsImpl implements Calendars {
     if (!this.exemplarCities) {
       this.exemplarCities = this.internals.schema.TimeZones.exemplarCity.mapping(this.bundle);
     }
-    const id = TZ.resolveId(substituteZoneAlias(zoneid)) || 'Factory';
+    const id = this.resolveTimeZoneId(zoneid) || 'Factory';
     const stableid = getStableTimeZoneId(id);
     const city = this.exemplarCities[stableid] || this.exemplarCities['Etc/Unknown'];
-    return {
-      id,
-      city: { name: city }
-    };
+    return { id, city: { name: city } };
   }
-
-  // timeZoneStableIds(): string[] {
-  //   const tzids = this.internals.config['timezone-id'];
-  //   return tzids ? tzids.slice(0) : [];
-  // }
-
-  // timeZoneInfo(): TimeZoneInfo[] {
-  //   // TODO: cache this?
-  //   const cities = this.internals.schema.TimeZones.exemplarCity.mapping(this.bundle);
-  //   const res: TimeZoneInfo[] = [];
-  //   for (const id of TZ.zoneIds()) {
-  //     const stableid = getStableTimeZoneId(substituteZoneAlias(id));
-  //     const cityName = cities[stableid] || cities['Etc/Unknown'];
-  //     res.push({ id, city: { name: cityName } });
-  //   }
-  //   return res;
-  // }
 
   private _getPatterns(type?: CalendarType): CalendarPatterns {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, type);
