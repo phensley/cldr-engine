@@ -28,26 +28,6 @@ export type NumberSystemName = 'adlm' | 'ahom' | 'arab' | 'arabext' | 'bali' | '
 'nkoo' | 'olck' | 'orya' | 'osma' | 'saur' | 'shrd' | 'sind' | 'sinh' | 'sora' | 'sund' |
 'takr' | 'talu' | 'tamldec' | 'telu' | 'thai' | 'tibt' | 'tirh' | 'vaii' | 'wara';
 
-// These are the number systems defined in the numbers schema.
-// export const NumberSystemNameValues: NumberSystemName[] = [
-//   'arab',
-//   'arabext',
-//   'beng',
-//   'deva',
-//   'gujr',
-//   'guru',
-//   'hanidec',
-//   'khmr',
-//   'knda',
-//   'laoo',
-//   'latn',
-//   'mlym',
-//   'mymr',
-//   'tamldec',
-//   'telu',
-//   'thai'
-// ];
-
 export type NumberSystemCategory = 'default' | 'native' | 'finance' | 'traditional';
 
 export const NumberSystemCategoryValues: NumberSystemCategory[] = [

@@ -1,9 +1,13 @@
 import { KeyIndex } from '../../types';
 import {  CalendarSchema } from './types';
 
-const rangeindex = (s: number, e: number): KeyIndex<string> => {
+/**
+ * Generate a key index containing numeric keys from start to end
+ * inclusive.
+ */
+const rangeindex = (start: number, end: number): KeyIndex<string> => {
   const r: string[] = [];
-  for (let i = s; i <= e; i++) {
+  for (let i = start; i <= end; i++) {
     r.push(String(i));
   }
   return new KeyIndex(r);

@@ -6,7 +6,6 @@ import {
   NumberSystemCategory,
   NumberSystemCategoryValues,
   NumberSystemName,
-  // NumberSystemNameValues,
 } from './enums';
 import { KeyIndex } from '../../types';
 
@@ -23,7 +22,6 @@ export const CurrencySpacingPatternIndex = new KeyIndex<CurrencySpacingPattern>(
 );
 
 export const NumberSystemsIndex = new KeyIndex(NumberSystemCategoryValues);
-// export const NumberSystemNameIndex = new KeyIndex(NumberSystemNameValues);
 export const NumberSymbolIndex = new KeyIndex(NumberSymbolValues);
 
 export interface CurrencyFormats {

@@ -98,14 +98,6 @@ export const enum Weekday {
   SATURDAY = '7'
 }
 
-// TODO: add function to determine plural category based on skeleton and date
-export interface CalendarInfo {
-  eras: string[];
-  months: string[];
-  // availableFormats: string[];
-  // intervalFormats: string[];
-}
-
 export interface CalendarFields {
   readonly weekdays: Vector2Arrow<string, string>;
   readonly months: Vector2Arrow<string, string>;
