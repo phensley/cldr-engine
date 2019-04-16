@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Fixed/Changed
  - Moved calendar available formats and interval formats to schema config.
  - Split the pluralized calendar available formats to their own schema method.
- - Added `Calendars.timeZoneStableIds` method to return CLDR stable timezone identifiers vs `Calendars.timeZoneIds` which returns an array of valid TZDB identifiers.
+ - The `Calendars.timeZoneIds` method now returns an array of valid TZDB identifiers instead of CLDR stable timezone identifiers.
  - The `Calendars.timeZoneInfo` method now accepts a timezone identifier or alias and returns a record containing the resolved TZDB identifier and exemplar city name.
 
 ## [0.13.7]
