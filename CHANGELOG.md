@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [UNRELEASED]
+### Fixed/Changed
+ - Moved calendar available formats and interval formats to schema config.
+ - Split the pluralized calendar available formats to their own schema method.
+
 ## [0.13.7]
 ### Added
  - Implemented cash rounding for currency formatting.
