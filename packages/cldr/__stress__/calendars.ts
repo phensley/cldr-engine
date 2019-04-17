@@ -58,9 +58,9 @@ export const calendarStress = () => {
   const datetimes = buildDatetimes();
   const locales = availableLocales();
   const dopts = dateOptions();
-  let i = 0;
 
   for (const locale of locales) {
+    let i = 0;
     timer.start();
     const engine = cldr.get(locale);
     elapsed = timer.micros();
