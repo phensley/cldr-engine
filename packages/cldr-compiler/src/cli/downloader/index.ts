@@ -7,5 +7,6 @@ export const main = async () => {
     await downloader.run();
   } catch (e) {
     console.log(`Download failed: ${e}`);
+    process.exit(1);
   }
 };
