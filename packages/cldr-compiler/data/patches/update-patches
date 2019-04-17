@@ -9,17 +9,25 @@ sys.path.insert(0, os.path.join(CWD, 'patchlib'))
 import languagematch
 import pluralrange
 
-TAG = 'release-35'
+TAG = 'release-35-1'
 BASEURL = 'https://unicode.org/repos/cldr/tags'
 TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')
 
 FILES = [
-    ('common/supplemental/languageInfo.xml', 
-    languagematch.build, 
+    # The latest languageInfo.xml still doesn't seem to capture
+    # the distances expressed in the ticket below.
+    # re: en-IN en-GB and en-US distances
+    # https://www.unicode.org/cldr/trac/ticket/10148
+    #
+    # I've decided to keep my own changes for now since I think
+    # they better capture the distances expressed in this comment:
+    # https://www.unicode.org/cldr/trac/ticket/10148#comment:3
+    ('common/supplemental/languageInfo.xml',
+    languagematch.build,
     'languageMatching-fix.json'),
 
-    ('common/supplemental/pluralRanges.xml', 
-    pluralrange.build, 
+    ('common/supplemental/pluralRanges.xml',
+    pluralrange.build,
     'pluralRanges-fix.json')
 ]
 
