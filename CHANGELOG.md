@@ -9,12 +9,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [UNRELEASED]
 ### Added
  - Added a `Calendars.resolveTimeZoneId` which maps a timezone id or alias to the current TZDB identifier for that zone.
+ - Added the miscellaneous number patterns to the schema keyed by `NumberMiscPatternType` values `at-least`, `at-most`, `approx` and `range`.
 
 ### Fixed/Changed
  - Moved calendar available formats and interval formats to schema config.
  - Split the pluralized calendar available formats to their own schema method.
  - The `Calendars.timeZoneIds` method now returns an array of valid TZDB identifiers instead of CLDR stable timezone identifiers.
  - The `Calendars.timeZoneInfo` method now accepts a timezone identifier or alias and returns a record containing the resolved TZDB identifier and exemplar city name.
+ - Added `UnitFormatStyleType` to omit the `percent` and `permille` styles from the unit formatter.
 
 ## [0.13.7]
 ### Added
