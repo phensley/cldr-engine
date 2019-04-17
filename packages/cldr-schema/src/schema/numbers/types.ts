@@ -1,6 +1,8 @@
 import { DigitsArrow, FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow  } from '../arrows';
 import { PluralType } from '../enums';
 import {
+  NumberMiscPatternType,
+  NumberMiscPatternValues,
   NumberSymbolType,
   NumberSymbolValues,
   NumberSystemCategory,
@@ -21,6 +23,7 @@ export const CurrencySpacingPatternIndex = new KeyIndex<CurrencySpacingPattern>(
   ['currencyMatch', 'surroundingMatch', 'insertBetween']
 );
 
+export const NumberMiscPatternIndex = new KeyIndex(NumberMiscPatternValues);
 export const NumberSystemsIndex = new KeyIndex(NumberSystemCategoryValues);
 export const NumberSymbolIndex = new KeyIndex(NumberSymbolValues);
 
@@ -44,6 +47,7 @@ export interface NumberSystemInfo {
   readonly decimalFormats: DecimalFormats;
   readonly percentFormat: FieldArrow;
   readonly scientificFormat: FieldArrow;
+  readonly miscPatterns: Vector1Arrow<NumberMiscPatternType>;
 }
 
 export interface NumbersSchema {

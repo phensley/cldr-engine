@@ -363,7 +363,8 @@ const MetaZones = {
 };
 
 const numberSystemKeys = [
-  'currencyFormats', 'decimalFormats', 'percentFormats', 'scientificFormats', 'symbols'
+  'currencyFormats', 'decimalFormats', 'percentFormats', 'scientificFormats', 'symbols',
+  'miscPatterns'
 ];
 
 /**

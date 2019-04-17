@@ -33,3 +33,9 @@ export type NumberSystemCategory = 'default' | 'native' | 'finance' | 'tradition
 export const NumberSystemCategoryValues: NumberSystemCategory[] = [
   'default', 'native', 'finance', 'traditional'
 ];
+
+export type NumberMiscPatternType = 'at-least' | 'at-most' | 'approx' | 'range';
+
+export const NumberMiscPatternValues: NumberMiscPatternType[] = [
+  'at-least', 'at-most', 'approx', 'range'
+];

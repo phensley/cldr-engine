@@ -34,6 +34,13 @@ const mappings = [
       ['percentFormats', 'percentFormat'],
       ['scientificFormats', 'scientificFormat']
     ]).field('standard').remap(0, 1, 2, 4),
+
+  Mappings.field('numberSystem').keys().field('miscPatterns').fields([
+    ['approximately', 'approx'],
+    ['atLeast', 'at-least'],
+    ['atMost', 'at-most'],
+    'range'
+  ]).remap(0, 1, 2, 3, 4),
 ];
 
 export const transformNumbers = (o: any): any => applyMappings(o, mappings, false);

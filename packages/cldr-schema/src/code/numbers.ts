@@ -2,9 +2,10 @@ import { digits, field, scope, scopemap, vector1, vector2, Scope } from '../type
 import {
   CurrencySpacingPatternIndex,
   CurrencySpacingPosIndex,
+  NumberMiscPatternIndex,
   NumberSymbolIndex,
   NumberSystemsIndex,
-  PluralDigitValues
+  PluralDigitValues,
 } from '../schema/numbers';
 
 export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
@@ -30,7 +31,8 @@ export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
     ]),
 
     field('percentFormat'),
-    field('scientificFormat')
+    field('scientificFormat'),
+    vector1('miscPatterns', 'number-misc-pattern')
   ])
 
 ]);
@@ -38,6 +40,7 @@ export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
 export const NUMBERS_INDICES = {
   'currency-spacing-pattern': CurrencySpacingPatternIndex,
   'currency-spacing-pos': CurrencySpacingPosIndex,
+  'number-misc-pattern': NumberMiscPatternIndex,
   'number-symbol': NumberSymbolIndex,
   'number-system': NumberSystemsIndex,
 };
