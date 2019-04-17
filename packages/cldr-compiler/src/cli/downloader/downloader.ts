@@ -87,7 +87,7 @@ export class Downloader {
         // http get
         .on('response', (r: request.Response) => {
           if (r.statusCode !== 200) {
-            console.log('failure', r.statusCode);
+            console.log('failure http', r.statusCode);
             reject(`unexpected status code ${r.statusCode} downloading ${desc}`);
           }
         })
