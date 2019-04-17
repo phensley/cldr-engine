@@ -32,14 +32,16 @@ const emptyCalendarIndex = (name: string): KeyIndexMap => ({
 
 export interface SchemaConfig {
   /**
-   * Calendar types to include.
+   * Calendar types to include. Note that 'gregory' for the
+   * gregorian calendar will be included by default, even if
+   * omitted from this list.
    *
-   * Ex: ['gregorian', 'buddhist', 'japanese', 'persian']
+   * Ex: ['buddhist', 'japanese', 'persian']
    */
   calendars?: string[];
 
   /**
-   * Control which Gregorian skeleton date time formats are available at runtime.
+   * Control which skeleton date time formats are available at runtime.
    */
   ['gregorian-available-format']?: string[];
   ['gregorian-plural-format']?: string[];
@@ -65,17 +67,20 @@ export interface SchemaConfig {
   ['currency-id']?: string[];
 
   /**
-   * Language identifiers to include.
+   * Language identifiers to include. This only controls
+   * inclusion of language display name data.
    */
   ['language-id']?: string[];
 
   /**
-   * Script identifiers to include.
+   * Script identifiers to include. This only controls
+   * inclusion of script display name data.
    */
   ['script-id']?: string[];
 
   /**
-   * Region identifiers to include.
+   * Region identifiers to include. This only controls
+   * inclusion of region display name data.
    */
   ['region-id']?: string[];
 
@@ -87,15 +92,18 @@ export interface SchemaConfig {
   ['unit-id']?: string[];
 
   /**
-   * CLDR stable timezone identifiers to include.
+   * CLDR stable timezone identifiers to include. This only
+   * controls inclusion of exemplar city data. All timezone
+   * ids and offset data will work even if this array is
+   * empty.
    *
    * Ex: ['America/New_York', 'America/Adak', ... ]
    */
   ['timezone-id']?: string[];
 
   /**
-   * Number system names to include, in addition to 'latn' which
-   * must always be defined.
+   * Number system names to include. Note that 'latn' will be
+   * included by default, even if omitted from this list.
    *
    * Ex: ['arab', 'laoo']
    */
