@@ -1,7 +1,7 @@
 import { UnitType } from '@phensley/cldr-schema';
 import { Decimal } from '@phensley/decimal';
 
-import { DecimalFormatOptions } from './numbers';
+import { NumberFormatOptions, NumberFormatStyleType } from './numbers';
 
 /**
  * @alpha
@@ -12,11 +12,18 @@ export interface Quantity {
   per?: UnitType;
 }
 
+/**
+ * @alpha
+ */
+export type UnitFormatStyleType =
+  NumberFormatStyleType;
+
 export type UnitLength = 'short' | 'narrow' | 'long';
 
 /**
  * @alpha
  */
-export interface UnitFormatOptions extends DecimalFormatOptions {
+export interface UnitFormatOptions extends NumberFormatOptions {
+  style?: UnitFormatStyleType;
   length?: UnitLength;
 }

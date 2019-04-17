@@ -26,11 +26,13 @@ export interface NumberFormatOptions {
   minimumSignificantDigits?: number;
 }
 
+export type NumberFormatStyleType = 'decimal' | 'short' | 'long' | 'scientific';
+
 /**
  * @alpha
  */
 export type DecimalFormatStyleType =
-  'decimal' | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled' | 'short' | 'long' | 'scientific';
+  NumberFormatStyleType | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled';
 
 /**
  * @alpha
