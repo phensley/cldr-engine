@@ -13,6 +13,7 @@ import { buildLocaleMap, checkLanguages, getProjectInfo, ProjectInfo } from './u
 
 import * as DEFAULT_CONFIG from './config.json';
 import { Downloader } from '../downloader/downloader';
+import { validateConfig } from './validate';
 
 /**
  * Encodes fields into a resource pack and returns the offset
@@ -80,6 +81,7 @@ const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
   if (configpath) {
     const configraw = fs.readFileSync(configpath, { encoding: 'utf-8' });
     config = JSON.parse(configraw);
+    validateConfig(config);
   } else {
     config = DEFAULT_CONFIG;
   }
