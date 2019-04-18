@@ -92,8 +92,7 @@ export const validateConfig = (config: SchemaConfig): SchemaConfig => {
   console.log();
 
   if (missing.length) {
-    console.log(`[validate] FATAL: config is missing keys: ${quote(missing)}`);
-    fail = true;
+    console.log(`[validate] WARN: config is missing keys: ${quote(missing)}`);
   }
 
   if (nonarray.length) {
