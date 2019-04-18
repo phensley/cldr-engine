@@ -1,4 +1,4 @@
-import * as DEFAULT_CONFIG from './config.json';
+import DEFAULT_CONFIG from './config.json';
 import { SchemaConfig } from '@phensley/cldr-core';
 
 const LIM = 10;
@@ -14,11 +14,15 @@ const quotevals = (s: string[]) => s.length < LIM ? quote(s) : quote(s.slice(0, 
  */
 export const validateConfig = (config: SchemaConfig): SchemaConfig => {
   console.log(`[validate] Validating schema config:`);
-  const res: SchemaConfig = {};
-  const keys = Object.keys(config).sort();
 
+  const res: SchemaConfig = {};
+  let fail = false;
+
+  const keys = Object.keys(config).sort();
   const maxlen = keys.reduce((p, c: string) => Math.max(p, c.length), 0);
 
+  const missing = Object.keys(DEFAULT_CONFIG).filter(k => keys.indexOf(k) === -1);
+  const nonarray: string[] = [];
   const ignore: string[] = [];
   for (const key of keys) {
     const canonical = DEFAULT_CONFIG[key as keyof SchemaConfig];
@@ -42,6 +46,11 @@ export const validateConfig = (config: SchemaConfig): SchemaConfig => {
 
     // Check config values against canonical set
     const vals = config[key as keyof SchemaConfig] as string[];
+    if (!Array.isArray(vals)) {
+      nonarray.push(key);
+      continue;
+    }
+
     for (const val of vals) {
       if (!valid.has(val)) {
         unk.push(val);
@@ -77,7 +86,24 @@ export const validateConfig = (config: SchemaConfig): SchemaConfig => {
   }
 
   if (ignore.length) {
-    console.log(`[validate] unknown keys ignored: ${quote(ignore)}`);
+    console.log(`[validate] Ignoring unknown keys: ${quote(ignore)}`);
+  }
+
+  console.log();
+
+  if (missing.length) {
+    console.log(`[validate] FATAL: config is missing keys: ${quote(missing)}`);
+    fail = true;
+  }
+
+  if (nonarray.length) {
+    console.log(`[validate] FATAL: keys not pointing to arrays: ${quote(nonarray)}`);
+    fail = true;
+  }
+
+  if (fail) {
+    console.log(`[validate] Failed validation, aborting.`);
+    process.exit(1);
   }
   return res;
 };

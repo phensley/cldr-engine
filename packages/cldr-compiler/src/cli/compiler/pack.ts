@@ -11,7 +11,7 @@ import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
 import { buildLocaleMap, checkLanguages, getProjectInfo, ProjectInfo } from './util';
 
-import * as DEFAULT_CONFIG from './config.json';
+import DEFAULT_CONFIG from './config.json';
 import { Downloader } from '../downloader/downloader';
 import { validateConfig } from './validate';
 
