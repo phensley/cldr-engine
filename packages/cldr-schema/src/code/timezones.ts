@@ -21,7 +21,3 @@ export const TIMEZONE_INDICES = {
   'metazone': MetaZoneIndex,
   'timezone-type': TimeZoneTypeIndex
 };
-
-export const TIMEZONE_VALUES = {
-  'metazone': MetaZoneValues,
-};
