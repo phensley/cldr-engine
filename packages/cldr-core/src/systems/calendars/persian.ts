@@ -26,10 +26,6 @@ export class PersianDate extends CalendarDate {
     return new PersianDate(this._firstDay, this._minDays).initFromJD(jd, ms, zoneId);
   }
 
-  monthCount(): number {
-    return 12;
-  }
-
   toString(): string {
     return this._toString('Persian');
   }
@@ -48,6 +44,10 @@ export class PersianDate extends CalendarDate {
     super.initFromJD(jd, msDay, zoneId);
     computePersianFields(this._fields);
     return this;
+  }
+
+  protected monthCount(): number {
+    return 12;
   }
 
   protected monthStart(eyear: number, month: number, _useMonth: boolean): number {

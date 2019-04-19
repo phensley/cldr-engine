@@ -43,10 +43,6 @@ export class GregorianDate extends CalendarDate {
     return new GregorianDate('gregory', this._firstDay, this._minDays).initFromJD(jd, ms, zoneId);
   }
 
-  monthCount(): number {
-    return 12;
-  }
-
   toString(): string {
     return this._toString('Gregorian');
   }
@@ -84,6 +80,10 @@ export class GregorianDate extends CalendarDate {
     f[DateField.ERA] = era;
     f[DateField.YEAR] = year;
     return this;
+  }
+
+  protected monthCount(): number {
+    return 12;
   }
 
   protected monthStart(eyear: number, month: number, _useMonth: boolean): number {

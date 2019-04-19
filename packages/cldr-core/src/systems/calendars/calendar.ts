@@ -301,7 +301,7 @@ export abstract class CalendarDate {
   }
 
   abstract add(fields: CalendarDateFields): CalendarDate;
-  abstract monthCount(): number;
+  protected abstract monthCount(): number;
 
   /**
    * Compute a new Julian day and milliseconds UTC by updating one or more fields.

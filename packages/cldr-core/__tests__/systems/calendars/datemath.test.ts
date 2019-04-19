@@ -15,8 +15,9 @@ const japanese = (e: number, z: string) => JapaneseDate.fromUnixEpoch(e, z, 1, 1
 const persian = (e: number, z: string) => PersianDate.fromUnixEpoch(e, z, 1, 1);
 
 test('fractional years', () => {
-  const base = new Date(2004, 3, 11, 12, 34, 56);
-  const date: GregorianDate = gregorian(base.getTime(), NEW_YORK);
+  const base = new Date(2004, 3, 11, 16, 34, 56); // Treat as UTC
+  const utc = base.getTime() - base.getTimezoneOffset() * 60000;
+  const date: GregorianDate = gregorian(utc, NEW_YORK);
 
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2004-04-11 12:34:56.000 America/New_York');
