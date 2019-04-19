@@ -301,6 +301,7 @@ export abstract class CalendarDate {
   }
 
   abstract add(fields: CalendarDateFields): CalendarDate;
+  abstract monthCount(): number;
 
   /**
    * Compute a new Julian day and milliseconds UTC by updating one or more fields.
@@ -311,19 +312,31 @@ export abstract class CalendarDate {
 
     // Adjust the extended year and month. Note: month may be fractional here,
     // but will be <= 12 after modulus the year
-    let month = (this._fields[DateField.MONTH] - 1) + (fields.month || 0);
-    const yadd = floor(month / 12); // TODO: support calendars != 12 months
-    const year = this._fields[DateField.EXTENDED_YEAR] + (fields.year || 0) + yadd;
-    month -= yadd * 12;
+    const mc = this.monthCount();
+    const months = floor((fields.year || 0) * mc);
+    let month = (this._fields[DateField.MONTH] - 1) + (fields.month || 0) + months;
+
+    const yadd = floor(month / mc);
+    const year = this._fields[DateField.EXTENDED_YEAR] + yadd;
+    month -= yadd * mc;
 
     // Calculate days and milliseconds from the time-oriented fields.
     const [days, ms] = this._addTime(fields);
 
     // Calculate the Julian day for the adjusted year/month then add back the days.
     const jd = this.monthStart(year, month, false) + dom + days;
-    const ijd = floor(jd);
+    let ijd = floor(jd);
     const djd = jd - ijd;
-    return [ijd, ms + (djd * CalendarConstants.ONE_DAY_MS)];
+
+    // Calculate ms and handle rollover
+    let _ms = ms + (djd * CalendarConstants.ONE_DAY_MS);
+    _ms = Math.round(_ms) | 0;
+    if (_ms >= CalendarConstants.ONE_DAY_MS) {
+      ijd++;
+      _ms -= CalendarConstants.ONE_DAY_MS;
+    }
+
+    return [ijd, _ms];
   }
 
   /**
@@ -339,7 +352,7 @@ export abstract class CalendarDate {
 
     const oneDay = CalendarConstants.ONE_DAY_MS;
     const days = floor(msDay / oneDay);
-    const ms = msDay - (days * oneDay);
+    const ms = (msDay - (days * oneDay));
     return [days, ms];
   }
 

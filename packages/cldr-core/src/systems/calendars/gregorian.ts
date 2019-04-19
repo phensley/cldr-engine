@@ -43,6 +43,10 @@ export class GregorianDate extends CalendarDate {
     return new GregorianDate('gregory', this._firstDay, this._minDays).initFromJD(jd, ms, zoneId);
   }
 
+  monthCount(): number {
+    return 12;
+  }
+
   toString(): string {
     return this._toString('Gregorian');
   }
@@ -83,7 +87,7 @@ export class GregorianDate extends CalendarDate {
   }
 
   protected monthStart(eyear: number, month: number, _useMonth: boolean): number {
-    let isLeap = eyear % 4 === 0;
+    let isLeap = (eyear | 0) % 4 === 0;
     const y = eyear - 1;
     let jd = 365 * y + floor(y / 4) + (CalendarConstants.JD_GREGORIAN_EPOCH - 3);
     if (eyear >= CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR) {

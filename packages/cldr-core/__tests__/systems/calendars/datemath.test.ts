@@ -14,6 +14,26 @@ const iso8601 = (e: number, z: string) => ISO8601Date.fromUnixEpoch(e, z, 1, 1);
 const japanese = (e: number, z: string) => JapaneseDate.fromUnixEpoch(e, z, 1, 1);
 const persian = (e: number, z: string) => PersianDate.fromUnixEpoch(e, z, 1, 1);
 
+test('fractional years', () => {
+  const base = new Date(2004, 3, 11, 12, 34, 56);
+  const date: GregorianDate = gregorian(base.getTime(), NEW_YORK);
+
+  let q: GregorianDate;
+  expect(date.toString()).toEqual('Gregorian 2004-04-11 12:34:56.000 America/New_York');
+
+  q = date.add({ year: 4.25 });
+  expect(q.toString()).toEqual('Gregorian 2008-07-11 12:34:56.000 America/New_York');
+
+  q = date.add({ year: 4, month: 3 });
+  expect(q.toString()).toEqual('Gregorian 2008-07-11 12:34:56.000 America/New_York');
+
+  q = date.add({ year: -4.25 });
+  expect(q.toString()).toEqual('Gregorian 2000-01-11 11:34:56.000 America/New_York');
+
+  q = date.add({ year: -4, month: -3 });
+  expect(q.toString()).toEqual('Gregorian 2000-01-11 11:34:56.000 America/New_York');
+});
+
 test('years', () => {
   const date: GregorianDate = gregorian(BASE, NEW_YORK);
   let q: GregorianDate;
@@ -24,7 +44,7 @@ test('years', () => {
 
   // TODO: check fractional years
   q = date.add({ year: 1.5 });
-  expect(q.toString()).toEqual('Gregorian 2001-09-09 16:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2001-09-11 04:00:25.000 America/New_York');
 
   q = date.add({ year: -3 });
   expect(q.toString()).toEqual('Gregorian 1997-03-11 03:00:25.000 America/New_York');
