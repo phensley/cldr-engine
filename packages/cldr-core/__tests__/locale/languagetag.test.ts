@@ -7,8 +7,11 @@ test('basics', () => {
   tag = new LanguageTag('en', '', '', '', {});
   expect(tag.compact()).toEqual('en');
 
-  tag = new LanguageTag('en', '', '', '', {'u': ['nu-gregory']});
-  expect(tag.compact()).toEqual('en-u-nu-gregory');
+  tag = new LanguageTag('en', '', '', '', {'u': ['nu-latn']});
+  expect(tag.compact()).toEqual('en-u-nu-latn');
+
+  tag = new LanguageTag('en', '', '', '', {'u': ['nu-latn', 'ca-gregory']});
+  expect(tag.compact()).toEqual('en-u-nu-latn-ca-gregory');
 
   const unkarray = undefined as unknown as string[];
   tag = new LanguageTag('en', '', '', '', {'u': unkarray });
