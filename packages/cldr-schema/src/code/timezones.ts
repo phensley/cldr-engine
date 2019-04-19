@@ -1,7 +1,6 @@
 import { field, scope, vector1, vector2, Scope } from '../types';
 import {
   MetaZoneIndex,
-  MetaZoneValues,
   TimeZoneTypeIndex,
 } from '../schema/timezones';
 

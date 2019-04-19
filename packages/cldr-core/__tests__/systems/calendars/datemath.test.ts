@@ -108,6 +108,9 @@ test('months', () => {
   q = date.add({ month: 9 });
   expect(q.toString()).toEqual('Gregorian 2000-12-11 03:00:25.000 America/New_York');
 
+  q = date.add({ month: -17 });
+  expect(q.toString()).toEqual('Gregorian 1998-10-11 04:00:25.000 America/New_York');
+
   q = date.add({ month: -60 });
   expect(q.toString()).toEqual('Gregorian 1995-03-11 03:00:25.000 America/New_York');
 
