@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [UNRELEASED]
+
+
+## [0.14.1]
 ### Added
  - Added a `Calendars.resolveTimeZoneId` which maps a timezone id or alias to the current TZDB identifier for that zone.
  - Added the miscellaneous number patterns to the schema keyed by `NumberMiscPatternType` values `at-least`, `at-most`, `approx` and `range`. These are not yet used for formatting.
@@ -114,7 +117,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
-[UNRELEASED]: https://github.com/phensley/cldr-engine/compare/v0.13.7...master
+[UNRELEASED]: https://github.com/phensley/cldr-engine/compare/v0.14.1...master
+[0.14.1]: https://github.com/phensley/cldr-engine/compare/v0.13.7...v0.14.1
 [0.13.7]: https://github.com/phensley/cldr-engine/compare/v0.13.6...v0.13.7
 [0.13.6]: https://github.com/phensley/cldr-engine/compare/v0.13.5...v0.13.6
 [0.13.5]: https://github.com/phensley/cldr-engine/compare/v0.13.4...v0.13.5
