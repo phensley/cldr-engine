@@ -9,9 +9,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [UNRELEASED]
 ### Added
  - Added a `Calendars.resolveTimeZoneId` which maps a timezone id or alias to the current TZDB identifier for that zone.
- - Added the miscellaneous number patterns to the schema keyed by `NumberMiscPatternType` values `at-least`, `at-most`, `approx` and `range`.
+ - Added the miscellaneous number patterns to the schema keyed by `NumberMiscPatternType` values `at-least`, `at-most`, `approx` and `range`. These are not yet used for formatting.
+ - Compiler now validates custom schema configs when generating resource packs, reporting differences agains the full schema config.
 
 ### Fixed/Changed
+ - Upgraded [cldr 35.1](http://cldr.unicode.org/index/downloads/cldr-35).
+ - Improved calendar date math. Fractional years now computed in terms of months so adding .25 years is equivalent to 3 even months.
  - Moved calendar available formats and interval formats to schema config.
  - Split the pluralized calendar available formats to their own schema method.
  - The `Calendars.timeZoneIds` method now returns an array of valid TZDB identifiers instead of CLDR stable timezone identifiers.
