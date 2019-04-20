@@ -6,8 +6,8 @@ import {
 
 export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZones', [
   scope('metaZones', 'metaZones', [
-    vector2('long', 'timezone-type', 'metazone'),
-    vector2('short', 'timezone-type', 'metazone')
+    vector2('short', 'timezone-type', 'metazone'),
+    vector2('long', 'timezone-type', 'metazone')
   ]),
   vector1('exemplarCity', 'timezone-id'),
   field('gmtFormat'),

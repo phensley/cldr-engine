@@ -51,7 +51,6 @@ export class TzImpl {
 
     const addlink = (src: string, dst: string) => {
       // index a few supported forms of the time zone id or alias
-      // Ex:  America/New_York, Ameirca_New_York
       const lowersrc = src.toLowerCase();
       this.linkindex.set(src, dst);
       this.linkindex.set(lowersrc, dst);
