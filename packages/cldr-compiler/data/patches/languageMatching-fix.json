@@ -859,16 +859,9 @@
           }, 
           {
             "desired": "en_*_$!enUS", 
-            "distance": "3",
-						"oneway": "1",
+            "distance": "3", 
             "supported": "en_*_GB"
           }, 
-          {
-            "desired": "en_*_GB",
-            "distance": "3",
-            "oneway": "1",
-            "supported": "en_*_US"
-          },
           {
             "desired": "en_*_$!enUS", 
             "distance": "4", 

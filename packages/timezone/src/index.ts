@@ -139,7 +139,6 @@ export class TzImpl {
    */
   private record(zoneid: string): [string, ZoneRecord] | undefined {
     const id = this.linkindex.get(zoneid);
-    // console.log('record lookup', zoneid, '->', id);
     // Failed to match a time zone or alias in any of the supported forms
     if (id === undefined) {
       return undefined;
