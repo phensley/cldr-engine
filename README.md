@@ -29,11 +29,23 @@ npm install --save @phensley/cldr
 yarn add @phensley/cldr
 ```
 
-## Rationale
+## Features
 
-I needed a library that included as much CLDR functionality as possible, while still meeting all of my requirements for performance, static and runtime code size, simplicity of integration, etc.
-
-I'm gradually [comparing this library with current alternatives](https://github.com/phensley/cldr-bakeoff) here.
+* Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html)
+* [360 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#availablelocales)
+* [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles.html) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
+* [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher.html) for improved locale fallback
+* Both string and [parts formatting](https://phensley.github.io/cldr-engine/docs/en/api-cldr-numbers.html#formatdecimaltoparts) for flexible markup styling
+* [Date time](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#formatdate), [date interval](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#formatdateinterval), and [relative time](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#formatrelativetimefield) formatting
+* Full TZDB and CLDR [timezone support](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#resolvetimezoneid) covering the full range of TZDB untils, resolving deprecated timezone identifiers and aliases
+* [Gregorian](https://phensley.github.io/cldr-engine/docs/en/api-gregoriandate.html), [ISO-8601](https://phensley.github.io/cldr-engine/docs/en/api-iso8601date.html), [Japanese](https://phensley.github.io/cldr-engine/docs/en/api-japanesedate.html), [Persian](https://phensley.github.io/cldr-engine/docs/en/api-persiandate.html) and [Buddhist](https://phensley.github.io/cldr-engine/docs/en/api-buddhistdate.html) calendars.
+* Date formatting using [flexible skeleton-based pattern matching](https://phensley.github.io/cldr-engine/docs/en/api-dateformatoptions.html#example)
+* [Date math](https://phensley.github.io/cldr-engine/docs/en/api-calendardate.html#add) and ["field of greatest difference"](https://phensley.github.io/cldr-engine/docs/en/api-calendardate.html#fieldofgreatestdifference) calculation
+* [Cardinal and ordinal pluralization](https://phensley.github.io/cldr-engine/docs/en/api-cldr-numbers.html#getpluralcardinal) rules
+* [Decimal numbers](https://phensley.github.io/cldr-engine/docs/en/api-cldr-numbers.html#formatdecimal), [currencies](https://phensley.github.io/cldr-engine/docs/en/api-cldr-numbers.html#formatcurrency), [units](https://phensley.github.io/cldr-engine/docs/en/api-cldr-units.html#formatquantity), and [unit sequence](https://phensley.github.io/cldr-engine/docs/en/api-cldr-units.html#formatquantitysequence) formatting, with [157 different units](https://phensley.github.io/cldr-engine/docs/en/api-unittype.html)
+* [Arbitrary precision decimal math](https://phensley.github.io/cldr-engine/docs/en/doc-math.html)
+* Display names for [languages](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general.html#getlanguagedisplayname), [scripts](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general.html#getscriptdisplayname), [regions](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general.html#getregiondisplayname), [currencies](https://phensley.github.io/cldr-engine/docs/en/api-cldr-numbers.html#getcurrencydisplayname), [units](https://phensley.github.io/cldr-engine/docs/en/api-cldr-units.html#getunitdisplayname), [calendar fields](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#months), etc
+* [List formatting](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general.html#formatlist), [measurement system](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general.html#measurementsystem), [character order](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general.html#characterorder), and [line order](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general.html#lineorder) information
 
 ## Goals
 
@@ -48,6 +60,13 @@ I'm gradually [comparing this library with current alternatives](https://github.
 * No familiarity with CLDR structure is required for developers to use this library.
 * High performance.
 * Arbitrary precision decimal math, to achieve the same accuracy in the browser as on the server.
+
+## Rationale
+
+I needed a library that included as much CLDR functionality as possible, while still meeting all of my requirements for performance, static and runtime code size, simplicity of integration, etc.
+
+I'm gradually [comparing this library with current alternatives](https://github.com/phensley/cldr-bakeoff) here.
+
 
 ## License
 
