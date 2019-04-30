@@ -10,8 +10,6 @@ const TAG_SEP = /[,\s]+/g;
 
 const numberCmp = (a: number, b: number) => a === b ? 0 : a < b ? -1 : 1;
 
-const UNDEFINED = new LanguageTag();
-
 // Mapping of paradigm locales to their relative position.
 type ParadigmMap = { [x: string]: number };
 const paradigmLocaleMap: ParadigmMap = paradigmLocales.reduce((o: ParadigmMap, k: string, i: number) => {
@@ -52,7 +50,10 @@ const parse = (locales: string | string[]): Entry[] => {
     if (tag.hasLanguage() || tag.hasScript() || tag.hasRegion()) {
       result.push(new Entry(id, LanguageResolver.resolve(tag)));
     } else {
-      result.push(new Entry(id, UNDEFINED));
+      // Preserve undefined core fields, but include input's extensions
+      result.push(new Entry(id, new LanguageTag(
+        undefined, undefined, undefined, undefined, tag.extensions(), tag.privateUse()
+      )));
     }
   }
   return result;
@@ -149,6 +150,7 @@ export class LocaleMatcher {
       if (exact !== undefined) {
         bestMatch = exact[0];
         bestDistance = 0;
+        bestDesired = desired;
         break;
       }
 

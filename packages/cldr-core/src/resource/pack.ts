@@ -100,8 +100,15 @@ export class Pack {
     // Strings for a language are organized by script.
     let script = this.scripts[tag.script()];
     if (script === undefined) {
-      script = this.scripts[this.defaultTag.script()];
-      return script.get(this.defaultTag);
+      // Swap in the default script
+      tag = new LanguageTag(
+        this.defaultTag.language(),
+        this.defaultTag.script(),
+        this.defaultTag.region(),
+        this.defaultTag.variant(),
+        tag.extensions(),
+        tag.privateUse());
+      script = this.scripts[tag.script()];
     }
     return script.get(tag);
   }
