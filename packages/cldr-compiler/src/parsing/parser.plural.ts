@@ -84,23 +84,23 @@ const P_RANGE = P_INTEGER.prefix(P_SPACE)
 const P_RANGELIST = P_RANGE.or(P_INTEGER)
   .separatedBy(P_COMMA).prefix(P_SPACE);
 
-export const P_EXPR = P_OPERAND.flatMap(operand =>
+const P_EXPR = P_OPERAND.flatMap(operand =>
   P_MODOP.orDefault(0).flatMap(modop =>
     P_RELOP.flatMap(relop =>
       P_RANGELIST
         .map(rangelist => new Expr(operand, modop, relop, rangelist)))));
 
-export const P_AND_CONDITION = P_EXPR
+const P_AND_CONDITION = P_EXPR
   .separatedBy(P_AND)
     .map(expr => new AndCondition(expr));
 
-export const P_OR_CONDITION = P_AND_CONDITION
+const P_OR_CONDITION = P_AND_CONDITION
   .separatedBy(P_OR).prefix(P_SPACE)
     .map(and => new OrCondition(and));
 
-export const P_SAMPLE = matcher(/^(@integer|@decimal).*$/u).orDefault('').prefix(P_SPACE);
+const P_SAMPLE = matcher(/^(@integer|@decimal).*$/u).orDefault('').prefix(P_SPACE);
 
-export const P_RULE = P_OR_CONDITION.orDefault(new OrCondition([]))
+const P_RULE = P_OR_CONDITION.orDefault(new OrCondition([]))
   .flatMap(or => P_SAMPLE.orDefault('')
     .map(samples => new Rule(or, samples)));
 

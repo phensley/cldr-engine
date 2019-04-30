@@ -226,7 +226,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-a-feminine→];", 
-          "value": "11000000/1,000"
+          "value": "11000000/1000"
         }, 
         {
           "rule": "biljun[→%%and-type-a-feminine→];", 
@@ -238,7 +238,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-a-feminine→];", 
-          "value": "11000000000/1,000"
+          "value": "11000000000/1000"
         }, 
         {
           "rule": "triljun[→%%and-type-a-feminine→];", 
@@ -250,7 +250,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-a-feminine→];", 
-          "value": "11000000000000/1,000"
+          "value": "11000000000000/1000"
         }, 
         {
           "rule": "kvadriljun[→%%and-type-a-feminine→];", 
@@ -262,7 +262,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-a-feminine→];", 
-          "value": "11000000000000000/1,000"
+          "value": "11000000000000000/1000"
         }, 
         {
           "rule": "=#,##0=;", 
@@ -435,7 +435,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-a-masculine→];", 
-          "value": "11000000/1,000"
+          "value": "11000000/1000"
         }, 
         {
           "rule": "biljun[→%%and-type-a-masculine→];", 
@@ -447,7 +447,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-a-masculine→];", 
-          "value": "11000000000/1,000"
+          "value": "11000000000/1000"
         }, 
         {
           "rule": "triljun[→%%and-type-a-masculine→];", 
@@ -459,7 +459,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-a-masculine→];", 
-          "value": "11000000000000/1,000"
+          "value": "11000000000000/1000"
         }, 
         {
           "rule": "kvadriljun[→%%and-type-a-masculine→];", 
@@ -471,7 +471,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-a-masculine→];", 
-          "value": "11000000000000000/1,000"
+          "value": "11000000000000000/1000"
         }, 
         {
           "rule": "=#,##0=;", 
@@ -640,7 +640,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-b-feminine→];", 
-          "value": "11000000/1,000"
+          "value": "11000000/1000"
         }, 
         {
           "rule": "biljun[→%%and-type-b-feminine→];", 
@@ -652,7 +652,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-b-feminine→];", 
-          "value": "11000000000/1,000"
+          "value": "11000000000/1000"
         }, 
         {
           "rule": "triljun[→%%and-type-b-feminine→];", 
@@ -664,7 +664,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-b-feminine→];", 
-          "value": "11000000000000/1,000"
+          "value": "11000000000000/1000"
         }, 
         {
           "rule": "kvadriljun[→%%and-type-b-feminine→];", 
@@ -676,7 +676,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-b-feminine→];", 
-          "value": "11000000000000000/1,000"
+          "value": "11000000000000000/1000"
         }, 
         {
           "rule": "=#,##0=;", 
@@ -845,7 +845,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-b-masculine→];", 
-          "value": "11000000/1,000"
+          "value": "11000000/1000"
         }, 
         {
           "rule": "biljun[→%%and-type-b-masculine→];", 
@@ -857,7 +857,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-b-masculine→];", 
-          "value": "11000000000/1,000"
+          "value": "11000000000/1000"
         }, 
         {
           "rule": "triljun[→%%and-type-b-masculine→];", 
@@ -869,7 +869,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-b-masculine→];", 
-          "value": "11000000000000/1,000"
+          "value": "11000000000000/1000"
         }, 
         {
           "rule": "kvadriljun[→%%and-type-b-masculine→];", 
@@ -881,7 +881,7 @@
         }, 
         {
           "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-b-masculine→];", 
-          "value": "11000000000000000/1,000"
+          "value": "11000000000000000/1000"
         }, 
         {
           "rule": "=#,##0=;", 

@@ -105,7 +105,7 @@
         }, 
         {
           "rule": "←← coma →→;", 
-          "value": "x,x"
+          "value": "x.x"
         }, 
         {
           "rule": "cero;", 
@@ -238,7 +238,7 @@
         }, 
         {
           "rule": "←← coma →→;", 
-          "value": "x,x"
+          "value": "x.x"
         }, 
         {
           "rule": "cero;", 
@@ -371,7 +371,7 @@
         }, 
         {
           "rule": "←← coma →→;", 
-          "value": "x,x"
+          "value": "x.x"
         }, 
         {
           "rule": "cero;", 
