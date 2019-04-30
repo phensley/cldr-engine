@@ -143,9 +143,13 @@ export class LocaleMatcher {
     let bestDesired = len === 0 ? this.default : desireds[0];
     for (let i = 0; i < len; i++) {
       const desired = desireds[i];
+
+      // Short-circuit if we find an exact match
       const exact = this.exactMap[desired.compact];
       if (exact !== undefined) {
-        return { locale: { id: exact[0].id, tag: exact[0].tag }, distance: 0 };
+        bestMatch = exact[0];
+        bestDistance = 0;
+        break;
       }
 
       for (let j = 0; j < this.count; j++) {
