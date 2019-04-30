@@ -45,17 +45,17 @@ const ARCHIVES = [
 // but left untagged, like 35.1 was. Without the tag we download
 // a tarball of a specific commit, at least until the tag is pushed.
 const COMMITS: any = {
-  'cldr-core': 'fdb81faac9c473c161d48b8a7a98028bcac61bd1',
-  'cldr-dates-modern': '35dfc323e2587fbefbb1d8bad79cc39f58c43348',
-  'cldr-cal-buddhist-modern': 'c19ad2798b930664a815a278f4df4b8679e0a411',
-  'cldr-cal-japanese-modern': '40e7cda11e4f0bc1a59aaec4b035214aa4dbb655',
-  'cldr-cal-persian-modern': '0bc2df2d2524b698e41708fff21fcda0f169efad',
-  'cldr-localenames-modern': 'bd969e9c29cabe45cd1a4aa88546f698e65b7be5',
-  'cldr-misc-modern': 'd507b415a36848470d9dda6e54f231f23655e173',
-  'cldr-numbers-modern': '894eff57e0410bf8c3457eb2db57f004e7ad0412',
-  'cldr-rbnf': 'ee499271a0c01a12ac3054943c16eac779d41bc1',
-  'cldr-segments-modern': '5c8fea8cfebf26b864353383168556c198ef22bd',
-  'cldr-units-modern': '6ce59f5c2e0a6def19f09344032b33925c67bf75'
+  // 'cldr-core': 'fdb81faac9c473c161d48b8a7a98028bcac61bd1',
+  // 'cldr-dates-modern': '35dfc323e2587fbefbb1d8bad79cc39f58c43348',
+  // 'cldr-cal-buddhist-modern': 'c19ad2798b930664a815a278f4df4b8679e0a411',
+  // 'cldr-cal-japanese-modern': '40e7cda11e4f0bc1a59aaec4b035214aa4dbb655',
+  // 'cldr-cal-persian-modern': '0bc2df2d2524b698e41708fff21fcda0f169efad',
+  // 'cldr-localenames-modern': 'bd969e9c29cabe45cd1a4aa88546f698e65b7be5',
+  // 'cldr-misc-modern': 'd507b415a36848470d9dda6e54f231f23655e173',
+  // 'cldr-numbers-modern': '894eff57e0410bf8c3457eb2db57f004e7ad0412',
+  // 'cldr-rbnf': 'ee499271a0c01a12ac3054943c16eac779d41bc1',
+  // 'cldr-segments-modern': '5c8fea8cfebf26b864353383168556c198ef22bd',
+  // 'cldr-units-modern': '6ce59f5c2e0a6def19f09344032b33925c67bf75'
 };
 
 const SUPPLEMENTAL = new Set([
