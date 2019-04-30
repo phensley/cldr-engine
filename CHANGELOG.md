@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## [UNRELEASED]
+## [0.14.4]
 ### Fixed/Changed
  - Improved matching of undefined locale. Ensures language tag extensions are passed through the locale matcher and resource bundle builder.
 
@@ -126,6 +126,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.14.4]: https://github.com/phensley/cldr-engine/compare/v0.14.3...v0.14.4
 [0.14.3]: https://github.com/phensley/cldr-engine/compare/v0.14.2...v0.14.3
 [0.14.2]: https://github.com/phensley/cldr-engine/compare/v0.14.1...v0.14.2
 [0.14.1]: https://github.com/phensley/cldr-engine/compare/v0.13.7...v0.14.1
