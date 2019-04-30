@@ -1,0 +1,807 @@
+{
+  "OrdinalRules": {
+    "digits-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "−→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=#,##0=ú;", 
+          "value": "0"
+        }
+      ]
+    }
+  }, 
+  "SpelloutRules": {
+    "2d-year": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "agus =%spellout-numbering=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-no-a=;", 
+          "value": "10"
+        }
+      ]
+    }, 
+    "billions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "billiún;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= billiún;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= billiún déag;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= billiún;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "←%%hundreds←→%%is-billions→;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "hundreds": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "céad;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "dhá chéad;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "trí chéad;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "ceithre chéad;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "cúig chéad;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "sé chéad;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "seacht gcéad;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "ocht gcéad;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "naoi gcéad;", 
+          "value": "9"
+        }
+      ]
+    }, 
+    "is": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' is;", 
+          "value": "0"
+        }, 
+        {
+          "rule": ";", 
+          "value": "1"
+        }, 
+        {
+          "rule": "→→;", 
+          "value": "10"
+        }
+      ]
+    }, 
+    "is-billions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' billiún;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' is =%%spellout-cardinal-prefixpart= billiún;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "' is =%%billions=;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%is= =%%billions=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "is-millions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' =%%million=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' is =%%spellout-cardinal-prefixpart= =%%million=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "' is =%%millions=;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%is= =%%millions=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "is-number": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' is =%spellout-numbering=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' =%spellout-numbering=;", 
+          "value": "1"
+        }
+      ]
+    }, 
+    "is-numberp": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' is =%%numberp=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' =%%numberp=;", 
+          "value": "1"
+        }
+      ]
+    }, 
+    "is-quadrillions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' quadrilliún;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' is =%%spellout-cardinal-prefixpart= quadrilliún;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "' is =%%quadrillions=;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%is= =%%quadrillions=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "is-thousands": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' =%%thousand=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' is =%%spellout-cardinal-prefixpart= =%%thousand=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "' is =%%thousands=;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%is= =%%thousands=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "is-trillions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' =%%trillion=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' is =%%spellout-cardinal-prefixpart= =%%trillion=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "' is =%%trillions=;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%is= =%%trillions=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "lenient-parse": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "& ' ' , ',' ;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "million": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "milliún;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "mhilliún;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "milliún;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "→→;", 
+          "value": "11"
+        }
+      ]
+    }, 
+    "millions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "milliún;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= =%%millionsp=;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "←%%hundreds←→%%is-millions→;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "millionsp": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "=%%million=;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "=%%million= déag;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%million=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "numberp": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "=%%spellout-cardinal-prefixpart=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "dó dhéag;", 
+          "value": "12"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= déag;", 
+          "value": "13"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "quadrillions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "quadrilliún;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= quadrilliún;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= quadrilliún déag;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= quadrilliún;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "←%%hundreds←→%%is-quadrillions→;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "spellout-cardinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-cardinal-prefixpart": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "náid;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "aon;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "dhá;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "trí;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "ceithre;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "cúig;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "sé;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "seacht;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "ocht;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "naoi;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "deich;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "→→;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "fiche[ is →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "tríocha[ is →→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "daichead[ is →→];", 
+          "value": "40"
+        }, 
+        {
+          "rule": "caoga[ is →→];", 
+          "value": "50"
+        }, 
+        {
+          "rule": "seasca[ is →→];", 
+          "value": "60"
+        }, 
+        {
+          "rule": "seachtó[ is →→];", 
+          "value": "70"
+        }, 
+        {
+          "rule": "ochtó[ is →→];", 
+          "value": "80"
+        }, 
+        {
+          "rule": "nócha[ is →→];", 
+          "value": "90"
+        }, 
+        {
+          "rule": "←%%hundreds←[→%%is-numberp→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←%%thousands←[, →%%numberp→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←%%millions←[, →%%numberp→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "←%%billions←[, →%%numberp→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "←%%trillions←[, →%%numberp→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←%%quadrillions←[, →%%numberp→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "míneas →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← pointe →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "a náid;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "a haon;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "a dó;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "a trí;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "a ceathair;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "a cúig;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "a sé;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "a seacht;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "a hocht;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "a naoi;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "a deich;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "→→ déag;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "→→ dhéag;", 
+          "value": "12"
+        }, 
+        {
+          "rule": "→→ déag;", 
+          "value": "13"
+        }, 
+        {
+          "rule": "fiche[ →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "tríocha[ →→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "daichead[ →→];", 
+          "value": "40"
+        }, 
+        {
+          "rule": "caoga[ →→];", 
+          "value": "50"
+        }, 
+        {
+          "rule": "seasca[ →→];", 
+          "value": "60"
+        }, 
+        {
+          "rule": "seachtó[ →→];", 
+          "value": "70"
+        }, 
+        {
+          "rule": "ochtó[ →→];", 
+          "value": "80"
+        }, 
+        {
+          "rule": "nócha[ →→];", 
+          "value": "90"
+        }, 
+        {
+          "rule": "←%%hundreds←[→%%is-number→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←%%thousands←[, →%spellout-numbering→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←%%millions←[, →%spellout-numbering→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "←%%billions←[, →%spellout-numbering→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "←%%trillions←[, →%spellout-numbering→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←%%quadrillions←[, →%spellout-numbering→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-numbering-no-a": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "náid;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "aon;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "dó;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "trí;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "ceathair;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "cúig;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "sé;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "seacht;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "ocht;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "naoi;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "deich;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "→→ déag;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "→→ dhéag;", 
+          "value": "12"
+        }, 
+        {
+          "rule": "→→ déag;", 
+          "value": "13"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "míneas →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "←%%spellout-numbering-no-a← →%%2d-year→;", 
+          "value": "1000/100"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "10000"
+        }
+      ]
+    }, 
+    "thousand": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "míle;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "mhíle;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "míle;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "→→;", 
+          "value": "11"
+        }
+      ]
+    }, 
+    "thousandp": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "=%%thousand=;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "=%%thousand= dhéag;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%thousand=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "thousands": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "míle;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= =%%thousandp=;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "←%%hundreds←→%%is-thousands→;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "trillion": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "dtrilliún;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "thrilliún;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "dtrilliún;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "→→;", 
+          "value": "11"
+        }
+      ]
+    }, 
+    "trillions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "thrilliún;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=%%spellout-cardinal-prefixpart= =%%trillionsp=;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "←%%hundreds←→%%is-trillions→;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "trillionsp": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "=%%trillion=;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "=%%trillion= déag;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "=%%trillion=;", 
+          "value": "20"
+        }
+      ]
+    }
+  }
+}

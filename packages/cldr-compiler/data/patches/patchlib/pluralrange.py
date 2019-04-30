@@ -2,7 +2,7 @@
 import json, os, sys
 from collections import OrderedDict
 from lxml.etree import fromstring, tostring
-from util import readxml
+from util import readxml, save
 
 # Builds a temporary patch for 'pluralRanges' JSON from original
 # supplemental 'pluralRanges.xml'. This data is currently missing
@@ -10,7 +10,8 @@ from util import readxml
 
 ROOT = '//pluralRanges'
 
-def build(path):
+def build(root, dest):
+    path = os.path.join(root, 'common/supplemental/pluralRanges.xml')
     tree = readxml(path)
 
     ranges = OrderedDict()
@@ -32,5 +33,7 @@ def build(path):
             pluralRanges = sort
         )
     )
-    return res
+
+    path = os.path.join(dest, 'pluralRanges-fix.json')
+    save(path, res)
 

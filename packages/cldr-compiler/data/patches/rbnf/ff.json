@@ -1,0 +1,329 @@
+{
+  "SpelloutRules": {
+    "spellout-cardinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "alaa limoore;", 
+          "value": "NaN"
+        }, 
+        {
+          "rule": "infinity;", 
+          "value": "Inf"
+        }, 
+        {
+          "rule": "minus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← poofirgel →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "ɓolum;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "goʼo;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "ɗiɗi;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "tati;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "nawi;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "jowi;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "jeegoʼo;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "jeeɗiɗi;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "jeetati;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "jeenawi;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "sappo[ e →→];", 
+          "value": "10"
+        }, 
+        {
+          "rule": "noogas[ e →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "cepanze ←←[ e →→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "temedere ←←[ e →→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "ujunere ←←[ e →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "miliyo ←←[, →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "miliyaari ←←[, →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "biliyo ←←[, →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "biliyaari ←←[, →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal-class-o": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "alaa limoore;", 
+          "value": "NaN"
+        }, 
+        {
+          "rule": "infinity;", 
+          "value": "Inf"
+        }, 
+        {
+          "rule": "minus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← poofirgel →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "ɓolum;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "gooto;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "ɗiɗo;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "tato;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "nawo;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "njowo;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "jeegomo;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "jeeɗiɗo;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "jeetato;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "jeenawo;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "sappo[ e →→];", 
+          "value": "10"
+        }, 
+        {
+          "rule": "noogas[ e →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "cepanze ←←[ e →→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "temedere ←←[ e →→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "ujunere ←←[ e →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "miliyo ←←[, →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "miliyaari ←←[, →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "biliyo ←←[, →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "biliyaari ←←[, →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "alaa limoore;", 
+          "value": "NaN"
+        }, 
+        {
+          "rule": "infinity;", 
+          "value": "Inf"
+        }, 
+        {
+          "rule": "minus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=#,##0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "ɓolum;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "arande;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "ɗiɗaɓo;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "tatiaɓo;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "nawaɓo;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "jowaɓo;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "jeearande;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "jeeɗiɗaɓo;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "jeetataɓo;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "jeenawaɓo;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "sappo[ e →→];", 
+          "value": "10"
+        }, 
+        {
+          "rule": "noogas[ e →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "cepanze ←←[ e →→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "temedere ←←[ e →→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "ujunere ←←[ e →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "miliyo ←←[, →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "miliyaari ←←[, →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "biliyo ←←[, →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "biliyaari ←←[, →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }
+  }
+}

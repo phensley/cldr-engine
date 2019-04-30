@@ -1,0 +1,217 @@
+{
+  "SpelloutRules": {
+    "spellout-cardinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "kaw →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← pɔw →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "hwee;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "koro;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "abien;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "abiasa;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "anan;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "anum;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "asia;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "asuon;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "awɔtwe;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "akron;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "du[-→%%spellout-cardinal-tens→];", 
+          "value": "10"
+        }, 
+        {
+          "rule": "aduonu[-→%%spellout-cardinal-tens→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "aduasa[-→%%spellout-cardinal-tens→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "adu←←[-→%%spellout-cardinal-tens→];", 
+          "value": "40"
+        }, 
+        {
+          "rule": "­ɔha[-na-­→→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "aha-←←[-na-→→];", 
+          "value": "200"
+        }, 
+        {
+          "rule": "apem[-na-→→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "mpem-←←[-na-→→];", 
+          "value": "2000"
+        }, 
+        {
+          "rule": "mpem-ɔha[-na-→→];", 
+          "value": "100000"
+        }, 
+        {
+          "rule": "mpem-aha-←←[-na-→→];", 
+          "value": "200000"
+        }, 
+        {
+          "rule": "ɔpepepem-←←[-na-→→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "mpepepem-←←[-na-→→];", 
+          "value": "2000000"
+        }, 
+        {
+          "rule": "ɔpepepepem-←←[-na-→→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "mpepepepem-←←[-na-→→];", 
+          "value": "2000000000"
+        }, 
+        {
+          "rule": "ɔpepepepepem-←←[-na-→→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "mpepepepepem-←←[-na-→→];", 
+          "value": "2000000000000"
+        }, 
+        {
+          "rule": "ɔpepepepepepem-←←[-na-→→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "mpepepepepepem-←←[-na-→→];", 
+          "value": "2000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal-tens": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": ";", 
+          "value": "0"
+        }, 
+        {
+          "rule": "biako;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "2"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "kaw →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "←← →→→;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "←← →→→;", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←← →→→;", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "10000"
+        }
+      ]
+    }, 
+    "spellout-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "kaw →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "a-ɛ-tɔ-so-hwee;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "a-ɛ-di-kane;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "a-ɛ-tɔ-so-=%spellout-cardinal=;", 
+          "value": "2"
+        }
+      ]
+    }
+  }
+}

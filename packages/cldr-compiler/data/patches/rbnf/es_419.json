@@ -1,0 +1,85 @@
+{
+  "OrdinalRules": {
+    "digits-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%digits-ordinal-masculine=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "digits-ordinal-feminine": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "−→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=#,##0=ª.;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "digits-ordinal-masculine": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "−→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=#,##0=º.;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "digits-ordinal-masculine-adjective": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "−→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=#,##0==%%dord-mascabbrev=.;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "dord-mascabbrev": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "º;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "ᵉʳ;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "º;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "ᵉʳ;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "º;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "→→;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "→→;", 
+          "value": "100"
+        }
+      ]
+    }
+  }
+}

@@ -2,7 +2,7 @@
 import json, os, sys
 from collections import OrderedDict
 from lxml.etree import fromstring, tostring
-from util import readxml
+from util import readxml, save
 
 # Builds a temporary patch for 'languageMatching' JSON from original
 # supplemental 'languageInfo.xml'. This is a temporary fix for a bug
@@ -11,7 +11,8 @@ from util import readxml
 
 ROOT = '//languageMatches[@type="written_new"]'
 
-def build(path):
+def build(root, dest):
+    path = os.path.join(root, 'common/supplemental/languageInfo.xml')
     tree = readxml(path)
 
     rules = []
@@ -46,5 +47,7 @@ def build(path):
             )
         )
     )
-    return res
+
+    path = os.path.join(dest, 'languageMatching-fix.json')
+    save(path, res)
 

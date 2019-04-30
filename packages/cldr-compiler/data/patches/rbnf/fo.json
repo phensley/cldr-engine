@@ -1,0 +1,433 @@
+{
+  "SpelloutRules": {
+    "spellout-cardinal-feminine": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "minus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← komma →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "null;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "ein;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "tvær;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "tríggjar;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "fýre;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-masculine=;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "tjúgo[­→→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "tríati[­→→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "fýrati[­→→];", 
+          "value": "40"
+        }, 
+        {
+          "rule": "fimmti[­→→];", 
+          "value": "50"
+        }, 
+        {
+          "rule": "seksti[­→→];", 
+          "value": "60"
+        }, 
+        {
+          "rule": "sjeyti[­→→];", 
+          "value": "70"
+        }, 
+        {
+          "rule": "áttati[­→→];", 
+          "value": "80"
+        }, 
+        {
+          "rule": "níti[­→→];", 
+          "value": "90"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "ein millión[ og →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];", 
+          "value": "2000000"
+        }, 
+        {
+          "rule": "ein milliard[ og →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];", 
+          "value": "2000000000"
+        }, 
+        {
+          "rule": "ein billión[ og →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];", 
+          "value": "2000000000000"
+        }, 
+        {
+          "rule": "ein billiard[ og →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];", 
+          "value": "2000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal-masculine": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "minus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← komma →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "null;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "ein;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "tveir;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "tríggir;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "fýre;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "fimm;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "seks;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "sjey;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "átta;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "níggju;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "tíggju;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "ellivu;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "tólv;", 
+          "value": "12"
+        }, 
+        {
+          "rule": "trettan;", 
+          "value": "13"
+        }, 
+        {
+          "rule": "fjúrtan;", 
+          "value": "14"
+        }, 
+        {
+          "rule": "fímtan;", 
+          "value": "15"
+        }, 
+        {
+          "rule": "sekstan;", 
+          "value": "16"
+        }, 
+        {
+          "rule": "seytan;", 
+          "value": "17"
+        }, 
+        {
+          "rule": "átjan;", 
+          "value": "18"
+        }, 
+        {
+          "rule": "nítjan;", 
+          "value": "19"
+        }, 
+        {
+          "rule": "tjúgo[­→→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "tríati[­→→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "fýrati[­→→];", 
+          "value": "40"
+        }, 
+        {
+          "rule": "fimmti[­→→];", 
+          "value": "50"
+        }, 
+        {
+          "rule": "seksti[­→→];", 
+          "value": "60"
+        }, 
+        {
+          "rule": "sjeyti[­→→];", 
+          "value": "70"
+        }, 
+        {
+          "rule": "áttati[­→→];", 
+          "value": "80"
+        }, 
+        {
+          "rule": "níti[­→→];", 
+          "value": "90"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "ein millión[ og →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];", 
+          "value": "2000000"
+        }, 
+        {
+          "rule": "ein milliard[ og →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];", 
+          "value": "2000000000"
+        }, 
+        {
+          "rule": "ein billión[ og →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];", 
+          "value": "2000000000000"
+        }, 
+        {
+          "rule": "ein billiard[ og →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];", 
+          "value": "2000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal-neuter": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "minus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← komma →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "null;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "eitt;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "tvey;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "trý;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "fýre;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-masculine=;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "tjúgo[­→→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "tríati[­→→];", 
+          "value": "30"
+        }, 
+        {
+          "rule": "fýrati[­→→];", 
+          "value": "40"
+        }, 
+        {
+          "rule": "fimmti[­→→];", 
+          "value": "50"
+        }, 
+        {
+          "rule": "seksti[­→→];", 
+          "value": "60"
+        }, 
+        {
+          "rule": "sjeyti[­→→];", 
+          "value": "70"
+        }, 
+        {
+          "rule": "áttati[­→→];", 
+          "value": "80"
+        }, 
+        {
+          "rule": "níti[­→→];", 
+          "value": "90"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "ein millión[ og →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];", 
+          "value": "2000000"
+        }, 
+        {
+          "rule": "ein milliard[ og →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];", 
+          "value": "2000000000"
+        }, 
+        {
+          "rule": "ein billión[ og →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];", 
+          "value": "2000000000000"
+        }, 
+        {
+          "rule": "ein billiard[ og →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];", 
+          "value": "2000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal-masculine=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "mínus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "←←­hundrað[­og­→→];", 
+          "value": "1100/100"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "10000"
+        }
+      ]
+    }
+  }
+}

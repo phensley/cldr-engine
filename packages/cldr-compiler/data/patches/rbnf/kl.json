@@ -1,0 +1,268 @@
+{
+  "SpelloutRules": {
+    "numbertimes": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "ataaseq;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "marlunnik;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "pingasunik;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "sisamanik;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "tallimanik;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "arfinilinnik;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "arfineq-marlunnik;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "arfineq-pingasunik;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "arfineq-sisamanik;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "qulinik;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "aqqanilinik;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "aqqaneq-marlunnik;", 
+          "value": "12"
+        }, 
+        {
+          "rule": "aqqaneq-pingasunik;", 
+          "value": "13"
+        }, 
+        {
+          "rule": "aqqaneq-sisamanik;", 
+          "value": "14"
+        }, 
+        {
+          "rule": "aqqaneq-tallimanik;", 
+          "value": "15"
+        }, 
+        {
+          "rule": "arfersanilinnik;", 
+          "value": "16"
+        }, 
+        {
+          "rule": "arfersaneq-marlunnik;", 
+          "value": "17"
+        }, 
+        {
+          "rule": "arfersaneq-pingasunik;", 
+          "value": "18"
+        }, 
+        {
+          "rule": "arfersaneq-sisamanik;", 
+          "value": "19"
+        }, 
+        {
+          "rule": "←%%numbertimes← qulillit[ →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "uutritit[ →→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←%%numbertimes← uutritillit[ →→];", 
+          "value": "200"
+        }
+      ]
+    }, 
+    "spellout-cardinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "minus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← komma →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "nuulu;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "ataaseq;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "marluk;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "pingasut;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "sisamat;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "tallimat;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "arfinillit;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "arfineq-marluk;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "arfineq-pingasut;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "arfineq-sisamat;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "qulit;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "aqqanilit;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "aqqaneq-marluk;", 
+          "value": "12"
+        }, 
+        {
+          "rule": "aqqaneq-pingasut;", 
+          "value": "13"
+        }, 
+        {
+          "rule": "aqqaneq-sisamat;", 
+          "value": "14"
+        }, 
+        {
+          "rule": "aqqaneq-tallimat;", 
+          "value": "15"
+        }, 
+        {
+          "rule": "arfersanillit;", 
+          "value": "16"
+        }, 
+        {
+          "rule": "arfersaneq-marluk;", 
+          "value": "17"
+        }, 
+        {
+          "rule": "arfersaneq-pingasut;", 
+          "value": "18"
+        }, 
+        {
+          "rule": "arfersaneq-sisamat;", 
+          "value": "19"
+        }, 
+        {
+          "rule": "←%%numbertimes← qulillit[ →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "uutritit[ →→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←%%numbertimes← uutritillit[ →→];", 
+          "value": "200"
+        }, 
+        {
+          "rule": "tuusintit[ →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←%%numbertimes← tuusintillit[ →→];", 
+          "value": "2000"
+        }, 
+        {
+          "rule": "millionit[ →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "←%%numbertimes← millionillit[ →→];", 
+          "value": "2000000"
+        }, 
+        {
+          "rule": "milliardit[ →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "←%%numbertimes← milliardillit[ →→];", 
+          "value": "2000000000"
+        }, 
+        {
+          "rule": "billionit[ →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←%%numbertimes← billioniillit[ →→];", 
+          "value": "2000000000000"
+        }, 
+        {
+          "rule": "billiardit[ →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "←%%numbertimes← billiardillit[ →→];", 
+          "value": "2000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }
+      ]
+    }
+  }
+}

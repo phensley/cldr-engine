@@ -1,0 +1,147 @@
+{
+  "SpelloutRules": {
+    "spellout-cardinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "miinus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← koma →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "null;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "üks;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "kaks;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "kolm;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "neli;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "viis;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "kuus;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "seitse;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "kaheksa;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "üheksa;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "kümme;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "→→teist;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "←←kümmend[ →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "←←sada[ →→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←← tuhat[ →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←← miljon[ →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "←← miljonit[ →→];", 
+          "value": "2000000"
+        }, 
+        {
+          "rule": "←← miljard[ →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "←← miljardit[ →→];", 
+          "value": "2000000000"
+        }, 
+        {
+          "rule": "←← biljon[ →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←← biljonit[ →→];", 
+          "value": "2000000000000"
+        }, 
+        {
+          "rule": "←← biljard[ →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "←← biljardit[ →→];", 
+          "value": "2000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "miinus →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "←← sada[ →→];", 
+          "value": "1100/100"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "10000"
+        }
+      ]
+    }
+  }
+}

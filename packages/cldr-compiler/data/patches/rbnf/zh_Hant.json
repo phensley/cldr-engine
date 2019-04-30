@@ -1,0 +1,856 @@
+{
+  "OrdinalRules": {
+    "digits-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "第−→#,##0→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "第=#,##0=;", 
+          "value": "0"
+        }
+      ]
+    }
+  }, 
+  "SpelloutRules": {
+    "cardinal-alternate2-13": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal-alternate2=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-alternate2=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-alternate2=;", 
+          "value": "1000000000000"
+        }
+      ]
+    }, 
+    "cardinal-alternate2-2": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "一=%spellout-numbering=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "cardinal-alternate2-3": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal-alternate2=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-alternate2=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-alternate2=;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "cardinal-alternate2-4": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal-alternate2=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-alternate2=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-alternate2=;", 
+          "value": "1000"
+        }
+      ]
+    }, 
+    "cardinal-alternate2-5": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal-alternate2=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-alternate2=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-alternate2=;", 
+          "value": "10000"
+        }
+      ]
+    }, 
+    "cardinal-alternate2-8": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal-alternate2=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-alternate2=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-alternate2=;", 
+          "value": "10000000"
+        }
+      ]
+    }, 
+    "cardinal13": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "1000000000000"
+        }
+      ]
+    }, 
+    "cardinal2": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "一=%spellout-numbering=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "cardinal3": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "cardinal4": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "1000"
+        }
+      ]
+    }, 
+    "cardinal5": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "10000"
+        }
+      ]
+    }, 
+    "cardinal8": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-numbering=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零一=%spellout-cardinal=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "10000000"
+        }
+      ]
+    }, 
+    "financialnumber13": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零壹=%spellout-cardinal-financial=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-financial=;", 
+          "value": "1000000000000"
+        }
+      ]
+    }, 
+    "financialnumber2": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "壹=%spellout-cardinal-financial=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-financial=;", 
+          "value": "20"
+        }
+      ]
+    }, 
+    "financialnumber3": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零壹=%spellout-cardinal-financial=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-financial=;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "financialnumber4": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零壹=%spellout-cardinal-financial=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-financial=;", 
+          "value": "1000"
+        }
+      ]
+    }, 
+    "financialnumber5": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零壹=%spellout-cardinal-financial=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-financial=;", 
+          "value": "10000"
+        }
+      ]
+    }, 
+    "financialnumber8": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "零壹=%spellout-cardinal-financial=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "零=%spellout-cardinal-financial=;", 
+          "value": "20"
+        }, 
+        {
+          "rule": "=%spellout-cardinal-financial=;", 
+          "value": "10000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "負→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←←點→→→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "零;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "一;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "二;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "三;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "四;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "五;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "六;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "七;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "八;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "九;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "←←百[→%%cardinal2→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←←千[→%%cardinal3→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←←萬[→%%cardinal4→];", 
+          "value": "10000"
+        }, 
+        {
+          "rule": "←←億[→%%cardinal5→];", 
+          "value": "100000000"
+        }, 
+        {
+          "rule": "←←兆[→%%cardinal8→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←←京[→%%cardinal13→];", 
+          "value": "10000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal-alternate2": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "負→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "零;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "一;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "兩;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "三;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "四;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "五;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "六;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "七;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "八;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "九;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "←←百[→%%cardinal-alternate2-2→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←←千[→%%cardinal-alternate2-3→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←←萬[→%%cardinal-alternate2-4→];", 
+          "value": "10000"
+        }, 
+        {
+          "rule": "←←億[→%%cardinal-alternate2-5→];", 
+          "value": "100000000"
+        }, 
+        {
+          "rule": "←←兆[→%%cardinal-alternate2-8→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←←京[→%%cardinal-alternate2-13→];", 
+          "value": "10000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal-financial": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "負→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←←點→→→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "零;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "壹;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "貳;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "參;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "肆;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "伍;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "陸;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "柒;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "捌;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "玖;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "拾[→→];", 
+          "value": "10"
+        }, 
+        {
+          "rule": "←←拾[→→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "←←佰[→%%financialnumber2→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←←仟[→%%financialnumber3→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←←萬[→%%financialnumber4→];", 
+          "value": "10000"
+        }, 
+        {
+          "rule": "←←億[→%%financialnumber5→];", 
+          "value": "100000000"
+        }, 
+        {
+          "rule": "←←兆[→%%financialnumber8→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←←京[→%%financialnumber13→];", 
+          "value": "10000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "負→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←%spellout-cardinal←點→→→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "〇;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "一;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "二;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "三;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "四;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "五;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "六;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "七;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "八;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "九;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "十[→→];", 
+          "value": "10"
+        }, 
+        {
+          "rule": "←←十[→→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "←%spellout-cardinal←百[→%%cardinal2→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←%spellout-cardinal←千[→%%cardinal3→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal←萬[→%%cardinal4→];", 
+          "value": "10000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal←億[→%%cardinal5→];", 
+          "value": "100000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal←兆[→%%cardinal8→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←%spellout-cardinal←京[→%%cardinal13→];", 
+          "value": "10000000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "1001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "2000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "2001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "3000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "3001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "4000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "4001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "5000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "5001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "6000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "6001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "7000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "7001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "8000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "8001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "9000"
+        }, 
+        {
+          "rule": "=%%spellout-numbering-year-digits=;", 
+          "value": "9001"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "10000"
+        }
+      ]
+    }, 
+    "spellout-numbering-year-digits": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "←←→→→;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "←←→→→;", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←←→→→;", 
+          "value": "1000"
+        }
+      ]
+    }, 
+    "spellout-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=#,##0.#=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "第=%spellout-numbering=;", 
+          "value": "0"
+        }
+      ]
+    }
+  }
+}

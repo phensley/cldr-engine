@@ -1,0 +1,157 @@
+{
+  "SpelloutRules": {
+    "spellout-cardinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "mana yupay;", 
+          "value": "NaN"
+        }, 
+        {
+          "rule": "mana usay;", 
+          "value": "Inf"
+        }, 
+        {
+          "rule": "minusu →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "←← comma →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "chusaq;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "huk;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "iskay;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "kinsa;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "tawa;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "phisqa;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "suqta;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "qanchis;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "pusaq;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "isqun;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "chunka[ →%%spellout-cardinal-with→];", 
+          "value": "10"
+        }, 
+        {
+          "rule": "←← chunka[ →%%spellout-cardinal-with→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "←← pachak[ →→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "←← waranqa[ →→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "←← hunu[ →→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "←← lluna[ →→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "←← trilionu[ →→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "←← kvadrilionu[ →→];", 
+          "value": "1000000000000000"
+        }, 
+        {
+          "rule": "=#,##0.#=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal-with": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal=-ni-yuq;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=-yuq;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=-ni-yuq;", 
+          "value": "7"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "minusu →→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=-ñiqin;", 
+          "value": "0"
+        }
+      ]
+    }
+  }
+}

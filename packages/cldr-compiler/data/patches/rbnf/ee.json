@@ -1,0 +1,321 @@
+{
+  "OrdinalRules": {
+    "digits-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "−→→;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=#,##0= lia;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "=#,##0= tɔ;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=#,##0= lia;", 
+          "value": "2"
+        }
+      ]
+    }
+  }, 
+  "SpelloutRules": {
+    "after-billions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' kpakple =%spellout-cardinal=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' kple =%spellout-cardinal=;", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "' kple =%spellout-cardinal=;", 
+          "value": "100000000"
+        }, 
+        {
+          "rule": "' =%spellout-cardinal=;", 
+          "value": "100000000000"
+        }
+      ]
+    }, 
+    "after-hundred-thousands": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' kpakple =%spellout-cardinal=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' =%spellout-cardinal=;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "after-hundreds": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "kple =%spellout-cardinal=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "21"
+        }, 
+        {
+          "rule": "kple =%spellout-cardinal=;", 
+          "value": "30"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "31"
+        }, 
+        {
+          "rule": "kple =%spellout-cardinal=;", 
+          "value": "40"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "41"
+        }, 
+        {
+          "rule": "kple =%spellout-cardinal=;", 
+          "value": "50"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "51"
+        }, 
+        {
+          "rule": "kple =%spellout-cardinal=;", 
+          "value": "60"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "61"
+        }, 
+        {
+          "rule": "kple =%spellout-cardinal=;", 
+          "value": "70"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "71"
+        }, 
+        {
+          "rule": "kple =%spellout-cardinal=;", 
+          "value": "80"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "81"
+        }, 
+        {
+          "rule": "kple =%spellout-cardinal=;", 
+          "value": "90"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "91"
+        }
+      ]
+    }, 
+    "after-millions": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' kpakple =%spellout-cardinal=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' kple =%spellout-cardinal=;", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "' =%spellout-cardinal=;", 
+          "value": "100000"
+        }
+      ]
+    }, 
+    "after-thousands": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "' kple =%spellout-cardinal=;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "' =%spellout-cardinal=;", 
+          "value": "100"
+        }
+      ]
+    }, 
+    "spellout-base": {
+      "private": 1, 
+      "rules": [
+        {
+          "rule": "ɖekeo;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "ɖekɛ;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "eve;", 
+          "value": "2"
+        }, 
+        {
+          "rule": "etɔ̃;", 
+          "value": "3"
+        }, 
+        {
+          "rule": "ene;", 
+          "value": "4"
+        }, 
+        {
+          "rule": "atɔ̃;", 
+          "value": "5"
+        }, 
+        {
+          "rule": "ade;", 
+          "value": "6"
+        }, 
+        {
+          "rule": "adre;", 
+          "value": "7"
+        }, 
+        {
+          "rule": "enyi;", 
+          "value": "8"
+        }, 
+        {
+          "rule": "asieke;", 
+          "value": "9"
+        }, 
+        {
+          "rule": "ewo;", 
+          "value": "10"
+        }, 
+        {
+          "rule": "wui→→;", 
+          "value": "11"
+        }, 
+        {
+          "rule": "bla←←[ vɔ →→];", 
+          "value": "20"
+        }, 
+        {
+          "rule": "alafa ←%spellout-cardinal←[ →%%after-hundreds→];", 
+          "value": "100"
+        }, 
+        {
+          "rule": "akpe ←%spellout-cardinal←[→%%after-thousands→];", 
+          "value": "1000"
+        }, 
+        {
+          "rule": "akpe ←%spellout-cardinal←[→%%after-hundred-thousands→];", 
+          "value": "100000/1000"
+        }, 
+        {
+          "rule": "miliɔn ←%spellout-cardinal←[→%%after-millions→];", 
+          "value": "1000000"
+        }, 
+        {
+          "rule": "miliɔn akpe ←%spellout-cardinal←[→%%after-millions→];", 
+          "value": "1000000000"
+        }, 
+        {
+          "rule": "biliɔn ←%spellout-cardinal←[→%%after-billions→];", 
+          "value": "1000000000000"
+        }, 
+        {
+          "rule": "=#,##0=;", 
+          "value": "1000000000000000000"
+        }
+      ]
+    }, 
+    "spellout-cardinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "→→ xlẽyimegbee;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "kakɛ →→;", 
+          "value": "0.x"
+        }, 
+        {
+          "rule": "←← kple kakɛ →→;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "ɖekeo;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "ɖeka;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=%%spellout-base=;", 
+          "value": "2"
+        }
+      ]
+    }, 
+    "spellout-numbering": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-numbering-year": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "=0.0=;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "=%spellout-numbering=;", 
+          "value": "0"
+        }
+      ]
+    }, 
+    "spellout-ordinal": {
+      "private": 0, 
+      "rules": [
+        {
+          "rule": "→→ xlẽyimegbee;", 
+          "value": "-x"
+        }, 
+        {
+          "rule": "=#,##0.0=lia;", 
+          "value": "x.x"
+        }, 
+        {
+          "rule": "ɖekeolia;", 
+          "value": "0"
+        }, 
+        {
+          "rule": "gbãtɔ;", 
+          "value": "1"
+        }, 
+        {
+          "rule": "=%spellout-cardinal=lia;", 
+          "value": "2"
+        }
+      ]
+    }
+  }
+}
