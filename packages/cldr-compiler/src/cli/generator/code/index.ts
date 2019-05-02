@@ -14,6 +14,7 @@ import { getIdentifiers } from './identifiers';
 import { getLocale } from './locale';
 import { getPartition } from './partition';
 import { getPlurals } from './plurals';
+import { getRBNF } from './rbnf';
 import { getSubtags } from './subtags';
 import { getSystems } from './systems';
 import { getTimeData } from './timedata';
@@ -33,6 +34,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   locale: getLocale,
   partition: getPartition,
   plurals: getPlurals,
+  rbnf: getRBNF,
   subtags: getSubtags,
   systems: getSystems,
   timedata: getTimeData,

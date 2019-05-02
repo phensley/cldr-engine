@@ -1,5 +1,6 @@
 import { getSupplemental } from '../../../cldr';
 import { Code, HEADER, NOLINT_MAXLINE } from './util';
+import { LanguageResolver } from '@phensley/cldr-core';
 
 const increasing = (s: string[]): boolean => {
   for (let i = 1; i < s.length; i++) {
@@ -32,19 +33,41 @@ const escape = (digits: string[]): string => {
 export const getSystems = (_data: any): Code[] => {
   const supp = getSupplemental();
 
-  let code = HEADER + NOLINT_MAXLINE;
+  // Public numbering system names like 'beng' and 'hansfin', pointers to the
+  // digits or public algorithmic rule name they use.
+  let numeric = '';
+  let algorithmic = '';
 
-  code += `export const decimalNumberingDigits: { [x: string]: string[] } = {\n`;
   Object.keys(supp.NumberingSystems).forEach(k => {
     const o = supp.NumberingSystems[k];
     if (o._type === 'numeric') {
       const v: string[] = Array.from(o._digits);
-      code += `  ${k}: [${escape(increasing(v) ? v.slice(0, 1) : v)}],\n`;
+      numeric += `  ${k}: [${escape(increasing(v) ? v.slice(0, 1) : v)}],\n`;
+    } else if (o._type === 'algorithmic') {
+      const v = o._rules;
+      let parts = ['root', v];
+      if (v.indexOf('/SpelloutRules') !== -1) {
+        const tmp = v.split('/');
+        const tag = LanguageResolver.resolve(tmp[0]);
+        const id = `${tag.language()}-${tag.script()}`;
+        parts = [id, tmp[2]];
+      }
+      algorithmic += `  ${k}: ${JSON.stringify(parts)},\n`;
     }
   });
+
+  const result: Code[] = [];
+
+  let code = HEADER + NOLINT_MAXLINE;
+  code += `export const decimalNumberingDigits: { [x: string]: string[] } = {\n`;
+  code += numeric;
+  code += '};\n\n';
+
+  code += `export const algorithmicNumbering: { [x: string]: [string, string] } = {\n`;
+  code += algorithmic;
   code += '};\n';
 
-  return [
-    Code.core(['systems', 'numbering', 'autogen.decimal.ts'], code)
-  ];
+  result.push(Code.core(['systems', 'numbering', 'autogen.names.ts'], code));
+
+  return result;
 };

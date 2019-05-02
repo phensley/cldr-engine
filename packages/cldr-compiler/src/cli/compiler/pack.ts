@@ -14,6 +14,7 @@ import { buildLocaleMap, checkLanguages, getProjectInfo, ProjectInfo } from './u
 import DEFAULT_CONFIG from './config.json';
 import { Downloader } from '../downloader/downloader';
 import { validateConfig } from './validate';
+import { RBNFCollector } from '../../rbnf';
 
 /**
  * Encodes fields into a resource pack and returns the offset
@@ -106,6 +107,9 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
   const origin = builder.origin();
   const checksum = checksumIndices(pkg.version, origin.indices);
 
+  const rbnf = new RBNFCollector();
+  rbnf.load();
+
   let path: string;
   const hashes: { [x: string]: string } = {};
   const pkghash = createHash('sha256');
@@ -120,7 +124,7 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
     }
 
     // Construct a pack that will contain all strings across all regions for this language.
-    const pack = new ResourcePack(lang, pkg.version, pkg.cldrVersion);
+    const pack = new ResourcePack(lang, pkg.version, pkg.cldrVersion, rbnf);
 
     const encoder = new PackEncoder(pack);
     const machine = new EncoderMachine(encoder, argv.verbose);

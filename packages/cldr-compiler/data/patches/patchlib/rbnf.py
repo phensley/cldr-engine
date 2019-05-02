@@ -31,10 +31,8 @@ def get_rules(root):
         rule = n.text
         if radix:
             value = '%s/%s' % (value, radix)
-        if value == 'x,x':
-            value = 'x.x'
-        value = value.replace(',', '')
-        print value
+        if value != 'x,x':
+            value = value.replace(',', '')
         o = {
             'value': value,
             'rule': rule

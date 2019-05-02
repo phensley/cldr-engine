@@ -165,8 +165,7 @@ export const escapeString = (raw: string, delim: string = '\'') => {
       esc += invisibles[ch];
       break;
 
-    default:
-    {
+    default: {
       // Check range and escape hex.
       const code = raw.charCodeAt(i);
       if (isControl0(code) || isControl1(code) || isLatin1Invisible(code)) {

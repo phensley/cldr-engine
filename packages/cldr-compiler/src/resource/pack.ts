@@ -1,5 +1,7 @@
 import { LanguageResolver, LanguageTag, Locale } from '@phensley/cldr-core';
 import { getOther } from '../cldr';
+import { RBNFPacker } from './rbnf';
+import { RBNFCollector } from '../rbnf';
 
 // Index default content for each language and language+script combination.
 const defaultContent = new Set();
@@ -50,11 +52,18 @@ export class ResourcePack {
   private current!: Layer;
   private defaultLayer?: LanguageTag;
 
+  private spellout: string;
+
   constructor(
     private language: string,
     private version: string,
-    private cldrVersion: string
-  ) {}
+    private cldrVersion: string,
+    rbnf: RBNFCollector
+  ) {
+
+    const packer: RBNFPacker = new RBNFPacker(rbnf);
+    this.spellout = packer.pack(language);
+  }
 
   /**
    * Push a new language layer.
@@ -120,7 +129,8 @@ export class ResourcePack {
       `"checksum":"${checksum}",` +
       `"language":"${this.language}",` +
       `"defaultTag":"${this.defaultLayer}",` +
-      `"scripts":{${scripts.join(',')}}}`;
+      `"scripts":{${scripts.join(',')}}},` +
+      `"spellout":${this.spellout}}`;
   }
 
   /**
