@@ -1,4 +1,4 @@
-import { Decimal, MathContext } from '../src';
+import { Decimal, DecimalConstants, MathContext } from '../src';
 
 const parse = (s: string) => new Decimal(s);
 const div = (u: string, v: string, c?: MathContext) => parse(u).divide(parse(v), c);
@@ -72,8 +72,13 @@ test('divide add back', () => {
 });
 
 test('divide by zero', () => {
-  expect(() => div('123', '0')).toThrowError();
-  expect(() => div('123', '0.0000e4')).toThrowError();
+  expect(div('123', '0')).toEqual(DecimalConstants.POSITIVE_INFINITY);
+  expect(div('123', '0.0000e4')).toEqual(DecimalConstants.POSITIVE_INFINITY);
+
+  expect(div('-123', '0')).toEqual(DecimalConstants.NEGATIVE_INFINITY);
+  expect(div('-123', '0.0000e4')).toEqual(DecimalConstants.NEGATIVE_INFINITY);
+
+  expect(div('0', '0')).toEqual(DecimalConstants.NAN);
 });
 
 test('divide zero', () => {
@@ -239,7 +244,10 @@ test('divide by single digit', () => {
 });
 
 test('divmod', () => {
-  expect(() => divmod('10', '0')).toThrowError();
+  expect(divmod('10', '0')).toEqual([
+    DecimalConstants.POSITIVE_INFINITY, DecimalConstants.NAN
+  ]);
+
   expect(divmod('0', '10')).toEqual([parse('0'), parse('0')]);
   expect(divmod('2', '3')).toEqual([parse('0'), parse('2')]);
   expect(divmod('10', '6')).toEqual([parse('1'), parse('4')]);

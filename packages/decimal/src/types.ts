@@ -1,3 +1,9 @@
+export const enum DecimalFlag {
+  NONE = 0,
+  NAN = 1,
+  INFINITY = 2,
+}
+
 export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor'
   | 'half-up' | 'half-down' | 'half-even';
 

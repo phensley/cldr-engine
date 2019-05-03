@@ -5,6 +5,7 @@ import { DecimalFormatter, Part, PartsDecimalFormatter, StringDecimalFormatter }
 import {
   Chars,
   Constants,
+  DecimalFlag,
   MathContext,
   ParseFlags,
   POWERS10,
@@ -18,7 +19,21 @@ const GROUP_NOOP: GroupFunc = (): void => {
   // nothing
 };
 
+const enum Op {
+  ADDITION = 0,
+  SUBTRACTION = 1,
+  MULTIPLICATION = 2,
+  DIVISION = 3,
+  MOD = 4
+}
+
 const DEFAULT_PRECISION = 28;
+const EMPTY: number[] = [];
+
+const NAN_VALUES = new Set(['nan', 'NaN']);
+const POS_INFINITY = new Set(['infinity', '+infinity', 'Infinity', '+Infinity']);
+const NEG_INFINITY = new Set(['-infinity', '-Infinity']);
+
 export const DECIMAL_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 export type DecimalArg = number | string | Decimal;
@@ -62,9 +77,10 @@ const size = (n: number): number => {
  */
 export class Decimal {
 
-  protected data!: number[];
-  protected sign!: number;
-  protected exp!: number;
+  protected data: number[] = EMPTY;
+  protected sign: number = 0;
+  protected exp: number = 0;
+  protected flag: DecimalFlag = DecimalFlag.NONE;
 
   constructor(num: DecimalArg) {
     if (typeof num === 'string' || typeof num === 'number') {
@@ -73,7 +89,16 @@ export class Decimal {
       this.data = num.data.slice();
       this.sign = num.sign;
       this.exp = num.exp;
+      this.flag = num.flag;
     }
+  }
+
+  isNaN(): boolean {
+    return this.flag === DecimalFlag.NAN;
+  }
+
+  isFinite(): boolean {
+    return this.flag === 0;
   }
 
   /**
@@ -84,10 +109,33 @@ export class Decimal {
    *   1   if  u &gt; v
    *
    * If the abs flag is true compare the absolute values.
+   *
+   * Any NAN argument will always return -1.
    */
   compare(v: DecimalArg, abs: boolean = false): number {
     const u: Decimal = this;
     v = coerceDecimal(v);
+
+    if (u.flag || v.flag) {
+      // NAN is never equal to itself or any other value
+      if (u.flag === DecimalFlag.NAN || v.flag === DecimalFlag.NAN) {
+        return -1;
+      }
+
+      // INFINITY
+
+      // Infinities can be equal if their sign matches
+      if (u.flag === v.flag) {
+        return u.sign === v.sign ? 0 : u.sign === -1 ? -1 : 1;
+      }
+
+      // Negative infinity before all other values
+      // Positive infinity after all other values
+      return u.flag === DecimalFlag.INFINITY ?
+        u.sign === -1 ? -1 : 1 :
+        v.sign === -1 ? -1 : 1;
+    }
+
     const us = u.sign;
     const vs = v.sign;
     if (!abs && us !== vs) {
@@ -129,6 +177,8 @@ export class Decimal {
 
   /**
    * Compute operands for this number, used for determining the plural category.
+   *
+   * A NAN or INFINITY will return the same operands as ZERO.
    */
   operands(): NumberOperands {
     return decimalOperands(this.sign, this.exp, this.data);
@@ -138,14 +188,14 @@ export class Decimal {
    * Return the absolute value of the number.
    */
   abs(): Decimal {
-    return this.sign === -1 ? Decimal.fromRaw(-this.sign, this.exp, this.data) : this;
+    return this.sign === -1 ? Decimal.fromRaw(-this.sign, this.exp, this.data, this.flag) : this;
   }
 
   /**
    * Invert this number's sign.
    */
   negate(): Decimal {
-    return this.sign === 0 ? this : Decimal.fromRaw(-this.sign, this.exp, this.data);
+    return this.sign === 0 ? this : Decimal.fromRaw(-this.sign, this.exp, this.data, this.flag);
   }
 
   /**
@@ -167,6 +217,9 @@ export class Decimal {
    * For example, '12.000' is the same number as '12'.
    */
   isInteger(): boolean {
+    if (this.flag) {
+      return false;
+    }
     return this.sign === 0 ? true : this.exp + this.trailingZeros() >= 0;
   }
 
@@ -174,7 +227,7 @@ export class Decimal {
    * Return the integer part.
    */
   toInteger(): Decimal {
-    return this.setScale(0, 'down');
+    return this.flag ? this : this.setScale(0, 'down');
   }
 
   /**
@@ -182,7 +235,8 @@ export class Decimal {
    */
   add(v: DecimalArg): Decimal {
     v = coerceDecimal(v);
-    return this.addsub(this, v, v.sign);
+    const r = this.handleFlags(Op.ADDITION, v);
+    return r === undefined ? this.addsub(this, v, v.sign) : r;
   }
 
   /**
@@ -190,7 +244,8 @@ export class Decimal {
    */
   subtract(v: DecimalArg): Decimal {
     v = coerceDecimal(v);
-    return this.addsub(this, v, v.sign === 1 ? -1 : 1);
+    const r = this.handleFlags(Op.SUBTRACTION, v);
+    return r === undefined ? this.addsub(this, v, v.sign === 1 ? -1 : 1) : r;
   }
 
   /**
@@ -198,9 +253,14 @@ export class Decimal {
    */
   multiply(v: DecimalArg, context?: MathContext): Decimal {
     const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
+    v = coerceDecimal(v);
+    const r = this.handleFlags(Op.MULTIPLICATION, v);
+    if (r !== undefined) {
+      return r;
+    }
 
     const u: Decimal = this;
-    v = coerceDecimal(v);
+
     const w = new Decimal(ZERO);
     w.exp = (u.exp + v.exp);
 
@@ -231,12 +291,13 @@ export class Decimal {
    * Divide by v with optional math context.
    */
   divide(v: DecimalArg, context?: MathContext): Decimal {
-    const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
-
     v = coerceDecimal(v);
-    if (this.checkDivision(v)) {
-      return usePrecision ? ZERO : ZERO.setScale(scaleprec);
+    const r = this.handleFlags(Op.DIVISION, v);
+    if (r !== undefined) {
+      return r;
     }
+
+    const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
 
     let u: Decimal = this;
     if (!usePrecision) {
@@ -304,6 +365,12 @@ export class Decimal {
    */
   divmod(v: DecimalArg): [Decimal, Decimal] {
     v = coerceDecimal(v);
+    const rq = this.handleFlags(Op.DIVISION, v);
+    if (rq !== undefined) {
+      const rm = this.handleFlags(Op.MOD, v)!;
+      return [rq, rm];
+    }
+
     if (this.checkDivision(v)) {
       return [ZERO, ZERO];
     }
@@ -356,6 +423,9 @@ export class Decimal {
    * Number of trailing zeros.
    */
   trailingZeros(): number {
+    if (this.flag) {
+      return 0;
+    }
     const d = this.data;
     const len = d.length;
     let r = 0;
@@ -377,6 +447,9 @@ export class Decimal {
    * Strip all trailing zeros.
    */
   stripTrailingZeros(): Decimal {
+    if (this.flag) {
+      return this;
+    }
     const r = new Decimal(this);
     r._stripTrailingZeros();
     return r;
@@ -387,10 +460,13 @@ export class Decimal {
    * Decimal coefficient and adjusted exponent.
    */
   scientific(minIntDigits: number = 1): [Decimal, number] {
+    if (this.flag) {
+      return [this, 0];
+    }
     minIntDigits = minIntDigits <= 1 ? 1 : minIntDigits;
     const exp = -(this.precision() - 1) + (minIntDigits - 1);
     // ensure exponent is not negative zero
-    const coeff = Decimal.fromRaw(this.sign, exp === 0 ? 0 : exp, this.data);
+    const coeff = Decimal.fromRaw(this.sign, exp === 0 ? 0 : exp, this.data, this.flag);
     return [
       coeff,
       this.exp - coeff.exp
@@ -401,6 +477,9 @@ export class Decimal {
    * Number of digits in the unscaled value.
    */
   precision(): number {
+    if (this.flag) {
+      return 0;
+    }
     if (this.sign === 0) {
       return 1;
     }
@@ -412,20 +491,23 @@ export class Decimal {
    * Scale is the number of digits to the right of the decimal point.
    */
   scale(): number {
-    return this.exp === 0 ? 0 : -this.exp;
+    return this.flag ? 0 : this.exp === 0 ? 0 : -this.exp;
   }
 
   /**
    * Number of integer digits, 1 or higher.
    */
   integerDigits(): number {
-    return Math.max(this.precision() + this.exp, 1);
+    return this.flag ? 0 : Math.max(this.precision() + this.exp, 1);
   }
 
   /**
    * Returns a new number with the given scale, shifting the coefficient as needed.
    */
   setScale(scale: number, roundingMode: RoundingModeType = 'half-even'): Decimal {
+    if (this.flag) {
+      return this;
+    }
     const r: Decimal = new Decimal(this);
     r._setScale(floor(scale), roundingMode);
     return r;
@@ -437,7 +519,7 @@ export class Decimal {
    * number must be shifted.
    */
   alignexp(): number {
-    return (this.exp + this.precision()) - 1;
+    return this.flag ? 0 : (this.exp + this.precision()) - 1;
   }
 
   /**
@@ -445,6 +527,9 @@ export class Decimal {
    * precision, only affects the exponent.
    */
   movePoint(n: number): Decimal {
+    if (this.flag) {
+      return this;
+    }
     const w = new Decimal(this);
     w.exp += floor(n);
     return w;
@@ -454,6 +539,9 @@ export class Decimal {
    * Shifts all digits to the left, increasing the precision.
    */
   shiftleft(shift: number): Decimal {
+    if (this.flag) {
+      return this;
+    }
     const w = new Decimal(this);
     w._shiftleft(floor(shift));
     return w;
@@ -464,6 +552,9 @@ export class Decimal {
    * using the given rounding mode.
    */
   shiftright(shift: number, mode: RoundingModeType = 'half-even'): Decimal {
+    if (this.flag) {
+      return this;
+    }
     const w = new Decimal(this);
     w._shiftright(floor(shift), mode);
     return w;
@@ -473,6 +564,9 @@ export class Decimal {
    * Increment the least-significant integer digit.
    */
   increment(): Decimal {
+    if (this.flag) {
+      return this;
+    }
     const r = new Decimal(this);
     if (r.sign === -1 || r.exp !== 0) {
       return r.add(DecimalConstants.ONE);
@@ -485,20 +579,23 @@ export class Decimal {
    * Decrement the least-significant integer digit.
    */
   decrement(): Decimal {
-    return this.subtract(DecimalConstants.ONE);
+    return this.flag ? this : this.subtract(DecimalConstants.ONE);
   }
 
   /**
    * Format the number to a string, using fixed point.
    */
   toString(): string {
-    return this.formatString(this, 1);
+    return this.flag ? this.formatFlags() : this.formatString(this, 1);
   }
 
   /**
    * Format this number to scientific notation as a string.
    */
   toScientificString(minIntegers: number = 1): string {
+    if (this.flag) {
+      return this.formatFlags();
+    }
     const [coeff, exp] = this.scientific(minIntegers);
     const r = this.formatString(coeff, minIntegers);
     return coeff.sign === 0 ? r :
@@ -509,13 +606,16 @@ export class Decimal {
    * Format this number to an array of parts.
    */
   toParts(): Part[] {
-    return this.formatParts(this, 1);
+    return this.flag ? this.formatFlagsParts() : this.formatParts(this, 1);
   }
 
   /**
    * Format this number to scientific notation as an array of parts.
    */
   toScientificParts(minIntegers: number = 1): Part[] {
+    if (this.flag) {
+      return this.formatFlagsParts();
+    }
     const [coeff, exp] = this.scientific(minIntegers);
     const r = this.formatParts(coeff, minIntegers);
     if (coeff.sign === 0 || exp === 0) {
@@ -657,6 +757,27 @@ export class Decimal {
     }
   }
 
+  protected formatFlags(): string {
+    switch (this.flag) {
+      case DecimalFlag.NAN:
+        return 'NaN';
+      case DecimalFlag.INFINITY:
+      default:
+        return this.sign === 1 ? 'Infinity' : '-Infinity';
+    }
+  }
+
+  protected formatFlagsParts(): Part[] {
+    switch (this.flag) {
+      case DecimalFlag.NAN:
+        return [{ type: 'nan', value: 'NaN' }];
+      case DecimalFlag.INFINITY:
+      default:
+        const s = this.sign === 1 ? 'Infinity' : '-Infinity';
+        return [{ type: 'infinity', value: s }];
+    }
+  }
+
   protected formatString(d: Decimal, minInt: number): string {
     const f = new StringDecimalFormatter();
     d.format(f, '.', '', minInt, 1, 3, 3, false);
@@ -671,8 +792,99 @@ export class Decimal {
     return d.sign === -1 ? [{ type: 'minus', value: '-' }].concat(r) : r;
   }
 
-  protected static fromRaw(sign: number, exp: number, data: number[]): Decimal {
-    return new this({ sign, exp, data } as any as Decimal);
+  /**
+   * Handle setting of flags for operations per the IEEE-754-2008 specification.
+   * These rules are also referenced in the EcmaScript specification:
+   *
+   * 12.7.3.1 - Applying the mul operator:
+   * https://tc39.github.io/ecma262/#sec-applying-the-mul-operator
+   *
+   * 12.7.3.2 - Applying the div operator:
+   * https://tc39.github.io/ecma262/#sec-applying-the-div-operator
+   *
+   * 12.7.3.3 - Applying the mod operator:
+   * https://tc39.github.io/ecma262/#sec-applying-the-mod-operator
+   *
+   * 12.8.5 - Applying the additive operators to numbers:
+   * https://tc39.github.io/ecma262/#sec-applying-the-additive-operators-to-numbers
+   *
+   */
+  protected handleFlags(op: Op, v: Decimal): Decimal | undefined {
+    const u = this as Decimal;
+    const uflag = u.flag;
+    const vflag = v.flag;
+
+    // Any operation involving a NAN returns a NAN
+    if (uflag === DecimalFlag.NAN || vflag === DecimalFlag.NAN) {
+      return NAN;
+    }
+
+    const uinf = u.flag === DecimalFlag.INFINITY;
+    const vinf = v.flag === DecimalFlag.INFINITY;
+    const uzero = !uflag && !u.sign;
+    const vzero = !vflag && !v.sign;
+
+    switch (op) {
+      case Op.ADDITION:
+        if (uinf && vinf) {
+          return u.sign === v.sign ? (u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY) : NAN;
+        } else if (uinf || vinf) {
+          return uinf ? u : v;
+        }
+        break;
+
+      case Op.SUBTRACTION:
+        if (uinf && vinf) {
+          return u.sign === v.sign ? NAN : u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY;
+        } else if (uinf || vinf) {
+          return uinf ? (u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY)
+            : v.sign === 1 ? NEGATIVE_INFINITY : POSITIVE_INFINITY;
+        }
+        break;
+
+      case Op.MULTIPLICATION:
+        if (uinf) {
+          return vzero ? NAN : u.sign === v.sign ? POSITIVE_INFINITY : NEGATIVE_INFINITY;
+        }
+        if (vinf) {
+          return uzero ? NAN : u.sign === v.sign ? POSITIVE_INFINITY : NEGATIVE_INFINITY;
+        }
+        break;
+
+      case Op.DIVISION:
+        if (uinf && vinf) {
+          return NAN;
+        }
+        if (uinf) {
+          return vzero ? (u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY) :
+            u.sign === v.sign ? POSITIVE_INFINITY : NEGATIVE_INFINITY;
+        }
+        if (vinf) {
+          return ZERO;
+        }
+        if (vzero) {
+          return uzero ? NAN : u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY;
+        }
+        break;
+
+      case Op.MOD:
+        if (uinf || vzero) {
+          return NAN;
+        }
+        if (!uinf && vinf) {
+          return u;
+        }
+        if (uzero && (!vzero && !vinf)) {
+          return u;
+        }
+        break;
+    }
+
+    return undefined;
+  }
+
+  protected static fromRaw(sign: number, exp: number, data: number[], flag: DecimalFlag): Decimal {
+    return new this({ sign, exp, data, flag } as any as Decimal);
   }
 
   /**
@@ -822,9 +1034,11 @@ export class Decimal {
 
   /**
    * Check for u/0 or 0/v cases.
+   *
+   * TODO: REMOVE
    */
   protected checkDivision(v: Decimal): boolean {
-    if (v.sign === 0) {
+    if (!v.flag && v.sign === 0) {
       throw new Error('Divide by zero');
     }
     return this.sign === 0;
@@ -908,9 +1122,15 @@ export class Decimal {
    * Addition and subtraction.
    */
   protected addsub(u: Decimal, v: Decimal, vsign: number): Decimal {
+    if (u.flag) {
+      return u;
+    }
+    if (v.flag) {
+      return v;
+    }
     const zero = u.sign === 0;
     if (zero || v.sign === 0) {
-      return zero ? Decimal.fromRaw(vsign, v.exp, v.data) : new Decimal(u);
+      return zero ? Decimal.fromRaw(vsign, v.exp, v.data, v.flag) : new Decimal(u);
     }
 
     let m = u; // m = bigger
@@ -960,6 +1180,18 @@ export class Decimal {
    * Parse a number or string setting the fields on the current instance.
    */
   protected parse(arg: string | number): void {
+    if (typeof arg === 'number') {
+      if (isNaN(arg)) {
+        this.flag = DecimalFlag.NAN;
+        return;
+      }
+      if (!isFinite(arg)) {
+        this.flag = DecimalFlag.INFINITY;
+        this.sign = arg === Infinity ? 1 : -1;
+        return;
+      }
+    }
+
     const str: string = typeof arg === 'string' ? arg : arg.toString();
     const msg = this._parse(str);
     if (msg !== undefined) {
@@ -970,9 +1202,28 @@ export class Decimal {
   /**
    * Parse a string into a Decimal.
    *
-   * Expects strings of the form:  "[-+][digits][.][digits][eE][-+][digits]"
+   * Expects strings of the form:
+   *    "[-+][digits][.][digits][eE][-+][digits]"
+   * or:
+   *    "[nN]a[nN]"        for a NaN
+   *    "[-+]?[iI]nfinity" for positive or negative infinity
    */
   protected _parse(str: string): string | undefined {
+    if (NAN_VALUES.has(str)) {
+      this.flag = DecimalFlag.NAN;
+      return;
+    }
+    if (POS_INFINITY.has(str)) {
+      this.flag = DecimalFlag.INFINITY;
+      this.sign = 1;
+      return;
+    }
+    if (NEG_INFINITY.has(str)) {
+      this.flag = DecimalFlag.INFINITY;
+      this.sign = -1;
+      return;
+    }
+
     const len = str.length;
 
     // Local variables to accumulate digits, sign and exponent
@@ -1102,10 +1353,17 @@ const E = new Decimal(
   '57496696762772407663035354759457138217852516642742746'
 );
 
+const NAN = new Decimal(NaN);
+const NEGATIVE_INFINITY = new Decimal(-Infinity);
+const POSITIVE_INFINITY = new Decimal(Infinity);
+
 export const DecimalConstants = {
   ZERO,
   ONE,
   TWO,
   PI,
-  E
+  E,
+  NAN,
+  POSITIVE_INFINITY,
+  NEGATIVE_INFINITY
 };
