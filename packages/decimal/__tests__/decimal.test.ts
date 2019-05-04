@@ -62,6 +62,12 @@ test('is negative', () => {
   expect(parse('-1').isNegative()).toEqual(true);
 });
 
+test('signum', () => {
+  expect(parse('0').signum()).toEqual(0);
+  expect(parse('10').signum()).toEqual(1);
+  expect(parse('-10').signum()).toEqual(-1);
+});
+
 test('is integer', () => {
   expect(parse('0').isInteger()).toEqual(true);
   expect(parse('0.1').isInteger()).toEqual(false);

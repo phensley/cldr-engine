@@ -371,10 +371,6 @@ export class Decimal {
       return [rq, rm];
     }
 
-    if (this.checkDivision(v)) {
-      return [ZERO, ZERO];
-    }
-
     let u: Decimal = this;
 
     const exp = u.exp > v.exp ? v.exp : u.exp;
@@ -416,7 +412,9 @@ export class Decimal {
    * Divide by v and return the remainder.
    */
   mod(v: DecimalArg): Decimal {
-    return this.divmod(v)[1];
+    v = coerceDecimal(v);
+    const r = this.handleFlags(Op.MOD, v);
+    return r === undefined ? this.divmod(v)[1] : r;
   }
 
   /**
@@ -1030,18 +1028,6 @@ export class Decimal {
     if (n > 0) {
       this._shiftright(n, 'down');
     }
-  }
-
-  /**
-   * Check for u/0 or 0/v cases.
-   *
-   * TODO: REMOVE
-   */
-  protected checkDivision(v: Decimal): boolean {
-    if (!v.flag && v.sign === 0) {
-      throw new Error('Divide by zero');
-    }
-    return this.sign === 0;
   }
 
   /**

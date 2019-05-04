@@ -394,6 +394,12 @@ test('mod', () => {
 
   // -----
 
+  // 0 % 10 = 0
+  expect(ZERO.mod(POS)).toEqual(ZERO);
+
+  // 0 % -10 = 0
+  expect(ZERO.mod(NEG)).toEqual(ZERO);
+
   // 10 % 0 = NaN
   expect(POS.mod(ZERO)).toEqual(NAN);
 
@@ -401,7 +407,7 @@ test('mod', () => {
   expect(NEG.mod(ZERO)).toEqual(NAN);
 });
 
-test('misc operations', () => {
+test('increment / decrement', () => {
     expect(NAN.increment()).toEqual(NAN);
     expect(INF_POS.increment()).toEqual(INF_POS);
     expect(INF_NEG.increment()).toEqual(INF_NEG);
@@ -419,4 +425,100 @@ test('formatting', () => {
   expect(NAN.toParts()).toEqual([{ type: 'nan', value: 'NaN' }]);
   expect(INF_POS.toParts()).toEqual([{ type: 'infinity', value: 'Infinity' }]);
   expect(INF_NEG.toParts()).toEqual([{ type: 'infinity', value: '-Infinity' }]);
+});
+
+test('signum', () => {
+  expect(NAN.signum()).toEqual(0);
+  expect(INF_POS.signum()).toEqual(1);
+  expect(INF_NEG.signum()).toEqual(-1);
+});
+
+test('to integer', () => {
+  expect(NAN.toInteger()).toEqual(NAN);
+  expect(INF_POS.toInteger()).toEqual(INF_POS);
+  expect(INF_NEG.toInteger()).toEqual(INF_NEG);
+});
+
+test('trailing zeros', () => {
+  expect(NAN.trailingZeros()).toEqual(0);
+  expect(INF_POS.trailingZeros()).toEqual(0);
+  expect(INF_NEG.trailingZeros()).toEqual(0);
+});
+
+test('strip trailing zeros', () => {
+  expect(NAN.stripTrailingZeros()).toEqual(NAN);
+  expect(INF_POS.stripTrailingZeros()).toEqual(INF_POS);
+  expect(INF_NEG.stripTrailingZeros()).toEqual(INF_NEG);
+});
+
+test('scientific representation', () => {
+  expect(NAN.scientific()).toEqual([NAN, 0]);
+  expect(INF_POS.scientific()).toEqual([INF_POS, 0]);
+  expect(INF_NEG.scientific()).toEqual([INF_NEG, 0]);
+});
+
+test('precision', () => {
+  expect(NAN.precision()).toEqual(0);
+  expect(INF_POS.precision()).toEqual(0);
+  expect(INF_NEG.precision()).toEqual(0);
+});
+
+test('scale', () => {
+  expect(NAN.scale()).toEqual(0);
+  expect(INF_POS.scale()).toEqual(0);
+  expect(INF_NEG.scale()).toEqual(0);
+});
+
+test('integer digits', () => {
+  expect(NAN.integerDigits()).toEqual(0);
+  expect(INF_POS.integerDigits()).toEqual(0);
+  expect(INF_NEG.integerDigits()).toEqual(0);
+});
+
+test('set scale', () => {
+  expect(NAN.setScale(3)).toEqual(NAN);
+  expect(INF_POS.setScale(3)).toEqual(INF_POS);
+  expect(INF_NEG.setScale(3)).toEqual(INF_NEG);
+});
+
+test('align exp', () => {
+  expect(NAN.alignexp()).toEqual(0);
+  expect(INF_POS.alignexp()).toEqual(0);
+  expect(INF_NEG.alignexp()).toEqual(0);
+});
+
+test('move point', () => {
+  expect(NAN.movePoint(3)).toEqual(NAN);
+  expect(INF_POS.movePoint(3)).toEqual(INF_POS);
+  expect(INF_NEG.movePoint(3)).toEqual(INF_NEG);
+});
+
+test('shift left', () => {
+  expect(NAN.shiftleft(3)).toEqual(NAN);
+  expect(INF_POS.shiftleft(3)).toEqual(INF_POS);
+  expect(INF_NEG.shiftleft(3)).toEqual(INF_NEG);
+});
+
+test('shift right', () => {
+  expect(NAN.shiftright(3)).toEqual(NAN);
+  expect(INF_POS.shiftright(3)).toEqual(INF_POS);
+  expect(INF_NEG.shiftright(3)).toEqual(INF_NEG);
+});
+
+test('scientific string', () => {
+  expect(NAN.toScientificString()).toEqual('NaN');
+  expect(INF_POS.toScientificString()).toEqual('Infinity');
+  expect(INF_NEG.toScientificString()).toEqual('-Infinity');
+});
+
+test('parts', () => {
+  expect(NAN.toParts()).toEqual([{ type: 'nan', value: 'NaN' }]);
+  expect(INF_POS.toParts()).toEqual([{ type: 'infinity', value: 'Infinity' }]);
+  expect(INF_NEG.toParts()).toEqual([{ type: 'infinity', value: '-Infinity' }]);
+});
+
+test('scientific parts', () => {
+  expect(NAN.toScientificParts()).toEqual([{ type: 'nan', value: 'NaN' }]);
+  expect(INF_POS.toScientificParts()).toEqual([{ type: 'infinity', value: 'Infinity' }]);
+  expect(INF_NEG.toScientificParts()).toEqual([{ type: 'infinity', value: '-Infinity' }]);
 });
