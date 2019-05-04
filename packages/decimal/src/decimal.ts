@@ -140,6 +140,15 @@ export class Decimal {
         v.sign === -1 ? -1 : 1;
     }
 
+    // TODO: improve representation of zero and sign, since with
+    // current representation there are many edge cases. Below
+    // code fixes issues of comparisons with zero.
+    if (u.sign === 0) {
+      return v.sign === 0 ? 0 : v.sign === 1 ? -1 : 1;
+    } else if (v.sign === 0) {
+      return u.sign;
+    }
+
     const us = u.sign;
     const vs = v.sign;
     if (!abs && us !== vs) {

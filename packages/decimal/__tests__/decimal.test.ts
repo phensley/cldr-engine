@@ -158,6 +158,11 @@ test('compare', () => {
   expect(cmp('2', '1')).toEqual(1);
   expect(cmp('1', '2')).toEqual(-1);
 
+  expect(cmp('0', '23')).toEqual(-1);
+  expect(cmp('0', '-23')).toEqual(1);
+  expect(cmp('23', '0')).toEqual(1);
+  expect(cmp('-23', '0')).toEqual(-1);
+
   expect(cmp('12.34', '1.234')).toEqual(1);
   expect(cmp('1.234', '12.34')).toEqual(-1);
   expect(cmp('1.234', '12.34e-1')).toEqual(0);
