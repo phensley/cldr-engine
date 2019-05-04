@@ -8,6 +8,7 @@ import {
   DecimalFormatOptions,
   DecimalFormatStyleType,
   UnitFormatOptions,
+  UnitFormatStyleType,
   UnitLength,
   UnitType
 } from '../src';
@@ -43,7 +44,7 @@ const UNITS: UnitType[] = [
   'kilogram', 'kilohertz', 'kilobyte'
 ];
 
-const UNIT_STYLES: DecimalFormatStyleType[] = [
+const UNIT_STYLES: UnitFormatStyleType[] = [
   'decimal', 'long', 'short'
 ];
 

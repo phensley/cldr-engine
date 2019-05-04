@@ -43,6 +43,7 @@ export {
   RoundingModeType,
   ScriptIdType,
   UnitFormatOptions,
+  UnitFormatStyleType,
   UnitLength,
   UnitType,
   ZonedDateTime
