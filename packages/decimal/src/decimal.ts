@@ -101,6 +101,10 @@ export class Decimal {
     return this.flag === 0;
   }
 
+  isInfinity(): boolean {
+    return this.flag === DecimalFlag.INFINITY;
+  }
+
   /**
    * Compare decimal u to v, returning the following:
    *

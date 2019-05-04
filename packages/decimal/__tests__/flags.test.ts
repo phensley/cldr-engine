@@ -14,18 +14,22 @@ test('construction', () => {
   d = new Decimal('NaN');
   expect(d.isNaN()).toBe(true);
   expect(d.isFinite()).toBe(false);
+  expect(d.isInfinity()).toBe(false);
 
   d = new Decimal('nan');
   expect(d.isNaN()).toBe(true);
   expect(d.isFinite()).toBe(false);
+  expect(d.isInfinity()).toBe(false);
 
   d = new Decimal('infinity');
   expect(d.isNaN()).toBe(false);
   expect(d.isFinite()).toBe(false);
+  expect(d.isInfinity()).toBe(true);
 
   d = new Decimal('Infinity');
   expect(d.isNaN()).toBe(false);
   expect(d.isFinite()).toBe(false);
+  expect(d.isInfinity()).toBe(true);
 });
 
 test('absolute value', () => {

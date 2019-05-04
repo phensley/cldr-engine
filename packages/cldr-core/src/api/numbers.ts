@@ -2,7 +2,7 @@ import {
   CurrencyType,
   PluralType,
 } from '@phensley/cldr-schema';
-import { coerceDecimal, DecimalArg, Part } from '@phensley/decimal';
+import { coerceDecimal, Decimal, DecimalArg, Part } from '@phensley/decimal';
 
 import {
   CurrencyFormatOptions,
@@ -104,11 +104,12 @@ export class NumbersImpl implements Numbers {
       n: DecimalArg, options: DecimalFormatOptions): T {
 
     // A NaN or Infinity value will just return the locale's representation
-    const v = validate(n, options, renderer, params);
+    const d = coerceDecimal(n);
+    const v = validate(d, options, renderer, params);
     if (v !== undefined) {
       return v;
     }
-    const [result] = this.numbers.formatDecimal(this.bundle, renderer, coerceDecimal(n), options, params);
+    const [result] = this.numbers.formatDecimal(this.bundle, renderer, d, options, params);
     return result;
   }
 
@@ -117,7 +118,8 @@ export class NumbersImpl implements Numbers {
 
     // Not much to be done with NaN and Infinity with currencies, so we always
     // throw an error.
-    validate(n, FORCE_ERRORS, renderer, params);
+    const d = coerceDecimal(n);
+    validate(d, FORCE_ERRORS, renderer, params);
     return this.numbers.formatCurrency(this.bundle, renderer, coerceDecimal(n), code, options, params);
   }
 
@@ -129,18 +131,14 @@ const FORCE_ERRORS: DecimalFormatOptions = { errors: ['nan', 'infinity' ]};
  * an error, or return the locale's string representation.
  */
 const validate = <T>(
-  n: DecimalArg,
+  n: Decimal,
   opts: DecimalFormatOptions,
   renderer: NumberRenderer<T>,
   params: NumberParams): T | undefined => {
 
-  if (typeof n !== 'number' || isFinite(n)) {
-    return undefined;
-  }
-
   // Check if we have NaN or Infinity
-  const isnan = isNaN(n);
-  const isinfinity = !isnan && !isFinite(n);
+  const isnan = n.isNaN();
+  const isinfinity = n.isInfinity();
 
   if (Array.isArray(opts.errors)) {
     // Check if we should throw an error on either of these
