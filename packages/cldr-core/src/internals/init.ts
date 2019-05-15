@@ -6,7 +6,6 @@ import {
   GeneralInternals,
   Internals,
   NumberInternals,
-  PluralInternals,
   UnitInternals,
   WrapperInternals
 } from './internals';
@@ -15,7 +14,6 @@ import { CalendarInternalsImpl } from './calendars';
 import { DateFieldInternalsImpl } from './datefields';
 import { GeneralInternalsImpl } from './general';
 import { NumberInternalsImpl } from './numbers';
-import { PluralInternalsImpl } from './plurals';
 import { UnitsInternalImpl } from './units';
 import { WrapperInternalsImpl } from './wrapper';
 import { checksumIndices } from '../resource/checksum';
@@ -31,7 +29,6 @@ export class InternalsImpl implements Internals {
   readonly dateFields: DateFieldInternals;
   readonly general: GeneralInternals;
   readonly numbers: NumberInternals;
-  readonly plurals: PluralInternals;
   readonly units: UnitInternals;
   readonly wrapper: WrapperInternals;
 
@@ -43,7 +40,6 @@ export class InternalsImpl implements Internals {
     this.indices = origin.indices;
     this.schema = buildSchema(origin, debug);
     this.checksum = checksumIndices(version, origin.indices);
-    this.plurals = new PluralInternalsImpl();
     this.wrapper = new WrapperInternalsImpl();
 
     this.calendars = new CalendarInternalsImpl(this, patternCacheSize);

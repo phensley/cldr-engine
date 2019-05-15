@@ -10,6 +10,7 @@ import { Internals, NumberRenderer, UnitInternals } from '../internals';
 import { Quantity, UnitFormatOptions } from '../../common';
 import { NumberParams } from '../../common/private';
 import { Bundle } from '../../resource';
+import { pluralRules } from '../../systems/plurals';
 
 export class UnitsInternalImpl implements UnitInternals {
 
@@ -36,7 +37,7 @@ export class UnitsInternalImpl implements UnitInternals {
       return num;
     }
 
-    const { plurals, wrapper } = this.internals;
+    const { wrapper } = this.internals;
     const info = this.getUnitInfo(options.length || '');
     const pattern = info.unitPattern.get(bundle, plural, q.unit);
 
@@ -55,7 +56,7 @@ export class UnitsInternalImpl implements UnitInternals {
       const compound = info.compoundUnitPattern.get(bundle);
 
       // Compute plural category for the value '1'
-      const singular = plurals.cardinal(
+      const singular = pluralRules.cardinal(
         bundle.language(), DecimalConstants.ONE.operands());
 
       // Fetch the denominator's singular unit pattern, strip off the '{0}'

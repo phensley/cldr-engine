@@ -10,6 +10,6 @@ export const getPlurals = (data: any): Code[] => {
   code += formatSource(`export const expressions: string[] = ${JSON.stringify(expressions)};\n`);
 
   return [
-    Code.core(['internals', 'plurals', 'autogen.rules.ts'], code)
+    Code.core(['systems', 'plurals', 'autogen.rules.ts'], code)
   ];
 };

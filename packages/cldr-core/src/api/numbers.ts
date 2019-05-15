@@ -21,15 +21,14 @@ import {
   Internals,
   NumberInternals,
   NumberRenderer,
-  PluralInternals,
 } from '../internals';
+import { pluralRules } from '../systems/plurals';
 
 /**
  * Number and currency formatting.
  */
 export class NumbersImpl implements Numbers {
 
-  private plurals: PluralInternals;
   private numbers: NumberInternals;
 
   constructor(
@@ -38,7 +37,6 @@ export class NumbersImpl implements Numbers {
     protected readonly privateApi: PrivateApiImpl
   ) {
     this.numbers = internal.numbers;
-    this.plurals = internal.plurals;
   }
 
   getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string {
@@ -64,12 +62,12 @@ export class NumbersImpl implements Numbers {
 
   getPluralCardinal(n: DecimalArg): string {
     const d = coerceDecimal(n);
-    return this.plurals.cardinal(this.bundle.language(), d.operands());
+    return pluralRules.cardinal(this.bundle.language(), d.operands());
   }
 
   getPluralOrdinal(n: DecimalArg): string {
     const d = coerceDecimal(n);
-    return this.plurals.ordinal(this.bundle.language(), d.operands());
+    return pluralRules.ordinal(this.bundle.language(), d.operands());
   }
 
   formatDecimal(n: DecimalArg, options?: DecimalFormatOptions): string {

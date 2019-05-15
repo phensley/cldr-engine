@@ -1,9 +1,8 @@
-import { INTERNALS } from '../../_helpers';
 import { Decimal } from '@phensley/decimal';
+import { pluralRules } from '../../../src/systems/plurals';
 
-const internals = INTERNALS();
 const operands = (n: string) => new Decimal(n).operands();
-const cardinal = (lang: string, n: string) => internals.plurals.cardinal(lang, operands(n));
+const cardinal = (lang: string, n: string) => pluralRules.cardinal(lang, operands(n));
 
 test('english', () => {
   const lang = 'en';

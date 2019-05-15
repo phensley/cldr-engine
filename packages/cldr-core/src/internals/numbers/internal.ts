@@ -22,6 +22,7 @@ import { getCurrencyFractions } from './util';
 import { Bundle } from '../../resource';
 import { Internals, NumberInternals, NumberRenderer } from '../../internals/internals';
 import { PartsNumberFormatter, StringNumberFormatter } from './render';
+import { pluralRules } from '../../systems/plurals';
 
 /**
  * Number internal engine singleton, shared across all locales.
@@ -103,7 +104,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
         // Compute the plural category for the final q2.
         const operands = q2.operands();
-        plural = this.internals.plurals.cardinal(bundle.language(), operands);
+        plural = pluralRules.cardinal(bundle.language(), operands);
 
         // Select the final pluralized compact pattern based on the integer
         // digits of n and the plural category of the rounded / shifted number q2.
@@ -139,7 +140,7 @@ export class NumberInternalsImpl implements NumberInternals {
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         const operands = n.operands();
-        plural = this.internals.plurals.cardinal(bundle.language(), operands);
+        plural = pluralRules.cardinal(bundle.language(), operands);
 
         // Re-select pattern as number may have changed sign due to rounding.
         pattern = this.getNumberPattern(raw, n.isNegative());
@@ -156,7 +157,7 @@ export class NumberInternalsImpl implements NumberInternals {
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         const operands = n.operands();
-        plural = this.internals.plurals.cardinal(bundle.language(), operands);
+        plural = pluralRules.cardinal(bundle.language(), operands);
 
         // Re-select pattern as number may have changed sign due to rounding.
         pattern = this.getNumberPattern(standardRaw, n.isNegative());
@@ -238,7 +239,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
         // Compute plural category and select pluralized unit.
         const operands = n.operands();
-        const plural = this.internals.plurals.cardinal(bundle.language(), operands);
+        const plural = pluralRules.cardinal(bundle.language(), operands);
         const unit = style === 'code' ? code : this.getCurrencyPluralName(bundle, code, plural);
 
         // Wrap number and unit together.
@@ -266,7 +267,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
         // Compute the plural category for the final q2.
         const operands = q2.operands();
-        const plural = this.internals.plurals.cardinal(bundle.language(), operands);
+        const plural = pluralRules.cardinal(bundle.language(), operands);
 
         // Select the final pluralized compact pattern based on the integer
         // digits of n and the plural category of the rounded / shifted number q2.

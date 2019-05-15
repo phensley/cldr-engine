@@ -12,7 +12,7 @@ import {
   UnitInfo,
   UnitType,
 } from '@phensley/cldr-schema';
-import { Decimal, DecimalArg, NumberOperands, Part } from '@phensley/decimal';
+import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 
 import {
   CurrencyFormatOptions,
@@ -88,11 +88,6 @@ export interface NumberInternals {
   getNumberPattern(raw: string, negative: boolean): NumberPattern;
 }
 
-export interface PluralInternals {
-  cardinal(language: string, operands: NumberOperands): PluralType;
-  ordinal(language: string, operands: NumberOperands): PluralType;
-}
-
 export interface UnitInternals {
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string;
   getUnitInfo(length: string): UnitInfo;
@@ -127,7 +122,6 @@ export interface Internals {
   readonly dateFields: DateFieldInternals;
   readonly general: GeneralInternals;
   readonly numbers: NumberInternals;
-  readonly plurals: PluralInternals;
   readonly schema: Schema;
   readonly units: UnitInternals;
   readonly wrapper: WrapperInternals;

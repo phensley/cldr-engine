@@ -9,6 +9,7 @@ import { DateFieldInternals, Internals } from '../internals';
 import { RelativeTimeFormatOptions } from '../../common';
 import { Bundle } from '../../resource';
 import { ContextTransformInfo, NumberParams } from '../../common/private';
+import { pluralRules } from '../../systems/plurals';
 
 // TODO: expose a method to calculate field difference with different options, e.g.
 // include weekdays
@@ -88,7 +89,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
 
     // Format a pluralized future / past.
     const operands = n.operands();
-    const plural = this.internals.plurals.cardinal(bundle.language(), operands);
+    const plural = pluralRules.cardinal(bundle.language(), operands);
     const arrow = negative ? format.past : format.future;
     let raw = arrow.get(bundle, plural, field);
     if (options.context) {
