@@ -3,33 +3,33 @@ import { pluralRules } from '../plurals';
 import { NormalRadixRule, NormalRule, Opcode, RuleType, RBNFInst, RBNFRule } from './rbnftypes';
 import { binarySearch } from './utils';
 
-export const OPCODES: { [x: number]: string } = {
-  [Opcode.APPLY_LEFT_2_NUM_FORMAT]: 'APPLY_LEFT_2_NUM_FORMAT',
-  [Opcode.APPLY_LEFT_2_RULE]: 'APPLY_LEFT_2_RULE',
-  [Opcode.APPLY_LEFT_NUM_FORMAT]: 'APPLY_LEFT_NUM_FORMAT',
-  [Opcode.APPLY_LEFT_RULE]: 'APPLY_LEFT_RULE',
-  [Opcode.APPLY_RIGHT_NUM_FORMAT]: 'APPLY_RIGHT_NUM_FORMAT',
-  [Opcode.APPLY_RIGHT_RULE]: 'APPLY_RIGHT_RULE',
-  [Opcode.CARDINAL]: 'CARDINAL',
-  [Opcode.LITERAL]: 'LITERAL',
-  [Opcode.OPTIONAL]: 'OPTIONAL',
-  [Opcode.ORDINAL]: 'ORDINAL',
-  [Opcode.SUB_LEFT]: 'SUB_LEFT',
-  [Opcode.SUB_RIGHT]: 'SUB_RIGHT',
-  [Opcode.SUB_RIGHT_3]: 'SUB_RIGHT_3',
-  [Opcode.UNCHANGED_NUM_FORMAT]: 'UNCHANGED_NUM_FORMAT',
-  [Opcode.UNCHANGED_RULE]: 'UNCHANGED_RULE',
-};
+// export const OPCODES: { [x: number]: string } = {
+//   [Opcode.APPLY_LEFT_2_NUM_FORMAT]: 'APPLY_LEFT_2_NUM_FORMAT',
+//   [Opcode.APPLY_LEFT_2_RULE]: 'APPLY_LEFT_2_RULE',
+//   [Opcode.APPLY_LEFT_NUM_FORMAT]: 'APPLY_LEFT_NUM_FORMAT',
+//   [Opcode.APPLY_LEFT_RULE]: 'APPLY_LEFT_RULE',
+//   [Opcode.APPLY_RIGHT_NUM_FORMAT]: 'APPLY_RIGHT_NUM_FORMAT',
+//   [Opcode.APPLY_RIGHT_RULE]: 'APPLY_RIGHT_RULE',
+//   [Opcode.CARDINAL]: 'CARDINAL',
+//   [Opcode.LITERAL]: 'LITERAL',
+//   [Opcode.OPTIONAL]: 'OPTIONAL',
+//   [Opcode.ORDINAL]: 'ORDINAL',
+//   [Opcode.SUB_LEFT]: 'SUB_LEFT',
+//   [Opcode.SUB_RIGHT]: 'SUB_RIGHT',
+//   [Opcode.SUB_RIGHT_3]: 'SUB_RIGHT_3',
+//   [Opcode.UNCHANGED_NUM_FORMAT]: 'UNCHANGED_NUM_FORMAT',
+//   [Opcode.UNCHANGED_RULE]: 'UNCHANGED_RULE',
+// };
 
-export const RULETYPES = {
-  [RuleType.IMPROPER_FRACTION]: 'IMPROPER_FRACTION',
-  [RuleType.INFINITY]: 'INFINITY',
-  [RuleType.MINUS]: 'MINUS',
-  [RuleType.NORMAL]: 'NORMAL',
-  [RuleType.NORMAL_RADIX]: 'NORMAL_RADIX',
-  [RuleType.NOT_A_NUMBER]: 'NOT_A_NUMBER',
-  [RuleType.PROPER_FRACTION]: 'PROPER_FRACTION'
-};
+// export const RULETYPES = {
+//   [RuleType.IMPROPER_FRACTION]: 'IMPROPER_FRACTION',
+//   [RuleType.INFINITY]: 'INFINITY',
+//   [RuleType.MINUS]: 'MINUS',
+//   [RuleType.NORMAL]: 'NORMAL',
+//   [RuleType.NORMAL_RADIX]: 'NORMAL_RADIX',
+//   [RuleType.NOT_A_NUMBER]: 'NOT_A_NUMBER',
+//   [RuleType.PROPER_FRACTION]: 'PROPER_FRACTION'
+// };
 
 export const PLURALS: { [x: string]: number } = {
   zero: 0,
@@ -247,7 +247,7 @@ export class RBNFEngine {
         }
 
         default:
-          console.log('NOIMPL: ', OPCODES[inst[0]]);
+          // console.log('NOIMPL: ', OPCODES[inst[0]]);
           break;
       }
     }

@@ -52,17 +52,19 @@ export class ResourcePack {
   private current!: Layer;
   private defaultLayer?: LanguageTag;
 
-  private spellout: string;
+  private spellout: string = '{}';
 
   constructor(
     private language: string,
     private version: string,
     private cldrVersion: string,
-    rbnf: RBNFCollector
+    rbnf?: RBNFCollector
   ) {
 
-    const packer: RBNFPacker = new RBNFPacker(rbnf);
-    this.spellout = packer.pack(language);
+    if (rbnf) {
+      const packer: RBNFPacker = new RBNFPacker(rbnf);
+      this.spellout = packer.pack(language);
+    }
   }
 
   /**
