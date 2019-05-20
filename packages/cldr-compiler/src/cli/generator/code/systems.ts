@@ -52,7 +52,7 @@ export const getSystems = (_data: any): Code[] => {
         const id = `${tag.language()}-${tag.script()}`;
         parts = [id, tmp[2]];
       }
-      algorithmic += `  ${k}: ${JSON.stringify(parts)},\n`;
+      algorithmic += `  ${k}: [${parts.map(p => `'${p}'`).join(', ')}],\n`;
     }
   });
 
