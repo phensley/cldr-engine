@@ -34,10 +34,10 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "^0.14.5",
-    "@phensley/cldr-utils": "^0.14.5",
-    "@phensley/decimal": "^0.14.5",
-    "@phensley/timezone": "^0.14.5",
+    "@phensley/cldr-schema": "0.14.5",
+    "@phensley/cldr-utils": "0.14.5",
+    "@phensley/decimal": "0.14.5",
+    "@phensley/timezone": "0.14.5",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
