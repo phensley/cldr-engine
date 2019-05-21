@@ -33,6 +33,11 @@ export class RBNFCollector {
   readonly locales: Map<string, JSONRoot> = new Map();
 
   /**
+   * Locales that are part of the core library.
+   */
+  readonly core: string[] = [];
+
+  /**
    * Load all RBNF rulesets.
    */
   load(): void {
@@ -80,7 +85,7 @@ export class RBNFCollector {
     // Identify the rbnf rulesets that are globally-accessible, so we can
     // embed these into the core library. As of 35.1.0 this includes:
     // zh, zh-Hant, ja
-    const core: string[] = ['root'];
+    this.core.push('root');
     const systems = getSupplemental().NumberingSystems;
     Object.keys(systems).forEach(k => {
       const sys = systems[k];
@@ -93,14 +98,14 @@ export class RBNFCollector {
       const parts = sys._rules.split('/');
       const tag = LanguageResolver.resolve(parts[0]);
       const id = `${tag.language()}-${tag.script()}`;
-      if (!core.includes(id)) {
-        core.push(id);
+      if (!this.core.includes(id)) {
+        this.core.push(id);
       }
     });
 
     for (const id of ids) {
       this.locales.set(id, res.get(id)!);
-      const lang = id === 'root' || core.includes(id) ? 'root' : parseLanguageTag(id).language();
+      const lang = id === 'root' || this.core.includes(id) ? 'root' : parseLanguageTag(id).language();
       const map = this.langs.get(lang) || [];
       map.push(id);
       this.langs.set(lang, map);

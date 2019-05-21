@@ -1,4 +1,4 @@
-import { Decimal } from '@phensley/decimal';
+// import { Decimal } from '@phensley/decimal';
 // import { PluralType } from '@phensley/cldr-schema';
 
 // Notation for categories in compact plural rules
@@ -51,10 +51,10 @@ export interface AtomRule {
  */
 export interface FractionRule {
   readonly [0]: FractionType;
-  // 0 = period, 1 = comma
-  readonly [1]: number;
   // array of instructions to evaluate
-  readonly [2]: RBNFInst[];
+  readonly [1]: RBNFInst[];
+  // 0 = period, 1 = comma
+  readonly [2]: number;
 }
 
 /**
@@ -62,10 +62,10 @@ export interface FractionRule {
  */
 export interface NormalRule {
   readonly [0]: RuleType.NORMAL;
-  // base value (implicit radix)
-  readonly [1]: Decimal;
   // instructions to evaluate
-  readonly [2]: RBNFInst[];
+  readonly [1]: RBNFInst[];
+  // index of base value (implicit radix)
+  readonly [2]: number;
 }
 
 /**
@@ -73,12 +73,12 @@ export interface NormalRule {
  */
 export interface NormalRadixRule {
   readonly [0]: RuleType.NORMAL_RADIX;
-  // base value
-  readonly [1]: Decimal;
-  // explicit radix
-  readonly [2]: Decimal;
   // instructions to evaluate
-  readonly [3]: RBNFInst[];
+  readonly [1]: RBNFInst[];
+  // index of base value
+  readonly [2]: number;
+  // index of explicit radix
+  readonly [3]: number;
 }
 
 export type RBNFRule = AtomRule | FractionRule | NormalRule | NormalRadixRule;
@@ -104,18 +104,21 @@ export const enum Opcode {
   APPLY_LEFT_2_NUM_FORMAT,
 }
 
+// Syntax: literal string occurring between substitutions
 export interface LiteralInst {
   readonly [0]: Opcode.LITERAL;
   // offset into symbol table
   readonly [1]: number;
 }
 
+// Syntax: <%rulename<
 export interface ApplyLeftRuleInst {
   readonly [0]: Opcode.APPLY_LEFT_RULE;
   // offset into ruleset array
   readonly [1]: number;
 }
 
+// Syntax: <#,##0<
 export interface ApplyLeftNumFormatInst {
   readonly [0]: Opcode.APPLY_LEFT_NUM_FORMAT;
   // offset into symbol table
@@ -221,3 +224,12 @@ export type RBNFInst = LiteralInst
   | UnchangedRuleInst
   | UnchangedNumFormatInst
   ;
+
+export const PLURALS: { [x: string]: number } = {
+  zero: 0,
+  one: 1,
+  two: 2,
+  few: 3,
+  many: 4,
+  other: 5
+};

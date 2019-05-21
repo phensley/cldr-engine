@@ -177,7 +177,7 @@ export class RBNFEncoder {
     for (const ruleset of rulesets) {
       const rules: any[] = [];
 
-      // determine if we need to duplicate / split the fraction rule.
+      // Determine if we need to duplicate / split the fraction rule.
       // we want our runtime code to have to make as few guesses as possible,
       // so if the ruleset doesn't include separate fraction rules for commas
       // and periods, we split the rules.
@@ -207,7 +207,7 @@ export class RBNFEncoder {
         if (/^\d+$/.test(value)) {
           // Normal rule without an explicit radix.
           const i = numbers.indexOf(value);
-          rules.push([RuleType.NORMAL, i, inst]);
+          rules.push([RuleType.NORMAL, inst, i]);
 
         } else if (/^\d+(\/\d+)?$/.test(value)) {
           // Normal rule with explicit radix
@@ -215,7 +215,7 @@ export class RBNFEncoder {
           const i = numbers.indexOf(p[0]);
           const j = numbers.indexOf(p[1]);
 
-          rules.push([RuleType.NORMAL_RADIX, i, j, inst]);
+          rules.push([RuleType.NORMAL_RADIX, inst, i, j]);
 
         } else {
           // Atom rule
@@ -223,33 +223,39 @@ export class RBNFEncoder {
             case '-x':
               rules.push([RuleType.MINUS, inst]);
               break;
+
             case '0.x':
-              rules.push([RuleType.PROPER_FRACTION, 0, inst]);
+              rules.push([RuleType.PROPER_FRACTION, inst, 0]);
               if (!comma) {
-                rules.push([RuleType.PROPER_FRACTION, 1, inst]);
+                rules.push([RuleType.PROPER_FRACTION, inst, 1]);
               }
               break;
+
             case '0,x':
-              rules.push([RuleType.PROPER_FRACTION, 1, inst]);
+              rules.push([RuleType.PROPER_FRACTION, inst, 1]);
               if (!period) {
-                rules.push([RuleType.PROPER_FRACTION, 0, inst]);
+                rules.push([RuleType.PROPER_FRACTION, inst, 0]);
               }
               break;
+
             case 'x.x':
-              rules.push([RuleType.IMPROPER_FRACTION, 0, inst]);
+              rules.push([RuleType.IMPROPER_FRACTION, inst, 0]);
               if (!comma) {
-                rules.push([RuleType.IMPROPER_FRACTION, 1, inst]);
+                rules.push([RuleType.IMPROPER_FRACTION, inst, 1]);
               }
               break;
+
             case 'x,x':
-              rules.push([RuleType.IMPROPER_FRACTION, 1, inst]);
+              rules.push([RuleType.IMPROPER_FRACTION, inst, 1]);
               if (!period) {
-                rules.push([RuleType.IMPROPER_FRACTION, 1, inst]);
+                rules.push([RuleType.IMPROPER_FRACTION, inst, 0]);
               }
               break;
+
             case 'Inf':
               rules.push([RuleType.INFINITY, inst]);
               break;
+
             case 'NaN':
               rules.push([RuleType.NOT_A_NUMBER, inst]);
               break;
