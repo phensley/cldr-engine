@@ -1,3 +1,3 @@
-import { version } from './package.json';
+import { version } from './pkginfo.json';
 
 export const VERSION = version;
