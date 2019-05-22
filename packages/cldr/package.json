@@ -50,6 +50,7 @@
     "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
   "files": [
+    "dist/",
     "lib/",
     "lib-es/",
     "packs/*.gz",
