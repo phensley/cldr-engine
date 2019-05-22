@@ -186,6 +186,8 @@ class CLDRImpl implements CLDR {
   }
 }
 
+const EMPTY_CONFIG: SchemaConfig = {};
+
 /**
  * Options to initialize the library.
  *
@@ -201,7 +203,7 @@ export interface CLDROptions {
   /**
    * Customizing of the schema.
    */
-  config: SchemaConfig;
+  config?: SchemaConfig;
 
   /**
    * Given a language identifier, fetch the resource pack from the
@@ -240,14 +242,24 @@ export class CLDRFramework {
   protected readonly loader?: (language: string) => any;
   protected readonly asyncLoader?: (language: string) => Promise<any>;
   protected readonly internals: Internals;
+  protected static defaultConfig?: SchemaConfig;
 
-  constructor(protected readonly options: CLDROptions) {
+  constructor(protected options: CLDROptions) {
     this.packCache = new LRU(options.packCacheSize || 2);
     this.loader = options.loader;
     this.asyncLoader = options.asyncLoader;
 
     const patternCacheSize = options.patternCacheSize || 50;
-    this.internals = new InternalsImpl(options.config, VERSION, options.debug, patternCacheSize);
+    this.internals = new InternalsImpl(
+      options.config || CLDRFramework.defaultConfig || EMPTY_CONFIG,
+      VERSION, options.debug, patternCacheSize);
+  }
+
+  /**
+   * Specify a configuration to use as a fallback.
+   */
+  static setDefaultConfig(config: SchemaConfig): void {
+    this.defaultConfig = config;
   }
 
   info(): string {

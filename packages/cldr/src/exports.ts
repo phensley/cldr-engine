@@ -10,6 +10,8 @@ export {
   CurrencyFormatStyleType,
   CurrencySymbolWidthType,
   CLDR,
+  CLDRFramework,
+  CLDROptions,
   DateFieldType,
   DateFormatOptions,
   Decimal,

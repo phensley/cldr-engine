@@ -24,10 +24,15 @@ function asyncLoader(language) {
 
 const options = { asyncLoader };
 const framework = new cldrengine.CLDRFramework(options);
-framework.getAsync('en').then(function(cldr) {
-  const s = cldr.Numbers.formatDecimal('15133.2553559999', { maximumFractionDigits: 1 });
-  document.getElementById('out').innerText = s;
-});
+const locales = ['en', 'de', 'fr', 'es', 'zh', 'ko', 'ja'];
+for (let i = 0; i < locales.length; i++) {
+  const id = locales[i];
+  framework.getAsync(id).then(function(cldr) {
+    const s = cldr.Numbers.formatDecimal('15133.2553559999', { maximumFractionDigits: 2 });
+    var elem = document.getElementById('out');
+    elem.innerHTML += id + ': ' + s + '<br>';
+  });
+}
 </script>
 
 <div id="out"></div>
