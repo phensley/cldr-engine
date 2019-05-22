@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [UNRELEASED]
+### Fixed/Changed
+ - Alter how `@phensley/cldr` default schema configuration is initialized.
+ - Created initial UMD rollup of the `@phensley/cldr` library.
+ - Save some space by storing only the first digit for decimal digit sets whose Unicode codepoints are increasing.
+
 ## [0.14.6]
 ### Fixed/Changed
  - Pin versions of dependencies.

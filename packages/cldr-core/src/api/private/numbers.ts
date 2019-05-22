@@ -88,8 +88,8 @@ export class NumberParamsCache {
       numberSystemName: name,
       system,
       latnSystem,
-      digits: decimalNumberingDigits[name],
-      latinDigits: decimalNumberingDigits.latn,
+      digits: makeDigits(name),
+      latinDigits: makeDigits('latn'),
       symbols,
       minimumGroupingDigits,
       primaryGroupingSize,
@@ -122,3 +122,19 @@ export class NumberParamsCache {
     );
   }
 }
+
+/**
+ * The codepoints for most Unicode decimal digit sets are in increasing order.
+ * To save space we store the base digit '0' and generate '1'..'9' from it.
+ */
+const makeDigits = (name: string): string[] => {
+  const digits = decimalNumberingDigits[name];
+  if (digits.length !== 10) {
+    const base = digits[0].codePointAt(0)!;
+    for (let i = 1; i < 10; i++) {
+      digits.push(String.fromCodePoint(base + i));
+    }
+    decimalNumberingDigits[name] = digits;
+  }
+  return digits;
+};
