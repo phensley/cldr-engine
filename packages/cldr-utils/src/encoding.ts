@@ -73,3 +73,4 @@ export const vuintEncode = (nums: number[] | Uint8Array, f?: (x: number) => numb
   }
   return res.subarray(0, j);
 };
+

@@ -1,6 +1,6 @@
 import { rawdata } from './autogen.zonedata';
 import { RawData } from './types';
-import { binarySearch, vuintDecode, z85Decode, zigzagDecode } from '@phensley/cldr-utils';
+import { binarySearch } from '@phensley/cldr-utils';
 
 export interface ZoneInfo {
   zoneid: string;
@@ -72,7 +72,7 @@ export class TzImpl {
       addlink(alias, id);
     });
 
-    this.untilindex = vuintDecode(z85Decode(raw.index), zigzagDecode);
+    this.untilindex = raw.index.split(' ').map(Number);
     this.rawzoneinfo = raw.zoneinfo;
     this.zonerecords = new Array(raw.zoneinfo.length);
 
@@ -175,8 +175,8 @@ class ZoneRecord {
 
   constructor(raw: string, index: number[]) {
     const [ _info, _types, _untils ] = raw.split('\t');
-    const untils = vuintDecode(z85Decode(_untils), zigzagDecode);
-    const types = _types.split('').map(t => TYPES[t]);
+    const untils = _untils ? _untils.split(' ').map(Number) : [];
+    const types = _types ? _types.split('').map(t => TYPES[t]) : [];
 
     // Decode initial until and the deltas
     const len = untils.length;

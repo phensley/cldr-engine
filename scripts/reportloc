@@ -27,9 +27,13 @@ for d in $DIRS ; do
     uglifyjs -o $TMP/$d.js `gfind packages/$d/lib -name '*.js'|xargs`
     wc -c $TMP/$d.js
 
-    echo -n 'uglified and gzipped size:  '
+    echo -n '   uglified and gzip size:  '
     gzip -c -9 $TMP/$d.js >$TMP/$d.js.gz
     wc -c $TMP/$d.js.gz
+
+    echo -n ' uglified and brotli size:  '
+    brotli -c $TMP/$d.js >$TMP/$d.js.br
+    wc -c $TMP/$d.js.br
 
     echo
     echo '--------------------------------------------------------------------'

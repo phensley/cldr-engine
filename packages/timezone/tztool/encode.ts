@@ -1,7 +1,6 @@
 import * as filepath from 'path';
 import { TZif } from './tzif';
 import { DefaultArrayMap, FrequencySet } from './types';
-import { vuintEncode, z85Encode, zigzagEncode } from '@phensley/cldr-utils';
 
 const TSLINT = '/* tslint:disable:max-line-length whitespace */\n\n';
 
@@ -85,7 +84,7 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
 
     zoneinfo.push(`    '${localtime}\\t` +
       `${types.join('')}\\t` +
-      `${z85Encode(vuintEncode(untils, zigzagEncode))}'`
+      `${untils.join(' ')}'`
     );
   }
 
@@ -101,8 +100,7 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
 
   data += `  links: '${linkindex.join('|')}',\n\n`;
 
-  const _untils = z85Encode(vuintEncode(untilkeys, zigzagEncode));
-  data += `  index: '${_untils}',\n\n`;
+  data += `  index: '${untilkeys.join(' ')}',\n\n`;
 
   data += `  zoneinfo: [\n`;
   data += zoneinfo.join(',\n');
