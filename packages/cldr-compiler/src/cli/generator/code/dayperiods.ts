@@ -1,4 +1,3 @@
-import { vuintEncode, z85Encode } from '@phensley/cldr-utils';
 import { Code, HEADER } from './util';
 import { getSupplemental } from '../../../cldr';
 
@@ -130,7 +129,7 @@ export const getDayPeriods = (_data: any): Code[] => {
 
     untils = expand(untils);
 
-    const times = z85Encode(vuintEncode(untils.map(u => u.type === 'exact' ? u.at : u.from)));
+    const times = untils.map(u => u.type === 'exact' ? u.at : u.from).join(' ');
     const keys = untils.map(u => INDEX[u.key]);
     const value = `${keys.join(' ')}|${times}`;
 

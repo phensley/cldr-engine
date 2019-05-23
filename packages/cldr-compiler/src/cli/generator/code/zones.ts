@@ -1,5 +1,4 @@
 import { TZ } from '@phensley/timezone';
-import { vuintEncode, z85Encode, zigzagEncode } from '@phensley/cldr-utils';
 import { lineWrap, Code, HEADER, NOLINT_MAXLINE } from './util';
 import chalk from 'chalk';
 
@@ -144,11 +143,11 @@ const buildMetaZones2 = (data: any): Metazones => {
   });
 
   return {
-    zoneindex: z85Encode(vuintEncode(zoneindex)),
+    zoneindex: zoneindex.join(' '),
     metazoneids: metazoneIndex.array.join('\\t'),
-    index: z85Encode(vuintEncode(index)),
-    offsets: z85Encode(vuintEncode(offsets)),
-    untils: z85Encode(vuintEncode(untils, zigzagEncode))
+    index: index.join(' '),
+    offsets: offsets.join(' '),
+    untils: untils.join(' ')
   };
 };
 

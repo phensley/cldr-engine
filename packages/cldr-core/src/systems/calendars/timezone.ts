@@ -1,10 +1,9 @@
 import { MetaZoneType, TimeZoneStableIdIndex } from '@phensley/cldr-schema';
-import { vuintDecode, z85Decode, zigzagDecode } from '@phensley/cldr-utils';
 import { TZ } from '@phensley/timezone';
 
 import { zoneAliasRaw } from './autogen.aliases';
 import { metazoneData } from './autogen.zonedata';
-import { stringToObject } from '../../utils/string';
+import { numarray, stringToObject } from '../../utils/string';
 
 export interface ZoneInfo {
   zoneid: string;
@@ -81,9 +80,9 @@ class Metazones {
 
   constructor(raw: any) {
     this.metazoneids = raw.metazoneids;
-    const index = vuintDecode(z85Decode(raw.index));
-    const offsets = vuintDecode(z85Decode(raw.offsets));
-    const untils = vuintDecode(z85Decode(raw.untils), zigzagDecode);
+    const index = numarray(raw.index);
+    const offsets = numarray(raw.offsets);
+    const untils = numarray(raw.untils);
 
     for (let i = 0; i < index.length; i += 2) {
       const s = index[i];
@@ -97,7 +96,7 @@ class Metazones {
 
     // mapping of zoneid to metazone records
     const zoneids = TZ.zoneIds();
-    const zoneindex = vuintDecode(z85Decode(raw.zoneindex));
+    const zoneindex = numarray(raw.zoneindex);
 
     // Mapping of tzdb id back to cldr stable id used for schema lookups
     raw.stableids.split('|').forEach((d: string) => {

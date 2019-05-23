@@ -1,7 +1,8 @@
-import { binarySearch, vuintDecode, z85Decode, Cache } from '@phensley/cldr-utils';
+import { binarySearch, Cache } from '@phensley/cldr-utils';
 
 import { DayPeriodType } from '@phensley/cldr-schema';
 import { Bundle } from '../../resource/bundle';
+import { numarray } from '../../utils/string';
 
 import { dayPeriodKeys, dayPeriodRules } from './autogen.dayperiods';
 
@@ -12,7 +13,7 @@ interface Rule {
 
 const parseRule = (raw: string): Rule => {
   const parts = raw.split('|');
-  const minutes = vuintDecode(z85Decode(parts[1]));
+  const minutes = numarray(parts[1]);
   const keys = parts[0].split(' ').map(s => dayPeriodKeys[Number(s)]);
   return { keys, minutes };
 };
