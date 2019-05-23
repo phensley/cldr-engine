@@ -11,7 +11,7 @@ test('zone info', () => {
   info = zoneInfoFromUTC('Etc/GMT+1', utc);
   expect(info.abbr).toEqual('-01');
   expect(info.dst).toEqual(0);
-  expect(info.metazoneid).toEqual('GMT');
+  expect(info.metazoneid).toEqual('');
   expect(info.offset).toEqual(-3600000);
 
   info = zoneInfoFromUTC('MissingZone', utc);

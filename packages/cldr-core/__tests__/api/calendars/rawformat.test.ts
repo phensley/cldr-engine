@@ -36,12 +36,27 @@ test('raw formats', () => {
 
   const time = JAN_01_2018_070025_UTC;
   const utc = unix(time, 'UTC');
+  const utc1 = unix(time, 'Etc/GMT+1');
+  const abidjan = unix(time, 'Africa/Abidjan');
   const wallis = unix(time, 'Pacific/Wallis');
   const ny = unix(time, 'America/New_York');
 
   // zzzz
 
   res = format(utc, 'z');
+  expect(res).toEqual([
+    'GMT', 'GMT', 'GMT', 'Greenwich Mean Time', '', ''
+  ]);
+
+  // Note: 'Etc/GMT+1' is a POSIX-style zone id, and positive means
+  // "west of Greenwich" and negative is "east of Greenwich".
+  // So +1 corresponds to 1 hour west / behind GMT, so the offset is -1 hour.
+  res = format(utc1, 'z');
+  expect(res).toEqual([
+    'GMT-1', '', '', 'GMT-01:00', '', ''
+  ]);
+
+  res = format(abidjan, 'z');
   expect(res).toEqual([
     'GMT', 'GMT', 'GMT', 'Greenwich Mean Time', '', ''
   ]);

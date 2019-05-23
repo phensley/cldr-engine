@@ -86,7 +86,6 @@ const IGNORED_ZONES = new Set<string>([
   'Etc/GMT-12',
   'Etc/GMT-13',
   'Etc/GMT-14',
-  'Etc/UTC'
 ]);
 
 const buildMetaZones2 = (data: any): Metazones => {
@@ -119,9 +118,15 @@ const buildMetaZones2 = (data: any): Metazones => {
 
   const zoneindex: number[] = [];
   zoneids.forEach((id, zi) => {
-    const mi = zonemap.get(zi);
-    if (mi === undefined && !IGNORED_ZONES.has(id)) {
-      console.log(`${chalk.red('Warning')}: ${id} has no metazone`);
+    let mi = zonemap.get(zi);
+    if (mi === undefined) {
+      // Special case, map this to Etc/GMT's metazone
+      if (id === 'Etc/UTC') {
+        zi = zoneids.indexOf('Etc/GMT');
+        mi = zonemap.get(zi);
+      } else if (!IGNORED_ZONES.has(id)) {
+        console.log(`${chalk.red('Warning')}: ${id} has no metazone`);
+      }
     }
     zoneindex.push(mi === undefined ? -1 : mi);
   });

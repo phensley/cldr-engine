@@ -105,8 +105,6 @@ class Metazones {
       this.stableids.set(zoneids[i], p[1]);
     });
 
-    // console.log(this.stableids);
-
     // Sanity-check, since the zoneindex is based off the canonical
     // zoneids array, but could be generated at different times. our test
     // cases should ensure they're in sync, but warn of a discrepancy
