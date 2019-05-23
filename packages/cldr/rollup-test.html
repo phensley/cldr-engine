@@ -9,6 +9,9 @@
   <script src="./dist/cldrengine.umd.js"></script>
 </head>
 <body>
+
+<div id="out"></div>
+
 <script>
 function asyncLoader(language) {
   const baseurl = './packs/';
@@ -22,19 +25,20 @@ function asyncLoader(language) {
   });
 };
 
+const { Decimal, DecimalConstants } = cldrengine;
 const options = { asyncLoader };
 const framework = new cldrengine.CLDRFramework(options);
 const locales = ['en', 'de', 'fr', 'es', 'zh', 'ko', 'ja'];
+const n = new Decimal('1e5').multiply(DecimalConstants.PI, { scale: 10 });
+var elem = document.getElementById('out');
+elem.innerHTML = 'Input: ' + n.toString() + '<br>';
 for (let i = 0; i < locales.length; i++) {
   const id = locales[i];
   framework.getAsync(id).then(function(cldr) {
-    const s = cldr.Numbers.formatDecimal('15133.2553559999', { maximumFractionDigits: 2 });
-    var elem = document.getElementById('out');
+    const s = cldr.Numbers.formatDecimal(n, { maximumFractionDigits: 2 });
     elem.innerHTML += id + ': ' + s + '<br>';
   });
 }
 </script>
-
-<div id="out"></div>
 </body>
 </html>
