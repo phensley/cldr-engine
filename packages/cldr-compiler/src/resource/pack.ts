@@ -1,5 +1,4 @@
 import { LanguageResolver, LanguageTag, Locale } from '@phensley/cldr-core';
-import { vuintEncode, z85Encode } from '@phensley/cldr-utils';
 import { getOther } from '../cldr';
 
 // Index default content for each language and language+script combination.
@@ -183,7 +182,7 @@ export class ResourcePack {
     // Pack all regions together with their exception indices.
     let defaultRegion = '';
     const regions = layers.map(curr => {
-      const idx = z85Encode(vuintEncode(curr.index));
+      const idx = curr.index.join(' ');
 
       let id = curr.tag.region();
       if (curr.isDefault) {

@@ -1,5 +1,3 @@
-import { vuintDecode, z85Decode } from '@phensley/cldr-utils';
-
 import { LanguageResolver, LanguageTag } from '../locale';
 import { Bundle, ExceptionIndex, StringBundle } from './bundle';
 
@@ -45,7 +43,7 @@ export class PackScript {
       return undefined;
     }
 
-    const decoded = vuintDecode(z85Decode(raw));
+    const decoded = raw ? raw.split(' ').map(Number) : [];
     const index: ExceptionIndex = {};
     for (let i = 0; i < decoded.length; i += 2) {
       const k = decoded[i];
