@@ -1,7 +1,7 @@
 import { CurrencyType } from '@phensley/cldr-schema';
 import { currencyFractionsRaw, currencyRegionsRaw } from './autogen.currencies';
 import { CurrencyFractions } from '../../common';
-import { stringToObject } from '../../utils/string';
+import { numarray, stringToObject } from '../../utils/string';
 
 type CurrencyFractionMap = { [x: string]: CurrencyFractions };
 
@@ -10,7 +10,7 @@ const currencyFractions = ((): CurrencyFractionMap => {
   currencyFractionsRaw.split('|').forEach(r => {
     const parts = r.split(':');
     const code = parts[0];
-    const values = parts[1].split(' ').map(Number);
+    const values = numarray(parts[1]);
     map[code] = {
       digits: values[0],
       rounding: values[1],

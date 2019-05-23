@@ -18,6 +18,8 @@ export interface Tz {
   zoneIds(): string[];
 }
 
+const numarray = (s: string) => s ? s.split(' ').map(Number) : [];
+
 export class TzImpl {
 
   /** Mapping of canonical time zone ids to index */
@@ -72,7 +74,7 @@ export class TzImpl {
       addlink(alias, id);
     });
 
-    this.untilindex = raw.index.split(' ').map(Number);
+    this.untilindex = numarray(raw.index);
     this.rawzoneinfo = raw.zoneinfo;
     this.zonerecords = new Array(raw.zoneinfo.length);
 
@@ -175,7 +177,7 @@ class ZoneRecord {
 
   constructor(raw: string, index: number[]) {
     const [ _info, _types, _untils ] = raw.split('\t');
-    const untils = _untils ? _untils.split(' ').map(Number) : [];
+    const untils = numarray(_untils);
     const types = _types ? _types.split('').map(t => TYPES[t]) : [];
 
     // Decode initial until and the deltas

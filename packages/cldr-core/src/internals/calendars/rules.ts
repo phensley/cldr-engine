@@ -14,7 +14,7 @@ interface Rule {
 const parseRule = (raw: string): Rule => {
   const parts = raw.split('|');
   const minutes = numarray(parts[1]);
-  const keys = parts[0].split(' ').map(s => dayPeriodKeys[Number(s)]);
+  const keys = numarray(parts[0]).map(n => dayPeriodKeys[n]);
   return { keys, minutes };
 };
 

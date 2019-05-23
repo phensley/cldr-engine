@@ -1,5 +1,6 @@
 import { LanguageResolver, LanguageTag } from '../locale';
 import { Bundle, ExceptionIndex, StringBundle } from './bundle';
+import { numarray } from '../utils/string';
 
 const DELIMITER = '\t';
 
@@ -43,7 +44,7 @@ export class PackScript {
       return undefined;
     }
 
-    const decoded = raw ? raw.split(' ').map(Number) : [];
+    const decoded = numarray(raw);
     const index: ExceptionIndex = {};
     for (let i = 0; i < decoded.length; i += 2) {
       const k = decoded[i];
