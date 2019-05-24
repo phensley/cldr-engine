@@ -25,10 +25,7 @@
     "clean": "rimraf ./lib ./lib-es ./.scratch",
     "clean:full": "yarn clean && rimraf ./node_modules",
     "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
-    "data": "./bin/tztool data -t 2018i",
     "generate": "./bin/tztool generate -o ./src/autogen.zonedata.ts",
-    "generate:real": "./bin/tztool generate -o ./src/autogen.zonedata.ts ./data/2018i.zi",
-    "generate:fake": "./bin/tztool generate -o __tests__/autogen.zonedata.ts ./data/fakezones.zi",
     "lint": "tslint -p ./tsconfig.lint.json",
     "prepublish": "yarn build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
