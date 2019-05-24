@@ -9,5 +9,5 @@ fi
 yarn
 lerna run clean
 lerna run lint
-lerna publish --force-publish=* --npm-client=npm $*
+lerna publish --exact --force-publish=* --npm-client=npm $*
 
