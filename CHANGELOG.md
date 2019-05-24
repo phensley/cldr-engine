@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [0.15.0]
 ### Fixed/Changed
- - Generate code to produce smaller gzip output. Removed z85 and variable unsigned integer encodings, which increases raw JavaScript and resource pack sizes by ~20%, but produces ~10% smaller gzip-compressed size.
+ - Generate code to produce smaller gzip output.
+ - Removed z85 and variable unsigned integer encodings. This increases uncompressed JavaScript and resource pack sizes by ~20%, but produces ~10% smaller gzip-compressed size.
  - All packages now have exact verson pins.
  - Fixed issue where `Etc/GMT+-[digit]` time zones mapped to the `GMT` metazone.
 
