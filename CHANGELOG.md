@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.15.0]
+### Fixed/Changed
+ - Generate code to produce smaller gzip output. Removed z85 and variable unsigned integer encodings, which increases raw JavaScript and resource pack sizes by ~20%, but produces ~10% smaller gzip-compressed size.
+ - All packages now have exact verson pins.
+ - Fixed issue where `Etc/GMT+-[digit]` time zones mapped to the `GMT` metazone.
+
 ## [0.14.8]
 ### Fixed/Changed
  - Alter how `@phensley/cldr` default schema configuration is initialized.
@@ -141,6 +147,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.15.0]: https://github.com/phensley/cldr-engine/compare/v0.14.8...v0.15.0
 [0.14.8]: https://github.com/phensley/cldr-engine/compare/v0.14.6...v0.14.8
 [0.14.6]: https://github.com/phensley/cldr-engine/compare/v0.14.5...v0.14.6
 [0.14.5]: https://github.com/phensley/cldr-engine/compare/v0.14.4...v0.14.5
