@@ -139,7 +139,7 @@ const buildMetaZones2 = (data: any): Metazones => {
       const [ mzid, from ] = range;
       const offset = metazoneIndex.add(mzid);
       offsets.push(offset);
-      untils.push(from);
+      untils.push(from === -1 ? from : from / 1000);
     });
 
     const end = offsets.length;
