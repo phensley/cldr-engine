@@ -1,41 +1,83 @@
-#!/bin/bash
+#!/usr/bin/env python
 
-# show stats for generated javascript
+import gzip, os, re, sys, zlib
+from os.path import abspath, dirname, isdir, join, relpath
+from subprocess import Popen, PIPE
 
-# provides an estimate for final bundle size for each package
-# and targets for further code size reduction
+import brotli
 
-CWD=$(cd `dirname $0`; pwd)
+CWD = dirname(abspath(__file__))
+TOP = join(CWD, '..')
+PKG = join(TOP, 'packages')
+PKGS = os.listdir(PKG)
 
-cd $CWD/..
-DIRS=`ls -1 packages|grep -v compiler`
+UGLIFYJS = join(TOP, 'node_modules/.bin/uglifyjs')
+RE_LANGS = re.compile('^(JavaScript|JSON)')
 
-TMP=./temp
-mkdir -p $TMP
+def run(cmd):
+    p = Popen(cmd, stdout=PIPE)
+    out, _ = p.communicate()
+    return out
 
-for d in $DIRS ; do
-    echo "Package: $d"
-    echo
+def cloc(path):
+    out = run(['cloc', path]).split('\n')
+    return [r for r in out if RE_LANGS.match(r)]
 
-    cloc packages/$d/lib | egrep -e '^(JavaScript|JSON)'
-    echo
+def uglify(paths):
+    if isinstance(paths, (str, unicode)):
+        paths = [paths]
+    raw = run([UGLIFYJS] + paths)
+    z = zlib.compress(raw, 9)
+    br = brotli.compress(raw)
+    return (len(raw), len(z), len(br))
 
-    gfind packages/$d/lib \( -name '*.js' -or -name '*.json' \) -printf '%10s  %P\n' |sort -nr
-    echo
-    
-    echo -n '            uglified size:  '
-    uglifyjs -o $TMP/$d.js `gfind packages/$d/lib -name '*.js'|xargs`
-    wc -c $TMP/$d.js
+def listfiles(top, cond):
+    r = []
+    for root, dirs, names in os.walk(top):
+        for name in names:
+            if cond(name):
+                r.append(join(root, name))
+    return r
 
-    echo -n '   uglified and gzip size:  '
-    gzip -c -9 $TMP/$d.js >$TMP/$d.js.gz
-    wc -c $TMP/$d.js.gz
+def uglifyit(paths):
+    raw, z, br = uglify(paths)
+    print '           uglify: %d' % raw
+    print '    uglify + gzip: %d' % z
+    print '  uglify + brotli: %d' % br
 
-    echo -n ' uglified and brotli size:  '
-    brotli -c $TMP/$d.js >$TMP/$d.js.br
-    wc -c $TMP/$d.js.br
+def main():
+    for pkg in sorted(PKGS):
+        pkgpath = abspath(join(PKG, pkg))
+        if not isdir(pkgpath) or pkg == 'cldr-compiler':
+            continue
+        print 'Package: %s\n' % pkg
+        libs = join(pkgpath, 'lib')
+#        for line in cloc(libs):
+#            print line
 
-    echo
-    echo '--------------------------------------------------------------------'
-done
+        jsfiles = listfiles(libs, lambda f: f.endswith('.js'))
+        if jsfiles:
+            uglifyit(jsfiles)
+            print
+
+            # sort by gzip size descending
+            files = sorted(((uglify(p), p) for p in jsfiles),
+                cmp=lambda a, b: cmp(a[0][1], b[0][1]), reverse=1)
+            for f in files:
+                data, p = f
+                raw, z, _ = data
+                relp = relpath(p, libs)
+                print '  %6d %6d  %s' % (raw, z, relp)
+            print
+
+        print '-'*74
+        print
+
+    rollup = join(TOP, 'packages/cldr/dist/cldrengine.umd.js')
+    raw, z, br = uglify(rollup)
+    print 'Rollup: cldrengine.umd.js\n'
+    uglifyit(rollup)
+
+if __name__ == '__main__':
+    main()
 
