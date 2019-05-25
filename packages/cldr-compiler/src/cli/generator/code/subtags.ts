@@ -33,6 +33,19 @@ const pruneRegion = (m: { [x: string]: string }): void =>
     }
   });
 
+/**
+ * Omit keys whose value is empty.
+ */
+const filterSubtags = (likely: any) => {
+  return Object.keys(likely).reduce((p, key) => {
+    const val = likely[key];
+    if (val) {
+      p[key] = val;
+    }
+    return p;
+  }, {} as any);
+};
+
 export const getSubtags = (_data: any): Code[] => {
   const supplemental = getSupplemental();
   const ianaSubtags = getIanaSubtags();
@@ -44,7 +57,7 @@ export const getSubtags = (_data: any): Code[] => {
   }, {}));
 
   pruneRegion(supplemental.LikelySubtags);
-  const likely = objectToString(supplemental.LikelySubtags);
+  const likely = objectToString(filterSubtags(supplemental.LikelySubtags));
 
   let code = HEADER + NOLINT_MAXLINE;
   code += `export const grandfatheredRaw = '${grandfathered}';\n\n`;
