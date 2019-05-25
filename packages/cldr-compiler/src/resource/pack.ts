@@ -182,7 +182,7 @@ export class ResourcePack {
     // Pack all regions together with their exception indices.
     let defaultRegion = '';
     const regions = layers.map(curr => {
-      const idx = curr.index.join(' ');
+      const idx = curr.index.map(n => n.toString(36)).join(' ');
 
       let id = curr.tag.region();
       if (curr.isDefault) {

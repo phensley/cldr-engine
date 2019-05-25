@@ -44,7 +44,7 @@ export class PackScript {
       return undefined;
     }
 
-    const decoded = numarray(raw);
+    const decoded = numarray(raw, 36);
     const index: ExceptionIndex = {};
     for (let i = 0; i < decoded.length; i += 2) {
       const k = decoded[i];
