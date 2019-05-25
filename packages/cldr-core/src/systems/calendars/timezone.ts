@@ -82,7 +82,7 @@ class Metazones {
     this.metazoneids = raw.metazoneids;
     const index = numarray(raw.index);
     const offsets = numarray(raw.offsets);
-    const untils = numarray(raw.untils).map(n => n === -1 ? n : n * 1000);
+    const untils = numarray(raw.untils, 36).map(n => n === -1 ? n : n * 1000);
 
     for (let i = 0; i < index.length; i += 2) {
       const s = index[i];

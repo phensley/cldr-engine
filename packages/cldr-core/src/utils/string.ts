@@ -1,4 +1,5 @@
-export const numarray = (s: string) => s ? s.split(' ').map(Number) : [];
+export const numarray = (s: string, base: number = 10) =>
+  s ? s.split(' ').map(n => parseInt(n, base)) : [];
 
 export const stringToObject = (raw: string, d1: string, d2: string): { [x: string]: string } => {
   const o: { [x: string]: string } = {};

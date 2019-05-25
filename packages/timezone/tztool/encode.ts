@@ -84,7 +84,7 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
 
     zoneinfo.push(`    '${localtime}\\t` +
       `${types.join('')}\\t` +
-      `${untils.join(' ')}'`
+      `${untils.map(n => n.toString(36)).join(' ')}'`
     );
   }
 
@@ -100,7 +100,7 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
 
   data += `  links: '${linkindex.join('|')}',\n\n`;
 
-  data += `  index: '${untilkeys.join(' ')}',\n\n`;
+  data += `  index: '${untilkeys.map(n => n.toString(36)).join(' ')}',\n\n`;
 
   data += `  zoneinfo: [\n`;
   data += zoneinfo.join(',\n');

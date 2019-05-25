@@ -152,7 +152,7 @@ const buildMetaZones2 = (data: any): Metazones => {
     metazoneids: metazoneIndex.array.join('\\t'),
     index: index.join(' '),
     offsets: offsets.join(' '),
-    untils: untils.join(' ')
+    untils: untils.map(n => n.toString(36)).join(' ')
   };
 };
 

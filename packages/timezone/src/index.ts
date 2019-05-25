@@ -18,7 +18,7 @@ export interface Tz {
   zoneIds(): string[];
 }
 
-const numarray = (s: string) => s ? s.split(' ').map(Number) : [];
+const numarray = (s: string) => s ? s.split(' ').map(n => parseInt(n, 36)) : [];
 
 export class TzImpl {
 
