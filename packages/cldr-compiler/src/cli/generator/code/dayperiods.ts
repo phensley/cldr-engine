@@ -129,7 +129,8 @@ export const getDayPeriods = (_data: any): Code[] => {
 
     untils = expand(untils);
 
-    const times = untils.map(u => u.type === 'exact' ? u.at : u.from).join(' ');
+    const times = untils.map(u => u.type === 'exact' ? u.at : u.from)
+      .map(n => n.toString(36)).join(' ');
     const keys = untils.map(u => INDEX[u.key]);
     const value = `${keys.join(' ')}|${times}`;
 
