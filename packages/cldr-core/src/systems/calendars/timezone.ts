@@ -80,8 +80,8 @@ class Metazones {
 
   constructor(raw: any) {
     this.metazoneids = raw.metazoneids;
-    const index = numarray(raw.index);
-    const offsets = numarray(raw.offsets);
+    const index = numarray(raw.index, 36);
+    const offsets = numarray(raw.offsets, 36);
     const untils = numarray(raw.untils, 36).map(n => n === -1 ? n : n * 1000);
 
     for (let i = 0; i < index.length; i += 2) {
@@ -96,7 +96,7 @@ class Metazones {
 
     // mapping of zoneid to metazone records
     const zoneids = TZ.zoneIds();
-    const zoneindex = numarray(raw.zoneindex);
+    const zoneindex = numarray(raw.zoneindex, 36);
 
     // Mapping of tzdb id back to cldr stable id used for schema lookups
     raw.stableids.split('|').forEach((d: string) => {

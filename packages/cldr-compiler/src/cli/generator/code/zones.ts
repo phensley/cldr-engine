@@ -88,6 +88,8 @@ const IGNORED_ZONES = new Set<string>([
   'Etc/GMT-14',
 ]);
 
+const base36 = (n: number) => n.toString(36);
+
 const buildMetaZones2 = (data: any): Metazones => {
   const metazoneIndex = new IdArray();
 
@@ -148,11 +150,11 @@ const buildMetaZones2 = (data: any): Metazones => {
   });
 
   return {
-    zoneindex: zoneindex.join(' '),
+    zoneindex: zoneindex.map(base36).join(' '),
     metazoneids: metazoneIndex.array.join('\\t'),
-    index: index.join(' '),
-    offsets: offsets.join(' '),
-    untils: untils.map(n => n.toString(36)).join(' ')
+    index: index.map(base36).join(' '),
+    offsets: offsets.map(base36).join(' '),
+    untils: untils.map(base36).join(' ')
   };
 };
 

@@ -212,7 +212,7 @@ class ZoneRecord {
     return {
       abbr,
       dst: Number(_dst),
-      offset: Number(_offset) * 1000
+      offset: parseInt(_offset, 36) * 1000
     };
   }
 

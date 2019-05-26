@@ -73,7 +73,7 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
 
     // Format:  <zoneabbr>:<dst flag>:<utc offset>
     const localtime = info.localtimetype.map(
-      t => `${info.zoneabbr(t.idx)}:${t.dst}:${t.utoff}`).join('|');
+      t => `${info.zoneabbr(t.idx)}:${t.dst}:${t.utoff.toString(36)}`).join('|');
 
     const types = info.transtypes.map((t: number) => TYPES[t]);
     for (const t of types) {
