@@ -374,7 +374,7 @@ const numberSystemInfo = (o: any): any => {
   const r: any = {};
 
   // Get unique numbering system keys in this locale
-  const systems = new Set();
+  const systems = new Set<string>();
   Object.keys(o).forEach(k => {
     if (k.startsWith('decimalFormats-numberSystem')) {
       const system = k.split('-')[2];

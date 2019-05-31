@@ -6,7 +6,7 @@ const buildMapSet = (raw: string): MapSet => {
   const res: MapSet = {};
   raw.split('|').forEach(e => {
     const [ k, vs ] = e.split(':');
-    const set = new Set();
+    const set = new Set<string>();
     vs.split('').forEach(v => set.add(v));
     res[k] = set;
   });

@@ -19,14 +19,7 @@ const defaultOptions: CLDROptions = {
   patternCacheSize: 50
 };
 
-type OptKey = keyof CLDROptions;
-
 export const getCLDR = (options: CLDROptions = defaultOptions): CLDRFramework => {
-  const merged: CLDROptions = {};
-  const keys: OptKey[] = Object.keys(defaultOptions) as OptKey[];
-  for (const key of keys) {
-    const val = options[key];
-    merged[key] = val === undefined ? defaultOptions[key] : val;
-  }
+  const merged = Object.assign({}, defaultOptions, options);
   return new CLDRFramework(merged);
 };

@@ -38,29 +38,29 @@ export const getSymbols = (): any => {
   const locales = availableLocales();
 
   // Containers for extracted values.
-  const timeZoneIds = new Set();
-  const metaZoneIds = new Set();
-  const contextTransforms = new Set();
-  const currencies = new Set();
-  const languages = new Set();
-  const scripts = new Set();
-  const territories = new Set();
-  const unitsRaw = new Set();
+  const timeZoneIds = new Set<string>();
+  const metaZoneIds = new Set<string>();
+  const contextTransforms = new Set<string>();
+  const currencies = new Set<string>();
+  const languages = new Set<string>();
+  const scripts = new Set<string>();
+  const territories = new Set<string>();
+  const unitsRaw = new Set<string>();
 
-  const gregorianAvailableFormats = new Set();
-  const buddhistAvailableFormats = new Set();
-  const persianAvailableFormats = new Set();
-  const japaneseAvailableFormats = new Set();
+  const gregorianAvailableFormats = new Set<string>();
+  const buddhistAvailableFormats = new Set<string>();
+  const persianAvailableFormats = new Set<string>();
+  const japaneseAvailableFormats = new Set<string>();
 
-  const gregorianPluralFormats = new Set();
-  const buddhistPluralFormats = new Set();
-  const persianPluralFormats = new Set();
-  const japanesePluralFormats = new Set();
+  const gregorianPluralFormats = new Set<string>();
+  const buddhistPluralFormats = new Set<string>();
+  const persianPluralFormats = new Set<string>();
+  const japanesePluralFormats = new Set<string>();
 
-  const gregorianIntervalFormats = new Set();
-  const buddhistIntervalFormats = new Set();
-  const persianIntervalFormats = new Set();
-  const japaneseIntervalFormats = new Set();
+  const gregorianIntervalFormats = new Set<string>();
+  const buddhistIntervalFormats = new Set<string>();
+  const persianIntervalFormats = new Set<string>();
+  const japaneseIntervalFormats = new Set<string>();
 
   locales.forEach(lang => {
     console.warn(`Scanning '${lang}'..`);
