@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.15.2]
+### Fixed/Changed
+ - Typescript 3.5.1
+ - Further optimization of output for smaller gzip sizes.
+ - Use base-36 encodings for resource pack exception arrays, day period minutes, timezone offsets and indices.
+
 ## [0.15.1]
 ### Fixed/Changed
  - Further optimization of output for smaller gzip sizes.
@@ -152,6 +158,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.15.2]: https://github.com/phensley/cldr-engine/compare/v0.15.1...v0.15.2
 [0.15.1]: https://github.com/phensley/cldr-engine/compare/v0.15.0...v0.15.1
 [0.15.0]: https://github.com/phensley/cldr-engine/compare/v0.14.8...v0.15.0
 [0.14.8]: https://github.com/phensley/cldr-engine/compare/v0.14.6...v0.14.8
