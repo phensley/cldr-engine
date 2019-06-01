@@ -29,6 +29,15 @@ const getTZC = (offset: number): TZC => {
 
 const widthKey1 = (w: number) => w === 5 ? 'narrow' : w === 4 ? 'wide' : 'abbreviated';
 
+/**
+ * Format a number using the main numbering system, with the given minimum integers.
+ */
+const _num = <T extends CalendarDate>(ctx: CalendarContext<T>, n: number, minInt: number): string =>
+  ctx.system.formatString(n, false, minInt);
+
+const _year = <T extends CalendarDate>(ctx: CalendarContext<T>, year: number, width: number): string =>
+  _num(ctx, width === 2 ? year % 100 : year, width);
+
 export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFormatter<T> {
 
   readonly wrapper: WrapperInternals;
@@ -56,47 +65,61 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       let type = '';
       let value = '';
 
+      // Date field symbol table
+      // https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+
       switch (n[0]) {
 
+        // ERA
         case 'G':
           type = 'era';
-          value = this.era(ctx, w);
+          value = this.cal.eras.get(ctx.bundle,
+            w ===  5 ? 'narrow' : w === 4 ? 'names' : 'abbr', `${ctx.date.era()}`);
           if (w !== 5) {
             field = w === 4 ? 'era-name' : 'era-abbr';
           }
           break;
 
+        // YEAR
         case 'y':
           type = 'year';
-          value = this.year(ctx, w);
+          value = _year(ctx, ctx.date.year(), w);
           break;
 
+        // YEAR IN WEEK OF YEAR
         case 'Y':
           type = 'year';
-          value = this.yearOfWeekYear(ctx, w);
+          value = _year(ctx, ctx.date.yearOfWeekOfYear(), w);
           break;
 
+        // EXTENDED YEAR
         case 'u':
           type = 'year';
-          value = this.extendedYear(ctx, w);
+          value = _num(ctx, ctx.date.extendedYear(), w);
           break;
 
+        // CYCLIC YEAR
         case 'U':
           type = 'cyclic-year';
-          value = this.cyclicYear(ctx, w);
+          // TODO: support chinese cyclical years
+          value = '';
           break;
 
+        // RELATED YEAR
         case 'r':
           type = 'related-year';
-          value = this.relatedYear(ctx, w);
+          // Note: this is always rendered using 'latn' digits
+          value = ctx.latnSystem.formatString(ctx.date.relatedYear(), false, w);
           break;
 
+        // QUARTER
         case 'Q':
         case 'q':
           type = 'quarter';
           value = this.quarter(ctx, n);
           break;
 
+        // MONTH FORMAT
         case 'M':
           type = 'month';
           value = this.month(ctx, n);
@@ -108,6 +131,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
           }
           break;
 
+        // MONTH STANDALONE
         case 'L':
           type = 'month';
           value = this.month(ctx, n);
@@ -121,78 +145,92 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
         // 'l' - deprecated
 
+        // WEEK OF WEEK YEAR
         case 'w':
           type = 'week';
-          value = this.weekOfWeekYear(ctx, n);
+          value = _num(ctx, ctx.date.weekOfYear(), min(w, 2));
           break;
 
+        // WEEK OF MONTH
         case 'W':
           type = 'week';
-          value = this.weekOfMonth(ctx);
+          value = _num(ctx, ctx.date.weekOfMonth(), 1);
           break;
 
+        // DAY OF MONTH
         case 'd':
           type = 'day';
-          value = this.dayOfMonth(ctx, n);
+          value = _num(ctx, ctx.date.dayOfMonth(), min(w, 2));
           break;
 
+        // DAY OF YEAR
         case 'D':
           type = 'day';
-          value = this.dayOfYear(ctx, n);
+          value = _num(ctx, ctx.date.dayOfYear(), min(w, 3));
           break;
 
+        // DAY OF WEEK IN MONTH
         case 'F':
           type = 'day';
-          value = this.dayOfWeekInMonth(ctx);
+          value = _num(ctx, ctx.date.dayOfWeekInMonth(), 1);
           break;
 
+        // MODIFIED JULIAN DAY
         case 'g':
           type = 'mjulian-day';
-          value = this.modifiedJulianDay(ctx, n);
+          value = _num(ctx, ctx.date.modifiedJulianDay(), w);
           break;
 
+        // WEEKDAY FORMAT
         case 'E':
           type = 'weekday';
-          value = this.weekday(ctx, n);
+          value = this._weekday(ctx.bundle, this.cal.format.weekdays, ctx.date, w);
           if (w !== 5) {
             field = 'day-format-except-narrow';
           }
           break;
 
+        // WEEKDAY LOCAL
         case 'e':
           type = 'weekday';
-          value = this.weekdayLocal(ctx, n);
+          value = this._weekdayLocal(ctx, n, false);
           break;
 
+        // WEEKDAY LOCAL STANDALONE
         case 'c':
           type = 'weekday';
-          value = this.weekdayLocalStandalone(ctx, n);
+          value = this._weekdayLocal(ctx, n, true);
           if (w !== 5) {
             field = 'day-standalone-except-narrow';
           }
           break;
 
+        // DAY PERIOD AM/PM
         case 'a':
           type = 'dayperiod';
-          value = this.dayPeriod(ctx, n);
+          value = this.cal.format.dayPeriods.get(ctx.bundle, widthKey1(w), ctx.date.hourOfDay() < 12 ? 'am' : 'pm');
           break;
 
+        // DAY PERIOD EXTENDED
         case 'b':
           type = 'dayperiod';
           value = this.dayPeriodExt(ctx, n);
           break;
 
+        // DAY PERIOD FLEXIBLE
         case 'B':
           type = 'dayperiod';
           value = this.dayPeriodFlex(ctx, n);
           break;
 
+        // HOUR 1-12 and 0-23
         case 'h':
         case 'H':
           type = 'hour';
           value = this.hour(ctx, n);
           break;
 
+        // HOUR 0-11 and 1-24
         case 'K':
         case 'k':
           type = 'hour';
@@ -201,51 +239,61 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
         // 'j', 'J', 'C' - input skeleton symbols, not present in formats
 
+        // MINUTE
         case 'm':
           type = 'minute';
-          value = this.minute(ctx, n);
+          value = _num(ctx, ctx.date.minute(), min(w, 2));
           break;
 
+        // SECOND
         case 's':
           type = 'second';
-          value = this.second(ctx, n);
+          value = _num(ctx, ctx.date.second(), min(w, 2));
           break;
 
+        // FRACTIONAL SECOND
         case 'S':
           type = 'fracsec';
           value = this.fractionalSecond(ctx, n);
           break;
 
+        // MILLISECONDS IN DAY
         case 'A':
           type = 'millis-in-day';
-          value = this.millisInDay(ctx, n);
+          value = _num(ctx, ctx.date.millisecondsInDay(), w);
           break;
 
+        // TIMEZONE SPECIFIC NON-LOCATION
         case 'z':
           type = 'timezone';
           value = this.timezone_z(ctx, n);
           break;
 
+        // TIMEZONE ISO-8601 EXTENDED
         case 'Z':
           type = 'timezone';
           value = this.timezone_Z(ctx, n);
           break;
 
+        // TIMEZONE LOCALIZED
         case 'O':
           type = 'timezone';
           value = this.timezone_O(ctx, n);
           break;
 
+        // TIMEZONE GENERIC NON-LOCATION
         case 'v':
           type = 'timezone';
           value = this.timezone_v(ctx, n);
           break;
 
+        // TIMEZONE ID, EXEMPLAR CITY, GENERIC LOCATION
         case 'V':
           type = 'timezone';
           value = this.timezone_V(ctx, n);
           break;
 
+        // TIMEZONE ISO-8601 BASIC, EXTENDED
         case 'X':
         case 'x':
           type = 'timezone';
@@ -263,55 +311,11 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     }
   }
 
-  /**
-   * Format a number using the main numbering system, with the given minimum integers.
-   */
-  _num(ctx: CalendarContext<T>, n: number, minInt: number): string {
-    return ctx.system.formatString(n, false, minInt);
-  }
-
-  era(ctx: CalendarContext<T>, width: number): string {
-    const key1 = width ===  5 ? 'narrow' : width === 4 ? 'names' : 'abbr';
-    return this.cal.eras.get(ctx.bundle, key1, `${ctx.date.era()}`);
-  }
-
-  year(ctx: CalendarContext<T>, width: number): string {
-    return this._year(ctx, ctx.date.year(), width);
-  }
-
-  yearOfWeekYear(ctx: CalendarContext<T>, width: number): string {
-    return this._year(ctx, ctx.date.yearOfWeekOfYear(), width);
-  }
-
-  extendedYear(ctx: CalendarContext<T>, width: number): string {
-    return this._num(ctx, ctx.date.extendedYear(), width);
-  }
-
-  /**
-   * Cyclic year.
-   */
-  cyclicYear(_ctx: CalendarContext<T>, _width: number): string {
-    // TODO: Supported in Chinese calendar.
-    return '';
-  }
-
-  /**
-   * Related Gregorian year.
-   */
-  relatedYear(ctx: CalendarContext<T>, width: number): string {
-    // Note: this is always rendered using 'latn' digits
-    return ctx.latnSystem.formatString(ctx.date.relatedYear(), false, width);
-  }
-
-  _year(ctx: CalendarContext<T>, year: number, width: number): string {
-    return this._num(ctx, width === 2 ? year % 100 : year, width);
-  }
-
   _formatQuarterOrMonth(ctx: CalendarContext<T>,
       format: Vector2Arrow<string, string>, value: number, width: number): string {
     return width >= 3 ?
       format.get(ctx.bundle, widthKey1(width), String(value)) :
-      this._num(ctx, value, width);
+      _num(ctx, value, width);
   }
 
   quarter(ctx: CalendarContext<T>, node: [string, number]): string {
@@ -325,42 +329,6 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
   month(ctx: CalendarContext<T>, node: [string, number]): string {
     const format = node[0] === 'M' ? this.cal.format : this.cal.standAlone;
     return this._formatQuarterOrMonth(ctx, format.months, ctx.date.month(), node[1]);
-  }
-
-  weekOfWeekYear(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._num(ctx, ctx.date.weekOfYear(), min(node[1], 2));
-  }
-
-  weekOfMonth(ctx: CalendarContext<T>): string {
-    return this._num(ctx, ctx.date.weekOfMonth(), 1);
-  }
-
-  dayOfMonth(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._num(ctx, ctx.date.dayOfMonth(), min(node[1], 2));
-  }
-
-  dayOfYear(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._num(ctx, ctx.date.dayOfYear(), min(node[1], 3));
-  }
-
-  dayOfWeekInMonth(ctx: CalendarContext<T>): string {
-    return this._num(ctx, ctx.date.dayOfWeekInMonth(), 1);
-  }
-
-  modifiedJulianDay(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._num(ctx, ctx.date.modifiedJulianDay(), node[1]);
-  }
-
-  weekday(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._weekday(ctx.bundle, this.cal.format.weekdays, ctx.date, node[1]);
-  }
-
-  weekdayLocal(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._weekdayLocal(ctx, node, false);
-  }
-
-  weekdayLocalStandalone(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._weekdayLocal(ctx, node, true);
   }
 
   _weekday(bundle: Bundle, format: Vector2Arrow<string, string>, date: CalendarDate, width: number): string {
@@ -386,10 +354,6 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       width = 1;
     }
     return ctx.system.formatString(ord, false, width);
-  }
-
-  dayPeriod(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this.cal.format.dayPeriods.get(ctx.bundle, widthKey1(node[1]), ctx.date.hourOfDay() < 12 ? 'am' : 'pm');
   }
 
   dayPeriodExt(ctx: CalendarContext<T>, node: [string, number]): string {
@@ -424,7 +388,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     if (twelve && hour === 0) {
       hour = 12;
     }
-    return this._num(ctx, hour, min(node[1], 2));
+    return _num(ctx, hour, min(node[1], 2));
   }
 
   hourAlt(ctx: CalendarContext<T>, node: [string, number]): string {
@@ -434,15 +398,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     if (!twelve && hour === 0) {
       hour = 24;
     }
-    return this._num(ctx, hour, min(node[1], 2));
-  }
-
-  minute(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._num(ctx, ctx.date.minute(), min(node[1], 2));
-  }
-
-  second(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._num(ctx, ctx.date.second(), min(node[1], 2));
+    return _num(ctx, hour, min(node[1], 2));
   }
 
   fractionalSecond(ctx: CalendarContext<T>, node: [string, number]): string {
@@ -455,11 +411,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     }
     // Milliseconds always have precision of 3, so handle the cases compactly.
     const n = w === 3 ? m : (w === 2 ? (m / 10) : (m / 100)) | 0;
-    return this._num(ctx, n, node[1]);
-  }
-
-  millisInDay(ctx: CalendarContext<T>, node: [string, number]): string {
-    return this._num(ctx, ctx.date.millisecondsInDay(), node[1]);
+    return _num(ctx, n, node[1]);
   }
 
   /**
@@ -497,11 +449,11 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     if (width <= 5) {
       // TODO: use number params
       fmt += negative ? '-' : '+' ;
-      fmt += this._num(ctx, hours, 2);
+      fmt += _num(ctx, hours, 2);
       if (width === 5) {
         fmt += ':';
       }
-      fmt += this._num(ctx, minutes, 2);
+      fmt += _num(ctx, minutes, 2);
     }
     return fmt;
   }
@@ -575,12 +527,12 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     if (width >= 1 && width <= 5) {
       const zero = hours === 0 && minutes === 0;
       fmt += zero ? '+' : negative ? '-' : '+';
-      fmt += this._num(ctx, hours, 2);
+      fmt += _num(ctx, hours, 2);
       if (width === 3 || width === 5) {
         fmt += ':';
       }
       if (width !== 1 || minutes > 0) {
-        fmt += this._num(ctx, minutes, 2);
+        fmt += _num(ctx, minutes, 2);
       }
       if (field === 'X' && offset === 0) {
         fmt += 'Z';
@@ -609,9 +561,9 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       } else {
         const [field, width] = n;
         if (field === 'H') {
-          fmt += width === 1 ? this._num(ctx, hours, 1) : this._num(ctx, hours, short ? 1 : width);
+          fmt += width === 1 ? _num(ctx, hours, 1) : _num(ctx, hours, short ? 1 : width);
         } else if (field === 'm' && emitMins) {
-          fmt += this._num(ctx, minutes, width);
+          fmt += _num(ctx, minutes, width);
         }
       }
     }

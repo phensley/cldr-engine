@@ -3,7 +3,16 @@ import {
   DATE_PATTERN_CHARS
 } from '../../parsing/date';
 
-import { getFieldType, skeletonFields, C, Field, FieldType, FIELD_INDEX, FIELD_TYPES } from './fields';
+import {
+  getFieldType,
+  skeletonFields,
+  EXTRA_FIELD,
+  Field,
+  FieldType,
+  FIELD_INDEX,
+  FIELD_TYPES,
+  MISSING_FIELD
+} from './fields';
 
 export interface SkeletonField {
   input: string;
@@ -160,7 +169,7 @@ export class DateSkeletonParser {
       if (hour.field === 'h' || hour.field === 'K') {
         if (!dayPeriod) {
           // Add the default day period
-          const idx = FIELD_INDEX['a'][0];
+          const idx = FIELD_INDEX.get('a')![0];
           const row = FIELD_TYPES[idx];
           s.type[Field.DAYPERIOD] = row[2];
           s.info[Field.DAYPERIOD] = { input: 'a', field: 'a', width: row[3], repeat: row[3] };
@@ -330,9 +339,9 @@ export class DatePatternMatcher {
         continue;
       }
       if (atype === 0) {
-        result += C.EXTRA_FIELD;
+        result += EXTRA_FIELD;
       } else if (btype === 0) {
-        result += C.MISSING_FIELD;
+        result += MISSING_FIELD;
       } else {
         result += Math.abs(atype - btype);
       }

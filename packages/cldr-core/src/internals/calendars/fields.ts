@@ -23,8 +23,7 @@ export const enum Field {
 export const skeletonFields = (): number[] =>
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-// Inlined constants
-export const enum C {
+const enum C {
   DELTA = 0x10,
   NUMERIC = 0x100,
   NONE = 0,
@@ -36,119 +35,130 @@ export const enum C {
   MISSING_FIELD = 0x1000,
 }
 
+// Use single letter variables in FIELD_TYPES for compactness
+const D = C.DELTA;
+const N = C.NUMERIC;
+// const E = C.NONE;
+const R = C.NARROW;
+const S = C.SHORTER;
+const T = C.SHORT;
+const L = C.LONG;
+
+export const EXTRA_FIELD = C.EXTRA_FIELD;
+export const MISSING_FIELD = C.MISSING_FIELD;
+
 export type FieldType = [string, number, number, number, number];
 
 export const FIELD_TYPES: FieldType[] = [
-  ['G', Field.ERA, C.SHORT, 1, 3],
-  ['G', Field.ERA, C.LONG, 4, 4],
-  ['G', Field.ERA, C.NARROW, 5, 5],
+  ['G', Field.ERA, /* SHORT */ T, 1, 3],
+  ['G', Field.ERA, /* LONG */ L, 4, 4],
+  ['G', Field.ERA, /* NARROW */ R, 5, 5],
 
-  ['y', Field.YEAR, C.NUMERIC, 1, 20],
-  ['Y', Field.YEAR, C.NUMERIC + C.DELTA, 1, 20],
-  ['u', Field.YEAR, C.NUMERIC + 2 * C.DELTA, 1, 20],
-  ['r', Field.YEAR, C.NUMERIC + 3 * C.DELTA, 1, 20],
-  ['U', Field.YEAR, C.SHORT, 1, 3],
-  ['U', Field.YEAR, C.LONG, 4, 4],
-  ['U', Field.YEAR, C.NARROW, 5, 5],
+  ['y', Field.YEAR, /* NUMERIC */ N, 1, 20],
+  ['Y', Field.YEAR, /* NUMERIC */ N + /* DELTA */ D, 1, 20],
+  ['u', Field.YEAR, /* NUMERIC */ N + 2 * /* DELTA */ D, 1, 20],
+  ['r', Field.YEAR, /* NUMERIC */ N + 3 * /* DELTA */ D, 1, 20],
+  ['U', Field.YEAR, /* SHORT */ T, 1, 3],
+  ['U', Field.YEAR, /* LONG */ L, 4, 4],
+  ['U', Field.YEAR, /* NARROW */ R, 5, 5],
 
-  ['Q', Field.QUARTER, C.NUMERIC, 1, 2],
-  ['Q', Field.QUARTER, C.SHORT, 3, 3],
-  ['Q', Field.QUARTER, C.LONG, 4, 4],
-  ['Q', Field.QUARTER, C.NARROW, 5, 5],
-  ['q', Field.QUARTER, C.NUMERIC + C.DELTA, 1, 2],
-  ['q', Field.QUARTER, C.SHORT - C.DELTA, 3, 3],
-  ['q', Field.QUARTER, C.LONG - C.DELTA, 4, 4],
-  ['q', Field.QUARTER, C.NARROW - C.DELTA, 5, 5],
+  ['Q', Field.QUARTER, /* NUMERIC */ N, 1, 2],
+  ['Q', Field.QUARTER, /* SHORT */ T, 3, 3],
+  ['Q', Field.QUARTER, /* LONG */ L, 4, 4],
+  ['Q', Field.QUARTER, /* NARROW */ R, 5, 5],
+  ['q', Field.QUARTER, /* NUMERIC */ N + /* DELTA */ D, 1, 2],
+  ['q', Field.QUARTER, /* SHORT */ T - /* DELTA */ D, 3, 3],
+  ['q', Field.QUARTER, /* LONG */ L - /* DELTA */ D, 4, 4],
+  ['q', Field.QUARTER, /* NARROW */ R - /* DELTA */ D, 5, 5],
 
-  ['M', Field.MONTH, C.NUMERIC, 1, 2],
-  ['M', Field.MONTH, C.SHORT, 3, 3],
-  ['M', Field.MONTH, C.LONG, 4, 4],
-  ['M', Field.MONTH, C.NARROW, 5, 5],
-  ['L', Field.MONTH, C.NUMERIC + C.DELTA, 1, 2],
-  ['L', Field.MONTH, C.SHORT - C.DELTA, 3, 3],
-  ['L', Field.MONTH, C.LONG - C.DELTA, 4, 4],
-  ['L', Field.MONTH, C.NARROW - C.DELTA, 5, 5],
-  ['l', Field.MONTH, C.NUMERIC + C.DELTA, 1, 1],
+  ['M', Field.MONTH, /* NUMERIC */ N, 1, 2],
+  ['M', Field.MONTH, /* SHORT */ T, 3, 3],
+  ['M', Field.MONTH, /* LONG */ L, 4, 4],
+  ['M', Field.MONTH, /* NARROW */ R, 5, 5],
+  ['L', Field.MONTH, /* NUMERIC */ N + /* DELTA */ D, 1, 2],
+  ['L', Field.MONTH, /* SHORT */ T - /* DELTA */ D, 3, 3],
+  ['L', Field.MONTH, /* LONG */ L - /* DELTA */ D, 4, 4],
+  ['L', Field.MONTH, /* NARROW */ R - /* DELTA */ D, 5, 5],
+  ['l', Field.MONTH, /* NUMERIC */ N + /* DELTA */ D, 1, 1],
 
-  ['w', Field.WEEK_OF_YEAR, C.NUMERIC, 1, 2],
+  ['w', Field.WEEK_OF_YEAR, /* NUMERIC */ N, 1, 2],
 
-  ['W', Field.WEEK_OF_MONTH, C.NUMERIC, 1, 1],
+  ['W', Field.WEEK_OF_MONTH, /* NUMERIC */ N, 1, 1],
 
-  ['E', Field.WEEKDAY, C.SHORT, 1, 3],
-  ['E', Field.WEEKDAY, C.LONG, 4, 4],
-  ['E', Field.WEEKDAY, C.NARROW, 5, 5],
-  ['E', Field.WEEKDAY, C.SHORTER, 6, 6],
-  ['c', Field.WEEKDAY, C.NUMERIC + 2 * C.DELTA, 1, 2],
-  ['c', Field.WEEKDAY, C.SHORT - 2 * C.DELTA, 3, 3],
-  ['c', Field.WEEKDAY, C.LONG - 2 * C.DELTA, 4, 4],
-  ['c', Field.WEEKDAY, C.NARROW - 2 * C.DELTA, 5, 5],
-  ['c', Field.WEEKDAY, C.SHORTER - 2 * C.DELTA, 6, 6],
-  ['e', Field.WEEKDAY, C.NUMERIC + C.DELTA, 1, 2],
-  ['e', Field.WEEKDAY, C.SHORT - C.DELTA, 3, 3],
-  ['e', Field.WEEKDAY, C.LONG - C.DELTA, 4, 4],
-  ['e', Field.WEEKDAY, C.NARROW - C.DELTA, 5, 5],
-  ['e', Field.WEEKDAY, C.SHORTER - C.DELTA, 6, 6],
+  ['E', Field.WEEKDAY, /* SHORT */ T, 1, 3],
+  ['E', Field.WEEKDAY, /* LONG */ L, 4, 4],
+  ['E', Field.WEEKDAY, /* NARROW */ R, 5, 5],
+  ['E', Field.WEEKDAY, /* SHORTER */ S, 6, 6],
+  ['c', Field.WEEKDAY, /* NUMERIC */ N + 2 * /* DELTA */ D, 1, 2],
+  ['c', Field.WEEKDAY, /* SHORT */ T - 2 * /* DELTA */ D, 3, 3],
+  ['c', Field.WEEKDAY, /* LONG */ L - 2 * /* DELTA */ D, 4, 4],
+  ['c', Field.WEEKDAY, /* NARROW */ R - 2 * /* DELTA */ D, 5, 5],
+  ['c', Field.WEEKDAY, /* SHORTER */ S - 2 * /* DELTA */ D, 6, 6],
+  ['e', Field.WEEKDAY, /* NUMERIC */ N + /* DELTA */ D, 1, 2],
+  ['e', Field.WEEKDAY, /* SHORT */ T - /* DELTA */ D, 3, 3],
+  ['e', Field.WEEKDAY, /* LONG */ L - /* DELTA */ D, 4, 4],
+  ['e', Field.WEEKDAY, /* NARROW */ R - /* DELTA */ D, 5, 5],
+  ['e', Field.WEEKDAY, /* SHORTER */ S - /* DELTA */ D, 6, 6],
 
-  ['d', Field.DAY, C.NUMERIC, 1, 2],
-  ['g', Field.DAY, C.NUMERIC + C.DELTA, 1, 20],
+  ['d', Field.DAY, /* NUMERIC */ N, 1, 2],
+  ['g', Field.DAY, /* NUMERIC */ N + /* DELTA */ D, 1, 20],
 
-  ['D', Field.DAY_OF_YEAR, C.NUMERIC, 1, 3],
+  ['D', Field.DAY_OF_YEAR, /* NUMERIC */ N, 1, 3],
 
-  ['F', Field.DAY_OF_WEEK_IN_MONTH, C.NUMERIC, 1, 1],
+  ['F', Field.DAY_OF_WEEK_IN_MONTH, /* NUMERIC */ N, 1, 1],
 
-  ['a', Field.DAYPERIOD, C.SHORT, 1, 3],
-  ['a', Field.DAYPERIOD, C.LONG, 4, 4],
-  ['a', Field.DAYPERIOD, C.NARROW, 5, 5],
-  ['b', Field.DAYPERIOD, C.SHORT - C.DELTA, 1, 3],
-  ['b', Field.DAYPERIOD, C.LONG - C.DELTA, 4, 4],
-  ['b', Field.DAYPERIOD, C.NARROW - C.DELTA, 5, 5],
-  ['B', Field.DAYPERIOD, C.SHORT - 3 * C.DELTA, 1, 3],
-  ['B', Field.DAYPERIOD, C.LONG - 3 * C.DELTA, 4, 4],
-  ['B', Field.DAYPERIOD, C.NARROW - 3 * C.DELTA, 5, 5],
+  ['a', Field.DAYPERIOD, /* SHORT */ T, 1, 3],
+  ['a', Field.DAYPERIOD, /* LONG */ L, 4, 4],
+  ['a', Field.DAYPERIOD, /* NARROW */ R, 5, 5],
+  ['b', Field.DAYPERIOD, /* SHORT */ T - /* DELTA */ D, 1, 3],
+  ['b', Field.DAYPERIOD, /* LONG */ L - /* DELTA */ D, 4, 4],
+  ['b', Field.DAYPERIOD, /* NARROW */ R - /* DELTA */ D, 5, 5],
+  ['B', Field.DAYPERIOD, /* SHORT */ T - 3 * /* DELTA */ D, 1, 3],
+  ['B', Field.DAYPERIOD, /* LONG */ L - 3 * /* DELTA */ D, 4, 4],
+  ['B', Field.DAYPERIOD, /* NARROW */ R - 3 * /* DELTA */ D, 5, 5],
 
-  ['H', Field.HOUR, C.NUMERIC + 10 * C.DELTA, 1, 2], // 24 hour
-  ['k', Field.HOUR, C.NUMERIC + 11 * C.DELTA, 1, 2],
-  ['h', Field.HOUR, C.NUMERIC, 1, 2], // 12 hour
-  ['K', Field.HOUR, C.NUMERIC + C.DELTA, 1, 2],
+  ['H', Field.HOUR, /* NUMERIC */ N + 10 * /* DELTA */ D, 1, 2], // 24 hour
+  ['k', Field.HOUR, /* NUMERIC */ N + 11 * /* DELTA */ D, 1, 2],
+  ['h', Field.HOUR, /* NUMERIC */ N, 1, 2], // 12 hour
+  ['K', Field.HOUR, /* NUMERIC */ N + /* DELTA */ D, 1, 2],
 
-  ['m', Field.MINUTE, C.NUMERIC, 1, 2],
+  ['m', Field.MINUTE, /* NUMERIC */ N, 1, 2],
 
-  ['s', Field.SECOND, C.NUMERIC, 1, 2],
-  ['A', Field.SECOND, C.NUMERIC + C.DELTA, 1, 1000],
+  ['s', Field.SECOND, /* NUMERIC */ N, 1, 2],
+  ['A', Field.SECOND, /* NUMERIC */ N + /* DELTA */ D, 1, 1000],
 
-  ['S', Field.FRACTIONAL_SECOND, C.NUMERIC, 1, 1000],
+  ['S', Field.FRACTIONAL_SECOND, /* NUMERIC */ N, 1, 1000],
 
-  ['v', Field.ZONE, C.SHORT - 2 * C.DELTA, 1, 1],
-  ['v', Field.ZONE, C.LONG - 2 * C.DELTA, 4, 4],
-  ['z', Field.ZONE, C.SHORT, 1, 3],
-  ['z', Field.ZONE, C.LONG, 4, 4],
-  ['Z', Field.ZONE, C.NARROW - C.DELTA, 1, 3],
-  ['Z', Field.ZONE, C.LONG - C.DELTA, 4, 4],
-  ['Z', Field.ZONE, C.SHORT - C.DELTA, 5, 5],
-  ['O', Field.ZONE, C.SHORT - C.DELTA, 1, 1],
-  ['O', Field.ZONE, C.LONG - C.DELTA, 4, 4],
-  ['V', Field.ZONE, C.SHORT - C.DELTA, 1, 1],
-  ['V', Field.ZONE, C.LONG - C.DELTA, 2, 2],
-  ['V', Field.ZONE, C.LONG - 1 - C.DELTA, 3, 3],
-  ['V', Field.ZONE, C.LONG - 2 - C.DELTA, 4, 4],
-  ['X', Field.ZONE, C.NARROW - C.DELTA, 1, 1],
-  ['X', Field.ZONE, C.SHORT - C.DELTA, 2, 2],
-  ['X', Field.ZONE, C.LONG - C.DELTA, 4, 4],
-  ['x', Field.ZONE, C.NARROW - C.DELTA, 1, 1],
-  ['x', Field.ZONE, C.SHORT - C.DELTA, 2, 2],
-  ['x', Field.ZONE, C.LONG - C.DELTA, 4, 4],
+  ['v', Field.ZONE, /* SHORT */ T - 2 * /* DELTA */ D, 1, 1],
+  ['v', Field.ZONE, /* LONG */ L - 2 * /* DELTA */ D, 4, 4],
+  ['z', Field.ZONE, /* SHORT */ T, 1, 3],
+  ['z', Field.ZONE, /* LONG */ L, 4, 4],
+  ['Z', Field.ZONE, /* NARROW */ R - /* DELTA */ D, 1, 3],
+  ['Z', Field.ZONE, /* LONG */ L - /* DELTA */ D, 4, 4],
+  ['Z', Field.ZONE, /* SHORT */ T - /* DELTA */ D, 5, 5],
+  ['O', Field.ZONE, /* SHORT */ T - /* DELTA */ D, 1, 1],
+  ['O', Field.ZONE, /* LONG */ L - /* DELTA */ D, 4, 4],
+  ['V', Field.ZONE, /* SHORT */ T - /* DELTA */ D, 1, 1],
+  ['V', Field.ZONE, /* LONG */ L - /* DELTA */ D, 2, 2],
+  ['V', Field.ZONE, /* LONG */ L - 1 - /* DELTA */ D, 3, 3],
+  ['V', Field.ZONE, /* LONG */ L - 2 - /* DELTA */ D, 4, 4],
+  ['X', Field.ZONE, /* NARROW */ R - /* DELTA */ D, 1, 1],
+  ['X', Field.ZONE, /* SHORT */ T - /* DELTA */ D, 2, 2],
+  ['X', Field.ZONE, /* LONG */ L - /* DELTA */ D, 4, 4],
+  ['x', Field.ZONE, /* NARROW */ R - /* DELTA */ D, 1, 1],
+  ['x', Field.ZONE, /* SHORT */ T - /* DELTA */ D, 2, 2],
+  ['x', Field.ZONE, /* LONG */ L - /* DELTA */ D, 4, 4],
 ];
 
 /**
  * Faster lookup for field canonical indices.
  */
-export const buildFieldIndex = (): { [x: string]: number[] } => {
-  const res: { [x: string]: number[] } = {};
+export const buildFieldIndex = (): Map<string, number[]> => {
+  const res = new Map<string, number[]>();
   FIELD_TYPES.forEach((t, i) => {
-    const ch = t[0];
-    const entry = res[ch] || [];
+    const entry = res.get(t[0]) || [];
     entry.push(i);
-    res[ch] = entry;
+    res.set(t[0], entry);
   });
   return res;
 };
@@ -156,7 +166,7 @@ export const buildFieldIndex = (): { [x: string]: number[] } => {
 export const FIELD_INDEX = buildFieldIndex();
 
 export const getFieldType = (field: string, width: number): FieldType | undefined => {
-  const indices = FIELD_INDEX[field];
+  const indices = FIELD_INDEX.get(field);
   if (indices === undefined) {
     return;
   }

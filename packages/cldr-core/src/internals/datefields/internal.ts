@@ -36,18 +36,8 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
       options: RelativeTimeFormatOptions, params: NumberParams,
       transform: ContextTransformInfo): string {
 
-    let format: RelativeTimeFields;
-    switch (options.width) {
-    case 'narrow':
-      format = this.relativeTimes.narrow;
-      break;
-    case 'short':
-      format = this.relativeTimes.short;
-      break;
-    default:
-      format = this.relativeTimes.wide;
-      break;
-    }
+    const width = options.width || 'wide';
+    const format: RelativeTimeFields = this.relativeTimes[width] || this.relativeTimes.wide;
 
     let n = coerceDecimal(value);
     const negative = n.isNegative();
