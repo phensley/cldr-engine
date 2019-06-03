@@ -86,25 +86,27 @@ class LikelySubtagsMap {
 }
 
 // Flags for subtag permutations
-const F_LANGUAGE = 1;
-const F_SCRIPT = 2;
-const F_REGION = 4;
+const enum F {
+  LANGUAGE = 1,
+  SCRIPT = 2,
+  REGION = 4
+}
 
 const MATCH_ORDER = [
-  F_LANGUAGE | F_SCRIPT | F_REGION,
-  F_LANGUAGE | F_REGION,
-  F_LANGUAGE | F_SCRIPT,
-  F_LANGUAGE,
-  F_SCRIPT
+  F.LANGUAGE | F.SCRIPT | F.REGION,
+  F.LANGUAGE | F.REGION,
+  F.LANGUAGE | F.SCRIPT,
+  F.LANGUAGE,
+  F.SCRIPT
 ];
 
 /**
  * Clear or copy fields from src to dst depending on flags.
  */
 const setFields = (src: FastTag, dst: FastTag, flags: number): void => {
-  dst[Tag.LANGUAGE] = (flags & F_LANGUAGE) === 0 ? Tag.LANGUAGE : src[Tag.LANGUAGE];
-  dst[Tag.SCRIPT] = (flags & F_SCRIPT) === 0 ? Tag.SCRIPT : src[Tag.SCRIPT];
-  dst[Tag.REGION] = (flags & F_REGION) === 0 ? Tag.REGION : src[Tag.REGION];
+  dst[Tag.LANGUAGE] = (flags & F.LANGUAGE) === 0 ? Tag.LANGUAGE : src[Tag.LANGUAGE];
+  dst[Tag.SCRIPT] = (flags & F.SCRIPT) === 0 ? Tag.SCRIPT : src[Tag.SCRIPT];
+  dst[Tag.REGION] = (flags & F.REGION) === 0 ? Tag.REGION : src[Tag.REGION];
 };
 
 /**
