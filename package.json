@@ -22,15 +22,15 @@
     "unlink-all": "lerna exec --concurrency=1 yarn unlink"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.14",
+    "@types/jest": "^24.0.13",
     "@types/node": "^10.12.21",
     "dependency-cruiser": "^4.15.1",
-    "jest": "^23.6.0",
+    "jest": "^24.8.0",
     "lerna": "^3.10.8",
     "rimraf": "^2.6.2",
-    "ts-jest": "^23.10.5",
+    "ts-jest": "^24.0.2",
     "ts-node": "6.1.1",
-    "tslint": "5.14.0",
+    "tslint": "^5.14.0",
     "tslint-no-circular-imports": "^0.6.1",
     "typedoc": "^0.14.2",
     "typescript": "3.5.x"
