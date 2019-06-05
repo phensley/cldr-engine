@@ -56,7 +56,19 @@ test('japanese calendar', () => {
   // Saturday, June 1, 2019 05:00:00.000 PM UTC
   n = 1559365200000;
   d = make(n, 'UTC');
-  expect(d.era()).toEqual(236); // <not yet named> 2019-05-01
+  expect(d.era()).toEqual(236);
   expect(d.year()).toEqual(1);
   expect(d.extendedYear()).toEqual(2019);
+});
+
+test('japanese era year', () => {
+  let d: JapaneseDate;
+  let n: number;
+
+  // Monday, June 5, 2023 12:34:56 PM UTC
+  n = 1685968496000;
+  d = make(n, 'UTC');
+  expect(d.era()).toEqual(236);
+  expect(d.year()).toEqual(5);
+  expect(d.extendedYear()).toEqual(2023);
 });
