@@ -12,7 +12,7 @@ import { GregorianDate } from './gregorian';
  */
 export class ISO8601Date extends GregorianDate {
 
-  private constructor() {
+  protected constructor() {
     // ISO-8601 dates use hard-coded firstDay and minDays
     super('iso8601', DayOfWeek.MONDAY, CalendarConstants.ISO8601_MIN_DAYS);
   }

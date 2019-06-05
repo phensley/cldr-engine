@@ -9,7 +9,7 @@ import { GregorianDate } from './gregorian';
  */
 export class JapaneseDate extends GregorianDate {
 
-  private constructor(firstDay: number, minDays: number) {
+  protected constructor(firstDay: number, minDays: number) {
     super('japanese', firstDay, minDays);
   }
 

@@ -8,6 +8,8 @@ const LONDON = 'Europe/London';
 // Sat March 11, 2000 8:00:25 AM UTC
 const BASE = 952761625000;
 
+const DAY = 86400 * 1000;
+
 const buddhist = (e: number, z: string) => BuddhistDate.fromUnixEpoch(e, z, 1, 1);
 const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1, 1);
 const iso8601 = (e: number, z: string) => ISO8601Date.fromUnixEpoch(e, z, 1, 1);
@@ -180,6 +182,10 @@ test('days', () => {
 
   q = date.add({ day: -3650 });
   expect(q.toString()).toEqual('Gregorian 1990-03-14 03:00:25.000 America/New_York');
+
+  // 35 days (5 weeks) + 5 days + 6 hours (.25 day) + 1 hour (timezone offset change)
+  q = date.add({ day: 40.25 });
+  expect(q.toString()).toEqual('Gregorian 2000-04-20 10:00:25.000 America/New_York');
 });
 
 test('weeks', () => {
@@ -255,4 +261,20 @@ test('minute', () => {
 
   q = date.add({ minute: 5.505 });
   expect(q.toString()).toEqual('Gregorian 2000-03-11 03:05:55.300 America/New_York');
+});
+
+test('milliseconds', () => {
+  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  let q: GregorianDate;
+  expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
+
+  q = date.add({ millis: 60 });
+  expect(q.toString()).toEqual('Gregorian 2000-03-11 03:00:25.060 America/New_York');
+
+  q = date.add({ millis: 120.5 });
+  expect(q.toString()).toEqual('Gregorian 2000-03-11 03:00:25.121 America/New_York');
+
+  // milliseconds roll over next day
+  q = date.add({ millis: (DAY * 2.5) + 120.5 });
+  expect(q.toString()).toEqual('Gregorian 2000-03-13 15:00:25.121 America/New_York');
 });

@@ -325,16 +325,17 @@ export abstract class CalendarDate {
 
     // Calculate the Julian day for the adjusted year/month then add back the days.
     const jd = this.monthStart(year, month, false) + dom + days;
-    let ijd = floor(jd);
-    const djd = jd - ijd;
+    const ijd = floor(jd);
 
     // Calculate ms and handle rollover
-    let _ms = ms + (djd * CalendarConstants.ONE_DAY_MS);
+    let _ms = ms + ((jd - ijd) * CalendarConstants.ONE_DAY_MS);
     _ms = Math.round(_ms) | 0;
-    if (_ms >= CalendarConstants.ONE_DAY_MS) {
-      ijd++;
-      _ms -= CalendarConstants.ONE_DAY_MS;
-    }
+
+    // NOTE: _ms is always less than one day here
+    // if (_ms >= CalendarConstants.ONE_DAY_MS) {
+    //   ijd++;
+    //   _ms -= CalendarConstants.ONE_DAY_MS;
+    // }
 
     return [ijd, _ms];
   }

@@ -10,7 +10,7 @@ import { DateField } from './fields';
  */
 export class BuddhistDate extends GregorianDate {
 
-  private constructor(firstDay: number, minDays: number) {
+  protected constructor(firstDay: number, minDays: number) {
     super('buddhist', firstDay, minDays);
   }
 

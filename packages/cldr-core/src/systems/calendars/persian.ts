@@ -12,7 +12,7 @@ import { floorDiv } from './utils';
  */
 export class PersianDate extends CalendarDate {
 
-  private constructor(firstDay: number, minDays: number) {
+  protected constructor(firstDay: number, minDays: number) {
     super('persian', firstDay, minDays);
   }
 
