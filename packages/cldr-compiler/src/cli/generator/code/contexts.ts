@@ -14,12 +14,6 @@ export const getContexts = (data: any): Code[] => {
   code += transforms.join(' ');
   code += `').split(' ') as ContextTransformFieldType[];\n`;
 
-  // code += `export const enum ContextTransformField {\n`;
-  // code += transforms.map((c: string) => {
-  //   return `  ${c.replace(/-/g, '_').toUpperCase()} = '${c}'`;
-  // }).join(',\n');
-  // code += '\n}\n';
-
   return [
     Code.schema(['schema', 'general', 'autogen.context.ts'], code)
   ];

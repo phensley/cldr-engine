@@ -145,15 +145,10 @@ const encode = (ms: MapSet): string => Object.keys(ms).map(k =>
     .join('|');
 
 export const getPartition = (data: any): Code[] => {
-  const { /* variables, */ macroRegions, regions, table } = buildPartitions(data);
+  const { macroRegions, regions, table } = buildPartitions(data);
 
   let code = HEADER;
   let str = '';
-
-  // NOTE: the variables are only used during code generation
-  // str = encode(variables);
-  // code += NOLINT_MAXLINE;
-  // code += `export const variables = '${str}';\n\n`;
 
   str = encode(regions);
   code += NOLINT_MAXLINE;

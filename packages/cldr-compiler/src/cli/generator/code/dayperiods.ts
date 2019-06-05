@@ -23,14 +23,6 @@ interface Range {
 
 type Until = Exact | Range;
 
-// const zeropad2 = (n: number): string => n < 10 ? `0${n}` : `${n}`;
-
-// const display = (v: number): string => {
-//   const hour = Math.floor(v / 60);
-//   const minute = v - (hour * 60);
-//   return `${zeropad2(hour)}:${zeropad2(minute)}`;
-// };
-
 const parseTime = (s: string): number => {
   const parts = s.split(':');
   const hours = parseInt(parts[0], 10);
