@@ -1121,12 +1121,6 @@ export class Decimal {
    * Addition and subtraction.
    */
   protected addsub(u: Decimal, v: Decimal, vsign: number): Decimal {
-    if (u.flag) {
-      return u;
-    }
-    if (v.flag) {
-      return v;
-    }
     const zero = u.sign === 0;
     if (zero || v.sign === 0) {
       return zero ? Decimal.fromRaw(vsign, v.exp, v.data, v.flag) : new Decimal(u);
