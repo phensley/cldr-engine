@@ -245,7 +245,7 @@ export class NumberInternalsImpl implements NumberInternals {
         // Wrap number and unit together.
         const unitWrapper = currencyFormats.unitPattern.get(bundle, plural)
           || latnInfo.currencyFormats.unitPattern.get(bundle, plural);
-        return renderer.wrap(this.internals.wrapper, unitWrapper, num, renderer.make('unit', unit));
+        return renderer.wrap(this.internals.general, unitWrapper, num, renderer.make('unit', unit));
       }
 
       case 'short': {

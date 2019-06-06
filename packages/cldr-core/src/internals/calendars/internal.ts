@@ -101,7 +101,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
       _time = value.render();
     }
     if (_date && _time && wrapper) {
-      const pattern = this.internals.wrapper.parseWrapper(wrapper);
+      const pattern = this.internals.general.parseWrapper(wrapper);
       value.wrap(pattern, [_time, _date]);
       return value.render();
     }

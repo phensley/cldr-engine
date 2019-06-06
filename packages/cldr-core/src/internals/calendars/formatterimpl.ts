@@ -4,7 +4,7 @@ import {
   TimeZoneSchema, Vector2Arrow
 } from '@phensley/cldr-schema';
 
-import { WrapperInternals } from '../../internals/internals';
+import { GeneralInternals } from '../../internals/internals';
 import { Bundle } from '../../resource/bundle';
 import { Internals } from '../internals';
 import { CalendarDate } from '../../systems/calendars';
@@ -40,14 +40,14 @@ const _year = <T extends CalendarDate>(ctx: CalendarContext<T>, year: number, wi
 
 export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFormatter<T> {
 
-  readonly wrapper: WrapperInternals;
+  readonly general: GeneralInternals;
   readonly tz: TimeZoneSchema;
 
   constructor(
     readonly internals: Internals,
     readonly cal: CalendarSchema
   ) {
-    this.wrapper = internals.wrapper;
+    this.general = internals.general;
     this.tz = internals.schema.TimeZones;
   }
 
@@ -499,7 +499,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
         return this.timezone_O(ctx, ['O', 4]);
       }
       const pattern = this.tz.regionFormat.get(bundle);
-      return this.wrapper.format(pattern, [city]);
+      return this.general.formatWrapper(pattern, [city]);
 
     case 3:
       // Exemplar city for the timezone.
@@ -569,7 +569,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     }
 
     const wrap = this.tz.gmtFormat.get(bundle);
-    return this.wrapper.format(wrap, [fmt]);
+    return this.general.formatWrapper(wrap, [fmt]);
   }
 
   _hourPattern(bundle: Bundle, negative: boolean): DateTimeNode[] {

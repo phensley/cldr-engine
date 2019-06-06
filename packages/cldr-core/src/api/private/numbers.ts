@@ -32,10 +32,10 @@ export class NumberParamsCache {
   getNumberParams(numberSystem?: NumberSystemType, defaultSystem?: NumberSystemType): NumberParams {
     // Default numbering system for a locale unless explicitly overridden
     // https://www.unicode.org/reports/tr35/tr35-33/tr35-numbers.html#defaultNumberingSystem
-    if (defaultSystem === undefined) {
+    if (!defaultSystem) {
       defaultSystem = 'default';
     }
-    if (numberSystem === undefined) {
+    if (!numberSystem) {
       const bundle = this.bundle.numberSystem();
       numberSystem = bundle as NumberSystemType || defaultSystem;
     }
@@ -44,12 +44,12 @@ export class NumberParamsCache {
 
     // Handle invalid number systems by returning the specified default
     // TODO: include algorithmic number system check
-    if (decimalNumberingDigits[realName] === undefined) {
+    if (!decimalNumberingDigits[realName]) {
       realName = this.select(defaultSystem);
 
       // TODO: temporary double-check to default for zh finance until we
       // have rbnf implemented.
-      if (decimalNumberingDigits[realName] === undefined) {
+      if (!decimalNumberingDigits[realName]) {
         realName = this.select('default');
       }
     }

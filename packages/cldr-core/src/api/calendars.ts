@@ -322,7 +322,7 @@ export class CalendarsImpl implements Calendars {
       const _start = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
       ctx.date = end;
       const _end = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
-      const wrapper = this.internals.wrapper.parseWrapper(req.wrapper);
+      const wrapper = this.internals.general.parseWrapper(req.wrapper);
       value.wrap(wrapper, [_start, _end]);
       return value.render();
     }
@@ -347,7 +347,7 @@ export class CalendarsImpl implements Calendars {
       // Docs don't mention this edge case:
       // https://www.unicode.org/reports/tr35/tr35-dates.html#intervalFormats
       const patterns = this.manager.getCalendarPatterns(calendar);
-      const wrapper = this.internals.wrapper.parseWrapper(patterns.getWrapperPattern('medium'));
+      const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern('medium'));
       value.wrap(wrapper, [_range, _date]);
       return value.render();
     }

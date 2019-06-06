@@ -2,7 +2,7 @@ import { Decimal, DecimalFormatter, Part, PartsDecimalFormatter, StringDecimalFo
 
 import { CurrencySpacingPatterns, NumberParams } from '../../common/private';
 import { NumberField, NumberPattern } from '../../parsing/number';
-import { NumberRenderer, WrapperInternals } from '../internals';
+import { GeneralInternals, NumberRenderer } from '../internals';
 import { fastFormatDecimal } from '../../systems/numbering';
 import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
 
@@ -133,7 +133,7 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
     return v.render();
   }
 
-  wrap(internal: WrapperInternals, raw: string, ...args: R[]): R {
+  wrap(internal: GeneralInternals, raw: string, ...args: R[]): R {
     const res: AbstractValue<R> = this.value();
     const pattern = internal.parseWrapper(raw);
     for (const n of pattern) {

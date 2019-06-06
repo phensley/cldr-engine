@@ -37,18 +37,18 @@ export class UnitsInternalImpl implements UnitInternals {
       return num;
     }
 
-    const { wrapper } = this.internals;
+    const { general } = this.internals;
     const info = this.getUnitInfo(options.length || '');
     const pattern = info.unitPattern.get(bundle, plural, q.unit);
 
     // Format argument '{0}' here. If no 'per' unit is defined, we
     // return it. Otherwise we join it with the denominator unit below.
-    const zero = renderer.wrap(wrapper, pattern, num);
+    const zero = renderer.wrap(general, pattern, num);
     if (q.per) {
       // Check if the 'per' unit has a perUnitPattern defined and use it.
       const perPattern = info.perUnitPattern.get(bundle, q.per);
       if (perPattern) {
-        return renderer.wrap(wrapper, perPattern, zero);
+        return renderer.wrap(general, perPattern, zero);
       }
 
       // Fall back to use the compoundUnit pattern. See notes here:
@@ -66,7 +66,7 @@ export class UnitsInternalImpl implements UnitInternals {
       const one = renderer.make('per', denom);
 
       // Wrap the numerator and denominator together
-      return renderer.wrap(wrapper, compound, zero, one);
+      return renderer.wrap(general, compound, zero, one);
     }
 
     return zero;

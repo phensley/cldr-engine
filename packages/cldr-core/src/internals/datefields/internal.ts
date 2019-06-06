@@ -87,7 +87,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
         options.context, 'relative');
     }
     const num = params.system.formatString(n, false, 1);
-    return this.internals.wrapper.format(raw, [num]);
+    return this.internals.general.formatWrapper(raw, [num]);
 
   }
 }

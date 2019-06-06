@@ -12,12 +12,14 @@ import {
   Vector1Arrow,
 } from '@phensley/cldr-schema';
 import { Part } from '@phensley/decimal';
+import { Cache } from '@phensley/cldr-utils';
 
 import { GeneralInternals, Internals } from '../../internals/internals';
 import { Bundle } from '../../resource';
 import { ListPatternType } from '../../common';
 import { ContextTransformInfo } from '../../common/private';
 import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
+import { parseWrapperPattern, WrapperNode } from '../../parsing/wrapper';
 
 export class GeneralInternalsImpl implements GeneralInternals {
 
@@ -25,11 +27,14 @@ export class GeneralInternalsImpl implements GeneralInternals {
   protected listPatterns: ListPatternsSchema;
   protected names: NamesSchema;
 
-  constructor(readonly internals: Internals) {
+  protected wrapperPatternCache: Cache<WrapperNode[]>;
+
+  constructor(readonly internals: Internals, cacheSize: number = 50) {
     const schema = internals.schema;
     this.layout = schema.Layout;
     this.names = schema.Names;
     this.listPatterns = schema.ListPatterns;
+    this.wrapperPatternCache = new Cache(parseWrapperPattern, cacheSize);
   }
 
   characterOrder(bundle: Bundle): string {
@@ -114,8 +119,28 @@ export class GeneralInternalsImpl implements GeneralInternals {
     return this._wrap(pattern.start, value, [items[0], res]);
   }
 
+  formatWrapper(format: string, args: string[]): string {
+    const pattern = this.wrapperPatternCache.get(format);
+    let res = '';
+    for (const node of pattern) {
+      if (typeof node === 'string') {
+        res += node;
+      } else {
+        const s = args[node];
+        if (s) {
+          res += s;
+        }
+      }
+    }
+    return res;
+  }
+
+  parseWrapper(raw: string): WrapperNode[] {
+    return this.wrapperPatternCache.get(raw);
+  }
+
   protected _wrap<R>(pattern: string, value: AbstractValue<R>, args: R[]): R {
-    const wrapper = this.internals.wrapper.parseWrapper(pattern);
+    const wrapper = this.internals.general.parseWrapper(pattern);
     value.wrap(wrapper, args);
     return value.render();
   }

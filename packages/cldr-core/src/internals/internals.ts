@@ -70,6 +70,8 @@ export interface GeneralInternals {
   getLanguageDisplayName(bundle: Bundle, code: string): string;
   getScriptDisplayName(bundle: Bundle, code: string): string;
   getRegionDisplayName(bundle: Bundle, code: string, alt?: AltType): string;
+  formatWrapper(format: string, args: string[]): string;
+  parseWrapper(raw: string): WrapperNode[];
 }
 
 export interface NumberInternals {
@@ -96,19 +98,13 @@ export interface UnitInternals {
     options: UnitFormatOptions, params: NumberParams): T;
 }
 
-export interface WrapperInternals {
-  format(format: string, args: string[]): string;
-  formatParts(format: string, args: Part[][]): Part[];
-  parseWrapper(format: string): WrapperNode[];
-}
-
 export interface NumberRenderer<R> {
   empty(): R;
   make(type: string, value: string): R;
   render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
     decimalSymbol: string, minInt: number, grouping?: boolean,
     exponent?: number): R;
-  wrap(internal: WrapperInternals, raw: string, ...args: R[]): R;
+  wrap(internal: GeneralInternals, raw: string, ...args: R[]): R;
 }
 
 /**
@@ -124,5 +120,4 @@ export interface Internals {
   readonly numbers: NumberInternals;
   readonly schema: Schema;
   readonly units: UnitInternals;
-  readonly wrapper: WrapperInternals;
 }
