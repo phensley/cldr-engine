@@ -106,7 +106,7 @@ test('relative time', () => {
 
 test('relative time 2', () => {
   // German for -2 and +2 days
-  const api = calendarsApi('de');
+  let api = calendarsApi('de');
   let s: string;
 
   s = api.formatRelativeTimeField('-3', 'day');
@@ -129,6 +129,29 @@ test('relative time 2', () => {
 
   s = api.formatRelativeTimeField('3', 'day');
   expect(s).toEqual('in 3 Tagen');
+
+  // English
+  api = calendarsApi('en-CC');
+  s = api.formatRelativeTimeField('-3', 'day');
+  expect(s).toEqual('3 days ago');
+
+  s = api.formatRelativeTimeField('-2', 'day');
+  expect(s).toEqual('2 days ago');
+
+  s = api.formatRelativeTimeField('-1', 'day');
+  expect(s).toEqual('yesterday');
+
+  s = api.formatRelativeTimeField('0', 'day');
+  expect(s).toEqual('today');
+
+  s = api.formatRelativeTimeField('1', 'day');
+  expect(s).toEqual('tomorrow');
+
+  s = api.formatRelativeTimeField('2', 'day');
+  expect(s).toEqual('in 2 days');
+
+  s = api.formatRelativeTimeField('3', 'day');
+  expect(s).toEqual('in 3 days');
 });
 
 test('relative time options', () => {

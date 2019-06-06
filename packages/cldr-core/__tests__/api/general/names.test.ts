@@ -26,7 +26,7 @@ test('languages', () => {
   expect(api.getLanguageDisplayName('ko')).toEqual('한국어');
 });
 
-test('territories', () => {
+test('regions', () => {
   let api = generalApi('en');
   expect(api.getRegionDisplayName('US')).toEqual('United States');
   expect(api.getRegionDisplayName('US', 'short')).toEqual('US');
