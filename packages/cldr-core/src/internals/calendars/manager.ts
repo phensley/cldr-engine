@@ -14,11 +14,12 @@ import { DateTimePatternFieldType } from '@phensley/cldr-schema';
 
 export class CalendarManager {
 
-  readonly patternCache: Cache<CalendarPatterns>;
-  readonly availableCalendars: Set<string>;
+  private readonly patternCache: Cache<CalendarPatterns>;
+  private readonly availableCalendars: Set<string>;
+
   constructor(
-    readonly bundle: Bundle,
-    readonly internals: Internals
+    private readonly bundle: Bundle,
+    private readonly internals: Internals
   ) {
     this.availableCalendars = new Set(internals.config.calendars || []);
     const schema = internals.schema;

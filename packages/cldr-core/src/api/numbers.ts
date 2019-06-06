@@ -18,7 +18,6 @@ import { PrivateApiImpl } from './private';
 import {
   getCurrencyForRegion,
   getCurrencyFractions,
-  Internals,
   NumberInternals,
   NumberRenderer,
 } from '../internals';
@@ -29,15 +28,11 @@ import { pluralRules } from '../systems/plurals';
  */
 export class NumbersImpl implements Numbers {
 
-  private numbers: NumberInternals;
-
   constructor(
-    protected readonly bundle: Bundle,
-    protected readonly internal: Internals,
-    protected readonly privateApi: PrivateApiImpl
-  ) {
-    this.numbers = internal.numbers;
-  }
+    private readonly bundle: Bundle,
+    private readonly numbers: NumberInternals,
+    private readonly privateApi: PrivateApiImpl
+  ) { }
 
   getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string {
     return this.numbers.getCurrencySymbol(this.bundle, code, width);

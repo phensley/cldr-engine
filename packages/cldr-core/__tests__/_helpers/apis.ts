@@ -40,7 +40,7 @@ export const generalApi = (tag: string, config?: SchemaConfig) => {
 export const numbersApi = (tag: string, config?: SchemaConfig) => {
   const bundle = languageBundle(tag, config);
   const internals = new InternalsImpl(config || defaultconfig, VERSION);
-  return new NumbersImpl(bundle, internals, new PrivateApiImpl(bundle, internals));
+  return new NumbersImpl(bundle, internals.numbers, new PrivateApiImpl(bundle, internals));
 };
 
 export const unitsApi = (tag: string, config?: SchemaConfig) => {

@@ -138,7 +138,7 @@ class CLDRImpl implements CLDR {
    */
   get Numbers(): Numbers {
     if (this._numbers === undefined) {
-      this._numbers = new NumbersImpl(this.bundle, this.internals, this.privateApi);
+      this._numbers = new NumbersImpl(this.bundle, this.internals.numbers, this.privateApi);
     }
     return this._numbers;
   }

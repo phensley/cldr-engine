@@ -35,28 +35,30 @@ export type TwoLevelMap = { [x: string]: |{ [y: string]: string } };
  */
 export class CalendarPatterns {
 
-  protected language: string;
-  protected region: string;
-  protected namesCache: LRU<{ [x: string]: { [y: string]: string } }>;
-  protected skeletonParser: DateSkeletonParser;
-  protected skeletonRequestCache: LRU<CachedSkeletonRequest>;
-  protected intervalRequestCache: LRU<CachedIntervalRequest>;
-  protected dateFormats: { [x: string]: string };
-  protected timeFormats: { [x: string]: string };
-  protected wrapperFormats: { [x: string]: string };
+  protected readonly language: string;
 
-  protected availableMatcher: DatePatternMatcher = new DatePatternMatcher();
-  protected intervalMatcher: { [x: string]: DatePatternMatcher } = {};
+  private readonly region: string;
+  private readonly namesCache: LRU<{ [x: string]: { [y: string]: string } }>;
+  private readonly skeletonParser: DateSkeletonParser;
+  private readonly skeletonRequestCache: LRU<CachedSkeletonRequest>;
+  private readonly intervalRequestCache: LRU<CachedIntervalRequest>;
+  private readonly dateFormats: { [x: string]: string };
+  private readonly timeFormats: { [x: string]: string };
+  private readonly wrapperFormats: { [x: string]: string };
 
-  protected rawAvailableFormats: { [x: string]: string } = {};
-  protected rawPluralFormats: { [x: string]: { [y: string]: string } } = {};
-  protected rawIntervalFormats: { [x: string]: { [y: string]: string } } = {};
-  protected intervalFallback: string;
+  private readonly availableMatcher: DatePatternMatcher = new DatePatternMatcher();
+  private readonly intervalMatcher: { [x: string]: DatePatternMatcher } = {};
+
+  private readonly rawIntervalFormats: { [x: string]: { [y: string]: string } } = {};
+  private readonly intervalFallback: string;
+
+  protected readonly rawAvailableFormats: { [x: string]: string } = {};
+  protected readonly rawPluralFormats: { [x: string]: { [y: string]: string } } = {};
 
   constructor(
-    readonly bundle: Bundle,
-    readonly internals: Internals,
-    readonly schema: CalendarSchema,
+    private readonly bundle: Bundle,
+    protected readonly internals: Internals,
+    private readonly schema: CalendarSchema,
     readonly cacheSize: number = 50
   ) {
     this.language = bundle.language();
