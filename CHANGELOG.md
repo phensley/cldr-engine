@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [UNRELEASED]
 ### Fixed/Changed
+ - Fix Decimal compare against Infinity.
  - Increase test coverage
  - Minor code size optimizations
 

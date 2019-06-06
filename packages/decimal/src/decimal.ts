@@ -137,7 +137,7 @@ export class Decimal {
       // Positive infinity after all other values
       return u.flag === DecimalFlag.INFINITY ?
         u.sign === -1 ? -1 : 1 :
-        v.sign === -1 ? -1 : 1;
+        v.sign === -1 ? 1 : -1;
     }
 
     // TODO: improve representation of zero and sign, since with

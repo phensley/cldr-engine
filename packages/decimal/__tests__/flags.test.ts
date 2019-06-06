@@ -63,6 +63,11 @@ test('compare', () => {
   expect(INF_NEG.compare(NEG)).toBe(-1);
   expect(INF_NEG.compare(NEG)).toBe(-1);
 
+  expect(POS.compare(INF_POS)).toBe(-1);
+  expect(POS.compare(INF_NEG)).toBe(1);
+  expect(NEG.compare(INF_POS)).toBe(-1);
+  expect(NEG.compare(INF_NEG)).toBe(1);
+
   expect(INF_POS.compare(NAN)).toBe(-1);
   expect(INF_NEG.compare(NAN)).toBe(-1);
   expect(NAN.compare(INF_POS)).toBe(-1);

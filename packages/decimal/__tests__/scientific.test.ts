@@ -35,4 +35,23 @@ test('scientific parts', () => {
     { type: 'plus', value: '+' },
     { type: 'integer', value: '1' }
   ]);
+
+  expect(scip('-123.57', 2)).toEqual([
+    { type: 'minus', value: '-' },
+    { type: 'integer', value: '12' },
+    { type: 'decimal', value: '.' },
+    { type: 'fraction', value: '357' },
+    { type: 'exp', value: 'E' },
+    { type: 'plus', value: '+' },
+    { type: 'integer', value: '1' }
+  ]);
+
+  expect(scip('0.0012')).toEqual([
+    { type: 'integer', value: '1' },
+    { type: 'decimal', value: '.' },
+    { type: 'fraction', value: '2' },
+    { type: 'exp', value: 'E' },
+    { type: 'minus', value: '-' },
+    { type: 'integer', value: '3' }
+  ]);
 });
