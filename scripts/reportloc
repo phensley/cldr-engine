@@ -24,7 +24,7 @@ def cloc(path):
     return [r for r in out if RE_LANGS.match(r)]
 
 def uglify(paths):
-    if isinstance(paths, (str, unicode)):
+    if isinstance(paths, (str,)):
         paths = [paths]
     raw = run([UGLIFYJS] + paths)
     z = zlib.compress(raw, 9)
@@ -41,43 +41,42 @@ def listfiles(top, cond):
 
 def uglifyit(paths):
     raw, z, br = uglify(paths)
-    print '           uglify: %d' % raw
-    print '    uglify + gzip: %d' % z
-    print '  uglify + brotli: %d' % br
+    print('           uglify: %d' % raw)
+    print('    uglify + gzip: %d' % z)
+    print('  uglify + brotli: %d' % br)
 
 def main():
     for pkg in sorted(PKGS):
         pkgpath = abspath(join(PKG, pkg))
         if not isdir(pkgpath) or pkg == 'cldr-compiler':
             continue
-        print 'Package: %s\n' % pkg
+        print('Package: %s\n' % pkg)
         libs = join(pkgpath, 'lib')
 #        for line in cloc(libs):
-#            print line
+#            print(line
 
         jsfiles = listfiles(libs, lambda f: f.endswith('.js'))
         if jsfiles:
             uglifyit(jsfiles)
-            print
+            print('')
 
             # sort by gzip size descending
             files = sorted(((uglify(p), p) for p in jsfiles),
-                cmp=lambda a, b: cmp(a[0][1], b[0][1]), reverse=1)
+              key=lambda a: a[0][1], reverse=1)
             for f in files:
                 data, p = f
                 raw, z, _ = data
                 relp = relpath(p, libs)
-                print '  %6d %6d  %s' % (raw, z, relp)
-            print
+                print('  %6d %6d  %s' % (raw, z, relp))
+            print('')
 
-        print '-'*74
-        print
+        print('-'*74)
+        print('')
 
     rollup = join(TOP, 'packages/cldr/dist/cldrengine.umd.js')
     raw, z, br = uglify(rollup)
-    print 'Rollup: cldrengine.umd.js\n'
+    print('Rollup: cldrengine.umd.js\n')
     uglifyit(rollup)
 
 if __name__ == '__main__':
     main()
-
