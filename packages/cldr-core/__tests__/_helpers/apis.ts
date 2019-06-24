@@ -34,13 +34,13 @@ export const calendarsApi = (tag: string, config?: SchemaConfig) => {
 export const generalApi = (tag: string, config?: SchemaConfig) => {
   const bundle = languageBundle(tag, config);
   const internals = new InternalsImpl(config || defaultconfig, VERSION);
-  return new GeneralImpl(bundle, Locale.resolve(tag), internals);
+  return new GeneralImpl(bundle, Locale.resolve(tag), internals, privateApi(bundle, config));
 };
 
 export const numbersApi = (tag: string, config?: SchemaConfig) => {
   const bundle = languageBundle(tag, config);
   const internals = new InternalsImpl(config || defaultconfig, VERSION);
-  return new NumbersImpl(bundle, internals.numbers, new PrivateApiImpl(bundle, internals));
+  return new NumbersImpl(bundle, internals.numbers, privateApi(bundle, config));
 };
 
 export const unitsApi = (tag: string, config?: SchemaConfig) => {

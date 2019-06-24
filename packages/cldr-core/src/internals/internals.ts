@@ -1,5 +1,4 @@
 import {
-  AltType,
   ContextTransformFieldType,
   ContextType,
   CurrencyType,
@@ -67,9 +66,6 @@ export interface GeneralInternals {
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string;
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[];
   formatListImpl<R>(bundle: Bundle, value: AbstractValue<R>, items: R[], type: ListPatternType): R;
-  getLanguageDisplayName(bundle: Bundle, code: string): string;
-  getScriptDisplayName(bundle: Bundle, code: string): string;
-  getRegionDisplayName(bundle: Bundle, code: string, alt?: AltType): string;
   formatWrapper(format: string, args: string[]): string;
   parseWrapper(raw: string): WrapperNode[];
 }

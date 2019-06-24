@@ -1,14 +1,10 @@
 import {
-  AltType,
   ContextTransformFieldType,
   ContextType,
-  LanguageIdType,
   LayoutSchema,
   ListPatternsSchema,
   ListPatternPositionType,
   NamesSchema,
-  RegionIdType,
-  ScriptIdType,
   Vector1Arrow,
 } from '@phensley/cldr-schema';
 import { Part } from '@phensley/decimal';
@@ -81,23 +77,6 @@ export class GeneralInternalsImpl implements GeneralInternals {
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[] {
     const parts: Part[][] = items.map(i => ([{ type: 'item', value: i }]));
     return this.formatListImpl(bundle, new PartsValue(), parts, type);
-  }
-
-  getLanguageDisplayName(bundle: Bundle, code: string): string {
-    const id = code as LanguageIdType;
-    return this.names.languages.displayName.get(bundle, id);
-  }
-
-  getScriptDisplayName(bundle: Bundle, code: string): string {
-    const id = code as ScriptIdType;
-    return this.names.scripts.displayName.get(bundle, id);
-  }
-
-  getRegionDisplayName(bundle: Bundle, code: string, alt: AltType = 'none'): string {
-    const id = code as RegionIdType;
-    const name = this.names.regions.displayName.get(bundle, alt, id);
-    // Fall back if preferred form is not available
-    return name === '' ? this.names.regions.displayName.get(bundle, 'none', id) : name;
   }
 
   formatListImpl<R>(bundle: Bundle, value: AbstractValue<R>, items: R[], type: ListPatternType): R {

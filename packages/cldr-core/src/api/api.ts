@@ -3,10 +3,7 @@ import {
   CurrencyType,
   DateFieldType,
   DateTimePatternFieldType,
-  LanguageIdType,
   LineOrderType,
-  RegionIdType,
-  ScriptIdType,
   UnitType
 } from '@phensley/cldr-schema';
 import { DecimalArg, Part } from '@phensley/decimal';
@@ -21,6 +18,7 @@ import {
   DateIntervalFormatOptions,
   DateRawFormatOptions,
   DecimalFormatOptions,
+  DisplayNameOptions,
   EraFieldOptions,
   ListPatternType,
   MeasurementCategory,
@@ -213,17 +211,17 @@ export interface General {
   /**
    * Returns the display name for the given language code.
    */
-  getLanguageDisplayName(code: LanguageIdType): string;
+  getLanguageDisplayName(code: string, options?: DisplayNameOptions): string;
 
   /**
    * Returns the display name for the given script code.
    */
-  getScriptDisplayName(code: ScriptIdType): string;
+  getScriptDisplayName(code: string, options?: DisplayNameOptions): string;
 
   /**
    * Returns the display name for the given region code.
    */
-  getRegionDisplayName(code: RegionIdType, type?: string): string;
+  getRegionDisplayName(code: string, options?: DisplayNameOptions): string;
 }
 
 /**

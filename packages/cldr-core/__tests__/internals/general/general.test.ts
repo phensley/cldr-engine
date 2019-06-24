@@ -1,4 +1,4 @@
-import { languageBundle, INTERNALS } from '../../_helpers';
+import { INTERNALS } from '../../_helpers';
 import { GeneralInternalsImpl } from '../../../src';
 import { ContextTransformInfo } from '../../../src/common/private';
 
@@ -41,29 +41,6 @@ test('context transform', () => {
 
   s = GENERAL.contextTransform('abc', no, 'ui-list-or-menu', field);
   expect(s).toEqual('abc');
-});
-
-test('region names', () => {
-  let s: string;
-  const en = languageBundle('en');
-
-  s = GENERAL.getRegionDisplayName(en, 'US');
-  expect(s).toEqual('United States');
-
-  s = GENERAL.getRegionDisplayName(en, 'US', 'short');
-  expect(s).toEqual('US');
-
-  s = GENERAL.getRegionDisplayName(en, 'GB');
-  expect(s).toEqual('United Kingdom');
-
-  s = GENERAL.getRegionDisplayName(en, 'GB', 'short');
-  expect(s).toEqual('UK');
-
-  s = GENERAL.getRegionDisplayName(en, 'FR');
-  expect(s).toEqual('France');
-
-  s = GENERAL.getRegionDisplayName(en, 'FR', 'short');
-  expect(s).toEqual('France');
 });
 
 // Parts formatting is currently done via a Renderer.

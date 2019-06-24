@@ -128,7 +128,7 @@ class CLDRImpl implements CLDR {
    */
   get General(): General {
     if (this._general === undefined) {
-      this._general = new GeneralImpl(this.bundle, this.locale, this.internals);
+      this._general = new GeneralImpl(this.bundle, this.locale, this.internals, this.privateApi);
     }
     return this._general;
   }

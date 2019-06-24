@@ -1,30 +1,40 @@
 import {
-  AltType,
   CharacterOrderType,
+  ContextType,
   LanguageIdType,
   LineOrderType,
+  NamesSchema,
   RegionIdType,
-  ScriptIdType
+  ScriptIdType,
 } from '@phensley/cldr-schema';
 import { Part } from '@phensley/decimal';
 
 import { parseLanguageTag, LanguageResolver, LanguageTag, Locale } from '../locale';
-import { ListPatternType, MeasurementCategory, MeasurementSystem } from '../common';
+import { DisplayNameOptions, ListPatternType, MeasurementCategory, MeasurementSystem } from '../common';
 import { Bundle } from '../resource';
 import { GeneralInternals, Internals } from '../internals';
 
 import { General } from './api';
+import { PrivateApiImpl } from './private/api';
+import { ContextTransformInfo } from '../common/private';
+
+const DEFAULT_NAME_OPTIONS: DisplayNameOptions = { context: 'begin-sentence' };
 
 export class GeneralImpl implements General {
 
   protected general: GeneralInternals;
+  protected names: NamesSchema;
+  protected transform: ContextTransformInfo;
 
   constructor(
     protected _bundle: Bundle,
     protected _locale: Locale,
-    protected internal: Internals
+    protected internal: Internals,
+    _private: PrivateApiImpl
   ) {
     this.general = internal.general;
+    this.names = internal.schema.Names;
+    this.transform = _private.getContextTransformInfo();
   }
 
   characterOrder(): CharacterOrderType {
@@ -89,16 +99,27 @@ export class GeneralImpl implements General {
     return this.general.formatListToParts(this._bundle, items, type || 'and');
   }
 
-  getLanguageDisplayName(code: LanguageIdType | string): string {
-    return this.general.getLanguageDisplayName(this._bundle, code);
+  getLanguageDisplayName(code: string, options: DisplayNameOptions = DEFAULT_NAME_OPTIONS): string {
+    const s = this.names.languages.displayName.get(this._bundle, code as LanguageIdType);
+    return this.general.contextTransform(s, this.transform, _ctx(options), 'languages');
   }
 
-  getScriptDisplayName(code: ScriptIdType | string): string {
-    return this.general.getScriptDisplayName(this._bundle, code);
+  getScriptDisplayName(code: string, options: DisplayNameOptions = DEFAULT_NAME_OPTIONS): string {
+    const s = this.names.scripts.displayName.get(this._bundle, code as ScriptIdType);
+    return this.general.contextTransform(s, this.transform, _ctx(options), 'script');
   }
 
-  getRegionDisplayName(code: RegionIdType | string, type?: string): string {
-    return this.general.getRegionDisplayName(this._bundle, code, (type || 'none') as AltType);
+  getRegionDisplayName(code: string, options: DisplayNameOptions = DEFAULT_NAME_OPTIONS): string {
+    const impl = this.names.regions.displayName;
+    const name = impl.get(this._bundle, _def(options, 'type', 'none'), code as RegionIdType);
+    return name ? name : impl.get(this._bundle, 'none', code as RegionIdType);
   }
 
 }
+
+// Default an options context value
+const _ctx = (o: DisplayNameOptions) => _def(o, 'context', 'begin-sentence' as ContextType);
+
+// Default an option value
+const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T =>
+  (o ? (o[k] as unknown as T) : t) || t;
