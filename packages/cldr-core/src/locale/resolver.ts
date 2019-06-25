@@ -113,7 +113,10 @@ const setFields = (src: FastTag, dst: FastTag, flags: number): void => {
  * Lookup any aliases that match this tag, and replace any undefined subtags.
  */
 const substituteLanguageAliases = (dst: FastTag): void => {
-  const aliases = LANGUAGE_ALIAS_MAP[dst[Tag.LANGUAGE]];
+  if (!LANGUAGE_ALIAS_MAP) {
+    initAilas();
+  }
+  const aliases = LANGUAGE_ALIAS_MAP![dst[Tag.LANGUAGE]];
   if (aliases === undefined) {
     return;
   }
@@ -141,11 +144,14 @@ const substituteLanguageAliases = (dst: FastTag): void => {
  * this would convert "en" to "en-Latn-US".
  */
 const addLikelySubtags = (dst: FastTag): void => {
+  if (!LIKELY_SUBTAGS_MAP) {
+    initSubtags();
+  }
   const tmp = dst.slice(0);
   for (let i = 0; i < MATCH_ORDER.length; i++) {
     const flags = MATCH_ORDER[i];
     setFields(dst, tmp, flags);
-    const match = LIKELY_SUBTAGS_MAP.get(tmp);
+    const match = LIKELY_SUBTAGS_MAP!.get(tmp);
     if (match !== undefined) {
       if (dst[Tag.LANGUAGE] === Tag.LANGUAGE) {
         dst[Tag.LANGUAGE] = match[Tag.LANGUAGE];
@@ -215,8 +221,16 @@ const buildLanguageAliasMap = (): LanguageAliasMap => {
 };
 
 // Singleton maps.
-const LANGUAGE_ALIAS_MAP: LanguageAliasMap = buildLanguageAliasMap();
-const LIKELY_SUBTAGS_MAP: LikelySubtagsMap = new LikelySubtagsMap(likelySubtags);
+let LANGUAGE_ALIAS_MAP: LanguageAliasMap | undefined;
+let LIKELY_SUBTAGS_MAP: LikelySubtagsMap | undefined;
+
+const initAilas = () => {
+  LANGUAGE_ALIAS_MAP = buildLanguageAliasMap();
+};
+
+const initSubtags = () => {
+  LIKELY_SUBTAGS_MAP = new LikelySubtagsMap(likelySubtags);
+};
 
 /**
  * Methods for substituting language and region aliases, adding likely subtags, etc.

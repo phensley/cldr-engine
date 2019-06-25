@@ -13,12 +13,20 @@ const buildMapSet = (raw: string): MapSet => {
   return res;
 };
 
-const regionToPartition = buildMapSet(regions);
-const macroRegionToPartitions = buildMapSet(macroRegions);
+let regionToPartition: MapSet | undefined;
+let macroRegionToPartitions: MapSet | undefined;
 
 const EMPTY_SET: Set<string> = new Set();
 
+const init = () => {
+  regionToPartition =  buildMapSet(regions);
+  macroRegionToPartitions = buildMapSet(macroRegions);
+};
+
 export const getRegionPartition = (region: string): Set<string> => {
-  const result = regionToPartition[region] || macroRegionToPartitions[region];
+  if (!regionToPartition) {
+    init();
+  }
+  const result = regionToPartition![region] || macroRegionToPartitions![region];
   return result === undefined ? EMPTY_SET : result;
 };

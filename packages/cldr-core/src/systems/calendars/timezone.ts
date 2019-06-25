@@ -20,6 +20,8 @@ interface MetazoneRecord {
 }
 
 export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
+  init();
+
   let tzinfo = TZ.fromUTC(zoneid, utc);
   if (tzinfo === undefined) {
     tzinfo = TZ.utcZone();
@@ -31,10 +33,10 @@ export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
 
   // Use the passed-in id as the stable id if it is an alias,
   // otherwise lookup the id in the stable map.
-  const stableid = isstable ? zoneid : metazones.getStableId(tzinfo.zoneid);
+  const stableid = isstable ? zoneid : metazones!.getStableId(tzinfo.zoneid);
 
   // Use the corrected zone id to lookup the metazone
-  const metazoneid = metazones.getMetazone(tzinfo.zoneid, utc);
+  const metazoneid = metazones!.getMetazone(tzinfo.zoneid, utc);
   return {
     ...tzinfo,
     metazoneid: metazoneid || ('' as MetaZoneType),
@@ -48,6 +50,7 @@ export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
  * since it doesn't need to decode the zone data.
  */
 export const getStableTimeZoneId = (zoneid: string): string => {
+  init();
   // Check if this is already a CLDR stable timezone id.
   const isstable = TimeZoneStableIdIndex.get(zoneid) !== -1;
   if (!isstable) {
@@ -55,7 +58,7 @@ export const getStableTimeZoneId = (zoneid: string): string => {
     const realid = TZ.resolveId(zoneid);
     if (realid) {
       // Map to a CLDR stable id
-      zoneid = metazones.getStableId(realid);
+      zoneid = metazones!.getStableId(realid);
     }
   }
   return zoneid;
@@ -152,7 +155,13 @@ class Metazones {
   }
 }
 
-const metazones = new Metazones(metazoneData);
+let metazones: Metazones | undefined;
+
+const init = () => {
+  if (!metazones) {
+    metazones = new Metazones(metazoneData);
+  }
+};
 
 const zoneAlias = stringToObject(zoneAliasRaw, '|', ':');
 

@@ -12,11 +12,15 @@ const numberCmp = (a: number, b: number) => a === b ? 0 : a < b ? -1 : 1;
 
 // Mapping of paradigm locales to their relative position.
 type ParadigmMap = { [x: string]: number };
-const paradigmLocaleMap: ParadigmMap = paradigmLocales.reduce((o: ParadigmMap, k: string, i: number) => {
-  const compact = LanguageResolver.resolve(k).compact();
-  o[compact] = i;
-  return o;
-}, {});
+let paradigmLocaleMap: ParadigmMap | undefined;
+
+const init = () => {
+  paradigmLocaleMap = paradigmLocales.reduce((o: ParadigmMap, k: string, i: number) => {
+    const c = LanguageResolver.resolve(k).compact();
+    o[c] = i;
+    return o;
+  }, {});
+};
 
 class Entry implements Locale {
   readonly compact: string;
@@ -95,6 +99,10 @@ export class LocaleMatcher {
     // The first locale in the list is used as the default.
     this.default = this.supported[0];
 
+    if (!paradigmLocaleMap) {
+      init();
+    }
+
     this.supported.sort((a: Entry, b: Entry): number => {
       // Keep default tag at the front.
       if (a.tag === this.default.tag) {
@@ -105,8 +113,8 @@ export class LocaleMatcher {
       }
 
       // Sort all paradigm locales before non-paradigms.
-      const pa = paradigmLocaleMap[a.compact];
-      const pb = paradigmLocaleMap[b.compact];
+      const pa = paradigmLocaleMap![a.compact];
+      const pb = paradigmLocaleMap![b.compact];
       if (pa !== undefined) {
         return pb === undefined ? -1 : numberCmp(pa, pb);
       } else if (pb !== undefined) {

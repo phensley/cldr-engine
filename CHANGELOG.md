@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [UNRELEASED]
 ### Fixed/Changed
  - Added `DisplayNameOptions` to methods for language, script, and region names.
+ - Lazy initialize some internal instances.
 
 ## [0.15.3]
 ### Fixed/Changed

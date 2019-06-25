@@ -38,16 +38,20 @@ const UNICODE_EXTENSION_KEYS: { [x: string]: number } = {
 };
 
 // Grandfathered irregular and regular tags from IANA registry.
-const GRANDFATHERED_TAGS: { [x: string]: string } = {
-  ...stringToObject(subtags.grandfatheredRaw, '|', ':'),
+let GRANDFATHERED_TAGS: { [x: string]: string } | undefined;
 
-  // Additional fallbacks from ICU
-  'cel-gaulish': 'xtg-x-cel-gaulish',
-  'en-GB-oed': 'en-GB-x-oed',
-  'i-default': 'en-x-i-default',
-  'i-enochian': 'und-x-i-enochian',
-  'i-mingo': 'see-x-i-mingo',
-  'zh-min': 'nan-x-zh-min'
+const init = () => {
+  GRANDFATHERED_TAGS = {
+    ...stringToObject(subtags.grandfatheredRaw, '|', ':'),
+
+    // Additional fallbacks from ICU
+    'cel-gaulish': 'xtg-x-cel-gaulish',
+    'en-GB-oed': 'en-GB-x-oed',
+    'i-default': 'en-x-i-default',
+    'i-enochian': 'und-x-i-enochian',
+    'i-mingo': 'see-x-i-mingo',
+    'zh-min': 'nan-x-zh-min'
+  };
 };
 
 /**
@@ -89,8 +93,11 @@ class LanguageTagParser {
    * Parse the string and return a language tag object.
    */
   parse(): LanguageTag {
+    if (!GRANDFATHERED_TAGS) {
+      init();
+    }
     const str = this.str.indexOf('_') === -1 ? this.str : this.str.replace(UNDERSCORE, SEP);
-    const preferred = GRANDFATHERED_TAGS[str.toLowerCase()];
+    const preferred = GRANDFATHERED_TAGS![str.toLowerCase()];
     const parts = typeof preferred === 'string' ? preferred.split(SEP) : str.split(SEP);
 
     if (this.parseLanguage(parts)) {
