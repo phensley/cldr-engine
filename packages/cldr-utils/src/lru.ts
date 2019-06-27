@@ -57,14 +57,11 @@ export class LRU<V> {
     if (this.storage.size === this.capacity) {
       const old = this.root.prev;
 
-      /* istanbul ignore else */
-      if (old !== undefined) {
-        this.storage.delete(old.key);
-        this.storage.set(key, old);
-        old.key = key;
-        old.val = val;
-        this.moveFront(old);
-      }
+      this.storage.delete(old!.key);
+      this.storage.set(key, old!);
+      old!.key = key;
+      old!.val = val;
+      this.moveFront(old!);
       return;
     }
 
@@ -96,24 +93,14 @@ export class LRU<V> {
     at.next = e;
     e.prev = at;
     e.next = n;
-    /* istanbul ignore else */
-    if (n) {
-      n.prev = e;
-    }
+    n!.prev = e;
     return e;
   }
 
   protected remove(n: Node<V>): Node<V> {
-    /* istanbul ignore else */
-    if (n.prev) {
-      n.prev.next = n.next;
-    }
-    /* istanbul ignore else */
-    if (n.next) {
-      n.next.prev = n.prev;
-    }
-    n.prev = undefined;
-    n.next = undefined;
+    n.prev!.next = n.next;
+    n.next!.prev = n.prev;
+    n.prev = n.next = undefined;
     return n;
   }
 
