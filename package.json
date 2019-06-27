@@ -52,7 +52,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfig": "tsconfig.settings.json"
+        "tsConfig": "tsconfig.jest.json"
       }
     },
     "moduleFileExtensions": [

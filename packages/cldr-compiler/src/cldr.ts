@@ -268,16 +268,16 @@ const coreCalendarSchema = (name: string) => {
   return {
     availableFormats: get([prefix('dateTimeFormats', 'availableFormats'), (o: any) => filterFormats(o, false)]),
     pluralFormats: get([prefix('dateTimeFormats', 'availableFormats'), (o: any) => filterFormats(o, true)]),
-    dateFormats: get(prefix('dateFormats', ..._sizeProps)),
-    dayPeriods: get(prefix('dayPeriods', ..._formats)),
-    dateTimeFormats: get(prefix('dateTimeFormats', ..._sizeProps)),
+    dateFormats: get(prefix('dateFormats', _sizeProps)),
+    dayPeriods: get(prefix('dayPeriods', _formats)),
+    dateTimeFormats: get(prefix('dateTimeFormats', _sizeProps)),
     eras: get([prefix('eras'), fixEras]),
     intervalFormats: get([L.compose(intervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
     intervalFormatFallback: get(L.compose(intervals, 'intervalFormatFallback')),
-    months: get(prefix('months', ..._formats)),
-    quarters: get(prefix('quarters', ..._formats)),
-    timeFormats: get(prefix('timeFormats', ..._sizeProps)),
-    weekdays: get(prefix('days', ..._formats))
+    months: get(prefix('months', _formats)),
+    quarters: get(prefix('quarters', _formats)),
+    timeFormats: get(prefix('timeFormats', _sizeProps)),
+    weekdays: get(prefix('days', _formats))
   };
 };
 
