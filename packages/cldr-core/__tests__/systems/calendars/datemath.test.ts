@@ -159,7 +159,8 @@ test('persian months', () => {
   q = date.add({ month: 1.5 });
   expect(q.toString()).toEqual('Persian 1379-02-05 16:00:25.000 America/New_York');
 
-  date = persian(new Date(2022, 2, 21, 12, 34, 56, 0).getTime(), NEW_YORK);
+  // Monday, March 21, 2022 12:34:54 PM UTC
+  date = persian(1647880496000, NEW_YORK);
   expect(date.toString()).toEqual('Persian 1401-01-01 12:34:56.000 America/New_York');
 
   q = date.add({ month: 1 });
