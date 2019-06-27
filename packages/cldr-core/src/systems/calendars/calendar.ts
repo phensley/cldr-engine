@@ -357,14 +357,14 @@ export abstract class CalendarDate {
     return [days, ms];
   }
 
-  protected initFromUnixEpoch(ms: number, zoneId: string = 'UTC'): void {
+  protected initFromUnixEpoch(ms: number, zoneId: string): void {
     zoneId = substituteZoneAlias(zoneId);
     this._zoneInfo = zoneInfoFromUTC(zoneId, ms);
     jdFromUnixEpoch(ms + this._zoneInfo.offset, this._fields);
     computeBaseFields(this._fields);
   }
 
-  protected initFromJD(jd: number, msDay: number, zoneId: string = 'UTC'): void {
+  protected initFromJD(jd: number, msDay: number, zoneId: string): void {
     const unixEpoch = unixEpochFromJD(jd, msDay);
     this.initFromUnixEpoch(unixEpoch, zoneId);
   }
