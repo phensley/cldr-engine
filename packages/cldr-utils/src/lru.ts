@@ -55,13 +55,12 @@ export class LRU<V> {
     // The lru is full, so reuse the oldest node to keep the
     // total node allocation stable.
     if (this.storage.size === this.capacity) {
-      const old = this.root.prev;
-
-      this.storage.delete(old!.key);
-      this.storage.set(key, old!);
-      old!.key = key;
-      old!.val = val;
-      this.moveFront(old!);
+      const old = this.root.prev!;
+      this.storage.delete(old.key);
+      this.storage.set(key, old);
+      old.key = key;
+      old.val = val;
+      this.moveFront(old);
       return;
     }
 
