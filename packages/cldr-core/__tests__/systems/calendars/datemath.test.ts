@@ -145,7 +145,7 @@ test('months', () => {
 });
 
 test('persian months', () => {
-  const date: PersianDate = persian(BASE, NEW_YORK);
+  let date: PersianDate = persian(BASE, NEW_YORK);
   let q: PersianDate;
   expect(date.toString()).toEqual('Persian 1378-12-21 03:00:25.000 America/New_York');
 
@@ -158,6 +158,15 @@ test('persian months', () => {
 
   q = date.add({ month: 1.5 });
   expect(q.toString()).toEqual('Persian 1379-02-05 16:00:25.000 America/New_York');
+
+  date = persian(new Date(2022, 2, 21, 12, 34, 56, 0).getTime(), NEW_YORK);
+  expect(date.toString()).toEqual('Persian 1401-01-01 12:34:56.000 America/New_York');
+
+  q = date.add({ month: 1 });
+  expect(q.toString()).toEqual('Persian 1401-02-01 12:34:56.000 America/New_York');
+
+  q = date.add({ month: 1.5 });
+  expect(q.toString()).toEqual('Persian 1401-02-17 00:34:56.000 America/New_York');
 });
 
 test('days', () => {

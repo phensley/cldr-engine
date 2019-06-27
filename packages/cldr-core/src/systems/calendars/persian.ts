@@ -65,7 +65,7 @@ export class PersianDate extends CalendarDate {
       if (d !== 0) {
         // number of days in Esfand determined by:
         // "number of days between two vernal equinoxes"
-        const isLeap = leapPersian(eyear - 1);
+        const isLeap = leapPersian(eyear);
 
         // note: the 'month' parameter must always be <= # months in the calendar
         // year, so <= 12 in this case.
