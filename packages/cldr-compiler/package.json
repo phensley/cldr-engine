@@ -45,25 +45,25 @@
     "@phensley/timezone": "0.16.0",
     "@types/prettier": "^1.10.0",
     "@types/request": "^2.48.1",
-    "@types/yargs": "^11.0.0",
+    "@types/yargs": "11.0.0",
     "chalk": "^2.4.2",
-    "partial.lenses": "^13.7.4",
+    "partial.lenses": "^14.17.0",
     "prettier": "^1.11.1",
     "request": "^2.88.0",
     "tar": "^4.4.8",
     "tslib": "^1.9.3",
-    "yargs": "^11.0.0"
+    "yargs": "11.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
-    "@types/node": "^10.12.21",
+    "@types/node": "^10.14.10",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
     "jest": "^24.8.0",
     "rimraf": "^2.6.2",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.14.0",
-    "tslint-no-circular-imports": "^0.6.1",
+    "tslint": "^5.18.0",
+    "tslint-no-circular-imports": "^0.7.0",
     "typescript": "3.5.x"
   },
   "jest": {
