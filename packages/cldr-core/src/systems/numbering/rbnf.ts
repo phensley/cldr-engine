@@ -1,5 +1,5 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-// import { pluralRules } from '../plurals';
+import { pluralRules } from '../plurals';
 import {
   ApplyLeft2NumFormatInst,
   ApplyLeft2RuleInst,
@@ -15,17 +15,6 @@ import {
   SubLeftInst,
 } from './rbnftypes';
 import { binarySearch } from './utils';
-import { pluralRules } from '../plurals';
-
-// import { scaninst, scaninsts } from './debug';
-
-const VERBOSE = true;
-
-const log = (...s: any[]) => {
-  if (VERBOSE) {
-    console.log(...s);
-  }
-};
 
 // Divisors based on the number of integer digits in the number being formatted.
 // A 2-digit number's divisor will be '1e1', 3-digit '1e2' and so on.
@@ -36,15 +25,6 @@ const DIVISORS: Decimal[] = [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
 const { ONE, ZERO } = DecimalConstants;
 const MINUS_ONE = ONE.negate();
 const TEN = new Decimal(10);
-
-// Extra debug symbols that are folded into a ruleset in debug mode.
-interface RBNFDebug {
-  allnames: string[];
-}
-
-const NOOP_DEBUG: RBNFDebug = {
-  allnames: [],
-};
 
 type IntegerSubInst = ApplyLeftRuleInst
   | ApplyLeft2RuleInst
@@ -76,9 +56,7 @@ export class RBNF {
     // Indices of fraction rules in rulesets array
     fractions: number[],
     // Array of rulesets
-    readonly rulesets: RBNFRule[][],
-    // Optional debug including names for all private rules
-    readonly debug: RBNFDebug = NOOP_DEBUG
+    readonly rulesets: RBNFRule[][]
   ) {
     names.forEach((n, i) => this.index.set(n, i));
     this.fractions = new Set<number>(fractions);
@@ -100,7 +78,7 @@ export class RBNF {
  * root locale) while others will be added to the corresponding language's resource
  * pack and only available when that language has been loaded.
  */
-class RBNFEngine {
+export class RBNFEngine {
 
   private buf: string = '';
   private errors: string[] = [];
@@ -121,8 +99,7 @@ class RBNFEngine {
     return this.buf;
   }
 
-  private _format(n: Decimal, si: number, fraction: boolean = false): void {
-    // log('\n  _format:', n.toString(), si, this.rbnf.debug.allnames[si]);
+  protected _format(n: Decimal, si: number, fraction: boolean = false): void {
     const ri = this._match(n, si);
     if (ri === -1) {
       // TODO: check for NaN and Inf, and handle by substituting symbols
@@ -132,7 +109,7 @@ class RBNFEngine {
     this._evalinst(n, r[1], r, ri, si, fraction);
   }
 
-  private _match(n: Decimal, si: number): number {
+  protected _match(n: Decimal, si: number): number {
     const rules = this.rbnf.rulesets[si];
     const neg = n.isNegative();
     const int = n.isInteger();
@@ -192,12 +169,9 @@ class RBNFEngine {
     return -1;
   }
 
-  private _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number, fraction: boolean = false): void {
-    // log('BEGIN _evalinst:', n.toString(), RULETYPES[r[0]]);
+  protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number, fraction: boolean = false): void {
     for (let j = 0; j < i.length; j++) {
       const inst = i[j];
-      // scaninst(this.rbnf, inst, '   ');
-      // console.log();
       switch (inst[0]) {
         case Opcode.LITERAL:
           this.symbol(inst[1]);
@@ -206,7 +180,6 @@ class RBNFEngine {
         case Opcode.OPTIONAL:
           // If number is not a multiple of radix, execute the optional block
           if (ZERO.compare(n.divmod(this.getradix(r))[1]) !== 0) {
-            // log('OPTONAL', this.rbnf.debug.allnames[si], n.toString());
             this._evalinst(n, inst[1], r, ri, si, true);
           }
           break;
@@ -235,10 +208,6 @@ class RBNFEngine {
           } else if (fraction || this.rbnf.fractions.has(si)) {
             const base = r[0] === RuleType.NORMAL || r[0] === RuleType.NORMAL_RADIX ? r[2] : -1;
             if (base !== -1) {
-              // if (VERBOSE) {
-              //   scaninst(this.rbnf, inst, '   ');
-              //   console.log();
-              // }
               this.numeratorsub(n, inst, base, ri, si);
             }
           } else {
@@ -268,24 +237,21 @@ class RBNFEngine {
           break;
 
         default:
+          // TODO: remove
           console.log('   MISSING:', inst[0]);
           break;
       }
     }
-    // log('  END _evalinst:', n.toString(), RULETYPES[r[0]]);
-
   }
 
-  private symbol(i: number): void {
-    // log(`sym ${i}: '${this.rbnf.symbols[i]}'`);
+  protected symbol(i: number): void {
     this.buf += this.rbnf.symbols[i];
   }
 
-  private fractionsub(n: Decimal, inst: RBNFInst, ri: number, si: number): void {
+  protected fractionsub(n: Decimal, inst: RBNFInst, ri: number, si: number): void {
     const _si = inst[0] === Opcode.APPLY_RIGHT_RULE ? inst[1] : si;
     const digits = inst[0] === Opcode.SUB_RIGHT || inst[0] === Opcode.SUB_RIGHT_3 || _si === si;
     const spaces = inst[0] !== Opcode.SUB_RIGHT_3;
-    // log('fractionsub():', n.toString(), OPCODES[inst[0]], ri, _si, si, digits, spaces);
     if (digits) {
       this.bydigit(n, ri, si, spaces);
     } else {
@@ -302,19 +268,13 @@ class RBNFEngine {
       const k = this._match(d, _si);
       if (k !== -1) {
         const r = this.rbnf.rulesets[_si][k];
-        // if (VERBOSE) {
-        //   scaninsts(this.rbnf, r[1], '   ');
-        //   console.log(`RULE: ${r} ${_si}`);
-        // }
         this._evalinst(t, r[1], r, k, _si, true);
       }
     }
-    // TODO:
   }
 
-  private integersub(n: Decimal, inst: IntegerSubInst, _ri: number, si: number): void {
+  protected integersub(n: Decimal, inst: IntegerSubInst, _ri: number, si: number): void {
     n = n.toInteger();
-    // log('integersub():', inst, n.toString(), ri, si);
     switch (inst[0]) {
       case Opcode.APPLY_LEFT_RULE:
       case Opcode.APPLY_LEFT_2_RULE:
@@ -323,13 +283,13 @@ class RBNFEngine {
         break;
       case Opcode.APPLY_LEFT_NUM_FORMAT:
       case Opcode.APPLY_LEFT_2_NUM_FORMAT:
+        // TODO: implement number format
         this.buf += '#';
         break;
     }
   }
 
-  private numeratorsub(n: Decimal, inst: RBNFInst, _base: number, _ri: number, _si: number): void {
-    // log(' numeratorsub():', n.toString(), OPCODES[inst[0]], this.rbnf.numbers[base].toString(), ri, si);
+  protected numeratorsub(n: Decimal, inst: RBNFInst, _base: number, _ri: number, _si: number): void {
     switch (inst[0]) {
       case Opcode.APPLY_LEFT_2_RULE:
         this._format(n, inst[1]);
@@ -337,27 +297,22 @@ class RBNFEngine {
     }
   }
 
-  private multipliersub(n: Decimal, inst: RBNFInst, radix: Decimal, _ri: number, si: number): void {
+  protected multipliersub(n: Decimal, inst: RBNFInst, radix: Decimal, _ri: number, si: number): void {
     const [q] = n.divmod(radix);
-    // log('multipliersub():', q.toString(), r.toString());
-    // if (VERBOSE) {
-    //   scaninst(this.rbnf, inst, '   ');
-    //   log();
-    // }
     switch (inst[0]) {
       case Opcode.APPLY_LEFT_RULE:
       case Opcode.SUB_LEFT:
         this._format(q, inst[0] === Opcode.SUB_LEFT ? si : inst[1]);
         break;
       default:
-        log('MISSING:', inst[0]);
+        // TODO: remove
+        console.log('MISSING:', inst[0]);
         break;
     }
   }
 
-  private modulussub(n: Decimal, inst: RBNFInst, radix: Decimal, _ri: number, si: number): void {
+  protected modulussub(n: Decimal, inst: RBNFInst, radix: Decimal, _ri: number, si: number): void {
     const r = n.divmod(radix)[1];
-    // log('modulussub', n.toString(), radix.toString(), '>>', r.toString(), optional);
       switch (inst[0]) {
         case Opcode.APPLY_RIGHT_RULE:
         case Opcode.SUB_RIGHT:
@@ -366,14 +321,13 @@ class RBNFEngine {
       }
   }
 
-  private plural(n: Decimal, cardinal: boolean): number {
+  protected plural(n: Decimal, cardinal: boolean): number {
     const o = n.operands();
     const cat = cardinal ? pluralRules.cardinal(this.language, o) : pluralRules.ordinal(this.language, o);
-    // log('MATCH PLURAL:', this.language, o, cat);
     return PLURALS[cat];
   }
 
-  private bydigit(n: Decimal, _ri: number, si: number, spaces: boolean = true): void {
+  protected bydigit(n: Decimal, _ri: number, si: number, spaces: boolean = true): void {
     let i = 0;
     while (ZERO.compare(n) !== 0) {
       if (spaces && i) {
@@ -389,7 +343,7 @@ class RBNFEngine {
     }
   }
 
-  private getradix(r: RBNFRule): Decimal {
+  protected getradix(r: RBNFRule): Decimal {
     const n = this.rbnf.numbers;
     return r[0] === RuleType.NORMAL_RADIX ? n[r[3]] :
       r[0] === RuleType.NORMAL ? DIVISORS[n[r[2]].integerDigits()] : TEN;

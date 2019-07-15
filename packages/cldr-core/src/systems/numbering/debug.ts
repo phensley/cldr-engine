@@ -1,5 +1,6 @@
-import { Opcode, RuleType, RBNFInst } from './rbnftypes';
-import { RBNF } from './rbnf';
+import { Decimal } from '@phensley/decimal';
+import { Opcode, RuleType, RBNFInst, RBNFRule } from './rbnftypes';
+import { RBNF as RBNFBase, RBNFEngine as RBNFEngineBase } from './rbnf';
 
 const REVPLURALS: { [x: number]: string } = {
   0: 'zero',
@@ -9,6 +10,86 @@ const REVPLURALS: { [x: number]: string } = {
   4: 'many',
   5: 'other'
 };
+
+// Extra debug symbols that are folded into a ruleset in debug mode.
+interface RBNFDebug {
+  allnames: string[];
+}
+
+const NOOP_DEBUG: RBNFDebug = {
+  allnames: [],
+};
+
+export class RBNF extends RBNFBase {
+
+  constructor(
+    names: string[],
+    decimal: number,
+    numbers: Decimal[],
+    symbols: string[],
+    fractions: number[],
+    rulesets: RBNFRule[][],
+
+    // Optional debug including names for all private rules
+    readonly debug: RBNFDebug = NOOP_DEBUG
+  ) {
+    super(names, decimal, numbers, symbols, fractions, rulesets);
+  }
+
+  format(language: string, rulename: string, n: Decimal): string {
+    return new RBNFDebugEngine(language, this).format(rulename, n);
+  }
+
+}
+
+export const pad = (s: string, n: number) => {
+  const d = n - s.length;
+  return  ' '.repeat(d > 0 ? d : 0) + s;
+};
+
+type tracefunc = (...s: any[]) => void;
+
+class RBNFDebugEngine extends RBNFEngineBase {
+
+  private depth: number = 0;
+  private id: number = 0;
+  private allnames: string[];
+
+  constructor(
+    language: string,
+    rbnf: RBNF
+  ) {
+    super(language, rbnf);
+    this.allnames = rbnf.debug.allnames;
+  }
+
+  protected trace(...s: any[]): tracefunc {
+    const id = `${pad(`[${this.id}]`, 5)}`;
+    const indent = '  '.repeat(this.depth);
+    this.id++;
+    this.depth++;
+    console.log(indent, id, '>>', ...s);
+    return (...e: any[]) => {
+      this.depth--;
+      const a = e.length ? e : s;
+      console.log(indent, id, '<<', ...a);
+    };
+  }
+
+  protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number, fraction: boolean = false): void {
+    const insts = i.map(_i => OPCODES[_i[0]]).join(',');
+    const t = this.trace(`_evalinst '${n.toString()}' ${this.allnames[si]}  rule=${RULETYPES[r[0]]} insts=${insts}`);
+    super._evalinst(n, i, r, ri, si, fraction);
+    t('_evalinst');
+  }
+
+  protected modulussub(n: Decimal, inst: RBNFInst, radix: Decimal, _ri: number, si: number): void {
+    const t = this.trace('modolussub', n.toString());
+    super.modulussub(n, inst, radix, _ri, si);
+    t('modulussub');
+  }
+
+}
 
 export const scaninst = (rbnf: RBNF, inst: RBNFInst, indent: string) => {
   const iname = OPCODES[inst[0]];

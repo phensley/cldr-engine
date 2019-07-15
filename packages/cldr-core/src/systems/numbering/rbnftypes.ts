@@ -1,11 +1,3 @@
-// import { Decimal } from '@phensley/decimal';
-// import { PluralType } from '@phensley/cldr-schema';
-
-// Notation for categories in compact plural rules
-// const CATEGORIES: PluralType[] = [
-//   'zero', 'one', 'two', 'few', 'many', 'other'
-// ];
-
 /**
  * Types for encoding RBNF rules as compactly as possible, removing ambiguity,
  * i.e. we encode the rules so as to minimize the guesswork at runtime.
@@ -118,61 +110,64 @@ export interface ApplyLeftRuleInst {
   readonly [1]: number;
 }
 
-// Syntax: <#,##0<
+// Syntax:  <#,##0<
 export interface ApplyLeftNumFormatInst {
   readonly [0]: Opcode.APPLY_LEFT_NUM_FORMAT;
   // offset into symbol table
   readonly [1]: number;
 }
 
+// Syntax:  <%rulename<<
 export interface ApplyLeft2RuleInst {
   readonly [0]: Opcode.APPLY_LEFT_2_RULE;
   // offset into ruleset array
   readonly [1]: number;
 }
 
+// Syntax:  <#,##0<<
 export interface ApplyLeft2NumFormatInst {
   readonly [0]: Opcode.APPLY_LEFT_2_NUM_FORMAT;
   // offset into symbol table
   readonly [1]: number;
 }
 
-export interface ApplyLeft2RuleInst {
-  readonly [0]: Opcode.APPLY_LEFT_2_RULE;
-  // offset into ruleset array
-  readonly [1]: number;
-}
-
+// Syntax:  >%rulename>
 export interface ApplyRightRuleInst {
   readonly [0]: Opcode.APPLY_RIGHT_RULE;
   // offset into ruleset array
   readonly [1]: number;
 }
 
+// Syntax:  >#,##0>
 export interface ApplyRightNumFormatInst {
   readonly [0]: Opcode.APPLY_RIGHT_NUM_FORMAT;
   // offset into symbol table
   readonly [1]: number;
 }
 
+// Syntax:  <<
 export interface SubLeftInst {
   readonly [0]: Opcode.SUB_LEFT;
 }
 
+// Syntax:  >>
 export interface SubRightInst {
   readonly [0]: Opcode.SUB_RIGHT;
 }
 
+// Syntax:  >>>
 export interface SubRight3Inst {
   readonly [0]: Opcode.SUB_RIGHT_3;
 }
 
+// Syntax:  =%rulename=
 export interface UnchangedRuleInst {
   readonly [0]: Opcode.UNCHANGED_RULE;
   // offset into ruleset array
   readonly [1]: number;
 }
 
+// Syntax:  =#,##0=
 export interface UnchangedNumFormatInst {
   readonly [0]: Opcode.UNCHANGED_NUM_FORMAT;
   // offset into symbol table for number format
@@ -182,14 +177,17 @@ export interface UnchangedNumFormatInst {
 /**
  * A block of rules that is optionally evaluated based on
  * some condition.
+ * Syntax:  [...]
  */
 export interface OptionalInst {
   readonly [0]: Opcode.OPTIONAL;
+  // nested optional instructions to evaluate
   readonly [1]: RBNFInst[];
 }
 
 /**
  * A substitution in a plural rule. Has a category and substition string.
+ * Syntax:  one{st}
  */
 export interface PluralSub {
   // offset into plural categories array
@@ -198,13 +196,19 @@ export interface PluralSub {
   readonly [1]: number;
 }
 
+// Syntax:  $(cardinal,one{Billiard}other{Billiarden})$
 export interface CardinalInst {
+  // cardinal plural type
   readonly [0]: Opcode.CARDINAL;
+  // literal substitutions for each plural category
   readonly [1]: PluralSub[];
 }
 
+// Syntax:  $(ordinal,one{st}two{nd}few{rd}other{th})$
 export interface OrdinalInst {
+  // ordinal plural type
   readonly [0]: Opcode.ORDINAL;
+  // literal substitutions for each plural category
   readonly [1]: PluralSub[];
 }
 
@@ -225,6 +229,7 @@ export type RBNFInst = LiteralInst
   | UnchangedNumFormatInst
   ;
 
+// Mapping from string name of plural category to rbnf equivalent
 export const PLURALS: { [x: string]: number } = {
   zero: 0,
   one: 1,
