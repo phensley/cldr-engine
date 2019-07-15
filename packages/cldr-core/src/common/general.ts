@@ -15,3 +15,10 @@ export interface DisplayNameOptions {
 
   context?: ContextType;
 }
+
+/**
+ * @alpha
+ */
+export interface CurrencyDisplayNameOptions {
+  context?: ContextType;
+}

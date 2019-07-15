@@ -10,6 +10,7 @@ import { DecimalArg, Part } from '@phensley/decimal';
 
 import {
   CalendarFieldsOptions,
+  CurrencyDisplayNameOptions,
   CurrencyFormatOptions,
   CurrencyFractions,
   CurrencySymbolWidthType,
@@ -259,12 +260,12 @@ export interface Numbers {
   /**
    * Returns the display name of the currency.
    */
-  getCurrencyDisplayName(code: CurrencyType): string;
+  getCurrencyDisplayName(code: CurrencyType, options?: CurrencyDisplayNameOptions): string;
 
   /**
    * Returns the pluralized display name of the currency.
    */
-  getCurrencyPluralName(code: CurrencyType, plural: string): string;
+  getCurrencyPluralName(num: DecimalArg, code: CurrencyType, options?: CurrencyDisplayNameOptions): string;
 
   /**
    * Return the currency fraction info for a given currency code.

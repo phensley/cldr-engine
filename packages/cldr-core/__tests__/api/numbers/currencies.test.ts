@@ -397,13 +397,16 @@ test('currency display names', () => {
   let s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('US Dollar');
 
-  s = api.getCurrencyPluralName('USD', 'one');
-  expect(s).toEqual('US dollar');
-
-  s = api.getCurrencyPluralName('USD', 'two');
+  s = api.getCurrencyPluralName('0', 'USD');
   expect(s).toEqual('US dollars');
 
-  s = api.getCurrencyPluralName('USD', 'other');
+  s = api.getCurrencyPluralName('1', 'USD');
+  expect(s).toEqual('US dollar');
+
+  s = api.getCurrencyPluralName('1.1', 'USD');
+  expect(s).toEqual('US dollars');
+
+  s = api.getCurrencyPluralName('2', 'USD');
   expect(s).toEqual('US dollars');
 
   api = numbersApi('en-GB');
@@ -412,11 +415,11 @@ test('currency display names', () => {
 
   api = numbersApi('es-419');
   s = api.getCurrencyDisplayName('USD');
-  expect(s).toEqual('dólar estadounidense');
+  expect(s).toEqual('Dólar estadounidense');
 
   api = numbersApi('fr');
   s = api.getCurrencyDisplayName('USD');
-  expect(s).toEqual('dollar des États-Unis');
+  expect(s).toEqual('Dollar des États-Unis');
 });
 
 test('currency special decimal', () => {

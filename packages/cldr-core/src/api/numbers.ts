@@ -1,10 +1,8 @@
-import {
-  CurrencyType,
-  PluralType,
-} from '@phensley/cldr-schema';
+import { ContextType, CurrencyType, PluralType } from '@phensley/cldr-schema';
 import { coerceDecimal, Decimal, DecimalArg, Part } from '@phensley/decimal';
 
 import {
+  CurrencyDisplayNameOptions,
   CurrencyFormatOptions,
   CurrencyFractions,
   CurrencySymbolWidthType,
@@ -12,34 +10,43 @@ import {
 } from '../common';
 
 import { Bundle } from '../resource';
-import { NumberParams } from '../common/private';
+import { ContextTransformInfo, NumberParams } from '../common/private';
 import { Numbers } from './api';
 import { PrivateApiImpl } from './private';
 import {
   getCurrencyForRegion,
   getCurrencyFractions,
+  GeneralInternals,
   NumberInternals,
   NumberRenderer,
 } from '../internals';
 import { pluralRules } from '../systems/plurals';
+
+const DEFAULT_CURRENCY_OPTIONS: CurrencyDisplayNameOptions = { context: 'begin-sentence' };
 
 /**
  * Number and currency formatting.
  */
 export class NumbersImpl implements Numbers {
 
+  protected transform: ContextTransformInfo;
+
   constructor(
     private readonly bundle: Bundle,
     private readonly numbers: NumberInternals,
+    private readonly general: GeneralInternals,
     private readonly privateApi: PrivateApiImpl
-  ) { }
+  ) {
+    this.transform = privateApi.getContextTransformInfo();
+  }
 
   getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string {
     return this.numbers.getCurrencySymbol(this.bundle, code, width);
   }
 
-  getCurrencyDisplayName(code: CurrencyType): string {
-    return this.numbers.getCurrencyDisplayName(this.bundle, code);
+  getCurrencyDisplayName(code: CurrencyType, opts: CurrencyDisplayNameOptions = DEFAULT_CURRENCY_OPTIONS): string {
+    const name = this.numbers.getCurrencyDisplayName(this.bundle, code);
+    return this.general.contextTransform(name, this.transform, _ctx(opts), 'currencyName');
   }
 
   getCurrencyFractions(code: CurrencyType): CurrencyFractions {
@@ -50,9 +57,14 @@ export class NumbersImpl implements Numbers {
     return getCurrencyForRegion(region);
   }
 
-  getCurrencyPluralName(code: CurrencyType, plural: PluralType): string {
-    const name = this.numbers.getCurrencyPluralName(this.bundle, code, plural);
-    return name !== '' ? name : this.numbers.getCurrencyPluralName(this.bundle, code, 'other');
+  getCurrencyPluralName(n: DecimalArg, code: string,
+      opts: CurrencyDisplayNameOptions = DEFAULT_CURRENCY_OPTIONS): string {
+    const plural = this.getPluralCardinal(n);
+    let name = this.numbers.getCurrencyPluralName(this.bundle, code, plural as PluralType);
+    if (!name) {
+      name = this.numbers.getCurrencyPluralName(this.bundle, code, 'other');
+    }
+    return this.general.contextTransform(name, this.transform, _ctx(opts), 'currencyName');
   }
 
   getPluralCardinal(n: DecimalArg): string {
@@ -147,3 +159,10 @@ const validate = <T>(
     : isinfinity ? renderer.make('infinity', params.symbols.infinity)
     : undefined;
 };
+
+// Default an options context value
+const _ctx = (o: CurrencyDisplayNameOptions) => _def(o, 'context', 'begin-sentence' as ContextType);
+
+// Default an option value
+const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T =>
+  (o ? (o[k] as unknown as T) : t) || t;
