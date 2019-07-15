@@ -85,7 +85,7 @@ export class RBNFEngine {
 
   constructor(
     private language: string,
-    private rbnf: RBNF
+    protected rbnf: RBNF
   ) { }
 
   format(name: string, n: Decimal): string {

@@ -11,15 +11,6 @@ const REVPLURALS: { [x: number]: string } = {
   5: 'other'
 };
 
-// Extra debug symbols that are folded into a ruleset in debug mode.
-interface RBNFDebug {
-  allnames: string[];
-}
-
-const NOOP_DEBUG: RBNFDebug = {
-  allnames: [],
-};
-
 export class RBNF extends RBNFBase {
 
   constructor(
@@ -28,10 +19,7 @@ export class RBNF extends RBNFBase {
     numbers: Decimal[],
     symbols: string[],
     fractions: number[],
-    rulesets: RBNFRule[][],
-
-    // Optional debug including names for all private rules
-    readonly debug: RBNFDebug = NOOP_DEBUG
+    rulesets: RBNFRule[][]
   ) {
     super(names, decimal, numbers, symbols, fractions, rulesets);
   }
@@ -53,14 +41,12 @@ class RBNFDebugEngine extends RBNFEngineBase {
 
   private depth: number = 0;
   private id: number = 0;
-  private allnames: string[];
 
   constructor(
     language: string,
     rbnf: RBNF
   ) {
     super(language, rbnf);
-    this.allnames = rbnf.debug.allnames;
   }
 
   protected trace(...s: any[]): tracefunc {
@@ -69,16 +55,17 @@ class RBNFDebugEngine extends RBNFEngineBase {
     this.id++;
     this.depth++;
     console.log(indent, id, '>>', ...s);
-    return (...e: any[]) => {
+    return (..._e: any[]) => {
       this.depth--;
-      const a = e.length ? e : s;
-      console.log(indent, id, '<<', ...a);
+      // const a = e.length ? e : s;
+      // console.log(indent, id, '<<', ...a);
     };
   }
 
   protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number, fraction: boolean = false): void {
-    const insts = i.map(_i => OPCODES[_i[0]]).join(',');
-    const t = this.trace(`_evalinst '${n.toString()}' ${this.allnames[si]}  rule=${RULETYPES[r[0]]} insts=${insts}`);
+    // const insts = i.map(_i => OPCODES[_i[0]]).join(',');
+    const t = this.trace(
+      `_evalinst '${n.toString()}' ${this.rbnf.names[si]} ${this.rulerepr(r)}`);
     super._evalinst(n, i, r, ri, si, fraction);
     t('_evalinst');
   }
@@ -89,80 +76,72 @@ class RBNFDebugEngine extends RBNFEngineBase {
     t('modulussub');
   }
 
-}
-
-export const scaninst = (rbnf: RBNF, inst: RBNFInst, indent: string) => {
-  const iname = OPCODES[inst[0]];
-  let desc = '<NONE>';
-  switch (inst[0]) {
-    case Opcode.APPLY_LEFT_RULE:
-    case Opcode.APPLY_LEFT_2_RULE:
-    case Opcode.APPLY_RIGHT_RULE:
-    case Opcode.UNCHANGED_RULE:
-      desc = rbnf.debug.allnames[inst[1]];
-      break;
-    case Opcode.LITERAL:
-      desc = `"${rbnf.symbols[inst[1]]}"`;
-      break;
-    case Opcode.APPLY_LEFT_NUM_FORMAT:
-    case Opcode.APPLY_LEFT_2_NUM_FORMAT:
-    case Opcode.APPLY_RIGHT_NUM_FORMAT:
-    case Opcode.UNCHANGED_NUM_FORMAT:
-      desc = `${rbnf.symbols[inst[1]]}`;
-      break;
-    case Opcode.SUB_LEFT:
-    case Opcode.SUB_RIGHT:
-    case Opcode.SUB_RIGHT_3:
-      desc = '';
-      break;
-    case Opcode.CARDINAL:
-    case Opcode.ORDINAL:
-      desc = '';
-      inst[1].forEach(sub => {
-        desc += `${REVPLURALS[sub[0]]}{${rbnf.symbols[sub[1]]}} `;
-      });
-      break;
-    case Opcode.OPTIONAL:
-      console.log(`${indent}${iname}`);
-      scaninsts(rbnf, inst[1], indent + '  ');
-      break;
-  }
-  console.log(`${indent}${iname}  ${desc}`);
-};
-
-export const scaninsts = (rbnf: RBNF, insts: RBNFInst[], indent: string) => {
-  for (const inst of insts) {
-    scaninst(rbnf, inst, indent);
-  }
-};
-
-export const dump = (rbnf: RBNF) => {
-  const len = rbnf.rulesets.length;
-  for (let i = 0; i < len; i++) {
-    const ruleset = rbnf.rulesets[i];
-    console.log(`%${rbnf.debug.allnames[i]}`);
-    for (const rule of ruleset) {
-      const rulename = RULETYPES[rule[0]];
-      const insts: RBNFInst[] = rule[1];
-      let desc = '';
-      switch (rule[0]) {
-        case RuleType.IMPROPER_FRACTION:
-        case RuleType.PROPER_FRACTION:
-          desc = rule[1] ? 'comma' : 'period';
-          break;
-        case RuleType.NORMAL:
-          desc = rbnf.numbers[rule[2]].toString();
-          break;
-        case RuleType.NORMAL_RADIX:
-          desc = `${rbnf.numbers[rule[2]].toString()}/${rbnf.numbers[rule[3]].toString()}`;
-          break;
+  private rulerepr(rule: RBNFRule): string {
+    let res = '';
+    switch (rule[0]) {
+      case RuleType.IMPROPER_FRACTION:
+      case RuleType.PROPER_FRACTION:
+        const sym = rule[2] === 1 ? ',' : '.';
+        res += `"${rule[0] === RuleType.IMPROPER_FRACTION ? 'x' : '0'}${sym}x"`;
+        break;
+      case RuleType.MINUS:
+        res += '"-x"';
+        break;
+      case RuleType.INFINITY:
+        res += `"Inf"`;
+        break;
+      case RuleType.NOT_A_NUMBER:
+        res += 'NaN';
+        break;
+      case RuleType.NORMAL:
+        res += `"${this.rbnf.numbers[rule[2]]}"`;
+        break;
+      case RuleType.NORMAL_RADIX:
+        res += `"${this.rbnf.numbers[rule[2]]}/${this.rbnf.numbers[rule[3]]}"`;
+        break;
+      default:
+        res += '!!!!!';
       }
-      console.log(`  ${rulename} ${desc}`);
-      scaninsts(rbnf, insts, '    ');
-    }
-    console.log();
+    res += '  "' + rule[1].map(i => this.instrepr(i)).join('') + ';"';
+    return res;
   }
-};
+
+  private instrepr(i: RBNFInst): string {
+    switch (i[0]) {
+      case Opcode.APPLY_LEFT_NUM_FORMAT:
+        return `<${this.rbnf.symbols[i[1]]}<`;
+      case Opcode.APPLY_LEFT_RULE:
+        return `<%${this.rbnf.names[i[1]]}%<`;
+      case Opcode.APPLY_LEFT_2_NUM_FORMAT:
+        return `<${this.rbnf.symbols[i[1]]}<<`;
+      case Opcode.APPLY_LEFT_2_RULE:
+        return `<%${this.rbnf.names[i[1]]}%<<`;
+      case Opcode.APPLY_RIGHT_RULE:
+        return `>%${this.rbnf.names[i[1]]}%>`;
+      case Opcode.OPTIONAL:
+        return '[' + i[1].map(_i => this.instrepr(_i)).join('') + ']';
+      case Opcode.LITERAL:
+        return this.rbnf.symbols[i[1]];
+      case Opcode.SUB_LEFT:
+        return '<<';
+      case Opcode.SUB_RIGHT:
+        return '>>';
+      case Opcode.SUB_RIGHT_3:
+        return '>>>';
+      case Opcode.UNCHANGED_NUM_FORMAT:
+        return `=${this.rbnf.symbols[i[1]]}=`;
+      case Opcode.UNCHANGED_RULE:
+        return `=%${this.rbnf.names[i[1]]}%=`;
+      case Opcode.CARDINAL:
+      case Opcode.ORDINAL:
+        const r = i[0] === Opcode.CARDINAL ? 'cardinal' : 'ordinal';
+        const subs = i[1].map(s => `${REVPLURALS[s[0]]}{${this.rbnf.symbols[s[1]]}}`).join('');
+        return `$(${r},${subs})$`;
+      default:
+        return OPCODES[i[0]];
+    }
+  }
+}
 
 export const OPCODES: { [x: number]: string } = {
   [Opcode.APPLY_LEFT_2_NUM_FORMAT]: 'APPLY_LEFT_2_NUM_FORMAT',

@@ -4,9 +4,6 @@ import { parseRBNF, RBNFNode } from '../parsing/parser.rbnf';
 import { JSONRoot, JSONRulesetInner, ROOT_KEYS } from './json';
 import { FrequencySet } from '../utils';
 
-// In debug mode we add debug symbols to the encoded result
-const DEBUG = false;
-
 const IGNORED = new Set(['lenient-parse']);
 
 const PLURALS: string[] = [
@@ -148,9 +145,8 @@ export class RBNFEncoder {
 
     const result = this._encode(rulesets);
 
-    // Public names, ordered 1:1 with their rulesets
-    const names = rulesets.filter(r => r[1].private === 0).map(r => r[0]);
-    const allnames = rulesets.map(r => r[0]);
+    // All names ordered 1:1 with their rulesets
+    const names = rulesets.map(r => r[0]);
 
     // Extract ruleset offset for all fraction rules
     const fractions: number[] = [];
@@ -160,9 +156,6 @@ export class RBNFEncoder {
       names: names.join('\t'),
       fractions: fractions.sort(),
       rulesets: result,
-
-      // Optionally include debug info
-      debug: DEBUG ? { allnames } : undefined,
     };
   }
 
