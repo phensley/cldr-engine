@@ -393,9 +393,33 @@ test('currency symbols', () => {
 
 test('currency display names', () => {
   let api = numbersApi('en');
+  let s: string;
 
-  let s = api.getCurrencyDisplayName('USD');
+  s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('US Dollar');
+
+  api = numbersApi('en-GB');
+  s = api.getCurrencyDisplayName('USD');
+  expect(s).toEqual('US Dollar');
+
+  api = numbersApi('es');
+  s = api.getCurrencyDisplayName('USD');
+  expect(s).toEqual('Dólar estadounidense');
+
+  s = api.getCurrencyDisplayName('USD', { context: 'middle-of-text' });
+  expect(s).toEqual('dólar estadounidense');
+
+  api = numbersApi('fr');
+  s = api.getCurrencyDisplayName('USD');
+  expect(s).toEqual('Dollar des États-Unis');
+
+  s = api.getCurrencyDisplayName('USD', { context: 'middle-of-text' });
+  expect(s).toEqual('dollar des États-Unis');
+});
+
+test('currency plural names', () => {
+  let api = numbersApi('en');
+  let s: string;
 
   s = api.getCurrencyPluralName('0', 'USD');
   expect(s).toEqual('US dollars');
@@ -409,17 +433,28 @@ test('currency display names', () => {
   s = api.getCurrencyPluralName('2', 'USD');
   expect(s).toEqual('US dollars');
 
-  api = numbersApi('en-GB');
-  s = api.getCurrencyDisplayName('USD');
-  expect(s).toEqual('US Dollar');
-
-  api = numbersApi('es-419');
-  s = api.getCurrencyDisplayName('USD');
+  api = numbersApi('es');
+  s = api.getCurrencyPluralName('1', 'USD');
   expect(s).toEqual('Dólar estadounidense');
 
+  s = api.getCurrencyPluralName('2', 'USD');
+  expect(s).toEqual('Dólares estadounidenses');
+
+  s = api.getCurrencyPluralName('2', 'USD', { context: 'middle-of-text' });
+  expect(s).toEqual('dólares estadounidenses');
+
   api = numbersApi('fr');
-  s = api.getCurrencyDisplayName('USD');
+  s = api.getCurrencyPluralName('0', 'USD');
   expect(s).toEqual('Dollar des États-Unis');
+
+  s = api.getCurrencyPluralName('1', 'USD');
+  expect(s).toEqual('Dollar des États-Unis');
+
+  s = api.getCurrencyPluralName('2', 'USD');
+  expect(s).toEqual('Dollars des États-Unis');
+
+  s = api.getCurrencyPluralName('2', 'USD', { context: 'middle-of-text' });
+  expect(s).toEqual('dollars des États-Unis');
 });
 
 test('currency special decimal', () => {
