@@ -20,7 +20,6 @@ export interface JSONRuleset {
 
 export interface JSONRulesetInner {
   private: number;
-  fraction?: number;
   rules: JSONRule[];
 }
 

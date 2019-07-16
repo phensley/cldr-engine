@@ -10,11 +10,13 @@ const PLURALS: string[] = [
   'zero', 'one', 'two', 'few', 'many', 'other'
 ];
 
+type Pair = [string, JSONRulesetInner];
+
 /**
  * Collect all rulesets.
  */
-const collect = (root: JSONRoot): [string, JSONRulesetInner][] => {
-  const res: [string, JSONRulesetInner][] = [];
+const collect = (root: JSONRoot): Pair[] => {
+  const res: Pair[] = [];
   for (const key of ROOT_KEYS) {
     const rulesets = root[key];
     if (!rulesets) {
@@ -107,8 +109,6 @@ export class RBNFSymbolExtractor {
 
 }
 
-type Pair = [string, JSONRulesetInner];
-
 /**
  * Parse RBNF rules and encode them compactly for distribution.
  */
@@ -148,16 +148,54 @@ export class RBNFEncoder {
     // All names ordered 1:1 with their rulesets
     const names = rulesets.map(r => r[0]);
 
-    // Extract ruleset offset for all fraction rules
-    const fractions: number[] = [];
-    this.extractFractionRules(result).forEach(ref => fractions.push(ref));
-
     return {
       names: names.join('\t'),
-      fractions: fractions.sort(),
       rulesets: result,
     };
   }
+
+  // Experiment extracting a single named ruleset from a locale
+  // filter(name: string, root: JSONRoot): void {
+  //   const rulesets = collect(root).filter(r => !IGNORED.has(r[0]));
+  //   const names: Set<string> = new Set();
+  //   this._filter(name, rulesets, names);
+  //   const s: string[] = [];
+  //   names.forEach(n => s.push(n));
+  //   console.log(`${name} depends on ${s.join(', ')}`);
+  // }
+
+  // private _filter(name: string, rulesets: Pair[], names: Set<string>): void {
+  //   for (const ruleset of rulesets) {
+  //     if (name === ruleset[0]) {
+  //       for (const rule of ruleset[1].rules) {
+  //         for (const n of this._extractNames(parse(rule.rule))) {
+  //           if (!names.has(n)) {
+  //             this._filter(n, rulesets, names);
+  //           }
+  //           names.add(n);
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  // private _extractNames(nodes: RBNFNode[]): string[] {
+  //   let names: string[] = [];
+  //   for (const n of nodes) {
+  //     switch (n.kind) {
+  //       case 'apply-left-2-rule':
+  //       case 'apply-left-rule':
+  //       case 'apply-right-rule':
+  //       case 'apply-unch-rule':
+  //         names.push(n.n);
+  //         break;
+  //       case 'optional':
+  //         names = names.concat(this._extractNames(n.n));
+  //         break;
+  //     }
+  //   }
+  //   return names;
+  // }
 
   /**
    * PASS 2: Encode the final RBNF rules and instructions.
@@ -260,33 +298,33 @@ export class RBNFEncoder {
     return result;
   }
 
-  private extractFractionRules(rulesets: any[][]): Set<number> {
-    const fractions: Set<number> = new Set();
-    for (const ruleset of rulesets) {
-      for (const rule of ruleset) {
-        switch (rule[0]) {
-          case RuleType.IMPROPER_FRACTION:
-          case RuleType.PROPER_FRACTION:
-            this.extractRuleRefs(fractions, rule[2]);
-            break;
-        }
-      }
-    }
-    return fractions;
-  }
+  // private extractFractionRules(rulesets: any[][]): Set<number> {
+  //   const fractions: Set<number> = new Set();
+  //   for (const ruleset of rulesets) {
+  //     for (const rule of ruleset) {
+  //       switch (rule[0]) {
+  //         case RuleType.IMPROPER_FRACTION:
+  //         case RuleType.PROPER_FRACTION:
+  //           this.extractRuleRefs(fractions, rule[2]);
+  //           break;
+  //       }
+  //     }
+  //   }
+  //   return fractions;
+  // }
 
-  private extractRuleRefs(refs: Set<number>, insts: any[]): void {
-    for (const inst of insts) {
-      switch (inst[0]) {
-        case Opcode.OPTIONAL:
-          this.extractRuleRefs(refs, inst[1]);
-          break;
-        case Opcode.APPLY_RIGHT_RULE:
-          refs.add(inst[1]);
-          break;
-      }
-    }
-  }
+  // private extractRuleRefs(refs: Set<number>, insts: any[]): void {
+  //   for (const inst of insts) {
+  //     switch (inst[0]) {
+  //       case Opcode.OPTIONAL:
+  //         this.extractRuleRefs(refs, inst[1]);
+  //         break;
+  //       case Opcode.APPLY_RIGHT_RULE:
+  //         refs.add(inst[1]);
+  //         break;
+  //     }
+  //   }
+  // }
 
   /**
    * Parse and decode an RBNF rule.

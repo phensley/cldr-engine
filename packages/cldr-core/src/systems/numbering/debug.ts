@@ -18,10 +18,9 @@ export class RBNF extends RBNFBase {
     decimal: number,
     numbers: Decimal[],
     symbols: string[],
-    fractions: number[],
     rulesets: RBNFRule[][]
   ) {
-    super(names, decimal, numbers, symbols, fractions, rulesets);
+    super(names, decimal, numbers, symbols, rulesets);
   }
 
   format(language: string, rulename: string, n: Decimal): string {
@@ -62,11 +61,11 @@ class RBNFDebugEngine extends RBNFEngineBase {
     };
   }
 
-  protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number, fraction: boolean = false): void {
+  protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number): void {
     // const insts = i.map(_i => OPCODES[_i[0]]).join(',');
     const t = this.trace(
       `_evalinst '${n.toString()}' ${this.rbnf.names[si]} ${this.rulerepr(r)}`);
-    super._evalinst(n, i, r, ri, si, fraction);
+    super._evalinst(n, i, r, ri, si);
     t('_evalinst');
   }
 

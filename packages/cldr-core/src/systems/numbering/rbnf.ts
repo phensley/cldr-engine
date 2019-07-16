@@ -42,7 +42,7 @@ export class RBNF {
   readonly index: Map<string, number> = new Map<string, number>();
 
   // Indices of which rulesets are fraction rulesets
-  readonly fractions: Set<number>;
+  // readonly fractions: Set<number>;
 
   constructor(
     // Ordered array of ruleset names, match 1:1 with first N elements in rulesets array
@@ -53,13 +53,10 @@ export class RBNF {
     readonly numbers: Decimal[],
     // Array of string symbols used in rules
     readonly symbols: string[],
-    // Indices of fraction rules in rulesets array
-    fractions: number[],
     // Array of rulesets
     readonly rulesets: RBNFRule[][]
   ) {
     names.forEach((n, i) => this.index.set(n, i));
-    this.fractions = new Set<number>(fractions);
   }
 
   /**
@@ -82,6 +79,7 @@ export class RBNFEngine {
 
   private buf: string = '';
   private errors: string[] = [];
+  private fractions: Set<number> = new Set<number>();
 
   constructor(
     private language: string,
@@ -99,14 +97,14 @@ export class RBNFEngine {
     return this.buf;
   }
 
-  protected _format(n: Decimal, si: number, fraction: boolean = false): void {
+  protected _format(n: Decimal, si: number): void {
     const ri = this._match(n, si);
     if (ri === -1) {
       // TODO: check for NaN and Inf, and handle by substituting symbols
       return;
     }
     const r = this.rbnf.rulesets[si][ri];
-    this._evalinst(n, r[1], r, ri, si, fraction);
+    this._evalinst(n, r[1], r, ri, si);
   }
 
   protected _match(n: Decimal, si: number): number {
@@ -169,7 +167,7 @@ export class RBNFEngine {
     return -1;
   }
 
-  protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number, fraction: boolean = false): void {
+  protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number): void {
     for (let j = 0; j < i.length; j++) {
       const inst = i[j];
       switch (inst[0]) {
@@ -180,7 +178,7 @@ export class RBNFEngine {
         case Opcode.OPTIONAL:
           // If number is not a multiple of radix, execute the optional block
           if (ZERO.compare(n.divmod(this.getradix(r))[1]) !== 0) {
-            this._evalinst(n, inst[1], r, ri, si, true);
+            this._evalinst(n, inst[1], r, ri, si);
           }
           break;
 
@@ -205,7 +203,7 @@ export class RBNFEngine {
         case Opcode.APPLY_LEFT_2_NUM_FORMAT:
           if (r[0] === RuleType.PROPER_FRACTION || r[0] === RuleType.IMPROPER_FRACTION) {
             this.integersub(n, inst, ri, si);
-          } else if (fraction || this.rbnf.fractions.has(si)) {
+          } else if (this.fractions.has(si)) {
             const base = r[0] === RuleType.NORMAL || r[0] === RuleType.NORMAL_RADIX ? r[2] : -1;
             if (base !== -1) {
               this.numeratorsub(n, inst, base, ri, si);
@@ -267,8 +265,9 @@ export class RBNFEngine {
       const d = DIVISORS[m];
       const k = this._match(d, _si);
       if (k !== -1) {
+        this.fractions.add(_si);
         const r = this.rbnf.rulesets[_si][k];
-        this._evalinst(t, r[1], r, k, _si, true);
+        this._evalinst(t, r[1], r, k, _si);
       }
     }
   }

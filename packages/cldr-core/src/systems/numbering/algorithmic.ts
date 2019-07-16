@@ -11,10 +11,10 @@ export class AlgorithmicNumberingSystem {
     const decimal = 0;
 
     const numbers = rbnfRulesets.numbers.split('\t');
-    const { fractions, rulesets } = loc;
+    const { rulesets } = loc;
     const names = loc.names.split('\t');
     const symbols = rbnfRulesets.symbols.split('\t');
-    this.rbnf = new RBNF(names, decimal, numbers, symbols, fractions, rulesets);
+    this.rbnf = new RBNF(names, decimal, numbers, symbols, rulesets);
   }
 
 }
