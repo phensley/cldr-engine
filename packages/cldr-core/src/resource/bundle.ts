@@ -8,6 +8,7 @@ export interface Bundle extends PrimitiveBundle {
   numberSystem(): string;
   languageScript(): string;
   languageRegion(): string;
+  spellout(): any;
 }
 
 export class StringBundle implements Bundle {
@@ -27,7 +28,8 @@ export class StringBundle implements Bundle {
     readonly tag: LanguageTag,
     readonly strings: string[],
     readonly exceptions: string[],
-    readonly index?: ExceptionIndex
+    readonly index: ExceptionIndex,
+    readonly _spellout: any
   ) {
     const language = tag.language();
     this._languageRegion = `${language}-${tag.region()}`;
@@ -83,5 +85,12 @@ export class StringBundle implements Bundle {
 
     // Return the actual string.
     return this.strings[offset] || '';
+  }
+
+  /**
+   * Group of spellout rules inside this bundle.
+   */
+  spellout(): any {
+    return this._spellout;
   }
 }

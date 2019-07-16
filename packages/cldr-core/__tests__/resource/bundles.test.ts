@@ -24,7 +24,7 @@ test('bundle unicode extension defaulting', () => {
 
 test('bundle index', () => {
   const tag = parseLanguageTag('en-XX');
-  const b = new StringBundle('en-XX', tag, ['A', 'B'], [], undefined);
+  const b = new StringBundle('en-XX', tag, ['A', 'B'], [], {}, {});
   expect(b.get(0)).toEqual('A');
   expect(b.get(1)).toEqual('B');
   expect(b.get(2)).toEqual('');
@@ -32,7 +32,7 @@ test('bundle index', () => {
 
 test('bundle exceptions', () => {
   const tag = parseLanguageTag('en-XX');
-  const b = new StringBundle('en-XX', tag, ['A', 'B'], ['C'], { 1: 0 });
+  const b = new StringBundle('en-XX', tag, ['A', 'B'], ['C'], { 1: 0 }, {});
   expect(b.get(0)).toEqual('A');
   expect(b.get(1)).toEqual('C');
   expect(b.get(2)).toEqual('');
@@ -40,7 +40,7 @@ test('bundle exceptions', () => {
 
 test('bundle exception missing', () => {
   const tag = parseLanguageTag('en-XX');
-  const b = new StringBundle('en-XX', tag, ['A', 'B'], ['C'], { 0: 0, 1: 5 });
+  const b = new StringBundle('en-XX', tag, ['A', 'B'], ['C'], { 0: 0, 1: 5 }, {});
   expect(b.get(0)).toEqual('C');
   expect(b.get(1)).toEqual('');
   expect(b.get(2)).toEqual('');
