@@ -144,12 +144,11 @@ export class RBNFEncoder {
     });
 
     const result = this._encode(rulesets);
-
-    // All names ordered 1:1 with their rulesets
-    const names = rulesets.map(r => r[0]);
+    const names = (pairs: Pair[]) => pairs.map(p => p[0]).join('\t');
 
     return {
-      names: names.join('\t'),
+      // All rule names [public, private] ordered 1:1 with their rulesets
+      names: [names(pub), names(prv)],
       rulesets: result,
     };
   }

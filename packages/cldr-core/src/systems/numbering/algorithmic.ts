@@ -7,17 +7,8 @@ export class AlgorithmicNumberingSystem {
   readonly rbnf: RBNF;
 
   constructor() {
-    const loc = rbnfRulesets.locales['ja-Jpan'];
-    const decimal = 0;
-
-    const numbers = rbnfRulesets.numbers.split('\t');
-    const { rulesets } = loc;
-    const names = loc.names.split('\t');
-    const symbols = rbnfRulesets.symbols.split('\t');
-    this.rbnf = new RBNF(names, decimal, numbers, symbols, rulesets);
+    const root = rbnfRulesets.locales['ja-Jpan'];
+    this.rbnf = new RBNF(root);
   }
 
 }
-
-// const sys = new AlgorithmicNumberingSystem();
-// console.log(sys.rbnf.names);

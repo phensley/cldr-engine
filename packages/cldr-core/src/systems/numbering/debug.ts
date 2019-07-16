@@ -1,6 +1,10 @@
 import { Decimal } from '@phensley/decimal';
 import { Opcode, RuleType, RBNFInst, RBNFRule } from './rbnftypes';
-import { RBNF as RBNFBase, RBNFEngine as RBNFEngineBase } from './rbnf';
+import {
+  RBNF as RBNFBase,
+  RBNFEngine as RBNFEngineBase,
+  RBNFSet as RBNFSetBase,
+} from './rbnf';
 
 const REVPLURALS: { [x: number]: string } = {
   0: 'zero',
@@ -13,18 +17,31 @@ const REVPLURALS: { [x: number]: string } = {
 
 export class RBNF extends RBNFBase {
 
+  constructor(spellout: any) {
+    super(spellout);
+  }
+
+  make(id: string, pub: string[], prv: string[],
+      numbers: Decimal[], symbols: string[], rulesets: RBNFRule[][]): RBNFSetBase {
+    return new RBNFDebugSet(id, pub, prv, numbers, symbols, rulesets);
+  }
+}
+
+export class RBNFDebugSet extends RBNFSetBase {
+
   constructor(
-    names: string[],
-    decimal: number,
+    id: string,
+    pubnames: string[],
+    prvnames: string[],
     numbers: Decimal[],
     symbols: string[],
     rulesets: RBNFRule[][]
   ) {
-    super(names, decimal, numbers, symbols, rulesets);
+    super(id, pubnames, prvnames, numbers, symbols, rulesets);
   }
 
-  format(language: string, rulename: string, n: Decimal): string {
-    return new RBNFDebugEngine(language, this).format(rulename, n);
+  format(language: string, rulename: string, decimal: number, n: Decimal): string {
+    return new RBNFDebugEngine(language, decimal, this).format(rulename, n);
   }
 
 }
@@ -43,9 +60,10 @@ class RBNFDebugEngine extends RBNFEngineBase {
 
   constructor(
     language: string,
-    rbnf: RBNF
+    decimal: number,
+    rbnf: RBNFSetBase
   ) {
-    super(language, rbnf);
+    super(language, decimal, rbnf);
   }
 
   protected trace(...s: any[]): tracefunc {
@@ -56,15 +74,13 @@ class RBNFDebugEngine extends RBNFEngineBase {
     console.log(indent, id, '>>', ...s);
     return (..._e: any[]) => {
       this.depth--;
-      // const a = e.length ? e : s;
-      // console.log(indent, id, '<<', ...a);
     };
   }
 
   protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number): void {
     // const insts = i.map(_i => OPCODES[_i[0]]).join(',');
     const t = this.trace(
-      `_evalinst '${n.toString()}' ${this.rbnf.names[si]} ${this.rulerepr(r)}`);
+      `_evalinst '${n.toString()}' ${this.rbnf.allnames[si]} ${this.rulerepr(r)}`);
     super._evalinst(n, i, r, ri, si);
     t('_evalinst');
   }
@@ -110,13 +126,13 @@ class RBNFDebugEngine extends RBNFEngineBase {
       case Opcode.APPLY_LEFT_NUM_FORMAT:
         return `<${this.rbnf.symbols[i[1]]}<`;
       case Opcode.APPLY_LEFT_RULE:
-        return `<%${this.rbnf.names[i[1]]}%<`;
+        return `<%${this.rbnf.allnames[i[1]]}%<`;
       case Opcode.APPLY_LEFT_2_NUM_FORMAT:
         return `<${this.rbnf.symbols[i[1]]}<<`;
       case Opcode.APPLY_LEFT_2_RULE:
-        return `<%${this.rbnf.names[i[1]]}%<<`;
+        return `<%${this.rbnf.allnames[i[1]]}%<<`;
       case Opcode.APPLY_RIGHT_RULE:
-        return `>%${this.rbnf.names[i[1]]}%>`;
+        return `>%${this.rbnf.allnames[i[1]]}%>`;
       case Opcode.OPTIONAL:
         return '[' + i[1].map(_i => this.instrepr(_i)).join('') + ']';
       case Opcode.LITERAL:
@@ -130,7 +146,7 @@ class RBNFDebugEngine extends RBNFEngineBase {
       case Opcode.UNCHANGED_NUM_FORMAT:
         return `=${this.rbnf.symbols[i[1]]}=`;
       case Opcode.UNCHANGED_RULE:
-        return `=%${this.rbnf.names[i[1]]}%=`;
+        return `=%${this.rbnf.allnames[i[1]]}%=`;
       case Opcode.CARDINAL:
       case Opcode.ORDINAL:
         const r = i[0] === Opcode.CARDINAL ? 'cardinal' : 'ordinal';

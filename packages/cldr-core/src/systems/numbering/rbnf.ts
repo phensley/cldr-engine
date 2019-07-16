@@ -33,22 +33,54 @@ type IntegerSubInst = ApplyLeftRuleInst
   | SubLeftInst;
 
 /**
- * A closed set of RBNF rules. By "closed" we mean that any instruction
- * that jumps to another named rule always lands in the same ruleset.
+ *
  */
 export class RBNF {
 
-  // Lookup a ruleset index by its name
+  protected symbols: string[];
+  protected numbers: Decimal[];
+  protected locales: Map<string, RBNFSet> = new Map<string, RBNFSet>();
+
+  constructor(spellout: any) {
+    const { locales, symbols, numbers } = spellout;
+    this.symbols = symbols.split('\t');
+    this.numbers = numbers.split('\t').map((n: string) => new Decimal(n));
+    for (const id of Object.keys(locales)) {
+      const { names, rulesets } = locales[id];
+      const [_pub, _prv] = names;
+      const pub = _pub.split('\t');
+      const prv = _prv.split('\t');
+      this.locales.set(id, this.make(id, pub, prv, this.numbers, this.symbols, rulesets));
+    }
+  }
+
+  make(id: string, pub: string[], prv: string[],
+      numbers: Decimal[], symbols: string[], rulesets: RBNFRule[][]): RBNFSet {
+    return new RBNFSet(id, pub, prv, numbers, symbols, rulesets);
+  }
+
+  get(id: string): RBNFSet | undefined {
+    return this.locales.get(id);
+  }
+
+}
+
+/**
+ * A closed set of RBNF rules. By "closed" we mean that any instruction
+ * that jumps to another named rule always lands in the same ruleset.
+ */
+export class RBNFSet {
+
+  // Lookup a public ruleset index by its name
   readonly index: Map<string, number> = new Map<string, number>();
 
-  // Indices of which rulesets are fraction rulesets
-  // readonly fractions: Set<number>;
+  // Ordered array of ruleset names, match 1:1 with first N elements in rulesets array
+  readonly allnames: string[];
 
   constructor(
-    // Ordered array of ruleset names, match 1:1 with first N elements in rulesets array
-    readonly names: string[],
-    // Decimal point character: 0 = period, 1 = comma
-    readonly decimal: number,
+    readonly id: string,
+    readonly pubnames: string[],
+    readonly prvnames: string[],
     // Array of numbers used in rules
     readonly numbers: Decimal[],
     // Array of string symbols used in rules
@@ -56,15 +88,16 @@ export class RBNF {
     // Array of rulesets
     readonly rulesets: RBNFRule[][]
   ) {
-    names.forEach((n, i) => this.index.set(n, i));
+    pubnames.forEach((n, i) => this.index.set(n, i));
+    this.allnames = pubnames.concat(prvnames);
   }
 
   /**
    * Return the RBNF formatted representation of a number for the given
    * language, using the given rules.
    */
-  format(language: string, rulename: string, n: Decimal): string {
-    return new RBNFEngine(language, this).format(rulename, n);
+  format(language: string, rulename: string, decimal: number, n: Decimal): string {
+    return new RBNFEngine(language, decimal, this).format(rulename, n);
   }
 }
 
@@ -83,7 +116,9 @@ export class RBNFEngine {
 
   constructor(
     private language: string,
-    protected rbnf: RBNF
+    // Decimal point character: 0 = period, 1 = comma
+    private decimal: number,
+    protected rbnf: RBNFSet
   ) { }
 
   format(name: string, n: Decimal): string {
@@ -135,7 +170,7 @@ export class RBNFEngine {
           break;
 
         case RuleType.PROPER_FRACTION:
-          if (!int && fin && r[2] === this.rbnf.decimal &&
+          if (!int && fin && r[2] === this.decimal &&
             ((neg && n.compare(MINUS_ONE) === 1) || (!neg && n.compare(ONE) === -1))) {
             return i;
           }
@@ -143,7 +178,7 @@ export class RBNFEngine {
 
         case RuleType.IMPROPER_FRACTION:
           // If present it always follows a proper fraction rule, catching anything that falls through
-          if (!int && fin && r[2] === this.rbnf.decimal) {
+          if (!int && fin && r[2] === this.decimal) {
             return i;
           }
           break;
