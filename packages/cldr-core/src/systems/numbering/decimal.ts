@@ -11,8 +11,6 @@ export interface NumberingSystemParams {
 
 export class DecimalNumberingSystem extends NumberingSystem {
 
-  readonly rbnf: AlgorithmicNumberingSystem = new AlgorithmicNumberingSystem();
-
   constructor(
     name: string,
     readonly digits: string[],
