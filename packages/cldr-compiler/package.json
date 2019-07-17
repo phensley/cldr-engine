@@ -29,6 +29,7 @@
     "clean:full": "yarn clean && rimraf ./node_modules .cldr",
     "coverage": "jest --coverage --runInBand --no-cache",
     "download": "node ./scripts/downloader.js",
+    "generator": "node ./scripts/generator.js",
     "lint": "tslint -p ./tsconfig.lint.json",
     "prepublish": "yarn build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
