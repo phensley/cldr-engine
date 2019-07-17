@@ -28,6 +28,11 @@ export class RBNFCollector {
   readonly langs: Map<string, string[]> = new Map();
 
   /**
+   * Additional algorithmic numbering systems available in a given locale.
+   */
+  readonly systems: Map<string, string[]> = new Map();
+
+  /**
    * RBNF rules broken out by locale
    */
   readonly locales: Map<string, JSONRoot> = new Map();
@@ -82,13 +87,17 @@ export class RBNFCollector {
       ids.push(id);
     }
 
-    // Identify the rbnf rulesets that are globally-accessible, so we can
-    // embed these into the core library. As of 35.1.0 this includes:
-    // zh, zh-Hant, ja
     this.core.push('root');
-    const systems = getSupplemental().NumberingSystems;
-    Object.keys(systems).forEach(k => {
-      const sys = systems[k];
+
+    // Identify the rbnf rulesets that are globally-accessible. We need to
+    // ensure that each locale that requires one of these has the correct
+    // set of rbnf rulesets in its resource bundle.
+    const { NumberingSystems } = getSupplemental();
+
+    // const systems: { [name: string]: string[] } = {};
+
+    Object.keys(NumberingSystems).forEach(k => {
+      const sys = NumberingSystems[k];
       if (sys._type !== 'algorithmic') {
         return;
       }
@@ -98,18 +107,34 @@ export class RBNFCollector {
       const parts = sys._rules.split('/');
       const tag = LanguageResolver.resolve(parts[0]);
       const id = `${tag.language()}-${tag.script()}`;
-      if (!this.core.includes(id)) {
-        this.core.push(id);
-      }
+
+      // if (!this.core.includes(id)) {
+      //   this.core.push(id);
+      // }
+
+      // Map numbering systems to a spellout locale id
+      const set = this.systems.get(id) || [];
+      set.push(k);
+      this.systems.set(id, set);
     });
 
+    // Map each spellout id to the language bundle that should contain it
     for (const id of ids) {
       this.locales.set(id, res.get(id)!);
-      const lang = id === 'root' || this.core.includes(id) ? 'root' : parseLanguageTag(id).language();
+      const lang = id === 'root' ? id : parseLanguageTag(id).language();
       const map = this.langs.get(lang) || [];
       map.push(id);
       this.langs.set(lang, map);
     }
+
+    // Special case of 'yue' depending on the same numbering system as 'zh-Hant'
+    // The 'yue' locale depends on 'hant' and 'hantfin' numbering systems which
+    // are implemented by the 'zh-Hant' locale's spellout rulesets
+    this.systems.set('yue-Hant', this.systems.get('zh-Hant')!);
+    this.langs.set('yue', ['zh-Hant']);
+
+    // TODO: the above mapping is currently hard-coded, but in the future we
+    // should derive it from the underlying data.
   }
 
   /**

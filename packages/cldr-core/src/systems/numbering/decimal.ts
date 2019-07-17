@@ -1,7 +1,6 @@
 import { coerceDecimal, Chars, DecimalArg, DecimalFormatter, StringDecimalFormatter } from '@phensley/decimal';
 
 import { NumberingSystem, NumberSymbols } from '../../common/private';
-import { AlgorithmicNumberingSystem } from './algorithmic';
 
 const isInteger = ((n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n);
 
