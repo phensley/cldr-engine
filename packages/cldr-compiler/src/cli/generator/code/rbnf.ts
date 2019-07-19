@@ -3,6 +3,8 @@ import { RBNFPacker } from '../../../resource/rbnf';
 import { RBNFCollector } from '../../../rbnf';
 
 export const getRBNF = (_data: any): Code[] => {
+  const codes: Code[] = [];
+
   const collector = new RBNFCollector();
   collector.load();
   const packer = new RBNFPacker(collector);
@@ -12,7 +14,14 @@ export const getRBNF = (_data: any): Code[] => {
   code += packer.pack('root');
   code += ';\n';
 
-  return [
+  codes.push(
     Code.core(['systems', 'numbering', 'autogen.rbnf.ts'], code)
-  ];
+  );
+
+  code = packer.report();
+  codes.push(
+    Code.top(['notes', 'spellout-rules.txt'], code)
+  );
+
+  return codes;
 };
