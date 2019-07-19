@@ -15,9 +15,14 @@ const REVPLURALS: { [x: number]: string } = {
   5: 'other'
 };
 
+export interface RBNFDebugSettings {
+  trace?: boolean;
+  coverage?: boolean;
+}
+
 export class RBNF extends RBNFBase {
 
-  static verbose: boolean = false;
+  static settings: RBNFDebugSettings = {};
 
   constructor(spellout: any) {
     super(spellout);
@@ -25,7 +30,7 @@ export class RBNF extends RBNFBase {
 
   make(id: string, pub: string[], prv: string[],
       numbers: Decimal[], symbols: string[], rulesets: RBNFRule[][]): RBNFSetBase {
-    return new RBNFDebugSet(id, pub, prv, numbers, symbols, rulesets, RBNF.verbose);
+    return new RBNFDebugSet(id, pub, prv, numbers, symbols, rulesets, RBNF.settings);
   }
 }
 
@@ -43,17 +48,18 @@ export class RBNFDebugSet extends RBNFSetBase {
     numbers: Decimal[],
     symbols: string[],
     rulesets: RBNFRule[][],
-    private verbose: boolean
+    private settings: RBNFDebugSettings
   ) {
     super(id, pubnames, prvnames, numbers, symbols, rulesets);
   }
 
   format(language: string, rulename: string, decimal: number, n: Decimal): string {
-    return new RBNFDebugEngine(language, decimal, this, this.verbose, this.coverage)
+    return new RBNFDebugEngine(language, decimal, this, this.settings, this.coverage)
       .format(rulename, n);
   }
 
   report(detail: boolean = false): void {
+    console.log('Coverage report:');
     for (let si = 0; si < this.allnames.length; si++) {
       const name = this.allnames[si];
       const rules = this.rulesets[si];
@@ -105,7 +111,7 @@ class RBNFDebugEngine extends RBNFEngineBase {
     language: string,
     decimal: number,
     rbnf: RBNFSetBase,
-    private verbose: boolean,
+    private settings: RBNFDebugSettings,
     private coverage: Map<number, Set<number>>
   ) {
     super(language, decimal, rbnf);
@@ -116,7 +122,7 @@ class RBNFDebugEngine extends RBNFEngineBase {
     const indent = '  '.repeat(this.depth);
     this.id++;
     this.depth++;
-    if (this.verbose) {
+    if (this.settings.trace) {
       console.log(indent, id, '>>', ...s);
     }
     return (..._e: any[]) => {
@@ -126,16 +132,23 @@ class RBNFDebugEngine extends RBNFEngineBase {
 
   protected _evalinst(n: Decimal, i: RBNFInst[], r: RBNFRule, ri: number, si: number): void {
     // Collect ruleset coverage during execution
-    let covered = this.coverage.get(si);
-    if (!covered) {
-      covered = new Set();
-      this.coverage.set(si, covered);
+    if (this.settings.coverage) {
+      let covered = this.coverage.get(si);
+      if (!covered) {
+        covered = new Set();
+        this.coverage.set(si, covered);
+      }
+      covered.add(ri);
     }
-    covered.add(ri);
-    const t = this.trace(
-      `_evalinst '${n.toString()}' ${this.rbnf.allnames[si]} ${rulerepr(this.rbnf, r)}`);
+    let t: tracefunc | undefined;
+    if (this.settings.trace) {
+      t = this.trace(
+        `_evalinst '${n.toString()}' ${this.rbnf.allnames[si]} ${rulerepr(this.rbnf, r)}`);
+      }
     super._evalinst(n, i, r, ri, si);
-    t('_evalinst');
+    if (this.settings.trace) {
+      t!('_evalinst');
+    }
   }
 
   protected modulussub(n: Decimal, inst: RBNFInst, radix: Decimal, _ri: number, si: number): void {
