@@ -71,6 +71,8 @@ export class RBNF {
  */
 export class RBNFSet {
 
+  readonly language: string;
+
   // Lookup a public ruleset index by its name
   readonly index: Map<string, number> = new Map<string, number>();
 
@@ -88,6 +90,7 @@ export class RBNFSet {
     // Array of rulesets
     readonly rulesets: RBNFRule[][]
   ) {
+    this.language = id === 'root' ? id : id.split('-')[0];
     pubnames.forEach((n, i) => this.index.set(n, i));
     this.allnames = pubnames.concat(prvnames);
   }
@@ -96,8 +99,8 @@ export class RBNFSet {
    * Return the RBNF formatted representation of a number for the given
    * language, using the given rules.
    */
-  format(language: string, rulename: string, decimal: number, n: Decimal): string {
-    return new RBNFEngine(language, decimal, this).format(rulename, n);
+  format(rulename: string, decimal: number, n: Decimal): string {
+    return new RBNFEngine(this.language, decimal, this).format(rulename, n);
   }
 }
 

@@ -13,12 +13,13 @@ export class RBNFPacker {
    * Pack the RBNF rulesets into JSON form.
    */
   pack(lang: string): string {
+    const locales: any = {};
     const symbols = new FrequencySet<string>();
     const numbers = new FrequencySet<string>();
 
-    let ids = this.collector.langs.get(lang);
+    const ids = this.collector.langs.get(lang);
     if (ids === undefined) {
-      ids = this.collector.langs.get('en')!;
+      return JSON.stringify({ locales, symbols: '', numbers: '' });
     }
 
     // Extract and populate the frequency sets.
@@ -28,7 +29,6 @@ export class RBNFPacker {
       extractor.extract(raw);
     });
 
-    const locales: any = {};
     ids.sort().forEach(id => {
       const raw = this.collector.locales.get(id)!;
 
