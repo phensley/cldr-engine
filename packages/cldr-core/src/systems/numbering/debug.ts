@@ -53,8 +53,8 @@ export class RBNFDebugSet extends RBNFSetBase {
     super(id, pubnames, prvnames, numbers, symbols, rulesets);
   }
 
-  format(language: string, rulename: string, decimal: number, n: Decimal): string {
-    return new RBNFDebugEngine(language, decimal, this, this.settings, this.coverage)
+  format(rulename: string, decimal: number, n: Decimal): string {
+    return new RBNFDebugEngine(this.language, decimal, this, this.settings, this.coverage)
       .format(rulename, n);
   }
 
