@@ -14,6 +14,7 @@ import {
 } from '../src';
 import { getCLDR } from '../__tests__/_helpers';
 import { Timer } from './timer';
+import { SpelloutFormatOptions } from '@phensley/cldr-core';
 
 const VERBOSE = true;
 
@@ -90,6 +91,18 @@ const currencyOptions = (): CurrencyFormatOptions[] => {
 return res;
 };
 
+const spelloutOptions = (): SpelloutFormatOptions[] => {
+  const res: CurrencyFormatOptions[] = [];
+  res.push({});
+  res.push({ minimumFractionDigits: 0 });
+  res.push({ minimumFractionDigits: 3 });
+  res.push({ maximumFractionDigits: 3 });
+  res.push({ maximumFractionDigits: 10 });
+  res.push({ minimumSignificantDigits: 3 });
+  res.push({ maximumSignificantDigits: 3 });
+  return res;
+};
+
 const unitOptions = (): UnitFormatOptions[] => {
   const res: UnitFormatOptions[] = [];
   for (const style of UNIT_STYLES) {
@@ -115,6 +128,7 @@ export const numberStress = () => {
 
   const dopts = decimalOptions();
   const copts = currencyOptions();
+  const sopts = spelloutOptions();
   const uopts = unitOptions();
   let i = 0;
 
@@ -160,6 +174,18 @@ export const numberStress = () => {
     elapsed = timer.micros();
     total += i;
     console.log(`format ${i} currency permutations: ${elapsed} micros`);
+
+    i = 0;
+    timer.start();
+    for (const n of NUMBERS) {
+      for (const o of sopts) {
+        engine.Numbers.formatSpellout(n, o);
+        i++;
+      }
+    }
+    elapsed = timer.micros();
+    total += i;
+    console.log(`format ${i} spellout permutations: ${elapsed} micros`);
 
     i = 0;
     timer.start();

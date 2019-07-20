@@ -43,8 +43,8 @@ export class RBNF {
 
   constructor(spellout: any) {
     const { locales, symbols, numbers } = spellout;
-    this.symbols = symbols.split('\t');
-    this.numbers = numbers.split('\t').map((n: string) => new Decimal(n));
+    this.symbols = symbols ? symbols.split('\t') : [];
+    this.numbers = numbers ? numbers.split('\t').map((n: string) => new Decimal(n)) : [];
     for (const id of Object.keys(locales)) {
       const { names, rulesets } = locales[id];
       const [_pub, _prv] = names;
