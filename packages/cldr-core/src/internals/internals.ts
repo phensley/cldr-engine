@@ -21,7 +21,8 @@ import {
   ListPatternType,
   Quantity,
   RelativeTimeFormatOptions,
-  UnitFormatOptions
+  SpelloutFormatOptions,
+  UnitFormatOptions,
 } from '../common';
 
 import { CalendarDate, CalendarType } from '../systems/calendars';
@@ -32,6 +33,7 @@ import { WrapperNode } from '../parsing/wrapper';
 import { Bundle } from '../resource';
 import { CalendarContext, CalendarFormatter } from './calendars/formatter';
 import { AbstractValue } from '../utils/render';
+import { AlgorithmicNumberingSystem } from '../systems';
 
 export interface CalendarInternals {
   getCalendarFormatter(type: CalendarType): CalendarFormatter<CalendarDate>;
@@ -81,6 +83,10 @@ export interface NumberInternals {
 
   formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal, code: string,
     options: CurrencyFormatOptions, params: NumberParams): T;
+
+  formatSpellout<T>(bundle: Bundle, renderer: NumberRenderer<T>,
+    system: AlgorithmicNumberingSystem, transform: ContextTransformInfo,
+    n: Decimal, options: SpelloutFormatOptions, params: NumberParams): T;
 
   getCurrencySymbol(bundle: Bundle, code: CurrencyType, width?: CurrencySymbolWidthType): string;
   getCurrencyDisplayName(bundle: Bundle, code: CurrencyType): string;

@@ -1,4 +1,4 @@
-import { NumberSystemCategory, NumberSystemName } from '@phensley/cldr-schema';
+import { ContextType, NumberSystemCategory, NumberSystemName } from '@phensley/cldr-schema';
 import { RoundingModeType } from '@phensley/decimal';
 
 /**
@@ -73,6 +73,20 @@ export interface CurrencyFormatOptions extends NumberFormatOptions {
   cash?: boolean;
   style?: CurrencyFormatStyleType;
   symbolWidth?: CurrencySymbolWidthType;
+}
+
+/**
+ * @alpha
+ */
+export interface SpelloutFormatOptions {
+  rule?: string;
+  context?: ContextType;
+  round?: RoundingModeType;
+  minimumIntegerDigits?: number;
+  maximumFractionDigits?: number;
+  minimumFractionDigits?: number;
+  maximumSignificantDigits?: number;
+  minimumSignificantDigits?: number;
 }
 
 /**

@@ -33,6 +33,7 @@ import {
   MeasurementSystem,
   Quantity,
   RelativeTimeFormatOptions,
+  SpelloutFormatOptions,
   TimeZoneInfo,
   UnitFormatOptions,
   UnitLength,
@@ -283,6 +284,11 @@ export interface Numbers {
    * Formats a currency value to an array of parts.
    */
   formatCurrencyToParts(num: DecimalArg, code: CurrencyType, options?: CurrencyFormatOptions): Part[];
+
+  /**
+   * Formats a decimal number using spellout rules.
+   */
+  formatSpellout(num: DecimalArg, options?: SpelloutFormatOptions): string;
 
   /**
    * Returns the currency symbol of the given width.

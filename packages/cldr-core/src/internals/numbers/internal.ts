@@ -14,16 +14,18 @@ import {
   CurrencySymbolWidthType,
   DecimalAdjustOptions,
   DecimalFormatOptions,
+  SpelloutFormatOptions,
 } from '../../common';
 
 import { NumberContext } from './context';
-import { NumberParams } from '../../common/private';
+import { ContextTransformInfo, NumberParams } from '../../common/private';
 import { parseNumberPattern, NumberPattern } from '../../parsing/number';
 import { getCurrencyFractions } from './util';
 import { Bundle } from '../../resource';
 import { Internals, NumberInternals, NumberRenderer } from '../../internals/internals';
 import { PartsNumberFormatter, StringNumberFormatter } from './render';
 import { pluralRules } from '@phensley/plurals';
+import { AlgorithmicNumberingSystem } from '../../systems';
 
 const ADJUST_PATTERN = parseNumberPattern('0')[0];
 
@@ -318,6 +320,41 @@ export class NumberInternalsImpl implements NumberInternals {
 
     // No valid style matched
     return renderer.empty();
+  }
+
+  /**
+   * Prototyping the spellout interface and implementation.
+   *
+   * VERY ALPHA UNTIL FURTHER NOTICE
+   *
+   * @alpha
+   */
+  formatSpellout<T>(bundle: Bundle, renderer: NumberRenderer<T>,
+      system: AlgorithmicNumberingSystem, transform: ContextTransformInfo,
+      n: Decimal, options: SpelloutFormatOptions, params: NumberParams): T {
+
+    // TODO: build fallback number formatter
+    const round = options.round || 'half-even';
+
+    // Use standard number pattern to set fallback options for min/max digits, etc.
+    const latnInfo = this.numbers.numberSystem.get('latn') as NumberSystemInfo;
+    const info = this.numbers.numberSystem.get(params.numberSystemName) || latnInfo;
+    const decimalFormats = info.decimalFormats;
+    const latnDecimalFormats = latnInfo.decimalFormats;
+    const standardRaw = decimalFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
+    const pattern = this.getNumberPattern(standardRaw, n.isNegative());
+
+    // Adjust number using pattern
+    const ctx = new NumberContext(options, round, false, false);
+    ctx.setPattern(pattern);
+    n = ctx.adjust(n);
+
+    // Format the spellout number as a string
+    let s = system.format(n);
+
+    // Context transform the result and return it
+    s = this.internals.general.contextTransform(s, transform, options.context, 'number-spellout');
+    return renderer.make('spellout', s);
   }
 
   /**
