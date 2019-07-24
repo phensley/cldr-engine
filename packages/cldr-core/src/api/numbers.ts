@@ -6,7 +6,8 @@ import {
   CurrencyFormatOptions,
   CurrencyFractions,
   CurrencySymbolWidthType,
-  DecimalFormatOptions
+  DecimalAdjustOptions,
+  DecimalFormatOptions,
 } from '../common';
 
 import { Bundle } from '../resource';
@@ -40,6 +41,10 @@ export class NumbersImpl implements Numbers {
     this.transform = privateApi.getContextTransformInfo();
   }
 
+  adjustDecimal(n: DecimalArg, opts?: DecimalAdjustOptions): Decimal {
+    return this.numbers.adjustDecimal(coerceDecimal(n), opts);
+  }
+
   getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string {
     return this.numbers.getCurrencySymbol(this.bundle, code, width);
   }
@@ -60,10 +65,7 @@ export class NumbersImpl implements Numbers {
   getCurrencyPluralName(n: DecimalArg, code: string,
       opts: CurrencyDisplayNameOptions = DEFAULT_CURRENCY_OPTIONS): string {
     const plural = this.getPluralCardinal(n);
-    let name = this.numbers.getCurrencyPluralName(this.bundle, code, plural as PluralType);
-    if (!name) {
-      name = this.numbers.getCurrencyPluralName(this.bundle, code, 'other');
-    }
+    const name = this.numbers.getCurrencyPluralName(this.bundle, code, plural as PluralType);
     return this.general.contextTransform(name, this.transform, _ctx(opts), 'currencyName');
   }
 

@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [UNRELEASED]
+### Added
+ - Added `Numbers.adjustDecimal(num, options): Decimal` method to adjust a decimal number using options, e.g. min/max fractions, etc.
+
 ### Fixed/Changed
  - Changed `getCurrencyDisplayName` and `getCurrencyPluralName` methods to take a number argument, which will be used to compute the plural category, and a options object to determine the display context.
 

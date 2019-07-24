@@ -12,6 +12,7 @@ import { Cache } from '@phensley/cldr-utils';
 import {
   CurrencyFormatOptions,
   CurrencySymbolWidthType,
+  DecimalAdjustOptions,
   DecimalFormatOptions,
 } from '../../common';
 
@@ -23,6 +24,8 @@ import { Bundle } from '../../resource';
 import { Internals, NumberInternals, NumberRenderer } from '../../internals/internals';
 import { PartsNumberFormatter, StringNumberFormatter } from './render';
 import { pluralRules } from '../../systems/plurals';
+
+const ADJUST_PATTERN = parseNumberPattern('0')[0];
 
 /**
  * Number internal engine singleton, shared across all locales.
@@ -39,6 +42,13 @@ export class NumberInternalsImpl implements NumberInternals {
     this.currencies = schema.Currencies;
     this.numbers = schema.Numbers;
     this.numberPatternCache = new Cache(parseNumberPattern, cacheSize);
+  }
+
+  adjustDecimal(num: Decimal, options: DecimalAdjustOptions = {}): Decimal {
+    options = Object.assign({}, { minInt: 0 }, options);
+    const ctx = new NumberContext(options, options.round || 'half-even', false, false);
+    ctx.setPattern(ADJUST_PATTERN);
+    return ctx.adjust(num);
   }
 
   stringRenderer(params: NumberParams): NumberRenderer<string> {

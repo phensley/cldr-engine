@@ -6,7 +6,7 @@ import {
   LineOrderType,
   UnitType
 } from '@phensley/cldr-schema';
-import { DecimalArg, Part } from '@phensley/decimal';
+import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 
 import {
   CalendarFieldsOptions,
@@ -18,6 +18,7 @@ import {
   DateFormatOptions,
   DateIntervalFormatOptions,
   DateRawFormatOptions,
+  DecimalAdjustOptions,
   DecimalFormatOptions,
   DisplayNameOptions,
   EraFieldOptions,
@@ -231,6 +232,11 @@ export interface General {
  * @alpha
  */
 export interface Numbers {
+
+  /**
+   * Adjusts a decimal number using the given options.
+   */
+  adjustDecimal(num: DecimalArg, options?: DecimalAdjustOptions): Decimal;
 
   /**
    * Formats a decimal number to string.

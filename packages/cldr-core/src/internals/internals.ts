@@ -16,6 +16,7 @@ import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 import {
   CurrencyFormatOptions,
   CurrencySymbolWidthType,
+  DecimalAdjustOptions,
   DecimalFormatOptions,
   ListPatternType,
   Quantity,
@@ -71,6 +72,7 @@ export interface GeneralInternals {
 }
 
 export interface NumberInternals {
+  adjustDecimal(num: DecimalArg, options?: DecimalAdjustOptions): Decimal;
   stringRenderer(params: NumberParams): NumberRenderer<string>;
   partsRenderer(params: NumberParams): NumberRenderer<Part[]>;
 

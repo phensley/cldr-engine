@@ -56,6 +56,18 @@ export interface DecimalFormatOptions extends NumberFormatOptions {
 /**
  * @alpha
  */
+export interface DecimalAdjustOptions {
+  round?: RoundingModeType;
+  minimumIntegerDigits?: number;
+  maximumFractionDigits?: number;
+  minimumFractionDigits?: number;
+  maximumSignificantDigits?: number;
+  minimumSignificantDigits?: number;
+}
+
+/**
+ * @alpha
+ */
 export interface CurrencyFormatOptions extends NumberFormatOptions {
   cash?: boolean;
   style?: CurrencyFormatStyleType;
