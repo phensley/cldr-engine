@@ -6,13 +6,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## [UNRELEASED]
+## [0.17.0]
 ### Added
  - Added `Numbers.adjustDecimal(num, options): Decimal` method to adjust a decimal number using options, e.g. min/max fractions, etc.
 
 ### Fixed/Changed
  - Changed `getCurrencyDisplayName` and `getCurrencyPluralName` methods to take a number argument, which will be used to compute the plural category, and a options object to determine the display context.
  - The `getPluralCardinal` and `getPluralOrdinal` methods now accept decimal adjustment options, to adjust the number before the plural calculation happens. Omitting the options will interpret the number as-is.
+ - Fixed leap year off-by-1 bug in `PersianDate`
 
 ## [0.16.0]
 ### Fixed/Changed
