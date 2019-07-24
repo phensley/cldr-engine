@@ -69,13 +69,13 @@ export class NumbersImpl implements Numbers {
     return this.general.contextTransform(name, this.transform, _ctx(opts), 'currencyName');
   }
 
-  getPluralCardinal(n: DecimalArg): string {
-    const d = coerceDecimal(n);
+  getPluralCardinal(n: DecimalArg, options?: DecimalAdjustOptions): string {
+    const d = options ? this.adjustDecimal(n, options) : coerceDecimal(n);
     return pluralRules.cardinal(this.bundle.language(), d.operands());
   }
 
-  getPluralOrdinal(n: DecimalArg): string {
-    const d = coerceDecimal(n);
+  getPluralOrdinal(n: DecimalArg, options?: DecimalAdjustOptions): string {
+    const d = options ? this.adjustDecimal(n, options) : coerceDecimal(n);
     return pluralRules.ordinal(this.bundle.language(), d.operands());
   }
 

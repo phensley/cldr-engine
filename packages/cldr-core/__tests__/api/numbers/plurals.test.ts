@@ -1,6 +1,6 @@
 import { numbersApi } from '../../_helpers';
 
-test('plurals', () => {
+test('cardinals', () => {
 
   // Main test cases are under engine/plurals. These are here to confirm
   // the public interface is covered.
@@ -27,6 +27,16 @@ test('plurals', () => {
   for (const n of ['0', '2', '3', '4', '5']) {
     expect(api.getPluralCardinal(n)).toEqual('other');
   }
+});
+
+test('cardinals with options', () => {
+  const api = numbersApi('en');
+
+  expect(api.getPluralCardinal('0.5', { round: 'down' })).toEqual('other');
+  expect(api.getPluralCardinal('1', { minimumFractionDigits: 1 })).toEqual('other');
+
+  expect(api.getPluralCardinal('1', { minimumFractionDigits: 0 })).toEqual('one');
+  expect(api.getPluralCardinal('1.1', { maximumFractionDigits: 0 })).toEqual('one');
 });
 
 test('ordinals', () => {

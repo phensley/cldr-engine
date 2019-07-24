@@ -286,13 +286,12 @@ export interface Numbers {
   /**
    * Returns the plural cardinal category of the given decimal number.
    */
-  getPluralCardinal(num: DecimalArg): string;
+  getPluralCardinal(n: DecimalArg, options?: DecimalAdjustOptions): string;
 
   /**
    * Returns the plural ordinal category of the given decimal number.
    */
-  getPluralOrdinal(num: DecimalArg): string;
-
+  getPluralOrdinal(num: DecimalArg, options?: DecimalAdjustOptions): string;
 }
 
 /**

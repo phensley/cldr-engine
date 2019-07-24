@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Fixed/Changed
  - Changed `getCurrencyDisplayName` and `getCurrencyPluralName` methods to take a number argument, which will be used to compute the plural category, and a options object to determine the display context.
+ - The `getPluralCardinal` and `getPluralOrdinal` methods now accept decimal adjustment options, to adjust the number before the plural calculation happens. Omitting the options will interpret the number as-is.
 
 ## [0.16.0]
 ### Fixed/Changed
