@@ -8,7 +8,7 @@ import {
   CurrencySymbolWidthType,
   DecimalAdjustOptions,
   DecimalFormatOptions,
-  SpelloutFormatOptions
+  RuleBasedFormatOptions
 } from '../common';
 
 import { Bundle } from '../resource';
@@ -42,7 +42,8 @@ export class NumbersImpl implements Numbers {
     private readonly privateApi: PrivateApiImpl
   ) {
     this.transform = privateApi.getContextTransformInfo();
-    this.algorithmic = new AlgorithmicNumberingSystems(bundle.spellout());
+    this.algorithmic = new AlgorithmicNumberingSystems(bundle.spellout(),
+      bundle.tag().expanded(), bundle.languageScript());
   }
 
   adjustDecimal(n: DecimalArg, opts?: DecimalAdjustOptions): Decimal {
@@ -111,16 +112,19 @@ export class NumbersImpl implements Numbers {
     return this.formatCurrencyImpl(renderer, params, n, code, options);
   }
 
-  formatSpellout(n: DecimalArg, options?: SpelloutFormatOptions): string {
+  formatRuleBased(n: DecimalArg, options?: RuleBasedFormatOptions): string {
     options = options || {};
     const rule = options.rule || 'spellout-numbering';
     const params = this.privateApi.getNumberParams('latn', 'default');
-    const id = this.bundle.languageScript();
-    const system = this.algorithmic.spellout(id, rule);
+    const system = this.algorithmic.rbnf(rule);
     const info = this.privateApi.getContextTransformInfo();
     return system ?
-      this.numbers.formatSpellout(this.bundle, this.numbers.stringRenderer(params),
+      this.numbers.formatRuleBased(this.bundle, this.numbers.stringRenderer(params),
         system, info, coerceDecimal(n), options, params) : '';
+  }
+
+  ruleBasedFormatNames(): string[] {
+    return this.algorithmic.rulenames.slice(0);
   }
 
   protected formatDecimalImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,

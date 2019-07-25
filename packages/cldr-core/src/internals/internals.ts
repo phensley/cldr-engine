@@ -21,7 +21,7 @@ import {
   ListPatternType,
   Quantity,
   RelativeTimeFormatOptions,
-  SpelloutFormatOptions,
+  RuleBasedFormatOptions,
   UnitFormatOptions,
 } from '../common';
 
@@ -84,9 +84,9 @@ export interface NumberInternals {
   formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal, code: string,
     options: CurrencyFormatOptions, params: NumberParams): T;
 
-  formatSpellout<T>(bundle: Bundle, renderer: NumberRenderer<T>,
+  formatRuleBased<T>(bundle: Bundle, renderer: NumberRenderer<T>,
     system: AlgorithmicNumberingSystem, transform: ContextTransformInfo,
-    n: Decimal, options: SpelloutFormatOptions, params: NumberParams): T;
+    n: Decimal, options: RuleBasedFormatOptions, params: NumberParams): T;
 
   getCurrencySymbol(bundle: Bundle, code: CurrencyType, width?: CurrencySymbolWidthType): string;
   getCurrencyDisplayName(bundle: Bundle, code: CurrencyType): string;

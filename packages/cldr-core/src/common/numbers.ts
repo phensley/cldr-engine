@@ -78,7 +78,7 @@ export interface CurrencyFormatOptions extends NumberFormatOptions {
 /**
  * @alpha
  */
-export interface SpelloutFormatOptions {
+export interface RuleBasedFormatOptions {
   rule?: string;
   context?: ContextType;
   round?: RoundingModeType;

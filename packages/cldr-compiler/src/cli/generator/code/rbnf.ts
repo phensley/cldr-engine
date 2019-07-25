@@ -20,7 +20,7 @@ export const getRBNF = (_data: any): Code[] => {
 
   code = packer.report();
   codes.push(
-    Code.top(['notes', 'spellout-rules.txt'], code)
+    Code.top(['notes', 'rbnf-names.txt'], code)
   );
 
   return codes;

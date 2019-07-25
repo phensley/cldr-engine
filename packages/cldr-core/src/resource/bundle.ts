@@ -4,6 +4,7 @@ import { LanguageTag } from '../locale';
 export type ExceptionIndex = { [y: number]: number };
 
 export interface Bundle extends PrimitiveBundle {
+  tag(): LanguageTag;
   calendarSystem(): string;
   numberSystem(): string;
   languageScript(): string;
@@ -25,19 +26,19 @@ export class StringBundle implements Bundle {
 
   constructor(
     readonly _id: string,
-    readonly tag: LanguageTag,
+    readonly _tag: LanguageTag,
     readonly strings: string[],
     readonly exceptions: string[],
     readonly index: ExceptionIndex,
     readonly _spellout: any
   ) {
-    const language = tag.language();
-    this._languageRegion = `${language}-${tag.region()}`;
-    this._languageScript = `${language}-${tag.script()}`;
+    const language = _tag.language();
+    this._languageRegion = `${language}-${_tag.region()}`;
+    this._languageScript = `${language}-${_tag.script()}`;
 
     // When bundle is constructed, see if there are unicode extensions for
     // number and calendar systems.
-    for (const subtag of tag.extensionSubtags('u')) {
+    for (const subtag of _tag.extensionSubtags('u')) {
       if (subtag.startsWith('nu-')) {
         this._numberSystem = subtag.substring(3);
       } else if (subtag.startsWith('ca-')) {
@@ -50,12 +51,16 @@ export class StringBundle implements Bundle {
     return this._id;
   }
 
+  tag(): LanguageTag {
+    return this._tag;
+  }
+
   language(): string {
-    return this.tag.language();
+    return this._tag.language();
   }
 
   region(): string {
-    return this.tag.region();
+    return this._tag.region();
   }
 
   languageScript(): string {

@@ -5,30 +5,63 @@ import { RBNF, RBNFSet } from './rbnf';
 
 const U = undefined;
 const ROOT = new RBNF(rbnfRulesets);
+const RBNFROOT = ROOT.get('root')!;
 
 export class AlgorithmicNumberingSystems {
 
-  readonly rbnf: RBNF;
+  readonly rbnfset: RBNFSet | undefined;
+  readonly rulenames: string[] = [];
 
-  constructor(spellout: any) {
-    this.rbnf = new RBNF(spellout);
-  }
+  constructor(spellout: any, ...ids: string[]) {
+    const rbnf = new RBNF(spellout);
 
-  system(name: string): AlgorithmicNumberingSystem | undefined {
-    const path = algorithmicNumbering[name];
-    return path ? this.spellout(...path) : U;
-  }
-
-  spellout(id: string, name: string): AlgorithmicNumberingSystem | undefined {
-    for (const rbnf of [ROOT, this.rbnf]) {
-      const set = rbnf.get(id);
-      if (set && set.index.has(name)) {
-        return new AlgorithmicNumberingSystem(name, set);
+    // Find the first defined system. This lets us check if a region-specific
+    // system exists, falling back to the language-script.
+    for (const id of ids) {
+      this.rbnfset = rbnf.get(id);
+      if (this.rbnfset) {
+        this.rulenames = this.rbnfset.pubnames;
+        // Include rules from the root locale that are not already defined
+        // by the locale.
+        for (const n of RBNFROOT.pubnames) {
+          if (!this.rbnfset.index.has(n)) {
+            this.rulenames.push(n);
+          }
+        }
       }
     }
+    // If no locale rules are available, use those from the root locale.
+    if (!this.rbnfset) {
+      this.rulenames = RBNFROOT.pubnames.slice(0);
+    }
+  }
 
-    // TODO: fallbacks?
+  /**
+   * Return a globally-available rule-based numbering system, e.g. 'hant' or 'roman-upper'.
+   */
+  system(name: string): AlgorithmicNumberingSystem | undefined {
+    const path = algorithmicNumbering[name];
+    if (path) {
+      const set = ROOT.get(path[0]);
+      if (set && set.index.has(path[1])) {
+        return new AlgorithmicNumberingSystem(path[1], set);
+      }
+    }
     return U;
+  }
+
+  /**
+   * Return a locale-specific rule-based numbering system, e.g. 'spellout-cardinal' or
+   * 'digits-ordinal'.
+   */
+  rbnf(rule: string): AlgorithmicNumberingSystem | undefined {
+    let set: RBNFSet | undefined;
+    if (this.rbnfset && this.rbnfset.index.has(rule)) {
+      set = this.rbnfset;
+    } else if (RBNFROOT.index.has(rule)) {
+      set = RBNFROOT;
+    }
+    return set ? new AlgorithmicNumberingSystem(rule, set) : U;
   }
 
 }

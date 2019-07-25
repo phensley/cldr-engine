@@ -33,7 +33,7 @@ import {
   MeasurementSystem,
   Quantity,
   RelativeTimeFormatOptions,
-  SpelloutFormatOptions,
+  RuleBasedFormatOptions,
   TimeZoneInfo,
   UnitFormatOptions,
   UnitLength,
@@ -286,9 +286,9 @@ export interface Numbers {
   formatCurrencyToParts(num: DecimalArg, code: CurrencyType, options?: CurrencyFormatOptions): Part[];
 
   /**
-   * Formats a decimal number using spellout rules.
+   * Formats a decimal number using a rule-based number format.
    */
-  formatSpellout(num: DecimalArg, options?: SpelloutFormatOptions): string;
+  formatRuleBased(num: DecimalArg, options?: RuleBasedFormatOptions): string;
 
   /**
    * Returns the currency symbol of the given width.
@@ -324,6 +324,11 @@ export interface Numbers {
    * Returns the plural ordinal category of the given decimal number.
    */
   getPluralOrdinal(num: DecimalArg, options?: DecimalAdjustOptions): string;
+
+  /**
+   * Returns the list of available rule-based number formats for the current locale.
+   */
+  ruleBasedFormatNames(): string[];
 }
 
 /**

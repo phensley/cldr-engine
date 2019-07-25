@@ -14,7 +14,7 @@ import {
   CurrencySymbolWidthType,
   DecimalAdjustOptions,
   DecimalFormatOptions,
-  SpelloutFormatOptions,
+  RuleBasedFormatOptions,
 } from '../../common';
 
 import { NumberContext } from './context';
@@ -329,9 +329,9 @@ export class NumberInternalsImpl implements NumberInternals {
    *
    * @alpha
    */
-  formatSpellout<T>(bundle: Bundle, renderer: NumberRenderer<T>,
+  formatRuleBased<T>(bundle: Bundle, renderer: NumberRenderer<T>,
       system: AlgorithmicNumberingSystem, transform: ContextTransformInfo,
-      n: Decimal, options: SpelloutFormatOptions, params: NumberParams): T {
+      n: Decimal, options: RuleBasedFormatOptions, params: NumberParams): T {
 
     // TODO: build fallback number formatter
     const round = options.round || 'half-even';
