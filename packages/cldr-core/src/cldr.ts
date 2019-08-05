@@ -40,6 +40,7 @@ import { VERSION } from './utils/version';
 const enum Messages {
   CHECKSUM = 'Checksum mismatch on resource pack! The schema config used to ' +
     'generate the resource pack must be identical to the one used at runtime.',
+  LOCALE_UNDEFINED = 'The "locale" argument is undefined',
   NO_ASYNC_LOADER = 'A Promise-based resource loader is not defined',
   NO_SYNC_LOADER = 'A synchronous resource loader is not defined',
 }
@@ -304,15 +305,14 @@ export class CLDRFramework {
    * when your application's state store is initialized.
    */
   get(locale: Locale | string): CLDR {
-    if (this.loader === undefined) {
-      throw new Error(Messages.NO_SYNC_LOADER);
-    }
+    must(this.loader, Messages.NO_SYNC_LOADER);
+    must(locale, Messages.LOCALE_UNDEFINED);
     const resolved = typeof locale === 'string' ? CLDRFramework.resolveLocale(locale) : locale;
     const language = resolved.tag.language();
 
     let pack = this.packCache.get(language);
     if (pack === undefined) {
-      const data = this.loader(language);
+      const data = this.loader!(language);
       pack = new Pack(data);
       this.check(pack);
       this.packCache.set(language, pack);
@@ -325,10 +325,8 @@ export class CLDRFramework {
    * a given locale.
    */
   getAsync(locale: Locale | string): Promise<CLDR> {
-    const asyncLoader = this.asyncLoader;
-    if (asyncLoader === undefined) {
-      throw new Error(Messages.NO_ASYNC_LOADER);
-    }
+    must(this.asyncLoader, Messages.NO_ASYNC_LOADER);
+    must(locale, Messages.LOCALE_UNDEFINED);
     const resolved = typeof locale === 'string' ? CLDRFramework.resolveLocale(locale) : locale;
     const language = resolved.tag.language();
 
@@ -340,7 +338,7 @@ export class CLDRFramework {
       }
 
       // Resolve via the promise loader
-      asyncLoader(language).then(raw => {
+      this.asyncLoader!(language).then(raw => {
         const _pack = new Pack(raw);
         this.check(_pack);
         this.packCache.set(language, _pack);
@@ -368,3 +366,9 @@ export class CLDRFramework {
     }
   }
 }
+
+const must = (arg: any, message: string) => {
+  if (arg === undefined) {
+    throw new Error(message);
+  }
+};

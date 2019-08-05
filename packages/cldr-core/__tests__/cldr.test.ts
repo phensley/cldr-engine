@@ -171,8 +171,15 @@ test('async await loader', async () => {
 
 test('loader errors', () => {
   const framework = new CLDRFramework({ config: {} });
-  expect(() => framework.get('en')).toThrowError();
-  expect(() => framework.getAsync('en')).toThrowError();
+  expect(() => framework.get('en')).toThrowError('loader is not defined');
+  expect(() => framework.getAsync('en')).toThrowError('loader is not defined');
+});
+
+test('undefined locale', () => {
+  const framework = getCLDR();
+  const undef = undefined as unknown as string;
+  expect(() => framework.get(undef)).toThrowError('argument is undefined');
+  expect(() => framework.getAsync(undef)).toThrowError('argument is undefined');
 });
 
 test('version', () => {
