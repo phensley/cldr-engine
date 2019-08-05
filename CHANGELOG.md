@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.17.1]
+### Fixed/Changed
+ - Improve argument validation and error messages for `CLDRFramework.get/getAsync`
+
 ## [0.17.0]
 ### Added
  - Added `Numbers.adjustDecimal(num, options): Decimal` method to adjust a decimal number using options, e.g. min/max fractions, etc.
@@ -178,6 +182,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.17.1]: https://github.com/phensley/cldr-engine/compare/v0.17.0...v0.17.1
 [0.17.0]: https://github.com/phensley/cldr-engine/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/phensley/cldr-engine/compare/v0.15.3...v0.16.0
 [0.15.3]: https://github.com/phensley/cldr-engine/compare/v0.15.2...v0.15.3
