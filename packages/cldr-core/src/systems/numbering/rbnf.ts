@@ -148,7 +148,7 @@ export class RBNFEngine {
       this._format(n, si);
     }
     if (this.errors.length) {
-      console.log(`ERRORS: ${this.errors.join('\n')}`);
+      console.log(`ERRORS: '${this.language}' rule '${name}' number '${n.toString()}'  ${this.errors.join('\n')}`);
     }
     return this.buf;
   }
@@ -215,7 +215,8 @@ export class RBNFEngine {
             const j = binarySearch(rules as (NormalRule | NormalRadixRule)[],
                 true, i, (e: (NormalRule | NormalRadixRule)): number => this.rbnf.numbers[e[2]].compare(m));
             if (j < i) {
-              this.errors.push(`Malformed rules in ruleset ${si} at ${i} for ${n.toString()}: got ${j}`);
+              const name = this.rbnf.allnames[si];
+              this.errors.push(`Malformed rules in ruleset '${name}' at ${i} for ${n.toString()}: got ${j}`);
               return -1;
             }
             return j;
