@@ -1,7 +1,7 @@
 import { Decimal } from '@phensley/decimal';
 import { algorithmicNumbering } from './autogen.names';
 import { rbnfRulesets } from './autogen.rbnf';
-import { RBNF, RBNFSet } from './rbnf';
+import { RBNF, RBNFSet, RBNFSymbols } from './rbnf';
 
 const U = undefined;
 const ROOT = new RBNF(rbnfRulesets);
@@ -39,12 +39,12 @@ export class AlgorithmicNumberingSystems {
   /**
    * Return a globally-available rule-based numbering system, e.g. 'hant' or 'roman-upper'.
    */
-  system(name: string): AlgorithmicNumberingSystem | undefined {
+  system(name: string, symbols: RBNFSymbols): AlgorithmicNumberingSystem | undefined {
     const path = algorithmicNumbering[name];
     if (path) {
       const set = ROOT.get(path[0]);
       if (set && set.index.has(path[1])) {
-        return new AlgorithmicNumberingSystem(path[1], set);
+        return new AlgorithmicNumberingSystem(path[1], symbols, set);
       }
     }
     return U;
@@ -54,25 +54,29 @@ export class AlgorithmicNumberingSystems {
    * Return a locale-specific rule-based numbering system, e.g. 'spellout-cardinal' or
    * 'digits-ordinal'.
    */
-  rbnf(rule: string): AlgorithmicNumberingSystem | undefined {
+  rbnf(rule: string, symbols: RBNFSymbols): AlgorithmicNumberingSystem | undefined {
     let set: RBNFSet | undefined;
     if (this.rbnfset && this.rbnfset.index.has(rule)) {
       set = this.rbnfset;
     } else if (RBNFROOT.index.has(rule)) {
       set = RBNFROOT;
     }
-    return set ? new AlgorithmicNumberingSystem(rule, set) : U;
+    return set ? new AlgorithmicNumberingSystem(rule, symbols, set) : U;
   }
 
 }
 
 export class AlgorithmicNumberingSystem {
 
-  constructor(readonly name: string, readonly rbnf: RBNFSet) {}
+  constructor(
+    readonly name: string,
+    readonly symbols: RBNFSymbols,
+    readonly rbnf: RBNFSet) {}
 
   format(n: Decimal): string {
+    // Pass number params
     // TODO: pass down decimal == '.' to set flag
-    return this.rbnf.format(this.name, 0, n);
+    return this.rbnf.format(this.name, this.symbols, n);
   }
 
 }

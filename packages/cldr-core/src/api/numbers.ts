@@ -116,7 +116,7 @@ export class NumbersImpl implements Numbers {
     options = options || {};
     const rule = options.rule || 'spellout-numbering';
     const params = this.privateApi.getNumberParams('latn', 'default');
-    const system = this.algorithmic.rbnf(rule);
+    const system = this.algorithmic.rbnf(rule, params.symbols);
     const info = this.privateApi.getContextTransformInfo();
     return system ?
       this.numbers.formatRuleBased(this.bundle, this.numbers.stringRenderer(params),

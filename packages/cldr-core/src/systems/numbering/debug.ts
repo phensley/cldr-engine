@@ -4,6 +4,7 @@ import {
   RBNF as RBNFBase,
   RBNFEngine as RBNFEngineBase,
   RBNFSet as RBNFSetBase,
+  RBNFSymbols,
 } from './rbnf';
 
 const REVPLURALS: { [x: number]: string } = {
@@ -53,8 +54,8 @@ export class RBNFDebugSet extends RBNFSetBase {
     super(id, pubnames, prvnames, numbers, symbols, rulesets);
   }
 
-  format(rulename: string, decimal: number, n: Decimal): string {
-    return new RBNFDebugEngine(this.language, decimal, this, this.settings, this.coverage)
+  format(rulename: string, symbols: RBNFSymbols, n: Decimal): string {
+    return new RBNFDebugEngine(this.language, symbols, this, this.settings, this.coverage)
       .format(rulename, n);
   }
 
@@ -109,12 +110,12 @@ class RBNFDebugEngine extends RBNFEngineBase {
 
   constructor(
     language: string,
-    decimal: number,
+    symbols: RBNFSymbols,
     rbnf: RBNFSetBase,
     private settings: RBNFDebugSettings,
     private coverage: Map<number, Set<number>>
   ) {
-    super(language, decimal, rbnf);
+    super(language, symbols, rbnf);
   }
 
   protected trace(...s: any[]): tracefunc {

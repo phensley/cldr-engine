@@ -32,8 +32,15 @@ type IntegerSubInst = ApplyLeftRuleInst
   | ApplyLeftNumFormatInst
   | SubLeftInst;
 
+  export interface RBNFSymbols {
+    decimal: string;
+    nan: string;
+    infinity: string;
+  }
+
 /**
- *
+ * A collection of multiple RBNF locale-specific rulesets with shared arrays of
+ * symbols and numbers.
  */
 export class RBNF {
 
@@ -54,11 +61,18 @@ export class RBNF {
     }
   }
 
+  /**
+   * Builds an RBNFSet instance, allowing overriding of construction in subclasses
+   * (currently used for debugging).
+   */
   make(id: string, pub: string[], prv: string[],
       numbers: Decimal[], symbols: string[], rulesets: RBNFRule[][]): RBNFSet {
     return new RBNFSet(id, pub, prv, numbers, symbols, rulesets);
   }
 
+  /**
+   * Fetch the rulesets for the given locale id.
+   */
   get(id: string): RBNFSet | undefined {
     return this.locales.get(id);
   }
@@ -99,8 +113,8 @@ export class RBNFSet {
    * Return the RBNF formatted representation of a number for the given
    * language, using the given rules.
    */
-  format(rulename: string, decimal: number, n: Decimal): string {
-    return new RBNFEngine(this.language, decimal, this).format(rulename, n);
+  format(rulename: string, symbols: RBNFSymbols, n: Decimal): string {
+    return new RBNFEngine(this.language, symbols, this).format(rulename, n);
   }
 }
 
@@ -116,13 +130,16 @@ export class RBNFEngine {
   private buf: string = '';
   private errors: string[] = [];
   private fractions: Set<number> = new Set<number>();
+  private decimal: number;
 
   constructor(
     private language: string,
     // Decimal point character: 0 = period, 1 = comma
-    private decimal: number,
+    private symbols: RBNFSymbols,
     protected rbnf: RBNFSet
-  ) { }
+  ) {
+    this.decimal = symbols.decimal === '.' ? 1 : 0;
+  }
 
   format(name: string, n: Decimal): string {
     const si = this.rbnf.index.get(name);
@@ -138,7 +155,11 @@ export class RBNFEngine {
   protected _format(n: Decimal, si: number): void {
     const ri = this._match(n, si);
     if (ri === -1) {
-      // TODO: check for NaN and Inf, and handle by substituting symbols
+      if (n.isNaN()) {
+        this.buf += this.symbols.nan;
+      } else if (n.isInfinity()) {
+        this.buf += this.symbols.infinity;
+      }
       return;
     }
     const r = this.rbnf.rulesets[si][ri];
