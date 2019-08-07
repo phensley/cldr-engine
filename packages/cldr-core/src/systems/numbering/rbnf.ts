@@ -56,7 +56,8 @@ export class RBNF {
       const { names, rulesets } = locales[id];
       const [_pub, _prv] = names;
       const pub = _pub.split('\t');
-      const prv = _prv.split('\t');
+      // some rulesets have no private rules
+      const prv = _prv.length ? _prv.split('\t') : [];
       this.locales.set(id, this.make(id, pub, prv, this.numbers, this.symbols, rulesets));
     }
   }
