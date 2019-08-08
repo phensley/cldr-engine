@@ -32,11 +32,14 @@ type IntegerSubInst = ApplyLeftRuleInst
   | ApplyLeftNumFormatInst
   | SubLeftInst;
 
-  export interface RBNFSymbols {
-    decimal: string;
-    nan: string;
-    infinity: string;
-  }
+export interface RBNFSymbols {
+  decimal: string;
+  nan: string;
+  infinity: string;
+}
+
+export type RBNFDecimalFormatter =
+  (pattern: string, n: Decimal) => string;
 
 /**
  * A collection of multiple RBNF locale-specific rulesets with shared arrays of
@@ -114,8 +117,9 @@ export class RBNFSet {
    * Return the RBNF formatted representation of a number for the given
    * language, using the given rules.
    */
-  format(rulename: string, symbols: RBNFSymbols, n: Decimal): string {
-    return new RBNFEngine(this.language, symbols, this).format(rulename, n);
+  format(rulename: string, symbols: RBNFSymbols, n: Decimal, fallback: RBNFDecimalFormatter): string {
+    return new RBNFEngine(this.language, symbols, this, fallback)
+      .format(rulename, n);
   }
 }
 
@@ -137,7 +141,8 @@ export class RBNFEngine {
     private language: string,
     // Decimal point character: 0 = period, 1 = comma
     private symbols: RBNFSymbols,
-    protected rbnf: RBNFSet
+    protected rbnf: RBNFSet,
+    protected fallback: RBNFDecimalFormatter
   ) {
     this.decimal = symbols.decimal === '.' ? 1 : 0;
   }
@@ -279,7 +284,7 @@ export class RBNFEngine {
           break;
 
         case Opcode.UNCHANGED_NUM_FORMAT:
-          this.buf += '#';
+          this.buf += this.fallback(this.rbnf.symbols[inst[1]], n);
           break;
 
         case Opcode.SUB_RIGHT:

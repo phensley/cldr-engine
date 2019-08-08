@@ -4,6 +4,7 @@ import {
 } from '../../../src/systems/numbering/algorithmic';
 import { Decimal } from '@phensley/decimal';
 import { languageBundle } from '../../_helpers/bundle';
+import { RBNFDecimalFormatter } from '../../../src/systems/numbering/rbnf';
 
 const SYMBOLS = {
   decimal: '.',
@@ -11,16 +12,18 @@ const SYMBOLS = {
   infinity: '∞'
 };
 
+const FALLBACK: RBNFDecimalFormatter = (p: string, n: Decimal) => p + ' ' + n.toString();
+
 test('numbering systems', () => {
   const en = languageBundle('en');
   const systems = new AlgorithmicNumberingSystems(en.spellout());
   let s: string;
 
   const sys = systems.system('romanlow', SYMBOLS)!;
-  s = sys.format(new Decimal('1234'));
+  s = sys.format(new Decimal('1234'), FALLBACK);
   expect(s).toEqual('mccxxxiv');
 
-  s = sys.format(new Decimal('57'));
+  s = sys.format(new Decimal('57'), FALLBACK);
   expect(s).toEqual('lvii');
 });
 
@@ -33,18 +36,18 @@ test('spellout english', () => {
   systems = new AlgorithmicNumberingSystems(en.spellout(), 'en-Latn');
 
   system = systems.rbnf('spellout-numbering', SYMBOLS)!;
-  s = system.format(new Decimal('1234'));
+  s = system.format(new Decimal('1234'), FALLBACK);
   expect(s).toEqual('one thousand two hundred thirty-four');
 
-  s = system.format(new Decimal('57'));
+  s = system.format(new Decimal('57'), FALLBACK);
   expect(s).toEqual('fifty-seven');
 
   system = systems.rbnf('spellout-cardinal', SYMBOLS)!;
-  s = system.format(new Decimal('1000273'));
+  s = system.format(new Decimal('1000273'), FALLBACK);
   expect(s).toEqual('one million two hundred seventy-three');
 
   systems = new AlgorithmicNumberingSystems(en.spellout(), 'en-Latn-IN');
   system = systems.rbnf('spellout-cardinal', SYMBOLS)!;
-  s = system.format(new Decimal('1000273'));
+  s = system.format(new Decimal('1000273'), FALLBACK);
   expect(s).toEqual('ten lakh two hundred seventy-three');
 });

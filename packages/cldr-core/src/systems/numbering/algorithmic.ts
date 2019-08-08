@@ -1,7 +1,7 @@
 import { Decimal } from '@phensley/decimal';
 import { algorithmicNumbering } from './autogen.names';
 import { rbnfRulesets } from './autogen.rbnf';
-import { RBNF, RBNFSet, RBNFSymbols } from './rbnf';
+import { RBNF, RBNFDecimalFormatter, RBNFSet, RBNFSymbols } from './rbnf';
 
 const U = undefined;
 const ROOT = new RBNF(rbnfRulesets);
@@ -73,10 +73,8 @@ export class AlgorithmicNumberingSystem {
     readonly symbols: RBNFSymbols,
     readonly rbnf: RBNFSet) {}
 
-  format(n: Decimal): string {
-    // Pass number params
-    // TODO: pass down decimal == '.' to set flag
-    return this.rbnf.format(this.name, this.symbols, n);
+  format(n: Decimal, fallback: RBNFDecimalFormatter): string {
+    return this.rbnf.format(this.name, this.symbols, n, fallback);
   }
 
 }

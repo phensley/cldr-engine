@@ -2,6 +2,7 @@ import { Decimal } from '@phensley/decimal';
 import { Opcode, RuleType, RBNFInst, RBNFRule } from './rbnftypes';
 import {
   RBNF as RBNFBase,
+  RBNFDecimalFormatter,
   RBNFEngine as RBNFEngineBase,
   RBNFSet as RBNFSetBase,
   RBNFSymbols,
@@ -54,8 +55,8 @@ export class RBNFDebugSet extends RBNFSetBase {
     super(id, pubnames, prvnames, numbers, symbols, rulesets);
   }
 
-  format(rulename: string, symbols: RBNFSymbols, n: Decimal): string {
-    return new RBNFDebugEngine(this.language, symbols, this, this.settings, this.coverage)
+  format(rulename: string, symbols: RBNFSymbols, n: Decimal, fallback: RBNFDecimalFormatter): string {
+    return new RBNFDebugEngine(this.language, symbols, this, fallback, this.settings, this.coverage)
       .format(rulename, n);
   }
 
@@ -112,10 +113,11 @@ class RBNFDebugEngine extends RBNFEngineBase {
     language: string,
     symbols: RBNFSymbols,
     rbnf: RBNFSetBase,
+    fallback: RBNFDecimalFormatter,
     private settings: RBNFDebugSettings,
     private coverage: Map<number, Set<number>>
   ) {
-    super(language, symbols, rbnf);
+    super(language, symbols, rbnf, fallback);
   }
 
   protected trace(...s: any[]): tracefunc {

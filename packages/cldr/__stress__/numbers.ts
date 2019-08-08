@@ -14,7 +14,7 @@ import {
 } from '../src';
 import { getCLDR } from '../__tests__/_helpers';
 import { Timer } from './timer';
-import { SpelloutFormatOptions } from '@phensley/cldr-core';
+import { RuleBasedFormatOptions } from '@phensley/cldr-core';
 
 const VERBOSE = true;
 
@@ -22,14 +22,19 @@ const { availableLocales } = CLDRFramework;
 
 const MAX = String(Number.MAX_SAFE_INTEGER);
 
-const NUMBERS: (string | Decimal)[] = [
-  '0', '1', '-1', '12345.789', '-12345.789',
+const CURRENCY_NUMBERS: (string | Decimal)[] = [
+  '0', '1', '-1',
+  '5', '-13',
+  '123.1', '-99.57',
+  '12345.789', '-12345.789',
   '1000000000',
   new Decimal('1.579e-13'),
   DecimalConstants.PI,
   MAX,
   MAX + MAX
 ];
+
+const NUMBERS: (string | Decimal)[] = ['-Infinity', 'NaN', ...CURRENCY_NUMBERS];
 
 const DECIMAL_STYLES: DecimalFormatStyleType[] = [
   'decimal', 'short', 'long', 'percent', 'permille', 'percent-scaled', 'permille-scaled'
@@ -91,8 +96,8 @@ const currencyOptions = (): CurrencyFormatOptions[] => {
 return res;
 };
 
-const spelloutOptions = (): SpelloutFormatOptions[] => {
-  const res: CurrencyFormatOptions[] = [];
+const ruleBasedOptions = (): RuleBasedFormatOptions[] => {
+  const res: RuleBasedFormatOptions[] = [];
   res.push({});
   res.push({ minimumFractionDigits: 0 });
   res.push({ minimumFractionDigits: 3 });
@@ -128,13 +133,14 @@ export const numberStress = () => {
 
   const dopts = decimalOptions();
   const copts = currencyOptions();
-  const sopts = spelloutOptions();
+  const sopts = ruleBasedOptions();
   const uopts = unitOptions();
   let i = 0;
 
   for (const locale of locales) {
     timer.start();
     const engine = cldr.get(locale);
+    const rbnfrules = engine.Numbers.ruleBasedFormatNames();
     elapsed = timer.micros();
     console.log(`load '${locale.id}' locale: ${elapsed} micros`);
 
@@ -157,7 +163,7 @@ export const numberStress = () => {
 
     i = 0;
     timer.start();
-    for (const n of NUMBERS) {
+    for (const n of CURRENCY_NUMBERS) {
       for (const currency of CURRENCIES) {
         for (const o of copts) {
           s = engine.Numbers.formatCurrency(n, currency, o);
@@ -179,13 +185,16 @@ export const numberStress = () => {
     timer.start();
     for (const n of NUMBERS) {
       for (const o of sopts) {
-        engine.Numbers.formatSpellout(n, o);
-        i++;
+        for (const rule of rbnfrules) {
+          o.rule = rule;
+          engine.Numbers.formatRuleBased(n, o);
+          i++;
+        }
       }
     }
     elapsed = timer.micros();
     total += i;
-    console.log(`format ${i} spellout permutations: ${elapsed} micros`);
+    console.log(`format ${i} rule-based permutations: ${elapsed} micros`);
 
     i = 0;
     timer.start();

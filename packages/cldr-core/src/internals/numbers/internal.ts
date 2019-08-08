@@ -349,8 +349,10 @@ export class NumberInternalsImpl implements NumberInternals {
     ctx.setPattern(pattern);
     n = ctx.adjust(n);
 
+    const fallback = (p: string, num: Decimal) => p + num.toString();
+
     // Format the spellout number as a string
-    let s = system.format(n);
+    let s = system.format(n, fallback);
 
     // Context transform the result and return it
     s = this.internals.general.contextTransform(s, transform, options.context, 'number-spellout');
