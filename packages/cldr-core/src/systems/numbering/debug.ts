@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { Decimal } from '@phensley/decimal';
 import { Opcode, RuleType, RBNFInst, RBNFRule } from './rbnftypes';
 import {
