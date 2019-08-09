@@ -22,12 +22,26 @@ test('numbers defaulting', () => {
   s = api.formatRuleBased(DecimalConstants.PI, { maximumFractionDigits: 4 });
   expect(s).toEqual('three point one four one six');
 
-  // TODO:
-  // s = api.formatRuleBased(3, { rule: 'digits-ordinal' });
-  // expect(s).toEqual('3rd');
+  s = api.formatRuleBased(0, { rule: 'digits-ordinal' });
+  expect(s).toEqual('0th');
 
-  // s = api.formatRuleBased(15, { rule: 'digits-ordinal' });
-  // expect(s).toEqual('15th');
+  s = api.formatRuleBased(1, { rule: 'digits-ordinal' });
+  expect(s).toEqual('1st');
+
+  s = api.formatRuleBased(3, { rule: 'digits-ordinal' });
+  expect(s).toEqual('3rd');
+
+  s = api.formatRuleBased(15, { rule: 'digits-ordinal' });
+  expect(s).toEqual('15th');
+
+  s = api.formatRuleBased(1.5, { rule: 'digits-ordinal' });
+  expect(s).toEqual('2nd');
+
+  s = api.formatRuleBased(1.5, { rule: 'digits-ordinal', round: 'down' });
+  expect(s).toEqual('1st');
+
+  s = api.formatRuleBased(1000023, { rule: 'digits-ordinal' });
+  expect(s).toEqual('1000023rd');
 
   api = numbersApi('es');
 
@@ -45,6 +59,24 @@ test('numbers defaulting', () => {
 
   s = api.formatRuleBased(DecimalConstants.PI, { maximumFractionDigits: 4 });
   expect(s).toEqual('tres punto uno cuatro uno seis');
+
+  s = api.formatRuleBased(0, { rule: 'digits-ordinal' });
+  expect(s).toEqual('0.º');
+
+  s = api.formatRuleBased(1, { rule: 'digits-ordinal' });
+  expect(s).toEqual('1.º');
+
+  s = api.formatRuleBased(3, { rule: 'digits-ordinal' });
+  expect(s).toEqual('3.º');
+
+  s = api.formatRuleBased(15, { rule: 'digits-ordinal' });
+  expect(s).toEqual('15.º');
+
+  s = api.formatRuleBased(1.5, { rule: 'digits-ordinal' });
+  expect(s).toEqual('2.º');
+
+  s = api.formatRuleBased(1.5, { rule: 'digits-ordinal', round: 'down' });
+  expect(s).toEqual('1.º');
 });
 
 test('rule names', () => {

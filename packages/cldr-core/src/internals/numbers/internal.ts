@@ -333,7 +333,6 @@ export class NumberInternalsImpl implements NumberInternals {
       system: AlgorithmicNumberingSystem, transform: ContextTransformInfo,
       n: Decimal, options: RuleBasedFormatOptions, params: NumberParams): T {
 
-    // TODO: build fallback number formatter
     const round = options.round || 'half-even';
 
     // Use standard number pattern to set fallback options for min/max digits, etc.
@@ -345,13 +344,23 @@ export class NumberInternalsImpl implements NumberInternals {
     const pattern = this.getNumberPattern(standardRaw, n.isNegative());
 
     // Adjust number using pattern
+    // TODO: mark ordinal rules with flags explicitly
+    const ordinal = system.name.indexOf('ordinal') !== -1;
+    if (ordinal) {
+      // Ordinals must to be rounded to nearest integer
+      options = {...options, maximumFractionDigits: 0 };
+    }
     const ctx = new NumberContext(options, round, false, false);
     ctx.setPattern(pattern);
     n = ctx.adjust(n);
 
-    const fallback = (p: string, num: Decimal) => p + num.toString();
+    // TODO: support parts formatting with rbnf
+    const fallback = (p: string, num: Decimal) => {
+      const _p = this.getNumberPattern(p, num.isNegative());
+      return this.stringRenderer(params).render(num, _p, '', '', params.symbols.decimal, ctx.minInt, false);
+    };
 
-    // Format the spellout number as a string
+    // Format the number as a string
     let s = system.format(n, fallback);
 
     // Context transform the result and return it
