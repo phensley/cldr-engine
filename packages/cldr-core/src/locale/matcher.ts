@@ -8,6 +8,8 @@ import { paradigmLocales } from './autogen.distance';
 // Space and comma-separated bundle ids.
 const TAG_SEP = /[,\s]+/g;
 
+const U = undefined;
+
 const numberCmp = (a: number, b: number) => a === b ? 0 : a < b ? -1 : 1;
 
 // Mapping of paradigm locales to their relative position.
@@ -32,7 +34,7 @@ class Entry implements Locale {
 /**
  * Flatten and split the string or array into a list of matcher entries.
  */
-const parse = (locales: string | string[]): Entry[] => {
+const parse = (locales: string | string[] = []): Entry[] => {
   let raw: string[];
   if (typeof locales === 'string') {
     raw = locales.split(TAG_SEP);
@@ -95,6 +97,9 @@ export class LocaleMatcher {
   constructor(supportedLocales: string | string[]) {
     this.supported = parse(supportedLocales);
     this.count = this.supported.length;
+    if (!this.count) {
+      throw new Error('LocaleMatcher expects at least one supported locale');
+    }
 
     // The first locale in the list is used as the default.
     this.default = this.supported[0];
@@ -116,7 +121,7 @@ export class LocaleMatcher {
       const pa = paradigmLocaleMap![a.compact];
       const pb = paradigmLocaleMap![b.compact];
       if (pa !== undefined) {
-        return pb === undefined ? -1 : numberCmp(pa, pb);
+        return pb === U ? -1 : numberCmp(pa, pb);
       } else if (pb !== undefined) {
         return 1;
       }
@@ -130,7 +135,7 @@ export class LocaleMatcher {
     this.supported.forEach(locale => {
       const key = locale.compact;
       let bundles = this.exactMap[key];
-      if (bundles === undefined) {
+      if (bundles === U) {
         bundles = [locale];
         this.exactMap[key] = bundles;
       } else {
@@ -165,7 +170,7 @@ export class LocaleMatcher {
       for (let j = 0; j < this.count; j++) {
         const supported = this.supported[j];
         const distance = getDistance(desired.tag, supported.tag, threshold);
-        if (bestDistance === undefined || distance < bestDistance) {
+        if (bestDistance === U || distance < bestDistance) {
           bestDistance = distance;
           bestMatch = supported;
           bestDesired = desired;
@@ -174,11 +179,11 @@ export class LocaleMatcher {
     }
     const extensions = bestDesired.tag.extensions();
     const privateUse = bestDesired.tag.privateUse();
-    const { id, tag } = bestMatch === undefined ? this.default : bestMatch;
+    const { id, tag } = bestMatch === U ? this.default : bestMatch;
     const result = new LanguageTag(tag.language(), tag.script(), tag.region(), tag.variant(), extensions, privateUse);
     return {
       locale: { id, tag: result },
-      distance: bestMatch === undefined ? MAX_DISTANCE : bestDistance
+      distance: bestMatch === U ? MAX_DISTANCE : bestDistance
     };
   }
 }

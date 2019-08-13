@@ -8,6 +8,10 @@ test('basics', () => {
   expect(m.locale.id).toEqual('en_GB');
 });
 
+test('bad args', () => {
+  expect(() => new LocaleMatcher(undefined as unknown as string)).toThrowError('at least');
+});
+
 test('constructor args', () => {
   let matcher: LocaleMatcher;
   let m: LocaleMatch;
