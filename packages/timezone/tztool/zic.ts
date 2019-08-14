@@ -31,6 +31,7 @@ export const parseZIC = (path: string): ParseResult => {
   for (const row of rows) {
     switch (row[0]) {
       case 'Li':
+      case 'L':
         const [ to, fr ] = row.slice(1);
         result.links.add(to, fr);
         break;

@@ -7,7 +7,7 @@ import { setupTZDB } from './tzdb';
 import { parseZIC } from './zic';
 import { encodeZones } from './encode';
 
-const VERSION = '2019a';
+const VERSION = '2019b';
 
 const runDumpJson = (argv: yargs.Arguments) => {
   const { file, pretty } = argv;
