@@ -31,7 +31,9 @@ if (isProd) {
   }));
 }
 
-plugins.push(filesize());
+plugins.push(filesize({
+  showBrotliSize: true
+}));
 
 const tasks = [
   {
