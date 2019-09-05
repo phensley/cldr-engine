@@ -47,7 +47,7 @@
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
     "tslint-no-circular-imports": "^0.7.0",
-    "typescript": "3.5.x"
+    "typescript": "3.6.x"
   },
   "jest": {
     "moduleFileExtensions": [

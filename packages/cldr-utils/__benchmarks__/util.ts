@@ -1,3 +1,5 @@
+/// <reference path="./typings.d.ts" />
+
 import * as fs from 'fs';
 import { Event, Suite } from 'benchmark';
 import * as beautify from 'beautify-benchmark';
