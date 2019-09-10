@@ -2,7 +2,8 @@ import {
   ContextTransformFieldType,
   ContextType,
   DateFieldType,
-  DateTimePatternFieldType
+  DateTimePatternFieldType,
+  RelativeTimeFieldType
 } from '@phensley/cldr-schema';
 
 import { DecimalArg, Part } from '@phensley/decimal';
@@ -226,7 +227,8 @@ export class CalendarsImpl implements Calendars {
   //     this.bundle, start, end, options, params);
   // }
 
-  formatRelativeTimeField(value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string {
+  formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType,
+      options?: RelativeTimeFormatOptions): string {
     options = options || { width: 'wide' };
     const transform = this.privateApi.getContextTransformInfo();
     const params = this.privateApi.getNumberParams(options.nu);

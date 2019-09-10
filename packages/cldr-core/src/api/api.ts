@@ -4,6 +4,7 @@ import {
   DateFieldType,
   DateTimePatternFieldType,
   LineOrderType,
+  RelativeTimeFieldType,
   UnitType
 } from '@phensley/cldr-schema';
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
@@ -121,7 +122,7 @@ export interface Calendars {
   /**
    * Formats a relative time field to string.
    */
-  formatRelativeTimeField(value: DecimalArg, field: DateFieldType, options?: RelativeTimeFormatOptions): string;
+  formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFormatOptions): string;
 
     /**
    * Formats a date-time value to string using a raw date-time pattern.
