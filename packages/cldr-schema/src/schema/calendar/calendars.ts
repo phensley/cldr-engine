@@ -1,5 +1,5 @@
 import { KeyIndex } from '../../types';
-import {  CalendarSchema } from './types';
+import { CalendarSchema } from './types';
 
 /**
  * Generate a key index containing numeric keys from start to end

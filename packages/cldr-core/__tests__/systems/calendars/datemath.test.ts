@@ -144,6 +144,32 @@ test('months', () => {
   expect(q.toString()).toEqual('Gregorian 2075-03-11 03:00:25.000 America/New_York');
 });
 
+test('month rollover', () => {
+  // Sunday, March 31, 2019 12:30:45 PM
+  const date: GregorianDate = gregorian(1554035445000, 'UTC');
+  let q: GregorianDate;
+
+  expect(date.toString()).toEqual('Gregorian 2019-03-31 12:30:45.000 Etc/UTC');
+
+  q = date.add({ month: 1 });
+  expect(q.toString()).toEqual('Gregorian 2019-05-01 12:30:45.000 Etc/UTC');
+
+  q = date.add({ month: 2 });
+  expect(q.toString()).toEqual('Gregorian 2019-05-31 12:30:45.000 Etc/UTC');
+
+  q = date.add({ month: 3 });
+  expect(q.toString()).toEqual('Gregorian 2019-07-01 12:30:45.000 Etc/UTC');
+
+  q = date.add({ month: 4 });
+  expect(q.toString()).toEqual('Gregorian 2019-07-31 12:30:45.000 Etc/UTC');
+
+  q = date.add({ month: 5 });
+  expect(q.toString()).toEqual('Gregorian 2019-08-31 12:30:45.000 Etc/UTC');
+
+  q = date.add({ month: 6 });
+  expect(q.toString()).toEqual('Gregorian 2019-10-01 12:30:45.000 Etc/UTC');
+});
+
 test('persian months', () => {
   let date: PersianDate = persian(BASE, NEW_YORK);
   let q: PersianDate;

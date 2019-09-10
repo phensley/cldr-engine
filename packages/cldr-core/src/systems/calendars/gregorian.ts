@@ -53,16 +53,17 @@ export class GregorianDate extends CalendarDate {
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): GregorianDate {
     super.initFromUnixEpoch(epoch, zoneId);
-    return this.initGregorian();
+    this.initFields(this._fields);
+    return this;
   }
 
   protected initFromJD(jd: number, msDay: number, zoneId: string): GregorianDate {
     super.initFromJD(jd, msDay, zoneId);
-    return this.initGregorian();
+    this.initFields(this._fields);
+    return this;
   }
 
-  protected initGregorian(): GregorianDate {
-    const f = this._fields;
+  protected initFields(f: number[]): void {
     if (f[DateField.JULIAN_DAY] >= CalendarConstants.JD_GREGORIAN_CUTOVER) {
       computeGregorianFields(f);
     } else {
@@ -79,7 +80,14 @@ export class GregorianDate extends CalendarDate {
     }
     f[DateField.ERA] = era;
     f[DateField.YEAR] = year;
-    return this;
+  }
+
+  protected daysInMonth(y: number, m: number): number {
+    return MONTH_COUNT[m][leapGregorian(y) ? 1 : 0];
+  }
+
+  protected daysInYear(y: number): number {
+    return leapGregorian(y) ? 366 : 365;
   }
 
   protected monthCount(): number {
@@ -193,7 +201,6 @@ const computeJulianFields = (f: number[]): void => {
  * Return true if the given year is a leap year in the Gregorian calendar; false otherwise.
  * Note that we switch to the Julian calendar at the Gregorian cutover year.
  */
-
 const leapGregorian = (y: number): boolean => {
   let r = y % 4 === 0;
   if (y >= CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR) {

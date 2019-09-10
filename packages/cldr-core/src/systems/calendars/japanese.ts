@@ -29,14 +29,19 @@ export class JapaneseDate extends GregorianDate {
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): JapaneseDate {
     super.initFromUnixEpoch(epoch, zoneId);
-    computeJapaneseFields(this._fields);
+    this.initFields(this._fields);
     return this;
   }
 
   protected initFromJD(jd: number, msDay: number, zoneId: string): JapaneseDate {
     super.initFromJD(jd, msDay, zoneId);
-    computeJapaneseFields(this._fields);
+    this.initFields(this._fields);
     return this;
+  }
+
+  protected initFields(f: number[]): void {
+    super.initFields(f);
+    computeJapaneseFields(f);
   }
 }
 

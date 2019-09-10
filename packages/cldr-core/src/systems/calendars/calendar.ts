@@ -300,24 +300,116 @@ export abstract class CalendarDate {
     return DateTimePatternField.SECOND;
   }
 
+  compare(other: CalendarDate): number {
+    const a = this.unixEpoch();
+    const b = other.unixEpoch();
+    return a < b ? -1 : a > b ? 1 : 0;
+  }
+
+  relativeTime(other: CalendarDate, _options?: any): void {
+    if (this._type !== other._type) {
+      // other = new
+    }
+  }
+
+  diff(other: CalendarDate): CalendarDateFields {
+    let s = this as CalendarDate;
+    let e = other;
+
+    // Swap start/end dates
+    if (this.compare(other) === 1) {
+      [s, e] = [e, s];
+    }
+
+    // Convert start and end to UTC and ensure both are of the same calendar type.
+    // We do this using lower-level logic since the CalendarDate base class currently
+    // cannot construct instances of subclasses.
+    const sf = s.utcfields();
+    const ef = e.utcfields();
+
+    // Use a borrow-based method to compute fields. If a field X is negative, we borrow
+    // from the next-higher field until X is positive. Repeat until all fields are
+    // positive.
+
+    let millis = ef[DateField.MILLIS_IN_DAY] - sf[DateField.MILLIS_IN_DAY];
+    let day = ef[DateField.DAY_OF_MONTH] - sf[DateField.DAY_OF_MONTH];
+    let month = ef[DateField.MONTH] - sf[DateField.MONTH];
+    let year = ef[DateField.EXTENDED_YEAR] - sf[DateField.EXTENDED_YEAR];
+
+    // Convert days into milliseconds
+    if (millis < 0) {
+      millis += CalendarConstants.ONE_DAY_MS;
+      day--;
+    }
+
+    // Convert months into days
+    // This is a little more complex since months can have 28, 29 30 or 31 days.
+    // We work backwards from the current month and successively convert months
+    // into days until days are positive.
+    const mc = s.monthCount();
+    let m = ef[DateField.MONTH] - 1; // convert to 0-based month
+    while (day < 0) {
+      // move to previous month
+      m--;
+      // add back the number of days in the current month, wrapping around to december
+      const dim = this.daysInMonth(ef[DateField.EXTENDED_YEAR], m < 0 ? m + mc : m);
+      day += dim;
+      month--;
+    }
+
+    // Convert years into months
+    if (month < 0) {
+      month += mc;
+      year--;
+    }
+
+    const week = day > 0 ? day / 7 | 0 : 0;
+    if (week > 0) {
+      day -= week * 7;
+    }
+
+    // Break down milliseconds into components
+    const hour = millis / CalendarConstants.ONE_HOUR_MS | 0;
+    millis -= hour * CalendarConstants.ONE_HOUR_MS;
+    const minute = millis / CalendarConstants.ONE_MINUTE_MS | 0;
+    millis -= minute * CalendarConstants.ONE_MINUTE_MS;
+    const second = millis / CalendarConstants.ONE_SECOND_MS | 0;
+    millis -= second * CalendarConstants.ONE_SECOND_MS;
+
+    return {
+      year,
+      month,
+      week,
+      day,
+      hour,
+      minute,
+      second,
+      millis
+    };
+  }
+
   abstract add(fields: CalendarDateFields): CalendarDate;
   protected abstract monthCount(): number;
+  protected abstract daysInMonth(y: number, m: number): number;
+  protected abstract daysInYear(y: number): number;
 
   /**
    * Compute a new Julian day and milliseconds UTC by updating one or more fields.
    */
   protected _add(fields: CalendarDateFields): [number, number] {
+    const f = this._fields;
+
     // All day calculations will be relative to the current day of the month.
-    const dom = this._fields[DateField.DAY_OF_MONTH] + (fields.day || 0) + ((fields.week || 0) * 7);
+    const dom = f[DateField.DAY_OF_MONTH] + (fields.day || 0) + ((fields.week || 0) * 7);
 
     // Adjust the extended year and month. Note: month may be fractional here,
     // but will be <= 12 after modulus the year
     const mc = this.monthCount();
     const months = floor((fields.year || 0) * mc);
-    let month = (this._fields[DateField.MONTH] - 1) + (fields.month || 0) + months;
+    let month = (f[DateField.MONTH] - 1) + (fields.month || 0) + months;
 
     const yadd = floor(month / mc);
-    const year = this._fields[DateField.EXTENDED_YEAR] + yadd;
+    const year = f[DateField.EXTENDED_YEAR] + yadd;
     month -= yadd * mc;
 
     // Calculate days and milliseconds from the time-oriented fields.
@@ -368,6 +460,8 @@ export abstract class CalendarDate {
     const unixEpoch = unixEpochFromJD(jd, msDay);
     this.initFromUnixEpoch(unixEpoch, zoneId);
   }
+
+  protected abstract initFields(f: number[]): void;
 
   protected _toString(type: string, year?: string): string {
     return `${type} ${year || this.year()}-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)} ` +
@@ -434,6 +528,15 @@ export abstract class CalendarDate {
   }
 
   protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
+
+  protected utcfields(): number[] {
+    const u = this.unixEpoch();
+    const f = this._fields.slice(0);
+    jdFromUnixEpoch(u, f);
+    computeBaseFields(f);
+    this.initFields(f);
+    return f;
+  }
 }
 
 /**

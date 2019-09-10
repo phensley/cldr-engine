@@ -46,8 +46,20 @@ export class PersianDate extends CalendarDate {
     return this;
   }
 
+  protected initFields(f: number[]): void {
+    computePersianFields(f);
+  }
+
   protected monthCount(): number {
     return 12;
+  }
+
+  protected daysInMonth(y: number, m: number): number {
+    return MONTH_COUNT[m][leapPersian(y) ? 1 : 0];
+  }
+
+  protected daysInYear(y: number): number {
+    return leapPersian(y) ? 366 : 365;
   }
 
   protected monthStart(eyear: number, month: number, _useMonth: boolean): number {

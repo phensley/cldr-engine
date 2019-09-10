@@ -30,14 +30,19 @@ export class BuddhistDate extends GregorianDate {
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): BuddhistDate {
     super.initFromUnixEpoch(epoch, zoneId);
-    computeBuddhistFields(this._fields);
+    this.initFields(this._fields);
     return this;
   }
 
   protected initFromJD(jd: number, msDay: number, zoneId: string): BuddhistDate {
     super.initFromJD(jd, msDay, zoneId);
-    computeBuddhistFields(this._fields);
+    this.initFields(this._fields);
     return this;
+  }
+
+  protected initFields(f: number[]): void {
+    super.initFields(f);
+    computeBuddhistFields(f);
   }
 }
 

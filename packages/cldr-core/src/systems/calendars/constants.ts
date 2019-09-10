@@ -5,6 +5,7 @@ export const enum CalendarConstants {
 
   // Min and max Julian day form a range of full years whose midpoint is the
   // UNIX epoch Jan 1 1970
+  MIN_YEAR = 4713,
   JD_MIN = 0,               // Mon Jan  1 4713 BC
   JD_UNIX_EPOCH = 2440588,  // Thu Jan  1 1970 AD
   JD_MAX = 4881503,         // Fri Dec 31 8652 AD
