@@ -12,7 +12,6 @@ export {
   LineOrderType,
   NumberSystemInfo,
   RegionIdType,
-  RelativeTimeField,
   RelativeTimeFieldType,
   Schema,
   SchemaConfig,
