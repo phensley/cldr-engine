@@ -4,6 +4,7 @@ import { CalendarConstants, ConstantsDesc } from './constants';
 import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
 import { TimeSpan, TimeSpanFields } from './interval';
+import { CalendarType } from './types';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
 
@@ -33,12 +34,6 @@ const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, fal
 const NULL = Number.MAX_SAFE_INTEGER;
 
 const floor = Math.floor;
-
-// The internal type name for Gregorian calendar is "gregory" so that it can fit
-// into a language tag ("zh-u-ca-gregory") as "gregorian" exceeds the 8-char
-// limit.
-// See https://www.unicode.org/reports/tr35/#Key_And_Type_Definitions_
-export type CalendarType = 'buddhist' | 'gregory' | 'iso8601' | 'japanese' | 'persian';
 
 export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
 

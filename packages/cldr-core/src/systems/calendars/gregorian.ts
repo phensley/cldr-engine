@@ -1,5 +1,6 @@
 import { CalendarConstants } from './constants';
-import { CalendarDate, CalendarType } from './calendar';
+import { CalendarDate } from './calendar';
+import { CalendarType } from './types';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
 import { TimeSpanFields } from './interval';

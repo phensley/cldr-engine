@@ -7,7 +7,7 @@ import {
 } from '@phensley/cldr-schema';
 
 import { NumberSystemType } from './numbers';
-import { CalendarType } from '../systems/calendars/calendar';
+import { CalendarType } from '../systems/calendars/types';
 
 /**
  * @alpha
