@@ -2,7 +2,7 @@ import { CalendarDate } from './calendar';
 import { CalendarConstants } from './constants';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
-import { TimeSpanFields } from './interval';
+import { TimeSpan } from './interval';
 
 /**
  * Construct a date using the rules of the Persian calendar.
@@ -21,7 +21,7 @@ export class PersianDate extends CalendarDate {
     return this._fields[DateField.EXTENDED_YEAR] + 622;
   }
 
-  add(fields: TimeSpanFields): PersianDate {
+  add(fields: TimeSpan): PersianDate {
     const [jd, ms] = this._add(fields);
     return new PersianDate(this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
   }

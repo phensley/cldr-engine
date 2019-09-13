@@ -58,7 +58,6 @@ export {
   SchemaConfig,
   ScriptIdType,
   TimeSpan,
-  TimeSpanFields,
   TimeZoneInfo,
   UnitFormatOptions,
   UnitFormatStyleType,

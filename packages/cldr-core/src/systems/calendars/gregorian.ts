@@ -3,7 +3,7 @@ import { CalendarDate } from './calendar';
 import { CalendarType } from './types';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
-import { TimeSpanFields } from './interval';
+import { TimeSpan } from './interval';
 
 // TODO: helpers to compute fields from partial information
 // export class GregorianInfo {
@@ -39,7 +39,7 @@ export class GregorianDate extends CalendarDate {
     super(type, firstDay, minDays);
   }
 
-  add(fields: TimeSpanFields): GregorianDate {
+  add(fields: TimeSpan): GregorianDate {
     const [jd, ms] = this._add(fields);
     return new GregorianDate('gregory', this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
   }

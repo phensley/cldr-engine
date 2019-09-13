@@ -3,7 +3,7 @@ import { dateFields, DateField, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
 import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
-import { TimeSpan, TimeSpanFields } from './interval';
+import { TimeSpan } from './interval';
 import { CalendarType } from './types';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
@@ -355,7 +355,7 @@ export abstract class CalendarDate {
     const second = millis / CalendarConstants.ONE_SECOND_MS | 0;
     millis -= second * CalendarConstants.ONE_SECOND_MS;
 
-    return new TimeSpan({
+    return {
       year,
       month,
       week,
@@ -364,10 +364,10 @@ export abstract class CalendarDate {
       minute,
       second,
       millis
-    });
+    };
   }
 
-  abstract add(fields: TimeSpanFields): CalendarDate;
+  abstract add(fields: TimeSpan): CalendarDate;
   abstract withZone(zoneId: string): CalendarDate;
 
   protected abstract initFields(f: number[]): void;
@@ -379,7 +379,7 @@ export abstract class CalendarDate {
   /**
    * Compute a new Julian day and milliseconds UTC by updating one or more fields.
    */
-  protected _add(fields: TimeSpanFields): [number, number] {
+  protected _add(fields: TimeSpan): [number, number] {
     const f = this._fields;
 
     // All day calculations will be relative to the current day of the month.
@@ -418,7 +418,7 @@ export abstract class CalendarDate {
   /**
    * Converts all time fields into [days, milliseconds].
    */
-  protected _addTime(fields: TimeSpanFields): [number, number] {
+  protected _addTime(fields: TimeSpan): [number, number] {
     // Calculate the time difference in days and milliseconds
     let msDay = this._fields[DateField.MILLIS_IN_DAY] - this.timeZoneOffset();
     msDay += ((fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
