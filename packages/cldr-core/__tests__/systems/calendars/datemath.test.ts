@@ -62,7 +62,7 @@ test('years', () => {
   q = date.add({ year: 1100 });
   expect(q.toString()).toEqual('Gregorian 3100-03-11 03:00:25.000 America/New_York');
 
-  q = date.add({ zoneId: LOS_ANGELES });
+  q = date.withZone(LOS_ANGELES);
   expect(q.toString()).toEqual('Gregorian 2000-03-11 00:00:25.000 America/Los_Angeles');
 });
 
@@ -251,15 +251,15 @@ test('weeks', () => {
   expect(q.dayOfWeek()).toEqual(DayOfWeek.SATURDAY);
 });
 
-test('timezone', () => {
+test('with zone', () => {
   const date: GregorianDate = gregorian(BASE, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
 
-  q = date.add({ zoneId: LOS_ANGELES });
+  q = date.withZone(LOS_ANGELES);
   expect(q.toString()).toEqual('Gregorian 2000-03-11 00:00:25.000 America/Los_Angeles');
 
-  q = date.add({ zoneId: LONDON });
+  q = date.withZone(LONDON);
   expect(q.toString()).toEqual('Gregorian 2000-03-11 08:00:25.000 Europe/London');
 });
 

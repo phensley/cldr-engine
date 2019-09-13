@@ -1,7 +1,8 @@
 import { CalendarConstants } from './constants';
-import { CalendarDate, CalendarDateFields, CalendarType } from './calendar';
+import { CalendarDate, CalendarType } from './calendar';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
+import { TimeSpanFields } from './interval';
 
 // TODO: helpers to compute fields from partial information
 // export class GregorianInfo {
@@ -37,10 +38,13 @@ export class GregorianDate extends CalendarDate {
     super(type, firstDay, minDays);
   }
 
-  add(fields: CalendarDateFields): GregorianDate {
-    const zoneId = fields.zoneId || this.timeZoneId();
+  add(fields: TimeSpanFields): GregorianDate {
     const [jd, ms] = this._add(fields);
-    return new GregorianDate('gregory', this._firstDay, this._minDays).initFromJD(jd, ms, zoneId);
+    return new GregorianDate('gregory', this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
+  }
+
+  withZone(zoneId: string): GregorianDate {
+    return new GregorianDate('gregory', this._firstDay, this._minDays).initFromUnixEpoch(this.unixEpoch(), zoneId);
   }
 
   toString(): string {

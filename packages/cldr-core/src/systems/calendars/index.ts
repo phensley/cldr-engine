@@ -1,4 +1,5 @@
 export * from './calendar';
+export * from './interval';
 
 export * from './buddhist';
 export * from './gregorian';

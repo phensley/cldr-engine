@@ -1,8 +1,5 @@
 import { UnitType } from '@phensley/cldr-schema';
-import { CalendarDate } from './calendar';
 import { Quantity } from '../../common';
-
-const U = undefined;
 
 export interface TimeSpanFields {
   year?: number;

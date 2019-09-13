@@ -1,7 +1,7 @@
 import { DayOfWeek } from './fields';
-import { CalendarDateFields } from './calendar';
 import { CalendarConstants } from './constants';
 import { GregorianDate } from './gregorian';
+import { TimeSpanFields } from './interval';
 
 /**
  * Gregorian calendar with ISO-8601 first day of week and minimum days in week.
@@ -17,10 +17,9 @@ export class ISO8601Date extends GregorianDate {
     super('iso8601', DayOfWeek.MONDAY, CalendarConstants.ISO8601_MIN_DAYS);
   }
 
-  add(fields: CalendarDateFields): ISO8601Date {
-    const zoneId = fields.zoneId || this.timeZoneId();
+  add(fields: TimeSpanFields): ISO8601Date {
     const [jd, ms] = this._add(fields);
-    return new ISO8601Date().initFromJD(jd, ms, zoneId) as ISO8601Date;
+    return new ISO8601Date().initFromJD(jd, ms, this.timeZoneId()) as ISO8601Date;
   }
 
   toString(): string {

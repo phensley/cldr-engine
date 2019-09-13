@@ -1,6 +1,5 @@
 export {
   CalendarDate,
-  CalendarDateFields,
   CalendarFieldsOptions,
   CalendarType,
   CharacterOrderType,
@@ -58,6 +57,8 @@ export {
   RoundingModeType,
   SchemaConfig,
   ScriptIdType,
+  TimeSpan,
+  TimeSpanFields,
   TimeZoneInfo,
   UnitFormatOptions,
   UnitFormatStyleType,

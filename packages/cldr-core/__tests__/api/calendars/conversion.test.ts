@@ -97,7 +97,7 @@ test('bare date', () => {
   expect(d.minute()).toEqual(34);
   expect(d.second()).toEqual(0);
 
-  d = d.add({ zoneId: NEW_YORK });
+  d = d.withZone(NEW_YORK);
   expect(d.hour()).toEqual(7);
   expect(d.hourOfDay()).toEqual(7);
 });

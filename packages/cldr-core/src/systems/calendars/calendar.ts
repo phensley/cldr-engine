@@ -3,6 +3,7 @@ import { dateFields, DateField, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
 import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
+import { TimeSpan, TimeSpanFields } from './interval';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
 
@@ -40,23 +41,6 @@ const floor = Math.floor;
 export type CalendarType = 'buddhist' | 'gregory' | 'iso8601' | 'japanese' | 'persian';
 
 export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
-
-/**
- * Generic structure used to add one or more fields to a date.
- *
- * @alpha
- */
-export interface CalendarDateFields {
-  year?: number;
-  month?: number;
-  week?: number;
-  day?: number;
-  hour?: number;
-  minute?: number;
-  second?: number;
-  millis?: number;
-  zoneId?: string;
-}
 
 const differenceFields: [number, DateTimePatternFieldType][] = [
   [DateField.YEAR, DateTimePatternField.YEAR],
@@ -312,7 +296,7 @@ export abstract class CalendarDate {
     }
   }
 
-  diff(other: CalendarDate): CalendarDateFields {
+  diff(other: CalendarDate): TimeSpan {
     let s = this as CalendarDate;
     let e = other;
 
@@ -376,7 +360,7 @@ export abstract class CalendarDate {
     const second = millis / CalendarConstants.ONE_SECOND_MS | 0;
     millis -= second * CalendarConstants.ONE_SECOND_MS;
 
-    return {
+    return new TimeSpan({
       year,
       month,
       week,
@@ -385,18 +369,22 @@ export abstract class CalendarDate {
       minute,
       second,
       millis
-    };
+    });
   }
 
-  abstract add(fields: CalendarDateFields): CalendarDate;
+  abstract add(fields: TimeSpanFields): CalendarDate;
+  abstract withZone(zoneId: string): CalendarDate;
+
+  protected abstract initFields(f: number[]): void;
   protected abstract monthCount(): number;
   protected abstract daysInMonth(y: number, m: number): number;
   protected abstract daysInYear(y: number): number;
+  protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
 
   /**
    * Compute a new Julian day and milliseconds UTC by updating one or more fields.
    */
-  protected _add(fields: CalendarDateFields): [number, number] {
+  protected _add(fields: TimeSpanFields): [number, number] {
     const f = this._fields;
 
     // All day calculations will be relative to the current day of the month.
@@ -435,7 +423,7 @@ export abstract class CalendarDate {
   /**
    * Converts all time fields into [days, milliseconds].
    */
-  protected _addTime(fields: CalendarDateFields): [number, number] {
+  protected _addTime(fields: TimeSpanFields): [number, number] {
     // Calculate the time difference in days and milliseconds
     let msDay = this._fields[DateField.MILLIS_IN_DAY] - this.timeZoneOffset();
     msDay += ((fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
@@ -460,8 +448,6 @@ export abstract class CalendarDate {
     const unixEpoch = unixEpochFromJD(jd, msDay);
     this.initFromUnixEpoch(unixEpoch, zoneId);
   }
-
-  protected abstract initFields(f: number[]): void;
 
   protected _toString(type: string, year?: string): string {
     return `${type} ${year || this.year()}-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)} ` +
@@ -526,8 +512,6 @@ export abstract class CalendarDate {
     const weekNo = floor((desiredDay + psow - 1) / 7);
     return ((7 - psow) >= this._minDays) ? weekNo + 1 : weekNo;
   }
-
-  protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
 
   protected utcfields(): number[] {
     const u = this.unixEpoch();

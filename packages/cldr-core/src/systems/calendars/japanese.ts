@@ -1,6 +1,6 @@
-import { CalendarDateFields } from './calendar';
 import { DateField } from './fields';
 import { GregorianDate } from './gregorian';
+import { TimeSpanFields } from './interval';
 
 /**
  * A date in the Japanese Imperial calendar.
@@ -13,10 +13,9 @@ export class JapaneseDate extends GregorianDate {
     super('japanese', firstDay, minDays);
   }
 
-  add(fields: CalendarDateFields): JapaneseDate {
-    const zoneId = fields.zoneId || this.timeZoneId();
+  add(fields: TimeSpanFields): JapaneseDate {
     const [jd, ms] = this._add(fields);
-    return new JapaneseDate(this._firstDay, this._minDays).initFromJD(jd, ms, zoneId);
+    return new JapaneseDate(this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
   }
 
   toString(): string {
