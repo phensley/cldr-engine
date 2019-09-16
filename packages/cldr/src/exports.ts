@@ -57,7 +57,7 @@ export {
   RoundingModeType,
   SchemaConfig,
   ScriptIdType,
-  TimeSpan,
+  TimePeriod,
   TimeZoneInfo,
   UnitFormatOptions,
   UnitFormatStyleType,

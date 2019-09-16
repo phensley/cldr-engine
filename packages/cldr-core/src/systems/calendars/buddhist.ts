@@ -1,7 +1,7 @@
 import { CalendarConstants } from './constants';
 import { GregorianDate } from './gregorian';
 import { DateField } from './fields';
-import { TimeSpan } from './interval';
+import { TimePeriod } from './interval';
 
 /**
  * A date in the Buddhist calendar.
@@ -14,7 +14,7 @@ export class BuddhistDate extends GregorianDate {
     super('buddhist', firstDay, minDays);
   }
 
-  add(fields: TimeSpan): BuddhistDate {
+  add(fields: TimePeriod): BuddhistDate {
     const [jd, ms] = this._add(fields);
     return new BuddhistDate(this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
   }
