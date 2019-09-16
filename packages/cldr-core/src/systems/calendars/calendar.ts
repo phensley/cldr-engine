@@ -263,11 +263,11 @@ export abstract class CalendarDate {
   }
 
   /**
-   * Computes the field of greatest difference between the two dates.
+   * Computes the field of visual difference between the two dates.
    * Note: This assumes the dates are of the same type and have the same
    * timezone offset.
    */
-  fieldOfGreatestDifference(other: CalendarDate): DateTimePatternFieldType {
+  fieldOfVisualDifference(other: CalendarDate): DateTimePatternFieldType {
     const a = this._fields;
     const b = other._fields;
     for (const pair of differenceFields) {
@@ -383,6 +383,7 @@ export abstract class CalendarDate {
       millis = span.millis || 0;
     }
 
+    // TODO: remove debugging code once test coverage exists
     // const check = (label: string) =>
     //   console.log(`[${label}]  year=${year} month=${month} day=${day} hour=${hour} minute=${minute} ` +
     //     `second=${second} millis=${millis}`);

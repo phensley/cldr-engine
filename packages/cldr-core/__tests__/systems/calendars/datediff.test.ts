@@ -21,5 +21,5 @@ const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1,
 test('basic diff', () => {
   const start = gregorian(BASE, NEW_YORK);
   const end = gregorian(BASE + (DAY * 369), NEW_YORK);
-  console.log(start.diff(end));
+  console.log(start.difference(end));
 });

@@ -90,10 +90,10 @@ export interface Calendars {
   toPersianDate(date: CalendarDate | ZonedDateTime | Date): PersianDate;
 
   /**
-   * Calculate the field of greatest difference between two dates. This can be used
+   * Calculate the field of visual difference between two dates. This can be used
    * to choose an appropriate date or time skeleton for interval formatting.
    */
-  fieldOfGreatestDifference(
+  fieldOfVisualDifference(
     a: CalendarDate | ZonedDateTime | Date,
     b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
 

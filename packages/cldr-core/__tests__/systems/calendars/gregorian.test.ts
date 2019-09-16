@@ -225,25 +225,25 @@ test('field of greatest difference', () => {
   const base = make(n, NEW_YORK);
   end = make(n + 5000, NEW_YORK);
 
-  expect(base.fieldOfGreatestDifference(end)).toEqual('s');
+  expect(base.fieldOfVisualDifference(end)).toEqual('s');
 
   end = make(n + (CalendarConstants.ONE_MINUTE_MS * 5), NEW_YORK);
-  expect(base.fieldOfGreatestDifference(end)).toEqual('m');
+  expect(base.fieldOfVisualDifference(end)).toEqual('m');
 
   end = make(n + (CalendarConstants.ONE_HOUR_MS * 5), NEW_YORK);
-  expect(base.fieldOfGreatestDifference(end)).toEqual('H');
+  expect(base.fieldOfVisualDifference(end)).toEqual('H');
 
   end = make(n + (CalendarConstants.ONE_HOUR_MS * 15), NEW_YORK);
-  expect(base.fieldOfGreatestDifference(end)).toEqual('a');
+  expect(base.fieldOfVisualDifference(end)).toEqual('a');
 
   end = make(n + (CalendarConstants.ONE_DAY_MS * 2), NEW_YORK);
-  expect(base.fieldOfGreatestDifference(end)).toEqual('d');
+  expect(base.fieldOfVisualDifference(end)).toEqual('d');
 
   end = make(n + (CalendarConstants.ONE_DAY_MS * 45), NEW_YORK);
-  expect(base.fieldOfGreatestDifference(end)).toEqual('M');
+  expect(base.fieldOfVisualDifference(end)).toEqual('M');
 
   end = make(n + (CalendarConstants.ONE_DAY_MS * 450), NEW_YORK);
-  expect(base.fieldOfGreatestDifference(end)).toEqual('y');
+  expect(base.fieldOfVisualDifference(end)).toEqual('y');
 });
 
 test('week of month', () => {

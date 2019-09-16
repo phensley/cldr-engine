@@ -19,35 +19,35 @@ test('field difference', () => {
 
   z1 = zoned(new Date(2018, 0, 1));
 
-  f = api.fieldOfGreatestDifference(z1, z1);
+  f = api.fieldOfVisualDifference(z1, z1);
   expect(f).toEqual('s');
 
   z2 = zoned(new Date(2018, 0, 1, 0, 0, 0, 100));
-  f = api.fieldOfGreatestDifference(z1, z2);
+  f = api.fieldOfVisualDifference(z1, z2);
   expect(f).toEqual('s');
 
   z2 = zoned(new Date(2018, 0, 1, 0, 0, 5, 100));
-  f = api.fieldOfGreatestDifference(z1, z2);
+  f = api.fieldOfVisualDifference(z1, z2);
   expect(f).toEqual('s');
 
   z2 = zoned(new Date(2018, 0, 1, 0, 10, 0, 0));
-  f = api.fieldOfGreatestDifference(z1, z2);
+  f = api.fieldOfVisualDifference(z1, z2);
   expect(f).toEqual('m');
 
   z2 = zoned(new Date(2018, 0, 1, 2, 10, 0, 0));
-  f = api.fieldOfGreatestDifference(z1, z2);
+  f = api.fieldOfVisualDifference(z1, z2);
   expect(f).toEqual('H');
 
   z2 = zoned(new Date(2018, 0, 2, 0, 0, 0, 0));
-  f = api.fieldOfGreatestDifference(z1, z2);
+  f = api.fieldOfVisualDifference(z1, z2);
   expect(f).toEqual('d');
 
   z2 = zoned(new Date(2018, 1, 16));
-  f = api.fieldOfGreatestDifference(z1, z2);
+  f = api.fieldOfVisualDifference(z1, z2);
   expect(f).toEqual('M');
 
   z2 = zoned(new Date(2019, 1, 16));
-  f = api.fieldOfGreatestDifference(z1, z2);
+  f = api.fieldOfVisualDifference(z1, z2);
   expect(f).toEqual('y');
 });
 
@@ -61,22 +61,22 @@ test('field diff mixed zoned and date', () => {
   z = zoned(new Date(2018, 1, 1), NEW_YORK);
 
   d = api.toGregorianDate(z);
-  f = api.fieldOfGreatestDifference(z, d);
+  f = api.fieldOfVisualDifference(z, d);
   expect(f).toEqual('s');
 
   // Jan 15 NY
   d = api.toGregorianDate(zoned(new Date(2018, 0, 15), NEW_YORK));
-  f = api.fieldOfGreatestDifference(z, d);
+  f = api.fieldOfVisualDifference(z, d);
   expect(f).toEqual('d');
 
   // Feb 2 NY
   d = api.toGregorianDate(zoned(new Date(2018, 1, 2), NEW_YORK));
-  f = api.fieldOfGreatestDifference(z, d);
+  f = api.fieldOfVisualDifference(z, d);
   expect(f).toEqual('M');
 
   // Feb 1 London
   d = api.toGregorianDate(zoned(new Date(2018, 1, 1), LONDON));
-  f = api.fieldOfGreatestDifference(z, d);
+  f = api.fieldOfVisualDifference(z, d);
   expect(f).toEqual('M');
 });
 
@@ -89,7 +89,7 @@ test('field diff mixed date types', () => {
   d1 = api.toGregorianDate(zoned(new Date(2018, 1, 1), NEW_YORK));
   d2 = api.toPersianDate(zoned(new Date(2018, 1, 1), NEW_YORK));
   expect(d1.year()).not.toEqual(d2.year());
-  f = api.fieldOfGreatestDifference(d1, d2);
+  f = api.fieldOfVisualDifference(d1, d2);
   expect(f).toEqual('s');
 });
 
@@ -97,9 +97,9 @@ test('field diff bare date', () => {
   const api = calendarsApi('en');
   let f: DateTimePatternFieldType;
 
-  f = api.fieldOfGreatestDifference(new Date(2018, 5, 1), new Date(2018, 5, 17));
+  f = api.fieldOfVisualDifference(new Date(2018, 5, 1), new Date(2018, 5, 17));
   expect(f).toEqual('d');
 
-  f = api.fieldOfGreatestDifference(new Date(2018, 10), new Date(2019, 10));
+  f = api.fieldOfVisualDifference(new Date(2018, 10), new Date(2019, 10));
   expect(f).toEqual('y');
 });

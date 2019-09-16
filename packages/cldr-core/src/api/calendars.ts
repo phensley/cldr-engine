@@ -161,10 +161,14 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
-   * Find the field of greatest difference between two dates. This can be used by applications
-   * to select an appropriate skeleton for date interval formatting.
+   * Find the field of visual difference between two dates. For example, the
+   * dates "2019-03-31" and "2019-04-01" differ visually in the month field,
+   * even though the dates are only 1 day apart.
+   *
+   * This can be used by applications to select an appropriate skeleton for date
+   * interval formatting, e.g. to format "March 31 - April 01, 2019"
    */
-  fieldOfGreatestDifference(
+  fieldOfVisualDifference(
       a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType {
 
     // Date is interpreted as UTC
@@ -188,7 +192,7 @@ export class CalendarsImpl implements Calendars {
     if (!(b instanceof CalendarDate) || (type !== b.type()) || (a.timeZoneId() !== b.timeZoneId())) {
       b = this.convertDateTo(type, b, a.timeZoneId());
     }
-    return a.fieldOfGreatestDifference(b);
+    return a.fieldOfVisualDifference(b);
   }
 
   /**
@@ -313,7 +317,7 @@ export class CalendarsImpl implements Calendars {
     start = this.convertDateTo(calendar, start);
     end = this.convertDateTo(calendar, end);
 
-    const fieldDiff = this.fieldOfGreatestDifference(start, end);
+    const fieldDiff = this.fieldOfVisualDifference(start, end);
     const params = this.privateApi.getNumberParams(options.nu, 'default');
     const req = this.manager.getDateIntervalFormatRequest(calendar, start, fieldDiff, options, params);
 
