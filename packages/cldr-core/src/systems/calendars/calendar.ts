@@ -354,6 +354,7 @@ export abstract class CalendarDate {
     const noyearmonth = !((f & TimePeriodFieldFlag.YEAR) || (f & TimePeriodFieldFlag.MONTH));
 
     // console.log(`noyearmonth = ${noyearmonth}`);
+    // console.log(`input ${JSON.stringify(span)}`);
 
     if (noyearmonth) {
       // Rollup year and month into day by computing in terms of Julian day difference
@@ -376,13 +377,6 @@ export abstract class CalendarDate {
       // Either year or month was requested.
       year = span.year || 0;
       month = span.month || 0;
-      if (!(f & TimePeriodFieldFlag.YEAR)) {
-        month += year * mc;
-        year = 0;
-      } else if (!(f & TimePeriodFieldFlag.MONTH)) {
-        year += month / mc;
-        month = 0;
-      }
       day = ((span.week || 0) * 7) + (span.day || 0);
 
       hour = span.hour || 0;
@@ -451,7 +445,10 @@ export abstract class CalendarDate {
     if (!(f & TimePeriodFieldFlag.MONTH)) {
       year += month / mc;
       month = 0;
-    } else if (f & TimePeriodFieldFlag.YEAR) {
+    } else if (!(f & TimePeriodFieldFlag.YEAR)) {
+      month += year * 12;
+      year = 0;
+    } else {
       const y = month / mc | 0;
       year += y;
       month -= y * mc;
