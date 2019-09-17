@@ -3,7 +3,7 @@ import { dateFields, DateField, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
 import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
-import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag } from './interval';
+import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag, TIME_PERIOD_FIELDS } from './interval';
 import { CalendarType } from './types';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
@@ -314,8 +314,16 @@ export abstract class CalendarDate {
     return fields ? this._rollup(r, sf, ef, fields) : r;
   }
 
+  subtract(fields: TimePeriod): CalendarDate {
+    const r: TimePeriod = {};
+    for (const f of TIME_PERIOD_FIELDS) {
+      const v = fields[f];
+      r[f] = v ? -v : 0;
+    }
+    return this.add(r);
+  }
+
   abstract add(fields: TimePeriod): CalendarDate;
-  // abstract subtract(fields: TimePeriod): CalendarDate;
   abstract withZone(zoneId: string): CalendarDate;
 
   protected abstract initFields(f: number[]): void;
