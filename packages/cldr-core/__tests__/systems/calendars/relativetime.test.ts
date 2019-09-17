@@ -8,17 +8,17 @@ const BASE = 952761625000;
 const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1, 1);
 
 test('basic difference', () => {
-  let r: number;
+  let r: [string, number];
   let end: CalendarDate;
   const start = gregorian(BASE, UTC);
 
   end = start.add({ day: 183 });
   r = start.relativeTime(end, { field: 'year' });
-  expect(r).toEqual(0.5);
+  expect(r).toEqual(['year', 0.5]);
   r = start.relativeTime(end, { field: 'month' });
-  expect(r).toEqual(6);
+  expect(r).toEqual(['month', 6]);
   r = start.relativeTime(end, { field: 'day' });
-  expect(r).toEqual(183);
+  expect(r).toEqual(['day', 183]);
 
   // TODO: increase test coverage
 });

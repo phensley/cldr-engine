@@ -6,7 +6,7 @@ import {
   FormatWidthType,
 } from '@phensley/cldr-schema';
 
-import { NumberSystemType } from './numbers';
+import { NumberFormatOptions, NumberSystemType } from './numbers';
 import { CalendarType } from '../systems/calendars/types';
 
 /**
@@ -155,13 +155,21 @@ export interface DateIntervalFormatOptions {
 /**
  * @alpha
  */
-export interface RelativeTimeFormatOptions {
+export interface RelativeTimeFieldFormatOptions {
   width?: DateFieldWidthType;
 
   readonly nu?: NumberSystemType;
 
   // Context in which the formatted string will be used
   context?: ContextType;
+}
+
+export interface RelativeTimeFormatOptions extends NumberFormatOptions {
+  width?: DateFieldWidthType;
+  // Context in which the formatted string will be used
+  context?: ContextType;
+  ca?: CalendarType;
+  dayOfWeek?: boolean;
 }
 
 /**

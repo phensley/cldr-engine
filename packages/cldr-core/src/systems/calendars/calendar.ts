@@ -1,4 +1,8 @@
-import { DateTimePatternField, DateTimePatternFieldType, MetaZoneType } from '@phensley/cldr-schema';
+import {
+  DateTimePatternField,
+  DateTimePatternFieldType,
+  MetaZoneType,
+} from '@phensley/cldr-schema';
 import { dateFields, DateField, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
 import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
@@ -7,6 +11,10 @@ import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag,
 import { CalendarType } from './types';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
+
+export interface RelativeTimeOptions {
+  field?: TimePeriodField;
+}
 
 /**
  * Implementation order, based on calendar preference data and ease of implementation.
@@ -41,6 +49,15 @@ const splitfrac = (n: number | undefined): [number, number] => {
   const sign = n < 0 ? -1 : 1;
   const r = t | 0;
   return [sign * r, sign * (t - r)];
+};
+
+const relativeField = (p: TimePeriod): TimePeriodField => {
+  for (const f of TIME_PERIOD_FIELDS) {
+    if (p[f]) {
+      return f;
+    }
+  }
+  return 'millis';
 };
 
 export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
@@ -304,12 +321,12 @@ export abstract class CalendarDate {
    * the time will be calculated in terms of that single field. Otherwise
    * the field of greatest difference will be used.
    */
-  relativeTime(other: CalendarDate, options?: any): number {
+  relativeTime(other: CalendarDate, options?: RelativeTimeOptions): [TimePeriodField, number] {
     const [s, sf, , ef] = this.swap(other);
     const d = this._diff(s, sf, ef);
-    const field = options.field as TimePeriodField;
-    const r = this._rollup(d, sf, ef, [field]);
-    return r[field] || 0;
+    const _field = (options && options.field) || relativeField(d);
+    const r = this._rollup(d, sf, ef, [_field]);
+    return [_field, r[_field] || 0];
   }
 
   /**

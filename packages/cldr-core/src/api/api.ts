@@ -124,7 +124,15 @@ export interface Calendars {
    */
   formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFormatOptions): string;
 
-    /**
+  /**
+   * Formats the relative time from a start to end date.
+   */
+  formatRelativeTime(
+      start: CalendarDate | ZonedDateTime | Date,
+      end: CalendarDate | ZonedDateTime | Date,
+      options?: RelativeTimeFormatOptions): string;
+
+  /**
    * Formats a date-time value to string using a raw date-time pattern.
    *
    * Warning: You should not use this for general formatting.

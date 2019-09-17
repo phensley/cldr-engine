@@ -6,7 +6,7 @@ import {
   RelativeTimeFieldType
 } from '@phensley/cldr-schema';
 
-import { DecimalArg, Part } from '@phensley/decimal';
+import { coerceDecimal, DecimalArg, Part } from '@phensley/decimal';
 import { TZ } from '@phensley/timezone';
 
 import { Bundle } from '../resource';
@@ -18,6 +18,7 @@ import {
   DateIntervalFormatOptions,
   DateRawFormatOptions,
   EraFieldOptions,
+  RelativeTimeFieldFormatOptions,
   RelativeTimeFormatOptions,
   TimeZoneInfo,
   ZonedDateTime,
@@ -45,6 +46,8 @@ import { PrivateApiImpl } from './private';
 import { CalendarContext } from '../internals/calendars/formatter';
 import { NumberParams } from '../common/private';
 import { getStableTimeZoneId, substituteZoneAlias } from '../systems/calendars/timezone';
+
+const DOW_FIELDS: RelativeTimeFieldType[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 export class CalendarsImpl implements Calendars {
 
@@ -232,12 +235,45 @@ export class CalendarsImpl implements Calendars {
   // }
 
   formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType,
-      options?: RelativeTimeFormatOptions): string {
+      options?: RelativeTimeFieldFormatOptions): string {
     options = options || { width: 'wide' };
     const transform = this.privateApi.getContextTransformInfo();
     const params = this.privateApi.getNumberParams(options.nu);
     return this.internals.dateFields.formatRelativeTimeField(
       this.bundle, value, field, options, params, transform);
+  }
+
+  formatRelativeTime(
+      start: CalendarDate | ZonedDateTime | Date,
+      end: CalendarDate | ZonedDateTime | Date,
+      options?: RelativeTimeFormatOptions): string {
+
+    options = options || { width: 'wide', maximumFractionDigits: 0 };
+
+    const { calendars, numbers } = this.internals;
+    const calendar = calendars.selectCalendar(this.bundle, options.ca);
+    const _start = this.convertDateTo(calendar, start);
+    const _end = this.convertDateTo(calendar, end);
+
+    let [field, amount] = _start.relativeTime(_end);
+    if (_start.compare(_end) === 1) {
+      amount *= -1;
+    }
+
+    if (field === 'millis') {
+      amount /= 1000.0;
+      field = 'second';
+    }
+    let _field = field as RelativeTimeFieldType;
+
+    // See if we can use day of week formatting
+    if (options.dayOfWeek && field === 'week' && _start.dayOfWeek() === _end.dayOfWeek()) {
+      const dow = _end.dayOfWeek() - 1;
+      _field = DOW_FIELDS[dow];
+    }
+
+    const n = numbers.adjustDecimal(coerceDecimal(amount), options);
+    return this.formatRelativeTimeField(n, _field, options);
   }
 
   /**
