@@ -33,7 +33,15 @@ const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, fal
 // Indicates a null field to support computing on demand
 const NULL = Number.MAX_SAFE_INTEGER;
 
-const floor = Math.floor;
+const { abs, floor } = Math;
+
+const splitfrac = (n: number | undefined): [number, number] => {
+  n = n || 0;
+  const t = abs(n);
+  const sign = n < 0 ? -1 : 1;
+  const r = t | 0;
+  return [sign * r, sign * (t - r)];
+};
 
 export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
 
@@ -550,39 +558,91 @@ export abstract class CalendarDate {
    * Compute a new Julian day and milliseconds UTC by updating one or more fields.
    */
   protected _add(fields: TimePeriod): [number, number] {
-    const f = this._fields;
+    const f = this.utcfields();
 
-    // All day calculations will be relative to the current day of the month.
-    const dom = f[DateField.DAY_OF_MONTH] + (fields.day || 0) + ((fields.week || 0) * 7);
+    let jd: number;
+    let ms: number;
+    let year: number;
+    let yearf: number;
 
-    // Adjust the extended year and month. Note: month may be fractional here,
-    // but will be <= 12 after modulus the year
+    let ydays: number;
+    let ydaysf: number;
+
+    let month: number;
+    let monthf: number;
+
+    let day: number;
+    let dayf: number;
+
+    let _days: number;
+    let _ms: number;
+
+    // Capture days and time fields (in milliseconds) for future use.
+    // We do this here since we'll be re-initializing the date fields
+    // below.
+    [_days, _ms] = this._addTime(fields);
+    _days += (fields.day || 0) + ((fields.week || 0) * 7);
+
+    // YEARS
+
+    // Split off the fractional part of the years. Add the integer
+    // years to the extended year. Then get the number of days in that
+    // year and multiply that by the fractional part.
+    // Example: In a Gregorian leap year we'll have 366 days. If the fractional
+    // year is 0.25 we'll get 91.5 days.
+    [year, yearf] = splitfrac(fields.year);
+    year += f[DateField.EXTENDED_YEAR];
+    [ydays, ydaysf] = splitfrac(this.daysInYear(year) * yearf);
+
+    // Add day fractions from year calculation to milliseconds
+    ms = ydaysf * CalendarConstants.ONE_DAY_MS;
+
+    // Calculate the julian day for the year, month and day-of-month combination,
+    // adding in the days due to fractional year
+    jd = this.monthStart(year, f[DateField.MONTH] - 1, false) + f[DateField.DAY_OF_MONTH] + ydays;
+
+    // Initialize fields from the julian day
+    f[DateField.JULIAN_DAY] = jd;
+    f[DateField.MILLIS_IN_DAY] = 0;
+    this.initFields(f);
+
+    year = f[DateField.EXTENDED_YEAR];
+
+    // MONTHS
+
+    // Get integer and fractional months
+    month = fields.month || 0;
+    [month, monthf] = splitfrac((f[DateField.MONTH] - 1) + month);
+
+    // Add back years by dividing by month count
     const mc = this.monthCount();
-    const months = floor((fields.year || 0) * mc);
-    let month = (f[DateField.MONTH] - 1) + (fields.month || 0) + months;
+    const myears = floor(month / 12);
+    month -= myears * mc;
+    year += myears;
 
-    const yadd = floor(month / mc);
-    const year = f[DateField.EXTENDED_YEAR] + yadd;
-    month -= yadd * mc;
+    // Take away a year if the month pointer went negative
+    if (month < 0) {
+      month += mc;
+      year--;
+    }
 
-    // Calculate days and milliseconds from the time-oriented fields.
-    const [days, ms] = this._addTime(fields);
+    // Compute updated julian day from year and fractional month
+    const dim = this.daysInMonth(year, month) * monthf;
+    [day, dayf] = splitfrac(dim);
+    jd = this.monthStart(year, month, false) + f[DateField.DAY_OF_MONTH];
 
-    // Calculate the Julian day for the adjusted year/month then add back the days.
-    const jd = this.monthStart(year, month, false) + dom + days;
-    const ijd = floor(jd);
+    // DAY AND TIME FIELDS
 
-    // Calculate ms and handle rollover
-    let _ms = ms + ((jd - ijd) * CalendarConstants.ONE_DAY_MS);
-    _ms = Math.round(_ms) | 0;
+    // Adjust julian day by fractional day and time fields
+    day += _days;
+    ms += Math.round(_ms + (dayf * CalendarConstants.ONE_DAY_MS));
+    if (ms >= CalendarConstants.ONE_DAY_MS) {
+      const d = floor(ms / CalendarConstants.ONE_DAY_MS);
+      ms -= d * CalendarConstants.ONE_DAY_MS;
+      day += d;
+    }
 
-    // NOTE: _ms is always less than one day here
-    // if (_ms >= CalendarConstants.ONE_DAY_MS) {
-    //   ijd++;
-    //   _ms -= CalendarConstants.ONE_DAY_MS;
-    // }
-
-    return [ijd, _ms];
+    return [jd + day, ms];
   }
 
   /**

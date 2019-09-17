@@ -19,22 +19,22 @@ const persian = (e: number, z: string) => PersianDate.fromUnixEpoch(e, z, 1, 1);
 test('fractional years', () => {
   const base = new Date(2004, 3, 11, 16, 34, 56); // Treat as UTC
   const utc = base.getTime() - base.getTimezoneOffset() * 60000;
-  const date: GregorianDate = gregorian(utc, NEW_YORK);
+  const date: GregorianDate = gregorian(utc, 'UTC');
 
   let q: GregorianDate;
-  expect(date.toString()).toEqual('Gregorian 2004-04-11 12:34:56.000 America/New_York');
+  expect(date.toString()).toEqual('Gregorian 2004-04-11 16:34:56.000 Etc/UTC');
 
-  q = date.add({ year: 4.25 });
-  expect(q.toString()).toEqual('Gregorian 2008-07-11 12:34:56.000 America/New_York');
+  q = date.add({ year: 4.25 }); // + 4 years and 91.5 days (366 * .25)
+  expect(q.toString()).toEqual('Gregorian 2008-07-12 04:34:56.000 Etc/UTC');
 
   q = date.add({ year: 4, month: 3 });
-  expect(q.toString()).toEqual('Gregorian 2008-07-11 12:34:56.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2008-07-11 16:34:56.000 Etc/UTC');
 
-  q = date.add({ year: -4.25 });
-  expect(q.toString()).toEqual('Gregorian 2000-01-11 11:34:56.000 America/New_York');
+  q = date.add({ year: -4.25 }); // - 4 years and 91.5 days (366 * .25)
+  expect(q.toString()).toEqual('Gregorian 2000-01-11 04:34:56.000 Etc/UTC');
 
   q = date.add({ year: -4, month: -3 });
-  expect(q.toString()).toEqual('Gregorian 2000-01-11 11:34:56.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2000-01-11 16:34:56.000 Etc/UTC');
 });
 
 test('years', () => {
@@ -45,9 +45,8 @@ test('years', () => {
   q = date.add({ year: 1 });
   expect(q.toString()).toEqual('Gregorian 2001-03-11 03:00:25.000 America/New_York');
 
-  // TODO: check fractional years
   q = date.add({ year: 1.5 });
-  expect(q.toString()).toEqual('Gregorian 2001-09-11 04:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2001-09-09 16:00:25.000 America/New_York');
 
   q = date.add({ year: -3 });
   expect(q.toString()).toEqual('Gregorian 1997-03-11 03:00:25.000 America/New_York');
@@ -123,7 +122,7 @@ test('months', () => {
   expect(q.toString()).toEqual('Gregorian 2000-04-11 04:00:25.000 America/New_York');
 
   q = date.add({ month: 1.5 });
-  expect(q.toString()).toEqual('Gregorian 2000-04-26 16:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2000-04-26 04:00:25.000 America/New_York');
 
   q = date.add({ month: 7 });
   expect(q.toString()).toEqual('Gregorian 2000-10-11 04:00:25.000 America/New_York');
