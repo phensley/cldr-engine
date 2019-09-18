@@ -401,22 +401,6 @@ export abstract class CalendarDate {
       year = span.year || 0;
       month = span.month || 0;
       day = ((span.week || 0) * 7) + (span.day || 0);
-
-      // Months borrow days
-      const m = ef[DateField.MONTH] - 2;
-      const dim = this.daysInMonth(ef[DateField.EXTENDED_YEAR], m < 0 ? m + mc : m);
-
-      if (day >= dim) {
-        day -= dim;
-        month++;
-      }
-
-      // Years borrow months
-      if (month > mc) {
-        month -= mc;
-        year++;
-      }
-
       hour = span.hour || 0;
       minute = span.minute || 0;
       second = span.second || 0;
@@ -650,7 +634,7 @@ export abstract class CalendarDate {
 
     // Add back years by dividing by month count
     const mc = this.monthCount();
-    const myears = floor(month / 12);
+    const [myears] = splitfrac(month / 12); // ignore fraction here
     month -= myears * mc;
     year += myears;
 

@@ -142,6 +142,32 @@ test('difference hour, minute, second, millis', () => {
   expect(t).toEqual(period({ second: 5, millis: 504 }));
 });
 
+test('difference sub-day', () => {
+  let t: TimePeriod;
+  let end: CalendarDate;
+
+  // Saturday, June 10, 2000 12:00:00 PM
+  const start = gregorian(960638400000, 'UTC');
+  expect(start.toString()).toEqual('Gregorian 2000-06-10 12:00:00.000 Etc/UTC');
+
+  end = start.add({ day: 4, minute: -120 });
+  t = start.difference(end, ['day', 'hour']);
+  expect(t).toEqual(period({ day: 3, hour: 22 }));
+});
+
+test('difference year wrap', () => {
+  let t: TimePeriod;
+  let end: CalendarDate;
+
+  // Saturday, Dec 31, 1999 12:00:00 PM
+  const start = gregorian(946641600000, 'UTC');
+  expect(start.toString()).toEqual('Gregorian 1999-12-31 12:00:00.000 Etc/UTC');
+
+  end = start.add({ day: 28 });
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ day: 28 }));
+});
+
 test('comparison', () => {
   let end: CalendarDate;
   const start = gregorian(BASE, NEW_YORK);

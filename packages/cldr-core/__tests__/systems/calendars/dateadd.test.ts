@@ -37,6 +37,21 @@ test('fractional years', () => {
   expect(q.toString()).toEqual('Gregorian 2000-01-11 16:34:56.000 Etc/UTC');
 });
 
+test('year wrap', () => {
+  const base = new Date(2000, 0, 10, 12, 0, 0); // Treat as UTC
+  const utc = base.getTime() - base.getTimezoneOffset() * 60000;
+  const date: GregorianDate = gregorian(utc, 'UTC');
+
+  let q: GregorianDate;
+  expect(date.toString()).toEqual('Gregorian 2000-01-10 12:00:00.000 Etc/UTC');
+
+  q = date.add({ day: -20 });
+  expect(q.toString()).toEqual('Gregorian 1999-12-21 12:00:00.000 Etc/UTC');
+
+  q = date.add({ month: -1 });
+  expect(q.toString()).toEqual('Gregorian 1999-12-10 12:00:00.000 Etc/UTC');
+});
+
 test('years', () => {
   const date: GregorianDate = gregorian(BASE, NEW_YORK);
   let q: GregorianDate;
