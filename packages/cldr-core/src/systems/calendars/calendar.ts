@@ -339,16 +339,8 @@ export abstract class CalendarDate {
     return fields ? this._rollup(r, sf, ef, fields) : r;
   }
 
-  subtract(fields: TimePeriod): CalendarDate {
-    const r: TimePeriod = {};
-    for (const f of TIME_PERIOD_FIELDS) {
-      const v = fields[f];
-      r[f] = v ? -v : 0;
-    }
-    return this.add(r);
-  }
-
   abstract add(fields: TimePeriod): CalendarDate;
+  abstract subtract(fields: TimePeriod): CalendarDate;
   abstract withZone(zoneId: string): CalendarDate;
 
   protected abstract initFields(f: number[]): void;
@@ -356,6 +348,15 @@ export abstract class CalendarDate {
   protected abstract daysInMonth(y: number, m: number): number;
   protected abstract daysInYear(y: number): number;
   protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
+
+  protected _invertPeriod(fields: TimePeriod): TimePeriod {
+    const r: TimePeriod = {};
+    for (const f of TIME_PERIOD_FIELDS) {
+      const v = fields[f];
+      r[f] = v ? -v : 0;
+    }
+    return r;
+  }
 
   /**
    * Roll up the given time period into a specified list of fields.
@@ -378,9 +379,6 @@ export abstract class CalendarDate {
     const mc = this.monthCount();
     const noyearmonth = !((f & TimePeriodFieldFlag.YEAR) || (f & TimePeriodFieldFlag.MONTH));
 
-    // console.log(`noyearmonth = ${noyearmonth}`);
-    // console.log(`input ${JSON.stringify(span)}`);
-
     if (noyearmonth) {
       // Rollup year and month into day by computing in terms of Julian day difference
       day = ef[DateField.JULIAN_DAY] - sf[DateField.JULIAN_DAY];
@@ -396,13 +394,28 @@ export abstract class CalendarDate {
       minute = millis / CalendarConstants.ONE_MINUTE_MS | 0;
       millis -= minute * CalendarConstants.ONE_MINUTE_MS;
       second = millis / CalendarConstants.ONE_SECOND_MS | 0;
-      millis -= second & CalendarConstants.ONE_SECOND_MS;
+      millis -= second * CalendarConstants.ONE_SECOND_MS;
 
     } else {
       // Either year or month was requested.
       year = span.year || 0;
       month = span.month || 0;
       day = ((span.week || 0) * 7) + (span.day || 0);
+
+      // Months borrow days
+      const m = ef[DateField.MONTH] - 2;
+      const dim = this.daysInMonth(ef[DateField.EXTENDED_YEAR], m < 0 ? m + mc : m);
+
+      if (day >= dim) {
+        day -= dim;
+        month++;
+      }
+
+      // Years borrow months
+      if (month > mc) {
+        month -= mc;
+        year++;
+      }
 
       hour = span.hour || 0;
       minute = span.minute || 0;
@@ -411,9 +424,11 @@ export abstract class CalendarDate {
     }
 
     // TODO: remove debugging code once test coverage exists
+
     // const check = (label: string) =>
     //   console.log(`[${label}]  year=${year} month=${month} day=${day} hour=${hour} minute=${minute} ` +
     //     `second=${second} millis=${millis}`);
+    // console.log(`fields ${fields}  input ${JSON.stringify(span)}`);
     // check('1');
 
     // ROLL DOWN
@@ -464,7 +479,9 @@ export abstract class CalendarDate {
       day = 0;
     }
     if (!(f & TimePeriodFieldFlag.WEEK)) {
-      month += (week * 7) / this.daysInMonth(ef[DateField.EXTENDED_YEAR], ef[DateField.MONTH] - 1);
+      const m = ef[DateField.MONTH] - 2;
+      const dim = this.daysInMonth(ef[DateField.EXTENDED_YEAR], m < 0 ? m + mc : m);
+      month += (week * 7) / dim;
       week = 0;
     }
     if (!(f & TimePeriodFieldFlag.MONTH)) {

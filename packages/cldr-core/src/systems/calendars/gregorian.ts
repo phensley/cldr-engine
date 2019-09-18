@@ -44,6 +44,10 @@ export class GregorianDate extends CalendarDate {
     return new GregorianDate('gregory', this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
   }
 
+  subtract(fields: TimePeriod): GregorianDate {
+    return this.add(this._invertPeriod(fields));
+  }
+
   withZone(zoneId: string): GregorianDate {
     return new GregorianDate('gregory', this._firstDay, this._minDays).initFromUnixEpoch(this.unixEpoch(), zoneId);
   }

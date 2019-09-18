@@ -26,6 +26,10 @@ export class PersianDate extends CalendarDate {
     return new PersianDate(this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
   }
 
+  subtract(fields: TimePeriod): PersianDate {
+    return this.add(this._invertPeriod(fields));
+  }
+
   withZone(zoneId: string): PersianDate {
     return new PersianDate(this._firstDay, this._minDays).initFromUnixEpoch(this.unixEpoch(), zoneId);
   }

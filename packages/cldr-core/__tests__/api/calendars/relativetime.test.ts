@@ -15,6 +15,23 @@ test('format relative time', () => {
   let end: CalendarDate;
 
   const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: UTC });
+
+  end = start.add({ millis: 250 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('Now');
+
+  end = start.add({ millis: 750 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('In 1 second');
+
+  end = start.add({ second: 30 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('In 30 seconds');
+
+  end = start.add({ minute: -32 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('32 minutes ago');
+
   end = start.add({ week: 1 });
   s = api.formatRelativeTime(start, end, { context });
   expect(s).toEqual('Next week');
@@ -26,4 +43,20 @@ test('format relative time', () => {
   end = start.add({ week: 2 });
   s = api.formatRelativeTime(start, end, { context, dayOfWeek: true });
   expect(s).toEqual('In 2 Sundays');
+
+  end = start.add({ year: 0.5 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('In 6 months');
+
+  end = start.add({ year: 0.5 });
+  s = api.formatRelativeTime(start, end, { context, width: 'short' });
+  expect(s).toEqual('In 6 mo.');
+
+  end = start.add({ year: 1.5 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('Next year');
+
+  end = start.add({ year: 1.5 });
+  s = api.formatRelativeTime(start, end, { context, width: 'short' });
+  expect(s).toEqual('Next yr.');
 });
