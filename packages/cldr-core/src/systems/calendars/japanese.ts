@@ -18,6 +18,10 @@ export class JapaneseDate extends GregorianDate {
     return new JapaneseDate(this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
   }
 
+  withZone(zoneId: string): JapaneseDate {
+    return new JapaneseDate(this._firstDay, this._minDays).initFromUnixEpoch(this.unixEpoch(), zoneId);
+  }
+
   toString(): string {
     return this._toString('Japanese', `${this.extendedYear()}`);
   }
