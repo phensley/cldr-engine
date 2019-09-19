@@ -282,6 +282,42 @@ test('difference year wrap', () => {
   expect(t).toEqual(period({ day: 28 }));
 });
 
+test('all fields', () => {
+  let t: TimePeriod;
+  let end: CalendarDate;
+  const start = gregorian(MAR_11, NEW_YORK);
+
+  end = start.add({ year: 1, month: 1, day: 1, hour: 12, minute: 30, second: 30, millis: 15000 });
+
+  t = start.difference(end, ['year', 'month', 'day', 'hour', 'minute', 'second']);
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, minute: 30, second: 45 }));
+
+  t = start.difference(end, ['year', 'month', 'day', 'hour', /* minute */ 'second']);
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, second: (30 * 60) + 45 }));
+
+  t = start.difference(end, ['year', 'month', 'day', /* hour, minute */ 'second']);
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, second: (12 * 3600) + (30 * 60) + 45 }));
+
+  t = start.difference(end, ['year', 'month', 'day', 'hour', 'minute']);
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, minute: 30.75 }));
+
+  t = start.difference(end, ['year', 'month', 'day', /* hour */ 'minute']);
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, minute: (12 * 60) + 30.75 }));
+
+  t = start.difference(end, ['year', 'month', 'day', 'hour']);
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12.5125 }));
+
+  end = start.add( { year: 1, month: 1, day: 1, hour: 12 });
+
+  t = start.difference(end, ['year', 'month', 'day']);
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1.5 }));
+
+  end = start.add({ year: 1, month: 1, day: 15, hour: 12 });
+
+  t = start.difference(end, ['year', 'month']);
+  expect(t).toEqual(period({ year: 1, month: 1.5 }));
+});
+
 test('difference edge cases', () => {
   let t: TimePeriod;
   let end: CalendarDate;
