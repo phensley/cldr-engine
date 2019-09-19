@@ -1,9 +1,16 @@
 import { CalendarDate, GregorianDate, TimePeriod } from '../../../src/systems';
 
+const UTC = 'UTC';
 const NEW_YORK = 'America/New_York';
 
 // Sat March 11, 2000 8:00:25 AM UTC
-const BASE = 952761625000;
+const MAR_11 = 952761625000;
+
+// Fri, Sep 15, 2000 12:00:00 PM
+const SEP_15 = 969019200000;
+
+// Fri, Sep 1, 2000 12:00:00 PM
+const SEP_01 = 967809600000;
 
 const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1, 1);
 
@@ -13,7 +20,7 @@ const period = (t: TimePeriod): TimePeriod =>
 test('basic difference', () => {
   let t: TimePeriod;
   let end: CalendarDate;
-  const start = gregorian(BASE, NEW_YORK);
+  const start = gregorian(MAR_11, NEW_YORK);
 
   end = start.add({ day: 369 });
   t = start.difference(end);
@@ -47,21 +54,89 @@ test('basic difference', () => {
 test('difference year, month', () => {
   let t: TimePeriod;
   let end: CalendarDate;
-  const start = gregorian(BASE, NEW_YORK);
+
+  // Mar 11 2000
+  let start = gregorian(MAR_11, NEW_YORK);
 
   end = start.add({ year: 3, day: 35 });
   t = start.difference(end, ['month', 'day']);
   expect(t).toEqual(period({ month: 37, day: 4 }));
 
   end = start.add({ month: 37, day: 4 });
+
   t = start.difference(end, ['year', 'day']);
   expect(t).toEqual(period({ year: 3, day: 35 }));
+
+  // Sept 15 2000
+  start = gregorian(SEP_15, UTC);
+
+  end = start.add({ year: 0.5 }); // Mar 17, 2001
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 6, day: 2 }));
+
+  t = start.difference(end, ['day']);
+  expect(t).toEqual(period({ day: 183 }));
+
+  end = start.add({ month: 6, day: -5 }); // Mar 10, 2001
+
+  t = start.difference(end, ['day']);
+  expect(t).toEqual(period({ day: 176 }));
+
+  t = start.difference(end, ['year', 'day']);
+  expect(t).toEqual(period({ day: 176 }));
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 5, day: 23 }));
+
+  end = start.add({ month: 6, day: 2 }); // Mar 17, 2001
+
+  t = start.difference(end, ['year']);
+  expect(t).toEqual(period({ year: 0.5 }));
+
+  t = start.difference(end, ['day']);
+  expect(t).toEqual(period({ day: 183 }));
+
+  // Sept 01 2000
+  start = gregorian(SEP_01, UTC);
+
+  end = start.add({ month: 4, day: -5 }); // Dec 27, 2001
+
+  t = start.difference(end, ['day']);
+  expect(t).toEqual(period({ day: 117 }));
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 3, day: 26 }));
+
+  end = start.add({ month: 5, day: -5 }); // Jan 27, 2001
+
+  t = start.difference(end, ['day']);
+  expect(t).toEqual(period({ day: 148 }));
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 4, day: 26 }));
+
+  end = start.add({ month: 6, day: -5 }); // Feb 24, 2001
+
+  t = start.difference(end, ['day']);
+  expect(t).toEqual(period({ day: 176 }));
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 5, day: 23 }));
+
+  end = start.add({ day: 176 }); // Feb 24, 2001
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 5, day: 23 }));
+
+  t = start.difference(end, ['day']);
+  expect(t).toEqual(period({ day: 176 }));
 });
 
 test('difference year, month, day', () => {
   let t: TimePeriod;
   let end: CalendarDate;
-  const start = gregorian(BASE, NEW_YORK);
+  const start = gregorian(MAR_11, NEW_YORK);
 
   // In the examples below, the start year is a leap year 2000
   // which has 366 days, and the next year 2001 has 365 days.
@@ -207,9 +282,48 @@ test('difference year wrap', () => {
   expect(t).toEqual(period({ day: 28 }));
 });
 
+test('difference edge cases', () => {
+  let t: TimePeriod;
+  let end: CalendarDate;
+
+  const start = gregorian(MAR_11, 'UTC');
+
+  end = start.add({ month: 7, day: 82 }); // Jan 1, 2001
+
+  t = start.difference(end, ['year', 'day']);
+  expect(t).toEqual(period({ day: 296 }));
+
+  end = start.add({ month: 7, day: 92 }); // Jan 11, 2001
+
+  t = start.difference(end, ['year', 'day']);
+  expect(t).toEqual(period({ day: 306 }));
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 10, day: 0 }));
+
+  t = start.difference(end, ['month']);
+  expect(t).toEqual(period({ month: 10 }));
+
+  end = start.add({ month: -3, day: -3 }); // Dec 8, 1999
+
+  t = start.difference(end, ['year', 'day']);
+  expect(t).toEqual(period({ day: 94 }));
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 3, day: 3 }));
+
+  end = start.add({ month: 0, day: 76 }); // May 26, 2000
+
+  t = start.difference(end, ['month']);
+  expect(t).toEqual(period({ month: 2.5 }));
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 2, day: 15 }));
+});
+
 test('comparison', () => {
   let end: CalendarDate;
-  const start = gregorian(BASE, NEW_YORK);
+  const start = gregorian(MAR_11, NEW_YORK);
 
   end = start.add({ year: 1 });
   expect(start.compare(end)).toEqual(-1);
