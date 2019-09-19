@@ -18,16 +18,18 @@ test('basic difference', () => {
   end = start.add({ year: 0.5 });
 
   r = start.relativeTime(end, { field: 'year' });
-  expect(r).toEqual(['year', 0.49731182795698925]);
+  expect(r).toEqual(['year', 0.5]);
   r = start.relativeTime(end, { field: 'month' });
   expect(r).toEqual(['month', 5.967741935483871]);
   r = start.relativeTime(end, { field: 'day' });
   expect(r).toEqual(['day', 183]);
 
   end = start.add({ month: 5.967741935483871 });
+  // console.log(start.toString());
+  // console.log(end.toString());
 
   r = start.relativeTime(end, { field: 'year' });
-  expect(r).toEqual(['year', 0.49731182795698925]);
+  expect(r).toEqual(['year', 0.5]);
   r = start.relativeTime(end, { field: 'month' });
   expect(r).toEqual(['month', 5.967741935483871]);
   r = start.relativeTime(end, { field: 'day' });
@@ -39,7 +41,7 @@ test('basic difference', () => {
   end = start.add({ month: 6 });
 
   r = start.relativeTime(end, { field: 'year' });
-  expect(r).toEqual(['year', 0.5]);
+  expect(r).toEqual(['year', 0.5027322404371585]);
   r = start.relativeTime(end, { field: 'month' });
   expect(r).toEqual(['month', 6]);
   r = start.relativeTime(end, { field: 'day' });
@@ -49,7 +51,7 @@ test('basic difference', () => {
   end = start.add({ day: 184 });
 
   r = start.relativeTime(end, { field: 'year' });
-  expect(r).toEqual(['year', 0.5]);
+  expect(r).toEqual(['year', 0.5027322404371585]);
   r = start.relativeTime(end, { field: 'month' });
   expect(r).toEqual(['month', 6]);
   r = start.relativeTime(end, { field: 'day' });

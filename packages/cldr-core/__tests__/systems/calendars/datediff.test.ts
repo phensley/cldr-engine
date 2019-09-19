@@ -44,6 +44,20 @@ test('basic difference', () => {
   expect(t).toEqual(period({ week: 1, day: 3 }));
 });
 
+test('difference year, month', () => {
+  let t: TimePeriod;
+  let end: CalendarDate;
+  const start = gregorian(BASE, NEW_YORK);
+
+  end = start.add({ year: 3, day: 35 });
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 37, day: 4 }));
+
+  end = start.add({ month: 37, day: 4 });
+  t = start.difference(end, ['year', 'day']);
+  expect(t).toEqual(period({ year: 3, day: 35 }));
+});
+
 test('difference year, month, day', () => {
   let t: TimePeriod;
   let end: CalendarDate;
@@ -51,6 +65,17 @@ test('difference year, month, day', () => {
 
   // In the examples below, the start year is a leap year 2000
   // which has 366 days, and the next year 2001 has 365 days.
+
+  end = start.add({ day: 52 });
+
+  t = start.difference(end, ['day']);
+  expect(t).toEqual(period({ day: 52 }));
+
+  t = start.difference(end, ['month', 'day']);
+  expect(t).toEqual(period({ month: 1, day: 21 }));
+
+  t = start.difference(end, ['year', 'day']);
+  expect(t).toEqual(period({ year: 0, day: 52 }));
 
   end = start.add({ day: 183 });
 
@@ -73,28 +98,31 @@ test('difference year, month, day', () => {
   end = start.add({ day: 184.5 });
 
   t = start.difference(end, ['year', 'day']);
-  expect(t).toEqual(period({ year: 0.5, day: 0.5 }));
+  expect(t).toEqual(period({ year: 0, day: 184.5 }));
 
   t = start.difference(end, ['year', 'month', 'day']);
   expect(t).toEqual(period({ month: 6, day: 0.5 }));
 
   // Next year
 
-  end = start.add({ day: 366 + 182 });
+  end = start.add({ day: 365 + 183 });
 
   t = start.difference(end, ['year', 'month', 'day']);
   expect(t).toEqual(period({ year: 1, month: 5, day: 30 }));
 
-  end = start.add({ day: 366 + 183 });
+  end = start.add({ day: 365 + 182.5 });
 
   t = start.difference(end, ['year']);
   expect(t).toEqual(period({ year: 1.5 }));
 
+  t = start.difference(end, ['year', 'month', 'day']);
+  expect(t).toEqual(period({ year: 1, month: 5, day: 29.5 }));
+
   t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 18 }));
+  expect(t).toEqual(period({ month: 17, day: 29.5 }));
 
   t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 366 + 183 }));
+  expect(t).toEqual(period({ day: 365 + 182.5 }));
 });
 
 test('difference hour, minute, second, millis', () => {
@@ -106,38 +134,48 @@ test('difference hour, minute, second, millis', () => {
   expect(start.toString()).toEqual('Gregorian 2000-06-10 12:00:00.000 Etc/UTC');
 
   end = start.add({ day: 4 });
+
   t = start.difference(end, ['hour']);
   expect(t).toEqual(period({ hour: 96 }));
 
   end = start.add({ day: 4.25, minute: 45 });
+
   t = start.difference(end, ['hour']);
   expect(t).toEqual(period({ hour: 102.75 }));
 
   end = start.add({ day: 0.25 });
+
   t = start.difference(end, ['hour']);
   expect(t).toEqual(period({ hour: 6 }));
 
   end = start.add({ hour: 6.5 });
+
   t = start.difference(end, ['hour', 'minute']);
   expect(t).toEqual(period({ hour: 6, minute: 30 }));
 
   end = start.add({ hour: 6.5, minute: 15.5 });
+
   t = start.difference(end, ['hour', 'minute']);
   expect(t).toEqual(period({ hour: 6, minute: 45.5 }));
+
   t = start.difference(end, ['hour', 'minute', 'second']);
   expect(t).toEqual(period({ hour: 6, minute: 45, second: 30 }));
 
   end = start.add({ hour: 6.5, minute: 15.5, second: 5.5 });
+
   t = start.difference(end, ['hour', 'minute', 'second']);
   expect(t).toEqual(period({ hour: 6, minute: 45, second: 35.5 }));
+
   t = start.difference(end, ['hour', 'minute', 'second', 'millis']);
   expect(t).toEqual(period({ hour: 6, minute: 45, second: 35, millis: 500 }));
 
   end = start.add({ millis: 5503 });
+
   t = start.difference(end, ['hour', 'minute', 'second', 'millis']);
   expect(t).toEqual(period({ second: 5, millis: 503 }));
 
   end = start.add({ millis: 5503.6 });
+
   t = start.difference(end, ['hour', 'minute', 'second', 'millis']);
   expect(t).toEqual(period({ second: 5, millis: 504 }));
 });
@@ -164,6 +202,7 @@ test('difference year wrap', () => {
   expect(start.toString()).toEqual('Gregorian 1999-12-31 12:00:00.000 Etc/UTC');
 
   end = start.add({ day: 28 });
+
   t = start.difference(end, ['month', 'day']);
   expect(t).toEqual(period({ day: 28 }));
 });

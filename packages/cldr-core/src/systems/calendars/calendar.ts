@@ -359,7 +359,7 @@ export abstract class CalendarDate {
   }
 
   /**
-   * Roll up the given time period into a specified list of fields.
+   * Roll up time period fields into a subset of fields.
    */
   protected _rollup(span: TimePeriod, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod {
     const f = timePeriodFieldFlags(fields);
@@ -367,120 +367,161 @@ export abstract class CalendarDate {
       return span;
     }
 
-    let year = 0;
-    let month = 0;
+    const mc = this.monthCount();
+
+    let year = span.year || 0;
+    let month = span.month || 0;
+    let day = ((span.week || 0) * 7) + (span.day || 0);
+    let ms = ((span.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
+      ((span.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
+      ((span.second || 0) * CalendarConstants.ONE_SECOND_MS) +
+      (span.millis || 0);
+
+    if (f & TimePeriodFieldFlag.YEAR && f & TimePeriodFieldFlag.MONTH) {
+      // Both year and month were requested, so use their integer values.
+
+    } else if (f & TimePeriodFieldFlag.MONTH) {
+      // Month was requested so convert years into months
+      month += year * mc;
+      year = 0;
+
+    } else if ((f & TimePeriodFieldFlag.YEAR) && month) {
+      // Year was requested so convert months into days
+
+      // This is a little verbose but necessary to accurately convert
+      // months into days.  Example:
+      //
+      //  2001-03-11  and 2001-09-09   5 months and 29 days apart
+      //  == (last month days) + (full month days) + (first month days)
+      //  == 9 + 31 + 31 + 30 + 31 + 30 + (31 - 11)
+      //  == 182 days
+
+      let endy = ef[DateField.EXTENDED_YEAR];
+      let endm = ef[DateField.MONTH] - 1;
+
+      // TODO: create a cursor for year/month calculations to reduce
+      // the verbosity of this block
+
+      // Subtract the number of days to find the "day of month"
+      // relative to each of the months to be converted.
+      let dom = ef[DateField.DAY_OF_MONTH] - day;
+      if (dom < 0) {
+        endm--;
+        if (endm < 0) {
+          endm += mc;
+          endy--;
+        }
+        // const dim = this.daysInMonth(endy, endm);
+        dom += this.daysInMonth(endy, endm);
+      }
+
+      // Convert each month except the last into days
+      let tmpd = dom;
+      while (month > 1) {
+        endm--;
+        if (endm < 0) {
+          endm += mc;
+          endy--;
+        }
+        tmpd += this.daysInMonth(endy, endm);
+        month--;
+      }
+
+      // Convert the last month into days
+      endm--;
+      if (endm < 0) {
+        endm += mc;
+        endy--;
+      }
+
+      tmpd += this.daysInMonth(endy, endm) - dom;
+      day += tmpd;
+      month = 0;
+
+    } else {
+      // Neither year nor month were requested, so we ignore those parts
+      // of the time period, and re-calculate the days directly from the
+      // original date fields.
+      day = ef[DateField.JULIAN_DAY] - sf[DateField.JULIAN_DAY];
+      ms = ef[DateField.MILLIS_IN_DAY] - sf[DateField.MILLIS_IN_DAY];
+      if (ms < 0) {
+        day--;
+        ms += CalendarConstants.ONE_DAY_MS;
+      }
+      year = month = 0;
+    }
+
+    // We have integer year, month, and millis computed at this point.
+
+    ms += CalendarConstants.ONE_DAY_MS * day;
+    day = 0;
+
+    const onedy = CalendarConstants.ONE_DAY_MS;
+    const onewk = onedy * 7;
+    const onehr = CalendarConstants.ONE_HOUR_MS;
+    const onemn = CalendarConstants.ONE_MINUTE_MS;
+
     let week = 0;
-    let day = 0;
     let hour = 0;
     let minute = 0;
     let second = 0;
     let millis = 0;
 
-    const mc = this.monthCount();
-    const noyearmonth = !((f & TimePeriodFieldFlag.YEAR) || (f & TimePeriodFieldFlag.MONTH));
-
-    if (noyearmonth) {
-      // Rollup year and month into day by computing in terms of Julian day difference
-      day = ef[DateField.JULIAN_DAY] - sf[DateField.JULIAN_DAY];
-      millis = ef[DateField.MILLIS_IN_DAY] - sf[DateField.MILLIS_IN_DAY];
-      if (millis < 0) {
-        day--;
-        millis += CalendarConstants.ONE_DAY_MS;
-      }
-
-      // Rollup millis to time fields
-      hour = millis / CalendarConstants.ONE_HOUR_MS | 0;
-      millis -= hour * CalendarConstants.ONE_HOUR_MS;
-      minute = millis / CalendarConstants.ONE_MINUTE_MS | 0;
-      millis -= minute * CalendarConstants.ONE_MINUTE_MS;
-      second = millis / CalendarConstants.ONE_SECOND_MS | 0;
-      millis -= second * CalendarConstants.ONE_SECOND_MS;
-
-    } else {
-      // Either year or month was requested.
-      year = span.year || 0;
-      month = span.month || 0;
-      day = ((span.week || 0) * 7) + (span.day || 0);
-      hour = span.hour || 0;
-      minute = span.minute || 0;
-      second = span.second || 0;
-      millis = span.millis || 0;
-    }
-
-    // TODO: remove debugging code once test coverage exists
-
-    // const check = (label: string) =>
-    //   console.log(`[${label}]  year=${year} month=${month} day=${day} hour=${hour} minute=${minute} ` +
-    //     `second=${second} millis=${millis}`);
-    // console.log(`fields ${fields}  input ${JSON.stringify(span)}`);
-    // check('1');
-
-    // ROLL DOWN
+    // Roll down
 
     if (f & TimePeriodFieldFlag.WEEK) {
-      week = day / 7 | 0;
-      day -= week * 7;
+      week = ms / onewk | 0;
+      ms -= week * onewk;
     }
-    if (!(f & TimePeriodFieldFlag.DAY)) {
-      hour += day * 24;
+    if (f & TimePeriodFieldFlag.DAY) {
+      day = ms / onedy | 0;
+      ms -= day * onedy;
+    }
+    if (f & TimePeriodFieldFlag.HOUR) {
+      hour = ms / onehr | 0;
+      ms -= hour * onehr;
+    }
+    if (f & TimePeriodFieldFlag.MINUTE) {
+      minute = ms / onemn | 0;
+      ms -= minute * onemn;
+    }
+    if (f & TimePeriodFieldFlag.SECOND) {
+      second = ms / 1000 | 0;
+      ms -= second * 1000;
+    }
+    if (f & TimePeriodFieldFlag.MILLIS) {
+      millis = ms;
+    }
+
+    const dayms = (ms / CalendarConstants.ONE_DAY_MS);
+
+    // Roll up fractional
+
+    if (f < TimePeriodFieldFlag.MONTH) {
+      // Days in the last year before adding the remaining fields
+      const diy = this.daysInYear(sf[DateField.EXTENDED_YEAR] + year);
+      year += (day + dayms) / diy;
       day = 0;
+    } else if (f < TimePeriodFieldFlag.WEEK) {
+      let ey = ef[DateField.YEAR];
+      let em = ef[DateField.MONTH] - 2;
+      if (em < 0) {
+        em += mc;
+        ey--;
+      }
+      const dim = this.daysInMonth(ey, em);
+      month += (day + dayms) / dim;
+    } else if (f < TimePeriodFieldFlag.DAY) {
+      week += (day + dayms) * 7;
+    } else if (f < TimePeriodFieldFlag.HOUR) {
+      day += dayms;
+    } else if (f < TimePeriodFieldFlag.MINUTE) {
+      hour += ms / onehr;
+    } else if (f < TimePeriodFieldFlag.SECOND) {
+      minute += ms / onemn;
+    } else if (f < TimePeriodFieldFlag.MILLIS) {
+      second += ms / 1000;
     }
-    if (!(f & TimePeriodFieldFlag.HOUR)) {
-      minute += hour * 60;
-      hour = 0;
-    }
-    if (!(f & TimePeriodFieldFlag.MINUTE)) {
-      second += minute * 60;
-      minute = 0;
-    }
-    if (!(f & TimePeriodFieldFlag.SECOND)) {
-      millis += second * 1000;
-      second = 0;
-    }
-
-    // check('2');
-
-    // ROLL UP
-
-    if (!(f & TimePeriodFieldFlag.MILLIS)) {
-      second += millis / 1000;
-      millis = 0;
-    }
-    if (!(f & TimePeriodFieldFlag.SECOND)) {
-      minute += second / 60;
-      second = 0;
-    }
-    if (!(f & TimePeriodFieldFlag.MINUTE)) {
-      hour += minute / 60;
-      minute = 0;
-    }
-    if (!(f & TimePeriodFieldFlag.HOUR)) {
-      day += hour / 24;
-      hour = 0;
-    }
-    if (!(f & TimePeriodFieldFlag.DAY)) {
-      week += day / 7;
-      day = 0;
-    }
-    if (!(f & TimePeriodFieldFlag.WEEK)) {
-      const m = ef[DateField.MONTH] - 2;
-      const dim = this.daysInMonth(ef[DateField.EXTENDED_YEAR], m < 0 ? m + mc : m);
-      month += (week * 7) / dim;
-      week = 0;
-    }
-    if (!(f & TimePeriodFieldFlag.MONTH)) {
-      year += month / mc;
-      month = 0;
-    } else if (!(f & TimePeriodFieldFlag.YEAR)) {
-      month += year * 12;
-      year = 0;
-    } else {
-      const y = month / mc | 0;
-      year += y;
-      month -= y * mc;
-    }
-
-    // check('3');
 
     return {
       year,
@@ -494,6 +535,10 @@ export abstract class CalendarDate {
     };
   }
 
+  /**
+   * Compute the number of years, months, days, etc, between two dates. The result will
+   * have all fields as integers.
+   */
   protected _diff(s: CalendarDate, sf: number[], ef: number[]): TimePeriod {
     // Use a borrow-based method to compute fields. If a field X is negative, we borrow
     // from the next-higher field until X is positive. Repeat until all fields are
@@ -516,11 +561,16 @@ export abstract class CalendarDate {
     // into days until days are positive.
     const mc = s.monthCount();
     let m = ef[DateField.MONTH] - 1; // convert to 0-based month
+    let y = ef[DateField.EXTENDED_YEAR];
     while (day < 0) {
       // move to previous month
       m--;
       // add back the number of days in the current month, wrapping around to december
-      const dim = this.daysInMonth(ef[DateField.EXTENDED_YEAR], m < 0 ? m + mc : m);
+      if (m < 0) {
+        m += mc;
+        y--;
+      }
+      const dim = this.daysInMonth(y, m);
       day += dim;
       month--;
     }
