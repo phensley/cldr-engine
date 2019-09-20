@@ -18,7 +18,6 @@ export interface NumberFormatOptions {
   nu?: NumberSystemType;
   round?: RoundingModeType;
   group?: boolean;
-  divisor?: number;
   minimumIntegerDigits?: number;
   maximumFractionDigits?: number;
   minimumFractionDigits?: number;
@@ -49,6 +48,7 @@ export type CurrencySymbolWidthType = 'default' | 'narrow';
  * @alpha
  */
 export interface DecimalFormatOptions extends NumberFormatOptions {
+  divisor?: number;
   style?: DecimalFormatStyleType;
   errors?: NumberFormatErrorType[];
 }
@@ -69,6 +69,7 @@ export interface DecimalAdjustOptions {
  * @alpha
  */
 export interface CurrencyFormatOptions extends NumberFormatOptions {
+  divisor?: number;
   cash?: boolean;
   style?: CurrencyFormatStyleType;
   symbolWidth?: CurrencySymbolWidthType;

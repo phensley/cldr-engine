@@ -24,6 +24,7 @@ export type UnitLength = 'short' | 'narrow' | 'long';
  * @alpha
  */
 export interface UnitFormatOptions extends NumberFormatOptions {
+  divisor?: number;
   style?: UnitFormatStyleType;
   length?: UnitLength;
 }
