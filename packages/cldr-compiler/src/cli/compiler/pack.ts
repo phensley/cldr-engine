@@ -138,7 +138,12 @@ const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
     path = join(dest, name);
     console.warn(`writing:     ${path}`);
     fs.writeFileSync(path, raw, { encoding: 'utf-8' });
+
+    // Only uncompressed hash is recorded
     hashes[name] = sha256(raw);
+
+    // Package hash only updated using uncompressed data
+    pkghash.update(raw);
 
     // Write compressed
     name = `${lang}.json.gz`;
@@ -146,8 +151,6 @@ const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
     console.warn(`writing:     ${path}`);
     const data = zlib.gzipSync(raw, { level: zlib.constants.Z_BEST_COMPRESSION });
     fs.writeFileSync(path, data, { encoding: 'binary' });
-    hashes[name] = sha256(data);
-    pkghash.update(data);
   });
 
   // Write hashes file
