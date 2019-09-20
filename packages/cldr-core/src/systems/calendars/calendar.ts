@@ -12,10 +12,6 @@ import { CalendarType } from './types';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
 
-export interface RelativeTimeOptions {
-  field?: TimePeriodField;
-}
-
 /**
  * Implementation order, based on calendar preference data and ease of implementation.
  * https://github.com/unicode-cldr/cldr-core/blob/master/supplemental/calendarPreferenceData.json
@@ -321,10 +317,10 @@ export abstract class CalendarDate {
    * the time will be calculated in terms of that single field. Otherwise
    * the field of greatest difference will be used.
    */
-  relativeTime(other: CalendarDate, options?: RelativeTimeOptions): [TimePeriodField, number] {
+  relativeTime(other: CalendarDate, field?: TimePeriodField): [TimePeriodField, number] {
     const [s, sf, , ef] = this.swap(other);
     const d = this._diff(s, sf, ef);
-    const _field = (options && options.field) || relativeField(d);
+    const _field = field || relativeField(d);
     const r = this._rollup(d, sf, ef, [_field]);
     return [_field, r[_field] || 0];
   }

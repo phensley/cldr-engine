@@ -255,7 +255,7 @@ export class CalendarsImpl implements Calendars {
     const _start = this.convertDateTo(calendar, start);
     const _end = this.convertDateTo(calendar, end);
 
-    let [field, amount] = _start.relativeTime(_end, { field: options.field });
+    let [field, amount] = _start.relativeTime(_end, options.field);
     if (_start.compare(_end) === 1) {
       amount *= -1;
     }
