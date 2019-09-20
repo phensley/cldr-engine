@@ -34,7 +34,7 @@
     "lib-es/"
   ],
   "dependencies": {
-    "tslib": "^1.9.3"
+    "tslib": "1.10.x"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",

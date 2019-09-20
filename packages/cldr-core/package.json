@@ -38,7 +38,7 @@
     "@phensley/cldr-utils": "0.17.6",
     "@phensley/decimal": "0.17.6",
     "@phensley/timezone": "0.17.6",
-    "tslib": "^1.9.3"
+    "tslib": "1.10.x"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
