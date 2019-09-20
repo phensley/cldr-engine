@@ -8,6 +8,7 @@ import {
 
 import { NumberFormatOptions, NumberSystemType } from './numbers';
 import { CalendarType } from '../systems/calendars/types';
+import { TimePeriodField } from '../systems';
 
 /**
  * @alpha
@@ -170,6 +171,9 @@ export interface RelativeTimeFormatOptions extends NumberFormatOptions {
   context?: ContextType;
   ca?: CalendarType;
   dayOfWeek?: boolean;
+
+  // Specify which field the relative time should be expressed in
+  field?: TimePeriodField;
 }
 
 /**

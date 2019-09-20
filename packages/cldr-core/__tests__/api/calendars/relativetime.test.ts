@@ -60,3 +60,28 @@ test('format relative time', () => {
   s = api.formatRelativeTime(start, end, { context, width: 'short', round: 'floor' });
   expect(s).toEqual('Next yr.');
 });
+
+test('specific field', () => {
+  const context: ContextType = 'begin-sentence';
+  const api = calendarsApi('en');
+  let s: string;
+  let end: CalendarDate;
+
+  const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: UTC });
+
+  end = start.add({ year: 1.5 });
+  s = api.formatRelativeTime(start, end, { context, field: 'month' });
+  expect(s).toEqual('In 18 months');
+
+  end = start.add({ month: 6 });
+  s = api.formatRelativeTime(start, end, { context, field: 'day' });
+  expect(s).toEqual('In 184 days');
+
+  end = start.add({ day: 90, hour: 12, minute: 30 });
+
+  s = api.formatRelativeTime(start, end, { context, field: 'day' });
+  expect(s).toEqual('In 91 days');
+
+  s = api.formatRelativeTime(start, end, { context, field: 'day', maximumFractionDigits: 1 });
+  expect(s).toEqual('In 90.5 days');
+});
