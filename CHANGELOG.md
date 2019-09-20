@@ -6,6 +6,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [UNRELEASED]
+### Added
+ - `TimePeriod` type to represent time between two dates in terms of years, months, etc.
+ - New `CalendarDate.difference` Method to compute the difference between two dates, returning a `TimePeriod`
+   - Can specify the difference result to be expressed using any combination of fields, and the `TimePeriod` will be "rolled up" into only those fields, e.g. `['year', 'day']`, `['day', 'hour', 'minute']`, etc.
+ - `formatRelativeTime` method which formats the relative time between two dates.
+   - User can specify the relative time field, or it will be automatically determined using `difference`.
+ - New `CalendarDate.subtract` method equivalent to `add(-timeperiod)`
+ - New `CalendarDate.withZone` method to return a copy using a different time zone
+
+### Fixed/Changed
+ - Improvements to calendar math
+ - Replaced `CalendarDateFields` with `TimePeriod`
+ - Reenamed `fieldOfGreatestDifference` to `fieldOfVisualDifference` to more accurately reflect its purpose, since it is primarily used to determine the pivot field for date interval formatting.
+ - `formatRelativeTimeField` options type is now `RelativeTimeFieldFormatOptions` to distinguish it from the options type for `formatRelativeTime` method.
+
 ## [0.17.6]
 ### Fixed/Changed
  - Use `lerna.json` to pull version string into library
