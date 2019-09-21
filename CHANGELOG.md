@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
  - Renamed `fieldOfGreatestDifference` to `fieldOfVisualDifference` to more accurately reflect its purpose, since it is primarily used to determine the pivot field for date interval formatting
  - `formatRelativeTimeField` options type is now `RelativeTimeFieldFormatOptions` to distinguish it from the options type for `formatRelativeTime` method
  - Use `tslib` 1.10.x
+ - Resource packs are now distributed uncompressed, to support direct loading over CDNs
 
 ## [0.17.6]
 ### Fixed/Changed
