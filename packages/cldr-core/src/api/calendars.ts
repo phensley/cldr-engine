@@ -25,6 +25,7 @@ import {
 } from '../common';
 
 import { Internals } from '../internals';
+import { Quantity } from '../common';
 
 import {
   BuddhistDate,
@@ -35,6 +36,8 @@ import {
   ISO8601Date,
   JapaneseDate,
   PersianDate,
+  TimePeriod,
+  TIME_PERIOD_FIELDS
 } from '../systems/calendars';
 
 import { CalendarManager } from '../internals/calendars/manager';
@@ -304,6 +307,18 @@ export class CalendarsImpl implements Calendars {
     const stableid = getStableTimeZoneId(id);
     const city = this.exemplarCities[stableid] || this.exemplarCities['Etc/Unknown'];
     return { id, city: { name: city } };
+  }
+
+  timePeriodToQuantity(period: TimePeriod): Quantity[] {
+    const q: Quantity[] = [];
+    for (const f of TIME_PERIOD_FIELDS) {
+      const v = period[f];
+      if (v) {
+        const unit = f === 'millis' ? 'millisecond' : f;
+        q.push({ unit, value: v });
+      }
+    }
+    return q;
   }
 
   private _getPatterns(type?: CalendarType): CalendarPatterns {

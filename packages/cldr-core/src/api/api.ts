@@ -44,6 +44,7 @@ import {
   ISO8601Date,
   JapaneseDate,
   PersianDate,
+  TimePeriod
 } from '../systems/calendars';
 
 /**
@@ -161,6 +162,12 @@ export interface Calendars {
    * localized exemplar city, e.g. { id: "America/New_York", city: { name: "New York" } }
    */
   timeZoneInfo(zoneid: string): TimeZoneInfo;
+
+  /**
+   * Convert a time period into a quantiy sequence, for unit formatting, e.g. "1 year, 2 months".
+   */
+  timePeriodToQuantity(period: TimePeriod): Quantity[];
+
 }
 
 /**
