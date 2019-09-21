@@ -1,0 +1,22 @@
+#!/bin/bash
+
+MESSAGE="Outdated pre-release version"
+VERSIONS=$*
+
+PACKAGES="
+@phensley/cldr
+@phensley/cldr-compiler
+@phensley/cldr-core
+@phensley/cldr-schema
+@phensley/cldr-utils
+@phensley/decimal
+@phensley/timezone
+"
+for version in $VERSIONS ; do
+    for pkg in $PACKAGES ; do
+        echo $pkg $version
+        npm deprecate $pkg@$version "$MESSAGE"
+    done
+done
+
+
