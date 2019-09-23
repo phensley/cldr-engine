@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.18.1]
+## Fixed/Changed
+ - Fix calculation of fractional weeks in calendar math rollup
+
 ## [0.18.0]
 ### Added
  - New `TimePeriod` type to represent time between two dates in terms of years, months, etc.
@@ -224,6 +228,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.18.1]: https://github.com/phensley/cldr-engine/compare/v0.18.1...v0.18.1
 [0.18.0]: https://github.com/phensley/cldr-engine/compare/v0.17.6...v0.18.0
 [0.17.6]: https://github.com/phensley/cldr-engine/compare/v0.17.5...v0.17.6
 [0.17.5]: https://github.com/phensley/cldr-engine/compare/v0.17.4...v0.17.5

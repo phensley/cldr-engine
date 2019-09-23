@@ -508,7 +508,7 @@ export abstract class CalendarDate {
       const dim = this.daysInMonth(ey, em);
       month += (day + dayms) / dim;
     } else if (f < TimePeriodFieldFlag.DAY) {
-      week += (day + dayms) * 7;
+      week += (day + dayms) / 7;
     } else if (f < TimePeriodFieldFlag.HOUR) {
       day += dayms;
     } else if (f < TimePeriodFieldFlag.MINUTE) {

@@ -32,6 +32,14 @@ test('format relative time', () => {
   s = api.formatRelativeTime(start, end, { context });
   expect(s).toEqual('32 minutes ago');
 
+  end = start.add({ day: -27 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('4 weeks ago');
+
+  end = start.add({ day: -27 });
+  s = api.formatRelativeTime(start, end, { context, maximumFractionDigits: 1 });
+  expect(s).toEqual('3.9 weeks ago');
+
   end = start.add({ week: 1 });
   s = api.formatRelativeTime(start, end, { context });
   expect(s).toEqual('Next week');
