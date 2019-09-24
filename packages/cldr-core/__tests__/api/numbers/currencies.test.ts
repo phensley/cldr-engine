@@ -464,6 +464,15 @@ test('currency special decimal', () => {
   let s = api.formatCurrency(1, 'PTE');
   expect(s).toEqual('1$00\xa0\u200b');
 
+  const p = api.formatCurrencyToParts(1, 'PTE');
+  expect(p).toEqual([
+    { type: 'integer', value: '1' },
+    { type: 'decimal', value: '$' },
+    { type: 'fraction', value: '00' },
+    { type: 'literal', value: '\xa0' },
+    { type: 'currency', value: '\u200b' }
+  ]);
+
   s = api.formatCurrency(100.50, 'PTE');
   expect(s).toEqual('100$50\xa0\u200b');
 
