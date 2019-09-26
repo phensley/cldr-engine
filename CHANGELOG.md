@@ -232,6 +232,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.18.2]: https://github.com/phensley/cldr-engine/compare/v0.18.1...v0.18.2
 [0.18.1]: https://github.com/phensley/cldr-engine/compare/v0.18.0...v0.18.1
 [0.18.0]: https://github.com/phensley/cldr-engine/compare/v0.17.6...v0.18.0
 [0.17.6]: https://github.com/phensley/cldr-engine/compare/v0.17.5...v0.17.6
