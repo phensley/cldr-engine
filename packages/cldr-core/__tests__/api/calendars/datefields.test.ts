@@ -83,6 +83,9 @@ test('relative time', () => {
   expect(s).toEqual('in 5 days');
 
   s = api.formatRelativeTimeField('-6.3', 'day');
+  expect(s).toEqual('6 days ago');
+
+  s = api.formatRelativeTimeField('-6.3', 'day', { maximumFractionDigits: 1});
   expect(s).toEqual('6.3 days ago');
 
   s = api.formatRelativeTimeField(1, 'sun');
@@ -97,8 +100,11 @@ test('relative time', () => {
   s = api.formatRelativeTimeField(-6, 'month');
   expect(s).toEqual('6 months ago');
 
-  s = api.formatRelativeTimeField('-6.3', 'year');
-  expect(s).toEqual('6.3 years ago');
+  s = api.formatRelativeTimeField('-6.6', 'year');
+  expect(s).toEqual('7 years ago');
+
+  s = api.formatRelativeTimeField('-6.6', 'year', { maximumFractionDigits: 1 });
+  expect(s).toEqual('6.6 years ago');
 
   s = api.formatRelativeTimeField(1, 'year');
   expect(s).toEqual('next year');
@@ -159,7 +165,13 @@ test('relative time options', () => {
   let s: string;
 
   s = api.formatRelativeTimeField(new Decimal('-3.2'), 'week');
-  expect(s).toEqual('3.2 weeks ago');
+  expect(s).toEqual('3 weeks ago');
+
+  s = api.formatRelativeTimeField(new Decimal('-1.2'), 'week');
+  expect(s).toEqual('last week');
+
+  s = api.formatRelativeTimeField(new Decimal('-1.2'), 'week', { maximumFractionDigits: 1 });
+  expect(s).toEqual('1.2 weeks ago');
 
   s = api.formatRelativeTimeField(1, 'week', {});
   expect(s).toEqual('next week');

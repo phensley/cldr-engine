@@ -6,7 +6,7 @@ import {
   RelativeTimeFieldType
 } from '@phensley/cldr-schema';
 
-import { coerceDecimal, DecimalArg, Part } from '@phensley/decimal';
+import { DecimalArg, Part } from '@phensley/decimal';
 import { TZ } from '@phensley/timezone';
 
 import { Bundle } from '../resource';
@@ -251,10 +251,9 @@ export class CalendarsImpl implements Calendars {
       end: CalendarDate | ZonedDateTime | Date,
       options?: RelativeTimeFormatOptions): string {
 
-    options = options || { width: 'wide', maximumFractionDigits: 0 };
+    options = options || { width: 'wide', maximumFractionDigits: 0, group: true };
 
-    const { calendars, numbers } = this.internals;
-    const calendar = calendars.selectCalendar(this.bundle, options.ca);
+    const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     const _start = this.convertDateTo(calendar, start);
     const _end = this.convertDateTo(calendar, end);
 
@@ -275,8 +274,7 @@ export class CalendarsImpl implements Calendars {
       _field = DOW_FIELDS[dow];
     }
 
-    const n = numbers.adjustDecimal(coerceDecimal(amount), options);
-    return this.formatRelativeTimeField(n, _field, options);
+    return this.formatRelativeTimeField(amount, _field, options);
   }
 
   /**

@@ -38,8 +38,10 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
 
     const width = options.width || 'wide';
     const format: RelativeTimeFields = this.relativeTimes[width] || this.relativeTimes.wide;
+    const group = options.group === undefined ? true : options.group;
 
     let n = coerceDecimal(value);
+    n = this.internals.numbers.adjustDecimal(n, options);
     const negative = n.isNegative();
     if (negative) {
       n = n.negate();
@@ -86,7 +88,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
       raw = this.internals.general.contextTransform(raw, transform,
         options.context, 'relative');
     }
-    const num = params.system.formatString(n, false, 1);
+    const num = params.system.formatString(n, group, 1);
     return this.internals.general.formatWrapper(raw, [num]);
 
   }

@@ -156,7 +156,7 @@ export interface DateIntervalFormatOptions {
 /**
  * @alpha
  */
-export interface RelativeTimeFieldFormatOptions {
+export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
   width?: DateFieldWidthType;
 
   readonly nu?: NumberSystemType;

@@ -56,6 +56,10 @@ test('format relative time', () => {
   s = api.formatRelativeTime(start, end, { context });
   expect(s).toEqual('In 6 months');
 
+  end = start.add({ month: 3000 });
+  s = api.formatRelativeTime(start, end, { context, field: 'month', group: true });
+  expect(s).toEqual('In 3,000 months');
+
   end = start.add({ year: 0.5 });
   s = api.formatRelativeTime(start, end, { context, width: 'short' });
   expect(s).toEqual('In 6 mo.');
