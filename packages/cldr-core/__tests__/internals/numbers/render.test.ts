@@ -6,6 +6,7 @@ import {
   NumberInternalsImpl,
   PrivateApiImpl
 } from '../../../src';
+import { RE_DIGIT, RE_SYMBOL } from '../../../src/internals/numbers/render';
 
 const internals = INTERNALS();
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, internals);
@@ -21,4 +22,29 @@ test('number renderer', () => {
   const pattern = impl.getNumberPattern(raw, false);
   const s = renderer.render(new Decimal('12345.6789'), pattern, '', '', '.', 1, false);
   expect(s).toEqual('+12345.6789');
+});
+
+test('digits', () => {
+  const is = (s: string) => RE_DIGIT.test(s);
+
+  expect(is('5')).toEqual(true);
+  expect(is('୨')).toEqual(true);
+  expect(is('\u0b67')).toEqual(true);
+  expect(is('\u1095')).toEqual(true);
+
+  expect(is('$')).toEqual(false);
+  expect(is('k')).toEqual(false);
+});
+
+test('symbols', () => {
+  const is = (s: string) => RE_SYMBOL.test(s);
+
+  expect(is('$')).toEqual(true);
+  expect(is('☀')).toEqual(true);
+  expect(is('\u2660')).toEqual(true);
+  expect(is('♯')).toEqual(true);
+  expect(is('\u266f')).toEqual(true);
+
+  expect(is('9')).toEqual(false);
+  expect(is('k')).toEqual(false);
 });
