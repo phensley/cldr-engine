@@ -50,11 +50,17 @@ const mergeKeyCounts = (dst: any, ...sources: any[]): any => {
   return mergeKeyCounts(dst, ...sources);
 };
 
+interface SchemaOptions {
+  out: string;
+  lang?: string;
+  withValues: boolean;
+}
+
 /**
  * Traverse all relevant CLDR JSON files and merge them, converting the leaf
  * values into counts. The count indicates the number of locales having that key.
  */
-const run = (args: yargs.Arguments): void => {
+const run = (args: yargs.Arguments<SchemaOptions>): void => {
   const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
   if (args.lang) {
@@ -102,8 +108,8 @@ const run = (args: yargs.Arguments): void => {
 export const schemaOptions = (argv: yargs.Argv) =>
   argv.command('schema', 'Generate schema', (y: yargs.Argv) => y
     .option('l', { alias: 'lang', description: 'List of languages' })
-    .option('n', { alias: 'dry-run' })
+    .option('n', { alias: 'dry-run', boolean: true })
     .option('o', { alias: 'out', description: 'Output dir', required: true })
     .option('p', { alias: 'pre-transform', description: 'Pre transform' })
-    .option('w', { alias: 'with-values', description: 'With value leaf nodes' }),
+    .option('w', { alias: 'with-values', boolean: true, description: 'With value leaf nodes' }),
     run);

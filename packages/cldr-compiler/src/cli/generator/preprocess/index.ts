@@ -40,7 +40,11 @@ const save = (name: string, data: any): void => {
   fs.writeFileSync(path, json, { encoding: 'utf-8' });
 };
 
-const run = (args: yargs.Arguments): void => {
+interface PreprocessOptions {
+  which?: string[];
+}
+
+const run = (args: yargs.Arguments<PreprocessOptions>): void => {
   let keys = Object.keys(OUTPUTS).sort();
   if (args.which) {
     keys = args.which;

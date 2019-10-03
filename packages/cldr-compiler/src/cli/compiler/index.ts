@@ -13,7 +13,7 @@ export const main = () => {
         .option('l', { alias: 'lang', description: 'Comma-delimited list of languages to include' })
         .option('c', { alias: 'config', description: 'Config to customize generated resource packs' })
         .option('r', { alias: 'regions', description: 'Optional comma-delimited list of region codes to include'})
-        .option('v', { alias: 'verbose', description: 'Verbose mode' }),
+        .option('v', { alias: 'verbose', boolean: true, description: 'Verbose mode' }),
       runPack)
     .version(`compiler:${pkg.version} cldr:${pkg.cldrVersion}`)
     .demandCommand(1, 'Please specify a command')

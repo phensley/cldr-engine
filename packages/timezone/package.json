@@ -42,7 +42,7 @@
     "@types/jest": "^24.0.13",
     "@types/node": "^10.14.10",
     "@types/rimraf": "^2.0.2",
-    "@types/yargs": "11.0.0",
+    "@types/yargs": "13.0.3",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
     "chalk": "^2.3.2",
@@ -55,7 +55,7 @@
     "tslint-no-circular-imports": "^0.7.0",
     "typescript": "3.6.x",
     "uglify-es": "^3.3.9",
-    "yargs": "11.0.0"
+    "yargs": "14.1.0"
   },
   "jest": {
     "moduleFileExtensions": [

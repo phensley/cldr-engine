@@ -9,16 +9,25 @@ import { encodeZones } from './encode';
 
 const VERSION = '2019b';
 
-const runDumpJson = (argv: yargs.Arguments) => {
+interface JsonOptions {
+  pretty: boolean;
+}
+
+const runDumpJson = (argv: yargs.Arguments<JsonOptions & { file: string }>) => {
   const { file, pretty } = argv;
   const info = new TZif('None', file);
   console.log(info.json(pretty ? '  ' : undefined));
 };
 
+interface GenerateOptions {
+  out: string;
+  tag?: string;
+}
+
 /**
  * Parse all zones and generate code.
  */
-const runGenerate = (argv: yargs.Arguments) => {
+const runGenerate = (argv: yargs.Arguments<GenerateOptions>) => {
   const { tag } = argv;
   const repo = setupTZDB(tag || VERSION);
 
@@ -37,10 +46,15 @@ const runGenerate = (argv: yargs.Arguments) => {
   }
 };
 
+interface ZdumpOptions {
+  timestamps: boolean;
+  years?: string;
+}
+
 /**
  * Run our zdump equivalent.
  */
-const runZdump = (argv: yargs.Arguments) => {
+const runZdump = (argv: yargs.Arguments<ZdumpOptions & { file: string }>) => {
   const { file, timestamps, years } = argv;
   const info = new TZif('None', file);
   const range = parseYears(years);
@@ -70,19 +84,24 @@ const asUTC = (d: Date) => (+d) - d.getTimezoneOffset() * 60000;
 export const main = () => {
   yargs
   .command('generate', 'Generate code from tzif data', (y: yargs.Argv) => y
-      .option('t', { alias: 'tag', description: 'Tag / version of the tzdb to build' })
-      .option('o', { alias: 'out', description: 'Output file path' }),
+      .option('t', { type: 'string', description: 'Tag / version of the tzdb to build' })
+      .option('o', { type: 'string', description: 'Output file path' })
+      .alias('o', 'out')
+      .alias('t', 'tag'),
       runGenerate)
 
   .command('json <file>', 'Dump tzif as JSON', (y: yargs.Argv) => y
-      .positional('file', { description: 'Input file in TZif format' })
-      .option('p', { alias: 'pretty', boolean: true }),
+      .positional('file', { type: 'string', description: 'Input file in TZif format' })
+      .option('p', { boolean: true })
+      .alias('p', 'pretty'),
       runDumpJson)
 
   .command('zdump <file>', 'Dump tzif ala zdump', (y: yargs.Argv) => y
-    .positional('file', { description: 'Input file in TZif format' })
-    .option('t', { alias: 'timestamps', boolean: true, description: 'Include timestamps' })
-    .option('y', { alias: 'years', type: 'string', description: 'Single year or range START:END' }),
+    .positional('file', { type: 'string', description: 'Input file in TZif format' })
+    .option('t', { boolean: true, description: 'Include timestamps' })
+    .option('y', { type: 'string', description: 'Single year or range START:END' })
+    .alias('t', 'timestamps')
+    .alias('y', 'years'),
     runZdump)
 
   .demandCommand(1, 'Please specify a command')

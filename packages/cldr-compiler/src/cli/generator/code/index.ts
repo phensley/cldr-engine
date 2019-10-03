@@ -62,10 +62,16 @@ const load = (): any => {
   return data;
 };
 
-const run = (args: yargs.Arguments) => {
+interface CodeOptions {
+  which?: string[];
+}
+
+const run = (args: yargs.Arguments<CodeOptions>) => {
   let keys = Object.keys(OUTPUTS).sort();
-  if (args.which) {
-    keys = args.which;
+
+  const { which } = args;
+  if (which) {
+    keys = which;
   }
 
   const data = load();

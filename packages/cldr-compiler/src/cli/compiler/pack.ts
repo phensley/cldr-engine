@@ -53,10 +53,18 @@ export class PackEncoder implements Encoder {
 export const sha256 = (data: string | Buffer): string =>
   createHash('sha256').update(data).digest('hex');
 
+export interface PackArgs {
+  out: string;
+  lang?: string;
+  config?: string;
+  regions?: string;
+  verbose: boolean;
+}
+
 /**
  * Generates static data that will be impored into the runtime.
  */
-export const runPack = (argv: yargs.Arguments) => {
+export const runPack = (argv: yargs.Arguments<PackArgs>) => {
   const pkg = getProjectInfo();
 
   // Ensure downloads happen before building
@@ -69,7 +77,7 @@ export const runPack = (argv: yargs.Arguments) => {
   });
 };
 
-const runPackImpl = (argv: yargs.Arguments, pkg: ProjectInfo) => {
+const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
   const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
   if (argv.lang) {
