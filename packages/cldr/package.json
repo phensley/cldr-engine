@@ -85,7 +85,7 @@
     "rollup-plugin-terser": "^5.0.0",
     "rollup-plugin-typescript2": "0.24.2",
     "rollup-plugin-uglify": "^6.0.2",
-    "source-map-explorer": "^2.0.1",
+    "source-map-explorer": "^2.1.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
