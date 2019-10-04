@@ -31,7 +31,7 @@ yarn add @phensley/cldr
 
 ## Features
 
-* Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html)
+* Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 36.0.0](http://cldr.unicode.org/index/downloads/cldr-36)
 * [360 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#availablelocales)
 * [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles.html) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
 * [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher.html) for improved locale fallback
