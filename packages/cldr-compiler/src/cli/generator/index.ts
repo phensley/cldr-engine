@@ -15,6 +15,6 @@ export const main = () => {
 
   argv.demandCommand(1, 'Please specify a command')
     .help('help')
-    .option('h', { alias: 'help' })
+    .alias('h', 'help')
     .parse();
 };

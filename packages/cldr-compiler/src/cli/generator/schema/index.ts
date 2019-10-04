@@ -53,7 +53,9 @@ const mergeKeyCounts = (dst: any, ...sources: any[]): any => {
 interface SchemaOptions {
   out: string;
   lang?: string;
-  withValues: boolean;
+  ['dry-run']: boolean;
+  ['pre-transform']: boolean;
+  ['with-values']: boolean;
 }
 
 /**
@@ -72,7 +74,7 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
     localeMap[lang].forEach(r => locales.push(r.id));
   });
 
-  const transform = !args.preTransform;
+  const transform = !args['pre-transform'];
   const sections: any = {};
   locales.forEach(locale => {
     console.warn(`Scanning ${locale}..`);
@@ -84,7 +86,7 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
       if (!src) {
         return;
       }
-      const counts = keyCounts(src, args.withValues);
+      const counts = keyCounts(src, args['with-values']);
       mergeKeyCounts(dst, counts);
       sections[prefix] = dst;
     });
@@ -93,7 +95,7 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
   const supplemental = getSupplemental();
   Object.keys(supplemental).forEach(key => {
     const src = supplemental[key];
-    sections[`Supplemental.${key}`] = keyCounts(src, args.withValues);
+    sections[`Supplemental.${key}`] = keyCounts(src, args['with-values']);
   });
 
   Object.keys(sections).forEach(key => {
@@ -105,11 +107,16 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
   });
 };
 
-export const schemaOptions = (argv: yargs.Argv) =>
-  argv.command('schema', 'Generate schema', (y: yargs.Argv) => y
-    .option('l', { alias: 'lang', description: 'List of languages' })
-    .option('n', { alias: 'dry-run', boolean: true })
-    .option('o', { alias: 'out', description: 'Output dir', required: true })
-    .option('p', { alias: 'pre-transform', description: 'Pre transform' })
-    .option('w', { alias: 'with-values', boolean: true, description: 'With value leaf nodes' }),
+export const schemaOptions = (argv: yargs.Argv<any>) =>
+  argv.command('schema', 'Generate schema', (y: yargs.Argv<SchemaOptions>) => y
+    .option('l', { description: 'List of languages' })
+    .alias('l', 'lang')
+    .option('n', { boolean: true })
+    .alias('n', 'dry-run')
+    .option('o', { description: 'Output dir', required: true })
+    .alias('o', 'out')
+    .option('p', { boolean: true, description: 'Pre transform' })
+    .alias('p', 'pre-transform')
+    .option('w', { boolean: true, description: 'With value leaf nodes' })
+    .alias('w', 'with-values'),
     run);
