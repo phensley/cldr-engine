@@ -1,4 +1,5 @@
 /.cldr/
+/.cldrbuild/
 /.cldrpatches/
 *.pyc
 

@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# Build cldr modern json archives from upstream sources.
+# There is naturally a lag between new cldr releases being tagged in git and
+# the official json files being available for download.
+# This lets us build them locally and integrate earlier.
+
+# extra dependencies:
+#   ant
+#   git lfs extension
+
+DIR=$(cd `dirname $0`; pwd)
+VERSION=36.0.0
+TAG=release-36
+BUILD=${DIR}/.cldrbuild
+CLDR=${BUILD}/cldr
+OUTPUT=${BUILD}/unicode-cldr
+
+if [ ! -d ${CLDR} ] ; then
+    mkdir -p ${BUILD}
+    cd ${BUILD}
+    git clone git@github.com:unicode-org/cldr.git
+fi
+
+cd ${CLDR}
+git fetch origin $TAG
+git checkout master
+git reset --hard
+git checkout $TAG
+
+# patch to avoid exception due to frozen xpath when generating the
+# supplemental dayPeriods data
+
+patch -p1 <<EOF
+diff --git a/tools/java/org/unicode/cldr/json/CldrItem.java b/tools/java/org/unicode/cldr/json/CldrItem.java
+index 347ee968f..42b05bd4b 100644
+--- a/tools/java/org/unicode/cldr/json/CldrItem.java
++++ b/tools/java/org/unicode/cldr/json/CldrItem.java
+@@ -217,10 +217,10 @@ public class CldrItem implements Comparable<CldrItem> {
+      * @return Array of CldrItem if it can be split, otherwise null.
+      */
+     public CldrItem[] split() {
+-        XPathParts xpp = XPathParts.getFrozenInstance(path);
+-        XPathParts fullxpp = XPathParts.getFrozenInstance(fullPath);
+-        XPathParts untransformedxpp = XPathParts.getFrozenInstance(untransformedPath);
+-        XPathParts untransformedfullxpp = XPathParts.getFrozenInstance(untransformedFullPath);
++        XPathParts xpp = XPathParts.getInstance(path);
++        XPathParts fullxpp = XPathParts.getInstance(fullPath);
++        XPathParts untransformedxpp = XPathParts.getInstance(untransformedPath);
++        XPathParts untransformedfullxpp = XPathParts.getInstance(untransformedFullPath);
+
+         XPathParts newxpp = new XPathParts();
+         XPathParts newfullxpp = new XPathParts();
+EOF
+
+cd tools/java
+ant clean all jar
+
+if [ -d ${OUTPUT} ] ; then
+    rm -rf ${OUTPUT}
+fi
+
+MAINTYPES="
+main
+rbnf
+segments
+"
+
+for type in ${MAINTYPES} ; do
+    # add -m 'en|root' for testing
+    java -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
+        -d ${OUTPUT} -r true -p true -t ${type} -s unconfirmed -l optional
+done
+
+java -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
+    -d ${OUTPUT} -r true -p true -t supplemental -s unconfirmed -l optional
+
+cd ${OUTPUT}
+for name in `echo {*-modern,cldr-rbnf,cldr-core} | xargs` ; do
+    tar cfz ${VERSION}.tar.gz ${name}
+    mkdir -p ${name}/archive
+    mv ${VERSION}.tar.gz ${name}/archive
+done
+
