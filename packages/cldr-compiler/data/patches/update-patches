@@ -9,8 +9,9 @@ sys.path.insert(0, os.path.join(CWD, 'patchlib'))
 import languagematch
 import pluralrange
 
-TAG = 'release-35-1'
-BASEURL = 'https://unicode.org/repos/cldr/tags'
+TAG = 'release-36'
+#BASEURL = 'https://unicode.org/repos/cldr/tags'
+BASEURL = 'https://raw.githubusercontent.com/unicode-org/cldr'
 TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')
 
 FILES = [
@@ -39,15 +40,20 @@ def download(path):
     realpath = os.path.join(TEMPDIR, TAG, path)
     if not os.path.exists(realpath):
         url = os.path.join(BASEURL, TAG, path)
+        print(url)
         res = requests.get(url)
         makedirs(os.path.dirname(realpath))
         open(realpath, 'wb').write(res.text.encode('utf-8'))
     return realpath
 
 def process(path, builder, dest):
+    print(path)
     realpath = download(path)
     rec = builder(realpath)
-    json.dump(rec, open(dest, 'wb'), indent=2, sort_keys=1)
+    out = open(dest, 'wb')
+    res = json.dumps(rec, indent=2, sort_keys=1)
+    out.write(res.encode('utf-8'))
+    out.close()
 
 def main():
     makedirs(TEMPDIR)

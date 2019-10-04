@@ -24,7 +24,7 @@ def build(path):
             ranges[k] = recs
 
     sort = OrderedDict()
-    for k in sorted(ranges.iterkeys()):
+    for k in sorted(ranges.keys()):
         sort[k] = ranges[k]
 
     res = dict(
