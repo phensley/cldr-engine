@@ -38,6 +38,34 @@ test('cldr v35 units', () => {
   expect(s).toEqual('10.76Btu');
 });
 
+test('cldr v36 units', () => {
+  const api = unitsApi('en');
+  let s: string;
+
+  // decade
+  const q: Quantity = { value: 8.9, unit: 'decade' };
+  s = api.formatQuantity(q, { length: 'long' });
+  expect(s).toEqual('8.9 decades');
+
+  q.value = 1;
+  s = api.formatQuantity(q);
+  expect(s).toEqual('1 decade');
+
+  // dot-per-inch
+  q.value = 8.9;
+  q.unit = 'dot-per-inch';
+  s = api.formatQuantity(q);
+  expect(s).toEqual('8.9 dots per inch');
+  s = api.formatQuantity(q, { length: 'short' });
+  expect(s).toEqual('8.9 dpi');
+
+  q.value = 1;
+  s = api.formatQuantity(q);
+  expect(s).toEqual('1 dot per inch');
+  s = api.formatQuantity(q, { length: 'narrow' });
+  expect(s).toEqual('1dpi');
+});
+
 test('display name', () => {
   const api = unitsApi('en');
 

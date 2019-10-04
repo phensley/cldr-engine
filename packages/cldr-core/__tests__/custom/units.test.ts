@@ -16,7 +16,7 @@ test('custom units', () => {
   s = api.formatQuantity(q);
   expect(s).toEqual('123.457 feet');
 
-  // Missing units
+  // Missing value
   q.unit = 'kilogram';
   s = api.formatQuantity(q);
   expect(s).toEqual('');

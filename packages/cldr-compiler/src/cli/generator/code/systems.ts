@@ -6,7 +6,7 @@ const increasing = (s: string[]): boolean => {
     const prev = s[i - 1].codePointAt(0)!;
     const curr = s[i].codePointAt(0)!;
     if (curr !== prev + 1) {
-      console.log(prev, curr, s);
+      console.log('[informational] non-sequential digits', prev, curr, s);
       return false;
     }
   }
