@@ -3,2345 +3,2362 @@
     "pluralRanges": {
       "af": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ak": [
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "am": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
+      "an": [
+        {
+          "end": "other",
+          "result": "other",
+          "start": "one"
+        },
+        {
+          "end": "one",
+          "result": "other",
+          "start": "other"
+        },
+        {
+          "end": "other",
+          "result": "other",
+          "start": "other"
+        }
+      ],
       "ar": [
         {
-          "end": "one", 
-          "result": "zero", 
+          "end": "one",
+          "result": "zero",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "zero", 
+          "end": "two",
+          "result": "zero",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "other", 
+          "end": "two",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "two"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "two"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "two"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "many"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "other", 
+          "end": "two",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "as": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "az": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "be": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "many"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "many"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "bg": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "bn": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "bs": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ca": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "cs": [
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "many"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "many"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "cy": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "two"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "two"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "two"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "da": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "de": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "el": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "en": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "es": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "et": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "eu": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "fa": [
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "fi": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "fil": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "fr": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ga": [
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "two"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "two"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "two"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "gl": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "gsw": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "gu": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "he": [
         {
-          "end": "two", 
-          "result": "other", 
+          "end": "two",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "other", 
+          "end": "many",
+          "result": "other",
           "start": "two"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "two"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "many", 
+          "end": "other",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "other", 
+          "end": "two",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "hi": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "hr": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "hu": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "hy": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ia": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "id": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "io": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "is": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "it": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ja": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ka": [
         {
-          "end": "other", 
-          "result": "one", 
+          "end": "other",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "kk": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "km": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "kn": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ko": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ky": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "lo": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "lt": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "many"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "many"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "lv": [
         {
-          "end": "zero", 
-          "result": "other", 
+          "end": "zero",
+          "result": "other",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "zero"
-        }, 
+        },
         {
-          "end": "zero", 
-          "result": "other", 
+          "end": "zero",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "zero", 
-          "result": "other", 
+          "end": "zero",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "mk": [
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ml": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "mn": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "mr": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ms": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "my": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "nb": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ne": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "nl": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "or": [
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "pa": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "pl": [
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "many"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "many"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ps": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "pt": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ro": [
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "few", 
+          "end": "one",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ru": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "many"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "many"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "sc": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "scn": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "sd": [
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "si": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "sk": [
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "many"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "many"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "sl": [
         {
-          "end": "one", 
-          "result": "few", 
+          "end": "one",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "few", 
+          "end": "one",
+          "result": "few",
           "start": "two"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "two"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "two"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "two"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "few", 
+          "end": "one",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "few", 
+          "end": "one",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "two", 
-          "result": "two", 
+          "end": "two",
+          "result": "two",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "sq": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "sr": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "sv": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "sw": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ta": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "te": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "th": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "tk": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "tr": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ug": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "uk": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "one"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "few"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "few"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "few"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "few"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "many"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "many"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "many"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "many"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "few", 
-          "result": "few", 
+          "end": "few",
+          "result": "few",
           "start": "other"
-        }, 
+        },
         {
-          "end": "many", 
-          "result": "many", 
+          "end": "many",
+          "result": "many",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "ur": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "other", 
+          "end": "one",
+          "result": "other",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "uz": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "other"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "vi": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "yue": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "zh": [
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
-      ], 
+      ],
       "zu": [
         {
-          "end": "one", 
-          "result": "one", 
+          "end": "one",
+          "result": "one",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "one"
-        }, 
+        },
         {
-          "end": "other", 
-          "result": "other", 
+          "end": "other",
+          "result": "other",
           "start": "other"
         }
       ]
