@@ -37,9 +37,26 @@ export class UnitsInternalImpl implements UnitInternals {
       return num;
     }
 
+    // Compute plural category for the value '1'
+    const singular = pluralRules.cardinal(
+      bundle.language(), DecimalConstants.ONE.operands());
+
+    // For default and "per" compound pattern, the {0} will use
+    // the plural category and {1} will be singular. Examples:
+    //   1 meter per second
+    //  10 meters per second
+    //
+    // For the 'times' compound pattern, the {0} will be singular,
+    // and the {1} will use the plural category. Examples:
+    //   1 newton-meter
+    //  10 newton-meters
+
+    const plural0 = q.times ? singular : plural;
+    const plural1 = q.times ? plural : singular;
+
     const { general } = this.internals;
     const info = this.getUnitInfo(options.length || '');
-    const pattern = info.unitPattern.get(bundle, plural, q.unit);
+    const pattern = info.unitPattern.get(bundle, plural0, q.unit);
 
     // Format argument '{0}' here. If no 'per' unit is defined, we
     // return it. Otherwise we join it with the denominator unit below.
@@ -50,18 +67,19 @@ export class UnitsInternalImpl implements UnitInternals {
       if (perPattern) {
         return renderer.wrap(general, perPattern, zero);
       }
+    }
 
-      // Fall back to use the compoundUnit pattern. See notes here:
-      // https://www.unicode.org/reports/tr35/tr35-general.html#perUnitPatterns
-      const compound = info.compoundUnitPattern.get(bundle);
+    // If per or times are specified, use use the corresponding compound pattern.
+    // See notes here:
+    // https://www.unicode.org/reports/tr35/tr35-general.html#perUnitPatterns
+    const compound = q.per ? info.perPattern.get(bundle) :
+      q.times ? info.timesPattern.get(bundle) : '';
 
-      // Compute plural category for the value '1'
-      const singular = pluralRules.cardinal(
-        bundle.language(), DecimalConstants.ONE.operands());
-
-      // Fetch the denominator's singular unit pattern, strip off the '{0}'
+    const perunit = q.per || q.times;
+    if (perunit) {
+      // Fetch the denominator's unit pattern, strip off the '{0}'
       // and any surrounding whitespace.
-      let denom = info.unitPattern.get(bundle, singular, q.per);
+      let denom = info.unitPattern.get(bundle, plural1, perunit);
       denom = denom.replace(/\s*\{0\}\s*/, '');
       const one = renderer.make('per', denom);
 

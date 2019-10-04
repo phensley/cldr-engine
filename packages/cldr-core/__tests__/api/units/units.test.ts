@@ -81,8 +81,11 @@ test('per unit pattern schema', () => {
   let p = units.long.perUnitPattern.get(en, 'kilogram');
   expect(p).toEqual('{0} per kilogram');
 
-  p = units.long.compoundUnitPattern.get(en);
+  p = units.long.perPattern.get(en);
   expect(p).toEqual('{0} per {1}');
+
+  p = units.long.timesPattern.get(en);
+  expect(p).toEqual('{0}⋅{1}');
 });
 
 test('per unit', () => {
@@ -100,6 +103,29 @@ test('per unit', () => {
 
   s = api.formatQuantity({ value: '30.7899', unit: 'kilogram', per: 'lux' });
   expect(s).toEqual('30.79 kilograms per lux');
+});
+
+test('times unit', () => {
+  const api = unitsApi('en');
+  let s: string;
+
+  s = api.formatQuantity({ value: '1', unit: 'newton', times: 'meter' });
+  expect(s).toEqual('1 newton⋅meter');
+
+  s = api.formatQuantity({ value: '123', unit: 'newton', times: 'meter' });
+  expect(s).toEqual('123 newton⋅meters');
+
+  s = api.formatQuantity({ value: '1', unit: 'foot', times: 'pound' });
+  expect(s).toEqual('1 foot⋅pound');
+
+  s = api.formatQuantity({ value: '123', unit: 'foot', times: 'pound' });
+  expect(s).toEqual('123 foot⋅pounds');
+
+  s = api.formatQuantity({ value: '1', unit: 'meter', times: 'kilogram' });
+  expect(s).toEqual('1 meter⋅kilogram');
+
+  s = api.formatQuantity({ value: '123', unit: 'meter', times: 'kilogram' });
+  expect(s).toEqual('123 meter⋅kilograms');
 });
 
 test('significant', () => {

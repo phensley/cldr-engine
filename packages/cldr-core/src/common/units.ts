@@ -10,6 +10,7 @@ export interface Quantity {
   value: number | string | Decimal;
   unit?: UnitType;
   per?: UnitType;
+  times?: UnitType;
 }
 
 /**
