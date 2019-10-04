@@ -250,7 +250,7 @@ export class CLDRFramework {
     this.loader = options.loader;
     this.asyncLoader = options.asyncLoader;
 
-    const patternCacheSize = options.patternCacheSize || 50;
+    const patternCacheSize = options.patternCacheSize || 200;
     this.internals = new InternalsImpl(
       options.config || CLDRFramework.defaultConfig || EMPTY_CONFIG,
       VERSION, options.debug, patternCacheSize);
