@@ -222,3 +222,29 @@ test('numbering', () => {
   s = api.formatRelativeTimeField(3, 'week', { width: 'short', nu: 'arab' });
   expect(s).toEqual('in ٣ wk.');
 });
+
+test('numeric only', () => {
+  const api = calendarsApi('en');
+  let s: string;
+
+  s = api.formatRelativeTimeField(0, 'day', { numericOnly: true });
+  expect(s).toEqual('in 0 days');
+
+  s = api.formatRelativeTimeField(0, 'day', { numericOnly: true, alwaysNow: true });
+  expect(s).toEqual('today');
+
+  s = api.formatRelativeTimeField(1, 'day', { numericOnly: true });
+  expect(s).toEqual('in 1 day');
+
+  s = api.formatRelativeTimeField(1, 'day', { numericOnly: true, alwaysNow: true });
+  expect(s).toEqual('in 1 day');
+
+  s = api.formatRelativeTimeField(-1, 'day');
+  expect(s).toEqual('yesterday');
+
+  s = api.formatRelativeTimeField(-1, 'day', { numericOnly: true });
+  expect(s).toEqual('1 day ago');
+
+  s = api.formatRelativeTimeField(-1, 'day', { numericOnly: true, alwaysNow: true });
+  expect(s).toEqual('1 day ago');
+});

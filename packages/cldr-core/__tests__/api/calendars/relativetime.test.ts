@@ -100,3 +100,35 @@ test('specific field', () => {
   s = api.formatRelativeTime(start, end, { context, field: 'day', maximumFractionDigits: 1 });
   expect(s).toEqual('In 90.5 days');
 });
+
+test('numeric only', () => {
+  const context: ContextType = 'begin-sentence';
+  const api = calendarsApi('en');
+  let s: string;
+  let end: CalendarDate;
+
+  const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: UTC });
+
+  end = start.add({ });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('Now');
+
+  s = api.formatRelativeTime(start, end, { context, field: 'day' });
+  expect(s).toEqual('Today');
+
+  s = api.formatRelativeTime(start, end, { context, numericOnly: true });
+  expect(s).toEqual('In 0 seconds');
+
+  s = api.formatRelativeTime(start, end, { context, numericOnly: true, field: 'hour' });
+  expect(s).toEqual('In 0 hours');
+
+  s = api.formatRelativeTime(start, end, { context, numericOnly: true, alwaysNow: true });
+  expect(s).toEqual('Now');
+
+  end = start.add({ year: 1 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('Next year');
+
+  s = api.formatRelativeTime(start, end, { context, numericOnly: true });
+  expect(s).toEqual('In 1 year');
+});

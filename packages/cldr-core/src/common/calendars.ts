@@ -163,6 +163,12 @@ export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
 
   // Context in which the formatted string will be used
   context?: ContextType;
+
+  // Force format to always display in terms of numbers
+  numericOnly?: boolean;
+
+  // In numeric mode, if the value is exactly 0 display "now" instead of "in 0 seconds"
+  alwaysNow?: boolean;
 }
 
 export interface RelativeTimeFormatOptions extends NumberFormatOptions {
@@ -174,6 +180,12 @@ export interface RelativeTimeFormatOptions extends NumberFormatOptions {
 
   // Specify which field the relative time should be expressed in
   field?: TimePeriodField;
+
+  // Force format to always display in terms of numbers
+  numericOnly?: boolean;
+
+  // In numeric mode, if the value is exactly 0 display "now" instead of "in 0 seconds"
+  alwaysNow?: boolean;
 }
 
 /**

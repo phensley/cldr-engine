@@ -47,30 +47,40 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
       n = n.negate();
     }
 
+    const iszero = n.compare(DecimalConstants.ZERO) === 0;
     let res = '';
-    if (n.compare(DecimalConstants.ZERO) === 0) {
-      res = format.current.get(bundle, field);
 
-    } else {
-      switch (field) {
-        case 'hour':
-        case 'minute':
-        case 'second':
-          break;
-        default:
-          if (n.compare(DecimalConstants.TWO) === 0) {
-            const p = negative ? format.previous2.get(bundle, field) : format.next2.get(bundle, field);
-            if (p !== '') {
-              res = p;
+    if (iszero) {
+      if (options.alwaysNow || !options.numericOnly) {
+        res = format.current.get(bundle, field);
+      }
+
+    } else if (!options.numericOnly) {
+      if (iszero) {
+        res = format.current.get(bundle, field);
+
+      } else {
+        switch (field) {
+          case 'hour':
+          case 'minute':
+          case 'second':
+            break;
+          default:
+            if (n.compare(DecimalConstants.TWO) === 0) {
+              const p = negative ? format.previous2.get(bundle, field) : format.next2.get(bundle, field);
+              if (p !== '') {
+                res = p;
+              }
+              // Fall through
+            } else if (n.compare(DecimalConstants.ONE) === 0) {
+              res = negative ? format.previous.get(bundle, field) : format.next.get(bundle, field);
             }
-            // Fall through
-          } else if (n.compare(DecimalConstants.ONE) === 0) {
-            res = negative ? format.previous.get(bundle, field) : format.next.get(bundle, field);
-          }
-          break;
+            break;
+        }
       }
     }
 
+    // If we output anything above, return it
     if (res) {
       if (options.context) {
         res = this.internals.general.contextTransform(res, transform,
