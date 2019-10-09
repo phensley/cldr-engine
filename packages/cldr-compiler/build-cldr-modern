@@ -15,6 +15,7 @@ TAG=release-36
 BUILD=${DIR}/.cldrbuild
 CLDR=${BUILD}/cldr
 OUTPUT=${BUILD}/unicode-cldr
+STATUS=provisional
 
 if [ ! -d ${CLDR} ] ; then
     mkdir -p ${BUILD}
@@ -69,11 +70,12 @@ segments
 for type in ${MAINTYPES} ; do
     # add -m 'en|root' for testing
     java -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
-        -d ${OUTPUT} -r true -p true -t ${type} -s unconfirmed -l optional
+        -d ${OUTPUT} -r true -p true -t ${type} -s ${STATUS} -l optional \
+        -m 'en|af|root'
 done
 
 java -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
-    -d ${OUTPUT} -r true -p true -t supplemental -s unconfirmed -l optional
+    -d ${OUTPUT} -r true -p true -t supplemental -s ${STATUS} -l optional
 
 cd ${OUTPUT}
 for name in `echo {*-modern,cldr-rbnf,cldr-core} | xargs` ; do
