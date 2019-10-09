@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [0.19.3]
 ### Fixed/Changed
- - Use official [cldr json][https://github.com/unicode-cldr] download locations now that version 36 is released.
+ - Use official [cldr json](https://github.com/unicode-cldr) download locations now that version 36 is released.
 
 ## [0.19.2]
 ### Added
