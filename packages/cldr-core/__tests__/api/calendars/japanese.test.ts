@@ -36,3 +36,14 @@ test('japanese date', () => {
   s = api.formatDate(date);
   expect(s).toEqual('Sunday, March 11, 30 Heisei');
 });
+
+test('japanese default', () => {
+  const api = calendarsApi('ja');
+  let s: string;
+  const date = { date: MARCH_11_2018_070025_UTC, zoneId: 'America/New_York' };
+
+  // TODO: once rbnf is implemented the year will be formatted
+  // using the 'jpanyear' rule.
+  s = api.formatDate(date);
+  expect(s).toEqual('平成30年3月11日日曜日');
+});

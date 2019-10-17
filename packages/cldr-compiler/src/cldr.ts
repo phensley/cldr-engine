@@ -261,6 +261,25 @@ const filterFormats = (o: any, plural: boolean) => {
   return r;
 };
 
+// TODO: need to expand this when rbnf is merged. We may need to
+// create a compound field containing the date pattern and any
+// modifiers for the formatters.
+// An example from Japanese calendar in the 'ja' locale:
+// "dateFormats": {
+//   "full": {
+//     "_value": "Gy年M月d日EEEE",
+//     "_numbers": "y=jpanyear"
+//   }
+// }
+//
+const getDateFormat = (o: any): string => {
+  return Object.keys(o).reduce((prev: any, key: string) => {
+    const val = o[key];
+    prev[key] = typeof val === 'string' ? val : val._value;
+    return prev;
+  }, {});
+};
+
 const coreCalendarSchema = (name: string) => {
   const prefix = (...keys: string[]) => ['dates', 'calendars', name, ...keys];
   const intervals = prefix('dateTimeFormats', 'intervalFormats');
@@ -268,7 +287,7 @@ const coreCalendarSchema = (name: string) => {
   return {
     availableFormats: get([prefix('dateTimeFormats', 'availableFormats'), (o: any) => filterFormats(o, false)]),
     pluralFormats: get([prefix('dateTimeFormats', 'availableFormats'), (o: any) => filterFormats(o, true)]),
-    dateFormats: get(prefix('dateFormats', _sizeProps)),
+    dateFormats: get([prefix('dateFormats', _sizeProps), getDateFormat]),
     dayPeriods: get(prefix('dayPeriods', _formats)),
     dateTimeFormats: get(prefix('dateTimeFormats', _sizeProps)),
     eras: get([prefix('eras'), fixEras]),
