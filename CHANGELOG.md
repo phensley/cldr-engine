@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.19.4]
+### Added
+ - New command `cldr-compiler dump` which dumps a resource pack, showing the internal structure.
+
+### Fixed/Changed
+ - Bug fix for locales that have multiple plural categories define only a single `unitPattern` under the `'other'` plural category. Now we explicitly fallback to `'other'`.
+ - Japanese calendar in the `ja` locale now correctly encodes the date formats; they were blank in previous releases. We currently use latin digits for this locale but once RBNF is supported the year field will be formatted using the `jpanyear` rule.
+
 ## [0.19.3]
 ### Fixed/Changed
  - Use official [cldr json](https://github.com/unicode-cldr) download locations now that version 36 is released.
@@ -253,6 +261,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.19.4]: https://github.com/phensley/cldr-engine/compare/v0.19.3...v0.19.4
 [0.19.3]: https://github.com/phensley/cldr-engine/compare/v0.19.2...v0.19.3
 [0.19.2]: https://github.com/phensley/cldr-engine/compare/v0.19.1...v0.19.2
 [0.19.1]: https://github.com/phensley/cldr-engine/compare/v0.19.0...v0.19.1
