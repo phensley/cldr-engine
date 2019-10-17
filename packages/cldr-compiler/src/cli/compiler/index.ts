@@ -1,4 +1,5 @@
 import * as yargs from 'yargs';
+import { runDump } from './dump';
 import { runPack } from './pack';
 import { getProjectInfo } from './util';
 
@@ -15,6 +16,12 @@ export const main = () => {
         .option('r', { alias: 'regions', description: 'Optional comma-delimited list of region codes to include'})
         .option('v', { alias: 'verbose', boolean: true, description: 'Verbose mode' }),
       runPack)
+
+    .command('dump', 'Dump a resource pack', (y: yargs.Argv) => y
+        .option('p', { alias: 'pack', required: true, description: 'Path to resource pack'})
+        .option('c', { alias: 'config', description: 'Path to config used to generate resource pack'}),
+      runDump)
+
     .version(`compiler:${pkg.version} cldr:${pkg.cldrVersion}`)
     .demandCommand(1, 'Please specify a command')
     .help('help')
