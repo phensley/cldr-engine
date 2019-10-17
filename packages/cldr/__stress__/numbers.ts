@@ -15,6 +15,8 @@ import {
 import { getCLDR } from '../__tests__/_helpers';
 import { Timer } from './timer';
 
+const VERBOSE = true;
+
 const { availableLocales } = CLDRFramework;
 
 const MAX = String(Number.MAX_SAFE_INTEGER);
@@ -104,6 +106,8 @@ const unitOptions = (): UnitFormatOptions[] => {
 
 export const numberStress = () => {
   let total = 0;
+  let empty = 0;
+  let s: string;
   let elapsed: string;
   const timer = new Timer();
   const cldr = getCLDR();
@@ -123,7 +127,13 @@ export const numberStress = () => {
     timer.start();
     for (const n of NUMBERS) {
       for (const o of dopts) {
-        engine.Numbers.formatDecimal(n, o);
+        s = engine.Numbers.formatDecimal(n, o);
+        if (!s) {
+          if (VERBOSE) {
+            console.log(`format decimal empty ${n.toString()} ${JSON.stringify(o)}`);
+          }
+          empty++;
+        }
         i++;
       }
     }
@@ -136,7 +146,13 @@ export const numberStress = () => {
     for (const n of NUMBERS) {
       for (const currency of CURRENCIES) {
         for (const o of copts) {
-          engine.Numbers.formatCurrency(n, currency, o);
+          s = engine.Numbers.formatCurrency(n, currency, o);
+          if (!s) {
+            if (VERBOSE) {
+              console.log(`format currency empty ${locale.id} ${n.toString()} ${currency} ${JSON.stringify(o)}`);
+            }
+            empty++;
+          }
           i++;
         }
       }
@@ -150,9 +166,22 @@ export const numberStress = () => {
     for (const n of NUMBERS) {
       for (const o of uopts) {
         for (const unit of UNITS) {
-          engine.Units.formatQuantity({ value: n, unit }, o);
+          s = engine.Units.formatQuantity({ value: n, unit }, o);
+          if (!s) {
+            if (VERBOSE) {
+              console.log(`format quantity empty ${locale.id} ${n.toString()} ${unit} ${JSON.stringify(o)}`);
+            }
+            empty++;
+          }
           i++;
-          engine.Units.formatQuantity({ value: n, unit, per: 'second' }, o);
+
+          s = engine.Units.formatQuantity({ value: n, unit, per: 'second' }, o);
+          if (!s) {
+            if (VERBOSE) {
+              console.log(`format quantity per empty ${locale.id} ${n.toString()} ${unit} per: 'second' ${JSON.stringify(o)}`);
+            }
+            empty++;
+          }
           i++;
         }
       }
@@ -161,5 +190,5 @@ export const numberStress = () => {
     total += i;
     console.log(`format ${i} unit permutations: ${elapsed} micros`);
   }
-  console.log(`executed ${total} total number and unit permutations`);
+  console.log(`executed ${total} total number and unit permutations, ${empty} empty`);
 };

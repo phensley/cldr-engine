@@ -52,6 +52,7 @@ const buildDatetimes = (): ZonedDateTime[] => {
 
 export const calendarStress = () => {
   let total = 0;
+  let empty = 0;
   let elapsed: string;
   const timer = new Timer();
   const cldr = getCLDR();
@@ -69,7 +70,10 @@ export const calendarStress = () => {
     timer.start();
     for (const datetime of datetimes) {
       for (const o of dopts) {
-        engine.Calendars.formatDate(datetime, o);
+        const s = engine.Calendars.formatDate(datetime, o);
+        if (s === '') {
+          empty++;
+        }
         i++;
       }
     }
@@ -78,5 +82,5 @@ export const calendarStress = () => {
     total += i;
     console.log(`format ${i} gregorian permutations: ${elapsed} micros`);
   }
-  console.log(`executed ${total} total number of calendar permutations`);
+  console.log(`executed ${total} total number of calendar permutations, ${empty} empty`);
 };
