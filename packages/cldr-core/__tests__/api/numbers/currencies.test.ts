@@ -23,6 +23,14 @@ test('currency regions', () => {
   expect(api.getCurrencyForRegion('EE')).toEqual('EUR');
 });
 
+test('plural unit wrapper fallback', () => {
+  const api = numbersApi('so');
+  let actual: string;
+
+  actual = api.formatCurrency('1', 'GBP', { style: 'code' });
+  expect(actual).toEqual('1.00 GBP');
+});
+
 test('currency nan and infinity', () => {
   const api = numbersApi('en');
 

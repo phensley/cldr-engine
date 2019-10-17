@@ -66,6 +66,15 @@ test('cldr v36 units', () => {
   expect(s).toEqual('1dpi');
 });
 
+test('pattern fallback to other', () => {
+  const api = unitsApi('de');
+  let s: string;
+
+  const q: Quantity = { value: 1, unit: 'kilogram' };
+  s = api.formatQuantity(q, { style: 'long', length: 'short' });
+  expect(s).toEqual('1 kg');
+});
+
 test('display name', () => {
   const api = unitsApi('en');
 

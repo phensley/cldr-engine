@@ -56,7 +56,12 @@ export class UnitsInternalImpl implements UnitInternals {
 
     const { general } = this.internals;
     const info = this.getUnitInfo(options.length || '');
-    const pattern = info.unitPattern.get(bundle, plural0, q.unit);
+    let pattern = info.unitPattern.get(bundle, plural0, q.unit);
+    if (!pattern) {
+      // Fallback to other. Some locales don't break out a pattern per category
+      // when the patterns are identical
+      pattern = info.unitPattern.get(bundle, 'other', q.unit);
+    }
 
     // Format argument '{0}' here. If no 'per' unit is defined, we
     // return it. Otherwise we join it with the denominator unit below.
