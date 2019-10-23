@@ -7,7 +7,7 @@ import { setupTZDB } from './tzdb';
 import { parseZIC } from './zic';
 import { encodeZones } from './encode';
 
-const VERSION = '2019b';
+const VERSION = '2019c';
 
 interface JsonOptions {
   pretty: boolean;
