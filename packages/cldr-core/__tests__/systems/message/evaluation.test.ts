@@ -1,4 +1,4 @@
-import { MessageArgs, MessageEngine } from '../../../src/systems/message/engine';
+import { MessageArgs, MessageEngine } from '../../../src/systems/message';
 import { parseMessagePattern, MessageCode, StickyMatcher } from '../../../src/parsing/message';
 
 const matcher = (s: string) => new StickyMatcher(s);
