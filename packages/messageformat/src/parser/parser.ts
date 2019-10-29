@@ -22,17 +22,6 @@ const enum Chars {
 export const parseMessagePattern = (raw: string, matcher: Matcher): MessageCode =>
   new MessagePatternParser(raw, matcher).parse();
 
-// Mapping of formatter names to message operation types
-const OPS: { [name: string]: MessageOpType } = {
-  number: MessageOpType.DECIMAL,
-  decimal: MessageOpType.DECIMAL,
-  date: MessageOpType.DATE,
-  time: MessageOpType.TIME,
-  datetime: MessageOpType.DATETIME,
-  money: MessageOpType.CURRENCY,
-  currency: MessageOpType.CURRENCY
-};
-
 /**
  * Hand-implemented parser for ICU message format. Designed to be compact and
  * fast vs. other implementations.
@@ -203,11 +192,7 @@ class MessagePatternParser {
         return this.select(args, m, r);
 
       default:
-        const op = OPS[name];
-        if (op !== undefined) {
-          return this.simple(args, op, m, r);
-        }
-        break;
+        return this.simple(args, name, m, r);
     }
 
     // This code should never be reached if the 'name' corresponds
@@ -322,26 +307,19 @@ class MessagePatternParser {
   /**
    * Simple single-argument formatter.
    */
-  simple(args: Argument[], op: MessageOpType, m: Matcher, r: Range): MessageCode {
-    m.spaces(r);
+  simple(args: Argument[], name: string, m: Matcher, r: Range): MessageCode {
 
-    const style = m.identifier(r);
-    if (style === undefined) {
-      return NOOP;
-    }
+    const options: string[] = [];
+    do {
+      m.spaces(r);
+      const opt = m.identifier(r);
+      if (!opt) {
+        break;
+      }
+      options.push(opt);
+    } while (!m.complete(r));
 
-    switch (op) {
-      case MessageOpType.DATETIME_INTERVAL:
-      case MessageOpType.CURRENCY:
-      case MessageOpType.DECIMAL:
-      case MessageOpType.DATE:
-      case MessageOpType.TIME:
-      case MessageOpType.DATETIME:
-        return [op, args, style];
-
-      default:
-        return NOOP;
-    }
+    return [MessageOpType.SIMPLE, name, args, options];
   }
 
   /**

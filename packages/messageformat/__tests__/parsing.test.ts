@@ -1,6 +1,15 @@
-import { parseMessagePattern, MessageCode, MessageOpType, StickyMatcher } from '../src/parser';
+import {
+  parseMessagePattern,
+  MessageCode,
+  MessageOpType,
+  PluralChoiceType,
+  StickyMatcher,
+} from '../src/parser';
+import { DecimalConstants } from '@phensley/decimal';
 
-const matcher = (s: string) => new StickyMatcher(s);
+const NAMES = ['decimal', 'number'];
+
+const matcher = (s: string) => new StickyMatcher(s, NAMES);
 
 const parse = (s: string) => parseMessagePattern(s, matcher(s));
 
@@ -18,9 +27,17 @@ test('basic', () => {
     ]]
   ]]);
 
+  c = parse('{0, plural, =0 {is zero} one {is one} other {is other}}');
+  expect(c).toEqual([MessageOpType.PLURAL, [0], 0, 0, [
+    [PluralChoiceType.EXACT, DecimalConstants.ZERO, [MessageOpType.TEXT, 'is zero']],
+    [PluralChoiceType.CATEGORY, 'one', [MessageOpType.TEXT, 'is one']],
+    [PluralChoiceType.CATEGORY, 'other', [MessageOpType.TEXT, 'is other']]
+  ]
+  ]);
+
   c = parse('{0, decimal, percent}');
-  expect(c).toEqual([MessageOpType.DECIMAL, [0], 'percent']);
+  expect(c).toEqual([MessageOpType.SIMPLE, 'decimal', [0], ['percent']]);
 
   c = parse('{0, number, percent}');
-  expect(c).toEqual([MessageOpType.DECIMAL, [0], 'percent']);
+  expect(c).toEqual([MessageOpType.SIMPLE, 'number', [0], ['percent']]);
 });

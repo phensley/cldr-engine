@@ -17,9 +17,9 @@ export type MessageNamedArgs = {
 export type MessageArgs = (MessageArg | MessageNamedArgs)[];
 
 export type MessageFormatFunc =
-  (args: MessageArgs, style: string) => string;
+  (args: MessageArg[], options: string[]) => string;
 
-export type MessageFormatFuncMap = { [op: number]: MessageFormatFunc };
+export type MessageFormatFuncMap = { [name: string]: MessageFormatFunc };
 
 /**
  * Merge positional and named arguments together.
@@ -187,16 +187,12 @@ export class MessageEngine {
         break;
       }
 
-      case MessageOpType.DECIMAL:
-      case MessageOpType.CURRENCY:
-      case MessageOpType.DATE:
-      case MessageOpType.TIME:
-      case MessageOpType.DATETIME:
-      case MessageOpType.DATETIME_INTERVAL: {
-        const op = code[0];
-        const f = this.formatters[op];
-        if (f) {
-          this.buf += f(code[1], code[2]);
+      case MessageOpType.SIMPLE: {
+        const name = code[1];
+        const f = this.formatters[name];
+        if (f !== undefined) {
+          const _args = code[2].map(key => args[key]);
+          this.buf += f(_args, code[3]);
         }
         break;
       }
