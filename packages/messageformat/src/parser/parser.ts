@@ -101,7 +101,10 @@ class MessagePatternParser {
             // Process tag interior
             const child = this.inner({ s: r.s + 1, e: k });
             if (!child) {
-              n.push(textarg(buf, argsub));
+              // If we're not in the outermost scope, push text
+              if (argsub) {
+                n.push(textarg(str.substring(r.s + 1, k), argsub));
+              }
             } else {
               n.push(child);
             }

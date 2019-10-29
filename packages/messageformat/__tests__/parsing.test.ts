@@ -40,4 +40,22 @@ test('basic', () => {
 
   c = parse('{0, number, percent}');
   expect(c).toEqual([MessageOpType.SIMPLE, 'number', [0], ['percent']]);
+
+  c = parse('{0, foobar, percent}');
+  expect(c).toEqual([MessageOpType.NOOP]);
+
+  c = parse('A {0, foobar, percent} B');
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, 'A '],
+    [MessageOpType.TEXT, ' B']
+  ]]);
+
+  c = parse('A {0, select, other {1 foobar baz}} B');
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, 'A '],
+    [MessageOpType.SELECT, [0], [
+      ['other', [MessageOpType.TEXT, '1 foobar baz']]
+    ]],
+    [MessageOpType.TEXT, ' B']
+  ]]);
 });
