@@ -18,6 +18,11 @@ export type MessageNamedArgs = {
 
 export type MessageArgs = (MessageArg | MessageNamedArgs)[];
 
+export type MessageFormatFunc =
+  (args: MessageArgs, style: string) => string;
+
+export type MessageFormatFuncMap = { [op: number]: MessageFormatFunc };
+
 /**
  * Merge positional and named arguments together.
  */
@@ -89,7 +94,10 @@ export class MessageEngine {
 
   private buf: string = '';
 
-  constructor(private language: string, private code: MessageCode) { }
+  constructor(
+    private language: string,
+    private formatters: MessageFormatFuncMap,
+    private code: MessageCode) { }
 
   evaluate(...args: MessageArgs): string {
     const merged = merge(...args);
@@ -101,6 +109,7 @@ export class MessageEngine {
       case MessageOpType.TEXT:
         this.buf += code[1];
         break;
+
       case MessageOpType.BLOCK:
         for (const n of code[1]) {
           this._evaluate(n, args);
@@ -114,7 +123,8 @@ export class MessageEngine {
       }
 
       case MessageOpType.PLURAL: {
-        const arg = args[code[1]];
+        const key = code[1][0];
+        const arg = args[key];
         const offset = code[2];
         const num = asdecimal(arg);
         const ops = (offset ? num.subtract(offset) : num).operands();
@@ -123,14 +133,15 @@ export class MessageEngine {
           pluralRules.ordinal(this.language, ops);
 
         let other: MessageCode | undefined;
-        let found = false;
+        let found = 0;
+
         loop:
         for (const c of code[4]) {
           switch (c[0]) {
             case PluralChoiceType.EXACT:
               if (num.compare(c[1]) === 0) {
                 this._evaluate(c[2], args);
-                found = true;
+                found = 1;
                 break loop;
               }
               break;
@@ -138,13 +149,13 @@ export class MessageEngine {
             case PluralChoiceType.CATEGORY:
               if (c[1] === category) {
                 this._evaluate(c[2], args);
-                found = true;
+                found = 1;
                 break loop;
               } else if (c[1] === 'other') {
                 other = c[2];
               }
               break;
-          }
+        }
 
         }
         if (!found && other) {
@@ -154,16 +165,18 @@ export class MessageEngine {
       }
 
       case MessageOpType.SELECT: {
-        const arg = args[code[1]];
+        const key = code[1][0];
+        const arg = args[key];
         const str = asstring(arg);
 
         let other: MessageCode | undefined;
-        let found = false;
+        let found = 0;
+
         loop:
         for (const c of code[2]) {
           if (c[0] === str) {
             this._evaluate(c[1], args);
-            found = true;
+            found = 1;
             break loop;
           }
           if (c[0] === 'other') {
@@ -172,6 +185,20 @@ export class MessageEngine {
         }
         if (!found && other) {
           this._evaluate(other, args);
+        }
+        break;
+      }
+
+      case MessageOpType.DECIMAL:
+      case MessageOpType.CURRENCY:
+      case MessageOpType.DATE:
+      case MessageOpType.TIME:
+      case MessageOpType.DATETIME:
+      case MessageOpType.DATETIME_INTERVAL: {
+        const op = code[0];
+        const f = this.formatters[op];
+        if (f) {
+          this.buf += f(code[1], code[2]);
         }
         break;
       }

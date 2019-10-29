@@ -45,7 +45,7 @@ export const enum PluralNumberType {
 
 export interface MessagePluralCode {
   [0]: MessageOpType.PLURAL;
-  [1]: Argument;
+  [1]: Argument[];
   [2]: number; // offset
   [3]: PluralNumberType; // cardinal | ordinal
   [4]: PluralChoice[];
@@ -74,7 +74,7 @@ export type PluralChoice = PluralExactChoice | PluralCategoryChoice;
 
 export interface MessageSelectCode {
   [0]: MessageOpType.SELECT;
-  [1]: Argument; // argument to compare
+  [1]: Argument[]; // argument to compare
   [2]: SelectChoice[];
 }
 
@@ -87,25 +87,25 @@ export interface SelectChoice {
 
 export interface MessageDecimalCode {
   [0]: MessageOpType.DECIMAL;
-  [1]: Argument;
+  [1]: Argument[];
   [2]: string;
 }
 
 export interface MessageDateCode {
   [0]: MessageOpType.DATE;
-  [1]: Argument;
+  [1]: Argument[];
   [2]: string;
 }
 
 export interface MessageTimeCode {
   [0]: MessageOpType.TIME;
-  [1]: Argument;
+  [1]: Argument[];
   [2]: string;
 }
 
 export interface MessageDateTimeCode {
   [0]: MessageOpType.DATETIME;
-  [1]: Argument;
+  [1]: Argument[];
   [2]: string;
 }
 
@@ -117,7 +117,7 @@ export interface MessageDateTimeIntervalCode {
 
 export interface MessageCurrencyCode {
   [0]: MessageOpType.CURRENCY;
-  [1]: Argument;
+  [1]: Argument[];
   [2]: string;
 }
 

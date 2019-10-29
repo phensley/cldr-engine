@@ -197,10 +197,10 @@ class MessagePatternParser {
       case 'plural':
       case 'selectordinal':
         const type = name === 'plural' ? PluralNumberType.CARDINAL : PluralNumberType.ORDINAL;
-        return this.plural(args[0], type, m, r);
+        return this.plural(args, type, m, r);
 
       case 'select':
-        return this.select(args[0], m, r);
+        return this.select(args, m, r);
 
       default:
         const op = OPS[name];
@@ -243,7 +243,7 @@ class MessagePatternParser {
   /**
    * Parse a plural instruction.
    */
-  plural(arg: Argument, type: PluralNumberType, m: Matcher, r: Range): MessageCode {
+  plural(args: Argument[], type: PluralNumberType, m: Matcher, r: Range): MessageCode {
 
     // See if we have an offset argument
     const offset = m.pluralOffset(r);
@@ -258,7 +258,7 @@ class MessagePatternParser {
       }
 
       // Parse a tag into a block of instructions
-      const block = this.tag(m, r, arg);
+      const block = this.tag(m, r, args[0]);
       if (!block) {
         return NOOP;
       }
@@ -287,13 +287,13 @@ class MessagePatternParser {
 
     // If we parsed no choices, emit a no-op
     return choices.length ?
-      [MessageOpType.PLURAL, arg, offset, type, choices] : NOOP;
+      [MessageOpType.PLURAL, args, offset, type, choices] : NOOP;
   }
 
   /**
    * Parse a select instruction.
    */
-  select(arg: Argument, m: Matcher, r: Range): MessageCode {
+  select(args: Argument[], m: Matcher, r: Range): MessageCode {
     const choices: SelectChoice[] = [];
     do {
       // Parse an identifier to be used as the select choice
@@ -303,7 +303,7 @@ class MessagePatternParser {
       }
 
       // Parse a tag into a block of instructions
-      const block = this.tag(m, r, arg);
+      const block = this.tag(m, r, args[0]);
       if (!block) {
         return NOOP;
       }
@@ -316,7 +316,7 @@ class MessagePatternParser {
 
     // If we parsed no choices, just emit a no-op
     return choices.length ?
-      [MessageOpType.SELECT, arg, choices] : NOOP;
+      [MessageOpType.SELECT, args, choices] : NOOP;
   }
 
   /**
@@ -332,14 +332,12 @@ class MessagePatternParser {
 
     switch (op) {
       case MessageOpType.DATETIME_INTERVAL:
-        return [op, args, style];
-
       case MessageOpType.CURRENCY:
       case MessageOpType.DECIMAL:
       case MessageOpType.DATE:
       case MessageOpType.TIME:
       case MessageOpType.DATETIME:
-        return [op, args[0], style];
+        return [op, args, style];
 
       default:
         return NOOP;

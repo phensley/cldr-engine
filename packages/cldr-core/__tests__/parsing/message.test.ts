@@ -11,7 +11,7 @@ test('basic', () => {
   expect(c).toEqual([MessageOpType.BLOCK, [
     [MessageOpType.ARG, 'name'],
     [MessageOpType.TEXT, ' '],
-    [MessageOpType.SELECT, 'height', [
+    [MessageOpType.SELECT, ['height'], [
       ['tall', [MessageOpType.TEXT, 'is tall']],
       ['short', [MessageOpType.TEXT, 'is short']],
       ['mid', [MessageOpType.TEXT, 'is of average height']]
@@ -19,8 +19,8 @@ test('basic', () => {
   ]]);
 
   c = parse('{0, decimal, percent}');
-  expect(c).toEqual([MessageOpType.DECIMAL, 0, 'percent']);
+  expect(c).toEqual([MessageOpType.DECIMAL, [0], 'percent']);
 
   c = parse('{0, number, percent}');
-  expect(c).toEqual([MessageOpType.DECIMAL, 0, 'percent']);
+  expect(c).toEqual([MessageOpType.DECIMAL, [0], 'percent']);
 });
