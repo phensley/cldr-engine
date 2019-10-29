@@ -1,20 +1,20 @@
-import { parseMessagePattern, MessageNode, MessageNodeType, StickyMatcher } from '../../src/parsing/message';
+import { parseMessagePattern, MessageCode, MessageOpType, StickyMatcher } from '../../src/parsing/message';
 
 const matcher = (s: string) => new StickyMatcher(s);
 
 const parse = (s: string) => parseMessagePattern(s, matcher(s));
 
 test('basic', () => {
-  let c: MessageNode;
+  let c: MessageCode;
 
   c = parse('{name} {height , select , tall {is tall} short {is short} mid {is of average height}}');
-  expect(c).toEqual([MessageNodeType.BLOCK, [
-    [MessageNodeType.ARG, 'name'],
-    [MessageNodeType.TEXT, ' '],
-    [MessageNodeType.SELECT, 'height', [
-      ['tall', [MessageNodeType.TEXT, 'is tall']],
-      ['short', [MessageNodeType.TEXT, 'is short']],
-      ['mid', [MessageNodeType.TEXT, 'is of average height']]
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.ARG, 'name'],
+    [MessageOpType.TEXT, ' '],
+    [MessageOpType.SELECT, 'height', [
+      ['tall', [MessageOpType.TEXT, 'is tall']],
+      ['short', [MessageOpType.TEXT, 'is short']],
+      ['mid', [MessageOpType.TEXT, 'is of average height']]
     ]]
   ]]);
 });

@@ -1,7 +1,7 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
 import {
-  MessageNode,
-  MessageNodeType,
+  MessageCode,
+  MessageOpType,
   PluralChoiceType,
   PluralNumberType,
 } from '../../parsing/message/types';
@@ -89,31 +89,31 @@ export class MessageEngine {
 
   private buf: string = '';
 
-  constructor(private language: string, private code: MessageNode) { }
+  constructor(private language: string, private code: MessageCode) { }
 
   evaluate(...args: MessageArgs): string {
     const merged = merge(...args);
     return this._evaluate(this.code, merged);
   }
 
-  private _evaluate(code: MessageNode, args: MessageNamedArgs): string {
+  private _evaluate(code: MessageCode, args: MessageNamedArgs): string {
     switch (code[0]) {
-      case MessageNodeType.TEXT:
+      case MessageOpType.TEXT:
         this.buf += code[1];
         break;
-      case MessageNodeType.BLOCK:
+      case MessageOpType.BLOCK:
         for (const n of code[1]) {
           this._evaluate(n, args);
         }
         break;
 
-      case MessageNodeType.ARG: {
+      case MessageOpType.ARG: {
         const arg = args[code[1]];
         this.buf += asstring(arg);
         break;
       }
 
-      case MessageNodeType.PLURAL: {
+      case MessageOpType.PLURAL: {
         const arg = args[code[1]];
         const offset = code[2];
         const num = asdecimal(arg);
@@ -122,7 +122,7 @@ export class MessageEngine {
           pluralRules.cardinal(this.language, ops) :
           pluralRules.ordinal(this.language, ops);
 
-        let other: MessageNode | undefined;
+        let other: MessageCode | undefined;
         let found = false;
         loop:
         for (const c of code[4]) {
@@ -153,7 +153,7 @@ export class MessageEngine {
         break;
       }
 
-      case MessageNodeType.SELECT: {
+      case MessageOpType.SELECT: {
         const arg = args[code[1]];
         const str = asstring(arg);
         for (const c of code[2]) {

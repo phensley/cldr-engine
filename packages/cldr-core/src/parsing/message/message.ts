@@ -3,8 +3,8 @@ import { Decimal, DecimalConstants } from '@phensley/decimal';
 import {
   Argument,
   Chars,
-  MessageNode,
-  MessageNodeType,
+  MessageCode,
+  MessageOpType,
   PluralChoice,
   PluralChoiceType,
   PluralNumberType,
@@ -13,7 +13,7 @@ import {
 
 import { Matcher, Range } from './matcher';
 
-export const parseMessagePattern = (raw: string, matcher: Matcher): MessageNode =>
+export const parseMessagePattern = (raw: string, matcher: Matcher): MessageCode =>
   new MessagePatternParser(raw, matcher).parse();
 
 /**
@@ -48,17 +48,17 @@ class MessagePatternParser {
   constructor(private raw: string, private matcher: Matcher) {
   }
 
-  parse(): MessageNode {
+  parse(): MessageCode {
     return this.outer({ s: 0, e: this.raw.length });
   }
 
-  outer(r: Range, argsub?: Argument): MessageNode {
+  outer(r: Range, argsub?: Argument): MessageCode {
     // this.matcher.debug('outer', r);
 
     const str = this.raw;
 
     // Accumulate parsed instruction nodes
-    const n: MessageNode[] = [];
+    const n: MessageCode[] = [];
 
     // Accumulate plain text characters
     let buf = '';
@@ -147,7 +147,7 @@ class MessagePatternParser {
     return flatten(n);
   }
 
-  inner(r: Range): MessageNode | undefined {
+  inner(r: Range): MessageCode | undefined {
     // this.matcher.debug('inner', r);
 
     const m = this.matcher;
@@ -165,7 +165,7 @@ class MessagePatternParser {
     // Check if we're done..
     if (!m.spaces(r) || m.complete(r)) {
       // We have a simple argument.
-      return [MessageNodeType.ARG, args[0]];
+      return [MessageOpType.ARG, args[0]];
     }
 
     // See if any of our known formatters are present
@@ -194,7 +194,7 @@ class MessagePatternParser {
   /**
    * Parse a nested tag sequence '{' ... '}'
    */
-  tag(m: Matcher, r: Range, argsub?: Argument): MessageNode | undefined {
+  tag(m: Matcher, r: Range, argsub?: Argument): MessageCode | undefined {
     // m.debug('  tag', r);
 
     m.spaces(r);
@@ -219,7 +219,7 @@ class MessagePatternParser {
   /**
    * Parse a plural instruction.
    */
-  plural(arg: Argument, type: PluralNumberType, m: Matcher, r: Range): MessageNode {
+  plural(arg: Argument, type: PluralNumberType, m: Matcher, r: Range): MessageCode {
 
     // See if we have an offset argument
     const offset = m.pluralOffset(r);
@@ -263,13 +263,13 @@ class MessagePatternParser {
 
     // If we parsed no choices, emit a no-op
     return choices.length ?
-      [MessageNodeType.PLURAL, arg, offset, type , choices] : NOOP;
+      [MessageOpType.PLURAL, arg, offset, type , choices] : NOOP;
   }
 
   /**
    * Parse a select instruction.
    */
-  select(arg: Argument, m: Matcher, r: Range): MessageNode {
+  select(arg: Argument, m: Matcher, r: Range): MessageCode {
     const choices: SelectChoice[] = [];
     do {
       // Parse an identifier to be used as the select choice
@@ -292,7 +292,7 @@ class MessagePatternParser {
 
     // If we parsed no choices, just emit a no-op
     return choices.length ?
-      [MessageNodeType.SELECT, arg, choices] : NOOP;
+      [MessageOpType.SELECT, arg, choices] : NOOP;
   }
 
   /**
@@ -350,10 +350,10 @@ class MessagePatternParser {
   }
 }
 
-const flatten = (n: MessageNode[]): MessageNode =>
-  !n.length ? NOOP : n.length === 1 ? n[0] : [MessageNodeType.BLOCK, n];
+const flatten = (n: MessageCode[]): MessageCode =>
+  !n.length ? NOOP : n.length === 1 ? n[0] : [MessageOpType.BLOCK, n];
 
-const text = (s: string): MessageNode => [MessageNodeType.TEXT, s];
+const text = (s: string): MessageCode => [MessageOpType.TEXT, s];
 
 // Save a bit of processing of common exact matches
 const DECIMAL_EXACT: { [n: string]: Decimal } = {
@@ -366,7 +366,7 @@ const DECIMAL_EXACT: { [n: string]: Decimal } = {
  * Emit a text node, performing argument substitution for all occurrences of
  * the '#' character.
  */
-const textarg = (s: string, argsub?: Argument): MessageNode => {
+const textarg = (s: string, argsub?: Argument): MessageCode => {
   let i = 0;
   let j = 0;
 
@@ -386,7 +386,7 @@ const textarg = (s: string, argsub?: Argument): MessageNode => {
   // We need to perform substitution on each occurrence of '#' in the
   // string and return a block.
   const len = s.length;
-  const n: MessageNode[] = [];
+  const n: MessageCode[] = [];
 
   // Loop, substituing an arg node for each occurrence of '#'
   while (j !== -1) {
@@ -396,7 +396,7 @@ const textarg = (s: string, argsub?: Argument): MessageNode => {
     }
 
     // Add a substitution
-    n.push([MessageNodeType.ARG, argsub!]);
+    n.push([MessageOpType.ARG, argsub!]);
 
     // Skip over '#' and search for next occurrence
     i = j + 1;
@@ -411,4 +411,4 @@ const textarg = (s: string, argsub?: Argument): MessageNode => {
   return flatten(n);
 };
 
-const NOOP: MessageNode = [MessageNodeType.NOOP];
+const NOOP: MessageCode = [MessageOpType.NOOP];
