@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.20.0]
+### Added
+ - Added an extensible ICU message formatter parser and evaluation engine in `@phensley/messageformatter` package.
+
+### Fixed/Changed
+ - Split plural rules engine into `@phensley/plurals` package so it can be used standalone.
+
 ## [0.19.5]
 ### Fixed/Changed
  - Upgrade to [tzdb 2019c](https://www.iana.org/time-zones)

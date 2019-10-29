@@ -1,12 +1,12 @@
-import { MessageArgs, MessageEngine } from '../../../src/systems/message';
-import { parseMessagePattern, MessageCode, StickyMatcher } from '../../../src/parsing/message';
+import { MessageArgs, MessageEngine } from '../src/evaluation';
+import { parseMessagePattern, MessageCode, StickyMatcher } from '../src/parser';
 
-const matcher = (s: string) => new StickyMatcher(s);
+const matcher = (s: string) => new StickyMatcher(s, []);
 
 const parse = (s: string) => parseMessagePattern(s, matcher(s));
 
 const evaluate = (lang: string, code: MessageCode, ...args: MessageArgs) =>
-  new MessageEngine(lang, code).evaluate(...args);
+  new MessageEngine(lang, {}, code).evaluate(...args);
 
 test('basic message evaluation', () => {
   let code: MessageCode;
