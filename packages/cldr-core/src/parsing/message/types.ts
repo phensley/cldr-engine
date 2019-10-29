@@ -40,7 +40,7 @@ export interface BlockNode {
 
 // PLURALS
 
-export const enum PluralType {
+export const enum PluralNumberType {
   CARDINAL = 0,
   ORDINAL = 1
 }
@@ -49,7 +49,7 @@ export interface PluralNode {
   [0]: MessageNodeType.PLURAL;
   [1]: Argument;
   [2]: number; // offset
-  [3]: PluralType; // cardinal | ordinal
+  [3]: PluralNumberType; // cardinal | ordinal
   [4]: PluralChoice[];
 }
 
@@ -76,13 +76,13 @@ export type PluralChoice = PluralExactChoice | PluralCategoryChoice;
 
 export interface SelectNode {
   [0]: MessageNodeType.SELECT;
-  [1]: SelectChoice[];
+  [1]: Argument; // argument to compare
+  [2]: SelectChoice[];
 }
 
 export interface SelectChoice {
-  [0]: string;
-  [1]: Argument;
-  [2]: MessageNode;
+  [0]: string; // match value
+  [1]: MessageNode; // body
 }
 
 export type MessageNode =

@@ -57,9 +57,9 @@ export class StickyMatcher implements Matcher {
 
   // Debug helper during development.
   // debug(msg: string, r: Range): void {
-  //   const pos = [r.s, r.e].map(n => n.toString().padStart(4));
-  //   const sub = JSON.stringify(this.str.substring(r.s, r.e));
-  //   console.log(`${msg} [${pos[0]}, ${pos[1]}] => ${sub}`);
+    // const pos = [r.s, r.e].map(n => n.toString().padStart(4));
+    // const sub = JSON.stringify(this.str.substring(r.s, r.e));
+    // console.log(`${msg} [${pos[0]}, ${pos[1]}] => ${sub}`);
   // }
 
   char(r: Range): string {

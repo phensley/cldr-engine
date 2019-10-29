@@ -1,4 +1,5 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
+import { PluralIndex, PluralType } from '@phensley/cldr-schema';
 
 import {
   Argument,
@@ -7,7 +8,7 @@ import {
   MessageNodeType,
   PluralChoice,
   PluralChoiceType,
-  PluralType,
+  PluralNumberType,
   SelectChoice,
 } from './types';
 
@@ -148,7 +149,7 @@ class MessagePatternParser {
   }
 
   inner(r: Range): MessageNode | undefined {
-    // m.debug('inner', r);
+    // this.matcher.debug('inner', r);
 
     const m = this.matcher;
 
@@ -179,7 +180,7 @@ class MessagePatternParser {
     switch (name) {
       case 'plural':
       case 'selectordinal':
-        const type = name === 'plural' ? PluralType.CARDINAL : PluralType.ORDINAL;
+        const type = name === 'plural' ? PluralNumberType.CARDINAL : PluralNumberType.ORDINAL;
         return this.plural(args[0], type, m, r);
 
       case 'select':
@@ -219,7 +220,7 @@ class MessagePatternParser {
   /**
    * Parse a plural instruction.
    */
-  plural(arg: Argument, type: PluralType, m: Matcher, r: Range): MessageNode {
+  plural(arg: Argument, type: PluralNumberType, m: Matcher, r: Range): MessageNode {
 
     // See if we have an offset argument
     const offset = m.pluralOffset(r);
@@ -285,14 +286,14 @@ class MessagePatternParser {
       }
 
       // Append and skip to the next choice
-      choices.push([ident, arg, block]);
+      choices.push([ident, block]);
       m.spaces(r);
 
     } while (!m.complete(r));
 
     // If we parsed no choices, just emit a no-op
     return choices.length ?
-      [MessageNodeType.SELECT, choices] : NOOP;
+      [MessageNodeType.SELECT, arg, choices] : NOOP;
   }
 
   /**
