@@ -1,5 +1,5 @@
 import { Decimal } from '@phensley/decimal';
-import { pluralRules } from '../../../src/systems/plurals';
+import { pluralRules } from '../src';
 
 const operands = (n: string) => new Decimal(n).operands();
 const cardinal = (lang: string, n: string) => pluralRules.cardinal(lang, operands(n));

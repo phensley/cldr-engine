@@ -1,5 +1,5 @@
 import { Decimal } from '@phensley/decimal';
-import { pluralRules } from '../src/systems/plurals';
+import { pluralRules } from '../src';
 
 test('missing rules', () => {
   const op = new Decimal('12345.678').operands();

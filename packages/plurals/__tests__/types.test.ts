@@ -1,4 +1,4 @@
-import { PluralCond, PluralExpr } from '../../../src/systems/plurals/types';
+import { PluralCond, PluralExpr } from '../src/types';
 
 test('parse compact', () => {
   const expr = new PluralExpr('i100=:2,4,17,12:14,93:145');
