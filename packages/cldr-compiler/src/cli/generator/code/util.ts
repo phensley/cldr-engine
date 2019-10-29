@@ -26,6 +26,10 @@ export class Code {
     return new Code(['packages', 'cldr-core', 'src', ...path], source);
   }
 
+  static plurals(path: string[], source: string): Code {
+    return new Code(['packages', 'plurals', 'src', ...path], source);
+  }
+
   static schema(path: string[], source: string): Code {
     return new Code(['packages', 'cldr-schema', 'src', ...path], source);
   }

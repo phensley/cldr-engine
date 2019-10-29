@@ -17,8 +17,8 @@ import { GeneralInternals, Internals } from '../internals';
 import { General } from './api';
 import { PrivateApiImpl } from './private/api';
 import { ContextTransformInfo } from '../common/private';
-import { MessageArgs, MessageEngine } from '../systems/message';
-import { buildMessageMatcher, parseMessagePattern } from '../parsing/message';
+
+import { buildMessageMatcher, parseMessagePattern, MessageArgs, MessageEngine } from '@phensley/messageformat';
 
 const DEFAULT_NAME_OPTIONS: DisplayNameOptions = { context: 'begin-sentence' };
 
@@ -96,7 +96,7 @@ export class GeneralImpl implements General {
   formatMessage(message: string, ...args: MessageArgs): string {
     const m = buildMessageMatcher(message);
     const code = parseMessagePattern(message, m);
-    const engine = new MessageEngine(this._locale.tag.language(), code);
+    const engine = new MessageEngine(this._locale.tag.language(), {}, code);
     return engine.evaluate(...args);
   }
 

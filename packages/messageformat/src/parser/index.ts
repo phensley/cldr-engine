@@ -1,3 +1,3 @@
 export * from './matcher';
-export * from './message';
+export * from './parser';
 export * from './types';

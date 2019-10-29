@@ -49,7 +49,7 @@ import {
 
 import {
   MessageArgs
-} from '../systems/message';
+} from '@phensley/messageformat';
 
 /**
  * Calendar, date and time functions.

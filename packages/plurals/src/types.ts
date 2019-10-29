@@ -1,4 +1,3 @@
-import { PluralType } from '@phensley/cldr-schema';
 import { NumberOperands } from '@phensley/decimal';
 
 // TODO: needs a bit of cleanup.
@@ -9,7 +8,7 @@ export type StringMap = { [x: string]: string };
 export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
 
 // Notation for categories in compact plural rules
-const CATEGORIES: { [x: string]: PluralType } = {
+const CATEGORIES: { [x: string]: string } = {
   'A': 'zero',
   'B': 'one',
   'C': 'two',
@@ -59,15 +58,15 @@ export class PluralRules {
       this.ordinals = new RuleCache(ordinalsRaw);
   }
 
-  cardinal(language: string, operands: NumberOperands): PluralType {
+  cardinal(language: string, operands: NumberOperands): string {
     return this.evaluate(language, operands, this.cardinals);
   }
 
-  ordinal(language: string, operands: NumberOperands): PluralType {
+  ordinal(language: string, operands: NumberOperands): string {
     return this.evaluate(language, operands, this.ordinals);
   }
 
-  private evaluate(language: string, operands: NumberOperands, cache: RuleCache): PluralType {
+  private evaluate(language: string, operands: NumberOperands, cache: RuleCache): string {
     let rule = cache.get(language);
     if (rule === undefined) {
       rule = cache.get('root');
@@ -134,7 +133,7 @@ export class PluralRule {
  */
 export class PluralCond {
 
-  readonly category: PluralType;
+  readonly category: string;
   readonly conditions: number[][];
 
   constructor(raw: string) {

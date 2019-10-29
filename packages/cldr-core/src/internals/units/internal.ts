@@ -1,5 +1,6 @@
 import {
   NumbersSchema,
+  PluralType,
   UnitsSchema,
   UnitInfo,
   UnitType
@@ -10,7 +11,7 @@ import { Internals, NumberRenderer, UnitInternals } from '../internals';
 import { Quantity, UnitFormatOptions } from '../../common';
 import { NumberParams } from '../../common/private';
 import { Bundle } from '../../resource';
-import { pluralRules } from '../../systems/plurals';
+import { pluralRules } from '@phensley/plurals';
 
 export class UnitsInternalImpl implements UnitInternals {
 
@@ -56,7 +57,7 @@ export class UnitsInternalImpl implements UnitInternals {
 
     const { general } = this.internals;
     const info = this.getUnitInfo(options.length || '');
-    let pattern = info.unitPattern.get(bundle, plural0, q.unit);
+    let pattern = info.unitPattern.get(bundle, plural0 as PluralType, q.unit);
     if (!pattern) {
       // Fallback to other. Some locales don't break out a pattern per category
       // when the patterns are identical
@@ -84,7 +85,7 @@ export class UnitsInternalImpl implements UnitInternals {
     if (perunit) {
       // Fetch the denominator's unit pattern, strip off the '{0}'
       // and any surrounding whitespace.
-      let denom = info.unitPattern.get(bundle, plural1, perunit);
+      let denom = info.unitPattern.get(bundle, plural1 as PluralType, perunit);
       denom = denom.replace(/\s*\{0\}\s*/, '');
       const one = renderer.make('per', denom);
 

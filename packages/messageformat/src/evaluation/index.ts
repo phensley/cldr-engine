@@ -1,15 +1,13 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
+import { pluralRules } from '@phensley/plurals';
 import {
   MessageCode,
   MessageOpType,
   PluralChoiceType,
   PluralNumberType,
-} from '../../parsing/message/types';
-import { ZonedDateTime } from '../../common';
-import { CalendarDate } from '../calendars';
-import { pluralRules } from '../plurals';
+} from '../parser';
 
-export type MessageArg = boolean | number | string | Decimal | Date | ZonedDateTime | CalendarDate;
+export type MessageArg = boolean | number | string | Decimal | object;
 
 export type MessageNamedArgs = {
   [s: string]: MessageArg;
@@ -36,10 +34,10 @@ const merge = (...args: (MessageArg | MessageNamedArgs)[]) => {
         merged[i] = arg;
         break;
       case 'object':
-        if (arg instanceof Decimal || arg instanceof Date || arg instanceof CalendarDate) {
+        if (arg instanceof Decimal || arg instanceof Date) {
           merged[i] = arg;
-        } else if (arg['date'] !== undefined) {
-          merged[i] = arg as ZonedDateTime;
+        // } else if (arg['date'] !== undefined) {
+        //   merged[i] = arg as ZonedDateTime;
         } else {
           merged = { ...merged, ...(arg as MessageNamedArgs) };
         }

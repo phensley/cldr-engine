@@ -21,7 +21,7 @@ import {
   NumberInternals,
   NumberRenderer,
 } from '../internals';
-import { pluralRules } from '../systems/plurals';
+import { pluralRules } from '@phensley/plurals';
 
 const DEFAULT_CURRENCY_OPTIONS: CurrencyDisplayNameOptions = { context: 'begin-sentence' };
 

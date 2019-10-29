@@ -10,6 +10,8 @@ PACKAGES="
 @phensley/cldr-schema
 @phensley/cldr-utils
 @phensley/decimal
+@phensley/messageformat
+@phensley/plurals
 @phensley/timezone
 "
 for version in $VERSIONS ; do

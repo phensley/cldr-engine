@@ -1,4 +1,4 @@
-import { parseMessagePattern, MessageCode, MessageOpType, StickyMatcher } from '../../src/parsing/message';
+import { parseMessagePattern, MessageCode, MessageOpType, StickyMatcher } from '../src/parser';
 
 const matcher = (s: string) => new StickyMatcher(s);
 
