@@ -1,5 +1,4 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-import { PluralIndex, PluralType } from '@phensley/cldr-schema';
 
 import {
   Argument,
