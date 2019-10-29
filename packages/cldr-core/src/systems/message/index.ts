@@ -156,11 +156,22 @@ export class MessageEngine {
       case MessageOpType.SELECT: {
         const arg = args[code[1]];
         const str = asstring(arg);
+
+        let other: MessageCode | undefined;
+        let found = false;
+        loop:
         for (const c of code[2]) {
           if (c[0] === str) {
             this._evaluate(c[1], args);
-            break;
+            found = true;
+            break loop;
           }
+          if (c[0] === 'other') {
+            other = c[1];
+          }
+        }
+        if (!found && other) {
+          this._evaluate(other, args);
         }
         break;
       }
