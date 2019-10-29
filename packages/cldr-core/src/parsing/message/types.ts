@@ -8,7 +8,13 @@ export const enum MessageOpType {
   PLURAL = 2,
   BLOCK = 3,
   NOOP = 4,
-  SELECT = 5
+  SELECT = 5,
+  DECIMAL = 6,
+  DATE = 7,
+  TIME = 8,
+  DATETIME = 9,
+  DATETIME_INTERVAL = 10,
+  CURRENCY = 11
 }
 
 export interface MessageNoopCode {
@@ -77,10 +83,54 @@ export interface SelectChoice {
   [1]: MessageCode; // body
 }
 
+// SIMPLE
+
+export interface MessageDecimalCode {
+  [0]: MessageOpType.DECIMAL;
+  [1]: Argument;
+  [2]: string;
+}
+
+export interface MessageDateCode {
+  [0]: MessageOpType.DATE;
+  [1]: Argument;
+  [2]: string;
+}
+
+export interface MessageTimeCode {
+  [0]: MessageOpType.TIME;
+  [1]: Argument;
+  [2]: string;
+}
+
+export interface MessageDateTimeCode {
+  [0]: MessageOpType.DATETIME;
+  [1]: Argument;
+  [2]: string;
+}
+
+export interface MessageDateTimeIntervalCode {
+  [0]: MessageOpType.DATETIME_INTERVAL;
+  [1]: Argument[];
+  [2]: string;
+}
+
+export interface MessageCurrencyCode {
+  [0]: MessageOpType.CURRENCY;
+  [1]: Argument;
+  [2]: string;
+}
+
 export type MessageCode =
   MessageArgsCode |
   MessageTextCode |
   MessagePluralCode |
   MessageBlockCode |
   MessageSelectCode |
+  MessageDecimalCode |
+  MessageDateCode |
+  MessageTimeCode |
+  MessageDateTimeCode |
+  MessageDateTimeIntervalCode |
+  MessageCurrencyCode |
   MessageNoopCode;

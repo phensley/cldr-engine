@@ -22,6 +22,17 @@ const enum Chars {
 export const parseMessagePattern = (raw: string, matcher: Matcher): MessageCode =>
   new MessagePatternParser(raw, matcher).parse();
 
+// Mapping of formatter names to message operation types
+const OPS: { [name: string]: MessageOpType } = {
+  number: MessageOpType.DECIMAL,
+  decimal: MessageOpType.DECIMAL,
+  date: MessageOpType.DATE,
+  time: MessageOpType.TIME,
+  datetime: MessageOpType.DATETIME,
+  money: MessageOpType.CURRENCY,
+  currency: MessageOpType.CURRENCY
+};
+
 /**
  * Hand-implemented parser for ICU message format. Designed to be compact and
  * fast vs. other implementations.
@@ -190,6 +201,13 @@ class MessagePatternParser {
 
       case 'select':
         return this.select(args[0], m, r);
+
+      default:
+        const op = OPS[name];
+        if (op !== undefined) {
+          return this.simple(args, op, m, r);
+        }
+        break;
     }
 
     // This code should never be reached if the 'name' corresponds
@@ -269,7 +287,7 @@ class MessagePatternParser {
 
     // If we parsed no choices, emit a no-op
     return choices.length ?
-      [MessageOpType.PLURAL, arg, offset, type , choices] : NOOP;
+      [MessageOpType.PLURAL, arg, offset, type, choices] : NOOP;
   }
 
   /**
@@ -299,6 +317,33 @@ class MessagePatternParser {
     // If we parsed no choices, just emit a no-op
     return choices.length ?
       [MessageOpType.SELECT, arg, choices] : NOOP;
+  }
+
+  /**
+   * Simple single-argument formatter.
+   */
+  simple(args: Argument[], op: MessageOpType, m: Matcher, r: Range): MessageCode {
+    m.spaces(r);
+
+    const style = m.identifier(r);
+    if (style === undefined) {
+      return NOOP;
+    }
+
+    switch (op) {
+      case MessageOpType.DATETIME_INTERVAL:
+        return [op, args, style];
+
+      case MessageOpType.CURRENCY:
+      case MessageOpType.DECIMAL:
+      case MessageOpType.DATE:
+      case MessageOpType.TIME:
+      case MessageOpType.DATETIME:
+        return [op, args[0], style];
+
+      default:
+        return NOOP;
+    }
   }
 
   /**
