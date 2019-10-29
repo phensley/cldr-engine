@@ -2,7 +2,6 @@ import { Decimal, DecimalConstants } from '@phensley/decimal';
 
 import {
   Argument,
-  Chars,
   MessageCode,
   MessageOpType,
   PluralChoice,
@@ -12,6 +11,13 @@ import {
 } from './types';
 
 import { Matcher, Range } from './matcher';
+
+const enum Chars {
+  LEFT = '{',
+  RIGHT = '}',
+  APOS = "'",
+  POUND = '#'
+}
 
 export const parseMessagePattern = (raw: string, matcher: Matcher): MessageCode =>
   new MessagePatternParser(raw, matcher).parse();

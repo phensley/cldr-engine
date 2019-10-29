@@ -1,5 +1,3 @@
-import { Chars } from './types';
-
 // A range of characters [s, e) (from 's' up to but not including 'e')
 export interface Range {
   s: number;
@@ -88,7 +86,9 @@ export class StickyMatcher implements Matcher {
 
       const n = parseInt(arg, 10);
       args.push(Number.isFinite(n) ? n : arg);
-      if (this.str[r.s] !== Chars.SEMI) {
+
+      // Tuple arguments are separated by a single semicolon
+      if (this.str[r.s] !== ';') {
         break;
       }
       r.s++;
@@ -173,5 +173,5 @@ const compile = hasStickyRegexp ?
  * Constructs the right instance of matcher based on the runtime environment's
  * support of sticky regexp.
  */
-export const buildMatcher = (raw: string) =>
+export const buildMessageMatcher = (raw: string) =>
   hasStickyRegexp ? new StickyMatcher(raw) : new SubstringMatcher(raw);

@@ -1,13 +1,5 @@
 import { Decimal } from '@phensley/decimal';
 
-export const enum Chars {
-  LEFT = '{',
-  RIGHT = '}',
-  APOS = "'",
-  SEMI = ';',
-  POUND = '#'
-}
-
 export type Argument = string | number;
 
 export const enum MessageOpType {

@@ -47,6 +47,10 @@ import {
   TimePeriod
 } from '../systems/calendars';
 
+import {
+  MessageArgs
+} from '../systems/message';
+
 /**
  * Calendar, date and time functions.
  *
@@ -215,6 +219,11 @@ export interface General {
    * measurement system for temperature you must pass in the category 'temperature'.
    */
   measurementSystem(category?: MeasurementCategory): MeasurementSystem;
+
+  /**
+   * Format a message with the given arguments.
+   */
+  formatMessage(message: string, ...args: MessageArgs): string;
 
   /**
    * Format a list of items to string using the given list type.
