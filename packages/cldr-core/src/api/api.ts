@@ -48,7 +48,8 @@ import {
 } from '../systems/calendars';
 
 import {
-  MessageArgs
+  MessageArg,
+  MessageNamedArgs
 } from '@phensley/messageformat';
 
 /**
@@ -223,7 +224,7 @@ export interface General {
   /**
    * Format a message with the given arguments.
    */
-  formatMessage(message: string, ...args: MessageArgs): string;
+  formatMessage(message: string, positional: MessageArg[], named: MessageNamedArgs): string;
 
   /**
    * Format a list of items to string using the given list type.
