@@ -35,8 +35,3 @@ export {
   RoundingModeType,
   StringDecimalFormatter,
 } from '@phensley/decimal';
-
-export {
-  MessageArg,
-  MessageNamedArgs
-} from '@phensley/messageformat';
