@@ -9,6 +9,14 @@ import {
 } from '@phensley/cldr-schema';
 import { Part } from '@phensley/decimal';
 
+// import {
+//   buildMessageMatcher,
+//   parseMessagePattern,
+//   MessageArg,
+//   MessageEngine,
+//   MessageNamedArgs
+// } from '@phensley/messageformat';
+
 import { parseLanguageTag, LanguageResolver, LanguageTag, Locale } from '../locale';
 import { DisplayNameOptions, ListPatternType, MeasurementCategory, MeasurementSystem } from '../common';
 import { Bundle } from '../resource';
@@ -17,8 +25,6 @@ import { GeneralInternals, Internals } from '../internals';
 import { General } from './api';
 import { PrivateApiImpl } from './private/api';
 import { ContextTransformInfo } from '../common/private';
-
-import { buildMessageMatcher, parseMessagePattern, MessageArg, MessageEngine, MessageNamedArgs } from '@phensley/messageformat';
 
 const DEFAULT_NAME_OPTIONS: DisplayNameOptions = { context: 'begin-sentence' };
 
@@ -93,13 +99,13 @@ export class GeneralImpl implements General {
     }
   }
 
-  formatMessage(message: string, positional: MessageArg[], named: MessageNamedArgs): string {
-     // TODO: build custom message formatter for cldr-engine types
-     const m = buildMessageMatcher(message, []);
-    const code = parseMessagePattern(message, m);
-    const engine = new MessageEngine(this._locale.tag.language(), {}, code);
-    return engine.evaluate(positional, named);
-  }
+  // formatMessage(message: string, positional: MessageArg[], named: MessageNamedArgs): string {
+  //    // TODO: build custom message formatter for cldr-engine types
+  //    const m = buildMessageMatcher(message, []);
+  //   const code = parseMessagePattern(message, m);
+  //   const engine = new MessageEngine(this._locale.tag.language(), {}, code);
+  //   return engine.evaluate(positional, named);
+  // }
 
   formatList(items: string[], type?: ListPatternType): string {
     return this.general.formatList(this._bundle, items, type || 'and');

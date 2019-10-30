@@ -9,6 +9,11 @@ import {
 } from '@phensley/cldr-schema';
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 
+// import {
+//   MessageArg,
+//   MessageNamedArgs
+// } from '@phensley/messageformat';
+
 import {
   CalendarFieldsOptions,
   CurrencyDisplayNameOptions,
@@ -46,11 +51,6 @@ import {
   PersianDate,
   TimePeriod
 } from '../systems/calendars';
-
-import {
-  MessageArg,
-  MessageNamedArgs
-} from '@phensley/messageformat';
 
 /**
  * Calendar, date and time functions.
@@ -224,7 +224,7 @@ export interface General {
   /**
    * Format a message with the given arguments.
    */
-  formatMessage(message: string, positional: MessageArg[], named: MessageNamedArgs): string;
+  // formatMessage(message: string, positional: MessageArg[], named: MessageNamedArgs): string;
 
   /**
    * Format a list of items to string using the given list type.

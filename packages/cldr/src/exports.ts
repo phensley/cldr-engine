@@ -51,7 +51,6 @@ export {
   MeasurementCategory,
   MeasurementSystem,
   MessageArg,
-  MessageArgs,
   MessageNamedArgs,
   NumberFormatErrorType,
   NumberFormatOptions,

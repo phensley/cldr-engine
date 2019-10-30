@@ -38,6 +38,5 @@ export {
 
 export {
   MessageArg,
-  MessageArgs,
   MessageNamedArgs
 } from '@phensley/messageformat';
