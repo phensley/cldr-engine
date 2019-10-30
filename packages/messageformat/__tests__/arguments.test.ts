@@ -14,7 +14,9 @@ test('decimals', () => {
   expect(asdecimal(true)).toEqual(new Decimal(1));
   expect(asdecimal(1.4)).toEqual(new Decimal('1.4'));
   expect(asdecimal('1.4')).toEqual(new Decimal('1.4'));
+  expect(asdecimal(new Decimal('3.14159'))).toEqual(new Decimal('3.14159'));
   expect(asdecimal('infinity')).toEqual(DecimalConstants.POSITIVE_INFINITY);
   expect(asdecimal('abc')).toEqual(DecimalConstants.NAN);
   expect(asdecimal({ foo: 'foo', bar: 'bar' })).toEqual(DecimalConstants.NAN);
+  expect(asdecimal(new Date())).toEqual(DecimalConstants.NAN);
 });

@@ -61,7 +61,7 @@ export const asdecimal = (arg: MessageArg): Decimal => {
       if (arg instanceof Decimal) {
         return arg;
       }
-      return DecimalConstants.NAN;
+      break;
   }
-  return DecimalConstants.ZERO;
+  return DecimalConstants.NAN;
 };

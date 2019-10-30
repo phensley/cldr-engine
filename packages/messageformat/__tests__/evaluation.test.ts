@@ -33,8 +33,10 @@ test('basic message evaluation', () => {
   expect(evaluate('en', c, [], { gender: 'zzz' })).toEqual('unknown quux');
 });
 
-test('plural offset', () => {
-  const c = parse('==> {0, plural, offset:1 ' +
+test('plurals', () => {
+  let c: MessageCode;
+
+  c = parse('==> {0, plural, offset:1 ' +
   '     =0 {Be the first to like this}' +
   '     =1 {You liked this}' +
   '    one {You and someone else liked this}' +
@@ -46,6 +48,10 @@ test('plural offset', () => {
   expect(evaluate('en', c, [2])).toEqual('==> You and someone else liked this!');
   expect(evaluate('en', c, [3])).toEqual('==> You and 2 others liked this!');
   expect(evaluate('en', c, [4])).toEqual('==> You and 3 others liked this!');
+
+  c = parse('{0 plural =0 {is zero} other {do not know}}');
+  expect(evaluate('en', c, [0])).toEqual('is zero');
+  expect(evaluate('en', c, [1])).toEqual('do not know');
 });
 
 test('blocks', () => {
