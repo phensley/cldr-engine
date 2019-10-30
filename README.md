@@ -35,6 +35,7 @@ yarn add @phensley/cldr
 * [360 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#availablelocales)
 * [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles.html) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
 * [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher.html) for improved locale fallback
+* [Fast, compact, and extensible ICU message formatting](packages/messageformat/README.md)
 * Both string and [parts formatting](https://phensley.github.io/cldr-engine/docs/en/api-cldr-numbers.html#formatdecimaltoparts) for flexible markup styling
 * [Date time](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#formatdate), [date interval](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#formatdateinterval), and [relative time](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#formatrelativetime) formatting
 * Full TZDB and CLDR [timezone support](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars.html#resolvetimezoneid) covering the full range of TZDB untils, resolving deprecated timezone identifiers and aliases
