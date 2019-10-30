@@ -1,15 +1,17 @@
 import {
   parseMessagePattern,
+  stickyRegexp,
   MessageCode,
   MessageOpType,
   PluralChoiceType,
+  PluralNumberType,
   StickyMatcher,
 } from '../src/parser';
-import { DecimalConstants } from '@phensley/decimal';
+import { Decimal, DecimalConstants } from '@phensley/decimal';
 
 const NAMES = ['decimal', 'number'];
 
-const matcher = (s: string) => new StickyMatcher(s, NAMES);
+const matcher = (s: string) => new StickyMatcher(s, NAMES, stickyRegexp);
 
 const parse = (s: string) => parseMessagePattern(s, matcher(s));
 
@@ -27,13 +29,13 @@ test('basic', () => {
     ]]
   ]]);
 
-  c = parse('{0, plural, =0 {is zero} one {is one} other {is other}}');
+  c = parse('{0, plural, =0 {is zero} =53 {is fifty-three} one {is one} other {is other}}');
   expect(c).toEqual([MessageOpType.PLURAL, [0], 0, 0, [
     [PluralChoiceType.EXACT, DecimalConstants.ZERO, [MessageOpType.TEXT, 'is zero']],
+    [PluralChoiceType.EXACT, new Decimal(53), [MessageOpType.TEXT, 'is fifty-three']],
     [PluralChoiceType.CATEGORY, 'one', [MessageOpType.TEXT, 'is one']],
     [PluralChoiceType.CATEGORY, 'other', [MessageOpType.TEXT, 'is other']]
-  ]
-  ]);
+  ]]);
 
   c = parse('{0, decimal, percent}');
   expect(c).toEqual([MessageOpType.SIMPLE, 'decimal', [0], ['percent']]);
@@ -57,5 +59,67 @@ test('basic', () => {
       ['other', [MessageOpType.TEXT, '1 foobar baz']]
     ]],
     [MessageOpType.TEXT, ' B']
+  ]]);
+});
+
+test('unclosed', () => {
+  let c: MessageCode;
+
+  c = parse('hello {0 plural one');
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, 'hello '],
+    [MessageOpType.TEXT, '{0 plural one']
+  ]]);
+});
+
+test('escapes', () => {
+  let c: MessageCode;
+
+  // '{' '}' wrapped text in the outermost scope that is not a valid tag
+  // is dropped.
+  c = parse("'{' 0 plural one {foo bar} '}'");
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, '{'],
+    [MessageOpType.TEXT, ' 0 plural one '],
+    [MessageOpType.TEXT, ' }']
+  ]]);
+
+  c = parse("'{'0 plural one {1 select baz {hi there}} '}'");
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, '{'],
+    [MessageOpType.TEXT, '0 plural one '],
+    [MessageOpType.SELECT, [1], [
+      ['baz', [MessageOpType.TEXT, 'hi there']]
+    ]],
+    [MessageOpType.TEXT, ' }']
+  ]]);
+
+  c = parse('leader {0 select foo {1 plural}} trailer');
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, 'leader '],
+    [MessageOpType.SELECT, [0], [
+      ['foo', [MessageOpType.TEXT, '1 plural']]
+    ]],
+    [MessageOpType.TEXT, ' trailer']
+  ]]);
+});
+
+test('arg substitution', () => {
+  let c: MessageCode;
+
+  c = parse('{0 plural one {# = # item} few {#} other {# items}}');
+  expect(c).toEqual([MessageOpType.PLURAL, [0], 0, PluralNumberType.CARDINAL, [
+    [PluralChoiceType.CATEGORY, 'one', [MessageOpType.BLOCK, [
+        [MessageOpType.ARG, 0],
+        [MessageOpType.TEXT, ' = '],
+        [MessageOpType.ARG, 0],
+        [MessageOpType.TEXT, ' item']
+      ]]
+    ],
+    [PluralChoiceType.CATEGORY, 'few', [MessageOpType.ARG, 0]],
+    [PluralChoiceType.CATEGORY, 'other', [MessageOpType.BLOCK, [
+      [MessageOpType.ARG, 0],
+      [MessageOpType.TEXT, ' items']
+    ]]]
   ]]);
 });

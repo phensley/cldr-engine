@@ -1,7 +1,7 @@
 import { MessageArgs, MessageEngine } from '../src/evaluation';
-import { parseMessagePattern, MessageCode, StickyMatcher } from '../src/parser';
+import { parseMessagePattern, stickyRegexp, MessageCode, StickyMatcher } from '../src/parser';
 
-const matcher = (s: string) => new StickyMatcher(s, []);
+const matcher = (s: string) => new StickyMatcher(s, [], stickyRegexp);
 
 const parse = (s: string) => parseMessagePattern(s, matcher(s));
 
