@@ -1,3 +1,4 @@
+import { Decimal, DecimalConstants } from '@phensley/decimal';
 import {
   parseMessagePattern,
   stickyRegexp,
@@ -6,8 +7,7 @@ import {
   PluralChoiceType,
   PluralNumberType,
   StickyMatcher,
-} from '../src/parser';
-import { Decimal, DecimalConstants } from '@phensley/decimal';
+} from '../src';
 
 const NAMES = ['decimal', 'number'];
 

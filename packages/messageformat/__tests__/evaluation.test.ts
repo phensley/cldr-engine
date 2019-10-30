@@ -1,6 +1,12 @@
-import { MessageArg, MessageNamedArgs } from '../src/evaluation/args';
-import { MessageEngine } from '../src/evaluation';
-import { parseMessagePattern, stickyRegexp, MessageCode, StickyMatcher } from '../src/parser';
+import {
+  parseMessagePattern,
+  stickyRegexp,
+  MessageArg,
+  MessageCode,
+  MessageEngine,
+  MessageNamedArgs,
+  StickyMatcher
+} from '../src';
 
 const CUSTOM = {
   foo: (args: MessageArg[], _options: string[]) => `foo args ${JSON.stringify(args)}`,
@@ -37,11 +43,11 @@ test('plurals', () => {
   let c: MessageCode;
 
   c = parse('==> {0, plural, offset:1 ' +
-  '     =0 {Be the first to like this}' +
-  '     =1 {You liked this}' +
-  '    one {You and someone else liked this}' +
-  '  other {You and # others liked this}' +
-  '}!');
+    '     =0 {Be the first to like this}' +
+    '     =1 {You liked this}' +
+    '    one {You and someone else liked this}' +
+    '  other {You and # others liked this}' +
+    '}!');
 
   expect(evaluate('en', c, [0])).toEqual('==> Be the first to like this!');
   expect(evaluate('en', c, [1])).toEqual('==> You liked this!');

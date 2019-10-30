@@ -2,7 +2,7 @@ import {
   buildMessageMatcher,
   Matcher,
   Range,
-} from '../src/parser';
+} from '../src';
 
 const build = (type: string, formatters: string[]) =>
   (input: string): [Matcher, Range] =>

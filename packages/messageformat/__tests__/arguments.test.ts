@@ -1,5 +1,5 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-import { asdecimal, asstring } from '../src/evaluation/args';
+import { asdecimal, asstring } from '../src';
 
 test('strings', () => {
   expect(asstring(false)).toEqual('false');

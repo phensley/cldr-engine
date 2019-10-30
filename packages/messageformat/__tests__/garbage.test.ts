@@ -2,7 +2,7 @@ import {
   parseMessagePattern,
   stickyRegexp,
   StickyMatcher,
-} from '../src/parser';
+} from '../src';
 
 const NAMES = ['decimal', 'unit', 'currency', 'datetime', 'datetime-interval', 'number'];
 
