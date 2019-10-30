@@ -24,7 +24,7 @@ let msg: string;
 
 // Example 1 - plural cardinals
 
-msg =   '{count, plural, offset:1 =0 {Be the first to like this} =1 {You liked this} one {You and someone else liked this} other {You and # others liked this}}';
+msg = '{count, plural, offset:1 =0 {Be the first to like this} =1 {You liked this} one {You and someone else liked this} other {You and # others liked this}}';
 
 format(msg, [], { count: 0 });
 format(msg, [], { count: 1 });
