@@ -12,8 +12,10 @@ export type MessageFormatFunc =
 
 export type MessageFormatFuncMap = { [name: string]: MessageFormatFunc };
 
-const get = (key: number | string, args: MessageArgs): MessageArg =>
-  args.named[key] || (typeof key === 'number' ? args.positional[key] : undefined);
+const get = (key: number | string, args: MessageArgs): MessageArg => {
+  const res: MessageArg = args.named[key];
+  return res !== undefined ? res : (typeof key === 'number' ? args.positional[key] : undefined);
+};
 
 /**
  * Evaluates a message format against a set of arguments, producing a string.
