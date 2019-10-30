@@ -32,7 +32,7 @@ yarn add @phensley/cldr
 ## Features
 
 * Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 36.0.0](http://cldr.unicode.org/index/downloads/cldr-36)
-* [360 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#availablelocales)
+* [370 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#availablelocales)
 * [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles.html) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
 * [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework.html#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher.html) for improved locale fallback
 * [Fast, compact, and extensible ICU message formatting](packages/messageformat/README.md)
@@ -64,7 +64,7 @@ yarn add @phensley/cldr
 
 ## Rationale
 
-I needed a library that included as much CLDR functionality as possible, while still meeting all of my requirements for performance, static and runtime code size, simplicity of integration, etc.
+I needed a library that included as much CLDR functionality as possible, while still meeting all of my requirements for performance, static and runtime code size, simplicity of integration, etc
 
 I'm gradually [comparing this library with current alternatives](https://github.com/phensley/cldr-bakeoff) here.
 
