@@ -110,15 +110,15 @@ test('arg substitution', () => {
   c = parse('{0 plural one {# = # item} few {#} other {# items}}');
   expect(c).toEqual([MessageOpType.PLURAL, [0], 0, PluralNumberType.CARDINAL, [
     [PluralChoiceType.CATEGORY, 'one', [MessageOpType.BLOCK, [
-        [MessageOpType.ARG, 0],
+        [MessageOpType.ARGSUB],
         [MessageOpType.TEXT, ' = '],
-        [MessageOpType.ARG, 0],
+        [MessageOpType.ARGSUB],
         [MessageOpType.TEXT, ' item']
       ]]
     ],
-    [PluralChoiceType.CATEGORY, 'few', [MessageOpType.ARG, 0]],
+    [PluralChoiceType.CATEGORY, 'few', [MessageOpType.ARGSUB]],
     [PluralChoiceType.CATEGORY, 'other', [MessageOpType.BLOCK, [
-      [MessageOpType.ARG, 0],
+      [MessageOpType.ARGSUB],
       [MessageOpType.TEXT, ' items']
     ]]]
   ]]);

@@ -414,8 +414,8 @@ const textarg = (s: string, argsub?: Argument): MessageCode => {
       n.push(text(s.substring(i, j)));
     }
 
-    // Add a substitution
-    n.push([MessageOpType.ARG, argsub!]);
+    // Add a substitution op
+    n.push([MessageOpType.ARGSUB]);
 
     // Skip over '#' and search for next occurrence
     i = j + 1;

@@ -1,5 +1,5 @@
-import { Decimal, DecimalConstants } from '@phensley/decimal';
 import { pluralRules } from '@phensley/plurals';
+import { asdecimal, asstring, MessageArg, MessageArgs, MessageNamedArgs } from './args';
 import {
   MessageCode,
   MessageOpType,
@@ -7,83 +7,13 @@ import {
   PluralNumberType,
 } from '../parser';
 
-export type MessageArg = boolean | number | string | Decimal | object;
-
-export type MessageNamedArgs = {
-  [s: string]: MessageArg;
-  [n: number]: MessageArg;
-};
-
-export type MessageArgs = (MessageArg | MessageNamedArgs)[];
-
 export type MessageFormatFunc =
   (args: MessageArg[], options: string[]) => string;
 
 export type MessageFormatFuncMap = { [name: string]: MessageFormatFunc };
 
-/**
- * Merge positional and named arguments together.
- */
-const merge = (...args: (MessageArg | MessageNamedArgs)[]) => {
-  let merged: MessageNamedArgs = {};
-  for (let i = 0; i < args.length; i++) {
-    const arg = args[i];
-    switch (typeof arg) {
-      case 'number':
-      case 'string':
-        merged[i] = arg;
-        break;
-      case 'object':
-        if (arg instanceof Decimal || arg instanceof Date) {
-          merged[i] = arg;
-        // } else if (arg['date'] !== undefined) {
-        //   merged[i] = arg as ZonedDateTime;
-        } else {
-          merged = { ...merged, ...(arg as MessageNamedArgs) };
-        }
-        break;
-    }
-  }
-  return merged;
-};
-
-/**
- * Select always compares its argument as a string.
- */
-const asstring = (arg: MessageArg) => {
-  switch (typeof arg) {
-    case 'string':
-      return arg;
-    case 'number':
-    case 'boolean':
-      return arg.toString();
-    case 'object':
-      if (arg instanceof Decimal) {
-        return arg.toString();
-      }
-      break;
-  }
-  return '';
-};
-
-/**
- * Plural computes the plural category of its argument.
- */
-const asdecimal = (arg: MessageArg) => {
-  switch (typeof arg) {
-    case 'string':
-    case 'number':
-      return new Decimal(arg);
-    case 'boolean':
-      return arg ? DecimalConstants.ONE : DecimalConstants.ZERO;
-    case 'object':
-      if (arg instanceof Decimal) {
-        return arg;
-      }
-      break;
-  }
-  return DecimalConstants.ZERO;
-};
+const get = (key: number | string, args: MessageArgs): MessageArg =>
+  args.named[key] || (typeof key === 'number' ? args.positional[key] : undefined);
 
 /**
  * Evaluates a message format against a set of arguments, producing a string.
@@ -97,12 +27,11 @@ export class MessageEngine {
     private formatters: MessageFormatFuncMap,
     private code: MessageCode) { }
 
-  evaluate(...args: MessageArgs): string {
-    const merged = merge(...args);
-    return this._evaluate(this.code, merged);
+  evaluate(positional: MessageArg[], named: MessageNamedArgs = {}): string {
+    return this._evaluate(this.code, { positional, named });
   }
 
-  private _evaluate(code: MessageCode, args: MessageNamedArgs): string {
+  private _evaluate(code: MessageCode, args: MessageArgs, argsub?: MessageArg): string {
     switch (code[0]) {
       case MessageOpType.TEXT:
         this.buf += code[1];
@@ -110,22 +39,29 @@ export class MessageEngine {
 
       case MessageOpType.BLOCK:
         for (const n of code[1]) {
-          this._evaluate(n, args);
+          this._evaluate(n, args, argsub);
         }
         break;
 
       case MessageOpType.ARG: {
-        const arg = args[code[1]];
+        const arg = get(code[1], args);
         this.buf += asstring(arg);
         break;
       }
 
+      case MessageOpType.ARGSUB: {
+        if (argsub !== undefined) {
+          this.buf += asstring(argsub);
+        }
+        break;
+      }
+
       case MessageOpType.PLURAL: {
-        const key = code[1][0];
-        const arg = args[key];
+        const arg = get(code[1][0], args);
         const offset = code[2];
         const num = asdecimal(arg);
-        const ops = (offset ? num.subtract(offset) : num).operands();
+        argsub = offset ? num.subtract(offset) : num;
+        const ops = argsub.operands();
         const category = code[3] === PluralNumberType.CARDINAL ?
           pluralRules.cardinal(this.language, ops) :
           pluralRules.ordinal(this.language, ops);
@@ -138,7 +74,7 @@ export class MessageEngine {
           switch (c[0]) {
             case PluralChoiceType.EXACT:
               if (num.compare(c[1]) === 0) {
-                this._evaluate(c[2], args);
+                this._evaluate(c[2], args, num);
                 found = 1;
                 break loop;
               }
@@ -146,25 +82,28 @@ export class MessageEngine {
 
             case PluralChoiceType.CATEGORY:
               if (c[1] === category) {
-                this._evaluate(c[2], args);
+                this._evaluate(c[2], args, argsub);
                 found = 1;
                 break loop;
+
               } else if (c[1] === 'other') {
+                // Capture the 'other' as a fallback
                 other = c[2];
               }
               break;
-        }
+          }
 
         }
+
+        // If no match and 'other' exists, emit that value.
         if (!found && other) {
-          this._evaluate(other, args);
+          this._evaluate(other, args, argsub);
         }
         break;
       }
 
       case MessageOpType.SELECT: {
-        const key = code[1][0];
-        const arg = args[key];
+        const arg = get(code[1][0], args);
         const str = asstring(arg);
 
         let other: MessageCode | undefined;
@@ -173,25 +112,30 @@ export class MessageEngine {
         loop:
         for (const c of code[2]) {
           if (c[0] === str) {
-            this._evaluate(c[1], args);
+            this._evaluate(c[1], args, arg);
             found = 1;
             break loop;
           }
+
           if (c[0] === 'other') {
+            // Capture the 'other' as a fallback
             other = c[1];
           }
         }
+
+        // If no match and 'other' exists, emit that value.
         if (!found && other) {
-          this._evaluate(other, args);
+          this._evaluate(other, args, arg);
         }
         break;
       }
 
       case MessageOpType.SIMPLE: {
+        // One or more arguments and zero or more options
         const name = code[1];
         const f = this.formatters[name];
         if (f !== undefined) {
-          const _args = code[2].map(key => args[key]);
+          const _args = code[2].map(k => get(k, args));
           this.buf += f(_args, code[3]);
         }
         break;

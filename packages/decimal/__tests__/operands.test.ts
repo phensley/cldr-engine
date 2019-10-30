@@ -1,8 +1,18 @@
-import { Decimal } from '../src';
+import { Decimal, DecimalConstants } from '../src';
 
 const parse = (s: string) => new Decimal(s);
 
 test('operands', () => {
+
+  expect(DecimalConstants.NAN.operands()).toEqual(
+    { n: 0, i: 0, v: 0, w: 0, f: 0, t: 0, neg: false, dec: false });
+
+  expect(DecimalConstants.POSITIVE_INFINITY.operands()).toEqual(
+    { n: 0, i: 0, v: 0, w: 0, f: 0, t: 0, neg: false, dec: false });
+
+  expect(DecimalConstants.NEGATIVE_INFINITY.operands()).toEqual(
+    { n: 0, i: 0, v: 0, w: 0, f: 0, t: 0, neg: true, dec: false });
+
   expect(parse('0').operands()).toEqual(
     { n: 0, i: 0, v: 0, w: 0, f: 0, t: 0, neg: false, dec: false }
   );

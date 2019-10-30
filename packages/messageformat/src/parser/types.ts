@@ -10,15 +10,20 @@ export const enum MessageOpType {
   BLOCK = 4,
   NOOP = 5,
   SIMPLE = 6,
+  ARGSUB = 7
 }
 
 export interface MessageNoopCode {
   [0]: MessageOpType.NOOP;
 }
 
-export interface MessageArgsCode {
+export interface MessageArgCode {
   [0]: MessageOpType.ARG;
   [1]: Argument;
+}
+
+export interface MessageArgSubCode {
+  [0]: MessageOpType.ARGSUB;
 }
 
 export interface MessageTextCode {
@@ -90,10 +95,11 @@ export interface MessageSimpleCode {
 }
 
 export type MessageCode =
-  MessageArgsCode |
+  MessageArgCode |
   MessageTextCode |
   MessagePluralCode |
   MessageBlockCode |
   MessageSelectCode |
   MessageSimpleCode |
+  MessageArgSubCode |
   MessageNoopCode;
