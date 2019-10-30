@@ -22,17 +22,42 @@ const FORMATTERS = {
 
 const FORMATTER_NAMES = Object.keys(FORMATTERS);
 
-const format = (message: string, positional: MessageArg[], named: MessageNamedArgs = {}) => {
+const parse = (message: string) => {
   const matcher = buildMessageMatcher(message, FORMATTER_NAMES);
-  const code = parseMessagePattern(message, matcher);
-  const engine = new MessageEngine('en', FORMATTERS, code);
+  return parseMessagePattern(message, matcher);
+};
+
+const dump = (message: string) =>
+  console.log(JSON.stringify(parse(message)));
+
+const format = (message: string, positional: MessageArg[], named: MessageNamedArgs = {}) => {
+  const engine = new MessageEngine('en', FORMATTERS, parse(message));
   console.log(engine.evaluate(positional, named));
 };
 
 let msg: string;
 ```
 
-#### Example 1 - plural cardinals
+#### Example 1 - message parsing (cache for repeated use)
+
+Messages can be pre-parsed and embedded into source code, JSON, or YAML files, or parsed and cached at runtime.
+
+```typescript
+dump('{0 select, male {his} female {her} other {their}} {item}');
+```
+```
+[4,[[3,[0],[["male",[0,"his"]],["female",[0,"her"]],["other",[0,"their"]]]],[0," "],[1,"item"]]]
+```
+
+```typescript
+dump('{word} uppercase = {word foo upper} lowercase = {word foo lower}');
+```
+
+```
+[4,[[1,"word"],[0," uppercase = "],[6,"foo",["word"],["upper"]],[0," lowercase = "],[6,"foo",["word"],["lower"]]]]
+```
+
+#### Example 2 - plural cardinals
 
 ```typescript
 msg = '{count, plural, offset:1 =0 {Be the first to like this} =1 {You liked this} ' +
@@ -51,7 +76,7 @@ You and someone else liked this
 You and 2 others liked this
 ```
 
-#### Example 2 - select
+#### Example 3 - select
 
 ```typescript
 msg = 'Get {0, select, male {his} female {her} other {their}} {item}';
@@ -67,7 +92,7 @@ Get her jacket
 Get his parka
 ```
 
-#### Example 3 - plural ordinals and select
+#### Example 4 - plural ordinals and select
 
 
 ```typescript
@@ -98,7 +123,7 @@ George tied for 4th place
 Larry came in 5th place
 ```
 
-#### Example 4 - custom formatter
+#### Example 5 - custom formatter
 
 ```typescript
 msg = '{word} uppercase = {word foo upper} lowercase = {word foo lower}';
