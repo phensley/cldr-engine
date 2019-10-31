@@ -1,4 +1,6 @@
 export {
+  buildMessageMatcher,
+  parseMessagePattern,
   BuddhistDate,
   Bundle,
   Calendars,
@@ -50,6 +52,12 @@ export {
   MathContext,
   MeasurementCategory,
   MeasurementSystem,
+  MessageArg,
+  MessageCode,
+  MessageEngine,
+  MessageFormatFunc,
+  MessageFormatFuncMap,
+  MessageNamedArgs,
   NumberFormatErrorType,
   NumberFormatOptions,
   NumberFormatStyleType,
@@ -79,14 +87,3 @@ export {
   UnitType,
   ZonedDateTime
 } from '@phensley/cldr-core';
-
-export {
-  buildMessageMatcher,
-  parseMessagePattern,
-  MessageArg,
-  MessageCode,
-  MessageEngine,
-  MessageFormatFunc,
-  MessageFormatFuncMap,
-  MessageNamedArgs
-} from '@phensley/messageformat';
