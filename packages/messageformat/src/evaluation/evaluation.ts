@@ -1,3 +1,4 @@
+import { Decimal, DecimalConstants } from '@phensley/decimal';
 import { pluralRules } from '@phensley/plurals';
 import { asdecimal, asstring, MessageArg, MessageArgs, MessageNamedArgs } from './args';
 import {
@@ -15,6 +16,13 @@ export type MessageFormatFuncMap = { [name: string]: MessageFormatFunc };
 const get = (key: number | string, args: MessageArgs): MessageArg => {
   const res: MessageArg = args.named[key];
   return res !== undefined ? res : (typeof key === 'number' ? args.positional[key] : undefined);
+};
+
+// Save a bit of processing of common exact matches
+const DECIMAL_EXACT: { [n: string]: Decimal } = {
+  0: DecimalConstants.ZERO,
+  1: DecimalConstants.ONE,
+  2: DecimalConstants.TWO
 };
 
 /**
@@ -75,7 +83,11 @@ export class MessageEngine {
         for (const c of code[4]) {
           switch (c[0]) {
             case PluralChoiceType.EXACT:
-              if (num.compare(c[1]) === 0) {
+              let v = DECIMAL_EXACT[c[1]];
+              if (v === undefined) {
+                v = asdecimal(c[1]);
+              }
+              if (num.compare(v) === 0) {
                 this._evaluate(c[2], args, num);
                 found = 1;
                 break loop;

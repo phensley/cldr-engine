@@ -1,5 +1,3 @@
-import { Decimal, DecimalConstants } from '@phensley/decimal';
-
 import {
   Argument,
   MessageCode,
@@ -253,14 +251,8 @@ class MessagePatternParser {
       // Determine which choice node to construct
       let node: PluralChoice;
       if (choice[0] === '=') {
-
-        // Conver the exact match into a Decimal type
         const num = choice.substring(1);
-        let value = DECIMAL_EXACT[num];
-        if (!value) {
-          value = new Decimal(num);
-        }
-        node = [PluralChoiceType.EXACT, value, block];
+        node = [PluralChoiceType.EXACT, num, block];
       } else {
 
         // Plural category match
@@ -373,13 +365,6 @@ const flatten = (n: MessageCode[]): MessageCode =>
   !n.length ? NOOP : n.length === 1 ? n[0] : [MessageOpType.BLOCK, n];
 
 const text = (s: string): MessageCode => [MessageOpType.TEXT, s];
-
-// Save a bit of processing of common exact matches
-const DECIMAL_EXACT: { [n: string]: Decimal } = {
-  0: DecimalConstants.ZERO,
-  1: DecimalConstants.ONE,
-  2: DecimalConstants.TWO
-};
 
 /**
  * Emit a text node, performing argument substitution for all occurrences of

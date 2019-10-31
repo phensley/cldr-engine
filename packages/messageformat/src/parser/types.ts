@@ -1,5 +1,3 @@
-import { Decimal } from '@phensley/decimal';
-
 export type Argument = string | number;
 
 export const enum MessageOpType {
@@ -58,7 +56,7 @@ export const enum PluralChoiceType {
 
 export interface PluralExactChoice {
   [0]: PluralChoiceType.EXACT;
-  [1]: Decimal;
+  [1]: string;
   [2]: MessageCode;
 }
 

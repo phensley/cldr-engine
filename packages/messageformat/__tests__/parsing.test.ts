@@ -1,4 +1,3 @@
-import { Decimal, DecimalConstants } from '@phensley/decimal';
 import {
   parseMessagePattern,
   stickyRegexp,
@@ -31,8 +30,8 @@ test('basic', () => {
 
   c = parse('{0, plural, =0 {is zero} =53 {is fifty-three} one {is one} other {is other}}');
   expect(c).toEqual([MessageOpType.PLURAL, [0], 0, 0, [
-    [PluralChoiceType.EXACT, DecimalConstants.ZERO, [MessageOpType.TEXT, 'is zero']],
-    [PluralChoiceType.EXACT, new Decimal(53), [MessageOpType.TEXT, 'is fifty-three']],
+    [PluralChoiceType.EXACT, '0', [MessageOpType.TEXT, 'is zero']],
+    [PluralChoiceType.EXACT, '53', [MessageOpType.TEXT, 'is fifty-three']],
     [PluralChoiceType.CATEGORY, 'one', [MessageOpType.TEXT, 'is one']],
     [PluralChoiceType.CATEGORY, 'other', [MessageOpType.TEXT, 'is other']]
   ]]);
