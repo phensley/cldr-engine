@@ -60,9 +60,7 @@ export class MessageEngine {
       }
 
       case MessageOpType.ARGSUB: {
-        if (argsub !== undefined) {
-          this.buf += asstring(argsub);
-        }
+        this.buf += asstring(argsub);
         break;
       }
 

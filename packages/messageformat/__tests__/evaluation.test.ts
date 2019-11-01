@@ -19,7 +19,7 @@ const matcher = (s: string) => new StickyMatcher(s, CUSTOM_NAMES, stickyRegexp);
 
 const parse = (s: string) => parseMessagePattern(s, matcher(s));
 
-const evaluate = (lang: string, code: MessageCode, positional: MessageArg[], named: MessageNamedArgs = {}) =>
+const evaluate = (lang: string, code: MessageCode, positional: MessageArg[], named?: MessageNamedArgs) =>
   new MessageEngine(lang, CUSTOM, code).evaluate(positional, named);
 
 test('basic message evaluation', () => {
@@ -37,6 +37,16 @@ test('basic message evaluation', () => {
   expect(evaluate('en', c, [], { gender: 'they' })).toEqual('their baz');
   expect(evaluate('en', c, [], { gender: 'other' })).toEqual('unknown quux');
   expect(evaluate('en', c, [], { gender: 'zzz' })).toEqual('unknown quux');
+});
+
+test('undefined formatter', () => {
+  // Parser is given a formatter name that is not defined during evaluation
+  const message = '{0 baz}';
+  const m = new StickyMatcher(message, ['baz'], stickyRegexp);
+  const code = parseMessagePattern(message, m);
+
+  const engine = new MessageEngine('en', {}, code);
+  expect(engine.evaluate([123])).toEqual('');
 });
 
 test('plurals', () => {
@@ -58,6 +68,11 @@ test('plurals', () => {
   c = parse('{0 plural =0 {is zero} other {do not know}}');
   expect(evaluate('en', c, [0])).toEqual('is zero');
   expect(evaluate('en', c, [1])).toEqual('do not know');
+
+  c = parse('{0 plural =53{fifty-three} other{dunno}}');
+  expect(evaluate('en', c, [53])).toEqual('fifty-three');
+  expect(evaluate('en', c, [1])).toEqual('dunno');
+  expect(evaluate('en', c, [3])).toEqual('dunno');
 });
 
 test('blocks', () => {
