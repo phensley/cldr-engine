@@ -123,8 +123,7 @@ class MessagePatternParser {
             }
 
             // Since this is escaped text, push text node without substituting '#'
-            n.push(text(buf + str.substring(r.s, k)));
-            buf = '';
+            buf += str.substring(r.s, k);
 
             // Skip over escaped text
             r.s = k;

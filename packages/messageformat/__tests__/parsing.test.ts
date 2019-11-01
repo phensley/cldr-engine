@@ -78,15 +78,13 @@ test('escapes', () => {
   // is dropped.
   c = parse("'{' 0 plural one {foo bar} '}'");
   expect(c).toEqual([MessageOpType.BLOCK, [
-    [MessageOpType.TEXT, '{'],
-    [MessageOpType.TEXT, ' 0 plural one '],
+    [MessageOpType.TEXT, '{ 0 plural one '],
     [MessageOpType.TEXT, ' }']
   ]]);
 
   c = parse("'{'0 plural one {1 select baz {hi there}} '}'");
   expect(c).toEqual([MessageOpType.BLOCK, [
-    [MessageOpType.TEXT, '{'],
-    [MessageOpType.TEXT, '0 plural one '],
+    [MessageOpType.TEXT, '{0 plural one '],
     [MessageOpType.SELECT, [1], [
       ['baz', [MessageOpType.TEXT, 'hi there']]
     ]],
