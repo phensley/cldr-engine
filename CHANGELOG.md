@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [UNRELEASED]
+### Fixed/Chaged
+ - Renamed `default` properties inside resource packs. This avoids confusion with the `default` property that is added by some module loaders, since resource packs can be loaded via `require()`, etc.
+ - The message format parser now buffers text when it detects an apostrophe escaped section, ensuring that adjacent text and escaped text is emitted as a single `TEXT` node.
+ - Locale distance partitions are now arrays instead of sets, simplifying iteration over them.
+
 ## [0.20.3]
 ### Fixed/Changed
  - Message format parser now produces a result that can be serialized to/from JSON/YAML or embedded into JavaScript code. Shifted Decimal-casting of plural exact match arguments to the evaluation phase.
