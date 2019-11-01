@@ -110,15 +110,15 @@ export const getDistance = (desired: LanguageTag, supported: LanguageTag, thresh
   let match = false;
 
   // Try permutations of desired and supported partitions to find the maximum distance.
-  wantPartitions.forEach(dpartition => {
-    havePartitions.forEach(spartition => {
+  for (const dpartition of wantPartitions) {
+    for (const spartition of havePartitions) {
       node = get(map, dpartition, spartition);
       if (node !== undefined) {
         maxDistance = Math.max(maxDistance, _distance(node));
         match = true;
       }
-    });
-  });
+    }
+  }
 
   if (!match) {
     node = getany(map);
@@ -137,33 +137,25 @@ export const getDistance = (desired: LanguageTag, supported: LanguageTag, thresh
 const scanRegion = (
   map: DistanceMap,
   want: string,
-  wantPartitions: Set<string>,
+  wantPartitions: string[],
   have: string,
-  havePartitions: Set<string>): number | undefined => {
+  havePartitions: string[]): number | undefined => {
 
   let node = undefined;
-  let iter = wantPartitions.values();
-  for (;;) {
-    const elem = iter.next();
-    node = get(map, elem.value, have);
+
+  for (const v of wantPartitions) {
+    node = get(map, v, have);
     if (typeof node === 'number') {
       return node;
-    }
-    if (elem.done) {
-      break;
     }
   }
 
-  iter = havePartitions.values();
-  for (;;) {
-    const elem = iter.next();
-    node = get(map, want, elem.value);
+  for (const v of havePartitions) {
+    node = get(map, want, v);
     if (typeof node === 'number') {
       return node;
     }
-    if (elem.done) {
-      break;
-    }
   }
+
   return undefined;
 };

@@ -1,32 +1,28 @@
 import { macroRegions, regions } from './autogen.partition';
 
-type MapSet = { [x: string]: Set<string> };
+type ArrayMap = { [x: string]: string[] };
 
-const buildMapSet = (raw: string): MapSet => {
-  const res: MapSet = {};
+const buildArrayMap = (raw: string): ArrayMap => {
+  const res: ArrayMap = {};
   raw.split('|').forEach(e => {
     const [ k, vs ] = e.split(':');
-    const set = new Set<string>();
-    vs.split('').forEach(v => set.add(v));
-    res[k] = set;
+    res[k] = vs.split('');
   });
   return res;
 };
 
-let regionToPartition: MapSet | undefined;
-let macroRegionToPartitions: MapSet | undefined;
-
-const EMPTY_SET: Set<string> = new Set();
+let regionToPartition: ArrayMap | undefined;
+let macroRegionToPartitions: ArrayMap | undefined;
 
 const init = () => {
-  regionToPartition =  buildMapSet(regions);
-  macroRegionToPartitions = buildMapSet(macroRegions);
+  regionToPartition =  buildArrayMap(regions);
+  macroRegionToPartitions = buildArrayMap(macroRegions);
 };
 
-export const getRegionPartition = (region: string): Set<string> => {
+export const getRegionPartition = (region: string): string[] => {
   if (!regionToPartition) {
     init();
   }
   const result = regionToPartition![region] || macroRegionToPartitions![region];
-  return result === undefined ? EMPTY_SET : result;
+  return result === undefined ? [] : result;
 };
