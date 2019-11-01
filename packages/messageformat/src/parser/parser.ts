@@ -201,7 +201,6 @@ class MessagePatternParser {
    */
   tag(m: Matcher, r: Range, argsub?: Argument): MessageCode | undefined {
     // m.debug('  tag', r);
-
     m.spaces(r);
 
     // Ensure we see a tag start next
@@ -228,6 +227,7 @@ class MessagePatternParser {
    * Parse a plural instruction.
    */
   plural(args: Argument[], type: PluralNumberType, m: Matcher, r: Range): MessageCode {
+    // m.debug('plural', r);
 
     // See if we have an offset argument
     const offset = m.pluralOffset(r);

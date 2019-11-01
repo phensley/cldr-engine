@@ -59,6 +59,28 @@ test('basic', () => {
     ]],
     [MessageOpType.TEXT, ' B']
   ]]);
+
+  c = parse('A {0 select foo {1 plural one{}}} B');
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, 'A '],
+    [MessageOpType.SELECT, [0], [
+      ['foo', [MessageOpType.TEXT, '1 plural one']]
+    ]],
+    [MessageOpType.TEXT, ' B']
+  ]]);
+
+  // Nested instructions need an extra '{' '}' level
+  c = parse('A {0 select foo {{1 plural offset:1 one{}}}} B');
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, 'A '],
+    [MessageOpType.SELECT, [0], [
+      ['foo', [MessageOpType.PLURAL, [1], 1, PluralNumberType.CARDINAL, [
+        [PluralChoiceType.CATEGORY, 'one', [MessageOpType.NOOP]]
+      ]],
+    ]]],
+    [MessageOpType.TEXT, ' B']
+  ]]);
+
 });
 
 test('unclosed', () => {
@@ -89,15 +111,6 @@ test('escapes', () => {
       ['baz', [MessageOpType.TEXT, 'hi there']]
     ]],
     [MessageOpType.TEXT, ' }']
-  ]]);
-
-  c = parse('leader {0 select foo {1 plural}} trailer');
-  expect(c).toEqual([MessageOpType.BLOCK, [
-    [MessageOpType.TEXT, 'leader '],
-    [MessageOpType.SELECT, [0], [
-      ['foo', [MessageOpType.TEXT, '1 plural']]
-    ]],
-    [MessageOpType.TEXT, ' trailer']
   ]]);
 });
 
