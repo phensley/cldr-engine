@@ -16,6 +16,14 @@ const build = (type: string, formatters: string[]) =>
   test(`${type} builder`, () => {
     const input = 'abc foo';
 
+    m = buildMessageMatcher(input, ['foo']);
+    r = { s: 0, e: input.length };
+
+    expect(m.arguments(r)).toEqual(['abc']);
+    expect(m.spaces(r)).toEqual(true);
+    expect(m.formatter(r)).toEqual('foo');
+    expect(m.complete(r)).toEqual(true);
+
     m = buildMessageMatcher(input, ['foo'], type === 'sticky');
     r = { s: 0, e: input.length };
 

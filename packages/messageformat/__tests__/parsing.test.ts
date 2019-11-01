@@ -77,7 +77,7 @@ test('basic', () => {
       ['foo', [MessageOpType.PLURAL, [1], 1, PluralNumberType.CARDINAL, [
         [PluralChoiceType.CATEGORY, 'one', [MessageOpType.NOOP]]
       ]],
-    ]]],
+      ]]],
     [MessageOpType.TEXT, ' B']
   ]]);
 
@@ -91,6 +91,9 @@ test('unclosed', () => {
     [MessageOpType.TEXT, 'hello '],
     [MessageOpType.TEXT, '{0 plural one']
   ]]);
+
+  c = parse('{');
+  expect(c).toEqual([MessageOpType.TEXT, '{']);
 });
 
 test('escapes', () => {
@@ -117,19 +120,23 @@ test('escapes', () => {
 test('arg substitution', () => {
   let c: MessageCode;
 
-  c = parse('{0 plural one {# = # item} few {#} other {# items}}');
-  expect(c).toEqual([MessageOpType.PLURAL, [0], 0, PluralNumberType.CARDINAL, [
-    [PluralChoiceType.CATEGORY, 'one', [MessageOpType.BLOCK, [
+  c = parse('# {0 plural one {# = # item} few {#} other {# items}} #');
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, '# '],
+    [MessageOpType.PLURAL, [0], 0, PluralNumberType.CARDINAL, [
+      [PluralChoiceType.CATEGORY, 'one', [MessageOpType.BLOCK, [
         [MessageOpType.ARGSUB],
         [MessageOpType.TEXT, ' = '],
         [MessageOpType.ARGSUB],
         [MessageOpType.TEXT, ' item']
       ]]
-    ],
-    [PluralChoiceType.CATEGORY, 'few', [MessageOpType.ARGSUB]],
-    [PluralChoiceType.CATEGORY, 'other', [MessageOpType.BLOCK, [
-      [MessageOpType.ARGSUB],
-      [MessageOpType.TEXT, ' items']
-    ]]]
+      ],
+      [PluralChoiceType.CATEGORY, 'few', [MessageOpType.ARGSUB]],
+      [PluralChoiceType.CATEGORY, 'other', [MessageOpType.BLOCK, [
+        [MessageOpType.ARGSUB],
+        [MessageOpType.TEXT, ' items']
+      ]]]
+    ]],
+    [MessageOpType.TEXT, ' #']
   ]]);
 });

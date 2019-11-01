@@ -81,11 +81,7 @@ class MessagePatternParser {
 
           const k = this.seek(r.s, r.e);
           if (k === -1) {
-            buf += str.substring(r.s, r.e);
-            if (buf) {
-              n.push(textarg(buf, argsub));
-              buf = '';
-            }
+            n.push(textarg(str.substring(r.s, r.e), argsub));
             r.s = r.e;
 
           } else {
