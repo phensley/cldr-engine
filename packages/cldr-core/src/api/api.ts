@@ -33,7 +33,7 @@ import {
   MeasurementSystem,
   Quantity,
   RelativeTimeFormatOptions,
-  RuleBasedFormatOptions,
+  // RuleBasedFormatOptions,
   TimeZoneInfo,
   UnitFormatOptions,
   UnitLength,
@@ -288,7 +288,7 @@ export interface Numbers {
   /**
    * Formats a decimal number using a rule-based number format.
    */
-  formatRuleBased(num: DecimalArg, options?: RuleBasedFormatOptions): string;
+  // formatRuleBased(num: DecimalArg, options?: RuleBasedFormatOptions): string;
 
   /**
    * Returns the currency symbol of the given width.
@@ -328,7 +328,7 @@ export interface Numbers {
   /**
    * Returns the list of available rule-based number formats for the current locale.
    */
-  ruleBasedFormatNames(): string[];
+  // ruleBasedFormatNames(): string[];
 }
 
 /**

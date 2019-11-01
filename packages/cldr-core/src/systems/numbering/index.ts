@@ -1,5 +1,4 @@
 import { DecimalArg } from '@phensley/decimal';
-export * from './algorithmic';
 export * from './decimal';
 
 // TODO: replace with instances
