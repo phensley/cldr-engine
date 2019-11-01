@@ -151,7 +151,7 @@ const buildMetaZones2 = (data: any): Metazones => {
 
   return {
     zoneindex: zoneindex.map(base36).join(' '),
-    metazoneids: metazoneIndex.array.join('\\t'),
+    metazoneids: metazoneIndex.array.join(' '),
     index: index.map(base36).join(' '),
     offsets: offsets.map(base36).join(' '),
     untils: untils.map(base36).join(' ')
@@ -192,7 +192,7 @@ export const getZones = (data: any): Code[] => {
   code += `  zoneindex: '${metazonedata.zoneindex}',\n\n`;
 
   code += `  // array of metazone ids\n`;
-  code += `  metazoneids: '${metazonedata.metazoneids}'.split('\\t'),\n\n`;
+  code += `  metazoneids: '${metazonedata.metazoneids}'.split(' '),\n\n`;
 
   code += `  // array of start/end slice indices into offsets and untils arrays\n`;
   code += `  index: '${metazonedata.index}',\n\n`;

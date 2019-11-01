@@ -82,8 +82,8 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
       }
     }
 
-    zoneinfo.push(`    '${localtime}\\t` +
-      `${types.join('')}\\t` +
+    zoneinfo.push(`    '${localtime}_` +
+      `${types.join('')}_` +
       `${untils.map(n => n.toString(36)).join(' ')}'`
     );
   }

@@ -176,7 +176,7 @@ class ZoneRecord {
   readonly len: number;
 
   constructor(raw: string, index: number[]) {
-    const [ _info, _types, _untils ] = raw.split('\t');
+    const [ _info, _types, _untils ] = raw.split('_');
     const untils = numarray(_untils);
     const types = _types ? _types.split('').map(t => TYPES[t]) : [];
 
