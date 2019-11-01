@@ -11,7 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
  - Renamed `default` properties inside resource packs. This avoids confusion with the `default` property that is added by some module loaders, since resource packs can be loaded via `require()`, etc.
  - The message format parser now buffers text when it detects an apostrophe escaped section, ensuring that adjacent text and escaped text is emitted as a single `TEXT` node.
  - Locale distance partitions are now arrays instead of sets, simplifying iteration over them.
- - Resource packs now use the `"_"` UNDERSCORE character to separate fields, resulting in a ~10% reduction in resource pack size.
+ - Resource packs now use the `"_"` UNDERSCORE character to separate fields, resulting in a ~10-20% reduction in resource pack size.
+ - Embedded timezone and metazone data now uses UNDERSCORE character to separate fields.
 
 ## [0.20.3]
 ### Fixed/Changed
