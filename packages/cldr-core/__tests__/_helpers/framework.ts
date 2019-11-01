@@ -1,34 +1,21 @@
 import * as fs from 'fs';
 import { join } from 'path';
-import * as zlib from 'zlib';
 
 import { config as defaultconfig } from '../../../cldr/src/config';
 import { CLDRFramework, CLDROptions } from '../../src';
 
 const packPath = (language: string) =>
-  join(__dirname, '..', '..', '..', 'cldr', 'packs', `${language}.json.gz`);
+  join(__dirname, '..', '..', '..', 'cldr', 'packs', `${language}.json`);
 
-export const loader = (language: string): any => {
-  const path = packPath(language);
-  const compressed = fs.readFileSync(path);
-  return zlib.gunzipSync(compressed).toString('utf-8');
-};
+export const loader = (language: string): any =>
+  fs.readFileSync(packPath(language)).toString('utf-8');
 
 export const asyncLoader = (language: string): Promise<any> => {
   const path = packPath(language);
-  return new Promise<any>((resolve, reject) => {
-    fs.readFile(path, {}, (err, data) => {
-      if (err) {
-        return reject(String(err));
-      }
-      zlib.gunzip(data, (err2, result) => {
-        if (err2) {
-          return reject(String(err2));
-        }
-        return resolve(result.toString('utf-8'));
-      });
-    });
-  });
+  return new Promise<any>((resolve, reject) =>
+    fs.readFile(path, {}, (err, data) =>
+      err ? reject(String(err)) : resolve(data.toString('utf-8')))
+  );
 };
 
 const defaultOptions: CLDROptions = {

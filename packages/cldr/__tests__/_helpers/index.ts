@@ -1,16 +1,12 @@
 import * as fs from 'fs';
 import { join } from 'path';
-import * as zlib from 'zlib';
 
 import { CLDRFramework, CLDROptions } from '../../src';
 
-const packPath = (language: string) => join(__dirname, '..', '..', 'packs', `${language}.json.gz`);
+const packPath = (language: string) => join(__dirname, '..', '..', 'packs', `${language}.json`);
 
-export const loader = (language: string): any => {
-  const path = packPath(language);
-  const compressed = fs.readFileSync(path);
-  return zlib.gunzipSync(compressed).toString('utf-8');
-};
+export const loader = (language: string): any =>
+  fs.readFileSync(packPath(language)).toString('utf-8');
 
 const defaultOptions: CLDROptions = {
   debug: true,

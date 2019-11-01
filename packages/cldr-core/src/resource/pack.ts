@@ -81,11 +81,11 @@ export class Pack {
     this.cldrVersion = cldr;
     this.checksum = checksum;
     this.language = language;
-    this.defaultTag = LanguageResolver.resolve(raw.default);
+    this.defaultTag = LanguageResolver.resolve(raw.defaultTag);
 
     Object.keys(raw.scripts).forEach(k => {
       const obj = raw.scripts[k];
-      this.scripts[k] = new PackScript(obj.strings, obj.exceptions, obj.regions, obj.default);
+      this.scripts[k] = new PackScript(obj.strings, obj.exceptions, obj.regions, obj.defaultRegion);
     });
   }
 

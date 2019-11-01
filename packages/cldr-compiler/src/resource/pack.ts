@@ -118,7 +118,7 @@ export class ResourcePack {
       `"cldr":"${this.cldrVersion}",` +
       `"checksum":"${checksum}",` +
       `"language":"${this.language}",` +
-      `"default":"${this.defaultLayer}",` +
+      `"defaultTag":"${this.defaultLayer}",` +
       `"scripts":{${scripts.join(',')}}}`;
   }
 
@@ -213,7 +213,7 @@ export class ResourcePack {
     return `{"strings":"${join(base.strings)}",` +
       `"exceptions":"${join(exceptions)}",` +
       `"regions":{${regions.join(',')}},` +
-      `"default":"${defaultRegion}"}`;
+      `"defaultRegion":"${defaultRegion}"}`;
   }
 
   /**
