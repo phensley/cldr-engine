@@ -1,238 +1,238 @@
 {
   "SpelloutRules": {
     "hundred": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ი;", 
+          "rule": "ი;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "­=%spellout-cardinal=;", 
+          "rule": "­=%spellout-cardinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "მინუს →→;", 
+          "rule": "მინუს →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← მძიმე →→;", 
+          "rule": "←← მძიმე →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "ნული;", 
+          "rule": "ნული;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ერთი;", 
+          "rule": "ერთი;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "ორი;", 
+          "rule": "ორი;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "სამი;", 
+          "rule": "სამი;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "ოთხი;", 
+          "rule": "ოთხი;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "ხუთი;", 
+          "rule": "ხუთი;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "ექვსი;", 
+          "rule": "ექვსი;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "შვიდი;", 
+          "rule": "შვიდი;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "რვა;", 
+          "rule": "რვა;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "ცხრა;", 
+          "rule": "ცხრა;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "ათი;", 
+          "rule": "ათი;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "თერთმეტი;", 
+          "rule": "თერთმეტი;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "თორმეტი;", 
+          "rule": "თორმეტი;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "ცამეტი;", 
+          "rule": "ცამეტი;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "თოთხმეტი;", 
+          "rule": "თოთხმეტი;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "თხუთმეტი;", 
+          "rule": "თხუთმეტი;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "თექვსმეტი;", 
+          "rule": "თექვსმეტი;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "ჩვიდმეტი;", 
+          "rule": "ჩვიდმეტი;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "თრვამეტი;", 
+          "rule": "თრვამეტი;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "ცხრამეტი;", 
+          "rule": "ცხრამეტი;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "ოცი;", 
+          "rule": "ოცი;",
           "value": "20/20"
-        }, 
+        },
         {
-          "rule": "ოცდა­→→;", 
+          "rule": "ოცდა­→→;",
           "value": "21/20"
-        }, 
+        },
         {
-          "rule": "ორმოცი;", 
+          "rule": "ორმოცი;",
           "value": "40/20"
-        }, 
+        },
         {
-          "rule": "ორმოცდა­→→;", 
+          "rule": "ორმოცდა­→→;",
           "value": "41/20"
-        }, 
+        },
         {
-          "rule": "სამოცი;", 
+          "rule": "სამოცი;",
           "value": "60/20"
-        }, 
+        },
         {
-          "rule": "სამოცდა­→→;", 
+          "rule": "სამოცდა­→→;",
           "value": "61/20"
-        }, 
+        },
         {
-          "rule": "ოთხმოცი;", 
+          "rule": "ოთხმოცი;",
           "value": "80/20"
-        }, 
+        },
         {
-          "rule": "ოთხმოცდა­→→;", 
+          "rule": "ოთხმოცდა­→→;",
           "value": "81/20"
-        }, 
+        },
         {
-          "rule": "ას→%%hundred→;", 
+          "rule": "ას→%%hundred→;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "ორას→%%hundred→;", 
+          "rule": "ორას→%%hundred→;",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "სამას→%%hundred→;", 
+          "rule": "სამას→%%hundred→;",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "ოთხას→%%hundred→;", 
+          "rule": "ოთხას→%%hundred→;",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "ხუთას→%%hundred→;", 
+          "rule": "ხუთას→%%hundred→;",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "ექვსას→%%hundred→;", 
+          "rule": "ექვსას→%%hundred→;",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "შვიდას→%%hundred→;", 
+          "rule": "შვიდას→%%hundred→;",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "რვაას→%%hundred→;", 
+          "rule": "რვაას→%%hundred→;",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "ცხრაას→%%hundred→;", 
+          "rule": "ცხრაას→%%hundred→;",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "ათას→%%th→;", 
+          "rule": "ათას→%%th→;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← ათას→%%th→;", 
+          "rule": "←← ათას→%%th→;",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← მილიონ→%%th→;", 
+          "rule": "←← მილიონ→%%th→;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← მილიარდ→%%th→;", 
+          "rule": "←← მილიარდ→%%th→;",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← ბილიონ→%%th→;", 
+          "rule": "←← ბილიონ→%%th→;",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← ბილიარდ→%%th→;", 
+          "rule": "←← ბილიარდ→%%th→;",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "th": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ი;", 
+          "rule": "ი;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-cardinal=;", 
+          "rule": "' =%spellout-cardinal=;",
           "value": "1"
         }
       ]

@@ -1,237 +1,237 @@
 {
   "SpelloutRules": {
     "spellout-cardinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← presje →→;", 
+          "rule": "←← presje →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "zero;", 
+          "rule": "zero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "një;", 
+          "rule": "një;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dy;", 
+          "rule": "dy;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tri;", 
+          "rule": "tri;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "njëzet[ e →→];", 
+          "rule": "njëzet[ e →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "tridhjetë[ e →→];", 
+          "rule": "tridhjetë[ e →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "dyzet[ e →→];", 
+          "rule": "dyzet[ e →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine←dhjetë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine←dhjetë[ e →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine←qind[ e →→];", 
+          "rule": "←%spellout-cardinal-masculine←qind[ e →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← mijë[ e →→];", 
+          "rule": "←%spellout-cardinal-masculine← mijë[ e →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "një milion[ e →→];", 
+          "rule": "një milion[ e →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milionë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine← milionë[ e →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "një miliar[ e →→];", 
+          "rule": "një miliar[ e →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← miliarë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine← miliarë[ e →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "një bilion[ e →→];", 
+          "rule": "një bilion[ e →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilionë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilionë[ e →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "një biliar[ e →→];", 
+          "rule": "një biliar[ e →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← biliarë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine← biliarë[ e →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← presje →→;", 
+          "rule": "←← presje →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "zero;", 
+          "rule": "zero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "një;", 
+          "rule": "një;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dy;", 
+          "rule": "dy;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tre;", 
+          "rule": "tre;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "katër;", 
+          "rule": "katër;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "pesë;", 
+          "rule": "pesë;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "gjashtë;", 
+          "rule": "gjashtë;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "shtatë;", 
+          "rule": "shtatë;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "tetë;", 
+          "rule": "tetë;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "nëntë;", 
+          "rule": "nëntë;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "dhjetë;", 
+          "rule": "dhjetë;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→%spellout-cardinal-masculine→mbëdhjetë;", 
+          "rule": "→%spellout-cardinal-masculine→mbëdhjetë;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "njëzet[ e →→];", 
+          "rule": "njëzet[ e →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "tridhjetë[ e →→];", 
+          "rule": "tridhjetë[ e →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "dyzet[ e →→];", 
+          "rule": "dyzet[ e →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine←dhjetë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine←dhjetë[ e →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine←qind[ e →→];", 
+          "rule": "←%spellout-cardinal-masculine←qind[ e →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← mijë[ e →→];", 
+          "rule": "←%spellout-cardinal-masculine← mijë[ e →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "një milion[ e →→];", 
+          "rule": "një milion[ e →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milionë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine← milionë[ e →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "një miliar[ e →→];", 
+          "rule": "një miliar[ e →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← miliarë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine← miliarë[ e →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "një bilion[ e →→];", 
+          "rule": "një bilion[ e →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilionë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilionë[ e →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "një biliar[ e →→];", 
+          "rule": "një biliar[ e →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← biliarë[ e →→];", 
+          "rule": "←%spellout-cardinal-feminine← biliarë[ e →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]

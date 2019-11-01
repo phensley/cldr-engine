@@ -1,247 +1,247 @@
 {
   "SpelloutRules": {
     "spellout-cardinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal-reale=;", 
+          "rule": "=%spellout-cardinal-reale=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal-reale=;", 
+          "rule": "=%spellout-cardinal-reale=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-neuter": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← komma →→;", 
+          "rule": "←← komma →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "null;", 
+          "rule": "null;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "eitt;", 
+          "rule": "eitt;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-reale=;", 
+          "rule": "=%spellout-cardinal-reale=;",
           "value": "2"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-reale": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← komma →→;", 
+          "rule": "←← komma →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "null;", 
+          "rule": "null;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "éin;", 
+          "rule": "éin;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "to;", 
+          "rule": "to;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tre;", 
+          "rule": "tre;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "fire;", 
+          "rule": "fire;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "fem;", 
+          "rule": "fem;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "seks;", 
+          "rule": "seks;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sju;", 
+          "rule": "sju;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "åtte;", 
+          "rule": "åtte;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "ni;", 
+          "rule": "ni;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "ti;", 
+          "rule": "ti;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "elleve;", 
+          "rule": "elleve;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "tolv;", 
+          "rule": "tolv;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "tretten;", 
+          "rule": "tretten;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "fjorten;", 
+          "rule": "fjorten;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "femten;", 
+          "rule": "femten;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "seksten;", 
+          "rule": "seksten;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "sytten;", 
+          "rule": "sytten;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "atten;", 
+          "rule": "atten;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "nitten;", 
+          "rule": "nitten;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "tjue[­→→];", 
+          "rule": "tjue[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "tretti[­→→];", 
+          "rule": "tretti[­→→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "førti[­→→];", 
+          "rule": "førti[­→→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "femti[­→→];", 
+          "rule": "femti[­→→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "seksti[­→→];", 
+          "rule": "seksti[­→→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "søtti[­→→];", 
+          "rule": "søtti[­→→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "åtti[­→→];", 
+          "rule": "åtti[­→→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "nitti[­→→];", 
+          "rule": "nitti[­→→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-neuter← hundre[ og →→];", 
+          "rule": "←%spellout-cardinal-neuter← hundre[ og →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-neuter← tusen[ og →→];", 
+          "rule": "←%spellout-cardinal-neuter← tusen[ og →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "éin miljon[ →→];", 
+          "rule": "éin miljon[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoner[ →→];", 
+          "rule": "←← miljoner[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "éin miljard[ →→];", 
+          "rule": "éin miljard[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljarder[ →→];", 
+          "rule": "←← miljarder[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "éin biljon[ →→];", 
+          "rule": "éin biljon[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoner[ →→];", 
+          "rule": "←← biljoner[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "éin biljard[ →→];", 
+          "rule": "éin biljard[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljarder[ →→];", 
+          "rule": "←← biljarder[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal-reale=;", 
+          "rule": "=%spellout-cardinal-reale=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←← hundre[ og →→];", 
+          "rule": "←← hundre[ og →→];",
           "value": "1100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "10000"
         }
       ]

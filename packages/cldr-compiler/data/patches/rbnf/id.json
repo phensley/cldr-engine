@@ -1,160 +1,160 @@
 {
   "OrdinalRules": {
     "digits-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "−ke-→#,##0→;", 
+          "rule": "−ke-→#,##0→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "ke-=#,##0=;", 
+          "rule": "ke-=#,##0=;",
           "value": "0"
         }
       ]
     }
-  }, 
+  },
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "negatif →→;", 
+          "rule": "negatif →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← titik →→;", 
+          "rule": "←← titik →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "kosong;", 
+          "rule": "kosong;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "satu;", 
+          "rule": "satu;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dua;", 
+          "rule": "dua;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tiga;", 
+          "rule": "tiga;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "empat;", 
+          "rule": "empat;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "lima;", 
+          "rule": "lima;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "enam;", 
+          "rule": "enam;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "tujuh;", 
+          "rule": "tujuh;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "delapan;", 
+          "rule": "delapan;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "sembilan;", 
+          "rule": "sembilan;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "sepuluh;", 
+          "rule": "sepuluh;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "sebelas;", 
+          "rule": "sebelas;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "→→ belas;", 
+          "rule": "→→ belas;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "←← puluh[ →→];", 
+          "rule": "←← puluh[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "seratus[ →→];", 
+          "rule": "seratus[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← ratus[ →→];", 
+          "rule": "←← ratus[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "seribu[ →→];", 
+          "rule": "seribu[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← ribu[ →→];", 
+          "rule": "←← ribu[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← juta[ →→];", 
+          "rule": "←← juta[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miliar[ →→];", 
+          "rule": "←← miliar[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← triliun[ →→];", 
+          "rule": "←← triliun[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← kuadriliun[ →→];", 
+          "rule": "←← kuadriliun[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "negatif →→;", 
+          "rule": "negatif →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "ke=%spellout-cardinal=;", 
+          "rule": "ke=%spellout-cardinal=;",
           "value": "0"
         }
       ]

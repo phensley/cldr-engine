@@ -1,144 +1,144 @@
 {
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← koma →→;", 
+          "rule": "←← koma →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "null;", 
+          "rule": "null;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "üks;", 
+          "rule": "üks;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaks;", 
+          "rule": "kaks;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolm;", 
+          "rule": "kolm;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neli;", 
+          "rule": "neli;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viis;", 
+          "rule": "viis;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuus;", 
+          "rule": "kuus;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitse;", 
+          "rule": "seitse;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kaheksa;", 
+          "rule": "kaheksa;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "üheksa;", 
+          "rule": "üheksa;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kümme;", 
+          "rule": "kümme;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→teist;", 
+          "rule": "→→teist;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←kümmend[ →→];", 
+          "rule": "←←kümmend[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "←←sada[ →→];", 
+          "rule": "←←sada[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← tuhat[ →→];", 
+          "rule": "←← tuhat[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← miljon[ →→];", 
+          "rule": "←← miljon[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljonit[ →→];", 
+          "rule": "←← miljonit[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljard[ →→];", 
+          "rule": "←← miljard[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardit[ →→];", 
+          "rule": "←← miljardit[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljon[ →→];", 
+          "rule": "←← biljon[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljonit[ →→];", 
+          "rule": "←← biljonit[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljard[ →→];", 
+          "rule": "←← biljard[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljardit[ →→];", 
+          "rule": "←← biljardit[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←← sada[ →→];", 
+          "rule": "←← sada[ →→];",
           "value": "1100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "10000"
         }
       ]

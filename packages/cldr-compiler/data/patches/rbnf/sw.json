@@ -1,177 +1,177 @@
 {
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "si nambari;", 
+          "rule": "si nambari;",
           "value": "NaN"
-        }, 
+        },
         {
-          "rule": "usio;", 
+          "rule": "usio;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "kasoro →→;", 
+          "rule": "kasoro →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← nukta →→;", 
+          "rule": "←← nukta →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "sifuri;", 
+          "rule": "sifuri;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "moja;", 
+          "rule": "moja;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "mbili;", 
+          "rule": "mbili;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tatu;", 
+          "rule": "tatu;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "nne;", 
+          "rule": "nne;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "tano;", 
+          "rule": "tano;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sita;", 
+          "rule": "sita;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "saba;", 
+          "rule": "saba;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "nane;", 
+          "rule": "nane;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "tisa;", 
+          "rule": "tisa;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kumi[ na →→];", 
+          "rule": "kumi[ na →→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "ishirini[ na →→];", 
+          "rule": "ishirini[ na →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "thelathini[ na →→];", 
+          "rule": "thelathini[ na →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "arobaini[ na →→];", 
+          "rule": "arobaini[ na →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "hamsini[ na →→];", 
+          "rule": "hamsini[ na →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "sitini[ na →→];", 
+          "rule": "sitini[ na →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "sabini[ na →→];", 
+          "rule": "sabini[ na →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "themanini[ na →→];", 
+          "rule": "themanini[ na →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "tisini[ na →→];", 
+          "rule": "tisini[ na →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "mia ←←[ na →→];", 
+          "rule": "mia ←←[ na →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "elfu ←←[, →→];", 
+          "rule": "elfu ←←[, →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "milioni ←←[, →→];", 
+          "rule": "milioni ←←[, →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "bilioni ←←[, →→];", 
+          "rule": "bilioni ←←[, →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "trilioni ←←[, →→];", 
+          "rule": "trilioni ←←[, →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "kvadrilioni ←←[, →→];", 
+          "rule": "kvadrilioni ←←[, →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "wa kasoro →%spellout-cardinal→;", 
+          "rule": "wa kasoro →%spellout-cardinal→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "wa sifuri;", 
+          "rule": "wa sifuri;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kwanza;", 
+          "rule": "kwanza;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "pili;", 
+          "rule": "pili;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "wa =%spellout-cardinal=;", 
+          "rule": "wa =%spellout-cardinal=;",
           "value": "3"
         }
       ]

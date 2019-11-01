@@ -3,25 +3,25 @@ from collections import defaultdict
 
 from util import makedirs, readxml, save, to_utf8
 
-def dump():
-    groups = defaultdict(set)
-    root = '/Users/phensley/temp/cldr-trunk/common/rbnf'
-    names = os.listdir(root)
-    for name in sorted(names):
-        lang, _ = os.path.splitext(name)
-        path = os.path.join(root, name)
+# def dump():
+#     groups = defaultdict(set)
+#     root = '/Users/phensley/temp/cldr-trunk/common/rbnf'
+#     names = os.listdir(root)
+#     for name in sorted(names):
+#         lang, _ = os.path.splitext(name)
+#         path = os.path.join(root, name)
 
-        tree = readxml(path)
-        for group in tree.xpath('//rulesetGrouping'):
-            for typ in group.xpath('//ruleset'):
-                if typ.attrib.get('access') == 'private':
-                    continue
-                typename = typ.attrib['type']
-                groups[lang].add(typename)
+#         tree = readxml(path)
+#         for group in tree.xpath('//rulesetGrouping'):
+#             for typ in group.xpath('//ruleset'):
+#                 if typ.attrib.get('access') == 'private':
+#                     continue
+#                 typename = typ.attrib['type']
+#                 groups[lang].add(typename)
 
-    for lang, types in groups.iteritems():
-        print lang, ' '.join(sorted(types))
-        print
+#     for lang, types in groups.iteritems():
+#         print lang, ' '.join(sorted(types))
+#         print
 
 def get_rules(root):
     r = []
@@ -73,9 +73,9 @@ def build(root, dest):
         out = os.path.join(dest, '%s.json' % name)
         save(out, rbnf)
 
-if __name__ == '__main__':
-    root = '/Users/phensley/temp/cldr-trunk/common/rbnf'
-    tree = readxml(os.path.join(root, 'en.xml'))
-    groups = convert(tree)
-    print json.dumps(groups, indent=2, sort_keys=1)
+# if __name__ == '__main__':
+#     root = '/Users/phensley/temp/cldr-trunk/common/rbnf'
+#     tree = readxml(os.path.join(root, 'en.xml'))
+#     groups = convert(tree)
+#     print json.dumps(groups, indent=2, sort_keys=1)
 

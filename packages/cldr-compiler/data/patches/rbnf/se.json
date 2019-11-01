@@ -1,128 +1,128 @@
 {
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "eret →→;", 
+          "rule": "eret →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nolla;", 
+          "rule": "nolla;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "okta;", 
+          "rule": "okta;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "guokte;", 
+          "rule": "guokte;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "golbma;", 
+          "rule": "golbma;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "njeallje;", 
+          "rule": "njeallje;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "vihtta;", 
+          "rule": "vihtta;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "guhtta;", 
+          "rule": "guhtta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "čieža;", 
+          "rule": "čieža;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "gávcci;", 
+          "rule": "gávcci;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "ovcci;", 
+          "rule": "ovcci;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "logi;", 
+          "rule": "logi;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→­nuppe­lohkái;", 
+          "rule": "→→­nuppe­lohkái;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­logi[­→→];", 
+          "rule": "←←­logi[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "←←­čuođi[­→→];", 
+          "rule": "←←­čuođi[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­duhát[ →→];", 
+          "rule": "←←­duhát[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← miljon[ →→];", 
+          "rule": "←← miljon[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljard[ →→];", 
+          "rule": "←← miljard[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← biljon[ →→];", 
+          "rule": "←← biljon[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljard[ →→];", 
+          "rule": "←← biljard[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "eret →→;", 
+          "rule": "eret →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←←­čuođi[­→→];", 
+          "rule": "←←­čuođi[­→→];",
           "value": "1100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "10000"
         }
       ]

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import argparse, os, json, shutil, sys
+import argparse, gzip, io, os, json, shutil, sys, tarfile
 import requests
-from subprocess import Popen
+# from subprocess import Popen
 
 CWD = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(CWD, 'patchlib'))
@@ -12,9 +12,10 @@ import pluralrange
 import rbnf
 from util import makedirs
 
+BASEURL = 'https://github.com/unicode-org/cldr/archive'
 TAG = 'release-36'
-#BASEURL = 'https://unicode.org/repos/cldr/tags'
-BASEURL = 'https://raw.githubusercontent.com/unicode-org/cldr'
+ROOTPATH = 'common'
+
 TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')
 
 BUILDERS = [
@@ -29,21 +30,13 @@ def get_root():
 def download():
     realpath = get_root()
     if not os.path.exists(realpath):
-        url = os.path.join(BASEURL, TAG, path)
-        print(url)
-        res = requests.get(url)
-        makedirs(os.path.dirname(realpath))
-        open(realpath, 'wb').write(res.text.encode('utf-8'))
-    return realpath
-
-def process(path, builder, dest):
-    print(path)
-    realpath = download(path)
-    rec = builder(realpath)
-    out = open(dest, 'wb')
-    res = json.dumps(rec, indent=2, sort_keys=1)
-    out.write(res.encode('utf-8'))
-    out.close()
+        makedirs(realpath)
+        url = os.path.join(BASEURL, '%s.tar.gz' % TAG)
+        r = requests.get(url)
+        f = gzip.GzipFile(fileobj=io.BytesIO(r.content))
+        t = tarfile.TarFile(fileobj=f)
+        t.extractall(realpath)
+    return os.path.join(realpath, 'cldr-%s' % TAG)
 
 def main():
     makedirs(TEMPDIR)
@@ -53,4 +46,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

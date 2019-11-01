@@ -1,1243 +1,1243 @@
 {
   "SpelloutRules": {
     "and-feminine": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ו=%spellout-numbering=;", 
+          "rule": "ו=%spellout-numbering=;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "ושתיים;", 
+          "rule": "ושתיים;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "ו=%spellout-numbering=;", 
+          "rule": "ו=%spellout-numbering=;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "עשרים;", 
+          "rule": "עשרים;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "עשרים →→;", 
+          "rule": "עשרים →→;",
           "value": "21"
-        }, 
+        },
         {
-          "rule": "שלושים;", 
+          "rule": "שלושים;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "שלושים →→;", 
+          "rule": "שלושים →→;",
           "value": "31"
-        }, 
+        },
         {
-          "rule": "ארבעים;", 
+          "rule": "ארבעים;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "ארבעים →→;", 
+          "rule": "ארבעים →→;",
           "value": "41"
-        }, 
+        },
         {
-          "rule": "חמישים;", 
+          "rule": "חמישים;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "חמישים →→;", 
+          "rule": "חמישים →→;",
           "value": "51"
-        }, 
+        },
         {
-          "rule": "שישים;", 
+          "rule": "שישים;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "שישים →→;", 
+          "rule": "שישים →→;",
           "value": "61"
-        }, 
+        },
         {
-          "rule": "שבעים;", 
+          "rule": "שבעים;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "שבעים →→;", 
+          "rule": "שבעים →→;",
           "value": "71"
-        }, 
+        },
         {
-          "rule": "שמונים;", 
+          "rule": "שמונים;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "שמונים →→;", 
+          "rule": "שמונים →→;",
           "value": "81"
-        }, 
+        },
         {
-          "rule": "תשעים;", 
+          "rule": "תשעים;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "תשעים →→;", 
+          "rule": "תשעים →→;",
           "value": "91"
-        }, 
+        },
         {
-          "rule": "מאה;", 
+          "rule": "מאה;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "מאה →→;", 
+          "rule": "מאה →→;",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "מאתיים;", 
+          "rule": "מאתיים;",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "מאתיים →→;", 
+          "rule": "מאתיים →→;",
           "value": "201"
-        }, 
+        },
         {
-          "rule": "שלוש מאות;", 
+          "rule": "שלוש מאות;",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "שלוש מאות →→;", 
+          "rule": "שלוש מאות →→;",
           "value": "301"
-        }, 
+        },
         {
-          "rule": "ארבע מאות;", 
+          "rule": "ארבע מאות;",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "ארבע מאות →→;", 
+          "rule": "ארבע מאות →→;",
           "value": "401"
-        }, 
+        },
         {
-          "rule": "חמש מאות;", 
+          "rule": "חמש מאות;",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "חמש מאות →→;", 
+          "rule": "חמש מאות →→;",
           "value": "501"
-        }, 
+        },
         {
-          "rule": "שש מאות;", 
+          "rule": "שש מאות;",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "שש מאות →→;", 
+          "rule": "שש מאות →→;",
           "value": "601"
-        }, 
+        },
         {
-          "rule": "שבע מאות;", 
+          "rule": "שבע מאות;",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "שבע מאות →→;", 
+          "rule": "שבע מאות →→;",
           "value": "701"
-        }, 
+        },
         {
-          "rule": "שמונה מאות;", 
+          "rule": "שמונה מאות;",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "שמונה מאות →→;", 
+          "rule": "שמונה מאות →→;",
           "value": "801"
-        }, 
+        },
         {
-          "rule": "תשע מאות;", 
+          "rule": "תשע מאות;",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "תשע מאות →→;", 
+          "rule": "תשע מאות →→;",
           "value": "901"
-        }, 
+        },
         {
-          "rule": "אלף[ →→];", 
+          "rule": "אלף[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "אלפיים[ →→];", 
+          "rule": "אלפיים[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "ו←%%thousands← אלפים[ →→];", 
+          "rule": "ו←%%thousands← אלפים[ →→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%%and-masculine← אלף[ →→];", 
+          "rule": "←%%and-masculine← אלף[ →→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "מיליון[ →→];", 
+          "rule": "מיליון[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "שני מיליון[ →→];", 
+          "rule": "שני מיליון[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%%and-masculine← מיליון[ →→];", 
+          "rule": "←%%and-masculine← מיליון[ →→];",
           "value": "3000000"
-        }, 
+        },
         {
-          "rule": "מיליארד[ →→];", 
+          "rule": "מיליארד[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "שני מיליארד[ →→];", 
+          "rule": "שני מיליארד[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%%and-masculine← מיליארד[ →→];", 
+          "rule": "←%%and-masculine← מיליארד[ →→];",
           "value": "3000000000"
-        }, 
+        },
         {
-          "rule": "ביליון[ →→];", 
+          "rule": "ביליון[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "שני ביליון[ →→];", 
+          "rule": "שני ביליון[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%%and-masculine← ביליון[ →→];", 
+          "rule": "←%%and-masculine← ביליון[ →→];",
           "value": "3000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "and-masculine": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ו=%%spellout-numbering-m=;", 
+          "rule": "ו=%%spellout-numbering-m=;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "עשרים;", 
+          "rule": "עשרים;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "עשרים →→;", 
+          "rule": "עשרים →→;",
           "value": "21"
-        }, 
+        },
         {
-          "rule": "שלושים;", 
+          "rule": "שלושים;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "שלושים →→;", 
+          "rule": "שלושים →→;",
           "value": "31"
-        }, 
+        },
         {
-          "rule": "ארבעים;", 
+          "rule": "ארבעים;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "ארבעים →→;", 
+          "rule": "ארבעים →→;",
           "value": "41"
-        }, 
+        },
         {
-          "rule": "חמישים;", 
+          "rule": "חמישים;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "חמישים →→;", 
+          "rule": "חמישים →→;",
           "value": "51"
-        }, 
+        },
         {
-          "rule": "שישים;", 
+          "rule": "שישים;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "שישים →→;", 
+          "rule": "שישים →→;",
           "value": "61"
-        }, 
+        },
         {
-          "rule": "שבעים;", 
+          "rule": "שבעים;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "שבעים →→;", 
+          "rule": "שבעים →→;",
           "value": "71"
-        }, 
+        },
         {
-          "rule": "שמונים;", 
+          "rule": "שמונים;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "שמונים →→;", 
+          "rule": "שמונים →→;",
           "value": "81"
-        }, 
+        },
         {
-          "rule": "תשעים;", 
+          "rule": "תשעים;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "תשעים →→;", 
+          "rule": "תשעים →→;",
           "value": "91"
-        }, 
+        },
         {
-          "rule": "מאה;", 
+          "rule": "מאה;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "מאה →→;", 
+          "rule": "מאה →→;",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "מאתיים;", 
+          "rule": "מאתיים;",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "מאתיים →→;", 
+          "rule": "מאתיים →→;",
           "value": "201"
-        }, 
+        },
         {
-          "rule": "שלוש מאות;", 
+          "rule": "שלוש מאות;",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "שלוש מאות →→;", 
+          "rule": "שלוש מאות →→;",
           "value": "301"
-        }, 
+        },
         {
-          "rule": "ארבע מאות;", 
+          "rule": "ארבע מאות;",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "ארבע מאות →→;", 
+          "rule": "ארבע מאות →→;",
           "value": "401"
-        }, 
+        },
         {
-          "rule": "חמש מאות;", 
+          "rule": "חמש מאות;",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "חמש מאות →→;", 
+          "rule": "חמש מאות →→;",
           "value": "501"
-        }, 
+        },
         {
-          "rule": "שש מאות;", 
+          "rule": "שש מאות;",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "שש מאות →→;", 
+          "rule": "שש מאות →→;",
           "value": "601"
-        }, 
+        },
         {
-          "rule": "שבע מאות;", 
+          "rule": "שבע מאות;",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "שבע מאות →→;", 
+          "rule": "שבע מאות →→;",
           "value": "701"
-        }, 
+        },
         {
-          "rule": "שמונה מאות;", 
+          "rule": "שמונה מאות;",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "שמונה מאות →→;", 
+          "rule": "שמונה מאות →→;",
           "value": "801"
-        }, 
+        },
         {
-          "rule": "תשע מאות;", 
+          "rule": "תשע מאות;",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "תשע מאות →→;", 
+          "rule": "תשע מאות →→;",
           "value": "901"
-        }, 
+        },
         {
-          "rule": "אלף[ →→];", 
+          "rule": "אלף[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "אלפיים[ →→];", 
+          "rule": "אלפיים[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "ו←%%thousands← אלפים[ →→];", 
+          "rule": "ו←%%thousands← אלפים[ →→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%%and-masculine← אלף[ →→];", 
+          "rule": "←%%and-masculine← אלף[ →→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "מיליון[ →→];", 
+          "rule": "מיליון[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "שני מיליון[ →→];", 
+          "rule": "שני מיליון[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%%and-masculine← מיליון[ →→];", 
+          "rule": "←%%and-masculine← מיליון[ →→];",
           "value": "3000000"
-        }, 
+        },
         {
-          "rule": "מיליארד[ →→];", 
+          "rule": "מיליארד[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "שני מיליארד[ →→];", 
+          "rule": "שני מיליארד[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%%and-masculine← מיליארד[ →→];", 
+          "rule": "←%%and-masculine← מיליארד[ →→];",
           "value": "3000000000"
-        }, 
+        },
         {
-          "rule": "ביליון[ →→];", 
+          "rule": "ביליון[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "שני ביליון[ →→];", 
+          "rule": "שני ביליון[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%%and-masculine← ביליון[ →→];", 
+          "rule": "←%%and-masculine← ביליון[ →→];",
           "value": "3000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "מינוס →→;", 
+          "rule": "מינוס →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← נקודה →→;", 
+          "rule": "←← נקודה →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "שתי;", 
+          "rule": "שתי;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-feminine-standalone": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "מינוס →→;", 
+          "rule": "מינוס →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← נקודה →→ ;", 
+          "rule": "←%%spellout-numbering-m← נקודה →→ ;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "אפס;", 
+          "rule": "אפס;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "אחד;", 
+          "rule": "אחד;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "שני;", 
+          "rule": "שני;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "שלושה;", 
+          "rule": "שלושה;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "ארבעה;", 
+          "rule": "ארבעה;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "חמישה;", 
+          "rule": "חמישה;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "שישה;", 
+          "rule": "שישה;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "שבעה;", 
+          "rule": "שבעה;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "שמונה;", 
+          "rule": "שמונה;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "תשעה;", 
+          "rule": "תשעה;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "עשרה;", 
+          "rule": "עשרה;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "אחד עשר;", 
+          "rule": "אחד עשר;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "שניים עשר;", 
+          "rule": "שניים עשר;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→ עשר;", 
+          "rule": "→→ עשר;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "עשרים[ →%%and-masculine→];", 
+          "rule": "עשרים[ →%%and-masculine→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "שלושים[ →%%and-masculine→];", 
+          "rule": "שלושים[ →%%and-masculine→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "ארבעים[ →%%and-masculine→];", 
+          "rule": "ארבעים[ →%%and-masculine→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "חמישים[ →%%and-masculine→];", 
+          "rule": "חמישים[ →%%and-masculine→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "שישים[ →%%and-masculine→];", 
+          "rule": "שישים[ →%%and-masculine→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "שבעים[ →%%and-masculine→];", 
+          "rule": "שבעים[ →%%and-masculine→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "שמונים[ →%%and-masculine→];", 
+          "rule": "שמונים[ →%%and-masculine→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "תשעים[ →%%and-masculine→];", 
+          "rule": "תשעים[ →%%and-masculine→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "מאה[ →%%and-masculine→];", 
+          "rule": "מאה[ →%%and-masculine→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "מאתיים[ →%%and-masculine→];", 
+          "rule": "מאתיים[ →%%and-masculine→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← מאות[ →%%and-masculine→];", 
+          "rule": "←%spellout-numbering← מאות[ →%%and-masculine→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "אלף[ →%%and-masculine→];", 
+          "rule": "אלף[ →%%and-masculine→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "אלפיים[ →%%and-masculine→];", 
+          "rule": "אלפיים[ →%%and-masculine→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%thousands← אלפים[ →%%and-masculine→];", 
+          "rule": "←%%thousands← אלפים[ →%%and-masculine→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← אלף[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← אלף[ →%%and-masculine→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "מיליון[ →%%and-masculine→];", 
+          "rule": "מיליון[ →%%and-masculine→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "שני מיליון[ →%%and-masculine→];", 
+          "rule": "שני מיליון[ →%%and-masculine→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← מיליון[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← מיליון[ →%%and-masculine→];",
           "value": "3000000"
-        }, 
+        },
         {
-          "rule": "מיליארד[ →%%and-masculine→];", 
+          "rule": "מיליארד[ →%%and-masculine→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "שני מיליארד[ →%%and-masculine→];", 
+          "rule": "שני מיליארד[ →%%and-masculine→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← מיליארד[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← מיליארד[ →%%and-masculine→];",
           "value": "3000000000"
-        }, 
+        },
         {
-          "rule": "ביליון[ →%%and-masculine→];", 
+          "rule": "ביליון[ →%%and-masculine→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "שני ביליון[ →%%and-masculine→];", 
+          "rule": "שני ביליון[ →%%and-masculine→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← ביליון[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← ביליון[ →%%and-masculine→];",
           "value": "3000000000000"
-        }, 
+        },
         {
-          "rule": "טריליון[ →%%and-masculine→];", 
+          "rule": "טריליון[ →%%and-masculine→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "שני טריליון[ →%%and-masculine→];", 
+          "rule": "שני טריליון[ →%%and-masculine→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← טריליון[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← טריליון[ →%%and-masculine→];",
           "value": "3000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine-standalone": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "מינוס →→;", 
+          "rule": "מינוס →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← נקודה →→ ;", 
+          "rule": "←%%spellout-numbering-m← נקודה →→ ;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "שניים;", 
+          "rule": "שניים;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-construct-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "מינוס →→;", 
+          "rule": "מינוס →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-feminine=;", 
+          "rule": "=%spellout-cardinal-feminine=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "שתי;", 
+          "rule": "שתי;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-feminine=;", 
+          "rule": "=%spellout-cardinal-feminine=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-construct-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "מינוס →→;", 
+          "rule": "מינוס →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "אחד;", 
+          "rule": "אחד;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "שני;", 
+          "rule": "שני;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "שלושת;", 
+          "rule": "שלושת;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "ארבעת;", 
+          "rule": "ארבעת;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "חמשת;", 
+          "rule": "חמשת;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "ששת;", 
+          "rule": "ששת;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "שבעת;", 
+          "rule": "שבעת;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "שמונת;", 
+          "rule": "שמונת;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "תשעת;", 
+          "rule": "תשעת;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "עשרת;", 
+          "rule": "עשרת;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "11"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "מינוס →→;", 
+          "rule": "מינוס →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← נקודה →→;", 
+          "rule": "←← נקודה →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "אפס;", 
+          "rule": "אפס;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "אחת;", 
+          "rule": "אחת;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "שתיים;", 
+          "rule": "שתיים;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "שלוש;", 
+          "rule": "שלוש;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "ארבע;", 
+          "rule": "ארבע;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "חמש;", 
+          "rule": "חמש;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "שש;", 
+          "rule": "שש;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "שבע;", 
+          "rule": "שבע;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "שמונה;", 
+          "rule": "שמונה;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "תשע;", 
+          "rule": "תשע;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "עשר;", 
+          "rule": "עשר;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "אחת עשרה;", 
+          "rule": "אחת עשרה;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "שתים עשרה;", 
+          "rule": "שתים עשרה;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→ עשרה;", 
+          "rule": "→→ עשרה;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "עשרים[ →%%and-feminine→];", 
+          "rule": "עשרים[ →%%and-feminine→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "שלושים[ →%%and-feminine→];", 
+          "rule": "שלושים[ →%%and-feminine→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "ארבעים[ →%%and-feminine→];", 
+          "rule": "ארבעים[ →%%and-feminine→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "חמישים[ →%%and-feminine→];", 
+          "rule": "חמישים[ →%%and-feminine→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "שישים[ →%%and-feminine→];", 
+          "rule": "שישים[ →%%and-feminine→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "שבעים[ →%%and-feminine→];", 
+          "rule": "שבעים[ →%%and-feminine→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "שמונים[ →%%and-feminine→];", 
+          "rule": "שמונים[ →%%and-feminine→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "תשעים[ →%%and-feminine→];", 
+          "rule": "תשעים[ →%%and-feminine→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "מאה[ →%%and-feminine→];", 
+          "rule": "מאה[ →%%and-feminine→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "מאתיים[ →%%and-feminine→];", 
+          "rule": "מאתיים[ →%%and-feminine→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← מאות[ →%%and-feminine→];", 
+          "rule": "←%spellout-numbering← מאות[ →%%and-feminine→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "אלף[ →%%and-feminine→];", 
+          "rule": "אלף[ →%%and-feminine→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "אלפיים[ →%%and-feminine→];", 
+          "rule": "אלפיים[ →%%and-feminine→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%thousands← אלפים[ →%%and-feminine→];", 
+          "rule": "←%%thousands← אלפים[ →%%and-feminine→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← אלף[ →%%and-feminine→];", 
+          "rule": "←%%spellout-numbering-m← אלף[ →%%and-feminine→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "מיליון[ →%%and-feminine→];", 
+          "rule": "מיליון[ →%%and-feminine→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "שני מיליון[ →%%and-feminine→];", 
+          "rule": "שני מיליון[ →%%and-feminine→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← מיליון[ →%%and-feminine→];", 
+          "rule": "←%%spellout-numbering-m← מיליון[ →%%and-feminine→];",
           "value": "3000000"
-        }, 
+        },
         {
-          "rule": "מיליארד[ →%%and-feminine→];", 
+          "rule": "מיליארד[ →%%and-feminine→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "שני מיליארד[ →%%and-feminine→];", 
+          "rule": "שני מיליארד[ →%%and-feminine→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← מיליארד[ →%%and-feminine→];", 
+          "rule": "←%%spellout-numbering-m← מיליארד[ →%%and-feminine→];",
           "value": "3000000000"
-        }, 
+        },
         {
-          "rule": "ביליון[ →%%and-feminine→];", 
+          "rule": "ביליון[ →%%and-feminine→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "שני ביליון[ →%%and-feminine→];", 
+          "rule": "שני ביליון[ →%%and-feminine→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← ביליון[ →%%and-feminine→];", 
+          "rule": "←%%spellout-numbering-m← ביליון[ →%%and-feminine→];",
           "value": "3000000000000"
-        }, 
+        },
         {
-          "rule": "טריליון[ →%%and-feminine→];", 
+          "rule": "טריליון[ →%%and-feminine→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "שני טריליון[ →%%and-feminine→];", 
+          "rule": "שני טריליון[ →%%and-feminine→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← טריליון[ →%%and-feminine→];", 
+          "rule": "←%%spellout-numbering-m← טריליון[ →%%and-feminine→];",
           "value": "3000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering-m": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "אפס;", 
+          "rule": "אפס;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "אחד;", 
+          "rule": "אחד;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "שניים;", 
+          "rule": "שניים;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "שלושה;", 
+          "rule": "שלושה;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "ארבעה;", 
+          "rule": "ארבעה;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "חמישה;", 
+          "rule": "חמישה;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "שישה;", 
+          "rule": "שישה;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "שבעה;", 
+          "rule": "שבעה;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "שמונה;", 
+          "rule": "שמונה;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "תשעה;", 
+          "rule": "תשעה;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "עשרה;", 
+          "rule": "עשרה;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "אחד עשר;", 
+          "rule": "אחד עשר;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "שניים עשר;", 
+          "rule": "שניים עשר;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→ עשר;", 
+          "rule": "→→ עשר;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "עשרים[ →%%and-masculine→];", 
+          "rule": "עשרים[ →%%and-masculine→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "שלושים[ →%%and-masculine→];", 
+          "rule": "שלושים[ →%%and-masculine→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "ארבעים[ →%%and-masculine→];", 
+          "rule": "ארבעים[ →%%and-masculine→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "חמישים[ →%%and-masculine→];", 
+          "rule": "חמישים[ →%%and-masculine→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "שישים[ →%%and-masculine→];", 
+          "rule": "שישים[ →%%and-masculine→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "שבעים[ →%%and-masculine→];", 
+          "rule": "שבעים[ →%%and-masculine→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "שמונים[ →%%and-masculine→];", 
+          "rule": "שמונים[ →%%and-masculine→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "תשעים[ →%%and-masculine→];", 
+          "rule": "תשעים[ →%%and-masculine→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "מאה[ →%%and-masculine→];", 
+          "rule": "מאה[ →%%and-masculine→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "מאתיים[ →%%and-masculine→];", 
+          "rule": "מאתיים[ →%%and-masculine→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← מאות[ →%%and-masculine→];", 
+          "rule": "←%spellout-numbering← מאות[ →%%and-masculine→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "אלף[ →%%and-masculine→];", 
+          "rule": "אלף[ →%%and-masculine→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "אלפיים[ →%%and-masculine→];", 
+          "rule": "אלפיים[ →%%and-masculine→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%thousands← אלפים[ →%%and-masculine→];", 
+          "rule": "←%%thousands← אלפים[ →%%and-masculine→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← אלף[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← אלף[ →%%and-masculine→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "מיליון[ →%%and-masculine→];", 
+          "rule": "מיליון[ →%%and-masculine→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "שני מיליון[ →%%and-masculine→];", 
+          "rule": "שני מיליון[ →%%and-masculine→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← מיליון[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← מיליון[ →%%and-masculine→];",
           "value": "3000000"
-        }, 
+        },
         {
-          "rule": "מיליארד[ →%%and-masculine→];", 
+          "rule": "מיליארד[ →%%and-masculine→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "שני מיליארד[ →%%and-masculine→];", 
+          "rule": "שני מיליארד[ →%%and-masculine→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← מיליארד[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← מיליארד[ →%%and-masculine→];",
           "value": "3000000000"
-        }, 
+        },
         {
-          "rule": "ביליון[ →%%and-masculine→];", 
+          "rule": "ביליון[ →%%and-masculine→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "שני ביליון[ →%%and-masculine→];", 
+          "rule": "שני ביליון[ →%%and-masculine→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← ביליון[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← ביליון[ →%%and-masculine→];",
           "value": "3000000000000"
-        }, 
+        },
         {
-          "rule": "טריליון[ →%%and-masculine→];", 
+          "rule": "טריליון[ →%%and-masculine→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "שני טריליון[ →%%and-masculine→];", 
+          "rule": "שני טריליון[ →%%and-masculine→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-numbering-m← טריליון[ →%%and-masculine→];", 
+          "rule": "←%%spellout-numbering-m← טריליון[ →%%and-masculine→];",
           "value": "3000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "מינוס →→;", 
+          "rule": "מינוס →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "מספר אפס;", 
+          "rule": "מספר אפס;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ראשונה;", 
+          "rule": "ראשונה;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "שניה;", 
+          "rule": "שניה;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "שלישית;", 
+          "rule": "שלישית;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "רביעית;", 
+          "rule": "רביעית;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "חמישית;", 
+          "rule": "חמישית;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "שישית;", 
+          "rule": "שישית;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "שביעית;", 
+          "rule": "שביעית;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "שמינית;", 
+          "rule": "שמינית;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "תשיעית;", 
+          "rule": "תשיעית;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "עשירית;", 
+          "rule": "עשירית;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "11"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "מינוס →→;", 
+          "rule": "מינוס →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "מספר אפס;", 
+          "rule": "מספר אפס;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ראשון;", 
+          "rule": "ראשון;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "שני;", 
+          "rule": "שני;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "שלישי;", 
+          "rule": "שלישי;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "רביעי;", 
+          "rule": "רביעי;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "חמישי;", 
+          "rule": "חמישי;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "שישי;", 
+          "rule": "שישי;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "שביעי;", 
+          "rule": "שביעי;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "שמיני;", 
+          "rule": "שמיני;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "תשיעי;", 
+          "rule": "תשיעי;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "עשירי;", 
+          "rule": "עשירי;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "=%%spellout-numbering-m=;", 
+          "rule": "=%%spellout-numbering-m=;",
           "value": "11"
         }
       ]
-    }, 
+    },
     "thousands": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ERROR-=0=;", 
+          "rule": "ERROR-=0=;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=ת;", 
+          "rule": "=%spellout-numbering=ת;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "שמונת;", 
+          "rule": "שמונת;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=ת;", 
+          "rule": "=%spellout-numbering=ת;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "ERROR-=0=;", 
+          "rule": "ERROR-=0=;",
           "value": "11"
         }
       ]

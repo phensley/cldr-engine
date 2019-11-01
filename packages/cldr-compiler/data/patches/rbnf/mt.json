@@ -1,953 +1,953 @@
 {
   "SpelloutRules": {
     "and-type-a-feminine": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' u =%spellout-cardinal-feminine=;", 
+          "rule": "' u =%spellout-cardinal-feminine=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "and-type-a-masculine": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' u =%spellout-cardinal-masculine=;", 
+          "rule": "' u =%spellout-cardinal-masculine=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "and-type-b-feminine": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' u =%%spellout-cardinal-type-b-feminine=;", 
+          "rule": "' u =%%spellout-cardinal-type-b-feminine=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "and-type-b-masculine": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' u =%%spellout-cardinal-type-b-masculine=;", 
+          "rule": "' u =%%spellout-cardinal-type-b-masculine=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "lenient-parse": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "&[last primary ignorable ] ←← ' ' ←← ',' ←← '-' ←← '­';", 
+          "rule": "&[last primary ignorable ] ←← ' ' ←← ',' ←← '-' ←← '­';",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← punt →→;", 
+          "rule": "←← punt →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "żero;", 
+          "rule": "żero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "waħda;", 
+          "rule": "waħda;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "żewġ;", 
+          "rule": "żewġ;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tliet;", 
+          "rule": "tliet;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "erbaʼ;", 
+          "rule": "erbaʼ;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "ħames;", 
+          "rule": "ħames;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sitt;", 
+          "rule": "sitt;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sebaʼ;", 
+          "rule": "sebaʼ;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "tmien;", 
+          "rule": "tmien;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "disaʼ;", 
+          "rule": "disaʼ;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "għaxar;", 
+          "rule": "għaxar;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "ħdax-il;", 
+          "rule": "ħdax-il;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "tnax-il;", 
+          "rule": "tnax-il;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "tlettax-il;", 
+          "rule": "tlettax-il;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "erbatax-il;", 
+          "rule": "erbatax-il;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "ħmistax-il;", 
+          "rule": "ħmistax-il;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "sittax-il;", 
+          "rule": "sittax-il;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "sbatax-il;", 
+          "rule": "sbatax-il;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "tmintax-il;", 
+          "rule": "tmintax-il;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "dsatax-il;", 
+          "rule": "dsatax-il;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-feminine→ u ]għoxrin;", 
+          "rule": "[→%spellout-cardinal-feminine→ u ]għoxrin;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-feminine→ u ]tletin;", 
+          "rule": "[→%spellout-cardinal-feminine→ u ]tletin;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-feminine→ u ]erbgħin;", 
+          "rule": "[→%spellout-cardinal-feminine→ u ]erbgħin;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-feminine→ u ]ħamsin;", 
+          "rule": "[→%spellout-cardinal-feminine→ u ]ħamsin;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-feminine→ u ]sittin;", 
+          "rule": "[→%spellout-cardinal-feminine→ u ]sittin;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-feminine→ u ]sebgħin;", 
+          "rule": "[→%spellout-cardinal-feminine→ u ]sebgħin;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-feminine→ u ]tmenin;", 
+          "rule": "[→%spellout-cardinal-feminine→ u ]tmenin;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-feminine→ u ]disgħin;", 
+          "rule": "[→%spellout-cardinal-feminine→ u ]disgħin;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "mitt;", 
+          "rule": "mitt;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "mija u →%spellout-cardinal-feminine→;", 
+          "rule": "mija u →%spellout-cardinal-feminine→;",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "mitejn[ u →%spellout-cardinal-feminine→];", 
+          "rule": "mitejn[ u →%spellout-cardinal-feminine→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← mija[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← mija[→%%and-type-a-feminine→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "elf[→%%and-type-a-feminine→];", 
+          "rule": "elf[→%%and-type-a-feminine→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "elfejn[→%%and-type-a-feminine→];", 
+          "rule": "elfejn[→%%and-type-a-feminine→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%thousands← elef[→%%and-type-a-feminine→];", 
+          "rule": "←%%thousands← elef[→%%and-type-a-feminine→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← elf[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← elf[→%%and-type-a-feminine→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "miljun[→%%and-type-a-feminine→];", 
+          "rule": "miljun[→%%and-type-a-feminine→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miljuni[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← miljuni[→%%and-type-a-feminine→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-a-feminine→];",
           "value": "11000000/1000"
-        }, 
+        },
         {
-          "rule": "biljun[→%%and-type-a-feminine→];", 
+          "rule": "biljun[→%%and-type-a-feminine→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biljuni[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← biljuni[→%%and-type-a-feminine→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-a-feminine→];",
           "value": "11000000000/1000"
-        }, 
+        },
         {
-          "rule": "triljun[→%%and-type-a-feminine→];", 
+          "rule": "triljun[→%%and-type-a-feminine→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triljuni[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← triljuni[→%%and-type-a-feminine→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-a-feminine→];",
           "value": "11000000000000/1000"
-        }, 
+        },
         {
-          "rule": "kvadriljun[→%%and-type-a-feminine→];", 
+          "rule": "kvadriljun[→%%and-type-a-feminine→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← kvadriljuni[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← kvadriljuni[→%%and-type-a-feminine→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-a-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-a-feminine→];",
           "value": "11000000000000000/1000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← punt →→;", 
+          "rule": "←← punt →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "żero;", 
+          "rule": "żero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "wieħed;", 
+          "rule": "wieħed;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "żewġ;", 
+          "rule": "żewġ;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tliet;", 
+          "rule": "tliet;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "erbaʼ;", 
+          "rule": "erbaʼ;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "ħames;", 
+          "rule": "ħames;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sitt;", 
+          "rule": "sitt;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sebaʼ;", 
+          "rule": "sebaʼ;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "tmien;", 
+          "rule": "tmien;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "disaʼ;", 
+          "rule": "disaʼ;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "għaxar;", 
+          "rule": "għaxar;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "ħdax-il;", 
+          "rule": "ħdax-il;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "tnax-il;", 
+          "rule": "tnax-il;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "tlettax-il;", 
+          "rule": "tlettax-il;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "erbatax-il;", 
+          "rule": "erbatax-il;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "ħmistax-il;", 
+          "rule": "ħmistax-il;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "sittax-il;", 
+          "rule": "sittax-il;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "sbatax-il;", 
+          "rule": "sbatax-il;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "tmintax-il;", 
+          "rule": "tmintax-il;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "dsatax-il;", 
+          "rule": "dsatax-il;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-masculine→ u ]għoxrin;", 
+          "rule": "[→%spellout-cardinal-masculine→ u ]għoxrin;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-masculine→ u ]tletin;", 
+          "rule": "[→%spellout-cardinal-masculine→ u ]tletin;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-masculine→ u ]erbgħin;", 
+          "rule": "[→%spellout-cardinal-masculine→ u ]erbgħin;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-masculine→ u ]ħamsin;", 
+          "rule": "[→%spellout-cardinal-masculine→ u ]ħamsin;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-masculine→ u ]sittin;", 
+          "rule": "[→%spellout-cardinal-masculine→ u ]sittin;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-masculine→ u ]sebgħin;", 
+          "rule": "[→%spellout-cardinal-masculine→ u ]sebgħin;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-masculine→ u ]tmenin;", 
+          "rule": "[→%spellout-cardinal-masculine→ u ]tmenin;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "[→%spellout-cardinal-masculine→ u ]disgħin;", 
+          "rule": "[→%spellout-cardinal-masculine→ u ]disgħin;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "mitt;", 
+          "rule": "mitt;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "mija u →%spellout-cardinal-masculine→;", 
+          "rule": "mija u →%spellout-cardinal-masculine→;",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "mitejn[ u →%spellout-cardinal-masculine→];", 
+          "rule": "mitejn[ u →%spellout-cardinal-masculine→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← mija[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← mija[→%%and-type-a-masculine→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "elf[→%%and-type-a-masculine→];", 
+          "rule": "elf[→%%and-type-a-masculine→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "elfejn[→%%and-type-a-masculine→];", 
+          "rule": "elfejn[→%%and-type-a-masculine→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%thousands← elef[→%%and-type-a-masculine→];", 
+          "rule": "←%%thousands← elef[→%%and-type-a-masculine→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← elf[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← elf[→%%and-type-a-masculine→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "miljun[→%%and-type-a-masculine→];", 
+          "rule": "miljun[→%%and-type-a-masculine→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miljuni[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← miljuni[→%%and-type-a-masculine→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-a-masculine→];",
           "value": "11000000/1000"
-        }, 
+        },
         {
-          "rule": "biljun[→%%and-type-a-masculine→];", 
+          "rule": "biljun[→%%and-type-a-masculine→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biljuni[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← biljuni[→%%and-type-a-masculine→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-a-masculine→];",
           "value": "11000000000/1000"
-        }, 
+        },
         {
-          "rule": "triljun[→%%and-type-a-masculine→];", 
+          "rule": "triljun[→%%and-type-a-masculine→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triljuni[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← triljuni[→%%and-type-a-masculine→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-a-masculine→];",
           "value": "11000000000000/1000"
-        }, 
+        },
         {
-          "rule": "kvadriljun[→%%and-type-a-masculine→];", 
+          "rule": "kvadriljun[→%%and-type-a-masculine→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← kvadriljuni[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← kvadriljuni[→%%and-type-a-masculine→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-a-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-a-masculine→];",
           "value": "11000000000000000/1000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-type-b-feminine": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← punt →→;", 
+          "rule": "←← punt →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "żero;", 
+          "rule": "żero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "waħda;", 
+          "rule": "waħda;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "tnejn;", 
+          "rule": "tnejn;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tlieta;", 
+          "rule": "tlieta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "erbgħa;", 
+          "rule": "erbgħa;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "ħamsa;", 
+          "rule": "ħamsa;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sitta;", 
+          "rule": "sitta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sebgħa;", 
+          "rule": "sebgħa;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "tmienja;", 
+          "rule": "tmienja;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "disgħa;", 
+          "rule": "disgħa;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "għaxra;", 
+          "rule": "għaxra;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "ħdax;", 
+          "rule": "ħdax;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "tnax;", 
+          "rule": "tnax;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "tlettax;", 
+          "rule": "tlettax;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "erbatax;", 
+          "rule": "erbatax;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "ħmistax;", 
+          "rule": "ħmistax;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "sittax;", 
+          "rule": "sittax;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "sbatax;", 
+          "rule": "sbatax;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "tmintax;", 
+          "rule": "tmintax;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "dsatax;", 
+          "rule": "dsatax;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "[→→ u ]għoxrin;", 
+          "rule": "[→→ u ]għoxrin;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "[→→ u ]tletin;", 
+          "rule": "[→→ u ]tletin;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "[→→ u ]erbgħin;", 
+          "rule": "[→→ u ]erbgħin;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "[→→ u ]ħamsin;", 
+          "rule": "[→→ u ]ħamsin;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "[→→ u ]sittin;", 
+          "rule": "[→→ u ]sittin;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "[→→ u ]sebgħin;", 
+          "rule": "[→→ u ]sebgħin;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "[→→ u ]tmenin;", 
+          "rule": "[→→ u ]tmenin;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "[→→ u ]disgħin;", 
+          "rule": "[→→ u ]disgħin;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "mija[ u →→];", 
+          "rule": "mija[ u →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "mitejn[ u →→];", 
+          "rule": "mitejn[ u →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← mija[ u →→];", 
+          "rule": "←%spellout-cardinal-masculine← mija[ u →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "elf[→%%and-type-b-feminine→];", 
+          "rule": "elf[→%%and-type-b-feminine→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "elfejn[→%%and-type-b-feminine→];", 
+          "rule": "elfejn[→%%and-type-b-feminine→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%thousands← elef[→%%and-type-b-feminine→];", 
+          "rule": "←%%thousands← elef[→%%and-type-b-feminine→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← elf[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← elf[→%%and-type-b-feminine→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "miljun[→%%and-type-b-feminine→];", 
+          "rule": "miljun[→%%and-type-b-feminine→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miljuni[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← miljuni[→%%and-type-b-feminine→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-b-feminine→];",
           "value": "11000000/1000"
-        }, 
+        },
         {
-          "rule": "biljun[→%%and-type-b-feminine→];", 
+          "rule": "biljun[→%%and-type-b-feminine→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biljuni[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← biljuni[→%%and-type-b-feminine→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-b-feminine→];",
           "value": "11000000000/1000"
-        }, 
+        },
         {
-          "rule": "triljun[→%%and-type-b-feminine→];", 
+          "rule": "triljun[→%%and-type-b-feminine→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triljuni[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← triljuni[→%%and-type-b-feminine→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-b-feminine→];",
           "value": "11000000000000/1000"
-        }, 
+        },
         {
-          "rule": "kvadriljun[→%%and-type-b-feminine→];", 
+          "rule": "kvadriljun[→%%and-type-b-feminine→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← kvadriljuni[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← kvadriljuni[→%%and-type-b-feminine→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-b-feminine→];", 
+          "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-b-feminine→];",
           "value": "11000000000000000/1000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-type-b-masculine": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← punt →→;", 
+          "rule": "←← punt →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "żero;", 
+          "rule": "żero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "wieħed;", 
+          "rule": "wieħed;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "tnejn;", 
+          "rule": "tnejn;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tlieta;", 
+          "rule": "tlieta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "erbgħa;", 
+          "rule": "erbgħa;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "ħamsa;", 
+          "rule": "ħamsa;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sitta;", 
+          "rule": "sitta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sebgħa;", 
+          "rule": "sebgħa;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "tmienja;", 
+          "rule": "tmienja;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "disgħa;", 
+          "rule": "disgħa;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "għaxra;", 
+          "rule": "għaxra;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "ħdax;", 
+          "rule": "ħdax;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "tnax;", 
+          "rule": "tnax;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "tlettax;", 
+          "rule": "tlettax;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "erbatax;", 
+          "rule": "erbatax;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "ħmistax;", 
+          "rule": "ħmistax;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "sittax;", 
+          "rule": "sittax;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "sbatax;", 
+          "rule": "sbatax;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "tmintax;", 
+          "rule": "tmintax;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "dsatax;", 
+          "rule": "dsatax;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "[→→ u ]għoxrin;", 
+          "rule": "[→→ u ]għoxrin;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "[→→ u ]tletin;", 
+          "rule": "[→→ u ]tletin;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "[→→ u ]erbgħin;", 
+          "rule": "[→→ u ]erbgħin;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "[→→ u ]ħamsin;", 
+          "rule": "[→→ u ]ħamsin;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "[→→ u ]sittin;", 
+          "rule": "[→→ u ]sittin;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "[→→ u ]sebgħin;", 
+          "rule": "[→→ u ]sebgħin;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "[→→ u ]tmenin;", 
+          "rule": "[→→ u ]tmenin;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "[→→ u ]disgħin;", 
+          "rule": "[→→ u ]disgħin;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "mija[ u →→];", 
+          "rule": "mija[ u →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "mitejn[ u →→];", 
+          "rule": "mitejn[ u →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← mija[ u →→];", 
+          "rule": "←%spellout-cardinal-masculine← mija[ u →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "elf[→%%and-type-b-masculine→];", 
+          "rule": "elf[→%%and-type-b-masculine→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "elfejn[→%%and-type-b-masculine→];", 
+          "rule": "elfejn[→%%and-type-b-masculine→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%thousands← elef[→%%and-type-b-masculine→];", 
+          "rule": "←%%thousands← elef[→%%and-type-b-masculine→];",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← elf[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← elf[→%%and-type-b-masculine→];",
           "value": "11000/1000"
-        }, 
+        },
         {
-          "rule": "miljun[→%%and-type-b-masculine→];", 
+          "rule": "miljun[→%%and-type-b-masculine→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miljuni[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← miljuni[→%%and-type-b-masculine→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← miljun[→%%and-type-b-masculine→];",
           "value": "11000000/1000"
-        }, 
+        },
         {
-          "rule": "biljun[→%%and-type-b-masculine→];", 
+          "rule": "biljun[→%%and-type-b-masculine→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biljuni[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← biljuni[→%%and-type-b-masculine→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← biljun[→%%and-type-b-masculine→];",
           "value": "11000000000/1000"
-        }, 
+        },
         {
-          "rule": "triljun[→%%and-type-b-masculine→];", 
+          "rule": "triljun[→%%and-type-b-masculine→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triljuni[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← triljuni[→%%and-type-b-masculine→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← triljun[→%%and-type-b-masculine→];",
           "value": "11000000000000/1000"
-        }, 
+        },
         {
-          "rule": "kvadriljun[→%%and-type-b-masculine→];", 
+          "rule": "kvadriljun[→%%and-type-b-masculine→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← kvadriljuni[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← kvadriljuni[→%%and-type-b-masculine→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-b-masculine→];", 
+          "rule": "←%spellout-cardinal-masculine← kvadriljun[→%%and-type-b-masculine→];",
           "value": "11000000000000000/1000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%%spellout-cardinal-type-b-masculine=;", 
+          "rule": "=%%spellout-cardinal-type-b-masculine=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "thousands": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ERROR-=0=;", 
+          "rule": "ERROR-=0=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "tlitt;", 
+          "rule": "tlitt;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "erbat;", 
+          "rule": "erbat;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "ħamest;", 
+          "rule": "ħamest;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sitt;", 
+          "rule": "sitt;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sebat;", 
+          "rule": "sebat;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "tmint;", 
+          "rule": "tmint;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "disat;", 
+          "rule": "disat;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "għaxart;", 
+          "rule": "għaxart;",
           "value": "10"
         }
       ]

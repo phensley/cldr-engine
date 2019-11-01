@@ -1,652 +1,652 @@
 {
   "OrdinalRules": {
     "digits-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "−→→;", 
+          "rule": "−→→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0==%%digits-ordinal-indicator=;", 
+          "rule": "=#,##0==%%digits-ordinal-indicator=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "digits-ordinal-indicator": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "''инчи;", 
+          "rule": "''инчи;",
           "value": "0"
         }
       ]
     }
-  }, 
+  },
   "SpelloutRules": {
     "and": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "' жана =%spellout-cardinal-verbose=;", 
+          "rule": "' жана =%spellout-cardinal-verbose=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-cardinal-verbose=;", 
+          "rule": "' =%spellout-cardinal-verbose=;",
           "value": "100"
         }
       ]
-    }, 
+    },
     "commas": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "' жана =%spellout-cardinal-verbose=;", 
+          "rule": "' жана =%spellout-cardinal-verbose=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": ", =%spellout-cardinal-verbose=;", 
+          "rule": ", =%spellout-cardinal-verbose=;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": ", ←%spellout-cardinal-verbose← миң[→%%commas→];", 
+          "rule": ", ←%spellout-cardinal-verbose← миң[→%%commas→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": ", =%spellout-cardinal-verbose=;", 
+          "rule": ", =%spellout-cardinal-verbose=;",
           "value": "1000000"
         }
       ]
-    }, 
+    },
     "inci": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "инчи;", 
+          "rule": "инчи;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "ingci": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "иңчи;", 
+          "rule": "иңчи;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "ncu": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "нчы;", 
+          "rule": "нчы;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "ncy": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "нчү;", 
+          "rule": "нчү;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "минус →→;", 
+          "rule": "минус →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← бүтүн →%%z-spellout-fraction→;", 
+          "rule": "←← бүтүн →%%z-spellout-fraction→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "нөл;", 
+          "rule": "нөл;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "бир;", 
+          "rule": "бир;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "эки;", 
+          "rule": "эки;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "үч;", 
+          "rule": "үч;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "төрт;", 
+          "rule": "төрт;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "беш;", 
+          "rule": "беш;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "алты;", 
+          "rule": "алты;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "жети;", 
+          "rule": "жети;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "сегиз;", 
+          "rule": "сегиз;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "тогуз;", 
+          "rule": "тогуз;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "он[ →→];", 
+          "rule": "он[ →→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "жыйырма[ →→];", 
+          "rule": "жыйырма[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "отуз[ →→];", 
+          "rule": "отуз[ →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "кырк[ →→];", 
+          "rule": "кырк[ →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "элүү[ →→];", 
+          "rule": "элүү[ →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "алтымыш[ →→];", 
+          "rule": "алтымыш[ →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "жетимиш[ →→];", 
+          "rule": "жетимиш[ →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "сексен[ →→];", 
+          "rule": "сексен[ →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "токсон[ →→];", 
+          "rule": "токсон[ →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "жүз;", 
+          "rule": "жүз;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← жүз[ →→];", 
+          "rule": "←← жүз[ →→];",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "←← жүз[ →→];", 
+          "rule": "←← жүз[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "миң;", 
+          "rule": "миң;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← миң[ →→];", 
+          "rule": "←← миң[ →→];",
           "value": "1001"
-        }, 
+        },
         {
-          "rule": "←← миң[ →→];", 
+          "rule": "←← миң[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "миллион;", 
+          "rule": "миллион;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← миллион[ →→];", 
+          "rule": "←← миллион[ →→];",
           "value": "1000001"
-        }, 
+        },
         {
-          "rule": "←← миллион[ →→];", 
+          "rule": "←← миллион[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "миллиард;", 
+          "rule": "миллиард;",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← миллиард[ →→];", 
+          "rule": "←← миллиард[ →→];",
           "value": "1000000001"
-        }, 
+        },
         {
-          "rule": "←← миллиард[ →→];", 
+          "rule": "←← миллиард[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "триллион;", 
+          "rule": "триллион;",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← триллион[ →→];", 
+          "rule": "←← триллион[ →→];",
           "value": "1000000000001"
-        }, 
+        },
         {
-          "rule": "←← триллион[ →→];", 
+          "rule": "←← триллион[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "квадриллион;", 
+          "rule": "квадриллион;",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←← квадриллион[ →→];", 
+          "rule": "←← квадриллион[ →→];",
           "value": "1000000000000001"
-        }, 
+        },
         {
-          "rule": "←← квадриллион[ →→];", 
+          "rule": "←← квадриллион[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-verbose": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "минус →→;", 
+          "rule": "минус →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← бүтүн →%%z-spellout-fraction→;", 
+          "rule": "←← бүтүн →%%z-spellout-fraction→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "жүз;", 
+          "rule": "жүз;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← жүз[→%%and→];", 
+          "rule": "←← жүз[→%%and→];",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "←← жүз[→%%and→];", 
+          "rule": "←← жүз[→%%and→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "миң;", 
+          "rule": "миң;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← миң[→%%and→];", 
+          "rule": "←← миң[→%%and→];",
           "value": "1001"
-        }, 
+        },
         {
-          "rule": "←← миң[→%%and→];", 
+          "rule": "←← миң[→%%and→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← миң[→%%commas→];", 
+          "rule": "←← миң[→%%commas→];",
           "value": "100000"
-        }, 
+        },
         {
-          "rule": "миллион;", 
+          "rule": "миллион;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← миллион[→%%commas→];", 
+          "rule": "←← миллион[→%%commas→];",
           "value": "1000001"
-        }, 
+        },
         {
-          "rule": "←← миллион[→%%commas→];", 
+          "rule": "←← миллион[→%%commas→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "миллиард;", 
+          "rule": "миллиард;",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← миллиард[→%%commas→];", 
+          "rule": "←← миллиард[→%%commas→];",
           "value": "1000000001"
-        }, 
+        },
         {
-          "rule": "←← миллиард[→%%commas→];", 
+          "rule": "←← миллиард[→%%commas→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "триллион;", 
+          "rule": "триллион;",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← триллион[→%%commas→];", 
+          "rule": "←← триллион[→%%commas→];",
           "value": "1000000000001"
-        }, 
+        },
         {
-          "rule": "←← триллион[→%%commas→];", 
+          "rule": "←← триллион[→%%commas→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "квадриллион;", 
+          "rule": "квадриллион;",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←← квадриллион[→%%commas→];", 
+          "rule": "←← квадриллион[→%%commas→];",
           "value": "1000000000000001"
-        }, 
+        },
         {
-          "rule": "←← квадриллион[→%%commas→];", 
+          "rule": "←← квадриллион[→%%commas→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "минус →→;", 
+          "rule": "минус →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "нөлүнчү;", 
+          "rule": "нөлүнчү;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "биринчи;", 
+          "rule": "биринчи;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "экинчи;", 
+          "rule": "экинчи;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "үчүнчү;", 
+          "rule": "үчүнчү;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "төртүнчү;", 
+          "rule": "төртүнчү;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "бешинчи;", 
+          "rule": "бешинчи;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "алтынчы;", 
+          "rule": "алтынчы;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "жетинчи;", 
+          "rule": "жетинчи;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "сегизинчи;", 
+          "rule": "сегизинчи;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "тогузунчу;", 
+          "rule": "тогузунчу;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "он→%%yncy→;", 
+          "rule": "он→%%yncy→;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "жыйырма→%%ncu→;", 
+          "rule": "жыйырма→%%ncu→;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "отуз→%%yncy→;", 
+          "rule": "отуз→%%yncy→;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "кырк→%%uncu→;", 
+          "rule": "кырк→%%uncu→;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "элүү→%%ncy→;", 
+          "rule": "элүү→%%ncy→;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "алтымыш→%%uncu→;", 
+          "rule": "алтымыш→%%uncu→;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "жетимиш→%%inci→;", 
+          "rule": "жетимиш→%%inci→;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "сексен→%%inci→;", 
+          "rule": "сексен→%%inci→;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "токсон→%%yncy→;", 
+          "rule": "токсон→%%yncy→;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "жүзүнчү;", 
+          "rule": "жүзүнчү;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← жүз→%%yncy2→;", 
+          "rule": "←%spellout-numbering← жүз→%%yncy2→;",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← жүз→%%yncy2→;", 
+          "rule": "←%spellout-numbering← жүз→%%yncy2→;",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "миңиңчи;", 
+          "rule": "миңиңчи;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← миң→%%ingci→;", 
+          "rule": "←%spellout-numbering← миң→%%ingci→;",
           "value": "1001"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← миң→%%ingci→;", 
+          "rule": "←%spellout-numbering← миң→%%ingci→;",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "миллионунчу;", 
+          "rule": "миллионунчу;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← миллион→%%yncy→;", 
+          "rule": "←%spellout-numbering← миллион→%%yncy→;",
           "value": "1000001"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← миллион→%%yncy→;", 
+          "rule": "←%spellout-numbering← миллион→%%yncy→;",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "миллиардынчы;", 
+          "rule": "миллиардынчы;",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← миллиард→%%uncu→;", 
+          "rule": "←%spellout-numbering← миллиард→%%uncu→;",
           "value": "1000000001"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← миллиард→%%uncu→;", 
+          "rule": "←%spellout-numbering← миллиард→%%uncu→;",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "триллионунчу;", 
+          "rule": "триллионунчу;",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← триллион→%%yncy→;", 
+          "rule": "←%spellout-numbering← триллион→%%yncy→;",
           "value": "1000000000001"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← триллион→%%yncy→;", 
+          "rule": "←%spellout-numbering← триллион→%%yncy→;",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "квадриллионунчу;", 
+          "rule": "квадриллионунчу;",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← квадриллион→%%yncy→;", 
+          "rule": "←%spellout-numbering← квадриллион→%%yncy→;",
           "value": "1000000000000001"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← квадриллион→%%yncy→;", 
+          "rule": "←%spellout-numbering← квадриллион→%%yncy→;",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0='inci;", 
+          "rule": "=#,##0='inci;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "uncu": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ынчы;", 
+          "rule": "ынчы;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "yncy": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "унчу;", 
+          "rule": "унчу;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "yncy2": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "үнчү;", 
+          "rule": "үнчү;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "z-spellout-fraction": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ондон ←%spellout-numbering←;", 
+          "rule": "ондон ←%spellout-numbering←;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "жүздөн ←%spellout-numbering←;", 
+          "rule": "жүздөн ←%spellout-numbering←;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "миңден ←%spellout-numbering←;", 
+          "rule": "миңден ←%spellout-numbering←;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "он миңден ←%spellout-numbering←;", 
+          "rule": "он миңден ←%spellout-numbering←;",
           "value": "10000"
-        }, 
+        },
         {
-          "rule": "жүз миңден ←%spellout-numbering←;", 
+          "rule": "жүз миңден ←%spellout-numbering←;",
           "value": "100000"
-        }, 
+        },
         {
-          "rule": "миллиондон ←%spellout-numbering←;", 
+          "rule": "миллиондон ←%spellout-numbering←;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "он миллиондон ←%spellout-numbering←;", 
+          "rule": "он миллиондон ←%spellout-numbering←;",
           "value": "10000000"
-        }, 
+        },
         {
-          "rule": "жүз миллиондон ←%spellout-numbering←;", 
+          "rule": "жүз миллиондон ←%spellout-numbering←;",
           "value": "100000000"
-        }, 
+        },
         {
-          "rule": "миллиарддан ←%spellout-numbering←;", 
+          "rule": "миллиарддан ←%spellout-numbering←;",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "он миллиарддан ←%spellout-numbering←;", 
+          "rule": "он миллиарддан ←%spellout-numbering←;",
           "value": "10000000000"
-        }, 
+        },
         {
-          "rule": "жүз миллиарддан ←%spellout-numbering←;", 
+          "rule": "жүз миллиарддан ←%spellout-numbering←;",
           "value": "100000000000"
-        }, 
+        },
         {
-          "rule": "0* ←#,##0←←;", 
+          "rule": "0* ←#,##0←←;",
           "value": "1000000000000"
         }
       ]

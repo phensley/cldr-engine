@@ -1,145 +1,145 @@
 {
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← komo →→;", 
+          "rule": "←← komo →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nulo;", 
+          "rule": "nulo;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "unu;", 
+          "rule": "unu;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "du;", 
+          "rule": "du;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tri;", 
+          "rule": "tri;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "kvar;", 
+          "rule": "kvar;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "kvin;", 
+          "rule": "kvin;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "ses;", 
+          "rule": "ses;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sep;", 
+          "rule": "sep;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "ok;", 
+          "rule": "ok;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "naŭ;", 
+          "rule": "naŭ;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "dek[ →→];", 
+          "rule": "dek[ →→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "←←dek[ →→];", 
+          "rule": "←←dek[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "cent[ →→];", 
+          "rule": "cent[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←cent[ →→];", 
+          "rule": "←←cent[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "mil[ →→];", 
+          "rule": "mil[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← mil[ →→];", 
+          "rule": "←← mil[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miliono[ →→];", 
+          "rule": "miliono[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← milionoj[ →→];", 
+          "rule": "←← milionoj[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miliardo[ →→];", 
+          "rule": "miliardo[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miliardoj[ →→];", 
+          "rule": "←← miliardoj[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biliono[ →→];", 
+          "rule": "biliono[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← bilionoj[ →→];", 
+          "rule": "←← bilionoj[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "biliardo[ →→];", 
+          "rule": "biliardo[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←← biliardoj[ →→];", 
+          "rule": "←← biliardoj[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=a;", 
+          "rule": "=%spellout-cardinal=a;",
           "value": "0"
         }
       ]

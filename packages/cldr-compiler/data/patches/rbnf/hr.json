@@ -1,798 +1,798 @@
 {
   "SpelloutRules": {
     "spellout-cardinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← zarez →→;", 
+          "rule": "←← zarez →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nula;", 
+          "rule": "nula;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "jedna;", 
+          "rule": "jedna;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dvije;", 
+          "rule": "dvije;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "dvadeset[ i →→];", 
+          "rule": "dvadeset[ i →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "trideset[ i →→];", 
+          "rule": "trideset[ i →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "četrdeset[ i →→];", 
+          "rule": "četrdeset[ i →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "pedeset[ i →→];", 
+          "rule": "pedeset[ i →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "šezdeset[ i →→];", 
+          "rule": "šezdeset[ i →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "sedamdeset[ i →→];", 
+          "rule": "sedamdeset[ i →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "osamdeset[ i →→];", 
+          "rule": "osamdeset[ i →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "devedeset[ i →→];", 
+          "rule": "devedeset[ i →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "sto[ →→];", 
+          "rule": "sto[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "dvjesto[ →→];", 
+          "rule": "dvjesto[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tristo[ →→];", 
+          "rule": "tristo[ →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "četiristo[ →→];", 
+          "rule": "četiristo[ →→];",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "petsto[ →→];", 
+          "rule": "petsto[ →→];",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "šeststo[ →→];", 
+          "rule": "šeststo[ →→];",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "sedamsto[ →→];", 
+          "rule": "sedamsto[ →→];",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "osamsto[ →→];", 
+          "rule": "osamsto[ →→];",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "devetsto[ →→];", 
+          "rule": "devetsto[ →→];",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "tisuću[ →→];", 
+          "rule": "tisuću[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← tisuće[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← tisuće[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← tisuća[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← tisuća[ →→];",
           "value": "5000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijun[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];",
           "value": "5000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijarda[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijarda[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijarde[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijarde[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijardi[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijardi[ →→];",
           "value": "5000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];",
           "value": "5000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijarda[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijarda[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijarde[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijarde[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijardi[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijardi[ →→];",
           "value": "5000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← zarez →→;", 
+          "rule": "←← zarez →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nula;", 
+          "rule": "nula;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "jedan;", 
+          "rule": "jedan;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dva;", 
+          "rule": "dva;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tri;", 
+          "rule": "tri;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "četiri;", 
+          "rule": "četiri;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "pet;", 
+          "rule": "pet;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "šest;", 
+          "rule": "šest;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sedam;", 
+          "rule": "sedam;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "osam;", 
+          "rule": "osam;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "devet;", 
+          "rule": "devet;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "deset;", 
+          "rule": "deset;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "jedanaest;", 
+          "rule": "jedanaest;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "dvanaest;", 
+          "rule": "dvanaest;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "trinaest;", 
+          "rule": "trinaest;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "četrnaest;", 
+          "rule": "četrnaest;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "petnaest;", 
+          "rule": "petnaest;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "šesnaest;", 
+          "rule": "šesnaest;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "sedamnaest;", 
+          "rule": "sedamnaest;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "osamnaest;", 
+          "rule": "osamnaest;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "devetnaest;", 
+          "rule": "devetnaest;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "dvadeset[ i →→];", 
+          "rule": "dvadeset[ i →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "trideset[ i →→];", 
+          "rule": "trideset[ i →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "četrdeset[ i →→];", 
+          "rule": "četrdeset[ i →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "pedeset[ i →→];", 
+          "rule": "pedeset[ i →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "šezdeset[ i →→];", 
+          "rule": "šezdeset[ i →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "sedamdeset[ i →→];", 
+          "rule": "sedamdeset[ i →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "osamdeset[ i →→];", 
+          "rule": "osamdeset[ i →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "devedeset[ i →→];", 
+          "rule": "devedeset[ i →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "sto[ →→];", 
+          "rule": "sto[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "dvjesto[ →→];", 
+          "rule": "dvjesto[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tristo[ →→];", 
+          "rule": "tristo[ →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "četiristo[ →→];", 
+          "rule": "četiristo[ →→];",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "petsto[ →→];", 
+          "rule": "petsto[ →→];",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "šeststo[ →→];", 
+          "rule": "šeststo[ →→];",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "sedamsto[ →→];", 
+          "rule": "sedamsto[ →→];",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "osamsto[ →→];", 
+          "rule": "osamsto[ →→];",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "devetsto[ →→];", 
+          "rule": "devetsto[ →→];",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "tisuću[ →→];", 
+          "rule": "tisuću[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← tisuće[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← tisuće[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← tisuća[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← tisuća[ →→];",
           "value": "5000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijun[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];",
           "value": "5000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijarda[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijarda[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijarde[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijarde[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijardi[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijardi[ →→];",
           "value": "5000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];",
           "value": "5000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijarda[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijarda[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijarde[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijarde[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijardi[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijardi[ →→];",
           "value": "5000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-neuter": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← zarez →→;", 
+          "rule": "←← zarez →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nula;", 
+          "rule": "nula;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "jedno;", 
+          "rule": "jedno;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dva;", 
+          "rule": "dva;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "dvadeset[ i →→];", 
+          "rule": "dvadeset[ i →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "trideset[ i →→];", 
+          "rule": "trideset[ i →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "četrdeset[ i →→];", 
+          "rule": "četrdeset[ i →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "pedeset[ i →→];", 
+          "rule": "pedeset[ i →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "šezdeset[ i →→];", 
+          "rule": "šezdeset[ i →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "sedamdeset[ i →→];", 
+          "rule": "sedamdeset[ i →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "osamdeset[ i →→];", 
+          "rule": "osamdeset[ i →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "devedeset[ i →→];", 
+          "rule": "devedeset[ i →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "sto[ →→];", 
+          "rule": "sto[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "dvjesto[ →→];", 
+          "rule": "dvjesto[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tristo[ →→];", 
+          "rule": "tristo[ →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "četiristo[ →→];", 
+          "rule": "četiristo[ →→];",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "petsto[ →→];", 
+          "rule": "petsto[ →→];",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "šeststo[ →→];", 
+          "rule": "šeststo[ →→];",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "sedamsto[ →→];", 
+          "rule": "sedamsto[ →→];",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "osamsto[ →→];", 
+          "rule": "osamsto[ →→];",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "devetsto[ →→];", 
+          "rule": "devetsto[ →→];",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "tisuću[ →→];", 
+          "rule": "tisuću[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← tisuće[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← tisuće[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← tisuća[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← tisuća[ →→];",
           "value": "5000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijun[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijuna[ →→];",
           "value": "5000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijarda[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijarda[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijarde[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijarde[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milijardi[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milijardi[ →→];",
           "value": "5000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijuna[ →→];",
           "value": "5000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijarda[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijarda[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijarde[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijarde[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilijardi[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilijardi[ →→];",
           "value": "5000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-base": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nula;", 
+          "rule": "nula;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "prv;", 
+          "rule": "prv;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "drug;", 
+          "rule": "drug;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "treć;", 
+          "rule": "treć;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "četvrt;", 
+          "rule": "četvrt;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "pet;", 
+          "rule": "pet;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "šest;", 
+          "rule": "šest;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sedm;", 
+          "rule": "sedm;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "osm;", 
+          "rule": "osm;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "devet;", 
+          "rule": "devet;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "deset;", 
+          "rule": "deset;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "dvadeset[ →→];", 
+          "rule": "dvadeset[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "trideset[ →→];", 
+          "rule": "trideset[ →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "četrdeset[ →→];", 
+          "rule": "četrdeset[ →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "pedeset[ →→];", 
+          "rule": "pedeset[ →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "šezdeset[ →→];", 
+          "rule": "šezdeset[ →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "sedamdeset[ →→];", 
+          "rule": "sedamdeset[ →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "osamdeset[ →→];", 
+          "rule": "osamdeset[ →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "devedeset[ →→];", 
+          "rule": "devedeset[ →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "st[ →→];", 
+          "rule": "st[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "dvest[ →→];", 
+          "rule": "dvest[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "trist[ →→];", 
+          "rule": "trist[ →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "četrist[ →→];", 
+          "rule": "četrist[ →→];",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "petst[ →→];", 
+          "rule": "petst[ →→];",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "šest[ →→];", 
+          "rule": "šest[ →→];",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "sedamst[ →→];", 
+          "rule": "sedamst[ →→];",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "osamst[ →→];", 
+          "rule": "osamst[ →→];",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "devetst[ →→];", 
+          "rule": "devetst[ →→];",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "tisuću[ →→];", 
+          "rule": "tisuću[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← tisuće[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← tisuće[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← tisuću[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← tisuću[ →→];",
           "value": "5000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijun[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijuny[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijuny[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milijun[ →→];",
           "value": "5000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miliarda[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← miliarda[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miliardy[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← miliardy[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← miliarda[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← miliarda[ →→];",
           "value": "5000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijuny[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijuny[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilijun[ →→];",
           "value": "5000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biliarda[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← biliarda[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biliardy[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← biliardy[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biliarda[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← biliarda[ →→];",
           "value": "5000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%%spellout-ordinal-base=a;", 
+          "rule": "=%%spellout-ordinal-base=a;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%%spellout-ordinal-base=i;", 
+          "rule": "=%%spellout-ordinal-base=i;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-neuter": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%%spellout-ordinal-base=o;", 
+          "rule": "=%%spellout-ordinal-base=o;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "=%%spellout-ordinal-base=e;", 
+          "rule": "=%%spellout-ordinal-base=e;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "=%%spellout-ordinal-base=o;", 
+          "rule": "=%%spellout-ordinal-base=o;",
           "value": "4"
         }
       ]

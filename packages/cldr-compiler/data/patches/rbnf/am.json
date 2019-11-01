@@ -1,168 +1,168 @@
 {
   "OrdinalRules": {
     "digits-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "−→→;", 
+          "rule": "−→→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0=ኛ;", 
+          "rule": "=#,##0=ኛ;",
           "value": "0"
         }
       ]
     }
-  }, 
+  },
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "ቅንስናሽ →→;", 
+          "rule": "ቅንስናሽ →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← ነጥብ →→;", 
+          "rule": "←← ነጥብ →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "ባዶ;", 
+          "rule": "ባዶ;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "አንድ;", 
+          "rule": "አንድ;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "ሁለት;", 
+          "rule": "ሁለት;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "ሦስት;", 
+          "rule": "ሦስት;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "አራት;", 
+          "rule": "አራት;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "አምስት;", 
+          "rule": "አምስት;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "ስድስት;", 
+          "rule": "ስድስት;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "ሰባት;", 
+          "rule": "ሰባት;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "ስምንት;", 
+          "rule": "ስምንት;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "ዘጠኝ;", 
+          "rule": "ዘጠኝ;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "አስር[ →→];", 
+          "rule": "አስር[ →→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "←← አስር[ →→];", 
+          "rule": "←← አስር[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "መቶ[ →→];", 
+          "rule": "መቶ[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← መቶ[ →→];", 
+          "rule": "←← መቶ[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "ሺ[ →→];", 
+          "rule": "ሺ[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← ሺ[ →→];", 
+          "rule": "←← ሺ[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "ሚሊዮን[ →→];", 
+          "rule": "ሚሊዮን[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← ሚሊዮን[ →→];", 
+          "rule": "←← ሚሊዮን[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← ቢሊዮን[ →→];", 
+          "rule": "←← ቢሊዮን[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← ቲሪሊዮን[ →→];", 
+          "rule": "←← ቲሪሊዮን[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← ቈዲሪሊዮን[ →→];", 
+          "rule": "←← ቈዲሪሊዮን[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "ቅንስናሽ →→;", 
+          "rule": "ቅንስናሽ →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←← መቶ[ →→];", 
+          "rule": "←← መቶ[ →→];",
           "value": "1100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "10000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "ቅንስናሽ →→;", 
+          "rule": "ቅንስናሽ →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=ኛ;", 
+          "rule": "=%spellout-numbering=ኛ;",
           "value": "0"
         }
       ]

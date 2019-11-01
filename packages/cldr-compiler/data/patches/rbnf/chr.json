@@ -1,197 +1,197 @@
 {
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "ꭺꮳꮄꮝꮧ →→;", 
+          "rule": "ꭺꮳꮄꮝꮧ →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← ꭺꮝꮣᏹ →→;", 
+          "rule": "←← ꭺꮝꮣᏹ →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "ꭲꭺꭿꮣ ꭸꮢ;", 
+          "rule": "ꭲꭺꭿꮣ ꭸꮢ;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "ꭷꮒꭹꮣ ꮧꮞꮝꮧ;", 
+          "rule": "ꭷꮒꭹꮣ ꮧꮞꮝꮧ;",
           "value": "NaN"
-        }, 
+        },
         {
-          "rule": "ꮭ ꭺꮝꮧ;", 
+          "rule": "ꮭ ꭺꮝꮧ;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ꮠꮼ;", 
+          "rule": "ꮠꮼ;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "ꮤꮅ;", 
+          "rule": "ꮤꮅ;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "ꮶꭲ;", 
+          "rule": "ꮶꭲ;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "ꮕꭹ;", 
+          "rule": "ꮕꭹ;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "ꭿꮝꭹ;", 
+          "rule": "ꭿꮝꭹ;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "ꮡꮣꮅ;", 
+          "rule": "ꮡꮣꮅ;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "ꭶꮅꮙꭹ;", 
+          "rule": "ꭶꮅꮙꭹ;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "ꮷꮑꮃ;", 
+          "rule": "ꮷꮑꮃ;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "ꮠꮑꮃ;", 
+          "rule": "ꮠꮑꮃ;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "ꮝꭺꭿ;", 
+          "rule": "ꮝꭺꭿ;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "ꮜꮪ;", 
+          "rule": "ꮜꮪ;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "ꮤꮅꮪ;", 
+          "rule": "ꮤꮅꮪ;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "ꮶꭶꮪ;", 
+          "rule": "ꮶꭶꮪ;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "ꮒꭶꮪ;", 
+          "rule": "ꮒꭶꮪ;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "ꭿꮝꭶꮪ;", 
+          "rule": "ꭿꮝꭶꮪ;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "ꮣꮃꮪ;", 
+          "rule": "ꮣꮃꮪ;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "ꭶꮅꮖꮪ;", 
+          "rule": "ꭶꮅꮖꮪ;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "ꮑꮃꮪ;", 
+          "rule": "ꮑꮃꮪ;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "ꮠꮑꮃꮪ;", 
+          "rule": "ꮠꮑꮃꮪ;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "ꮤꮅꮝꭺ→%%spellout-tens→;", 
+          "rule": "ꮤꮅꮝꭺ→%%spellout-tens→;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "ꮶꭲꮝꭺ→%%spellout-tens→;", 
+          "rule": "ꮶꭲꮝꭺ→%%spellout-tens→;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "ꮕꭹꮝꭺ→%%spellout-tens→;", 
+          "rule": "ꮕꭹꮝꭺ→%%spellout-tens→;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "ꭿꮝꭹꮝꭺ→%%spellout-tens→;", 
+          "rule": "ꭿꮝꭹꮝꭺ→%%spellout-tens→;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "ꮡꮣꮅꮝꭺ→%%spellout-tens→;", 
+          "rule": "ꮡꮣꮅꮝꭺ→%%spellout-tens→;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "ꭶꮅꮖꮝꭺ→%%spellout-tens→;", 
+          "rule": "ꭶꮅꮖꮝꭺ→%%spellout-tens→;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "ꮷꮑꮃꮝꭺ→%%spellout-tens→;", 
+          "rule": "ꮷꮑꮃꮝꭺ→%%spellout-tens→;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "ꮠꮑꮃꮝꭺ→%%spellout-tens→;", 
+          "rule": "ꮠꮑꮃꮝꭺ→%%spellout-tens→;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←← ꮝꭺꭿꮵꮖ[ →→];", 
+          "rule": "←← ꮝꭺꭿꮵꮖ[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← ꭲꮿꭶᏼꮅ[ →→];", 
+          "rule": "←← ꭲꮿꭶᏼꮅ[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← ꭲᏻꮖꮧꮕꮣ[ →→];", 
+          "rule": "←← ꭲᏻꮖꮧꮕꮣ[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← ꭲꮿꮤꮃꮧꮕꮫ[ →→];", 
+          "rule": "←← ꭲꮿꮤꮃꮧꮕꮫ[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← ꭲꮿꮶꭰꮧꮕꮫ[ →→];", 
+          "rule": "←← ꭲꮿꮶꭰꮧꮕꮫ[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← ꭲꮿꮕꭶꮧꮕꮫ[ →→];", 
+          "rule": "←← ꭲꮿꮕꭶꮧꮕꮫ[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-tens": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ꭿ;", 
+          "rule": "ꭿ;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-numbering=;", 
+          "rule": "' =%spellout-numbering=;",
           "value": "1"
         }
       ]

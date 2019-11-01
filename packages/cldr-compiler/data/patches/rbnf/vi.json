@@ -1,220 +1,220 @@
 {
   "OrdinalRules": {
     "digits-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "−→→;", 
+          "rule": "−→→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "thứ =#,##0=;", 
+          "rule": "thứ =#,##0=;",
           "value": "0"
         }
       ]
     }
-  }, 
+  },
   "SpelloutRules": {
     "after-hundred": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "lẻ =%spellout-cardinal=;", 
+          "rule": "lẻ =%spellout-cardinal=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "10"
         }
       ]
-    }, 
+    },
     "after-thousand-or-more": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "không trăm =%%after-hundred=;", 
+          "rule": "không trăm =%%after-hundred=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "100"
         }
       ]
-    }, 
+    },
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "âm →→;", 
+          "rule": "âm →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← phẩy →→;", 
+          "rule": "←← phẩy →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "không;", 
+          "rule": "không;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "một;", 
+          "rule": "một;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "hai;", 
+          "rule": "hai;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "ba;", 
+          "rule": "ba;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "bốn;", 
+          "rule": "bốn;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "năm;", 
+          "rule": "năm;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sáu;", 
+          "rule": "sáu;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "bảy;", 
+          "rule": "bảy;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "tám;", 
+          "rule": "tám;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "chín;", 
+          "rule": "chín;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "mười[ →%%teen→];", 
+          "rule": "mười[ →%%teen→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "←← mươi[ →%%x-ty→];", 
+          "rule": "←← mươi[ →%%x-ty→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "←← trăm[ →%%after-hundred→];", 
+          "rule": "←← trăm[ →%%after-hundred→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← nghìn[ →%%after-thousand-or-more→];", 
+          "rule": "←← nghìn[ →%%after-thousand-or-more→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← triệu[ →%%after-hundred→];", 
+          "rule": "←← triệu[ →%%after-hundred→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← tỷ[ →%%after-hundred→];", 
+          "rule": "←← tỷ[ →%%after-hundred→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "thứ =%spellout-cardinal=;", 
+          "rule": "thứ =%spellout-cardinal=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "thứ nhất;", 
+          "rule": "thứ nhất;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "thứ nhì;", 
+          "rule": "thứ nhì;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "thứ =%spellout-cardinal=;", 
+          "rule": "thứ =%spellout-cardinal=;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "thứ tư;", 
+          "rule": "thứ tư;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "thứ =%spellout-cardinal=;", 
+          "rule": "thứ =%spellout-cardinal=;",
           "value": "5"
         }
       ]
-    }, 
+    },
     "teen": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "lăm;", 
+          "rule": "lăm;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "6"
         }
       ]
-    }, 
+    },
     "x-ty": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "mốt;", 
+          "rule": "mốt;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "=%%teen=;", 
+          "rule": "=%%teen=;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tư;", 
+          "rule": "tư;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "=%%teen=;", 
+          "rule": "=%%teen=;",
           "value": "5"
         }
       ]

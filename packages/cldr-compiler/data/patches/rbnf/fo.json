@@ -1,430 +1,430 @@
 {
   "SpelloutRules": {
     "spellout-cardinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← komma →→;", 
+          "rule": "←← komma →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "null;", 
+          "rule": "null;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ein;", 
+          "rule": "ein;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "tvær;", 
+          "rule": "tvær;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tríggjar;", 
+          "rule": "tríggjar;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "fýre;", 
+          "rule": "fýre;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "tjúgo[­→→];", 
+          "rule": "tjúgo[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "tríati[­→→];", 
+          "rule": "tríati[­→→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "fýrati[­→→];", 
+          "rule": "fýrati[­→→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "fimmti[­→→];", 
+          "rule": "fimmti[­→→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "seksti[­→→];", 
+          "rule": "seksti[­→→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "sjeyti[­→→];", 
+          "rule": "sjeyti[­→→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "áttati[­→→];", 
+          "rule": "áttati[­→→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "níti[­→→];", 
+          "rule": "níti[­→→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];", 
+          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];", 
+          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "ein millión[ og →→];", 
+          "rule": "ein millión[ og →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "ein milliard[ og →→];", 
+          "rule": "ein milliard[ og →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "ein billión[ og →→];", 
+          "rule": "ein billión[ og →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "ein billiard[ og →→];", 
+          "rule": "ein billiard[ og →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← komma →→;", 
+          "rule": "←← komma →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "null;", 
+          "rule": "null;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ein;", 
+          "rule": "ein;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "tveir;", 
+          "rule": "tveir;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tríggir;", 
+          "rule": "tríggir;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "fýre;", 
+          "rule": "fýre;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "fimm;", 
+          "rule": "fimm;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "seks;", 
+          "rule": "seks;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sjey;", 
+          "rule": "sjey;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "átta;", 
+          "rule": "átta;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "níggju;", 
+          "rule": "níggju;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "tíggju;", 
+          "rule": "tíggju;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "ellivu;", 
+          "rule": "ellivu;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "tólv;", 
+          "rule": "tólv;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "trettan;", 
+          "rule": "trettan;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "fjúrtan;", 
+          "rule": "fjúrtan;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "fímtan;", 
+          "rule": "fímtan;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "sekstan;", 
+          "rule": "sekstan;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "seytan;", 
+          "rule": "seytan;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "átjan;", 
+          "rule": "átjan;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "nítjan;", 
+          "rule": "nítjan;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "tjúgo[­→→];", 
+          "rule": "tjúgo[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "tríati[­→→];", 
+          "rule": "tríati[­→→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "fýrati[­→→];", 
+          "rule": "fýrati[­→→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "fimmti[­→→];", 
+          "rule": "fimmti[­→→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "seksti[­→→];", 
+          "rule": "seksti[­→→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "sjeyti[­→→];", 
+          "rule": "sjeyti[­→→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "áttati[­→→];", 
+          "rule": "áttati[­→→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "níti[­→→];", 
+          "rule": "níti[­→→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];", 
+          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];", 
+          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "ein millión[ og →→];", 
+          "rule": "ein millión[ og →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "ein milliard[ og →→];", 
+          "rule": "ein milliard[ og →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "ein billión[ og →→];", 
+          "rule": "ein billión[ og →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "ein billiard[ og →→];", 
+          "rule": "ein billiard[ og →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-neuter": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← komma →→;", 
+          "rule": "←← komma →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "null;", 
+          "rule": "null;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "eitt;", 
+          "rule": "eitt;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "tvey;", 
+          "rule": "tvey;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "trý;", 
+          "rule": "trý;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "fýre;", 
+          "rule": "fýre;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "tjúgo[­→→];", 
+          "rule": "tjúgo[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "tríati[­→→];", 
+          "rule": "tríati[­→→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "fýrati[­→→];", 
+          "rule": "fýrati[­→→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "fimmti[­→→];", 
+          "rule": "fimmti[­→→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "seksti[­→→];", 
+          "rule": "seksti[­→→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "sjeyti[­→→];", 
+          "rule": "sjeyti[­→→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "áttati[­→→];", 
+          "rule": "áttati[­→→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "níti[­→→];", 
+          "rule": "níti[­→→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];", 
+          "rule": "←%spellout-cardinal-neuter←­hundrað[­og­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];", 
+          "rule": "←%spellout-cardinal-neuter← tusin[ og →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "ein millión[ og →→];", 
+          "rule": "ein millión[ og →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← millióner[ og →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "ein milliard[ og →→];", 
+          "rule": "ein milliard[ og →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← milliarder[ og →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "ein billión[ og →→];", 
+          "rule": "ein billión[ og →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← billióner[ og →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "ein billiard[ og →→];", 
+          "rule": "ein billiard[ og →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];", 
+          "rule": "←%spellout-cardinal-feminine← billiarder[ og →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "mínus →→;", 
+          "rule": "mínus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←←­hundrað[­og­→→];", 
+          "rule": "←←­hundrað[­og­→→];",
           "value": "1100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "10000"
         }
       ]

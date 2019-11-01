@@ -1,482 +1,482 @@
 {
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "mínusz →→;", 
+          "rule": "mínusz →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← egész →→;", 
+          "rule": "←← egész →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nulla;", 
+          "rule": "nulla;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "egy;", 
+          "rule": "egy;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kettő;", 
+          "rule": "kettő;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "három;", 
+          "rule": "három;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "négy;", 
+          "rule": "négy;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "öt;", 
+          "rule": "öt;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "hat;", 
+          "rule": "hat;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "hét;", 
+          "rule": "hét;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "nyolc;", 
+          "rule": "nyolc;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "kilenc;", 
+          "rule": "kilenc;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "tíz;", 
+          "rule": "tíz;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "tizen­→→;", 
+          "rule": "tizen­→→;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "húsz;", 
+          "rule": "húsz;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "huszon­→→;", 
+          "rule": "huszon­→→;",
           "value": "21"
-        }, 
+        },
         {
-          "rule": "harminc[­→→];", 
+          "rule": "harminc[­→→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "negyven[­→→];", 
+          "rule": "negyven[­→→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "ötven[­→→];", 
+          "rule": "ötven[­→→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "hatvan[­→→];", 
+          "rule": "hatvan[­→→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "hetven[­→→];", 
+          "rule": "hetven[­→→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "nyolcvan[­→→];", 
+          "rule": "nyolcvan[­→→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "kilencven[­→→];", 
+          "rule": "kilencven[­→→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "száz[­→→];", 
+          "rule": "száz[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­száz[­→→];", 
+          "rule": "←%%spellout-cardinal-initial←­száz[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "ezer[­→→];", 
+          "rule": "ezer[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­ezer[­→→];", 
+          "rule": "←%%spellout-cardinal-initial←­ezer[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­millió[­→→];", 
+          "rule": "←%%spellout-cardinal-initial←­millió[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­milliárd[­→→];", 
+          "rule": "←%%spellout-cardinal-initial←­milliárd[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­billió[­→→];", 
+          "rule": "←%%spellout-cardinal-initial←­billió[­→→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­billiárd[­→→];", 
+          "rule": "←%%spellout-cardinal-initial←­billiárd[­→→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-initial": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "egy;", 
+          "rule": "egy;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "két;", 
+          "rule": "két;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-verbose": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "mínusz →→;", 
+          "rule": "mínusz →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← egész →→;", 
+          "rule": "←← egész →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←←­száz[­→→];", 
+          "rule": "←←­száz[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­ezer[­→→];", 
+          "rule": "←←­ezer[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­millió[­→→];", 
+          "rule": "←←­millió[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←←­milliárd[­→→];", 
+          "rule": "←←­milliárd[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←←­billió[­→→];", 
+          "rule": "←←­billió[­→→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←←­billiárd[­→→];", 
+          "rule": "←←­billiárd[­→→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "mínusz →→;", 
+          "rule": "mínusz →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "mínusz →→;", 
+          "rule": "mínusz →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nulla;", 
+          "rule": "nulla;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "első;", 
+          "rule": "első;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "második;", 
+          "rule": "második;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%%spellout-ordinal-larger=;", 
+          "rule": "=%%spellout-ordinal-larger=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-adik": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "adik;", 
+          "rule": "adik;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "=%%spellout-ordinal-larger=;", 
+          "rule": "=%%spellout-ordinal-larger=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "edik;", 
+          "rule": "edik;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "egyedik;", 
+          "rule": "egyedik;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kettedik;", 
+          "rule": "kettedik;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "harmadik;", 
+          "rule": "harmadik;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "negyedik;", 
+          "rule": "negyedik;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "ötödik;", 
+          "rule": "ötödik;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "hatodik;", 
+          "rule": "hatodik;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "hetedik;", 
+          "rule": "hetedik;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "nyolcadik;", 
+          "rule": "nyolcadik;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "kilencedik;", 
+          "rule": "kilencedik;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "tizedik;", 
+          "rule": "tizedik;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "tizen→→;", 
+          "rule": "tizen→→;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "huszadik;", 
+          "rule": "huszadik;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "huszon→→;", 
+          "rule": "huszon→→;",
           "value": "21"
-        }, 
+        },
         {
-          "rule": "harminc→%%spellout-ordinal-adik→;", 
+          "rule": "harminc→%%spellout-ordinal-adik→;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "negyven→→;", 
+          "rule": "negyven→→;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "ötven→→;", 
+          "rule": "ötven→→;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "hatvan→%%spellout-ordinal-adik→;", 
+          "rule": "hatvan→%%spellout-ordinal-adik→;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "hetven→→;", 
+          "rule": "hetven→→;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "nyolcvan→%%spellout-ordinal-adik→;", 
+          "rule": "nyolcvan→%%spellout-ordinal-adik→;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "kilencven→→;", 
+          "rule": "kilencven→→;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "száz→%%spellout-ordinal-adik→;", 
+          "rule": "száz→%%spellout-ordinal-adik→;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←száz→%%spellout-ordinal-adik→;", 
+          "rule": "←%%spellout-cardinal-initial←száz→%%spellout-ordinal-adik→;",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "ezr→→;", 
+          "rule": "ezr→→;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "ezer­→→;", 
+          "rule": "ezer­→→;",
           "value": "1001"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­ezr→→;", 
+          "rule": "←%%spellout-cardinal-initial←­ezr→→;",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­ezer­→→;", 
+          "rule": "←%%spellout-cardinal-initial←­ezer­→→;",
           "value": "2001"
-        }, 
+        },
         {
-          "rule": "←%%spellout-cardinal-initial←­milliom­→%%spellout-ordinal-odik→;", 
+          "rule": "←%%spellout-cardinal-initial←­milliom­→%%spellout-ordinal-odik→;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=.;", 
+          "rule": "=#,##0=.;",
           "value": "1000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-odik": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "odik;", 
+          "rule": "odik;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "=%%spellout-ordinal-larger=;", 
+          "rule": "=%%spellout-ordinal-larger=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-verbose": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "mínusz →→;", 
+          "rule": "mínusz →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nulladik;", 
+          "rule": "nulladik;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "első;", 
+          "rule": "első;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "második;", 
+          "rule": "második;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%%spellout-ordinal-verbose-larger=;", 
+          "rule": "=%%spellout-ordinal-verbose-larger=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-verbose-adik": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "adik;", 
+          "rule": "adik;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "=%%spellout-ordinal-verbose-larger=;", 
+          "rule": "=%%spellout-ordinal-verbose-larger=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-verbose-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "=%%spellout-ordinal-larger=;", 
+          "rule": "=%%spellout-ordinal-larger=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-verbose←száz→%%spellout-ordinal-verbose-adik→;", 
+          "rule": "←%spellout-cardinal-verbose←száz→%%spellout-ordinal-verbose-adik→;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-verbose←­ezr→→;", 
+          "rule": "←%spellout-cardinal-verbose←­ezr→→;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-verbose←­ezer­→→;", 
+          "rule": "←%spellout-cardinal-verbose←­ezer­→→;",
           "value": "1001"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-verbose←­milliom­→%%spellout-ordinal-verbose-odik→;", 
+          "rule": "←%spellout-cardinal-verbose←­milliom­→%%spellout-ordinal-verbose-odik→;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=.;", 
+          "rule": "=#,##0=.;",
           "value": "1000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-verbose-odik": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "odik;", 
+          "rule": "odik;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "=%%spellout-ordinal-verbose-larger=;", 
+          "rule": "=%%spellout-ordinal-verbose-larger=;",
           "value": "1"
         }
       ]

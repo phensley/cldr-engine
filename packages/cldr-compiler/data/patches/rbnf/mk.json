@@ -1,354 +1,354 @@
 {
   "SpelloutRules": {
     "spellout-cardinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "минус →→;", 
+          "rule": "минус →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← кома →→;", 
+          "rule": "←← кома →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "нула;", 
+          "rule": "нула;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "една;", 
+          "rule": "една;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "две;", 
+          "rule": "две;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "дваесет[ и →→];", 
+          "rule": "дваесет[ и →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "триесет[ и →→];", 
+          "rule": "триесет[ и →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "четириесет[ и →→];", 
+          "rule": "четириесет[ и →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "педесет[ и →→];", 
+          "rule": "педесет[ и →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "шеесет[ и →→];", 
+          "rule": "шеесет[ и →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "седумдесет[ и →→];", 
+          "rule": "седумдесет[ и →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "осумдесет[ и →→];", 
+          "rule": "осумдесет[ и →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "деведесет[ и →→];", 
+          "rule": "деведесет[ и →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine←сто[ →→];", 
+          "rule": "←%spellout-cardinal-feminine←сто[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← илјада[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← илјада[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← милион[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← милион[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← милијарда[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← милијарда[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← билион[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← билион[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← билијарда[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← билијарда[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "минус →→;", 
+          "rule": "минус →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← кома →→;", 
+          "rule": "←← кома →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "нула;", 
+          "rule": "нула;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "еден;", 
+          "rule": "еден;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "два;", 
+          "rule": "два;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "три;", 
+          "rule": "три;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "четири;", 
+          "rule": "четири;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "пет;", 
+          "rule": "пет;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "шест;", 
+          "rule": "шест;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "седум;", 
+          "rule": "седум;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "осум;", 
+          "rule": "осум;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "девет;", 
+          "rule": "девет;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "десет;", 
+          "rule": "десет;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "единаесет;", 
+          "rule": "единаесет;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "дванаесет;", 
+          "rule": "дванаесет;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "тринаесет;", 
+          "rule": "тринаесет;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "четиринаесет;", 
+          "rule": "четиринаесет;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "петнаесет;", 
+          "rule": "петнаесет;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "шеснаесет;", 
+          "rule": "шеснаесет;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "седумнаесет;", 
+          "rule": "седумнаесет;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "осумнаесет;", 
+          "rule": "осумнаесет;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "деветнаесет;", 
+          "rule": "деветнаесет;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "дваесет[ и →→];", 
+          "rule": "дваесет[ и →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "триесет[ и →→];", 
+          "rule": "триесет[ и →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "четириесет[ и →→];", 
+          "rule": "четириесет[ и →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "педесет[ и →→];", 
+          "rule": "педесет[ и →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "шеесет[ и →→];", 
+          "rule": "шеесет[ и →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "седумдесет[ и →→];", 
+          "rule": "седумдесет[ и →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "осумдесет[ и →→];", 
+          "rule": "осумдесет[ и →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "деведесет[ и →→];", 
+          "rule": "деведесет[ и →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine←сто[ →→];", 
+          "rule": "←%spellout-cardinal-feminine←сто[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← илјада[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← илјада[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← милион[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← милион[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← милијарда[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← милијарда[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← билион[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← билион[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← билијарда[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← билијарда[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-neuter": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "минус →→;", 
+          "rule": "минус →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← кома →→;", 
+          "rule": "←← кома →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "нула;", 
+          "rule": "нула;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "едно;", 
+          "rule": "едно;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "два;", 
+          "rule": "два;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "дваесет[ и →→];", 
+          "rule": "дваесет[ и →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "триесет[ и →→];", 
+          "rule": "триесет[ и →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "четириесет[ и →→];", 
+          "rule": "четириесет[ и →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "педесет[ и →→];", 
+          "rule": "педесет[ и →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "шеесет[ и →→];", 
+          "rule": "шеесет[ и →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "седумдесет[ и →→];", 
+          "rule": "седумдесет[ и →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "осумдесет[ и →→];", 
+          "rule": "осумдесет[ и →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "деведесет[ и →→];", 
+          "rule": "деведесет[ и →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine←сто[ →→];", 
+          "rule": "←%spellout-cardinal-feminine←сто[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← илјада[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← илјада[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← милион[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← милион[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← милијарда[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← милијарда[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← билион[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← билион[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← билијарда[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← билијарда[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]

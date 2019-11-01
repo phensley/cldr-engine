@@ -1,205 +1,205 @@
 {
   "OrdinalRules": {
     "digits-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "−→→;", 
+          "rule": "−→→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "ika=#,##0=;", 
+          "rule": "ika=#,##0=;",
           "value": "0"
         }
       ]
     }
-  }, 
+  },
   "SpelloutRules": {
     "number-times": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "isáng;", 
+          "rule": "isáng;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dalawáng;", 
+          "rule": "dalawáng;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tatlóng;", 
+          "rule": "tatlóng;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "ápat na;", 
+          "rule": "ápat na;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "limáng;", 
+          "rule": "limáng;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "anim na;", 
+          "rule": "anim na;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "pitóng;", 
+          "rule": "pitóng;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "walóng;", 
+          "rule": "walóng;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "siyám na;", 
+          "rule": "siyám na;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "sampûng;", 
+          "rule": "sampûng;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "labíng-→→;", 
+          "rule": "labíng-→→;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←%%number-times← pû[’t →→];", 
+          "rule": "←%%number-times← pû[’t →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "←%%number-times← daán[ at →→];", 
+          "rule": "←%%number-times← daán[ at →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%number-times← libó[’t →→];", 
+          "rule": "←%%number-times← libó[’t →→];",
           "value": "1000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← tuldok →→;", 
+          "rule": "←← tuldok →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "walâ;", 
+          "rule": "walâ;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "isá;", 
+          "rule": "isá;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dalawá;", 
+          "rule": "dalawá;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "tatló;", 
+          "rule": "tatló;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "ápat;", 
+          "rule": "ápat;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "limá;", 
+          "rule": "limá;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "anim;", 
+          "rule": "anim;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "pitó;", 
+          "rule": "pitó;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "waló;", 
+          "rule": "waló;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "siyám;", 
+          "rule": "siyám;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "sampû;", 
+          "rule": "sampû;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "labíng-→→;", 
+          "rule": "labíng-→→;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←%%number-times← pû[’t →→];", 
+          "rule": "←%%number-times← pû[’t →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "←%%number-times← daán[ at →→];", 
+          "rule": "←%%number-times← daán[ at →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%number-times← libó[’t →→];", 
+          "rule": "←%%number-times← libó[’t →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%number-times← milyón[ at →→];", 
+          "rule": "←%%number-times← milyón[ at →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%number-times← bilyón[ at →→];", 
+          "rule": "←%%number-times← bilyón[ at →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%number-times← trilyón[ at →→];", 
+          "rule": "←%%number-times← trilyón[ at →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%number-times← katrilyón[ at →→];", 
+          "rule": "←%%number-times← katrilyón[ at →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "ika =%spellout-cardinal=;", 
+          "rule": "ika =%spellout-cardinal=;",
           "value": "0"
         }
       ]

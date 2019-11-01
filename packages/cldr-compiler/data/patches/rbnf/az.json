@@ -1,346 +1,346 @@
 {
   "OrdinalRules": {
     "digits-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "−→→;", 
+          "rule": "−→→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0==%%digits-ordinal-indicator=;", 
+          "rule": "=#,##0==%%digits-ordinal-indicator=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "digits-ordinal-indicator": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "''inci;", 
+          "rule": "''inci;",
           "value": "0"
         }
       ]
     }
-  }, 
+  },
   "SpelloutRules": {
     "inci": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "inci;", 
+          "rule": "inci;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "inci2": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "ıncı;", 
+          "rule": "ıncı;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "nci": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "nci;", 
+          "rule": "nci;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "əksi →→;", 
+          "rule": "əksi →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← tam →→;", 
+          "rule": "←← tam →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "sıfır;", 
+          "rule": "sıfır;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "bir;", 
+          "rule": "bir;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "iki;", 
+          "rule": "iki;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "üç;", 
+          "rule": "üç;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "dörd;", 
+          "rule": "dörd;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "beş;", 
+          "rule": "beş;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "altı;", 
+          "rule": "altı;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "yeddi;", 
+          "rule": "yeddi;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "səkkiz;", 
+          "rule": "səkkiz;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "doqquz;", 
+          "rule": "doqquz;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "on[ →→];", 
+          "rule": "on[ →→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "iyirmi[ →→];", 
+          "rule": "iyirmi[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "otuz[ →→];", 
+          "rule": "otuz[ →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "qırx[ →→];", 
+          "rule": "qırx[ →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "əlli[ →→];", 
+          "rule": "əlli[ →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "atmış[ →→];", 
+          "rule": "atmış[ →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "yetmiş[ →→];", 
+          "rule": "yetmiş[ →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "səqsən[ →→];", 
+          "rule": "səqsən[ →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "doxsan[ →→];", 
+          "rule": "doxsan[ →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←← yüz[ →→];", 
+          "rule": "←← yüz[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← min[ →→];", 
+          "rule": "←← min[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← milyon[ →→];", 
+          "rule": "←← milyon[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← milyard[ →→];", 
+          "rule": "←← milyard[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← trilyon[ →→];", 
+          "rule": "←← trilyon[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← katrilyon[ →→];", 
+          "rule": "←← katrilyon[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "əksi →→;", 
+          "rule": "əksi →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "sıfırıncı;", 
+          "rule": "sıfırıncı;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "birinci;", 
+          "rule": "birinci;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "ikinci;", 
+          "rule": "ikinci;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "üçüncü;", 
+          "rule": "üçüncü;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "dördüncü;", 
+          "rule": "dördüncü;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "beşinci;", 
+          "rule": "beşinci;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "altıncı;", 
+          "rule": "altıncı;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "yeddinci;", 
+          "rule": "yeddinci;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "səkkizinci;", 
+          "rule": "səkkizinci;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "doqquzuncu;", 
+          "rule": "doqquzuncu;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "on→%%uncu→;", 
+          "rule": "on→%%uncu→;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "iyirmi→%%nci→;", 
+          "rule": "iyirmi→%%nci→;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "otuz→%%uncu→;", 
+          "rule": "otuz→%%uncu→;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "qırx→%%inci2→;", 
+          "rule": "qırx→%%inci2→;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "əlli→%%nci→;", 
+          "rule": "əlli→%%nci→;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "altmış→%%inci2→;", 
+          "rule": "altmış→%%inci2→;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "yetmiş→%%inci2→;", 
+          "rule": "yetmiş→%%inci2→;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "səqsən→%%inci2→;", 
+          "rule": "səqsən→%%inci2→;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "doxsan→%%inci2→;", 
+          "rule": "doxsan→%%inci2→;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← yüz→%%uncu2→;", 
+          "rule": "←%spellout-numbering← yüz→%%uncu2→;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← bin→%%inci→;", 
+          "rule": "←%spellout-numbering← bin→%%inci→;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← milyon→%%uncu→;", 
+          "rule": "←%spellout-numbering← milyon→%%uncu→;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← milyar→%%inci2→;", 
+          "rule": "←%spellout-numbering← milyar→%%inci2→;",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← trilyon→%%uncu→;", 
+          "rule": "←%spellout-numbering← trilyon→%%uncu→;",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← katrilyon→%%uncu→;", 
+          "rule": "←%spellout-numbering← katrilyon→%%uncu→;",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0='inci;", 
+          "rule": "=#,##0='inci;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "uncu": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "uncu;", 
+          "rule": "uncu;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "uncu2": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "üncü;", 
+          "rule": "üncü;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]

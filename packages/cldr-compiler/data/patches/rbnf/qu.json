@@ -1,154 +1,154 @@
 {
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "mana yupay;", 
+          "rule": "mana yupay;",
           "value": "NaN"
-        }, 
+        },
         {
-          "rule": "mana usay;", 
+          "rule": "mana usay;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "minusu →→;", 
+          "rule": "minusu →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← comma →→;", 
+          "rule": "←← comma →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "chusaq;", 
+          "rule": "chusaq;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "huk;", 
+          "rule": "huk;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "iskay;", 
+          "rule": "iskay;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kinsa;", 
+          "rule": "kinsa;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "tawa;", 
+          "rule": "tawa;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "phisqa;", 
+          "rule": "phisqa;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "suqta;", 
+          "rule": "suqta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "qanchis;", 
+          "rule": "qanchis;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "pusaq;", 
+          "rule": "pusaq;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "isqun;", 
+          "rule": "isqun;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "chunka[ →%%spellout-cardinal-with→];", 
+          "rule": "chunka[ →%%spellout-cardinal-with→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "←← chunka[ →%%spellout-cardinal-with→];", 
+          "rule": "←← chunka[ →%%spellout-cardinal-with→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "←← pachak[ →→];", 
+          "rule": "←← pachak[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← waranqa[ →→];", 
+          "rule": "←← waranqa[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← hunu[ →→];", 
+          "rule": "←← hunu[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← lluna[ →→];", 
+          "rule": "←← lluna[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← trilionu[ →→];", 
+          "rule": "←← trilionu[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← kvadrilionu[ →→];", 
+          "rule": "←← kvadrilionu[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-with": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=-ni-yuq;", 
+          "rule": "=%spellout-cardinal=-ni-yuq;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=-yuq;", 
+          "rule": "=%spellout-cardinal=-yuq;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=-ni-yuq;", 
+          "rule": "=%spellout-cardinal=-ni-yuq;",
           "value": "7"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minusu →→;", 
+          "rule": "minusu →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=-ñiqin;", 
+          "rule": "=%spellout-cardinal=-ñiqin;",
           "value": "0"
         }
       ]

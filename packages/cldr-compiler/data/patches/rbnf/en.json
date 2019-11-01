@@ -1,706 +1,706 @@
 {
   "OrdinalRules": {
     "digits-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "−→→;", 
+          "rule": "−→→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0=$(ordinal,one{st}two{nd}few{rd}other{th})$;", 
+          "rule": "=#,##0=$(ordinal,one{st}two{nd}few{rd}other{th})$;",
           "value": "0"
         }
       ]
     }
-  }, 
+  },
   "SpelloutRules": {
     "2d-year": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "hundred;", 
+          "rule": "hundred;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "oh-=%spellout-numbering=;", 
+          "rule": "oh-=%spellout-numbering=;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "10"
         }
       ]
-    }, 
+    },
     "and": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "' and =%spellout-cardinal-verbose=;", 
+          "rule": "' and =%spellout-cardinal-verbose=;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "' =%spellout-cardinal-verbose=;", 
+          "rule": "' =%spellout-cardinal-verbose=;",
           "value": "100"
         }
       ]
-    }, 
+    },
     "and-o": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "th;", 
+          "rule": "th;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' and =%spellout-ordinal-verbose=;", 
+          "rule": "' and =%spellout-ordinal-verbose=;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal-verbose=;", 
+          "rule": "' =%spellout-ordinal-verbose=;",
           "value": "100"
         }
       ]
-    }, 
+    },
     "commas": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "' and =%spellout-cardinal-verbose=;", 
+          "rule": "' and =%spellout-cardinal-verbose=;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": ", =%spellout-cardinal-verbose=;", 
+          "rule": ", =%spellout-cardinal-verbose=;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": ", ←%spellout-cardinal-verbose← thousand[→%%commas→];", 
+          "rule": ", ←%spellout-cardinal-verbose← thousand[→%%commas→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": ", =%spellout-cardinal-verbose=;", 
+          "rule": ", =%spellout-cardinal-verbose=;",
           "value": "1000000"
         }
       ]
-    }, 
+    },
     "commas-o": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "th;", 
+          "rule": "th;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' and =%spellout-ordinal-verbose=;", 
+          "rule": "' and =%spellout-ordinal-verbose=;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": ", =%spellout-ordinal-verbose=;", 
+          "rule": ", =%spellout-ordinal-verbose=;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": ", ←%spellout-cardinal-verbose← thousand→%%commas-o→;", 
+          "rule": ", ←%spellout-cardinal-verbose← thousand→%%commas-o→;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": ", =%spellout-ordinal-verbose=;", 
+          "rule": ", =%spellout-ordinal-verbose=;",
           "value": "1000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← point →→;", 
+          "rule": "←← point →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "infinite;", 
+          "rule": "infinite;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "not a number;", 
+          "rule": "not a number;",
           "value": "NaN"
-        }, 
+        },
         {
-          "rule": "zero;", 
+          "rule": "zero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "one;", 
+          "rule": "one;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "two;", 
+          "rule": "two;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "three;", 
+          "rule": "three;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "four;", 
+          "rule": "four;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "five;", 
+          "rule": "five;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "six;", 
+          "rule": "six;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seven;", 
+          "rule": "seven;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "eight;", 
+          "rule": "eight;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "nine;", 
+          "rule": "nine;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "ten;", 
+          "rule": "ten;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "eleven;", 
+          "rule": "eleven;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "twelve;", 
+          "rule": "twelve;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "thirteen;", 
+          "rule": "thirteen;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "fourteen;", 
+          "rule": "fourteen;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "fifteen;", 
+          "rule": "fifteen;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "sixteen;", 
+          "rule": "sixteen;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "seventeen;", 
+          "rule": "seventeen;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "eighteen;", 
+          "rule": "eighteen;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "nineteen;", 
+          "rule": "nineteen;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "twenty[-→→];", 
+          "rule": "twenty[-→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "thirty[-→→];", 
+          "rule": "thirty[-→→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "forty[-→→];", 
+          "rule": "forty[-→→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "fifty[-→→];", 
+          "rule": "fifty[-→→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "sixty[-→→];", 
+          "rule": "sixty[-→→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "seventy[-→→];", 
+          "rule": "seventy[-→→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "eighty[-→→];", 
+          "rule": "eighty[-→→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "ninety[-→→];", 
+          "rule": "ninety[-→→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←← hundred[ →→];", 
+          "rule": "←← hundred[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← thousand[ →→];", 
+          "rule": "←← thousand[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← million[ →→];", 
+          "rule": "←← million[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← billion[ →→];", 
+          "rule": "←← billion[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← trillion[ →→];", 
+          "rule": "←← trillion[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← quadrillion[ →→];", 
+          "rule": "←← quadrillion[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-verbose": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← point →→;", 
+          "rule": "←← point →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "infinite;", 
+          "rule": "infinite;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "not a number;", 
+          "rule": "not a number;",
           "value": "NaN"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←← hundred[→%%and→];", 
+          "rule": "←← hundred[→%%and→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←← thousand[→%%and→];", 
+          "rule": "←← thousand[→%%and→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← thousand[→%%commas→];", 
+          "rule": "←← thousand[→%%commas→];",
           "value": "100000/1000"
-        }, 
+        },
         {
-          "rule": "←← million[→%%commas→];", 
+          "rule": "←← million[→%%commas→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← billion[→%%commas→];", 
+          "rule": "←← billion[→%%commas→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← trillion[→%%commas→];", 
+          "rule": "←← trillion[→%%commas→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← quadrillion[→%%commas→];", 
+          "rule": "←← quadrillion[→%%commas→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "infinity;", 
+          "rule": "infinity;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "not a number;", 
+          "rule": "not a number;",
           "value": "NaN"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-verbose": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "infinity;", 
+          "rule": "infinity;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "not a number;", 
+          "rule": "not a number;",
           "value": "NaN"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-verbose=;", 
+          "rule": "=%spellout-cardinal-verbose=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "1010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "1100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "2010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "2100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "3000"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "3010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "3100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "4000"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "4010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "4100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "5000"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "5010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "5100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "6000"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "6010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "6100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "7000"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "7010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "7100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "8000"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "8010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "8100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "9000"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "9010/100"
-        }, 
+        },
         {
-          "rule": "←← →%%2d-year→;", 
+          "rule": "←← →%%2d-year→;",
           "value": "9100/100"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "10000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "infinitieth;", 
+          "rule": "infinitieth;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "zeroth;", 
+          "rule": "zeroth;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "first;", 
+          "rule": "first;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "second;", 
+          "rule": "second;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "third;", 
+          "rule": "third;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "fourth;", 
+          "rule": "fourth;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "fifth;", 
+          "rule": "fifth;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sixth;", 
+          "rule": "sixth;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seventh;", 
+          "rule": "seventh;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "eighth;", 
+          "rule": "eighth;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "ninth;", 
+          "rule": "ninth;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "tenth;", 
+          "rule": "tenth;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "eleventh;", 
+          "rule": "eleventh;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "twelfth;", 
+          "rule": "twelfth;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=th;", 
+          "rule": "=%spellout-numbering=th;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "twen→%%tieth→;", 
+          "rule": "twen→%%tieth→;",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "thir→%%tieth→;", 
+          "rule": "thir→%%tieth→;",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "for→%%tieth→;", 
+          "rule": "for→%%tieth→;",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "fif→%%tieth→;", 
+          "rule": "fif→%%tieth→;",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "six→%%tieth→;", 
+          "rule": "six→%%tieth→;",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "seven→%%tieth→;", 
+          "rule": "seven→%%tieth→;",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "eigh→%%tieth→;", 
+          "rule": "eigh→%%tieth→;",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "nine→%%tieth→;", 
+          "rule": "nine→%%tieth→;",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← hundred→%%th→;", 
+          "rule": "←%spellout-numbering← hundred→%%th→;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← thousand→%%th→;", 
+          "rule": "←%spellout-numbering← thousand→%%th→;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← million→%%th→;", 
+          "rule": "←%spellout-numbering← million→%%th→;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← billion→%%th→;", 
+          "rule": "←%spellout-numbering← billion→%%th→;",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← trillion→%%th→;", 
+          "rule": "←%spellout-numbering← trillion→%%th→;",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering← quadrillion→%%th→;", 
+          "rule": "←%spellout-numbering← quadrillion→%%th→;",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=.;", 
+          "rule": "=#,##0=.;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-verbose": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "minus →→;", 
+          "rule": "minus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "infinitieth;", 
+          "rule": "infinitieth;",
           "value": "Inf"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal=;", 
+          "rule": "=%spellout-ordinal=;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering-verbose← hundred→%%and-o→;", 
+          "rule": "←%spellout-numbering-verbose← hundred→%%and-o→;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering-verbose← thousand→%%and-o→;", 
+          "rule": "←%spellout-numbering-verbose← thousand→%%and-o→;",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering-verbose← thousand→%%commas-o→;", 
+          "rule": "←%spellout-numbering-verbose← thousand→%%commas-o→;",
           "value": "100000/1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering-verbose← million→%%commas-o→;", 
+          "rule": "←%spellout-numbering-verbose← million→%%commas-o→;",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering-verbose← billion→%%commas-o→;", 
+          "rule": "←%spellout-numbering-verbose← billion→%%commas-o→;",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering-verbose← trillion→%%commas-o→;", 
+          "rule": "←%spellout-numbering-verbose← trillion→%%commas-o→;",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-numbering-verbose← quadrillion→%%commas-o→;", 
+          "rule": "←%spellout-numbering-verbose← quadrillion→%%commas-o→;",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=.;", 
+          "rule": "=#,##0=.;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "th": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "th;", 
+          "rule": "th;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "' =%spellout-ordinal=;", 
+          "rule": "' =%spellout-ordinal=;",
           "value": "1"
         }
       ]
-    }, 
+    },
     "tieth": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "tieth;", 
+          "rule": "tieth;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ty-=%spellout-ordinal=;", 
+          "rule": "ty-=%spellout-ordinal=;",
           "value": "1"
         }
       ]

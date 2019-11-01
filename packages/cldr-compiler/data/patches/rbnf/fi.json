@@ -1,5130 +1,5130 @@
 {
   "SpelloutRules": {
     "spellout-cardinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nolla;", 
+          "rule": "nolla;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksi;", 
+          "rule": "yksi;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksi;", 
+          "rule": "kaksi;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolme;", 
+          "rule": "kolme;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljä;", 
+          "rule": "neljä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisi;", 
+          "rule": "viisi;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusi;", 
+          "rule": "kuusi;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemän;", 
+          "rule": "seitsemän;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksan;", 
+          "rule": "kahdeksan;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksän;", 
+          "rule": "yhdeksän;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenen;", 
+          "rule": "kymmenen;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmentä[­→→];", 
+          "rule": "←←­kymmentä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sata[­→→];", 
+          "rule": "sata[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sataa[­→→];", 
+          "rule": "←←­sataa[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhat[­→→];", 
+          "rule": "tuhat[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhatta[­→→];", 
+          "rule": "←←­tuhatta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoona[ →→];", 
+          "rule": "←← miljoona[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonaa[ →→];", 
+          "rule": "←← miljoonaa[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardi[ →→];", 
+          "rule": "←← miljardi[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardia[ →→];", 
+          "rule": "←← miljardia[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoona[ →→];", 
+          "rule": "←← biljoona[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonaa[ →→];", 
+          "rule": "←← biljoonaa[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-ablative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollalta;", 
+          "rule": "nollalta;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhdeltä;", 
+          "rule": "yhdeltä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahdelta;", 
+          "rule": "kahdelta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmelta;", 
+          "rule": "kolmelta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljältä;", 
+          "rule": "neljältä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viideltä;", 
+          "rule": "viideltä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudelta;", 
+          "rule": "kuudelta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemältä;", 
+          "rule": "seitsemältä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksalta;", 
+          "rule": "kahdeksalta;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksältä;", 
+          "rule": "yhdeksältä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmeneltä;", 
+          "rule": "kymmeneltä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmeneltä[­→→];", 
+          "rule": "←←­kymmeneltä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadalta[­→→];", 
+          "rule": "sadalta[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadalta[­→→];", 
+          "rule": "←←­sadalta[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannelta[­→→];", 
+          "rule": "tuhannelta[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhannelta[­→→];", 
+          "rule": "←←­tuhannelta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonalta[ →→];", 
+          "rule": "←← miljoonalta[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonalta[ →→];", 
+          "rule": "←← miljoonalta[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardilta[ →→];", 
+          "rule": "←← miljardilta[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardilta[ →→];", 
+          "rule": "←← miljardilta[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonalta[ →→];", 
+          "rule": "←← biljoonalta[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonalta[ →→];", 
+          "rule": "←← biljoonalta[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-ablative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollilta;", 
+          "rule": "nollilta;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksiltä;", 
+          "rule": "yksiltä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksilta;", 
+          "rule": "kaksilta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmilta;", 
+          "rule": "kolmilta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljiltä;", 
+          "rule": "neljiltä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisiltä;", 
+          "rule": "viisiltä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusilta;", 
+          "rule": "kuusilta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemiltä;", 
+          "rule": "seitsemiltä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksilta;", 
+          "rule": "kahdeksilta;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksiltä;", 
+          "rule": "yhdeksiltä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmeniltä;", 
+          "rule": "kymmeniltä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmeniltä[­→→];", 
+          "rule": "←←­kymmeniltä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadoilta[­→→];", 
+          "rule": "sadoilta[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadoilta[­→→];", 
+          "rule": "←←­sadoilta[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansilta[­→→];", 
+          "rule": "tuhansilta[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansilta[­→→];", 
+          "rule": "←←­tuhansilta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonilta[ →→];", 
+          "rule": "←← miljoonilta[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonilta[ →→];", 
+          "rule": "←← miljoonilta[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeilta[ →→];", 
+          "rule": "←← miljardeilta[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeilta[ →→];", 
+          "rule": "←← miljardeilta[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonilta[ →→];", 
+          "rule": "←← biljoonilta[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonilta[ →→];", 
+          "rule": "←← biljoonilta[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-adessive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollalla;", 
+          "rule": "nollalla;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhdellä;", 
+          "rule": "yhdellä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahdella;", 
+          "rule": "kahdella;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmella;", 
+          "rule": "kolmella;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljällä;", 
+          "rule": "neljällä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidellä;", 
+          "rule": "viidellä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudella;", 
+          "rule": "kuudella;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemällä;", 
+          "rule": "seitsemällä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksalla;", 
+          "rule": "kahdeksalla;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksällä;", 
+          "rule": "yhdeksällä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenellä;", 
+          "rule": "kymmenellä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenellä[­→→];", 
+          "rule": "←←­kymmenellä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadalla[­→→];", 
+          "rule": "sadalla[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadalla[­→→];", 
+          "rule": "←←­sadalla[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannella[­→→];", 
+          "rule": "tuhannella[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhannella[­→→];", 
+          "rule": "←←­tuhannella[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonalla[ →→];", 
+          "rule": "←← miljoonalla[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonalla[ →→];", 
+          "rule": "←← miljoonalla[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardilla[ →→];", 
+          "rule": "←← miljardilla[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardilla[ →→];", 
+          "rule": "←← miljardilla[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonalla[ →→];", 
+          "rule": "←← biljoonalla[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonalla[ →→];", 
+          "rule": "←← biljoonalla[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-adessive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollilla;", 
+          "rule": "nollilla;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksillä;", 
+          "rule": "yksillä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksilla;", 
+          "rule": "kaksilla;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmilla;", 
+          "rule": "kolmilla;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljillä;", 
+          "rule": "neljillä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisillä;", 
+          "rule": "viisillä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusilla;", 
+          "rule": "kuusilla;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemillä;", 
+          "rule": "seitsemillä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksilla;", 
+          "rule": "kahdeksilla;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksillä;", 
+          "rule": "yhdeksillä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenillä;", 
+          "rule": "kymmenillä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenillä[­→→];", 
+          "rule": "←←­kymmenillä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadoilla[­→→];", 
+          "rule": "sadoilla[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadoilla[­→→];", 
+          "rule": "←←­sadoilla[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansilla­[­→→];", 
+          "rule": "tuhansilla­[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansilla[­→→];", 
+          "rule": "←←­tuhansilla[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonilla[ →→];", 
+          "rule": "←← miljoonilla[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonilla[ →→];", 
+          "rule": "←← miljoonilla[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeilla[ →→];", 
+          "rule": "←← miljardeilla[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeilla[ →→];", 
+          "rule": "←← miljardeilla[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonilla[ →→];", 
+          "rule": "←← biljoonilla[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonilla[ →→];", 
+          "rule": "←← biljoonilla[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-allative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollalle;", 
+          "rule": "nollalle;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhdelle;", 
+          "rule": "yhdelle;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahdelle;", 
+          "rule": "kahdelle;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmelle;", 
+          "rule": "kolmelle;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljälle;", 
+          "rule": "neljälle;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidelle;", 
+          "rule": "viidelle;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudelle;", 
+          "rule": "kuudelle;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemälle;", 
+          "rule": "seitsemälle;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksalle;", 
+          "rule": "kahdeksalle;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksälle;", 
+          "rule": "yhdeksälle;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenelle;", 
+          "rule": "kymmenelle;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenelle[­→→];", 
+          "rule": "←←­kymmenelle[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadalle[­→→];", 
+          "rule": "sadalle[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadalle[­→→];", 
+          "rule": "←←­sadalle[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannelle[­→→];", 
+          "rule": "tuhannelle[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhannelle[­→→];", 
+          "rule": "←←­tuhannelle[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonalle[ →→];", 
+          "rule": "←← miljoonalle[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonalle[ →→];", 
+          "rule": "←← miljoonalle[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardille[ →→];", 
+          "rule": "←← miljardille[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardille[ →→];", 
+          "rule": "←← miljardille[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonalle[ →→];", 
+          "rule": "←← biljoonalle[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonalle[ →→];", 
+          "rule": "←← biljoonalle[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-allative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollille;", 
+          "rule": "nollille;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksille;", 
+          "rule": "yksille;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksille;", 
+          "rule": "kaksille;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmille;", 
+          "rule": "kolmille;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljille;", 
+          "rule": "neljille;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisille;", 
+          "rule": "viisille;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusille;", 
+          "rule": "kuusille;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemille;", 
+          "rule": "seitsemille;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksille;", 
+          "rule": "kahdeksille;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksille;", 
+          "rule": "yhdeksille;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenille;", 
+          "rule": "kymmenille;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenille[­→→];", 
+          "rule": "←←­kymmenille[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadoille[­→→];", 
+          "rule": "sadoille[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadoille[­→→];", 
+          "rule": "←←­sadoille[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansille[­→→];", 
+          "rule": "tuhansille[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansille[­→→];", 
+          "rule": "←←­tuhansille[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonille[ →→];", 
+          "rule": "←← miljoonille[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonille[ →→];", 
+          "rule": "←← miljoonille[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeille[ →→];", 
+          "rule": "←← miljardeille[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeille[ →→];", 
+          "rule": "←← miljardeille[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonille[ →→];", 
+          "rule": "←← biljoonille[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonille[ →→];", 
+          "rule": "←← biljoonille[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-elative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollasta;", 
+          "rule": "nollasta;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhdestä;", 
+          "rule": "yhdestä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahdesta;", 
+          "rule": "kahdesta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmesta;", 
+          "rule": "kolmesta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljästä;", 
+          "rule": "neljästä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidestä;", 
+          "rule": "viidestä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudesta;", 
+          "rule": "kuudesta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemästä;", 
+          "rule": "seitsemästä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksasta;", 
+          "rule": "kahdeksasta;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksästä;", 
+          "rule": "yhdeksästä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenestä;", 
+          "rule": "kymmenestä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenestä[­→→];", 
+          "rule": "←←­kymmenestä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadasta[­→→];", 
+          "rule": "sadasta[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadasta[­→→];", 
+          "rule": "←←­sadasta[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannesta[­→→];", 
+          "rule": "tuhannesta[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhannesta[­→→];", 
+          "rule": "←←­tuhannesta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonasta[ →→];", 
+          "rule": "←← miljoonasta[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonasta[ →→];", 
+          "rule": "←← miljoonasta[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardista[ →→];", 
+          "rule": "←← miljardista[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardista[ →→];", 
+          "rule": "←← miljardista[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonasta[ →→];", 
+          "rule": "←← biljoonasta[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonasta[ →→];", 
+          "rule": "←← biljoonasta[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-elative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollista;", 
+          "rule": "nollista;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksistä;", 
+          "rule": "yksistä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksista;", 
+          "rule": "kaksista;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmista;", 
+          "rule": "kolmista;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljistä;", 
+          "rule": "neljistä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisistä;", 
+          "rule": "viisistä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusista;", 
+          "rule": "kuusista;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemistä;", 
+          "rule": "seitsemistä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksista;", 
+          "rule": "kahdeksista;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksistä;", 
+          "rule": "yhdeksistä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenistä;", 
+          "rule": "kymmenistä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenistä[­→→];", 
+          "rule": "←←­kymmenistä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadoista[­→→];", 
+          "rule": "sadoista[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadoista[­→→];", 
+          "rule": "←←­sadoista[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansista[­→→];", 
+          "rule": "tuhansista[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansista[­→→];", 
+          "rule": "←←­tuhansista[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonista[ →→];", 
+          "rule": "←← miljoonista[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonista[ →→];", 
+          "rule": "←← miljoonista[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeista[ →→];", 
+          "rule": "←← miljardeista[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeista[ →→];", 
+          "rule": "←← miljardeista[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonista[ →→];", 
+          "rule": "←← biljoonista[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonista[ →→];", 
+          "rule": "←← biljoonista[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-essive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollana;", 
+          "rule": "nollana;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhtenä;", 
+          "rule": "yhtenä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahtena;", 
+          "rule": "kahtena;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmena;", 
+          "rule": "kolmena;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänä;", 
+          "rule": "neljänä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viitenä;", 
+          "rule": "viitenä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuutena;", 
+          "rule": "kuutena;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänä;", 
+          "rule": "seitsemänä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksana;", 
+          "rule": "kahdeksana;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänä;", 
+          "rule": "yhdeksänä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenenä;", 
+          "rule": "kymmenenä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenenä[­→→];", 
+          "rule": "←←­kymmenenä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "satana[­→→];", 
+          "rule": "satana[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­satana[­→→];", 
+          "rule": "←←­satana[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhantena[­→→];", 
+          "rule": "tuhantena[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhantena[­→→];", 
+          "rule": "←←­tuhantena[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonana[ →→];", 
+          "rule": "←← miljoonana[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonana[ →→];", 
+          "rule": "←← miljoonana[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardina[ →→];", 
+          "rule": "←← miljardina[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardina[ →→];", 
+          "rule": "←← miljardina[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonana[ →→];", 
+          "rule": "←← biljoonana[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonana[ →→];", 
+          "rule": "←← biljoonana[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-essive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollina;", 
+          "rule": "nollina;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksinä;", 
+          "rule": "yksinä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksina;", 
+          "rule": "kaksina;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmina;", 
+          "rule": "kolmina;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljinä;", 
+          "rule": "neljinä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisinä;", 
+          "rule": "viisinä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusina;", 
+          "rule": "kuusina;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitseminä;", 
+          "rule": "seitseminä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksina;", 
+          "rule": "kahdeksina;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksinä;", 
+          "rule": "yhdeksinä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmeninä;", 
+          "rule": "kymmeninä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmeninä[­→→];", 
+          "rule": "←←­kymmeninä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "satoina[­→→];", 
+          "rule": "satoina[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­satoina[­→→];", 
+          "rule": "←←­satoina[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansina[­→→];", 
+          "rule": "tuhansina[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansina[­→→];", 
+          "rule": "←←­tuhansina[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonina[ →→];", 
+          "rule": "←← miljoonina[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonina[ →→];", 
+          "rule": "←← miljoonina[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeina[ →→];", 
+          "rule": "←← miljardeina[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeina[ →→];", 
+          "rule": "←← miljardeina[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonina[ →→];", 
+          "rule": "←← biljoonina[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonina[ →→];", 
+          "rule": "←← biljoonina[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-genitive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollan;", 
+          "rule": "nollan;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhden;", 
+          "rule": "yhden;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahden;", 
+          "rule": "kahden;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmen;", 
+          "rule": "kolmen;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljän;", 
+          "rule": "neljän;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viiden;", 
+          "rule": "viiden;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuuden;", 
+          "rule": "kuuden;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemän;", 
+          "rule": "seitsemän;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksan;", 
+          "rule": "kahdeksan;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksän;", 
+          "rule": "yhdeksän;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenen;", 
+          "rule": "kymmenen;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenen[­→→];", 
+          "rule": "←←­kymmenen[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadan[­→→];", 
+          "rule": "sadan[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadan[­→→];", 
+          "rule": "←←­sadan[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannen[­→→];", 
+          "rule": "tuhannen[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhannen[­→→];", 
+          "rule": "←←­tuhannen[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonan[ →→];", 
+          "rule": "←← miljoonan[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonan[ →→];", 
+          "rule": "←← miljoonan[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardin[ →→];", 
+          "rule": "←← miljardin[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardin[ →→];", 
+          "rule": "←← miljardin[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonan[ →→];", 
+          "rule": "←← biljoonan[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonan[ →→];", 
+          "rule": "←← biljoonan[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-genitive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollien;", 
+          "rule": "nollien;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksien;", 
+          "rule": "yksien;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksien;", 
+          "rule": "kaksien;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmien;", 
+          "rule": "kolmien;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljien;", 
+          "rule": "neljien;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisien;", 
+          "rule": "viisien;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusien;", 
+          "rule": "kuusien;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemien;", 
+          "rule": "seitsemien;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksien;", 
+          "rule": "kahdeksien;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksien;", 
+          "rule": "yhdeksien;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenien;", 
+          "rule": "kymmenien;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenien[­→→];", 
+          "rule": "←←­kymmenien[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "satojen[­→→];", 
+          "rule": "satojen[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­satojen[­→→];", 
+          "rule": "←←­satojen[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansien[­→→];", 
+          "rule": "tuhansien[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansien[­→→];", 
+          "rule": "←←­tuhansien[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonien[ →→];", 
+          "rule": "←← miljoonien[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonien[ →→];", 
+          "rule": "←← miljoonien[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardien[ →→];", 
+          "rule": "←← miljardien[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardien[ →→];", 
+          "rule": "←← miljardien[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonien[ →→];", 
+          "rule": "←← biljoonien[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonien[ →→];", 
+          "rule": "←← biljoonien[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-illative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollaan;", 
+          "rule": "nollaan;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhteen;", 
+          "rule": "yhteen;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahteen;", 
+          "rule": "kahteen;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmeen;", 
+          "rule": "kolmeen;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljään;", 
+          "rule": "neljään;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viiteen;", 
+          "rule": "viiteen;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuuteen;", 
+          "rule": "kuuteen;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemään;", 
+          "rule": "seitsemään;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksaan;", 
+          "rule": "kahdeksaan;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksään;", 
+          "rule": "yhdeksään;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmeneen;", 
+          "rule": "kymmeneen;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmeneen[­→→];", 
+          "rule": "←←­kymmeneen[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sataan[­→→];", 
+          "rule": "sataan[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sataan[­→→];", 
+          "rule": "←←­sataan[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhanteen[­→→];", 
+          "rule": "tuhanteen[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhanteen[­→→];", 
+          "rule": "←←­tuhanteen[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonaan[ →→];", 
+          "rule": "←← miljoonaan[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonaan[ →→];", 
+          "rule": "←← miljoonaan[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardiin[ →→];", 
+          "rule": "←← miljardiin[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardiin[ →→];", 
+          "rule": "←← miljardiin[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonaan[ →→];", 
+          "rule": "←← biljoonaan[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonaan[ →→];", 
+          "rule": "←← biljoonaan[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-illative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nolliin;", 
+          "rule": "nolliin;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksiin;", 
+          "rule": "yksiin;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksiin;", 
+          "rule": "kaksiin;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmiin;", 
+          "rule": "kolmiin;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljiin;", 
+          "rule": "neljiin;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisiin;", 
+          "rule": "viisiin;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusiin;", 
+          "rule": "kuusiin;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemiin;", 
+          "rule": "seitsemiin;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksiin;", 
+          "rule": "kahdeksiin;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksiin;", 
+          "rule": "yhdeksiin;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmeniin;", 
+          "rule": "kymmeniin;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmeniin[­→→];", 
+          "rule": "←←­kymmeniin[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "satoihin[­→→];", 
+          "rule": "satoihin[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­satoihin[­→→];", 
+          "rule": "←←­satoihin[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansiin­[­→→];", 
+          "rule": "tuhansiin­[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansiin­[­→→];", 
+          "rule": "←←­tuhansiin­[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljooniin[ →→];", 
+          "rule": "←← miljooniin[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljooniin[ →→];", 
+          "rule": "←← miljooniin[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeihin[ →→];", 
+          "rule": "←← miljardeihin[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeihin[ →→];", 
+          "rule": "←← miljardeihin[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljooniin[ →→];", 
+          "rule": "←← biljooniin[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljooniin[ →→];", 
+          "rule": "←← biljooniin[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-inessive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollassa;", 
+          "rule": "nollassa;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhdessä;", 
+          "rule": "yhdessä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahdessa;", 
+          "rule": "kahdessa;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmessa;", 
+          "rule": "kolmessa;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljässä;", 
+          "rule": "neljässä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidessä;", 
+          "rule": "viidessä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudessa;", 
+          "rule": "kuudessa;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemässä;", 
+          "rule": "seitsemässä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksassa;", 
+          "rule": "kahdeksassa;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksässä;", 
+          "rule": "yhdeksässä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenessä;", 
+          "rule": "kymmenessä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenessä[­→→];", 
+          "rule": "←←­kymmenessä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadassa[­→→];", 
+          "rule": "sadassa[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadassa[­→→];", 
+          "rule": "←←­sadassa[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannessa[­→→];", 
+          "rule": "tuhannessa[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhannessa[­→→];", 
+          "rule": "←←­tuhannessa[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonassa[ →→];", 
+          "rule": "←← miljoonassa[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonassa[ →→];", 
+          "rule": "←← miljoonassa[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardissa[ →→];", 
+          "rule": "←← miljardissa[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardissa[ →→];", 
+          "rule": "←← miljardissa[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonassa[ →→];", 
+          "rule": "←← biljoonassa[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonassa[ →→];", 
+          "rule": "←← biljoonassa[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-inessive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollissa;", 
+          "rule": "nollissa;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksissä;", 
+          "rule": "yksissä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksissa;", 
+          "rule": "kaksissa;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmissa;", 
+          "rule": "kolmissa;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljissä;", 
+          "rule": "neljissä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisissä;", 
+          "rule": "viisissä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusissa;", 
+          "rule": "kuusissa;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemissä;", 
+          "rule": "seitsemissä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksissa;", 
+          "rule": "kahdeksissa;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksissä;", 
+          "rule": "yhdeksissä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenissä;", 
+          "rule": "kymmenissä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmenissä[­→→];", 
+          "rule": "←←­kymmenissä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadoissa[­→→];", 
+          "rule": "sadoissa[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadoissa[­→→];", 
+          "rule": "←←­sadoissa[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansissa[­→→];", 
+          "rule": "tuhansissa[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansissa[­→→];", 
+          "rule": "←←­tuhansissa[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonissa[ →→];", 
+          "rule": "←← miljoonissa[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonissa[ →→];", 
+          "rule": "←← miljoonissa[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeissa[ →→];", 
+          "rule": "←← miljardeissa[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeissa[ →→];", 
+          "rule": "←← miljardeissa[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonissa[ →→];", 
+          "rule": "←← biljoonissa[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonissa[ →→];", 
+          "rule": "←← biljoonissa[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-partitive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollaa;", 
+          "rule": "nollaa;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhtä;", 
+          "rule": "yhtä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahta;", 
+          "rule": "kahta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmea;", 
+          "rule": "kolmea;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljää;", 
+          "rule": "neljää;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viittä;", 
+          "rule": "viittä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuutta;", 
+          "rule": "kuutta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemää;", 
+          "rule": "seitsemää;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksaa;", 
+          "rule": "kahdeksaa;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksää;", 
+          "rule": "yhdeksää;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmentä;", 
+          "rule": "kymmentä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmentä[­→→];", 
+          "rule": "←←­kymmentä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sataa[­→→];", 
+          "rule": "sataa[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sataa[­→→];", 
+          "rule": "←←­sataa[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhatta[­→→];", 
+          "rule": "tuhatta[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhatta[­→→];", 
+          "rule": "←←­tuhatta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonaa[ →→];", 
+          "rule": "←← miljoonaa[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonaa[ →→];", 
+          "rule": "←← miljoonaa[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardia[ →→];", 
+          "rule": "←← miljardia[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardia[ →→];", 
+          "rule": "←← miljardia[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonaa[ →→];", 
+          "rule": "←← biljoonaa[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonaa[ →→];", 
+          "rule": "←← biljoonaa[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-partitive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollia;", 
+          "rule": "nollia;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksiä;", 
+          "rule": "yksiä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksia;", 
+          "rule": "kaksia;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmia;", 
+          "rule": "kolmia;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljiä;", 
+          "rule": "neljiä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisiä;", 
+          "rule": "viisiä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusia;", 
+          "rule": "kuusia;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemiä;", 
+          "rule": "seitsemiä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksia;", 
+          "rule": "kahdeksia;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksiä;", 
+          "rule": "yhdeksiä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmeniä;", 
+          "rule": "kymmeniä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmeniä[­→→];", 
+          "rule": "←←­kymmeniä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "satoja[­→→];", 
+          "rule": "satoja[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­satoja[­→→];", 
+          "rule": "←←­satoja[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansia[­→→];", 
+          "rule": "tuhansia[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansia[­→→];", 
+          "rule": "←←­tuhansia[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonia[ →→];", 
+          "rule": "←← miljoonia[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonia[ →→];", 
+          "rule": "←← miljoonia[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeja[ →→];", 
+          "rule": "←← miljardeja[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeja[ →→];", 
+          "rule": "←← miljardeja[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonia[ →→];", 
+          "rule": "←← biljoonia[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonia[ →→];", 
+          "rule": "←← biljoonia[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-translative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollaksi;", 
+          "rule": "nollaksi;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yhdeksi;", 
+          "rule": "yhdeksi;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kahdeksi;", 
+          "rule": "kahdeksi;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmeksi;", 
+          "rule": "kolmeksi;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljäksi;", 
+          "rule": "neljäksi;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viideksi;", 
+          "rule": "viideksi;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudeksi;", 
+          "rule": "kuudeksi;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemäksi;", 
+          "rule": "seitsemäksi;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksaksi;", 
+          "rule": "kahdeksaksi;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksäksi;", 
+          "rule": "yhdeksäksi;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmeneksi;", 
+          "rule": "kymmeneksi;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmeneksi[­→→];", 
+          "rule": "←←­kymmeneksi[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadaksi[­→→];", 
+          "rule": "sadaksi[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadaksi[­→→];", 
+          "rule": "←←­sadaksi[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhanneksi[­→→];", 
+          "rule": "tuhanneksi[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhanneksi[­→→];", 
+          "rule": "←←­tuhanneksi[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljoonaksi[ →→];", 
+          "rule": "←← miljoonaksi[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljoonaksi[ →→];", 
+          "rule": "←← miljoonaksi[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardiksi[ →→];", 
+          "rule": "←← miljardiksi[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardiksi[ →→];", 
+          "rule": "←← miljardiksi[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonaksi[ →→];", 
+          "rule": "←← biljoonaksi[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljoonaksi[ →→];", 
+          "rule": "←← biljoonaksi[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-translative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← pilkku →→;", 
+          "rule": "←← pilkku →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nolliksi;", 
+          "rule": "nolliksi;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "yksiksi;", 
+          "rule": "yksiksi;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "kaksiksi;", 
+          "rule": "kaksiksi;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmiksi;", 
+          "rule": "kolmiksi;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljiksi;", 
+          "rule": "neljiksi;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viisiksi;", 
+          "rule": "viisiksi;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuusiksi;", 
+          "rule": "kuusiksi;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemiksi;", 
+          "rule": "seitsemiksi;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksiksi;", 
+          "rule": "kahdeksiksi;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksiksi;", 
+          "rule": "yhdeksiksi;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmeniksi;", 
+          "rule": "kymmeniksi;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "←←­kymmeniksi[­→→];", 
+          "rule": "←←­kymmeniksi[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadoiksi[­→→];", 
+          "rule": "sadoiksi[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←←­sadoiksi[­→→];", 
+          "rule": "←←­sadoiksi[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhansiksi[­→→];", 
+          "rule": "tuhansiksi[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←←­tuhansiksi[­→→];", 
+          "rule": "←←­tuhansiksi[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "←← miljooniksi[ →→];", 
+          "rule": "←← miljooniksi[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← miljooniksi[ →→];", 
+          "rule": "←← miljooniksi[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeiksi[ →→];", 
+          "rule": "←← miljardeiksi[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← miljardeiksi[ →→];", 
+          "rule": "←← miljardeiksi[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "←← biljooniksi[ →→];", 
+          "rule": "←← biljooniksi[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← biljooniksi[ →→];", 
+          "rule": "←← biljooniksi[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal=;", 
+          "rule": "=%spellout-cardinal=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollas;", 
+          "rule": "nollas;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäinen;", 
+          "rule": "ensimmäinen;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toinen;", 
+          "rule": "toinen;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmas;", 
+          "rule": "kolmas;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljäs;", 
+          "rule": "neljäs;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viides;", 
+          "rule": "viides;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudes;", 
+          "rule": "kuudes;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemäs;", 
+          "rule": "seitsemäs;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksas;", 
+          "rule": "kahdeksas;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksäs;", 
+          "rule": "yhdeksäs;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenes;", 
+          "rule": "kymmenes;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdestoista;", 
+          "rule": "yhdestoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdestoista;", 
+          "rule": "kahdestoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-larger←­kymmenes[­→→];", 
+          "rule": "←%%spellout-ordinal-larger←­kymmenes[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadas[­→→];", 
+          "rule": "sadas[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-larger←­sadas[­→→];", 
+          "rule": "←%%spellout-ordinal-larger←­sadas[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannes[­→→];", 
+          "rule": "tuhannes[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-larger←­tuhannes[­→→];", 
+          "rule": "←%%spellout-ordinal-larger←­tuhannes[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonas[­→→];", 
+          "rule": "miljoonas[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-larger← miljoonas[­→→];", 
+          "rule": "←%%spellout-ordinal-larger← miljoonas[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardis[­→→];", 
+          "rule": "miljardis[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-larger← miljardis[­→→];", 
+          "rule": "←%%spellout-ordinal-larger← miljardis[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonas[ →→];", 
+          "rule": "biljoonas[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-larger← biljoonas[ →→];", 
+          "rule": "←%%spellout-ordinal-larger← biljoonas[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-ablative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannelta;", 
+          "rule": "nollannelta;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäiseltä;", 
+          "rule": "ensimmäiseltä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toiselta;", 
+          "rule": "toiselta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannelta;", 
+          "rule": "kolmannelta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänneltä;", 
+          "rule": "neljänneltä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidenneltä;", 
+          "rule": "viidenneltä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennelta;", 
+          "rule": "kuudennelta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänneltä;", 
+          "rule": "seitsemänneltä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannelta;", 
+          "rule": "kahdeksannelta;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänneltä;", 
+          "rule": "yhdeksänneltä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenenneltä;", 
+          "rule": "kymmenenneltä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdenneltätoista;", 
+          "rule": "yhdenneltätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdenneltatoista;", 
+          "rule": "kahdenneltatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-larger←­kymmenenneltä[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-larger←­kymmenenneltä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannelta[­→→];", 
+          "rule": "sadannelta[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-larger←­sadannelta[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-larger←­sadannelta[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennelta[­→→];", 
+          "rule": "tuhannennelta[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-larger←­tuhannennelta[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-larger←­tuhannennelta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannelta[­→→];", 
+          "rule": "miljoonannelta[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-larger←­miljoonannelta[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-larger←­miljoonannelta[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnelta[­→→];", 
+          "rule": "miljardinnelta[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-larger←­miljardinnelta[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-larger←­miljardinnelta[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannelta[ →→];", 
+          "rule": "biljoonannelta[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-larger←­biljoonannelta[ →→];", 
+          "rule": "←%%spellout-ordinal-ablative-larger←­biljoonannelta[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-ablative-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennelta;", 
+          "rule": "kahdennelta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-ablative=;", 
+          "rule": "=%spellout-ordinal-ablative=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-ablative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannilta;", 
+          "rule": "nollannilta;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisiltä;", 
+          "rule": "ensimmäisiltä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisilta;", 
+          "rule": "toisilta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannilta;", 
+          "rule": "kolmannilta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänniltä;", 
+          "rule": "neljänniltä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidenniltä;", 
+          "rule": "viidenniltä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennilta;", 
+          "rule": "kuudennilta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänniltä;", 
+          "rule": "seitsemänniltä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannilta;", 
+          "rule": "kahdeksannilta;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänniltä;", 
+          "rule": "yhdeksänniltä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenenniltä;", 
+          "rule": "kymmenenniltä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdenniltätoista;", 
+          "rule": "yhdenniltätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdenniltatoista;", 
+          "rule": "kahdenniltatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-plural-larger←­kymmenenniltä[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-plural-larger←­kymmenenniltä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannilta[­→→];", 
+          "rule": "sadannilta[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-plural-larger←­sadannilta[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-plural-larger←­sadannilta[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennilta[­→→];", 
+          "rule": "tuhannennilta[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-plural-larger←­tuhannennilta[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-plural-larger←­tuhannennilta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannilta[­→→];", 
+          "rule": "miljoonannilta[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-plural-larger←­miljoonannilta[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-plural-larger←­miljoonannilta[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnilta[­→→];", 
+          "rule": "miljardinnilta[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-plural-larger←­miljardinnilta[­→→];", 
+          "rule": "←%%spellout-ordinal-ablative-plural-larger←­miljardinnilta[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannilta[ →→];", 
+          "rule": "biljoonannilta[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-ablative-plural-larger←­biljoonannilta[ →→];", 
+          "rule": "←%%spellout-ordinal-ablative-plural-larger←­biljoonannilta[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-ablative-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennilta;", 
+          "rule": "kahdennilta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-ablative-plural=;", 
+          "rule": "=%spellout-ordinal-ablative-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-adessive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannella;", 
+          "rule": "nollannella;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisellä;", 
+          "rule": "ensimmäisellä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisella;", 
+          "rule": "toisella;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannella;", 
+          "rule": "kolmannella;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljännellä;", 
+          "rule": "neljännellä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidennellä;", 
+          "rule": "viidennellä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennella;", 
+          "rule": "kuudennella;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemännellä;", 
+          "rule": "seitsemännellä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannella;", 
+          "rule": "kahdeksannella;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksännellä;", 
+          "rule": "yhdeksännellä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenennellä;", 
+          "rule": "kymmenennellä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdennellätoista;", 
+          "rule": "yhdennellätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdennellatoista;", 
+          "rule": "kahdennellatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-larger←­kymmenennellä[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-larger←­kymmenennellä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannella[­→→];", 
+          "rule": "sadannella[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-larger←­sadannella[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-larger←­sadannella[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennella[­→→];", 
+          "rule": "tuhannennella[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-larger←­tuhannennella[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-larger←­tuhannennella[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannella[­→→];", 
+          "rule": "miljoonannella[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-larger←­miljoonannella[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-larger←­miljoonannella[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnella[­→→];", 
+          "rule": "miljardinnella[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-larger←­miljardinnella[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-larger←­miljardinnella[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannella[ →→];", 
+          "rule": "biljoonannella[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-larger←­biljoonannella[ →→];", 
+          "rule": "←%%spellout-ordinal-adessive-larger←­biljoonannella[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-adessive-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennella;", 
+          "rule": "kahdennella;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-adessive=;", 
+          "rule": "=%spellout-ordinal-adessive=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-adessive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannilla;", 
+          "rule": "nollannilla;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisillä;", 
+          "rule": "ensimmäisillä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisilla;", 
+          "rule": "toisilla;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannilla;", 
+          "rule": "kolmannilla;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljännillä;", 
+          "rule": "neljännillä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidennillä;", 
+          "rule": "viidennillä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennilla;", 
+          "rule": "kuudennilla;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemännillä;", 
+          "rule": "seitsemännillä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannilla;", 
+          "rule": "kahdeksannilla;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksännillä;", 
+          "rule": "yhdeksännillä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenennillä;", 
+          "rule": "kymmenennillä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdennillätoista;", 
+          "rule": "yhdennillätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdennillatoista;", 
+          "rule": "kahdennillatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-plural-larger←­kymmenennillä[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-plural-larger←­kymmenennillä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannilla[­→→];", 
+          "rule": "sadannilla[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-plural-larger←­sadannilla[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-plural-larger←­sadannilla[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennilla[­→→];", 
+          "rule": "tuhannennilla[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-plural-larger←­tuhannennilla[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-plural-larger←­tuhannennilla[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannilla[­→→];", 
+          "rule": "miljoonannilla[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-plural-larger←­miljoonannilla[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-plural-larger←­miljoonannilla[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnilla[­→→];", 
+          "rule": "miljardinnilla[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-plural-larger←­miljardinnilla[­→→];", 
+          "rule": "←%%spellout-ordinal-adessive-plural-larger←­miljardinnilla[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannilla[ →→];", 
+          "rule": "biljoonannilla[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-adessive-plural-larger←­biljoonannilla[ →→];", 
+          "rule": "←%%spellout-ordinal-adessive-plural-larger←­biljoonannilla[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-adessive-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennilla;", 
+          "rule": "kahdennilla;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-adessive-plural=;", 
+          "rule": "=%spellout-ordinal-adessive-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-allative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannelle;", 
+          "rule": "nollannelle;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäiselle;", 
+          "rule": "ensimmäiselle;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toiselle;", 
+          "rule": "toiselle;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannelle;", 
+          "rule": "kolmannelle;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljännelle;", 
+          "rule": "neljännelle;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidennelle;", 
+          "rule": "viidennelle;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennelle;", 
+          "rule": "kuudennelle;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemännelle;", 
+          "rule": "seitsemännelle;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannelle;", 
+          "rule": "kahdeksannelle;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksännelle;", 
+          "rule": "yhdeksännelle;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenennelle;", 
+          "rule": "kymmenennelle;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdennelletoista;", 
+          "rule": "yhdennelletoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdennelletoista;", 
+          "rule": "kahdennelletoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-larger←­kymmenennelle[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-larger←­kymmenennelle[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannelle[­→→];", 
+          "rule": "sadannelle[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-larger←­sadannelle[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-larger←­sadannelle[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennelle[­→→];", 
+          "rule": "tuhannennelle[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-larger←­tuhannennelle[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-larger←­tuhannennelle[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannelle[­→→];", 
+          "rule": "miljoonannelle[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-larger←­miljoonannelle[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-larger←­miljoonannelle[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnelle[­→→];", 
+          "rule": "miljardinnelle[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-larger←­miljardinnelle[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-larger←­miljardinnelle[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannelle[ →→];", 
+          "rule": "biljoonannelle[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-larger←­biljoonannelle[ →→];", 
+          "rule": "←%%spellout-ordinal-allative-larger←­biljoonannelle[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-allative-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennelle;", 
+          "rule": "kahdennelle;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-allative=;", 
+          "rule": "=%spellout-ordinal-allative=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-allative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannille;", 
+          "rule": "nollannille;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisille;", 
+          "rule": "ensimmäisille;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisille;", 
+          "rule": "toisille;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannille;", 
+          "rule": "kolmannille;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljännille;", 
+          "rule": "neljännille;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidennille;", 
+          "rule": "viidennille;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennille;", 
+          "rule": "kuudennille;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemännille;", 
+          "rule": "seitsemännille;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannille;", 
+          "rule": "kahdeksannille;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksännille;", 
+          "rule": "yhdeksännille;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenennille;", 
+          "rule": "kymmenennille;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdennilletoista;", 
+          "rule": "yhdennilletoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdennilletoista;", 
+          "rule": "kahdennilletoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-plural-larger←­kymmenennille[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-plural-larger←­kymmenennille[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannille[­→→];", 
+          "rule": "sadannille[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-plural-larger←­sadannille[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-plural-larger←­sadannille[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennille[­→→];", 
+          "rule": "tuhannennille[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-plural-larger←­tuhannennille[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-plural-larger←­tuhannennille[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannille[­→→];", 
+          "rule": "miljoonannille[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-plural-larger←­miljoonannille[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-plural-larger←­miljoonannille[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnille[­→→];", 
+          "rule": "miljardinnille[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-plural-larger←­miljardinnille[­→→];", 
+          "rule": "←%%spellout-ordinal-allative-plural-larger←­miljardinnille[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannille[ →→];", 
+          "rule": "biljoonannille[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-allative-plural-larger←­biljoonannille[ →→];", 
+          "rule": "←%%spellout-ordinal-allative-plural-larger←­biljoonannille[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-allative-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennille;", 
+          "rule": "kahdennille;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-allative-plural=;", 
+          "rule": "=%spellout-ordinal-allative-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-elative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannesta;", 
+          "rule": "nollannesta;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisestä;", 
+          "rule": "ensimmäisestä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisesta;", 
+          "rule": "toisesta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannesta;", 
+          "rule": "kolmannesta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljännestä;", 
+          "rule": "neljännestä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidennestä;", 
+          "rule": "viidennestä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennesta;", 
+          "rule": "kuudennesta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemännestä;", 
+          "rule": "seitsemännestä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannesta;", 
+          "rule": "kahdeksannesta;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksännestä;", 
+          "rule": "yhdeksännestä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenennestä;", 
+          "rule": "kymmenennestä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdennestätoista;", 
+          "rule": "yhdennestätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdennestatoista;", 
+          "rule": "kahdennestatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-larger←­kymmenennestä[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-larger←­kymmenennestä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannesta[­→→];", 
+          "rule": "sadannesta[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-larger←­sadannesta[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-larger←­sadannesta[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennesta[­→→];", 
+          "rule": "tuhannennesta[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-larger←­tuhannennesta[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-larger←­tuhannennesta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannesta[­→→];", 
+          "rule": "miljoonannesta[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-larger←­miljoonannesta[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-larger←­miljoonannesta[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnesta[­→→];", 
+          "rule": "miljardinnesta[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-larger←­miljardinnesta[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-larger←­miljardinnesta[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannesta[ →→];", 
+          "rule": "biljoonannesta[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-larger←­biljoonannesta[ →→];", 
+          "rule": "←%%spellout-ordinal-elative-larger←­biljoonannesta[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-elative-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennesta;", 
+          "rule": "kahdennesta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-elative=;", 
+          "rule": "=%spellout-ordinal-elative=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-elative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollansista;", 
+          "rule": "nollansista;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisistä;", 
+          "rule": "ensimmäisistä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisista;", 
+          "rule": "toisista;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmansista;", 
+          "rule": "kolmansista;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänsistä;", 
+          "rule": "neljänsistä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidensistä;", 
+          "rule": "viidensistä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudensista;", 
+          "rule": "kuudensista;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänsistä;", 
+          "rule": "seitsemänsistä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksansista;", 
+          "rule": "kahdeksansista;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänsistä;", 
+          "rule": "yhdeksänsistä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenensistä;", 
+          "rule": "kymmenensistä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdensistätoista;", 
+          "rule": "yhdensistätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdensistatoista;", 
+          "rule": "kahdensistatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-plural-larger←­kymmenensistä[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-plural-larger←­kymmenensistä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadansista[­→→];", 
+          "rule": "sadansista[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-plural-larger←­sadansista[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-plural-larger←­sadansista[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannensista[­→→];", 
+          "rule": "tuhannensista[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-plural-larger←­tuhannensista[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-plural-larger←­tuhannensista[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonansista[­→→];", 
+          "rule": "miljoonansista[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-plural-larger←­miljoonansista[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-plural-larger←­miljoonansista[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinsista[­→→];", 
+          "rule": "miljardinsista[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-plural-larger←­miljardinsista[­→→];", 
+          "rule": "←%%spellout-ordinal-elative-plural-larger←­miljardinsista[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonansista[ →→];", 
+          "rule": "biljoonansista[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-elative-plural-larger←­biljoonansista[ →→];", 
+          "rule": "←%%spellout-ordinal-elative-plural-larger←­biljoonansista[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-elative-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdensista;", 
+          "rule": "kahdensista;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-elative-plural=;", 
+          "rule": "=%spellout-ordinal-elative-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-essive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollantena;", 
+          "rule": "nollantena;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisenä;", 
+          "rule": "ensimmäisenä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisena;", 
+          "rule": "toisena;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmantena;", 
+          "rule": "kolmantena;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljäntenä;", 
+          "rule": "neljäntenä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidentenä;", 
+          "rule": "viidentenä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudentena;", 
+          "rule": "kuudentena;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemäntenä;", 
+          "rule": "seitsemäntenä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksantena;", 
+          "rule": "kahdeksantena;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksäntenä;", 
+          "rule": "yhdeksäntenä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenentenä;", 
+          "rule": "kymmenentenä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdentenätoista;", 
+          "rule": "yhdentenätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdentenatoista;", 
+          "rule": "kahdentenatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-larger←­kymmenentenä[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-larger←­kymmenentenä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadantena[­→→];", 
+          "rule": "sadantena[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-larger←­sadantena[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-larger←­sadantena[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannentena[­→→];", 
+          "rule": "tuhannentena[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-larger←­tuhannentena[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-larger←­tuhannentena[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonantena[­→→];", 
+          "rule": "miljoonantena[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-larger←­miljoonantena[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-larger←­miljoonantena[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardintena[­→→];", 
+          "rule": "miljardintena[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-larger←­miljardintena[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-larger←­miljardintena[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonantena[ →→];", 
+          "rule": "biljoonantena[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-larger←­biljoonantena[ →→];", 
+          "rule": "←%%spellout-ordinal-essive-larger←­biljoonantena[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-essive-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdentena;", 
+          "rule": "kahdentena;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-essive=;", 
+          "rule": "=%spellout-ordinal-essive=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-essive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollansina;", 
+          "rule": "nollansina;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisinä;", 
+          "rule": "ensimmäisinä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisina;", 
+          "rule": "toisina;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmansina;", 
+          "rule": "kolmansina;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänsinä;", 
+          "rule": "neljänsinä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidensinä;", 
+          "rule": "viidensinä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudensina;", 
+          "rule": "kuudensina;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänsinä;", 
+          "rule": "seitsemänsinä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksansina;", 
+          "rule": "kahdeksansina;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänsinä;", 
+          "rule": "yhdeksänsinä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenensinä;", 
+          "rule": "kymmenensinä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdensinätoista;", 
+          "rule": "yhdensinätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdensinatoista;", 
+          "rule": "kahdensinatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-plural-larger←­kymmenensinä[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-plural-larger←­kymmenensinä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadansina[­→→];", 
+          "rule": "sadansina[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-plural-larger←­sadansina[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-plural-larger←­sadansina[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannensina[­→→];", 
+          "rule": "tuhannensina[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-plural-larger←­tuhannensina[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-plural-larger←­tuhannensina[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonansina[­→→];", 
+          "rule": "miljoonansina[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-plural-larger←­miljoonansina[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-plural-larger←­miljoonansina[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinsina[­→→];", 
+          "rule": "miljardinsina[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-plural-larger←­miljardinsina[­→→];", 
+          "rule": "←%%spellout-ordinal-essive-plural-larger←­miljardinsina[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonansina[ →→];", 
+          "rule": "biljoonansina[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-essive-plural-larger←­biljoonansina[ →→];", 
+          "rule": "←%%spellout-ordinal-essive-plural-larger←­biljoonansina[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-essive-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdensina;", 
+          "rule": "kahdensina;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-essive-plural=;", 
+          "rule": "=%spellout-ordinal-essive-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-genitive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannen;", 
+          "rule": "nollannen;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisen;", 
+          "rule": "ensimmäisen;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisen;", 
+          "rule": "toisen;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannen;", 
+          "rule": "kolmannen;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljännen;", 
+          "rule": "neljännen;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidennen;", 
+          "rule": "viidennen;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennen;", 
+          "rule": "kuudennen;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemännen;", 
+          "rule": "seitsemännen;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannen;", 
+          "rule": "kahdeksannen;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksännen;", 
+          "rule": "yhdeksännen;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenennen;", 
+          "rule": "kymmenennen;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdennentoista;", 
+          "rule": "yhdennentoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdennentoista;", 
+          "rule": "kahdennentoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-larger←­kymmenennen[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-larger←­kymmenennen[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannen[­→→];", 
+          "rule": "sadannen[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-larger←­sadannen[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-larger←­sadannen[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennen[­→→];", 
+          "rule": "tuhannennen[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-larger←­tuhannennen[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-larger←­tuhannennen[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannen[­→→];", 
+          "rule": "miljoonannen[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-larger←­miljoonannen[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-larger←­miljoonannen[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnen[­→→];", 
+          "rule": "miljardinnen[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-larger←­miljardinnen[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-larger←­miljardinnen[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannen[ →→];", 
+          "rule": "biljoonannen[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-larger←­biljoonannen[ →→];", 
+          "rule": "←%%spellout-ordinal-genitive-larger←­biljoonannen[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-genitive-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennen;", 
+          "rule": "kahdennen;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-genitive=;", 
+          "rule": "=%spellout-ordinal-genitive=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-genitive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollansien;", 
+          "rule": "nollansien;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisten;", 
+          "rule": "ensimmäisten;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisten;", 
+          "rule": "toisten;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmansien;", 
+          "rule": "kolmansien;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänsien;", 
+          "rule": "neljänsien;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidensien;", 
+          "rule": "viidensien;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudensien;", 
+          "rule": "kuudensien;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänsien;", 
+          "rule": "seitsemänsien;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksansien;", 
+          "rule": "kahdeksansien;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänsien;", 
+          "rule": "yhdeksänsien;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenensien;", 
+          "rule": "kymmenensien;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdensientoista;", 
+          "rule": "yhdensientoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdensientoista;", 
+          "rule": "kahdensientoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-plural-larger←­kymmenensien[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-plural-larger←­kymmenensien[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadansien[­→→];", 
+          "rule": "sadansien[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-plural-larger←­sadansien[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-plural-larger←­sadansien[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannensien[­→→];", 
+          "rule": "tuhannensien[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-plural-larger←­tuhannensien[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-plural-larger←­tuhannensien[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonansien[­→→];", 
+          "rule": "miljoonansien[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-plural-larger←­miljoonansien[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-plural-larger←­miljoonansien[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinsien[­→→];", 
+          "rule": "miljardinsien[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-plural-larger←­miljardinsien[­→→];", 
+          "rule": "←%%spellout-ordinal-genitive-plural-larger←­miljardinsien[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonansien[ →→];", 
+          "rule": "biljoonansien[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-genitive-plural-larger←­biljoonansien[ →→];", 
+          "rule": "←%%spellout-ordinal-genitive-plural-larger←­biljoonansien[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-genitive-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdensien;", 
+          "rule": "kahdensien;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-genitive-plural=;", 
+          "rule": "=%spellout-ordinal-genitive-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-illative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollanteen;", 
+          "rule": "nollanteen;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäiseen;", 
+          "rule": "ensimmäiseen;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toiseen;", 
+          "rule": "toiseen;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmanteen;", 
+          "rule": "kolmanteen;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänteen;", 
+          "rule": "neljänteen;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidenteen;", 
+          "rule": "viidenteen;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudenteen;", 
+          "rule": "kuudenteen;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänteen;", 
+          "rule": "seitsemänteen;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksanteen;", 
+          "rule": "kahdeksanteen;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänteen;", 
+          "rule": "yhdeksänteen;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenenteen;", 
+          "rule": "kymmenenteen;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdenteentoista;", 
+          "rule": "yhdenteentoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdenteentoista;", 
+          "rule": "kahdenteentoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-larger←­kymmenenteen[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-larger←­kymmenenteen[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadanteen[­→→];", 
+          "rule": "sadanteen[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-larger←­sadanteen[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-larger←­sadanteen[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannenteen[­→→];", 
+          "rule": "tuhannenteen[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-larger←­tuhannenteen[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-larger←­tuhannenteen[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonanteen[­→→];", 
+          "rule": "miljoonanteen[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-larger←­miljoonanteen[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-larger←­miljoonanteen[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinteen[­→→];", 
+          "rule": "miljardinteen[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-larger←­miljardinteen[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-larger←­miljardinteen[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonanteen[ →→];", 
+          "rule": "biljoonanteen[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-larger←­biljoonanteen[ →→];", 
+          "rule": "←%%spellout-ordinal-illative-larger←­biljoonanteen[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-illative-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdenteen;", 
+          "rule": "kahdenteen;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-illative=;", 
+          "rule": "=%spellout-ordinal-illative=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-illative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollansiin;", 
+          "rule": "nollansiin;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisiin;", 
+          "rule": "ensimmäisiin;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisiin;", 
+          "rule": "toisiin;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmansiin;", 
+          "rule": "kolmansiin;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänsiin;", 
+          "rule": "neljänsiin;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidensiin;", 
+          "rule": "viidensiin;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudensiin;", 
+          "rule": "kuudensiin;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänsiin;", 
+          "rule": "seitsemänsiin;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksansiin;", 
+          "rule": "kahdeksansiin;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänsiin;", 
+          "rule": "yhdeksänsiin;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenensiin;", 
+          "rule": "kymmenensiin;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdensiintoista;", 
+          "rule": "yhdensiintoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdensiintoista;", 
+          "rule": "kahdensiintoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-plural-larger←­kymmenensiin[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-plural-larger←­kymmenensiin[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadansiin[­→→];", 
+          "rule": "sadansiin[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-plural-larger←­sadansiin[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-plural-larger←­sadansiin[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannensiin[­→→];", 
+          "rule": "tuhannensiin[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-plural-larger←­tuhannensiin[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-plural-larger←­tuhannensiin[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonansiin[­→→];", 
+          "rule": "miljoonansiin[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-plural-larger←­miljoonansiin[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-plural-larger←­miljoonansiin[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinsiin[­→→];", 
+          "rule": "miljardinsiin[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-plural-larger←­miljardinsiin[­→→];", 
+          "rule": "←%%spellout-ordinal-illative-plural-larger←­miljardinsiin[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonansiin[ →→];", 
+          "rule": "biljoonansiin[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-illative-plural-larger←­biljoonansiin[ →→];", 
+          "rule": "←%%spellout-ordinal-illative-plural-larger←­biljoonansiin[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-illative-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdensiin;", 
+          "rule": "kahdensiin;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-illative-plural=;", 
+          "rule": "=%spellout-ordinal-illative-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-inessive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollannessa;", 
+          "rule": "nollannessa;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisessä;", 
+          "rule": "ensimmäisessä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisessa;", 
+          "rule": "toisessa;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmannessa;", 
+          "rule": "kolmannessa;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljännessä;", 
+          "rule": "neljännessä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidennessä;", 
+          "rule": "viidennessä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudennessa;", 
+          "rule": "kuudennessa;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemännessä;", 
+          "rule": "seitsemännessä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksannessa;", 
+          "rule": "kahdeksannessa;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksännessä;", 
+          "rule": "yhdeksännessä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenennessä;", 
+          "rule": "kymmenennessä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdennessätoista;", 
+          "rule": "yhdennessätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdennessatoista;", 
+          "rule": "kahdennessatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-larger←­kymmenennessä[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-larger←­kymmenennessä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadannessa[­→→];", 
+          "rule": "sadannessa[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-larger←­sadannessa[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-larger←­sadannessa[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannennessa[­→→];", 
+          "rule": "tuhannennessa[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-larger←­tuhannennessa[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-larger←­tuhannennessa[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonannessa[­→→];", 
+          "rule": "miljoonannessa[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-larger←­miljoonannessa[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-larger←­miljoonannessa[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinnessa[­→→];", 
+          "rule": "miljardinnessa[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-larger←­miljardinnessa[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-larger←­miljardinnessa[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonannessa[ →→];", 
+          "rule": "biljoonannessa[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-larger←­biljoonannessa[ →→];", 
+          "rule": "←%%spellout-ordinal-inessive-larger←­biljoonannessa[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-inessive-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdennessa;", 
+          "rule": "kahdennessa;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-inessive=;", 
+          "rule": "=%spellout-ordinal-inessive=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-inessive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollansissa;", 
+          "rule": "nollansissa;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisissä;", 
+          "rule": "ensimmäisissä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisissa;", 
+          "rule": "toisissa;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmansissa;", 
+          "rule": "kolmansissa;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänsissä;", 
+          "rule": "neljänsissä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidensissä;", 
+          "rule": "viidensissä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudensissa;", 
+          "rule": "kuudensissa;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänsissä;", 
+          "rule": "seitsemänsissä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksansissa;", 
+          "rule": "kahdeksansissa;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänsissä;", 
+          "rule": "yhdeksänsissä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenensissä;", 
+          "rule": "kymmenensissä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdensissätoista;", 
+          "rule": "yhdensissätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdensissatoista;", 
+          "rule": "kahdensissatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-plural-larger←­kymmenensissä[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-plural-larger←­kymmenensissä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadansissa[­→→];", 
+          "rule": "sadansissa[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-plural-larger←­sadansissa[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-plural-larger←­sadansissa[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannensissa[­→→];", 
+          "rule": "tuhannensissa[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-plural-larger←­tuhannensissa[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-plural-larger←­tuhannensissa[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonansissa[­→→];", 
+          "rule": "miljoonansissa[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-plural-larger←­miljoonansissa[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-plural-larger←­miljoonansissa[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinsissa[­→→];", 
+          "rule": "miljardinsissa[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-plural-larger←­miljardinsissa[­→→];", 
+          "rule": "←%%spellout-ordinal-inessive-plural-larger←­miljardinsissa[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonansissa[ →→];", 
+          "rule": "biljoonansissa[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-inessive-plural-larger←­biljoonansissa[ →→];", 
+          "rule": "←%%spellout-ordinal-inessive-plural-larger←­biljoonansissa[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-inessive-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdensissa;", 
+          "rule": "kahdensissa;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-inessive-plural=;", 
+          "rule": "=%spellout-ordinal-inessive-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdes;", 
+          "rule": "kahdes;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal=;", 
+          "rule": "=%spellout-ordinal=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-partitive": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollatta;", 
+          "rule": "nollatta;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäistä;", 
+          "rule": "ensimmäistä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toista;", 
+          "rule": "toista;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmatta;", 
+          "rule": "kolmatta;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljättä;", 
+          "rule": "neljättä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidettä;", 
+          "rule": "viidettä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudetta;", 
+          "rule": "kuudetta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemättä;", 
+          "rule": "seitsemättä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksatta;", 
+          "rule": "kahdeksatta;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksättä;", 
+          "rule": "yhdeksättä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenettä;", 
+          "rule": "kymmenettä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdettätoista;", 
+          "rule": "yhdettätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdettatoista;", 
+          "rule": "kahdettatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-larger←­kymmenettä[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-larger←­kymmenettä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadatta[­→→];", 
+          "rule": "sadatta[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-larger←­sadatta[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-larger←­sadatta[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannetta[­→→];", 
+          "rule": "tuhannetta[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-larger←­tuhannetta[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-larger←­tuhannetta[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonatta[­→→];", 
+          "rule": "miljoonatta[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-larger←­miljoonatta[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-larger←­miljoonatta[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljarditta[­→→];", 
+          "rule": "miljarditta[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-larger←­miljarditta[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-larger←­miljarditta[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonatta[ →→];", 
+          "rule": "biljoonatta[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-larger←­biljoonatta[ →→];", 
+          "rule": "←%%spellout-ordinal-partitive-larger←­biljoonatta[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-partitive-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdetta;", 
+          "rule": "kahdetta;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-partitive=;", 
+          "rule": "=%spellout-ordinal-partitive=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-partitive-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollansia;", 
+          "rule": "nollansia;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisiä;", 
+          "rule": "ensimmäisiä;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisia;", 
+          "rule": "toisia;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmansia;", 
+          "rule": "kolmansia;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänsiä;", 
+          "rule": "neljänsiä;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidensiä;", 
+          "rule": "viidensiä;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudensia;", 
+          "rule": "kuudensia;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänsiä;", 
+          "rule": "seitsemänsiä;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksansia;", 
+          "rule": "kahdeksansia;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänsiä;", 
+          "rule": "yhdeksänsiä;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenensiä;", 
+          "rule": "kymmenensiä;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdensiätoista;", 
+          "rule": "yhdensiätoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdensiatoista;", 
+          "rule": "kahdensiatoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-plural-larger←­kymmenensiä[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-plural-larger←­kymmenensiä[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadansia[­→→];", 
+          "rule": "sadansia[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-plural-larger←­sadansia[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-plural-larger←­sadansia[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannensia[­→→];", 
+          "rule": "tuhannensia[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-plural-larger←­tuhannensia[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-plural-larger←­tuhannensia[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonansia[­→→];", 
+          "rule": "miljoonansia[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-plural-larger←­miljoonansia[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-plural-larger←­miljoonansia[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinsia[­→→];", 
+          "rule": "miljardinsia[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-plural-larger←­miljardinsia[­→→];", 
+          "rule": "←%%spellout-ordinal-partitive-plural-larger←­miljardinsia[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonansia[ →→];", 
+          "rule": "biljoonansia[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-partitive-plural-larger←­biljoonansia[ →→];", 
+          "rule": "←%%spellout-ordinal-partitive-plural-larger←­biljoonansia[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-partitive-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdensia;", 
+          "rule": "kahdensia;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-partitive-plural=;", 
+          "rule": "=%spellout-ordinal-partitive-plural=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-translative": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollanneksi;", 
+          "rule": "nollanneksi;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäiseksi;", 
+          "rule": "ensimmäiseksi;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toiseksi;", 
+          "rule": "toiseksi;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmanneksi;", 
+          "rule": "kolmanneksi;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänneksi;", 
+          "rule": "neljänneksi;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidenneksi;", 
+          "rule": "viidenneksi;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudenneksi;", 
+          "rule": "kuudenneksi;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänneksi;", 
+          "rule": "seitsemänneksi;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksanneksi;", 
+          "rule": "kahdeksanneksi;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänneksi;", 
+          "rule": "yhdeksänneksi;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenenneksi;", 
+          "rule": "kymmenenneksi;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdenneksitoista;", 
+          "rule": "yhdenneksitoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdenneksitoista;", 
+          "rule": "kahdenneksitoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-larger←­kymmenenneksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-larger←­kymmenenneksi[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadanneksi[­→→];", 
+          "rule": "sadanneksi[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-larger←­sadanneksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-larger←­sadanneksi[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannenneksi[­→→];", 
+          "rule": "tuhannenneksi[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-larger←­tuhannenneksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-larger←­tuhannenneksi[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonanneksi[­→→];", 
+          "rule": "miljoonanneksi[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-larger←­miljoonanneksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-larger←­miljoonanneksi[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinneksi[­→→];", 
+          "rule": "miljardinneksi[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-larger←­miljardinneksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-larger←­miljardinneksi[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonanneksi[ →→];", 
+          "rule": "biljoonanneksi[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-larger←­biljoonanneksi[ →→];", 
+          "rule": "←%%spellout-ordinal-translative-larger←­biljoonanneksi[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-translative-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdenneksi;", 
+          "rule": "kahdenneksi;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-translative=;", 
+          "rule": "=%spellout-ordinal-translative=;",
           "value": "3"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-translative-plural": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "miinus →→;", 
+          "rule": "miinus →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "nollansiksi;", 
+          "rule": "nollansiksi;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "ensimmäisiksi;", 
+          "rule": "ensimmäisiksi;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "toisiksi;", 
+          "rule": "toisiksi;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "kolmansiksi;", 
+          "rule": "kolmansiksi;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "neljänsiksi;", 
+          "rule": "neljänsiksi;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "viidensiksi;", 
+          "rule": "viidensiksi;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "kuudensiksi;", 
+          "rule": "kuudensiksi;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "seitsemänsiksi;", 
+          "rule": "seitsemänsiksi;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "kahdeksansiksi;", 
+          "rule": "kahdeksansiksi;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "yhdeksänsiksi;", 
+          "rule": "yhdeksänsiksi;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "kymmenensiksi;", 
+          "rule": "kymmenensiksi;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "yhdensiksitoista;", 
+          "rule": "yhdensiksitoista;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "kahdensiksitoista;", 
+          "rule": "kahdensiksitoista;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "→→toista;", 
+          "rule": "→→toista;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-plural-larger←­kymmenensiksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-plural-larger←­kymmenensiksi[­→→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "sadansiksi[­→→];", 
+          "rule": "sadansiksi[­→→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-plural-larger←­sadansiksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-plural-larger←­sadansiksi[­→→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tuhannensiksi[­→→];", 
+          "rule": "tuhannensiksi[­→→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-plural-larger←­tuhannensiksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-plural-larger←­tuhannensiksi[­→→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "miljoonansiksi[­→→];", 
+          "rule": "miljoonansiksi[­→→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-plural-larger←­miljoonansiksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-plural-larger←­miljoonansiksi[­→→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "miljardinsiksi[­→→];", 
+          "rule": "miljardinsiksi[­→→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-plural-larger←­miljardinsiksi[­→→];", 
+          "rule": "←%%spellout-ordinal-translative-plural-larger←­miljardinsiksi[­→→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "biljoonansiksi[ →→];", 
+          "rule": "biljoonansiksi[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%%spellout-ordinal-translative-plural-larger←­biljoonansiksi[ →→];", 
+          "rule": "←%%spellout-ordinal-translative-plural-larger←­biljoonansiksi[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-translative-plural-larger": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": ";", 
+          "rule": ";",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "kahdensiksi;", 
+          "rule": "kahdensiksi;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-ordinal-translative-plural=;", 
+          "rule": "=%spellout-ordinal-translative-plural=;",
           "value": "3"
         }
       ]

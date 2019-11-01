@@ -1,724 +1,724 @@
 {
   "SpelloutRules": {
     "lenient-parse": {
-      "private": 1, 
+      "private": 1,
       "rules": [
         {
-          "rule": "&[last primary ignorable ] ←← ' ' ←← ',' ←← '-' ←← '­';", 
+          "rule": "&[last primary ignorable ] ←← ' ' ←← ',' ←← '-' ←← '­';",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "menos →→;", 
+          "rule": "menos →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← vírgula →→;", 
+          "rule": "←← vírgula →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "zero;", 
+          "rule": "zero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "uma;", 
+          "rule": "uma;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "duas;", 
+          "rule": "duas;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "vinte[ e →→];", 
+          "rule": "vinte[ e →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "trinta[ e →→];", 
+          "rule": "trinta[ e →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "quarenta[ e →→];", 
+          "rule": "quarenta[ e →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "cinquenta[ e →→];", 
+          "rule": "cinquenta[ e →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "sessenta[ e →→];", 
+          "rule": "sessenta[ e →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "setenta[ e →→];", 
+          "rule": "setenta[ e →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "oitenta[ e →→];", 
+          "rule": "oitenta[ e →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "noventa[ e →→];", 
+          "rule": "noventa[ e →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "cem;", 
+          "rule": "cem;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "cento e →→;", 
+          "rule": "cento e →→;",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "duzentas[ e →→];", 
+          "rule": "duzentas[ e →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "trezentas[ e →→];", 
+          "rule": "trezentas[ e →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "quatrocentas[ e →→];", 
+          "rule": "quatrocentas[ e →→];",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "quinhentas[ e →→];", 
+          "rule": "quinhentas[ e →→];",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "seiscentas[ e →→];", 
+          "rule": "seiscentas[ e →→];",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "setecentas[ e →→];", 
+          "rule": "setecentas[ e →→];",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "oitocentas[ e →→];", 
+          "rule": "oitocentas[ e →→];",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "novecentas[ e →→];", 
+          "rule": "novecentas[ e →→];",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "mil[ e →→];", 
+          "rule": "mil[ e →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← mil[ e →→];", 
+          "rule": "←← mil[ e →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "um milhão[ e →→];", 
+          "rule": "um milhão[ e →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milhões[ e →→];", 
+          "rule": "←%spellout-cardinal-masculine← milhões[ e →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "um bilião[ e →→];", 
+          "rule": "um bilião[ e →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← biliões[ e →→];", 
+          "rule": "←%spellout-cardinal-masculine← biliões[ e →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "um trilião[ e →→];", 
+          "rule": "um trilião[ e →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← triliões[ e →→];", 
+          "rule": "←%spellout-cardinal-masculine← triliões[ e →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "um quatrilião[ e →→];", 
+          "rule": "um quatrilião[ e →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← quatriliões[ e →→];", 
+          "rule": "←%spellout-cardinal-masculine← quatriliões[ e →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-cardinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "menos →→;", 
+          "rule": "menos →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "←← vírgula →→;", 
+          "rule": "←← vírgula →→;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "zero;", 
+          "rule": "zero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "um;", 
+          "rule": "um;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "dois;", 
+          "rule": "dois;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "três;", 
+          "rule": "três;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "quatro;", 
+          "rule": "quatro;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "cinco;", 
+          "rule": "cinco;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "seis;", 
+          "rule": "seis;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sete;", 
+          "rule": "sete;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "oito;", 
+          "rule": "oito;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "nove;", 
+          "rule": "nove;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "dez;", 
+          "rule": "dez;",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "onze;", 
+          "rule": "onze;",
           "value": "11"
-        }, 
+        },
         {
-          "rule": "doze;", 
+          "rule": "doze;",
           "value": "12"
-        }, 
+        },
         {
-          "rule": "treze;", 
+          "rule": "treze;",
           "value": "13"
-        }, 
+        },
         {
-          "rule": "catorze;", 
+          "rule": "catorze;",
           "value": "14"
-        }, 
+        },
         {
-          "rule": "quinze;", 
+          "rule": "quinze;",
           "value": "15"
-        }, 
+        },
         {
-          "rule": "dezasseis;", 
+          "rule": "dezasseis;",
           "value": "16"
-        }, 
+        },
         {
-          "rule": "dezassete;", 
+          "rule": "dezassete;",
           "value": "17"
-        }, 
+        },
         {
-          "rule": "dezoito;", 
+          "rule": "dezoito;",
           "value": "18"
-        }, 
+        },
         {
-          "rule": "dezanove;", 
+          "rule": "dezanove;",
           "value": "19"
-        }, 
+        },
         {
-          "rule": "vinte[ e →→];", 
+          "rule": "vinte[ e →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "trinta[ e →→];", 
+          "rule": "trinta[ e →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "quarenta[ e →→];", 
+          "rule": "quarenta[ e →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "cinquenta[ e →→];", 
+          "rule": "cinquenta[ e →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "sessenta[ e →→];", 
+          "rule": "sessenta[ e →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "setenta[ e →→];", 
+          "rule": "setenta[ e →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "oitenta[ e →→];", 
+          "rule": "oitenta[ e →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "noventa[ e →→];", 
+          "rule": "noventa[ e →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "cem;", 
+          "rule": "cem;",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "cento e →→;", 
+          "rule": "cento e →→;",
           "value": "101"
-        }, 
+        },
         {
-          "rule": "duzentos[ e →→];", 
+          "rule": "duzentos[ e →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "trezentos[ e →→];", 
+          "rule": "trezentos[ e →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "quatrocentos[ e →→];", 
+          "rule": "quatrocentos[ e →→];",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "quinhentos[ e →→];", 
+          "rule": "quinhentos[ e →→];",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "seiscentos[ e →→];", 
+          "rule": "seiscentos[ e →→];",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "setecentos[ e →→];", 
+          "rule": "setecentos[ e →→];",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "oitocentos[ e →→];", 
+          "rule": "oitocentos[ e →→];",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "novecentos[ e →→];", 
+          "rule": "novecentos[ e →→];",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "mil[ e →→];", 
+          "rule": "mil[ e →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←← mil[ e →→];", 
+          "rule": "←← mil[ e →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "um milhão[ e →→];", 
+          "rule": "um milhão[ e →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←← milhões[ e →→];", 
+          "rule": "←← milhões[ e →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "um bilião[ e →→];", 
+          "rule": "um bilião[ e →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←← biliões[ e →→];", 
+          "rule": "←← biliões[ e →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "um trilião[ e →→];", 
+          "rule": "um trilião[ e →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←← triliões[ e →→];", 
+          "rule": "←← triliões[ e →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "um quatrilião[ e →→];", 
+          "rule": "um quatrilião[ e →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←← quatriliões[ e →→];", 
+          "rule": "←← quatriliões[ e →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=;", 
+          "rule": "=#,##0=;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-numbering": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=%spellout-cardinal-masculine=;", 
+          "rule": "=%spellout-cardinal-masculine=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-numbering-year": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "=0.0=;", 
+          "rule": "=0.0=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "=%spellout-numbering=;", 
+          "rule": "=%spellout-numbering=;",
           "value": "0"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-feminine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "menos →→;", 
+          "rule": "menos →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "zero;", 
+          "rule": "zero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "primeira;", 
+          "rule": "primeira;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "segunda;", 
+          "rule": "segunda;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "terceira;", 
+          "rule": "terceira;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "quarta;", 
+          "rule": "quarta;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "quinta;", 
+          "rule": "quinta;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sexta;", 
+          "rule": "sexta;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sétima;", 
+          "rule": "sétima;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "oitava;", 
+          "rule": "oitava;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "nona;", 
+          "rule": "nona;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "décima[ →→];", 
+          "rule": "décima[ →→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "vigésima[ →→];", 
+          "rule": "vigésima[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "trigésima[ →→];", 
+          "rule": "trigésima[ →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "quadragésima[ →→];", 
+          "rule": "quadragésima[ →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "quinquagésima[ →→];", 
+          "rule": "quinquagésima[ →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "sexagésima[ →→];", 
+          "rule": "sexagésima[ →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "septuagésima[ →→];", 
+          "rule": "septuagésima[ →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "octogésima[ →→];", 
+          "rule": "octogésima[ →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "nonagésima[ →→];", 
+          "rule": "nonagésima[ →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "centésima[ →→];", 
+          "rule": "centésima[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "ducentésima[ →→];", 
+          "rule": "ducentésima[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tricentésima[ →→];", 
+          "rule": "tricentésima[ →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "quadringentésima[ →→];", 
+          "rule": "quadringentésima[ →→];",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "quingentésima[ →→];", 
+          "rule": "quingentésima[ →→];",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "sexcentésima[ →→];", 
+          "rule": "sexcentésima[ →→];",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "septingentésima[ →→];", 
+          "rule": "septingentésima[ →→];",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "octingentésima[ →→];", 
+          "rule": "octingentésima[ →→];",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "noningentésima[ →→];", 
+          "rule": "noningentésima[ →→];",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "milésima[ →→];", 
+          "rule": "milésima[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← ­milésima[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← ­milésima[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "uma milionésima[ →→];", 
+          "rule": "uma milionésima[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← milionésima[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← milionésima[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "uma bilionésima[ →→];", 
+          "rule": "uma bilionésima[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← bilionésima[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← bilionésima[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "uma trilionésima[ →→];", 
+          "rule": "uma trilionésima[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← trilionésima[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← trilionésima[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "uma quadrilionésima[ →→];", 
+          "rule": "uma quadrilionésima[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-feminine← quadrilionésima[ →→];", 
+          "rule": "←%spellout-cardinal-feminine← quadrilionésima[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=ª;", 
+          "rule": "=#,##0=ª;",
           "value": "1000000000000000000"
         }
       ]
-    }, 
+    },
     "spellout-ordinal-masculine": {
-      "private": 0, 
+      "private": 0,
       "rules": [
         {
-          "rule": "menos →→;", 
+          "rule": "menos →→;",
           "value": "-x"
-        }, 
+        },
         {
-          "rule": "=#,##0.#=;", 
+          "rule": "=#,##0.#=;",
           "value": "x.x"
-        }, 
+        },
         {
-          "rule": "zero;", 
+          "rule": "zero;",
           "value": "0"
-        }, 
+        },
         {
-          "rule": "primeiro;", 
+          "rule": "primeiro;",
           "value": "1"
-        }, 
+        },
         {
-          "rule": "segundo;", 
+          "rule": "segundo;",
           "value": "2"
-        }, 
+        },
         {
-          "rule": "terceiro;", 
+          "rule": "terceiro;",
           "value": "3"
-        }, 
+        },
         {
-          "rule": "quarto;", 
+          "rule": "quarto;",
           "value": "4"
-        }, 
+        },
         {
-          "rule": "quinto;", 
+          "rule": "quinto;",
           "value": "5"
-        }, 
+        },
         {
-          "rule": "sexto;", 
+          "rule": "sexto;",
           "value": "6"
-        }, 
+        },
         {
-          "rule": "sétimo;", 
+          "rule": "sétimo;",
           "value": "7"
-        }, 
+        },
         {
-          "rule": "oitavo;", 
+          "rule": "oitavo;",
           "value": "8"
-        }, 
+        },
         {
-          "rule": "nono;", 
+          "rule": "nono;",
           "value": "9"
-        }, 
+        },
         {
-          "rule": "décimo[ →→];", 
+          "rule": "décimo[ →→];",
           "value": "10"
-        }, 
+        },
         {
-          "rule": "vigésimo[ →→];", 
+          "rule": "vigésimo[ →→];",
           "value": "20"
-        }, 
+        },
         {
-          "rule": "trigésimo[ →→];", 
+          "rule": "trigésimo[ →→];",
           "value": "30"
-        }, 
+        },
         {
-          "rule": "quadragésimo[ →→];", 
+          "rule": "quadragésimo[ →→];",
           "value": "40"
-        }, 
+        },
         {
-          "rule": "quinquagésimo[ →→];", 
+          "rule": "quinquagésimo[ →→];",
           "value": "50"
-        }, 
+        },
         {
-          "rule": "sexagésimo[ →→];", 
+          "rule": "sexagésimo[ →→];",
           "value": "60"
-        }, 
+        },
         {
-          "rule": "septuagésimo[ →→];", 
+          "rule": "septuagésimo[ →→];",
           "value": "70"
-        }, 
+        },
         {
-          "rule": "octogésimo[ →→];", 
+          "rule": "octogésimo[ →→];",
           "value": "80"
-        }, 
+        },
         {
-          "rule": "nonagésimo[ →→];", 
+          "rule": "nonagésimo[ →→];",
           "value": "90"
-        }, 
+        },
         {
-          "rule": "centésimo[ →→];", 
+          "rule": "centésimo[ →→];",
           "value": "100"
-        }, 
+        },
         {
-          "rule": "ducentésimo[ →→];", 
+          "rule": "ducentésimo[ →→];",
           "value": "200"
-        }, 
+        },
         {
-          "rule": "tricentésimo[ →→];", 
+          "rule": "tricentésimo[ →→];",
           "value": "300"
-        }, 
+        },
         {
-          "rule": "quadringentésimo[ →→];", 
+          "rule": "quadringentésimo[ →→];",
           "value": "400"
-        }, 
+        },
         {
-          "rule": "quingentésimo[ →→];", 
+          "rule": "quingentésimo[ →→];",
           "value": "500"
-        }, 
+        },
         {
-          "rule": "sexcentésimo[ →→];", 
+          "rule": "sexcentésimo[ →→];",
           "value": "600"
-        }, 
+        },
         {
-          "rule": "septingentésimo[ →→];", 
+          "rule": "septingentésimo[ →→];",
           "value": "700"
-        }, 
+        },
         {
-          "rule": "octingentésimo[ →→];", 
+          "rule": "octingentésimo[ →→];",
           "value": "800"
-        }, 
+        },
         {
-          "rule": "noningentésimo[ →→];", 
+          "rule": "noningentésimo[ →→];",
           "value": "900"
-        }, 
+        },
         {
-          "rule": "milésimo[ →→];", 
+          "rule": "milésimo[ →→];",
           "value": "1000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← ­milésimo[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← ­milésimo[ →→];",
           "value": "2000"
-        }, 
+        },
         {
-          "rule": "um milionésimo[ →→];", 
+          "rule": "um milionésimo[ →→];",
           "value": "1000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← milionésimo[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← milionésimo[ →→];",
           "value": "2000000"
-        }, 
+        },
         {
-          "rule": "um bilionésimo[ →→];", 
+          "rule": "um bilionésimo[ →→];",
           "value": "1000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← bilionésimo[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← bilionésimo[ →→];",
           "value": "2000000000"
-        }, 
+        },
         {
-          "rule": "um trilionésimo[ →→];", 
+          "rule": "um trilionésimo[ →→];",
           "value": "1000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← trilionésima[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← trilionésima[ →→];",
           "value": "2000000000000"
-        }, 
+        },
         {
-          "rule": "um quadrilionésimo[ →→];", 
+          "rule": "um quadrilionésimo[ →→];",
           "value": "1000000000000000"
-        }, 
+        },
         {
-          "rule": "←%spellout-cardinal-masculine← quadrilionésimo[ →→];", 
+          "rule": "←%spellout-cardinal-masculine← quadrilionésimo[ →→];",
           "value": "2000000000000000"
-        }, 
+        },
         {
-          "rule": "=#,##0=º;", 
+          "rule": "=#,##0=º;",
           "value": "1000000000000000000"
         }
       ]
