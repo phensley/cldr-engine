@@ -144,7 +144,7 @@ export class RBNFEncoder {
     });
 
     const result = this._encode(rulesets);
-    const names = (pairs: Pair[]) => pairs.map(p => p[0]).join('\t');
+    const names = (pairs: Pair[]) => pairs.map(p => p[0]).join('_');
 
     return {
       // All rule names [public, private] ordered 1:1 with their rulesets

@@ -40,8 +40,8 @@ export class RBNFPacker {
 
     const out = {
       locales,
-      symbols: symbols.sort().join('\t'),
-      numbers: numbers.sort().join('\t')
+      symbols: symbols.sort().join('_'),
+      numbers: numbers.sort().join('_')
     };
     return JSON.stringify(out);
   }

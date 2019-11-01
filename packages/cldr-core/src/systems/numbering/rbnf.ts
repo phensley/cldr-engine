@@ -1,5 +1,5 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-import { pluralRules } from '../plurals';
+import { pluralRules } from '@phensley/plurals';
 import {
   ApplyLeft2NumFormatInst,
   ApplyLeft2RuleInst,
@@ -53,14 +53,14 @@ export class RBNF {
 
   constructor(spellout: any) {
     const { locales, symbols, numbers } = spellout;
-    this.symbols = symbols ? symbols.split('\t') : [];
-    this.numbers = numbers ? numbers.split('\t').map((n: string) => new Decimal(n)) : [];
+    this.symbols = symbols ? symbols.split('_') : [];
+    this.numbers = numbers ? numbers.split('_').map((n: string) => new Decimal(n)) : [];
     for (const id of Object.keys(locales)) {
       const { names, rulesets } = locales[id];
       const [_pub, _prv] = names;
-      const pub = _pub.split('\t');
+      const pub = _pub.split('_');
       // some rulesets have no private rules
-      const prv = _prv.length ? _prv.split('\t') : [];
+      const prv = _prv.length ? _prv.split('_') : [];
       this.locales.set(id, this.make(id, pub, prv, this.numbers, this.symbols, rulesets));
     }
   }

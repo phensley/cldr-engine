@@ -131,7 +131,7 @@ export class ResourcePack {
       `"checksum":"${checksum}",` +
       `"language":"${this.language}",` +
       `"defaultTag":"${this.defaultLayer}",` +
-      `"scripts":{${scripts.join(',')}}},` +
+      `"scripts":{${scripts.join(',')}},` +
       `"spellout":${this.spellout}}`;
   }
 
