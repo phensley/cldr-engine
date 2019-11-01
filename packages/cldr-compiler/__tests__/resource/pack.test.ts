@@ -45,8 +45,8 @@ test('creation', () => {
   expect(Object.keys(p.scripts)).toEqual(['Latn']);
 
   const { strings, exceptions, regions } = p.scripts.Latn;
-  expect(strings).toEqual('foo\tbar\tbaz\tquux');
-  expect(exceptions).toEqual('bar.gb\tquux.gb\tquux.ca\tfoo.de\tbar.de\tquux.de');
+  expect(strings).toEqual('foo_bar_baz_quux');
+  expect(exceptions).toEqual('bar.gb_quux.gb_quux.ca_foo.de_bar.de_quux.de');
 
   // US is the base since it has the minimum distance to the other regions.
   expect(regions.US).toEqual('');

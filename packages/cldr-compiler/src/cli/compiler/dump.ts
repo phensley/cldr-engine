@@ -113,7 +113,7 @@ export const runDump = (argv: yargs.Arguments<DumpArgs>) => {
 
   const opts = { verbose: false };
   Object.keys(data.scripts).forEach(name => {
-    const strings = data.scripts[name].strings.split('\t');
+    const strings = data.scripts[name].strings.split('_');
     const entries = scan(schema, 1, opts);
     display(entries, strings);
   });

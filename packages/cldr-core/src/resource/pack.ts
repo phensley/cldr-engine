@@ -2,7 +2,10 @@ import { LanguageResolver, LanguageTag } from '../locale';
 import { Bundle, ExceptionIndex, StringBundle } from './bundle';
 import { numarray } from '../utils/string';
 
-const DELIMITER = '\t';
+const enum Chars {
+  // Fields in a resource pack are separated by an UNDERSCORE character
+  DELIM = '_'
+}
 
 /**
  * Layer in the pack that supports all regions for a single language + script.
@@ -21,8 +24,8 @@ export class PackScript {
     regions: { [x: string]: string },
     defaultRegion: string
   ) {
-    this._strings = strings.split(DELIMITER);
-    this._exceptions = exceptions.split(DELIMITER);
+    this._strings = strings.split(Chars.DELIM);
+    this._exceptions = exceptions.split(Chars.DELIM);
     this._regions = regions;
     this._defaultRegion = defaultRegion;
   }

@@ -231,16 +231,16 @@ test('encoding', () => {
 
   expect(strings).toEqual(
     // vector1 symbols
-    'E\t.\t,\t' +
+    'E_._,_' +
     // scope currency
-    '¤#,##0.00\t' +
+    '¤#,##0.00_' +
     // digits short
-    '0K\t3\t00K\t3\t000K\t3\t0R\t3\t00R\t3\t000R\t3\t' +
+    '0K_3_00K_3_000K_3_0R_3_00R_3_000R_3_' +
     // scopemap
-    'Foo\tBar 2\t' +
+    'Foo_Bar 2_' +
     // vector2 plurals
-    'E\tFoos\tBars\tFoo\tBar');
+    'E_Foos_Bars_Foo_Bar');
 
   expect(exceptions).toEqual(
-    '0K\t00K\t000K\tBar\t,\t.\t#,##0.00 ¤\t0Q\t00Q\t000Q\tFoo 2');
+    '0K_00K_000K_Bar_,_._#,##0.00 ¤_0Q_00Q_000Q_Foo 2');
 });

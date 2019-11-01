@@ -10,10 +10,11 @@ const loadDefaultContent = () =>
     defaultContent.add(tag.expanded());
   });
 
-// TAB delimiter selected as it is (a) a single character, (b) does not occur in
-// the CLDR JSON data, (c) is safe to encode in JSON, (d) separates strings
-// nicely when viewing the packed string array in a text editor / console.
-const DELIMITER = '\\t';
+// UNDERSCORE delimiter selected as it saves about 10% space vs the previous
+// delimiter, an escaped TAB character.
+// Note: We'll need to revert to the TAB character if we ever need to incorporate
+// the characters/punctiation CLDR field.
+const DELIMITER = '_';
 
 class Layer {
 
