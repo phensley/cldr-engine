@@ -1,15 +1,18 @@
-import { PluralType } from '@phensley/cldr-types';
+import {
+  DateFieldType,
+  DateFieldWidthType,
+  PluralType,
+  RelativeTimeFieldType,
+} from '@phensley/cldr-types';
+
 import {
   Vector1Arrow,
   Vector2Arrow
 } from '../arrows';
 
 import {
-  DateFieldType,
   DateFieldValues,
-  DateFieldWidthType,
   DateFieldWidthValues,
-  RelativeTimeFieldType,
   RelativeTimeFieldValues
 } from './enums';
 import { KeyIndexImpl } from '../../instructions';

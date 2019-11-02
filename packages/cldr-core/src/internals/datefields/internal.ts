@@ -1,9 +1,13 @@
-import { PluralType } from '@phensley/cldr-types';
+import {
+  PluralType,
+  RelativeTimeFieldType,
+} from '@phensley/cldr-types';
+
 import {
   RelativeTimes,
   RelativeTimeFields,
-  RelativeTimeFieldType,
 } from '@phensley/cldr-schema';
+
 import { coerceDecimal, DecimalArg, DecimalConstants } from '@phensley/decimal';
 
 import { DateFieldInternals, Internals } from '../internals';

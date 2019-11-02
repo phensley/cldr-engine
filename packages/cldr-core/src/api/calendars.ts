@@ -1,12 +1,12 @@
 import {
+  DateFieldType,
   DateTimePatternFieldType,
+  RelativeTimeFieldType
 } from '@phensley/cldr-types';
 
 import {
   ContextTransformFieldType,
   ContextType,
-  DateFieldType,
-  RelativeTimeFieldType
 } from '@phensley/cldr-schema';
 
 import { DecimalArg, Part } from '@phensley/decimal';
