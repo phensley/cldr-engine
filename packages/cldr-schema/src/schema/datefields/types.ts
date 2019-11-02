@@ -3,12 +3,9 @@ import {
   DateFieldWidthType,
   PluralType,
   RelativeTimeFieldType,
-} from '@phensley/cldr-types';
-
-import {
   Vector1Arrow,
   Vector2Arrow
-} from '../arrows';
+} from '@phensley/cldr-types';
 
 import {
   DateFieldValues,

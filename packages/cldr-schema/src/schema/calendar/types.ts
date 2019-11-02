@@ -7,10 +7,10 @@ import {
   FormatWidthType,
   PluralType,
   QuarterType,
+  Vector1Arrow,
+  Vector2Arrow,
   WeekdayType
 } from '@phensley/cldr-types';
-
-import { Vector1Arrow, Vector2Arrow } from '../arrows';
 
 export const DateTimePatternFieldValues: DateTimePatternFieldType[] = [
   'y', 'M', 'd', 'a', 'H', 'm', 's'

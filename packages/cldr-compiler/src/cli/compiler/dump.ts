@@ -9,8 +9,8 @@ import {
   Origin,
   Schema,
   ScopeArrowImpl,
-  Vector1Arrow,
-  Vector2Arrow
+  Vector1ArrowImpl,
+  Vector2ArrowImpl
 } from '@phensley/cldr-schema';
 import { VERSION } from '@phensley/cldr-core/lib/utils/version';
 import { SchemaBuilder } from '@phensley/cldr-core/lib/internals/schema';
@@ -45,10 +45,10 @@ const scan = (o: any, depth: number, opts: Options): Entry[] => {
     e.push([depth, 'DigitsArrow', start, start + o.index.size * o.size2]);
   } else if (o instanceof FieldArrowImpl) {
     e.push([depth, 'FieldArrow', o.offset, o.offset + 1]);
-  } else if (o instanceof Vector1Arrow) {
+  } else if (o instanceof Vector1ArrowImpl) {
     const start = o.offset - 1;
     e.push([depth, 'Vector1Arrow', start, start + o.len + 1]);
-  } else if (o instanceof Vector2Arrow) {
+  } else if (o instanceof Vector2ArrowImpl) {
     // TODO: need to get the right formatting
     // if (opts.verbose) {
     //   const vec2 = o as Vector2Arrow<any, any>;

@@ -2,9 +2,8 @@ import {
   ContextTransformFieldType,
   FieldArrow,
   ListPatternPositionType,
+  Vector1Arrow
 } from '@phensley/cldr-types';
-
- import { Vector1Arrow } from '../arrows';
 
 export interface LayoutSchema {
   readonly characterOrder: FieldArrow;

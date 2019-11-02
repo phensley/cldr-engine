@@ -10,9 +10,9 @@ import {
   ScopeArrowImpl,
   ScopeMap,
   Vector1,
-  Vector1Arrow,
+  Vector1ArrowImpl,
   Vector2,
-  Vector2Arrow,
+  Vector2ArrowImpl,
 } from '@phensley/cldr-schema';
 import { Decimal } from '@phensley/decimal';
 import { leftPad } from '../utils/string';
@@ -148,7 +148,7 @@ export class SchemaBuilder {
     const dim0 = this.origin.getIndex(inst.dim0);
     const offset = this.generator.field(); // header
     this.generator.vector1(dim0.size);
-    obj[inst.name] = new Vector1Arrow(offset, dim0);
+    obj[inst.name] = new Vector1ArrowImpl(offset, dim0);
   }
 
   private constructVector2(obj: any, inst: Vector2): void {
@@ -156,7 +156,7 @@ export class SchemaBuilder {
     const dim1 = this.origin.getIndex(inst.dim1);
     const offset = this.generator.field(); // header
     this.generator.vector2(dim0.size, dim1.size);
-    obj[inst.name] = new Vector2Arrow(offset, dim0, dim1);
+    obj[inst.name] = new Vector2ArrowImpl(offset, dim0, dim1);
   }
 }
 

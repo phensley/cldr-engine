@@ -1,10 +1,11 @@
 import {
   ContextTransformFieldType,
+  Vector2Arrow
 } from '@phensley/cldr-types';
 
 import {
   CalendarSchema,
-  TimeZoneSchema, Vector2Arrow
+  TimeZoneSchema,
 } from '@phensley/cldr-schema';
 
 import { GeneralInternals } from '../../internals/internals';

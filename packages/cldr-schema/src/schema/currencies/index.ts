@@ -1,5 +1,4 @@
-import { AltType, CurrencyType, PluralType } from '@phensley/cldr-types';
-import { Vector1Arrow, Vector2Arrow } from '../arrows';
+import { AltType, CurrencyType, PluralType, Vector1Arrow, Vector2Arrow } from '@phensley/cldr-types';
 
 export interface CurrenciesSchema {
   readonly displayName: Vector1Arrow<CurrencyType>;

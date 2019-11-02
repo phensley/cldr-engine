@@ -2,13 +2,13 @@ import {
   ContextTransformFieldType,
   ContextType,
   ListPatternPositionType,
+  Vector1Arrow,
 } from '@phensley/cldr-types';
 
 import {
   LayoutSchema,
   ListPatternsSchema,
   NamesSchema,
-  Vector1Arrow,
 } from '@phensley/cldr-schema';
 import { Part } from '@phensley/decimal';
 import { Cache } from '@phensley/cldr-utils';

@@ -3,8 +3,9 @@ import {
   LanguageIdType,
   RegionIdType,
   ScriptIdType,
+  Vector1Arrow,
+  Vector2Arrow
 } from '@phensley/cldr-types';
-import { Vector1Arrow, Vector2Arrow } from '../arrows';
 
 export interface LanguageNameInfo {
   readonly displayName: Vector1Arrow<LanguageIdType>;

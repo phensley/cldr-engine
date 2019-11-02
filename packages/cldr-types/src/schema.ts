@@ -28,3 +28,23 @@ export interface DigitsArrow<T extends string> {
   readonly size2: number;
   get(bundle: PrimitiveBundle, key: T, digits: number): [string, number];
 }
+
+export interface Vector1Arrow<T extends string> {
+  readonly len: number;
+  readonly offset: number;
+  readonly index: KeyIndex<T>;
+  exists(bundle: PrimitiveBundle): boolean;
+  get(bundle: PrimitiveBundle, key: T): string;
+  mapping(bundle: PrimitiveBundle): { [P in T]: string };
+}
+
+export interface Vector2Arrow<T extends string, S extends string> {
+  readonly size: number;
+  readonly size2: number;
+  readonly offset: number;
+  readonly index1: KeyIndex<T>;
+  readonly index2: KeyIndex<S>;
+  exists(bundle: PrimitiveBundle): boolean;
+  get(bundle: PrimitiveBundle, key1: T, key2: S): string;
+  mapping(bundle: PrimitiveBundle): { [P in T]: { [Q in S]: string }};
+}

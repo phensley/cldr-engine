@@ -8,10 +8,10 @@ import {
   NumberSystemCategory,
   NumberSystemName,
   PluralType,
-  ScopeArrow
+  ScopeArrow,
+  Vector1Arrow,
+  Vector2Arrow
 } from '@phensley/cldr-types';
-
-import { Vector1Arrow, Vector2Arrow } from '../arrows';
 
 import {
   NumberMiscPatternValues,

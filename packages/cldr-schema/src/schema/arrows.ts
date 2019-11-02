@@ -4,6 +4,8 @@ import {
   KeyIndex,
   PrimitiveBundle,
   ScopeArrow,
+  Vector1Arrow,
+  Vector2Arrow,
 } from '@phensley/cldr-types';
 
 export class FieldArrowImpl implements FieldArrow {
@@ -54,7 +56,7 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
   }
 }
 
-export class Vector1Arrow<T extends string> {
+export class Vector1ArrowImpl<T extends string> implements Vector1Arrow<T> {
 
   readonly len: number;
   readonly offset: number;
@@ -97,7 +99,7 @@ export class Vector1Arrow<T extends string> {
   }
 }
 
-export class Vector2Arrow<T extends string, S extends string> {
+export class Vector2ArrowImpl<T extends string, S extends string> implements Vector2Arrow<T, S> {
 
   readonly size: number;
   readonly size2: number;

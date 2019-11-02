@@ -1,5 +1,4 @@
-import { FieldArrow, PluralType, UnitType } from '@phensley/cldr-types';
-import { Vector1Arrow, Vector2Arrow } from '../arrows';
+import { FieldArrow, PluralType, UnitType, Vector1Arrow, Vector2Arrow } from '@phensley/cldr-types';
 
 export interface UnitInfo {
   readonly unitPattern: Vector2Arrow<PluralType, UnitType>;
