@@ -29,6 +29,12 @@ npm install --save @phensley/cldr
 yarn add @phensley/cldr
 ```
 
+## Pacakge Naming
+
+Packages with the `cldr-*` prefix represent pieces of the larger library and are designed to work together. The [`@phensley/cldr`](https://www.npmjs.com/package/@phensley/cldr) package pulls in the full functionality of the library.
+
+Packages without the `cldr-*` prefix can be used in an application individually without pulling in the larger core library. You can use any of the packages [`@phensley/decimal`](https://www.npmjs.com/package/@phensley/decimal), [`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat), [`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals), and [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone)  on their own.
+
 ## Features
 
 * Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 36.0.0](http://cldr.unicode.org/index/downloads/cldr-36)
