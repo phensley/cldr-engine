@@ -1,3 +1,8 @@
+// TODO: may not need this
+export type DateFieldSymbol = 'G' | 'y' | 'Y' | 'u' | 'U' | 'r' | 'Q' | 'q' | 'M' | 'L' | 'l' | 'w' | 'W' |
+  'd' | 'D' | 'F' | 'g' | 'E' | 'e' | 'c' | 'a' | 'b' | 'B' | 'h' | 'H' | 'K' | 'k' | 'j' | 'J' | 'C' | 'm' |
+  's' | 'S' | 'A' | 'z' | 'Z' | 'O' | 'v' | 'V' | 'X' | 'x';
+
 export type DateFieldType = 'era' | 'year' | 'quarter' | 'month' | 'week' |
   'weekday' | 'weekdayOfMonth' | 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' |
   'day' | 'dayperiod' | 'hour' | 'minute' | 'second' | 'zone';
