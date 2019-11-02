@@ -1,4 +1,4 @@
-import { Opcode, RuleType } from '@phensley/cldr-core/lib/systems/numbering/rbnftypes';
+import { Opcode, RuleType } from '@phensley/cldr-ext-rbnf/lib/rbnftypes';
 
 import { parseRBNF, RBNFNode } from '../parsing/parser.rbnf';
 import { JSONRoot, JSONRulesetInner, ROOT_KEYS } from './json';
