@@ -1,6 +1,16 @@
 // Values 'h' and 'H' for hours have been unified to 'H' for uniqueness.
 export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
 
+export const enum DateTimePatternField {
+  YEAR = 'y',
+  MONTH = 'M',
+  DAY = 'd',
+  DAYPERIOD = 'a', // am / pm
+  HOUR = 'H',
+  MINUTE = 'm',
+  SECOND = 's'
+}
+
 export type DayPeriodType = 'noon' | 'midnight' | 'am' | 'pm' | 'morning1' | 'morning2' |
   'afternoon1' | 'afternoon2' | 'evening1' | 'evening2' | 'night1' | 'night2';
 

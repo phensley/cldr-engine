@@ -1,10 +1,9 @@
 import {
+  DateTimePatternField,
   DateTimePatternFieldType,
   MetaZoneType
 } from '@phensley/cldr-types';
-import {
-  DateTimePatternField,
-} from '@phensley/cldr-schema';
+
 import { dateFields, DateField, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
 import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
