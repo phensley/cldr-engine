@@ -1,14 +1,17 @@
 import {
-  CurrencySpacingPos,
   CurrencySpacingPattern,
+  CurrencySpacingPos,
+  DigitsArrow,
+  FieldArrow,
   NumberMiscPatternType,
   NumberSymbolType,
   NumberSystemCategory,
   NumberSystemName,
-  PluralType
+  PluralType,
+  ScopeArrow
 } from '@phensley/cldr-types';
 
-import { DigitsArrow, FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
+import { Vector1Arrow, Vector2Arrow } from '../arrows';
 
 import {
   NumberMiscPatternValues,

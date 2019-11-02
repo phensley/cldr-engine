@@ -1,11 +1,11 @@
 import {
   CurrencyType,
+  DigitsArrow,
   PluralType
 } from '@phensley/cldr-types';
 
 import {
   CurrenciesSchema,
-  DigitsArrow,
   NumbersSchema,
   NumberSystemInfo
 } from '@phensley/cldr-schema';

@@ -1,4 +1,4 @@
-import { NumberSymbolType, NumberSystemCategory, NumberMiscPatternType } from '@phensley/cldr-types';
+import { NumberMiscPatternType, NumberSymbolType, NumberSystemCategory } from '@phensley/cldr-types';
 
 export const NumberSymbolValues: NumberSymbolType[] = [
   'currencyDecimal',

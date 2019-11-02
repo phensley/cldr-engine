@@ -1,13 +1,13 @@
 import {
   Digits,
-  DigitsArrow,
+  DigitsArrowImpl,
   Field,
-  FieldArrow,
+  FieldArrowImpl,
   Instruction,
   Origin,
   Schema,
   Scope,
-  ScopeArrow,
+  ScopeArrowImpl,
   ScopeMap,
   Vector1,
   Vector1Arrow,
@@ -90,12 +90,12 @@ export class SchemaBuilder {
   private constructDigits(obj: any, inst: Digits): void {
     const dim0 = this.origin.getIndex(inst.dim0);
     const offset = this.generator.vector2(dim0.size, inst.values.length * 2);
-    obj[inst.name] = new DigitsArrow(offset, dim0, inst.values);
+    obj[inst.name] = new DigitsArrowImpl(offset, dim0, inst.values);
   }
 
   private constructField(obj: any, inst: Field): void {
     const offset = this.generator.field();
-    obj[inst.name] = new FieldArrow(offset);
+    obj[inst.name] = new FieldArrowImpl(offset);
   }
 
   private constructOrigin(obj: any, inst: Origin): void {
@@ -141,7 +141,7 @@ export class SchemaBuilder {
     // for (const i of inst.block) {
     //   this.construct(undef, i);
     // }
-    obj[inst.name] = new ScopeArrow(map);
+    obj[inst.name] = new ScopeArrowImpl(map);
   }
 
   private constructVector1(obj: any, inst: Vector1): void {

@@ -1,6 +1,12 @@
-import { KeyIndex, PrimitiveBundle } from '@phensley/cldr-types';
+import {
+  DigitsArrow,
+  FieldArrow,
+  KeyIndex,
+  PrimitiveBundle,
+  ScopeArrow,
+} from '@phensley/cldr-types';
 
-export class FieldArrow {
+export class FieldArrowImpl implements FieldArrow {
   constructor(readonly offset: number) {}
 
   get(bundle: PrimitiveBundle): string {
@@ -8,7 +14,7 @@ export class FieldArrow {
   }
 }
 
-export class ScopeArrow<T extends string, R> {
+export class ScopeArrowImpl<T extends string, R> implements ScopeArrow<T, R> {
 
   constructor(
     readonly map: { [P in T]: R }) { }
@@ -21,7 +27,7 @@ export class ScopeArrow<T extends string, R> {
 /**
  * Special vector to store a pluralized number pattern and its divisor together.
  */
-export class DigitsArrow<T extends string> {
+export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
 
   static EMPTY: [string, number] = ['', 0];
 
@@ -44,7 +50,7 @@ export class DigitsArrow<T extends string> {
         return [p, Number(d)];
       }
     }
-    return DigitsArrow.EMPTY;
+    return DigitsArrowImpl.EMPTY;
   }
 }
 

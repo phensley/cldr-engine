@@ -1,5 +1,5 @@
-import { MetaZoneType } from '@phensley/cldr-types';
-import { FieldArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
+import { FieldArrow, MetaZoneType } from '@phensley/cldr-types';
+import { Vector1Arrow, Vector2Arrow } from '../arrows';
 import { MetaZoneValues, TimeZoneStableIds } from './autogen.timezones';
 import { KeyIndexImpl } from '../../instructions';
 

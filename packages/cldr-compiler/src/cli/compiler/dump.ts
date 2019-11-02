@@ -2,7 +2,16 @@ import * as fs from 'fs';
 import { join } from 'path';
 import * as yargs from 'yargs';
 
-import { CodeBuilder, DigitsArrow, FieldArrow, Origin, Schema, ScopeArrow, Vector1Arrow, Vector2Arrow } from '@phensley/cldr-schema';
+import {
+  CodeBuilder,
+  DigitsArrowImpl,
+  FieldArrowImpl,
+  Origin,
+  Schema,
+  ScopeArrowImpl,
+  Vector1Arrow,
+  Vector2Arrow
+} from '@phensley/cldr-schema';
 import { VERSION } from '@phensley/cldr-core/lib/utils/version';
 import { SchemaBuilder } from '@phensley/cldr-core/lib/internals/schema';
 import { checksumIndices } from '@phensley/cldr-core/lib/resource/checksum';
@@ -10,7 +19,7 @@ import * as CONFIG from './config.json';
 
 export const loader = (lang: string) => {
   const path = join(__dirname, `../../../../cldr/packs/${lang}.json`);
-    return fs.readFileSync(path).toString('utf-8');
+  return fs.readFileSync(path).toString('utf-8');
 };
 
 export const buildSchema = (origin: Origin, debug: boolean = false): Schema => {
@@ -31,10 +40,10 @@ interface Options {
  */
 const scan = (o: any, depth: number, opts: Options): Entry[] => {
   let e: Entry[] = [];
-  if (o instanceof DigitsArrow) {
+  if (o instanceof DigitsArrowImpl) {
     const start = o.offset;
     e.push([depth, 'DigitsArrow', start, start + o.index.size * o.size2]);
-  } else if (o instanceof FieldArrow) {
+  } else if (o instanceof FieldArrowImpl) {
     e.push([depth, 'FieldArrow', o.offset, o.offset + 1]);
   } else if (o instanceof Vector1Arrow) {
     const start = o.offset - 1;
@@ -51,7 +60,7 @@ const scan = (o: any, depth: number, opts: Options): Entry[] => {
     const start = o.offset - 1;
     e.push([depth, 'Vector2Arrow', start, start + o.size + 1]);
     // }
-  } else if (o instanceof ScopeArrow) {
+  } else if (o instanceof ScopeArrowImpl) {
     e.push([depth, 'ScopeArrow']);
     for (const key of Object.keys(o.map)) {
       e.push([depth, key]);
