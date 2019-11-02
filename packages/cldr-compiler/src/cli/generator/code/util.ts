@@ -31,7 +31,7 @@ export class Code {
   }
 
   static rbnf(path: string[], source: string): Code {
-    return new Code(['packages', 'cldr-rbnf', 'src', ...path], source);
+    return new Code(['packages', 'cldr-ext-rbnf', 'src', ...path], source);
   }
 
   static schema(path: string[], source: string): Code {
