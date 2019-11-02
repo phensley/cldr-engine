@@ -1,10 +1,10 @@
 import {
   AlgorithmicNumberingSystem,
   AlgorithmicNumberingSystems
-} from '../../../src/systems/numbering/algorithmic';
+} from '../src/algorithmic';
 import { Decimal } from '@phensley/decimal';
 import { languageBundle } from '../../_helpers/bundle';
-import { RBNFDecimalFormatter } from '../../../src/systems/numbering/rbnf';
+import { RBNFDecimalFormatter } from '../src/rbnf';
 
 const SYMBOLS = {
   decimal: '.',

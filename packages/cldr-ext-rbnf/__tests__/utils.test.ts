@@ -1,5 +1,5 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-import { binarySearch } from '../../../src/systems/numbering/utils';
+import { binarySearch } from '../src/utils';
 
 const { ONE, ZERO } = DecimalConstants;
 
