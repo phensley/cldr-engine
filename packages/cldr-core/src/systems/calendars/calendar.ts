@@ -1,6 +1,8 @@
 import {
-  DateTimePatternField,
   DateTimePatternFieldType,
+} from '@phensley/cldr-types';
+import {
+  DateTimePatternField,
   MetaZoneType,
 } from '@phensley/cldr-schema';
 import { dateFields, DateField, DayOfWeek } from './fields';

@@ -1,6 +1,6 @@
+import { DayPeriodType } from '@phensley/cldr-types';
 import { binarySearch, Cache } from '@phensley/cldr-utils';
 
-import { DayPeriodType } from '@phensley/cldr-schema';
 import { Bundle } from '../../resource/bundle';
 import { numarray } from '../../utils/string';
 

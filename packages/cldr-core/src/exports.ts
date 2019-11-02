@@ -1,13 +1,16 @@
 export {
+  EraWidthType,
+  FieldWidthType,
+  FormatWidthType
+} from '@phensley/cldr-types';
+
+export {
   CharacterOrderType,
   ContextType,
   ContextTransformFieldType,
   CurrencyType,
   DateFieldType,
   DateFieldWidthType,
-  EraWidthType,
-  FieldWidthType,
-  FormatWidthType,
   LanguageIdType,
   LineOrderType,
   NumberSystemInfo,

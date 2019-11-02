@@ -1,3 +1,4 @@
+import { DateTimePatternFieldType } from '@phensley/cldr-types';
 import { Cache } from '@phensley/cldr-utils';
 
 import { Internals } from '../internals';
@@ -10,7 +11,6 @@ import { CalendarPatterns, GregorianPatterns } from './patterns';
 import { DateSkeleton } from './skeleton';
 import { DateFormatRequest, DateIntervalFormatRequest } from './types';
 import { Field } from './fields';
-import { DateTimePatternFieldType } from '@phensley/cldr-schema';
 
 export class CalendarManager {
 

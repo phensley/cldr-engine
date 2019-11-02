@@ -82,7 +82,7 @@ const expand = (untils: Until[]): Until[] => {
 export const getDayPeriods = (_data: any): Code[] => {
   let code = HEADER;
 
-  code += `import { DayPeriodType } from '@phensley/cldr-schema';\n\n`;
+  code += `import { DayPeriodType } from '@phensley/cldr-types';\n\n`;
 
   code += 'export const dayPeriodKeys: DayPeriodType[] = [\n  ';
   code += KEYS.map(s => `'${s}'`).join(', ');

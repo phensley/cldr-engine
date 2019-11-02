@@ -1,8 +1,11 @@
 import {
+  DateTimePatternFieldType,
+} from '@phensley/cldr-types';
+
+import {
   ContextTransformFieldType,
   ContextType,
   DateFieldType,
-  DateTimePatternFieldType,
   RelativeTimeFieldType
 } from '@phensley/cldr-schema';
 

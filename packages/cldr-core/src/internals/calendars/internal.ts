@@ -1,7 +1,8 @@
+import { DayPeriodType } from '@phensley/cldr-types';
+import { CalendarSchema, Schema } from '@phensley/cldr-schema';
 import { Cache } from '@phensley/cldr-utils';
 
 import { CalendarDate, CalendarType } from '../../systems/calendars';
-import { CalendarSchema, DayPeriodType, Schema } from '@phensley/cldr-schema';
 import { calendarIds, calendarPrefData } from './autogen.calprefs';
 import { weekFirstDay, weekMinDays } from './autogen.weekdata';
 import { Bundle } from '../../resource';

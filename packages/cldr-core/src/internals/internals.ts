@@ -1,15 +1,20 @@
-import { KeyIndexMap, PluralType } from '@phensley/cldr-types';
+import {
+  DayPeriodType,
+  KeyIndexMap,
+  PluralType
+} from '@phensley/cldr-types';
+
 import {
   ContextTransformFieldType,
   ContextType,
   CurrencyType,
   DateFieldType,
-  DayPeriodType,
   Schema,
   SchemaConfig,
   UnitInfo,
   UnitType,
 } from '@phensley/cldr-schema';
+
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 
 import {

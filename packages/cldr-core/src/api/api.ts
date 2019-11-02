@@ -1,8 +1,10 @@
 import {
+  DateTimePatternFieldType
+} from '@phensley/cldr-types';
+import {
   CharacterOrderType,
   CurrencyType,
   DateFieldType,
-  DateTimePatternFieldType,
   LineOrderType,
   RelativeTimeFieldType,
   UnitType
