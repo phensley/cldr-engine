@@ -1,4 +1,4 @@
-import { UnitType } from '@phensley/cldr-schema';
+import { UnitType } from '@phensley/cldr-types';
 import { Part } from '@phensley/decimal';
 
 import { GeneralInternals, Internals, NumberInternals, UnitInternals } from '../internals';

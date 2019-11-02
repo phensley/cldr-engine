@@ -5,11 +5,8 @@ import {
   DateTimePatternFieldType,
   LineOrderType,
   RelativeTimeFieldType,
-} from '@phensley/cldr-types';
-
-import {
   UnitType
-} from '@phensley/cldr-schema';
+} from '@phensley/cldr-types';
 
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 

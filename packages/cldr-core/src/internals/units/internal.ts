@@ -1,9 +1,8 @@
-import { PluralType } from '@phensley/cldr-types';
+import { PluralType, UnitType } from '@phensley/cldr-types';
 import {
   NumbersSchema,
   UnitsSchema,
   UnitInfo,
-  UnitType
 } from '@phensley/cldr-schema';
 import { coerceDecimal, DecimalConstants } from '@phensley/decimal';
 

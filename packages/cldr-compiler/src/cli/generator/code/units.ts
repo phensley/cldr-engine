@@ -21,6 +21,6 @@ export const getUnits = (data: any): Code[] => {
   code += `export type UnitType = ${unitType};`;
 
   return [
-    Code.schema(['schema', 'units', 'autogen.units.ts'], code)
+    Code.types(['autogen.units.ts'], code)
   ];
 };

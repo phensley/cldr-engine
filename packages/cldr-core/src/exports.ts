@@ -13,13 +13,13 @@ export {
   RegionIdType,
   RelativeTimeFieldType,
   ScriptIdType,
+  UnitType
 } from '@phensley/cldr-types';
 
 export {
   NumberSystemInfo,
   Schema,
   SchemaConfig,
-  UnitType
 } from '@phensley/cldr-schema';
 
 export {

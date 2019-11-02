@@ -1,4 +1,4 @@
-import { UnitType } from '@phensley/cldr-schema';
+import { UnitType } from '@phensley/cldr-types';
 import { Decimal } from '@phensley/decimal';
 
 import { NumberFormatOptions, NumberFormatStyleType } from './numbers';

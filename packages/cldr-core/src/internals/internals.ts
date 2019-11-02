@@ -5,14 +5,14 @@ import {
   DateFieldType,
   DayPeriodType,
   KeyIndexMap,
-  PluralType
+  PluralType,
+  UnitType,
 } from '@phensley/cldr-types';
 
 import {
   Schema,
   SchemaConfig,
   UnitInfo,
-  UnitType,
 } from '@phensley/cldr-schema';
 
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
