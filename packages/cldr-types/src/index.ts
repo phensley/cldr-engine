@@ -1,5 +1,6 @@
 export * from './autogen.context';
 export * from './autogen.currencies';
+export * from './autogen.identifiers';
 export * from './calendars';
 export * from './datefields';
 export * from './extensions';

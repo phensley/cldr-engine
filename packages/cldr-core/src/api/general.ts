@@ -1,15 +1,16 @@
 import {
   CharacterOrderType,
   ContextType,
+  LanguageIdType,
   LineOrderType,
+  RegionIdType,
+  ScriptIdType,
 } from '@phensley/cldr-types';
 
 import {
-  LanguageIdType,
   NamesSchema,
-  RegionIdType,
-  ScriptIdType,
 } from '@phensley/cldr-schema';
+
 import { Part } from '@phensley/decimal';
 
 // import {

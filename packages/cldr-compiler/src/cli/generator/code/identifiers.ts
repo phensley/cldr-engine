@@ -31,6 +31,6 @@ export const getIdentifiers = (data: any): Code[] => {
   code += ');\n';
 
   return [
-    Code.schema(['schema', 'names', 'autogen.identifiers.ts'], code)
+    Code.types(['autogen.identifiers.ts'], code)
   ];
 };

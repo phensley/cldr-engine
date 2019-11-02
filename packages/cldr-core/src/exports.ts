@@ -8,17 +8,17 @@ export {
   EraWidthType,
   FieldWidthType,
   FormatWidthType,
+  LanguageIdType,
   LineOrderType,
+  RegionIdType,
   RelativeTimeFieldType,
+  ScriptIdType,
 } from '@phensley/cldr-types';
 
 export {
-  LanguageIdType,
   NumberSystemInfo,
-  RegionIdType,
   Schema,
   SchemaConfig,
-  ScriptIdType,
   UnitType
 } from '@phensley/cldr-schema';
 
