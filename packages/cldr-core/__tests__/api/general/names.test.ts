@@ -1,4 +1,4 @@
-import { AltType } from '@phensley/cldr-schema';
+import { AltType } from '@phensley/cldr-types';
 import { generalApi, languageBundle, INTERNALS } from '../../_helpers';
 import { DisplayNameOptions } from '../../../src';
 

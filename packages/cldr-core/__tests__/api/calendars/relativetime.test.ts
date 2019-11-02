@@ -1,4 +1,4 @@
-import { ContextType } from '@phensley/cldr-schema';
+import { ContextType } from '@phensley/cldr-types';
 
 import { calendarsApi } from '../../_helpers';
 import { CalendarDate } from '../../../src';

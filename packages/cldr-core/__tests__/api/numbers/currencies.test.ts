@@ -1,4 +1,4 @@
-import { CurrencyType } from '@phensley/cldr-schema';
+import { CurrencyType } from '@phensley/cldr-types';
 import { Part } from '@phensley/decimal';
 
 import { numbersApi } from '../../_helpers';

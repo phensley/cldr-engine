@@ -1,4 +1,4 @@
-import { DateFieldWidthType, RelativeTimeFieldType } from '@phensley/cldr-schema';
+import { DateFieldWidthType, RelativeTimeFieldType } from '@phensley/cldr-types';
 import { Decimal } from '@phensley/decimal';
 
 import { calendarsApi } from '../../_helpers';

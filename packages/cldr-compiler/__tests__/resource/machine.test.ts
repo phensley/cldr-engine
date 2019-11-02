@@ -6,7 +6,7 @@ import {
   scopemap,
   vector1,
   vector2,
-  KeyIndex,
+  KeyIndexImpl,
   Origin,
   Scope
 } from '@phensley/cldr-schema';
@@ -22,11 +22,11 @@ const EN_DE = parseLocale('en-DE');
 const EN_CA = parseLocale('en-CA');
 
 const NumberSymbolValues = ['decimal', 'group'];
-const NumberSymbolIndex = new KeyIndex(NumberSymbolValues);
+const NumberSymbolIndex = new KeyIndexImpl(NumberSymbolValues);
 
-const PluralIndex = new KeyIndex(['other', 'one']);
+const PluralIndex = new KeyIndexImpl(['other', 'one']);
 const DigitValues = [4, 5, 6];
-const FooIndex = new KeyIndex(['foo', 'bar']);
+const FooIndex = new KeyIndexImpl(['foo', 'bar']);
 
 const INDICES = {
   'foo': FooIndex,

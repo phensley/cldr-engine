@@ -1,5 +1,5 @@
+import { DateTimePatternFieldType } from '@phensley/cldr-types';
 import { calendarsApi } from '../../_helpers';
-import { DateTimePatternFieldType } from '@phensley/cldr-schema';
 
 import {
   CalendarDate,
