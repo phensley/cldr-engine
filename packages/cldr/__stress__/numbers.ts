@@ -14,7 +14,6 @@ import {
 } from '../src';
 import { getCLDR } from '../__tests__/_helpers';
 import { Timer } from './timer';
-import { RuleBasedFormatOptions } from '@phensley/cldr-core';
 
 const VERBOSE = true;
 
@@ -96,17 +95,18 @@ const currencyOptions = (): CurrencyFormatOptions[] => {
 return res;
 };
 
-const ruleBasedOptions = (): RuleBasedFormatOptions[] => {
-  const res: RuleBasedFormatOptions[] = [];
-  res.push({});
-  res.push({ minimumFractionDigits: 0 });
-  res.push({ minimumFractionDigits: 3 });
-  res.push({ maximumFractionDigits: 3 });
-  res.push({ maximumFractionDigits: 10 });
-  res.push({ minimumSignificantDigits: 3 });
-  res.push({ maximumSignificantDigits: 3 });
-  return res;
-};
+// TODO: enable once rbnf is incorporated
+// const ruleBasedOptions = (): RuleBasedFormatOptions[] => {
+//   const res: RuleBasedFormatOptions[] = [];
+//   res.push({});
+//   res.push({ minimumFractionDigits: 0 });
+//   res.push({ minimumFractionDigits: 3 });
+//   res.push({ maximumFractionDigits: 3 });
+//   res.push({ maximumFractionDigits: 10 });
+//   res.push({ minimumSignificantDigits: 3 });
+//   res.push({ maximumSignificantDigits: 3 });
+//   return res;
+// };
 
 const unitOptions = (): UnitFormatOptions[] => {
   const res: UnitFormatOptions[] = [];
@@ -133,16 +133,21 @@ export const numberStress = () => {
 
   const dopts = decimalOptions();
   const copts = currencyOptions();
-  const sopts = ruleBasedOptions();
+
+    // TODO: enable once rbnf is incorporated
+  // const sopts = ruleBasedOptions();
+
   const uopts = unitOptions();
   let i = 0;
 
   for (const locale of locales) {
-    timer.start();
     const engine = cldr.get(locale);
-    const rbnfrules = engine.Numbers.ruleBasedFormatNames();
-    elapsed = timer.micros();
-    console.log(`load '${locale.id}' locale: ${elapsed} micros`);
+
+    // TODO: enable once rbnf is incorporated
+    // timer.start();
+    // const rbnfrules = engine.Numbers.ruleBasedFormatNames();
+    // elapsed = timer.micros();
+    // console.log(`load '${locale.id}' locale: ${elapsed} micros`);
 
     timer.start();
     for (const n of NUMBERS) {
@@ -181,20 +186,21 @@ export const numberStress = () => {
     total += i;
     console.log(`format ${i} currency permutations: ${elapsed} micros`);
 
-    i = 0;
-    timer.start();
-    for (const n of NUMBERS) {
-      for (const o of sopts) {
-        for (const rule of rbnfrules) {
-          o.rule = rule;
-          engine.Numbers.formatRuleBased(n, o);
-          i++;
-        }
-      }
-    }
-    elapsed = timer.micros();
-    total += i;
-    console.log(`format ${i} rule-based permutations: ${elapsed} micros`);
+    // TODO: enable once rbnf is incorporated
+    // i = 0;
+    // timer.start();
+    // for (const n of NUMBERS) {
+    //   for (const o of sopts) {
+    //     for (const rule of rbnfrules) {
+    //       o.rule = rule;
+    //       engine.Numbers.formatRuleBased(n, o);
+    //       i++;
+    //     }
+    //   }
+    // }
+    // elapsed = timer.micros();
+    // total += i;
+    // console.log(`format ${i} rule-based permutations: ${elapsed} micros`);
 
     i = 0;
     timer.start();
