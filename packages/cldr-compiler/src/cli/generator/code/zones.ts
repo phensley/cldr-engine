@@ -210,15 +210,24 @@ export const getZones = (data: any): Code[] => {
   result.push(Code.core(['systems', 'calendars', 'autogen.zonedata.ts'], code));
 
   // Build autogen.timezones.ts source
-  code = `${HEADER}`;
+  code = HEADER;
 
   // const timeZoneType = lineWrap(60, ' | ', data.timeZoneIds.map((k: string) => `'${k}'`));
   // code += `export type TimeZoneType = (\n${timeZoneType});\n\n`;
+
+  code += "import { MetaZoneType } from '@phensley/cldr-types';\n\n";
 
   code += NOLINT_MAXLINE;
   code += `export const TimeZoneStableIds: string[] = ('`;
   code += data.timeZoneIds.join(' ');
   code += `').split(' ');\n\n`;
+
+  code += NOLINT_MAXLINE;
+  code += `export const MetaZoneValues: MetaZoneType[] = ('`;
+  code += data.metaZoneIds.join(' ');
+  code += `').split(' ') as MetaZoneType[];\n`;
+
+  result.push(Code.schema(['schema', 'timezones', 'autogen.timezones.ts'], code));
 
   // code += 'export const enum TimeZone {';
   // data.timeZoneIds.forEach((k: string) => {
@@ -227,15 +236,12 @@ export const getZones = (data: any): Code[] => {
   // });
   // code += '\n}\n\n';
 
-  const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
-  code += `export type MetaZoneType = ${metaZoneType};\n\n`;
-
+  code = HEADER;
   code += NOLINT_MAXLINE;
-  code += `export const MetaZoneValues: MetaZoneType[] = ('`;
-  code += data.metaZoneIds.join(' ');
-  code += `').split(' ') as MetaZoneType[];\n`;
+  const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
+  code += `export type MetaZoneType = ${metaZoneType};\n`;
 
-  result.push(Code.schema(['schema', 'timezones', 'autogen.timezones.ts'], code));
+  result.push(Code.types(['autogen.timezones.ts'], code));
 
   return result;
 };

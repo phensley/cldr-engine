@@ -1,5 +1,6 @@
+import { MetaZoneType } from '@phensley/cldr-types';
 import { FieldArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
-import { MetaZoneType, MetaZoneValues, TimeZoneStableIds } from './autogen.timezones';
+import { MetaZoneValues, TimeZoneStableIds } from './autogen.timezones';
 import { KeyIndexImpl } from '../../instructions';
 
 export const MetaZoneIndex = new KeyIndexImpl(MetaZoneValues);
