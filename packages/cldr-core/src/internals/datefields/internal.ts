@@ -1,12 +1,9 @@
 import {
   PluralType,
-  RelativeTimeFieldType,
-} from '@phensley/cldr-types';
-
-import {
   RelativeTimes,
   RelativeTimeFields,
-} from '@phensley/cldr-schema';
+  RelativeTimeFieldType,
+} from '@phensley/cldr-types';
 
 import { coerceDecimal, DecimalArg, DecimalConstants } from '@phensley/decimal';
 

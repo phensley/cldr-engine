@@ -3,13 +3,10 @@ import {
   ContextType,
   LanguageIdType,
   LineOrderType,
+  NamesSchema,
   RegionIdType,
   ScriptIdType,
 } from '@phensley/cldr-types';
-
-import {
-  NamesSchema,
-} from '@phensley/cldr-schema';
 
 import { Part } from '@phensley/decimal';
 

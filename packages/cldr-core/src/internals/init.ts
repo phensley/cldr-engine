@@ -1,5 +1,5 @@
-import { KeyIndexMap } from '@phensley/cldr-types';
-import { CodeBuilder, Schema, SchemaConfig } from '@phensley/cldr-schema';
+import { KeyIndexMap, Schema } from '@phensley/cldr-types';
+import { CodeBuilder, SchemaConfig } from '@phensley/cldr-schema';
 import { buildSchema } from './schema';
 import {
   CalendarInternals,

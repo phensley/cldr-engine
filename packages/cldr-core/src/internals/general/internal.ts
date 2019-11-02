@@ -1,15 +1,13 @@
 import {
   ContextTransformFieldType,
   ContextType,
+  LayoutSchema,
+  ListPatternsSchema,
   ListPatternPositionType,
+  NamesSchema,
   Vector1Arrow,
 } from '@phensley/cldr-types';
 
-import {
-  LayoutSchema,
-  ListPatternsSchema,
-  NamesSchema,
-} from '@phensley/cldr-schema';
 import { Part } from '@phensley/decimal';
 import { Cache } from '@phensley/cldr-utils';
 

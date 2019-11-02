@@ -2,12 +2,12 @@ import * as fs from 'fs';
 import { join } from 'path';
 import * as yargs from 'yargs';
 
+import { Schema } from '@phensley/cldr-types';
 import {
   CodeBuilder,
   DigitsArrowImpl,
   FieldArrowImpl,
   Origin,
-  Schema,
   ScopeArrowImpl,
   Vector1ArrowImpl,
   Vector2ArrowImpl

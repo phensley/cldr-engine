@@ -6,14 +6,12 @@ import {
   DayPeriodType,
   KeyIndexMap,
   PluralType,
+  Schema,
+  UnitInfo,
   UnitType,
 } from '@phensley/cldr-types';
 
-import {
-  Schema,
-  SchemaConfig,
-  UnitInfo,
-} from '@phensley/cldr-schema';
+import { SchemaConfig } from '@phensley/cldr-schema';
 
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 

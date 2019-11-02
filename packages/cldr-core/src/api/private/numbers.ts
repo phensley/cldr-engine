@@ -1,11 +1,9 @@
 import {
+  NumbersSchema,
+  NumberSystemInfo,
   NumberSystemName,
 } from '@phensley/cldr-types';
 
-import {
-  NumbersSchema,
-  NumberSystemInfo,
-} from '@phensley/cldr-schema';
 import { Cache } from '@phensley/cldr-utils';
 
 import { Internals } from '../../internals';

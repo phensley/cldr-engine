@@ -2,15 +2,31 @@ import {
   DateTimePatternFieldType,
   DayPeriodType,
   EraWidthType,
-  FieldArrow,
   FieldWidthType,
   FormatWidthType,
-  PluralType,
+  KeyIndex,
   QuarterType,
-  Vector1Arrow,
-  Vector2Arrow,
   WeekdayType
 } from '@phensley/cldr-types';
+import { KeyIndexImpl } from '../instructions';
+
+/**
+ * Generate a key index containing numeric keys from start to end
+ * inclusive.
+ */
+const rangeindex = (start: number, end: number): KeyIndex<string> => {
+  const r: string[] = [];
+  for (let i = start; i <= end; i++) {
+    r.push(String(i));
+  }
+  return new KeyIndexImpl(r);
+};
+
+export const BuddhistEraIndex = rangeindex(0, 0);
+export const GregorianEraIndex = rangeindex(0, 1);
+export const JapaneseEraIndex = rangeindex(0, 236);
+export const PersianEraIndex = BuddhistEraIndex;
+export const GregorianMonthsIndex = rangeindex(1, 12);
 
 export const DateTimePatternFieldValues: DateTimePatternFieldType[] = [
   'y', 'M', 'd', 'a', 'H', 'm', 's'
@@ -40,23 +56,3 @@ export const QuarterValues: QuarterType[] = [
 export const WeekdayValues: WeekdayType[] = [
   '1', '2', '3', '4', '5', '6', '7'
 ];
-
-export interface CalendarFields {
-  readonly weekdays: Vector2Arrow<string, string>;
-  readonly months: Vector2Arrow<string, string>;
-  readonly quarters: Vector2Arrow<string, string>;
-  readonly dayPeriods: Vector2Arrow<string, string>;
-}
-
-export interface CalendarSchema {
-  readonly eras: Vector2Arrow<EraWidthType, string>;
-  readonly format: CalendarFields;
-  readonly standAlone: CalendarFields;
-  readonly availableFormats: Vector1Arrow<string>;
-  readonly pluralFormats: Vector2Arrow<PluralType, string>;
-  readonly intervalFormats: Vector2Arrow<DateTimePatternFieldType, string>;
-  readonly dateFormats: Vector1Arrow<FormatWidthType>;
-  readonly timeFormats: Vector1Arrow<FormatWidthType>;
-  readonly dateTimeFormats: Vector1Arrow<FormatWidthType>;
-  readonly intervalFormatFallback: FieldArrow;
-}

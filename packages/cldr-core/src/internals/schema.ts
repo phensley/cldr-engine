@@ -1,3 +1,4 @@
+import { Schema } from '@phensley/cldr-types';
 import {
   Digits,
   DigitsArrowImpl,
@@ -5,7 +6,6 @@ import {
   FieldArrowImpl,
   Instruction,
   Origin,
-  Schema,
   Scope,
   ScopeArrowImpl,
   ScopeMap,

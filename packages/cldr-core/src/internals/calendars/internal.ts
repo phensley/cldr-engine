@@ -1,5 +1,4 @@
-import { DayPeriodType } from '@phensley/cldr-types';
-import { CalendarSchema, Schema } from '@phensley/cldr-schema';
+import { CalendarSchema, DayPeriodType, Schema } from '@phensley/cldr-types';
 import { Cache } from '@phensley/cldr-utils';
 
 import { CalendarDate, CalendarType } from '../../systems/calendars';

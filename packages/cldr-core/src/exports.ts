@@ -10,17 +10,15 @@ export {
   FormatWidthType,
   LanguageIdType,
   LineOrderType,
+  NumberSystemInfo,
   RegionIdType,
   RelativeTimeFieldType,
+  Schema,
   ScriptIdType,
   UnitType
 } from '@phensley/cldr-types';
 
-export {
-  NumberSystemInfo,
-  Schema,
-  SchemaConfig,
-} from '@phensley/cldr-schema';
+export { SchemaConfig } from '@phensley/cldr-schema';
 
 export {
   coerceDecimal,

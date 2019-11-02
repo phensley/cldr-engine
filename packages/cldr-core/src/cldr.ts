@@ -1,7 +1,5 @@
-import {
-  Schema,
-  SchemaConfig
-} from '@phensley/cldr-schema';
+import { Schema } from '@phensley/cldr-types';
+import { SchemaConfig } from '@phensley/cldr-schema';
 
 import { LRU } from '@phensley/cldr-utils';
 

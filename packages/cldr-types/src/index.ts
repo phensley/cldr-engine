@@ -1,3 +1,4 @@
+export * from './arrows';
 export * from './autogen.context';
 export * from './autogen.currencies';
 export * from './autogen.identifiers';

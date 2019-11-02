@@ -1,5 +1,4 @@
-import { PluralType } from '@phensley/cldr-types';
-import { CalendarSchema } from '@phensley/cldr-schema';
+import { CalendarSchema, PluralType } from '@phensley/cldr-types';
 import { coerceDecimal } from '@phensley/decimal';
 import { LRU } from '@phensley/cldr-utils';
 
