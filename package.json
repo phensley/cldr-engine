@@ -16,8 +16,8 @@
     "lint": "lerna run build && lerna run build:lint && lerna run lint",
     "stress": "lerna run --stream --concurrency=1 stress",
     "test": "rimraf ./coverage && jest --coverage --verbose -i --no-cache",
-    "test:runtime": "rimraf ./coverage && jest --coverage --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-compiler/.*\"",
-    "test:codecov": "rimraf ./coverage && jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-compiler/.*\"",
+    "test:runtime": "rimraf ./coverage && jest --coverage --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-(ext-rbnf|compiler|types)/.*\"",
+    "test:codecov": "rimraf ./coverage && jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-(ext-rbnf|compiler|types)/.*\"",
     "test:watch": "jest --watch --runInBand --no-cache",
     "unlink-all": "lerna exec --concurrency=1 yarn unlink"
   },
