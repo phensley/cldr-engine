@@ -1,4 +1,5 @@
 import {
+  CurrencyType,
   DayPeriodType,
   KeyIndexMap,
   PluralType
@@ -7,7 +8,6 @@ import {
 import {
   ContextTransformFieldType,
   ContextType,
-  CurrencyType,
   DateFieldType,
   Schema,
   SchemaConfig,

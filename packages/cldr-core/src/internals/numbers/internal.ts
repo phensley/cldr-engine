@@ -1,12 +1,17 @@
-import { PluralType } from '@phensley/cldr-types';
+import {
+  CurrencyType,
+  PluralType
+} from '@phensley/cldr-types';
+
 import {
   CurrenciesSchema,
-  CurrencyType,
   DigitsArrow,
   NumbersSchema,
   NumberSystemInfo
 } from '@phensley/cldr-schema';
+
 import { Decimal, Part } from '@phensley/decimal';
+
 import { Cache } from '@phensley/cldr-utils';
 
 import {

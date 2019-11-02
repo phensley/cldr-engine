@@ -21,7 +21,7 @@ export const getCurrencies = (data: any): Code[] => {
   code += lineWrap(80, '|', currencies);
   code += ');\n';
 
-  result.push(Code.schema(['schema', 'currencies', 'autogen.currencies.ts'], code));
+  result.push(Code.types(['autogen.currencies.ts'], code));
 
   code = '';
   const fractions = data.currencies

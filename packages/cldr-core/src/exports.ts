@@ -1,4 +1,5 @@
 export {
+  CurrencyType,
   EraWidthType,
   FieldWidthType,
   FormatWidthType
@@ -8,7 +9,6 @@ export {
   CharacterOrderType,
   ContextType,
   ContextTransformFieldType,
-  CurrencyType,
   DateFieldType,
   DateFieldWidthType,
   LanguageIdType,

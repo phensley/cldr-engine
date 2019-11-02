@@ -1,5 +1,5 @@
-import { PluralType } from '@phensley/cldr-types';
-import { ContextType, CurrencyType } from '@phensley/cldr-schema';
+import { CurrencyType, PluralType } from '@phensley/cldr-types';
+import { ContextType } from '@phensley/cldr-schema';
 import { coerceDecimal, Decimal, DecimalArg, Part } from '@phensley/decimal';
 
 import {

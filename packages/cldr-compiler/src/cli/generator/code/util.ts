@@ -38,6 +38,10 @@ export class Code {
     return new Code(['packages', 'cldr-schema', 'src', ...path], source);
   }
 
+  static types(path: string[], source: string): Code {
+    return new Code(['packages', 'cldr-types', 'src', ...path], source);
+  }
+
   static top(path: string[], source: string): Code {
     return new Code(path, source);
   }

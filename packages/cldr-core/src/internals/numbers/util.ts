@@ -1,4 +1,4 @@
-import { CurrencyType } from '@phensley/cldr-schema';
+import { CurrencyType } from '@phensley/cldr-types';
 import { currencyFractionsRaw, currencyRegionsRaw } from './autogen.currencies';
 import { CurrencyFractions } from '../../common';
 import { numarray, stringToObject } from '../../utils/string';
