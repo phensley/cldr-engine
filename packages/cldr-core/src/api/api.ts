@@ -1,13 +1,13 @@
 import {
+  CharacterOrderType,
   CurrencyType,
   DateFieldType,
   DateTimePatternFieldType,
+  LineOrderType,
   RelativeTimeFieldType,
 } from '@phensley/cldr-types';
 
 import {
-  CharacterOrderType,
-  LineOrderType,
   UnitType
 } from '@phensley/cldr-schema';
 

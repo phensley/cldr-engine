@@ -1,19 +1,19 @@
 export {
+  CharacterOrderType,
+  ContextTransformFieldType,
+  ContextType,
   CurrencyType,
   DateFieldType,
   DateFieldWidthType,
   EraWidthType,
   FieldWidthType,
   FormatWidthType,
+  LineOrderType,
   RelativeTimeFieldType,
 } from '@phensley/cldr-types';
 
 export {
-  CharacterOrderType,
-  ContextType,
-  ContextTransformFieldType,
   LanguageIdType,
-  LineOrderType,
   NumberSystemInfo,
   RegionIdType,
   Schema,

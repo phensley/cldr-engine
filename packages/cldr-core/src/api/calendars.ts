@@ -1,13 +1,10 @@
 import {
+  ContextTransformFieldType,
+  ContextType,
   DateFieldType,
   DateTimePatternFieldType,
   RelativeTimeFieldType
 } from '@phensley/cldr-types';
-
-import {
-  ContextTransformFieldType,
-  ContextType,
-} from '@phensley/cldr-schema';
 
 import { DecimalArg, Part } from '@phensley/decimal';
 import { TZ } from '@phensley/timezone';

@@ -1,6 +1,9 @@
 import {
-  CalendarSchema,
   ContextTransformFieldType,
+} from '@phensley/cldr-types';
+
+import {
+  CalendarSchema,
   TimeZoneSchema, Vector2Arrow
 } from '@phensley/cldr-schema';
 

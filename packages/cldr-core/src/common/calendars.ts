@@ -1,12 +1,10 @@
 import {
+  ContextType,
   DateFieldWidthType,
   EraWidthType,
   FieldWidthType,
   FormatWidthType,
 } from '@phensley/cldr-types';
-import {
-  ContextType,
-} from '@phensley/cldr-schema';
 
 import { NumberFormatOptions, NumberSystemType } from './numbers';
 import { CalendarType } from '../systems/calendars/types';

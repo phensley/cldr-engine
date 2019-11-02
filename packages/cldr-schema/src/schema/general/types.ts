@@ -1,10 +1,9 @@
-import { FieldArrow, Vector1Arrow } from '../arrows';
-import { ListPatternPositionType } from './enums';
-import { ContextTransformFieldType } from './autogen.context';
+import {
+  ContextTransformFieldType,
+  ListPatternPositionType,
+} from '@phensley/cldr-types';
 
-export type LineOrderType = 'ltr' | 'rtl';
-export type CharacterOrderType = 'ttb' | 'btt';
-export type ContextType = 'middle-of-text' | 'begin-sentence' | 'standalone' | 'ui-list-or-menu';
+ import { FieldArrow, Vector1Arrow } from '../arrows';
 
 export interface LayoutSchema {
   readonly characterOrder: FieldArrow;

@@ -1,8 +1,11 @@
 import {
   CharacterOrderType,
   ContextType,
-  LanguageIdType,
   LineOrderType,
+} from '@phensley/cldr-types';
+
+import {
+  LanguageIdType,
   NamesSchema,
   RegionIdType,
   ScriptIdType,

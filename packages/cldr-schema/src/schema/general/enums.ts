@@ -1,7 +1,6 @@
+import { ContextTransformFieldType, ListPatternPositionType } from '@phensley/cldr-types';
 import { KeyIndexImpl } from '../../instructions';
-import { ContextTransformFieldType, ContextTransformFieldValues } from './autogen.context';
-
-export type ListPatternPositionType = 'start' | 'middle' | 'end' | 'two';
+import { ContextTransformFieldValues } from './autogen.context';
 
 export const ListPatternPositionIndex = new KeyIndexImpl<ListPatternPositionType>(
   ['start', 'middle', 'end', 'two']);

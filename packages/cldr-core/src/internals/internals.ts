@@ -1,4 +1,6 @@
 import {
+  ContextTransformFieldType,
+  ContextType,
   CurrencyType,
   DateFieldType,
   DayPeriodType,
@@ -7,8 +9,6 @@ import {
 } from '@phensley/cldr-types';
 
 import {
-  ContextTransformFieldType,
-  ContextType,
   Schema,
   SchemaConfig,
   UnitInfo,

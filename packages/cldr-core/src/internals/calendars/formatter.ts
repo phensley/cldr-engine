@@ -1,4 +1,4 @@
-import { ContextType } from '@phensley/cldr-schema';
+import { ContextType } from '@phensley/cldr-types';
 import { Bundle } from '../../resource';
 import { DateTimeNode } from '../../parsing/date';
 import { CalendarDate } from '../../systems/calendars';
