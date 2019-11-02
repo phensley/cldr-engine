@@ -1,5 +1,4 @@
-import { CurrencySpacingPattern, CurrencySpacingPos } from '@phensley/cldr-types';
-import { NumberSymbolType, NumberSystemName } from '@phensley/cldr-schema';
+import { CurrencySpacingPattern, CurrencySpacingPos, NumberSymbolType, NumberSystemName } from '@phensley/cldr-types';
 
 export type CurrencySpacing = { [P in CurrencySpacingPos]: { [Q in CurrencySpacingPattern]: string } };
 export type NumberSymbols =  { [P in NumberSymbolType]: string };

@@ -1,5 +1,4 @@
-import { ContextType } from '@phensley/cldr-types';
-import { NumberSystemCategory, NumberSystemName } from '@phensley/cldr-schema';
+import { ContextType, NumberSystemCategory, NumberSystemName } from '@phensley/cldr-types';
 import { RoundingModeType } from '@phensley/decimal';
 
 /**

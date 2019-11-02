@@ -1,7 +1,10 @@
 import {
+  NumberSystemName,
+} from '@phensley/cldr-types';
+
+import {
   NumbersSchema,
   NumberSystemInfo,
-  NumberSystemName,
 } from '@phensley/cldr-schema';
 import { Cache } from '@phensley/cldr-utils';
 

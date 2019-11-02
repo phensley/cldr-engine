@@ -2,12 +2,10 @@ import {
   ContextTransformFieldType,
   CurrencySpacingPattern,
   CurrencySpacingPos,
-} from '@phensley/cldr-types';
-
-import {
   NumberSymbolType,
   NumberSystemName,
-} from '@phensley/cldr-schema';
+} from '@phensley/cldr-types';
+
 import { DecimalArg } from '@phensley/decimal';
 
 import { DateTimeNode } from '../parsing/date';
