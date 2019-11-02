@@ -61,13 +61,16 @@ export const getSystems = (_data: any): Code[] => {
   let code = HEADER + NOLINT_MAXLINE;
   code += `export const decimalNumberingDigits: { [x: string]: string[] } = {\n`;
   code += numeric;
-  code += '};\n\n';
+  code += '};\n';
 
+  result.push(Code.core(['systems', 'numbering', 'autogen.names.ts'], code));
+
+  code = HEADER + NOLINT_MAXLINE;
   code += `export const algorithmicNumbering: { [x: string]: [string, string] } = {\n`;
   code += algorithmic;
   code += '};\n';
 
-  result.push(Code.core(['systems', 'numbering', 'autogen.names.ts'], code));
+  result.push(Code.rbnf(['autogen.names.ts'], code));
 
   return result;
 };

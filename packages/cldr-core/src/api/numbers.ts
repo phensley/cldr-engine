@@ -33,7 +33,6 @@ const DEFAULT_CURRENCY_OPTIONS: CurrencyDisplayNameOptions = { context: 'begin-s
 export class NumbersImpl implements Numbers {
 
   protected transform: ContextTransformInfo;
-  // protected algorithmic: AlgorithmicNumberingSystems;
 
   constructor(
     private readonly bundle: Bundle,
@@ -42,8 +41,6 @@ export class NumbersImpl implements Numbers {
     private readonly privateApi: PrivateApiImpl
   ) {
     this.transform = privateApi.getContextTransformInfo();
-    // this.algorithmic = new AlgorithmicNumberingSystems(bundle.spellout(),
-    //   bundle.tag().expanded(), bundle.languageScript());
   }
 
   adjustDecimal(n: DecimalArg, opts?: DecimalAdjustOptions): Decimal {
@@ -111,21 +108,6 @@ export class NumbersImpl implements Numbers {
     const renderer = this.numbers.partsRenderer(params);
     return this.formatCurrencyImpl(renderer, params, n, code, options);
   }
-
-  // formatRuleBased(n: DecimalArg, options?: RuleBasedFormatOptions): string {
-  //   options = options || {};
-  //   const rule = options.rule || 'spellout-numbering';
-  //   const params = this.privateApi.getNumberParams('latn', 'default');
-  //   const system = this.algorithmic.rbnf(rule, params.symbols);
-  //   const info = this.privateApi.getContextTransformInfo();
-  //   return system ?
-  //     this.numbers.formatRuleBased(this.bundle, this.numbers.stringRenderer(params),
-  //       system, info, coerceDecimal(n), options, params) : '';
-  // }
-
-  // ruleBasedFormatNames(): string[] {
-  //   return this.algorithmic.rulenames.slice(0);
-  // }
 
   protected formatDecimalImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
       n: DecimalArg, options: DecimalFormatOptions): T {

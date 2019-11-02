@@ -30,6 +30,10 @@ export class Code {
     return new Code(['packages', 'plurals', 'src', ...path], source);
   }
 
+  static rbnf(path: string[], source: string): Code {
+    return new Code(['packages', 'cldr-rbnf', 'src', ...path], source);
+  }
+
   static schema(path: string[], source: string): Code {
     return new Code(['packages', 'cldr-schema', 'src', ...path], source);
   }

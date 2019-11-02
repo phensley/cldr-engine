@@ -15,7 +15,7 @@ export const getRBNF = (_data: any): Code[] => {
   code += ';\n';
 
   codes.push(
-    Code.core(['systems', 'numbering', 'autogen.rbnf.ts'], code)
+    Code.rbnf(['autogen.rbnf.ts'], code)
   );
 
   code = packer.report();
