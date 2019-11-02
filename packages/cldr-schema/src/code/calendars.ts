@@ -1,5 +1,5 @@
-import { field, scope, vector1, vector2 } from '../types';
-import { KeyIndex, KeyIndexMap } from '../types';
+import { KeyIndexMap } from '@phensley/cldr-types';
+import { field, scope, vector1, vector2, KeyIndexImpl } from '../instructions';
 
 import {
   BuddhistEraIndex,
@@ -36,13 +36,13 @@ const calendarScope = (name: string, scopeName: string) => scope(scopeName, scop
   field('intervalFormatFallback')
 ]);
 
-export const DateTimePatternFieldIndex = new KeyIndex(DateTimePatternFieldValues);
-export const DayPeriodIndex = new KeyIndex(DayPeriodValues);
-export const EraTypeIndex = new KeyIndex(EraWidthValues);
-export const FieldWidthIndex = new KeyIndex(FieldWidthValues);
-export const FormatWidthIndex = new KeyIndex(FormatWidthValues);
-export const QuartersIndex = new KeyIndex(QuarterValues);
-export const WeekdaysIndex = new KeyIndex(WeekdayValues);
+export const DateTimePatternFieldIndex = new KeyIndexImpl(DateTimePatternFieldValues);
+export const DayPeriodIndex = new KeyIndexImpl(DayPeriodValues);
+export const EraTypeIndex = new KeyIndexImpl(EraWidthValues);
+export const FieldWidthIndex = new KeyIndexImpl(FieldWidthValues);
+export const FormatWidthIndex = new KeyIndexImpl(FormatWidthValues);
+export const QuartersIndex = new KeyIndexImpl(QuarterValues);
+export const WeekdaysIndex = new KeyIndexImpl(WeekdayValues);
 
 export const CALENDAR_INDICES: KeyIndexMap = {
   'date-time-pattern-field': DateTimePatternFieldIndex,

@@ -9,23 +9,23 @@ import {
   NumberSystemCategoryValues,
   NumberSystemName,
 } from './enums';
-import { KeyIndex } from '../../types';
+import { KeyIndexImpl } from '../../instructions';
 
 export const PluralDigitValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 export type CurrencySpacingPos = 'before' | 'after';
 
-export const CurrencySpacingPosIndex = new KeyIndex<CurrencySpacingPos>(['before', 'after']);
+export const CurrencySpacingPosIndex = new KeyIndexImpl<CurrencySpacingPos>(['before', 'after']);
 
 export type CurrencySpacingPattern = 'currencyMatch' | 'surroundingMatch' | 'insertBetween';
 
-export const CurrencySpacingPatternIndex = new KeyIndex<CurrencySpacingPattern>(
+export const CurrencySpacingPatternIndex = new KeyIndexImpl<CurrencySpacingPattern>(
   ['currencyMatch', 'surroundingMatch', 'insertBetween']
 );
 
-export const NumberMiscPatternIndex = new KeyIndex(NumberMiscPatternValues);
-export const NumberSystemsIndex = new KeyIndex(NumberSystemCategoryValues);
-export const NumberSymbolIndex = new KeyIndex(NumberSymbolValues);
+export const NumberMiscPatternIndex = new KeyIndexImpl(NumberMiscPatternValues);
+export const NumberSystemsIndex = new KeyIndexImpl(NumberSystemCategoryValues);
+export const NumberSymbolIndex = new KeyIndexImpl(NumberSymbolValues);
 
 export interface CurrencyFormats {
   readonly standard: FieldArrow;

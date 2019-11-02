@@ -1,4 +1,5 @@
-import { KeyIndex } from '../../types';
+import { KeyIndex } from '@phensley/cldr-types';
+import { KeyIndexImpl } from '../../instructions';
 import { CalendarSchema } from './types';
 
 /**
@@ -10,7 +11,7 @@ const rangeindex = (start: number, end: number): KeyIndex<string> => {
   for (let i = start; i <= end; i++) {
     r.push(String(i));
   }
-  return new KeyIndex(r);
+  return new KeyIndexImpl(r);
 };
 
 export interface BuddhistSchema extends CalendarSchema {

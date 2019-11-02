@@ -1,4 +1,4 @@
-import { KeyIndex } from '../types';
+import { KeyIndex } from '@phensley/cldr-types';
 
 /**
  * Very low-level access to strings in a bundle. Includes properties

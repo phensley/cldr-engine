@@ -12,11 +12,11 @@ import {
   RelativeTimeFieldType,
   RelativeTimeFieldValues
 } from './enums';
-import { KeyIndex } from '../../types';
+import { KeyIndexImpl } from '../../instructions';
 
-export const DateFieldIndex = new KeyIndex(DateFieldValues);
-export const DateFieldWidthIndex = new KeyIndex(DateFieldWidthValues);
-export const RelativeTimeFieldIndex = new KeyIndex(RelativeTimeFieldValues);
+export const DateFieldIndex = new KeyIndexImpl(DateFieldValues);
+export const DateFieldWidthIndex = new KeyIndexImpl(DateFieldWidthValues);
+export const RelativeTimeFieldIndex = new KeyIndexImpl(RelativeTimeFieldValues);
 
 export interface RelativeTimeFields {
   readonly previous2: Vector1Arrow<RelativeTimeFieldType>;

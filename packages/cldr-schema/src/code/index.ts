@@ -1,4 +1,5 @@
-import { origin, KeyIndex, KeyIndexMap, Origin } from '../types';
+import { KeyIndex, KeyIndexMap } from '@phensley/cldr-types';
+import { origin, KeyIndexImpl, Origin } from '../instructions';
 import {
   BUDDHIST,
   BUDDHIST_INDICES,
@@ -20,7 +21,7 @@ import { UNITS } from './units';
 
 import { AltIndex, PluralIndex } from '../schema';
 
-const EMPTY_INDEX = new KeyIndex([]);
+const EMPTY_INDEX = new KeyIndexImpl([]);
 
 const emptyCalendarIndex = (name: string): KeyIndexMap => ({
   [`${name}-available-format`]: EMPTY_INDEX,
@@ -203,11 +204,11 @@ export class CodeBuilder {
    * Set the key index with the given name.
    */
   private make(name: string, keys: string[]): void {
-    this.indices[name] = new KeyIndex<string>(keys);
+    this.indices[name] = new KeyIndexImpl<string>(keys);
   }
 
   private copy(name: SchemaConfigKey): void {
-    this.indices[name] = new KeyIndex<string>(this.config[name] || []);
+    this.indices[name] = new KeyIndexImpl<string>(this.config[name] || []);
   }
 
   private add(indices: KeyIndexMap): void {

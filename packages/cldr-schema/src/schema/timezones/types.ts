@@ -1,12 +1,12 @@
 import { FieldArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
 import { MetaZoneType, MetaZoneValues, TimeZoneStableIds } from './autogen.timezones';
-import { KeyIndex } from '../../types';
+import { KeyIndexImpl } from '../../instructions';
 
-export const MetaZoneIndex = new KeyIndex(MetaZoneValues);
-export const TimeZoneTypeIndex = new KeyIndex(['daylight', 'generic', 'standard']);
+export const MetaZoneIndex = new KeyIndexImpl(MetaZoneValues);
+export const TimeZoneTypeIndex = new KeyIndexImpl(['daylight', 'generic', 'standard']);
 export type TimeZoneNameType = 'daylight' | 'generic' | 'standard';
 
-export const TimeZoneStableIdIndex = new KeyIndex(TimeZoneStableIds);
+export const TimeZoneStableIdIndex = new KeyIndexImpl(TimeZoneStableIds);
 
 export interface MetaZoneInfo {
   readonly short: Vector2Arrow<TimeZoneNameType, MetaZoneType>;

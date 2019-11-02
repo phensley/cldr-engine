@@ -1,4 +1,4 @@
-import { digits, field, scope, scopemap, vector1, vector2, Scope } from '../types';
+import { digits, field, scope, scopemap, vector1, vector2, Scope } from '../instructions';
 import {
   CurrencySpacingPatternIndex,
   CurrencySpacingPosIndex,

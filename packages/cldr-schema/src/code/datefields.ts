@@ -1,4 +1,4 @@
-import { scope, vector1, vector2, Instruction, Scope } from '../types';
+import { scope, vector1, vector2, Instruction, Scope } from '../instructions';
 import { DateFieldIndex, DateFieldWidthIndex, RelativeTimeFieldIndex } from '../schema';
 
 const prevNext: Instruction[] = ['previous2', 'previous', 'current', 'next', 'next2']

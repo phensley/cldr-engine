@@ -1,11 +1,9 @@
-export interface KeyIndexMap {
-  [name: string]: KeyIndex<string>;
-}
+import { KeyIndex } from '@phensley/cldr-types';
 
 /**
  * Inverse mapping of a key to its index in an array.
  */
-export class KeyIndex<T extends string> {
+export class KeyIndexImpl<T extends string> implements KeyIndex<T> {
   /* tslint:disable-next-line */
   readonly index: { [P in T]: number } = Object.create(null);
   readonly size: number;
@@ -44,7 +42,7 @@ export interface Origin {
   getValues(name: string): string[];
 }
 
-const NULL_KEYINDEX = new KeyIndex<string>([]);
+const NULL_KEYINDEX = new KeyIndexImpl<string>([]);
 const WARNED: { [x: string]: boolean } = {};
 
 export class OriginImpl implements Origin {
