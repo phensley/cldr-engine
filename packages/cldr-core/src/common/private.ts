@@ -1,10 +1,10 @@
 import {
   ContextTransformFieldType,
+  CurrencySpacingPattern,
+  CurrencySpacingPos,
 } from '@phensley/cldr-types';
 
 import {
-  CurrencySpacingPattern,
-  CurrencySpacingPos,
   NumberSymbolType,
   NumberSystemName,
 } from '@phensley/cldr-schema';

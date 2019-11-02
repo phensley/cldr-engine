@@ -6,4 +6,5 @@ export * from './datefields';
 export * from './extensions';
 export * from './general';
 export * from './misc';
+export * from './numbers';
 export * from './schema';

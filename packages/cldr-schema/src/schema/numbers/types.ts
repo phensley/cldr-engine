@@ -1,4 +1,4 @@
-import { PluralType } from '@phensley/cldr-types';
+import { CurrencySpacingPos, CurrencySpacingPattern, PluralType } from '@phensley/cldr-types';
 import { DigitsArrow, FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow  } from '../arrows';
 import {
   NumberMiscPatternType,
@@ -13,11 +13,7 @@ import { KeyIndexImpl } from '../../instructions';
 
 export const PluralDigitValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-export type CurrencySpacingPos = 'before' | 'after';
-
 export const CurrencySpacingPosIndex = new KeyIndexImpl<CurrencySpacingPos>(['before', 'after']);
-
-export type CurrencySpacingPattern = 'currencyMatch' | 'surroundingMatch' | 'insertBetween';
 
 export const CurrencySpacingPatternIndex = new KeyIndexImpl<CurrencySpacingPattern>(
   ['currencyMatch', 'surroundingMatch', 'insertBetween']
