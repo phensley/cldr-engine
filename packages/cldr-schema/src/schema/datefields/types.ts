@@ -1,9 +1,9 @@
+import { PluralType } from '@phensley/cldr-types';
 import {
   Vector1Arrow,
   Vector2Arrow
 } from '../arrows';
 
-import { PluralType } from '../enums';
 import {
   DateFieldType,
   DateFieldValues,

@@ -1,4 +1,4 @@
-import { PluralType } from '@phensley/cldr-schema';
+import { PluralType } from '@phensley/cldr-types';
 import {
   RelativeTimes,
   RelativeTimeFields,

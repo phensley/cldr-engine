@@ -1,5 +1,5 @@
+import { PluralType } from '@phensley/cldr-types';
 import { FieldArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
-import { PluralType } from '../enums';
 import { UnitType } from './autogen.units';
 
 export interface UnitInfo {

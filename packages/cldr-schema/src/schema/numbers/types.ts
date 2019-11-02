@@ -1,5 +1,5 @@
+import { PluralType } from '@phensley/cldr-types';
 import { DigitsArrow, FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow  } from '../arrows';
-import { PluralType } from '../enums';
 import {
   NumberMiscPatternType,
   NumberMiscPatternValues,

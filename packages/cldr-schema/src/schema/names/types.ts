@@ -1,5 +1,5 @@
+import { AltType } from '@phensley/cldr-types';
 import { Vector1Arrow, Vector2Arrow } from '../arrows';
-import { AltType } from '../enums';
 import {
   LanguageIdType,
   RegionIdType,

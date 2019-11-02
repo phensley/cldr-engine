@@ -1,4 +1,4 @@
-import { PluralType } from '../enums';
+import { PluralType } from '@phensley/cldr-types';
 import { FieldArrow, Vector1Arrow, Vector2Arrow } from '../arrows';
 
 // Values 'h' and 'H' for hours have been unified to 'H' for uniqueness.

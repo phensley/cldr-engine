@@ -4,8 +4,6 @@
     // this.algorithmic = new AlgorithmicNumberingSystems(bundle.spellout(),
     //   bundle.tag().expanded(), bundle.languageScript());
 
-
-
   // formatRuleBased(n: DecimalArg, options?: RuleBasedFormatOptions): string {
   //   options = options || {};
   //   const rule = options.rule || 'spellout-numbering';

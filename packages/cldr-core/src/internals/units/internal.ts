@@ -1,6 +1,6 @@
+import { PluralType } from '@phensley/cldr-types';
 import {
   NumbersSchema,
-  PluralType,
   UnitsSchema,
   UnitInfo,
   UnitType

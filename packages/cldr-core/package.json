@@ -35,6 +35,7 @@
   ],
   "dependencies": {
     "@phensley/cldr-schema": "0.20.4",
+    "@phensley/cldr-types": "0.20.4",
     "@phensley/cldr-utils": "0.20.4",
     "@phensley/decimal": "0.20.4",
     "@phensley/messageformat": "0.20.4",

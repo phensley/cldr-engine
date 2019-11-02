@@ -1,3 +1,4 @@
+import { PluralType } from '@phensley/cldr-types';
 import {
   ContextTransformFieldType,
   ContextType,
@@ -5,7 +6,6 @@ import {
   DateFieldType,
   DayPeriodType,
   KeyIndexMap,
-  PluralType,
   Schema,
   SchemaConfig,
   UnitInfo,

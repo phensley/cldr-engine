@@ -1,10 +1,10 @@
+import { PluralType } from '@phensley/cldr-types';
 import {
   CurrenciesSchema,
   CurrencyType,
   DigitsArrow,
   NumbersSchema,
-  NumberSystemInfo,
-  PluralType,
+  NumberSystemInfo
 } from '@phensley/cldr-schema';
 import { Decimal, Part } from '@phensley/decimal';
 import { Cache } from '@phensley/cldr-utils';
