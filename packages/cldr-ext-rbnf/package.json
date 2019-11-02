@@ -1,7 +1,7 @@
 {
-  "name": "@phensley/cldr-rbnf",
+  "name": "@phensley/cldr-ext-rbnf",
   "version": "0.20.4",
-  "description": "Addon for rule-based number formatting",
+  "description": "Extension for rule-based number formatting",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
   "types": "lib/index.d.ts",
