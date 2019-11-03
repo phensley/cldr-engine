@@ -10,9 +10,9 @@ import {
 
 const NAMES = ['decimal', 'number'];
 
-const matcher = (s: string) => new StickyMatcher(s, NAMES, stickyRegexp);
+const matcher = () => new StickyMatcher(NAMES, stickyRegexp);
 
-const parse = (s: string) => parseMessagePattern(s, matcher(s));
+const parse = (s: string) => parseMessagePattern(s, matcher());
 
 test('basic', () => {
   let c: MessageCode;

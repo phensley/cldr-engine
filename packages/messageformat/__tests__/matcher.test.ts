@@ -1,31 +1,31 @@
 import {
   buildMessageMatcher,
   Matcher,
-  Range,
+  MessageState,
 } from '../src';
 
 const build = (type: string, formatters: string[]) =>
-  (input: string): [Matcher, Range] =>
-    [buildMessageMatcher(input, formatters, type === 'sticky'), { s: 0, e: input.length }];
+  (input: string): [Matcher, MessageState] =>
+    [buildMessageMatcher(formatters, type === 'sticky'), { t: input, s: 0, e: input.length }];
 
 ['sticky', 'substring'].forEach(type => {
   let m: Matcher;
-  let r: Range;
+  let r: MessageState;
   const matcher = build(type, ['foo', 'bar']);
 
   test(`${type} builder`, () => {
     const input = 'abc foo';
 
-    m = buildMessageMatcher(input, ['foo']);
-    r = { s: 0, e: input.length };
+    m = buildMessageMatcher(['foo']);
+    r = { t: input, s: 0, e: input.length };
 
     expect(m.arguments(r)).toEqual(['abc']);
     expect(m.spaces(r)).toEqual(true);
     expect(m.formatter(r)).toEqual('foo');
     expect(m.complete(r)).toEqual(true);
 
-    m = buildMessageMatcher(input, ['foo'], type === 'sticky');
-    r = { s: 0, e: input.length };
+    m = buildMessageMatcher(['foo'], type === 'sticky');
+    r = { t: input, s: 0, e: input.length };
 
     expect(m.arguments(r)).toEqual(['abc']);
     expect(m.spaces(r)).toEqual(true);

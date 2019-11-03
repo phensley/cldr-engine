@@ -1,5 +1,8 @@
-// A range of characters [s, e) (from 's' up to but not including 'e')
-export interface Range {
+// A string and range of characters [s, e) (from 's' up to but not including 'e'),
+// representing the current state of the parse of a given scope inside a
+// message string.
+export interface MessageState {
+  t: string;
   s: number;
   e: number;
 }
@@ -14,16 +17,16 @@ const patterns = {
 };
 
 export interface Matcher {
-  // debug(msg: string, r: Range): void;
-  char(r: Range): string;
-  complete(r: Range): boolean;
-  spaces(r: Range): boolean;
-  arguments(r: Range): (number | string)[] | undefined;
-  identifier(r: Range): string | undefined;
-  options(r: Range): string[];
-  formatter(r: Range): string | undefined;
-  pluralOffset(r: Range): number;
-  pluralChoice(r: Range): string | undefined;
+  // debug(msg: string, r: MessageState): void;
+  char(r: MessageState): string;
+  complete(r: MessageState): boolean;
+  spaces(r: MessageState): boolean;
+  arguments(r: MessageState): (number | string)[] | undefined;
+  identifier(r: MessageState): string | undefined;
+  options(r: MessageState): string[];
+  formatter(r: MessageState): string | undefined;
+  pluralOffset(r: MessageState): number;
+  pluralChoice(r: MessageState): string | undefined;
 }
 
 // This library supports these operations by default.
@@ -51,7 +54,7 @@ export class StickyMatcher implements Matcher {
   private _offset: RegExp;
   private _choice: RegExp;
 
-  constructor(protected str: string, formatters: string[], compile: regexpFunc) {
+  constructor(formatters: string[], compile: regexpFunc) {
     this._space = compile('[,\\s]+');
     this._arg = compile(`(0[1..9]+|\\d+|${patterns.identifier})`);
     this._ident = compile(patterns.identifier);
@@ -62,25 +65,25 @@ export class StickyMatcher implements Matcher {
   }
 
   // Debug helper during development.
-  // debug(msg: string, r: Range): void {
+  // debug(msg: string, r: MessageState): void {
   //   const pos = [r.s, r.e].map(n => n.toString().padStart(4));
-  //   const sub = JSON.stringify(this.str.substring(r.s, r.e));
+  //   const sub = JSON.stringify(r.t.substring(r.s, r.e));
   //   console.log(`${msg} [${pos[0]}, ${pos[1]}] => ${sub}`);
   // }
 
-  char(r: Range): string {
-    return this.str[r.s];
+  char(r: MessageState): string {
+    return r.t[r.s];
   }
 
-  complete(r: Range): boolean {
+  complete(r: MessageState): boolean {
     return r.e === r.s;
   }
 
-  spaces(r: Range): boolean {
+  spaces(r: MessageState): boolean {
     return this.match(this._space, r) !== undefined;
   }
 
-  arguments(r: Range): (number | string)[] | undefined {
+  arguments(r: MessageState): (number | string)[] | undefined {
     let args: (number | string)[] | undefined;
     do {
       const arg = this.match(this._arg, r);
@@ -95,7 +98,7 @@ export class StickyMatcher implements Matcher {
       args.push(Number.isFinite(n) ? n : arg);
 
       // Tuple arguments are separated by a single semicolon
-      if (this.str[r.s] !== ';') {
+      if (r.t[r.s] !== ';') {
         break;
       }
       r.s++;
@@ -103,11 +106,11 @@ export class StickyMatcher implements Matcher {
     return args;
   }
 
-  identifier(r: Range): string | undefined {
+  identifier(r: MessageState): string | undefined {
     return this.match(this._ident, r);
   }
 
-  options(r: Range): string[] {
+  options(r: MessageState): string[] {
     const options: string[] = [];
     do {
       this.spaces(r);
@@ -120,15 +123,15 @@ export class StickyMatcher implements Matcher {
     return options;
   }
 
-  formatter(r: Range): string | undefined {
+  formatter(r: MessageState): string | undefined {
     return this.match(this._fmt, r);
   }
 
-  pluralChoice(r: Range): string | undefined {
+  pluralChoice(r: MessageState): string | undefined {
     return this.match(this._choice, r);
   }
 
-  pluralOffset(r: Range): number {
+  pluralOffset(r: MessageState): number {
     let n = 0;
     const m = this.match(this._offset, r);
     if (m) {
@@ -143,9 +146,9 @@ export class StickyMatcher implements Matcher {
    * match is found, move the start pointer and return the string.
    * Otherwise return undefined.
    */
-  match(pattern: RegExp, r: Range): string | undefined {
+  match(pattern: RegExp, r: MessageState): string | undefined {
     pattern.lastIndex = r.s;
-    const raw = pattern.exec(this.str);
+    const raw = pattern.exec(r.t);
     if (raw) {
       // set the start of range to the sticky index
       r.s = pattern.lastIndex;
@@ -163,9 +166,9 @@ export class StickyMatcher implements Matcher {
  */
 export class SubstringMatcher extends StickyMatcher {
 
-  match(pattern: RegExp, r: Range): string | undefined {
+  match(pattern: RegExp, r: MessageState): string | undefined {
     pattern.lastIndex = 0;
-    const s = this.str.substring(r.s, r.e);
+    const s = r.t.substring(r.s, r.e);
     const raw = pattern.exec(s);
     if (raw) {
       // skip ahead by the number of characters matched
@@ -199,5 +202,5 @@ export const substringRegexp = (pattern: string) => new RegExp('^' + pattern, 'g
  * support of sticky regexp, while allowing substring matcher to be selected for
  * testing.
  */
-export const buildMessageMatcher = (raw: string, names: string[], sticky: boolean = hasStickyRegexp) =>
-  new (sticky ? StickyMatcher : SubstringMatcher)(raw, names, sticky ? stickyRegexp : substringRegexp);
+export const buildMessageMatcher = (names: string[], sticky: boolean = hasStickyRegexp) =>
+  new (sticky ? StickyMatcher : SubstringMatcher)(names, sticky ? stickyRegexp : substringRegexp);

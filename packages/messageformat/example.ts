@@ -13,10 +13,9 @@ const FORMATTERS = {
 
 const FORMATTER_NAMES = Object.keys(FORMATTERS);
 
-const parse = (message: string) => {
-  const matcher = buildMessageMatcher(message, FORMATTER_NAMES);
-  return parseMessagePattern(message, matcher);
-};
+const MATCHER = buildMessageMatcher(FORMATTER_NAMES);
+
+const parse = (message: string) => parseMessagePattern(message, MATCHER);
 
 const dump = (message: string) =>
   console.log(JSON.stringify(parse(message)));

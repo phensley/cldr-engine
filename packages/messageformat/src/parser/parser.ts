@@ -8,7 +8,7 @@ import {
   SelectChoice,
 } from './types';
 
-import { Matcher, Range } from './matcher';
+import { Matcher, MessageState } from './matcher';
 
 const enum Chars {
   LEFT = '{',
@@ -52,10 +52,11 @@ class MessagePatternParser {
   }
 
   parse(): MessageCode {
-    return this.outer({ s: 0, e: this.raw.length });
+    const t = this.raw;
+    return this.outer({ t, s: 0, e: t.length });
   }
 
-  outer(r: Range, argsub?: Argument): MessageCode {
+  outer(r: MessageState, argsub?: Argument): MessageCode {
     // this.matcher.debug('outer', r);
 
     const str = this.raw;
@@ -86,7 +87,7 @@ class MessagePatternParser {
 
           } else {
             // Process tag interior
-            const child = this.inner({ s: r.s + 1, e: k });
+            const child = this.inner({ t: r.t, s: r.s + 1, e: k });
             if (!child) {
               // If we're not in the outermost scope, push text
               if (argsub) {
@@ -144,7 +145,7 @@ class MessagePatternParser {
     return flatten(n);
   }
 
-  inner(r: Range): MessageCode | undefined {
+  inner(r: MessageState): MessageCode | undefined {
     // this.matcher.debug('inner', r);
 
     const m = this.matcher;
@@ -195,7 +196,7 @@ class MessagePatternParser {
   /**
    * Parse a nested tag sequence '{' ... '}'
    */
-  tag(m: Matcher, r: Range, argsub?: Argument): MessageCode | undefined {
+  tag(m: Matcher, r: MessageState, argsub?: Argument): MessageCode | undefined {
     // m.debug('  tag', r);
     m.spaces(r);
 
@@ -214,7 +215,7 @@ class MessagePatternParser {
     // }
 
     // Parse nested block and skip over it
-    const node = this.outer({ s: r.s + 1, e: k }, argsub);
+    const node = this.outer({ t: r.t, s: r.s + 1, e: k }, argsub);
     r.s = k + 1;
     return node;
   }
@@ -222,7 +223,7 @@ class MessagePatternParser {
   /**
    * Parse a plural instruction.
    */
-  plural(args: Argument[], type: PluralNumberType, m: Matcher, r: Range): MessageCode {
+  plural(args: Argument[], type: PluralNumberType, m: Matcher, r: MessageState): MessageCode {
     // m.debug('plural', r);
 
     // See if we have an offset argument
@@ -267,7 +268,7 @@ class MessagePatternParser {
   /**
    * Parse a select instruction.
    */
-  select(args: Argument[], m: Matcher, r: Range): MessageCode {
+  select(args: Argument[], m: Matcher, r: MessageState): MessageCode {
     const choices: SelectChoice[] = [];
     do {
       // Parse an identifier to be used as the select choice
@@ -296,7 +297,7 @@ class MessagePatternParser {
   /**
    * Simple single-argument formatter with zero or more options.
    */
-  simple(args: Argument[], name: string, m: Matcher, r: Range): MessageCode {
+  simple(args: Argument[], name: string, m: Matcher, r: MessageState): MessageCode {
     const options = m.options(r);
     return [MessageOpType.SIMPLE, name, args, options];
   }

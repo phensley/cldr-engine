@@ -15,9 +15,9 @@ const CUSTOM = {
 
 const CUSTOM_NAMES = Object.keys(CUSTOM);
 
-const matcher = (s: string) => new StickyMatcher(s, CUSTOM_NAMES, stickyRegexp);
+const matcher = () => new StickyMatcher(CUSTOM_NAMES, stickyRegexp);
 
-const parse = (s: string) => parseMessagePattern(s, matcher(s));
+const parse = (s: string) => parseMessagePattern(s, matcher());
 
 const evaluate = (lang: string, code: MessageCode, positional: MessageArg[], named?: MessageNamedArgs) =>
   new MessageEngine(lang, CUSTOM, code).evaluate(positional, named);
@@ -42,7 +42,7 @@ test('basic message evaluation', () => {
 test('undefined formatter', () => {
   // Parser is given a formatter name that is not defined during evaluation
   const message = '{0 baz}';
-  const m = new StickyMatcher(message, ['baz'], stickyRegexp);
+  const m = new StickyMatcher(['baz'], stickyRegexp);
   const code = parseMessagePattern(message, m);
 
   const engine = new MessageEngine('en', {}, code);
