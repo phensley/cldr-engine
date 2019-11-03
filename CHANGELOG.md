@@ -8,7 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [UNRELEASED]
 ### Added
- - Rule-based number formatting implementation. This enables formatting using the global algorithmic numbering systems as well as named rules.
+ - Rule-based number formatting extension package `@phensley/cldr-ext-rbnf`. This will enable formatting using the global algorithmic numbering systems as well as named rules. This is implemented as an extension to the main library but is not currently integrated.
+
+### Fixed/Changed
+ - Migrated many shared types to new `@phensley/cldr-types` package. This will eventually enable the core library and extension packages to be able to interface.
+ - Message formatter matcher is now reusable across multiple parses, which doubles the speed of parsing.
 
 ## [0.20.4]
 ### Fixed/Chaged
