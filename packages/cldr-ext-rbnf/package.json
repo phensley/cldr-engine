@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-ext-rbnf",
-  "version": "0.20.4",
+  "version": "0.21.0",
   "description": "Extension for rule-based number formatting",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -34,9 +34,9 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-types": "0.20.4",
-    "@phensley/decimal": "0.20.4",
-    "@phensley/plurals": "0.20.4",
+    "@phensley/cldr-types": "0.21.0",
+    "@phensley/decimal": "0.21.0",
+    "@phensley/plurals": "0.21.0",
     "tslib": "1.10.x"
   },
   "devDependencies": {
