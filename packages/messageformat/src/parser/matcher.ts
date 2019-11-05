@@ -16,7 +16,7 @@ const patterns = {
   pluralChoice: /(=\d+(\.\d+)?)|zero|one|two|few|many|other/.source
 };
 
-export interface Matcher {
+export interface MessageMatcher {
   // debug(msg: string, r: MessageState): void;
   char(r: MessageState): string;
   complete(r: MessageState): boolean;
@@ -44,7 +44,7 @@ const BUILTINS = 'plural|select(ordinal)?|';
  *
  *   "{gender, select, female {guests plural one {her guest} other {her guests}}"
  */
-export class StickyMatcher implements Matcher {
+export class StickyMatcher implements MessageMatcher {
 
   private _space: RegExp;
   private _arg: RegExp;

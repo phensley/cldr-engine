@@ -8,7 +8,7 @@ import {
   SelectChoice,
 } from './types';
 
-import { Matcher, MessageState } from './matcher';
+import { MessageMatcher, MessageState } from './matcher';
 
 const enum Chars {
   LEFT = '{',
@@ -17,7 +17,7 @@ const enum Chars {
   POUND = '#'
 }
 
-export const parseMessagePattern = (raw: string, matcher: Matcher): MessageCode =>
+export const parseMessagePattern = (raw: string, matcher: MessageMatcher): MessageCode =>
   new MessagePatternParser(raw, matcher).parse();
 
 /**
@@ -48,7 +48,7 @@ export const parseMessagePattern = (raw: string, matcher: Matcher): MessageCode 
  */
 class MessagePatternParser {
 
-  constructor(private raw: string, private matcher: Matcher) {
+  constructor(private raw: string, private matcher: MessageMatcher) {
   }
 
   parse(): MessageCode {
@@ -196,7 +196,7 @@ class MessagePatternParser {
   /**
    * Parse a nested tag sequence '{' ... '}'
    */
-  tag(m: Matcher, r: MessageState, argsub?: Argument): MessageCode | undefined {
+  tag(m: MessageMatcher, r: MessageState, argsub?: Argument): MessageCode | undefined {
     // m.debug('  tag', r);
     m.spaces(r);
 
@@ -223,7 +223,7 @@ class MessagePatternParser {
   /**
    * Parse a plural instruction.
    */
-  plural(args: Argument[], type: PluralNumberType, m: Matcher, r: MessageState): MessageCode {
+  plural(args: Argument[], type: PluralNumberType, m: MessageMatcher, r: MessageState): MessageCode {
     // m.debug('plural', r);
 
     // See if we have an offset argument
@@ -268,7 +268,7 @@ class MessagePatternParser {
   /**
    * Parse a select instruction.
    */
-  select(args: Argument[], m: Matcher, r: MessageState): MessageCode {
+  select(args: Argument[], m: MessageMatcher, r: MessageState): MessageCode {
     const choices: SelectChoice[] = [];
     do {
       // Parse an identifier to be used as the select choice
@@ -297,7 +297,7 @@ class MessagePatternParser {
   /**
    * Simple single-argument formatter with zero or more options.
    */
-  simple(args: Argument[], name: string, m: Matcher, r: MessageState): MessageCode {
+  simple(args: Argument[], name: string, m: MessageMatcher, r: MessageState): MessageCode {
     const options = m.options(r);
     return [MessageOpType.SIMPLE, name, args, options];
   }
