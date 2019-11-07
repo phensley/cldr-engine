@@ -34,8 +34,6 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/decimal": "0.21.1",
-    "@phensley/plurals": "0.21.1",
     "tslib": "1.10.x"
   },
   "devDependencies": {
