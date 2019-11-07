@@ -7,7 +7,7 @@
     "api": "lerna run api",
     "bench": "lerna run --stream --concurrency=1 bench",
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build build:es",
+    "build": "lerna run build",
     "build:watch": "lerna run build:watch --parallel",
     "clean": "lerna run clean && rimraf ./coverage && jest --clearCache",
     "clean:full": "lerna run clean:full && rimraf ./node_modules",
