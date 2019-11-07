@@ -45,5 +45,6 @@ export {
   MessageEngine,
   MessageFormatFunc,
   MessageFormatFuncMap,
+  MessageMatcher,
   MessageNamedArgs
 } from '@phensley/messageformat';
