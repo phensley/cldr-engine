@@ -43,7 +43,7 @@ expect.extend({
 
 declare global {
   namespace jest {
-    interface Matchers<R> {
+    interface Matchers<R, T> {
       toHaveCategory(typ: string, lang: string, expected: string): R;
     }
   }
