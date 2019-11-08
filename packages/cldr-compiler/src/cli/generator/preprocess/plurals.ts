@@ -48,7 +48,24 @@ const parseRules = (pluralSet: any): StringMap => {
         // Replace expression with its unique id.
         return c.split('&').map(exprId).join('&');
       }).join('|');
-    }).sort().join('\t');
+    }).sort().join('_');
+  });
+  return map;
+};
+
+const SPACER = /[\s,]+/;
+const IGNORE = new Set(['@integer', '@decimal', '…']);
+
+const parseSamples = (pluralSet: any): StringMap => {
+  const map: any = {};
+  Object.keys(pluralSet).forEach(lang => {
+    const obj = pluralSet[lang];
+    map[lang] = Object.keys(obj).map(k => {
+      const code = k.split('-')[2];
+      const rule = parsePluralRule(obj[k]).get()._1;
+      const samples = rule.samples.split(SPACER).filter(s => !IGNORE.has(s));
+      return [code, samples];
+    });
   });
   return map;
 };
@@ -62,9 +79,15 @@ export const getPlurals = (): any => {
   const exprs = Object.keys(expressions)
     .sort((a, b) => expressions[a] < expressions[b] ? -1 : 1);
 
+  const samples = {
+    cardinals: parseSamples(Cardinals),
+    ordinals: parseSamples(Ordinals)
+  };
+
   return {
     cardinals,
     ordinals,
     expressions: exprs,
+    samples
   };
 };
