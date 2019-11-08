@@ -229,7 +229,7 @@ test('to string', () => {
   expect(parse('-2.9999998e-23').toString()).toEqual('-0.000000000000000000000029999998');
 
   expect(parse('0e10').toString()).toEqual('0');
-  expect(parse('0e-10').toString()).toEqual('0');
+  expect(parse('0e-10').toString()).toEqual('0.0000000000');
 });
 
 test('to parts', () => {

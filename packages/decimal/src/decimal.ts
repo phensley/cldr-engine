@@ -1,6 +1,5 @@
 import { add, divide, multiply, subtract, trimLeadingZeros, DivMod } from './math';
 import { allzero, compare, digitCount } from './operations';
-import { decimalOperands, NumberOperands } from './operands';
 import { DecimalFormatter, Part, PartsDecimalFormatter, StringDecimalFormatter } from './format';
 import {
   Chars,
@@ -189,15 +188,6 @@ export class Decimal {
   }
 
   /**
-   * Compute operands for this number, used for determining the plural category.
-   *
-   * A NAN or INFINITY will return the same operands as ZERO.
-   */
-  operands(): NumberOperands {
-    return decimalOperands(this.sign, this.exp, this.data);
-  }
-
-  /**
    * Return the absolute value of the number.
    */
   abs(): Decimal {
@@ -258,7 +248,7 @@ export class Decimal {
   subtract(v: DecimalArg): Decimal {
     v = coerceDecimal(v);
     const r = this.handleFlags(Op.SUBTRACTION, v);
-    return r === undefined ? this.addsub(this, v, v.sign === 1 ? -1 : 1) : r;
+    return r === undefined ? this.addsub(this, v, v.sign ? -v.sign : 0) : r;
   }
 
   /**
@@ -791,14 +781,14 @@ export class Decimal {
 
   protected formatString(d: Decimal, minInt: number): string {
     const f = new StringDecimalFormatter();
-    d.format(f, '.', '', minInt, 1, 3, 3, false);
+    d.format(f, '.', '', minInt, 1, 3, 3, true);
     const r = f.render();
     return d.sign === -1 ? '-' + r : r;
   }
 
   protected formatParts(d: Decimal, minInt: number): Part[] {
     const f = new PartsDecimalFormatter('.', '');
-    d.format(f, '.', '', minInt, 1, 3, 3, false);
+    d.format(f, '.', '', minInt, 1, 3, 3, true);
     const r = f.render();
     return d.sign === -1 ? [{ type: 'minus', value: '-' }].concat(r) : r;
   }
