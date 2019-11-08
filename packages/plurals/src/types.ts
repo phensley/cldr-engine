@@ -1,4 +1,5 @@
-import { NumberOperands } from '@phensley/decimal';
+import { Decimal } from '@phensley/decimal';
+import { numberOperands, NumberOperands } from './operands';
 
 // TODO: needs a bit of cleanup.
 
@@ -56,6 +57,10 @@ export class PluralRules {
       this.expressions = new Array(expressionsRaw.length);
       this.cardinals = new RuleCache(cardinalsRaw);
       this.ordinals = new RuleCache(ordinalsRaw);
+  }
+
+  operands(d: Decimal): NumberOperands {
+    return numberOperands(d);
   }
 
   cardinal(language: string, operands: NumberOperands): string {
@@ -123,7 +128,7 @@ export class PluralRule {
   readonly conditions: PluralCond[];
 
   constructor(raw: string) {
-    this.conditions = raw.split('\t').map(s => new PluralCond(s));
+    this.conditions = raw.split('_').map(s => new PluralCond(s));
   }
 
 }
@@ -151,14 +156,14 @@ export class PluralExpr {
 
   readonly operand: Operand;
   readonly operator: string;
-  readonly mod: number;
-  readonly ranges: (number | number[])[];
+  readonly mod?: Decimal;
+  readonly ranges: (Decimal | Decimal[])[];
 
   constructor(raw: string) {
     this.operand = raw[0] as Operand;
     let done = false;
     this.operator = '=';
-    this.mod = 0;
+    let mod = 0;
     let i = 1;
     while (i < raw.length) {
       const ch = raw[i];
@@ -173,8 +178,8 @@ export class PluralExpr {
       case '7':
       case '8':
       case '9':
-        this.mod *= 10;
-        this.mod += Number(ch);
+        mod *= 10;
+        mod += Number(ch);
         break;
       case '!':
         this.operator = '!';
@@ -189,38 +194,40 @@ export class PluralExpr {
       }
       i++;
     }
-    this.ranges = raw.substring(i).split(',')
-      .map(s => s.indexOf(':') === -1 ? Number(s) : s.split(':').map(Number));
+    if (mod) {
+      this.mod = new Decimal(mod);
+    }
+
+    raw = raw.substring(i);
+    this.ranges = raw ? raw.split(',')
+      .map(s => s.indexOf(':') === -1 ? new Decimal(s) : s.split(':').map(x => new Decimal(x))) : [];
   }
 }
 
 export const evaluateExpr = (operands: NumberOperands, expr: PluralExpr): boolean => {
   const { operand, ranges } = expr;
-  let n: number = operands[operand];
-
-  // If we're applying modulus to the 'n' operand we must also ensure
-  // decimal value is zero.
-  if (expr.operand === 'n') {
-    if (operands.f !== 0) {
-      return false;
-    }
+  if (!operand) {
+    return false;
   }
 
-  if (expr.mod !== 0) {
-    n = n % expr.mod;
+  let n: Decimal = operands[operand];
+
+  if (expr.mod) {
+    n = n.divmod(expr.mod)[1];
   }
+
+  const integer = n.isInteger();
 
   const equals = expr.operator !== '!';
   const len = ranges.length;
   let res = false;
   for (let i = 0; i < len; i++) {
     const elem = ranges[i];
-    if (typeof elem === 'number') {
-      res = res || n === elem;
+    if (elem instanceof Decimal) {
+      res = res || n.compare(elem) === 0;
     } else {
-      res = res || (n >= elem[0] && n <= elem[1]);
+      res = res || (integer && n.compare(elem[0]) >= 0 && n.compare(elem[1]) <= 0);
     }
   }
-
   return equals ? res : !res;
 };
