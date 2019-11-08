@@ -28,7 +28,6 @@ export {
   DecimalConstants,
   DecimalFormatter,
   MathContext,
-  NumberOperands,
   Part,
   PartsDecimalFormatter,
   Rational,
@@ -48,3 +47,7 @@ export {
   MessageMatcher,
   MessageNamedArgs
 } from '@phensley/messageformat';
+
+export {
+  NumberOperands
+} from '@phensley/plurals';

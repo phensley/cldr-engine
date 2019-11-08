@@ -2,57 +2,79 @@ import { Decimal } from '@phensley/decimal';
 
 const ZERO = new Decimal('0');
 
-export interface NumberOperands {
-  n: Decimal;
-  i: Decimal;
-  v: Decimal;
-  w: Decimal;
-  f: Decimal;
-  t: Decimal;
+const FIELDS = ['n', 'i', 'v', 'w', 'f', 't'];
+
+const fracs = (a: Decimal, b: Decimal) => {
+  const n = a.subtract(b);
+  const s = n.scale();
+  return s > 0 ? n.movePoint(s) : n;
+};
+
+const scale = (n: Decimal) => {
+  const s = n.scale();
+  return s > 0 ? new Decimal(s) : ZERO;
+};
+
+/**
+ * Computes each number operands field as needed.
+ */
+export class NumberOperands {
+  private n: Decimal;
+  private _i?: Decimal;
+  private _v?: Decimal;
+  private _w?: Decimal;
+  private _f?: Decimal;
+  private _t?: Decimal;
+
+  private _nz?: Decimal;
+
+  constructor(d: Decimal) {
+    this.n = d.isFinite() ? d.abs() : ZERO;
+  }
+
+  get i(): Decimal {
+    if (!this._i) {
+      this._i = this.n.toInteger();
+    }
+    return this._i;
+  }
+
+  get v(): Decimal {
+    if (!this._v) {
+      this._v = scale(this.n);
+    }
+    return this._v;
+  }
+
+  get w(): Decimal {
+    if (!this._w) {
+      this._w = scale(this.nz);
+    }
+    return this._w;
+  }
+
+  get f(): Decimal {
+    if (!this._f) {
+      this._f = fracs(this.n, this.i);
+    }
+    return this._f;
+  }
+
+  get t(): Decimal {
+    if (!this._t) {
+      this._t = fracs(this.nz, this.i);
+    }
+    return this._t;
+  }
+
+  toString(): string {
+    return FIELDS.map(f => `${f}: ${this[f as keyof NumberOperands].toString()}`).join(', ');
+  }
+
+  protected get nz(): Decimal {
+    if (!this._nz) {
+      this._nz = this.n.stripTrailingZeros();
+    }
+    return this._nz;
+  }
 }
-
-const ZERO_OPS: NumberOperands = {
-  n: ZERO,
-  i: ZERO,
-  v: ZERO,
-  w: ZERO,
-  f: ZERO,
-  t: ZERO
-};
-
-export const numberOperands = (d: Decimal): NumberOperands => {
-  if (!d.isFinite()) {
-    return ZERO_OPS;
-  }
-
-  // n - absolute value of the source number (integer and decimals)
-  const n = d.abs();
-
-  // i - integer digits of n
-  const i = n.toInteger();
-
-  // v - number of visible fraction digits in n, with trailing zeroes
-  const nsc = n.scale();
-  const v = nsc > 0 ? new Decimal(nsc) : ZERO;
-
-  // w - number of visible fraction digits in n, without trailing zeroes
-  const nz = n.stripTrailingZeros();
-  const nzsc = nz.scale();
-  const w = nzsc > 0 ? new Decimal(nzsc) : ZERO;
-
-  // f - visible fractional digits in n, with trailing zeros
-  let f = n.subtract(i);
-  const fsc = f.scale();
-  if (fsc > 0) {
-    f = f.movePoint(fsc);
-  }
-
-  // t - visible fractional digits in n, without trailing zeros
-  let t = nz.subtract(i);
-  const tsc = t.scale();
-  if (tsc > 0) {
-    t = t.movePoint(tsc);
-  }
-
-  return { n, i, v, w, f, t };
-};

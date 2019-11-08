@@ -41,7 +41,7 @@ export class UnitsInternalImpl implements UnitInternals {
 
     // Compute plural category for the value '1'
     const singular = pluralRules.cardinal(
-      bundle.language(), DecimalConstants.ONE.operands());
+      bundle.language(), DecimalConstants.ONE);
 
     // For default and "per" compound pattern, the {0} will use
     // the plural category and {1} will be singular. Examples:

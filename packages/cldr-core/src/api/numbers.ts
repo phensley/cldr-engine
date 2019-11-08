@@ -73,12 +73,12 @@ export class NumbersImpl implements Numbers {
 
   getPluralCardinal(n: DecimalArg, options?: DecimalAdjustOptions): string {
     const d = options ? this.adjustDecimal(n, options) : coerceDecimal(n);
-    return pluralRules.cardinal(this.bundle.language(), d.operands());
+    return pluralRules.cardinal(this.bundle.language(), d);
   }
 
   getPluralOrdinal(n: DecimalArg, options?: DecimalAdjustOptions): string {
     const d = options ? this.adjustDecimal(n, options) : coerceDecimal(n);
-    return pluralRules.ordinal(this.bundle.language(), d.operands());
+    return pluralRules.ordinal(this.bundle.language(), d);
   }
 
   formatDecimal(n: DecimalArg, options?: DecimalFormatOptions): string {

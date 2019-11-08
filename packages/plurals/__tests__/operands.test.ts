@@ -1,11 +1,12 @@
 import { Decimal } from '@phensley/decimal';
-import { pluralRules, NumberOperands2 } from '../src';
+import { pluralRules } from '../src';
 
 const operands = (n: string) => {
-  const ops = pluralRules.operands(new Decimal(n));
-  return Object.keys(ops)
-    .map(k => `${k}: ${ops[k as keyof NumberOperands2].toString()}`)
-    .join(', ');
+  return pluralRules.operands(new Decimal(n)).toString();
+  // const ops = pluralRules.operands(new Decimal(n));
+  // return Object.keys(ops)
+  //   .map(k => `${k}: ${ops[k as keyof NumberOperands2].toString()}`)
+  //   .join(', ');
 };
 
 test('basics', () => {

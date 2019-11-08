@@ -69,10 +69,9 @@ export class MessageEngine {
         const offset = code[2];
         const num = asdecimal(arg);
         argsub = offset ? num.subtract(offset) : num;
-        const ops = argsub.operands();
         const category = code[3] === PluralNumberType.CARDINAL ?
-          pluralRules.cardinal(this.language, ops) :
-          pluralRules.ordinal(this.language, ops);
+          pluralRules.cardinal(this.language, argsub) :
+          pluralRules.ordinal(this.language, argsub);
 
         let other: MessageCode | undefined;
         let found = 0;

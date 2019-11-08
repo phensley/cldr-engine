@@ -1,8 +1,8 @@
 import { Decimal } from '@phensley/decimal';
 import { pluralRules } from '../src';
 
-const operands = (n: string) => pluralRules.operands(new Decimal(n));
-const cardinal = (lang: string, n: string) => pluralRules.cardinal(lang, operands(n));
+// const operands = (n: string) => pluralRules.operands(new Decimal(n));
+const cardinal = (lang: string, n: string) => pluralRules.cardinal(lang, new Decimal(n));
 
 test('english', () => {
   const lang = 'en';

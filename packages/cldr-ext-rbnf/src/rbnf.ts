@@ -387,8 +387,8 @@ export class RBNFEngine {
   }
 
   protected plural(n: Decimal, cardinal: boolean): number {
-    const o = n.operands();
-    const cat = cardinal ? pluralRules.cardinal(this.language, o) : pluralRules.ordinal(this.language, o);
+    const cat = cardinal ?
+      pluralRules.cardinal(this.language, n) : pluralRules.ordinal(this.language, n);
     return PLURALS[cat];
   }
 

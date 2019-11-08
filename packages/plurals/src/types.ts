@@ -1,5 +1,5 @@
 import { Decimal } from '@phensley/decimal';
-import { numberOperands, NumberOperands } from './operands';
+import { NumberOperands } from './operands';
 
 // TODO: needs a bit of cleanup.
 
@@ -7,6 +7,15 @@ export type RuleMap = { [x: string]: PluralRule };
 export type StringMap = { [x: string]: string };
 
 export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
+
+export const enum Op {
+  N = 0,
+  I = 1,
+  V = 2,
+  W = 4,
+  F = 8,
+  T = 16
+}
 
 // Notation for categories in compact plural rules
 const CATEGORIES: { [x: string]: string } = {
@@ -60,15 +69,15 @@ export class PluralRules {
   }
 
   operands(d: Decimal): NumberOperands {
-    return numberOperands(d);
+    return new NumberOperands(d);
   }
 
-  cardinal(language: string, operands: NumberOperands): string {
-    return this.evaluate(language, operands, this.cardinals);
+  cardinal(language: string, n: Decimal): string {
+    return this.evaluate(language, new NumberOperands(n), this.cardinals);
   }
 
-  ordinal(language: string, operands: NumberOperands): string {
-    return this.evaluate(language, operands, this.ordinals);
+  ordinal(language: string, n: Decimal): string {
+    return this.evaluate(language, new NumberOperands(n), this.ordinals);
   }
 
   private evaluate(language: string, operands: NumberOperands, cache: RuleCache): string {

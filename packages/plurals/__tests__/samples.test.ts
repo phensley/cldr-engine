@@ -30,8 +30,9 @@ SAMPLES.forEach(line => {
 
 expect.extend({
   toHaveCategory: (sample: string, typ: string, lang: string, expected: string) => {
-    const ops = pluralRules.operands(new Decimal(sample));
-    const actual = typ === 'cardinals' ? pluralRules.cardinal(lang, ops) : pluralRules.ordinal(lang, ops);
+    const n = new Decimal(sample);
+    const actual = typ === 'cardinals' ?
+      pluralRules.cardinal(lang, n) : pluralRules.ordinal(lang, n);
     const msg = (pass: boolean) => () =>
       `Expected language "${lang}" number "${sample}" ${pass ? 'not ' : ''}to have ${typ} category "${expected}" but got "${actual}"`;
 

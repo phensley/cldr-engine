@@ -87,8 +87,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     }
 
     // Format a pluralized future / past.
-    const operands = n.operands();
-    const plural = pluralRules.cardinal(bundle.language(), operands) as PluralType;
+    const plural = pluralRules.cardinal(bundle.language(), n) as PluralType;
     const arrow = negative ? format.past : format.future;
     let raw = arrow.get(bundle, plural, field);
     if (options.context) {

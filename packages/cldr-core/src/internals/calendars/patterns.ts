@@ -244,13 +244,13 @@ export class GregorianPatterns extends CalendarPatterns {
       switch (s.skeleton) {
         case 'MMMMW': {
           const week = coerceDecimal(d.weekOfMonth());
-          plural = pluralRules.cardinal(this.language, week.operands()) as PluralType;
+          plural = pluralRules.cardinal(this.language, week) as PluralType;
           pattern = this.rawPluralFormats[plural][s.skeleton];
           break;
         }
         case 'yw': {
           const week = coerceDecimal(d.weekOfYear());
-          plural = pluralRules.cardinal(this.language, week.operands()) as PluralType;
+          plural = pluralRules.cardinal(this.language, week) as PluralType;
           pattern = this.rawPluralFormats[plural][s.skeleton];
           break;
         }
