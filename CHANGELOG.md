@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [0.22.0]
 ### Fixed/Changed
+ - Plural rule evaluation now takes `Decimal` argument instead of number operands.
  - Switched plural calculations to use arbitrary precision for all number operand fields.
  - Extracted all plural samples to use as test cases.
  - Moved plural operands from the `decimal` package into `plurals`.
