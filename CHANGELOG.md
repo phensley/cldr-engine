@@ -10,8 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Fixed/Changed
  - Switched plural calculations to use arbitrary precision for all number operand fields.
  - Extracted all plural samples to use as test cases.
- - Moved plural operands from the `decimal` package into `plurals`
- - Fixed sign issue in subtract
+ - Moved plural operands from the `decimal` package into `plurals`.
+ - Fixed sign issue in subtract.
 
 ## [0.21.2]
 ### Fixed/Changed
@@ -314,6 +314,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.22.0]: https://github.com/phensley/cldr-engine/compare/v0.21.2...v0.22.0
 [0.21.2]: https://github.com/phensley/cldr-engine/compare/v0.21.1...v0.21.2
 [0.21.1]: https://github.com/phensley/cldr-engine/compare/v0.21.0...v0.21.1
 [0.21.0]: https://github.com/phensley/cldr-engine/compare/v0.20.4...v0.21.0
