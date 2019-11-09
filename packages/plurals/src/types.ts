@@ -1,4 +1,4 @@
-import { Decimal } from '@phensley/decimal';
+import { coerceDecimal, Decimal, DecimalArg } from '@phensley/decimal';
 import { NumberOperands } from './operands';
 
 // TODO: needs a bit of cleanup.
@@ -72,12 +72,12 @@ export class PluralRules {
     return new NumberOperands(d);
   }
 
-  cardinal(language: string, n: Decimal): string {
-    return this.evaluate(language, new NumberOperands(n), this.cardinals);
+  cardinal(language: string, n: DecimalArg): string {
+    return this.evaluate(language, new NumberOperands(coerceDecimal(n)), this.cardinals);
   }
 
-  ordinal(language: string, n: Decimal): string {
-    return this.evaluate(language, new NumberOperands(n), this.ordinals);
+  ordinal(language: string, n: DecimalArg): string {
+    return this.evaluate(language, new NumberOperands(coerceDecimal(n)), this.ordinals);
   }
 
   private evaluate(language: string, operands: NumberOperands, cache: RuleCache): string {
