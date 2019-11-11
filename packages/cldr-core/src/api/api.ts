@@ -8,6 +8,7 @@ import {
   UnitType
 } from '@phensley/cldr-types';
 
+import { MessageFormatter, MessageFormatterOptions } from '@phensley/messageformat';
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 
 import {
@@ -209,6 +210,11 @@ export interface General {
    * Parses a language tag and canonicalizes its fields.
    */
   parseLanguageTag(tag: string): LanguageTag;
+
+  /**
+   * Returns a message formatter instance for the current locale.
+   */
+  messageFormatter(options?: MessageFormatterOptions): MessageFormatter;
 
   /**
    * Returns the measurement system in use for the current locale generally,

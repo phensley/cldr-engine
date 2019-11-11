@@ -34,6 +34,7 @@
     "lib-es/"
   ],
   "dependencies": {
+    "@phensley/cldr-utils": "0.22.1",
     "@phensley/decimal": "0.22.1",
     "@phensley/plurals": "0.22.1",
     "tslib": "1.10.x"

@@ -8,6 +8,7 @@ import {
   ScriptIdType,
 } from '@phensley/cldr-types';
 
+import { MessageFormatter, MessageFormatterOptions } from '@phensley/messageformat';
 import { Part } from '@phensley/decimal';
 
 // import {
@@ -70,6 +71,10 @@ export class GeneralImpl implements General {
 
   parseLanguageTag(tag: string): LanguageTag {
     return parseLanguageTag(tag);
+  }
+
+  messageFormatter(options?: MessageFormatterOptions): MessageFormatter {
+    return new MessageFormatter(this._bundle.language(), options);
   }
 
   measurementSystem(category?: MeasurementCategory): MeasurementSystem {
