@@ -57,6 +57,8 @@ export {
   MessageEngine,
   MessageFormatFunc,
   MessageFormatFuncMap,
+  MessageFormatter,
+  MessageFormatterOptions,
   MessageMatcher,
   MessageNamedArgs,
   NumberFormatErrorType,
