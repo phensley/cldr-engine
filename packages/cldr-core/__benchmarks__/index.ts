@@ -10,7 +10,13 @@ import {
   numberParseSuite
 } from './numbers';
 
+import {
+  messageSuite
+} from './messages';
+
 const options = { async: false, delay: 0.5 };
+
+messageSuite.run(options);
 
 formatDateSuite.run(options);
 gregorianSuite.run(options);
