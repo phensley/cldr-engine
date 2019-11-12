@@ -3,6 +3,7 @@ import {
   parseMessagePattern,
   MessageArg,
   MessageEngine,
+  MessageFormatter,
   MessageNamedArgs
 } from './src';
 
@@ -35,7 +36,13 @@ dump('{0 select, male {his} female {her} other {their}} {item}');
 
 dump('{word} uppercase = {word foo upper} lowercase = {word foo lower}');
 
-// Example 2 - plural cardinals
+// Example 2 - MessageFormatter
+
+const formatter = new MessageFormatter('en', { formatters: FORMATTERS, cacheSize: 100 });
+msg = '{0 select, male {his} female {her} other {their}} {item}';
+console.log(formatter.format(msg, ['female'], { item: 'parka' }));
+
+// Example 3 - plural cardinals
 
 msg = '{count, plural, offset:1 =0 {Be the first to like this} =1 {You liked this} one {You and someone else liked this} other {You and # others liked this}}';
 
@@ -44,7 +51,7 @@ format(msg, [], { count: 1 });
 format(msg, [], { count: 2 });
 format(msg, [], { count: 3 });
 
-// Example 3 - select
+// Example 4 - select
 
 msg = '{0, select, male {his} female {her} other {their}} {item}';
 
@@ -52,7 +59,7 @@ format(msg, ['they'], { item: 'coat' });
 format(msg, ['female'], { item: 'jacket' });
 format(msg, ['male'], { item: 'parka' });
 
-// Example 4 - plural ordinals and select
+// Example 5 - plural ordinals and select
 
 msg = '{name} {tied select true {tied for} other {came in}} {place selectordinal one {#st} two {#nd} few {#rd} other {#th}} place';
 
@@ -69,7 +76,7 @@ for (const racer of racers) {
   format(msg, [], racer);
 }
 
-// Example 5 - custom formatter
+// Example 6 - custom formatter
 
 msg = '{word} uppercase = {word foo upper} lowercase = {word foo lower}';
 

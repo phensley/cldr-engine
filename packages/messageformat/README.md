@@ -12,6 +12,7 @@ import {
   parseMessagePattern,
   MessageArg,
   MessageEngine,
+  MessageFormatter,
   MessageNamedArgs
 } from '@phensley/messageformat';
 
@@ -56,7 +57,21 @@ dump('{word} uppercase = {word foo upper} lowercase = {word foo lower}');
 [4,[[1,"word"],[0," uppercase = "],[6,"foo",["word"],["upper"]],[0," lowercase = "],[6,"foo",["word"],["lower"]]]]
 ```
 
-#### Example 2 - plural cardinals
+#### Example 2 - MessageFormatter
+
+If you don't need to embed parsed messages into source code, the `MessageFormatter` can parse and cache messages at runtime. Internally it uses a least-recently-used cache whose size can be configured.
+
+```typescript
+const formatter = new MessageFormatter('en', { formatters: FORMATTERS, cacheSize: 100 });
+msg = '{0 select, male {his} female {her} other {their}} {item}';
+console.log(formatter.format(msg, ['female'], { item: 'parka' }));
+```
+
+```
+her parka
+```
+
+#### Example 3 - plural cardinals
 
 ```typescript
 msg = '{count, plural, offset:1 =0 {Be the first to like this} =1 {You liked this} ' +
@@ -75,7 +90,7 @@ You and someone else liked this
 You and 2 others liked this
 ```
 
-#### Example 3 - select
+#### Example 4 - select
 
 ```typescript
 msg = 'Get {0, select, male {his} female {her} other {their}} {item}';
@@ -91,7 +106,7 @@ Get her jacket
 Get his parka
 ```
 
-#### Example 4 - plural ordinals and select
+#### Example 5 - plural ordinals and select
 
 
 ```typescript
@@ -122,7 +137,7 @@ George tied for 4th place
 Larry came in 5th place
 ```
 
-#### Example 5 - custom formatter
+#### Example 6 - custom formatter
 
 ```typescript
 msg = '{word} uppercase = {word foo upper} lowercase = {word foo lower}';
