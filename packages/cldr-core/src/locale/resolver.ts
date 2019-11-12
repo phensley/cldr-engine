@@ -114,7 +114,7 @@ const setFields = (src: FastTag, dst: FastTag, flags: number): void => {
  */
 const substituteLanguageAliases = (dst: FastTag): void => {
   if (!LANGUAGE_ALIAS_MAP) {
-    initAilas();
+    initAlias();
   }
   const aliases = LANGUAGE_ALIAS_MAP![dst[Tag.LANGUAGE]];
   if (aliases === undefined) {
@@ -202,11 +202,9 @@ const fastTagEquals = (a: FastTag, b: FastTag): boolean => {
   return true;
 };
 
-const languageAlias = stringToObject(languageAliasRaw, '|', ':');
-const likelySubtags = stringToObject(subtags.likelyRaw, '|', ':');
-
 const buildLanguageAliasMap = (): LanguageAliasMap => {
-  return Object.keys(languageAlias).reduce((o: LanguageAliasMap, k) => {
+  const languageAlias = stringToObject(languageAliasRaw, '|', ':');
+    return Object.keys(languageAlias).reduce((o: LanguageAliasMap, k) => {
     const type = parseFastTag(k);
     const repl = parseFastTag(languageAlias[k]);
     const language = type[Tag.LANGUAGE];
@@ -224,11 +222,12 @@ const buildLanguageAliasMap = (): LanguageAliasMap => {
 let LANGUAGE_ALIAS_MAP: LanguageAliasMap | undefined;
 let LIKELY_SUBTAGS_MAP: LikelySubtagsMap | undefined;
 
-const initAilas = () => {
+const initAlias = () => {
   LANGUAGE_ALIAS_MAP = buildLanguageAliasMap();
 };
 
 const initSubtags = () => {
+  const likelySubtags = stringToObject(subtags.likelyRaw, '|', ':');
   LIKELY_SUBTAGS_MAP = new LikelySubtagsMap(likelySubtags);
 };
 

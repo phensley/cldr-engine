@@ -15,13 +15,18 @@ const buildTerritoryAliasMap = (): TerritoryAliasMap => {
   }, {});
 };
 
-const TERRITORY_ALIAS_MAP: TerritoryAliasMap = buildTerritoryAliasMap();
+let TERRITORY_ALIAS_MAP: TerritoryAliasMap;
+
+const init = () => TERRITORY_ALIAS_MAP = buildTerritoryAliasMap();
 
 /**
  * Helper for the language tag parser to fix overlong region fields that may
  * or may not be variants.
  */
 export const replaceRegion = (region: string): string | undefined => {
+  if (!TERRITORY_ALIAS_MAP) {
+    init();
+  }
   const aliases = TERRITORY_ALIAS_MAP[region];
   return aliases === undefined ? undefined : aliases[0];
 };
@@ -30,6 +35,9 @@ export const replaceRegion = (region: string): string | undefined => {
  * Substitute territory subtag aliases, if any.
  */
 export const substituteRegionAliases = (dst: FastTag): void => {
+  if (!TERRITORY_ALIAS_MAP) {
+    init();
+  }
   const region = dst[Tag.REGION];
   const replacement = region === Tag.REGION ? undefined : TERRITORY_ALIAS_MAP[region];
   if (replacement === undefined) {
