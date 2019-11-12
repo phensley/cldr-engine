@@ -145,6 +145,14 @@ test('significant', () => {
   expect(s).toEqual('12,300 miles');
 });
 
+test('negative zero', () => {
+  const api = unitsApi('en');
+  let s: string;
+
+  s = api.formatQuantity({ value: '-0', unit: 'mile' });
+  expect(s).toEqual('0 miles');
+});
+
 test('number systems', () => {
   let api = unitsApi('ar');
   let s: string;

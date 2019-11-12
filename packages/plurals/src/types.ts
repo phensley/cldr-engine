@@ -225,6 +225,7 @@ export const evaluateExpr = (operands: NumberOperands, expr: PluralExpr): boolea
     n = n.divmod(expr.mod)[1];
   }
 
+  // The N = X..Y syntax means N matches an integer from X to Y inclusive
   const integer = n.isInteger();
 
   const equals = expr.operator !== '!';

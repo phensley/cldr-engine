@@ -49,6 +49,7 @@ export type CurrencySymbolWidthType = 'default' | 'narrow';
  */
 export interface DecimalFormatOptions extends NumberFormatOptions {
   divisor?: number;
+  negativeZero?: boolean;
   style?: DecimalFormatStyleType;
   errors?: NumberFormatErrorType[];
 }

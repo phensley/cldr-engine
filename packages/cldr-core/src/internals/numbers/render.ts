@@ -12,8 +12,7 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
     readonly params: NumberParams) { }
 
   render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
-      decimalSymbol: string, minInt: number, grouping: boolean = true,
-      exponent?: number): R {
+      decimalSymbol: string, minInt: number, grouping: boolean = true, exponent?: number): R {
 
     const { symbols } = this.params;
     const currency: boolean = currencySymbol !== '';

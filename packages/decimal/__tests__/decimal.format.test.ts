@@ -63,7 +63,7 @@ test('format', () => {
 test('leading integer zeros', () => {
   let opts: FormatArgs = ['.', ',', 5, 1, 3, -1];
   expect(format('0', opts)).toEqual('00,000');
-  expect(format('0.0', opts)).toEqual('00,000');
+  expect(format('0.0', opts)).toEqual('00,000.0');
   expect(format('0e10', opts)).toEqual('00,000');
   expect(format('.1', opts)).toEqual('00,000.1');
   expect(format('1', opts)).toEqual('00,001');

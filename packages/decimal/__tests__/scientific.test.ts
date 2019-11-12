@@ -22,6 +22,10 @@ test('scientific string', () => {
   expect(sci('12345.678', 2)).toEqual('12.345678E+3');
 });
 
+test('negative zero', () => {
+  expect(sci('-0')).toEqual('-0');
+});
+
 test('scientific parts', () => {
   expect(scip('0')).toEqual([
     { type: 'integer', value: '0' }

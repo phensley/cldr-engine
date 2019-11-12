@@ -12,6 +12,11 @@ test('compare', () => {
   expect(cmp('2', '1')).toEqual(1);
   expect(cmp('1', '2')).toEqual(-1);
 
+  expect(cmp('0', '0.0')).toEqual(0);
+  expect(cmp('1.000', '1.0')).toEqual(0);
+
+  expect(cmp('0.00500000', '0.005')).toEqual(0);
+
   expect(cmp('0', '23')).toEqual(-1);
   expect(cmp('0', '-23')).toEqual(1);
   expect(cmp('23', '0')).toEqual(1);

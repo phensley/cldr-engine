@@ -116,7 +116,7 @@ export class Decimal {
    * Any NAN argument will always return -1.
    */
   compare(v: DecimalArg, abs: boolean = false): number {
-    const u: Decimal = this;
+    let u: Decimal = this;
     v = coerceDecimal(v);
 
     if (u.flag || v.flag) {
@@ -139,13 +139,13 @@ export class Decimal {
         v.sign === -1 ? 1 : -1;
     }
 
-    // TODO: improve representation of zero and sign, since with
-    // current representation there are many edge cases. Below
-    // code fixes issues of comparisons with zero.
-    if (u.sign === 0) {
-      return v.sign === 0 ? 0 : v.sign === 1 ? -1 : 1;
-    } else if (v.sign === 0) {
-      return u.sign;
+    u = u.stripTrailingZeros();
+    v = v.stripTrailingZeros();
+
+    const uz = u.isZero();
+    const vz = v.isZero();
+    if (uz && vz) {
+      return 0;
     }
 
     const us = u.sign;
@@ -173,7 +173,7 @@ export class Decimal {
     }
 
     // Same number of radix digits.
-    let i = u.data.length;
+    let i = u.data.length - 1;
     while (i >= 0) {
       const a = u.data[i];
       const b = v.data[i];
@@ -198,7 +198,7 @@ export class Decimal {
    * Invert this number's sign.
    */
   negate(): Decimal {
-    return this.sign === 0 ? this : Decimal.fromRaw(-this.sign, this.exp, this.data, this.flag);
+    return this.isNaN() ? this : Decimal.fromRaw(-this.sign, this.exp, this.data, this.flag);
   }
 
   /**
@@ -212,7 +212,7 @@ export class Decimal {
    * Signum.
    */
   signum(): number {
-    return this.sign;
+    return this.isZero() ? 0 : this.sign;
   }
 
   /**
@@ -223,7 +223,14 @@ export class Decimal {
     if (this.flag) {
       return false;
     }
-    return this.sign === 0 ? true : this.exp + this.trailingZeros() >= 0;
+    return (this.exp + this.trailingZeros()) >= 0;
+  }
+
+  /**
+   * Number is exactly zero. Exponent may exist, e.g. "0e-2" is "0.00".
+   */
+  isZero(): boolean {
+    return !this.flag && this.data.length === 1 && this.data[0] === 0;
   }
 
   /**
@@ -248,7 +255,7 @@ export class Decimal {
   subtract(v: DecimalArg): Decimal {
     v = coerceDecimal(v);
     const r = this.handleFlags(Op.SUBTRACTION, v);
-    return r === undefined ? this.addsub(this, v, v.sign ? -v.sign : 0) : r;
+    return r === undefined ? this.addsub(this, v, -v.sign) : r;
   }
 
   /**
@@ -265,9 +272,12 @@ export class Decimal {
     const u: Decimal = this;
 
     const w = new Decimal(ZERO);
+    w.sign = u.sign === v.sign ? 1 : -1;
     w.exp = (u.exp + v.exp);
 
-    if (u.sign === 0 || v.sign === 0) {
+    const uz = u.isZero();
+    const vz = v.isZero();
+    if (uz || vz) {
       if (!usePrecision) {
         w._setScale(scaleprec);
       }
@@ -481,9 +491,6 @@ export class Decimal {
     if (this.flag) {
       return 0;
     }
-    if (this.sign === 0) {
-      return 1;
-    }
     const len = this.data.length;
     return ((len - 1) * Constants.RDIGITS) + digitCount(this.data[len - 1]);
   }
@@ -599,8 +606,7 @@ export class Decimal {
     }
     const [coeff, exp] = this.scientific(minIntegers);
     const r = this.formatString(coeff, minIntegers);
-    return coeff.sign === 0 ? r :
-      exp === 0 ? r : r + `E${exp > 0 ? '+' : ''}${exp}`;
+    return coeff.isZero() ? r : exp === 0 ? r : r + `E${exp > 0 ? '+' : ''}${exp}`;
   }
 
   /**
@@ -619,7 +625,7 @@ export class Decimal {
     }
     const [coeff, exp] = this.scientific(minIntegers);
     const r = this.formatParts(coeff, minIntegers);
-    if (coeff.sign === 0 || exp === 0) {
+    if (coeff.isZero() || exp === 0) {
       return r;
     }
     const sign = exp < 0 ?
@@ -649,7 +655,7 @@ export class Decimal {
 
     // Determine how many integer digits to emit. If integer digits is
     // larger than the integer coefficient we emit leading zeros.
-    let int = this.data.length === 0 ? 1 : this.precision() + exp;
+    let int = (this.data.length === 1 && this.data[0] === 0) ? 1 : this.precision() + exp;
 
     if (minInt <= 0 && this.compare(ONE, true) === -1) {
       // If the number is between 0 and 1 and format requested minimum
@@ -681,7 +687,7 @@ export class Decimal {
     // Push trailing zeros for a positive exponent, only if the number
     // is non-zero
     let zeros = exp;
-    if (this.sign !== 0) {
+    if (!(this.data.length === 1 && this.data[0] === 0)) {
       while (zeros > 0) {
         formatter.add(digits[0]);
         emitted++;
@@ -735,7 +741,7 @@ export class Decimal {
     }
 
     // If exponent still negative, emit leading decimal zeros
-    if (this.sign !== 0) {
+    // if (!(this.data.length === 1 && this.data[0] === 0)) {
       while (exp < 0) {
         formatter.add(digits[0]);
 
@@ -745,7 +751,7 @@ export class Decimal {
           formatter.add(decimal);
         }
       }
-    }
+    // }
 
     // Leading integer zeros
     while (int > 0) {
@@ -820,10 +826,10 @@ export class Decimal {
       return NAN;
     }
 
-    const uinf = u.flag === DecimalFlag.INFINITY;
-    const vinf = v.flag === DecimalFlag.INFINITY;
-    const uzero = !uflag && !u.sign;
-    const vzero = !vflag && !v.sign;
+    const uinf = uflag === DecimalFlag.INFINITY;
+    const vinf = vflag === DecimalFlag.INFINITY;
+    const uzero = u.isZero();
+    const vzero = v.isZero();
 
     switch (op) {
       case Op.ADDITION:
@@ -892,7 +898,7 @@ export class Decimal {
    * Mutating in-place shift left.
    */
   protected _shiftleft(shift: number): void {
-    if (shift <= 0 || this.sign === 0) {
+    if (shift <= 0) {
       return;
     }
     const w: Decimal = this;
@@ -954,7 +960,7 @@ export class Decimal {
     if (shift <= 0) {
       return;
     }
-    if (this.sign === 0) {
+    if (this.isZero()) {
       this.exp += shift;
       return;
     }
@@ -1023,7 +1029,7 @@ export class Decimal {
   protected _stripTrailingZeros(): void {
     let n = 0;
     // Special case for zero with negative exponent
-    if (this.sign === 0 && this.exp < 0) {
+    if (this.data.length === 1 && this.data[0] === 0 && this.exp < 0) {
       n = -this.exp;
     } else {
       n = this.trailingZeros();
@@ -1038,9 +1044,6 @@ export class Decimal {
    */
   protected trim(): Decimal {
     trimLeadingZeros(this.data);
-    if (this.data.length === 0) {
-      this.sign = 0;
-    }
     return this;
   }
 
@@ -1048,6 +1051,7 @@ export class Decimal {
    * Increment the least-significant digit of the coefficient.
    */
   protected _increment(): void {
+    const z = this.isZero();
     const d = this.data;
     const len = d.length;
     let s = 0;
@@ -1061,7 +1065,7 @@ export class Decimal {
       d.push(1);
     }
     // Check if we incremented from zero.
-    if (this.sign === 0) {
+    if (z) {
       this.sign = 1;
     }
   }
@@ -1111,11 +1115,6 @@ export class Decimal {
    * Addition and subtraction.
    */
   protected addsub(u: Decimal, v: Decimal, vsign: number): Decimal {
-    const zero = u.sign === 0;
-    if (zero || v.sign === 0) {
-      return zero ? Decimal.fromRaw(vsign, v.exp, v.data, v.flag) : new Decimal(u);
-    }
-
     let m = u; // m = bigger
     let n = v; // n = smaller
     let swap = 0;
@@ -1207,11 +1206,11 @@ export class Decimal {
       return;
     }
 
-    const len = str.length;
-
     // Local variables to accumulate digits, sign and exponent
     const data: number[] = [];
-    let sign = 0;
+
+    // Default sign is 1. Negative sign is -1. NaN sign is 0.
+    let sign = 1;
     let exp = 0;
 
     // Flags to control parsing, raise errors.
@@ -1224,7 +1223,7 @@ export class Decimal {
     let z = 0;
 
     // Pointer to the current character being parsed.
-    let i = len - 1;
+    let i = str.length - 1;
 
     // Total number of digits parsed.
     let dig = 0;
@@ -1253,7 +1252,7 @@ export class Decimal {
           // Copy the parsed number to the exponent and reset the digit count.
           dig = 0;
           exp = sign === -1 ? -n : n;
-          sign = 0;
+          sign = 1;
           n = 0;
           z = 0;
           break;
@@ -1266,7 +1265,7 @@ export class Decimal {
           if (flags & ParseFlags.SIGN) {
             return `Duplicate sign character at ${i}`;
           }
-          sign = code === Chars.MINUS ? -1 : 0;
+          sign = code === Chars.MINUS ? -1 : 1;
           flags |= ParseFlags.SIGN;
           break;
 
@@ -1308,9 +1307,7 @@ export class Decimal {
       return 'Number must include at least 1 digit';
     }
 
-    if (n > 0) {
-      data.push(n);
-    }
+    data.push(n);
 
     this.data = data;
     this.sign = sign === -1 ? -1 : 1;

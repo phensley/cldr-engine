@@ -275,11 +275,12 @@ const addhelper = (u: number[], j: number, v: number[], m: number, n: number): v
 };
 
 /**
- * Starting at the end of the array, remove contiguous zeros.
+ * Starting at the end of the array, remove all contiguous zeros except
+ * the last.
  */
 export const trimLeadingZeros = (data: number[]): void => {
   let i = data.length - 1;
-  while (i >= 0 && data[i] === 0) {
+  while (i > 0 && data[i] === 0) {
     data.pop();
     i--;
   }

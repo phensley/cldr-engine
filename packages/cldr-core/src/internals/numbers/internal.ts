@@ -32,6 +32,12 @@ import { pluralRules } from '@phensley/plurals';
 const ADJUST_PATTERN = parseNumberPattern('0')[0];
 
 /**
+ * If n is zero check if it is signed and return abs.
+ */
+const negzero = (n: Decimal, show?: boolean) =>
+  !show && n.isZero() && n.isNegative() ? n.abs() : n;
+
+/**
  * Number internal engine singleton, shared across all locales.
  */
 export class NumberInternalsImpl implements NumberInternals {
@@ -116,6 +122,8 @@ export class NumberInternalsImpl implements NumberInternals {
           [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
         }
 
+        q2 = negzero(q2, options.negativeZero);
+
         // Compute the plural category for the final q2.
         plural = pluralRules.cardinal(bundle.language(), q2) as PluralType;
 
@@ -125,6 +133,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
         // Re-select pattern as number may have changed sign due to rounding.
         const pattern = this.getNumberPattern(raw, q2.isNegative());
+
         result = renderer.render(q2, pattern, '', '', '', ctx.minInt, options.group);
         break;
       }
@@ -152,6 +161,7 @@ export class NumberInternalsImpl implements NumberInternals {
         const ctx = new NumberContext(options, round, false, false, -1);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
+        n = negzero(n, options.negativeZero);
         plural = pluralRules.cardinal(bundle.language(), n) as PluralType;
 
         // Re-select pattern as number may have changed sign due to rounding.
@@ -168,6 +178,7 @@ export class NumberInternalsImpl implements NumberInternals {
         const ctx = new NumberContext(options, round, false, false, -1);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
+        n = negzero(n, options.negativeZero);
         plural = pluralRules.cardinal(bundle.language(), n) as PluralType;
 
         // Re-select pattern as number may have changed sign due to rounding.
@@ -182,15 +193,17 @@ export class NumberInternalsImpl implements NumberInternals {
       const ctx = new NumberContext(options, round, false, true, -1);
       const latnSciFormat = latnInfo.scientificFormat;
       const format = sciFormat.get(bundle) || latnSciFormat.get(bundle);
-      const pattern = this.getNumberPattern(format, n.isNegative());
+      let pattern = this.getNumberPattern(format, n.isNegative());
 
       ctx.setPattern(pattern, true);
       n = ctx.adjust(n, true);
+      n = negzero(n, options.negativeZero !== false);
+
+      pattern = this.getNumberPattern(format, n.isNegative());
 
       // Split number into coeffcient and exponent
       const [coeff, exponent] = n.scientific(ctx.minInt || 1);
       const adjcoeff = ctx.adjust(coeff, true);
-
       result = renderer.render(adjcoeff, pattern, '', '', '', 1, false, exponent);
       break;
     }
@@ -243,6 +256,7 @@ export class NumberInternalsImpl implements NumberInternals {
         const ctx = new NumberContext(options, round, false, false, fractions.digits);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
+        n = negzero(n, false);
 
         // Re-select pattern as number may have changed sign due to rounding.
         pattern = this.getNumberPattern(raw, n.isNegative());
@@ -277,6 +291,7 @@ export class NumberInternalsImpl implements NumberInternals {
         } else {
           [q2, ndigits] = this.setupCompact(bundle, n, ctx, standardRaw, patternImpl);
         }
+        q2 = negzero(q2, false);
 
         // Compute the plural category for the final q2.
         const plural = pluralRules.cardinal(bundle.language(), q2) as PluralType;
@@ -307,6 +322,7 @@ export class NumberInternalsImpl implements NumberInternals {
         const ctx = new NumberContext(options, round, false, false, fractions.digits);
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
+        n = negzero(n, false);
 
         // Re-select pattern as number may have changed sign due to rounding.
         pattern = this.getNumberPattern(raw, n.isNegative());

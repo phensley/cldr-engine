@@ -26,8 +26,20 @@ test('zeros', () => {
   s = api.formatDecimal('0');
   expect(s).toEqual('0');
 
-  s = api.formatDecimal('0', { minimumFractionDigits: 2});
+  s = api.formatDecimal('-0.00');
+  expect(s).toEqual('0');
+
+  s = api.formatDecimal('-0.00', { negativeZero: true });
+  expect(s).toEqual('-0');
+
+  s = api.formatDecimal('0', { minimumFractionDigits: 2 });
   expect(s).toEqual('0.00');
+
+  s = api.formatDecimal('-0.00', { minimumFractionDigits: 2 });
+  expect(s).toEqual('0.00');
+
+  s = api.formatDecimal('-0.00', { minimumFractionDigits: 2, negativeZero: true });
+  expect(s).toEqual('-0.00');
 });
 
 test('decimals unknown style', () => {
@@ -175,6 +187,18 @@ test('significant digits', () => {
 
   s = api.formatDecimal('101599.99', { maximumSignificantDigits: 3, round: 'half-even' });
   expect(s).toEqual('102,000');
+});
+
+test('negative zero', () => {
+  const api = numbersApi('en');
+  const opts: DecimalFormatOptions = { style: 'long', maximumFractionDigits: 0, round: 'ceiling' };
+  let s: string;
+
+  s = api.formatDecimal('-0.999', opts);
+  expect(s).toEqual('0');
+
+  s = api.formatDecimal('-0.999', { ...opts, negativeZero: true });
+  expect(s).toEqual('-0');
 });
 
 test('decimal compact', () => {
@@ -364,6 +388,17 @@ test('decimal scientific', () => {
   opts = { style: 'scientific', minimumFractionDigits: 3 };
   s = api.formatDecimal('12.3456', opts);
   expect(s).toEqual('1.235E+1');
+});
+
+test('decimal scientific negative zero', () => {
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatDecimal('-0', { style: 'scientific' });
+  expect(s).toEqual('-0');
+
+  s = api.formatDecimal('-0', { style: 'scientific', negativeZero: false });
+  expect(s).toEqual('0');
 });
 
 test('decimal rounding', () => {
