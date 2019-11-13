@@ -188,6 +188,13 @@ export class Decimal {
   }
 
   /**
+   * Return the raw internal properties of the number. Use with caution.
+   */
+  properties(): [number[], number, number, number] {
+    return [this.data, this.sign, this.exp, this.flag];
+  }
+
+  /**
    * Return the absolute value of the number.
    */
   abs(): Decimal {

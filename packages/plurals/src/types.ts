@@ -165,8 +165,8 @@ export class PluralExpr {
 
   readonly operand: Operand;
   readonly operator: string;
-  readonly mod?: Decimal;
-  readonly ranges: (Decimal | Decimal[])[];
+  readonly mod?: number;
+  readonly ranges: (number | number[])[];
 
   constructor(raw: string) {
     this.operand = raw[0] as Operand;
@@ -204,12 +204,12 @@ export class PluralExpr {
       i++;
     }
     if (mod) {
-      this.mod = new Decimal(mod);
+      this.mod = mod;
     }
 
     raw = raw.substring(i);
     this.ranges = raw ? raw.split(',')
-      .map(s => s.indexOf(':') === -1 ? new Decimal(s) : s.split(':').map(x => new Decimal(x))) : [];
+      .map(s => s.indexOf(':') === -1 ? Number(s) : s.split(':').map(x => Number(x))) : [];
   }
 }
 
@@ -219,24 +219,26 @@ export const evaluateExpr = (operands: NumberOperands, expr: PluralExpr): boolea
     return false;
   }
 
-  let n: Decimal = operands[operand];
-
-  if (expr.mod) {
-    n = n.divmod(expr.mod)[1];
-  }
+  let n: number = operands[operand];
 
   // The N = X..Y syntax means N matches an integer from X to Y inclusive
-  const integer = n.isInteger();
+  // Operand 'n' must always be compared as an integer, so if it has any non-zero decimal
+  // parts we must set integer = false.
+  const integer = operand === 'n' ? operands.w === 0 : true;
+
+  if (expr.mod) {
+    n = n % expr.mod;
+  }
 
   const equals = expr.operator !== '!';
   const len = ranges.length;
   let res = false;
   for (let i = 0; i < len; i++) {
     const elem = ranges[i];
-    if (elem instanceof Decimal) {
-      res = res || n.compare(elem) === 0;
+    if (typeof elem === 'number') {
+      res = res || (integer && n === elem);
     } else {
-      res = res || (integer && n.compare(elem[0]) >= 0 && n.compare(elem[1]) <= 0);
+      res = res || (integer && elem[0] <= n && n <= elem[1]);
     }
   }
   return equals ? res : !res;
