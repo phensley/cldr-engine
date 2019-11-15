@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.23.0]
+### Fixed/Changed
+ - Support for negative zero in `@phensley/decimal`
+ - Added option for formatting negative zero
+ - Improvements to plural number operands calculations
+ - Faster plural calculations
+
 ## [0.22.3]
 ### Added
  - Exported `MessageFormatter` and `MessageFormatterOptions` from top-level packages
