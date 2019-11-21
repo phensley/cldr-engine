@@ -28,14 +28,14 @@ const PRIVATEUSE_PREFIX = /^x$/i;
 const PRIVATEUSE_SUBTAG = /^[\da-z]{1,8}$/i;
 
 // https://www.unicode.org/reports/tr35/tr35-33/tr35.html#Key_And_Type_Definitions_
-const UNICODE_EXTENSION_KEYS: { [x: string]: number } = {
-  ca: 1, // calendar
-  co: 1, // collation
-  cu: 1, // currency
-  nu: 1, // numbering system
-  tz: 1, // timezone
-  va: 1  // common variant type
-};
+const UNICODE_EXTENSION_KEYS: Set<string> = new Set([
+  'ca', // calendar
+  'co', // collation
+  'cu', // currency
+  'nu', // numbering system
+  'tz', // timezone
+  'va'  // common variant type
+]);
 
 // Grandfathered irregular and regular tags from IANA registry.
 let GRANDFATHERED_TAGS: { [x: string]: string } | undefined;
@@ -110,10 +110,10 @@ class LanguageTagParser {
     this.parsePrivateUse(parts);
 
     // If no region was parsed, check if one of the extlangs is actually a valid ISO 3166
-    if (this.region === undefined) {
+    if (!this.region) {
       for (let i = 0; i < this.extlangs.length; i++) {
         const replacement = replaceRegion(this.extlangs[i].toUpperCase());
-        if (replacement !== undefined) {
+        if (replacement) {
           this.region = replacement;
           // Ignore the extlangs since we currently don't add them to the LanguageTag.
           break;
@@ -133,13 +133,13 @@ class LanguageTagParser {
 
   private parseLanguage(parts: string[]): boolean {
     this.language = match(parts, LANGUAGE);
-    return this.language !== undefined;
+    return !!this.language;
   }
 
   private parseExtLangs(parts: string[]): boolean {
     while (parts.length !== 0) {
       const result = match(parts, EXTLANG);
-      if (result === undefined) {
+      if (!result) {
         break;
       }
       this.extlangs.push(result);
@@ -149,18 +149,18 @@ class LanguageTagParser {
 
   private parseScript(parts: string[]): boolean {
     this.script = match(parts, SCRIPT);
-    return this.script !== undefined;
+    return !!this.script;
   }
 
   private parseRegion(parts: string[]): boolean {
     this.region = match(parts, REGION);
-    return this.region !== undefined;
+    return !!this.region;
   }
 
   private parseVariants(parts: string[]): boolean {
     while (parts.length > 0) {
       const result = match(parts, VARIANT);
-      if (result === undefined) {
+      if (!result) {
         break;
       }
       this.variants.push(result);
@@ -172,7 +172,7 @@ class LanguageTagParser {
     let parsed = false;
     while (parts.length > 0) {
       const prefix = match(parts, EXTENSION_PREFIX);
-      if (prefix === undefined) {
+      if (!prefix) {
         break;
       }
 
@@ -180,11 +180,11 @@ class LanguageTagParser {
       let temp = '';
       while (parts.length > 0) {
         const subtag = match(parts, EXTENSION_SUBTAG);
-        if (subtag === undefined) {
+        if (!subtag) {
           break;
         }
 
-        if (UNICODE_EXTENSION_KEYS[subtag] !== 1) {
+        if (!UNICODE_EXTENSION_KEYS.has(subtag)) {
           temp += temp ? SEP + subtag : subtag;
           continue;
         }
@@ -214,13 +214,13 @@ class LanguageTagParser {
     let parsed = false;
     while (parts.length > 0) {
       const prefix = match(parts, PRIVATEUSE_PREFIX);
-      if (prefix === undefined) {
+      if (!prefix) {
         break;
       }
       const subs = [];
       while (parts.length > 0) {
         const subtag = match(parts, PRIVATEUSE_SUBTAG);
-        if (subtag === undefined) {
+        if (!subtag) {
           break;
         }
         subs.push(subtag);
