@@ -62,7 +62,7 @@ def main():
 
             # sort by gzip size descending
             files = sorted(((uglify(p), p) for p in jsfiles),
-              key=lambda a: a[0][1], reverse=1)
+              key=lambda a: a[0][0], reverse=1)
             for f in files:
                 data, p = f
                 raw, z, _ = data
