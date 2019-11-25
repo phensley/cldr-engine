@@ -6,8 +6,12 @@ import { MessageArg, MessageEngine, MessageFormatFuncMap, MessageNamedArgs } fro
 const DEFAULT_CACHE_SIZE = 100;
 
 export interface MessageFormatterOptions {
-  language: string;
+  language?: string;
   region?: string;
+
+  // The plural rules you want to use. Otherwise it will be selected
+  // using the language + region.
+  plurals?: PluralRules;
   formatters?: MessageFormatFuncMap;
   cacheSize?: number;
 }
@@ -22,9 +26,9 @@ export class MessageFormatter {
   private matcher: MessageMatcher;
   private cache: Cache<MessageCode>;
 
-  constructor(options: MessageFormatterOptions = { language: 'root' }) {
+  constructor(options: MessageFormatterOptions = { }) {
     this.formatters = options.formatters || {};
-    this.plurals = pluralRules.get(options.language, options.region);
+    this.plurals = options.plurals || pluralRules.get(options.language || 'root', options.region);
     const size = options.cacheSize || DEFAULT_CACHE_SIZE;
     this.matcher = buildMessageMatcher(Object.keys(this.formatters));
     this.cache = new Cache<MessageCode>(s => parseMessagePattern(s, this.matcher), size);
