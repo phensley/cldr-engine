@@ -22,7 +22,6 @@ import {
   NumberInternals,
   NumberRenderer,
 } from '../internals';
-import { pluralRules } from '@phensley/plurals';
 // import { AlgorithmicNumberingSystems } from '../systems';
 
 const DEFAULT_CURRENCY_OPTIONS: CurrencyDisplayNameOptions = { context: 'begin-sentence' };
@@ -73,12 +72,12 @@ export class NumbersImpl implements Numbers {
 
   getPluralCardinal(n: DecimalArg, options?: DecimalAdjustOptions): string {
     const d = options ? this.adjustDecimal(n, options) : coerceDecimal(n);
-    return pluralRules.cardinal(this.bundle.language(), d);
+    return this.bundle.plurals().cardinal(d);
   }
 
   getPluralOrdinal(n: DecimalArg, options?: DecimalAdjustOptions): string {
     const d = options ? this.adjustDecimal(n, options) : coerceDecimal(n);
-    return pluralRules.ordinal(this.bundle.language(), d);
+    return this.bundle.plurals().ordinal(d);
   }
 
   formatDecimal(n: DecimalArg, options?: DecimalFormatOptions): string {

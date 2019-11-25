@@ -31,5 +31,8 @@ test('rule compact', () => {
   const rule = 'v = 0 and i % 10 = 1 or v % 10 = 2,3..6 @integer 1, 21, 31';
   const result = parsePluralRule(rule);
   const { _1 } = result.get();
-  expect(_1.compact()).toEqual('v0:0&i10:1|v10:2,3:6');
+  expect(_1.compact()).toEqual([
+    [['v', 0, 1, [0]], ['i', 10, 1, [1]]],
+    [['v', 10, 1, [2, [3, 6]]]]
+  ]);
 });

@@ -1,4 +1,5 @@
 import { PrimitiveBundle } from '@phensley/cldr-types';
+import { pluralRules, PluralRules } from '@phensley/plurals';
 import { LanguageTag } from '../locale';
 
 export type ExceptionIndex = { [y: number]: number };
@@ -10,6 +11,7 @@ export interface Bundle extends PrimitiveBundle {
   languageScript(): string;
   languageRegion(): string;
   spellout(): any;
+  plurals(): PluralRules;
 }
 
 export class StringBundle implements Bundle {
@@ -24,6 +26,9 @@ export class StringBundle implements Bundle {
   private _calendarSystem: string = '';
   private _numberSystem: string = 'default';
 
+  // Plural rules are used in many places, so provide them on the bundle
+  private _plurals: PluralRules;
+
   constructor(
     readonly _id: string,
     readonly _tag: LanguageTag,
@@ -35,6 +40,7 @@ export class StringBundle implements Bundle {
     const language = _tag.language();
     this._languageRegion = `${language}-${_tag.region()}`;
     this._languageScript = `${language}-${_tag.script()}`;
+    this._plurals = pluralRules.get(language, _tag.region());
 
     // When bundle is constructed, see if there are unicode extensions for
     // number and calendar systems.
@@ -97,5 +103,12 @@ export class StringBundle implements Bundle {
    */
   spellout(): any {
     return this._spellout;
+  }
+
+  /**
+   * Plural rules for cardinals and ordinals for this locale.
+   */
+  plurals(): PluralRules {
+    return this._plurals;
   }
 }

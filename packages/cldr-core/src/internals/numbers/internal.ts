@@ -27,7 +27,6 @@ import { getCurrencyFractions } from './util';
 import { Bundle } from '../../resource';
 import { Internals, NumberInternals, NumberRenderer } from '../../internals/internals';
 import { PartsNumberFormatter, StringNumberFormatter } from './render';
-import { pluralRules } from '@phensley/plurals';
 
 const ADJUST_PATTERN = parseNumberPattern('0')[0];
 
@@ -102,6 +101,8 @@ export class NumberInternalsImpl implements NumberInternals {
     const latnDecimalFormats = latnInfo.decimalFormats;
     const standardRaw = decimalFormats.standard.get(bundle) || latnDecimalFormats.standard.get(bundle);
 
+    const plurals = bundle.plurals();
+
     switch (style) {
       case 'long':
       case 'short': {
@@ -125,7 +126,7 @@ export class NumberInternalsImpl implements NumberInternals {
         q2 = negzero(q2, options.negativeZero);
 
         // Compute the plural category for the final q2.
-        plural = pluralRules.cardinal(bundle.language(), q2) as PluralType;
+        plural = plurals.cardinal(q2) as PluralType;
 
         // Select the final pluralized compact pattern based on the integer
         // digits of n and the plural category of the rounded / shifted number q2.
@@ -162,7 +163,7 @@ export class NumberInternalsImpl implements NumberInternals {
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         n = negzero(n, options.negativeZero);
-        plural = pluralRules.cardinal(bundle.language(), n) as PluralType;
+        plural = plurals.cardinal(n) as PluralType;
 
         // Re-select pattern as number may have changed sign due to rounding.
         pattern = this.getNumberPattern(raw, n.isNegative());
@@ -179,7 +180,7 @@ export class NumberInternalsImpl implements NumberInternals {
         ctx.setPattern(pattern);
         n = ctx.adjust(n);
         n = negzero(n, options.negativeZero);
-        plural = pluralRules.cardinal(bundle.language(), n) as PluralType;
+        plural = plurals.cardinal(n) as PluralType;
 
         // Re-select pattern as number may have changed sign due to rounding.
         pattern = this.getNumberPattern(standardRaw, n.isNegative());
@@ -245,6 +246,8 @@ export class NumberInternalsImpl implements NumberInternals {
     // Some locales have a special decimal symbol for certain currencies, e.g. pt-PT and PTE
     const decimal = this.currencies.decimal.get(bundle, code as CurrencyType) || '';
 
+    const plurals = bundle.plurals();
+
     switch (style) {
 
       case 'code':
@@ -263,7 +266,7 @@ export class NumberInternalsImpl implements NumberInternals {
         const num = renderer.render(n, pattern, '', '', decimal, ctx.minInt, options.group);
 
         // Compute plural category and select pluralized unit.
-        const plural = pluralRules.cardinal(bundle.language(), n) as PluralType;
+        const plural = plurals.cardinal(n) as PluralType;
         const unit = style === 'code' ? code : this.getCurrencyPluralName(bundle, code, plural);
 
         // Wrap number and unit together.
@@ -294,7 +297,7 @@ export class NumberInternalsImpl implements NumberInternals {
         q2 = negzero(q2, false);
 
         // Compute the plural category for the final q2.
-        const plural = pluralRules.cardinal(bundle.language(), q2) as PluralType;
+        const plural = plurals.cardinal(q2) as PluralType;
 
         // Select the final pluralized compact pattern based on the integer
         // digits of n and the plural category of the rounded / shifted number q2.

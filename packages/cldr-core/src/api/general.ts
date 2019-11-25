@@ -74,7 +74,8 @@ export class GeneralImpl implements General {
   }
 
   messageFormatter(options?: MessageFormatterOptions): MessageFormatter {
-    return new MessageFormatter(this._bundle.language(), options);
+    const plurals = this._bundle.plurals();
+    return new MessageFormatter({ ...options, plurals });
   }
 
   measurementSystem(category?: MeasurementCategory): MeasurementSystem {
