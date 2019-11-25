@@ -25,12 +25,14 @@ export const getPlurals = (data: any): Code[] => {
   const result: Code[] = [];
 
   const { cardinals, ordinals, expressions, samples } = data;
-  const type = '{ [x: string]: string }';
 
   let code = HEADER;
+  code += "import { Expr, Rule } from './types';\n\n";
+
+  const type = '{ [x: string]: Rule[] }';
   code += formatSource(`export const cardinalRules: ${type} = ${JSON.stringify(cardinals)};\n\n`);
   code += formatSource(`export const ordinalRules: ${type} = ${JSON.stringify(ordinals)};\n\n`);
-  code += formatSource(`export const expressions: string[] = ${JSON.stringify(expressions)};\n`);
+  code += formatSource(`export const expressions: Expr[] = ${JSON.stringify(expressions)};\n`);
 
   result.push(Code.plurals(['autogen.rules.ts'], code));
 

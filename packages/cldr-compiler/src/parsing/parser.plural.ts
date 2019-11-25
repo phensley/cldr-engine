@@ -5,14 +5,28 @@ import { matcher } from './parser';
 
 export type RangeList = Array<number | Range>;
 
+export interface CompactRange {
+  [0]: number;
+  [1]: number;
+}
+
 export class Range {
   constructor(
     public start: number,
     public end: number) {}
 
-  compact(): string {
-    return `${this.start}:${this.end}`;
+  compact(): CompactRange {
+    return [this.start, this.end];
   }
+}
+
+export type CompactRangeList = Array<number | CompactRange>;
+
+export interface CompactExpr {
+  [0]: string;
+  [1]: number;
+  [2]: number;
+  [3]: CompactRangeList;
 }
 
 export class Expr {
@@ -22,27 +36,31 @@ export class Expr {
     public relop: string,
     public rangelist: RangeList) {}
 
-  compact(): string {
-    const rangelist = this.rangelist.map(e => typeof e === 'number' ? e : e.compact()).join(',');
-    return `${this.operand}${this.modop}${this.relop === '=' ? '' : '!'}:${rangelist}`;
+  compact(): CompactExpr {
+    const rangelist = this.rangelist.map(e => typeof e === 'number' ? e : e.compact());
+    return [this.operand, this.modop, Number(this.relop === '='), rangelist];
   }
 }
+
+export type CompactAndCondition = Array<CompactExpr>;
 
 export class AndCondition {
   constructor(
     public expressions: Array<Expr>) {}
 
-  compact(): string {
-    return `${this.expressions.map(e => e.compact()).join('&')}`;
+  compact(): CompactAndCondition {
+    return this.expressions.map(e => e.compact());
   }
 }
+
+export type CompactOrCondition = Array<CompactAndCondition>;
 
 export class OrCondition {
   constructor(
     public and: Array<AndCondition>) {}
 
-  compact(): string {
-    return `${this.and.map(a => a.compact()).join('|')}`;
+  compact(): CompactOrCondition {
+    return this.and.map(c => c.compact());
   }
 }
 
@@ -51,7 +69,7 @@ export class Rule {
     public or: OrCondition,
     public samples: string) {}
 
-  compact(): string {
+  compact(): CompactOrCondition {
     return this.or.compact();
   }
 }

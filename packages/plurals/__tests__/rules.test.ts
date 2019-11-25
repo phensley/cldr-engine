@@ -2,11 +2,12 @@ import { Decimal } from '@phensley/decimal';
 import { pluralRules } from '../src';
 
 test('missing rules', () => {
+  const rules = pluralRules.get('xyz');
   const n = new Decimal('12345.678');
 
-  let cat = pluralRules.cardinal('xyz', n);
+  let cat = rules.cardinal(n);
   expect(cat).toEqual('other');
 
-  cat = pluralRules.ordinal('xyz', n);
+  cat = rules.ordinal(n);
   expect(cat).toEqual('other');
 });

@@ -16,7 +16,7 @@ interface Group {
 
 SAMPLES.forEach(line => {
   line = line.trim();
-  if (!line) {
+  if (!line || line[0] === '#') {
     return;
   }
   const [typ, lang, category, _samples] = line.split(/\s+/);
@@ -31,8 +31,9 @@ SAMPLES.forEach(line => {
 expect.extend({
   toHaveCategory: (sample: string, typ: string, lang: string, expected: string) => {
     const n = new Decimal(sample);
-    const actual = typ === 'cardinals' ?
-      pluralRules.cardinal(lang, n) : pluralRules.ordinal(lang, n);
+    const [language, region] = lang.split('-');
+    const rules = pluralRules.get(language, region);
+    const actual = typ === 'cardinals' ? rules.cardinal(n) : rules.ordinal(n);
     const msg = (pass: boolean) => () =>
       `Expected language "${lang}" number "${sample}" ${pass ? 'not ' : ''}to have ${typ} category "${expected}" but got "${actual}"`;
 

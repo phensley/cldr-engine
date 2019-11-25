@@ -51,6 +51,8 @@ const LIMIT = 10000000000000;
 
 const FIELDS: (keyof NumberOperands)[] = ['n', 'i', 'v', 'w', 'f', 't'];
 
+export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
+
 /**
  * Operands for use in evaluating localized plural rules:
  * See: http://www.unicode.org/reports/tr35/tr35-numbers.html#Plural_Operand_Meanings

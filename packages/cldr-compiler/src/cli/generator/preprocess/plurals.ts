@@ -1,14 +1,14 @@
 import { getSupplemental } from '../../../cldr';
-import { parsePluralRule } from '../../../parsing/parser.plural';
+import { parsePluralRule, CompactOrCondition } from '../../../parsing/parser.plural';
 
 // Single-character ids for the plural categories.
 const categories: any = {
-  zero: 'A',
-  one: 'B',
-  two: 'C',
-  few: 'D',
-  many: 'E',
-  other: 'F',
+  zero: 0,
+  one: 1,
+  two: 2,
+  few: 3,
+  many: 4,
+  other: 5,
 };
 
 type StringMap = { [x: string]: string };
@@ -19,7 +19,8 @@ let sequence = 0;
 // Expressions mapped to unique identifiers.
 const expressions: { [x: string]: number } = {};
 
-const exprId = (e: string): number => {
+const exprId = (o: any): number => {
+  const e = JSON.stringify(o);
   let id = expressions[e];
   if (id === undefined) {
     id = sequence++;
@@ -28,7 +29,7 @@ const exprId = (e: string): number => {
   return id;
 };
 
-const parseRule = (lang: string, category: string, raw: string): string => {
+const parseRule = (lang: string, category: string, raw: string): CompactOrCondition => {
   const result = parsePluralRule(raw);
   if (result.isNothing()) {
     throw new Error(`Failure to parse plural rule for ${lang} key ${category}: ${raw}`);
@@ -38,17 +39,14 @@ const parseRule = (lang: string, category: string, raw: string): string => {
 };
 
 const parseRules = (pluralSet: any): StringMap => {
-  const map: StringMap = {};
+  const map: { [k: string]: any } = {};
   Object.keys(pluralSet).forEach(lang => {
     const obj = pluralSet[lang];
-    map[lang] = Object.keys(obj).map(k => {
+    map[lang] = Object.keys(obj).filter(k => k.split('-')[2] !== 'other').map(k => {
       const code = categories[k.split('-')[2]];
       const json = parseRule(lang, k, obj[k]);
-      return code + '|' + json.split('|').map(c => {
-        // Replace expression with its unique id.
-        return c.split('&').map(exprId).join('&');
-      }).join('|');
-    }).sort().join('_');
+      return [code, json.map(c => c.map(exprId))];
+    });
   });
   return map;
 };
@@ -87,7 +85,7 @@ export const getPlurals = (): any => {
   return {
     cardinals,
     ordinals,
-    expressions: exprs,
+    expressions: exprs.map(e => JSON.parse(e)),
     samples
   };
 };
