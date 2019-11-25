@@ -29,6 +29,9 @@ jobs:
         run: |
           yarn
           yarn clean
+
+      - name: Lint
+        run: |
           yarn lint
           yarn api
 
