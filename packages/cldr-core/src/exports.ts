@@ -51,5 +51,8 @@ export {
 } from '@phensley/messageformat';
 
 export {
-  NumberOperands
+  pluralRules,
+  NumberOperands,
+  Plurals,
+  PluralRules
 } from '@phensley/plurals';

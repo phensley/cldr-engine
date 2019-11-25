@@ -1,6 +1,7 @@
 export {
   buildMessageMatcher,
   parseMessagePattern,
+  pluralRules,
   BuddhistDate,
   Bundle,
   Calendars,
@@ -70,6 +71,8 @@ export {
   Pack,
   Part,
   PersianDate,
+  Plurals,
+  PluralRules,
   Quantity,
   Rational,
   RationalArg,
