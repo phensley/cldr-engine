@@ -1,10 +1,11 @@
 name: Build and Test
 
 on:
-  push:
-    branches:
-     - actions
-     - master
+  push
+
+    # branches:
+    #  - actions
+    #  - master
 
 jobs:
   build:
