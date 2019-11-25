@@ -7,6 +7,7 @@ import {
   MessageNamedArgs,
   StickyMatcher
 } from '../src';
+import { pluralRules } from '@phensley/plurals';
 
 const CUSTOM = {
   foo: (args: MessageArg[], _options: string[]) => `foo args ${JSON.stringify(args)}`,
@@ -19,8 +20,10 @@ const matcher = () => new StickyMatcher(CUSTOM_NAMES, stickyRegexp);
 
 const parse = (s: string) => parseMessagePattern(s, matcher());
 
-const evaluate = (lang: string, code: MessageCode, positional: MessageArg[], named?: MessageNamedArgs) =>
-  new MessageEngine(lang, CUSTOM, code).evaluate(positional, named);
+const evaluate = (lang: string, code: MessageCode, positional: MessageArg[], named?: MessageNamedArgs) => {
+  const plurals = pluralRules.get(lang);
+  return new MessageEngine(plurals, CUSTOM, code).evaluate(positional, named);
+};
 
 test('basic message evaluation', () => {
   let c: MessageCode;
@@ -45,7 +48,7 @@ test('undefined formatter', () => {
   const m = new StickyMatcher(['baz'], stickyRegexp);
   const code = parseMessagePattern(message, m);
 
-  const engine = new MessageEngine('en', {}, code);
+  const engine = new MessageEngine(pluralRules.get('en'), {}, code);
   expect(engine.evaluate([123])).toEqual('');
 });
 

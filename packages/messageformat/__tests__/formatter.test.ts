@@ -6,7 +6,7 @@ const formatters = {
 };
 
 test('basic formatter', () => {
-  const f = new MessageFormatter('en', { formatters });
+  const f = new MessageFormatter({ language: 'en', formatters });
 
   expect(f.format('{0}', ['Hello'], {})).toEqual('Hello');
   expect(f.format('{0 foo upper}', ['Hello'], {})).toEqual('HELLO');

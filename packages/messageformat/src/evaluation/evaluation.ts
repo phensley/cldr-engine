@@ -1,5 +1,5 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-import { pluralRules } from '@phensley/plurals';
+import { PluralRules } from '@phensley/plurals';
 import { asdecimal, asstring, MessageArg, MessageArgs, MessageNamedArgs } from './args';
 import {
   MessageCode,
@@ -33,7 +33,7 @@ export class MessageEngine {
   private buf: string = '';
 
   constructor(
-    private language: string,
+    private plurals: PluralRules,
     private formatters: MessageFormatFuncMap,
     private code: MessageCode) { }
 
@@ -70,8 +70,8 @@ export class MessageEngine {
         const num = asdecimal(arg);
         argsub = offset ? num.subtract(offset) : num;
         const category = code[3] === PluralNumberType.CARDINAL ?
-          pluralRules.cardinal(this.language, argsub) :
-          pluralRules.ordinal(this.language, argsub);
+          this.plurals.cardinal(argsub) :
+          this.plurals.ordinal(argsub);
 
         let other: MessageCode | undefined;
         let found = 0;
