@@ -1,6 +1,6 @@
 {
   "name": "@phensley/messageformat",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "description": "Extensible ICU message formatter",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -34,9 +34,9 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-utils": "0.23.0",
-    "@phensley/decimal": "0.23.0",
-    "@phensley/plurals": "0.23.0",
+    "@phensley/cldr-utils": "0.24.0",
+    "@phensley/decimal": "0.24.0",
+    "@phensley/plurals": "0.24.0",
     "tslib": "1.10.x"
   },
   "devDependencies": {
