@@ -7,6 +7,7 @@ Compact and extensible ICU message formatter with built-in support for `plural`,
 #### Setup
 
 ```typescript
+import { pluralRules } from '@phensley/plurals';
 import {
   buildMessageMatcher,
   parseMessagePattern,
@@ -30,8 +31,11 @@ const parse = (message: string) => parseMessagePattern(message, MATCHER);
 const dump = (message: string) =>
   console.log(JSON.stringify(parse(message)));
 
+const plurals = (language: string, region?: string) =>
+  pluralRules.get(language, region);
+
 const format = (message: string, positional: MessageArg[], named: MessageNamedArgs = {}) => {
-  const engine = new MessageEngine('en', FORMATTERS, parse(message));
+  const engine = new MessageEngine(plurals('en'), FORMATTERS, parse(message));
   console.log(engine.evaluate(positional, named));
 };
 
@@ -62,7 +66,8 @@ dump('{word} uppercase = {word foo upper} lowercase = {word foo lower}');
 If you don't need to embed parsed messages into source code, the `MessageFormatter` can parse and cache messages at runtime. Internally it uses a least-recently-used cache whose size can be configured.
 
 ```typescript
-const formatter = new MessageFormatter('en', { formatters: FORMATTERS, cacheSize: 100 });
+const rules = plurals('en');
+const formatter = new MessageFormatter({ plurals: rules, formatters: FORMATTERS, cacheSize: 100 });
 msg = '{0 select, male {his} female {her} other {their}} {item}';
 console.log(formatter.format(msg, ['female'], { item: 'parka' }));
 ```
