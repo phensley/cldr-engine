@@ -1,5 +1,5 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-import { pluralRules } from '@phensley/plurals';
+import { PluralRules } from '@phensley/plurals';
 import {
   ApplyLeft2NumFormatInst,
   ApplyLeft2RuleInst,
@@ -51,7 +51,7 @@ export class RBNF {
   protected numbers: Decimal[];
   protected locales: Map<string, RBNFSet> = new Map<string, RBNFSet>();
 
-  constructor(spellout: any) {
+  constructor(protected plurals: PluralRules, spellout: any) {
     const { locales, symbols, numbers } = spellout;
     this.symbols = symbols ? symbols.split('_') : [];
     this.numbers = numbers ? numbers.split('_').map((n: string) => new Decimal(n)) : [];
@@ -61,7 +61,7 @@ export class RBNF {
       const pub = _pub.split('_');
       // some rulesets have no private rules
       const prv = _prv.length ? _prv.split('_') : [];
-      this.locales.set(id, this.make(id, pub, prv, this.numbers, this.symbols, rulesets));
+      this.locales.set(id, this.make(id, plurals, pub, prv, this.numbers, this.symbols, rulesets));
     }
   }
 
@@ -69,9 +69,9 @@ export class RBNF {
    * Builds an RBNFSet instance, allowing overriding of construction in subclasses
    * (currently used for debugging).
    */
-  make(id: string, pub: string[], prv: string[],
+  make(id: string, plurals: PluralRules, pub: string[], prv: string[],
       numbers: Decimal[], symbols: string[], rulesets: RBNFRule[][]): RBNFSet {
-    return new RBNFSet(id, pub, prv, numbers, symbols, rulesets);
+    return new RBNFSet(id, plurals, pub, prv, numbers, symbols, rulesets);
   }
 
   /**
@@ -99,6 +99,7 @@ export class RBNFSet {
 
   constructor(
     readonly id: string,
+    readonly plurals: PluralRules,
     readonly pubnames: string[],
     readonly prvnames: string[],
     // Array of numbers used in rules
@@ -118,7 +119,7 @@ export class RBNFSet {
    * language, using the given rules.
    */
   format(rulename: string, symbols: RBNFSymbols, n: Decimal, fallback: RBNFDecimalFormatter): string {
-    return new RBNFEngine(this.language, symbols, this, fallback)
+    return new RBNFEngine(this.language, this.plurals, symbols, this, fallback)
       .format(rulename, n);
   }
 }
@@ -139,6 +140,7 @@ export class RBNFEngine {
 
   constructor(
     private language: string,
+    private plurals: PluralRules,
     // Decimal point character: 0 = period, 1 = comma
     private symbols: RBNFSymbols,
     protected rbnf: RBNFSet,
@@ -388,7 +390,7 @@ export class RBNFEngine {
 
   protected plural(n: Decimal, cardinal: boolean): number {
     const cat = cardinal ?
-      pluralRules.cardinal(this.language, n) : pluralRules.ordinal(this.language, n);
+      this.plurals.cardinal(n) : this.plurals.ordinal(n);
     return PLURALS[cat];
   }
 

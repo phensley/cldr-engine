@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 
 import { Decimal } from '@phensley/decimal';
+import { PluralRules } from '@phensley/plurals';
 import { Opcode, RuleType, RBNFInst, RBNFRule } from './rbnftypes';
 import {
   RBNF as RBNFBase,
@@ -28,13 +29,13 @@ export class RBNF extends RBNFBase {
 
   static settings: RBNFDebugSettings = {};
 
-  constructor(spellout: any) {
-    super(spellout);
+  constructor(plurals: PluralRules, spellout: any) {
+    super(plurals, spellout);
   }
 
-  make(id: string, pub: string[], prv: string[],
+  make(id: string, plurals: PluralRules, pub: string[], prv: string[],
       numbers: Decimal[], symbols: string[], rulesets: RBNFRule[][]): RBNFSetBase {
-    return new RBNFDebugSet(id, pub, prv, numbers, symbols, rulesets, RBNF.settings);
+    return new RBNFDebugSet(id, plurals, pub, prv, numbers, symbols, rulesets, RBNF.settings);
   }
 }
 
@@ -47,6 +48,7 @@ export class RBNFDebugSet extends RBNFSetBase {
 
   constructor(
     id: string,
+    plurals: PluralRules,
     pubnames: string[],
     prvnames: string[],
     numbers: Decimal[],
@@ -54,11 +56,11 @@ export class RBNFDebugSet extends RBNFSetBase {
     rulesets: RBNFRule[][],
     private settings: RBNFDebugSettings
   ) {
-    super(id, pubnames, prvnames, numbers, symbols, rulesets);
+    super(id, plurals, pubnames, prvnames, numbers, symbols, rulesets);
   }
 
   format(rulename: string, symbols: RBNFSymbols, n: Decimal, fallback: RBNFDecimalFormatter): string {
-    return new RBNFDebugEngine(this.language, symbols, this, fallback, this.settings, this.coverage)
+    return new RBNFDebugEngine(this.language, this.plurals, symbols, this, fallback, this.settings, this.coverage)
       .format(rulename, n);
   }
 
@@ -113,13 +115,14 @@ class RBNFDebugEngine extends RBNFEngineBase {
 
   constructor(
     language: string,
+    plurals: PluralRules,
     symbols: RBNFSymbols,
     rbnf: RBNFSetBase,
     fallback: RBNFDecimalFormatter,
     private settings: RBNFDebugSettings,
     private coverage: Map<number, Set<number>>
   ) {
-    super(language, symbols, rbnf, fallback);
+    super(language, plurals, symbols, rbnf, fallback);
   }
 
   protected trace(...s: any[]): tracefunc {

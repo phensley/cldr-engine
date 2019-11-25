@@ -1,10 +1,11 @@
 import { Decimal } from '@phensley/decimal';
+import { pluralRules, PluralRules } from '@phensley/plurals';
 import { algorithmicNumbering } from './autogen.names';
 import { rbnfRulesets } from './autogen.rbnf';
 import { RBNF, RBNFDecimalFormatter, RBNFSet, RBNFSymbols } from './rbnf';
 
 const U = undefined;
-const ROOT = new RBNF(rbnfRulesets);
+const ROOT = new RBNF(pluralRules.get('root'), rbnfRulesets);
 const RBNFROOT = ROOT.get('root')!;
 
 export class AlgorithmicNumberingSystems {
@@ -12,8 +13,8 @@ export class AlgorithmicNumberingSystems {
   readonly rbnfset: RBNFSet | undefined;
   readonly rulenames: string[] = [];
 
-  constructor(spellout: any, ...ids: string[]) {
-    const rbnf = new RBNF(spellout);
+  constructor(plurals: PluralRules, spellout: any, ...ids: string[]) {
+    const rbnf = new RBNF(plurals, spellout);
 
     // Find the first defined system. This lets us check if a region-specific
     // system exists, falling back to the language-script.
