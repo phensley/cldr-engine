@@ -1,7 +1,7 @@
 
 import { Suite } from 'benchmark';
 import { makeSuite } from '../../../cldr-utils/__benchmarks__/util';
-
+import { pluralRules } from '@phensley/plurals';
 import {
   buildMessageMatcher,
   parseMessagePattern,
@@ -21,14 +21,16 @@ const MESSAGE = 'foo bar {0 plural one {# item} other {# items}} {1}';
 const MATCHER = buildMessageMatcher(Object.keys(FORMATTERS));
 const CODE = parseMessagePattern(MESSAGE, MATCHER);
 
-const FORMATTER = new MessageFormatter('en', { formatters: FORMATTERS });
+const FORMATTER = new MessageFormatter({ language: 'en', formatters: FORMATTERS });
+
+const PLURALS = pluralRules.get('en');
 
 messageSuite.add('parse', () => {
   parseMessagePattern(MESSAGE, MATCHER);
 });
 
 messageSuite.add('eval', () => {
-  new MessageEngine('en', FORMATTERS, CODE).evaluate([12, 'hello']);
+  new MessageEngine(PLURALS, FORMATTERS, CODE).evaluate([12, 'hello']);
 });
 
 messageSuite.add('formatter', () => {
