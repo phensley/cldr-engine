@@ -7,9 +7,14 @@ PACKAGES="
 @phensley/cldr
 @phensley/cldr-compiler
 @phensley/cldr-core
+@phensley/cldr-ext-rbnf
 @phensley/cldr-schema
+@phensley/cldr-types
 @phensley/cldr-utils
 @phensley/decimal
+@phensley/language-tag
+@phensley/locale
+@phensley/locale-matcher
 @phensley/messageformat
 @phensley/plurals
 @phensley/timezone
