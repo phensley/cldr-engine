@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.25.0]
+### Fixed/Changed
+ - Split locale-related code into 3 new packages which can be used independently of the main library:
+  - `@phensley/language-tag` implements BCP 47 language tag parsing and construction.
+  - `@phensley/locale` implements resolving of language tags by alias and likely subtags substitution.
+  - `@phensley/locale-matcher` implements distance based locale matching using the CLDR enhanced language matching algorithm.
+
 ## [0.24.0]
 ### Fixed/Changed
  - Improve `@phensley/plurals` and `@phensley/messageformat` APIs
@@ -340,6 +347,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.25.0]: https://github.com/phensley/cldr-engine/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/phensley/cldr-engine/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/phensley/cldr-engine/compare/v0.22.3...v0.23.0
 [0.22.3]: https://github.com/phensley/cldr-engine/compare/v0.22.2...v0.22.3
