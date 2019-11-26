@@ -159,7 +159,7 @@ export const getPartition = (data: any): Code[] => {
   code += `export const macroRegions = '${str}';\n`;
 
   return [
-    Code.core(['locale', 'autogen.partition.ts'], code),
+    Code.localematcher(['autogen.partition.ts'], code),
     Code.top(['notes', 'language-partition-table.txt'], table)
   ];
 };

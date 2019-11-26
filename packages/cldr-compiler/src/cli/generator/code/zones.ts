@@ -227,7 +227,7 @@ export const getZones = (data: any): Code[] => {
   code += data.metaZoneIds.join(' ');
   code += `').split(' ') as MetaZoneType[];\n`;
 
-  result.push(Code.schema(['schema', 'timezones', 'autogen.timezones.ts'], code));
+  result.push(Code.schema(['schema', 'autogen.timezones.ts'], code));
 
   // code += 'export const enum TimeZone {';
   // data.timeZoneIds.forEach((k: string) => {

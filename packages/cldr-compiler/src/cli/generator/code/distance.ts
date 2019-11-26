@@ -339,7 +339,7 @@ export const getDistance = (data: any): Code[] => {
   const table = distanceMap.toString();
 
   return [
-    Code.core(['locale', 'autogen.distance.ts'], code),
+    Code.localematcher(['autogen.distance.ts'], code),
     Code.top(['notes', 'language-distance-table.txt'], table)
   ];
 };

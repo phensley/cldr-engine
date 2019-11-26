@@ -26,6 +26,18 @@ export class Code {
     return new Code(['packages', 'cldr-core', 'src', ...path], source);
   }
 
+  static languagetag(path: string[], source: string): Code {
+    return new Code(['packages', 'language-tag', 'src', ...path], source);
+  }
+
+  static locale(path: string[], source: string): Code {
+    return new Code(['packages', 'locale', 'src', ...path], source);
+  }
+
+  static localematcher(path: string[], source: string): Code {
+    return new Code(['packages', 'locale-matcher', 'src', ...path], source);
+  }
+
   static plurals(path: string[], source: string): Code {
     return new Code(['packages', 'plurals', 'src', ...path], source);
   }

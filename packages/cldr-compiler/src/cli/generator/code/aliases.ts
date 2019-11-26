@@ -15,10 +15,14 @@ export const getAliases = (_data: any): Code[] => {
 
   let code = HEADER + NOLINT_MAXLINE;
   code += `export const languageAliasRaw = '${languages}';\n\n`;
-  code += `export const scriptAliasRaw = '${scripts}';\n\n`;
+  code += `export const scriptAliasRaw = '${scripts}';\n`;
+
+  result.push(Code.locale(['autogen.aliases.ts'], code));
+
+  code = HEADER + NOLINT_MAXLINE;
   code += `export const territoryAliasRaw = '${territories}';\n`;
 
-  result.push(Code.core(['locale', 'autogen.aliases.ts'], code));
+  result.push(Code.languagetag(['autogen.aliases.ts'], code));
 
   // Find time zone aliases that are not already handled in the @phensley/timezone package
   const zoneids = TZ.zoneIds();

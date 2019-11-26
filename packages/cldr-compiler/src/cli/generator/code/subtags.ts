@@ -47,6 +47,8 @@ const filterSubtags = (likely: any) => {
 };
 
 export const getSubtags = (_data: any): Code[] => {
+  const result: Code[] = [];
+
   const supplemental = getSupplemental();
   const ianaSubtags = getIanaSubtags();
 
@@ -60,12 +62,13 @@ export const getSubtags = (_data: any): Code[] => {
   const likely = objectToString(filterSubtags(supplemental.LikelySubtags));
 
   let code = HEADER + NOLINT_MAXLINE;
-  code += `export const grandfatheredRaw = '${grandfathered}';\n\n`;
+  code += `export const grandfatheredRaw = '${grandfathered}';\n`;
 
-  code += NOLINT_MAXLINE;
+  result.push(Code.languagetag(['autogen.subtags.ts'], code));
+
+  code = HEADER + NOLINT_MAXLINE;
   code += `export const likelyRaw = '${likely}';\n`;
 
-  return [
-    Code.core(['locale', 'autogen.subtags.ts'], code)
-  ];
+  result.push(Code.locale(['autogen.subtags.ts'], code));
+  return result;
 };
