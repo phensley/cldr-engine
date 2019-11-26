@@ -8,10 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [0.25.0]
 ### Fixed/Changed
- - Split locale-related code into 3 new packages which can be used independently of the main library:
-  - `@phensley/language-tag` implements BCP 47 language tag parsing and construction.
-  - `@phensley/locale` implements resolving of language tags by alias and likely subtags substitution.
-  - `@phensley/locale-matcher` implements distance based locale matching using the CLDR enhanced language matching algorithm.
+Split locale-related code into 3 new packages which can be used independently of the main library:
+ - `@phensley/language-tag` implements BCP 47 language tag parsing and construction.
+ - `@phensley/locale` implements resolving of language tags by alias and likely subtags substitution.
+ - `@phensley/locale-matcher` implements distance based locale matching using the CLDR enhanced language matching algorithm.
 
 ## [0.24.0]
 ### Fixed/Changed
