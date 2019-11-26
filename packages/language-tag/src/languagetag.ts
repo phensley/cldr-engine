@@ -1,4 +1,4 @@
-export const enum Tag {
+export const enum LanguageTagField {
   LANGUAGE = 0,
   SCRIPT = 1,
   REGION = 2,
@@ -14,7 +14,7 @@ const UNDEFINED_VALUES = [
   '',
 ];
 
-const KEYS = [Tag.LANGUAGE, Tag.SCRIPT, Tag.REGION, Tag.VARIANT];
+const KEYS = [LanguageTagField.LANGUAGE, LanguageTagField.SCRIPT, LanguageTagField.REGION, LanguageTagField.VARIANT];
 
 const TRANSFORMS: ((s: string) => string)[] = [
   s => s.toLowerCase(),
@@ -27,7 +27,7 @@ const TRANSFORMS: ((s: string) => string)[] = [
  * Ensure the given field is in canonical form.
  */
 const canonicalize = (field: number, value?: string): string | undefined => {
-  if (field === Tag.LANGUAGE && value === 'root') {
+  if (field === LanguageTagField.LANGUAGE && value === 'root') {
     value = undefined;
   } else if (value === UNDEFINED_VALUES[field]) {
     value = undefined;
@@ -60,10 +60,10 @@ export class LanguageTag {
     extensions?: { [x: string]: string[] },
     privateUse?: string) {
     this.core = [
-      canonicalize(Tag.LANGUAGE, language),
-      canonicalize(Tag.SCRIPT, script),
-      canonicalize(Tag.REGION, region),
-      canonicalize(Tag.VARIANT, variant)
+      canonicalize(LanguageTagField.LANGUAGE, language),
+      canonicalize(LanguageTagField.SCRIPT, script),
+      canonicalize(LanguageTagField.REGION, region),
+      canonicalize(LanguageTagField.VARIANT, variant)
     ];
     this._extensions = extensions || {};
     this._privateUse = privateUse || '';
@@ -73,49 +73,49 @@ export class LanguageTag {
    * Language subtag.
    */
   language(): string {
-    return this.core[Tag.LANGUAGE] || UNDEFINED_VALUES[Tag.LANGUAGE];
+    return this.core[LanguageTagField.LANGUAGE] || UNDEFINED_VALUES[LanguageTagField.LANGUAGE];
   }
 
   /**
    * Returns true if the language subtag is defined.
    */
   hasLanguage(): boolean {
-    return this.core[Tag.LANGUAGE] !== undefined;
+    return this.core[LanguageTagField.LANGUAGE] !== undefined;
   }
 
   /**
    * Script subtag.
    */
   script(): string {
-    return this.core[Tag.SCRIPT] || UNDEFINED_VALUES[Tag.SCRIPT];
+    return this.core[LanguageTagField.SCRIPT] || UNDEFINED_VALUES[LanguageTagField.SCRIPT];
   }
 
   /**
    * Returns true if the script subtag is defined.
    */
   hasScript(): boolean {
-    return this.core[Tag.SCRIPT] !== undefined;
+    return this.core[LanguageTagField.SCRIPT] !== undefined;
   }
 
   /**
    * Region subtag.
    */
   region(): string {
-    return this.core[Tag.REGION] || UNDEFINED_VALUES[Tag.REGION];
+    return this.core[LanguageTagField.REGION] || UNDEFINED_VALUES[LanguageTagField.REGION];
   }
 
   /**
    * Returns true if the region subtag is defined.
    */
   hasRegion(): boolean {
-    return this.core[Tag.REGION] !== undefined;
+    return this.core[LanguageTagField.REGION] !== undefined;
   }
 
   /**
    * Variant subtag.
    */
   variant(): string {
-    return this.core[Tag.VARIANT] || UNDEFINED_VALUES[Tag.VARIANT];
+    return this.core[LanguageTagField.VARIANT] || UNDEFINED_VALUES[LanguageTagField.VARIANT];
   }
 
   /**
@@ -182,7 +182,7 @@ export class LanguageTag {
   private render(expanded: boolean): string {
     let buf: string = '';
     KEYS.forEach(key => {
-      const force: boolean = key !== Tag.VARIANT && (key === Tag.LANGUAGE || expanded);
+      const force: boolean = key !== LanguageTagField.VARIANT && (key === LanguageTagField.LANGUAGE || expanded);
       const val: string | undefined = this.core[key];
       if (val !== undefined || force) {
         if (buf.length > 0) {

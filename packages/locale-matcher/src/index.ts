@@ -1,0 +1,1 @@
+export { LocaleMatch, LocaleMatcher } from './matcher';

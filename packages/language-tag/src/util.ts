@@ -1,4 +1,4 @@
-import { Tag } from './languagetag';
+import { LanguageTagField as Tag } from './languagetag';
 import { territoryAliasRaw } from './autogen.aliases';
 
 export type FastTag = (string | number)[];
@@ -47,6 +47,15 @@ export const substituteRegionAliases = (dst: FastTag): void => {
   // Hack: for now we just use the first region in the list.
   dst[Tag.REGION] = replacement[0];
 
-  // TODO: get the best regions for this language / script combiantion, and if
+  // TODO: get the best regions for this language / script combination, and if
   // one is found in the replacement set, use it. Otherwise use the first in the list.
+};
+
+export const stringToObject = (raw: string, d1: string, d2: string): { [x: string]: string } => {
+  const o: { [x: string]: string } = {};
+  for (const part of raw.split(d1)) {
+    const [k, v] = part.split(d2);
+    o[k] = v;
+  }
+  return o;
 };

@@ -1,6 +1,5 @@
-import { LanguageTag } from './languagetag';
+import { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
 import { LanguageResolver } from './resolver';
-import { parseLanguageTag } from './parser';
 
 const UNDEFINED = new LanguageTag();
 

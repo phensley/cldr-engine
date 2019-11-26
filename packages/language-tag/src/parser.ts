@@ -1,6 +1,5 @@
 import { LanguageTag } from './languagetag';
-import { replaceRegion } from './util';
-import { stringToObject } from '../utils/string';
+import { replaceRegion, stringToObject } from './util';
 import * as subtags from './autogen.subtags';
 
 // Subtag separator

@@ -1,7 +1,7 @@
 {
-  "name": "@phensley/cldr-core",
+  "name": "@phensley/locale",
   "version": "0.24.0",
-  "description": "Core library for @phensley/cldr",
+  "description": "Locale subtag resolver",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
   "types": "lib/index.d.ts",
@@ -16,13 +16,13 @@
     "access": "public"
   },
   "scripts": {
-    "bench": "ts-node -P tsconfig.lint.json __benchmarks__/",
+    "bench:off": "ts-node __benchmarks__/",
     "build": "yarn build:cj && yarn build:es",
     "build:cj": "tsc -p ./tsconfig.json",
     "build:es": "tsc -p ./tsconfig.json --module esnext --outDir lib-es",
     "build:lint": "tsc -p ./tsconfig.lint.json",
     "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
-    "clean": "rimraf ./lib ./lib-es ./.scratch ./.custom-packs",
+    "clean": "rimraf ./lib ./lib-es ./.scratch",
     "clean:full": "yarn clean && rimraf ./node_modules",
     "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
     "lint": "tslint -p ./tsconfig.lint.json",
@@ -34,16 +34,7 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "0.24.0",
-    "@phensley/cldr-types": "0.24.0",
-    "@phensley/cldr-utils": "0.24.0",
-    "@phensley/decimal": "0.24.0",
     "@phensley/language-tag": "0.24.0",
-    "@phensley/locale": "0.24.0",
-    "@phensley/locale-matcher": "0.24.0",
-    "@phensley/messageformat": "0.24.0",
-    "@phensley/plurals": "0.24.0",
-    "@phensley/timezone": "0.24.0",
     "tslib": "1.10.x"
   },
   "devDependencies": {

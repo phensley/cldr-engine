@@ -1,4 +1,4 @@
-import { LanguageTag } from './languagetag';
+import { LanguageTag } from '@phensley/language-tag';
 import { getRegionPartition } from './partition';
 import { distanceMap, DistanceMap, DistanceNode } from './autogen.distance';
 

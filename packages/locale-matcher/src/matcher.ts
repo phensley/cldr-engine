@@ -1,8 +1,7 @@
-import { LanguageTag } from './languagetag';
-import { Locale } from './locale';
+import { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
+import { LanguageResolver, Locale } from '@phensley/locale';
+
 import { getDistance, DEFAULT_THRESHOLD, MAX_DISTANCE } from './distance';
-import { parseLanguageTag } from './parser';
-import { LanguageResolver } from './resolver';
 import { paradigmLocales } from './autogen.distance';
 
 // Space and comma-separated bundle ids.

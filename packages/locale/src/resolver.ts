@@ -1,7 +1,11 @@
-import { LanguageTag, Tag } from './languagetag';
-import { parseLanguageTag } from './parser';
-import { substituteRegionAliases, FastTag, LanguageAliasMap } from './util';
-import { stringToObject } from '../utils/string';
+import {
+  parseLanguageTag,
+  substituteRegionAliases,
+  LanguageTag, LanguageTagField as Tag
+} from '@phensley/language-tag';
+
+import {FastTag, LanguageAliasMap } from './util';
+import { stringToObject } from './util';
 import { languageAliasRaw } from './autogen.aliases';
 import * as subtags from './autogen.subtags';
 

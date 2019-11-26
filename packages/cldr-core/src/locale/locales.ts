@@ -1,5 +1,4 @@
-import { Locale } from './locale';
-import { LanguageResolver } from './resolver';
+import { LanguageResolver, Locale } from '@phensley/locale';
 import { availableLocalesRaw } from './autogen.locales';
 
 let allLocales: Locale[];
