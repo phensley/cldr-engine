@@ -5,7 +5,8 @@ import { join } from 'path';
 
 import { SchemaConfig } from '@phensley/cldr-schema';
 import { LRU } from '@phensley/cldr-utils';
-import { LanguageResolver } from '../../src/locale/resolver';
+import { LanguageResolver } from '@phensley/locale';
+
 import { Bundle, Pack } from '../../src/resource';
 import { CLDRFramework } from '../../src';
 import { VERSION } from '../../src/utils/version';

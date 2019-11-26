@@ -1,4 +1,5 @@
-import { parseLanguageTag, LanguageResolver } from '../../src/locale';
+import { parseLanguageTag } from '@phensley/language-tag';
+import { LanguageResolver } from '../src';
 
 const { resolve, addLikelySubtags, removeLikelySubtags } = LanguageResolver;
 

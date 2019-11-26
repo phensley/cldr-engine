@@ -1,4 +1,4 @@
-import { getRegionPartition } from '../../src/locale/partition';
+import { getRegionPartition } from '../src/partition';
 
 test('sanity check', () => {
   const p = getRegionPartition('US');

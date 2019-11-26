@@ -1,5 +1,5 @@
-import { getDistance } from '../../src/locale/distance';
-import { LanguageResolver } from '../../src/locale/resolver';
+import { LanguageResolver } from '@phensley/locale';
+import { getDistance } from '../src/distance';
 import { loadDistanceCases } from './util';
 
 const { resolve } = LanguageResolver;

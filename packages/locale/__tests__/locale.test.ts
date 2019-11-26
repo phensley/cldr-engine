@@ -1,4 +1,5 @@
-import { LanguageTag, Locale } from '../../src/locale';
+import { LanguageTag } from '@phensley/language-tag';
+import { Locale } from '../src';
 
 test('basics', () => {
   const tag = new LanguageTag('en', undefined, 'US');

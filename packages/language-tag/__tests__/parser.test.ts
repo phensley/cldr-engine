@@ -1,4 +1,4 @@
-import { parseLanguageTag } from '../../src/locale/parser';
+import { parseLanguageTag } from '../src';
 
 const compact = (s: string) => parseLanguageTag(s).compact();
 const expanded = (s: string) => parseLanguageTag(s).expanded();

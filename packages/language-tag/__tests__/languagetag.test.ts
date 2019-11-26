@@ -1,4 +1,4 @@
-import { LanguageTag } from '../../src/locale';
+import { LanguageTag } from '../src';
 
 test('basics', () => {
   let tag = new LanguageTag('', '', '', '');

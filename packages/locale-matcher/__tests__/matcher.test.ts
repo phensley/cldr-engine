@@ -1,4 +1,4 @@
-import { LocaleMatch, LocaleMatcher } from '../../src/locale/matcher';
+import { LocaleMatch, LocaleMatcher } from '../src';
 import { loadMatchCases } from './util';
 
 test('basics', () => {
