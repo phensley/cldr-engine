@@ -6,8 +6,20 @@ if [[ $REG != *"registry.npmjs.org"* ]] ; then
     exit 1
 fi
 
+# ensure packages are installed
+yarn
+
+# wipe everything out
+yarn clean:full
+rm -f yarn.lock
+
+# install again
 yarn
 yarn clean
+
+# build and lint
 yarn lint
-lerna publish --exact --force-publish=* $*
+
+# publish packages
+#lerna publish --exact --force-publish=* $*
 
