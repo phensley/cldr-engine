@@ -17,6 +17,10 @@ test('basics', () => {
   expect(expanded('en-US')).toEqual('en-Zzzz-US');
 });
 
+test('variants', () => {
+  expect(compact('en-VARIANT1-VARIANT2-VARIANT3')).toEqual('en-variant1');
+});
+
 test('case / underscore', () => {
   expect(compact('FR_latn_fr')).toEqual('fr-Latn-FR');
 });
@@ -55,4 +59,9 @@ test('extensions', () => {
   expect(compact('fr-u-ca-islamic')).toEqual('fr-u-ca-islamic');
   expect(expanded('fr-u-ca-islamic')).toEqual('fr-Zzzz-ZZ-u-ca-islamic');
   expect(extensions('fr-u-ca-islamic-u_co_phonebk')).toEqual({ u: ['ca-islamic', 'co-phonebk'] });
+  expect(extensions('fr-u-ca-islamic-ca-gregory')).toEqual({ u: ['ca-gregory', 'ca-islamic']});
+});
+
+test('region replacement', () => {
+  expect(compact('en-ARG')).toEqual('en-AR');
 });
