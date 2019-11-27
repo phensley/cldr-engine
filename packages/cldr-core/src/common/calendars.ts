@@ -14,6 +14,7 @@ import { TimePeriodField } from '../systems';
  * @alpha
  */
 export interface ZonedDateTime {
+
   /**
    * Can be either a Date object or Unix epoch time in milliseconds.
    * Both are interpreted as being relative to UTC.
@@ -93,32 +94,45 @@ export interface DateFieldFormatOptions {
  */
 export interface DateFormatOptions {
 
-  // Set format for both date and time.
+  /**
+   * Set format for both date and time.
+   */
   datetime?: FormatWidthType;
 
-  // Date format.
+  /**
+   * Date format.
+   */
   date?: FormatWidthType;
 
-  // Time format.
+  /**
+   * Time format.
+   */
   time?: FormatWidthType;
 
-  // Wrapper format to use, if both a date and time are being formatted.
+  /**
+   * Wrapper format to use, if both a date and time are being formatted.
+   */
   wrap?: FormatWidthType;
 
-  // A skeleton format containing date, time fields.
+  /**
+   * A skeleton format containing date and/or time fields.
+   */
   skeleton?: string;
 
-  // Specify the calendar to use.
+  /**
+   * Specify the calendar to use.
+   */
   ca?: CalendarType;
 
-  // Specify the number system to use.
+  /**
+   * Specify the number system to use.
+   */
   nu?: NumberSystemType;
 
-  // Context in which the formatted string will be used
+  /**
+   * Context in which the formatted string will be used
+   */
   context?: ContextType;
-
-  // TODO: add context
-  // readonly context: FormatContextType;
 }
 
 /**
@@ -126,13 +140,24 @@ export interface DateFormatOptions {
  */
 export interface DateRawFormatOptions {
 
-  readonly pattern?: string;
+  /**
+   * Raw date time pattern to use.
+   */
+  pattern?: string;
 
+  /**
+   * Specify the calendar to use.
+   */
   ca?: CalendarType;
 
+  /**
+   * Specify the numbering system to use.
+   */
   nu?: NumberSystemType;
 
-  // Context in which the formatted string will be used
+  /**
+   * Context in which the formatted string will be used
+   */
   context?: ContextType;
 }
 
@@ -141,50 +166,93 @@ export interface DateRawFormatOptions {
  */
 export interface DateIntervalFormatOptions {
 
-  readonly skeleton: string;
+  /**
+   * A skeleton format containing date and/or time fields.
+   */
+  skeleton: string;
 
-  // Specify the calendar to use
-  readonly ca?: CalendarType;
+  /**
+   * Specify the calendar to use
+   */
+  ca?: CalendarType;
 
-  // Specify the number system to use
-  readonly nu?: NumberSystemType;
+  /**
+   * Specify the number system to use
+   */
+  nu?: NumberSystemType;
 
-  // Context in which the formatted string will be used
+  /**
+   * Context in which the formatted string will be used
+   */
   context?: ContextType;
 }
 
 /**
+ * Options used to format a relative time field.
+ *
  * @alpha
  */
 export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
   width?: DateFieldWidthType;
 
-  readonly nu?: NumberSystemType;
+  nu?: NumberSystemType;
 
-  // Context in which the formatted string will be used
+  /**
+   * Context in which the formatted string will be used
+   */
   context?: ContextType;
 
-  // Force format to always display in terms of numbers
+  /**
+   * Force format to always display in terms of numbers
+   */
   numericOnly?: boolean;
 
-  // In numeric mode, if the value is exactly 0 display "now" instead of "in 0 seconds"
+  /**
+   * In numeric mode, if the value is exactly 0 display "now" instead of "in 0 seconds"
+   */
   alwaysNow?: boolean;
 }
 
+/**
+ * Options used to format a relative time.
+ *
+ * @alpha
+ */
 export interface RelativeTimeFormatOptions extends NumberFormatOptions {
+
+  /**
+   * Specify the format width.
+   */
   width?: DateFieldWidthType;
-  // Context in which the formatted string will be used
+
+  /**
+   * Context in which the formatted string will be used
+   */
   context?: ContextType;
+
+  /**
+   * Specify the calendar to use.
+   */
   ca?: CalendarType;
+
+  /**
+   * Include day-of-week formatting when applicable.
+   */
   dayOfWeek?: boolean;
 
-  // Specify which field the relative time should be expressed in
+  /**
+   * Specify which field the relative time should be expressed in.
+   */
   field?: TimePeriodField;
 
-  // Force format to always display in terms of numbers
+  /**
+   * Force format to always display in terms of numbers.
+   */
   numericOnly?: boolean;
 
-  // In numeric mode, if the value is exactly 0 display "now" instead of "in 0 seconds"
+  /**
+   * In numeric mode, if the value is exactly 0 display "now" instead of "in 0 seconds"
+   */
   alwaysNow?: boolean;
 }
 
