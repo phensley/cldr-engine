@@ -21,5 +21,5 @@ yarn clean
 yarn lint
 
 # publish packages
-#lerna publish --exact --force-publish=* $*
+lerna publish --exact --force-publish=* $*
 
