@@ -1,6 +1,36 @@
 import { numbersApi } from '../../_helpers';
 import { CurrencyFormatOptions, DecimalFormatOptions } from '../../../src';
 
+test('divisor magnitudes', () => {
+  const api = numbersApi('en');
+  let opts: DecimalFormatOptions;
+  let s: string;
+
+  opts = { style: 'short', divisor: 100 };
+  s = api.formatDecimal(5000, opts);
+  expect(s).toEqual('5,000');
+
+  opts.divisor = 1000;
+  s = api.formatDecimal(5000, opts);
+  expect(s).toEqual('5K');
+
+  opts.divisor = 10000;
+  s = api.formatDecimal(5000, opts);
+  expect(s).toEqual('5K');
+
+  opts.divisor = 100000;
+  s = api.formatDecimal(5000, opts);
+  expect(s).toEqual('5K');
+
+  opts.divisor = 1000000;
+  s = api.formatDecimal(5000, opts);
+  expect(s).toEqual('0.005M');
+
+  opts.divisor = 10000000;
+  s = api.formatDecimal(5000, opts);
+  expect(s).toEqual('0.005M');
+});
+
 test('currency short divisors', () => {
   const api = numbersApi('en');
   let opts: CurrencyFormatOptions;

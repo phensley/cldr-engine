@@ -418,7 +418,12 @@ export class NumberInternalsImpl implements NumberInternals {
 
     const pattern = this.getCompactPattern(raw, standardRaw, negative);
     const fracDigits = ctx.useSignificant ? -1 : 0;
+    const noMinInt = ctx.minInt === -1;
     ctx.setCompact(pattern, n.integerDigits(), divisor, fracDigits);
+    // Hack to avoid extra leading '0' for certain divisor cases
+    if (noMinInt) {
+      ctx.minInt = 1;
+    }
     return [ctx.adjust(n), ndigits];
   }
 
