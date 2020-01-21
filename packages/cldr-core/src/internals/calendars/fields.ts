@@ -47,7 +47,13 @@ const L = C.LONG;
 export const EXTRA_FIELD = C.EXTRA_FIELD;
 export const MISSING_FIELD = C.MISSING_FIELD;
 
-export type FieldType = [string, number, number, number, number];
+export type FieldType = [
+  string, // 0 pattern character
+  number, // 1 field
+  number, // 2 sub field
+  number, // 3 repeat
+  number  // 4 width
+];
 
 export const FIELD_TYPES: FieldType[] = [
   ['G', Field.ERA, /* SHORT */ T, 1, 3],

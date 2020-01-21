@@ -911,7 +911,7 @@ export class Decimal {
     const w: Decimal = this;
     const prec = w.precision();
     const data = w.data.slice();
-    w.data.fill(0);
+    // w.data.fill(0);
 
     let m = data.length;
 

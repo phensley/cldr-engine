@@ -11,7 +11,7 @@ import { CalendarDate } from '../../systems/calendars';
 
 export interface CachedSkeletonRequest {
   dateSkel?: DateSkeleton;
-  timeSkel?: DateSkeleton;
+  // timeSkel?: DateSkeleton;
   date?: DateTimeNode[];
   time?: DateTimeNode[];
 }
