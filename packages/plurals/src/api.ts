@@ -8,14 +8,14 @@ const resolve = (r: RuleMap, language: string, region?: string): Rule[] =>
 
 export class Plurals {
 
-/**
- * Get the plural rules for a given language and optional region.
- */
-get(language: string, region?: string): PluralRules {
-  const cardinals = resolve(cardinalRules, language, region);
-  const ordinals = resolve(ordinalRules, language, region);
-  return new PluralRules(expressions, cardinals, ordinals);
-}
+  /**
+   * Get the plural rules for a given language and optional region.
+   */
+  get(language: string, region?: string): PluralRules {
+    const cardinals = resolve(cardinalRules, language, region);
+    const ordinals = resolve(ordinalRules, language, region);
+    return new PluralRules(expressions, cardinals, ordinals);
+  }
 
 }
 export const pluralRules = new Plurals();

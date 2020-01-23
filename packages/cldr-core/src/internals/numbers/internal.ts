@@ -199,9 +199,7 @@ export class NumberInternalsImpl implements NumberInternals {
       ctx.setPattern(pattern, true);
       n = ctx.adjust(n, true);
       n = negzero(n, options.negativeZero !== false);
-
       pattern = this.getNumberPattern(format, n.isNegative());
-
       // Split number into coeffcient and exponent
       const [coeff, exponent] = n.scientific(ctx.minInt || 1);
       const adjcoeff = ctx.adjust(coeff, true);

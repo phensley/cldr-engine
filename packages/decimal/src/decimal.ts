@@ -977,7 +977,6 @@ export class Decimal {
 
     const div = new DivMod();
     const [q, r] = div.word(shift, Constants.RDIGITS);
-
     let i = 0, j = 0;
     let rnd = 0, rest = 0;
 
