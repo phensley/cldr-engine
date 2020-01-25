@@ -193,9 +193,10 @@ export interface DateIntervalFormatOptions {
  * @alpha
  */
 export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
+  /**
+   * Specify the format width.
+   */
   width?: DateFieldWidthType;
-
-  nu?: NumberSystemType;
 
   /**
    * Context in which the formatted string will be used
@@ -218,17 +219,7 @@ export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
  *
  * @alpha
  */
-export interface RelativeTimeFormatOptions extends NumberFormatOptions {
-
-  /**
-   * Specify the format width.
-   */
-  width?: DateFieldWidthType;
-
-  /**
-   * Context in which the formatted string will be used
-   */
-  context?: ContextType;
+export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOptions {
 
   /**
    * Specify the calendar to use.
@@ -244,16 +235,6 @@ export interface RelativeTimeFormatOptions extends NumberFormatOptions {
    * Specify which field the relative time should be expressed in.
    */
   field?: TimePeriodField;
-
-  /**
-   * Force format to always display in terms of numbers.
-   */
-  numericOnly?: boolean;
-
-  /**
-   * In numeric mode, if the value is exactly 0 display "now" instead of "in 0 seconds"
-   */
-  alwaysNow?: boolean;
 }
 
 /**

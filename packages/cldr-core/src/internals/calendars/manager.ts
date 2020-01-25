@@ -125,7 +125,6 @@ export class CalendarManager {
   }
 
   /**
-   *
    * Best-fit match an input skeleton. The skeleton can contain both date and
    * time fields.
    *
@@ -146,7 +145,6 @@ export class CalendarManager {
    *  a. "yMd" same, "ahms" same: format time standalone
    *  b. "yMd" same, "ahms" differ: select and format time range.
    *  c. "yMd" differ: prepend "yMd" to skeleton and go to (1a).
-   *
    */
   getDateIntervalFormatRequest(
     calendar: string,

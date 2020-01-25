@@ -8,7 +8,7 @@ import {
 import { coerceDecimal, DecimalArg, DecimalConstants } from '@phensley/decimal';
 
 import { DateFieldInternals, Internals } from '../internals';
-import { RelativeTimeFormatOptions } from '../../common';
+import { RelativeTimeFieldFormatOptions } from '../../common';
 import { Bundle } from '../../resource';
 import { ContextTransformInfo, NumberParams } from '../../common/private';
 
@@ -34,7 +34,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
   // }
 
   formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType,
-      options: RelativeTimeFormatOptions, params: NumberParams,
+      options: RelativeTimeFieldFormatOptions, params: NumberParams,
       transform: ContextTransformInfo): string {
 
     const width = options.width || 'wide';

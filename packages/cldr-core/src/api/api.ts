@@ -29,6 +29,7 @@ import {
   MeasurementCategory,
   MeasurementSystem,
   Quantity,
+  RelativeTimeFieldFormatOptions,
   RelativeTimeFormatOptions,
   TimeZoneInfo,
   UnitFormatOptions,
@@ -125,7 +126,8 @@ export interface Calendars {
   /**
    * Formats a relative time field to string.
    */
-  formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFormatOptions): string;
+  formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType,
+    options?: RelativeTimeFieldFormatOptions): string;
 
   /**
    * Formats the relative time from a start to end date.

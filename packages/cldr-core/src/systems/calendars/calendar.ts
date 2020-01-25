@@ -562,7 +562,7 @@ export abstract class CalendarDate {
     while (day < 0) {
       // move to previous month
       m--;
-      // add back the number of days in the current month, wrapping around to december
+      // add back the number of days in the current month, wrapping around to December
       if (m < 0) {
         m += mc;
         y--;

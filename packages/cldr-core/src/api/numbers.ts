@@ -65,6 +65,8 @@ export class NumbersImpl implements Numbers {
 
   getCurrencyPluralName(n: DecimalArg, code: string,
       opts: CurrencyDisplayNameOptions = DEFAULT_CURRENCY_OPTIONS): string {
+
+    // TODO: support adjustment options here
     const plural = this.getPluralCardinal(n);
     const name = this.numbers.getCurrencyPluralName(this.bundle, code, plural as PluralType);
     return this.general.contextTransform(name, this.transform, _ctx(opts), 'currencyName');
