@@ -977,6 +977,7 @@ export class Decimal {
 
     const div = new DivMod();
     const [q, r] = div.word(shift, Constants.RDIGITS);
+
     let i = 0, j = 0;
     let rnd = 0, rest = 0;
 
@@ -1000,7 +1001,9 @@ export class Decimal {
 
     let hiprev = 0;
     const ph = POWERS10[Constants.RDIGITS - r];
-    [hiprev, rest] = div.pow10(data[q], r);
+    if (q < data.length) {
+      [hiprev, rest] = div.pow10(data[q], r);
+    }
     [rnd, rest] = div.pow10(rest, r - 1);
     if (rest === 0 && q > 0) {
       rest = allzero(data, q) === 0 ? 1 : 0;
