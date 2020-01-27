@@ -164,7 +164,7 @@ export class DateSkeletonParser {
     if (noDayPeriod) {
       this.clear(s, Field.DAYPERIOD);
 
-    }  else if (hour !== undefined && hour.field !== '') {
+    } else if (hour !== undefined && hour.field !== '') {
       // If we have a 12-hour-cycle but no dayperiod, add the default.
       if (hour.field === 'h' || hour.field === 'K') {
         if (!dayPeriod) {
