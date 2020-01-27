@@ -24,7 +24,7 @@ const getTZC = (offset: number): TZC => {
   }
   offset /= 60000;
   const hours = offset / 60 | 0;
-  const minutes = offset % 60;
+  const minutes = offset % 60 | 0;
   return [offset, negative, hours, minutes];
 };
 
