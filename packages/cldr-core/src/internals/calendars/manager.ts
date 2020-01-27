@@ -79,7 +79,7 @@ export class CalendarManager {
 
     // Perform a best-fit match on the skeleton
 
-    // Check if we've cached the patterns fo this skeleton before
+    // Check if we've cached the patterns for this skeleton before
     let entry = patterns.getCachedSkeletonRequest(skelKey);
     if (entry) {
       req.date = entry.date;
