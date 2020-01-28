@@ -12,8 +12,10 @@ import {
   transformCalendar,
   transformCurrencies,
   transformDatefields,
+  transformLanguage,
   transformNumbers,
   transformRegion,
+  transformScript,
   transformTimezones,
   transformUnits
 } from './data';
@@ -545,10 +547,12 @@ export const getMain = (language: string, transform: boolean = true) => {
 
     Names: {
       languages: {
-        ...access({ displayName: get(['localeDisplayNames', 'languages']) }, 'languages')
+        ...access({ displayName: get(['localeDisplayNames', 'languages']) }, 'languages',
+        false, transformLanguage)
       },
       scripts: {
-        ...access({ displayName: get(['localeDisplayNames', 'scripts']) }, 'scripts'),
+        ...access({ displayName: get(['localeDisplayNames', 'scripts']) }, 'scripts',
+        false, transformScript),
       },
       regions: {
         ...access({ displayName: get(['localeDisplayNames', 'territories']) }, 'territories',

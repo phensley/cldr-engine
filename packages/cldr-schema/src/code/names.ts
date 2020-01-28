@@ -1,13 +1,13 @@
-import { scope, vector1, vector2, Scope } from '../instructions';
+import { scope, vector2, Scope } from '../instructions';
 
 export const NAMES: Scope = scope('Names', 'Names', [
 
   scope('languages', 'languages', [
-    vector1('displayName', 'language-id')
+    vector2('displayName', 'alt-key', 'language-id')
   ]),
 
   scope('scripts', 'scripts', [
-    vector1('displayName', 'script-id')
+    vector2('displayName', 'alt-key', 'script-id')
   ]),
 
   scope('regions', 'regions', [

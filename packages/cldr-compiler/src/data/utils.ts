@@ -2,7 +2,7 @@
 import { pluralDigit } from '../utils';
 
 const plurals = ['other', 'zero', 'one', 'two', 'few', 'many'];
-const alts = ['none', 'short', 'variant', 'narrow', 'stand-alone'];
+const alts = ['none', 'short', 'variant', 'narrow', 'stand-alone', 'menu', 'long'];
 
 /**
  * Map a plural key and transform it.

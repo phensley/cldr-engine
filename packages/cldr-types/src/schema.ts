@@ -135,11 +135,11 @@ export interface ContextTransformsSchema {
 // NAMES
 
 export interface LanguageNameInfo {
-  readonly displayName: Vector1Arrow<LanguageIdType>;
+  readonly displayName: Vector2Arrow<AltType, LanguageIdType>;
 }
 
 export interface ScriptNameInfo {
-  readonly displayName: Vector1Arrow<ScriptIdType>;
+  readonly displayName: Vector2Arrow<AltType, ScriptIdType>;
 }
 
 export interface RegionNameInfo {

@@ -61,8 +61,8 @@ const NUMBER_SYSTEM_NAME = [
 ];
 
 export const getConfig = (data: any): Code[] => {
-  const languages = identifiers(data.languages);
-  const scripts = identifiers(data.scripts);
+  const languages = sortSet(new Set(data.languages));
+  const scripts = sortSet(new Set(data.scripts));
   const regions = identifiers(data.territories);
   const units = unitNames(data.units);
   const { currencies, timeZoneIds } = data;

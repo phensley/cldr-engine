@@ -71,8 +71,8 @@ export const getSymbols = (): any => {
     addKeys(main.ContextTransforms.contextTransforms, contextTransforms);
     addKeys(main.Currencies.currencyIds, currencies);
     addKeys(main.Units.unitIds, unitsRaw);
-    addKeys(main.Names.languages.displayName, languages);
-    addKeys(main.Names.scripts.displayName, scripts);
+    addKeys(nestedKeys(main.Names.languages.displayName), languages);
+    addKeys(nestedKeys(main.Names.scripts.displayName), scripts);
     addKeys(main.Territories.territories, territories);
     addKeys(main.TimeZoneNames.timeZoneIds, timeZoneIds);
     addKeys(main.TimeZoneNames.metaZoneIds, metaZoneIds);

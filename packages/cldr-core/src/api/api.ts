@@ -243,17 +243,17 @@ export interface General {
   /**
    * Returns the display name for the given language code.
    */
-  getLanguageDisplayName(code: string, options?: DisplayNameOptions): string;
+  getLanguageDisplayName(code: string | LanguageTag, options?: DisplayNameOptions): string;
 
   /**
    * Returns the display name for the given script code.
    */
-  getScriptDisplayName(code: string, options?: DisplayNameOptions): string;
+  getScriptDisplayName(code: string | LanguageTag, options?: DisplayNameOptions): string;
 
   /**
    * Returns the display name for the given region code.
    */
-  getRegionDisplayName(code: string, options?: DisplayNameOptions): string;
+  getRegionDisplayName(code: string | LanguageTag, options?: DisplayNameOptions): string;
 }
 
 /**

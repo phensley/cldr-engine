@@ -6,8 +6,8 @@ const process = (symbols: any): string[] => {
 };
 
 export const getIdentifiers = (data: any): Code[] => {
-  const languages = process(data.languages);
-  const scripts = process(data.scripts);
+  const languages = sortSet(new Set(data.languages));
+  const scripts = sortSet(new Set(data.scripts));
   const regions = process(data.territories);
 
   let code = `${HEADER}`;
