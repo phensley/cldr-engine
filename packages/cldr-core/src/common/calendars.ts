@@ -167,9 +167,23 @@ export interface DateRawFormatOptions {
 export interface DateIntervalFormatOptions {
 
   /**
-   * A skeleton format containing date and/or time fields.
+   * A skeleton format containing date and/or time fields. Note
+   * that if present, this overrides the 'date' and 'time' options below.
+   * If all are omitted a reasonable default will be selected.
    */
-  skeleton: string;
+  skeleton?: string;
+
+  /**
+   * A skeleton containing fields to format if the difference
+   * between the start and end dates is 1 day or more.
+   */
+  date?: string;
+
+  /**
+   * A skeleton containing fields to format if the difference
+   * between the start and end dates is less than 1 day.
+   */
+  time?: string;
 
   /**
    * Specify the calendar to use

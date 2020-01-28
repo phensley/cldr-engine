@@ -361,7 +361,8 @@ export class CalendarsImpl implements Calendars {
       start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
       options?: DateIntervalFormatOptions): R {
 
-    options = options || { skeleton: 'yMd' };
+    // options = options || { skeleton: 'yMd' };
+    options = options || {};
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     start = this.convertDateTo(calendar, start);
     end = this.convertDateTo(calendar, end);

@@ -159,7 +159,20 @@ export class CalendarManager {
     const wrapper = patterns.getIntervalFallback();
     const req: DateIntervalFormatRequest = { params, wrapper };
 
-    const origSkeleton = options.skeleton || 'yMd';
+    let origSkeleton = options.skeleton;
+    if (!origSkeleton) {
+      if (dateDiffers && options.date) {
+        origSkeleton = options.date;
+      } else {
+        origSkeleton = options.time;
+      }
+    }
+
+    // If the skeleton is still undefined, select a reasonable default
+    if (!origSkeleton) {
+      origSkeleton = dateDiffers ? 'yMMMd' : 'hmsa';
+    }
+
     let skeleton = origSkeleton;
 
     // Cache key consists of the input skeleton and the field of greatest difference between
@@ -177,8 +190,6 @@ export class CalendarManager {
 
     let query = patterns.parseSkeleton(skeleton);
 
-    // TODO: Augment skeleton to ensure context. day without month, minute without hour, etc.
-
     let standalone = fieldDiff === 's' || (query.isDate && !dateDiffers) || (query.isTime && dateDiffers);
 
     if (!standalone) {
@@ -192,7 +203,13 @@ export class CalendarManager {
 
     if (!query.isDate && dateDiffers) {
       // 3c. prepend "yMd" and proceed
-      skeleton = `yMd${skeleton}`;
+      if (fieldDiff === 'y') {
+        skeleton = `yMd${skeleton}`;
+      } else if (fieldDiff === 'M') {
+        skeleton = `Md${skeleton}`;
+      } else {
+        skeleton = `d${skeleton}`;
+      }
     }
 
     if (origSkeleton !== skeleton) {

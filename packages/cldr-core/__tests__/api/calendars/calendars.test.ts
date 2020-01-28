@@ -636,7 +636,7 @@ test('intervals', () => {
 test('intervals bare date', () => {
   const api = calendarsApi('en');
   let s = api.formatDateInterval(new Date(2018, 1, 20), new Date(2018, 5, 13));
-  expect(s).toEqual('2/20/2018 – 6/13/2018');
+  expect(s).toEqual('Feb 20 – Jun 13, 2018');
 
   s = api.formatDateInterval(new Date(2018, 1, 20, 5, 10), new Date(2018, 1, 20, 22), { skeleton: 'hms' });
   expect(s).toEqual('5:10 AM – 10:00 PM');

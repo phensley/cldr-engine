@@ -17,6 +17,7 @@ import {
 export interface SkeletonField {
   input: string;
   field: string;
+  type: Field;
   width: number;
   repeat: number;
 }
@@ -62,8 +63,8 @@ export class DateSkeleton {
         const _info = this.info[i];
         if (_info !== undefined) {
           // ensure we copy the properties
-          const { input, field, width, repeat } = _info;
-          r.info[i] = { input, field, width, repeat };
+          const { input, field, type, width, repeat } = _info;
+          r.info[i] = { input, field, type, width, repeat };
         }
         this.type[i] = 0;
         this.info[i] = undefined;
@@ -172,7 +173,13 @@ export class DateSkeletonParser {
           const idx = FIELD_INDEX.get('a')![0];
           const row = FIELD_TYPES[idx];
           s.type[Field.DAYPERIOD] = row[2];
-          s.info[Field.DAYPERIOD] = { input: 'a', field: 'a', width: row[3], repeat: row[3] };
+          s.info[Field.DAYPERIOD] = {
+            input: 'a',
+            field: 'a',
+            type: Field.DAYPERIOD,
+            width: row[3],
+            repeat: row[3]
+          };
         }
       } else if (dayPeriod !== undefined && dayPeriod.field !== '') {
         this.clear(s, Field.DAYPERIOD);
@@ -219,7 +226,7 @@ export class DateSkeletonParser {
   private index(s: DateSkeleton, input: string, field: string, width: number, ft: FieldType): void {
     const idx = ft[1];
     s.type[idx] = ft[2] + (ft[2] > 0 ? width : 0);
-    s.info[idx] = { input, field, width, repeat: ft[3] };
+    s.info[idx] = { input, field, type: idx, width, repeat: ft[3] };
     s.isDate = s.isDate || idx < Field.DAYPERIOD;
     s.isTime = s.isTime || idx >= Field.DAYPERIOD;
   }
