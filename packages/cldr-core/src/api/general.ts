@@ -216,7 +216,7 @@ export class GeneralImpl implements General {
     return s;
   }
 
-  // Check if the given alt type field exists, and fall back to alt type 'nonee'
+  // Check if the given alt type field exists, and fall back to alt type 'none'
   protected _getVectorAlt<T extends string>(arrow: Vector2Arrow<AltType, T>,
     code: string, type: AltType): string {
     return arrow.get(this._bundle, type, code as unknown as T)
