@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [0.25.4]
 ### Fixed/Changed
 * Improved defaulting for date interval formatting when skeleton option is omitted.
-* Additional `date` and `time` skeleton options, which are used when the start and end dates differ by more or less than 1 day.
+* Additional `date` and `time` skeleton options for date interval formatting. These are used when the start and end dates differ by more or less than 1 day.
 
 ## [0.25.3]
 ### Fixed/Changed
