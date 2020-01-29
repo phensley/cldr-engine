@@ -72,7 +72,6 @@ export class PersianDate extends CalendarDate {
 
   protected monthStart(eyear: number, month: number, _useMonth: boolean): number {
     let jd = CalendarConstants.JD_PERSIAN_EPOCH - 1 + 365 * (eyear - 1) + floor((8 * eyear + 21) / 33);
-
     if (month !== 0) {
       const mc = MONTH_COUNT;
       const m = floor(month);
@@ -117,6 +116,7 @@ const computePersianFields = (f: number[]): void => {
   const jd = f[DateField.JULIAN_DAY];
   const days = jd - CalendarConstants.JD_PERSIAN_EPOCH;
   const year = 1 + floor((33 * days + 3) / 12053);
+
   const favardin1 = 365 * (year - 1) + floor((8 * year + 21) / 33);
   const doy = days - favardin1;
   const month = floor(doy < 216 ? (doy / 31) : ((doy - 6) / 30));

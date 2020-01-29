@@ -693,13 +693,12 @@ export abstract class CalendarDate {
 
     // Compute updated julian day from year and fractional month
     const dim = this.daysInMonth(year, month) * monthf;
-    [day, dayf] = splitfrac(dim);
+    [day, dayf] = splitfrac(_days + dim);
     jd = this.monthStart(year, month, false) + f[DateField.DAY_OF_MONTH];
 
     // DAY AND TIME FIELDS
 
     // Adjust julian day by fractional day and time fields
-    day += _days;
     ms += Math.round(_ms + (dayf * CalendarConstants.ONE_DAY_MS));
     if (ms >= CalendarConstants.ONE_DAY_MS) {
       const d = floor(ms / CalendarConstants.ONE_DAY_MS);
