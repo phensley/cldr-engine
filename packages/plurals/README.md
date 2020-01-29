@@ -1,6 +1,6 @@
 @phensley/plurals
 
-Standalone CLDR plural rules engine.
+Standalone CLDR plural rules engine. Supports cardinal, ordinal, and plural range calculations.
 
 ## Example
 
