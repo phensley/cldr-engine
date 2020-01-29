@@ -14,6 +14,7 @@ import { getIdentifiers } from './identifiers';
 import { getLocale } from './locale';
 import { getPartition } from './partition';
 import { getPlurals } from './plurals';
+import { getPluralRanges } from './pluralranges';
 import { getRBNF } from './rbnf';
 import { getSubtags } from './subtags';
 import { getSystems } from './systems';
@@ -34,6 +35,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
   locale: getLocale,
   partition: getPartition,
   plurals: getPlurals,
+  pluralranges: getPluralRanges,
   rbnf: getRBNF,
   subtags: getSubtags,
   systems: getSystems,
@@ -46,7 +48,7 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
 // Names of pre-processed data files
 const DATA_FILES = [
   'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals',
-  'subtags', 'symbols', 'timedata', 'weekdata'
+  'pluralranges', 'subtags', 'symbols', 'timedata', 'weekdata'
 ];
 
 const load = (): any => {

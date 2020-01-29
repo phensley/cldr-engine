@@ -7,6 +7,7 @@ import { getCurrencyInfo } from './currency';
 import { getMatching } from './matching';
 import { getMetazones } from './metazones';
 import { getPlurals } from './plurals';
+import { getPluralRanges } from './pluralranges';
 import { getSubtags } from './subtags';
 import { getSymbols } from './symbols';
 import { getTimeData } from './timedata';
@@ -22,6 +23,7 @@ const OUTPUTS: { [x: string]: () => string } = {
   matching: getMatching,
   metazones: getMetazones,
   plurals: getPlurals,
+  pluralranges: getPluralRanges,
   subtags: getSubtags,
   symbols: getSymbols,
   timedata: getTimeData,
