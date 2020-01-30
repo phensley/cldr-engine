@@ -1,4 +1,4 @@
-import { UnitType } from '@phensley/cldr-types';
+import { UnitCategory, UnitType } from '@phensley/cldr-types';
 import { Decimal, MathContext, Rational } from '@phensley/decimal';
 import { UnitFactor, UnitFactorMapEntry } from './types';
 
@@ -11,7 +11,7 @@ export class UnitFactorMap {
 
   private factors: { [from: string]: { [to: string]: UnitFactor } } = {};
 
-  constructor(readonly category: string, factors: UnitFactorMapEntry[]) {
+  constructor(readonly category: UnitCategory, factors: UnitFactorMapEntry[]) {
     const units = new Set<UnitType>();
     for (const f of factors) {
       const from = f[0];
