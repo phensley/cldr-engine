@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+
+import os
+from collections import defaultdict
+
+CWD = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.join(CWD, '../packages/cldr-compiler/.cldr/36.0.0/main')
+
+MAIN = [
+  'ca-buddhist',
+  'ca-gregorian', 
+  'ca-japanese', 
+  'ca-persian', 
+  'characters',
+  'contextTransforms',
+  'currencies', 
+  'dateFields', 
+  'languages', 
+  'layout',
+  'listPatterns', 
+  'numbers', 
+  'scripts', 
+  'territories', 
+  'timeZoneNames',
+  'units'
+]
+
+
+def sumall(id):
+    size = 0
+    for m in MAIN:
+        path = os.path.join(ROOT, id, '%s.json' % m)
+        if os.path.exists(path):
+            size += os.stat(path).st_size
+    return size
+
+locales = os.listdir(ROOT)
+
+langs = defaultdict(list)
+for id in locales:
+    lang = id.split('-')[0]
+    langs[lang].append(id)
+
+for lang in sorted(langs.keys()):
+    size = 0
+    for id in sorted(langs[lang]):
+        size += sumall(id)
+    print('%12d' % size, lang)
+
