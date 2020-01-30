@@ -116,3 +116,7 @@ export class Rational {
   }
 
 }
+
+export const RationalConstants = {
+  ONE: new Rational(1, 1)
+};
