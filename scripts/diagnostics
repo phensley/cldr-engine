@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+import gzip, os, re, sys, zlib
+from os.path import abspath, dirname, exists, isdir, join, relpath
+from subprocess import Popen, PIPE
+
+CWD = dirname(abspath(__file__))
+TOP = join(CWD, '..')
+PKG = join(TOP, 'packages')
+PKGS = [join('packages', p) for p in os.listdir(PKG)]
+
+def run(cmd, cwd):
+    p = Popen(cmd, stdout=PIPE, cwd=cwd)
+    out, _ = p.communicate()
+    return out.decode('utf-8')
+
+def diagnostics(path):
+    out = run(['tsc', '--noEmit', '--diagnostics'], path)
+    print(out)
+
+def main():
+    for pkg in PKGS:
+        path = abspath(join(TOP, pkg))
+        if not exists(join(path, 'package.json')):
+            continue
+        print(pkg)
+        diagnostics(path)
+
+if __name__ == '__main__':
+    main()
+
