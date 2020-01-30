@@ -8,8 +8,10 @@ import { Constants, FNV } from './fnv';
 export interface MPHashTable<T> {
   // Intermediate table
   g: number[];
+
   // Values array
   v: T[];
+
   // Number of keys
   s: number;
 }

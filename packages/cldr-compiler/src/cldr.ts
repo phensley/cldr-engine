@@ -455,7 +455,7 @@ const TimeZoneNames = {
  */
 const getUnitNames = (obj: any) => {
   return Object.keys(obj).reduce((o: any, k) => {
-    if (k !== 'per' && k !== 'coordinateUnit') {
+    if (k !== 'times' && k !== 'per' && k !== 'coordinateUnit') {
       o[k] = {};
     }
     return o;
