@@ -1,18 +1,23 @@
-import { UnitCategory, UnitType } from '@phensley/cldr-types';
+import { UnitType } from '@phensley/cldr-types';
 import { Decimal, MathContext, Rational } from '@phensley/decimal';
 import { UnitFactor, UnitFactorMapEntry } from './types';
 
 const ONE = new Rational(1, 1);
 
+/**
+ * Represents an indexed set of conversion factors.
+ */
 export class UnitFactorMap {
 
   // All units referenced in this map
-  private units: UnitType[] = [];
+  readonly units: UnitType[] = [];
 
   private factors: { [from: string]: { [to: string]: UnitFactor } } = {};
 
-  constructor(readonly category: UnitCategory, factors: UnitFactorMapEntry[]) {
-    const units = new Set<UnitType>();
+  constructor(readonly category: string, factors: UnitFactorMapEntry[]) {
+    const unitset = new Set<UnitType>();
+
+    // Add a forward and reverse conversion entry for each factor
     for (const f of factors) {
       const from = f[0];
       let map = this.factors[from];
@@ -23,19 +28,25 @@ export class UnitFactorMap {
       const fac = typeof to[0] === 'string' ? new Rational(to[0]) : to[0];
 
       // Add from and to units to set
-      units.add(from);
-      units.add(to[1]);
+      unitset.add(from);
+      unitset.add(to[1]);
 
       // Add forward and reverse mappings
       map[to[1]] = [fac, to[1]];
       this.set(to[1], fac.inverse(), from, false);
     }
 
-    units.forEach(u => this.units.push(u));
+    // Get a sorted list of the units in this map
+    unitset.forEach(u => {
+      this.units.push(u);
+    });
     this.units.sort();
+
+    // Calculate conversion factors between all pairwise units in this set
     for (const from of this.units) {
       for (const to of this.units) {
         if (from === to) {
+          // We'll return Decimal '1' for identical units
           continue;
         }
 
@@ -61,9 +72,11 @@ export class UnitFactorMap {
         }
       }
     }
-
   }
 
+  /**
+   * Dump the conversion factors for all units in the map.
+   */
   dump(): string {
     let s = '';
     for (const from of this.units) {
@@ -79,20 +92,27 @@ export class UnitFactorMap {
     return s;
   }
 
-  convert(amt: Decimal, from: UnitType, to: UnitType, ctx?: MathContext): Decimal {
+  /**
+   * Convert the given amount from 'from' units to 'to'. Throws an error if the
+   * conversion doesn't exist.
+   */
+  convert(amt: Decimal, from: UnitType, to: UnitType, ctx?: MathContext): Decimal | undefined {
     if (from === to) {
       return amt;
     }
-    const fac = this.get(from, to)![0] as Rational;
-    return fac.multiply(amt, ctx).toDecimal(ctx);
+    const fac = this.get(from, to);
+    if (!fac) {
+      return undefined;
+    }
+    return (fac[0] as Rational).multiply(amt, ctx).toDecimal(ctx);
   }
 
-  get(from: UnitType, to: UnitType): UnitFactor | undefined {
+  private get(from: UnitType, to: UnitType): UnitFactor | undefined {
     const m = this.factors[from];
     return m ? m[to] : undefined;
   }
 
-  set(from: UnitType, factor: string | Rational, to: UnitType, replace: boolean): void {
+  private set(from: UnitType, factor: string | Rational, to: UnitType, replace: boolean): void {
     let map = this.factors[from];
     if (!map) {
       this.factors[from] = map = {};
@@ -102,7 +122,7 @@ export class UnitFactorMap {
     }
   }
 
-  resolve(from: UnitType, to: UnitType): UnitFactor {
+  private resolve(from: UnitType, to: UnitType): UnitFactor {
     const one: UnitFactor = [ONE, to];
     if (from === to) {
       return one;
