@@ -319,41 +319,25 @@ export class Decimal {
 
     const [usePrecision, scaleprec, rounding] = parseMathContext('half-even', context);
 
+    let w: Decimal;
     let u: Decimal = this;
-    if (!usePrecision) {
-      // Shift the numerator to ensure the result has the desired scale.
-      const sh = scaleprec + v.scale();
-      if (sh > 0) {
-        u = u.shiftleft(sh);
-        u.exp -= sh;
-      }
-    }
+    const sign = u.sign === v.sign ? 1 : -1;
 
-    const w = new Decimal(ZERO);
+    const shift = usePrecision
+      ? (v.precision() - u.precision()) + scaleprec + 2
+      : v.precision() + u.precision() + scaleprec + 2;
 
-    // Shift in extra digits for rounding.
-    let shift = 2;
-
-    // In precision mode, ensure shift takes into account target precision
-    if (usePrecision) {
-      shift += (v.precision() - u.precision()) + scaleprec;
-    }
-
-    // Calculate the exponent on the result
     const exp = (u.exp - v.exp) - shift;
 
-    // Shift numerator or denominator
     if (shift > 0) {
       u = u.shiftleft(shift);
     } else if (shift < 0) {
       v = v.shiftleft(-shift);
     }
 
-    // Perform the division.
-    const [q, rem] = divide(u.data, v.data, false);
-    w.data = q;
-    w.sign = u.sign === v.sign ? 1 : -1;
-    w.exp = exp;
+    const [q, rem] = divide(u.data, v.data, true);
+
+    w = Decimal.fromRaw(sign, exp, q, 0);
     w.trim();
 
     const hasrem = rem.length && rem[rem.length - 1] !== 0;
@@ -1033,6 +1017,7 @@ export class Decimal {
       this._shiftright(-diff, roundingMode);
     }
     this.exp = scale === 0 ? 0 : -scale;
+    this.trim();
   }
 
   protected _stripTrailingZeros(): void {
