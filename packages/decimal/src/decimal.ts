@@ -325,7 +325,7 @@ export class Decimal {
 
     const shift = usePrecision
       ? (v.precision() - u.precision()) + scaleprec + 2
-      : v.precision() + u.precision() + scaleprec + 2;
+      : v.precision() + u.precision() + Math.abs(scaleprec) + 2;
 
     const exp = (u.exp - v.exp) - shift;
 
