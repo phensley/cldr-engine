@@ -6,9 +6,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## [UNRELEASED]
+## [0.25.6]
+### Fixed/Changed
+* Divsion scale mode use abs(scale)
+* Added a stress test for decimal math operations
+
+## [0.25.5]
 ### Added
-* The `@phensley/plurals` package now supports calculating cardinal plural category for ranges.
+* Calculation of plural categories for decimal ranges added to `@phensley/plurals`
+* Added minimal perfect hashing implementation
+* Added unit categories, mapped to units via minimal perfect hashing
+
+### Fixed/Changed
+* Simplfied `Decimal` division and fixed edge cases with `scale` math context
+* Removed errant `times` unit that slipped in due to a bug in filtering out unit patterns
 
 ## [0.25.4]
 ### Fixed/Changed
@@ -372,6 +383,8 @@ Split locale-related code into 3 new packages which can be used independently of
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.25.6]: https://github.com/phensley/cldr-engine/compare/v0.25.5...v0.25.6
+[0.25.5]: https://github.com/phensley/cldr-engine/compare/v0.25.4...v0.25.5
 [0.25.4]: https://github.com/phensley/cldr-engine/compare/v0.25.3...v0.25.4
 [0.25.3]: https://github.com/phensley/cldr-engine/compare/v0.25.2...v0.25.3
 [0.25.2]: https://github.com/phensley/cldr-engine/compare/v0.25.1...v0.25.2
