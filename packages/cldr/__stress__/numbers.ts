@@ -155,7 +155,7 @@ export const numberStress = () => {
         s = engine.Numbers.formatDecimal(n, o);
         if (!s) {
           if (VERBOSE) {
-            console.log(`format decimal empty ${n.toString()} ${JSON.stringify(o)}`);
+            console.log(`[numbers] format decimal empty ${n.toString()} ${JSON.stringify(o)}`);
           }
           empty++;
         }
@@ -164,7 +164,7 @@ export const numberStress = () => {
     }
     elapsed = timer.micros();
     total += i;
-    console.log(`format ${i} number permutations: ${elapsed} micros`);
+    console.log(`[numbers] format ${i} number permutations: ${elapsed} micros`);
 
     i = 0;
     timer.start();
@@ -174,7 +174,7 @@ export const numberStress = () => {
           s = engine.Numbers.formatCurrency(n, currency, o);
           if (!s) {
             if (VERBOSE) {
-              console.log(`format currency empty ${locale.id} ${n.toString()} ${currency} ${JSON.stringify(o)}`);
+              console.log(`[numbers] format currency empty ${locale.id} ${n.toString()} ${currency} ${JSON.stringify(o)}`);
             }
             empty++;
           }
@@ -184,7 +184,7 @@ export const numberStress = () => {
     }
     elapsed = timer.micros();
     total += i;
-    console.log(`format ${i} currency permutations: ${elapsed} micros`);
+    console.log(`[numbers] format ${i} currency permutations: ${elapsed} micros`);
 
     // TODO: enable once rbnf is incorporated
     // i = 0;
@@ -210,7 +210,7 @@ export const numberStress = () => {
           s = engine.Units.formatQuantity({ value: n, unit }, o);
           if (!s) {
             if (VERBOSE) {
-              console.log(`format quantity empty ${locale.id} ${n.toString()} ${unit} ${JSON.stringify(o)}`);
+              console.log(`[numbers] format quantity empty ${locale.id} ${n.toString()} ${unit} ${JSON.stringify(o)}`);
             }
             empty++;
           }
@@ -219,7 +219,7 @@ export const numberStress = () => {
           s = engine.Units.formatQuantity({ value: n, unit, per: 'second' }, o);
           if (!s) {
             if (VERBOSE) {
-              console.log(`format quantity per empty ${locale.id} ${n.toString()} ${unit} per: 'second' ${JSON.stringify(o)}`);
+              console.log(`[numbers] format quantity per empty ${locale.id} ${n.toString()} ${unit} per: 'second' ${JSON.stringify(o)}`);
             }
             empty++;
           }
@@ -229,7 +229,7 @@ export const numberStress = () => {
     }
     elapsed = timer.micros();
     total += i;
-    console.log(`format ${i} unit permutations: ${elapsed} micros`);
+    console.log(`[numbers] format ${i} unit permutations: ${elapsed} micros`);
   }
-  console.log(`executed ${total} total number and unit permutations, ${empty} empty`);
+  console.log(`[numbers] executed ${total} total number and unit permutations, ${empty} empty`);
 };

@@ -80,7 +80,7 @@ export const calendarStress = () => {
 
     elapsed = timer.micros();
     total += i;
-    console.log(`format ${i} gregorian permutations: ${elapsed} micros`);
+    console.log(`[calendars] format ${i} gregorian permutations: ${elapsed} micros`);
   }
-  console.log(`executed ${total} total number of calendar permutations, ${empty} empty`);
+  console.log(`[calendars] executed ${total} total number of calendar permutations, ${empty} empty`);
 };
