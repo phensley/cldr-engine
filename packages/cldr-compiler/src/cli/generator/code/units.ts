@@ -1,5 +1,5 @@
 import { lineWrap, Code, HEADER, NOLINT_MAXLINE } from './util';
-import { mphashCreate } from '../../../mphash';
+// import { mphashCreate } from '../../../mphash';
 
 export const getUnits = (data: any): Code[] => {
   const res: Code[] = [];
@@ -34,19 +34,21 @@ export const getUnits = (data: any): Code[] => {
 
   res.push(Code.types(['autogen.units.ts'], code));
 
+  // TODO: unit categories are not yet in use
+
   // Unit category values and mapping to units
-  code = `${HEADER}${NOLINT_MAXLINE}\n`;
-  code += `import { UnitCategory } from '@phensley/cldr-types';\n\n`;
-  code += `export const unitCategories: UnitCategory[] = [${categories.join(', ')}];\n\n`;
+  // code = `${HEADER}${NOLINT_MAXLINE}\n`;
+  // code += `import { UnitCategory } from '@phensley/cldr-types';\n\n`;
+  // code += `export const unitCategories: UnitCategory[] = [${categories.join(', ')}];\n\n`;
 
-  const vals = (nums: number[]) => nums.map(n => n === undefined ? '' : `${n}`).join(', ');
+  // const vals = (nums: number[]) => nums.map(n => n === undefined ? '' : `${n}`).join(', ');
 
-  const hash = mphashCreate(categoryMap);
-  code += `// Minimal perfect hash mapping units to the index of their category\n`;
-  code += `export const unitCategoryMapG: number[] = [${vals(hash.g)}];\n`;
-  code += `export const unitCategoryMapV: (number | undefined)[] = [${vals(hash.v)}];\n`;
-  code += `export const unitCategoryMapS: number = ${hash.s};\n`;
+  // const hash = mphashCreate(categoryMap);
+  // code += `// Minimal perfect hash mapping units to the index of their category\n`;
+  // code += `export const unitCategoryMapG: number[] = [${vals(hash.g)}];\n`;
+  // code += `export const unitCategoryMapV: (number | undefined)[] = [${vals(hash.v)}];\n`;
+  // code += `export const unitCategoryMapS: number = ${hash.s};\n`;
 
-  res.push(Code.core(['systems', 'units', 'autogen.units.ts'], code));
+  // res.push(Code.core(['systems', 'units', 'autogen.units.ts'], code));
   return res;
 };
