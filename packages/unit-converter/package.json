@@ -1,0 +1,67 @@
+{
+  "name": "@phensley/unit-converter",
+  "version": "0.25.6",
+  "description": "Conversions between CLDR units",
+  "main": "lib/index.js",
+  "module": "lib-es/index.js",
+  "types": "lib/index.d.ts",
+  "author": "Patrick Hensley <pathensley@gmail.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/phensley/cldr-engine/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phensley/cldr-engine"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "bench:off": "ts-node __benchmarks__/",
+    "build": "yarn build:cj && yarn build:es",
+    "build:cj": "tsc -p ./tsconfig.json",
+    "build:es": "tsc -p ./tsconfig.json --module esnext --outDir lib-es",
+    "build:lint": "tsc -p ./tsconfig.lint.json",
+    "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
+    "clean": "rimraf ./lib ./lib-es ./.scratch",
+    "clean:full": "yarn clean && rimraf ./node_modules",
+    "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
+    "lint": "tslint -p ./tsconfig.lint.json",
+    "prepublish": "yarn build",
+    "test:watch": "jest --watch --coverage --coverageReporters=html"
+  },
+  "files": [
+    "lib/",
+    "lib-es/"
+  ],
+  "dependencies": {
+    "@phensley/cldr-utils": "0.25.6",
+    "@phensley/decimal": "0.25.6",
+    "tslib": "1.10.x"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.22",
+    "@types/node": "^10.14.10",
+    "beautify-benchmark": "^0.2.4",
+    "benchmark": "^2.1.4",
+    "chalk": "^2.3.2",
+    "jest": "24.9.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "tslint-no-circular-imports": "^0.7.0",
+    "typescript": "3.7.x"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.ts"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    }
+  }
+}
