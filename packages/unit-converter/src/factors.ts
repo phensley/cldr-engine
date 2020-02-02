@@ -38,20 +38,20 @@ export const CONSUMPTION: FactorDef[] = [
   ['liter-per-100kilometers', '1 / 100', 'liter-per-kilometer']
 ];
 
-const DIGITAL_BASE: FactorDef[] = [
-  ...kfactors('1000', ['terabit', 'gigabit', 'megabit', 'kilobit', 'bit']),
+const DIGITAL_BASE: FactorDef[] =
+kfactors('1000', ['terabit', 'gigabit', 'megabit', 'kilobit', 'bit']).concat([
   ['byte', '8', 'bit'],
-];
+]);
 
-export const DIGITAL: FactorDef[] = [
-  ...DIGITAL_BASE,
-  ...kfactors('1024', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
-];
+export const DIGITAL: FactorDef[] =
+DIGITAL_BASE.concat(
+  kfactors('1024', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
+);
 
-export const DIGITAL_DECIMAL: FactorDef[] = [
-  ...DIGITAL_BASE,
-  ...kfactors('1000', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
-];
+export const DIGITAL_DECIMAL: FactorDef[] =
+DIGITAL_BASE.concat(
+  kfactors('1000', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
+);
 
 /**
  * Duration factors.  Values for month, year, century are approximate. If you
@@ -140,10 +140,10 @@ export const MASS: FactorDef[] = [
   ['ounce-troy', '12 / 175', 'pound'],
 ];
 
-export const POWER: FactorDef[] = [
-  ...kfactors('1000', ['gigawatt', 'megawatt', 'kilowatt', 'watt']),
-    ['horsepower', '745.69987158227', 'watt']
-];
+export const POWER: FactorDef[] =
+kfactors('1000', ['gigawatt', 'megawatt', 'kilowatt', 'watt']).concat([
+  ['horsepower', '745.69987158227', 'watt']
+]);
 
 export const PRESSURE: FactorDef[] = [
   ['hectopascal', '1', 'millibar'],
@@ -193,9 +193,7 @@ const VOLUME_BASE: FactorDef[] = [
   ['teaspoon', '1 / 6', 'fluid-ounce'],
 ];
 
-export const VOLUME: FactorDef[] = [
-  ...VOLUME_BASE,
-
+export const VOLUME: FactorDef[] = VOLUME_BASE.concat([
   // These are US units. Grouped to be overridden below for UK.
   ['bushel', '2150.42', 'cubic-inch'],
   ['gallon', '231', 'cubic-inch'],
@@ -205,9 +203,7 @@ export const VOLUME: FactorDef[] = [
   ['cup', '8', 'fluid-ounce'],
 ];
 
-export const VOLUME_UK: FactorDef[] = [
-  ...VOLUME_BASE,
-
+export const VOLUME_UK: FactorDef[] = VOLUME_BASE.concat([
   ['bushel', '8', 'gallon-imperial'],
   ['gallon', '4.54609', 'liter'],
   ['fluid-ounce', '1 / 160', 'gallon-imperial'],
