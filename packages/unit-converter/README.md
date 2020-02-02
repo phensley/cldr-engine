@@ -1,6 +1,6 @@
 # @phensley/unit-converter
 
-General framework for converting between units with pre-defined factors for conversion between CLDR units.
+General framework for converting between units. Includes pre-defined factors for conversion between CLDR units.
 
 ```typescript
 import { MathContext } from '@phensley/decimal';
