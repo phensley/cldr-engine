@@ -32,7 +32,6 @@ import {
   RelativeTimeFieldFormatOptions,
   RelativeTimeFormatOptions,
   TimeZoneInfo,
-  UnitConvertOptions,
   UnitFormatOptions,
   UnitLength,
   ZonedDateTime,
