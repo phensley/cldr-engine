@@ -44,7 +44,6 @@
     "@phensley/messageformat": "0.25.6",
     "@phensley/plurals": "0.25.6",
     "@phensley/timezone": "0.25.6",
-    "@phensley/unit-converter": "0.25.6",
     "tslib": "1.10.x"
   },
   "devDependencies": {
