@@ -201,7 +201,7 @@ export const VOLUME: FactorDef[] = VOLUME_BASE.concat([
   ['quart', '1 / 4', 'gallon'],
   ['pint', '1 / 8', 'gallon'],
   ['cup', '8', 'fluid-ounce'],
-];
+]);
 
 export const VOLUME_UK: FactorDef[] = VOLUME_BASE.concat([
   ['bushel', '8', 'gallon-imperial'],
@@ -210,4 +210,4 @@ export const VOLUME_UK: FactorDef[] = VOLUME_BASE.concat([
   ['quart', '1 / 4', 'gallon-imperial'],
   ['pint', '1 / 8', 'gallon-imperial'],
   ['cup', '284.1', 'milliliter']
-];
+]);
