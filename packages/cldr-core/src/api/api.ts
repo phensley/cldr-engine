@@ -32,6 +32,7 @@ import {
   RelativeTimeFieldFormatOptions,
   RelativeTimeFormatOptions,
   TimeZoneInfo,
+  UnitConvertOptions,
   UnitFormatOptions,
   UnitLength,
   ZonedDateTime,
@@ -347,6 +348,11 @@ export interface Units {
   availableUnits(): UnitType[];
 
   /**
+   * Convert a Decimal value units.
+   */
+  convertDecimal(n: Decimal, from: UnitType, to: UnitType, options?: UnitConvertOptions): Decimal | undefined;
+
+  /**
    * Formats the given unit quantity to string.
    */
   formatQuantity(qty: Quantity, options?: UnitFormatOptions): string;
@@ -370,5 +376,4 @@ export interface Units {
    * Returns the display name for the given unit.
    */
   getUnitDisplayName(name: UnitType, length?: UnitLength): string;
-
 }

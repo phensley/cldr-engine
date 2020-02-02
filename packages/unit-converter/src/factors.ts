@@ -53,6 +53,24 @@ export const DIGITAL_DECIMAL: FactorDef[] = [
   ...kfactors('1000', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
 ];
 
+/**
+ * Duration factors.  Values for month, year, century are approximate. If you
+ * want accurate duration conversions from a given date, use calendar math.
+ */
+export const DURATION: FactorDef[] = [
+  ['century', '315569520', 'second'],
+  ['year', '12', 'month'],
+  ['year', '31556952', 'second'],
+  ['month', '30.436875', 'day'],
+  ['week', '7', 'day'],
+  ['day', '24', 'hour'],
+  ['hour', '60', 'minute'],
+  ['minute', '60', 'second'],
+  ['second', '1000', 'millisecond'],
+  ['millisecond', '1000', 'microsecond'],
+  ['microsecond', '1000', 'nanosecond']
+];
+
 export const ELECTRIC: FactorDef[] = [
   ['ampere', '1000', 'milliampere']
 ];
@@ -197,27 +215,3 @@ export const VOLUME_UK: FactorDef[] = [
   ['pint', '1 / 8', 'gallon-imperial'],
   ['cup', '284.1', 'milliliter']
 ];
-
-export const DefaultFactors: { [category: string]: FactorDef[] } = {
-
-  acceleration: ACCELERATION,
-  angle: ANGLE,
-  area: AREA,
-  consumption: CONSUMPTION,
-  digital: DIGITAL,
-  // duration: use calendar math to convert
-  electric: ELECTRIC,
-  energy: ENERGY,
-  force: FORCE,
-  frequency: FREQUENCY,
-  length: LENGTH,
-  // light: lux <-> solar luminance depends on time of year, atmospheric conditions
-  mass: MASS,
-  power: POWER,
-  pressure: PRESSURE,
-  speed: SPEED,
-  // temperature: TBD: computed with functions
-  torque: TORQUE,
-  volume: VOLUME,
-  ['volume-uk']: VOLUME_UK
-};

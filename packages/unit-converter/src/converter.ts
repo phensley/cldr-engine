@@ -1,12 +1,12 @@
 import { Decimal, MathContext } from '@phensley/decimal';
-import { UnitFactorMap } from './factormap';
+import { UnitFactors } from './factormap';
 
 /**
  * Converts between units.
  */
 export class UnitConverter {
 
-  private storage: { [category: string]: UnitFactorMap } = {};
+  private storage: { [category: string]: UnitFactors } = {};
 
   // Mapping of unit to category that converts it
   private units: { [unit: string]: string[] } = {};
@@ -21,7 +21,7 @@ export class UnitConverter {
   /**
    * Add a set of conversion factors with the given category name.
    */
-  add(category: string, map: UnitFactorMap): void {
+  add(category: string, map: UnitFactors): void {
     if (this.storage[category]) {
       throw new Error(`this converter has registered factors for category ${category}`);
     }
@@ -35,7 +35,7 @@ export class UnitConverter {
     }
   }
 
-  factors(category: string): UnitFactorMap | undefined {
+  factors(category: string): UnitFactors | undefined {
     return this.storage[category];
   }
 

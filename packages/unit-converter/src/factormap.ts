@@ -30,34 +30,21 @@ const ONE = new Rational(1);
  * conversion factor by multiplying all factors along the path. Finally the
  * new factor is added to the graph.
  */
-export class UnitFactorMap {
+export class UnitFactors {
 
   readonly units: string[] = [];
+  readonly unitset: Set<string> = new Set();
   private graph: G<Rational> = {};
+  private initialized: boolean = false;
 
-  constructor(factors: FactorDef[]) {
-    for (const factor of factors) {
-      const [ src, raw, dst ] = factor;
-      const rat = typeof raw === 'string' ? new Rational(raw) : raw;
-
-      // Convert src -> dst
-      let m = this.graph[src];
-      if (!m) {
-        this.graph[src] = m = {};
-      }
-      m[dst] = rat;
-
-      // Convert dst -> src, if an explicit mapping does not already exist.
-      m = this.graph[dst];
-      if (!m) {
-        this.graph[dst] = m = {};
-      }
-      const tmp = m[src];
-      if (!tmp) {
-        m[src] = rat.inverse();
-      }
+  constructor(readonly factors: FactorDef[]) {
+    for (let i = 0; i < factors.length; i++) {
+      const [src, , dst] = factors[i];
+      this.unitset.add(src);
+      this.unitset.add(dst);
     }
-    this.units = (Object.keys(this.graph) as string[]).sort();
+    this.unitset.forEach(u => this.units.push(u));
+    this.units.sort();
   }
 
   /**
@@ -67,6 +54,10 @@ export class UnitFactorMap {
     // Units are the same, conversion is 1
     if (src === dst) {
       return ONE;
+    }
+
+    if (!this.initialized) {
+      this.init();
     }
 
     // See if a direct conversion exists
@@ -102,6 +93,34 @@ export class UnitFactorMap {
     }
     // No conversion factor exists
     return undefined;
+  }
+
+  /**
+   * Lazy-initialize constructing the intial factor graph.
+   */
+  protected init(): void {
+    for (const factor of this.factors) {
+      const [ src, raw, dst ] = factor;
+      const rat = typeof raw === 'string' ? new Rational(raw) : raw;
+
+      // Convert src -> dst
+      let m = this.graph[src];
+      if (!m) {
+        this.graph[src] = m = {};
+      }
+      m[dst] = rat;
+
+      // Convert dst -> src, if an explicit mapping does not already exist.
+      m = this.graph[dst];
+      if (!m) {
+        this.graph[dst] = m = {};
+      }
+      const tmp = m[src];
+      if (!tmp) {
+        m[src] = rat.inverse();
+      }
+    }
+    this.initialized = true;
   }
 
   /**

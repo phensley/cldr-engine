@@ -1,5 +1,5 @@
 import { UnitType } from '@phensley/cldr-types';
-import { Decimal } from '@phensley/decimal';
+import { Decimal, MathContext } from '@phensley/decimal';
 
 import { NumberFormatOptions, NumberFormatStyleType } from './numbers';
 
@@ -28,4 +28,11 @@ export interface UnitFormatOptions extends NumberFormatOptions {
   divisor?: number;
   style?: UnitFormatStyleType;
   length?: UnitLength;
+}
+
+/**
+ * @alpha
+ */
+export interface UnitConvertOptions {
+  ctx?: MathContext;
 }

@@ -22,7 +22,6 @@ export class UnitsInternalImpl implements UnitInternals {
     const schema = internals.schema;
     this.unitsSchema = schema.Units;
     this.numbersSchema = schema.Numbers;
-
   }
 
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string {
