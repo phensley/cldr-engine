@@ -41,12 +41,12 @@ const _year = <T extends CalendarDate>(ctx: CalendarContext<T>, year: number, wi
 
 export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFormatter<T> {
 
-  readonly general: GeneralInternals;
-  readonly tz: TimeZoneSchema;
+  private general: GeneralInternals;
+  private tz: TimeZoneSchema;
 
   constructor(
-    readonly internals: Internals,
-    readonly cal: CalendarSchema
+    private internals: Internals,
+    private cal: CalendarSchema
   ) {
     this.general = internals.general;
     this.tz = internals.schema.TimeZones;

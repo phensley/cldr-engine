@@ -13,8 +13,8 @@ export class PrivateApiImpl {
   private contextTransforms: ContextTransformInfo;
 
   constructor(
-    protected bundle: Bundle,
-    protected internals: Internals
+    private bundle: Bundle,
+    private internals: Internals
   ) {
     this.numberParamsCache = new NumberParamsCache(bundle, internals);
     this.contextTransforms =

@@ -15,7 +15,6 @@ test('available units', () => {
   expect(api.availableUnits()).toContain('permyriad');
   expect(api.availableUnits()).toContain('british-thermal-unit');
   expect(api.availableUnits()).toContain('newton-meter');
-
 });
 
 test('cldr v35 units', () => {

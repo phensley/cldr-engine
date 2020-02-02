@@ -1,18 +1,31 @@
 import { UnitType } from '@phensley/cldr-types';
-import { Decimal, MathContext, Part, Rational } from '@phensley/decimal';
-import {
-  ACCELERATION,
-  ANGLE,
-  AREA,
-  CONSUMPTION,
-  DIGITAL,
-  DIGITAL_DECIMAL,
-  FactorDef,
-  UnitFactors
-} from '@phensley/unit-converter';
+import { Part } from '@phensley/decimal';
+// import { Decimal, DecimalArg, Part, Rational } from '@phensley/decimal';
+// import {
+//   ACCELERATION,
+//   ANGLE,
+//   AREA,
+//   CONSUMPTION,
+//   DIGITAL,
+//   DURATION,
+//   ELECTRIC,
+//   ENERGY,
+//   FactorDef,
+//   FORCE,
+//   FREQUENCY,
+//   GRAPHICS_PER,
+//   GRAPHICS_PIXEL,
+//   LENGTH,
+//   MASS,
+//   POWER,
+//   PRESSURE,
+//   SPEED,
+//   TORQUE,
+//   UnitFactors,
+// } from '@phensley/unit-converter';
 
 import { GeneralInternals, Internals, NumberInternals, UnitInternals } from '../internals';
-import { ListPatternType, Quantity, UnitConvertOptions, UnitFormatOptions, UnitLength } from '../common';
+import { ListPatternType, Quantity, UnitFormatOptions, UnitLength } from '../common';
 import { Bundle } from '../resource';
 import { PartsValue } from '../utils/render';
 
@@ -21,29 +34,42 @@ import { PrivateApiImpl } from './private';
 
 const DEFAULT_OPTIONS: UnitFormatOptions = { length: 'long', style: 'decimal' };
 
-const BASE_FACTORS = [
-  ACCELERATION,
-  ANGLE,
-  AREA,
-  CONSUMPTION,
+// const BASE_FACTORS = [
+//   ACCELERATION,
+//   ANGLE,
+//   AREA,
+//   CONSUMPTION,
+//   DIGITAL,
+//   DURATION,
+//   ELECTRIC,
+//   ENERGY,
+//   FORCE,
+//   FREQUENCY,
+//   GRAPHICS_PER,
+//   GRAPHICS_PIXEL,
+//   LENGTH,
+//   MASS,
+//   POWER,
+//   PRESSURE,
+//   SPEED,
+//   TORQUE,
+// ];
 
-];
+// type Converters = { [unit: string]: UnitFactors };
 
-type Converters = { [unit: string]: UnitFactors };
-
-const addfactors = (c: Converters, defs: FactorDef[]) => {
-  const factors = new UnitFactors(defs);
-  for (const unit of factors.units) {
-    c[unit] = factors;
-  }
-};
+// const addfactors = (c: Converters, defs: FactorDef[]) => {
+//   const factors = new UnitFactors(defs);
+//   for (const unit of factors.units) {
+//     c[unit] = factors;
+//   }
+// };
 
 export class UnitsImpl implements Units {
 
   private general: GeneralInternals;
   private numbers: NumberInternals;
   private units: UnitInternals;
-  private converters: Converters = {};
+  // private converters: Converters = {};
 
   constructor(
     private bundle: Bundle,
@@ -55,25 +81,29 @@ export class UnitsImpl implements Units {
     this.units = internal.units;
 
     // Build the unit converter
-    for (const defs of BASE_FACTORS) {
-      addfactors(this.converters, defs);
-    }
+    // for (const defs of BASE_FACTORS) {
+    //   addfactors(this.converters, defs);
+    // }
+
+    // TODO: add locale-specific factors for volume
+    // TODO: add locale-specific temperature conversions
   }
 
   availableUnits(): UnitType[] {
     return this.internal.indices['unit-id'].keys.slice(0) as UnitType[];
   }
 
-  convertDecimal(n: Decimal, from: UnitType, to: UnitType, options?: UnitConvertOptions): Decimal | undefined {
-    const converter = this.converters[from];
-    if (converter) {
-      const fac = converter.get(from, to);
-      if (fac) {
-        return new Rational(n).multiply(fac, options ? options.ctx : undefined).toDecimal();
-      }
-    }
-    return undefined;
-  }
+  // convertDecimal(n: DecimalArg, from: UnitType, to: UnitType, options?: UnitConvertOptions): Decimal | undefined {
+  //   const converter = this.converters[from];
+  //   if (converter) {
+  //     const fac = converter.get(from, to);
+  //     if (fac) {
+  //       const ctx = options ? options.ctx : undefined;
+  //       return new Rational(n).multiply(fac, ctx).toDecimal(ctx);
+  //     }
+  //   }
+  //   return undefined;
+  // }
 
   getUnitDisplayName(name: UnitType, length?: UnitLength): string {
     return this.units.getDisplayName(this.bundle, name, length || 'long');

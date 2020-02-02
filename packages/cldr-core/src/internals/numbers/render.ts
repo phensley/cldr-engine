@@ -9,7 +9,7 @@ import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
 export abstract class NumberFormatter<R> implements NumberRenderer<R> {
 
   constructor(
-    readonly params: NumberParams) { }
+    private params: NumberParams) { }
 
   render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
       decimalSymbol: string, minInt: number, grouping: boolean = true, exponent?: number): R {

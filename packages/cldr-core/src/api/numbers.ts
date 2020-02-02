@@ -31,7 +31,7 @@ const DEFAULT_CURRENCY_OPTIONS: CurrencyDisplayNameOptions = { context: 'begin-s
  */
 export class NumbersImpl implements Numbers {
 
-  protected transform: ContextTransformInfo;
+  private transform: ContextTransformInfo;
 
   constructor(
     private readonly bundle: Bundle,

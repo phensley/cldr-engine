@@ -54,21 +54,20 @@ const DOW_FIELDS: RelativeTimeFieldType[] = ['sun', 'mon', 'tue', 'wed', 'thu', 
 
 export class CalendarsImpl implements Calendars {
 
-  readonly manager: CalendarManager;
-  readonly firstDay: number;
-  readonly minDays: number;
+  private manager: CalendarManager;
+  private firstDay: number;
+  private minDays: number;
   private exemplarCities: { [x: string]: string } | undefined;
 
   constructor(
-    protected readonly bundle: Bundle,
-    protected readonly internals: Internals,
-    protected readonly privateApi: PrivateApiImpl
+    private readonly bundle: Bundle,
+    private readonly internals: Internals,
+    private readonly privateApi: PrivateApiImpl
   ) {
     this.manager = new CalendarManager(bundle, internals);
     const region = bundle.region();
     this.firstDay = internals.calendars.weekFirstDay(region);
     this.minDays = internals.calendars.weekMinDays(region);
-
   }
 
   /**

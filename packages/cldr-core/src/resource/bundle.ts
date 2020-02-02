@@ -30,12 +30,12 @@ export class StringBundle implements Bundle {
   private _plurals: PluralRules;
 
   constructor(
-    readonly _id: string,
-    readonly _tag: LanguageTag,
-    readonly strings: string[],
-    readonly exceptions: string[],
-    readonly index: ExceptionIndex,
-    readonly _spellout: any
+    private _id: string,
+    private _tag: LanguageTag,
+    private strings: string[],
+    private exceptions: string[],
+    private index: ExceptionIndex,
+    private _spellout: any
   ) {
     const language = _tag.language();
     this._languageRegion = `${language}-${_tag.region()}`;

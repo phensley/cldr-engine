@@ -21,8 +21,8 @@ export class NumberParamsCache {
   private latnSystemInfo: NumberSystemInfo;
 
   constructor(
-    protected bundle: Bundle,
-    protected internals: Internals
+    private bundle: Bundle,
+    private internals: Internals
   ) {
     this.numberParamsCache = new Cache((s: string) => this.build(s as NumberSystemName), 20);
     this.numbers = internals.schema.Numbers;

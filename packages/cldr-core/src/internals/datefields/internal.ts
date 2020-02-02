@@ -17,10 +17,10 @@ import { ContextTransformInfo, NumberParams } from '../../common/private';
 
 export class DateFieldInternalsImpl implements DateFieldInternals {
 
-  readonly relativeTimes: RelativeTimes;
+  private relativeTimes: RelativeTimes;
 
   constructor(
-    readonly internals: Internals
+    private internals: Internals
   ) {
     this.relativeTimes = internals.schema.DateFields.relativeTimes;
   }

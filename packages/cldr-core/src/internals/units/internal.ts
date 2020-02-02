@@ -1,5 +1,4 @@
 import {
-  NumbersSchema,
   PluralType,
   UnitsSchema,
   UnitInfo,
@@ -15,13 +14,11 @@ import { Bundle } from '../../resource';
 
 export class UnitsInternalImpl implements UnitInternals {
 
-  readonly numbersSchema: NumbersSchema;
-  readonly unitsSchema: UnitsSchema;
+  private unitsSchema: UnitsSchema;
 
-  constructor(readonly internals: Internals) {
+  constructor(private internals: Internals) {
     const schema = internals.schema;
     this.unitsSchema = schema.Units;
-    this.numbersSchema = schema.Numbers;
   }
 
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string {

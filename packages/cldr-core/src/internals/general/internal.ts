@@ -4,7 +4,6 @@ import {
   LayoutSchema,
   ListPatternsSchema,
   ListPatternPositionType,
-  NamesSchema,
   Vector1Arrow,
 } from '@phensley/cldr-types';
 
@@ -20,16 +19,14 @@ import { parseWrapperPattern, WrapperNode } from '../../parsing/wrapper';
 
 export class GeneralInternalsImpl implements GeneralInternals {
 
-  protected layout: LayoutSchema;
-  protected listPatterns: ListPatternsSchema;
-  protected names: NamesSchema;
+  private layout: LayoutSchema;
+  private listPatterns: ListPatternsSchema;
 
-  protected wrapperPatternCache: Cache<WrapperNode[]>;
+  private wrapperPatternCache: Cache<WrapperNode[]>;
 
-  constructor(readonly internals: Internals, cacheSize: number = 50) {
+  constructor(private internals: Internals, cacheSize: number = 50) {
     const schema = internals.schema;
     this.layout = schema.Layout;
-    this.names = schema.Names;
     this.listPatterns = schema.ListPatterns;
     this.wrapperPatternCache = new Cache(parseWrapperPattern, cacheSize);
   }

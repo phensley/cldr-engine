@@ -1,11 +1,11 @@
 import { Rational } from '@phensley/decimal';
-import { ANGLE, AREA, FactorDef, UnitFactorMap } from '../src';
+import { ANGLE, AREA, FactorDef, UnitFactors } from '../src';
 
 test('factors', () => {
   const factors: FactorDef[] = [
     ['g-force', '9.80665', 'meter-per-second-squared']
   ];
-  const map = new UnitFactorMap(factors);
+  const map = new UnitFactors(factors);
   let factor: Rational;
 
   factor = map.get('g-force', 'meter-per-second-squared')!;
@@ -16,7 +16,7 @@ test('factors', () => {
 });
 
 test('angle', () => {
-  const map = new UnitFactorMap(ANGLE);
+  const map = new UnitFactors(ANGLE);
   let factor: Rational;
 
   factor = map.get('arc-second', 'arc-minute')!;
@@ -33,7 +33,7 @@ test('angle', () => {
 });
 
 test('area', () => {
-  const map = new UnitFactorMap(AREA);
+  const map = new UnitFactors(AREA);
   let factor: Rational;
 
   factor = map.get('acre', 'square-foot')!;

@@ -43,14 +43,14 @@ const LANGUAGE_FUNCS: LanguageTagFunc[] = [
 
 export class GeneralImpl implements General {
 
-  protected general: GeneralInternals;
-  protected names: NamesSchema;
-  protected transform: ContextTransformInfo;
+  private general: GeneralInternals;
+  private names: NamesSchema;
+  private transform: ContextTransformInfo;
 
   constructor(
-    protected _bundle: Bundle,
-    protected _locale: Locale,
-    protected internal: Internals,
+    private _bundle: Bundle,
+    private _locale: Locale,
+    internal: Internals,
     _private: PrivateApiImpl
   ) {
     this.general = internal.general;

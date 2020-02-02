@@ -13,18 +13,18 @@ const U = undefined;
  */
 export class PackScript {
 
-  readonly _strings: string[];
-  readonly _exceptions: string[];
-  readonly _regions: { [x: string]: string };
-  readonly _cache: { [x: string]: ExceptionIndex} = {};
-  readonly _defaultRegion: string;
+  private _strings: string[];
+  private _exceptions: string[];
+  private _regions: { [x: string]: string };
+  private _cache: { [x: string]: ExceptionIndex} = {};
+  private _defaultRegion: string;
 
   constructor(
     strings: string,
     exceptions: string,
     regions: { [x: string]: string },
     defaultRegion: string,
-    readonly _spellout: any
+    private _spellout: any
   ) {
     this._strings = strings.split(Chars.DELIM);
     this._exceptions = exceptions.split(Chars.DELIM);

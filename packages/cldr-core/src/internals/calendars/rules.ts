@@ -22,7 +22,7 @@ export class DayPeriodRules {
 
   private cache: Cache<Rule>;
 
-  constructor(protected cacheSize: number) {
+  constructor(cacheSize: number) {
     this.cache = new Cache(parseRule, cacheSize);
   }
 

@@ -348,9 +348,9 @@ export interface Units {
   availableUnits(): UnitType[];
 
   /**
-   * Convert a Decimal value units.
+   * Convert a decimal value between units.
    */
-  convertDecimal(n: Decimal, from: UnitType, to: UnitType, options?: UnitConvertOptions): Decimal | undefined;
+  // convertDecimal(n: Decimal, from: UnitType, to: UnitType, options?: UnitConvertOptions): Decimal | undefined;
 
   /**
    * Formats the given unit quantity to string.

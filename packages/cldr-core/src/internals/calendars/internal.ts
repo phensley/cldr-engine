@@ -18,16 +18,16 @@ import { DayPeriodRules } from './rules';
  */
 export class CalendarInternalsImpl implements CalendarInternals {
 
-  readonly schema: Schema;
-  readonly dayPeriodRules: DayPeriodRules;
-  readonly patternCache: Cache<DateTimeNode[]>;
-  readonly hourPatternCache: Cache<[DateTimeNode[], DateTimeNode[]]>;
-  readonly calendarFormatterCache: Cache<CalendarFormatter<CalendarDate>>;
-  readonly availableCalendars: Set<string>;
+  private schema: Schema;
+  private dayPeriodRules: DayPeriodRules;
+  private patternCache: Cache<DateTimeNode[]>;
+  private hourPatternCache: Cache<[DateTimeNode[], DateTimeNode[]]>;
+  private calendarFormatterCache: Cache<CalendarFormatter<CalendarDate>>;
+  private availableCalendars: Set<string>;
 
   constructor(
-    readonly internals: Internals,
-    readonly cacheSize: number = 50
+    private internals: Internals,
+    cacheSize: number = 50
   ) {
     this.schema = internals.schema;
     this.dayPeriodRules = new DayPeriodRules(cacheSize);

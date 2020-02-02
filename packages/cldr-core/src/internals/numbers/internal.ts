@@ -41,12 +41,12 @@ const negzero = (n: Decimal, show?: boolean) =>
  */
 export class NumberInternalsImpl implements NumberInternals {
 
-  readonly currencies: CurrenciesSchema;
-  readonly numbers: NumbersSchema;
+  private currencies: CurrenciesSchema;
+  private numbers: NumbersSchema;
 
-  protected readonly numberPatternCache: Cache<NumberPattern[]>;
+  private readonly numberPatternCache: Cache<NumberPattern[]>;
 
-  constructor(readonly internals: Internals, cacheSize: number = 50) {
+  constructor(private internals: Internals, cacheSize: number = 50) {
     const schema = internals.schema;
     this.currencies = schema.Currencies;
     this.numbers = schema.Numbers;
