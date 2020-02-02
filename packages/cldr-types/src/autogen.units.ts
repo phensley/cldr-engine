@@ -54,4 +54,3 @@ export type UnitCategory =   'acceleration' |  'angle' |  'area' |  'concentr'
  |  'energy' |  'force' |  'frequency' |  'graphics' |  'length'
  |  'light' |  'mass' |  'power' |  'pressure' |  'speed'
  |  'temperature' |  'torque' |  'volume';
-
