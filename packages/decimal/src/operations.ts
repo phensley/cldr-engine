@@ -53,6 +53,9 @@ export const compare = (a: number[], b: number[], shift: number): number => {
 };
 
 export const allzero = (data: number[], len: number): number => {
+  if (len > data.length) {
+    return 1;
+  }
   while (--len >= 0) {
     if (data[len] !== 0) {
       return 0;

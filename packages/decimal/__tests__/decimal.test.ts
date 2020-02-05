@@ -311,14 +311,18 @@ test('shift right', () => {
   expect(shr('999', 2, m)).toEqual(parse('10e2'));
 
   expect(shr('99', 1, m)).toEqual(parse('10e1'));
-  expect(shr('99', 2, m)).toEqual(parse('1e2'));
+  expect(shr('99', 2, m)).toEqual(parse('0e2'));
 
-  expect(shr('9', 1, m)).toEqual(parse('1e1'));
+  expect(shr('9', 1, m)).toEqual(parse('0e1'));
   expect(shr('9', 2, m)).toEqual(parse('0e2'));
+
+  expect(shr('1', 1, m)).toEqual(parse('0e1'));
+  expect(shr('1', 2, m)).toEqual(parse('0e2'));
 
   expect(shr('100000000000000', 12, m)).toEqual(parse('100e12'));
   expect(shr('100000000000000', 13, m)).toEqual(parse('10e13'));
   expect(shr('100000000000000', 14, m)).toEqual(parse('1e14'));
+  expect(shr('100000000000000', 15, m)).toEqual(parse('0e15'));
 
   expect(shr('99999', 1, m)).toEqual(parse('10000e1'));
   expect(shr('999999', 1, m)).toEqual(parse('100000e1'));

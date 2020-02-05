@@ -18,7 +18,20 @@ test('addition', () => {
 
   expect(add('-1.234', '-50e1')).toEqual(parse('-501.234'));
   expect(add('-1.234', '.001')).toEqual(parse('-1.233'));
+});
 
+test('signs', () => {
+  expect(add('1', '1')).toEqual(parse('2'));
+  expect(add('1', '-1')).toEqual(parse('0'));
+
+  expect(add('-1', '1')).toEqual(parse('-0'));
+  expect(add('-1', '-1')).toEqual(parse('-2'));
+
+  expect(add('1000050000000', '-50000000')).toEqual(parse('1000000000000'));
+  expect(add('50000000', '-1000050000000')).toEqual(parse('-1000000000000'));
+
+  expect(add('9999999999', '-0.00000000001')).toEqual(parse('9999999998.99999999999'));
+  expect(add('0.00000000001', '-9999999999')).toEqual(parse('-9999999998.99999999999'));
 });
 
 test('addition carry', () => {

@@ -131,7 +131,7 @@ test('divide with precision', () => {
   expect(div('10', '6', { precision: 20 })).toEqual(parse('1.6666666666666666667'));
   expect(div('10', '6', { precision: 30 })).toEqual(parse('1.66666666666666666666666666667'));
 
-  // expect(div('10000', '6', { precision: 0 })).toEqual(parse('0e4'));
+  expect(div('10000', '6', { precision: 0 })).toEqual(parse('0e4'));
   expect(div('10000', '6', { precision: 1 })).toEqual(parse('2e3'));
   expect(div('10000', '6', { precision: 2 })).toEqual(parse('17e2'));
   expect(div('10000', '6', { precision: 3 })).toEqual(parse('167e1'));

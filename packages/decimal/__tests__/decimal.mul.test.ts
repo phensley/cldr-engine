@@ -8,6 +8,9 @@ test('multiply', () => {
   expect(mul('1.234', '0')).toEqual(parse('0.000'));
   expect(mul('-1.234', '0')).toEqual(parse('-0.000'));
 
+  expect(mul('1', '1', { precision: 0 })).toEqual(parse('0e1'));
+  expect(mul('1', '1', { precision: 1 })).toEqual(parse('1'));
+
   expect(mul('15', '100')).toEqual(parse('1500'));
   expect(mul('15000000', '100000')).toEqual(parse('1500000000000'));
 
@@ -61,7 +64,7 @@ test('multiply with precision', () => {
   expect(mul('10', '.33333', { precision: 5 })).toEqual(parse('3.3333'));
   expect(mul('10', '.33333', { precision: 6 })).toEqual(parse('3.33330'));
 
-  expect(mul('10', '.66666', { precision: 0 })).toEqual(parse('1e1'));
+  expect(mul('10', '.66666', { precision: 0 })).toEqual(parse('0e1'));
   expect(mul('10', '.66666', { precision: 1 })).toEqual(parse('7'));
   expect(mul('10', '.66666', { precision: 2 })).toEqual(parse('6.7'));
   expect(mul('10', '.66666', { precision: 3 })).toEqual(parse('6.67'));

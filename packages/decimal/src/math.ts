@@ -157,8 +157,6 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
   // Storage for quotient and remainder.
   const q = new Array(nplusm + 1);
   q.fill(0);
-  const r = new Array(m);
-  r.fill(0);
 
   // D1. Normalize
   const d = (Constants.RADIX / (v[n - 1] + 1)) | 0;
@@ -232,6 +230,8 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
   // D8. Unnormalize remainder.
   if (remainder) {
     k = 0;
+    const r = new Array(n);
+    r.fill(0);
     for (let i = n - 1; i >= 0; i--) {
       p = u[i] + (k * Constants.RADIX);
       r[i] = (p / d) | 0;

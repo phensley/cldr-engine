@@ -253,7 +253,13 @@ export class Decimal {
   add(v: DecimalArg): Decimal {
     v = coerceDecimal(v);
     const r = this.handleFlags(Op.ADDITION, v);
-    return r === undefined ? this.addsub(this, v, v.sign) : r;
+    if (r === undefined) {
+      if (this.isZero()) {
+        return v;
+      }
+      return v.isZero() ? this : this.addsub(this, v, v.sign);
+    }
+    return r;
   }
 
   /**
@@ -262,7 +268,13 @@ export class Decimal {
   subtract(v: DecimalArg): Decimal {
     v = coerceDecimal(v);
     const r = this.handleFlags(Op.SUBTRACTION, v);
-    return r === undefined ? this.addsub(this, v, -v.sign) : r;
+    if (r === undefined) {
+      if (this.isZero()) {
+        return v.negate();
+      }
+      return v.isZero() ? this : this.addsub(this, v, -v.sign);
+    }
+    return r;
   }
 
   /**
@@ -837,8 +849,6 @@ export class Decimal {
         } else if (uinf || vinf) {
           return uinf ? (u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY)
             : v.sign === 1 ? NEGATIVE_INFINITY : POSITIVE_INFINITY;
-        } else if (uzero || vzero) {
-          return uzero ? v.negate() : u;
         }
         break;
 
@@ -957,13 +967,30 @@ export class Decimal {
       this.exp += shift;
       return;
     }
+
     const w: Decimal = this;
-    const data = w.data.slice();
-    w.data.fill(0);
+    const prec = w.precision();
+
+    // Check if shift exceeds precision, so all digits are shifted to
+    // zero with no rounding possible. Just set zero and bump the exponent.
+    if (prec < shift) {
+      w.data = [0];
+      w.exp += shift;
+      return;
+    }
+
+    // We only want to round up when there is a free zero integer
+    // digit to the left. We do this when the number is < 0 or
+    // we're not shifting out all of the digits.
+    const round = w.alignexp() < 0 || prec !== shift;
 
     const div = new DivMod();
     const [q, r] = div.word(shift, Constants.RDIGITS);
 
+    const data = w.data.slice();
+    w.data.fill(0);
+
+    // check if we divided evenly
     let i = 0, j = 0;
     let rnd = 0, rest = 0;
 
@@ -977,38 +1004,34 @@ export class Decimal {
       for (j = 0; j < data.length - q; j++) {
         w.data[j] = data[q + j];
       }
-      w.exp += shift;
-      if (w.round(rnd, rest, mode)) {
-        w._increment();
+    } else {
+      let hiprev = 0;
+      const ph = POWERS10[Constants.RDIGITS - r];
+      if (q < data.length) {
+        [hiprev, rest] = div.pow10(data[q], r);
       }
-      w.trim();
-      return;
+      [rnd, rest] = div.pow10(rest, r - 1);
+      if (rest === 0 && q > 0) {
+        rest = allzero(data, q) === 0 ? 1 : 0;
+      }
+
+      for (j = 0, i = q + 1; i < data.length; i++ , j++) {
+        const [hi, lo] = div.pow10(data[i], r);
+        w.data[j] = ph * lo + hiprev;
+        hiprev = hi;
+      }
+      if (hiprev !== 0) {
+        w.data[j] = hiprev;
+      }
     }
 
-    let hiprev = 0;
-    const ph = POWERS10[Constants.RDIGITS - r];
-    if (q < data.length) {
-      [hiprev, rest] = div.pow10(data[q], r);
-    }
-    [rnd, rest] = div.pow10(rest, r - 1);
-    if (rest === 0 && q > 0) {
-      rest = allzero(data, q) === 0 ? 1 : 0;
-    }
-
-    for (j = 0, i = q + 1; i < data.length; i++ , j++) {
-      const [hi, lo] = div.pow10(data[i], r);
-      w.data[j] = ph * lo + hiprev;
-      hiprev = hi;
-    }
-    if (hiprev !== 0) {
-      w.data[j] = hiprev;
-    }
-
+    w.trim();
     w.exp += shift;
-    if (w.round(rnd, rest, mode)) {
+
+    if (round && w.round(rnd, rest, mode)) {
+      // If precision changes due to rounding, subtract from exponent
       w._increment();
     }
-    w.trim();
   }
 
   protected _setScale(scale: number, roundingMode: RoundingModeType = 'half-even'): void {
@@ -1047,7 +1070,6 @@ export class Decimal {
    * Increment the least-significant digit of the coefficient.
    */
   protected _increment(): void {
-    const z = this.isZero();
     const d = this.data;
     const len = d.length;
     let s = 0;
@@ -1059,10 +1081,6 @@ export class Decimal {
     }
     if (k === 1) {
       d.push(1);
-    }
-    // Check if we incremented from zero.
-    if (z) {
-      this.sign = 1;
     }
   }
 
