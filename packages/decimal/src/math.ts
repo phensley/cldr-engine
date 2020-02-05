@@ -39,25 +39,36 @@ export const add = (u: number[], v: number[]): number[] => {
  * Numbers must already be aligned and length u >= length v.
  */
 export const subtract = (u: number[], v: number[]): number[] => {
-  const vlen = v.length;
-  const n = u.length;
-  const w: number[] = new Array(n);
+  const m = u.length;
+  const n = v.length;
+  const w: number[] = new Array(m);
 
   // S1. Initialize
   let j = 0;
   let k = 0;
+
+  // S2. Subtract digits
   while (j < n) {
-    // v may be shorter than u
-    const vj = j < vlen ? v[j] : 0;
-
-    // S2. Subtract digits
-    const z = u[j] - vj + k;
-    w[j] = z < 0 ? z + Constants.RADIX : z;
-
-    // .. k is set to -1 or 0, to borrow
-    k = z < 0 ? -1 : 0;
+     const z = u[j] - v[j] - k;
+     w[j] = z < 0 ? z + Constants.RADIX : z;
+     // k is set to 1 or 0, indicating a borrow
+     k = z < 0 ? 1 : 0;
+    j++;
 
     // S3. Loop on j
+  }
+
+  // Propagate the borrow flag up
+  while (k && j < m) {
+    const z = u[j] - k;
+    w[j] = z < 0 ? z + Constants.RADIX : z;
+    k = z < 0 ? 1 : 0;
+    j++;
+  }
+
+  // Borrow done, copy remainder of larger number
+  while (j < m) {
+    w[j] = u[j];
     j++;
   }
   return w;

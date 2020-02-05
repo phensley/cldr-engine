@@ -837,6 +837,8 @@ export class Decimal {
         } else if (uinf || vinf) {
           return uinf ? (u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY)
             : v.sign === 1 ? NEGATIVE_INFINITY : POSITIVE_INFINITY;
+        } else if (uzero || vzero) {
+          return uzero ? v.negate() : u;
         }
         break;
 
