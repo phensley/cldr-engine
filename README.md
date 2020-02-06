@@ -33,7 +33,18 @@ yarn add @phensley/cldr
 
 Packages with the `cldr-*` prefix represent pieces of the larger library and are designed to work together. The [`@phensley/cldr`](https://www.npmjs.com/package/@phensley/cldr) package pulls in the full functionality of the library.
 
-Packages without the `cldr-*` prefix can be used in an application individually without pulling in the larger core library. You can use any of the packages [`@phensley/decimal`](https://www.npmjs.com/package/@phensley/decimal), [`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat), [`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals), and [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone)  on their own.
+Packages without the `cldr-*` prefix can be used in an application individually without pulling in the larger core library.
+
+You can use any of the packages independent of the rest of the library:
+
+* [`@phensley/decimal`](https://www.npmjs.com/package/@phensley/decimal)
+* [`@phensley/language-tag`](https://www.npmjs.com/package/@phensley/language-tag)
+* [`@phensley/locale`](https://www.npmjs.com/package/@phensley/locale)
+* [`@phensley/locale-matcher`](https://www.npmjs.com/package/@phensley/locale-matcher)
+* [`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat)
+* [`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals)
+* [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone)  on their own.
+* [`@phensley/unit-converter`](https://www.npmjs.com/package/@phensley/unit-converter)
 
 ## Features
 
