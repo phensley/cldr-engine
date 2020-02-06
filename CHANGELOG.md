@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.25.9]
+### Fixed/Changed
+* Fixed a regression in compact rounding edge case.
+
 ## [0.25.8]
 ### Fixed/Changed
 * Fixes to decimal math: right shifting beyond precision, addition and subtraction with zero, and improved subtraction borrow-handling. More coverage.
@@ -391,6 +395,7 @@ Split locale-related code into 3 new packages which can be used independently of
 #### Fixed/Changed
 - Converted `CLDR` to an interface
 
+[0.25.9]: https://github.com/phensley/cldr-engine/compare/v0.25.8...v0.25.9
 [0.25.8]: https://github.com/phensley/cldr-engine/compare/v0.25.7...v0.25.8
 [0.25.7]: https://github.com/phensley/cldr-engine/compare/v0.25.6...v0.25.7
 [0.25.6]: https://github.com/phensley/cldr-engine/compare/v0.25.5...v0.25.6
