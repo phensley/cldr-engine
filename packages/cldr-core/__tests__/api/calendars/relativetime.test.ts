@@ -88,6 +88,12 @@ test('specific field', () => {
   const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: UTC });
 
   end = start.add({ year: 1.5 });
+  s = api.formatRelativeTime(start, end, { context, field: 'year' });
+  expect(s).toEqual('In 2 years');
+
+  s = api.formatRelativeTime(start, end, { context, field: 'year', minimumFractionDigits: 1 });
+  expect(s).toEqual('In 1.5 years');
+
   s = api.formatRelativeTime(start, end, { context, field: 'month' });
   expect(s).toEqual('In 18 months');
 
