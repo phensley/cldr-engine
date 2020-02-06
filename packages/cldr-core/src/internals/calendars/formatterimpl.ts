@@ -75,7 +75,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
         case 'G':
           type = 'era';
           value = this.cal.eras.get(ctx.bundle,
-            w ===  5 ? 'narrow' : w === 4 ? 'names' : 'abbr', `${ctx.date.era()}`);
+            w === 5 ? 'narrow' : w === 4 ? 'names' : 'abbr', `${ctx.date.era()}`);
           if (w !== 5) {
             field = w === 4 ? 'era-name' : 'era-abbr';
           }
