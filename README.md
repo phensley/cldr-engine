@@ -37,14 +37,14 @@ Packages without the `cldr-*` prefix can be used in an application individually 
 
 You can use any of the packages independent of the rest of the library:
 
-* [`@phensley/decimal`](https://www.npmjs.com/package/@phensley/decimal)
-* [`@phensley/language-tag`](https://www.npmjs.com/package/@phensley/language-tag)
-* [`@phensley/locale`](https://www.npmjs.com/package/@phensley/locale)
-* [`@phensley/locale-matcher`](https://www.npmjs.com/package/@phensley/locale-matcher)
-* [`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat)
-* [`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals)
-* [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone)
-* [`@phensley/unit-converter`](https://www.npmjs.com/package/@phensley/unit-converter)
+* [`@phensley/decimal`](https://www.npmjs.com/package/@phensley/decimal) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/decimal)
+* [`@phensley/language-tag`](https://www.npmjs.com/package/@phensley/language-tag) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/language-tag)
+* [`@phensley/locale`](https://www.npmjs.com/package/@phensley/locale) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/locale)
+* [`@phensley/locale-matcher`](https://www.npmjs.com/package/@phensley/locale-matcher) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/locale-matcher)
+* [`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/messageformat)
+* [`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/plurals)
+* [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/timezone)
+* [`@phensley/unit-converter`](https://www.npmjs.com/package/@phensley/unit-converter) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/unit-converter)
 
 ## Features
 
