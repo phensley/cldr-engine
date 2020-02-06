@@ -1,6 +1,7 @@
-# @phensley/messageformat
+[`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/messageformat)
 
 Compact and extensible ICU message formatter with built-in support for `plural`, `select`, and `selectordinal`.
+
 
 ### Examples
 

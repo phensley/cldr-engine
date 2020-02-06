@@ -1,6 +1,7 @@
-@phensley/plurals
+[`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/plurals)
 
 Standalone CLDR plural rules engine. Supports cardinal, ordinal, and plural range calculations.
+
 
 ## Example
 

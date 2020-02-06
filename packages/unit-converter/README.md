@@ -1,4 +1,4 @@
-# @phensley/unit-converter
+[`@phensley/unit-converter`](https://www.npmjs.com/package/@phensley/unit-converter) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/unit-converter)
 
 General framework for converting between units. Includes pre-defined factors for conversion between CLDR units.
 
