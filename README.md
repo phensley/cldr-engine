@@ -43,7 +43,7 @@ You can use any of the packages independent of the rest of the library:
 * [`@phensley/locale-matcher`](https://www.npmjs.com/package/@phensley/locale-matcher)
 * [`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat)
 * [`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals)
-* [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone)  on their own.
+* [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone)
 * [`@phensley/unit-converter`](https://www.npmjs.com/package/@phensley/unit-converter)
 
 ## Features
