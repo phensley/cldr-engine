@@ -5,13 +5,40 @@ const shr = (u: string, s: number, m: RoundingModeType) =>
   parse(u).shiftright(s, m);
 
 test('shift to rounding', () => {
-  expect(shr('0.99', 1, 'up')).toEqual(parse('1.0'));
-  expect(shr('0.99', 2, 'up')).toEqual(parse('1'));
   expect(shr('0.99', 3, 'up')).toEqual(parse('0e1'));
+  expect(shr('0.99', 2, 'up')).toEqual(parse('1'));
+  expect(shr('0.99', 1, 'up')).toEqual(parse('1.0'));
 
-  expect(shr('0.67', 1, 'half-even')).toEqual(parse('.7'));
-  expect(shr('0.67', 2, 'half-even')).toEqual(parse('1'));
+  // half-even
   expect(shr('0.67', 3, 'half-even')).toEqual(parse('0e1'));
+  expect(shr('0.67', 2, 'half-even')).toEqual(parse('1'));
+  expect(shr('0.67', 1, 'half-even')).toEqual(parse('.7'));
+
+  // half-up
+  expect(shr('0.1', 3, 'half-up')).toEqual(parse('0e2'));
+  expect(shr('0.1', 2, 'half-up')).toEqual(parse('0e1'));
+  expect(shr('0.1', 1, 'half-up')).toEqual(parse('0'));
+  expect(shr('0.1', 0, 'half-up')).toEqual(parse('0.1'));
+
+  expect(shr('0.5', 3, 'half-up')).toEqual(parse('0e2'));
+  expect(shr('0.5', 2, 'half-up')).toEqual(parse('0e1'));
+  expect(shr('0.5', 1, 'half-up')).toEqual(parse('1'));
+  expect(shr('0.5', 0, 'half-up')).toEqual(parse('0.5'));
+
+  expect(shr('0.9', 3, 'half-up')).toEqual(parse('0e2'));
+  expect(shr('0.9', 2, 'half-up')).toEqual(parse('0e1'));
+  expect(shr('0.9', 1, 'half-up')).toEqual(parse('1'));
+  expect(shr('0.9', 0, 'half-up')).toEqual(parse('0.9'));
+
+  expect(shr('0.90', 3, 'half-up')).toEqual(parse('0e1'));
+  expect(shr('0.90', 2, 'half-up')).toEqual(parse('1'));
+  expect(shr('0.90', 1, 'half-up')).toEqual(parse('0.9'));
+  expect(shr('0.90', 0, 'half-up')).toEqual(parse('0.90'));
+
+  expect(shr('2.17', 4, 'half-up')).toEqual(parse('0e2'));
+  expect(shr('2.17', 3, 'half-up')).toEqual(parse('0e1'));
+  expect(shr('2.17', 2, 'half-up')).toEqual(parse('2'));
+  expect(shr('2.17', 1, 'half-up')).toEqual(parse('2.2'));
 });
 
 test('shift to zero', () => {
