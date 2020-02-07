@@ -36,6 +36,7 @@
   },
   "files": [
     "bin",
+    "data/patches/rbnf",
     "lib/",
     "lib-es/"
   ],
