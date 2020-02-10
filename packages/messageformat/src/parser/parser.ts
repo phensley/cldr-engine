@@ -13,6 +13,7 @@ import { MessageMatcher, MessageState } from './matcher';
 const enum Chars {
   LEFT = '{',
   RIGHT = '}',
+  MINUS = '-',
   APOS = "'",
   POUND = '#'
 }
@@ -79,11 +80,19 @@ class MessagePatternParser {
             n.push(textarg(buf, argsub));
             buf = '';
           }
+          const hidden = str[r.s + 1] === Chars.MINUS;
 
           const k = this.seek(r.s, r.e);
           if (k === -1) {
             n.push(textarg(str.substring(r.s, r.e), argsub));
             r.s = r.e;
+
+          } else if (hidden) {
+            // Tag is hidden from processor, emit as text
+            n.push(text(Chars.LEFT + str.substring(r.s + 2, k + 1)));
+
+            // Skip over hidden tag
+            r.s = k;
 
           } else {
             // Process tag interior
@@ -205,6 +214,8 @@ class MessagePatternParser {
       return undefined;
     }
 
+    const hidden = this.raw[r.s + 1] === Chars.MINUS;
+
     // Find matching end delimter
     const k = this.seek(r.s, r.e);
 
@@ -215,7 +226,9 @@ class MessagePatternParser {
     // }
 
     // Parse nested block and skip over it
-    const node = this.outer({ t: r.t, s: r.s + 1, e: k }, argsub);
+    const node = hidden
+      ? text(Chars.LEFT + this.raw.substring(r.s + 2, k + 1))
+      : this.outer({ t: r.t, s: r.s + 1, e: k }, argsub);
     r.s = k + 1;
     return node;
   }

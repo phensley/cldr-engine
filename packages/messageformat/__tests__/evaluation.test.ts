@@ -42,6 +42,23 @@ test('basic message evaluation', () => {
   expect(evaluate('en', c, [], { gender: 'zzz' })).toEqual('unknown quux');
 });
 
+test('hidden tags', () => {
+  let c = parse('{0}{-1}');
+  expect(evaluate('en', c, [1, 1])).toEqual('1{1}');
+  expect(evaluate('en', c, [2, 2])).toEqual('2{1}');
+
+  c = parse('{0 plural one {-ONE #} other {OTHER #}}');
+  expect(evaluate('en', c, [1])).toEqual('{ONE #}');
+  expect(evaluate('en', c, [2])).toEqual('OTHER 2');
+  expect(evaluate('en', c, [15])).toEqual('OTHER 15');
+
+  c = parse('{0}{-0 missing formatter}{1}');
+  expect(evaluate('en', c, [1, 2])).toEqual('1{0 missing formatter}2');
+
+  c = parse('{0}{a}{-0}{-a}{}{-}{--}{---}');
+  expect(evaluate('en', c, [], { a: 'A' })).toEqual('A{0}{a}{}{-}{--}');
+});
+
 test('undefined formatter', () => {
   // Parser is given a formatter name that is not defined during evaluation
   const message = '{0 baz}';

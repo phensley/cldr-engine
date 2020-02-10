@@ -140,3 +140,18 @@ test('arg substitution', () => {
     [MessageOpType.TEXT, ' #']
   ]]);
 });
+
+test('hidden', () => {
+  let c: MessageCode;
+
+  c = parse('# {0 plural one {-# = # item} few {-#} other {-# items}} #');
+  expect(c).toEqual([MessageOpType.BLOCK, [
+    [MessageOpType.TEXT, '# '],
+    [MessageOpType.PLURAL, [0], 0, PluralNumberType.CARDINAL, [
+      [PluralChoiceType.CATEGORY, 'one', [MessageOpType.TEXT, '{# = # item}']],
+      [PluralChoiceType.CATEGORY, 'few', [MessageOpType.TEXT, '{#}']],
+      [PluralChoiceType.CATEGORY, 'other', [MessageOpType.TEXT, '{# items}']]
+    ]],
+    [MessageOpType.TEXT, ' #']
+  ]]);
+});
