@@ -1,4 +1,4 @@
-import { Decimal, RoundingModeType } from  '@phensley/decimal';
+import { Decimal, RoundingModeType } from '@phensley/decimal';
 import { NumberFormatOptions } from '../../common';
 import { NumberPattern } from '../../parsing/number';
 
@@ -19,7 +19,7 @@ export class NumberContext {
   currencyDigits: number = -1;
 
   constructor(options: NumberFormatOptions, readonly roundingMode: RoundingModeType,
-      compact: boolean, scientific: boolean, currencyDigits: number = -1) {
+    compact: boolean, scientific: boolean, currencyDigits: number = -1) {
     const o = options;
     this.options = o;
     this.currencyDigits = currencyDigits;
@@ -69,8 +69,11 @@ export class NumberContext {
       }
     }
 
-    if (this.useSignificant && this.minSig >= 0 && this.maxSig > 0) {
-      if (n.precision() > this.maxSig) {
+    if (this.useSignificant && this.minSig >= 0) {
+      // By default we assume maximum significant digits will equal the
+      // number's default precision. So if the option's maxSig == -1
+      // we ignore reducing the precision.
+      if (this.maxSig !== -1 && n.precision() > this.maxSig) {
         // Scale the number to have at most the maximum significant digits.
         const scale = this.maxSig - n.precision() + n.scale();
         n = n.setScale(scale, this.roundingMode);
@@ -111,7 +114,7 @@ export class NumberContext {
    * Set context parameters from options, pattern and significant digit arguments.
    */
   private _setPattern(pattern: NumberPattern,
-      scientific: boolean, maxSigDigits: number, minSigDigits: number, maxFracDigits: number): void {
+    scientific: boolean, maxSigDigits: number, minSigDigits: number, maxFracDigits: number): void {
 
     const o = this.options;
 
@@ -149,15 +152,17 @@ export class NumberContext {
       let minSig = scientific ? orDefault(optMinSig, pattern.minFrac) : orDefault(optMinSig, minSigDigits);
       let maxSig = scientific ? orDefault(optMaxSig, pattern.maxFrac) : orDefault(optMaxSig, maxSigDigits);
 
-      if (minSig !== -1 && minSig > maxSig) {
+      if (minSig !== -1 && maxSig !== -1 && minSig > maxSig) {
         maxSig = minSig;
       }
       if (maxSig !== -1 && maxSig < minSig) {
         minSig = maxSig;
       }
-
-      this.minSig = minSig === -1 ? maxSig : minSig;
-      this.maxSig = maxSig === -1 ? minSig : maxSig;
+      if (minSig === -1) {
+        minSig = maxSig;
+      }
+      this.minSig = minSig;
+      this.maxSig = maxSig;
     } else {
       this.maxSig = -1;
       this.minSig = -1;

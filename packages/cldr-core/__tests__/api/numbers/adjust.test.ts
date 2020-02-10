@@ -37,21 +37,21 @@ test('adjust significant', () => {
   s = adjust('1.05');
   expect(s).toEqual('1');
 
-  s = adjust('1.05', { minimumSignificantDigits: 2 });
+  s = adjust('1.05', { maximumSignificantDigits: 2 });
   expect(s).toEqual('1.0');
 
-  s = adjust('1.06', { minimumSignificantDigits: 2  });
+  s = adjust('1.06', { maximumSignificantDigits: 2 });
   expect(s).toEqual('1.1');
 
-  s = adjust('1.05', { minimumSignificantDigits: 2, round: 'ceiling'  });
+  s = adjust('1.05', { maximumSignificantDigits: 2, round: 'ceiling' });
   expect(s).toEqual('1.1');
 
-  s = adjust('1.05', { minimumSignificantDigits: 2, round: 'down'  });
+  s = adjust('1.05', { maximumSignificantDigits: 2, round: 'down' });
   expect(s).toEqual('1.0');
 
-  s = adjust('1.05', { minimumSignificantDigits: 3 });
+  s = adjust('1.05', { maximumSignificantDigits: 3 });
   expect(s).toEqual('1.05');
 
-  s = adjust('1.05', { minimumSignificantDigits: 4 });
+  s = adjust('1.05', { maximumSignificantDigits: 4 });
   expect(s).toEqual('1.050');
 });

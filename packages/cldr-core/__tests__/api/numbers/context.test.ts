@@ -124,7 +124,7 @@ test('decimal significant', () => {
   ctx = new NumberContext(opts, 'half-even', false, false, -1);
   ctx.setPattern(pattern);
   expect(ctx.minSig).toEqual(1);
-  expect(ctx.maxSig).toEqual(1);
+  expect(ctx.maxSig).toEqual(-1);
 
   opts = { maximumSignificantDigits: 3 };
   ctx = new NumberContext(opts, 'half-even', false, false, -1);
@@ -148,7 +148,7 @@ test('decimal significant', () => {
   ctx = new NumberContext(opts, 'half-even', false, false, -1);
   ctx.setPattern(pattern);
   expect(ctx.minSig).toEqual(5);
-  expect(ctx.maxSig).toEqual(5);
+  expect(ctx.maxSig).toEqual(-1);
 
   opts = { minimumSignificantDigits: -1, maximumSignificantDigits: 5 };
   ctx = new NumberContext(opts, 'half-even', false, false, -1);
