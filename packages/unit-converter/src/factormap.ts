@@ -96,11 +96,11 @@ export class UnitFactors {
   }
 
   /**
-   * Lazy-initialize constructing the intial factor graph.
+   * Lazy-initialize constructing the initial factor graph.
    */
   protected init(): void {
     for (const factor of this.factors) {
-      const [ src, raw, dst ] = factor;
+      const [src, raw, dst] = factor;
       const rat = typeof raw === 'string' ? new Rational(raw) : raw;
 
       // Convert src -> dst

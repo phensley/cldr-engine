@@ -51,7 +51,7 @@ export class Heap<T> {
    */
   private _down(i: number = 0): void {
     const len = this.items.length;
-    for (;;) {
+    for (; ;) {
       const lx = left(i);
       if (lx >= len) {
         break;

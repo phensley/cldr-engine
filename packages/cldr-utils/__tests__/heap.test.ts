@@ -13,6 +13,7 @@ test('basic min heap', () => {
   const cmp = (a: string, b: string) =>
     a < b ? -1 : a > b ? 1 : 0;
   const heap = new Heap(cmp, strings);
+
   const res: string[] = [];
   while (!heap.empty()) {
     res.push(heap.pop()!);
