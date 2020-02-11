@@ -15,7 +15,7 @@ export const ACCELERATION: FactorDef[] = [
 ];
 
 export const ANGLE: FactorDef[] = [
-  ['revolution', '360', 'degree' ],
+  ['revolution', '360', 'degree'],
   ['arc-minute', '1/60', 'degree'],
   ['arc-second', '1/60', 'arc-minute'],
   ['radian', '0.5 / ' + PI, 'revolution']
@@ -39,19 +39,19 @@ export const CONSUMPTION: FactorDef[] = [
 ];
 
 const DIGITAL_BASE: FactorDef[] =
-kfactors('1000', ['terabit', 'gigabit', 'megabit', 'kilobit', 'bit']).concat([
-  ['byte', '8', 'bit'],
-]);
+  kfactors('1000', ['terabit', 'gigabit', 'megabit', 'kilobit', 'bit']).concat([
+    ['byte', '8', 'bit'],
+  ]);
 
 export const DIGITAL: FactorDef[] =
-DIGITAL_BASE.concat(
-  kfactors('1024', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
-);
+  DIGITAL_BASE.concat(
+    kfactors('1024', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
+  );
 
 export const DIGITAL_DECIMAL: FactorDef[] =
-DIGITAL_BASE.concat(
-  kfactors('1000', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
-);
+  DIGITAL_BASE.concat(
+    kfactors('1000', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
+  );
 
 /**
  * Duration factors.  Values for month, year, century are approximate. If you
@@ -141,9 +141,9 @@ export const MASS: FactorDef[] = [
 ];
 
 export const POWER: FactorDef[] =
-kfactors('1000', ['gigawatt', 'megawatt', 'kilowatt', 'watt']).concat([
-  ['horsepower', '745.69987158227', 'watt']
-]);
+  kfactors('1000', ['gigawatt', 'megawatt', 'kilowatt', 'watt']).concat([
+    ['horsepower', '745.69987158227', 'watt']
+  ]);
 
 export const PRESSURE: FactorDef[] = [
   ['hectopascal', '1', 'millibar'],
@@ -182,8 +182,6 @@ const VOLUME_BASE: FactorDef[] = [
   ['cubic-inch', '1 / 1728', 'cubic-foot'],
 
   ['acre-foot', '43560', 'cubic-foot'],
-  ['gallon', '3.785411784', 'liter'],
-  ['gallon-imperial', '4.54609', 'liter'],
 
   // To be correct, metric pint conversions would need to be localized.
   // Pinning this at 500mL for now.
@@ -193,8 +191,10 @@ const VOLUME_BASE: FactorDef[] = [
   ['teaspoon', '1 / 6', 'fluid-ounce'],
 ];
 
+// These are US units. Grouped to be overridden below for UK.
 export const VOLUME: FactorDef[] = VOLUME_BASE.concat([
-  // These are US units. Grouped to be overridden below for UK.
+  ['gallon', '3.785411784', 'liter'],
+  ['gallon-imperial', '4.54609', 'liter'],
   ['bushel', '2150.42', 'cubic-inch'],
   ['gallon', '231', 'cubic-inch'],
   ['fluid-ounce', '1 / 128', 'gallon'],
@@ -204,8 +204,9 @@ export const VOLUME: FactorDef[] = VOLUME_BASE.concat([
 ]);
 
 export const VOLUME_UK: FactorDef[] = VOLUME_BASE.concat([
-  ['bushel', '8', 'gallon-imperial'],
   ['gallon', '4.54609', 'liter'],
+  ['gallon-imperial', '4.54609', 'liter'],
+  ['bushel', '8', 'gallon-imperial'],
   ['fluid-ounce', '1 / 160', 'gallon-imperial'],
   ['quart', '1 / 4', 'gallon-imperial'],
   ['pint', '1 / 8', 'gallon-imperial'],
