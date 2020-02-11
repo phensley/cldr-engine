@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-schema",
-  "version": "0.25.11",
+  "version": "0.25.12",
   "description": "Schema for @phensley/cldr",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -33,7 +33,7 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-types": "0.25.11",
+    "@phensley/cldr-types": "0.25.12",
     "tslib": "1.10.x"
   },
   "devDependencies": {
