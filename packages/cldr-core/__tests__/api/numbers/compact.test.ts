@@ -88,3 +88,38 @@ test('decimal long divisors', () => {
   s = api.formatDecimal('123456789', opts);
   expect(s).toEqual('123,457 thousand');
 });
+
+test('significant digits', () => {
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatDecimal('1256', { style: 'short', minimumSignificantDigits: 1 });
+  expect(s).toEqual('1.3K');
+
+  s = api.formatDecimal('1256', { style: 'short', minimumSignificantDigits: 2 });
+  expect(s).toEqual('1.3K');
+
+  s = api.formatDecimal('1256', { style: 'short', minimumSignificantDigits: 3 });
+  expect(s).toEqual('1.26K');
+
+  s = api.formatDecimal('12356', { style: 'short', minimumSignificantDigits: 1 });
+  expect(s).toEqual('12K');
+
+  s = api.formatDecimal('12356', { style: 'short', minimumSignificantDigits: 2 });
+  expect(s).toEqual('12K');
+
+  s = api.formatDecimal('12356', { style: 'short', minimumSignificantDigits: 3 });
+  expect(s).toEqual('12.4K');
+
+  s = api.formatDecimal('123456', { style: 'short', minimumSignificantDigits: 1 });
+  expect(s).toEqual('123K');
+
+  s = api.formatDecimal('123456', { style: 'short', minimumSignificantDigits: 2 });
+  expect(s).toEqual('123K');
+
+  s = api.formatDecimal('123456', { style: 'short', minimumSignificantDigits: 3 });
+  expect(s).toEqual('123K');
+
+  s = api.formatDecimal('123456', { style: 'short', minimumSignificantDigits: 4 });
+  expect(s).toEqual('123.5K');
+});

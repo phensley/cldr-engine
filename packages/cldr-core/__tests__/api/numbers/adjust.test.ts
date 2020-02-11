@@ -34,6 +34,32 @@ test('adjust fractions', () => {
 test('adjust significant', () => {
   let s: string;
 
+  s = adjust('1.00', { minimumSignificantDigits: 1 });
+  expect(s).toEqual('1');
+
+  s = adjust('1.00', { minimumSignificantDigits: 2 });
+  expect(s).toEqual('1.0');
+
+  s = adjust('1.00', { minimumSignificantDigits: 3 });
+  expect(s).toEqual('1.00');
+
+  s = adjust('1.00', { minimumSignificantDigits: 4 });
+  expect(s).toEqual('1.000');
+
+  // minimum overrides maximum
+  s = adjust('1.00', { minimumSignificantDigits: 4, maximumSignificantDigits: 1 });
+  expect(s).toEqual('1.000');
+
+  s = adjust('1.00', { minimumSignificantDigits: 4, maximumSignificantDigits: 5 });
+  expect(s).toEqual('1.000');
+
+  s = adjust('1.00006', { minimumSignificantDigits: 4, maximumSignificantDigits: 5 });
+  expect(s).toEqual('1.0001');
+});
+
+test('adjust significant', () => {
+  let s: string;
+
   s = adjust('1.05');
   expect(s).toEqual('1');
 
