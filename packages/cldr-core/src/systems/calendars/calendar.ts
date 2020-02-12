@@ -716,10 +716,9 @@ export abstract class CalendarDate {
     // Calculate the time difference in days and milliseconds
     let msDay = this._fields[DateField.MILLIS_IN_DAY] - this.timeZoneOffset();
     msDay += ((fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
-             ((fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
-             ((fields.second || 0) * CalendarConstants.ONE_SECOND_MS) +
-             ((fields.millis || 0));
-
+      ((fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
+      ((fields.second || 0) * CalendarConstants.ONE_SECOND_MS) +
+      ((fields.millis || 0));
     const oneDay = CalendarConstants.ONE_DAY_MS;
     const days = floor(msDay / oneDay);
     const ms = (msDay - (days * oneDay));
@@ -831,7 +830,7 @@ const jdFromUnixEpoch = (ms: number, f: number[]): void => {
  */
 const unixEpochFromJD = (jd: number, msDay: number): number => {
   const days = jd - CalendarConstants.JD_UNIX_EPOCH;
-  return (days * CalendarConstants.ONE_DAY_MS) + msDay;
+  return (days * CalendarConstants.ONE_DAY_MS) + Math.round(msDay);
 };
 
 /**
