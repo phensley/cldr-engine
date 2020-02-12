@@ -131,9 +131,19 @@ export class NumberParamsCache {
 const makeDigits = (name: string): string[] => {
   const digits = decimalNumberingDigits[name];
   if (digits.length !== 10) {
-    const base = digits[0].codePointAt(0)!;
-    for (let i = 1; i < 10; i++) {
-      digits.push(String.fromCodePoint(base + i));
+    const c = digits[0].charCodeAt(0);
+    if (c >= 0xD800 && c <= 0xDBFF) {
+      const c2 = digits[0].charCodeAt(1);
+      if (c2 >= 0xDC00 && c2 <= 0xDFFF) {
+        for (let i = 1; i < 10; i++) {
+          const digit = String.fromCharCode(c) + String.fromCharCode(c2 + i);
+          digits.push(digit);
+        }
+      }
+    } else {
+      for (let i = 1; i < 10; i++) {
+        digits.push(String.fromCharCode(c + i));
+      }
     }
     decimalNumberingDigits[name] = digits;
   }
