@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Fixed/Changed
 
 - Removed use of `String.codePointAt` that affected IE11 w/out polyfills
+- Fixed relative time arrow order in schema
+- Ensure date millis are rounded to integer
 
 ## [0.25.12]
 
