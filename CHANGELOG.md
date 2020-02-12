@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.25.13]
+
+### Fixed/Changed
+
+- Removed use of `String.codePointAt` that affected IE11 w/out polyfills
+
 ## [0.25.12]
 
 ### Fixed/Changed
@@ -554,6 +560,7 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[0.25.13]: https://github.com/phensley/cldr-engine/compare/v0.25.12...v0.25.13
 [0.25.12]: https://github.com/phensley/cldr-engine/compare/v0.25.11...v0.25.12
 [0.25.11]: https://github.com/phensley/cldr-engine/compare/v0.25.10...v0.25.11
 [0.25.10]: https://github.com/phensley/cldr-engine/compare/v0.25.9...v0.25.10
