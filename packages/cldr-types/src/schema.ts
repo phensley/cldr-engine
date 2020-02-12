@@ -103,8 +103,8 @@ export interface RelativeTimeFields {
 
 export interface RelativeTimes {
   readonly wide: RelativeTimeFields;
-  readonly narrow: RelativeTimeFields;
   readonly short: RelativeTimeFields;
+  readonly narrow: RelativeTimeFields;
 }
 
 export interface DateFieldsSchema {

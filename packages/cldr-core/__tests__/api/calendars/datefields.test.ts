@@ -85,7 +85,7 @@ test('relative time', () => {
   s = api.formatRelativeTimeField('-6.3', 'day');
   expect(s).toEqual('6 days ago');
 
-  s = api.formatRelativeTimeField('-6.3', 'day', { maximumFractionDigits: 1});
+  s = api.formatRelativeTimeField('-6.3', 'day', { maximumFractionDigits: 1 });
   expect(s).toEqual('6.3 days ago');
 
   s = api.formatRelativeTimeField(1, 'sun');
@@ -182,8 +182,17 @@ test('relative time options', () => {
   s = api.formatRelativeTimeField(-3, 'week', { width: 'narrow' });
   expect(s).toEqual('3 wk. ago');
 
-  s = api.formatRelativeTimeField(2, 'month', { width: 'narrow'});
+  s = api.formatRelativeTimeField(2, 'month', { width: 'narrow' });
   expect(s).toEqual('in 2 mo.');
+
+  s = api.formatRelativeTimeField(-70, 'sun', { width: 'short' });
+  expect(s).toEqual('70 Sun. ago');
+
+  s = api.formatRelativeTimeField(-70, 'sun', { width: 'narrow' });
+  expect(s).toEqual('70 Su ago');
+
+  s = api.formatRelativeTimeField(-70, 'sun', { width: 'wide' });
+  expect(s).toEqual('70 Sundays ago');
 
   // Invalid field
   s = api.formatRelativeTimeField(5, 'weekXX' as RelativeTimeFieldType);

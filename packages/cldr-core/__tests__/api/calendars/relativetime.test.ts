@@ -77,6 +77,10 @@ test('format relative time', () => {
   end = start.add({ year: 1.5 });
   s = api.formatRelativeTime(start, end, { context, width: 'short', round: 'floor' });
   expect(s).toEqual('Next yr.');
+
+  end = start.add({ year: 1.5 });
+  s = api.formatRelativeTime(start, end, { context, width: 'narrow', round: 'floor' });
+  expect(s).toEqual('Next yr.');
 });
 
 test('specific field', () => {
@@ -118,7 +122,7 @@ test('numeric only', () => {
 
   const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: UTC });
 
-  end = start.add({ });
+  end = start.add({});
   s = api.formatRelativeTime(start, end, { context });
   expect(s).toEqual('Now');
 
