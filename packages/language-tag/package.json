@@ -1,6 +1,6 @@
 {
   "name": "@phensley/language-tag",
-  "version": "0.25.12",
+  "version": "0.25.13",
   "description": "Parsing and construction of BCP 47 language tags",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
