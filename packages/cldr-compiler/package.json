@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-compiler",
-  "version": "0.25.13",
+  "version": "0.25.14",
   "description": "Compiler for @phensley/cldr",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -41,13 +41,13 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-core": "0.25.13",
-    "@phensley/cldr-ext-rbnf": "0.25.13",
-    "@phensley/cldr-schema": "0.25.13",
-    "@phensley/cldr-types": "0.25.13",
-    "@phensley/cldr-utils": "0.25.13",
-    "@phensley/decimal": "0.25.13",
-    "@phensley/timezone": "0.25.13",
+    "@phensley/cldr-core": "0.25.14",
+    "@phensley/cldr-ext-rbnf": "0.25.14",
+    "@phensley/cldr-schema": "0.25.14",
+    "@phensley/cldr-types": "0.25.14",
+    "@phensley/cldr-utils": "0.25.14",
+    "@phensley/decimal": "0.25.14",
+    "@phensley/timezone": "0.25.14",
     "@types/prettier": "^1.10.0",
     "@types/request": "^2.48.1",
     "@types/yargs": "13.0.3",
