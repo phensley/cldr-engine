@@ -818,7 +818,7 @@ const jdFromUnixEpoch = (ms: number, f: number[]): void => {
   const oneDayMS = CalendarConstants.ONE_DAY_MS;
   const days = floor(ms / oneDayMS);
   const jd = days + CalendarConstants.JD_UNIX_EPOCH;
-  const msDay = ms - (days * oneDayMS);
+  const msDay = floor(ms - (days * oneDayMS));
 
   f[DateField.JULIAN_DAY] = jd;
   f[DateField.MILLIS_IN_DAY] = msDay;
