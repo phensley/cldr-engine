@@ -92,18 +92,30 @@ export class Decimal {
     }
   }
 
+  /**
+   * Return the decimal's exponent.
+   */
   exp(): number {
     return this._exp;
   }
 
+  /**
+   * Return true if this decimal is not a number (NaN).
+   */
   isNaN(): boolean {
     return this.flag === DecimalFlag.NAN;
   }
 
+  /**
+   * Return true if this decimal is finite (not infinity or NaN).
+   */
   isFinite(): boolean {
     return this.flag === 0;
   }
 
+  /**
+   * Return true if this decimal is positive or negative infinity.
+   */
   isInfinity(): boolean {
     return this.flag === DecimalFlag.INFINITY;
   }

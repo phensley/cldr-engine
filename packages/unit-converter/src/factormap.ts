@@ -188,7 +188,7 @@ export class UnitFactors {
 const cmp = (x: E, y: E) => x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0;
 
 /**
- * Return the maximum precious between the numerator and denominator
+ * Return the maximum precision between the numerator and denominator
  */
 const precision = (r: Rational) => {
   const n = r.numerator();
