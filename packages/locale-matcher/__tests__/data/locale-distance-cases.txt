@@ -17,9 +17,9 @@ en-US ; en-ZA ; 5
 en-US ; en-MX ; 5
 
 en-GB ; en-GB ; 0
-en-GB ; en-ZA ; 3 ; 4
-en-GB ; en-IN ; 3 ; 4
-en-GB ; en-MX ; 3 ; 4
+en-GB ; en-ZA ; 3
+en-GB ; en-IN ; 3
+en-GB ; en-MX ; 3
 en-GB ; en-VI ; 5
 
 en-IN ; en-ZA ; 4

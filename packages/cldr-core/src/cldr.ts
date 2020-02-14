@@ -37,7 +37,7 @@ import { VERSION } from './utils/version';
 
 const enum Messages {
   CHECKSUM = 'Checksum mismatch on resource pack! The schema config used to ' +
-    'generate the resource pack must be identical to the one used at runtime.',
+  'generate the resource pack must be identical to the one used at runtime.',
   LOCALE_UNDEFINED = 'The "locale" argument is undefined',
   NO_ASYNC_LOADER = 'A Promise-based resource loader is not defined',
   NO_SYNC_LOADER = 'A synchronous resource loader is not defined',
@@ -70,25 +70,25 @@ export interface CLDR {
    */
   readonly Units: Units;
 
- /**
-   * UNDOCUMENTED AND EXPERIMENTAL
-   *
-   * Provides access to the low-level schema for accessing CLDR fields.
-   *
-   * Currently undocumented. In the future an internal api can be
-   * exposed allowing access to low-level functions of the library.
-   *
-   * @internal
-   */
+  /**
+    * UNDOCUMENTED AND EXPERIMENTAL
+    *
+    * Provides access to the low-level schema for accessing CLDR fields.
+    *
+    * Currently undocumented. In the future an internal api can be
+    * exposed allowing access to low-level functions of the library.
+    *
+    * @internal
+    */
   readonly Schema: Schema;
 
- /**
-   * UNDOCUMENTED AND EXPERIMENTAL
-   *
-   * Provides access to the low-level library internals.
-   *
-   * @internal
-   */
+  /**
+    * UNDOCUMENTED AND EXPERIMENTAL
+    *
+    * Provides access to the low-level library internals.
+    *
+    * @internal
+    */
   readonly Internals: Internals;
 
 }
@@ -110,7 +110,7 @@ class CLDRImpl implements CLDR {
     private readonly locale: Locale,
     private readonly bundle: Bundle,
     private readonly internals: Internals
-  ) {}
+  ) { }
 
   /**
    * Calendar functions.
@@ -241,17 +241,16 @@ export class CLDRFramework {
   protected readonly loader?: (language: string) => any;
   protected readonly asyncLoader?: (language: string) => Promise<any>;
   protected readonly internals: Internals;
+  protected readonly _config: SchemaConfig;
   protected static defaultConfig?: SchemaConfig;
 
   constructor(protected options: CLDROptions) {
     this.packCache = new LRU(options.packCacheSize || 2);
     this.loader = options.loader;
     this.asyncLoader = options.asyncLoader;
-
+    this._config = options.config || CLDRFramework.defaultConfig || EMPTY_CONFIG;
     const patternCacheSize = options.patternCacheSize || 200;
-    this.internals = new InternalsImpl(
-      options.config || CLDRFramework.defaultConfig || EMPTY_CONFIG,
-      VERSION, options.debug, patternCacheSize);
+    this.internals = new InternalsImpl(this._config, VERSION, options.debug, patternCacheSize);
   }
 
   /**
@@ -259,6 +258,10 @@ export class CLDRFramework {
    */
   static setDefaultConfig(config: SchemaConfig): void {
     this.defaultConfig = config;
+  }
+
+  config(): SchemaConfig {
+    return this._config;
   }
 
   info(): string {
