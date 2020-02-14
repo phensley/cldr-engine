@@ -1,47 +1,52 @@
-import { Rational } from '@phensley/decimal';
-import { ANGLE, AREA, FactorDef, UnitFactors } from '../src';
+import { ANGLE, AREA, FactorDef, UnitConversion, UnitFactors } from '../src';
 
 test('factors', () => {
   const factors: FactorDef[] = [
     ['g-force', '9.80665', 'meter-per-second-squared']
   ];
   const map = new UnitFactors(factors);
-  let factor: Rational;
+  let c: UnitConversion;
 
-  factor = map.get('g-force', 'meter-per-second-squared')!;
-  expect(factor.toString()).toEqual('9.80665 / 1');
+  const f = (e: UnitConversion) => e.factors.map(x => x.toString());
 
-  factor = map.get('meter-per-second-squared', 'g-force')!;
-  expect(factor.toString()).toEqual('1 / 9.80665');
+  c = map.get('g-force', 'meter-per-second-squared')!;
+  expect(f(c)).toEqual(['9.80665 / 1']);
+
+  c = map.get('meter-per-second-squared', 'g-force')!;
+  expect(f(c)).toEqual(['1 / 9.80665']);
 });
 
 test('angle', () => {
   const map = new UnitFactors(ANGLE);
-  let factor: Rational;
+  let c: UnitConversion;
 
-  factor = map.get('arc-second', 'arc-minute')!;
-  expect(factor.toString()).toEqual('1 / 60');
+  const f = (e: UnitConversion) => e.factors.map(x => x.toString());
 
-  factor = map.get('arc-minute', 'arc-second')!;
-  expect(factor.toString()).toEqual('60 / 1');
+  c = map.get('arc-second', 'arc-minute')!;
+  expect(f(c)).toEqual(['1 / 60']);
 
-  factor = map.get('arc-second', 'degree')!;
-  expect(factor.toString()).toEqual('1 / 3600');
+  c = map.get('arc-minute', 'arc-second')!;
+  expect(f(c)).toEqual(['60 / 1']);
 
-  factor = map.get('degree', 'arc-second')!;
-  expect(factor.toString()).toEqual('3600 / 1');
+  c = map.get('arc-second', 'degree')!;
+  expect(f(c)).toEqual(['1 / 60', '1 / 60']);
+
+  c = map.get('degree', 'arc-second')!;
+  expect(f(c)).toEqual(['60 / 1', '60 / 1']);
 });
 
 test('area', () => {
   const map = new UnitFactors(AREA);
-  let factor: Rational;
+  let c: UnitConversion;
 
-  factor = map.get('acre', 'square-foot')!;
-  expect(factor.toString()).toEqual('43560 / 1');
+  const f = (e: UnitConversion) => e.factors.map(x => x.toString());
 
-  factor = map.get('acre', 'square-inch')!;
-  expect(factor.toString()).toEqual('6272640 / 1');
+  c = map.get('acre', 'square-foot')!;
+  expect(f(c)).toEqual(['43560 / 1']);
 
-  factor = map.get('square-inch', 'acre')!;
-  expect(factor.toString()).toEqual('1 / 6272640');
+  c = map.get('acre', 'square-inch')!;
+  expect(f(c)).toEqual(['43560 / 1', '144 / 1']);
+
+  c = map.get('square-inch', 'acre')!;
+  expect(f(c)).toEqual(['1 / 144', '1 / 43560']);
 });

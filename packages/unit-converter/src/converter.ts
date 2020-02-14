@@ -1,5 +1,5 @@
-import { Decimal, MathContext } from '@phensley/decimal';
-import { UnitFactors } from './factormap';
+import { Decimal, MathContext, RationalConstants } from '@phensley/decimal';
+import { UnitConversion, UnitFactors } from './factormap';
 
 /**
  * Converts between units.
@@ -43,14 +43,21 @@ export class UnitConverter {
     return Object.keys(this.storage).sort();
   }
 
-  convert(category: string, n: Decimal, src: string, dst: string, ctx?: MathContext): Decimal | undefined {
+  get(category: string, src: string, dst: string): UnitConversion | undefined {
     const factors = this.storage[category];
     if (factors) {
-      const fac = factors.get(src, dst);
-      if (fac) {
-        return n.multiply(fac.toDecimal(), ctx);
-      }
+      return factors.get(src, dst);
     }
     return undefined;
   }
+
+  convert(category: string, n: Decimal, src: string, dst: string, ctx?: MathContext): Decimal | undefined {
+    const conv = this.get(category, src, dst);
+    if (conv) {
+      const fac = conv.factors.reduce((p, c) => p.multiply(c, ctx), RationalConstants.ONE);
+      return n.multiply(fac.toDecimal(), ctx);
+    }
+    return undefined;
+  }
+
 }

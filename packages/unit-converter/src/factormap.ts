@@ -15,6 +15,15 @@ type E = [
   number  // cost
 ];
 
+/**
+ * Represents a conversion path from source to destination unit, and the
+ * rational conversion factors.
+ */
+export interface UnitConversion {
+  path: string[];
+  factors: Rational[];
+}
+
 const ONE = new Rational(1);
 
 /**
@@ -35,8 +44,12 @@ export class UnitFactors {
   readonly units: string[] = [];
   readonly unitset: Set<string> = new Set();
   private graph: G<Rational> = {};
+  private cache: G<UnitConversion> = {};
   private initialized: boolean = false;
 
+  /**
+   * Build a unit converter graph using the given factors.
+   */
   constructor(readonly factors: FactorDef[]) {
     for (let i = 0; i < factors.length; i++) {
       const [src, , dst] = factors[i];
@@ -50,10 +63,10 @@ export class UnitFactors {
   /**
    * Return the factor that converts units of 'src' into 'dst'.
    */
-  get(src: string, dst: string): Rational | undefined {
+  get(src: string, dst: string): UnitConversion | undefined {
     // Units are the same, conversion is 1
     if (src === dst) {
-      return ONE;
+      return { path: [src, dst], factors: [ONE] };
     }
 
     if (!this.initialized) {
@@ -61,35 +74,45 @@ export class UnitFactors {
     }
 
     // See if a direct conversion exists
-    let fac = this.graph[src][dst];
+    const fac = this.graph[src][dst];
     if (fac) {
-      return fac;
+      return { path: [src, dst], factors: [fac] };
+    }
+
+    // See if a cached path exists
+    const res = this.cache[src];
+    if (res) {
+      const m = res[dst];
+      if (m) {
+        return m;
+      }
     }
 
     // Find the shortest, lowest-cost conversion path between
     // the two factors
     const path = this.shortestPath(src, dst);
     if (path) {
-      // Multiply the factors together
-      fac = ONE;
+      // Collect the conversion factors
+      const factors: Rational[] = [];
       let curr: string | undefined = path[0];
       for (let i = 1; i < path.length; i++) {
         const next = path[i];
         const nextfac = this.graph[curr]![next]!;
-        fac = fac.multiply(nextfac);
+        factors.push(nextfac);
         curr = next;
       }
 
-      // Record this factor in the graph
-      this.graph[src]![dst] = fac;
+      const r: UnitConversion = { path, factors };
 
-      // If the inverse conversion factor is unknown, add it.
-      const m = this.graph[dst]!;
-      if (!m[src]) {
-        m[src] = fac.inverse();
+      // Record this conversion factor in the cache
+      let tmp = this.cache[src];
+      if (!tmp) {
+        this.cache[src] = tmp = {};
       }
-
-      return fac;
+      if (!tmp[dst]) {
+        tmp[dst] = r;
+      }
+      return r;
     }
     // No conversion factor exists
     return undefined;
@@ -167,8 +190,11 @@ const cmp = (x: E, y: E) => x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0;
 /**
  * Return the maximum precious between the numerator and denominator
  */
-const precision = (r: Rational) =>
-  Math.max(r.numerator().precision(), r.denominator().precision());
+const precision = (r: Rational) => {
+  const n = r.numerator();
+  const d = r.denominator();
+  return (n.precision() + n.alignexp()) + (d.precision() + d.alignexp());
+};
 
 /**
  * Extract the path from the edges, tracking backwards from the

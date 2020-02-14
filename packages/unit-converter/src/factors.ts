@@ -179,6 +179,7 @@ const VOLUME_BASE: FactorDef[] = [
   ['cubic-mile', '5451776000', 'cubic-yard'],
   ['cubic-yard', '27', 'cubic-foot'],
   ['cubic-foot', '1 / 35.31466672148859', 'cubic-meter'],
+  ['cubic-foot', '28.316846592', 'liter'],
   ['cubic-inch', '1 / 1728', 'cubic-foot'],
 
   ['acre-foot', '43560', 'cubic-foot'],
