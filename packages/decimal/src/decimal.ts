@@ -78,7 +78,7 @@ export class Decimal {
 
   protected data: number[] = EMPTY;
   protected sign: number = 0;
-  protected exp: number = 0;
+  protected _exp: number = 0;
   protected flag: DecimalFlag = DecimalFlag.NONE;
 
   constructor(num: DecimalArg) {
@@ -87,9 +87,13 @@ export class Decimal {
     } else {
       this.data = num.data.slice();
       this.sign = num.sign;
-      this.exp = num.exp;
+      this._exp = num._exp;
       this.flag = num.flag;
     }
+  }
+
+  exp(): number {
+    return this._exp;
   }
 
   isNaN(): boolean {
@@ -163,8 +167,8 @@ export class Decimal {
       return ue < ve ? -1 * us : us;
     }
 
-    if (u.exp !== v.exp) {
-      const shift = u.exp - v.exp;
+    if (u._exp !== v._exp) {
+      const shift = u._exp - v._exp;
       if (shift > 0) {
         const c = compare(v.data, u.data, shift);
         return c === 0 ? c : -c;
@@ -191,21 +195,21 @@ export class Decimal {
    * Return the raw internal properties of the number. Use with caution.
    */
   properties(): [number[], number, number, number] {
-    return [this.data, this.sign, this.exp, this.flag];
+    return [this.data, this.sign, this._exp, this.flag];
   }
 
   /**
    * Return the absolute value of the number.
    */
   abs(): Decimal {
-    return this.sign === -1 ? Decimal.fromRaw(-this.sign, this.exp, this.data, this.flag) : this;
+    return this.sign === -1 ? Decimal.fromRaw(-this.sign, this._exp, this.data, this.flag) : this;
   }
 
   /**
    * Invert this number's sign.
    */
   negate(): Decimal {
-    return this.isNaN() ? this : Decimal.fromRaw(-this.sign, this.exp, this.data, this.flag);
+    return this.isNaN() ? this : Decimal.fromRaw(-this.sign, this._exp, this.data, this.flag);
   }
 
   /**
@@ -230,7 +234,7 @@ export class Decimal {
     if (this.flag) {
       return false;
     }
-    return (this.exp + this.trailingZeros()) >= 0;
+    return (this._exp + this.trailingZeros()) >= 0;
   }
 
   /**
@@ -292,7 +296,7 @@ export class Decimal {
 
     const w = new Decimal(ZERO);
     w.sign = u.sign === v.sign ? 1 : -1;
-    w.exp = (u.exp + v.exp);
+    w._exp = (u._exp + v._exp);
 
     const uz = u.isZero();
     const vz = v.isZero();
@@ -339,7 +343,7 @@ export class Decimal {
       ? (v.precision() - u.precision()) + scaleprec + 2
       : v.precision() + u.precision() + Math.abs(scaleprec) + 2;
 
-    const exp = (u.exp - v.exp) - shift;
+    const exp = (u._exp - v._exp) - shift;
 
     if (shift > 0) {
       u = u.shiftleft(shift);
@@ -389,9 +393,9 @@ export class Decimal {
 
     let u: Decimal = this;
 
-    const exp = u.exp > v.exp ? v.exp : u.exp;
-    if (u.exp !== v.exp) {
-      const shift = u.exp - v.exp;
+    const exp = u._exp > v._exp ? v._exp : u._exp;
+    if (u._exp !== v._exp) {
+      const shift = u._exp - v._exp;
       if (shift > 0) {
         u = u.shiftleft(shift);
       } else {
@@ -419,7 +423,7 @@ export class Decimal {
     const r = new Decimal(ZERO);
     r.data = rd;
     r.sign = u.sign;
-    r.exp = exp;
+    r._exp = exp;
 
     return [q.trim(), r.trim()];
   }
@@ -483,7 +487,7 @@ export class Decimal {
     const coeff = Decimal.fromRaw(this.sign, exp === 0 ? 0 : exp, this.data, this.flag);
     return [
       coeff,
-      this.exp - coeff.exp
+      this._exp - coeff._exp
     ];
   }
 
@@ -502,14 +506,14 @@ export class Decimal {
    * Scale is the number of digits to the right of the decimal point.
    */
   scale(): number {
-    return this.flag ? 0 : this.exp === 0 ? 0 : -this.exp;
+    return this.flag ? 0 : this._exp === 0 ? 0 : -this._exp;
   }
 
   /**
    * Number of integer digits, 1 or higher.
    */
   integerDigits(): number {
-    return this.flag ? 0 : Math.max(this.precision() + this.exp, 1);
+    return this.flag ? 0 : Math.max(this.precision() + this._exp, 1);
   }
 
   /**
@@ -530,7 +534,7 @@ export class Decimal {
    * number must be shifted.
    */
   alignexp(): number {
-    return this.flag ? 0 : (this.exp + this.precision()) - 1;
+    return this.flag ? 0 : (this._exp + this.precision()) - 1;
   }
 
   /**
@@ -542,7 +546,7 @@ export class Decimal {
       return this;
     }
     const w = new Decimal(this);
-    w.exp += floor(n);
+    w._exp += floor(n);
     return w;
   }
 
@@ -579,7 +583,7 @@ export class Decimal {
       return this;
     }
     const r = new Decimal(this);
-    if (r.sign === -1 || r.exp !== 0) {
+    if (r.sign === -1 || r._exp !== 0) {
       return r.add(DecimalConstants.ONE);
     }
     r._increment();
@@ -636,7 +640,7 @@ export class Decimal {
     return r.concat([
       { type: 'exp', value: 'E' },
       sign,
-      { type: 'integer', value: `${Math.abs(exp)}`}
+      { type: 'integer', value: `${Math.abs(exp)}` }
     ]);
   }
 
@@ -654,7 +658,7 @@ export class Decimal {
       secGroup = priGroup;
     }
 
-    let exp = this.exp;
+    let exp = this._exp;
 
     // Determine how many integer digits to emit. If integer digits is
     // larger than the integer coefficient we emit leading zeros.
@@ -745,15 +749,15 @@ export class Decimal {
 
     // If exponent still negative, emit leading decimal zeros
     // if (!(this.data.length === 1 && this.data[0] === 0)) {
-      while (exp < 0) {
-        formatter.add(digits[0]);
+    while (exp < 0) {
+      formatter.add(digits[0]);
 
-        // When we've reached exponent of 0, push the decimal point
-        exp++;
-        if (exp === 0) {
-          formatter.add(decimal);
-        }
+      // When we've reached exponent of 0, push the decimal point
+      exp++;
+      if (exp === 0) {
+        formatter.add(decimal);
       }
+    }
     // }
 
     // Leading integer zeros
@@ -893,8 +897,8 @@ export class Decimal {
     return undefined;
   }
 
-  protected static fromRaw(sign: number, exp: number, data: number[], flag: DecimalFlag): Decimal {
-    return new this({ sign, exp, data, flag } as any as Decimal);
+  protected static fromRaw(sign: number, _exp: number, data: number[], flag: DecimalFlag): Decimal {
+    return new this({ sign, _exp, data, flag } as any as Decimal);
   }
 
   /**
@@ -964,7 +968,7 @@ export class Decimal {
       return;
     }
     if (this.isZero()) {
-      this.exp += shift;
+      this._exp += shift;
       return;
     }
 
@@ -975,7 +979,7 @@ export class Decimal {
     // zero with no rounding possible. Just set zero and bump the exponent.
     if (prec < shift) {
       w.data = [0];
-      w.exp += shift;
+      w._exp += shift;
       return;
     }
 
@@ -1026,7 +1030,7 @@ export class Decimal {
     }
 
     w.trim();
-    w.exp += shift;
+    w._exp += shift;
 
     if (round && w.round(rnd, rest, mode)) {
       // If precision changes due to rounding, subtract from exponent
@@ -1041,15 +1045,15 @@ export class Decimal {
     } else {
       this._shiftright(-diff, roundingMode);
     }
-    this.exp = scale === 0 ? 0 : -scale;
+    this._exp = scale === 0 ? 0 : -scale;
     this.trim();
   }
 
   protected _stripTrailingZeros(): void {
     let n = 0;
     // Special case for zero with negative exponent
-    if (this.data.length === 1 && this.data[0] === 0 && this.exp < 0) {
-      n = -this.exp;
+    if (this.data.length === 1 && this.data[0] === 0 && this._exp < 0) {
+      n = -this._exp;
     } else {
       n = this.trailingZeros();
     }
@@ -1132,16 +1136,16 @@ export class Decimal {
     let m = u; // m = bigger
     let n = v; // n = smaller
     let swap = 0;
-    if (m.exp < n.exp) {
+    if (m._exp < n._exp) {
       [m, n] = [n, m];
       swap++;
     }
 
-    const shift = m.exp - n.exp;
+    const shift = m._exp - n._exp;
     m = m.shiftleft(shift);
 
     const w = new Decimal(ZERO);
-    w.exp = n.exp;
+    w._exp = n._exp;
 
     if (m.data.length < n.data.length) {
       [m, n] = [n, m];
@@ -1325,7 +1329,7 @@ export class Decimal {
 
     this.data = data;
     this.sign = sign === -1 ? -1 : 1;
-    this.exp = exp;
+    this._exp = exp;
     this.trim();
     return undefined;
   }
