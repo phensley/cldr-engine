@@ -228,6 +228,12 @@ test('skeleton metacharacters', () => {
   s = api.formatDate(mar11, { skeleton: 'Cmm' });
   expect(s).toEqual('11:00 PM');
 
+  s = api.formatDate(mar11, { skeleton: 'K' });
+  expect(s).toEqual('11 PM');
+
+  s = api.formatDate(mar11, { skeleton: 'BH' });
+  expect(s).toEqual('23');
+
   api = calendarsApi('de');
   s = api.formatDate(mar11, { skeleton: 'J' });
   expect(s).toEqual('23 Uhr');
@@ -243,46 +249,46 @@ test('parts', () => {
   const api = calendarsApi('en');
   let p = api.formatDateToParts(mar11, { date: 'full' });
   expect(p).toEqual([
-    { type: 'weekday', value: 'Saturday'},
-    { type: 'literal', value: ', '},
-    { type: 'month', value: 'March'},
-    { type: 'literal', value: ' '},
-    { type: 'day', value: '10'},
-    { type: 'literal', value: ', '},
-    { type: 'year', value: '2018'}
+    { type: 'weekday', value: 'Saturday' },
+    { type: 'literal', value: ', ' },
+    { type: 'month', value: 'March' },
+    { type: 'literal', value: ' ' },
+    { type: 'day', value: '10' },
+    { type: 'literal', value: ', ' },
+    { type: 'year', value: '2018' }
   ]);
 
   p = api.formatDateToParts(mar11, { date: 'short' });
   expect(p).toEqual([
-    { type: 'month', value: '3'},
-    { type: 'literal', value: '/'},
-    { type: 'day', value: '10'},
-    { type: 'literal', value: '/'},
-    { type: 'year', value: '18'}
+    { type: 'month', value: '3' },
+    { type: 'literal', value: '/' },
+    { type: 'day', value: '10' },
+    { type: 'literal', value: '/' },
+    { type: 'year', value: '18' }
   ]);
 
   p = api.formatDateToParts(mar11, { time: 'full' });
   expect(p).toEqual([
-    { type: 'hour', value: '11'},
-    { type: 'literal', value: ':'},
-    { type: 'minute', value: '00'},
-    { type: 'literal', value: ':'},
-    { type: 'second', value: '25'},
-    { type: 'literal', value: ' '},
-    { type: 'dayperiod', value: 'PM'},
-    { type: 'literal', value: ' '},
-    { type: 'timezone', value: 'Pacific Standard Time'}
+    { type: 'hour', value: '11' },
+    { type: 'literal', value: ':' },
+    { type: 'minute', value: '00' },
+    { type: 'literal', value: ':' },
+    { type: 'second', value: '25' },
+    { type: 'literal', value: ' ' },
+    { type: 'dayperiod', value: 'PM' },
+    { type: 'literal', value: ' ' },
+    { type: 'timezone', value: 'Pacific Standard Time' }
   ]);
 
   p = api.formatDateToParts(mar11, { time: 'medium' });
   expect(p).toEqual([
-    { type: 'hour', value: '11'},
-    { type: 'literal', value: ':'},
-    { type: 'minute', value: '00'},
-    { type: 'literal', value: ':'},
-    { type: 'second', value: '25'},
-    { type: 'literal', value: ' '},
-    { type: 'dayperiod', value: 'PM'}
+    { type: 'hour', value: '11' },
+    { type: 'literal', value: ':' },
+    { type: 'minute', value: '00' },
+    { type: 'literal', value: ':' },
+    { type: 'second', value: '25' },
+    { type: 'literal', value: ' ' },
+    { type: 'dayperiod', value: 'PM' }
   ]);
 });
 
@@ -653,9 +659,9 @@ test('interval parts', () => {
     { type: 'literal', value: ' ' },
     { type: 'day', value: '10' },
     { type: 'literal', value: ' – ' },
-    { type: 'day', value: '14'},
-    { type: 'literal', value: ', '},
-    { type: 'year', value: '2018'}
+    { type: 'day', value: '14' },
+    { type: 'literal', value: ', ' },
+    { type: 'year', value: '2018' }
   ]);
 });
 
@@ -694,7 +700,7 @@ test('day periods', () => {
   expect(api.formatDateRaw(d, { pattern: 'bbbbb' })).toEqual('n');
 
   expect(api.formatDateRawToParts(d, { pattern: 'b' })).toEqual([
-    { type: 'dayperiod', value: 'noon'}
+    { type: 'dayperiod', value: 'noon' }
   ]);
 
   expect(api.formatDateRawToParts(d)).toEqual([]);
