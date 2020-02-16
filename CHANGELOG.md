@@ -6,6 +6,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [UNRELEASED]
+
+### Added
+
+- Method to fetch `SchemaConfig` from the `CLDRFramework`.
+- Method to get exponent of a `Decimal`.
+
+### Fixed/Changed
+
+- Changed cost function used to find shortest paths in the unit conversion graph.
+- The conversion graph now remains static after it is first build. Instead of updating the graph incrementally with direct conversion factors, we cache and return the full unit conversion paths.
+
 ## [0.25.14]
 
 ### Fixed/Changed
