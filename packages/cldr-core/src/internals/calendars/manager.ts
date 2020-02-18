@@ -26,12 +26,12 @@ export class CalendarManager {
     this.patternCache = new Cache((calendar: string) => {
       if (this.availableCalendars.has(calendar)) {
         switch (calendar) {
-        case 'buddhist':
-          return new CalendarPatterns(bundle, internals, schema.Buddhist);
-        case 'japanese':
-          return new CalendarPatterns(bundle, internals, schema.Japanese);
-        case 'persian':
-          return new CalendarPatterns(bundle, internals, schema.Persian);
+          case 'buddhist':
+            return new CalendarPatterns(bundle, internals, schema.Buddhist);
+          case 'japanese':
+            return new CalendarPatterns(bundle, internals, schema.Japanese);
+          case 'persian':
+            return new CalendarPatterns(bundle, internals, schema.Persian);
         }
       }
       return new GregorianPatterns(bundle, internals, schema.Gregorian);
@@ -45,8 +45,6 @@ export class CalendarManager {
   getDateFormatRequest(date: CalendarDate, options: DateFormatOptions, params: NumberParams): DateFormatRequest {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     const patterns = this.getCalendarPatterns(calendar);
-
-    // TODO: default if none set
 
     let dateKey = this.supportedOption(options.datetime || options.date);
     const timeKey = this.supportedOption(options.datetime || options.time);
@@ -150,7 +148,7 @@ export class CalendarManager {
     calendar: string,
     start: CalendarDate,
     fieldDiff: DateTimePatternFieldType, options: DateIntervalFormatOptions,
-  params: NumberParams): DateIntervalFormatRequest {
+    params: NumberParams): DateIntervalFormatRequest {
 
     const patterns = this.getCalendarPatterns(calendar);
 
@@ -259,13 +257,13 @@ export class CalendarManager {
   }
 
   protected matchAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
-      query: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
+    query: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
     const match = patterns.matchAvailable(query);
     return this.getAvailablePattern(patterns, date, query, match, params);
   }
 
   protected getAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
-      query: DateSkeleton, match: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
+    query: DateSkeleton, match: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
     const pattern = patterns.getAvailablePattern(date, match);
     return pattern.length === 0 ? undefined : patterns.adjustPattern(pattern, query, params.symbols.decimal);
   }
