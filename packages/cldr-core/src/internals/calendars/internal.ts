@@ -86,8 +86,8 @@ export class CalendarInternalsImpl implements CalendarInternals {
   }
 
   formatDateTime<R>(
-      calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>,
-      date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R {
+    calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>,
+    date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R {
 
     const formatter = this.getCalendarFormatter(calendar);
     let _date: R | undefined;
@@ -138,14 +138,14 @@ export class CalendarInternalsImpl implements CalendarInternals {
   protected supportedCalendar(c: string | undefined): CalendarType | undefined {
     if (c && this.availableCalendars.has(c)) {
       switch (c) {
-      case 'buddhist':
-      case 'iso8601':
-      case 'japanese':
-      case 'persian':
-      case 'gregory':
-        return c;
-      case 'gregorian':
-        return 'gregory';
+        case 'buddhist':
+        case 'iso8601':
+        case 'japanese':
+        case 'persian':
+        case 'gregory':
+          return c;
+        case 'gregorian':
+          return 'gregory';
       }
     }
     return undefined;

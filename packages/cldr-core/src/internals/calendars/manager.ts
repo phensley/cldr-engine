@@ -49,7 +49,7 @@ export class CalendarManager {
     let dateKey = this.supportedOption(options.datetime || options.date);
     const timeKey = this.supportedOption(options.datetime || options.time);
     const wrapKey = this.supportedOption(options.wrap);
-    const skelKey = options.skeleton || '';
+    let skelKey = options.skeleton || '';
 
     if (!dateKey && !timeKey && !skelKey) {
       dateKey = 'long';
@@ -70,31 +70,60 @@ export class CalendarManager {
       req.time = patterns.getTimePattern(timeKey);
     }
 
-    // Standard format
-    if (req.date || req.time) {
+    let query: DateSkeleton;
+
+    // We have both standard formats, we're done
+    if (req.date && req.time) {
       return req;
     }
+
+    // We have at least a date/time standard format.
+    if (req.date || req.time) {
+
+      // If no skeleton specified, we're done
+      if (!skelKey) {
+        return req;
+      }
+
+      // We have a standard date or time pattern along with a skeleton.
+      // We split the skeleton into date/time parts, then use the one
+      // that doesn't conflict with the specified standard format
+      query = patterns.parseSkeleton(skelKey);
+
+      // Use the part of the skeleton that does not conflict
+      const time = query.split();
+      if (req.date) {
+        query = time;
+      }
+
+      // Update skeleton key with only the used fields
+      skelKey = query.canonical();
+
+    } else {
+      // No standard format specified, so just parse the skeleton
+      query = patterns.parseSkeleton(skelKey);
+    }
+
+    // TODO: skeleton caching disabled for now due to mixed formats
+    // Check if we've cached the patterns for this skeleton before
+    // let entry = patterns.getCachedSkeletonRequest(skelKey);
+    // if (entry) {
+    //   req.date = entry.date;
+    //   req.time = entry.time;
+    //   if (!wrapKey && entry.dateSkel && req.date && req.time) {
+    //     // If wrapper not explicitly requested, select based on skeleton date fields.
+    //     req.wrapper = this.selectWrapper(patterns, entry.dateSkel, req.date);
+    //   }
+    //   return req;
+    // }
 
     // Perform a best-fit match on the skeleton
-
-    // Check if we've cached the patterns for this skeleton before
-    let entry = patterns.getCachedSkeletonRequest(skelKey);
-    if (entry) {
-      req.date = entry.date;
-      req.time = entry.time;
-      if (!wrapKey && entry.dateSkel && req.date && req.time) {
-        // If wrapper not explicitly requested, select based on skeleton date fields.
-        req.wrapper = this.selectWrapper(patterns, entry.dateSkel, req.date);
-      }
-      return req;
-    }
 
     let timeQuery: DateSkeleton | undefined;
     let dateSkel: DateSkeleton | undefined;
     let timeSkel: DateSkeleton | undefined;
 
     // Check if skeleton specifies date or time fields, or both.
-    const query = patterns.parseSkeleton(skelKey);
     if (query.compound()) {
       // Separate into a date and a time skeletons.
       timeQuery = query.split();
@@ -107,18 +136,26 @@ export class CalendarManager {
       timeSkel = patterns.matchAvailable(query);
     }
 
-    req.date = dateSkel ?
-      this.getAvailablePattern(patterns, date, query, dateSkel, params) : undefined;
-
-    req.time = timeQuery && timeSkel ?
-      this.getAvailablePattern(patterns, date, timeQuery, timeSkel, params) : undefined;
-
-    if (!wrapKey && dateSkel && req.date && req.time) {
-      req.wrapper = this.selectWrapper(patterns, dateSkel, req.date);
+    if (dateSkel) {
+      req.date = this.getAvailablePattern(patterns, date, query, dateSkel, params);
+    }
+    if (timeQuery && timeSkel) {
+      req.time = this.getAvailablePattern(patterns, date, timeQuery, timeSkel, params);
     }
 
-    entry = { date: req.date, time: req.time, dateSkel: dateSkel };
-    patterns.setCachedSkeletonRequest(skelKey, entry);
+    if (!wrapKey) {
+      if (dateSkel && req.date && req.time) {
+        // Select wrapper based on fields in date skeleton
+        req.wrapper = this.selectWrapper(patterns, dateSkel, req.date);
+      } else {
+        // Select wrapper based on width of standard date format
+        req.wrapper = patterns.getWrapperPattern(dateKey || 'short');
+      }
+    }
+
+    // TODO: skeleton caching disabled for now due to mixed formats
+    // entry = { date: req.date, time: req.time, dateSkel: dateSkel };
+    // patterns.setCachedSkeletonRequest(skelKey, entry);
     return req;
   }
 
