@@ -5,6 +5,7 @@ import { pluralRules } from '@phensley/plurals';
 import {
   buildMessageMatcher,
   parseMessagePattern,
+  DefaultMessageArgConverter,
   MessageArg,
   MessageEngine,
   MessageFormatter,
@@ -20,7 +21,7 @@ const FORMATTERS = {
 const MESSAGE = 'foo bar {0 plural one {# item} other {# items}} {1}';
 const MATCHER = buildMessageMatcher(Object.keys(FORMATTERS));
 const CODE = parseMessagePattern(MESSAGE, MATCHER);
-
+const CONVERTER = new DefaultMessageArgConverter();
 const FORMATTER = new MessageFormatter({ language: 'en', formatters: FORMATTERS });
 
 const PLURALS = pluralRules.get('en');
@@ -30,7 +31,7 @@ messageSuite.add('parse', () => {
 });
 
 messageSuite.add('eval', () => {
-  new MessageEngine(PLURALS, FORMATTERS, CODE).evaluate([12, 'hello']);
+  new MessageEngine(PLURALS, CONVERTER, FORMATTERS, CODE).evaluate([12, 'hello']);
 });
 
 messageSuite.add('formatter', () => {
