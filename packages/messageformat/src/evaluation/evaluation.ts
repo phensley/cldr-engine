@@ -1,6 +1,7 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
 import { PluralRules } from '@phensley/plurals';
-import { asdecimal, asstring, MessageArg, MessageArgs, MessageNamedArgs } from './args';
+import { MessageArg, MessageArgs, MessageNamedArgs } from './args';
+import { MessageArgConverter } from './converter';
 import {
   MessageCode,
   MessageOpType,
@@ -34,6 +35,7 @@ export class MessageEngine {
 
   constructor(
     private plurals: PluralRules,
+    private converter: MessageArgConverter,
     private formatters: MessageFormatFuncMap,
     private code: MessageCode) { }
 
@@ -55,19 +57,19 @@ export class MessageEngine {
 
       case MessageOpType.ARG: {
         const arg = get(code[1], args);
-        this.buf += asstring(arg);
+        this.buf += this.converter.asString(arg);
         break;
       }
 
       case MessageOpType.ARGSUB: {
-        this.buf += asstring(argsub);
+        this.buf += this.converter.asString(argsub);
         break;
       }
 
       case MessageOpType.PLURAL: {
         const arg = get(code[1][0], args);
         const offset = code[2];
-        const num = asdecimal(arg);
+        const num = this.converter.asDecimal(arg);
         argsub = offset ? num.subtract(offset) : num;
         const category = code[3] === PluralNumberType.CARDINAL ?
           this.plurals.cardinal(argsub) :
@@ -82,7 +84,7 @@ export class MessageEngine {
             case PluralChoiceType.EXACT:
               let v = DECIMAL_EXACT[c[1]];
               if (v === undefined) {
-                v = asdecimal(c[1]);
+                v = this.converter.asDecimal(c[1]);
               }
               if (num.compare(v) === 0) {
                 this._evaluate(c[2], args, num);
@@ -115,7 +117,7 @@ export class MessageEngine {
 
       case MessageOpType.SELECT: {
         const arg = get(code[1][0], args);
-        const str = asstring(arg);
+        const str = this.converter.asString(arg);
 
         let other: MessageCode | undefined;
         let found = 0;

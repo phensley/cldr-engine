@@ -2,7 +2,6 @@
 
 Compact and extensible ICU message formatter with built-in support for `plural`, `select`, and `selectordinal`.
 
-
 ### Examples
 
 #### Setup
@@ -12,6 +11,7 @@ import { pluralRules } from '@phensley/plurals';
 import {
   buildMessageMatcher,
   parseMessagePattern,
+  DefaultMessageArgConverter,
   MessageArg,
   MessageEngine,
   MessageFormatter,
@@ -27,16 +27,26 @@ const FORMATTER_NAMES = Object.keys(FORMATTERS);
 
 const MATCHER = buildMessageMatcher(FORMATTER_NAMES);
 
+const CONVERTER = new DefaultMessageArgConverter();
+
 const parse = (message: string) => parseMessagePattern(message, MATCHER);
 
-const dump = (message: string) =>
-  console.log(JSON.stringify(parse(message)));
+const dump = (message: string) => console.log(JSON.stringify(parse(message)));
 
 const plurals = (language: string, region?: string) =>
   pluralRules.get(language, region);
 
-const format = (message: string, positional: MessageArg[], named: MessageNamedArgs = {}) => {
-  const engine = new MessageEngine(plurals('en'), FORMATTERS, parse(message));
+const format = (
+  message: string,
+  positional: MessageArg[],
+  named: MessageNamedArgs = {}
+) => {
+  const engine = new MessageEngine(
+    plurals('en'),
+    CONVERTER,
+    FORMATTERS,
+    parse(message)
+  );
   console.log(engine.evaluate(positional, named));
 };
 
@@ -50,6 +60,7 @@ Messages can be pre-parsed and embedded into source code, JSON, or YAML files, o
 ```typescript
 dump('{0 select, male {his} female {her} other {their}} {item}');
 ```
+
 ```
 [4,[[3,[0],[["male",[0,"his"]],["female",[0,"her"]],["other",[0,"their"]]]],[0," "],[1,"item"]]]
 ```
@@ -68,7 +79,11 @@ If you don't need to embed parsed messages into source code, the `MessageFormatt
 
 ```typescript
 const rules = plurals('en');
-const formatter = new MessageFormatter({ plurals: rules, formatters: FORMATTERS, cacheSize: 100 });
+const formatter = new MessageFormatter({
+  plurals: rules,
+  formatters: FORMATTERS,
+  cacheSize: 100
+});
 msg = '{0 select, male {his} female {her} other {their}} {item}';
 console.log(formatter.format(msg, ['female'], { item: 'parka' }));
 ```
@@ -80,7 +95,8 @@ her parka
 #### Example 3 - plural cardinals
 
 ```typescript
-msg = '{count, plural, offset:1 =0 {Be the first to like this} =1 {You liked this} ' +
+msg =
+  '{count, plural, offset:1 =0 {Be the first to like this} =1 {You liked this} ' +
   'one {You and someone else liked this} other {You and # others liked this}}';
 
 format(msg, [], { count: 0 });
@@ -114,10 +130,9 @@ Get his parka
 
 #### Example 5 - plural ordinals and select
 
-
 ```typescript
-
-msg = '{name} {tied select true {tied for} other {came in}} {place selectordinal one {#st} ' +
+msg =
+  '{name} {tied select true {tied for} other {came in}} {place selectordinal one {#st} ' +
   'two {#nd} few {#rd} other {#th}} place';
 
 const racers = [
@@ -148,11 +163,7 @@ Larry came in 5th place
 ```typescript
 msg = '{word} uppercase = {word foo upper} lowercase = {word foo lower}';
 
-const WORDS = [
-  'Computer',
-  'Science',
-  'Mathematics'
-];
+const WORDS = ['Computer', 'Science', 'Mathematics'];
 
 for (const word of WORDS) {
   format(msg, [], { word });

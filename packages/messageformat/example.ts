@@ -2,6 +2,7 @@ import { pluralRules } from '@phensley/plurals';
 import {
   buildMessageMatcher,
   parseMessagePattern,
+  DefaultMessageArgConverter,
   MessageArg,
   MessageEngine,
   MessageFormatter,
@@ -17,6 +18,8 @@ const FORMATTER_NAMES = Object.keys(FORMATTERS);
 
 const MATCHER = buildMessageMatcher(FORMATTER_NAMES);
 
+const CONVERTER = new DefaultMessageArgConverter();
+
 const parse = (message: string) => parseMessagePattern(message, MATCHER);
 
 const dump = (message: string) =>
@@ -26,7 +29,7 @@ const plurals = (language: string, region?: string) =>
   pluralRules.get(language, region);
 
 const format = (message: string, positional: MessageArg[], named: MessageNamedArgs = {}) => {
-  const engine = new MessageEngine(plurals('en'), FORMATTERS, parse(message));
+  const engine = new MessageEngine(plurals('en'), CONVERTER, FORMATTERS, parse(message));
   console.log(engine.evaluate(positional, named));
 };
 

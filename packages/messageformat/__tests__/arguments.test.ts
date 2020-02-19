@@ -1,5 +1,10 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-import { asdecimal, asstring } from '../src';
+import { DefaultMessageArgConverter, MessageArg } from '../src';
+
+const CONVERTER = new DefaultMessageArgConverter();
+
+const asstring = (arg: MessageArg | undefined) => CONVERTER.asString(arg);
+const asdecimal = (arg: MessageArg | undefined) => CONVERTER.asDecimal(arg);
 
 test('strings', () => {
   expect(asstring(false)).toEqual('false');
