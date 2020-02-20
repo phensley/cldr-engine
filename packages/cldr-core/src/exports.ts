@@ -39,7 +39,9 @@ export {
 export {
   buildMessageMatcher,
   parseMessagePattern,
+  DefaultMessageArgConverter,
   MessageArg,
+  MessageArgConverter,
   MessageCode,
   MessageEngine,
   MessageFormatFunc,
