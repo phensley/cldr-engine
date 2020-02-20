@@ -8,7 +8,8 @@ const identifiers = (symbols: string[]): string[] => {
 const unitNames = (symbols: string[]) => {
   return symbols.map(s => {
     const i = s.indexOf('-');
-    return s.substring(i + 1);
+    const name = s.substring(i + 1);
+    return name === 'generic' ? 'temperature' : name;
   }).sort();
 };
 

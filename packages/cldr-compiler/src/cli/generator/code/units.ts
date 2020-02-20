@@ -12,8 +12,10 @@ export const getUnits = (data: any): Code[] => {
   data.units.forEach((s: string) => {
     const index = s.indexOf('-');
     const category = s.substring(0, index);
-    const unit = s.substring(index + 1);
-
+    let unit = s.substring(index + 1);
+    if (category === 'temperature' && unit === 'generic') {
+      unit = category;
+    }
     const cat = `'${category}'`;
     let i = categories.indexOf(cat);
     if (i === -1) {

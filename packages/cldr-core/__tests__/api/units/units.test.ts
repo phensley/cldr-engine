@@ -65,6 +65,18 @@ test('cldr v36 units', () => {
   expect(s).toEqual('1dpi');
 });
 
+test('generic temperature', () => {
+  const api = unitsApi('en');
+  let s: string;
+
+  const q: Quantity = { value: 8.9, unit: 'temperature' };
+  s = api.formatQuantity(q, { length: 'long' });
+  expect(s).toEqual('8.9°');
+
+  s = api.formatQuantity(q, { length: 'short' });
+  expect(s).toEqual('8.9°');
+});
+
 test('pattern fallback to other', () => {
   const api = unitsApi('de');
   let s: string;
@@ -184,19 +196,19 @@ test('format string', () => {
   const api = unitsApi('en');
   let s: string;
 
-  s = api.formatQuantity({ value: '123', unit: 'meter'});
+  s = api.formatQuantity({ value: '123', unit: 'meter' });
   expect(s).toEqual('123 meters');
 
-  s = api.formatQuantity({ value: '12345', unit: 'meter'}, { style: 'long', minimumFractionDigits: 1 });
+  s = api.formatQuantity({ value: '12345', unit: 'meter' }, { style: 'long', minimumFractionDigits: 1 });
   expect(s).toEqual('12.3 thousand meters');
 
-  s = api.formatQuantity({ value: '1', unit: 'pound'}, { style: 'long' });
+  s = api.formatQuantity({ value: '1', unit: 'pound' }, { style: 'long' });
   expect(s).toEqual('1 pound');
 
-  s = api.formatQuantity({ value: '1', unit: 'pound'}, { style: 'long', minimumFractionDigits: 1 });
+  s = api.formatQuantity({ value: '1', unit: 'pound' }, { style: 'long', minimumFractionDigits: 1 });
   expect(s).toEqual('1.0 pounds');
 
-  s = api.formatQuantity({ value: '12345000', unit: 'pound'},
+  s = api.formatQuantity({ value: '12345000', unit: 'pound' },
     { length: 'short', style: 'short', minimumFractionDigits: 1 });
   expect(s).toEqual('12.3M lb');
 });
@@ -236,18 +248,18 @@ test('format parts', () => {
 
   p = api.formatQuantityToParts({ value: '123', unit: 'meter' });
   expect(p).toEqual([
-    { type: 'integer', value: '123'},
-    { type: 'literal', value: ' meters'}
+    { type: 'integer', value: '123' },
+    { type: 'literal', value: ' meters' }
   ]);
 
-  p = api.formatQuantityToParts({ value: '12345000', unit: 'pound'},
+  p = api.formatQuantityToParts({ value: '12345000', unit: 'pound' },
     { length: 'short', style: 'short', minimumFractionDigits: 1 });
   expect(p).toEqual([
-    { type: 'integer', value: '12'},
-    { type: 'decimal', value: '.'},
-    { type: 'fraction', value: '3'},
-    { type: 'literal', value: 'M'},
-    { type: 'literal', value: ' lb'}
+    { type: 'integer', value: '12' },
+    { type: 'decimal', value: '.' },
+    { type: 'fraction', value: '3' },
+    { type: 'literal', value: 'M' },
+    { type: 'literal', value: ' lb' }
   ]);
 });
 
@@ -256,7 +268,7 @@ test('format sequence string', () => {
   let s: string;
   let u: Quantity[];
 
-  u = [{ value: '123', unit: 'meter'}, { value: '17.2', unit: 'centimeter' }];
+  u = [{ value: '123', unit: 'meter' }, { value: '17.2', unit: 'centimeter' }];
   s = api.formatQuantitySequence(u);
   expect(s).toEqual('123 meters, 17.2 centimeters');
 
@@ -297,16 +309,16 @@ test('format sequence parts', () => {
   let p: Part[];
   let u: Quantity[];
 
-  u = [{ value: '123', unit: 'meter'}, { value: '17.2', unit: 'centimeter' }];
+  u = [{ value: '123', unit: 'meter' }, { value: '17.2', unit: 'centimeter' }];
   p = api.formatQuantitySequenceToParts(u);
   expect(p).toEqual([
     { type: 'integer', value: '123' },
-    { type: 'literal', value: ' meters'},
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ' meters' },
+    { type: 'literal', value: ', ' },
     { type: 'integer', value: '17' },
-    { type: 'decimal', value: '.'},
-    { type: 'fraction', value: '2'},
-    { type: 'literal', value: ' centimeters'}
+    { type: 'decimal', value: '.' },
+    { type: 'fraction', value: '2' },
+    { type: 'literal', value: ' centimeters' }
   ]);
 
   u = [{ value: '312', unit: 'foot' }, { value: '59', unit: 'inch' }];
@@ -314,7 +326,7 @@ test('format sequence parts', () => {
   expect(p).toEqual([
     { type: 'integer', value: '312' },
     { type: 'literal', value: '′' },
-    { type: 'literal', value: ' '},
+    { type: 'literal', value: ' ' },
     { type: 'integer', value: '59' },
     { type: 'literal', value: '″' }
   ]);

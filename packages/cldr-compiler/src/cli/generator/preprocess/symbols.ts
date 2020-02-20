@@ -94,6 +94,7 @@ export const getSymbols = (): any => {
   });
 
   const unitCategories = unique(sorted(unitsRaw).map(u => u.split('-')[0]));
+
   return {
     metaZoneIds: sorted(metaZoneIds),
     timeZoneIds: sorted(timeZoneIds),

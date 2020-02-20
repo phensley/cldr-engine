@@ -59,7 +59,7 @@ const assign = (dst: any, ...src: any[]): any => {
 const flattenTimeZones = (obj: any): any => {
   const inner = (o: any, path: string[] = []): any =>
     isTimeZone(o) ? [{ [path.join('/')]: o }] :
-    [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
+      [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
   return assign({}, ...inner(obj));
 };
 
@@ -80,7 +80,7 @@ const flattenAlias = (obj: any) => {
 const flattenZoneAliases = (obj: any) => {
   const inner = (o: any, path: string[] = []): any =>
     isTimeZoneAlias(o) ? [{ [path.join('/')]: o._replacement }] :
-    [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
+      [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
   return assign({}, ...inner(obj));
 };
 
@@ -90,7 +90,7 @@ const flattenZoneAliases = (obj: any) => {
 const flattenMetaZones = (obj: any): any => {
   const inner = (o: any, path: string[] = []): any =>
     Array.isArray(o) ? [{ [path.join('/')]: o }] :
-    [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
+      [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
   return assign({}, ...inner(obj));
 };
 
@@ -469,7 +469,10 @@ const splitUnitNames = (obj: any) => {
   const keys = Object.keys(obj);
   return keys.reduce((o: any, key) => {
     const index = key.indexOf('-');
-    const name = index === -1 ? key : key.substring(index + 1);
+    let name = index === -1 ? key : key.substring(index + 1);
+    if (name === 'generic') {
+      name = 'temperature';
+    }
     o[name] = obj[key];
     return o;
   }, {});
@@ -548,11 +551,11 @@ export const getMain = (language: string, transform: boolean = true) => {
     Names: {
       languages: {
         ...access({ displayName: get(['localeDisplayNames', 'languages']) }, 'languages',
-        false, transformLanguage)
+          false, transformLanguage)
       },
       scripts: {
         ...access({ displayName: get(['localeDisplayNames', 'scripts']) }, 'scripts',
-        false, transformScript),
+          false, transformScript),
       },
       regions: {
         ...access({ displayName: get(['localeDisplayNames', 'territories']) }, 'territories',
@@ -638,7 +641,7 @@ export const availableLocales = () =>
   _availableLocales('modern').filter(v => v !== 'root');
 
 const _availableLocales = (group: string): string[] =>
-   cldrjson('supplemental', 'availableLocales')['availableLocales'][group];
+  cldrjson('supplemental', 'availableLocales')['availableLocales'][group];
 
 export const cldrjson = (...relpath: string[]): any => {
   const { cldrversion } = readjson(join(__dirname, '..', 'package.json'));
