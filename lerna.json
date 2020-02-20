@@ -4,7 +4,7 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.25.18",
+  "version": "0.25.19",
   "command": {
     "run": {
       "npmClient": "yarn"
