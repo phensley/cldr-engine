@@ -74,13 +74,14 @@
   Decimal,
   DecimalConstants,
   DecimalFormatStyleType,
+  DefaultMessageArgConverter,
   FormatWidthType,
   MessageArg,
   MessageNamedArgs,
   MessageEngine,
   MessageFormatFuncMap,
   PluralRules,
-  ZonedDateTime,
+  ZonedDateTime
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr'</span>;
 
 <span class="hljs-keyword">const</span> coerce = <span class="hljs-function">(<span class="hljs-params">arg: <span class="hljs-built_in">any</span></span>) =&gt;</span> {
@@ -98,23 +99,38 @@
   },
   datetime: <span class="hljs-function">(<span class="hljs-params">args: MessageArg[], options: <span class="hljs-built_in">string</span>[]</span>) =&gt;</span> {
     <span class="hljs-keyword">const</span> width = options[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> FormatWidthType;
-    <span class="hljs-keyword">return</span> cldr.Calendars.formatDate(args[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> ZonedDateTime, { datetime: width });
+    <span class="hljs-keyword">return</span> cldr.Calendars.formatDate(args[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> ZonedDateTime, {
+      datetime: width
+    });
   },
   currency: <span class="hljs-function">(<span class="hljs-params">args: MessageArg[], options: <span class="hljs-built_in">string</span>[]</span>) =&gt;</span> {
     <span class="hljs-keyword">const</span> arg = args[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> MyCurrency;
     <span class="hljs-keyword">const</span> style = options[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> CurrencyFormatStyleType;
-    <span class="hljs-keyword">return</span> cldr.Numbers.formatCurrency(coerce(arg.amount), arg.currencyCode, { style });
+    <span class="hljs-keyword">return</span> cldr.Numbers.formatCurrency(coerce(arg.amount), arg.currencyCode, {
+      style
+    });
   }
 });
 
 <span class="hljs-keyword">const</span> FORMATTER_NAMES = [<span class="hljs-string">'currency'</span>, <span class="hljs-string">'decimal'</span>, <span class="hljs-string">'datetime'</span>];
-
 <span class="hljs-keyword">const</span> MATCHER = buildMessageMatcher(FORMATTER_NAMES);
+<span class="hljs-keyword">const</span> CONVERTER = <span class="hljs-keyword">new</span> DefaultMessageArgConverter();
 
 <span class="hljs-keyword">const</span> parse = <span class="hljs-function">(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>) =&gt;</span> parseMessagePattern(message, MATCHER);
 
-<span class="hljs-keyword">const</span> format = <span class="hljs-function">(<span class="hljs-params">plurals: PluralRules, formatters: MessageFormatFuncMap, message: <span class="hljs-built_in">string</span>, positional: MessageArg[], named: MessageNamedArgs = {}</span>) =&gt;</span> {
-  <span class="hljs-keyword">const</span> engine = <span class="hljs-keyword">new</span> MessageEngine(plurals, formatters, parse(message));
+<span class="hljs-keyword">const</span> format = (
+  plurals: PluralRules,
+  formatters: MessageFormatFuncMap,
+  message: <span class="hljs-built_in">string</span>,
+  positional: MessageArg[],
+  named: MessageNamedArgs = {}
+) =&gt; {
+  <span class="hljs-keyword">const</span> engine = <span class="hljs-keyword">new</span> MessageEngine(
+    plurals,
+    CONVERTER,
+    formatters,
+    parse(message)
+  );
   <span class="hljs-keyword">return</span> engine.evaluate(positional, named);
 };
 
@@ -135,25 +151,30 @@
   log(s);
 
   msg = <span class="hljs-string">'  "{0 datetime short}"  "{0 datetime long}"'</span>;
-  s = format(plurals, formatters, msg, [{ date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(), zoneId: <span class="hljs-string">'America/Los_Angeles'</span> }]);
+  s = format(plurals, formatters, msg, [
+    { date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(), zoneId: <span class="hljs-string">'America/Los_Angeles'</span> }
+  ]);
   log(s);
 
   msg = <span class="hljs-string">'  "{0 currency name}"  "{0 currency}"  "{0 currency short}"'</span>;
-  s = format(plurals, formatters, msg, [{ amount: <span class="hljs-string">'12351330'</span> , currencyCode: <span class="hljs-string">'EUR'</span> }]);
+  s = format(plurals, formatters, msg, [
+    { amount: <span class="hljs-string">'12351330'</span>, currencyCode: <span class="hljs-string">'EUR'</span> }
+  ]);
   log(s);
 }
 </code></pre>
 <pre class="output">
 English
   "12,535.99"  "13K"  "13 thousand"
-  "2/18/20, 7:49 AM"  "February 18, 2020 at 7:49:25 AM PST"
+  "2/20/20, 10:21 AM"  "February 20, 2020 at 10:21:27 AM PST"
   "12,351,330.00 euros"  "€12,351,330.00"  "€12M"
 Spanish
   "12.535,99"  "13 mil"  "13 mil"
-  "18/2/20 7:49"  "18 de febrero de 2020, 7:49:25 GMT-8"
+  "20/2/20 10:21"  "20 de febrero de 2020, 10:21:27 GMT-8"
   "12.351.330,00 euros"  "12.351.330,00 €"  "12 M€"
 Korean
   "12,535.99"  "1.3만"  "1.3만"
-  "20. 2. 18. AM 7:49"  "2020년 2월 18일 AM 7시 49분 25초 GMT-8"
+  "20. 2. 20. AM 10:21"  "2020년 2월 20일 AM 10시 21분 27초 GMT-8"
   "12,351,330.00 유로"  "€12,351,330.00"  "€1,235만"
-</pre></span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/next/doc-messageformatting"><span class="arrow-prev">← </span><span>Usage</span></a><a class="docs-next button" href="/cldr-engine/docs/en/next/doc-design-bundles"><span>Resource bundles</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>
+</pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/next/doc-messageformatting"><span class="arrow-prev">← </span><span>Usage</span></a><a class="docs-next button" href="/cldr-engine/docs/en/next/doc-design-bundles"><span>Resource bundles</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>
