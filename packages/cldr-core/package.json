@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-core",
-  "version": "0.25.19",
+  "version": "0.25.20",
   "description": "Core library for @phensley/cldr",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -34,16 +34,16 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "0.25.19",
-    "@phensley/cldr-types": "0.25.19",
-    "@phensley/cldr-utils": "0.25.19",
-    "@phensley/decimal": "0.25.19",
-    "@phensley/language-tag": "0.25.19",
-    "@phensley/locale": "0.25.19",
-    "@phensley/locale-matcher": "0.25.19",
-    "@phensley/messageformat": "0.25.19",
-    "@phensley/plurals": "0.25.19",
-    "@phensley/timezone": "0.25.19",
+    "@phensley/cldr-schema": "0.25.20",
+    "@phensley/cldr-types": "0.25.20",
+    "@phensley/cldr-utils": "0.25.20",
+    "@phensley/decimal": "0.25.20",
+    "@phensley/language-tag": "0.25.20",
+    "@phensley/locale": "0.25.20",
+    "@phensley/locale-matcher": "0.25.20",
+    "@phensley/messageformat": "0.25.20",
+    "@phensley/plurals": "0.25.20",
+    "@phensley/timezone": "0.25.20",
     "tslib": "1.10.x"
   },
   "devDependencies": {
