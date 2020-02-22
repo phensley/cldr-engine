@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.25.21]
+
+### Fixed/Changed
+
+- Sort date skeletons for consistent matching.
+
 ## [0.25.20]
 
 ### Added
@@ -610,6 +616,7 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[0.25.21]: https://github.com/phensley/cldr-engine/compare/v0.25.20...v0.25.21
 [0.25.20]: https://github.com/phensley/cldr-engine/compare/v0.25.19...v0.25.20
 [0.25.19]: https://github.com/phensley/cldr-engine/compare/v0.25.18...v0.25.19
 [0.25.18]: https://github.com/phensley/cldr-engine/compare/v0.25.17...v0.25.18
