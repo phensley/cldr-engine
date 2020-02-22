@@ -495,7 +495,7 @@ test('intervals best-fit', () => {
   expect(s).toEqual('3/10 – 3/14');
 
   s = api.formatDateInterval(start, end, { skeleton: 'y' });
-  expect(s).toEqual('Mar 10 – 14, 2018');
+  expect(s).toEqual('3/10/2018 – 3/14/2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
   expect(s).toEqual('Mar 10 – 14, 2018');
