@@ -233,6 +233,9 @@ export class DateSkeletonParser {
 
 }
 
+const cmp = (a: number, b: number) =>
+  a < b ? -1 : a > b ? 1 : 0;
+
 /**
  * Cache of date patterns and skeletons with ICU-compatible best-fit matching.
  */
@@ -251,6 +254,7 @@ export class DatePatternMatcher {
       this.exact[key] = skeleton;
       this.entries.push(skeleton);
     }
+    this.entries.sort((a, b) => cmp(a.skeleton.length, b.skeleton.length));
   }
 
   // TODO: future options to control the match
