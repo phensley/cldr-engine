@@ -30,7 +30,9 @@ export interface MessageMatcher {
 }
 
 // This library supports these operations by default.
-const BUILTINS = 'plural|select(ordinal)?|';
+const BUILTINS = ['plural', 'select', 'selectordinal'];
+
+const cmp = (a: number, b: number) => a < b ? -1 : a > b ? 1 : 0;
 
 /**
  * Matches against a substring defined by the [start, end) range
@@ -59,7 +61,9 @@ export class StickyMatcher implements MessageMatcher {
     this._arg = compile(`(0[1..9]+|\\d+|${patterns.identifier})`);
     this._ident = compile(patterns.identifier);
     this._option = compile(patterns.option);
-    this._fmt = compile(`(${BUILTINS}${formatters.join('|')})`);
+    // Sort keys by length descending to ensure prefixes are matched last
+    formatters = BUILTINS.concat(formatters).sort((a, b) => cmp(b.length, a.length));
+    this._fmt = compile(`(${formatters.join('|')})`);
     this._offset = compile(/offset:\d+/.source);
     this._choice = compile(patterns.pluralChoice);
   }

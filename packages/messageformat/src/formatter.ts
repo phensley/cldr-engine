@@ -41,8 +41,6 @@ export interface MessageFormatterOptions {
   cacheSize?: number;
 }
 
-const cmp = (a: number, b: number) => a < b ? -1 : a > b ? 1 : 0;
-
 /**
  * Convenience class that caches parsed messages.
  */
@@ -59,8 +57,7 @@ export class MessageFormatter {
     this.converter = options.converter || new DefaultMessageArgConverter();
     this.plurals = options.plurals || pluralRules.get(options.language || 'root', options.region);
     const size = options.cacheSize || DEFAULT_CACHE_SIZE;
-    // Sort keys by length descending to ensure prefixes are matched last
-    this.matcher = buildMessageMatcher(Object.keys(this.formatters).sort((a, b) => cmp(b.length, a.length)));
+    this.matcher = buildMessageMatcher(Object.keys(this.formatters));
     this.cache = new Cache<MessageCode>(s => parseMessagePattern(s, this.matcher), size);
   }
 
