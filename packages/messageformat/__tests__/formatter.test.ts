@@ -2,7 +2,10 @@ import { MessageArg, MessageFormatter } from '../src';
 
 const formatters = {
   foo: (args: MessageArg[], options: string[]): string =>
-    options[0] === 'upper' ? args[0].toUpperCase() : args[0].toLowerCase()
+    options[0] === 'upper' ? args[0].toUpperCase() : args[0].toLowerCase(),
+  quux: (_args: MessageArg[], _options: string[]): string => 'quux',
+  quuxbar: (_args: MessageArg[], _options: string[]): string => 'quuxbar',
+  quuxbaz: (_args: MessageArg[], _options: string[]): string => 'quuxbaz',
 };
 
 test('basic formatter', () => {
@@ -23,4 +26,12 @@ test('basic formatter', () => {
   expect(f.format('{0 plural one {# item} other {# items}}', [2], {})).toEqual('2 items');
 
   expect(f.toString()).toContain('cached=4');
+});
+
+test('formatter prefixes', () => {
+  const f = new MessageFormatter({ language: 'en', formatters });
+
+  expect(f.format('{0 quux}', [0], {})).toEqual('quux');
+  expect(f.format('{0 quuxbar}', [0], {})).toEqual('quuxbar');
+  expect(f.format('{0 quuxbaz}', [0], {})).toEqual('quuxbaz');
 });
