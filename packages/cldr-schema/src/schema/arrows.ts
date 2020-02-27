@@ -9,7 +9,7 @@ import {
 } from '@phensley/cldr-types';
 
 export class FieldArrowImpl implements FieldArrow {
-  constructor(readonly offset: number) {}
+  constructor(readonly offset: number) { }
 
   get(bundle: PrimitiveBundle): string {
     return bundle.get(this.offset);
@@ -130,7 +130,7 @@ export class Vector2ArrowImpl<T extends string, S extends string> implements Vec
     return '';
   }
 
-  mapping(bundle: PrimitiveBundle): { [P in T]: { [Q in S]: string }} {
+  mapping(bundle: PrimitiveBundle): { [P in T]: { [Q in S]: string } } {
     const offset = this.offset;
     /* tslint:disable-next-line */
     const res: { [P in T]: { [Q in S]: string } } = Object.create(null);
