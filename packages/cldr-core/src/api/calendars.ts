@@ -461,14 +461,13 @@ export class CalendarsImpl implements Calendars {
     switch (target) {
       case 'buddhist':
         return this.toBuddhistDate(date);
-      case 'gregory':
-        return this.toGregorianDate(date);
-      case 'iso8601':
-        return this.toISO8601Date(date);
       case 'japanese':
         return this.toJapaneseDate(date);
       case 'persian':
         return this.toPersianDate(date);
+      default:
+      case 'gregory':
+        return this.toGregorianDate(date);
     }
   }
 }

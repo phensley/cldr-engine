@@ -79,13 +79,10 @@ test('conversions', () => {
   const api = calendarsApi('en');
   const date = api.toGregorianDate(mar11);
 
-  // Requesting ISO will fall back to gregorian
+  // Requesting ISO will fall back to gregorian since iso8601 is not
+  // a supported calendar for formatting
   s = api.formatDate(date, { ca: 'iso8601' });
   expect(s).toEqual('March 10, 2018');
-
-  // Force conversion to cover the API
-  const r = api.toISO8601Date(date);
-  expect(r.toString()).toEqual('ISO8601 2018-03-10 23:00:25.000 America/Los_Angeles');
 
   s = api.formatDate(date, { ca: 'japanese' });
   expect(s).toEqual('March 10, 30 Heisei');

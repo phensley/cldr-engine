@@ -16,10 +16,17 @@ test('format relative time', () => {
 
   const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: UTC });
 
+  s = api.formatRelativeTime(start, start);
+  expect(s).toEqual('now');
+
   s = api.formatRelativeTime(start, start, { context });
   expect(s).toEqual('Now');
 
   end = start.add({ millis: 250 });
+
+  s = api.formatRelativeTime(start, end);
+  expect(s).toEqual('now');
+
   s = api.formatRelativeTime(start, end, { context });
   expect(s).toEqual('Now');
 
@@ -28,6 +35,9 @@ test('format relative time', () => {
   expect(s).toEqual('In 1 second');
 
   end = start.add({ second: 30 });
+  s = api.formatRelativeTime(start, end);
+  expect(s).toEqual('in 30 seconds');
+
   s = api.formatRelativeTime(start, end, { context });
   expect(s).toEqual('In 30 seconds');
 
