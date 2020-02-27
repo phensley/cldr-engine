@@ -1,10 +1,42 @@
 import {
   CurrencyFormatOptions,
+  Decimal,
   DecimalFormatOptions,
 } from '../../../src';
 
 import { NumberContext } from '../../../src/internals/numbers/context';
 import { parseNumberPattern, NumberPattern } from '../../../src/parsing/number';
+
+test('zeros', () => {
+  let opts: DecimalFormatOptions;
+  let ctx: NumberContext;
+  let pattern: NumberPattern;
+  let n: Decimal;
+
+  pattern = parseNumberPattern('#,##0.###')[0];
+
+  opts = { minimumSignificantDigits: 2 };
+  ctx = new NumberContext(opts, 'half-even', false, false, -1);
+  ctx.setPattern(pattern);
+
+  n = ctx.adjust(new Decimal('0'));
+  expect(n.toString()).toEqual('0.0');
+
+  opts = { maximumSignificantDigits: 1, minimumSignificantDigits: 2 };
+  ctx = new NumberContext(opts, 'half-even', false, false, -1);
+  ctx.setPattern(pattern);
+
+  n = ctx.adjust(new Decimal('0'));
+  expect(n.toString()).toEqual('0.0');
+
+  pattern = parseNumberPattern('#,##0.000')[0];
+  opts = {};
+  ctx = new NumberContext(opts, 'half-even', false, false, -1);
+  ctx.setPattern(pattern);
+
+  n = ctx.adjust(new Decimal('0'));
+  expect(n.toString()).toEqual('0.000');
+});
 
 test('decimal default', () => {
   let opts: DecimalFormatOptions;
