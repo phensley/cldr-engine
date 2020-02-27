@@ -50,6 +50,10 @@
     "typescript": "3.7.x"
   },
   "jest": {
+    "coveragePathIgnorePatterns": [
+			"/__tests__/",
+      "/lib/"
+    ],
     "moduleFileExtensions": [
       "js",
       "ts",

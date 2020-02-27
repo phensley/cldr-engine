@@ -12,13 +12,22 @@ test('basic min heap', () => {
 
   const cmp = (a: string, b: string) =>
     a < b ? -1 : a > b ? 1 : 0;
-  const heap = new Heap(cmp, strings);
 
+  // Add half the strings on construction
+  const heap = new Heap(cmp, strings.slice(0, 100));
+
+  // Push the rest onto the heap
+  for (let i = 100; i < 200; i++) {
+    heap.push(strings[i]);
+  }
+
+  // Pop all strings
   const res: string[] = [];
   while (!heap.empty()) {
     res.push(heap.pop()!);
   }
 
+  // Compare to sorted input
   strings.sort(cmp);
   expect(strings).toEqual(res);
 });
