@@ -43,8 +43,20 @@ export interface Tz {
    */
   fromUTC(zoneid: string, utc: number): ZoneInfo | undefined;
 
-  // TODO:
-  // fromWall(zoneid: string, utc: number): ZoneInfo | undefined;
+  /**
+   * Get the info for a time zone using a Wall Clock timestamp. This returns
+   * the corresponding UTC timestamp and the timezone info record, or undefined
+   * if the zone lookup fails.
+   *
+   * Since daylight savings time can result in a clock being moved backwards,
+   * there is some ambiguity in resolving a wall clock time to the corresponding
+   * UTC time. For example, on November 8 2020 in New York, the time 1:30 AM
+   * occurs twice: once before the timezone boundary of 2:00 AM is reached, and
+   * again after the clock is set back 1 hour to 1:00 AM.  The 'pre' flag can
+   * be used to determine if the pre-boundary or post-boundary offset should be
+   * returned.
+   */
+  fromWall(zoneid: string, wall: number, pre?: boolean): [number, ZoneInfo] | undefined;
 
   /**
    * Resolve a lowercase time zone id or alias into the canonical proper-cased id.
@@ -65,7 +77,7 @@ export interface Tz {
 const numarray = (s: string) => s ? s.split(' ').map(n => parseInt(n, 36)) : [];
 
 /**
- *
+ * Implements the time zone lookup.
  *
  * @public
  */
@@ -136,15 +148,19 @@ export class TzImpl {
    * Get the info for a time zone using a UTC timestamp.
    */
   fromUTC(zoneid: string, utc: number): ZoneInfo | undefined {
-    return this.lookup(zoneid, utc, true);
+    const r = this.lookup(zoneid, utc, true, false);
+    return r ? r[1] : r;
   }
 
   /**
-   * Get the info for a time zone using a local "wall clock" timestamp.
+   * Get the info for a time zone using a local "wall clock" timestamp
+   * for that zone.
+   *
+   * @alpha
    */
-  // fromWall(zoneid: string, wall: number): ZoneInfo | undefined {
-  //   return this.lookup(zoneid, wall, false);
-  // }
+  fromWall(zoneid: string, wall: number, pre?: boolean): [number, ZoneInfo] | undefined {
+    return this.lookup(zoneid, wall, false, pre);
+  }
 
   /**
    * UTC zone info.
@@ -170,17 +186,16 @@ export class TzImpl {
   /**
    * Lookup the time zone record and return the zone info.
    */
-  private lookup(id: string, t: number, _isutc: boolean): ZoneInfo | undefined {
+  private lookup(id: string, t: number, isutc: boolean, pre?: boolean): [number, ZoneInfo] | undefined {
     const rec = this.record(id);
     if (rec) {
       const [zoneid, r] = rec;
-      const res = r.fromUTC(t);
-      // TODO: rework wall -> utc since it can require some guessing
+      const [utc, res] = isutc ? r.fromUTC(t) : r.fromWall(t, pre);
       // const res = isutc ? r.fromUTC(t) : r.fromWall(t);
-      return {
+      return [utc, {
         ...res,
         zoneid
-      };
+      }];
     }
     return undefined;
   }
@@ -249,10 +264,75 @@ class ZoneRecord {
   /**
    * Resolve the zone info using a UTC timestamp.
    */
-  fromUTC(utc: number): ZoneInfoRec {
+  fromUTC(utc: number): [number, ZoneInfoRec] {
     const i = binarySearch(this.untils, true, utc);
     const type = i === -1 ? 0 : this.types[i];
-    return this.localtime[type];
+    return [utc, this.localtime[type]];
+  }
+
+  /**
+   * Resolve the zone info using a wall clock timestamp in the given zone.
+   *
+   * We have to determine the nearest DST transition boundary in wall clock
+   * time, and choose one side of the boundary based on whether the clock moved
+   * backwards or forwards, and where our wall time falls relative to
+   * the boundary, or within the transitional gap.
+   */
+  fromWall(wall: number, pre?: boolean): [number, ZoneInfoRec] {
+
+    // Find the until one day before our wall time
+    let i = binarySearch(this.untils, true, wall - 86400000);
+    const r0 = this.localtime[i === -1 ? 0 : this.types[i]];
+    i++;
+
+    // Check if we hit the end of the untils array and return
+    if (i === this.types.length) {
+      return [wall - r0.offset, r0];
+    }
+
+    // Get the next until.
+    const r1 = this.localtime[this.types[i]];
+    const u1 = this.untils[i];
+
+    // Adjust the next until using the prior offset to find the wall
+    // clock time of the boundary.
+    //
+    // Example for New York on March 8, 2020 with DST boundary at 7:00 AM UTC:
+    //
+    //   1:59 AM NY time is UTC 6:59 AM minus 5 hours
+    //
+    // 1 minute later the offset changes to -04:00:
+    //
+    //   2:00 AM NY time is UTC 7:00 AM minus 4 hours, so local time becomes 3:00 AM
+
+    // Wall time instantaneously at zone boundary
+    const w0 = u1 + r0.offset;
+
+    // New wall time after boundary is crossed
+    const w1 = u1 + r1.offset;
+
+    // Wall time is before the gap, return pre-boundary offset
+    if (wall < w0 && wall < w1) {
+      return [wall - r0.offset, r0];
+    }
+
+    // Wall time is either in the gap of impossible times or after the gap.
+    // We return the post-boundary offset.
+    //
+    // When local time jumps forward, the resulting gap contains many "impossible"
+    // times. In our example for New York, March 8 2020 at 2:30 AM is invalid so
+    // we must assume we have crossed into or past the gap, by returning the
+    // post-boundary offset.
+    if (wall >= w1 && wall >= w0) {
+      return [wall - r1.offset, r1];
+    }
+
+    // Time jumped backward. If local time jumps backwards, many times occur twice.
+    // In our example for New York, March 8 2020, 1:30 AM occurs once as local
+    // time moves towards 2:00 AM, and occurs again after the time has been
+    // moved back to 1:00 AM. If our wall time is in this gap we return the
+    // post-boundary offset unless the user requested the pre-boundary offset.
+    return pre ? [wall - r0.offset, r0] : [wall - r1.offset, r1];
   }
 
   /**
