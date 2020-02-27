@@ -3,9 +3,37 @@ import { loadMatchCases } from './util';
 
 test('basics', () => {
   const matcher = new LocaleMatcher('en, en_GB, zh, pt_AR, es-419');
-  const m: LocaleMatch = matcher.match('en-AU');
+  let m: LocaleMatch;
+
+  m = matcher.match('en-AU');
   expect(m.distance).toEqual(3);
   expect(m.locale.id).toEqual('en_GB');
+
+  // Unknown languages match default supported locale with max. distance
+  m = matcher.match(['xx', 'yy']);
+  expect(m.distance).toEqual(100);
+  expect(m.locale.id).toEqual('en');
+
+  // Distance 100 indicates none of the desired locales match (since the
+  // argument is empty) and default supported locale was returned
+  m = matcher.match([]);
+  expect(m.distance).toEqual(100);
+  expect(m.locale.id).toEqual('en');
+});
+
+test('threshold', () => {
+  const matcher = new LocaleMatcher('en, en_GB, zh, pt_AR, es-419');
+  let m: LocaleMatch;
+
+  m = matcher.match('en-AU', 10);
+  expect(m.distance).toEqual(3);
+  expect(m.locale.id).toEqual('en_GB');
+
+  // Distance 100 indicates match wasn't within threshold and default
+  // supported locale was returned
+  m = matcher.match('en-AU', 1);
+  expect(m.distance).toEqual(100);
+  expect(m.locale.id).toEqual('en');
 });
 
 test('bad args', () => {

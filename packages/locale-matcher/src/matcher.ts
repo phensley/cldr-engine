@@ -112,6 +112,7 @@ export class LocaleMatcher {
       if (a.tag === this.default.tag) {
         return -1;
       }
+      /* istanbul ignore if */
       if (b.tag === this.default.tag) {
         return 1;
       }
