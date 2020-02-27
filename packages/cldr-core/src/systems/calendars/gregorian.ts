@@ -96,6 +96,9 @@ export class GregorianDate extends CalendarDate {
       const d = month - m;
       jd += mc[m][isLeap ? 3 : 2];
 
+      // TODO: we never reach the block below since all internal uses of monthStart
+      // pass in an integer
+
       // Check if there is a fractional month part, and if so add the number
       // of the days in the next month multiplied by the fraction
       if (d !== 0) {

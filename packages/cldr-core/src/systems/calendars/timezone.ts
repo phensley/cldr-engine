@@ -130,22 +130,19 @@ class Metazones {
   getMetazone(zoneid: string, utc: number): string | undefined {
     const i = this.zoneToMetazone.get(zoneid);
     if (i !== undefined) {
-      const rec = this.metazones[i];
-      if (rec !== undefined) {
-
-        // Note: we don't bother with binary search here since the metazone
-        // until arrays are quite short.
-        const { offsets, untils } = rec;
-        const len = untils.length;
-        for (let j = len - 1; j > 0; j--) {
-          if (untils[j] <= utc) {
-            return this.metazoneids[offsets[j]];
-          }
+      const rec = this.metazones[i]!;
+      // Note: we don't bother with binary search here since the metazone
+      // until arrays are quite short.
+      const { offsets, untils } = rec;
+      const len = untils.length;
+      for (let j = len - 1; j > 0; j--) {
+        if (untils[j] <= utc) {
+          return this.metazoneids[offsets[j]];
         }
-
-        // Hit the end, return the initial metazone id
-        return this.metazoneids[offsets[0]];
       }
+
+      // Hit the end, return the initial metazone id
+      return this.metazoneids[offsets[0]];
     }
 
     // This zone has no metazoneid, e.g. "Etc/GMT+1"

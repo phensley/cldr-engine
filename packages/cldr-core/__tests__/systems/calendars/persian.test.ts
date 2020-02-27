@@ -35,6 +35,30 @@ test('persian calendar', () => {
   expect(d.weekOfYear()).toEqual(45);
 });
 
+test('persian leaps', () => {
+  let d: PersianDate;
+
+  // March 19, 2020
+  d = make(1584633586000, 'UTC');
+  expect(d.year()).toEqual(1398);
+  expect(d.month()).toEqual(12); // Esfand
+  expect(d.dayOfMonth()).toEqual(29); // 29 in non-leap
+  expect(d.isLeapYear()).toEqual(false);
+
+  // March 20, 2020
+  d = make(1584719986000, 'UTC');
+  expect(d.year()).toEqual(1399);
+  expect(d.month()).toEqual(1); // Favardin
+  expect(d.dayOfMonth()).toEqual(1);
+  expect(d.isLeapYear()).toEqual(true);
+
+  // March 20, 2021
+  d = make(1616255986000, 'UTC');
+  expect(d.month()).toEqual(12); // Esfand
+  expect(d.dayOfMonth()).toEqual(30); // 30 in leap
+  expect(d.isLeapYear()).toEqual(true);
+});
+
 test('with zone', () => {
   let d: PersianDate;
 

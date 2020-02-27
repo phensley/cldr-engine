@@ -79,6 +79,9 @@ export class PersianDate extends CalendarDate {
 
       jd += mc[m][2];
 
+      // TODO: we never reach the block below since all internal uses of monthStart
+      // pass in an integer
+
       // Check if there is a fractional month part, and if so add the number
       // of the days in the next month multiplied by the fraction
       if (d !== 0) {
@@ -98,18 +101,18 @@ export class PersianDate extends CalendarDate {
 const floor = Math.floor;
 
 const MONTH_COUNT = [
-  [  31,  31,   0 ], // Farvardin
-  [  31,  31,  31 ], // Ordibehesht
-  [  31,  31,  62 ], // Khordad
-  [  31,  31,  93 ], // Tir
-  [  31,  31, 124 ], // Mordad
-  [  31,  31, 155 ], // Shahrivar
-  [  30,  30, 186 ], // Mehr
-  [  30,  30, 216 ], // Aban
-  [  30,  30, 246 ], // Azar
-  [  30,  30, 276 ], // Dey
-  [  30,  30, 306 ], // Bahman
-  [  29,  30, 336 ]  // Esfand
+  [31, 31, 0], // Farvardin
+  [31, 31, 31], // Ordibehesht
+  [31, 31, 62], // Khordad
+  [31, 31, 93], // Tir
+  [31, 31, 124], // Mordad
+  [31, 31, 155], // Shahrivar
+  [30, 30, 186], // Mehr
+  [30, 30, 216], // Aban
+  [30, 30, 246], // Azar
+  [30, 30, 276], // Dey
+  [30, 30, 306], // Bahman
+  [29, 30, 336]  // Esfand
 ];
 
 const computePersianFields = (f: number[]): void => {
