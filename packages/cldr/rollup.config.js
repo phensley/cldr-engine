@@ -1,7 +1,7 @@
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import filesize from "rollup-plugin-filesize";
-import json from 'rollup-plugin-json';
-import resolve from 'rollup-plugin-node-resolve';
+import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 
 const libName = 'cldrengine';
