@@ -8,7 +8,6 @@ import {
   CurrencySymbolWidthType,
   DecimalAdjustOptions,
   DecimalFormatOptions,
-  // RuleBasedFormatOptions
 } from '../common';
 
 import { Bundle } from '../resource';
@@ -22,7 +21,6 @@ import {
   NumberInternals,
   NumberRenderer,
 } from '../internals';
-// import { AlgorithmicNumberingSystems } from '../systems';
 
 const DEFAULT_CURRENCY_OPTIONS: CurrencyDisplayNameOptions = { context: 'begin-sentence' };
 
@@ -64,9 +62,7 @@ export class NumbersImpl implements Numbers {
   }
 
   getCurrencyPluralName(n: DecimalArg, code: string,
-      opts: CurrencyDisplayNameOptions = DEFAULT_CURRENCY_OPTIONS): string {
-
-    // TODO: support adjustment options here
+    opts: CurrencyDisplayNameOptions = DEFAULT_CURRENCY_OPTIONS): string {
     const plural = this.getPluralCardinal(n);
     const name = this.numbers.getCurrencyPluralName(this.bundle, code, plural as PluralType);
     return this.general.contextTransform(name, this.transform, _ctx(opts), 'currencyName');
@@ -111,7 +107,7 @@ export class NumbersImpl implements Numbers {
   }
 
   protected formatDecimalImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
-      n: DecimalArg, options: DecimalFormatOptions): T {
+    n: DecimalArg, options: DecimalFormatOptions): T {
 
     // A NaN or Infinity value will just return the locale's representation
     const d = coerceDecimal(n);
@@ -124,7 +120,7 @@ export class NumbersImpl implements Numbers {
   }
 
   protected formatCurrencyImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
-      n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): T {
+    n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): T {
 
     // Not much to be done with NaN and Infinity with currencies, so we always
     // throw an error.
@@ -134,7 +130,7 @@ export class NumbersImpl implements Numbers {
   }
 
 }
-const FORCE_ERRORS: DecimalFormatOptions = { errors: ['nan', 'infinity' ]};
+const FORCE_ERRORS: DecimalFormatOptions = { errors: ['nan', 'infinity'] };
 
 /**
  * Check if the number is a NaN or Infinity and whether this should throw
@@ -162,7 +158,7 @@ const validate = <T>(
 
   return isnan ? renderer.make('nan', params.symbols.nan)
     : isinfinity ? renderer.make('infinity', params.symbols.infinity)
-    : undefined;
+      : undefined;
 };
 
 // Default an options context value

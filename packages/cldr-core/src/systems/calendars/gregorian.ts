@@ -5,27 +5,6 @@ import { DateField } from './fields';
 import { floorDiv } from './utils';
 import { TimePeriod } from './interval';
 
-// TODO: helpers to compute fields from partial information
-// export class GregorianInfo {
-
-//   daysInYear(year: number): number {
-//     const isLeap = leapGregorian(year);
-//     const m = MONTH_COUNT[11];
-//     return m[isLeap ? 1 : 0] + m[isLeap ? 3 : 2];
-//   }
-
-//   monthsInYear(year: number): number {
-//     return MONTH_COUNT.length;
-//   }
-
-//   daysInMonth(year: number, month: number): number {
-//     const i = clamp(month - 1, 0, 11);
-//     const isLeap = leapGregorian(year);
-//     return MONTH_COUNT[month][isLeap ? 1 : 0];
-//   }
-
-// }
-
 /**
  * Construct a date using the rules of the Gregorian calendar.
  *

@@ -10,14 +10,6 @@ import {
 import { MessageFormatter, MessageFormatterOptions } from '@phensley/messageformat';
 import { Part } from '@phensley/decimal';
 
-// import {
-//   buildMessageMatcher,
-//   parseMessagePattern,
-//   MessageArg,
-//   MessageEngine,
-//   MessageNamedArgs
-// } from '@phensley/messageformat';
-
 import { parseLanguageTag, LanguageResolver, LanguageTag, Locale } from '../locale';
 import { DisplayNameOptions, ListPatternType, MeasurementCategory, MeasurementSystem } from '../common';
 import { Bundle } from '../resource';
@@ -117,14 +109,6 @@ export class GeneralImpl implements General {
     }
   }
 
-  // formatMessage(message: string, positional: MessageArg[], named: MessageNamedArgs): string {
-  //    // TODO: build custom message formatter for cldr-engine types
-  //    const m = buildMessageMatcher(message, []);
-  //   const code = parseMessagePattern(message, m);
-  //   const engine = new MessageEngine(this._locale.tag.language(), {}, code);
-  //   return engine.evaluate(positional, named);
-  // }
-
   formatList(items: string[], type?: ListPatternType): string {
     return this.general.formatList(this._bundle, items, type || 'and');
   }
@@ -180,9 +164,9 @@ export class GeneralImpl implements General {
     if (typeof code === 'string') {
       s = this._getVectorAlt(arrow, code, type);
 
-    // If language is blank or we have an explicit script subtag, use the
-    // script subtag as-is. This will resolve "und-Zzzz" to "Unknown" but
-    // "en-Zzzz" will fall through to resolve "Latin"
+      // If language is blank or we have an explicit script subtag, use the
+      // script subtag as-is. This will resolve "und-Zzzz" to "Unknown" but
+      // "en-Zzzz" will fall through to resolve "Latin"
     } else if (!code.hasLanguage() || code.hasScript()) {
       s = this._getVectorAlt(arrow, code.script(), type);
     }
@@ -201,9 +185,9 @@ export class GeneralImpl implements General {
     if (typeof code === 'string') {
       s = this._getVectorAlt(arrow, code, type);
 
-    // If language is blank or we have an explicit region subtag, use
-    // the region subtag as-is. This will resolve "und-ZZ" to "Unknown" but
-    // "en-Zzzz" will fall through to resolve "United States"
+      // If language is blank or we have an explicit region subtag, use
+      // the region subtag as-is. This will resolve "und-ZZ" to "Unknown" but
+      // "en-Zzzz" will fall through to resolve "United States"
     } else if (!code.hasLanguage() || code.hasRegion()) {
       s = this._getVectorAlt(arrow, code.region(), type);
     }

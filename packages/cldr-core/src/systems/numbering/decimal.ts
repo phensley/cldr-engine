@@ -29,17 +29,6 @@ export class DecimalNumberingSystem extends NumberingSystem {
 
   // TODO: future merging of internal number formatting code into this module
 
-  // format<R>(formatter: NumberFormatter<R>, n: DecimalArg, groupDigits: boolean = false, minInt: number = 1): R {
-  //   const f = formatter.formatter(this.symbols.decimal, groupDigits ? this.symbols.group : '');
-  //   return this._formatDecimal(f, n, groupDigits, minInt);
-  // }
-
-  // formatPattern<R>(formatter: NumberFormatter<R>, pattern: NumberPattern, n: DecimalArg,
-  //     groupDigits: boolean, currencySymbol: string, percentSymbol: string, minInt: number): R {
-
-  //   return {} as R;
-  // }
-
   protected _formatDecimal<R>(f: DecimalFormatter<R>, n: DecimalArg, groupDigits?: boolean, minInt: number = 1): R {
     const d = coerceDecimal(n);
     const group = groupDigits ? this.symbols.group : '';

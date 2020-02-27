@@ -14,7 +14,7 @@ import { DateTimeNode } from '../parsing/date';
 
 export type CurrencySpacingPatterns = { [Q in CurrencySpacingPattern]: string };
 export type CurrencySpacing = { [P in CurrencySpacingPos]: CurrencySpacingPatterns };
-export type NumberSymbols =  { [P in NumberSymbolType]: string };
+export type NumberSymbols = { [P in NumberSymbolType]: string };
 
 export abstract class NumberingSystem {
 
@@ -24,18 +24,13 @@ export abstract class NumberingSystem {
     readonly minimumGroupingDigits: number,
     readonly primaryGroupingSize: number,
     readonly secondaryGroupingSize: number
-  ) {}
+  ) { }
 
   /**
    * Format a number directly to a string. This is used for things like low-level field
    * formatting for Calendars.
    */
   abstract formatString(n: DecimalArg, groupDigits?: boolean, minInt?: number): string;
-
-  // abstract format<R>(formatter: NumberFormatter<R>, n: DecimalArg, groupDigits?: boolean, minInt?: number): R;
-
-  // abstract formatPattern<R>(formatter: NumberFormatter<R>, pattern: NumberPattern, n: DecimalArg,
-  //   groupDigits: boolean, currencySymbol: string, percentSymbol: string, minInt: number): R;
 }
 
 /**
