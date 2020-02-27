@@ -97,3 +97,20 @@ test('interval date/time choice', () => {
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('Mar 11, 3 – 10 AM');
 });
+
+test('interval mismatch', () => {
+  const api = calendarsApi('en');
+  const zoneId = 'America/New_York';
+  const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId });
+
+  let end: CalendarDate;
+  let s: string;
+
+  end = start.add({ week: 2 });
+  s = api.formatDateInterval(start, end, { skeleton: 'hm' });
+  expect(s).toEqual('11, 3:00 AM – 25, 3:00 AM');
+
+  end = start.add({ month: 2 });
+  s = api.formatDateInterval(start, end, { skeleton: 'hm' });
+  expect(s).toEqual('3/11, 3:00 AM – 5/11, 3:00 AM');
+});

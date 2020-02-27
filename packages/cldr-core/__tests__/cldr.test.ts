@@ -1,4 +1,4 @@
-import { CurrencyFormatOptions, CLDRFramework, NumberSystemInfo, Quantity } from '../src';
+import { CurrencyFormatOptions, CLDRFramework, NumberSystemInfo, Quantity, SchemaConfig } from '../src';
 import { getCLDR } from './_helpers';
 
 const { parseLanguageTag, resolveLocale } = CLDRFramework;
@@ -21,7 +21,7 @@ test('init framework', () => {
 
   let s: string;
 
-  const ux = { date: 1109934428000, zoneId: 'America/New_York'};
+  const ux = { date: 1109934428000, zoneId: 'America/New_York' };
   s = api.Calendars.formatDate(ux, { datetime: 'full' });
   s = api.Calendars.formatDate(ux, { datetime: 'full' });
   expect(s).toEqual('Friday, March 4, 2005 at 6:07:08 AM Eastern Standard Time');
@@ -185,4 +185,22 @@ test('undefined locale', () => {
 test('version', () => {
   const version = CLDRFramework.version().split(/\./g);
   expect(version.length).toBeGreaterThanOrEqual(3);
+});
+
+test('framework config', () => {
+  let framework: CLDRFramework;
+  const config: SchemaConfig = {
+    'number-system-name': ['latn', 'beng']
+  };
+
+  CLDRFramework.setDefaultConfig(config);
+  framework = new CLDRFramework({});
+  expect(framework.config()).toEqual(config);
+
+  CLDRFramework.setDefaultConfig(undefined as unknown as SchemaConfig);
+  framework = new CLDRFramework({});
+  expect(framework.config()).toEqual({});
+
+  framework = new CLDRFramework({ config });
+  expect(framework.config()).toEqual(config);
 });

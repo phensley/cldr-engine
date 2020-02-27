@@ -45,6 +45,7 @@ export class NumberParamsCache {
 
     // Handle invalid number systems by returning the specified default
     // TODO: include algorithmic number system check
+    /* istanbul ignore if */
     if (!decimalNumberingDigits[realName]) {
       realName = this.select(defaultSystem);
 

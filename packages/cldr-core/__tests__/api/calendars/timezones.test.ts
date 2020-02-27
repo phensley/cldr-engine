@@ -51,4 +51,8 @@ test('stability', () => {
 
   s = EN.formatDateRaw(date, { pattern: 'VVV' });
   expect(s).toEqual('Jersey');
+
+  date.zoneId = 'Asia/Harbin';
+  s = EN.formatDateRaw(date, { pattern: 'zzzz' });
+  expect(s).toEqual('China Standard Time');
 });

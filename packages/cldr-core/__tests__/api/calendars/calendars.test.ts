@@ -2,8 +2,9 @@ import { calendarsApi } from '../../_helpers';
 
 import {
   DateRawFormatOptions,
+  FormatWidthType,
   GregorianDate,
-  ZonedDateTime
+  ZonedDateTime,
 } from '../../../src';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
@@ -71,6 +72,31 @@ test('formats', () => {
   expect(s).toEqual('3/10/18, 11:00 PM');
 });
 
+test('conversions', () => {
+  const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  let s: string;
+
+  const api = calendarsApi('en');
+  const date = api.toGregorianDate(mar11);
+
+  // Requesting ISO will fall back to gregorian
+  s = api.formatDate(date, { ca: 'iso8601' });
+  expect(s).toEqual('March 10, 2018');
+
+  // Force conversion to cover the API
+  const r = api.toISO8601Date(date);
+  expect(r.toString()).toEqual('ISO8601 2018-03-10 23:00:25.000 America/Los_Angeles');
+
+  s = api.formatDate(date, { ca: 'japanese' });
+  expect(s).toEqual('March 10, 30 Heisei');
+
+  s = api.formatDate(date, { ca: 'persian' });
+  expect(s).toEqual('Esfand 19, 1396 AP');
+
+  s = api.formatDate(date, { ca: 'buddhist' });
+  expect(s).toEqual('March 10, 2561 BE');
+});
+
 test('formats bare date', () => {
   const api = calendarsApi('en');
   let s = api.formatDate(new Date(2018, 5, 15, 12, 34, 56, 789), { datetime: 'full' });
@@ -78,6 +104,15 @@ test('formats bare date', () => {
 
   s = api.formatDate(new Date(1977, 4, 25, 14, 30, 0), { datetime: 'full' });
   expect(s).toEqual('Wednesday, May 25, 1977 at 2:30:00 PM Greenwich Mean Time');
+});
+
+test('options defaulting', () => {
+  const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+  const api = calendarsApi('en');
+  let s: string;
+
+  s = api.formatDate(mar11, { datetime: '' as FormatWidthType, date: '' as FormatWidthType });
+  expect(s).toEqual('March 10, 2018');
 });
 
 test('year padding', () => {
@@ -247,7 +282,19 @@ test('parts', () => {
   // const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
 
   const api = calendarsApi('en');
-  let p = api.formatDateToParts(mar11, { date: 'full' });
+
+  let p = api.formatDateToParts(mar11);
+  expect(p).toEqual([
+    { type: 'weekday', value: 'Saturday' },
+    { type: 'literal', value: ', ' },
+    { type: 'month', value: 'March' },
+    { type: 'literal', value: ' ' },
+    { type: 'day', value: '10' },
+    { type: 'literal', value: ', ' },
+    { type: 'year', value: '2018' }
+  ]);
+
+  p = api.formatDateToParts(mar11, { date: 'full' });
   expect(p).toEqual([
     { type: 'weekday', value: 'Saturday' },
     { type: 'literal', value: ', ' },
