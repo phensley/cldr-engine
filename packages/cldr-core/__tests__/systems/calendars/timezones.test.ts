@@ -1,4 +1,7 @@
-import { zoneInfoFromUTC } from '../../../src/systems/calendars/timezone';
+import {
+  getStableTimeZoneId,
+  zoneInfoFromUTC
+} from '../../../src/systems/calendars/timezone';
 
 test('zone info', () => {
   const utc = 1554263155000;
@@ -19,4 +22,15 @@ test('zone info', () => {
   expect(info.dst).toEqual(0);
   expect(info.metazoneid).toEqual('GMT');
   expect(info.offset).toEqual(0);
+});
+
+test('stable id', () => {
+  // Valid stable id
+  expect(getStableTimeZoneId('Africa/Bamako')).toEqual('Africa/Bamako');
+
+  // Zone alias must be resolved to match a stable id
+  expect(getStableTimeZoneId('Asia/Harbin')).toEqual('Asia/Shanghai');
+
+  // No way of mapping to a real zone
+  expect(getStableTimeZoneId('Foo/Bar')).toEqual('');
 });

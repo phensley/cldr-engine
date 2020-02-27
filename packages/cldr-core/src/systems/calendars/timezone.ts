@@ -54,15 +54,16 @@ export const getStableTimeZoneId = (zoneid: string): string => {
   init();
   // Check if this is already a CLDR stable timezone id.
   const isstable = TimeZoneStableIdIndex.get(zoneid) !== -1;
-  if (!isstable) {
-    // Resolve the passed-in string to a real tzdb zone id
-    const realid = TZ.resolveId(zoneid);
-    if (realid) {
-      // Map to a CLDR stable id
-      zoneid = metazones!.getStableId(realid);
-    }
+  if (isstable) {
+    return zoneid;
   }
-  return zoneid;
+  // Resolve the passed-in string to a real tzdb zone id
+  const realid = TZ.resolveId(zoneid);
+  if (realid) {
+    // Map to a CLDR stable id
+    return metazones!.getStableId(realid);
+  }
+  return '';
 };
 
 /**
