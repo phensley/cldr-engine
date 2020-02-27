@@ -1,3 +1,4 @@
+import { Rational } from '@phensley/decimal';
 import { ANGLE, AREA, FactorDef, UnitConversion, UnitFactors } from '../src';
 
 test('factors', () => {
@@ -49,4 +50,23 @@ test('area', () => {
 
   c = map.get('square-inch', 'acre')!;
   expect(f(c)).toEqual(['1 / 144', '1 / 43560']);
+
+  // Caching coverage
+  c = map.get('acre', 'square-foot')!;
+  expect(f(c)).toEqual(['43560 / 1']);
+
+  c = map.get('acre', 'square-foot')!;
+  expect(f(c)).toEqual(['43560 / 1']);
+});
+
+test('rational factors', () => {
+  let c: UnitConversion;
+  const map = new UnitFactors([
+    ['foo', new Rational('2 / 1'), 'bar']
+  ]);
+
+  c = map.get('foo', 'bar')!;
+  expect(c.path).toEqual(['foo', 'bar']);
+  expect(c.factors.length).toEqual(1);
+  expect(c.factors[0].toString()).toEqual('2 / 1');
 });

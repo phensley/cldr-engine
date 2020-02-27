@@ -74,9 +74,12 @@ export class UnitFactors {
     }
 
     // See if a direct conversion exists
-    const fac = this.graph[src][dst];
-    if (fac) {
-      return { path: [src, dst], factors: [fac] };
+    const n = this.graph[src];
+    if (n) {
+      const fac = n[dst];
+      if (fac) {
+        return { path: [src, dst], factors: [fac] };
+      }
     }
 
     // See if a cached path exists
@@ -109,9 +112,7 @@ export class UnitFactors {
       if (!tmp) {
         this.cache[src] = tmp = {};
       }
-      if (!tmp[dst]) {
-        tmp[dst] = r;
-      }
+      tmp[dst] = r;
       return r;
     }
     // No conversion factor exists
