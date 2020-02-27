@@ -8,6 +8,11 @@ const formatters = {
   quuxbaz: (_args: MessageArg[], _options: string[]): string => 'quuxbaz',
 };
 
+test('defaults', () => {
+  const f = new MessageFormatter();
+  expect(f.format('{0}', ['Foo'], {})).toEqual('Foo');
+});
+
 test('basic formatter', () => {
   const f = new MessageFormatter({ language: 'en', formatters });
 

@@ -86,11 +86,7 @@ export class PluralRules {
 }
 
 export const evaluateExpr = (operands: NumberOperands, expr: Expr): boolean => {
-  const operand = expr[0];
-  if (!operand) {
-    return false;
-  }
-
+  const operand = expr[0]!;
   let n: number = operands[operand as Operand];
 
   // The N = X..Y syntax means N matches an integer from X to Y inclusive
