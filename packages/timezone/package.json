@@ -58,6 +58,10 @@
     "yargs": "14.2.0"
   },
   "jest": {
+    "coveragePathIgnorePatterns": [
+      "/__tests__/",
+      "/lib/"
+    ],
     "moduleFileExtensions": [
       "js",
       "ts",
