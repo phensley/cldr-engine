@@ -6,6 +6,7 @@ test('bundle loading', () => {
 
   b = languageBundle('en-u-nu-hant-ca-buddhist');
   expect(b.id()).toEqual('en-Latn-US-u-ca-buddhist-nu-hant');
+  expect(b.tag().compact()).toEqual('en-Latn-US-u-ca-buddhist-nu-hant');
   expect(b.language()).toEqual('en');
   expect(b.region()).toEqual('US');
   expect(b.languageScript()).toEqual('en-Latn');
@@ -44,4 +45,11 @@ test('bundle exception missing', () => {
   expect(b.get(0)).toEqual('C');
   expect(b.get(1)).toEqual('');
   expect(b.get(2)).toEqual('');
+});
+
+test('bundle spellout', () => {
+  let b: Bundle;
+
+  b = languageBundle('en-u-nu-hant-ca-buddhist');
+  expect(b.spellout()).toBeDefined();
 });
