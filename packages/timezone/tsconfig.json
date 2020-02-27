@@ -7,7 +7,7 @@
     "src/**/*.ts"
   ],
   "exclude": [
-		"tztool/**/*",
+    "tztool/**/*",
     "__tests__/**/*",
     "__benchmarks__/**/*"
   ]
