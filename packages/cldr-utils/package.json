@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-utils",
-  "version": "0.25.22",
+  "version": "0.26.0",
   "description": "Utilities for cldr-engine packages",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -51,7 +51,7 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
-			"/__tests__/",
+      "/__tests__/",
       "/lib/"
     ],
     "moduleFileExtensions": [
