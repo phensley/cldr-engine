@@ -1,5 +1,5 @@
 import { DivMod } from './math';
-import { Constants, POWERS10  } from './types';
+import { Constants, POWERS10 } from './types';
 
 const cmp = (a: number, b: number): number => a < b ? -1 : a === b ? 0 : 1;
 
@@ -34,7 +34,7 @@ export const compare = (a: number[], b: number[], shift: number): number => {
       --n;
     }
     let x = 0;
-    for (; m >= 0; m--, n--) {
+    for (; m >= 0; m-- , n--) {
       [hi, lo] = div.pow10(b[m], Constants.RDIGITS - r);
       x = ph * loprev + hi;
       c = cmp(a[n], x);
@@ -53,12 +53,11 @@ export const compare = (a: number[], b: number[], shift: number): number => {
 };
 
 export const allzero = (data: number[], len: number): number => {
-  if (len > data.length) {
-    return 1;
-  }
-  while (--len >= 0) {
-    if (data[len] !== 0) {
-      return 0;
+  if (len <= data.length) {
+    while (--len >= 0) {
+      if (data[len] !== 0) {
+        return 0;
+      }
     }
   }
   return 1;

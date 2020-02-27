@@ -19,6 +19,38 @@ test('is negative', () => {
   expect(parse('-1').isNegative()).toEqual(true);
 });
 
+test('exponent', () => {
+  expect(parse('100').exp()).toEqual(0);
+  expect(parse('1e10').exp()).toEqual(10);
+  expect(parse('1e-10').exp()).toEqual(-10);
+});
+
+test('properties', () => {
+  expect(parse('-12300').properties()).toEqual(
+    [[12300], -1, 0, 0]
+  );
+
+  expect(parse('-123e10').properties()).toEqual(
+    [[123], -1, 10, 0]
+  );
+
+  expect(parse('-123e-10').properties()).toEqual(
+    [[123], -1, -10, 0]
+  );
+
+  expect(parse('infinity').properties()).toEqual(
+    [[], 1, 0, 2]
+  );
+
+  expect(parse('-infinity').properties()).toEqual(
+    [[], -1, 0, 2]
+  );
+
+  expect(parse('nan').properties()).toEqual(
+    [[], 0, 0, 1]
+  );
+});
+
 test('signum', () => {
   expect(parse('0').signum()).toEqual(0);
   expect(parse('-0').signum()).toEqual(0);
