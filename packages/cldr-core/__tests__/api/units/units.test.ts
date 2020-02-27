@@ -252,6 +252,20 @@ test('format parts', () => {
     { type: 'literal', value: ' meters' }
   ]);
 
+  p = api.formatQuantityToParts({ value: '123', unit: 'meter', per: 'hour' });
+  expect(p).toEqual([
+    { type: 'integer', value: '123' },
+    { type: 'literal', value: ' meters' },
+    { type: 'literal', value: ' per hour' }
+  ]);
+
+  p = api.formatQuantityToParts({ value: '123', unit: 'meter', per: 'hour' }, { length: 'narrow' });
+  expect(p).toEqual([
+    { type: 'integer', value: '123' },
+    { type: 'literal', value: 'm' },
+    { type: 'literal', value: '/h' }
+  ]);
+
   p = api.formatQuantityToParts({ value: '12345000', unit: 'pound' },
     { length: 'short', style: 'short', minimumFractionDigits: 1 });
   expect(p).toEqual([
