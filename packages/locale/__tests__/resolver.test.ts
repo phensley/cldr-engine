@@ -37,6 +37,9 @@ test('add likely subtags', () => {
   expect(addLikelySubtags('und-BY')).toEqual(parse('be-Cyrl-BY'));
 
   expect(addLikelySubtags('en-u-cu-usd')).toEqual(parse('en-Latn-US-u-cu-usd'));
+
+  // Pass language tag
+  expect(addLikelySubtags(parse('und-US'))).toEqual(parse('en-Latn-US'));
 });
 
 test('remove likely subtags', () => {
@@ -60,4 +63,8 @@ test('remove likely subtags', () => {
   expect(removeLikelySubtags('und-BY')).toEqual(parse('be'));
 
   expect(removeLikelySubtags('en-US-u-cu-usd')).toEqual(parse('en-u-cu-usd'));
+
+  // Pass language tag
+  expect(removeLikelySubtags(parse('en-Latn-US'))).toEqual(parse('en'));
+
 });

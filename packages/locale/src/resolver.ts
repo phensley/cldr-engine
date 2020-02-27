@@ -4,7 +4,7 @@ import {
   LanguageTag, LanguageTagField as Tag
 } from '@phensley/language-tag';
 
-import {FastTag, LanguageAliasMap } from './util';
+import { FastTag, LanguageAliasMap } from './util';
 import { stringToObject } from './util';
 import { languageAliasRaw } from './autogen.aliases';
 import * as subtags from './autogen.subtags';
@@ -31,8 +31,10 @@ interface FakeLanguageTag {
 /**
  * Since a lot of comparisons will be done, we need fast access to
  * core fields of LanguageTag without exposing the raw fields.
+ *
+ * Visible for testing
  */
-const fastTag = (real: LanguageTag): FastTag => {
+export const fastTag = (real: LanguageTag): FastTag => {
   // Hack to get fast access to internal core fields without exposing them.
   const fake = (real as any) as FakeLanguageTag;
 
@@ -127,8 +129,8 @@ const substituteLanguageAliases = (dst: FastTag): void => {
   for (let i = 0; i < aliases.length; i++) {
     const { type, repl } = aliases[i];
     const exact = (type[Tag.LANGUAGE] === dst[Tag.LANGUAGE] &&
-    type[Tag.SCRIPT] === dst[Tag.SCRIPT] &&
-    type[Tag.REGION] === dst[Tag.REGION]);
+      type[Tag.SCRIPT] === dst[Tag.SCRIPT] &&
+      type[Tag.REGION] === dst[Tag.REGION]);
 
     if ((type[Tag.SCRIPT] === Tag.SCRIPT && type[Tag.REGION] === Tag.REGION) || exact) {
       dst[Tag.LANGUAGE] = repl[Tag.LANGUAGE];
@@ -174,8 +176,10 @@ const addLikelySubtags = (dst: FastTag): void => {
 /**
  * Return a language tag, combining the fast tag's core subtags with the
  * original's additional subtags.
+ *
+ * Visible for testing
  */
-const returnTag = (real: LanguageTag, fast: FastTag): LanguageTag => {
+export const returnTag = (real: LanguageTag, fast: FastTag): LanguageTag => {
   const language = fast[Tag.LANGUAGE];
   const script = fast[Tag.SCRIPT];
   const region = fast[Tag.REGION];
@@ -208,7 +212,7 @@ const fastTagEquals = (a: FastTag, b: FastTag): boolean => {
 
 const buildLanguageAliasMap = (): LanguageAliasMap => {
   const languageAlias = stringToObject(languageAliasRaw, '|', ':');
-    return Object.keys(languageAlias).reduce((o: LanguageAliasMap, k) => {
+  return Object.keys(languageAlias).reduce((o: LanguageAliasMap, k) => {
     const type = parseFastTag(k);
     const repl = parseFastTag(languageAlias[k]);
     const language = type[Tag.LANGUAGE];
