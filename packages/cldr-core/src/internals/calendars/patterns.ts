@@ -24,7 +24,7 @@ export interface CachedIntervalRequest {
 
 export type StandaloneFieldType = 'dayPeriods' | 'eras' | 'months' | 'quarters' | 'weekdays';
 
-export type TwoLevelMap = { [x: string]: |{ [y: string]: string } };
+export type TwoLevelMap = { [x: string]: | { [y: string]: string } };
 
 /**
  * Caches all available date formatting patterns for a given calendar schema.
@@ -39,7 +39,7 @@ export class CalendarPatterns {
   private readonly region: string;
   private readonly namesCache: LRU<{ [x: string]: { [y: string]: string } }>;
   private readonly skeletonParser: DateSkeletonParser;
-  private readonly skeletonRequestCache: LRU<CachedSkeletonRequest>;
+  // private readonly skeletonRequestCache: LRU<CachedSkeletonRequest>;
   private readonly intervalRequestCache: LRU<CachedIntervalRequest>;
   private readonly dateFormats: { [x: string]: string };
   private readonly timeFormats: { [x: string]: string };
@@ -63,7 +63,7 @@ export class CalendarPatterns {
     this.language = bundle.language();
     this.region = bundle.region();
     this.skeletonParser = this.buildSkeletonParser();
-    this.skeletonRequestCache = new LRU(cacheSize);
+    // this.skeletonRequestCache = new LRU(cacheSize);
     this.intervalRequestCache = new LRU(cacheSize);
     this.namesCache = new LRU(cacheSize);
 
@@ -130,13 +130,13 @@ export class CalendarPatterns {
     return this.internals.calendars.parseDatePattern(this.timeFormats[width] || '');
   }
 
-  getCachedSkeletonRequest(key: string): CachedSkeletonRequest | undefined {
-    return this.skeletonRequestCache.get(key);
-  }
+  // getCachedSkeletonRequest(key: string): CachedSkeletonRequest | undefined {
+  //   return this.skeletonRequestCache.get(key);
+  // }
 
-  setCachedSkeletonRequest(key: string, req: CachedSkeletonRequest): void {
-    this.skeletonRequestCache.set(key, req);
-  }
+  // setCachedSkeletonRequest(key: string, req: CachedSkeletonRequest): void {
+  //   this.skeletonRequestCache.set(key, req);
+  // }
 
   getCachedIntervalRequest(key: string): CachedIntervalRequest | undefined {
     return this.intervalRequestCache.get(key);
