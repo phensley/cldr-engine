@@ -29,7 +29,7 @@
     "access": "public"
   },
   "scripts": {
-    "api": "api-extractor run -c ./etc/api-extractor.json",
+    "api": "api-extractor run -c ./etc/api-extractor.json --verbose",
     "api:local": "yarn api -l",
     "build": "yarn build:cj && yarn build:es && yarn build:packs && yarn build:rollup",
     "build:cj": "tsc -p ./tsconfig.json",
@@ -66,7 +66,7 @@
     "tslib": "1.11.1"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "7.5.6",
+    "@microsoft/api-extractor": "^7.7.8",
     "@phensley/cldr-compiler": "0.26.0",
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-json": "^4.0.2",

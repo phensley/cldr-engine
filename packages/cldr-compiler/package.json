@@ -20,6 +20,8 @@
   },
   "cldrversion": "36.0.0",
   "scripts": {
+    "api": "api-extractor run -c ./etc/api-extractor.json --verbose",
+    "api:local": "yarn api -l",
     "build": "yarn build:cj && yarn build:es && yarn download",
     "build:cj": "tsc -p ./tsconfig.json",
     "build:es": "tsc -p ./tsconfig.json --module esnext --outDir lib-es",
@@ -60,6 +62,7 @@
     "yargs": "14.2.0"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.7.8",
     "@types/jest": "25.1.3",
     "@types/node": "^10.14.10",
     "beautify-benchmark": "^0.2.4",

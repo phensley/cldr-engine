@@ -16,6 +16,8 @@
     "access": "public"
   },
   "scripts": {
+    "api": "api-extractor run -c ./etc/api-extractor.json --verbose",
+    "api:local": "yarn api -l",
     "bench:off": "ts-node __benchmarks__/",
     "build": "yarn build:cj && yarn build:es",
     "build:cj": "tsc -p ./tsconfig.json",
@@ -38,6 +40,7 @@
     "tslib": "1.11.1"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.7.8",
     "@types/jest": "25.1.3",
     "@types/node": "^10.14.10",
     "beautify-benchmark": "^0.2.4",

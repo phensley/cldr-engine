@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "api": "lerna run api",
+    "api:local": "lerna run api:local",
     "bench": "lerna run --stream --concurrency=1 bench",
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build --stream",
