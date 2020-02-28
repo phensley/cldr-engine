@@ -52,6 +52,9 @@ import { getStableTimeZoneId, substituteZoneAlias } from '../systems/calendars/t
 
 const DOW_FIELDS: RelativeTimeFieldType[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
+/**
+ * @internal
+ */
 export class CalendarsImpl implements Calendars {
 
   private manager: CalendarManager;
@@ -70,27 +73,18 @@ export class CalendarsImpl implements Calendars {
     this.minDays = internals.calendars.weekMinDays(region);
   }
 
-  /**
-   * @alpha
-   */
   dateField(type: DateFieldType, opt?: DateFieldFormatOptions): string {
     opt = opt || {};
     const field = this.internals.schema.DateFields.displayName.get(this.bundle, type, opt.width || 'wide');
     return this._transformField(field, 'calendar-field', opt.context);
   }
 
-  /**
-   * @alpha
-   */
   dayPeriods(opt?: CalendarFieldsOptions): any {
     opt = opt || {};
     const fields = this._getPatterns(opt.ca).dayPeriods()[opt.width || 'wide'];
     return this._transformFields(fields, undefined, opt.context);
   }
 
-  /**
-   * @alpha
-   */
   eras(opt?: EraFieldOptions): any {
     opt = opt || {};
     const w = opt.width || 'names';
@@ -99,9 +93,6 @@ export class CalendarsImpl implements Calendars {
     return this._transformFields(fields, tx, opt.context);
   }
 
-  /**
-   * @alpha
-   */
   months(opt?: CalendarFieldsOptions): any {
     opt = opt || {};
     const w = opt.width === 'short' ? 'narrow' : opt.width || 'wide';
@@ -110,18 +101,12 @@ export class CalendarsImpl implements Calendars {
     return this._transformFields(fields, tx, opt.context);
   }
 
-  /**
-   * @alpha
-   */
   quarters(opt?: CalendarFieldsOptions): any {
     opt = opt || {};
     const fields = (this._getPatterns(opt.ca).quarters()[opt.width || 'wide']);
     return this._transformFields(fields, undefined, opt.context);
   }
 
-  /**
-   * @alpha
-   */
   weekdays(opt?: CalendarFieldsOptions): any {
     opt = opt || {};
     const w = opt.width || 'wide';

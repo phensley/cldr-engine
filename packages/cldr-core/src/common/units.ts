@@ -4,7 +4,7 @@ import { Decimal, MathContext } from '@phensley/decimal';
 import { NumberFormatOptions, NumberFormatStyleType } from './numbers';
 
 /**
- * @alpha
+ * @public
  */
 export interface Quantity {
   value: number | string | Decimal;
@@ -14,15 +14,18 @@ export interface Quantity {
 }
 
 /**
- * @alpha
+ * @public
  */
 export type UnitFormatStyleType =
   NumberFormatStyleType;
 
+/**
+ * @public
+ */
 export type UnitLength = 'short' | 'narrow' | 'long';
 
 /**
- * @alpha
+ * @public
  */
 export interface UnitFormatOptions extends NumberFormatOptions {
   divisor?: number;
@@ -31,7 +34,7 @@ export interface UnitFormatOptions extends NumberFormatOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface UnitConvertOptions {
   ctx?: MathContext;

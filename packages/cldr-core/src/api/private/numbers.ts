@@ -13,6 +13,9 @@ import { DecimalNumberingSystem } from '../../systems';
 import { decimalNumberingDigits } from '../../systems/numbering/autogen.names';
 import { Bundle } from '../../resource';
 
+/**
+ * @internal
+ */
 export class NumberParamsCache {
 
   private numberParamsCache: Cache<NumberParams>;

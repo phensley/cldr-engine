@@ -17,6 +17,9 @@ import { NumberInternalsImpl } from './numbers';
 import { UnitsInternalImpl } from './units';
 import { checksumIndices } from '../resource/checksum';
 
+/**
+ * @internal
+ */
 export class InternalsImpl implements Internals {
 
   readonly schema: Schema;

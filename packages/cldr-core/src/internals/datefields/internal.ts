@@ -15,6 +15,9 @@ import { ContextTransformInfo, NumberParams } from '../../common/private';
 // TODO: expose a method to calculate field difference with different options, e.g.
 // include weekdays
 
+/**
+ * @internal
+ */
 export class DateFieldInternalsImpl implements DateFieldInternals {
 
   private relativeTimes: RelativeTimes;

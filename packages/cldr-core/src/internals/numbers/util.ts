@@ -30,8 +30,14 @@ const defaultCurrencyFractions: CurrencyFractions = {
 
 const currencyRegions = stringToObject(currencyRegionsRaw, '|', ':');
 
+/**
+ * @internal
+ */
 export const getCurrencyFractions = (code: string): CurrencyFractions =>
   currencyFractions[code] || defaultCurrencyFractions;
 
+/**
+ * @internal
+ */
 export const getCurrencyForRegion = (region: string): CurrencyType =>
   currencyRegions[region] as CurrencyType || 'USD';

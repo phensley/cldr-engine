@@ -2,8 +2,14 @@ import { PrimitiveBundle } from '@phensley/cldr-types';
 import { pluralRules, PluralRules } from '@phensley/plurals';
 import { LanguageTag } from '../locale';
 
+/**
+ * @internal
+ */
 export type ExceptionIndex = { [y: number]: number };
 
+/**
+ * @public
+ */
 export interface Bundle extends PrimitiveBundle {
   tag(): LanguageTag;
   calendarSystem(): string;
@@ -14,6 +20,9 @@ export interface Bundle extends PrimitiveBundle {
   plurals(): PluralRules;
 }
 
+/**
+ * @internal
+ */
 export class StringBundle implements Bundle {
 
   // Properties for fast internal lookups into maps.

@@ -3,6 +3,9 @@ import { availableLocalesRaw } from './autogen.locales';
 
 let allLocales: Locale[];
 
+/**
+ * @public
+ */
 export const availableLocales = (): Locale[] => {
   if (allLocales === undefined) {
     allLocales = availableLocalesRaw.split('|').map(id => {

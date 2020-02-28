@@ -7,6 +7,8 @@ import { TimePeriod } from './interval';
  * A date in the Buddhist calendar.
  *
  * type: buddhist
+ *
+ * @public
  */
 export class BuddhistDate extends GregorianDate {
 

@@ -17,6 +17,9 @@ import { ContextTransformInfo } from '../../common/private';
 import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
 import { parseWrapperPattern, WrapperNode } from '../../parsing/wrapper';
 
+/**
+ * @internal
+ */
 export class GeneralInternalsImpl implements GeneralInternals {
 
   private layout: LayoutSchema;

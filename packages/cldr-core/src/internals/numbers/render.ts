@@ -6,13 +6,16 @@ import { GeneralInternals, NumberRenderer } from '../internals';
 import { fastFormatDecimal } from '../../systems/numbering';
 import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
 
+/**
+ * @internal
+ */
 export abstract class NumberFormatter<R> implements NumberRenderer<R> {
 
   constructor(
     private params: NumberParams) { }
 
   render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
-      decimalSymbol: string, minInt: number, grouping: boolean = true, exponent?: number): R {
+    decimalSymbol: string, minInt: number, grouping: boolean = true, exponent?: number): R {
 
     const { symbols } = this.params;
     const currency: boolean = currencySymbol !== '';
@@ -152,6 +155,9 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
   abstract formatter(decimal: string, group: string): DecimalFormatter<R>;
 }
 
+/**
+ * @internal
+ */
 export class StringNumberFormatter extends NumberFormatter<string> {
   value(): AbstractValue<string> {
     return new StringValue();
@@ -161,6 +167,9 @@ export class StringNumberFormatter extends NumberFormatter<string> {
   }
 }
 
+/**
+ * @internal
+ */
 export class PartsNumberFormatter extends NumberFormatter<Part[]> {
   value(): AbstractValue<Part[]> {
     return new PartsValue();
@@ -189,12 +198,23 @@ const OTHER_SYMBOL = /\u00a6\u00a9\u00ae\u00b0\u0482\u060e\u060f\u06de\u06e9\u06
 // https://www.unicode.org/Public/UCD/latest/ucd/extracted/DerivedNumericType.txt
 const DECIMAL_DIGIT_NUMBER = /\u0030-\u0039\u0660-\u0669\u06f0-\u06f9\u07c0-\u07c9\u0966-\u096f\u09e6-\u09ef\u0a66-\u0a6f\u0ae6-\u0aef\u0b66-\u0b6f\u0be6-\u0bef\u0c66-\u0c6f\u0ce6-\u0cef\u0d66-\u0d6f\u0e50-\u0e59\u0ed0-\u0ed9\u0f20-\u0f29\u1040-\u1049\u1090-\u1099\u17e0-\u17e9\u1810-\u1819\u1946-\u194f\u19d0-\u19d9\u1a80-\u1a89\u1a90-\u1a99\u1b50-\u1b59\u1bb0-\u1bb9\u1c40-\u1c49\u1c50-\u1c59\ua620-\ua629\ua8d0-\ua8d9\ua900-\ua909\ua9d0-\ua9d9\uaa50-\uaa59\uabf0-\uabf9\uff10-\uff19/;
 
+/**
+ * @internal
+ */
 export const RE_SYMBOL = new RegExp(`^[${MATH_SYMBOL.source}${CURRENCY_SYMBOL.source}${MODIFIER_SYMBOL.source}${OTHER_SYMBOL.source}]`);
+
+/**
+ * @internal
+ */
 export const RE_DIGIT = new RegExp(`^[${DECIMAL_DIGIT_NUMBER.source}]`);
 
-// Exhaustive list of currency spacing matchers from scanning.
-// find cldr-data -name numbers.json -exec egrep -e '(currencyMatch|surroundingMatch)' {} \;|sort |uniq -c
+/**
+ * @internal
+ */
 export const CURRENCY_SPACING_MATCHERS: { [x: string]: (s: string) => boolean } = {
+  // Exhaustive list of currency spacing matchers from scanning.
+  // find cldr-data -name numbers.json -exec egrep -e '(currencyMatch|surroundingMatch)' {} \;|sort |uniq -c
+
   '[:digit:]': (s: string) => RE_DIGIT.test(s),
   '[:^S:]': (s: string) => !RE_SYMBOL.test(s)
 };

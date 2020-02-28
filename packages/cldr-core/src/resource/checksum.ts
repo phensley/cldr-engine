@@ -5,6 +5,8 @@ import { Checksum } from '@phensley/cldr-utils';
  * Compute a checksum on a KeyIndexMap used to configure the
  * schema. This lets us quickly confirm that the resource pack
  * was generated from the config at runtime
+ *
+ * @internal
  */
 export const checksumIndices = (version: string, map: KeyIndexMap): string => {
   const c = new Checksum();

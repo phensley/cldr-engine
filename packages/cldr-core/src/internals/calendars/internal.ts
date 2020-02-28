@@ -15,6 +15,8 @@ import { DayPeriodRules } from './rules';
 
 /**
  * Framework scoped calendar functions.
+ *
+ * @internal
  */
 export class CalendarInternalsImpl implements CalendarInternals {
 

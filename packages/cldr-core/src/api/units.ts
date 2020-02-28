@@ -11,6 +11,9 @@ import { PrivateApiImpl } from './private';
 
 const DEFAULT_OPTIONS: UnitFormatOptions = { length: 'long', style: 'decimal' };
 
+/**
+ * @internal
+ */
 export class UnitsImpl implements Units {
 
   private general: GeneralInternals;

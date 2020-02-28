@@ -12,6 +12,9 @@ import { Quantity, UnitFormatOptions } from '../../common';
 import { NumberParams } from '../../common/private';
 import { Bundle } from '../../resource';
 
+/**
+ * @internal
+ */
 export class UnitsInternalImpl implements UnitInternals {
 
   private unitsSchema: UnitsSchema;
@@ -93,12 +96,12 @@ export class UnitsInternalImpl implements UnitInternals {
 
   getUnitInfo(length: string): UnitInfo {
     switch (length) {
-    case 'narrow':
-      return this.unitsSchema.narrow;
-    case 'short':
-      return this.unitsSchema.short;
-    default:
-      return this.unitsSchema.long;
+      case 'narrow':
+        return this.unitsSchema.narrow;
+      case 'short':
+        return this.unitsSchema.short;
+      default:
+        return this.unitsSchema.long;
     }
   }
 

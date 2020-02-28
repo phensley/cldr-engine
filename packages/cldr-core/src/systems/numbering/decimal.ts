@@ -3,10 +3,16 @@ import { NumberingSystem, NumberSymbols } from '../../common/private';
 
 const isInteger = ((n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n);
 
+/**
+ * @internal
+ */
 export interface NumberingSystemParams {
   readonly decimal: string;
 }
 
+/**
+ * @internal
+ */
 export class DecimalNumberingSystem extends NumberingSystem {
 
   constructor(
@@ -48,6 +54,8 @@ export class DecimalNumberingSystem extends NumberingSystem {
 
 /**
  * Fast formatter for integers, no grouping, etc.
+ *
+ * @internal
  */
 export const fastFormatDecimal = (n: string, digits: string[], minInt: number): string => {
   let r = '';
@@ -98,5 +106,8 @@ const INTERNAL_SYMBOLS: NumberSymbols = {
   timeSeparator: ':'
 };
 
+/**
+ * @internal
+ */
 export const INTERNAL_NUMBERING = new DecimalNumberingSystem(
   'internal', '0123456789'.split(''), INTERNAL_SYMBOLS, 1, 3, 3);

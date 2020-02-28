@@ -1,8 +1,18 @@
 import { CurrencySpacingPattern, CurrencySpacingPos, NumberSymbolType, NumberSystemName } from '@phensley/cldr-types';
 
+/**
+ * @internal
+ */
 export type CurrencySpacing = { [P in CurrencySpacingPos]: { [Q in CurrencySpacingPattern]: string } };
-export type NumberSymbols =  { [P in NumberSymbolType]: string };
 
+/**
+ * @internal
+ */
+export type NumberSymbols = { [P in NumberSymbolType]: string };
+
+/**
+ * @internal
+ */
 export interface NumberParams {
   numberSystemName: NumberSystemName;
   digits: string[];
@@ -15,6 +25,9 @@ export interface NumberParams {
   afterCurrency: CurrencySpacing;
 }
 
+/**
+ * @internal
+ */
 export interface NumberFormatRequest {
   // readonly numberSystem:
 }

@@ -12,10 +12,24 @@ import { DateTimeNode } from '../parsing/date';
 
 // TODO: move these
 
+/**
+ * @internal
+ */
 export type CurrencySpacingPatterns = { [Q in CurrencySpacingPattern]: string };
+
+/**
+ * @internal
+ */
 export type CurrencySpacing = { [P in CurrencySpacingPos]: CurrencySpacingPatterns };
+
+/**
+ * @internal
+ */
 export type NumberSymbols = { [P in NumberSymbolType]: string };
 
+/**
+ * @internal
+ */
 export abstract class NumberingSystem {
 
   constructor(

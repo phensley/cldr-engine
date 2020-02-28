@@ -53,15 +53,38 @@ import {
 /**
  * Calendar, date and time functions.
  *
- * @alpha
+ * @public
  */
 export interface Calendars {
 
+  /**
+   * Date field's string representation for this locale.
+   */
   dateField(type: DateFieldType, options?: DateFieldFormatOptions): string;
+
+  /**
+   * Mapping of all day periods for this locale.
+   */
   dayPeriods(options?: CalendarFieldsOptions): any;
+
+  /**
+   * Mapping of all eras for this locale.
+   */
   eras(options?: EraFieldOptions): any;
+
+  /**
+   * Mapping of all months for this locale.
+   */
   months(options?: CalendarFieldsOptions): any;
+
+  /**
+   * Mapping of all quarters for this locale.
+   */
   quarters(options?: CalendarFieldsOptions): any;
+
+  /**
+   * Mapping of all weekdays for this locale.
+   */
   weekdays(options?: CalendarFieldsOptions): any;
 
   /**
@@ -133,9 +156,9 @@ export interface Calendars {
    * Formats the relative time from a start to end date.
    */
   formatRelativeTime(
-      start: CalendarDate | ZonedDateTime | Date,
-      end: CalendarDate | ZonedDateTime | Date,
-      options?: RelativeTimeFormatOptions): string;
+    start: CalendarDate | ZonedDateTime | Date,
+    end: CalendarDate | ZonedDateTime | Date,
+    options?: RelativeTimeFormatOptions): string;
 
   /**
    * Formats a date-time value to string using a raw date-time pattern.
@@ -163,7 +186,7 @@ export interface Calendars {
 
   /**
    * Return additional information for a timezone id, including the
-   * localized exemplar city, e.g. { id: "America/New_York", city: { name: "New York" } }
+   * localized exemplar city, e.g. `{ id: "America/New_York", city: { name: "New York" } }`
    */
   timeZoneInfo(zoneid: string): TimeZoneInfo;
 
@@ -177,7 +200,7 @@ export interface Calendars {
 /**
  * General functions.
  *
- * @alpha
+ * @public
  */
 export interface General {
 
@@ -259,7 +282,7 @@ export interface General {
 /**
  * Number and currency functions.
  *
- * @alpha
+ * @public
  */
 export interface Numbers {
 
@@ -337,7 +360,7 @@ export interface Numbers {
 /**
  * Unit quantity functions.
  *
- * @alpha
+ * @public
  */
 export interface Units {
 

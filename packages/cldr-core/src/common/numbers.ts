@@ -2,17 +2,17 @@ import { ContextType, NumberSystemCategory, NumberSystemName } from '@phensley/c
 import { RoundingModeType } from '@phensley/decimal';
 
 /**
- * @alpha
+ * @public
  */
 export type NumberSystemType = NumberSystemCategory | NumberSystemName;
 
 /**
- * @alpha
+ * @public
  */
 export type NumberFormatErrorType = 'nan' | 'infinity';
 
 /**
- * @alpha
+ * @public
  */
 export interface NumberFormatOptions {
   nu?: NumberSystemType;
@@ -25,27 +25,30 @@ export interface NumberFormatOptions {
   minimumSignificantDigits?: number;
 }
 
+/**
+ * @public
+ */
 export type NumberFormatStyleType = 'decimal' | 'short' | 'long' | 'scientific';
 
 /**
- * @alpha
+ * @public
  */
 export type DecimalFormatStyleType =
   NumberFormatStyleType | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled';
 
 /**
- * @alpha
+ * @public
  */
 export type CurrencyFormatStyleType =
   'symbol' | 'accounting' | 'code' | 'name' | 'short';
 
 /**
- * @alpha
+ * @public
  */
 export type CurrencySymbolWidthType = 'default' | 'narrow';
 
 /**
- * @alpha
+ * @public
  */
 export interface DecimalFormatOptions extends NumberFormatOptions {
   divisor?: number;
@@ -55,7 +58,7 @@ export interface DecimalFormatOptions extends NumberFormatOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface DecimalAdjustOptions {
   round?: RoundingModeType;
@@ -67,7 +70,7 @@ export interface DecimalAdjustOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface CurrencyFormatOptions extends NumberFormatOptions {
   divisor?: number;
@@ -77,7 +80,7 @@ export interface CurrencyFormatOptions extends NumberFormatOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface RuleBasedFormatOptions {
   rule?: string;
@@ -93,7 +96,7 @@ export interface RuleBasedFormatOptions {
 /**
  * Information on rounding and number of decimal digits for a given currency.
  *
- * @alpha
+ * @public
  */
 export interface CurrencyFractions {
   digits: number;

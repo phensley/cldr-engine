@@ -9,7 +9,7 @@ import { TimePeriod } from './interval';
  *
  * type: persian
  *
- * @alpha
+ * @public
  */
 export class PersianDate extends CalendarDate {
 

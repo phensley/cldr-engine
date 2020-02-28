@@ -1,13 +1,22 @@
 import { AltType, ContextType } from '@phensley/cldr-types';
 
+/**
+ * @public
+ */
 export type ListPatternType = 'and' | 'and-short' | 'or' | 'unit-long' | 'unit-narrow' | 'unit-short';
 
+/**
+ * @public
+ */
 export type MeasurementSystem = 'us' | 'uk' | 'metric';
 
+/**
+ * @public
+ */
 export type MeasurementCategory = 'temperature';
 
 /**
- * @alpha
+ * @public
  */
 export interface DisplayNameOptions {
 
@@ -17,7 +26,7 @@ export interface DisplayNameOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface CurrencyDisplayNameOptions {
   context?: ContextType;

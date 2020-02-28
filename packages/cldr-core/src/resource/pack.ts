@@ -10,13 +10,15 @@ const U = undefined;
 
 /**
  * Layer in the pack that supports all regions for a single language + script.
+ *
+ * @public
  */
 export class PackScript {
 
   private _strings: string[];
   private _exceptions: string[];
   private _regions: { [x: string]: string };
-  private _cache: { [x: string]: ExceptionIndex} = {};
+  private _cache: { [x: string]: ExceptionIndex } = {};
   private _defaultRegion: string;
 
   constructor(
@@ -64,7 +66,7 @@ export class PackScript {
 /**
  * Runtime resource pack manager.
  *
- * @alpha
+ * @public
  */
 export class Pack {
 

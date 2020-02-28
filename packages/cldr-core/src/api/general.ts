@@ -33,6 +33,9 @@ const LANGUAGE_FUNCS: LanguageTagFunc[] = [
   t => t.language()
 ];
 
+/**
+ * @internal
+ */
 export class GeneralImpl implements General {
 
   private general: GeneralInternals;

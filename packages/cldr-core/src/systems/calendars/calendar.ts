@@ -57,6 +57,9 @@ const relativeField = (p: TimePeriod): TimePeriodField => {
   return 'millis';
 };
 
+/**
+ * @internal
+ */
 export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
 
 const differenceFields: [number, DateTimePatternFieldType][] = [
@@ -71,7 +74,7 @@ const differenceFields: [number, DateTimePatternFieldType][] = [
 /**
  * Base class for dates in supported calendars.
  *
- * @alpha
+ * @public
  */
 export abstract class CalendarDate {
 
@@ -303,9 +306,12 @@ export abstract class CalendarDate {
 
   /**
    * Compare two dates a and b, returning:
+   *
+   * ```
    *   a < b  ->  -1
    *   a = b  ->  0
    *   a > b  ->  1
+   * ```
    */
   compare(other: CalendarDate): number {
     const a = this.unixEpoch();

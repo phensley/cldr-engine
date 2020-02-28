@@ -26,6 +26,8 @@ const DEFAULT_CURRENCY_OPTIONS: CurrencyDisplayNameOptions = { context: 'begin-s
 
 /**
  * Number and currency formatting.
+ *
+ * @internal
  */
 export class NumbersImpl implements Numbers {
 

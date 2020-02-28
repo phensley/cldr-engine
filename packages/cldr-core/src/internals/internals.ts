@@ -37,6 +37,9 @@ import { CalendarContext, CalendarFormatter } from './calendars/formatter';
 import { AbstractValue } from '../utils/render';
 // import { AlgorithmicNumberingSystem } from '../systems';
 
+/**
+ * @internal
+ */
 export interface CalendarInternals {
   getCalendarFormatter(type: CalendarType): CalendarFormatter<CalendarDate>;
   flexDayPeriod(bundle: Bundle, minutes: number): DayPeriodType | undefined;
@@ -54,6 +57,9 @@ export interface CalendarInternals {
     value: AbstractValue<R>, end: CalendarDate, pattern: DateTimeNode[]): R;
 }
 
+/**
+ * @internal
+ */
 export interface DateFieldInternals {
   // formatRelativeTime(bundle: Bundle, start: CalendarDate, end: CalendarDate,
   //   options: RelativeTimeFormatOptions, params: NumberParams): string;
@@ -63,6 +69,9 @@ export interface DateFieldInternals {
     transform: ContextTransformInfo): string;
 }
 
+/**
+ * @internal
+ */
 export interface GeneralInternals {
   characterOrder(bundle: Bundle): string;
   lineOrder(bundle: Bundle): string;
@@ -75,6 +84,9 @@ export interface GeneralInternals {
   parseWrapper(raw: string): WrapperNode[];
 }
 
+/**
+ * @internal
+ */
 export interface NumberInternals {
   adjustDecimal(num: DecimalArg, options?: DecimalAdjustOptions): Decimal;
   stringRenderer(params: NumberParams): NumberRenderer<string>;
@@ -96,6 +108,9 @@ export interface NumberInternals {
   getNumberPattern(raw: string, negative: boolean): NumberPattern;
 }
 
+/**
+ * @internal
+ */
 export interface UnitInternals {
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string;
   getUnitInfo(length: string): UnitInfo;
@@ -104,6 +119,9 @@ export interface UnitInternals {
     options: UnitFormatOptions, params: NumberParams): T;
 }
 
+/**
+ * @internal
+ */
 export interface NumberRenderer<R> {
   empty(): R;
   make(type: string, value: string): R;
@@ -115,6 +133,8 @@ export interface NumberRenderer<R> {
 
 /**
  * Unified interface for accessing internal functionality.
+ *
+ * @internal
  */
 export interface Internals {
   readonly config: SchemaConfig;

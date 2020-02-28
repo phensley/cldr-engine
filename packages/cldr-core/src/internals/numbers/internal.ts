@@ -38,6 +38,8 @@ const negzero = (n: Decimal, show?: boolean) =>
 
 /**
  * Number internal engine singleton, shared across all locales.
+ *
+ * @internal
  */
 export class NumberInternalsImpl implements NumberInternals {
 

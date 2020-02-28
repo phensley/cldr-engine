@@ -49,6 +49,8 @@ const elapsed = (start: [number, number], end: [number, number]): string =>
 
 /**
  * Builds the schema accessor singleton.
+ *
+ * @internal
  */
 export class SchemaBuilder {
 
@@ -160,6 +162,9 @@ export class SchemaBuilder {
   }
 }
 
+/**
+ * @internal
+ */
 export const buildSchema = (origin: Origin, debug: boolean = false): Schema => {
   const builder = new SchemaBuilder(debug);
   const schema = ({} as any) as Schema;

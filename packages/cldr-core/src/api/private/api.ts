@@ -6,6 +6,8 @@ import { NumberParamsCache } from './numbers';
 
 /**
  * Private API only visible internally.
+ *
+ * @internal
  */
 export class PrivateApiImpl {
 
@@ -19,7 +21,7 @@ export class PrivateApiImpl {
     this.numberParamsCache = new NumberParamsCache(bundle, internals);
     this.contextTransforms =
       this.internals.schema.ContextTransforms.contextTransforms.mapping(this.bundle);
- }
+  }
 
   getNumberParams(numberSystem?: NumberSystemType, defaultSystem?: NumberSystemType): NumberParams {
     return this.numberParamsCache.getNumberParams(numberSystem, defaultSystem);
