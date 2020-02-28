@@ -87,8 +87,6 @@ export interface AlgorithmicNumberSystem {
 // @public (undocumented)
 export const availableLocales: () => Locale[];
 
-// Warning: (ae-incompatible-release-tags) The symbol "BuddhistDate" is marked as @public, but its signature references "GregorianDate" which is marked as @alpha
-//
 // @public
 export class BuddhistDate extends GregorianDate {
     protected constructor(firstDay: number, minDays: number);
@@ -237,7 +235,7 @@ export abstract class CalendarDate {
     protected _zoneInfo: ZoneInfo;
 }
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface CalendarFieldsOptions {
     ca?: CalendarType;
     context?: ContextType;
@@ -307,59 +305,29 @@ export class CalendarInternalsImpl implements CalendarInternals {
 
 // @public
 export interface Calendars {
-    // Warning: (ae-incompatible-release-tags) The symbol "dateField" is marked as @public, but its signature references "DateFieldFormatOptions" which is marked as @alpha
     dateField(type: DateFieldType, options?: DateFieldFormatOptions): string;
-    // Warning: (ae-incompatible-release-tags) The symbol "dayPeriods" is marked as @public, but its signature references "CalendarFieldsOptions" which is marked as @alpha
     dayPeriods(options?: CalendarFieldsOptions): any;
-    // Warning: (ae-incompatible-release-tags) The symbol "eras" is marked as @public, but its signature references "EraFieldOptions" which is marked as @alpha
     eras(options?: EraFieldOptions): any;
-    // Warning: (ae-incompatible-release-tags) The symbol "fieldOfVisualDifference" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
     fieldOfVisualDifference(a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDate" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDate" is marked as @public, but its signature references "DateFormatOptions" which is marked as @alpha
     formatDate(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): string;
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateInterval" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateInterval" is marked as @public, but its signature references "DateIntervalFormatOptions" which is marked as @alpha
     formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: DateIntervalFormatOptions): string;
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateIntervalToParts" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateIntervalToParts" is marked as @public, but its signature references "DateIntervalFormatOptions" which is marked as @alpha
     formatDateIntervalToParts(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: DateIntervalFormatOptions): Part[];
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateRaw" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateRaw" is marked as @public, but its signature references "DateRawFormatOptions" which is marked as @alpha
     formatDateRaw(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): string;
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateRawToParts" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateRawToParts" is marked as @public, but its signature references "DateRawFormatOptions" which is marked as @alpha
     formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[];
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateToParts" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "formatDateToParts" is marked as @public, but its signature references "DateFormatOptions" which is marked as @alpha
     formatDateToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): Part[];
-    // Warning: (ae-incompatible-release-tags) The symbol "formatRelativeTime" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "formatRelativeTime" is marked as @public, but its signature references "RelativeTimeFormatOptions" which is marked as @alpha
     formatRelativeTime(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: RelativeTimeFormatOptions): string;
-    // Warning: (ae-incompatible-release-tags) The symbol "formatRelativeTimeField" is marked as @public, but its signature references "RelativeTimeFieldFormatOptions" which is marked as @alpha
     formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFieldFormatOptions): string;
-    // Warning: (ae-incompatible-release-tags) The symbol "months" is marked as @public, but its signature references "CalendarFieldsOptions" which is marked as @alpha
     months(options?: CalendarFieldsOptions): any;
-    // Warning: (ae-incompatible-release-tags) The symbol "quarters" is marked as @public, but its signature references "CalendarFieldsOptions" which is marked as @alpha
     quarters(options?: CalendarFieldsOptions): any;
     resolveTimeZoneId(zoneid: string): string | undefined;
     timePeriodToQuantity(period: TimePeriod): Quantity[];
     timeZoneIds(): string[];
-    // Warning: (ae-incompatible-release-tags) The symbol "timeZoneInfo" is marked as @public, but its signature references "TimeZoneInfo" which is marked as @alpha
     timeZoneInfo(zoneid: string): TimeZoneInfo;
-    // Warning: (ae-incompatible-release-tags) The symbol "toBuddhistDate" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
     toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
-    // Warning: (ae-incompatible-release-tags) The symbol "toGregorianDate" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "toGregorianDate" is marked as @public, but its signature references "GregorianDate" which is marked as @alpha
     toGregorianDate(date: CalendarDate | ZonedDateTime | Date): GregorianDate;
-    // Warning: (ae-incompatible-release-tags) The symbol "toISO8601Date" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
-    // Warning: (ae-incompatible-release-tags) The symbol "toISO8601Date" is marked as @public, but its signature references "ISO8601Date" which is marked as @alpha
     toISO8601Date(date: CalendarDate | ZonedDateTime | Date): ISO8601Date;
-    // Warning: (ae-incompatible-release-tags) The symbol "toJapaneseDate" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
     toJapaneseDate(date: CalendarDate | ZonedDateTime | Date): JapaneseDate;
-    // Warning: (ae-incompatible-release-tags) The symbol "toPersianDate" is marked as @public, but its signature references "ZonedDateTime" which is marked as @alpha
     toPersianDate(date: CalendarDate | ZonedDateTime | Date): PersianDate;
-    // Warning: (ae-incompatible-release-tags) The symbol "weekdays" is marked as @public, but its signature references "CalendarFieldsOptions" which is marked as @alpha
     weekdays(options?: CalendarFieldsOptions): any;
 }
 
@@ -421,7 +389,7 @@ export { Chars }
 // @internal
 export const checksumIndices: (version: string, map: KeyIndexMap) => string;
 
-// @alpha
+// @public
 export interface CLDR {
     readonly Calendars: Calendars;
     readonly General: General;
@@ -433,7 +401,7 @@ export interface CLDR {
     readonly Units: Units;
 }
 
-// @alpha
+// @public
 export class CLDRFramework {
     constructor(options: CLDROptions);
     // (undocumented)
@@ -451,7 +419,7 @@ export class CLDRFramework {
     getAsync(locale: Locale | string): Promise<CLDR>;
     // (undocumented)
     info(): string;
-    // Warning: (ae-incompatible-release-tags) The symbol "internals" is marked as @alpha, but its signature references "Internals" which is marked as @internal
+    // Warning: (ae-incompatible-release-tags) The symbol "internals" is marked as @public, but its signature references "Internals" which is marked as @internal
     //
     // (undocumented)
     protected readonly internals: Internals;
@@ -467,7 +435,7 @@ export class CLDRFramework {
     static version(): string;
 }
 
-// @alpha
+// @public
 export interface CLDROptions {
     // (undocumented)
     asyncLoader?: (language: string) => Promise<any>;
@@ -538,7 +506,7 @@ export type CurrencySymbolWidthType = 'default' | 'narrow';
 
 export { CurrencyType }
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface DateFieldFormatOptions {
     ca?: CalendarType;
     context?: ContextType;
@@ -569,7 +537,7 @@ export { DateFieldType }
 
 export { DateFieldWidthType }
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface DateFormatOptions {
     ca?: CalendarType;
     context?: ContextType;
@@ -581,7 +549,7 @@ export interface DateFormatOptions {
     wrap?: FormatWidthType;
 }
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface DateIntervalFormatOptions {
     ca?: CalendarType;
     context?: ContextType;
@@ -591,7 +559,7 @@ export interface DateIntervalFormatOptions {
     time?: string;
 }
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface DateRawFormatOptions {
     ca?: CalendarType;
     context?: ContextType;
@@ -663,7 +631,7 @@ export interface DisplayNameOptions {
     type?: AltType;
 }
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface EraFieldOptions {
     ca?: CalendarType;
     context?: ContextType;
@@ -679,7 +647,7 @@ export type ExceptionIndex = {
     [y: number]: number;
 };
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface ExemplarCity {
     // (undocumented)
     name: string;
@@ -802,7 +770,7 @@ export const getCurrencyForRegion: (region: string) => CurrencyType;
 // @internal (undocumented)
 export const getCurrencyFractions: (code: string) => CurrencyFractions;
 
-// @alpha
+// @public
 export class GregorianDate extends CalendarDate {
     protected constructor(type: CalendarType, firstDay: number, minDays: number);
     // (undocumented)
@@ -885,7 +853,7 @@ export class InternalsImpl implements Internals {
     readonly units: UnitInternals;
 }
 
-// @alpha
+// @public
 export class ISO8601Date extends GregorianDate {
     protected constructor();
     // (undocumented)
@@ -900,8 +868,6 @@ export class ISO8601Date extends GregorianDate {
     withZone(zoneId: string): ISO8601Date;
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "JapaneseDate" is marked as @public, but its signature references "GregorianDate" which is marked as @alpha
-//
 // @public
 export class JapaneseDate extends GregorianDate {
     protected constructor(firstDay: number, minDays: number);
@@ -1340,7 +1306,7 @@ export const RE_SYMBOL: RegExp;
 
 export { RegionIdType }
 
-// @alpha
+// @public
 export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
     alwaysNow?: boolean;
     context?: ContextType;
@@ -1350,7 +1316,7 @@ export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
 
 export { RelativeTimeFieldType }
 
-// @alpha
+// @public
 export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOptions {
     ca?: CalendarType;
     dayOfWeek?: boolean;
@@ -1484,7 +1450,7 @@ export const enum TimePeriodFieldFlag {
 // @internal (undocumented)
 export const timePeriodFieldFlags: (fields: ("day" | "hour" | "minute" | "month" | "second" | "year" | "week" | "millis")[]) => number;
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface TimeZoneInfo {
     // (undocumented)
     city: ExemplarCity;
@@ -1572,7 +1538,7 @@ export class UnitsInternalImpl implements UnitInternals {
 
 export { UnitType }
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface ZonedDateTime {
     date: number | Date;
     zoneId?: string;
