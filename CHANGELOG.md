@@ -632,6 +632,7 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[1.0.0]: https://github.com/phensley/cldr-engine/compare/v0.26.0...v1.0.0
 [0.26.0]: https://github.com/phensley/cldr-engine/compare/v0.25.22...v0.26.0
 [0.25.22]: https://github.com/phensley/cldr-engine/compare/v0.25.21...v0.25.22
 [0.25.21]: https://github.com/phensley/cldr-engine/compare/v0.25.20...v0.25.21
