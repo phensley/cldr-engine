@@ -67,10 +67,17 @@ const parse = (locales: string | string[] = []): Entry[] => {
 /**
  * A result returned by the LocaleMatcher.
  *
- * @alpha
+ * @public
  */
 export interface LocaleMatch {
+  /**
+   * The locale that was matched.
+   */
   locale: Locale;
+
+  /**
+   * Distance of the match from the desired locale.
+   */
   distance: number;
 }
 
@@ -84,7 +91,7 @@ export interface LocaleMatch {
  * Implementation of CLDR enhanced language matching:
  * http://www.unicode.org/reports/tr35/tr35.html#EnhancedLanguageMatching
  *
- * @alpha
+ * @public
  */
 export class LocaleMatcher {
 
