@@ -46,9 +46,10 @@
     "jest": "25.1.0",
     "rimraf": "^3.0.0",
     "ts-jest": "25.2.1",
+    "tslib": "1.11.1",
     "tslint": "^5.18.0",
     "tslint-no-circular-imports": "^0.7.0",
-    "typescript": "3.7.x"
+    "typescript": "3.8.x"
   },
   "jest": {
     "moduleFileExtensions": [
