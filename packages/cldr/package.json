@@ -63,7 +63,7 @@
     "@phensley/cldr-core": "0.26.0",
     "@phensley/cldr-utils": "0.26.0",
     "@phensley/messageformat": "0.26.0",
-    "tslib": "1.10.x"
+    "tslib": "1.11.1"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "7.5.6",
@@ -89,7 +89,6 @@
     "source-map-explorer": "^2.1.0",
     "ts-jest": "25.2.1",
     "ts-node": "^8.3.0",
-    "tslib": "1.11.1",
     "tslint": "^5.18.0",
     "tslint-no-circular-imports": "^0.7.0",
     "typescript": "3.8.x",

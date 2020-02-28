@@ -44,7 +44,7 @@
     "@phensley/messageformat": "0.26.0",
     "@phensley/plurals": "0.26.0",
     "@phensley/timezone": "0.26.0",
-    "tslib": "1.10.x"
+    "tslib": "1.11.1"
   },
   "devDependencies": {
     "@types/jest": "25.1.3",
@@ -55,7 +55,6 @@
     "jest": "25.1.0",
     "rimraf": "^3.0.0",
     "ts-jest": "25.2.1",
-    "tslib": "1.11.1",
     "tslint": "^5.18.0",
     "tslint-no-circular-imports": "^0.7.0",
     "typescript": "3.8.x"
