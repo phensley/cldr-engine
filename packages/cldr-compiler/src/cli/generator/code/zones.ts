@@ -138,7 +138,7 @@ const buildMetaZones2 = (data: any): Metazones => {
     const start = offsets.length;
     const ranges = data[id].reverse();
     ranges.forEach((range: [string, number, number]) => {
-      const [ mzid, from ] = range;
+      const [mzid, from] = range;
       const offset = metazoneIndex.add(mzid);
       offsets.push(offset);
       untils.push(from === -1 ? from : from / 1000);
@@ -239,6 +239,7 @@ export const getZones = (data: any): Code[] => {
   code = HEADER;
   code += NOLINT_MAXLINE;
   const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
+  code += '/** @public */\n';
   code += `export type MetaZoneType = ${metaZoneType};\n`;
 
   result.push(Code.types(['autogen.timezones.ts'], code));

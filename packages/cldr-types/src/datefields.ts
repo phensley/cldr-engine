@@ -1,12 +1,21 @@
-// TODO: may not need this
+/**
+ * TODO: may not need this
+ * @public
+ */
 export type DateFieldSymbol = 'G' | 'y' | 'Y' | 'u' | 'U' | 'r' | 'Q' | 'q' | 'M' | 'L' | 'l' | 'w' | 'W' |
   'd' | 'D' | 'F' | 'g' | 'E' | 'e' | 'c' | 'a' | 'b' | 'B' | 'h' | 'H' | 'K' | 'k' | 'j' | 'J' | 'C' | 'm' |
   's' | 'S' | 'A' | 'z' | 'Z' | 'O' | 'v' | 'V' | 'X' | 'x';
 
+/**
+ * @public
+ */
 export type DateFieldType = 'era' | 'year' | 'quarter' | 'month' | 'week' |
   'weekday' | 'weekdayOfMonth' | 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' |
   'day' | 'dayperiod' | 'hour' | 'minute' | 'second' | 'zone';
 
+/**
+ * @public
+ */
 export const enum DateField {
   ERA = 'era',
   YEAR = 'year',
@@ -32,17 +41,29 @@ export const enum DateField {
   ZONE = 'zone'
 }
 
+/**
+ * @public
+ */
 export type DateFieldWidthType = 'short' | 'narrow' | 'wide';
 
+/**
+ * @public
+ */
 export const enum DateFieldWidth {
   SHORT = 'short',
   NARROW = 'narrow',
   WIDE = 'wide'
 }
 
+/**
+ * @public
+ */
 export type RelativeTimeFieldType = 'year' | 'quarter' | 'month' | 'week' | 'day' |
   'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'hour' | 'minute' | 'second';
 
+/**
+ * @public
+ */
 export const enum RelativeTimeField {
   YEAR = 'year',
   QUARTER = 'quarter',

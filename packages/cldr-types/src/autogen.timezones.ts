@@ -3,6 +3,7 @@
 //
 
 /* tslint:disable:max-line-length */
+/** @public */
 export type MetaZoneType =   'Acre' |  'Afghanistan' |  'Africa_Central'
  |  'Africa_Eastern' |  'Africa_Southern' |  'Africa_Western'
  |  'Alaska' |  'Almaty' |  'Amazon' |  'America_Central'

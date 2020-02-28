@@ -4,6 +4,7 @@
 
 /* tslint:disable:max-line-length */
 
+/** @public */
 export type UnitType =   'g-force' |  'meter-per-second-squared' |  'arc-minute'
  |  'arc-second' |  'degree' |  'radian' |  'revolution' |  'acre'
  |  'dunam' |  'hectare' |  'square-centimeter' |  'square-foot'
@@ -49,6 +50,7 @@ export type UnitType =   'g-force' |  'meter-per-second-squared' |  'arc-minute'
  |  'megaliter' |  'milliliter' |  'pint' |  'pint-metric'
  |  'quart' |  'tablespoon' |  'teaspoon';
 
+/** @public */
 export type UnitCategory =   'acceleration' |  'angle' |  'area' |  'concentr'
  |  'consumption' |  'digital' |  'duration' |  'electric'
  |  'energy' |  'force' |  'frequency' |  'graphics' |  'length'

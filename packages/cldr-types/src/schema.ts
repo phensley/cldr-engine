@@ -41,6 +41,9 @@ import { AltType, PluralType } from './misc';
 
 // CALENDARS
 
+/**
+ * @public
+ */
 export interface CalendarFields {
   readonly weekdays: Vector2Arrow<string, string>;
   readonly months: Vector2Arrow<string, string>;
@@ -48,6 +51,9 @@ export interface CalendarFields {
   readonly dayPeriods: Vector2Arrow<string, string>;
 }
 
+/**
+ * @public
+ */
 export interface CalendarSchema {
   readonly eras: Vector2Arrow<EraWidthType, string>;
   readonly format: CalendarFields;
@@ -61,24 +67,39 @@ export interface CalendarSchema {
   readonly intervalFormatFallback: FieldArrow;
 }
 
+/**
+ * @public
+ */
 export interface BuddhistSchema extends CalendarSchema {
 
 }
 
+/**
+ * @public
+ */
 export interface GregorianSchema extends CalendarSchema {
 
 }
 
+/**
+ * @public
+ */
 export interface JapaneseSchema extends CalendarSchema {
 
 }
 
+/**
+ * @public
+ */
 export interface PersianSchema extends CalendarSchema {
 
 }
 
 // CURRENCIES
 
+/**
+ * @public
+ */
 export interface CurrenciesSchema {
   readonly displayName: Vector1Arrow<CurrencyType>;
   readonly decimal: Vector1Arrow<CurrencyType>;
@@ -88,6 +109,9 @@ export interface CurrenciesSchema {
 
 // DATEFIELDS
 
+/**
+ * @public
+ */
 export interface RelativeTimeFields {
   readonly previous2: Vector1Arrow<RelativeTimeFieldType>;
   readonly previous: Vector1Arrow<RelativeTimeFieldType>;
@@ -101,12 +125,18 @@ export interface RelativeTimeFields {
 // TODO: Consider moving these down and using Vector2Arrow including the width.
 // it will make some code more compact.
 
+/**
+ * @public
+ */
 export interface RelativeTimes {
   readonly wide: RelativeTimeFields;
   readonly short: RelativeTimeFields;
   readonly narrow: RelativeTimeFields;
 }
 
+/**
+ * @public
+ */
 export interface DateFieldsSchema {
   readonly relativeTimes: RelativeTimes;
   readonly displayName: Vector2Arrow<DateFieldType, DateFieldWidthType>;
@@ -114,11 +144,17 @@ export interface DateFieldsSchema {
 
 // GENERAL
 
+/**
+ * @public
+ */
 export interface LayoutSchema {
   readonly characterOrder: FieldArrow;
   readonly lineOrder: FieldArrow;
 }
 
+/**
+ * @public
+ */
 export interface ListPatternsSchema {
   readonly and: Vector1Arrow<ListPatternPositionType>;
   readonly andShort: Vector1Arrow<ListPatternPositionType>;
@@ -128,24 +164,39 @@ export interface ListPatternsSchema {
   readonly unitShort: Vector1Arrow<ListPatternPositionType>;
 }
 
+/**
+ * @public
+ */
 export interface ContextTransformsSchema {
   readonly contextTransforms: Vector1Arrow<ContextTransformFieldType>;
 }
 
 // NAMES
 
+/**
+ * @public
+ */
 export interface LanguageNameInfo {
   readonly displayName: Vector2Arrow<AltType, LanguageIdType>;
 }
 
+/**
+ * @public
+ */
 export interface ScriptNameInfo {
   readonly displayName: Vector2Arrow<AltType, ScriptIdType>;
 }
 
+/**
+ * @public
+ */
 export interface RegionNameInfo {
   readonly displayName: Vector2Arrow<AltType, RegionIdType>;
 }
 
+/**
+ * @public
+ */
 export interface NamesSchema {
   readonly languages: LanguageNameInfo;
   readonly scripts: ScriptNameInfo;
@@ -154,6 +205,9 @@ export interface NamesSchema {
 
 // NUMBERS
 
+/**
+ * @public
+ */
 export interface CurrencyFormats {
   readonly standard: FieldArrow;
   readonly accounting: FieldArrow;
@@ -162,12 +216,18 @@ export interface CurrencyFormats {
   readonly unitPattern: Vector1Arrow<PluralType>;
 }
 
+/**
+ * @public
+ */
 export interface DecimalFormats {
   readonly standard: FieldArrow;
   readonly short: DigitsArrow<PluralType>;
   readonly long: DigitsArrow<PluralType>;
 }
 
+/**
+ * @public
+ */
 export interface NumberSystemInfo {
   readonly symbols: Vector1Arrow<NumberSymbolType>;
   readonly currencyFormats: CurrencyFormats;
@@ -177,6 +237,9 @@ export interface NumberSystemInfo {
   readonly miscPatterns: Vector1Arrow<NumberMiscPatternType>;
 }
 
+/**
+ * @public
+ */
 export interface NumbersSchema {
   readonly minimumGroupingDigits: FieldArrow;
   readonly numberSystems: Vector1Arrow<NumberSystemCategory>;
@@ -185,13 +248,22 @@ export interface NumbersSchema {
 
 // TIMEZONES
 
+/**
+ * @public
+ */
 export type TimeZoneNameType = 'daylight' | 'generic' | 'standard';
 
+/**
+ * @public
+ */
 export interface MetaZoneInfo {
   readonly short: Vector2Arrow<TimeZoneNameType, MetaZoneType>;
   readonly long: Vector2Arrow<TimeZoneNameType, MetaZoneType>;
 }
 
+/**
+ * @public
+ */
 export interface TimeZoneSchema {
   readonly metaZones: MetaZoneInfo;
   readonly exemplarCity: Vector1Arrow<string>;
@@ -203,6 +275,9 @@ export interface TimeZoneSchema {
 
 // UNITS
 
+/**
+ * @public
+ */
 export interface UnitInfo {
   readonly unitPattern: Vector2Arrow<PluralType, UnitType>;
   readonly displayName: Vector1Arrow<UnitType>;
@@ -212,6 +287,9 @@ export interface UnitInfo {
   // TODO: coordinate display names and patterns
 }
 
+/**
+ * @public
+ */
 export interface UnitsSchema {
   readonly long: UnitInfo;
   readonly narrow: UnitInfo;
@@ -220,6 +298,9 @@ export interface UnitsSchema {
 
 // ROOT SCHEMA
 
+/**
+ * @public
+ */
 export interface Schema {
   readonly Names: NamesSchema;
   readonly Numbers: NumbersSchema;

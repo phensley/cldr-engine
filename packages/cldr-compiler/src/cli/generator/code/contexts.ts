@@ -7,6 +7,7 @@ export const getContexts = (data: any): Code[] => {
   const _transforms = transforms.map((c: string) => `'${c}'`);
 
   let code = HEADER;
+  code += '/** @public */\n';
   code += `export type ContextTransformFieldType = (\n`;
   code += lineWrap(80, '|', _transforms);
   code += ');\n';

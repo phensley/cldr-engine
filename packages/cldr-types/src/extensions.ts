@@ -1,6 +1,8 @@
 
 /**
- * Interface for extending the @phensley/cldr library.
+ * Interface for extending the `@phensley/cldr` library.
+ *
+ * @internal
  */
 export interface Extension {
 

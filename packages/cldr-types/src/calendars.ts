@@ -1,6 +1,13 @@
-// Values 'h' and 'H' for hours have been unified to 'H' for uniqueness.
+/**
+ * Values 'h' and 'H' for hours have been unified to 'H' for uniqueness
+ *
+ * @public
+ */
 export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
 
+/**
+ * @public
+ */
 export const enum DateTimePatternField {
   YEAR = 'y',
   MONTH = 'M',
@@ -11,9 +18,15 @@ export const enum DateTimePatternField {
   SECOND = 's'
 }
 
+/**
+ * @public
+ */
 export type DayPeriodType = 'noon' | 'midnight' | 'am' | 'pm' | 'morning1' | 'morning2' |
   'afternoon1' | 'afternoon2' | 'evening1' | 'evening2' | 'night1' | 'night2';
 
+/**
+ * @public
+ */
 export const enum DayPeriod {
   NOON = 'noon',
   MIDNIGHT = 'midnight',
@@ -29,16 +42,28 @@ export const enum DayPeriod {
   NIGHT2 = 'night2'
 }
 
+/**
+ * @public
+ */
 export type EraWidthType = 'names' | 'abbr' | 'narrow';
 
+/**
+ * @public
+ */
 export const enum EraWidth {
   NAMES = 'names',
   ABBR = 'abbr',
   NARROW = 'narrow'
 }
 
+/**
+ * @public
+ */
 export type FieldWidthType = 'abbreviated' | 'narrow' | 'short' | 'wide';
 
+/**
+ * @public
+ */
 export const enum FieldWidth {
   ABBREVIATED = 'abbreviated',
   NARROW = 'narrow',
@@ -46,8 +71,14 @@ export const enum FieldWidth {
   WIDE = 'wide'
 }
 
+/**
+ * @public
+ */
 export type FormatWidthType = 'short' | 'medium' | 'long' | 'full';
 
+/**
+ * @public
+ */
 export const enum FormatWidth {
   SHORT = 'short',
   MEDIUM = 'medium',
@@ -55,8 +86,14 @@ export const enum FormatWidth {
   FULL = 'full'
 }
 
+/**
+ * @public
+ */
 export type QuarterType = '1' | '2' | '3' | '4';
 
+/**
+ * @public
+ */
 export const enum Quarter {
   FIRST = '1',
   SECOND = '2',
@@ -64,8 +101,14 @@ export const enum Quarter {
   FOURTH = '4'
 }
 
+/**
+ * @public
+ */
 export type WeekdayType = '1' | '2' | '3' | '4' | '5' | '6' | '7';
 
+/**
+ * @public
+ */
 export const enum Weekday {
   SUNDAY = '1',
   MONDAY = '2',

@@ -17,6 +17,7 @@ export const getCurrencies = (data: any): Code[] => {
   let code = `${HEADER}`;
   const currencies = data.currencies.map((c: string) => `'${c}'`);
 
+  code += '/** @public */\n';
   code += 'export type CurrencyType = (\n';
   code += lineWrap(80, '|', currencies);
   code += ');\n';

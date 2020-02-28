@@ -29,9 +29,11 @@ export const getUnits = (data: any): Code[] => {
 
   // Unit and category types
   const unitType = lineWrap(60, ' | ', units);
+  code += '/** @public */\n';
   code += `export type UnitType = ${unitType};\n\n`;
 
   const unitCategory = lineWrap(60, ' | ', categories);
+  code += '/** @public */\n';
   code += `export type UnitCategory = ${unitCategory};\n`;
 
   res.push(Code.types(['autogen.units.ts'], code));
