@@ -2,24 +2,73 @@ import { rawdata } from './autogen.zonedata';
 import { RawData } from './types';
 import { binarySearch } from '@phensley/cldr-utils';
 
+export { RawData } from './types';
+
+/**
+ * Represents abbreviation, daylight savings and timezone offset for
+ * a single time zone.
+ *
+ * @public
+ */
 export interface ZoneInfo {
+  /**
+   * Time zone identifier.
+   */
   zoneid: string;
+
+  /**
+   * Time zone 3-character abbreviation.
+   */
   abbr: string;
+
+  /**
+   * Flag indicating the zone is currently in daylight savings time.
+   */
   dst: number;
+
+  /**
+   * Time zone offset from UTC.
+   */
   offset: number;
 }
 
+/**
+ * Interface to accessing time zone data.
+ *
+ * @public
+ */
 export interface Tz {
+  /**
+   * Get the info for a time zone using a UTC timestamp.
+   */
   fromUTC(zoneid: string, utc: number): ZoneInfo | undefined;
+
   // TODO:
   // fromWall(zoneid: string, utc: number): ZoneInfo | undefined;
+
+  /**
+   * Resolve a lowercase time zone id or alias into the canonical proper-cased id.
+   */
   resolveId(id: string): string | undefined;
+
+  /**
+   * UTC zone info.
+   */
   utcZone(): ZoneInfo;
+
+  /**
+   * Returns an array of time zone ids.
+   */
   zoneIds(): string[];
 }
 
 const numarray = (s: string) => s ? s.split(' ').map(n => parseInt(n, 36)) : [];
 
+/**
+ *
+ *
+ * @public
+ */
 export class TzImpl {
 
   /** Mapping of canonical time zone ids to index */
@@ -167,6 +216,8 @@ export class TzImpl {
 
 /**
  * Information related to a single timezone.
+ *
+ * @internal
  */
 class ZoneRecord {
 
@@ -176,7 +227,7 @@ class ZoneRecord {
   readonly len: number;
 
   constructor(raw: string, index: number[]) {
-    const [ _info, _types, _untils ] = raw.split('_');
+    const [_info, _types, _untils] = raw.split('_');
     const untils = numarray(_untils);
     const types = _types ? _types.split('').map(t => TYPES[t]) : [];
 
@@ -208,7 +259,7 @@ class ZoneRecord {
    * Decode a single zone info record.
    */
   private decodeInfo(raw: string): ZoneInfoRec {
-    const [ abbr, _dst, _offset ] = raw.split(':');
+    const [abbr, _dst, _offset] = raw.split(':');
     return {
       abbr,
       dst: Number(_dst),
@@ -230,4 +281,9 @@ interface ZoneInfoRec {
   offset: number;
 }
 
+/**
+ * Global instance for accessing time zones.
+ *
+ * @public
+ */
 export const TZ: Tz = new TzImpl(rawdata);
