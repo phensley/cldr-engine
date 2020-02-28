@@ -8,6 +8,9 @@ import {
   Vector2Arrow,
 } from '@phensley/cldr-types';
 
+/**
+ * @public
+ */
 export class FieldArrowImpl implements FieldArrow {
   constructor(readonly offset: number) { }
 
@@ -16,6 +19,9 @@ export class FieldArrowImpl implements FieldArrow {
   }
 }
 
+/**
+ * @public
+ */
 export class ScopeArrowImpl<T extends string, R> implements ScopeArrow<T, R> {
 
   constructor(
@@ -28,6 +34,8 @@ export class ScopeArrowImpl<T extends string, R> implements ScopeArrow<T, R> {
 
 /**
  * Special vector to store a pluralized number pattern and its divisor together.
+ *
+ * @public
  */
 export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
 
@@ -56,6 +64,9 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
   }
 }
 
+/**
+ * @public
+ */
 export class Vector1ArrowImpl<T extends string> implements Vector1Arrow<T> {
 
   readonly len: number;
@@ -99,6 +110,9 @@ export class Vector1ArrowImpl<T extends string> implements Vector1Arrow<T> {
   }
 }
 
+/**
+ * @public
+ */
 export class Vector2ArrowImpl<T extends string, S extends string> implements Vector2Arrow<T, S> {
 
   readonly size: number;

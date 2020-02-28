@@ -17,6 +17,8 @@ export const getContexts = (data: any): Code[] => {
   code = HEADER;
   code += "import { ContextTransformFieldType } from '@phensley/cldr-types';\n\n";
   code += NOLINT_MAXLINE;
+
+  code += '/** @public */\n';
   code += `export const ContextTransformFieldValues: ContextTransformFieldType[] = ('`;
   code += transforms.join(' ');
   code += `').split(' ') as ContextTransformFieldType[];\n`;

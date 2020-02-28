@@ -218,11 +218,13 @@ export const getZones = (data: any): Code[] => {
   code += "import { MetaZoneType } from '@phensley/cldr-types';\n\n";
 
   code += NOLINT_MAXLINE;
+  code += '/** @public */\n';
   code += `export const TimeZoneStableIds: string[] = ('`;
   code += data.timeZoneIds.join(' ');
   code += `').split(' ');\n\n`;
 
   code += NOLINT_MAXLINE;
+  code += '/** @public */\n';
   code += `export const MetaZoneValues: MetaZoneType[] = ('`;
   code += data.metaZoneIds.join(' ');
   code += `').split(' ') as MetaZoneType[];\n`;

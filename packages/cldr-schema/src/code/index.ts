@@ -31,6 +31,9 @@ const emptyCalendarIndex = (name: string): KeyIndexMap => ({
   [`${name}-month`]: EMPTY_INDEX
 });
 
+/**
+ * @public
+ */
 export interface SchemaConfig {
   /**
    * Calendar types to include. Note that 'gregory' for the
@@ -122,6 +125,9 @@ const COPY: SchemaConfigKey[] = [
   'timezone-id'
 ];
 
+/**
+ * @public
+ */
 export class CodeBuilder {
 
   private indices: { [name: string]: KeyIndex<string> } = {
