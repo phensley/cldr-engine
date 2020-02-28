@@ -66,7 +66,7 @@ export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
  *   f       visible fractional digits in n, with trailing zeros
  *   t       visible fractional digits in n, without trailing zeros
  *
- * @alpha
+ * @public
  */
 export class NumberOperands {
 
@@ -116,7 +116,7 @@ export class NumberOperands {
       intdigits = 0;
     }
 
-  outer:
+    outer:
     // Start at most-significant digit to least
     while (x >= 0) {
       let r = data[x];

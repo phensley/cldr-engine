@@ -20,6 +20,8 @@ const FLAG_OTHER = (5 << 5) + 5;
 /**
  * Set of all cardinal and ordinal plural rules, and the array of expression
  * fragments the rules reference.
+ *
+ * @public
  */
 export class PluralRules {
 
