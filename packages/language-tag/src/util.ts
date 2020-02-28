@@ -22,6 +22,8 @@ const init = () => TERRITORY_ALIAS_MAP = buildTerritoryAliasMap();
 /**
  * Helper for the language tag parser to fix overlong region fields that may
  * or may not be variants.
+ *
+ * @internal
  */
 export const replaceRegion = (region: string): string | undefined => {
   if (!TERRITORY_ALIAS_MAP) {
@@ -33,6 +35,8 @@ export const replaceRegion = (region: string): string | undefined => {
 
 /**
  * Substitute territory subtag aliases, if any.
+ *
+ * @public
  */
 export const substituteRegionAliases = (dst: FastTag): void => {
   if (!TERRITORY_ALIAS_MAP) {

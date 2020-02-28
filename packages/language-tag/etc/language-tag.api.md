@@ -4,7 +4,7 @@
 
 ```ts
 
-// @alpha
+// @public
 export class LanguageTag {
     constructor(language?: string, script?: string, region?: string, variant?: string, extensions?: {
         [x: string]: string[];
@@ -50,8 +50,6 @@ export const enum LanguageTagField {
     VARIANT = 3
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "parseLanguageTag" is marked as @public, but its signature references "LanguageTag" which is marked as @alpha
-//
 // @public
 export const parseLanguageTag: (str: string) => LanguageTag;
 

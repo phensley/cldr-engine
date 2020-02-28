@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export const enum LanguageTagField {
   LANGUAGE = 0,
   SCRIPT = 1,
