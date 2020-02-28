@@ -188,28 +188,28 @@ export class NumberInternalsImpl implements NumberInternals {
         break;
       }
 
-    case 'scientific': {
-      const sciFormat = info.scientificFormat;
+      case 'scientific': {
+        const sciFormat = info.scientificFormat;
 
-      const ctx = new NumberContext(options, round, false, true, -1);
-      const latnSciFormat = latnInfo.scientificFormat;
-      const format = sciFormat.get(bundle) || latnSciFormat.get(bundle);
-      let pattern = this.getNumberPattern(format, n.isNegative());
+        const ctx = new NumberContext(options, round, false, true, -1);
+        const latnSciFormat = latnInfo.scientificFormat;
+        const format = sciFormat.get(bundle) || latnSciFormat.get(bundle);
+        let pattern = this.getNumberPattern(format, n.isNegative());
 
-      ctx.setPattern(pattern, true);
-      n = ctx.adjust(n, true);
-      n = negzero(n, options.negativeZero !== false);
-      pattern = this.getNumberPattern(format, n.isNegative());
-      // Split number into coeffcient and exponent
-      const [coeff, exponent] = n.scientific(ctx.minInt || 1);
-      const adjcoeff = ctx.adjust(coeff, true);
-      result = renderer.render(adjcoeff, pattern, '', '', '', 1, false, exponent);
-      break;
-    }
+        ctx.setPattern(pattern, true);
+        n = ctx.adjust(n, true);
+        n = negzero(n, options.negativeZero !== false);
+        pattern = this.getNumberPattern(format, n.isNegative());
+        // Split number into coeffcient and exponent
+        const [coeff, exponent] = n.scientific(ctx.minInt || 1);
+        const adjcoeff = ctx.adjust(coeff, true);
+        result = renderer.render(adjcoeff, pattern, '', '', '', 1, false, exponent);
+        break;
+      }
 
-    default:
-      result = renderer.empty();
-      break;
+      default:
+        result = renderer.empty();
+        break;
     }
 
     // No valid style matched
@@ -270,9 +270,9 @@ export class NumberInternalsImpl implements NumberInternals {
         // Wrap number and unit together.
         // TODO: implement a more concise fallback to 'other' for pluralized lookups
         const unitWrapper = currencyFormats.unitPattern.get(bundle, plural)
-        || currencyFormats.unitPattern.get(bundle, 'other')
-        || latnInfo.currencyFormats.unitPattern.get(bundle, plural)
-        || latnInfo.currencyFormats.unitPattern.get(bundle, 'other');
+          || currencyFormats.unitPattern.get(bundle, 'other')
+          || latnInfo.currencyFormats.unitPattern.get(bundle, plural)
+          || latnInfo.currencyFormats.unitPattern.get(bundle, 'other');
         return renderer.wrap(this.internals.general, unitWrapper, num, renderer.make('unit', unit));
       }
 
@@ -343,7 +343,7 @@ export class NumberInternalsImpl implements NumberInternals {
    * The extra complexity here is to deal with rounding up and selecting the
    * correct pluralized pattern for the final rounded form.
    */
-  protected setupCompact(
+  private setupCompact(
     bundle: Bundle, n: Decimal, ctx: NumberContext, standardRaw: string,
     patternImpl: DigitsArrow<PluralType>): [Decimal, number] {
 

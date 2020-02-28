@@ -179,14 +179,14 @@ export class CalendarPatterns {
     return this.intervalMatcher[field].match(skeleton);
   }
 
-  protected buildSkeletonParser(): DateSkeletonParser {
+  private buildSkeletonParser(): DateSkeletonParser {
     const pair = this.getTimeData();
     const allowedFlex = pair[0].split(' ').map(parseDatePattern);
     const preferredFlex = parseDatePattern(pair[1]);
     return new DateSkeletonParser(preferredFlex, allowedFlex[0]);
   }
 
-  protected buildAvailableMatcher(): void {
+  private buildAvailableMatcher(): void {
     for (const width of Object.keys(this.dateFormats)) {
       this.availableMatcher.add(this.skeletonParser.parse(this.dateFormats[width], true));
       this.availableMatcher.add(this.skeletonParser.parse(this.timeFormats[width], true));
@@ -205,7 +205,7 @@ export class CalendarPatterns {
     }
   }
 
-  protected buildIntervalMatcher(): void {
+  private buildIntervalMatcher(): void {
     for (const field of Object.keys(this.rawIntervalFormats)) {
       const group = this.rawIntervalFormats[field];
       const m = new DatePatternMatcher();
@@ -220,7 +220,7 @@ export class CalendarPatterns {
     }
   }
 
-  protected getTimeData(): [string, string] {
+  private getTimeData(): [string, string] {
     const w = timeData['']['001'];
     const t = timeData[''][this.region] || (timeData[this.language] || {})[this.region];
     return timeStrings[(t !== undefined ? t : w)].split('|') as [string, string];

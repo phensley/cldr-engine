@@ -135,7 +135,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
   /**
    * Translates a string into a supported calendar type, or undefined if none match.
    */
-  protected supportedCalendar(c: string | undefined): CalendarType | undefined {
+  private supportedCalendar(c: string | undefined): CalendarType | undefined {
     if (c && this.availableCalendars.has(c)) {
       switch (c) {
         case 'buddhist':

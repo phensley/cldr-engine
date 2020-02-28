@@ -293,13 +293,13 @@ export class CalendarManager {
     return req;
   }
 
-  protected matchAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
+  private matchAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
     query: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
     const match = patterns.matchAvailable(query);
     return this.getAvailablePattern(patterns, date, query, match, params);
   }
 
-  protected getAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
+  private getAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
     query: DateSkeleton, match: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
     const pattern = patterns.getAvailablePattern(date, match);
     return pattern.length === 0 ? undefined : patterns.adjustPattern(pattern, query, params.symbols.decimal);
@@ -308,7 +308,7 @@ export class CalendarManager {
   /**
    * Select appropriate wrapper based on fields in the date skeleton.
    */
-  protected selectWrapper(
+  private selectWrapper(
     patterns: CalendarPatterns, dateSkel: DateSkeleton, _date: DateTimeNode[]): string {
 
     let wrapKey = 'short';
@@ -322,7 +322,7 @@ export class CalendarManager {
     return patterns.getWrapperPattern(wrapKey);
   }
 
-  protected supportedOption(key?: string): string {
+  private supportedOption(key?: string): string {
     switch (key) {
       case 'full':
       case 'long':

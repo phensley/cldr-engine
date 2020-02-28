@@ -312,38 +312,38 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     }
   }
 
-  _formatQuarterOrMonth(ctx: CalendarContext<T>,
-      format: Vector2Arrow<string, string>, value: number, width: number): string {
+  private _formatQuarterOrMonth(ctx: CalendarContext<T>,
+    format: Vector2Arrow<string, string>, value: number, width: number): string {
     return width >= 3 ?
       format.get(ctx.bundle, widthKey1(width), String(value)) :
       _num(ctx, value, width);
   }
 
-  quarter(ctx: CalendarContext<T>, node: [string, number]): string {
+  private quarter(ctx: CalendarContext<T>, node: [string, number]): string {
     const [field, width] = node;
     const format = field === 'Q' ? this.cal.format : this.cal.standAlone;
     const quarters = format.quarters;
-    const quarter = ((ctx.date.month() - 1 ) / 3 | 0) + 1;
+    const quarter = ((ctx.date.month() - 1) / 3 | 0) + 1;
     return this._formatQuarterOrMonth(ctx, quarters, quarter, width);
   }
 
-  month(ctx: CalendarContext<T>, node: [string, number]): string {
+  private month(ctx: CalendarContext<T>, node: [string, number]): string {
     const format = node[0] === 'M' ? this.cal.format : this.cal.standAlone;
     return this._formatQuarterOrMonth(ctx, format.months, ctx.date.month(), node[1]);
   }
 
-  _weekday(bundle: Bundle, format: Vector2Arrow<string, string>, date: CalendarDate, width: number): string {
+  private _weekday(bundle: Bundle, format: Vector2Arrow<string, string>, date: CalendarDate, width: number): string {
     const key2 = String(date.dayOfWeek());
     let key1 = 'abbreviated';
     switch (width) {
-    case 6: key1 = 'short'; break;
-    case 5: key1 = 'narrow'; break;
-    case 4: key1 = 'wide'; break;
+      case 6: key1 = 'short'; break;
+      case 5: key1 = 'narrow'; break;
+      case 4: key1 = 'wide'; break;
     }
     return format.get(bundle, key1, key2);
   }
 
-  _weekdayLocal(ctx: CalendarContext<T>, node: [string, number], standAlone: boolean): string {
+  private _weekdayLocal(ctx: CalendarContext<T>, node: [string, number], standAlone: boolean): string {
     const { bundle, date } = ctx;
     let width = node[1];
     if (width > 2) {
@@ -357,7 +357,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return ctx.system.formatString(ord, false, width);
   }
 
-  dayPeriodExt(ctx: CalendarContext<T>, node: [string, number]): string {
+  private dayPeriodExt(ctx: CalendarContext<T>, node: [string, number]): string {
     const { bundle, date } = ctx;
     const key1 = widthKey1(node[1]);
     const key2 = date.isAM() ? 'am' : 'pm';
@@ -371,7 +371,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return format.get(bundle, key1, key2ext) || format.get(bundle, key1, key2);
   }
 
-  dayPeriodFlex(ctx: CalendarContext<T>, node: [string, number]): string {
+  private dayPeriodFlex(ctx: CalendarContext<T>, node: [string, number]): string {
     const { bundle, date } = ctx;
     const minutes = (date.hourOfDay() * 60) + date.minute();
     const key2 = this.internals.calendars.flexDayPeriod(bundle, minutes);
@@ -382,7 +382,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return res ? res : this.dayPeriodExt(ctx, node);
   }
 
-  hour(ctx: CalendarContext<T>, node: [string, number]): string {
+  private hour(ctx: CalendarContext<T>, node: [string, number]): string {
     const { date } = ctx;
     const twelve = node[0] === 'h';
     let hour = twelve ? date.hour() : date.hourOfDay();
@@ -392,7 +392,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return _num(ctx, hour, min(node[1], 2));
   }
 
-  hourAlt(ctx: CalendarContext<T>, node: [string, number]): string {
+  private hourAlt(ctx: CalendarContext<T>, node: [string, number]): string {
     const { date } = ctx;
     const twelve = node[0] === 'K';
     let hour = twelve ? date.hour() : date.hourOfDay();
@@ -402,7 +402,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return _num(ctx, hour, min(node[1], 2));
   }
 
-  fractionalSecond(ctx: CalendarContext<T>, node: [string, number]): string {
+  private fractionalSecond(ctx: CalendarContext<T>, node: [string, number]): string {
     let w = node[1];
     let m = ctx.date.milliseconds();
     const d = w > 3 ? w - 3 : 0;
@@ -419,7 +419,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
    * Timezone: short/long specific non-location format.
    * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
    */
-  timezone_z(ctx: CalendarContext<T>, node: [string, number]): string {
+  private timezone_z(ctx: CalendarContext<T>, node: [string, number]): string {
     if (node[1] > 4) {
       return '';
     }
@@ -439,17 +439,17 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
    * Timezone: ISO8601 basic/extended format, long localized GMT format.
    * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
    */
-  timezone_Z(ctx: CalendarContext<T>, node: [string, number]): string {
+  private timezone_Z(ctx: CalendarContext<T>, node: [string, number]): string {
     const width = node[1];
     if (width === 4) {
       return this.timezone_O(ctx, ['O', width]);
     }
 
-    const [ , negative, hours, minutes] = getTZC(ctx.date.timeZoneOffset());
+    const [, negative, hours, minutes] = getTZC(ctx.date.timeZoneOffset());
     let fmt = '';
     if (width <= 5) {
       // TODO: use number params
-      fmt += negative ? '-' : '+' ;
+      fmt += negative ? '-' : '+';
       fmt += _num(ctx, hours, 2);
       if (width === 5) {
         fmt += ':';
@@ -462,14 +462,14 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
   /**
    * Timezone: short/long localized GMT format.
    */
-  timezone_O(ctx: CalendarContext<T>, node: [string, number]): string {
+  private timezone_O(ctx: CalendarContext<T>, node: [string, number]): string {
     return node[1] === 1 || node[1] === 4 ? this._wrapGMT(ctx, node[1] === 1) : '';
   }
 
   /**
    * Timezone: short/long generic non-location format.
    */
-  timezone_v(ctx: CalendarContext<T>, node: [string, number]): string {
+  private timezone_v(ctx: CalendarContext<T>, node: [string, number]): string {
     const width = node[1];
     if (width !== 1 && width !== 4) {
       return '';
@@ -488,31 +488,31 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
    * Timezone: short/long zone ID, exemplar city, generic location format.
    * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
    */
-  timezone_V(ctx: CalendarContext<T>, node: [string, number]): string {
+  private timezone_V(ctx: CalendarContext<T>, node: [string, number]): string {
     const { bundle } = ctx;
     const stableId = ctx.date.timeZoneStableId();
     const exemplarCity = this.tz.exemplarCity;
     let city = '';
     switch (node[1]) {
-    case 4:
-      city = exemplarCity.get(bundle, stableId);
-      if (!city) {
-        return this.timezone_O(ctx, ['O', 4]);
-      }
-      const pattern = this.tz.regionFormat.get(bundle);
-      return this.general.formatWrapper(pattern, [city]);
+      case 4:
+        city = exemplarCity.get(bundle, stableId);
+        if (!city) {
+          return this.timezone_O(ctx, ['O', 4]);
+        }
+        const pattern = this.tz.regionFormat.get(bundle);
+        return this.general.formatWrapper(pattern, [city]);
 
-    case 3:
-      // Exemplar city for the timezone.
-      city = exemplarCity.get(bundle, stableId);
-      return city ? city : exemplarCity.get(bundle, 'Etc/Unknown');
+      case 3:
+        // Exemplar city for the timezone.
+        city = exemplarCity.get(bundle, stableId);
+        return city ? city : exemplarCity.get(bundle, 'Etc/Unknown');
 
-    case 2:
-      const zoneId = ctx.date.timeZoneId();
-      return zoneId;
+      case 2:
+        const zoneId = ctx.date.timeZoneId();
+        return zoneId;
 
-    case 1:
-      return 'unk';
+      case 1:
+        return 'unk';
     }
     return '';
   }
@@ -521,7 +521,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
    * Timezone: ISO8601 basic format
    * https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
    */
-  timezone_x(ctx: CalendarContext<T>, node: [string, number]): string {
+  private timezone_x(ctx: CalendarContext<T>, node: [string, number]): string {
     const [field, width] = node;
     const [offset, negative, hours, minutes] = getTZC(ctx.date.timeZoneOffset());
     let fmt = '';
@@ -542,16 +542,16 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return fmt;
   }
 
-  _wrapGMT(ctx: CalendarContext<T>, short: boolean): string {
+  private _wrapGMT(ctx: CalendarContext<T>, short: boolean): string {
     const { bundle, date } = ctx;
     const _offset = date.timeZoneOffset();
     if (_offset === 0) {
       return this.tz.gmtZeroFormat.get(bundle);
     }
-    const [ , negative, hours, minutes] = getTZC(_offset);
+    const [, negative, hours, minutes] = getTZC(_offset);
 
     const emitMins = !short || minutes > 0;
-    const hourPattern =  this._hourPattern(bundle, negative);
+    const hourPattern = this._hourPattern(bundle, negative);
     let fmt = '';
     for (const n of hourPattern) {
       if (typeof n === 'string') {
@@ -573,7 +573,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     return this.general.formatWrapper(wrap, [fmt]);
   }
 
-  _hourPattern(bundle: Bundle, negative: boolean): DateTimeNode[] {
+  private _hourPattern(bundle: Bundle, negative: boolean): DateTimeNode[] {
     const raw = this.tz.hourFormat.get(bundle);
     return this.internals.calendars.getHourPattern(raw, negative);
   }

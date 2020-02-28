@@ -42,8 +42,8 @@ export class GeneralInternalsImpl implements GeneralInternals {
   /**
    * Contextually transform a string,
    */
-  contextTransform(value: string,  info: ContextTransformInfo,
-      context?: ContextType, field?: ContextTransformFieldType): string {
+  contextTransform(value: string, info: ContextTransformInfo,
+    context?: ContextType, field?: ContextTransformFieldType): string {
 
     if (!value) {
       return value;
@@ -116,13 +116,13 @@ export class GeneralInternalsImpl implements GeneralInternals {
     return this.wrapperPatternCache.get(raw);
   }
 
-  protected _wrap<R>(pattern: string, value: AbstractValue<R>, args: R[]): R {
+  private _wrap<R>(pattern: string, value: AbstractValue<R>, args: R[]): R {
     const wrapper = this.internals.general.parseWrapper(pattern);
     value.wrap(wrapper, args);
     return value.render();
   }
 
-  protected selectListPattern(type: ListPatternType): Vector1Arrow<ListPatternPositionType> {
+  private selectListPattern(type: ListPatternType): Vector1Arrow<ListPatternPositionType> {
     const p = this.listPatterns;
     switch (type) {
       case 'unit-long':
