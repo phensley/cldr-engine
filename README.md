@@ -4,18 +4,11 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 
 ![build](https://github.com/phensley/cldr-engine/workflows/Build%20and%20Test/badge.svg) [![codecov](https://codecov.io/gh/phensley/cldr-engine/branch/master/graph/badge.svg)](https://codecov.io/gh/phensley/cldr-engine) [![npm version](https://badge.fury.io/js/%40phensley%2Fcldr.svg)](https://www.npmjs.com/package/@phensley/cldr)
 
-## Documentation
+## Links
 
-The [documentation](https://phensley.github.io/cldr-engine/) is mostly complete but under development in advance of a 1.0 release.
-
-## Demonstration
-
+- [Documentation](https://phensley.github.io/cldr-engine/) on the library API and usage.
 - [CodeSandbox example](https://codesandbox.io/s/qqr1rl40r6) can be used to experiment, report bugs, etc.
 - [Demonstration app](https://phensley.github.io/cldr-engine-react-demo/) provides an example using React and Redux. ([source code](https://github.com/phensley/cldr-engine-react-demo))
-
-## Status
-
-**The project is currently BETA. Working on stabilizing the public API and feature set for an initial 1.0 release.**
 
 ## Install
 
@@ -23,9 +16,11 @@ Install the [NPM package](https://www.npmjs.com/package/@phensley/cldr):
 
 ```bash
 npm install --save @phensley/cldr
+```
 
-# or
+Using Yarn:
 
+```bash
 yarn add @phensley/cldr
 ```
 
@@ -79,12 +74,6 @@ You can use any of the packages independent of the rest of the library:
 - No familiarity with CLDR structure is required for developers to use this library.
 - High performance.
 - Arbitrary precision decimal math, to achieve the same accuracy in the browser as on the server.
-
-## Rationale
-
-I needed a library that included as much CLDR functionality as possible, while still meeting all of my requirements for performance, static and runtime code size, simplicity of integration, etc
-
-I'm gradually [comparing this library with current alternatives](https://github.com/phensley/cldr-bakeoff) here.
 
 ## License
 
