@@ -4,6 +4,8 @@
  *
  *    true  - index of element less-than-or-equal to our search
  *    false -               .. greater-than-or-equal ..
+ *
+ * @public
  */
 export const binarySearch = (elems: number[], lessThan: boolean, n: number): number => {
   let lo = 0;

@@ -10,6 +10,8 @@ import { LRU } from './lru';
  *    representation of the pattern.
  *  * Caching any object that is expensive to create, where the cache
  *    key identifies the type of object to cache.
+ *
+ * @public
  */
 export class Cache<T> {
 
@@ -19,10 +21,21 @@ export class Cache<T> {
     this.storage = new LRU(capacity);
   }
 
+  /**
+   * Return the number of items stored in the cache.
+   *
+   * @public
+   */
   size(): number {
     return this.storage.size();
   }
 
+  /**
+   * Fetch an item from the cache. If the item is not found,
+   * it will be built and stored in the cache.
+   *
+   * @public
+   */
   get(raw: string): T {
     let o = this.storage.get(raw);
     if (o === undefined) {

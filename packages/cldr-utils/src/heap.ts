@@ -1,3 +1,8 @@
+/**
+ * Compares two values of type T.
+ *
+ * @public
+ */
 export type Comparator<T> = (a: T, b: T) => number;
 
 const parent = (i: number) => (i - 1) >> 1;
@@ -6,12 +11,14 @@ const right = (i: number) => (i << 1) + 2;
 
 /**
  * Minimum heap.
+ *
+ * @public
  */
 export class Heap<T> {
 
   private items: T[];
 
-  constructor(readonly cmp: Comparator<T>, data: T[]) {
+  constructor(private readonly cmp: Comparator<T>, data: T[]) {
     this.items = data.slice(0);
     for (let i = parent(data.length - 1); i >= 0; i--) {
       this._down(i);
@@ -20,6 +27,8 @@ export class Heap<T> {
 
   /**
    * Is the heap empty?
+   *
+   * @public
    */
   empty(): boolean {
     return !this.items.length;
@@ -27,6 +36,8 @@ export class Heap<T> {
 
   /**
    * Push an item and sift up.
+   *
+   * @public
    */
   push(item: T): void {
     this.items.push(item);
@@ -35,6 +46,8 @@ export class Heap<T> {
 
   /**
    * Pop the minimum item.
+   *
+   * @public
    */
   pop(): T | undefined {
     if (this.items.length <= 1) {

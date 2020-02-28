@@ -5,6 +5,11 @@
 
 import { Constants, FNV } from './fnv';
 
+/**
+ * Minimal perfect hash table.
+ *
+ * @public
+ */
 export interface MPHashTable<T> {
   // Intermediate table
   g: number[];
@@ -18,12 +23,16 @@ export interface MPHashTable<T> {
 
 /**
  * Hash a key for use in minimal perfect hashing.
+ *
+ * @public
  */
 export const mphash = (d: number, len: number, s: string) =>
   FNV(d || Constants.FNV1A_BASIS, s) % len;
 
 /**
  * Lookup a key in the given minimal perfect hash table.
+ *
+ * @public
  */
 export const mplookup = <T>(t: MPHashTable<T>, key: string) => {
   let d = t.g[mphash(0, t.s, key)];
