@@ -7,7 +7,7 @@ const UNDEFINED = new LanguageTag();
  * Wrapper pairing an application's opaque locale identifier with a
  * parsed and resolved language tag object.
  *
- * @alpha
+ * @public
  */
 export interface Locale {
 
@@ -30,9 +30,13 @@ export interface Locale {
 /**
  * Merged declaration to add a parse() method to Locale interface.
  *
- * @alpha
+ * @public
  */
 export class Locale {
+  /**
+   * Parses a language tag and resolves it, substituting aliases and
+   * adding likely subtags.
+   */
   static resolve(id: string): Locale {
     let tag = parseLanguageTag(id);
     if (tag.hasLanguage() || tag.hasScript() || tag.hasRegion()) {

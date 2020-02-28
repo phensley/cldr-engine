@@ -242,7 +242,7 @@ const initSubtags = () => {
 /**
  * Methods for substituting language and region aliases, adding likely subtags, etc.
  *
- * @alpha
+ * @public
  */
 export class LanguageResolver {
 
