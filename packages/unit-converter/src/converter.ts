@@ -3,6 +3,8 @@ import { UnitConversion, UnitFactors } from './factormap';
 
 /**
  * Converts between units.
+ *
+ * @public
  */
 export class UnitConverter {
 
@@ -35,14 +37,23 @@ export class UnitConverter {
     }
   }
 
+  /**
+   * Returns the unit factors for the given category.
+   */
   factors(category: string): UnitFactors | undefined {
     return this.storage[category];
   }
 
+  /**
+   * Return an array of the categories added to this converter.
+   */
   categories(): string[] {
     return Object.keys(this.storage).sort();
   }
 
+  /**
+   * Get the unit conversion factor that converts `src` to `dst` for the given category.
+   */
   get(category: string, src: string, dst: string): UnitConversion | undefined {
     const factors = this.storage[category];
     if (factors) {
@@ -51,6 +62,9 @@ export class UnitConverter {
     return undefined;
   }
 
+  /**
+   * Convert the decimal value from `src` to `dst` units.
+  */
   convert(category: string, n: Decimal, src: string, dst: string, ctx?: MathContext): Decimal | undefined {
     const conv = this.get(category, src, dst);
     if (conv) {

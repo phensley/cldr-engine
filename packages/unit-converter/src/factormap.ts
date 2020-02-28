@@ -18,6 +18,8 @@ type E = [
 /**
  * Represents a conversion path from source to destination unit, and the
  * rational conversion factors.
+ *
+ * @public
  */
 export interface UnitConversion {
   path: string[];
@@ -38,6 +40,8 @@ const ONE = new Rational(1);
  * with no direct conversion factor. The path is transformed into a direct
  * conversion factor by multiplying all factors along the path. Finally the
  * new factor is added to the graph.
+ *
+ * @public
  */
 export class UnitFactors {
 
