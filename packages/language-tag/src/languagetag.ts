@@ -42,7 +42,7 @@ const canonicalize = (field: number, value?: string): string | undefined => {
  * IETF BCP 47 language tag with static methods for parsing, adding likely
  * subtags, etc.
  *
- * @alpha
+ * @public
  */
 export class LanguageTag {
 

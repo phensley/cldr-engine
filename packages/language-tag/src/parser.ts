@@ -237,5 +237,7 @@ class LanguageTagParser {
 
 /**
  * Low-level parsing of a language tag. No resolution is performed.
+ *
+ * @public
  */
 export const parseLanguageTag = (str: string) => new LanguageTagParser(str).parse();
