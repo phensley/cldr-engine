@@ -18,6 +18,12 @@ const enum Chars {
   POUND = '#'
 }
 
+/**
+ * Parses a string into message code. The result can be used to evaluate the
+ * message or serialized to JSON for later evaluation.
+ *
+ * @public
+ */
 export const parseMessagePattern = (raw: string, matcher: MessageMatcher): MessageCode =>
   new MessagePatternParser(raw, matcher).parse();
 

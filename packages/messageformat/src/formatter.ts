@@ -6,6 +6,11 @@ import { DefaultMessageArgConverter, MessageArgConverter } from './evaluation/co
 
 const DEFAULT_CACHE_SIZE = 100;
 
+/**
+ * Configures a MessageFormatter instance.
+ *
+ * @public
+ */
 export interface MessageFormatterOptions {
 
   /**
@@ -43,6 +48,8 @@ export interface MessageFormatterOptions {
 
 /**
  * Convenience class that caches parsed messages.
+ *
+ * @public
  */
 export class MessageFormatter {
 
@@ -61,12 +68,19 @@ export class MessageFormatter {
     this.cache = new Cache<MessageCode>(s => parseMessagePattern(s, this.matcher), size);
   }
 
+  /**
+   * Parse and evaluate the message against the given argument. Internally caches parsed
+   * messages for reuse.
+   */
   format(message: string, positional: MessageArg[], named: MessageNamedArgs): string {
     const code = this.cache.get(message);
     return new MessageEngine(this.plurals, this.converter, this.formatters, code)
       .evaluate(positional, named);
   }
 
+  /**
+   * String representation of this formatter.
+   */
   toString(): string {
     return `MessageFormatter(formatters=${JSON.stringify(Object.keys(this.formatters))} cached=${this.cache.size()})`;
   }

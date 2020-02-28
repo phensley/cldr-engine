@@ -1,6 +1,10 @@
-// A string and range of characters [s, e) (from 's' up to but not including 'e'),
-// representing the current state of the parse of a given scope inside a
-// message string.
+/**
+ * A string and range of characters [s, e) (from 's' up to but not including 'e'),
+ * representing the current state of the parse of a given scope inside a
+ * message string.
+ *
+ * @public
+ */
 export interface MessageState {
   t: string;
   s: number;
@@ -16,16 +20,57 @@ const patterns = {
   pluralChoice: /(=\d+(\.\d+)?)|zero|one|two|few|many|other/.source
 };
 
+/**
+ * Matches message syntax fragments.
+ *
+ * @public
+ */
 export interface MessageMatcher {
   // debug(msg: string, r: MessageState): void;
+
+  /**
+   * Return the next character.
+   */
   char(r: MessageState): string;
+
+  /**
+   * Indicate if we've reached the end of input.
+   */
   complete(r: MessageState): boolean;
+
+  /**
+   * Match one or more spaces.
+   */
   spaces(r: MessageState): boolean;
+
+  /**
+   * Match a list of arguments.
+   */
   arguments(r: MessageState): (number | string)[] | undefined;
+
+  /**
+   * Match variable identifier.
+   */
   identifier(r: MessageState): string | undefined;
+
+  /**
+   * Match a list of options.
+   */
   options(r: MessageState): string[];
+
+  /**
+   * Match a formatter name.
+   */
   formatter(r: MessageState): string | undefined;
+
+  /**
+   * Match a plural offset.
+   */
   pluralOffset(r: MessageState): number;
+
+  /**
+   * Match a plural choice (exact or category).
+   */
   pluralChoice(r: MessageState): string | undefined;
 }
 
@@ -44,7 +89,10 @@ const cmp = (a: number, b: number) => a < b ? -1 : a > b ? 1 : 0;
  * the corresponding parse positions maintained in a range object within each
  * stack frame.
  *
+ * ```
  *   "{gender, select, female {guests plural one {her guest} other {her guests}}"
+ * ```
+ * @public
  */
 export class StickyMatcher implements MessageMatcher {
 
@@ -167,6 +215,8 @@ export class StickyMatcher implements MessageMatcher {
  * Implementation of matcher for browsers that do not support sticky regexps.
  * We anchor all patterns to the start of the string, then match against
  * a substring [start, end].
+ *
+ * @public
  */
 export class SubstringMatcher extends StickyMatcher {
 
@@ -197,14 +247,33 @@ const hasStickyRegexp = (() => {
   }
 })();
 
+/**
+ * Function that compiles a regular expression.
+ *
+ * @public
+ */
 export type regexpFunc = (pattern: string) => RegExp;
+
+/**
+ * Construct a regular expression for use in a StickyMatcher.
+ *
+ * @public
+ */
 export const stickyRegexp = (pattern: string) => new RegExp(pattern, 'y');
+
+/**
+ * Construct a regular expression for use in a SubstringMatcher.
+ *
+ * @public
+ */
 export const substringRegexp = (pattern: string) => new RegExp('^' + pattern, 'g');
 
 /**
  * Constructs the right instance of matcher based on the runtime environment's
  * support of sticky regexp, while allowing substring matcher to be selected for
  * testing.
+ *
+ * @public
  */
 export const buildMessageMatcher = (names: string[], sticky: boolean = hasStickyRegexp) =>
   new (sticky ? StickyMatcher : SubstringMatcher)(names, sticky ? stickyRegexp : substringRegexp);

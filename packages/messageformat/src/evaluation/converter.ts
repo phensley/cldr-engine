@@ -1,11 +1,21 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
 import { MessageArg } from './args';
 
+/**
+ * Interface for argument converters.
+ *
+ * @public
+ */
 export interface MessageArgConverter {
   asString(arg: MessageArg | undefined): string;
   asDecimal(arg: MessageArg | undefined): Decimal;
 }
 
+/**
+ * Converts arguments to string or Decimal.
+ *
+ * @public
+ */
 export class DefaultMessageArgConverter implements MessageArgConverter {
 
   /**

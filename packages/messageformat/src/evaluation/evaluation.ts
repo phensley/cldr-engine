@@ -9,9 +9,19 @@ import {
   PluralNumberType,
 } from '../parser';
 
+/**
+ * User-defined message formatter function.
+ *
+ * @public
+ */
 export type MessageFormatFunc =
   (args: MessageArg[], options: string[]) => string;
 
+/**
+ * A map of user-defined formatter names to their implementations.
+ *
+ * @public
+ */
 export type MessageFormatFuncMap = { [name: string]: MessageFormatFunc };
 
 const get = (key: number | string, args: MessageArgs): MessageArg => {
@@ -28,6 +38,8 @@ const DECIMAL_EXACT: { [n: string]: Decimal } = {
 
 /**
  * Evaluates a message format against a set of arguments, producing a string.
+ *
+ * @public
  */
 export class MessageEngine {
 
@@ -39,6 +51,9 @@ export class MessageEngine {
     private formatters: MessageFormatFuncMap,
     private code: MessageCode) { }
 
+  /**
+   * Evaluate the message code against the given arguments.
+   */
   evaluate(positional: MessageArg[], named: MessageNamedArgs = {}): string {
     return this._evaluate(this.code, { positional, named });
   }
