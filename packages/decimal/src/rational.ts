@@ -26,21 +26,26 @@ const coerceRational = (n: RationalArg): Rational => {
  */
 const fromString = (s: string): Decimal => {
   switch (s.toLowerCase()) {
-  case 'e':
-    return DecimalConstants.E;
-  case 'pi':
-    return DecimalConstants.PI;
-  default:
-    return new Decimal(s);
+    case 'e':
+      return DecimalConstants.E;
+    case 'pi':
+      return DecimalConstants.PI;
+    default:
+      return new Decimal(s);
   }
 };
 
+/**
+ * Valid argument for constructing a Rational value.
+ *
+ * @public
+ */
 export type RationalArg = Rational | Decimal | number | string;
 
 /**
  * Arbitrary precision rational type.
  *
- * @alpha
+ * @public
  */
 export class Rational {
 
@@ -117,6 +122,11 @@ export class Rational {
 
 }
 
+/**
+ * Common Rational values as constants.
+ *
+ * @public
+ */
 export const RationalConstants = {
   ONE: new Rational(1, 1)
 };

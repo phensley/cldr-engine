@@ -1,17 +1,26 @@
+/**
+ * Flags indicate special values.
+ *
+ * @public
+ */
 export const enum DecimalFlag {
   NONE = 0,
   NAN = 1,
   INFINITY = 2,
-  NEG = 4
 }
 
+/**
+ * Modes for controlling rounding.
+ *
+ * @public
+ */
 export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor'
   | 'half-up' | 'half-down' | 'half-even';
 
 /**
  * Sets the scale or precision, and the rounding mode for a math operation.
  *
- * @alpha
+ * @public
  */
 export interface MathContext {
   scale?: number;
@@ -19,6 +28,9 @@ export interface MathContext {
   round?: RoundingModeType;
 }
 
+/**
+ * Constants for use in Decimal calculations.
+ */
 export const enum Constants {
   // 10^7 < sqrt(Number.MAX_SAFE_INTEGER)
   RADIX = 1e7,
@@ -47,6 +59,9 @@ export const POWERS10 = [
   Constants.P8
 ];
 
+/**
+ * States during decimal parsing.
+ */
 export const enum ParseState {
   INITIAL = 0,
   INTEGER = 1,
@@ -54,12 +69,20 @@ export const enum ParseState {
   EXPONENT = 3,
 }
 
+/**
+ * Flags used during decimal parsing.
+ */
 export const enum ParseFlags {
   SIGN = 1,
   POINT = 2,
   EXP = 4
 }
 
+/**
+ * Characters used in decimal parsing.
+ *
+ * @public
+ */
 export const enum Chars {
   PLUS = 0x2b,
   MINUS = 0x2d,

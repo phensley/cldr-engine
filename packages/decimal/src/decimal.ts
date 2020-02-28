@@ -33,10 +33,25 @@ const NAN_VALUES = new Set(['nan', 'NaN']);
 const POS_INFINITY = new Set(['infinity', '+infinity', 'Infinity', '+Infinity']);
 const NEG_INFINITY = new Set(['-infinity', '-Infinity']);
 
+/**
+ * Latin decimal digits.
+ *
+ * @public
+ */
 export const DECIMAL_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
+/**
+ * Valid argument for constructing a Decimal value.
+ *
+ * @public
+ */
 export type DecimalArg = number | string | Decimal;
 
+/**
+ * Converts a valid argument into a Decimal value.
+ *
+ * @public
+ */
 export const coerceDecimal = (n: DecimalArg): Decimal =>
   typeof n === 'number' || typeof n === 'string' ? new Decimal(n) : n;
 
@@ -1367,6 +1382,11 @@ const NAN = new Decimal(NaN);
 const NEGATIVE_INFINITY = new Decimal(-Infinity);
 const POSITIVE_INFINITY = new Decimal(Infinity);
 
+/**
+ * Common Decimal values as constants.
+ *
+ * @public
+ */
 export const DecimalConstants = {
   ZERO,
   ONE,

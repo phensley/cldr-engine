@@ -1,7 +1,7 @@
 /**
  * A single part of a multi-part value.
  *
- * @alpha
+ * @public
  */
 export interface Part {
   type: string;
@@ -10,6 +10,8 @@ export interface Part {
 
 /**
  * Formatting of decimal values.
+ *
+ * @public
  */
 export interface DecimalFormatter<T> {
 
@@ -26,6 +28,8 @@ export interface DecimalFormatter<T> {
 
 /**
  * Formats a decimal into a string.
+ *
+ * @public
  */
 export class StringDecimalFormatter implements DecimalFormatter<string> {
 
@@ -43,6 +47,8 @@ export class StringDecimalFormatter implements DecimalFormatter<string> {
 
 /**
  * Formats a decimal into an array of parts.
+ *
+ * @public
  */
 export class PartsDecimalFormatter implements DecimalFormatter<Part[]> {
 
