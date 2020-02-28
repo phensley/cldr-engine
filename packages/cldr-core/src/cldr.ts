@@ -46,7 +46,7 @@ const enum Messages {
 /**
  * Interface exporting all functionality for a given locale.
  *
- * @alpha
+ * @public
  */
 export interface CLDR {
 
@@ -96,7 +96,7 @@ export interface CLDR {
 /**
  * Implements CLDR
  *
- * @alpha
+ * @public
  */
 class CLDRImpl implements CLDR {
 
@@ -190,7 +190,7 @@ const EMPTY_CONFIG: SchemaConfig = {};
 /**
  * Options to initialize the library.
  *
- * @alpha
+ * @public
  */
 export interface CLDROptions {
 
@@ -233,7 +233,7 @@ export interface CLDROptions {
  * All other functionality should be available statically through
  * exported types and functions.
  *
- * @alpha
+ * @public
  */
 export class CLDRFramework {
 

@@ -21,13 +21,13 @@
 
 // INTERNAL NumbersImpl
 
-  /**
-   * Prototyping the spellout interface and implementation.
-   *
-   * VERY ALPHA UNTIL FURTHER NOTICE
-   *
-   * @alpha
-   */
+/**
+ * Prototyping the spellout interface and implementation.
+ *
+ * VERY ALPHA UNTIL FURTHER NOTICE
+ *
+ * @alpha
+ */
   // formatRuleBased<T>(bundle: Bundle, renderer: NumberRenderer<T>,
   //     system: AlgorithmicNumberingSystem, transform: ContextTransformInfo,
   //     n: Decimal, options: RuleBasedFormatOptions, params: NumberParams): T {

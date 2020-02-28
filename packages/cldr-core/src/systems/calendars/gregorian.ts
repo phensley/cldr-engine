@@ -10,7 +10,7 @@ import { TimePeriod } from './interval';
  *
  * type: gregory
  *
- * @alpha
+ * @public
  */
 export class GregorianDate extends CalendarDate {
 

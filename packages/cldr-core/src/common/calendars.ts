@@ -11,7 +11,7 @@ import { CalendarType } from '../systems/calendars/types';
 import { TimePeriodField } from '../systems';
 
 /**
- * @alpha
+ * @public
  */
 export interface ZonedDateTime {
 
@@ -28,7 +28,7 @@ export interface ZonedDateTime {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface CalendarFieldsOptions {
 
@@ -49,7 +49,7 @@ export interface CalendarFieldsOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface EraFieldOptions {
 
@@ -70,7 +70,7 @@ export interface EraFieldOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface DateFieldFormatOptions {
 
@@ -90,7 +90,7 @@ export interface DateFieldFormatOptions {
   context?: ContextType;
 }
 /**
- * @alpha
+ * @public
  */
 export interface DateFormatOptions {
 
@@ -136,7 +136,7 @@ export interface DateFormatOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface DateRawFormatOptions {
 
@@ -162,7 +162,7 @@ export interface DateRawFormatOptions {
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface DateIntervalFormatOptions {
 
@@ -204,7 +204,7 @@ export interface DateIntervalFormatOptions {
 /**
  * Options used to format a relative time field.
  *
- * @alpha
+ * @public
  */
 export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
   /**
@@ -231,7 +231,7 @@ export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
 /**
  * Options used to format a relative time.
  *
- * @alpha
+ * @public
  */
 export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOptions {
 
@@ -252,14 +252,14 @@ export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOption
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface ExemplarCity {
   name: string;
 }
 
 /**
- * @alpha
+ * @public
  */
 export interface TimeZoneInfo {
   id: string;

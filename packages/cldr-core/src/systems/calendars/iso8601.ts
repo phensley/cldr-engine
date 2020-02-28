@@ -8,7 +8,7 @@ import { TimePeriod } from './interval';
  *
  * type: iso8601
  *
- * @alpha
+ * @public
  */
 export class ISO8601Date extends GregorianDate {
 

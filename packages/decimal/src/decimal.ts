@@ -87,7 +87,7 @@ const size = (n: number): number => {
 /**
  * Arbitrary precision decimal type.
  *
- * @alpha
+ * @public
  */
 export class Decimal {
 
@@ -977,7 +977,7 @@ export class Decimal {
     m--;
 
     // Divmod each element of u, copying the hi/lo parts to w.
-    for (; m >= 0; m-- , n--) {
+    for (; m >= 0; m--, n--) {
       hi = (data[m] / powhi) | 0;
       lo = data[m] - hi * powhi;
       w.data[n] = powlo * loprev + hi;
@@ -1046,7 +1046,7 @@ export class Decimal {
         rest = allzero(data, q) === 0 ? 1 : 0;
       }
 
-      for (j = 0, i = q + 1; i < data.length; i++ , j++) {
+      for (j = 0, i = q + 1; i < data.length; i++, j++) {
         const [hi, lo] = div.pow10(data[i], r);
         w.data[j] = ph * lo + hiprev;
         hiprev = hi;
