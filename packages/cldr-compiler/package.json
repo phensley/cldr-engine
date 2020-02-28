@@ -20,8 +20,8 @@
   },
   "cldrversion": "36.0.0",
   "scripts": {
-    "api": "api-extractor run -c ./etc/api-extractor.json --verbose",
-    "api:local": "yarn api -l",
+    "disabled:api": "api-extractor run -c ./etc/api-extractor.json --verbose",
+    "disabled:api:local": "yarn api -l",
     "build": "yarn build:cj && yarn build:es && yarn download",
     "build:cj": "tsc -p ./tsconfig.json",
     "build:es": "tsc -p ./tsconfig.json --module esnext --outDir lib-es",
