@@ -1,6 +1,8 @@
 /**
  * Binary search into the array of T, using the return value of 'f'  to
  * direct the search.
+ *
+ * @public
  */
 export const binarySearch = <T>(elems: T[], lessThan: boolean, lo: number, f: (elem: T) => number): number => {
   let hi = elems.length - 1;
