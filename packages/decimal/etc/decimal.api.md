@@ -38,12 +38,10 @@ export const enum Chars {
     PLUS = 43
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "coerceDecimal" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-//
 // @public
 export const coerceDecimal: (n: DecimalArg) => Decimal;
 
-// @alpha
+// @public
 export class Decimal {
     constructor(num: DecimalArg);
     abs(): Decimal;
@@ -123,8 +121,6 @@ export class Decimal {
 // @public
 export const DECIMAL_DIGITS: string[];
 
-// Warning: (ae-incompatible-release-tags) The symbol "DecimalArg" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-//
 // @public
 export type DecimalArg = number | string | Decimal;
 
@@ -186,12 +182,8 @@ export class Rational {
     constructor(numerator: DecimalArg, denominator?: DecimalArg);
     // (undocumented)
     compare(num: RationalArg, context?: MathContext): number;
-    // Warning: (ae-incompatible-release-tags) The symbol "denom" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-    //
     // (undocumented)
     protected denom: Decimal;
-    // Warning: (ae-incompatible-release-tags) The symbol "denominator" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-    //
     // (undocumented)
     denominator(): Decimal;
     // (undocumented)
@@ -200,24 +192,16 @@ export class Rational {
     inverse(): Rational;
     // (undocumented)
     multiply(num: RationalArg, context?: MathContext): Rational;
-    // Warning: (ae-incompatible-release-tags) The symbol "numer" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-    //
     // (undocumented)
     protected numer: Decimal;
-    // Warning: (ae-incompatible-release-tags) The symbol "numerator" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-    //
     // (undocumented)
     numerator(): Decimal;
-    // Warning: (ae-incompatible-release-tags) The symbol "toDecimal" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-    //
     // (undocumented)
     toDecimal(context?: MathContext): Decimal;
     // (undocumented)
     toString(): string;
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "RationalArg" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-//
 // @public
 export type RationalArg = Rational | Decimal | number | string;
 
@@ -239,17 +223,6 @@ export class StringDecimalFormatter implements DecimalFormatter<string> {
     render(): string;
 }
 
-
-// Warnings were encountered during analysis:
-//
-// lib/decimal.d.ts:275:5 - (ae-incompatible-release-tags) The symbol "ZERO" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-// lib/decimal.d.ts:276:5 - (ae-incompatible-release-tags) The symbol "ONE" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-// lib/decimal.d.ts:277:5 - (ae-incompatible-release-tags) The symbol "TWO" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-// lib/decimal.d.ts:278:5 - (ae-incompatible-release-tags) The symbol "PI" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-// lib/decimal.d.ts:279:5 - (ae-incompatible-release-tags) The symbol "E" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-// lib/decimal.d.ts:280:5 - (ae-incompatible-release-tags) The symbol "NAN" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-// lib/decimal.d.ts:281:5 - (ae-incompatible-release-tags) The symbol "POSITIVE_INFINITY" is marked as @public, but its signature references "Decimal" which is marked as @alpha
-// lib/decimal.d.ts:282:5 - (ae-incompatible-release-tags) The symbol "NEGATIVE_INFINITY" is marked as @public, but its signature references "Decimal" which is marked as @alpha
 
 // (No @packageDocumentation comment for this package)
 
