@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+
+# Script to determine how much smaller files get by minimizing the
+# prototype assignments in classes
+
+import codecs, os, re, shutil, sys
+from subprocess import Popen, PIPE
+
+CWD = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+
+RE_PROTOTYPE = re.compile('^\s*(\w+)\.prototype\.(.+)')
+
+PACKAGES = [
+    'cldr',
+    'cldr-core',
+    'cldr-schema',
+    'cldr-types',
+    'cldr-utils',
+    'decimal',
+    'language-tag',
+    'locale',
+    'locale-matcher',
+    'messageformat',
+    'plurals',
+    'timezone'
+]
+
+def run(cmd):
+    p = Popen(cmd, stdout=PIPE)
+    out, _ = p.communicate()
+    return out.decode('utf-8')
+
+def terser(path):
+    raw = run(['terser', path])
+    codecs.open(path, 'w', 'utf-8').write(raw)
+
+def read(path):
+    return codecs.open(path, 'r', 'utf-8').read()
+
+def process(path):
+    seen = set()
+    out = ''
+    data = read(path)
+    srcsz = len(data)
+    lines = data.split('\n')
+    for line in lines:
+        m = RE_PROTOTYPE.match(line)
+        if m is None:
+            out += line + '\n'
+            continue
+        name = m.group(1)
+        rest = m.group(2)
+        if not name in seen:
+            seen.add(name)
+            out += 'var P = ' + name + '.prototype;\n'
+        out += 'P.' + rest + '\n'
+    dstsz = len(out)
+    ratio = (dstsz / srcsz) * 100.0
+    return out, srcsz, dstsz
+
+def main():
+    stotal = dtotal = 0
+    for pkg in PACKAGES:
+        root = os.path.join(CWD, 'packages', pkg, 'lib-es')
+        save = os.path.join(CWD, 'packages', pkg, 'lib-es-save')
+        if not os.path.exists(save):
+            shutil.copytree(root, save)
+        for root, dirs, names in os.walk(root):
+            for name in names:
+                if name.endswith('.js'):
+                    path = os.path.join(root, name)
+                    out, s, d = process(path)
+                    stotal += s
+                    dtotal += d
+                    w = codecs.open(path, 'w', 'utf-8')
+                    w.write(out)
+                    terser(path)
+                    print(path, str(s).rjust(8), d)
+    r = dtotal / stotal
+    print(str(stotal).rjust(10), dtotal)
+    print(r * 100)
+
+
+if __name__ == '__main__':
+    main()
+
