@@ -1482,7 +1482,7 @@ export const enum TimePeriodFieldFlag {
 // Warning: (ae-internal-missing-underscore) The name "timePeriodFieldFlags" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
-export const timePeriodFieldFlags: (fields: ("year" | "month" | "week" | "day" | "hour" | "minute" | "second" | "millis")[]) => number;
+export const timePeriodFieldFlags: (fields: ("day" | "hour" | "minute" | "month" | "second" | "year" | "week" | "millis")[]) => number;
 
 // @alpha (undocumented)
 export interface TimeZoneInfo {
