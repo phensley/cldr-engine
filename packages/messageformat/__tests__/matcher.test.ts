@@ -104,6 +104,9 @@ const build = (type: string, formatters: string[]) =>
     [m, r] = matcher('offset:12');
     expect(m.pluralOffset(r)).toEqual(12);
 
+    [m, r] = matcher('offset:-12');
+    expect(m.pluralOffset(r)).toEqual(-12);
+
     [m, r] = matcher('offset:-infinity');
     expect(m.pluralOffset(r)).toEqual(0);
 

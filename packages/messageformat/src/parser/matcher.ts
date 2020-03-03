@@ -112,7 +112,7 @@ export class StickyMatcher implements MessageMatcher {
     // Sort keys by length descending to ensure prefixes are matched last
     formatters = BUILTINS.concat(formatters).sort((a, b) => cmp(b.length, a.length));
     this._fmt = compile(`(${formatters.join('|')})`);
-    this._offset = compile(/offset:\d+/.source);
+    this._offset = compile(/offset:-?\d+/.source);
     this._choice = compile(patterns.pluralChoice);
   }
 
