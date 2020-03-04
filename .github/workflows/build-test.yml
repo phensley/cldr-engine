@@ -2,10 +2,9 @@ name: Build and Test
 
 on:
   push
-
-    # branches:
-    #  - actions
-    #  - master
+  # branches:
+  #  - actions
+  #  - master
 
 jobs:
   build:
@@ -34,12 +33,10 @@ jobs:
           yarn api
 
       - name: Test
-        run: yarn test:runtime
-
+        run: env TZ='America/New_York' yarn test:runtime
       # - name: Test
       #   run: |
       #     yarn test:codecov
-
       # - name: Upload Coverage
       #   uses: codecov/codecov-action@v1
       #   with:
