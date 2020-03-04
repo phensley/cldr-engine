@@ -58,7 +58,7 @@ test('field diff mixed zoned and date', () => {
   let f: DateTimePatternFieldType;
 
   // Feb 1 midnight UTC is Jan 31 NY time
-  z = zoned(new Date(2018, 1, 1), NEW_YORK);
+  z = zoned(new Date(2018, 0, 31, 10), NEW_YORK);
 
   d = api.toGregorianDate(z);
   f = api.fieldOfVisualDifference(z, d);

@@ -6,6 +6,7 @@ import {
 } from '../../../src';
 
 const NEW_YORK = 'America/New_York';
+const LOS_ANGELES = 'America/Los_Angeles';
 const ROME = 'Europe/Rome';
 
 // NOTE: We have two problems using Date for dates way in the past:
@@ -25,16 +26,28 @@ test('zoned date time gregorian epoch', () => {
   let d: GregorianDate;
   let date: Date;
 
-  // 1514810096789 UTC
+  // 1514828096789 UTC
   date = new Date(2018, 0, 1, 12, 34, 56, 789);
   d = api.toGregorianDate({ date, zoneId: NEW_YORK });
-  expect(d.toString()).toEqual('Gregorian 2018-01-01 07:34:56.789 America/New_York');
-  expect(d.unixEpoch()).toEqual(1514810096789);
+  expect(d.toString()).toEqual('Gregorian 2018-01-01 12:34:56.789 America/New_York');
+  expect(d.unixEpoch()).toEqual(1514828096789);
   expect(d.year()).toEqual(2018);
   expect(d.month()).toEqual(1);
   expect(d.dayOfMonth()).toEqual(1);
-  expect(d.hour()).toEqual(7);
-  expect(d.hourOfDay()).toEqual(7);
+  expect(d.hour()).toEqual(0);
+  expect(d.hourOfDay()).toEqual(12);
+  expect(d.minute()).toEqual(34);
+  expect(d.second()).toEqual(56);
+  expect(d.milliseconds()).toEqual(789);
+
+  d = api.toGregorianDate({ date, zoneId: LOS_ANGELES });
+  expect(d.toString()).toEqual('Gregorian 2018-01-01 09:34:56.789 America/Los_Angeles');
+  expect(d.unixEpoch()).toEqual(1514828096789);
+  expect(d.year()).toEqual(2018);
+  expect(d.month()).toEqual(1);
+  expect(d.dayOfMonth()).toEqual(1);
+  expect(d.hour()).toEqual(9);
+  expect(d.hourOfDay()).toEqual(9);
   expect(d.minute()).toEqual(34);
   expect(d.second()).toEqual(56);
   expect(d.milliseconds()).toEqual(789);
@@ -88,18 +101,20 @@ test('bare date', () => {
   const api = calendarsApi('en');
   let d: CalendarDate;
 
+  // Defaults to UTC
   d = api.toGregorianDate(new Date(2018, 1, 20, 12, 34));
+  expect(d.unixEpoch()).toEqual(1519148040000);
   expect(d.year()).toEqual(2018);
   expect(d.month()).toEqual(2);
   expect(d.dayOfMonth()).toEqual(20);
-  expect(d.hour()).toEqual(0);
-  expect(d.hourOfDay()).toEqual(12);
+  expect(d.hour()).toEqual(5);
+  expect(d.hourOfDay()).toEqual(17);
   expect(d.minute()).toEqual(34);
   expect(d.second()).toEqual(0);
 
   d = d.withZone(NEW_YORK);
-  expect(d.hour()).toEqual(7);
-  expect(d.hourOfDay()).toEqual(7);
+  expect(d.hour()).toEqual(0);
+  expect(d.hourOfDay()).toEqual(12);
 });
 
 test('noop conversions', () => {

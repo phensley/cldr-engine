@@ -458,4 +458,4 @@ export class CalendarsImpl implements Calendars {
 }
 
 const getEpochUTC = (date: Date | number): number =>
-  typeof date === 'number' ? date : (+date) - date.getTimezoneOffset() * 60000;
+  typeof date === 'number' ? date : (+date);
