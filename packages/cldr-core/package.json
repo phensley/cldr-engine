@@ -26,10 +26,10 @@
     "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./lib-es ./.scratch ./.custom-packs",
     "clean:full": "yarn clean && rimraf ./node_modules",
-    "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
+    "coverage": "TZ=America/New_York jest --coverage --runInBand --no-cache --coverageReporters=html",
     "lint": "tslint -p ./tsconfig.lint.json",
     "prepublish": "yarn build",
-    "test:watch": "jest --watch --coverage --coverageReporters=html"
+    "test:watch": "TZ=America/New_York jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "lib/",

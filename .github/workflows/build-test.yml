@@ -33,7 +33,7 @@ jobs:
           yarn api
 
       - name: Test
-        run: env TZ='America/New_York' yarn test:runtime
+        run: yarn test:runtime
       # - name: Test
       #   run: |
       #     yarn test:codecov

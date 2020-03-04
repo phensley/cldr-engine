@@ -42,13 +42,13 @@
     "build:rollup-dts": "dts-bundle-generator -o ./dist/cldrengine.umd.d.ts src/index.ts",
     "clean": "rimraf ./lib ./lib-es ./packs ./dist",
     "clean:full": "yarn clean && rimraf ./node_modules",
-    "coverage": "jest --coverage --runInBand --no-cache",
+    "coverage": "TZ=America/New_York jest --coverage --runInBand --no-cache",
     "off-install": "node ./scripts/extract.js",
     "lint": "tslint -p ./tsconfig.lint.json",
     "prepublish": "yarn build",
     "stress": "ts-node ./__stress__",
-    "test": "jest",
-    "test:watch": "jest --watch --coverage --coverageReporters=html"
+    "test": "TZ=America/New_York jest",
+    "test:watch": "TZ=America/New_York jest --watch --coverage --coverageReporters=html"
   },
   "files": [
     "dist/",
