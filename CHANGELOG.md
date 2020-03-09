@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 - Method on `LanguageResolver` to substitute aliases in a language tag
+- `LocaleMatcher` can be passed an array of language tag and locale instances, bypassing parsing.
 - `LocaleMatcher` constructor now accepts an options parameter.
   - Option `resolve: boolean` can be used to disable locale resolution if the tags have already been fully resolved.
 
