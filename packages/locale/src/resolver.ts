@@ -30,14 +30,13 @@ export const fastTag = (real: LanguageTag): FastTag => {
   // undefined, and we don't want to use its string representation of
   // the undefined value (e.g. 'und', 'Zzzz', etc), we use the field's
   // index number to represent undefined.
-  const language = fake.core[Tag.LANGUAGE];
-  const script = fake.core[Tag.SCRIPT];
-  const region = fake.core[Tag.REGION];
-  return [
-    language || Tag.LANGUAGE,
-    script || Tag.SCRIPT,
-    region || Tag.REGION
-  ];
+  const fast = fake.core.slice(0, 3) as FastTag;
+  for (let i = 0; i < 3; i++) {
+    if (!fast[i]) {
+      fast[i] = i;
+    }
+  }
+  return fast;
 };
 
 const likelyGet = (query: FastTag): FastTag | undefined => {
@@ -48,6 +47,7 @@ const likelyGet = (query: FastTag): FastTag | undefined => {
   const region = query[Tag.REGION];
   const n3: any = n2[region];
   if (typeof n3 === 'string') {
+    // On first access, convert to an array representation
     const p = n3.split('-').map((v, i) => {
       if (!v && i === 0) {
         return lang;
