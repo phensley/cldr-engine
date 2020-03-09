@@ -7,19 +7,7 @@ import {
 import { FastTag, LanguageAliasMap } from './util';
 import { stringToObject } from './util';
 import { languageAliasRaw } from './autogen.aliases';
-import * as subtags from './autogen.subtags';
-
-/**
- * Put a nested map into the given map.
- */
-const putMap = (map: any, key: string | number) => {
-  let val: any = map[key];
-  if (val === undefined) {
-    val = [];
-    map[key] = val;
-  }
-  return val;
-};
+import { likelySubtags } from './autogen.subtags';
 
 // Helper to cast LanguageTag to access protected fields
 interface FakeLanguageTag {
@@ -54,42 +42,28 @@ export const fastTag = (real: LanguageTag): FastTag => {
 
 const parseFastTag = (raw: string): FastTag => fastTag(parseLanguageTag(raw));
 
-/**
- * Index holding likely subtags matches.
- */
-class LikelySubtagsMap {
-
-  // Hack to be able to index using numbers and strings.
-  readonly index: any = [];
-
-  constructor(likely: { [x: string]: string }) {
-    Object.keys(likely).forEach(k => {
-      const key = parseFastTag(k);
-      const val = parseFastTag(likely[k]);
-
-      // Add the fast tag into the index.
-      const map = putMap(putMap(this.index, key[Tag.LANGUAGE]), key[Tag.SCRIPT]);
-      map[key[Tag.REGION]] = val;
-    });
-  }
-
-  /**
-   * Lookup the FastTag in the index.
-   */
-  get(query: FastTag): FastTag | undefined {
-    const language = query[Tag.LANGUAGE];
-    const node1 = this.index[language];
-    if (node1 !== undefined) {
-      const script = query[Tag.SCRIPT];
-      const node2 = node1[script];
-      if (node2 !== undefined) {
-        const region = query[Tag.REGION];
-        return node2[region] || undefined;
+const likelyGet = (query: FastTag): FastTag | undefined => {
+  const lang = query[Tag.LANGUAGE];
+  const n1 = likelySubtags[lang] || {};
+  const script = query[Tag.SCRIPT];
+  const n2 = n1[script] || {};
+  const region = query[Tag.REGION];
+  const n3: any = n2[region];
+  if (typeof n3 === 'string') {
+    const p = n3.split('-').map((v, i) => {
+      if (!v && i === 0) {
+        return lang;
       }
-    }
-    return undefined;
+      if (i === 1) {
+        return likelySubtags._[Number(v)];
+      }
+      return v;
+    });
+    n2[region] = p;
+    return p;
   }
-}
+  return n3;
+};
 
 // Flags for subtag permutations
 const enum F {
@@ -150,14 +124,11 @@ const substituteLanguageAliases = (dst: FastTag): void => {
  * this would convert "en" to "en-Latn-US".
  */
 const addLikelySubtags = (dst: FastTag): void => {
-  if (!LIKELY_SUBTAGS_MAP) {
-    initSubtags();
-  }
   const tmp = dst.slice(0);
   for (let i = 0; i < MATCH_ORDER.length; i++) {
     const flags = MATCH_ORDER[i];
     setFields(dst, tmp, flags);
-    const match = LIKELY_SUBTAGS_MAP!.get(tmp);
+    const match = likelyGet(tmp);
     if (match !== undefined) {
       if (dst[Tag.LANGUAGE] === Tag.LANGUAGE) {
         dst[Tag.LANGUAGE] = match[Tag.LANGUAGE];
@@ -228,15 +199,9 @@ const buildLanguageAliasMap = (): LanguageAliasMap => {
 
 // Singleton maps.
 let LANGUAGE_ALIAS_MAP: LanguageAliasMap | undefined;
-let LIKELY_SUBTAGS_MAP: LikelySubtagsMap | undefined;
 
 const initAlias = () => {
   LANGUAGE_ALIAS_MAP = buildLanguageAliasMap();
-};
-
-const initSubtags = () => {
-  const likelySubtags = stringToObject(subtags.likelyRaw, '|', ':');
-  LIKELY_SUBTAGS_MAP = new LikelySubtagsMap(likelySubtags);
 };
 
 /**
