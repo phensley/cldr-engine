@@ -11,6 +11,7 @@ export class LanguageResolver {
     static addLikelySubtags(real: string | LanguageTag): LanguageTag;
     static removeLikelySubtags(real: string | LanguageTag): LanguageTag;
     static resolve(real: string | LanguageTag): LanguageTag;
+    static substituteAliases(real: string | LanguageTag): LanguageTag;
 }
 
 // @public
