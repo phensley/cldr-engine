@@ -40,8 +40,6 @@ export const fastTag = (real: LanguageTag): FastTag => {
   ];
 };
 
-const parseFastTag = (raw: string): FastTag => fastTag(parseLanguageTag(raw));
-
 const likelyGet = (query: FastTag): FastTag | undefined => {
   const lang = query[Tag.LANGUAGE];
   const n1 = likelySubtags[lang] || {};
@@ -101,7 +99,7 @@ const substituteLanguageAliases = (dst: FastTag): void => {
     return;
   }
   for (let i = 0; i < aliases.length; i++) {
-    const { type, repl } = aliases[i];
+    const [type, repl] = aliases[i];
     const exact = (type[Tag.LANGUAGE] === dst[Tag.LANGUAGE] &&
       type[Tag.SCRIPT] === dst[Tag.SCRIPT] &&
       type[Tag.REGION] === dst[Tag.REGION]);
@@ -181,6 +179,17 @@ const fastTagEquals = (a: FastTag, b: FastTag): boolean => {
   return true;
 };
 
+const parseFastTag = (s: string) => {
+  const p = s.split('-');
+  const r: FastTag = [0, 1, 2];
+  for (let i = 0; i < 3; i++) {
+    if (p[i]) {
+      r[i] = p[i];
+    }
+  }
+  return r as FastTag;
+};
+
 const buildLanguageAliasMap = (): LanguageAliasMap => {
   const languageAlias = stringToObject(languageAliasRaw, '|', ':');
   return Object.keys(languageAlias).reduce((o: LanguageAliasMap, k) => {
@@ -192,7 +201,7 @@ const buildLanguageAliasMap = (): LanguageAliasMap => {
       aliases = [];
       o[language] = aliases;
     }
-    aliases.push({ type, repl });
+    aliases.push([type, repl]);
     return o;
   }, {});
 };
@@ -217,6 +226,7 @@ export class LanguageResolver {
   static resolve(real: string | LanguageTag): LanguageTag {
     const tag = typeof real === 'string' ? parseLanguageTag(real) : real;
     const fast = fastTag(tag);
+    // TODO: add flags to determine which operations to perform.
     substituteLanguageAliases(fast);
     substituteRegionAliases(fast);
     addLikelySubtags(fast);

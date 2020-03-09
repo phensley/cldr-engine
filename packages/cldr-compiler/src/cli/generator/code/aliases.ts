@@ -4,6 +4,7 @@ import * as zlib from 'zlib';
 import { TZ } from '@phensley/timezone';
 import { getSupplemental } from '../../../cldr';
 import { objectToString, Code, HEADER, NOLINT_MAXLINE } from './util';
+import { parseLanguageTag } from '@phensley/cldr-core';
 
 /**
  * Split string into lines and split each line into a colon-delimited
@@ -17,6 +18,31 @@ const parseSubtagBlock = (raw: string): { [x: string]: string } => {
     o[k.trim()] = v.trim();
     return o;
   }, {});
+};
+
+const expand = (aliases: any) => {
+  const o: any = {};
+  Object.keys(aliases).forEach(k => {
+    const tag = parseLanguageTag(k);
+    const parts: string[] = [];
+    let flag = false;
+
+    // We ignore variants in language alias substitution for now
+    if (tag.variant()) {
+      return;
+    }
+    if (flag || tag.hasRegion()) {
+      parts.push(tag.hasRegion() ? tag.region() : '');
+      flag = true;
+    }
+    if (flag || tag.hasScript()) {
+      parts.push(tag.hasScript() ? tag.script() : '');
+    }
+    parts.push(tag.language());
+    const key = parts.reverse().join('-');
+    o[key] = aliases[k];
+  });
+  return o;
 };
 
 const getIanaSubtags = () => {
@@ -45,7 +71,7 @@ export const getAliases = (_data: any): Code[] => {
     }
   });
 
-  const languages = objectToString(languageAlias);
+  const languages = objectToString(expand(languageAlias));
   const scripts = objectToString(scriptAlias);
   const territories = objectToString(territoryAlias);
 

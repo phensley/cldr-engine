@@ -1,5 +1,5 @@
 export type FastTag = (string | number)[];
-export type FastTagPair = { type: FastTag, repl: FastTag };
+export type FastTagPair = [FastTag, FastTag];
 export type LanguageAliasMap = { [x: string]: FastTagPair[] };
 
 export const stringToObject = (raw: string, d1: string, d2: string): { [x: string]: string } => {
