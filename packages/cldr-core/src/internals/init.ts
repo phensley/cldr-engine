@@ -33,14 +33,16 @@ export class InternalsImpl implements Internals {
   readonly numbers: NumberInternals;
   readonly units: UnitInternals;
 
-  constructor(config: SchemaConfig, version: string, debug: boolean = false, patternCacheSize: number = 50) {
+  constructor(
+    config: SchemaConfig, version: string, debug: boolean = false,
+    skipChecksum: boolean = false, patternCacheSize: number = 50) {
     // TODO: may move this up depending on how integration evolves
     this.config = config;
     const code = new CodeBuilder(config);
     const origin = code.origin();
     this.indices = origin.indices;
     this.schema = buildSchema(origin, debug);
-    this.checksum = checksumIndices(version, origin.indices);
+    this.checksum = skipChecksum ? '' : checksumIndices(version, origin.indices);
 
     this.calendars = new CalendarInternalsImpl(this, patternCacheSize);
     this.dateFields = new DateFieldInternalsImpl(this);

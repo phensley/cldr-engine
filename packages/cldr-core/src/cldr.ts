@@ -225,6 +225,12 @@ export interface CLDROptions {
    * Size of internal pattern caches.
    */
   patternCacheSize?: number;
+
+  /**
+   * Skip calculting the schema checksums. The checksum detects when the schema
+   * does not match the loaded resource pack and throws an error.
+   */
+  skipChecksum?: boolean;
 }
 
 /**
@@ -250,7 +256,7 @@ export class CLDRFramework {
     this.asyncLoader = options.asyncLoader;
     this._config = options.config || CLDRFramework.defaultConfig || EMPTY_CONFIG;
     const patternCacheSize = options.patternCacheSize || 200;
-    this.internals = new InternalsImpl(this._config, VERSION, options.debug, patternCacheSize);
+    this.internals = new InternalsImpl(this._config, VERSION, options.debug, options.skipChecksum, patternCacheSize);
   }
 
   /**
@@ -362,7 +368,7 @@ export class CLDRFramework {
    * Verify the resource pack is compatible with the schema config checksum.
    */
   protected check(pack: Pack): void {
-    if (pack.checksum !== this.internals.checksum) {
+    if (!this.options.skipChecksum && pack.checksum !== this.internals.checksum) {
       throw new Error(Messages.CHECKSUM);
     }
   }
