@@ -6,13 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [UNRELEASED]
 
+### Added
+
+- Method on `LanguageResolver` to substitute aliases in a language tag
+- `LocaleMatcher` constructor now accepts an options parameter.
+  - Option `resolve: boolean` can be used to disable locale resolution if the tags have already been fully resolved.
+
 ### Fixed/Changed
 
 - Optimizations:
   - Construction of the available locales array on first access.
   - Indices used for language resolution and language aliases.
   - Conversion of language tags to "fast tag" representation internally.
-  - Locale matcher will substitute aliases if it sees all subtags are present on a language tag.
+  - Locale matcher will substitute aliases instead of resolving if it sees all subtags are present on a language tag.
+  - Pre-encode paradigm locales map to avoid going through resolver.
 
 ## [1.0.2]
 

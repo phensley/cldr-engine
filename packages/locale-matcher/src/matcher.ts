@@ -11,18 +11,6 @@ const U = undefined;
 
 const numberCmp = (a: number, b: number) => a === b ? 0 : a < b ? -1 : 1;
 
-// Mapping of paradigm locales to their relative position.
-type ParadigmMap = { [x: string]: number };
-let paradigmLocaleMap: ParadigmMap | undefined;
-
-const init = () => {
-  paradigmLocaleMap = paradigmLocales.reduce((o: ParadigmMap, k: string, i: number) => {
-    const c = LanguageResolver.resolve(k).compact();
-    o[c] = i;
-    return o;
-  }, {});
-};
-
 class Entry implements Locale {
   readonly compact: string;
   constructor(readonly id: string, readonly tag: LanguageTag) {
@@ -30,39 +18,58 @@ class Entry implements Locale {
   }
 }
 
+type LangTag = LanguageTag | string;
+
 /**
  * Flatten and split the string or array into a list of matcher entries.
  */
-const parse = (locales: string | string[] = []): Entry[] => {
-  let raw: string[];
+const parse = (locales: string | (Locale | LangTag)[] = [], options: LocaleMatcherOptions = {}): Entry[] => {
+  let raw: LangTag[];
   if (typeof locales === 'string') {
     raw = locales.split(TAG_SEP);
   } else {
-    raw = locales.reduce((a: string[], e: string): string[] => {
-      const tmp = e.split(TAG_SEP);
-      return a.concat(tmp);
-    }, []);
+    raw = locales.reduce((a: LangTag[], e: (Locale | LanguageTag | string)): LangTag[] => {
+      if (typeof e === 'string') {
+        const tmp = e.split(TAG_SEP);
+        return a.concat(tmp);
+      }
+      if ((e as Locale).tag instanceof LanguageTag) {
+        a.push((e as Locale).tag);
+      } else if (e instanceof LanguageTag) {
+        a.push(e);
+      }
+      return a;
+    }, [] as LangTag[]);
   }
 
   const result: Entry[] = [];
   const len = raw.length;
   for (let i = 0; i < len; i++) {
-    const id = raw[i].trim();
-    const tag = parseLanguageTag(id);
+    const e = raw[i];
+    let id: string;
+    let tag: LanguageTag;
+    if (e instanceof LanguageTag) {
+      tag = e;
+      id = tag.compact();
+    } else {
+      id = e.trim();
+      tag = parseLanguageTag(id);
+    }
 
     // This code preserves the 'und' undefined locale. If we resolve it, adding
     // likely subtags will expand it to 'en-Latn-US'.
 
+    const resolve = options.resolve !== false;
     const l = tag.hasLanguage();
     const s = tag.hasScript();
     const r = tag.hasRegion();
 
     if (l && s && r) {
       // If all subtags are present, substitute aliases
-      result.push(new Entry(id, LanguageResolver.substituteAliases(tag)));
+      result.push(new Entry(id, resolve ? LanguageResolver.substituteAliases(tag) : tag));
     } else if (l || s || r) {
       // If at least one subtag is present, resolve
-      result.push(new Entry(id, LanguageResolver.resolve(tag)));
+      result.push(new Entry(id, resolve ? LanguageResolver.resolve(tag) : tag));
     } else {
       // Preserve undefined core fields, but include input's extensions
       result.push(new Entry(id, new LanguageTag(
@@ -90,6 +97,14 @@ export interface LocaleMatch {
   distance: number;
 }
 
+export interface LocaleMatcherOptions {
+
+  /**
+   * Resolve language tags. (default true)
+   */
+  resolve?: boolean;
+}
+
 /**
  * Given a list of supported locales, and a list of a user's desired locales
  * (sorted in the order of preference, descending), returns the supported
@@ -109,8 +124,8 @@ export class LocaleMatcher {
   private default: Entry;
   private exactMap: { [x: string]: Entry[] } = {};
 
-  constructor(supportedLocales: string | string[]) {
-    this.supported = parse(supportedLocales);
+  constructor(supportedLocales: string | (Locale | LanguageTag | string)[], options: LocaleMatcherOptions = {}) {
+    this.supported = parse(supportedLocales, options);
     this.count = this.supported.length;
     if (!this.count) {
       throw new Error('LocaleMatcher expects at least one supported locale');
@@ -118,10 +133,6 @@ export class LocaleMatcher {
 
     // The first locale in the list is used as the default.
     this.default = this.supported[0];
-
-    if (!paradigmLocaleMap) {
-      init();
-    }
 
     this.supported.sort((a: Entry, b: Entry): number => {
       // Keep default tag at the front.
@@ -134,8 +145,8 @@ export class LocaleMatcher {
       }
 
       // Sort all paradigm locales before non-paradigms.
-      const pa = paradigmLocaleMap![a.compact];
-      const pb = paradigmLocaleMap![b.compact];
+      const pa = paradigmLocales[a.compact];
+      const pb = paradigmLocales[b.compact];
       if (pa !== undefined) {
         return pb === U ? -1 : numberCmp(pa, pb);
       } else if (pb !== undefined) {

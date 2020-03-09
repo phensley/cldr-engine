@@ -1,3 +1,4 @@
+import { parseLanguageTag } from '@phensley/language-tag';
 import { LocaleMatch, LocaleMatcher } from '../src';
 import { loadMatchCases } from './util';
 
@@ -53,6 +54,15 @@ test('constructor args', () => {
   m = matcher.match('en-AU');
   expect(m.distance).toEqual(3);
   expect(m.locale.id).toEqual('en_GB');
+
+  // Parsing will correct the subtag separator
+  matcher = new LocaleMatcher([parseLanguageTag('en_GB'), parseLanguageTag('pt_AR')]);
+  m = matcher.match('en-AU');
+  expect(m.distance).toEqual(3);
+  expect(m.locale.id).toEqual('en-GB');
+
+  m = matcher.match('pt');
+  expect(m.distance).toEqual(4);
 });
 
 test('extensions', () => {
