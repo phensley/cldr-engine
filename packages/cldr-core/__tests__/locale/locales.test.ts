@@ -1,11 +1,11 @@
-import { availableLocales, LanguageResolver, LanguageTag } from '../../src';
+import { availableLocales, LanguageResolver, LanguageTag, Locale } from '../../src';
 
 test('available locales', () => {
   let locales = availableLocales();
   let tag: LanguageTag;
   for (const id of ['en', 'zh', 'ko', 'fr', 'ar', 'en-GB', 'de', 'es-419']) {
     tag = LanguageResolver.resolve(id);
-    const locale = { id, tag };
+    const locale: Locale = { id, tag };
     expect(locales).toContainEqual(locale);
   }
 

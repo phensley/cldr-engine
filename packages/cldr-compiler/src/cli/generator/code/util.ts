@@ -8,7 +8,7 @@ export const HEADER = `\
 `;
 
 export const NOLINT = '/* tslint:disable-next-line */\n';
-export const NOLINT_MAXLINE = '/* tslint:disable:max-line-length */\n';
+export const NOLINT_MAXLINE = '/* tslint:disable:max-line-length whitespace */\n';
 
 const FORMAT_OPTIONS: Options = {
   parser: 'typescript',
@@ -20,7 +20,7 @@ const FORMAT_OPTIONS: Options = {
 export class Code {
   private constructor(
     readonly path: string[],
-    readonly source: string) {}
+    readonly source: string) { }
 
   static core(path: string[], source: string): Code {
     return new Code(['packages', 'cldr-core', 'src', ...path], source);
@@ -169,33 +169,33 @@ export const escapeString = (raw: string, delim: string = '\'') => {
   for (let i = 0; i < len; i++) {
     const ch = raw[i];
     switch (ch) {
-    case '"':
-    case '\'':
-    case '`':
-      esc += ch === delim ? '\\' + ch : ch;
-      break;
+      case '"':
+      case '\'':
+      case '`':
+        esc += ch === delim ? '\\' + ch : ch;
+        break;
 
-    case '\\':
-    case '\b':
-    case '\f':
-    case '\n':
-    case '\r':
-    case '\t':
-    case '\v':
-      esc += invisibles[ch];
-      break;
+      case '\\':
+      case '\b':
+      case '\f':
+      case '\n':
+      case '\r':
+      case '\t':
+      case '\v':
+        esc += invisibles[ch];
+        break;
 
-    default: {
-      // Check range and escape hex.
-      const code = raw.charCodeAt(i);
-      if (isControl0(code) || isControl1(code) || isLatin1Invisible(code)) {
-        esc += `\\x${escapeHex(code, 2)}`;
-      } else if (code > 0xff) {
-        esc += `\\u${escapeHex(code, 4)}`;
-      } else {
-        esc += ch;
+      default: {
+        // Check range and escape hex.
+        const code = raw.charCodeAt(i);
+        if (isControl0(code) || isControl1(code) || isLatin1Invisible(code)) {
+          esc += `\\x${escapeHex(code, 2)}`;
+        } else if (code > 0xff) {
+          esc += `\\u${escapeHex(code, 4)}`;
+        } else {
+          esc += ch;
+        }
       }
-    }
     }
   }
   return esc + delim;
