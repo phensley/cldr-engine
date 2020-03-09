@@ -11,7 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Optimizations:
   - Construction of the available locales array on first access.
   - Indices used for language resolution and language aliases.
-  - Conversion of language tags to "fast tag" representation internally
+  - Conversion of language tags to "fast tag" representation internally.
+  - Locale matcher will substitute aliases if it sees all subtags are present on a language tag.
 
 ## [1.0.2]
 

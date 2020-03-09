@@ -221,6 +221,17 @@ const initAlias = () => {
 export class LanguageResolver {
 
   /**
+   * Substitute aliases only.
+   */
+  static substituteAliases(real: string | LanguageTag): LanguageTag {
+    const tag = typeof real === 'string' ? parseLanguageTag(real) : real;
+    const fast = fastTag(tag);
+    substituteLanguageAliases(fast);
+    substituteRegionAliases(fast);
+    return returnTag(tag, fast);
+  }
+
+  /**
    * Substitute all relevant aliases, and then add likely subtags.
    */
   static resolve(real: string | LanguageTag): LanguageTag {

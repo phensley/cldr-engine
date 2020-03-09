@@ -50,9 +50,18 @@ const parse = (locales: string | string[] = []): Entry[] => {
     const id = raw[i].trim();
     const tag = parseLanguageTag(id);
 
-    // Preserve 'und' undefined locale. If we resolve it, adding
+    // This code preserves the 'und' undefined locale. If we resolve it, adding
     // likely subtags will expand it to 'en-Latn-US'.
-    if (tag.hasLanguage() || tag.hasScript() || tag.hasRegion()) {
+
+    const l = tag.hasLanguage();
+    const s = tag.hasScript();
+    const r = tag.hasRegion();
+
+    if (l && s && r) {
+      // If all subtags are present, substitute aliases
+      result.push(new Entry(id, LanguageResolver.substituteAliases(tag)));
+    } else if (l || s || r) {
+      // If at least one subtag is present, resolve
       result.push(new Entry(id, LanguageResolver.resolve(tag)));
     } else {
       // Preserve undefined core fields, but include input's extensions
