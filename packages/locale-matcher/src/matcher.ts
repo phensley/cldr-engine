@@ -97,6 +97,11 @@ export interface LocaleMatch {
   distance: number;
 }
 
+/**
+ * Options for the LocaleMatcher.
+ *
+ * @public
+ */
 export interface LocaleMatcherOptions {
 
   /**
