@@ -19,7 +19,7 @@ export const stringToObject = (raw: string, d1: string, d2: string): { [x: strin
 /**
  * @internal
  */
-export const leftPad = (s: string | number, w: number): string => {
+export const leftPad = (s: number | string, w: number): string => {
   s = typeof s === 'number' ? String(s) : s;
   let d = w - s.length;
   let r = '';

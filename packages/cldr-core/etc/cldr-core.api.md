@@ -444,6 +444,7 @@ export interface CLDROptions {
     loader?: (language: string) => any;
     packCacheSize?: number;
     patternCacheSize?: number;
+    skipChecksum?: boolean;
 }
 
 export { coerceDecimal }
@@ -832,7 +833,7 @@ export interface Internals {
 //
 // @internal (undocumented)
 export class InternalsImpl implements Internals {
-    constructor(config: SchemaConfig, version: string, debug?: boolean, patternCacheSize?: number);
+    constructor(config: SchemaConfig, version: string, debug?: boolean, skipChecksum?: boolean, patternCacheSize?: number);
     // (undocumented)
     readonly calendars: CalendarInternals;
     // (undocumented)
@@ -1448,7 +1449,7 @@ export const enum TimePeriodFieldFlag {
 // Warning: (ae-internal-missing-underscore) The name "timePeriodFieldFlags" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
-export const timePeriodFieldFlags: (fields: ("day" | "hour" | "minute" | "month" | "second" | "year" | "week" | "millis")[]) => number;
+export const timePeriodFieldFlags: (fields: ("year" | "month" | "week" | "day" | "hour" | "minute" | "second" | "millis")[]) => number;
 
 // @public (undocumented)
 export interface TimeZoneInfo {
