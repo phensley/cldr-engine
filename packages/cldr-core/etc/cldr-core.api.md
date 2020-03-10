@@ -1422,7 +1422,7 @@ export interface TimePeriod {
 }
 
 // @public (undocumented)
-export type TimePeriodField = keyof TimePeriod;
+export type TimePeriodField = 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'millis';
 
 // Warning: (ae-internal-missing-underscore) The name "TimePeriodFieldFlag" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -1449,7 +1449,7 @@ export const enum TimePeriodFieldFlag {
 // Warning: (ae-internal-missing-underscore) The name "timePeriodFieldFlags" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
-export const timePeriodFieldFlags: (fields: ("year" | "month" | "week" | "day" | "hour" | "minute" | "second" | "millis")[]) => number;
+export const timePeriodFieldFlags: (fields: TimePeriodField[]) => number;
 
 // @public (undocumented)
 export interface TimeZoneInfo {
