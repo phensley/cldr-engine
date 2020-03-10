@@ -9,7 +9,15 @@ import {
   Vector2
 } from '@phensley/cldr-schema';
 
-import { leftPad } from '@phensley/cldr-core';
+const leftPad = (s: number | string, w: number): string => {
+  s = typeof s === 'number' ? String(s) : s;
+  let d = w - s.length;
+  let r = '';
+  while (d-- > 0) {
+    r += ' ';
+  }
+  return r + s;
+};
 
 export interface Encoder {
   encode(name: string): number;
@@ -37,31 +45,31 @@ export class EncoderMachine {
 
   private origin!: Origin;
 
-  constructor(private encoder: Encoder, private verbose: boolean) {}
+  constructor(private encoder: Encoder, private verbose: boolean) { }
 
   encode(obj: any, inst: Instruction): void {
     switch (inst.type) {
-    case 'digits':
-      this.encodeDigits(obj, inst);
-      break;
-    case 'field':
-      this.encodeField(obj, inst);
-      break;
-    case 'origin':
-      this.encodeOrigin(obj, inst);
-      break;
-    case 'scope':
-      this.encodeScope(obj, inst);
-      break;
-    case 'scopemap':
-      this.encodeScopeMap(obj, inst);
-      break;
-    case 'vector1':
-      this.encodeVector1(obj, inst);
-      break;
-    case 'vector2':
-      this.encodeVector2(obj, inst);
-      break;
+      case 'digits':
+        this.encodeDigits(obj, inst);
+        break;
+      case 'field':
+        this.encodeField(obj, inst);
+        break;
+      case 'origin':
+        this.encodeOrigin(obj, inst);
+        break;
+      case 'scope':
+        this.encodeScope(obj, inst);
+        break;
+      case 'scopemap':
+        this.encodeScopeMap(obj, inst);
+        break;
+      case 'vector1':
+        this.encodeVector1(obj, inst);
+        break;
+      case 'vector2':
+        this.encodeVector2(obj, inst);
+        break;
     }
   }
 

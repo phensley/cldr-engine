@@ -9,5 +9,4 @@ export * from './systems';
 
 export * from './cldr';
 
-export { leftPad } from './utils/string';
 export { checksumIndices } from './resource/checksum';
