@@ -49,8 +49,8 @@ const likelyGet = (query: FastTag): FastTag | undefined => {
   if (typeof n3 === 'string') {
     // On first access, convert to an array representation
     const p = n3.split('-').map((v, i) => {
-      if (!v && i === 0) {
-        return lang;
+      if (!v) {
+        return i === 0 ? lang : region;
       }
       if (i === 1) {
         return likelySubtags._[Number(v)];

@@ -97,6 +97,7 @@ const buildSubtags = (likely: any) => {
   Object.keys(likely).sort().forEach(k => {
     const key = fastTag(parseLanguageTag(k));
     const val = fastTag(parseLanguageTag(likely[k]));
+
     const map = putMap(putMap(index, key[Tag.LANGUAGE]), key[Tag.SCRIPT]);
     const script = val[Tag.SCRIPT];
     let scriptid = scripts.indexOf(script as string);
@@ -105,7 +106,9 @@ const buildSubtags = (likely: any) => {
       scripts.push(script as string);
     }
     val[Tag.SCRIPT] = scriptid;
-    map[key[Tag.REGION]] = val.map(t => t === key[Tag.LANGUAGE] ? '' : t).join('-');
+    const _val = val.map((t, i) =>
+      i === Tag.LANGUAGE && t === key[Tag.LANGUAGE] || i === Tag.REGION && t === key[Tag.REGION] ? '' : t).join('-');
+    map[key[Tag.REGION]] = _val;
   });
   index._ = scripts;
   return index;
