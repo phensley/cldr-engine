@@ -103,66 +103,66 @@ Thursday, March 15, 2018
   log(cldr.Calendars.formatDate({ date, zoneId }, { time: <span class="hljs-string">'short'</span> })));
 </code></pre>
 <pre class="output">
-8:34 AM
 12:34 PM
-9:34 PM
+4:34 PM
+1:34 AM
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { time: <span class="hljs-string">'medium'</span> })));
 </code></pre>
 <pre class="output">
-8:34:56 AM
 12:34:56 PM
-9:34:56 PM
+4:34:56 PM
+1:34:56 AM
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { time: <span class="hljs-string">'long'</span> })));
 </code></pre>
 <pre class="output">
-8:34:56 AM EDT
-12:34:56 PM GMT
-9:34:56 PM GMT+9
+12:34:56 PM EDT
+4:34:56 PM GMT
+1:34:56 AM GMT+9
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { time: <span class="hljs-string">'full'</span> })));
 </code></pre>
 <pre class="output">
-8:34:56 AM Eastern Daylight Time
-12:34:56 PM Greenwich Mean Time
-9:34:56 PM Japan Standard Time
+12:34:56 PM Eastern Daylight Time
+4:34:56 PM Greenwich Mean Time
+1:34:56 AM Japan Standard Time
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="dates-and-times"></a><a href="#dates-and-times" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dates and times</h2>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { datetime: <span class="hljs-string">'short'</span> )}));
 </code></pre>
 <pre class="output">
-3/15/18, 8:34 AM
 3/15/18, 12:34 PM
-3/15/18, 9:34 PM
+3/15/18, 4:34 PM
+3/16/18, 1:34 AM
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { datetime: <span class="hljs-string">'medium'</span> })));
 </code></pre>
 <pre class="output">
-Mar 15, 2018, 8:34:56 AM
 Mar 15, 2018, 12:34:56 PM
-Mar 15, 2018, 9:34:56 PM
+Mar 15, 2018, 4:34:56 PM
+Mar 16, 2018, 1:34:56 AM
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { datetime: <span class="hljs-string">'long'</span> })));
 </code></pre>
 <pre class="output">
-March 15, 2018 at 8:34:56 AM EDT
-March 15, 2018 at 12:34:56 PM GMT
-March 15, 2018 at 9:34:56 PM GMT+9
+March 15, 2018 at 12:34:56 PM EDT
+March 15, 2018 at 4:34:56 PM GMT
+March 16, 2018 at 1:34:56 AM GMT+9
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { datetime: <span class="hljs-string">'full'</span> })));
 </code></pre>
 <pre class="output">
-Thursday, March 15, 2018 at 8:34:56 AM Eastern Daylight Time
-Thursday, March 15, 2018 at 12:34:56 PM Greenwich Mean Time
-Thursday, March 15, 2018 at 9:34:56 PM Japan Standard Time
+Thursday, March 15, 2018 at 12:34:56 PM Eastern Daylight Time
+Thursday, March 15, 2018 at 4:34:56 PM Greenwich Mean Time
+Friday, March 16, 2018 at 1:34:56 AM Japan Standard Time
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="date-skeletons"></a><a href="#date-skeletons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Date skeletons</h2>
 <pre><code class="hljs css language-typescript">log(cldr.Calendars.formatDate({ date }, { skeleton: <span class="hljs-string">'yMd'</span> }));
@@ -190,81 +190,81 @@ Thursday, March 15, 2018
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'hm'</span> })));
 </code></pre>
 <pre class="output">
-8:34 AM
 12:34 PM
-9:34 PM
+4:34 PM
+1:34 AM
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'hmsz'</span> })));
 </code></pre>
 <pre class="output">
-8:34:56 AM EDT
-12:34:56 PM GMT
-9:34:56 PM GMT+9
+12:34:56 PM EDT
+4:34:56 PM GMT
+1:34:56 AM GMT+9
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'hmszzzz'</span> })));
 </code></pre>
 <pre class="output">
-8:34:56 AM Eastern Daylight Time
-12:34:56 PM Greenwich Mean Time
-9:34:56 PM Japan Standard Time
+12:34:56 PM Eastern Daylight Time
+4:34:56 PM Greenwich Mean Time
+1:34:56 AM Japan Standard Time
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'hmsVVVV'</span> })));
 </code></pre>
 <pre class="output">
-8:34:56 AM New York Time
-12:34:56 PM London Time
-9:34:56 PM Tokyo Time
+12:34:56 PM New York Time
+4:34:56 PM London Time
+1:34:56 AM Tokyo Time
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'hmsvvvv'</span> })));
 </code></pre>
 <pre class="output">
-8:34:56 AM Eastern Time
-12:34:56 PM GMT
-9:34:56 PM Japan Time
+12:34:56 PM Eastern Time
+4:34:56 PM GMT
+1:34:56 AM Japan Time
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="date-time-skeletons"></a><a href="#date-time-skeletons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Date time skeletons</h2>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'yMdhm'</span> })));
 </code></pre>
 <pre class="output">
-3/15/2018, 8:34 AM
 3/15/2018, 12:34 PM
-3/15/2018, 9:34 PM
+3/15/2018, 4:34 PM
+3/16/2018, 1:34 AM
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'yMMMdhmsz'</span> })));
 </code></pre>
 <pre class="output">
-Mar 15, 2018, 8:34:56 AM EDT
-Mar 15, 2018, 12:34:56 PM GMT
-Mar 15, 2018, 9:34:56 PM GMT+9
+Mar 15, 2018, 12:34:56 PM EDT
+Mar 15, 2018, 4:34:56 PM GMT
+Mar 16, 2018, 1:34:56 AM GMT+9
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'EyMMMMdhmszzzz'</span> })));
 </code></pre>
 <pre class="output">
-Thu, March 15, 2018 at 8:34:56 AM Eastern Daylight Time
-Thu, March 15, 2018 at 12:34:56 PM Greenwich Mean Time
-Thu, March 15, 2018 at 9:34:56 PM Japan Standard Time
+Thu, March 15, 2018 at 12:34:56 PM Eastern Daylight Time
+Thu, March 15, 2018 at 4:34:56 PM Greenwich Mean Time
+Fri, March 16, 2018 at 1:34:56 AM Japan Standard Time
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'yMMMdhmsVVVV'</span> })));
 </code></pre>
 <pre class="output">
-Mar 15, 2018, 8:34:56 AM New York Time
-Mar 15, 2018, 12:34:56 PM London Time
-Mar 15, 2018, 9:34:56 PM Tokyo Time
+Mar 15, 2018, 12:34:56 PM New York Time
+Mar 15, 2018, 4:34:56 PM London Time
+Mar 16, 2018, 1:34:56 AM Tokyo Time
 </pre>
 <pre><code class="hljs css language-typescript">zones.forEach(<span class="hljs-function"><span class="hljs-params">zoneId</span> =&gt;</span>
   log(cldr.Calendars.formatDate({ date, zoneId }, { skeleton: <span class="hljs-string">'yMMMMdhmsvvvv'</span> })));
 </code></pre>
 <pre class="output">
-March 15, 2018 at 8:34:56 AM Eastern Time
-March 15, 2018 at 12:34:56 PM GMT
-March 15, 2018 at 9:34:56 PM Japan Time
+March 15, 2018 at 12:34:56 PM Eastern Time
+March 15, 2018 at 4:34:56 PM GMT
+March 16, 2018 at 1:34:56 AM Japan Time
 </pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/next/doc-calendar-overview"><span class="arrow-prev">← </span><span>Calendar Overview</span></a><a class="docs-next button" href="/cldr-engine/docs/en/next/doc-math"><span>Arbitrary Precision</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#dates">Dates</a></li><li><a href="#times">Times</a></li><li><a href="#dates-and-times">Dates and times</a></li><li><a href="#date-skeletons">Date skeletons</a></li><li><a href="#time-skeletons">Time skeletons</a></li><li><a href="#date-time-skeletons">Date time skeletons</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>
