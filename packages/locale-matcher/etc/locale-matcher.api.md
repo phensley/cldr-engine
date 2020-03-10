@@ -15,10 +15,14 @@ export interface LocaleMatch {
 
 // @public
 export class LocaleMatcher {
-    // Warning: (ae-forgotten-export) The symbol "LocaleMatcherOptions" needs to be exported by the entry point index.d.ts
     constructor(supportedLocales: string | (Locale | LanguageTag | string)[], options?: LocaleMatcherOptions);
     match(desiredLocales: string | string[], threshold?: number): LocaleMatch;
     }
+
+// @public
+export interface LocaleMatcherOptions {
+    resolve?: boolean;
+}
 
 
 // (No @packageDocumentation comment for this package)
