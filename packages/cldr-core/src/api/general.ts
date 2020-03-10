@@ -10,7 +10,8 @@ import {
 import { MessageFormatter, MessageFormatterOptions } from '@phensley/messageformat';
 import { Part } from '@phensley/decimal';
 
-import { parseLanguageTag, LanguageResolver, LanguageTag, Locale } from '../locale';
+import { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
+import { LanguageResolver, Locale } from '@phensley/locale';
 import { DisplayNameOptions, ListPatternType, MeasurementCategory, MeasurementSystem } from '../common';
 import { Bundle } from '../resource';
 import { GeneralInternals, Internals } from '../internals';

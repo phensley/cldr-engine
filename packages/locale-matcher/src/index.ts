@@ -1,1 +1,1 @@
-export { LocaleMatch, LocaleMatcher } from './matcher';
+export { LocaleMatch, LocaleMatcher, LocaleMatcherOptions } from './matcher';

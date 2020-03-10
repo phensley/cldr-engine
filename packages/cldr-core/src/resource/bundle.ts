@@ -1,6 +1,6 @@
 import { PrimitiveBundle } from '@phensley/cldr-types';
 import { pluralRules, PluralRules } from '@phensley/plurals';
-import { LanguageTag } from '../locale';
+import { LanguageTag } from '@phensley/language-tag';
 
 /**
  * @internal

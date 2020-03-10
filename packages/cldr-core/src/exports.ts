@@ -37,6 +37,22 @@ export {
 } from '@phensley/decimal';
 
 export {
+  parseLanguageTag,
+  LanguageTag
+} from '@phensley/language-tag';
+
+export {
+  LanguageResolver,
+  Locale
+} from '@phensley/locale';
+
+export {
+  LocaleMatch,
+  LocaleMatcher,
+  LocaleMatcherOptions
+} from '@phensley/locale-matcher';
+
+export {
   buildMessageMatcher,
   parseMessagePattern,
   DefaultMessageArgConverter,

@@ -22,11 +22,17 @@ import {
 
 import {
   availableLocales,
-  parseLanguageTag,
-  LanguageResolver,
-  LanguageTag,
-  Locale
 } from './locale';
+
+import {
+  parseLanguageTag,
+  LanguageTag,
+} from '@phensley/language-tag';
+
+import {
+  LanguageResolver,
+  Locale
+} from '@phensley/locale';
 
 import {
   Bundle,

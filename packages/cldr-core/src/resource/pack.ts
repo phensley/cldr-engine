@@ -1,4 +1,5 @@
-import { LanguageResolver, LanguageTag } from '../locale';
+import { LanguageTag } from '@phensley/language-tag';
+import { LanguageResolver } from '@phensley/locale';
 import { Bundle, ExceptionIndex, StringBundle } from './bundle';
 import { numarray } from '../utils/string';
 

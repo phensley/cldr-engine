@@ -38,7 +38,8 @@ import {
 } from '../common';
 
 import { Bundle } from '../resource';
-import { LanguageTag, Locale } from '../locale';
+import { LanguageTag } from '@phensley/language-tag';
+import { Locale } from '@phensley/locale';
 
 import {
   BuddhistDate,
