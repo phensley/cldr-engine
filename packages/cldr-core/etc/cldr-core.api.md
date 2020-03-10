@@ -34,6 +34,7 @@ import { LineOrderType } from '@phensley/cldr-types';
 import { Locale } from '@phensley/locale';
 import { LocaleMatch } from '@phensley/locale-matcher';
 import { LocaleMatcher } from '@phensley/locale-matcher';
+import { LocaleMatcherOptions } from '@phensley/locale-matcher';
 import { LRU } from '@phensley/cldr-utils';
 import { MathContext } from '@phensley/decimal';
 import { MessageArg } from '@phensley/messageformat';
@@ -894,11 +895,6 @@ export { LanguageResolver }
 
 export { LanguageTag }
 
-// Warning: (ae-internal-missing-underscore) The name "leftPad" should be prefixed with an underscore because the declaration is marked as @internal
-//
-// @internal (undocumented)
-export const leftPad: (s: string | number, w: number) => string;
-
 export { LineOrderType }
 
 // @public (undocumented)
@@ -909,6 +905,8 @@ export { Locale }
 export { LocaleMatch }
 
 export { LocaleMatcher }
+
+export { LocaleMatcherOptions }
 
 export { MathContext }
 
