@@ -202,7 +202,7 @@ export class LocaleMatcher {
       for (let j = 0; j < this.count; j++) {
         const supported = this.supported[j];
         const distance = getDistance(desired.tag, supported.tag, threshold);
-        if (bestDistance === U || distance < bestDistance) {
+        if (distance < bestDistance) {
           bestDistance = distance;
           bestMatch = supported;
           bestDesired = desired;
