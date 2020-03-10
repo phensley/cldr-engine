@@ -1,7 +1,7 @@
 /**
  * @public
  */
-export type TimePeriodField = keyof TimePeriod;
+export type TimePeriodField = 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'millis';
 
 /**
  * @internal
