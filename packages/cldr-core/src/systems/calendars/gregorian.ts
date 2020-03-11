@@ -101,6 +101,7 @@ export class GregorianDate extends CalendarDate {
 
       // Check if there is a fractional month part, and if so add the number
       // of the days in the next month multiplied by the fraction
+      /* istanbul ignore if */
       if (d !== 0) {
         // note: the 'month' parameter must always be <= # months in the calendar
         // year, so <= 12 in this case.
