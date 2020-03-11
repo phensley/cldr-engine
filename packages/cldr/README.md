@@ -10,6 +10,23 @@ Internationalization in Typescript with Unicode CLDR, batteries included
 - [CodeSandbox example](https://codesandbox.io/s/qqr1rl40r6) can be used to experiment, report bugs, etc.
 - [Demonstration app](https://phensley.github.io/cldr-engine-react-demo/) provides an example using React and Redux. ([source code](https://github.com/phensley/cldr-engine-react-demo))
 
+## Versioning
+
+- `1.0` release is stable.
+- `1.1` release will upgrade to CLDR v37 when available. At that point `1.0` will receive bug fixes only.
+- `2.0` is reserved to make major improvements in the library in several areas TBD.
+
+Due to this library's dependence on CLDR data, it uses a **modified semantic versioning** scheme `[MAJOR][MINOR][PATCH]`:
+
+- **PATCH** - Bug fixes and new small features, guaranteed backwards-compatible.
+- **MINOR** - [New CLDR releases](http://cldr.unicode.org/index/downloads) are incorporated.
+  - High compatibility. Existing API should not break except where unavoidable due to CLDR changes.
+  - Formatting may differ due to changes in the underlying formatting patterns.
+  - Values of certain types like [UnitType](https://phensley.github.io/cldr-engine/docs/en/api-unittype) may change.
+  - New features that are larger, or derive from new CLDR data, will bump the minor version.
+  - All implications for compatibility will be declared in the changelog.
+- **MAJOR** - Breaking backwards-compatibility, major reorganization of the library.
+
 ## Install
 
 Install the [NPM package](https://www.npmjs.com/package/@phensley/cldr):
