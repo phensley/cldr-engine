@@ -141,6 +141,21 @@ test('arg substitution', () => {
   ]]);
 });
 
+test('arg substitution interior', () => {
+  const c = parse('{0 plural one { {A # B} }}');
+  expect(c).toEqual([MessageOpType.PLURAL, [0], 0, PluralNumberType.CARDINAL, [
+    [PluralChoiceType.CATEGORY, 'one', [MessageOpType.BLOCK, [
+      [MessageOpType.TEXT, ' '],
+      [MessageOpType.BLOCK, [
+        [MessageOpType.TEXT, 'A '],
+        [MessageOpType.ARGSUB],
+        [MessageOpType.TEXT, ' B']
+      ]],
+      [MessageOpType.TEXT, ' ']
+    ]]],
+  ]]);
+});
+
 test('hidden', () => {
   let c: MessageCode;
 

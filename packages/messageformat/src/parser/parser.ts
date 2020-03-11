@@ -105,7 +105,7 @@ class MessagePatternParser {
             const child = this.inner({ t: r.t, s: r.s + 1, e: k });
             if (!child) {
               // If we're not in the outermost scope, push text
-              if (argsub) {
+              if (argsub !== undefined && r.s + 1 !== k) {
                 n.push(textarg(str.substring(r.s + 1, k), argsub));
               }
             } else {
