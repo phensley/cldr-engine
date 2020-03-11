@@ -378,7 +378,7 @@ export class Decimal {
       v = v.shiftleft(-shift);
     }
 
-    const [q, rem] = divide(u.data, v.data, true);
+    const [q, rem] = divide(u.data, v.data);
 
     w = Decimal.fromRaw(sign, exp, q, 0);
     w.trim();
@@ -441,7 +441,7 @@ export class Decimal {
       }
     }
 
-    const [qd, rd] = divide(u.data, v.data, true);
+    const [qd, rd] = divide(u.data, v.data);
 
     const q = new Decimal(ZERO);
     q.data = qd;
@@ -977,7 +977,7 @@ export class Decimal {
     m--;
 
     // Divmod each element of u, copying the hi/lo parts to w.
-    for (; m >= 0; m--, n--) {
+    for (; m >= 0; m-- , n--) {
       hi = (data[m] / powhi) | 0;
       lo = data[m] - hi * powhi;
       w.data[n] = powlo * loprev + hi;
@@ -1046,7 +1046,7 @@ export class Decimal {
         rest = allzero(data, q) === 0 ? 1 : 0;
       }
 
-      for (j = 0, i = q + 1; i < data.length; i++, j++) {
+      for (j = 0, i = q + 1; i < data.length; i++ , j++) {
         const [hi, lo] = div.pow10(data[i], r);
         w.data[j] = ph * lo + hiprev;
         hiprev = hi;

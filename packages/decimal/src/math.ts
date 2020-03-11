@@ -49,10 +49,10 @@ export const subtract = (u: number[], v: number[]): number[] => {
 
   // S2. Subtract digits
   while (j < n) {
-     const z = u[j] - v[j] - k;
-     w[j] = z < 0 ? z + Constants.RADIX : z;
-     // k is set to 1 or 0, indicating a borrow
-     k = z < 0 ? 1 : 0;
+    const z = u[j] - v[j] - k;
+    w[j] = z < 0 ? z + Constants.RADIX : z;
+    // k is set to 1 or 0, indicating a borrow
+    k = z < 0 ? 1 : 0;
     j++;
 
     // S3. Loop on j
@@ -135,7 +135,7 @@ export const multiplyword = (w: number[], u: number[], n: number, v: number): vo
  * Knuth TAoCP 4.3.1 Algorithm D
  * Division of nonnegative integer u by v, returning the quotient q and remainder r.
  */
-export const divide = (uc: number[], vc: number[], remainder: boolean): [number[], number[]] => {
+export const divide = (uc: number[], vc: number[]): [number[], number[]] => {
   const n = vc.length;
   const m = uc.length - n;
   if (n === 1) {
@@ -228,18 +228,15 @@ export const divide = (uc: number[], vc: number[], remainder: boolean): [number[
   }
 
   // D8. Unnormalize remainder.
-  if (remainder) {
-    k = 0;
-    const r = new Array(n);
-    r.fill(0);
-    for (let i = n - 1; i >= 0; i--) {
-      p = u[i] + (k * Constants.RADIX);
-      r[i] = (p / d) | 0;
-      k = p - r[i] * d;
-    }
-    return [q, r];
+  k = 0;
+  const r = new Array(n);
+  r.fill(0);
+  for (let i = n - 1; i >= 0; i--) {
+    p = u[i] + (k * Constants.RADIX);
+    r[i] = (p / d) | 0;
+    k = p - r[i] * d;
   }
-  return [q, []];
+  return [q, r];
 };
 
 /**
