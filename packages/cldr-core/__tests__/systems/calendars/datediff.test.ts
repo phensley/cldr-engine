@@ -1,4 +1,4 @@
-import { CalendarDate, GregorianDate, TimePeriod } from '../../../src/systems';
+import { CalendarDate, GregorianDate, TimePeriod, TimePeriodField } from '../../../src/systems';
 
 const UTC = 'UTC';
 const NEW_YORK = 'America/New_York';
@@ -313,7 +313,7 @@ test('all fields', () => {
   t = start.difference(end, ['year', 'month', 'day', 'hour']);
   expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12.5125 }));
 
-  end = start.add( { year: 1, month: 1, day: 1, hour: 12 });
+  end = start.add({ year: 1, month: 1, day: 1, hour: 12 });
 
   t = start.difference(end, ['year', 'month', 'day']);
   expect(t).toEqual(period({ year: 1, month: 1, day: 1.5 }));
@@ -361,6 +361,15 @@ test('difference edge cases', () => {
 
   t = start.difference(end, ['month', 'day']);
   expect(t).toEqual(period({ month: 2, day: 15 }));
+
+  // Invalid fields are ignored
+  t = start.difference(end, ['month', 'day', 'foobar' as TimePeriodField]);
+  expect(t).toEqual(period({ month: 2, day: 15 }));
+
+  // If no valid fields are passed in, it will
+  // return the raw difference with no field rollup
+  t = start.difference(end, ['foobar' as TimePeriodField, 'baz' as TimePeriodField]);
+  expect(t).toEqual(period({ month: 2, week: 2, day: 1 }));
 });
 
 test('comparison', () => {
@@ -373,7 +382,7 @@ test('comparison', () => {
   end = start.add({ millis: 1 });
   expect(start.compare(end)).toEqual(-1);
 
-  end = start.add({ });
+  end = start.add({});
   expect(start.compare(end)).toEqual(0);
 
   end = start.add({ year: 0, millis: 0 });
