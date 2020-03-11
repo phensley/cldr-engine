@@ -327,10 +327,12 @@ export class DatePatternMatcher {
         }
       }
 
-      // Metacharacters have already been replaced in the pattern.
-      if ('jJC'.indexOf(adjfield) !== -1) {
-        adjfield = field;
-      }
+      // TODO: UNREACHABLE as field replacement has been selected above
+      // // Metacharacters have already been replaced in the pattern.
+      // if ('jJC'.indexOf(adjfield) !== -1) {
+      //   console.log('adjust skeleton', adjfield);
+      //   adjfield = field;
+      // }
       r.push([adjfield, adjwidth]);
     }
 

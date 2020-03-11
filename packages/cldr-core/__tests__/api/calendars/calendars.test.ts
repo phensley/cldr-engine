@@ -253,6 +253,9 @@ test('skeleton metacharacters', () => {
   s = api.formatDate(mar11, { skeleton: 'j' });
   expect(s).toEqual('11 PM');
 
+  s = api.formatDate(mar11, { skeleton: 'jjj' });
+  expect(s).toEqual('11 PM');
+
   s = api.formatDate(mar11, { skeleton: 'jmm' });
   expect(s).toEqual('11:00 PM');
 
