@@ -1,6 +1,6 @@
 import { calendarsApi } from '../../_helpers';
-
 import {
+  CalendarType,
   DateRawFormatOptions,
   FormatWidthType,
   GregorianDate,
@@ -79,6 +79,10 @@ test('conversions', () => {
   const api = calendarsApi('en');
   const date = api.toGregorianDate(mar11);
 
+  // Inadvertently passing in 'gregorian' instead of 'gregory'
+  s = api.formatDate(date, { ca: 'gregorian' as CalendarType });
+  expect(s).toEqual('March 10, 2018');
+
   // Requesting ISO will fall back to gregorian since iso8601 is not
   // a supported calendar for formatting
   s = api.formatDate(date, { ca: 'iso8601' });
@@ -92,6 +96,7 @@ test('conversions', () => {
 
   s = api.formatDate(date, { ca: 'buddhist' });
   expect(s).toEqual('March 10, 2561 BE');
+
 });
 
 test('formats bare date', () => {

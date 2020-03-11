@@ -146,8 +146,6 @@ export class CalendarInternalsImpl implements CalendarInternals {
         case 'persian':
         case 'gregory':
           return c;
-        case 'gregorian':
-          return 'gregory';
       }
     }
     return undefined;
