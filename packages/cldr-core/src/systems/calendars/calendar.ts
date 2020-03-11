@@ -778,10 +778,7 @@ export abstract class CalendarDate {
     } else {
       const lastDoy = this.yearLength(eyear);
       if (doy >= (lastDoy - 5)) {
-        let lastRdow = (rdow + lastDoy - doy) % 7;
-        if (lastRdow < 0) {
-          lastRdow += 7;
-        }
+        const lastRdow = (rdow + lastDoy - doy) % 7;
         if (((6 - lastRdow) >= this._minDays) && ((doy + 7 - rdow) > lastDoy)) {
           woy = 1;
           ywoy++;
