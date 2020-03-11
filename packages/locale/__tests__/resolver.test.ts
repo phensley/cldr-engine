@@ -68,3 +68,8 @@ test('remove likely subtags', () => {
   expect(removeLikelySubtags(parse('en-Latn-US'))).toEqual(parse('en'));
 
 });
+
+test('aliases', () => {
+  expect(LanguageResolver.substituteAliases('eng-Latn-US')).toEqual(parse('en-Latn-US'));
+  expect(LanguageResolver.substituteAliases(parse('eng-Latn-US'))).toEqual(parse('en-Latn-US'));
+});
