@@ -293,10 +293,7 @@ export class DatePatternMatcher {
       }
 
       const [field, width] = n;
-      const p = getFieldType(field, width);
-      if (p === undefined) {
-        continue;
-      }
+      const p = getFieldType(field, width)!;
 
       // Adjust field and width to match skeleton below
       let adjfield = field;
