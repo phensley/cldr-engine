@@ -44,7 +44,10 @@
     "collectCoverageFrom": [
       "packages/*/src/**/*.ts",
       "!packages/*/src/cli/**/*.ts",
-      "!packages/*/src/**/*.d.ts"
+      "!packages/*/src/**/*.d.ts",
+      "!packages/cldr-compiler/**",
+      "!packages/cldr-ext-rbnf/**",
+      "!packages/cldr-types/**"
     ],
     "coverageReporters": [
       "json",
