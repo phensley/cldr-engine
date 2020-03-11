@@ -78,16 +78,10 @@ export class NumberContext {
         const scale = this.maxSig - n.precision() + n.scale();
         n = n.setScale(scale, this.roundingMode);
       }
-
-      // Ensure that one less digit is emitted if the number is exactly zero.
       n = n.stripTrailingZeros();
-      const zero = n.signum() === 0;
-      let precision = n.precision();
-      if (zero && n.scale() === 1) {
-        precision--;
-      }
 
       // scale the number to have at least the minimum significant digits
+      const precision = n.precision();
       if (precision < this.minSig) {
         const scale = this.minSig - precision + n.scale();
         n = n.setScale(scale, this.roundingMode);
@@ -154,9 +148,6 @@ export class NumberContext {
 
       if (minSig !== -1 && maxSig !== -1 && minSig > maxSig) {
         maxSig = minSig;
-      }
-      if (maxSig !== -1 && maxSig < minSig) {
-        minSig = maxSig;
       }
       if (minSig === -1) {
         minSig = maxSig;
