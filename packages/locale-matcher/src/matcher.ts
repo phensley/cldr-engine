@@ -18,7 +18,7 @@ class Entry implements Locale {
   }
 }
 
-type LangTag = LanguageTag | string;
+type LangTag = Locale | LanguageTag | string;
 
 /**
  * Flatten and split the string or array into a list of matcher entries.
@@ -34,7 +34,7 @@ const parse = (locales: string | (Locale | LangTag)[] = [], options: LocaleMatch
         return a.concat(tmp);
       }
       if ((e as Locale).tag instanceof LanguageTag) {
-        a.push((e as Locale).tag);
+        a.push(e as Locale);
       } else if (e instanceof LanguageTag) {
         a.push(e);
       }
@@ -42,6 +42,7 @@ const parse = (locales: string | (Locale | LangTag)[] = [], options: LocaleMatch
     }, [] as LangTag[]);
   }
 
+  const resolve = options.resolve !== false;
   const result: Entry[] = [];
   const len = raw.length;
   for (let i = 0; i < len; i++) {
@@ -51,15 +52,20 @@ const parse = (locales: string | (Locale | LangTag)[] = [], options: LocaleMatch
     if (e instanceof LanguageTag) {
       tag = e;
       id = tag.compact();
-    } else {
+    } else if (typeof e === 'string') {
       id = e.trim();
       tag = parseLanguageTag(id);
+    } else {
+      // Have a full Locale object, so optionally substitute aliases and add it
+      tag = e.tag;
+      id = e.id;
+      result.push(new Entry(e.id, resolve ? LanguageResolver.substituteAliases(e.tag) : e.tag));
+      continue;
     }
 
     // This code preserves the 'und' undefined locale. If we resolve it, adding
     // likely subtags will expand it to 'en-Latn-US'.
 
-    const resolve = options.resolve !== false;
     const l = tag.hasLanguage();
     const s = tag.hasScript();
     const r = tag.hasRegion();

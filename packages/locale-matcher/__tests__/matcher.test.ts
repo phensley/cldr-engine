@@ -1,4 +1,5 @@
-import { parseLanguageTag } from '@phensley/language-tag';
+import { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
+import { Locale } from '@phensley/locale';
 import { LocaleMatch, LocaleMatcher } from '../src';
 import { loadMatchCases } from './util';
 
@@ -37,6 +38,34 @@ test('threshold', () => {
   expect(m.locale.id).toEqual('en');
 });
 
+test('no resolve', () => {
+  let matcher = new LocaleMatcher('en en_GB', { resolve: false });
+  let m: LocaleMatch;
+
+  // Missing subtags cause matcher to fail
+  m = matcher.match('en-AU');
+  expect(m.distance).toEqual(100);
+  expect(m.locale.id).toEqual('en');
+
+  // Supported locales have all relevant subtags so matcher has enough
+  // information for proper distance computation
+  matcher = new LocaleMatcher('en-Latn-US en-Latn-GB', { resolve: false });
+  m = matcher.match('en-AU');
+  expect(m.distance).toEqual(3);
+  expect(m.locale.id).toEqual('en-Latn-GB');
+
+  // A Locale instance can be passed in to ensure the locale's id matches the
+  // exact input tag form, assuming the language tags have all relevant
+  const supported: Locale[] = [
+    { id: 'en', tag: new LanguageTag('en', 'Latn', 'US') },
+    { id: 'en_GB', tag: new LanguageTag('en', 'Latn', 'GB') }
+  ];
+  matcher = new LocaleMatcher(supported, { resolve: false });
+  m = matcher.match('en-AU');
+  expect(m.distance).toEqual(3);
+  expect(m.locale.id).toEqual('en_GB');
+});
+
 test('bad args', () => {
   expect(() => new LocaleMatcher(undefined as unknown as string)).toThrowError('at least');
 });
@@ -55,14 +84,20 @@ test('constructor args', () => {
   expect(m.distance).toEqual(3);
   expect(m.locale.id).toEqual('en_GB');
 
+  m = matcher.match('pt');
+  expect(m.distance).toEqual(4);
+
   // Parsing will correct the subtag separator
   matcher = new LocaleMatcher([parseLanguageTag('en_GB'), parseLanguageTag('pt_AR')]);
   m = matcher.match('en-AU');
   expect(m.distance).toEqual(3);
   expect(m.locale.id).toEqual('en-GB');
 
-  m = matcher.match('pt');
-  expect(m.distance).toEqual(4);
+  // Only substitute aliases
+  matcher = new LocaleMatcher([parseLanguageTag('eng-Latn-US'), parseLanguageTag('eng-Latn-GB')]);
+  m = matcher.match('en-AU');
+  expect(m.distance).toEqual(3);
+  expect(m.locale.id).toEqual('eng-Latn-GB');
 });
 
 test('extensions', () => {
