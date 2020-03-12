@@ -450,12 +450,11 @@ export class CalendarsImpl implements Calendars {
         return this.toJapaneseDate(date);
       case 'persian':
         return this.toPersianDate(date);
-      default:
-      case 'gregory':
-        return this.toGregorianDate(date);
     }
+    // All others convert to 'gregory'
+    return this.toGregorianDate(date);
   }
 }
 
 const getEpochUTC = (date: Date | number): number =>
-  typeof date === 'number' ? date : (+date);
+  typeof date === 'number' ? date : date instanceof Date ? (+date) : 0;
