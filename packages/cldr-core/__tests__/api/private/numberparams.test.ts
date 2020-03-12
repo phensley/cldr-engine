@@ -1,6 +1,7 @@
 import { languageBundle, INTERNALS } from '../../_helpers';
 import { NumberParams } from '../../../src/common/private';
 import { NumberParamsCache } from '../../../src/api/private';
+import { NumberSystemType } from '../../../src';
 
 const LATN_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
@@ -12,6 +13,24 @@ test('number systems', () => {
   const bundle = languageBundle('zh');
   const res = internals.schema.Numbers.numberSystems.mapping(bundle);
   expect(res.finance).toEqual('hansfin');
+});
+
+test('invalid system', () => {
+  let params: NumberParams;
+  let cache: NumberParamsCache;
+
+  const bundle = languageBundle('zh-u-nu-invalid');
+  expect(bundle.numberSystem()).toEqual('invalid');
+
+  cache = getCache('zh-u-nu-unknown');
+  params = cache.getNumberParams('invalid' as NumberSystemType);
+  expect(params.digits).toEqual(LATN_DIGITS);
+
+  params = cache.getNumberParams();
+  expect(params.digits).toEqual(LATN_DIGITS);
+
+  cache = getCache('zh-u-nu-x');
+  expect(params.digits).toEqual(LATN_DIGITS);
 });
 
 test('number params cache', () => {

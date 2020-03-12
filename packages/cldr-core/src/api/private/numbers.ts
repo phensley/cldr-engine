@@ -40,20 +40,19 @@ export class NumberParamsCache {
       defaultSystem = 'default';
     }
     if (!numberSystem) {
-      const bundle = this.bundle.numberSystem();
-      numberSystem = bundle as NumberSystemType || defaultSystem;
+      numberSystem = this.bundle.numberSystem() as NumberSystemType;
     }
 
     let realName: NumberSystemName = this.select(numberSystem);
 
     // Handle invalid number systems by returning the specified default
     // TODO: include algorithmic number system check
-    /* istanbul ignore if */
     if (!decimalNumberingDigits[realName]) {
       realName = this.select(defaultSystem);
 
       // TODO: temporary double-check to default for zh finance until we
       // have rbnf implemented.
+      /* istanbul ignore if */
       if (!decimalNumberingDigits[realName]) {
         realName = this.select('default');
       }
@@ -138,6 +137,7 @@ const makeDigits = (name: string): string[] => {
     const c = digits[0].charCodeAt(0);
     if (c >= 0xD800 && c <= 0xDBFF) {
       const c2 = digits[0].charCodeAt(1);
+      /* istanbul ignore else */
       if (c2 >= 0xDC00 && c2 <= 0xDFFF) {
         for (let i = 1; i < 10; i++) {
           const digit = String.fromCharCode(c) + String.fromCharCode(c2 + i);
