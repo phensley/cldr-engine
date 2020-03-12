@@ -13,7 +13,7 @@ import rbnf
 from util import makedirs
 
 BASEURL = 'https://github.com/unicode-org/cldr/archive'
-TAG = 'release-36'
+TAG = 'release-37-alpha3'
 ROOTPATH = 'common'
 
 TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')

@@ -10,8 +10,8 @@
 #   git lfs extension
 
 DIR=$(cd `dirname $0`; pwd)
-VERSION=36.0.0
-TAG=release-36
+VERSION=37.0.0
+TAG=release-37-alpha3
 BUILD=${DIR}/.cldrbuild
 CLDR=${BUILD}/cldr
 OUTPUT=${BUILD}/unicode-cldr
@@ -24,7 +24,8 @@ if [ ! -d ${CLDR} ] ; then
 fi
 
 cd ${CLDR}
-git fetch origin $TAG
+git reset --hard
+git fetch origin
 git checkout master
 git reset --hard
 git checkout $TAG
@@ -52,6 +53,33 @@ index 347ee968f..42b05bd4b 100644
 
          XPathParts newxpp = new XPathParts();
          XPathParts newfullxpp = new XPathParts();
+diff --git a/tools/java/org/unicode/cldr/json/Ldml2JsonConverter.java b/tools/java/org/unicode/cldr/json/Ldml2JsonConverter.java
+index 7e3f64dc0..93dbfe13d 100644
+--- a/tools/java/org/unicode/cldr/json/Ldml2JsonConverter.java
++++ b/tools/java/org/unicode/cldr/json/Ldml2JsonConverter.java
+@@ -304,6 +304,10 @@ public class Ldml2JsonConverter {
+                 activeNumberingSystems.add(ns);
+             }
+         }
++        // Skip supplemental/units as it currently blows up
++        if (locID.equals("units")) {
++            return;
++        }
+         DtdType fileDtdType;
+         if (CLDRFile.isSupplementalName(locID)) {
+             fileDtdType = DtdType.supplementalData;
+diff --git a/tools/java/org/unicode/cldr/util/CLDRFile.java b/tools/java/org/unicode/cldr/util/CLDRFile.java
+index 027d398fc..4c8a5a560 100644
+--- a/tools/java/org/unicode/cldr/util/CLDRFile.java
++++ b/tools/java/org/unicode/cldr/util/CLDRFile.java
+@@ -125,6 +125,7 @@ public class CLDRFile implements Freezable<CLDRFile>, Iterable<String> {
+     public static final String SUPPLEMENTAL_PREFIX = "supplemental";
+     public static final String GEN_VERSION = "37";
+     public static final List<String> SUPPLEMENTAL_NAMES = Arrays.asList("characters", "coverageLevels", "dayPeriods", "genderList", "languageInfo",
++        "grammaticalFeatures", "units",
+         "languageGroup", "likelySubtags", "metaZones", "numberingSystems", "ordinals", "plurals", "postalCodeData", "rgScope", "supplementalData",
+         "supplementalMetadata",
+         "telephoneCodeData", "windowsZones");
 EOF
 
 cd tools/java
@@ -69,9 +97,9 @@ segments
 
 for type in ${MAINTYPES} ; do
     # add -m 'en|root' for testing
-    java -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
-        -d ${OUTPUT} -r true -p true -t ${type} -s ${STATUS} -l optional \
-        -m 'en|af|root'
+    java -Xmx8g -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
+        -d ${OUTPUT} -r true -p true -t ${type} -s ${STATUS} -l optional
+        #-m 'en|af|root'
 done
 
 java -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \

@@ -155,7 +155,7 @@
           "value": "60"
         },
         {
-          "rule": "søtti[­→→];",
+          "rule": "sytti[­→→];",
           "value": "70"
         },
         {
@@ -175,35 +175,35 @@
           "value": "1000"
         },
         {
-          "rule": "éin miljon[ →→];",
+          "rule": "éin million[ →→];",
           "value": "1000000"
         },
         {
-          "rule": "←← miljoner[ →→];",
+          "rule": "←← millionar[ →→];",
           "value": "2000000"
         },
         {
-          "rule": "éin miljard[ →→];",
+          "rule": "éin milliard[ →→];",
           "value": "1000000000"
         },
         {
-          "rule": "←← miljarder[ →→];",
+          "rule": "←← milliardar[ →→];",
           "value": "2000000000"
         },
         {
-          "rule": "éin biljon[ →→];",
+          "rule": "éin billion[ →→];",
           "value": "1000000000000"
         },
         {
-          "rule": "←← biljoner[ →→];",
+          "rule": "←← billionar[ →→];",
           "value": "2000000000000"
         },
         {
-          "rule": "éin biljard[ →→];",
+          "rule": "éin billiard[ →→];",
           "value": "1000000000000000"
         },
         {
-          "rule": "←← biljarder[ →→];",
+          "rule": "←← biliardar[ →→];",
           "value": "2000000000000000"
         },
         {

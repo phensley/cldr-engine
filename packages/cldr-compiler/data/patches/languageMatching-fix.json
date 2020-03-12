@@ -57,624 +57,618 @@
           },
           {
             "desired": "ab",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "ach",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "af",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "nl"
           },
           {
             "desired": "ak",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ay",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "es"
           },
           {
             "desired": "az",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "be",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "bem",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "bh",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "hi"
           },
           {
             "desired": "bn",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "br",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "ceb",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "fil"
           },
           {
             "desired": "chr",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ckb",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ar"
           },
           {
             "desired": "co",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "crs",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "cy",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ee",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "eo",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "et",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "fi"
           },
           {
             "desired": "eu",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "es"
           },
           {
             "desired": "fo",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "da"
           },
           {
             "desired": "fy",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "nl"
           },
           {
             "desired": "ga",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "gaa",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "gd",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "gl",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "es"
           },
           {
             "desired": "gn",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "es"
           },
           {
             "desired": "gu",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "hi"
           },
           {
             "desired": "ha",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "haw",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ht",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "hy",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "ia",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ig",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "is",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "jv",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "id"
           },
           {
             "desired": "ka",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "kg",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "kk",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "km",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "kn",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "kri",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ku",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "tr"
           },
           {
             "desired": "ky",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "la",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "it"
           },
           {
             "desired": "lg",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ln",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "lo",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "loz",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "lua",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "mfe",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "mg",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "mi",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "en"
           },
           {
-            "desired": "mk",
-            "distance": "10",
-            "oneway": "1",
-            "supported": "bg"
-          },
-          {
             "desired": "ml",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "mn",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "mr",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "hi"
           },
           {
             "desired": "ms",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "id"
           },
           {
             "desired": "mt",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "my",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ne",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "nn",
-            "distance": "10",
+            "distance": "20",
             "supported": "nb"
           },
           {
             "desired": "nn",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "no"
           },
           {
             "desired": "nso",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ny",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "nyn",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "oc",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "om",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "or",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "pa",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "pcm",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ps",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "qu",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "es"
           },
           {
             "desired": "rm",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "de"
           },
           {
             "desired": "rn",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "rw",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "sa",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "hi"
           },
           {
             "desired": "sd",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "si",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "sn",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "so",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "sq",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "st",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "su",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "id"
           },
           {
             "desired": "sw",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ta",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "te",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "tg",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "ti",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "tk",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "tlh",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "tn",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "to",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "tt",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "tum",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "ug",
-            "distance": "10",
+            "distance": "20",
             "oneway": "1",
             "supported": "zh"
           },
           {
             "desired": "ur",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "uz",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "ru"
           },
           {
             "desired": "wo",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "fr"
           },
           {
             "desired": "xh",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "yi",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "yo",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
           {
             "desired": "zu",
-            "distance": "10",
+            "distance": "30",
             "oneway": "1",
             "supported": "en"
           },
@@ -1947,6 +1941,144 @@
             "distance": "19",
             "oneway": "1",
             "supported": "zh_Hans"
+          },
+          {
+            "desired": "zh_Hani",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "zh_Hans"
+          },
+          {
+            "desired": "zh_Hani",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "zh_Hant"
+          },
+          {
+            "desired": "ar_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "ar_Arab"
+          },
+          {
+            "desired": "bn_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "bn_Beng"
+          },
+          {
+            "desired": "gu_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "gu_Gujr"
+          },
+          {
+            "desired": "hi_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "hi_Deva"
+          },
+          {
+            "desired": "kn_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "kn_Knda"
+          },
+          {
+            "desired": "ml_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "ml_Mlym"
+          },
+          {
+            "desired": "mr_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "mr_Deva"
+          },
+          {
+            "desired": "ta_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "ta_Taml"
+          },
+          {
+            "desired": "te_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "te_Telu"
+          },
+          {
+            "desired": "zh_Latn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "zh_Hans"
+          },
+          {
+            "desired": "ja_Latn",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ja_Jpan"
+          },
+          {
+            "desired": "ja_Hani",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ja_Jpan"
+          },
+          {
+            "desired": "ja_Hira",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ja_Jpan"
+          },
+          {
+            "desired": "ja_Kana",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ja_Jpan"
+          },
+          {
+            "desired": "ja_Hrkt",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ja_Jpan"
+          },
+          {
+            "desired": "ja_Hira",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ja_Hrkt"
+          },
+          {
+            "desired": "ja_Kana",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ja_Hrkt"
+          },
+          {
+            "desired": "ko_Hani",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ko_Kore"
+          },
+          {
+            "desired": "ko_Hang",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ko_Kore"
+          },
+          {
+            "desired": "ko_Jamo",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ko_Kore"
+          },
+          {
+            "desired": "ko_Jamo",
+            "distance": "5",
+            "oneway": "1",
+            "supported": "ko_Hang"
           },
           {
             "desired": "*_*",

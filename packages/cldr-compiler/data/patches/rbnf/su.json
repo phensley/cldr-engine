@@ -1,0 +1,145 @@
+{
+  "SpelloutRules": {
+    "spellout-cardinal": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mineus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "←← titik →→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nol;",
+          "value": "0"
+        },
+        {
+          "rule": "hiji;",
+          "value": "1"
+        },
+        {
+          "rule": "dua;",
+          "value": "2"
+        },
+        {
+          "rule": "tilu;",
+          "value": "3"
+        },
+        {
+          "rule": "opat;",
+          "value": "4"
+        },
+        {
+          "rule": "lima;",
+          "value": "5"
+        },
+        {
+          "rule": "genep;",
+          "value": "6"
+        },
+        {
+          "rule": "tujuh;",
+          "value": "7"
+        },
+        {
+          "rule": "dalapan;",
+          "value": "8"
+        },
+        {
+          "rule": "salapan;",
+          "value": "9"
+        },
+        {
+          "rule": "sapuluh;",
+          "value": "10"
+        },
+        {
+          "rule": "sabelas;",
+          "value": "11"
+        },
+        {
+          "rule": "→→ belas;",
+          "value": "12"
+        },
+        {
+          "rule": "←← puluh[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "←%%spellout-cardinal-large←ratus[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%%spellout-cardinal-large←rebu[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%%spellout-cardinal-large←juta[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%%spellout-cardinal-large←miliar[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-large": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "sa;",
+          "value": "1"
+        },
+        {
+          "rule": "=%spellout-cardinal= ;",
+          "value": "0"
+        }
+      ]
+    },
+    "spellout-numbering": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal=;",
+          "value": "0"
+        }
+      ]
+    },
+    "spellout-numbering-year": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=0.0=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "=%spellout-numbering=;",
+          "value": "0"
+        }
+      ]
+    },
+    "spellout-ordinal": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mineus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0.0=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "ka=%spellout-cardinal=;",
+          "value": "0"
+        }
+      ]
+    }
+  }
+}

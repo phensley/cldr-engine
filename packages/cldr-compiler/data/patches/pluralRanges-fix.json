@@ -1561,6 +1561,23 @@
           "start": "other"
         }
       ],
+      "pcm": [
+        {
+          "end": "other",
+          "result": "other",
+          "start": "one"
+        },
+        {
+          "end": "one",
+          "result": "other",
+          "start": "other"
+        },
+        {
+          "end": "other",
+          "result": "other",
+          "start": "other"
+        }
+      ],
       "pl": [
         {
           "end": "few",
