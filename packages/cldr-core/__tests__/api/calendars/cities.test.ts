@@ -1,35 +1,43 @@
+import { CalendarsImpl } from '../../../src/api/calendars';
 import { calendarsApi } from '../../_helpers';
 
 test('timezone exemplar cities', () => {
+  let api: CalendarsImpl;
   const utc = 'Etc/UTC';
   const unk = 'Factory';
+  const invalid = 'Invalid';
   const newyork = 'America/New_York';
   let tz: any;
 
-  const find = (lang: string, id: string) =>
-    calendarsApi(lang).timeZoneInfo(id);
+  api = calendarsApi('en');
 
-  tz = find('en', newyork);
+  tz = api.timeZoneInfo(newyork);
   expect(tz.id).toEqual(newyork);
   expect(tz.city).toEqual({ name: 'New York' });
 
-  tz = find('en', utc);
+  tz = api.timeZoneInfo(utc);
   expect(tz.id).toEqual(utc);
   expect(tz.city).toEqual({ name: 'Unknown City' });
 
-  tz = find('en', unk);
+  tz = api.timeZoneInfo(unk);
   expect(tz.id).toEqual(unk);
   expect(tz.city).toEqual({ name: 'Unknown City' });
 
-  tz = find('es', newyork);
+  tz = api.timeZoneInfo(invalid);
+  expect(tz.id).toEqual(unk);
+  expect(tz.city).toEqual({ name: 'Unknown City' });
+
+  api = calendarsApi('es');
+
+  tz = api.timeZoneInfo(newyork);
   expect(tz.id).toEqual(newyork);
   expect(tz.city).toEqual({ name: 'Nueva York' });
 
-  tz = find('es', utc);
+  tz = api.timeZoneInfo(utc);
   expect(tz.id).toEqual(utc);
   expect(tz.city).toEqual({ name: 'ciudad desconocida' });
 
-  tz = find('es', unk);
+  tz = api.timeZoneInfo(unk);
   expect(tz.id).toEqual(unk);
   expect(tz.city).toEqual({ name: 'ciudad desconocida' });
 });
