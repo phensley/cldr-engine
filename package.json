@@ -19,7 +19,7 @@
     "stress": "lerna run --stream --concurrency=1 stress",
     "test": "rimraf ./coverage && TZ=America/New_York jest --coverage --verbose -i --no-cache",
     "test:runtime": "rimraf ./coverage && TZ=America/New_York jest --coverage --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-(ext-rbnf|compiler|types)/.*\"",
-    "test:codecov": "rimraf ./coverage && TZ=America/New_York jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-(ext-rbnf|compiler|types)/.*\"",
+    "test:codecov": "rimraf ./coverage && TZ=America/New_York jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache",
     "test:watch": "TZ=America/New_York jest --watch --runInBand --no-cache",
     "unlink-all": "lerna exec --concurrency=1 yarn unlink"
   },

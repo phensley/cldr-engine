@@ -1,10 +1,10 @@
 name: Build and Test
 
 on:
-  push
-  # branches:
-  #  - actions
-  #  - master
+  push:
+    branches:
+      - coverage
+      - master
 
 jobs:
   build:
@@ -33,11 +33,10 @@ jobs:
           yarn api
 
       - name: Test
-        run: yarn test:runtime
-      # - name: Test
-      #   run: |
-      #     yarn test:codecov
-      # - name: Upload Coverage
-      #   uses: codecov/codecov-action@v1
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+        run: yarn test:codecov
+
+      - uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage/lcov.info
+          name: codecov-umbrella
+          fail_ci_if_error: true
