@@ -17,9 +17,6 @@ rm -f yarn.lock
 yarn
 yarn clean
 
-# build and lint
-yarn lint
-
-# publish packages
+# build and publish packages
 lerna publish --exact --force-publish=* $*
 
