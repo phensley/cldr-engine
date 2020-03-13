@@ -456,5 +456,11 @@ export class CalendarsImpl implements Calendars {
   }
 }
 
-const getEpochUTC = (date: Date | number): number =>
-  typeof date === 'number' ? date : date instanceof Date ? (+date) : 0;
+const getEpochUTC = (date: Date | number): number => {
+  try {
+    return typeof date === 'number' ? date : (+date);
+  } catch (e) {
+    // Can't cast to an epoch value, so return 0
+    return 0;
+  }
+};

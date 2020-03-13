@@ -732,6 +732,9 @@ export abstract class CalendarDate {
   }
 
   protected initFromUnixEpoch(ms: number, zoneId: string): void {
+    if (!isFinite(ms)) {
+      ms = 0;
+    }
     zoneId = substituteZoneAlias(zoneId);
     this._zoneInfo = zoneInfoFromUTC(zoneId, ms);
     jdFromUnixEpoch(ms + this._zoneInfo.offset, this._fields);
