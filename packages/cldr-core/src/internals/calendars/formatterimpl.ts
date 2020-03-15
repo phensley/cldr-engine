@@ -476,11 +476,9 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     }
     let name = '';
     const key = ctx.date.metaZoneId();
-    if (key) {
-      const { long, short } = this.tz.metaZones;
-      const format = width === 1 ? short : long;
-      name = format.get(ctx.bundle, 'generic', key);
-    }
+    const { long, short } = this.tz.metaZones;
+    const format = width === 1 ? short : long;
+    name = format.get(ctx.bundle, 'generic', key);
     return name ? name : this.timezone_O(ctx, ['O', width]);
   }
 

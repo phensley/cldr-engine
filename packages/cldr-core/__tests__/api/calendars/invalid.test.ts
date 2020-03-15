@@ -25,8 +25,13 @@ test('invalid calendar type', () => {
 test('invalid epoch timestamp', () => {
   const api = calendarsApi('en');
   let s: string;
+  let date: ZonedDateTime;
 
-  const date = { date: 'foo', zoneId: LOS_ANGELES } as unknown as ZonedDateTime;
+  date = { date: 'foo', zoneId: LOS_ANGELES } as unknown as ZonedDateTime;
+  s = api.formatDate(date, { datetime: 'full' });
+  expect(s).toEqual('Wednesday, December 31, 1969 at 4:00:00 PM Pacific Standard Time');
+
+  date = { date: { foo: 'bar' }, zoneId: LOS_ANGELES } as unknown as ZonedDateTime;
   s = api.formatDate(date, { datetime: 'full' });
   expect(s).toEqual('Wednesday, December 31, 1969 at 4:00:00 PM Pacific Standard Time');
 });

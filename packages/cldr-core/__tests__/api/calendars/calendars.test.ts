@@ -950,6 +950,10 @@ test('timezone iso8601 basic/extended', () => {
 
   s = en.formatDateRaw(d, { pattern: 'ZZZZZ' });
   expect(s).toEqual('-04:00');
+
+  const fi = calendarsApi('fi');
+  s = fi.formatDateRaw(d, { pattern: 'ZZZZ' }); // Same as 'OOOO'
+  expect(s).toEqual('UTC-4.00');
 });
 
 test('timezone short/long localized gmt', () => {
