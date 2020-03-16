@@ -21,8 +21,10 @@ const get = (map: DistanceMap, want: string, have: string): DistanceNode | undef
 
 const getany = (map: DistanceMap): DistanceNode => {
   const sub = map.$;
+  /* istanbul ignore else */
   if (sub !== undefined) {
     const node = sub.$;
+    /* istanbul ignore else */
     if (node !== undefined) {
       return node;
     }
@@ -34,10 +36,10 @@ const getany = (map: DistanceMap): DistanceNode => {
 const _distance = (node: DistanceNode | number): number => typeof node === 'number' ? node : node[0];
 const _map = (node: DistanceNode | number): DistanceMap => typeof node === 'number' ? EMPTY_MAP : node[1];
 
-  /**
-   * Return the distance between the desired and supported locale, stopping once
-   * the given threshold is exceeded.
-   */
+/**
+ * Return the distance between the desired and supported locale, stopping once
+ * the given threshold is exceeded.
+ */
 export const getDistance = (desired: LanguageTag, supported: LanguageTag, threshold?: number): number => {
   if (typeof threshold !== 'number') {
     threshold = DEFAULT_THRESHOLD;
