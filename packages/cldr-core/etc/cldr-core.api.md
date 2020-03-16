@@ -283,7 +283,7 @@ export interface CalendarInternals {
 //
 // @internal
 export class CalendarInternalsImpl implements CalendarInternals {
-    constructor(internals: Internals, cacheSize?: number);
+    constructor(internals: Internals, cacheSize: number);
     // (undocumented)
     flexDayPeriod(bundle: Bundle, minutes: number): DayPeriodType | undefined;
     // (undocumented)
@@ -618,9 +618,9 @@ export class DecimalNumberingSystem extends NumberingSystem {
     // (undocumented)
     readonly digits: string[];
     // (undocumented)
-    protected _formatDecimal<R>(f: DecimalFormatter<R>, n: DecimalArg, groupDigits?: boolean, minInt?: number): R;
+    protected _formatDecimal<R>(f: DecimalFormatter<R>, n: DecimalArg, groupDigits: boolean, minInt: number): R;
     // (undocumented)
-    formatString(n: DecimalArg, groupDigits?: boolean, minInt?: number): string;
+    formatString(n: DecimalArg, groupDigits: boolean, minInt: number): string;
 }
 
 export { DefaultMessageArgConverter }
@@ -744,7 +744,7 @@ export interface GeneralInternals {
 //
 // @internal (undocumented)
 export class GeneralInternalsImpl implements GeneralInternals {
-    constructor(internals: Internals, cacheSize?: number);
+    constructor(internals: Internals, cacheSize: number);
     // (undocumented)
     characterOrder(bundle: Bundle): string;
     contextTransform(value: string, info: ContextTransformInfo, context?: ContextType, field?: ContextTransformFieldType): string;
@@ -1025,7 +1025,7 @@ export interface NumberInternals {
 //
 // @internal
 export class NumberInternalsImpl implements NumberInternals {
-    constructor(internals: Internals, cacheSize?: number);
+    constructor(internals: Internals, cacheSize: number);
     // (undocumented)
     adjustDecimal(num: Decimal, options?: DecimalAdjustOptions): Decimal;
     // (undocumented)
