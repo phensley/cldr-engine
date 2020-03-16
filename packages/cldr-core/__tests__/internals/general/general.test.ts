@@ -2,7 +2,7 @@ import { INTERNALS } from '../../_helpers';
 import { GeneralInternalsImpl } from '../../../src';
 import { ContextTransformInfo } from '../../../src/common/private';
 
-const GENERAL = new GeneralInternalsImpl(INTERNALS());
+const GENERAL = new GeneralInternalsImpl(INTERNALS(), 50);
 
 test('wrapper args', () => {
   let s = GENERAL.formatWrapper('{0} {1}', ['a', 'b']);
@@ -20,7 +20,7 @@ test('wrapper args', () => {
 
 test('context transform', () => {
   let s: string;
-  const yes = {'calendar-field': 'TN'} as ContextTransformInfo;
+  const yes = { 'calendar-field': 'TN' } as ContextTransformInfo;
   const no = {} as ContextTransformInfo;
   const field = 'calendar-field';
 

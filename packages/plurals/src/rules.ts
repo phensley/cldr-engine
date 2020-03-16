@@ -15,8 +15,6 @@ const CATEGORIES: string[] = ['zero', 'one', 'two', 'few', 'many', 'other'];
 const arg = (n: DecimalArg) =>
   new NumberOperands(coerceDecimal(n));
 
-const FLAG_OTHER = (5 << 5) + 5;
-
 /**
  * Set of all cardinal and ordinal plural rules, and the array of expression
  * fragments the rules reference.
@@ -51,7 +49,7 @@ export class PluralRules {
     const s = this.evaluate(arg(start), this.cardinals);
     const e = this.evaluate(arg(end), this.cardinals);
     const cat = this.ranges[((1 << s) << 5) + (1 << e)];
-    return CATEGORIES[cat || this.ranges[FLAG_OTHER]];
+    return CATEGORIES[cat] || 'other';
   }
 
   private evaluate(operands: NumberOperands, rules: Rule[]): number {

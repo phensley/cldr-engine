@@ -60,12 +60,9 @@ export class DateSkeleton {
     for (let i = Field.DAYPERIOD; i < Field.MAX_TYPE; i++) {
       if (this.type[i] !== 0) {
         r.type[i] = this.type[i];
-        const _info = this.info[i];
-        if (_info !== undefined) {
-          // ensure we copy the properties
-          const { input, field, type, width, repeat } = _info;
-          r.info[i] = { input, field, type, width, repeat };
-        }
+        // ensure we copy the properties
+        const { input, field, type, width, repeat } = this.info[i]!;
+        r.info[i] = { input, field, type, width, repeat };
         this.type[i] = 0;
         this.info[i] = undefined;
       }
