@@ -98,6 +98,26 @@ test('constructor args', () => {
   m = matcher.match('en-AU');
   expect(m.distance).toEqual(3);
   expect(m.locale.id).toEqual('eng-Latn-GB');
+
+  // Invalid args
+  matcher = new LocaleMatcher(['en', new Date() as unknown as LanguageTag]);
+  m = matcher.match('de');
+  expect(m.distance).toEqual(100);
+  expect(m.locale.id).toEqual('en');
+
+  // Aliases will be substituted automatically
+  matcher = new LocaleMatcher([
+    { id: 'en', tag: parseLanguageTag('eng-Latn-US') }
+  ]);
+  m = matcher.match('en');
+  expect(m.locale.tag.expanded()).toEqual('en-Latn-US');
+
+  // Disable alias substitution
+  matcher = new LocaleMatcher([
+    { id: 'en', tag: parseLanguageTag('eng-Latn-US') }
+  ], { resolve: false });
+  m = matcher.match('en');
+  expect(m.locale.tag.expanded()).toEqual('eng-Latn-US');
 });
 
 test('extensions', () => {
