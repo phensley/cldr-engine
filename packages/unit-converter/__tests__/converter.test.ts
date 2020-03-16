@@ -39,3 +39,12 @@ test('converter', () => {
   v = c.convert('angle', new Decimal(3), 'revolution', 'unknown');
   expect(v).toBe(undefined);
 });
+
+test('constructor', () => {
+  const c = new UnitConverter();
+  c.add('angle', new UnitFactors(ANGLE));
+  c.add('angle-2', new UnitFactors(ANGLE));
+  expect(c.has('angle')).toEqual(true);
+  expect(c.get('angle', 'degree', 'arc-minute')!.path).toEqual(['degree', 'arc-minute']);
+  expect(c.get('angle-2', 'degree', 'arc-minute')!.path).toEqual(['degree', 'arc-minute']);
+});
