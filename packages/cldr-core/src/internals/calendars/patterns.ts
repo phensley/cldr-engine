@@ -166,7 +166,7 @@ export class CalendarPatterns {
     return this.intervalFallback;
   }
 
-  adjustPattern(pattern: DateTimeNode[], skeleton: DateSkeleton, decimal: string = '.'): DateTimeNode[] {
+  adjustPattern(pattern: DateTimeNode[], skeleton: DateSkeleton, decimal: string): DateTimeNode[] {
     return this.availableMatcher.adjust(pattern, skeleton, decimal);
   }
 
@@ -196,11 +196,7 @@ export class CalendarPatterns {
     // be populated for every locale.
     for (const formats of [this.rawAvailableFormats, this.rawPluralFormats.other || {}]) {
       for (const skeleton of Object.keys(formats)) {
-        // Only add skeletons which point to valid formats for this locale. Not all
-        // skeletons are implemented for all locales.
-        if (formats[skeleton]) {
-          this.availableMatcher.add(this.skeletonParser.parse(skeleton));
-        }
+        this.availableMatcher.add(this.skeletonParser.parse(skeleton));
       }
     }
   }
@@ -210,11 +206,7 @@ export class CalendarPatterns {
       const group = this.rawIntervalFormats[field];
       const m = new DatePatternMatcher();
       for (const skeleton of Object.keys(group)) {
-        // Only add skeletons which point to valid formats for this locale. Not all
-        // skeletons are implemented for all locales.
-        if (group[skeleton]) {
-          m.add(this.skeletonParser.parse(skeleton));
-        }
+        m.add(this.skeletonParser.parse(skeleton));
       }
       this.intervalMatcher[field] = m;
     }
@@ -241,14 +233,9 @@ export class GregorianPatterns extends CalendarPatterns {
     let pattern = s.pattern;
     if (!pattern) {
       switch (s.skeleton) {
-        case 'MMMMW': {
-          const week = coerceDecimal(d.weekOfMonth());
-          plural = this.bundle.plurals().cardinal(week) as PluralType;
-          pattern = this.rawPluralFormats[plural][s.skeleton];
-          break;
-        }
+        case 'MMMMW':
         case 'yw': {
-          const week = coerceDecimal(d.weekOfYear());
+          const week = coerceDecimal(s.skeleton === 'yw' ? d.weekOfYear() : d.weekOfMonth());
           plural = this.bundle.plurals().cardinal(week) as PluralType;
           pattern = this.rawPluralFormats[plural][s.skeleton];
           break;
@@ -258,7 +245,7 @@ export class GregorianPatterns extends CalendarPatterns {
           break;
       }
     }
-    return this.internals.calendars.parseDatePattern(pattern || '');
+    return this.internals.calendars.parseDatePattern(pattern);
   }
 
 }

@@ -284,7 +284,7 @@ export class DatePatternMatcher {
   /**
    * Make field width adjustments to pattern using the given skeleton.
    */
-  adjust(pattern: DateTimeNode[], skeleton: DateSkeleton, decimal: string = '.'): DateTimeNode[] {
+  adjust(pattern: DateTimeNode[], skeleton: DateSkeleton, decimal: string): DateTimeNode[] {
     const r: DateTimeNode[] = [];
     for (const n of pattern) {
       if (typeof n === 'string') {

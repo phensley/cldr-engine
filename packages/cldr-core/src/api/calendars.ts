@@ -391,7 +391,6 @@ export class CalendarsImpl implements Calendars {
       value.wrap(wrapper, [_range, _date]);
       return value.render();
     }
-
     return _date ? _date : value.empty();
   }
 

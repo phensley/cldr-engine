@@ -49,6 +49,10 @@ test('interval date/time choice', () => {
 
   const opts: DateIntervalFormatOptions = { date: 'EEEyMMMd', time: 'Hms' };
 
+  end = start.add({ minute: 33 });
+  s = api.formatDateInterval(start, end, opts);
+  expect(s).toEqual('03:00 – 03:33');
+
   end = start.add({ day: 0.1 });
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('03:00 – 05:24');

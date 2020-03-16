@@ -59,7 +59,7 @@ export class SchemaBuilder {
   private _times: [string, string][] = [];
   private origin!: Origin;
 
-  constructor(debug: boolean = false) {
+  constructor(debug: boolean) {
     this.captureTimes = debug && process !== undefined && process.hrtime !== undefined;
   }
 
@@ -138,11 +138,6 @@ export class SchemaBuilder {
       }
       map[field] = child;
     }
-
-    // const undef: any = {};
-    // for (const i of inst.block) {
-    //   this.construct(undef, i);
-    // }
     obj[inst.name] = new ScopeArrowImpl(map);
   }
 
@@ -165,7 +160,7 @@ export class SchemaBuilder {
 /**
  * @internal
  */
-export const buildSchema = (origin: Origin, debug: boolean = false): Schema => {
+export const buildSchema = (origin: Origin, debug: boolean): Schema => {
   const builder = new SchemaBuilder(debug);
   const schema = ({} as any) as Schema;
   builder.construct(schema, origin);

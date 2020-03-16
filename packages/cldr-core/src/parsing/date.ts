@@ -7,15 +7,18 @@ export const DATE_PATTERN_CHARS = [
   'F', 'g', 'E', 'e', 'c', 'a', 'b', 'B', 'h', 'H', 'K', 'k', 'j', 'J', 'C',
   'm', 's', 'S', 'A', 'z', 'Z', 'O', 'v', 'V', 'X', 'x'
 ].reduce((o: any, c, i) => {
-    o[c] = i + 1;
-    return o;
-  }, {});
+  o[c] = i + 1;
+  return o;
+}, {});
 
 /**
  * Parse a datetime pattern into an array of nodes.
  */
 export const parseDatePattern = (raw: string): DateTimeNode[] => {
   const nodes: DateTimeNode[] = [];
+  if (!raw) {
+    return nodes;
+  }
   const len = raw.length;
 
   let buf = '';
