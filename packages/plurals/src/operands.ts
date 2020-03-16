@@ -3,7 +3,7 @@ import { Decimal } from '@phensley/decimal';
 /**
  * Returns the number of digits in w, where w < RADIX.
  */
-const digitCount = (w: number): number => {
+export const digitCount = (w: number): number => {
   if (w < Constants.P4) {
     if (w < Constants.P2) {
       return w < Constants.P1 ? 1 : 2;

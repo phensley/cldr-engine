@@ -1,5 +1,5 @@
 import { Decimal } from '@phensley/decimal';
-import { NumberOperands } from '../src/operands';
+import { digitCount, NumberOperands } from '../src/operands';
 
 const operands = (n: string) => new NumberOperands(new Decimal(n)).toString();
 
@@ -44,7 +44,7 @@ test('basics', () => {
 
   ops = operands('0.1234567890123456789');
   expect(ops)
-   .toEqual('n: 0, i: 0, v: 19, w: 19, f: 12345678901234, t: 12345678901234');
+    .toEqual('n: 0, i: 0, v: 19, w: 19, f: 12345678901234, t: 12345678901234');
 
   ops = operands('1234567890123456789.12345000');
   expect(ops).toEqual('n: 17890123456789, i: 17890123456789, v: 8, w: 5, f: 12345000, t: 12345');
@@ -102,6 +102,17 @@ test('tens', () => {
   ops = operands('20000001230000000');
   expect(ops).toEqual('n: 10001230000000, i: 10001230000000, v: 0, w: 0, f: 0, t: 0');
 
+});
+
+test('digit count', () => {
+  expect(digitCount(9)).toEqual(1);
+  expect(digitCount(99)).toEqual(2);
+  expect(digitCount(999)).toEqual(3);
+  expect(digitCount(9999)).toEqual(4);
+  expect(digitCount(99999)).toEqual(5);
+  expect(digitCount(999999)).toEqual(6);
+  expect(digitCount(9999999)).toEqual(7);
+  expect(digitCount(99999999)).toEqual(8);
 });
 
 test('overflow', () => {
