@@ -12,8 +12,6 @@ export const DEFAULT_THRESHOLD = 50;
  */
 export const MAX_DISTANCE = 100;
 
-const EMPTY_MAP: DistanceMap = {};
-
 const get = (map: DistanceMap, want: string, have: string): DistanceNode | undefined => {
   const sub = map[want];
   return sub === undefined ? undefined : sub[have];
@@ -33,8 +31,8 @@ const getany = (map: DistanceMap): DistanceNode => {
   throw new Error('Severe error: wildcard levels missing in distance map.');
 };
 
-const _distance = (node: DistanceNode | number): number => typeof node === 'number' ? node : node[0];
-const _map = (node: DistanceNode | number): DistanceMap => typeof node === 'number' ? EMPTY_MAP : node[1];
+const _distance = (node: DistanceNode | number): number =>
+  typeof node === 'number' ? node : node[0];
 
 /**
  * Return the distance between the desired and supported locale, stopping once
@@ -64,7 +62,7 @@ export const getDistance = (desired: LanguageTag, supported: LanguageTag, thresh
   }
 
   // Move to compare the SCRIPT subtag.
-  map = _map(node);
+  map = (node as [number, DistanceMap])[1];
   want = desired.script();
   have = supported.script();
 
@@ -94,8 +92,13 @@ export const getDistance = (desired: LanguageTag, supported: LanguageTag, thresh
   const wantPartitions = getRegionPartition(want);
   const havePartitions = getRegionPartition(have);
 
-  map = _map(node);
+  map = (node as [number, DistanceMap])[1];
   node = get(map, want, have);
+
+  // There are currently no region -> region distances, so the node
+  // be undefined here.
+
+  /* istanbul ignore else */
   if (node === undefined) {
     // Compare the desired region against supported partitions, and vice-versa.
     node = scanRegion(map, want, wantPartitions, have, havePartitions);
@@ -124,6 +127,8 @@ export const getDistance = (desired: LanguageTag, supported: LanguageTag, thresh
 
   if (!match) {
     node = getany(map);
+    // The 'any' lookup will always succeed here
+    /* istanbul ignore else */
     if (node !== undefined) {
       maxDistance = Math.max(maxDistance, _distance(node));
     }
