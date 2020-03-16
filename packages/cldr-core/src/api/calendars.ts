@@ -391,7 +391,11 @@ export class CalendarsImpl implements Calendars {
       value.wrap(wrapper, [_range, _date]);
       return value.render();
     }
-    return _date ? _date : value.empty();
+    // Here, the request should always be:
+    //   { date }
+    //   { date, range }
+    //   { range }
+    return _date!;
   }
 
   private _context<T extends CalendarDate>(date: T, params: NumberParams, context?: ContextType): CalendarContext<T> {

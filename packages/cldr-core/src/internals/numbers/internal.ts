@@ -48,7 +48,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
   private readonly numberPatternCache: Cache<NumberPattern[]>;
 
-  constructor(private internals: Internals, cacheSize: number = 50) {
+  constructor(private internals: Internals, cacheSize: number) {
     const schema = internals.schema;
     this.currencies = schema.Currencies;
     this.numbers = schema.Numbers;

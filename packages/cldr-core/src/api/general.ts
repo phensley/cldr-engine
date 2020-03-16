@@ -218,4 +218,4 @@ const _ctx = (o: DisplayNameOptions) => _def(o, 'context', 'begin-sentence' as C
 
 // Default an option value
 const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T =>
-  (o ? (o[k] as unknown as T) : t) || t;
+  o[k] as unknown as T || t;

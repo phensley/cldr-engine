@@ -1,4 +1,4 @@
-import { CurrencyType } from '@phensley/cldr-types';
+import { ContextType, CurrencyType } from '@phensley/cldr-types';
 import { Part } from '@phensley/decimal';
 
 import { numbersApi } from '../../_helpers';
@@ -406,6 +406,9 @@ test('currency display names', () => {
   s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('US Dollar');
 
+  s = api.getCurrencyDisplayName('USD', {});
+  expect(s).toEqual('US Dollar');
+
   api = numbersApi('en-GB');
   s = api.getCurrencyDisplayName('USD');
   expect(s).toEqual('US Dollar');
@@ -422,6 +425,9 @@ test('currency display names', () => {
   expect(s).toEqual('Dollar des États-Unis');
 
   s = api.getCurrencyDisplayName('USD', { context: 'middle-of-text' });
+  expect(s).toEqual('dollar des États-Unis');
+
+  s = api.getCurrencyDisplayName('USD', { context: 'invalid' as ContextType });
   expect(s).toEqual('dollar des États-Unis');
 });
 

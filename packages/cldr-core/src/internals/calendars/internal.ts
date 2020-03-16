@@ -29,7 +29,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
 
   constructor(
     private internals: Internals,
-    cacheSize: number = 50
+    cacheSize: number
   ) {
     this.schema = internals.schema;
     this.dayPeriodRules = new DayPeriodRules(cacheSize);

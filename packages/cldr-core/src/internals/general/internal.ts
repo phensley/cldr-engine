@@ -27,7 +27,7 @@ export class GeneralInternalsImpl implements GeneralInternals {
 
   private wrapperPatternCache: Cache<WrapperNode[]>;
 
-  constructor(private internals: Internals, cacheSize: number = 50) {
+  constructor(private internals: Internals, cacheSize: number) {
     const schema = internals.schema;
     this.layout = schema.Layout;
     this.listPatterns = schema.ListPatterns;

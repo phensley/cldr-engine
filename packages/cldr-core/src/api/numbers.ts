@@ -168,4 +168,4 @@ const _ctx = (o: CurrencyDisplayNameOptions) => _def(o, 'context', 'begin-senten
 
 // Default an option value
 const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T =>
-  (o ? (o[k] as unknown as T) : t) || t;
+  o[k] as unknown as T || t;
