@@ -27,6 +27,7 @@ export const availableLocales = (): Locale[] => {
         for (let i = 0; i < re.length; i++) {
           const f = c[i] as number;
           const x: string[] = [];
+          /* istanbul ignore else */
           if (f & Flags.LANG) {
             x.push(l);
           }

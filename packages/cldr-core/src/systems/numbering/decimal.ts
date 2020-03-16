@@ -26,7 +26,7 @@ export class DecimalNumberingSystem extends NumberingSystem {
     super(name, symbols, minimumGroupingDigits, primaryGroupingSize, secondaryGroupingSize);
   }
 
-  formatString(n: DecimalArg, groupDigits?: boolean, minInt: number = 1): string {
+  formatString(n: DecimalArg, groupDigits: boolean, minInt: number): string {
     if (!groupDigits && isInteger(n)) {
       return fastFormatDecimal(String(n), this.digits, minInt);
     }
@@ -35,7 +35,7 @@ export class DecimalNumberingSystem extends NumberingSystem {
 
   // TODO: future merging of internal number formatting code into this module
 
-  protected _formatDecimal<R>(f: DecimalFormatter<R>, n: DecimalArg, groupDigits?: boolean, minInt: number = 1): R {
+  protected _formatDecimal<R>(f: DecimalFormatter<R>, n: DecimalArg, groupDigits: boolean, minInt: number): R {
     const d = coerceDecimal(n);
     const group = groupDigits ? this.symbols.group : '';
     d.format(f,

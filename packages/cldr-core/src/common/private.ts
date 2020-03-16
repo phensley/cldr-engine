@@ -44,7 +44,7 @@ export abstract class NumberingSystem {
    * Format a number directly to a string. This is used for things like low-level field
    * formatting for Calendars.
    */
-  abstract formatString(n: DecimalArg, groupDigits?: boolean, minInt?: number): string;
+  abstract formatString(n: DecimalArg, groupDigits: boolean, minInt: number): string;
 }
 
 /**
