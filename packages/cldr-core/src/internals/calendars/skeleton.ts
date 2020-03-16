@@ -137,7 +137,7 @@ export class DateSkeletonParser {
 
       } else if (DATE_PATTERN_CHARS[ch] > 0) {
         if (ch !== field) {
-          if (field !== '') {
+          if (field) {
             noDayPeriod = this.setDayPeriod(s, field, width, noDayPeriod);
           }
           field = ch;
@@ -151,8 +151,9 @@ export class DateSkeletonParser {
       i++;
     }
 
-    // Push the last field
-    if (width > 0 && field !== '') {
+    // Push the last field. For a non-empty skeleton this will always
+    // be true.
+    if (width > 0 && field) {
       noDayPeriod = this.setDayPeriod(s, field, width, noDayPeriod);
     }
 
@@ -162,7 +163,7 @@ export class DateSkeletonParser {
     if (noDayPeriod) {
       this.clear(s, Field.DAYPERIOD);
 
-    } else if (hour !== undefined && hour.field !== '') {
+    } else if (hour && hour.field) {
       // If we have a 12-hour-cycle but no dayperiod, add the default.
       if (hour.field === 'h' || hour.field === 'K') {
         if (!dayPeriod) {
@@ -178,7 +179,7 @@ export class DateSkeletonParser {
             repeat: row[3]
           };
         }
-      } else if (dayPeriod !== undefined && dayPeriod.field !== '') {
+      } else if (dayPeriod && dayPeriod.field) {
         this.clear(s, Field.DAYPERIOD);
       }
     }
@@ -202,6 +203,8 @@ export class DateSkeletonParser {
   private setMeta(s: DateSkeleton, field: string): void {
     const meta = field === 'C' ? this.allowedFlex : this.preferredFlex;
     for (const n of meta) {
+      // Flex types have no static pattern fields
+      /* istanbul ignore else */
       if (typeof n !== 'string') {
         this.set(s, field, n[0], n[1]);
       }
@@ -210,6 +213,8 @@ export class DateSkeletonParser {
 
   private set(s: DateSkeleton, input: string, field: string, width: number): void {
     const ft = getFieldType(field, width);
+    // Will never fail as field types are whitelisted at a higher call point
+    /* istanbul ignore else */
     if (ft !== undefined) {
       this.index(s, input, field, width, ft);
     }
@@ -318,7 +323,10 @@ export class DatePatternMatcher {
       // Ensure magnitudes are the same
       if ((ptype < 0 && stype < 0) || (ptype > 0 && stype > 0)) {
         const _info = skeleton.info[i];
-        if (_info !== undefined) {
+        // Since the 'i' comes from a parsed date pattern, this should
+        // always be defined.
+        /* istanbul ignore else */
+        if (_info) {
           adjfield = _info.field;
           adjwidth = _info.width;
         }
@@ -337,10 +345,12 @@ export class DatePatternMatcher {
     return r;
   }
 
-  protected getDistance(a: DateSkeleton, b: DateSkeleton, mask: number = 0): number {
+  // TODO: mask is currently unused
+  protected getDistance(a: DateSkeleton, b: DateSkeleton, _mask: number = 0): number {
     let result = 0;
     for (let i = 0; i < Field.MAX_TYPE; i++) {
-      const atype = mask > 0 && (mask & (1 << i)) === 0 ? 0 : a.type[i];
+      // const atype = mask > 0 && (mask & (1 << i)) === 0 ? 0 : a.type[i];
+      const atype = a.type[i];
       const btype = b.type[i];
       if (atype === btype) {
         continue;

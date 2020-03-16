@@ -7,6 +7,12 @@ test('compound split', () => {
   let d: DateSkeleton;
   let t: DateSkeleton;
 
+  // empty
+  d = parse('');
+  expect(d.compound()).toEqual(false);
+  expect(d.isDate).toEqual(false);
+  expect(d.isTime).toEqual(false);
+
   d = parse('GyMMMdhmsv');
 
   expect(d.compound()).toEqual(true);
