@@ -267,15 +267,15 @@ const addhelper = (u: number[], j: number, v: number[], m: number, n: number): v
 
   while (i < n) {
     s = u[i + j] + (v[i] + k);
-    k = (s < u[i] || s >= Constants.RADIX) ? 1 : 0;
+    k = s >= Constants.RADIX ? 1 : 0;
     u[i + j] = k ? s - Constants.RADIX : s;
     i++;
   }
 
   while (k && i < m) {
     s = u[i + j] + k;
-    k = s === Constants.RADIX ? 1 : 0;
-    u[i + j] = k === 1 ? s - Constants.RADIX : s;
+    k = s === Constants.RADIX ? 1 : /* istanbul ignore next */ 0;
+    u[i + j] = k === 1 ? s - Constants.RADIX : /* istanbul ignore next */ s;
     i++;
   }
 
