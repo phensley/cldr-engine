@@ -7,6 +7,7 @@ import {
   PrivateApiImpl
 } from '../../../src';
 import { RE_DIGIT, RE_SYMBOL } from '../../../src/internals/numbers/render';
+import { NumberPattern } from '../../../src/parsing/number';
 
 const internals = INTERNALS();
 const privateApi = (bundle: Bundle) => new PrivateApiImpl(bundle, internals);
@@ -34,6 +35,20 @@ test('digits', () => {
 
   expect(is('$')).toEqual(false);
   expect(is('k')).toEqual(false);
+});
+
+test('secondary groupiing', () => {
+  const en = languageBundle('en');
+  const priv = privateApi(en);
+  const impl = numbersImpl('en');
+
+  const renderer = impl.stringRenderer(priv.getNumberParams('latn'));
+  let s: string;
+  let pattern: NumberPattern;
+
+  pattern = impl.getNumberPattern('#,##,##0', false);
+  s = renderer.render(new Decimal('123456789'), pattern, '', '', '.', 1, true);
+  expect(s).toEqual('12,34,56,789');
 });
 
 test('symbols', () => {

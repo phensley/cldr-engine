@@ -143,6 +143,11 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
         res.add('literal', n);
       } else {
         const v = args[n];
+        // The only way the else branch could be taken is if there
+        // is a mismatch between the CLDR wrapper pattern and the
+        // number of arguments passed in, e.g. "{0} {1} {2}" with
+        // only 2 arguments.
+        /* istanbul ignore else */
         if (v !== undefined) {
           res.append(v);
         }
