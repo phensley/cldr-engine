@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.0.7]
+
+### Fixed/Changed
+
+- Improve defaulting for number formatting minimum integer options.
+- Fix defaulting to non-`latn` number systems for compact number formats.
+- Test coverage increased to 99.19% of all branches.
+
 ## [1.0.6]
 
 ### Fixed/Changed
