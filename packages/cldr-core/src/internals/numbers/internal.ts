@@ -108,7 +108,6 @@ export class NumberInternalsImpl implements NumberInternals {
     switch (style) {
       case 'long':
       case 'short': {
-        console.log(options);
         const isShort = style === 'short';
         const useLatn = decimalFormats.short.get(bundle, 'other', 4)[0] === '';
         const patternImpl = isShort ? (useLatn ? latnInfo.decimalFormats.short : decimalFormats.short)
@@ -204,7 +203,7 @@ export class NumberInternalsImpl implements NumberInternals {
         n = negzero(n, options.negativeZero !== false);
         pattern = this.getNumberPattern(format, n.isNegative());
         // Split number into coeffcient and exponent
-        const [coeff, exponent] = n.scientific(ctx.minInt || 1);
+        const [coeff, exponent] = n.scientific(ctx.minInt);
         const adjcoeff = ctx.adjust(coeff, true);
         result = renderer.render(adjcoeff, pattern, '', '', '', 1, false, exponent);
         break;
@@ -422,8 +421,12 @@ export class NumberInternalsImpl implements NumberInternals {
     const pattern = this.getCompactPattern(raw, standardRaw, negative);
     const fracDigits = ctx.useSignificant ? -1 : 0;
     ctx.setCompact(pattern, n.integerDigits(), divisor, fracDigits);
-    const noMinInt = ctx.minInt === -1;
-    // Hack to avoid extra leading '0' for certain divisor cases
+
+    // Hack to avoid extra leading '0' for certain divisor cases.
+    // Unless explicit minimum integers is set in options, we force it to
+    // 1 to override the compact pattern.
+    const minInt = ctx.options.minimumIntegerDigits;
+    const noMinInt = minInt === undefined || minInt < 0;
     if (noMinInt) {
       ctx.minInt = 1;
     }

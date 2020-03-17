@@ -23,6 +23,7 @@ export class NumberContext {
     const o = options;
     this.options = o;
     this.currencyDigits = currencyDigits;
+    this.minInt = options.minimumIntegerDigits || -1;
 
     // Determine if we should use default or significant digit modes. If we're in compact mode
     // we will use significant digits unless any fraction option is set. Otherwise we use
@@ -112,7 +113,10 @@ export class NumberContext {
 
     const o = this.options;
 
-    this.minInt = orDefault(o.minimumIntegerDigits, pattern.minInt);
+    // If minInt is not specified in options, always copy from pattern
+    if (this.options.minimumIntegerDigits === undefined) {
+      this.minInt = pattern.minInt;
+    }
     this.minFrac = this.currencyDigits === -1 ? pattern.minFrac : this.currencyDigits;
     this.maxFrac = this.currencyDigits === -1 ? pattern.maxFrac : this.currencyDigits;
 
