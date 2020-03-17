@@ -725,10 +725,8 @@ export class Decimal {
       while (zeros > 0) {
         formatter.add(digits[0]);
         emitted++;
+        groupFunc();
         int--;
-        if (int > 0) {
-          groupFunc();
-        }
         zeros--;
       }
     } else if (zeroScale && exp < 0) {
@@ -990,7 +988,7 @@ export class Decimal {
   /**
    * Mutating in-place shift right.
    */
-  protected _shiftright(shift: number, mode: RoundingModeType = 'half-even'): void {
+  protected _shiftright(shift: number, mode: RoundingModeType): void {
     if (shift <= 0) {
       return;
     }

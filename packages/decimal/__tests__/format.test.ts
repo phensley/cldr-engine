@@ -13,3 +13,10 @@ test('string', () => {
   n.format(f, '.', ',', 1, 1, 3, 3, true, digits);
   expect(f.render()).toEqual('bcd,efg,hij');
 });
+
+test('trailing zeros with group', () => {
+  const f = new StringDecimalFormatter();
+  const n = new Decimal('1.2e31');
+  n.format(f, '.', ',', 1, 1, 3, 3, true);
+  expect(f.render()).toEqual('12,000,000,000,000,000,000,000,000,000,000');
+});
