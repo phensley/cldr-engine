@@ -41,6 +41,10 @@ test('shift to rounding', () => {
   expect(shr('2.17', 1, 'half-up')).toEqual(parse('2.2'));
 });
 
+test('shift even', () => {
+  expect(shr('100000020000003000000', 7, 'floor')).toEqual(parse('10000002000000e7'));
+});
+
 test('shift to zero', () => {
   expect(shr('-10000000000', 10, 'up')).toEqual(parse('-1e10'));
   expect(shr('-20000000000', 10, 'up')).toEqual(parse('-2e10'));

@@ -1024,11 +1024,10 @@ export class Decimal {
     let rnd = 0, rest = 0;
 
     if (r === 0) {
-      if (q > 0) {
-        [rnd, rest] = div.pow10(data[q - 1], Constants.RDIGITS - 1);
-        if (rest === 0) {
-          rest = allzero(data, q - 1) === 0 ? 1 : 0;
-        }
+      // q is always non-zero here, else there would be no shift
+      [rnd, rest] = div.pow10(data[q - 1], Constants.RDIGITS - 1);
+      if (rest === 0) {
+        rest = allzero(data, q - 1) === 0 ? 1 : 0;
       }
       for (j = 0; j < data.length - q; j++) {
         w.data[j] = data[q + j];
