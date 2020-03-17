@@ -32,3 +32,9 @@ test('subtraction', () => {
   expect(sub('-54321', '-321')).toEqual(parse('-54000'));
   expect(sub('-54.0321', '-.0321')).toEqual(parse('-54.0000'));
 });
+
+test('subtraction coverage', () => {
+  expect(sub('999998910', '99999909')).toEqual(parse('899999001'));
+  expect(sub('1000000000000999998910', '10000999598910'))
+    .toEqual(parse('999999990000000400000'));
+});
