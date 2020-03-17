@@ -101,7 +101,7 @@ export class Decimal {
     shiftleft(shift: number): Decimal;
     protected _shiftleft(shift: number): void;
     shiftright(shift: number, mode?: RoundingModeType): Decimal;
-    protected _shiftright(shift: number, mode?: RoundingModeType): void;
+    protected _shiftright(shift: number, mode: RoundingModeType): void;
     // (undocumented)
     protected sign: number;
     signum(): number;
