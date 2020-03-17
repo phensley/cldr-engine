@@ -24,6 +24,11 @@ test('divide default', () => {
     .toEqual(parse('1000.0000000000000000999'));
 });
 
+test('divide negative', () => {
+  expect(div('503', '-10')).toEqual(parse('-50.3'));
+  expect(div('-503', '100')).toEqual(parse('-5.03'));
+});
+
 test('divide near radix', () => {
   expect(div('10000000', '99999999999999')).toEqual(parse('1.00000000000001E-7'));
 });
@@ -305,6 +310,10 @@ test('divmod conversions', () => {
   expect(hours).toEqual(parse('13'));
   expect(minutes).toEqual(parse('42'));
   expect(seconds).toEqual(parse('23'));
+});
+
+test('divmod shift', () => {
+  expect(divmod('2e-2', '1.00000005')).toEqual([parse('0'), parse('2000000e-8')]);
 });
 
 test('mod', () => {

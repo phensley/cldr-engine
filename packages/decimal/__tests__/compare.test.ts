@@ -48,6 +48,7 @@ test('compare', () => {
   expect(cmp('10000000000.234566666666e-6', '10000000000.23457e-6')).toEqual(-1);
 
   expect(cmp('120000.2345666666e-7', '100030.232566666e-7')).toEqual(1);
+  expect(cmp('100030.2345666666e-7', '120000.232566666e-7')).toEqual(-1);
 
   expect(cmp('1', '2.0001')).toEqual(-1);
   expect(cmp('2.0001', '1')).toEqual(1);
@@ -66,4 +67,6 @@ test('compare abs', () => {
   expect(cmp('1', '-1', true)).toEqual(0);
   expect(cmp('-15', '10', true)).toEqual(1);
   expect(cmp('10', '-15', true)).toEqual(-1);
+
+  expect(cmp('1001', '1002', true)).toEqual(-1);
 });

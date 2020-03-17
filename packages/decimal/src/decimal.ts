@@ -197,8 +197,8 @@ export class Decimal {
     if (u._exp !== v._exp) {
       const shift = u._exp - v._exp;
       if (shift > 0) {
-        const c = compare(v.data, u.data, shift);
-        return c === 0 ? c : -c;
+        // Data cannot be equal here
+        return -compare(v.data, u.data, shift);
       }
       return compare(u.data, v.data, -shift);
     }
