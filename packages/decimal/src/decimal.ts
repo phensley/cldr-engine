@@ -383,7 +383,7 @@ export class Decimal {
     w = Decimal.fromRaw(sign, exp, q, 0);
     w.trim();
 
-    const hasrem = rem.length && rem[rem.length - 1] !== 0;
+    const hasrem = rem.length && !allzero(rem, rem.length);
     if (hasrem) {
       const lsd = w.data[0] % 10;
       if (lsd === 0 || lsd === 5) {
@@ -1012,7 +1012,6 @@ export class Decimal {
     // digit to the left. We do this when the number is < 0 or
     // we're not shifting out all of the digits.
     const round = w.alignexp() < 0 || prec !== shift;
-
     const div = new DivMod();
     const [q, r] = div.word(shift, Constants.RDIGITS);
 

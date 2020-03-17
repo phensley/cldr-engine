@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 - Improve defaulting for number formatting minimum integer options.
 - Fix defaulting to non-`latn` number systems for compact number formats.
+- Fix rare decimal division rounding bug caused by a leading zero on remainder.
 - Test coverage increased to 99.19% of all branches.
 
 ## [1.0.6]
