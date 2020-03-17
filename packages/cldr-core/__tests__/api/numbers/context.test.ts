@@ -38,6 +38,21 @@ test('zeros', () => {
   expect(n.toString()).toEqual('0.000');
 });
 
+test('defaulting coverage', () => {
+  let opts: DecimalFormatOptions;
+  let ctx: NumberContext;
+  let pattern: NumberPattern;
+  let n: Decimal;
+
+  pattern = parseNumberPattern('#,##0.###')[0];
+
+  opts = { minimumFractionDigits: 1, maximumFractionDigits: 3 };
+  ctx = new NumberContext(opts, 'half-even', false, false, -1);
+  ctx.setPattern(pattern);
+  n = ctx.adjust(new Decimal('1.0'));
+  expect(n.toString()).toEqual('1.0');
+});
+
 test('decimal default', () => {
   let opts: DecimalFormatOptions;
   let ctx: NumberContext;

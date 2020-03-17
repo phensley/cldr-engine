@@ -286,6 +286,7 @@ export class CalendarManager {
       const match = patterns.matchInterval(query, fieldDiff);
       if (match) {
         const pattern = patterns.getIntervalPattern(fieldDiff, match.skeleton);
+        /* istanbul ignore else */
         if (pattern.length) {
           entry.range = patterns.adjustPattern(pattern, query, params.symbols.decimal);
         }
@@ -307,6 +308,7 @@ export class CalendarManager {
   private getAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
     query: DateSkeleton, match: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
     const pattern = patterns.getAvailablePattern(date, match);
+    /* istanbul ignore else */
     if (pattern.length) {
       return patterns.adjustPattern(pattern, query, params.symbols.decimal);
     }
