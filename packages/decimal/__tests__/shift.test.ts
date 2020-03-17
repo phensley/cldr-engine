@@ -41,8 +41,19 @@ test('shift to rounding', () => {
   expect(shr('2.17', 1, 'half-up')).toEqual(parse('2.2'));
 });
 
-test('shift even', () => {
+test('shift large', () => {
+  expect(shr('100000020000003000000', 5, 'floor')).toEqual(parse('1000000200000030e5'));
+  expect(shr('100000020000003000000', 6, 'floor')).toEqual(parse('100000020000003e6'));
   expect(shr('100000020000003000000', 7, 'floor')).toEqual(parse('10000002000000e7'));
+
+  expect(shr('100000020000003000000', 14, 'floor')).toEqual(parse('1000000e14'));
+  expect(shr('100000020000003000000', 15, 'floor')).toEqual(parse('100000e15'));
+  expect(shr('100000020000003000000', 16, 'floor')).toEqual(parse('10000e16'));
+  expect(shr('100000020000003000000', 17, 'floor')).toEqual(parse('1000e17'));
+  expect(shr('100000020000003000000', 18, 'floor')).toEqual(parse('100e18'));
+  expect(shr('100000020000003000000', 19, 'floor')).toEqual(parse('10e19'));
+  expect(shr('100000020000003000000', 20, 'floor')).toEqual(parse('1e20'));
+  expect(shr('100000020000003000000', 21, 'floor')).toEqual(parse('0e21'));
 });
 
 test('shift to zero', () => {

@@ -1035,9 +1035,8 @@ export class Decimal {
     } else {
       let hiprev = 0;
       const ph = POWERS10[Constants.RDIGITS - r];
-      if (q < data.length) {
-        [hiprev, rest] = div.pow10(data[q], r);
-      }
+      // q is always < data.length here; otherwise r == 0
+      [hiprev, rest] = div.pow10(data[q], r);
       [rnd, rest] = div.pow10(rest, r - 1);
       if (rest === 0 && q > 0) {
         rest = allzero(data, q) === 0 ? 1 : 0;
