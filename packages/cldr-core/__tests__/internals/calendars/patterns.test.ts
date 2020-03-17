@@ -26,7 +26,7 @@ test('calendar patterns', () => {
   ]);
 
   // Interval matching has minutes resolution
-  skel = impl.matchInterval(impl.parseSkeleton('mm'), 's');
+  skel = impl.matchInterval(impl.parseSkeleton('mm'), 's')!;
   expect(skel.skeleton).toEqual('Hm');
   expect(skel.isTime).toEqual(true);
 });

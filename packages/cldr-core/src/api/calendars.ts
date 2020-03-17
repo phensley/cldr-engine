@@ -395,7 +395,8 @@ export class CalendarsImpl implements Calendars {
     //   { date }
     //   { date, range }
     //   { range }
-    return _date!;
+    // Unless the schema config contains no relevant patterns.
+    return _date || value.empty();
   }
 
   private _context<T extends CalendarDate>(date: T, params: NumberParams, context?: ContextType): CalendarContext<T> {

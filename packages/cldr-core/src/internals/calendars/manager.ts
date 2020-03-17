@@ -21,7 +21,8 @@ export class CalendarManager {
     private readonly bundle: Bundle,
     private readonly internals: Internals
   ) {
-    this.availableCalendars = new Set(internals.config.calendars || []);
+    // calendars config array should always be non-empty
+    this.availableCalendars = new Set(internals.config.calendars || /* istanbul ignore next */[]);
     const schema = internals.schema;
     this.patternCache = new Cache((calendar: string) => {
       if (this.availableCalendars.has(calendar)) {
@@ -283,8 +284,12 @@ export class CalendarManager {
       // 2b. format date interval: "<date start> - <date end>"
       // 3b. format time interval: "<time start> - <time end>"
       const match = patterns.matchInterval(query, fieldDiff);
-      const pattern = patterns.getIntervalPattern(fieldDiff, match.skeleton);
-      entry.range = pattern.length === 0 ? undefined : patterns.adjustPattern(pattern, query, params.symbols.decimal);
+      if (match) {
+        const pattern = patterns.getIntervalPattern(fieldDiff, match.skeleton);
+        if (pattern.length) {
+          entry.range = patterns.adjustPattern(pattern, query, params.symbols.decimal);
+        }
+      }
     }
 
     patterns.setCachedIntervalRequest(cacheKey, entry);
@@ -302,7 +307,12 @@ export class CalendarManager {
   private getAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
     query: DateSkeleton, match: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
     const pattern = patterns.getAvailablePattern(date, match);
-    return pattern.length === 0 ? undefined : patterns.adjustPattern(pattern, query, params.symbols.decimal);
+    if (pattern.length) {
+      return patterns.adjustPattern(pattern, query, params.symbols.decimal);
+    }
+    // Base standard calendar formats are (currently) always defined.
+    /* istanbul ignore next */
+    return undefined;
   }
 
   /**

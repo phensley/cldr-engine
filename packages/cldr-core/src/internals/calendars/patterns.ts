@@ -174,9 +174,10 @@ export class CalendarPatterns {
     return this.availableMatcher.match(skeleton);
   }
 
-  matchInterval(skeleton: DateSkeleton, field: string): DateSkeleton {
+  matchInterval(skeleton: DateSkeleton, field: string): DateSkeleton | undefined {
     field = field === 's' ? 'm' : field;
-    return this.intervalMatcher[field].match(skeleton);
+    const m = this.intervalMatcher[field];
+    return m ? m.match(skeleton) : undefined;
   }
 
   private buildSkeletonParser(): DateSkeletonParser {
@@ -214,7 +215,7 @@ export class CalendarPatterns {
 
   private getTimeData(): [string, string] {
     const w = timeData['']['001'];
-    const t = timeData[''][this.region] || (timeData[this.language] || {})[this.region];
+    const t = timeData[''][this.region] || (timeData[this.language] || /* istanbul ignore next */ {})[this.region];
     return timeStrings[(t !== undefined ? t : w)].split('|') as [string, string];
   }
 

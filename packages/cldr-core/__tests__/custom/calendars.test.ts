@@ -60,3 +60,16 @@ test('skeleton pattern quarters', () => {
   s = api.formatDate(date, { skeleton: 'yQQQQ' });
   expect(s).toEqual('2nd quarter 2019');
 });
+
+test('missing interval patterns', () => {
+  const zoneId = 'America/New_York';
+  const api = calendarsApi('en', {
+    calendars: [],
+  });
+  let s: string;
+
+  const start = api.toGregorianDate({ date: new Date(2019, 5, 10, 12, 34, 56), zoneId });
+
+  s = api.formatDateInterval(start, start.add({ day: 1 }));
+  expect(s).toEqual('');
+});
