@@ -4,14 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
-## [UNRELEASED]
+## [1.0.7]
 
 ### Fixed/Changed
 
 - Improve defaulting for number formatting minimum integer options.
 - Fix defaulting to non-`latn` number systems for compact number formats.
 - Fix rare decimal division rounding bug caused by a leading zero on remainder.
-- Test coverage increased to 99.19% of all branches.
+- Test coverage increased to 100% of all branches.
 
 ## [1.0.6]
 
@@ -690,6 +690,7 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[1.0.7]: https://github.com/phensley/cldr-engine/compare/v1.0.6...v1.0.7
 [1.0.6]: https://github.com/phensley/cldr-engine/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/phensley/cldr-engine/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/phensley/cldr-engine/compare/v1.0.3...v1.0.4
