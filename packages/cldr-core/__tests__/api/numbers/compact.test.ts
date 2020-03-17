@@ -56,6 +56,22 @@ test('currency short divisors', () => {
 
   s = api.formatCurrency('123456789', 'USD', opts);
   expect(s).toEqual('$123,457K');
+
+  opts.minimumFractionDigits = 2;
+  s = api.formatCurrency('123456789', 'USD', opts);
+  expect(s).toEqual('$123,456.79K');
+
+  opts.minimumIntegerDigits = 3;
+  s = api.formatCurrency('100', 'USD', opts);
+  expect(s).toEqual('$000.10K');
+
+  opts.minimumIntegerDigits = 0;
+  s = api.formatCurrency('100', 'USD', opts);
+  expect(s).toEqual('$.10K');
+
+  opts.minimumIntegerDigits = -1;
+  s = api.formatCurrency('100', 'USD', opts);
+  expect(s).toEqual('$0.10K');
 });
 
 test('decimal long divisors', () => {

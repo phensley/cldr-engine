@@ -2,6 +2,7 @@ import { numbersApi } from '../../_helpers';
 import {
   DecimalFormatOptions,
   DecimalFormatStyleType,
+  NumbersImpl,
   Part,
 } from '../../../src';
 
@@ -176,6 +177,47 @@ test('decimals long', () => {
 
   s = api.formatDecimal('10000000000000000', { style: 'long', group: true });
   expect(s).toEqual('10,000 trillion');
+});
+
+test('compact non-latn', () => {
+  let api: NumbersImpl;
+  let s: string;
+
+  api = numbersApi('zh-HK');
+  s = api.formatDecimal('1000000000', { style: 'long' });
+  expect(s).toEqual('10億'); // 億 = hundred millions
+
+  s = api.formatDecimal('1000000000', { style: 'short' });
+  expect(s).toEqual('1B');
+
+  api = numbersApi('km');
+  s = api.formatDecimal('1000000000', { style: 'long' });
+  expect(s).toEqual('1 ប៊ីលាន');
+
+  s = api.formatDecimal('1000000000', { style: 'short' });
+  expect(s).toEqual('1 ប៊ីលាន');
+
+  api = numbersApi('ta-LK');
+  s = api.formatDecimal('1000000000', { style: 'long' });
+  expect(s).toEqual('1 பில்லியன்');
+
+  s = api.formatDecimal('1000000000', { style: 'short' });
+  expect(s).toEqual('1பி');
+});
+
+test('scientific non-latn', () => {
+  let api: NumbersImpl;
+  let s: string;
+
+  api = numbersApi('zh-HK');
+  s = api.formatDecimal('1000000000', { style: 'scientific' });
+  expect(s).toEqual('1E+9');
+
+  s = api.formatDecimal('1000000000', { style: 'scientific', nu: 'beng' });
+  expect(s).toEqual('১E+৯');
+
+  s = api.formatDecimal('1000000000', { style: 'scientific', nu: 'beng', minimumIntegerDigits: 0 });
+  expect(s).toEqual('১E+৯');
 });
 
 test('significant digits', () => {

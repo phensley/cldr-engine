@@ -108,8 +108,9 @@ export class NumberInternalsImpl implements NumberInternals {
     switch (style) {
       case 'long':
       case 'short': {
+        console.log(options);
         const isShort = style === 'short';
-        const useLatn = decimalFormats.short.get(bundle, 'other', 4);
+        const useLatn = decimalFormats.short.get(bundle, 'other', 4)[0] === '';
         const patternImpl = isShort ? (useLatn ? latnInfo.decimalFormats.short : decimalFormats.short)
           : (useLatn ? latnInfo.decimalFormats.long : decimalFormats.long);
 
@@ -274,6 +275,8 @@ export class NumberInternalsImpl implements NumberInternals {
         const unitWrapper = currencyFormats.unitPattern.get(bundle, plural)
           || currencyFormats.unitPattern.get(bundle, 'other')
           || latnInfo.currencyFormats.unitPattern.get(bundle, plural)
+          // Only occurs for a missing pattern in CLDR data
+          /* istanbul ignore next */
           || latnInfo.currencyFormats.unitPattern.get(bundle, 'other');
         return renderer.wrap(this.internals.general, unitWrapper, num, renderer.make('unit', unit));
       }
@@ -418,8 +421,8 @@ export class NumberInternalsImpl implements NumberInternals {
 
     const pattern = this.getCompactPattern(raw, standardRaw, negative);
     const fracDigits = ctx.useSignificant ? -1 : 0;
-    const noMinInt = ctx.minInt === -1;
     ctx.setCompact(pattern, n.integerDigits(), divisor, fracDigits);
+    const noMinInt = ctx.minInt === -1;
     // Hack to avoid extra leading '0' for certain divisor cases
     if (noMinInt) {
       ctx.minInt = 1;

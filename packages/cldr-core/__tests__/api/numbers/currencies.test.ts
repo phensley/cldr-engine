@@ -505,3 +505,14 @@ test('currency special decimal', () => {
   s = api.formatCurrency(100.50, 'CHF');
   expect(s).toEqual('100.50\xa0CHF');
 });
+
+test('currency non-latn', () => {
+  const api = numbersApi('km');
+  let s: string;
+
+  s = api.formatCurrency('123456789', 'USD', { style: 'name' });
+  expect(s).toEqual('123.456.789,00 ដុល្លារ​អាមេរិក');
+
+  s = api.formatCurrency('123456789', 'USD', { style: 'code', nu: 'deva' });
+  expect(s).toEqual('१२३.४५६.७८९,०० USD');
+});
