@@ -1,10 +1,32 @@
-[`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/messageformat)
+# @phensley/messageformat
 
-Compact and extensible ICU message formatter with built-in support for `plural`, `select`, and `selectordinal`.
+[![@phensley/messageformat](https://badge.fury.io/js/%40phensley%2Fmessageformat.svg)](https://www.npmjs.com/package/@phensley/messageformat) [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/messageformat)](https://bundlephobia.com/result?p=@phensley/messageformat)
 
-### Examples
+Compact and extensible ICU message formatter with built-in support for `plural`, `select`, and `selectordinal`. Also supports plural calculations using arbitrary precision decimal numbers.
+
+## Installation
+
+NPM:
+
+```
+npm install --save @phensley/messageformat
+```
+
+Yarn:
+
+```
+yarn add @phensley/messageformat
+```
+
+## Examples
 
 #### Setup
+
+The package allows you to wire up the different types how you want. Things are broken out so that parsing can be done separately from evaluation.
+
+Parsing can be done at build time -- read a YAML file, parse messages and embed them into a YAML/JSON file, or embed them into code, for faster runtime message evaluation.
+
+Custom formatting and argument conversion functions can be defined and plugged into the framework.
 
 ```typescript
 import { pluralRules } from '@phensley/plurals';
@@ -73,9 +95,9 @@ dump('{word} uppercase = {word foo upper} lowercase = {word foo lower}');
 [4,[[1,"word"],[0," uppercase = "],[6,"foo",["word"],["upper"]],[0," lowercase = "],[6,"foo",["word"],["lower"]]]]
 ```
 
-#### Example 2 - MessageFormatter
+#### Example 2 - MessageFormatter class
 
-If you don't need to embed parsed messages into source code, the `MessageFormatter` can parse and cache messages at runtime. Internally it uses a least-recently-used cache whose size can be configured.
+If you don't need to embed parsed messages into source code, the `MessageFormatter` can parse and cache messages at runtime. Internally it uses a least-recently-used cache whose size can be configured. There is no need for the elaborate setup in the first example.
 
 ```typescript
 const rules = plurals('en');
