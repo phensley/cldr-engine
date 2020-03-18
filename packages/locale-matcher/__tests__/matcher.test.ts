@@ -2,6 +2,7 @@ import { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
 import { Locale } from '@phensley/locale';
 import { LocaleMatch, LocaleMatcher } from '../src';
 import { loadMatchCases } from './util';
+import { parse, sortEntries } from '../src/matcher';
 
 test('basics', () => {
   const matcher = new LocaleMatcher('en, en_GB, zh, pt_AR, es-419');
@@ -21,6 +22,23 @@ test('basics', () => {
   m = matcher.match([]);
   expect(m.distance).toEqual(100);
   expect(m.locale.id).toEqual('en');
+});
+
+test('entry sort', () => {
+  const entries = parse('en en-GB fr-FR');
+  const en = entries[0];
+  const enGB = entries[1];
+  const frFR = entries[2];
+
+  const f = sortEntries(en);
+
+  // 'en' is default, should always be first
+  expect(f(en, enGB)).toEqual(-1);
+  expect(f(enGB, en)).toEqual(1);
+
+  // 'en-GB' is a paradigm locale, should always be first
+  expect(f(enGB, frFR)).toEqual(-1);
+  expect(f(frFR, enGB)).toEqual(1);
 });
 
 test('threshold', () => {

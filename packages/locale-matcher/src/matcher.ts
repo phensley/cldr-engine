@@ -22,8 +22,10 @@ type LangTag = Locale | LanguageTag | string;
 
 /**
  * Flatten and split the string or array into a list of matcher entries.
+ *
+ * Visible for testing.
  */
-const parse = (locales: string | (Locale | LangTag)[] = [], options: LocaleMatcherOptions = {}): Entry[] => {
+export const parse = (locales: string | (Locale | LangTag)[] = [], options: LocaleMatcherOptions = {}): Entry[] => {
   let raw: LangTag[];
   if (typeof locales === 'string') {
     raw = locales.split(TAG_SEP);
@@ -117,6 +119,39 @@ export interface LocaleMatcherOptions {
 }
 
 /**
+ * Sort the supported locale entries. The result will have the following order:
+ *
+ *  First: default locale
+ *   Next: all paradigm locales
+ *   Last: all other locales
+ *
+ * Visible for testing.
+ */
+export const sortEntries = (d: Entry) => (a: Entry, b: Entry): number => {
+  // Check if entry is our default tag, to keep it at the front of the array.
+  if (a.tag === d.tag) {
+    return -1;
+  }
+  if (b.tag === d.tag) {
+    return 1;
+  }
+
+  // Sort all paradigm locales before non-paradigms.
+  const pa = paradigmLocales[a.compact];
+  const pb = paradigmLocales[b.compact];
+  console.log(a.compact, pa, '  ', b.compact, pb);
+  if (pa !== undefined) {
+    return pb === U ? -1 : numberCmp(pa, pb);
+  } else if (pb !== undefined) {
+    return 1;
+  }
+
+  // All other locales stay in their relative positions.
+  return 0;
+
+};
+
+/**
  * Given a list of supported locales, and a list of a user's desired locales
  * (sorted in the order of preference, descending), returns the supported
  * locale closest to the user preference. The first locale in the list will
@@ -144,29 +179,7 @@ export class LocaleMatcher {
 
     // The first locale in the list is used as the default.
     this.default = this.supported[0];
-
-    this.supported.sort((a: Entry, b: Entry): number => {
-      // Keep default tag at the front.
-      if (a.tag === this.default.tag) {
-        return -1;
-      }
-      /* istanbul ignore if */
-      if (b.tag === this.default.tag) {
-        return 1;
-      }
-
-      // Sort all paradigm locales before non-paradigms.
-      const pa = paradigmLocales[a.compact];
-      const pb = paradigmLocales[b.compact];
-      if (pa !== undefined) {
-        return pb === U ? -1 : numberCmp(pa, pb);
-      } else if (pb !== undefined) {
-        return 1;
-      }
-
-      // All other locales stay in their relative positions.
-      return 0;
-    });
+    this.supported.sort(sortEntries(this.default));
 
     // Wire up a map for quick lookups of exact matches. These have a
     // distance of 0 and will short-circuit the matching loop.
