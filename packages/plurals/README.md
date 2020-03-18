@@ -1,9 +1,24 @@
-[`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/plurals)
+# @phensley/timezone
 
-Standalone CLDR plural rules engine. Supports cardinal, ordinal, and plural range calculations.
+[![@phensley/plurals](https://badge.fury.io/js/%40phensley%2Fplurals.svg)](https://www.npmjs.com/package/@phensley/plurals) [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/plurals)](https://bundlephobia.com/result?p=@phensley/plurals)
 
+Standalone CLDR plural rules engine. Supports cardinal, ordinal, and plural range calculations. Also supports arbitrary precision decimal numbers.
 
-## Example
+## Installation
+
+NPM:
+
+```
+npm install --save @phensley/plurals
+```
+
+Yarn:
+
+```
+yarn add @phensley/plurals
+```
+
+## Examples
 
 The plural rules engine takes 2 parameters as input: an ISO 639 language code and a number. The number can be a `Decimal`, `number`, or a string containing a valid number.
 
@@ -38,7 +53,7 @@ const NUMBERS = [
   '1000000000000.0',
   '9999999999999999999999919',
   '9999999999999999999999999',
-  '1e30',
+  '1e30'
 ];
 
 let s = '';
