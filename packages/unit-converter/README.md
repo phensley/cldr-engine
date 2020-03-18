@@ -1,4 +1,6 @@
-[`@phensley/unit-converter`](https://www.npmjs.com/package/@phensley/unit-converter) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/unit-converter)
+# @phensley/unit-converter
+
+[![@phensley/unit-converter](https://badge.fury.io/js/%40phensley%2Flocale.svg)](https://www.npmjs.com/package/@phensley/unit-converter) [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/unit-converter)](https://bundlephobia.com/result?p=@phensley/unit-converter)
 
 General framework for converting between units. Includes pre-defined factors for conversion between CLDR units.
 
@@ -21,7 +23,6 @@ for (const unit of ['foot', 'mile']) {
   }
   console.log();
 }
-
 ```
 
 ```
