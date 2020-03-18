@@ -24,7 +24,7 @@ yarn add @phensley/decimal
 import { Decimal, DecimalConstants, MathContext } from '@phensley/decimal';
 
 const area = (radius: Decimal, ctx: MathContext) =>
-  DecimalConstants.PI.multiply(radius, ctx);
+  DecimalConstants.PI.multiply(radius, ctx).multiply(radius, ctx);
 
 const calc = (ctx: MathContext) => {
   for (const r of ['.002', '1', '1.5', '999.999']) {
@@ -65,28 +65,28 @@ for (const name of Object.keys(NEAREST_STARS)) {
 
 ```
 Scale 5:
-area of circle with radius .002    is 0.00628
+area of circle with radius .002    is 0.00001
 area of circle with radius 1       is 3.14159
-area of circle with radius 1.5     is 4.71239
-area of circle with radius 999.999 is 3141.58951
+area of circle with radius 1.5     is 7.06858
+area of circle with radius 999.999 is 3141586.36841
 
 Scale 15:
-area of circle with radius .002    is 0.006283185307180
+area of circle with radius .002    is 0.000012566370614
 area of circle with radius 1       is 3.141592653589793
-area of circle with radius 1.5     is 4.712388980384690
-area of circle with radius 999.999 is 3141.589511997139649
+area of circle with radius 1.5     is 7.068583470577035
+area of circle with radius 999.999 is 3141586.370407627651860
 
 Precision 10:
-area of circle with radius .002    is 0.006283185307
+area of circle with radius .002    is 0.00001256637061
 area of circle with radius 1       is 3.141592654
-area of circle with radius 1.5     is 4.712388980
-area of circle with radius 999.999 is 3141.589512
+area of circle with radius 1.5     is 7.068583470
+area of circle with radius 999.999 is 3141586.370
 
 Precision 30:
-area of circle with radius .002    is 0.00628318530717958647692528676656
+area of circle with radius .002    is 0.0000125663706143591729538505735331
 area of circle with radius 1       is 3.14159265358979323846264338328
-area of circle with radius 1.5     is 4.71238898038468985769396507492
-area of circle with radius 999.999 is 3141.58951199713964866940492064
+area of circle with radius 1.5     is 7.06858347057703478654094761238
+area of circle with radius 999.999 is 3141586.37040762765152975625124
 
 Distance to Proxima Centauri is 40871520000000 kilometers
 Distance to Barnard's Star   is 56387560000000 kilometers
