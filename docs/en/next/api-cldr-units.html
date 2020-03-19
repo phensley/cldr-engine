@@ -142,12 +142,14 @@ formatQuantity(qty, options?): Part[]
 log(cldr.Units.formatQuantityToParts(qty, { length: <span class="hljs-string">'long'</span> }));
 </code></pre>
 <pre class="output">
-[ { type: 'integer', value: '1' },
+[
+  { type: 'integer', value: '1' },
   { type: 'group', value: ',' },
   { type: 'integer', value: '353' },
   { type: 'decimal', value: '.' },
   { type: 'fraction', value: '76' },
-  { type: 'literal', value: ' miles per hour' } ]
+  { type: 'literal', value: ' miles per hour' }
+]
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="formatquantitysequence"></a><a href="#formatquantitysequence" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatQuantitySequence</h2>
 <p>Format a sequence of <a href="api-quantity.html">Quantity</a> into a string.</p>
@@ -217,7 +219,8 @@ formatQuantitySequenceToParts(quantities, options?): string
 log(cldr.Units.formatQuantitySequenceToParts(qty, { length: <span class="hljs-string">'short'</span> }));
 </code></pre>
 <pre class="output">
-[ { type: 'integer', value: '3' },
+[
+  { type: 'integer', value: '3' },
   { type: 'literal', value: ' mi' },
   { type: 'literal', value: ', ' },
   { type: 'integer', value: '1' },
@@ -229,7 +232,8 @@ log(cldr.Units.formatQuantitySequenceToParts(qty, { length: <span class="hljs-st
   { type: 'integer', value: '9' },
   { type: 'decimal', value: '.' },
   { type: 'fraction', value: '6' },
-  { type: 'literal', value: ' in' } ]
+  { type: 'literal', value: ' in' }
+]
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="getunitdisplayname"></a><a href="#getunitdisplayname" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getUnitDisplayName</h2>
 <p>Return a string containing the unit display name.</p>
