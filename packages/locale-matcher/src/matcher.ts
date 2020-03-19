@@ -139,7 +139,6 @@ export const sortEntries = (d: Entry) => (a: Entry, b: Entry): number => {
   // Sort all paradigm locales before non-paradigms.
   const pa = paradigmLocales[a.compact];
   const pb = paradigmLocales[b.compact];
-  console.log(a.compact, pa, '  ', b.compact, pb);
   if (pa !== undefined) {
     return pb === U ? -1 : numberCmp(pa, pb);
   } else if (pb !== undefined) {
