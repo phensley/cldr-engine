@@ -3,15 +3,15 @@ import * as tar from 'tar';
 import * as zlib from 'zlib';
 import * as filepath from 'path';
 
-import * as request from 'request';
 import chalk from 'chalk';
+import fetch, { Response } from 'node-fetch';
 
 /*
  * Replacement for 'cldr-data-downloader'
  */
 
 // Temporary location prior to official Github JSON release
-// const BASEURL = `https://glonk.com/unicode-cldr`;
+// const BASEURL = 'http://localhost:8000/.cldrbuild/unicode-cldr';
 
 const BASEURL = 'https://github.com/unicode-cldr';
 const DATAROOT = filepath.resolve(filepath.join(__dirname, '../../../.cldr'));
@@ -94,8 +94,8 @@ export class Downloader {
     const res: Promise<boolean>[] = [];
     for (const name of ARCHIVES) {
       if (this.state[name] !== this.version) {
-         const commit = COMMITS[name];
-         res.push(this.extract(name, this.version, commit));
+        const commit = COMMITS[name];
+        res.push(this.extract(name, this.version, commit));
       }
     }
     return Promise.all(res);
@@ -109,41 +109,33 @@ export class Downloader {
       const url = `${BASEURL}/${name}/archive/${commit ? commit : version}.tar.gz`;
       const desc = `${name} ${version} at ${url}`;
 
-      request.get(url)
-        // http get
-        .on('response', (r: request.Response) => {
-          if (r.statusCode !== 200) {
-            console.log('failure http', r.statusCode);
-            reject(`unexpected status code ${r.statusCode} downloading ${desc}`);
-          }
-        })
-        .on('error', (e: Error) => {
-          console.log('failure', e);
-          reject(`failure downloading ${desc}: ${e}`);
-        })
+      const unzip = zlib.createGunzip();
+      fetch(url)
+        .then((r: Response) => {
+          r.body
+            // un-gzip
+            .pipe(unzip)
+            .on('error', (e: Error) => {
+              console.log('failure', e);
+              reject(`failure un-gzipping ${desc}: ${e}`);
+            })
 
-        // un-gzip
-        .pipe(zlib.createGunzip())
-        .on('error', (e: Error) => {
-          console.log('failure', e);
-          reject(`failure un-gzipping ${desc}: ${e}`);
+            // untar
+            .pipe(new tar.Parse({ strip: 1 }) as fs.WriteStream)
+            .on('entry', (entry: any) => {
+              this.save(version, entry);
+            })
+            .on('close', () => {
+              this.state[name] = version;
+              this.savestate();
+              info(`${chalk.green('      ok')} ${name}`);
+              resolve(true);
+            });
         })
-
-        // untar
-        .pipe(new tar.Parse({ strip: 1 }) as fs.WriteStream)
-        .on('entry', (entry: any) => {
-          this.save(version, entry);
-        })
-        .on('close', () => {
-          this.state[name] = version;
-          this.savestate();
-          info(`${chalk.green('      ok')} ${name}`);
-          resolve(true);
-        })
-        .on('error', (e: Error) => {
-          reject(`failure un-tarring ${desc}: ${e}`);
+        .catch((reason: any) => {
+          reject(`failure downloading ${desc}: ${reason}`);
         });
-      });
+    });
   }
 
   private save(version: string, entry: any): void {
