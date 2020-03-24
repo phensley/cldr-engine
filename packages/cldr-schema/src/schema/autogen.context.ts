@@ -4,6 +4,6 @@
 
 import { ContextTransformFieldType } from '@phensley/cldr-types';
 
-/* tslint:disable:max-line-length */
+/* tslint:disable:max-line-length whitespace */
 /** @public */
 export const ContextTransformFieldValues: ContextTransformFieldType[] = ('calendar-field currencyName day-format-except-narrow day-standalone-except-narrow era-abbr era-name keyValue languages month-format-except-narrow month-standalone-except-narrow number-spellout relative script typographicNames').split(' ') as ContextTransformFieldType[];

@@ -35,12 +35,12 @@ en-CA ; ar-MK ; 100
 he ; iw ; 0
 cmn ; zh ; 0
 
-en ; to ; 14 ; 100
+en ; to ; 34 ; 100
 
 no-DE ; no ; 4
-no    ; nn    ; 10
+no    ; nn    ; 20
 
-nn ; no-DE ; 14
+nn ; no-DE ; 24
 
 no ; no ; 0
 da ; no ; 12

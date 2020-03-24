@@ -450,12 +450,16 @@ const TimeZoneNames = {
 
 // const _pruneUnitFormats = L.remove(L.props('per', 'coordinateUnit'));
 
+const NON_UNIT_CATEGORIES = new Set([
+  'times', 'per', 'coordinateUnit', 'power2', 'power3'
+]);
+
 /**
  * Get the full unit names.
  */
 const getUnitNames = (obj: any) => {
   return Object.keys(obj).reduce((o: any, k) => {
-    if (k !== 'times' && k !== 'per' && k !== 'coordinateUnit') {
+    if (!NON_UNIT_CATEGORIES.has(k) && !k.startsWith('10p')) {
       o[k] = {};
     }
     return o;

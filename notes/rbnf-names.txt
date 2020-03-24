@@ -836,6 +836,13 @@ sr:
    spellout-numbering-year
    spellout-ordinal
 
+su:
+   digits-ordinal
+   spellout-cardinal
+   spellout-numbering
+   spellout-numbering-year
+   spellout-ordinal
+
 sv:
    digits-ordinal
    digits-ordinal-feminine

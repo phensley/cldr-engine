@@ -299,6 +299,7 @@ export const cardinalRules: { [x: string]: Rule[] } = {
   osa: [],
   pa: [[1, [[1]]]],
   pap: [[1, [[0]]]],
+  pcm: [[1, [[2], [0]]]],
   pl: [
     [1, [[7, 8]]],
     [3, [[8, 27, 28]]],
@@ -347,6 +348,10 @@ export const cardinalRules: { [x: string]: Rule[] } = {
   rwk: [[1, [[0]]]],
   sah: [],
   saq: [[1, [[0]]]],
+  sat: [
+    [1, [[0]]],
+    [2, [[4]]]
+  ],
   sc: [[1, [[7, 8]]]],
   scn: [[1, [[7, 8]]]],
   sd: [[1, [[0]]]],
