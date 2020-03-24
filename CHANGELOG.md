@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 
+- Upgrade to [CLDR v37](http://cldr.unicode.org/index/downloads/cldr-37)
 - New methods to construct dates from one or more fields, e.g. `Calendars.newGregorianDate(fields)` for each calendar type.
 - New methods to construct "now" dates, e.g. `Calendars.now()` and `Calendars.nowGregorian()` for each calendar type.
 - `CalendarDate.asJSDate()` converts a `CalendarDate` to a JavaScript `Date`.
@@ -24,6 +25,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
   - The `dayPeriod` default for Gregorian in US English is "AM" and "PM".
     Specifying the `{ alt: { dayPeriod: 'casing' }}` option will use lowercase forms "am" and "pm".
 - Expose the `Calendars.firstDayOfWeek()` and `Calendars.minDaysInFirstWeek()` methods.
+
+#### Breaking Changes
+
+- The following values of `UnitType` have been renamed in the underlying CLDR data.
+
+  | old                        | new                           |
+  | -------------------------- | ----------------------------- |
+  | `meter-per-second-squared` | `meter-per-square-second`     |
+  | `part-per-million`         | `permillion`                  |
+  | `liter-per-100kilometers`  | `liter-per-100-kilometer`     |
+  | `millimeter-of-mercury`    | `millimeter-ofhg`             |
+  | `pound-per-square-inch`    | `pound-force-per-square-inch` |
+  | `inch-hg`                  | `inch-ofhg`                   |
+  | `pound-foot`               | `pound-force-foot`            |
 
 ### Fixed/Changed
 
