@@ -170,12 +170,6 @@
             "supported": "en"
           },
           {
-            "desired": "et",
-            "distance": "30",
-            "oneway": "1",
-            "supported": "fi"
-          },
-          {
             "desired": "eu",
             "distance": "20",
             "oneway": "1",

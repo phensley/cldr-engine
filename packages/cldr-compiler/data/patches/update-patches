@@ -13,7 +13,7 @@ import rbnf
 from util import makedirs
 
 BASEURL = 'https://github.com/unicode-org/cldr/archive'
-TAG = 'release-37-alpha3'
+TAG = 'maint/maint-37'
 ROOTPATH = 'common'
 
 TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')
@@ -24,11 +24,9 @@ BUILDERS = [
     rbnf
 ]
 
-def get_root():
-    return os.path.join(TEMPDIR, TAG)
-
 def download():
-    realpath = get_root()
+    tag = TAG.replace('/', '-')
+    realpath = os.path.join(TEMPDIR, tag)
     if not os.path.exists(realpath):
         makedirs(realpath)
         url = os.path.join(BASEURL, '%s.tar.gz' % TAG)
@@ -36,7 +34,7 @@ def download():
         f = gzip.GzipFile(fileobj=io.BytesIO(r.content))
         t = tarfile.TarFile(fileobj=f)
         t.extractall(realpath)
-    return os.path.join(realpath, 'cldr-%s' % TAG)
+    return os.path.join(realpath, 'cldr-%s' % tag)
 
 def main():
     makedirs(TEMPDIR)
