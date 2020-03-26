@@ -1,4 +1,4 @@
-import { Schema } from '@phensley/cldr-types';
+import { KeyIndex, Schema } from '@phensley/cldr-types';
 import {
   Digits,
   DigitsArrowImpl,
@@ -9,10 +9,8 @@ import {
   Scope,
   ScopeArrowImpl,
   ScopeMap,
-  Vector1,
-  Vector1ArrowImpl,
-  Vector2,
-  Vector2ArrowImpl,
+  Vector,
+  VectorArrowImpl,
 } from '@phensley/cldr-schema';
 import { Decimal } from '@phensley/decimal';
 import { leftPad } from '../utils/string';
@@ -28,13 +26,13 @@ class Generator {
     return this.offset++;
   }
 
-  vector1(dim: number): number {
+  vector(dims: KeyIndex<string>[]): number {
     const off = this.offset;
-    this.offset += dim;
+    this.offset += dims.reduce((p, c) => c.size * p, 1);
     return off;
   }
 
-  vector2(dim1: number, dim2: number): number {
+  digits(dim1: number, dim2: number): number {
     const off = this.offset;
     this.offset += (dim1 * dim2);
     return off;
@@ -80,18 +78,15 @@ export class SchemaBuilder {
       case 'scopemap':
         this.constructScopeMap(obj, inst);
         break;
-      case 'vector1':
-        this.constructVector1(obj, inst);
-        break;
-      case 'vector2':
-        this.constructVector2(obj, inst);
+      case 'vector':
+        this.constructVector(obj, inst);
         break;
     }
   }
 
   private constructDigits(obj: any, inst: Digits): void {
     const dim0 = this.origin.getIndex(inst.dim0);
-    const offset = this.generator.vector2(dim0.size, inst.values.length * 2);
+    const offset = this.generator.digits(dim0.size, inst.values.length * 2);
     obj[inst.name] = new DigitsArrowImpl(offset, dim0, inst.values);
   }
 
@@ -141,19 +136,11 @@ export class SchemaBuilder {
     obj[inst.name] = new ScopeArrowImpl(map);
   }
 
-  private constructVector1(obj: any, inst: Vector1): void {
-    const dim0 = this.origin.getIndex(inst.dim0);
+  private constructVector(obj: any, inst: Vector): void {
+    const dims = inst.dims.map(k => this.origin.getIndex(k));
     const offset = this.generator.field(); // header
-    this.generator.vector1(dim0.size);
-    obj[inst.name] = new Vector1ArrowImpl(offset, dim0);
-  }
-
-  private constructVector2(obj: any, inst: Vector2): void {
-    const dim0 = this.origin.getIndex(inst.dim0);
-    const dim1 = this.origin.getIndex(inst.dim1);
-    const offset = this.generator.field(); // header
-    this.generator.vector2(dim0.size, dim1.size);
-    obj[inst.name] = new Vector2ArrowImpl(offset, dim0, dim1);
+    this.generator.vector(dims);
+    obj[inst.name] = new VectorArrowImpl(offset, dims);
   }
 }
 

@@ -1,4 +1,4 @@
-import { field, scope, vector1, Scope } from '../instructions';
+import { field, scope, vector, Scope } from '../instructions';
 import {
   ContextTransformFieldIndex,
   ListPatternPositionIndex
@@ -9,7 +9,7 @@ export const LAYOUT: Scope = scope('Layout', 'Layout', [
   field('lineOrder')
 ]);
 
-const listPattern = (name: string) => vector1(name, 'list-pattern-position');
+const listPattern = (name: string) => vector(name, ['list-pattern-position']);
 
 export const LIST_PATTERNS: Scope = scope('ListPatterns', 'ListPatterns', [
   listPattern('and'),
@@ -26,5 +26,5 @@ export const GENERAL_INDICES = {
 };
 
 export const CONTEXT_TRANSFORM: Scope = scope('ContextTransforms', 'ContextTransforms', [
-  vector1('contextTransforms', 'context-transform-field')
+  vector('contextTransforms', ['context-transform-field'])
 ]);

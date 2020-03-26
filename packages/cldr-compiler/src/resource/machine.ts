@@ -5,8 +5,7 @@ import {
   Origin,
   Scope,
   ScopeMap,
-  Vector1,
-  Vector2
+  Vector,
 } from '@phensley/cldr-schema';
 
 const leftPad = (s: number | string, w: number): string => {
@@ -64,11 +63,8 @@ export class EncoderMachine {
       case 'scopemap':
         this.encodeScopeMap(obj, inst);
         break;
-      case 'vector1':
-        this.encodeVector1(obj, inst);
-        break;
-      case 'vector2':
-        this.encodeVector2(obj, inst);
+      case 'vector':
+        this.encodeVector(obj, inst);
         break;
     }
   }
@@ -138,48 +134,35 @@ export class EncoderMachine {
         this.encode(child, i);
       }
     }
-
-    // const undef: any = {};
-    // for (const i of inst.block) {
-    //   this.encode(undef, i);
-    // }
   }
 
-  private encodeVector1(obj: any, inst: Vector1): void {
-    const dim0 = this.origin.getIndex(inst.dim0);
+  private encodeVector(obj: any, inst: Vector): any {
+    const o = obj[inst.name] || {};
     const values: string[] = [];
-    let exists = false;
-    const o0 = obj[inst.name] || {};
-    for (const k of dim0.keys) {
-      const v = o0[k];
-      exists = exists || v !== undefined && v !== '';
-      values.push(v);
-    }
-    // header
+    const exists = this._encodeVector(o, inst, values, 0);
     this.encoder.encode(exists ? 'E' : 'N');
     for (const v of values) {
       this.encoder.encode(v);
     }
   }
 
-  private encodeVector2(obj: any, inst: Vector2): void {
-    const dim0 = this.origin.getIndex(inst.dim0);
-    const dim1 = this.origin.getIndex(inst.dim1);
-    const values: string[] = [];
+  private _encodeVector(obj: any, inst: Vector, values: string[], k: number): boolean {
+    const dims = inst.dims;
+    const dim = this.origin.getIndex(dims[k]);
+    const last = k === dims.length - 1;
     let exists = false;
-    const o0 = obj[inst.name] || {};
-    for (const k1 of dim0.keys) {
-      const o1 = o0[k1] || {};
-      for (const k2 of dim1.keys) {
-        const v = o1[k2];
-        exists = exists || v !== undefined && v !== '';
-        values.push(v);
+    for (const key of dim.keys) {
+      if (!last) {
+        // Drill one level deeper
+        const res = this._encodeVector(obj[key] || {}, inst, values, k + 1);
+        exists = exists || res;
+      } else {
+        // Encode the value
+        const v = obj[key];
+        exists = exists || !!v;
+        values.push(v || '');
       }
     }
-    // header
-    this.encoder.encode(exists ? 'E' : 'N');
-    for (const v of values) {
-      this.encoder.encode(v);
-    }
+    return exists;
   }
 }

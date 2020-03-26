@@ -65,115 +65,89 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
 }
 
 /**
+ * Generalized multi-dimensional vector arrow.
+ *
  * @public
  */
-export class Vector1ArrowImpl<T extends string> implements Vector1Arrow<T> {
+export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<string, string> {
 
+  readonly offset: number;
   readonly len: number;
-  readonly offset: number;
-  constructor(offset: number, readonly index: KeyIndex<T>) {
-    this.len = index.keys.length;
-    this.offset = offset + 1; // skip header
+
+  private last: number;
+  private factors: number[];
+  private warning: boolean = false;
+
+  constructor(offset: number, readonly keysets: KeyIndex<string>[]) {
+    this.offset = offset + 1; // skip over header
+    this.len = keysets.length;
+    this.last = this.len - 1;
+    this.factors = new Array(this.len);
+
+    // Pre-compute the address factor for each dimension:
+    //  1-dim:        [ index0 ]
+    //  2-dim:        [ (index0 * size1), index1 ]
+    //  3-dim:        [ (index0 * size1 * size2), (index1 * size), index2 ]
+    //  ...
+    for (let i = 0; i < this.len; i++) {
+      let k = 1;
+      for (let j = i + 1; j < this.len; j++) {
+        k *= this.keysets[j].size;
+      }
+      this.factors[i] = k;
+    }
   }
 
   exists(bundle: PrimitiveBundle): boolean {
     return bundle.get(this.offset - 1) === 'E';
   }
 
-  get(bundle: PrimitiveBundle, key: T): string {
-    const exists = bundle.get(this.offset - 1) === 'E';
-    if (exists) {
-      const i = this.index.get(key);
-      return i === -1 ? '' : bundle.get(this.offset + i);
+  get(bundle: PrimitiveBundle, ...keys: string[]): string {
+    if (!this.exists(bundle)) {
+      return '';
     }
-    return '';
-  }
-
-  mapping(bundle: PrimitiveBundle): { [P in T]: string } {
-    const len = this.len;
-    const offset = this.offset;
-    const keys = this.index.keys;
-    /* tslint:disable-next-line */
-    const res: { [P in T]: string } = Object.create(null);
-    const exists = bundle.get(offset - 1) === 'E';
-    if (!exists) {
-      return res;
-    }
-    for (let i = 0; i < len; i++) {
-      const s = bundle.get(offset + i);
-      if (s) {
-        const k = keys[i];
-        res[k] = s;
+    if (keys.length !== this.len) {
+      // Impossible lookup, will never reach a valid field
+      if (!this.warning) {
+        console.log(`Warning: impossible vector lookup with keys ${JSON.stringify(keys)}`);
+        this.warning = true;
       }
+      return '';
     }
-    return res;
-  }
-}
-
-/**
- * @public
- */
-export class Vector2ArrowImpl<T extends string, S extends string> implements Vector2Arrow<T, S> {
-
-  readonly size: number;
-  readonly size2: number;
-  readonly offset: number;
-
-  constructor(offset: number, readonly index1: KeyIndex<T>, readonly index2: KeyIndex<S>) {
-    this.size = index1.size * index2.size;
-    this.size2 = index2.size;
-    this.offset = offset + 1; // skip header
+    let k = this.offset;
+    for (let i = 0; i < this.len; i++) {
+      const j = this.keysets[i].get(keys[i]);
+      if (j === -1) {
+        // Invalid lookup
+        return '';
+      }
+      k += j * this.factors[i];
+    }
+    return bundle.get(k);
   }
 
-  exists(bundle: PrimitiveBundle): boolean {
-    return bundle.get(this.offset - 1) === 'E';
+  mapping(bundle: PrimitiveBundle): any {
+    return this.exists(bundle) ? this._mapping(bundle, 0, 0) : {};
   }
 
-  get(bundle: PrimitiveBundle, key1: T, key2: S): string {
-    const exists = bundle.get(this.offset - 1) === 'E';
-    if (exists) {
-      const i = this.index1.get(key1);
-      if (i !== -1) {
-        const j = this.index2.get(key2);
-        if (j !== -1) {
-          const k = this.offset + (i * this.size2) + j;
-          return bundle.get(k);
+  private _mapping(bundle: PrimitiveBundle, k: number, ix: number): any {
+    const o: any = {};
+    const keys = this.keysets[k].keys;
+    const last = k === this.last;
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      if (last) {
+        // We're at the value level of the map, so lookup the corresponding string
+        const val = bundle.get(this.offset + i + ix);
+        if (val) {
+          o[key] = val;
         }
+      } else {
+        // Drill one level deeper
+        o[key] = this._mapping(bundle, k + 1, ix + (i * this.factors[k]));
       }
     }
-    return '';
+    return o;
   }
 
-  mapping(bundle: PrimitiveBundle): { [P in T]: { [Q in S]: string } } {
-    const offset = this.offset;
-    /* tslint:disable-next-line */
-    const res: { [P in T]: { [Q in S]: string } } = Object.create(null);
-    let exists = bundle.get(offset - 1) === 'E';
-    if (!exists) {
-      return res;
-    }
-
-    const size2 = this.size2;
-    const keys1 = this.index1.keys;
-    const keys2 = this.index2.keys;
-    for (let i = 0; i < keys1.length; i++) {
-      exists = false;
-      /* tslint:disable-next-line */
-      const o: { [Q in S]: string } = Object.create(null);
-      for (let j = 0; j < keys2.length; j++) {
-        const k = offset + (i * size2) + j;
-        const s = bundle.get(k);
-        if (s) {
-          exists = true;
-          const key2 = keys2[j];
-          o[key2] = s;
-        }
-      }
-      if (exists) {
-        const key1 = keys1[i];
-        res[key1] = o;
-      }
-    }
-    return res;
-  }
 }

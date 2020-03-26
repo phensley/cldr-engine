@@ -1,4 +1,4 @@
-import { digits, field, scope, scopemap, vector1, vector2, Scope } from '../instructions';
+import { digits, field, scope, scopemap, vector, Scope } from '../instructions';
 import {
   CurrencySpacingPatternIndex,
   CurrencySpacingPosIndex,
@@ -11,17 +11,17 @@ import {
 export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
 
   field('minimumGroupingDigits'),
-  vector1('numberSystems', 'number-system'),
+  vector('numberSystems', ['number-system']),
 
   scopemap('numberSystem', 'number-system-name', [
-    vector1('symbols', 'number-symbol'),
+    vector('symbols', ['number-symbol']),
 
     scope('currencyFormats', 'currencyFormats', [
       field('standard'),
       field('accounting'),
       digits('short', 'plural-key', PluralDigitValues),
-      vector2('spacing', 'currency-spacing-pos', 'currency-spacing-pattern'),
-      vector1('unitPattern', 'plural-key')
+      vector('spacing', ['currency-spacing-pos', 'currency-spacing-pattern']),
+      vector('unitPattern', ['plural-key'])
     ]),
 
     scope('decimalFormats', 'decimalFormats', [
@@ -32,7 +32,7 @@ export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
 
     field('percentFormat'),
     field('scientificFormat'),
-    vector1('miscPatterns', 'number-misc-pattern')
+    vector('miscPatterns', ['number-misc-pattern'])
   ])
 
 ]);

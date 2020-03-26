@@ -1,4 +1,4 @@
-import { field, scope, vector1, vector2, Scope } from '../instructions';
+import { field, scope, vector, Scope } from '../instructions';
 import {
   MetaZoneIndex,
   TimeZoneTypeIndex,
@@ -6,10 +6,10 @@ import {
 
 export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZones', [
   scope('metaZones', 'metaZones', [
-    vector2('short', 'timezone-type', 'metazone'),
-    vector2('long', 'timezone-type', 'metazone')
+    vector('short', ['timezone-type', 'metazone']),
+    vector('long', ['timezone-type', 'metazone'])
   ]),
-  vector1('exemplarCity', 'timezone-id'),
+  vector('exemplarCity', ['timezone-id']),
   field('gmtFormat'),
   field('hourFormat'),
   field('gmtZeroFormat'),

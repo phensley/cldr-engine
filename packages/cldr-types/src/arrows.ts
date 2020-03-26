@@ -18,6 +18,7 @@ export interface KeyIndex<T extends string> {
   readonly index: { [P in T]: number };
   readonly keys: T[];
   readonly size: number;
+  readonly last: number;
   get(key: T): number;
 }
 
@@ -65,10 +66,6 @@ export interface DigitsArrow<T extends string> {
  * @public
  */
 export interface Vector1Arrow<T extends string> {
-  readonly len: number;
-  readonly offset: number;
-  readonly index: KeyIndex<T>;
-
   /**
    * Indicates this vector exists in the bundle.
    */
@@ -91,12 +88,6 @@ export interface Vector1Arrow<T extends string> {
  * @public
  */
 export interface Vector2Arrow<T extends string, S extends string> {
-  readonly size: number;
-  readonly size2: number;
-  readonly offset: number;
-  readonly index1: KeyIndex<T>;
-  readonly index2: KeyIndex<S>;
-
   /**
    * Indicates this vector exists in the bundle.
    */
@@ -111,4 +102,26 @@ export interface Vector2Arrow<T extends string, S extends string> {
    * Full mapping of all keys to the corresponding fields.
    */
   mapping(bundle: PrimitiveBundle): { [P in T]: { [Q in S]: string } };
+}
+
+/**
+ * Function representing a 3-dimensional vector.
+ *
+ * @public
+ */
+export interface Vector3Arrow<T extends string, S extends string, U extends string> {
+  /**
+   * Indicates this vector exists in the bundle.
+   */
+  exists(bundle: PrimitiveBundle): boolean;
+
+  /**
+   * Gets the field at the corresponding offset [key1, key2, key3]
+   */
+  get(bundle: PrimitiveBundle, key1: T, key2: S, key3: U): string;
+
+  /**
+   * Full mapping of all keys to the corresponding fields.
+   */
+  mapping(bundle: PrimitiveBundle): { [P in T]: { [Q in S]: { [R in U]: string } } };
 }

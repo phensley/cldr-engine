@@ -9,8 +9,7 @@ import {
   FieldArrowImpl,
   Origin,
   ScopeArrowImpl,
-  Vector1ArrowImpl,
-  Vector2ArrowImpl
+  VectorArrowImpl,
 } from '@phensley/cldr-schema';
 import { VERSION } from '@phensley/cldr-core/lib/utils/version';
 import { SchemaBuilder } from '@phensley/cldr-core/lib/internals/schema';
@@ -45,21 +44,10 @@ const scan = (o: any, depth: number, opts: Options): Entry[] => {
     e.push([depth, 'DigitsArrow', start, start + o.index.size * o.size2]);
   } else if (o instanceof FieldArrowImpl) {
     e.push([depth, 'FieldArrow', o.offset, o.offset + 1]);
-  } else if (o instanceof Vector1ArrowImpl) {
+  } else if (o instanceof VectorArrowImpl) {
     const start = o.offset - 1;
-    e.push([depth, 'Vector1Arrow', start, start + o.len + 1]);
-  } else if (o instanceof Vector2ArrowImpl) {
-    // TODO: need to get the right formatting
-    // if (opts.verbose) {
-    //   const vec2 = o as Vector2Arrow<any, any>;
-    //   for (const k1 of vec2.index1.keys) {
-    //     e.push([depth, `Vector2Arrow "${k1}" "${vec2.index2.keys.join(', ')}"`]);
-    //     e.push([depth + 1, ``, o.offset + vec2.index1.get(k1),  o.offset + vec2.index2.size]);
-    //   }
-    // } else {
-    const start = o.offset - 1;
-    e.push([depth, 'Vector2Arrow', start, start + o.size + 1]);
-    // }
+    const size = o.keysets.reduce((p, c) => c.size * p, 1);
+    e.push([depth, 'VectorArrow', start, start + size + 1]);
   } else if (o instanceof ScopeArrowImpl) {
     e.push([depth, 'ScopeArrow']);
     for (const key of Object.keys(o.map)) {

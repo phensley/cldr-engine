@@ -1,9 +1,9 @@
-import { field, scope, vector1, vector2, Scope } from '../instructions';
+import { field, scope, vector, Scope } from '../instructions';
 
 const unitInfo = (width: string) => scope(width, width, [
-  vector2('unitPattern', 'plural-key', 'unit-id'),
-  vector1('displayName', 'unit-id'),
-  vector1('perUnitPattern', 'unit-id'),
+  vector('unitPattern', ['plural-key', 'unit-id']),
+  vector('displayName', ['unit-id']),
+  vector('perUnitPattern', ['unit-id']),
   field('perPattern'),
   field('timesPattern')
 ]);

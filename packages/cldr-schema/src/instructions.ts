@@ -9,8 +9,10 @@ export class KeyIndexImpl<T extends string> implements KeyIndex<T> {
   /* tslint:disable-next-line */
   readonly index: { [P in T]: number } = Object.create(null);
   readonly size: number;
+  readonly last: number;
   constructor(readonly keys: T[]) {
     this.size = keys.length;
+    this.last = this.size - 1;
     let i = 0;
     while (i < keys.length) {
       this.index[keys[i]] = i;
@@ -109,20 +111,10 @@ export interface ScopeMap {
 /**
  * @public
  */
-export interface Vector1 {
-  readonly type: 'vector1';
+export interface Vector {
+  readonly type: 'vector';
   readonly name: string;
-  readonly dim0: string;
-}
-
-/**
- * @public
- */
-export interface Vector2 {
-  readonly type: 'vector2';
-  readonly name: string;
-  readonly dim0: string;
-  readonly dim1: string;
+  readonly dims: string[];
 }
 
 /**
@@ -134,8 +126,7 @@ export type Instruction =
   Origin |
   Scope |
   ScopeMap |
-  Vector1 |
-  Vector2;
+  Vector;
 
 /**
  * @internal
@@ -172,11 +163,5 @@ export const scopemap = (name: string, fields: string, block: Instruction[]): Sc
 /**
  * @internal
  */
-export const vector1 = (name: string, dim0: string): Vector1 =>
-  ({ type: 'vector1', name, dim0 });
-
-/**
- * @internal
- */
-export const vector2 = (name: string, dim0: string, dim1: string): Vector2 =>
-  ({ type: 'vector2', name, dim0, dim1 });
+export const vector = (name: string, dims: string[]): Vector =>
+  ({ type: 'vector', name, dims });

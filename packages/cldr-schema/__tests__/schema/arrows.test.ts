@@ -5,8 +5,7 @@ import {
   KeyIndexImpl,
   PluralIndex,
   ScopeArrowImpl,
-  Vector1ArrowImpl,
-  Vector2ArrowImpl,
+  VectorArrowImpl,
 } from '../../src';
 
 type Foo = 'foo1' | 'foo2';
@@ -42,7 +41,7 @@ class DummyBundle implements PrimitiveBundle {
         return this.exists ? 'E' : '';
       }
     }
-    return offset.toString();
+    return this.exists ? offset.toString() : '';
   }
 }
 
@@ -111,7 +110,7 @@ test('scope arrow', () => {
 test('1d arrow', () => {
   const bundle = new DummyBundle(true);
   const index = new KeyIndexImpl<Foo>(FOO);
-  const a = new Vector1ArrowImpl<Foo>(0, index);
+  const a = new VectorArrowImpl(0, [index]);
 
   expect(a.get(bundle, 'foo1')).toEqual('1');
   expect(a.get(bundle, 'foo2')).toEqual('2');
@@ -124,7 +123,7 @@ test('1d arrow', () => {
 test('1d arrow empty', () => {
   const bundle = new EmptyBundle();
   const index = new KeyIndexImpl<Foo>(FOO);
-  const a = new Vector1ArrowImpl<Foo>(0, index);
+  const a = new VectorArrowImpl(0, [index]);
 
   expect(a.get(bundle, 'foo1')).toEqual('');
   expect(a.mapping(bundle)).toEqual({});
@@ -133,7 +132,7 @@ test('1d arrow empty', () => {
 test('missing 1d arrow', () => {
   let bundle: PrimitiveBundle;
   const index = new KeyIndexImpl<Foo>(FOO);
-  const a = new Vector1ArrowImpl<Foo>(0, index);
+  const a = new VectorArrowImpl(0, [index]);
 
   bundle = new DummyBundle(false);
 
@@ -155,7 +154,7 @@ test('2d arrow', () => {
   const bundle = new DummyBundle(true, true);
   const i1 = new KeyIndexImpl<Foo>(FOO);
   const i2 = new KeyIndexImpl<Bar>(BAR);
-  const a = new Vector2ArrowImpl<Foo, Bar>(0, i1, i2);
+  const a = new VectorArrowImpl(0, [i1, i2]);
 
   expect(a.exists(bundle)).toEqual(true);
   expect(a.get(bundle, 'foo1', 'bar1')).toEqual('1');
@@ -171,12 +170,22 @@ test('2d arrow', () => {
     foo1: { bar1: '1', bar2: '2', bar3: '3' },
     foo2: { bar1: '4', bar2: '5', bar3: '6' }
   });
+
+  // invalid keys, generate warning
+  expect(a.get(bundle, 'xxxxx', 'yyyyy')).toEqual('');
+  expect(a.get(bundle, 'xxxxx', 'yyyyy')).toEqual('');
+
+  // number of arguments don't match vector's dimension
+  expect(a.get(bundle, 'xxxxx')).toEqual('');
+  expect(a.get(bundle, 'xxxxx')).toEqual('');
+  expect(a.get(bundle, 'foo1', 'bar1', 'xxxxx')).toEqual('');
+  expect(a.get(bundle, 'foo1', 'bar1', 'xxxxx')).toEqual('');
 });
 
 test('missing 2d arrow', () => {
   const i1 = new KeyIndexImpl<Foo>(FOO);
   const i2 = new KeyIndexImpl<Bar>(BAR);
-  const a = new Vector2ArrowImpl<Foo, Bar>(0, i1, i2);
+  const a = new VectorArrowImpl(0, [i1, i2]);
   let bundle: PrimitiveBundle;
 
   bundle = new DummyBundle(false);
@@ -194,5 +203,8 @@ test('missing 2d arrow', () => {
   bundle = new EmptyBundle();
   expect(a.exists(bundle)).toEqual(true);
   expect(a.get(bundle, 'foo1', 'bar1')).toEqual('');
-  expect(a.mapping(bundle)).toEqual({});
+  expect(a.mapping(bundle)).toEqual({
+    foo1: {},
+    foo2: {}
+  });
 });

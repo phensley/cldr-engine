@@ -4,8 +4,7 @@ import {
   origin,
   scope,
   scopemap,
-  vector1,
-  vector2,
+  vector,
   KeyIndexImpl,
   Origin,
   Scope
@@ -36,7 +35,7 @@ const INDICES = {
 };
 
 const NUMBERS: Scope = scope('Numbers', 'Numbers', [
-  vector1('symbols', 'number-symbol'),
+  vector('symbols', ['number-symbol']),
   scope('currencyFormats', 'currencyFormats', [
     field('standard')
   ]),
@@ -44,7 +43,7 @@ const NUMBERS: Scope = scope('Numbers', 'Numbers', [
   scopemap('group', 'foo-bar', [
     field('name')
   ]),
-  vector2('plurals', 'plural-key', 'foo')
+  vector('plurals', ['plural-key', 'foo'])
 ]);
 
 const CODE = [NUMBERS];
@@ -230,7 +229,7 @@ test('encoding', () => {
   const { strings, exceptions } = p.scripts.Latn;
 
   expect(strings).toEqual(
-    // vector1 symbols
+    // vector 1-d symbols
     'E_._,_' +
     // scope currency
     '¤#,##0.00_' +
@@ -238,7 +237,7 @@ test('encoding', () => {
     '0K_3_00K_3_000K_3_0R_3_00R_3_000R_3_' +
     // scopemap
     'Foo_Bar 2_' +
-    // vector2 plurals
+    // vector 2-d plurals
     'E_Foos_Bars_Foo_Bar');
 
   expect(exceptions).toEqual(
