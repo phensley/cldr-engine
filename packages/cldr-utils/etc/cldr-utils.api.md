@@ -8,11 +8,13 @@
 export const binarySearch: (elems: number[], lessThan: boolean, n: number) => number;
 
 // @public
-export class Cache<T> {
+class Cache_2<T> {
     constructor(builder: (s: string) => T, capacity: number);
     get(raw: string): T;
     size(): number;
     }
+
+export { Cache_2 as Cache }
 
 // @public
 export class Checksum {
