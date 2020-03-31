@@ -32,7 +32,7 @@ import { Vector2Arrow } from '@phensley/cldr-types';
 import { WeekdayType } from '@phensley/cldr-types';
 
 // @public (undocumented)
-export const AltIndex: KeyIndexImpl<import("../../../cldr-types/lib").AltType>;
+export const AltIndex: KeyIndexImpl<"none" | "short" | "narrow" | "variant" | "stand-alone" | "long" | "menu">;
 
 // @public (undocumented)
 export const BuddhistEraIndex: KeyIndex<string>;
@@ -145,7 +145,7 @@ export const GregorianEraIndex: KeyIndex<string>;
 export const GregorianMonthsIndex: KeyIndex<string>;
 
 // @public (undocumented)
-export type Instruction = Digits | Field | Origin | Scope | ScopeMap | Vector1 | Vector2;
+export type Instruction = Digits | Field | Origin | Scope | ScopeMap | Vector;
 
 // @public (undocumented)
 export const JapaneseEraIndex: KeyIndex<string>;
@@ -161,6 +161,8 @@ export class KeyIndexImpl<T extends string> implements KeyIndex<T> {
     };
     // (undocumented)
     readonly keys: T[];
+    // (undocumented)
+    readonly last: number;
     // (undocumented)
     readonly size: number;
 }
@@ -341,83 +343,39 @@ export const TimeZoneStableIdIndex: KeyIndexImpl<string>;
 export const TimeZoneStableIds: string[];
 
 // @public (undocumented)
-export const TimeZoneTypeIndex: KeyIndexImpl<import("../../../cldr-types/lib").TimeZoneNameType>;
+export const TimeZoneTypeIndex: KeyIndexImpl<"daylight" | "generic" | "standard">;
 
 // @public (undocumented)
-export interface Vector1 {
+export interface Vector {
     // (undocumented)
-    readonly dim0: string;
+    readonly dims: string[];
     // (undocumented)
     readonly name: string;
     // (undocumented)
-    readonly type: 'vector1';
+    readonly type: 'vector';
 }
 
-// Warning: (ae-internal-missing-underscore) The name "vector1" should be prefixed with an underscore because the declaration is marked as @internal
+// Warning: (ae-internal-missing-underscore) The name "vector" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
-export const vector1: (name: string, dim0: string) => Vector1;
+export const vector: (name: string, dims: string[]) => Vector;
 
-// @public (undocumented)
-export class Vector1ArrowImpl<T extends string> implements Vector1Arrow<T> {
-    constructor(offset: number, index: KeyIndex<T>);
+// @public
+export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<string, string> {
+    constructor(offset: number, keysets: KeyIndex<string>[]);
     // (undocumented)
     exists(bundle: PrimitiveBundle): boolean;
     // (undocumented)
-    get(bundle: PrimitiveBundle, key: T): string;
+    get(bundle: PrimitiveBundle, ...keys: string[]): string;
     // (undocumented)
-    readonly index: KeyIndex<T>;
+    readonly keysets: KeyIndex<string>[];
     // (undocumented)
     readonly len: number;
     // (undocumented)
-    mapping(bundle: PrimitiveBundle): {
-        [P in T]: string;
-    };
+    mapping(bundle: PrimitiveBundle): any;
     // (undocumented)
     readonly offset: number;
-}
-
-// @public (undocumented)
-export interface Vector2 {
-    // (undocumented)
-    readonly dim0: string;
-    // (undocumented)
-    readonly dim1: string;
-    // (undocumented)
-    readonly name: string;
-    // (undocumented)
-    readonly type: 'vector2';
-}
-
-// Warning: (ae-internal-missing-underscore) The name "vector2" should be prefixed with an underscore because the declaration is marked as @internal
-//
-// @internal (undocumented)
-export const vector2: (name: string, dim0: string, dim1: string) => Vector2;
-
-// @public (undocumented)
-export class Vector2ArrowImpl<T extends string, S extends string> implements Vector2Arrow<T, S> {
-    constructor(offset: number, index1: KeyIndex<T>, index2: KeyIndex<S>);
-    // (undocumented)
-    exists(bundle: PrimitiveBundle): boolean;
-    // (undocumented)
-    get(bundle: PrimitiveBundle, key1: T, key2: S): string;
-    // (undocumented)
-    readonly index1: KeyIndex<T>;
-    // (undocumented)
-    readonly index2: KeyIndex<S>;
-    // (undocumented)
-    mapping(bundle: PrimitiveBundle): {
-        [P in T]: {
-            [Q in S]: string;
-        };
-    };
-    // (undocumented)
-    readonly offset: number;
-    // (undocumented)
-    readonly size: number;
-    // (undocumented)
-    readonly size2: number;
-}
+    }
 
 // @public (undocumented)
 export const WeekdayValues: WeekdayType[];
