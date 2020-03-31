@@ -210,12 +210,13 @@ export interface Origin {
     readonly type: 'origin';
 }
 
-// Warning: (ae-internal-missing-underscore) The name "origin" should be prefixed with an underscore because the declaration is marked as @internal
-//
 // @internal (undocumented)
-export const origin: (block: Scope[], indices: {
+const origin_2: (block: Scope[], indices: {
     [x: string]: KeyIndex<any>;
 }) => Origin;
+
+// Warning: (ae-internal-missing-underscore) The name "origin" should be prefixed with an underscore because the declaration is marked as @internal
+export { origin_2 as origin }
 
 // @public (undocumented)
 export class OriginImpl implements Origin {
