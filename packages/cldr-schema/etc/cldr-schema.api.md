@@ -32,7 +32,7 @@ import { Vector2Arrow } from '@phensley/cldr-types';
 import { WeekdayType } from '@phensley/cldr-types';
 
 // @public (undocumented)
-export const AltIndex: KeyIndexImpl<"none" | "short" | "narrow" | "variant" | "stand-alone" | "long" | "menu">;
+export const AltIndex: KeyIndexImpl<import("../../../cldr-types/lib").AltType>;
 
 // @public (undocumented)
 export const BuddhistEraIndex: KeyIndex<string>;
@@ -343,7 +343,7 @@ export const TimeZoneStableIdIndex: KeyIndexImpl<string>;
 export const TimeZoneStableIds: string[];
 
 // @public (undocumented)
-export const TimeZoneTypeIndex: KeyIndexImpl<"daylight" | "generic" | "standard">;
+export const TimeZoneTypeIndex: KeyIndexImpl<import("../../../cldr-types/lib").TimeZoneNameType>;
 
 // @public (undocumented)
 export interface Vector {
