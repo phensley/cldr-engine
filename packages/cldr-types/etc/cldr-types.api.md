@@ -323,6 +323,8 @@ export interface KeyIndex<T extends string> {
     // (undocumented)
     readonly keys: T[];
     // (undocumented)
+    readonly last: number;
+    // (undocumented)
     readonly size: number;
 }
 
@@ -640,36 +642,33 @@ export type UnitType = 'g-force' | 'meter-per-second-squared' | 'arc-minute' | '
 export interface Vector1Arrow<T extends string> {
     exists(bundle: PrimitiveBundle): boolean;
     get(bundle: PrimitiveBundle, key: T): string;
-    // (undocumented)
-    readonly index: KeyIndex<T>;
-    // (undocumented)
-    readonly len: number;
     mapping(bundle: PrimitiveBundle): {
         [P in T]: string;
     };
-    // (undocumented)
-    readonly offset: number;
 }
 
 // @public
 export interface Vector2Arrow<T extends string, S extends string> {
     exists(bundle: PrimitiveBundle): boolean;
     get(bundle: PrimitiveBundle, key1: T, key2: S): string;
-    // (undocumented)
-    readonly index1: KeyIndex<T>;
-    // (undocumented)
-    readonly index2: KeyIndex<S>;
     mapping(bundle: PrimitiveBundle): {
         [P in T]: {
             [Q in S]: string;
         };
     };
-    // (undocumented)
-    readonly offset: number;
-    // (undocumented)
-    readonly size: number;
-    // (undocumented)
-    readonly size2: number;
+}
+
+// @public
+export interface Vector3Arrow<T extends string, S extends string, U extends string> {
+    exists(bundle: PrimitiveBundle): boolean;
+    get(bundle: PrimitiveBundle, key1: T, key2: S, key3: U): string;
+    mapping(bundle: PrimitiveBundle): {
+        [P in T]: {
+            [Q in S]: {
+                [R in U]: string;
+            };
+        };
+    };
 }
 
 // @public (undocumented)
