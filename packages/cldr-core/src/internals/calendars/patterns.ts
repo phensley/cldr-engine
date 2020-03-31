@@ -11,7 +11,6 @@ import { CalendarDate } from '../../systems/calendars';
 
 export interface CachedSkeletonRequest {
   dateSkel?: DateSkeleton;
-  // timeSkel?: DateSkeleton;
   date?: DateTimeNode[];
   time?: DateTimeNode[];
 }
@@ -24,7 +23,8 @@ export interface CachedIntervalRequest {
 
 export type StandaloneFieldType = 'dayPeriods' | 'eras' | 'months' | 'quarters' | 'weekdays';
 
-export type TwoLevelMap = { [x: string]: | { [y: string]: string } };
+export type TwoLevelMap = { [x: string]: { [y: string]: string } };
+export type ThreeLevelMap = { [x: string]: { [y: string]: { [z: string]: string } } };
 
 /**
  * Caches all available date formatting patterns for a given calendar schema.
@@ -37,9 +37,7 @@ export class CalendarPatterns {
   protected readonly language: string;
 
   private readonly region: string;
-  private readonly namesCache: LRU<{ [x: string]: { [y: string]: string } }>;
   private readonly skeletonParser: DateSkeletonParser;
-  // private readonly skeletonRequestCache: LRU<CachedSkeletonRequest>;
   private readonly intervalRequestCache: LRU<CachedIntervalRequest>;
   private readonly dateFormats: { [x: string]: string };
   private readonly timeFormats: { [x: string]: string };
@@ -63,9 +61,7 @@ export class CalendarPatterns {
     this.language = bundle.language();
     this.region = bundle.region();
     this.skeletonParser = this.buildSkeletonParser();
-    // this.skeletonRequestCache = new LRU(cacheSize);
     this.intervalRequestCache = new LRU(cacheSize);
-    this.namesCache = new LRU(cacheSize);
 
     // Fetch this locale's main formats
     this.dateFormats = schema.dateFormats.mapping(bundle);
@@ -82,40 +78,24 @@ export class CalendarPatterns {
     this.intervalFallback = this.schema.intervalFormatFallback.get(bundle);
   }
 
-  dayPeriods(): TwoLevelMap {
-    return this._getStandalone('dayPeriods');
+  dayPeriods(): ThreeLevelMap {
+    return this.schema.standAlone.dayPeriods.mapping(this.bundle);
   }
 
-  eras(): TwoLevelMap {
-    return this._getStandalone('eras');
+  eras(): ThreeLevelMap {
+    return this.schema.eras.mapping(this.bundle);
   }
 
   months(): TwoLevelMap {
-    return this._getStandalone('months');
+    return this.schema.standAlone.months.mapping(this.bundle);
   }
 
   weekdays(): TwoLevelMap {
-    return this._getStandalone('weekdays');
+    return this.schema.standAlone.weekdays.mapping(this.bundle);
   }
 
   quarters(): TwoLevelMap {
-    return this._getStandalone('quarters');
-  }
-
-  _getStandalone(key: StandaloneFieldType): TwoLevelMap {
-    let entry = this.namesCache.get(key);
-    if (entry === undefined) {
-      switch (key) {
-        case 'eras':
-          entry = this.schema.eras.mapping(this.bundle);
-          break;
-        default:
-          entry = this.schema.standAlone[key].mapping(this.bundle);
-          break;
-      }
-      this.namesCache.set(key, entry);
-    }
-    return entry;
+    return this.schema.standAlone.quarters.mapping(this.bundle);
   }
 
   parseSkeleton(raw: string): DateSkeleton {
@@ -129,14 +109,6 @@ export class CalendarPatterns {
   getTimePattern(width: string): DateTimeNode[] {
     return this.internals.calendars.parseDatePattern(this.timeFormats[width] || '');
   }
-
-  // getCachedSkeletonRequest(key: string): CachedSkeletonRequest | undefined {
-  //   return this.skeletonRequestCache.get(key);
-  // }
-
-  // setCachedSkeletonRequest(key: string, req: CachedSkeletonRequest): void {
-  //   this.skeletonRequestCache.set(key, req);
-  // }
 
   getCachedIntervalRequest(key: string): CachedIntervalRequest | undefined {
     return this.intervalRequestCache.get(key);

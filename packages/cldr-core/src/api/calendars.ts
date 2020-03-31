@@ -315,7 +315,9 @@ export class CalendarsImpl implements Calendars {
     const res: any = {};
     if (fields) {
       for (const key of Object.keys(fields)) {
-        res[key] = this._transformField(fields[key], type, context);
+        const val = fields[key];
+        res[key] = typeof val === 'string' ?
+          this._transformField(val, type, context) : this._transformFields(val, type, context);
       }
     }
     return res;

@@ -19,7 +19,7 @@ import { NUMBERS, NUMBERS_INDICES } from './numbers';
 import { TIMEZONE, TIMEZONE_INDICES } from './timezones';
 import { UNITS } from './units';
 
-import { AltIndex, PluralIndex } from '../schema';
+import { AltIndex, DayPeriodAltIndex, EraAltIndex, PluralIndex } from '../schema';
 
 const EMPTY_INDEX = new KeyIndexImpl([]);
 
@@ -132,6 +132,8 @@ export class CodeBuilder {
 
   private indices: { [name: string]: KeyIndex<string> } = {
     'alt-key': AltIndex,
+    'day-period-alt-key': DayPeriodAltIndex,
+    'era-alt-key': EraAltIndex,
     'plural-key': PluralIndex,
     ...CALENDAR_INDICES,
     ...GREGORIAN_INDICES,

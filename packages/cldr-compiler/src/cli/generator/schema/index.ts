@@ -53,6 +53,7 @@ const mergeKeyCounts = (dst: any, ...sources: any[]): any => {
 interface SchemaOptions {
   out: string;
   lang?: string;
+  region?: string;
   ['dry-run']: boolean;
   ['pre-transform']: boolean;
   ['with-values']: boolean;
@@ -68,10 +69,18 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
   if (args.lang) {
     langs = checkLanguages(args.lang.split(','), localeMap);
   }
+  let regions: Set<string> | undefined;
+  if (args.region) {
+    regions = new Set(args.region.split(','));
+  }
 
   const locales: string[] = [];
   langs.forEach(lang => {
-    localeMap[lang].forEach(r => locales.push(r.id));
+    localeMap[lang].forEach(r => {
+      if (!regions || regions.has(r.tag.region())) {
+        locales.push(r.id);
+      }
+    });
   });
 
   const transform = !args['pre-transform'];
@@ -111,6 +120,8 @@ export const schemaOptions = (argv: yargs.Argv<any>) =>
   argv.command('schema', 'Generate schema', (y: yargs.Argv<SchemaOptions>) => y
     .option('l', { description: 'List of languages' })
     .alias('l', 'lang')
+    .alias('r', 'region')
+    .option('r', { description: 'Regions' })
     .option('n', { boolean: true })
     .alias('n', 'dry-run')
     .option('o', { description: 'Output dir', required: true })

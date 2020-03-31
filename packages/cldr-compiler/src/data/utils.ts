@@ -4,6 +4,11 @@ import { pluralDigit } from '../utils';
 const plurals = ['other', 'zero', 'one', 'two', 'few', 'many'];
 const alts = ['none', 'short', 'variant', 'narrow', 'stand-alone', 'menu', 'long'];
 
+const altmapping = alts.reduce((p, c) => {
+  p[c] = c;
+  return p;
+}, {} as any);
+
 /**
  * Map a plural key and transform it.
  */
@@ -25,20 +30,31 @@ export interface AltSpec {
  */
 export const categoryKeys =
   (sep: string, categories: string[], field: string, replace?: string): [string, string, string][] => {
-  const keys: [string, string, string][] = [];
-  for (const c of categories) {
-    const key = c !== 'none' ? `${field}-${sep}-${c}` : field;
-    const rkey = replace || field;
-    keys.push([key, rkey, c]);
-  }
-  return keys;
-};
+    const keys: [string, string, string][] = [];
+    for (const c of categories) {
+      const key = c !== 'none' ? `${field}-${sep}-${c}` : field;
+      const rkey = replace || field;
+      keys.push([key, rkey, c]);
+    }
+    return keys;
+  };
 
 export const pluralKeys = (field: string, replace?: string): [string, string, string][] =>
   categoryKeys('count', plurals, field, replace);
 
-export const altKeys = (field: string, replace?: string): [string, string, string][] =>
-  categoryKeys('alt', alts, field, replace);
+export const altKeys = (field: string, mapping: any = altmapping): [string, string, string][] => {
+  const keys: [string, string, string][] = [];
+  for (const c of ['none'].concat(Object.keys(mapping))) {
+    if (c === 'none') {
+      keys.push([field, field, c]);
+    } else {
+      const repl = mapping[c];
+      const key = `${field}-alt-${c}`;
+      keys.push([key, field, repl]);
+    }
+  }
+  return keys;
+};
 
 export const stripPlural = (k: string) => {
   const i = k.indexOf('-count-');
@@ -64,6 +80,7 @@ export interface KeysSpec {
  */
 export interface AltKeysSpec {
   readonly kind: 'altkeys';
+  readonly mapping: any;
 }
 
 /**
@@ -228,7 +245,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
     case 'altkeys': {
       const orig = Object.keys(obj).filter(k => k.indexOf('-alt-') === -1);
       for (const raw of orig) {
-        for (const keys of altKeys(raw)) {
+        for (const keys of altKeys(raw, spec.mapping)) {
           const [key, rkey, c] = keys;
           const v = obj[key];
           const pfx = [rkey, c];
@@ -338,13 +355,13 @@ export class MappingBuilder {
     return this;
   }
 
-  alt(field: string, replace?: string): this {
-    this.specs.push({ kind: 'alt', keys: altKeys(field, replace) });
+  alt(field: string, mapping?: any): this {
+    this.specs.push({ kind: 'alt', keys: altKeys(field, mapping) });
     return this;
   }
 
-  altKeys(): this {
-    this.specs.push({ kind: 'altkeys' });
+  altKeys(mapping?: any): this {
+    this.specs.push({ kind: 'altkeys', mapping });
     return this;
   }
 
@@ -386,12 +403,12 @@ export class Mappings {
     return new MappingBuilder().point(name);
   }
 
-  static alt(field: string, replace?: string): MappingBuilder {
-    return new MappingBuilder().alt(field, replace);
+  static alt(field: string, mapping?: any): MappingBuilder {
+    return new MappingBuilder().alt(field, mapping);
   }
 
-  static altKeys(): MappingBuilder {
-    return new MappingBuilder().altKeys();
+  static altKeys(mapping?: any): MappingBuilder {
+    return new MappingBuilder().altKeys(mapping);
   }
 }
 

@@ -8,20 +8,20 @@ test('era', () => {
   const en = calendarsApi('en');
   let e = en.eras();
 
-  expect(e[0]).toEqual('Before Christ');
-  expect(e[1]).toEqual('Anno Domini');
+  expect(e[0]).toEqual({ none: 'Before Christ', sensitive: 'Before Common Era' });
+  expect(e[1]).toEqual({ none: 'Anno Domini', sensitive: 'Common Era' });
 
   e = en.eras({ width: 'abbr' });
-  expect(e[0]).toEqual('BC');
-  expect(e[1]).toEqual('AD');
+  expect(e[0]).toEqual({ none: 'BC', sensitive: 'BCE' });
+  expect(e[1]).toEqual({ none: 'AD', sensitive: 'CE' });
 
   e = en.eras({ width: 'narrow' });
-  expect(e[0]).toEqual('B');
-  expect(e[1]).toEqual('A');
+  expect(e[0]).toEqual({ none: 'B', sensitive: 'BCE' });
+  expect(e[1]).toEqual({ none: 'A', sensitive: 'CE' });
 
   e = en.eras({ width: 'names' });
-  expect(e[0]).toEqual('Before Christ');
-  expect(e[1]).toEqual('Anno Domini');
+  expect(e[0]).toEqual({ none: 'Before Christ', sensitive: 'Before Common Era' });
+  expect(e[1]).toEqual({ none: 'Anno Domini', sensitive: 'Common Era' });
 
   e = en.eras({ width: 'invalid' as EraWidthType });
   expect(e[0]).toEqual(undefined);
@@ -29,10 +29,10 @@ test('era', () => {
 
   const es = calendarsApi('es');
   e = es.eras();
-  expect(e[0]).toEqual('antes de Cristo');
+  expect(e[0]).toEqual({ none: 'antes de Cristo', sensitive: 'antes de la era común' });
 
   e = es.eras({ context: 'begin-sentence' });
-  expect(e[0]).toEqual('Antes de Cristo');
+  expect(e[0]).toEqual({ none: 'Antes de Cristo', sensitive: 'Antes de la era común' });
 });
 
 test('month', () => {
@@ -104,21 +104,22 @@ test('day periods', () => {
   let api = calendarsApi('en');
 
   let d = api.dayPeriods();
-  expect(d.noon).toEqual('noon');
+  expect(d.am).toEqual({ none: 'AM', casing: 'am' });
+  expect(d.noon).toEqual({ none: 'noon' });
 
   d = api.dayPeriods({ ca: 'persian' });
-  expect(d.noon).toEqual('noon');
+  expect(d.noon).toEqual({ none: 'noon' });
 
   api = calendarsApi('es');
 
   d = api.dayPeriods();
-  expect(d.noon).toEqual('mediodía');
+  expect(d.noon).toEqual({ none: 'mediodía' });
 
   d = api.dayPeriods({ context: 'begin-sentence' });
-  expect(d.noon).toEqual('Mediodía');
+  expect(d.noon).toEqual({ none: 'Mediodía' });
 
   d = api.dayPeriods({ context: 'ui-list-or-menu' });
-  expect(d.noon).toEqual('mediodía');
+  expect(d.noon).toEqual({ none: 'mediodía' });
 });
 
 test('quarter', () => {

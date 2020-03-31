@@ -3,7 +3,8 @@ import {
   FieldArrow,
   ScopeArrow,
   Vector1Arrow,
-  Vector2Arrow
+  Vector2Arrow,
+  Vector3Arrow
 } from './arrows';
 
 import {
@@ -37,7 +38,7 @@ import { CurrencyType } from './autogen.currencies';
 import { MetaZoneType } from './autogen.timezones';
 import { UnitType } from './autogen.units';
 
-import { AltType, PluralType } from './misc';
+import { AltType, DayPeriodAltType, EraAltType, PluralType } from './misc';
 
 // CALENDARS
 
@@ -48,14 +49,14 @@ export interface CalendarFields {
   readonly weekdays: Vector2Arrow<string, string>;
   readonly months: Vector2Arrow<string, string>;
   readonly quarters: Vector2Arrow<string, string>;
-  readonly dayPeriods: Vector2Arrow<string, string>;
+  readonly dayPeriods: Vector3Arrow<string, string, DayPeriodAltType>;
 }
 
 /**
  * @public
  */
 export interface CalendarSchema {
-  readonly eras: Vector2Arrow<EraWidthType, string>;
+  readonly eras: Vector3Arrow<EraWidthType, string, EraAltType>;
   readonly format: CalendarFields;
   readonly standAlone: CalendarFields;
   readonly availableFormats: Vector1Arrow<string>;

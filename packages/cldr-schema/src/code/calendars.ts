@@ -20,11 +20,11 @@ const formats = (name: string, rename: string, month: string) => scope(name, ren
   vector('weekdays', ['field-width', 'weekday']),
   vector('months', ['field-width', `${month}-month`]),
   vector('quarters', ['field-width', 'quarter']),
-  vector('dayPeriods', ['field-width', 'day-period']),
+  vector('dayPeriods', ['field-width', 'day-period', 'day-period-alt-key']),
 ]);
 
 const calendarScope = (name: string, scopeName: string) => scope(scopeName, scopeName, [
-  vector('eras', ['era-type', `${name}-era`]),
+  vector('eras', ['era-type', `${name}-era`, 'era-alt-key']),
   formats('format', 'format', name),
   formats('standAlone', 'standAlone', name),
   vector('availableFormats', [`${name}-available-format`]),

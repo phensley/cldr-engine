@@ -274,7 +274,7 @@ const filterFormats = (o: any, plural: boolean) => {
 //   }
 // }
 //
-const getDateFormat = (o: any): string => {
+const getDateFormat = (o: any): any => {
   return Object.keys(o).reduce((prev: any, key: string) => {
     const val = o[key];
     prev[key] = typeof val === 'string' ? val : val._value;

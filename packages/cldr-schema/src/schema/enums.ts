@@ -10,3 +10,13 @@ export const PluralIndex = new KeyIndexImpl<PluralType>(['other', 'zero', 'one',
  * @public
  */
 export const AltIndex = new KeyIndexImpl(['none', 'short', 'narrow', 'variant', 'stand-alone', 'long', 'menu']);
+
+/**
+ * @public
+ */
+export const EraAltIndex = new KeyIndexImpl(['none', 'sensitive']);
+
+/**
+ * @public
+ */
+export const DayPeriodAltIndex = new KeyIndexImpl(['none', 'casing']);
