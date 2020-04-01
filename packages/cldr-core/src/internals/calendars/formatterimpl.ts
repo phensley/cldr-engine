@@ -74,9 +74,12 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
         // ERA
         case 'G': {
           type = 'era';
+          // TODO: more compact fallback for alt
           const alt = (ctx.alt || {}).era || 'none';
+          const era = `${ctx.date.era()}`;
           const width = w === 5 ? 'narrow' : w === 4 ? 'names' : 'abbr';
-          value = this.cal.eras.get(ctx.bundle, width, `${ctx.date.era()}`, alt);
+          value = this.cal.eras.get(ctx.bundle, width, era, alt)
+            || this.cal.eras.get(ctx.bundle, width, era, 'none');
           if (w !== 5) {
             field = w === 4 ? 'era-name' : 'era-abbr';
           }
@@ -210,10 +213,13 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
         // DAY PERIOD AM/PM
         case 'a': {
+          // TODO: more compact fallback for alt
           const alt = (ctx.alt || {}).dayPeriod || 'none';
           const ampm = ctx.date.hourOfDay() < 12 ? 'am' : 'pm';
+          const width = widthKey1(w);
           type = 'dayperiod';
-          value = this.cal.format.dayPeriods.get(ctx.bundle, widthKey1(w), ampm, alt);
+          value = this.cal.format.dayPeriods.get(ctx.bundle, width, ampm, alt)
+            || this.cal.format.dayPeriods.get(ctx.bundle, width, ampm, 'none');
           break;
         }
 
@@ -374,8 +380,11 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     const format = this.cal.format.dayPeriods;
     const alt = (ctx.alt || {}).dayPeriod || 'none';
     // Try extended and if it doesn't exist fall back to am/pm
+    // TODO: more compact fallbacks for alternatives
     return format.get(bundle, key1, key2ext, alt)
-      || format.get(bundle, key1, key2, alt);
+      || format.get(bundle, key1, key2, alt)
+      || format.get(bundle, key1, key2ext, 'none')
+      || format.get(bundle, key1, key2, 'none');
   }
 
   private dayPeriodFlex(ctx: CalendarContext<T>, node: [string, number]): string {
@@ -385,7 +394,10 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     let res = '';
     if (key2) {
       const alt = (ctx.alt || {}).dayPeriod || 'none';
-      res = this.cal.format.dayPeriods.get(bundle, widthKey1(node[1]), key2, alt);
+      const width = widthKey1(node[1]);
+      // TODO: more compact fallbacks for alternatives
+      res = this.cal.format.dayPeriods.get(bundle, width, key2, alt)
+        || this.cal.format.dayPeriods.get(bundle, width, key2, 'none');
     }
     return res ? res : this.dayPeriodExt(ctx, node);
   }
