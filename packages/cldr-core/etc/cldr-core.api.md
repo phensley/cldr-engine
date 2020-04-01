@@ -17,12 +17,14 @@ import { CurrencyType } from '@phensley/cldr-types';
 import { DateFieldType } from '@phensley/cldr-types';
 import { DateFieldWidthType } from '@phensley/cldr-types';
 import { DateTimePatternFieldType } from '@phensley/cldr-types';
+import { DayPeriodAltType } from '@phensley/cldr-types';
 import { DayPeriodType } from '@phensley/cldr-types';
 import { Decimal } from '@phensley/decimal';
 import { DecimalArg } from '@phensley/decimal';
 import { DecimalConstants } from '@phensley/decimal';
 import { DecimalFormatter } from '@phensley/decimal';
 import { DefaultMessageArgConverter } from '@phensley/messageformat';
+import { EraAltType } from '@phensley/cldr-types';
 import { EraWidthType } from '@phensley/cldr-types';
 import { FieldWidthType } from '@phensley/cldr-types';
 import { FormatWidthType } from '@phensley/cldr-types';
@@ -540,7 +542,16 @@ export { DateFieldType }
 export { DateFieldWidthType }
 
 // @public (undocumented)
+export interface DateFormatAltOptions {
+    // (undocumented)
+    dayPeriod?: DayPeriodAltType;
+    // (undocumented)
+    era?: EraAltType;
+}
+
+// @public (undocumented)
 export interface DateFormatOptions {
+    alt?: DateFormatAltOptions;
     ca?: CalendarType;
     context?: ContextType;
     date?: FormatWidthType;

@@ -14,7 +14,7 @@ export interface BuddhistSchema extends CalendarSchema {
 // @public (undocumented)
 export interface CalendarFields {
     // (undocumented)
-    readonly dayPeriods: Vector2Arrow<string, string>;
+    readonly dayPeriods: Vector3Arrow<string, string, DayPeriodAltType>;
     // (undocumented)
     readonly months: Vector2Arrow<string, string>;
     // (undocumented)
@@ -32,7 +32,7 @@ export interface CalendarSchema {
     // (undocumented)
     readonly dateTimeFormats: Vector1Arrow<FormatWidthType>;
     // (undocumented)
-    readonly eras: Vector2Arrow<EraWidthType, string>;
+    readonly eras: Vector3Arrow<EraWidthType, string, EraAltType>;
     // (undocumented)
     readonly format: CalendarFields;
     // (undocumented)
@@ -222,6 +222,9 @@ export const enum DayPeriod {
 }
 
 // @public (undocumented)
+export type DayPeriodAltType = 'none' | 'casing';
+
+// @public (undocumented)
 export type DayPeriodType = 'noon' | 'midnight' | 'am' | 'pm' | 'morning1' | 'morning2' | 'afternoon1' | 'afternoon2' | 'evening1' | 'evening2' | 'night1' | 'night2';
 
 // @public (undocumented)
@@ -246,6 +249,9 @@ export interface DigitsArrow<T extends string> {
     // (undocumented)
     readonly values: number[];
 }
+
+// @public (undocumented)
+export type EraAltType = 'none' | 'sensitive';
 
 // @public (undocumented)
 export const enum EraWidth {

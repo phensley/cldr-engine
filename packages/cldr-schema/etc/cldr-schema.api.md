@@ -71,6 +71,9 @@ export const DateFieldWidthValues: DateFieldWidthType[];
 export const DateTimePatternFieldValues: DateTimePatternFieldType[];
 
 // @public (undocumented)
+export const DayPeriodAltIndex: KeyIndexImpl<import("../../../cldr-types/lib").DayPeriodAltType>;
+
+// @public (undocumented)
 export const DayPeriodValues: DayPeriodType[];
 
 // @public (undocumented)
@@ -106,6 +109,9 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
     // (undocumented)
     readonly values: number[];
 }
+
+// @public (undocumented)
+export const EraAltIndex: KeyIndexImpl<import("../../../cldr-types/lib").EraAltType>;
 
 // @public (undocumented)
 export const EraWidthValues: EraWidthType[];
