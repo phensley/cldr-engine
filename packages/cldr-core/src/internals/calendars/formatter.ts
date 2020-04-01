@@ -3,6 +3,7 @@ import { Bundle } from '../../resource';
 import { DateTimeNode } from '../../parsing/date';
 import { CalendarDate } from '../../systems/calendars';
 import { ContextTransformInfo, NumberingSystem } from '../../common/private';
+import { DateFormatAltOptions } from '../../common/calendars';
 import { AbstractValue } from '../../utils/render';
 
 /**
@@ -40,6 +41,11 @@ export interface CalendarContext<T extends CalendarDate> {
    * Context transform info.
    */
   transform: ContextTransformInfo;
+
+  /**
+   * Specify alternate fields.
+   */
+  alt?: DateFormatAltOptions;
 }
 
 export interface CalendarFormatter<T extends CalendarDate> {

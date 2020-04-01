@@ -14,6 +14,7 @@ import { Bundle } from '../resource';
 import {
   CalendarFieldsOptions,
   DateFieldFormatOptions,
+  DateFormatAltOptions,
   DateFormatOptions,
   DateIntervalFormatOptions,
   DateRawFormatOptions,
@@ -339,7 +340,7 @@ export class CalendarsImpl implements Calendars {
 
     date = this.convertDateTo(calendar, date);
     const req = this.manager.getDateFormatRequest(date, options, params);
-    const ctx = this._context(date, params, options.context);
+    const ctx = this._context(date, params, options.context, options.alt);
     return calendars.formatDateTime(calendar, ctx, value, req.date, req.time, req.wrapper);
   }
 
@@ -401,8 +402,10 @@ export class CalendarsImpl implements Calendars {
     return _date || value.empty();
   }
 
-  private _context<T extends CalendarDate>(date: T, params: NumberParams, context?: ContextType): CalendarContext<T> {
+  private _context<T extends CalendarDate>(date: T, params: NumberParams,
+    context?: ContextType, alt?: DateFormatAltOptions): CalendarContext<T> {
     return {
+      alt,
       date,
       bundle: this.bundle,
       system: params.system,

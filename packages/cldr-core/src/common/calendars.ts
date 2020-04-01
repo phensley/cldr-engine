@@ -1,6 +1,8 @@
 import {
   ContextType,
   DateFieldWidthType,
+  DayPeriodAltType,
+  EraAltType,
   EraWidthType,
   FieldWidthType,
   FormatWidthType,
@@ -89,6 +91,15 @@ export interface DateFieldFormatOptions {
    */
   context?: ContextType;
 }
+
+/**
+ * @public
+ */
+export interface DateFormatAltOptions {
+  era?: EraAltType;
+  dayPeriod?: DayPeriodAltType;
+}
+
 /**
  * @public
  */
@@ -133,6 +144,11 @@ export interface DateFormatOptions {
    * Context in which the formatted string will be used
    */
   context?: ContextType;
+
+  /**
+   * Selection of alternate fields.
+   */
+  alt?: DateFormatAltOptions;
 }
 
 /**
