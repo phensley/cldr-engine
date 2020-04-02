@@ -271,12 +271,8 @@ export class NumberInternalsImpl implements NumberInternals {
 
         // Wrap number and unit together.
         // TODO: implement a more concise fallback to 'other' for pluralized lookups
-        const unitWrapper = currencyFormats.unitPattern.get(bundle, plural)
-          || currencyFormats.unitPattern.get(bundle, 'other')
-          || latnInfo.currencyFormats.unitPattern.get(bundle, plural)
-          // Only occurs for a missing pattern in CLDR data
-          /* istanbul ignore next */
-          || latnInfo.currencyFormats.unitPattern.get(bundle, 'other');
+        const unitWrapper = currencyFormats.unitPattern.get(bundle, [plural, 'other'])
+          || latnInfo.currencyFormats.unitPattern.get(bundle, [plural, 'other']);
         return renderer.wrap(this.internals.general, unitWrapper, num, renderer.make('unit', unit));
       }
 

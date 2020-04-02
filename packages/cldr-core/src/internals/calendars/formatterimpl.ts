@@ -2,7 +2,7 @@ import {
   CalendarSchema,
   ContextTransformFieldType,
   TimeZoneSchema,
-  Vector2Arrow
+  Vector2Arrow,
 } from '@phensley/cldr-types';
 
 import { GeneralInternals } from '../../internals/internals';
@@ -74,12 +74,9 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
         // ERA
         case 'G': {
           type = 'era';
-          // TODO: more compact fallback for alt
-          const alt = (ctx.alt || {}).era || 'none';
           const era = `${ctx.date.era()}`;
           const width = w === 5 ? 'narrow' : w === 4 ? 'names' : 'abbr';
-          value = this.cal.eras.get(ctx.bundle, width, era, alt)
-            || this.cal.eras.get(ctx.bundle, width, era, 'none');
+          value = this.cal.eras.get(ctx.bundle, width, era, [ctx.alt.era!, 'none']);
           if (w !== 5) {
             field = w === 4 ? 'era-name' : 'era-abbr';
           }
@@ -213,13 +210,10 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
         // DAY PERIOD AM/PM
         case 'a': {
-          // TODO: more compact fallback for alt
-          const alt = (ctx.alt || {}).dayPeriod || 'none';
           const ampm = ctx.date.hourOfDay() < 12 ? 'am' : 'pm';
           const width = widthKey1(w);
           type = 'dayperiod';
-          value = this.cal.format.dayPeriods.get(ctx.bundle, width, ampm, alt)
-            || this.cal.format.dayPeriods.get(ctx.bundle, width, ampm, 'none');
+          value = this.cal.format.dayPeriods.get(ctx.bundle, width, ampm, [ctx.alt.dayPeriod!, 'none']);
           break;
         }
 
@@ -378,13 +372,8 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       key2ext = hour === 0 ? 'midnight' : hour === 12 ? 'noon' : key2;
     }
     const format = this.cal.format.dayPeriods;
-    const alt = (ctx.alt || {}).dayPeriod || 'none';
     // Try extended and if it doesn't exist fall back to am/pm
-    // TODO: more compact fallbacks for alternatives
-    return format.get(bundle, key1, key2ext, alt)
-      || format.get(bundle, key1, key2, alt)
-      || format.get(bundle, key1, key2ext, 'none')
-      || format.get(bundle, key1, key2, 'none');
+    return format.get(bundle, key1, [key2ext, key2], [ctx.alt.dayPeriod!, 'none']);
   }
 
   private dayPeriodFlex(ctx: CalendarContext<T>, node: [string, number]): string {
@@ -393,11 +382,9 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     const key2 = this.internals.calendars.flexDayPeriod(bundle, minutes);
     let res = '';
     if (key2) {
-      const alt = (ctx.alt || {}).dayPeriod || 'none';
       const width = widthKey1(node[1]);
       // TODO: more compact fallbacks for alternatives
-      res = this.cal.format.dayPeriods.get(bundle, width, key2, alt)
-        || this.cal.format.dayPeriods.get(bundle, width, key2, 'none');
+      res = this.cal.format.dayPeriods.get(bundle, width, key2, [ctx.alt.dayPeriod!, 'none']);
     }
     return res ? res : this.dayPeriodExt(ctx, node);
   }

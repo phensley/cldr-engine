@@ -4,8 +4,6 @@ import {
   KeyIndex,
   PrimitiveBundle,
   ScopeArrow,
-  Vector1Arrow,
-  Vector2Arrow,
 } from '@phensley/cldr-types';
 
 /**
@@ -69,7 +67,7 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
  *
  * @public
  */
-export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<string, string> {
+export class VectorArrowImpl {
 
   readonly offset: number;
   readonly len: number;
@@ -101,7 +99,7 @@ export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<strin
     return bundle.get(this.offset - 1) === 'E';
   }
 
-  get(bundle: PrimitiveBundle, ...keys: string[]): string {
+  get(bundle: PrimitiveBundle, ...keys: (string | string[])[]): string {
     if (keys.length !== this.len) {
       // Impossible lookup, will never reach a valid field
       throw new Error(`Warning: impossible vector lookup with keys ${JSON.stringify(keys)}`);
@@ -109,20 +107,33 @@ export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<strin
     if (!this.exists(bundle)) {
       return '';
     }
-    let k = this.offset;
-    for (let i = 0; i < this.len; i++) {
-      const j = this.keysets[i].get(keys[i]);
-      if (j === -1) {
-        // Invalid lookup
-        return '';
-      }
-      k += j * this.factors[i];
-    }
-    return bundle.get(k);
+    return this._get(bundle, keys, 0, this.offset);
   }
 
   mapping(bundle: PrimitiveBundle): any {
     return this.exists(bundle) ? this._mapping(bundle, 0, 0) : {};
+  }
+
+  private _get(bundle: PrimitiveBundle, keys: (string | string[])[], ix: number, k: number): string {
+    const key = keys[ix];
+    const args = typeof key === 'string' ? [key] : key;
+    const last = args.length - 1;
+    for (let i = 0; i < args.length; i++) {
+      const arg = args[i];
+      const j = this.keysets[ix].get(arg);
+      if (j === -1) {
+        if (i !== last) {
+          continue;
+        }
+        return '';
+      }
+      const kk = k + j * this.factors[ix];
+      const val = ix === this.last ? bundle.get(kk) : this._get(bundle, keys, ix + 1, kk);
+      if (!!val) {
+        return val;
+      }
+    }
+    return '';
   }
 
   private _mapping(bundle: PrimitiveBundle, k: number, ix: number): any {

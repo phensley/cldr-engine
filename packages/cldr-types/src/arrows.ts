@@ -74,7 +74,7 @@ export interface Vector1Arrow<T extends string> {
   /**
    * Gets the field at the corresponding offset of the given key.
    */
-  get(bundle: PrimitiveBundle, key: T): string;
+  get(bundle: PrimitiveBundle, key: T | T[]): string;
 
   /**
    * Full mapping of all keys to the corresponding fields.
@@ -96,7 +96,7 @@ export interface Vector2Arrow<T extends string, S extends string> {
   /**
    * Gets the field at the corresponding offset [key1, key2]
    */
-  get(bundle: PrimitiveBundle, key1: T, key2: S): string;
+  get(bundle: PrimitiveBundle, key1: T | T[], key2: S | S[]): string;
 
   /**
    * Full mapping of all keys to the corresponding fields.
@@ -118,7 +118,7 @@ export interface Vector3Arrow<T extends string, S extends string, U extends stri
   /**
    * Gets the field at the corresponding offset [key1, key2, key3]
    */
-  get(bundle: PrimitiveBundle, key1: T, key2: S, key3: U): string;
+  get(bundle: PrimitiveBundle, key1: T | T[], key2: S | S[], key3: U | U[]): string;
 
   /**
    * Full mapping of all keys to the corresponding fields.

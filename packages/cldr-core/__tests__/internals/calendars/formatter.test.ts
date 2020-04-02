@@ -25,6 +25,7 @@ test('calendar formatter', () => {
 
   date = GregorianDate.fromUnixEpoch(0, 'America/New_York', 1, 1);
   const ctx: CalendarContext<GregorianDate> = {
+    alt: {},
     bundle: en,
     date,
     system,

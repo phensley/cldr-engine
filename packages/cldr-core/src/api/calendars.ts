@@ -403,7 +403,7 @@ export class CalendarsImpl implements Calendars {
   }
 
   private _context<T extends CalendarDate>(date: T, params: NumberParams,
-    context?: ContextType, alt?: DateFormatAltOptions): CalendarContext<T> {
+    context?: ContextType, alt: DateFormatAltOptions = {}): CalendarContext<T> {
     return {
       alt,
       date,

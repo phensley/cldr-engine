@@ -45,7 +45,7 @@ export interface CalendarContext<T extends CalendarDate> {
   /**
    * Specify alternate fields.
    */
-  alt?: DateFormatAltOptions;
+  alt: DateFormatAltOptions;
 }
 
 export interface CalendarFormatter<T extends CalendarDate> {
