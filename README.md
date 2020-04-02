@@ -12,8 +12,8 @@ Internationalization in Typescript with Unicode CLDR, batteries included.
 
 ## Versioning
 
-- `1.0` release is stable.
-- `1.1` release will upgrade to CLDR v37 when available. At that point `1.0` will receive bug fixes only.
+- `1.0` release is stable (CLDR v36)
+- `1.1` release is stable (CLDR v37)
 - `2.0` is reserved to make major improvements in the library in several areas TBD.
 
 Due to this library's dependence on CLDR data, it uses a **modified semantic versioning** scheme `[MAJOR][MINOR][PATCH]`:
