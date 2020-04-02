@@ -45,13 +45,13 @@
     "@types/node": "^13.9.8",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
-    "chalk": "^3.0.0",
-    "jest": "^25.2.4",
+    "chalk": "^4.0.0",
+    "jest": "^25.2.6",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.3.0",
-    "tslint": "^6.1.0",
+    "tslint": "^6.1.1",
     "tslint-no-circular-imports": "^0.7.0",
-    "typescript": "^3.8.x"
+    "typescript": "^3.8.3"
   },
   "jest": {
     "moduleFileExtensions": [
