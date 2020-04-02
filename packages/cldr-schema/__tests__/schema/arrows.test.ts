@@ -171,11 +171,19 @@ test('2d arrow', () => {
     foo2: { bar1: '4', bar2: '5', bar3: '6' }
   });
 
-  // invalid keys, generate warning
+  // invalid keys
   expect(a.get(bundle, 'xxxxx', 'yyyyy')).toEqual('');
   expect(a.get(bundle, 'xxxxx', 'yyyyy')).toEqual('');
 
-  // number of arguments don't match vector's dimension
+  // invalid mixed with valid
+  expect(a.get(bundle, ['xxxxx', 'foo2'], ['yyyyy', 'bar3'])).toEqual('6');
+  expect(a.get(bundle, ['foo2', 'xxxxx'], ['bar3', 'yyyyy'])).toEqual('6');
+
+  // invalid multiple
+  expect(a.get(bundle, ['xxxxx', 'yyyyy'], ['xxxxx', 'yyyyy'])).toEqual('');
+  expect(a.get(bundle, ['xxxxx', 'yyyyy'], ['xxxxx', 'yyyyy'])).toEqual('');
+
+  // number of arguments don't match vector's dimension throws error
   expect(() => a.get(bundle, 'xxxxx')).toThrowError();
   expect(() => a.get(bundle, 'xxxxx')).toThrowError();
   expect(() => a.get(bundle, 'foo1', 'bar1', 'xxxxx')).toThrowError();
