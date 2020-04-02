@@ -27,12 +27,10 @@ import { PrimitiveBundle } from '@phensley/cldr-types';
 import { QuarterType } from '@phensley/cldr-types';
 import { RelativeTimeFieldType } from '@phensley/cldr-types';
 import { ScopeArrow } from '@phensley/cldr-types';
-import { Vector1Arrow } from '@phensley/cldr-types';
-import { Vector2Arrow } from '@phensley/cldr-types';
 import { WeekdayType } from '@phensley/cldr-types';
 
 // @public (undocumented)
-export const AltIndex: KeyIndexImpl<import("../../../cldr-types/lib").AltType>;
+export const AltIndex: KeyIndexImpl<"none" | "short" | "narrow" | "variant" | "stand-alone" | "long" | "menu">;
 
 // @public (undocumented)
 export const BuddhistEraIndex: KeyIndex<string>;
@@ -71,7 +69,7 @@ export const DateFieldWidthValues: DateFieldWidthType[];
 export const DateTimePatternFieldValues: DateTimePatternFieldType[];
 
 // @public (undocumented)
-export const DayPeriodAltIndex: KeyIndexImpl<import("../../../cldr-types/lib").DayPeriodAltType>;
+export const DayPeriodAltIndex: KeyIndexImpl<"none" | "casing">;
 
 // @public (undocumented)
 export const DayPeriodValues: DayPeriodType[];
@@ -111,7 +109,7 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
 }
 
 // @public (undocumented)
-export const EraAltIndex: KeyIndexImpl<import("../../../cldr-types/lib").EraAltType>;
+export const EraAltIndex: KeyIndexImpl<"none" | "sensitive">;
 
 // @public (undocumented)
 export const EraWidthValues: EraWidthType[];
@@ -350,7 +348,7 @@ export const TimeZoneStableIdIndex: KeyIndexImpl<string>;
 export const TimeZoneStableIds: string[];
 
 // @public (undocumented)
-export const TimeZoneTypeIndex: KeyIndexImpl<import("../../../cldr-types/lib").TimeZoneNameType>;
+export const TimeZoneTypeIndex: KeyIndexImpl<"daylight" | "generic" | "standard">;
 
 // @public (undocumented)
 export interface Vector {
@@ -368,12 +366,12 @@ export interface Vector {
 export const vector: (name: string, dims: string[]) => Vector;
 
 // @public
-export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<string, string> {
+export class VectorArrowImpl {
     constructor(offset: number, keysets: KeyIndex<string>[]);
     // (undocumented)
     exists(bundle: PrimitiveBundle): boolean;
     // (undocumented)
-    get(bundle: PrimitiveBundle, ...keys: string[]): string;
+    get(bundle: PrimitiveBundle, ...keys: (string | string[])[]): string;
     // (undocumented)
     readonly keysets: KeyIndex<string>[];
     // (undocumented)
@@ -382,7 +380,7 @@ export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<strin
     mapping(bundle: PrimitiveBundle): any;
     // (undocumented)
     readonly offset: number;
-    }
+}
 
 // @public (undocumented)
 export const WeekdayValues: WeekdayType[];

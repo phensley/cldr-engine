@@ -647,7 +647,7 @@ export type UnitType = 'g-force' | 'meter-per-second-squared' | 'arc-minute' | '
 // @public
 export interface Vector1Arrow<T extends string> {
     exists(bundle: PrimitiveBundle): boolean;
-    get(bundle: PrimitiveBundle, key: T): string;
+    get(bundle: PrimitiveBundle, key: T | T[]): string;
     mapping(bundle: PrimitiveBundle): {
         [P in T]: string;
     };
@@ -656,7 +656,7 @@ export interface Vector1Arrow<T extends string> {
 // @public
 export interface Vector2Arrow<T extends string, S extends string> {
     exists(bundle: PrimitiveBundle): boolean;
-    get(bundle: PrimitiveBundle, key1: T, key2: S): string;
+    get(bundle: PrimitiveBundle, key1: T | T[], key2: S | S[]): string;
     mapping(bundle: PrimitiveBundle): {
         [P in T]: {
             [Q in S]: string;
@@ -667,7 +667,7 @@ export interface Vector2Arrow<T extends string, S extends string> {
 // @public
 export interface Vector3Arrow<T extends string, S extends string, U extends string> {
     exists(bundle: PrimitiveBundle): boolean;
-    get(bundle: PrimitiveBundle, key1: T, key2: S, key3: U): string;
+    get(bundle: PrimitiveBundle, key1: T | T[], key2: S | S[], key3: U | U[]): string;
     mapping(bundle: PrimitiveBundle): {
         [P in T]: {
             [Q in S]: {
