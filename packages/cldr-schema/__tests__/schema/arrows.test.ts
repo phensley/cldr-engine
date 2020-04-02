@@ -176,10 +176,10 @@ test('2d arrow', () => {
   expect(a.get(bundle, 'xxxxx', 'yyyyy')).toEqual('');
 
   // number of arguments don't match vector's dimension
-  expect(a.get(bundle, 'xxxxx')).toEqual('');
-  expect(a.get(bundle, 'xxxxx')).toEqual('');
-  expect(a.get(bundle, 'foo1', 'bar1', 'xxxxx')).toEqual('');
-  expect(a.get(bundle, 'foo1', 'bar1', 'xxxxx')).toEqual('');
+  expect(() => a.get(bundle, 'xxxxx')).toThrowError();
+  expect(() => a.get(bundle, 'xxxxx')).toThrowError();
+  expect(() => a.get(bundle, 'foo1', 'bar1', 'xxxxx')).toThrowError();
+  expect(() => a.get(bundle, 'foo1', 'bar1', 'xxxxx')).toThrowError();
 });
 
 test('missing 2d arrow', () => {

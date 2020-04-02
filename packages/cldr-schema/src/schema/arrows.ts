@@ -76,7 +76,6 @@ export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<strin
 
   private last: number;
   private factors: number[];
-  private warning: boolean = false;
 
   constructor(offset: number, readonly keysets: KeyIndex<string>[]) {
     this.offset = offset + 1; // skip over header
@@ -103,15 +102,11 @@ export class VectorArrowImpl implements Vector1Arrow<string>, Vector2Arrow<strin
   }
 
   get(bundle: PrimitiveBundle, ...keys: string[]): string {
-    if (!this.exists(bundle)) {
-      return '';
-    }
     if (keys.length !== this.len) {
       // Impossible lookup, will never reach a valid field
-      if (!this.warning) {
-        console.log(`Warning: impossible vector lookup with keys ${JSON.stringify(keys)}`);
-        this.warning = true;
-      }
+      throw new Error(`Warning: impossible vector lookup with keys ${JSON.stringify(keys)}`);
+    }
+    if (!this.exists(bundle)) {
       return '';
     }
     let k = this.offset;
