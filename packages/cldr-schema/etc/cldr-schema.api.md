@@ -30,7 +30,7 @@ import { ScopeArrow } from '@phensley/cldr-types';
 import { WeekdayType } from '@phensley/cldr-types';
 
 // @public (undocumented)
-export const AltIndex: KeyIndexImpl<"none" | "short" | "narrow" | "variant" | "stand-alone" | "long" | "menu">;
+export const AltIndex: KeyIndexImpl<import("../../../cldr-types/lib").AltType>;
 
 // @public (undocumented)
 export const BuddhistEraIndex: KeyIndex<string>;
@@ -69,7 +69,7 @@ export const DateFieldWidthValues: DateFieldWidthType[];
 export const DateTimePatternFieldValues: DateTimePatternFieldType[];
 
 // @public (undocumented)
-export const DayPeriodAltIndex: KeyIndexImpl<"none" | "casing">;
+export const DayPeriodAltIndex: KeyIndexImpl<import("../../../cldr-types/lib").DayPeriodAltType>;
 
 // @public (undocumented)
 export const DayPeriodValues: DayPeriodType[];
@@ -109,7 +109,7 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
 }
 
 // @public (undocumented)
-export const EraAltIndex: KeyIndexImpl<"none" | "sensitive">;
+export const EraAltIndex: KeyIndexImpl<import("../../../cldr-types/lib").EraAltType>;
 
 // @public (undocumented)
 export const EraWidthValues: EraWidthType[];
@@ -348,7 +348,7 @@ export const TimeZoneStableIdIndex: KeyIndexImpl<string>;
 export const TimeZoneStableIds: string[];
 
 // @public (undocumented)
-export const TimeZoneTypeIndex: KeyIndexImpl<"daylight" | "generic" | "standard">;
+export const TimeZoneTypeIndex: KeyIndexImpl<import("../../../cldr-types/lib").TimeZoneNameType>;
 
 // @public (undocumented)
 export interface Vector {
