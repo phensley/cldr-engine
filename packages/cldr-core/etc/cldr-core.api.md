@@ -564,6 +564,7 @@ export interface DateFormatOptions {
 
 // @public (undocumented)
 export interface DateIntervalFormatOptions {
+    alt?: DateFormatAltOptions;
     ca?: CalendarType;
     context?: ContextType;
     date?: string;
@@ -574,6 +575,7 @@ export interface DateIntervalFormatOptions {
 
 // @public (undocumented)
 export interface DateRawFormatOptions {
+    alt?: DateFormatAltOptions;
     ca?: CalendarType;
     context?: ContextType;
     nu?: NumberSystemType;
