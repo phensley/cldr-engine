@@ -361,7 +361,7 @@ export class CalendarsImpl implements Calendars {
     if (req.skeleton) {
       const { ca, nu } = options;
       const r = this.manager.getDateFormatRequest(start, { ca, nu, skeleton: req.skeleton }, params);
-      const ctx = this._context(start, params, options.context);
+      const ctx = this._context(start, params, options.context, options.alt);
       const _start = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
       ctx.date = end;
       const _end = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
@@ -372,12 +372,12 @@ export class CalendarsImpl implements Calendars {
 
     let _date: R | undefined;
     if (req.date) {
-      const ctx = this._context(start, params, options.context);
+      const ctx = this._context(start, params, options.context, options.alt);
       _date = this.internals.calendars.formatDateTime(calendar, ctx, value, req.date);
     }
 
     if (req.range) {
-      const ctx = this._context(start, params, options.context);
+      const ctx = this._context(start, params, options.context, options.alt);
       const _range = this.internals.calendars.formatInterval(
         calendar, ctx, value, end, req.range);
       if (!_date) {
@@ -424,7 +424,7 @@ export class CalendarsImpl implements Calendars {
     const pattern = this.internals.calendars.parseDatePattern(options.pattern);
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     const params = this.privateApi.getNumberParams(options.nu, 'default');
-    const ctx = this._context(this.convertDateTo(calendar, date), params, options.context);
+    const ctx = this._context(this.convertDateTo(calendar, date), params, options.context, options.alt);
     return this.internals.calendars.formatDateTime(calendar, ctx, value, pattern);
   }
 

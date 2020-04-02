@@ -175,6 +175,11 @@ export interface DateRawFormatOptions {
    * Context in which the formatted string will be used
    */
   context?: ContextType;
+
+  /**
+   * Selection of alternate fields.
+   */
+  alt?: DateFormatAltOptions;
 }
 
 /**
@@ -215,6 +220,11 @@ export interface DateIntervalFormatOptions {
    * Context in which the formatted string will be used
    */
   context?: ContextType;
+
+  /**
+   * Selection of alternate fields.
+   */
+  alt?: DateFormatAltOptions;
 }
 
 /**

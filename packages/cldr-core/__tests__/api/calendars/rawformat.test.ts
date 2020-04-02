@@ -1,7 +1,8 @@
 import { calendarsApi } from '../../_helpers';
 
 import {
-  ZonedDateTime
+  DateRawFormatOptions,
+  ZonedDateTime,
 } from '../../../src';
 
 const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
@@ -17,12 +18,36 @@ test('raw formats', () => {
   const api = calendarsApi('en');
 
   const widths = [1, 2, 3, 4, 5, 6];
-  const format = (date: ZonedDateTime, ch: string): string[] =>
-    widths.map((_, i) => api.formatDateRaw(date, { pattern: ch.repeat(widths[i]) }));
+  const format = (date: ZonedDateTime, ch: string, opts: DateRawFormatOptions = {}): string[] =>
+    widths.map((_, i) => api.formatDateRaw(date, { pattern: ch.repeat(widths[i]), ...opts }));
+
+  let res: string[];
+
+  // GGGG
+  res = format(jan01, 'G');
+  expect(res).toEqual([
+    'AD', 'AD', 'AD', 'Anno Domini', 'A', 'AD'
+  ]);
+
+  res = format(jan01, 'G', { alt: { era: 'sensitive' } });
+  expect(res).toEqual([
+    'CE', 'CE', 'CE', 'Common Era', 'CE', 'CE'
+  ]);
+
+  // aaaa
+  res = format(jan01, 'a');
+  expect(res).toEqual([
+    'PM', 'PM', 'PM', 'PM', 'p', 'PM'
+  ]);
+
+  res = format(jan01, 'a', { alt: { dayPeriod: 'casing' } });
+  expect(res).toEqual([
+    'pm', 'pm', 'pm', 'pm', 'pm', 'pm'
+  ]);
 
   // EEEE
 
-  let res = format(jan01, 'E');
+  res = format(jan01, 'E');
   expect(res).toEqual([
     'Mon', 'Mon', 'Mon', 'Monday', 'M', 'Mo'
   ]);

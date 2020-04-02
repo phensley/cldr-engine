@@ -100,6 +100,10 @@ test('interval date/time choice', () => {
   end = start.add({ day: 0.3 });
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('Mar 11, 3 – 10 AM');
+
+  opts.alt = { dayPeriod: 'casing' };
+  s = api.formatDateInterval(start, end, opts);
+  expect(s).toEqual('Mar 11, 3 – 10 am');
 });
 
 test('interval mismatch', () => {
