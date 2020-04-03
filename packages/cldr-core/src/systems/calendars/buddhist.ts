@@ -18,11 +18,11 @@ export class BuddhistDate extends GregorianDate {
 
   add(fields: TimePeriod): BuddhistDate {
     const [jd, ms] = this._add(fields);
-    return new BuddhistDate(this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
+    return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
   withZone(zoneId: string): BuddhistDate {
-    return new BuddhistDate(this._firstDay, this._minDays).initFromUnixEpoch(this.unixEpoch(), zoneId);
+    return this._new().initFromUnixEpoch(this.unixEpoch(), zoneId);
   }
 
   toString(): string {
@@ -31,6 +31,10 @@ export class BuddhistDate extends GregorianDate {
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): BuddhistDate {
     return new BuddhistDate(firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
+  }
+
+  protected _new(): BuddhistDate {
+    return new BuddhistDate(this._firstDay, this._minDays);
   }
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): BuddhistDate {

@@ -17,11 +17,11 @@ export class JapaneseDate extends GregorianDate {
 
   add(fields: TimePeriod): JapaneseDate {
     const [jd, ms] = this._add(fields);
-    return new JapaneseDate(this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
+    return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
   withZone(zoneId: string): JapaneseDate {
-    return new JapaneseDate(this._firstDay, this._minDays).initFromUnixEpoch(this.unixEpoch(), zoneId);
+    return this._new().initFromUnixEpoch(this.unixEpoch(), zoneId);
   }
 
   toString(): string {
@@ -30,6 +30,10 @@ export class JapaneseDate extends GregorianDate {
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): JapaneseDate {
     return new JapaneseDate(firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
+  }
+
+  protected _new(): JapaneseDate {
+    return new JapaneseDate(this._firstDay, this._minDays);
   }
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): JapaneseDate {

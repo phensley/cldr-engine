@@ -342,15 +342,59 @@ export abstract class CalendarDate {
     return fields ? this._rollup(r, sf, ef, fields) : r;
   }
 
+  /**
+   * Return all of the date and time field values.
+   */
+  fields(): TimePeriod {
+    return {
+      year: this.year(),
+      month: this.month(),
+      week: 0, // ignored for this call
+      day: this.dayOfMonth(),
+      hour: this.hourOfDay(),
+      minute: this.minute(),
+      second: this.second(),
+      millis: this.milliseconds()
+    };
+  }
+
+  /**
+   * Set one or more fields on this date explicitly, and return a new date.
+   */
+  abstract set(fields: TimePeriod): CalendarDate;
+
+  /**
+   * Add the fields to this date, returning a new date.
+   */
   abstract add(fields: TimePeriod): CalendarDate;
+
+  /**
+   * Subtract the fields from this date, returning a new date.
+   */
   abstract subtract(fields: TimePeriod): CalendarDate;
+
+  /**
+   * Change the timezone for this date, returning a new date.
+   */
   abstract withZone(zoneId: string): CalendarDate;
 
+  protected abstract _new(): CalendarDate;
   protected abstract initFields(f: number[]): void;
   protected abstract monthCount(): number;
   protected abstract daysInMonth(y: number, m: number): number;
   protected abstract daysInYear(y: number): number;
   protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
+
+  /**
+   * Rollup just the time fields into number of milliseconds. This is internal
+   * and assumes all time fields are defined.
+   */
+  protected _timeToMs(f: TimePeriod): number {
+    return (Math.max(f.hour!, 0) | 0) * CalendarConstants.ONE_HOUR_MS
+      + (Math.max(f.minute!, 0) | 0) * CalendarConstants.ONE_MINUTE_MS
+      + (Math.max(f.second!, 0) | 0) * CalendarConstants.ONE_SECOND_MS
+      + (Math.max(f.millis!, 0) | 0);
+  }
 
   protected _invertPeriod(fields: TimePeriod): TimePeriod {
     const r: TimePeriod = {};

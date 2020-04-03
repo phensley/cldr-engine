@@ -19,7 +19,7 @@ export class ISO8601Date extends GregorianDate {
 
   add(fields: TimePeriod): ISO8601Date {
     const [jd, ms] = this._add(fields);
-    return new ISO8601Date().initFromJD(jd, ms, this.timeZoneId()) as ISO8601Date;
+    return this._new().initFromJD(jd, ms, this.timeZoneId()) as ISO8601Date;
   }
 
   toString(): string {
@@ -27,11 +27,15 @@ export class ISO8601Date extends GregorianDate {
   }
 
   withZone(zoneId: string): ISO8601Date {
-    return new ISO8601Date().initFromUnixEpoch(this.unixEpoch(), zoneId);
+    return this._new().initFromUnixEpoch(this.unixEpoch(), zoneId);
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, _firstDay: number, _minDays: number): ISO8601Date {
     return new ISO8601Date().initFromUnixEpoch(epoch, zoneId);
+  }
+
+  protected _new(): ISO8601Date {
+    return new ISO8601Date();
   }
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): ISO8601Date {

@@ -13,6 +13,8 @@ export const enum CalendarConstants {
   // Date of cutover to the Gregorian calendar, Oct 15, 1582
   JD_GREGORIAN_CUTOVER = 2299161,
   JD_GREGORIAN_CUTOVER_YEAR = 1582,
+  JD_GREGORIAN_CUTOVER_MONTH = 10,
+  JD_GREGORIAN_CUTOVER_DAY = 15,
 
   // Julian day for Jan 1, 1 first day of the Gregorian calendar common era
   JD_GREGORIAN_EPOCH = 1721426,

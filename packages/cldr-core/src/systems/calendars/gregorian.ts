@@ -18,9 +18,16 @@ export class GregorianDate extends CalendarDate {
     super(type, firstDay, minDays);
   }
 
+  set(fields: TimePeriod): CalendarDate {
+    const f = { ...this.fields(), ...fields };
+    const jd = this._ymdToJD(f.year!, f.month!, f.day!);
+    const ms = this._timeToMs(f) - this.timeZoneOffset();
+    return this._new().initFromJD(jd, ms, this.timeZoneId());
+  }
+
   add(fields: TimePeriod): GregorianDate {
     const [jd, ms] = this._add(fields);
-    return new GregorianDate('gregory', this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
+    return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
   subtract(fields: TimePeriod): GregorianDate {
@@ -28,7 +35,7 @@ export class GregorianDate extends CalendarDate {
   }
 
   withZone(zoneId: string): GregorianDate {
-    return new GregorianDate('gregory', this._firstDay, this._minDays).initFromUnixEpoch(this.unixEpoch(), zoneId);
+    return this._new().initFromUnixEpoch(this.unixEpoch(), zoneId);
   }
 
   toString(): string {
@@ -37,6 +44,10 @@ export class GregorianDate extends CalendarDate {
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number = 1, minDays: number = 1): GregorianDate {
     return new GregorianDate('gregory', firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
+  }
+
+  protected _new(): GregorianDate {
+    return new GregorianDate('gregory', this._firstDay, this._minDays);
   }
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): GregorianDate {
@@ -110,6 +121,35 @@ export class GregorianDate extends CalendarDate {
     }
     return jd;
   }
+
+  /**
+   * Convert integer (year, month, day) to Julian day.
+   */
+  private _ymdToJD(y: number, m: number, d: number): number {
+    y |= 0;
+    const leap = leapGregorian(y);
+    const mc = this.monthCount();
+    m = m < 1 ? 1 : m > mc ? mc : m;
+    const dc = MONTH_COUNT[m - 1][leap ? 1 : 0];
+    d = d < 1 ? 1 : d > dc ? dc : d;
+
+    // Adjustment due to Gregorian calendar switch on Oct 4, 1582 -> Oct 15, 1582
+    if (y < CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR || (y === CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR &&
+      (m < CalendarConstants.JD_GREGORIAN_CUTOVER_MONTH || (m === CalendarConstants.JD_GREGORIAN_CUTOVER_MONTH &&
+        d < CalendarConstants.JD_GREGORIAN_CUTOVER_DAY)))) {
+      if (m < 3) {
+        m += 12;
+        y -= 1;
+      }
+      return (1721117 + (1461 * y / 4 | 0) + ((153 * m - 457 | 0) / 5 | 0) + d);
+    }
+
+    const a = ((14 - m) / 12) | 0;
+    y = y + 4800 - a;
+    m = m + 12 * a - 3;
+    return d + ((153 * m + 2) / 5 | 0) + 365 * y + (y / 4 | 0) - (y / 100 | 0) + (y / 400 | 0) - 32045;
+  }
+
 }
 
 const floor = Math.floor;

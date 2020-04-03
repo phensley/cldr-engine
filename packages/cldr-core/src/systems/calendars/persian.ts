@@ -21,9 +21,16 @@ export class PersianDate extends CalendarDate {
     return this._fields[DateField.EXTENDED_YEAR] + 622;
   }
 
+  set(fields: TimePeriod): PersianDate {
+    const f = { ...this.fields(), ...fields };
+    const jd = this._ymdToJD(f.year!, f.month!, f.day!);
+    const ms = this._timeToMs(f) - this.timeZoneOffset();
+    return this._new().initFromJD(jd, ms, this.timeZoneId());
+  }
+
   add(fields: TimePeriod): PersianDate {
     const [jd, ms] = this._add(fields);
-    return new PersianDate(this._firstDay, this._minDays).initFromJD(jd, ms, this.timeZoneId());
+    return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
   subtract(fields: TimePeriod): PersianDate {
@@ -31,7 +38,7 @@ export class PersianDate extends CalendarDate {
   }
 
   withZone(zoneId: string): PersianDate {
-    return new PersianDate(this._firstDay, this._minDays).initFromUnixEpoch(this.unixEpoch(), zoneId);
+    return this._new().initFromUnixEpoch(this.unixEpoch(), zoneId);
   }
 
   toString(): string {
@@ -40,6 +47,10 @@ export class PersianDate extends CalendarDate {
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): PersianDate {
     return new PersianDate(firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
+  }
+
+  protected _new(): PersianDate {
+    return new PersianDate(this._firstDay, this._minDays);
   }
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): PersianDate {
@@ -96,6 +107,20 @@ export class PersianDate extends CalendarDate {
       }
     }
     return jd;
+  }
+
+  private _ymdToJD(y: number, m: number, d: number): number {
+    y |= 0;
+    const leap = leapPersian(y);
+    const mc = this.monthCount();
+    m = m < 1 ? 1 : m > mc ? mc : m;
+    const dc = MONTH_COUNT[m - 1][leap ? 1 : 0];
+    d = d < 1 ? 1 : d > dc ? dc : d;
+
+    const favardin1 = 365 * (y - 1) + floor((8 * y + 21) / 33);
+    const mdays = MONTH_COUNT[m - 1][2];
+    const days = favardin1 + d + mdays - 1;
+    return days + CalendarConstants.JD_PERSIAN_EPOCH;
   }
 }
 
