@@ -2,7 +2,7 @@
 
 [![@phensley/timezone](https://badge.fury.io/js/%40phensley%2Ftimezone.svg)](https://www.npmjs.com/package/@phensley/timezone) [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/timezone)](https://bundlephobia.com/result?p=@phensley/timezone)
 
-Compact timezone library provides the full range of tzdb data. Supports all years for which rules exist, with currently-active rules extended into the future through year 2499. https://data.iana.org/time-zones/tz-link.html
+Compact timezone library provides the full range of tzdb data. https://data.iana.org/time-zones/tz-link.html
 
 ## Installation
 
@@ -42,7 +42,7 @@ const ZONES = [
   'America/New_York',
   'Pacific/Pago_Pago',
   'Asia/Tokyo',
-  'Europe/Paris'
+  'Europe/Paris',
 ];
 
 const now = new Date(2020, 2, 18, 12, 30, 0).getTime();
