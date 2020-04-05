@@ -9,7 +9,8 @@ import { CalendarConstants, ConstantsDesc } from './constants';
 import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
 import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag, TIME_PERIOD_FIELDS } from './interval';
-import { CalendarType } from './types';
+import { CalendarDateFields, CalendarType } from './types';
+import { unixEpochFromJD } from './utils';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
 
@@ -78,6 +79,8 @@ const differenceFields: [number, DateTimePatternFieldType][] = [
  */
 export abstract class CalendarDate {
 
+  // Forward reference for casting to Gregorian date
+  protected static _gregorian: (d: CalendarDate, utc: boolean, firstDate: number, minDays: number) => CalendarDate;
   protected _fields: number[] = dateFields();
   protected _zoneInfo!: ZoneInfo;
 
@@ -92,6 +95,7 @@ export abstract class CalendarDate {
     // Compute week fields on demand.
     this._fields[DateField.WEEK_OF_YEAR] = NULL;
     this._fields[DateField.YEAR_WOY] = NULL;
+    this._zoneInfo = zoneInfoFromUTC('UTC', 0);
   }
 
   /**
@@ -102,14 +106,16 @@ export abstract class CalendarDate {
   }
 
   /**
-   * Returns a formatted ISO8601 string of the date in UTC.
+   * Returns a formatted ISO-8601 string of the date in UTC. Note that this
+   * always returns a date in the Gregorian calendar.
    */
   toISOString(): string {
-    return this._toISOString(this.withZone('UTC'), true);
+    return this._toISOString(this, true);
   }
 
   /**
-   * Returns a formatted ISO8601 string of the date.
+   * Returns a formatted ISO 8601 string of the date with local timezone offset.
+   * Note that this always returns a date in the Gregorian calendar.
    */
   toLocalISOString(): string {
     return this._toISOString(this, false);
@@ -359,22 +365,26 @@ export abstract class CalendarDate {
   /**
    * Return all of the date and time field values.
    */
-  fields(): TimePeriod {
+  fields(): CalendarDateFields {
     return {
-      year: this.year(),
+      year: this.extendedYear(),
       month: this.month(),
       day: this.dayOfMonth(),
       hour: this.hourOfDay(),
       minute: this.minute(),
       second: this.second(),
-      millis: this.milliseconds()
+      millis: this.milliseconds(),
+      zoneId: this.timeZoneId()
     };
   }
 
   /**
    * Set one or more fields on this date explicitly, and return a new date.
+   *
+   * Note: when setting the 'year' field you must use the "extended year".
+   * For example, the extended year 0 is 1 B.C in the Gregorian calendar.
    */
-  abstract set(fields: TimePeriod): CalendarDate;
+  abstract set(fields: Partial<CalendarDateFields>): CalendarDate;
 
   /**
    * Add the fields to this date, returning a new date.
@@ -399,12 +409,15 @@ export abstract class CalendarDate {
   protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
 
   protected _toISOString(d: CalendarDate, utc: boolean): string {
+    d = CalendarDate._gregorian(this, utc, this._firstDay, this._minDays);
     let z = 'Z';
     if (!utc) {
       const o = (this.timeZoneOffset() / CalendarConstants.ONE_MINUTE_MS) | 0;
       z = `${o < 0 ? '-' : '+'}${zeropad(o / 60 | 0, 2)}:${zeropad(o % 60 | 0, 2)}`;
     }
-    return `${d.year()}-${zeropad(d.month(), 2)}-${zeropad(d.dayOfMonth(), 2)}` +
+    const y = d.extendedYear();
+    const neg = y < 0;
+    return `${neg ? '-' : ''}${zeropad(Math.abs(y), 4)}-${zeropad(d.month(), 2)}-${zeropad(d.dayOfMonth(), 2)}` +
       `T${zeropad(d.hourOfDay(), 2)}:${zeropad(d.minute(), 2)}:${zeropad(d.second(), 2)}` +
       `.${zeropad(d.milliseconds(), 3)}${z}`;
   }
@@ -414,10 +427,10 @@ export abstract class CalendarDate {
    * and assumes all time fields are defined.
    */
   protected _timeToMs(f: TimePeriod): number {
-    return (Math.max(f.hour!, 0) | 0) * CalendarConstants.ONE_HOUR_MS
-      + (Math.max(f.minute!, 0) | 0) * CalendarConstants.ONE_MINUTE_MS
-      + (Math.max(f.second!, 0) | 0) * CalendarConstants.ONE_SECOND_MS
-      + (Math.max(f.millis!, 0) | 0);
+    return clamp(f.hour!, 0, 23) * CalendarConstants.ONE_HOUR_MS
+      + clamp(f.minute!, 0, 59) * CalendarConstants.ONE_MINUTE_MS
+      + clamp(f.second!, 0, 59) * CalendarConstants.ONE_SECOND_MS
+      + clamp(f.millis!, 0, 999);
   }
 
   protected _invertPeriod(fields: TimePeriod): TimePeriod {
@@ -811,8 +824,11 @@ export abstract class CalendarDate {
     this.initFromUnixEpoch(unixEpoch, zoneId);
   }
 
-  protected _toString(type: string, year?: string): string {
-    return `${type} ${year || this.year()}-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)} ` +
+  protected _toString(type: string): string {
+    const y = this.extendedYear();
+    const neg = y < 0;
+    return `${type} ${neg ? '-' : ''}${zeropad(Math.abs(y), 4)}` +
+      `-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)} ` +
       `${zeropad(this.hourOfDay(), 2)}:${zeropad(this.minute(), 2)}:${zeropad(this.second(), 2)}` +
       `.${zeropad(this.milliseconds(), 3)} ${this._zoneInfo.zoneid}`;
   }
@@ -882,6 +898,9 @@ export abstract class CalendarDate {
   }
 }
 
+const clamp = (n: number, min: number, max: number): number =>
+  Math.max(Math.min(n, max), min) | 0;
+
 /**
  * Compute Julian day from timezone-adjusted Unix epoch milliseconds.
  */
@@ -893,15 +912,6 @@ const jdFromUnixEpoch = (ms: number, f: number[]): void => {
 
   f[DateField.JULIAN_DAY] = jd;
   f[DateField.MILLIS_IN_DAY] = msDay;
-};
-
-/**
- * Given a Julian day and local milliseconds (in UTC), return the Unix
- * epoch milliseconds UTC.
- */
-const unixEpochFromJD = (jd: number, msDay: number): number => {
-  const days = jd - CalendarConstants.JD_UNIX_EPOCH;
-  return (days * CalendarConstants.ONE_DAY_MS) + Math.round(msDay);
 };
 
 /**

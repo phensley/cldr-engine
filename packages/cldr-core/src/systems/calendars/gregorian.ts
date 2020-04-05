@@ -1,9 +1,20 @@
+import { TZ } from '@phensley/timezone';
 import { CalendarConstants } from './constants';
 import { CalendarDate } from './calendar';
-import { CalendarType } from './types';
+import { CalendarDateFields, CalendarType } from './types';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
 import { TimePeriod } from './interval';
+
+const ZEROS: Partial<CalendarDateFields> = {
+  year: 1970,
+  month: 1,
+  day: 1,
+  hour: 0,
+  minute: 0,
+  second: 0,
+  millis: 0,
+};
 
 /**
  * Construct a date using the rules of the Gregorian calendar.
@@ -14,15 +25,17 @@ import { TimePeriod } from './interval';
  */
 export class GregorianDate extends CalendarDate {
 
+  static _init: void = (() => {
+    CalendarDate._gregorian =
+      (d, utc, fd, md) => GregorianDate.fromUnixEpoch(d.unixEpoch(), utc ? 'Etc/UTC' : d.timeZoneId(), fd, md);
+  })();
+
   protected constructor(type: CalendarType, firstDay: number, minDays: number) {
     super(type, firstDay, minDays);
   }
 
-  set(fields: TimePeriod): CalendarDate {
-    const f = { ...this.fields(), ...fields };
-    const jd = this._ymdToJD(f.year!, f.month!, f.day!);
-    const ms = this._timeToMs(f) - this.timeZoneOffset();
-    return this._new().initFromJD(jd, ms, this.timeZoneId());
+  set(fields: Partial<CalendarDateFields>): GregorianDate {
+    return this._set({ ...this.fields(), ...fields });
   }
 
   add(fields: TimePeriod): GregorianDate {
@@ -40,6 +53,10 @@ export class GregorianDate extends CalendarDate {
 
   toString(): string {
     return this._toString('Gregorian');
+  }
+
+  static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): GregorianDate {
+    return new GregorianDate('gregory', firstDay, minDays)._set({ ...ZEROS, ...fields });
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number = 1, minDays: number = 1): GregorianDate {
@@ -125,7 +142,7 @@ export class GregorianDate extends CalendarDate {
   /**
    * Convert integer (year, month, day) to Julian day.
    */
-  private _ymdToJD(y: number, m: number, d: number): number {
+  protected _ymdToJD(y: number, m: number, d: number): number {
     y |= 0;
     const leap = leapGregorian(y);
     const mc = this.monthCount();
@@ -141,13 +158,23 @@ export class GregorianDate extends CalendarDate {
         m += 12;
         y -= 1;
       }
-      return (1721117 + (1461 * y / 4 | 0) + ((153 * m - 457 | 0) / 5 | 0) + d);
+      return (1721117 + floor(1461 * y / 4) + floor((153 * m - 457) / 5) + d);
     }
 
     const a = ((14 - m) / 12) | 0;
     y = y + 4800 - a;
     m = m + 12 * a - 3;
     return d + ((153 * m + 2) / 5 | 0) + 365 * y + (y / 4 | 0) - (y / 100 | 0) + (y / 400 | 0) - 32045;
+  }
+
+  protected _set(f: Partial<CalendarDateFields>): GregorianDate {
+    const jd = this._ymdToJD(f.year!, f.month!, f.day!);
+    const ms = this._timeToMs(f);
+    const epoch = unixEpochFromJD(jd, ms);
+    const zoneId = f.zoneId || this.timeZoneId();
+    // Find UTC epoch for wall clock time in the requested timezone
+    const r = TZ.fromWall(zoneId, epoch);
+    return this._new().initFromUnixEpoch(r ? r[0] : epoch, zoneId);
   }
 
 }
@@ -239,4 +266,13 @@ const leapGregorian = (y: number): boolean => {
     r = r && ((y % 100 !== 0) || (y % 400 === 0));
   }
   return r;
+};
+
+/**
+ * Given a Julian day and local milliseconds (in UTC), return the Unix
+ * epoch milliseconds UTC.
+ */
+const unixEpochFromJD = (jd: number, msDay: number): number => {
+  const days = jd - CalendarConstants.JD_UNIX_EPOCH;
+  return (days * CalendarConstants.ONE_DAY_MS) + Math.round(msDay);
 };

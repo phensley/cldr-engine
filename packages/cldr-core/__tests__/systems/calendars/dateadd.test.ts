@@ -119,13 +119,13 @@ test('persian years', () => {
 test('buddhist years', () => {
   const date: BuddhistDate = buddhist(BASE, NEW_YORK);
   let q: BuddhistDate;
-  expect(date.toString()).toEqual('Buddhist 2543-03-11 03:00:25.000 America/New_York');
+  expect(date.toString()).toEqual('Buddhist 2000-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ year: 1 });
-  expect(q.toString()).toEqual('Buddhist 2544-03-11 03:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Buddhist 2001-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ year: -5 });
-  expect(q.toString()).toEqual('Buddhist 2538-03-11 03:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Buddhist 1995-03-11 03:00:25.000 America/New_York');
 });
 
 test('months', () => {

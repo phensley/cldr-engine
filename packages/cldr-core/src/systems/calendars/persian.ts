@@ -3,6 +3,7 @@ import { CalendarConstants } from './constants';
 import { DateField } from './fields';
 import { floorDiv } from './utils';
 import { TimePeriod } from './interval';
+import { CalendarDateFields } from './types';
 
 /**
  * Construct a date using the rules of the Persian calendar.
@@ -21,7 +22,7 @@ export class PersianDate extends CalendarDate {
     return this._fields[DateField.EXTENDED_YEAR] + 622;
   }
 
-  set(fields: TimePeriod): PersianDate {
+  set(fields: Partial<CalendarDateFields>): PersianDate {
     const f = { ...this.fields(), ...fields };
     const jd = this._ymdToJD(f.year!, f.month!, f.day!);
     const ms = this._timeToMs(f) - this.timeZoneOffset();
@@ -43,6 +44,10 @@ export class PersianDate extends CalendarDate {
 
   toString(): string {
     return this._toString('Persian');
+  }
+
+  static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): PersianDate {
+    return new PersianDate(firstDay, minDays).set({ year: 1, month: 1, day: 1, ...fields });
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): PersianDate {

@@ -2,6 +2,7 @@ import { DayOfWeek } from './fields';
 import { CalendarConstants } from './constants';
 import { GregorianDate } from './gregorian';
 import { TimePeriod } from './interval';
+import { CalendarDateFields } from './types';
 
 /**
  * Gregorian calendar with ISO-8601 first day of week and minimum days in week.
@@ -28,6 +29,10 @@ export class ISO8601Date extends GregorianDate {
 
   withZone(zoneId: string): ISO8601Date {
     return this._new().initFromUnixEpoch(this.unixEpoch(), zoneId);
+  }
+
+  static fromFields(fields: Partial<CalendarDateFields>, _firstDay: number, _minDays: number): ISO8601Date {
+    return new ISO8601Date()._set(fields) as ISO8601Date;
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, _firstDay: number, _minDays: number): ISO8601Date {

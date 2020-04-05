@@ -44,6 +44,7 @@ import { Locale } from '@phensley/locale';
 import {
   BuddhistDate,
   CalendarDate,
+  CalendarDateFields,
   GregorianDate,
   ISO8601Date,
   JapaneseDate,
@@ -95,15 +96,30 @@ export interface Calendars {
   toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
 
   /**
+   * Construct a new date in the Buddhist calendar with the given fields.
+   */
+  newBuddhistDate(fields: Partial<CalendarDateFields>): BuddhistDate;
+
+  /**
    * Convert a date time into a date in the Gregorian calendar, with locale-specific
    * week data.
    */
   toGregorianDate(date: CalendarDate | ZonedDateTime | Date): GregorianDate;
 
   /**
+   * Construct a new date in the Gregorian calendar with the given fields.
+   */
+  newGregorianDate(fields: Partial<CalendarDateFields>): GregorianDate;
+
+  /**
    * Convert a date time into a date in the ISO-8601 calendar, with ISO week data.
    */
   toISO8601Date(date: CalendarDate | ZonedDateTime | Date): ISO8601Date;
+
+  /**
+   * Construct a new date in the ISO-8601 calendar with the given fields.
+   */
+  newISO8601Date(fields: Partial<CalendarDateFields>): ISO8601Date;
 
   /**
    * Convert a date time into a date in the Japanese calendar, with locale-specific
@@ -112,10 +128,20 @@ export interface Calendars {
   toJapaneseDate(date: CalendarDate | ZonedDateTime | Date): JapaneseDate;
 
   /**
+   * Construct a new date in the Japanese calendar with the given fields.
+   */
+  newJapaneseDate(fields: Partial<CalendarDateFields>): JapaneseDate;
+
+  /**
    * Convert a date time into a date in the Persian calendar, with locale-specific
    * week data.
    */
   toPersianDate(date: CalendarDate | ZonedDateTime | Date): PersianDate;
+
+  /**
+   * Construct a new date in the Persian calendar with the given fields.
+   */
+  newPersianDate(fields: Partial<CalendarDateFields>): PersianDate;
 
   /**
    * Calculate the field of visual difference between two dates. This can be used

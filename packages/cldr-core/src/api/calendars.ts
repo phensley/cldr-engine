@@ -31,6 +31,7 @@ import { Quantity } from '../common';
 import {
   BuddhistDate,
   CalendarDate,
+  CalendarDateFields,
   CalendarFromUnixEpoch,
   CalendarType,
   GregorianDate,
@@ -124,10 +125,24 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
+   * Construct a new date in the Buddhist calendar with the given fields.
+   */
+  newBuddhistDate(fields: Partial<CalendarDateFields>): BuddhistDate {
+    return BuddhistDate.fromFields(fields, this.firstDay, this.minDays);
+  }
+
+  /**
    * Convert the given date to the Gregorian calendar.
    */
   toGregorianDate(date: CalendarDate | ZonedDateTime | Date): GregorianDate {
     return this.convertDate(GregorianDate.fromUnixEpoch, date);
+  }
+
+  /**
+   * Construct a new date in the Gregorian calendar with the given fields.
+   */
+  newGregorianDate(fields: Partial<CalendarDateFields>): GregorianDate {
+    return GregorianDate.fromFields(fields, this.firstDay, this.minDays);
   }
 
   /**
@@ -138,6 +153,13 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
+   * Construct a new date in the ISO-8601 calendar with the given fields.
+   */
+  newISO8601Date(fields: Partial<CalendarDateFields>): ISO8601Date {
+    return ISO8601Date.fromFields(fields, this.firstDay, this.minDays);
+  }
+
+  /**
    * Convert the given date to the Japanese calendar.
    */
   toJapaneseDate(date: CalendarDate | ZonedDateTime | Date): JapaneseDate {
@@ -145,10 +167,24 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
+   * Construct a new date in the Japanese calendar with the given fields.
+   */
+  newJapaneseDate(fields: Partial<CalendarDateFields>): JapaneseDate {
+    return JapaneseDate.fromFields(fields, this.firstDay, this.minDays);
+  }
+
+  /**
    * Convert the given date to the Persian calendar.
    */
   toPersianDate(date: CalendarDate | ZonedDateTime | Date): PersianDate {
     return this.convertDate(PersianDate.fromUnixEpoch, date);
+  }
+
+  /**
+   * Construct a new date in the Persian calendar with the given fields.
+   */
+  newPersianDate(fields: Partial<CalendarDateFields>): PersianDate {
+    return PersianDate.fromFields(fields, this.firstDay, this.minDays);
   }
 
   /**

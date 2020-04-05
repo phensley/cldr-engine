@@ -1,6 +1,7 @@
 import { DateField } from './fields';
 import { GregorianDate } from './gregorian';
 import { TimePeriod } from './interval';
+import { CalendarDateFields } from './types';
 
 /**
  * A date in the Japanese Imperial calendar.
@@ -25,7 +26,11 @@ export class JapaneseDate extends GregorianDate {
   }
 
   toString(): string {
-    return this._toString('Japanese', `${this.extendedYear()}`);
+    return this._toString('Japanese');
+  }
+
+  static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): JapaneseDate {
+    return new JapaneseDate(firstDay, minDays)._set(fields) as JapaneseDate;
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): JapaneseDate {

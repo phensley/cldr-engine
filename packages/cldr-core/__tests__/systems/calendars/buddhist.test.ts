@@ -17,7 +17,7 @@ test('buddhist calendar', () => {
   let d: BuddhistDate;
 
   d = make(APR_11, NEW_YORK);
-  expect(d.toString()).toEqual('Buddhist 2561-04-11 19:59:59.123 America/New_York');
+  expect(d.toString()).toEqual('Buddhist 2018-04-11 19:59:59.123 America/New_York');
   expect(d.type()).toEqual('buddhist');
   expect(d.modifiedJulianDay()).toEqual(2458220);
   expect(d.era()).toEqual(0);
@@ -38,11 +38,11 @@ test('with zone', () => {
   let d: BuddhistDate;
 
   d = make(APR_11, UTC);
-  expect(d.toString()).toEqual('Buddhist 2561-04-11 23:59:59.123 Etc/UTC');
+  expect(d.toString()).toEqual('Buddhist 2018-04-11 23:59:59.123 Etc/UTC');
 
   d = d.withZone(LOS_ANGELES);
-  expect(d.toString()).toEqual('Buddhist 2561-04-11 16:59:59.123 America/Los_Angeles');
+  expect(d.toString()).toEqual('Buddhist 2018-04-11 16:59:59.123 America/Los_Angeles');
 
   d = d.withZone(NEW_YORK);
-  expect(d.toString()).toEqual('Buddhist 2561-04-11 19:59:59.123 America/New_York');
+  expect(d.toString()).toEqual('Buddhist 2018-04-11 19:59:59.123 America/New_York');
 });

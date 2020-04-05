@@ -19,7 +19,7 @@ export const enum CalendarConstants {
   // Julian day for Jan 1, 1 first day of the Gregorian calendar common era
   JD_GREGORIAN_EPOCH = 1721426,
 
-  // Julian day for Mar 21, 622 first day of the Persian calendar
+  // Julian day for Mar 21, 622 CE first day of the Persian calendar
   JD_PERSIAN_EPOCH = 1948320,
 
   BUDDHIST_ERA_START = -543,

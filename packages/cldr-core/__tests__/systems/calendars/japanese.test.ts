@@ -14,7 +14,7 @@ test('japanese calendar', () => {
   // Monday, January 24, 620 4:40:00 AM UTC
   n = -42599935200000;
   d = make(n, 'UTC');
-  expect(d.toString()).toEqual('Japanese 620-01-21 04:40:00.000 Etc/UTC');
+  expect(d.toString()).toEqual('Japanese 0620-01-21 04:40:00.000 Etc/UTC');
   expect(d.type()).toEqual('japanese');
   expect(d.era()).toEqual(0); // Taika 645-06-19
   expect(d.year()).toEqual(-24);

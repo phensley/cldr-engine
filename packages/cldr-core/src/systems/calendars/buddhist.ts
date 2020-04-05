@@ -2,6 +2,9 @@ import { CalendarConstants } from './constants';
 import { GregorianDate } from './gregorian';
 import { DateField } from './fields';
 import { TimePeriod } from './interval';
+import { CalendarDateFields } from './types';
+
+const ZEROS: TimePeriod = { year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, millis: 0 };
 
 /**
  * A date in the Buddhist calendar.
@@ -16,6 +19,13 @@ export class BuddhistDate extends GregorianDate {
     super('buddhist', firstDay, minDays);
   }
 
+  set(fields: Partial<CalendarDateFields>): GregorianDate {
+    const f: TimePeriod = { ...this.fields(), ...fields };
+    // Adjust year to Gregorian before calling internal set
+    // f.year! += CalendarConstants.BUDDHIST_ERA_START;
+    return this._set(f);
+  }
+
   add(fields: TimePeriod): BuddhistDate {
     const [jd, ms] = this._add(fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
@@ -27,6 +37,10 @@ export class BuddhistDate extends GregorianDate {
 
   toString(): string {
     return this._toString('Buddhist');
+  }
+
+  static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): BuddhistDate {
+    return new BuddhistDate(firstDay, minDays)._set({ ...ZEROS, ...fields }) as BuddhistDate;
   }
 
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): BuddhistDate {
@@ -53,6 +67,7 @@ export class BuddhistDate extends GregorianDate {
     super.initFields(f);
     computeBuddhistFields(f);
   }
+
 }
 
 const computeBuddhistFields = (f: number[]): void => {

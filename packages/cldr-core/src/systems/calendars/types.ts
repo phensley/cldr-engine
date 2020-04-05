@@ -8,3 +8,21 @@
  * @public
  */
 export type CalendarType = 'buddhist' | 'gregory' | 'iso8601' | 'japanese' | 'persian';
+
+/**
+ * Fields on a CalendarDate.
+ *
+ * @public
+ */
+export interface CalendarDateFields {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+  second: number;
+  millis: number;
+  zoneId: string;
+}
+
+export type DstResolutionType = 'pre' | 'post';
