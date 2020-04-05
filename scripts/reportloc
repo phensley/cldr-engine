@@ -26,7 +26,7 @@ def cloc(path):
 def uglify(paths):
     if isinstance(paths, (str,)):
         paths = [paths]
-    raw = run([UGLIFYJS] + paths)
+    raw = run([UGLIFYJS] + paths + ['-c', '-m', '--toplevel'])
     z = zlib.compress(raw, 9)
     br = brotli.compress(raw)
     return (len(raw), len(z), len(br))
