@@ -104,6 +104,8 @@ export class BuddhistDate extends GregorianDate {
     // (undocumented)
     protected initFromUnixEpoch(epoch: number, zoneId: string): BuddhistDate;
     // (undocumented)
+    protected _new(): BuddhistDate;
+    // (undocumented)
     toString(): string;
     // (undocumented)
     withZone(zoneId: string): BuddhistDate;
@@ -132,7 +134,6 @@ export interface Bundle extends PrimitiveBundle {
 // @public
 export abstract class CalendarDate {
     protected constructor(_type: CalendarType, _firstDay: number, _minDays: number);
-    // (undocumented)
     abstract add(fields: TimePeriod): CalendarDate;
     protected _add(fields: TimePeriod): [number, number];
     protected _addTime(fields: TimePeriod): [number, number];
@@ -155,6 +156,7 @@ export abstract class CalendarDate {
     // (undocumented)
     extendedYear(): number;
     fieldOfVisualDifference(other: CalendarDate): DateTimePatternFieldType;
+    fields(): TimePeriod;
     // (undocumented)
     protected _fields: number[];
     // (undocumented)
@@ -195,16 +197,19 @@ export abstract class CalendarDate {
     protected abstract monthCount(): number;
     // (undocumented)
     protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
+    // (undocumented)
+    protected abstract _new(): CalendarDate;
     ordinalDayOfWeek(): number;
     // (undocumented)
     relatedYear(): number;
     relativeTime(other: CalendarDate, field?: TimePeriodField): [TimePeriodField, number];
     protected _rollup(span: TimePeriod, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod;
     second(): number;
-    // (undocumented)
+    abstract set(fields: TimePeriod): CalendarDate;
     abstract subtract(fields: TimePeriod): CalendarDate;
     // (undocumented)
     protected swap(other: CalendarDate): [CalendarDate, number[], CalendarDate, number[]];
+    protected _timeToMs(f: TimePeriod): number;
     // (undocumented)
     timeZoneId(): string;
     // (undocumented)
@@ -224,7 +229,6 @@ export abstract class CalendarDate {
     weekOfMonth(): number;
     // (undocumented)
     weekOfYear(): number;
-    // (undocumented)
     abstract withZone(zoneId: string): CalendarDate;
     // (undocumented)
     year(): number;
@@ -807,12 +811,16 @@ export class GregorianDate extends CalendarDate {
     // (undocumented)
     protected monthStart(eyear: number, month: number, _useMonth: boolean): number;
     // (undocumented)
+    protected _new(): GregorianDate;
+    // (undocumented)
+    set(fields: TimePeriod): CalendarDate;
+    // (undocumented)
     subtract(fields: TimePeriod): GregorianDate;
     // (undocumented)
     toString(): string;
     // (undocumented)
     withZone(zoneId: string): GregorianDate;
-}
+    }
 
 // Warning: (ae-internal-missing-underscore) The name "INTERNAL_NUMBERING" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -878,6 +886,8 @@ export class ISO8601Date extends GregorianDate {
     // (undocumented)
     protected initFromUnixEpoch(epoch: number, zoneId: string): ISO8601Date;
     // (undocumented)
+    protected _new(): ISO8601Date;
+    // (undocumented)
     toString(): string;
     // (undocumented)
     withZone(zoneId: string): ISO8601Date;
@@ -896,6 +906,8 @@ export class JapaneseDate extends GregorianDate {
     protected initFromJD(jd: number, msDay: number, zoneId: string): JapaneseDate;
     // (undocumented)
     protected initFromUnixEpoch(epoch: number, zoneId: string): JapaneseDate;
+    // (undocumented)
+    protected _new(): JapaneseDate;
     // (undocumented)
     toString(): string;
     // (undocumented)
@@ -1264,14 +1276,18 @@ export class PersianDate extends CalendarDate {
     // (undocumented)
     protected monthStart(eyear: number, month: number, _useMonth: boolean): number;
     // (undocumented)
+    protected _new(): PersianDate;
+    // (undocumented)
     relatedYear(): number;
+    // (undocumented)
+    set(fields: TimePeriod): PersianDate;
     // (undocumented)
     subtract(fields: TimePeriod): PersianDate;
     // (undocumented)
     toString(): string;
     // (undocumented)
     withZone(zoneId: string): PersianDate;
-}
+    }
 
 export { PluralRules }
 
