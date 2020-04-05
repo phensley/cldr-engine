@@ -6,9 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [UNRELEASED]
 
+### Added
+
+- `CalendarDate.set` to set one or more fields on a date.
+- `CalendarDate.fields` to retrieve a `TimePeriod` populated with a date's field values.
+- Date formatting options now accept an optional `alt` property:
+  - The `era` default for Gregorian is "Before Christ" and "Anno Domini".
+    Specifying the `{ alt: { era: 'sensitive' }}` option will use "Before Common Era" and "Common Era".
+  - The `dayPeriod` default for Gregorian in US English is "AM" and "PM".
+    Specifying the `{ alt: { dayPeriod: 'casing' }}` option will use lowercase forms "am" and "pm".
+
 ### Fixed/Changed
 
-- Generalized the vector arrow type in the schema, to support creation of higher-dimension arrows while reducing runtime code size.
+- Internal: generalized the vector arrow type in the schema, to support creation of higher-dimension arrows while reducing runtime code size.
 
 ## [1.0.9]
 
