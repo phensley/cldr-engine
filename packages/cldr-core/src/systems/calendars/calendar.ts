@@ -102,6 +102,20 @@ export abstract class CalendarDate {
   }
 
   /**
+   * Returns a formatted ISO8601 string of the date in UTC.
+   */
+  toISOString(): string {
+    return this._toISOString(this.withZone('UTC'), true);
+  }
+
+  /**
+   * Returns a formatted ISO8601 string of the date.
+   */
+  toLocalISOString(): string {
+    return this._toISOString(this, false);
+  }
+
+  /**
    * Unix epoch with no timezone offset.
    */
   unixEpoch(): number {
@@ -349,7 +363,6 @@ export abstract class CalendarDate {
     return {
       year: this.year(),
       month: this.month(),
-      week: 0, // ignored for this call
       day: this.dayOfMonth(),
       hour: this.hourOfDay(),
       minute: this.minute(),
@@ -384,6 +397,17 @@ export abstract class CalendarDate {
   protected abstract daysInMonth(y: number, m: number): number;
   protected abstract daysInYear(y: number): number;
   protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
+
+  protected _toISOString(d: CalendarDate, utc: boolean): string {
+    let z = 'Z';
+    if (!utc) {
+      const o = (this.timeZoneOffset() / CalendarConstants.ONE_MINUTE_MS) | 0;
+      z = `${o < 0 ? '-' : '+'}${zeropad(o / 60 | 0, 2)}:${zeropad(o % 60 | 0, 2)}`;
+    }
+    return `${d.year()}-${zeropad(d.month(), 2)}-${zeropad(d.dayOfMonth(), 2)}` +
+      `T${zeropad(d.hourOfDay(), 2)}:${zeropad(d.minute(), 2)}:${zeropad(d.second(), 2)}` +
+      `.${zeropad(d.milliseconds(), 3)}${z}`;
+  }
 
   /**
    * Rollup just the time fields into number of milliseconds. This is internal
