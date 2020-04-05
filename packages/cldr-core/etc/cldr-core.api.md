@@ -216,6 +216,10 @@ export abstract class CalendarDate {
     timeZoneOffset(): number;
     // (undocumented)
     timeZoneStableId(): string;
+    toISOString(): string;
+    // (undocumented)
+    protected _toISOString(d: CalendarDate, utc: boolean): string;
+    toLocalISOString(): string;
     // (undocumented)
     protected _toString(type: string, year?: string): string;
     type(): CalendarType;
