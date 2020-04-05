@@ -9,7 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 - `CalendarDate.set` to set one or more fields on a date.
-- `CalendarDate.fields` to retrieve a `TimePeriod` populated with a date's field values.
+- `CalendarDate.fields` returns a `TimePeriod` populated with a date's field values.
+- `CalendarDate.toISOString` returns an ISO-8601 string of the UTC timestamp.
+- `CalendarDate.toLocalString` returns an ISO-8601 string of the local timestamp.
 - Date formatting options now accept an optional `alt` property:
   - The `era` default for Gregorian is "Before Christ" and "Anno Domini".
     Specifying the `{ alt: { era: 'sensitive' }}` option will use "Before Common Era" and "Common Era".
