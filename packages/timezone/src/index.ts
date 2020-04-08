@@ -294,16 +294,19 @@ class ZoneRecord {
     const r1 = this.localtime[this.types[i]];
     const u1 = this.untils[i];
 
-    // Adjust the next until using the prior offset to find the wall
-    // clock time of the boundary.
+    // Adjust the next until using the prior offset to find the wall clock time of the boundary.
     //
-    // Example for New York on March 8, 2020 with DST boundary at 7:00 AM UTC:
-    //
+    // Example for New York on Mar 8, 2020 with DST boundary at 7:00 AM UTC:
     //   1:59 AM NY time is UTC 6:59 AM minus 5 hours
     //
     // 1 minute later the offset changes to -04:00:
-    //
     //   2:00 AM NY time is UTC 7:00 AM minus 4 hours, so local time becomes 3:00 AM
+    //
+    // Example for New York on Nov 1, 2020 with DST boundary at 7:00 AM UTC:
+    //   1:59 AM NY time is UTC 5:59 AM minus 4 hours
+    //
+    // 1 minute later the offset changes to -05:00:
+    //   2:00 AM NY time is UTC 6:00 AM minus 5 hours, so local time becomes 1:00 AM
 
     // Wall time instantaneously at zone boundary
     const w0 = u1 + r0.offset;
@@ -320,7 +323,7 @@ class ZoneRecord {
     // We return the post-boundary offset.
     //
     // When local time jumps forward, the resulting gap contains many "impossible"
-    // times. In our example for New York, March 8 2020 at 2:30 AM is invalid so
+    // times. In our example for New York, Mar 8 2020 at 2:30 AM is invalid so
     // we must assume we have crossed into or past the gap, by returning the
     // post-boundary offset.
     if (wall >= w1 && wall >= w0) {
@@ -328,7 +331,7 @@ class ZoneRecord {
     }
 
     // Time jumped backward. If local time jumps backwards, many times occur twice.
-    // In our example for New York, March 8 2020, 1:30 AM occurs once as local
+    // In our example for New York, Nov 1 2020, 1:30 AM occurs once as local
     // time moves towards 2:00 AM, and occurs again after the time has been
     // moved back to 1:00 AM. If our wall time is in this gap we return the
     // post-boundary offset unless the user requested the pre-boundary offset.
