@@ -18,15 +18,17 @@ export const TZ: Tz;
 // @public
 export interface Tz {
     fromUTC(zoneid: string, utc: number): ZoneInfo | undefined;
+    fromWall(zoneid: string, wall: number): [number, ZoneInfo] | undefined;
     resolveId(id: string): string | undefined;
     utcZone(): ZoneInfo;
     zoneIds(): string[];
 }
 
-// @public (undocumented)
+// @public
 export class TzImpl {
     constructor(raw: RawData);
     fromUTC(zoneid: string, utc: number): ZoneInfo | undefined;
+    fromWall(zoneid: string, wall: number): [number, ZoneInfo] | undefined;
     resolveId(id: string): string | undefined;
     utcZone(): ZoneInfo;
     zoneIds(): string[];

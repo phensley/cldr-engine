@@ -154,8 +154,6 @@ export class TzImpl {
   /**
    * Get the info for a time zone using a local "wall clock" timestamp
    * for that zone.
-   *
-   * @alpha
    */
   fromWall(zoneid: string, wall: number): [number, ZoneInfo] | undefined {
     return this.lookup(zoneid, wall, false);
