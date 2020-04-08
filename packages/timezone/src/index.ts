@@ -52,11 +52,10 @@ export interface Tz {
    * there is some ambiguity in resolving a wall clock time to the corresponding
    * UTC time. For example, on November 8 2020 in New York, the time 1:30 AM
    * occurs twice: once before the timezone boundary of 2:00 AM is reached, and
-   * again after the clock is set back 1 hour to 1:00 AM.  The 'pre' flag can
-   * be used to determine if the pre-boundary or post-boundary offset should be
-   * returned.
+   * again after the clock is set back 1 hour to 1:00 AM. This method attempts
+   * to resolve the ambiguity in the most intuitive way.
    */
-  fromWall(zoneid: string, wall: number, pre?: boolean): [number, ZoneInfo] | undefined;
+  fromWall(zoneid: string, wall: number): [number, ZoneInfo] | undefined;
 
   /**
    * Resolve a lowercase time zone id or alias into the canonical proper-cased id.
@@ -148,7 +147,7 @@ export class TzImpl {
    * Get the info for a time zone using a UTC timestamp.
    */
   fromUTC(zoneid: string, utc: number): ZoneInfo | undefined {
-    const r = this.lookup(zoneid, utc, true, false);
+    const r = this.lookup(zoneid, utc, true);
     return r ? r[1] : r;
   }
 
@@ -158,8 +157,8 @@ export class TzImpl {
    *
    * @alpha
    */
-  fromWall(zoneid: string, wall: number, pre?: boolean): [number, ZoneInfo] | undefined {
-    return this.lookup(zoneid, wall, false, pre);
+  fromWall(zoneid: string, wall: number): [number, ZoneInfo] | undefined {
+    return this.lookup(zoneid, wall, false);
   }
 
   /**
@@ -186,12 +185,11 @@ export class TzImpl {
   /**
    * Lookup the time zone record and return the zone info.
    */
-  private lookup(id: string, t: number, isutc: boolean, pre?: boolean): [number, ZoneInfo] | undefined {
+  private lookup(id: string, t: number, isutc: boolean): [number, ZoneInfo] | undefined {
     const rec = this.record(id);
     if (rec) {
       const [zoneid, r] = rec;
-      const [utc, res] = isutc ? r.fromUTC(t) : r.fromWall(t, pre);
-      // const res = isutc ? r.fromUTC(t) : r.fromWall(t);
+      const [utc, res] = isutc ? r.fromUTC(t) : r.fromWall(t);
       return [utc, {
         ...res,
         zoneid
@@ -278,7 +276,7 @@ class ZoneRecord {
    * backwards or forwards, and where our wall time falls relative to
    * the boundary, or within the transitional gap.
    */
-  fromWall(wall: number, _pre?: boolean): [number, ZoneInfoRec] {
+  fromWall(wall: number): [number, ZoneInfoRec] {
 
     // Find the until one day before our wall time
     let i = binarySearch(this.untils, true, wall - 86400000);
