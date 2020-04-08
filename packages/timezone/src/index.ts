@@ -278,7 +278,7 @@ class ZoneRecord {
    * backwards or forwards, and where our wall time falls relative to
    * the boundary, or within the transitional gap.
    */
-  fromWall(wall: number, pre?: boolean): [number, ZoneInfoRec] {
+  fromWall(wall: number, _pre?: boolean): [number, ZoneInfoRec] {
 
     // Find the until one day before our wall time
     let i = binarySearch(this.untils, true, wall - 86400000);
@@ -300,13 +300,13 @@ class ZoneRecord {
     //   1:59 AM NY time is UTC 6:59 AM minus 5 hours
     //
     // 1 minute later the offset changes to -04:00:
-    //   2:00 AM NY time is UTC 7:00 AM minus 4 hours, so local time becomes 3:00 AM
+    //   2:00 AM NY time is UTC 7:00 AM minus 5 hours, so local time becomes 3:00 AM
     //
     // Example for New York on Nov 1, 2020 with DST boundary at 7:00 AM UTC:
     //   1:59 AM NY time is UTC 5:59 AM minus 4 hours
     //
     // 1 minute later the offset changes to -05:00:
-    //   2:00 AM NY time is UTC 6:00 AM minus 5 hours, so local time becomes 1:00 AM
+    //   2:00 AM NY time is UTC 6:00 AM minus 4 hours, so local time becomes 1:00 AM
 
     // Wall time instantaneously at zone boundary
     const w0 = u1 + r0.offset;
@@ -319,23 +319,19 @@ class ZoneRecord {
       return [wall - r0.offset, r0];
     }
 
-    // Wall time is either in the gap of impossible times or after the gap.
-    // We return the post-boundary offset.
-    //
     // When local time jumps forward, the resulting gap contains many "impossible"
-    // times. In our example for New York, Mar 8 2020 at 2:30 AM is invalid so
-    // we must assume we have crossed into or past the gap, by returning the
-    // post-boundary offset.
-    if (wall >= w1 && wall >= w0) {
-      return [wall - r1.offset, r1];
+    // times. In our example for New York, Mar 8 2020 at 2:30 AM is invalid.
+    // We return a UTC timestamp and offset that will make the local time 3:30 AM.
+    if (w0 < w1) {
+      // Wall time is either in the gap of impossible times or after the gap.
+      return wall < w1 ? [wall - r0.offset, r1] : [wall - r1.offset, r1];
     }
 
-    // Time jumped backward. If local time jumps backwards, many times occur twice.
+    // When local time jumps backwards, many times occur twice.
     // In our example for New York, Nov 1 2020, 1:30 AM occurs once as local
     // time moves towards 2:00 AM, and occurs again after the time has been
-    // moved back to 1:00 AM. If our wall time is in this gap we return the
-    // post-boundary offset unless the user requested the pre-boundary offset.
-    return pre ? [wall - r0.offset, r0] : [wall - r1.offset, r1];
+    // moved back to 1:00 AM.
+    return wall < w0 ? [wall - r0.offset, r0] : [wall - r1.offset, r1];
   }
 
   /**
