@@ -8,10 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 
+- New methods to construct dates from one or more fields.
 - `CalendarDate.set` to set one or more fields on a date.
 - `CalendarDate.fields` returns a `TimePeriod` populated with a date's field values.
-- `CalendarDate.toISOString` returns an ISO-8601 string of the UTC timestamp.
-- `CalendarDate.toLocalString` returns an ISO-8601 string of the local timestamp.
+- `CalendarDate.toISOString` returns an Gregorian ISO-8601 string of the UTC timestamp.
+- `CalendarDate.toLocalString` returns an Gregorian ISO-8601 string of the local timestamp.
+- Timezone records can now be queried using local "wall clock" time.
 - Date formatting options now accept an optional `alt` property:
   - The `era` default for Gregorian is "Before Christ" and "Anno Domini".
     Specifying the `{ alt: { era: 'sensitive' }}` option will use "Before Common Era" and "Common Era".
@@ -20,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Fixed/Changed
 
+- `CalendarDate.toString` now formats the era-less extended year for consistency.
 - Internal: generalized the vector arrow type in the schema, to support creation of higher-dimension arrows while reducing runtime code size.
 
 ## [1.0.9]
