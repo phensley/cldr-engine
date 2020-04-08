@@ -24,5 +24,3 @@ export interface CalendarDateFields {
   millis: number;
   zoneId: string;
 }
-
-export type DstResolutionType = 'pre' | 'post';

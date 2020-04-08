@@ -10,7 +10,6 @@ import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
 import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag, TIME_PERIOD_FIELDS } from './interval';
 import { CalendarDateFields, CalendarType } from './types';
-import { unixEpochFromJD } from './utils';
 
 const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
 
@@ -955,4 +954,13 @@ const checkJDRange = (jd: number): void => {
       `Julian day ${jd} is outside the supported range of this library: ` +
       `${ConstantsDesc.JD_MIN} to ${ConstantsDesc.JD_MAX}`);
   }
+};
+
+/**
+ * Given a Julian day and local milliseconds (in UTC), return the Unix
+ * epoch milliseconds UTC.
+ */
+const unixEpochFromJD = (jd: number, msDay: number): number => {
+  const days = jd - CalendarConstants.JD_UNIX_EPOCH;
+  return (days * CalendarConstants.ONE_DAY_MS) + Math.round(msDay);
 };
