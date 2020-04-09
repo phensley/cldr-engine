@@ -5,6 +5,8 @@ export {
   CurrencyType,
   DateFieldType,
   DateFieldWidthType,
+  DayPeriodAltType,
+  EraAltType,
   EraWidthType,
   FieldWidthType,
   FormatWidthType,

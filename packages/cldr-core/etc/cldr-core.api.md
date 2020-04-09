@@ -141,6 +141,7 @@ export abstract class CalendarDate {
     abstract add(fields: TimePeriod): CalendarDate;
     protected _add(fields: TimePeriod): [number, number];
     protected _addTime(fields: TimePeriod): [number, number];
+    asJSDate(): Date;
     compare(other: CalendarDate): number;
     protected computeWeekFields(): void;
     // (undocumented)
@@ -346,6 +347,7 @@ export interface Calendars {
     dayPeriods(options?: CalendarFieldsOptions): any;
     eras(options?: EraFieldOptions): any;
     fieldOfVisualDifference(a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
+    firstDayOfWeek(): number;
     formatDate(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): string;
     formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: DateIntervalFormatOptions): string;
     formatDateIntervalToParts(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: DateIntervalFormatOptions): Part[];
@@ -356,6 +358,7 @@ export interface Calendars {
     formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[];
     formatRelativeTime(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: RelativeTimeFormatOptions): string;
     formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFieldFormatOptions): string;
+    minDaysInFirstWeek(): number;
     months(options?: CalendarFieldsOptions): any;
     newBuddhistDate(fields: Partial<CalendarDateFields>): BuddhistDate;
     newGregorianDate(fields: Partial<CalendarDateFields>): GregorianDate;
@@ -387,6 +390,8 @@ export class CalendarsImpl implements Calendars {
     // (undocumented)
     eras(opt?: EraFieldOptions): any;
     fieldOfVisualDifference(a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
+    // (undocumented)
+    firstDayOfWeek(): number;
     formatDate(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): string;
     // (undocumented)
     formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: DateIntervalFormatOptions): string;
@@ -404,6 +409,8 @@ export class CalendarsImpl implements Calendars {
     formatRelativeTime(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: RelativeTimeFormatOptions): string;
     // (undocumented)
     formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFieldFormatOptions): string;
+    // (undocumented)
+    minDaysInFirstWeek(): number;
     // (undocumented)
     months(opt?: CalendarFieldsOptions): any;
     newBuddhistDate(fields: Partial<CalendarDateFields>): BuddhistDate;
@@ -646,6 +653,8 @@ export interface DateWrapperFormatOptions {
     width?: FormatWidthType;
 }
 
+export { DayPeriodAltType }
+
 export { Decimal }
 
 // @public (undocumented)
@@ -709,6 +718,8 @@ export interface DisplayNameOptions {
     // (undocumented)
     type?: AltType;
 }
+
+export { EraAltType }
 
 // @public (undocumented)
 export interface EraFieldOptions {

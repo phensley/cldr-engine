@@ -8,6 +8,7 @@ import { BuddhistDate } from '@phensley/cldr-core';
 import { buildMessageMatcher } from '@phensley/cldr-core';
 import { Bundle } from '@phensley/cldr-core';
 import { CalendarDate } from '@phensley/cldr-core';
+import { CalendarDateFields } from '@phensley/cldr-core';
 import { CalendarFieldsOptions } from '@phensley/cldr-core';
 import { Calendars } from '@phensley/cldr-core';
 import { CalendarType } from '@phensley/cldr-core';
@@ -26,9 +27,12 @@ import { CurrencyType } from '@phensley/cldr-core';
 import { DateFieldFormatOptions } from '@phensley/cldr-core';
 import { DateFieldType } from '@phensley/cldr-core';
 import { DateFieldWidthType } from '@phensley/cldr-core';
+import { DateFormatAltOptions } from '@phensley/cldr-core';
 import { DateFormatOptions } from '@phensley/cldr-core';
 import { DateIntervalFormatOptions } from '@phensley/cldr-core';
 import { DateRawFormatOptions } from '@phensley/cldr-core';
+import { DateWrapperFormatOptions } from '@phensley/cldr-core';
+import { DayPeriodAltType } from '@phensley/cldr-core';
 import { Decimal } from '@phensley/cldr-core';
 import { DecimalAdjustOptions } from '@phensley/cldr-core';
 import { DecimalArg } from '@phensley/cldr-core';
@@ -37,6 +41,7 @@ import { DecimalFormatOptions } from '@phensley/cldr-core';
 import { DecimalFormatStyleType } from '@phensley/cldr-core';
 import { DefaultMessageArgConverter } from '@phensley/cldr-core';
 import { DisplayNameOptions } from '@phensley/cldr-core';
+import { EraAltType } from '@phensley/cldr-core';
 import { EraFieldOptions } from '@phensley/cldr-core';
 import { EraWidthType } from '@phensley/cldr-core';
 import { ExemplarCity } from '@phensley/cldr-core';
@@ -108,6 +113,8 @@ export { Bundle }
 
 export { CalendarDate }
 
+export { CalendarDateFields }
+
 export { CalendarFieldsOptions }
 
 export { Calendars }
@@ -144,11 +151,17 @@ export { DateFieldType }
 
 export { DateFieldWidthType }
 
+export { DateFormatAltOptions }
+
 export { DateFormatOptions }
 
 export { DateIntervalFormatOptions }
 
 export { DateRawFormatOptions }
+
+export { DateWrapperFormatOptions }
+
+export { DayPeriodAltType }
 
 export { Decimal }
 
@@ -165,6 +178,8 @@ export { DecimalFormatStyleType }
 export { DefaultMessageArgConverter }
 
 export { DisplayNameOptions }
+
+export { EraAltType }
 
 export { EraFieldOptions }
 

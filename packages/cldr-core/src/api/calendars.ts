@@ -61,8 +61,8 @@ const DOW_FIELDS: RelativeTimeFieldType[] = ['sun', 'mon', 'tue', 'wed', 'thu', 
 export class CalendarsImpl implements Calendars {
 
   private manager: CalendarManager;
-  private firstDay: number;
-  private minDays: number;
+  private _firstDay: number;
+  private _minDays: number;
   private exemplarCities: { [x: string]: string } | undefined;
 
   constructor(
@@ -72,8 +72,16 @@ export class CalendarsImpl implements Calendars {
   ) {
     this.manager = new CalendarManager(bundle, internals);
     const region = bundle.region();
-    this.firstDay = internals.calendars.weekFirstDay(region);
-    this.minDays = internals.calendars.weekMinDays(region);
+    this._firstDay = internals.calendars.weekFirstDay(region);
+    this._minDays = internals.calendars.weekMinDays(region);
+  }
+
+  firstDayOfWeek(): number {
+    return this._firstDay;
+  }
+
+  minDaysInFirstWeek(): number {
+    return this._minDays;
   }
 
   dateField(type: DateFieldType, opt?: DateFieldFormatOptions): string {
@@ -136,14 +144,14 @@ export class CalendarsImpl implements Calendars {
    * Construct a new date in the Buddhist calendar with the given fields.
    */
   newBuddhistDate(fields: Partial<CalendarDateFields>): BuddhistDate {
-    return BuddhistDate.fromFields(fields, this.firstDay, this.minDays);
+    return BuddhistDate.fromFields(fields, this._firstDay, this._minDays);
   }
 
   /**
    * Construct a new date in the Buddhist calendar representing the current date and time.
    */
   nowBuddhist(zoneId?: string): BuddhistDate {
-    return BuddhistDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
+    return BuddhistDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this._firstDay, this._minDays);
   }
 
   /**
@@ -157,14 +165,14 @@ export class CalendarsImpl implements Calendars {
    * Construct a new date in the Gregorian calendar with the given fields.
    */
   newGregorianDate(fields: Partial<CalendarDateFields>): GregorianDate {
-    return GregorianDate.fromFields(fields, this.firstDay, this.minDays);
+    return GregorianDate.fromFields(fields, this._firstDay, this._minDays);
   }
 
   /**
    * Construct a new date in the Gregorian calendar representing the current date and time.
    */
   nowGregorian(zoneId?: string): GregorianDate {
-    return GregorianDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
+    return GregorianDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this._firstDay, this._minDays);
   }
 
   /**
@@ -178,14 +186,14 @@ export class CalendarsImpl implements Calendars {
    * Construct a new date in the ISO-8601 calendar with the given fields.
    */
   newISO8601Date(fields: Partial<CalendarDateFields>): ISO8601Date {
-    return ISO8601Date.fromFields(fields, this.firstDay, this.minDays);
+    return ISO8601Date.fromFields(fields, this._firstDay, this._minDays);
   }
 
   /**
    * Construct a new date in the ISO8601 calendar representing the current date and time.
    */
   nowISO8601(zoneId?: string): ISO8601Date {
-    return ISO8601Date.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
+    return ISO8601Date.fromUnixEpoch(new Date().getTime(), zoneId || '', this._firstDay, this._minDays);
   }
 
   /**
@@ -199,14 +207,14 @@ export class CalendarsImpl implements Calendars {
    * Construct a new date in the Japanese calendar with the given fields.
    */
   newJapaneseDate(fields: Partial<CalendarDateFields>): JapaneseDate {
-    return JapaneseDate.fromFields(fields, this.firstDay, this.minDays);
+    return JapaneseDate.fromFields(fields, this._firstDay, this._minDays);
   }
 
   /**
    * Construct a new date in the Japanese calendar representing the current date and time.
    */
   nowJapanese(zoneId?: string): JapaneseDate {
-    return JapaneseDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
+    return JapaneseDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this._firstDay, this._minDays);
   }
 
   /**
@@ -220,14 +228,14 @@ export class CalendarsImpl implements Calendars {
    * Construct a new date in the Persian calendar with the given fields.
    */
   newPersianDate(fields: Partial<CalendarDateFields>): PersianDate {
-    return PersianDate.fromFields(fields, this.firstDay, this.minDays);
+    return PersianDate.fromFields(fields, this._firstDay, this._minDays);
   }
 
   /**
    * Construct a new date in the Persian calendar representing the current date and time.
    */
   nowPersian(zoneId?: string): PersianDate {
-    return PersianDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
+    return PersianDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this._firstDay, this._minDays);
   }
 
   /**
@@ -535,7 +543,7 @@ export class CalendarsImpl implements Calendars {
   }
 
   private convertEpoch<T>(cons: CalendarFromUnixEpoch<T>, epoch: number, zoneId: string): T {
-    return cons(epoch, zoneId, this.firstDay, this.minDays);
+    return cons(epoch, zoneId, this._firstDay, this._minDays);
   }
 
   private convertDateTo(target: CalendarType,

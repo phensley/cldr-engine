@@ -61,6 +61,16 @@ import {
 export interface Calendars {
 
   /**
+   * First day of the week for this locale, e.g. 1=SUN, 2=MON, etc.
+   */
+  firstDayOfWeek(): number;
+
+  /**
+   * Minimum number of days to count as a new week in a month or year in this locale.
+   */
+  minDaysInFirstWeek(): number;
+
+  /**
    * Date field's string representation for this locale.
    */
   dateField(type: DateFieldType, options?: DateFieldFormatOptions): string;

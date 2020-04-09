@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
     Specifying the `{ alt: { era: 'sensitive' }}` option will use "Before Common Era" and "Common Era".
   - The `dayPeriod` default for Gregorian in US English is "AM" and "PM".
     Specifying the `{ alt: { dayPeriod: 'casing' }}` option will use lowercase forms "am" and "pm".
+- Expose the `Calendars.firstDayOfWeek` and `Calendars.minimumDaysInWeek` methods.
 
 ### Fixed/Changed
 
