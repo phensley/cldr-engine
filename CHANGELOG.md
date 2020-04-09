@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 - New methods to construct dates from one or more fields, e.g. `Calendars.newGregorianDate(fields)` for each calendar type.
 - New methods to construct "now" dates, e.g. `Calendars.now()` and `Calendars.nowGregorian()` for each calendar type.
+- `CalendarDate.asJSDate()` converts a `CalendarDate` to a JavaScript `Date`.
 - `CalendarDate.set(fields)` to set one or more fields on a date.
 - `CalendarDate.fields()` returns a `TimePeriod` populated with a date's field values.
 - `CalendarDate.toISOString()` returns an Gregorian ISO-8601 string of the UTC timestamp.

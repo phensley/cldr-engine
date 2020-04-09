@@ -378,6 +378,13 @@ export abstract class CalendarDate {
   }
 
   /**
+   * Return a JavaScript Date object with the same date and time.
+   */
+  asJSDate(): Date {
+    return new Date(this.toLocalISOString());
+  }
+
+  /**
    * Set one or more fields on this date explicitly, and return a new date.
    *
    * Note: when setting the 'year' field you must use the "extended year".
