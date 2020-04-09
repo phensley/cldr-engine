@@ -33,7 +33,9 @@ console.log(id);
 Pacific/Pago_Pago
 ```
 
-Lookup the zone info for a timezone id at a given UTC time. Timezone offsets are in milliseconds.
+#### Lookup the zone info for a timezone id at a given UTC time.
+
+Timezone offsets are in milliseconds.
 
 ```typescript
 const ZONES = [
@@ -59,4 +61,22 @@ America/New_York   -> {"abbr":"EDT","dst":1,"offset":-14400000,"zoneid":"America
 Pacific/Pago_Pago  -> {"abbr":"SST","dst":0,"offset":-39600000,"zoneid":"Pacific/Pago_Pago"}
 Asia/Tokyo         -> {"abbr":"JST","dst":0,"offset":32400000,"zoneid":"Asia/Tokyo"}
 Europe/Paris       -> {"abbr":"CET","dst":0,"offset":3600000,"zoneid":"Europe/Paris"}
+```
+
+#### Lookup the zone info for a timezone id and a local "wall clock" timestamp.
+
+Returns the corresponding UTC timestamp along with a zone info record.
+
+```typescript
+// Sun Mar  8 2020 02:10:00 AM NY time
+const epoch = 1583633400000;
+const zoneid = 'America/New_York';
+const [utc, info] = TZ.fromUTC(zoneid, now)!;
+console.log(utc);
+console.log(JSON.stringify(info));
+```
+
+```
+1583651400000
+{"abbr":"EDT","dst":1,"offset":-14400000,"zoneid":"America/New_York"}
 ```
