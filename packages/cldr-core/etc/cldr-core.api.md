@@ -352,6 +352,8 @@ export interface Calendars {
     formatDateRaw(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): string;
     formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[];
     formatDateToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): Part[];
+    formatDateWrapper(date: string, time: string, options?: DateWrapperFormatOptions): string;
+    formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[];
     formatRelativeTime(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: RelativeTimeFormatOptions): string;
     formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFieldFormatOptions): string;
     months(options?: CalendarFieldsOptions): any;
@@ -395,6 +397,10 @@ export class CalendarsImpl implements Calendars {
     formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[];
     formatDateToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): Part[];
     // (undocumented)
+    formatDateWrapper(date: string, time: string, options?: DateWrapperFormatOptions): string;
+    // (undocumented)
+    formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[];
+    // (undocumented)
     formatRelativeTime(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: RelativeTimeFormatOptions): string;
     // (undocumented)
     formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFieldFormatOptions): string;
@@ -405,6 +411,12 @@ export class CalendarsImpl implements Calendars {
     newISO8601Date(fields: Partial<CalendarDateFields>): ISO8601Date;
     newJapaneseDate(fields: Partial<CalendarDateFields>): JapaneseDate;
     newPersianDate(fields: Partial<CalendarDateFields>): PersianDate;
+    now(zoneId?: string): GregorianDate;
+    nowBuddhist(zoneId?: string): BuddhistDate;
+    nowGregorian(zoneId?: string): GregorianDate;
+    nowISO8601(zoneId?: string): ISO8601Date;
+    nowJapanese(zoneId?: string): JapaneseDate;
+    nowPersian(zoneId?: string): PersianDate;
     // (undocumented)
     quarters(opt?: CalendarFieldsOptions): any;
     // (undocumented)
@@ -624,6 +636,14 @@ export interface DateRawFormatOptions {
     context?: ContextType;
     nu?: NumberSystemType;
     pattern?: string;
+}
+
+// @public (undocumented)
+export interface DateWrapperFormatOptions {
+    // (undocumented)
+    ca?: CalendarType;
+    // (undocumented)
+    width?: FormatWidthType;
 }
 
 export { Decimal }
