@@ -1,10 +1,22 @@
 import { calendarsApi } from '../../_helpers';
-import { ZonedDateTime } from '../../../src';
+import { CalendarsImpl, ZonedDateTime } from '../../../src';
 
 const make = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
 const DAY = 86400000;
 const NEW_YORK = 'America/New_York';
+
+test('week of month', () => {
+  let api: CalendarsImpl;
+
+  api = calendarsApi('en-US');
+  expect(api.firstDayOfWeek()).toEqual(1);
+  expect(api.minDaysInFirstWeek()).toEqual(1);
+
+  api = calendarsApi('de-BE');
+  expect(api.firstDayOfWeek()).toEqual(2);
+  expect(api.minDaysInFirstWeek()).toEqual(4);
+});
 
 test('week of month', () => {
   const en = calendarsApi('en');
