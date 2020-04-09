@@ -11,7 +11,7 @@ import fetch, { Response } from 'node-fetch';
  */
 
 // Temporary location prior to official Github JSON release
-const BASEURL = 'http://zeus:8000/.cldrbuild/unicode-cldr';
+const BASEURL = 'https://glonk.com/unicode-cldr';
 
 // const BASEURL = 'https://github.com/unicode-cldr';
 const DATAROOT = filepath.resolve(filepath.join(__dirname, '../../../.cldr'));
