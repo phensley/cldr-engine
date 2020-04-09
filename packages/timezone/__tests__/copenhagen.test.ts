@@ -22,14 +22,6 @@ test('copenhagen min / max', () => {
   expect(info).toEqual({ zoneid: ID, abbr: 'CET', dst: 0, offset: 3600000 });
 });
 
-// test('copenhagen roundtrip', () => {
-//   const t = OCT272019_010000;
-//   roundtrip(ID, t.n);
-//   roundtrip(ID, t.mins(1).n);
-//   roundtrip(ID, t.mins(-1).n);
-//   roundtrip(ID, t.mins(-2).n);
-// });
-
 test('copenhagen zones', () => {
   const t = OCT272019_010000;
   let info: ZoneInfo | undefined;
