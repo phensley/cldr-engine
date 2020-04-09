@@ -8,11 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 
-- New methods to construct dates from one or more fields, e.g. `Calendars.newGregorianDate(fields)`
+- New methods to construct dates from one or more fields, e.g. `Calendars.newGregorianDate(fields)` for each calendar type.
+- New methods to construct "now" dates, e.g. `Calendars.now()` and `Calendars.nowGregorian()` for each calendar type.
 - `CalendarDate.set(fields)` to set one or more fields on a date.
 - `CalendarDate.fields()` returns a `TimePeriod` populated with a date's field values.
 - `CalendarDate.toISOString()` returns an Gregorian ISO-8601 string of the UTC timestamp.
 - `CalendarDate.toLocalISOString()` returns an Gregorian ISO-8601 string of the local timestamp.
+- `Calendars.formatDateWrapper` method to wrap a date and time that have been formatted separately. Can be used to join a relative date format with a time, e.g. "Next Wednesday at 3:30 PM".
 - Timezone records can now be queried using local "wall clock" time.
 - Date formatting options now accept an optional `alt` property:
   - The `era` default for Gregorian is "Before Christ" and "Anno Domini".

@@ -280,6 +280,14 @@ export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOption
 /**
  * @public
  */
+export interface DateWrapperFormatOptions {
+  ca?: CalendarType;
+  width?: FormatWidthType;
+}
+
+/**
+ * @public
+ */
 export interface ExemplarCity {
   name: string;
 }

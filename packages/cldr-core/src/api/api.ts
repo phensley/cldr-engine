@@ -5,7 +5,7 @@ import {
   DateTimePatternFieldType,
   LineOrderType,
   RelativeTimeFieldType,
-  UnitType
+  UnitType,
 } from '@phensley/cldr-types';
 
 import { MessageFormatter, MessageFormatterOptions } from '@phensley/messageformat';
@@ -21,6 +21,7 @@ import {
   DateFormatOptions,
   DateIntervalFormatOptions,
   DateRawFormatOptions,
+  DateWrapperFormatOptions,
   DecimalAdjustOptions,
   DecimalFormatOptions,
   DisplayNameOptions,
@@ -200,6 +201,18 @@ export interface Calendars {
    * Warning: You should not use this for general formatting.
    */
   formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[];
+
+  /**
+   * Formats a date and time string together using a wrapper format of the given width. This can be
+   * used when you need to format a date and time string separately and join them together.
+   */
+  formatDateWrapper(date: string, time: string, options?: DateWrapperFormatOptions): string;
+
+  /**
+   * Formats  date and time `Part[]` together using a wrapper format of the given width. This can be
+   * used when you need to format a date and time string separately and join them together.
+   */
+  formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[];
 
   /**
    * Return an array containing the official TZDB timezone identifiers.

@@ -3,7 +3,7 @@ import {
   ContextType,
   DateFieldType,
   DateTimePatternFieldType,
-  RelativeTimeFieldType
+  RelativeTimeFieldType,
 } from '@phensley/cldr-types';
 
 import { DecimalArg, Part } from '@phensley/decimal';
@@ -18,6 +18,7 @@ import {
   DateFormatOptions,
   DateIntervalFormatOptions,
   DateRawFormatOptions,
+  DateWrapperFormatOptions,
   EraFieldOptions,
   RelativeTimeFieldFormatOptions,
   RelativeTimeFormatOptions,
@@ -118,6 +119,13 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
+   * Alias for nowGregorian()
+   */
+  now(zoneId?: string): GregorianDate {
+    return this.nowGregorian(zoneId);
+  }
+
+  /**
    * Convert the given date to the Buddhist calendar.
    */
   toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate {
@@ -129,6 +137,13 @@ export class CalendarsImpl implements Calendars {
    */
   newBuddhistDate(fields: Partial<CalendarDateFields>): BuddhistDate {
     return BuddhistDate.fromFields(fields, this.firstDay, this.minDays);
+  }
+
+  /**
+   * Construct a new date in the Buddhist calendar representing the current date and time.
+   */
+  nowBuddhist(zoneId?: string): BuddhistDate {
+    return BuddhistDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
   }
 
   /**
@@ -146,6 +161,13 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
+   * Construct a new date in the Gregorian calendar representing the current date and time.
+   */
+  nowGregorian(zoneId?: string): GregorianDate {
+    return GregorianDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
+  }
+
+  /**
    * Convert the given date to the ISO-8601 calendar.
    */
   toISO8601Date(date: CalendarDate | ZonedDateTime | Date): ISO8601Date {
@@ -157,6 +179,13 @@ export class CalendarsImpl implements Calendars {
    */
   newISO8601Date(fields: Partial<CalendarDateFields>): ISO8601Date {
     return ISO8601Date.fromFields(fields, this.firstDay, this.minDays);
+  }
+
+  /**
+   * Construct a new date in the ISO8601 calendar representing the current date and time.
+   */
+  nowISO8601(zoneId?: string): ISO8601Date {
+    return ISO8601Date.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
   }
 
   /**
@@ -174,6 +203,13 @@ export class CalendarsImpl implements Calendars {
   }
 
   /**
+   * Construct a new date in the Japanese calendar representing the current date and time.
+   */
+  nowJapanese(zoneId?: string): JapaneseDate {
+    return JapaneseDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
+  }
+
+  /**
    * Convert the given date to the Persian calendar.
    */
   toPersianDate(date: CalendarDate | ZonedDateTime | Date): PersianDate {
@@ -185,6 +221,13 @@ export class CalendarsImpl implements Calendars {
    */
   newPersianDate(fields: Partial<CalendarDateFields>): PersianDate {
     return PersianDate.fromFields(fields, this.firstDay, this.minDays);
+  }
+
+  /**
+   * Construct a new date in the Persian calendar representing the current date and time.
+   */
+  nowPersian(zoneId?: string): PersianDate {
+    return PersianDate.fromUnixEpoch(new Date().getTime(), zoneId || '', this.firstDay, this.minDays);
   }
 
   /**
@@ -308,6 +351,14 @@ export class CalendarsImpl implements Calendars {
 
   formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[] {
     return this._formatDateRaw(new PartsValue(), date, options || {});
+  }
+
+  formatDateWrapper(date: string, time: string, options?: DateWrapperFormatOptions): string {
+    return this._formatDateWrapper(new StringValue(), date, time, options || {});
+  }
+
+  formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[] {
+    return this._formatDateWrapper(new PartsValue(), date, time, options || {});
   }
 
   timeZoneIds(): string[] {
@@ -462,6 +513,14 @@ export class CalendarsImpl implements Calendars {
     const params = this.privateApi.getNumberParams(options.nu, 'default');
     const ctx = this._context(this.convertDateTo(calendar, date), params, options.context, options.alt);
     return this.internals.calendars.formatDateTime(calendar, ctx, value, pattern);
+  }
+
+  private _formatDateWrapper<R>(value: AbstractValue<R>, date: R, time: R, options: DateWrapperFormatOptions): R {
+    const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
+    const patterns = this.manager.getCalendarPatterns(calendar);
+    const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern(options.width || 'medium'));
+    value.wrap(wrapper, [time, date]);
+    return value.render();
   }
 
   private convertDate<T>(cons: CalendarFromUnixEpoch<T>,
