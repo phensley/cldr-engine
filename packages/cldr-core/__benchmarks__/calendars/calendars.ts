@@ -6,7 +6,7 @@ import { calendarsApi } from '../../__tests__/_helpers';
 import { CalendarsImpl, DateFormatOptions, GregorianDate, TimePeriod } from '../../src';
 import { RelativeTimeFormatOptions } from '../../lib';
 
-const BUNDLES: { [x: string]: CalendarsImpl} = {
+const BUNDLES: { [x: string]: CalendarsImpl } = {
   'en': calendarsApi('en'),
   'es': calendarsApi('es')
 };
@@ -40,7 +40,7 @@ const DATES = [
   GregorianDate.fromUnixEpoch(967809600000, 'UTC', 1, 1),
 ];
 
-const INCR: TimePeriod[] = [
+const INCR: Partial<TimePeriod>[] = [
   { day: 10, hour: 7 },
   { month: -3, day: -3 },
   { year: 0.5, month: 3, day: 82 }
