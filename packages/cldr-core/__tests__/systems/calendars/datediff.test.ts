@@ -14,7 +14,7 @@ const SEP_01 = 967809600000;
 
 const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1, 1);
 
-const period = (t: TimePeriod): TimePeriod =>
+const period = (t: Partial<TimePeriod>): TimePeriod =>
   Object.assign({ year: 0, month: 0, week: 0, day: 0, hour: 0, minute: 0, second: 0, millis: 0 }, t);
 
 test('basic difference', () => {
@@ -56,6 +56,28 @@ test('basic difference', () => {
 
   t = start.difference(end);
   expect(t).toEqual(period({ week: 1, day: 3 }));
+});
+
+test('signed difference', () => {
+  let t: TimePeriod;
+  let end: CalendarDate;
+  const start = gregorian(MAR_11, NEW_YORK);
+
+  end = start.add({ day: 369 }); // Mar 15, 2001
+
+  t = end.differenceSigned(start);
+  expect(t).toEqual(period({ year: -1, day: -4 }));
+
+  t = start.differenceSigned(end);
+  expect(t).toEqual(period({ year: 1, day: 4 }));
+
+  end = start.add({ day: 419 }); // May 4, 2001
+
+  t = end.differenceSigned(start);
+  expect(t).toEqual(period({ year: -1, month: -1, week: -3, day: -2 }));
+
+  t = start.differenceSigned(end);
+  expect(t).toEqual(period({ year: 1, month: 1, week: 3, day: 2 }));
 });
 
 test('difference year, month', () => {

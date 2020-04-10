@@ -4,7 +4,7 @@ import { DateField } from './fields';
 import { TimePeriod } from './interval';
 import { CalendarDateFields } from './types';
 
-const ZEROS: TimePeriod = { year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, millis: 0 };
+const ZEROS: Partial<CalendarDateFields> = { year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, millis: 0 };
 
 /**
  * A date in the Buddhist calendar.
@@ -20,13 +20,10 @@ export class BuddhistDate extends GregorianDate {
   }
 
   set(fields: Partial<CalendarDateFields>): GregorianDate {
-    const f: TimePeriod = { ...this.fields(), ...fields };
-    // Adjust year to Gregorian before calling internal set
-    // f.year! += CalendarConstants.BUDDHIST_ERA_START;
-    return this._set(f);
+    return this._set({ ...this.fields(), ...fields });
   }
 
-  add(fields: TimePeriod): BuddhistDate {
+  add(fields: Partial<TimePeriod>): BuddhistDate {
     const [jd, ms] = this._add(fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }

@@ -13,14 +13,14 @@ export const TIME_PERIOD_FIELDS: TimePeriodField[] =
  * @public
  */
 export interface TimePeriod {
-  year?: number;
-  month?: number;
-  week?: number;
-  day?: number;
-  hour?: number;
-  minute?: number;
-  second?: number;
-  millis?: number;
+  year: number;
+  month: number;
+  week: number;
+  day: number;
+  hour: number;
+  minute: number;
+  second: number;
+  millis: number;
 }
 
 /**

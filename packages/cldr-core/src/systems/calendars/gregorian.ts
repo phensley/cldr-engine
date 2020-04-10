@@ -38,12 +38,12 @@ export class GregorianDate extends CalendarDate {
     return this._set({ ...this.fields(), ...fields });
   }
 
-  add(fields: TimePeriod): GregorianDate {
+  add(fields: Partial<TimePeriod>): GregorianDate {
     const [jd, ms] = this._add(fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
-  subtract(fields: TimePeriod): GregorianDate {
+  subtract(fields: Partial<TimePeriod>): GregorianDate {
     return this.add(this._invertPeriod(fields));
   }
 

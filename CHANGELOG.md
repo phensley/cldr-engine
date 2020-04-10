@@ -15,17 +15,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - `CalendarDate.fields()` returns a `TimePeriod` populated with a date's field values.
 - `CalendarDate.toISOString()` returns an Gregorian ISO-8601 string of the UTC timestamp.
 - `CalendarDate.toLocalISOString()` returns an Gregorian ISO-8601 string of the local timestamp.
-- `Calendars.formatDateWrapper` method to wrap a date and time that have been formatted separately. Can be used to join a relative date format with a time, e.g. "Next Wednesday at 3:30 PM".
+- `Calendars.formatDateWrapper()` method to wrap a date and time that have been formatted separately. Can be used to join a relative date format with a time, e.g. "Next Wednesday at 3:30 PM".
+- `CalendarDate.differenceSigned()` method to return signed values (`.difference()` returns absolute value).
 - Timezone records can now be queried using local "wall clock" time.
 - Date formatting options now accept an optional `alt` property:
   - The `era` default for Gregorian is "Before Christ" and "Anno Domini".
     Specifying the `{ alt: { era: 'sensitive' }}` option will use "Before Common Era" and "Common Era".
   - The `dayPeriod` default for Gregorian in US English is "AM" and "PM".
     Specifying the `{ alt: { dayPeriod: 'casing' }}` option will use lowercase forms "am" and "pm".
-- Expose the `Calendars.firstDayOfWeek` and `Calendars.minimumDaysInWeek` methods.
+- Expose the `Calendars.firstDayOfWeek()` and `Calendars.minimumDaysInWeek()` methods.
 
 ### Fixed/Changed
 
+- `TimePeriod` fields are no longer optional, and `CalendarDate.add` and `.subtract` now take a `Partial<TimePeriod>` to allow fields to be omitted.
 - `CalendarDate.toString` now formats the era-less extended year for consistency.
 - Internal: generalized the vector arrow type in the schema, to support creation of higher-dimension arrows while reducing runtime code size.
 

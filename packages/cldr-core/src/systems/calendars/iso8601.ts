@@ -18,7 +18,7 @@ export class ISO8601Date extends GregorianDate {
     super('iso8601', DayOfWeek.MONDAY, CalendarConstants.ISO8601_MIN_DAYS);
   }
 
-  add(fields: TimePeriod): ISO8601Date {
+  add(fields: Partial<TimePeriod>): ISO8601Date {
     const [jd, ms] = this._add(fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId()) as ISO8601Date;
   }

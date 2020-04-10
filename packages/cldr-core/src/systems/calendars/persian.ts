@@ -29,12 +29,12 @@ export class PersianDate extends CalendarDate {
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
-  add(fields: TimePeriod): PersianDate {
+  add(fields: Partial<TimePeriod>): PersianDate {
     const [jd, ms] = this._add(fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
-  subtract(fields: TimePeriod): PersianDate {
+  subtract(fields: Partial<TimePeriod>): PersianDate {
     return this.add(this._invertPeriod(fields));
   }
 

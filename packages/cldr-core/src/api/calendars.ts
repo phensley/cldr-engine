@@ -387,7 +387,7 @@ export class CalendarsImpl implements Calendars {
     return { id, city: { name: city } };
   }
 
-  timePeriodToQuantity(period: TimePeriod): Quantity[] {
+  timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[] {
     const q: Quantity[] = [];
     for (const f of TIME_PERIOD_FIELDS) {
       const v = period[f];

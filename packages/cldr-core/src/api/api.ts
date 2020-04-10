@@ -243,7 +243,7 @@ export interface Calendars {
   /**
    * Convert a time period into a quantiy sequence, for unit formatting, e.g. "1 year, 2 months".
    */
-  timePeriodToQuantity(period: TimePeriod): Quantity[];
+  timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
 
 }
 

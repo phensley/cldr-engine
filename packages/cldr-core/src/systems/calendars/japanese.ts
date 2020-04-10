@@ -16,7 +16,7 @@ export class JapaneseDate extends GregorianDate {
     super('japanese', firstDay, minDays);
   }
 
-  add(fields: TimePeriod): JapaneseDate {
+  add(fields: Partial<TimePeriod>): JapaneseDate {
     const [jd, ms] = this._add(fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }

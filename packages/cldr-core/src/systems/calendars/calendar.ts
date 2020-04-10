@@ -353,12 +353,21 @@ export abstract class CalendarDate {
 
   /**
    * Calculate the time period between two dates. Note this returns the
-   * absolute value.
+   * absolute value of the difference.
    */
   difference(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod {
     const [s, sf, , ef] = this.swap(other);
-    const r = this._diff(s, sf, ef);
-    return fields ? this._rollup(r, sf, ef, fields) : r;
+    const d = this._diff(s, sf, ef);
+    return fields ? this._rollup(d, sf, ef, fields) : d;
+  }
+
+  /**
+   * Calculate the time period between two dates. If 'other' is before this date,
+   * the time period fields will be negative.
+   */
+  differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod {
+    const r = this.difference(other, fields);
+    return other.compare(this) < 0 ? this._invertPeriod(r) as TimePeriod : r;
   }
 
   /**
@@ -395,12 +404,12 @@ export abstract class CalendarDate {
   /**
    * Add the fields to this date, returning a new date.
    */
-  abstract add(fields: TimePeriod): CalendarDate;
+  abstract add(fields: Partial<TimePeriod>): CalendarDate;
 
   /**
    * Subtract the fields from this date, returning a new date.
    */
-  abstract subtract(fields: TimePeriod): CalendarDate;
+  abstract subtract(fields: Partial<TimePeriod>): CalendarDate;
 
   /**
    * Change the timezone for this date, returning a new date.
@@ -432,15 +441,15 @@ export abstract class CalendarDate {
    * Rollup just the time fields into number of milliseconds. This is internal
    * and assumes all time fields are defined.
    */
-  protected _timeToMs(f: TimePeriod): number {
-    return clamp(f.hour!, 0, 23) * CalendarConstants.ONE_HOUR_MS
-      + clamp(f.minute!, 0, 59) * CalendarConstants.ONE_MINUTE_MS
-      + clamp(f.second!, 0, 59) * CalendarConstants.ONE_SECOND_MS
-      + clamp(f.millis!, 0, 999);
+  protected _timeToMs(f: Partial<CalendarDateFields>): number {
+    return clamp(f.hour || 0, 0, 23) * CalendarConstants.ONE_HOUR_MS
+      + clamp(f.minute || 0, 0, 59) * CalendarConstants.ONE_MINUTE_MS
+      + clamp(f.second || 0, 0, 59) * CalendarConstants.ONE_SECOND_MS
+      + clamp(f.millis || 0, 0, 999);
   }
 
-  protected _invertPeriod(fields: TimePeriod): TimePeriod {
-    const r: TimePeriod = {};
+  protected _invertPeriod(fields: Partial<TimePeriod>): Partial<TimePeriod> {
+    const r: Partial<TimePeriod> = {};
     for (const f of TIME_PERIOD_FIELDS) {
       const v = fields[f];
       r[f] = v ? -v : 0;
@@ -451,10 +460,11 @@ export abstract class CalendarDate {
   /**
    * Roll up time period fields into a subset of fields.
    */
-  protected _rollup(span: TimePeriod, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod {
+  protected _rollup(span: Partial<TimePeriod>, sf: number[], ef: number[],
+    fields: TimePeriodField[]): TimePeriod {
     const f = timePeriodFieldFlags(fields);
     if (!f) {
-      return span;
+      return { year: 0, month: 0, week: 0, day: 0, hour: 0, minute: 0, second: 0, millis: 0, ...span };
     }
 
     const mc = this.monthCount();
@@ -715,7 +725,7 @@ export abstract class CalendarDate {
   /**
    * Compute a new Julian day and milliseconds UTC by updating one or more fields.
    */
-  protected _add(fields: TimePeriod): [number, number] {
+  protected _add(fields: Partial<TimePeriod>): [number, number] {
     const f = this.utcfields();
 
     let jd: number;
@@ -805,7 +815,7 @@ export abstract class CalendarDate {
   /**
    * Converts all time fields into [days, milliseconds].
    */
-  protected _addTime(fields: TimePeriod): [number, number] {
+  protected _addTime(fields: Partial<TimePeriod>): [number, number] {
     // Calculate the time difference in days and milliseconds
     let msDay = this._fields[DateField.MILLIS_IN_DAY] - this.timeZoneOffset();
     msDay += ((fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +

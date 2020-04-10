@@ -94,7 +94,7 @@ export const availableLocales: () => Locale[];
 export class BuddhistDate extends GregorianDate {
     protected constructor(firstDay: number, minDays: number);
     // (undocumented)
-    add(fields: TimePeriod): BuddhistDate;
+    add(fields: Partial<TimePeriod>): BuddhistDate;
     // (undocumented)
     static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): BuddhistDate;
     // (undocumented)
@@ -138,9 +138,9 @@ export interface Bundle extends PrimitiveBundle {
 // @public
 export abstract class CalendarDate {
     protected constructor(_type: CalendarType, _firstDay: number, _minDays: number);
-    abstract add(fields: TimePeriod): CalendarDate;
-    protected _add(fields: TimePeriod): [number, number];
-    protected _addTime(fields: TimePeriod): [number, number];
+    abstract add(fields: Partial<TimePeriod>): CalendarDate;
+    protected _add(fields: Partial<TimePeriod>): [number, number];
+    protected _addTime(fields: Partial<TimePeriod>): [number, number];
     asJSDate(): Date;
     compare(other: CalendarDate): number;
     protected computeWeekFields(): void;
@@ -156,6 +156,7 @@ export abstract class CalendarDate {
     protected abstract daysInYear(y: number): number;
     protected _diff(s: CalendarDate, sf: number[], ef: number[]): TimePeriod;
     difference(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
+    differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
     // (undocumented)
     era(): number;
     // (undocumented)
@@ -179,7 +180,7 @@ export abstract class CalendarDate {
     // (undocumented)
     protected initFromUnixEpoch(ms: number, zoneId: string): void;
     // (undocumented)
-    protected _invertPeriod(fields: TimePeriod): TimePeriod;
+    protected _invertPeriod(fields: Partial<TimePeriod>): Partial<TimePeriod>;
     // (undocumented)
     isAM(): boolean;
     // (undocumented)
@@ -210,13 +211,13 @@ export abstract class CalendarDate {
     // (undocumented)
     relatedYear(): number;
     relativeTime(other: CalendarDate, field?: TimePeriodField): [TimePeriodField, number];
-    protected _rollup(span: TimePeriod, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod;
+    protected _rollup(span: Partial<TimePeriod>, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod;
     second(): number;
     abstract set(fields: Partial<CalendarDateFields>): CalendarDate;
-    abstract subtract(fields: TimePeriod): CalendarDate;
+    abstract subtract(fields: Partial<TimePeriod>): CalendarDate;
     // (undocumented)
     protected swap(other: CalendarDate): [CalendarDate, number[], CalendarDate, number[]];
-    protected _timeToMs(f: TimePeriod): number;
+    protected _timeToMs(f: Partial<CalendarDateFields>): number;
     // (undocumented)
     timeZoneId(): string;
     // (undocumented)
@@ -367,7 +368,7 @@ export interface Calendars {
     newPersianDate(fields: Partial<CalendarDateFields>): PersianDate;
     quarters(options?: CalendarFieldsOptions): any;
     resolveTimeZoneId(zoneid: string): string | undefined;
-    timePeriodToQuantity(period: TimePeriod): Quantity[];
+    timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
     timeZoneIds(): string[];
     timeZoneInfo(zoneid: string): TimeZoneInfo;
     toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
@@ -429,7 +430,7 @@ export class CalendarsImpl implements Calendars {
     // (undocumented)
     resolveTimeZoneId(zoneid: string): string | undefined;
     // (undocumented)
-    timePeriodToQuantity(period: TimePeriod): Quantity[];
+    timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
     // (undocumented)
     timeZoneIds(): string[];
     // (undocumented)
@@ -864,7 +865,7 @@ export const getCurrencyFractions: (code: string) => CurrencyFractions;
 export class GregorianDate extends CalendarDate {
     protected constructor(type: CalendarType, firstDay: number, minDays: number);
     // (undocumented)
-    add(fields: TimePeriod): GregorianDate;
+    add(fields: Partial<TimePeriod>): GregorianDate;
     // (undocumented)
     protected daysInMonth(y: number, m: number): number;
     // (undocumented)
@@ -892,7 +893,7 @@ export class GregorianDate extends CalendarDate {
     // (undocumented)
     protected _set(f: Partial<CalendarDateFields>): GregorianDate;
     // (undocumented)
-    subtract(fields: TimePeriod): GregorianDate;
+    subtract(fields: Partial<TimePeriod>): GregorianDate;
     // (undocumented)
     toString(): string;
     // (undocumented)
@@ -958,7 +959,7 @@ export class InternalsImpl implements Internals {
 export class ISO8601Date extends GregorianDate {
     protected constructor();
     // (undocumented)
-    add(fields: TimePeriod): ISO8601Date;
+    add(fields: Partial<TimePeriod>): ISO8601Date;
     // (undocumented)
     static fromFields(fields: Partial<CalendarDateFields>, _firstDay: number, _minDays: number): ISO8601Date;
     // (undocumented)
@@ -977,7 +978,7 @@ export class ISO8601Date extends GregorianDate {
 export class JapaneseDate extends GregorianDate {
     protected constructor(firstDay: number, minDays: number);
     // (undocumented)
-    add(fields: TimePeriod): JapaneseDate;
+    add(fields: Partial<TimePeriod>): JapaneseDate;
     // (undocumented)
     static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): JapaneseDate;
     // (undocumented)
@@ -1340,7 +1341,7 @@ export class PartsNumberFormatter extends NumberFormatter<Part[]> {
 export class PersianDate extends CalendarDate {
     protected constructor(firstDay: number, minDays: number);
     // (undocumented)
-    add(fields: TimePeriod): PersianDate;
+    add(fields: Partial<TimePeriod>): PersianDate;
     // (undocumented)
     protected daysInMonth(y: number, m: number): number;
     // (undocumented)
@@ -1366,7 +1367,7 @@ export class PersianDate extends CalendarDate {
     // (undocumented)
     set(fields: Partial<CalendarDateFields>): PersianDate;
     // (undocumented)
-    subtract(fields: TimePeriod): PersianDate;
+    subtract(fields: Partial<TimePeriod>): PersianDate;
     // (undocumented)
     toString(): string;
     // (undocumented)
@@ -1515,21 +1516,21 @@ export const TIME_PERIOD_FIELDS: TimePeriodField[];
 // @public (undocumented)
 export interface TimePeriod {
     // (undocumented)
-    day?: number;
+    day: number;
     // (undocumented)
-    hour?: number;
+    hour: number;
     // (undocumented)
-    millis?: number;
+    millis: number;
     // (undocumented)
-    minute?: number;
+    minute: number;
     // (undocumented)
-    month?: number;
+    month: number;
     // (undocumented)
-    second?: number;
+    second: number;
     // (undocumented)
-    week?: number;
+    week: number;
     // (undocumented)
-    year?: number;
+    year: number;
 }
 
 // @public (undocumented)
