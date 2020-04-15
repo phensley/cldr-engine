@@ -12,9 +12,15 @@ Internationalization in Typescript with Unicode CLDR, batteries included.
 
 ## Versioning
 
-- `1.0` release is stable.
-- `1.1` release will upgrade to CLDR v37 and add some new features.
-- `2.0` is reserved to make major improvements in the library in several areas TBD.
+- `1.0` release is stable (CLDR v36).
+- `1.1` release is stable (CLDR v37).
+- `1.2` is in planning and early development.
+
+A future `2.0` release is planned. Features would include:
+
+- API improvements for calendars, decimal, and other types.
+- Moving embedded static data to top-level and make it more user-configurable.
+- Make it easier to use a small subset of features with far less code.
 
 Due to this library's dependence on CLDR data, it uses a **modified semantic versioning** scheme `[MAJOR][MINOR][PATCH]`:
 
@@ -60,7 +66,7 @@ You can use any of the packages independent of the rest of the library:
 
 ## Features
 
-- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 36.0.0](http://cldr.unicode.org/index/downloads/cldr-36)
+- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 37.0.0](http://cldr.unicode.org/index/downloads/cldr-37)
 - [370 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#availablelocales)
 - [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
 - [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher) for improved locale fallback
