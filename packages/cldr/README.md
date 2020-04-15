@@ -12,9 +12,15 @@ Internationalization in Typescript with Unicode CLDR, batteries included.
 
 ## Versioning
 
-- `1.0` release is stable.
-- `1.1` release will upgrade to CLDR v37 when available. At that point `1.0` will receive bug fixes only.
-- `2.0` is reserved to make major improvements in the library in several areas TBD.
+- `1.0` release is stable (CLDR v36).
+- `1.1` release is stable (CLDR v37).
+- `1.2` is in planning and early development.
+
+A future `2.0` release is planned. Features would include:
+
+- API improvements for calendars, decimal, and other types.
+- Moving embedded static data to top-level and make it more user-configurable.
+- Make it easier to use a small subset of features with far less code.
 
 Due to this library's dependence on CLDR data, it uses a **modified semantic versioning** scheme `[MAJOR][MINOR][PATCH]`:
 
@@ -60,14 +66,14 @@ You can use any of the packages independent of the rest of the library:
 
 ## Features
 
-- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 36.0.0](http://cldr.unicode.org/index/downloads/cldr-36)
+- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 37.0.0](http://cldr.unicode.org/index/downloads/cldr-37)
 - [370 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#availablelocales)
 - [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
 - [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher) for improved locale fallback
 - [Fast, compact, and extensible ICU message formatting](packages/messageformat/README.md)
 - Both string and [parts formatting](https://phensley.github.io/cldr-engine/docs/en/api-cldr-numbers#formatdecimaltoparts) for flexible markup styling
 - [Date time](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars#formatdate), [date interval](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars#formatdateinterval), and [relative time](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars#formatrelativetime) formatting
-- Full TZDB and CLDR [timezone support](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars#resolvetimezoneid) covering the full range of TZDB untils, resolving deprecated timezone identifiers and aliases
+- Full IANA and CLDR [timezone support](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars#resolvetimezoneid) covering the full range of IANA timezone untils, automatic handling of deprecated timezone identifiers and aliases
 - [Gregorian](https://phensley.github.io/cldr-engine/docs/en/api-gregoriandate), [ISO-8601](https://phensley.github.io/cldr-engine/docs/en/api-iso8601date), [Japanese](https://phensley.github.io/cldr-engine/docs/en/api-japanesedate), [Persian](https://phensley.github.io/cldr-engine/docs/en/api-persiandate) and [Buddhist](https://phensley.github.io/cldr-engine/docs/en/api-buddhistdate) calendars.
 - Date formatting using [flexible skeleton-based pattern matching](https://phensley.github.io/cldr-engine/docs/en/api-dateskeleton)
 - [Date addition](https://phensley.github.io/cldr-engine/docs/en/api-calendardate#add), [date subtraction](https://phensley.github.io/cldr-engine/docs/en/api-calendardate#subtract), [date differencing](https://phensley.github.io/cldr-engine/docs/en/api-calendardate#difference) and ["field of visual difference"](https://phensley.github.io/cldr-engine/docs/en/api-calendardate#fieldofvisualdifference) calculation
