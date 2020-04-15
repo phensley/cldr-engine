@@ -16,7 +16,7 @@ const kfactors = (f: string, u: string[]) => {
  * @public
  */
 export const ACCELERATION: FactorDef[] = [
-  ['g-force', '9.80665', 'meter-per-second-squared']
+  ['g-force', '9.80665', 'meter-per-square-second']
 ];
 
 /**
@@ -55,7 +55,7 @@ export const AREA: FactorDef[] = [
  * @public
  */
 export const CONSUMPTION: FactorDef[] = [
-  ['liter-per-100kilometers', '1 / 100', 'liter-per-kilometer']
+  ['liter-per-100-kilometer', '1 / 100', 'liter-per-kilometer']
 ];
 
 const DIGITAL_BASE: FactorDef[] =
@@ -229,9 +229,9 @@ export const POWER: FactorDef[] =
  */
 export const PRESSURE: FactorDef[] = [
   ['hectopascal', '1', 'millibar'],
-  ['hectopascal', '129032000000 / 8896443230521', 'pound-per-square-inch'],
-  ['inch-hg', '33.86389', 'hectopascal'],
-  ['millimeter-of-mercury', '1013.25 / 760', 'hectopascal']
+  ['hectopascal', '129032000000 / 8896443230521', 'pound-force-per-square-inch'],
+  ['inch-ofhg', '33.86389', 'hectopascal'],
+  ['millimeter-ofhg', '1013.25 / 760', 'hectopascal']
 ];
 
 /**
@@ -251,7 +251,7 @@ export const SPEED: FactorDef[] = [
  * @public
  */
 export const TORQUE: FactorDef[] = [
-  ['pound-foot', '1.35582', 'newton-meter']
+  ['pound-force-foot', '1.35582', 'newton-meter']
 ];
 
 const VOLUME_BASE: FactorDef[] = [
