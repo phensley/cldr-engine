@@ -23,6 +23,11 @@ export interface NumberFormatOptions {
   minimumFractionDigits?: number;
   maximumSignificantDigits?: number;
   minimumSignificantDigits?: number;
+
+  /**
+   * Values whose fraction part is all zeros will format as a whole number, e.g. '10.00' -> '$10'
+   */
+  trimZeroFractions?: boolean;
 }
 
 /**

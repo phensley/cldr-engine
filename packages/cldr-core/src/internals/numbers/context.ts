@@ -96,8 +96,14 @@ export class NumberContext {
       n = n.setScale(scale, this.roundingMode);
       n = n.stripTrailingZeros();
 
-      // Ensure minimum fraction digits is met.
-      if (n.scale() < this.minFrac) {
+      // If user hasn't requested minimum fraction digits, and requested to trim zero fractions,
+      // and the number is an integer, force it to render as a whole number.
+      if (this.options.trimZeroFractions && !this.options.minimumFractionDigits && n.isInteger()) {
+        // Trim zeros when whole number display is possible
+        n = n.setScale(0, this.roundingMode);
+
+      } else if (n.scale() < this.minFrac) {
+        // Ensure minimum fraction digits is met.
         n = n.setScale(this.minFrac, this.roundingMode);
       }
     }

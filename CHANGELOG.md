@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [UNRELEASED]
+
+### Added
+
+- Currency formatting can now use the `trimZeroFractions: boolean` option to format an amount as a whole number, provided the fractional digits are all zero. Example: `10.00` formats as `"$10"`, but `10.10` would still format as `"$10.10"`. This option has no effect if the `minimumFractionDigits` option is also set.
+
 ## [1.1.0]
 
 ### Added
