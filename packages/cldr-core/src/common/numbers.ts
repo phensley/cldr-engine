@@ -25,7 +25,8 @@ export interface NumberFormatOptions {
   minimumSignificantDigits?: number;
 
   /**
-   * Values whose fraction part is all zeros will format as a whole number, e.g. '10.00' -> '$10'
+   * Values whose fraction part is all zeros will format as a whole number,
+   * e.g. '10.00' formats as '$10'
    */
   trimZeroFractions?: boolean;
 }
