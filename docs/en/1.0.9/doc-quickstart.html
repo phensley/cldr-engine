@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Quick start · @phensley/cldr</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Below are examples of how to integrate the library into an application. There are a few steps:"/><meta name="docsearch:version" content="1.0.9"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Quick start · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="Below are examples of how to integrate the library into an application. There are a few steps:"/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.0.9</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.0.9/doc-index" target="_self">Docs</a></li><li class=""><a href="/cldr-engine/docs/en/1.0.9/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Introduction</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-index">Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-goals">Goals</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-faq">Rationale</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-quickstart">Quick start</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-locales-parsing">Locale parsing</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-locales-resolution">Locale resolution</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-locales-matching">Language matching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-calendar-overview">Calendar Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-calendar-examples">Example: date formatting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-math">Arbitrary Precision</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-math-example-factorial">Example: factorial</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-math-example-rational-approx">Math: rational approximation</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-math-example-contd-fractions">Math: continued fractions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Message Formatting</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-messageformatting">Usage</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-messageformatting-custom">Customization</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Design</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-design-bundles">Resource bundles</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.0.9/doc-design-caching">Caching</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Quick start</h1></header><article><div><span><p>Below are examples of how to integrate the library into an application. There are a few steps:</p>
+<ol>
+<li>Configure a <a href="api-cldrframework.html">CLDRFramework</a> instance with at least one loader. This will provide the framework with a way to fetch language bundles at runtime.</li>
+<li>Obtain a <a href="api-cldr.html">CLDR</a> instance by calling the method corresponding to the type of loader you configured.
+<ul>
+<li class="list"><code>framework.get(locale)</code> uses the synchronous loader</li>
+<li class="list"><code>framework.getAsync(locale)</code> uses the asynchronous loader, returning a promise</li>
+</ul></li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="code-sandbox"></a><a href="#code-sandbox" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code Sandbox</h2>
+<p>Below is <a href="https://codesandbox.io/s/qqr1rl40r6">an example on codesandbox.io</a> which can be used to learn, demo, experiment, report a bug, etc.</p>
+<iframe src="https://codesandbox.io/embed/qqr1rl40r6?fontsize=12" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<h2><a class="anchor" aria-hidden="true" id="integration"></a><a href="#integration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Integration</h2>
+<p>In order to use the framework we must configure it with a resource pack loader. This tells the framework how to find the resource pack for a given locale.</p>
+<p>A resource pack is a JSON file containing all of the string data specific to a given language, covering all scripts and regions for that language. For example, the resource pack <code>&quot;en.json&quot;</code> will contain the data for all 104 modern English locales (e.g. <code>&quot;en-US&quot;, &quot;en-GB&quot;, &quot;en-CA&quot;, &quot;en-AU&quot;</code>, etc).</p>
+<p>The framework must be configured with a function that, when called with a <code>language</code> argument, will return the resource pack data for that language. The framework will use this resource pack to construct a <code>CLDR</code> instance for the requested locale.</p>
+<p>For example, if &quot;es-MX&quot; is requested by the application, the framework will attempt to load the resource pack &quot;es.json&quot;, will construct a <a href="api-bundle.html"><code>Bundle</code></a> for <code>es-MX</code> and return a <a href="api-cldr.html"><code>CLDR</code></a> instance wrapping that bundle.</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">import</span> wretch <span class="hljs-keyword">from</span> <span class="hljs-string">'wretch'</span>;
+<span class="hljs-keyword">import</span> { CLDRFramework, CLDROptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr'</span>;
+
+<span class="hljs-comment">// Import the resource file containing information about the resource packs</span>
+<span class="hljs-keyword">import</span> Resource <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr/packs/resource.json'</span>;
+
+<span class="hljs-comment">// Copy the sha256 hash of all of the packages, to use for cache busting.</span>
+<span class="hljs-comment">// Note: Resource files have been copied by the build process with the</span>
+<span class="hljs-comment">// matching version in the path.</span>
+<span class="hljs-keyword">const</span> version = Resource.sha256.substring(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+
+<span class="hljs-comment">// Import default language directly so it's always available. We will load</span>
+<span class="hljs-comment">// this below using the synchronous loader.</span>
+<span class="hljs-keyword">import</span> EnglishPack <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr/packs/en.json'</span>;
+
+<span class="hljs-comment">// Load English synchronously (see below)</span>
+<span class="hljs-keyword">const</span> loader = (language: string): <span class="hljs-function"><span class="hljs-params">any</span> =&gt;</span> EnglishPack;
+
+<span class="hljs-comment">// All other languages are loaded asynchronously at runtime</span>
+<span class="hljs-keyword">const</span> asyncLoader = (language: string): <span class="hljs-built_in">Promise</span>&lt;any&gt; =&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>&lt;any&gt;<span class="hljs-function">(<span class="hljs-params">(resolve, reject</span>) =&gt;</span> {
+    <span class="hljs-comment">// Since English is always loaded, return the static instance</span>
+    <span class="hljs-keyword">if</span> (language === <span class="hljs-string">'en'</span>) {
+      resolve(EnglishPack);
+    }
+
+    <span class="hljs-comment">// Fetch the resource pack by URL</span>
+    wretch(<span class="hljs-string">`<span class="hljs-subst">${process.env.PUBLIC_URL}</span>/packs/<span class="hljs-subst">${language}</span>-<span class="hljs-subst">${version}</span>.json`</span>)
+      .get()
+      .json(resolve)
+      .catch(reject);
+  });
+};
+
+<span class="hljs-comment">// Options for initializing the framework</span>
+<span class="hljs-keyword">const</span> options: CLDROptions = {
+  loader,
+  asyncLoader
+};
+
+<span class="hljs-comment">// Global instance of the framework</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> framework = <span class="hljs-keyword">new</span> CLDRFramework(options);
+
+<span class="hljs-comment">// Default language to be used on startup. For example this might be the initial</span>
+<span class="hljs-comment">// value for a React property, or the initial value in a Redux store.</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> English = framework.get(<span class="hljs-string">'en'</span>);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="simple-example"></a><a href="#simple-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Simple example</h3>
+<p>Once you have a framework instance you can start using it. This is an over-simplified example that may work for some cases. Larger applications are probably using a state manager, so the Redux example below will be more applicable.</p>
+<h4><a class="anchor" aria-hidden="true" id="synchronous"></a><a href="#synchronous" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Synchronous</h4>
+<p>The synchronous loader is useful for pre-loading multiple resource packs in a server-side application on startup, or a statically-imported pack in a web application, e.g. the <code>EnglishPack</code> example above. The call to <code>framework.get(locale)</code> will block execution while the resource pack loads.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'de'</span>);
+log(cldr.Numbers.formatCurrency(<span class="hljs-string">'12345.678'</span>, <span class="hljs-string">'CAD'</span>, { group: <span class="hljs-literal">true</span> }));
+</code></pre>
+<pre class="output">
+12.345,68 CA$
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="asynchronous"></a><a href="#asynchronous" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Asynchronous</h4>
+<p>THe asynchronous loader returns a promise which, when resolved, could populate an application's state store.</p>
+<pre><code class="hljs css language-typescript">framework.getAsync(<span class="hljs-string">'und-CA'</span>).then(<span class="hljs-function">(<span class="hljs-params">cldr</span>) =&gt;</span> {
+  <span class="hljs-comment">// use cldr</span>
+  log(cldr.Numbers.formatCurrency(<span class="hljs-string">'12345.678'</span>, <span class="hljs-string">'CAD'</span>));
+}).then(done);
+
+wait();
+</code></pre>
+<pre class="output">
+$12,345.68
+</pre>
+<h3><a class="anchor" aria-hidden="true" id="redux-example"></a><a href="#redux-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Redux example</h3>
+<p>In this example we use Redux and Redux Saga, although it should be straightforward to adapt this to your state container of choice.</p>
+<p><strong>Redux store containing the locale state</strong></p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">import</span> { CLDR } <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr'</span>;
+<span class="hljs-keyword">import</span> { LocaleAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'../actions'</span>;
+<span class="hljs-keyword">import</span> { English } <span class="hljs-keyword">from</span> <span class="hljs-string">'../locale'</span>;
+<span class="hljs-keyword">import</span> { Reducer } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> icepick <span class="hljs-keyword">from</span> <span class="hljs-string">'icepick'</span>;
+
+<span class="hljs-keyword">export</span> interface LocaleState {
+  <span class="hljs-attr">cldr</span>: CLDR;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> initialLocaleState: LocaleState = icepick.freeze({
+  <span class="hljs-attr">cldr</span>: English
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> locale: Reducer&lt;LocaleState&gt; =
+  (state: LocaleState = initialLocaleState, <span class="hljs-attr">action</span>: LocaleAction): <span class="hljs-function"><span class="hljs-params">LocaleState</span> =&gt;</span> {
+
+  <span class="hljs-keyword">switch</span> (action.type) {
+  <span class="hljs-keyword">case</span> <span class="hljs-string">'locale/update'</span>:
+    <span class="hljs-keyword">return</span> icepick.set(state, <span class="hljs-string">'cldr'</span>, action.payload);
+  }
+  <span class="hljs-keyword">return</span> state;
+};
+</code></pre>
+<p><strong>Saga to watch for locale changes</strong></p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">import</span> { Locale } <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr'</span>;
+<span class="hljs-keyword">import</span> { call, put, takeEvery } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga/effects'</span>;
+<span class="hljs-keyword">import</span> { Action, ActionType } <span class="hljs-keyword">from</span> <span class="hljs-string">'../actions'</span>;
+<span class="hljs-keyword">import</span> { framework } <span class="hljs-keyword">from</span> <span class="hljs-string">'../locale'</span>;
+
+<span class="hljs-comment">// Return a Promise that loads the resource pack for this locale.</span>
+<span class="hljs-keyword">const</span> getLocale = <span class="hljs-function">(<span class="hljs-params">locale: Locale</span>) =&gt;</span> framework.getAsync(locale);
+
+<span class="hljs-comment">// Process an action that changes the locale.</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">changeLocale</span>(<span class="hljs-params">action: Action&lt;Locale&gt;</span>): <span class="hljs-title">IterableIterator</span>&lt;<span class="hljs-title">any</span>&gt; </span>{
+  <span class="hljs-keyword">const</span> locale = action.payload;
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Make an async call to fetch the CLDR instance for the locale</span>
+    <span class="hljs-keyword">const</span> request = <span class="hljs-keyword">yield</span> call(getLocale, locale);
+
+    <span class="hljs-comment">// Put the CLDR instance into the store</span>
+    <span class="hljs-keyword">yield</span> put({ <span class="hljs-attr">type</span>: ActionType.LOCALE_UPDATE, <span class="hljs-attr">payload</span>: request });
+  } <span class="hljs-keyword">catch</span> (e) {
+    <span class="hljs-keyword">yield</span> call(<span class="hljs-built_in">console</span>.warn, e);
+
+    <span class="hljs-comment">// Put the error into the store</span>
+    <span class="hljs-keyword">yield</span> put({ <span class="hljs-attr">type</span>: ActionType.LOCALE_INVALID, locale });
+  }
+}
+
+<span class="hljs-comment">// Watch for actions to change the locale</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">localeSaga</span>(<span class="hljs-params"></span>): <span class="hljs-title">IterableIterator</span>&lt;<span class="hljs-title">any</span>&gt; </span>{
+  <span class="hljs-keyword">yield</span> takeEvery(ActionType.LOCALE_CHANGE, changeLocale);
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.0.9/doc-faq"><span class="arrow-prev">← </span><span>Rationale</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.0.9/doc-locales-parsing"><span>Locale parsing</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#code-sandbox">Code Sandbox</a></li><li><a href="#integration">Integration</a><ul class="toc-headings"><li><a href="#simple-example">Simple example</a></li><li><a href="#redux-example">Redux example</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>
