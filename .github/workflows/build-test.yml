@@ -34,6 +34,7 @@ jobs:
 
       - name: Test
         run: yarn test:codecov
+        if: ${{ matrix.node-version == '12.x' }}
 
       - uses: codecov/codecov-action@v1
         with:
