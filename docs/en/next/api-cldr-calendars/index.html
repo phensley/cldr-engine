@@ -489,7 +489,7 @@ formatDateWrapper(date, time, options?): string
 log(cldr.Calendars.formatDateWrapper(date, time, { width: <span class="hljs-string">'full'</span> }));
 </code></pre>
 <pre class="output">
-Next Wednesday at 3:00:03 PM
+Next Wednesday at 4:13:20 PM
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="formatdatewrappertoparts"></a><a href="#formatdatewrappertoparts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatDateWrapperToParts</h2>
 <p>Formats a date and time <code>Part[]</code> together using a wrapper format of the given width. This can be
@@ -535,11 +535,11 @@ log(
 [
   { type: 'reldate', value: 'Next Wednesday' },
   { type: 'literal', value: ' at ' },
-  { type: 'hour', value: '3' },
+  { type: 'hour', value: '4' },
   { type: 'literal', value: ':' },
-  { type: 'minute', value: '00' },
+  { type: 'minute', value: '13' },
   { type: 'literal', value: ':' },
-  { type: 'second', value: '03' },
+  { type: 'second', value: '20' },
   { type: 'literal', value: ' ' },
   { type: 'dayperiod', value: 'PM' }
 ]
@@ -817,8 +817,8 @@ log(en.Calendars.nowBuddhist());
 log(en.Calendars.nowBuddhist(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Buddhist 2020-04-20 15:00:03.798 Etc/UTC
-Buddhist 2020-04-20 08:00:03.798 America/Los_Angeles
+Buddhist 2020-04-20 16:13:20.158 Etc/UTC
+Buddhist 2020-04-20 09:13:20.158 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowgregorian"></a><a href="#nowgregorian" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowGregorian</h2>
 <p>Construct a date in the Gregorian calendar representing the current date and time.</p>
@@ -839,8 +839,8 @@ log(en.Calendars.nowGregorian());
 log(en.Calendars.nowGregorian(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Gregorian 2020-04-20 15:00:03.801 Etc/UTC
-Gregorian 2020-04-20 08:00:03.801 America/Los_Angeles
+Gregorian 2020-04-20 16:13:20.161 Etc/UTC
+Gregorian 2020-04-20 09:13:20.161 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowiso8601"></a><a href="#nowiso8601" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowISO8601</h2>
 <p>Construct a date in the ISO8601 calendar representing the current date and time.</p>
@@ -861,8 +861,8 @@ log(en.Calendars.nowISO8601());
 log(en.Calendars.nowISO8601(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-ISO8601 2020-04-20 15:00:03.804 Etc/UTC
-ISO8601 2020-04-20 08:00:03.804 America/Los_Angeles
+ISO8601 2020-04-20 16:13:20.163 Etc/UTC
+ISO8601 2020-04-20 09:13:20.163 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowjapanese"></a><a href="#nowjapanese" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowJapanese</h2>
 <p>Construct a date in the Japanese calendar representing the current date and time.</p>
@@ -883,8 +883,8 @@ log(en.Calendars.nowJapanese());
 log(en.Calendars.nowJapanese(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Japanese 2020-04-20 15:00:03.806 Etc/UTC
-Japanese 2020-04-20 08:00:03.806 America/Los_Angeles
+Japanese 2020-04-20 16:13:20.166 Etc/UTC
+Japanese 2020-04-20 09:13:20.166 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowpersian"></a><a href="#nowpersian" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowPersian</h2>
 <p>Construct a date in the Persian calendar representing the current date and time.</p>
@@ -905,8 +905,8 @@ log(en.Calendars.nowPersian());
 log(en.Calendars.nowPersian(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Persian 1399-02-01 15:00:03.809 Etc/UTC
-Persian 1399-02-01 08:00:03.809 America/Los_Angeles
+Persian 1399-02-01 16:13:20.168 Etc/UTC
+Persian 1399-02-01 09:13:20.169 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="quarters"></a><a href="#quarters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>quarters</h2>
 <p>Return a mapping of quarter ordinal number to name for the current locale.</p>
