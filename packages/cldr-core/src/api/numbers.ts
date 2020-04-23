@@ -46,6 +46,10 @@ export class NumbersImpl implements Numbers {
     return this.numbers.adjustDecimal(coerceDecimal(n), opts);
   }
 
+  parseDecimal(n: number | string): Decimal {
+    return coerceDecimal(n);
+  }
+
   getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string {
     return this.numbers.getCurrencySymbol(this.bundle, code, width);
   }

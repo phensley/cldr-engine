@@ -98,5 +98,6 @@ export {
   UnitLength,
   Units,
   UnitType,
-  ZonedDateTime
+  ZonedDateTime,
+  ZoneInfo
 } from '@phensley/cldr-core';

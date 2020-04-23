@@ -76,3 +76,7 @@ export {
   Plurals,
   PluralRules
 } from '@phensley/plurals';
+
+export {
+  ZoneInfo
+} from '@phensley/timezone';

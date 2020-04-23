@@ -10,6 +10,7 @@ import {
 
 import { MessageFormatter, MessageFormatterOptions } from '@phensley/messageformat';
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
+import { ZoneInfo } from '@phensley/timezone';
 
 import {
   CalendarFieldsOptions,
@@ -245,6 +246,19 @@ export interface Calendars {
    */
   timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
 
+  /**
+   * Lookup the time zone info for the given UTC timestamp (in milliseconds).
+   * Info includes the abbreviation, offset, daylight savings flag. Returns undefined if the
+   * zoneid doesn't exist.
+   */
+  timeZoneFromUTC(utc: number, zoneid: string): ZoneInfo | undefined;
+
+  /**
+   * Lookup the time zone info for the given local "wall clock" timestamp (in milliseconds).
+   * It also returns the corresponding UTC timestamp. Info includes the abbreviation, offset,
+   * daylight savings flag. Returns undefined if the zoneid doesn't exist.
+   */
+  timeZoneFromWall(wall: number, zoneid: string): [number, ZoneInfo] | undefined;
 }
 
 /**
@@ -340,6 +354,11 @@ export interface Numbers {
    * Adjusts a decimal number using the given options.
    */
   adjustDecimal(num: DecimalArg, options?: DecimalAdjustOptions): Decimal;
+
+  /**
+   * Parses the string or JavaScript number and returns a Decimal instance.
+   */
+  parseDecimal(num: number | string): Decimal;
 
   /**
    * Formats a decimal number to string.

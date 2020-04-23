@@ -7,7 +7,7 @@ import {
 } from '@phensley/cldr-types';
 
 import { DecimalArg, Part } from '@phensley/decimal';
-import { TZ } from '@phensley/timezone';
+import { TZ, ZoneInfo } from '@phensley/timezone';
 
 import { Bundle } from '../resource';
 
@@ -385,6 +385,14 @@ export class CalendarsImpl implements Calendars {
     const stableid = getStableTimeZoneId(id);
     const city = this.exemplarCities[stableid] || this.exemplarCities['Etc/Unknown'];
     return { id, city: { name: city } };
+  }
+
+  timeZoneFromUTC(utc: number, zoneid: string): ZoneInfo | undefined {
+    return TZ.fromUTC(zoneid, utc);
+  }
+
+  timeZoneFromWall(wall: number, zoneid: string): [number, ZoneInfo] | undefined {
+    return TZ.fromWall(zoneid, wall);
   }
 
   timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[] {

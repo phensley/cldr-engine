@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [UNRELEASED]
+
+### Added
+
+- `CLDR.Numbers.parseDecimal` convenience method to parse a number or string into a `Decimal` instance.
+- `CLDR.Calendars.timeZoneFromUTC` and `CLDR.Calendars.timeZoneFromWall` convenience methods to lookup time zone info from either a UTC or local "wall clock" timestamp.
+
 ## [1.1.1]
 
 ### Added
