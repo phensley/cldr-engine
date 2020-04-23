@@ -76,6 +76,7 @@ import { StringDecimalFormatter } from '@phensley/decimal';
 import { UnitInfo } from '@phensley/cldr-types';
 import { UnitType } from '@phensley/cldr-types';
 import { Vector2Arrow } from '@phensley/cldr-types';
+import { ZoneInfo } from '@phensley/timezone';
 
 // Warning: (ae-internal-missing-underscore) The name "AlgorithmicNumberSystem" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -251,7 +252,7 @@ export abstract class CalendarDate {
     // Warning: (ae-forgotten-export) The symbol "ZoneInfo" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    protected _zoneInfo: ZoneInfo;
+    protected _zoneInfo: ZoneInfo_2;
 }
 
 // @public
@@ -369,6 +370,8 @@ export interface Calendars {
     quarters(options?: CalendarFieldsOptions): any;
     resolveTimeZoneId(zoneid: string): string | undefined;
     timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
+    timeZoneFromUTC(utc: number, zoneid: string): ZoneInfo | undefined;
+    timeZoneFromWall(wall: number, zoneid: string): [number, ZoneInfo] | undefined;
     timeZoneIds(): string[];
     timeZoneInfo(zoneid: string): TimeZoneInfo;
     toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
@@ -431,6 +434,10 @@ export class CalendarsImpl implements Calendars {
     resolveTimeZoneId(zoneid: string): string | undefined;
     // (undocumented)
     timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
+    // (undocumented)
+    timeZoneFromUTC(utc: number, zoneid: string): ZoneInfo | undefined;
+    // (undocumented)
+    timeZoneFromWall(wall: number, zoneid: string): [number, ZoneInfo] | undefined;
     // (undocumented)
     timeZoneIds(): string[];
     // (undocumented)
@@ -1224,6 +1231,7 @@ export interface Numbers {
     getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string;
     getPluralCardinal(n: DecimalArg, options?: DecimalAdjustOptions): string;
     getPluralOrdinal(num: DecimalArg, options?: DecimalAdjustOptions): string;
+    parseDecimal(num: number | string): Decimal;
 }
 
 // Warning: (ae-internal-missing-underscore) The name "NumbersImpl" should be prefixed with an underscore because the declaration is marked as @internal
@@ -1259,6 +1267,8 @@ export class NumbersImpl implements Numbers {
     getPluralCardinal(n: DecimalArg, options?: DecimalAdjustOptions): string;
     // (undocumented)
     getPluralOrdinal(n: DecimalArg, options?: DecimalAdjustOptions): string;
+    // (undocumented)
+    parseDecimal(n: number | string): Decimal;
     }
 
 // Warning: (ae-internal-missing-underscore) The name "NumberSymbols" should be prefixed with an underscore because the declaration is marked as @internal
@@ -1657,6 +1667,8 @@ export interface ZonedDateTime {
     date: number | Date;
     zoneId?: string;
 }
+
+export { ZoneInfo }
 
 
 // (No @packageDocumentation comment for this package)

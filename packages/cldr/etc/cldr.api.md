@@ -104,6 +104,7 @@ import { UnitLength } from '@phensley/cldr-core';
 import { Units } from '@phensley/cldr-core';
 import { UnitType } from '@phensley/cldr-core';
 import { ZonedDateTime } from '@phensley/cldr-core';
+import { ZoneInfo } from '@phensley/cldr-core';
 
 export { BuddhistDate }
 
@@ -304,6 +305,8 @@ export { Units }
 export { UnitType }
 
 export { ZonedDateTime }
+
+export { ZoneInfo }
 
 
 // (No @packageDocumentation comment for this package)
