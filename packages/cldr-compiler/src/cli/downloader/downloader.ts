@@ -39,8 +39,8 @@ const ARCHIVES = [
   'cldr-localenames-modern',
   'cldr-misc-modern',
   'cldr-numbers-modern',
-  'cldr-rbnf',
-  'cldr-segments-modern',
+  // 'cldr-rbnf', //
+  // 'cldr-segments-modern',
   'cldr-units-modern'
 ];
 
