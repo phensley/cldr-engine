@@ -7,7 +7,7 @@ import { setupTZDB } from './tzdb';
 import { parseZIC } from './zic';
 import { encodeZones } from './encode';
 
-const VERSION = '2019c';
+const VERSION = '2020a';
 
 interface JsonOptions {
   pretty: boolean;
@@ -83,29 +83,29 @@ const asUTC = (d: Date) => (+d) - d.getTimezoneOffset() * 60000;
  */
 export const main = () => {
   yargs
-  .command('generate', 'Generate code from tzif data', (y: yargs.Argv) => y
+    .command('generate', 'Generate code from tzif data', (y: yargs.Argv) => y
       .option('t', { type: 'string', description: 'Tag / version of the tzdb to build' })
       .option('o', { type: 'string', description: 'Output file path' })
       .alias('o', 'out')
       .alias('t', 'tag'),
       runGenerate)
 
-  .command('json <file>', 'Dump tzif as JSON', (y: yargs.Argv) => y
+    .command('json <file>', 'Dump tzif as JSON', (y: yargs.Argv) => y
       .positional('file', { type: 'string', description: 'Input file in TZif format' })
       .option('p', { boolean: true })
       .alias('p', 'pretty'),
       runDumpJson)
 
-  .command('zdump <file>', 'Dump tzif ala zdump', (y: yargs.Argv) => y
-    .positional('file', { type: 'string', description: 'Input file in TZif format' })
-    .option('t', { boolean: true, description: 'Include timestamps' })
-    .option('y', { type: 'string', description: 'Single year or range START:END' })
-    .alias('t', 'timestamps')
-    .alias('y', 'years'),
-    runZdump)
+    .command('zdump <file>', 'Dump tzif ala zdump', (y: yargs.Argv) => y
+      .positional('file', { type: 'string', description: 'Input file in TZif format' })
+      .option('t', { boolean: true, description: 'Include timestamps' })
+      .option('y', { type: 'string', description: 'Single year or range START:END' })
+      .alias('t', 'timestamps')
+      .alias('y', 'years'),
+      runZdump)
 
-  .demandCommand(1, 'Please specify a command')
-  .help('help')
-  .option('h', { alias: 'help' })
-  .parse();
+    .demandCommand(1, 'Please specify a command')
+    .help('help')
+    .option('h', { alias: 'help' })
+    .parse();
 };
