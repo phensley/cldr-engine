@@ -156,7 +156,7 @@ class Metazones {
 
 let metazones: Metazones | undefined;
 
-const init = () => {
+const init = (): void => {
   if (!metazones) {
     metazones = new Metazones(metazoneData);
   }

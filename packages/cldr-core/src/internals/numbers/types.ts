@@ -28,6 +28,6 @@ export interface NumberParams {
 /**
  * @internal
  */
-export interface NumberFormatRequest {
+// export interface NumberFormatRequest {
   // readonly numberSystem:
-}
+// }

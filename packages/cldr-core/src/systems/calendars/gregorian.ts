@@ -25,9 +25,10 @@ const ZEROS: Partial<CalendarDateFields> = {
  */
 export class GregorianDate extends CalendarDate {
 
-  static _init: void = (() => {
+  static _init: void = ((): void => {
     CalendarDate._gregorian =
-      (d, utc, fd, md) => GregorianDate.fromUnixEpoch(d.unixEpoch(), utc ? 'Etc/UTC' : d.timeZoneId(), fd, md);
+      (d, utc, fd, md): GregorianDate =>
+        GregorianDate.fromUnixEpoch(d.unixEpoch(), utc ? 'Etc/UTC' : d.timeZoneId(), fd, md);
   })();
 
   protected constructor(type: CalendarType, firstDay: number, minDays: number) {

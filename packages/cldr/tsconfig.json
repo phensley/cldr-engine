@@ -1,13 +1,8 @@
 {
-  "extends": "../../tsconfig.settings.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib"
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "__tests__/**/*",
-    "__stress__/**/*"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["__tests__/**/*", "__stress__/**/*"]
 }

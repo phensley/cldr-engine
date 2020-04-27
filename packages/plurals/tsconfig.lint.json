@@ -1,11 +1,7 @@
 {
-  "extends": "../../tsconfig.settings.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": ".scratch"
   },
-  "include": [
-    "src/**/*",
-    "__benchmarks__/**/*",
-    "__tests__/**/*"
-  ]
+  "include": ["src/**/*", "__benchmarks__/**/*", "__tests__/**/*"]
 }

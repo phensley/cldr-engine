@@ -11,6 +11,7 @@ import { Bundle, Pack } from '../../src/resource';
 import { CLDRFramework } from '../../src';
 import { VERSION } from '../../src/utils/version';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../package.json');
 
 const TEMPROOT = join(__dirname, '..', '..', '.custom-packs');

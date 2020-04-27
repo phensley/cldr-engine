@@ -36,13 +36,13 @@ declare module 'benchmark' {
     }
 
     export class Event {
-      constructor(type: string | Object);
+      constructor(type: string | any);
 
       aborted: boolean;
       cancelled: boolean;
-      currentTarget: Object;
+      currentTarget: any;
       result: any;
-      target: Object;
+      target: any;
       timeStamp: number;
       type: string;
     }
@@ -77,5 +77,5 @@ declare module 'benchmark' {
 
 declare module 'beautify-benchmark' {
   function log(): void;
-  function add(obj: Object): void;
+  function add(obj: any): void;
 }

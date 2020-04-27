@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as filepath from 'path';
-import { Decimal } from'@phensley/decimal';
+import { Decimal } from '@phensley/decimal';
 import { pluralRules } from '../src';
 
 const PATH = filepath.join(__dirname, 'samples.txt');
@@ -43,6 +43,7 @@ expect.extend({
 });
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R, T> {
       toHaveCategory(typ: string, lang: string, expected: string): R;

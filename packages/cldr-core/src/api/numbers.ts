@@ -168,7 +168,8 @@ const validate = <T>(
 };
 
 // Default an options context value
-const _ctx = (o: CurrencyDisplayNameOptions) => _def(o, 'context', 'begin-sentence' as ContextType);
+const _ctx = (o: CurrencyDisplayNameOptions): ContextType =>
+  _def(o, 'context', 'begin-sentence' as ContextType);
 
 // Default an option value
 const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T =>

@@ -28,7 +28,8 @@ const getTZC = (offset: number): TZC => {
   return [offset, negative, hours, minutes];
 };
 
-const widthKey1 = (w: number) => w === 5 ? 'narrow' : w === 4 ? 'wide' : 'abbreviated';
+const widthKey1 = (w: number): string =>
+  w === 5 ? 'narrow' : w === 4 ? 'wide' : 'abbreviated';
 
 /**
  * Format a number using the main numbering system, with the given minimum integers.

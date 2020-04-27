@@ -1,4 +1,4 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.enabled": false
+    "cSpell.enabled": false,
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

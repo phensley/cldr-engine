@@ -11,7 +11,7 @@ import { INTERNAL_NUMBERING } from '../numbering';
 import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag, TIME_PERIOD_FIELDS } from './interval';
 import { CalendarDateFields, CalendarType } from './types';
 
-const zeropad = (n: number, w: number) => INTERNAL_NUMBERING.formatString(n, false, w);
+const zeropad = (n: number, w: number): string => INTERNAL_NUMBERING.formatString(n, false, w);
 
 /**
  * Implementation order, based on calendar preference data and ease of implementation.

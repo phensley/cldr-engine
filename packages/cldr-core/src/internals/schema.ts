@@ -39,7 +39,7 @@ class Generator {
   }
 }
 
-const time = (n: [number, number]) =>
+const time = (n: [number, number]): Decimal =>
   new Decimal(n[0]).add(new Decimal(n[1]).movePoint(-9));
 
 const elapsed = (start: [number, number], end: [number, number]): string =>

@@ -33,7 +33,7 @@ const ADJUST_PATTERN = parseNumberPattern('0')[0];
 /**
  * If n is zero check if it is signed and return abs.
  */
-const negzero = (n: Decimal, show?: boolean) =>
+const negzero = (n: Decimal, show?: boolean): Decimal =>
   !show && n.isZero() && n.isNegative() ? n.abs() : n;
 
 /**

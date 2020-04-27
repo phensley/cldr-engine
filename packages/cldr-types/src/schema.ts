@@ -71,6 +71,7 @@ export interface CalendarSchema {
 /**
  * @public
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface BuddhistSchema extends CalendarSchema {
 
 }
@@ -78,6 +79,7 @@ export interface BuddhistSchema extends CalendarSchema {
 /**
  * @public
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface GregorianSchema extends CalendarSchema {
 
 }
@@ -85,6 +87,7 @@ export interface GregorianSchema extends CalendarSchema {
 /**
  * @public
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface JapaneseSchema extends CalendarSchema {
 
 }
@@ -92,6 +95,7 @@ export interface JapaneseSchema extends CalendarSchema {
 /**
  * @public
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface PersianSchema extends CalendarSchema {
 
 }

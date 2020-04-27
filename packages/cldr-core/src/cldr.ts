@@ -380,7 +380,7 @@ export class CLDRFramework {
   }
 }
 
-const must = (arg: any, message: string) => {
+const must = (arg: any, message: string): void => {
   if (arg === undefined) {
     throw new Error(message);
   }

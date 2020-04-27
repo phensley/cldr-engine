@@ -25,13 +25,13 @@ const DEFAULT_NAME_OPTIONS: DisplayNameOptions = { context: 'begin-sentence' };
 // Compound fields for language display name
 type LanguageTagFunc = (t: LanguageTag) => string;
 
-const F_LANG_REGION = (t: LanguageTag) => `${t.language()}-${t.region()}`;
-const F_LANG_SCRIPT = (t: LanguageTag) => `${t.language()}-${t.script()}`;
+const F_LANG_REGION = (t: LanguageTag): string => `${t.language()}-${t.region()}`;
+const F_LANG_SCRIPT = (t: LanguageTag): string => `${t.language()}-${t.script()}`;
 
 const LANGUAGE_FUNCS: LanguageTagFunc[] = [
   F_LANG_REGION,
   F_LANG_SCRIPT,
-  t => t.language()
+  (t: LanguageTag): string => t.language()
 ];
 
 /**
@@ -214,7 +214,7 @@ export class GeneralImpl implements General {
 }
 
 // Default an options context value
-const _ctx = (o: DisplayNameOptions) => _def(o, 'context', 'begin-sentence' as ContextType);
+const _ctx = (o: DisplayNameOptions): ContextType => _def(o, 'context', 'begin-sentence' as ContextType);
 
 // Default an option value
 const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T =>

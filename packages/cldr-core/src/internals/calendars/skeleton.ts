@@ -235,7 +235,7 @@ export class DateSkeletonParser {
 
 }
 
-const cmp = (a: number, b: number) =>
+const cmp = (a: number, b: number): number =>
   a < b ? -1 : a > b ? 1 : 0;
 
 /**

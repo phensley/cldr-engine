@@ -1,4 +1,4 @@
-import { just, nothing, IMaybe } from './maybe';
+import { just, nothing, Maybe } from './maybe';
 import { pair, Pair } from './pair';
 
 const cons = <T>(x: T, xs: T[]): T[] => [x].concat(xs);
@@ -6,8 +6,8 @@ const cons = <T>(x: T, xs: T[]): T[] => [x].concat(xs);
 /**
  * Function that matches on some input, driving the parser.
  */
-export interface IParseFunction<T> {
-  (s: string): IMaybe<Pair<T, string>>;
+export interface ParseFunction<T> {
+  (s: string): Maybe<Pair<T, string>>;
 }
 
 /**
@@ -15,9 +15,9 @@ export interface IParseFunction<T> {
  */
 export class Parser<T> {
 
-  parse: IParseFunction<T>;
+  parse: ParseFunction<T>;
 
-  constructor(parse: IParseFunction<T>) {
+  constructor(parse: ParseFunction<T>) {
     this.parse = parse;
   }
 

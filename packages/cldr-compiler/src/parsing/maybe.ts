@@ -1,19 +1,19 @@
 /**
  * Interface for a value that may not be there.
  */
-export interface IMaybe<T> {
+export interface Maybe<T> {
   isJust(): boolean;
   isNothing(): boolean;
   get(): T;
-  map<R>(f: (value: T) => R): IMaybe<R>;
-  flatMap<R>(f: (value: T) => IMaybe<R>): IMaybe<R>;
-  orElse<R>(f: () => IMaybe<R>): IMaybe<T | R>;
+  map<R>(f: (value: T) => R): Maybe<R>;
+  flatMap<R>(f: (value: T) => Maybe<R>): Maybe<R>;
+  orElse<R>(f: () => Maybe<R>): Maybe<T | R>;
 }
 
 /**
  * Class for a singleton object representing all values that are not there.
  */
-export class Nothing<T> implements IMaybe<T> {
+export class Nothing<T> implements Maybe<T> {
 
   isJust(): boolean {
     return false;
@@ -27,15 +27,15 @@ export class Nothing<T> implements IMaybe<T> {
     throw new Error('Cannot invoke get() on Nothing');
   }
 
-  map<R>(_f: (v: T) => R): IMaybe<R> {
+  map<R>(_f: (v: T) => R): Maybe<R> {
     return (this as any) as Nothing<R>;
   }
 
-  flatMap<R>(_f: (v: T) => IMaybe<R>): IMaybe<R> {
+  flatMap<R>(_f: (v: T) => Maybe<R>): Maybe<R> {
     return (this as any) as Nothing<R>;
   }
 
-  orElse<R>(f: () => IMaybe<R>): IMaybe<T | R> {
+  orElse<R>(f: () => Maybe<R>): Maybe<T | R> {
     return f();
   }
 }
@@ -43,10 +43,10 @@ export class Nothing<T> implements IMaybe<T> {
 /**
  * A value in the Maybe type.
  */
-export class Just<T> implements IMaybe<T> {
+export class Just<T> implements Maybe<T> {
 
   constructor(
-    readonly value: T) {}
+    readonly value: T) { }
 
   isJust(): boolean {
     return true;
@@ -60,15 +60,15 @@ export class Just<T> implements IMaybe<T> {
     return this.value;
   }
 
-  map<R>(f: (value: T) => R): IMaybe<R> {
+  map<R>(f: (value: T) => R): Maybe<R> {
     return new Just(f(this.get()));
   }
 
-  flatMap<R>(f: (value: T) => IMaybe<R>): IMaybe<R> {
+  flatMap<R>(f: (value: T) => Maybe<R>): Maybe<R> {
     return f(this.get());
   }
 
-  orElse<R>(_f: () => IMaybe<R>): IMaybe<T | R> {
+  orElse<R>(_f: () => Maybe<R>): Maybe<T | R> {
     return this;
   }
 }
@@ -76,9 +76,9 @@ export class Just<T> implements IMaybe<T> {
 /**
  * Singleton nothing value.
  */
-export const nothing: IMaybe<any> = new Nothing();
+export const nothing: Maybe<any> = new Nothing();
 
 /**
  * Shorthand to create a Just<T>.
  */
-export const just = <T>(value: T): IMaybe<T> => new Just(value);
+export const just = <T>(value: T): Maybe<T> => new Just(value);
