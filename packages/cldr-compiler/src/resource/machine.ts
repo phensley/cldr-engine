@@ -106,15 +106,15 @@ export class EncoderMachine {
       totalCount += count;
       totalSize += size;
       if (this.verbose) {
-        console.warn(`      ${leftPad(i.identifier, 20)}  ` +
+        console.log(`      ${leftPad(i.identifier, 20)}  ` +
           `${leftPad(count, PADDING)} fields   ${leftPad(size, PADDING)} chars`);
       }
     }
     if (this.verbose) {
-      console.warn('      --------------------   --------------   --------------');
-      console.warn(`      ${leftPad('Total', 20)}  ` +
+      console.log('      --------------------   --------------   --------------');
+      console.log(`      ${leftPad('Total', 20)}  ` +
         `${leftPad(totalCount, PADDING)} fields   ${leftPad(totalSize, PADDING)} chars`);
-      console.warn(`      ${leftPad('', 20)}  ${leftPad(this.encoder.distinct(), PADDING)} distinct strings`);
+      console.log(`      ${leftPad('', 20)}  ${leftPad(this.encoder.distinct(), PADDING)} distinct strings`);
     }
   }
 
