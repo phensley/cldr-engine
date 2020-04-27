@@ -10,7 +10,10 @@ import { Checksum } from '@phensley/cldr-utils';
  */
 export const checksumIndices = (version: string, map: KeyIndexMap): string => {
   const c = new Checksum();
-  c.update(version);
+  // Checksum will ignore the patch level of the version, indicating that packs from any
+  // patch level will work together.
+  const v = version.split('.').slice(0, 2).join('.');
+  c.update(v);
 
   // Visit map keys in sorted order
   const keys = Object.keys(map).sort();
