@@ -20,6 +20,5 @@
     "paths": {
       "@phensley/*": ["./packages/*/"]
     }
-  },
-  "include": ["src/**/*.ts"]
+  }
 }

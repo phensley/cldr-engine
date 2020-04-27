@@ -92,7 +92,7 @@ const currencyOptions = (): CurrencyFormatOptions[] => {
   }
   res.push({ style: 'short', divisor: 1e4 });
   res.push({ style: 'short', divisor: 1e6 });
-return res;
+  return res;
 };
 
 // TODO: enable once rbnf is incorporated
@@ -134,7 +134,7 @@ export const numberStress = () => {
   const dopts = decimalOptions();
   const copts = currencyOptions();
 
-    // TODO: enable once rbnf is incorporated
+  // TODO: enable once rbnf is incorporated
   // const sopts = ruleBasedOptions();
 
   const uopts = unitOptions();
@@ -174,7 +174,8 @@ export const numberStress = () => {
           s = engine.Numbers.formatCurrency(n, currency, o);
           if (!s) {
             if (VERBOSE) {
-              console.log(`[numbers] format currency empty ${locale.id} ${n.toString()} ${currency} ${JSON.stringify(o)}`);
+              console.log(`[numbers] format currency empty ` +
+                `${locale.id} ${n.toString()} ${currency} ${JSON.stringify(o)}`);
             }
             empty++;
           }
@@ -219,7 +220,8 @@ export const numberStress = () => {
           s = engine.Units.formatQuantity({ value: n, unit, per: 'second' }, o);
           if (!s) {
             if (VERBOSE) {
-              console.log(`[numbers] format quantity per empty ${locale.id} ${n.toString()} ${unit} per: 'second' ${JSON.stringify(o)}`);
+              console.log(`[numbers] format quantity per empty ` +
+                `${locale.id} ${n.toString()} ${unit} per: 'second' ${JSON.stringify(o)}`);
             }
             empty++;
           }

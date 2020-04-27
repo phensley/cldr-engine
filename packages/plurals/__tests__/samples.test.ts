@@ -35,7 +35,8 @@ expect.extend({
     const rules = pluralRules.get(language, region);
     const actual = typ === 'cardinals' ? rules.cardinal(n) : rules.ordinal(n);
     const msg = (pass: boolean) => () =>
-      `Expected language "${lang}" number "${sample}" ${pass ? 'not ' : ''}to have ${typ} category "${expected}" but got "${actual}"`;
+      `Expected language "${lang}" number "${sample}" ${pass ? 'not ' : ''}to have ` +
+      `${typ} category "${expected}" but got "${actual}"`;
 
     const result = actual === expected;
     return { message: msg(result), pass: result };

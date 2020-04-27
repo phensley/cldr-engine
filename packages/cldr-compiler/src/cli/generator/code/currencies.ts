@@ -1,4 +1,4 @@
-import { lineWrap, Code, HEADER } from './util';
+import { lineWrap, Code, HEADER, NOLINT_MAXLINE } from './util';
 
 const DEFAULT_DIGITS = '2';
 const DEFAULT_ROUNDING = '0';
@@ -14,7 +14,7 @@ const convert = (s: any): string[] => {
 export const getCurrencies = (data: any): Code[] => {
   const result: Code[] = [];
 
-  let code = `${HEADER}`;
+  let code = NOLINT_MAXLINE + HEADER;
   const currencies = data.currencies.map((c: string) => `'${c}'`);
 
   code += '/** @public */\n';
@@ -24,7 +24,7 @@ export const getCurrencies = (data: any): Code[] => {
 
   result.push(Code.types(['autogen.currencies.ts'], code));
 
-  code = '';
+  code = NOLINT_MAXLINE + HEADER;
   const fractions = data.currencies
     .filter((c: string) => data.currencyFractions[c] !== undefined)
     .map((c: string) => {
@@ -32,14 +32,12 @@ export const getCurrencies = (data: any): Code[] => {
       return `${c}:${frac}`;
     }).join('|');
 
-  code += '/* tslint:disable-next-line:max-line-length */\n';
   code += `export const currencyFractionsRaw = '${fractions}';\n\n`;
 
   const regions = Object.keys(data.currencyRegions)
     .map((r: string) => `${r}:${data.currencyRegions[r]}`)
     .join('|');
 
-  code += '/* tslint:disable-next-line:max-line-length */\n';
   code += `export const currencyRegionsRaw = '${regions}';\n`;
 
   result.push(Code.core(['internals', 'numbers', 'autogen.currencies.ts'], code));

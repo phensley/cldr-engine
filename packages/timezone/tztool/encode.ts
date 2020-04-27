@@ -2,12 +2,12 @@ import * as filepath from 'path';
 import { TZif } from './tzif';
 import { DefaultArrayMap, FrequencySet } from './types';
 
-const TSLINT = '/* tslint:disable:max-line-length whitespace */\n\n';
+const MAXLEN = '/* eslint-disable max-len */\n\n';
 
 /**
  * Encode the time zone data in a compact form.
  */
-export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayMap<string>) => {
+export const encodeZones = (version: string, zonedir: string, ids: string[], links: DefaultArrayMap<string>) => {
   ids.sort();
 
   const untilindex = new FrequencySet<number>();
@@ -90,7 +90,9 @@ export const encodeZones = (zonedir: string, ids: string[], links: DefaultArrayM
 
   // OUTPUT
 
-  let data = TSLINT;
+  let data = MAXLEN;
+
+  data += `/* Generated from tzdb version ${version} */\n\n`;
 
   data += `import { RawData } from './types';\n\n`;
 

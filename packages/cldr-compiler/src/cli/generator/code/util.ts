@@ -7,8 +7,8 @@ export const HEADER = `\
 
 `;
 
-export const NOLINT = '/* tslint:disable-next-line */\n';
-export const NOLINT_MAXLINE = '/* tslint:disable:max-line-length whitespace */\n';
+export const NOLINT = '// eslint-disable-next-line max-len\n';
+export const NOLINT_MAXLINE = '/* eslint-disable max-len */\n';
 
 const FORMAT_OPTIONS: Options = {
   parser: 'typescript',

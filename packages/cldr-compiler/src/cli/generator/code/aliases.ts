@@ -77,13 +77,13 @@ export const getAliases = (_data: any): Code[] => {
 
   const result: Code[] = [];
 
-  let code = HEADER + NOLINT_MAXLINE;
+  let code = NOLINT_MAXLINE + HEADER;
   code += `export const languageAliasRaw = '${languages}';\n\n`;
   code += `export const scriptAliasRaw = '${scripts}';\n`;
 
   result.push(Code.locale(['autogen.aliases.ts'], code));
 
-  code = HEADER + NOLINT_MAXLINE;
+  code = NOLINT_MAXLINE + HEADER;
   code += `export const territoryAliasRaw = '${territories}';\n`;
 
   result.push(Code.languagetag(['autogen.aliases.ts'], code));
@@ -101,7 +101,7 @@ export const getAliases = (_data: any): Code[] => {
     return TZ.resolveId(alias) === undefined;
   }).sort().map(k => [k, zoneAlias[k]].join(':')).join('|');
 
-  code = HEADER + NOLINT_MAXLINE;
+  code = NOLINT_MAXLINE + HEADER;
   code += `export const zoneAliasRaw = '${zones}';\n`;
 
   result.push(Code.core(['systems', 'calendars', 'autogen.aliases.ts'], code));

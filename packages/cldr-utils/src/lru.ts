@@ -10,7 +10,7 @@ export type Key = string | number;
 
 // Note next / prev will always be set internally, but are undefined
 // temporarily when inserting a new node into the list.
-type Node<V> = { key: Key, val: V, next?: Node<V>, prev?: Node<V> };
+type Node<V> = { key: Key; val: V; next?: Node<V>; prev?: Node<V> };
 
 /**
  * Cache evicts the least-recently-used key when capacity is exceeded.

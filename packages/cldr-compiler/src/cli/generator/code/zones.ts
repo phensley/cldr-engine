@@ -185,7 +185,7 @@ export const getZones = (data: any): Code[] => {
   // Map canoical tzdb identifier to cldr stable id.
   const stableidmap = buildStableIdMapping(data);
 
-  let code = HEADER + '/* tslint:disable:max-line-length */\n';
+  let code = NOLINT_MAXLINE + HEADER;
 
   code += `export const metazoneData = {\n`;
   code += `  // mapping of time zone's array index to metazone's array index\n`;
@@ -210,20 +210,18 @@ export const getZones = (data: any): Code[] => {
   result.push(Code.core(['systems', 'calendars', 'autogen.zonedata.ts'], code));
 
   // Build autogen.timezones.ts source
-  code = HEADER;
+  code = NOLINT_MAXLINE + HEADER;
 
   // const timeZoneType = lineWrap(60, ' | ', data.timeZoneIds.map((k: string) => `'${k}'`));
   // code += `export type TimeZoneType = (\n${timeZoneType});\n\n`;
 
   code += "import { MetaZoneType } from '@phensley/cldr-types';\n\n";
 
-  code += NOLINT_MAXLINE;
   code += '/** @public */\n';
   code += `export const TimeZoneStableIds: string[] = ('`;
   code += data.timeZoneIds.join(' ');
   code += `').split(' ');\n\n`;
 
-  code += NOLINT_MAXLINE;
   code += '/** @public */\n';
   code += `export const MetaZoneValues: MetaZoneType[] = ('`;
   code += data.metaZoneIds.join(' ');
@@ -238,8 +236,7 @@ export const getZones = (data: any): Code[] => {
   // });
   // code += '\n}\n\n';
 
-  code = HEADER;
-  code += NOLINT_MAXLINE;
+  code = NOLINT_MAXLINE + HEADER;
   const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
   code += '/** @public */\n';
   code += `export type MetaZoneType = ${metaZoneType};\n`;

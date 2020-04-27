@@ -52,8 +52,10 @@ test('gregorian set field', () => {
   expect(d.set({ hour: 0 }).toString()).toEqual('Gregorian 2020-04-03 00:08:52.123 America/New_York');
 
   // Gregorian cutover
-  expect(d.set({ year: 1582, month: 10, day: 3 }).toString()).toEqual('Gregorian 1582-10-03 14:08:52.123 America/New_York');
-  expect(d.set({ year: 1582, month: 10, day: 16 }).toString()).toEqual('Gregorian 1582-10-16 14:08:52.123 America/New_York');
+  expect(d.set({ year: 1582, month: 10, day: 3 }).toString())
+    .toEqual('Gregorian 1582-10-03 14:08:52.123 America/New_York');
+  expect(d.set({ year: 1582, month: 10, day: 16 }).toString())
+    .toEqual('Gregorian 1582-10-16 14:08:52.123 America/New_York');
 
   // Set zone concurrently
   expect(d.set({ zoneId: 'America/Los_Angeles' }).toString())

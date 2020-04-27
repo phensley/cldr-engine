@@ -55,22 +55,6 @@ export class LRU<V> {
     toString(): string;
 }
 
-// @public
-export const mphash: (d: number, len: number, s: string) => number;
-
-// @public
-export interface MPHashTable<T> {
-    // (undocumented)
-    g: number[];
-    // (undocumented)
-    s: number;
-    // (undocumented)
-    v: T[];
-}
-
-// @public
-export const mplookup: <T>(t: MPHashTable<T>, key: string) => T;
-
 
 // (No @packageDocumentation comment for this package)
 

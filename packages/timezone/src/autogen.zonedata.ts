@@ -1,6 +1,6 @@
-/* Generated from tzdb version undefined */
+/* eslint-disable max-len */
 
-/* tslint:disable:max-line-length whitespace */
+/* Generated from tzdb version 2020a */
 
 import { RawData } from './types';
 

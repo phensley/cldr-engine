@@ -35,9 +35,7 @@ const runGenerate = (argv: yargs.Arguments<GenerateOptions>) => {
   const zonedir = filepath.join(repo, 'zones');
 
   const { links, zones } = parseZIC(tzdata);
-  const encoded = encodeZones(zonedir, zones, links);
-
-  const data = `/* Generated from tzdb version ${tag} */\n\n` + encoded;
+  const data = encodeZones(tag || VERSION, zonedir, zones, links);
 
   if (argv.out) {
     fs.writeFileSync(argv.out, data, { encoding: 'utf-8' });
