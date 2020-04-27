@@ -24,6 +24,28 @@ Using Yarn:
 yarn add @phensley/cldr
 ```
 
+## Versioning
+
+This project follows [semantic versioning](https://semver.org/):
+
+**PATCH**
+
+- Bug fixes
+- Backwards-compatible
+- Resource pack compatibility maintained (packs from `1.0.0` are guaranteed to work for all `1.0.*` versions)
+
+**MINOR**
+
+- New features
+- Backwards-compatible
+- Internal schema breaking changes (applications must load resource packs from the same `major.minor` version)
+- CLDR data upgrades which maintain backwards-compatibility
+
+**MAJOR**
+
+- Public API breaking changes
+- CLDR data upgrades which change break API compatibility (unit deprecation / renaming, etc)
+
 ## Features
 
 - Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 37.0.0](http://cldr.unicode.org/index/downloads/cldr-37)
@@ -43,29 +65,6 @@ yarn add @phensley/cldr
 - Display names for [languages](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general#getlanguagedisplayname), [scripts](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general#getscriptdisplayname), [regions](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general#getregiondisplayname), [currencies](https://phensley.github.io/cldr-engine/docs/en/api-cldr-numbers#getcurrencydisplayname), [units](https://phensley.github.io/cldr-engine/docs/en/api-cldr-units#getunitdisplayname), [calendar fields](https://phensley.github.io/cldr-engine/docs/en/api-cldr-calendars#months), etc
 - [List formatting](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general#formatlist), [measurement system](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general#measurementsystem), [character order](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general#characterorder), and [line order](https://phensley.github.io/cldr-engine/docs/en/api-cldr-general#lineorder) information
 - Optional [Unit conversion package](packages/unit-converter) to convert quantities between CLDR units
-
-## Versioning
-
-- `1.0` release is stable (CLDR v36).
-- `1.1` release is stable (CLDR v37).
-- `1.2` is in planning and early development.
-
-A future `2.0` release is planned. Features would include:
-
-- API improvements for calendars, decimal, and other types.
-- Moving embedded static data to top-level and make it more user-configurable.
-- Make it easier to use a small subset of features with far less code.
-
-Due to this library's dependence on CLDR data, it uses a **modified semantic versioning** scheme `[MAJOR][MINOR][PATCH]`:
-
-- **PATCH** - Bug fixes and new small features, guaranteed backwards-compatible.
-- **MINOR** - [New CLDR releases](http://cldr.unicode.org/index/downloads) are incorporated.
-  - High compatibility. Existing API should not break except where unavoidable due to CLDR changes.
-  - Formatting may differ due to changes in the underlying formatting patterns.
-  - Values of certain types like [UnitType](https://phensley.github.io/cldr-engine/docs/en/api-unittype) may change.
-  - New features that are larger, or derive from new CLDR data, will bump the minor version.
-  - All implications for compatibility will be declared in the changelog.
-- **MAJOR** - Breaking backwards-compatibility, major reorganization of the library.
 
 ## Package Naming
 
