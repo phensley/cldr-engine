@@ -25,18 +25,18 @@
     "unlink-all": "lerna exec --concurrency=1 yarn unlink"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.2",
-    "dependency-cruiser": "^8.0.2",
-    "jest": "^25.1.0",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "dependency-cruiser": "^9.0.0",
+    "jest": "^25.4.0",
     "lerna": "^3.20.2",
-    "npm-check-updates": "^4.0.5",
+    "npm-check-updates": "^4.1.2",
     "rimraf": "^3.0.2",
-    "ts-jest": "^25.2.1",
-    "ts-node": "^8.8.1",
-    "tslint": "^6.1.0",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.1",
+    "tslint": "^6.1.2",
     "tslint-no-circular-imports": "^0.7.0",
-    "typedoc": "^0.17.3",
+    "typedoc": "^0.17.6",
     "typescript": "^3.8.3"
   },
   "workspaces": [
