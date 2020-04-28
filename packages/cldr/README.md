@@ -74,14 +74,17 @@ Packages without the `cldr-*` prefix can be used in an application individually 
 
 You can use any of the packages independent of the rest of the library:
 
-- [`@phensley/decimal`](https://www.npmjs.com/package/@phensley/decimal) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/decimal)
-- [`@phensley/language-tag`](https://www.npmjs.com/package/@phensley/language-tag) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/language-tag)
-- [`@phensley/locale`](https://www.npmjs.com/package/@phensley/locale) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/locale)
-- [`@phensley/locale-matcher`](https://www.npmjs.com/package/@phensley/locale-matcher) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/locale-matcher)
-- [`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/messageformat)
-- [`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/plurals)
-- [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/timezone)
-- [`@phensley/unit-converter`](https://www.npmjs.com/package/@phensley/unit-converter) ![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/unit-converter)
+| package                                                                              | size                                                                                                                                       | dependencies                                                  |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| [`@phensley/cldr-utils`](https://www.npmjs.com/package/@phensley/cldr-utils)         | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/cldr-utils)](https://bundlephobia.com/result?p=@phensley/cldr-utils)         |                                                               |
+| [`@phensley/decimal`](https://www.npmjs.com/package/@phensley/decimal)               | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/decimal)](https://bundlephobia.com/result?p=@phensley/decimal)               |                                                               |
+| [`@phensley/language-tag`](https://www.npmjs.com/package/@phensley/language-tag)     | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/language-tag)](https://bundlephobia.com/result?p=@phensley/language-tag)     |                                                               |
+| [`@phensley/locale`](https://www.npmjs.com/package/@phensley/locale)                 | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/locale)](https://bundlephobia.com/result?p=@phensley/locale)                 | size includes `language-tag` package                          |
+| [`@phensley/locale-matcher`](https://www.npmjs.com/package/@phensley/locale-matcher) | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/locale-matcher)](https://bundlephobia.com/result?p=@phensley/locale-matcher) | size includes `locale` and `language-tag` packages            |
+| [`@phensley/messageformat`](https://www.npmjs.com/package/@phensley/messageformat)   | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/messageformat)](https://bundlephobia.com/result?p=@phensley/messageformat)   | size includes `cldr-utils`, `decimal`, and `plurals` packages |
+| [`@phensley/plurals`](https://www.npmjs.com/package/@phensley/plurals)               | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/plurals)](https://bundlephobia.com/result?p=@phensley/plurals)               | size includes `decimal` package                               |
+| [`@phensley/timezone`](https://www.npmjs.com/package/@phensley/timezone)             | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/timezone)](https://bundlephobia.com/result?p=@phensley/timezone)             | size includes `cldr-utils` package                            |
+| [`@phensley/unit-converter`](https://www.npmjs.com/package/@phensley/unit-converter) | [![min+gzip](https://badgen.net/bundlephobia/minzip/@phensley/unit-converter)](https://bundlephobia.com/result?p=@phensley/unit-converter) | size includes `cldr-utils` and `decimal` packages             |
 
 ## Goals
 
