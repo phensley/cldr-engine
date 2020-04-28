@@ -8,7 +8,6 @@ PACKAGES="
 @phensley/cldr-compiler
 @phensley/cldr-core
 @phensley/cldr-ext-rbnf
-@phensley/cldr-schema
 @phensley/cldr-types
 @phensley/cldr-utils
 @phensley/decimal

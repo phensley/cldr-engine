@@ -6,11 +6,11 @@ import {
   scopemap,
   vector,
   KeyIndexImpl,
+  LanguageResolver,
   Origin,
   Scope
-} from '@phensley/cldr-schema';
+} from '@phensley/cldr-core';
 
-import { LanguageResolver } from '@phensley/cldr-core';
 import { Encoder, EncoderMachine } from '../../src/resource/machine';
 import { ResourcePack } from '../../src/resource/pack';
 

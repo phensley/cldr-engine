@@ -22,7 +22,7 @@ export const getContexts = (data: any): Code[] => {
   code += transforms.join(' ');
   code += `').split(' ') as ContextTransformFieldType[];\n`;
 
-  result.push(Code.schema(['schema', 'autogen.context.ts'], code));
+  result.push(Code.core(['schema', 'schema', 'autogen.context.ts'], code));
 
   return result;
 };

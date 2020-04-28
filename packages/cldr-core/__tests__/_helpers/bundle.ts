@@ -3,12 +3,11 @@ import { createHash } from 'crypto';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { SchemaConfig } from '@phensley/cldr-schema';
 import { LRU } from '@phensley/cldr-utils';
 import { LanguageResolver } from '@phensley/locale';
 
 import { Bundle, Pack } from '../../src/resource';
-import { CLDRFramework } from '../../src';
+import { CLDRFramework, SchemaConfig } from '../../src';
 import { VERSION } from '../../src/utils/version';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

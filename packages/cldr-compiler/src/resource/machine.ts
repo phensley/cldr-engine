@@ -6,7 +6,7 @@ import {
   Scope,
   ScopeMap,
   Vector,
-} from '@phensley/cldr-schema';
+} from '@phensley/cldr-core';
 
 const leftPad = (s: number | string, w: number): string => {
   s = typeof s === 'number' ? String(s) : s;

@@ -11,7 +11,7 @@ import {
   ScopeMap,
   Vector,
   VectorArrowImpl,
-} from '@phensley/cldr-schema';
+} from '../schema';
 import { Decimal } from '@phensley/decimal';
 import { leftPad } from '../utils/string';
 

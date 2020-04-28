@@ -10,7 +10,7 @@ import {
   Origin,
   ScopeArrowImpl,
   VectorArrowImpl,
-} from '@phensley/cldr-schema';
+} from '@phensley/cldr-core';
 import { VERSION } from '@phensley/cldr-core/lib/utils/version';
 import { SchemaBuilder } from '@phensley/cldr-core/lib/internals/schema';
 import { checksumIndices } from '@phensley/cldr-core/lib/resource/checksum';

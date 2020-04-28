@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.2.0]
+
+### Fixed/Changed
+
+- Project now uses standard semantic versioning, see [README](https://github.com/phensley/cldr-engine/#versioning)
+- All `@phensley/*` package interdependencies now use the `^x.x.x` constraint.
+- Removed the internal package `@phensley/cldr-schema`, merging its code into `@phensley/cldr-core`.
+- Switched from tslint to eslint.
+- Modified checksum so that resource packs are now compatible at the patch level. Resource packs must match the `major.minor` version of the `@phensley/cldr-core` package at runtime to ensure schema compatibility.
+
 ## [1.1.2]
 
 ### Added

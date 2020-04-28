@@ -20,7 +20,28 @@ export {
   UnitType
 } from '@phensley/cldr-types';
 
-export { SchemaConfig } from '@phensley/cldr-schema';
+export {
+  digits,
+  field,
+  origin,
+  scope,
+  scopemap,
+  vector,
+  CodeBuilder,
+  Digits,
+  DigitsArrowImpl,
+  Field,
+  FieldArrowImpl,
+  Instruction,
+  KeyIndexImpl,
+  Origin,
+  SchemaConfig,
+  Scope,
+  ScopeArrowImpl,
+  ScopeMap,
+  Vector,
+  VectorArrowImpl,
+} from './schema';
 
 export {
   coerceDecimal,

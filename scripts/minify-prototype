@@ -13,7 +13,6 @@ RE_PROTOTYPE = re.compile('^\s*(\w+)\.prototype\.(.+)')
 PACKAGES = [
     'cldr',
     'cldr-core',
-    'cldr-schema',
     'cldr-types',
     'cldr-utils',
     'decimal',

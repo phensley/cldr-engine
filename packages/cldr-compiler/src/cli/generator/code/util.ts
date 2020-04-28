@@ -46,10 +46,6 @@ export class Code {
     return new Code(['packages', 'cldr-ext-rbnf', 'src', ...path], source);
   }
 
-  static schema(path: string[], source: string): Code {
-    return new Code(['packages', 'cldr-schema', 'src', ...path], source);
-  }
-
   static types(path: string[], source: string): Code {
     return new Code(['packages', 'cldr-types', 'src', ...path], source);
   }

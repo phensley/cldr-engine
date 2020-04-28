@@ -1,6 +1,5 @@
 import { config as defaultconfig } from '../../../cldr/src/config';
 
-import { SchemaConfig } from '@phensley/cldr-schema';
 import { languageBundle } from './bundle';
 import {
   Bundle,
@@ -10,6 +9,7 @@ import {
   Locale,
   NumbersImpl,
   PrivateApiImpl,
+  SchemaConfig,
   UnitsImpl,
 } from '../../src';
 

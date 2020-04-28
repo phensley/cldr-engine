@@ -11,7 +11,7 @@ import {
   UnitType,
 } from '@phensley/cldr-types';
 
-import { SchemaConfig } from '@phensley/cldr-schema';
+import { SchemaConfig } from '../schema';
 
 import { Decimal, DecimalArg, Part } from '@phensley/decimal';
 

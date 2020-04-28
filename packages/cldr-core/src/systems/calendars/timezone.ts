@@ -1,5 +1,5 @@
 import { MetaZoneType } from '@phensley/cldr-types';
-import { TimeZoneStableIdIndex } from '@phensley/cldr-schema';
+import { TimeZoneStableIdIndex } from '../../schema';
 import { TZ } from '@phensley/timezone';
 
 import { zoneAliasRaw } from './autogen.aliases';

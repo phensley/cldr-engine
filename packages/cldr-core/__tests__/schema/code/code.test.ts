@@ -1,4 +1,4 @@
-import { CodeBuilder, Origin } from '../../src';
+import { CodeBuilder, Origin } from '../../../src/schema';
 
 test('code builder', () => {
   let o: Origin;

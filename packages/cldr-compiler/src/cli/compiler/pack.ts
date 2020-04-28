@@ -4,9 +4,8 @@ import { join } from 'path';
 import * as yargs from 'yargs';
 import * as zlib from 'zlib';
 
-import { checksumIndices } from '@phensley/cldr-core';
-import { CodeBuilder } from '@phensley/cldr-schema';
-import { getMain  } from '../../cldr';
+import { checksumIndices, CodeBuilder } from '@phensley/cldr-core';
+import { getMain } from '../../cldr';
 import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
 import { buildLocaleMap, checkLanguages, getProjectInfo, ProjectInfo } from './util';
@@ -75,7 +74,7 @@ export const runPack = (argv: yargs.Arguments<PackArgs>) => {
     .catch(e => {
       console.log(e);
       process.exit(1);
-  });
+    });
 };
 
 const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {

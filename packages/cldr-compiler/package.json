@@ -45,7 +45,6 @@
   "dependencies": {
     "@phensley/cldr-core": "~1.1.2",
     "@phensley/cldr-ext-rbnf": "~1.1.2",
-    "@phensley/cldr-schema": "~1.1.2",
     "@phensley/cldr-types": "~1.1.2",
     "@phensley/cldr-utils": "~1.1.2",
     "@phensley/decimal": "~1.1.2",

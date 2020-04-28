@@ -36,7 +36,6 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-schema": "~1.1.2",
     "@phensley/cldr-types": "~1.1.2",
     "@phensley/cldr-utils": "~1.1.2",
     "@phensley/decimal": "~1.1.2",
