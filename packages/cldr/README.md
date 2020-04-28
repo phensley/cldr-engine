@@ -2,7 +2,18 @@
 
 Internationalization in Typescript with Unicode CLDR, batteries included.
 
-![build](https://github.com/phensley/cldr-engine/workflows/Build%20and%20Test/badge.svg) [![codecov](https://codecov.io/gh/phensley/cldr-engine/branch/master/graph/badge.svg)](https://codecov.io/gh/phensley/cldr-engine) [![npm version](https://badge.fury.io/js/%40phensley%2Fcldr.svg)](https://www.npmjs.com/package/@phensley/cldr)
+[![build](https://github.com/phensley/cldr-engine/workflows/Build%20and%20Test/badge.svg)](https://github.com/phensley/cldr-engine/actions)
+[![codecov](https://codecov.io/gh/phensley/cldr-engine/branch/master/graph/badge.svg)](https://codecov.io/gh/phensley/cldr-engine)
+[![npm version](https://badge.fury.io/js/%40phensley%2Fcldr.svg)](https://www.npmjs.com/package/@phensley/cldr)
+
+- [Links](#links)
+- [Install](#install)
+- [Versioning](#versioning)
+- [Features](#features)
+- [Package Naming](#package-naming)
+- [Goals](#goals)
+- [License](#license)
+- [Affiliation](#affiliation)
 
 ## Links
 
