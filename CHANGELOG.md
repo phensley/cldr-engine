@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 
-- Upgrade to [tzdb 2019c](https://www.iana.org/time-zones)
+- Upgrade to [tzdb 2020a](https://www.iana.org/time-zones)
 - `CLDR.Numbers.parseDecimal` convenience method to parse a number or string into a `Decimal` instance.
 - `CLDR.Calendars.timeZoneFromUTC` and `CLDR.Calendars.timeZoneFromWall` convenience methods to lookup time zone info from either a UTC or local "wall clock" timestamp.
 
