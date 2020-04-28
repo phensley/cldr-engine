@@ -18,5 +18,5 @@ yarn
 yarn clean
 
 # build and publish packages
-lerna publish --exact --force-publish=* $*
+lerna publish --force-publish=* $*
 
