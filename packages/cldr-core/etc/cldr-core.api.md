@@ -24,10 +24,13 @@ import { DecimalArg } from '@phensley/decimal';
 import { DecimalConstants } from '@phensley/decimal';
 import { DecimalFormatter } from '@phensley/decimal';
 import { DefaultMessageArgConverter } from '@phensley/messageformat';
+import { DigitsArrow } from '@phensley/cldr-types';
 import { EraAltType } from '@phensley/cldr-types';
 import { EraWidthType } from '@phensley/cldr-types';
+import { FieldArrow } from '@phensley/cldr-types';
 import { FieldWidthType } from '@phensley/cldr-types';
 import { FormatWidthType } from '@phensley/cldr-types';
+import { KeyIndex } from '@phensley/cldr-types';
 import { KeyIndexMap } from '@phensley/cldr-types';
 import { LanguageIdType } from '@phensley/cldr-types';
 import { LanguageResolver } from '@phensley/locale';
@@ -70,7 +73,7 @@ import { RegionIdType } from '@phensley/cldr-types';
 import { RelativeTimeFieldType } from '@phensley/cldr-types';
 import { RoundingModeType } from '@phensley/decimal';
 import { Schema } from '@phensley/cldr-types';
-import { SchemaConfig } from '@phensley/cldr-schema';
+import { ScopeArrow } from '@phensley/cldr-types';
 import { ScriptIdType } from '@phensley/cldr-types';
 import { StringDecimalFormatter } from '@phensley/decimal';
 import { UnitInfo } from '@phensley/cldr-types';
@@ -521,6 +524,12 @@ export interface CLDROptions {
     skipChecksum?: boolean;
 }
 
+// @public (undocumented)
+export class CodeBuilder {
+    constructor(config: SchemaConfig);
+    origin(): Origin;
+}
+
 export { coerceDecimal }
 
 export { ContextTransformFieldType }
@@ -720,6 +729,40 @@ export class DecimalNumberingSystem extends NumberingSystem {
 export { DefaultMessageArgConverter }
 
 // @public (undocumented)
+export interface Digits {
+    // (undocumented)
+    readonly dim0: string;
+    // (undocumented)
+    readonly name: string;
+    // (undocumented)
+    readonly type: 'digits';
+    // (undocumented)
+    readonly values: number[];
+}
+
+// Warning: (ae-internal-missing-underscore) The name "digits" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
+export const digits: (name: string, dim0: string, values: number[]) => Digits;
+
+// @public
+export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
+    constructor(offset: number, index: KeyIndex<T>, values: number[]);
+    // (undocumented)
+    static EMPTY: [string, number];
+    // (undocumented)
+    get(bundle: PrimitiveBundle, key: T, digits: number): [string, number];
+    // (undocumented)
+    readonly index: KeyIndex<T>;
+    // (undocumented)
+    readonly offset: number;
+    // (undocumented)
+    readonly size2: number;
+    // (undocumented)
+    readonly values: number[];
+}
+
+// @public (undocumented)
 export interface DisplayNameOptions {
     // (undocumented)
     context?: ContextType;
@@ -755,6 +798,28 @@ export interface ExemplarCity {
 //
 // @internal
 export const fastFormatDecimal: (n: string, digits: string[], minInt: number) => string;
+
+// @public (undocumented)
+export interface Field {
+    // (undocumented)
+    readonly name: string;
+    // (undocumented)
+    readonly type: 'field';
+}
+
+// Warning: (ae-internal-missing-underscore) The name "field" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
+export const field: (name: string) => Field;
+
+// @public (undocumented)
+export class FieldArrowImpl implements FieldArrow {
+    constructor(offset: number);
+    // (undocumented)
+    get(bundle: PrimitiveBundle): string;
+    // (undocumented)
+    readonly offset: number;
+}
 
 export { FieldWidthType }
 
@@ -908,6 +973,9 @@ export class GregorianDate extends CalendarDate {
     protected _ymdToJD(y: number, m: number, d: number): number;
 }
 
+// @public (undocumented)
+export type Instruction = Digits | Field | Origin | Scope | ScopeMap | Vector;
+
 // Warning: (ae-internal-missing-underscore) The name "INTERNAL_NUMBERING" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
@@ -1002,6 +1070,23 @@ export class JapaneseDate extends GregorianDate {
     toString(): string;
     // (undocumented)
     withZone(zoneId: string): JapaneseDate;
+}
+
+// @public
+export class KeyIndexImpl<T extends string> implements KeyIndex<T> {
+    constructor(keys: T[]);
+    // (undocumented)
+    get(key: T): number;
+    // (undocumented)
+    readonly index: {
+        [P in T]: number;
+    };
+    // (undocumented)
+    readonly keys: T[];
+    // (undocumented)
+    readonly last: number;
+    // (undocumented)
+    readonly size: number;
 }
 
 export { LanguageIdType }
@@ -1292,6 +1377,30 @@ export interface NumericNumberSystem {
     readonly type: 'numeric';
 }
 
+// @public (undocumented)
+export interface Origin {
+    // (undocumented)
+    readonly block: Scope[];
+    // (undocumented)
+    getIndex(name: string): KeyIndex<any>;
+    // (undocumented)
+    getValues(name: string): string[];
+    // (undocumented)
+    readonly indices: {
+        [x: string]: KeyIndex<any>;
+    };
+    // (undocumented)
+    readonly type: 'origin';
+}
+
+// @internal (undocumented)
+const origin_2: (block: Scope[], indices: {
+    [x: string]: KeyIndex<any>;
+}) => Origin;
+
+// Warning: (ae-internal-missing-underscore) The name "origin" should be prefixed with an underscore because the declaration is marked as @internal
+export { origin_2 as origin }
+
 // @public
 export class Pack {
     constructor(data: any);
@@ -1465,7 +1574,87 @@ export interface RuleBasedFormatOptions {
 
 export { Schema }
 
-export { SchemaConfig }
+// @public (undocumented)
+export interface SchemaConfig {
+    // (undocumented)
+    ['buddhist-available-format']?: string[];
+    // (undocumented)
+    ['buddhist-interval-format']?: string[];
+    // (undocumented)
+    ['buddhist-plural-format']?: string[];
+    ['currency-id']?: string[];
+    ['gregorian-available-format']?: string[];
+    // (undocumented)
+    ['gregorian-interval-format']?: string[];
+    // (undocumented)
+    ['gregorian-plural-format']?: string[];
+    // (undocumented)
+    ['japanese-available-format']?: string[];
+    // (undocumented)
+    ['japanese-interval-format']?: string[];
+    // (undocumented)
+    ['japanese-plural-format']?: string[];
+    ['language-id']?: string[];
+    ['number-system-name']?: string[];
+    // (undocumented)
+    ['persian-available-format']?: string[];
+    // (undocumented)
+    ['persian-interval-format']?: string[];
+    // (undocumented)
+    ['persian-plural-format']?: string[];
+    ['region-id']?: string[];
+    ['script-id']?: string[];
+    ['timezone-id']?: string[];
+    ['unit-id']?: string[];
+    calendars?: string[];
+}
+
+// @public (undocumented)
+export interface Scope {
+    // (undocumented)
+    readonly block: Instruction[];
+    // (undocumented)
+    readonly identifier: string;
+    // (undocumented)
+    readonly name: string;
+    // (undocumented)
+    readonly type: 'scope';
+}
+
+// Warning: (ae-internal-missing-underscore) The name "scope" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
+export const scope: (name: string, identifier: string, block: Instruction[]) => Scope;
+
+// @public (undocumented)
+export class ScopeArrowImpl<T extends string, R> implements ScopeArrow<T, R> {
+    constructor(map: {
+        [P in T]: R;
+    });
+    // (undocumented)
+    get(key: T): R | undefined;
+    // (undocumented)
+    readonly map: {
+        [P in T]: R;
+    };
+}
+
+// @public (undocumented)
+export interface ScopeMap {
+    // (undocumented)
+    readonly block: Instruction[];
+    // (undocumented)
+    readonly fields: string;
+    // (undocumented)
+    readonly name: string;
+    // (undocumented)
+    readonly type: 'scopemap';
+}
+
+// Warning: (ae-internal-missing-underscore) The name "scopemap" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
+export const scopemap: (name: string, fields: string, block: Instruction[]) => ScopeMap;
 
 export { ScriptIdType }
 
@@ -1655,6 +1844,38 @@ export class UnitsInternalImpl implements UnitInternals {
     }
 
 export { UnitType }
+
+// @public (undocumented)
+export interface Vector {
+    // (undocumented)
+    readonly dims: string[];
+    // (undocumented)
+    readonly name: string;
+    // (undocumented)
+    readonly type: 'vector';
+}
+
+// Warning: (ae-internal-missing-underscore) The name "vector" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
+export const vector: (name: string, dims: string[]) => Vector;
+
+// @public
+export class VectorArrowImpl {
+    constructor(offset: number, keysets: KeyIndex<string>[]);
+    // (undocumented)
+    exists(bundle: PrimitiveBundle): boolean;
+    // (undocumented)
+    get(bundle: PrimitiveBundle, ...keys: (string | string[])[]): string;
+    // (undocumented)
+    readonly keysets: KeyIndex<string>[];
+    // (undocumented)
+    readonly len: number;
+    // (undocumented)
+    mapping(bundle: PrimitiveBundle): any;
+    // (undocumented)
+    readonly offset: number;
+}
 
 // @public (undocumented)
 export interface ZonedDateTime {
