@@ -1,0 +1,470 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>TimeZoneType · @phensley/cldr</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The identifier for a timezone, e.g. &#x27;`America/New_York`&#x27;."/><meta name="docsearch:version" content="1.1.2"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="TimeZoneType · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="The identifier for a timezone, e.g. &#x27;`America/New_York`&#x27;."/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.1.2</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/cldr-engine/docs/en/1.1.2/doc-index" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.1.2/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Calendars</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-cldrframework">CLDRFramework</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-cldroptions">CLDROptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-cldr">CLDR</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-cldr-calendars">CLDR.Calendars</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-cldr-general">CLDR.General</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-cldr-numbers">CLDR.Numbers</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-cldr-units">CLDR.Units</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-schemaconfig">SchemaConfig</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-buddhistdate">BuddhistDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-calendardate">CalendarDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-calendardatefields">CalendarDateFields</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-calendarfieldoptions">CalendarFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-calendartype">CalendarType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-datefieldtype">DateFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-datefieldformatoptions">DateFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-dateformataltoptions">DateFormatAltOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-dateformatoptions">DateFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-dateintervalformatoptions">DateIntervalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-daterawformatoptions">DateRawFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-dateskeleton">DateSkeleton</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-datetimepatternfieldtype">DateTimePatternFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-datewrapperformatoptions">DateWrapperFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-dayperiodalttype">DayPeriodAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-eraalttype">EraAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-erafieldoptions">EraFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-erawidthtype">EraWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-exemplarcity">ExemplarCity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-fieldwidthtype">FieldWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-formatwidthtype">FormatWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-gregoriandate">GregorianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-iso8601date">ISO8601Date</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-japanesedate">JapaneseDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-persiandate">PersianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-relativetimefieldtype">RelativeTimeFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-relativetimeformatoptions">RelativeTimeFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-relativetimefieldformatoptions">RelativeTimeFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-timeperiod">TimePeriod</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-timeperiodfield">TimePeriodField</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-timezoneinfo">TimeZoneInfo</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-timezonetype">TimeZoneType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-zoneddatetime">ZonedDateTime</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-contexttype">ContextType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-displaynameoptions">DisplayNameOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-languageidtype">LanguageIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-listpatterntype">ListPatternType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-measurementcategory">MeasurementCategory</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-measurementsystem">MeasurementSystem</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-regionidtype">RegionIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-scriptidtype">ScriptIdType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-bundle">Bundle</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-languagetag">LanguageTag</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-locale">Locale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-localematcher">LocaleMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-localematcheroptions">LocaleMatcherOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-decimal">Decimal</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-decimalconstants">DecimalConstants</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-mathcontext">MathContext</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-rational">Rational</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-roundingmodetype">RoundingModeType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Messages</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-buildmessagematcher">buildMessageMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-parsemessagepattern">parseMessagePattern</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-defaultmessageargconverter">DefaultMessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-messageargconverter">MessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-messagecode">MessageCode</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-messageengine">MessageEngine</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-messageformatfuncmap">MessageFormatFuncMap</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-messageformatter">MessageFormatter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-messageformatteroptions">MessageFormatterOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-messagematcher">MessageMatcher</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Numbers</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-currencyformatoptions">CurrencyFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-currencyformatstyletype">CurrencyFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-currencysymbolwidthtype">CurrencySymbolWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-currencytype">CurrencyType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-decimaladjustoptions">DecimalAdjustOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-decimalformatoptions">DecimalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-decimalformatstyletype">DecimalFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-numberformaterrortype">NumberFormatErrorType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-numbersystemtype">NumberSystemType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Units</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-quantity">Quantity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-unitformatoptions">UnitFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-unitformatstyletype">UnitFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-unitlength">UnitLength</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/api-unittype">UnitType</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">TimeZoneType</h1></header><article><div><span><p>The identifier for a timezone, e.g. '<code>America/New_York</code>'.</p>
+<h3><a class="anchor" aria-hidden="true" id="syntax"></a><a href="#syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h3>
+<pre class="syntax">
+'Africa/Abidjan' | 'Africa/Accra' ... 'Pacific/Wallis' | 'WET'
+</pre>
+<h3><a class="anchor" aria-hidden="true" id="values"></a><a href="#values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Values</h3>
+<ul>
+<li>'Africa/Abidjan'</li>
+<li>'Africa/Accra'</li>
+<li>'Africa/Algiers'</li>
+<li>'Africa/Bissau'</li>
+<li>'Africa/Cairo'</li>
+<li>'Africa/Casablanca'</li>
+<li>'Africa/Ceuta'</li>
+<li>'Africa/El_Aaiun'</li>
+<li>'Africa/Johannesburg'</li>
+<li>'Africa/Juba'</li>
+<li>'Africa/Khartoum'</li>
+<li>'Africa/Lagos'</li>
+<li>'Africa/Maputo'</li>
+<li>'Africa/Monrovia'</li>
+<li>'Africa/Nairobi'</li>
+<li>'Africa/Ndjamena'</li>
+<li>'Africa/Sao_Tome'</li>
+<li>'Africa/Tripoli'</li>
+<li>'Africa/Tunis'</li>
+<li>'Africa/Windhoek'</li>
+<li>'America/Adak'</li>
+<li>'America/Anchorage'</li>
+<li>'America/Araguaina'</li>
+<li>'America/Argentina/Buenos_Aires'</li>
+<li>'America/Argentina/Catamarca'</li>
+<li>'America/Argentina/Cordoba'</li>
+<li>'America/Argentina/Jujuy'</li>
+<li>'America/Argentina/La_Rioja'</li>
+<li>'America/Argentina/Mendoza'</li>
+<li>'America/Argentina/Rio_Gallegos'</li>
+<li>'America/Argentina/Salta'</li>
+<li>'America/Argentina/San_Juan'</li>
+<li>'America/Argentina/San_Luis'</li>
+<li>'America/Argentina/Tucuman'</li>
+<li>'America/Argentina/Ushuaia'</li>
+<li>'America/Asuncion'</li>
+<li>'America/Atikokan'</li>
+<li>'America/Bahia'</li>
+<li>'America/Bahia_Banderas'</li>
+<li>'America/Barbados'</li>
+<li>'America/Belem'</li>
+<li>'America/Belize'</li>
+<li>'America/Blanc-Sablon'</li>
+<li>'America/Boa_Vista'</li>
+<li>'America/Bogota'</li>
+<li>'America/Boise'</li>
+<li>'America/Cambridge_Bay'</li>
+<li>'America/Campo_Grande'</li>
+<li>'America/Cancun'</li>
+<li>'America/Caracas'</li>
+<li>'America/Cayenne'</li>
+<li>'America/Chicago'</li>
+<li>'America/Chihuahua'</li>
+<li>'America/Costa_Rica'</li>
+<li>'America/Creston'</li>
+<li>'America/Cuiaba'</li>
+<li>'America/Curacao'</li>
+<li>'America/Danmarkshavn'</li>
+<li>'America/Dawson'</li>
+<li>'America/Dawson_Creek'</li>
+<li>'America/Denver'</li>
+<li>'America/Detroit'</li>
+<li>'America/Edmonton'</li>
+<li>'America/Eirunepe'</li>
+<li>'America/El_Salvador'</li>
+<li>'America/Fort_Nelson'</li>
+<li>'America/Fortaleza'</li>
+<li>'America/Glace_Bay'</li>
+<li>'America/Godthab'</li>
+<li>'America/Goose_Bay'</li>
+<li>'America/Grand_Turk'</li>
+<li>'America/Guatemala'</li>
+<li>'America/Guayaquil'</li>
+<li>'America/Guyana'</li>
+<li>'America/Halifax'</li>
+<li>'America/Havana'</li>
+<li>'America/Hermosillo'</li>
+<li>'America/Indiana/Indianapolis'</li>
+<li>'America/Indiana/Knox'</li>
+<li>'America/Indiana/Marengo'</li>
+<li>'America/Indiana/Petersburg'</li>
+<li>'America/Indiana/Tell_City'</li>
+<li>'America/Indiana/Vevay'</li>
+<li>'America/Indiana/Vincennes'</li>
+<li>'America/Indiana/Winamac'</li>
+<li>'America/Inuvik'</li>
+<li>'America/Iqaluit'</li>
+<li>'America/Jamaica'</li>
+<li>'America/Juneau'</li>
+<li>'America/Kentucky/Louisville'</li>
+<li>'America/Kentucky/Monticello'</li>
+<li>'America/La_Paz'</li>
+<li>'America/Lima'</li>
+<li>'America/Los_Angeles'</li>
+<li>'America/Maceio'</li>
+<li>'America/Managua'</li>
+<li>'America/Manaus'</li>
+<li>'America/Martinique'</li>
+<li>'America/Matamoros'</li>
+<li>'America/Mazatlan'</li>
+<li>'America/Menominee'</li>
+<li>'America/Merida'</li>
+<li>'America/Metlakatla'</li>
+<li>'America/Mexico_City'</li>
+<li>'America/Miquelon'</li>
+<li>'America/Moncton'</li>
+<li>'America/Monterrey'</li>
+<li>'America/Montevideo'</li>
+<li>'America/Nassau'</li>
+<li>'America/New_York'</li>
+<li>'America/Nipigon'</li>
+<li>'America/Nome'</li>
+<li>'America/Noronha'</li>
+<li>'America/North_Dakota/Beulah'</li>
+<li>'America/North_Dakota/Center'</li>
+<li>'America/North_Dakota/New_Salem'</li>
+<li>'America/Ojinaga'</li>
+<li>'America/Panama'</li>
+<li>'America/Pangnirtung'</li>
+<li>'America/Paramaribo'</li>
+<li>'America/Phoenix'</li>
+<li>'America/Port-au-Prince'</li>
+<li>'America/Port_of_Spain'</li>
+<li>'America/Porto_Velho'</li>
+<li>'America/Puerto_Rico'</li>
+<li>'America/Punta_Arenas'</li>
+<li>'America/Rainy_River'</li>
+<li>'America/Rankin_Inlet'</li>
+<li>'America/Recife'</li>
+<li>'America/Regina'</li>
+<li>'America/Resolute'</li>
+<li>'America/Rio_Branco'</li>
+<li>'America/Santarem'</li>
+<li>'America/Santiago'</li>
+<li>'America/Santo_Domingo'</li>
+<li>'America/Sao_Paulo'</li>
+<li>'America/Scoresbysund'</li>
+<li>'America/Sitka'</li>
+<li>'America/St_Johns'</li>
+<li>'America/Swift_Current'</li>
+<li>'America/Tegucigalpa'</li>
+<li>'America/Thule'</li>
+<li>'America/Thunder_Bay'</li>
+<li>'America/Tijuana'</li>
+<li>'America/Toronto'</li>
+<li>'America/Vancouver'</li>
+<li>'America/Whitehorse'</li>
+<li>'America/Winnipeg'</li>
+<li>'America/Yakutat'</li>
+<li>'America/Yellowknife'</li>
+<li>'Antarctica/Casey'</li>
+<li>'Antarctica/Davis'</li>
+<li>'Antarctica/DumontDUrville'</li>
+<li>'Antarctica/Macquarie'</li>
+<li>'Antarctica/Mawson'</li>
+<li>'Antarctica/Palmer'</li>
+<li>'Antarctica/Rothera'</li>
+<li>'Antarctica/Syowa'</li>
+<li>'Antarctica/Troll'</li>
+<li>'Antarctica/Vostok'</li>
+<li>'Asia/Almaty'</li>
+<li>'Asia/Amman'</li>
+<li>'Asia/Anadyr'</li>
+<li>'Asia/Aqtau'</li>
+<li>'Asia/Aqtobe'</li>
+<li>'Asia/Ashgabat'</li>
+<li>'Asia/Atyrau'</li>
+<li>'Asia/Baghdad'</li>
+<li>'Asia/Baku'</li>
+<li>'Asia/Bangkok'</li>
+<li>'Asia/Barnaul'</li>
+<li>'Asia/Beirut'</li>
+<li>'Asia/Bishkek'</li>
+<li>'Asia/Brunei'</li>
+<li>'Asia/Chita'</li>
+<li>'Asia/Choibalsan'</li>
+<li>'Asia/Colombo'</li>
+<li>'Asia/Damascus'</li>
+<li>'Asia/Dhaka'</li>
+<li>'Asia/Dili'</li>
+<li>'Asia/Dubai'</li>
+<li>'Asia/Dushanbe'</li>
+<li>'Asia/Famagusta'</li>
+<li>'Asia/Gaza'</li>
+<li>'Asia/Hebron'</li>
+<li>'Asia/Ho_Chi_Minh'</li>
+<li>'Asia/Hong_Kong'</li>
+<li>'Asia/Hovd'</li>
+<li>'Asia/Irkutsk'</li>
+<li>'Asia/Jakarta'</li>
+<li>'Asia/Jayapura'</li>
+<li>'Asia/Jerusalem'</li>
+<li>'Asia/Kabul'</li>
+<li>'Asia/Kamchatka'</li>
+<li>'Asia/Karachi'</li>
+<li>'Asia/Kathmandu'</li>
+<li>'Asia/Khandyga'</li>
+<li>'Asia/Kolkata'</li>
+<li>'Asia/Krasnoyarsk'</li>
+<li>'Asia/Kuala_Lumpur'</li>
+<li>'Asia/Kuching'</li>
+<li>'Asia/Macau'</li>
+<li>'Asia/Magadan'</li>
+<li>'Asia/Makassar'</li>
+<li>'Asia/Manila'</li>
+<li>'Asia/Nicosia'</li>
+<li>'Asia/Novokuznetsk'</li>
+<li>'Asia/Novosibirsk'</li>
+<li>'Asia/Omsk'</li>
+<li>'Asia/Oral'</li>
+<li>'Asia/Pontianak'</li>
+<li>'Asia/Pyongyang'</li>
+<li>'Asia/Qatar'</li>
+<li>'Asia/Qostanay'</li>
+<li>'Asia/Qyzylorda'</li>
+<li>'Asia/Riyadh'</li>
+<li>'Asia/Sakhalin'</li>
+<li>'Asia/Samarkand'</li>
+<li>'Asia/Seoul'</li>
+<li>'Asia/Shanghai'</li>
+<li>'Asia/Singapore'</li>
+<li>'Asia/Srednekolymsk'</li>
+<li>'Asia/Taipei'</li>
+<li>'Asia/Tashkent'</li>
+<li>'Asia/Tbilisi'</li>
+<li>'Asia/Tehran'</li>
+<li>'Asia/Thimphu'</li>
+<li>'Asia/Tokyo'</li>
+<li>'Asia/Tomsk'</li>
+<li>'Asia/Ulaanbaatar'</li>
+<li>'Asia/Urumqi'</li>
+<li>'Asia/Ust-Nera'</li>
+<li>'Asia/Vladivostok'</li>
+<li>'Asia/Yakutsk'</li>
+<li>'Asia/Yangon'</li>
+<li>'Asia/Yekaterinburg'</li>
+<li>'Asia/Yerevan'</li>
+<li>'Atlantic/Azores'</li>
+<li>'Atlantic/Bermuda'</li>
+<li>'Atlantic/Canary'</li>
+<li>'Atlantic/Cape_Verde'</li>
+<li>'Atlantic/Faroe'</li>
+<li>'Atlantic/Madeira'</li>
+<li>'Atlantic/Reykjavik'</li>
+<li>'Atlantic/South_Georgia'</li>
+<li>'Atlantic/Stanley'</li>
+<li>'Australia/Adelaide'</li>
+<li>'Australia/Brisbane'</li>
+<li>'Australia/Broken_Hill'</li>
+<li>'Australia/Currie'</li>
+<li>'Australia/Darwin'</li>
+<li>'Australia/Eucla'</li>
+<li>'Australia/Hobart'</li>
+<li>'Australia/Lindeman'</li>
+<li>'Australia/Lord_Howe'</li>
+<li>'Australia/Melbourne'</li>
+<li>'Australia/Perth'</li>
+<li>'Australia/Sydney'</li>
+<li>'CET'</li>
+<li>'CST6CDT'</li>
+<li>'EET'</li>
+<li>'EST'</li>
+<li>'EST5EDT'</li>
+<li>'Etc/GMT'</li>
+<li>'Etc/GMT+1'</li>
+<li>'Etc/GMT+10'</li>
+<li>'Etc/GMT+11'</li>
+<li>'Etc/GMT+12'</li>
+<li>'Etc/GMT+2'</li>
+<li>'Etc/GMT+3'</li>
+<li>'Etc/GMT+4'</li>
+<li>'Etc/GMT+5'</li>
+<li>'Etc/GMT+6'</li>
+<li>'Etc/GMT+7'</li>
+<li>'Etc/GMT+8'</li>
+<li>'Etc/GMT+9'</li>
+<li>'Etc/GMT-1'</li>
+<li>'Etc/GMT-10'</li>
+<li>'Etc/GMT-11'</li>
+<li>'Etc/GMT-12'</li>
+<li>'Etc/GMT-13'</li>
+<li>'Etc/GMT-14'</li>
+<li>'Etc/GMT-2'</li>
+<li>'Etc/GMT-3'</li>
+<li>'Etc/GMT-4'</li>
+<li>'Etc/GMT-5'</li>
+<li>'Etc/GMT-6'</li>
+<li>'Etc/GMT-7'</li>
+<li>'Etc/GMT-8'</li>
+<li>'Etc/GMT-9'</li>
+<li>'Etc/UTC'</li>
+<li>'Europe/Amsterdam'</li>
+<li>'Europe/Andorra'</li>
+<li>'Europe/Astrakhan'</li>
+<li>'Europe/Athens'</li>
+<li>'Europe/Belgrade'</li>
+<li>'Europe/Berlin'</li>
+<li>'Europe/Brussels'</li>
+<li>'Europe/Bucharest'</li>
+<li>'Europe/Budapest'</li>
+<li>'Europe/Chisinau'</li>
+<li>'Europe/Copenhagen'</li>
+<li>'Europe/Dublin'</li>
+<li>'Europe/Gibraltar'</li>
+<li>'Europe/Helsinki'</li>
+<li>'Europe/Istanbul'</li>
+<li>'Europe/Kaliningrad'</li>
+<li>'Europe/Kiev'</li>
+<li>'Europe/Kirov'</li>
+<li>'Europe/Lisbon'</li>
+<li>'Europe/London'</li>
+<li>'Europe/Luxembourg'</li>
+<li>'Europe/Madrid'</li>
+<li>'Europe/Malta'</li>
+<li>'Europe/Minsk'</li>
+<li>'Europe/Monaco'</li>
+<li>'Europe/Moscow'</li>
+<li>'Europe/Oslo'</li>
+<li>'Europe/Paris'</li>
+<li>'Europe/Prague'</li>
+<li>'Europe/Riga'</li>
+<li>'Europe/Rome'</li>
+<li>'Europe/Samara'</li>
+<li>'Europe/Saratov'</li>
+<li>'Europe/Simferopol'</li>
+<li>'Europe/Sofia'</li>
+<li>'Europe/Stockholm'</li>
+<li>'Europe/Tallinn'</li>
+<li>'Europe/Tirane'</li>
+<li>'Europe/Ulyanovsk'</li>
+<li>'Europe/Uzhgorod'</li>
+<li>'Europe/Vienna'</li>
+<li>'Europe/Vilnius'</li>
+<li>'Europe/Volgograd'</li>
+<li>'Europe/Warsaw'</li>
+<li>'Europe/Zaporozhye'</li>
+<li>'Europe/Zurich'</li>
+<li>'Factory'</li>
+<li>'HST'</li>
+<li>'Indian/Chagos'</li>
+<li>'Indian/Christmas'</li>
+<li>'Indian/Cocos'</li>
+<li>'Indian/Kerguelen'</li>
+<li>'Indian/Mahe'</li>
+<li>'Indian/Maldives'</li>
+<li>'Indian/Mauritius'</li>
+<li>'Indian/Reunion'</li>
+<li>'MET'</li>
+<li>'MST'</li>
+<li>'MST7MDT'</li>
+<li>'PST8PDT'</li>
+<li>'Pacific/Apia'</li>
+<li>'Pacific/Auckland'</li>
+<li>'Pacific/Bougainville'</li>
+<li>'Pacific/Chatham'</li>
+<li>'Pacific/Chuuk'</li>
+<li>'Pacific/Easter'</li>
+<li>'Pacific/Efate'</li>
+<li>'Pacific/Enderbury'</li>
+<li>'Pacific/Fakaofo'</li>
+<li>'Pacific/Fiji'</li>
+<li>'Pacific/Funafuti'</li>
+<li>'Pacific/Galapagos'</li>
+<li>'Pacific/Gambier'</li>
+<li>'Pacific/Guadalcanal'</li>
+<li>'Pacific/Guam'</li>
+<li>'Pacific/Honolulu'</li>
+<li>'Pacific/Kiritimati'</li>
+<li>'Pacific/Kosrae'</li>
+<li>'Pacific/Kwajalein'</li>
+<li>'Pacific/Majuro'</li>
+<li>'Pacific/Marquesas'</li>
+<li>'Pacific/Nauru'</li>
+<li>'Pacific/Niue'</li>
+<li>'Pacific/Norfolk'</li>
+<li>'Pacific/Noumea'</li>
+<li>'Pacific/Pago_Pago'</li>
+<li>'Pacific/Palau'</li>
+<li>'Pacific/Pitcairn'</li>
+<li>'Pacific/Pohnpei'</li>
+<li>'Pacific/Port_Moresby'</li>
+<li>'Pacific/Rarotonga'</li>
+<li>'Pacific/Tahiti'</li>
+<li>'Pacific/Tarawa'</li>
+<li>'Pacific/Tongatapu'</li>
+<li>'Pacific/Wake'</li>
+<li>'Pacific/Wallis'</li>
+<li>'WET'</li>
+</ul>
+<p><h3><a class="anchor" aria-hidden="true" id="references"></a><a href="#references" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>References</h3>
+<ul>
+<li class="list"><a href="api-calendardate.html">CalendarDate</a>
+<ul>
+<li>.<a href="api-calendardate.html#withzone">withZone</a></li>
+</ul></li>
+<li class="list"><a href="api-timezoneinfo.html">TimeZoneInfo</a></li>
+</ul>
+</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.1.2/api-timezoneinfo"><span class="arrow-prev">← </span><span class="function-name-prevnext">TimeZoneInfo</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.1.2/api-zoneddatetime"><span class="function-name-prevnext">ZonedDateTime</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>

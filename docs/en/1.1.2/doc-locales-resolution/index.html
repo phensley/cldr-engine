@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Locale resolution · @phensley/cldr</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Resolution is the process of filling in any undefined subtags, and replacing subtag aliases with a preferred value."/><meta name="docsearch:version" content="1.1.2"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Locale resolution · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="Resolution is the process of filling in any undefined subtags, and replacing subtag aliases with a preferred value."/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.1.2</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.1.2/doc-index" target="_self">Docs</a></li><li class=""><a href="/cldr-engine/docs/en/1.1.2/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Locales</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-index">Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-goals">Goals</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-faq">Rationale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-quickstart">Quick start</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-locales-parsing">Locale parsing</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-locales-resolution">Locale resolution</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-locales-matching">Language matching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-calendar-overview">Calendar Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-calendar-examples">Example: date formatting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-math">Arbitrary Precision</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-math-example-factorial">Example: factorial</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-math-example-rational-approx">Math: rational approximation</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-math-example-contd-fractions">Math: continued fractions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Message Formatting</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-messageformatting">Usage</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-messageformatting-custom">Customization</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Design</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-design-bundles">Resource bundles</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.1.2/doc-design-caching">Caching</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Locale resolution</h1></header><article><div><span><p>Resolution is the process of filling in any undefined subtags, and replacing subtag aliases with a preferred value.</p>
+<p>The function <a href="api-cldrframework.html#resolvelocale">CLDRFramework.resolveLocale</a> performs both parsing and resolution, returning a <a href="api-locale.html">Locale</a> object.</p>
+<p>A <a href="api-locale.html">Locale</a> object has two properties: <code>id</code> is the original unaltered identifier, and <code>tag</code> is the <a href="api-languagetag.html">LanguageTag</a> object with its subtags resolved and normalized.</p>
+<p>The resolution process and the <a href="api-locale.html">Locale</a> object are important since there are parts of the library which require the value for a specific subtag. For example, pluralization uses the language subtag, and selecting a measurement system (US, UK, Metric) uses the region subtag. The resolution process ensures these subtags are populated.</p>
+<p>In the example below, the identifier <code>&quot;und-US&quot;</code> uses the undefined language subtag, and its script subtag is missing. The resolution process will apply <a href="https://www.unicode.org/reports/tr35/tr35.html#Likely_Subtags">&quot;likely subtags&quot;</a> data to fill in these undefined values.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">import</span> { CLDRFramework } <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr'</span>;
+
+<span class="hljs-keyword">let</span> { id, tag } = CLDRFramework.resolveLocale(<span class="hljs-string">'und-US'</span>);
+log(id);
+log(tag.expanded());
+</code></pre>
+<pre class="output">
+und-US
+en-Latn-US
+</pre>
+<p>In other cases a subtag is aliased to a preferred value that should be used. Resolution will perform language and region alias substitution.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> { id, tag } = CLDRFramework.resolveLocale(<span class="hljs-string">'cmn-TW'</span>);
+log(tag.compact());
+</code></pre>
+<pre class="output">
+zh-Hant-TW
+</pre>
+<p>Irregular or grandfathered tags are mapped directly to a replacement value.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> { id, tag } = CLDRFramework.resolveLocale(<span class="hljs-string">'i-klingon'</span>);
+log(tag.language());
+</code></pre>
+<pre class="output">
+tlh
+</pre>
+<p>If all subtags are undefined, as in <code>&quot;und-Zzzz-ZZ&quot;</code> the library currently resolves this to <code>&quot;en-Latn-US&quot;</code>. Language resolution alone should not be relied on to perform quasi-language matching or defaulting. See the <a href="doc-locales-matching.html">language matching</a> section for more on this.</p>
+<h4><a class="anchor" aria-hidden="true" id="see-also"></a><a href="#see-also" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>See Also</h4>
+<ul>
+<li class="list"><a href="api-localematcher.html">LocaleMatcher</a></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.1.2/doc-locales-parsing"><span class="arrow-prev">← </span><span>Locale parsing</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.1.2/doc-locales-matching"><span>Language matching</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>

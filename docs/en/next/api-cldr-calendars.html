@@ -489,7 +489,7 @@ formatDateWrapper(date, time, options?): string
 log(cldr.Calendars.formatDateWrapper(date, time, { width: <span class="hljs-string">'full'</span> }));
 </code></pre>
 <pre class="output">
-Next Wednesday at 4:13:20 PM
+Next Wednesday at 12:22:42 PM
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="formatdatewrappertoparts"></a><a href="#formatdatewrappertoparts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatDateWrapperToParts</h2>
 <p>Formats a date and time <code>Part[]</code> together using a wrapper format of the given width. This can be
@@ -535,11 +535,11 @@ log(
 [
   { type: 'reldate', value: 'Next Wednesday' },
   { type: 'literal', value: ' at ' },
-  { type: 'hour', value: '4' },
+  { type: 'hour', value: '12' },
   { type: 'literal', value: ':' },
-  { type: 'minute', value: '13' },
+  { type: 'minute', value: '22' },
   { type: 'literal', value: ':' },
-  { type: 'second', value: '20' },
+  { type: 'second', value: '42' },
   { type: 'literal', value: ' ' },
   { type: 'dayperiod', value: 'PM' }
 ]
@@ -817,8 +817,8 @@ log(en.Calendars.nowBuddhist());
 log(en.Calendars.nowBuddhist(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Buddhist 2020-04-20 16:13:20.158 Etc/UTC
-Buddhist 2020-04-20 09:13:20.158 America/Los_Angeles
+Buddhist 2020-04-29 12:22:42.587 Etc/UTC
+Buddhist 2020-04-29 05:22:42.588 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowgregorian"></a><a href="#nowgregorian" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowGregorian</h2>
 <p>Construct a date in the Gregorian calendar representing the current date and time.</p>
@@ -839,8 +839,8 @@ log(en.Calendars.nowGregorian());
 log(en.Calendars.nowGregorian(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Gregorian 2020-04-20 16:13:20.161 Etc/UTC
-Gregorian 2020-04-20 09:13:20.161 America/Los_Angeles
+Gregorian 2020-04-29 12:22:42.591 Etc/UTC
+Gregorian 2020-04-29 05:22:42.591 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowiso8601"></a><a href="#nowiso8601" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowISO8601</h2>
 <p>Construct a date in the ISO8601 calendar representing the current date and time.</p>
@@ -861,8 +861,8 @@ log(en.Calendars.nowISO8601());
 log(en.Calendars.nowISO8601(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-ISO8601 2020-04-20 16:13:20.163 Etc/UTC
-ISO8601 2020-04-20 09:13:20.163 America/Los_Angeles
+ISO8601 2020-04-29 12:22:42.593 Etc/UTC
+ISO8601 2020-04-29 05:22:42.593 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowjapanese"></a><a href="#nowjapanese" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowJapanese</h2>
 <p>Construct a date in the Japanese calendar representing the current date and time.</p>
@@ -883,8 +883,8 @@ log(en.Calendars.nowJapanese());
 log(en.Calendars.nowJapanese(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Japanese 2020-04-20 16:13:20.166 Etc/UTC
-Japanese 2020-04-20 09:13:20.166 America/Los_Angeles
+Japanese 2020-04-29 12:22:42.596 Etc/UTC
+Japanese 2020-04-29 05:22:42.596 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowpersian"></a><a href="#nowpersian" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowPersian</h2>
 <p>Construct a date in the Persian calendar representing the current date and time.</p>
@@ -905,8 +905,8 @@ log(en.Calendars.nowPersian());
 log(en.Calendars.nowPersian(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Persian 1399-02-01 16:13:20.168 Etc/UTC
-Persian 1399-02-01 09:13:20.169 America/Los_Angeles
+Persian 1399-02-10 12:22:42.599 Etc/UTC
+Persian 1399-02-10 05:22:42.599 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="quarters"></a><a href="#quarters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>quarters</h2>
 <p>Return a mapping of quarter ordinal number to name for the current locale.</p>
@@ -1022,20 +1022,93 @@ Africa/Johannesburg
 Africa/Juba
 ...
 </pre>
-<h2><a class="anchor" aria-hidden="true" id="timezoneinfo"></a><a href="#timezoneinfo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>timeZoneInfo</h2>
-<p>Returns an array of <code>TimeZoneInfo</code> objects, including the exemplar city for each.</p>
-<h4><a class="anchor" aria-hidden="true" id="syntax-33"></a><a href="#syntax-33" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<h2><a class="anchor" aria-hidden="true" id="timezonefromutc"></a><a href="#timezonefromutc" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>timeZoneFromUTC</h2>
+<p>Returns the timezone info in effect for a timezone at a given UTC instant.</p>
 <pre class="syntax">
-timeZoneInfo(id): TimeZoneInfo[]
+timeZoneFromUTC(timestamp, zoneid): ZoneInfo
 </pre>
 <h4><a class="anchor" aria-hidden="true" id="parameters-28"></a><a href="#parameters-28" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
 <ul>
+<li><code class="def">timestamp: <span>number</span></code>
+<ul>
+<li>UTC timestamp in milliseconds.</li>
+</ul></li>
 <li><code class="def">id: <span>string</span></code>
 <ul>
 <li>Time zone identifier.</li>
 </ul></li>
 </ul>
 <h4><a class="anchor" aria-hidden="true" id="example-27"></a><a href="#example-27" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> zoneid = <span class="hljs-string">'America/New_York'</span>;
+<span class="hljs-comment">// Sun Mar 8 2020 6:59 AM UTC</span>
+log(en.Calendars.timeZoneFromUTC(<span class="hljs-number">1583650740000</span>, zoneid));
+<span class="hljs-comment">// 1 minute later</span>
+log(en.Calendars.timeZoneFromUTC(<span class="hljs-number">1583650800000</span>, zoneid));
+</code></pre>
+<pre class="output">
+{ abbr: 'EST', dst: 0, offset: -18000000, zoneid: 'America/New_York' }
+{ abbr: 'EDT', dst: 1, offset: -14400000, zoneid: 'America/New_York' }
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="timezonefromwall"></a><a href="#timezonefromwall" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>timeZoneFromWall</h2>
+<p>Returns the timezone info in effect for a timezone at a given local &quot;wall clock&quot; instant. It returns a pair containing the adjusted UTC timestamp for the instant, and the timezone info.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-33"></a><a href="#syntax-33" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+timeZoneFromWall(timestamp, zoneid): [number, ZoneInfo]
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-29"></a><a href="#parameters-29" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">timestamp: <span>number</span></code>
+<ul>
+<li>Local &quot;wall clock&quot; timestamp in milliseconds.</li>
+</ul></li>
+<li><code class="def">id: <span>string</span></code>
+<ul>
+<li>Time zone identifier.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-28"></a><a href="#example-28" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> zoneid = <span class="hljs-string">'America/New_York'</span>;
+<span class="hljs-comment">// Sun Mar 8 2020 1:59 AM NY time</span>
+log(en.Calendars.timeZoneFromWall(<span class="hljs-number">1583632740000</span>, zoneid));
+<span class="hljs-comment">// 1 minute later</span>
+log(en.Calendars.timeZoneFromWall(<span class="hljs-number">1583632800000</span>, zoneid));
+</code></pre>
+<pre class="output">
+[
+  1583650740000,
+  {
+    abbr: 'EST',
+    dst: 0,
+    offset: -18000000,
+    zoneid: 'America/New_York'
+  }
+]
+[
+  1583650800000,
+  {
+    abbr: 'EDT',
+    dst: 1,
+    offset: -14400000,
+    zoneid: 'America/New_York'
+  }
+]
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="timezoneinfo"></a><a href="#timezoneinfo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>timeZoneInfo</h2>
+<p>Returns an array of <code>TimeZoneInfo</code> objects, including the exemplar city for each.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-34"></a><a href="#syntax-34" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+timeZoneInfo(id): TimeZoneInfo[]
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-30"></a><a href="#parameters-30" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">id: <span>string</span></code>
+<ul>
+<li>Time zone identifier.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-29"></a><a href="#example-29" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
 <span class="hljs-keyword">const</span> ids = en.Calendars.timeZoneIds();
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id of ids.slice(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)) {
@@ -1058,18 +1131,18 @@ log(<span class="hljs-string">'...'</span>);
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="tobuddhistdate"></a><a href="#tobuddhistdate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>toBuddhistDate</h2>
 <p>Converts a date to a <a href="api-buddhistdate.html">BuddhistDate</a> instance.</p>
-<h4><a class="anchor" aria-hidden="true" id="syntax-34"></a><a href="#syntax-34" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<h4><a class="anchor" aria-hidden="true" id="syntax-35"></a><a href="#syntax-35" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
 <pre class="syntax">
 toBuddhistDate(date): BuddhistDate
 </pre>
-<h4><a class="anchor" aria-hidden="true" id="parameters-29"></a><a href="#parameters-29" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<h4><a class="anchor" aria-hidden="true" id="parameters-31"></a><a href="#parameters-31" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
 <ul>
 <li><code class="def">date: <span><a href="api-calendardate.html">CalendarDate</a> | <a href="api-zoneddatetime.html">ZonedDateTime</a> | Date</span></code>
 <ul>
 <li>Date or timestamp to convert</li>
 </ul></li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="example-28"></a><a href="#example-28" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<h4><a class="anchor" aria-hidden="true" id="example-30"></a><a href="#example-30" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
 log(
   cldr.Calendars.toBuddhistDate({
@@ -1083,18 +1156,18 @@ Buddhist 2018-06-27 14:41:12.456 America/New_York
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="togregoriandate"></a><a href="#togregoriandate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>toGregorianDate</h2>
 <p>Converts a date to a <a href="api-gregoriandate.html">GregorianDate</a> instance.</p>
-<h4><a class="anchor" aria-hidden="true" id="syntax-35"></a><a href="#syntax-35" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<h4><a class="anchor" aria-hidden="true" id="syntax-36"></a><a href="#syntax-36" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
 <pre class="syntax">
 toGregorianDate(date): GregorianDate
 </pre>
-<h4><a class="anchor" aria-hidden="true" id="parameters-30"></a><a href="#parameters-30" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<h4><a class="anchor" aria-hidden="true" id="parameters-32"></a><a href="#parameters-32" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
 <ul>
 <li><code class="def">date: <span><a href="api-calendardate.html">CalendarDate</a> | <a href="api-zoneddatetime.html">ZonedDateTime</a> | Date</span></code>
 <ul>
 <li>Date or timestamp to convert</li>
 </ul></li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="example-29"></a><a href="#example-29" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<h4><a class="anchor" aria-hidden="true" id="example-31"></a><a href="#example-31" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
 log(
   cldr.Calendars.toGregorianDate({
@@ -1128,14 +1201,14 @@ Gregorian 2018-07-17 12:34:56.789 America/New_York
 <pre class="syntax">
 toISO8601Date(date): ISO8601Date
 </pre>
-<h4><a class="anchor" aria-hidden="true" id="parameters-31"></a><a href="#parameters-31" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<h4><a class="anchor" aria-hidden="true" id="parameters-33"></a><a href="#parameters-33" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
 <ul>
 <li><code class="def">date: <span><a href="api-calendardate.html">CalendarDate</a> | <a href="api-zoneddatetime.html">ZonedDateTime</a> | Date</span></code>
 <ul>
 <li>Date or timestamp to convert</li>
 </ul></li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="example-30"></a><a href="#example-30" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<h4><a class="anchor" aria-hidden="true" id="example-32"></a><a href="#example-32" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
 <span class="hljs-keyword">const</span> weekdays = cldr.Calendars.weekdays();
 <span class="hljs-keyword">const</span> date = cldr.Calendars.toGregorianDate({ date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2017</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>) });
@@ -1158,14 +1231,14 @@ gregorian week starts on Sunday, week of year: 2017-1
 <pre class="syntax">
 toJapaneseDate(date): JapaneseDate
 </pre>
-<h4><a class="anchor" aria-hidden="true" id="parameters-32"></a><a href="#parameters-32" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<h4><a class="anchor" aria-hidden="true" id="parameters-34"></a><a href="#parameters-34" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
 <ul>
 <li><code class="def">date: <span><a href="api-calendardate.html">CalendarDate</a> | <a href="api-zoneddatetime.html">ZonedDateTime</a> | Date</span></code>
 <ul>
 <li>Date or timestamp to convert</li>
 </ul></li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="example-31"></a><a href="#example-31" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<h4><a class="anchor" aria-hidden="true" id="example-33"></a><a href="#example-33" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
 <span class="hljs-keyword">const</span> date = cldr.Calendars.toJapaneseDate({
   date: <span class="hljs-number">1530124872456</span>,
@@ -1185,7 +1258,7 @@ Japanese 2018-06-27 14:41:12.456 America/New_York
 <pre class="syntax">
 toPersianDate(date): PersianDate
 </pre>
-<h4><a class="anchor" aria-hidden="true" id="parameters-33"></a><a href="#parameters-33" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<h4><a class="anchor" aria-hidden="true" id="parameters-35"></a><a href="#parameters-35" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
 <ul>
 <li><code class="def">date: <span><a href="api-calendardate.html">CalendarDate</a> | <a href="api-zoneddatetime.html">ZonedDateTime</a> | Date</span></code>
 <ul>
@@ -1194,18 +1267,18 @@ toPersianDate(date): PersianDate
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="weekdays"></a><a href="#weekdays" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>weekdays</h2>
 <p>Return a mapping of weekday ordinal number to name for the current locale.</p>
-<h4><a class="anchor" aria-hidden="true" id="syntax-36"></a><a href="#syntax-36" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<h4><a class="anchor" aria-hidden="true" id="syntax-37"></a><a href="#syntax-37" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
 <pre class="syntax">
 weekdays(options?): any
 </pre>
-<h4><a class="anchor" aria-hidden="true" id="parameters-34"></a><a href="#parameters-34" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<h4><a class="anchor" aria-hidden="true" id="parameters-36"></a><a href="#parameters-36" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
 <ul>
 <li><code class="def">options?: <span><a href="api-calendarfieldoptions.html">CalendarFieldOptions</a></span></code>
 <ul>
 <li>Options for field width, context, etc.</li>
 </ul></li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="example-32"></a><a href="#example-32" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<h4><a class="anchor" aria-hidden="true" id="example-34"></a><a href="#example-34" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
 <span class="hljs-keyword">const</span> es = framework.get(<span class="hljs-string">'es'</span>);
 <span class="hljs-keyword">const</span> context = <span class="hljs-string">'ui-list-or-menu'</span>;
@@ -1233,4 +1306,4 @@ log(es.Calendars.weekdays({ context }));
   '7': 'Sábado'
 }
 </pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/next/api-cldr"><span class="arrow-prev">← </span><span>CLDR</span></a><a class="docs-next button" href="/cldr-engine/docs/en/next/api-cldr-general"><span>CLDR.General</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#datefield">dateField</a></li><li><a href="#dayperiods">dayPeriods</a></li><li><a href="#eras">eras</a></li><li><a href="#fieldofvisualdifference">fieldOfVisualDifference</a></li><li><a href="#firstdayofweek">firstDayOfWeek</a></li><li><a href="#formatdate">formatDate</a></li><li><a href="#formatdatetoparts">formatDateToParts</a></li><li><a href="#formatdateinterval">formatDateInterval</a></li><li><a href="#formatdateintervaltoparts">formatDateIntervalToParts</a></li><li><a href="#formatdateraw">formatDateRaw</a></li><li><a href="#formatdaterawtoparts">formatDateRawToParts</a></li><li><a href="#formatdatewrapper">formatDateWrapper</a></li><li><a href="#formatdatewrappertoparts">formatDateWrapperToParts</a></li><li><a href="#formatrelativetime">formatRelativeTime</a></li><li><a href="#formatrelativetimefield">formatRelativeTimeField</a></li><li><a href="#mindaysinfirstweek">minDaysInFirstWeek</a></li><li><a href="#months">months</a></li><li><a href="#newbuddhistdate">newBuddhistDate</a></li><li><a href="#newgregoriandate">newGregorianDate</a></li><li><a href="#newiso8601date">newISO8601Date</a></li><li><a href="#newjapanesedate">newJapaneseDate</a></li><li><a href="#newpersiandate">newPersianDate</a></li><li><a href="#newiso8601date-1">newISO8601Date</a></li><li><a href="#now">now</a></li><li><a href="#nowbuddhist">nowBuddhist</a></li><li><a href="#nowgregorian">nowGregorian</a></li><li><a href="#nowiso8601">nowISO8601</a></li><li><a href="#nowjapanese">nowJapanese</a></li><li><a href="#nowpersian">nowPersian</a></li><li><a href="#quarters">quarters</a></li><li><a href="#resolvetimezoneid">resolveTimeZoneId</a></li><li><a href="#timeperiodtoquantity">timePeriodToQuantity</a></li><li><a href="#timezoneids">timeZoneIds</a></li><li><a href="#timezoneinfo">timeZoneInfo</a></li><li><a href="#tobuddhistdate">toBuddhistDate</a></li><li><a href="#togregoriandate">toGregorianDate</a></li><li><a href="#toiso8601date">toISO8601Date</a></li><li><a href="#tojapanesedate">toJapaneseDate</a></li><li><a href="#topersiandate">toPersianDate</a></li><li><a href="#weekdays">weekdays</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/next/api-cldr"><span class="arrow-prev">← </span><span>CLDR</span></a><a class="docs-next button" href="/cldr-engine/docs/en/next/api-cldr-general"><span>CLDR.General</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#datefield">dateField</a></li><li><a href="#dayperiods">dayPeriods</a></li><li><a href="#eras">eras</a></li><li><a href="#fieldofvisualdifference">fieldOfVisualDifference</a></li><li><a href="#firstdayofweek">firstDayOfWeek</a></li><li><a href="#formatdate">formatDate</a></li><li><a href="#formatdatetoparts">formatDateToParts</a></li><li><a href="#formatdateinterval">formatDateInterval</a></li><li><a href="#formatdateintervaltoparts">formatDateIntervalToParts</a></li><li><a href="#formatdateraw">formatDateRaw</a></li><li><a href="#formatdaterawtoparts">formatDateRawToParts</a></li><li><a href="#formatdatewrapper">formatDateWrapper</a></li><li><a href="#formatdatewrappertoparts">formatDateWrapperToParts</a></li><li><a href="#formatrelativetime">formatRelativeTime</a></li><li><a href="#formatrelativetimefield">formatRelativeTimeField</a></li><li><a href="#mindaysinfirstweek">minDaysInFirstWeek</a></li><li><a href="#months">months</a></li><li><a href="#newbuddhistdate">newBuddhistDate</a></li><li><a href="#newgregoriandate">newGregorianDate</a></li><li><a href="#newiso8601date">newISO8601Date</a></li><li><a href="#newjapanesedate">newJapaneseDate</a></li><li><a href="#newpersiandate">newPersianDate</a></li><li><a href="#newiso8601date-1">newISO8601Date</a></li><li><a href="#now">now</a></li><li><a href="#nowbuddhist">nowBuddhist</a></li><li><a href="#nowgregorian">nowGregorian</a></li><li><a href="#nowiso8601">nowISO8601</a></li><li><a href="#nowjapanese">nowJapanese</a></li><li><a href="#nowpersian">nowPersian</a></li><li><a href="#quarters">quarters</a></li><li><a href="#resolvetimezoneid">resolveTimeZoneId</a></li><li><a href="#timeperiodtoquantity">timePeriodToQuantity</a></li><li><a href="#timezoneids">timeZoneIds</a></li><li><a href="#timezonefromutc">timeZoneFromUTC</a></li><li><a href="#timezonefromwall">timeZoneFromWall</a></li><li><a href="#timezoneinfo">timeZoneInfo</a></li><li><a href="#tobuddhistdate">toBuddhistDate</a></li><li><a href="#togregoriandate">toGregorianDate</a></li><li><a href="#toiso8601date">toISO8601Date</a></li><li><a href="#tojapanesedate">toJapaneseDate</a></li><li><a href="#topersiandate">toPersianDate</a></li><li><a href="#weekdays">weekdays</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Patrick Hensley</section></footer></div></body></html>
