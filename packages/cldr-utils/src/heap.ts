@@ -15,7 +15,6 @@ const right = (i: number) => (i << 1) + 2;
  * @public
  */
 export class Heap<T> {
-
   private items: T[];
 
   constructor(private readonly cmp: Comparator<T>, data: T[]) {
@@ -64,15 +63,13 @@ export class Heap<T> {
    */
   private _down(i: number = 0): void {
     const len = this.items.length;
-    for (; ;) {
+    for (;;) {
       const lx = left(i);
       if (lx >= len) {
         break;
       }
       const rx = right(i);
-      const sm = rx < len
-        ? (this.cmp(this.items[lx], this.items[rx]) === -1 ? lx : rx)
-        : lx;
+      const sm = rx < len ? (this.cmp(this.items[lx], this.items[rx]) === -1 ? lx : rx) : lx;
 
       if (this.cmp(this.items[sm], this.items[i]) >= 0) {
         break;
@@ -102,5 +99,4 @@ export class Heap<T> {
     this.items[i] = this.items[j];
     this.items[j] = tmp;
   }
-
 }

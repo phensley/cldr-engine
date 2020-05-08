@@ -6,7 +6,6 @@ import { Constants, FNV } from './fnv';
  * @public
  */
 export class Checksum {
-
   private v: number = 0;
 
   constructor() {

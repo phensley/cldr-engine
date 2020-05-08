@@ -1,4 +1,3 @@
-
 const DEFAULT_CAPACITY = 100;
 
 /**
@@ -18,7 +17,6 @@ type Node<V> = { key: Key; val: V; next?: Node<V>; prev?: Node<V> };
  * @public
  */
 export class LRU<V> {
-
   private readonly storage: Map<Key, Node<V>> = new Map();
   private readonly root: Node<V>;
   private readonly capacity: number;
@@ -124,5 +122,4 @@ export class LRU<V> {
     n.prev = n.next = undefined;
     return n;
   }
-
 }

@@ -14,7 +14,6 @@ import { LRU } from './lru';
  * @public
  */
 export class Cache<T> {
-
   private storage: LRU<T>;
 
   constructor(private builder: (s: string) => T, capacity: number) {
@@ -44,5 +43,4 @@ export class Cache<T> {
     }
     return o;
   }
-
 }
