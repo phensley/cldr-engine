@@ -10,7 +10,6 @@ const UNDEFINED = new LanguageTag();
  * @public
  */
 export interface Locale {
-
   /**
    * Application's own identifier for the locale, e.g. 'en_US', 'fr-CA', etc.
    * We preserve this since applications may use it as a unique key to

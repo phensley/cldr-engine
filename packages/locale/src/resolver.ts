@@ -1,7 +1,8 @@
 import {
   parseLanguageTag,
   substituteRegionAliases,
-  LanguageTag, LanguageTagField as Tag
+  LanguageTag,
+  LanguageTagField as Tag,
 } from '@phensley/language-tag';
 
 import { FastTag, LanguageAliasMap } from './util';
@@ -67,7 +68,7 @@ const likelyGet = (query: FastTag): FastTag | undefined => {
 const enum F {
   LANGUAGE = 1,
   SCRIPT = 2,
-  REGION = 4
+  REGION = 4,
 }
 
 const MATCH_ORDER = [
@@ -75,7 +76,7 @@ const MATCH_ORDER = [
   F.LANGUAGE | F.REGION,
   F.LANGUAGE | F.SCRIPT,
   F.LANGUAGE,
-  F.SCRIPT
+  F.SCRIPT,
 ];
 
 /**
@@ -100,9 +101,10 @@ const substituteLanguageAliases = (dst: FastTag): void => {
   }
   for (let i = 0; i < aliases.length; i++) {
     const [type, repl] = aliases[i];
-    const exact = (type[Tag.LANGUAGE] === dst[Tag.LANGUAGE] &&
+    const exact =
+      type[Tag.LANGUAGE] === dst[Tag.LANGUAGE] &&
       type[Tag.SCRIPT] === dst[Tag.SCRIPT] &&
-      type[Tag.REGION] === dst[Tag.REGION]);
+      type[Tag.REGION] === dst[Tag.REGION];
 
     if ((type[Tag.SCRIPT] === Tag.SCRIPT && type[Tag.REGION] === Tag.REGION) || exact) {
       dst[Tag.LANGUAGE] = repl[Tag.LANGUAGE];
@@ -159,7 +161,7 @@ export const returnTag = (real: LanguageTag, fast: FastTag): LanguageTag => {
     typeof region === 'number' ? undefined : region,
     real.variant(),
     real.extensions(),
-    real.privateUse()
+    real.privateUse(),
   );
 };
 
@@ -219,7 +221,6 @@ const initAlias = () => {
  * @public
  */
 export class LanguageResolver {
-
   /**
    * Substitute aliases only.
    */
@@ -297,5 +298,4 @@ export class LanguageResolver {
     // 4. Nothing matched, so return a copy of the original tag.
     return returnTag(tag, max);
   }
-
 }
