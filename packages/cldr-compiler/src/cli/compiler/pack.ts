@@ -20,12 +20,11 @@ import { RBNFCollector } from '../../rbnf';
  * to the field. Undefined fields get encoded as ''.
  */
 export class PackEncoder implements Encoder {
-
   private _distinct: { [x: string]: number } = {};
   private _count: number = 0;
   private _size: number = 0;
 
-  constructor(private pack: ResourcePack) { }
+  constructor(private pack: ResourcePack) {}
 
   encode(field: string | undefined): number {
     this._count++;
@@ -50,8 +49,7 @@ export class PackEncoder implements Encoder {
   }
 }
 
-export const sha256 = (data: string | Buffer): string =>
-  createHash('sha256').update(data).digest('hex');
+export const sha256 = (data: string | Buffer): string => createHash('sha256').update(data).digest('hex');
 
 export interface PackArgs {
   out: string;
@@ -69,9 +67,10 @@ export const runPack = (argv: yargs.Arguments<PackArgs>) => {
 
   // Ensure downloads happen before building
   const downloader = new Downloader(pkg.cldrVersion);
-  downloader.run()
+  downloader
+    .run()
     .then(() => runPackImpl(argv, pkg))
-    .catch(e => {
+    .catch((e) => {
       console.log(e);
       process.exit(1);
     });
@@ -112,14 +111,14 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
   let path: string;
   const hashes: { [x: string]: string } = {};
   const pkghash = createHash('sha256');
-  langs.forEach(lang => {
+  langs.forEach((lang) => {
     console.warn(`processing:  ${lang}`);
 
     // Get the list of languages that should live together in this bundle.
     let locales = localeMap[lang];
 
     if (regions.size > 0) {
-      locales = locales.filter(l => l.id === lang || regions.has(l.tag.region()));
+      locales = locales.filter((l) => l.id === lang || regions.has(l.tag.region()));
     }
 
     // Construct a pack that will contain all strings across all regions for this language.
@@ -129,7 +128,7 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
     const machine = new EncoderMachine(encoder, argv.verbose);
 
     // For each locale, fetch its data from the JSON files and execute an encoder.
-    locales.forEach(locale => {
+    locales.forEach((locale) => {
       if (argv.verbose) {
         console.warn(`   locale: ${locale.id}`);
       }
@@ -168,7 +167,13 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
   path = join(dest, 'sha256sums.txt');
   console.warn(`writing:     ${path}`);
 
-  fs.writeFileSync(path, Object.keys(hashes).sort().map(k => `${hashes[k]}  ${k}`).join('\n') + '\n');
+  fs.writeFileSync(
+    path,
+    Object.keys(hashes)
+      .sort()
+      .map((k) => `${hashes[k]}  ${k}`)
+      .join('\n') + '\n',
+  );
 
   path = join(dest, 'resource.json');
   console.warn(`writing:     ${path}`);

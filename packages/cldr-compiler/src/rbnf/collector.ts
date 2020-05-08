@@ -16,7 +16,6 @@ const KEYS: JSONRootKey[] = ['OrdinalRules', 'SpelloutRules'];
  * into global and locale-specific groups.
  */
 export class RBNFCollector {
-
   /**
    * Mapping of language to locale ids
    * RBNF rules that are mapped to a global name ('hansfin', 'jpanyear', etc)
@@ -47,7 +46,7 @@ export class RBNFCollector {
    */
   load(): void {
     const dir = path.join(__dirname, '../../data/patches/rbnf');
-    const files = fs.readdirSync(dir).filter(f => RE_FILE.test(f));
+    const files = fs.readdirSync(dir).filter((f) => RE_FILE.test(f));
     const res: Map<string, JSONRoot> = new Map<string, JSONRoot>();
 
     const ids: string[] = [];
@@ -94,7 +93,7 @@ export class RBNFCollector {
     // set of rbnf rulesets in its resource bundle.
     const { NumberingSystems } = getSupplemental();
 
-    Object.keys(NumberingSystems).forEach(k => {
+    Object.keys(NumberingSystems).forEach((k) => {
       const sys = NumberingSystems[k];
       if (sys._type !== 'algorithmic') {
         return;
@@ -157,5 +156,4 @@ export class RBNFCollector {
       }
     }
   }
-
 }

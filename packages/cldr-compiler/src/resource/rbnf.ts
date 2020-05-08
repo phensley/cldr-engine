@@ -6,8 +6,7 @@ import { parseLanguageTag } from '@phensley/cldr-core';
  * Collect and pack rules for the given locales.
  */
 export class RBNFPacker {
-
-  constructor(private collector: RBNFCollector) { }
+  constructor(private collector: RBNFCollector) {}
 
   /**
    * Pack the RBNF rulesets into JSON form.
@@ -23,13 +22,13 @@ export class RBNFPacker {
     }
 
     // Extract and populate the frequency sets.
-    ids.forEach(id => {
+    ids.forEach((id) => {
       const raw = this.collector.locales.get(id)!;
       const extractor = new RBNFSymbolExtractor(symbols, numbers);
       extractor.extract(raw);
     });
 
-    ids.sort().forEach(id => {
+    ids.sort().forEach((id) => {
       const raw = this.collector.locales.get(id)!;
 
       // Encode final JSON representation
@@ -41,7 +40,7 @@ export class RBNFPacker {
     const out = {
       locales,
       symbols: symbols.sort().join('_'),
-      numbers: numbers.sort().join('_')
+      numbers: numbers.sort().join('_'),
     };
     return JSON.stringify(out);
   }
@@ -53,7 +52,7 @@ export class RBNFPacker {
     this.collector.locales.forEach((_, id) => allids.push(id));
 
     const seen: Set<string> = new Set();
-    allids = ['root'].concat(allids.filter(i => i !== 'root').sort());
+    allids = ['root'].concat(allids.filter((i) => i !== 'root').sort());
     for (const id of allids) {
       // Same rule are defined for each script and region of a language, so only
       // list rules at the language level.
@@ -70,16 +69,21 @@ export class RBNFPacker {
       const names: string[] = [];
 
       // Only show numbering systems at the root level
-      const keys: (keyof JSONRoot)[] = id === 'root' ?
-        ['NumberingSystemRules'] : ['OrdinalRules', 'SpelloutRules'];
+      const keys: (keyof JSONRoot)[] = id === 'root' ? ['NumberingSystemRules'] : ['OrdinalRules', 'SpelloutRules'];
 
       for (const key of keys) {
         const rules = raw[key];
         if (rules) {
-          Object.keys(rules).filter(k => !rules[k].private).forEach(n => names.push(n));
+          Object.keys(rules)
+            .filter((k) => !rules[k].private)
+            .forEach((n) => names.push(n));
         }
       }
-      r += names.sort().map(n => `   ${n}`).join('\n') + '\n\n';
+      r +=
+        names
+          .sort()
+          .map((n) => `   ${n}`)
+          .join('\n') + '\n\n';
     }
     return r;
   }

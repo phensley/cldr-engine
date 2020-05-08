@@ -3,11 +3,11 @@ import { availableLocales, getMain } from '../../../cldr';
 /**
  * Copy an object's keys into a set.
  */
-const addKeys = (obj: any, set: Set<string>) => Object.keys(obj || {}).forEach(v => set.add(v));
+const addKeys = (obj: any, set: Set<string>) => Object.keys(obj || {}).forEach((v) => set.add(v));
 
 const nestedKeys = (obj: any): any => {
   const r: any = {};
-  Object.keys(obj || {}).forEach(k => {
+  Object.keys(obj || {}).forEach((k) => {
     for (const key of Object.keys(obj[k])) {
       r[key] = 1;
     }
@@ -17,7 +17,7 @@ const nestedKeys = (obj: any): any => {
 
 const unique = (values: string[]): string[] => {
   const set = new Set<string>();
-  values.forEach(v => set.add(v));
+  values.forEach((v) => set.add(v));
   return sorted(set);
 };
 
@@ -26,7 +26,7 @@ const unique = (values: string[]): string[] => {
  */
 const sorted = (set: Set<string>) => {
   const list: string[] = [];
-  set.forEach(e => list.push(e));
+  set.forEach((e) => list.push(e));
   list.sort();
   return list;
 };
@@ -62,7 +62,7 @@ export const getSymbols = (): any => {
   const persianIntervalFormats = new Set<string>();
   const japaneseIntervalFormats = new Set<string>();
 
-  locales.forEach(lang => {
+  locales.forEach((lang) => {
     console.warn(`Scanning '${lang}'..`);
 
     // Add keys for nested objects to their corresponding sets.
@@ -93,7 +93,7 @@ export const getSymbols = (): any => {
     addKeys(nestedKeys(main.Japanese.intervalFormats), japaneseIntervalFormats);
   });
 
-  const unitCategories = unique(sorted(unitsRaw).map(u => u.split('-')[0]));
+  const unitCategories = unique(sorted(unitsRaw).map((u) => u.split('-')[0]));
 
   return {
     metaZoneIds: sorted(metaZoneIds),

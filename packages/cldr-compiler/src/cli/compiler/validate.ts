@@ -5,9 +5,9 @@ const LIM = 10;
 
 const leftpad = (s: string, n: number) => `${' '.repeat(Math.max(0, n - s.length))}'${s}'`;
 
-const quote = (s: string[]) =>  s.map(v => `'${v}'`).join(', ');
+const quote = (s: string[]) => s.map((v) => `'${v}'`).join(', ');
 
-const quotevals = (s: string[]) => s.length < LIM ? quote(s) : quote(s.slice(0, LIM)) + ' ...';
+const quotevals = (s: string[]) => (s.length < LIM ? quote(s) : quote(s.slice(0, LIM)) + ' ...');
 
 /**
  * Compare custom config against canonical and emit messages.
@@ -21,7 +21,7 @@ export const validateConfig = (config: SchemaConfig): SchemaConfig => {
   const keys = Object.keys(config).sort();
   const maxlen = keys.reduce((p, c: string) => Math.max(p, c.length), 0);
 
-  const missing = Object.keys(DEFAULT_CONFIG).filter(k => keys.indexOf(k) === -1);
+  const missing = Object.keys(DEFAULT_CONFIG).filter((k) => keys.indexOf(k) === -1);
   const nonarray: string[] = [];
   const ignore: string[] = [];
   for (const key of keys) {

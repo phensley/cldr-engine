@@ -14,14 +14,10 @@ export const getRBNF = (_data: any): Code[] => {
   code += packer.pack('root');
   code += ';\n';
 
-  codes.push(
-    Code.rbnf(['autogen.rbnf.ts'], code)
-  );
+  codes.push(Code.rbnf(['autogen.rbnf.ts'], code));
 
   code = packer.report();
-  codes.push(
-    Code.top(['notes', 'rbnf-names.txt'], code)
-  );
+  codes.push(Code.top(['notes', 'rbnf-names.txt'], code));
 
   return codes;
 };

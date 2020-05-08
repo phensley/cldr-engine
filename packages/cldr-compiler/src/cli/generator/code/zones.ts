@@ -3,7 +3,6 @@ import { lineWrap, Code, HEADER, NOLINT_MAXLINE } from './util';
 import chalk from 'chalk';
 
 class IdArray {
-
   readonly array: string[] = [];
   private index: any = {};
   private sequence: number = 0;
@@ -134,7 +133,7 @@ const buildMetaZones2 = (data: any): Metazones => {
   });
 
   // Metazone time zone ids
-  Object.keys(data).forEach(id => {
+  Object.keys(data).forEach((id) => {
     const start = offsets.length;
     const ranges = data[id].reverse();
     ranges.forEach((range: [string, number, number]) => {
@@ -154,7 +153,7 @@ const buildMetaZones2 = (data: any): Metazones => {
     metazoneids: metazoneIndex.array.join(' '),
     index: index.map(base36).join(' '),
     offsets: offsets.map(base36).join(' '),
-    untils: untils.map(base36).join(' ')
+    untils: untils.map(base36).join(' '),
   };
 };
 
@@ -237,7 +236,11 @@ export const getZones = (data: any): Code[] => {
   // code += '\n}\n\n';
 
   code = NOLINT_MAXLINE + HEADER;
-  const metaZoneType = lineWrap(60, ' | ', data.metaZoneIds.map((k: string) => `'${k}'`));
+  const metaZoneType = lineWrap(
+    60,
+    ' | ',
+    data.metaZoneIds.map((k: string) => `'${k}'`),
+  );
   code += '/** @public */\n';
   code += `export type MetaZoneType = ${metaZoneType};\n`;
 

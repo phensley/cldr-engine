@@ -13,7 +13,7 @@ type TerritorySet = { [x: string]: number };
 const getTerritories = () => {
   const territories: StringMap = {};
   const data = supplemental.TerritoryContainment;
-  Object.keys(data).forEach(code => {
+  Object.keys(data).forEach((code) => {
     if (code.indexOf('-') !== -1) {
       if (!code.endsWith('-status-grouping')) {
         return;
@@ -39,7 +39,7 @@ const flattenRegion = (parent: string, flat: StringMap, data: any): string[] => 
     if (data[key]) {
       const children = flattenRegion(key, flat, data);
       flat[key] = children;
-      children.forEach(k => countries[k] = 1);
+      children.forEach((k) => (countries[k] = 1));
     } else {
       countries[key] = 1;
     }
@@ -53,7 +53,7 @@ const flattenRegion = (parent: string, flat: StringMap, data: any): string[] => 
 const flattenTerritories = () => {
   const data = getTerritories();
   const flat: StringMap = {};
-  Object.keys(data).forEach(key => {
+  Object.keys(data).forEach((key) => {
     flat[key] = flattenRegion(key, flat, data);
   });
   return flat;
@@ -65,7 +65,7 @@ const flattenTerritories = () => {
 const getMatchVariables = (territories: StringMap) => {
   const variables: StringMap = {};
   const { matchVariable } = LanguageMatching;
-  Object.keys(matchVariable).forEach(key => {
+  Object.keys(matchVariable).forEach((key) => {
     let regions: string[] = [];
     matchVariable[key].split(/\+/).forEach((code: string) => {
       const children = territories[code] || [code];

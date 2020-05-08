@@ -33,7 +33,5 @@ export const getIdentifiers = (data: any): Code[] => {
   code += lineWrap(80, '|', _regions);
   code += ');\n';
 
-  return [
-    Code.types(['autogen.identifiers.ts'], code)
-  ];
+  return [Code.types(['autogen.identifiers.ts'], code)];
 };

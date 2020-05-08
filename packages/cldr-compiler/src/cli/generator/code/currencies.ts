@@ -30,7 +30,8 @@ export const getCurrencies = (data: any): Code[] => {
     .map((c: string) => {
       const frac = convert(data.currencyFractions[c]).join(' ');
       return `${c}:${frac}`;
-    }).join('|');
+    })
+    .join('|');
 
   code += `export const currencyFractionsRaw = '${fractions}';\n\n`;
 

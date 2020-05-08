@@ -38,7 +38,7 @@ export const getSystems = (_data: any): Code[] => {
   let numeric = '';
   let algorithmic = '';
 
-  Object.keys(supp.NumberingSystems).forEach(k => {
+  Object.keys(supp.NumberingSystems).forEach((k) => {
     const o = supp.NumberingSystems[k];
     if (o._type === 'numeric') {
       const v: string[] = Array.from(o._digits);
@@ -52,7 +52,7 @@ export const getSystems = (_data: any): Code[] => {
         const id = `${tag.language()}-${tag.script()}`;
         parts = [id, tmp[2]];
       }
-      algorithmic += `  ${k}: [${parts.map(p => `'${p}'`).join(', ')}],\n`;
+      algorithmic += `  ${k}: [${parts.map((p) => `'${p}'`).join(', ')}],\n`;
     }
   });
 

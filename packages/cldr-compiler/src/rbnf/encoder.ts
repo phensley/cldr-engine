@@ -6,9 +6,7 @@ import { FrequencySet } from '../utils';
 
 const IGNORED = new Set(['lenient-parse']);
 
-const PLURALS: string[] = [
-  'zero', 'one', 'two', 'few', 'many', 'other'
-];
+const PLURALS: string[] = ['zero', 'one', 'two', 'few', 'many', 'other'];
 
 type Pair = [string, JSONRulesetInner];
 
@@ -23,7 +21,7 @@ const collect = (root: JSONRoot): Pair[] => {
       continue;
     }
     for (const name of Object.keys(rulesets)) {
-      res.push([name, rulesets[name] ]);
+      res.push([name, rulesets[name]]);
     }
   }
   return res;
@@ -44,14 +42,13 @@ const parse = (raw: string): RBNFNode[] => {
  * Recurse through the syntax tree and extract and intern all symbols.
  */
 export class RBNFSymbolExtractor {
-
   constructor(
     // Unique symbols sorted by frequency
     private symbols: FrequencySet<string>,
 
     // Unique numbers (base value / radix) sorted by frequency
-    private numbers: FrequencySet<string>) {
-  }
+    private numbers: FrequencySet<string>,
+  ) {}
 
   /**
    * Populate the frequency-sorted symbol, base value / radix tables.
@@ -81,8 +78,8 @@ export class RBNFSymbolExtractor {
   }
 
   /**
-  * Recurse into the given node, interning all symbols found.
-  */
+   * Recurse into the given node, interning all symbols found.
+   */
   extractNode(node: RBNFNode): void {
     switch (node.kind) {
       case 'apply-unch-numfmt':
@@ -106,14 +103,12 @@ export class RBNFSymbolExtractor {
         break;
     }
   }
-
 }
 
 /**
  * Parse RBNF rules and encode them compactly for distribution.
  */
 export class RBNFEncoder {
-
   // Map ruleset names to their offset
   private index: Map<string, number> = new Map<string, number>();
 
@@ -122,18 +117,17 @@ export class RBNFEncoder {
     private symbols: FrequencySet<string>,
 
     // Unique numbers (base value / radix) sorted by frequency
-    private numbers: FrequencySet<string>) {
-  }
+    private numbers: FrequencySet<string>,
+  ) {}
 
   encode(root: JSONRoot): any {
-    let rulesets = collect(root).filter(r => !IGNORED.has(r[0]));
+    let rulesets = collect(root).filter((r) => !IGNORED.has(r[0]));
 
     // Sort all rulesets so the public sets are placed first, and then in alphabetical order.
-    const cmp = (a: Pair, b: Pair) =>
-      a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0;
+    const cmp = (a: Pair, b: Pair) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0);
 
-    const pub = rulesets.filter(r => r[1].private === 0).sort(cmp);
-    const prv = rulesets.filter(r => r[1].private === 1).sort(cmp);
+    const pub = rulesets.filter((r) => r[1].private === 0).sort(cmp);
+    const prv = rulesets.filter((r) => r[1].private === 1).sort(cmp);
 
     rulesets = pub.concat(prv);
 
@@ -144,7 +138,7 @@ export class RBNFEncoder {
     });
 
     const result = this._encode(rulesets);
-    const names = (pairs: Pair[]) => pairs.map(p => p[0]).join('_');
+    const names = (pairs: Pair[]) => pairs.map((p) => p[0]).join('_');
 
     return {
       // All rule names [public, private] ordered 1:1 with their rulesets
@@ -227,7 +221,6 @@ export class RBNFEncoder {
       }
 
       for (const raw of ruleset[1].rules) {
-
         // Decode the instruction array
         const inst = this.encodeRule(raw.rule, symbols);
 
@@ -238,7 +231,6 @@ export class RBNFEncoder {
           // Normal rule without an explicit radix.
           const i = numbers.indexOf(value);
           rules.push([RuleType.NORMAL, inst, i]);
-
         } else if (/^\d+(\/\d+)?$/.test(value)) {
           // Normal rule with explicit radix
           const p = value.split('/');
@@ -246,7 +238,6 @@ export class RBNFEncoder {
           const j = numbers.indexOf(p[1]);
 
           rules.push([RuleType.NORMAL_RADIX, inst, i, j]);
-
         } else {
           // Atom rule
           switch (value) {
@@ -330,82 +321,82 @@ export class RBNFEncoder {
    */
   private encodeRule(rule: string, symbols: string[]): any[] {
     const nodes = parse(rule);
-    return nodes.map(n => this.encodeNode(n, symbols));
+    return nodes.map((n) => this.encodeNode(n, symbols));
   }
 
   private encodeNode(node: RBNFNode, symbols: string[]): any {
     switch (node.kind) {
-        case 'literal': {
-          const i = symbols.indexOf(node.n);
-          return [Opcode.LITERAL, i];
-        }
-
-        case 'apply-left-rule': {
-          const i = this.ruleindex(node.n);
-          return [Opcode.APPLY_LEFT_RULE, i];
-        }
-
-        case 'apply-left-numfmt': {
-          const i = this.index.get(node.n);
-          return [Opcode.APPLY_LEFT_NUM_FORMAT, i];
-        }
-
-        case 'apply-left-2-rule': {
-          const i = this.ruleindex(node.n);
-          return [Opcode.APPLY_LEFT_2_RULE, i];
-        }
-
-        case 'apply-left-2-numfmt': {
-          const i = symbols.indexOf(node.n);
-          return [Opcode.APPLY_LEFT_2_NUM_FORMAT, i];
-        }
-
-        case 'apply-right-rule': {
-          const i = this.ruleindex(node.n);
-          return [Opcode.APPLY_RIGHT_RULE, i];
-        }
-
-        case 'apply-right-numfmt': {
-          const i = symbols.indexOf(node.n);
-          return [Opcode.APPLY_RIGHT_NUM_FORMAT, i];
-        }
-
-        case 'apply-unch-rule': {
-          const i = this.ruleindex(node.n);
-          return [Opcode.UNCHANGED_RULE, i];
-        }
-
-        case 'apply-unch-numfmt': {
-          const i = symbols.indexOf(node.n);
-          return [Opcode.UNCHANGED_NUM_FORMAT, i];
-        }
-
-        case 'cardinal':
-        case 'ordinal': {
-          const block: any[] = [];
-          for (const n of node.n) {
-            const cat = PLURALS.indexOf(n.category);
-            const i = symbols.indexOf(n.n);
-            block.push([cat, i]);
-          }
-          return node.kind === 'cardinal' ? [Opcode.CARDINAL, block] : [Opcode.ORDINAL, block];
-        }
-
-        case 'optional': {
-          const block = node.n.map(n => this.encodeNode(n, symbols));
-          return [Opcode.OPTIONAL, block];
-        }
-
-        case 'sub-left':
-          return [Opcode.SUB_LEFT];
-
-        case 'sub-right':
-          return [Opcode.SUB_RIGHT];
-
-        case 'sub-right-3':
-          return [Opcode.SUB_RIGHT_3];
+      case 'literal': {
+        const i = symbols.indexOf(node.n);
+        return [Opcode.LITERAL, i];
       }
-      throw new Error(`No encoder for node: ${JSON.stringify(node)}`);
+
+      case 'apply-left-rule': {
+        const i = this.ruleindex(node.n);
+        return [Opcode.APPLY_LEFT_RULE, i];
+      }
+
+      case 'apply-left-numfmt': {
+        const i = this.index.get(node.n);
+        return [Opcode.APPLY_LEFT_NUM_FORMAT, i];
+      }
+
+      case 'apply-left-2-rule': {
+        const i = this.ruleindex(node.n);
+        return [Opcode.APPLY_LEFT_2_RULE, i];
+      }
+
+      case 'apply-left-2-numfmt': {
+        const i = symbols.indexOf(node.n);
+        return [Opcode.APPLY_LEFT_2_NUM_FORMAT, i];
+      }
+
+      case 'apply-right-rule': {
+        const i = this.ruleindex(node.n);
+        return [Opcode.APPLY_RIGHT_RULE, i];
+      }
+
+      case 'apply-right-numfmt': {
+        const i = symbols.indexOf(node.n);
+        return [Opcode.APPLY_RIGHT_NUM_FORMAT, i];
+      }
+
+      case 'apply-unch-rule': {
+        const i = this.ruleindex(node.n);
+        return [Opcode.UNCHANGED_RULE, i];
+      }
+
+      case 'apply-unch-numfmt': {
+        const i = symbols.indexOf(node.n);
+        return [Opcode.UNCHANGED_NUM_FORMAT, i];
+      }
+
+      case 'cardinal':
+      case 'ordinal': {
+        const block: any[] = [];
+        for (const n of node.n) {
+          const cat = PLURALS.indexOf(n.category);
+          const i = symbols.indexOf(n.n);
+          block.push([cat, i]);
+        }
+        return node.kind === 'cardinal' ? [Opcode.CARDINAL, block] : [Opcode.ORDINAL, block];
+      }
+
+      case 'optional': {
+        const block = node.n.map((n) => this.encodeNode(n, symbols));
+        return [Opcode.OPTIONAL, block];
+      }
+
+      case 'sub-left':
+        return [Opcode.SUB_LEFT];
+
+      case 'sub-right':
+        return [Opcode.SUB_RIGHT];
+
+      case 'sub-right-3':
+        return [Opcode.SUB_RIGHT_3];
+    }
+    throw new Error(`No encoder for node: ${JSON.stringify(node)}`);
   }
 
   private ruleindex(name: string): number {
@@ -416,5 +407,4 @@ export class RBNFEncoder {
     }
     return i;
   }
-
 }

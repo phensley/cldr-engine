@@ -47,19 +47,27 @@ const OUTPUTS: { [x: string]: (data: any) => Code[] } = {
 
 // Names of pre-processed data files
 const DATA_FILES = [
-  'aliases', 'currencyinfo', 'matching', 'metazones', 'plurals',
-  'pluralranges', 'subtags', 'symbols', 'timedata', 'weekdata'
+  'aliases',
+  'currencyinfo',
+  'matching',
+  'metazones',
+  'plurals',
+  'pluralranges',
+  'subtags',
+  'symbols',
+  'timedata',
+  'weekdata',
 ];
 
 const load = (): any => {
   const root = join(__dirname, '..', '..', '..', '..', 'temp');
   const data: any = {};
-  DATA_FILES.forEach(name => {
+  DATA_FILES.forEach((name) => {
     const path = join(root, `${name}.json`);
     console.warn(`Reading ${name}.json`);
     const raw = fs.readFileSync(path, { encoding: 'utf-8' });
     const tmp = JSON.parse(raw);
-    Object.keys(tmp).forEach(key => {
+    Object.keys(tmp).forEach((key) => {
       data[key] = tmp[key];
     });
   });
@@ -93,7 +101,12 @@ const run = (args: yargs.Arguments<CodeOptions>) => {
 };
 
 export const codeOptions = (argv: yargs.Argv) =>
-  argv.command('code', 'Generate code', (y: yargs.Argv) => y
-    .option('w', { alias: 'which', type: 'array', description: 'Which files to generate' })
-    .choices('w', Object.keys(OUTPUTS)),
-    run);
+  argv.command(
+    'code',
+    'Generate code',
+    (y: yargs.Argv) =>
+      y
+        .option('w', { alias: 'which', type: 'array', description: 'Which files to generate' })
+        .choices('w', Object.keys(OUTPUTS)),
+    run,
+  );

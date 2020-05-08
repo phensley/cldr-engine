@@ -4,6 +4,6 @@ export const getCurrencyInfo = (): any => {
   const supplemental = getSupplemental();
   return {
     currencyFractions: supplemental.CurrencyFractions,
-    currencyRegions: supplemental.CurrencyRegions.regions
+    currencyRegions: supplemental.CurrencyRegions.regions,
   };
 };

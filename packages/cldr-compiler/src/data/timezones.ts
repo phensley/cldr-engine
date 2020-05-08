@@ -10,7 +10,7 @@ const mappings: Mapping[] = [
 
   // Extract a list of names
   Mappings.point('timeZoneIds').field('timeZones').keys().point('1').remap(0, 2, 3),
-  Mappings.point('metaZoneIds').field('metaZones').keys().point('1').remap(0, 2, 3)
+  Mappings.point('metaZoneIds').field('metaZones').keys().point('1').remap(0, 2, 3),
 ];
 
 export const transformTimezones = (o: any): any => applyMappings(o, mappings);

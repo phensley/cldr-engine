@@ -18,12 +18,12 @@ interface Range {
 
 const COUNTS: any = {};
 
-const incr = (s: string) => COUNTS[s] = (COUNTS[s] || 0) + 1;
+const incr = (s: string) => (COUNTS[s] = (COUNTS[s] || 0) + 1);
 
-const flag = (cat: string) => (1 << categories[cat]);
+const flag = (cat: string) => 1 << categories[cat];
 
 const convert = (ranges: Range[]): object | number => {
-  const same = new Set(ranges.map(r => r.result)).size === 1;
+  const same = new Set(ranges.map((r) => r.result)).size === 1;
   if (same) {
     return categories[ranges[0].result];
   }

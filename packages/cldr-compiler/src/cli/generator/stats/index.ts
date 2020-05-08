@@ -24,12 +24,11 @@ const MAIN = [
   'units',
 ];
 
-const isObject = (o: any): boolean =>
-  typeof o === 'object' ? o !== null && !Array.isArray(o) : false;
+const isObject = (o: any): boolean => (typeof o === 'object' ? o !== null && !Array.isArray(o) : false);
 
 const extractValues = (o: any): string[] => {
   let r: string[] = [];
-  Object.keys(o).forEach(k => {
+  Object.keys(o).forEach((k) => {
     const v = o[k];
     if (isObject(v)) {
       r = r.concat(extractValues(v));
@@ -43,15 +42,15 @@ const extractValues = (o: any): string[] => {
 const run = (args: yargs.Arguments): void => {
   let locales = availableLocales();
   if (args.lang) {
-    locales = (args.lang as string).split(',').map(a => a.trim());
+    locales = (args.lang as string).split(',').map((a) => a.trim());
   }
 
   const grandTotalChars = [0];
   const allStrings = [''];
-  locales.forEach(lang => {
+  locales.forEach((lang) => {
     const totalChars = [0];
     const totalJson = [0];
-    MAIN.forEach(filename => {
+    MAIN.forEach((filename) => {
       const path = `main/${lang}/${filename}`;
       const main = load(path, true);
       const compressed = JSON.stringify(main, undefined, 0);
@@ -71,6 +70,9 @@ const run = (args: yargs.Arguments): void => {
 };
 
 export const statsOptions = (argv: yargs.Argv) =>
-  argv.command('stats', 'Generate stats', (y: yargs.Argv) => y
-    .option('l', { alias: 'lang', description: 'List of languages' }),
-    run);
+  argv.command(
+    'stats',
+    'Generate stats',
+    (y: yargs.Argv) => y.option('l', { alias: 'lang', description: 'List of languages' }),
+    run,
+  );

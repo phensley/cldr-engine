@@ -27,14 +27,14 @@ class Node {
     readonly have: string,
     readonly distance: number,
     readonly wildcard: boolean,
-    readonly map: DistanceMap
-  ) { }
+    readonly map: DistanceMap,
+  ) {}
 }
 
 /**
  * Convert public wildcard for internal ANY string.
  */
-const key = (s: string) => s === WILDCARD ? ANY : s;
+const key = (s: string) => (s === WILDCARD ? ANY : s);
 
 /**
  * Compare two distance map nodes for sorting.
@@ -47,10 +47,9 @@ const nodeCmp = (a: Node, b: Node) => {
 };
 
 /**
-* Store a tree of distances between desired and supported tags.
-*/
+ * Store a tree of distances between desired and supported tags.
+ */
 class DistanceMap {
-
   readonly map: { [x: string]: any } = {};
 
   /**
@@ -101,13 +100,7 @@ class DistanceMap {
     }
 
     // Build a new node, add it to the map and return it.
-    node = new Node(
-      want,
-      have,
-      distance,
-      want === ANY || have === ANY,
-      new DistanceMap()
-    );
+    node = new Node(want, have, distance, want === ANY || have === ANY, new DistanceMap());
     sub[have] = node;
     return node;
   }
@@ -121,9 +114,9 @@ class DistanceMap {
    */
   nodes(): Node[] {
     const res: Node[] = [];
-    Object.keys(this.map).forEach(k1 => {
+    Object.keys(this.map).forEach((k1) => {
       const inner = this.map[k1];
-      Object.keys(inner).forEach(k2 => {
+      Object.keys(inner).forEach((k2) => {
         const node = inner[k2];
         res.push(node);
       });
@@ -143,7 +136,7 @@ class DistanceMap {
     let prior: string | undefined = undefined;
     let rows = 0;
     let res = '';
-    nodes.forEach(node => {
+    nodes.forEach((node) => {
       if (rows !== 0) {
         for (let i = 0; i < level; i++) {
           res += '               ';
@@ -204,8 +197,8 @@ const addRule = (variables: MapSet, desired: string[], supported: string[], dist
         const have = key(supported[2]);
         const wantPartitions = want.startsWith('$') ? variables[want] : new Set([want]);
         const havePartitions = have.startsWith('$') ? variables[have] : new Set([have]);
-        wantPartitions.forEach(w => {
-          havePartitions.forEach(h => {
+        wantPartitions.forEach((w) => {
+          havePartitions.forEach((h) => {
             node.map.put(w, h, distance);
           });
         });
@@ -218,7 +211,6 @@ const addRule = (variables: MapSet, desired: string[], supported: string[], dist
 type RawMatchRule = [string, string, number, number, number];
 
 class MatchRule {
-
   readonly desired: string[];
   readonly supported: string[];
   readonly wildcards: number;
@@ -237,7 +229,7 @@ class MatchRule {
 /**
  * Sort a number.
  */
-const numberCmp = (a: number, b: number) => a === b ? 0 : a < b ? -1 : 1;
+const numberCmp = (a: number, b: number) => (a === b ? 0 : a < b ? -1 : 1);
 
 /**
  * Sort a match based on the number of components and, secondarily,
@@ -253,37 +245,40 @@ const matchCmp = (a: MatchRule, b: MatchRule) => {
  */
 const buildDistanceMap = (variables: MapSet, matchRules: RawMatchRule[]) => {
   const wildcards: MatchRule[] = [];
-  matchRules.map(m => new MatchRule(m)).sort(matchCmp).forEach(match => {
-    // Collect the pure wildcard distances to be indexed in a separate step.
-    if (match.desired.length === match.wildcards) {
-      wildcards.push(match);
-      return;
-    }
+  matchRules
+    .map((m) => new MatchRule(m))
+    .sort(matchCmp)
+    .forEach((match) => {
+      // Collect the pure wildcard distances to be indexed in a separate step.
+      if (match.desired.length === match.wildcards) {
+        wildcards.push(match);
+        return;
+      }
 
-    // Add the rule, optionally adding its inverse.
-    const { desired, supported, distance, oneway } = match;
-    addRule(variables, desired, supported, distance);
-    if (!oneway) {
-      addRule(variables, supported, desired, distance);
-    }
-  });
+      // Add the rule, optionally adding its inverse.
+      const { desired, supported, distance, oneway } = match;
+      addRule(variables, desired, supported, distance);
+      if (!oneway) {
+        addRule(variables, supported, desired, distance);
+      }
+    });
 
   // Fill out all levels of the distance map with wildcard distances.
-  wildcards.forEach(match => {
+  wildcards.forEach((match) => {
     switch (match.wildcards) {
       case 1:
         distanceMap.put(ANY, ANY, match.distance);
         break;
 
       case 2:
-        distanceMap.nodes().forEach(node => {
+        distanceMap.nodes().forEach((node) => {
           node.map.put(ANY, ANY, match.distance);
         });
         break;
 
       case 3:
-        distanceMap.nodes().forEach(outer => {
-          outer.map.nodes().forEach(inner => {
+        distanceMap.nodes().forEach((outer) => {
+          outer.map.nodes().forEach((inner) => {
             inner.map.put(ANY, ANY, match.distance);
           });
         });
@@ -294,10 +289,10 @@ const buildDistanceMap = (variables: MapSet, matchRules: RawMatchRule[]) => {
 
 const convert = (dm: DistanceMap): string => {
   const outer: any = {};
-  Object.keys(dm.map).forEach(have => {
+  Object.keys(dm.map).forEach((have) => {
     const h = dm.map[have];
     const inner: any = {};
-    Object.keys(h).forEach(want => {
+    Object.keys(h).forEach((want) => {
       const node = h[want];
       // const child = [node.distance];
       if (node.map.nodes().length !== 0) {
@@ -312,11 +307,15 @@ const convert = (dm: DistanceMap): string => {
 };
 
 const paradigmLocales = (data: any) =>
-  '{' + (data as string[]).reduce((p, c, i) => {
-    const k = LanguageResolver.resolve(c).compact();
-    p.push(`'${k}':${i}`);
-    return p;
-  }, [] as string[]).join(',') + '}';
+  '{' +
+  (data as string[])
+    .reduce((p, c, i) => {
+      const k = LanguageResolver.resolve(c).compact();
+      p.push(`'${k}':${i}`);
+      return p;
+    }, [] as string[])
+    .join(',') +
+  '}';
 
 const convertDistanceMap = (): string => {
   const encoded = convert(distanceMap);
@@ -345,8 +344,5 @@ export const getDistance = (data: any): Code[] => {
 
   const table = distanceMap.toString();
 
-  return [
-    Code.localematcher(['autogen.distance.ts'], code),
-    Code.top(['notes', 'language-distance-table.txt'], table)
-  ];
+  return [Code.localematcher(['autogen.distance.ts'], code), Code.top(['notes', 'language-distance-table.txt'], table)];
 };

@@ -1,4 +1,3 @@
-
 // Structure of our patch-generated JSON, derived from the CLDR common/rbnf XML files.
 
 export type JSONRootKey = keyof JSONRoot;

@@ -4,11 +4,11 @@ type MapType = { [x: string]: number };
 
 const DIGIT = /\d/g;
 
-const key = (k: string): string => DIGIT.test(k[0]) ? `'${k}'` : k;
+const key = (k: string): string => (DIGIT.test(k[0]) ? `'${k}'` : k);
 
 const encode = (map: MapType): string => {
   let raw = '';
-  Object.keys(map).forEach(k => {
+  Object.keys(map).forEach((k) => {
     if (raw.length > 0) {
       raw += ',';
     }
@@ -21,12 +21,12 @@ const DAYS: MapType = { sun: 1, mon: 2, tue: 3, wed: 4, thu: 5, fri: 6, sat: 7 }
 
 export const getWeekData = (data: any): Code[] => {
   const minDays: MapType = {};
-  Object.keys(data.minDays).forEach(k => {
+  Object.keys(data.minDays).forEach((k) => {
     minDays[k] = Number(data.minDays[k]);
   });
 
   const firstDay: MapType = {};
-  Object.keys(data.firstDay).forEach(k => {
+  Object.keys(data.firstDay).forEach((k) => {
     if (k.indexOf('-alt-variant') !== -1) {
       return;
     }
@@ -40,7 +40,5 @@ export const getWeekData = (data: any): Code[] => {
   code += NOLINT;
   code += `export const weekMinDays: { [x: string]: number } = {${encode(minDays)}};\n`;
 
-  return [
-    Code.core(['internals', 'calendars', 'autogen.weekdata.ts'], code)
-  ];
+  return [Code.core(['internals', 'calendars', 'autogen.weekdata.ts'], code)];
 };

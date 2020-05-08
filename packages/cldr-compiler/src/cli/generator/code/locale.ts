@@ -6,7 +6,7 @@ const enum Flags {
   LANG = 1,
   SCRIPT = 2,
   REGION = 4,
-  VARIANT = 8
+  VARIANT = 8,
 }
 
 const computeFlags = (_id: string, tag: LanguageTag) => {
@@ -73,7 +73,7 @@ const computeLocales = (): string => {
 
       const flags: number[] = [];
       const regions: string[] = [];
-      Object.keys(regionobj).forEach(region => {
+      Object.keys(regionobj).forEach((region) => {
         const [r, f] = region.split(':');
         regions.push(r);
         flags.push(parseInt(f, 10));
@@ -85,7 +85,7 @@ const computeLocales = (): string => {
         }
         s += flags[k];
       }
-      s += ',\'';
+      s += ",'";
 
       for (let k = 0; k < regions.length; k++) {
         if (k) {
@@ -93,7 +93,7 @@ const computeLocales = (): string => {
         }
         s += regions[k];
       }
-      s += '\']';
+      s += "']";
     }
     s += '}';
   }
@@ -108,7 +108,5 @@ export const getLocale = (_data: any): Code[] => {
   let code = HEADER + NOLINT_MAXLINE;
   code += `export const rawLocales: any = ${locales};\n`;
 
-  return [
-    Code.core(['locale', 'autogen.locales.ts'], code)
-  ];
+  return [Code.core(['locale', 'autogen.locales.ts'], code)];
 };

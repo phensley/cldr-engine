@@ -1,4 +1,3 @@
-
 import { pluralDigit } from '../utils';
 
 const plurals = ['other', 'zero', 'one', 'two', 'few', 'many'];
@@ -28,16 +27,20 @@ export interface AltSpec {
 /**
  * Generate tuple of keys for plural and alt.
  */
-export const categoryKeys =
-  (sep: string, categories: string[], field: string, replace?: string): [string, string, string][] => {
-    const keys: [string, string, string][] = [];
-    for (const c of categories) {
-      const key = c !== 'none' ? `${field}-${sep}-${c}` : field;
-      const rkey = replace || field;
-      keys.push([key, rkey, c]);
-    }
-    return keys;
-  };
+export const categoryKeys = (
+  sep: string,
+  categories: string[],
+  field: string,
+  replace?: string,
+): [string, string, string][] => {
+  const keys: [string, string, string][] = [];
+  for (const c of categories) {
+    const key = c !== 'none' ? `${field}-${sep}-${c}` : field;
+    const rkey = replace || field;
+    keys.push([key, rkey, c]);
+  }
+  return keys;
+};
 
 export const pluralKeys = (field: string, replace?: string): [string, string, string][] =>
   categoryKeys('count', plurals, field, replace);
@@ -112,8 +115,16 @@ export interface FieldsSpec {
   fields: (string | [string, string])[];
 }
 
-export type Spec = DigitsSpec | PluralSpec | AltSpec | KeysSpec | AltKeysSpec |
-  FieldSpec | FieldsSpec | PluralKeysSpec | PointSpec;
+export type Spec =
+  | DigitsSpec
+  | PluralSpec
+  | AltSpec
+  | KeysSpec
+  | AltKeysSpec
+  | FieldSpec
+  | FieldsSpec
+  | PluralKeysSpec
+  | PointSpec;
 
 /**
  * Apply the field mapping specs to the object, converting hierarchy of keys
@@ -243,7 +254,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
     }
 
     case 'altkeys': {
-      const orig = Object.keys(obj).filter(k => k.indexOf('-alt-') === -1);
+      const orig = Object.keys(obj).filter((k) => k.indexOf('-alt-') === -1);
       for (const raw of orig) {
         for (const keys of altKeys(raw, spec.mapping)) {
           const [key, rkey, c] = keys;
@@ -266,7 +277,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
     case 'pluralkeys': {
       const orig = Object.keys(obj);
 
-      const normal = orig.filter(k => k.indexOf('-count-') === -1);
+      const normal = orig.filter((k) => k.indexOf('-count-') === -1);
       for (const key of normal) {
         const v = obj[key];
         const pfx = [key, 'other'];
@@ -281,7 +292,7 @@ const tabular = (specs: Spec[], obj: any): string[][] => {
         }
       }
 
-      const plural = orig.filter(k => k.indexOf('-count-') !== -1).map(stripPlural);
+      const plural = orig.filter((k) => k.indexOf('-count-') !== -1).map(stripPlural);
       for (const raw of plural) {
         for (const keys of pluralKeys(raw)) {
           const [key, rkey, c] = keys;
@@ -374,7 +385,6 @@ export class MappingBuilder {
  * Entry points to Mapping builder.
  */
 export class Mappings {
-
   static digits(): MappingBuilder {
     return new MappingBuilder().digits();
   }
@@ -453,7 +463,7 @@ export const applyMappings = (root: any, mappings: Mapping[], debug = false): an
       if (debug) {
         console.log('I>', JSON.stringify(row));
       }
-      row = m.remap.map(i => row[i]);
+      row = m.remap.map((i) => row[i]);
       if (debug) {
         console.log('O>', JSON.stringify(row));
       }

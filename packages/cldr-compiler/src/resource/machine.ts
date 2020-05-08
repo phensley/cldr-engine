@@ -1,12 +1,4 @@
-import {
-  Digits,
-  Field,
-  Instruction,
-  Origin,
-  Scope,
-  ScopeMap,
-  Vector,
-} from '@phensley/cldr-core';
+import { Digits, Field, Instruction, Origin, Scope, ScopeMap, Vector } from '@phensley/cldr-core';
 
 const leftPad = (s: number | string, w: number): string => {
   s = typeof s === 'number' ? String(s) : s;
@@ -41,10 +33,9 @@ const PADDING = 8;
  * Executes the instructions to encode strings.
  */
 export class EncoderMachine {
-
   private origin!: Origin;
 
-  constructor(private encoder: Encoder, private verbose: boolean) { }
+  constructor(private encoder: Encoder, private verbose: boolean) {}
 
   encode(obj: any, inst: Instruction): void {
     switch (inst.type) {
@@ -106,14 +97,18 @@ export class EncoderMachine {
       totalCount += count;
       totalSize += size;
       if (this.verbose) {
-        console.log(`      ${leftPad(i.identifier, 20)}  ` +
-          `${leftPad(count, PADDING)} fields   ${leftPad(size, PADDING)} chars`);
+        console.log(
+          `      ${leftPad(i.identifier, 20)}  ` +
+            `${leftPad(count, PADDING)} fields   ${leftPad(size, PADDING)} chars`,
+        );
       }
     }
     if (this.verbose) {
       console.log('      --------------------   --------------   --------------');
-      console.log(`      ${leftPad('Total', 20)}  ` +
-        `${leftPad(totalCount, PADDING)} fields   ${leftPad(totalSize, PADDING)} chars`);
+      console.log(
+        `      ${leftPad('Total', 20)}  ` +
+          `${leftPad(totalCount, PADDING)} fields   ${leftPad(totalSize, PADDING)} chars`,
+      );
       console.log(`      ${leftPad('', 20)}  ${leftPad(this.encoder.distinct(), PADDING)} distinct strings`);
     }
   }

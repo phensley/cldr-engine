@@ -1,13 +1,13 @@
-import { getSupplemental} from '../../../cldr';
+import { getSupplemental } from '../../../cldr';
 import { Code, HEADER, NOLINT } from './util';
 
 const DIGIT = /\d/g;
 
-const key = (k: string): string => DIGIT.test(k[0]) ? `'${k}'` : k;
+const key = (k: string): string => (DIGIT.test(k[0]) ? `'${k}'` : k);
 
 const encode = (map: { [x: string]: number[] }): string => {
   let raw = '';
-  Object.keys(map).forEach(k => {
+  Object.keys(map).forEach((k) => {
     if (raw.length > 0) {
       raw += ',';
     }
@@ -33,18 +33,16 @@ export const getCalendarPrefs = (_data: any): Code[] => {
   };
 
   const calendarPrefs: { [x: string]: number[] } = {};
-  Object.keys(prefsData).forEach(id => {
+  Object.keys(prefsData).forEach((id) => {
     const prefs = prefsData[id].split(' ').map(getId);
     calendarPrefs[id] = prefs;
   });
 
   let code = HEADER + NOLINT;
-  code += `export const calendarIds: string[] = [${calendarIds.map(c => `'${c}'`).join(', ')}];\n\n`;
+  code += `export const calendarIds: string[] = [${calendarIds.map((c) => `'${c}'`).join(', ')}];\n\n`;
 
   code += NOLINT;
   code += `export const calendarPrefData: { [x: string]: number[] } = {${encode(calendarPrefs)}};\n`;
 
-  return [
-    Code.core(['internals', 'calendars', 'autogen.calprefs.ts'], code)
-  ];
+  return [Code.core(['internals', 'calendars', 'autogen.calprefs.ts'], code)];
 };

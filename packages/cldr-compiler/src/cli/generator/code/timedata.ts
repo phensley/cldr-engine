@@ -4,7 +4,7 @@ import { escapeString, Code, HEADER, NOLINT } from './util';
 export const getTimeData = (data: any): Code[] => {
   const timeData: { [x: string]: { [y: string]: string } } = {};
 
-  Object.keys(data.timeData).forEach(k => {
+  Object.keys(data.timeData).forEach((k) => {
     let tag = parseLanguageTag(k);
     if (!tag.hasRegion()) {
       tag = parseLanguageTag(`und-${k}`);
@@ -49,10 +49,8 @@ export const getTimeData = (data: any): Code[] => {
 
   code += NOLINT;
   code += `export const timeStrings: string[] = [`;
-  code += `  ${strings.map(s => escapeString(s, "'")).join(',')}`;
+  code += `  ${strings.map((s) => escapeString(s, "'")).join(',')}`;
   code += `];\n`;
 
-  return [
-    Code.core(['internals', 'calendars', 'autogen.timedata.ts'], code)
-  ];
+  return [Code.core(['internals', 'calendars', 'autogen.timedata.ts'], code)];
 };

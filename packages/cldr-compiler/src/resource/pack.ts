@@ -19,15 +19,13 @@ const loadDefaultContent = () =>
 const DELIMITER = '_';
 
 class Layer {
-
   readonly localeId: string;
   readonly strings: string[] = [];
   readonly index: number[] = [];
 
-  constructor(
-    readonly tag: LanguageTag, readonly isDefault: boolean) {
-      this.localeId = tag.expanded();
-    }
+  constructor(readonly tag: LanguageTag, readonly isDefault: boolean) {
+    this.localeId = tag.expanded();
+  }
 }
 
 const RE_QUOTE = /"/g;
@@ -36,7 +34,7 @@ const RE_QUOTE = /"/g;
  * Join an array of strings together, escape double quotes, and UTF-8
  * encode the result.
  */
-const join = (strings: string[]): string => strings.join(DELIMITER).replace(RE_QUOTE, '\"');
+const join = (strings: string[]): string => strings.join(DELIMITER).replace(RE_QUOTE, '"');
 
 /**
  * Builds a resource pack containing all strings across all regions for a
@@ -46,7 +44,6 @@ const join = (strings: string[]): string => strings.join(DELIMITER).replace(RE_Q
  * the decoding and string lookup at runtime.
  */
 export class ResourcePack {
-
   // Layers are grouped by script
   private layers: { [x: string]: Layer[] } = {};
   private current!: Layer;
@@ -54,13 +51,7 @@ export class ResourcePack {
 
   private spellout: string = '{}';
 
-  constructor(
-    private language: string,
-    private version: string,
-    private cldrVersion: string,
-    rbnf?: RBNFCollector
-  ) {
-
+  constructor(private language: string, private version: string, private cldrVersion: string, rbnf?: RBNFCollector) {
     if (rbnf) {
       const packer: RBNFPacker = new RBNFPacker(rbnf);
       this.spellout = packer.pack(language);
@@ -117,7 +108,7 @@ export class ResourcePack {
 
   render(checksum: string): string {
     const scripts: string[] = [];
-    Object.keys(this.layers).forEach(script => {
+    Object.keys(this.layers).forEach((script) => {
       const json = this.renderScript(script);
       scripts.push(`"${script}":${json}`);
     });
@@ -126,13 +117,15 @@ export class ResourcePack {
       throw new Error(`No default layer found for ${this.language}!`);
     }
 
-    return `{"version":"${this.version}",` +
+    return (
+      `{"version":"${this.version}",` +
       `"cldr":"${this.cldrVersion}",` +
       `"checksum":"${checksum}",` +
       `"language":"${this.language}",` +
       `"defaultTag":"${this.defaultLayer}",` +
       `"scripts":{${scripts.join(',')}},` +
-      `"spellout":${this.spellout}}`;
+      `"spellout":${this.spellout}}`
+    );
   }
 
   /**
@@ -194,8 +187,8 @@ export class ResourcePack {
 
     // Pack all regions together with their exception indices.
     let defaultRegion = '';
-    const regions = layers.map(curr => {
-      const idx = curr.index.map(n => n.toString(36)).join(' ');
+    const regions = layers.map((curr) => {
+      const idx = curr.index.map((n) => n.toString(36)).join(' ');
 
       let id = curr.tag.region();
       if (curr.isDefault) {
@@ -223,10 +216,12 @@ export class ResourcePack {
     // Manually build the JSON to ensure the same result every time (avoid passing
     // through object hash functions). We return a raw UTF-16 string that the
     // Node.js fs module will write as UTF-8.
-    return `{"strings":"${join(base.strings)}",` +
+    return (
+      `{"strings":"${join(base.strings)}",` +
       `"exceptions":"${join(exceptions)}",` +
       `"regions":{${regions.join(',')}},` +
-      `"defaultRegion":"${defaultRegion}"}`;
+      `"defaultRegion":"${defaultRegion}"}`
+    );
   }
 
   /**
@@ -259,8 +254,10 @@ export class ResourcePack {
 
         /* istanbul ignore if */
         if (baseLen !== currLen) {
-          throw new Error(`Severe error: string tables for ${base.localeId} and` +
-            `${curr.localeId} lengths differ: ${baseLen} !== ${currLen}`);
+          throw new Error(
+            `Severe error: string tables for ${base.localeId} and` +
+              `${curr.localeId} lengths differ: ${baseLen} !== ${currLen}`,
+          );
         }
 
         // Distance is the number of field values that differ.
@@ -272,12 +269,11 @@ export class ResourcePack {
       }
 
       // Keep track of the total distance for each potential base layer.
-      distances.push([ dist, base ]);
+      distances.push([dist, base]);
     }
 
     // Sort by distance and return the layer with the smallest distance.
-    distances.sort((a, b) => a[0] === b[0] ? 0 : a[0] < b[0] ? -1 : 1);
+    distances.sort((a, b) => (a[0] === b[0] ? 0 : a[0] < b[0] ? -1 : 1));
     return distances[0][1];
   }
-
 }

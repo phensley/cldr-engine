@@ -40,13 +40,15 @@ const parseRule = (lang: string, category: string, raw: string): CompactOrCondit
 
 const parseRules = (pluralSet: any): StringMap => {
   const map: { [k: string]: any } = {};
-  Object.keys(pluralSet).forEach(lang => {
+  Object.keys(pluralSet).forEach((lang) => {
     const obj = pluralSet[lang];
-    map[lang] = Object.keys(obj).filter(k => k.split('-')[2] !== 'other').map(k => {
-      const code = categories[k.split('-')[2]];
-      const json = parseRule(lang, k, obj[k]);
-      return [code, json.map(c => c.map(exprId))];
-    });
+    map[lang] = Object.keys(obj)
+      .filter((k) => k.split('-')[2] !== 'other')
+      .map((k) => {
+        const code = categories[k.split('-')[2]];
+        const json = parseRule(lang, k, obj[k]);
+        return [code, json.map((c) => c.map(exprId))];
+      });
   });
   return map;
 };
@@ -56,12 +58,12 @@ const IGNORE = new Set(['@integer', '@decimal', '…']);
 
 const parseSamples = (pluralSet: any): StringMap => {
   const map: any = {};
-  Object.keys(pluralSet).forEach(lang => {
+  Object.keys(pluralSet).forEach((lang) => {
     const obj = pluralSet[lang];
-    map[lang] = Object.keys(obj).map(k => {
+    map[lang] = Object.keys(obj).map((k) => {
       const code = k.split('-')[2];
       const rule = parsePluralRule(obj[k]).get()._1;
-      const samples = rule.samples.split(SPACER).filter(s => !IGNORE.has(s));
+      const samples = rule.samples.split(SPACER).filter((s) => !IGNORE.has(s));
       return [code, samples];
     });
   });
@@ -74,18 +76,17 @@ export const getPlurals = (): any => {
 
   const cardinals = parseRules(Cardinals);
   const ordinals = parseRules(Ordinals);
-  const exprs = Object.keys(expressions)
-    .sort((a, b) => expressions[a] < expressions[b] ? -1 : 1);
+  const exprs = Object.keys(expressions).sort((a, b) => (expressions[a] < expressions[b] ? -1 : 1));
 
   const samples = {
     cardinals: parseSamples(Cardinals),
-    ordinals: parseSamples(Ordinals)
+    ordinals: parseSamples(Ordinals),
   };
 
   return {
     cardinals,
     ordinals,
-    expressions: exprs.map(e => JSON.parse(e)),
-    samples
+    expressions: exprs.map((e) => JSON.parse(e)),
+    samples,
   };
 };

@@ -9,15 +9,7 @@ const parseDate = (raw: string): number => {
   if (m === null) {
     throw new Error(`Parse failed, invalid date: ${raw}`);
   }
-  return Date.UTC(
-    int(m[1]),
-    int(m[2]) - 1,
-    int(m[3]),
-    int(m[4]),
-    int(m[5]),
-    0,
-    0
-  );
+  return Date.UTC(int(m[1]), int(m[2]) - 1, int(m[3]), int(m[4]), int(m[5]), 0, 0);
 };
 
 /**
@@ -25,7 +17,7 @@ const parseDate = (raw: string): number => {
  */
 const parseMetazoneRanges = (metazones: any): any => {
   const res: any = {};
-  Object.keys(metazones).forEach(k => {
+  Object.keys(metazones).forEach((k) => {
     const ranges: string[][] = [];
     metazones[k].forEach((range: any) => {
       const { _mzone, _from, _to } = range.usesMetazone;

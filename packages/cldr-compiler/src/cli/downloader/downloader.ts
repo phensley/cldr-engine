@@ -41,7 +41,7 @@ const ARCHIVES = [
   'cldr-numbers-modern',
   // 'cldr-rbnf', //
   // 'cldr-segments-modern',
-  'cldr-units-modern'
+  'cldr-units-modern',
 ];
 
 // We use the specific commit when a cldr JSON update is pushed
@@ -61,11 +61,7 @@ const COMMITS: any = {
   // 'cldr-units-modern': '6ce59f5c2e0a6def19f09344032b33925c67bf75'
 };
 
-const SUPPLEMENTAL = new Set([
-  'availableLocales.json',
-  'defaultContent.json',
-  'scriptMetadata.json'
-]);
+const SUPPLEMENTAL = new Set(['availableLocales.json', 'defaultContent.json', 'scriptMetadata.json']);
 
 type State = { [archive: string]: string };
 
@@ -83,7 +79,6 @@ const info = (m: string) => console.log(m);
 const error = (m: string) => console.log(`${chalk.red('ERROR')} ${m}`);
 
 export class Downloader {
-
   private state: State;
 
   constructor(readonly version: string) {
@@ -157,10 +152,9 @@ export class Downloader {
     if (group === 'supplemental' || group === 'main') {
       const path = [version, ...parts].join(filepath.sep);
       makedirs(DATAROOT, path);
-      entry.pipe(fs.createWriteStream(filepath.join(DATAROOT, path), { encoding: 'utf-8' }))
-        .on('error', (e: Error) => {
-          error(`failure writing entry ${path}: ${e}`);
-        });
+      entry.pipe(fs.createWriteStream(filepath.join(DATAROOT, path), { encoding: 'utf-8' })).on('error', (e: Error) => {
+        error(`failure writing entry ${path}: ${e}`);
+      });
     } else {
       entry.resume();
     }
@@ -182,5 +176,4 @@ export class Downloader {
     const data = JSON.stringify(this.state, undefined, '  ');
     fs.writeFileSync(path, data, { encoding: 'utf-8' });
   }
-
 }

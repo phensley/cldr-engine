@@ -43,19 +43,21 @@ export type LocaleMap = { [x: string]: Locale[] };
  * Build a mapping of language -> Locale[].
  */
 export const buildLocaleMap = (): LocaleMap =>
-  availableLocales().map(getLocale).reduce((o: LocaleMap, c) => {
-    const lang = c.tag.language();
-    const values = o[lang] || [];
-    values.push(c);
-    o[lang] = values;
-    return o;
-  }, {});
+  availableLocales()
+    .map(getLocale)
+    .reduce((o: LocaleMap, c) => {
+      const lang = c.tag.language();
+      const values = o[lang] || [];
+      values.push(c);
+      o[lang] = values;
+      return o;
+    }, {});
 
 /**
  * Ensure any languages passed on the command line are valid / known.
  */
 export const checkLanguages = (languages: string[], localeMap: LocaleMap): string[] => {
-  languages.forEach(k => {
+  languages.forEach((k) => {
     if (localeMap[k] === undefined) {
       throw new Error(`Unknown or unsupported language '${k}'`);
     }

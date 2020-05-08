@@ -58,7 +58,10 @@ const run = (args: yargs.Arguments<PreprocessOptions>): void => {
 };
 
 export const preprocessOptions = (argv: yargs.Argv) =>
-  argv.command('data', 'Preprocess data files', (y: yargs.Argv) => y
-    .option('w', { alias: 'which', type: 'array', description: 'Which data' })
-    .choices('w', Object.keys(OUTPUTS)),
-    run);
+  argv.command(
+    'data',
+    'Preprocess data files',
+    (y: yargs.Argv) =>
+      y.option('w', { alias: 'which', type: 'array', description: 'Which data' }).choices('w', Object.keys(OUTPUTS)),
+    run,
+  );

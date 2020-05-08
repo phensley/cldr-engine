@@ -27,7 +27,7 @@ const parseTime = (s: string): number => {
   const parts = s.split(':');
   const hours = parseInt(parts[0], 10);
   const minutes = parseInt(parts[1], 10);
-  return (hours * 60) + minutes;
+  return hours * 60 + minutes;
 };
 
 const compare = (a: Until, b: Until): number => {
@@ -47,7 +47,6 @@ const expand = (untils: Until[]): Until[] => {
   for (const u of untils) {
     if (u.type === 'exact') {
       res.push(u);
-
     } else {
       // Wrap-around splits into 2 ranges
       if (u.from > u.before) {
@@ -67,8 +66,8 @@ const expand = (untils: Until[]): Until[] => {
       continue;
     }
     let overlap = false;
-    res.forEach(v => {
-      overlap = overlap || v.type === 'exact' && v.at === u.from;
+    res.forEach((v) => {
+      overlap = overlap || (v.type === 'exact' && v.at === u.from);
     });
     if (overlap) {
       u.from += 1;
@@ -85,16 +84,16 @@ export const getDayPeriods = (_data: any): Code[] => {
   code += `import { DayPeriodType } from '@phensley/cldr-types';\n\n`;
 
   code += 'export const dayPeriodKeys: DayPeriodType[] = [\n  ';
-  code += KEYS.map(s => `'${s}'`).join(', ');
+  code += KEYS.map((s) => `'${s}'`).join(', ');
   code += '\n];\n\n';
 
   code += 'export const dayPeriodRules: { [x: string]: string } = {\n';
 
   const { DayPeriods } = getSupplemental();
-  Object.keys(DayPeriods).forEach(id => {
+  Object.keys(DayPeriods).forEach((id) => {
     const dayPeriod = DayPeriods[id];
     let untils: Until[] = [];
-    KEYS.forEach(key => {
+    KEYS.forEach((key) => {
       const o = dayPeriod[key];
       if (o === undefined) {
         return;
@@ -103,14 +102,14 @@ export const getDayPeriods = (_data: any): Code[] => {
         untils.push({
           type: 'exact',
           key,
-          at: parseTime(o._at)
+          at: parseTime(o._at),
         });
       } else {
         untils.push({
           type: 'range',
           key,
           from: parseTime(o._from),
-          before: parseTime(o._before)
+          before: parseTime(o._before),
         });
       }
     });
@@ -121,9 +120,11 @@ export const getDayPeriods = (_data: any): Code[] => {
 
     untils = expand(untils);
 
-    const times = untils.map(u => u.type === 'exact' ? u.at : u.from)
-      .map(n => n.toString(36)).join(' ');
-    const keys = untils.map(u => INDEX[u.key]);
+    const times = untils
+      .map((u) => (u.type === 'exact' ? u.at : u.from))
+      .map((n) => n.toString(36))
+      .join(' ');
+    const keys = untils.map((u) => INDEX[u.key]);
     const value = `${keys.join(' ')}|${times}`;
 
     if (id.indexOf('-') !== -1) {
@@ -134,7 +135,5 @@ export const getDayPeriods = (_data: any): Code[] => {
 
   code += '};\n';
 
-  return [
-    Code.core(['internals', 'calendars', 'autogen.dayperiods.ts'], code)
-  ];
+  return [Code.core(['internals', 'calendars', 'autogen.dayperiods.ts'], code)];
 };

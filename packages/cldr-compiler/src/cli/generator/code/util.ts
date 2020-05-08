@@ -18,9 +18,7 @@ const FORMAT_OPTIONS: Options = {
 };
 
 export class Code {
-  private constructor(
-    readonly path: string[],
-    readonly source: string) { }
+  private constructor(readonly path: string[], readonly source: string) {}
 
   static core(path: string[], source: string): Code {
     return new Code(['packages', 'cldr-core', 'src', ...path], source);
@@ -55,7 +53,7 @@ export class Code {
   }
 }
 
-const ENUM_UNSAFE = /[^a-z\d\/_-]+/ig;
+const ENUM_UNSAFE = /[^a-z\d\/_-]+/gi;
 const DASH = /[\/-]+/g;
 
 export const enumName = (raw: string) => raw.replace(ENUM_UNSAFE, '').replace(DASH, '_');
@@ -91,14 +89,16 @@ export const lineWrap = (max: number, sep: string, values: string[]): string => 
 };
 
 export const objectToString = (o: any): string =>
-  Object.keys(o).map(k => [k, o[k]].join(':')).join('|');
+  Object.keys(o)
+    .map((k) => [k, o[k]].join(':'))
+    .join('|');
 
 /**
  * Return a sorted array holding the set's elements.
  */
 export const sortSet = (set: Set<string>): string[] => {
   const res: string[] = [];
-  set.forEach(v => res.push(v));
+  set.forEach((v) => res.push(v));
   return res.sort();
 };
 
@@ -140,7 +140,7 @@ const escapeHex = (n: number, d: number) => {
   return r;
 };
 
-const inRange = (s: number, e: number) => (n: number) => (n >= s && n <= e);
+const inRange = (s: number, e: number) => (n: number) => n >= s && n <= e;
 
 const isLatin1Invisible = (c: number) => c === 0xa0 || c === 0xad;
 const isControl0 = inRange(0, 0x1f);
@@ -153,20 +153,20 @@ const invisibles = {
   '\n': '\\n',
   '\r': '\\r',
   '\t': '\\t',
-  '\v': '\\v'
+  '\v': '\\v',
 };
 
 /**
  * Escape a string so it can appear as a literal in Typescript source.
  */
-export const escapeString = (raw: string, delim: string = '\'') => {
+export const escapeString = (raw: string, delim: string = "'") => {
   let esc = delim;
   const len = raw.length;
   for (let i = 0; i < len; i++) {
     const ch = raw[i];
     switch (ch) {
       case '"':
-      case '\'':
+      case "'":
       case '`':
         esc += ch === delim ? '\\' + ch : ch;
         break;

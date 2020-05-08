@@ -17,17 +17,17 @@ import {
   transformRegion,
   transformScript,
   transformTimezones,
-  transformUnits
+  transformUnits,
 } from './data';
 
 const DATAROOT = resolve(join(__dirname, '../.cldr'));
 
 const get = (optic: any) => (o: any) => L.get(optic, o);
 
-const _widthTemplate = { 'wide': [], 'narrow': [], 'abbreviated': [], 'short': [] };
+const _widthTemplate = { wide: [], narrow: [], abbreviated: [], short: [] };
 
 const _alias = ['metadata', 'alias'];
-const _formats = L.pickIn({ 'format': _widthTemplate, 'stand-alone': _widthTemplate });
+const _formats = L.pickIn({ format: _widthTemplate, 'stand-alone': _widthTemplate });
 
 const _languageMatching = ['languageMatching', 'written_new'];
 const _sizeProps = L.props('short', 'medium', 'long', 'full');
@@ -35,8 +35,7 @@ const _timeZoneNames = ['dates', 'timeZoneNames'];
 
 const _dateFields = ['dates', 'fields'];
 
-const isTimeZone = (o: any) => typeof o === 'object' &&
-  ('exemplarCity' in o || 'short' in o || 'long' in o);
+const isTimeZone = (o: any) => typeof o === 'object' && ('exemplarCity' in o || 'short' in o || 'long' in o);
 
 const isTimeZoneAlias = (o: any) => '_replacement' in o;
 
@@ -58,8 +57,7 @@ const assign = (dst: any, ...src: any[]): any => {
  */
 const flattenTimeZones = (obj: any): any => {
   const inner = (o: any, path: string[] = []): any =>
-    isTimeZone(o) ? [{ [path.join('/')]: o }] :
-      [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
+    isTimeZone(o) ? [{ [path.join('/')]: o }] : [].concat(...Object.keys(o).map((k) => inner(o[k], path.concat([k]))));
   return assign({}, ...inner(obj));
 };
 
@@ -79,8 +77,9 @@ const flattenAlias = (obj: any) => {
  */
 const flattenZoneAliases = (obj: any) => {
   const inner = (o: any, path: string[] = []): any =>
-    isTimeZoneAlias(o) ? [{ [path.join('/')]: o._replacement }] :
-      [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
+    isTimeZoneAlias(o)
+      ? [{ [path.join('/')]: o._replacement }]
+      : [].concat(...Object.keys(o).map((k) => inner(o[k], path.concat([k]))));
   return assign({}, ...inner(obj));
 };
 
@@ -89,8 +88,9 @@ const flattenZoneAliases = (obj: any) => {
  */
 const flattenMetaZones = (obj: any): any => {
   const inner = (o: any, path: string[] = []): any =>
-    Array.isArray(o) ? [{ [path.join('/')]: o }] :
-      [].concat(...Object.keys(o).map(k => inner(o[k], path.concat([k]))));
+    Array.isArray(o)
+      ? [{ [path.join('/')]: o }]
+      : [].concat(...Object.keys(o).map((k) => inner(o[k], path.concat([k]))));
   return assign({}, ...inner(obj));
 };
 
@@ -99,10 +99,10 @@ const flattenMetaZones = (obj: any): any => {
  */
 const fixIntervals = (obj: any) => {
   const res: any = {};
-  Object.keys(obj).forEach(skel => {
+  Object.keys(obj).forEach((skel) => {
     const outer = obj[skel];
     const inner: any = {};
-    Object.keys(outer).forEach(field => {
+    Object.keys(outer).forEach((field) => {
       const key = field === 'h' ? 'H' : field;
       inner[key] = outer[field];
     });
@@ -133,7 +133,7 @@ const Aliases = {
   scriptAlias: get([_alias, 'scriptAlias', flattenAlias]),
   territoryAlias: get([_alias, 'territoryAlias', flattenAlias]),
   variantAlias: get([_alias, 'variantAlias', flattenAlias]),
-  zoneAlias: get([_alias, 'zoneAlias', flattenZoneAliases])
+  zoneAlias: get([_alias, 'zoneAlias', flattenZoneAliases]),
 };
 
 /**
@@ -142,7 +142,7 @@ const Aliases = {
 const currencyRegion = (o: any): any => {
   const res: any = {};
   const keys = Object.keys(o);
-  keys.forEach(k => {
+  keys.forEach((k) => {
     for (const e of o[k]) {
       const code = Object.keys(e)[0];
       const r = e[code];
@@ -159,7 +159,7 @@ const currencyRegion = (o: any): any => {
  * Currency regions
  */
 const CurrencyRegions = {
-  regions: get(['currencyData', 'region', currencyRegion])
+  regions: get(['currencyData', 'region', currencyRegion]),
 };
 
 const _orientation = ['layout', 'orientation'];
@@ -168,7 +168,7 @@ const LAYOUT_KEY: any = {
   'left-to-right': 'ltr',
   'right-to-left': 'rtl',
   'top-to-bottom': 'ttb',
-  'bottom-to-top': 'btt'
+  'bottom-to-top': 'btt',
 };
 
 const layoutKey = (k: string): string => {
@@ -180,7 +180,7 @@ const layoutKey = (k: string): string => {
  */
 const Layout = {
   characterOrder: get([_orientation, 'characterOrder', layoutKey]),
-  lineOrder: get([_orientation, 'lineOrder', layoutKey])
+  lineOrder: get([_orientation, 'lineOrder', layoutKey]),
 };
 
 const contextRename = (s: string) => {
@@ -215,7 +215,7 @@ const contextCategories = (obj: any): any => {
         throw new Error(`Found unexpected context key ${key}`);
       }
     }
-    const vals = contextKeys.map(c => contextRename(sub[c])).join('');
+    const vals = contextKeys.map((c) => contextRename(sub[c])).join('');
     r[cat] = vals;
   }
   return r;
@@ -230,7 +230,7 @@ const ContextTransforms = {
 
 const dateFieldNames = (obj: any): any => {
   const r: any = {};
-  Object.keys(obj).forEach(k => {
+  Object.keys(obj).forEach((k) => {
     const parts = k.split('-');
     const name = parts[0];
     const width = parts[1] || 'wide';
@@ -245,7 +245,7 @@ const dateFieldNames = (obj: any): any => {
  * Date fields, relative times.
  */
 const DateFields = {
-  relativeTimes: get([_dateFields, dateFieldNames])
+  relativeTimes: get([_dateFields, dateFieldNames]),
 };
 
 const filterFormats = (o: any, plural: boolean) => {
@@ -298,7 +298,7 @@ const coreCalendarSchema = (name: string) => {
     months: get(prefix('months', _formats)),
     quarters: get(prefix('quarters', _formats)),
     timeFormats: get(prefix('timeFormats', _sizeProps)),
-    weekdays: get(prefix('days', _formats))
+    weekdays: get(prefix('days', _formats)),
   };
 };
 
@@ -353,7 +353,7 @@ const Persian = {
 const LanguageMatching = {
   languageMatch: get([_languageMatching, 'languageMatch']),
   matchVariable: get([_languageMatching, 'matchVariable']),
-  paradigmLocales: get([_languageMatching, 'paradigmLocales'])
+  paradigmLocales: get([_languageMatching, 'paradigmLocales']),
 };
 
 const listPatternKeys = [
@@ -362,7 +362,7 @@ const listPatternKeys = [
   ['or', 'or'],
   ['unit', 'unitLong'],
   ['unit-narrow', 'unitNarrow'],
-  ['unit-short', 'unitShort']
+  ['unit-short', 'unitShort'],
 ];
 
 const listPattern = (o: any): any => {
@@ -384,8 +384,12 @@ const MetaZones = {
 };
 
 const numberSystemKeys = [
-  'currencyFormats', 'decimalFormats', 'percentFormats', 'scientificFormats', 'symbols',
-  'miscPatterns'
+  'currencyFormats',
+  'decimalFormats',
+  'percentFormats',
+  'scientificFormats',
+  'symbols',
+  'miscPatterns',
 ];
 
 /**
@@ -396,7 +400,7 @@ const numberSystemInfo = (o: any): any => {
 
   // Get unique numbering system keys in this locale
   const systems = new Set<string>();
-  Object.keys(o).forEach(k => {
+  Object.keys(o).forEach((k) => {
     if (k.startsWith('decimalFormats-numberSystem')) {
       const system = k.split('-')[2];
       systems.add(system);
@@ -404,9 +408,9 @@ const numberSystemInfo = (o: any): any => {
   });
 
   // Group formats by numbering system
-  systems.forEach(name => {
+  systems.forEach((name) => {
     const system: any = {};
-    numberSystemKeys.forEach(k => {
+    numberSystemKeys.forEach((k) => {
       system[k] = o[`${k}-numberSystem-${name}`];
     });
     r[name] = system;
@@ -423,7 +427,7 @@ const numberSystems = (o: any): any => {
     default: def,
     native,
     finance: other.finance || def,
-    traditional: other.traditional || native
+    traditional: other.traditional || native,
   };
 };
 
@@ -445,14 +449,12 @@ const TimeZoneNames = {
   hourFormat: get([_timeZoneNames, 'hourFormat']),
   regionFormat: get([_timeZoneNames, 'regionFormat']),
   metaZones: get([_timeZoneNames, 'metazone']),
-  timeZones: get([_timeZoneNames, 'zone', flattenTimeZones])
+  timeZones: get([_timeZoneNames, 'zone', flattenTimeZones]),
 };
 
 // const _pruneUnitFormats = L.remove(L.props('per', 'coordinateUnit'));
 
-const NON_UNIT_CATEGORIES = new Set([
-  'times', 'per', 'coordinateUnit', 'power2', 'power3'
-]);
+const NON_UNIT_CATEGORIES = new Set(['times', 'per', 'coordinateUnit', 'power2', 'power3']);
 
 /**
  * Get the full unit names.
@@ -500,7 +502,7 @@ const WeekData = {
   minDays: get(['weekData', 'minDays']),
   firstDay: get(['weekData', 'firstDay']),
   weekendStart: get(['weekData', 'weekendStart']),
-  weekendEnd: get(['weekData', 'weekendEnd'])
+  weekendEnd: get(['weekData', 'weekendEnd']),
 };
 
 /**
@@ -554,17 +556,14 @@ export const getMain = (language: string, transform: boolean = true) => {
 
     Names: {
       languages: {
-        ...access({ displayName: get(['localeDisplayNames', 'languages']) }, 'languages',
-          false, transformLanguage)
+        ...access({ displayName: get(['localeDisplayNames', 'languages']) }, 'languages', false, transformLanguage),
       },
       scripts: {
-        ...access({ displayName: get(['localeDisplayNames', 'scripts']) }, 'scripts',
-          false, transformScript),
+        ...access({ displayName: get(['localeDisplayNames', 'scripts']) }, 'scripts', false, transformScript),
       },
       regions: {
-        ...access({ displayName: get(['localeDisplayNames', 'territories']) }, 'territories',
-          false, transformRegion)
-      }
+        ...access({ displayName: get(['localeDisplayNames', 'territories']) }, 'territories', false, transformRegion),
+      },
     },
 
     ...access({ Characters: get(['characters']) }, 'characters'),
@@ -602,7 +601,7 @@ export const getSupplemental = () => {
     ...access({ LikelySubtags: get(['likelySubtags']) }, 'likelySubtags'),
     ...access({ NumberingSystems: get(['numberingSystems']) }, 'numberingSystems'),
     ...access({ TerritoryContainment: get(['territoryContainment']) }, 'territoryContainment'),
-    ...access({ TimeData: get(['timeData']) }, 'timeData')
+    ...access({ TimeData: get(['timeData']) }, 'timeData'),
   };
 };
 
@@ -616,7 +615,7 @@ export const getOther = () => {
   };
 
   return {
-    ...access({ DefaultContent: get(['defaultContent']) }, 'defaultContent')
+    ...access({ DefaultContent: get(['defaultContent']) }, 'defaultContent'),
   };
 };
 
@@ -624,7 +623,6 @@ export const getOther = () => {
  * Exports all extensions / patches.
  */
 export const getExtensions = () => {
-
   const access = (group: {}, filename: string) => {
     const path = join(__dirname, '..', 'data', 'patches', `${filename}.json`);
     const data = JSON.parse(fs.readFileSync(path, { encoding: 'utf-8' }));
@@ -634,15 +632,14 @@ export const getExtensions = () => {
 
   return {
     LanguageMatching: access(LanguageMatching, 'languageMatching-fix'),
-    ...access({ PluralRanges: get(['pluralRanges']) }, 'pluralRanges-fix')
+    ...access({ PluralRanges: get(['pluralRanges']) }, 'pluralRanges-fix'),
   };
 };
 
 /**
  * Available locales.
  */
-export const availableLocales = () =>
-  _availableLocales('modern').filter(v => v !== 'root');
+export const availableLocales = () => _availableLocales('modern').filter((v) => v !== 'root');
 
 const _availableLocales = (group: string): string[] =>
   cldrjson('supplemental', 'availableLocales')['availableLocales'][group];

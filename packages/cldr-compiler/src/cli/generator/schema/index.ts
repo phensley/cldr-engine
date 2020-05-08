@@ -5,8 +5,7 @@ import * as yargs from 'yargs';
 import { getMain, getSupplemental } from '../../../cldr';
 import { buildLocaleMap, checkLanguages, writeJSON } from '../../compiler/util';
 
-const isObject = (o: any): boolean =>
-  typeof o === 'object' ? o !== null && !Array.isArray(o) : false;
+const isObject = (o: any): boolean => (typeof o === 'object' ? o !== null && !Array.isArray(o) : false);
 
 /**
  * Recurse into an object, replacing all nested leaf values with integer 1.
@@ -39,7 +38,6 @@ const mergeKeyCounts = (dst: any, ...sources: any[]): any => {
           Object.assign(dst, { [key]: {} });
         }
         mergeKeyCounts(dst[key], src[key]);
-
       } else {
         const v = dst[key];
         dst[key] = v ? src[key] + v : src[key];
@@ -75,8 +73,8 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
   }
 
   const locales: string[] = [];
-  langs.forEach(lang => {
-    localeMap[lang].forEach(r => {
+  langs.forEach((lang) => {
+    localeMap[lang].forEach((r) => {
       if (!regions || regions.has(r.tag.region())) {
         locales.push(r.id);
       }
@@ -85,10 +83,10 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
 
   const transform = !args['pre-transform'];
   const sections: any = {};
-  locales.forEach(locale => {
+  locales.forEach((locale) => {
     console.warn(`Scanning ${locale}..`);
     const main = getMain(locale, transform);
-    Object.keys(main).forEach(key => {
+    Object.keys(main).forEach((key) => {
       const prefix = `Main.${key}`;
       const dst = sections[prefix] || {};
       const src = main[key];
@@ -102,12 +100,12 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
   });
 
   const supplemental = getSupplemental();
-  Object.keys(supplemental).forEach(key => {
+  Object.keys(supplemental).forEach((key) => {
     const src = supplemental[key];
     sections[`Supplemental.${key}`] = keyCounts(src, args['with-values']);
   });
 
-  Object.keys(sections).forEach(key => {
+  Object.keys(sections).forEach((key) => {
     const obj = sections[key];
     if (!fs.existsSync(args.out)) {
       fs.mkdirSync(args.out);
@@ -117,17 +115,22 @@ const run = (args: yargs.Arguments<SchemaOptions>): void => {
 };
 
 export const schemaOptions = (argv: yargs.Argv<any>) =>
-  argv.command('schema', 'Generate schema', (y: yargs.Argv<SchemaOptions>) => y
-    .option('l', { description: 'List of languages' })
-    .alias('l', 'lang')
-    .alias('r', 'region')
-    .option('r', { description: 'Regions' })
-    .option('n', { boolean: true })
-    .alias('n', 'dry-run')
-    .option('o', { description: 'Output dir', required: true })
-    .alias('o', 'out')
-    .option('p', { boolean: true, description: 'Pre transform' })
-    .alias('p', 'pre-transform')
-    .option('w', { boolean: true, description: 'With value leaf nodes' })
-    .alias('w', 'with-values'),
-    run);
+  argv.command(
+    'schema',
+    'Generate schema',
+    (y: yargs.Argv<SchemaOptions>) =>
+      y
+        .option('l', { description: 'List of languages' })
+        .alias('l', 'lang')
+        .alias('r', 'region')
+        .option('r', { description: 'Regions' })
+        .option('n', { boolean: true })
+        .alias('n', 'dry-run')
+        .option('o', { description: 'Output dir', required: true })
+        .alias('o', 'out')
+        .option('p', { boolean: true, description: 'Pre transform' })
+        .alias('p', 'pre-transform')
+        .option('w', { boolean: true, description: 'With value leaf nodes' })
+        .alias('w', 'with-values'),
+    run,
+  );

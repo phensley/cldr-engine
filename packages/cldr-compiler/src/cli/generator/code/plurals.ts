@@ -38,9 +38,9 @@ export const getPlurals = (data: any): Code[] => {
 
   // Generate test cases from rule samples
   code = '';
-  Object.keys(samples).forEach(typ => {
+  Object.keys(samples).forEach((typ) => {
     const langs = samples[typ];
-    Object.keys(langs).forEach(lang => {
+    Object.keys(langs).forEach((lang) => {
       for (const group of langs[lang]) {
         const [category, cases] = group;
         // console.log(category, cases, '!');

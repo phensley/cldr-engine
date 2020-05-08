@@ -14,7 +14,6 @@ export interface Maybe<T> {
  * Class for a singleton object representing all values that are not there.
  */
 export class Nothing<T> implements Maybe<T> {
-
   isJust(): boolean {
     return false;
   }
@@ -44,9 +43,7 @@ export class Nothing<T> implements Maybe<T> {
  * A value in the Maybe type.
  */
 export class Just<T> implements Maybe<T> {
-
-  constructor(
-    readonly value: T) { }
+  constructor(readonly value: T) {}
 
   isJust(): boolean {
     return true;
