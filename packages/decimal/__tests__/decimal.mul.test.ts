@@ -1,8 +1,7 @@
 import { Decimal, DecimalConstants, MathContext } from '../src';
 
 const parse = (s: string) => new Decimal(s);
-const mul = (u: string, v: string, c?: MathContext) =>
-  parse(u).multiply(parse(v), c);
+const mul = (u: string, v: string, c?: MathContext) => parse(u).multiply(parse(v), c);
 
 test('multiply', () => {
   expect(mul('1.234', '0')).toEqual(parse('0.000'));

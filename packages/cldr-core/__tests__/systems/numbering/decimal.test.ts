@@ -8,9 +8,7 @@ const SYMBOLS = {
   decimal: '.',
   group: ',',
 } as NumberSymbols;
-const NOSYM = {
-
-} as NumberSymbols;
+const NOSYM = {} as NumberSymbols;
 
 test('decimal numbering', () => {
   let d: NumberingSystem;

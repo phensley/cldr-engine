@@ -76,7 +76,7 @@ test('no resolve', () => {
   // exact input tag form, assuming the language tags have all relevant
   const supported: Locale[] = [
     { id: 'en', tag: new LanguageTag('en', 'Latn', 'US') },
-    { id: 'en_GB', tag: new LanguageTag('en', 'Latn', 'GB') }
+    { id: 'en_GB', tag: new LanguageTag('en', 'Latn', 'GB') },
   ];
   matcher = new LocaleMatcher(supported, { resolve: false });
   m = matcher.match('en-AU');
@@ -85,7 +85,7 @@ test('no resolve', () => {
 });
 
 test('bad args', () => {
-  expect(() => new LocaleMatcher(undefined as unknown as string)).toThrowError('at least');
+  expect(() => new LocaleMatcher((undefined as unknown) as string)).toThrowError('at least');
 });
 
 test('constructor args', () => {
@@ -118,22 +118,18 @@ test('constructor args', () => {
   expect(m.locale.id).toEqual('eng-Latn-GB');
 
   // Invalid args
-  matcher = new LocaleMatcher(['en', new Date() as unknown as LanguageTag]);
+  matcher = new LocaleMatcher(['en', (new Date() as unknown) as LanguageTag]);
   m = matcher.match('de');
   expect(m.distance).toEqual(100);
   expect(m.locale.id).toEqual('en');
 
   // Aliases will be substituted automatically
-  matcher = new LocaleMatcher([
-    { id: 'en', tag: parseLanguageTag('eng-Latn-US') }
-  ]);
+  matcher = new LocaleMatcher([{ id: 'en', tag: parseLanguageTag('eng-Latn-US') }]);
   m = matcher.match('en');
   expect(m.locale.tag.expanded()).toEqual('en-Latn-US');
 
   // Disable alias substitution
-  matcher = new LocaleMatcher([
-    { id: 'en', tag: parseLanguageTag('eng-Latn-US') }
-  ], { resolve: false });
+  matcher = new LocaleMatcher([{ id: 'en', tag: parseLanguageTag('eng-Latn-US') }], { resolve: false });
   m = matcher.match('en');
   expect(m.locale.tag.expanded()).toEqual('eng-Latn-US');
 });
@@ -148,7 +144,7 @@ test('extensions', () => {
   expect(tag.extensions()).toEqual({ u: ['ca-persian'] });
 });
 
-loadMatchCases().forEach(c => {
+loadMatchCases().forEach((c) => {
   test(`locale-match-cases.txt - line ${c.lineno}`, () => {
     const m = new LocaleMatcher(c.supported);
     const result = m.match(c.desired);

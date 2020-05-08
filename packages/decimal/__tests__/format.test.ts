@@ -25,7 +25,5 @@ test('parts formatter edge case', () => {
   const f = new PartsDecimalFormatter('.', ',');
   expect(f.render()).toEqual([]);
   f.add('123');
-  expect(f.render()).toEqual([
-    { type: 'integer', value: '123' }
-  ]);
+  expect(f.render()).toEqual([{ type: 'integer', value: '123' }]);
 });

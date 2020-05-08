@@ -1,11 +1,5 @@
 import { calendarsApi } from '../../_helpers';
-import {
-  CalendarType,
-  DateRawFormatOptions,
-  FormatWidthType,
-  GregorianDate,
-  ZonedDateTime,
-} from '../../../src';
+import { CalendarType, DateRawFormatOptions, FormatWidthType, GregorianDate, ZonedDateTime } from '../../../src';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
 
 const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
@@ -96,7 +90,6 @@ test('conversions', () => {
 
   s = api.formatDate(date, { ca: 'buddhist' });
   expect(s).toEqual('March 10, 2561 BE');
-
 });
 
 test('formats bare date', () => {
@@ -132,8 +125,8 @@ test('year padding', () => {
 test('skeletons', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC + 123, LOS_ANGELES);
   // const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
-  const jun09 = unix(MARCH_11_2018_070025_UTC + (DAY * 90), LOS_ANGELES);
-  const sep07 = unix(MARCH_11_2018_070025_UTC + (DAY * 180), LOS_ANGELES);
+  const jun09 = unix(MARCH_11_2018_070025_UTC + DAY * 90, LOS_ANGELES);
+  const sep07 = unix(MARCH_11_2018_070025_UTC + DAY * 180, LOS_ANGELES);
   const api = calendarsApi('en');
   let s: string;
 
@@ -296,7 +289,7 @@ test('parts', () => {
     { type: 'literal', value: ' ' },
     { type: 'day', value: '10' },
     { type: 'literal', value: ', ' },
-    { type: 'year', value: '2018' }
+    { type: 'year', value: '2018' },
   ]);
 
   p = api.formatDateToParts(mar11, { date: 'full' });
@@ -307,7 +300,7 @@ test('parts', () => {
     { type: 'literal', value: ' ' },
     { type: 'day', value: '10' },
     { type: 'literal', value: ', ' },
-    { type: 'year', value: '2018' }
+    { type: 'year', value: '2018' },
   ]);
 
   p = api.formatDateToParts(mar11, { date: 'short' });
@@ -316,7 +309,7 @@ test('parts', () => {
     { type: 'literal', value: '/' },
     { type: 'day', value: '10' },
     { type: 'literal', value: '/' },
-    { type: 'year', value: '18' }
+    { type: 'year', value: '18' },
   ]);
 
   p = api.formatDateToParts(mar11, { time: 'full' });
@@ -329,7 +322,7 @@ test('parts', () => {
     { type: 'literal', value: ' ' },
     { type: 'dayperiod', value: 'PM' },
     { type: 'literal', value: ' ' },
-    { type: 'timezone', value: 'Pacific Standard Time' }
+    { type: 'timezone', value: 'Pacific Standard Time' },
   ]);
 
   p = api.formatDateToParts(mar11, { time: 'medium' });
@@ -340,7 +333,7 @@ test('parts', () => {
     { type: 'literal', value: ':' },
     { type: 'second', value: '25' },
     { type: 'literal', value: ' ' },
-    { type: 'dayperiod', value: 'PM' }
+    { type: 'dayperiod', value: 'PM' },
   ]);
 });
 
@@ -446,7 +439,7 @@ test('julian day', () => {
 
   const g = api.toGregorianDate(mk(0, NEW_YORK));
   expect(g.julianDay()).toEqual(2458188.7919560187); // Real Julian day UTC
-  expect(g.modifiedJulianDay()).toEqual(2458189);    // CLDR's modified Julian day, midnight local time.
+  expect(g.modifiedJulianDay()).toEqual(2458189); // CLDR's modified Julian day, midnight local time.
 
   s = api.formatDateRaw(mk(0, NEW_YORK), opts);
   expect(s).toEqual('2458189');
@@ -470,7 +463,7 @@ test('intervals best-fit', () => {
   let start: ZonedDateTime;
   let end: ZonedDateTime;
 
-  start = unix(base - ((HOUR * 13) + 123456), LOS_ANGELES);
+  start = unix(base - (HOUR * 13 + 123456), LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'h' });
@@ -485,13 +478,13 @@ test('intervals best-fit', () => {
   s = api.formatDateInterval(start, end, { skeleton: 'SSS' });
   expect(s).toEqual('9 AM – 11 PM');
 
-  start = unix(base - (HOUR * 5), LOS_ANGELES);
+  start = unix(base - HOUR * 5, LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yyMdhms' });
   expect(s).toEqual('3/10/18, 6:00 – 11:00 PM');
 
-  start = unix(base - (HOUR * 13), LOS_ANGELES);
+  start = unix(base - HOUR * 13, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yyMdhms' });
   expect(s).toEqual('3/10/18, 10:00 AM – 11:00 PM');
@@ -538,7 +531,7 @@ test('intervals best-fit', () => {
   expect(s).toEqual('Mar 10');
 
   // Date skeleton, days differ
-  end = unix(base + (DAY * 3), LOS_ANGELES);
+  end = unix(base + DAY * 3, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'd' });
   expect(s).toEqual('3/10 – 3/14');
@@ -559,7 +552,7 @@ test('intervals best-fit', () => {
   expect(s).toEqual('Mar 10 – 14');
 
   // Date skeleton, months differ
-  end = unix(base + (DAY * 34), LOS_ANGELES);
+  end = unix(base + DAY * 34, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'd' });
   expect(s).toEqual('3/10 – 4/14');
@@ -577,7 +570,7 @@ test('intervals best-fit', () => {
   expect(s).toEqual('Sat, Mar 10 – Sat, Apr 14, 2018');
 
   // Date skeleton, years differ
-  end = unix(base + (DAY * 301), LOS_ANGELES);
+  end = unix(base + DAY * 301, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'd' });
   expect(s).toEqual('3/10/2018 – 1/5/2019');
@@ -595,7 +588,7 @@ test('intervals best-fit', () => {
   expect(s).toEqual('Sat, Mar 10, 2018 – Sat, Jan 5, 2019');
 
   // Time skeleton, hours differ
-  start = unix(base - ((HOUR * 13) + 123456), LOS_ANGELES);
+  start = unix(base - (HOUR * 13 + 123456), LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'h' });
@@ -613,7 +606,7 @@ test('intervals best-fit', () => {
   s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
   expect(s).toEqual('3/10/2018, 9:58 AM – 11:00 PM');
 
-  start = unix(base - (HOUR * 5), LOS_ANGELES);
+  start = unix(base - HOUR * 5, LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
@@ -621,7 +614,7 @@ test('intervals best-fit', () => {
 
   // Time skeleton, years differ
   start = unix(base, LOS_ANGELES);
-  end = unix(base + (DAY * 301), LOS_ANGELES);
+  end = unix(base + DAY * 301, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'ahm' });
   expect(s).toEqual('3/10/2018, 11:00 PM – 1/5/2019, 11:00 PM');
@@ -633,14 +626,14 @@ test('intervals best-fit', () => {
 
   // Time skeleton, years differ
 
-  end = unix(base + (DAY * 301) - (HOUR * 7), LOS_ANGELES);
+  end = unix(base + DAY * 301 - HOUR * 7, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'Bh' });
   expect(s).toEqual('3/10/2018, 11 at night – 1/5/2019, 4 in the afternoon');
 
   // Mixed skeleton, months differ
 
-  end = unix(base + (DAY * 3), LOS_ANGELES);
+  end = unix(base + DAY * 3, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'MMMdh' });
   expect(s).toEqual('Mar 10, 11 PM – Mar 14, 12 AM');
@@ -653,7 +646,7 @@ test('intervals best-fit', () => {
 
 test('intervals', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-  const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const mar14 = unix(MARCH_11_2018_070025_UTC + DAY * 3, LOS_ANGELES);
 
   let api = calendarsApi('en');
   let s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
@@ -702,7 +695,7 @@ test('intervals bare date', () => {
 
 test('interval parts', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
-  const mar14 = unix(MARCH_11_2018_070025_UTC + (DAY * 3), LOS_ANGELES);
+  const mar14 = unix(MARCH_11_2018_070025_UTC + DAY * 3, LOS_ANGELES);
 
   const api = calendarsApi('en');
   const p = api.formatDateIntervalToParts(mar11, mar14, { skeleton: 'yMMMMd' });
@@ -713,7 +706,7 @@ test('interval parts', () => {
     { type: 'literal', value: ' – ' },
     { type: 'day', value: '14' },
     { type: 'literal', value: ', ' },
-    { type: 'year', value: '2018' }
+    { type: 'year', value: '2018' },
   ]);
 });
 
@@ -751,9 +744,7 @@ test('day periods', () => {
   expect(api.formatDateRaw(d, { pattern: 'bbbb' })).toEqual('noon');
   expect(api.formatDateRaw(d, { pattern: 'bbbbb' })).toEqual('n');
 
-  expect(api.formatDateRawToParts(d, { pattern: 'b' })).toEqual([
-    { type: 'dayperiod', value: 'noon' }
-  ]);
+  expect(api.formatDateRawToParts(d, { pattern: 'b' })).toEqual([{ type: 'dayperiod', value: 'noon' }]);
 
   expect(api.formatDateRawToParts(d)).toEqual([]);
 });

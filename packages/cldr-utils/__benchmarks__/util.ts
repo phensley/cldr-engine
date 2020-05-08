@@ -41,8 +41,9 @@ export const pad = (n: number, str: string, repl: string) => {
 };
 
 export const readLines = (path: string): string[] => {
-  return fs.readFileSync(path, 'utf-8')
+  return fs
+    .readFileSync(path, 'utf-8')
     .split('\n')
-    .map(s => s.trim())
-    .filter(s => s.length > 0);
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0);
 };

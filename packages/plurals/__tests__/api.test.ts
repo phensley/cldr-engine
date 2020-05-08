@@ -6,7 +6,12 @@ test('basic', () => {
   const rules = pluralRules.get(lang);
 
   expect(rules.operands(new Decimal('123'))).toEqual({
-    f: 0, i: 123, n: 123, t: 0, v: 0, w: 0
+    f: 0,
+    i: 123,
+    n: 123,
+    t: 0,
+    v: 0,
+    w: 0,
   });
 
   expect(rules.cardinal(0)).toEqual('other');

@@ -4,7 +4,7 @@ test('code builder', () => {
   let o: Origin;
 
   o = new CodeBuilder({
-    calendars: ['buddhist', 'japanese', 'persian']
+    calendars: ['buddhist', 'japanese', 'persian'],
   }).origin();
 
   for (const cal of ['gregorian', 'buddhist', 'japanese', 'persian']) {
@@ -21,7 +21,7 @@ test('schema', () => {
   let o: Origin;
 
   o = new CodeBuilder({
-    'number-system-name': ['latn']
+    'number-system-name': ['latn'],
   }).origin();
 
   expect(o.getIndex('number-system-name').size).toEqual(1);

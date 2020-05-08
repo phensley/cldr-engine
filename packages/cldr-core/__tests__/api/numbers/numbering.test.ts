@@ -1,9 +1,5 @@
 import { numbersApi, unitsApi } from '../../_helpers';
-import {
-  NumbersImpl,
-  Part,
-  UnitsImpl
-} from '../../../src';
+import { NumbersImpl, Part, UnitsImpl } from '../../../src';
 
 test('numbers defaulting', () => {
   let api: NumbersImpl;
@@ -12,7 +8,7 @@ test('numbers defaulting', () => {
 
   api = numbersApi('en-u-nu-fullwide');
 
-  s = api.formatDecimal('123.45', { });
+  s = api.formatDecimal('123.45', {});
   expect(s).toEqual('１２３.４５');
 
   s = api.formatDecimal('123.45', { nu: 'fullwide' });
@@ -33,7 +29,7 @@ test('numbers defaulting', () => {
   s = api.formatDecimal('12345.678', { style: 'short', nu: 'mathsans' });
   expect(s).toEqual('𝟣𝟤K');
 
-  s = api.formatCurrency('123.45', 'USD', { });
+  s = api.formatCurrency('123.45', 'USD', {});
   expect(s).toEqual('$１２３.４５');
 
   s = api.formatCurrency('12345', 'USD', { style: 'code' });
@@ -80,14 +76,14 @@ test('numbers defaulting', () => {
 
   api = numbersApi('en-u-nu-orya');
 
-  s = api.formatDecimal('123.45', { });
+  s = api.formatDecimal('123.45', {});
   expect(s).toEqual('୧୨୩.୪୫');
 
-  p = api.formatDecimalToParts('123.45', { });
+  p = api.formatDecimalToParts('123.45', {});
   expect(p).toEqual([
     { type: 'integer', value: '୧୨୩' },
     { type: 'decimal', value: '.' },
-    { type: 'fraction', value: '୪୫' }
+    { type: 'fraction', value: '୪୫' },
   ]);
 });
 
@@ -105,6 +101,6 @@ test('units defaulting', () => {
     { type: 'integer', value: '１７' },
     { type: 'decimal', value: '.' },
     { type: 'fraction', value: '６７９' },
-    { type: 'literal', value: ' meters' }
+    { type: 'literal', value: ' meters' },
   ]);
 });

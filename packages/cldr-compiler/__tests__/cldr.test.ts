@@ -19,8 +19,7 @@ test('supplemental', () => {
 
 test('extensions', () => {
   const e = getExtensions();
-  expect(e.LanguageMatching.languageMatch)
-    .toContainEqual({ desired: 'no', supported: 'nb', distance: '1'});
+  expect(e.LanguageMatching.languageMatch).toContainEqual({ desired: 'no', supported: 'nb', distance: '1' });
   expect(e.PluralRanges.ko).toEqual([{ start: 'other', end: 'other', result: 'other' }]);
 });
 

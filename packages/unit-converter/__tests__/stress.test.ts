@@ -19,13 +19,10 @@ import {
   SPEED,
   TORQUE,
   VOLUME,
-  VOLUME_UK
+  VOLUME_UK,
 } from '../src';
 
-import {
-  FactorDef,
-  UnitFactors
-} from '../src';
+import { FactorDef, UnitFactors } from '../src';
 
 const FACTORS: FactorDef[][] = [
   ACCELERATION,
@@ -48,7 +45,7 @@ const FACTORS: FactorDef[][] = [
   SPEED,
   TORQUE,
   VOLUME,
-  VOLUME_UK
+  VOLUME_UK,
 ];
 
 test('cover all factors', () => {

@@ -2,10 +2,7 @@ import { ContextType, CurrencyType } from '@phensley/cldr-types';
 import { Part } from '@phensley/decimal';
 
 import { numbersApi } from '../../_helpers';
-import {
-  CurrencyFormatOptions,
-  CurrencyFormatStyleType,
-} from '../../../src';
+import { CurrencyFormatOptions, CurrencyFormatStyleType } from '../../../src';
 
 test('currency fractions', () => {
   const api = numbersApi('en');
@@ -288,7 +285,7 @@ test('currency parts', () => {
     { type: 'group', value: ',' },
     { type: 'integer', value: '345' },
     { type: 'decimal', value: '.' },
-    { type: 'fraction', value: '23' }
+    { type: 'fraction', value: '23' },
   ]);
 
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
@@ -299,7 +296,7 @@ test('currency parts', () => {
     { type: 'group', value: ',' },
     { type: 'integer', value: '345' },
     { type: 'decimal', value: '.' },
-    { type: 'fraction', value: '23' }
+    { type: 'fraction', value: '23' },
   ]);
 
   opts.style = 'code';
@@ -313,7 +310,7 @@ test('currency parts', () => {
     { type: 'decimal', value: '.' },
     { type: 'fraction', value: '02' },
     { type: 'literal', value: ' ' },
-    { type: 'unit', value: 'AUD' }
+    { type: 'unit', value: 'AUD' },
   ]);
 
   opts.style = 'short';
@@ -321,7 +318,7 @@ test('currency parts', () => {
   expect(p).toEqual([
     { type: 'currency', value: '€' },
     { type: 'integer', value: '123' },
-    { type: 'literal', value: 'M' }
+    { type: 'literal', value: 'M' },
   ]);
 });
 
@@ -337,7 +334,7 @@ test('currency parts spacing', () => {
     { type: 'group', value: ',' },
     { type: 'integer', value: '345' },
     { type: 'decimal', value: '.' },
-    { type: 'fraction', value: '23' }
+    { type: 'fraction', value: '23' },
   ]);
 
   api = numbersApi('km');
@@ -349,7 +346,7 @@ test('currency parts spacing', () => {
     { type: 'decimal', value: ',' },
     { type: 'fraction', value: '២៣' },
     { type: 'spacer', value: '\u00a0' },
-    { type: 'currency', value: 'BAD' }
+    { type: 'currency', value: 'BAD' },
   ]);
 
   s = api.formatCurrencyToParts('12345.234', 'BAD', { group: true });
@@ -360,7 +357,7 @@ test('currency parts spacing', () => {
     { type: 'decimal', value: ',' },
     { type: 'fraction', value: '23' },
     { type: 'spacer', value: '\u00a0' },
-    { type: 'currency', value: 'BAD' }
+    { type: 'currency', value: 'BAD' },
   ]);
 });
 
@@ -484,25 +481,25 @@ test('currency special decimal', () => {
     { type: 'decimal', value: '$' },
     { type: 'fraction', value: '00' },
     { type: 'literal', value: '\xa0' },
-    { type: 'currency', value: '\u200b' }
+    { type: 'currency', value: '\u200b' },
   ]);
 
-  s = api.formatCurrency(100.50, 'PTE');
+  s = api.formatCurrency(100.5, 'PTE');
   expect(s).toEqual('100$50\xa0\u200b');
 
-  s = api.formatCurrency(10689.50, 'PTE', { group: true });
+  s = api.formatCurrency(10689.5, 'PTE', { group: true });
   expect(s).toEqual('10\xa0689$50\xa0\u200b');
 
   api = numbersApi('pt-CV');
-  s = api.formatCurrency(100.50, 'CVE');
+  s = api.formatCurrency(100.5, 'CVE');
   expect(s).toEqual('100$50\xa0\u200b');
 
   // fr-CH different decimal for currency values
   api = numbersApi('fr-CH');
-  s = api.formatDecimal(100.50);
+  s = api.formatDecimal(100.5);
   expect(s).toEqual('100,5');
 
-  s = api.formatCurrency(100.50, 'CHF');
+  s = api.formatCurrency(100.5, 'CHF');
   expect(s).toEqual('100.50\xa0CHF');
 });
 

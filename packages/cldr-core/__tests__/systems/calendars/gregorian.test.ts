@@ -98,7 +98,7 @@ test('gregorian date', () => {
 
   d = make(n, NEW_YORK);
   expect(d.julianDay()).toEqual(2458188.7919560187); // Real Julian day UTC
-  expect(d.modifiedJulianDay()).toEqual(2458189);    // CLDR's modified Julian day, midnight local time.
+  expect(d.modifiedJulianDay()).toEqual(2458189); // CLDR's modified Julian day, midnight local time.
   expect(d.year()).toEqual(2018);
   expect(d.month()).toEqual(3);
   expect(d.dayOfMonth()).toEqual(11);
@@ -175,18 +175,68 @@ test('leap years 1584-1808', () => {
   const leaps: number[] = [];
 
   for (let i = 0; i < 230; i++) {
-    d = make(base + (oneYear * i), NEW_YORK);
+    d = make(base + oneYear * i, NEW_YORK);
     if (d.isLeapYear()) {
       leaps.push(d.year());
     }
   }
 
   expect(leaps).toEqual([
-    1584, 1588, 1592, 1596, 1600, 1604, 1608, 1612, 1616, 1620, 1624, 1628, 1632, 1636,
-    1640, 1644, 1648, 1652, 1656, 1660, 1664, 1668, 1672, 1676, 1680, 1684, 1688, 1692, 1696,
-    1704, 1708, 1712, 1716, 1720, 1724, 1728, 1732, 1736, 1740, 1744, 1748, 1752, 1756, 1760,
-    1764, 1768, 1772, 1776, 1780, 1784, 1788, 1792, 1796,
-    1804, 1808
+    1584,
+    1588,
+    1592,
+    1596,
+    1600,
+    1604,
+    1608,
+    1612,
+    1616,
+    1620,
+    1624,
+    1628,
+    1632,
+    1636,
+    1640,
+    1644,
+    1648,
+    1652,
+    1656,
+    1660,
+    1664,
+    1668,
+    1672,
+    1676,
+    1680,
+    1684,
+    1688,
+    1692,
+    1696,
+    1704,
+    1708,
+    1712,
+    1716,
+    1720,
+    1724,
+    1728,
+    1732,
+    1736,
+    1740,
+    1744,
+    1748,
+    1752,
+    1756,
+    1760,
+    1764,
+    1768,
+    1772,
+    1776,
+    1780,
+    1784,
+    1788,
+    1792,
+    1796,
+    1804,
+    1808,
   ]);
 });
 
@@ -199,18 +249,68 @@ test('leap years 1982-2208', () => {
   const leaps: number[] = [];
 
   for (let i = 0; i < 230; i++) {
-    d = make(base + (oneYear * i), NEW_YORK);
+    d = make(base + oneYear * i, NEW_YORK);
     if (d.isLeapYear()) {
       leaps.push(d.year());
     }
   }
 
   expect(leaps).toEqual([
-    1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016, 2020, 2024, 2028, 2032, 2036,
-    2040, 2044, 2048, 2052, 2056, 2060, 2064, 2068, 2072, 2076, 2080, 2084, 2088, 2092, 2096,
-    2104, 2108, 2112, 2116, 2120, 2124, 2128, 2132, 2136, 2140, 2144, 2148, 2152, 2156, 2160,
-    2164, 2168, 2172, 2176, 2180, 2184, 2188, 2192, 2196,
-    2204, 2208
+    1984,
+    1988,
+    1992,
+    1996,
+    2000,
+    2004,
+    2008,
+    2012,
+    2016,
+    2020,
+    2024,
+    2028,
+    2032,
+    2036,
+    2040,
+    2044,
+    2048,
+    2052,
+    2056,
+    2060,
+    2064,
+    2068,
+    2072,
+    2076,
+    2080,
+    2084,
+    2088,
+    2092,
+    2096,
+    2104,
+    2108,
+    2112,
+    2116,
+    2120,
+    2124,
+    2128,
+    2132,
+    2136,
+    2140,
+    2144,
+    2148,
+    2152,
+    2156,
+    2160,
+    2164,
+    2168,
+    2172,
+    2176,
+    2180,
+    2184,
+    2188,
+    2192,
+    2196,
+    2204,
+    2208,
   ]);
 });
 
@@ -227,22 +327,22 @@ test('field of greatest difference', () => {
 
   expect(base.fieldOfVisualDifference(end)).toEqual('s');
 
-  end = make(n + (CalendarConstants.ONE_MINUTE_MS * 5), NEW_YORK);
+  end = make(n + CalendarConstants.ONE_MINUTE_MS * 5, NEW_YORK);
   expect(base.fieldOfVisualDifference(end)).toEqual('m');
 
-  end = make(n + (CalendarConstants.ONE_HOUR_MS * 5), NEW_YORK);
+  end = make(n + CalendarConstants.ONE_HOUR_MS * 5, NEW_YORK);
   expect(base.fieldOfVisualDifference(end)).toEqual('H');
 
-  end = make(n + (CalendarConstants.ONE_HOUR_MS * 15), NEW_YORK);
+  end = make(n + CalendarConstants.ONE_HOUR_MS * 15, NEW_YORK);
   expect(base.fieldOfVisualDifference(end)).toEqual('a');
 
-  end = make(n + (CalendarConstants.ONE_DAY_MS * 2), NEW_YORK);
+  end = make(n + CalendarConstants.ONE_DAY_MS * 2, NEW_YORK);
   expect(base.fieldOfVisualDifference(end)).toEqual('d');
 
-  end = make(n + (CalendarConstants.ONE_DAY_MS * 45), NEW_YORK);
+  end = make(n + CalendarConstants.ONE_DAY_MS * 45, NEW_YORK);
   expect(base.fieldOfVisualDifference(end)).toEqual('M');
 
-  end = make(n + (CalendarConstants.ONE_DAY_MS * 450), NEW_YORK);
+  end = make(n + CalendarConstants.ONE_DAY_MS * 450, NEW_YORK);
   expect(base.fieldOfVisualDifference(end)).toEqual('y');
 });
 
@@ -256,34 +356,34 @@ test('week of month', () => {
   expect(d.month()).toEqual(1);
   expect(d.weekOfMonth()).toEqual(1);
 
-  d = make(base + (6 * day), NEW_YORK);
+  d = make(base + 6 * day, NEW_YORK);
   expect(d.weekOfMonth()).toEqual(1);
 
-  d = make(base + (7 * day), NEW_YORK);
+  d = make(base + 7 * day, NEW_YORK);
   expect(d.weekOfMonth()).toEqual(2);
 
-  d = make(base + (13 * day), NEW_YORK);
+  d = make(base + 13 * day, NEW_YORK);
   expect(d.weekOfMonth()).toEqual(2);
 
-  d = make(base + (14 * day), NEW_YORK);
+  d = make(base + 14 * day, NEW_YORK);
   expect(d.weekOfMonth()).toEqual(3);
 
-  d = make(base + (20 * day), NEW_YORK);
+  d = make(base + 20 * day, NEW_YORK);
   expect(d.weekOfMonth()).toEqual(3);
 
-  d = make(base + (21 * day), NEW_YORK);
+  d = make(base + 21 * day, NEW_YORK);
   expect(d.dayOfMonth()).toEqual(22);
   expect(d.weekOfMonth()).toEqual(4);
 
-  d = make(base + (28 * day), NEW_YORK);
+  d = make(base + 28 * day, NEW_YORK);
   expect(d.dayOfMonth()).toEqual(29);
   expect(d.weekOfMonth()).toEqual(5);
 
-  d = make(base + (30 * day), NEW_YORK);
+  d = make(base + 30 * day, NEW_YORK);
   expect(d.dayOfMonth()).toEqual(31);
   expect(d.weekOfMonth()).toEqual(5);
 
-  d = make(base + (32 * day), NEW_YORK);
+  d = make(base + 32 * day, NEW_YORK);
   expect(d.month()).toEqual(2);
   expect(d.dayOfMonth()).toEqual(2);
   expect(d.weekOfMonth()).toEqual(1);
@@ -331,55 +431,55 @@ test('week of year', () => {
   expect(d.dayOfYear()).toEqual(72);
   expect(d.weekOfYear()).toEqual(12);
 
-  d = make(base + (2 * day), NEW_YORK);
+  d = make(base + 2 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(2); // monday
   expect(d.dayOfMonth()).toEqual(13);
   expect(d.dayOfYear()).toEqual(73);
   expect(d.weekOfYear()).toEqual(12);
 
-  d = make(base + (3 * day), NEW_YORK);
+  d = make(base + 3 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(3); // tuesday
   expect(d.dayOfMonth()).toEqual(14);
   expect(d.dayOfYear()).toEqual(74);
   expect(d.weekOfYear()).toEqual(12);
 
-  d = make(base + (4 * day), NEW_YORK);
+  d = make(base + 4 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(4); // wednesday
   expect(d.dayOfMonth()).toEqual(15);
   expect(d.dayOfYear()).toEqual(75);
   expect(d.weekOfYear()).toEqual(12);
 
-  d = make(base + (5 * day), NEW_YORK);
+  d = make(base + 5 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(5); // thursday
   expect(d.dayOfMonth()).toEqual(16);
   expect(d.dayOfYear()).toEqual(76);
   expect(d.weekOfYear()).toEqual(12);
 
-  d = make(base + (6 * day), NEW_YORK);
+  d = make(base + 6 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(6); // friday
   expect(d.dayOfMonth()).toEqual(17);
   expect(d.dayOfYear()).toEqual(77);
   expect(d.weekOfYear()).toEqual(12);
 
-  d = make(base + (7 * day), NEW_YORK);
+  d = make(base + 7 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(7); // saturday
   expect(d.dayOfMonth()).toEqual(18);
   expect(d.dayOfYear()).toEqual(78);
   expect(d.weekOfYear()).toEqual(12);
 
-  d = make(base + (8 * day), NEW_YORK);
+  d = make(base + 8 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(1); // sunday
   expect(d.dayOfMonth()).toEqual(19);
   expect(d.dayOfYear()).toEqual(79);
   expect(d.weekOfYear()).toEqual(13);
 
-  d = make(base + (9 * day), NEW_YORK);
+  d = make(base + 9 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(2); // monday
   expect(d.dayOfMonth()).toEqual(20);
   expect(d.dayOfYear()).toEqual(80);
   expect(d.weekOfYear()).toEqual(13);
 
-  d = make(base + (10 * day), NEW_YORK);
+  d = make(base + 10 * day, NEW_YORK);
   expect(d.dayOfWeek()).toEqual(3); // tuesday
   expect(d.dayOfMonth()).toEqual(21);
   expect(d.dayOfYear()).toEqual(81);
@@ -393,7 +493,7 @@ test('first/last week of year 2000', () => {
 
   const check = (c: WeekCase, i: number) => {
     const [dom, woy, ywoy] = c;
-    const d = make(base + (i * day), NEW_YORK);
+    const d = make(base + i * day, NEW_YORK);
     try {
       expect(d.dayOfMonth()).toEqual(dom);
       expect(d.weekOfYear()).toEqual(woy);
@@ -418,7 +518,7 @@ test('first/last week of year 2000', () => {
     [31, 1, 2000],
     [1, 1, 2000],
     [2, 2, 2000],
-    [3, 2, 2000]
+    [3, 2, 2000],
   ];
 
   cases.forEach(check);
@@ -439,7 +539,7 @@ test('first/last week of year 2000', () => {
     [4, 1, 2001],
     [5, 1, 2001],
     [6, 1, 2001],
-    [7, 2, 2001]
+    [7, 2, 2001],
   ];
   cases.forEach(check);
 
@@ -459,7 +559,7 @@ test('first/last week of year 2000', () => {
     [4, 1, 2002],
     [5, 1, 2002],
     [6, 2, 2002],
-    [7, 2, 2002]
+    [7, 2, 2002],
   ];
   cases.forEach(check);
 
@@ -478,7 +578,7 @@ test('first/last week of year 2000', () => {
     [3, 1, 2003],
     [4, 1, 2003],
     [5, 2, 2003],
-    [6, 2, 2003]
+    [6, 2, 2003],
   ];
   cases.forEach(check);
 
@@ -496,7 +596,7 @@ test('first/last week of year 2000', () => {
     [2, 1, 2004],
     [3, 1, 2004],
     [4, 2, 2004],
-    [5, 2, 2004]
+    [5, 2, 2004],
   ];
   cases.forEach(check);
 
@@ -515,7 +615,7 @@ test('first/last week of year 2000', () => {
     [1, 1, 2005],
     [2, 2, 2005],
     [3, 2, 2005],
-    [4, 2, 2005]
+    [4, 2, 2005],
   ];
   cases.forEach(check);
 
@@ -534,7 +634,7 @@ test('first/last week of year 2000', () => {
     [1, 1, 2006],
     [2, 1, 2006],
     [3, 1, 2006],
-    [4, 1, 2006]
+    [4, 1, 2006],
   ];
   cases.forEach(check);
 
@@ -552,7 +652,7 @@ test('first/last week of year 2000', () => {
     [31, 1, 2007],
     [1, 1, 2007],
     [2, 1, 2007],
-    [3, 1, 2007]
+    [3, 1, 2007],
   ];
   cases.forEach(check);
 
@@ -568,7 +668,7 @@ test('first/last week of year 2000', () => {
     [31, 1, 2008],
     [1, 1, 2008],
     [2, 1, 2008],
-    [3, 1, 2008]
+    [3, 1, 2008],
   ];
   cases.forEach(check);
 
@@ -584,7 +684,7 @@ test('first/last week of year 2000', () => {
     [31, 1, 2009],
     [1, 1, 2009],
     [2, 1, 2009],
-    [3, 1, 2009]
+    [3, 1, 2009],
   ];
   cases.forEach(check);
 });

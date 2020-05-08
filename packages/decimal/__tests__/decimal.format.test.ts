@@ -7,7 +7,7 @@ type FormatArgs = [string, string, number, number, number, number];
 const format = (s: string, opts: FormatArgs): string => {
   const n = parse(s);
   const f = new StringDecimalFormatter();
-  const [ d, g, mi, mg, pg, sg ] = opts;
+  const [d, g, mi, mg, pg, sg] = opts;
   n.format(f, d, g, mi, mg, pg, sg, false);
   return f.render();
 };
@@ -15,7 +15,7 @@ const format = (s: string, opts: FormatArgs): string => {
 const formatParts = (s: string, opts: any[]): Part[] => {
   const n = parse(s);
   const f = new PartsDecimalFormatter(opts[0], opts[1]);
-  const [ d, g, mi, mg, pg, sg ] = opts;
+  const [d, g, mi, mg, pg, sg] = opts;
   n.format(f, d, g, mi, mg, pg, sg, false);
   return f.render();
 };
@@ -54,10 +54,10 @@ test('format', () => {
   expect(format('1.23456e5', opts)).toEqual('123,456');
   expect(format('1.23000', opts)).toEqual('1.23000');
 
-  expect(format('123000000000000000000', opts))
-    .toEqual('12,3000,0000,0000,0000,000');
-  expect(format('123000000000000000000.000000456000000000000', opts))
-    .toEqual('12,3000,0000,0000,0000,000.000000456000000000000');
+  expect(format('123000000000000000000', opts)).toEqual('12,3000,0000,0000,0000,000');
+  expect(format('123000000000000000000.000000456000000000000', opts)).toEqual(
+    '12,3000,0000,0000,0000,000.000000456000000000000',
+  );
 });
 
 test('leading integer zeros', () => {
@@ -89,6 +89,6 @@ test('format parts', () => {
     { type: 'group', value: ',' },
     { type: 'integer', value: '345' },
     { type: 'decimal', value: '.' },
-    { type: 'fraction', value: '12300' }
+    { type: 'fraction', value: '12300' },
   ]);
 });

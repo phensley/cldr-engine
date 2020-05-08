@@ -325,6 +325,6 @@ test('milliseconds', () => {
   expect(q.toString()).toEqual('Gregorian 2000-03-11 03:00:25.121 America/New_York');
 
   // milliseconds roll over next day
-  q = date.add({ millis: (DAY * 2.5) + 120.5 });
+  q = date.add({ millis: DAY * 2.5 + 120.5 });
   expect(q.toString()).toEqual('Gregorian 2000-03-13 15:00:25.121 America/New_York');
 });

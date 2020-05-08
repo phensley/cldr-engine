@@ -2,13 +2,11 @@ import { Rational } from '@phensley/decimal';
 import { ANGLE, AREA, FactorDef, UnitConversion, UnitFactors } from '../src';
 
 test('factors', () => {
-  const factors: FactorDef[] = [
-    ['g-force', '9.80665', 'meter-per-second-squared']
-  ];
+  const factors: FactorDef[] = [['g-force', '9.80665', 'meter-per-second-squared']];
   const map = new UnitFactors(factors);
   let c: UnitConversion;
 
-  const f = (e: UnitConversion) => e.factors.map(x => x.toString());
+  const f = (e: UnitConversion) => e.factors.map((x) => x.toString());
 
   c = map.get('g-force', 'meter-per-second-squared')!;
   expect(f(c)).toEqual(['9.80665 / 1']);
@@ -21,7 +19,7 @@ test('angle', () => {
   const map = new UnitFactors(ANGLE);
   let c: UnitConversion;
 
-  const f = (e: UnitConversion) => e.factors.map(x => x.toString());
+  const f = (e: UnitConversion) => e.factors.map((x) => x.toString());
 
   c = map.get('arc-second', 'arc-minute')!;
   expect(f(c)).toEqual(['1 / 60']);
@@ -40,7 +38,7 @@ test('area', () => {
   const map = new UnitFactors(AREA);
   let c: UnitConversion;
 
-  const f = (e: UnitConversion) => e.factors.map(x => x.toString());
+  const f = (e: UnitConversion) => e.factors.map((x) => x.toString());
 
   c = map.get('acre', 'square-foot')!;
   expect(f(c)).toEqual(['43560 / 1']);
@@ -61,9 +59,7 @@ test('area', () => {
 
 test('rational factors', () => {
   let c: UnitConversion;
-  const map = new UnitFactors([
-    ['foo', new Rational('2 / 1'), 'bar']
-  ]);
+  const map = new UnitFactors([['foo', new Rational('2 / 1'), 'bar']]);
 
   c = map.get('foo', 'bar')!;
   expect(c.path).toEqual(['foo', 'bar']);

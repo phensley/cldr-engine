@@ -1,11 +1,6 @@
 import { languageBundle, INTERNALS } from '../../_helpers';
 
-import {
-  Bundle,
-  Decimal,
-  NumberInternalsImpl,
-  PrivateApiImpl
-} from '../../../src';
+import { Bundle, Decimal, NumberInternalsImpl, PrivateApiImpl } from '../../../src';
 import { RE_DIGIT, RE_SYMBOL } from '../../../src/internals/numbers/render';
 import { NumberPattern } from '../../../src/parsing/number';
 

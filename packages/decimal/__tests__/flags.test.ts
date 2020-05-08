@@ -126,7 +126,7 @@ test('addition', () => {
   // -Infinity + -10 = -Infinity
   expect(INF_NEG.add(NEG)).toEqual(INF_NEG);
 
-    // -----
+  // -----
 
   // 0 + Infinity = Infinity
   expect(ZERO.add(INF_POS)).toEqual(INF_POS);
@@ -211,7 +211,6 @@ test('subtraction', () => {
 });
 
 test('multiplication', () => {
-
   // Any NaN returns NaN
   expect(NAN.multiply(NAN)).toEqual(NAN);
   expect(NAN.multiply(POS)).toEqual(NAN);
@@ -417,14 +416,14 @@ test('mod', () => {
 });
 
 test('increment / decrement', () => {
-    expect(NAN.increment()).toEqual(NAN);
-    expect(INF_POS.increment()).toEqual(INF_POS);
-    expect(INF_NEG.increment()).toEqual(INF_NEG);
+  expect(NAN.increment()).toEqual(NAN);
+  expect(INF_POS.increment()).toEqual(INF_POS);
+  expect(INF_NEG.increment()).toEqual(INF_NEG);
 
-    expect(NAN.decrement()).toEqual(NAN);
-    expect(INF_POS.decrement()).toEqual(INF_POS);
-    expect(INF_NEG.decrement()).toEqual(INF_NEG);
-  });
+  expect(NAN.decrement()).toEqual(NAN);
+  expect(INF_POS.decrement()).toEqual(INF_POS);
+  expect(INF_NEG.decrement()).toEqual(INF_NEG);
+});
 
 test('formatting', () => {
   expect(NAN.toString()).toEqual('NaN');

@@ -1,18 +1,8 @@
-import {
-  formatDateSuite,
-  gregorianSuite
-} from './calendars';
+import { formatDateSuite, gregorianSuite } from './calendars';
 
-import {
-  numberEngineSuite,
-  numberFormatBaselineSuite,
-  numberFormatSuite,
-  numberParseSuite
-} from './numbers';
+import { numberEngineSuite, numberFormatBaselineSuite, numberFormatSuite, numberParseSuite } from './numbers';
 
-import {
-  messageSuite
-} from './messages';
+import { messageSuite } from './messages';
 
 const options = { async: false, delay: 0.5 };
 

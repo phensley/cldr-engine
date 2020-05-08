@@ -3,7 +3,7 @@ import { generalApi } from '../../_helpers';
 
 const formatters = {
   foo: (args: MessageArg[], options: string[]): string =>
-    options[0] === 'upper' ? args[0].toUpperCase() : args[0].toLowerCase()
+    options[0] === 'upper' ? args[0].toUpperCase() : args[0].toLowerCase(),
 };
 
 test('basic formatter', () => {

@@ -44,7 +44,7 @@ test('parts', () => {
     { type: 'literal', value: 'A' },
     { type: 'literal', value: 'B' },
     { type: 'foo', value: 'C' },
-    { type: 'bar', value: 'D' }
+    { type: 'bar', value: 'D' },
   ]);
 
   v.add('literal', 'A');
@@ -53,14 +53,16 @@ test('parts', () => {
 
   expect(v.render()).toEqual([]);
   expect(v.empty()).toEqual([]);
-  expect(v.join([
+  expect(
+    v.join([
+      { type: 'foo', value: 'A' },
+      { type: 'bar', value: 'B' },
+      { type: 'baz', value: 'C' },
+    ]),
+  ).toEqual([
     { type: 'foo', value: 'A' },
     { type: 'bar', value: 'B' },
-    { type: 'baz', value: 'C' }
-  ])).toEqual([
-    { type: 'foo', value: 'A' },
-    { type: 'bar', value: 'B' },
-    { type: 'baz', value: 'C' }
+    { type: 'baz', value: 'C' },
   ]);
 
   let p = parseWrapperPattern('{3}, {1} - {0}, {2}');
@@ -70,7 +72,7 @@ test('parts', () => {
     [{ type: 'ccc', value: 'C' }],
     [{ type: 'ddd', value: 'D' }],
     [{ type: 'eee', value: 'E' }],
-    [{ type: 'fff', value: 'F' }]
+    [{ type: 'fff', value: 'F' }],
   ]);
   expect(v.render()).toEqual([
     { type: 'ddd', value: 'D' },
@@ -79,7 +81,7 @@ test('parts', () => {
     { type: 'literal', value: ' - ' },
     { type: 'aaa', value: 'A' },
     { type: 'literal', value: ', ' },
-    { type: 'ccc', value: 'C' }
+    { type: 'ccc', value: 'C' },
   ]);
 
   v.add('foo', 'A');
@@ -92,6 +94,6 @@ test('parts', () => {
   expect(v.render()).toEqual([
     { type: 'foo', value: 'A' },
     { type: 'literal', value: ' ' },
-    { type: 'literal', value: ' ' }
+    { type: 'literal', value: ' ' },
   ]);
 });

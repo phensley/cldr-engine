@@ -32,8 +32,8 @@ test('fnv1a test vectors', () => {
 
 test('order', () => {
   const c1 = new Checksum();
-  ['arab', 'guru', 'deva'].forEach(s => c1.update(s));
+  ['arab', 'guru', 'deva'].forEach((s) => c1.update(s));
   const c2 = new Checksum();
-  ['deva', 'guru', 'arab'].forEach(s => c2.update(s));
+  ['deva', 'guru', 'arab'].forEach((s) => c2.update(s));
   expect(c1.get()).not.toEqual(c2.get());
 });

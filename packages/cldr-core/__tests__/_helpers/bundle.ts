@@ -37,7 +37,7 @@ export const customFramework = (path: string, config: SchemaConfig): CLDRFramewo
   const loader = (_lang: string) => fs.readFileSync(path).toString('utf-8');
   return new CLDRFramework({
     config,
-    loader
+    loader,
   });
 };
 

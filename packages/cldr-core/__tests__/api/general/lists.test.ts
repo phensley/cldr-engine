@@ -43,58 +43,56 @@ test('list patterns and', () => {
 test('list patterns and parts', () => {
   const api = generalApi('en');
 
-  expect(api.formatListToParts(ONE)).toEqual([
-    { type: 'item', value: '1' }
-  ]);
+  expect(api.formatListToParts(ONE)).toEqual([{ type: 'item', value: '1' }]);
 
   expect(api.formatListToParts(TWO)).toEqual([
     { type: 'item', value: '1' },
-    { type: 'literal', value: ' and '},
-    { type: 'item', value: '2' }
+    { type: 'literal', value: ' and ' },
+    { type: 'item', value: '2' },
   ]);
 
   expect(api.formatListToParts(THREE)).toEqual([
     { type: 'item', value: '1' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '2' },
-    { type: 'literal', value: ', and '},
-    { type: 'item', value: '3' }
+    { type: 'literal', value: ', and ' },
+    { type: 'item', value: '3' },
   ]);
 
   expect(api.formatListToParts(FOUR)).toEqual([
     { type: 'item', value: '1' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '2' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '3' },
-    { type: 'literal', value: ', and '},
-    { type: 'item', value: '4' }
+    { type: 'literal', value: ', and ' },
+    { type: 'item', value: '4' },
   ]);
 
   expect(api.formatListToParts(FIVE)).toEqual([
     { type: 'item', value: '1' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '2' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '3' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '4' },
-    { type: 'literal', value: ', and '},
-    { type: 'item', value: '5' }
+    { type: 'literal', value: ', and ' },
+    { type: 'item', value: '5' },
   ]);
 
   expect(api.formatListToParts(SIX)).toEqual([
     { type: 'item', value: '1' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '2' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '3' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '4' },
-    { type: 'literal', value: ', '},
+    { type: 'literal', value: ', ' },
     { type: 'item', value: '5' },
-    { type: 'literal', value: ', and '},
-    { type: 'item', value: '6' }
+    { type: 'literal', value: ', and ' },
+    { type: 'item', value: '6' },
   ]);
 });
 

@@ -5,14 +5,14 @@ import {
   MessageCode,
   MessageEngine,
   MessageNamedArgs,
-  StickyMatcher
+  StickyMatcher,
 } from '../src';
 import { pluralRules } from '@phensley/plurals';
 import { DefaultMessageArgConverter } from '../src/evaluation/converter';
 
 const CUSTOM = {
   foo: (args: MessageArg[], _options: string[]) => `foo args ${JSON.stringify(args)}`,
-  bar: (_args: MessageArg[], options: string[]) => `bar options ${JSON.stringify(options)}`
+  bar: (_args: MessageArg[], options: string[]) => `bar options ${JSON.stringify(options)}`,
 };
 
 const CUSTOM_NAMES = Object.keys(CUSTOM);
@@ -75,12 +75,14 @@ test('undefined formatter', () => {
 test('plurals', () => {
   let c: MessageCode;
 
-  c = parse('==> {0, plural, offset:1 ' +
-    '     =0 {Be the first to like this}' +
-    '     =1 {You liked this}' +
-    '    one {You and someone else liked this}' +
-    '  other {You and # others liked this}' +
-    '}!');
+  c = parse(
+    '==> {0, plural, offset:1 ' +
+      '     =0 {Be the first to like this}' +
+      '     =1 {You liked this}' +
+      '    one {You and someone else liked this}' +
+      '  other {You and # others liked this}' +
+      '}!',
+  );
 
   expect(evaluate('en', c, [0])).toEqual('==> Be the first to like this!');
   expect(evaluate('en', c, [1])).toEqual('==> You liked this!');

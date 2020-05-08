@@ -1,7 +1,6 @@
 import { GregorianDate } from '../../../src';
 
-const make = (epoch: number | Date, zoneId: string): GregorianDate =>
-  GregorianDate.fromUnixEpoch(+epoch, zoneId, 1, 1);
+const make = (epoch: number | Date, zoneId: string): GregorianDate => GregorianDate.fromUnixEpoch(+epoch, zoneId, 1, 1);
 
 test('metazones, dst, offsets', () => {
   const zoneId = 'America/New_York';

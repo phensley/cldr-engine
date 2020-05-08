@@ -321,16 +321,16 @@ test('all fields', () => {
   expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, minute: 30, second: 45 }));
 
   t = start.difference(end, ['year', 'month', 'day', 'hour', /* minute */ 'second']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, second: (30 * 60) + 45 }));
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, second: 30 * 60 + 45 }));
 
   t = start.difference(end, ['year', 'month', 'day', /* hour, minute */ 'second']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, second: (12 * 3600) + (30 * 60) + 45 }));
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, second: 12 * 3600 + 30 * 60 + 45 }));
 
   t = start.difference(end, ['year', 'month', 'day', 'hour', 'minute']);
   expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, minute: 30.75 }));
 
   t = start.difference(end, ['year', 'month', 'day', /* hour */ 'minute']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, minute: (12 * 60) + 30.75 }));
+  expect(t).toEqual(period({ year: 1, month: 1, day: 1, minute: 12 * 60 + 30.75 }));
 
   t = start.difference(end, ['year', 'month', 'day', 'hour']);
   expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12.5125 }));

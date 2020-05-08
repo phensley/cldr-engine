@@ -1,7 +1,4 @@
-import {
-  parseNumberPattern as parse,
-  NumberField,
-} from '../../src/parsing/number';
+import { parseNumberPattern as parse, NumberField } from '../../src/parsing/number';
 
 test('parse', () => {
   const pos0 = {
@@ -10,7 +7,7 @@ test('parse', () => {
     maxFrac: 2,
     minFrac: 2,
     priGroup: 3,
-    secGroup: 0
+    secGroup: 0,
   };
 
   const neg0 = {
@@ -19,7 +16,7 @@ test('parse', () => {
     maxFrac: 2,
     minFrac: 2,
     priGroup: 3,
-    secGroup: 0
+    secGroup: 0,
   };
 
   expect(parse('¤#,##0.00;(¤#,##0.00)')).toEqual([pos0, neg0]);
@@ -30,7 +27,7 @@ test('parse', () => {
     maxFrac: 0,
     minFrac: 0,
     priGroup: 3,
-    secGroup: 0
+    secGroup: 0,
   };
 
   const neg1 = {
@@ -39,7 +36,7 @@ test('parse', () => {
     maxFrac: 0,
     minFrac: 0,
     priGroup: 3,
-    secGroup: 0
+    secGroup: 0,
   };
 
   expect(parse('#,##0%')).toEqual([pos1, neg1]);
@@ -50,7 +47,7 @@ test('parse', () => {
     maxFrac: 6,
     minFrac: 0,
     priGroup: 0,
-    secGroup: 0
+    secGroup: 0,
   };
 
   const neg2 = {
@@ -59,7 +56,7 @@ test('parse', () => {
     maxFrac: 6,
     minFrac: 0,
     priGroup: 0,
-    secGroup: 0
+    secGroup: 0,
   };
 
   expect(parse('#0.######;-#0.######')).toEqual([pos2, neg2]);
@@ -71,7 +68,7 @@ test('parse', () => {
     maxFrac: 3,
     minFrac: 0,
     priGroup: 3,
-    secGroup: 2
+    secGroup: 2,
   };
 
   const neg3 = {
@@ -80,7 +77,7 @@ test('parse', () => {
     maxFrac: 3,
     minFrac: 0,
     priGroup: 3,
-    secGroup: 2
+    secGroup: 2,
   };
 
   expect(parse('#,##,##0.###')).toEqual([pos3, neg3]);
@@ -92,7 +89,7 @@ test('parse', () => {
     maxFrac: 0,
     minFrac: 0,
     priGroup: 0,
-    secGroup: 0
+    secGroup: 0,
   };
 
   const neg4 = {
@@ -101,7 +98,7 @@ test('parse', () => {
     maxFrac: 0,
     minFrac: 0,
     priGroup: 0,
-    secGroup: 0
+    secGroup: 0,
   };
 
   expect(parse("¤ 000 милј'.'")).toEqual([pos4, neg4]);
@@ -124,7 +121,7 @@ test('user-supplied', () => {
       maxFrac: 2,
       minFrac: 2,
       priGroup: 3,
-      secGroup: 0
+      secGroup: 0,
     },
     {
       nodes: ['(&laquo;', NumberField.NUMBER, '&raquo;)'],
@@ -132,8 +129,8 @@ test('user-supplied', () => {
       maxFrac: 2,
       minFrac: 2,
       priGroup: 3,
-      secGroup: 0
-    }
+      secGroup: 0,
+    },
   ]);
 });
 
@@ -144,7 +141,7 @@ test('multiple boundaries', () => {
     maxFrac: 0,
     minFrac: 0,
     priGroup: 0,
-    secGroup: 0
+    secGroup: 0,
   };
 
   const neg1 = {
@@ -153,7 +150,7 @@ test('multiple boundaries', () => {
     maxFrac: 0,
     minFrac: 0,
     priGroup: 0,
-    secGroup: 0
+    secGroup: 0,
   };
 
   expect(parse('000M;-000M;foo')).toEqual([pos1, neg1]);

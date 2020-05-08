@@ -3,8 +3,7 @@ import { Decimal, DecimalAdjustOptions } from '../../../src';
 
 const API = numbersApi('en');
 
-const adjust = (s: string, opts?: DecimalAdjustOptions): string =>
-  API.adjustDecimal(s, opts).toString();
+const adjust = (s: string, opts?: DecimalAdjustOptions): string => API.adjustDecimal(s, opts).toString();
 
 const parse = (n: number | string): Decimal => API.parseDecimal(n);
 

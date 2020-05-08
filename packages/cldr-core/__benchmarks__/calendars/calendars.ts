@@ -7,19 +7,14 @@ import { CalendarsImpl, DateFormatOptions, GregorianDate, TimePeriod } from '../
 import { RelativeTimeFormatOptions } from '../../lib';
 
 const BUNDLES: { [x: string]: CalendarsImpl } = {
-  'en': calendarsApi('en'),
-  'es': calendarsApi('es')
+  en: calendarsApi('en'),
+  es: calendarsApi('es'),
 };
 
 export const gregorianSuite: Suite = makeSuite('GregorianDate');
 export const formatDateSuite: Suite = makeSuite('Calendars.formatDate');
 
-const ZONES = [
-  undefined,
-  'UTC',
-  'America/New_York',
-  'Europe/London',
-];
+const ZONES = [undefined, 'UTC', 'America/New_York', 'Europe/London'];
 
 const EPOCHS = [
   // Mar 10 2018
@@ -31,7 +26,7 @@ const EPOCHS = [
   // Fire of London, Sep 2 1666
   // -9572087379000,
   // Magna Carta, Jun 15 1215
-  -23811152979000
+  -23811152979000,
 ];
 
 const DATES = [
@@ -43,20 +38,20 @@ const DATES = [
 const INCR: Partial<TimePeriod>[] = [
   { day: 10, hour: 7 },
   { month: -3, day: -3 },
-  { year: 0.5, month: 3, day: 82 }
+  { year: 0.5, month: 3, day: 82 },
 ];
 
-ZONES.forEach(z => {
-  EPOCHS.forEach(e => {
+ZONES.forEach((z) => {
+  EPOCHS.forEach((e) => {
     gregorianSuite.add(`construct ${e} ${z}`, () => {
       GregorianDate.fromUnixEpoch(e, z as string, 1, 1);
     });
   });
 });
 
-Object.keys(BUNDLES).forEach(k => {
-  ZONES.forEach(z => {
-    EPOCHS.forEach(e => {
+Object.keys(BUNDLES).forEach((k) => {
+  ZONES.forEach((z) => {
+    EPOCHS.forEach((e) => {
       const opts: DateFormatOptions = { datetime: 'full' };
       const engine = BUNDLES[k];
       const date = { date: e, zoneId: z };
@@ -66,8 +61,8 @@ Object.keys(BUNDLES).forEach(k => {
       });
     });
   });
-  DATES.forEach(d => {
-    INCR.forEach(i => {
+  DATES.forEach((d) => {
+    INCR.forEach((i) => {
       const opts: RelativeTimeFormatOptions = { dayOfWeek: true };
       const engine = BUNDLES[k];
       formatDateSuite.add(`relative time ${k} ${d.unixEpoch()} ${JSON.stringify(i)}`, () => {

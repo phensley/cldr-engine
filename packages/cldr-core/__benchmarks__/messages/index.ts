@@ -1,4 +1,3 @@
-
 import { Suite } from 'benchmark';
 import { makeSuite } from '../../../cldr-utils/__benchmarks__/util';
 import { pluralRules } from '@phensley/plurals';
@@ -15,7 +14,7 @@ export const messageSuite: Suite = makeSuite('message');
 
 const FORMATTERS = {
   foo: (args: MessageArg[], options: string[]) =>
-    options[0] === 'upper' ? args[0].toUpperCase() : args[0].toLowerCase()
+    options[0] === 'upper' ? args[0].toUpperCase() : args[0].toLowerCase(),
 };
 
 const MESSAGE = 'foo bar {0 plural one {# item} other {# items}} {1}';

@@ -1,9 +1,6 @@
 import { calendarsApi } from '../../_helpers';
 
-import {
-  CalendarDate,
-  GregorianDate,
-} from '../../../src';
+import { CalendarDate, GregorianDate } from '../../../src';
 
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';

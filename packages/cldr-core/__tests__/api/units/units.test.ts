@@ -208,8 +208,10 @@ test('format string', () => {
   s = api.formatQuantity({ value: '1', unit: 'pound' }, { style: 'long', minimumFractionDigits: 1 });
   expect(s).toEqual('1.0 pounds');
 
-  s = api.formatQuantity({ value: '12345000', unit: 'pound' },
-    { length: 'short', style: 'short', minimumFractionDigits: 1 });
+  s = api.formatQuantity(
+    { value: '12345000', unit: 'pound' },
+    { length: 'short', style: 'short', minimumFractionDigits: 1 },
+  );
   expect(s).toEqual('12.3M lb');
 });
 
@@ -249,31 +251,33 @@ test('format parts', () => {
   p = api.formatQuantityToParts({ value: '123', unit: 'meter' });
   expect(p).toEqual([
     { type: 'integer', value: '123' },
-    { type: 'literal', value: ' meters' }
+    { type: 'literal', value: ' meters' },
   ]);
 
   p = api.formatQuantityToParts({ value: '123', unit: 'meter', per: 'hour' });
   expect(p).toEqual([
     { type: 'integer', value: '123' },
     { type: 'literal', value: ' meters' },
-    { type: 'literal', value: ' per hour' }
+    { type: 'literal', value: ' per hour' },
   ]);
 
   p = api.formatQuantityToParts({ value: '123', unit: 'meter', per: 'hour' }, { length: 'narrow' });
   expect(p).toEqual([
     { type: 'integer', value: '123' },
     { type: 'literal', value: 'm' },
-    { type: 'literal', value: '/h' }
+    { type: 'literal', value: '/h' },
   ]);
 
-  p = api.formatQuantityToParts({ value: '12345000', unit: 'pound' },
-    { length: 'short', style: 'short', minimumFractionDigits: 1 });
+  p = api.formatQuantityToParts(
+    { value: '12345000', unit: 'pound' },
+    { length: 'short', style: 'short', minimumFractionDigits: 1 },
+  );
   expect(p).toEqual([
     { type: 'integer', value: '12' },
     { type: 'decimal', value: '.' },
     { type: 'fraction', value: '3' },
     { type: 'literal', value: 'M' },
-    { type: 'literal', value: ' lb' }
+    { type: 'literal', value: ' lb' },
   ]);
 });
 
@@ -282,7 +286,10 @@ test('format sequence string', () => {
   let s: string;
   let u: Quantity[];
 
-  u = [{ value: '123', unit: 'meter' }, { value: '17.2', unit: 'centimeter' }];
+  u = [
+    { value: '123', unit: 'meter' },
+    { value: '17.2', unit: 'centimeter' },
+  ];
   s = api.formatQuantitySequence(u);
   expect(s).toEqual('123 meters, 17.2 centimeters');
 
@@ -295,7 +302,7 @@ test('format sequence string', () => {
   u = [
     { value: '312', unit: 'degree' },
     { value: '1', unit: 'arc-minute' },
-    { value: '17', unit: 'arc-second' }
+    { value: '17', unit: 'arc-second' },
   ];
 
   s = api.formatQuantitySequence(u);
@@ -307,7 +314,10 @@ test('format sequence string', () => {
   s = api.formatQuantitySequence(u, { length: 'narrow' });
   expect(s).toEqual('312° 1′ 17″');
 
-  u = [{ value: '312', unit: 'foot' }, { value: '59', unit: 'inch' }];
+  u = [
+    { value: '312', unit: 'foot' },
+    { value: '59', unit: 'inch' },
+  ];
   s = api.formatQuantitySequence(u);
   expect(s).toEqual('312 feet, 59 inches');
 
@@ -323,7 +333,10 @@ test('format sequence parts', () => {
   let p: Part[];
   let u: Quantity[];
 
-  u = [{ value: '123', unit: 'meter' }, { value: '17.2', unit: 'centimeter' }];
+  u = [
+    { value: '123', unit: 'meter' },
+    { value: '17.2', unit: 'centimeter' },
+  ];
   p = api.formatQuantitySequenceToParts(u);
   expect(p).toEqual([
     { type: 'integer', value: '123' },
@@ -332,16 +345,19 @@ test('format sequence parts', () => {
     { type: 'integer', value: '17' },
     { type: 'decimal', value: '.' },
     { type: 'fraction', value: '2' },
-    { type: 'literal', value: ' centimeters' }
+    { type: 'literal', value: ' centimeters' },
   ]);
 
-  u = [{ value: '312', unit: 'foot' }, { value: '59', unit: 'inch' }];
+  u = [
+    { value: '312', unit: 'foot' },
+    { value: '59', unit: 'inch' },
+  ];
   p = api.formatQuantitySequenceToParts(u, { length: 'narrow' });
   expect(p).toEqual([
     { type: 'integer', value: '312' },
     { type: 'literal', value: '′' },
     { type: 'literal', value: ' ' },
     { type: 'integer', value: '59' },
-    { type: 'literal', value: '″' }
+    { type: 'literal', value: '″' },
   ]);
 });

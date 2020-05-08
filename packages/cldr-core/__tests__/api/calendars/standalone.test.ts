@@ -1,8 +1,5 @@
 import { calendarsApi } from '../../_helpers';
-import {
-  EraWidthType,
-  FieldWidthType,
-} from '../../../src';
+import { EraWidthType, FieldWidthType } from '../../../src';
 
 test('era', () => {
   const en = calendarsApi('en');

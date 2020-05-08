@@ -1,8 +1,7 @@
 import { Decimal, RoundingModeType } from '../src';
 
 const parse = (s: string) => new Decimal(s);
-const shr = (u: string, s: number, m: RoundingModeType) =>
-  parse(u).shiftright(s, m);
+const shr = (u: string, s: number, m: RoundingModeType) => parse(u).shiftright(s, m);
 
 test('shift to rounding', () => {
   expect(shr('0.99', 3, 'up')).toEqual(parse('0e1'));

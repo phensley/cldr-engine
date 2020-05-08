@@ -15,7 +15,7 @@ test('tz info from utc', () => {
   info = EN.timeZoneFromUTC(epoch, zoneid);
   expect(info).toEqual({ zoneid, abbr: 'EST', dst: 0, offset: -18000000 });
 
-  info = EN.timeZoneFromUTC(epoch + (30 * MINUTE), zoneid);
+  info = EN.timeZoneFromUTC(epoch + 30 * MINUTE, zoneid);
   expect(info).toEqual({ zoneid, abbr: 'EDT', dst: 1, offset: -14400000 });
 });
 
@@ -30,12 +30,12 @@ test('tz info from wall', () => {
   info = EN.timeZoneFromWall(epoch, zoneid);
   expect(info).toEqual([
     1583647200000, // Sun Mar 8 2020 6:00 AM UTC
-    { zoneid, abbr: 'EST', dst: 0, offset: -18000000 }
+    { zoneid, abbr: 'EST', dst: 0, offset: -18000000 },
   ]);
 
-  info = EN.timeZoneFromWall(epoch + (60 * MINUTE), zoneid);
+  info = EN.timeZoneFromWall(epoch + 60 * MINUTE, zoneid);
   expect(info).toEqual([
     1583650800000, // Sun Mar 8 2020 7:00 AM UTC
-    { zoneid, abbr: 'EDT', dst: 1, offset: -14400000 }
+    { zoneid, abbr: 'EDT', dst: 1, offset: -14400000 },
   ]);
 });

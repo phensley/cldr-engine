@@ -8,7 +8,7 @@ export const numberFormatBaselineSuite = makeSuite('Number Format Baseline');
 
 const CASES = readLines(join(__dirname, './numbers.txt'));
 
-CASES.forEach(n => {
+CASES.forEach((n) => {
   const parsed = new Decimal(n);
   const raw = parsed.toString().split('').reverse();
 

@@ -1,8 +1,6 @@
 import { numbersApi } from '../../_helpers';
 
-import {
-  NumberSystemType,
-} from '../../../src';
+import { NumberSystemType } from '../../../src';
 
 test('numbering systems', () => {
   let api = numbersApi('th');

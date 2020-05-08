@@ -24,14 +24,14 @@ test('basics', () => {
   tag = new LanguageTag('en', '', '', '', {});
   expect(tag.compact()).toEqual('en');
 
-  tag = new LanguageTag('en', '', '', '', {'u': ['nu-latn']});
+  tag = new LanguageTag('en', '', '', '', { u: ['nu-latn'] });
   expect(tag.compact()).toEqual('en-u-nu-latn');
 
-  tag = new LanguageTag('en', '', '', '', {'u': ['nu-latn', 'ca-gregory']});
+  tag = new LanguageTag('en', '', '', '', { u: ['nu-latn', 'ca-gregory'] });
   expect(tag.compact()).toEqual('en-u-nu-latn-ca-gregory');
 
-  const unkarray = undefined as unknown as string[];
-  tag = new LanguageTag('en', '', '', '', {'u': unkarray });
+  const unkarray = (undefined as unknown) as string[];
+  tag = new LanguageTag('en', '', '', '', { u: unkarray });
   expect(tag.compact()).toEqual('en');
 
   // NOTE: constructing language tags directly allows creation

@@ -36,40 +36,40 @@ test('week of month', () => {
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (2 * DAY), NEW_YORK);
+  d = make(base + 2 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (3 * DAY), NEW_YORK);
+  d = make(base + 3 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (4 * DAY), NEW_YORK);
+  d = make(base + 4 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (5 * DAY), NEW_YORK);
+  d = make(base + 5 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (6 * DAY), NEW_YORK);
+  d = make(base + 6 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (7 * DAY), NEW_YORK);
+  d = make(base + 7 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
   // Jump to Apr 28
-  d = make(base + (27 * DAY), NEW_YORK);
+  d = make(base + 27 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('4');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
-  d = make(base + (28 * DAY), NEW_YORK);
+  d = make(base + 28 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
-  d = make(base + (29 * DAY), NEW_YORK);
+  d = make(base + 29 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('5');
 
@@ -84,53 +84,53 @@ test('week of month', () => {
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (2 * DAY), NEW_YORK);
+  d = make(base + 2 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (3 * DAY), NEW_YORK);
+  d = make(base + 3 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (4 * DAY), NEW_YORK);
+  d = make(base + 4 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (5 * DAY), NEW_YORK);
+  d = make(base + 5 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (6 * DAY), NEW_YORK);
+  d = make(base + 6 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (7 * DAY), NEW_YORK);
+  d = make(base + 7 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
   // Jump to Jul 16
-  d = make(base + (15 * DAY), NEW_YORK);
+  d = make(base + 15 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('3');
   expect(fr.formatDateRaw(d, opts)).toEqual('3');
 
-  d = make(base + (16 * DAY), NEW_YORK);
+  d = make(base + 16 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('3');
   expect(fr.formatDateRaw(d, opts)).toEqual('3');
 
-  d = make(base + (17 * DAY), NEW_YORK);
+  d = make(base + 17 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('3');
   expect(fr.formatDateRaw(d, opts)).toEqual('3');
 
   // Jump to Jul 28
-  d = make(base + (27 * DAY), NEW_YORK);
+  d = make(base + 27 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('4');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
-  d = make(base + (28 * DAY), NEW_YORK);
+  d = make(base + 28 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
-  d = make(base + (29 * DAY), NEW_YORK);
+  d = make(base + 29 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('5');
 
@@ -145,53 +145,53 @@ test('week of month', () => {
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (2 * DAY), NEW_YORK);
+  d = make(base + 2 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (3 * DAY), NEW_YORK);
+  d = make(base + 3 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('1');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (4 * DAY), NEW_YORK);
+  d = make(base + 4 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (5 * DAY), NEW_YORK);
+  d = make(base + 5 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('2');
 
-  d = make(base + (6 * DAY), NEW_YORK);
+  d = make(base + 6 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('2');
 
-  d = make(base + (7 * DAY), NEW_YORK);
+  d = make(base + 7 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('2');
 
   // Jump to Aug 16
-  d = make(base + (15 * DAY), NEW_YORK);
+  d = make(base + 15 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('3');
   expect(fr.formatDateRaw(d, opts)).toEqual('3');
 
-  d = make(base + (16 * DAY), NEW_YORK);
+  d = make(base + 16 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('3');
   expect(fr.formatDateRaw(d, opts)).toEqual('3');
 
-  d = make(base + (17 * DAY), NEW_YORK);
+  d = make(base + 17 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('3');
   expect(fr.formatDateRaw(d, opts)).toEqual('3');
 
   // Jump to Aug 25
-  d = make(base + (24 * DAY), NEW_YORK);
+  d = make(base + 24 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('4');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
-  d = make(base + (25 * DAY), NEW_YORK);
+  d = make(base + 25 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
-  d = make(base + (26 * DAY), NEW_YORK);
+  d = make(base + 26 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('5');
 
@@ -206,58 +206,58 @@ test('week of month', () => {
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('0');
 
-  d = make(base + (2 * DAY), NEW_YORK);
+  d = make(base + 2 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (3 * DAY), NEW_YORK);
+  d = make(base + 3 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (4 * DAY), NEW_YORK);
+  d = make(base + 4 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (5 * DAY), NEW_YORK);
+  d = make(base + 5 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (6 * DAY), NEW_YORK);
+  d = make(base + 6 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
-  d = make(base + (7 * DAY), NEW_YORK);
+  d = make(base + 7 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('2');
   expect(fr.formatDateRaw(d, opts)).toEqual('1');
 
   // Jump to Sep 16
-  d = make(base + (15 * DAY), NEW_YORK);
+  d = make(base + 15 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('4');
   expect(fr.formatDateRaw(d, opts)).toEqual('2');
 
-  d = make(base + (16 * DAY), NEW_YORK);
+  d = make(base + 16 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('4');
   expect(fr.formatDateRaw(d, opts)).toEqual('3');
 
-  d = make(base + (17 * DAY), NEW_YORK);
+  d = make(base + 17 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('4');
   expect(fr.formatDateRaw(d, opts)).toEqual('3');
 
   // Jump to Sep 25
-  d = make(base + (24 * DAY), NEW_YORK);
+  d = make(base + 24 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
-  d = make(base + (25 * DAY), NEW_YORK);
+  d = make(base + 25 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
-  d = make(base + (26 * DAY), NEW_YORK);
+  d = make(base + 26 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('5');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 
   // Jump to Sep 30
-  d = make(base + (29 * DAY), NEW_YORK);
+  d = make(base + 29 * DAY, NEW_YORK);
   expect(en.formatDateRaw(d, opts)).toEqual('6');
   expect(fr.formatDateRaw(d, opts)).toEqual('4');
 });

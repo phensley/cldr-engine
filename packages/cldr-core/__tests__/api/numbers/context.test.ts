@@ -1,8 +1,4 @@
-import {
-  CurrencyFormatOptions,
-  Decimal,
-  DecimalFormatOptions,
-} from '../../../src';
+import { CurrencyFormatOptions, Decimal, DecimalFormatOptions } from '../../../src';
 
 import { NumberContext } from '../../../src/internals/numbers/context';
 import { parseNumberPattern, NumberPattern } from '../../../src/parsing/number';

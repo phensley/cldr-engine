@@ -2,7 +2,6 @@ import { Decimal } from '@phensley/decimal';
 import { numbersApi } from '../../_helpers';
 
 test('cardinals', () => {
-
   // Main test cases are under engine/plurals. These are here to confirm
   // the public interface is covered.
 

@@ -10,8 +10,7 @@ test('basic min heap', () => {
     strings.push(rng.rand(10));
   }
 
-  const cmp = (a: string, b: string) =>
-    a < b ? -1 : a > b ? 1 : 0;
+  const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 
   // Add half the strings on construction
   const heap = new Heap(cmp, strings.slice(0, 100));

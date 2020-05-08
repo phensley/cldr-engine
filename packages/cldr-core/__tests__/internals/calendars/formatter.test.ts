@@ -1,8 +1,6 @@
 import { languageBundle, INTERNALS } from '../../_helpers';
 import { StringValue } from '../../../src/utils/render';
-import {
-  CalendarFormatterImpl
-} from '../../../src/internals/calendars/formatterimpl';
+import { CalendarFormatterImpl } from '../../../src/internals/calendars/formatterimpl';
 import { CalendarContext } from '../../../src/internals/calendars/formatter';
 import { DecimalNumberingSystem, GregorianDate } from '../../../src';
 import { ContextTransformInfo, NumberSymbols } from '../../../src/common/private';
@@ -10,7 +8,7 @@ import { ContextTransformInfo, NumberSymbols } from '../../../src/common/private
 const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const SYMBOLS: NumberSymbols = {
   decimal: '.',
-  group: ','
+  group: ',',
 } as NumberSymbols;
 
 test('calendar formatter', () => {
@@ -30,7 +28,7 @@ test('calendar formatter', () => {
     date,
     system,
     latnSystem: system,
-    transform: {} as ContextTransformInfo
+    transform: {} as ContextTransformInfo,
   };
 
   impl.format(value, ctx, [['M', 3]]);

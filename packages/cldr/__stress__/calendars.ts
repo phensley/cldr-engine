@@ -1,9 +1,4 @@
-import {
-  CLDRFramework,
-  DateFormatOptions,
-  FormatWidthType,
-  ZonedDateTime
-} from '../src';
+import { CLDRFramework, DateFormatOptions, FormatWidthType, ZonedDateTime } from '../src';
 
 import { getCLDR } from '../__tests__/_helpers';
 import { Timer } from './timer';
@@ -12,10 +7,7 @@ const { availableLocales } = CLDRFramework;
 
 const ZONES = ['America/New_York', 'Europe/London', 'Africa/Timbuktu'];
 
-const DATETIMES = [
-  123000,
-  1520873594000
-];
+const DATETIMES = [123000, 1520873594000];
 
 const FRACTIONS = 10;
 

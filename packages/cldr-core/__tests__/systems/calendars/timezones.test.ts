@@ -1,7 +1,4 @@
-import {
-  getStableTimeZoneId,
-  zoneInfoFromUTC
-} from '../../../src/systems/calendars/timezone';
+import { getStableTimeZoneId, zoneInfoFromUTC } from '../../../src/systems/calendars/timezone';
 
 test('zone info', () => {
   const utc = 1554263155000;

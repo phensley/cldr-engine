@@ -26,29 +26,17 @@ test('exponent', () => {
 });
 
 test('properties', () => {
-  expect(parse('-12300').properties()).toEqual(
-    [[12300], -1, 0, 0]
-  );
+  expect(parse('-12300').properties()).toEqual([[12300], -1, 0, 0]);
 
-  expect(parse('-123e10').properties()).toEqual(
-    [[123], -1, 10, 0]
-  );
+  expect(parse('-123e10').properties()).toEqual([[123], -1, 10, 0]);
 
-  expect(parse('-123e-10').properties()).toEqual(
-    [[123], -1, -10, 0]
-  );
+  expect(parse('-123e-10').properties()).toEqual([[123], -1, -10, 0]);
 
-  expect(parse('infinity').properties()).toEqual(
-    [[], 1, 0, 2]
-  );
+  expect(parse('infinity').properties()).toEqual([[], 1, 0, 2]);
 
-  expect(parse('-infinity').properties()).toEqual(
-    [[], -1, 0, 2]
-  );
+  expect(parse('-infinity').properties()).toEqual([[], -1, 0, 2]);
 
-  expect(parse('nan').properties()).toEqual(
-    [[], 0, 0, 1]
-  );
+  expect(parse('nan').properties()).toEqual([[], 0, 0, 1]);
 });
 
 test('signum', () => {
@@ -229,13 +217,13 @@ test('to parts', () => {
     { type: 'minus', value: '-' },
     { type: 'integer', value: '1512' },
     { type: 'decimal', value: '.' },
-    { type: 'fraction', value: '34' }
+    { type: 'fraction', value: '34' },
   ]);
 
   expect(parse('1.3e-5').toParts()).toEqual([
     { type: 'integer', value: '0' },
     { type: 'decimal', value: '.' },
-    { type: 'fraction', value: '000013' }
+    { type: 'fraction', value: '000013' },
   ]);
 });
 
@@ -313,8 +301,7 @@ test('shift left', () => {
   expect(parse('12345.234').shiftleft(3)).toEqual(parse('12345234.000'));
   expect(parse('12345.234').shiftleft(4)).toEqual(parse('123452340.000'));
 
-  expect(parse('12345678900000000000').shiftleft(10))
-    .toEqual(parse('123456789000000000000000000000'));
+  expect(parse('12345678900000000000').shiftleft(10)).toEqual(parse('123456789000000000000000000000'));
 });
 
 test('shift right', () => {

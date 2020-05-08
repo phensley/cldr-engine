@@ -9,7 +9,7 @@ const ZONES = [
   'America/New_York',
   'Asia/Tokyo',
   'Africa/Casablanca',
-  'Antarctica/McMurdo' // alias
+  'Antarctica/McMurdo', // alias
 ];
 
 test('gregorian fields', () => {
@@ -23,7 +23,7 @@ test('gregorian fields', () => {
     minute: 8,
     second: 52,
     millis: 123,
-    zoneId: 'America/New_York'
+    zoneId: 'America/New_York',
   });
 });
 
@@ -52,30 +52,35 @@ test('gregorian set field', () => {
   expect(d.set({ hour: 0 }).toString()).toEqual('Gregorian 2020-04-03 00:08:52.123 America/New_York');
 
   // Gregorian cutover
-  expect(d.set({ year: 1582, month: 10, day: 3 }).toString())
-    .toEqual('Gregorian 1582-10-03 14:08:52.123 America/New_York');
-  expect(d.set({ year: 1582, month: 10, day: 16 }).toString())
-    .toEqual('Gregorian 1582-10-16 14:08:52.123 America/New_York');
+  expect(d.set({ year: 1582, month: 10, day: 3 }).toString()).toEqual(
+    'Gregorian 1582-10-03 14:08:52.123 America/New_York',
+  );
+  expect(d.set({ year: 1582, month: 10, day: 16 }).toString()).toEqual(
+    'Gregorian 1582-10-16 14:08:52.123 America/New_York',
+  );
 
   // Set zone concurrently
-  expect(d.set({ zoneId: 'America/Los_Angeles' }).toString())
-    .toEqual('Gregorian 2020-04-03 14:08:52.123 America/Los_Angeles');
+  expect(d.set({ zoneId: 'America/Los_Angeles' }).toString()).toEqual(
+    'Gregorian 2020-04-03 14:08:52.123 America/Los_Angeles',
+  );
 
   // Set fields then change zone
-  expect(d.set({}).withZone('America/Los_Angeles').toString())
-    .toEqual('Gregorian 2020-04-03 11:08:52.123 America/Los_Angeles');
+  expect(d.set({}).withZone('America/Los_Angeles').toString()).toEqual(
+    'Gregorian 2020-04-03 11:08:52.123 America/Los_Angeles',
+  );
 
   // Set fields, then change zone
-  expect(d.set({ hour: 9 }).withZone('America/Los_Angeles').toString())
-    .toEqual('Gregorian 2020-04-03 06:08:52.123 America/Los_Angeles');
+  expect(d.set({ hour: 9 }).withZone('America/Los_Angeles').toString()).toEqual(
+    'Gregorian 2020-04-03 06:08:52.123 America/Los_Angeles',
+  );
 
   // Change zone, then set fields
-  expect(d.withZone('America/Los_Angeles').set({ hour: 9 }).toString())
-    .toEqual('Gregorian 2020-04-03 09:08:52.123 America/Los_Angeles');
+  expect(d.withZone('America/Los_Angeles').set({ hour: 9 }).toString()).toEqual(
+    'Gregorian 2020-04-03 09:08:52.123 America/Los_Angeles',
+  );
 
   // Set to invalid zone
-  expect(d.set({ zoneId: 'ZZZ' }).toString())
-    .toEqual('Gregorian 2020-04-03 14:08:52.123 Etc/UTC');
+  expect(d.set({ zoneId: 'ZZZ' }).toString()).toEqual('Gregorian 2020-04-03 14:08:52.123 Etc/UTC');
 });
 
 test('buddhist fields', () => {
@@ -91,7 +96,7 @@ test('buddhist fields', () => {
     minute: 8,
     second: 52,
     millis: 123,
-    zoneId: 'America/New_York'
+    zoneId: 'America/New_York',
   });
 });
 
@@ -113,7 +118,7 @@ test('persian fields', () => {
     minute: 8,
     second: 52,
     millis: 123,
-    zoneId: 'America/New_York'
+    zoneId: 'America/New_York',
   });
 });
 
@@ -135,16 +140,19 @@ test('persian set field', () => {
   expect(d.set({ hour: 5 }).toString()).toEqual('Persian 1399-01-15 05:08:52.123 America/New_York');
 
   // Just change zone
-  expect(d.set({}).withZone('America/Los_Angeles').toString())
-    .toEqual('Persian 1399-01-15 11:08:52.123 America/Los_Angeles');
+  expect(d.set({}).withZone('America/Los_Angeles').toString()).toEqual(
+    'Persian 1399-01-15 11:08:52.123 America/Los_Angeles',
+  );
 
   // Set fields, then change zone
-  expect(d.set({ hour: 9 }).withZone('America/Los_Angeles').toString())
-    .toEqual('Persian 1399-01-15 06:08:52.123 America/Los_Angeles');
+  expect(d.set({ hour: 9 }).withZone('America/Los_Angeles').toString()).toEqual(
+    'Persian 1399-01-15 06:08:52.123 America/Los_Angeles',
+  );
 
   // Change zone, then set fields
-  expect(d.withZone('America/Los_Angeles').set({ hour: 9 }).toString())
-    .toEqual('Persian 1399-01-15 09:08:52.123 America/Los_Angeles');
+  expect(d.withZone('America/Los_Angeles').set({ hour: 9 }).toString()).toEqual(
+    'Persian 1399-01-15 09:08:52.123 America/Los_Angeles',
+  );
 });
 
 test('gregorian random', () => {

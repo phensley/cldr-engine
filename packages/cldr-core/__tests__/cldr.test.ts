@@ -109,19 +109,7 @@ test('accessing internals', () => {
   const api = framework.get('en');
 
   const p = api.Internals.calendars.parseDatePattern('yyyy/MM/dd h:m:s');
-  expect(p).toEqual([
-    ['y', 4],
-    '/',
-    ['M', 2],
-    '/',
-    ['d', 2],
-    ' ',
-    ['h', 1],
-    ':',
-    ['m', 1],
-    ':',
-    ['s', 1]
-  ]);
+  expect(p).toEqual([['y', 4], '/', ['M', 2], '/', ['d', 2], ' ', ['h', 1], ':', ['m', 1], ':', ['s', 1]]);
 });
 
 test('resolving locales', () => {
@@ -177,7 +165,7 @@ test('loader errors', () => {
 
 test('undefined locale', () => {
   const framework = getCLDR();
-  const undef = undefined as unknown as string;
+  const undef = (undefined as unknown) as string;
   expect(() => framework.get(undef)).toThrowError('argument is undefined');
   expect(() => framework.getAsync(undef)).toThrowError('argument is undefined');
 });
@@ -190,14 +178,14 @@ test('version', () => {
 test('framework config', () => {
   let framework: CLDRFramework;
   const config: SchemaConfig = {
-    'number-system-name': ['latn', 'beng']
+    'number-system-name': ['latn', 'beng'],
   };
 
   CLDRFramework.setDefaultConfig(config);
   framework = new CLDRFramework({});
   expect(framework.config()).toEqual(config);
 
-  CLDRFramework.setDefaultConfig(undefined as unknown as SchemaConfig);
+  CLDRFramework.setDefaultConfig((undefined as unknown) as SchemaConfig);
   framework = new CLDRFramework({});
   expect(framework.config()).toEqual({});
 

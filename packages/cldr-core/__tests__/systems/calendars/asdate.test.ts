@@ -4,11 +4,20 @@ test('as javascript date', () => {
   let d: CalendarDate;
   let j: Date;
 
-  d = GregorianDate.fromFields({
-    year: 2020, month: 4, day: 21,
-    hour: 12, minute: 34, second: 56, millis: 123,
-    zoneId: 'America/New_York'
-  }, 1, 1);
+  d = GregorianDate.fromFields(
+    {
+      year: 2020,
+      month: 4,
+      day: 21,
+      hour: 12,
+      minute: 34,
+      second: 56,
+      millis: 123,
+      zoneId: 'America/New_York',
+    },
+    1,
+    1,
+  );
 
   j = d.asJSDate();
   expect(j.getFullYear()).toEqual(2020);

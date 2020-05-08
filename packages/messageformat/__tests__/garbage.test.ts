@@ -1,8 +1,4 @@
-import {
-  parseMessagePattern,
-  stickyRegexp,
-  StickyMatcher,
-} from '../src';
+import { parseMessagePattern, stickyRegexp, StickyMatcher } from '../src';
 
 const NAMES = ['decimal', 'unit', 'currency', 'datetime', 'datetime-interval', 'number'];
 
@@ -19,12 +15,10 @@ const VALID: string[] = [
   '{0 currency format:long}',
   '{0 unit in:seconds sequence:day,hour,minute}',
   '{0 selectordinal one{st} other{th}}',
-  '{0 number format:long}'
+  '{0 number format:long}',
 ];
 
-const GARBAGE: string[] = [
-  ',', "'", "''", ' ', '{', '}', '*', ';', '!',
-];
+const GARBAGE: string[] = [',', "'", "''", ' ', '{', '}', '*', ';', '!'];
 
 const generate = (threshold: number) => {
   const ix = (Math.random() * VALID.length) | 0;

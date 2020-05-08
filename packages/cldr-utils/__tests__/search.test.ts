@@ -1,10 +1,8 @@
 import { binarySearch } from '../src/search';
 
-const searchlt = (nums: number[], n: number) =>
-  binarySearch(nums, true, n);
+const searchlt = (nums: number[], n: number) => binarySearch(nums, true, n);
 
-const searchgt = (nums: number[], n: number) =>
-  binarySearch(nums, false, n);
+const searchgt = (nums: number[], n: number) => binarySearch(nums, false, n);
 
 test('binary search less than', () => {
   let nums: number[] = [];

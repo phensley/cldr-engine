@@ -23,21 +23,13 @@ const RAW_NUMBERS: string = `
 
 const NUMBERS: Decimal[] = [];
 
-RAW_NUMBERS.split(/\n/).map(s => s.trim())
-  .filter(s => s[0] !== '#')
-  .map(s => s.split(/\s+/))
-  .forEach(
-    r => r.filter(s => s.length).forEach(s => NUMBERS.push(new Decimal(s))));
+RAW_NUMBERS.split(/\n/)
+  .map((s) => s.trim())
+  .filter((s) => s[0] !== '#')
+  .map((s) => s.split(/\s+/))
+  .forEach((r) => r.filter((s) => s.length).forEach((s) => NUMBERS.push(new Decimal(s))));
 
-const ROUNDING: RoundingModeType[] = [
-  'ceiling',
-  'up',
-  'down',
-  'floor',
-  'half-down',
-  'half-up',
-  'half-even'
-];
+const ROUNDING: RoundingModeType[] = ['ceiling', 'up', 'down', 'floor', 'half-down', 'half-up', 'half-even'];
 
 const CONTEXTS: MathContext[] = [{}];
 for (const round of ROUNDING) {
@@ -58,7 +50,7 @@ export const mathStress = () => {
   let div: Decimal;
   let total = 0;
 
-  const numbers: Decimal[] = NUMBERS.concat(NUMBERS.map(n => n.negate()));
+  const numbers: Decimal[] = NUMBERS.concat(NUMBERS.map((n) => n.negate()));
   const timer = new Timer();
   timer.start();
 

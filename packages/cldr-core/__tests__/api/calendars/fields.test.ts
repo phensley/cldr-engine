@@ -1,10 +1,7 @@
 import { DateTimePatternFieldType } from '@phensley/cldr-types';
 import { calendarsApi } from '../../_helpers';
 
-import {
-  CalendarDate,
-  ZonedDateTime
-} from '../../../src';
+import { CalendarDate, ZonedDateTime } from '../../../src';
 
 const zoned = (date: number | Date, zoneId?: string): ZonedDateTime => ({ date, zoneId });
 

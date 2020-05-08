@@ -1,7 +1,5 @@
 import { calendarsApi } from '../../_helpers';
-import {
-  CalendarDate,
-} from '../../../src';
+import { CalendarDate } from '../../../src';
 
 test('gregorian defaults', () => {
   let d: CalendarDate;

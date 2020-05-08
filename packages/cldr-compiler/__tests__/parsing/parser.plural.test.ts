@@ -1,11 +1,4 @@
-import {
-  parsePluralRule,
-  AndCondition,
-  Expr,
-  OrCondition,
-  Range,
-  Rule
-} from '../../src/parsing';
+import { parsePluralRule, AndCondition, Expr, OrCondition, Range, Rule } from '../../src/parsing';
 
 test('rule parse', () => {
   const rule = 'v = 0 and i % 10 = 1 or v % 10 = 2,3..6 @integer 1, 21, 31';
@@ -15,14 +8,13 @@ test('rule parse', () => {
   const { _1, _2 } = result.get();
   expect(_2).toEqual('');
 
-  const expected = new Rule(new OrCondition([
-    new AndCondition([
-      new Expr('v', 0, '=', [0]),
-      new Expr('i', 10, '=', [1]),
-    ]), new AndCondition([
-      new Expr('v', 10, '=', [2, new Range(3, 6)])
-    ])
-  ]), '@integer 1, 21, 31');
+  const expected = new Rule(
+    new OrCondition([
+      new AndCondition([new Expr('v', 0, '=', [0]), new Expr('i', 10, '=', [1])]),
+      new AndCondition([new Expr('v', 10, '=', [2, new Range(3, 6)])]),
+    ]),
+    '@integer 1, 21, 31',
+  );
 
   expect(_1).toEqual(expected);
 });
@@ -32,7 +24,10 @@ test('rule compact', () => {
   const result = parsePluralRule(rule);
   const { _1 } = result.get();
   expect(_1.compact()).toEqual([
-    [['v', 0, 1, [0]], ['i', 10, 1, [1]]],
-    [['v', 10, 1, [2, [3, 6]]]]
+    [
+      ['v', 0, 1, [0]],
+      ['i', 10, 1, [1]],
+    ],
+    [['v', 10, 1, [2, [3, 6]]]],
   ]);
 });

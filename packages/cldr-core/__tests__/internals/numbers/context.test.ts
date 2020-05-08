@@ -25,10 +25,15 @@ test('standard', () => {
 
 test('standard min/max significant', () => {
   const pat = parseNumberPattern('#,##0.00#')[0];
-  const ctx = new NumberContext({
-    minimumSignificantDigits: 2,
-    maximumSignificantDigits: 1
-  }, 'half-even', false, false);
+  const ctx = new NumberContext(
+    {
+      minimumSignificantDigits: 2,
+      maximumSignificantDigits: 1,
+    },
+    'half-even',
+    false,
+    false,
+  );
   ctx.setPattern(pat, false);
 
   expect(ctx.minInt).toEqual(1);

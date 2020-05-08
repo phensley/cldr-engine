@@ -19,11 +19,7 @@ test('calendar patterns', () => {
   const date = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: 'America/New_York' });
   skel = impl.parseSkeleton('y');
   const pattern = impl.getAvailablePattern(date, skel);
-  expect(pattern).toEqual([
-    ['y', 1],
-    ' ',
-    ['G', 1]
-  ]);
+  expect(pattern).toEqual([['y', 1], ' ', ['G', 1]]);
 
   // Interval matching has minutes resolution
   skel = impl.matchInterval(impl.parseSkeleton('mm'), 's')!;

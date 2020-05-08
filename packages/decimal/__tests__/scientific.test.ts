@@ -1,10 +1,8 @@
 import { Decimal } from '../src';
 
-const sci = (d: string, m?: number) =>
-  new Decimal(d).toScientificString(m);
+const sci = (d: string, m?: number) => new Decimal(d).toScientificString(m);
 
-const scip = (d: string, m?: number) =>
-  new Decimal(d).toScientificParts(m);
+const scip = (d: string, m?: number) => new Decimal(d).toScientificParts(m);
 
 test('scientific string', () => {
   expect(sci('0')).toEqual('0');
@@ -27,9 +25,7 @@ test('negative zero', () => {
 });
 
 test('scientific parts', () => {
-  expect(scip('0')).toEqual([
-    { type: 'integer', value: '0' }
-  ]);
+  expect(scip('0')).toEqual([{ type: 'integer', value: '0' }]);
 
   expect(scip('123', 2)).toEqual([
     { type: 'integer', value: '12' },
@@ -37,7 +33,7 @@ test('scientific parts', () => {
     { type: 'fraction', value: '3' },
     { type: 'exp', value: 'E' },
     { type: 'plus', value: '+' },
-    { type: 'integer', value: '1' }
+    { type: 'integer', value: '1' },
   ]);
 
   expect(scip('-123.57', 2)).toEqual([
@@ -47,7 +43,7 @@ test('scientific parts', () => {
     { type: 'fraction', value: '357' },
     { type: 'exp', value: 'E' },
     { type: 'plus', value: '+' },
-    { type: 'integer', value: '1' }
+    { type: 'integer', value: '1' },
   ]);
 
   expect(scip('0.0012')).toEqual([
@@ -56,6 +52,6 @@ test('scientific parts', () => {
     { type: 'fraction', value: '2' },
     { type: 'exp', value: 'E' },
     { type: 'minus', value: '-' },
-    { type: 'integer', value: '3' }
+    { type: 'integer', value: '3' },
   ]);
 });

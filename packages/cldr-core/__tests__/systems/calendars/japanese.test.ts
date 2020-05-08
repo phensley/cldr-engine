@@ -1,8 +1,7 @@
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
 import { JapaneseDate } from '../../../src/systems/calendars/japanese';
 
-const make = (e: number, z: string) =>
-  JapaneseDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
+const make = (e: number, z: string) => JapaneseDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
 // Monday, June 1, 1925 12:34:56 PM UTC
 const JUN_01 = -1406978704000;

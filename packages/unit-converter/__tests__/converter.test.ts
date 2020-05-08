@@ -25,7 +25,7 @@ test('converter', () => {
 
   f = c.get('angle', 'revolution', 'arc-minute')!;
   expect(f.path).toEqual(['revolution', 'degree', 'arc-minute']);
-  expect(f.factors.map(x => x.toString())).toEqual(['360 / 1', '60 / 1']);
+  expect(f.factors.map((x) => x.toString())).toEqual(['360 / 1', '60 / 1']);
 
   f = c.get('angle', 'unknown', 'arc-minute');
   expect(f).toBe(undefined);

@@ -10,7 +10,7 @@ import {
   UnitFormatOptions,
   UnitFormatStyleType,
   UnitLength,
-  UnitType
+  UnitType,
 } from '../src';
 import { getCLDR } from '../__tests__/_helpers';
 import { Timer } from './timer';
@@ -22,42 +22,43 @@ const { availableLocales } = CLDRFramework;
 const MAX = String(Number.MAX_SAFE_INTEGER);
 
 const CURRENCY_NUMBERS: (string | Decimal)[] = [
-  '0', '1', '-1',
-  '5', '-13',
-  '123.1', '-99.57',
-  '12345.789', '-12345.789',
+  '0',
+  '1',
+  '-1',
+  '5',
+  '-13',
+  '123.1',
+  '-99.57',
+  '12345.789',
+  '-12345.789',
   '1000000000',
   new Decimal('1.579e-13'),
   DecimalConstants.PI,
   MAX,
-  MAX + MAX
+  MAX + MAX,
 ];
 
 const NUMBERS: (string | Decimal)[] = ['-Infinity', 'NaN', ...CURRENCY_NUMBERS];
 
 const DECIMAL_STYLES: DecimalFormatStyleType[] = [
-  'decimal', 'short', 'long', 'percent', 'permille', 'percent-scaled', 'permille-scaled'
+  'decimal',
+  'short',
+  'long',
+  'percent',
+  'permille',
+  'percent-scaled',
+  'permille-scaled',
 ];
 
-const CURRENCY_STYLES: CurrencyFormatStyleType[] = [
-  'symbol', 'accounting', 'name', 'code', 'short'
-];
+const CURRENCY_STYLES: CurrencyFormatStyleType[] = ['symbol', 'accounting', 'name', 'code', 'short'];
 
-const CURRENCIES: CurrencyType[] = [
-  'USD', 'JPY', 'EUR', 'GBP'
-];
+const CURRENCIES: CurrencyType[] = ['USD', 'JPY', 'EUR', 'GBP'];
 
-const UNITS: UnitType[] = [
-  'kilogram', 'kilohertz', 'kilobyte'
-];
+const UNITS: UnitType[] = ['kilogram', 'kilohertz', 'kilobyte'];
 
-const UNIT_STYLES: UnitFormatStyleType[] = [
-  'decimal', 'long', 'short'
-];
+const UNIT_STYLES: UnitFormatStyleType[] = ['decimal', 'long', 'short'];
 
-const UNIT_LENGTHS: UnitLength[] = [
-  'long', 'short', 'narrow'
-];
+const UNIT_LENGTHS: UnitLength[] = ['long', 'short', 'narrow'];
 
 /**
  * Generate permutations of options.
@@ -174,8 +175,9 @@ export const numberStress = () => {
           s = engine.Numbers.formatCurrency(n, currency, o);
           if (!s) {
             if (VERBOSE) {
-              console.log(`[numbers] format currency empty ` +
-                `${locale.id} ${n.toString()} ${currency} ${JSON.stringify(o)}`);
+              console.log(
+                `[numbers] format currency empty ` + `${locale.id} ${n.toString()} ${currency} ${JSON.stringify(o)}`,
+              );
             }
             empty++;
           }
@@ -220,8 +222,10 @@ export const numberStress = () => {
           s = engine.Units.formatQuantity({ value: n, unit, per: 'second' }, o);
           if (!s) {
             if (VERBOSE) {
-              console.log(`[numbers] format quantity per empty ` +
-                `${locale.id} ${n.toString()} ${unit} per: 'second' ${JSON.stringify(o)}`);
+              console.log(
+                `[numbers] format quantity per empty ` +
+                  `${locale.id} ${n.toString()} ${unit} per: 'second' ${JSON.stringify(o)}`,
+              );
             }
             empty++;
           }

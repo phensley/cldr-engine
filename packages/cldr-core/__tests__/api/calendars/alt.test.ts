@@ -1,8 +1,5 @@
 import { calendarsApi } from '../../_helpers';
-import {
-  CalendarsImpl,
-  ZonedDateTime,
-} from '../../../src';
+import { CalendarsImpl, ZonedDateTime } from '../../../src';
 
 const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
@@ -119,5 +116,4 @@ test('day period alternate', () => {
 
   s = api.formatDate(mar11, { skeleton: 'hma', alt: { dayPeriod: 'casing' } });
   expect(s).toEqual('11:00 PM');
-
 });

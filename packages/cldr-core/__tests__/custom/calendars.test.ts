@@ -48,7 +48,7 @@ test('skeleton pattern quarters', () => {
   const date = { date: new Date(2019, 5, 10, 12, 34, 56), zoneId };
   const api = calendarsApi('en', {
     calendars: [],
-    'gregorian-available-format': ['yQQQ', 'yQQQQ']
+    'gregorian-available-format': ['yQQQ', 'yQQQQ'],
   });
 
   let s: string;

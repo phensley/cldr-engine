@@ -42,7 +42,6 @@ test('date wrapper string', () => {
 
   s = api.formatDateWrapper('DATE', 'TIME', { ca: 'persian', width: 'full' });
   expect(s).toEqual('DATE، ساعت TIME');
-
 });
 
 test('date wrapper parts', () => {
@@ -52,24 +51,19 @@ test('date wrapper parts', () => {
 
   api = calendarsApi('en');
 
-  p = api.formatDateWrapperToParts(
-    [{ type: 'date', value: 'DATE' }],
-    [{ type: 'time', value: 'TIME' }]
-  );
+  p = api.formatDateWrapperToParts([{ type: 'date', value: 'DATE' }], [{ type: 'time', value: 'TIME' }]);
   expect(p).toEqual([
     { type: 'date', value: 'DATE' },
     { type: 'literal', value: ', ' },
-    { type: 'time', value: 'TIME' }
+    { type: 'time', value: 'TIME' },
   ]);
 
-  p = api.formatDateWrapperToParts(
-    [{ type: 'date', value: 'DATE' }],
-    [{ type: 'time', value: 'TIME' }],
-    { width: 'full' }
-  );
+  p = api.formatDateWrapperToParts([{ type: 'date', value: 'DATE' }], [{ type: 'time', value: 'TIME' }], {
+    width: 'full',
+  });
   expect(p).toEqual([
     { type: 'date', value: 'DATE' },
     { type: 'literal', value: ' at ' },
-    { type: 'time', value: 'TIME' }
+    { type: 'time', value: 'TIME' },
   ]);
 });

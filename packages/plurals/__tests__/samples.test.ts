@@ -14,7 +14,7 @@ interface Group {
   samples: string[];
 }
 
-SAMPLES.forEach(line => {
+SAMPLES.forEach((line) => {
   line = line.trim();
   if (!line || line[0] === '#') {
     return;
@@ -40,7 +40,7 @@ expect.extend({
 
     const result = actual === expected;
     return { message: msg(result), pass: result };
-  }
+  },
 });
 
 declare global {
@@ -52,12 +52,14 @@ declare global {
   }
 }
 
-Object.keys(TESTCASES).sort().forEach(key => {
-  test(key, () => {
-    for (const c of TESTCASES[key]) {
-      for (const sample of c.samples) {
-        expect(sample).toHaveCategory(c.typ, c.lang, c.category);
+Object.keys(TESTCASES)
+  .sort()
+  .forEach((key) => {
+    test(key, () => {
+      for (const c of TESTCASES[key]) {
+        for (const sample of c.samples) {
+          expect(sample).toHaveCategory(c.typ, c.lang, c.category);
+        }
       }
-    }
+    });
   });
-});

@@ -35,6 +35,5 @@ test('subtraction', () => {
 
 test('subtraction coverage', () => {
   expect(sub('999998910', '99999909')).toEqual(parse('899999001'));
-  expect(sub('1000000000000999998910', '10000999598910'))
-    .toEqual(parse('999999990000000400000'));
+  expect(sub('1000000000000999998910', '10000999598910')).toEqual(parse('999999990000000400000'));
 });

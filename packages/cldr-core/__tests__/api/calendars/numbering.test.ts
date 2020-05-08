@@ -1,9 +1,6 @@
 import { calendarsApi } from '../../_helpers';
 
-import {
-  NumberSystemType,
-  ZonedDateTime
-} from '../../../src';
+import { NumberSystemType, ZonedDateTime } from '../../../src';
 
 const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 

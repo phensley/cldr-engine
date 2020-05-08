@@ -66,7 +66,6 @@ test('remove likely subtags', () => {
 
   // Pass language tag
   expect(removeLikelySubtags(parse('en-Latn-US'))).toEqual(parse('en'));
-
 });
 
 test('aliases', () => {

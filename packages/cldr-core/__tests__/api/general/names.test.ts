@@ -133,7 +133,6 @@ test('regions', () => {
   expect(api.getRegionDisplayName('US')).toEqual('Estados Unidos');
   expect(api.getRegionDisplayName('US', { type: 'short' })).toEqual('EE. UU.');
   expect(api.getRegionDisplayName('ZZ')).toEqual('Región desconocida');
-
 });
 
 test('internals', () => {

@@ -2,7 +2,6 @@
 // Upstream typings are missing some overloads.
 
 declare module 'benchmark' {
-
   class Benchmark {
     abort(): Benchmark;
     on(type?: string, listener?: Function): Benchmark;

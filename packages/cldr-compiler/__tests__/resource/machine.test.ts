@@ -8,7 +8,7 @@ import {
   KeyIndexImpl,
   LanguageResolver,
   Origin,
-  Scope
+  Scope,
 } from '@phensley/cldr-core';
 
 import { Encoder, EncoderMachine } from '../../src/resource/machine';
@@ -28,7 +28,7 @@ const DigitValues = [4, 5, 6];
 const FooIndex = new KeyIndexImpl(['foo', 'bar']);
 
 const INDICES = {
-  'foo': FooIndex,
+  foo: FooIndex,
   'foo-bar': FooIndex,
   'plural-key': PluralIndex,
   'number-symbol': NumberSymbolIndex,
@@ -36,14 +36,10 @@ const INDICES = {
 
 const NUMBERS: Scope = scope('Numbers', 'Numbers', [
   vector('symbols', ['number-symbol']),
-  scope('currencyFormats', 'currencyFormats', [
-    field('standard')
-  ]),
+  scope('currencyFormats', 'currencyFormats', [field('standard')]),
   digits('short', 'plural-key', DigitValues),
-  scopemap('group', 'foo-bar', [
-    field('name')
-  ]),
-  vector('plurals', ['plural-key', 'foo'])
+  scopemap('group', 'foo-bar', [field('name')]),
+  vector('plurals', ['plural-key', 'foo']),
 ]);
 
 const CODE = [NUMBERS];
@@ -53,11 +49,11 @@ const ORIGIN: Origin = origin(CODE, INDICES);
 const SOURCE_EN_US = {
   Numbers: {
     currencyFormats: {
-      standard: '¤#,##0.00'
+      standard: '¤#,##0.00',
     },
     symbols: {
       decimal: '.',
-      group: ','
+      group: ',',
     },
     short: {
       other: {
@@ -69,37 +65,37 @@ const SOURCE_EN_US = {
         4: '0K',
         5: '00K',
         6: '000K',
-      }
+      },
     },
     group: {
       foo: {
-        name: 'Foo'
+        name: 'Foo',
       },
       bar: {
-        name: 'Bar'
-      }
+        name: 'Bar',
+      },
     },
     plurals: {
       other: {
         foo: 'Foos',
-        bar: 'Bars'
+        bar: 'Bars',
       },
       one: {
         foo: 'Foo',
-        bar: 'Bar'
-      }
-    }
-  }
+        bar: 'Bar',
+      },
+    },
+  },
 };
 
 const SOURCE_EN_DE = {
   Numbers: {
     currencyFormats: {
-      standard: '#,##0.00 ¤'
+      standard: '#,##0.00 ¤',
     },
     symbols: {
       decimal: ',',
-      group: '.'
+      group: '.',
     },
     short: {
       other: {
@@ -111,37 +107,37 @@ const SOURCE_EN_DE = {
         4: '0R',
         5: '00R',
         6: '000R',
-      }
+      },
     },
     group: {
       foo: {
-        name: 'Foo 2'
+        name: 'Foo 2',
       },
       bar: {
-        name: 'Bar'
-      }
+        name: 'Bar',
+      },
     },
     plurals: {
       other: {
         foo: 'Foos',
-        bar: 'Bars'
+        bar: 'Bars',
       },
       one: {
         foo: 'Foo',
-        bar: 'Bar'
-      }
-    }
-  }
+        bar: 'Bar',
+      },
+    },
+  },
 };
 
 const SOURCE_EN_CA = {
   Numbers: {
     currencyFormats: {
-      standard: '¤#,##0.00'
+      standard: '¤#,##0.00',
     },
     symbols: {
       decimal: '.',
-      group: ','
+      group: ',',
     },
     short: {
       other: {
@@ -153,36 +149,35 @@ const SOURCE_EN_CA = {
         4: '0R',
         5: '00R',
         6: '000R',
-      }
+      },
     },
     group: {
       foo: {
-        name: 'Foo'
+        name: 'Foo',
       },
       bar: {
-        name: 'Bar 2'
-      }
+        name: 'Bar 2',
+      },
     },
     plurals: {
       other: {
         foo: 'Foos',
-        bar: 'Bars'
+        bar: 'Bars',
       },
       one: {
         foo: 'Foo',
-        bar: 'Bar'
-      }
-    }
-  }
+        bar: 'Bar',
+      },
+    },
+  },
 };
 
 class PackEncoder implements Encoder {
-
   _distinct: { [x: string]: number } = {};
   _count: number = 0;
   _size: number = 0;
 
-  constructor(private pack: ResourcePack) { }
+  constructor(private pack: ResourcePack) {}
 
   encode(f: string | undefined): number {
     this._count++;
@@ -231,15 +226,15 @@ test('encoding', () => {
   expect(strings).toEqual(
     // vector 1-d symbols
     'E_._,_' +
-    // scope currency
-    '¤#,##0.00_' +
-    // digits short
-    '0K_3_00K_3_000K_3_0R_3_00R_3_000R_3_' +
-    // scopemap
-    'Foo_Bar 2_' +
-    // vector 2-d plurals
-    'E_Foos_Bars_Foo_Bar');
+      // scope currency
+      '¤#,##0.00_' +
+      // digits short
+      '0K_3_00K_3_000K_3_0R_3_00R_3_000R_3_' +
+      // scopemap
+      'Foo_Bar 2_' +
+      // vector 2-d plurals
+      'E_Foos_Bars_Foo_Bar',
+  );
 
-  expect(exceptions).toEqual(
-    '0K_00K_000K_Bar_,_._#,##0.00 ¤_0Q_00Q_000Q_Foo 2');
+  expect(exceptions).toEqual('0K_00K_000K_Bar_,_._#,##0.00 ¤_0Q_00Q_000Q_Foo 2');
 });

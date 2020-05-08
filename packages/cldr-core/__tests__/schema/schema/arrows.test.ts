@@ -17,11 +17,7 @@ const BAR: Bar[] = ['bar1', 'bar2', 'bar3'];
 const PluralDigitValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 class DummyBundle implements PrimitiveBundle {
-
-  constructor(
-    readonly exists: boolean,
-    readonly header: boolean = true) {
-  }
+  constructor(readonly exists: boolean, readonly header: boolean = true) {}
 
   id(): string {
     return 'und-ZZ';
@@ -96,7 +92,7 @@ test('digits arrow', () => {
 });
 
 type FooScope = {
-  [k in Foo]: any
+  [k in Foo]: any;
 };
 
 test('scope arrow', () => {
@@ -104,7 +100,7 @@ test('scope arrow', () => {
   const a = new ScopeArrowImpl(map);
   expect(a.get('foo1')).toEqual({ bar: 1 });
   expect(a.get('foo2')).toEqual({ bar: 2 });
-  expect(a.get('bar' as any as Foo)).toBe(undefined);
+  expect(a.get(('bar' as any) as Foo)).toBe(undefined);
 });
 
 test('1d arrow', () => {
@@ -116,7 +112,8 @@ test('1d arrow', () => {
   expect(a.get(bundle, 'foo2')).toEqual('2');
   expect(a.get(bundle, 'quux' as Foo)).toEqual('');
   expect(a.mapping(bundle)).toEqual({
-    foo1: '1', foo2: '2'
+    foo1: '1',
+    foo2: '2',
   });
 });
 
@@ -168,7 +165,7 @@ test('2d arrow', () => {
   expect(a.get(bundle, 'quux' as Foo, 'quux' as Bar)).toEqual('');
   expect(a.mapping(bundle)).toEqual({
     foo1: { bar1: '1', bar2: '2', bar3: '3' },
-    foo2: { bar1: '4', bar2: '5', bar3: '6' }
+    foo2: { bar1: '4', bar2: '5', bar3: '6' },
   });
 
   // invalid keys
@@ -213,6 +210,6 @@ test('missing 2d arrow', () => {
   expect(a.get(bundle, 'foo1', 'bar1')).toEqual('');
   expect(a.mapping(bundle)).toEqual({
     foo1: {},
-    foo2: {}
+    foo2: {},
   });
 });
