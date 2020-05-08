@@ -7,7 +7,6 @@ import { NumberPattern } from '../../parsing/number';
  * options with defaults based on modes and the number pattern.
  */
 export class NumberContext {
-
   readonly options: NumberFormatOptions;
   useSignificant: boolean;
 
@@ -18,8 +17,13 @@ export class NumberContext {
   minSig: number = -1;
   currencyDigits: number = -1;
 
-  constructor(options: NumberFormatOptions, readonly roundingMode: RoundingModeType,
-    compact: boolean, scientific: boolean, currencyDigits: number = -1) {
+  constructor(
+    options: NumberFormatOptions,
+    readonly roundingMode: RoundingModeType,
+    compact: boolean,
+    scientific: boolean,
+    currencyDigits: number = -1,
+  ) {
     const o = options;
     this.options = o;
     this.currencyDigits = currencyDigits;
@@ -56,7 +60,6 @@ export class NumberContext {
    * Adjust the scale of the number using the resolved parameters.
    */
   adjust(n: Decimal, scientific: boolean = false): Decimal {
-
     // TODO: consider moving this logic into Decimal since it could be useful
     // to adjust a number using several options in a single pass. Could be
     // more efficient, making fewer copies.
@@ -87,7 +90,6 @@ export class NumberContext {
         const scale = this.minSig - precision + n.scale();
         n = n.setScale(scale, this.roundingMode);
       }
-
     } else {
       // Precise control over number of integer and decimal digits to include, e.g. when
       // formatting exact currency values.
@@ -101,7 +103,6 @@ export class NumberContext {
       if (this.options.trimZeroFractions && !this.options.minimumFractionDigits && n.isInteger()) {
         // Trim zeros when whole number display is possible
         n = n.setScale(0, this.roundingMode);
-
       } else if (n.scale() < this.minFrac) {
         // Ensure minimum fraction digits is met.
         n = n.setScale(this.minFrac, this.roundingMode);
@@ -114,9 +115,13 @@ export class NumberContext {
   /**
    * Set context parameters from options, pattern and significant digit arguments.
    */
-  private _setPattern(pattern: NumberPattern,
-    scientific: boolean, maxSigDigits: number, minSigDigits: number, maxFracDigits: number): void {
-
+  private _setPattern(
+    pattern: NumberPattern,
+    scientific: boolean,
+    maxSigDigits: number,
+    minSigDigits: number,
+    maxFracDigits: number,
+  ): void {
     const o = this.options;
 
     // If minInt is not specified in options, always copy from pattern
@@ -171,4 +176,4 @@ export class NumberContext {
   }
 }
 
-const orDefault = (n: number | undefined, alt: number): number => n === undefined ? alt : n;
+const orDefault = (n: number | undefined, alt: number): number => (n === undefined ? alt : n);

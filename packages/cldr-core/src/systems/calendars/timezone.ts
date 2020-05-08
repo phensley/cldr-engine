@@ -41,7 +41,7 @@ export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
   return {
     ...tzinfo,
     metazoneid: metazoneid || ('' as MetaZoneType),
-    stableid
+    stableid,
   };
 };
 
@@ -69,14 +69,12 @@ export const getStableTimeZoneId = (zoneid: string): string => {
 /**
  * Maps a possible timezone alias to the correct id.
  */
-export const substituteZoneAlias = (id: string): string =>
-  timeZoneAliases[id] || id;
+export const substituteZoneAlias = (id: string): string => timeZoneAliases[id] || id;
 
 /**
  * Index all metazone information for quick access.
  */
 class Metazones {
-
   readonly metazoneids: string[];
   readonly metazones: MetazoneRecord[] = [];
   readonly zoneToMetazone: Map<string, number> = new Map();
@@ -87,14 +85,14 @@ class Metazones {
     this.metazoneids = raw.metazoneids;
     const index = numarray(raw.index, 36);
     const offsets = numarray(raw.offsets, 36);
-    const untils = numarray(raw.untils, 36).map(n => n === -1 ? n : n * 1000);
+    const untils = numarray(raw.untils, 36).map((n) => (n === -1 ? n : n * 1000));
 
     for (let i = 0; i < index.length; i += 2) {
       const s = index[i];
       const e = index[i + 1];
       const rec = {
         offsets: offsets.slice(s, e),
-        untils: untils.slice(s, e)
+        untils: untils.slice(s, e),
       };
       this.metazones.push(rec);
     }
@@ -177,5 +175,5 @@ export const timeZoneAliases: { [x: string]: string } = {
   ...zoneAlias,
 
   'Canada/East-Saskatchewan': 'America/Regina',
-  'Etc/Unknown': 'Factory'
+  'Etc/Unknown': 'Factory',
 };

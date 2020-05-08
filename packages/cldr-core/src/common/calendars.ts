@@ -16,7 +16,6 @@ import { TimePeriodField } from '../systems';
  * @public
  */
 export interface ZonedDateTime {
-
   /**
    * Can be either a Date object or Unix epoch time in milliseconds.
    * Both are interpreted as being relative to UTC.
@@ -33,7 +32,6 @@ export interface ZonedDateTime {
  * @public
  */
 export interface CalendarFieldsOptions {
-
   /**
    * Overrides which calendar to use
    */
@@ -54,7 +52,6 @@ export interface CalendarFieldsOptions {
  * @public
  */
 export interface EraFieldOptions {
-
   /**
    * Overrides which calendar to use
    */
@@ -75,7 +72,6 @@ export interface EraFieldOptions {
  * @public
  */
 export interface DateFieldFormatOptions {
-
   /**
    * Overrides which calendar to use
    */
@@ -104,7 +100,6 @@ export interface DateFormatAltOptions {
  * @public
  */
 export interface DateFormatOptions {
-
   /**
    * Set format for both date and time.
    */
@@ -155,7 +150,6 @@ export interface DateFormatOptions {
  * @public
  */
 export interface DateRawFormatOptions {
-
   /**
    * Raw date time pattern to use.
    */
@@ -186,7 +180,6 @@ export interface DateRawFormatOptions {
  * @public
  */
 export interface DateIntervalFormatOptions {
-
   /**
    * A skeleton format containing date and/or time fields. Note
    * that if present, this overrides the 'date' and 'time' options below.
@@ -260,7 +253,6 @@ export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
  * @public
  */
 export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOptions {
-
   /**
    * Specify the calendar to use.
    */

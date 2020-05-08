@@ -19,7 +19,6 @@ export type MeasurementCategory = 'temperature';
  * @public
  */
 export interface DisplayNameOptions {
-
   type?: AltType;
 
   context?: ContextType;

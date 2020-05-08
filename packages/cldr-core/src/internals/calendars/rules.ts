@@ -14,12 +14,11 @@ interface Rule {
 const parseRule = (raw: string): Rule => {
   const parts = raw.split('|');
   const minutes = numarray(parts[1], 36);
-  const keys = numarray(parts[0]).map(n => dayPeriodKeys[n]);
+  const keys = numarray(parts[0]).map((n) => dayPeriodKeys[n]);
   return { keys, minutes };
 };
 
 export class DayPeriodRules {
-
   private cache: Cache<Rule>;
 
   constructor(cacheSize: number) {
@@ -35,5 +34,4 @@ export class DayPeriodRules {
     const i = binarySearch(rule.minutes, true, minutes);
     return rule.keys[i];
   }
-
 }

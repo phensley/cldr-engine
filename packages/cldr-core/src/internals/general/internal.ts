@@ -21,7 +21,6 @@ import { parseWrapperPattern, WrapperNode } from '../../parsing/wrapper';
  * @internal
  */
 export class GeneralInternalsImpl implements GeneralInternals {
-
   private layout: LayoutSchema;
   private listPatterns: ListPatternsSchema;
 
@@ -45,9 +44,12 @@ export class GeneralInternalsImpl implements GeneralInternals {
   /**
    * Contextually transform a string,
    */
-  contextTransform(value: string, info: ContextTransformInfo,
-    context?: ContextType, field?: ContextTransformFieldType): string {
-
+  contextTransform(
+    value: string,
+    info: ContextTransformInfo,
+    context?: ContextType,
+    field?: ContextTransformFieldType,
+  ): string {
     if (!value) {
       return value;
     }
@@ -59,7 +61,7 @@ export class GeneralInternalsImpl implements GeneralInternals {
         title = true;
         break;
       case 'standalone':
-        title = flag !== undefined && (flag[0] === 'T');
+        title = flag !== undefined && flag[0] === 'T';
         break;
       case 'ui-list-or-menu':
         title = flag !== undefined && flag[1] === 'T';
@@ -76,7 +78,7 @@ export class GeneralInternalsImpl implements GeneralInternals {
   }
 
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[] {
-    const parts: Part[][] = items.map(i => ([{ type: 'item', value: i }]));
+    const parts: Part[][] = items.map((i) => [{ type: 'item', value: i }]);
     return this.formatListImpl(bundle, new PartsValue(), parts, type);
   }
 
@@ -143,5 +145,4 @@ export class GeneralInternalsImpl implements GeneralInternals {
         return p.and;
     }
   }
-
 }

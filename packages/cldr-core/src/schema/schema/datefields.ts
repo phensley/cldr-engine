@@ -6,24 +6,52 @@ import { DateFieldType, DateFieldWidthType, RelativeTimeFieldType } from '@phens
  * @public
  */
 export const DateFieldValues: DateFieldType[] = [
-  'era', 'year', 'quarter', 'month', 'week',
-  'weekday', 'weekdayOfMonth', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat',
-  'day', 'dayperiod', 'hour', 'minute', 'second', 'zone'
+  'era',
+  'year',
+  'quarter',
+  'month',
+  'week',
+  'weekday',
+  'weekdayOfMonth',
+  'sun',
+  'mon',
+  'tue',
+  'wed',
+  'thu',
+  'fri',
+  'sat',
+  'day',
+  'dayperiod',
+  'hour',
+  'minute',
+  'second',
+  'zone',
 ];
 
 /**
  * @public
  */
-export const DateFieldWidthValues: DateFieldWidthType[] = [
-  'short', 'narrow', 'wide'
-];
+export const DateFieldWidthValues: DateFieldWidthType[] = ['short', 'narrow', 'wide'];
 
 /**
  * @public
  */
 export const RelativeTimeFieldValues: RelativeTimeFieldType[] = [
-  'year', 'quarter', 'month', 'week', 'day',
-  'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'hour', 'minute', 'second'
+  'year',
+  'quarter',
+  'month',
+  'week',
+  'day',
+  'sun',
+  'mon',
+  'tue',
+  'wed',
+  'thu',
+  'fri',
+  'sat',
+  'hour',
+  'minute',
+  'second',
 ];
 
 /**

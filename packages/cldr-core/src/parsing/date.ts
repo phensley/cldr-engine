@@ -2,6 +2,7 @@ export type DateTimeField = [string, number];
 
 export type DateTimeNode = DateTimeField | string;
 
+// prettier-ignore
 export const DATE_PATTERN_CHARS = [
   'G', 'y', 'Y', 'u', 'U', 'r', 'Q', 'q', 'M', 'L', 'l', 'w', 'W', 'd', 'D',
   'F', 'g', 'E', 'e', 'c', 'a', 'b', 'B', 'h', 'H', 'K', 'k', 'j', 'J', 'C',
@@ -30,7 +31,7 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
   while (i < len) {
     const ch = raw[i];
     if (inquote) {
-      if (ch === '\'') {
+      if (ch === "'") {
         inquote = false;
         field = '';
       } else {
@@ -62,7 +63,7 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
         nodes.push([field, width]);
       }
       field = '';
-      if (ch === '\'') {
+      if (ch === "'") {
         inquote = true;
       } else {
         buf += ch;
@@ -92,10 +93,10 @@ export const intervalPatternBoundary = (pattern: DateTimeNode[]): number => {
     if (typeof node !== 'string') {
       const n = DATE_PATTERN_CHARS[node[0]];
       const idx = n >>> 5;
-      if ((data[idx] >>> (n % 32) & 1) === 1) {
+      if (((data[idx] >>> n % 32) & 1) === 1) {
         return i;
       }
-      data[idx] |= (1 << n);
+      data[idx] |= 1 << n;
     }
   }
   return -1;

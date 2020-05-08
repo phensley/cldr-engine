@@ -4,7 +4,7 @@ export const enum NumberField {
   CURRENCY = 2,
   NUMBER = 3,
   EXPONENT = 4,
-  PLUS = 5
+  PLUS = 5,
 }
 
 export interface NumberPattern {
@@ -20,11 +20,9 @@ export type NumberNode = string | NumberField;
 
 const MINUS_NODE: NumberNode[] = [NumberField.MINUS];
 
-const newPattern = (): NumberPattern =>
-  ({ nodes: [], minInt: 0, maxFrac: 0, minFrac: 0, priGroup: 0, secGroup: 0 });
+const newPattern = (): NumberPattern => ({ nodes: [], minInt: 0, maxFrac: 0, minFrac: 0, priGroup: 0, secGroup: 0 });
 
 class NumberPatternParser {
-
   private curr: NumberPattern = newPattern();
   private buf: string = '';
   private attached: boolean = false;
@@ -38,102 +36,101 @@ class NumberPatternParser {
     let indecimal = false;
     let i = 0;
 
-    outer:
-    while (i < len) {
+    outer: while (i < len) {
       let ch = raw[i];
       switch (ch) {
-      case "'":
-        while (i++ < len) {
-          ch = raw[i];
-          if (ch === '\'') {
-            break;
+        case "'":
+          while (i++ < len) {
+            ch = raw[i];
+            if (ch === "'") {
+              break;
+            }
+            this.buf += ch;
           }
+          break;
+
+        case ';':
+          // If we encounter more than one pattern separator, bail out
+          if (save) {
+            break outer;
+          }
+          this.pushText();
+          // Save current pattern and start parsing a new one
+          save = curr;
+          curr = newPattern();
+          this.curr = curr;
+          // Reset state for next parse
+          indecimal = false;
+          ingroup = false;
+          this.attached = false;
+          break;
+
+        case '-':
+          this.pushText();
+          curr.nodes.push(NumberField.MINUS);
+          break;
+
+        case '%':
+          this.pushText();
+          curr.nodes.push(NumberField.PERCENT);
+          break;
+
+        case '\u00a4':
+          this.pushText();
+          curr.nodes.push(NumberField.CURRENCY);
+          break;
+
+        case 'E':
+          this.pushText();
+          curr.nodes.push(NumberField.EXPONENT);
+          break;
+
+        case '+':
+          this.pushText();
+          curr.nodes.push(NumberField.PLUS);
+          break;
+
+        case '#':
+          this.attach();
+          if (ingroup) {
+            curr.priGroup++;
+          } else if (indecimal) {
+            curr.maxFrac++;
+          }
+          break;
+
+        case ',':
+          this.attach();
+          if (ingroup) {
+            curr.secGroup = curr.priGroup;
+            curr.priGroup = 0;
+          } else {
+            ingroup = true;
+          }
+          break;
+
+        case '.':
+          ingroup = false;
+          this.attach();
+          indecimal = true;
+          break;
+
+        case '0':
+          this.attach();
+          if (ingroup) {
+            curr.priGroup++;
+          } else if (indecimal) {
+            curr.maxFrac++;
+            curr.minFrac++;
+          }
+          if (!indecimal) {
+            curr.minInt++;
+          }
+          break;
+
+        default:
           this.buf += ch;
-        }
-        break;
-
-      case ';':
-        // If we encounter more than one pattern separator, bail out
-        if (save) {
-          break outer;
-        }
-        this.pushText();
-        // Save current pattern and start parsing a new one
-        save = curr;
-        curr = newPattern();
-        this.curr = curr;
-        // Reset state for next parse
-        indecimal = false;
-        ingroup = false;
-        this.attached = false;
-        break;
-
-      case '-':
-        this.pushText();
-        curr.nodes.push(NumberField.MINUS);
-        break;
-
-      case '%':
-        this.pushText();
-        curr.nodes.push(NumberField.PERCENT);
-        break;
-
-      case '\u00a4':
-        this.pushText();
-        curr.nodes.push(NumberField.CURRENCY);
-        break;
-
-      case 'E':
-        this.pushText();
-        curr.nodes.push(NumberField.EXPONENT);
-        break;
-
-      case '+':
-        this.pushText();
-        curr.nodes.push(NumberField.PLUS);
-        break;
-
-      case '#':
-        this.attach();
-        if (ingroup) {
-          curr.priGroup++;
-        } else if (indecimal) {
-          curr.maxFrac++;
-        }
-        break;
-
-      case ',':
-        this.attach();
-        if (ingroup) {
-          curr.secGroup = curr.priGroup;
-          curr.priGroup = 0;
-        } else {
-          ingroup = true;
-        }
-        break;
-
-      case '.':
-        ingroup = false;
-        this.attach();
-        indecimal = true;
-        break;
-
-      case '0':
-        this.attach();
-        if (ingroup) {
-          curr.priGroup++;
-        } else if (indecimal) {
-          curr.maxFrac++;
-          curr.minFrac++;
-        }
-        if (!indecimal) {
-          curr.minInt++;
-        }
-        break;
-
-      default:
-        this.buf += ch;
-        break;
+          break;
       }
 
       i++;
@@ -164,5 +161,4 @@ class NumberPatternParser {
   }
 }
 
-export const parseNumberPattern = (raw: string): NumberPattern[] =>
-  new NumberPatternParser().parse(raw);
+export const parseNumberPattern = (raw: string): NumberPattern[] => new NumberPatternParser().parse(raw);

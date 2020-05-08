@@ -29,5 +29,5 @@ export interface NumberParams {
  * @internal
  */
 // export interface NumberFormatRequest {
-  // readonly numberSystem:
+// readonly numberSystem:
 // }

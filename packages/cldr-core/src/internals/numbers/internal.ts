@@ -4,7 +4,7 @@ import {
   DigitsArrow,
   NumbersSchema,
   NumberSystemInfo,
-  PluralType
+  PluralType,
 } from '@phensley/cldr-types';
 
 import { Decimal, Part } from '@phensley/decimal';
@@ -19,9 +19,7 @@ import {
 } from '../../common';
 
 import { NumberContext } from './context';
-import {
-  NumberParams
-} from '../../common/private';
+import { NumberParams } from '../../common/private';
 import { parseNumberPattern, NumberPattern } from '../../parsing/number';
 import { getCurrencyFractions } from './util';
 import { Bundle } from '../../resource';
@@ -33,8 +31,7 @@ const ADJUST_PATTERN = parseNumberPattern('0')[0];
 /**
  * If n is zero check if it is signed and return abs.
  */
-const negzero = (n: Decimal, show?: boolean): Decimal =>
-  !show && n.isZero() && n.isNegative() ? n.abs() : n;
+const negzero = (n: Decimal, show?: boolean): Decimal => (!show && n.isZero() && n.isNegative() ? n.abs() : n);
 
 /**
  * Number internal engine singleton, shared across all locales.
@@ -42,7 +39,6 @@ const negzero = (n: Decimal, show?: boolean): Decimal =>
  * @internal
  */
 export class NumberInternalsImpl implements NumberInternals {
-
   private currencies: CurrenciesSchema;
   private numbers: NumbersSchema;
 
@@ -87,9 +83,13 @@ export class NumberInternalsImpl implements NumberInternals {
     return this.numberPatternCache.get(raw)[negative ? 1 : 0];
   }
 
-  formatDecimal<T>(bundle: Bundle, renderer: NumberRenderer<T>,
-    n: Decimal, options: DecimalFormatOptions, params: NumberParams): [T, PluralType] {
-
+  formatDecimal<T>(
+    bundle: Bundle,
+    renderer: NumberRenderer<T>,
+    n: Decimal,
+    options: DecimalFormatOptions,
+    params: NumberParams,
+  ): [T, PluralType] {
     // TODO: abstract away pattern selection defaulting
     const style = options.style === undefined ? 'decimal' : options.style;
     let result: T;
@@ -110,8 +110,13 @@ export class NumberInternalsImpl implements NumberInternals {
       case 'short': {
         const isShort = style === 'short';
         const useLatn = decimalFormats.short.get(bundle, 'other', 4)[0] === '';
-        const patternImpl = isShort ? (useLatn ? latnInfo.decimalFormats.short : decimalFormats.short)
-          : (useLatn ? latnInfo.decimalFormats.long : decimalFormats.long);
+        const patternImpl = isShort
+          ? useLatn
+            ? latnInfo.decimalFormats.short
+            : decimalFormats.short
+          : useLatn
+          ? latnInfo.decimalFormats.long
+          : decimalFormats.long;
 
         const ctx = new NumberContext(options, round, true, false);
 
@@ -157,8 +162,8 @@ export class NumberInternalsImpl implements NumberInternals {
         }
 
         // Select percent or permille symbol.
-        const symbol = (style === 'percent' || style === 'percent-scaled') ?
-          params.symbols.percentSign : params.symbols.perMille;
+        const symbol =
+          style === 'percent' || style === 'percent-scaled' ? params.symbols.percentSign : params.symbols.perMille;
 
         // Adjust number using pattern and options, then render.
         const ctx = new NumberContext(options, round, false, false, -1);
@@ -218,9 +223,14 @@ export class NumberInternalsImpl implements NumberInternals {
     return [result, plural];
   }
 
-  formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>,
-    n: Decimal, code: string, options: CurrencyFormatOptions, params: NumberParams): T {
-
+  formatCurrency<T>(
+    bundle: Bundle,
+    renderer: NumberRenderer<T>,
+    n: Decimal,
+    code: string,
+    options: CurrencyFormatOptions,
+    params: NumberParams,
+  ): T {
     const fractions = getCurrencyFractions(code);
     const round = options.round || 'half-even';
 
@@ -249,7 +259,6 @@ export class NumberInternalsImpl implements NumberInternals {
     const plurals = bundle.plurals();
 
     switch (style) {
-
       case 'code':
       case 'name': {
         const raw = info.decimalFormats.standard.get(bundle) || latnInfo.decimalFormats.standard.get(bundle);
@@ -271,8 +280,9 @@ export class NumberInternalsImpl implements NumberInternals {
 
         // Wrap number and unit together.
         // TODO: implement a more concise fallback to 'other' for pluralized lookups
-        const unitWrapper = currencyFormats.unitPattern.get(bundle, [plural, 'other'])
-          || latnInfo.currencyFormats.unitPattern.get(bundle, [plural, 'other']);
+        const unitWrapper =
+          currencyFormats.unitPattern.get(bundle, [plural, 'other']) ||
+          latnInfo.currencyFormats.unitPattern.get(bundle, [plural, 'other']);
         return renderer.wrap(this.internals.general, unitWrapper, num, renderer.make('unit', unit));
       }
 
@@ -344,9 +354,12 @@ export class NumberInternalsImpl implements NumberInternals {
    * correct pluralized pattern for the final rounded form.
    */
   private setupCompact(
-    bundle: Bundle, n: Decimal, ctx: NumberContext, standardRaw: string,
-    patternImpl: DigitsArrow<PluralType>): [Decimal, number] {
-
+    bundle: Bundle,
+    n: Decimal,
+    ctx: NumberContext,
+    standardRaw: string,
+    patternImpl: DigitsArrow<PluralType>,
+  ): [Decimal, number] {
     // Select the correct divisor based on the number of integer digits in n.
     let negative = n.isNegative();
     let ndigits = n.integerDigits();
@@ -402,10 +415,14 @@ export class NumberInternalsImpl implements NumberInternals {
     return [q2, ndigits];
   }
 
-  private setupCompactDivisor(bundle: Bundle, n: Decimal, ctx: NumberContext,
-    standardRaw: string, divisor: number,
-    patternImpl: DigitsArrow<PluralType>): [Decimal, number] {
-
+  private setupCompactDivisor(
+    bundle: Bundle,
+    n: Decimal,
+    ctx: NumberContext,
+    standardRaw: string,
+    divisor: number,
+    patternImpl: DigitsArrow<PluralType>,
+  ): [Decimal, number] {
     const negative = n.isNegative();
     const ndigits = Math.log10(divisor) + 1;
     // Select compact patterns based on number of digits in divisor

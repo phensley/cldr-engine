@@ -40,13 +40,16 @@ export type NumberFormatStyleType = 'decimal' | 'short' | 'long' | 'scientific';
  * @public
  */
 export type DecimalFormatStyleType =
-  NumberFormatStyleType | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled';
+  | NumberFormatStyleType
+  | 'percent'
+  | 'percent-scaled'
+  | 'permille'
+  | 'permille-scaled';
 
 /**
  * @public
  */
-export type CurrencyFormatStyleType =
-  'symbol' | 'accounting' | 'code' | 'name' | 'short';
+export type CurrencyFormatStyleType = 'symbol' | 'accounting' | 'code' | 'name' | 'short';
 
 /**
  * @public

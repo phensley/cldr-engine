@@ -1,4 +1,3 @@
-
 /**
  * The internal type name for Gregorian calendar is "gregory" so that it can fit
  * into a language tag ("zh-u-ca-gregory") as "gregorian" exceeds the 8-char

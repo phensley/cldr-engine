@@ -64,9 +64,7 @@ const WARNED: { [x: string]: boolean } = {};
 export class OriginImpl implements Origin {
   readonly type: 'origin' = 'origin';
 
-  constructor(
-    readonly block: Scope[],
-    readonly indices: { [x: string]: KeyIndex<string> }) { }
+  constructor(readonly block: Scope[], readonly indices: { [x: string]: KeyIndex<string> }) {}
 
   getIndex(name: string): KeyIndex<string> {
     const r = this.indices[name];
@@ -85,7 +83,6 @@ export class OriginImpl implements Origin {
   getValues(name: string): string[] {
     return this.getIndex(name).keys;
   }
-
 }
 
 /**
@@ -120,48 +117,50 @@ export interface Vector {
 /**
  * @public
  */
-export type Instruction =
-  Digits |
-  Field |
-  Origin |
-  Scope |
-  ScopeMap |
-  Vector;
+export type Instruction = Digits | Field | Origin | Scope | ScopeMap | Vector;
 
 /**
  * @internal
  */
-export const digits = (name: string, dim0: string, values: number[]): Digits =>
-  ({ type: 'digits', name, dim0, values });
+export const digits = (name: string, dim0: string, values: number[]): Digits => ({
+  type: 'digits',
+  name,
+  dim0,
+  values,
+});
 
 /**
  * @internal
  */
-export const field = (name: string): Field =>
-  ({ type: 'field', name });
+export const field = (name: string): Field => ({ type: 'field', name });
 
 /**
  * @internal
  */
-export const origin = (
-  block: Scope[],
-  indices: { [x: string]: KeyIndex<any> }): Origin =>
+export const origin = (block: Scope[], indices: { [x: string]: KeyIndex<any> }): Origin =>
   new OriginImpl(block, indices);
 
 /**
  * @internal
  */
-export const scope = (name: string, identifier: string, block: Instruction[]): Scope =>
-  ({ type: 'scope', name, identifier, block });
+export const scope = (name: string, identifier: string, block: Instruction[]): Scope => ({
+  type: 'scope',
+  name,
+  identifier,
+  block,
+});
 
 /**
  * @internal
  */
-export const scopemap = (name: string, fields: string, block: Instruction[]): ScopeMap =>
-  ({ type: 'scopemap', name, fields, block });
+export const scopemap = (name: string, fields: string, block: Instruction[]): ScopeMap => ({
+  type: 'scopemap',
+  name,
+  fields,
+  block,
+});
 
 /**
  * @internal
  */
-export const vector = (name: string, dims: string[]): Vector =>
-  ({ type: 'vector', name, dims });
+export const vector = (name: string, dims: string[]): Vector => ({ type: 'vector', name, dims });

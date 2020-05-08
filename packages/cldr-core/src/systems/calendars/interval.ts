@@ -6,8 +6,16 @@ export type TimePeriodField = 'year' | 'month' | 'week' | 'day' | 'hour' | 'minu
 /**
  * @internal
  */
-export const TIME_PERIOD_FIELDS: TimePeriodField[] =
-  ['year', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millis'];
+export const TIME_PERIOD_FIELDS: TimePeriodField[] = [
+  'year',
+  'month',
+  'week',
+  'day',
+  'hour',
+  'minute',
+  'second',
+  'millis',
+];
 
 /**
  * @public
@@ -34,14 +42,14 @@ export const enum TimePeriodFieldFlag {
   HOUR = 16,
   MINUTE = 32,
   SECOND = 64,
-  MILLIS = 128
+  MILLIS = 128,
 }
 
 /**
  * @internal
  */
-export const TIME_FLAGS = TimePeriodFieldFlag.HOUR | TimePeriodFieldFlag.MINUTE |
-  TimePeriodFieldFlag.SECOND | TimePeriodFieldFlag.MILLIS;
+export const TIME_FLAGS =
+  TimePeriodFieldFlag.HOUR | TimePeriodFieldFlag.MINUTE | TimePeriodFieldFlag.SECOND | TimePeriodFieldFlag.MILLIS;
 
 const FIELDMAP: { [x: string]: number } = {
   year: TimePeriodFieldFlag.YEAR,
@@ -51,11 +59,14 @@ const FIELDMAP: { [x: string]: number } = {
   hour: TimePeriodFieldFlag.HOUR,
   minute: TimePeriodFieldFlag.MINUTE,
   second: TimePeriodFieldFlag.SECOND,
-  millis: TimePeriodFieldFlag.MILLIS
+  millis: TimePeriodFieldFlag.MILLIS,
 };
 
 /**
  * @internal
  */
 export const timePeriodFieldFlags = (fields: TimePeriodField[]): number =>
-  fields.reduce((p, c) => { p |= FIELDMAP[c]; return p; }, 0);
+  fields.reduce((p, c) => {
+    p |= FIELDMAP[c];
+    return p;
+  }, 0);

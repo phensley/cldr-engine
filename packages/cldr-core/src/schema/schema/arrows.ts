@@ -1,16 +1,10 @@
-import {
-  DigitsArrow,
-  FieldArrow,
-  KeyIndex,
-  PrimitiveBundle,
-  ScopeArrow,
-} from '@phensley/cldr-types';
+import { DigitsArrow, FieldArrow, KeyIndex, PrimitiveBundle, ScopeArrow } from '@phensley/cldr-types';
 
 /**
  * @public
  */
 export class FieldArrowImpl implements FieldArrow {
-  constructor(readonly offset: number) { }
+  constructor(readonly offset: number) {}
 
   get(bundle: PrimitiveBundle): string {
     return bundle.get(this.offset);
@@ -21,9 +15,7 @@ export class FieldArrowImpl implements FieldArrow {
  * @public
  */
 export class ScopeArrowImpl<T extends string, R> implements ScopeArrow<T, R> {
-
-  constructor(
-    readonly map: { [P in T]: R }) { }
+  constructor(readonly map: { [P in T]: R }) {}
 
   get(key: T): R | undefined {
     return this.map[key];
@@ -36,7 +28,6 @@ export class ScopeArrowImpl<T extends string, R> implements ScopeArrow<T, R> {
  * @public
  */
 export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
-
   static EMPTY: [string, number] = ['', 0];
 
   readonly size2: number;
@@ -52,7 +43,7 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
     if (digits > 0) {
       const i = this.index.get(key);
       if (i !== -1) {
-        const k = this.offset + (i * this.size2) + ((digits - 1) * 2);
+        const k = this.offset + i * this.size2 + (digits - 1) * 2;
         const p = bundle.get(k);
         const d = bundle.get(k + 1);
         return [p, Number(d)];
@@ -68,7 +59,6 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
  * @public
  */
 export class VectorArrowImpl {
-
   readonly offset: number;
   readonly len: number;
 
@@ -150,10 +140,9 @@ export class VectorArrowImpl {
         }
       } else {
         // Drill one level deeper
-        o[key] = this._mapping(bundle, k + 1, ix + (i * this.factors[k]));
+        o[key] = this._mapping(bundle, k + 1, ix + i * this.factors[k]);
       }
     }
     return o;
   }
-
 }

@@ -24,7 +24,6 @@ export interface Bundle extends PrimitiveBundle {
  * @internal
  */
 export class StringBundle implements Bundle {
-
   // Properties for fast internal lookups into maps.
   // For example, extended day periods cover all of 'es' except for 'es-CO'.
   // Pre-computing these to avoid string creation for lookups at runtime.
@@ -44,7 +43,7 @@ export class StringBundle implements Bundle {
     private strings: string[],
     private exceptions: string[],
     private index: ExceptionIndex,
-    private _spellout: any
+    private _spellout: any,
   ) {
     const language = _tag.language();
     this._languageRegion = `${language}-${_tag.region()}`;

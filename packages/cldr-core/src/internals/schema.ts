@@ -19,7 +19,6 @@ import { leftPad } from '../utils/string';
  * Generates field offsets for the schema builder.
  */
 class Generator {
-
   private offset: number = 0;
 
   field(): number {
@@ -34,13 +33,12 @@ class Generator {
 
   digits(dim1: number, dim2: number): number {
     const off = this.offset;
-    this.offset += (dim1 * dim2);
+    this.offset += dim1 * dim2;
     return off;
   }
 }
 
-const time = (n: [number, number]): Decimal =>
-  new Decimal(n[0]).add(new Decimal(n[1]).movePoint(-9));
+const time = (n: [number, number]): Decimal => new Decimal(n[0]).add(new Decimal(n[1]).movePoint(-9));
 
 const elapsed = (start: [number, number], end: [number, number]): string =>
   time(end).subtract(time(start)).movePoint(6).toString();
@@ -51,7 +49,6 @@ const elapsed = (start: [number, number], end: [number, number]): string =>
  * @internal
  */
 export class SchemaBuilder {
-
   private generator: Generator = new Generator();
   private captureTimes: boolean;
   private _times: [string, string][] = [];
@@ -137,7 +134,7 @@ export class SchemaBuilder {
   }
 
   private constructVector(obj: any, inst: Vector): void {
-    const dims = inst.dims.map(k => this.origin.getIndex(k));
+    const dims = inst.dims.map((k) => this.origin.getIndex(k));
     const offset = this.generator.field(); // header
     this.generator.vector(dims);
     obj[inst.name] = new VectorArrowImpl(offset, dims);

@@ -40,7 +40,7 @@ import {
   JapaneseDate,
   PersianDate,
   TimePeriod,
-  TIME_PERIOD_FIELDS
+  TIME_PERIOD_FIELDS,
 } from '../systems/calendars';
 
 import { CalendarManager } from '../internals/calendars/manager';
@@ -59,7 +59,6 @@ const DOW_FIELDS: RelativeTimeFieldType[] = ['sun', 'mon', 'tue', 'wed', 'thu', 
  * @internal
  */
 export class CalendarsImpl implements Calendars {
-
   private manager: CalendarManager;
   private _firstDay: number;
   private _minDays: number;
@@ -68,7 +67,7 @@ export class CalendarsImpl implements Calendars {
   constructor(
     private readonly bundle: Bundle,
     private readonly internals: Internals,
-    private readonly privateApi: PrivateApiImpl
+    private readonly privateApi: PrivateApiImpl,
   ) {
     this.manager = new CalendarManager(bundle, internals);
     const region = bundle.region();
@@ -114,7 +113,7 @@ export class CalendarsImpl implements Calendars {
 
   quarters(opt?: CalendarFieldsOptions): any {
     opt = opt || {};
-    const fields = (this._getPatterns(opt.ca).quarters()[opt.width || 'wide']);
+    const fields = this._getPatterns(opt.ca).quarters()[opt.width || 'wide'];
     return this._transformFields(fields, undefined, opt.context);
   }
 
@@ -247,8 +246,9 @@ export class CalendarsImpl implements Calendars {
    * interval formatting, e.g. to format "March 31 - April 01, 2019"
    */
   fieldOfVisualDifference(
-    a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType {
-
+    a: CalendarDate | ZonedDateTime | Date,
+    b: CalendarDate | ZonedDateTime | Date,
+  ): DateTimePatternFieldType {
     // Date is interpreted as UTC
     if (a instanceof Date) {
       a = { date: a } as ZonedDateTime;
@@ -259,15 +259,18 @@ export class CalendarsImpl implements Calendars {
 
     // Determine calendar type to use for comparison, falling back to the default for the
     // current locale.
-    const type: CalendarType = a instanceof CalendarDate ? a.type() :
-      b instanceof CalendarDate ? b.type() :
-        this.internals.calendars.selectCalendar(this.bundle);
+    const type: CalendarType =
+      a instanceof CalendarDate
+        ? a.type()
+        : b instanceof CalendarDate
+        ? b.type()
+        : this.internals.calendars.selectCalendar(this.bundle);
 
     // Convert a and b to CalendarDate having the correct type, ensuring their types and timezones match.
-    if (!(a instanceof CalendarDate) || (type !== a.type())) {
+    if (!(a instanceof CalendarDate) || type !== a.type()) {
       a = this.convertDateTo(type, a);
     }
-    if (!(b instanceof CalendarDate) || (type !== b.type()) || (a.timeZoneId() !== b.timeZoneId())) {
+    if (!(b instanceof CalendarDate) || type !== b.type() || a.timeZoneId() !== b.timeZoneId()) {
       b = this.convertDateTo(type, b, a.timeZoneId());
     }
     return a.fieldOfVisualDifference(b);
@@ -287,13 +290,19 @@ export class CalendarsImpl implements Calendars {
     return this._formatDate(new PartsValue(), date, options);
   }
 
-  formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
-    options?: DateIntervalFormatOptions): string {
+  formatDateInterval(
+    start: CalendarDate | ZonedDateTime | Date,
+    end: CalendarDate | ZonedDateTime | Date,
+    options?: DateIntervalFormatOptions,
+  ): string {
     return this._formatInterval(new StringValue(), start, end, options);
   }
 
-  formatDateIntervalToParts(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
-    options?: DateIntervalFormatOptions): Part[] {
+  formatDateIntervalToParts(
+    start: CalendarDate | ZonedDateTime | Date,
+    end: CalendarDate | ZonedDateTime | Date,
+    options?: DateIntervalFormatOptions,
+  ): Part[] {
     return this._formatInterval(new PartsValue(), start, end, options);
   }
 
@@ -309,20 +318,22 @@ export class CalendarsImpl implements Calendars {
   //     this.bundle, start, end, options, params);
   // }
 
-  formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType,
-    options?: RelativeTimeFieldFormatOptions): string {
+  formatRelativeTimeField(
+    value: DecimalArg,
+    field: RelativeTimeFieldType,
+    options?: RelativeTimeFieldFormatOptions,
+  ): string {
     options = options || { width: 'wide' };
     const transform = this.privateApi.getContextTransformInfo();
     const params = this.privateApi.getNumberParams(options.nu);
-    return this.internals.dateFields.formatRelativeTimeField(
-      this.bundle, value, field, options, params, transform);
+    return this.internals.dateFields.formatRelativeTimeField(this.bundle, value, field, options, params, transform);
   }
 
   formatRelativeTime(
     start: CalendarDate | ZonedDateTime | Date,
     end: CalendarDate | ZonedDateTime | Date,
-    options?: RelativeTimeFormatOptions): string {
-
+    options?: RelativeTimeFormatOptions,
+  ): string {
     options = options || { width: 'wide', maximumFractionDigits: 0, group: true };
 
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
@@ -420,22 +431,25 @@ export class CalendarsImpl implements Calendars {
     if (fields) {
       for (const key of Object.keys(fields)) {
         const val = fields[key];
-        res[key] = typeof val === 'string' ?
-          this._transformField(val, type, context) : this._transformFields(val, type, context);
+        res[key] =
+          typeof val === 'string'
+            ? this._transformField(val, type, context)
+            : this._transformFields(val, type, context);
       }
     }
     return res;
   }
 
-  private _transformField(field: string,
-    type?: ContextTransformFieldType, context?: ContextType): string {
+  private _transformField(field: string, type?: ContextTransformFieldType, context?: ContextType): string {
     const info = this.privateApi.getContextTransformInfo();
     return context ? this.internals.general.contextTransform(field, info, context, type) : field;
   }
 
-  private _formatDate<R>(value: AbstractValue<R>,
-    date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): R {
-
+  private _formatDate<R>(
+    value: AbstractValue<R>,
+    date: CalendarDate | ZonedDateTime | Date,
+    options?: DateFormatOptions,
+  ): R {
     const calendars = this.internals.calendars;
     options = options || { date: 'full' };
     const calendar = calendars.selectCalendar(this.bundle, options.ca);
@@ -447,10 +461,12 @@ export class CalendarsImpl implements Calendars {
     return calendars.formatDateTime(calendar, ctx, value, req.date, req.time, req.wrapper);
   }
 
-  private _formatInterval<R>(value: AbstractValue<R>,
-    start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
-    options?: DateIntervalFormatOptions): R {
-
+  private _formatInterval<R>(
+    value: AbstractValue<R>,
+    start: CalendarDate | ZonedDateTime | Date,
+    end: CalendarDate | ZonedDateTime | Date,
+    options?: DateIntervalFormatOptions,
+  ): R {
     // options = options || { skeleton: 'yMd' };
     options = options || {};
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
@@ -481,8 +497,7 @@ export class CalendarsImpl implements Calendars {
 
     if (req.range) {
       const ctx = this._context(start, params, options.context, options.alt);
-      const _range = this.internals.calendars.formatInterval(
-        calendar, ctx, value, end, req.range);
+      const _range = this.internals.calendars.formatInterval(calendar, ctx, value, end, req.range);
       if (!_date) {
         return _range;
       }
@@ -505,8 +520,12 @@ export class CalendarsImpl implements Calendars {
     return _date || value.empty();
   }
 
-  private _context<T extends CalendarDate>(date: T, params: NumberParams,
-    context?: ContextType, alt: DateFormatAltOptions = {}): CalendarContext<T> {
+  private _context<T extends CalendarDate>(
+    date: T,
+    params: NumberParams,
+    context?: ContextType,
+    alt: DateFormatAltOptions = {},
+  ): CalendarContext<T> {
     return {
       alt,
       date,
@@ -514,13 +533,15 @@ export class CalendarsImpl implements Calendars {
       system: params.system,
       latnSystem: params.latnSystem,
       context,
-      transform: this.privateApi.getContextTransformInfo()
+      transform: this.privateApi.getContextTransformInfo(),
     };
   }
 
-  private _formatDateRaw<R>(value: AbstractValue<R>,
-    date: CalendarDate | ZonedDateTime | Date, options: DateRawFormatOptions): R {
-
+  private _formatDateRaw<R>(
+    value: AbstractValue<R>,
+    date: CalendarDate | ZonedDateTime | Date,
+    options: DateRawFormatOptions,
+  ): R {
     if (!options.pattern) {
       return value.empty();
     }
@@ -539,24 +560,24 @@ export class CalendarsImpl implements Calendars {
     return value.render();
   }
 
-  private convertDate<T>(cons: CalendarFromUnixEpoch<T>,
-    date: CalendarDate | ZonedDateTime | Date): T {
-
+  private convertDate<T>(cons: CalendarFromUnixEpoch<T>, date: CalendarDate | ZonedDateTime | Date): T {
     if (date instanceof Date) {
       date = { date, zoneId: 'UTC' } as ZonedDateTime;
     }
-    return date instanceof CalendarDate ?
-      this.convertEpoch(cons, date.unixEpoch(), date.timeZoneId()) :
-      this.convertEpoch(cons, getEpochUTC(date.date), date.zoneId || 'UTC');
+    return date instanceof CalendarDate
+      ? this.convertEpoch(cons, date.unixEpoch(), date.timeZoneId())
+      : this.convertEpoch(cons, getEpochUTC(date.date), date.zoneId || 'UTC');
   }
 
   private convertEpoch<T>(cons: CalendarFromUnixEpoch<T>, epoch: number, zoneId: string): T {
     return cons(epoch, zoneId, this._firstDay, this._minDays);
   }
 
-  private convertDateTo(target: CalendarType,
-    date: CalendarDate | ZonedDateTime | Date, zoneId?: string): CalendarDate {
-
+  private convertDateTo(
+    target: CalendarType,
+    date: CalendarDate | ZonedDateTime | Date,
+    zoneId?: string,
+  ): CalendarDate {
     if (date instanceof CalendarDate && target === date.type() && (!zoneId || zoneId === date.timeZoneId())) {
       return date;
     } else if (date instanceof Date) {
@@ -577,6 +598,6 @@ export class CalendarsImpl implements Calendars {
 }
 
 const getEpochUTC = (date: Date | number): number => {
-  const n = (+date);
+  const n = +date;
   return isFinite(n) ? n : 0;
 };

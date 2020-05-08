@@ -14,7 +14,6 @@ const ZEROS: Partial<CalendarDateFields> = { year: 1, month: 1, day: 1, hour: 0,
  * @public
  */
 export class BuddhistDate extends GregorianDate {
-
   protected constructor(firstDay: number, minDays: number) {
     super('buddhist', firstDay, minDays);
   }
@@ -64,7 +63,6 @@ export class BuddhistDate extends GregorianDate {
     super.initFields(f);
     computeBuddhistFields(f);
   }
-
 }
 
 const computeBuddhistFields = (f: number[]): void => {

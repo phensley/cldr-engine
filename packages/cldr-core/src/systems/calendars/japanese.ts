@@ -11,7 +11,6 @@ import { CalendarDateFields } from './types';
  * @public
  */
 export class JapaneseDate extends GregorianDate {
-
   protected constructor(firstDay: number, minDays: number) {
     super('japanese', firstDay, minDays);
   }
@@ -73,7 +72,7 @@ const computeJapaneseFields = (f: number[]): void => {
       const j = i * 3;
       let diff = year - ERAS[j];
       if (diff === 0) {
-        diff = (f[DateField.MONTH] - 1) - (ERAS[j + 1] - 1);
+        diff = f[DateField.MONTH] - 1 - (ERAS[j + 1] - 1);
         if (diff === 0) {
           diff = f[DateField.DAY_OF_MONTH] - ERAS[j + 2];
         }
@@ -89,6 +88,7 @@ const computeJapaneseFields = (f: number[]): void => {
   f[DateField.YEAR] = year - ERAS[low * 3] + 1;
 };
 
+// prettier-ignore
 const ERAS: number[] = [
   645, 6, 19,     // Taika
   650, 2, 15,     // Hakuchi

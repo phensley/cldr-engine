@@ -1,7 +1,7 @@
 import { coerceDecimal, Chars, DecimalArg, DecimalFormatter, StringDecimalFormatter } from '@phensley/decimal';
 import { NumberingSystem, NumberSymbols } from '../../common/private';
 
-const isInteger = ((n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n);
+const isInteger = (n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n;
 
 /**
  * @internal
@@ -14,14 +14,13 @@ export interface NumberingSystemParams {
  * @internal
  */
 export class DecimalNumberingSystem extends NumberingSystem {
-
   constructor(
     name: string,
     readonly digits: string[],
     symbols: NumberSymbols,
     minimumGroupingDigits: number,
     primaryGroupingSize: number,
-    secondaryGroupingSize: number
+    secondaryGroupingSize: number,
   ) {
     super(name, symbols, minimumGroupingDigits, primaryGroupingSize, secondaryGroupingSize);
   }
@@ -38,7 +37,8 @@ export class DecimalNumberingSystem extends NumberingSystem {
   protected _formatDecimal<R>(f: DecimalFormatter<R>, n: DecimalArg, groupDigits: boolean, minInt: number): R {
     const d = coerceDecimal(n);
     const group = groupDigits ? this.symbols.group : '';
-    d.format(f,
+    d.format(
+      f,
       this.symbols.decimal || '.',
       group,
       minInt,
@@ -46,10 +46,10 @@ export class DecimalNumberingSystem extends NumberingSystem {
       this.primaryGroupingSize,
       this.secondaryGroupingSize,
       true, // zeroScale
-      this.digits);
+      this.digits,
+    );
     return f.render();
   }
-
 }
 
 /**
@@ -103,11 +103,17 @@ const INTERNAL_SYMBOLS: NumberSymbols = {
   perMille: '‰',
   infinity: '∞',
   nan: 'NaN',
-  timeSeparator: ':'
+  timeSeparator: ':',
 };
 
 /**
  * @internal
  */
 export const INTERNAL_NUMBERING = new DecimalNumberingSystem(
-  'internal', '0123456789'.split(''), INTERNAL_SYMBOLS, 1, 3, 3);
+  'internal',
+  '0123456789'.split(''),
+  INTERNAL_SYMBOLS,
+  1,
+  3,
+  3,
+);

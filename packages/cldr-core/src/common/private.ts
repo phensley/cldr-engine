@@ -31,14 +31,13 @@ export type NumberSymbols = { [P in NumberSymbolType]: string };
  * @internal
  */
 export abstract class NumberingSystem {
-
   constructor(
     readonly name: string,
     readonly symbols: NumberSymbols,
     readonly minimumGroupingDigits: number,
     readonly primaryGroupingSize: number,
-    readonly secondaryGroupingSize: number
-  ) { }
+    readonly secondaryGroupingSize: number,
+  ) {}
 
   /**
    * Format a number directly to a string. This is used for things like low-level field

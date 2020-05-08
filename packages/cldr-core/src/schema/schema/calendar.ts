@@ -6,7 +6,7 @@ import {
   FormatWidthType,
   KeyIndex,
   QuarterType,
-  WeekdayType
+  WeekdayType,
 } from '@phensley/cldr-types';
 import { KeyIndexImpl } from '../instructions';
 
@@ -50,49 +50,47 @@ export const GregorianMonthsIndex = rangeindex(1, 12);
 /**
  * @public
  */
-export const DateTimePatternFieldValues: DateTimePatternFieldType[] = [
-  'y', 'M', 'd', 'a', 'H', 'm', 's'
-];
+export const DateTimePatternFieldValues: DateTimePatternFieldType[] = ['y', 'M', 'd', 'a', 'H', 'm', 's'];
 
 /**
  * @public
  */
 export const DayPeriodValues: DayPeriodType[] = [
-  'noon', 'midnight', 'am', 'pm', 'morning1', 'morning2',
-  'afternoon1', 'afternoon2', 'evening1', 'evening2', 'night1', 'night2',
+  'noon',
+  'midnight',
+  'am',
+  'pm',
+  'morning1',
+  'morning2',
+  'afternoon1',
+  'afternoon2',
+  'evening1',
+  'evening2',
+  'night1',
+  'night2',
 ];
 
 /**
  * @public
  */
-export const EraWidthValues: EraWidthType[] = [
-  'names', 'abbr', 'narrow'
-];
+export const EraWidthValues: EraWidthType[] = ['names', 'abbr', 'narrow'];
 
 /**
  * @public
  */
-export const FieldWidthValues: FieldWidthType[] = [
-  'abbreviated', 'narrow', 'short', 'wide'
-];
+export const FieldWidthValues: FieldWidthType[] = ['abbreviated', 'narrow', 'short', 'wide'];
 
 /**
  * @public
  */
-export const FormatWidthValues: FormatWidthType[] = [
-  'short', 'medium', 'long', 'full'
-];
+export const FormatWidthValues: FormatWidthType[] = ['short', 'medium', 'long', 'full'];
 
 /**
  * @public
  */
-export const QuarterValues: QuarterType[] = [
-  '1', '2', '3', '4'
-];
+export const QuarterValues: QuarterType[] = ['1', '2', '3', '4'];
 
 /**
  * @public
  */
-export const WeekdayValues: WeekdayType[] = [
-  '1', '2', '3', '4', '5', '6', '7'
-];
+export const WeekdayValues: WeekdayType[] = ['1', '2', '3', '4', '5', '6', '7'];

@@ -17,11 +17,10 @@ export const enum Field {
   FRACTIONAL_SECOND = 14,
   ZONE = 15,
 
-  MAX_TYPE = 16
+  MAX_TYPE = 16,
 }
 
-export const skeletonFields = (): number[] =>
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+export const skeletonFields = (): number[] => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 const enum C {
   DELTA = 0x10,
@@ -52,7 +51,7 @@ export type FieldType = [
   number, // 1 field
   number, // 2 sub field
   number, // 3 repeat
-  number  // 4 width
+  number, // 4 width
 ];
 
 export const FIELD_TYPES: FieldType[] = [

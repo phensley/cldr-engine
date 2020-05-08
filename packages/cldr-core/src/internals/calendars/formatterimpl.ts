@@ -1,9 +1,4 @@
-import {
-  CalendarSchema,
-  ContextTransformFieldType,
-  TimeZoneSchema,
-  Vector2Arrow,
-} from '@phensley/cldr-types';
+import { CalendarSchema, ContextTransformFieldType, TimeZoneSchema, Vector2Arrow } from '@phensley/cldr-types';
 
 import { GeneralInternals } from '../../internals/internals';
 import { Bundle } from '../../resource/bundle';
@@ -23,13 +18,12 @@ const getTZC = (offset: number): TZC => {
     offset *= -1;
   }
   offset /= 60000;
-  const hours = offset / 60 | 0;
+  const hours = (offset / 60) | 0;
   const minutes = offset % 60 | 0;
   return [offset, negative, hours, minutes];
 };
 
-const widthKey1 = (w: number): string =>
-  w === 5 ? 'narrow' : w === 4 ? 'wide' : 'abbreviated';
+const widthKey1 = (w: number): string => (w === 5 ? 'narrow' : w === 4 ? 'wide' : 'abbreviated');
 
 /**
  * Format a number using the main numbering system, with the given minimum integers.
@@ -41,14 +35,10 @@ const _year = <T extends CalendarDate>(ctx: CalendarContext<T>, year: number, wi
   _num(ctx, width === 2 ? year % 100 : year, width);
 
 export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFormatter<T> {
-
   private general: GeneralInternals;
   private tz: TimeZoneSchema;
 
-  constructor(
-    private internals: Internals,
-    private cal: CalendarSchema
-  ) {
+  constructor(private internals: Internals, private cal: CalendarSchema) {
     this.general = internals.general;
     this.tz = internals.schema.TimeZones;
   }
@@ -71,7 +61,6 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       // https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 
       switch (n[0]) {
-
         // ERA
         case 'G': {
           type = 'era';
@@ -318,18 +307,20 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     }
   }
 
-  private _formatQuarterOrMonth(ctx: CalendarContext<T>,
-    format: Vector2Arrow<string, string>, value: number, width: number): string {
-    return width >= 3 ?
-      format.get(ctx.bundle, widthKey1(width), String(value)) :
-      _num(ctx, value, width);
+  private _formatQuarterOrMonth(
+    ctx: CalendarContext<T>,
+    format: Vector2Arrow<string, string>,
+    value: number,
+    width: number,
+  ): string {
+    return width >= 3 ? format.get(ctx.bundle, widthKey1(width), String(value)) : _num(ctx, value, width);
   }
 
   private quarter(ctx: CalendarContext<T>, node: [string, number]): string {
     const [field, width] = node;
     const format = field === 'Q' ? this.cal.format : this.cal.standAlone;
     const quarters = format.quarters;
-    const quarter = ((ctx.date.month() - 1) / 3 | 0) + 1;
+    const quarter = (((ctx.date.month() - 1) / 3) | 0) + 1;
     return this._formatQuarterOrMonth(ctx, quarters, quarter, width);
   }
 
@@ -342,9 +333,15 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     const key2 = String(date.dayOfWeek());
     let key1 = 'abbreviated';
     switch (width) {
-      case 6: key1 = 'short'; break;
-      case 5: key1 = 'narrow'; break;
-      case 4: key1 = 'wide'; break;
+      case 6:
+        key1 = 'short';
+        break;
+      case 5:
+        key1 = 'narrow';
+        break;
+      case 4:
+        key1 = 'wide';
+        break;
     }
     return format.get(bundle, key1, key2);
   }
@@ -379,7 +376,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
 
   private dayPeriodFlex(ctx: CalendarContext<T>, node: [string, number]): string {
     const { bundle, date } = ctx;
-    const minutes = (date.hourOfDay() * 60) + date.minute();
+    const minutes = date.hourOfDay() * 60 + date.minute();
     const key2 = this.internals.calendars.flexDayPeriod(bundle, minutes);
     let res = '';
     if (key2) {
@@ -419,7 +416,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
       m *= Math.pow(10, d);
     }
     // Milliseconds always have precision of 3, so handle the cases compactly.
-    const n = w === 3 ? m : (w === 2 ? (m / 10) : (m / 100)) | 0;
+    const n = w === 3 ? m : (w === 2 ? m / 10 : m / 100) | 0;
     return _num(ctx, n, node[1]);
   }
 

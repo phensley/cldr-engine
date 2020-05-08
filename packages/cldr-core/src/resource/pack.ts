@@ -5,7 +5,7 @@ import { numarray } from '../utils/string';
 
 const enum Chars {
   // Fields in a resource pack are separated by an UNDERSCORE character
-  DELIM = '_'
+  DELIM = '_',
 }
 const U = undefined;
 
@@ -15,7 +15,6 @@ const U = undefined;
  * @public
  */
 export class PackScript {
-
   private _strings: string[];
   private _exceptions: string[];
   private _regions: { [x: string]: string };
@@ -27,7 +26,7 @@ export class PackScript {
     exceptions: string,
     regions: { [x: string]: string },
     defaultRegion: string,
-    private _spellout: any
+    private _spellout: any,
   ) {
     this._strings = strings.split(Chars.DELIM);
     this._exceptions = exceptions.split(Chars.DELIM);
@@ -70,7 +69,6 @@ export class PackScript {
  * @public
  */
 export class Pack {
-
   readonly version: string;
   readonly cldrVersion: string;
   readonly checksum: string;
@@ -93,7 +91,7 @@ export class Pack {
     this.spellout = spellout;
     this.defaultTag = LanguageResolver.resolve(raw.defaultTag);
 
-    Object.keys(raw.scripts).forEach(k => {
+    Object.keys(raw.scripts).forEach((k) => {
       const obj = raw.scripts[k];
       this.scripts[k] = new PackScript(obj.strings, obj.exceptions, obj.regions, obj.defaultRegion, this.spellout);
     });
@@ -116,10 +114,10 @@ export class Pack {
         this.defaultTag.region(),
         this.defaultTag.variant(),
         tag.extensions(),
-        tag.privateUse());
+        tag.privateUse(),
+      );
       script = this.scripts[tag.script()];
     }
     return script.get(tag);
   }
-
 }

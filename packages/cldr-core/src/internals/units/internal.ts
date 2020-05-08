@@ -1,9 +1,4 @@
-import {
-  PluralType,
-  UnitsSchema,
-  UnitInfo,
-  UnitType
-} from '@phensley/cldr-types';
+import { PluralType, UnitsSchema, UnitInfo, UnitType } from '@phensley/cldr-types';
 
 import { coerceDecimal, DecimalConstants } from '@phensley/decimal';
 
@@ -16,7 +11,6 @@ import { Bundle } from '../../resource';
  * @internal
  */
 export class UnitsInternalImpl implements UnitInternals {
-
   private unitsSchema: UnitsSchema;
 
   constructor(private internals: Internals) {
@@ -28,9 +22,13 @@ export class UnitsInternalImpl implements UnitInternals {
     return this.getUnitInfo(length).displayName.get(bundle, name);
   }
 
-  format<T>(bundle: Bundle, renderer: NumberRenderer<T>, q: Quantity,
-    options: UnitFormatOptions, params: NumberParams): T {
-
+  format<T>(
+    bundle: Bundle,
+    renderer: NumberRenderer<T>,
+    q: Quantity,
+    options: UnitFormatOptions,
+    params: NumberParams,
+  ): T {
     const n = coerceDecimal(q.value);
     const [num, plural] = this.internals.numbers.formatDecimal(bundle, renderer, n, options, params);
     if (q.unit === undefined) {
@@ -76,8 +74,7 @@ export class UnitsInternalImpl implements UnitInternals {
     // If per or times are specified, use use the corresponding compound pattern.
     // See notes here:
     // https://www.unicode.org/reports/tr35/tr35-general.html#perUnitPatterns
-    const compound = q.per ? info.perPattern.get(bundle) :
-      q.times ? info.timesPattern.get(bundle) : '';
+    const compound = q.per ? info.perPattern.get(bundle) : q.times ? info.timesPattern.get(bundle) : '';
 
     const perunit = q.per || q.times;
     if (perunit) {
@@ -104,5 +101,4 @@ export class UnitsInternalImpl implements UnitInternals {
         return this.unitsSchema.long;
     }
   }
-
 }

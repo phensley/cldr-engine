@@ -1,9 +1,4 @@
-import {
-  PluralType,
-  RelativeTimes,
-  RelativeTimeFields,
-  RelativeTimeFieldType,
-} from '@phensley/cldr-types';
+import { PluralType, RelativeTimes, RelativeTimeFields, RelativeTimeFieldType } from '@phensley/cldr-types';
 
 import { coerceDecimal, DecimalArg, DecimalConstants } from '@phensley/decimal';
 
@@ -19,12 +14,9 @@ import { ContextTransformInfo, NumberParams } from '../../common/private';
  * @internal
  */
 export class DateFieldInternalsImpl implements DateFieldInternals {
-
   private relativeTimes: RelativeTimes;
 
-  constructor(
-    private internals: Internals
-  ) {
+  constructor(private internals: Internals) {
     this.relativeTimes = internals.schema.DateFields.relativeTimes;
   }
 
@@ -36,10 +28,14 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
   // return '';
   // }
 
-  formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType,
-    options: RelativeTimeFieldFormatOptions, params: NumberParams,
-    transform: ContextTransformInfo): string {
-
+  formatRelativeTimeField(
+    bundle: Bundle,
+    value: DecimalArg,
+    field: RelativeTimeFieldType,
+    options: RelativeTimeFieldFormatOptions,
+    params: NumberParams,
+    transform: ContextTransformInfo,
+  ): string {
     const width = options.width || 'wide';
     const format: RelativeTimeFields = this.relativeTimes[width] || this.relativeTimes.wide;
     const group = options.group === undefined ? true : options.group;
@@ -58,7 +54,6 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
       if (options.alwaysNow || !options.numericOnly) {
         res = format.current.get(bundle, field);
       }
-
     } else if (!options.numericOnly) {
       switch (field) {
         case 'hour':
@@ -82,8 +77,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     // If we output anything above, return it
     if (res) {
       if (options.context) {
-        res = this.internals.general.contextTransform(res, transform,
-          options.context, 'relative');
+        res = this.internals.general.contextTransform(res, transform, options.context, 'relative');
       }
       return res;
     }
@@ -93,11 +87,9 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     const arrow = negative ? format.past : format.future;
     let raw = arrow.get(bundle, plural, field);
     if (options.context) {
-      raw = this.internals.general.contextTransform(raw, transform,
-        options.context, 'relative');
+      raw = this.internals.general.contextTransform(raw, transform, options.context, 'relative');
     }
     const num = params.system.formatString(n, group, 1);
     return this.internals.general.formatWrapper(raw, [num]);
-
   }
 }

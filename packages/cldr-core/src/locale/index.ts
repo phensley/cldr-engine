@@ -6,7 +6,7 @@ const enum Flags {
   LANG = 1,
   SCRIPT = 2,
   REGION = 4,
-  VARIANT = 8
+  VARIANT = 8,
 }
 
 const allLocales: Locale[] = [];
@@ -18,9 +18,9 @@ export const availableLocales = (): Locale[] => {
   if (!allLocales.length) {
     const k = Object.keys;
     const a: any = rawLocales;
-    k(a).forEach(l => {
+    k(a).forEach((l) => {
       const b = a[l];
-      k(b).forEach(s => {
+      k(b).forEach((s) => {
         const c = b[s];
         const e = c.length - 1;
         const re = c[e].split(' ');
@@ -50,7 +50,7 @@ export const availableLocales = (): Locale[] => {
           }
           allLocales.push({
             id: x.join('-'),
-            tag: new LanguageTag(l, s, r, v)
+            tag: new LanguageTag(l, s, r, v),
           });
         }
       });

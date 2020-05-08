@@ -33,7 +33,6 @@ export type ThreeLevelMap = { [x: string]: { [y: string]: { [z: string]: string 
  * patterns for use in best-fit matching.
  */
 export class CalendarPatterns {
-
   protected readonly language: string;
 
   private readonly region: string;
@@ -56,7 +55,7 @@ export class CalendarPatterns {
     protected readonly bundle: Bundle,
     protected readonly internals: Internals,
     private readonly schema: CalendarSchema,
-    readonly cacheSize: number = 50
+    readonly cacheSize: number = 50,
   ) {
     this.language = bundle.language();
     this.region = bundle.region();
@@ -123,8 +122,9 @@ export class CalendarPatterns {
   }
 
   getAvailablePattern(_d: CalendarDate, s: DateSkeleton): DateTimeNode[] {
-    const pattern = s.pattern ? s.pattern :
-      this.rawAvailableFormats[s.skeleton] || (this.rawPluralFormats.other || {})[s.skeleton];
+    const pattern = s.pattern
+      ? s.pattern
+      : this.rawAvailableFormats[s.skeleton] || (this.rawPluralFormats.other || {})[s.skeleton];
     return this.internals.calendars.parseDatePattern(pattern || '');
   }
 
@@ -188,13 +188,11 @@ export class CalendarPatterns {
   private getTimeData(): [string, string] {
     const w = timeData['']['001'];
     const t = timeData[''][this.region] || (timeData[this.language] || /* istanbul ignore next */ {})[this.region];
-    return timeStrings[(t !== undefined ? t : w)].split('|') as [string, string];
+    return timeStrings[t !== undefined ? t : w].split('|') as [string, string];
   }
-
 }
 
 export class GregorianPatterns extends CalendarPatterns {
-
   /**
    * Apply pluralization rules to select a skeleton pattern. Note: this is slightly
    * future-proofing since at the time of this writing these patterns don't actually
@@ -220,5 +218,4 @@ export class GregorianPatterns extends CalendarPatterns {
     }
     return this.internals.calendars.parseDatePattern(pattern);
   }
-
 }

@@ -13,7 +13,6 @@ import { CalendarDateFields } from './types';
  * @public
  */
 export class PersianDate extends CalendarDate {
-
   protected constructor(firstDay: number, minDays: number) {
     super('persian', firstDay, minDays);
   }
@@ -143,7 +142,7 @@ const MONTH_COUNT = [
   [30, 30, 246], // Azar
   [30, 30, 276], // Dey
   [30, 30, 306], // Bahman
-  [29, 30, 336]  // Esfand
+  [29, 30, 336], // Esfand
 ];
 
 const computePersianFields = (f: number[]): void => {
@@ -153,7 +152,7 @@ const computePersianFields = (f: number[]): void => {
 
   const favardin1 = 365 * (year - 1) + floor((8 * year + 21) / 33);
   const doy = days - favardin1;
-  const month = floor(doy < 216 ? (doy / 31) : ((doy - 6) / 30));
+  const month = floor(doy < 216 ? doy / 31 : (doy - 6) / 30);
   const dom = doy - MONTH_COUNT[month][2] + 1;
 
   f[DateField.ERA] = 0;

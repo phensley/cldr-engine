@@ -13,16 +13,12 @@ import { DateFormatRequest, DateIntervalFormatRequest } from './types';
 import { Field } from './fields';
 
 export class CalendarManager {
-
   private readonly patternCache: Cache<CalendarPatterns>;
   private readonly availableCalendars: Set<string>;
 
-  constructor(
-    private readonly bundle: Bundle,
-    private readonly internals: Internals
-  ) {
+  constructor(private readonly bundle: Bundle, private readonly internals: Internals) {
     // calendars config array should always be non-empty
-    this.availableCalendars = new Set(internals.config.calendars || /* istanbul ignore next */[]);
+    this.availableCalendars = new Set(internals.config.calendars || /* istanbul ignore next */ []);
     const schema = internals.schema;
     this.patternCache = new Cache((calendar: string) => {
       if (this.availableCalendars.has(calendar)) {
@@ -80,7 +76,6 @@ export class CalendarManager {
 
     // We have at least a date/time standard format.
     if (req.date || req.time) {
-
       // If no skeleton specified, we're done
       if (!skelKey) {
         return req;
@@ -99,7 +94,6 @@ export class CalendarManager {
 
       // Update skeleton key with only the used fields
       skelKey = query.canonical();
-
     } else {
       // No standard format specified, so just parse the skeleton
       query = patterns.parseSkeleton(skelKey);
@@ -185,9 +179,10 @@ export class CalendarManager {
   getDateIntervalFormatRequest(
     calendar: string,
     start: CalendarDate,
-    fieldDiff: DateTimePatternFieldType, options: DateIntervalFormatOptions,
-    params: NumberParams): DateIntervalFormatRequest {
-
+    fieldDiff: DateTimePatternFieldType,
+    options: DateIntervalFormatOptions,
+    params: NumberParams,
+  ): DateIntervalFormatRequest {
     const patterns = this.getCalendarPatterns(calendar);
 
     const dateDiffers = 'yMd'.indexOf(fieldDiff) !== -1;
@@ -299,14 +294,23 @@ export class CalendarManager {
     return req;
   }
 
-  private matchAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
-    query: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
+  private matchAvailablePattern(
+    patterns: CalendarPatterns,
+    date: CalendarDate,
+    query: DateSkeleton,
+    params: NumberParams,
+  ): DateTimeNode[] | undefined {
     const match = patterns.matchAvailable(query);
     return this.getAvailablePattern(patterns, date, query, match, params);
   }
 
-  private getAvailablePattern(patterns: CalendarPatterns, date: CalendarDate,
-    query: DateSkeleton, match: DateSkeleton, params: NumberParams): DateTimeNode[] | undefined {
+  private getAvailablePattern(
+    patterns: CalendarPatterns,
+    date: CalendarDate,
+    query: DateSkeleton,
+    match: DateSkeleton,
+    params: NumberParams,
+  ): DateTimeNode[] | undefined {
     const pattern = patterns.getAvailablePattern(date, match);
     /* istanbul ignore else */
     if (pattern.length) {
@@ -320,9 +324,7 @@ export class CalendarManager {
   /**
    * Select appropriate wrapper based on fields in the date skeleton.
    */
-  private selectWrapper(
-    patterns: CalendarPatterns, dateSkel: DateSkeleton, _date: DateTimeNode[]): string {
-
+  private selectWrapper(patterns: CalendarPatterns, dateSkel: DateSkeleton, _date: DateTimeNode[]): string {
     let wrapKey = 'short';
     const monthWidth = dateSkel.monthWidth();
     const hasWeekday = dateSkel.has(Field.WEEKDAY);

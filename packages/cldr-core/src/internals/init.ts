@@ -21,7 +21,6 @@ import { checksumIndices } from '../resource/checksum';
  * @internal
  */
 export class InternalsImpl implements Internals {
-
   readonly schema: Schema;
   readonly config: SchemaConfig;
   readonly indices: KeyIndexMap;
@@ -34,8 +33,12 @@ export class InternalsImpl implements Internals {
   readonly units: UnitInternals;
 
   constructor(
-    config: SchemaConfig, version: string, debug: boolean = false,
-    skipChecksum: boolean = false, patternCacheSize: number = 50) {
+    config: SchemaConfig,
+    version: string,
+    debug: boolean = false,
+    skipChecksum: boolean = false,
+    patternCacheSize: number = 50,
+  ) {
     // TODO: may move this up depending on how integration evolves
     this.config = config;
     const code = new CodeBuilder(config);
@@ -50,5 +53,4 @@ export class InternalsImpl implements Internals {
     this.numbers = new NumberInternalsImpl(this, patternCacheSize);
     this.units = new UnitsInternalImpl(this);
   }
-
 }

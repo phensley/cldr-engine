@@ -15,7 +15,6 @@ export interface AbstractValue<R> {
 }
 
 export class StringValue implements AbstractValue<string> {
-
   private str: string = '';
 
   length(): number {
@@ -70,11 +69,9 @@ export class StringValue implements AbstractValue<string> {
   empty(): string {
     return '';
   }
-
 }
 
 export class PartsValue implements AbstractValue<Part[]> {
-
   private parts: Part[] = [];
 
   length(): number {
@@ -129,5 +126,4 @@ export class PartsValue implements AbstractValue<Part[]> {
   empty(): Part[] {
     return [];
   }
-
 }

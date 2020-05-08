@@ -10,18 +10,26 @@ import { AbstractValue, PartsValue, StringValue } from '../../utils/render';
  * @internal
  */
 export abstract class NumberFormatter<R> implements NumberRenderer<R> {
+  constructor(private params: NumberParams) {}
 
-  constructor(
-    private params: NumberParams) { }
-
-  render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
-    decimalSymbol: string, minInt: number, grouping: boolean = true, exponent?: number): R {
-
+  render(
+    n: Decimal,
+    pattern: NumberPattern,
+    currencySymbol: string,
+    percentSymbol: string,
+    decimalSymbol: string,
+    minInt: number,
+    grouping: boolean = true,
+    exponent?: number,
+  ): R {
     const { symbols } = this.params;
     const currency: boolean = currencySymbol !== '';
 
-    const decimal = decimalSymbol ? decimalSymbol
-      : currency ? symbols.currencyDecimal || symbols.decimal : symbols.decimal;
+    const decimal = decimalSymbol
+      ? decimalSymbol
+      : currency
+      ? symbols.currencyDecimal || symbols.decimal
+      : symbols.decimal;
     let group = '';
     if (grouping) {
       group = symbols.group;
@@ -48,7 +56,7 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
       priGroup,
       secGroup,
       true, // zeroScale
-      this.params.digits
+      this.params.digits,
     );
     const formatted = formatter.render();
 
@@ -62,7 +70,6 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
         res.add('literal', node);
       } else {
         switch (node) {
-
           case NumberField.CURRENCY: {
             // Save the offset to the segment before or after the currency symbol.
             currencyBefore = !haveNumber;
@@ -211,8 +218,9 @@ const DECIMAL_DIGIT_NUMBER = /\u0030-\u0039\u0660-\u0669\u06f0-\u06f9\u07c0-\u07
 /**
  * @internal
  */
-export const RE_SYMBOL =
-  new RegExp(`^[${MATH_SYMBOL.source}${CURRENCY_SYMBOL.source}${MODIFIER_SYMBOL.source}${OTHER_SYMBOL.source}]`);
+export const RE_SYMBOL = new RegExp(
+  `^[${MATH_SYMBOL.source}${CURRENCY_SYMBOL.source}${MODIFIER_SYMBOL.source}${OTHER_SYMBOL.source}]`,
+);
 
 /**
  * @internal
@@ -227,10 +235,12 @@ export const CURRENCY_SPACING_MATCHERS: { [x: string]: (s: string) => boolean } 
   // find cldr-data -name numbers.json -exec egrep -e '(currencyMatch|surroundingMatch)' {} \;|sort |uniq -c
 
   '[:digit:]': (s: string) => RE_DIGIT.test(s),
-  '[:^S:]': (s: string) => !RE_SYMBOL.test(s)
+  '[:^S:]': (s: string) => !RE_SYMBOL.test(s),
 };
 
 const insertBetween = (spacing: CurrencySpacingPatterns, currency: string, surrounding: string): boolean => {
-  return CURRENCY_SPACING_MATCHERS[spacing.currencyMatch](currency) &&
-    CURRENCY_SPACING_MATCHERS[spacing.surroundingMatch](surrounding);
+  return (
+    CURRENCY_SPACING_MATCHERS[spacing.currencyMatch](currency) &&
+    CURRENCY_SPACING_MATCHERS[spacing.surroundingMatch](surrounding)
+  );
 };

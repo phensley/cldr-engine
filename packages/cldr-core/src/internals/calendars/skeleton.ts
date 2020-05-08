@@ -1,7 +1,4 @@
-import {
-  DateTimeNode,
-  DATE_PATTERN_CHARS
-} from '../../parsing/date';
+import { DateTimeNode, DATE_PATTERN_CHARS } from '../../parsing/date';
 
 import {
   getFieldType,
@@ -11,7 +8,7 @@ import {
   FieldType,
   FIELD_INDEX,
   FIELD_TYPES,
-  MISSING_FIELD
+  MISSING_FIELD,
 } from './fields';
 
 export interface SkeletonField {
@@ -27,7 +24,6 @@ export interface SkeletonField {
  * the actual pattern.
  */
 export class DateSkeleton {
-
   type: number[] = skeletonFields();
   info: (SkeletonField | undefined)[] = [];
 
@@ -98,17 +94,12 @@ export class DateSkeleton {
     }
     return r;
   }
-
 }
 
 export const EMPTY = new DateSkeleton();
 
 export class DateSkeletonParser {
-
-  constructor(
-    readonly preferredFlex: DateTimeNode[],
-    readonly allowedFlex: DateTimeNode[]
-  ) { }
+  constructor(readonly preferredFlex: DateTimeNode[], readonly allowedFlex: DateTimeNode[]) {}
 
   parse(skeleton: string, isPattern: boolean = false): DateSkeleton {
     const s = new DateSkeleton();
@@ -126,7 +117,7 @@ export class DateSkeletonParser {
     while (i < len) {
       const ch = raw[i];
       if (inquote) {
-        if (ch === '\'') {
+        if (ch === "'") {
           inquote = false;
         }
         i++;
@@ -134,7 +125,6 @@ export class DateSkeletonParser {
       }
       if (ch === "'") {
         inquote = true;
-
       } else if (DATE_PATTERN_CHARS[ch] > 0) {
         if (ch !== field) {
           if (field) {
@@ -162,7 +152,6 @@ export class DateSkeletonParser {
     const dayPeriod = s.info[Field.DAYPERIOD];
     if (noDayPeriod) {
       this.clear(s, Field.DAYPERIOD);
-
     } else if (hour && hour.field) {
       // If we have a 12-hour-cycle but no dayperiod, add the default.
       if (hour.field === 'h' || hour.field === 'K') {
@@ -176,7 +165,7 @@ export class DateSkeletonParser {
             field: 'a',
             type: Field.DAYPERIOD,
             width: row[3],
-            repeat: row[3]
+            repeat: row[3],
           };
         }
       } else if (dayPeriod && dayPeriod.field) {
@@ -232,17 +221,14 @@ export class DateSkeletonParser {
     s.isDate = s.isDate || idx < Field.DAYPERIOD;
     s.isTime = s.isTime || idx >= Field.DAYPERIOD;
   }
-
 }
 
-const cmp = (a: number, b: number): number =>
-  a < b ? -1 : a > b ? 1 : 0;
+const cmp = (a: number, b: number): number => (a < b ? -1 : a > b ? 1 : 0);
 
 /**
  * Cache of date patterns and skeletons with ICU-compatible best-fit matching.
  */
 export class DatePatternMatcher {
-
   // Save some work for exact matches.
   private exact: { [x: string]: DateSkeleton } = {};
 

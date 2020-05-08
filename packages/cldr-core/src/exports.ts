@@ -17,7 +17,7 @@ export {
   RelativeTimeFieldType,
   Schema,
   ScriptIdType,
-  UnitType
+  UnitType,
 } from '@phensley/cldr-types';
 
 export {
@@ -59,21 +59,11 @@ export {
   StringDecimalFormatter,
 } from '@phensley/decimal';
 
-export {
-  parseLanguageTag,
-  LanguageTag
-} from '@phensley/language-tag';
+export { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
 
-export {
-  LanguageResolver,
-  Locale
-} from '@phensley/locale';
+export { LanguageResolver, Locale } from '@phensley/locale';
 
-export {
-  LocaleMatch,
-  LocaleMatcher,
-  LocaleMatcherOptions
-} from '@phensley/locale-matcher';
+export { LocaleMatch, LocaleMatcher, LocaleMatcherOptions } from '@phensley/locale-matcher';
 
 export {
   buildMessageMatcher,
@@ -88,16 +78,9 @@ export {
   MessageFormatter,
   MessageFormatterOptions,
   MessageMatcher,
-  MessageNamedArgs
+  MessageNamedArgs,
 } from '@phensley/messageformat';
 
-export {
-  pluralRules,
-  NumberOperands,
-  Plurals,
-  PluralRules
-} from '@phensley/plurals';
+export { pluralRules, NumberOperands, Plurals, PluralRules } from '@phensley/plurals';
 
-export {
-  ZoneInfo
-} from '@phensley/timezone';
+export { ZoneInfo } from '@phensley/timezone';

@@ -50,11 +50,21 @@ export interface CalendarInternals {
   selectCalendar(bundle: Bundle, ca?: CalendarType): CalendarType;
 
   formatDateTime<R>(
-    calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>,
-    date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
+    calendar: CalendarType,
+    ctx: CalendarContext<CalendarDate>,
+    value: AbstractValue<R>,
+    date?: DateTimeNode[],
+    time?: DateTimeNode[],
+    wrapper?: string,
+  ): R;
 
-  formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>,
-    value: AbstractValue<R>, end: CalendarDate, pattern: DateTimeNode[]): R;
+  formatInterval<R>(
+    calendar: CalendarType,
+    ctx: CalendarContext<CalendarDate>,
+    value: AbstractValue<R>,
+    end: CalendarDate,
+    pattern: DateTimeNode[],
+  ): R;
 }
 
 /**
@@ -64,9 +74,14 @@ export interface DateFieldInternals {
   // formatRelativeTime(bundle: Bundle, start: CalendarDate, end: CalendarDate,
   //   options: RelativeTimeFormatOptions, params: NumberParams): string;
 
-  formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: DateFieldType,
-    options: RelativeTimeFormatOptions, params: NumberParams,
-    transform: ContextTransformInfo): string;
+  formatRelativeTimeField(
+    bundle: Bundle,
+    value: DecimalArg,
+    field: DateFieldType,
+    options: RelativeTimeFormatOptions,
+    params: NumberParams,
+    transform: ContextTransformInfo,
+  ): string;
 }
 
 /**
@@ -75,8 +90,12 @@ export interface DateFieldInternals {
 export interface GeneralInternals {
   characterOrder(bundle: Bundle): string;
   lineOrder(bundle: Bundle): string;
-  contextTransform(value: string, info: ContextTransformInfo,
-    context?: ContextType, field?: ContextTransformFieldType): string;
+  contextTransform(
+    value: string,
+    info: ContextTransformInfo,
+    context?: ContextType,
+    field?: ContextTransformFieldType,
+  ): string;
   formatList(bundle: Bundle, items: string[], type: ListPatternType): string;
   formatListToParts(bundle: Bundle, items: string[], type: ListPatternType): Part[];
   formatListImpl<R>(bundle: Bundle, value: AbstractValue<R>, items: R[], type: ListPatternType): R;
@@ -92,11 +111,22 @@ export interface NumberInternals {
   stringRenderer(params: NumberParams): NumberRenderer<string>;
   partsRenderer(params: NumberParams): NumberRenderer<Part[]>;
 
-  formatDecimal<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal,
-    options: DecimalFormatOptions, params: NumberParams): [T, PluralType];
+  formatDecimal<T>(
+    bundle: Bundle,
+    renderer: NumberRenderer<T>,
+    n: Decimal,
+    options: DecimalFormatOptions,
+    params: NumberParams,
+  ): [T, PluralType];
 
-  formatCurrency<T>(bundle: Bundle, renderer: NumberRenderer<T>, n: Decimal, code: string,
-    options: CurrencyFormatOptions, params: NumberParams): T;
+  formatCurrency<T>(
+    bundle: Bundle,
+    renderer: NumberRenderer<T>,
+    n: Decimal,
+    code: string,
+    options: CurrencyFormatOptions,
+    params: NumberParams,
+  ): T;
 
   // formatRuleBased<T>(bundle: Bundle, renderer: NumberRenderer<T>,
   //   system: AlgorithmicNumberingSystem, transform: ContextTransformInfo,
@@ -115,8 +145,13 @@ export interface UnitInternals {
   getDisplayName(bundle: Bundle, name: UnitType, length: string): string;
   getUnitInfo(length: string): UnitInfo;
 
-  format<T>(bundle: Bundle, renderer: NumberRenderer<T>, q: Quantity,
-    options: UnitFormatOptions, params: NumberParams): T;
+  format<T>(
+    bundle: Bundle,
+    renderer: NumberRenderer<T>,
+    q: Quantity,
+    options: UnitFormatOptions,
+    params: NumberParams,
+  ): T;
 }
 
 /**
@@ -125,9 +160,16 @@ export interface UnitInternals {
 export interface NumberRenderer<R> {
   empty(): R;
   make(type: string, value: string): R;
-  render(n: Decimal, pattern: NumberPattern, currencySymbol: string, percentSymbol: string,
-    decimalSymbol: string, minInt: number, grouping?: boolean,
-    exponent?: number): R;
+  render(
+    n: Decimal,
+    pattern: NumberPattern,
+    currencySymbol: string,
+    percentSymbol: string,
+    decimalSymbol: string,
+    minInt: number,
+    grouping?: boolean,
+    exponent?: number,
+  ): R;
   wrap(internal: GeneralInternals, raw: string, ...args: R[]): R;
 }
 

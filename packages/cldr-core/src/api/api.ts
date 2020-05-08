@@ -51,7 +51,7 @@ import {
   ISO8601Date,
   JapaneseDate,
   PersianDate,
-  TimePeriod
+  TimePeriod,
 } from '../systems/calendars';
 
 /**
@@ -60,7 +60,6 @@ import {
  * @public
  */
 export interface Calendars {
-
   /**
    * First day of the week for this locale, e.g. 1=SUN, 2=MON, etc.
    */
@@ -161,7 +160,8 @@ export interface Calendars {
    */
   fieldOfVisualDifference(
     a: CalendarDate | ZonedDateTime | Date,
-    b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
+    b: CalendarDate | ZonedDateTime | Date,
+  ): DateTimePatternFieldType;
 
   /**
    * Formats a date-time value to string.
@@ -176,20 +176,29 @@ export interface Calendars {
   /**
    * Formats a date-time interval for the given skeleton to string.
    */
-  formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
-    options?: DateIntervalFormatOptions): string;
+  formatDateInterval(
+    start: CalendarDate | ZonedDateTime | Date,
+    end: CalendarDate | ZonedDateTime | Date,
+    options?: DateIntervalFormatOptions,
+  ): string;
 
   /**
    * Formats a date-time interval for the given skeleton to an array of parts.
    */
-  formatDateIntervalToParts(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date,
-    options?: DateIntervalFormatOptions): Part[];
+  formatDateIntervalToParts(
+    start: CalendarDate | ZonedDateTime | Date,
+    end: CalendarDate | ZonedDateTime | Date,
+    options?: DateIntervalFormatOptions,
+  ): Part[];
 
   /**
    * Formats a relative time field to string.
    */
-  formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType,
-    options?: RelativeTimeFieldFormatOptions): string;
+  formatRelativeTimeField(
+    value: DecimalArg,
+    field: RelativeTimeFieldType,
+    options?: RelativeTimeFieldFormatOptions,
+  ): string;
 
   /**
    * Formats the relative time from a start to end date.
@@ -197,7 +206,8 @@ export interface Calendars {
   formatRelativeTime(
     start: CalendarDate | ZonedDateTime | Date,
     end: CalendarDate | ZonedDateTime | Date,
-    options?: RelativeTimeFormatOptions): string;
+    options?: RelativeTimeFormatOptions,
+  ): string;
 
   /**
    * Formats a date-time value to string using a raw date-time pattern.
@@ -267,7 +277,6 @@ export interface Calendars {
  * @public
  */
 export interface General {
-
   /**
    * Returns the character order for the current locale, e.g. "ltr" for left-to-right
    * or "rtl" for right-to-left.
@@ -349,7 +358,6 @@ export interface General {
  * @public
  */
 export interface Numbers {
-
   /**
    * Adjusts a decimal number using the given options.
    */
@@ -432,7 +440,6 @@ export interface Numbers {
  * @public
  */
 export interface Units {
-
   /**
    * Returns an array of available units.
    */

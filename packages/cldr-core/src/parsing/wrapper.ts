@@ -16,34 +16,34 @@ export const parseWrapperPattern = (raw: string): WrapperNode[] => {
   while (i < len) {
     const ch = raw[i];
     switch (ch) {
-    case '{':
-      if (buf.length > 0) {
-        nodes.push(buf);
-        buf = '';
-      }
-      intag = true;
-      break;
+      case '{':
+        if (buf.length > 0) {
+          nodes.push(buf);
+          buf = '';
+        }
+        intag = true;
+        break;
 
-    case '}':
-      intag = false;
-      break;
+      case '}':
+        intag = false;
+        break;
 
-    case '\'':
-      if (inquote) {
-        inquote = false;
-      } else {
-        inquote = true;
-      }
-      break;
+      case "'":
+        if (inquote) {
+          inquote = false;
+        } else {
+          inquote = true;
+        }
+        break;
 
-    default:
-      if (intag) {
-        // Index doesn't exceed single digits.
-        nodes.push(Number(ch));
-      } else {
-        buf += ch;
-      }
-      break;
+      default:
+        if (intag) {
+          // Index doesn't exceed single digits.
+          nodes.push(Number(ch));
+        } else {
+          buf += ch;
+        }
+        break;
     }
     i++;
   }

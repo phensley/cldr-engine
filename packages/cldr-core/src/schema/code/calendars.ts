@@ -16,25 +16,27 @@ import {
   WeekdayValues,
 } from '../schema';
 
-const formats = (name: string, rename: string, month: string) => scope(name, rename, [
-  vector('weekdays', ['field-width', 'weekday']),
-  vector('months', ['field-width', `${month}-month`]),
-  vector('quarters', ['field-width', 'quarter']),
-  vector('dayPeriods', ['field-width', 'day-period', 'day-period-alt-key']),
-]);
+const formats = (name: string, rename: string, month: string) =>
+  scope(name, rename, [
+    vector('weekdays', ['field-width', 'weekday']),
+    vector('months', ['field-width', `${month}-month`]),
+    vector('quarters', ['field-width', 'quarter']),
+    vector('dayPeriods', ['field-width', 'day-period', 'day-period-alt-key']),
+  ]);
 
-const calendarScope = (name: string, scopeName: string) => scope(scopeName, scopeName, [
-  vector('eras', ['era-type', `${name}-era`, 'era-alt-key']),
-  formats('format', 'format', name),
-  formats('standAlone', 'standAlone', name),
-  vector('availableFormats', [`${name}-available-format`]),
-  vector('pluralFormats', ['plural-key', `${name}-plural-format`]),
-  vector('intervalFormats', ['date-time-pattern-field', `${name}-interval-format`]),
-  vector('dateFormats', ['format-width']),
-  vector('timeFormats', ['format-width']),
-  vector('dateTimeFormats', ['format-width']),
-  field('intervalFormatFallback')
-]);
+const calendarScope = (name: string, scopeName: string) =>
+  scope(scopeName, scopeName, [
+    vector('eras', ['era-type', `${name}-era`, 'era-alt-key']),
+    formats('format', 'format', name),
+    formats('standAlone', 'standAlone', name),
+    vector('availableFormats', [`${name}-available-format`]),
+    vector('pluralFormats', ['plural-key', `${name}-plural-format`]),
+    vector('intervalFormats', ['date-time-pattern-field', `${name}-interval-format`]),
+    vector('dateFormats', ['format-width']),
+    vector('timeFormats', ['format-width']),
+    vector('dateTimeFormats', ['format-width']),
+    field('intervalFormatFallback'),
+  ]);
 
 export const DateTimePatternFieldIndex = new KeyIndexImpl(DateTimePatternFieldValues);
 export const DayPeriodIndex = new KeyIndexImpl(DayPeriodValues);
@@ -50,34 +52,34 @@ export const CALENDAR_INDICES: KeyIndexMap = {
   'era-type': EraTypeIndex,
   'field-width': FieldWidthIndex,
   'format-width': FormatWidthIndex,
-  'quarter': QuartersIndex,
-  'weekday': WeekdaysIndex
+  quarter: QuartersIndex,
+  weekday: WeekdaysIndex,
 };
 
 export const BUDDHIST = calendarScope('buddhist', 'Buddhist');
 
 export const BUDDHIST_INDICES: KeyIndexMap = {
   'buddhist-era': BuddhistEraIndex,
-  'buddhist-month': GregorianMonthsIndex
+  'buddhist-month': GregorianMonthsIndex,
 };
 
 export const GREGORIAN = calendarScope('gregorian', 'Gregorian');
 
 export const GREGORIAN_INDICES: KeyIndexMap = {
   'gregorian-era': GregorianEraIndex,
-  'gregorian-month': GregorianMonthsIndex
+  'gregorian-month': GregorianMonthsIndex,
 };
 
 export const JAPANESE = calendarScope('japanese', 'Japanese');
 
 export const JAPANESE_INDICES: KeyIndexMap = {
   'japanese-era': JapaneseEraIndex,
-  'japanese-month': GregorianMonthsIndex
+  'japanese-month': GregorianMonthsIndex,
 };
 
 export const PERSIAN = calendarScope('persian', 'Persian');
 
 export const PERSIAN_INDICES: KeyIndexMap = {
   'persian-era': PersianEraIndex,
-  'persian-month': GregorianMonthsIndex
+  'persian-month': GregorianMonthsIndex,
 };

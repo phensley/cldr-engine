@@ -1,8 +1,4 @@
-import {
-  DateTimePatternField,
-  DateTimePatternFieldType,
-  MetaZoneType
-} from '@phensley/cldr-types';
+import { DateTimePatternField, DateTimePatternFieldType, MetaZoneType } from '@phensley/cldr-types';
 
 import { dateFields, DateField, DayOfWeek } from './fields';
 import { CalendarConstants, ConstantsDesc } from './constants';
@@ -77,7 +73,6 @@ const differenceFields: [number, DateTimePatternFieldType][] = [
  * @public
  */
 export abstract class CalendarDate {
-
   // Forward reference for casting to Gregorian date
   protected static _gregorian: (d: CalendarDate, utc: boolean, firstDate: number, minDays: number) => CalendarDate;
   protected _fields: number[] = dateFields();
@@ -89,8 +84,8 @@ export abstract class CalendarDate {
   protected constructor(
     protected readonly _type: CalendarType,
     protected readonly _firstDay: number,
-    protected readonly _minDays: number) {
-
+    protected readonly _minDays: number,
+  ) {
     // Compute week fields on demand.
     this._fields[DateField.WEEK_OF_YEAR] = NULL;
     this._fields[DateField.YEAR_WOY] = NULL;
@@ -140,7 +135,7 @@ export abstract class CalendarDate {
    */
   julianDay(): number {
     const ms = (this._fields[DateField.MILLIS_IN_DAY] - this._zoneInfo.offset) / CalendarConstants.ONE_DAY_MS;
-    return (this._fields[DateField.JULIAN_DAY] - 0.5) + ms;
+    return this._fields[DateField.JULIAN_DAY] - 0.5 + ms;
   }
 
   /**
@@ -223,7 +218,7 @@ export abstract class CalendarDate {
   ordinalDayOfWeek(): number {
     const weekday = this.dayOfWeek();
     const firstDay = this.firstDayOfWeek();
-    return (7 - firstDay + weekday) % 7 + 1;
+    return ((7 - firstDay + weekday) % 7) + 1;
   }
 
   /**
@@ -367,7 +362,7 @@ export abstract class CalendarDate {
    */
   differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod {
     const r = this.difference(other, fields);
-    return other.compare(this) < 0 ? this._invertPeriod(r) as TimePeriod : r;
+    return other.compare(this) < 0 ? (this._invertPeriod(r) as TimePeriod) : r;
   }
 
   /**
@@ -382,7 +377,7 @@ export abstract class CalendarDate {
       minute: this.minute(),
       second: this.second(),
       millis: this.milliseconds(),
-      zoneId: this.timeZoneId()
+      zoneId: this.timeZoneId(),
     };
   }
 
@@ -428,13 +423,15 @@ export abstract class CalendarDate {
     let z = 'Z';
     if (!utc) {
       const o = (this.timeZoneOffset() / CalendarConstants.ONE_MINUTE_MS) | 0;
-      z = `${o < 0 ? '-' : '+'}${zeropad(o / 60 | 0, 2)}:${zeropad(o % 60 | 0, 2)}`;
+      z = `${o < 0 ? '-' : '+'}${zeropad((o / 60) | 0, 2)}:${zeropad(o % 60 | 0, 2)}`;
     }
     const y = d.extendedYear();
     const neg = y < 0;
-    return `${neg ? '-' : ''}${zeropad(Math.abs(y), 4)}-${zeropad(d.month(), 2)}-${zeropad(d.dayOfMonth(), 2)}` +
+    return (
+      `${neg ? '-' : ''}${zeropad(Math.abs(y), 4)}-${zeropad(d.month(), 2)}-${zeropad(d.dayOfMonth(), 2)}` +
       `T${zeropad(d.hourOfDay(), 2)}:${zeropad(d.minute(), 2)}:${zeropad(d.second(), 2)}` +
-      `.${zeropad(d.milliseconds(), 3)}${z}`;
+      `.${zeropad(d.milliseconds(), 3)}${z}`
+    );
   }
 
   /**
@@ -442,10 +439,12 @@ export abstract class CalendarDate {
    * and assumes all time fields are defined.
    */
   protected _timeToMs(f: Partial<CalendarDateFields>): number {
-    return clamp(f.hour || 0, 0, 23) * CalendarConstants.ONE_HOUR_MS
-      + clamp(f.minute || 0, 0, 59) * CalendarConstants.ONE_MINUTE_MS
-      + clamp(f.second || 0, 0, 59) * CalendarConstants.ONE_SECOND_MS
-      + clamp(f.millis || 0, 0, 999);
+    return (
+      clamp(f.hour || 0, 0, 23) * CalendarConstants.ONE_HOUR_MS +
+      clamp(f.minute || 0, 0, 59) * CalendarConstants.ONE_MINUTE_MS +
+      clamp(f.second || 0, 0, 59) * CalendarConstants.ONE_SECOND_MS +
+      clamp(f.millis || 0, 0, 999)
+    );
   }
 
   protected _invertPeriod(fields: Partial<TimePeriod>): Partial<TimePeriod> {
@@ -460,8 +459,7 @@ export abstract class CalendarDate {
   /**
    * Roll up time period fields into a subset of fields.
    */
-  protected _rollup(span: Partial<TimePeriod>, sf: number[], ef: number[],
-    fields: TimePeriodField[]): TimePeriod {
+  protected _rollup(span: Partial<TimePeriod>, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod {
     const f = timePeriodFieldFlags(fields);
     if (!f) {
       return { year: 0, month: 0, week: 0, day: 0, hour: 0, minute: 0, second: 0, millis: 0, ...span };
@@ -471,21 +469,20 @@ export abstract class CalendarDate {
 
     let year = span.year || 0;
     let month = span.month || 0;
-    let day = ((span.week || 0) * 7) + (span.day || 0);
-    let ms = ((span.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
-      ((span.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
-      ((span.second || 0) * CalendarConstants.ONE_SECOND_MS) +
+    let day = (span.week || 0) * 7 + (span.day || 0);
+    let ms =
+      (span.hour || 0) * CalendarConstants.ONE_HOUR_MS +
+      (span.minute || 0) * CalendarConstants.ONE_MINUTE_MS +
+      (span.second || 0) * CalendarConstants.ONE_SECOND_MS +
       (span.millis || 0);
 
     if (f & TimePeriodFieldFlag.YEAR && f & TimePeriodFieldFlag.MONTH) {
       // Both year and month were requested, so use their integer values.
-
     } else if (f & TimePeriodFieldFlag.MONTH) {
       // Month was requested so convert years into months
       month += year * mc;
       year = 0;
-
-    } else if ((f & TimePeriodFieldFlag.YEAR) && month) {
+    } else if (f & TimePeriodFieldFlag.YEAR && month) {
       // Year was requested so convert months into days
 
       // This is a little verbose but necessary to accurately convert
@@ -537,7 +534,6 @@ export abstract class CalendarDate {
       tmpd += this.daysInMonth(endy, endm) - dom;
       day += tmpd;
       month = 0;
-
     } else {
       // Neither year nor month were requested, so we ignore those parts
       // of the time period, and re-calculate the days directly from the
@@ -570,30 +566,30 @@ export abstract class CalendarDate {
     // Roll down
 
     if (f & TimePeriodFieldFlag.WEEK) {
-      week = ms / onewk | 0;
+      week = (ms / onewk) | 0;
       ms -= week * onewk;
     }
     if (f & TimePeriodFieldFlag.DAY) {
-      day = ms / onedy | 0;
+      day = (ms / onedy) | 0;
       ms -= day * onedy;
     }
     if (f & TimePeriodFieldFlag.HOUR) {
-      hour = ms / onehr | 0;
+      hour = (ms / onehr) | 0;
       ms -= hour * onehr;
     }
     if (f & TimePeriodFieldFlag.MINUTE) {
-      minute = ms / onemn | 0;
+      minute = (ms / onemn) | 0;
       ms -= minute * onemn;
     }
     if (f & TimePeriodFieldFlag.SECOND) {
-      second = ms / 1000 | 0;
+      second = (ms / 1000) | 0;
       ms -= second * 1000;
     }
     if (f & TimePeriodFieldFlag.MILLIS) {
       millis = ms;
     }
 
-    const dayms = (ms / CalendarConstants.ONE_DAY_MS);
+    const dayms = ms / CalendarConstants.ONE_DAY_MS;
 
     // Roll up fractional
 
@@ -631,7 +627,7 @@ export abstract class CalendarDate {
       hour,
       minute,
       second,
-      millis
+      millis,
     };
   }
 
@@ -682,17 +678,17 @@ export abstract class CalendarDate {
     }
 
     // Convert days to weeks
-    const week = day > 0 ? day / 7 | 0 : 0;
+    const week = day > 0 ? (day / 7) | 0 : 0;
     if (week > 0) {
       day -= week * 7;
     }
 
     // Break down milliseconds into components
-    const hour = millis / CalendarConstants.ONE_HOUR_MS | 0;
+    const hour = (millis / CalendarConstants.ONE_HOUR_MS) | 0;
     millis -= hour * CalendarConstants.ONE_HOUR_MS;
-    const minute = millis / CalendarConstants.ONE_MINUTE_MS | 0;
+    const minute = (millis / CalendarConstants.ONE_MINUTE_MS) | 0;
     millis -= minute * CalendarConstants.ONE_MINUTE_MS;
-    const second = millis / CalendarConstants.ONE_SECOND_MS | 0;
+    const second = (millis / CalendarConstants.ONE_SECOND_MS) | 0;
     millis -= second * CalendarConstants.ONE_SECOND_MS;
 
     return {
@@ -703,7 +699,7 @@ export abstract class CalendarDate {
       hour,
       minute,
       second,
-      millis
+      millis,
     };
   }
 
@@ -749,7 +745,7 @@ export abstract class CalendarDate {
     // We do this here since we'll be re-initializing the date fields
     // below.
     [_days, _ms] = this._addTime(fields);
-    _days += (fields.day || 0) + ((fields.week || 0) * 7);
+    _days += (fields.day || 0) + (fields.week || 0) * 7;
 
     // YEARS
 
@@ -780,7 +776,7 @@ export abstract class CalendarDate {
 
     // Get integer and fractional months
     month = fields.month || 0;
-    [month, monthf] = splitfrac((f[DateField.MONTH] - 1) + month);
+    [month, monthf] = splitfrac(f[DateField.MONTH] - 1 + month);
 
     // Add back years by dividing by month count
     const mc = this.monthCount();
@@ -802,7 +798,7 @@ export abstract class CalendarDate {
     // DAY AND TIME FIELDS
 
     // Adjust julian day by fractional day and time fields
-    ms += Math.round(_ms + (dayf * CalendarConstants.ONE_DAY_MS));
+    ms += Math.round(_ms + dayf * CalendarConstants.ONE_DAY_MS);
     if (ms >= CalendarConstants.ONE_DAY_MS) {
       const d = floor(ms / CalendarConstants.ONE_DAY_MS);
       ms -= d * CalendarConstants.ONE_DAY_MS;
@@ -818,13 +814,14 @@ export abstract class CalendarDate {
   protected _addTime(fields: Partial<TimePeriod>): [number, number] {
     // Calculate the time difference in days and milliseconds
     let msDay = this._fields[DateField.MILLIS_IN_DAY] - this.timeZoneOffset();
-    msDay += ((fields.hour || 0) * CalendarConstants.ONE_HOUR_MS) +
-      ((fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS) +
-      ((fields.second || 0) * CalendarConstants.ONE_SECOND_MS) +
-      ((fields.millis || 0));
+    msDay +=
+      (fields.hour || 0) * CalendarConstants.ONE_HOUR_MS +
+      (fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS +
+      (fields.second || 0) * CalendarConstants.ONE_SECOND_MS +
+      (fields.millis || 0);
     const oneDay = CalendarConstants.ONE_DAY_MS;
     const days = floor(msDay / oneDay);
-    const ms = (msDay - (days * oneDay));
+    const ms = msDay - days * oneDay;
     return [days, ms];
   }
 
@@ -843,10 +840,12 @@ export abstract class CalendarDate {
   protected _toString(type: string): string {
     const y = this.extendedYear();
     const neg = y < 0;
-    return `${type} ${neg ? '-' : ''}${zeropad(Math.abs(y), 4)}` +
+    return (
+      `${type} ${neg ? '-' : ''}${zeropad(Math.abs(y), 4)}` +
       `-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)} ` +
       `${zeropad(this.hourOfDay(), 2)}:${zeropad(this.minute(), 2)}:${zeropad(this.second(), 2)}` +
-      `.${zeropad(this.milliseconds(), 3)} ${this._zoneInfo.zoneid}`;
+      `.${zeropad(this.milliseconds(), 3)} ${this._zoneInfo.zoneid}`
+    );
   }
 
   /**
@@ -867,7 +866,7 @@ export abstract class CalendarDate {
     const rdow = (dow + 7 - this._firstDay) % 7;
     const rdowJan1 = (dow - doy + 7001 - this._firstDay) % 7;
     let woy = floor((doy - 1 + rdowJan1) / 7);
-    if ((7 - rdowJan1) >= this._minDays) {
+    if (7 - rdowJan1 >= this._minDays) {
       woy++;
     }
 
@@ -877,9 +876,9 @@ export abstract class CalendarDate {
       ywoy--;
     } else {
       const lastDoy = this.yearLength(eyear);
-      if (doy >= (lastDoy - 5)) {
+      if (doy >= lastDoy - 5) {
         const lastRdow = (rdow + lastDoy - doy) % 7;
-        if (((6 - lastRdow) >= this._minDays) && ((doy + 7 - rdow) > lastDoy)) {
+        if (6 - lastRdow >= this._minDays && doy + 7 - rdow > lastDoy) {
           woy = 1;
           ywoy++;
         }
@@ -888,7 +887,7 @@ export abstract class CalendarDate {
     f[DateField.WEEK_OF_MONTH] = this.weekNumber(dom, dom, dow);
     f[DateField.WEEK_OF_YEAR] = woy;
     f[DateField.YEAR_WOY] = ywoy;
-    f[DateField.DAY_OF_WEEK_IN_MONTH] = ((dom - 1) / 7 | 0) + 1;
+    f[DateField.DAY_OF_WEEK_IN_MONTH] = (((dom - 1) / 7) | 0) + 1;
   }
 
   protected yearLength(y: number): number {
@@ -901,7 +900,7 @@ export abstract class CalendarDate {
       psow += 7;
     }
     const weekNo = floor((desiredDay + psow - 1) / 7);
-    return ((7 - psow) >= this._minDays) ? weekNo + 1 : weekNo;
+    return 7 - psow >= this._minDays ? weekNo + 1 : weekNo;
   }
 
   protected utcfields(): number[] {
@@ -914,8 +913,7 @@ export abstract class CalendarDate {
   }
 }
 
-const clamp = (n: number, min: number, max: number): number =>
-  Math.max(Math.min(n, max), min) | 0;
+const clamp = (n: number, min: number, max: number): number => Math.max(Math.min(n, max), min) | 0;
 
 /**
  * Compute Julian day from timezone-adjusted Unix epoch milliseconds.
@@ -924,7 +922,7 @@ const jdFromUnixEpoch = (ms: number, f: number[]): void => {
   const oneDayMS = CalendarConstants.ONE_DAY_MS;
   const days = floor(ms / oneDayMS);
   const jd = days + CalendarConstants.JD_UNIX_EPOCH;
-  const msDay = floor(ms - (days * oneDayMS));
+  const msDay = floor(ms - days * oneDayMS);
 
   f[DateField.JULIAN_DAY] = jd;
   f[DateField.MILLIS_IN_DAY] = msDay;
@@ -940,22 +938,22 @@ const computeBaseFields = (f: number[]): void => {
   checkJDRange(jd);
 
   let msDay = f[DateField.MILLIS_IN_DAY];
-  const ms = msDay + ((jd - CalendarConstants.JD_UNIX_EPOCH) * CalendarConstants.ONE_DAY_MS);
+  const ms = msDay + (jd - CalendarConstants.JD_UNIX_EPOCH) * CalendarConstants.ONE_DAY_MS;
 
   f[DateField.LOCAL_MILLIS] = ms;
   f[DateField.JULIAN_DAY] = jd;
   f[DateField.MILLIS_IN_DAY] = msDay;
   f[DateField.MILLIS] = msDay % 1000;
 
-  msDay = msDay / 1000 | 0;
+  msDay = (msDay / 1000) | 0;
   f[DateField.SECOND] = msDay % 60;
 
-  msDay = msDay / 60 | 0;
+  msDay = (msDay / 60) | 0;
   f[DateField.MINUTE] = msDay % 60;
 
-  msDay = msDay / 60 | 0;
+  msDay = (msDay / 60) | 0;
   f[DateField.HOUR_OF_DAY] = msDay;
-  f[DateField.AM_PM] = msDay / 12 | 0;
+  f[DateField.AM_PM] = (msDay / 12) | 0;
   f[DateField.HOUR] = msDay % 12;
 
   let dow = (jd + DayOfWeek.MONDAY) % 7;
@@ -969,7 +967,8 @@ const checkJDRange = (jd: number): void => {
   if (jd < CalendarConstants.JD_MIN || jd > CalendarConstants.JD_MAX) {
     throw new Error(
       `Julian day ${jd} is outside the supported range of this library: ` +
-      `${ConstantsDesc.JD_MIN} to ${ConstantsDesc.JD_MAX}`);
+        `${ConstantsDesc.JD_MIN} to ${ConstantsDesc.JD_MAX}`,
+    );
   }
 };
 
@@ -979,5 +978,5 @@ const checkJDRange = (jd: number): void => {
  */
 const unixEpochFromJD = (jd: number, msDay: number): number => {
   const days = jd - CalendarConstants.JD_UNIX_EPOCH;
-  return (days * CalendarConstants.ONE_DAY_MS) + Math.round(msDay);
+  return days * CalendarConstants.ONE_DAY_MS + Math.round(msDay);
 };

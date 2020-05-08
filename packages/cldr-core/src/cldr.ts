@@ -12,38 +12,24 @@ import {
   NumbersImpl,
   PrivateApiImpl,
   Units,
-  UnitsImpl
+  UnitsImpl,
 } from './api';
 
-import {
-  Internals,
-  InternalsImpl
-} from './internals';
+import { Internals, InternalsImpl } from './internals';
 
-import {
-  availableLocales,
-} from './locale';
+import { availableLocales } from './locale';
 
-import {
-  parseLanguageTag,
-  LanguageTag,
-} from '@phensley/language-tag';
+import { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
 
-import {
-  LanguageResolver,
-  Locale
-} from '@phensley/locale';
+import { LanguageResolver, Locale } from '@phensley/locale';
 
-import {
-  Bundle,
-  Pack
-} from './resource';
+import { Bundle, Pack } from './resource';
 
 import { VERSION } from './utils/version';
 
 const enum Messages {
   CHECKSUM = 'Checksum mismatch on resource pack! The schema config used to ' +
-  'generate the resource pack must be identical to the one used at runtime.',
+    'generate the resource pack must be identical to the one used at runtime.',
   LOCALE_UNDEFINED = 'The "locale" argument is undefined',
   NO_ASYNC_LOADER = 'A Promise-based resource loader is not defined',
   NO_SYNC_LOADER = 'A synchronous resource loader is not defined',
@@ -55,7 +41,6 @@ const enum Messages {
  * @public
  */
 export interface CLDR {
-
   /**
    * Calendar functions.
    */
@@ -77,26 +62,25 @@ export interface CLDR {
   readonly Units: Units;
 
   /**
-    * UNDOCUMENTED AND EXPERIMENTAL
-    *
-    * Provides access to the low-level schema for accessing CLDR fields.
-    *
-    * Currently undocumented. In the future an internal api can be
-    * exposed allowing access to low-level functions of the library.
-    *
-    * @internal
-    */
+   * UNDOCUMENTED AND EXPERIMENTAL
+   *
+   * Provides access to the low-level schema for accessing CLDR fields.
+   *
+   * Currently undocumented. In the future an internal api can be
+   * exposed allowing access to low-level functions of the library.
+   *
+   * @internal
+   */
   readonly Schema: Schema;
 
   /**
-    * UNDOCUMENTED AND EXPERIMENTAL
-    *
-    * Provides access to the low-level library internals.
-    *
-    * @internal
-    */
+   * UNDOCUMENTED AND EXPERIMENTAL
+   *
+   * Provides access to the low-level library internals.
+   *
+   * @internal
+   */
   readonly Internals: Internals;
-
 }
 
 /**
@@ -105,7 +89,6 @@ export interface CLDR {
  * @public
  */
 class CLDRImpl implements CLDR {
-
   private _calendars?: Calendars;
   private _general?: General;
   private _numbers?: Numbers;
@@ -115,8 +98,8 @@ class CLDRImpl implements CLDR {
   constructor(
     private readonly locale: Locale,
     private readonly bundle: Bundle,
-    private readonly internals: Internals
-  ) { }
+    private readonly internals: Internals,
+  ) {}
 
   /**
    * Calendar functions.
@@ -199,7 +182,6 @@ const EMPTY_CONFIG: SchemaConfig = {};
  * @public
  */
 export interface CLDROptions {
-
   /**
    * Log some messages.
    */
@@ -248,7 +230,6 @@ export interface CLDROptions {
  * @public
  */
 export class CLDRFramework {
-
   protected readonly packCache: LRU<Pack>;
   protected readonly loader?: (language: string) => any;
   protected readonly asyncLoader?: (language: string) => Promise<any>;
@@ -351,12 +332,14 @@ export class CLDRFramework {
       }
 
       // Resolve via the promise loader
-      this.asyncLoader!(language).then(raw => {
-        const _pack = new Pack(raw);
-        this.check(_pack);
-        this.packCache.set(language, _pack);
-        resolve(this.build(resolved, _pack));
-      }).catch(reject);
+      this.asyncLoader!(language)
+        .then((raw) => {
+          const _pack = new Pack(raw);
+          this.check(_pack);
+          this.packCache.set(language, _pack);
+          resolve(this.build(resolved, _pack));
+        })
+        .catch(reject);
     });
 
     return promise;

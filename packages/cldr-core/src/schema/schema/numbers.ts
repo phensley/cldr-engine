@@ -3,7 +3,7 @@ import {
   CurrencySpacingPos,
   NumberMiscPatternType,
   NumberSymbolType,
-  NumberSystemCategory
+  NumberSystemCategory,
 } from '@phensley/cldr-types';
 
 import { KeyIndexImpl } from '../instructions';
@@ -21,9 +21,11 @@ export const CurrencySpacingPosIndex = new KeyIndexImpl<CurrencySpacingPos>(['be
 /**
  * @public
  */
-export const CurrencySpacingPatternIndex = new KeyIndexImpl<CurrencySpacingPattern>(
-  ['currencyMatch', 'surroundingMatch', 'insertBetween']
-);
+export const CurrencySpacingPatternIndex = new KeyIndexImpl<CurrencySpacingPattern>([
+  'currencyMatch',
+  'surroundingMatch',
+  'insertBetween',
+]);
 
 /**
  * @public
@@ -42,22 +44,18 @@ export const NumberSymbolValues: NumberSymbolType[] = [
   'percentSign',
   'plusSign',
   'superscriptingExponent',
-  'timeSeparator'
+  'timeSeparator',
 ];
 
 /**
  * @public
  */
-export const NumberSystemCategoryValues: NumberSystemCategory[] = [
-  'default', 'native', 'finance', 'traditional'
-];
+export const NumberSystemCategoryValues: NumberSystemCategory[] = ['default', 'native', 'finance', 'traditional'];
 
 /**
  * @public
  */
-export const NumberMiscPatternValues: NumberMiscPatternType[] = [
-  'at-least', 'at-most', 'approx', 'range'
-];
+export const NumberMiscPatternValues: NumberMiscPatternType[] = ['at-least', 'at-most', 'approx', 'range'];
 
 /**
  * @public

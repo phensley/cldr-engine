@@ -1,8 +1,4 @@
-import {
-  NumbersSchema,
-  NumberSystemInfo,
-  NumberSystemName,
-} from '@phensley/cldr-types';
+import { NumbersSchema, NumberSystemInfo, NumberSystemName } from '@phensley/cldr-types';
 
 import { Cache } from '@phensley/cldr-utils';
 
@@ -17,16 +13,12 @@ import { Bundle } from '../../resource';
  * @internal
  */
 export class NumberParamsCache {
-
   private numberParamsCache: Cache<NumberParams>;
   private numbers: NumbersSchema;
   private latnSystem: NumberingSystem;
   private latnSystemInfo: NumberSystemInfo;
 
-  constructor(
-    private bundle: Bundle,
-    private internals: Internals
-  ) {
+  constructor(private bundle: Bundle, private internals: Internals) {
     this.numberParamsCache = new Cache((s: string) => this.build(s as NumberSystemName), 20);
     this.numbers = internals.schema.Numbers;
     this.latnSystemInfo = this.numbers.numberSystem.get('latn') as NumberSystemInfo;
@@ -98,7 +90,7 @@ export class NumberParamsCache {
       minimumGroupingDigits,
       primaryGroupingSize,
       secondaryGroupingSize,
-      currencySpacing
+      currencySpacing,
     };
   }
 
@@ -110,8 +102,8 @@ export class NumberParamsCache {
       ? info.symbols.mapping(bundle)
       : this.latnSystemInfo.symbols.mapping(bundle);
 
-    const standardRaw = info.decimalFormats.standard.get(bundle)
-      || this.latnSystemInfo.decimalFormats.standard.get(bundle);
+    const standardRaw =
+      info.decimalFormats.standard.get(bundle) || this.latnSystemInfo.decimalFormats.standard.get(bundle);
 
     // Fetch standard pattern to determine grouping digits
     const standard = this.internals.numbers.getNumberPattern(standardRaw, false);
@@ -122,7 +114,7 @@ export class NumberParamsCache {
       symbols,
       minimumGroupingDigits,
       standard.priGroup,
-      standard.secGroup
+      standard.secGroup,
     );
   }
 }
@@ -135,10 +127,10 @@ const makeDigits = (name: string): string[] => {
   const digits = decimalNumberingDigits[name];
   if (digits.length !== 10) {
     const c = digits[0].charCodeAt(0);
-    if (c >= 0xD800 && c <= 0xDBFF) {
+    if (c >= 0xd800 && c <= 0xdbff) {
       const c2 = digits[0].charCodeAt(1);
       /* istanbul ignore else */
-      if (c2 >= 0xDC00 && c2 <= 0xDFFF) {
+      if (c2 >= 0xdc00 && c2 <= 0xdfff) {
         for (let i = 1; i < 10; i++) {
           const digit = String.fromCharCode(c) + String.fromCharCode(c2 + i);
           digits.push(digit);

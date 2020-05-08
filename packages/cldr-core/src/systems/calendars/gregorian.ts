@@ -24,11 +24,9 @@ const ZEROS: Partial<CalendarDateFields> = {
  * @public
  */
 export class GregorianDate extends CalendarDate {
-
   static _init: void = ((): void => {
-    CalendarDate._gregorian =
-      (d, utc, fd, md): GregorianDate =>
-        GregorianDate.fromUnixEpoch(d.unixEpoch(), utc ? 'Etc/UTC' : d.timeZoneId(), fd, md);
+    CalendarDate._gregorian = (d, utc, fd, md): GregorianDate =>
+      GregorianDate.fromUnixEpoch(d.unixEpoch(), utc ? 'Etc/UTC' : d.timeZoneId(), fd, md);
   })();
 
   protected constructor(type: CalendarType, firstDay: number, minDays: number) {
@@ -116,7 +114,7 @@ export class GregorianDate extends CalendarDate {
     const y = eyear - 1;
     let jd = 365 * y + floor(y / 4) + (CalendarConstants.JD_GREGORIAN_EPOCH - 3);
     if (eyear >= CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR) {
-      isLeap = isLeap && ((eyear % 100 !== 0) || (eyear % 400 === 0));
+      isLeap = isLeap && (eyear % 100 !== 0 || eyear % 400 === 0);
       jd += floor(y / 400) - floor(y / 100) + 2;
     }
     if (month !== 0) {
@@ -152,20 +150,23 @@ export class GregorianDate extends CalendarDate {
     d = d < 1 ? 1 : d > dc ? dc : d;
 
     // Adjustment due to Gregorian calendar switch on Oct 4, 1582 -> Oct 15, 1582
-    if (y < CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR || (y === CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR &&
-      (m < CalendarConstants.JD_GREGORIAN_CUTOVER_MONTH || (m === CalendarConstants.JD_GREGORIAN_CUTOVER_MONTH &&
-        d < CalendarConstants.JD_GREGORIAN_CUTOVER_DAY)))) {
+    if (
+      y < CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR ||
+      (y === CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR &&
+        (m < CalendarConstants.JD_GREGORIAN_CUTOVER_MONTH ||
+          (m === CalendarConstants.JD_GREGORIAN_CUTOVER_MONTH && d < CalendarConstants.JD_GREGORIAN_CUTOVER_DAY)))
+    ) {
       if (m < 3) {
         m += 12;
         y -= 1;
       }
-      return (1721117 + floor(1461 * y / 4) + floor((153 * m - 457) / 5) + d);
+      return 1721117 + floor((1461 * y) / 4) + floor((153 * m - 457) / 5) + d;
     }
 
     const a = ((14 - m) / 12) | 0;
     y = y + 4800 - a;
     m = m + 12 * a - 3;
-    return d + ((153 * m + 2) / 5 | 0) + 365 * y + (y / 4 | 0) - (y / 100 | 0) + (y / 400 | 0) - 32045;
+    return d + (((153 * m + 2) / 5) | 0) + 365 * y + ((y / 4) | 0) - ((y / 100) | 0) + ((y / 400) | 0) - 32045;
   }
 
   protected _set(f: Partial<CalendarDateFields>): GregorianDate {
@@ -177,7 +178,6 @@ export class GregorianDate extends CalendarDate {
     const r = TZ.fromWall(zoneId, epoch);
     return this._new().initFromUnixEpoch(r ? r[0] : epoch, zoneId);
   }
-
 }
 
 const floor = Math.floor;
@@ -194,7 +194,7 @@ const MONTH_COUNT = [
   [30, 30, 243, 244], // Sep
   [31, 31, 273, 274], // Oct
   [30, 30, 304, 305], // Nov
-  [31, 31, 334, 335]  // Dec
+  [31, 31, 334, 335], // Dec
 ];
 
 /**
@@ -264,7 +264,7 @@ const computeJulianFields = (f: number[]): void => {
 const leapGregorian = (y: number): boolean => {
   let r = y % 4 === 0;
   if (y >= CalendarConstants.JD_GREGORIAN_CUTOVER_YEAR) {
-    r = r && ((y % 100 !== 0) || (y % 400 === 0));
+    r = r && (y % 100 !== 0 || y % 400 === 0);
   }
   return r;
 };
@@ -275,5 +275,5 @@ const leapGregorian = (y: number): boolean => {
  */
 const unixEpochFromJD = (jd: number, msDay: number): number => {
   const days = jd - CalendarConstants.JD_UNIX_EPOCH;
-  return (days * CalendarConstants.ONE_DAY_MS) + Math.round(msDay);
+  return days * CalendarConstants.ONE_DAY_MS + Math.round(msDay);
 };

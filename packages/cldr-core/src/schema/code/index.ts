@@ -28,7 +28,7 @@ const emptyCalendarIndex = (name: string): KeyIndexMap => ({
   [`${name}-plural-format`]: EMPTY_INDEX,
   [`${name}-era`]: EMPTY_INDEX,
   [`${name}-interval-format`]: EMPTY_INDEX,
-  [`${name}-month`]: EMPTY_INDEX
+  [`${name}-month`]: EMPTY_INDEX,
 });
 
 /**
@@ -116,20 +116,12 @@ export interface SchemaConfig {
 
 type SchemaConfigKey = keyof SchemaConfig;
 
-const COPY: SchemaConfigKey[] = [
-  'currency-id',
-  'language-id',
-  'script-id',
-  'region-id',
-  'unit-id',
-  'timezone-id'
-];
+const COPY: SchemaConfigKey[] = ['currency-id', 'language-id', 'script-id', 'region-id', 'unit-id', 'timezone-id'];
 
 /**
  * @public
  */
 export class CodeBuilder {
-
   private indices: { [name: string]: KeyIndex<string> } = {
     'alt-key': AltIndex,
     'day-period-alt-key': DayPeriodAltIndex,
@@ -146,7 +138,7 @@ export class CodeBuilder {
     ...TIMEZONE_INDICES,
   };
 
-  constructor(private config: SchemaConfig) { }
+  constructor(private config: SchemaConfig) {}
 
   /**
    * Creates the origin of the code that builds the schema accessor instance.
@@ -176,7 +168,7 @@ export class CodeBuilder {
       TIMEZONE,
       CURRENCIES,
       UNITS,
-      CONTEXT_TRANSFORM
+      CONTEXT_TRANSFORM,
     ];
 
     for (const name of this.config.calendars || []) {

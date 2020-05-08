@@ -15,16 +15,11 @@ const DEFAULT_OPTIONS: UnitFormatOptions = { length: 'long', style: 'decimal' };
  * @internal
  */
 export class UnitsImpl implements Units {
-
   private general: GeneralInternals;
   private numbers: NumberInternals;
   private units: UnitInternals;
 
-  constructor(
-    private bundle: Bundle,
-    private internal: Internals,
-    private privateApi: PrivateApiImpl
-  ) {
+  constructor(private bundle: Bundle, private internal: Internals, private privateApi: PrivateApiImpl) {
     this.general = internal.general;
     this.numbers = internal.numbers;
     this.units = internal.units;
@@ -54,14 +49,14 @@ export class UnitsImpl implements Units {
 
   formatQuantitySequence(qs: Quantity[], options?: UnitFormatOptions): string {
     options = options || DEFAULT_OPTIONS;
-    const items = qs.map(q => this.formatQuantity(q, options));
+    const items = qs.map((q) => this.formatQuantity(q, options));
     const type = this.selectListType(options);
     return this.general.formatList(this.bundle, items, type);
   }
 
   formatQuantitySequenceToParts(qs: Quantity[], options?: UnitFormatOptions): Part[] {
     options = options || DEFAULT_OPTIONS;
-    const parts: Part[][] = qs.map(q => this.formatQuantityToParts(q, options));
+    const parts: Part[][] = qs.map((q) => this.formatQuantityToParts(q, options));
     const type = this.selectListType(options);
     return this.general.formatListImpl(this.bundle, new PartsValue(), parts, type);
   }

@@ -30,14 +30,13 @@ const DEFAULT_CURRENCY_OPTIONS: CurrencyDisplayNameOptions = { context: 'begin-s
  * @internal
  */
 export class NumbersImpl implements Numbers {
-
   private transform: ContextTransformInfo;
 
   constructor(
     private readonly bundle: Bundle,
     private readonly numbers: NumberInternals,
     private readonly general: GeneralInternals,
-    private readonly privateApi: PrivateApiImpl
+    private readonly privateApi: PrivateApiImpl,
   ) {
     this.transform = privateApi.getContextTransformInfo();
   }
@@ -67,8 +66,11 @@ export class NumbersImpl implements Numbers {
     return getCurrencyForRegion(region);
   }
 
-  getCurrencyPluralName(n: DecimalArg, code: string,
-    opts: CurrencyDisplayNameOptions = DEFAULT_CURRENCY_OPTIONS): string {
+  getCurrencyPluralName(
+    n: DecimalArg,
+    code: string,
+    opts: CurrencyDisplayNameOptions = DEFAULT_CURRENCY_OPTIONS,
+  ): string {
     const plural = this.getPluralCardinal(n);
     const name = this.numbers.getCurrencyPluralName(this.bundle, code, plural as PluralType);
     return this.general.contextTransform(name, this.transform, _ctx(opts), 'currencyName');
@@ -112,9 +114,12 @@ export class NumbersImpl implements Numbers {
     return this.formatCurrencyImpl(renderer, params, n, code, options);
   }
 
-  protected formatDecimalImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
-    n: DecimalArg, options: DecimalFormatOptions): T {
-
+  protected formatDecimalImpl<T>(
+    renderer: NumberRenderer<T>,
+    params: NumberParams,
+    n: DecimalArg,
+    options: DecimalFormatOptions,
+  ): T {
     // A NaN or Infinity value will just return the locale's representation
     const d = coerceDecimal(n);
     const v = validate(d, options, renderer, params);
@@ -125,16 +130,19 @@ export class NumbersImpl implements Numbers {
     return result;
   }
 
-  protected formatCurrencyImpl<T>(renderer: NumberRenderer<T>, params: NumberParams,
-    n: DecimalArg, code: CurrencyType, options: CurrencyFormatOptions): T {
-
+  protected formatCurrencyImpl<T>(
+    renderer: NumberRenderer<T>,
+    params: NumberParams,
+    n: DecimalArg,
+    code: CurrencyType,
+    options: CurrencyFormatOptions,
+  ): T {
     // Not much to be done with NaN and Infinity with currencies, so we always
     // throw an error.
     const d = coerceDecimal(n);
     validate(d, FORCE_ERRORS, renderer, params);
     return this.numbers.formatCurrency(this.bundle, renderer, coerceDecimal(n), code, options, params);
   }
-
 }
 const FORCE_ERRORS: DecimalFormatOptions = { errors: ['nan', 'infinity'] };
 
@@ -146,8 +154,8 @@ const validate = <T>(
   n: Decimal,
   opts: DecimalFormatOptions,
   renderer: NumberRenderer<T>,
-  params: NumberParams): T | undefined => {
-
+  params: NumberParams,
+): T | undefined => {
   // Check if we have NaN or Infinity
   const isnan = n.isNaN();
   const isinfinity = n.isInfinity();
@@ -162,15 +170,15 @@ const validate = <T>(
     }
   }
 
-  return isnan ? renderer.make('nan', params.symbols.nan)
-    : isinfinity ? renderer.make('infinity', params.symbols.infinity)
-      : undefined;
+  return isnan
+    ? renderer.make('nan', params.symbols.nan)
+    : isinfinity
+    ? renderer.make('infinity', params.symbols.infinity)
+    : undefined;
 };
 
 // Default an options context value
-const _ctx = (o: CurrencyDisplayNameOptions): ContextType =>
-  _def(o, 'context', 'begin-sentence' as ContextType);
+const _ctx = (o: CurrencyDisplayNameOptions): ContextType => _def(o, 'context', 'begin-sentence' as ContextType);
 
 // Default an option value
-const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T =>
-  o[k] as unknown as T || t;
+const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T => ((o[k] as unknown) as T) || t;

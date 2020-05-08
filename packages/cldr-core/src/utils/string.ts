@@ -2,7 +2,7 @@
  * @internal
  */
 export const numarray = (s: string, base: number = 10): number[] =>
-  s ? s.split(' ').map(n => parseInt(n, base)) : [];
+  s ? s.split(' ').map((n) => parseInt(n, base)) : [];
 
 /**
  * @internal

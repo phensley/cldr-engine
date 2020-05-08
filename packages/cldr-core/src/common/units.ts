@@ -16,8 +16,7 @@ export interface Quantity {
 /**
  * @public
  */
-export type UnitFormatStyleType =
-  NumberFormatStyleType;
+export type UnitFormatStyleType = NumberFormatStyleType;
 
 /**
  * @public

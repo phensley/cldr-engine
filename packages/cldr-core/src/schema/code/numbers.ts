@@ -9,7 +9,6 @@ import {
 } from '../schema/numbers';
 
 export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
-
   field('minimumGroupingDigits'),
   vector('numberSystems', ['number-system']),
 
@@ -21,7 +20,7 @@ export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
       field('accounting'),
       digits('short', 'plural-key', PluralDigitValues),
       vector('spacing', ['currency-spacing-pos', 'currency-spacing-pattern']),
-      vector('unitPattern', ['plural-key'])
+      vector('unitPattern', ['plural-key']),
     ]),
 
     scope('decimalFormats', 'decimalFormats', [
@@ -32,9 +31,8 @@ export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
 
     field('percentFormat'),
     field('scientificFormat'),
-    vector('miscPatterns', ['number-misc-pattern'])
-  ])
-
+    vector('miscPatterns', ['number-misc-pattern']),
+  ]),
 ]);
 
 export const NUMBERS_INDICES = {

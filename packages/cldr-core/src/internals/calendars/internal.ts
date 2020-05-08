@@ -19,7 +19,6 @@ import { DayPeriodRules } from './rules';
  * @internal
  */
 export class CalendarInternalsImpl implements CalendarInternals {
-
   private schema: Schema;
   private dayPeriodRules: DayPeriodRules;
   private patternCache: Cache<DateTimeNode[]>;
@@ -27,10 +26,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
   private calendarFormatterCache: Cache<CalendarFormatter<CalendarDate>>;
   private availableCalendars: Set<string>;
 
-  constructor(
-    private internals: Internals,
-    cacheSize: number
-  ) {
+  constructor(private internals: Internals, cacheSize: number) {
     this.schema = internals.schema;
     this.dayPeriodRules = new DayPeriodRules(cacheSize);
     this.patternCache = new Cache(parseDatePattern, cacheSize);
@@ -88,9 +84,13 @@ export class CalendarInternalsImpl implements CalendarInternals {
   }
 
   formatDateTime<R>(
-    calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>,
-    date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R {
-
+    calendar: CalendarType,
+    ctx: CalendarContext<CalendarDate>,
+    value: AbstractValue<R>,
+    date?: DateTimeNode[],
+    time?: DateTimeNode[],
+    wrapper?: string,
+  ): R {
     const formatter = this.getCalendarFormatter(calendar);
     let _date: R | undefined;
     let _time: R | undefined;
@@ -110,8 +110,13 @@ export class CalendarInternalsImpl implements CalendarInternals {
     return _date ? _date : _time ? _time : value.empty();
   }
 
-  formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>,
-    value: AbstractValue<R>, end: CalendarDate, pattern: DateTimeNode[]): R {
+  formatInterval<R>(
+    calendar: CalendarType,
+    ctx: CalendarContext<CalendarDate>,
+    value: AbstractValue<R>,
+    end: CalendarDate,
+    pattern: DateTimeNode[],
+  ): R {
     const idx = intervalPatternBoundary(pattern);
     const s = this.formatDateTime(calendar, ctx, value, pattern.slice(0, idx));
     ctx.date = end;
@@ -150,5 +155,4 @@ export class CalendarInternalsImpl implements CalendarInternals {
     }
     return undefined;
   }
-
 }
