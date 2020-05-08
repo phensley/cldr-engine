@@ -48,14 +48,10 @@ export type RationalArg = Rational | Decimal | number | string;
  * @public
  */
 export class Rational {
-
   protected numer!: Decimal;
   protected denom!: Decimal;
 
-  constructor(
-    numerator: DecimalArg,
-    denominator?: DecimalArg) {
-
+  constructor(numerator: DecimalArg, denominator?: DecimalArg) {
     if (typeof numerator === 'string' && denominator === undefined) {
       this._parse(numerator);
     } else {
@@ -83,18 +79,12 @@ export class Rational {
 
   divide(num: RationalArg, context?: MathContext): Rational {
     const n = coerceRational(num);
-    return new Rational(
-      this.numer.multiply(n.denom, context),
-      this.denom.multiply(n.numer, context)
-    );
+    return new Rational(this.numer.multiply(n.denom, context), this.denom.multiply(n.numer, context));
   }
 
   multiply(num: RationalArg, context?: MathContext): Rational {
     const n = coerceRational(num);
-    return new Rational(
-      this.numer.multiply(n.numer, context),
-      this.denom.multiply(n.denom, context)
-    );
+    return new Rational(this.numer.multiply(n.numer, context), this.denom.multiply(n.denom, context));
   }
 
   inverse(): Rational {
@@ -119,7 +109,6 @@ export class Rational {
       this.denom = fromString(raw.substring(i + 1).trim());
     }
   }
-
 }
 
 /**
@@ -128,5 +117,5 @@ export class Rational {
  * @public
  */
 export const RationalConstants = {
-  ONE: new Rational(1, 1)
+  ONE: new Rational(1, 1),
 };

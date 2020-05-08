@@ -1,15 +1,7 @@
 import { add, divide, multiply, subtract, trimLeadingZeros, DivMod } from './math';
 import { allzero, compare, digitCount } from './operations';
 import { DecimalFormatter, Part, PartsDecimalFormatter, StringDecimalFormatter } from './format';
-import {
-  Chars,
-  Constants,
-  DecimalFlag,
-  MathContext,
-  ParseFlags,
-  POWERS10,
-  RoundingModeType
-} from './types';
+import { Chars, Constants, DecimalFlag, MathContext, ParseFlags, POWERS10, RoundingModeType } from './types';
 
 const { floor } = Math;
 
@@ -23,7 +15,7 @@ const enum Op {
   SUBTRACTION = 1,
   MULTIPLICATION = 2,
   DIVISION = 3,
-  MOD = 4
+  MOD = 4,
 }
 
 const DEFAULT_PRECISION = 28;
@@ -90,7 +82,6 @@ const size = (n: number): number => {
  * @public
  */
 export class Decimal {
-
   protected data: number[] = EMPTY;
   protected sign: number = 0;
   protected _exp: number = 0;
@@ -165,9 +156,7 @@ export class Decimal {
 
       // Negative infinity before all other values
       // Positive infinity after all other values
-      return u.flag === DecimalFlag.INFINITY ?
-        u.sign === -1 ? -1 : 1 :
-        v.sign === -1 ? 1 : -1;
+      return u.flag === DecimalFlag.INFINITY ? (u.sign === -1 ? -1 : 1) : v.sign === -1 ? 1 : -1;
     }
 
     u = u.stripTrailingZeros();
@@ -261,7 +250,7 @@ export class Decimal {
     if (this.flag) {
       return false;
     }
-    return (this._exp + this.trailingZeros()) >= 0;
+    return this._exp + this.trailingZeros() >= 0;
   }
 
   /**
@@ -323,7 +312,7 @@ export class Decimal {
 
     const w = new Decimal(ZERO);
     w.sign = u.sign === v.sign ? 1 : -1;
-    w._exp = (u._exp + v._exp);
+    w._exp = u._exp + v._exp;
 
     const uz = u.isZero();
     const vz = v.isZero();
@@ -367,10 +356,10 @@ export class Decimal {
     const sign = u.sign === v.sign ? 1 : -1;
 
     const shift = usePrecision
-      ? (v.precision() - u.precision()) + scaleprec + 2
+      ? v.precision() - u.precision() + scaleprec + 2
       : v.precision() + u.precision() + Math.abs(scaleprec) + 2;
 
-    const exp = (u._exp - v._exp) - shift;
+    const exp = u._exp - v._exp - shift;
 
     if (shift > 0) {
       u = u.shiftleft(shift);
@@ -512,10 +501,7 @@ export class Decimal {
     const exp = -(this.precision() - 1) + (minIntDigits - 1);
     // ensure exponent is not negative zero
     const coeff = Decimal.fromRaw(this.sign, exp === 0 ? 0 : exp, this.data, this.flag);
-    return [
-      coeff,
-      this._exp - coeff._exp
-    ];
+    return [coeff, this._exp - coeff._exp];
   }
 
   /**
@@ -526,7 +512,7 @@ export class Decimal {
       return 0;
     }
     const len = this.data.length;
-    return ((len - 1) * Constants.RDIGITS) + digitCount(this.data[len - 1]);
+    return (len - 1) * Constants.RDIGITS + digitCount(this.data[len - 1]);
   }
 
   /**
@@ -561,7 +547,7 @@ export class Decimal {
    * number must be shifted.
    */
   alignexp(): number {
-    return this.flag ? 0 : (this._exp + this.precision()) - 1;
+    return this.flag ? 0 : this._exp + this.precision() - 1;
   }
 
   /**
@@ -662,22 +648,24 @@ export class Decimal {
     if (coeff.isZero() || exp === 0) {
       return r;
     }
-    const sign = exp < 0 ?
-      { type: 'minus', value: '-' } : { type: 'plus', value: '+' };
-    return r.concat([
-      { type: 'exp', value: 'E' },
-      sign,
-      { type: 'integer', value: `${Math.abs(exp)}` }
-    ]);
+    const sign = exp < 0 ? { type: 'minus', value: '-' } : { type: 'plus', value: '+' };
+    return r.concat([{ type: 'exp', value: 'E' }, sign, { type: 'integer', value: `${Math.abs(exp)}` }]);
   }
 
   /**
    * Low-level formatting of string and Part[] forms.
    */
   format<R>(
-    formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number,
-    minGroup: number, priGroup: number, secGroup: number, zeroScale: boolean, digits: string[] = DECIMAL_DIGITS): void {
-
+    formatter: DecimalFormatter<R>,
+    decimal: string,
+    group: string,
+    minInt: number,
+    minGroup: number,
+    priGroup: number,
+    secGroup: number,
+    zeroScale: boolean,
+    digits: string[] = DECIMAL_DIGITS,
+  ): void {
     // Determine if grouping is enabled, and set the primary and
     // secondary group sizes.
     const grouping = group !== '';
@@ -689,7 +677,7 @@ export class Decimal {
 
     // Determine how many integer digits to emit. If integer digits is
     // larger than the integer coefficient we emit leading zeros.
-    let int = (this.data.length === 1 && this.data[0] === 0) ? 1 : this.precision() + exp;
+    let int = this.data.length === 1 && this.data[0] === 0 ? 1 : this.precision() + exp;
 
     if (minInt <= 0 && this.compare(ONE, true) === -1) {
       // If the number is between 0 and 1 and format requested minimum
@@ -876,8 +864,13 @@ export class Decimal {
         if (uinf && vinf) {
           return u.sign === v.sign ? NAN : u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY;
         } else if (uinf || vinf) {
-          return uinf ? (u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY)
-            : v.sign === 1 ? NEGATIVE_INFINITY : POSITIVE_INFINITY;
+          return uinf
+            ? u.sign === 1
+              ? POSITIVE_INFINITY
+              : NEGATIVE_INFINITY
+            : v.sign === 1
+            ? NEGATIVE_INFINITY
+            : POSITIVE_INFINITY;
         }
         break;
 
@@ -895,8 +888,13 @@ export class Decimal {
           return NAN;
         }
         if (uinf) {
-          return vzero ? (u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY) :
-            u.sign === v.sign ? POSITIVE_INFINITY : NEGATIVE_INFINITY;
+          return vzero
+            ? u.sign === 1
+              ? POSITIVE_INFINITY
+              : NEGATIVE_INFINITY
+            : u.sign === v.sign
+            ? POSITIVE_INFINITY
+            : NEGATIVE_INFINITY;
         }
         if (vinf) {
           return ZERO;
@@ -913,7 +911,7 @@ export class Decimal {
         if (!uinf && vinf) {
           return u;
         }
-        if (uzero && (!vzero && !vinf)) {
+        if (uzero && !vzero && !vinf) {
           return u;
         }
         break;
@@ -923,7 +921,7 @@ export class Decimal {
   }
 
   protected static fromRaw(sign: number, _exp: number, data: number[], flag: DecimalFlag): Decimal {
-    return new this({ sign, _exp, data, flag } as any as Decimal);
+    return new this(({ sign, _exp, data, flag } as any) as Decimal);
   }
 
   /**
@@ -975,7 +973,7 @@ export class Decimal {
     m--;
 
     // Divmod each element of u, copying the hi/lo parts to w.
-    for (; m >= 0; m-- , n--) {
+    for (; m >= 0; m--, n--) {
       hi = (data[m] / powhi) | 0;
       lo = data[m] - hi * powhi;
       w.data[n] = powlo * loprev + hi;
@@ -1019,8 +1017,10 @@ export class Decimal {
     w.data.fill(0);
 
     // check if we divided evenly
-    let i = 0, j = 0;
-    let rnd = 0, rest = 0;
+    let i = 0,
+      j = 0;
+    let rnd = 0,
+      rest = 0;
 
     if (r === 0) {
       // q is always non-zero here, else there would be no shift
@@ -1041,7 +1041,7 @@ export class Decimal {
         rest = allzero(data, q) === 0 ? 1 : 0;
       }
 
-      for (j = 0, i = q + 1; i < data.length; i++ , j++) {
+      for (j = 0, i = q + 1; i < data.length; i++, j++) {
         const [hi, lo] = div.pow10(data[i], r);
         w.data[j] = ph * lo + hiprev;
         hiprev = hi;
@@ -1138,7 +1138,7 @@ export class Decimal {
         return Number(rnd > 5);
       case 'half-even':
         // if n = 5 and digit to left of n is odd round up; if even round down
-        return Number((rnd > 5) || ((rnd === 5 && this.isodd())));
+        return Number(rnd > 5 || (rnd === 5 && this.isodd()));
       default:
         return 0;
     }
@@ -1148,7 +1148,7 @@ export class Decimal {
    * Return true if this instance is odd.
    */
   protected isodd(): boolean {
-    return this.data.length > 0 && (this.data[0] % 2 === 1);
+    return this.data.length > 0 && this.data[0] % 2 === 1;
   }
 
   /**
@@ -1177,7 +1177,6 @@ export class Decimal {
     if (u.sign === vsign) {
       w.data = add(m.data, n.data);
       w.sign = vsign;
-
     } else {
       const ulen = m.data.length;
       const vlen = n.data.length;
@@ -1355,7 +1354,6 @@ export class Decimal {
     this.trim();
     return undefined;
   }
-
 }
 
 const ZERO = new Decimal('0');
@@ -1364,13 +1362,12 @@ const TWO = new Decimal('2');
 
 // 105 digits of pi - https://oeis.org/A000796/constant
 const PI = new Decimal(
-  '3.141592653589793238462643383279502884197169399375105' +
-  '82097494459230781640628620899862803482534211706798214');
+  '3.141592653589793238462643383279502884197169399375105' + '82097494459230781640628620899862803482534211706798214',
+);
 
 // 105 digits of e - https://oeis.org/A001113/constant
 const E = new Decimal(
-  '2.718281828459045235360287471352662497757247093699959' +
-  '57496696762772407663035354759457138217852516642742746'
+  '2.718281828459045235360287471352662497757247093699959' + '57496696762772407663035354759457138217852516642742746',
 );
 
 const NAN = new Decimal(NaN);
@@ -1390,5 +1387,5 @@ export const DecimalConstants = {
   E,
   NAN,
   POSITIVE_INFINITY,
-  NEGATIVE_INFINITY
+  NEGATIVE_INFINITY,
 };

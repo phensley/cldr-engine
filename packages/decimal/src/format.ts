@@ -14,7 +14,6 @@ export interface Part {
  * @public
  */
 export interface DecimalFormatter<T> {
-
   /**
    * Add a new part to the formatted value.
    */
@@ -32,7 +31,6 @@ export interface DecimalFormatter<T> {
  * @public
  */
 export class StringDecimalFormatter implements DecimalFormatter<string> {
-
   protected parts: string[] = [];
 
   add(c: string): void {
@@ -42,7 +40,6 @@ export class StringDecimalFormatter implements DecimalFormatter<string> {
   render(): string {
     return this.parts.reverse().join('');
   }
-
 }
 
 /**
@@ -51,14 +48,10 @@ export class StringDecimalFormatter implements DecimalFormatter<string> {
  * @public
  */
 export class PartsDecimalFormatter implements DecimalFormatter<Part[]> {
-
   protected parts: Part[] = [];
   protected curr: string[] = [];
 
-  constructor(
-    protected decimal: string,
-    protected group: string
-  ) { }
+  constructor(protected decimal: string, protected group: string) {}
 
   add(c: string): void {
     switch (c) {
@@ -90,5 +83,4 @@ export class PartsDecimalFormatter implements DecimalFormatter<Part[]> {
   private current(): string {
     return this.curr.reverse().join('');
   }
-
 }

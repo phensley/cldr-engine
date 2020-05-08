@@ -97,7 +97,7 @@ export const multiply = (u: number[], v: number[]): number[] => {
     k = 0;
     while (i < m) {
       // M4. Multiply and add
-      const p = (k + w[i + j]) + u[i] * v[j];
+      const p = k + w[i + j] + u[i] * v[j];
       k = (p / Constants.RADIX) | 0;
       w[i + j] = p - k * Constants.RADIX;
 
@@ -122,7 +122,7 @@ export const multiplyword = (w: number[], u: number[], n: number, v: number): vo
   let i = 0;
   let k = 0;
   for (i = 0; i < n; i++) {
-    const p = (k + u[i] * v);
+    const p = k + u[i] * v;
     k = (p / Constants.RADIX) | 0;
     w[i] = p - k * Constants.RADIX;
   }
@@ -173,7 +173,7 @@ export const divide = (uc: number[], vc: number[]): [number[], number[]] => {
   let j = m;
   while (j >= 0) {
     // D3. Calculate q̂ and r̂.
-    p = u[j + n - 1] + (u[j + n] * Constants.RADIX);
+    p = u[j + n - 1] + u[j + n] * Constants.RADIX;
     let qhat = (p / v[n - 1]) | 0;
     let rhat = p - qhat * v[n - 1];
     while (true) {
@@ -232,7 +232,7 @@ export const divide = (uc: number[], vc: number[]): [number[], number[]] => {
   const r = new Array(n);
   r.fill(0);
   for (let i = n - 1; i >= 0; i--) {
-    p = u[i] + (k * Constants.RADIX);
+    p = u[i] + k * Constants.RADIX;
     r[i] = (p / d) | 0;
     k = p - r[i] * d;
   }
@@ -250,7 +250,7 @@ const divideword = (u: number[], v: number): [number[], number[]] => {
   q.fill(0);
   let r = 0;
   for (let i = n - 1; i >= 0; i--) {
-    const p = u[i] + (r * Constants.RADIX);
+    const p = u[i] + r * Constants.RADIX;
     q[i] = (p / v) | 0;
     r = p - q[i] * v;
   }
@@ -298,7 +298,6 @@ export const trimLeadingZeros = (data: number[]): void => {
  * Reusable quotient and remainder for repeated divmod operations.
  */
 export class DivMod {
-
   // [quotient, remainder]
   private s: number[] = [0, 0];
 

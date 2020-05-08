@@ -14,8 +14,7 @@ export const enum DecimalFlag {
  *
  * @public
  */
-export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor'
-  | 'half-up' | 'half-down' | 'half-even';
+export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor' | 'half-up' | 'half-down' | 'half-even';
 
 /**
  * Sets the scale or precision, and the rounding mode for a math operation.
@@ -44,7 +43,7 @@ export const enum Constants {
   P5 = 100000,
   P6 = 1000000,
   P7 = 10000000,
-  P8 = 100000000
+  P8 = 100000000,
 }
 
 export const POWERS10 = [
@@ -56,7 +55,7 @@ export const POWERS10 = [
   Constants.P5,
   Constants.P6,
   Constants.P7,
-  Constants.P8
+  Constants.P8,
 ];
 
 /**
@@ -75,7 +74,7 @@ export const enum ParseState {
 export const enum ParseFlags {
   SIGN = 1,
   POINT = 2,
-  EXP = 4
+  EXP = 4,
 }
 
 /**
