@@ -9,7 +9,6 @@ const ROOT = new RBNF(pluralRules.get('root'), rbnfRulesets);
 const RBNFROOT = ROOT.get('root')!;
 
 export class AlgorithmicNumberingSystems {
-
   readonly rbnfset: RBNFSet | undefined;
   readonly rulenames: string[] = [];
 
@@ -64,18 +63,12 @@ export class AlgorithmicNumberingSystems {
     }
     return set ? new AlgorithmicNumberingSystem(rule, symbols, set) : U;
   }
-
 }
 
 export class AlgorithmicNumberingSystem {
-
-  constructor(
-    readonly name: string,
-    readonly symbols: RBNFSymbols,
-    readonly rbnf: RBNFSet) {}
+  constructor(readonly name: string, readonly symbols: RBNFSymbols, readonly rbnf: RBNFSet) {}
 
   format(n: Decimal, fallback: RBNFDecimalFormatter): string {
     return this.rbnf.format(this.name, this.symbols, n, fallback);
   }
-
 }

@@ -19,14 +19,16 @@ import { binarySearch } from './utils';
 // Divisors based on the number of integer digits in the number being formatted.
 // A 2-digit number's divisor will be '1e1', 3-digit '1e2' and so on.
 // This table stops just past the largest base value found in the RBNF dataset.
-const DIVISORS: Decimal[] = [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-  .map(e => new Decimal(`1e${e}`));
+const DIVISORS: Decimal[] = [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
+  (e) => new Decimal(`1e${e}`),
+);
 
 const { ONE, ZERO } = DecimalConstants;
 const MINUS_ONE = ONE.negate();
 const TEN = new Decimal(10);
 
-type IntegerSubInst = ApplyLeftRuleInst
+type IntegerSubInst =
+  | ApplyLeftRuleInst
   | ApplyLeft2RuleInst
   | ApplyLeft2NumFormatInst
   | ApplyLeftNumFormatInst
@@ -38,15 +40,13 @@ export interface RBNFSymbols {
   infinity: string;
 }
 
-export type RBNFDecimalFormatter =
-  (pattern: string, n: Decimal) => string;
+export type RBNFDecimalFormatter = (pattern: string, n: Decimal) => string;
 
 /**
  * A collection of multiple RBNF locale-specific rulesets with shared arrays of
  * symbols and numbers.
  */
 export class RBNF {
-
   protected symbols: string[];
   protected numbers: Decimal[];
   protected locales: Map<string, RBNFSet> = new Map<string, RBNFSet>();
@@ -69,8 +69,15 @@ export class RBNF {
    * Builds an RBNFSet instance, allowing overriding of construction in subclasses
    * (currently used for debugging).
    */
-  make(id: string, plurals: PluralRules, pub: string[], prv: string[],
-      numbers: Decimal[], symbols: string[], rulesets: RBNFRule[][]): RBNFSet {
+  make(
+    id: string,
+    plurals: PluralRules,
+    pub: string[],
+    prv: string[],
+    numbers: Decimal[],
+    symbols: string[],
+    rulesets: RBNFRule[][],
+  ): RBNFSet {
     return new RBNFSet(id, plurals, pub, prv, numbers, symbols, rulesets);
   }
 
@@ -80,7 +87,6 @@ export class RBNF {
   get(id: string): RBNFSet | undefined {
     return this.locales.get(id);
   }
-
 }
 
 /**
@@ -88,7 +94,6 @@ export class RBNF {
  * that jumps to another named rule always lands in the same ruleset.
  */
 export class RBNFSet {
-
   readonly language: string;
 
   // Lookup a public ruleset index by its name
@@ -107,7 +112,7 @@ export class RBNFSet {
     // Array of string symbols used in rules
     readonly symbols: string[],
     // Array of rulesets
-    readonly rulesets: RBNFRule[][]
+    readonly rulesets: RBNFRule[][],
   ) {
     this.language = id === 'root' ? id : id.split('-')[0];
     pubnames.forEach((n, i) => this.index.set(n, i));
@@ -119,8 +124,7 @@ export class RBNFSet {
    * language, using the given rules.
    */
   format(rulename: string, symbols: RBNFSymbols, n: Decimal, fallback: RBNFDecimalFormatter): string {
-    return new RBNFEngine(this.language, this.plurals, symbols, this, fallback)
-      .format(rulename, n);
+    return new RBNFEngine(this.language, this.plurals, symbols, this, fallback).format(rulename, n);
   }
 }
 
@@ -132,7 +136,6 @@ export class RBNFSet {
  * pack and only available when that language has been loaded.
  */
 export class RBNFEngine {
-
   private buf: string = '';
   private errors: string[] = [];
   private fractions: Set<number> = new Set<number>();
@@ -144,7 +147,7 @@ export class RBNFEngine {
     // Decimal point character: 0 = period, 1 = comma
     private symbols: RBNFSymbols,
     protected rbnf: RBNFSet,
-    protected fallback: RBNFDecimalFormatter
+    protected fallback: RBNFDecimalFormatter,
   ) {
     this.decimal = symbols.decimal === '.' ? 1 : 0;
   }
@@ -202,8 +205,12 @@ export class RBNFEngine {
           break;
 
         case RuleType.PROPER_FRACTION:
-          if (!int && fin && r[2] === this.decimal &&
-            ((neg && n.compare(MINUS_ONE) === 1) || (!neg && n.compare(ONE) === -1))) {
+          if (
+            !int &&
+            fin &&
+            r[2] === this.decimal &&
+            ((neg && n.compare(MINUS_ONE) === 1) || (!neg && n.compare(ONE) === -1))
+          ) {
             return i;
           }
           break;
@@ -219,8 +226,12 @@ export class RBNFEngine {
         case RuleType.NORMAL_RADIX:
           if (fin) {
             const m = n.abs();
-            const j = binarySearch(rules as (NormalRule | NormalRadixRule)[],
-                true, i, (e: (NormalRule | NormalRadixRule)): number => this.rbnf.numbers[e[2]].compare(m));
+            const j = binarySearch(
+              rules as (NormalRule | NormalRadixRule)[],
+              true,
+              i,
+              (e: NormalRule | NormalRadixRule): number => this.rbnf.numbers[e[2]].compare(m),
+            );
             if (j < i) {
               const name = this.rbnf.allnames[si];
               this.errors.push(`Malformed rules in ruleset '${name}' at ${i} for ${n.toString()}: got ${j}`);
@@ -255,9 +266,9 @@ export class RBNFEngine {
           const q = n.divmod(this.getradix(r))[0];
           const cat = this.plural(q.stripTrailingZeros(), inst[0] === Opcode.CARDINAL);
           // Select string matching plural category, and fall back to 'other'
-          let subs = inst[1].filter(s => s[0] === cat);
+          let subs = inst[1].filter((s) => s[0] === cat);
           if (!subs.length) {
-            subs = inst[1].filter(s => s[0] === PLURALS['other']);
+            subs = inst[1].filter((s) => s[0] === PLURALS['other']);
           }
           if (subs.length) {
             this.symbol(subs[0][1]);
@@ -380,17 +391,16 @@ export class RBNFEngine {
 
   protected modulussub(n: Decimal, inst: RBNFInst, radix: Decimal, _ri: number, si: number): void {
     const r = n.divmod(radix)[1];
-      switch (inst[0]) {
-        case Opcode.APPLY_RIGHT_RULE:
-        case Opcode.SUB_RIGHT:
-          this._format(r, inst[0] === Opcode.SUB_RIGHT ? si : inst[1]);
-          break;
-      }
+    switch (inst[0]) {
+      case Opcode.APPLY_RIGHT_RULE:
+      case Opcode.SUB_RIGHT:
+        this._format(r, inst[0] === Opcode.SUB_RIGHT ? si : inst[1]);
+        break;
+    }
   }
 
   protected plural(n: Decimal, cardinal: boolean): number {
-    const cat = cardinal ?
-      this.plurals.cardinal(n) : this.plurals.ordinal(n);
+    const cat = cardinal ? this.plurals.cardinal(n) : this.plurals.ordinal(n);
     return PLURALS[cat];
   }
 
@@ -412,7 +422,10 @@ export class RBNFEngine {
 
   protected getradix(r: RBNFRule): Decimal {
     const n = this.rbnf.numbers;
-    return r[0] === RuleType.NORMAL_RADIX ? n[r[3]] :
-      r[0] === RuleType.NORMAL ? DIVISORS[n[r[2]].integerDigits()] : TEN;
+    return r[0] === RuleType.NORMAL_RADIX
+      ? n[r[3]]
+      : r[0] === RuleType.NORMAL
+      ? DIVISORS[n[r[2]].integerDigits()]
+      : TEN;
   }
 }

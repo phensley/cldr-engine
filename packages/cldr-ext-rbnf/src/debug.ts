@@ -17,7 +17,7 @@ const REVPLURALS: { [x: number]: string } = {
   2: 'two',
   3: 'few',
   4: 'many',
-  5: 'other'
+  5: 'other',
 };
 
 export interface RBNFDebugSettings {
@@ -26,21 +26,26 @@ export interface RBNFDebugSettings {
 }
 
 export class RBNF extends RBNFBase {
-
   static settings: RBNFDebugSettings = {};
 
   constructor(plurals: PluralRules, spellout: any) {
     super(plurals, spellout);
   }
 
-  make(id: string, plurals: PluralRules, pub: string[], prv: string[],
-      numbers: Decimal[], symbols: string[], rulesets: RBNFRule[][]): RBNFSetBase {
+  make(
+    id: string,
+    plurals: PluralRules,
+    pub: string[],
+    prv: string[],
+    numbers: Decimal[],
+    symbols: string[],
+    rulesets: RBNFRule[][],
+  ): RBNFSetBase {
     return new RBNFDebugSet(id, plurals, pub, prv, numbers, symbols, rulesets, RBNF.settings);
   }
 }
 
 export class RBNFDebugSet extends RBNFSetBase {
-
   /**
    * Collect and report ruleset coverage information.
    */
@@ -54,14 +59,21 @@ export class RBNFDebugSet extends RBNFSetBase {
     numbers: Decimal[],
     symbols: string[],
     rulesets: RBNFRule[][],
-    private settings: RBNFDebugSettings
+    private settings: RBNFDebugSettings,
   ) {
     super(id, plurals, pubnames, prvnames, numbers, symbols, rulesets);
   }
 
   format(rulename: string, symbols: RBNFSymbols, n: Decimal, fallback: RBNFDecimalFormatter): string {
-    return new RBNFDebugEngine(this.language, this.plurals, symbols, this, fallback, this.settings, this.coverage)
-      .format(rulename, n);
+    return new RBNFDebugEngine(
+      this.language,
+      this.plurals,
+      symbols,
+      this,
+      fallback,
+      this.settings,
+      this.coverage,
+    ).format(rulename, n);
   }
 
   report(detail: boolean = false): void {
@@ -87,7 +99,8 @@ export class RBNFDebugSet extends RBNFSetBase {
         padleft(`${count}`, 2),
         '/',
         padleft(`${rules.length}`, 2),
-        ']', name
+        ']',
+        name,
       );
       if (detail && pct < 100) {
         console.log(rpt);
@@ -98,7 +111,7 @@ export class RBNFDebugSet extends RBNFSetBase {
 
 export const padleft = (s: string, n: number) => {
   const d = n - s.length;
-  return  ' '.repeat(d > 0 ? d : 0) + s;
+  return ' '.repeat(d > 0 ? d : 0) + s;
 };
 
 export const padright = (s: string, n: number) => {
@@ -109,7 +122,6 @@ export const padright = (s: string, n: number) => {
 type tracefunc = (...s: any[]) => void;
 
 class RBNFDebugEngine extends RBNFEngineBase {
-
   private depth: number = 0;
   private id: number = 0;
 
@@ -120,7 +132,7 @@ class RBNFDebugEngine extends RBNFEngineBase {
     rbnf: RBNFSetBase,
     fallback: RBNFDecimalFormatter,
     private settings: RBNFDebugSettings,
-    private coverage: Map<number, Set<number>>
+    private coverage: Map<number, Set<number>>,
   ) {
     super(language, plurals, symbols, rbnf, fallback);
   }
@@ -150,9 +162,8 @@ class RBNFDebugEngine extends RBNFEngineBase {
     }
     let t: tracefunc | undefined;
     if (this.settings.trace) {
-      t = this.trace(
-        `_evalinst '${n.toString()}' ${this.rbnf.allnames[si]} ${rulerepr(this.rbnf, r)}`);
-      }
+      t = this.trace(`_evalinst '${n.toString()}' ${this.rbnf.allnames[si]} ${rulerepr(this.rbnf, r)}`);
+    }
     super._evalinst(n, i, r, ri, si);
     if (this.settings.trace) {
       t!('_evalinst');
@@ -191,8 +202,8 @@ const rulerepr = (rbnf: RBNFSetBase, rule: RBNFRule): string => {
       break;
     default:
       res += '!!!!!';
-    }
-  res += '  "' + rule[1].map(i => instrepr(rbnf, i)).join('') + ';"';
+  }
+  res += '  "' + rule[1].map((i) => instrepr(rbnf, i)).join('') + ';"';
   return res;
 };
 
@@ -209,7 +220,7 @@ const instrepr = (rbnf: RBNFSetBase, i: RBNFInst): string => {
     case Opcode.APPLY_RIGHT_RULE:
       return `>%${rbnf.allnames[i[1]]}%>`;
     case Opcode.OPTIONAL:
-      return '[' + i[1].map(_i => instrepr(rbnf, _i)).join('') + ']';
+      return '[' + i[1].map((_i) => instrepr(rbnf, _i)).join('') + ']';
     case Opcode.LITERAL:
       return rbnf.symbols[i[1]];
     case Opcode.SUB_LEFT:
@@ -225,7 +236,7 @@ const instrepr = (rbnf: RBNFSetBase, i: RBNFInst): string => {
     case Opcode.CARDINAL:
     case Opcode.ORDINAL:
       const r = i[0] === Opcode.CARDINAL ? 'cardinal' : 'ordinal';
-      const subs = i[1].map(s => `${REVPLURALS[s[0]]}{${rbnf.symbols[s[1]]}}`).join('');
+      const subs = i[1].map((s) => `${REVPLURALS[s[0]]}{${rbnf.symbols[s[1]]}}`).join('');
       return `$(${r},${subs})$`;
     default:
       return OPCODES[i[0]];
@@ -257,5 +268,5 @@ export const RULETYPES = {
   [RuleType.NORMAL]: 'NORMAL',
   [RuleType.NORMAL_RADIX]: 'NORMAL_RADIX',
   [RuleType.NOT_A_NUMBER]: 'NOT_A_NUMBER',
-  [RuleType.PROPER_FRACTION]: 'PROPER_FRACTION'
+  [RuleType.PROPER_FRACTION]: 'PROPER_FRACTION',
 };

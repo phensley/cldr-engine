@@ -15,19 +15,12 @@ export const enum RuleType {
   NORMAL = 3,
   NORMAL_RADIX = 4,
   INFINITY = 5,
-  NOT_A_NUMBER = 6
+  NOT_A_NUMBER = 6,
 }
 
-export type AtomType =
-  RuleType.MINUS
-  | RuleType.INFINITY
-  | RuleType.NOT_A_NUMBER
-  ;
+export type AtomType = RuleType.MINUS | RuleType.INFINITY | RuleType.NOT_A_NUMBER;
 
-export type FractionType =
-  RuleType.PROPER_FRACTION
-  | RuleType.IMPROPER_FRACTION
-  ;
+export type FractionType = RuleType.PROPER_FRACTION | RuleType.IMPROPER_FRACTION;
 
 /**
  * An atom rule has a type and one or more instructions to evaluate.
@@ -212,7 +205,8 @@ export interface OrdinalInst {
   readonly [1]: PluralSub[];
 }
 
-export type RBNFInst = LiteralInst
+export type RBNFInst =
+  | LiteralInst
   | ApplyLeftRuleInst
   | ApplyLeftNumFormatInst
   | ApplyLeft2RuleInst
@@ -226,8 +220,7 @@ export type RBNFInst = LiteralInst
   | SubRightInst
   | SubRight3Inst
   | UnchangedRuleInst
-  | UnchangedNumFormatInst
-  ;
+  | UnchangedNumFormatInst;
 
 // Mapping from string name of plural category to rbnf equivalent
 export const PLURALS: { [x: string]: number } = {
@@ -236,5 +229,5 @@ export const PLURALS: { [x: string]: number } = {
   two: 2,
   few: 3,
   many: 4,
-  other: 5
+  other: 5,
 };
