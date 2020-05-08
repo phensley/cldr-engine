@@ -73,7 +73,7 @@ export interface Tz {
   zoneIds(): string[];
 }
 
-const numarray = (s: string) => s ? s.split(' ').map(n => parseInt(n, 36)) : [];
+const numarray = (s: string) => (s ? s.split(' ').map((n) => parseInt(n, 36)) : []);
 
 /**
  * Implements the time zone lookup.
@@ -81,7 +81,6 @@ const numarray = (s: string) => s ? s.split(' ').map(n => parseInt(n, 36)) : [];
  * @public
  */
 export class TzImpl {
-
   /** Mapping of canonical time zone ids to index */
   private zoneindex: Map<string, number> = new Map();
 
@@ -104,12 +103,12 @@ export class TzImpl {
   private utcinfo: ZoneInfo = { zoneid: 'Etc/UTC', abbr: 'UTC', dst: 0, offset: 0 };
 
   constructor(raw: RawData) {
+    const zoneids = raw.zoneids.split('|').map((e, i) => [e, i] as [string, number]);
 
-    const zoneids = raw.zoneids.split('|')
-      .map((e, i) => [e, i] as [string, number]);
-
-    const links = raw.links.split('|')
-      .map(e => { const [k, j] = e.split(':'); return [k, Number(j)] as [string, number]; });
+    const links = raw.links.split('|').map((e) => {
+      const [k, j] = e.split(':');
+      return [k, Number(j)] as [string, number];
+    });
 
     const addlink = (src: string, dst: string) => {
       // index a few supported forms of the time zone id or alias
@@ -119,7 +118,7 @@ export class TzImpl {
     };
 
     this._zoneids = [];
-    zoneids.forEach(i => {
+    zoneids.forEach((i) => {
       const id = i[0];
       this._zoneids.push(id);
       this.zoneindex.set(id, i[1]);
@@ -128,7 +127,7 @@ export class TzImpl {
       addlink(id, id);
     });
 
-    links.forEach(i => {
+    links.forEach((i) => {
       const alias = i[0];
       const id = zoneids[i[1]][0];
       addlink(alias, id);
@@ -188,10 +187,13 @@ export class TzImpl {
     if (rec) {
       const [zoneid, r] = rec;
       const [utc, res] = isutc ? r.fromUTC(t) : r.fromWall(t);
-      return [utc, {
-        ...res,
-        zoneid
-      }];
+      return [
+        utc,
+        {
+          ...res,
+          zoneid,
+        },
+      ];
     }
     return undefined;
   }
@@ -222,7 +224,6 @@ export class TzImpl {
     // Return canonical time zone id with its record
     return [id, rec];
   }
-
 }
 
 /**
@@ -231,7 +232,6 @@ export class TzImpl {
  * @internal
  */
 class ZoneRecord {
-
   readonly localtime: ZoneInfoRec[];
   readonly types: number[];
   readonly untils: number[];
@@ -240,14 +240,14 @@ class ZoneRecord {
   constructor(raw: string, index: number[]) {
     const [_info, _types, _untils] = raw.split('_');
     const untils = numarray(_untils);
-    const types = _types ? _types.split('').map(t => TYPES[t]) : [];
+    const types = _types ? _types.split('').map((t) => TYPES[t]) : [];
 
     // Decode initial until and the deltas
     const len = untils.length;
     if (len > 0) {
       untils[0] = index[untils[0]] * 1000;
       for (let i = 1; i < len; i++) {
-        untils[i] = untils[i - 1] + (index[untils[i]] * 1000);
+        untils[i] = untils[i - 1] + index[untils[i]] * 1000;
       }
     }
 
@@ -275,7 +275,6 @@ class ZoneRecord {
    * the boundary, or within the transitional gap.
    */
   fromWall(wall: number): [number, ZoneInfoRec] {
-
     // Find the until one day before our wall time
     let i = binarySearch(this.untils, true, wall - 86400000);
     const r0 = this.localtime[i === -1 ? 0 : this.types[i]];
@@ -338,17 +337,15 @@ class ZoneRecord {
     return {
       abbr,
       dst: Number(_dst),
-      offset: parseInt(_offset, 36) * 1000
+      offset: parseInt(_offset, 36) * 1000,
     };
   }
-
 }
 
-const TYPES = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-  .reduce((p, c, i) => {
-    p[c] = i;
-    return p;
-  }, {} as { [x: string]: number });
+const TYPES = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').reduce((p, c, i) => {
+  p[c] = i;
+  return p;
+}, {} as { [x: string]: number });
 
 interface ZoneInfoRec {
   abbr: string;
