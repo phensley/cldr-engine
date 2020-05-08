@@ -5,25 +5,20 @@ export const enum LanguageTagField {
   LANGUAGE = 0,
   SCRIPT = 1,
   REGION = 2,
-  VARIANT = 3
+  VARIANT = 3,
 }
 
 const SEP = '-';
 
-const UNDEFINED_VALUES = [
-  'und',
-  'Zzzz',
-  'ZZ',
-  '',
-];
+const UNDEFINED_VALUES = ['und', 'Zzzz', 'ZZ', ''];
 
 const KEYS = [LanguageTagField.LANGUAGE, LanguageTagField.SCRIPT, LanguageTagField.REGION, LanguageTagField.VARIANT];
 
 const TRANSFORMS: ((s: string) => string)[] = [
-  s => s.toLowerCase(),
-  s => s[0].toUpperCase() + s.substring(1).toLowerCase(),
-  s => s.toUpperCase(),
-  s => s.toLowerCase(),
+  (s) => s.toLowerCase(),
+  (s) => s[0].toUpperCase() + s.substring(1).toLowerCase(),
+  (s) => s.toUpperCase(),
+  (s) => s.toLowerCase(),
 ];
 
 /**
@@ -48,7 +43,6 @@ const canonicalize = (field: number, value?: string): string | undefined => {
  * @public
  */
 export class LanguageTag {
-
   protected core: (undefined | string)[];
   protected _extensions: { [x: string]: string[] };
   protected _privateUse: string;
@@ -61,12 +55,13 @@ export class LanguageTag {
     region?: string,
     variant?: string,
     extensions?: { [x: string]: string[] },
-    privateUse?: string) {
+    privateUse?: string,
+  ) {
     this.core = [
       canonicalize(LanguageTagField.LANGUAGE, language),
       canonicalize(LanguageTagField.SCRIPT, script),
       canonicalize(LanguageTagField.REGION, region),
-      canonicalize(LanguageTagField.VARIANT, variant)
+      canonicalize(LanguageTagField.VARIANT, variant),
     ];
     this._extensions = extensions || {};
     this._privateUse = privateUse || '';
@@ -127,7 +122,7 @@ export class LanguageTag {
   extensions(): { [x: string]: string[] } {
     const exts = this._extensions;
     const res: { [x: string]: string[] } = {};
-    Object.keys(exts).forEach(k => {
+    Object.keys(exts).forEach((k) => {
       res[k] = exts[k];
     });
     return res;
@@ -184,7 +179,7 @@ export class LanguageTag {
    */
   private render(expanded: boolean): string {
     let buf: string = '';
-    KEYS.forEach(key => {
+    KEYS.forEach((key) => {
       const force: boolean = key !== LanguageTagField.VARIANT && (key === LanguageTagField.LANGUAGE || expanded);
       const val: string | undefined = this.core[key];
       if (val !== undefined || force) {
@@ -197,7 +192,7 @@ export class LanguageTag {
     const exts = this._extensions;
     const keys = Object.keys(exts);
     if (keys.length) {
-      keys.sort().forEach(k => {
+      keys.sort().forEach((k) => {
         const vals = exts[k];
         if (vals !== undefined && vals.length > 0) {
           buf += SEP + k + SEP + exts[k].join(SEP);
@@ -209,5 +204,4 @@ export class LanguageTag {
     }
     return buf;
   }
-
 }

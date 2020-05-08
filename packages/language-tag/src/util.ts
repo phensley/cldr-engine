@@ -17,7 +17,7 @@ const buildTerritoryAliasMap = (): TerritoryAliasMap => {
 
 let TERRITORY_ALIAS_MAP: TerritoryAliasMap;
 
-const init = () => TERRITORY_ALIAS_MAP = buildTerritoryAliasMap();
+const init = () => (TERRITORY_ALIAS_MAP = buildTerritoryAliasMap());
 
 /**
  * Helper for the language tag parser to fix overlong region fields that may

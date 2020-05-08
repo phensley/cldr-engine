@@ -33,7 +33,7 @@ const UNICODE_EXTENSION_KEYS: Set<string> = new Set([
   'cu', // currency
   'nu', // numbering system
   'tz', // timezone
-  'va'  // common variant type
+  'va', // common variant type
 ]);
 
 // Grandfathered irregular and regular tags from IANA registry.
@@ -49,7 +49,7 @@ const init = () => {
     'i-default': 'en-x-i-default',
     'i-enochian': 'und-x-i-enochian',
     'i-mingo': 'see-x-i-mingo',
-    'zh-min': 'nan-x-zh-min'
+    'zh-min': 'nan-x-zh-min',
   };
 };
 
@@ -72,7 +72,6 @@ const match = (parts: string[], pattern: RegExp): string | undefined => {
  * Parses a string into a series of language tag fields.
  */
 class LanguageTagParser {
-
   private language?: string;
   private script?: string;
   private region?: string;
@@ -126,7 +125,7 @@ class LanguageTagParser {
       this.region,
       this.variants.length === 0 ? undefined : this.variants[0],
       this.extensions,
-      this.privateUse
+      this.privateUse,
     );
   }
 
@@ -232,7 +231,6 @@ class LanguageTagParser {
     }
     return parsed;
   }
-
 }
 
 /**
