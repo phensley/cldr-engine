@@ -15,14 +15,25 @@ export const enum DateTimePatternField {
   DAYPERIOD = 'a', // am / pm
   HOUR = 'H',
   MINUTE = 'm',
-  SECOND = 's'
+  SECOND = 's',
 }
 
 /**
  * @public
  */
-export type DayPeriodType = 'noon' | 'midnight' | 'am' | 'pm' | 'morning1' | 'morning2' |
-  'afternoon1' | 'afternoon2' | 'evening1' | 'evening2' | 'night1' | 'night2';
+export type DayPeriodType =
+  | 'noon'
+  | 'midnight'
+  | 'am'
+  | 'pm'
+  | 'morning1'
+  | 'morning2'
+  | 'afternoon1'
+  | 'afternoon2'
+  | 'evening1'
+  | 'evening2'
+  | 'night1'
+  | 'night2';
 
 /**
  * @public
@@ -39,7 +50,7 @@ export const enum DayPeriod {
   EVENING1 = 'evening1',
   EVENING2 = 'evening2',
   NIGHT1 = 'night1',
-  NIGHT2 = 'night2'
+  NIGHT2 = 'night2',
 }
 
 /**
@@ -53,7 +64,7 @@ export type EraWidthType = 'names' | 'abbr' | 'narrow';
 export const enum EraWidth {
   NAMES = 'names',
   ABBR = 'abbr',
-  NARROW = 'narrow'
+  NARROW = 'narrow',
 }
 
 /**
@@ -68,7 +79,7 @@ export const enum FieldWidth {
   ABBREVIATED = 'abbreviated',
   NARROW = 'narrow',
   SHORT = 'short',
-  WIDE = 'wide'
+  WIDE = 'wide',
 }
 
 /**
@@ -83,7 +94,7 @@ export const enum FormatWidth {
   SHORT = 'short',
   MEDIUM = 'medium',
   LONG = 'long',
-  FULL = 'full'
+  FULL = 'full',
 }
 
 /**
@@ -98,7 +109,7 @@ export const enum Quarter {
   FIRST = '1',
   SECOND = '2',
   THIRD = '3',
-  FOURTH = '4'
+  FOURTH = '4',
 }
 
 /**
@@ -116,5 +127,5 @@ export const enum Weekday {
   WEDNESDAY = '4',
   THURSDAY = '5',
   FRIDAY = '6',
-  SATURDAY = '7'
+  SATURDAY = '7',
 }

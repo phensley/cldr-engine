@@ -1,27 +1,10 @@
-import {
-  DigitsArrow,
-  FieldArrow,
-  ScopeArrow,
-  Vector1Arrow,
-  Vector2Arrow,
-  Vector3Arrow
-} from './arrows';
+import { DigitsArrow, FieldArrow, ScopeArrow, Vector1Arrow, Vector2Arrow, Vector3Arrow } from './arrows';
 
-import {
-  DateTimePatternFieldType,
-  EraWidthType,
-  FormatWidthType,
-} from './calendars';
+import { DateTimePatternFieldType, EraWidthType, FormatWidthType } from './calendars';
 
-import {
-  DateFieldType,
-  DateFieldWidthType,
-  RelativeTimeFieldType
-} from './datefields';
+import { DateFieldType, DateFieldWidthType, RelativeTimeFieldType } from './datefields';
 
-import {
-  ListPatternPositionType,
-} from './general';
+import { ListPatternPositionType } from './general';
 
 import {
   CurrencySpacingPattern,
@@ -29,7 +12,7 @@ import {
   NumberMiscPatternType,
   NumberSymbolType,
   NumberSystemCategory,
-  NumberSystemName
+  NumberSystemName,
 } from './numbers';
 
 import { LanguageIdType, RegionIdType, ScriptIdType } from './autogen.identifiers';
@@ -72,33 +55,25 @@ export interface CalendarSchema {
  * @public
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface BuddhistSchema extends CalendarSchema {
-
-}
+export interface BuddhistSchema extends CalendarSchema {}
 
 /**
  * @public
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface GregorianSchema extends CalendarSchema {
-
-}
+export interface GregorianSchema extends CalendarSchema {}
 
 /**
  * @public
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface JapaneseSchema extends CalendarSchema {
-
-}
+export interface JapaneseSchema extends CalendarSchema {}
 
 /**
  * @public
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface PersianSchema extends CalendarSchema {
-
-}
+export interface PersianSchema extends CalendarSchema {}
 
 // CURRENCIES
 

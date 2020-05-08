@@ -2,16 +2,73 @@
  * TODO: may not need this
  * @public
  */
-export type DateFieldSymbol = 'G' | 'y' | 'Y' | 'u' | 'U' | 'r' | 'Q' | 'q' | 'M' | 'L' | 'l' | 'w' | 'W' |
-  'd' | 'D' | 'F' | 'g' | 'E' | 'e' | 'c' | 'a' | 'b' | 'B' | 'h' | 'H' | 'K' | 'k' | 'j' | 'J' | 'C' | 'm' |
-  's' | 'S' | 'A' | 'z' | 'Z' | 'O' | 'v' | 'V' | 'X' | 'x';
+export type DateFieldSymbol =
+  | 'G'
+  | 'y'
+  | 'Y'
+  | 'u'
+  | 'U'
+  | 'r'
+  | 'Q'
+  | 'q'
+  | 'M'
+  | 'L'
+  | 'l'
+  | 'w'
+  | 'W'
+  | 'd'
+  | 'D'
+  | 'F'
+  | 'g'
+  | 'E'
+  | 'e'
+  | 'c'
+  | 'a'
+  | 'b'
+  | 'B'
+  | 'h'
+  | 'H'
+  | 'K'
+  | 'k'
+  | 'j'
+  | 'J'
+  | 'C'
+  | 'm'
+  | 's'
+  | 'S'
+  | 'A'
+  | 'z'
+  | 'Z'
+  | 'O'
+  | 'v'
+  | 'V'
+  | 'X'
+  | 'x';
 
 /**
  * @public
  */
-export type DateFieldType = 'era' | 'year' | 'quarter' | 'month' | 'week' |
-  'weekday' | 'weekdayOfMonth' | 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' |
-  'day' | 'dayperiod' | 'hour' | 'minute' | 'second' | 'zone';
+export type DateFieldType =
+  | 'era'
+  | 'year'
+  | 'quarter'
+  | 'month'
+  | 'week'
+  | 'weekday'
+  | 'weekdayOfMonth'
+  | 'sun'
+  | 'mon'
+  | 'tue'
+  | 'wed'
+  | 'thu'
+  | 'fri'
+  | 'sat'
+  | 'day'
+  | 'dayperiod'
+  | 'hour'
+  | 'minute'
+  | 'second'
+  | 'zone';
 
 /**
  * @public
@@ -38,7 +95,7 @@ export const enum DateField {
   HOUR = 'hour',
   MINUTE = 'minute',
   SECOND = 'second',
-  ZONE = 'zone'
+  ZONE = 'zone',
 }
 
 /**
@@ -52,14 +109,28 @@ export type DateFieldWidthType = 'short' | 'narrow' | 'wide';
 export const enum DateFieldWidth {
   SHORT = 'short',
   NARROW = 'narrow',
-  WIDE = 'wide'
+  WIDE = 'wide',
 }
 
 /**
  * @public
  */
-export type RelativeTimeFieldType = 'year' | 'quarter' | 'month' | 'week' | 'day' |
-  'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'hour' | 'minute' | 'second';
+export type RelativeTimeFieldType =
+  | 'year'
+  | 'quarter'
+  | 'month'
+  | 'week'
+  | 'day'
+  | 'sun'
+  | 'mon'
+  | 'tue'
+  | 'wed'
+  | 'thu'
+  | 'fri'
+  | 'sat'
+  | 'hour'
+  | 'minute'
+  | 'second';
 
 /**
  * @public
@@ -79,5 +150,5 @@ export const enum RelativeTimeField {
   SAT = 'sat',
   HOUR = 'hour',
   MINUTE = 'minute',
-  SECOND = 'second'
+  SECOND = 'second',
 }
