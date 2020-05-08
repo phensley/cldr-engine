@@ -7,12 +7,12 @@ type G<T> = { [src: string]: M<T> };
 
 type C = [
   number, // cost
-  string | undefined  // previous
+  string | undefined, // previous
 ];
 
 type E = [
   string, // edge
-  number  // cost
+  number, // cost
 ];
 
 /**
@@ -44,7 +44,6 @@ const ONE = new Rational(1);
  * @public
  */
 export class UnitFactors {
-
   readonly units: string[] = [];
   readonly unitset: Set<string> = new Set();
   private graph: G<Rational> = {};
@@ -60,7 +59,7 @@ export class UnitFactors {
       this.unitset.add(src);
       this.unitset.add(dst);
     }
-    this.unitset.forEach(u => this.units.push(u));
+    this.unitset.forEach((u) => this.units.push(u));
     this.units.sort();
   }
 
@@ -190,7 +189,7 @@ export class UnitFactors {
 /**
  * Compare edge cost
  */
-const cmp = (x: E, y: E) => x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0;
+const cmp = (x: E, y: E) => (x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0);
 
 /**
  * Return the maximum precision between the numerator and denominator
@@ -198,7 +197,7 @@ const cmp = (x: E, y: E) => x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0;
 const precision = (r: Rational) => {
   const n = r.numerator();
   const d = r.denominator();
-  return (n.precision() + n.alignexp()) + (d.precision() + d.alignexp());
+  return n.precision() + n.alignexp() + (d.precision() + d.alignexp());
 };
 
 /**

@@ -15,9 +15,7 @@ const kfactors = (f: string, u: string[]) => {
  *
  * @public
  */
-export const ACCELERATION: FactorDef[] = [
-  ['g-force', '9.80665', 'meter-per-square-second']
-];
+export const ACCELERATION: FactorDef[] = [['g-force', '9.80665', 'meter-per-square-second']];
 
 /**
  * Conversions between CLDR angle units.
@@ -28,7 +26,7 @@ export const ANGLE: FactorDef[] = [
   ['revolution', '360', 'degree'],
   ['arc-minute', '1/60', 'degree'],
   ['arc-second', '1/60', 'arc-minute'],
-  ['radian', '0.5 / ' + PI, 'revolution']
+  ['radian', '0.5 / ' + PI, 'revolution'],
 ];
 
 /**
@@ -46,7 +44,7 @@ export const AREA: FactorDef[] = [
   ['square-mile', '27878400', 'square-foot'],
   ['acre', '43560', 'square-foot'],
   ['square-yard', '9', 'square-foot'],
-  ['square-foot', '144', 'square-inch']
+  ['square-foot', '144', 'square-inch'],
 ];
 
 /**
@@ -54,34 +52,29 @@ export const AREA: FactorDef[] = [
  *
  * @public
  */
-export const CONSUMPTION: FactorDef[] = [
-  ['liter-per-100-kilometer', '1 / 100', 'liter-per-kilometer']
-];
+export const CONSUMPTION: FactorDef[] = [['liter-per-100-kilometer', '1 / 100', 'liter-per-kilometer']];
 
-const DIGITAL_BASE: FactorDef[] =
-  kfactors('1000', ['terabit', 'gigabit', 'megabit', 'kilobit', 'bit']).concat([
-    ['byte', '8', 'bit'],
-  ]);
+const DIGITAL_BASE: FactorDef[] = kfactors('1000', ['terabit', 'gigabit', 'megabit', 'kilobit', 'bit']).concat([
+  ['byte', '8', 'bit'],
+]);
 
 /**
  * Conversions between CLDR digital units.
  *
  * @public
  */
-export const DIGITAL: FactorDef[] =
-  DIGITAL_BASE.concat(
-    kfactors('1024', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
-  );
+export const DIGITAL: FactorDef[] = DIGITAL_BASE.concat(
+  kfactors('1024', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte']),
+);
 
 /**
  * Conversions between CLDR digital units where 1 kilobyte is 1000 bytes.
  *
  * @public
  */
-export const DIGITAL_DECIMAL: FactorDef[] =
-  DIGITAL_BASE.concat(
-    kfactors('1000', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte'])
-  );
+export const DIGITAL_DECIMAL: FactorDef[] = DIGITAL_BASE.concat(
+  kfactors('1000', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte']),
+);
 
 /**
  * Duration factors.  Values for month, year, century are approximate. If you
@@ -100,7 +93,7 @@ export const DURATION: FactorDef[] = [
   ['minute', '60', 'second'],
   ['second', '1000', 'millisecond'],
   ['millisecond', '1000', 'microsecond'],
-  ['microsecond', '1000', 'nanosecond']
+  ['microsecond', '1000', 'nanosecond'],
 ];
 
 /**
@@ -108,9 +101,7 @@ export const DURATION: FactorDef[] = [
  *
  * @public
  */
-export const ELECTRIC: FactorDef[] = [
-  ['ampere', '1000', 'milliampere']
-];
+export const ELECTRIC: FactorDef[] = [['ampere', '1000', 'milliampere']];
 
 /**
  * Conversions between CLDR energy units.
@@ -122,7 +113,7 @@ export const ENERGY: FactorDef[] = [
   ['kilowatt-hour', '3600000', 'joule'],
   ['calorie', '4.1868', 'joule'],
   ['foodcalorie', '523 / 125', 'joule'],
-  ['kilocalorie', '1000', 'calorie']
+  ['kilocalorie', '1000', 'calorie'],
 ];
 
 /**
@@ -130,17 +121,14 @@ export const ENERGY: FactorDef[] = [
  *
  * @public
  */
-export const FORCE: FactorDef[] = [
-  ['pound-force', '4.448222', 'newton']
-];
+export const FORCE: FactorDef[] = [['pound-force', '4.448222', 'newton']];
 
 /**
  * Conversions between CLDR frequency units.
  *
  * @public
  */
-export const FREQUENCY: FactorDef[] =
-  kfactors('1000', ['gigahertz', 'megahertz', 'kilohertz', 'hertz']);
+export const FREQUENCY: FactorDef[] = kfactors('1000', ['gigahertz', 'megahertz', 'kilohertz', 'hertz']);
 
 /**
  * Conversions between CLDR graphics 'per' units.
@@ -157,9 +145,7 @@ export const GRAPHICS_PER: FactorDef[] = [
  *
  * @public
  */
-export const GRAPHICS_PIXEL: FactorDef[] = [
-  ['megapixel', '1000000', 'pixel']
-];
+export const GRAPHICS_PIXEL: FactorDef[] = [['megapixel', '1000000', 'pixel']];
 
 /**
  * Conversions between CLDR length units.
@@ -217,10 +203,9 @@ export const MASS: FactorDef[] = [
  *
  * @public
  */
-export const POWER: FactorDef[] =
-  kfactors('1000', ['gigawatt', 'megawatt', 'kilowatt', 'watt']).concat([
-    ['horsepower', '745.69987158227', 'watt']
-  ]);
+export const POWER: FactorDef[] = kfactors('1000', ['gigawatt', 'megawatt', 'kilowatt', 'watt']).concat([
+  ['horsepower', '745.69987158227', 'watt'],
+]);
 
 /**
  * Conversions between CLDR pressure units.
@@ -231,7 +216,7 @@ export const PRESSURE: FactorDef[] = [
   ['hectopascal', '1', 'millibar'],
   ['hectopascal', '129032000000 / 8896443230521', 'pound-force-per-square-inch'],
   ['inch-ofhg', '33.86389', 'hectopascal'],
-  ['millimeter-ofhg', '1013.25 / 760', 'hectopascal']
+  ['millimeter-ofhg', '1013.25 / 760', 'hectopascal'],
 ];
 
 /**
@@ -242,7 +227,7 @@ export const PRESSURE: FactorDef[] = [
 export const SPEED: FactorDef[] = [
   ['kilometer-per-hour', '5 / 18', 'meter-per-second'],
   ['mile-per-hour', '1397 / 3125', 'meter-per-second'],
-  ['knot', '463 / 900', 'meter-per-second']
+  ['knot', '463 / 900', 'meter-per-second'],
 ];
 
 /**
@@ -250,9 +235,7 @@ export const SPEED: FactorDef[] = [
  *
  * @public
  */
-export const TORQUE: FactorDef[] = [
-  ['pound-force-foot', '1.35582', 'newton-meter']
-];
+export const TORQUE: FactorDef[] = [['pound-force-foot', '1.35582', 'newton-meter']];
 
 const VOLUME_BASE: FactorDef[] = [
   ['cubic-kilometer', '1000000000', 'cubic-meter'],
@@ -313,5 +296,5 @@ export const VOLUME_UK: FactorDef[] = VOLUME_BASE.concat([
   ['fluid-ounce', '1 / 160', 'gallon-imperial'],
   ['quart', '1 / 4', 'gallon-imperial'],
   ['pint', '1 / 8', 'gallon-imperial'],
-  ['cup', '284.1', 'milliliter']
+  ['cup', '284.1', 'milliliter'],
 ]);

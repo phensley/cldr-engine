@@ -7,7 +7,6 @@ import { UnitConversion, UnitFactors } from './factormap';
  * @public
  */
 export class UnitConverter {
-
   private storage: { [category: string]: UnitFactors } = {};
 
   // Mapping of unit to category that converts it
@@ -64,7 +63,7 @@ export class UnitConverter {
 
   /**
    * Convert the decimal value from `src` to `dst` units.
-  */
+   */
   convert(category: string, n: Decimal, src: string, dst: string, ctx?: MathContext): Decimal | undefined {
     const conv = this.get(category, src, dst);
     if (conv) {
@@ -73,5 +72,4 @@ export class UnitConverter {
     }
     return undefined;
   }
-
 }
