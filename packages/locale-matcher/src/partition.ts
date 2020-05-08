@@ -4,8 +4,8 @@ type ArrayMap = { [x: string]: string[] };
 
 const buildArrayMap = (raw: string): ArrayMap => {
   const res: ArrayMap = {};
-  raw.split('|').forEach(e => {
-    const [ k, vs ] = e.split(':');
+  raw.split('|').forEach((e) => {
+    const [k, vs] = e.split(':');
     res[k] = vs.split('');
   });
   return res;
@@ -15,7 +15,7 @@ let regionToPartition: ArrayMap | undefined;
 let macroRegionToPartitions: ArrayMap | undefined;
 
 const init = () => {
-  regionToPartition =  buildArrayMap(regions);
+  regionToPartition = buildArrayMap(regions);
   macroRegionToPartitions = buildArrayMap(macroRegions);
 };
 

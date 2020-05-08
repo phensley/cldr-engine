@@ -31,8 +31,7 @@ const getany = (map: DistanceMap): DistanceNode => {
   throw new Error('Severe error: wildcard levels missing in distance map.');
 };
 
-const _distance = (node: DistanceNode | number): number =>
-  typeof node === 'number' ? node : node[0];
+const _distance = (node: DistanceNode | number): number => (typeof node === 'number' ? node : node[0]);
 
 /**
  * Return the distance between the desired and supported locale, stopping once
@@ -146,8 +145,8 @@ const scanRegion = (
   want: string,
   wantPartitions: string[],
   have: string,
-  havePartitions: string[]): number | undefined => {
-
+  havePartitions: string[],
+): number | undefined => {
   let node = undefined;
 
   for (const v of wantPartitions) {

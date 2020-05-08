@@ -9,7 +9,7 @@ const TAG_SEP = /[,\s]+/g;
 
 const U = undefined;
 
-const numberCmp = (a: number, b: number) => a === b ? 0 : a < b ? -1 : 1;
+const numberCmp = (a: number, b: number) => (a === b ? 0 : a < b ? -1 : 1);
 
 class Entry implements Locale {
   readonly compact: string;
@@ -30,7 +30,7 @@ export const parse = (locales: string | (Locale | LangTag)[] = [], options: Loca
   if (typeof locales === 'string') {
     raw = locales.split(TAG_SEP);
   } else {
-    raw = locales.reduce((a: LangTag[], e: (Locale | LanguageTag | string)): LangTag[] => {
+    raw = locales.reduce((a: LangTag[], e: Locale | LanguageTag | string): LangTag[] => {
       if (typeof e === 'string') {
         const tmp = e.split(TAG_SEP);
         return a.concat(tmp);
@@ -80,9 +80,9 @@ export const parse = (locales: string | (Locale | LangTag)[] = [], options: Loca
       result.push(new Entry(id, resolve ? LanguageResolver.resolve(tag) : tag));
     } else {
       // Preserve undefined core fields, but include input's extensions
-      result.push(new Entry(id, new LanguageTag(
-        undefined, undefined, undefined, undefined, tag.extensions(), tag.privateUse()
-      )));
+      result.push(
+        new Entry(id, new LanguageTag(undefined, undefined, undefined, undefined, tag.extensions(), tag.privateUse())),
+      );
     }
   }
   return result;
@@ -111,7 +111,6 @@ export interface LocaleMatch {
  * @public
  */
 export interface LocaleMatcherOptions {
-
   /**
    * Resolve language tags. (default true)
    */
@@ -147,7 +146,6 @@ export const sortEntries = (d: Entry) => (a: Entry, b: Entry): number => {
 
   // All other locales stay in their relative positions.
   return 0;
-
 };
 
 /**
@@ -163,7 +161,6 @@ export const sortEntries = (d: Entry) => (a: Entry, b: Entry): number => {
  * @public
  */
 export class LocaleMatcher {
-
   private supported: Entry[];
   private count: number;
   private default: Entry;
@@ -182,7 +179,7 @@ export class LocaleMatcher {
 
     // Wire up a map for quick lookups of exact matches. These have a
     // distance of 0 and will short-circuit the matching loop.
-    this.supported.forEach(locale => {
+    this.supported.forEach((locale) => {
       const key = locale.compact;
       let bundles = this.exactMap[key];
       if (bundles === U) {
@@ -233,7 +230,7 @@ export class LocaleMatcher {
     const result = new LanguageTag(tag.language(), tag.script(), tag.region(), tag.variant(), extensions, privateUse);
     return {
       locale: { id, tag: result },
-      distance: bestMatch === U ? MAX_DISTANCE : bestDistance
+      distance: bestMatch === U ? MAX_DISTANCE : bestDistance,
     };
   }
 }
