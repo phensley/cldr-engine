@@ -29,7 +29,7 @@ const enum Constants {
   P5 = 100000,
   P6 = 1000000,
   P7 = 10000000,
-  P8 = 100000000
+  P8 = 100000000,
 }
 
 const POWERS10 = [
@@ -41,7 +41,7 @@ const POWERS10 = [
   Constants.P5,
   Constants.P6,
   Constants.P7,
-  Constants.P8
+  Constants.P8,
 ];
 
 // When a number crosses this limit we reduce it to avoid overflow.
@@ -69,7 +69,6 @@ export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
  * @public
  */
 export class NumberOperands {
-
   n: number = 0;
   i: number = 0;
   v: number = 0;
@@ -91,7 +90,7 @@ export class NumberOperands {
     const last = len - 1;
     // const neg = sign === -1;
     // const dec = exp < 0;
-    const precision = (last * Constants.RDIGITS) + digitCount(data[last]);
+    const precision = last * Constants.RDIGITS + digitCount(data[last]);
 
     // Local operands
     let n = 0;
@@ -116,9 +115,8 @@ export class NumberOperands {
       intdigits = 0;
     }
 
-    outer:
     // Start at most-significant digit to least
-    while (x >= 0) {
+    outer: while (x >= 0) {
       let r = data[x];
       const c = x !== last ? Constants.RDIGITS : digitCount(r);
       y = c - 1;
@@ -131,7 +129,7 @@ export class NumberOperands {
 
         if (intdigits > 0) {
           // Integer part
-          n = (n * 10) + q;
+          n = n * 10 + q;
 
           // If the integer digits exceed the limit we apply modulus.
           if (n > LIMIT) {
@@ -140,7 +138,6 @@ export class NumberOperands {
             n = (n % LIMIT) + LIMIT;
           }
           intdigits--;
-
         } else {
           // Decimal part
           if (q === 0) {
@@ -148,7 +145,7 @@ export class NumberOperands {
           } else {
             trail = 0;
           }
-          f = (f * 10) + q;
+          f = f * 10 + q;
         }
 
         // If the decimal digits exceed our limit we bail out early.
@@ -194,7 +191,6 @@ export class NumberOperands {
   }
 
   toString(): string {
-    return FIELDS.map(f => `${f}: ${this[f]}`).join(', ');
+    return FIELDS.map((f) => `${f}: ${this[f]}`).join(', ');
   }
-
 }

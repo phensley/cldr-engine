@@ -13,7 +13,6 @@ const resolve = (r: RuleMap, language: string, region?: string): Rule[] =>
  * @public
  */
 export class Plurals {
-
   /**
    * Get the plural rules for a given language and optional region.
    */
@@ -23,7 +22,6 @@ export class Plurals {
     const ranges = pluralRanges[language] || pluralRanges.en;
     return new PluralRules(expressions, cardinals, ordinals, ranges);
   }
-
 }
 
 /**

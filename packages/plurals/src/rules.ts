@@ -12,8 +12,7 @@ export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
 // Notation for categories in compact plural rules
 const CATEGORIES: string[] = ['zero', 'one', 'two', 'few', 'many', 'other'];
 
-const arg = (n: DecimalArg) =>
-  new NumberOperands(coerceDecimal(n));
+const arg = (n: DecimalArg) => new NumberOperands(coerceDecimal(n));
 
 /**
  * Set of all cardinal and ordinal plural rules, and the array of expression
@@ -22,13 +21,12 @@ const arg = (n: DecimalArg) =>
  * @public
  */
 export class PluralRules {
-
   constructor(
     private expressions: Expr[],
     private cardinals: Rule[],
     private ordinals: Rule[],
-    private ranges: RangeMap) {
-  }
+    private ranges: RangeMap,
+  ) {}
 
   operands(d: Decimal): NumberOperands {
     return new NumberOperands(d);
@@ -82,7 +80,6 @@ export class PluralRules {
     }
     return false;
   }
-
 }
 
 export const evaluateExpr = (operands: NumberOperands, expr: Expr): boolean => {
