@@ -1,4 +1,8 @@
 {
-    "cSpell.enabled": false,
-    "typescript.tsdk": "node_modules/typescript/lib"
+  "cSpell.enabled": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false,
+    "source.fixAll.eslint": true
+  }
 }
