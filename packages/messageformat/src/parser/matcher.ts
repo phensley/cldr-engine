@@ -13,12 +13,13 @@ export interface MessageState {
 
 const patterns = {
   // eslint-disable-next-line max-len
-  identifier: /[^\u0009-\u000d \u0085\u200e\u200f\u2028\u2029\u0021-\u002f\u003a-\u0040\u005b-\u005e\u0060\u007b-\u007e\u00a1-\u00a7\u00a9\u00ab\u00ac\u00ae\u00b0\u00b1\u00b6\u00bb\u00bf\u00d7\u00f7\u2010-\u2027\u2030-\u203e\u2041-\u2053\u2055-\u205e\u2190-\u245f\u2500-\u2775\u2794-\u2bff\u2e00-\u2e7f\u3001-\u3003\u3008-\u3020\u3030\ufd3e\ufd3f\ufe45\ufe46]+/.source,
+  identifier: /[^\u0009-\u000d \u0085\u200e\u200f\u2028\u2029\u0021-\u002f\u003a-\u0040\u005b-\u005e\u0060\u007b-\u007e\u00a1-\u00a7\u00a9\u00ab\u00ac\u00ae\u00b0\u00b1\u00b6\u00bb\u00bf\u00d7\u00f7\u2010-\u2027\u2030-\u203e\u2041-\u2053\u2055-\u205e\u2190-\u245f\u2500-\u2775\u2794-\u2bff\u2e00-\u2e7f\u3001-\u3003\u3008-\u3020\u3030\ufd3e\ufd3f\ufe45\ufe46]+/
+    .source,
 
   option: /[^\s,\{\}]+/.source,
 
   // explicit or plural category
-  pluralChoice: /(=\d+(\.\d+)?)|zero|one|two|few|many|other/.source
+  pluralChoice: /(=\d+(\.\d+)?)|zero|one|two|few|many|other/.source,
 };
 
 /**
@@ -78,7 +79,7 @@ export interface MessageMatcher {
 // This library supports these operations by default.
 const BUILTINS = ['plural', 'select', 'selectordinal'];
 
-const cmp = (a: number, b: number) => a < b ? -1 : a > b ? 1 : 0;
+const cmp = (a: number, b: number) => (a < b ? -1 : a > b ? 1 : 0);
 
 /**
  * Matches against a substring defined by the [start, end) range
@@ -96,7 +97,6 @@ const cmp = (a: number, b: number) => a < b ? -1 : a > b ? 1 : 0;
  * @public
  */
 export class StickyMatcher implements MessageMatcher {
-
   private _space: RegExp;
   private _arg: RegExp;
   private _ident: RegExp;
@@ -209,7 +209,6 @@ export class StickyMatcher implements MessageMatcher {
     }
     return undefined;
   }
-
 }
 
 /**
@@ -220,7 +219,6 @@ export class StickyMatcher implements MessageMatcher {
  * @public
  */
 export class SubstringMatcher extends StickyMatcher {
-
   match(pattern: RegExp, r: MessageState): string | undefined {
     pattern.lastIndex = 0;
     const s = r.t.substring(r.s, r.e);
@@ -232,7 +230,6 @@ export class SubstringMatcher extends StickyMatcher {
     }
     return undefined;
   }
-
 }
 
 /**

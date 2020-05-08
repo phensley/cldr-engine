@@ -18,7 +18,7 @@ export const enum MessageOpType {
   BLOCK = 4,
   NOOP = 5,
   SIMPLE = 6,
-  ARGSUB = 7
+  ARGSUB = 7,
 }
 
 /**
@@ -78,7 +78,7 @@ export interface MessageBlockCode {
  */
 export const enum PluralNumberType {
   CARDINAL = 0,
-  ORDINAL = 1
+  ORDINAL = 1,
 }
 
 /**
@@ -101,7 +101,7 @@ export interface MessagePluralCode {
  */
 export const enum PluralChoiceType {
   EXACT = 0,
-  CATEGORY = 1
+  CATEGORY = 1,
 }
 
 /**
@@ -179,11 +179,11 @@ export interface MessageSimpleCode {
  * @public
  */
 export type MessageCode =
-  MessageArgCode |
-  MessageTextCode |
-  MessagePluralCode |
-  MessageBlockCode |
-  MessageSelectCode |
-  MessageSimpleCode |
-  MessageArgSubCode |
-  MessageNoopCode;
+  | MessageArgCode
+  | MessageTextCode
+  | MessagePluralCode
+  | MessageBlockCode
+  | MessageSelectCode
+  | MessageSimpleCode
+  | MessageArgSubCode
+  | MessageNoopCode;

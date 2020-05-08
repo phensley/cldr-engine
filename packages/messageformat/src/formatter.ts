@@ -12,7 +12,6 @@ const DEFAULT_CACHE_SIZE = 100;
  * @public
  */
 export interface MessageFormatterOptions {
-
   /**
    * Language code, e.g. "en"
    */
@@ -52,7 +51,6 @@ export interface MessageFormatterOptions {
  * @public
  */
 export class MessageFormatter {
-
   private plurals: PluralRules;
   private converter: MessageArgConverter;
   private formatters: MessageFormatFuncMap;
@@ -65,7 +63,7 @@ export class MessageFormatter {
     this.plurals = options.plurals || pluralRules.get(options.language || 'root', options.region);
     const size = options.cacheSize || DEFAULT_CACHE_SIZE;
     this.matcher = buildMessageMatcher(Object.keys(this.formatters));
-    this.cache = new Cache<MessageCode>(s => parseMessagePattern(s, this.matcher), size);
+    this.cache = new Cache<MessageCode>((s) => parseMessagePattern(s, this.matcher), size);
   }
 
   /**
@@ -74,8 +72,7 @@ export class MessageFormatter {
    */
   format(message: string, positional: MessageArg[], named: MessageNamedArgs): string {
     const code = this.cache.get(message);
-    return new MessageEngine(this.plurals, this.converter, this.formatters, code)
-      .evaluate(positional, named);
+    return new MessageEngine(this.plurals, this.converter, this.formatters, code).evaluate(positional, named);
   }
 
   /**
@@ -84,5 +81,4 @@ export class MessageFormatter {
   toString(): string {
     return `MessageFormatter(formatters=${JSON.stringify(Object.keys(this.formatters))} cached=${this.cache.size()})`;
   }
-
 }

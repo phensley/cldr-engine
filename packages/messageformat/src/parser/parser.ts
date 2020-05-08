@@ -15,7 +15,7 @@ const enum Chars {
   RIGHT = '}',
   MINUS = '-',
   APOS = "'",
-  POUND = '#'
+  POUND = '#',
 }
 
 /**
@@ -54,9 +54,7 @@ export const parseMessagePattern = (raw: string, matcher: MessageMatcher): Messa
  *   https://unpkg.com/messageformat-parser/parser.js
  */
 class MessagePatternParser {
-
-  constructor(private raw: string, private matcher: MessageMatcher) {
-  }
+  constructor(private raw: string, private matcher: MessageMatcher) {}
 
   parse(): MessageCode {
     const t = this.raw;
@@ -92,14 +90,12 @@ class MessagePatternParser {
           if (k === -1) {
             n.push(textarg(str.substring(r.s, r.e), argsub));
             r.s = r.e;
-
           } else if (hidden) {
             // Tag is hidden from processor, emit as text
             n.push(text(Chars.LEFT + str.substring(r.s + 2, k + 1)));
 
             // Skip over hidden tag
             r.s = k;
-
           } else {
             // Process tag interior
             const child = this.inner({ t: r.t, s: r.s + 1, e: k });
@@ -123,7 +119,6 @@ class MessagePatternParser {
             // Convert double apostrophe to single
             buf += c;
             r.s++;
-
           } else {
             // Skip over apostrophe
             r.s++;
@@ -269,7 +264,6 @@ class MessagePatternParser {
         const num = choice.substring(1);
         node = [PluralChoiceType.EXACT, num, block];
       } else {
-
         // Plural category match
         node = [PluralChoiceType.CATEGORY, choice, block];
       }
@@ -280,8 +274,7 @@ class MessagePatternParser {
     } while (!m.complete(r));
 
     // If we parsed no choices, emit a no-op
-    return choices.length ?
-      [MessageOpType.PLURAL, args, offset, type, choices] : NOOP;
+    return choices.length ? [MessageOpType.PLURAL, args, offset, type, choices] : NOOP;
   }
 
   /**
@@ -305,12 +298,10 @@ class MessagePatternParser {
       // Append and skip to the next choice
       choices.push([ident, block]);
       m.spaces(r);
-
     } while (!m.complete(r));
 
     // If we parsed no choices, just emit a no-op
-    return choices.length ?
-      [MessageOpType.SELECT, args, choices] : NOOP;
+    return choices.length ? [MessageOpType.SELECT, args, choices] : NOOP;
   }
 
   /**
@@ -332,8 +323,7 @@ class MessagePatternParser {
     const r = this.raw;
     let d = 0; // Track nesting depth
 
-    loop:
-    while (i < j) {
+    loop: while (i < j) {
       const c = r[i];
       switch (c) {
         case Chars.LEFT:
@@ -342,7 +332,6 @@ class MessagePatternParser {
           break;
 
         case Chars.RIGHT:
-
           // Reduce depth
           d--;
           if (!d) {

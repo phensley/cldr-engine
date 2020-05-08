@@ -17,7 +17,6 @@ export interface MessageArgConverter {
  * @public
  */
 export class DefaultMessageArgConverter implements MessageArgConverter {
-
   /**
    * Convert to a string if possible.
    */

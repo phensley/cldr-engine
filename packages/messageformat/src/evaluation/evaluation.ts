@@ -2,20 +2,14 @@ import { Decimal, DecimalConstants } from '@phensley/decimal';
 import { PluralRules } from '@phensley/plurals';
 import { MessageArg, MessageArgs, MessageNamedArgs } from './args';
 import { MessageArgConverter } from './converter';
-import {
-  MessageCode,
-  MessageOpType,
-  PluralChoiceType,
-  PluralNumberType,
-} from '../parser';
+import { MessageCode, MessageOpType, PluralChoiceType, PluralNumberType } from '../parser';
 
 /**
  * User-defined message formatter function.
  *
  * @public
  */
-export type MessageFormatFunc =
-  (args: MessageArg[], options: string[]) => string;
+export type MessageFormatFunc = (args: MessageArg[], options: string[]) => string;
 
 /**
  * A map of user-defined formatter names to their implementations.
@@ -26,14 +20,14 @@ export type MessageFormatFuncMap = { [name: string]: MessageFormatFunc };
 
 const get = (key: number | string, args: MessageArgs): MessageArg => {
   const res: MessageArg = args.named[key];
-  return res !== undefined ? res : (typeof key === 'number' ? args.positional[key] : undefined);
+  return res !== undefined ? res : typeof key === 'number' ? args.positional[key] : undefined;
 };
 
 // Save a bit of processing of common exact matches
 const DECIMAL_EXACT: { [n: string]: Decimal } = {
   0: DecimalConstants.ZERO,
   1: DecimalConstants.ONE,
-  2: DecimalConstants.TWO
+  2: DecimalConstants.TWO,
 };
 
 /**
@@ -42,14 +36,14 @@ const DECIMAL_EXACT: { [n: string]: Decimal } = {
  * @public
  */
 export class MessageEngine {
-
   private buf: string = '';
 
   constructor(
     private plurals: PluralRules,
     private converter: MessageArgConverter,
     private formatters: MessageFormatFuncMap,
-    private code: MessageCode) { }
+    private code: MessageCode,
+  ) {}
 
   /**
    * Evaluate the message code against the given arguments.
@@ -86,15 +80,13 @@ export class MessageEngine {
         const offset = code[2];
         const num = this.converter.asDecimal(arg);
         argsub = offset ? num.subtract(offset) : num;
-        const category = code[3] === PluralNumberType.CARDINAL ?
-          this.plurals.cardinal(argsub) :
-          this.plurals.ordinal(argsub);
+        const category =
+          code[3] === PluralNumberType.CARDINAL ? this.plurals.cardinal(argsub) : this.plurals.ordinal(argsub);
 
         let other: MessageCode | undefined;
         let found = 0;
 
-        loop:
-        for (const c of code[4]) {
+        loop: for (const c of code[4]) {
           switch (c[0]) {
             case PluralChoiceType.EXACT:
               let v = DECIMAL_EXACT[c[1]];
@@ -113,14 +105,12 @@ export class MessageEngine {
                 this._evaluate(c[2], args, argsub);
                 found = 1;
                 break loop;
-
               } else if (c[1] === 'other') {
                 // Capture the 'other' as a fallback
                 other = c[2];
               }
               break;
           }
-
         }
 
         // If no match and 'other' exists, emit that value.
@@ -137,8 +127,7 @@ export class MessageEngine {
         let other: MessageCode | undefined;
         let found = 0;
 
-        loop:
-        for (const c of code[2]) {
+        loop: for (const c of code[2]) {
           if (c[0] === str) {
             this._evaluate(c[1], args, arg);
             found = 1;
@@ -163,7 +152,7 @@ export class MessageEngine {
         const name = code[1];
         const f = this.formatters[name];
         if (f !== undefined) {
-          const _args = code[2].map(k => get(k, args));
+          const _args = code[2].map((k) => get(k, args));
           this.buf += f(_args, code[3]);
         }
         break;
