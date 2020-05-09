@@ -63,7 +63,7 @@ const parseYears = (years: string | undefined): [number, number] | undefined => 
   if (!years) {
     return undefined;
   }
-  const tmp = years.split(':').map(y => parseInt(y, 10));
+  const tmp = years.split(':').map((y) => parseInt(y, 10));
   if (tmp.length === 2) {
     const [start, end] = tmp;
     return [jan1(start), dec31(end)];
@@ -74,33 +74,48 @@ const parseYears = (years: string | undefined): [number, number] | undefined => 
 
 const jan1 = (year: number) => asUTC(new Date(year, 0, 1, 0, 0, 0));
 const dec31 = (year: number) => asUTC(new Date(year, 11, 31, 0, 0, 0));
-const asUTC = (d: Date) => (+d) - d.getTimezoneOffset() * 60000;
+const asUTC = (d: Date) => +d - d.getTimezoneOffset() * 60000;
 
 /**
  * Entry point for tztool command line.
  */
 export const main = () => {
   yargs
-    .command('generate', 'Generate code from tzif data', (y: yargs.Argv) => y
-      .option('t', { type: 'string', description: 'Tag / version of the tzdb to build' })
-      .option('o', { type: 'string', description: 'Output file path' })
-      .alias('o', 'out')
-      .alias('t', 'tag'),
-      runGenerate)
+    .command(
+      'generate',
+      'Generate code from tzif data',
+      (y: yargs.Argv) =>
+        y
+          .option('t', { type: 'string', description: 'Tag / version of the tzdb to build' })
+          .option('o', { type: 'string', description: 'Output file path' })
+          .alias('o', 'out')
+          .alias('t', 'tag'),
+      runGenerate,
+    )
 
-    .command('json <file>', 'Dump tzif as JSON', (y: yargs.Argv) => y
-      .positional('file', { type: 'string', description: 'Input file in TZif format' })
-      .option('p', { boolean: true })
-      .alias('p', 'pretty'),
-      runDumpJson)
+    .command(
+      'json <file>',
+      'Dump tzif as JSON',
+      (y: yargs.Argv) =>
+        y
+          .positional('file', { type: 'string', description: 'Input file in TZif format' })
+          .option('p', { boolean: true })
+          .alias('p', 'pretty'),
+      runDumpJson,
+    )
 
-    .command('zdump <file>', 'Dump tzif ala zdump', (y: yargs.Argv) => y
-      .positional('file', { type: 'string', description: 'Input file in TZif format' })
-      .option('t', { boolean: true, description: 'Include timestamps' })
-      .option('y', { type: 'string', description: 'Single year or range START:END' })
-      .alias('t', 'timestamps')
-      .alias('y', 'years'),
-      runZdump)
+    .command(
+      'zdump <file>',
+      'Dump tzif ala zdump',
+      (y: yargs.Argv) =>
+        y
+          .positional('file', { type: 'string', description: 'Input file in TZif format' })
+          .option('t', { boolean: true, description: 'Include timestamps' })
+          .option('y', { type: 'string', description: 'Single year or range START:END' })
+          .alias('t', 'timestamps')
+          .alias('y', 'years'),
+      runZdump,
+    )
 
     .demandCommand(1, 'Please specify a command')
     .help('help')

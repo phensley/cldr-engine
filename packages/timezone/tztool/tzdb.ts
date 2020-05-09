@@ -11,7 +11,7 @@ const fail = (m: string) => {
   process.exit(1);
 };
 
-const lines = (s: string) => s.split('\n').filter(e => e.length);
+const lines = (s: string) => s.split('\n').filter((e) => e.length);
 
 const set = (s: string[]) => new Set(s);
 
@@ -33,11 +33,9 @@ export const setupTZDB = (tag: string): string => {
     }
   }
 
-  const exec = (cmd: string, cwd: string) =>
-    subproc.execSync(cmd, { cwd, timeout: TIMEOUT });
+  const exec = (cmd: string, cwd: string) => subproc.execSync(cmd, { cwd, timeout: TIMEOUT });
 
-  const tagset = () =>
-    set(lines(exec(`git tag`, repo).toString('utf-8')));
+  const tagset = () => set(lines(exec(`git tag`, repo).toString('utf-8')));
 
   // clone, checkout master, pull refresh
   if (!fs.existsSync(repo)) {

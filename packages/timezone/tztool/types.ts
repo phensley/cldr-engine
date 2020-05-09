@@ -1,5 +1,4 @@
 export class DefaultArrayMap<T> {
-
   private elems: { [x: string]: T[] } = {};
 
   get(key: string): T[] {
@@ -21,7 +20,6 @@ export class DefaultArrayMap<T> {
 }
 
 export class FrequencySet<T> {
-
   private elems: T[] = [];
   private freq: Map<T, number> = new Map();
 

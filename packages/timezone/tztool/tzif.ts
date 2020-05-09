@@ -4,8 +4,7 @@ const MAGIC = 'TZif';
 const VERSIONS = [2, 3];
 const HISCALE = 0x100000000;
 
-export const utcs = (n: number, tz: string = 'UT') =>
-  (new Date(n).toUTCString()).replace('GMT', tz);
+export const utcs = (n: number, tz: string = 'UT') => new Date(n).toUTCString().replace('GMT', tz);
 
 export interface LocaltimeType {
   utoff: number;
@@ -28,7 +27,6 @@ const leftpad = (s: string, ch: string, n: number): string => {
  * specified by TZif RFC 8536.
  */
 class Stream {
-
   private i: number = 0;
 
   constructor(readonly buf: Buffer) {}
@@ -66,13 +64,13 @@ class Stream {
   readInt64(): number {
     const hi = this.readInt32(); // signed
     const lo = this.readUInt32();
-    return (hi * HISCALE) + lo;
+    return hi * HISCALE + lo;
   }
 
   readUInt64(): number {
     const hi = this.readUInt32();
     const lo = this.readUInt32();
-    return (hi * HISCALE) + lo;
+    return hi * HISCALE + lo;
   }
 
   readLocaltimeTypeArray(count: number): LocaltimeType[] {
@@ -129,7 +127,6 @@ class Stream {
  * https://www.rfc-editor.org/rfc/rfc8536.txt
  */
 export class TZif {
-
   readonly stm: Stream;
 
   // Four bytes identifying the file type
@@ -223,12 +220,23 @@ export class TZif {
    * JSON string containing the properties of this tzif file.
    */
   json(space?: string): string {
-    const { id, magic, version, transtimes, transtypes, localtimetype, zoneabbrs,
-      leapsecs, utinds, stdinds } = this;
-    return JSON.stringify({
-      id, magic, version, transtimes, transtypes, localtimetype, zoneabbrs,
-      leapsecs, utinds, stdinds
-    }, undefined, space);
+    const { id, magic, version, transtimes, transtypes, localtimetype, zoneabbrs, leapsecs, utinds, stdinds } = this;
+    return JSON.stringify(
+      {
+        id,
+        magic,
+        version,
+        transtimes,
+        transtypes,
+        localtimetype,
+        zoneabbrs,
+        leapsecs,
+        utinds,
+        stdinds,
+      },
+      undefined,
+      space,
+    );
   }
 
   /**
@@ -278,7 +286,7 @@ export class TZif {
     const utc = utcs(ms);
     const { utoff, dst, idx } = typ;
     const ind = this.zoneabbr(idx);
-    const loc = utcs(ms + (utoff * 1000), ind);
+    const loc = utcs(ms + utoff * 1000, ind);
     const r = timestamps ? leftpad(`${ms}`, ' ', 15) + '  ' : '';
     return r + `${utc}  =  ${loc}  isdst=${dst} gmtoff=${utoff}\n`;
   }

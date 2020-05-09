@@ -24,7 +24,7 @@ const readRows = (path: string) => {
 export const parseZIC = (path: string): ParseResult => {
   const result: ParseResult = {
     zones: [],
-    links: new DefaultArrayMap<string>()
+    links: new DefaultArrayMap<string>(),
   };
 
   const rows = readRows(path);
@@ -32,7 +32,7 @@ export const parseZIC = (path: string): ParseResult => {
     switch (row[0]) {
       case 'Li':
       case 'L':
-        const [ to, fr ] = row.slice(1);
+        const [to, fr] = row.slice(1);
         result.links.add(to, fr);
         break;
 

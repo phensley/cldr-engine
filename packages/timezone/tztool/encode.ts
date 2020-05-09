@@ -39,7 +39,7 @@ export const encodeZones = (version: string, zonedir: string, ids: string[], lin
   const untilkeys = untilindex.sort();
 
   const linkindex: string[] = [];
-  links.keys().forEach(dst => {
+  links.keys().forEach((dst) => {
     for (const alias of links.get(dst)) {
       linkindex.push(`${alias}:${ids.indexOf(dst)}`);
     }
@@ -72,8 +72,9 @@ export const encodeZones = (version: string, zonedir: string, ids: string[], lin
     }
 
     // Format:  <zoneabbr>:<dst flag>:<utc offset>
-    const localtime = info.localtimetype.map(
-      t => `${info.zoneabbr(t.idx)}:${t.dst}:${t.utoff.toString(36)}`).join('|');
+    const localtime = info.localtimetype
+      .map((t) => `${info.zoneabbr(t.idx)}:${t.dst}:${t.utoff.toString(36)}`)
+      .join('|');
 
     const types = info.transtypes.map((t: number) => TYPES[t]);
     for (const t of types) {
@@ -82,10 +83,7 @@ export const encodeZones = (version: string, zonedir: string, ids: string[], lin
       }
     }
 
-    zoneinfo.push(`    '${localtime}_` +
-      `${types.join('')}_` +
-      `${untils.map(n => n.toString(36)).join(' ')}'`
-    );
+    zoneinfo.push(`    '${localtime}_` + `${types.join('')}_` + `${untils.map((n) => n.toString(36)).join(' ')}'`);
   }
 
   // OUTPUT
@@ -102,7 +100,7 @@ export const encodeZones = (version: string, zonedir: string, ids: string[], lin
 
   data += `  links: '${linkindex.join('|')}',\n\n`;
 
-  data += `  index: '${untilkeys.map(n => n.toString(36)).join(' ')}',\n\n`;
+  data += `  index: '${untilkeys.map((n) => n.toString(36)).join(' ')}',\n\n`;
 
   data += `  zoneinfo: [\n`;
   data += zoneinfo.join(',\n');
