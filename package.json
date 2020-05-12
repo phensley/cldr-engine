@@ -28,8 +28,8 @@
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
+    "@typescript-eslint/eslint-plugin": "^2.32.0",
+    "@typescript-eslint/parser": "^2.32.0",
     "dependency-cruiser": "^9.1.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
@@ -39,7 +39,7 @@
     "npm-check-updates": "^5.0.0",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
-    "ts-jest": "^25.5.0",
+    "ts-jest": "^25.5.1",
     "ts-node": "^8.10.1",
     "typedoc": "^0.17.6",
     "typescript": "^3.8.3"
