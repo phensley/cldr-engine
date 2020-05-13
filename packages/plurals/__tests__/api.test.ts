@@ -1,9 +1,10 @@
 import { Decimal } from '@phensley/decimal';
-import { pluralRules } from '../src';
+import { pluralRules, Plurals, PluralRules } from '../src';
 
 test('basic', () => {
   const lang = 'en';
-  const rules = pluralRules.get(lang);
+  const plurals: Plurals = pluralRules;
+  const rules: PluralRules = plurals.get(lang);
 
   expect(rules.operands(new Decimal('123'))).toEqual({
     f: 0,

@@ -1,5 +1,6 @@
 import { Decimal } from '@phensley/decimal';
-import { digitCount, NumberOperands } from '../src/operands';
+import { NumberOperands } from '../src';
+import { digitCount } from '../src/operands';
 
 const operands = (n: string) => new NumberOperands(new Decimal(n)).toString();
 

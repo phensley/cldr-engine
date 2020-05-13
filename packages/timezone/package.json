@@ -60,7 +60,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^25.5.1",
     "ts-node": "^8.10.1",
-    "typescript": "^3.9.2",
+    "typescript": "~3.8.3",
     "uglify-es": "^3.3.9",
     "yargs": "^15.3.1"
   },

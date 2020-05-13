@@ -1,6 +1,5 @@
 import { cardinalRules, expressions, ordinalRules } from './autogen.rules';
 import { pluralRanges } from './autogen.ranges';
-export { NumberOperands } from './operands';
 import { PluralRules } from './rules';
 import { Rule, RuleMap } from './types';
 
