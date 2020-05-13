@@ -31,7 +31,7 @@ class Stream {
 
   constructor(readonly buf: Buffer) {}
 
-  readString(encoding: string, length: number): string {
+  readString(encoding: BufferEncoding, length: number): string {
     const s = this.buf.toString(encoding, this.i, this.i + length);
     this.seek(length);
     return s;
