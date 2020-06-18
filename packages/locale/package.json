@@ -1,6 +1,6 @@
 {
   "name": "@phensley/locale",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Locale subtag resolver",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -36,7 +36,7 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/language-tag": "^1.2.0",
+    "@phensley/language-tag": "^1.2.1",
     "tslib": "^1.13.0"
   },
   "devDependencies": {
