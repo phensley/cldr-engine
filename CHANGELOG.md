@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.2.1]
+
+### Fixed/Changed
+
+- Use `tslib ^1.13.0`
+
 ## [1.2.0]
 
 ### Fixed/Changed
@@ -771,6 +777,7 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[1.2.1]: https://github.com/phensley/cldr-engine/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/phensley/cldr-engine/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/phensley/cldr-engine/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/phensley/cldr-engine/compare/v1.1.0...v1.1.1
