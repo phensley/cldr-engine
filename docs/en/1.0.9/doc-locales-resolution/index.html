@@ -62,7 +62,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Locale resolution</h1></header><article><div><span><p>Resolution is the process of filling in any undefined subtags, and replacing subtag aliases with a preferred value.</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Locale resolution</h1></header><article><div><span><p>Resolution is the process of filling in any undefined subtags, and replacing subtag aliases with a preferred value.</p>
 <p>The function <a href="api-cldrframework.html#resolvelocale">CLDRFramework.resolveLocale</a> performs both parsing and resolution, returning a <a href="api-locale.html">Locale</a> object.</p>
 <p>A <a href="api-locale.html">Locale</a> object has two properties: <code>id</code> is the original unaltered identifier, and <code>tag</code> is the <a href="api-languagetag.html">LanguageTag</a> object with its subtags resolved and normalized.</p>
 <p>The resolution process and the <a href="api-locale.html">Locale</a> object are important since there are parts of the library which require the value for a specific subtag. For example, pluralization uses the language subtag, and selecting a measurement system (US, UK, Metric) uses the region subtag. The resolution process ensures these subtags are populated.</p>

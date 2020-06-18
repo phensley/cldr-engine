@@ -62,7 +62,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Caching</h1></header><article><div><span><p>Inside the library there are several structures that are in a dormant state, only becoming activated when needed.</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Caching</h1></header><article><div><span><p>Inside the library there are several structures that are in a dormant state, only becoming activated when needed.</p>
 <p>The CLDR resource bundles also contain many raw patterns that need to be parsed before they can be used to format a result. Since applications may end up repeatedly formatting hundreds of numbers or dates using the same patterns, we want to avoid the overhead of parsing the pattern each time.</p>
 <p>Some pieces of data need to be computed on the fly every time while others can be computed once and kept around, either inside a curried function's closure or an explicit cache.</p>
 <p>The next section discusses ways of dealing with this overhead.</p>
