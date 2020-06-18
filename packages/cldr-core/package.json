@@ -45,7 +45,7 @@
     "@phensley/messageformat": "^1.2.0",
     "@phensley/plurals": "^1.2.0",
     "@phensley/timezone": "^1.2.0",
-    "tslib": "1.11.2"
+    "tslib": "^1.13.0"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.8.0",
