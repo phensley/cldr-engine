@@ -1,13 +1,27 @@
 import * as filepath from 'path';
 import { TZif } from './tzif';
-import { DefaultArrayMap, FrequencySet } from './types';
+import { DefaultArrayMap, FrequencySet, StandardOffsetMap } from './types';
+import { ZoneTabEntry, ZoneTabMap } from './zonetab';
 
 const MAXLEN = '/* eslint-disable max-len */\n\n';
+
+const DEFAULT_ZONEMETA: ZoneTabEntry = {
+  latitude: 0,
+  longitude: 0,
+  countries: '',
+};
 
 /**
  * Encode the time zone data in a compact form.
  */
-export const encodeZones = (version: string, zonedir: string, ids: string[], links: DefaultArrayMap<string>) => {
+export const encodeZones = (
+  version: string,
+  zonedir: string,
+  ids: string[],
+  links: DefaultArrayMap<string>,
+  stdoff: StandardOffsetMap,
+  metadata: ZoneTabMap,
+) => {
   ids.sort();
 
   const untilindex = new FrequencySet<number>();
@@ -52,6 +66,10 @@ export const encodeZones = (version: string, zonedir: string, ids: string[], lin
   for (const id of ids) {
     const path = filepath.join(zonedir, id);
     const info = new TZif(id, path);
+    const std = stdoff[id];
+    if (typeof std !== 'number') {
+      throw new Error(`no standard offset found for zone ${id}`);
+    }
 
     const untils: number[] = [];
 
@@ -83,7 +101,17 @@ export const encodeZones = (version: string, zonedir: string, ids: string[], lin
       }
     }
 
-    zoneinfo.push(`    '${localtime}_` + `${types.join('')}_` + `${untils.map((n) => n.toString(36)).join(' ')}'`);
+    const zonemeta = metadata[id] || DEFAULT_ZONEMETA;
+    const latitude = Math.round(zonemeta.latitude * 1e6).toString(36);
+    const longitude = Math.round(zonemeta.longitude * 1e6).toString(36);
+    const countries = zonemeta.countries;
+
+    const stdstr = std.toString(36);
+    zoneinfo.push(
+      `    '${stdstr}_${latitude}_${longitude}_${countries}_${localtime}_` +
+        `${types.join('')}_` +
+        `${untils.map((n) => n.toString(36)).join(' ')}'`,
+    );
   }
 
   // OUTPUT

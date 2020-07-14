@@ -47,3 +47,5 @@ export class FrequencySet<T> {
     return res;
   }
 }
+
+export type StandardOffsetMap = { [name: string]: number };

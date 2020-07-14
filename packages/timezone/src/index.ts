@@ -32,6 +32,34 @@ export interface ZoneInfo {
   offset: number;
 }
 
+export interface ZoneMeta {
+  /**
+   * Time zone identifier. Corrected if the metadata was looked up using an alias.
+   */
+  zoneid: string;
+
+  /**
+   * Current standard offset from UTC, in milliseconds.
+   */
+  stdoffset: number;
+
+  /**
+   * Latitude of the zone's "principal location".
+   */
+  latitude: number;
+
+  /**
+   * Longitude of the zone's "principal location".
+   */
+  longitude: number;
+
+  /**
+   * ISO 3166 2-character country code for all countries which
+   * overlap the timezone.
+   */
+  countries: string[];
+}
+
 /**
  * Interface to accessing time zone data.
  *
@@ -66,6 +94,13 @@ export interface Tz {
    * UTC zone info.
    */
   utcZone(): ZoneInfo;
+
+  /**
+   * Metadata related to a zone, such as the list of country codes that overlap with
+   * the zone, the latitude and longitude, and the current standard offset, in milliseconds.
+   * These can be used to display user interfaces for selecting a zone.
+   */
+  zoneMeta(id: string): ZoneMeta;
 
   /**
    * Returns an array of time zone ids.
@@ -173,6 +208,31 @@ export class TzImpl {
   }
 
   /**
+   * Metadata related to a zone, such as the list of country codes that overlap with
+   * the zone, the latitude and longitude, and the current standard offset, in milliseconds.
+   * These can be used to display user interfaces for selecting a zone.
+   */
+  zoneMeta(id: string): ZoneMeta {
+    const rec = this.record(id);
+    if (rec) {
+      return {
+        zoneid: rec[0],
+        stdoffset: rec[1].stdoff,
+        latitude: rec[1].latitude,
+        longitude: rec[1].longitude,
+        countries: rec[1].countries,
+      };
+    }
+    return {
+      zoneid: id,
+      stdoffset: 0,
+      latitude: 0,
+      longitude: 0,
+      countries: [],
+    };
+  }
+
+  /**
    * Returns an array of time zone ids.
    */
   zoneIds(): string[] {
@@ -232,13 +292,19 @@ export class TzImpl {
  * @internal
  */
 class ZoneRecord {
+  // metadata
+  readonly stdoff: number;
+  readonly latitude: number;
+  readonly longitude: number;
+  readonly countries: string[]; // indices
+
   readonly localtime: ZoneInfoRec[];
   readonly types: number[];
   readonly untils: number[];
   readonly len: number;
 
   constructor(raw: string, index: number[]) {
-    const [_info, _types, _untils] = raw.split('_');
+    const [_std, _lat, _lon, _countries, _info, _types, _untils] = raw.split('_');
     const untils = numarray(_untils);
     const types = _types ? _types.split('').map((t) => TYPES[t]) : [];
 
@@ -251,6 +317,10 @@ class ZoneRecord {
       }
     }
 
+    this.stdoff = parseInt(_std, 36) * 1000;
+    this.latitude = parseInt(_lat, 36) / 1e6;
+    this.longitude = parseInt(_lon, 36) / 1e6;
+    this.countries = _countries ? _countries.split(',') : [];
     this.localtime = _info.split('|').map(this.decodeInfo);
     this.types = types;
     this.untils = untils;

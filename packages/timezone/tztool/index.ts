@@ -6,6 +6,7 @@ import { TZif } from './tzif';
 import { setupTZDB } from './tzdb';
 import { parseZIC } from './zic';
 import { encodeZones } from './encode';
+import { parseZoneTab } from './zonetab';
 
 const VERSION = '2020a';
 
@@ -33,9 +34,11 @@ const runGenerate = (argv: yargs.Arguments<GenerateOptions>) => {
 
   const tzdata = filepath.join(repo, 'tzdata.zi');
   const zonedir = filepath.join(repo, 'zones');
+  const zonetab = filepath.join(repo, 'zone1970.tab');
 
-  const { links, zones } = parseZIC(tzdata);
-  const data = encodeZones(tag || VERSION, zonedir, zones, links);
+  const { links, stdoff, zones } = parseZIC(tzdata);
+  const metadata = parseZoneTab(zonetab);
+  const data = encodeZones(tag || VERSION, zonedir, zones, links, stdoff, metadata);
 
   if (argv.out) {
     fs.writeFileSync(argv.out, data, { encoding: 'utf-8' });
