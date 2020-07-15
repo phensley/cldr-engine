@@ -290,4 +290,9 @@ export interface ExemplarCity {
 export interface TimeZoneInfo {
   id: string;
   city: ExemplarCity;
+  countries: string[];
+  latitude: number;
+  longitude: number;
+  stdoffset: number;
+  metazone: string;
 }

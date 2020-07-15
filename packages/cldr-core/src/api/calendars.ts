@@ -51,7 +51,7 @@ import { Calendars } from './api';
 import { PrivateApiImpl } from './private';
 import { CalendarContext } from '../internals/calendars/formatter';
 import { NumberParams } from '../common/private';
-import { getStableTimeZoneId, substituteZoneAlias } from '../systems/calendars/timezone';
+import { getStableTimeZoneId, substituteZoneAlias, currentMetazone } from '../systems/calendars/timezone';
 
 const DOW_FIELDS: RelativeTimeFieldType[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
@@ -395,7 +395,19 @@ export class CalendarsImpl implements Calendars {
     const id = this.resolveTimeZoneId(zoneid) || 'Factory';
     const stableid = getStableTimeZoneId(id);
     const city = this.exemplarCities[stableid] || this.exemplarCities['Etc/Unknown'];
-    return { id, city: { name: city } };
+    const metazone = currentMetazone(id) || '';
+    const { countries, latitude, longitude, stdoffset } = TZ.zoneMeta(id)!; // Factory fallback will return a record
+    return {
+      id,
+      city: {
+        name: city,
+      },
+      countries,
+      latitude,
+      longitude,
+      stdoffset,
+      metazone,
+    };
   }
 
   timeZoneFromUTC(utc: number, zoneid: string): ZoneInfo | undefined {

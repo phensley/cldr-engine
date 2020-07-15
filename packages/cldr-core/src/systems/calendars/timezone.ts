@@ -45,6 +45,8 @@ export const zoneInfoFromUTC = (zoneid: string, utc: number): ZoneInfo => {
   };
 };
 
+export const currentMetazone = (id: string) => metazones!.getMetazone(id, Number.MAX_SAFE_INTEGER);
+
 /**
  * Map a given timezone identifier to a CLDR stable timezone id.
  * This is lighter-weight than going through `zoneInfoFromUTC`

@@ -99,8 +99,10 @@ export interface Tz {
    * Metadata related to a zone, such as the list of country codes that overlap with
    * the zone, the latitude and longitude, and the current standard offset, in milliseconds.
    * These can be used to display user interfaces for selecting a zone.
+   *
+   * If the zone identifier does not match a known zone or alias this returns undefined.
    */
-  zoneMeta(id: string): ZoneMeta;
+  zoneMeta(id: string): ZoneMeta | undefined;
 
   /**
    * Returns an array of time zone ids.
@@ -212,7 +214,7 @@ export class TzImpl {
    * the zone, the latitude and longitude, and the current standard offset, in milliseconds.
    * These can be used to display user interfaces for selecting a zone.
    */
-  zoneMeta(id: string): ZoneMeta {
+  zoneMeta(id: string): ZoneMeta | undefined {
     const rec = this.record(id);
     if (rec) {
       return {
@@ -223,13 +225,7 @@ export class TzImpl {
         countries: rec[1].countries,
       };
     }
-    return {
-      zoneid: id,
-      stdoffset: 0,
-      latitude: 0,
-      longitude: 0,
-      countries: [],
-    };
+    return;
   }
 
   /**
