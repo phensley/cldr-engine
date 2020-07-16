@@ -1762,7 +1762,17 @@ export interface TimeZoneInfo {
     // (undocumented)
     city: ExemplarCity;
     // (undocumented)
+    countries: string[];
+    // (undocumented)
     id: string;
+    // (undocumented)
+    latitude: number;
+    // (undocumented)
+    longitude: number;
+    // (undocumented)
+    metazone: string;
+    // (undocumented)
+    stdoffset: number;
 }
 
 // @public (undocumented)

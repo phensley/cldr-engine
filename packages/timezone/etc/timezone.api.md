@@ -22,6 +22,7 @@ export interface Tz {
     resolveId(id: string): string | undefined;
     utcZone(): ZoneInfo;
     zoneIds(): string[];
+    zoneMeta(id: string): ZoneMeta | undefined;
 }
 
 // @public
@@ -32,6 +33,7 @@ export class TzImpl {
     resolveId(id: string): string | undefined;
     utcZone(): ZoneInfo;
     zoneIds(): string[];
+    zoneMeta(id: string): ZoneMeta | undefined;
     }
 
 // @public
@@ -39,6 +41,15 @@ export interface ZoneInfo {
     abbr: string;
     dst: number;
     offset: number;
+    zoneid: string;
+}
+
+// @public
+export interface ZoneMeta {
+    countries: string[];
+    latitude: number;
+    longitude: number;
+    stdoffset: number;
     zoneid: string;
 }
 

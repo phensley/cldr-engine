@@ -32,6 +32,11 @@ export interface ZoneInfo {
   offset: number;
 }
 
+/**
+ * Represents metadata associated with a timezone.
+ *
+ * @public
+ */
 export interface ZoneMeta {
   /**
    * Time zone identifier. Corrected if the metadata was looked up using an alias.
