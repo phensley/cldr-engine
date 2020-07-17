@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [UNRELEASED]
+
+### Added
+
+- The `phensley/timezone` package includes a new `TZ.zoneMeta` method to return metadata for a timezone. This can be useful for displaying user interfaces for choosing a timezone:
+
+  - Current standard offset in milliseconds.
+  - Latitude and longitude to 6 decimal places, for the timezone's "principal location"
+  - List of ISO 3166 2-letter country codes for countries which overlap the timezone.
+
+- The `cldr.Calendars.timeZoneInfo` result `TimeZoneInfo` now includes the same properties as `TZ.zoneMeta` above, plus the following:
+
+  - Current [CLDR metazone](http://www.unicode.org/reports/tr35/tr35-dates.html#Metazone_Names) for the timezone.
+
 ## [1.2.1]
 
 ### Fixed/Changed
