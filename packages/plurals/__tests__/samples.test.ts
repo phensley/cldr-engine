@@ -20,6 +20,11 @@ SAMPLES.forEach((line) => {
     return;
   }
   const [typ, lang, category, _samples] = line.split(/\s+/);
+
+  if (lang !== 'fr') {
+    return;
+  }
+
   const samples = _samples.split(',');
   const key = `${lang} - ${typ}`;
 
@@ -58,6 +63,7 @@ Object.keys(TESTCASES)
     test(key, () => {
       for (const c of TESTCASES[key]) {
         for (const sample of c.samples) {
+          console.log('>>', sample);
           expect(sample).toHaveCategory(c.typ, c.lang, c.category);
         }
       }

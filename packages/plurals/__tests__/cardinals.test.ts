@@ -22,6 +22,9 @@ test('french', () => {
 
   expect(cardinal(lang, '1.2')).toEqual('one');
   expect(cardinal(lang, '1.7')).toEqual('one');
+
+  expect(cardinal(lang, '100000')).toEqual('other');
+  expect(cardinal(lang, '1000000')).toEqual('many');
 });
 
 test('lithuanian', () => {

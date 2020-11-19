@@ -49,9 +49,9 @@ const POWERS10 = [
 // by 10 will still be < MAX_SAFE_INTEGER.
 const LIMIT = 10000000000000;
 
-const FIELDS: (keyof NumberOperands)[] = ['n', 'i', 'v', 'w', 'f', 't'];
+const FIELDS: (keyof NumberOperands)[] = ['n', 'i', 'v', 'w', 'f', 't', 'c'];
 
-export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
+export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't' | 'c';
 
 /**
  * Operands for use in evaluating localized plural rules:
@@ -65,6 +65,8 @@ export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
  *   w       number of visible fraction digits in n, without trailing zeros
  *   f       visible fractional digits in n, with trailing zeros
  *   t       visible fractional digits in n, without trailing zeros
+ *   c       compact decimal exponent value
+ *   e       synonym for 'c', may be redefined in the future
  *
  * @public
  */
@@ -75,8 +77,9 @@ export class NumberOperands {
   w: number = 0;
   f: number = 0;
   t: number = 0;
+  c: number = 0;
 
-  constructor(d: Decimal) {
+  constructor(d: Decimal, decimals: number = 0) {
     const props = d.properties();
     const flag = props[3];
     if (flag) {
@@ -88,8 +91,6 @@ export class NumberOperands {
 
     const len = data.length;
     const last = len - 1;
-    // const neg = sign === -1;
-    // const dec = exp < 0;
     const precision = last * Constants.RDIGITS + digitCount(data[last]);
 
     // Local operands
@@ -98,6 +99,12 @@ export class NumberOperands {
     let w = 0;
     let f = 0;
     let t = 0;
+
+    // Compact decimal exponent value
+    // See https://www.unicode.org/reports/tr35/tr35-numbers.html#Operands
+    // Assumes compact exponent, which should never have a power of 10 that is
+    // less than zero.
+    let c = exp < 0 ? 0 : exp + decimals;
 
     // Count trailing zeros
     let trail = 0;
@@ -188,6 +195,7 @@ export class NumberOperands {
     this.w = w;
     this.f = f;
     this.t = t;
+    this.c = c;
   }
 
   toString(): string {

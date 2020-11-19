@@ -2,43 +2,97 @@ import { Decimal } from '@phensley/decimal';
 import { NumberOperands } from '../src';
 import { digitCount } from '../src/operands';
 
-const operands = (n: string) => new NumberOperands(new Decimal(n)).toString();
+const operands = (n: string, c: number = 0) => new NumberOperands(new Decimal(n), c).toString();
+
+test('foo', () => {
+  let ops: string;
+
+  ops = operands('1000000.0');
+  expect(ops).toEqual('n: 1000000, i: 1000000, v: 1, w: 0, f: 0, t: 0, c: 6');
+});
+
+// Examples from https://www.unicode.org/reports/tr35/tr35-numbers.html#Operands
+test('tr35 examples', () => {
+  let ops: string;
+
+  ops = operands('1');
+  expect(ops).toEqual('n: 1, i: 1, v: 0, w: 0, f: 0, t: 0, c: 0');
+
+  ops = operands('1.0');
+  expect(ops).toEqual('n: 1, i: 1, v: 1, w: 0, f: 0, t: 0, c: 0');
+
+  ops = operands('1.00');
+  expect(ops).toEqual('n: 1, i: 1, v: 2, w: 0, f: 0, t: 0, c: 0');
+
+  ops = operands('1.3');
+  expect(ops).toEqual('n: 1, i: 1, v: 1, w: 1, f: 3, t: 3, c: 0');
+
+  ops = operands('1.30');
+  expect(ops).toEqual('n: 1, i: 1, v: 2, w: 1, f: 30, t: 3, c: 0');
+
+  ops = operands('1.03');
+  expect(ops).toEqual('n: 1, i: 1, v: 2, w: 2, f: 3, t: 3, c: 0');
+
+  ops = operands('1.230');
+  expect(ops).toEqual('n: 1, i: 1, v: 3, w: 2, f: 230, t: 23, c: 0');
+
+  ops = operands('1200000');
+  expect(ops).toEqual('n: 1200000, i: 1200000, v: 0, w: 0, f: 0, t: 0, c: 0');
+
+  ops = operands('1.2e6', 1);
+  expect(ops).toEqual('n: 1200000, i: 1200000, v: 0, w: 0, f: 0, t: 0, c: 6');
+
+  ops = operands('123e6', 0);
+  expect(ops).toEqual('n: 123000000, i: 123000000, v: 0, w: 0, f: 0, t: 0, c: 6');
+
+  ops = operands('123e5', 0);
+  expect(ops).toEqual('n: 12300000, i: 12300000, v: 0, w: 0, f: 0, t: 0, c: 5');
+
+  ops = operands('123e5', 0);
+  expect(ops).toEqual('n: 12300000, i: 12300000, v: 0, w: 0, f: 0, t: 0, c: 5');
+
+  ops = operands('1200.50');
+  expect(ops).toEqual('n: 1200, i: 1200, v: 2, w: 1, f: 50, t: 5, c: 0');
+
+  ops = operands('1.20050e3', 2);
+  expect(ops).toEqual('n: 1200, i: 1200, v: 2, w: 1, f: 50, t: 5, c: 3');
+});
 
 test('basics', () => {
   let ops: string;
 
   ops = operands('nan');
-  expect(ops).toEqual('n: 0, i: 0, v: 0, w: 0, f: 0, t: 0');
+  expect(ops).toEqual('n: 0, i: 0, v: 0, w: 0, f: 0, t: 0, c: 0');
 
   ops = operands('infinity');
-  expect(ops).toEqual('n: 0, i: 0, v: 0, w: 0, f: 0, t: 0');
+  expect(ops).toEqual('n: 0, i: 0, v: 0, w: 0, f: 0, t: 0, c: 0');
 
   ops = operands('-infinity');
-  expect(ops).toEqual('n: 0, i: 0, v: 0, w: 0, f: 0, t: 0');
+  expect(ops).toEqual('n: 0, i: 0, v: 0, w: 0, f: 0, t: 0, c: 0');
 
   ops = operands('0');
-  expect(ops).toEqual('n: 0, i: 0, v: 0, w: 0, f: 0, t: 0');
+  expect(ops).toEqual('n: 0, i: 0, v: 0, w: 0, f: 0, t: 0, c: 0');
 
   ops = operands('0.00');
-  expect(ops).toEqual('n: 0, i: 0, v: 2, w: 0, f: 0, t: 0');
+  expect(ops).toEqual('n: 0, i: 0, v: 2, w: 0, f: 0, t: 0, c: 0');
 
   ops = operands('1');
-  expect(ops).toEqual('n: 1, i: 1, v: 0, w: 0, f: 0, t: 0');
+  expect(ops).toEqual('n: 1, i: 1, v: 0, w: 0, f: 0, t: 0, c: 0');
 
   ops = operands('1.0');
-  expect(ops).toEqual('n: 1, i: 1, v: 1, w: 0, f: 0, t: 0');
+  expect(ops).toEqual('n: 1, i: 1, v: 1, w: 0, f: 0, t: 0, c: 0');
 
   ops = operands('1e-3');
-  expect(ops).toEqual('n: 0, i: 0, v: 3, w: 3, f: 1, t: 1');
+  expect(ops).toEqual('n: 0, i: 0, v: 3, w: 3, f: 1, t: 1, c: -3');
 
   ops = operands('1e2');
-  expect(ops).toEqual('n: 100, i: 100, v: 0, w: 0, f: 0, t: 0');
+  expect(ops).toEqual('n: 100, i: 100, v: 0, w: 0, f: 0, t: 0, c: 2');
 
   ops = operands('123.12');
-  expect(ops).toEqual('n: 123, i: 123, v: 2, w: 2, f: 12, t: 12');
+  expect(ops).toEqual('n: 123, i: 123, v: 2, w: 2, f: 12, t: 12, c: 2');
 
   ops = operands('-123.400');
-  expect(ops).toEqual('n: 123, i: 123, v: 3, w: 1, f: 400, t: 4');
+  expect(ops).toEqual('n: 123, i: 123, v: 3, w: 1, f: 400, t: 4, c: 2');
 
   ops = operands('-1234567890.12300');
   expect(ops).toEqual('n: 1234567890, i: 1234567890, v: 5, w: 3, f: 12300, t: 123');

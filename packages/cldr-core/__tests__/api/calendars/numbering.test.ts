@@ -19,17 +19,17 @@ test('decimals', () => {
   let s: string;
 
   s = api.formatDate(mar11, { datetime: 'full' });
-  expect(s).toEqual('2018年3月10日星期六 北美太平洋标准时间 下午11:00:25');
+  expect(s).toEqual('2018年3月10日星期六北美太平洋标准时间 下午11:00:25');
 
   s = api.formatDate(mar11, { datetime: 'full', nu: 'native' });
-  expect(s).toEqual('二〇一八年三月一〇日星期六 北美太平洋标准时间 下午一一:〇〇:二五');
+  expect(s).toEqual('二〇一八年三月一〇日星期六北美太平洋标准时间 下午一一:〇〇:二五');
 
   s = api.formatDate(mar11, { datetime: 'full', nu: 'hanidec' });
-  expect(s).toEqual('二〇一八年三月一〇日星期六 北美太平洋标准时间 下午一一:〇〇:二五');
+  expect(s).toEqual('二〇一八年三月一〇日星期六北美太平洋标准时间 下午一一:〇〇:二五');
 
   // TODO: algorithmic numbering not yet implemented
   s = api.formatDate(mar11, { datetime: 'full', nu: 'hans' as NumberSystemType });
-  expect(s).toEqual('2018年3月10日星期六 北美太平洋标准时间 下午11:00:25');
+  expect(s).toEqual('2018年3月10日星期六北美太平洋标准时间 下午11:00:25');
 
   api = calendarsApi('my');
   s = api.formatDate(mar11, { datetime: 'full' });
@@ -37,7 +37,7 @@ test('decimals', () => {
 
   api = calendarsApi('mr');
   s = api.formatDate(mar11, { datetime: 'full' });
-  expect(s).toEqual('शनिवार, १० मार्च, २०१८ रोजी ११:००:२५ म.उ. पॅसिफिक प्रमाण वेळ');
+  expect(s).toEqual('शनिवार, १० मार्च, २०१८ रोजी ११:००:२५ PM पॅसिफिक प्रमाण वेळ');
 
   api = calendarsApi('bn-IN');
   s = api.formatDate(mar11, { datetime: 'full' });

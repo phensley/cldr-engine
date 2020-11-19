@@ -18,6 +18,8 @@ test('scientific string', () => {
   expect(sci('1', 2)).toEqual('10E-1');
   expect(sci('123', 2)).toEqual('12.3E+1');
   expect(sci('12345.678', 2)).toEqual('12.345678E+3');
+
+  expect(sci('1.2e6')).toEqual('1.2E+6');
 });
 
 test('negative zero', () => {

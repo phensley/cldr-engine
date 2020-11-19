@@ -221,7 +221,7 @@ test('currency short', () => {
   e = numbersApi('zh');
   s = e.formatCurrency('999999.987', 'USD', opts);
   // TODO: support algorithmic numbering for chinese finance
-  expect(s).toEqual('US$100万');
+  expect(s).toEqual('US$1M');
 });
 
 test('currency fractions', () => {

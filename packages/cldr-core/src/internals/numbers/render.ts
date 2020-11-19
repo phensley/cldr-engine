@@ -235,7 +235,7 @@ export const CURRENCY_SPACING_MATCHERS: { [x: string]: (s: string) => boolean } 
   // find cldr-data -name numbers.json -exec egrep -e '(currencyMatch|surroundingMatch)' {} \;|sort |uniq -c
 
   '[:digit:]': (s: string) => RE_DIGIT.test(s),
-  '[:^S:]': (s: string) => !RE_SYMBOL.test(s),
+  '[[:^S:]&[:^Z:]]': (s: string) => !RE_SYMBOL.test(s),
 };
 
 const insertBetween = (spacing: CurrencySpacingPatterns, currency: string, surrounding: string): boolean => {

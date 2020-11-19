@@ -46,6 +46,7 @@ export class LanguageTag {
   protected core: (undefined | string)[];
   protected _extensions: { [x: string]: string[] };
   protected _privateUse: string;
+  protected _extlangs: string[];
   protected _compact?: string;
   protected _expanded?: string;
 
@@ -56,6 +57,7 @@ export class LanguageTag {
     variant?: string,
     extensions?: { [x: string]: string[] },
     privateUse?: string,
+    extlangs?: string[],
   ) {
     this.core = [
       canonicalize(LanguageTagField.LANGUAGE, language),
@@ -65,6 +67,7 @@ export class LanguageTag {
     ];
     this._extensions = extensions || {};
     this._privateUse = privateUse || '';
+    this._extlangs = extlangs || [];
   }
 
   /**
@@ -142,6 +145,13 @@ export class LanguageTag {
    */
   privateUse(): string {
     return this._privateUse;
+  }
+
+  /**
+   * Extended language tags, used for BCP 47 canonicalization.
+   */
+  extlangs(): string[] {
+    return this._extlangs;
   }
 
   /**

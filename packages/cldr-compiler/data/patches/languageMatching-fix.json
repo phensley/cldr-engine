@@ -423,7 +423,6 @@
           {
             "desired": "nn",
             "distance": "20",
-            "oneway": "1",
             "supported": "no"
           },
           {

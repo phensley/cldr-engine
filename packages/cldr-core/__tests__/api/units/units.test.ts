@@ -105,7 +105,7 @@ test('per unit pattern schema', () => {
   expect(p).toEqual('{0} per {1}');
 
   p = units.long.timesPattern.get(en);
-  expect(p).toEqual('{0}⋅{1}');
+  expect(p).toEqual('{0}-{1}');
 });
 
 test('per unit', () => {
@@ -130,22 +130,22 @@ test('times unit', () => {
   let s: string;
 
   s = api.formatQuantity({ value: '1', unit: 'newton', times: 'meter' });
-  expect(s).toEqual('1 newton⋅meter');
+  expect(s).toEqual('1 newton-meter');
 
   s = api.formatQuantity({ value: '123', unit: 'newton', times: 'meter' });
-  expect(s).toEqual('123 newton⋅meters');
+  expect(s).toEqual('123 newton-meters');
 
   s = api.formatQuantity({ value: '1', unit: 'foot', times: 'pound' });
-  expect(s).toEqual('1 foot⋅pound');
+  expect(s).toEqual('1 foot-pound');
 
   s = api.formatQuantity({ value: '123', unit: 'foot', times: 'pound' });
-  expect(s).toEqual('123 foot⋅pounds');
+  expect(s).toEqual('123 foot-pounds');
 
   s = api.formatQuantity({ value: '1', unit: 'meter', times: 'kilogram' });
-  expect(s).toEqual('1 meter⋅kilogram');
+  expect(s).toEqual('1 meter-kilogram');
 
   s = api.formatQuantity({ value: '123', unit: 'meter', times: 'kilogram' });
-  expect(s).toEqual('123 meter⋅kilograms');
+  expect(s).toEqual('123 meter-kilograms');
 });
 
 test('significant', () => {

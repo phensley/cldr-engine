@@ -7,7 +7,7 @@ export type RuleMap = { [x: string]: Rule[] };
 
 export type RangeMap = number | { [x: number]: number };
 
-export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
+export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't' | 'c';
 
 // Notation for categories in compact plural rules
 const CATEGORIES: string[] = ['zero', 'one', 'two', 'few', 'many', 'other'];

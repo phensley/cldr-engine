@@ -52,6 +52,7 @@ export const dayPeriodRules: { [x: string]: string } = {
   kn: '2 5 3 0 1 5|0 1 a0 k0 u0 z0',
   ko: '2 5 3 4 6 0 1 5|0 1 50 a0 k0 k1 u0 z0',
   ky: '2 5 3 6 0 1 5|0 1 a0 k0 k1 u0 z0',
+  lij: '2 5 3 6 0 1 5|0 1 a0 k0 k1 u0 10o',
   lo: '2 5 3 6 0 1 5|0 1 8c k0 k1 qo xc',
   lt: '2 5 3 6 0 1|0 1 a0 k0 k1 u0',
   lv: '2 5 3 6 0 1 5|0 1 a0 k0 k1 u0 12c',
