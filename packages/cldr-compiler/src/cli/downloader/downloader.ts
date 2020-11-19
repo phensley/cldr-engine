@@ -11,7 +11,8 @@ import fetch, { Response } from 'node-fetch';
  */
 
 // Temporary location prior to official Github JSON release
-const BASEURL = 'https://glonk.com/unicode-cldr';
+// const BASEURL = 'https://glonk.com/unicode-cldr';
+const BASEURL = 'http://localhost:8000/unicode-cldr';
 
 // const BASEURL = 'https://github.com/unicode-cldr';
 const DATAROOT = filepath.resolve(filepath.join(__dirname, '../../../.cldr'));
