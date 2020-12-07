@@ -122,31 +122,33 @@ export class GeneralImpl implements General {
     if (typeof code === 'string') {
       s = this._getVectorAlt(arrow, code, type);
     }
-    // Try language + region
-    if (!s && tag.hasLanguage() && tag.hasRegion()) {
-      s = this._getVectorAlt(arrow, F_LANG_REGION(tag), type);
-    }
-    // Try language + script
-    if (!s && tag.hasLanguage() && tag.hasScript()) {
-      s = this._getVectorAlt(arrow, F_LANG_SCRIPT(tag), type);
-    }
-    // Try language if script and region are empty
-    if (!s && !tag.hasScript() && !tag.hasRegion()) {
-      s = this._getVectorAlt(arrow, tag.language(), type);
-    }
-
-    // Resolve to fill in unknown subtags, then attempt combinations
     if (!s) {
-      const locale = this.resolveLocale(tag);
-      tag = locale.tag;
-      for (const func of LANGUAGE_FUNCS) {
-        const id = func(tag);
-        s = this._getVectorAlt(arrow, id, type);
-        if (s) {
-          // Found one
-          break;
+      let resolved = false;
+      outer: while (true) {
+        // If language tag is undefined
+        if (tag.hasLanguage() || !options.autoResolve) {
+          for (const func of LANGUAGE_FUNCS) {
+            const id = func(tag);
+            s = this._getVectorAlt(arrow, id, type);
+            if (s) {
+              // Found one
+              break outer;
+            }
+          }
         }
+
+        // If we've passed through twice, or auto resolving is not enabled, exit
+        if (resolved || !options.autoResolve) {
+          break outer;
+        }
+        // Fill in unknown subtags
+        ({ tag } = this.resolveLocale(tag));
+        resolved = true;
       }
+    }
+    // Falls back to "unknown"
+    if (!s) {
+      s = this._getVectorAlt(arrow, 'und', type);
     }
     return this.general.contextTransform(s, this.transform, _ctx(options), 'languages');
   }
@@ -154,20 +156,27 @@ export class GeneralImpl implements General {
   getScriptDisplayName(code: string | LanguageTag, options: DisplayNameOptions = DEFAULT_NAME_OPTIONS): string {
     const arrow = this.names.scripts.displayName;
     const type = options.type || 'none';
+
+    let tag: LanguageTag = typeof code === 'string' ? parseLanguageTag(code) : code;
     let s: string = '';
     if (typeof code === 'string') {
       s = this._getVectorAlt(arrow, code, type);
-
-      // If language is blank or we have an explicit script subtag, use the
-      // script subtag as-is. This will resolve "und-Zzzz" to "Unknown" but
-      // "en-Zzzz" will fall through to resolve "Latin"
-    } else if (!code.hasLanguage() || code.hasScript()) {
-      s = this._getVectorAlt(arrow, code.script(), type);
     }
-    if (!s) {
-      // Resolve to populate the script
-      const locale = this.resolveLocale(code);
+
+    // If language is blank or we have an explicit script subtag, use the
+    // script subtag as-is. This will resolve "und-Zzzz" to "Unknown" but
+    // "en-Zzzz" will fall through to resolve "Latin"
+    if (!s && (!tag.hasLanguage() || tag.hasScript())) {
+      s = this._getVectorAlt(arrow, tag.script(), type);
+    }
+    // If we've failed to resolve and auto-resolve is set, try it
+    if (!s && options.autoResolve) {
+      const locale = this.resolveLocale(tag);
       s = this._getVectorAlt(arrow, locale.tag.script(), type);
+    }
+    // Falls back to "unknown"
+    if (!s) {
+      s = this._getVectorAlt(arrow, 'Zzzz', type);
     }
     return this.general.contextTransform(s, this.transform, _ctx(options), 'script');
   }
@@ -175,20 +184,27 @@ export class GeneralImpl implements General {
   getRegionDisplayName(code: string | LanguageTag, options: DisplayNameOptions = DEFAULT_NAME_OPTIONS): string {
     const arrow = this.names.regions.displayName;
     const type = options.type || 'none';
+
+    let tag: LanguageTag = typeof code === 'string' ? parseLanguageTag(code) : code;
     let s: string = '';
     if (typeof code === 'string') {
       s = this._getVectorAlt(arrow, code, type);
-
-      // If language is blank or we have an explicit region subtag, use
-      // the region subtag as-is. This will resolve "und-ZZ" to "Unknown" but
-      // "en-Zzzz" will fall through to resolve "United States"
-    } else if (!code.hasLanguage() || code.hasRegion()) {
-      s = this._getVectorAlt(arrow, code.region(), type);
     }
-    if (!s) {
-      // Resolve to populate the region
+
+    // If language is blank or we have an explicit region subtag, use
+    // the region subtag as-is. This will resolve "und-ZZ" to "Unknown" but
+    // "en-Zzzz" will fall through to resolve "United States"
+    if (!s && (!tag.hasLanguage() || tag.hasRegion())) {
+      s = this._getVectorAlt(arrow, tag.region(), type);
+    }
+    // If we've failed to resolve and auto-resolve is set, try it
+    if (!s && options.autoResolve) {
       const { tag } = this.resolveLocale(code);
       s = this._getVectorAlt(arrow, tag.region(), type);
+    }
+    // Falls back to "unknown"
+    if (!s) {
+      s = this._getVectorAlt(arrow, 'ZZ', type);
     }
     // No context transform for region
     return s;

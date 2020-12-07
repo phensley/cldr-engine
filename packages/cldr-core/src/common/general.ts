@@ -22,6 +22,8 @@ export interface DisplayNameOptions {
   type?: AltType;
 
   context?: ContextType;
+
+  autoResolve?: boolean;
 }
 
 /**

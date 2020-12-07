@@ -21,7 +21,7 @@ test('custom script display names', () => {
   expect(s).toEqual('Latin');
 
   s = api.getLanguageDisplayName('Arab');
-  expect(s).toEqual('');
+  expect(s).toEqual('Unknown language');
 });
 
 test('custom region display names', () => {

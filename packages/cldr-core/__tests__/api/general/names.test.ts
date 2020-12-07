@@ -30,6 +30,7 @@ test('languages', () => {
   // tags
   tag = parseLanguageTag('und');
   expect(api.getLanguageDisplayName(tag)).toEqual('Unknown language');
+  expect(api.getLanguageDisplayName(tag, { autoResolve: true })).toEqual('American English');
   tag = parseLanguageTag('en');
   expect(api.getLanguageDisplayName(tag)).toEqual('English');
   tag = parseLanguageTag('en-US');
@@ -39,9 +40,11 @@ test('languages', () => {
   tag = parseLanguageTag('zh-Hans');
   expect(api.getLanguageDisplayName(tag)).toEqual('Simplified Chinese');
   tag = parseLanguageTag('zh-Zzzz-CN');
-  expect(api.getLanguageDisplayName(tag)).toEqual('Simplified Chinese');
+  expect(api.getLanguageDisplayName(tag)).toEqual('Chinese');
+  expect(api.getLanguageDisplayName(tag, { autoResolve: true })).toEqual('Chinese');
   tag = parseLanguageTag('zh-Zzzz-TW');
-  expect(api.getLanguageDisplayName(tag)).toEqual('Traditional Chinese');
+  expect(api.getLanguageDisplayName(tag)).toEqual('Chinese');
+  expect(api.getLanguageDisplayName(tag, { autoResolve: true })).toEqual('Chinese');
 
   api = generalApi('es');
   expect(api.getLanguageDisplayName('en')).toEqual('Inglés');
@@ -83,15 +86,18 @@ test('scripts', () => {
 
   // tags
   tag = parseLanguageTag('en-Zzzz');
-  expect(api.getScriptDisplayName(tag)).toEqual('Latin');
+  expect(api.getScriptDisplayName(tag)).toEqual('Unknown Script');
   tag = parseLanguageTag('und-Zzzz');
   expect(api.getScriptDisplayName(tag)).toEqual('Unknown Script');
   tag = parseLanguageTag('en');
-  expect(api.getScriptDisplayName(tag)).toEqual('Latin');
+  expect(api.getScriptDisplayName(tag)).toEqual('Unknown Script');
+  expect(api.getScriptDisplayName(tag, { autoResolve: true })).toEqual('Latin');
   tag = parseLanguageTag('zh-CN');
-  expect(api.getScriptDisplayName(tag)).toEqual('Simplified');
+  expect(api.getScriptDisplayName(tag)).toEqual('Unknown Script');
+  expect(api.getScriptDisplayName(tag, { autoResolve: true })).toEqual('Simplified');
   tag = parseLanguageTag('zh-TW');
-  expect(api.getScriptDisplayName(tag)).toEqual('Traditional');
+  expect(api.getScriptDisplayName(tag)).toEqual('Unknown Script');
+  expect(api.getScriptDisplayName(tag, { autoResolve: true })).toEqual('Traditional');
 
   api = generalApi('es');
   expect(api.getScriptDisplayName('Latn')).toEqual('Latino');
@@ -126,8 +132,10 @@ test('regions', () => {
   expect(api.getRegionDisplayName(tag)).toEqual('United States');
   tag = parseLanguageTag('und-ZZ');
   expect(api.getRegionDisplayName(tag)).toEqual('Unknown Region');
+  expect(api.getRegionDisplayName(tag, { autoResolve: true })).toEqual('Unknown Region');
   tag = parseLanguageTag('en-ZZ');
-  expect(api.getRegionDisplayName(tag)).toEqual('United States');
+  expect(api.getRegionDisplayName(tag)).toEqual('Unknown Region');
+  expect(api.getRegionDisplayName(tag, { autoResolve: true })).toEqual('United States');
 
   api = generalApi('es');
   expect(api.getRegionDisplayName('US')).toEqual('Estados Unidos');
