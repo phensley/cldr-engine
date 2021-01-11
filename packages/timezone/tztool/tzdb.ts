@@ -67,7 +67,7 @@ export const setupTZDB = (tag: string): string => {
   // make zic and tzdata.zi and generate tzif zone files
   exec(`make clean`, repo);
   exec(`make zic tzdata.zi`, repo);
-  exec(`./zic -d zones tzdata.zi`, repo);
+  exec(`./zic -b fat -d zones tzdata.zi`, repo);
 
   console.log(`Tag ${tag} built successfully`);
 
