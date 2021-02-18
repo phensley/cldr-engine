@@ -149,6 +149,8 @@ export abstract class CalendarDate {
     compare(other: CalendarDate): number;
     protected computeWeekFields(): void;
     // (undocumented)
+    protected _computeWeekFields(woyfield: number, ywoyfield: number, firstDay: number, minDays: number, dow: number, _dom: number, doy: number): void;
+    // (undocumented)
     dayOfMonth(): number;
     dayOfWeek(): number;
     dayOfWeekInMonth(): number;
@@ -241,10 +243,12 @@ export abstract class CalendarDate {
     // (undocumented)
     protected utcfields(): number[];
     // (undocumented)
-    protected weekNumber(desiredDay: number, dayOfPeriod: number, dayOfWeek: number): number;
+    protected weekNumber(firstDay: number, minDays: number, desiredDay: number, dayOfPeriod: number, dayOfWeek: number): number;
     weekOfMonth(): number;
     // (undocumented)
     weekOfYear(): number;
+    // (undocumented)
+    weekOfYearISO(): number;
     abstract withZone(zoneId: string): CalendarDate;
     // (undocumented)
     year(): number;
@@ -252,6 +256,8 @@ export abstract class CalendarDate {
     protected yearLength(y: number): number;
     // (undocumented)
     yearOfWeekOfYear(): number;
+    // (undocumented)
+    yearOfWeekofYearISO(): number;
     // Warning: (ae-forgotten-export) The symbol "ZoneInfo" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
