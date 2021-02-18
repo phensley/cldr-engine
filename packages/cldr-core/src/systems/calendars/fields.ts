@@ -35,7 +35,7 @@ export const enum DateField {
   IS_LEAP,
   IS_DST,
   ISO_YEAR_WOY,
-  ISO_WEEK_OF_YEAR // 24
+  ISO_WEEK_OF_YEAR, // 24
 }
 
 // 25 fields
