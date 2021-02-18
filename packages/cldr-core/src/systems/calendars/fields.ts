@@ -33,8 +33,10 @@ export const enum DateField {
   MILLIS,
   TZ_OFFSET,
   IS_LEAP,
-  IS_DST, // 22
+  IS_DST,
+  ISO_YEAR_WOY,
+  ISO_WEEK_OF_YEAR // 24
 }
 
-// 22 fields
-export const dateFields = (): number[] => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+// 25 fields
+export const dateFields = (): number[] => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
