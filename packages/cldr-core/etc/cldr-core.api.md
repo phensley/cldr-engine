@@ -257,7 +257,7 @@ export abstract class CalendarDate {
     // (undocumented)
     yearOfWeekOfYear(): number;
     // (undocumented)
-    yearOfWeekofYearISO(): number;
+    yearOfWeekOfYearISO(): number;
     // Warning: (ae-forgotten-export) The symbol "ZoneInfo" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)

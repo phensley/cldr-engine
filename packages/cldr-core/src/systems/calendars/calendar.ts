@@ -171,7 +171,7 @@ export abstract class CalendarDate {
     return this._fields[DateField.WEEK_OF_YEAR];
   }
 
-  yearOfWeekofYearISO(): number {
+  yearOfWeekOfYearISO(): number {
     this.computeWeekFields();
     return this._fields[DateField.ISO_YEAR_WOY];
   }

@@ -26,7 +26,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(1);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(53);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Dec 30
   d = d.subtract({ day: 1 });
@@ -34,7 +34,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(1);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(53);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Dec 29
   d = d.subtract({ day: 1 });
@@ -42,7 +42,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(1);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(53);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Dec 28
   d = d.subtract({ day: 1 });
@@ -50,7 +50,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(1);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(53);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Dec 27
   d = d.subtract({ day: 1 });
@@ -58,7 +58,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(1);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(52);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Dec 26
   d = d.subtract({ day: 1 });
@@ -66,7 +66,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(52);
   expect(d.yearOfWeekOfYear()).toEqual(2020);
   expect(d.weekOfYearISO()).toEqual(52);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Dec 25
   d = d.subtract({ day: 1 });
@@ -74,7 +74,16 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(52);
   expect(d.yearOfWeekOfYear()).toEqual(2020);
   expect(d.weekOfYearISO()).toEqual(52);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
+
+  //  January 2021
+  //  Su Mo Tu We Th Fr Sa
+  //                  1  2
+  //   3  4  5  6  7  8  9
+  //  10 11 12 13 14 15 16
+  //  17 18 19 20 21 22 23
+  //  24 25 26 27 28 29 30
+  //  31
 
   // Jan 1
   d = make(n, NEW_YORK).add({ day: 1 });
@@ -82,7 +91,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(1);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(53);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Jan 2
   d = d.add({ day: 1 });
@@ -90,7 +99,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(1);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(53);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Jan 3
   d = d.add({ day: 1 });
@@ -98,7 +107,7 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(2);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(53);
-  expect(d.yearOfWeekofYearISO()).toEqual(2020);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2020);
 
   // Jan 4
   d = d.add({ day: 1 });
@@ -106,5 +115,5 @@ test('weeks coverage', () => {
   expect(d.weekOfYear()).toEqual(2);
   expect(d.yearOfWeekOfYear()).toEqual(2021);
   expect(d.weekOfYearISO()).toEqual(1);
-  expect(d.yearOfWeekofYearISO()).toEqual(2021);
+  expect(d.yearOfWeekOfYearISO()).toEqual(2021);
 });
