@@ -27,6 +27,8 @@ module.exports = {
       { argsIgnorePattern: "^_.*$" }
     ],
     "@typescript-eslint/no-use-before-define": "off",
+    // warn prettier for now
+    "prettier/prettier": "warn",
   },
   settings: {
   }

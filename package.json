@@ -12,7 +12,7 @@
     "build:watch": "lerna exec --parallel -- tsc -w --preserveWatchOutput",
     "build:es:watch": "lerna exec --parallel -- tsc -w --preserveWatchOutput --module esnext --outDir lib-es",
     "clean": "lerna run --parallel clean && rimraf ./coverage && jest --clearCache",
-    "clean:full": "lerna run --parallel clean:full && rimraf ./node_modules",
+    "clean:full": "lerna run --parallel clean:full && rimraf ./node_modules yarn.lock",
     "depgraph": "depcruise -T dot -x tslib packages/cldr/src | dot -T pdf > depgraph.pdf",
     "format": "lerna exec --stream -- eslint --no-error-on-unmatched-pattern --fix \"'{src,tztool,__benchmarks__,__stress__,__tests__}/**/*.ts'\"",
     "link-all": "lerna exec --concurrency=1 yarn link",
