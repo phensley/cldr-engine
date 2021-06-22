@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [UNRELEASED]
+
+### Fixed/Changed
+
+- Fix types for character/line order.
+
 ## [1.2.4]
 
 ### Added
