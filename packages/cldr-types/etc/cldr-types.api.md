@@ -48,7 +48,7 @@ export interface CalendarSchema {
 }
 
 // @public (undocumented)
-export type CharacterOrderType = 'ttb' | 'btt';
+export type CharacterOrderType = 'ltr' | 'rtl';
 
 // @public (undocumented)
 export type ContextTransformFieldType = ('calendar-field' | 'currencyName' | 'day-format-except-narrow' | 'day-standalone-except-narrow' | 'era-abbr' | 'era-name' | 'keyValue' | 'languages' | 'month-format-except-narrow' | 'month-standalone-except-narrow' | 'number-spellout' | 'relative' | 'script' | 'typographicNames');
@@ -358,7 +358,7 @@ export interface LayoutSchema {
 }
 
 // @public (undocumented)
-export type LineOrderType = 'ltr' | 'rtl';
+export type LineOrderType = 'ttb' | 'btt';
 
 // @public (undocumented)
 export type ListPatternPositionType = 'start' | 'middle' | 'end' | 'two';
