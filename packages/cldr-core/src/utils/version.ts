@@ -1,3 +1,3 @@
-import { version } from './pkginfo.json';
+import pkginfo from './pkginfo.json';
 
-export const VERSION = version;
+export const VERSION = pkginfo.version;
