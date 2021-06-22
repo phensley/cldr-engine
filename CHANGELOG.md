@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Fixed/Changed
 
 - Fix types for character/line order.
+- Use default JSON export for version string.
 
 ## [1.2.4]
 
