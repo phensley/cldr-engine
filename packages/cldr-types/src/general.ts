@@ -1,7 +1,7 @@
 /**
  * @public
  */
-export type CharacterOrderType = 'ttb' | 'btt';
+export type CharacterOrderType = 'ltr' | 'rtl';
 
 /**
  * @public
@@ -11,7 +11,7 @@ export type ContextType = 'middle-of-text' | 'begin-sentence' | 'standalone' | '
 /**
  * @public
  */
-export type LineOrderType = 'ltr' | 'rtl';
+export type LineOrderType = 'ttb' | 'btt';
 
 /**
  * @public
