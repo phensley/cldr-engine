@@ -31,7 +31,7 @@ const ONE = new Rational(1);
 /**
  * Build a graph of conversion factors between units. Sets of conversion
  * factors are closed, e.g. any factor must be convertable into any other
- * unit in the set. Their must be a connected path of length 1 or greater
+ * unit in the set. There must be a connected path of length 1 or greater
  * between any two units.
  *
  * Gaps in the graph represent conversion factors that are unknown at the
