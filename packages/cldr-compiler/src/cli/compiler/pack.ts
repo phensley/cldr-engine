@@ -8,6 +8,7 @@ import { checksumIndices, CodeBuilder } from '@phensley/cldr-core';
 import { getMain } from '../../cldr';
 import { Encoder, EncoderMachine } from '../../resource/machine';
 import { ResourcePack } from '../../resource/pack';
+import { loadPatch, applyPatch, PatchFile } from './patch';
 import { buildLocaleMap, checkLanguages, getProjectInfo, ProjectInfo } from './util';
 
 import DEFAULT_CONFIG from './config.json';
@@ -54,6 +55,7 @@ export const sha256 = (data: string | Buffer): string => createHash('sha256').up
 export interface PackArgs {
   out: string;
   lang?: string;
+  patch?: string;
   config?: string;
   regions?: string;
   verbose: boolean;
@@ -100,6 +102,25 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
     fs.mkdirSync(dest);
   }
 
+  // We can apply zero or more patch files to the schema before generating
+  // resource files.
+  const patchfiles: PatchFile[] = [];
+  if (argv.patch) {
+    let fail = false;
+    for (const path of argv.patch.split(',')) {
+      try {
+        const patchfile = loadPatch(path);
+        patchfiles.push(patchfile);
+      } catch (e) {
+        console.warn(`failed to load patch: ${e}`);
+        fail = true;
+      }
+    }
+    if (fail) {
+      process.exit(1);
+    }
+  }
+
   // Configure the schema accessor builder
   const builder = new CodeBuilder(config);
   const origin = builder.origin();
@@ -127,6 +148,9 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
     const encoder = new PackEncoder(pack);
     const machine = new EncoderMachine(encoder, argv.verbose);
 
+    // Load patches if any. We pattern match the locale selector against each id
+    // to determine if the patch applies
+
     // For each locale, fetch its data from the JSON files and execute an encoder.
     locales.forEach((locale) => {
       if (argv.verbose) {
@@ -134,6 +158,14 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
       }
       pack.push(locale);
       const main = getMain(locale.id);
+      if (patchfiles.length) {
+        for (const patch of patchfiles) {
+          if (!applyPatch(locale.id, main, patch)) {
+            console.warn(`failed to apply patch ${patch.path} to ${locale.id}, aborting`);
+            process.exit(1);
+          }
+        }
+      }
       machine.encode(main, origin);
       if (argv.verbose) {
         console.warn('');
