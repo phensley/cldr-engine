@@ -1,6 +1,7 @@
 import * as yargs from 'yargs';
 import { runDump } from './dump';
 import { runPack } from './pack';
+import { runSchema } from './schema';
 import { getProjectInfo } from './util';
 
 /**
@@ -31,6 +32,18 @@ export const main = () => {
           .option('p', { alias: 'pack', required: true, description: 'Path to resource pack' })
           .option('c', { alias: 'config', description: 'Path to config used to generate resource pack' }),
       runDump,
+    )
+
+    .command(
+      'schema',
+      'Display the schema',
+      (y: yargs.Argv) =>
+        y
+          .option('l', { alias: 'lang', description: 'Languages to include' })
+          .option('r', { alias: 'regions', description: 'Regions to include' })
+          .option('o', { alias: 'out', default: '.', description: 'Output directory' })
+          .option('v', { alias: 'values', boolean: false, description: 'Include leaf values instead of counts' }),
+      runSchema,
     )
 
     .version(`compiler:${pkg.version} cldr:${pkg.cldrVersion}`)
