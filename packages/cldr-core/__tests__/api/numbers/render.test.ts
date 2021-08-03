@@ -1,20 +1,20 @@
 import { CURRENCY_SPACING_MATCHERS } from '../../../src/internals/numbers/render';
 
 const isDigit = (s: string) => CURRENCY_SPACING_MATCHERS['[:digit:]'](s);
-const notSymbol = (s: string) => CURRENCY_SPACING_MATCHERS['[:^S:]'](s);
+const notSymSpace = (s: string) => CURRENCY_SPACING_MATCHERS['[[:^S:]&[:^Z:]]'](s);
 
 test('symbol', () => {
-  expect(notSymbol('$')).toEqual(false); // Sc Currency Symbol
-  expect(notSymbol('+')).toEqual(false); // Sm Math Symbol
-  expect(notSymbol('^')).toEqual(false); // Sk Modifier Symbol
+  expect(notSymSpace('$')).toEqual(false); // Sc Currency Symbol
+  expect(notSymSpace('+')).toEqual(false); // Sm Math Symbol
+  expect(notSymSpace('^')).toEqual(false); // Sk Modifier Symbol
 
-  expect(notSymbol('-')).toEqual(true); // Pd Dash Punctuation
-  expect(notSymbol('%')).toEqual(true); // Po Other Punctuation
-  expect(notSymbol(' ')).toEqual(true); // Zs Space Separator
-  expect(notSymbol('\u00a0')).toEqual(true); // Zs Space Separator
+  expect(notSymSpace('-')).toEqual(true); // Pd Dash Punctuation
+  expect(notSymSpace('%')).toEqual(true); // Po Other Punctuation
+  expect(notSymSpace(' ')).toEqual(false); // Zs Space Separator
+  expect(notSymSpace('\u00a0')).toEqual(false); // Zs Space Separator
 
-  expect(notSymbol('0')).toEqual(true); // Nd	Decimal Digit Number
-  expect(notSymbol('\u0660')).toEqual(true); // Arabic-Indic digit zero
+  expect(notSymSpace('0')).toEqual(true); // Nd	Decimal Digit Number
+  expect(notSymSpace('\u0660')).toEqual(true); // Arabic-Indic digit zero
 });
 
 test('digit', () => {

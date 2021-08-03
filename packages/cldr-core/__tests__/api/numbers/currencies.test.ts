@@ -84,6 +84,15 @@ test('currency', () => {
   expect(s).toEqual('$2');
 });
 
+test('v38 currencies', () => {
+  const opts: CurrencyFormatOptions = { style: 'symbol', symbolWidth: 'narrow', group: true };
+  const api = numbersApi('en');
+  let s: string;
+
+  s = api.formatCurrency('0', 'AZN', opts);
+  expect(s).toEqual('₼0.00');
+});
+
 test('currency accounting', () => {
   const opts: CurrencyFormatOptions = { style: 'accounting', group: true };
   let api = numbersApi('en');

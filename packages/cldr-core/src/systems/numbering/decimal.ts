@@ -90,19 +90,20 @@ export const fastFormatDecimal = (n: string, digits: string[], minInt: number): 
 };
 
 const INTERNAL_SYMBOLS: NumberSymbols = {
-  decimal: '.',
-  group: ',',
-  list: ';',
-  percentSign: '%',
-  plusSign: '+',
-  minusSign: '-',
-  exponential: 'E',
+  approximatelySign: '~',
   currencyDecimal: '.',
   currencyGroup: ',',
-  superscriptingExponent: '×',
-  perMille: '‰',
+  decimal: '.',
+  exponential: 'E',
+  group: ',',
   infinity: '∞',
+  list: ';',
+  minusSign: '-',
   nan: 'NaN',
+  perMille: '‰',
+  percentSign: '%',
+  plusSign: '+',
+  superscriptingExponent: '×',
   timeSeparator: ':',
 };
 

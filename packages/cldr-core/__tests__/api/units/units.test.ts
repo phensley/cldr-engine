@@ -1,7 +1,7 @@
 import { Part } from '@phensley/decimal';
 
 import { languageBundle, unitsApi, INTERNALS } from '../../_helpers';
-import { Quantity } from '../../../src';
+import { Quantity, UnitFormatOptions } from '../../../src';
 
 test('available units', () => {
   const api = unitsApi('en');
@@ -105,7 +105,7 @@ test('per unit pattern schema', () => {
   expect(p).toEqual('{0} per {1}');
 
   p = units.long.timesPattern.get(en);
-  expect(p).toEqual('{0}⋅{1}');
+  expect(p).toEqual('{0}-{1}');
 });
 
 test('per unit', () => {
@@ -130,22 +130,72 @@ test('times unit', () => {
   let s: string;
 
   s = api.formatQuantity({ value: '1', unit: 'newton', times: 'meter' });
-  expect(s).toEqual('1 newton⋅meter');
+  expect(s).toEqual('1 newton-meter');
 
   s = api.formatQuantity({ value: '123', unit: 'newton', times: 'meter' });
-  expect(s).toEqual('123 newton⋅meters');
+  expect(s).toEqual('123 newton-meters');
 
   s = api.formatQuantity({ value: '1', unit: 'foot', times: 'pound' });
-  expect(s).toEqual('1 foot⋅pound');
+  expect(s).toEqual('1 foot-pound');
 
   s = api.formatQuantity({ value: '123', unit: 'foot', times: 'pound' });
-  expect(s).toEqual('123 foot⋅pounds');
+  expect(s).toEqual('123 foot-pounds');
 
   s = api.formatQuantity({ value: '1', unit: 'meter', times: 'kilogram' });
-  expect(s).toEqual('1 meter⋅kilogram');
+  expect(s).toEqual('1 meter-kilogram');
 
   s = api.formatQuantity({ value: '123', unit: 'meter', times: 'kilogram' });
-  expect(s).toEqual('123 meter⋅kilograms');
+  expect(s).toEqual('123 meter-kilograms');
+});
+
+test('v38 units', () => {
+  const api = unitsApi('en');
+  let q: Quantity;
+  let opts: UnitFormatOptions;
+  let s: string;
+
+  q = { value: '23.7', unit: 'earth-radius' };
+  s = api.formatQuantity(q);
+  expect(s).toEqual('23.7 earth radius');
+
+  opts = { length: 'short' };
+  s = api.formatQuantity(q, opts);
+  expect(s).toEqual('23.7 R⊕');
+
+  q = { value: '1', unit: 'dessert-spoon' };
+  s = api.formatQuantity(q);
+  expect(s).toEqual('1 dessert spoon');
+
+  q.value = '5';
+  s = api.formatQuantity(q);
+  expect(s).toEqual('5 dessert spoon');
+
+  q.value = '12.5';
+  s = api.formatQuantity(q);
+  expect(s).toEqual('12.5 dessert spoon');
+
+  opts = { length: 'short' };
+  s = api.formatQuantity(q, opts);
+  expect(s).toEqual('12.5 dstspn');
+});
+
+test('v39 units', () => {
+  const api = unitsApi('en');
+  let q: Quantity;
+  let opts: UnitFormatOptions;
+  let s: string;
+
+  q = { value: '1', unit: 'milligram-ofglucose-per-deciliter' };
+  s = api.formatQuantity(q);
+  expect(s).toEqual('1 milligram per deciliter');
+
+  q.value = '12.5';
+  s = api.formatQuantity(q);
+  expect(s).toEqual('12.5 milligrams per deciliter');
+
+  opts = { length: 'short' };
+  s = api.formatQuantity(q, opts);
+  expect(s).toEqual('12.5 mg/dL');
 });
 
 test('significant', () => {

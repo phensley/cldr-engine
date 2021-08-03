@@ -45,9 +45,9 @@ test('timezone exemplar cities', () => {
 
   tz = api.timeZoneInfo(utc);
   expect(tz.id).toEqual(utc);
-  expect(tz.city).toEqual({ name: 'ciudad desconocida' });
+  expect(tz.city).toEqual({ name: 'Ciudad desconocida' });
 
   tz = api.timeZoneInfo(unk);
   expect(tz.id).toEqual(unk);
-  expect(tz.city).toEqual({ name: 'ciudad desconocida' });
+  expect(tz.city).toEqual({ name: 'Ciudad desconocida' });
 });

@@ -126,6 +126,7 @@ class LanguageTagParser {
       this.variants.length === 0 ? undefined : this.variants[0],
       this.extensions,
       this.privateUse,
+      this.extlangs,
     );
   }
 

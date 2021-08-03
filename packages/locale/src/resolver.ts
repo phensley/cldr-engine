@@ -15,6 +15,7 @@ interface FakeLanguageTag {
   core: (string | number)[];
   _extensions?: string[];
   _privateUse?: string;
+  _extlangs?: string[];
 }
 
 /**
@@ -36,6 +37,11 @@ export const fastTag = (real: LanguageTag): FastTag => {
     if (!fast[i]) {
       fast[i] = i;
     }
+  }
+  // If an extlang subtag exists, replace the language subtag with the first
+  // extlang value.
+  if (fake._extlangs && fake._extlangs.length) {
+    fast[0] = fake._extlangs[0];
   }
   return fast;
 };

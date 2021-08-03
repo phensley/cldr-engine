@@ -201,6 +201,11 @@ test('aligned exponent', () => {
   expect(parse('12.34e2').alignexp()).toEqual(3);
   expect(parse('12.3456789').alignexp()).toEqual(1);
   expect(parse('.02').alignexp()).toEqual(-2);
+
+  expect(parse('0.00012345123e8').alignexp()).toEqual(4);
+  expect(parse('1.2345123e4').alignexp()).toEqual(4);
+  expect(parse('12.345123e3').alignexp()).toEqual(4);
+  expect(parse('12345.123').alignexp()).toEqual(4);
 });
 
 test('to string', () => {

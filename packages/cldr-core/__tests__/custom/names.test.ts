@@ -30,7 +30,7 @@ test('custom region display names', () => {
   let s: string;
 
   s = api.getRegionDisplayName('001');
-  expect(s).toEqual('World');
+  expect(s).toEqual('world');
 
   s = api.getRegionDisplayName('US');
   expect(s).toEqual('United States');

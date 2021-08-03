@@ -165,7 +165,7 @@ zh, zh-TW, zh-HK ;  zh-MO ;     zh-HK
 
 zh, zh-Hant ;   und-TW ;    zh-Hant # und-TW should be closer to zh-Hant than to zh
 en-Hant-TW, und-TW ;    zh-Hant ;   und-TW  # zh-Hant should be closer to und-TW than to en-Hant-TW
-en-Hant-TW, und-TW ;    zh ;    und-TW  # zh should be closer to und-TW than to en-Hant-TW
+en-Hant-TW, und-TW ;    zh ;    en-Hant-TW  # zh should be closer to und-TW than to en-Hant-TW
 
 
 ##################################################

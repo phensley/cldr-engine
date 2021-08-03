@@ -7,12 +7,12 @@ export type RuleMap = { [x: string]: Rule[] };
 
 export type RangeMap = number | { [x: number]: number };
 
-export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't';
+export type Operand = 'n' | 'i' | 'v' | 'w' | 'f' | 't' | 'c';
 
 // Notation for categories in compact plural rules
 const CATEGORIES: string[] = ['zero', 'one', 'two', 'few', 'many', 'other'];
 
-const arg = (n: DecimalArg) => new NumberOperands(coerceDecimal(n));
+const arg = (n: DecimalArg, c: number = 0) => new NumberOperands(coerceDecimal(n), c);
 
 /**
  * Set of all cardinal and ordinal plural rules, and the array of expression
@@ -32,8 +32,8 @@ export class PluralRules {
     return new NumberOperands(d);
   }
 
-  cardinal(n: DecimalArg): string {
-    return CATEGORIES[this.evaluate(arg(n), this.cardinals)];
+  cardinal(n: DecimalArg, c: number = 0): string {
+    return CATEGORIES[this.evaluate(arg(n, c), this.cardinals)];
   }
 
   ordinal(n: DecimalArg): string {

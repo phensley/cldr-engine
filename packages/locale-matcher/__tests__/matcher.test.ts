@@ -145,9 +145,32 @@ test('extensions', () => {
 });
 
 loadMatchCases().forEach((c) => {
-  test(`locale-match-cases.txt - line ${c.lineno}`, () => {
+  test(c.testname, () => {
     const m = new LocaleMatcher(c.supported);
     const result = m.match(c.desired);
     expect(result.locale.id).toEqual(c.result);
   });
 });
+
+/*
+
+TODO: revisit matcher logic to pass these tests
+
+loadMatchCasesNew().forEach((c) => {
+  test(c.testname, () => {
+    if (c.favor != 'normal' || c.threshold != '') {
+      // TODO: we do not yet support the "favoring subtags" scheme in
+      // locale matching, which adjusts the distance based on which subtag
+      // we prefer. This is implemented informally in ICU but not formally
+      // described in the CLDR specification. We skip these tests for now.
+
+      // TODO: allow for overriding threshold
+      return;
+    }
+
+    const m = new LocaleMatcher(c.supported);
+    const result = m.match(c.desired);
+    expect(result.locale.id).toEqual(c.result);
+  });
+});
+*/

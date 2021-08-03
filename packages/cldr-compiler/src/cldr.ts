@@ -461,7 +461,7 @@ const NON_UNIT_CATEGORIES = new Set(['times', 'per', 'coordinateUnit', 'power2',
  */
 const getUnitNames = (obj: any) => {
   return Object.keys(obj).reduce((o: any, k) => {
-    if (!NON_UNIT_CATEGORIES.has(k) && !k.startsWith('10p')) {
+    if (!NON_UNIT_CATEGORIES.has(k) && !k.startsWith('10p') && !k.startsWith('1024p')) {
       o[k] = {};
     }
     return o;

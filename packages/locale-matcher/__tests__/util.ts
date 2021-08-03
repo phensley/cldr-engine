@@ -11,8 +11,14 @@ export class DistanceCase {
   ) {}
 }
 
-export class MatchCase {
-  constructor(readonly supported: string, readonly desired: string, readonly result: string, readonly lineno: number) {}
+export interface MatchCase {
+  testname: string;
+  favor: string;
+  threshold: string;
+  supported: string;
+  desired: string;
+  result: string;
+  lineno: number;
 }
 
 export const loadDistanceCases = (): DistanceCase[] => {
@@ -38,7 +44,8 @@ export const loadDistanceCases = (): DistanceCase[] => {
 };
 
 export const loadMatchCases = (): MatchCase[] => {
-  const path = join(__dirname, 'data', 'locale-match-cases.txt');
+  const name = 'locale-match-cases.txt';
+  const path = join(__dirname, 'data', name);
   const cases: MatchCase[] = [];
   readLines(path).forEach((entry) => {
     const [line, lineno] = entry;
@@ -46,7 +53,65 @@ export const loadMatchCases = (): MatchCase[] => {
     if (cols.length !== 3) {
       throw new Error(`Invalid test case found: ${line}`);
     }
-    cases.push(new MatchCase(cols[0], cols[1], cols[2], lineno));
+    cases.push({
+      testname: `${name} (line ${lineno})`,
+      favor: 'normal',
+      threshold: '',
+      supported: cols[0],
+      desired: cols[1],
+      result: cols[2],
+      lineno,
+    });
+  });
+  return cases;
+};
+
+export const loadMatchCasesNew = (): MatchCase[] => {
+  const name = 'locale-match-cases-new.txt';
+  const path = join(__dirname, 'data', name);
+  const cases: MatchCase[] = [];
+  let testname = '';
+  let supported = '';
+  let favor = '';
+  let threshold = '';
+  readLines(path).forEach((entry) => {
+    const [line, lineno] = entry;
+    if (line.startsWith('**')) {
+      // Each test resets the parameters to their defaults
+      testname = line.split(':')[1].trim();
+      supported = '';
+      favor = 'normal';
+      threshold = '';
+      return;
+    }
+
+    // Directives set parameter values
+    if (line[0] == '@') {
+      const [key, val] = line.split('=');
+      switch (key) {
+        case '@supported':
+          supported = val;
+          return;
+        case '@favor':
+          favor = val;
+          return;
+        case '@threshold':
+          threshold = val;
+          return;
+      }
+    }
+
+    // Test cases have the form "desired >> result"
+    const [desired, result] = line.split('>>').map((s) => s.trim());
+    cases.push({
+      testname: `${name} - ${testname} (line ${lineno})`,
+      favor,
+      threshold,
+      supported,
+      desired,
+      result,
+      lineno,
+    });
   });
   return cases;
 };

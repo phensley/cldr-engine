@@ -142,8 +142,16 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
       locales = locales.filter((l) => l.id === lang || regions.has(l.tag.region()));
     }
 
+    // Truncate the cldr version to the first 3 components.
+    const m = /^(\d+\.\d+\.\d+).*$/.exec(pkg.cldrVersion);
+    if (!m) {
+      console.error(`Invalid CLDR version string: ${pkg.cldrVersion}`);
+      process.exit(1);
+    }
+    const cldrversion = m[1];
+
     // Construct a pack that will contain all strings across all regions for this language.
-    const pack = new ResourcePack(lang, pkg.version, pkg.cldrVersion, rbnf);
+    const pack = new ResourcePack(lang, pkg.version, cldrversion, rbnf);
 
     const encoder = new PackEncoder(pack);
     const machine = new EncoderMachine(encoder, argv.verbose);

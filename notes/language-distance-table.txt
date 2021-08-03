@@ -22,6 +22,8 @@
   ajp    ar  10    *     *  50    *     *   4
    ak    en  30    *     *  50    *     *   4
   aln    sq  10    *     *  50    *     *   4
+   am    en  30 Ethi  Latn  10    *     *   4
+                   *     *  50    *     *   4
   apc    ar  10    *     *  50    *     *   4
   apd    ar  10    *     *  50    *     *   4
    ar    ar   0 Latn  Arab  20    *     *   4
@@ -66,6 +68,7 @@
    az    ru  30 Latn  Cyrl  10    *     *   4
                    *     *  50    *     *   4
   azb    az  10    *     *  50    *     *   4
+  bal    ur  20    *     *  50    *     *   4
   bbz    ar  10    *     *  50    *     *   4
    be    ru  20    *     *  50    *     *   4
   bem    en  30    *     *  50    *     *   4
@@ -78,6 +81,8 @@
                    *     *  50    *     *   4
          en  30 Beng  Latn  10    *     *   4
                    *     *  50    *     *   4
+   bo    zh  20 Tibt  Hans  10    *     *   4
+                   *     *  50    *     *   4
    br    fr  20    *     *  50    *     *   4
    bs    hr   4    *     *  50    *     *   4
          sh   4    *     *  50    *     *   4
@@ -85,6 +90,7 @@
   bve    ms  10    *     *  50    *     *   4
   bvu    ms  10    *     *  50    *     *   4
   bzc    mg  10    *     *  50    *     *   4
+   ca    es  20    *     *  50    *     *   4
   cdo    zh  10    *     *  50    *     *   4
   ceb   fil  30    *     *  50    *     *   4
   chr    en  20    *     *  50    *     *   4
@@ -94,6 +100,7 @@
   coa    ms  10    *     *  50    *     *   4
   cpx    zh  10    *     *  50    *     *   4
   crs    fr  20    *     *  50    *     *   4
+   cs    sk  20    *     *  50    *     *   4
    cy    en  20    *     *  50    *     *   4
   czh    zh  10    *     *  50    *     *   4
   czo    zh  10    *     *  50    *     *   4
@@ -255,6 +262,7 @@
   lua    fr  30    *     *  50    *     *   4
   lwg   luy  10    *     *  50    *     *   4
   lzh    zh  10    *     *  50    *     *   4
+  mai    hi  20    *     *  50    *     *   4
   max    ms  10    *     *  50    *     *   4
   meo    ms  10    *     *  50    *     *   4
   mfa    ms  10    *     *  50    *     *   4
@@ -294,6 +302,7 @@
          no  20    *     *  50    *     *   4
    no    da   8    *     *  50    *     *   4
          nb   1    *     *  50    *     *   4
+         nn  20    *     *  50    *     *   4
   nso    en  30    *     *  50    *     *   4
    ny    en  30    *     *  50    *     *   4
   nyd   luy  10    *     *  50    *     *   4
@@ -397,6 +406,7 @@
   shu    ar  10    *     *  50    *     *   4
    si    en  30 Sinh  Latn  10    *     *   4
                    *     *  50    *     *   4
+   sk    cs  20    *     *  50    *     *   4
   skg    mg  10    *     *  50    *     *   4
    sn    en  30    *     *  50    *     *   4
    so    en  30    *     *  50    *     *   4
@@ -437,6 +447,7 @@
   tuy   kln  10    *     *  50    *     *   4
   txy    mg  10    *     *  50    *     *   4
    ug    zh  20    *     *  50    *     *   4
+   uk    ru  20    *     *  50    *     *   4
    ur    en  30 Arab  Latn  10    *     *   4
                    *     *  50    *     *   4
   urk    ms  10    *     *  50    *     *   4
@@ -457,11 +468,11 @@
   yih    yi  10    *     *  50    *     *   4
    yo    en  30    *     *  50    *     *   4
   yue    zh  10    *     *  50    *     *   4
+   za    zh  20 Latn  Hans  10    *     *   4
+                   *     *  50    *     *   4
    zh    zh   0 Hani  Hans  20    *     *   4
                       Hant  20    *     *   4
-                Hans  Hant  15    *     *   4
-                Hant  Hans  19    *     *   4
-                      Hant   0    α     α   4
+                Hant  Hant   0    α     α   4
                                         β   4
                                         γ   4
                                         δ   4

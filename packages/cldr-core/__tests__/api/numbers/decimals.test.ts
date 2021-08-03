@@ -515,3 +515,12 @@ test('decimal invalid', () => {
   const s = api.formatDecimal('12345.1234', opts);
   expect(s).toEqual('');
 });
+
+test('v39 es-419 grouping digits', () => {
+  const api = numbersApi('es-419');
+  let s: string;
+
+  // Pre-v39 grouping digits was 2, would format as '1000'
+  s = api.formatDecimal('1000');
+  expect(s).toEqual('1,000');
+});

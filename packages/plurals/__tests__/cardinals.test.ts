@@ -1,6 +1,6 @@
 import { pluralRules } from '../src';
 
-const cardinal = (lang: string, n: string) => pluralRules.get(lang).cardinal(n);
+const cardinal = (lang: string, n: string, c: number = 0) => pluralRules.get(lang).cardinal(n, c);
 
 test('english', () => {
   const lang = 'en';
@@ -22,6 +22,14 @@ test('french', () => {
 
   expect(cardinal(lang, '1.2')).toEqual('one');
   expect(cardinal(lang, '1.7')).toEqual('one');
+
+  expect(cardinal(lang, '100000')).toEqual('other');
+  expect(cardinal(lang, '1000000')).toEqual('many');
+
+  // Compact format specifies the compact shifted exponent
+  expect(cardinal(lang, '100000', 5)).toEqual('other');
+  expect(cardinal(lang, '1000000', 6)).toEqual('many');
+  expect(cardinal(lang, '30000001', 6)).toEqual('many');
 });
 
 test('lithuanian', () => {

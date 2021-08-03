@@ -1243,6 +1243,23 @@
           "start": "other"
         }
       ],
+      "lij": [
+        {
+          "end": "other",
+          "result": "other",
+          "start": "one"
+        },
+        {
+          "end": "one",
+          "result": "one",
+          "start": "other"
+        },
+        {
+          "end": "other",
+          "result": "other",
+          "start": "other"
+        }
+      ],
       "lo": [
         {
           "end": "other",
@@ -1509,6 +1526,23 @@
         {
           "end": "one",
           "result": "one",
+          "start": "other"
+        },
+        {
+          "end": "other",
+          "result": "other",
+          "start": "other"
+        }
+      ],
+      "no": [
+        {
+          "end": "other",
+          "result": "other",
+          "start": "one"
+        },
+        {
+          "end": "one",
+          "result": "other",
           "start": "other"
         },
         {

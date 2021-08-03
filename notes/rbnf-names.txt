@@ -148,6 +148,7 @@ da:
 de:
    digits-ordinal
    spellout-cardinal-feminine
+   spellout-cardinal-m
    spellout-cardinal-masculine
    spellout-cardinal-n
    spellout-cardinal-neuter
@@ -156,6 +157,7 @@ de:
    spellout-numbering
    spellout-numbering-year
    spellout-ordinal
+   spellout-ordinal-m
    spellout-ordinal-n
    spellout-ordinal-r
    spellout-ordinal-s
@@ -261,6 +263,7 @@ fi:
    spellout-cardinal-inessive-plural
    spellout-cardinal-partitive
    spellout-cardinal-partitive-plural
+   spellout-cardinal-plural
    spellout-cardinal-translative
    spellout-cardinal-translative-plural
    spellout-numbering
@@ -284,6 +287,7 @@ fi:
    spellout-ordinal-inessive-plural
    spellout-ordinal-partitive
    spellout-ordinal-partitive-plural
+   spellout-ordinal-plural
    spellout-ordinal-translative
    spellout-ordinal-translative-plural
 
@@ -597,18 +601,6 @@ my:
 
 nb:
    digits-ordinal
-   spellout-cardinal-feminine
-   spellout-cardinal-masculine
-   spellout-cardinal-neuter
-   spellout-numbering
-   spellout-numbering-year
-   spellout-ordinal-feminine
-   spellout-ordinal-masculine
-   spellout-ordinal-neuter
-   spellout-ordinal-plural
-
-ne:
-   digits-ordinal
    spellout-cardinal
    spellout-cardinal-verbose
    spellout-numbering
@@ -616,6 +608,14 @@ ne:
    spellout-numbering-year
    spellout-ordinal
    spellout-ordinal-verbose
+
+ne:
+   digits-ordinal
+   spellout-cardinal
+   spellout-numbering
+   spellout-numbering-year
+   spellout-ordinal-feminine
+   spellout-ordinal-masculine
 
 nl:
    digits-ordinal
@@ -632,6 +632,18 @@ nn:
    spellout-cardinal-reale
    spellout-numbering
    spellout-numbering-year
+
+no:
+   digits-ordinal
+   spellout-cardinal-feminine
+   spellout-cardinal-masculine
+   spellout-cardinal-neuter
+   spellout-numbering
+   spellout-numbering-year
+   spellout-ordinal-feminine
+   spellout-ordinal-masculine
+   spellout-ordinal-neuter
+   spellout-ordinal-plural
 
 or:
    digits-ordinal

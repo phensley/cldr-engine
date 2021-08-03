@@ -28,8 +28,7 @@ export const getProjectInfo = (): ProjectInfo => {
   const path = join(__dirname, '..', '..', '..', 'package.json');
   const raw = fs.readFileSync(path, { encoding: 'utf-8' });
   const pkg = JSON.parse(raw);
-  const cldrVersion = pkg.cldrversion.replace(/[^\d.]+/, '');
-  return { version: pkg.version, cldrVersion };
+  return { version: pkg.version, cldrVersion: pkg.cldrversion };
 };
 
 /**

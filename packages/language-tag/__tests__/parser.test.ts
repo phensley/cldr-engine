@@ -4,6 +4,7 @@ const compact = (s: string) => parseLanguageTag(s).compact();
 const expanded = (s: string) => parseLanguageTag(s).expanded();
 const privateUse = (s: string) => parseLanguageTag(s).privateUse();
 const extensions = (s: string) => parseLanguageTag(s).extensions();
+const extlangs = (s: string) => parseLanguageTag(s).extlangs();
 
 test('basics', () => {
   expect(compact('!+')).toEqual('und');
@@ -71,4 +72,8 @@ test('extensions', () => {
 
 test('region replacement', () => {
   expect(compact('en-ARG')).toEqual('en-AR');
+});
+
+test('extlangs', () => {
+  expect(extlangs('en-ext-lan')).toEqual(['ext', 'lan']);
 });
