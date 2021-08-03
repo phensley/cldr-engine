@@ -42,7 +42,13 @@ const expand = (aliases: any) => {
     if (flag || tag.hasScript()) {
       parts.push(tag.hasScript() ? tag.script() : '');
     }
-    parts.push(tag.language());
+    let lang = tag.language();
+    const extlangs = tag.extlangs();
+    if (extlangs.length) {
+      // Canonicalize step 3 https://tools.ietf.org/html/bcp47#section-4.5
+      lang = extlangs[0];
+    }
+    parts.push(lang);
     const key = parts.reverse().join('-');
     o[key] = aliases[k];
   });

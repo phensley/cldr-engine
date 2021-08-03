@@ -20,7 +20,7 @@ test('date wrapper string', () => {
   api = calendarsApi('es-HN');
 
   s = api.formatDateWrapper('DATE', 'TIME', { width: 'full' });
-  expect(s).toEqual('DATE a las TIME');
+  expect(s).toEqual('DATE, TIME');
 
   api = calendarsApi('fr-LU');
 

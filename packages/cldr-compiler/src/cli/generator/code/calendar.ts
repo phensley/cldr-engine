@@ -34,7 +34,7 @@ export const getCalendarPrefs = (_data: any): Code[] => {
 
   const calendarPrefs: { [x: string]: number[] } = {};
   Object.keys(prefsData).forEach((id) => {
-    const prefs = prefsData[id].split(' ').map(getId);
+    const prefs = prefsData[id].map(getId);
     calendarPrefs[id] = prefs;
   });
 

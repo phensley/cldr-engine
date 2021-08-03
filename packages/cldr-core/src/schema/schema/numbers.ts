@@ -31,6 +31,7 @@ export const CurrencySpacingPatternIndex = new KeyIndexImpl<CurrencySpacingPatte
  * @public
  */
 export const NumberSymbolValues: NumberSymbolType[] = [
+  'approximatelySign',
   'currencyDecimal',
   'currencyGroup',
   'decimal',

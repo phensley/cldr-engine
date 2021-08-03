@@ -14,6 +14,12 @@ test('number systems', () => {
   expect(res.finance).toEqual('hansfin');
 });
 
+test('v39 symbols', () => {
+  const cache = getCache('en');
+  const params = cache.getNumberParams('latn');
+  expect(params.symbols.approximatelySign).toEqual('~');
+});
+
 test('invalid system', () => {
   let params: NumberParams;
   let cache: NumberParamsCache;

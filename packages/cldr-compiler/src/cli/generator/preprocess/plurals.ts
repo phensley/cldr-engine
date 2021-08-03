@@ -77,7 +77,6 @@ export const getPlurals = (): any => {
   const cardinals = parseRules(Cardinals);
   const ordinals = parseRules(Ordinals);
   const exprs = Object.keys(expressions).sort((a, b) => (expressions[a] < expressions[b] ? -1 : 1));
-
   const samples = {
     cardinals: parseSamples(Cardinals),
     ordinals: parseSamples(Ordinals),

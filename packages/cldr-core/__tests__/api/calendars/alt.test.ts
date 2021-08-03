@@ -43,10 +43,10 @@ test('era alternate', () => {
   api = calendarsApi('es');
 
   s = api.formatDate(mar11, { skeleton: 'GGGGMMMyd', alt: { era: 'none' } });
-  expect(s).toEqual('10 mar. 2018 después de Cristo');
+  expect(s).toEqual('10 mar 2018 después de Cristo');
 
   s = api.formatDate(mar11, { skeleton: 'GGGGMMMyd', alt: { era: 'sensitive' } });
-  expect(s).toEqual('10 mar. 2018 era común');
+  expect(s).toEqual('10 mar 2018 era común');
 
   // GERMAN
 

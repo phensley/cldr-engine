@@ -74,7 +74,9 @@ const P_OR = matcher(/^or/).prefix(P_SPACE);
 
 const P_ELLIPSES = matcher(/^\.\./).prefix(P_SPACE);
 
-const P_OPERAND = matcher(/^[nivwft]/).prefix(P_SPACE);
+const P_OPERAND = matcher(/^[enivwft]/)
+  .prefix(P_SPACE)
+  .map((c) => (c === 'e' ? 'c' : c));
 
 const P_RELOP = matcher(/^(=|!=)/).prefix(P_SPACE);
 

@@ -37,7 +37,7 @@ test('decimals', () => {
 
   api = calendarsApi('mr');
   s = api.formatDate(mar11, { datetime: 'full' });
-  expect(s).toEqual('शनिवार, १० मार्च, २०१८ रोजी ११:००:२५ म.उ. पॅसिफिक प्रमाण वेळ');
+  expect(s).toEqual('शनिवार, १० मार्च, २०१८ रोजी ११:००:२५ PM पॅसिफिक प्रमाण वेळ');
 
   api = calendarsApi('bn-IN');
   s = api.formatDate(mar11, { datetime: 'full' });

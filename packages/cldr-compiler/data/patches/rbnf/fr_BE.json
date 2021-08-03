@@ -477,7 +477,7 @@
         },
         {
           "rule": "=%spellout-numbering=;",
-          "value": "10000"
+          "value": "2000"
         }
       ]
     },

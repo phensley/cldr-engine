@@ -20,6 +20,7 @@ SAMPLES.forEach((line) => {
     return;
   }
   const [typ, lang, category, _samples] = line.split(/\s+/);
+
   const samples = _samples.split(',');
   const key = `${lang} - ${typ}`;
 
@@ -30,10 +31,22 @@ SAMPLES.forEach((line) => {
 
 expect.extend({
   toHaveCategory: (sample: string, typ: string, lang: string, expected: string) => {
-    const n = new Decimal(sample);
+    let n: Decimal;
+    let c = 0;
+
+    // Split off compact exponent syntax
+    const parts = sample.split('c');
+    if (parts.length == 1) {
+      n = new Decimal(sample);
+    } else {
+      n = new Decimal(parts[0]);
+      c = parseInt(parts[1], 10);
+      n = n.shiftleft(c);
+    }
+
     const [language, region] = lang.split('-');
     const rules = pluralRules.get(language, region);
-    const actual = typ === 'cardinals' ? rules.cardinal(n) : rules.ordinal(n);
+    const actual = typ === 'cardinals' ? rules.cardinal(n, c) : rules.ordinal(n);
     const msg = (pass: boolean) => () =>
       `Expected language "${lang}" number "${sample}" ${pass ? 'not ' : ''}to have ` +
       `${typ} category "${expected}" but got "${actual}"`;
@@ -57,7 +70,7 @@ Object.keys(TESTCASES)
   .forEach((key) => {
     test(key, () => {
       for (const c of TESTCASES[key]) {
-        for (const sample of c.samples) {
+        for (let sample of c.samples) {
           expect(sample).toHaveCategory(c.typ, c.lang, c.category);
         }
       }

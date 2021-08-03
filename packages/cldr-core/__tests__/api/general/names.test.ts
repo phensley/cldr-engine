@@ -142,7 +142,7 @@ test('internals', () => {
   const { schema } = INTERNALS();
   let s: string;
   s = schema.Names.regions.displayName.get(en, 'none', '001');
-  expect(s).toEqual('World');
+  expect(s).toEqual('world');
 
   s = schema.Names.scripts.displayName.get(en, 'none', 'Arab');
   expect(s).toEqual('Arabic');

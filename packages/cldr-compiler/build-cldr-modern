@@ -10,8 +10,8 @@
 #   git lfs extension
 
 DIR=$(cd `dirname $0`; pwd)
-VERSION=37.0.0
-TAG=release-37
+VERSION=38.0.0
+TAG=release-38
 BUILD=${DIR}/.cldrbuild
 CLDR=${BUILD}/cldr
 OUTPUT=${BUILD}/unicode-cldr
@@ -24,62 +24,27 @@ if [ ! -d ${CLDR} ] ; then
 fi
 
 cd ${CLDR}
+
 git reset --hard
 git fetch origin
 git checkout master
 git reset --hard
 git checkout $TAG
 
-# patch to avoid exception due to frozen xpath when generating the
-# supplemental dayPeriods data
-
 patch -p1 <<EOF
-diff --git a/tools/java/org/unicode/cldr/json/CldrItem.java b/tools/java/org/unicode/cldr/json/CldrItem.java
-index 347ee968f..42b05bd4b 100644
---- a/tools/java/org/unicode/cldr/json/CldrItem.java
-+++ b/tools/java/org/unicode/cldr/json/CldrItem.java
-@@ -217,10 +217,10 @@ public class CldrItem implements Comparable<CldrItem> {
-      * @return Array of CldrItem if it can be split, otherwise null.
-      */
-     public CldrItem[] split() {
--        XPathParts xpp = XPathParts.getFrozenInstance(path);
--        XPathParts fullxpp = XPathParts.getFrozenInstance(fullPath);
--        XPathParts untransformedxpp = XPathParts.getFrozenInstance(untransformedPath);
--        XPathParts untransformedfullxpp = XPathParts.getFrozenInstance(untransformedFullPath);
-+        XPathParts xpp = XPathParts.getInstance(path);
-+        XPathParts fullxpp = XPathParts.getInstance(fullPath);
-+        XPathParts untransformedxpp = XPathParts.getInstance(untransformedPath);
-+        XPathParts untransformedfullxpp = XPathParts.getInstance(untransformedFullPath);
-
-         XPathParts newxpp = new XPathParts();
-         XPathParts newfullxpp = new XPathParts();
-diff --git a/tools/java/org/unicode/cldr/json/Ldml2JsonConverter.java b/tools/java/org/unicode/cldr/json/Ldml2JsonConverter.java
-index 7e3f64dc0..93dbfe13d 100644
---- a/tools/java/org/unicode/cldr/json/Ldml2JsonConverter.java
-+++ b/tools/java/org/unicode/cldr/json/Ldml2JsonConverter.java
-@@ -304,6 +304,10 @@ public class Ldml2JsonConverter {
-                 activeNumberingSystems.add(ns);
-             }
+diff --git a/tools/java/org/unicode/cldr/util/DtdData.java b/tools/java/org/unicode/cldr/util/DtdData.java
+index a0acd3ff21..3728d1d5a3 100644
+--- a/tools/java/org/unicode/cldr/util/DtdData.java
++++ b/tools/java/org/unicode/cldr/util/DtdData.java
+@@ -809,7 +809,7 @@ public class DtdData extends XMLFileReader.SimpleHandler {
+             return xpathComparator(a, b);
          }
-+        // Skip supplemental/units as it currently blows up
-+        if (locID.equals("units")) {
-+            return;
-+        }
-         DtdType fileDtdType;
-         if (CLDRFile.isSupplementalName(locID)) {
-             fileDtdType = DtdType.supplementalData;
-diff --git a/tools/java/org/unicode/cldr/util/CLDRFile.java b/tools/java/org/unicode/cldr/util/CLDRFile.java
-index 027d398fc..4c8a5a560 100644
---- a/tools/java/org/unicode/cldr/util/CLDRFile.java
-+++ b/tools/java/org/unicode/cldr/util/CLDRFile.java
-@@ -125,6 +125,7 @@ public class CLDRFile implements Freezable<CLDRFile>, Iterable<String> {
-     public static final String SUPPLEMENTAL_PREFIX = "supplemental";
-     public static final String GEN_VERSION = "37";
-     public static final List<String> SUPPLEMENTAL_NAMES = Arrays.asList("characters", "coverageLevels", "dayPeriods", "genderList", "languageInfo",
-+        "grammaticalFeatures", "units",
-         "languageGroup", "likelySubtags", "metaZones", "numberingSystems", "ordinals", "plurals", "postalCodeData", "rgScope", "supplementalData",
-         "supplementalMetadata",
-         "telephoneCodeData", "windowsZones");
+
+-        public int xpathComparator(XPathParts a, XPathParts b) {
++        synchronized public int xpathComparator(XPathParts a, XPathParts b) {
+             // there must always be at least one element
+             String baseA = a.getElement(0);
+             String baseB = b.getElement(0);
 EOF
 
 cd tools/java
@@ -96,17 +61,20 @@ segments
 "
 
 for type in ${MAINTYPES} ; do
-    # add -m 'en|root' for testing
-    java -Xmx8g -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
-        -d ${OUTPUT} -r true -p true -t ${type} -s ${STATUS} -l optional
-        #-m 'en|af|root'
+    # uncomment -m 'en|root' for testing
+    java -Xmx12g -DCLDR_DIR=${CLDR} \
+        -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
+        -d ${OUTPUT} -r true -p true -t ${type} -s ${STATUS} -l optional 
+#        -m 'en|root'
 done
 
-java -DCLDR_DIR=${CLDR} -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
+java -DCLDR_DIR=${CLDR} \
+    -jar ./cldr.jar ldml2json -c ${CLDR}/common/ \
     -d ${OUTPUT} -r true -p true -t supplemental -s ${STATUS} -l optional
 
 cd ${OUTPUT}
 for name in `echo {*-modern,cldr-rbnf,cldr-core} | xargs` ; do
+    echo "archiving ${name}"
     tar cfz ${VERSION}.tar.gz ${name}
     mkdir -p ${name}/archive
     mv ${VERSION}.tar.gz ${name}/archive

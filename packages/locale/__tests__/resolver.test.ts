@@ -17,9 +17,9 @@ test('resolve', () => {
   expect(resolve('ru-172')).toEqual(parse('ru-Cyrl-RU'));
 
   // ISO 3166-1 3ALPHA codes replaced at parse time.
-  expect(resolve('en-AAA')).toEqual(parse('en-Latn-AA'));
+  expect(resolve('en-AAA')).toEqual(parse('aaa-Latn-AA'));
   expect(resolve('en-eng-eng-AAA')).toEqual(parse('en-Latn-AA'));
-  expect(resolve('en-aaa')).toEqual(parse('en-Latn-AA'));
+  expect(resolve('en-aaa')).toEqual(parse('aaa-Latn-AA'));
 
   // Add likely subtags.
   expect(resolve('he')).toEqual(parse('he-Hebr-IL'));
@@ -71,4 +71,5 @@ test('remove likely subtags', () => {
 test('aliases', () => {
   expect(LanguageResolver.substituteAliases('eng-Latn-US')).toEqual(parse('en-Latn-US'));
   expect(LanguageResolver.substituteAliases(parse('eng-Latn-US'))).toEqual(parse('en-Latn-US'));
+  expect(LanguageResolver.substituteAliases('cmn')).toEqual(parse('zh'));
 });

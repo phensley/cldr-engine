@@ -4,9 +4,9 @@
       "written_new": {
         "languageMatch": [
           {
-            "desired": "no",
+            "desired": "nb",
             "distance": "1",
-            "supported": "nb"
+            "supported": "no"
           },
           {
             "desired": "hr",
@@ -80,6 +80,12 @@
             "supported": "en"
           },
           {
+            "desired": "am",
+            "distance": "30",
+            "oneway": "1",
+            "supported": "en"
+          },
+          {
             "desired": "ay",
             "distance": "20",
             "oneway": "1",
@@ -90,6 +96,12 @@
             "distance": "30",
             "oneway": "1",
             "supported": "ru"
+          },
+          {
+            "desired": "bal",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "ur"
           },
           {
             "desired": "be",
@@ -116,10 +128,22 @@
             "supported": "en"
           },
           {
+            "desired": "bo",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "zh"
+          },
+          {
             "desired": "br",
             "distance": "20",
             "oneway": "1",
             "supported": "fr"
+          },
+          {
+            "desired": "ca",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "es"
           },
           {
             "desired": "ceb",
@@ -150,6 +174,11 @@
             "distance": "20",
             "oneway": "1",
             "supported": "fr"
+          },
+          {
+            "desired": "cs",
+            "distance": "20",
+            "supported": "sk"
           },
           {
             "desired": "cy",
@@ -356,6 +385,12 @@
             "supported": "fr"
           },
           {
+            "desired": "mai",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "hi"
+          },
+          {
             "desired": "mfe",
             "distance": "30",
             "oneway": "1",
@@ -423,7 +458,6 @@
           {
             "desired": "nn",
             "distance": "20",
-            "oneway": "1",
             "supported": "no"
           },
           {
@@ -625,6 +659,12 @@
             "supported": "zh"
           },
           {
+            "desired": "uk",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "ru"
+          },
+          {
             "desired": "ur",
             "distance": "30",
             "oneway": "1",
@@ -659,6 +699,12 @@
             "distance": "30",
             "oneway": "1",
             "supported": "en"
+          },
+          {
+            "desired": "za",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "zh"
           },
           {
             "desired": "zu",
@@ -1788,6 +1834,12 @@
             "supported": "*"
           },
           {
+            "desired": "am_Ethi",
+            "distance": "10",
+            "oneway": "1",
+            "supported": "en_Latn"
+          },
+          {
             "desired": "az_Latn",
             "distance": "10",
             "oneway": "1",
@@ -1798,6 +1850,12 @@
             "distance": "10",
             "oneway": "1",
             "supported": "en_Latn"
+          },
+          {
+            "desired": "bo_Tibt",
+            "distance": "10",
+            "oneway": "1",
+            "supported": "zh_Hans"
           },
           {
             "desired": "hy_Armn",
@@ -1925,14 +1983,8 @@
             "supported": "sr_Cyrl"
           },
           {
-            "desired": "zh_Hans",
-            "distance": "15",
-            "oneway": "1",
-            "supported": "zh_Hant"
-          },
-          {
-            "desired": "zh_Hant",
-            "distance": "19",
+            "desired": "za_Latn",
+            "distance": "10",
             "oneway": "1",
             "supported": "zh_Hans"
           },

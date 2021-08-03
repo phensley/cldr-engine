@@ -13,6 +13,7 @@ test('basic', () => {
     t: 0,
     v: 0,
     w: 0,
+    c: 0,
   });
 
   expect(rules.cardinal(0)).toEqual('other');

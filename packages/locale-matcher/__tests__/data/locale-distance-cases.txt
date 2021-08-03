@@ -46,7 +46,9 @@ no ; no ; 0
 da ; no ; 12
 
 zh-Hant ; da ; 100
-zh-Hans ; zh-Hant ; 23 ; 19
+
+# See https://unicode-org.atlassian.net/browse/CLDR-14355
+zh-Hans ; zh-Hant ; 100 ; 100
 
 en ; zh-Hans ; 100
 

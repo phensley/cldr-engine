@@ -8,7 +8,7 @@
 export class LanguageTag {
     constructor(language?: string, script?: string, region?: string, variant?: string, extensions?: {
         [x: string]: string[];
-    }, privateUse?: string);
+    }, privateUse?: string, extlangs?: string[]);
     compact(): string;
     // (undocumented)
     protected _compact?: string;
@@ -25,6 +25,9 @@ export class LanguageTag {
         [x: string]: string[];
     };
     extensionSubtags(key: string): string[];
+    extlangs(): string[];
+    // (undocumented)
+    protected _extlangs: string[];
     hasLanguage(): boolean;
     hasRegion(): boolean;
     hasScript(): boolean;
@@ -57,7 +60,6 @@ export const parseLanguageTag: (str: string) => LanguageTag;
 //
 // @public
 export const substituteRegionAliases: (dst: FastTag) => void;
-
 
 // (No @packageDocumentation comment for this package)
 

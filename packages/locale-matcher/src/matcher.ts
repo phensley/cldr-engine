@@ -226,6 +226,7 @@ export class LocaleMatcher {
         }
       }
     }
+
     const extensions = bestDesired.tag.extensions();
     const privateUse = bestDesired.tag.privateUse();
     const { id, tag } = bestMatch === U ? this.default : bestMatch;

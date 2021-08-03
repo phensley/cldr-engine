@@ -12,6 +12,7 @@ export type CurrencySpacingPattern = 'currencyMatch' | 'surroundingMatch' | 'ins
  * @public
  */
 export type NumberSymbolType =
+  | 'approximatelySign'
   | 'currencyDecimal'
   | 'currencyGroup'
   | 'decimal'
