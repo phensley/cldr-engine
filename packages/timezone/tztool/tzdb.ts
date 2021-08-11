@@ -37,7 +37,7 @@ export const setupTZDB = (tag: string): string => {
 
   const tagset = () => set(lines(exec(`git tag`, repo).toString('utf-8')));
 
-  // clone, checkout master, pull refresh
+  // clone, checkout main, pull refresh
   if (!fs.existsSync(repo)) {
     exec(`git clone ${REPO}`, tmp);
   }
@@ -45,10 +45,11 @@ export const setupTZDB = (tag: string): string => {
   // check if desired tag exists
   let tags = tagset();
   if (!tags.has(tag)) {
-    // switch to clean master and refresh from origin
-    exec(`git checkout master`, repo);
+    // switch to clean main and refresh from origin
+    exec(`git fetch origin`, repo);
+    exec(`git checkout main`, repo);
     exec(`git reset --hard`, repo);
-    exec(`git pull origin master --tags`, repo);
+    exec(`git pull origin main --tags`, repo);
   }
 
   // after pull, check tag again
