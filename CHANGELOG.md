@@ -4,9 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.2.7]
+
+### Fixed/Changed
+
+- Upgrade to [tzdb 2021a](https://www.iana.org/time-zones)
+
 ## [1.2.6]
 
-## Added
+### Added
 
 - The `cldr-compiler pack` command now includes the ability to apply patches to the resource packs, allowing you to replace CLDR values with your own. See [the included example](./packages/cldr/example-patch.yaml).
 - A new command `cldr-compiler schema` will dump the CLDR data schema used to generate resource packs. This is helpful in identifying the full path to a value you may want to patch.
@@ -26,7 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [1.2.3]
 
-### Added
+### Fixed/Changed
 
 - Upgrade to [tzdb 2020f](https://www.iana.org/time-zones)
 
@@ -65,9 +71,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 
-- Upgrade to [tzdb 2020a](https://www.iana.org/time-zones)
 - `CLDR.Numbers.parseDecimal` convenience method to parse a number or string into a `Decimal` instance.
 - `CLDR.Calendars.timeZoneFromUTC` and `CLDR.Calendars.timeZoneFromWall` convenience methods to lookup time zone info from either a UTC or local "wall clock" timestamp.
+
+### Fixed/Changed
+
+- Upgrade to [tzdb 2020a](https://www.iana.org/time-zones)
 
 ## [1.1.1]
 
@@ -818,6 +827,7 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[1.2.7]: https://github.com/phensley/cldr-engine/compare/v1.2.6...v1.2.7
 [1.2.6]: https://github.com/phensley/cldr-engine/compare/v1.2.5...v1.2.6
 [1.2.5]: https://github.com/phensley/cldr-engine/compare/v1.2.4...v1.2.5
 [1.2.4]: https://github.com/phensley/cldr-engine/compare/v1.2.3...v1.2.4
