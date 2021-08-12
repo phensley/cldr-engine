@@ -196,9 +196,7 @@ export class GeneralImpl implements General {
 
   // Check if the given alt type field exists, and fall back to alt type 'none'
   protected _getVectorAlt<T extends string>(arrow: Vector2Arrow<AltType, T>, code: string, type: AltType): string {
-    return (
-      arrow.get(this._bundle, type, (code as unknown) as T) || arrow.get(this._bundle, 'none', (code as unknown) as T)
-    );
+    return arrow.get(this._bundle, type, code as unknown as T) || arrow.get(this._bundle, 'none', code as unknown as T);
   }
 }
 
@@ -206,4 +204,4 @@ export class GeneralImpl implements General {
 const _ctx = (o: DisplayNameOptions): ContextType => _def(o, 'context', 'begin-sentence' as ContextType);
 
 // Default an option value
-const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T => ((o[k] as unknown) as T) || t;
+const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T => (o[k] as unknown as T) || t;

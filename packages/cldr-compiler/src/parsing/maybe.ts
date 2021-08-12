@@ -27,11 +27,11 @@ export class Nothing<T> implements Maybe<T> {
   }
 
   map<R>(_f: (v: T) => R): Maybe<R> {
-    return (this as any) as Nothing<R>;
+    return this as any as Nothing<R>;
   }
 
   flatMap<R>(_f: (v: T) => Maybe<R>): Maybe<R> {
-    return (this as any) as Nothing<R>;
+    return this as any as Nothing<R>;
   }
 
   orElse<R>(f: () => Maybe<R>): Maybe<T | R> {

@@ -165,7 +165,7 @@ test('loader errors', () => {
 
 test('undefined locale', () => {
   const framework = getCLDR();
-  const undef = (undefined as unknown) as string;
+  const undef = undefined as unknown as string;
   expect(() => framework.get(undef)).toThrowError('argument is undefined');
   expect(() => framework.getAsync(undef)).toThrowError('argument is undefined');
 });
@@ -185,7 +185,7 @@ test('framework config', () => {
   framework = new CLDRFramework({});
   expect(framework.config()).toEqual(config);
 
-  CLDRFramework.setDefaultConfig((undefined as unknown) as SchemaConfig);
+  CLDRFramework.setDefaultConfig(undefined as unknown as SchemaConfig);
   framework = new CLDRFramework({});
   expect(framework.config()).toEqual({});
 

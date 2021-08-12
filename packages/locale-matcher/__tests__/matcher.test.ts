@@ -85,7 +85,7 @@ test('no resolve', () => {
 });
 
 test('bad args', () => {
-  expect(() => new LocaleMatcher((undefined as unknown) as string)).toThrowError('at least');
+  expect(() => new LocaleMatcher(undefined as unknown as string)).toThrowError('at least');
 });
 
 test('constructor args', () => {
@@ -118,7 +118,7 @@ test('constructor args', () => {
   expect(m.locale.id).toEqual('eng-Latn-GB');
 
   // Invalid args
-  matcher = new LocaleMatcher(['en', (new Date() as unknown) as LanguageTag]);
+  matcher = new LocaleMatcher(['en', new Date() as unknown as LanguageTag]);
   m = matcher.match('de');
   expect(m.distance).toEqual(100);
   expect(m.locale.id).toEqual('en');

@@ -921,7 +921,7 @@ export class Decimal {
   }
 
   protected static fromRaw(sign: number, _exp: number, data: number[], flag: DecimalFlag): Decimal {
-    return new this(({ sign, _exp, data, flag } as any) as Decimal);
+    return new this({ sign, _exp, data, flag } as any as Decimal);
   }
 
   /**

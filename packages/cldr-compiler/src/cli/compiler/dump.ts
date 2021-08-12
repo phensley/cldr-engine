@@ -23,7 +23,7 @@ export const loader = (lang: string) => {
 
 export const buildSchema = (origin: Origin, debug: boolean = false): Schema => {
   const builder = new SchemaBuilder(debug);
-  const schema = ({} as any) as Schema;
+  const schema = {} as any as Schema;
   builder.construct(schema, origin);
   return schema;
 };
@@ -100,7 +100,7 @@ export const runDump = (argv: yargs.Arguments<DumpArgs>) => {
   raw = fs.readFileSync(argv.pack).toString('utf-8');
   const data = JSON.parse(raw);
 
-  const schema = ({} as any) as Schema;
+  const schema = {} as any as Schema;
   const origin = new CodeBuilder(config).origin();
   const ck = checksumIndices(VERSION, origin.indices);
   console.log(`Checksum ${ck}`);

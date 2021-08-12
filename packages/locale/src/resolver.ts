@@ -25,7 +25,7 @@ interface FakeLanguageTag {
  */
 export const fastTag = (real: LanguageTag): FastTag => {
   // Hack to get fast access to internal core fields without exposing them.
-  const fake = (real as any) as FakeLanguageTag;
+  const fake = real as any as FakeLanguageTag;
 
   // The fast tag is used for indexing purposes. Since a field may be
   // undefined, and we don't want to use its string representation of

@@ -1,9 +1,9 @@
 import { buildMessageMatcher, MessageMatcher, MessageState } from '../src';
 
-const build = (type: string, formatters: string[]) => (input: string): [MessageMatcher, MessageState] => [
-  buildMessageMatcher(formatters, type === 'sticky'),
-  { t: input, s: 0, e: input.length },
-];
+const build =
+  (type: string, formatters: string[]) =>
+  (input: string): [MessageMatcher, MessageState] =>
+    [buildMessageMatcher(formatters, type === 'sticky'), { t: input, s: 0, e: input.length }];
 
 ['sticky', 'substring'].forEach((type) => {
   let m: MessageMatcher;

@@ -126,27 +126,29 @@ export interface LocaleMatcherOptions {
  *
  * Visible for testing.
  */
-export const sortEntries = (d: Entry) => (a: Entry, b: Entry): number => {
-  // Check if entry is our default tag, to keep it at the front of the array.
-  if (a.tag === d.tag) {
-    return -1;
-  }
-  if (b.tag === d.tag) {
-    return 1;
-  }
+export const sortEntries =
+  (d: Entry) =>
+  (a: Entry, b: Entry): number => {
+    // Check if entry is our default tag, to keep it at the front of the array.
+    if (a.tag === d.tag) {
+      return -1;
+    }
+    if (b.tag === d.tag) {
+      return 1;
+    }
 
-  // Sort all paradigm locales before non-paradigms.
-  const pa = paradigmLocales[a.compact];
-  const pb = paradigmLocales[b.compact];
-  if (pa !== undefined) {
-    return pb === U ? -1 : numberCmp(pa, pb);
-  } else if (pb !== undefined) {
-    return 1;
-  }
+    // Sort all paradigm locales before non-paradigms.
+    const pa = paradigmLocales[a.compact];
+    const pb = paradigmLocales[b.compact];
+    if (pa !== undefined) {
+      return pb === U ? -1 : numberCmp(pa, pb);
+    } else if (pb !== undefined) {
+      return 1;
+    }
 
-  // All other locales stay in their relative positions.
-  return 0;
-};
+    // All other locales stay in their relative positions.
+    return 0;
+  };
 
 /**
  * Given a list of supported locales, and a list of a user's desired locales

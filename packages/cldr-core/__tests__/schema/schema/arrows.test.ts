@@ -100,7 +100,7 @@ test('scope arrow', () => {
   const a = new ScopeArrowImpl(map);
   expect(a.get('foo1')).toEqual({ bar: 1 });
   expect(a.get('foo2')).toEqual({ bar: 2 });
-  expect(a.get(('bar' as any) as Foo)).toBe(undefined);
+  expect(a.get('bar' as any as Foo)).toBe(undefined);
 });
 
 test('1d arrow', () => {

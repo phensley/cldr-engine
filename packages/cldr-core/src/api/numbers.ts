@@ -181,4 +181,4 @@ const validate = <T>(
 const _ctx = (o: CurrencyDisplayNameOptions): ContextType => _def(o, 'context', 'begin-sentence' as ContextType);
 
 // Default an option value
-const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T => ((o[k] as unknown) as T) || t;
+const _def = <O, K extends keyof O, T>(o: O, k: K, t: T): T => (o[k] as unknown as T) || t;

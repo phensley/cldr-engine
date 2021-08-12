@@ -146,7 +146,7 @@ export class SchemaBuilder {
  */
 export const buildSchema = (origin: Origin, debug: boolean): Schema => {
   const builder = new SchemaBuilder(debug);
-  const schema = ({} as any) as Schema;
+  const schema = {} as any as Schema;
   builder.construct(schema, origin);
   return schema;
 };
