@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.3.0]
+
+## Fixed/Changed
+
+- Upgrade to [CLDR v39](http://cldr.unicode.org/index/downloads/cldr-39)
+
 ## [1.2.7]
 
 ### Fixed/Changed
@@ -827,6 +833,7 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[1.3.0]: https://github.com/phensley/cldr-engine/compare/v1.2.7...v1.3.0
 [1.2.7]: https://github.com/phensley/cldr-engine/compare/v1.2.6...v1.2.7
 [1.2.6]: https://github.com/phensley/cldr-engine/compare/v1.2.5...v1.2.6
 [1.2.5]: https://github.com/phensley/cldr-engine/compare/v1.2.4...v1.2.5

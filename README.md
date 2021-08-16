@@ -6,14 +6,15 @@ Internationalization in Typescript with Unicode CLDR, batteries included.
 [![codecov](https://codecov.io/gh/phensley/cldr-engine/branch/master/graph/badge.svg)](https://codecov.io/gh/phensley/cldr-engine)
 [![npm version](https://badge.fury.io/js/%40phensley%2Fcldr.svg)](https://www.npmjs.com/package/@phensley/cldr)
 
-- [Links](#links)
-- [Install](#install)
-- [Versioning](#versioning)
-- [Features](#features)
-- [Package Naming](#package-naming)
-- [Goals](#goals)
-- [License](#license)
-- [Affiliation](#affiliation)
+- [cldr-engine](#cldr-engine)
+  - [Links](#links)
+  - [Install](#install)
+  - [Versioning](#versioning)
+  - [Features](#features)
+  - [Package Naming](#package-naming)
+  - [Goals](#goals)
+  - [License](#license)
+  - [Affiliation](#affiliation)
 
 ## Links
 
@@ -59,7 +60,7 @@ This project follows [semantic versioning](https://semver.org/):
 
 ## Features
 
-- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 37.0.0](http://cldr.unicode.org/index/downloads/cldr-37)
+- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 39.0.0](http://cldr.unicode.org/index/downloads/cldr-39)
 - [372 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#availablelocales)
 - [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
 - [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher) for improved locale fallback
