@@ -1,6 +1,6 @@
 import { cardinalRules, expressions, ordinalRules } from './autogen.rules';
 import { pluralRanges } from './autogen.ranges';
-import { PluralRules } from './rules';
+import { PluralRules, PluralRulesImpl } from './rules';
 import { Rule, RuleMap } from './types';
 
 const resolve = (r: RuleMap, language: string, region?: string): Rule[] =>
@@ -19,7 +19,7 @@ export class Plurals {
     const cardinals = resolve(cardinalRules, language, region);
     const ordinals = resolve(ordinalRules, language, region);
     const ranges = pluralRanges[language] || pluralRanges.en;
-    return new PluralRules(expressions, cardinals, ordinals, ranges);
+    return new PluralRulesImpl(expressions, cardinals, ordinals, ranges);
   }
 }
 

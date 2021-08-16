@@ -15,12 +15,24 @@ const CATEGORIES: string[] = ['zero', 'one', 'two', 'few', 'many', 'other'];
 const arg = (n: DecimalArg, c: number = 0) => new NumberOperands(coerceDecimal(n), c);
 
 /**
- * Set of all cardinal and ordinal plural rules, and the array of expression
- * fragments the rules reference.
+ * Plural operations for a given language.
  *
  * @public
  */
-export class PluralRules {
+export interface PluralRules {
+  operands(d: Decimal): NumberOperands;
+  cardinal(n: DecimalArg, c?: number): string;
+  ordinal(n: DecimalArg): string;
+  range(start: DecimalArg, end: DecimalArg): string;
+}
+
+/**
+ * Set of all cardinal and ordinal plural rules, and the array of expression
+ * fragments the rules reference.
+ *
+ * @internal
+ */
+export class PluralRulesImpl implements PluralRules {
   constructor(
     private expressions: Expr[],
     private cardinals: Rule[],
