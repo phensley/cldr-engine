@@ -621,7 +621,7 @@ export class DateFieldInternalsImpl implements DateFieldInternals {
     constructor(internals: Internals);
     // (undocumented)
     formatRelativeTimeField(bundle: Bundle, value: DecimalArg, field: RelativeTimeFieldType, options: RelativeTimeFieldFormatOptions, params: NumberParams_2, transform: ContextTransformInfo): string;
-    }
+}
 
 export { DateFieldType }
 
@@ -881,7 +881,7 @@ export class GeneralImpl implements General {
     parseLanguageTag(tag: string): LanguageTag;
     // (undocumented)
     resolveLocale(id: string | LanguageTag): Locale;
-    }
+}
 
 // Warning: (ae-internal-missing-underscore) The name "GeneralInternals" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -927,7 +927,7 @@ export class GeneralInternalsImpl implements GeneralInternals {
     lineOrder(bundle: Bundle): string;
     // (undocumented)
     parseWrapper(raw: string): WrapperNode[];
-    }
+}
 
 // Warning: (ae-internal-missing-underscore) The name "getCurrencyForRegion" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -1354,7 +1354,7 @@ export class NumbersImpl implements Numbers {
     getPluralOrdinal(n: DecimalArg, options?: DecimalAdjustOptions): string;
     // (undocumented)
     parseDecimal(n: number | string): Decimal;
-    }
+}
 
 // Warning: (ae-internal-missing-underscore) The name "NumberSymbols" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -1409,7 +1409,7 @@ export { origin_2 as origin }
 
 // @public
 export class Pack {
-    constructor(data: any);
+    constructor(data: string | any);
     // (undocumented)
     readonly checksum: string;
     // (undocumented)
@@ -1437,7 +1437,7 @@ export class PackScript {
     }, defaultRegion: string, _spellout: any);
     // (undocumented)
     get(tag: LanguageTag): Bundle;
-    }
+}
 
 export { parseLanguageTag }
 
@@ -1492,7 +1492,7 @@ export class PersianDate extends CalendarDate {
     toString(): string;
     // (undocumented)
     withZone(zoneId: string): PersianDate;
-    }
+}
 
 export { PluralRules }
 
@@ -1509,7 +1509,7 @@ export class PrivateApiImpl {
     getContextTransformInfo(): ContextTransformInfo;
     // (undocumented)
     getNumberParams(numberSystem?: NumberSystemType, defaultSystem?: NumberSystemType): NumberParams_2;
-    }
+}
 
 // @public (undocumented)
 export interface Quantity {
@@ -1689,7 +1689,7 @@ export class StringBundle implements Bundle {
     spellout(): any;
     // (undocumented)
     tag(): LanguageTag;
-    }
+}
 
 export { StringDecimalFormatter }
 
@@ -1844,7 +1844,7 @@ export class UnitsImpl implements Units {
     getUnitDisplayName(name: UnitType, length?: UnitLength): string;
     // (undocumented)
     protected selectListType(options: UnitFormatOptions): ListPatternType;
-    }
+}
 
 // Warning: (ae-internal-missing-underscore) The name "UnitsInternalImpl" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -1857,7 +1857,7 @@ export class UnitsInternalImpl implements UnitInternals {
     getDisplayName(bundle: Bundle, name: UnitType, length: string): string;
     // (undocumented)
     getUnitInfo(length: string): UnitInfo;
-    }
+}
 
 export { UnitType }
 
@@ -1900,7 +1900,6 @@ export interface ZonedDateTime {
 }
 
 export { ZoneInfo }
-
 
 // (No @packageDocumentation comment for this package)
 

@@ -77,7 +77,7 @@ export class Pack {
   readonly scripts: { [x: string]: PackScript } = {};
   readonly spellout: any;
 
-  constructor(data: string | Record<string, unknown>) {
+  constructor(data: string | any) {
     const raw: any = typeof data === 'string' ? JSON.parse(data) : data;
     const { version, cldr, checksum, language, spellout } = raw;
     if (version === U) {

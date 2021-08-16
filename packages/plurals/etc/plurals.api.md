@@ -29,11 +29,7 @@ export class NumberOperands {
 }
 
 // @public
-export class PluralRules {
-    // Warning: (ae-forgotten-export) The symbol "Expr" needs to be exported by the entry point index.d.ts
-    // Warning: (ae-forgotten-export) The symbol "Rule" needs to be exported by the entry point index.d.ts
-    // Warning: (ae-forgotten-export) The symbol "RangeMap" needs to be exported by the entry point index.d.ts
-    constructor(expressions: Expr[], cardinals: Rule[], ordinals: Rule[], ranges: RangeMap);
+export interface PluralRules {
     // (undocumented)
     cardinal(n: DecimalArg, c?: number): string;
     // (undocumented)

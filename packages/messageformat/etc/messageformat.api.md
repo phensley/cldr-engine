@@ -11,7 +11,7 @@ import { PluralRules } from '@phensley/plurals';
 export type Argument = string | number;
 
 // @public
-export const buildMessageMatcher: (names: string[], sticky?: boolean) => StickyMatcher;
+export const buildMessageMatcher: (names: string[], sticky?: boolean) => MessageMatcher;
 
 // @public
 export class DefaultMessageArgConverter implements MessageArgConverter {
@@ -65,7 +65,7 @@ export type MessageCode = MessageArgCode | MessageTextCode | MessagePluralCode |
 export class MessageEngine {
     constructor(plurals: PluralRules, converter: MessageArgConverter, formatters: MessageFormatFuncMap, code: MessageCode);
     evaluate(positional: MessageArg[], named?: MessageNamedArgs): string;
-    }
+}
 
 // @public
 export type MessageFormatFunc = (args: MessageArg[], options: string[]) => string;
@@ -279,7 +279,6 @@ export class SubstringMatcher extends StickyMatcher {
 
 // @public
 export const substringRegexp: (pattern: string) => RegExp;
-
 
 // (No @packageDocumentation comment for this package)
 
