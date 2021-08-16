@@ -259,14 +259,14 @@ export type regexpFunc = (pattern: string) => RegExp;
  *
  * @public
  */
-export const stickyRegexp = (pattern: string) => new RegExp(pattern, 'y');
+export const stickyRegexp = (pattern: string): RegExp => new RegExp(pattern, 'y');
 
 /**
  * Construct a regular expression for use in a SubstringMatcher.
  *
  * @public
  */
-export const substringRegexp = (pattern: string) => new RegExp('^' + pattern, 'g');
+export const substringRegexp = (pattern: string): RegExp => new RegExp('^' + pattern, 'g');
 
 /**
  * Constructs the right instance of matcher based on the runtime environment's
@@ -275,5 +275,5 @@ export const substringRegexp = (pattern: string) => new RegExp('^' + pattern, 'g
  *
  * @public
  */
-export const buildMessageMatcher = (names: string[], sticky: boolean = hasStickyRegexp) =>
+export const buildMessageMatcher = (names: string[], sticky: boolean = hasStickyRegexp): MessageMatcher =>
   new (sticky ? StickyMatcher : SubstringMatcher)(names, sticky ? stickyRegexp : substringRegexp);

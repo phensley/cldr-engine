@@ -239,4 +239,4 @@ class LanguageTagParser {
  *
  * @public
  */
-export const parseLanguageTag = (str: string) => new LanguageTagParser(str).parse();
+export const parseLanguageTag = (str: string): LanguageTag => new LanguageTagParser(str).parse();
