@@ -43,7 +43,7 @@ for (const round of ROUNDING) {
 
 const VERBOSE = false;
 
-export const mathStress = () => {
+export const mathStress = (): void => {
   let add: Decimal;
   let sub: Decimal;
   let mul: Decimal;

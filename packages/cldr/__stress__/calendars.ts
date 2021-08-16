@@ -42,7 +42,7 @@ const buildDatetimes = (): ZonedDateTime[] => {
   return res;
 };
 
-export const calendarStress = () => {
+export const calendarStress = (): void => {
   let total = 0;
   let empty = 0;
   let elapsed: string;

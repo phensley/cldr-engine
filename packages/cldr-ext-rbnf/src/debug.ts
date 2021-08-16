@@ -109,12 +109,12 @@ export class RBNFDebugSet extends RBNFSetBase {
   }
 }
 
-export const padleft = (s: string, n: number) => {
+export const padleft = (s: string, n: number): string => {
   const d = n - s.length;
   return ' '.repeat(d > 0 ? d : 0) + s;
 };
 
-export const padright = (s: string, n: number) => {
+export const padright = (s: string, n: number): string => {
   const d = n - s.length;
   return s + ' '.repeat(d > 0 ? d : 0);
 };

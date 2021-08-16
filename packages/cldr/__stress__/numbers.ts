@@ -123,7 +123,7 @@ const unitOptions = (): UnitFormatOptions[] => {
   return res;
 };
 
-export const numberStress = () => {
+export const numberStress = (): void => {
   let total = 0;
   let empty = 0;
   let s: string;
