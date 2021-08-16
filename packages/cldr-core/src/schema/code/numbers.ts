@@ -1,4 +1,4 @@
-import { digits, field, scope, scopemap, vector, Scope } from '../instructions';
+import { digits, field, scope, scopemap, vector, KeyIndexImpl, Scope } from '../instructions';
 import {
   CurrencySpacingPatternIndex,
   CurrencySpacingPosIndex,
@@ -35,7 +35,7 @@ export const NUMBERS: Scope = scope('Numbers', 'Numbers', [
   ]),
 ]);
 
-export const NUMBERS_INDICES = {
+export const NUMBERS_INDICES: { [x: string]: KeyIndexImpl<string> } = {
   'currency-spacing-pattern': CurrencySpacingPatternIndex,
   'currency-spacing-pos': CurrencySpacingPosIndex,
   'number-misc-pattern': NumberMiscPatternIndex,

@@ -1,10 +1,11 @@
+import { MetaZoneType } from '@phensley/cldr-types';
 import { MetaZoneValues, TimeZoneStableIds } from './autogen.timezones';
 import { KeyIndexImpl } from '../instructions';
 
 /**
  * @public
  */
-export const MetaZoneIndex = new KeyIndexImpl(MetaZoneValues);
+export const MetaZoneIndex = new KeyIndexImpl<MetaZoneType>(MetaZoneValues);
 
 /**
  * @public

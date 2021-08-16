@@ -1,4 +1,4 @@
-import { field, scope, vector, Scope } from '../instructions';
+import { field, scope, vector, KeyIndexImpl, Scope } from '../instructions';
 import { ContextTransformFieldIndex, ListPatternPositionIndex } from '../schema/general';
 
 export const LAYOUT: Scope = scope('Layout', 'Layout', [field('characterOrder'), field('lineOrder')]);
@@ -14,7 +14,7 @@ export const LIST_PATTERNS: Scope = scope('ListPatterns', 'ListPatterns', [
   listPattern('unitShort'),
 ]);
 
-export const GENERAL_INDICES = {
+export const GENERAL_INDICES: { [x: string]: KeyIndexImpl<string> } = {
   'context-transform-field': ContextTransformFieldIndex,
   'list-pattern-position': ListPatternPositionIndex,
 };

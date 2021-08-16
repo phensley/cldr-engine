@@ -1,4 +1,4 @@
-import { field, scope, vector, Scope } from '../instructions';
+import { field, scope, vector, KeyIndexImpl, Scope } from '../instructions';
 import { MetaZoneIndex, TimeZoneTypeIndex } from '../schema/timezones';
 
 export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZones', [
@@ -13,7 +13,7 @@ export const TIMEZONE: Scope = scope('TimeZoneNames', 'TimeZones', [
   field('regionFormat'),
 ]);
 
-export const TIMEZONE_INDICES = {
+export const TIMEZONE_INDICES: { [x: string]: KeyIndexImpl<string> } = {
   metazone: MetaZoneIndex,
   'timezone-type': TimeZoneTypeIndex,
 };
