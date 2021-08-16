@@ -1,10 +1,12 @@
 // Minimal typings for the parts of benchmark-related modules we use.
 // Upstream typings are missing some overloads.
 
+type benchfunc = (...args: any[]) => any;
+
 declare module 'benchmark' {
   class Benchmark {
     abort(): Benchmark;
-    on(type?: string, listener?: Function): Benchmark;
+    on(type?: string, listener?: benchfunc): Benchmark;
     on(types: string[]): Benchmark;
     reset(): Benchmark;
     run(options?: Benchmark.Options): Benchmark;
@@ -22,15 +24,15 @@ declare module 'benchmark' {
       minSamples?: number;
       minTime?: number;
       name?: string;
-      onAbort?: Function;
-      onComplete?: Function;
-      onCycle?: Function;
-      onError?: Function;
-      onReset?: Function;
-      onStart?: Function;
-      setup?: Function | string;
-      teardown?: Function | string;
-      fn?: Function | string;
+      onAbort?: benchfunc;
+      onComplete?: benchfunc;
+      onCycle?: benchfunc;
+      onError?: benchfunc;
+      onReset?: benchfunc;
+      onStart?: benchfunc;
+      setup?: benchfunc | string;
+      teardown?: benchfunc | string;
+      fn?: benchfunc | string;
       queued?: boolean;
     }
 
@@ -56,14 +58,14 @@ declare module 'benchmark' {
       running: boolean;
 
       abort(): Suite;
-      add(name: string, fn: Function | string, options?: Options): Suite;
-      add(fn: Function | string, options?: Options): Suite;
+      add(name: string, fn: benchfunc | string, options?: Options): Suite;
+      add(fn: benchfunc | string, options?: Options): Suite;
       add(name: string, options?: Options): Suite;
       add(options: Options): Suite;
-      filter(callback: Function | string): Suite;
-      map(callback: Function): string[];
+      filter(callback: benchfunc | string): Suite;
+      map(callback: benchfunc): string[];
       map(name: string): string[];
-      on(type?: string, callback?: Function): Suite;
+      on(type?: string, callback?: benchfunc): Suite;
       on(types: string[]): Suite;
       push(benchmark: Benchmark): number;
       reset(): Suite;

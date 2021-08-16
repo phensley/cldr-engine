@@ -58,7 +58,7 @@ export class SchemaBuilder {
     this.captureTimes = debug && process !== undefined && process.hrtime !== undefined;
   }
 
-  construct(obj: any, inst: Instruction): void {
+  construct(obj: Schema, inst: Instruction): void {
     switch (inst.type) {
       case 'digits':
         this.constructDigits(obj, inst);

@@ -24,7 +24,7 @@ export const makeSuite = (name: string): Suite => {
 /**
  * Pad a string to length n using the replacement string.
  */
-export const pad = (n: number, str: string, repl: string) => {
+export const pad = (n: number, str: string, repl: string): string => {
   if (n < str.length) {
     throw new Error(`String is longer than the padding amount ${n}`);
   }
