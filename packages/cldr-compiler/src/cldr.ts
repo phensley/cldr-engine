@@ -535,7 +535,7 @@ export const load = (path: string, optional = false) => {
  * Flattens and exports the main hierarchy for a given language.
  */
 export const getMain = (language: string, transform: boolean = true) => {
-  const access = (group: {}, fileName: string, optional = false, transformer?: (o: any) => any) => {
+  const access = (group: any, fileName: string, optional = false, transformer?: (o: any) => any) => {
     const data = load(`main/${language}/${fileName}`, optional);
     const root = L.get(['main', language], data);
     const converted = convert(group, root);
@@ -581,7 +581,7 @@ export const getMain = (language: string, transform: boolean = true) => {
  * Flattens and exports the supplemental hierarchy.
  */
 export const getSupplemental = () => {
-  const access = (group: {}, fileName: string) => {
+  const access = (group: any, fileName: string) => {
     const data = load(`supplemental/${fileName}`);
     const root = L.get(['supplemental'], data);
     return convert(group, root);
@@ -609,7 +609,7 @@ export const getSupplemental = () => {
  * Files that did not originate under supplemental.
  */
 export const getOther = () => {
-  const access = (group: {}, fileName: string) => {
+  const access = (group: any, fileName: string) => {
     const root = load(`supplemental/${fileName}`);
     return convert(group, root);
   };
@@ -623,7 +623,7 @@ export const getOther = () => {
  * Exports all extensions / patches.
  */
 export const getExtensions = () => {
-  const access = (group: {}, filename: string) => {
+  const access = (group: any, filename: string) => {
     const path = join(__dirname, '..', 'data', 'patches', `${filename}.json`);
     const data = JSON.parse(fs.readFileSync(path, { encoding: 'utf-8' }));
     const root = L.get(['supplemental'], data);
