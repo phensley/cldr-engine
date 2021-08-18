@@ -99,7 +99,9 @@ class LanguageTagParser {
     const parts = typeof preferred === 'string' ? preferred.split(SEP) : str.split(SEP);
 
     if (this.parseLanguage(parts)) {
-      this.parseExtLangs(parts);
+      if (this.language && this.language.length <= 3) {
+        this.parseExtLangs(parts);
+      }
       this.parseScript(parts);
       this.parseRegion(parts);
       this.parseVariants(parts);
