@@ -5,6 +5,7 @@ on:
     branches:
       # - coverage
       - master
+      - 1.2.x
 
 jobs:
   build:
