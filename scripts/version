@@ -7,6 +7,11 @@ from subprocess import Popen
 
 CWD = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
 
+def run(cmd):
+    print('running:', ' '.join(cmd))
+    proc = Popen(cmd)
+    proc.communicate()
+
 def load_json(path):
     return json.load(open(path))
 
@@ -30,14 +35,41 @@ def set_versions(cfg, version):
             rec[name] = '~' + version
     return cfg
 
+def usage():
+    print('Usage: %r [patch | minor | major]' % sys.argv[0])
+    sys.exit(1)
+
 def main():
+    args = set(sys.argv[1:])
+    if len(args) != 1:
+        usage()
+
+    # collect paths to add, commit, and tag
+    paths = []
 
     # get version from lerna.json and increment
+
+    paths.append('lerna.json')
     path = os.path.join(CWD, 'lerna.json')
     cfg = load_json(path)
     old_version = cfg['version']
     major, minor, patch = [int(c) for c in old_version.split('.')]
-    new_version = '%d.%d.%d' % (major, minor, patch + 1)
+
+    # bump version
+    if 'patch' in args:
+        patch += 1
+    elif 'minor' in args:
+        patch = 0
+        minor += 1
+    elif 'major' in args:
+        patch = 0
+        minor = 0
+        major += 1
+    else:
+        usage()
+
+    # set new version
+    new_version = '%d.%d.%d' % (major, minor, patch)
     cfg['version'] = new_version
     save_json(path, cfg)
 
@@ -45,10 +77,18 @@ def main():
     root = os.path.join(CWD, 'packages')
     pkgs = os.listdir(root)
     for p in pkgs:
+        paths.append(os.path.join('packages', p, 'package.json'))
         path = os.path.join(root, p, 'package.json')
         cfg = load_json(path)
         cfg = set_versions(cfg, new_version)
         save_json(path, cfg)
 
+    # git add, commit, tag
+    run(['git', 'add'] + paths)
+    tag = 'v' + new_version
+    run(['git', 'commit', '-m', tag])
+    run(['git', 'tag', tag])
+
 if __name__ == '__main__':
     main()
+
