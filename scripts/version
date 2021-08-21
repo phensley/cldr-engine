@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+import json, os, re, sys
+from subprocess import Popen
+
+# same as 'lerna version' but lets us set a '~' dependency
+
+CWD = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
+
+def load_json(path):
+    return json.load(open(path))
+
+def save_json(path, data):
+    out = open(path, 'w')
+    json.dump(data, out, indent='  ')
+    out.write('\n')
+
+def run(cmd):
+    p = Popen(cmd)
+    p.communicate()
+
+def set_versions(cfg, version):
+    cfg['version'] = version
+    for key in ('dependencies', 'devDependencies'):
+        rec = cfg[key]
+        names = rec.keys()
+        for name in names:
+            if not name.startswith('@phensley/'):
+                continue
+            rec[name] = '~' + version
+    return cfg
+
+def main():
+
+    # get version from lerna.json and increment
+    path = os.path.join(CWD, 'lerna.json')
+    cfg = load_json(path)
+    old_version = cfg['version']
+    major, minor, patch = [int(c) for c in old_version.split('.')]
+    new_version = '%d.%d.%d' % (major, minor, patch + 1)
+    cfg['version'] = new_version
+    save_json(path, cfg)
+
+    # set versions for all packages
+    root = os.path.join(CWD, 'packages')
+    pkgs = os.listdir(root)
+    for p in pkgs:
+        path = os.path.join(root, p, 'package.json')
+        cfg = load_json(path)
+        cfg = set_versions(cfg, new_version)
+        save_json(path, cfg)
+
+if __name__ == '__main__':
+    main()
