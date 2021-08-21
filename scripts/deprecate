@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+
+import argparse, os, re, sys
+from subprocess import Popen
+
+CWD = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
+RE_VERSION = re.compile('\d+\.\d+\.\d+')
+
+def deprecate(package, version, message):
+    print('Deprecating %s version %s: %s' % (package, version, message))
+    cmd = ['npm', 'deprecate', '%s@%s' % (package, version), message]
+    # print(cmd)
+    proc = Popen(cmd)
+    proc.communicate()
+
+def list_packages():
+    root = os.path.join(CWD, 'packages')
+    return [('@phensley/%s') % c for c in os.listdir(root)]
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        prog='deprecate',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        description='Deprecate NPM packages')
+
+    # parser.add_argument('--otp', type=str, required=1, help='NPM OTP')
+    parser.add_argument('--message', type=str, required=1, help='Deprecation message')
+    parser.add_argument('--package', type=str, help='Specific package')
+    parser.add_argument('version', type=str, nargs='+',
+        help='Versions to deprecate')
+
+    return parser.parse_args()
+
+def main():
+    args = parse_args()
+    if args.package:
+        packages = [args.package]
+    else:
+        packages = list_packages()
+    for version in args.version:
+        for package in packages:
+            deprecate(package, version, args.message)
+
+if __name__ == '__main__':
+    main()
