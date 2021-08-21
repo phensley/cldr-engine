@@ -1,0 +1,1251 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>RegionIdType · @phensley/cldr</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="An [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)"/><meta name="docsearch:version" content="1.2.10"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="RegionIdType · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="An [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)"/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.2.10</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/cldr-engine/docs/en/1.2.10/doc-index" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.2.10/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>General</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-cldrframework">CLDRFramework</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-cldroptions">CLDROptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-cldr">CLDR</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-cldr-calendars">CLDR.Calendars</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-cldr-general">CLDR.General</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-cldr-numbers">CLDR.Numbers</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-cldr-units">CLDR.Units</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-schemaconfig">SchemaConfig</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-buddhistdate">BuddhistDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-calendardate">CalendarDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-calendardatefields">CalendarDateFields</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-calendarfieldoptions">CalendarFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-calendartype">CalendarType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-datefieldtype">DateFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-datefieldformatoptions">DateFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-dateformataltoptions">DateFormatAltOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-dateformatoptions">DateFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-dateintervalformatoptions">DateIntervalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-daterawformatoptions">DateRawFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-dateskeleton">DateSkeleton</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-datetimepatternfieldtype">DateTimePatternFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-datewrapperformatoptions">DateWrapperFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-dayperiodalttype">DayPeriodAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-eraalttype">EraAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-erafieldoptions">EraFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-erawidthtype">EraWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-exemplarcity">ExemplarCity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-fieldwidthtype">FieldWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-formatwidthtype">FormatWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-gregoriandate">GregorianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-iso8601date">ISO8601Date</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-japanesedate">JapaneseDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-persiandate">PersianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-relativetimefieldtype">RelativeTimeFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-relativetimeformatoptions">RelativeTimeFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-relativetimefieldformatoptions">RelativeTimeFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-timeperiod">TimePeriod</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-timeperiodfield">TimePeriodField</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-timezoneinfo">TimeZoneInfo</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-timezonetype">TimeZoneType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-zoneddatetime">ZonedDateTime</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-contexttype">ContextType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-displaynameoptions">DisplayNameOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-languageidtype">LanguageIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-listpatterntype">ListPatternType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-measurementcategory">MeasurementCategory</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-measurementsystem">MeasurementSystem</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-regionidtype">RegionIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-scriptidtype">ScriptIdType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-bundle">Bundle</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-languagetag">LanguageTag</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-locale">Locale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-localematcher">LocaleMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-localematcheroptions">LocaleMatcherOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-decimal">Decimal</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-decimalconstants">DecimalConstants</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-mathcontext">MathContext</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-rational">Rational</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-roundingmodetype">RoundingModeType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Messages</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-buildmessagematcher">buildMessageMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-parsemessagepattern">parseMessagePattern</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-defaultmessageargconverter">DefaultMessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-messageargconverter">MessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-messagecode">MessageCode</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-messageengine">MessageEngine</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-messageformatfuncmap">MessageFormatFuncMap</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-messageformatter">MessageFormatter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-messageformatteroptions">MessageFormatterOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-messagematcher">MessageMatcher</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Numbers</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-currencyformatoptions">CurrencyFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-currencyformatstyletype">CurrencyFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-currencysymbolwidthtype">CurrencySymbolWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-currencytype">CurrencyType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-decimaladjustoptions">DecimalAdjustOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-decimalformatoptions">DecimalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-decimalformatstyletype">DecimalFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-numberformaterrortype">NumberFormatErrorType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-numbersystemtype">NumberSystemType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Units</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-quantity">Quantity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-unitformatoptions">UnitFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-unitformatstyletype">UnitFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-unitlength">UnitLength</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.2.10/api-unittype">UnitType</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">RegionIdType</h1></header><article><div><span><p>An <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>
+or <a href="https://en.wikipedia.org/wiki/UN_M.49">UN M.49</a> identifier for a region.</p>
+<h3><a class="anchor" aria-hidden="true" id="syntax"></a><a href="#syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h3>
+<pre class="syntax">
+'001' | '002' | '003' ... 'ZM' | 'ZW' | 'ZZ'
+</pre>
+<h3><a class="anchor" aria-hidden="true" id="values"></a><a href="#values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Values</h3>
+<ul>
+<li>'001'
+<ul>
+<li>World</li>
+</ul></li>
+<li>'002'
+<ul>
+<li>Africa</li>
+</ul></li>
+<li>'003'
+<ul>
+<li>North America</li>
+</ul></li>
+<li>'005'
+<ul>
+<li>South America</li>
+</ul></li>
+<li>'009'
+<ul>
+<li>Oceania</li>
+</ul></li>
+<li>'011'
+<ul>
+<li>Western Africa</li>
+</ul></li>
+<li>'013'
+<ul>
+<li>Central America</li>
+</ul></li>
+<li>'014'
+<ul>
+<li>Eastern Africa</li>
+</ul></li>
+<li>'015'
+<ul>
+<li>Northern Africa</li>
+</ul></li>
+<li>'017'
+<ul>
+<li>Middle Africa</li>
+</ul></li>
+<li>'018'
+<ul>
+<li>Southern Africa</li>
+</ul></li>
+<li>'019'
+<ul>
+<li>Americas</li>
+</ul></li>
+<li>'021'
+<ul>
+<li>Northern America</li>
+</ul></li>
+<li>'029'
+<ul>
+<li>Caribbean</li>
+</ul></li>
+<li>'030'
+<ul>
+<li>Eastern Asia</li>
+</ul></li>
+<li>'034'
+<ul>
+<li>Southern Asia</li>
+</ul></li>
+<li>'035'
+<ul>
+<li>Southeast Asia</li>
+</ul></li>
+<li>'039'
+<ul>
+<li>Southern Europe</li>
+</ul></li>
+<li>'053'
+<ul>
+<li>Australasia</li>
+</ul></li>
+<li>'054'
+<ul>
+<li>Melanesia</li>
+</ul></li>
+<li>'057'
+<ul>
+<li>Micronesian Region</li>
+</ul></li>
+<li>'061'
+<ul>
+<li>Polynesia</li>
+</ul></li>
+<li>'142'
+<ul>
+<li>Asia</li>
+</ul></li>
+<li>'143'
+<ul>
+<li>Central Asia</li>
+</ul></li>
+<li>'145'
+<ul>
+<li>Western Asia</li>
+</ul></li>
+<li>'150'
+<ul>
+<li>Europe</li>
+</ul></li>
+<li>'151'
+<ul>
+<li>Eastern Europe</li>
+</ul></li>
+<li>'154'
+<ul>
+<li>Northern Europe</li>
+</ul></li>
+<li>'155'
+<ul>
+<li>Western Europe</li>
+</ul></li>
+<li>'202'
+<ul>
+<li>Sub-Saharan Africa</li>
+</ul></li>
+<li>'419'
+<ul>
+<li>Latin America</li>
+</ul></li>
+<li>'AC'
+<ul>
+<li>Ascension Island</li>
+</ul></li>
+<li>'AD'
+<ul>
+<li>Andorra</li>
+</ul></li>
+<li>'AE'
+<ul>
+<li>United Arab Emirates</li>
+</ul></li>
+<li>'AF'
+<ul>
+<li>Afghanistan</li>
+</ul></li>
+<li>'AG'
+<ul>
+<li>Antigua &amp; Barbuda</li>
+</ul></li>
+<li>'AI'
+<ul>
+<li>Anguilla</li>
+</ul></li>
+<li>'AL'
+<ul>
+<li>Albania</li>
+</ul></li>
+<li>'AM'
+<ul>
+<li>Armenia</li>
+</ul></li>
+<li>'AO'
+<ul>
+<li>Angola</li>
+</ul></li>
+<li>'AQ'
+<ul>
+<li>Antarctica</li>
+</ul></li>
+<li>'AR'
+<ul>
+<li>Argentina</li>
+</ul></li>
+<li>'AS'
+<ul>
+<li>American Samoa</li>
+</ul></li>
+<li>'AT'
+<ul>
+<li>Austria</li>
+</ul></li>
+<li>'AU'
+<ul>
+<li>Australia</li>
+</ul></li>
+<li>'AW'
+<ul>
+<li>Aruba</li>
+</ul></li>
+<li>'AX'
+<ul>
+<li>Åland Islands</li>
+</ul></li>
+<li>'AZ'
+<ul>
+<li>Azerbaijan</li>
+</ul></li>
+<li>'BA'
+<ul>
+<li>Bosnia &amp; Herzegovina</li>
+</ul></li>
+<li>'BB'
+<ul>
+<li>Barbados</li>
+</ul></li>
+<li>'BD'
+<ul>
+<li>Bangladesh</li>
+</ul></li>
+<li>'BE'
+<ul>
+<li>Belgium</li>
+</ul></li>
+<li>'BF'
+<ul>
+<li>Burkina Faso</li>
+</ul></li>
+<li>'BG'
+<ul>
+<li>Bulgaria</li>
+</ul></li>
+<li>'BH'
+<ul>
+<li>Bahrain</li>
+</ul></li>
+<li>'BI'
+<ul>
+<li>Burundi</li>
+</ul></li>
+<li>'BJ'
+<ul>
+<li>Benin</li>
+</ul></li>
+<li>'BL'
+<ul>
+<li>St. Barthélemy</li>
+</ul></li>
+<li>'BM'
+<ul>
+<li>Bermuda</li>
+</ul></li>
+<li>'BN'
+<ul>
+<li>Brunei</li>
+</ul></li>
+<li>'BO'
+<ul>
+<li>Bolivia</li>
+</ul></li>
+<li>'BQ'
+<ul>
+<li>Caribbean Netherlands</li>
+</ul></li>
+<li>'BR'
+<ul>
+<li>Brazil</li>
+</ul></li>
+<li>'BS'
+<ul>
+<li>Bahamas</li>
+</ul></li>
+<li>'BT'
+<ul>
+<li>Bhutan</li>
+</ul></li>
+<li>'BV'
+<ul>
+<li>Bouvet Island</li>
+</ul></li>
+<li>'BW'
+<ul>
+<li>Botswana</li>
+</ul></li>
+<li>'BY'
+<ul>
+<li>Belarus</li>
+</ul></li>
+<li>'BZ'
+<ul>
+<li>Belize</li>
+</ul></li>
+<li>'CA'
+<ul>
+<li>Canada</li>
+</ul></li>
+<li>'CC'
+<ul>
+<li>Cocos (Keeling) Islands</li>
+</ul></li>
+<li>'CD'
+<ul>
+<li>Congo - Kinshasa</li>
+</ul></li>
+<li>'CF'
+<ul>
+<li>Central African Republic</li>
+</ul></li>
+<li>'CG'
+<ul>
+<li>Congo - Brazzaville</li>
+</ul></li>
+<li>'CH'
+<ul>
+<li>Switzerland</li>
+</ul></li>
+<li>'CI'
+<ul>
+<li>Côte d’Ivoire</li>
+</ul></li>
+<li>'CK'
+<ul>
+<li>Cook Islands</li>
+</ul></li>
+<li>'CL'
+<ul>
+<li>Chile</li>
+</ul></li>
+<li>'CM'
+<ul>
+<li>Cameroon</li>
+</ul></li>
+<li>'CN'
+<ul>
+<li>China</li>
+</ul></li>
+<li>'CO'
+<ul>
+<li>Colombia</li>
+</ul></li>
+<li>'CP'
+<ul>
+<li>Clipperton Island</li>
+</ul></li>
+<li>'CR'
+<ul>
+<li>Costa Rica</li>
+</ul></li>
+<li>'CU'
+<ul>
+<li>Cuba</li>
+</ul></li>
+<li>'CV'
+<ul>
+<li>Cape Verde</li>
+</ul></li>
+<li>'CW'
+<ul>
+<li>Curaçao</li>
+</ul></li>
+<li>'CX'
+<ul>
+<li>Christmas Island</li>
+</ul></li>
+<li>'CY'
+<ul>
+<li>Cyprus</li>
+</ul></li>
+<li>'CZ'
+<ul>
+<li>Czechia</li>
+</ul></li>
+<li>'DE'
+<ul>
+<li>Germany</li>
+</ul></li>
+<li>'DG'
+<ul>
+<li>Diego Garcia</li>
+</ul></li>
+<li>'DJ'
+<ul>
+<li>Djibouti</li>
+</ul></li>
+<li>'DK'
+<ul>
+<li>Denmark</li>
+</ul></li>
+<li>'DM'
+<ul>
+<li>Dominica</li>
+</ul></li>
+<li>'DO'
+<ul>
+<li>Dominican Republic</li>
+</ul></li>
+<li>'DZ'
+<ul>
+<li>Algeria</li>
+</ul></li>
+<li>'EA'
+<ul>
+<li>Ceuta &amp; Melilla</li>
+</ul></li>
+<li>'EC'
+<ul>
+<li>Ecuador</li>
+</ul></li>
+<li>'EE'
+<ul>
+<li>Estonia</li>
+</ul></li>
+<li>'EG'
+<ul>
+<li>Egypt</li>
+</ul></li>
+<li>'EH'
+<ul>
+<li>Western Sahara</li>
+</ul></li>
+<li>'ER'
+<ul>
+<li>Eritrea</li>
+</ul></li>
+<li>'ES'
+<ul>
+<li>Spain</li>
+</ul></li>
+<li>'ET'
+<ul>
+<li>Ethiopia</li>
+</ul></li>
+<li>'EU'
+<ul>
+<li>European Union</li>
+</ul></li>
+<li>'EZ'
+<ul>
+<li>Eurozone</li>
+</ul></li>
+<li>'FI'
+<ul>
+<li>Finland</li>
+</ul></li>
+<li>'FJ'
+<ul>
+<li>Fiji</li>
+</ul></li>
+<li>'FK'
+<ul>
+<li>Falkland Islands</li>
+</ul></li>
+<li>'FM'
+<ul>
+<li>Micronesia</li>
+</ul></li>
+<li>'FO'
+<ul>
+<li>Faroe Islands</li>
+</ul></li>
+<li>'FR'
+<ul>
+<li>France</li>
+</ul></li>
+<li>'GA'
+<ul>
+<li>Gabon</li>
+</ul></li>
+<li>'GB'
+<ul>
+<li>United Kingdom</li>
+</ul></li>
+<li>'GD'
+<ul>
+<li>Grenada</li>
+</ul></li>
+<li>'GE'
+<ul>
+<li>Georgia</li>
+</ul></li>
+<li>'GF'
+<ul>
+<li>French Guiana</li>
+</ul></li>
+<li>'GG'
+<ul>
+<li>Guernsey</li>
+</ul></li>
+<li>'GH'
+<ul>
+<li>Ghana</li>
+</ul></li>
+<li>'GI'
+<ul>
+<li>Gibraltar</li>
+</ul></li>
+<li>'GL'
+<ul>
+<li>Greenland</li>
+</ul></li>
+<li>'GM'
+<ul>
+<li>Gambia</li>
+</ul></li>
+<li>'GN'
+<ul>
+<li>Guinea</li>
+</ul></li>
+<li>'GP'
+<ul>
+<li>Guadeloupe</li>
+</ul></li>
+<li>'GQ'
+<ul>
+<li>Equatorial Guinea</li>
+</ul></li>
+<li>'GR'
+<ul>
+<li>Greece</li>
+</ul></li>
+<li>'GS'
+<ul>
+<li>South Georgia &amp; South Sandwich Islands</li>
+</ul></li>
+<li>'GT'
+<ul>
+<li>Guatemala</li>
+</ul></li>
+<li>'GU'
+<ul>
+<li>Guam</li>
+</ul></li>
+<li>'GW'
+<ul>
+<li>Guinea-Bissau</li>
+</ul></li>
+<li>'GY'
+<ul>
+<li>Guyana</li>
+</ul></li>
+<li>'HK'
+<ul>
+<li>Hong Kong SAR China</li>
+</ul></li>
+<li>'HM'
+<ul>
+<li>Heard &amp; McDonald Islands</li>
+</ul></li>
+<li>'HN'
+<ul>
+<li>Honduras</li>
+</ul></li>
+<li>'HR'
+<ul>
+<li>Croatia</li>
+</ul></li>
+<li>'HT'
+<ul>
+<li>Haiti</li>
+</ul></li>
+<li>'HU'
+<ul>
+<li>Hungary</li>
+</ul></li>
+<li>'IC'
+<ul>
+<li>Canary Islands</li>
+</ul></li>
+<li>'ID'
+<ul>
+<li>Indonesia</li>
+</ul></li>
+<li>'IE'
+<ul>
+<li>Ireland</li>
+</ul></li>
+<li>'IL'
+<ul>
+<li>Israel</li>
+</ul></li>
+<li>'IM'
+<ul>
+<li>Isle of Man</li>
+</ul></li>
+<li>'IN'
+<ul>
+<li>India</li>
+</ul></li>
+<li>'IO'
+<ul>
+<li>British Indian Ocean Territory</li>
+</ul></li>
+<li>'IQ'
+<ul>
+<li>Iraq</li>
+</ul></li>
+<li>'IR'
+<ul>
+<li>Iran</li>
+</ul></li>
+<li>'IS'
+<ul>
+<li>Iceland</li>
+</ul></li>
+<li>'IT'
+<ul>
+<li>Italy</li>
+</ul></li>
+<li>'JE'
+<ul>
+<li>Jersey</li>
+</ul></li>
+<li>'JM'
+<ul>
+<li>Jamaica</li>
+</ul></li>
+<li>'JO'
+<ul>
+<li>Jordan</li>
+</ul></li>
+<li>'JP'
+<ul>
+<li>Japan</li>
+</ul></li>
+<li>'KE'
+<ul>
+<li>Kenya</li>
+</ul></li>
+<li>'KG'
+<ul>
+<li>Kyrgyzstan</li>
+</ul></li>
+<li>'KH'
+<ul>
+<li>Cambodia</li>
+</ul></li>
+<li>'KI'
+<ul>
+<li>Kiribati</li>
+</ul></li>
+<li>'KM'
+<ul>
+<li>Comoros</li>
+</ul></li>
+<li>'KN'
+<ul>
+<li>St. Kitts &amp; Nevis</li>
+</ul></li>
+<li>'KP'
+<ul>
+<li>North Korea</li>
+</ul></li>
+<li>'KR'
+<ul>
+<li>South Korea</li>
+</ul></li>
+<li>'KW'
+<ul>
+<li>Kuwait</li>
+</ul></li>
+<li>'KY'
+<ul>
+<li>Cayman Islands</li>
+</ul></li>
+<li>'KZ'
+<ul>
+<li>Kazakhstan</li>
+</ul></li>
+<li>'LA'
+<ul>
+<li>Laos</li>
+</ul></li>
+<li>'LB'
+<ul>
+<li>Lebanon</li>
+</ul></li>
+<li>'LC'
+<ul>
+<li>St. Lucia</li>
+</ul></li>
+<li>'LI'
+<ul>
+<li>Liechtenstein</li>
+</ul></li>
+<li>'LK'
+<ul>
+<li>Sri Lanka</li>
+</ul></li>
+<li>'LR'
+<ul>
+<li>Liberia</li>
+</ul></li>
+<li>'LS'
+<ul>
+<li>Lesotho</li>
+</ul></li>
+<li>'LT'
+<ul>
+<li>Lithuania</li>
+</ul></li>
+<li>'LU'
+<ul>
+<li>Luxembourg</li>
+</ul></li>
+<li>'LV'
+<ul>
+<li>Latvia</li>
+</ul></li>
+<li>'LY'
+<ul>
+<li>Libya</li>
+</ul></li>
+<li>'MA'
+<ul>
+<li>Morocco</li>
+</ul></li>
+<li>'MC'
+<ul>
+<li>Monaco</li>
+</ul></li>
+<li>'MD'
+<ul>
+<li>Moldova</li>
+</ul></li>
+<li>'ME'
+<ul>
+<li>Montenegro</li>
+</ul></li>
+<li>'MF'
+<ul>
+<li>St. Martin</li>
+</ul></li>
+<li>'MG'
+<ul>
+<li>Madagascar</li>
+</ul></li>
+<li>'MH'
+<ul>
+<li>Marshall Islands</li>
+</ul></li>
+<li>'MK'
+<ul>
+<li>North Macedonia</li>
+</ul></li>
+<li>'ML'
+<ul>
+<li>Mali</li>
+</ul></li>
+<li>'MM'
+<ul>
+<li>Myanmar (Burma)</li>
+</ul></li>
+<li>'MN'
+<ul>
+<li>Mongolia</li>
+</ul></li>
+<li>'MO'
+<ul>
+<li>Macao SAR China</li>
+</ul></li>
+<li>'MP'
+<ul>
+<li>Northern Mariana Islands</li>
+</ul></li>
+<li>'MQ'
+<ul>
+<li>Martinique</li>
+</ul></li>
+<li>'MR'
+<ul>
+<li>Mauritania</li>
+</ul></li>
+<li>'MS'
+<ul>
+<li>Montserrat</li>
+</ul></li>
+<li>'MT'
+<ul>
+<li>Malta</li>
+</ul></li>
+<li>'MU'
+<ul>
+<li>Mauritius</li>
+</ul></li>
+<li>'MV'
+<ul>
+<li>Maldives</li>
+</ul></li>
+<li>'MW'
+<ul>
+<li>Malawi</li>
+</ul></li>
+<li>'MX'
+<ul>
+<li>Mexico</li>
+</ul></li>
+<li>'MY'
+<ul>
+<li>Malaysia</li>
+</ul></li>
+<li>'MZ'
+<ul>
+<li>Mozambique</li>
+</ul></li>
+<li>'NA'
+<ul>
+<li>Namibia</li>
+</ul></li>
+<li>'NC'
+<ul>
+<li>New Caledonia</li>
+</ul></li>
+<li>'NE'
+<ul>
+<li>Niger</li>
+</ul></li>
+<li>'NF'
+<ul>
+<li>Norfolk Island</li>
+</ul></li>
+<li>'NG'
+<ul>
+<li>Nigeria</li>
+</ul></li>
+<li>'NI'
+<ul>
+<li>Nicaragua</li>
+</ul></li>
+<li>'NL'
+<ul>
+<li>Netherlands</li>
+</ul></li>
+<li>'NO'
+<ul>
+<li>Norway</li>
+</ul></li>
+<li>'NP'
+<ul>
+<li>Nepal</li>
+</ul></li>
+<li>'NR'
+<ul>
+<li>Nauru</li>
+</ul></li>
+<li>'NU'
+<ul>
+<li>Niue</li>
+</ul></li>
+<li>'NZ'
+<ul>
+<li>New Zealand</li>
+</ul></li>
+<li>'OM'
+<ul>
+<li>Oman</li>
+</ul></li>
+<li>'PA'
+<ul>
+<li>Panama</li>
+</ul></li>
+<li>'PE'
+<ul>
+<li>Peru</li>
+</ul></li>
+<li>'PF'
+<ul>
+<li>French Polynesia</li>
+</ul></li>
+<li>'PG'
+<ul>
+<li>Papua New Guinea</li>
+</ul></li>
+<li>'PH'
+<ul>
+<li>Philippines</li>
+</ul></li>
+<li>'PK'
+<ul>
+<li>Pakistan</li>
+</ul></li>
+<li>'PL'
+<ul>
+<li>Poland</li>
+</ul></li>
+<li>'PM'
+<ul>
+<li>St. Pierre &amp; Miquelon</li>
+</ul></li>
+<li>'PN'
+<ul>
+<li>Pitcairn Islands</li>
+</ul></li>
+<li>'PR'
+<ul>
+<li>Puerto Rico</li>
+</ul></li>
+<li>'PS'
+<ul>
+<li>Palestinian Territories</li>
+</ul></li>
+<li>'PT'
+<ul>
+<li>Portugal</li>
+</ul></li>
+<li>'PW'
+<ul>
+<li>Palau</li>
+</ul></li>
+<li>'PY'
+<ul>
+<li>Paraguay</li>
+</ul></li>
+<li>'QA'
+<ul>
+<li>Qatar</li>
+</ul></li>
+<li>'QO'
+<ul>
+<li>Outlying Oceania</li>
+</ul></li>
+<li>'RE'
+<ul>
+<li>Réunion</li>
+</ul></li>
+<li>'RO'
+<ul>
+<li>Romania</li>
+</ul></li>
+<li>'RS'
+<ul>
+<li>Serbia</li>
+</ul></li>
+<li>'RU'
+<ul>
+<li>Russia</li>
+</ul></li>
+<li>'RW'
+<ul>
+<li>Rwanda</li>
+</ul></li>
+<li>'SA'
+<ul>
+<li>Saudi Arabia</li>
+</ul></li>
+<li>'SB'
+<ul>
+<li>Solomon Islands</li>
+</ul></li>
+<li>'SC'
+<ul>
+<li>Seychelles</li>
+</ul></li>
+<li>'SD'
+<ul>
+<li>Sudan</li>
+</ul></li>
+<li>'SE'
+<ul>
+<li>Sweden</li>
+</ul></li>
+<li>'SG'
+<ul>
+<li>Singapore</li>
+</ul></li>
+<li>'SH'
+<ul>
+<li>St. Helena</li>
+</ul></li>
+<li>'SI'
+<ul>
+<li>Slovenia</li>
+</ul></li>
+<li>'SJ'
+<ul>
+<li>Svalbard &amp; Jan Mayen</li>
+</ul></li>
+<li>'SK'
+<ul>
+<li>Slovakia</li>
+</ul></li>
+<li>'SL'
+<ul>
+<li>Sierra Leone</li>
+</ul></li>
+<li>'SM'
+<ul>
+<li>San Marino</li>
+</ul></li>
+<li>'SN'
+<ul>
+<li>Senegal</li>
+</ul></li>
+<li>'SO'
+<ul>
+<li>Somalia</li>
+</ul></li>
+<li>'SR'
+<ul>
+<li>Suriname</li>
+</ul></li>
+<li>'SS'
+<ul>
+<li>South Sudan</li>
+</ul></li>
+<li>'ST'
+<ul>
+<li>São Tomé &amp; Príncipe</li>
+</ul></li>
+<li>'SV'
+<ul>
+<li>El Salvador</li>
+</ul></li>
+<li>'SX'
+<ul>
+<li>Sint Maarten</li>
+</ul></li>
+<li>'SY'
+<ul>
+<li>Syria</li>
+</ul></li>
+<li>'SZ'
+<ul>
+<li>Eswatini</li>
+</ul></li>
+<li>'TA'
+<ul>
+<li>Tristan da Cunha</li>
+</ul></li>
+<li>'TC'
+<ul>
+<li>Turks &amp; Caicos Islands</li>
+</ul></li>
+<li>'TD'
+<ul>
+<li>Chad</li>
+</ul></li>
+<li>'TF'
+<ul>
+<li>French Southern Territories</li>
+</ul></li>
+<li>'TG'
+<ul>
+<li>Togo</li>
+</ul></li>
+<li>'TH'
+<ul>
+<li>Thailand</li>
+</ul></li>
+<li>'TJ'
+<ul>
+<li>Tajikistan</li>
+</ul></li>
+<li>'TK'
+<ul>
+<li>Tokelau</li>
+</ul></li>
+<li>'TL'
+<ul>
+<li>Timor-Leste</li>
+</ul></li>
+<li>'TM'
+<ul>
+<li>Turkmenistan</li>
+</ul></li>
+<li>'TN'
+<ul>
+<li>Tunisia</li>
+</ul></li>
+<li>'TO'
+<ul>
+<li>Tonga</li>
+</ul></li>
+<li>'TR'
+<ul>
+<li>Turkey</li>
+</ul></li>
+<li>'TT'
+<ul>
+<li>Trinidad &amp; Tobago</li>
+</ul></li>
+<li>'TV'
+<ul>
+<li>Tuvalu</li>
+</ul></li>
+<li>'TW'
+<ul>
+<li>Taiwan</li>
+</ul></li>
+<li>'TZ'
+<ul>
+<li>Tanzania</li>
+</ul></li>
+<li>'UA'
+<ul>
+<li>Ukraine</li>
+</ul></li>
+<li>'UG'
+<ul>
+<li>Uganda</li>
+</ul></li>
+<li>'UM'
+<ul>
+<li>U.S. Outlying Islands</li>
+</ul></li>
+<li>'UN'
+<ul>
+<li>United Nations</li>
+</ul></li>
+<li>'US'
+<ul>
+<li>United States</li>
+</ul></li>
+<li>'UY'
+<ul>
+<li>Uruguay</li>
+</ul></li>
+<li>'UZ'
+<ul>
+<li>Uzbekistan</li>
+</ul></li>
+<li>'VA'
+<ul>
+<li>Vatican City</li>
+</ul></li>
+<li>'VC'
+<ul>
+<li>St. Vincent &amp; Grenadines</li>
+</ul></li>
+<li>'VE'
+<ul>
+<li>Venezuela</li>
+</ul></li>
+<li>'VG'
+<ul>
+<li>British Virgin Islands</li>
+</ul></li>
+<li>'VI'
+<ul>
+<li>U.S. Virgin Islands</li>
+</ul></li>
+<li>'VN'
+<ul>
+<li>Vietnam</li>
+</ul></li>
+<li>'VU'
+<ul>
+<li>Vanuatu</li>
+</ul></li>
+<li>'WF'
+<ul>
+<li>Wallis &amp; Futuna</li>
+</ul></li>
+<li>'WS'
+<ul>
+<li>Samoa</li>
+</ul></li>
+<li>'XA'
+<ul>
+<li>Pseudo-Accents</li>
+</ul></li>
+<li>'XB'
+<ul>
+<li>Pseudo-Bidi</li>
+</ul></li>
+<li>'XK'
+<ul>
+<li>Kosovo</li>
+</ul></li>
+<li>'YE'
+<ul>
+<li>Yemen</li>
+</ul></li>
+<li>'YT'
+<ul>
+<li>Mayotte</li>
+</ul></li>
+<li>'ZA'
+<ul>
+<li>South Africa</li>
+</ul></li>
+<li>'ZM'
+<ul>
+<li>Zambia</li>
+</ul></li>
+<li>'ZW'
+<ul>
+<li>Zimbabwe</li>
+</ul></li>
+<li>'ZZ'
+<ul>
+<li>Unknown Region</li>
+</ul></li>
+</ul>
+<p></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.2.10/api-measurementsystem"><span class="arrow-prev">← </span><span class="function-name-prevnext">MeasurementSystem</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.2.10/api-scriptidtype"><span class="function-name-prevnext">ScriptIdType</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2021 Patrick Hensley</section></footer></div></body></html>
