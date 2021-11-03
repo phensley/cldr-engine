@@ -1,0 +1,509 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>CLDR.Numbers · @phensley/cldr</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The `CLDR.Numbers` namespace allows you to:"/><meta name="docsearch:version" content="1.3.3"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="CLDR.Numbers · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="The `CLDR.Numbers` namespace allows you to:"/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.3.3</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/cldr-engine/docs/en/1.3.3/doc-index" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.3.3/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>API</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-cldrframework">CLDRFramework</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-cldroptions">CLDROptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-cldr">CLDR</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-cldr-calendars">CLDR.Calendars</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-cldr-general">CLDR.General</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-cldr-numbers">CLDR.Numbers</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-cldr-units">CLDR.Units</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-schemaconfig">SchemaConfig</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-buddhistdate">BuddhistDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-calendardate">CalendarDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-calendardatefields">CalendarDateFields</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-calendarfieldoptions">CalendarFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-calendartype">CalendarType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-datefieldtype">DateFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-datefieldformatoptions">DateFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-dateformataltoptions">DateFormatAltOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-dateformatoptions">DateFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-dateintervalformatoptions">DateIntervalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-daterawformatoptions">DateRawFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-dateskeleton">DateSkeleton</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-datetimepatternfieldtype">DateTimePatternFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-datewrapperformatoptions">DateWrapperFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-dayperiodalttype">DayPeriodAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-eraalttype">EraAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-erafieldoptions">EraFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-erawidthtype">EraWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-exemplarcity">ExemplarCity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-fieldwidthtype">FieldWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-formatwidthtype">FormatWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-gregoriandate">GregorianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-iso8601date">ISO8601Date</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-japanesedate">JapaneseDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-persiandate">PersianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-relativetimefieldtype">RelativeTimeFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-relativetimeformatoptions">RelativeTimeFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-relativetimefieldformatoptions">RelativeTimeFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-timeperiod">TimePeriod</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-timeperiodfield">TimePeriodField</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-timezoneinfo">TimeZoneInfo</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-timezonetype">TimeZoneType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-zoneddatetime">ZonedDateTime</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-contexttype">ContextType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-displaynameoptions">DisplayNameOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-languageidtype">LanguageIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-listpatterntype">ListPatternType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-measurementcategory">MeasurementCategory</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-measurementsystem">MeasurementSystem</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-regionidtype">RegionIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-scriptidtype">ScriptIdType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-bundle">Bundle</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-languagetag">LanguageTag</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-locale">Locale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-localematcher">LocaleMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-localematcheroptions">LocaleMatcherOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-decimal">Decimal</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-decimalconstants">DecimalConstants</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-mathcontext">MathContext</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-rational">Rational</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-roundingmodetype">RoundingModeType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Messages</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-buildmessagematcher">buildMessageMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-parsemessagepattern">parseMessagePattern</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-defaultmessageargconverter">DefaultMessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-messageargconverter">MessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-messagecode">MessageCode</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-messageengine">MessageEngine</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-messageformatfuncmap">MessageFormatFuncMap</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-messageformatter">MessageFormatter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-messageformatteroptions">MessageFormatterOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-messagematcher">MessageMatcher</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Numbers</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-currencyformatoptions">CurrencyFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-currencyformatstyletype">CurrencyFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-currencysymbolwidthtype">CurrencySymbolWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-currencytype">CurrencyType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-decimaladjustoptions">DecimalAdjustOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-decimalformatoptions">DecimalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-decimalformatstyletype">DecimalFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-numberformaterrortype">NumberFormatErrorType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-numbersystemtype">NumberSystemType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Units</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-quantity">Quantity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-unitformatoptions">UnitFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-unitformatstyletype">UnitFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-unitlength">UnitLength</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.3.3/api-unittype">UnitType</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">CLDR.Numbers</h1></header><article><div><span><p>The <code>CLDR.Numbers</code> namespace allows you to:</p>
+<ul>
+<li>Format decimal numbers and currencies</li>
+<li>Compute the plural category for cardinal and ordinal numbers</li>
+<li>Get currency symbols, display name, pluralized name and fraction info.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="adjustdecimal"></a><a href="#adjustdecimal" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>adjustDecimal</h2>
+<p>Adjust a decimal numbers integer, significant and fraction digits, and apply the given
+rounding mode.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax"></a><a href="#syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+adjustDecimal(num, options?): Decimal
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters"></a><a href="#parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string | <a href="api-decimal.html">Decimal</a></span></code>
+<ul>
+<li>The number to adjust.</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-decimaladjustoptions.html">DecimalAdjustOptions</a></span></code>
+<ul>
+<li>Options to control the decimal number adjustment.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="examples"></a><a href="#examples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.adjustDecimal(<span class="hljs-string">'1.5'</span>, { maximumFractionDigits: <span class="hljs-number">0</span> }));
+log(
+  cldr.Numbers.adjustDecimal(<span class="hljs-string">'1.5'</span>, { maximumFractionDigits: <span class="hljs-number">0</span>, round: <span class="hljs-string">'down'</span> })
+);
+</code></pre>
+<pre class="output">
+2
+1
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="formatcurrency"></a><a href="#formatcurrency" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatCurrency</h2>
+<p>Format a decimal number, representing an amount in a given currency, into a string.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-1"></a><a href="#syntax-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+formatCurrency(num, code, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-1"></a><a href="#parameters-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string | <a href="api-decimal.html">Decimal</a></span></code>
+<ul>
+<li>The currency amount to format.</li>
+</ul></li>
+<li><code class="def">code: <span><a href="api-currencytype.html">CurrencyType</a></span></code>
+<ul>
+<li>The 3-letter <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> code for the currency.</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-currencyformatoptions.html">CurrencyFormatOptions</a></span></code>
+<ul>
+<li>Options to control the currency formatting.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="return-value"></a><a href="#return-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return value</h4>
+<ul>
+<li>A <code class="def"><span>string</span></code> containing the formatted currency value.</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.formatCurrency(<span class="hljs-string">'12345.6789'</span>, <span class="hljs-string">'EUR'</span>));
+</code></pre>
+<pre class="output">
+€12,345.68
+</pre>
+<p>Using a compact style with an explicit fixed divisor.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> opts = { style: <span class="hljs-string">'short'</span>, divisor: <span class="hljs-number">1000</span> };
+log(cldr.Numbers.formatCurrency(<span class="hljs-string">'100'</span>, <span class="hljs-string">'USD'</span>, opts));
+log(cldr.Numbers.formatCurrency(<span class="hljs-string">'1234567'</span>, <span class="hljs-string">'USD'</span>, opts));
+</code></pre>
+<pre class="output">
+$0.1K
+$1,235K
+</pre>
+<p>The <code>cash</code> option activates rounding to the smallest cash unit available for the given currency. For example, if the penny were eliminated in the United States, the nickel (<code>$0.05</code>) would become the smallest cash unit available. See <a href="https://github.com/unicode-cldr/cldr-core/blob/master/supplemental/currencyData.json">the CLDR currency data</a> for the most recent list.</p>
+<p>Note: the <code>round</code> rounding mode still takes effect; only the rounding increment is changed.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> opts = { cash: <span class="hljs-literal">true</span> };
+
+<span class="hljs-comment">// The smallest cash unit for the Danish Krone is 0.50</span>
+log(cldr.Numbers.formatCurrency(<span class="hljs-string">'345.67'</span>, <span class="hljs-string">'DKK'</span>, opts));
+log(cldr.Numbers.formatCurrency(<span class="hljs-string">'345.76'</span>, <span class="hljs-string">'DKK'</span>, opts));
+
+<span class="hljs-comment">// The smallest cash unit for the Canadian Dollar is 0.05</span>
+log(cldr.Numbers.formatCurrency(<span class="hljs-string">'345.67'</span>, <span class="hljs-string">'CAD'</span>, opts));
+log(cldr.Numbers.formatCurrency(<span class="hljs-string">'345.76'</span>, <span class="hljs-string">'CAD'</span>, opts));
+</code></pre>
+<pre class="output">
+DKK 345.50
+DKK 346.00
+CA$345.65
+CA$345.75
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="formatcurrencytoparts"></a><a href="#formatcurrencytoparts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatCurrencyToParts</h2>
+<p>Format a decimal number, representing an amount in a given currency, into an array of parts.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-2"></a><a href="#syntax-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+formatCurrencyToParts(num, code, options?): Part[]
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-2"></a><a href="#parameters-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string | <a href="api-decimal.html">Decimal</a></span></code>
+<ul>
+<li>The currency amount to format.</li>
+</ul></li>
+<li><code class="def">code: <span><a href="api-currencytype.html">CurrencyType</a></span></code>
+<ul>
+<li>The 3-letter <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> code for the currency.</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-currencyformatoptions.html">CurrencyFormatOptions</a></span></code>
+<ul>
+<li>Options to control the currency formatting.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="return-value-1"></a><a href="#return-value-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return value</h4>
+<ul>
+<li>An array containing the formatted parts.</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-1"></a><a href="#example-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.formatCurrencyToParts(<span class="hljs-string">'12345.6789'</span>, <span class="hljs-string">'EUR'</span>));
+</code></pre>
+<pre class="output">
+[
+  { type: 'currency', value: '€' },
+  { type: 'integer', value: '12' },
+  { type: 'group', value: ',' },
+  { type: 'integer', value: '345' },
+  { type: 'decimal', value: '.' },
+  { type: 'fraction', value: '68' }
+]
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="formatdecimal"></a><a href="#formatdecimal" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatDecimal</h2>
+<p>Format a decimal number to a string.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-3"></a><a href="#syntax-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+formatDecimal(num, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-3"></a><a href="#parameters-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string | <a href="api-decimal.html">Decimal</a></span></code>
+<ul>
+<li>The number to format.</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-decimalformatoptions.html">DecimalFormatOptions</a></span></code>
+<ul>
+<li>Options to control the decimal formatting</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="return-value-2"></a><a href="#return-value-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return value</h4>
+<ul>
+<li>A string containing the formatted number</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-2"></a><a href="#example-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.formatDecimal(<span class="hljs-string">'12345.6789'</span>, { group: <span class="hljs-literal">true</span> }));
+</code></pre>
+<pre class="output">
+12,345.679
+</pre>
+<p>Using a compact style with an explicit fixed divisor.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> opts = { style: <span class="hljs-string">'long'</span>, divisor: <span class="hljs-number">1000</span> };
+log(cldr.Numbers.formatDecimal(<span class="hljs-string">'100'</span>, opts));
+log(cldr.Numbers.formatDecimal(<span class="hljs-string">'1234567'</span>, opts));
+</code></pre>
+<pre class="output">
+0.1 thousand
+1,235 thousand
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="formatdecimaltoparts"></a><a href="#formatdecimaltoparts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatDecimalToParts</h2>
+<p>Format a decimal number to an array of parts.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-4"></a><a href="#syntax-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+formatDecimalToParts(num, options?): Part[]
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-4"></a><a href="#parameters-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string | <a href="api-decimal.html">Decimal</a></span></code>
+<ul>
+<li>The number to format.</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-decimalformatoptions.html">DecimalFormatOptions</a></span></code>
+<ul>
+<li>Options to control the decimal formatting</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="return-value-3"></a><a href="#return-value-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return value</h4>
+<ul>
+<li>An array containing a list of the formatted parts.</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-3"></a><a href="#example-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.formatDecimalToParts(<span class="hljs-string">'12345.6789'</span>, { group: <span class="hljs-literal">true</span> }));
+</code></pre>
+<pre class="output">
+[
+  { type: 'integer', value: '12' },
+  { type: 'group', value: ',' },
+  { type: 'integer', value: '345' },
+  { type: 'decimal', value: '.' },
+  { type: 'fraction', value: '679' }
+]
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getcurrencysymbol"></a><a href="#getcurrencysymbol" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getCurrencySymbol</h2>
+<p>Get the display symbol for a given currency.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-5"></a><a href="#syntax-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getCurrencySymbol(code, width?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-5"></a><a href="#parameters-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">code: <span><a href="api-currencytype.html">CurrencyType</a></span></code>
+<ul>
+<li>The 3-letter <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> code for the currency.</li>
+</ul></li>
+<li><code class="def">width: <span><a href="api-currencysymbolwidthtype.html">CurrencySymbolWidthType</a></span></code>
+<ul>
+<li>Hint indicating you prefer the narrowest symbol.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-4"></a><a href="#example-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.getCurrencySymbol(<span class="hljs-string">'GBP'</span>));
+</code></pre>
+<pre class="output">
+£
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getcurrencydisplayname"></a><a href="#getcurrencydisplayname" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getCurrencyDisplayName</h2>
+<p>Get the display name for a given currency.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-6"></a><a href="#syntax-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getCurrencyDisplayName(code, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-6"></a><a href="#parameters-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">code: <span><a href="api-currencytype.html">CurrencyType</a></span></code>
+<ul>
+<li>The 3-letter <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> code for the currency.</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-displaynameoptions.html">DisplayNameOptions</a></span></code>
+<ul>
+<li>Options to adjust the display name</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-5"></a><a href="#example-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.getCurrencyDisplayName(<span class="hljs-string">'MXN'</span>));
+</code></pre>
+<pre class="output">
+Mexican Peso
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getcurrencypluralname"></a><a href="#getcurrencypluralname" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getCurrencyPluralName</h2>
+<p>Get the pluralized name for a given currency.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-7"></a><a href="#syntax-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getCurrencyPluralName(num, code, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-7"></a><a href="#parameters-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string | <a href="api-decimal.html">Decimal</a></span></code>
+<ul>
+<li>The number to use to compute the plural category. Note that you may want to <a href="api-cldr-numbers.html#adjustdecimal">adjustDecimal</a> the number first, to ensure the number has the expected number of fraction digits, since the plural categories for <code>1</code> and <code>1.0</code> can differ.</li>
+</ul></li>
+<li><code class="def">code: <span><a href="api-currencytype.html">CurrencyType</a></span></code>
+<ul>
+<li>The 3-letter <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> code for the currency.</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-displaynameoptions.html">DisplayNameOptions</a></span></code>
+<ul>
+<li>Options to adjust the display name</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-6"></a><a href="#example-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.getCurrencyPluralName(<span class="hljs-string">'1'</span>, <span class="hljs-string">'USD'</span>));
+log(cldr.Numbers.getCurrencyPluralName(<span class="hljs-string">'17'</span>, <span class="hljs-string">'USD'</span>));
+</code></pre>
+<pre class="output">
+US dollar
+US dollars
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getcurrencyfractions"></a><a href="#getcurrencyfractions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getCurrencyFractions</h2>
+<p>Get the fraction info for a given currency.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-8"></a><a href="#syntax-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getCurrencyFractions(code): CurrencyFractions
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-8"></a><a href="#parameters-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">code: <span><a href="api-currencytype.html">CurrencyType</a></span></code>
+<ul>
+<li>The 3-letter <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> code for the currency.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="return-value-4"></a><a href="#return-value-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return value</h4>
+<ul>
+<li>A <code>CurrencyFractions</code> object</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-7"></a><a href="#example-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.getCurrencyFractions(<span class="hljs-string">'USD'</span>));
+log(cldr.Numbers.getCurrencyFractions(<span class="hljs-string">'JPY'</span>));
+</code></pre>
+<pre class="output">
+{ digits: 2, rounding: 0, cashDigits: 2, cashRounding: 0 }
+{ digits: 0, rounding: 0, cashDigits: 0, cashRounding: 0 }
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getcurrencyforregion"></a><a href="#getcurrencyforregion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getCurrencyForRegion</h2>
+<p>Get the currency code for a given region code.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-9"></a><a href="#syntax-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getCurrencyForRegion(region): CurrencyType
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-9"></a><a href="#parameters-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">region: <span>string</span></code>
+<ul>
+<li>The 2-letter ISO-3166-1 code for a region.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="return-value-5"></a><a href="#return-value-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return value</h4>
+<ul>
+<li>A <a href="api-currencytype.html">CurrencyType</a> value</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-8"></a><a href="#example-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.Numbers.getCurrencyForRegion(<span class="hljs-string">'ME'</span>));
+log(cldr.Numbers.getCurrencyForRegion(<span class="hljs-string">'CH'</span>));
+</code></pre>
+<pre class="output">
+EUR
+CHF
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getpluralcardinal"></a><a href="#getpluralcardinal" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getPluralCardinal</h2>
+<p>Get the plural category for a cardinal number.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-10"></a><a href="#syntax-10" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getPluralCardinal(num, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-10"></a><a href="#parameters-10" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string | <a href="api-decimal.html">Decimal</a></span></code>
+<ul>
+<li>The cardinal number</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-decimaladjustoptions.html">DecimalAdjustOptions</a></span></code>
+<ul>
+<li>Options to control the decimal number adjustment.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-9"></a><a href="#example-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> w = <span class="hljs-function">(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${s}</span><span class="hljs-subst">${<span class="hljs-string">' '</span>.repeat(<span class="hljs-number">12</span> - s.length)}</span>`</span>;
+
+<span class="hljs-keyword">const</span> nums = [<span class="hljs-string">'0'</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'1.0'</span>, <span class="hljs-string">'2'</span>, <span class="hljs-string">'6'</span>];
+<span class="hljs-keyword">const</span> locales = [<span class="hljs-string">'en-US'</span>, <span class="hljs-string">'fr-FR'</span>, <span class="hljs-string">'pl-PL'</span>, <span class="hljs-string">'lt-LT'</span>];
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> n of nums) {
+  <span class="hljs-keyword">const</span> res = locales
+    .map(<span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> cldr = framework.get(id);
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${id}</span>=<span class="hljs-subst">${cldr.Numbers.getPluralCardinal(n)}</span>`</span>;
+    })
+    .map(w)
+    .join(<span class="hljs-string">' '</span>);
+  log(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-string">' '</span>.repeat(<span class="hljs-number">4</span> - n.length)}</span><span class="hljs-subst">${n}</span>   <span class="hljs-subst">${res}</span>`</span>);
+}
+</code></pre>
+<pre class="output">
+   0   en-US=other  fr-FR=one    pl-PL=many   lt-LT=other 
+   1   en-US=one    fr-FR=one    pl-PL=one    lt-LT=one   
+ 1.0   en-US=other  fr-FR=one    pl-PL=other  lt-LT=one   
+   2   en-US=other  fr-FR=other  pl-PL=few    lt-LT=few   
+   6   en-US=other  fr-FR=other  pl-PL=many   lt-LT=few   
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getpluralordinal"></a><a href="#getpluralordinal" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getPluralOrdinal</h2>
+<p>Get the plural category for an ordinal number.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-11"></a><a href="#syntax-11" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getPluralOrdinal(num, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-11"></a><a href="#parameters-11" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string | <a href="api-decimal.html">Decimal</a></span></code>
+<ul>
+<li>The cardinal number</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-decimaladjustoptions.html">DecimalAdjustOptions</a></span></code>
+<ul>
+<li>Options to control the decimal number adjustment.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-10"></a><a href="#example-10" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> endings = {
+  fr: { one: <span class="hljs-string">'re'</span>, other: <span class="hljs-string">'e'</span> },
+  en: { one: <span class="hljs-string">'st'</span>, two: <span class="hljs-string">'nd'</span>, few: <span class="hljs-string">'rd'</span>, other: <span class="hljs-string">'th'</span> },
+};
+
+<span class="hljs-keyword">const</span> nums = [<span class="hljs-string">'1'</span>, <span class="hljs-string">'2'</span>, <span class="hljs-string">'3'</span>, <span class="hljs-string">'4'</span>, <span class="hljs-string">'5'</span>];
+
+<span class="hljs-built_in">Object</span>.keys(endings).forEach(<span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> cldr = framework.get(id);
+  <span class="hljs-keyword">const</span> res = nums
+    .map(<span class="hljs-function">(<span class="hljs-params">n</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> cat = cldr.Numbers.getPluralOrdinal(n);
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${n}</span><span class="hljs-subst">${endings[id][cat]}</span>`</span>;
+    })
+    .join(<span class="hljs-string">' '</span>);
+  log(<span class="hljs-string">`<span class="hljs-subst">${id}</span>: <span class="hljs-subst">${res}</span>`</span>);
+});
+</code></pre>
+<pre class="output">
+fr: 1re 2e 3e 4e 5e
+en: 1st 2nd 3rd 4th 5th
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="parsedecimal"></a><a href="#parsedecimal" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>parseDecimal</h2>
+<p>Parse a string or number into a <a href="api-decimal">Decimal</a> instance.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-12"></a><a href="#syntax-12" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+parseDecimal(n): Decimal
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-12"></a><a href="#parameters-12" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">num: <span>number | string</span></code>
+<ul>
+<li>The number to convert / parse.</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-11"></a><a href="#example-11" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> n of [<span class="hljs-number">0</span>, <span class="hljs-string">'1.23456789'</span>, <span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER, <span class="hljs-string">'1.999999e50'</span>]) {
+  <span class="hljs-keyword">const</span> d = en.Numbers.parseDecimal(n);
+  log(d.toScientificString().padEnd(<span class="hljs-number">22</span>), d.toString());
+}
+</code></pre>
+<pre class="output">
+0                      0
+1.23456789             1.23456789
+9.007199254740991E+15  9007199254740991
+1.999999E+50           199999900000000000000000000000000000000000000000000
+</pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.3.3/api-cldr-general"><span class="arrow-prev">← </span><span>CLDR.General</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.3.3/api-cldr-units"><span>CLDR.Units</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#adjustdecimal">adjustDecimal</a></li><li><a href="#formatcurrency">formatCurrency</a></li><li><a href="#formatcurrencytoparts">formatCurrencyToParts</a></li><li><a href="#formatdecimal">formatDecimal</a></li><li><a href="#formatdecimaltoparts">formatDecimalToParts</a></li><li><a href="#getcurrencysymbol">getCurrencySymbol</a></li><li><a href="#getcurrencydisplayname">getCurrencyDisplayName</a></li><li><a href="#getcurrencypluralname">getCurrencyPluralName</a></li><li><a href="#getcurrencyfractions">getCurrencyFractions</a></li><li><a href="#getcurrencyforregion">getCurrencyForRegion</a></li><li><a href="#getpluralcardinal">getPluralCardinal</a></li><li><a href="#getpluralordinal">getPluralOrdinal</a></li><li><a href="#parsedecimal">parseDecimal</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2021 Patrick Hensley</section></footer></div></body></html>
