@@ -22,7 +22,7 @@ export interface MatchCase {
 }
 
 export const loadDistanceCases = (): DistanceCase[] => {
-  const path = join(__dirname, 'data', 'locale-distance-cases.txt');
+  const path = join(__dirname, 'data', `locale-distance-cases.txt`);
   const cases: DistanceCase[] = [];
   readLines(path).forEach((entry) => {
     const [line, lineno] = entry;
@@ -62,6 +62,31 @@ export const loadMatchCases = (): MatchCase[] => {
       result: cols[2],
       lineno,
     });
+  });
+  return cases;
+};
+
+export const loadDistanceCasesNew = (): DistanceCase[] => {
+  const path = join(__dirname, 'data', `locale-distance-cases-new.txt`);
+  const cases: DistanceCase[] = [];
+  readLines(path).forEach((entry) => {
+    const [line, lineno] = entry;
+    if (line.startsWith('@debug')) {
+      return;
+    }
+    const cols = line.split(';').map((s) => s.trim());
+    if (cols.length > 0 && cols.length !== 3 && cols.length !== 4) {
+      throw new Error(`Invalid test case found: ${line}`);
+    }
+    cases.push(
+      new DistanceCase(
+        cols[0],
+        cols[1],
+        parseInt(cols[2], 10),
+        parseInt(cols.length === 3 ? cols[2] : cols[3], 10),
+        lineno,
+      ),
+    );
   });
   return cases;
 };

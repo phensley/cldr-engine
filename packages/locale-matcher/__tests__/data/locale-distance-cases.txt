@@ -54,7 +54,7 @@ en ; zh-Hans ; 100
 
 en-AU ; en-US ; 5
 en-GU ; en-VI ; 4
-en-CA ; en-AU ; 4
+en-CA ; en-AU ; 5
 
 en-Cyrl ; en-CA ; 100
 es-MX ; en-Cyrl ; 100

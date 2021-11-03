@@ -157,6 +157,7 @@ loadMatchCases().forEach((c) => {
 TODO: these additional test cases come from ICU which implements additional
 matching logic not described in the TR35 specification:
 https://www.unicode.org/reports/tr35/tr35-63/tr35.html#EnhancedLanguageMatching
+https://github.com/unicode-org/icu/blob/main/icu4j/main/classes/core/src/com/ibm/icu/util/LocaleMatcher.java
 
 Uncomment when matching logic is modified so that these all pass.
 
