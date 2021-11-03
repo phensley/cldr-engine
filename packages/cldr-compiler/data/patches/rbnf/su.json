@@ -98,7 +98,7 @@
         },
         {
           "rule": "=%spellout-cardinal= ;",
-          "value": "0"
+          "value": "2"
         }
       ]
     },

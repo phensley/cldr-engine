@@ -44,4 +44,4 @@ export type MetaZoneType =   'Acre' |  'Afghanistan' |  'Africa_Central'
  |  'Tajikistan' |  'Tokelau' |  'Tonga' |  'Truk' |  'Turkmenistan'
  |  'Tuvalu' |  'Uruguay' |  'Uzbekistan' |  'Vanuatu'
  |  'Venezuela' |  'Vladivostok' |  'Volgograd' |  'Vostok'
- |  'Wake' |  'Wallis' |  'Yakutsk' |  'Yekaterinburg';
+ |  'Wake' |  'Wallis' |  'Yakutsk' |  'Yekaterinburg' |  'Yukon';

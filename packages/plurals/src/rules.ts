@@ -63,9 +63,11 @@ export class PluralRulesImpl implements PluralRules {
   }
 
   private evaluate(operands: NumberOperands, rules: Rule[]): number {
-    for (const rule of rules) {
-      if (this.execute(operands, rule[1])) {
-        return rule[0];
+    if (rules) {
+      for (const rule of rules) {
+        if (this.execute(operands, rule[1])) {
+          return rule[0];
+        }
       }
     }
     return 5;

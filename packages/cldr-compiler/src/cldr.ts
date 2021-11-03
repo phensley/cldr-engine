@@ -639,7 +639,7 @@ export const getExtensions = () => {
 /**
  * Available locales.
  */
-export const availableLocales = () => _availableLocales('modern').filter((v) => v !== 'root');
+export const availableLocales = () => _availableLocales('modern').filter((v) => v !== 'root' && v !== 'und');
 
 const _availableLocales = (group: string): string[] =>
   cldrjson('supplemental', 'availableLocales')['availableLocales'][group];

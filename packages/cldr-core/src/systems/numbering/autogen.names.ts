@@ -67,6 +67,7 @@ export const decimalNumberingDigits: { [x: string]: string[] } = {
   thai: ['๐'],
   tibt: ['༠'],
   tirh: ['\u{114d0}'],
+  tnsa: ['\u{16ac0}'],
   vaii: ['꘠'],
   wara: ['\u{118e0}'],
   wcho: ['\u{1e2f0}'],

@@ -795,7 +795,7 @@
           "value": "0"
         },
         {
-          "rule": "' =%spellout-ordinal=;",
+          "rule": "‘ =%spellout-ordinal=;",
           "value": "1"
         }
       ]

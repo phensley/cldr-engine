@@ -665,7 +665,7 @@ test('intervals', () => {
 
   api = calendarsApi('es-419');
   s = api.formatDate(mar11, { date: 'medium' });
-  expect(s).toEqual('10 mar. 2018');
+  expect(s).toEqual('10 mar 2018');
 
   api = calendarsApi('fr');
   s = api.formatDate(mar11, { date: 'full' });

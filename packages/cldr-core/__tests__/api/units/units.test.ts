@@ -168,11 +168,11 @@ test('v38 units', () => {
 
   q.value = '5';
   s = api.formatQuantity(q);
-  expect(s).toEqual('5 dessert spoon');
+  expect(s).toEqual('5 dessert spoons');
 
   q.value = '12.5';
   s = api.formatQuantity(q);
-  expect(s).toEqual('12.5 dessert spoon');
+  expect(s).toEqual('12.5 dessert spoons');
 
   opts = { length: 'short' };
   s = api.formatQuantity(q, opts);

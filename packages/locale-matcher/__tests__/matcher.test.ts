@@ -152,9 +152,13 @@ loadMatchCases().forEach((c) => {
   });
 });
 
-/*
+/**
 
-TODO: revisit matcher logic to pass these tests
+TODO: these additional test cases come from ICU which implements additional
+matching logic not described in the TR35 specification:
+https://www.unicode.org/reports/tr35/tr35-63/tr35.html#EnhancedLanguageMatching
+
+Uncomment when matching logic is modified so that these all pass.
 
 loadMatchCasesNew().forEach((c) => {
   test(c.testname, () => {

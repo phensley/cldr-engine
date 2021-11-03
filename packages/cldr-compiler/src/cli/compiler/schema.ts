@@ -20,11 +20,11 @@ export const runSchema = (args: yargs.Arguments<SchemaArgs>) => {
   const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
   if (args.lang) {
-    langs = checkLanguages(args.lang.split(','), localeMap);
+    langs = checkLanguages(String(args.lang).split(','), localeMap);
   }
   let regions: Set<string> | undefined;
   if (args.regions) {
-    regions = new Set(args.regions.split(','));
+    regions = new Set(String(args.regions).split(','));
   }
 
   const locales: string[] = [];
