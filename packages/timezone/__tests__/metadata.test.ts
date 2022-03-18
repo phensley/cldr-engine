@@ -29,7 +29,7 @@ test('standard offset', () => {
   expect(r.stdoffset).toEqual(0);
   expect(r.latitude).toEqual(5.316667);
   expect(r.longitude).toEqual(-4.033333);
-  expect(r.countries).toEqual(['CI', 'BF', 'GM', 'GN', 'ML', 'MR', 'SH', 'SL', 'SN', 'TG']);
+  expect(r.countries).toEqual(['CI', 'BF', 'GH', 'GM', 'GN', 'ML', 'MR', 'SH', 'SL', 'SN', 'TG']);
 
   r = TZ.zoneMeta('CET')!;
   expect(r.zoneid).toEqual('CET');
