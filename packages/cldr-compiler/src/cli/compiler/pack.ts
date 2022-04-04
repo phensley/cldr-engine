@@ -102,9 +102,29 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
     fs.mkdirSync(dest);
   }
 
+  const patchfiles: PatchFile[] = [];
+
+  // INTERNAL CLDR PATCHES
+  patchfiles.push({
+    path: 'internal',
+    version: 1,
+    patches: [
+      // Fix 41.0.0-BETA2 underscore present in hi-Latn
+      {
+        locales: 'hi-Latn',
+        operations: [
+          {
+            op: 'replace',
+            path: '/TimeZoneNames/exemplarCity/America~1Santo_Domingo',
+            value: 'Santo Domingo',
+          },
+        ],
+      },
+    ],
+  });
+
   // We can apply zero or more patch files to the schema before generating
   // resource files.
-  const patchfiles: PatchFile[] = [];
   if (argv.patch) {
     let fail = false;
     for (const path of argv.patch.split(',')) {

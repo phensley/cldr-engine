@@ -54,7 +54,7 @@ export const applyPatch = (locale: string, doc: any, patchfile: PatchFile) => {
     for (const op of patch.operations) {
       try {
         applyOperation(doc, op, true, true, true);
-      } catch (e) {
+      } catch (e: any) {
         console.warn(`error patching key ${op.path}: ${e.name}`);
         ok = false;
       }

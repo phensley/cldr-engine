@@ -1013,6 +1013,16 @@ test('timezone short/long zone id, exemplar city, generic location format', () =
 
   s = en.formatDateRaw(d, { pattern: 'VVVV' });
   expect(s).toEqual('New York Time');
+
+  // In CLDR 41.0.0-BETA2 the Santo_Domingo exemplarCity contained an underscore
+  // which currently the reserved character in our resource packs. This is patched
+  // in the compiler and checked with this test
+  const hi = calendarsApi('hi-Latn');
+
+  d = unix(base, 'America/Santo_Domingo');
+
+  s = hi.formatDateRaw(d, { pattern: 'VVVV' });
+  expect(s).toEqual('Santo Domingo Time');
 });
 
 test('timezone iso8601 basic format', () => {
