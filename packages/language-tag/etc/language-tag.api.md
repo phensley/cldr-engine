@@ -4,6 +4,9 @@
 
 ```ts
 
+// @public (undocumented)
+export type FastTag = (string | number)[];
+
 // @public
 export class LanguageTag {
     constructor(language?: string, script?: string, region?: string, variant?: string, extensions?: {
@@ -56,8 +59,6 @@ export const enum LanguageTagField {
 // @public
 export const parseLanguageTag: (str: string) => LanguageTag;
 
-// Warning: (ae-forgotten-export) The symbol "FastTag" needs to be exported by the entry point index.d.ts
-//
 // @public
 export const substituteRegionAliases: (dst: FastTag) => void;
 

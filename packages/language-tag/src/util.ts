@@ -1,7 +1,11 @@
 import { LanguageTagField as Tag } from './languagetag';
 import { territoryAliasRaw } from './autogen.aliases';
 
+/**
+ * @public
+ */
 export type FastTag = (string | number)[];
+
 export type FastTagPair = { type: FastTag; repl: FastTag };
 export type LanguageAliasMap = { [x: string]: FastTagPair[] };
 export type TerritoryAliasMap = { [x: string]: string[] };
