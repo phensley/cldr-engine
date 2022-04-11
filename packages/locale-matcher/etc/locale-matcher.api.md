@@ -4,16 +4,17 @@
 
 ```ts
 
+import { LanguageTag } from '@phensley/language-tag';
+import { Locale } from '@phensley/locale';
+
 // @public
 export interface LocaleMatch {
     distance: number;
-    // Warning: (ae-forgotten-export) The symbol "Locale" needs to be exported by the entry point index.d.ts
     locale: Locale;
 }
 
 // @public
 export class LocaleMatcher {
-    // Warning: (ae-forgotten-export) The symbol "LanguageTag" needs to be exported by the entry point index.d.ts
     constructor(supportedLocales: string | (Locale | LanguageTag | string)[], options?: LocaleMatcherOptions);
     match(desiredLocales: string | string[], threshold?: number): LocaleMatch;
 }

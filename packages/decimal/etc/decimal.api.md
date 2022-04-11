@@ -223,7 +223,6 @@ export class StringDecimalFormatter implements DecimalFormatter<string> {
     render(): string;
 }
 
-
 // (No @packageDocumentation comment for this package)
 
 ```

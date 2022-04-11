@@ -12,8 +12,7 @@ class Cache_2<T> {
     constructor(builder: (s: string) => T, capacity: number);
     get(raw: string): T;
     size(): number;
-    }
-
+}
 export { Cache_2 as Cache }
 
 // @public
@@ -21,7 +20,7 @@ export class Checksum {
     constructor();
     get(): number;
     update(s: string): this;
-    }
+}
 
 // @public
 export type Comparator<T> = (a: T, b: T) => number;
@@ -41,7 +40,7 @@ export class Heap<T> {
     empty(): boolean;
     pop(): T | undefined;
     push(item: T): void;
-    }
+}
 
 // @public
 export type Key = string | number;
@@ -54,7 +53,6 @@ export class LRU<V> {
     size(): number;
     toString(): string;
 }
-
 
 // (No @packageDocumentation comment for this package)
 

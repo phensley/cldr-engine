@@ -4,9 +4,11 @@
 
 ```ts
 
+import { Decimal } from '@phensley/decimal';
+import { DecimalArg } from '@phensley/decimal';
+
 // @public
 export class NumberOperands {
-    // Warning: (ae-forgotten-export) The symbol "Decimal" needs to be exported by the entry point index.d.ts
     constructor(d: Decimal, c?: number);
     // (undocumented)
     c: number;
@@ -28,8 +30,6 @@ export class NumberOperands {
 
 // @public
 export interface PluralRules {
-    // Warning: (ae-forgotten-export) The symbol "DecimalArg" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     cardinal(n: DecimalArg, c?: number): string;
     // (undocumented)

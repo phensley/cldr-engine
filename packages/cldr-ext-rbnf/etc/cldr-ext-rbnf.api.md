@@ -7,7 +7,6 @@
 // @public
 export const binarySearch: <T>(elems: T[], lessThan: boolean, lo: number, f: (elem: T) => number) => number;
 
-
 // (No @packageDocumentation comment for this package)
 
 ```

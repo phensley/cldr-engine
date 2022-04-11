@@ -4,6 +4,9 @@
 
 ```ts
 
+import { Decimal } from '@phensley/decimal';
+import { PluralRules } from '@phensley/plurals';
+
 // @public
 export type Argument = string | number;
 
@@ -12,7 +15,6 @@ export const buildMessageMatcher: (names: string[], sticky?: boolean) => Message
 
 // @public
 export class DefaultMessageArgConverter implements MessageArgConverter {
-    // Warning: (ae-forgotten-export) The symbol "Decimal" needs to be exported by the entry point index.d.ts
     asDecimal(arg: MessageArg | undefined): Decimal;
     asString(arg: MessageArg | undefined): string;
 }
@@ -61,7 +63,6 @@ export type MessageCode = MessageArgCode | MessageTextCode | MessagePluralCode |
 
 // @public
 export class MessageEngine {
-    // Warning: (ae-forgotten-export) The symbol "PluralRules" needs to be exported by the entry point index.d.ts
     constructor(plurals: PluralRules, converter: MessageArgConverter, formatters: MessageFormatFuncMap, code: MessageCode);
     evaluate(positional: MessageArg[], named?: MessageNamedArgs): string;
 }

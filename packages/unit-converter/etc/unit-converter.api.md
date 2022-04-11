@@ -4,6 +4,10 @@
 
 ```ts
 
+import { Decimal } from '@phensley/decimal';
+import { MathContext } from '@phensley/decimal';
+import { Rational } from '@phensley/decimal';
+
 // @public
 export const ACCELERATION: FactorDef[];
 
@@ -31,8 +35,6 @@ export const ELECTRIC: FactorDef[];
 // @public
 export const ENERGY: FactorDef[];
 
-// Warning: (ae-forgotten-export) The symbol "Rational" needs to be exported by the entry point index.d.ts
-//
 // @public
 export type FactorDef = [string, string | Rational, string];
 
@@ -78,8 +80,6 @@ export interface UnitConversion {
 export class UnitConverter {
     add(category: string, map: UnitFactors): void;
     categories(): string[];
-    // Warning: (ae-forgotten-export) The symbol "Decimal" needs to be exported by the entry point index.d.ts
-    // Warning: (ae-forgotten-export) The symbol "MathContext" needs to be exported by the entry point index.d.ts
     convert(category: string, n: Decimal, src: string, dst: string, ctx?: MathContext): Decimal | undefined;
     factors(category: string): UnitFactors | undefined;
     get(category: string, src: string, dst: string): UnitConversion | undefined;
