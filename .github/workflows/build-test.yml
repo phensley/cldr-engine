@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x, 16.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -36,7 +36,7 @@ jobs:
         run: yarn test:codecov
 
       - uses: codecov/codecov-action@v1
-        if: matrix.node-version == '14.x'
+        if: matrix.node-version == '16.x'
         with:
           file: ./coverage/lcov.info
           name: codecov-umbrella
