@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Notes on package upgrade exclusions:
+
+# api-extractor: warnings that emit full paths to files breaking builds on
+# other machines
+#
+# chalk: 5.x is an ESM module now, incompatible with the CommonJS side of our
+# project
+#
+# yargs: types are out of sync with the library, and api seems to change
+# frequently
+
+PIN="
+@microsoft/api-extractor
+@types/yargs
+chalk
+yargs
+"
+
+join() {
+  local IFS="$1"
+  shift
+  echo "$*"
+}
+
+PINNED=`join , $PIN`
+
+ncu -u -x $PINNED
+lerna exec --concurrency=1 -- ncu -u -x $PINNED
+
