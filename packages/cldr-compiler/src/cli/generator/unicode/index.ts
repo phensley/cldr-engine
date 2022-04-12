@@ -156,14 +156,15 @@ const download = (): Promise<boolean> => {
         reject(`failure downloading: ${r.statusText}`);
         return;
       }
-      r.body
-        .pipe(fs.createWriteStream(path, { encoding: 'utf-8' }))
-        .on('error', (e: Error) => {
-          reject(`failed to save: ${e}`);
-        })
-        .on('close', () => {
-          resolve(true);
-        });
+      r.body &&
+        r.body
+          .pipe(fs.createWriteStream(path, { encoding: 'utf-8' }))
+          .on('error', (e: Error) => {
+            reject(`failed to save: ${e}`);
+          })
+          .on('close', () => {
+            resolve(true);
+          });
     });
   });
 };

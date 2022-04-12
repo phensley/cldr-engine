@@ -79,25 +79,26 @@ export class Downloader {
       const unzip = zlib.createGunzip();
       fetch(url)
         .then((r: Response) => {
-          r.body
-            // un-gzip
-            .pipe(unzip)
-            .on('error', (e: Error) => {
-              console.log('failure', e);
-              reject(`failure un-gzipping ${desc}: ${e}`);
-            })
+          r.body &&
+            r.body
+              // un-gzip
+              .pipe(unzip)
+              .on('error', (e: Error) => {
+                console.log('failure', e);
+                reject(`failure un-gzipping ${desc}: ${e}`);
+              })
 
-            // untar
-            .pipe(new tar.Parse({ strip: 1 }) as fs.WriteStream)
-            .on('entry', (entry: any) => {
-              this.save(version, entry);
-            })
-            .on('close', () => {
-              this.state[name] = version;
-              this.savestate();
-              info(`${chalk.green('      ok')} ${name}`);
-              resolve(true);
-            });
+              // untar
+              .pipe(new tar.Parse({ strip: 1 }) as fs.WriteStream)
+              .on('entry', (entry: any) => {
+                this.save(version, entry);
+              })
+              .on('close', () => {
+                this.state[name] = version;
+                this.savestate();
+                info(`${chalk.green('      ok')} ${name}`);
+                resolve(true);
+              });
         })
         .catch((reason: any) => {
           reject(`failure downloading ${desc}: ${reason}`);
