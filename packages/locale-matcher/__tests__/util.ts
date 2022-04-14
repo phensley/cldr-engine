@@ -146,7 +146,7 @@ export const loadMatchCasesNew = (): MatchCase[] => {
   return loadMatchCasesFromRaw(name, readLines(path));
 };
 
-export const readLinesFrom = (raw: String): [string, number][] =>
+export const readLinesFrom = (raw: string): [string, number][] =>
   raw
     .split('\n')
     .map((s, i) => {
