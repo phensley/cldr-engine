@@ -4,7 +4,7 @@ on:
   push:
     branches:
       # - coverage
-      - master
+      - main
 
 jobs:
   build:
