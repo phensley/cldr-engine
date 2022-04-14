@@ -4,7 +4,7 @@ import os
 from collections import defaultdict
 
 CWD = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.join(CWD, '../packages/cldr-compiler/.cldr/36.0.0/main')
+ROOT = os.path.join(CWD, '../packages/cldr-compiler/.cldr/41.0.0/main')
 
 MAIN = [
   'ca-buddhist',
@@ -25,7 +25,6 @@ MAIN = [
   'units'
 ]
 
-
 def sumall(id):
     size = 0
     for m in MAIN:
@@ -41,9 +40,15 @@ for id in locales:
     lang = id.split('-')[0]
     langs[lang].append(id)
 
+sums = []
 for lang in sorted(langs.keys()):
     size = 0
     for id in sorted(langs[lang]):
         size += sumall(id)
-    print('%12d' % size, lang)
+    sums.append((size, lang))
+
+for size, lang in sorted(sums, reverse=1):
+    sz = '{:,.0f} KB'.format(size / 1024).rjust(12)
+    print('%s  %s' % (sz, lang))
+#    print('%12d  %5d KB' % (size, size/1024), lang)
 
