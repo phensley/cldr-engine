@@ -80,8 +80,8 @@ export const loadDistanceCasesNew = (): DistanceCase[] => {
     }
     cases.push(
       new DistanceCase(
-        cols[0],
         cols[1],
+        cols[0],
         parseInt(cols[2], 10),
         parseInt(cols.length === 3 ? cols[2] : cols[3], 10),
         lineno,
@@ -91,15 +91,14 @@ export const loadDistanceCasesNew = (): DistanceCase[] => {
   return cases;
 };
 
-export const loadMatchCasesNew = (): MatchCase[] => {
-  const name = 'locale-match-cases-new.txt';
-  const path = join(__dirname, 'data', name);
+export const loadMatchCasesFromRaw = (source: string, lines: [string, number][]) => {
   const cases: MatchCase[] = [];
   let testname = '';
   let supported = '';
   let favor = '';
   let threshold = '';
-  readLines(path).forEach((entry) => {
+
+  lines.forEach((entry) => {
     const [line, lineno] = entry;
     if (line.startsWith('**')) {
       // Each test resets the parameters to their defaults
@@ -129,7 +128,7 @@ export const loadMatchCasesNew = (): MatchCase[] => {
     // Test cases have the form "desired >> result"
     const [desired, result] = line.split('>>').map((s) => s.trim());
     cases.push({
-      testname: `${name} - ${testname} (line ${lineno})`,
+      testname: `${source} - ${testname} (line ${lineno})`,
       favor,
       threshold,
       supported,
@@ -141,9 +140,14 @@ export const loadMatchCasesNew = (): MatchCase[] => {
   return cases;
 };
 
-const readLines = (path: string): [string, number][] => {
-  const raw = fs.readFileSync(path, { encoding: 'utf-8' });
-  return raw
+export const loadMatchCasesNew = (): MatchCase[] => {
+  const name = 'locale-match-cases-new.txt';
+  const path = join(__dirname, 'data', name);
+  return loadMatchCasesFromRaw(name, readLines(path));
+};
+
+export const readLinesFrom = (raw: String): [string, number][] =>
+  raw
     .split('\n')
     .map((s, i) => {
       const idx = s.indexOf('#');
@@ -154,4 +158,8 @@ const readLines = (path: string): [string, number][] => {
       return result;
     })
     .filter((s) => s[0][0] !== '#' && s[0].length > 0);
+
+const readLines = (path: string): [string, number][] => {
+  const raw = fs.readFileSync(path, { encoding: 'utf-8' });
+  return readLinesFrom(raw);
 };
