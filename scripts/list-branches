@@ -1,0 +1,4 @@
+#!/bin/bash
+
+for b in `git br` ; do echo '----------------------------------' ; echo $b ;  git log -1 $b ; echo ; done >branches.txt
+
