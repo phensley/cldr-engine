@@ -60,7 +60,7 @@ This project follows [semantic versioning](https://semver.org/):
 
 ## Features
 
-- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 39.0.0](http://cldr.unicode.org/index/downloads/cldr-39)
+- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 41.0.0](http://cldr.unicode.org/index/downloads/cldr-41)
 - [372 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#availablelocales)
 - [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
 - [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher) for improved locale fallback
