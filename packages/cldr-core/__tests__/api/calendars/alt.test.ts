@@ -8,6 +8,25 @@ const MARCH_11_2018_070025_UTC = 1520751625000;
 
 const LOS_ANGELES = 'America/Los_Angeles';
 
+test('java alt examples', () => {
+  const apr17 = unix(1587126896000, 'America/New_York');
+  let api: CalendarsImpl;
+  let s: string;
+
+  api = calendarsApi('en');
+  s = api.formatDate(apr17, { skeleton: 'GyMMd' });
+  expect(s).toEqual('04/17/2020 AD');
+
+  s = api.formatDate(apr17, { skeleton: 'GGGGyMMd' });
+  expect(s).toEqual('04/17/2020 Anno Domini');
+
+  s = api.formatDate(apr17, { skeleton: 'GyMMd', alt: { era: 'sensitive' } });
+  expect(s).toEqual('04/17/2020 CE');
+
+  s = api.formatDate(apr17, { skeleton: 'GGGGyMMd', alt: { era: 'sensitive' } });
+  expect(s).toEqual('04/17/2020 Common Era');
+});
+
 test('era alternate', () => {
   const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
   let api: CalendarsImpl;
