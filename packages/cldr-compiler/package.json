@@ -52,7 +52,7 @@
     "@types/node-fetch": "^2.6.1",
     "@types/prettier": "^2.6.0",
     "@types/yargs": "17.0.2",
-    "chalk": "^4.1.2",
+    "chalk": "4.1.2",
     "fast-json-patch": "^3.1.1",
     "minimatch": "^5.0.1",
     "node-fetch": "2.6.7",
