@@ -48,7 +48,7 @@ test('raw formats', () => {
   const utc = unix(time, 'UTC');
   const utc1 = unix(time, 'Etc/GMT+1');
   const abidjan = unix(time, 'Africa/Abidjan');
-  const wallis = unix(time, 'Pacific/Wallis');
+  const tarawa = unix(time, 'Pacific/Tarawa'); // Changed in 2022b See NEWS re: backzone
   const ny = unix(time, 'America/New_York');
 
   // zzzz
@@ -65,7 +65,7 @@ test('raw formats', () => {
   res = format(abidjan, 'z');
   expect(res).toEqual(['GMT', 'GMT', 'GMT', 'Greenwich Mean Time', '', '']);
 
-  res = format(wallis, 'z');
+  res = format(tarawa, 'z');
   expect(res).toEqual(['GMT+12', '', '', 'Wallis & Futuna Time', '', '']);
 
   res = format(ny, 'z');
@@ -76,7 +76,7 @@ test('raw formats', () => {
   res = format(utc, 'v');
   expect(res).toEqual(['GMT', '', '', 'GMT', '', '']);
 
-  res = format(wallis, 'v');
+  res = format(tarawa, 'v');
   expect(res).toEqual(['GMT+12', '', '', 'GMT+12:00', '', '']);
 
   res = format(ny, 'v');
@@ -87,8 +87,8 @@ test('raw formats', () => {
   res = format(utc, 'V');
   expect(res).toEqual(['unk', 'Etc/UTC', 'Unknown City', 'GMT', '', '']);
 
-  res = format(wallis, 'V');
-  expect(res).toEqual(['unk', 'Pacific/Wallis', 'Wallis', 'Wallis Time', '', '']);
+  res = format(tarawa, 'V');
+  expect(res).toEqual(['unk', 'Pacific/Tarawa', 'Tarawa', 'Tarawa Time', '', '']);
 
   res = format(ny, 'V');
   expect(res).toEqual(['unk', 'America/New_York', 'New York', 'New York Time', '', '']);
@@ -98,7 +98,7 @@ test('raw formats', () => {
   res = format(utc, 'O');
   expect(res).toEqual(['GMT', '', '', 'GMT', '', '']);
 
-  res = format(wallis, 'O');
+  res = format(tarawa, 'O');
   expect(res).toEqual(['GMT+12', '', '', 'GMT+12:00', '', '']);
 
   res = format(ny, 'O');
@@ -109,7 +109,7 @@ test('raw formats', () => {
   res = format(utc, 'x');
   expect(res).toEqual(['+00', '+0000', '+00:00', '+0000', '+00:00', '']);
 
-  res = format(wallis, 'x');
+  res = format(tarawa, 'x');
   expect(res).toEqual(['+12', '+1200', '+12:00', '+1200', '+12:00', '']);
 
   res = format(ny, 'x');

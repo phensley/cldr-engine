@@ -6,7 +6,7 @@ test('timezone identifiers', () => {
   const ids = EN.timeZoneIds();
   expect(ids).toContain('America/New_York');
   expect(ids).toContain('Europe/Rome');
-  expect(ids).toContain('Pacific/Wallis');
+  expect(ids).toContain('Pacific/Tarawa'); // Changed in 2022b See NEWS re: backzone
 });
 
 test('stability', () => {
