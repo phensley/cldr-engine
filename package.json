@@ -4,25 +4,35 @@
   "author": "Patrick Hensley <pathensley@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "api": "lerna run api --stream",
-    "api:local": "lerna run api:local --stream",
-    "bench": "lerna run --stream --concurrency=1 bench",
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build --stream",
-    "build:watch": "lerna exec --parallel -- tsc -w --preserveWatchOutput",
-    "build:es:watch": "lerna exec --parallel -- tsc -w --preserveWatchOutput --module esnext --outDir lib-es",
-    "clean": "lerna run --parallel clean && rimraf ./coverage && jest --clearCache",
-    "clean:full": "lerna run --parallel clean:full && rimraf ./node_modules yarn.lock",
+    "api": "pnpm --stream -r run api",
+    "bench": "pnpm --stream -r run bench",
+    "build": "pnpm --stream -r run build",
+    "build:watch": "pnpm --stream -r run build:watch",
+    "clean": "pnpm --stream -r run clean && rimraf ./coverage && jest --clearCache",
+    "clean:full": "pnpm --stream -r run clean:full && rimraf ./node_modules yarn.lock",
     "depgraph": "depcruise -T dot -x tslib packages/cldr/src | dot -T pdf > depgraph.pdf",
-    "format": "lerna exec --stream -- eslint --no-error-on-unmatched-pattern --fix \"'{src,tztool,__benchmarks__,__stress__,__tests__}/**/*.ts'\"",
-    "link-all": "lerna exec --concurrency=1 yarn link",
-    "lint": "lerna run build --stream && lerna run build:lint --stream && lerna run lint --no-bail --stream",
-    "stress": "lerna run --stream --concurrency=1 stress",
+    "lint": "pnpm run build && pnpm --stream -r run build:lint && pnpm --stream -r run lint",
+
+    "stress": "pnpm --stream -r run stress",
     "test": "rimraf ./coverage && TZ=America/New_York jest --coverage --verbose -i --no-cache",
+
+    "link-all": "lerna exec --concurrency=1 yarn link",
+    "unlink-all": "lerna exec --concurrency=1 yarn unlink",
+
+    "x_api": "lerna run api --stream",
+    "x_api:local": "lerna run api:local --stream",
+    "x_bench": "lerna run --stream --concurrency=1 bench",
+    "x_build": "lerna run build --stream",
+    "x_build:watch": "lerna exec --parallel -- tsc -w --preserveWatchOutput",
+    "x_build:es:watch": "lerna exec --parallel -- tsc -w --preserveWatchOutput --module esnext --outDir lib-es",
+
+    "x_clean": "lerna run --parallel clean && rimraf ./coverage && jest --clearCache",
+    "x_clean:full": "lerna run --parallel clean:full && rimraf ./node_modules yarn.lock",
+    "format": "lerna exec --stream -- eslint --no-error-on-unmatched-pattern --fix \"'{src,tztool,__benchmarks__,__stress__,__tests__}/**/*.ts'\"",
+    "x_test": "rimraf ./coverage && TZ=America/New_York jest --coverage --verbose -i --no-cache",
     "test:runtime": "rimraf ./coverage && TZ=America/New_York jest --coverage --verbose -i --no-cache --coveragePathIgnorePatterns=\"packages/cldr-(ext-rbnf|compiler|types)/.*\"",
     "test:codecov": "rimraf ./coverage && TZ=America/New_York jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache",
-    "test:watch": "TZ=America/New_York jest --watch --runInBand --no-cache",
-    "unlink-all": "lerna exec --concurrency=1 yarn unlink"
+    "test:watch": "TZ=America/New_York jest --watch --runInBand --no-cache"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
@@ -43,9 +53,6 @@
     "typedoc": "^0.22.15",
     "typescript": "~4.6.3"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "jest": {
     "collectCoverageFrom": [
       "packages/*/src/**/*.ts",
