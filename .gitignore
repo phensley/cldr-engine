@@ -12,6 +12,7 @@ temp/
 
 .DS_Store
 .scratch
+pnpm-lock.yaml
 yarn.lock
 yarn-error.log
 lerna-debug.log
