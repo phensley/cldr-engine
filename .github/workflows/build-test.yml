@@ -5,6 +5,7 @@ on:
     branches:
       # - coverage
       - main
+      - pnpm
 
 jobs:
   build:
@@ -12,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x, 18.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -23,17 +24,17 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Yarn
-        run: npm install -g yarn
+        run: npm install -g pnpm
 
       - name: Build
         run: |
-          yarn
-          yarn clean
-          yarn lint
-          yarn api
+          pnpm i
+          pnpm run clean
+          pnpm run lint
+          pnpm run api
 
       - name: Test
-        run: yarn test:codecov
+        run: pnpm run test:codecov
 
       - uses: codecov/codecov-action@v1
         if: matrix.node-version == '16.x'

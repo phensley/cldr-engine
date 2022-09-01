@@ -21,19 +21,19 @@
   "cldrversion": "41.0.0",
   "scripts": {
     "disabled:api": "api-extractor run -c ./etc/api-extractor.json --verbose",
-    "disabled:api:local": "yarn api -l",
-    "build": "yarn build:cj && yarn build:es && yarn download",
+    "disabled:api:local": "pnpm run api -l",
+    "build": "pnpm run build:cj && pnpm run build:es && pnpm run download",
     "build:cj": "tsc -p ./tsconfig.json",
     "build:es": "tsc -p ./tsconfig.json --module esnext --outDir lib-es",
     "build:lint": "tsc -p ./tsconfig.lint.json",
     "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./lib-es",
-    "clean:full": "yarn clean && rimraf ./node_modules .cldr",
+    "clean:full": "pnpm run clean && rimraf ./node_modules .cldr",
     "coverage": "jest --coverage --runInBand --no-cache",
     "download": "node ./scripts/downloader.js",
     "generator": "node ./scripts/generator.js",
     "lint": "eslint -c .eslintrc.js --ext .ts src __tests__",
-    "prepublish": "yarn build",
+    "prepublish": "pnpm run build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
   "files": [

@@ -17,18 +17,18 @@
   },
   "scripts": {
     "api": "api-extractor run -c ./etc/api-extractor.json --verbose",
-    "api:local": "yarn api -l",
+    "api:local": "pnpm run api -l",
     "bench:off": "ts-node __benchmarks__/",
-    "build": "yarn build:cj && yarn build:es",
+    "build": "pnpm run build:cj && pnpm run build:es",
     "build:cj": "tsc -p ./tsconfig.json",
     "build:es": "tsc -p ./tsconfig.json --module esnext --outDir lib-es",
     "build:lint": "tsc -p ./tsconfig.lint.json",
     "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./lib-es ./.scratch",
-    "clean:full": "yarn clean && rimraf ./node_modules",
+    "clean:full": "pnpm run clean && rimraf ./node_modules",
     "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
     "lint": "eslint -c .eslintrc.js --ext .ts src __tests__",
-    "prepublish": "yarn build",
+    "prepublish": "pnpm run build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
   "files": [
