@@ -13,8 +13,10 @@
 
 PIN="
 @microsoft/api-extractor
+@types/node-fetch
 @types/yargs
 chalk
+node-fetch
 yargs
 "
 
@@ -27,5 +29,5 @@ join() {
 PINNED=`join , $PIN`
 
 ncu -u -x $PINNED
-lerna exec --concurrency=1 -- ncu -u -x $PINNED
+pnpm --stream -r exec -- ncu -u -x $PINNED
 
