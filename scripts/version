@@ -3,7 +3,7 @@
 import json, os, re, sys
 from subprocess import Popen
 
-# same as 'lerna version' but lets us set a '~' dependency
+# version all packages with a patch-level dependency between them
 
 CWD = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
 
@@ -47,10 +47,10 @@ def main():
     # collect paths to add, commit, and tag
     paths = []
 
-    # get version from lerna.json and increment
+    # get version from version.json and increment
 
-    paths.append('lerna.json')
-    path = os.path.join(CWD, 'lerna.json')
+    paths.append('version.json')
+    path = os.path.join(CWD, 'version.json')
     cfg = load_json(path)
     old_version = cfg['version']
     major, minor, patch = [int(c) for c in old_version.split('.')]
