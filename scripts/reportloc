@@ -11,7 +11,7 @@ TOP = join(CWD, '..')
 PKG = join(TOP, 'packages')
 PKGS = os.listdir(PKG)
 
-UGLIFYJS = join(TOP, 'node_modules/.bin/uglifyjs')
+TERSERJS = join(TOP, 'node_modules/.bin/terser')
 RE_LANGS = re.compile('^(JavaScript|JSON)')
 
 def run(cmd):
@@ -19,14 +19,14 @@ def run(cmd):
     out, _ = p.communicate()
     return out
 
-def cloc(path):
-    out = run(['cloc', path]).split('\n')
-    return [r for r in out if RE_LANGS.match(r)]
+#def cloc(path):
+#    out = run(['cloc', path]).split('\n')
+#    return [r for r in out if RE_LANGS.match(r)]
 
-def uglify(paths):
+def terser(paths):
     if isinstance(paths, (str,)):
         paths = [paths]
-    raw = run([UGLIFYJS] + paths + ['-c', '-m', '--toplevel'])
+    raw = run([TERSERJS] + paths + ['-c', '-m', '--toplevel'])
     z = zlib.compress(raw, 9)
     br = brotli.compress(raw)
     return (len(raw), len(z), len(br))
@@ -39,11 +39,11 @@ def listfiles(top, cond):
                 r.append(join(root, name))
     return r
 
-def uglifyit(paths):
-    raw, z, br = uglify(paths)
-    print('           uglify: %d' % raw)
-    print('    uglify + gzip: %d' % z)
-    print('  uglify + brotli: %d' % br)
+def terserit(paths):
+    raw, z, br = terser(paths)
+    print('           terser: %d' % raw)
+    print('    terser + gzip: %d' % z)
+    print('  terser + brotli: %d' % br)
 
 def main():
     for pkg in sorted(PKGS):
@@ -57,11 +57,11 @@ def main():
 
         jsfiles = listfiles(libs, lambda f: f.endswith('.js'))
         if jsfiles:
-            uglifyit(jsfiles)
+            terserit(jsfiles)
             print('')
 
             # sort by gzip size descending
-            files = sorted(((uglify(p), p) for p in jsfiles),
+            files = sorted(((terser(p), p) for p in jsfiles),
               key=lambda a: a[0][0], reverse=1)
             for f in files:
                 data, p = f
@@ -74,9 +74,9 @@ def main():
         print('')
 
     rollup = join(TOP, 'packages/cldr/dist/cldrengine.umd.js')
-    raw, z, br = uglify(rollup)
+    raw, z, br = terser(rollup)
     print('Rollup: cldrengine.umd.js\n')
-    uglifyit(rollup)
+    terserit(rollup)
 
 if __name__ == '__main__':
     main()

@@ -18,14 +18,12 @@
     "test": "rimraf ./coverage && TZ=America/New_York jest --coverage --verbose -i --no-cache",
     "test:codecov": "rimraf ./coverage && TZ=America/New_York jest --coverage --coverageReporters=lcovonly --verbose -i --no-cache",
     "test:watch": "TZ=America/New_York jest --watch --runInBand --no-cache",
-
     "x_api": "lerna run api --stream",
     "x_api:local": "lerna run api:local --stream",
     "x_bench": "lerna run --stream --concurrency=1 bench",
     "x_build": "lerna run build --stream",
     "x_build:watch": "lerna exec --parallel -- tsc -w --preserveWatchOutput",
     "x_build:es:watch": "lerna exec --parallel -- tsc -w --preserveWatchOutput --module esnext --outDir lib-es",
-
     "x_clean": "lerna run --parallel clean && rimraf ./coverage && jest --clearCache",
     "x_clean:full": "lerna run --parallel clean:full && rimraf ./node_modules yarn.lock",
     "x_format": "lerna exec --stream -- eslint --no-error-on-unmatched-pattern --fix \"'{src,tztool,__benchmarks__,__stress__,__tests__}/**/*.ts'\"",
@@ -46,6 +44,7 @@
     "npm-check-updates": "^12.5.8",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
+    "terser": "^5.15.0",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
     "typedoc": "^0.22.15",
