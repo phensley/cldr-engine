@@ -10,17 +10,12 @@ import fetch, { Response } from 'node-fetch';
  * Replacement for 'cldr-data-downloader'
  */
 
-// Temporary location prior to official Github JSON release
-// const BASEURL = 'https://glonk.com/unicode-cldr';
-// const BASEURL = 'http://localhost:8000/unicode-org';
+const BASEURL = 'https://registry.npmjs.org';
 
-const BASEURL = 'https://github.com/unicode-org/';
 const DATAROOT = filepath.resolve(filepath.join(__dirname, '../../../.cldr'));
 const STATEFILE = 'state.json';
 
-const ARCHIVES = ['cldr-json'];
-
-const GROUPS = new Set<string>([
+const ARCHIVES = [
   'cldr-core',
   'cldr-dates-modern',
   'cldr-cal-buddhist-modern',
@@ -31,20 +26,24 @@ const GROUPS = new Set<string>([
   'cldr-numbers-modern',
   'cldr-rbnf',
   'cldr-units-modern',
-]);
+];
 
-const IGNORE = new Set<string>(['bower.json', 'package.json']);
+const IGNORE = new Set<string>(['bower.json', 'package.json', 'LICENSE', 'README.md']);
 const SUPPLEMENTAL = new Set(['availableLocales.json', 'defaultContent.json', 'scriptMetadata.json']);
 
 type State = { [archive: string]: string };
+
+const makedir = (dir: string) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+};
 
 const makedirs = (root: string, filename: string) => {
   const p = filename.split(filepath.sep);
   for (let i = 0; i < p.length; i++) {
     const dir = filepath.join(root, ...p.slice(0, i));
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
+    makedir(dir);
   }
 };
 
@@ -55,6 +54,7 @@ export class Downloader {
   private state: State;
 
   constructor(readonly version: string) {
+    makedirs(DATAROOT, version);
     this.state = this.loadstate();
   }
 
@@ -73,7 +73,7 @@ export class Downloader {
       info(`${chalk.yellow('fetching')} ${name}`);
 
       // If a specific commit is defined, use that.
-      const url = `${BASEURL}/${name}/archive/${version}.tar.gz`;
+      const url = `${BASEURL}/${name}/-/${name}-${version}.tgz`;
       const desc = `${name} ${version} at ${url}`;
 
       const unzip = zlib.createGunzip();
@@ -112,28 +112,28 @@ export class Downloader {
       return;
     }
 
-    let parts = entry.path.split(filepath.sep).slice(2);
+    let parts = entry.path.split(filepath.sep).slice(1);
     const name = parts[parts.length - 1];
+
     if (IGNORE.has(name)) {
       entry.resume();
       return;
     }
-    if (SUPPLEMENTAL.has(name)) {
-      parts = ['cldr-core', 'supplemental', name];
-    }
-    const group = parts[0];
-    if (GROUPS.has(group)) {
-      // Build destination path
-      const path = [version, ...parts.slice(1)].join(filepath.sep);
-      makedirs(DATAROOT, path);
 
-      // Write output
-      entry.pipe(fs.createWriteStream(filepath.join(DATAROOT, path), { encoding: 'utf-8' })).on('error', (e: Error) => {
-        error(`failure writing entry ${path}: ${e}`);
-      });
-    } else {
-      entry.resume();
+    if (SUPPLEMENTAL.has(name)) {
+      parts = ['supplemental', name];
     }
+
+    // Build destination path
+    const path = [version, ...parts].join(filepath.sep);
+    if (parts.length > 1) {
+      makedirs(DATAROOT, path);
+    }
+
+    // Write output
+    entry.pipe(fs.createWriteStream(filepath.join(DATAROOT, path), { encoding: 'utf-8' })).on('error', (e: Error) => {
+      error(`failure writing entry ${path}: ${e}`);
+    });
   }
 
   private loadstate(): State {

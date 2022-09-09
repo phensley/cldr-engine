@@ -41,6 +41,7 @@ export class CalendarPatterns {
   private readonly dateFormats: { [x: string]: string };
   private readonly timeFormats: { [x: string]: string };
   private readonly wrapperFormats: { [x: string]: string };
+  private readonly wrapperFormatsAt: { [x: string]: string };
 
   private readonly availableMatcher: DatePatternMatcher = new DatePatternMatcher();
   private readonly intervalMatcher: { [x: string]: DatePatternMatcher } = {};
@@ -66,6 +67,7 @@ export class CalendarPatterns {
     this.dateFormats = schema.dateFormats.mapping(bundle);
     this.timeFormats = schema.timeFormats.mapping(bundle);
     this.wrapperFormats = schema.dateTimeFormats.mapping(bundle);
+    this.wrapperFormatsAt = schema.dateTimeFormatsAt.mapping(bundle);
 
     // Fetch skeletons and build best-fit matchers
     this.rawAvailableFormats = this.schema.availableFormats.mapping(bundle);
@@ -117,8 +119,9 @@ export class CalendarPatterns {
     this.intervalRequestCache.set(key, req);
   }
 
-  getWrapperPattern(width: string): string {
-    return this.wrapperFormats[width] || '';
+  getWrapperPattern(width: string, atTime: boolean): string {
+    let w = this.wrapperFormatsAt[width];
+    return atTime && w ? w : this.wrapperFormats[width] || '';
   }
 
   getAvailablePattern(_d: CalendarDate, s: DateSkeleton): DateTimeNode[] {

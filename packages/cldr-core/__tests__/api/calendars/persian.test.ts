@@ -16,7 +16,7 @@ test('persian', () => {
   let s: string;
 
   s = api.formatDate(mar11, { datetime: 'full', ca: 'persian' });
-  expect(s).toEqual('Saturday, Esfand 19, 1396 AP at 11:00:25 PM Pacific Standard Time');
+  expect(s).toEqual('Saturday, Esfand 19, 1396 AP at 11:00:25 PM Pacific Standard Time');
 
   // Related Gregorian year
   s = api.formatDateRaw(mar11, { pattern: 'r', ca: 'persian' });
@@ -32,5 +32,5 @@ test('persian unicode extension', () => {
   let s: string;
 
   s = api.formatDate(mar11, { datetime: 'full', ca: 'persian' });
-  expect(s).toEqual('Saturday, Esfand 19, 1396 AP at 11:00:25 PM Pacific Standard Time');
+  expect(s).toEqual('Saturday, Esfand 19, 1396 AP at 11:00:25 PM Pacific Standard Time');
 });

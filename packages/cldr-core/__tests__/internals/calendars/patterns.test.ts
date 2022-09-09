@@ -36,7 +36,8 @@ test('edge cases', () => {
 
   expect(impl.getDatePattern('missing-width')).toEqual([]);
   expect(impl.getTimePattern('missing-width')).toEqual([]);
-  expect(impl.getWrapperPattern('missing-width')).toEqual('');
+  expect(impl.getWrapperPattern('missing-width', true)).toEqual('');
+  expect(impl.getWrapperPattern('missing-width', false)).toEqual('');
 
   expect(impl.getAvailablePattern(date, { skeleton: 'xyz' } as DateSkeleton)).toEqual([]);
   expect(impl.getAvailablePattern(date, { pattern: 'foo' } as DateSkeleton)).toEqual(['foo']);

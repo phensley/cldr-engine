@@ -11,6 +11,7 @@ Global:
    roman-lower
    roman-upper
    tamil
+   zz-default
 
 af:
    digits-ordinal
@@ -72,10 +73,22 @@ be:
 
 bg:
    digits-ordinal
+   digits-ordinal-feminine
+   digits-ordinal-masculine
+   digits-ordinal-neuter
    spellout-cardinal-feminine
+   spellout-cardinal-feminine-financial
    spellout-cardinal-masculine
+   spellout-cardinal-masculine-financial
+   spellout-cardinal-masculine-personal
+   spellout-cardinal-masculine-personal-financial
+   spellout-cardinal-neuter
+   spellout-cardinal-neuter-financial
    spellout-numbering
    spellout-numbering-year
+   spellout-ordinal-feminine
+   spellout-ordinal-masculine
+   spellout-ordinal-neuter
 
 bn:
    digits-ordinal
@@ -162,6 +175,16 @@ de:
    spellout-ordinal-r
    spellout-ordinal-s
 
+dsb:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 ee:
    digits-ordinal
    spellout-cardinal
@@ -200,8 +223,10 @@ eo:
 es:
    digits-ordinal
    digits-ordinal-feminine
+   digits-ordinal-feminine-plural
    digits-ordinal-masculine
    digits-ordinal-masculine-adjective
+   digits-ordinal-masculine-plural
    spellout-cardinal-feminine
    spellout-cardinal-masculine
    spellout-numbering
@@ -327,6 +352,16 @@ ga:
    spellout-numbering
    spellout-numbering-year
 
+gd:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 gl:
    digits-ordinal
    spellout-cardinal
@@ -338,6 +373,16 @@ gl:
    spellout-ordinal-verbose
 
 gu:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
+ha:
    digits-ordinal
    spellout-cardinal
    spellout-cardinal-verbose
@@ -382,6 +427,16 @@ hr:
    spellout-ordinal-masculine
    spellout-ordinal-neuter
 
+hsb:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 hu:
    digits-ordinal
    spellout-cardinal
@@ -404,6 +459,16 @@ id:
    spellout-numbering-year
    spellout-ordinal
 
+ig:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 is:
    digits-ordinal
    spellout-cardinal-feminine
@@ -421,7 +486,9 @@ it:
    spellout-numbering
    spellout-numbering-year
    spellout-ordinal-feminine
+   spellout-ordinal-feminine-plural
    spellout-ordinal-masculine
+   spellout-ordinal-masculine-plural
 
 ja:
    digits-ordinal
@@ -451,12 +518,9 @@ ka:
 kk:
    digits-ordinal
    spellout-cardinal
-   spellout-cardinal-verbose
    spellout-numbering
-   spellout-numbering-verbose
    spellout-numbering-year
    spellout-ordinal
-   spellout-ordinal-verbose
 
 kl:
    digits-ordinal
@@ -493,6 +557,16 @@ ko:
    spellout-ordinal-native-count
    spellout-ordinal-sinokorean
    spellout-ordinal-sinokorean-count
+
+kok:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
 
 ky:
    digits-ordinal
@@ -665,6 +739,16 @@ pa:
    spellout-ordinal
    spellout-ordinal-verbose
 
+pcm:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 pl:
    digits-ordinal
    spellout-cardinal-feminine
@@ -729,6 +813,30 @@ ro:
 
 ru:
    digits-ordinal
+   digits-ordinal-feminine
+   digits-ordinal-feminine-ablative
+   digits-ordinal-feminine-accusative
+   digits-ordinal-feminine-dative
+   digits-ordinal-feminine-genitive
+   digits-ordinal-feminine-locative
+   digits-ordinal-masculine
+   digits-ordinal-masculine-ablative
+   digits-ordinal-masculine-accusative
+   digits-ordinal-masculine-dative
+   digits-ordinal-masculine-genitive
+   digits-ordinal-masculine-locative
+   digits-ordinal-neuter
+   digits-ordinal-neuter-ablative
+   digits-ordinal-neuter-accusative
+   digits-ordinal-neuter-dative
+   digits-ordinal-neuter-genitive
+   digits-ordinal-neuter-locative
+   digits-ordinal-plural
+   digits-ordinal-plural-ablative
+   digits-ordinal-plural-accusative
+   digits-ordinal-plural-dative
+   digits-ordinal-plural-genitive
+   digits-ordinal-plural-locative
    spellout-cardinal-feminine
    spellout-cardinal-feminine-ablative
    spellout-cardinal-feminine-accusative
@@ -913,6 +1021,16 @@ tk:
    spellout-ordinal
    spellout-ordinal-verbose
 
+to:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 tr:
    digits-ordinal
    spellout-cardinal
@@ -954,6 +1072,16 @@ vi:
    spellout-numbering
    spellout-numbering-year
    spellout-ordinal
+
+yo:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
 
 yue:
    digits-ordinal

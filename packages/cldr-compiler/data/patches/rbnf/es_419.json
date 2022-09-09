@@ -22,6 +22,19 @@
         }
       ]
     },
+    "digits-ordinal-feminine-plural": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=ᵃˢ.;",
+          "value": "0"
+        }
+      ]
+    },
     "digits-ordinal-masculine": {
       "private": 0,
       "rules": [
@@ -44,6 +57,19 @@
         },
         {
           "rule": "=#,##0==%%dord-mascabbrev=.;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine-plural": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=ᵒˢ.;",
           "value": "0"
         }
       ]

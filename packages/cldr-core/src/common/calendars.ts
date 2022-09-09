@@ -144,6 +144,12 @@ export interface DateFormatOptions {
    * Selection of alternate fields.
    */
   alt?: DateFormatAltOptions;
+
+  /**
+   * Wrap with 'at' if available. This defaults to true since it was
+   * the default datetime wrapper format in CLDR releases prior to v42.
+   */
+  atTime?: boolean;
 }
 
 /**
@@ -218,6 +224,12 @@ export interface DateIntervalFormatOptions {
    * Selection of alternate fields.
    */
   alt?: DateFormatAltOptions;
+
+  /**
+   * Wrap with 'at' if available. This defaults to true since it was
+   * the default datetime wrapper format in CLDR releases prior to v42.
+   */
+  atTime?: boolean;
 }
 
 /**
@@ -275,6 +287,12 @@ export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOption
 export interface DateWrapperFormatOptions {
   ca?: CalendarType;
   width?: FormatWidthType;
+
+  /**
+   * Wrap with 'at' if available. This defaults to true since it was
+   * the default datetime wrapper format in CLDR releases prior to v42.
+   */
+  atTime?: boolean;
 }
 
 /**

@@ -24,7 +24,7 @@ test('init framework', () => {
   const ux = { date: 1109934428000, zoneId: 'America/New_York' };
   s = api.Calendars.formatDate(ux, { datetime: 'full' });
   s = api.Calendars.formatDate(ux, { datetime: 'full' });
-  expect(s).toEqual('Friday, March 4, 2005 at 6:07:08 AM Eastern Standard Time');
+  expect(s).toEqual('Friday, March 4, 2005 at 6:07:08 AM Eastern Standard Time');
 
   const currOpts: CurrencyFormatOptions = { style: 'short' };
   s = api.Numbers.formatCurrency('345678', 'USD', currOpts);

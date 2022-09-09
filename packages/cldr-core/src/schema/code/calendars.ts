@@ -35,6 +35,7 @@ const calendarScope = (name: string, scopeName: string) =>
     vector('dateFormats', ['format-width']),
     vector('timeFormats', ['format-width']),
     vector('dateTimeFormats', ['format-width']),
+    vector('dateTimeFormatsAt', ['format-width']),
     field('intervalFormatFallback'),
   ]);
 

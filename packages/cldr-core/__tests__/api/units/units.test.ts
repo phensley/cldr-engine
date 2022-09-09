@@ -71,7 +71,7 @@ test('generic temperature', () => {
 
   const q: Quantity = { value: 8.9, unit: 'temperature' };
   s = api.formatQuantity(q, { length: 'long' });
-  expect(s).toEqual('8.9°');
+  expect(s).toEqual('8.9 degrees temperature');
 
   s = api.formatQuantity(q, { length: 'short' });
   expect(s).toEqual('8.9°');
@@ -196,6 +196,30 @@ test('v39 units', () => {
   opts = { length: 'short' };
   s = api.formatQuantity(q, opts);
   expect(s).toEqual('12.5 mg/dL');
+});
+
+test('v42 units', () => {
+  const api = unitsApi('en');
+
+  let q: Quantity;
+  let opts: UnitFormatOptions;
+  let s: string;
+
+  q = { value: '1', unit: 'tonne' };
+  s = api.formatQuantity(q);
+  expect(s).toEqual('1 metric ton');
+
+  opts = { length: 'short' };
+  s = api.formatQuantity(q, opts);
+  expect(s).toEqual('1 t');
+
+  q = { value: '12.5', unit: 'ton' };
+  s = api.formatQuantity(q);
+  expect(s).toEqual('12.5 tons');
+
+  opts = { length: 'short' };
+  s = api.formatQuantity(q, opts);
+  expect(s).toEqual('12.5 tn');
 });
 
 test('significant', () => {

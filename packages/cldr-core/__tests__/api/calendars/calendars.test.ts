@@ -42,28 +42,34 @@ test('formats', () => {
   expect(s).toEqual('3/10/18');
 
   s = api.formatDate(mar11, { time: 'full' });
-  expect(s).toEqual('11:00:25 PM Pacific Standard Time');
+  expect(s).toEqual('11:00:25 PM Pacific Standard Time');
 
   s = api.formatDate(mar11, { time: 'long' });
-  expect(s).toEqual('11:00:25 PM PST');
+  expect(s).toEqual('11:00:25 PM PST');
 
   s = api.formatDate(mar11, { time: 'medium' });
-  expect(s).toEqual('11:00:25 PM');
+  expect(s).toEqual('11:00:25 PM');
 
   s = api.formatDate(mar11, { time: 'short' });
-  expect(s).toEqual('11:00 PM');
+  expect(s).toEqual('11:00 PM');
 
   s = api.formatDate(mar11, { datetime: 'full' });
-  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
+  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
+
+  s = api.formatDate(mar11, { datetime: 'full', atTime: true });
+  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
+
+  s = api.formatDate(mar11, { datetime: 'full', atTime: false });
+  expect(s).toEqual('Saturday, March 10, 2018, 11:00:25 PM Pacific Standard Time');
 
   s = api.formatDate(mar11, { datetime: 'long' });
-  expect(s).toEqual('March 10, 2018 at 11:00:25 PM PST');
+  expect(s).toEqual('March 10, 2018 at 11:00:25 PM PST');
 
   s = api.formatDate(mar11, { datetime: 'medium' });
-  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
+  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
 
   s = api.formatDate(mar11, { datetime: 'short' });
-  expect(s).toEqual('3/10/18, 11:00 PM');
+  expect(s).toEqual('3/10/18, 11:00 PM');
 });
 
 test('conversions', () => {
@@ -95,10 +101,10 @@ test('conversions', () => {
 test('formats bare date', () => {
   const api = calendarsApi('en');
   let s = api.formatDate(new Date(2018, 5, 15, 12, 34, 56, 789), { datetime: 'full' });
-  expect(s).toEqual('Friday, June 15, 2018 at 4:34:56 PM Greenwich Mean Time');
+  expect(s).toEqual('Friday, June 15, 2018 at 4:34:56 PM Greenwich Mean Time');
 
   s = api.formatDate(new Date(1977, 4, 25, 14, 30, 0), { datetime: 'full' });
-  expect(s).toEqual('Wednesday, May 25, 1977 at 6:30:00 PM Greenwich Mean Time');
+  expect(s).toEqual('Wednesday, May 25, 1977 at 6:30:00 PM Greenwich Mean Time');
 });
 
 test('options defaulting', () => {
@@ -155,26 +161,26 @@ test('skeletons', () => {
   expect(s).toEqual('week 2 of March');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'full' });
-  expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
+  expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'long' });
-  expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
+  expect(s).toEqual('Mar 10, 2018 at 11:00:25 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'medium' });
-  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
+  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMdhms', wrap: 'short' });
-  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
+  expect(s).toEqual('Mar 10, 2018, 11:00:25 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yyyyMMddjjmmssSSS' });
-  expect(s).toEqual('03/10/2018, 11:00:25.123 PM');
+  expect(s).toEqual('03/10/2018, 11:00:25.123 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMMdjmsSSSVVVV' });
-  expect(s).toEqual('March 10, 2018 at 11:00:25.123 PM Los Angeles Time');
+  expect(s).toEqual('March 10, 2018 at 11:00:25.123 PM Los Angeles Time');
 
   const nyMar11 = unix(MARCH_11_2018_070025_UTC + 123, NEW_YORK);
   s = api.formatDate(nyMar11, { skeleton: 'yMMMMdjmsSSSVVVV' });
-  expect(s).toEqual('March 11, 2018 at 3:00:25.123 AM New York Time');
+  expect(s).toEqual('March 11, 2018 at 3:00:25.123 AM New York Time');
 });
 
 test('skeleton wrapper width', () => {
@@ -184,19 +190,19 @@ test('skeleton wrapper width', () => {
 
   // full
   s = api.formatDate(mar11, { skeleton: 'yEMMMMdhm' });
-  expect(s).toEqual('Sat, March 10, 2018 at 11:00 PM');
+  expect(s).toEqual('Sat, March 10, 2018 at 11:00 PM');
 
   // long
   s = api.formatDate(mar11, { skeleton: 'yMMMMdhm' });
-  expect(s).toEqual('March 10, 2018 at 11:00 PM');
+  expect(s).toEqual('March 10, 2018 at 11:00 PM');
 
   // medium
   s = api.formatDate(mar11, { skeleton: 'yMMMEdhm' });
-  expect(s).toEqual('Sat, Mar 10, 2018, 11:00 PM');
+  expect(s).toEqual('Sat, Mar 10, 2018, 11:00 PM');
 
   // short
   s = api.formatDate(mar11, { skeleton: 'yMdhm' });
-  expect(s).toEqual('3/10/2018, 11:00 PM');
+  expect(s).toEqual('3/10/2018, 11:00 PM');
 });
 
 test('fractional seconds', () => {
@@ -207,35 +213,35 @@ test('fractional seconds', () => {
 
   date = unix(base, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsS' });
-  expect(s).toEqual('11:00:25.0 PM');
+  expect(s).toEqual('11:00:25.0 PM');
 
   date = unix(base, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSS' });
-  expect(s).toEqual('11:00:25.00 PM');
+  expect(s).toEqual('11:00:25.00 PM');
 
   date = unix(base, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSSS' });
-  expect(s).toEqual('11:00:25.000 PM');
+  expect(s).toEqual('11:00:25.000 PM');
 
   date = unix(base + 567, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsS' });
-  expect(s).toEqual('11:00:25.5 PM');
+  expect(s).toEqual('11:00:25.5 PM');
 
   date = unix(base + 567, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSS' });
-  expect(s).toEqual('11:00:25.56 PM');
+  expect(s).toEqual('11:00:25.56 PM');
 
   date = unix(base + 567, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSSS' });
-  expect(s).toEqual('11:00:25.567 PM');
+  expect(s).toEqual('11:00:25.567 PM');
 
   date = unix(base + 567, LOS_ANGELES);
   s = api.formatDate(date, { skeleton: 'hmsSSSS' });
-  expect(s).toEqual('11:00:25.5670 PM');
+  expect(s).toEqual('11:00:25.5670 PM');
 
   api = calendarsApi('fr');
   s = api.formatDate(date, { skeleton: 'hmsSSSS' });
-  expect(s).toEqual('11:00:25,5670 PM');
+  expect(s).toEqual('11:00:25,5670 PM');
 });
 
 test('skeleton metacharacters', () => {
@@ -244,13 +250,13 @@ test('skeleton metacharacters', () => {
 
   let api = calendarsApi('en');
   s = api.formatDate(mar11, { skeleton: 'j' });
-  expect(s).toEqual('11 PM');
+  expect(s).toEqual('11 PM');
 
   s = api.formatDate(mar11, { skeleton: 'jjj' });
-  expect(s).toEqual('11 PM');
+  expect(s).toEqual('11 PM');
 
   s = api.formatDate(mar11, { skeleton: 'jmm' });
-  expect(s).toEqual('11:00 PM');
+  expect(s).toEqual('11:00 PM');
 
   s = api.formatDate(mar11, { skeleton: 'J' });
   expect(s).toEqual('23');
@@ -259,10 +265,10 @@ test('skeleton metacharacters', () => {
   expect(s).toEqual('23:00');
 
   s = api.formatDate(mar11, { skeleton: 'Cmm' });
-  expect(s).toEqual('11:00 PM');
+  expect(s).toEqual('11:00 PM');
 
   s = api.formatDate(mar11, { skeleton: 'K' });
-  expect(s).toEqual('11 PM');
+  expect(s).toEqual('11 PM');
 
   s = api.formatDate(mar11, { skeleton: 'BH' });
   expect(s).toEqual('23');
@@ -319,7 +325,7 @@ test('parts', () => {
     { type: 'minute', value: '00' },
     { type: 'literal', value: ':' },
     { type: 'second', value: '25' },
-    { type: 'literal', value: ' ' },
+    { type: 'literal', value: ' ' },
     { type: 'dayperiod', value: 'PM' },
     { type: 'literal', value: ' ' },
     { type: 'timezone', value: 'Pacific Standard Time' },
@@ -332,7 +338,7 @@ test('parts', () => {
     { type: 'minute', value: '00' },
     { type: 'literal', value: ':' },
     { type: 'second', value: '25' },
-    { type: 'literal', value: ' ' },
+    { type: 'literal', value: ' ' },
     { type: 'dayperiod', value: 'PM' },
   ]);
 });
@@ -467,27 +473,27 @@ test('intervals best-fit', () => {
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'h' });
-  expect(s).toEqual('9 AM – 11 PM');
+  expect(s).toEqual('9 AM – 11 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 'm' });
-  expect(s).toEqual('9:58 AM – 11:00 PM');
+  expect(s).toEqual('9:58 AM – 11:00 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 's' });
-  expect(s).toEqual('9 AM – 11 PM');
+  expect(s).toEqual('9 AM – 11 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 'SSS' });
-  expect(s).toEqual('9 AM – 11 PM');
+  expect(s).toEqual('9 AM – 11 PM');
 
   start = unix(base - HOUR * 5, LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yyMdhms' });
-  expect(s).toEqual('3/10/18, 6:00 – 11:00 PM');
+  expect(s).toEqual('3/10/18, 6:00 – 11:00 PM');
 
   start = unix(base - HOUR * 13, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yyMdhms' });
-  expect(s).toEqual('3/10/18, 10:00 AM – 11:00 PM');
+  expect(s).toEqual('3/10/18, 10:00 AM – 11:00 PM');
 
   start = unix(base, LOS_ANGELES);
 
@@ -534,93 +540,93 @@ test('intervals best-fit', () => {
   end = unix(base + DAY * 3, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'd' });
-  expect(s).toEqual('3/10 – 3/14');
+  expect(s).toEqual('3/10 – 3/14');
 
   s = api.formatDateInterval(start, end, { skeleton: 'M' });
-  expect(s).toEqual('3/10 – 3/14');
+  expect(s).toEqual('3/10 – 3/14');
 
   s = api.formatDateInterval(start, end, { skeleton: 'y' });
-  expect(s).toEqual('3/10/2018 – 3/14/2018');
+  expect(s).toEqual('3/10/2018 – 3/14/2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
-  expect(s).toEqual('Mar 10 – 14, 2018');
+  expect(s).toEqual('Mar 10 – 14, 2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yEMMMd' });
-  expect(s).toEqual('Sat, Mar 10 – Wed, Mar 14, 2018');
+  expect(s).toEqual('Sat, Mar 10 – Wed, Mar 14, 2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'MMMd' });
-  expect(s).toEqual('Mar 10 – 14');
+  expect(s).toEqual('Mar 10 – 14');
 
   // Date skeleton, months differ
   end = unix(base + DAY * 34, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'd' });
-  expect(s).toEqual('3/10 – 4/14');
+  expect(s).toEqual('3/10 – 4/14');
 
   s = api.formatDateInterval(start, end, { skeleton: 'M' });
-  expect(s).toEqual('3 – 4');
+  expect(s).toEqual('3 – 4');
 
   s = api.formatDateInterval(start, end, { skeleton: 'y' });
-  expect(s).toEqual('3/2018 – 4/2018');
+  expect(s).toEqual('3/2018 – 4/2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
-  expect(s).toEqual('Mar 10 – Apr 14, 2018');
+  expect(s).toEqual('Mar 10 – Apr 14, 2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yEMMMd' });
-  expect(s).toEqual('Sat, Mar 10 – Sat, Apr 14, 2018');
+  expect(s).toEqual('Sat, Mar 10 – Sat, Apr 14, 2018');
 
   // Date skeleton, years differ
   end = unix(base + DAY * 301, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'd' });
-  expect(s).toEqual('3/10/2018 – 1/5/2019');
+  expect(s).toEqual('3/10/2018 – 1/5/2019');
 
   s = api.formatDateInterval(start, end, { skeleton: 'M' });
-  expect(s).toEqual('3/2018 – 1/2019');
+  expect(s).toEqual('3/2018 – 1/2019');
 
   s = api.formatDateInterval(start, end, { skeleton: 'y' });
-  expect(s).toEqual('2018 – 2019');
+  expect(s).toEqual('2018 – 2019');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
-  expect(s).toEqual('Mar 10, 2018 – Jan 5, 2019');
+  expect(s).toEqual('Mar 10, 2018 – Jan 5, 2019');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yEMMMd' });
-  expect(s).toEqual('Sat, Mar 10, 2018 – Sat, Jan 5, 2019');
+  expect(s).toEqual('Sat, Mar 10, 2018 – Sat, Jan 5, 2019');
 
   // Time skeleton, hours differ
   start = unix(base - (HOUR * 13 + 123456), LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'h' });
-  expect(s).toEqual('9 AM – 11 PM');
+  expect(s).toEqual('9 AM – 11 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 'm' });
-  expect(s).toEqual('9:58 AM – 11:00 PM');
+  expect(s).toEqual('9:58 AM – 11:00 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 's' });
-  expect(s).toEqual('9 AM – 11 PM');
+  expect(s).toEqual('9 AM – 11 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 'SSS' });
-  expect(s).toEqual('9 AM – 11 PM');
+  expect(s).toEqual('9 AM – 11 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
-  expect(s).toEqual('3/10/2018, 9:58 AM – 11:00 PM');
+  expect(s).toEqual('3/10/2018, 9:58 AM – 11:00 PM');
 
   start = unix(base - HOUR * 5, LOS_ANGELES);
   end = unix(base, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMdhms' });
-  expect(s).toEqual('3/10/2018, 6:00 – 11:00 PM');
+  expect(s).toEqual('3/10/2018, 6:00 – 11:00 PM');
 
   // Time skeleton, years differ
   start = unix(base, LOS_ANGELES);
   end = unix(base + DAY * 301, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'ahm' });
-  expect(s).toEqual('3/10/2018, 11:00 PM – 1/5/2019, 11:00 PM');
+  expect(s).toEqual('3/10/2018, 11:00 PM – 1/5/2019, 11:00 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 'ahmsSSS' });
-  expect(s).toEqual('3/10/2018, 11:00:25.789 PM – 1/5/2019, 11:00:25.789 PM');
+  expect(s).toEqual('3/10/2018, 11:00:25.789 PM – 1/5/2019, 11:00:25.789 PM');
 
   // FALLBACKS
 
@@ -629,19 +635,19 @@ test('intervals best-fit', () => {
   end = unix(base + DAY * 301 - HOUR * 7, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'Bh' });
-  expect(s).toEqual('3/10/2018, 11 at night – 1/5/2019, 4 in the afternoon');
+  expect(s).toEqual('3/10/2018, 11 at night – 1/5/2019, 4 in the afternoon');
 
   // Mixed skeleton, months differ
 
   end = unix(base + DAY * 3, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'MMMdh' });
-  expect(s).toEqual('Mar 10, 11 PM – Mar 14, 12 AM');
+  expect(s).toEqual('Mar 10, 11 PM – Mar 14, 12 AM');
 
   // Mixed skeleton, months differ
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMMMddhmsSSSv' });
-  expect(s).toEqual('Mar 10, 2018, 11:00:25.789 PM PT – Mar 14, 2018, 12:00:25.789 AM PT');
+  expect(s).toEqual('Mar 10, 2018, 11:00:25.789 PM PT – Mar 14, 2018, 12:00:25.789 AM PT');
 });
 
 test('intervals', () => {
@@ -650,7 +656,7 @@ test('intervals', () => {
 
   let api = calendarsApi('en');
   let s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
-  expect(s).toEqual('Mar 10 – 14, 2018');
+  expect(s).toEqual('Mar 10 – 14, 2018');
 
   api = calendarsApi('en-GB');
   s = api.formatDate(mar11, { date: 'full' });
@@ -687,10 +693,10 @@ test('intervals', () => {
 test('intervals bare date', () => {
   const api = calendarsApi('en');
   let s = api.formatDateInterval(new Date(2018, 1, 20), new Date(2018, 5, 13));
-  expect(s).toEqual('Feb 20 – Jun 13, 2018');
+  expect(s).toEqual('Feb 20 – Jun 13, 2018');
 
   s = api.formatDateInterval(new Date(2018, 1, 20, 0, 10), new Date(2018, 1, 20, 17), { skeleton: 'hms' });
-  expect(s).toEqual('5:10 AM – 10:00 PM');
+  expect(s).toEqual('5:10 AM – 10:00 PM');
 });
 
 test('interval parts', () => {
@@ -703,7 +709,7 @@ test('interval parts', () => {
     { type: 'month', value: 'March' },
     { type: 'literal', value: ' ' },
     { type: 'day', value: '10' },
-    { type: 'literal', value: ' – ' },
+    { type: 'literal', value: ' – ' },
     { type: 'day', value: '14' },
     { type: 'literal', value: ', ' },
     { type: 'year', value: '2018' },

@@ -15,16 +15,16 @@ test('best-fit skeleton matching', () => {
   let s: string;
 
   s = api.formatDate(mar11, { skeleton: 'hmmssv' });
-  expect(s).toEqual('11:00:25 PM PT');
+  expect(s).toEqual('11:00:25 PM PT');
 
   s = api.formatDate(mar11, { skeleton: 'yMMdhmms' });
-  expect(s).toEqual('03/10/2018, 11:00:25 PM');
+  expect(s).toEqual('03/10/2018, 11:00:25 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMdhm' });
-  expect(s).toEqual('03/10/2018, 11:00 PM');
+  expect(s).toEqual('03/10/2018, 11:00 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMdhmmsv' });
-  expect(s).toEqual('03/10/2018, 11:00:25 PM PT');
+  expect(s).toEqual('03/10/2018, 11:00:25 PM PT');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMM' });
   expect(s).toEqual('March 2018');
@@ -38,16 +38,16 @@ test('best-fit skeleton matching', () => {
   api = calendarsApi('de');
 
   s = api.formatDate(mar11, { skeleton: 'hmmssv' });
-  expect(s).toEqual('11:00:25 PM GMT-8');
+  expect(s).toEqual('11:00:25 PM GMT-8');
 
   s = api.formatDate(mar11, { skeleton: 'yMMdhmms' });
-  expect(s).toEqual('10.03.2018, 11:00:25 PM');
+  expect(s).toEqual('10.03.2018, 11:00:25 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMdhm' });
-  expect(s).toEqual('10.03.2018, 11:00 PM');
+  expect(s).toEqual('10.03.2018, 11:00 PM');
 
   s = api.formatDate(mar11, { skeleton: 'yMMdhmmsv' });
-  expect(s).toEqual('10.03.2018, 11:00:25 PM GMT-8');
+  expect(s).toEqual('10.03.2018, 11:00:25 PM GMT-8');
 
   s = api.formatDate(mar11, { skeleton: 'yMMMM' });
   expect(s).toEqual('März 2018');
@@ -90,7 +90,7 @@ test('matching skeletons', () => {
 
   r = m.getDateFormatRequest(d, { skeleton: 'yMMMdhmsv' }, params);
   expect(r.date).toEqual([['M', 3], ' ', ['d', 1], ', ', ['y', 1]]);
-  expect(r.time).toEqual([['h', 1], ':', ['m', 2], ':', ['s', 2], ' ', ['a', 1], ' ', ['v', 1]]);
+  expect(r.time).toEqual([['h', 1], ':', ['m', 2], ':', ['s', 2], ' ', ['a', 1], ' ', ['v', 1]]);
 
   r = m.getDateFormatRequest(d, { date: 'full' }, params);
   expect(r.date).toEqual([['E', 4], ', ', ['M', 4], ' ', ['d', 1], ', ', ['y', 1]]);
@@ -98,5 +98,5 @@ test('matching skeletons', () => {
 
   r = m.getDateFormatRequest(d, { skeleton: 'hmsVVV' }, params);
   expect(r.date).toEqual(undefined);
-  expect(r.time).toEqual([['h', 1], ':', ['m', 2], ':', ['s', 2], ' ', ['a', 1], ' ', ['V', 3]]);
+  expect(r.time).toEqual([['h', 1], ':', ['m', 2], ':', ['s', 2], ' ', ['a', 1], ' ', ['V', 3]]);
 });

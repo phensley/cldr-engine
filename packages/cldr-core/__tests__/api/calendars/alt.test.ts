@@ -89,24 +89,24 @@ test('day period alternate', () => {
 
   // abbreviated
   s = api.formatDate(mar11, { skeleton: 'hma', alt: { dayPeriod: 'none' } });
-  expect(s).toEqual('11:00 PM');
+  expect(s).toEqual('11:00 PM');
 
   s = api.formatDate(mar11, { skeleton: 'hma', alt: { dayPeriod: 'casing' } });
-  expect(s).toEqual('11:00 pm');
+  expect(s).toEqual('11:00 pm');
 
   // wide
   s = api.formatDate(mar11, { skeleton: 'hmaaaa', alt: { dayPeriod: 'none' } });
-  expect(s).toEqual('11:00 PM');
+  expect(s).toEqual('11:00 PM');
 
   s = api.formatDate(mar11, { skeleton: 'hmaaaa', alt: { dayPeriod: 'casing' } });
-  expect(s).toEqual('11:00 pm');
+  expect(s).toEqual('11:00 pm');
 
   // narrow
   s = api.formatDate(mar11, { skeleton: 'hmaaaaa', alt: { dayPeriod: 'none' } });
-  expect(s).toEqual('11:00 p');
+  expect(s).toEqual('11:00 p');
 
   s = api.formatDate(mar11, { skeleton: 'hmaaaaa', alt: { dayPeriod: 'casing' } });
-  expect(s).toEqual('11:00 pm');
+  expect(s).toEqual('11:00 pm');
 
   // SPANISH
 
@@ -114,25 +114,25 @@ test('day period alternate', () => {
 
   // abbreviated
   s = api.formatDate(mar11, { skeleton: 'hma', alt: { dayPeriod: 'none' } });
-  expect(s).toEqual('11:00 p. m.');
+  expect(s).toEqual('11:00 p. m.');
 
   s = api.formatDate(mar11, { skeleton: 'hma', alt: { dayPeriod: 'casing' } });
-  expect(s).toEqual('11:00 p. m.');
+  expect(s).toEqual('11:00 p. m.');
 
   // narrow
   s = api.formatDate(mar11, { skeleton: 'hmaaaaa', alt: { dayPeriod: 'none' } });
-  expect(s).toEqual('11:00 p. m.');
+  expect(s).toEqual('11:00 p. m.');
 
   s = api.formatDate(mar11, { skeleton: 'hmaaaaa', alt: { dayPeriod: 'casing' } });
-  expect(s).toEqual('11:00 p. m.');
+  expect(s).toEqual('11:00 p. m.');
 
   // GERMAN
 
   api = calendarsApi('de');
 
   s = api.formatDate(mar11, { skeleton: 'hma', alt: { dayPeriod: 'none' } });
-  expect(s).toEqual('11:00 PM');
+  expect(s).toEqual('11:00 PM');
 
   s = api.formatDate(mar11, { skeleton: 'hma', alt: { dayPeriod: 'casing' } });
-  expect(s).toEqual('11:00 PM');
+  expect(s).toEqual('11:00 PM');
 });

@@ -292,6 +292,7 @@ const coreCalendarSchema = (name: string) => {
     dateFormats: get([prefix('dateFormats', _sizeProps), getDateFormat]),
     dayPeriods: get(prefix('dayPeriods', _formats)),
     dateTimeFormats: get(prefix('dateTimeFormats', _sizeProps)),
+    dateTimeFormatsAt: get(prefix('dateTimeFormats-atTime', 'standard', _sizeProps)),
     eras: get([prefix('eras'), fixEras]),
     intervalFormats: get([L.compose(intervals, L.remove(L.props('intervalFormatFallback'))), fixIntervals]),
     intervalFormatFallback: get(L.compose(intervals, 'intervalFormatFallback')),

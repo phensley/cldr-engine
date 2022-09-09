@@ -33,7 +33,7 @@ test('decimals', () => {
 
   api = calendarsApi('my');
   s = api.formatDate(mar11, { datetime: 'full' });
-  expect(s).toEqual('၂၀၁၈- မတ် ၁၀- စနေ မြောက်အမေရိက ပစိဖိတ်စံတော်ချိန် ၂၃:၀၀:၂၅');
+  expect(s).toEqual('၂၀၁၈၊ မတ် ၁၀၊ စနေ ပစိဖိတ်စံတော်ချိန် ၂၃:၀၀:၂၅');
 
   api = calendarsApi('mr');
   s = api.formatDate(mar11, { datetime: 'full' });
@@ -41,7 +41,7 @@ test('decimals', () => {
 
   api = calendarsApi('bn-IN');
   s = api.formatDate(mar11, { datetime: 'full' });
-  expect(s).toEqual('শনিবার, ১০ মার্চ, ২০১৮ ১১:০০:২৫ PM প্রশান্ত মহাসাগরীয় অঞ্চলের মানক সময়');
+  expect(s).toEqual('শনিবার, ১০ মার্চ, ২০১৮ এ ১১:০০:২৫ PM প্রশান্ত মহাসাগরীয় অঞ্চলের মানক সময়');
 });
 
 test('padding', () => {

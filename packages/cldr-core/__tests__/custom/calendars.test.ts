@@ -7,17 +7,17 @@ test('custom calendars', () => {
   let s: string;
 
   s = api.formatDate(date, { datetime: 'full' });
-  expect(s).toEqual('Monday, June 10, 2019 at 12:34:56 PM Eastern Daylight Time');
+  expect(s).toEqual('Monday, June 10, 2019 at 12:34:56 PM Eastern Daylight Time');
 
   // We've omitted all non-gregorian calendars, so all date formatting
   // will use the given calendar's rules but fall back to gregorian
   // patterns, names, etc
 
   s = api.formatDate(date, { datetime: 'full', ca: 'buddhist' });
-  expect(s).toEqual('Monday, June 10, 2019 at 12:34:56 PM Eastern Daylight Time');
+  expect(s).toEqual('Monday, June 10, 2019 at 12:34:56 PM Eastern Daylight Time');
 
   s = api.formatDate(date, { datetime: 'full', ca: 'persian' });
-  expect(s).toEqual('Monday, June 10, 2019 at 12:34:56 PM Eastern Daylight Time');
+  expect(s).toEqual('Monday, June 10, 2019 at 12:34:56 PM Eastern Daylight Time');
 });
 
 test('skeleton pattern defaulting', () => {

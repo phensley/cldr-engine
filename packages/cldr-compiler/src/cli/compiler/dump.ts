@@ -32,6 +32,7 @@ type Entry = [number, string, number, number] | [number, string];
 
 interface Options {
   verbose: boolean;
+  indices?: boolean;
 }
 
 /**
@@ -66,7 +67,7 @@ const scan = (o: any, depth: number, opts: Options): Entry[] => {
 /**
  * Display the schema entries.
  */
-const display = (entries: Entry[], strings: string[]) => {
+const display = (entries: Entry[], strings: string[], indices?: boolean) => {
   // let next = 0;
   // for (let i = 0; i < entries.length; i++) {
 
@@ -77,7 +78,11 @@ const display = (entries: Entry[], strings: string[]) => {
       console.log(`${' '.repeat(depth)}${key}`);
     } else {
       const [depth, key, start, end] = e;
-      console.log(`${' '.repeat(depth)}${key} (${start}, ${end})`);
+      let s = `${' '.repeat(depth)}${key}`;
+      if (indices) {
+        s += ` (${start}, ${end})`;
+      }
+      console.log(s);
       console.log(' '.repeat(depth), JSON.stringify(strings.slice(start, end)));
     }
   }
@@ -85,6 +90,7 @@ const display = (entries: Entry[], strings: string[]) => {
 
 interface DumpArgs {
   pack: string;
+  indices?: boolean;
   config?: string;
 }
 
@@ -108,7 +114,7 @@ export const runDump = (argv: yargs.Arguments<DumpArgs>) => {
   const builder = new SchemaBuilder(false);
   builder.construct(schema, origin);
 
-  const opts = { verbose: false };
+  const opts = { verbose: false, indices: argv.indices };
   Object.keys(data.scripts).forEach((name) => {
     const strings = data.scripts[name].strings.split('_');
     const entries = scan(schema, 1, opts);

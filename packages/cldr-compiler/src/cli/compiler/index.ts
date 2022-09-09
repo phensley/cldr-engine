@@ -30,6 +30,7 @@ export const main = () => {
       (y: yargs.Argv) =>
         y
           .option('p', { alias: 'pack', required: true, description: 'Path to resource pack' })
+          .option('i', { alias: 'indices', description: 'Show string indices' })
           .option('c', { alias: 'config', description: 'Path to config used to generate resource pack' }),
       runDump,
     )

@@ -638,6 +638,7 @@ export interface DateFormatAltOptions {
 // @public (undocumented)
 export interface DateFormatOptions {
     alt?: DateFormatAltOptions;
+    atTime?: boolean;
     ca?: CalendarType;
     context?: ContextType;
     date?: FormatWidthType;
@@ -651,6 +652,7 @@ export interface DateFormatOptions {
 // @public (undocumented)
 export interface DateIntervalFormatOptions {
     alt?: DateFormatAltOptions;
+    atTime?: boolean;
     ca?: CalendarType;
     context?: ContextType;
     date?: string;
@@ -670,6 +672,7 @@ export interface DateRawFormatOptions {
 
 // @public (undocumented)
 export interface DateWrapperFormatOptions {
+    atTime?: boolean;
     // (undocumented)
     ca?: CalendarType;
     // (undocumented)

@@ -20,12 +20,12 @@ test('japanese', () => {
   let s: string;
 
   s = api.formatDate(mar11, { datetime: 'full', ca: 'japanese' });
-  expect(s).toEqual('Saturday, March 10, 30 Heisei at 11:00:25 PM Pacific Standard Time');
+  expect(s).toEqual('Saturday, March 10, 30 Heisei at 11:00:25 PM Pacific Standard Time');
 
   const may01 = unix(MAY_01_2019_120000_UTC, NEW_YORK);
 
   s = api.formatDate(may01, { datetime: 'full', ca: 'japanese' });
-  expect(s).toEqual('Wednesday, May 1, 1 Reiwa at 8:00:00 AM Eastern Daylight Time');
+  expect(s).toEqual('Wednesday, May 1, 1 Reiwa at 8:00:00 AM Eastern Daylight Time');
 });
 
 test('japanese date', () => {

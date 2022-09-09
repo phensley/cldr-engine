@@ -2637,6 +2637,15 @@
           "value": "1000"
         }
       ]
+    },
+    "zz-default": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=#,##0=;",
+          "value": "0"
+        }
+      ]
     }
   },
   "OrdinalRules": {

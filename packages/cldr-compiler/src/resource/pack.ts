@@ -216,8 +216,9 @@ export class ResourcePack {
     // Manually build the JSON to ensure the same result every time (avoid passing
     // through object hash functions). We return a raw UTF-16 string that the
     // Node.js fs module will write as UTF-8.
+    const strings = base.strings.map((s) => s.replace(/"/g, '\\"'));
     return (
-      `{"strings":"${join(base.strings)}",` +
+      `{"strings":"${join(strings)}",` +
       `"exceptions":"${join(exceptions)}",` +
       `"regions":{${regions.join(',')}},` +
       `"defaultRegion":"${defaultRegion}"}`

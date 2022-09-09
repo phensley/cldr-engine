@@ -1,4 +1,331 @@
 {
+  "OrdinalRules": {
+    "digits-ordinal": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=.;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-feminine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-я;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-feminine-ablative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-й;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-feminine-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-ю;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-feminine-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-й;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-feminine-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-й;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-feminine-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-й;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-й;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine-ablative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-м;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-й;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-му;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-го;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-м;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-neuter": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-е;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-neuter-ablative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-м;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-neuter-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-е;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-neuter-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-му;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-neuter-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-го;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-neuter-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-м;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-plural": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-e;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-plural-ablative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-ми;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-plural-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-e;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-plural-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-м;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-plural-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-х;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-plural-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-х;",
+          "value": "0"
+        }
+      ]
+    }
+  },
   "SpelloutRules": {
     "aja": {
       "private": 1,

@@ -14,6 +14,12 @@ test('date wrapper string', () => {
   s = api.formatDateWrapper('DATE', 'TIME', { width: 'full' });
   expect(s).toEqual('DATE at TIME');
 
+  s = api.formatDateWrapper('DATE', 'TIME', { width: 'full', atTime: true });
+  expect(s).toEqual('DATE at TIME');
+
+  s = api.formatDateWrapper('DATE', 'TIME', { width: 'full', atTime: false });
+  expect(s).toEqual('DATE, TIME');
+
   s = api.formatDateWrapper('DATE', 'TIME', { ca: 'persian' });
   expect(s).toEqual('DATE, TIME');
 
@@ -30,10 +36,10 @@ test('date wrapper string', () => {
   api = calendarsApi('vi');
 
   s = api.formatDateWrapper('DATE', 'TIME', { width: 'short' });
-  expect(s).toEqual('TIME, DATE');
+  expect(s).toEqual('TIME DATE');
 
   s = api.formatDateWrapper('DATE', 'TIME', { width: 'full' });
-  expect(s).toEqual('TIME DATE');
+  expect(s).toEqual('lúc TIME DATE');
 
   api = calendarsApi('fa');
 

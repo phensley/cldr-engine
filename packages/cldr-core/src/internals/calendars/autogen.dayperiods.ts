@@ -39,6 +39,7 @@ export const dayPeriodRules: { [x: string]: string } = {
   gu: '2 5 3 0 1 5|0 1 6o k0 qo xc',
   he: '2 5 3 0 1 5|0 1 a0 k0 u0 10o',
   hi: '2 5 3 0 1 5|0 1 6o k0 qo xc',
+  'hi-Latn': '2 5 3 6 0 1 5|0 1 6o k0 k1 qo xc',
   hr: '2 5 3 6 0 1 5|0 1 6o k0 k1 u0 z0',
   hu: '2 5 3 4 6 0 1 5|0 1 a0 f0 k0 k1 u0 z0',
   hy: '2 5 3 6 0 1|0 1 a0 k0 k1 u0',

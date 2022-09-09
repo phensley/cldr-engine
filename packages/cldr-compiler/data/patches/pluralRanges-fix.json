@@ -926,34 +926,14 @@
           "start": "one"
         },
         {
-          "end": "many",
-          "result": "many",
-          "start": "one"
-        },
-        {
           "end": "other",
           "result": "other",
           "start": "one"
         },
         {
-          "end": "many",
-          "result": "other",
-          "start": "two"
-        },
-        {
           "end": "other",
           "result": "other",
           "start": "two"
-        },
-        {
-          "end": "many",
-          "result": "many",
-          "start": "many"
-        },
-        {
-          "end": "other",
-          "result": "many",
-          "start": "many"
         },
         {
           "end": "one",
@@ -963,11 +943,6 @@
         {
           "end": "two",
           "result": "other",
-          "start": "other"
-        },
-        {
-          "end": "many",
-          "result": "many",
           "start": "other"
         },
         {

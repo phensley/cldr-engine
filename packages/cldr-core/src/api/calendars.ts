@@ -520,7 +520,8 @@ export class CalendarsImpl implements Calendars {
       // Docs don't mention this edge case:
       // https://www.unicode.org/reports/tr35/tr35-dates.html#intervalFormats
       const patterns = this.manager.getCalendarPatterns(calendar);
-      const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern('medium'));
+      const atTime = options.atTime === false ? false : true;
+      const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern('medium', atTime));
       value.wrap(wrapper, [_range, _date]);
       return value.render();
     }
@@ -567,7 +568,8 @@ export class CalendarsImpl implements Calendars {
   private _formatDateWrapper<R>(value: AbstractValue<R>, date: R, time: R, options: DateWrapperFormatOptions): R {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     const patterns = this.manager.getCalendarPatterns(calendar);
-    const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern(options.width || 'medium'));
+    const atTime = options.atTime === false ? false : true;
+    const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern(options.width || 'medium', atTime));
     value.wrap(wrapper, [time, date]);
     return value.render();
   }

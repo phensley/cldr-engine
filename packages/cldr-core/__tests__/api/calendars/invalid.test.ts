@@ -16,7 +16,7 @@ test('invalid calendar type', () => {
   let s: string;
 
   s = api.formatDate(mar11, { datetime: 'full', ca: 'invalid' as CalendarType });
-  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
+  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
 });
 
 test('invalid epoch timestamp', () => {
@@ -26,9 +26,9 @@ test('invalid epoch timestamp', () => {
 
   date = { date: 'foo', zoneId: LOS_ANGELES } as unknown as ZonedDateTime;
   s = api.formatDate(date, { datetime: 'full' });
-  expect(s).toEqual('Wednesday, December 31, 1969 at 4:00:00 PM Pacific Standard Time');
+  expect(s).toEqual('Wednesday, December 31, 1969 at 4:00:00 PM Pacific Standard Time');
 
   date = { date: { foo: 'bar' }, zoneId: LOS_ANGELES } as unknown as ZonedDateTime;
   s = api.formatDate(date, { datetime: 'full' });
-  expect(s).toEqual('Wednesday, December 31, 1969 at 4:00:00 PM Pacific Standard Time');
+  expect(s).toEqual('Wednesday, December 31, 1969 at 4:00:00 PM Pacific Standard Time');
 });

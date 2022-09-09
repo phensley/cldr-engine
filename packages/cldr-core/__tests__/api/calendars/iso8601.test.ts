@@ -15,5 +15,5 @@ test('japanese', () => {
   let s: string;
 
   s = api.formatDate(mar11, { datetime: 'full', ca: 'iso8601' });
-  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
+  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
 });

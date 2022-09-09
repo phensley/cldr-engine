@@ -52,11 +52,13 @@ export class CalendarManager {
       dateKey = 'long';
     }
 
+    const atTime = options.atTime === false ? false : true;
+
     let wrapper = '';
     if (wrapKey) {
-      wrapper = patterns.getWrapperPattern(wrapKey);
+      wrapper = patterns.getWrapperPattern(wrapKey, atTime);
     } else if (dateKey && timeKey) {
-      wrapper = patterns.getWrapperPattern(dateKey);
+      wrapper = patterns.getWrapperPattern(dateKey, atTime);
     }
 
     const req: DateFormatRequest = { wrapper, params };
@@ -141,10 +143,10 @@ export class CalendarManager {
     if (!wrapKey) {
       if (dateSkel && req.date && req.time) {
         // Select wrapper based on fields in date skeleton
-        req.wrapper = this.selectWrapper(patterns, dateSkel, req.date);
+        req.wrapper = this.selectWrapper(patterns, dateSkel, req.date, atTime);
       } else {
         // Select wrapper based on width of standard date format
-        req.wrapper = patterns.getWrapperPattern(dateKey || 'short');
+        req.wrapper = patterns.getWrapperPattern(dateKey || 'short', atTime);
       }
     }
 
@@ -324,7 +326,12 @@ export class CalendarManager {
   /**
    * Select appropriate wrapper based on fields in the date skeleton.
    */
-  private selectWrapper(patterns: CalendarPatterns, dateSkel: DateSkeleton, _date: DateTimeNode[]): string {
+  private selectWrapper(
+    patterns: CalendarPatterns,
+    dateSkel: DateSkeleton,
+    _date: DateTimeNode[],
+    atTime: boolean,
+  ): string {
     let wrapKey = 'short';
     const monthWidth = dateSkel.monthWidth();
     const hasWeekday = dateSkel.has(Field.WEEKDAY);
@@ -333,7 +340,7 @@ export class CalendarManager {
     } else if (monthWidth === 3) {
       wrapKey = 'medium';
     }
-    return patterns.getWrapperPattern(wrapKey);
+    return patterns.getWrapperPattern(wrapKey, atTime);
   }
 
   private supportedOption(key?: string): string {

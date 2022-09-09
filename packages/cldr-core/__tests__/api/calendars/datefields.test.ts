@@ -180,10 +180,10 @@ test('relative time options', () => {
   expect(s).toEqual('next wk.');
 
   s = api.formatRelativeTimeField(-3, 'week', { width: 'narrow' });
-  expect(s).toEqual('3 wk. ago');
+  expect(s).toEqual('3w ago');
 
   s = api.formatRelativeTimeField(2, 'month', { width: 'narrow' });
-  expect(s).toEqual('in 2 mo.');
+  expect(s).toEqual('in 2mo');
 
   s = api.formatRelativeTimeField(-70, 'sun', { width: 'short' });
   expect(s).toEqual('70 Sun. ago');

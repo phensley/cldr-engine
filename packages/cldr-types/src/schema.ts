@@ -48,6 +48,7 @@ export interface CalendarSchema {
   readonly dateFormats: Vector1Arrow<FormatWidthType>;
   readonly timeFormats: Vector1Arrow<FormatWidthType>;
   readonly dateTimeFormats: Vector1Arrow<FormatWidthType>;
+  readonly dateTimeFormatsAt: Vector1Arrow<FormatWidthType>;
   readonly intervalFormatFallback: FieldArrow;
 }
 
