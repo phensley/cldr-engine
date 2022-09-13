@@ -1494,6 +1494,9 @@ export class PersianDate extends CalendarDate {
     withZone(zoneId: string): PersianDate;
 }
 
+// @public (undocumented)
+export const PluralIndex: KeyIndexImpl<PluralType>;
+
 export { PluralRules }
 
 export { pluralRules }
