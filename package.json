@@ -7,7 +7,7 @@
     "api": "pnpm --stream -r run api",
     "bench": "pnpm --stream -r run bench",
     "build": "pnpm --stream -r run build",
-    "build:watch": "pnpm --stream -r run build:watch",
+    "build:watch": "pnpm --parallel --stream -r run build:watch",
     "clean": "pnpm --stream -r run clean && rimraf ./coverage && jest --clearCache",
     "clean:full": "pnpm --stream -r run clean:full && rimraf ./node_modules yarn.lock",
     "depgraph": "depcruise -T dot -x tslib packages/cldr/src | dot -T pdf > depgraph.pdf",

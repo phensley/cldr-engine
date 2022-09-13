@@ -1,5 +1,5 @@
 import { RNG } from '../../../../cldr-utils/__tests__/rng';
-import { BuddhistDate, GregorianDate, PersianDate } from '../../../src/systems/calendars';
+import { BuddhistDate, GregorianDate, PersianDate } from '../../../src';
 
 // Fri Apr 3 2020 18:08:52.123 UTC
 const EPOCH = 1585937332123;

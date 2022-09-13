@@ -35,6 +35,7 @@ export {
   Instruction,
   KeyIndexImpl,
   Origin,
+  PluralIndex,
   SchemaConfig,
   Scope,
   ScopeArrowImpl,

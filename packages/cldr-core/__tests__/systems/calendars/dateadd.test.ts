@@ -1,4 +1,4 @@
-import { BuddhistDate, GregorianDate, ISO8601Date, JapaneseDate, PersianDate } from '../../../src/systems/calendars';
+import { BuddhistDate, GregorianDate, ISO8601Date, JapaneseDate, PersianDate } from '../../../src';
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
 
 const NEW_YORK = 'America/New_York';

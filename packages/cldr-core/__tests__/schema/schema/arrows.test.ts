@@ -6,7 +6,7 @@ import {
   PluralIndex,
   ScopeArrowImpl,
   VectorArrowImpl,
-} from '../../../src/schema';
+} from '../../../src';
 
 type Foo = 'foo1' | 'foo2';
 type Bar = 'bar1' | 'bar2' | 'bar3';

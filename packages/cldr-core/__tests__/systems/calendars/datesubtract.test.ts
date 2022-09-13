@@ -1,4 +1,4 @@
-import { GregorianDate } from '../../../src/systems/calendars';
+import { GregorianDate } from '../../../src';
 
 const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1, 1);
 

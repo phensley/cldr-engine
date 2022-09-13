@@ -1,4 +1,4 @@
-import { CalendarDate, GregorianDate, TimePeriod, TimePeriodField } from '../../../src/systems';
+import { CalendarDate, GregorianDate, TimePeriod, TimePeriodField } from '../../../src';
 
 const UTC = 'UTC';
 const NEW_YORK = 'America/New_York';

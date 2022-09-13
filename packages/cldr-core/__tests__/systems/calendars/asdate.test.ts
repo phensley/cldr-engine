@@ -1,4 +1,4 @@
-import { CalendarDate, GregorianDate } from '../../../src/systems/calendars';
+import { CalendarDate, GregorianDate } from '../../../src';
 
 test('as javascript date', () => {
   let d: CalendarDate;

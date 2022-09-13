@@ -1,5 +1,5 @@
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
-import { BuddhistDate } from '../../../src/systems/calendars';
+import { BuddhistDate } from '../../../src';
 
 const make = (e: number, z: string) => BuddhistDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
