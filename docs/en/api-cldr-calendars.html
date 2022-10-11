@@ -489,7 +489,7 @@ formatDateWrapper(date, time, options?): string
 log(cldr.Calendars.formatDateWrapper(date, time, { width: <span class="hljs-string">'full'</span> }));
 </code></pre>
 <pre class="output">
-Next Wednesday at 12:40:22 PM
+Next Wednesday at 10:01:48 PM
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="formatdatewrappertoparts"></a><a href="#formatdatewrappertoparts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatDateWrapperToParts</h2>
 <p>Formats a date and time <code>Part[]</code> together using a wrapper format of the given width. This can be
@@ -535,11 +535,11 @@ log(
 [
   { type: 'reldate', value: 'Next Wednesday' },
   { type: 'literal', value: ' at ' },
-  { type: 'hour', value: '12' },
+  { type: 'hour', value: '10' },
   { type: 'literal', value: ':' },
-  { type: 'minute', value: '40' },
+  { type: 'minute', value: '01' },
   { type: 'literal', value: ':' },
-  { type: 'second', value: '22' },
+  { type: 'second', value: '48' },
   { type: 'literal', value: ' ' },
   { type: 'dayperiod', value: 'PM' }
 ]
@@ -817,8 +817,8 @@ log(en.Calendars.nowBuddhist());
 log(en.Calendars.nowBuddhist(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Buddhist 2020-04-29 12:40:22.300 Etc/UTC
-Buddhist 2020-04-29 05:40:22.300 America/Los_Angeles
+Buddhist 2022-10-09 22:01:48.523 Etc/UTC
+Buddhist 2022-10-09 15:01:48.523 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowgregorian"></a><a href="#nowgregorian" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowGregorian</h2>
 <p>Construct a date in the Gregorian calendar representing the current date and time.</p>
@@ -839,8 +839,8 @@ log(en.Calendars.nowGregorian());
 log(en.Calendars.nowGregorian(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Gregorian 2020-04-29 12:40:22.306 Etc/UTC
-Gregorian 2020-04-29 05:40:22.306 America/Los_Angeles
+Gregorian 2022-10-09 22:01:48.524 Etc/UTC
+Gregorian 2022-10-09 15:01:48.524 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowiso8601"></a><a href="#nowiso8601" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowISO8601</h2>
 <p>Construct a date in the ISO8601 calendar representing the current date and time.</p>
@@ -861,8 +861,8 @@ log(en.Calendars.nowISO8601());
 log(en.Calendars.nowISO8601(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-ISO8601 2020-04-29 12:40:22.313 Etc/UTC
-ISO8601 2020-04-29 05:40:22.313 America/Los_Angeles
+ISO8601 2022-10-09 22:01:48.525 Etc/UTC
+ISO8601 2022-10-09 15:01:48.525 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowjapanese"></a><a href="#nowjapanese" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowJapanese</h2>
 <p>Construct a date in the Japanese calendar representing the current date and time.</p>
@@ -883,8 +883,8 @@ log(en.Calendars.nowJapanese());
 log(en.Calendars.nowJapanese(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Japanese 2020-04-29 12:40:22.318 Etc/UTC
-Japanese 2020-04-29 05:40:22.318 America/Los_Angeles
+Japanese 2022-10-09 22:01:48.526 Etc/UTC
+Japanese 2022-10-09 15:01:48.526 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="nowpersian"></a><a href="#nowpersian" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nowPersian</h2>
 <p>Construct a date in the Persian calendar representing the current date and time.</p>
@@ -905,8 +905,8 @@ log(en.Calendars.nowPersian());
 log(en.Calendars.nowPersian(<span class="hljs-string">'America/Los_Angeles'</span>));
 </code></pre>
 <pre class="output">
-Persian 1399-02-10 12:40:22.322 Etc/UTC
-Persian 1399-02-10 05:40:22.323 America/Los_Angeles
+Persian 1401-07-17 22:01:48.527 Etc/UTC
+Persian 1401-07-17 15:01:48.527 America/Los_Angeles
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="quarters"></a><a href="#quarters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>quarters</h2>
 <p>Return a mapping of quarter ordinal number to name for the current locale.</p>
@@ -1011,7 +1011,6 @@ log(<span class="hljs-string">'...'</span>);
 </code></pre>
 <pre class="output">
 Africa/Abidjan
-Africa/Accra
 Africa/Algiers
 Africa/Bissau
 Africa/Cairo
@@ -1020,6 +1019,7 @@ Africa/Ceuta
 Africa/El_Aaiun
 Africa/Johannesburg
 Africa/Juba
+Africa/Khartoum
 ...
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="timezonefromutc"></a><a href="#timezonefromutc" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>timeZoneFromUTC</h2>
@@ -1117,16 +1117,101 @@ timeZoneInfo(id): TimeZoneInfo[]
 log(<span class="hljs-string">'...'</span>);
 </code></pre>
 <pre class="output">
-{ id: 'Africa/Abidjan', city: { name: 'Abidjan' } }
-{ id: 'Africa/Accra', city: { name: 'Accra' } }
-{ id: 'Africa/Algiers', city: { name: 'Algiers' } }
-{ id: 'Africa/Bissau', city: { name: 'Bissau' } }
-{ id: 'Africa/Cairo', city: { name: 'Cairo' } }
-{ id: 'Africa/Casablanca', city: { name: 'Casablanca' } }
-{ id: 'Africa/Ceuta', city: { name: 'Ceuta' } }
-{ id: 'Africa/El_Aaiun', city: { name: 'El Aaiun' } }
-{ id: 'Africa/Johannesburg', city: { name: 'Johannesburg' } }
-{ id: 'Africa/Juba', city: { name: 'Juba' } }
+{
+  id: 'Africa/Abidjan',
+  city: { name: 'Abidjan' },
+  countries: [
+    'CI', 'BF', 'GH',
+    'GM', 'GN', 'IS',
+    'ML', 'MR', 'SH',
+    'SL', 'SN', 'TG'
+  ],
+  latitude: 5.316667,
+  longitude: -4.033333,
+  stdoffset: 0,
+  metazone: 'GMT'
+}
+{
+  id: 'Africa/Algiers',
+  city: { name: 'Algiers' },
+  countries: [ 'DZ' ],
+  latitude: 36.783333,
+  longitude: 3.05,
+  stdoffset: 3600000,
+  metazone: 'Europe_Central'
+}
+{
+  id: 'Africa/Bissau',
+  city: { name: 'Bissau' },
+  countries: [ 'GW' ],
+  latitude: 11.85,
+  longitude: -15.583333,
+  stdoffset: 0,
+  metazone: 'GMT'
+}
+{
+  id: 'Africa/Cairo',
+  city: { name: 'Cairo' },
+  countries: [ 'EG' ],
+  latitude: 30.05,
+  longitude: 31.25,
+  stdoffset: 7200000,
+  metazone: 'Europe_Eastern'
+}
+{
+  id: 'Africa/Casablanca',
+  city: { name: 'Casablanca' },
+  countries: [ 'MA' ],
+  latitude: 33.65,
+  longitude: -7.583333,
+  stdoffset: 3600000,
+  metazone: 'Europe_Western'
+}
+{
+  id: 'Africa/Ceuta',
+  city: { name: 'Ceuta' },
+  countries: [ 'ES' ],
+  latitude: 35.883333,
+  longitude: -5.316667,
+  stdoffset: 3600000,
+  metazone: 'Europe_Central'
+}
+{
+  id: 'Africa/El_Aaiun',
+  city: { name: 'El Aaiun' },
+  countries: [ 'EH' ],
+  latitude: 27.15,
+  longitude: -13.2,
+  stdoffset: 3600000,
+  metazone: 'Europe_Western'
+}
+{
+  id: 'Africa/Johannesburg',
+  city: { name: 'Johannesburg' },
+  countries: [ 'ZA', 'LS', 'SZ' ],
+  latitude: -26.25,
+  longitude: 28,
+  stdoffset: 7200000,
+  metazone: 'Africa_Southern'
+}
+{
+  id: 'Africa/Juba',
+  city: { name: 'Juba' },
+  countries: [ 'SS' ],
+  latitude: 4.85,
+  longitude: 31.616667,
+  stdoffset: 7200000,
+  metazone: 'Africa_Central'
+}
+{
+  id: 'Africa/Khartoum',
+  city: { name: 'Khartoum' },
+  countries: [ 'SD' ],
+  latitude: 15.6,
+  longitude: 32.533333,
+  stdoffset: 7200000,
+  metazone: 'Africa_Central'
+}
 ...
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="tobuddhistdate"></a><a href="#tobuddhistdate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>toBuddhistDate</h2>
