@@ -103,7 +103,7 @@ You can use any of the packages independent of the rest of the library:
 - Support a broad set of CLDR features in the browser "out of the box".
 - Support all scripts and regions for a language in a single compact resource pack.
 - Resolve the CLDR data size and dimensionality problems.
-  - In the case of English: ~40MB of JSON for 105 locales is compressed to a 194KB resource pack (44KB gzip), a factor of approx. 200:1 uncompressed, 1000:1 with gzip compression.
+  - In the case of English: ~49MB of JSON for 106 locales is compressed to a 227KB resource pack (42KB gzip), a factor of approx. 220:1 uncompressed, 1200:1 with gzip compression.
 - No additional library dependencies required.
 - No custom extraction of CLDR data or precompilation of formatters required.
 - Correctness and consistency across browsers, Node.js, and other Javascript ES5 runtime environments.
