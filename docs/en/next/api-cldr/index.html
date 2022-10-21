@@ -82,15 +82,19 @@ several namespaces.</p>
 <ul>
 <li>Formatting unit quantities and unit sequences, getting unit display names</li>
 </ul></li>
+<li><code>CLDR.Schema</code>
+<ul>
+<li>Direct access to all raw fields in a resource pack.</li>
+</ul></li>
 </ul>
 <p>In order to make use of any localized functionality you need to obtain a <code>CLDR</code> instance from the
 framework.</p>
 <p>Synchronous:</p>
-<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr: CLDR = framework.get(<span class="hljs-string">'en'</span>);
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr: CLDR = framework.get(<span class="hljs-string">"en"</span>);
 <span class="hljs-comment">// .. do something with cldr instance</span>
 </code></pre>
 <p>Asynchronous:</p>
-<pre><code class="hljs css language-typescript">framework.getAsync(<span class="hljs-string">'en'</span>).then(<span class="hljs-function">(<span class="hljs-params">cldr: CLDR</span>) =&gt;</span> {
+<pre><code class="hljs css language-typescript">framework.getAsync(<span class="hljs-string">"en"</span>).then(<span class="hljs-function">(<span class="hljs-params">cldr: CLDR</span>) =&gt;</span> {
   <span class="hljs-comment">// .. do something with cldr instance</span>
 });
 </code></pre>

@@ -413,11 +413,11 @@ cmp(date, date.add({ month: <span class="hljs-number">7</span> }));
 cmp(date, date.add({ year: <span class="hljs-number">23</span> }));
 </code></pre>
 <pre class="output">
-May 15, 2019 at 4:00:00 AM GMT  ~  May 15, 2019 at 4:01:00 AM GMT  => m
-May 15, 2019 at 4:00:00 AM GMT  ~  May 15, 2019 at 7:00:00 AM GMT  => H
-May 15, 2019 at 4:00:00 AM GMT  ~  May 24, 2019 at 4:00:00 AM GMT  => d
-May 15, 2019 at 4:00:00 AM GMT  ~  December 15, 2019 at 4:00:00 AM GMT  => M
-May 15, 2019 at 4:00:00 AM GMT  ~  May 15, 2042 at 4:00:00 AM GMT  => y
+May 15, 2019 at 4:00:00 AM GMT  ~  May 15, 2019 at 4:01:00 AM GMT  => m
+May 15, 2019 at 4:00:00 AM GMT  ~  May 15, 2019 at 7:00:00 AM GMT  => H
+May 15, 2019 at 4:00:00 AM GMT  ~  May 24, 2019 at 4:00:00 AM GMT  => d
+May 15, 2019 at 4:00:00 AM GMT  ~  December 15, 2019 at 4:00:00 AM GMT  => M
+May 15, 2019 at 4:00:00 AM GMT  ~  May 15, 2042 at 4:00:00 AM GMT  => y
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="fields"></a><a href="#fields" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>fields</h2>
 <p>Returns the date and time-related fields as a <a href="api-calendardatefields"><code>CalendarDateFields</code></a> object.</p>
@@ -489,7 +489,7 @@ log(cldr.Calendars.formatDate(date, { time: <span class="hljs-string">'long'</sp
 log(date.hour());
 </code></pre>
 <pre class="output">
-4:10:20 PM GMT
+4:10:20 PM GMT
 4
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="hourofday"></a><a href="#hourofday" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>hourOfDay</h2>
@@ -508,7 +508,7 @@ log(cldr.Calendars.formatDate(date, { time: <span class="hljs-string">'long'</sp
 log(date.hourOfDay());
 </code></pre>
 <pre class="output">
-4:10:20 PM GMT
+4:10:20 PM GMT
 16
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="isdaylightsavings"></a><a href="#isdaylightsavings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>isDaylightSavings</h2>
@@ -536,9 +536,9 @@ dst(date.add({ day: <span class="hljs-number">58</span> }));
 dst(date.add({ day: <span class="hljs-number">61</span> }));
 </code></pre>
 <pre class="output">
-January 10, 2019 at 12:00:00 PM EST daylight savings: false
-March 9, 2019 at 12:00:00 PM EST daylight savings: false
-March 12, 2019 at 1:00:00 PM EDT daylight savings: true
+January 10, 2019 at 12:00:00 PM EST daylight savings: false
+March 9, 2019 at 12:00:00 PM EST daylight savings: false
+March 12, 2019 at 1:00:00 PM EDT daylight savings: true
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="isam"></a><a href="#isam" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>isAM</h2>
 <p>Indicates if the time is in the A.M. period.</p>
@@ -565,9 +565,9 @@ isam(date.add({ minute: <span class="hljs-number">239</span> }));
 isam(date.add({ minute: <span class="hljs-number">241</span> }));
 </code></pre>
 <pre class="output">
-January 10, 2019 at 8:00:00 AM EST is AM: true
-January 10, 2019 at 11:59:00 AM EST is AM: true
-January 10, 2019 at 12:01:00 PM EST is AM: false
+January 10, 2019 at 8:00:00 AM EST is AM: true
+January 10, 2019 at 11:59:00 AM EST is AM: true
+January 10, 2019 at 12:01:00 PM EST is AM: false
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="isleapyear"></a><a href="#isleapyear" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>isLeapYear</h2>
 <p>Indicates the date's year is a leap year, per the date's calendar.</p>
@@ -686,9 +686,9 @@ fmt(date.add({ minute: <span class="hljs-number">1</span> }));
 fmt(date.add({ minute: <span class="hljs-number">2</span> }));
 </code></pre>
 <pre class="output">
-March 10, 2019 at 6:59:59 AM EDT  25199000
-March 10, 2019 at 7:00:59 AM EDT  25259000
-March 10, 2019 at 7:01:59 AM EDT  25319000
+March 10, 2019 at 6:59:59 AM EDT  25199000
+March 10, 2019 at 7:00:59 AM EDT  25259000
+March 10, 2019 at 7:01:59 AM EDT  25319000
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="mindaysinfirstweek"></a><a href="#mindaysinfirstweek" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>minDaysInFirstWeek</h2>
 <p>Minimum number of days in a week to count as the first week of the year.</p>
@@ -725,7 +725,7 @@ log(cldr.Calendars.formatDate(date, { time: <span class="hljs-string">'long'</sp
 log(date.minute());
 </code></pre>
 <pre class="output">
-4:27:41 PM GMT
+4:27:41 PM GMT
 27
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="modifiedjulianday"></a><a href="#modifiedjulianday" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>modifiedJulianDay</h2>
@@ -855,7 +855,7 @@ log(cldr.Calendars.formatDate(date, { time: <span class="hljs-string">'long'</sp
 log(date.second());
 </code></pre>
 <pre class="output">
-4:27:41 PM GMT
+4:27:41 PM GMT
 41
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="set"></a><a href="#set" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>set</h2>
@@ -942,9 +942,9 @@ timeZoneOffset(): number
 }
 </code></pre>
 <pre class="output">
-Friday, May 10, 2019 at 4:27:41 PM Greenwich Mean Time has offset 0
-Friday, May 10, 2019 at 12:27:41 PM Eastern Daylight Time has offset -14400000
-Friday, May 10, 2019 at 6:27:41 PM Central European Summer Time has offset 7200000
+Friday, May 10, 2019 at 4:27:41 PM Greenwich Mean Time has offset 0
+Friday, May 10, 2019 at 12:27:41 PM Eastern Daylight Time has offset -14400000
+Friday, May 10, 2019 at 6:27:41 PM Central European Summer Time has offset 7200000
 </pre>
 <h2><a class="anchor" aria-hidden="true" id="tostring"></a><a href="#tostring" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>toString</h2>
 <p>Return a string representation of this date. The year field is the &quot;extended year&quot; represented by an integer.

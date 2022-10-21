@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Caching · @phensley/cldr</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Inside the library there are several structures that are in a dormant state, only becoming activated when needed."/><meta name="docsearch:version" content="1.5.1"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Caching · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="Inside the library there are several structures that are in a dormant state, only becoming activated when needed."/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.5.1</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.5.1/doc-index" target="_self">Docs</a></li><li class=""><a href="/cldr-engine/docs/en/1.5.1/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Design</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-index">Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-goals">Goals</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-faq">Rationale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-quickstart">Quick start</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Customization</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-resource-patching">Resource Patching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-locales-parsing">Locale parsing</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-locales-resolution">Locale resolution</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-locales-matching">Language matching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-calendar-overview">Calendar Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-calendar-examples">Example: date formatting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-math">Arbitrary Precision</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-math-example-factorial">Example: factorial</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-math-example-rational-approx">Math: rational approximation</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-math-example-contd-fractions">Math: continued fractions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Message Formatting</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-messageformatting">Usage</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-messageformatting-custom">Customization</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Design</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-design-bundles">Resource bundles</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/doc-design-caching">Caching</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Caching</h1></header><article><div><span><p>Inside the library there are several structures that are in a dormant state, only becoming activated when needed.</p>
+<p>The CLDR resource bundles also contain many raw patterns that need to be parsed before they can be used to format a result. Since applications may end up repeatedly formatting hundreds of numbers or dates using the same patterns, we want to avoid the overhead of parsing the pattern each time.</p>
+<p>Some pieces of data need to be computed on the fly every time while others can be computed once and kept around, either inside a curried function's closure or an explicit cache.</p>
+<p>The next section discusses ways of dealing with this overhead.</p>
+<h2><a class="anchor" aria-hidden="true" id="possible-approaches-to-avoiding-runtime-overhead"></a><a href="#possible-approaches-to-avoiding-runtime-overhead" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Possible approaches to avoiding runtime overhead</h2>
+<p>There are a few approaches a library can use to avoid certain classes of runtime overhead of functions that use string patterns for formatting, and accept options to adjust the behavior of a formatting function.</p>
+<p>Some of these points may seem opinionated and arguable, but they reflect experiences from using other CLDR-based JavaScript libraries, observing some of the impact on application developers over time, as well as being informed by some of the challenges in designing internal routines to correctly implement CLDR spec without sacrificing performance.</p>
+<h3><a class="anchor" aria-hidden="true" id="1-extract-the-patterns-at-build-time-and-generate-the-exact-code-required-for-formatting"></a><a href="#1-extract-the-patterns-at-build-time-and-generate-the-exact-code-required-for-formatting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Extract the patterns at build time and generate the exact code required for formatting</h3>
+<p>We would generate JavaScript code at build time and compile this into our app. This binds the locale-specific patterns with our options and writes out JavaScript our application can call directly.</p>
+<p><strong>Build time pseudocode:</strong></p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> locale of locales) {
+  <span class="hljs-keyword">let</span> code = <span class="hljs-string">''</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> opts of options) {
+    code += buildNumberFormatter(opts);
+    code += <span class="hljs-string">'\n'</span>;
+  }
+  writeGeneratedCode(locale, code);
+}
+</code></pre>
+<p><strong>Runtime pseudocode:</strong></p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">import</span> { numberFormatter } <span class="hljs-keyword">from</span> <span class="hljs-string">'my-library'</span>;
+
+<span class="hljs-comment">// Must go upstream to modify build process and cut a new release when</span>
+<span class="hljs-comment">// locales and options change.</span>
+<span class="hljs-keyword">const</span> result = numberFormatter(<span class="hljs-number">12345</span>);
+</code></pre>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li class="list">If several patterns are needed, the generated code tends to grow large.</li>
+<li class="list">Each additional locale requires its own generated code leading to rapidly increasing size of the codebase due to the dimensions of locales, patterns, and options.</li>
+<li class="list">Requires the addition of a potentially-complicated custom build step for each application.</li>
+<li class="list">The application needs to select its patterns and any other related data in advance.</li>
+<li class="list">When application needs change developers need to modify their builds.</li>
+<li class="list">When bugs are found or different patterns are needed the &quot;test, modify, build, release, test&quot; cycle can be tedious.</li>
+<li class="list">Brittle since some required data might be missed by developers and bugs only discovered at runtime.</li>
+<li class="list">Requires developers to know things about CLDR structure to correctly extract patterns and related data.</li>
+<li class="list">May require developers to have some knowledge of low-level CLDR data structures.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="2-using-a-factory-or-curried-functions-to-build-formatters-at-runtime"></a><a href="#2-using-a-factory-or-curried-functions-to-build-formatters-at-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Using a factory or curried functions to build formatters at runtime</h3>
+<p>We do the expensive operations at runtime in the builder function, which returns a formatter function with the patterns and other parameters stored in its closure. Then later we call that formatter function to format a value.</p>
+<p><strong>Runtime pseudocode:</strong></p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> formatter = library.makeNumberFormatter({ style: <span class="hljs-string">'short'</span> });
+<span class="hljs-keyword">const</span> result = formatter(<span class="hljs-number">12345</span>);
+</code></pre>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li class="list">Inflexible, since each place where a pattern is used with slightly different options needs to be curried to be efficient.</li>
+<li class="list">Dimensionality of the patterns, options, and input combinations require the curried functions to load and hold onto more data than is needed for a specific formatting operation.</li>
+<li class="list">Equates to a form of caching, since it keeps results of expensive calculations inside of a closure. But the &quot;cache&quot; is only visible inside that closure, inaccessible to other calls that use the same pattern.</li>
+<li class="list">To take advantage of this, applications have to separate their calls into 2 types: calls to create a formatter function (to which they must hold references) and execution of the formatter.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="3-caching-on-demand-our-chosen-solution"></a><a href="#3-caching-on-demand-our-chosen-solution" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Caching on demand (our chosen solution)</h3>
+<pre><code class="hljs css language-typescript"><span class="hljs-comment">// internal caches hold number system params, parsed patterns, etc.</span>
+<span class="hljs-keyword">const</span> result = cldr.Numbers.formatDecimal(<span class="hljs-number">12345</span>, { style: <span class="hljs-string">'short'</span> });
+</code></pre>
+<ul>
+<li class="list">No build steps required; patterns don't need to be known in advance.</li>
+<li class="list">Opens up some flexibility in the API, allowing more options to be passed through to end users vs. being hard-coded or otherwise precomputed.</li>
+<li class="list">Applications don't have to curry functions and hold a reference per set of unique options.</li>
+<li class="list">No generated code required and all localized patterns remain in the resource bundle, where they are stored most compactly.</li>
+<li class="list">Patterns are only loaded and parsed on demand, or cached in advance when they are known to be required.</li>
+<li class="list">Least-recently used (LRU) caching scheme is fast and balances memory vs runtime overhead.</li>
+<li class="list">API simpler as it does not need to handle currying of formatter functions.</li>
+<li class="list">Pattern caches use the string representation as the cache key, so caches can be global and reused across locales.
+<ul>
+<li class="list">For example the locales <code>'de'</code> and <code>'fr'</code> both use the standard currency pattern <code>&quot;#,##0.00 ¤&quot;</code>, so we only need to parse and cache this once when switching between these locales.</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="lru-caching-on-demand"></a><a href="#lru-caching-on-demand" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LRU caching on demand</h2>
+<p>To achieve performance this library uses aggressive caching at various levels to avoid repeating relatively-expensive operations.</p>
+<p>At the time of writing, the following types of objects are cached:</p>
+<ul>
+<li class="list">Loaded resource packs.</li>
+<li class="list">Parsed number, date, and wrapper patterns.</li>
+<li class="list">Calendar formatters.</li>
+<li class="list">Parsed timezone information.</li>
+</ul>
+<p>These objects are often relatively expensive to construct, so we use least-recently used (LRU) caches to avoid this overhead.</p>
+<h2><a class="anchor" aria-hidden="true" id="example-where-caching-comes-into-play"></a><a href="#example-where-caching-comes-into-play" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example where caching comes into play</h2>
+<p>For example, these bullets list out the pieces of data needed and steps taken during formatting of a currency amount using <a href="api-cldr-numbers.html#formatcurrency">cldr.Numbers.formatCurrency</a>:</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li class="list">The amount to be formatted, e.g. <code>123.45</code></li>
+<li class="list">The currency code, e.g. <code>'USD'</code></li>
+<li class="list">The formatting options <a href="api-currencyformatoptions.html">CurrencyFormatOptions</a>, most importantly the name of the formatting style to use (e.g. <code>'symbol', 'accounting', 'code', 'name', 'short'</code>).</li>
+</ul>
+<p><strong>Global data</strong></p>
+<ul>
+<li class="list">A mapping of currency to the number of decimal digits it uses. For example <code>USD = 2 digits</code> while <code>JPY = 0 digits</code>, which tells us the defaults for minimum fraction digits.</li>
+<li class="list">If a decimal numbering system other than <code>latn</code> is selected we need the digits <code>'0'..'9'</code> for that system.</li>
+</ul>
+<p><strong>Locale-specific data</strong></p>
+<ul>
+<li class="list">Calling <code>framework.getAsync(locale)</code> to load the resource bundle for the user's locale.</li>
+<li class="list">The numbering system to use, defaulting to <code>'latn'</code>.</li>
+<li class="list">Number system specific parameters and symbols, e.g. grouping and decimal characters.</li>
+<li class="list">Select the pattern based on the formatting style and possibly aspects of the amount itself, e.g. number of igits.</li>
+<li class="list">Currency name or symbol, possibly pluralized. Also may need the pattern that wraps an amount together with the currency name or code.</li>
+<li class="list">Patterns have a negative and positive form, which needs to be selected based on the sign of the amount.</li>
+<li class="list">Compact format style <code>'short'</code> selects the pattern based on the scaled value, after shifting its decimal point based on the number of digits in the number.
+<ul>
+<li class="list">We need to figure out the right divisor to divide the amount, and then select the pattern based on the number of adjusted digits.</li>
+<li class="list">We must also handle when the number of digits change after rounding, e.g <code>'999,999'</code> rounds up to <code>'1 million'</code> or when rounding causes a sign change.</li>
+<li class="list">Once the amount has been adjusted and the number of digits stable we need to compute the number's plural category to select the pluralized pattern.</li>
+<li class="list">The pluralized pattern falls back to using the standard currency pattern when the number of digits are below a threshold.</li>
+</ul></li>
+</ul>
+<p>If we had to fetch and recompute all of these on every call to <a href="api-cldr-numbers.html#formatcurrency">cldr.Numbers.formatCurrency</a> it would impact performance, so we use caching to spread this overhead out across many thousands of calls.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.5.1/doc-design-bundles"><span class="arrow-prev">← </span><span>Resource bundles</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#possible-approaches-to-avoiding-runtime-overhead">Possible approaches to avoiding runtime overhead</a><ul class="toc-headings"><li><a href="#1-extract-the-patterns-at-build-time-and-generate-the-exact-code-required-for-formatting">1. Extract the patterns at build time and generate the exact code required for formatting</a></li><li><a href="#2-using-a-factory-or-curried-functions-to-build-formatters-at-runtime">2. Using a factory or curried functions to build formatters at runtime</a></li><li><a href="#3-caching-on-demand-our-chosen-solution">3. Caching on demand (our chosen solution)</a></li></ul></li><li><a href="#lru-caching-on-demand">LRU caching on demand</a></li><li><a href="#example-where-caching-comes-into-play">Example where caching comes into play</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2022 Patrick Hensley</section></footer></div></body></html>

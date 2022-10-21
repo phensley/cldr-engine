@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>CLDR.General · @phensley/cldr</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## bundle"/><meta name="docsearch:version" content="1.5.1"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="CLDR.General · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="## bundle"/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.5.1</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/cldr-engine/docs/en/1.5.1/doc-index" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.5.1/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>API</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-cldrframework">CLDRFramework</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-cldroptions">CLDROptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-cldr">CLDR</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-cldr-calendars">CLDR.Calendars</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-cldr-general">CLDR.General</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-cldr-numbers">CLDR.Numbers</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-cldr-units">CLDR.Units</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-schemaconfig">SchemaConfig</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-buddhistdate">BuddhistDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-calendardate">CalendarDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-calendardatefields">CalendarDateFields</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-calendarfieldoptions">CalendarFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-calendartype">CalendarType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-datefieldtype">DateFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-datefieldformatoptions">DateFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-dateformataltoptions">DateFormatAltOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-dateformatoptions">DateFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-dateintervalformatoptions">DateIntervalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-daterawformatoptions">DateRawFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-dateskeleton">DateSkeleton</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-datetimepatternfieldtype">DateTimePatternFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-datewrapperformatoptions">DateWrapperFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-dayperiodalttype">DayPeriodAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-eraalttype">EraAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-erafieldoptions">EraFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-erawidthtype">EraWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-exemplarcity">ExemplarCity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-fieldwidthtype">FieldWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-formatwidthtype">FormatWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-gregoriandate">GregorianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-iso8601date">ISO8601Date</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-japanesedate">JapaneseDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-persiandate">PersianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-relativetimefieldtype">RelativeTimeFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-relativetimeformatoptions">RelativeTimeFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-relativetimefieldformatoptions">RelativeTimeFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-timeperiod">TimePeriod</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-timeperiodfield">TimePeriodField</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-timezoneinfo">TimeZoneInfo</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-timezonetype">TimeZoneType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-zoneddatetime">ZonedDateTime</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-contexttype">ContextType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-displaynameoptions">DisplayNameOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-languageidtype">LanguageIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-listpatterntype">ListPatternType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-measurementcategory">MeasurementCategory</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-measurementsystem">MeasurementSystem</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-regionidtype">RegionIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-scriptidtype">ScriptIdType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-bundle">Bundle</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-languagetag">LanguageTag</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-locale">Locale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-localematcher">LocaleMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-localematcheroptions">LocaleMatcherOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-decimal">Decimal</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-decimalconstants">DecimalConstants</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-mathcontext">MathContext</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-rational">Rational</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-roundingmodetype">RoundingModeType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Messages</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-buildmessagematcher">buildMessageMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-parsemessagepattern">parseMessagePattern</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-defaultmessageargconverter">DefaultMessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-messageargconverter">MessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-messagecode">MessageCode</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-messageengine">MessageEngine</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-messageformatfuncmap">MessageFormatFuncMap</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-messageformatter">MessageFormatter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-messageformatteroptions">MessageFormatterOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-messagematcher">MessageMatcher</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Numbers</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-currencyformatoptions">CurrencyFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-currencyformatstyletype">CurrencyFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-currencysymbolwidthtype">CurrencySymbolWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-currencytype">CurrencyType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-decimaladjustoptions">DecimalAdjustOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-decimalformatoptions">DecimalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-decimalformatstyletype">DecimalFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-numberformaterrortype">NumberFormatErrorType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-numbersystemtype">NumberSystemType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Units</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-quantity">Quantity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-unitformatoptions">UnitFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-unitformatstyletype">UnitFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-unitlength">UnitLength</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.5.1/api-unittype">UnitType</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">CLDR.General</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="bundle"></a><a href="#bundle" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bundle</h2>
+<p>Returns a reference to the <a href="api-bundle.html">Bundle</a> for this <a href="api-cldr.html">CLDR</a> instance.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax"></a><a href="#syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+bundle(): Bundle
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> locale of [<span class="hljs-string">'en'</span>, <span class="hljs-string">'fr'</span>, <span class="hljs-string">'ja'</span>, <span class="hljs-string">'ar'</span>]) {
+  <span class="hljs-keyword">const</span> cldr = framework.get(locale);
+  <span class="hljs-keyword">const</span> b = cldr.General.bundle();
+  log(<span class="hljs-string">`<span class="hljs-subst">${b.id()}</span>  <span class="hljs-subst">${b.language()}</span>  <span class="hljs-subst">${b.region()}</span>`</span>);
+}
+</code></pre>
+<pre class="output">
+en-Latn-US  en  US
+fr-Latn-FR  fr  FR
+ja-Jpan-JP  ja  JP
+ar-Arab-EG  ar  EG
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="characterorder"></a><a href="#characterorder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>characterOrder</h2>
+<p>Returns the character order for the current locale.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-1"></a><a href="#syntax-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+characterOrder(): CharacterOrderType
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="return-values"></a><a href="#return-values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return values</h4>
+<ul>
+<li><code class="def">&quot;ltr&quot;</code>
+<ul>
+<li>Left to right</li>
+</ul></li>
+<li><code class="def">&quot;rtl&quot;</code>
+<ul>
+<li>Right to left</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="lineorder"></a><a href="#lineorder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>lineOrder</h2>
+<p>Returns the line order for the current locale.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-2"></a><a href="#syntax-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+lineOrder(): LineOrderType
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="return-values-1"></a><a href="#return-values-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return values</h4>
+<ul>
+<li><code class="def">&quot;ttb&quot;</code>
+<ul>
+<li>Top to bottom</li>
+</ul></li>
+<li><code class="def">&quot;btt&quot;</code>
+<ul>
+<li>Bottom to top</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="locale"></a><a href="#locale" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>locale</h2>
+<p>Returns the <a href="api-locale.html">Locale</a> for this <a href="api-cldr.html">CLDR</a> instance.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-3"></a><a href="#syntax-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+locale(): Locale
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="example-1"></a><a href="#example-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> locale of [<span class="hljs-string">'en'</span>, <span class="hljs-string">'fr'</span>, <span class="hljs-string">'ja'</span>, <span class="hljs-string">'ar'</span>]) {
+  <span class="hljs-keyword">const</span> cldr = framework.get(locale);
+  <span class="hljs-keyword">const</span> { tag } = cldr.General.locale();
+  log(tag.expanded());
+}
+</code></pre>
+<pre class="output">
+en-Latn-US
+fr-Latn-FR
+ja-Jpan-JP
+ar-Arab-EG
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="formatlist"></a><a href="#formatlist" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatList</h2>
+<p>Format a list of items, with a given list type, returning a string.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-4"></a><a href="#syntax-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+formatList(items, type?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters"></a><a href="#parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">items: <span>string[]</span></code>
+<ul>
+<li>Items to join together into a list</li>
+</ul></li>
+<li><code class="def">type?: <span><a href="api-listpatterntype.html">ListPatternType</a></span></code>
+<ul>
+<li>Type of list to format</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-2"></a><a href="#example-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> items = [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'three'</span>, <span class="hljs-string">'four'</span>, <span class="hljs-string">'five'</span>];
+log(cldr.General.formatList(items.slice(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>), <span class="hljs-string">'and'</span>));
+log(cldr.General.formatList(items, <span class="hljs-string">'or'</span>));
+</code></pre>
+<pre class="output">
+one and two
+one, two, three, four, or five
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="formatlisttoparts"></a><a href="#formatlisttoparts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>formatListToParts</h2>
+<p>Format a list of items, with a given list type, returning an array of parts.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-5"></a><a href="#syntax-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+formatList(items, type?): Part[]
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-1"></a><a href="#parameters-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">items: <span>string[]</span></code>
+<ul>
+<li>Items to join together into a list</li>
+</ul></li>
+<li><code class="def">type?: <span><a href="api-listpatterntype.html">ListPatternType</a></span></code>
+<ul>
+<li>Type of list to format</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-3"></a><a href="#example-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> items = [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'three'</span>, <span class="hljs-string">'four'</span>, <span class="hljs-string">'five'</span>];
+log(cldr.General.formatListToParts(items.slice(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>), <span class="hljs-string">'and'</span>));
+log(cldr.General.formatListToParts(items, <span class="hljs-string">'or'</span>));
+</code></pre>
+<pre class="output">
+[
+  { type: 'item', value: 'one' },
+  { type: 'literal', value: ' and ' },
+  { type: 'item', value: 'two' }
+]
+[
+  { type: 'item', value: 'one' },
+  { type: 'literal', value: ', ' },
+  { type: 'item', value: 'two' },
+  { type: 'literal', value: ', ' },
+  { type: 'item', value: 'three' },
+  { type: 'literal', value: ', ' },
+  { type: 'item', value: 'four' },
+  { type: 'literal', value: ', or ' },
+  { type: 'item', value: 'five' }
+]
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getlanguagedisplayname"></a><a href="#getlanguagedisplayname" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getLanguageDisplayName</h2>
+<p>Return the display name for a given language code.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-6"></a><a href="#syntax-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getLanguageDisplayName(code, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-2"></a><a href="#parameters-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">code: <span>string | <a href="api-languagetag.html">LanguageTag</a></span></code>
+<ul>
+<li>Valid <a href="https://en.wikipedia.org/wiki/ISO_639">ISO 639</a> language identifier, a <a href="api-languagetag.html">LanguageTag</a> instance or parseable string</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-displaynameoptions.html">DisplayNameOptions</a></span></code>
+<ul>
+<li>Options for selecting the display name</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-4"></a><a href="#example-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> ids = [<span class="hljs-string">'fr'</span>, <span class="hljs-string">'ko'</span>, <span class="hljs-string">'en'</span>, <span class="hljs-string">'und-US'</span>, <span class="hljs-string">'en-GB'</span>, <span class="hljs-string">'zh-CN'</span>, <span class="hljs-string">'zh-TW'</span>];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id of ids) {
+    log(en.General.getLanguageDisplayName(id));
+}
+</code></pre>
+<pre class="output">
+French
+Korean
+English
+American English
+British English
+Simplified Chinese
+Traditional Chinese
+</pre>
+<p>You can also pass in a <a href="api-languagetag.html"><code>LanguageTag</code></a> instance.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id of [<span class="hljs-string">'en'</span>, <span class="hljs-string">'und'</span>, <span class="hljs-string">'und-GB'</span>]) {
+  <span class="hljs-keyword">const</span> tag = en.General.parseLanguageTag(id);
+  log(en.General.getLanguageDisplayName(tag));
+}
+</code></pre>
+<pre class="output">
+English
+Unknown language
+British English
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getregiondisplayname"></a><a href="#getregiondisplayname" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getRegionDisplayName</h2>
+<p>Return the name of a given region.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-7"></a><a href="#syntax-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getRegionDisplayName(code, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-3"></a><a href="#parameters-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">code: <span>string | <a href="api-languagetag.html">LanguageTag</a></span></code>
+<ul>
+<li>Valid <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> or <a href="https://en.wikipedia.org/wiki/UN_M.49">UN M.49</a> region identifier, a <a href="api-languagetag.html">LanguageTag</a> instance or parseable string</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-displaynameoptions.html">DisplayNameOptions</a></span></code>
+<ul>
+<li>Options for selecting the display name</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-5"></a><a href="#example-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> fr = framework.get(<span class="hljs-string">'fr'</span>);
+<span class="hljs-keyword">const</span> ids: <span class="hljs-built_in">string</span>[] = [<span class="hljs-string">'US'</span>, <span class="hljs-string">'CA'</span>, <span class="hljs-string">'BE'</span>, <span class="hljs-string">'ZA'</span>, <span class="hljs-string">'ZZ'</span>, <span class="hljs-string">'en-ZZ'</span>];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id of ids) {
+  <span class="hljs-keyword">const</span> a = en.General.getRegionDisplayName(id);
+  <span class="hljs-keyword">const</span> b = fr.General.getRegionDisplayName(id);
+  log(<span class="hljs-string">`en=<span class="hljs-subst">${a}</span> fr=<span class="hljs-subst">${b}</span>`</span>);
+}
+</code></pre>
+<pre class="output">
+en=United States fr=États-Unis
+en=Canada fr=Canada
+en=Belgium fr=Belgique
+en=South Africa fr=Afrique du Sud
+en=Unknown Region fr=région indéterminée
+en=United States fr=États-Unis
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="getscriptdisplayname"></a><a href="#getscriptdisplayname" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getScriptDisplayName</h2>
+<p>Return the name of a given script.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-8"></a><a href="#syntax-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+getScriptDisplayName(code, options?): string
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-4"></a><a href="#parameters-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">code: <span>string | <a href="api-languagetag.html">LanguageTag</a></span></code>
+<ul>
+<li>Valid <a href="https://en.wikipedia.org/wiki/ISO_15924">ISO 15924</a> script identifier, a <a href="api-languagetag.html">LanguageTag</a> instance or parseable string</li>
+</ul></li>
+<li><code class="def">options?: <span><a href="api-displaynameoptions.html">DisplayNameOptions</a></span></code>
+<ul>
+<li>Options for selecting the display name</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-6"></a><a href="#example-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> en = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> de = framework.get(<span class="hljs-string">'de'</span>);
+
+<span class="hljs-keyword">const</span> ids: <span class="hljs-built_in">string</span>[] = [<span class="hljs-string">'Latn'</span>, <span class="hljs-string">'Egyp'</span>, <span class="hljs-string">'Cyrl'</span>, <span class="hljs-string">'Zzzz'</span>, <span class="hljs-string">'en'</span>, <span class="hljs-string">'zh-CN'</span>, <span class="hljs-string">'zh-TW'</span>];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id of ids) {
+  <span class="hljs-keyword">const</span> a = en.General.getScriptDisplayName(id);
+  <span class="hljs-keyword">const</span> b = de.General.getScriptDisplayName(id);
+  log(<span class="hljs-string">`en=<span class="hljs-subst">${a}</span> de=<span class="hljs-subst">${b}</span>`</span>);
+}
+</code></pre>
+<pre class="output">
+en=Latin de=Lateinisch
+en=Egyptian hieroglyphs de=Ägyptische Hieroglyphen
+en=Cyrillic de=Kyrillisch
+en=Unknown Script de=Unbekannte Schrift
+en=Latin de=Lateinisch
+en=Simplified de=Vereinfacht
+en=Traditional de=Traditionell
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="measurementsystem"></a><a href="#measurementsystem" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>measurementSystem</h2>
+<h4><a class="anchor" aria-hidden="true" id="syntax-9"></a><a href="#syntax-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+measurementSystem(category?: MeasurementCategory): MeasurementSystem
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-5"></a><a href="#parameters-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">category?: <span><a href="api-measurementcategory.html">MeasurementCategory</a></span></code>
+<ul>
+<li>Optional category (ex: temperature has special handling for certain regions)</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="return-values-2"></a><a href="#return-values-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Return values</h4>
+<p>A <a href="api-measurementsystem.html">MeasurementSystem</a> value</p>
+<h4><a class="anchor" aria-hidden="true" id="example-7"></a><a href="#example-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'es-PR'</span>);
+log(cldr.General.measurementSystem());
+log(cldr.General.measurementSystem(<span class="hljs-string">'temperature'</span>));
+</code></pre>
+<pre class="output">
+metric
+us
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="messageformatter"></a><a href="#messageformatter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>messageFormatter</h2>
+<p>Returns an extensible message formatter for the current locale. See <a href="api-messageformatter">MessageFormatter</a></p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-10"></a><a href="#syntax-10" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+messageFormatter(options?: MessageFormatterOptions): MessageFormatter
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="example-8"></a><a href="#example-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> formatters = {
+  emphatic: <span class="hljs-function">(<span class="hljs-params">args: MessageArg[], options: <span class="hljs-built_in">string</span>[]</span>) =&gt;</span> args[<span class="hljs-number">0</span>].toUpperCase() + <span class="hljs-string">'!'</span>
+};
+<span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'pt-PT'</span>);
+<span class="hljs-keyword">const</span> formatter = cldr.General.messageFormatter({ formatters });
+log(formatter.format(<span class="hljs-string">'Hi, {thing emphatic}'</span>, [], { thing: <span class="hljs-string">'computer'</span> }));
+</code></pre>
+<pre class="output">
+Hi, COMPUTER!
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="parselanguagetag"></a><a href="#parselanguagetag" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>parseLanguageTag</h2>
+<p>Parses a language tag and canonicalizes its fields, returning a <a href="api-languagetag.html">LanguageTag</a> object.</p>
+<h4><a class="anchor" aria-hidden="true" id="syntax-11"></a><a href="#syntax-11" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+parseLanguageTag(tag: string): LanguageTag
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-6"></a><a href="#parameters-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">tag: <span>string</span></code>
+<ul>
+<li>String to parse into a <a href="api-languagetag.html">LanguageTag</a> object</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-9"></a><a href="#example-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+log(cldr.General.parseLanguageTag(<span class="hljs-string">'fr-AU'</span>).expanded());
+log(cldr.General.parseLanguageTag(<span class="hljs-string">'en'</span>).expanded());
+</code></pre>
+<pre class="output">
+fr-Zzzz-AU
+en-Zzzz-ZZ
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="resolvelocale"></a><a href="#resolvelocale" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>resolveLocale</h2>
+<p>Parses and resolves a locale identifer or language tag into a <a href="api-locale.html">Locale</a> object.</p>
+<p>Resolution involves:</p>
+<ul>
+<li class="list">Replace language and region aliases</li>
+<li class="list">Remap grandfathered tags</li>
+<li class="list">Add likely subtags</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="syntax-12"></a><a href="#syntax-12" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h4>
+<pre class="syntax">
+resolveLocale(tag): Locale
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="parameters-7"></a><a href="#parameters-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h4>
+<ul>
+<li><code class="def">tag: <span>string</span></code>
+<ul>
+<li>String to parse into a <a href="api-locale.html">Locale</a> object</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="example-10"></a><a href="#example-10" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> ids = [
+  <span class="hljs-string">'en_CA'</span>,
+  <span class="hljs-string">'ko'</span>,
+  <span class="hljs-string">'und-Cyrl'</span>,
+  <span class="hljs-string">'fr-u-ca-persian-u-nu-mathmono'</span>,
+  <span class="hljs-string">'und-CN'</span>
+];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id of ids) {
+  <span class="hljs-keyword">const</span> { tag } = cldr.General.resolveLocale(id);
+  log(<span class="hljs-string">`<span class="hljs-subst">${tag.language()}</span>  <span class="hljs-subst">${tag.script()}</span>  <span class="hljs-subst">${tag.region()}</span>`</span>);
+}
+</code></pre>
+<pre class="output">
+en  Latn  CA
+ko  Kore  KR
+ru  Cyrl  RU
+fr  Latn  FR
+zh  Hans  CN
+</pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.5.1/api-cldr-calendars"><span class="arrow-prev">← </span><span>CLDR.Calendars</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.5.1/api-cldr-numbers"><span>CLDR.Numbers</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#bundle">bundle</a></li><li><a href="#characterorder">characterOrder</a></li><li><a href="#lineorder">lineOrder</a></li><li><a href="#locale">locale</a></li><li><a href="#formatlist">formatList</a></li><li><a href="#formatlisttoparts">formatListToParts</a></li><li><a href="#getlanguagedisplayname">getLanguageDisplayName</a></li><li><a href="#getregiondisplayname">getRegionDisplayName</a></li><li><a href="#getscriptdisplayname">getScriptDisplayName</a></li><li><a href="#measurementsystem">measurementSystem</a></li><li><a href="#messageformatter">messageFormatter</a></li><li><a href="#parselanguagetag">parseLanguageTag</a></li><li><a href="#resolvelocale">resolveLocale</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2022 Patrick Hensley</section></footer></div></body></html>
