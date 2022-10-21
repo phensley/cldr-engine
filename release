@@ -6,5 +6,6 @@ if [[ $REG != *"registry.npmjs.org"* ]] ; then
     exit 1
 fi
 
+# use npm automation token to avoid repeated otp prompts and rate limiting
 pnpm publish -r
 
