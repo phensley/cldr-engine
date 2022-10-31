@@ -1,8 +1,9 @@
+import { UnitType } from '@phensley/cldr-types';
 import { FactorDef } from './types';
 
 const PI = '3.14159265358979323846';
 
-const kfactors = (f: string, u: string[]) => {
+const kfactors = (f: string, u: UnitType[]) => {
   const r: FactorDef[] = [];
   for (let i = 1; i < u.length; i++) {
     r.push([u[i - 1], f, u[i]]);
@@ -184,7 +185,7 @@ export const LENGTH: FactorDef[] = [
  * @public
  */
 export const MASS: FactorDef[] = [
-  ['metric-ton', '1000', 'kilogram'],
+  ['tonne', '1000', 'kilogram'],
   ['gram', '1 / 1000', 'kilogram'],
   ['milligram', '1 / 1000', 'gram'],
   ['microgram', '1 / 1000', 'milligram'],

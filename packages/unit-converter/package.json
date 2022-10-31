@@ -38,6 +38,7 @@
   "dependencies": {
     "@phensley/cldr-utils": "~1.6.1",
     "@phensley/decimal": "~1.6.1",
+    "@phensley/cldr-types": "~1.6.1",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
