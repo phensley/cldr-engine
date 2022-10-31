@@ -7,6 +7,7 @@
 import { Decimal } from '@phensley/decimal';
 import { MathContext } from '@phensley/decimal';
 import { Rational } from '@phensley/decimal';
+import { UnitType } from '@phensley/cldr-types';
 
 // @public
 export const ACCELERATION: FactorDef[];
@@ -36,7 +37,7 @@ export const ELECTRIC: FactorDef[];
 export const ENERGY: FactorDef[];
 
 // @public
-export type FactorDef = [string, string | Rational, string];
+export type FactorDef = [UnitType, string | Rational, UnitType];
 
 // @public
 export const FORCE: FactorDef[];
