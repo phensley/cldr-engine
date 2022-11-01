@@ -305,6 +305,23 @@ export interface ExemplarCity {
 /**
  * @public
  */
+export interface MetazoneName {
+  generic: string;
+  standard: string;
+  daylight: string;
+}
+
+/**
+ * @public
+ */
+export interface MetazoneNames {
+  long: MetazoneName;
+  short: MetazoneName;
+}
+
+/**
+ * @public
+ */
 export interface TimeZoneInfo {
   id: string;
   city: ExemplarCity;
@@ -313,4 +330,5 @@ export interface TimeZoneInfo {
   longitude: number;
   stdoffset: number;
   metazone: string;
+  names: MetazoneNames;
 }

@@ -1146,6 +1146,24 @@ export { MessageMatcher }
 export { MessageNamedArgs }
 
 // @public (undocumented)
+export interface MetazoneName {
+    // (undocumented)
+    daylight: string;
+    // (undocumented)
+    generic: string;
+    // (undocumented)
+    standard: string;
+}
+
+// @public (undocumented)
+export interface MetazoneNames {
+    // (undocumented)
+    long: MetazoneName;
+    // (undocumented)
+    short: MetazoneName;
+}
+
+// @public (undocumented)
 export type NumberFormatErrorType = 'nan' | 'infinity';
 
 // @public (undocumented)
@@ -1783,6 +1801,8 @@ export interface TimeZoneInfo {
     longitude: number;
     // (undocumented)
     metazone: string;
+    // (undocumented)
+    names: MetazoneNames;
     // (undocumented)
     stdoffset: number;
 }
