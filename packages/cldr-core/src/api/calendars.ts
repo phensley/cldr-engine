@@ -3,6 +3,7 @@ import {
   ContextType,
   DateFieldType,
   DateTimePatternFieldType,
+  MetaZoneType,
   RelativeTimeFieldType,
 } from '@phensley/cldr-types';
 
@@ -20,6 +21,7 @@ import {
   DateRawFormatOptions,
   DateWrapperFormatOptions,
   EraFieldOptions,
+  MetazoneNames,
   RelativeTimeFieldFormatOptions,
   RelativeTimeFormatOptions,
   TimeZoneInfo,
@@ -52,6 +54,7 @@ import { PrivateApiImpl } from './private';
 import { CalendarContext } from '../internals/calendars/formatter';
 import { NumberParams } from '../common/private';
 import { getStableTimeZoneId, substituteZoneAlias, currentMetazone } from '../systems/calendars/timezone';
+import { TimeZoneTypeIndex } from '../schema';
 
 const DOW_FIELDS: RelativeTimeFieldType[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
@@ -389,13 +392,22 @@ export class CalendarsImpl implements Calendars {
   }
 
   timeZoneInfo(zoneid: string): TimeZoneInfo {
+    const tz = this.internals.schema.TimeZones;
     if (!this.exemplarCities) {
-      this.exemplarCities = this.internals.schema.TimeZones.exemplarCity.mapping(this.bundle);
+      this.exemplarCities = tz.exemplarCity.mapping(this.bundle);
     }
     const id = this.resolveTimeZoneId(zoneid) || 'Factory';
     const stableid = getStableTimeZoneId(id);
     const city = this.exemplarCities[stableid] || this.exemplarCities['Etc/Unknown'];
-    const metazone = currentMetazone(id) || '';
+    const metazone = (currentMetazone(id) || '') as MetaZoneType;
+    const names: MetazoneNames = {
+      long: { generic: '', standard: '', daylight: '' },
+      short: { generic: '', standard: '', daylight: '' },
+    };
+    for (const key of TimeZoneTypeIndex.keys) {
+      names.long[key] = tz.metaZones.long.get(this.bundle, key, metazone);
+      names.short[key] = tz.metaZones.short.get(this.bundle, key, metazone);
+    }
     const { countries, latitude, longitude, stdoffset } = TZ.zoneMeta(id)!; // Factory fallback will return a record
     return {
       id,
@@ -407,6 +419,7 @@ export class CalendarsImpl implements Calendars {
       longitude,
       stdoffset,
       metazone,
+      names,
     };
   }
 

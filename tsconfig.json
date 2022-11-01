@@ -4,6 +4,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["es6", "dom"],
+    "skipLibCheck": true,
     "declaration": true,
     "removeComments": false,
     "sourceMap": true,
