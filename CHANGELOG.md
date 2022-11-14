@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.2.12]
+
+### Fixed/Changed
+
+- Add `Calendars.timeData` method to fetch preferred and allowed time cycles.
+
+## [1.2.11]
+
+### Fixed/Changed
+
+- Add long/short timezone names to timeZoneInfo results.
+
+## [1.2.10]
+
+### Fixed/Changed
+
+- Build improvements.
+
+## [1.2.9]
+
+### Fixed/Changed
+
+- Fix parsing of extended language subtag.
+- Ping all dependencies to same minor version.
+
+## [1.2.8]
+
+### Fixed/Changed
+
+- Inline Typescript code in source maps.
+
 ## [1.2.7]
 
 ### Fixed/Changed
@@ -827,6 +858,11 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[1.2.12]: https://github.com/phensley/cldr-engine/compare/v1.2.11...v1.2.12
+[1.2.11]: https://github.com/phensley/cldr-engine/compare/v1.2.10...v1.2.11
+[1.2.10]: https://github.com/phensley/cldr-engine/compare/v1.2.9...v1.2.10
+[1.2.9]: https://github.com/phensley/cldr-engine/compare/v1.2.8...v1.2.9
+[1.2.8]: https://github.com/phensley/cldr-engine/compare/v1.2.7...v1.2.8
 [1.2.7]: https://github.com/phensley/cldr-engine/compare/v1.2.6...v1.2.7
 [1.2.6]: https://github.com/phensley/cldr-engine/compare/v1.2.5...v1.2.6
 [1.2.5]: https://github.com/phensley/cldr-engine/compare/v1.2.4...v1.2.5
