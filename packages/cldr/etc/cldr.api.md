@@ -95,6 +95,7 @@ import { RelativeTimeFormatOptions } from '@phensley/cldr-core';
 import { RoundingModeType } from '@phensley/cldr-core';
 import { SchemaConfig } from '@phensley/cldr-core';
 import { ScriptIdType } from '@phensley/cldr-core';
+import { TimeData } from '@phensley/cldr-core';
 import { TimePeriod } from '@phensley/cldr-core';
 import { TimePeriodField } from '@phensley/cldr-core';
 import { TimeZoneInfo } from '@phensley/cldr-core';
@@ -287,6 +288,8 @@ export { RoundingModeType }
 export { SchemaConfig }
 
 export { ScriptIdType }
+
+export { TimeData }
 
 export { TimePeriod }
 

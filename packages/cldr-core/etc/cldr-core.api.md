@@ -378,6 +378,7 @@ export interface Calendars {
     newPersianDate(fields: Partial<CalendarDateFields>): PersianDate;
     quarters(options?: CalendarFieldsOptions): any;
     resolveTimeZoneId(zoneid: string): string | undefined;
+    timeData(): TimeData;
     timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
     timeZoneFromUTC(utc: number, zoneid: string): ZoneInfo | undefined;
     timeZoneFromWall(wall: number, zoneid: string): [number, ZoneInfo] | undefined;
@@ -441,6 +442,8 @@ export class CalendarsImpl implements Calendars {
     quarters(opt?: CalendarFieldsOptions): any;
     // (undocumented)
     resolveTimeZoneId(zoneid: string): string | undefined;
+    // (undocumented)
+    timeData(): TimeData;
     // (undocumented)
     timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
     // (undocumented)
@@ -1736,6 +1739,12 @@ export const TIME_FLAGS: number;
 //
 // @internal (undocumented)
 export const TIME_PERIOD_FIELDS: TimePeriodField[];
+
+// @public (undocumented)
+export interface TimeData {
+    allowed: string[];
+    preferred: string;
+}
 
 // @public (undocumented)
 export interface TimePeriod {
