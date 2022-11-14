@@ -280,6 +280,21 @@ export interface DateWrapperFormatOptions {
 /**
  * @public
  */
+export interface TimeData {
+  /**
+   * Preferred time cycle for the region.
+   */
+  preferred: string;
+
+  /**
+   * Allowed / acceptible time cycles for the region.
+   */
+  allowed: string[];
+}
+
+/**
+ * @public
+ */
 export interface ExemplarCity {
   name: string;
 }

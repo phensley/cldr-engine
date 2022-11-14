@@ -24,6 +24,7 @@ import {
   MetazoneNames,
   RelativeTimeFieldFormatOptions,
   RelativeTimeFormatOptions,
+  TimeData,
   TimeZoneInfo,
   ZonedDateTime,
 } from '../common';
@@ -381,6 +382,15 @@ export class CalendarsImpl implements Calendars {
 
   formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[] {
     return this._formatDateWrapper(new PartsValue(), date, time, options || {});
+  }
+
+  timeData(type?: CalendarType): TimeData {
+    const patterns = this._getPatterns(type);
+    const [allowed, preferred] = patterns.getTimeData();
+    return {
+      preferred,
+      allowed: allowed.split(' '),
+    };
   }
 
   timeZoneIds(): string[] {

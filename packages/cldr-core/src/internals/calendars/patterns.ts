@@ -185,7 +185,7 @@ export class CalendarPatterns {
     }
   }
 
-  private getTimeData(): [string, string] {
+  getTimeData(): [string, string] {
     const w = timeData['']['001'];
     const t = timeData[''][this.region] || (timeData[this.language] || /* istanbul ignore next */ {})[this.region];
     return timeStrings[t !== undefined ? t : w].split('|') as [string, string];

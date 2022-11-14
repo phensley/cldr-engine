@@ -33,6 +33,7 @@ import {
   Quantity,
   RelativeTimeFieldFormatOptions,
   RelativeTimeFormatOptions,
+  TimeData,
   TimeZoneInfo,
   UnitFormatOptions,
   UnitLength,
@@ -234,6 +235,11 @@ export interface Calendars {
    * used when you need to format a date and time string separately and join them together.
    */
   formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[];
+
+  /**
+   * Return information about the locale's preferred and allowed time cycles.
+   */
+  timeData(): TimeData;
 
   /**
    * Return an array containing the official TZDB timezone identifiers.

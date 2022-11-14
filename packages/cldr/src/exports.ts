@@ -91,6 +91,7 @@ export {
   RoundingModeType,
   SchemaConfig,
   ScriptIdType,
+  TimeData,
   TimePeriod,
   TimePeriodField,
   TimeZoneInfo,
