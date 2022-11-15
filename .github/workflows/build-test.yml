@@ -32,14 +32,15 @@ jobs:
           pnpm run clean
           pnpm run lint
           pnpm run api
+          pnpm run test
 
-      - name: Test
-        run: pnpm run test:codecov
+      # coverage upload stopped working randomly
+      # - name: Test
+      #   run: pnpm run test:codecov
 
-      - uses: codecov/codecov-action@v3
-        if: matrix.node-version == '16.x'
-        with:
-          files: ./coverage/lcov.info
-          name: codecov-umbrella
-          fail_ci_if_error: true
-
+      # - uses: codecov/codecov-action@v3
+      #   if: matrix.node-version == '16.x'
+      #   with:
+      #     files: ./coverage/lcov.info
+      #     name: codecov-umbrella
+      #     fail_ci_if_error: true
