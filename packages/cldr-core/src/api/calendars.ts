@@ -384,8 +384,8 @@ export class CalendarsImpl implements Calendars {
     return this._formatDateWrapper(new PartsValue(), date, time, options || {});
   }
 
-  timeData(type?: CalendarType): TimeData {
-    const patterns = this._getPatterns(type);
+  timeData(): TimeData {
+    const patterns = this._getPatterns('gregory');
     const [allowed, preferred] = patterns.getTimeData();
     return {
       preferred,
