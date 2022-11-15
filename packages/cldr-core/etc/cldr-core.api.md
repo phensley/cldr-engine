@@ -376,7 +376,7 @@ export class CalendarsImpl implements Calendars {
     // (undocumented)
     resolveTimeZoneId(zoneid: string): string | undefined;
     // (undocumented)
-    timeData(type?: CalendarType): TimeData;
+    timeData(): TimeData;
     // (undocumented)
     timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
     // (undocumented)
