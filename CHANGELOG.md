@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.6.5]
+
+## Fixed/Changed
+
+- Upgrade to [tzdb 2022g](https://www.iana.org/time-zones)
+
 ## [1.6.4]
 
 ## Fixed/Changed
@@ -917,6 +923,7 @@ Split locale-related code into 3 new packages which can be used independently of
 
 - Converted `CLDR` to an interface
 
+[1.6.5]: https://github.com/phensley/cldr-engine/compare/v1.6.4...v1.6.5
 [1.6.4]: https://github.com/phensley/cldr-engine/compare/v1.6.3...v1.6.4
 [1.6.3]: https://github.com/phensley/cldr-engine/compare/v1.6.2...v1.6.3
 [1.6.2]: https://github.com/phensley/cldr-engine/compare/v1.6.1...v1.6.2

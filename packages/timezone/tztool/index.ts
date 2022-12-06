@@ -8,7 +8,7 @@ import { parseZIC } from './zic';
 import { encodeZones } from './encode';
 import { parseZoneTab } from './zonetab';
 
-const VERSION = '2022e';
+const VERSION = '2022g';
 
 interface JsonOptions {
   pretty: boolean;
