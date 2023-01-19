@@ -25,7 +25,7 @@
     "build:lint": "tsc -p ./tsconfig.lint.json",
     "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
     "clean": "rimraf ./lib ./lib-es ./.scratch",
-    "clean:full": "pnpm run clean && rimraf ./node_modules",
+    "clean:full": "pnpm run clean && rimraf ./node_modules ./.tztemp",
     "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
     "generate": "./bin/tztool generate -o ./src/autogen.zonedata.ts",
     "lint": "eslint -c .eslintrc.js --ext .ts src __benchmarks__ __tests__",
