@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as filepath from 'path';
 import * as rimraf from 'rimraf';
 import * as subproc from 'child_process';
+import { platform } from 'node:process';
 
 const REPO = 'https://github.com/eggert/tz.git';
 const TIMEOUT = 30000;
@@ -33,7 +34,10 @@ export const setupTZDB = (tag: string): string => {
     }
   }
 
-  const exec = (cmd: string, cwd: string) => subproc.execSync(cmd, { cwd, timeout: TIMEOUT });
+  const exec = (cmd: string, cwd: string) => {
+    const env = platform === 'darwin' ? { 'LFLAGS': '-lintl' } : {};
+    return subproc.execSync(cmd, { cwd, env, timeout: TIMEOUT });
+  };
 
   const tagset = () => set(lines(exec(`git tag`, repo).toString('utf-8')));
 
