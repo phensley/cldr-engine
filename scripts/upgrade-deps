@@ -12,12 +12,10 @@
 # frequently
 
 PIN="
-@microsoft/api-extractor
+#@microsoft/api-extractor
 @types/node-fetch
-@types/yargs
-chalk
 node-fetch
-yargs
+chalk
 "
 
 join() {

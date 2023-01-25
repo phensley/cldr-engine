@@ -1,4 +1,4 @@
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import { runDump } from './dump';
 import { runPack } from './pack';
 import { runSchema } from './schema';
@@ -9,7 +9,8 @@ import { getProjectInfo } from './util';
  */
 export const main = () => {
   const pkg = getProjectInfo();
-  yargs
+
+  yargs(process.argv.slice(2))
     .command(
       'pack',
       'Compile resource packs',

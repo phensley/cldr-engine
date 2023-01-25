@@ -64,7 +64,7 @@ export interface PackArgs {
 /**
  * Generates static data that will be impored into the runtime.
  */
-export const runPack = (argv: yargs.Arguments<PackArgs>) => {
+export const runPack = (argv: yargs.ArgumentsCamelCase<PackArgs>) => {
   const pkg = getProjectInfo();
 
   // Ensure downloads happen before building

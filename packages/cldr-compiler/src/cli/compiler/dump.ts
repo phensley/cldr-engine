@@ -94,7 +94,7 @@ interface DumpArgs {
   config?: string;
 }
 
-export const runDump = (argv: yargs.Arguments<DumpArgs>) => {
+export const runDump = (argv: yargs.ArgumentsCamelCase<DumpArgs>) => {
   let raw: string;
   let config: any = CONFIG;
 

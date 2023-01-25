@@ -16,7 +16,7 @@ export interface SchemaArgs {
  * Traverse all relevant CLDR JSON files and merge them, converting the leaf
  * values into counts. The count indicates the number of locales having that key.
  */
-export const runSchema = (args: yargs.Arguments<SchemaArgs>) => {
+export const runSchema = (args: yargs.ArgumentsCamelCase<SchemaArgs>) => {
   const localeMap = buildLocaleMap();
   let langs = Object.keys(localeMap).sort();
   if (args.lang) {
