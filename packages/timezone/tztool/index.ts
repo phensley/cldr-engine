@@ -14,7 +14,7 @@ interface JsonOptions {
   pretty: boolean;
 }
 
-const runDumpJson = (argv: yargs.Arguments<JsonOptions & { file: string }>) => {
+const runDumpJson = (argv: yargs.ArgumentsCamelCase<JsonOptions & { file: string }>) => {
   const { file, pretty } = argv;
   const info = new TZif('None', file);
   console.log(info.json(pretty ? '  ' : undefined));
@@ -28,7 +28,7 @@ interface GenerateOptions {
 /**
  * Parse all zones and generate code.
  */
-const runGenerate = (argv: yargs.Arguments<GenerateOptions>) => {
+const runGenerate = (argv: yargs.ArgumentsCamelCase<GenerateOptions>) => {
   const { tag } = argv;
   const repo = setupTZDB(tag || VERSION);
 
@@ -55,7 +55,7 @@ interface ZdumpOptions {
 /**
  * Run our zdump equivalent.
  */
-const runZdump = (argv: yargs.Arguments<ZdumpOptions & { file: string }>) => {
+const runZdump = (argv: yargs.ArgumentsCamelCase<ZdumpOptions & { file: string }>) => {
   const { file, timestamps, years } = argv;
   const info = new TZif('None', file);
   const range = parseYears(years);
