@@ -4,7 +4,11 @@ const MAGIC = 'TZif';
 const VERSIONS = [2, 3];
 const HISCALE = 0x100000000;
 
-export const utcs = (n: number, tz: string = 'UT') => new Date(n).toUTCString().replace('GMT', tz);
+export const utcs = (n: number, tz: string = 'UT') =>
+  new Date(n)
+    .toISOString()
+    .replace('Z', ' ' + tz)
+    .replace('T', ' ');
 
 export interface LocaltimeType {
   utoff: number;
@@ -261,9 +265,9 @@ export class TZif {
       // transition time. Type 0 is used before the
       // first transition time occurs.
       let j = i === 0 ? 0 : this.transtypes[i - 1];
-      r += this._zdump(timestamps, secs - 1, this.localtimetype[j]);
+      r += this._zdump(timestamps, ms - 1, this.localtimetype[j]);
       j = this.transtypes[i];
-      r += this._zdump(timestamps, secs, this.localtimetype[j]);
+      r += this._zdump(timestamps, ms, this.localtimetype[j]);
     }
     return r;
   }
@@ -281,8 +285,7 @@ export class TZif {
   /**
    * Produces a zdump string for a single transition.
    */
-  private _zdump(timestamps: boolean, secs: number, typ: LocaltimeType): string {
-    const ms = secs * 1000;
+  private _zdump(timestamps: boolean, ms: number, typ: LocaltimeType): string {
     const utc = utcs(ms);
     const { utoff, dst, idx } = typ;
     const ind = this.zoneabbr(idx);
