@@ -86,6 +86,7 @@ export class MessageFormatter {
 export interface MessageFormatterOptions {
     cacheSize?: number;
     converter?: MessageArgConverter;
+    disableEscapes?: boolean;
     formatters?: MessageFormatFuncMap;
     language?: string;
     plurals?: PluralRules;
@@ -192,7 +193,7 @@ export interface MessageTextCode {
 }
 
 // @public
-export const parseMessagePattern: (raw: string, matcher: MessageMatcher) => MessageCode;
+export const parseMessagePattern: (raw: string, matcher: MessageMatcher, disableEscapes?: boolean) => MessageCode;
 
 // @public
 export interface PluralCategoryChoice {
