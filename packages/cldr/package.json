@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "description": "Internationalization in Typescript with Unicode CLDR, batteries included",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -60,14 +60,14 @@
     "scripts/"
   ],
   "dependencies": {
-    "@phensley/cldr-core": "~1.2.14",
-    "@phensley/cldr-utils": "~1.2.14",
-    "@phensley/messageformat": "~1.2.14",
+    "@phensley/cldr-core": "~1.2.15",
+    "@phensley/cldr-utils": "~1.2.15",
+    "@phensley/messageformat": "~1.2.15",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.8.0",
-    "@phensley/cldr-compiler": "~1.2.14",
+    "@phensley/cldr-compiler": "~1.2.15",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-json": "^4.0.3",
     "@rollup/plugin-node-resolve": "^7.1.3",
