@@ -43,6 +43,11 @@ export interface MessageFormatterOptions {
    * Number of parsed messages to cache internally.
    */
   cacheSize?: number;
+
+  /**
+   * Disables the escaping of text between matching apostrophes.
+   */
+  disableEscapes?: boolean;
 }
 
 /**
@@ -63,7 +68,7 @@ export class MessageFormatter {
     this.plurals = options.plurals || pluralRules.get(options.language || 'root', options.region);
     const size = options.cacheSize || DEFAULT_CACHE_SIZE;
     this.matcher = buildMessageMatcher(Object.keys(this.formatters));
-    this.cache = new Cache<MessageCode>((s) => parseMessagePattern(s, this.matcher), size);
+    this.cache = new Cache<MessageCode>((s) => parseMessagePattern(s, this.matcher, options.disableEscapes), size);
   }
 
   /**
