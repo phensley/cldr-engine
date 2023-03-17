@@ -27,7 +27,7 @@
     "clean": "rimraf ./lib ./lib-es ./.scratch",
     "clean:full": "yarn clean && rimraf ./node_modules",
     "coverage": "jest --coverage --runInBand --no-cache --coverageReporters=html",
-    "lint": "eslint -c .eslintrc.js --ext .ts src __benchmarks__ __tests__",
+    "lint": "eslint -c .eslintrc.js --ext .ts src __tests__",
     "prepublish": "yarn build",
     "test:watch": "jest --watch --coverage --coverageReporters=html"
   },
