@@ -34,7 +34,7 @@ export class TzImpl {
     utcZone(): ZoneInfo;
     zoneIds(): string[];
     zoneMeta(id: string): ZoneMeta | undefined;
-    }
+}
 
 // @public
 export interface ZoneInfo {
@@ -52,7 +52,6 @@ export interface ZoneMeta {
     stdoffset: number;
     zoneid: string;
 }
-
 
 // (No @packageDocumentation comment for this package)
 

@@ -4,12 +4,13 @@
 
 ```ts
 
+import { LanguageTag } from '@phensley/language-tag';
+
 // @public
 export class LanguageResolver {
     static addLikelySubtags(real: string | LanguageTag): LanguageTag;
     static removeLikelySubtags(real: string | LanguageTag): LanguageTag;
     static resolve(real: string | LanguageTag): LanguageTag;
-    // Warning: (ae-forgotten-export) The symbol "LanguageTag" needs to be exported by the entry point index.d.ts
     static substituteAliases(real: string | LanguageTag): LanguageTag;
 }
 
