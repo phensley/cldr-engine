@@ -1327,6 +1327,7 @@ export class MessageFormatter {
 export interface MessageFormatterOptions {
     cacheSize?: number;
     converter?: MessageArgConverter;
+    disableEscapes?: boolean;
     formatters?: MessageFormatFuncMap;
     language?: string;
     plurals?: PluralRules;
@@ -1718,7 +1719,7 @@ export class PackScript {
 export const parseLanguageTag: (str: string) => LanguageTag;
 
 // @public
-export const parseMessagePattern: (raw: string, matcher: MessageMatcher) => MessageCode;
+export const parseMessagePattern: (raw: string, matcher: MessageMatcher, disableEscapes?: boolean) => MessageCode;
 
 // @public
 export interface Part {
