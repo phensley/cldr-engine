@@ -12,7 +12,7 @@ const NAMES = ['decimal', 'number'];
 
 const matcher = () => new StickyMatcher(NAMES, stickyRegexp);
 
-const parse = (s: string) => parseMessagePattern(s, matcher());
+const parse = (s: string, disableEscapes?: boolean) => parseMessagePattern(s, matcher(), disableEscapes);
 
 test('basic', () => {
   let c: MessageCode;
@@ -239,6 +239,22 @@ test('hidden', () => {
         ],
       ],
       [MessageOpType.TEXT, ' #'],
+    ],
+  ]);
+});
+
+test('apostrophes', () => {
+  let c: MessageCode;
+
+  c = parse("{0} '{1}' {2}", true);
+  expect(c).toEqual([
+    MessageOpType.BLOCK,
+    [
+      [MessageOpType.ARG, 0],
+      [MessageOpType.TEXT, " '"],
+      [MessageOpType.ARG, 1],
+      [MessageOpType.TEXT, "' "],
+      [MessageOpType.ARG, 2],
     ],
   ]);
 });

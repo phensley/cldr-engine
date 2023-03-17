@@ -24,8 +24,8 @@ const enum Chars {
  *
  * @public
  */
-export const parseMessagePattern = (raw: string, matcher: MessageMatcher): MessageCode =>
-  new MessagePatternParser(raw, matcher).parse();
+export const parseMessagePattern = (raw: string, matcher: MessageMatcher, disableEscapes?: boolean): MessageCode =>
+  new MessagePatternParser(raw, matcher, disableEscapes).parse();
 
 /**
  * Hand-implemented parser for ICU message format. Designed to be compact and
@@ -54,7 +54,7 @@ export const parseMessagePattern = (raw: string, matcher: MessageMatcher): Messa
  *   https://unpkg.com/messageformat-parser/parser.js
  */
 class MessagePatternParser {
-  constructor(private raw: string, private matcher: MessageMatcher) {}
+  constructor(private raw: string, private matcher: MessageMatcher, private disableEscapes?: boolean) {}
 
   parse(): MessageCode {
     const t = this.raw;
@@ -115,25 +115,29 @@ class MessagePatternParser {
         }
 
         case Chars.APOS: {
-          if (c === str[r.s + 1]) {
-            // Convert double apostrophe to single
+          if (this.disableEscapes) {
             buf += c;
-            r.s++;
           } else {
-            // Skip over apostrophe
-            r.s++;
+            if (c === str[r.s + 1]) {
+              // Convert double apostrophe to single
+              buf += c;
+              r.s++;
+            } else {
+              // Skip over apostrophe
+              r.s++;
 
-            // Capture string wrapped in apostrophes
-            let k = str.indexOf(c, r.s);
-            if (k === -1) {
-              k = r.e;
+              // Capture string wrapped in apostrophes
+              let k = str.indexOf(c, r.s);
+              if (k === -1) {
+                k = r.e;
+              }
+
+              // Since this is escaped text, push text node without substituting '#'
+              buf += str.substring(r.s, k);
+
+              // Skip over escaped text
+              r.s = k;
             }
-
-            // Since this is escaped text, push text node without substituting '#'
-            buf += str.substring(r.s, k);
-
-            // Skip over escaped text
-            r.s = k;
           }
           break;
         }
