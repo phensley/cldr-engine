@@ -63,7 +63,7 @@
     "@phensley/cldr-core": "~1.2.13",
     "@phensley/cldr-utils": "~1.2.13",
     "@phensley/messageformat": "~1.2.13",
-    "tslib": "^1.13.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.8.0",
@@ -71,7 +71,7 @@
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-json": "^4.0.3",
     "@rollup/plugin-node-resolve": "^7.1.3",
-    "@types/jest": "^25.2.1",
+    "@types/jest": "25.2.1",
     "@types/node": "^14.0.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
@@ -82,7 +82,7 @@
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "jest": "^26.0.1",
+    "jest": "25.5.4",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.10.0",
@@ -92,9 +92,9 @@
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-typescript2": "^0.27.1",
     "source-map-explorer": "^2.4.2",
-    "ts-jest": "^25.5.1",
+    "ts-jest": "25.5.1",
     "ts-node": "^8.10.1",
-    "typescript": "~3.8.3",
+    "typescript": "4.9.4",
     "uglify-es": "^3.3.9"
   },
   "jest": {
