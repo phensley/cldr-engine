@@ -62,7 +62,7 @@ const WARNED: { [x: string]: boolean } = {};
  * @public
  */
 export class OriginImpl implements Origin {
-  readonly type: 'origin' = 'origin';
+  readonly type: 'origin' = 'origin' as const;
 
   constructor(readonly block: Scope[], readonly indices: { [x: string]: KeyIndex<string> }) {}
 
