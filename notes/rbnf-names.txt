@@ -175,16 +175,6 @@ de:
    spellout-ordinal-r
    spellout-ordinal-s
 
-dsb:
-   digits-ordinal
-   spellout-cardinal
-   spellout-cardinal-verbose
-   spellout-numbering
-   spellout-numbering-verbose
-   spellout-numbering-year
-   spellout-ordinal
-   spellout-ordinal-verbose
-
 ee:
    digits-ordinal
    spellout-cardinal
@@ -426,16 +416,6 @@ hr:
    spellout-ordinal-feminine
    spellout-ordinal-masculine
    spellout-ordinal-neuter
-
-hsb:
-   digits-ordinal
-   spellout-cardinal
-   spellout-cardinal-verbose
-   spellout-numbering
-   spellout-numbering-verbose
-   spellout-numbering-year
-   spellout-ordinal
-   spellout-ordinal-verbose
 
 hu:
    digits-ordinal
@@ -1012,16 +992,6 @@ th:
    spellout-ordinal
 
 tk:
-   digits-ordinal
-   spellout-cardinal
-   spellout-cardinal-verbose
-   spellout-numbering
-   spellout-numbering-verbose
-   spellout-numbering-year
-   spellout-ordinal
-   spellout-ordinal-verbose
-
-to:
    digits-ordinal
    spellout-cardinal
    spellout-cardinal-verbose

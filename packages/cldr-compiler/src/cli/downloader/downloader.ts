@@ -29,7 +29,12 @@ const ARCHIVES = [
 ];
 
 const IGNORE = new Set<string>(['bower.json', 'package.json', 'LICENSE', 'README.md']);
-const SUPPLEMENTAL = new Set(['availableLocales.json', 'defaultContent.json', 'scriptMetadata.json']);
+const SUPPLEMENTAL = new Set([
+  'availableLocales.json',
+  'coverageLevels.json',
+  'defaultContent.json',
+  'scriptMetadata.json'
+]);
 
 type State = { [archive: string]: string };
 

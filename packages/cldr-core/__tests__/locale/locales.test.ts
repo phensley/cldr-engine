@@ -3,6 +3,7 @@ import { availableLocales, LanguageResolver, LanguageTag, Locale } from '../../s
 test('available locales', () => {
   let locales = availableLocales();
   let tag: LanguageTag;
+
   for (const id of ['en', 'zh', 'ko', 'fr', 'ar', 'en-GB', 'de', 'es-419']) {
     tag = LanguageResolver.resolve(id);
     const locale: Locale = { id, tag };

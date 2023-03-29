@@ -85,6 +85,10 @@ export class VectorArrowImpl {
     }
   }
 
+  valid(...keys: (string | string[])[]): boolean {
+    return this._index(keys, 0, this.offset) !== -1;
+  }
+
   exists(bundle: PrimitiveBundle): boolean {
     return bundle.get(this.offset - 1) === 'E';
   }
@@ -102,6 +106,31 @@ export class VectorArrowImpl {
 
   mapping(bundle: PrimitiveBundle): any {
     return this.exists(bundle) ? this._mapping(bundle, 0, 0) : {};
+  }
+
+  private _index(keys: (string | string[])[], ix: number, k: number): number {
+    const key = keys[ix];
+    const args = typeof key === 'string' ? [key] : key;
+    const last = args.length - 1;
+    for (let i = 0; i < args.length; i++) {
+      const arg = args[i];
+      const j = this.keysets[ix].get(arg);
+      if (j === -1) {
+        if (i !== last) {
+          continue;
+        }
+        return -1;
+      }
+      const kk = k + j * this.factors[ix];
+      if (ix === this.last) {
+        return kk;
+      }
+      const result = this._index(keys, ix + 1, kk);
+      if (result !== -1) {
+        return result;
+      }
+    }
+    return -1;
   }
 
   private _get(bundle: PrimitiveBundle, keys: (string | string[])[], ix: number, k: number): string {

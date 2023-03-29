@@ -1,4 +1,5 @@
 import {
+  AltType,
   CurrenciesSchema,
   CurrencyType,
   DigitsArrow,
@@ -67,8 +68,12 @@ export class NumberInternalsImpl implements NumberInternals {
   }
 
   getCurrencySymbol(bundle: Bundle, code: CurrencyType, width?: CurrencySymbolWidthType): string {
-    const alt = width === 'narrow' ? 'narrow' : 'none';
-    return this.currencies.symbol.get(bundle, alt, code) || this.currencies.symbol.get(bundle, 'none', code);
+    return this._getCurrencySymbol(bundle, code, width === 'narrow' ? 'narrow' : 'none');
+  }
+
+  private _getCurrencySymbol(bundle: Bundle, code: CurrencyType, alt: AltType): string {
+    const sym = this.currencies.symbol;
+    return sym.get(bundle, [alt, 'none'], code) || (sym.valid('none', code) ? code : '');
   }
 
   getCurrencyDisplayName(bundle: Bundle, code: CurrencyType): string {
@@ -293,7 +298,7 @@ export class NumberInternalsImpl implements NumberInternals {
         const patternImpl = currencyFormats.short;
 
         const ctx = new NumberContext(options, round, true, false, fractions.digits);
-        const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
+        const symbol = this._getCurrencySymbol(bundle, code as CurrencyType, width);
 
         // Adjust the number using the compact pattern and divisor.
         let q2: Decimal;
@@ -339,7 +344,7 @@ export class NumberInternalsImpl implements NumberInternals {
 
         // Re-select pattern as number may have changed sign due to rounding.
         pattern = this.getNumberPattern(raw, n.isNegative());
-        const symbol = this.currencies.symbol.get(bundle, width, code as CurrencyType);
+        const symbol = this._getCurrencySymbol(bundle, code as CurrencyType, width);
         return renderer.render(n, pattern, symbol, '', decimal, ctx.minInt, options.group);
       }
     }

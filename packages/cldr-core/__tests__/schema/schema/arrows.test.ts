@@ -213,3 +213,19 @@ test('missing 2d arrow', () => {
     foo2: {},
   });
 });
+
+test('valid 2d arrow', () => {
+  const i1 = new KeyIndexImpl<Foo>(FOO);
+  const i2 = new KeyIndexImpl<Bar>(BAR);
+  const a = new VectorArrowImpl(0, [i1, i2]);
+  expect(a.valid('foo1', 'bar1')).toEqual(true);
+  expect(a.valid('quux' as Foo, 'bar1')).toEqual(false);
+  expect(a.valid('foo1', 'quux' as Bar)).toEqual(false);
+  expect(a.valid('quux' as Foo, 'quux' as Bar)).toEqual(false);
+
+  // Fallbacks
+  expect(a.valid(['quux', 'foo1'], ['quux', 'bar1'])).toEqual(true);
+  expect(a.valid(['quux', 'quux'], ['bar1'])).toEqual(false);
+  expect(a.valid(['foo1'], ['quux', 'quux'])).toEqual(false);
+  expect(a.valid(['quux', 'quux'], ['quux', 'quux'])).toEqual(false);
+});
