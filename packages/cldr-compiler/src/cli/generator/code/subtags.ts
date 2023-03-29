@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { join } from 'path';
 import * as zlib from 'zlib';
-import { getSupplemental } from '../../../cldr';
+import { availableLocales, getSupplemental } from '../../../cldr';
 import { objectToString, Code, HEADER, NOLINT_MAXLINE } from './util';
 import { parseLanguageTag, LanguageTag } from '@phensley/cldr-core';
 import { inspect } from 'util';
@@ -93,15 +93,23 @@ const putMap = (map: any, key: string | number) => {
   return val;
 };
 
-const buildSubtags = (likely: any) => {
+const buildSubtags = (likely: any, languages: Set<string>) => {
   likely = filterSubtags(likely);
   const index: any = {};
   const scripts: string[] = [];
   Object.keys(likely)
     .sort()
     .forEach((k) => {
+      const dst = parseLanguageTag(likely[k]);
+      // Skip all subtag patterns for unsupported languages. This prunes down
+      // the mapping size.
+      if (dst.hasLanguage() && !languages.has(dst.language())) {
+        console.log(`skipping ${likely[k]}`);
+        return;
+      }
+
       const key = fastTag(parseLanguageTag(k));
-      const val = fastTag(parseLanguageTag(likely[k]));
+      const val = fastTag(dst);
 
       const map = putMap(putMap(index, key[Tag.LANGUAGE]), key[Tag.SCRIPT]);
       const script = val[Tag.SCRIPT];
@@ -158,8 +166,21 @@ const encode = (o: any): string => {
   return '';
 };
 
-export const getSubtags = (_data: any): Code[] => {
-  const result: Code[] = [];
+export const getSubtags = (data: any): Code[] => {
+  const languages = new Set<string>();
+
+  // Get list of supported languages and scripts
+  for (const id of availableLocales()) {
+    const tag = parseLanguageTag(id);
+    if (tag.hasLanguage()) {
+      languages.add(tag.language());
+    }
+  }
+
+  for (const rule of data.matchRules) {
+    languages.add(rule[0]);
+    languages.add(rule[1]);
+  }
 
   const supplemental = getSupplemental();
   const ianaSubtags = getIanaSubtags();
@@ -175,7 +196,9 @@ export const getSubtags = (_data: any): Code[] => {
   );
 
   pruneRegion(supplemental.LikelySubtags);
-  const likely = buildSubtags(supplemental.LikelySubtags);
+  const likely = buildSubtags(supplemental.LikelySubtags, languages);
+
+  const result: Code[] = [];
 
   let code = HEADER + NOLINT_MAXLINE;
   code += `export const grandfatheredRaw = '${grandfathered}';\n`;

@@ -65,7 +65,12 @@ export class RBNFPacker {
 
       const name = id === 'root' ? 'Global' : lang;
       r += `${name}:\n`;
-      const raw = this.collector.locales.get(id)!;
+      const raw = this.collector.locales.get(id);
+      if (!raw) {
+        console.log(`rbnf ${id} skipping`);
+        continue;
+      }
+
       const names: string[] = [];
 
       // Only show numbering systems at the root level

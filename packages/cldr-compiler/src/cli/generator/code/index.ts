@@ -59,7 +59,7 @@ const DATA_FILES = [
   'weekdata',
 ];
 
-const load = (): any => {
+export const load = (): any => {
   const root = join(__dirname, '..', '..', '..', '..', 'temp');
   const data: any = {};
   DATA_FILES.forEach((name) => {

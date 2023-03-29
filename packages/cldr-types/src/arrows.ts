@@ -72,6 +72,11 @@ export interface Vector1Arrow<T extends string> {
   exists(bundle: PrimitiveBundle): boolean;
 
   /**
+   * Fast way to check if a key is valid, even if it has no value.
+   */
+  valid(key: T): boolean;
+
+  /**
    * Gets the field at the corresponding offset of the given key.
    */
   get(bundle: PrimitiveBundle, key: T | T[]): string;
@@ -92,6 +97,11 @@ export interface Vector2Arrow<T extends string, S extends string> {
    * Indicates this vector exists in the bundle.
    */
   exists(bundle: PrimitiveBundle): boolean;
+
+  /**
+   * Fast way to check if a key is valid, even if it has no value.
+   */
+  valid(key1: T | T[], key2: S | S[]): boolean;
 
   /**
    * Gets the field at the corresponding offset [key1, key2]

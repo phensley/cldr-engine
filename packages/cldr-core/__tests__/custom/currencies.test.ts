@@ -11,8 +11,8 @@ test('custom currencies', () => {
   s = api.formatCurrency('1234.56789', 'JPY');
   expect(s).toEqual('¥1,235');
 
-  // no way of knowing the currency symbol to use.
-  // TODO: should probably fall back to 'code' style
+  // No way of knowing the currency symbol to use. CLDR now defaults
+  // to using the code when the symbol is undefined.
   s = api.formatCurrency('1234.56789', 'GBP');
   expect(s).toEqual(' 1,234.57');
 });

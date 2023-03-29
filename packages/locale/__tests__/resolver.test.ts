@@ -10,7 +10,8 @@ test('resolve', () => {
   expect(resolve('iw')).toEqual(parse('he-Hebr-IL'));
 
   // Language aliasees.
-  expect(resolve('tah')).toEqual(parse('ty-Latn-PF'));
+  // expect(resolve('tah')).toEqual(parse('ty-Latn-PF'));
+  expect(resolve('afr')).toEqual(parse('af-Latn-ZA'));
 
   // Territory aliases.
   expect(resolve('en-120')).toEqual(parse('en-Latn-CM'));
