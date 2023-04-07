@@ -14,12 +14,7 @@ const mappings: Mapping[] = [
   Mappings.point('metaZoneIds').field('metaZones').keys().point('1').remap(0, 2, 3),
 ];
 
-const UNKNOWN = new Set<string>([
-  'CST6CDT',
-  'EST5EDT',
-  'MST7MDT',
-  'PST8PDT'
-]);
+const UNKNOWN = new Set<string>(['CST6CDT', 'EST5EDT', 'MST7MDT', 'PST8PDT']);
 
 let SUPPLEMENTAL: any;
 
@@ -41,11 +36,11 @@ export const transformTimezones = (o: any): any => {
     if (id.startsWith('Etc/') || UNKNOWN.has(id)) {
       city = ['Unknown City'];
     } else {
-      city = id.split('/').map(x => x.replace(/_/g, ' '));
+      city = id.split('/').map((x) => x.replace(/_/g, ' '));
     }
 
     m.exemplarCity[id] = city[city.length - 1];
   }
 
   return m;
-}
+};
