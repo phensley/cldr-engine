@@ -8,14 +8,14 @@
 # chalk: 5.x is an ESM module now, incompatible with the CommonJS side of our
 # project
 #
-# yargs: types are out of sync with the library, and api seems to change
-# frequently
+# minimatch 8.x generates a typescript error when compiling ES5
 
 PIN="
 #@microsoft/api-extractor
 @types/node-fetch
 node-fetch
 chalk
+minimatch
 "
 
 join() {
