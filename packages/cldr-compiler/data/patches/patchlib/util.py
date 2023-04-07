@@ -1,4 +1,4 @@
-import json, os
+import codecs, json, os
 from lxml.etree import fromstring
 
 def readxml(path):
@@ -6,7 +6,7 @@ def readxml(path):
     return fromstring(data)
 
 def save(dest, obj):
-    json.dump(obj, open(dest, 'w'), indent=2, sort_keys=1, ensure_ascii=0)
+    json.dump(obj, codecs.open(dest, 'w', 'utf-8'), indent=2, sort_keys=1, ensure_ascii=0)
 
 def makedirs(path):
     if not os.path.exists(path):

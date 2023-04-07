@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse, gzip, io, os, json, shutil, sys, tarfile
 import requests
@@ -13,7 +13,7 @@ import rbnf
 from util import makedirs
 
 BASEURL = 'https://github.com/unicode-org/cldr/archive'
-TAG = 'maint/maint-42'
+TAG = 'maint/maint-43'
 ROOTPATH = 'common'
 
 TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')

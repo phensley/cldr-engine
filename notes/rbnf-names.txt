@@ -1036,6 +1036,15 @@ uz:
    spellout-ordinal
    spellout-ordinal-verbose
 
+vec:
+   digits-ordinal
+   spellout-cardinal-feminine
+   spellout-cardinal-masculine
+   spellout-numbering
+   spellout-numbering-year
+   spellout-ordinal-feminine
+   spellout-ordinal-masculine
+
 vi:
    digits-ordinal
    spellout-cardinal
