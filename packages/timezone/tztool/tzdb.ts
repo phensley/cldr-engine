@@ -35,7 +35,8 @@ export const setupTZDB = (tag: string): string => {
   }
 
   const exec = (cmd: string, cwd: string) => {
-    const env = platform === 'darwin' ? { 'LFLAGS': '-lintl' } : {};
+    console.log(`executing ${cmd} in ${cwd}`);
+    const env = platform === 'darwin' ? { ...process.env, 'LFLAGS': '-lintl' } : process.env;
     return subproc.execSync(cmd, { cwd, env, timeout: TIMEOUT });
   };
 
