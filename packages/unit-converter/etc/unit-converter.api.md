@@ -4,11 +4,6 @@
 
 ```ts
 
-import { Decimal } from '@phensley/decimal';
-import { MathContext } from '@phensley/decimal';
-import { Rational } from '@phensley/decimal';
-import { UnitType } from '@phensley/cldr-types';
-
 // @public
 export const ACCELERATION: FactorDef[];
 
@@ -20,6 +15,87 @@ export const AREA: FactorDef[];
 
 // @public
 export const CONSUMPTION: FactorDef[];
+
+// @public
+export class Decimal {
+    // Warning: (ae-forgotten-export) The symbol "DecimalArg" needs to be exported by the entry point index.d.ts
+    constructor(num: DecimalArg);
+    abs(): Decimal;
+    add(v: DecimalArg): Decimal;
+    protected addsub(u: Decimal, v: Decimal, vsign: number): Decimal;
+    alignexp(): number;
+    compare(v: DecimalArg, abs?: boolean): number;
+    // (undocumented)
+    protected data: number[];
+    decrement(): Decimal;
+    divide(v: DecimalArg, context?: MathContext): Decimal;
+    divmod(v: DecimalArg): [Decimal, Decimal];
+    exp(): number;
+    // (undocumented)
+    protected _exp: number;
+    // Warning: (ae-forgotten-export) The symbol "DecimalFlag" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    protected flag: DecimalFlag;
+    // Warning: (ae-forgotten-export) The symbol "DecimalFormatter" needs to be exported by the entry point index.d.ts
+    format<R>(formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, zeroScale: boolean, digits?: string[]): void;
+    // (undocumented)
+    protected formatFlags(): string;
+    // (undocumented)
+    protected formatFlagsParts(): Part[];
+    // (undocumented)
+    protected formatParts(d: Decimal, minInt: number): Part[];
+    // (undocumented)
+    protected formatString(d: Decimal, minInt: number): string;
+    // (undocumented)
+    protected static fromRaw(sign: number, _exp: number, data: number[], flag: DecimalFlag): Decimal;
+    // Warning: (ae-forgotten-export) The symbol "Op" needs to be exported by the entry point index.d.ts
+    protected handleFlags(op: Op, v: Decimal): Decimal | undefined;
+    increment(): Decimal;
+    protected _increment(): void;
+    integerDigits(): number;
+    isFinite(): boolean;
+    isInfinity(): boolean;
+    isInteger(): boolean;
+    isNaN(): boolean;
+    isNegative(): boolean;
+    protected isodd(): boolean;
+    isZero(): boolean;
+    mod(v: DecimalArg): Decimal;
+    movePoint(n: number): Decimal;
+    multiply(v: DecimalArg, context?: MathContext): Decimal;
+    negate(): Decimal;
+    protected parse(arg: string | number): void;
+    protected _parse(str: string): string | undefined;
+    precision(): number;
+    properties(): [number[], number, number, number];
+    protected round(rnd: number, rest: number, mode: RoundingModeType): number;
+    scale(): number;
+    scientific(minIntDigits?: number): [Decimal, number];
+    // Warning: (ae-forgotten-export) The symbol "RoundingModeType" needs to be exported by the entry point index.d.ts
+    setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
+    // (undocumented)
+    protected _setScale(scale: number, roundingMode?: RoundingModeType): void;
+    shiftleft(shift: number): Decimal;
+    protected _shiftleft(shift: number): void;
+    shiftright(shift: number, mode?: RoundingModeType): Decimal;
+    protected _shiftright(shift: number, mode: RoundingModeType): void;
+    // (undocumented)
+    protected sign: number;
+    signum(): number;
+    stripTrailingZeros(): Decimal;
+    // (undocumented)
+    protected _stripTrailingZeros(): void;
+    subtract(v: DecimalArg): Decimal;
+    toInteger(): Decimal;
+    // Warning: (ae-forgotten-export) The symbol "Part" needs to be exported by the entry point index.d.ts
+    toParts(): Part[];
+    toScientificParts(minIntegers?: number): Part[];
+    toScientificString(minIntegers?: number): string;
+    toString(): string;
+    trailingZeros(): number;
+    protected trim(): Decimal;
+}
 
 // @public
 export const DIGITAL: FactorDef[];
@@ -58,10 +134,47 @@ export const LENGTH: FactorDef[];
 export const MASS: FactorDef[];
 
 // @public
+export interface MathContext {
+    // (undocumented)
+    precision?: number;
+    // (undocumented)
+    round?: RoundingModeType;
+    // (undocumented)
+    scale?: number;
+}
+
+// @public
 export const POWER: FactorDef[];
 
 // @public
 export const PRESSURE: FactorDef[];
+
+// @public
+export class Rational {
+    constructor(numerator: DecimalArg, denominator?: DecimalArg);
+    // Warning: (ae-forgotten-export) The symbol "RationalArg" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    compare(num: RationalArg, context?: MathContext): number;
+    // (undocumented)
+    protected denom: Decimal;
+    // (undocumented)
+    denominator(): Decimal;
+    // (undocumented)
+    divide(num: RationalArg, context?: MathContext): Rational;
+    // (undocumented)
+    inverse(): Rational;
+    // (undocumented)
+    multiply(num: RationalArg, context?: MathContext): Rational;
+    // (undocumented)
+    protected numer: Decimal;
+    // (undocumented)
+    numerator(): Decimal;
+    // (undocumented)
+    toDecimal(context?: MathContext): Decimal;
+    // (undocumented)
+    toString(): string;
+}
 
 // @public
 export const SPEED: FactorDef[];
@@ -100,6 +213,9 @@ export class UnitFactors {
     // (undocumented)
     readonly unitset: Set<string>;
 }
+
+// @public (undocumented)
+export type UnitType = 'g-force' | 'meter-per-square-second' | 'arc-minute' | 'arc-second' | 'degree' | 'radian' | 'revolution' | 'acre' | 'dunam' | 'hectare' | 'square-centimeter' | 'square-foot' | 'square-inch' | 'square-kilometer' | 'square-meter' | 'square-mile' | 'square-yard' | 'item' | 'karat' | 'milligram-ofglucose-per-deciliter' | 'millimole-per-liter' | 'mole' | 'percent' | 'permille' | 'permillion' | 'permyriad' | 'liter-per-100-kilometer' | 'liter-per-kilometer' | 'mile-per-gallon' | 'mile-per-gallon-imperial' | 'bit' | 'byte' | 'gigabit' | 'gigabyte' | 'kilobit' | 'kilobyte' | 'megabit' | 'megabyte' | 'petabyte' | 'terabit' | 'terabyte' | 'century' | 'day' | 'day-person' | 'decade' | 'hour' | 'microsecond' | 'millisecond' | 'minute' | 'month' | 'nanosecond' | 'quarter' | 'second' | 'week' | 'year' | 'ampere' | 'milliampere' | 'ohm' | 'volt' | 'british-thermal-unit' | 'calorie' | 'electronvolt' | 'foodcalorie' | 'joule' | 'kilocalorie' | 'kilojoule' | 'kilowatt-hour' | 'therm-us' | 'kilowatt-hour-per-100-kilometer' | 'newton' | 'pound-force' | 'gigahertz' | 'hertz' | 'kilohertz' | 'megahertz' | 'dot' | 'dot-per-centimeter' | 'dot-per-inch' | 'em' | 'megapixel' | 'pixel' | 'pixel-per-centimeter' | 'pixel-per-inch' | 'astronomical-unit' | 'centimeter' | 'decimeter' | 'earth-radius' | 'fathom' | 'foot' | 'furlong' | 'inch' | 'kilometer' | 'light-year' | 'meter' | 'micrometer' | 'mile' | 'mile-scandinavian' | 'millimeter' | 'nanometer' | 'nautical-mile' | 'parsec' | 'picometer' | 'point' | 'solar-radius' | 'yard' | 'candela' | 'lumen' | 'lux' | 'solar-luminosity' | 'carat' | 'dalton' | 'earth-mass' | 'grain' | 'gram' | 'kilogram' | 'microgram' | 'milligram' | 'ounce' | 'ounce-troy' | 'pound' | 'solar-mass' | 'stone' | 'ton' | 'tonne' | 'gigawatt' | 'horsepower' | 'kilowatt' | 'megawatt' | 'milliwatt' | 'watt' | 'atmosphere' | 'bar' | 'hectopascal' | 'inch-ofhg' | 'kilopascal' | 'megapascal' | 'millibar' | 'millimeter-ofhg' | 'pascal' | 'pound-force-per-square-inch' | 'beaufort' | 'kilometer-per-hour' | 'knot' | 'meter-per-second' | 'mile-per-hour' | 'celsius' | 'fahrenheit' | 'temperature' | 'kelvin' | 'newton-meter' | 'pound-force-foot' | 'acre-foot' | 'barrel' | 'bushel' | 'centiliter' | 'cubic-centimeter' | 'cubic-foot' | 'cubic-inch' | 'cubic-kilometer' | 'cubic-meter' | 'cubic-mile' | 'cubic-yard' | 'cup' | 'cup-metric' | 'deciliter' | 'dessert-spoon' | 'dessert-spoon-imperial' | 'dram' | 'drop' | 'fluid-ounce' | 'fluid-ounce-imperial' | 'gallon' | 'gallon-imperial' | 'hectoliter' | 'jigger' | 'liter' | 'megaliter' | 'milliliter' | 'pinch' | 'pint' | 'pint-metric' | 'quart' | 'quart-imperial' | 'tablespoon' | 'teaspoon';
 
 // @public
 export const VOLUME: FactorDef[];
