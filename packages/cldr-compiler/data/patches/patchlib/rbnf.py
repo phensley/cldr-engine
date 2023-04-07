@@ -71,7 +71,12 @@ def build(root, dest):
         rbnf = convert(tree)
         rbnf = to_utf8(rbnf)
         out = os.path.join(dest, '%s.json' % name)
-        save(out, rbnf)
+        try:
+            save(out, rbnf)
+        except:
+            print(name)
+            print(rbnf)
+            raise
 
 # if __name__ == '__main__':
 #     root = '/Users/phensley/temp/cldr-trunk/common/rbnf'

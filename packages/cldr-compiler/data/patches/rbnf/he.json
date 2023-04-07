@@ -1,4 +1,19 @@
 {
+  "OrdinalRules": {
+    "digits-ordinal": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "0"
+        }
+      ]
+    }
+  },
   "SpelloutRules": {
     "and-feminine": {
       "private": 1,

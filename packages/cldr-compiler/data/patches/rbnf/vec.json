@@ -1,0 +1,1547 @@
+{
+  "SpelloutRules": {
+    "fem-with-a": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "a;",
+          "value": "0"
+        },
+        {
+          "rule": "­auna;",
+          "value": "1"
+        },
+        {
+          "rule": "adó;",
+          "value": "2"
+        },
+        {
+          "rule": "atrè;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%msco-with-a=;",
+          "value": "4"
+        }
+      ]
+    },
+    "fem-with-i": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "i;",
+          "value": "0"
+        },
+        {
+          "rule": "­iuna;",
+          "value": "1"
+        },
+        {
+          "rule": "idó;",
+          "value": "2"
+        },
+        {
+          "rule": "itrè;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%msco-with-i=;",
+          "value": "4"
+        }
+      ]
+    },
+    "fem-with-o": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "o;",
+          "value": "0"
+        },
+        {
+          "rule": "­ouna;",
+          "value": "1"
+        },
+        {
+          "rule": "odó;",
+          "value": "2"
+        },
+        {
+          "rule": "otrè;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%msco-with-o=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msc-no-final": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "=%spellout-cardinal-masculine=;",
+          "value": "0"
+        },
+        {
+          "rule": "vint→%%msc-with-i-nofinal→;",
+          "value": "20"
+        },
+        {
+          "rule": "trent→%%msc-with-a-nofinal→;",
+          "value": "30"
+        },
+        {
+          "rule": "cuarant→%%msc-with-a-nofinal→;",
+          "value": "40"
+        },
+        {
+          "rule": "sincuant→%%msc-with-a-nofinal→;",
+          "value": "50"
+        },
+        {
+          "rule": "sesant→%%msc-with-a-nofinal→;",
+          "value": "60"
+        },
+        {
+          "rule": "setant→%%msc-with-a-nofinal→;",
+          "value": "70"
+        },
+        {
+          "rule": "otant→%%msc-with-a-nofinal→;",
+          "value": "80"
+        },
+        {
+          "rule": "novant→%%msc-with-a-nofinal→;",
+          "value": "90"
+        },
+        {
+          "rule": "sent→%%msc-with-o-nofinal→;",
+          "value": "100"
+        },
+        {
+          "rule": "←←­zent→%%msc-with-o-nofinal→;",
+          "value": "200"
+        },
+        {
+          "rule": "←←­sent→%%msc-with-o-nofinal→;",
+          "value": "400"
+        }
+      ]
+    },
+    "msc-with-a": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "a;",
+          "value": "0"
+        },
+        {
+          "rule": "­aun;",
+          "value": "1"
+        },
+        {
+          "rule": "­adù;",
+          "value": "2"
+        },
+        {
+          "rule": "­atrì;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%msco-with-a=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msc-with-a-nofinal": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "=%%msc-with-a=;",
+          "value": "0"
+        },
+        {
+          "rule": "aun;",
+          "value": "1"
+        },
+        {
+          "rule": "a­dù;",
+          "value": "2"
+        },
+        {
+          "rule": "a­trì;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%msc-with-a=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msc-with-i": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "i;",
+          "value": "0"
+        },
+        {
+          "rule": "­iun;",
+          "value": "1"
+        },
+        {
+          "rule": "­idù;",
+          "value": "2"
+        },
+        {
+          "rule": "­itrì;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%msco-with-i=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msc-with-i-nofinal": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "=%%msc-with-i=;",
+          "value": "0"
+        },
+        {
+          "rule": "iun;",
+          "value": "1"
+        },
+        {
+          "rule": "i­dù;",
+          "value": "2"
+        },
+        {
+          "rule": "i­trì;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%msc-with-i=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msc-with-o": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "o;",
+          "value": "0"
+        },
+        {
+          "rule": "o­un;",
+          "value": "1"
+        },
+        {
+          "rule": "o­dù;",
+          "value": "2"
+        },
+        {
+          "rule": "o­trì;",
+          "value": "3"
+        },
+        {
+          "rule": "o­=%spellout-numbering=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msc-with-o-nofinal": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "=%%msc-with-o=;",
+          "value": "0"
+        },
+        {
+          "rule": "oun;",
+          "value": "1"
+        },
+        {
+          "rule": "o­dù;",
+          "value": "2"
+        },
+        {
+          "rule": "o­trì;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%msc-with-o=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msco-with-a": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "a;",
+          "value": "0"
+        },
+        {
+          "rule": "­aun;",
+          "value": "1"
+        },
+        {
+          "rule": "a­dó;",
+          "value": "2"
+        },
+        {
+          "rule": "a­trè;",
+          "value": "3"
+        },
+        {
+          "rule": "a­=%spellout-numbering=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msco-with-i": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "i;",
+          "value": "0"
+        },
+        {
+          "rule": "­iun;",
+          "value": "1"
+        },
+        {
+          "rule": "i­dó;",
+          "value": "2"
+        },
+        {
+          "rule": "i­trè;",
+          "value": "3"
+        },
+        {
+          "rule": "i­=%spellout-numbering=;",
+          "value": "4"
+        }
+      ]
+    },
+    "msco-with-o": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "o;",
+          "value": "0"
+        },
+        {
+          "rule": "o­un;",
+          "value": "1"
+        },
+        {
+          "rule": "o­dó;",
+          "value": "2"
+        },
+        {
+          "rule": "o­trè;",
+          "value": "3"
+        },
+        {
+          "rule": "o­=%spellout-numbering=;",
+          "value": "4"
+        }
+      ]
+    },
+    "ordinal-ezema": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "èzema;",
+          "value": "0"
+        },
+        {
+          "rule": "­unèzema;",
+          "value": "1"
+        },
+        {
+          "rule": "­doèzema;",
+          "value": "2"
+        },
+        {
+          "rule": "­treèzema;",
+          "value": "3"
+        },
+        {
+          "rule": "­cuatrèzema;",
+          "value": "4"
+        },
+        {
+          "rule": "­sincuèzema;",
+          "value": "5"
+        },
+        {
+          "rule": "­sièzema;",
+          "value": "6"
+        },
+        {
+          "rule": "­setèzema;",
+          "value": "7"
+        },
+        {
+          "rule": "­otèzema;",
+          "value": "8"
+        },
+        {
+          "rule": "­novèzema;",
+          "value": "9"
+        },
+        {
+          "rule": "=%spellout-ordinal-feminine=;",
+          "value": "10"
+        }
+      ]
+    },
+    "ordinal-ezema-with-a": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "èzema;",
+          "value": "0"
+        },
+        {
+          "rule": "a­unèzema;",
+          "value": "1"
+        },
+        {
+          "rule": "a­doèzema;",
+          "value": "2"
+        },
+        {
+          "rule": "a­treèzema;",
+          "value": "3"
+        },
+        {
+          "rule": "a­cuatrèzema;",
+          "value": "4"
+        },
+        {
+          "rule": "a­sincuèzema;",
+          "value": "5"
+        },
+        {
+          "rule": "a­sièzema;",
+          "value": "6"
+        },
+        {
+          "rule": "a­setèzema;",
+          "value": "7"
+        },
+        {
+          "rule": "a­otèzema;",
+          "value": "8"
+        },
+        {
+          "rule": "a­novèzema;",
+          "value": "9"
+        },
+        {
+          "rule": "=%spellout-ordinal-feminine=;",
+          "value": "10"
+        }
+      ]
+    },
+    "ordinal-ezema-with-i": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "èzema;",
+          "value": "0"
+        },
+        {
+          "rule": "i­unèzema;",
+          "value": "1"
+        },
+        {
+          "rule": "i­doèzema;",
+          "value": "2"
+        },
+        {
+          "rule": "i­treèzema;",
+          "value": "3"
+        },
+        {
+          "rule": "i­cuatrèzema;",
+          "value": "4"
+        },
+        {
+          "rule": "i­sincuèzema;",
+          "value": "5"
+        },
+        {
+          "rule": "i­sièzema;",
+          "value": "6"
+        },
+        {
+          "rule": "i­setèzema;",
+          "value": "7"
+        },
+        {
+          "rule": "i­otèzema;",
+          "value": "8"
+        },
+        {
+          "rule": "i­novèzema;",
+          "value": "9"
+        },
+        {
+          "rule": "=%spellout-ordinal-feminine=;",
+          "value": "10"
+        }
+      ]
+    },
+    "ordinal-ezema-with-o": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "èzema;",
+          "value": "0"
+        },
+        {
+          "rule": "o­unèzema;",
+          "value": "1"
+        },
+        {
+          "rule": "o­doèzema;",
+          "value": "2"
+        },
+        {
+          "rule": "o­treèzema;",
+          "value": "3"
+        },
+        {
+          "rule": "o­cuatrèzema;",
+          "value": "4"
+        },
+        {
+          "rule": "o­sincuèzema;",
+          "value": "5"
+        },
+        {
+          "rule": "o­sièzema;",
+          "value": "6"
+        },
+        {
+          "rule": "o­setèzema;",
+          "value": "7"
+        },
+        {
+          "rule": "o­otèzema;",
+          "value": "8"
+        },
+        {
+          "rule": "o­novèzema;",
+          "value": "9"
+        },
+        {
+          "rule": "o­=%spellout-ordinal-feminine=;",
+          "value": "10"
+        }
+      ]
+    },
+    "ordinal-ezemo": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "èzemo;",
+          "value": "0"
+        },
+        {
+          "rule": "­unèzemo;",
+          "value": "1"
+        },
+        {
+          "rule": "­duèzemo;",
+          "value": "2"
+        },
+        {
+          "rule": "­treèzemo;",
+          "value": "3"
+        },
+        {
+          "rule": "­cuatrèzemo;",
+          "value": "4"
+        },
+        {
+          "rule": "­sincuèzemo;",
+          "value": "5"
+        },
+        {
+          "rule": "­sièzemo;",
+          "value": "6"
+        },
+        {
+          "rule": "­setèzemo;",
+          "value": "7"
+        },
+        {
+          "rule": "­otèzemo;",
+          "value": "8"
+        },
+        {
+          "rule": "­novèzemo;",
+          "value": "9"
+        },
+        {
+          "rule": "=%spellout-ordinal-masculine=;",
+          "value": "10"
+        }
+      ]
+    },
+    "ordinal-ezemo-with-a": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "èzemo;",
+          "value": "0"
+        },
+        {
+          "rule": "a­unèzemo;",
+          "value": "1"
+        },
+        {
+          "rule": "a­duèzemo;",
+          "value": "2"
+        },
+        {
+          "rule": "a­treèzemo;",
+          "value": "3"
+        },
+        {
+          "rule": "a­cuatrèzemo;",
+          "value": "4"
+        },
+        {
+          "rule": "a­sincuèzemo;",
+          "value": "5"
+        },
+        {
+          "rule": "a­sièzemo;",
+          "value": "6"
+        },
+        {
+          "rule": "a­setèzemo;",
+          "value": "7"
+        },
+        {
+          "rule": "a­otèzemo;",
+          "value": "8"
+        },
+        {
+          "rule": "a­novèzemo;",
+          "value": "9"
+        },
+        {
+          "rule": "=%spellout-ordinal-masculine=;",
+          "value": "10"
+        }
+      ]
+    },
+    "ordinal-ezemo-with-i": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "èzemo;",
+          "value": "0"
+        },
+        {
+          "rule": "i­unèzemo;",
+          "value": "1"
+        },
+        {
+          "rule": "i­duèzemo;",
+          "value": "2"
+        },
+        {
+          "rule": "i­treèzemo;",
+          "value": "3"
+        },
+        {
+          "rule": "i­cuatrèzemo;",
+          "value": "4"
+        },
+        {
+          "rule": "i­sincuèzemo;",
+          "value": "5"
+        },
+        {
+          "rule": "i­sièzemo;",
+          "value": "6"
+        },
+        {
+          "rule": "i­setèzemo;",
+          "value": "7"
+        },
+        {
+          "rule": "i­otèzemo;",
+          "value": "8"
+        },
+        {
+          "rule": "i­novèzemo;",
+          "value": "9"
+        },
+        {
+          "rule": "=%spellout-ordinal-masculine=;",
+          "value": "10"
+        }
+      ]
+    },
+    "ordinal-ezemo-with-o": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "èzemo;",
+          "value": "0"
+        },
+        {
+          "rule": "o­unèzemo;",
+          "value": "1"
+        },
+        {
+          "rule": "o­duèzemo;",
+          "value": "2"
+        },
+        {
+          "rule": "o­treèzemo;",
+          "value": "3"
+        },
+        {
+          "rule": "o­cuatrèzemo;",
+          "value": "4"
+        },
+        {
+          "rule": "o­sincuèzemo;",
+          "value": "5"
+        },
+        {
+          "rule": "o­sièzemo;",
+          "value": "6"
+        },
+        {
+          "rule": "o­setèzemo;",
+          "value": "7"
+        },
+        {
+          "rule": "o­otèzemo;",
+          "value": "8"
+        },
+        {
+          "rule": "o­novèzemo;",
+          "value": "9"
+        },
+        {
+          "rule": "o­=%spellout-ordinal-masculine=;",
+          "value": "10"
+        }
+      ]
+    },
+    "spellout-cardinal-feminine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "manca →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "←← vìrgoła →→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "zero;",
+          "value": "0"
+        },
+        {
+          "rule": "una;",
+          "value": "1"
+        },
+        {
+          "rule": "=%spellout-numbering=;",
+          "value": "2"
+        },
+        {
+          "rule": "vent→%%fem-with-i→;",
+          "value": "20"
+        },
+        {
+          "rule": "trent→%%fem-with-a→;",
+          "value": "30"
+        },
+        {
+          "rule": "cuarant→%%fem-with-a→;",
+          "value": "40"
+        },
+        {
+          "rule": "sincuant→%%fem-with-a→;",
+          "value": "50"
+        },
+        {
+          "rule": "sesant→%%fem-with-a→;",
+          "value": "60"
+        },
+        {
+          "rule": "settant→%%fem-with-a→;",
+          "value": "70"
+        },
+        {
+          "rule": "otant→%%fem-with-a→;",
+          "value": "80"
+        },
+        {
+          "rule": "novant→%%fem-with-a→;",
+          "value": "90"
+        },
+        {
+          "rule": "sent→%%fem-with-o→;",
+          "value": "100"
+        },
+        {
+          "rule": "←←­zent→%%fem-with-o→;",
+          "value": "200"
+        },
+        {
+          "rule": "←←­sent→%%fem-with-o→;",
+          "value": "400"
+        },
+        {
+          "rule": "miłe[­→→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%%msc-no-final←­miła[­→→];",
+          "value": "2000"
+        },
+        {
+          "rule": "un miłion[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← miłioni[ →→];",
+          "value": "2000000"
+        },
+        {
+          "rule": "un miliardo[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← miłiardi[ →→];",
+          "value": "2000000000"
+        },
+        {
+          "rule": "un bilione[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← biłioni[ →→];",
+          "value": "2000000000000"
+        },
+        {
+          "rule": "un biliardo[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← biłiardi[ →→];",
+          "value": "2000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-masculine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "manca →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "←← vìrgoła →→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "zero;",
+          "value": "0"
+        },
+        {
+          "rule": "un;",
+          "value": "1"
+        },
+        {
+          "rule": "du;",
+          "value": "2"
+        },
+        {
+          "rule": "tri;",
+          "value": "3"
+        },
+        {
+          "rule": "­=%spellout-numbering=;",
+          "value": "4"
+        },
+        {
+          "rule": "vint→%%msc-with-i→;",
+          "value": "20"
+        },
+        {
+          "rule": "trent→%%msc-with-a→;",
+          "value": "30"
+        },
+        {
+          "rule": "cuarant→%%msc-with-a→;",
+          "value": "40"
+        },
+        {
+          "rule": "sincuant→%%msc-with-a→;",
+          "value": "50"
+        },
+        {
+          "rule": "sesant→%%msc-with-a→;",
+          "value": "60"
+        },
+        {
+          "rule": "setant→%%msc-with-a→;",
+          "value": "70"
+        },
+        {
+          "rule": "otant→%%msc-with-a→;",
+          "value": "80"
+        },
+        {
+          "rule": "novant→%%msc-with-a→;",
+          "value": "90"
+        },
+        {
+          "rule": "sent→%%msc-with-o→;",
+          "value": "100"
+        },
+        {
+          "rule": "←←zent→%%msc-with-o→;",
+          "value": "200"
+        },
+        {
+          "rule": "←←­sent→%%msc-with-o→;",
+          "value": "400"
+        },
+        {
+          "rule": "miłe[­→→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%%msc-no-final←­miła[­→→];",
+          "value": "2000"
+        },
+        {
+          "rule": "un miłion[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← miłioni[ →→];",
+          "value": "2000000"
+        },
+        {
+          "rule": "un miliardo[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← miłiardi[ →→];",
+          "value": "2000000000"
+        },
+        {
+          "rule": "un bilione[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← biłioni[ →→];",
+          "value": "2000000000000"
+        },
+        {
+          "rule": "un biliardo[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← biłiardi[ →→];",
+          "value": "2000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-numbering": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "manca →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "←← vìrgoła →→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "zero;",
+          "value": "0"
+        },
+        {
+          "rule": "uno;",
+          "value": "1"
+        },
+        {
+          "rule": "do;",
+          "value": "2"
+        },
+        {
+          "rule": "tre;",
+          "value": "3"
+        },
+        {
+          "rule": "cuatro;",
+          "value": "4"
+        },
+        {
+          "rule": "sincue;",
+          "value": "5"
+        },
+        {
+          "rule": "sie;",
+          "value": "6"
+        },
+        {
+          "rule": "sete;",
+          "value": "7"
+        },
+        {
+          "rule": "oto;",
+          "value": "8"
+        },
+        {
+          "rule": "nove;",
+          "value": "9"
+        },
+        {
+          "rule": "dieze;",
+          "value": "10"
+        },
+        {
+          "rule": "ùndeze;",
+          "value": "11"
+        },
+        {
+          "rule": "dódeze;",
+          "value": "12"
+        },
+        {
+          "rule": "trèdeze;",
+          "value": "13"
+        },
+        {
+          "rule": "cuatòrdeze;",
+          "value": "14"
+        },
+        {
+          "rule": "cuìndeze;",
+          "value": "15"
+        },
+        {
+          "rule": "sédeze;",
+          "value": "16"
+        },
+        {
+          "rule": "disete;",
+          "value": "17"
+        },
+        {
+          "rule": "dizdoto;",
+          "value": "18"
+        },
+        {
+          "rule": "diznove;",
+          "value": "19"
+        },
+        {
+          "rule": "vint→%%msco-with-i→;",
+          "value": "20"
+        },
+        {
+          "rule": "trent→%%msco-with-a→;",
+          "value": "30"
+        },
+        {
+          "rule": "cuarant→%%msco-with-a→;",
+          "value": "40"
+        },
+        {
+          "rule": "sincuant→%%msco-with-a→;",
+          "value": "50"
+        },
+        {
+          "rule": "sesant→%%msco-with-a→;",
+          "value": "60"
+        },
+        {
+          "rule": "setant→%%msco-with-a→;",
+          "value": "70"
+        },
+        {
+          "rule": "otant→%%msco-with-a→;",
+          "value": "80"
+        },
+        {
+          "rule": "novant→%%msco-with-a→;",
+          "value": "90"
+        },
+        {
+          "rule": "sent→%%msco-with-o→;",
+          "value": "100"
+        },
+        {
+          "rule": "←←zent→%%msco-with-o→;",
+          "value": "200"
+        },
+        {
+          "rule": "←←­sent→%%msco-with-o→;",
+          "value": "400"
+        },
+        {
+          "rule": "miłe[­→→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%%msc-no-final←­miła[­→→];",
+          "value": "2000"
+        },
+        {
+          "rule": "un miłion[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← miłioni[ →→];",
+          "value": "2000000"
+        },
+        {
+          "rule": "un miliardo[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← miłiardi[ →→];",
+          "value": "2000000000"
+        },
+        {
+          "rule": "un bilione[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← biłioni[ →→];",
+          "value": "2000000000000"
+        },
+        {
+          "rule": "un biliardo[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← biłiardi[ →→];",
+          "value": "2000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-numbering-year": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=0.0=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "=%spellout-numbering=;",
+          "value": "0"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "manca →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0.#=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "zerèzema;",
+          "value": "0"
+        },
+        {
+          "rule": "prima;",
+          "value": "1"
+        },
+        {
+          "rule": "segonda;",
+          "value": "2"
+        },
+        {
+          "rule": "tersa;",
+          "value": "3"
+        },
+        {
+          "rule": "cuarta;",
+          "value": "4"
+        },
+        {
+          "rule": "cuinta;",
+          "value": "5"
+        },
+        {
+          "rule": "sesta;",
+          "value": "6"
+        },
+        {
+          "rule": "sètema;",
+          "value": "7"
+        },
+        {
+          "rule": "otava;",
+          "value": "8"
+        },
+        {
+          "rule": "nona;",
+          "value": "9"
+        },
+        {
+          "rule": "dèzema;",
+          "value": "10"
+        },
+        {
+          "rule": "undezèzema;",
+          "value": "11"
+        },
+        {
+          "rule": "dodezèzema;",
+          "value": "12"
+        },
+        {
+          "rule": "tredezèzema;",
+          "value": "13"
+        },
+        {
+          "rule": "cuatordezèzema;",
+          "value": "14"
+        },
+        {
+          "rule": "cuindezèzema;",
+          "value": "15"
+        },
+        {
+          "rule": "sedezèzema;",
+          "value": "16"
+        },
+        {
+          "rule": "disetèzema;",
+          "value": "17"
+        },
+        {
+          "rule": "dizdotèzema;",
+          "value": "18"
+        },
+        {
+          "rule": "diznovèzema;",
+          "value": "19"
+        },
+        {
+          "rule": "vent→%%ordinal-ezema-with-i→;",
+          "value": "20"
+        },
+        {
+          "rule": "trent→%%ordinal-ezema-with-a→;",
+          "value": "30"
+        },
+        {
+          "rule": "cuarant→%%ordinal-ezema-with-a→;",
+          "value": "40"
+        },
+        {
+          "rule": "sincuant→%%ordinal-ezema-with-a→;",
+          "value": "50"
+        },
+        {
+          "rule": "sesant→%%ordinal-ezema-with-a→;",
+          "value": "60"
+        },
+        {
+          "rule": "setant→%%ordinal-ezema-with-a→;",
+          "value": "70"
+        },
+        {
+          "rule": "otant→%%ordinal-ezema-with-a→;",
+          "value": "80"
+        },
+        {
+          "rule": "novant→%%ordinal-ezema-with-a→;",
+          "value": "90"
+        },
+        {
+          "rule": "sent→%%ordinal-ezema-with-o→;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine←­zent→%%ordinal-ezema-with-o→;",
+          "value": "200"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine←­sent→%%ordinal-ezema-with-o→;",
+          "value": "400"
+        },
+        {
+          "rule": "miłe­→%%ordinal-ezema→;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine←­miłe­→%%ordinal-ezema→;",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine←­miła­→%%ordinal-ezema→;",
+          "value": "2001"
+        },
+        {
+          "rule": "miłion­→%%ordinal-ezema→;",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine←miłion­→%%ordinal-ezema→;",
+          "value": "2000000"
+        },
+        {
+          "rule": "miłiard­→%%ordinal-ezema-with-o→;",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine←miłiard­→%%ordinal-ezema-with-o→;",
+          "value": "2000000000"
+        },
+        {
+          "rule": "biłione­→%%ordinal-ezema→;",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine←biłion­→%%ordinal-ezema→;",
+          "value": "2000000000000"
+        },
+        {
+          "rule": "biłiard­→%%ordinal-ezema-with-o→;",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine←biłiard­→%%ordinal-ezema-with-o→;",
+          "value": "2000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "manca →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0.#=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "zerèzemo;",
+          "value": "0"
+        },
+        {
+          "rule": "primo;",
+          "value": "1"
+        },
+        {
+          "rule": "segondo;",
+          "value": "2"
+        },
+        {
+          "rule": "terso;",
+          "value": "3"
+        },
+        {
+          "rule": "cuarto;",
+          "value": "4"
+        },
+        {
+          "rule": "cuinto;",
+          "value": "5"
+        },
+        {
+          "rule": "sesto;",
+          "value": "6"
+        },
+        {
+          "rule": "sètemo;",
+          "value": "7"
+        },
+        {
+          "rule": "otavo;",
+          "value": "8"
+        },
+        {
+          "rule": "nono;",
+          "value": "9"
+        },
+        {
+          "rule": "dèzemo;",
+          "value": "10"
+        },
+        {
+          "rule": "undezèzemo;",
+          "value": "11"
+        },
+        {
+          "rule": "dodezèzemo;",
+          "value": "12"
+        },
+        {
+          "rule": "tredezèzemo;",
+          "value": "13"
+        },
+        {
+          "rule": "cuatordezèzemo;",
+          "value": "14"
+        },
+        {
+          "rule": "cuindezèzemo;",
+          "value": "15"
+        },
+        {
+          "rule": "sedezèzemo;",
+          "value": "16"
+        },
+        {
+          "rule": "disetèzemo;",
+          "value": "17"
+        },
+        {
+          "rule": "dizdotèzemo;",
+          "value": "18"
+        },
+        {
+          "rule": "diznovèzemo;",
+          "value": "19"
+        },
+        {
+          "rule": "vent→%%ordinal-ezemo-with-i→;",
+          "value": "20"
+        },
+        {
+          "rule": "trent→%%ordinal-ezemo-with-a→;",
+          "value": "30"
+        },
+        {
+          "rule": "cuarant→%%ordinal-ezemo-with-a→;",
+          "value": "40"
+        },
+        {
+          "rule": "sincuant→%%ordinal-ezemo-with-a→;",
+          "value": "50"
+        },
+        {
+          "rule": "sesant→%%ordinal-ezemo-with-a→;",
+          "value": "60"
+        },
+        {
+          "rule": "setant→%%ordinal-ezemo-with-a→;",
+          "value": "70"
+        },
+        {
+          "rule": "otant→%%ordinal-ezemo-with-a→;",
+          "value": "80"
+        },
+        {
+          "rule": "novant→%%ordinal-ezemo-with-a→;",
+          "value": "90"
+        },
+        {
+          "rule": "sent→%%ordinal-ezemo-with-o→;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←­zent→%%ordinal-ezemo-with-o→;",
+          "value": "200"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←­sent→%%ordinal-ezemo-with-o→;",
+          "value": "400"
+        },
+        {
+          "rule": "miłe­→%%ordinal-ezemo→;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←­miłe­→%%ordinal-ezemo→;",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←­miła­→%%ordinal-ezemo→;",
+          "value": "2001"
+        },
+        {
+          "rule": "miłion­→%%ordinal-ezemo→;",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←miłion­→%%ordinal-ezemo→;",
+          "value": "2000000"
+        },
+        {
+          "rule": "miłiard­→%%ordinal-ezemo-with-o→;",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←miłiard­→%%ordinal-ezemo-with-o→;",
+          "value": "2000000000"
+        },
+        {
+          "rule": "biłion­→%%ordinal-ezemo→;",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←biłion­→%%ordinal-ezemo→;",
+          "value": "2000000000000"
+        },
+        {
+          "rule": "biłiard­→%%ordinal-ezemo-with-o→;",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←biłiard­→%%ordinal-ezemo-with-o→;",
+          "value": "2000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    }
+  }
+}
