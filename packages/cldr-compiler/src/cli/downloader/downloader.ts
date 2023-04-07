@@ -33,7 +33,7 @@ const SUPPLEMENTAL = new Set([
   'availableLocales.json',
   'coverageLevels.json',
   'defaultContent.json',
-  'scriptMetadata.json'
+  'scriptMetadata.json',
 ]);
 
 type State = { [archive: string]: string };
