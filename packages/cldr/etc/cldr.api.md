@@ -4,312 +4,1224 @@
 
 ```ts
 
-import { BuddhistDate } from '@phensley/cldr-core';
-import { buildMessageMatcher } from '@phensley/cldr-core';
-import { Bundle } from '@phensley/cldr-core';
-import { CalendarDate } from '@phensley/cldr-core';
-import { CalendarDateFields } from '@phensley/cldr-core';
-import { CalendarFieldsOptions } from '@phensley/cldr-core';
-import { Calendars } from '@phensley/cldr-core';
-import { CalendarType } from '@phensley/cldr-core';
-import { CharacterOrderType } from '@phensley/cldr-core';
-import { CLDR } from '@phensley/cldr-core';
-import { CLDRFramework } from '@phensley/cldr-core';
-import { CLDROptions } from '@phensley/cldr-core';
-import { ContextTransformFieldType } from '@phensley/cldr-core';
-import { ContextType } from '@phensley/cldr-core';
-import { CurrencyDisplayNameOptions } from '@phensley/cldr-core';
-import { CurrencyFormatOptions } from '@phensley/cldr-core';
-import { CurrencyFormatStyleType } from '@phensley/cldr-core';
-import { CurrencyFractions } from '@phensley/cldr-core';
-import { CurrencySymbolWidthType } from '@phensley/cldr-core';
-import { CurrencyType } from '@phensley/cldr-core';
-import { DateFieldFormatOptions } from '@phensley/cldr-core';
-import { DateFieldType } from '@phensley/cldr-core';
-import { DateFieldWidthType } from '@phensley/cldr-core';
-import { DateFormatAltOptions } from '@phensley/cldr-core';
-import { DateFormatOptions } from '@phensley/cldr-core';
-import { DateIntervalFormatOptions } from '@phensley/cldr-core';
-import { DateRawFormatOptions } from '@phensley/cldr-core';
-import { DateWrapperFormatOptions } from '@phensley/cldr-core';
-import { DayPeriodAltType } from '@phensley/cldr-core';
-import { Decimal } from '@phensley/cldr-core';
-import { DecimalAdjustOptions } from '@phensley/cldr-core';
-import { DecimalArg } from '@phensley/cldr-core';
-import { DecimalConstants } from '@phensley/cldr-core';
-import { DecimalFormatOptions } from '@phensley/cldr-core';
-import { DecimalFormatStyleType } from '@phensley/cldr-core';
-import { DefaultMessageArgConverter } from '@phensley/cldr-core';
-import { DisplayNameOptions } from '@phensley/cldr-core';
-import { EraAltType } from '@phensley/cldr-core';
-import { EraFieldOptions } from '@phensley/cldr-core';
-import { EraWidthType } from '@phensley/cldr-core';
-import { ExemplarCity } from '@phensley/cldr-core';
-import { FieldWidthType } from '@phensley/cldr-core';
-import { FormatWidthType } from '@phensley/cldr-core';
-import { General } from '@phensley/cldr-core';
-import { GregorianDate } from '@phensley/cldr-core';
-import { ISO8601Date } from '@phensley/cldr-core';
-import { JapaneseDate } from '@phensley/cldr-core';
-import { LanguageIdType } from '@phensley/cldr-core';
-import { LanguageResolver } from '@phensley/cldr-core';
-import { LanguageTag } from '@phensley/cldr-core';
-import { LineOrderType } from '@phensley/cldr-core';
-import { ListPatternType } from '@phensley/cldr-core';
-import { Locale } from '@phensley/cldr-core';
-import { LocaleMatch } from '@phensley/cldr-core';
-import { LocaleMatcher } from '@phensley/cldr-core';
-import { MathContext } from '@phensley/cldr-core';
-import { MeasurementCategory } from '@phensley/cldr-core';
-import { MeasurementSystem } from '@phensley/cldr-core';
-import { MessageArg } from '@phensley/cldr-core';
-import { MessageArgConverter } from '@phensley/cldr-core';
-import { MessageCode } from '@phensley/cldr-core';
-import { MessageEngine } from '@phensley/cldr-core';
-import { MessageFormatFunc } from '@phensley/cldr-core';
-import { MessageFormatFuncMap } from '@phensley/cldr-core';
-import { MessageFormatter } from '@phensley/cldr-core';
-import { MessageFormatterOptions } from '@phensley/cldr-core';
-import { MessageMatcher } from '@phensley/cldr-core';
-import { MessageNamedArgs } from '@phensley/cldr-core';
-import { NumberFormatErrorType } from '@phensley/cldr-core';
-import { NumberFormatOptions } from '@phensley/cldr-core';
-import { NumberFormatStyleType } from '@phensley/cldr-core';
-import { NumberOperands } from '@phensley/cldr-core';
-import { Numbers } from '@phensley/cldr-core';
-import { NumberSystemType } from '@phensley/cldr-core';
-import { Pack } from '@phensley/cldr-core';
-import { parseMessagePattern } from '@phensley/cldr-core';
-import { Part } from '@phensley/cldr-core';
-import { PersianDate } from '@phensley/cldr-core';
-import { PluralRules } from '@phensley/cldr-core';
-import { pluralRules } from '@phensley/cldr-core';
-import { Plurals } from '@phensley/cldr-core';
-import { Quantity } from '@phensley/cldr-core';
-import { Rational } from '@phensley/cldr-core';
-import { RationalArg } from '@phensley/cldr-core';
-import { RegionIdType } from '@phensley/cldr-core';
-import { RelativeTimeFieldFormatOptions } from '@phensley/cldr-core';
-import { RelativeTimeFieldType } from '@phensley/cldr-core';
-import { RelativeTimeFormatOptions } from '@phensley/cldr-core';
-import { RoundingModeType } from '@phensley/cldr-core';
-import { SchemaConfig } from '@phensley/cldr-core';
-import { ScriptIdType } from '@phensley/cldr-core';
-import { TimeData } from '@phensley/cldr-core';
-import { TimePeriod } from '@phensley/cldr-core';
-import { TimePeriodField } from '@phensley/cldr-core';
-import { TimeZoneInfo } from '@phensley/cldr-core';
-import { UnitFormatOptions } from '@phensley/cldr-core';
-import { UnitFormatStyleType } from '@phensley/cldr-core';
-import { UnitLength } from '@phensley/cldr-core';
-import { Units } from '@phensley/cldr-core';
-import { UnitType } from '@phensley/cldr-core';
-import { ZonedDateTime } from '@phensley/cldr-core';
-import { ZoneInfo } from '@phensley/cldr-core';
-
-export { BuddhistDate }
-
-export { buildMessageMatcher }
-
-export { Bundle }
-
-export { CalendarDate }
-
-export { CalendarDateFields }
-
-export { CalendarFieldsOptions }
-
-export { Calendars }
-
-export { CalendarType }
-
-export { CharacterOrderType }
-
-export { CLDR }
-
-export { CLDRFramework }
-
-export { CLDROptions }
-
-export { ContextTransformFieldType }
-
-export { ContextType }
-
-export { CurrencyDisplayNameOptions }
-
-export { CurrencyFormatOptions }
-
-export { CurrencyFormatStyleType }
-
-export { CurrencyFractions }
-
-export { CurrencySymbolWidthType }
-
-export { CurrencyType }
-
-export { DateFieldFormatOptions }
-
-export { DateFieldType }
-
-export { DateFieldWidthType }
-
-export { DateFormatAltOptions }
-
-export { DateFormatOptions }
-
-export { DateIntervalFormatOptions }
-
-export { DateRawFormatOptions }
-
-export { DateWrapperFormatOptions }
-
-export { DayPeriodAltType }
-
-export { Decimal }
-
-export { DecimalAdjustOptions }
-
-export { DecimalArg }
-
-export { DecimalConstants }
-
-export { DecimalFormatOptions }
-
-export { DecimalFormatStyleType }
-
-export { DefaultMessageArgConverter }
-
-export { DisplayNameOptions }
-
-export { EraAltType }
-
-export { EraFieldOptions }
-
-export { EraWidthType }
-
-export { ExemplarCity }
-
-export { FieldWidthType }
-
-export { FormatWidthType }
-
-export { General }
-
-export { GregorianDate }
-
-export { ISO8601Date }
-
-export { JapaneseDate }
-
-export { LanguageIdType }
-
-export { LanguageResolver }
-
-export { LanguageTag }
-
-export { LineOrderType }
-
-export { ListPatternType }
-
-export { Locale }
-
-export { LocaleMatch }
-
-export { LocaleMatcher }
-
-export { MathContext }
-
-export { MeasurementCategory }
-
-export { MeasurementSystem }
-
-export { MessageArg }
-
-export { MessageArgConverter }
-
-export { MessageCode }
-
-export { MessageEngine }
-
-export { MessageFormatFunc }
-
-export { MessageFormatFuncMap }
-
-export { MessageFormatter }
-
-export { MessageFormatterOptions }
-
-export { MessageMatcher }
-
-export { MessageNamedArgs }
-
-export { NumberFormatErrorType }
-
-export { NumberFormatOptions }
-
-export { NumberFormatStyleType }
-
-export { NumberOperands }
-
-export { Numbers }
-
-export { NumberSystemType }
-
-export { Pack }
-
-export { parseMessagePattern }
-
-export { Part }
-
-export { PersianDate }
-
-export { PluralRules }
-
-export { pluralRules }
-
-export { Plurals }
-
-export { Quantity }
-
-export { Rational }
-
-export { RationalArg }
-
-export { RegionIdType }
-
-export { RelativeTimeFieldFormatOptions }
-
-export { RelativeTimeFieldType }
-
-export { RelativeTimeFormatOptions }
-
-export { RoundingModeType }
-
-export { SchemaConfig }
-
-export { ScriptIdType }
-
-export { TimeData }
-
-export { TimePeriod }
-
-export { TimePeriodField }
-
-export { TimeZoneInfo }
-
-export { UnitFormatOptions }
-
-export { UnitFormatStyleType }
-
-export { UnitLength }
-
-export { Units }
-
-export { UnitType }
-
-export { ZonedDateTime }
-
-export { ZoneInfo }
+// @public
+export class BuddhistDate extends GregorianDate {
+    protected constructor(firstDay: number, minDays: number);
+    // (undocumented)
+    add(fields: Partial<TimePeriod>): BuddhistDate;
+    // (undocumented)
+    static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): BuddhistDate;
+    // (undocumented)
+    static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): BuddhistDate;
+    // (undocumented)
+    protected initFields(f: number[]): void;
+    // (undocumented)
+    protected initFromJD(jd: number, msDay: number, zoneId: string): BuddhistDate;
+    // (undocumented)
+    protected initFromUnixEpoch(epoch: number, zoneId: string): BuddhistDate;
+    // (undocumented)
+    protected _new(): BuddhistDate;
+    // (undocumented)
+    set(fields: Partial<CalendarDateFields>): GregorianDate;
+    // (undocumented)
+    toString(): string;
+    // (undocumented)
+    withZone(zoneId: string): BuddhistDate;
+}
+
+// @public
+export const buildMessageMatcher: (names: string[], sticky?: boolean) => MessageMatcher;
+
+// Warning: (ae-forgotten-export) The symbol "PrimitiveBundle" needs to be exported by the entry point index.d.ts
+//
+// @public (undocumented)
+export interface Bundle extends PrimitiveBundle {
+    // (undocumented)
+    calendarSystem(): string;
+    // (undocumented)
+    languageRegion(): string;
+    // (undocumented)
+    languageScript(): string;
+    // (undocumented)
+    numberSystem(): string;
+    // (undocumented)
+    plurals(): PluralRules;
+    // (undocumented)
+    spellout(): any;
+    // (undocumented)
+    tag(): LanguageTag;
+}
+
+// @public
+export abstract class CalendarDate {
+    protected constructor(_type: CalendarType, _firstDay: number, _minDays: number);
+    abstract add(fields: Partial<TimePeriod>): CalendarDate;
+    protected _add(fields: Partial<TimePeriod>): [number, number];
+    protected _addTime(fields: Partial<TimePeriod>): [number, number];
+    asJSDate(): Date;
+    compare(other: CalendarDate): number;
+    protected computeWeekFields(): void;
+    // (undocumented)
+    protected _computeWeekFields(woyfield: number, ywoyfield: number, firstDay: number, minDays: number, dow: number, _dom: number, doy: number): void;
+    // (undocumented)
+    dayOfMonth(): number;
+    dayOfWeek(): number;
+    dayOfWeekInMonth(): number;
+    // (undocumented)
+    dayOfYear(): number;
+    // (undocumented)
+    protected abstract daysInMonth(y: number, m: number): number;
+    // (undocumented)
+    protected abstract daysInYear(y: number): number;
+    protected _diff(s: CalendarDate, sf: number[], ef: number[]): TimePeriod;
+    difference(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
+    differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
+    // (undocumented)
+    era(): number;
+    // (undocumented)
+    extendedYear(): number;
+    // Warning: (ae-forgotten-export) The symbol "DateTimePatternFieldType" needs to be exported by the entry point index.d.ts
+    fieldOfVisualDifference(other: CalendarDate): DateTimePatternFieldType;
+    fields(): CalendarDateFields;
+    // (undocumented)
+    protected _fields: number[];
+    // (undocumented)
+    protected readonly _firstDay: number;
+    // (undocumented)
+    firstDayOfWeek(): number;
+    // (undocumented)
+    protected static _gregorian: (d: CalendarDate, utc: boolean, firstDate: number, minDays: number) => CalendarDate;
+    hour(): number;
+    hourOfDay(): number;
+    // (undocumented)
+    protected abstract initFields(f: number[]): void;
+    // (undocumented)
+    protected initFromJD(jd: number, msDay: number, zoneId: string): void;
+    // (undocumented)
+    protected initFromUnixEpoch(ms: number, zoneId: string): void;
+    // (undocumented)
+    protected _invertPeriod(fields: Partial<TimePeriod>): Partial<TimePeriod>;
+    // (undocumented)
+    isAM(): boolean;
+    // (undocumented)
+    isDaylightSavings(): boolean;
+    // (undocumented)
+    isLeapYear(): boolean;
+    julianDay(): number;
+    // Warning: (ae-forgotten-export) The symbol "MetaZoneType" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    metaZoneId(): MetaZoneType;
+    // (undocumented)
+    milliseconds(): number;
+    // (undocumented)
+    millisecondsInDay(): number;
+    // (undocumented)
+    protected readonly _minDays: number;
+    // (undocumented)
+    minDaysInFirstWeek(): number;
+    minute(): number;
+    modifiedJulianDay(): number;
+    month(): number;
+    // (undocumented)
+    protected abstract monthCount(): number;
+    // (undocumented)
+    protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
+    // (undocumented)
+    protected abstract _new(): CalendarDate;
+    ordinalDayOfWeek(): number;
+    // (undocumented)
+    relatedYear(): number;
+    relativeTime(other: CalendarDate, field?: TimePeriodField): [TimePeriodField, number];
+    protected _rollup(span: Partial<TimePeriod>, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod;
+    second(): number;
+    abstract set(fields: Partial<CalendarDateFields>): CalendarDate;
+    abstract subtract(fields: Partial<TimePeriod>): CalendarDate;
+    // (undocumented)
+    protected swap(other: CalendarDate): [CalendarDate, number[], CalendarDate, number[]];
+    protected _timeToMs(f: Partial<CalendarDateFields>): number;
+    // (undocumented)
+    timeZoneId(): string;
+    // (undocumented)
+    timeZoneOffset(): number;
+    // (undocumented)
+    timeZoneStableId(): string;
+    toISOString(): string;
+    // (undocumented)
+    protected _toISOString(d: CalendarDate, utc: boolean): string;
+    toLocalISOString(): string;
+    // (undocumented)
+    protected _toString(type: string): string;
+    type(): CalendarType;
+    // (undocumented)
+    protected readonly _type: CalendarType;
+    unixEpoch(): number;
+    // (undocumented)
+    protected utcfields(): number[];
+    // (undocumented)
+    protected weekNumber(firstDay: number, minDays: number, desiredDay: number, dayOfPeriod: number, dayOfWeek: number): number;
+    weekOfMonth(): number;
+    // (undocumented)
+    weekOfYear(): number;
+    // (undocumented)
+    weekOfYearISO(): number;
+    abstract withZone(zoneId: string): CalendarDate;
+    // (undocumented)
+    year(): number;
+    // (undocumented)
+    protected yearLength(y: number): number;
+    // (undocumented)
+    yearOfWeekOfYear(): number;
+    // (undocumented)
+    yearOfWeekOfYearISO(): number;
+    // Warning: (ae-forgotten-export) The symbol "ZoneInfo_2" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    protected _zoneInfo: ZoneInfo_2;
+}
+
+// @public
+export interface CalendarDateFields {
+    // (undocumented)
+    day: number;
+    // (undocumented)
+    hour: number;
+    // (undocumented)
+    millis: number;
+    // (undocumented)
+    minute: number;
+    // (undocumented)
+    month: number;
+    // (undocumented)
+    second: number;
+    // (undocumented)
+    year: number;
+    // (undocumented)
+    zoneId: string;
+}
+
+// @public (undocumented)
+export interface CalendarFieldsOptions {
+    ca?: CalendarType;
+    context?: ContextType;
+    width?: FieldWidthType;
+}
+
+// @public
+export interface Calendars {
+    dateField(type: DateFieldType, options?: DateFieldFormatOptions): string;
+    dayPeriods(options?: CalendarFieldsOptions): any;
+    eras(options?: EraFieldOptions): any;
+    fieldOfVisualDifference(a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
+    firstDayOfWeek(): number;
+    formatDate(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): string;
+    formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: DateIntervalFormatOptions): string;
+    formatDateIntervalToParts(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: DateIntervalFormatOptions): Part[];
+    formatDateRaw(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): string;
+    formatDateRawToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateRawFormatOptions): Part[];
+    formatDateToParts(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): Part[];
+    formatDateWrapper(date: string, time: string, options?: DateWrapperFormatOptions): string;
+    formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[];
+    formatRelativeTime(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: RelativeTimeFormatOptions): string;
+    formatRelativeTimeField(value: DecimalArg, field: RelativeTimeFieldType, options?: RelativeTimeFieldFormatOptions): string;
+    minDaysInFirstWeek(): number;
+    months(options?: CalendarFieldsOptions): any;
+    newBuddhistDate(fields: Partial<CalendarDateFields>): BuddhistDate;
+    newGregorianDate(fields: Partial<CalendarDateFields>): GregorianDate;
+    newISO8601Date(fields: Partial<CalendarDateFields>): ISO8601Date;
+    newJapaneseDate(fields: Partial<CalendarDateFields>): JapaneseDate;
+    newPersianDate(fields: Partial<CalendarDateFields>): PersianDate;
+    quarters(options?: CalendarFieldsOptions): any;
+    resolveTimeZoneId(zoneid: string): string | undefined;
+    timeData(): TimeData;
+    timePeriodToQuantity(period: Partial<TimePeriod>): Quantity[];
+    timeZoneFromUTC(utc: number, zoneid: string): ZoneInfo | undefined;
+    timeZoneFromWall(wall: number, zoneid: string): [number, ZoneInfo] | undefined;
+    timeZoneIds(): string[];
+    timeZoneInfo(zoneid: string): TimeZoneInfo;
+    toBuddhistDate(date: CalendarDate | ZonedDateTime | Date): BuddhistDate;
+    toGregorianDate(date: CalendarDate | ZonedDateTime | Date): GregorianDate;
+    toISO8601Date(date: CalendarDate | ZonedDateTime | Date): ISO8601Date;
+    toJapaneseDate(date: CalendarDate | ZonedDateTime | Date): JapaneseDate;
+    toPersianDate(date: CalendarDate | ZonedDateTime | Date): PersianDate;
+    weekdays(options?: CalendarFieldsOptions): any;
+}
+
+// @public
+export type CalendarType = 'buddhist' | 'gregory' | 'iso8601' | 'japanese' | 'persian';
+
+// @public (undocumented)
+export type CharacterOrderType = 'ltr' | 'rtl';
+
+// @public
+export interface CLDR {
+    readonly Calendars: Calendars;
+    readonly General: General;
+    // Warning: (ae-forgotten-export) The symbol "Internals" needs to be exported by the entry point index.d.ts
+    //
+    // @internal
+    readonly Internals: Internals;
+    readonly Numbers: Numbers;
+    // Warning: (ae-forgotten-export) The symbol "Schema" needs to be exported by the entry point index.d.ts
+    //
+    // @internal
+    readonly Schema: Schema;
+    readonly Units: Units;
+}
+
+// @public
+export class CLDRFramework {
+    constructor(options: CLDROptions);
+    // (undocumented)
+    protected readonly asyncLoader?: (language: string) => Promise<any>;
+    static availableLocales(): Locale[];
+    protected build(locale: Locale, pack: Pack): CLDR;
+    protected check(pack: Pack): void;
+    // (undocumented)
+    config(): SchemaConfig;
+    // (undocumented)
+    protected readonly _config: SchemaConfig;
+    // (undocumented)
+    protected static defaultConfig?: SchemaConfig;
+    get(locale: Locale | string): CLDR;
+    getAsync(locale: Locale | string): Promise<CLDR>;
+    // (undocumented)
+    info(): string;
+    // (undocumented)
+    protected readonly internals: Internals;
+    // (undocumented)
+    protected readonly loader?: (language: string) => any;
+    // (undocumented)
+    protected options: CLDROptions;
+    // Warning: (ae-forgotten-export) The symbol "LRU" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    protected readonly packCache: LRU<Pack>;
+    static parseLanguageTag(s: string): LanguageTag;
+    static resolveLocale(id: string | LanguageTag): Locale;
+    static setDefaultConfig(config: SchemaConfig): void;
+    static version(): string;
+}
+
+// @public
+export interface CLDROptions {
+    // (undocumented)
+    asyncLoader?: (language: string) => Promise<any>;
+    config?: SchemaConfig;
+    debug?: boolean;
+    loader?: (language: string) => any;
+    packCacheSize?: number;
+    patternCacheSize?: number;
+    skipChecksum?: boolean;
+}
+
+// @public (undocumented)
+export type ContextTransformFieldType = ('calendar-field' | 'currencyName' | 'day-format-except-narrow' | 'day-standalone-except-narrow' | 'era-abbr' | 'era-name' | 'keyValue' | 'languages' | 'month-format-except-narrow' | 'month-standalone-except-narrow' | 'number-spellout' | 'relative' | 'script' | 'typographicNames');
+
+// @public (undocumented)
+export type ContextType = 'middle-of-text' | 'begin-sentence' | 'standalone' | 'ui-list-or-menu';
+
+// @public (undocumented)
+export interface CurrencyDisplayNameOptions {
+    // (undocumented)
+    context?: ContextType;
+}
+
+// @public (undocumented)
+export interface CurrencyFormatOptions extends NumberFormatOptions {
+    // (undocumented)
+    cash?: boolean;
+    // (undocumented)
+    divisor?: number;
+    // (undocumented)
+    style?: CurrencyFormatStyleType;
+    // (undocumented)
+    symbolWidth?: CurrencySymbolWidthType;
+}
+
+// @public (undocumented)
+export type CurrencyFormatStyleType = 'symbol' | 'accounting' | 'code' | 'name' | 'short';
+
+// @public
+export interface CurrencyFractions {
+    // (undocumented)
+    cashDigits: number;
+    // (undocumented)
+    cashRounding: number;
+    // (undocumented)
+    digits: number;
+    // (undocumented)
+    rounding: number;
+}
+
+// @public (undocumented)
+export type CurrencySymbolWidthType = 'default' | 'narrow';
+
+// @public (undocumented)
+export type CurrencyType = ('ADP' | 'AED' | 'AFA' | 'AFN' | 'ALK' | 'ALL' | 'AMD' | 'ANG' | 'AOA' | 'AOK' | 'AON' | 'AOR' | 'ARA' | 'ARL' | 'ARM' | 'ARP' | 'ARS' | 'ATS' | 'AUD' | 'AWG' | 'AZM' | 'AZN' | 'BAD' | 'BAM' | 'BAN' | 'BBD' | 'BDT' | 'BEC' | 'BEF' | 'BEL' | 'BGL' | 'BGM' | 'BGN' | 'BGO' | 'BHD' | 'BIF' | 'BMD' | 'BND' | 'BOB' | 'BOL' | 'BOP' | 'BOV' | 'BRB' | 'BRC' | 'BRE' | 'BRL' | 'BRN' | 'BRR' | 'BRZ' | 'BSD' | 'BTN' | 'BUK' | 'BWP' | 'BYB' | 'BYN' | 'BYR' | 'BZD' | 'CAD' | 'CDF' | 'CHE' | 'CHF' | 'CHW' | 'CLE' | 'CLF' | 'CLP' | 'CNH' | 'CNX' | 'CNY' | 'COP' | 'COU' | 'CRC' | 'CSD' | 'CSK' | 'CUC' | 'CUP' | 'CVE' | 'CYP' | 'CZK' | 'DDM' | 'DEM' | 'DJF' | 'DKK' | 'DOP' | 'DZD' | 'ECS' | 'ECV' | 'EEK' | 'EGP' | 'ERN' | 'ESA' | 'ESB' | 'ESP' | 'ETB' | 'EUR' | 'FIM' | 'FJD' | 'FKP' | 'FRF' | 'GBP' | 'GEK' | 'GEL' | 'GHC' | 'GHS' | 'GIP' | 'GMD' | 'GNF' | 'GNS' | 'GQE' | 'GRD' | 'GTQ' | 'GWE' | 'GWP' | 'GYD' | 'HKD' | 'HNL' | 'HRD' | 'HRK' | 'HTG' | 'HUF' | 'IDR' | 'IEP' | 'ILP' | 'ILR' | 'ILS' | 'INR' | 'IQD' | 'IRR' | 'ISJ' | 'ISK' | 'ITL' | 'JMD' | 'JOD' | 'JPY' | 'KES' | 'KGS' | 'KHR' | 'KMF' | 'KPW' | 'KRH' | 'KRO' | 'KRW' | 'KWD' | 'KYD' | 'KZT' | 'LAK' | 'LBP' | 'LKR' | 'LRD' | 'LSL' | 'LTL' | 'LTT' | 'LUC' | 'LUF' | 'LUL' | 'LVL' | 'LVR' | 'LYD' | 'MAD' | 'MAF' | 'MCF' | 'MDC' | 'MDL' | 'MGA' | 'MGF' | 'MKD' | 'MKN' | 'MLF' | 'MMK' | 'MNT' | 'MOP' | 'MRO' | 'MRU' | 'MTL' | 'MTP' | 'MUR' | 'MVP' | 'MVR' | 'MWK' | 'MXN' | 'MXP' | 'MXV' | 'MYR' | 'MZE' | 'MZM' | 'MZN' | 'NAD' | 'NGN' | 'NIC' | 'NIO' | 'NLG' | 'NOK' | 'NPR' | 'NZD' | 'OMR' | 'PAB' | 'PEI' | 'PEN' | 'PES' | 'PGK' | 'PHP' | 'PKR' | 'PLN' | 'PLZ' | 'PTE' | 'PYG' | 'QAR' | 'RHD' | 'ROL' | 'RON' | 'RSD' | 'RUB' | 'RUR' | 'RWF' | 'SAR' | 'SBD' | 'SCR' | 'SDD' | 'SDG' | 'SDP' | 'SEK' | 'SGD' | 'SHP' | 'SIT' | 'SKK' | 'SLE' | 'SLL' | 'SOS' | 'SRD' | 'SRG' | 'SSP' | 'STD' | 'STN' | 'SUR' | 'SVC' | 'SYP' | 'SZL' | 'THB' | 'TJR' | 'TJS' | 'TMM' | 'TMT' | 'TND' | 'TOP' | 'TPE' | 'TRL' | 'TRY' | 'TTD' | 'TWD' | 'TZS' | 'UAH' | 'UAK' | 'UGS' | 'UGX' | 'USD' | 'USN' | 'USS' | 'UYI' | 'UYP' | 'UYU' | 'UYW' | 'UZS' | 'VEB' | 'VED' | 'VEF' | 'VES' | 'VND' | 'VNN' | 'VUV' | 'WST' | 'XAF' | 'XAG' | 'XAU' | 'XBA' | 'XBB' | 'XBC' | 'XBD' | 'XCD' | 'XDR' | 'XEU' | 'XFO' | 'XFU' | 'XOF' | 'XPD' | 'XPF' | 'XPT' | 'XRE' | 'XSU' | 'XTS' | 'XUA' | 'XXX' | 'YDD' | 'YER' | 'YUD' | 'YUM' | 'YUN' | 'YUR' | 'ZAL' | 'ZAR' | 'ZMK' | 'ZMW' | 'ZRN' | 'ZRZ' | 'ZWD' | 'ZWL' | 'ZWR');
+
+// @public (undocumented)
+export interface DateFieldFormatOptions {
+    ca?: CalendarType;
+    context?: ContextType;
+    width?: DateFieldWidthType;
+}
+
+// @public (undocumented)
+export type DateFieldType = 'era' | 'year' | 'quarter' | 'month' | 'week' | 'weekday' | 'weekdayOfMonth' | 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'day' | 'dayperiod' | 'hour' | 'minute' | 'second' | 'zone';
+
+// @public (undocumented)
+export type DateFieldWidthType = 'short' | 'narrow' | 'wide';
+
+// @public (undocumented)
+export interface DateFormatAltOptions {
+    // (undocumented)
+    dayPeriod?: DayPeriodAltType;
+    // (undocumented)
+    era?: EraAltType;
+}
+
+// @public (undocumented)
+export interface DateFormatOptions {
+    alt?: DateFormatAltOptions;
+    atTime?: boolean;
+    ca?: CalendarType;
+    context?: ContextType;
+    date?: FormatWidthType;
+    datetime?: FormatWidthType;
+    nu?: NumberSystemType;
+    skeleton?: string;
+    time?: FormatWidthType;
+    wrap?: FormatWidthType;
+}
+
+// @public (undocumented)
+export interface DateIntervalFormatOptions {
+    alt?: DateFormatAltOptions;
+    atTime?: boolean;
+    ca?: CalendarType;
+    context?: ContextType;
+    date?: string;
+    nu?: NumberSystemType;
+    skeleton?: string;
+    time?: string;
+}
+
+// @public (undocumented)
+export interface DateRawFormatOptions {
+    alt?: DateFormatAltOptions;
+    ca?: CalendarType;
+    context?: ContextType;
+    nu?: NumberSystemType;
+    pattern?: string;
+}
+
+// @public (undocumented)
+export interface DateWrapperFormatOptions {
+    atTime?: boolean;
+    // (undocumented)
+    ca?: CalendarType;
+    // (undocumented)
+    width?: FormatWidthType;
+}
+
+// @public (undocumented)
+export type DayPeriodAltType = 'none' | 'casing';
+
+// @public
+export class Decimal {
+    constructor(num: DecimalArg);
+    abs(): Decimal;
+    add(v: DecimalArg): Decimal;
+    protected addsub(u: Decimal, v: Decimal, vsign: number): Decimal;
+    alignexp(): number;
+    compare(v: DecimalArg, abs?: boolean): number;
+    // (undocumented)
+    protected data: number[];
+    decrement(): Decimal;
+    divide(v: DecimalArg, context?: MathContext): Decimal;
+    divmod(v: DecimalArg): [Decimal, Decimal];
+    exp(): number;
+    // (undocumented)
+    protected _exp: number;
+    // Warning: (ae-forgotten-export) The symbol "DecimalFlag" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    protected flag: DecimalFlag;
+    // Warning: (ae-forgotten-export) The symbol "DecimalFormatter" needs to be exported by the entry point index.d.ts
+    format<R>(formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, zeroScale: boolean, digits?: string[]): void;
+    // (undocumented)
+    protected formatFlags(): string;
+    // (undocumented)
+    protected formatFlagsParts(): Part[];
+    // (undocumented)
+    protected formatParts(d: Decimal, minInt: number): Part[];
+    // (undocumented)
+    protected formatString(d: Decimal, minInt: number): string;
+    // (undocumented)
+    protected static fromRaw(sign: number, _exp: number, data: number[], flag: DecimalFlag): Decimal;
+    // Warning: (ae-forgotten-export) The symbol "Op" needs to be exported by the entry point index.d.ts
+    protected handleFlags(op: Op, v: Decimal): Decimal | undefined;
+    increment(): Decimal;
+    protected _increment(): void;
+    integerDigits(): number;
+    isFinite(): boolean;
+    isInfinity(): boolean;
+    isInteger(): boolean;
+    isNaN(): boolean;
+    isNegative(): boolean;
+    protected isodd(): boolean;
+    isZero(): boolean;
+    mod(v: DecimalArg): Decimal;
+    movePoint(n: number): Decimal;
+    multiply(v: DecimalArg, context?: MathContext): Decimal;
+    negate(): Decimal;
+    protected parse(arg: string | number): void;
+    protected _parse(str: string): string | undefined;
+    precision(): number;
+    properties(): [number[], number, number, number];
+    protected round(rnd: number, rest: number, mode: RoundingModeType): number;
+    scale(): number;
+    scientific(minIntDigits?: number): [Decimal, number];
+    setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
+    // (undocumented)
+    protected _setScale(scale: number, roundingMode?: RoundingModeType): void;
+    shiftleft(shift: number): Decimal;
+    protected _shiftleft(shift: number): void;
+    shiftright(shift: number, mode?: RoundingModeType): Decimal;
+    protected _shiftright(shift: number, mode: RoundingModeType): void;
+    // (undocumented)
+    protected sign: number;
+    signum(): number;
+    stripTrailingZeros(): Decimal;
+    // (undocumented)
+    protected _stripTrailingZeros(): void;
+    subtract(v: DecimalArg): Decimal;
+    toInteger(): Decimal;
+    toParts(): Part[];
+    toScientificParts(minIntegers?: number): Part[];
+    toScientificString(minIntegers?: number): string;
+    toString(): string;
+    trailingZeros(): number;
+    protected trim(): Decimal;
+}
+
+// @public (undocumented)
+export interface DecimalAdjustOptions {
+    // (undocumented)
+    maximumFractionDigits?: number;
+    // (undocumented)
+    maximumSignificantDigits?: number;
+    // (undocumented)
+    minimumFractionDigits?: number;
+    // (undocumented)
+    minimumIntegerDigits?: number;
+    // (undocumented)
+    minimumSignificantDigits?: number;
+    // (undocumented)
+    round?: RoundingModeType;
+}
+
+// @public
+export type DecimalArg = number | string | Decimal;
+
+// @public
+export const DecimalConstants: {
+    ZERO: Decimal;
+    ONE: Decimal;
+    TWO: Decimal;
+    PI: Decimal;
+    E: Decimal;
+    NAN: Decimal;
+    POSITIVE_INFINITY: Decimal;
+    NEGATIVE_INFINITY: Decimal;
+};
+
+// @public (undocumented)
+export interface DecimalFormatOptions extends NumberFormatOptions {
+    // (undocumented)
+    divisor?: number;
+    // (undocumented)
+    errors?: NumberFormatErrorType[];
+    // (undocumented)
+    negativeZero?: boolean;
+    // (undocumented)
+    style?: DecimalFormatStyleType;
+}
+
+// @public (undocumented)
+export type DecimalFormatStyleType = NumberFormatStyleType | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled';
+
+// @public
+export class DefaultMessageArgConverter implements MessageArgConverter {
+    asDecimal(arg: MessageArg | undefined): Decimal;
+    asString(arg: MessageArg | undefined): string;
+}
+
+// @public (undocumented)
+export interface DisplayNameOptions {
+    // (undocumented)
+    context?: ContextType;
+    // Warning: (ae-forgotten-export) The symbol "AltType" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    type?: AltType;
+}
+
+// @public (undocumented)
+export type EraAltType = 'none' | 'sensitive';
+
+// @public (undocumented)
+export interface EraFieldOptions {
+    ca?: CalendarType;
+    context?: ContextType;
+    width?: EraWidthType;
+}
+
+// @public (undocumented)
+export type EraWidthType = 'names' | 'abbr' | 'narrow';
+
+// @public (undocumented)
+export interface ExemplarCity {
+    // (undocumented)
+    name: string;
+}
+
+// @public (undocumented)
+export type FieldWidthType = 'abbreviated' | 'narrow' | 'short' | 'wide';
+
+// @public (undocumented)
+export type FormatWidthType = 'short' | 'medium' | 'long' | 'full';
+
+// @public
+export interface General {
+    bundle(): Bundle;
+    characterOrder(): CharacterOrderType;
+    formatList(items: string[], type?: ListPatternType): string;
+    formatListToParts(items: string[], type?: ListPatternType): Part[];
+    getLanguageDisplayName(code: string | LanguageTag, options?: DisplayNameOptions): string;
+    getRegionDisplayName(code: string | LanguageTag, options?: DisplayNameOptions): string;
+    getScriptDisplayName(code: string | LanguageTag, options?: DisplayNameOptions): string;
+    lineOrder(): LineOrderType;
+    locale(): Locale;
+    measurementSystem(category?: MeasurementCategory): MeasurementSystem;
+    messageFormatter(options?: MessageFormatterOptions): MessageFormatter;
+    parseLanguageTag(tag: string): LanguageTag;
+    resolveLocale(id: string | LanguageTag): Locale;
+}
+
+// @public
+export class GregorianDate extends CalendarDate {
+    protected constructor(type: CalendarType, firstDay: number, minDays: number);
+    // (undocumented)
+    add(fields: Partial<TimePeriod>): GregorianDate;
+    // (undocumented)
+    protected daysInMonth(y: number, m: number): number;
+    // (undocumented)
+    protected daysInYear(y: number): number;
+    // (undocumented)
+    static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): GregorianDate;
+    // (undocumented)
+    static fromUnixEpoch(epoch: number, zoneId: string, firstDay?: number, minDays?: number): GregorianDate;
+    // (undocumented)
+    static _init: void;
+    // (undocumented)
+    protected initFields(f: number[]): void;
+    // (undocumented)
+    protected initFromJD(jd: number, msDay: number, zoneId: string): GregorianDate;
+    // (undocumented)
+    protected initFromUnixEpoch(epoch: number, zoneId: string): GregorianDate;
+    // (undocumented)
+    protected monthCount(): number;
+    // (undocumented)
+    protected monthStart(eyear: number, month: number, _useMonth: boolean): number;
+    // (undocumented)
+    protected _new(): GregorianDate;
+    // (undocumented)
+    set(fields: Partial<CalendarDateFields>): GregorianDate;
+    // (undocumented)
+    protected _set(f: Partial<CalendarDateFields>): GregorianDate;
+    // (undocumented)
+    subtract(fields: Partial<TimePeriod>): GregorianDate;
+    // (undocumented)
+    toString(): string;
+    // (undocumented)
+    withZone(zoneId: string): GregorianDate;
+    protected _ymdToJD(y: number, m: number, d: number): number;
+}
+
+// @public
+export class ISO8601Date extends GregorianDate {
+    protected constructor();
+    // (undocumented)
+    add(fields: Partial<TimePeriod>): ISO8601Date;
+    // (undocumented)
+    static fromFields(fields: Partial<CalendarDateFields>, _firstDay: number, _minDays: number): ISO8601Date;
+    // (undocumented)
+    static fromUnixEpoch(epoch: number, zoneId: string, _firstDay: number, _minDays: number): ISO8601Date;
+    // (undocumented)
+    protected initFromUnixEpoch(epoch: number, zoneId: string): ISO8601Date;
+    // (undocumented)
+    protected _new(): ISO8601Date;
+    // (undocumented)
+    toString(): string;
+    // (undocumented)
+    withZone(zoneId: string): ISO8601Date;
+}
+
+// @public
+export class JapaneseDate extends GregorianDate {
+    protected constructor(firstDay: number, minDays: number);
+    // (undocumented)
+    add(fields: Partial<TimePeriod>): JapaneseDate;
+    // (undocumented)
+    static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): JapaneseDate;
+    // (undocumented)
+    static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): JapaneseDate;
+    // (undocumented)
+    protected initFields(f: number[]): void;
+    // (undocumented)
+    protected initFromJD(jd: number, msDay: number, zoneId: string): JapaneseDate;
+    // (undocumented)
+    protected initFromUnixEpoch(epoch: number, zoneId: string): JapaneseDate;
+    // (undocumented)
+    protected _new(): JapaneseDate;
+    // (undocumented)
+    toString(): string;
+    // (undocumented)
+    withZone(zoneId: string): JapaneseDate;
+}
+
+// @public (undocumented)
+export type LanguageIdType = ('aa' | 'ab' | 'ace' | 'ach' | 'ada' | 'ady' | 'ae' | 'aeb' | 'af' | 'afh' | 'agq' | 'ain' | 'ajp' | 'ak' | 'akk' | 'akz' | 'ale' | 'aln' | 'alt' | 'am' | 'an' | 'ang' | 'ann' | 'anp' | 'ar' | 'ar-001' | 'arc' | 'arn' | 'aro' | 'arp' | 'arq' | 'ars' | 'arw' | 'ary' | 'arz' | 'as' | 'asa' | 'ase' | 'ast' | 'atj' | 'av' | 'avk' | 'awa' | 'ay' | 'az' | 'az-Arab' | 'ba' | 'bal' | 'ban' | 'bar' | 'bas' | 'bax' | 'bbc' | 'bbj' | 'be' | 'bej' | 'bem' | 'bew' | 'bez' | 'bfd' | 'bfq' | 'bg' | 'bgc' | 'bgn' | 'bho' | 'bi' | 'bik' | 'bin' | 'bjn' | 'bkm' | 'bla' | 'blt' | 'bm' | 'bn' | 'bo' | 'bpy' | 'bqi' | 'br' | 'bra' | 'brh' | 'brx' | 'bs' | 'bss' | 'bua' | 'bug' | 'bum' | 'byn' | 'byv' | 'ca' | 'cad' | 'car' | 'cay' | 'cch' | 'ccp' | 'ce' | 'ceb' | 'cgg' | 'ch' | 'chb' | 'chg' | 'chk' | 'chm' | 'chn' | 'cho' | 'chp' | 'chr' | 'chy' | 'cic' | 'ckb' | 'clc' | 'co' | 'cop' | 'cps' | 'cr' | 'crg' | 'crh' | 'crj' | 'crk' | 'crl' | 'crm' | 'crr' | 'crs' | 'cs' | 'csb' | 'csw' | 'cu' | 'cv' | 'cwd' | 'cy' | 'da' | 'dak' | 'dar' | 'dav' | 'de' | 'de-AT' | 'de-CH' | 'del' | 'den' | 'dgr' | 'din' | 'dje' | 'doi' | 'dsb' | 'dtp' | 'dua' | 'dum' | 'dv' | 'dyo' | 'dyu' | 'dz' | 'dzg' | 'ebu' | 'ee' | 'efi' | 'egl' | 'egy' | 'eka' | 'el' | 'elx' | 'en' | 'en-AU' | 'en-CA' | 'en-GB' | 'en-US' | 'enm' | 'eo' | 'es' | 'es-419' | 'es-ES' | 'es-MX' | 'esu' | 'et' | 'eu' | 'ewo' | 'ext' | 'fa' | 'fa-AF' | 'fan' | 'fat' | 'ff' | 'fi' | 'fil' | 'fit' | 'fj' | 'fo' | 'fon' | 'fr' | 'fr-CA' | 'fr-CH' | 'frc' | 'frm' | 'fro' | 'frp' | 'frr' | 'frs' | 'fur' | 'fy' | 'ga' | 'gaa' | 'gag' | 'gan' | 'gay' | 'gba' | 'gbz' | 'gd' | 'gez' | 'gil' | 'gl' | 'glk' | 'gmh' | 'gn' | 'goh' | 'gom' | 'gon' | 'gor' | 'got' | 'grb' | 'grc' | 'gsw' | 'gu' | 'guc' | 'gur' | 'guz' | 'gv' | 'gwi' | 'ha' | 'hai' | 'hak' | 'haw' | 'hax' | 'hdn' | 'he' | 'hi' | 'hi-Latn' | 'hif' | 'hil' | 'hit' | 'hmn' | 'hnj' | 'ho' | 'hr' | 'hsb' | 'hsn' | 'ht' | 'hu' | 'hup' | 'hur' | 'hy' | 'hz' | 'ia' | 'iba' | 'ibb' | 'id' | 'ie' | 'ig' | 'ii' | 'ik' | 'ike' | 'ikt' | 'ilo' | 'inh' | 'io' | 'is' | 'it' | 'iu' | 'izh' | 'ja' | 'jam' | 'jbo' | 'jgo' | 'jmc' | 'jpr' | 'jrb' | 'jut' | 'jv' | 'ka' | 'kaa' | 'kab' | 'kac' | 'kaj' | 'kam' | 'kaw' | 'kbd' | 'kbl' | 'kcg' | 'kde' | 'kea' | 'ken' | 'kfo' | 'kg' | 'kgp' | 'kha' | 'kho' | 'khq' | 'khw' | 'ki' | 'kiu' | 'kj' | 'kk' | 'kkj' | 'kl' | 'kln' | 'km' | 'kmb' | 'kn' | 'ko' | 'koi' | 'kok' | 'kos' | 'kpe' | 'kr' | 'krc' | 'kri' | 'krj' | 'krl' | 'kru' | 'ks' | 'ksb' | 'ksf' | 'ksh' | 'ku' | 'kum' | 'kut' | 'kv' | 'kw' | 'kwk' | 'ky' | 'la' | 'lad' | 'lag' | 'lah' | 'lam' | 'lb' | 'lez' | 'lfn' | 'lg' | 'li' | 'lij' | 'lil' | 'liv' | 'lkt' | 'lmo' | 'ln' | 'lo' | 'lol' | 'lou' | 'loz' | 'lrc' | 'lsm' | 'lt' | 'ltg' | 'lu' | 'lua' | 'lui' | 'lun' | 'luo' | 'lus' | 'luy' | 'lv' | 'lzh' | 'lzz' | 'mad' | 'maf' | 'mag' | 'mai' | 'mak' | 'man' | 'mas' | 'mde' | 'mdf' | 'mdr' | 'men' | 'mer' | 'mfe' | 'mg' | 'mga' | 'mgh' | 'mgo' | 'mh' | 'mi' | 'mic' | 'min' | 'mk' | 'ml' | 'mn' | 'mnc' | 'mni' | 'moe' | 'moh' | 'mos' | 'mr' | 'mrj' | 'ms' | 'mt' | 'mua' | 'mul' | 'mus' | 'mwl' | 'mwr' | 'mwv' | 'my' | 'mye' | 'myv' | 'mzn' | 'na' | 'nan' | 'nap' | 'naq' | 'nb' | 'nd' | 'nds' | 'nds-NL' | 'ne' | 'new' | 'ng' | 'nia' | 'niu' | 'njo' | 'nl' | 'nl-BE' | 'nmg' | 'nn' | 'nnh' | 'no' | 'nog' | 'non' | 'nov' | 'nqo' | 'nr' | 'nso' | 'nus' | 'nv' | 'nwc' | 'ny' | 'nym' | 'nyn' | 'nyo' | 'nzi' | 'oc' | 'oj' | 'ojb' | 'ojc' | 'ojg' | 'ojs' | 'ojw' | 'oka' | 'om' | 'or' | 'os' | 'osa' | 'ota' | 'pa' | 'pag' | 'pal' | 'pam' | 'pap' | 'pau' | 'pcd' | 'pcm' | 'pdc' | 'pdt' | 'peo' | 'pfl' | 'phn' | 'pi' | 'pis' | 'pl' | 'pms' | 'pnt' | 'pon' | 'pqm' | 'prg' | 'pro' | 'ps' | 'pt' | 'pt-BR' | 'pt-PT' | 'qu' | 'quc' | 'qug' | 'raj' | 'rap' | 'rar' | 'rgn' | 'rhg' | 'rif' | 'rm' | 'rn' | 'ro' | 'ro-MD' | 'rof' | 'rom' | 'rtm' | 'ru' | 'rue' | 'rug' | 'rup' | 'rw' | 'rwk' | 'sa' | 'sad' | 'sah' | 'sam' | 'saq' | 'sas' | 'sat' | 'saz' | 'sba' | 'sbp' | 'sc' | 'scn' | 'sco' | 'sd' | 'sdc' | 'sdh' | 'se' | 'see' | 'seh' | 'sei' | 'sel' | 'ses' | 'sg' | 'sga' | 'sgs' | 'sh' | 'shi' | 'shn' | 'shu' | 'si' | 'sid' | 'sk' | 'sl' | 'slh' | 'sli' | 'sly' | 'sm' | 'sma' | 'smj' | 'smn' | 'sms' | 'sn' | 'snk' | 'so' | 'sog' | 'sq' | 'sr' | 'sr-ME' | 'srn' | 'srr' | 'ss' | 'ssy' | 'st' | 'stq' | 'str' | 'su' | 'suk' | 'sus' | 'sux' | 'sv' | 'sw' | 'sw-CD' | 'swb' | 'syc' | 'syr' | 'szl' | 'ta' | 'tce' | 'tcy' | 'te' | 'tem' | 'teo' | 'ter' | 'tet' | 'tg' | 'tgx' | 'th' | 'tht' | 'ti' | 'tig' | 'tiv' | 'tk' | 'tkl' | 'tkr' | 'tl' | 'tlh' | 'tli' | 'tly' | 'tmh' | 'tn' | 'to' | 'tog' | 'tok' | 'tpi' | 'tr' | 'tru' | 'trv' | 'trw' | 'ts' | 'tsd' | 'tsi' | 'tt' | 'ttm' | 'ttt' | 'tum' | 'tvl' | 'tw' | 'twq' | 'ty' | 'tyv' | 'tzm' | 'udm' | 'ug' | 'uga' | 'uk' | 'umb' | 'und' | 'ur' | 'uz' | 'vai' | 've' | 'vec' | 'vep' | 'vi' | 'vls' | 'vmf' | 'vo' | 'vot' | 'vro' | 'vun' | 'wa' | 'wae' | 'wal' | 'war' | 'was' | 'wbp' | 'wo' | 'wuu' | 'xal' | 'xh' | 'xmf' | 'xog' | 'yao' | 'yap' | 'yav' | 'ybb' | 'yi' | 'yo' | 'yrl' | 'yue' | 'za' | 'zap' | 'zbl' | 'zea' | 'zen' | 'zgh' | 'zh' | 'zh-Hans' | 'zh-Hant' | 'zu' | 'zun' | 'zxx' | 'zza');
+
+// @public
+export class LanguageResolver {
+    static addLikelySubtags(real: string | LanguageTag): LanguageTag;
+    static removeLikelySubtags(real: string | LanguageTag): LanguageTag;
+    static resolve(real: string | LanguageTag): LanguageTag;
+    static substituteAliases(real: string | LanguageTag): LanguageTag;
+}
+
+// @public
+export class LanguageTag {
+    constructor(language?: string, script?: string, region?: string, variant?: string, extensions?: {
+        [x: string]: string[];
+    }, privateUse?: string, extlangs?: string[]);
+    compact(): string;
+    // (undocumented)
+    protected _compact?: string;
+    // (undocumented)
+    protected core: (undefined | string)[];
+    expanded(): string;
+    // (undocumented)
+    protected _expanded?: string;
+    extensions(): {
+        [x: string]: string[];
+    };
+    // (undocumented)
+    protected _extensions: {
+        [x: string]: string[];
+    };
+    extensionSubtags(key: string): string[];
+    extlangs(): string[];
+    // (undocumented)
+    protected _extlangs: string[];
+    hasLanguage(): boolean;
+    hasRegion(): boolean;
+    hasScript(): boolean;
+    language(): string;
+    privateUse(): string;
+    // (undocumented)
+    protected _privateUse: string;
+    region(): string;
+    script(): string;
+    toString(): string;
+    variant(): string;
+}
+
+// @public (undocumented)
+export type LineOrderType = 'ttb' | 'btt';
+
+// @public (undocumented)
+export type ListPatternType = 'and' | 'and-short' | 'or' | 'unit-long' | 'unit-narrow' | 'unit-short';
+
+// @public
+export interface Locale {
+    readonly id: string;
+    readonly tag: LanguageTag;
+}
+
+// @public
+export class Locale {
+    static resolve(id: string): Locale;
+}
+
+// @public
+export interface LocaleMatch {
+    distance: number;
+    locale: Locale;
+}
+
+// @public
+export class LocaleMatcher {
+    // Warning: (ae-forgotten-export) The symbol "LocaleMatcherOptions" needs to be exported by the entry point index.d.ts
+    constructor(supportedLocales: string | (Locale | LanguageTag | string)[], options?: LocaleMatcherOptions);
+    match(desiredLocales: string | string[], threshold?: number): LocaleMatch;
+}
+
+// @public
+export interface MathContext {
+    // (undocumented)
+    precision?: number;
+    // (undocumented)
+    round?: RoundingModeType;
+    // (undocumented)
+    scale?: number;
+}
+
+// @public (undocumented)
+export type MeasurementCategory = 'temperature';
+
+// @public (undocumented)
+export type MeasurementSystem = 'us' | 'uk' | 'metric';
+
+// @public
+export type MessageArg = any;
+
+// @public
+export interface MessageArgConverter {
+    // (undocumented)
+    asDecimal(arg: MessageArg | undefined): Decimal;
+    // (undocumented)
+    asString(arg: MessageArg | undefined): string;
+}
+
+// Warning: (ae-forgotten-export) The symbol "MessageArgCode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MessageTextCode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MessagePluralCode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MessageBlockCode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MessageSelectCode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MessageSimpleCode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MessageArgSubCode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MessageNoopCode" needs to be exported by the entry point index.d.ts
+//
+// @public
+export type MessageCode = MessageArgCode | MessageTextCode | MessagePluralCode | MessageBlockCode | MessageSelectCode | MessageSimpleCode | MessageArgSubCode | MessageNoopCode;
+
+// @public
+export class MessageEngine {
+    constructor(plurals: PluralRules, converter: MessageArgConverter, formatters: MessageFormatFuncMap, code: MessageCode);
+    evaluate(positional: MessageArg[], named?: MessageNamedArgs): string;
+}
+
+// @public
+export type MessageFormatFunc = (args: MessageArg[], options: string[]) => string;
+
+// @public
+export type MessageFormatFuncMap = {
+    [name: string]: MessageFormatFunc;
+};
+
+// @public
+export class MessageFormatter {
+    constructor(options?: MessageFormatterOptions);
+    format(message: string, positional: MessageArg[], named: MessageNamedArgs): string;
+    toString(): string;
+}
+
+// @public
+export interface MessageFormatterOptions {
+    cacheSize?: number;
+    converter?: MessageArgConverter;
+    disableEscapes?: boolean;
+    formatters?: MessageFormatFuncMap;
+    language?: string;
+    plurals?: PluralRules;
+    region?: string;
+}
+
+// @public
+export interface MessageMatcher {
+    arguments(r: MessageState): (number | string)[] | undefined;
+    // Warning: (ae-forgotten-export) The symbol "MessageState" needs to be exported by the entry point index.d.ts
+    char(r: MessageState): string;
+    complete(r: MessageState): boolean;
+    formatter(r: MessageState): string | undefined;
+    identifier(r: MessageState): string | undefined;
+    options(r: MessageState): string[];
+    pluralChoice(r: MessageState): string | undefined;
+    pluralOffset(r: MessageState): number;
+    spaces(r: MessageState): boolean;
+}
+
+// @public
+export type MessageNamedArgs = {
+    [s: string]: MessageArg;
+    [n: number]: MessageArg;
+};
+
+// @public (undocumented)
+export type NumberFormatErrorType = 'nan' | 'infinity';
+
+// @public (undocumented)
+export interface NumberFormatOptions {
+    // (undocumented)
+    group?: boolean;
+    // (undocumented)
+    maximumFractionDigits?: number;
+    // (undocumented)
+    maximumSignificantDigits?: number;
+    // (undocumented)
+    minimumFractionDigits?: number;
+    // (undocumented)
+    minimumIntegerDigits?: number;
+    // (undocumented)
+    minimumSignificantDigits?: number;
+    // (undocumented)
+    nu?: NumberSystemType;
+    // (undocumented)
+    round?: RoundingModeType;
+    trimZeroFractions?: boolean;
+}
+
+// @public (undocumented)
+export type NumberFormatStyleType = 'decimal' | 'short' | 'long' | 'scientific';
+
+// @public
+export class NumberOperands {
+    constructor(d: Decimal, c?: number);
+    // (undocumented)
+    c: number;
+    // (undocumented)
+    f: number;
+    // (undocumented)
+    i: number;
+    // (undocumented)
+    n: number;
+    // (undocumented)
+    t: number;
+    // (undocumented)
+    toString(): string;
+    // (undocumented)
+    v: number;
+    // (undocumented)
+    w: number;
+}
+
+// @public
+export interface Numbers {
+    adjustDecimal(num: DecimalArg, options?: DecimalAdjustOptions): Decimal;
+    formatCurrency(num: DecimalArg, code: CurrencyType, options?: CurrencyFormatOptions): string;
+    formatCurrencyToParts(num: DecimalArg, code: CurrencyType, options?: CurrencyFormatOptions): Part[];
+    formatDecimal(num: DecimalArg, options?: DecimalFormatOptions): string;
+    formatDecimalToParts(num: DecimalArg, options?: DecimalFormatOptions): Part[];
+    getCurrencyDisplayName(code: CurrencyType, options?: CurrencyDisplayNameOptions): string;
+    getCurrencyForRegion(region: string): CurrencyType;
+    getCurrencyFractions(code: CurrencyType): CurrencyFractions;
+    getCurrencyPluralName(num: DecimalArg, code: CurrencyType, options?: CurrencyDisplayNameOptions): string;
+    getCurrencySymbol(code: CurrencyType, width?: CurrencySymbolWidthType): string;
+    getPluralCardinal(n: DecimalArg, options?: DecimalAdjustOptions): string;
+    getPluralOrdinal(num: DecimalArg, options?: DecimalAdjustOptions): string;
+    parseDecimal(num: number | string): Decimal;
+}
+
+// Warning: (ae-forgotten-export) The symbol "NumberSystemCategory" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "NumberSystemName" needs to be exported by the entry point index.d.ts
+//
+// @public (undocumented)
+export type NumberSystemType = NumberSystemCategory | NumberSystemName;
+
+// @public
+export class Pack {
+    constructor(data: string | any);
+    // (undocumented)
+    readonly checksum: string;
+    // (undocumented)
+    readonly cldrVersion: string;
+    // (undocumented)
+    readonly defaultTag: LanguageTag;
+    // (undocumented)
+    get(tag: LanguageTag): Bundle;
+    // (undocumented)
+    readonly language: string;
+    // (undocumented)
+    readonly scripts: {
+        [x: string]: PackScript;
+    };
+    // (undocumented)
+    readonly spellout: any;
+    // (undocumented)
+    readonly version: string;
+}
+
+// @public
+export const parseMessagePattern: (raw: string, matcher: MessageMatcher, disableEscapes?: boolean) => MessageCode;
+
+// @public
+export interface Part {
+    // (undocumented)
+    type: string;
+    // (undocumented)
+    value: string;
+}
+
+// @public
+export class PersianDate extends CalendarDate {
+    protected constructor(firstDay: number, minDays: number);
+    // (undocumented)
+    add(fields: Partial<TimePeriod>): PersianDate;
+    // (undocumented)
+    protected daysInMonth(y: number, m: number): number;
+    // (undocumented)
+    protected daysInYear(y: number): number;
+    // (undocumented)
+    static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): PersianDate;
+    // (undocumented)
+    static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): PersianDate;
+    // (undocumented)
+    protected initFields(f: number[]): void;
+    // (undocumented)
+    protected initFromJD(jd: number, msDay: number, zoneId: string): PersianDate;
+    // (undocumented)
+    protected initFromUnixEpoch(epoch: number, zoneId: string): PersianDate;
+    // (undocumented)
+    protected monthCount(): number;
+    // (undocumented)
+    protected monthStart(eyear: number, month: number, _useMonth: boolean): number;
+    // (undocumented)
+    protected _new(): PersianDate;
+    // (undocumented)
+    relatedYear(): number;
+    // (undocumented)
+    set(fields: Partial<CalendarDateFields>): PersianDate;
+    // (undocumented)
+    subtract(fields: Partial<TimePeriod>): PersianDate;
+    // (undocumented)
+    toString(): string;
+    // (undocumented)
+    withZone(zoneId: string): PersianDate;
+}
+
+// @public
+export interface PluralRules {
+    // (undocumented)
+    cardinal(n: DecimalArg, c?: number): string;
+    // (undocumented)
+    operands(d: Decimal): NumberOperands;
+    // (undocumented)
+    ordinal(n: DecimalArg): string;
+    // (undocumented)
+    range(start: DecimalArg, end: DecimalArg): string;
+}
+
+// @public
+export const pluralRules: Plurals;
+
+// @public
+export class Plurals {
+    get(language: string, region?: string): PluralRules;
+}
+
+// @public (undocumented)
+export interface Quantity {
+    // (undocumented)
+    per?: UnitType;
+    // (undocumented)
+    times?: UnitType;
+    // (undocumented)
+    unit?: UnitType;
+    // (undocumented)
+    value: number | string | Decimal;
+}
+
+// @public
+export class Rational {
+    constructor(numerator: DecimalArg, denominator?: DecimalArg);
+    // (undocumented)
+    compare(num: RationalArg, context?: MathContext): number;
+    // (undocumented)
+    protected denom: Decimal;
+    // (undocumented)
+    denominator(): Decimal;
+    // (undocumented)
+    divide(num: RationalArg, context?: MathContext): Rational;
+    // (undocumented)
+    inverse(): Rational;
+    // (undocumented)
+    multiply(num: RationalArg, context?: MathContext): Rational;
+    // (undocumented)
+    protected numer: Decimal;
+    // (undocumented)
+    numerator(): Decimal;
+    // (undocumented)
+    toDecimal(context?: MathContext): Decimal;
+    // (undocumented)
+    toString(): string;
+}
+
+// @public
+export type RationalArg = Rational | Decimal | number | string;
+
+// @public (undocumented)
+export type RegionIdType = ('001' | '002' | '003' | '005' | '009' | '011' | '013' | '014' | '015' | '017' | '018' | '019' | '021' | '029' | '030' | '034' | '035' | '039' | '053' | '054' | '057' | '061' | '142' | '143' | '145' | '150' | '151' | '154' | '155' | '202' | '419' | 'AC' | 'AD' | 'AE' | 'AF' | 'AG' | 'AI' | 'AL' | 'AM' | 'AO' | 'AQ' | 'AR' | 'AS' | 'AT' | 'AU' | 'AW' | 'AX' | 'AZ' | 'BA' | 'BB' | 'BD' | 'BE' | 'BF' | 'BG' | 'BH' | 'BI' | 'BJ' | 'BL' | 'BM' | 'BN' | 'BO' | 'BQ' | 'BR' | 'BS' | 'BT' | 'BV' | 'BW' | 'BY' | 'BZ' | 'CA' | 'CC' | 'CD' | 'CF' | 'CG' | 'CH' | 'CI' | 'CK' | 'CL' | 'CM' | 'CN' | 'CO' | 'CP' | 'CQ' | 'CR' | 'CU' | 'CV' | 'CW' | 'CX' | 'CY' | 'CZ' | 'DE' | 'DG' | 'DJ' | 'DK' | 'DM' | 'DO' | 'DZ' | 'EA' | 'EC' | 'EE' | 'EG' | 'EH' | 'ER' | 'ES' | 'ET' | 'EU' | 'EZ' | 'FI' | 'FJ' | 'FK' | 'FM' | 'FO' | 'FR' | 'GA' | 'GB' | 'GD' | 'GE' | 'GF' | 'GG' | 'GH' | 'GI' | 'GL' | 'GM' | 'GN' | 'GP' | 'GQ' | 'GR' | 'GS' | 'GT' | 'GU' | 'GW' | 'GY' | 'HK' | 'HM' | 'HN' | 'HR' | 'HT' | 'HU' | 'IC' | 'ID' | 'IE' | 'IL' | 'IM' | 'IN' | 'IO' | 'IQ' | 'IR' | 'IS' | 'IT' | 'JE' | 'JM' | 'JO' | 'JP' | 'KE' | 'KG' | 'KH' | 'KI' | 'KM' | 'KN' | 'KP' | 'KR' | 'KW' | 'KY' | 'KZ' | 'LA' | 'LB' | 'LC' | 'LI' | 'LK' | 'LR' | 'LS' | 'LT' | 'LU' | 'LV' | 'LY' | 'MA' | 'MC' | 'MD' | 'ME' | 'MF' | 'MG' | 'MH' | 'MK' | 'ML' | 'MM' | 'MN' | 'MO' | 'MP' | 'MQ' | 'MR' | 'MS' | 'MT' | 'MU' | 'MV' | 'MW' | 'MX' | 'MY' | 'MZ' | 'NA' | 'NC' | 'NE' | 'NF' | 'NG' | 'NI' | 'NL' | 'NO' | 'NP' | 'NR' | 'NU' | 'NZ' | 'OM' | 'PA' | 'PE' | 'PF' | 'PG' | 'PH' | 'PK' | 'PL' | 'PM' | 'PN' | 'PR' | 'PS' | 'PT' | 'PW' | 'PY' | 'QA' | 'QO' | 'RE' | 'RO' | 'RS' | 'RU' | 'RW' | 'SA' | 'SB' | 'SC' | 'SD' | 'SE' | 'SG' | 'SH' | 'SI' | 'SJ' | 'SK' | 'SL' | 'SM' | 'SN' | 'SO' | 'SR' | 'SS' | 'ST' | 'SV' | 'SX' | 'SY' | 'SZ' | 'TA' | 'TC' | 'TD' | 'TF' | 'TG' | 'TH' | 'TJ' | 'TK' | 'TL' | 'TM' | 'TN' | 'TO' | 'TR' | 'TT' | 'TV' | 'TW' | 'TZ' | 'UA' | 'UG' | 'UM' | 'UN' | 'US' | 'UY' | 'UZ' | 'VA' | 'VC' | 'VE' | 'VG' | 'VI' | 'VN' | 'VU' | 'WF' | 'WS' | 'XA' | 'XB' | 'XK' | 'YE' | 'YT' | 'ZA' | 'ZM' | 'ZW' | 'ZZ');
+
+// @public
+export interface RelativeTimeFieldFormatOptions extends NumberFormatOptions {
+    alwaysNow?: boolean;
+    context?: ContextType;
+    numericOnly?: boolean;
+    width?: DateFieldWidthType;
+}
+
+// @public (undocumented)
+export type RelativeTimeFieldType = 'year' | 'quarter' | 'month' | 'week' | 'day' | 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'hour' | 'minute' | 'second';
+
+// @public
+export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOptions {
+    ca?: CalendarType;
+    dayOfWeek?: boolean;
+    field?: TimePeriodField;
+}
+
+// @public
+export type RoundingModeType = 'up' | 'down' | 'ceiling' | 'floor' | 'half-up' | 'half-down' | 'half-even';
+
+// @public (undocumented)
+export interface SchemaConfig {
+    // (undocumented)
+    ['buddhist-available-format']?: string[];
+    // (undocumented)
+    ['buddhist-interval-format']?: string[];
+    // (undocumented)
+    ['buddhist-plural-format']?: string[];
+    ['currency-id']?: string[];
+    ['gregorian-available-format']?: string[];
+    // (undocumented)
+    ['gregorian-interval-format']?: string[];
+    // (undocumented)
+    ['gregorian-plural-format']?: string[];
+    // (undocumented)
+    ['japanese-available-format']?: string[];
+    // (undocumented)
+    ['japanese-interval-format']?: string[];
+    // (undocumented)
+    ['japanese-plural-format']?: string[];
+    ['language-id']?: string[];
+    ['number-system-name']?: string[];
+    // (undocumented)
+    ['persian-available-format']?: string[];
+    // (undocumented)
+    ['persian-interval-format']?: string[];
+    // (undocumented)
+    ['persian-plural-format']?: string[];
+    ['region-id']?: string[];
+    ['script-id']?: string[];
+    ['timezone-id']?: string[];
+    ['unit-id']?: string[];
+    calendars?: string[];
+}
+
+// @public (undocumented)
+export type ScriptIdType = ('Adlm' | 'Afak' | 'Aghb' | 'Ahom' | 'Arab' | 'Aran' | 'Armi' | 'Armn' | 'Avst' | 'Bali' | 'Bamu' | 'Bass' | 'Batk' | 'Beng' | 'Bhks' | 'Blis' | 'Bopo' | 'Brah' | 'Brai' | 'Bugi' | 'Buhd' | 'Cakm' | 'Cans' | 'Cari' | 'Cham' | 'Cher' | 'Chrs' | 'Cirt' | 'Copt' | 'Cpmn' | 'Cprt' | 'Cyrl' | 'Cyrs' | 'Deva' | 'Diak' | 'Dogr' | 'Dsrt' | 'Dupl' | 'Egyd' | 'Egyh' | 'Egyp' | 'Elba' | 'Elym' | 'Ethi' | 'Geok' | 'Geor' | 'Glag' | 'Gong' | 'Gonm' | 'Goth' | 'Gran' | 'Grek' | 'Gujr' | 'Guru' | 'Hanb' | 'Hang' | 'Hani' | 'Hano' | 'Hans' | 'Hant' | 'Hatr' | 'Hebr' | 'Hira' | 'Hluw' | 'Hmng' | 'Hmnp' | 'Hrkt' | 'Hung' | 'Inds' | 'Ital' | 'Jamo' | 'Java' | 'Jpan' | 'Jurc' | 'Kali' | 'Kana' | 'Kawi' | 'Khar' | 'Khmr' | 'Khoj' | 'Kits' | 'Knda' | 'Kore' | 'Kpel' | 'Kthi' | 'Lana' | 'Laoo' | 'Latf' | 'Latg' | 'Latn' | 'Lepc' | 'Limb' | 'Lina' | 'Linb' | 'Lisu' | 'Loma' | 'Lyci' | 'Lydi' | 'Mahj' | 'Maka' | 'Mand' | 'Mani' | 'Marc' | 'Maya' | 'Medf' | 'Mend' | 'Merc' | 'Mero' | 'Mlym' | 'Modi' | 'Mong' | 'Moon' | 'Mroo' | 'Mtei' | 'Mult' | 'Mymr' | 'Nagm' | 'Nand' | 'Narb' | 'Nbat' | 'Newa' | 'Nkgb' | 'Nkoo' | 'Nshu' | 'Ogam' | 'Olck' | 'Orkh' | 'Orya' | 'Osge' | 'Osma' | 'Ougr' | 'Palm' | 'Pauc' | 'Perm' | 'Phag' | 'Phli' | 'Phlp' | 'Phlv' | 'Phnx' | 'Plrd' | 'Prti' | 'Qaag' | 'Rjng' | 'Rohg' | 'Roro' | 'Runr' | 'Samr' | 'Sara' | 'Sarb' | 'Saur' | 'Sgnw' | 'Shaw' | 'Shrd' | 'Sidd' | 'Sind' | 'Sinh' | 'Sogd' | 'Sogo' | 'Sora' | 'Soyo' | 'Sund' | 'Sylo' | 'Syrc' | 'Syre' | 'Syrj' | 'Syrn' | 'Tagb' | 'Takr' | 'Tale' | 'Talu' | 'Taml' | 'Tang' | 'Tavt' | 'Telu' | 'Teng' | 'Tfng' | 'Tglg' | 'Thaa' | 'Thai' | 'Tibt' | 'Tirh' | 'Tnsa' | 'Toto' | 'Ugar' | 'Vaii' | 'Visp' | 'Vith' | 'Wara' | 'Wcho' | 'Wole' | 'Xpeo' | 'Xsux' | 'Yezi' | 'Yiii' | 'Zanb' | 'Zinh' | 'Zmth' | 'Zsye' | 'Zsym' | 'Zxxx' | 'Zyyy' | 'Zzzz');
+
+// @public (undocumented)
+export interface TimeData {
+    allowed: string[];
+    preferred: string;
+}
+
+// @public (undocumented)
+export interface TimePeriod {
+    // (undocumented)
+    day: number;
+    // (undocumented)
+    hour: number;
+    // (undocumented)
+    millis: number;
+    // (undocumented)
+    minute: number;
+    // (undocumented)
+    month: number;
+    // (undocumented)
+    second: number;
+    // (undocumented)
+    week: number;
+    // (undocumented)
+    year: number;
+}
+
+// @public (undocumented)
+export type TimePeriodField = 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'millis';
+
+// @public (undocumented)
+export interface TimeZoneInfo {
+    // (undocumented)
+    city: ExemplarCity;
+    // (undocumented)
+    countries: string[];
+    // (undocumented)
+    id: string;
+    // (undocumented)
+    latitude: number;
+    // (undocumented)
+    longitude: number;
+    // (undocumented)
+    metazone: string;
+    // Warning: (ae-forgotten-export) The symbol "MetazoneNames" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    names: MetazoneNames;
+    // (undocumented)
+    stdoffset: number;
+}
+
+// @public (undocumented)
+export interface UnitFormatOptions extends NumberFormatOptions {
+    // (undocumented)
+    divisor?: number;
+    // (undocumented)
+    length?: UnitLength;
+    // (undocumented)
+    style?: UnitFormatStyleType;
+}
+
+// @public (undocumented)
+export type UnitFormatStyleType = NumberFormatStyleType;
+
+// @public (undocumented)
+export type UnitLength = 'short' | 'narrow' | 'long';
+
+// @public
+export interface Units {
+    availableUnits(): UnitType[];
+    formatQuantity(qty: Quantity, options?: UnitFormatOptions): string;
+    formatQuantitySequence(qty: Quantity[], options?: UnitFormatOptions): string;
+    formatQuantitySequenceToParts(qty: Quantity[], options?: UnitFormatOptions): Part[];
+    formatQuantityToParts(qty: Quantity, options?: UnitFormatOptions): Part[];
+    getUnitDisplayName(name: UnitType, length?: UnitLength): string;
+}
+
+// @public (undocumented)
+export type UnitType = 'g-force' | 'meter-per-square-second' | 'arc-minute' | 'arc-second' | 'degree' | 'radian' | 'revolution' | 'acre' | 'dunam' | 'hectare' | 'square-centimeter' | 'square-foot' | 'square-inch' | 'square-kilometer' | 'square-meter' | 'square-mile' | 'square-yard' | 'item' | 'karat' | 'milligram-ofglucose-per-deciliter' | 'millimole-per-liter' | 'mole' | 'percent' | 'permille' | 'permillion' | 'permyriad' | 'liter-per-100-kilometer' | 'liter-per-kilometer' | 'mile-per-gallon' | 'mile-per-gallon-imperial' | 'bit' | 'byte' | 'gigabit' | 'gigabyte' | 'kilobit' | 'kilobyte' | 'megabit' | 'megabyte' | 'petabyte' | 'terabit' | 'terabyte' | 'century' | 'day' | 'day-person' | 'decade' | 'hour' | 'microsecond' | 'millisecond' | 'minute' | 'month' | 'nanosecond' | 'quarter' | 'second' | 'week' | 'year' | 'ampere' | 'milliampere' | 'ohm' | 'volt' | 'british-thermal-unit' | 'calorie' | 'electronvolt' | 'foodcalorie' | 'joule' | 'kilocalorie' | 'kilojoule' | 'kilowatt-hour' | 'therm-us' | 'kilowatt-hour-per-100-kilometer' | 'newton' | 'pound-force' | 'gigahertz' | 'hertz' | 'kilohertz' | 'megahertz' | 'dot' | 'dot-per-centimeter' | 'dot-per-inch' | 'em' | 'megapixel' | 'pixel' | 'pixel-per-centimeter' | 'pixel-per-inch' | 'astronomical-unit' | 'centimeter' | 'decimeter' | 'earth-radius' | 'fathom' | 'foot' | 'furlong' | 'inch' | 'kilometer' | 'light-year' | 'meter' | 'micrometer' | 'mile' | 'mile-scandinavian' | 'millimeter' | 'nanometer' | 'nautical-mile' | 'parsec' | 'picometer' | 'point' | 'solar-radius' | 'yard' | 'candela' | 'lumen' | 'lux' | 'solar-luminosity' | 'carat' | 'dalton' | 'earth-mass' | 'grain' | 'gram' | 'kilogram' | 'microgram' | 'milligram' | 'ounce' | 'ounce-troy' | 'pound' | 'solar-mass' | 'stone' | 'ton' | 'tonne' | 'gigawatt' | 'horsepower' | 'kilowatt' | 'megawatt' | 'milliwatt' | 'watt' | 'atmosphere' | 'bar' | 'hectopascal' | 'inch-ofhg' | 'kilopascal' | 'megapascal' | 'millibar' | 'millimeter-ofhg' | 'pascal' | 'pound-force-per-square-inch' | 'beaufort' | 'kilometer-per-hour' | 'knot' | 'meter-per-second' | 'mile-per-hour' | 'celsius' | 'fahrenheit' | 'temperature' | 'kelvin' | 'newton-meter' | 'pound-force-foot' | 'acre-foot' | 'barrel' | 'bushel' | 'centiliter' | 'cubic-centimeter' | 'cubic-foot' | 'cubic-inch' | 'cubic-kilometer' | 'cubic-meter' | 'cubic-mile' | 'cubic-yard' | 'cup' | 'cup-metric' | 'deciliter' | 'dessert-spoon' | 'dessert-spoon-imperial' | 'dram' | 'drop' | 'fluid-ounce' | 'fluid-ounce-imperial' | 'gallon' | 'gallon-imperial' | 'hectoliter' | 'jigger' | 'liter' | 'megaliter' | 'milliliter' | 'pinch' | 'pint' | 'pint-metric' | 'quart' | 'quart-imperial' | 'tablespoon' | 'teaspoon';
+
+// @public (undocumented)
+export interface ZonedDateTime {
+    date: number | Date;
+    zoneId?: string;
+}
+
+// @public
+export interface ZoneInfo {
+    abbr: string;
+    dst: number;
+    offset: number;
+    zoneid: string;
+}
+
+// Warnings were encountered during analysis:
+//
+// /home/pat/dev/cldr-engine/packages/cldr-core/lib/resource/pack.d.ts:33:9 - (ae-forgotten-export) The symbol "PackScript" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

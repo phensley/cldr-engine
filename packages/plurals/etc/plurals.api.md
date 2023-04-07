@@ -4,8 +4,89 @@
 
 ```ts
 
-import { Decimal } from '@phensley/decimal';
-import { DecimalArg } from '@phensley/decimal';
+// @public
+export class Decimal {
+    constructor(num: DecimalArg);
+    abs(): Decimal;
+    add(v: DecimalArg): Decimal;
+    protected addsub(u: Decimal, v: Decimal, vsign: number): Decimal;
+    alignexp(): number;
+    compare(v: DecimalArg, abs?: boolean): number;
+    // (undocumented)
+    protected data: number[];
+    decrement(): Decimal;
+    divide(v: DecimalArg, context?: MathContext): Decimal;
+    divmod(v: DecimalArg): [Decimal, Decimal];
+    exp(): number;
+    // (undocumented)
+    protected _exp: number;
+    // Warning: (ae-forgotten-export) The symbol "DecimalFlag" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    protected flag: DecimalFlag;
+    // Warning: (ae-forgotten-export) The symbol "DecimalFormatter" needs to be exported by the entry point index.d.ts
+    format<R>(formatter: DecimalFormatter<R>, decimal: string, group: string, minInt: number, minGroup: number, priGroup: number, secGroup: number, zeroScale: boolean, digits?: string[]): void;
+    // (undocumented)
+    protected formatFlags(): string;
+    // (undocumented)
+    protected formatFlagsParts(): Part[];
+    // (undocumented)
+    protected formatParts(d: Decimal, minInt: number): Part[];
+    // (undocumented)
+    protected formatString(d: Decimal, minInt: number): string;
+    // (undocumented)
+    protected static fromRaw(sign: number, _exp: number, data: number[], flag: DecimalFlag): Decimal;
+    // Warning: (ae-forgotten-export) The symbol "Op" needs to be exported by the entry point index.d.ts
+    protected handleFlags(op: Op, v: Decimal): Decimal | undefined;
+    increment(): Decimal;
+    protected _increment(): void;
+    integerDigits(): number;
+    isFinite(): boolean;
+    isInfinity(): boolean;
+    isInteger(): boolean;
+    isNaN(): boolean;
+    isNegative(): boolean;
+    protected isodd(): boolean;
+    isZero(): boolean;
+    mod(v: DecimalArg): Decimal;
+    movePoint(n: number): Decimal;
+    // Warning: (ae-forgotten-export) The symbol "MathContext" needs to be exported by the entry point index.d.ts
+    multiply(v: DecimalArg, context?: MathContext): Decimal;
+    negate(): Decimal;
+    protected parse(arg: string | number): void;
+    protected _parse(str: string): string | undefined;
+    precision(): number;
+    properties(): [number[], number, number, number];
+    protected round(rnd: number, rest: number, mode: RoundingModeType): number;
+    scale(): number;
+    scientific(minIntDigits?: number): [Decimal, number];
+    // Warning: (ae-forgotten-export) The symbol "RoundingModeType" needs to be exported by the entry point index.d.ts
+    setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
+    // (undocumented)
+    protected _setScale(scale: number, roundingMode?: RoundingModeType): void;
+    shiftleft(shift: number): Decimal;
+    protected _shiftleft(shift: number): void;
+    shiftright(shift: number, mode?: RoundingModeType): Decimal;
+    protected _shiftright(shift: number, mode: RoundingModeType): void;
+    // (undocumented)
+    protected sign: number;
+    signum(): number;
+    stripTrailingZeros(): Decimal;
+    // (undocumented)
+    protected _stripTrailingZeros(): void;
+    subtract(v: DecimalArg): Decimal;
+    toInteger(): Decimal;
+    // Warning: (ae-forgotten-export) The symbol "Part" needs to be exported by the entry point index.d.ts
+    toParts(): Part[];
+    toScientificParts(minIntegers?: number): Part[];
+    toScientificString(minIntegers?: number): string;
+    toString(): string;
+    trailingZeros(): number;
+    protected trim(): Decimal;
+}
+
+// @public
+export type DecimalArg = number | string | Decimal;
 
 // @public
 export class NumberOperands {

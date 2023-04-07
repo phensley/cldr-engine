@@ -4,14 +4,49 @@
 
 ```ts
 
-import { LanguageTag } from '@phensley/language-tag';
-
 // @public
 export class LanguageResolver {
     static addLikelySubtags(real: string | LanguageTag): LanguageTag;
     static removeLikelySubtags(real: string | LanguageTag): LanguageTag;
     static resolve(real: string | LanguageTag): LanguageTag;
     static substituteAliases(real: string | LanguageTag): LanguageTag;
+}
+
+// @public
+export class LanguageTag {
+    constructor(language?: string, script?: string, region?: string, variant?: string, extensions?: {
+        [x: string]: string[];
+    }, privateUse?: string, extlangs?: string[]);
+    compact(): string;
+    // (undocumented)
+    protected _compact?: string;
+    // (undocumented)
+    protected core: (undefined | string)[];
+    expanded(): string;
+    // (undocumented)
+    protected _expanded?: string;
+    extensions(): {
+        [x: string]: string[];
+    };
+    // (undocumented)
+    protected _extensions: {
+        [x: string]: string[];
+    };
+    extensionSubtags(key: string): string[];
+    extlangs(): string[];
+    // (undocumented)
+    protected _extlangs: string[];
+    hasLanguage(): boolean;
+    hasRegion(): boolean;
+    hasScript(): boolean;
+    language(): string;
+    privateUse(): string;
+    // (undocumented)
+    protected _privateUse: string;
+    region(): string;
+    script(): string;
+    toString(): string;
+    variant(): string;
 }
 
 // @public
