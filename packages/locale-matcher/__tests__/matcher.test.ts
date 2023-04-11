@@ -1,6 +1,5 @@
-import { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
-import { Locale } from '@phensley/locale';
-import { LocaleMatch, LocaleMatcher } from '../src';
+import { parseLanguageTag } from '@phensley/language-tag';
+import { LanguageTag, Locale, LocaleMatch, LocaleMatcher } from '../src';
 import { loadMatchCases } from './util';
 import { parse, sortEntries } from '../src/matcher';
 
