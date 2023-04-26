@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 export { Decimal } from '@phensley/decimal';
 export { PluralRules } from '@phensley/plurals';
 export * from './evaluation';

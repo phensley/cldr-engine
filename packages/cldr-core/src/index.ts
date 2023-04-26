@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 export * from './exports';
 
 export * from './api';
