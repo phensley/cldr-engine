@@ -63,7 +63,7 @@ test('rational', () => {
   expect(r.toDecimal().toString()).toEqual('0.2');
 });
 
-test('message arg converter', () => {});
+// test('message arg converter', () => {});
 
 test('language tag', () => {
   const tag = new LanguageTag('en', undefined, 'US');
