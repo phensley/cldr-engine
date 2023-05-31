@@ -5,7 +5,7 @@ on:
     branches:
       - coverage
       - main
-      - cldr-42
+      - cldr-43
 
 jobs:
   build:
