@@ -305,7 +305,7 @@
          *
          * DEFAULT VALUE: false
          */
-        "addToApiReportFile": false
+        "addToApiReportFile": true
       }
 
       // "TS2551": {
@@ -325,8 +325,8 @@
      */
     "extractorMessageReporting": {
       "default": {
-        "logLevel": "warning"
-        // "addToApiReportFile": false
+        "logLevel": "warning",
+        "addToApiReportFile": true
       }
 
       // "ae-extra-release-tag": {
@@ -346,8 +346,8 @@
      */
     "tsdocMessageReporting": {
       "default": {
-        "logLevel": "warning"
-        // "addToApiReportFile": false
+        "logLevel": "warning",
+        "addToApiReportFile": true
       }
 
       // "tsdoc-link-tag-unescaped-text": {

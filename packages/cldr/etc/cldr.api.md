@@ -956,6 +956,15 @@ export class Pack {
 }
 
 // @public
+export class PackScript {
+    constructor(strings: string, exceptions: string, regions: {
+        [x: string]: string;
+    }, defaultRegion: string, _spellout: any);
+    // (undocumented)
+    get(tag: LanguageTag): Bundle;
+}
+
+// @public
 export const parseMessagePattern: (raw: string, matcher: MessageMatcher, disableEscapes?: boolean) => MessageCode;
 
 // @public
@@ -1218,10 +1227,6 @@ export interface ZoneInfo {
     offset: number;
     zoneid: string;
 }
-
-// Warnings were encountered during analysis:
-//
-// /home/pat/dev/cldr-engine/packages/cldr-core/lib/resource/pack.d.ts:33:9 - (ae-forgotten-export) The symbol "PackScript" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 
