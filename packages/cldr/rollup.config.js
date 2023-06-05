@@ -2,7 +2,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import filesize from "rollup-plugin-filesize";
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 
 const libName = 'cldrengine';
 const isProd = process.env.NODE_ENV == 'production';
