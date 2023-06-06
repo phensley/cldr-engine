@@ -1,6 +1,6 @@
 {
   "name": "@phensley/timezone",
-  "version": "1.6.6",
+  "version": "1.7.0",
   "description": "Compact timezone lib based on tz database",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -37,7 +37,7 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-utils": "~1.6.6",
+    "@phensley/cldr-utils": "~1.7.0",
     "tslib": "^2.5.3"
   },
   "devDependencies": {
