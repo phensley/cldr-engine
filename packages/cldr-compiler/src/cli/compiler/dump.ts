@@ -68,10 +68,6 @@ const scan = (o: any, depth: number, opts: Options): Entry[] => {
  * Display the schema entries.
  */
 const display = (entries: Entry[], strings: string[], indices?: boolean) => {
-  // let next = 0;
-  // for (let i = 0; i < entries.length; i++) {
-
-  // }
   for (const e of entries) {
     if (e.length === 2) {
       const [depth, key] = e;
@@ -118,6 +114,6 @@ export const runDump = (argv: yargs.ArgumentsCamelCase<DumpArgs>) => {
   Object.keys(data.scripts).forEach((name) => {
     const strings = data.scripts[name].strings.split('_');
     const entries = scan(schema, 1, opts);
-    display(entries, strings);
+    display(entries, strings, opts.indices);
   });
 };
