@@ -255,7 +255,7 @@ const filterFormats = (o: any, plural: boolean) => {
     const exists = key.indexOf('-count-') !== -1;
 
     // exclude variants for now
-    const variant = key.indexOf('-alt-variant') !== -1;
+    const variant = key.indexOf('-alt-variant') !== -1 || key.indexOf('-alt-ascii') !== -1;
     if (!variant && ((plural && exists) || (!plural && !exists))) {
       r[key] = o[key];
     }
