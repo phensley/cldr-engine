@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
+This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
+
+## [1.7.1]
+
+## Fixed/Changed
+
+- Upgrade to [CLDR v43.1](https://cldr.unicode.org/index/downloads/cldr-43#h.qobmda543waj)
 
 ## [1.7.0]
 
@@ -176,6 +182,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Switched from tslint to eslint.
 - Modified checksum so that resource packs are now compatible at the patch level. Resource packs must match the `major.minor` version of the `@phensley/cldr-core` package at runtime to ensure schema compatibility.
 
+[1.7.1]: https://github.com/phensley/cldr-engine/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/phensley/cldr-engine/compare/v1.6.6...v1.7.0
 [1.6.6]: https://github.com/phensley/cldr-engine/compare/v1.6.5...v1.6.6
 [1.6.5]: https://github.com/phensley/cldr-engine/compare/v1.6.4...v1.6.5
