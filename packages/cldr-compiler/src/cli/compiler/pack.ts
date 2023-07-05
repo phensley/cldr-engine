@@ -105,18 +105,19 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
   const patchfiles: PatchFile[] = [];
 
   // INTERNAL CLDR PATCHES
+
   patchfiles.push({
     path: 'internal',
     version: 1,
     patches: [
-      // Fix 41.0.0-BETA2 underscore present in hi-Latn
+      // Fix 43.1.0 missing ajp name
       {
-        locales: 'hi-Latn',
+        locales: 'en*',
         operations: [
           {
-            op: 'replace',
-            path: '/TimeZoneNames/exemplarCity/America~1Santo_Domingo',
-            value: 'Santo Domingo',
+            op: 'add',
+            path: '/Names/languages/displayName/none/ajp',
+            value: 'South Levantine Arabic',
           },
         ],
       },
