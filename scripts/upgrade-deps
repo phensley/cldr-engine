@@ -9,6 +9,8 @@
 # project
 #
 # minimatch 8.x generates a typescript error when compiling ES5
+#
+# prettier "resolveConfig.sync is not a function" error
 
 PIN="
 #@microsoft/api-extractor
@@ -16,6 +18,7 @@ PIN="
 node-fetch
 chalk
 minimatch
+prettier
 "
 
 join() {

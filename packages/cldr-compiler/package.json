@@ -57,7 +57,7 @@
     "minimatch": "^7.4.5",
     "node-fetch": "^2.6.7",
     "partial.lenses": "^14.17.0",
-    "prettier": "^3.0.0",
+    "prettier": "^2.8.8",
     "tar": "^6.1.15",
     "tslib": "^2.6.0",
     "yaml": "^2.3.1",
