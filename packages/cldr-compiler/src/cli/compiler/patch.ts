@@ -46,11 +46,14 @@ export const loadPatch = (path: string): PatchFile => {
  */
 export const applyPatch = (locale: string, doc: any, patchfile: PatchFile) => {
   let ok = true;
+
   for (const patch of patchfile.patches) {
     if (!matchesLocale(locale, patch.locales)) {
       continue;
     }
-    console.warn(`patching:    ${locale} from ${patchfile.path}`);
+    if (patchfile.path != 'internal') {
+      console.warn(`patching:    ${locale} from ${patchfile.path}`);
+    }
     for (const op of patch.operations) {
       try {
         applyOperation(doc, op, true, true, true);
