@@ -1,0 +1,882 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>ScriptIdType · @phensley/cldr</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="An [ISO 15924](https://en.wikipedia.org/wiki/ISO_15924) identifier for a script."/><meta name="docsearch:version" content="1.6.5"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="ScriptIdType · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="An [ISO 15924](https://en.wikipedia.org/wiki/ISO_15924) identifier for a script."/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.6.5</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/cldr-engine/docs/en/1.6.5/doc-index" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.6.5/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>General</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-cldrframework">CLDRFramework</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-cldroptions">CLDROptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-cldr">CLDR</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-cldr-calendars">CLDR.Calendars</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-cldr-general">CLDR.General</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-cldr-numbers">CLDR.Numbers</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-cldr-units">CLDR.Units</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-schemaconfig">SchemaConfig</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-buddhistdate">BuddhistDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-calendardate">CalendarDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-calendardatefields">CalendarDateFields</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-calendarfieldoptions">CalendarFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-calendartype">CalendarType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-datefieldtype">DateFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-datefieldformatoptions">DateFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-dateformataltoptions">DateFormatAltOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-dateformatoptions">DateFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-dateintervalformatoptions">DateIntervalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-daterawformatoptions">DateRawFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-dateskeleton">DateSkeleton</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-datetimepatternfieldtype">DateTimePatternFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-datewrapperformatoptions">DateWrapperFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-dayperiodalttype">DayPeriodAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-eraalttype">EraAltType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-erafieldoptions">EraFieldOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-erawidthtype">EraWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-exemplarcity">ExemplarCity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-fieldwidthtype">FieldWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-formatwidthtype">FormatWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-gregoriandate">GregorianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-iso8601date">ISO8601Date</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-japanesedate">JapaneseDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-persiandate">PersianDate</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-relativetimefieldtype">RelativeTimeFieldType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-relativetimeformatoptions">RelativeTimeFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-relativetimefieldformatoptions">RelativeTimeFieldFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-timeperiod">TimePeriod</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-timeperiodfield">TimePeriodField</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-timezoneinfo">TimeZoneInfo</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-timezonetype">TimeZoneType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-zoneddatetime">ZonedDateTime</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-contexttype">ContextType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-displaynameoptions">DisplayNameOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-languageidtype">LanguageIdType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-listpatterntype">ListPatternType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-measurementcategory">MeasurementCategory</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-measurementsystem">MeasurementSystem</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-regionidtype">RegionIdType</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-scriptidtype">ScriptIdType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-bundle">Bundle</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-languagetag">LanguageTag</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-locale">Locale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-localematcher">LocaleMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-localematcheroptions">LocaleMatcherOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-decimal">Decimal</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-decimalconstants">DecimalConstants</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-mathcontext">MathContext</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-rational">Rational</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-roundingmodetype">RoundingModeType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Messages</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-buildmessagematcher">buildMessageMatcher</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-parsemessagepattern">parseMessagePattern</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-defaultmessageargconverter">DefaultMessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-messageargconverter">MessageArgConverter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-messagecode">MessageCode</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-messageengine">MessageEngine</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-messageformatfuncmap">MessageFormatFuncMap</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-messageformatter">MessageFormatter</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-messageformatteroptions">MessageFormatterOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-messagematcher">MessageMatcher</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Numbers</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-currencyformatoptions">CurrencyFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-currencyformatstyletype">CurrencyFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-currencysymbolwidthtype">CurrencySymbolWidthType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-currencytype">CurrencyType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-decimaladjustoptions">DecimalAdjustOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-decimalformatoptions">DecimalFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-decimalformatstyletype">DecimalFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-numberformaterrortype">NumberFormatErrorType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-numbersystemtype">NumberSystemType</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Units</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-quantity">Quantity</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-unitformatoptions">UnitFormatOptions</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-unitformatstyletype">UnitFormatStyleType</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-unitlength">UnitLength</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.6.5/api-unittype">UnitType</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">ScriptIdType</h1></header><article><div><span><p>An <a href="https://en.wikipedia.org/wiki/ISO_15924">ISO 15924</a> identifier for a script.</p>
+<h3><a class="anchor" aria-hidden="true" id="syntax"></a><a href="#syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h3>
+<pre class="syntax">
+'Adlm' | 'Afak' | 'Aghb' ... 'Zxxx' | 'Zyyy' | 'Zzzz'
+</pre>
+<h3><a class="anchor" aria-hidden="true" id="values"></a><a href="#values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Values</h3>
+<ul>
+<li>'Adlm'
+<ul>
+<li>Adlam</li>
+</ul></li>
+<li>'Afak'
+<ul>
+<li>Afaka</li>
+</ul></li>
+<li>'Aghb'
+<ul>
+<li>Caucasian Albanian</li>
+</ul></li>
+<li>'Ahom'
+<ul>
+<li>Ahom</li>
+</ul></li>
+<li>'Arab'
+<ul>
+<li>Arabic</li>
+</ul></li>
+<li>'Aran'
+<ul>
+<li>Nastaliq</li>
+</ul></li>
+<li>'Armi'
+<ul>
+<li>Imperial Aramaic</li>
+</ul></li>
+<li>'Armn'
+<ul>
+<li>Armenian</li>
+</ul></li>
+<li>'Avst'
+<ul>
+<li>Avestan</li>
+</ul></li>
+<li>'Bali'
+<ul>
+<li>Balinese</li>
+</ul></li>
+<li>'Bamu'
+<ul>
+<li>Bamum</li>
+</ul></li>
+<li>'Bass'
+<ul>
+<li>Bassa Vah</li>
+</ul></li>
+<li>'Batk'
+<ul>
+<li>Batak</li>
+</ul></li>
+<li>'Beng'
+<ul>
+<li>Bangla</li>
+</ul></li>
+<li>'Bhks'
+<ul>
+<li>Bhaiksuki</li>
+</ul></li>
+<li>'Blis'
+<ul>
+<li>Blissymbols</li>
+</ul></li>
+<li>'Bopo'
+<ul>
+<li>Bopomofo</li>
+</ul></li>
+<li>'Brah'
+<ul>
+<li>Brahmi</li>
+</ul></li>
+<li>'Brai'
+<ul>
+<li>Braille</li>
+</ul></li>
+<li>'Bugi'
+<ul>
+<li>Buginese</li>
+</ul></li>
+<li>'Buhd'
+<ul>
+<li>Buhid</li>
+</ul></li>
+<li>'Cakm'
+<ul>
+<li>Chakma</li>
+</ul></li>
+<li>'Cans'
+<ul>
+<li>Unified Canadian Aboriginal Syllabics</li>
+</ul></li>
+<li>'Cari'
+<ul>
+<li>Carian</li>
+</ul></li>
+<li>'Cham'
+<ul>
+<li>Cham</li>
+</ul></li>
+<li>'Cher'
+<ul>
+<li>Cherokee</li>
+</ul></li>
+<li>'Chrs'
+<ul>
+<li>Chorasmian</li>
+</ul></li>
+<li>'Cirt'
+<ul>
+<li>Cirth</li>
+</ul></li>
+<li>'Copt'
+<ul>
+<li>Coptic</li>
+</ul></li>
+<li>'Cpmn'
+<ul>
+<li>Cypro-Minoan</li>
+</ul></li>
+<li>'Cprt'
+<ul>
+<li>Cypriot</li>
+</ul></li>
+<li>'Cyrl'
+<ul>
+<li>Cyrillic</li>
+</ul></li>
+<li>'Cyrs'
+<ul>
+<li>Old Church Slavonic Cyrillic</li>
+</ul></li>
+<li>'Deva'
+<ul>
+<li>Devanagari</li>
+</ul></li>
+<li>'Diak'
+<ul>
+<li>Dives Akuru</li>
+</ul></li>
+<li>'Dogr'
+<ul>
+<li>Dogra</li>
+</ul></li>
+<li>'Dsrt'
+<ul>
+<li>Deseret</li>
+</ul></li>
+<li>'Dupl'
+<ul>
+<li>Duployan shorthand</li>
+</ul></li>
+<li>'Egyd'
+<ul>
+<li>Egyptian demotic</li>
+</ul></li>
+<li>'Egyh'
+<ul>
+<li>Egyptian hieratic</li>
+</ul></li>
+<li>'Egyp'
+<ul>
+<li>Egyptian hieroglyphs</li>
+</ul></li>
+<li>'Elba'
+<ul>
+<li>Elbasan</li>
+</ul></li>
+<li>'Elym'
+<ul>
+<li>Elymaic</li>
+</ul></li>
+<li>'Ethi'
+<ul>
+<li>Ethiopic</li>
+</ul></li>
+<li>'Geok'
+<ul>
+<li>Georgian Khutsuri</li>
+</ul></li>
+<li>'Geor'
+<ul>
+<li>Georgian</li>
+</ul></li>
+<li>'Glag'
+<ul>
+<li>Glagolitic</li>
+</ul></li>
+<li>'Gong'
+<ul>
+<li>Gunjala Gondi</li>
+</ul></li>
+<li>'Gonm'
+<ul>
+<li>Masaram Gondi</li>
+</ul></li>
+<li>'Goth'
+<ul>
+<li>Gothic</li>
+</ul></li>
+<li>'Gran'
+<ul>
+<li>Grantha</li>
+</ul></li>
+<li>'Grek'
+<ul>
+<li>Greek</li>
+</ul></li>
+<li>'Gujr'
+<ul>
+<li>Gujarati</li>
+</ul></li>
+<li>'Guru'
+<ul>
+<li>Gurmukhi</li>
+</ul></li>
+<li>'Hanb'
+<ul>
+<li>Han with Bopomofo</li>
+</ul></li>
+<li>'Hang'
+<ul>
+<li>Hangul</li>
+</ul></li>
+<li>'Hani'
+<ul>
+<li>Han</li>
+</ul></li>
+<li>'Hano'
+<ul>
+<li>Hanunoo</li>
+</ul></li>
+<li>'Hans'
+<ul>
+<li>Simplified</li>
+</ul></li>
+<li>'Hant'
+<ul>
+<li>Traditional</li>
+</ul></li>
+<li>'Hatr'
+<ul>
+<li>Hatran</li>
+</ul></li>
+<li>'Hebr'
+<ul>
+<li>Hebrew</li>
+</ul></li>
+<li>'Hira'
+<ul>
+<li>Hiragana</li>
+</ul></li>
+<li>'Hluw'
+<ul>
+<li>Anatolian Hieroglyphs</li>
+</ul></li>
+<li>'Hmng'
+<ul>
+<li>Pahawh Hmong</li>
+</ul></li>
+<li>'Hmnp'
+<ul>
+<li>Nyiakeng Puachue Hmong</li>
+</ul></li>
+<li>'Hrkt'
+<ul>
+<li>Japanese syllabaries</li>
+</ul></li>
+<li>'Hung'
+<ul>
+<li>Old Hungarian</li>
+</ul></li>
+<li>'Inds'
+<ul>
+<li>Indus</li>
+</ul></li>
+<li>'Ital'
+<ul>
+<li>Old Italic</li>
+</ul></li>
+<li>'Jamo'
+<ul>
+<li>Jamo</li>
+</ul></li>
+<li>'Java'
+<ul>
+<li>Javanese</li>
+</ul></li>
+<li>'Jpan'
+<ul>
+<li>Japanese</li>
+</ul></li>
+<li>'Jurc'
+<ul>
+<li>Jurchen</li>
+</ul></li>
+<li>'Kali'
+<ul>
+<li>Kayah Li</li>
+</ul></li>
+<li>'Kana'
+<ul>
+<li>Katakana</li>
+</ul></li>
+<li>'Kawi'
+<ul>
+<li>Kawi</li>
+</ul></li>
+<li>'Khar'
+<ul>
+<li>Kharoshthi</li>
+</ul></li>
+<li>'Khmr'
+<ul>
+<li>Khmer</li>
+</ul></li>
+<li>'Khoj'
+<ul>
+<li>Khojki</li>
+</ul></li>
+<li>'Kits'
+<ul>
+<li>Khitan small script</li>
+</ul></li>
+<li>'Knda'
+<ul>
+<li>Kannada</li>
+</ul></li>
+<li>'Kore'
+<ul>
+<li>Korean</li>
+</ul></li>
+<li>'Kpel'
+<ul>
+<li>Kpelle</li>
+</ul></li>
+<li>'Kthi'
+<ul>
+<li>Kaithi</li>
+</ul></li>
+<li>'Lana'
+<ul>
+<li>Lanna</li>
+</ul></li>
+<li>'Laoo'
+<ul>
+<li>Lao</li>
+</ul></li>
+<li>'Latf'
+<ul>
+<li>Fraktur Latin</li>
+</ul></li>
+<li>'Latg'
+<ul>
+<li>Gaelic Latin</li>
+</ul></li>
+<li>'Latn'
+<ul>
+<li>Latin</li>
+</ul></li>
+<li>'Lepc'
+<ul>
+<li>Lepcha</li>
+</ul></li>
+<li>'Limb'
+<ul>
+<li>Limbu</li>
+</ul></li>
+<li>'Lina'
+<ul>
+<li>Linear A</li>
+</ul></li>
+<li>'Linb'
+<ul>
+<li>Linear B</li>
+</ul></li>
+<li>'Lisu'
+<ul>
+<li>Fraser</li>
+</ul></li>
+<li>'Loma'
+<ul>
+<li>Loma</li>
+</ul></li>
+<li>'Lyci'
+<ul>
+<li>Lycian</li>
+</ul></li>
+<li>'Lydi'
+<ul>
+<li>Lydian</li>
+</ul></li>
+<li>'Mahj'
+<ul>
+<li>Mahajani</li>
+</ul></li>
+<li>'Maka'
+<ul>
+<li>Makasar</li>
+</ul></li>
+<li>'Mand'
+<ul>
+<li>Mandaean</li>
+</ul></li>
+<li>'Mani'
+<ul>
+<li>Manichaean</li>
+</ul></li>
+<li>'Marc'
+<ul>
+<li>Marchen</li>
+</ul></li>
+<li>'Maya'
+<ul>
+<li>Mayan hieroglyphs</li>
+</ul></li>
+<li>'Medf'
+<ul>
+<li>Medefaidrin</li>
+</ul></li>
+<li>'Mend'
+<ul>
+<li>Mende</li>
+</ul></li>
+<li>'Merc'
+<ul>
+<li>Meroitic Cursive</li>
+</ul></li>
+<li>'Mero'
+<ul>
+<li>Meroitic</li>
+</ul></li>
+<li>'Mlym'
+<ul>
+<li>Malayalam</li>
+</ul></li>
+<li>'Modi'
+<ul>
+<li>Modi</li>
+</ul></li>
+<li>'Mong'
+<ul>
+<li>Mongolian</li>
+</ul></li>
+<li>'Moon'
+<ul>
+<li>Moon</li>
+</ul></li>
+<li>'Mroo'
+<ul>
+<li>Mro</li>
+</ul></li>
+<li>'Mtei'
+<ul>
+<li>Meitei Mayek</li>
+</ul></li>
+<li>'Mult'
+<ul>
+<li>Multani</li>
+</ul></li>
+<li>'Mymr'
+<ul>
+<li>Myanmar</li>
+</ul></li>
+<li>'Nagm'
+<ul>
+<li>Nag Mundari</li>
+</ul></li>
+<li>'Nand'
+<ul>
+<li>Nandinagari</li>
+</ul></li>
+<li>'Narb'
+<ul>
+<li>Old North Arabian</li>
+</ul></li>
+<li>'Nbat'
+<ul>
+<li>Nabataean</li>
+</ul></li>
+<li>'Newa'
+<ul>
+<li>Newa</li>
+</ul></li>
+<li>'Nkgb'
+<ul>
+<li>Naxi Geba</li>
+</ul></li>
+<li>'Nkoo'
+<ul>
+<li>N’Ko</li>
+</ul></li>
+<li>'Nshu'
+<ul>
+<li>Nüshu</li>
+</ul></li>
+<li>'Ogam'
+<ul>
+<li>Ogham</li>
+</ul></li>
+<li>'Olck'
+<ul>
+<li>Ol Chiki</li>
+</ul></li>
+<li>'Orkh'
+<ul>
+<li>Orkhon</li>
+</ul></li>
+<li>'Orya'
+<ul>
+<li>Odia</li>
+</ul></li>
+<li>'Osge'
+<ul>
+<li>Osage</li>
+</ul></li>
+<li>'Osma'
+<ul>
+<li>Osmanya</li>
+</ul></li>
+<li>'Ougr'
+<ul>
+<li>Old Uyghur</li>
+</ul></li>
+<li>'Palm'
+<ul>
+<li>Palmyrene</li>
+</ul></li>
+<li>'Pauc'
+<ul>
+<li>Pau Cin Hau</li>
+</ul></li>
+<li>'Perm'
+<ul>
+<li>Old Permic</li>
+</ul></li>
+<li>'Phag'
+<ul>
+<li>Phags-pa</li>
+</ul></li>
+<li>'Phli'
+<ul>
+<li>Inscriptional Pahlavi</li>
+</ul></li>
+<li>'Phlp'
+<ul>
+<li>Psalter Pahlavi</li>
+</ul></li>
+<li>'Phlv'
+<ul>
+<li>Book Pahlavi</li>
+</ul></li>
+<li>'Phnx'
+<ul>
+<li>Phoenician</li>
+</ul></li>
+<li>'Plrd'
+<ul>
+<li>Pollard Phonetic</li>
+</ul></li>
+<li>'Prti'
+<ul>
+<li>Inscriptional Parthian</li>
+</ul></li>
+<li>'Qaag'
+<ul>
+<li>Zawgyi</li>
+</ul></li>
+<li>'Rjng'
+<ul>
+<li>Rejang</li>
+</ul></li>
+<li>'Rohg'
+<ul>
+<li>Hanifi</li>
+</ul></li>
+<li>'Roro'
+<ul>
+<li>Rongorongo</li>
+</ul></li>
+<li>'Runr'
+<ul>
+<li>Runic</li>
+</ul></li>
+<li>'Samr'
+<ul>
+<li>Samaritan</li>
+</ul></li>
+<li>'Sara'
+<ul>
+<li>Sarati</li>
+</ul></li>
+<li>'Sarb'
+<ul>
+<li>Old South Arabian</li>
+</ul></li>
+<li>'Saur'
+<ul>
+<li>Saurashtra</li>
+</ul></li>
+<li>'Sgnw'
+<ul>
+<li>SignWriting</li>
+</ul></li>
+<li>'Shaw'
+<ul>
+<li>Shavian</li>
+</ul></li>
+<li>'Shrd'
+<ul>
+<li>Sharada</li>
+</ul></li>
+<li>'Sidd'
+<ul>
+<li>Siddham</li>
+</ul></li>
+<li>'Sind'
+<ul>
+<li>Khudawadi</li>
+</ul></li>
+<li>'Sinh'
+<ul>
+<li>Sinhala</li>
+</ul></li>
+<li>'Sogd'
+<ul>
+<li>Sogdian</li>
+</ul></li>
+<li>'Sogo'
+<ul>
+<li>Old Sogdian</li>
+</ul></li>
+<li>'Sora'
+<ul>
+<li>Sora Sompeng</li>
+</ul></li>
+<li>'Soyo'
+<ul>
+<li>Soyombo</li>
+</ul></li>
+<li>'Sund'
+<ul>
+<li>Sundanese</li>
+</ul></li>
+<li>'Sylo'
+<ul>
+<li>Syloti Nagri</li>
+</ul></li>
+<li>'Syrc'
+<ul>
+<li>Syriac</li>
+</ul></li>
+<li>'Syre'
+<ul>
+<li>Estrangelo Syriac</li>
+</ul></li>
+<li>'Syrj'
+<ul>
+<li>Western Syriac</li>
+</ul></li>
+<li>'Syrn'
+<ul>
+<li>Eastern Syriac</li>
+</ul></li>
+<li>'Tagb'
+<ul>
+<li>Tagbanwa</li>
+</ul></li>
+<li>'Takr'
+<ul>
+<li>Takri</li>
+</ul></li>
+<li>'Tale'
+<ul>
+<li>Tai Le</li>
+</ul></li>
+<li>'Talu'
+<ul>
+<li>New Tai Lue</li>
+</ul></li>
+<li>'Taml'
+<ul>
+<li>Tamil</li>
+</ul></li>
+<li>'Tang'
+<ul>
+<li>Tangut</li>
+</ul></li>
+<li>'Tavt'
+<ul>
+<li>Tai Viet</li>
+</ul></li>
+<li>'Telu'
+<ul>
+<li>Telugu</li>
+</ul></li>
+<li>'Teng'
+<ul>
+<li>Tengwar</li>
+</ul></li>
+<li>'Tfng'
+<ul>
+<li>Tifinagh</li>
+</ul></li>
+<li>'Tglg'
+<ul>
+<li>Tagalog</li>
+</ul></li>
+<li>'Thaa'
+<ul>
+<li>Thaana</li>
+</ul></li>
+<li>'Thai'
+<ul>
+<li>Thai</li>
+</ul></li>
+<li>'Tibt'
+<ul>
+<li>Tibetan</li>
+</ul></li>
+<li>'Tirh'
+<ul>
+<li>Tirhuta</li>
+</ul></li>
+<li>'Tnsa'
+<ul>
+<li>Tangsa</li>
+</ul></li>
+<li>'Toto'
+<ul>
+<li>Toto</li>
+</ul></li>
+<li>'Ugar'
+<ul>
+<li>Ugaritic</li>
+</ul></li>
+<li>'Vaii'
+<ul>
+<li>Vai</li>
+</ul></li>
+<li>'Visp'
+<ul>
+<li>Visible Speech</li>
+</ul></li>
+<li>'Vith'
+<ul>
+<li>Vithkuqi</li>
+</ul></li>
+<li>'Wara'
+<ul>
+<li>Varang Kshiti</li>
+</ul></li>
+<li>'Wcho'
+<ul>
+<li>Wancho</li>
+</ul></li>
+<li>'Wole'
+<ul>
+<li>Woleai</li>
+</ul></li>
+<li>'Xpeo'
+<ul>
+<li>Old Persian</li>
+</ul></li>
+<li>'Xsux'
+<ul>
+<li>Sumero-Akkadian Cuneiform</li>
+</ul></li>
+<li>'Yezi'
+<ul>
+<li>Yezidi</li>
+</ul></li>
+<li>'Yiii'
+<ul>
+<li>Yi</li>
+</ul></li>
+<li>'Zanb'
+<ul>
+<li>Zanabazar Square</li>
+</ul></li>
+<li>'Zinh'
+<ul>
+<li>Inherited</li>
+</ul></li>
+<li>'Zmth'
+<ul>
+<li>Mathematical Notation</li>
+</ul></li>
+<li>'Zsye'
+<ul>
+<li>Emoji</li>
+</ul></li>
+<li>'Zsym'
+<ul>
+<li>Symbols</li>
+</ul></li>
+<li>'Zxxx'
+<ul>
+<li>Unwritten</li>
+</ul></li>
+<li>'Zyyy'
+<ul>
+<li>Common</li>
+</ul></li>
+<li>'Zzzz'
+<ul>
+<li>Unknown Script</li>
+</ul></li>
+</ul>
+<p></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.6.5/api-regionidtype"><span class="arrow-prev">← </span><span class="function-name-prevnext">RegionIdType</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.6.5/api-bundle"><span>Bundle</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2023 Patrick Hensley</section></footer></div></body></html>
