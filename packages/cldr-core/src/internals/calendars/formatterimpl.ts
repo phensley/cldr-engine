@@ -43,7 +43,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     this.tz = internals.schema.TimeZones;
   }
 
-  format<R>(val: AbstractValue<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[]): void {
+  format<R>(val: AbstractValue<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[], first: boolean = true): void {
     const len = nodes.length;
     for (let i = 0; i < len; i++) {
       const n = nodes[i];
@@ -300,7 +300,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
           continue;
       }
 
-      if (i === 0 && ctx.context && field) {
+      if (first && i === 0 && ctx.context && field) {
         value = this.internals.general.contextTransform(value, ctx.transform, ctx.context, field);
       }
       val.add(type, value);

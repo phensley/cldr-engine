@@ -49,5 +49,5 @@ export interface CalendarContext<T extends CalendarDate> {
 }
 
 export interface CalendarFormatter<T extends CalendarDate> {
-  format<R>(val: AbstractValue<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[]): void;
+  format<R>(val: AbstractValue<R>, ctx: CalendarContext<T>, nodes: DateTimeNode[], first: boolean): void;
 }

@@ -122,3 +122,19 @@ test('interval mismatch', () => {
   s = api.formatDateInterval(start, end, { skeleton: 'hm' });
   expect(s).toEqual('3/11, 3:00 AM – 5/11, 3:00 AM');
 });
+
+test('interval context', () => {
+  const api = calendarsApi('fr');
+  const zoneId = 'America/New_York';
+  const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId });
+
+  let end: CalendarDate;
+  let s: string;
+
+  end = start.add({ week: 2 });
+  s = api.formatDateInterval(start, end, { skeleton: 'yMMMEd', context: 'middle-of-text' });
+  expect(s).toEqual('dim. 11 – dim. 25 mars 2018');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'yMMMEd', context: 'begin-sentence' });
+  expect(s).toEqual('Dim. 11 – dim. 25 mars 2018');
+});
