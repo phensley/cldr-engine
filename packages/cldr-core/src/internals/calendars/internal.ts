@@ -87,6 +87,7 @@ export class CalendarInternalsImpl implements CalendarInternals {
     calendar: CalendarType,
     ctx: CalendarContext<CalendarDate>,
     value: AbstractValue<R>,
+    first: boolean,
     date?: DateTimeNode[],
     time?: DateTimeNode[],
     wrapper?: string,
@@ -95,11 +96,11 @@ export class CalendarInternalsImpl implements CalendarInternals {
     let _date: R | undefined;
     let _time: R | undefined;
     if (date) {
-      formatter.format(value, ctx, date);
+      formatter.format(value, ctx, date, first);
       _date = value.render();
     }
     if (time) {
-      formatter.format(value, ctx, time);
+      formatter.format(value, ctx, time, !!date && first);
       _time = value.render();
     }
     if (_date && _time && wrapper) {
@@ -114,13 +115,14 @@ export class CalendarInternalsImpl implements CalendarInternals {
     calendar: CalendarType,
     ctx: CalendarContext<CalendarDate>,
     value: AbstractValue<R>,
+    first: boolean,
     end: CalendarDate,
     pattern: DateTimeNode[],
   ): R {
     const idx = intervalPatternBoundary(pattern);
-    const s = this.formatDateTime(calendar, ctx, value, pattern.slice(0, idx));
+    const s = this.formatDateTime(calendar, ctx, value, first, pattern.slice(0, idx));
     ctx.date = end;
-    const e = this.formatDateTime(calendar, ctx, value, pattern.slice(idx));
+    const e = this.formatDateTime(calendar, ctx, value, false, pattern.slice(idx));
     return value.join(s, e);
   }
 

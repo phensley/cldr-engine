@@ -493,7 +493,7 @@ export class CalendarsImpl implements Calendars {
     date = this.convertDateTo(calendar, date);
     const req = this.manager.getDateFormatRequest(date, options, params);
     const ctx = this._context(date, params, options.context, options.alt);
-    return calendars.formatDateTime(calendar, ctx, value, req.date, req.time, req.wrapper);
+    return calendars.formatDateTime(calendar, ctx, value, true, req.date, req.time, req.wrapper);
   }
 
   private _formatInterval<R>(
@@ -516,9 +516,9 @@ export class CalendarsImpl implements Calendars {
       const { ca, nu } = options;
       const r = this.manager.getDateFormatRequest(start, { ca, nu, skeleton: req.skeleton }, params);
       const ctx = this._context(start, params, options.context, options.alt);
-      const _start = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
+      const _start = this.internals.calendars.formatDateTime(calendar, ctx, value, true, r.date, r.time, r.wrapper);
       ctx.date = end;
-      const _end = this.internals.calendars.formatDateTime(calendar, ctx, value, r.date, r.time, r.wrapper);
+      const _end = this.internals.calendars.formatDateTime(calendar, ctx, value, false, r.date, r.time, r.wrapper);
       const wrapper = this.internals.general.parseWrapper(req.wrapper);
       value.wrap(wrapper, [_start, _end]);
       return value.render();
@@ -527,12 +527,12 @@ export class CalendarsImpl implements Calendars {
     let _date: R | undefined;
     if (req.date) {
       const ctx = this._context(start, params, options.context, options.alt);
-      _date = this.internals.calendars.formatDateTime(calendar, ctx, value, req.date);
+      _date = this.internals.calendars.formatDateTime(calendar, ctx, value, true, req.date);
     }
 
     if (req.range) {
       const ctx = this._context(start, params, options.context, options.alt);
-      const _range = this.internals.calendars.formatInterval(calendar, ctx, value, end, req.range);
+      const _range = this.internals.calendars.formatInterval(calendar, ctx, value, !_date, end, req.range);
       if (!_date) {
         return _range;
       }
@@ -584,7 +584,7 @@ export class CalendarsImpl implements Calendars {
     const calendar = this.internals.calendars.selectCalendar(this.bundle, options.ca);
     const params = this.privateApi.getNumberParams(options.nu, 'default');
     const ctx = this._context(this.convertDateTo(calendar, date), params, options.context, options.alt);
-    return this.internals.calendars.formatDateTime(calendar, ctx, value, pattern);
+    return this.internals.calendars.formatDateTime(calendar, ctx, value, true, pattern);
   }
 
   private _formatDateWrapper<R>(value: AbstractValue<R>, date: R, time: R, options: DateWrapperFormatOptions): R {
