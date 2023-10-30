@@ -237,9 +237,9 @@ export interface CalendarInternals {
     // Warning: (ae-forgotten-export) The symbol "AbstractValue" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    formatDateTime<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>, date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
+    formatDateTime<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>, first: boolean, date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
     // (undocumented)
-    formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>, end: CalendarDate, pattern: DateTimeNode[]): R;
+    formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>, first: boolean, end: CalendarDate, pattern: DateTimeNode[]): R;
     // Warning: (ae-forgotten-export) The symbol "CalendarFormatter" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -266,9 +266,9 @@ export class CalendarInternalsImpl implements CalendarInternals {
     // (undocumented)
     flexDayPeriod(bundle: Bundle, minutes: number): DayPeriodType | undefined;
     // (undocumented)
-    formatDateTime<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>, date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
+    formatDateTime<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>, first: boolean, date?: DateTimeNode[], time?: DateTimeNode[], wrapper?: string): R;
     // (undocumented)
-    formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>, end: CalendarDate, pattern: DateTimeNode[]): R;
+    formatInterval<R>(calendar: CalendarType, ctx: CalendarContext<CalendarDate>, value: AbstractValue<R>, first: boolean, end: CalendarDate, pattern: DateTimeNode[]): R;
     // (undocumented)
     getCalendarFormatter(type: CalendarType): CalendarFormatter<CalendarDate>;
     // (undocumented)

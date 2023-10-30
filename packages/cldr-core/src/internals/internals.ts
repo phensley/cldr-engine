@@ -53,6 +53,7 @@ export interface CalendarInternals {
     calendar: CalendarType,
     ctx: CalendarContext<CalendarDate>,
     value: AbstractValue<R>,
+    first: boolean,
     date?: DateTimeNode[],
     time?: DateTimeNode[],
     wrapper?: string,
@@ -62,6 +63,7 @@ export interface CalendarInternals {
     calendar: CalendarType,
     ctx: CalendarContext<CalendarDate>,
     value: AbstractValue<R>,
+    first: boolean,
     end: CalendarDate,
     pattern: DateTimeNode[],
   ): R;
