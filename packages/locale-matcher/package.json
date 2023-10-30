@@ -1,6 +1,6 @@
 {
   "name": "@phensley/locale-matcher",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "Implements CLDR enhanced language matching",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -36,8 +36,8 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/language-tag": "~1.7.2",
-    "@phensley/locale": "~1.7.2",
+    "@phensley/language-tag": "~1.7.3",
+    "@phensley/locale": "~1.7.3",
     "tslib": "^2.6.0"
   },
   "devDependencies": {

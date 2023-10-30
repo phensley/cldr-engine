@@ -1,6 +1,6 @@
 {
   "name": "@phensley/cldr-types",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "Types shared among packages in the @phensley/cldr library",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
