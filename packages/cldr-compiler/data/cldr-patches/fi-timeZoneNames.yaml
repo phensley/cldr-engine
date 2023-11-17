@@ -1,0 +1,7 @@
+version: 1
+patches:
+  - operations:
+    - op: add
+      path: /main/fi/dates/timeZoneNames/zone/America/Thule/exemplarCity
+      value: Thule
+

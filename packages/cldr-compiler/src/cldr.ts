@@ -7,6 +7,8 @@
 import * as fs from 'fs';
 import { join, resolve } from 'path';
 import * as L from 'partial.lenses';
+import * as yaml from 'yaml';
+import { applyOperation, Operation } from 'fast-json-patch';
 
 import {
   transformCalendar,
@@ -56,8 +58,11 @@ const assign = (dst: any, ...src: any[]): any => {
  *  { 'Pacific/Honolulu': { short: { generic: ... } } }
  */
 const flattenTimeZones = (obj: any): any => {
-  const inner = (o: any, path: string[] = []): any =>
-    isTimeZone(o) ? [{ [path.join('/')]: o }] : [].concat(...Object.keys(o).map((k) => inner(o[k], path.concat([k]))));
+  const inner = (o: any, path: string[] = []): any => {
+    return isTimeZone(o)
+      ? [{ [path.join('/')]: o }]
+      : [].concat(...Object.keys(o).map((k) => inner(o[k], path.concat([k]))));
+  };
   return assign({}, ...inner(obj));
 };
 
@@ -537,7 +542,15 @@ export const load = (path: string, optional = false) => {
  */
 export const getMain = (language: string, transform: boolean = true) => {
   const access = (group: any, fileName: string, optional = false, transformer?: (o: any) => any) => {
-    const data = load(`main/${language}/${fileName}`, optional);
+    let data = load(`main/${language}/${fileName}`, optional);
+    // CLDR 44 release has at least one error we need to correct before transforming
+    // the JSON according to our schema. We patch these errors before processing the
+    // JSON documents.
+    if (hasPatch(language, fileName)) {
+      if (!applyPatch(language, fileName, data)) {
+        process.exit(1);
+      }
+    }
     const root = L.get(['main', language], data);
     const converted = convert(group, root);
     return transform && transformer ? transformer(converted) : converted;
@@ -655,3 +668,36 @@ const readjson = (path: string): any => {
   const data = fs.readFileSync(path, { encoding: 'utf-8' });
   return JSON.parse(data);
 };
+
+const hasPatch = (language: string, fileName: string): boolean => {
+  const path = join(__dirname, '..', 'data', 'cldr-patches', `${language}-${fileName}.yaml`);
+  return fs.existsSync(path);
+};
+
+const applyPatch = (language: string, fileName: string, doc: any): boolean => {
+  const path = join(__dirname, '..', 'data', 'cldr-patches', `${language}-${fileName}.yaml`);
+  const raw = fs.readFileSync(path, { encoding: 'utf-8' });
+  const patchfile = yaml.parse(raw) as PatchFile;
+  let ok = true;
+  for (const patch of patchfile.patches) {
+    for (const op of patch.operations) {
+      try {
+        applyOperation(doc, op, true, true, true);
+      } catch (e: any) {
+        console.warn(`error patching key ${op.path}: ${e.name}`);
+        ok = false;
+      }
+    }
+  }
+  return ok;
+};
+
+interface Patch {
+  operations: Operation[];
+}
+
+interface PatchFile {
+  path: string;
+  version: number;
+  patches: Patch[];
+}

@@ -18,7 +18,7 @@
   "bin": {
     "cldr-compiler": "./bin/compiler.js"
   },
-  "cldrversion": "43.1.0",
+  "cldrversion": "44.0.1",
   "scripts": {
     "disabled:api": "api-extractor run -c ./etc/api-extractor.json --verbose",
     "disabled:api:local": "pnpm run api -l",
