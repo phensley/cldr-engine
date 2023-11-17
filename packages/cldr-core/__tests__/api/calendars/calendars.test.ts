@@ -660,7 +660,7 @@ test('intervals', () => {
 
   api = calendarsApi('en-GB');
   s = api.formatDate(mar11, { date: 'full' });
-  expect(s).toEqual('Saturday, 10 March 2018');
+  expect(s).toEqual('Saturday 10 March 2018');
 
   s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
   expect(s).toEqual('10–14 Mar 2018');

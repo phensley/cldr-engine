@@ -273,7 +273,7 @@ test('currency spacing', () => {
 
   api = numbersApi('km');
   s = api.formatCurrency('12345.234', 'USD', opts);
-  expect(s).toEqual('12.345,23$');
+  expect(s).toEqual('12,345.23$');
 
   opts = { style: 'symbol', symbolWidth: 'default', group: true, nu: 'native' };
   s = api.formatCurrency('12345.234', 'USD', opts);
@@ -361,9 +361,9 @@ test('currency parts spacing', () => {
   s = api.formatCurrencyToParts('12345.234', 'BAD', { group: true });
   expect(s).toEqual([
     { type: 'integer', value: '12' },
-    { type: 'group', value: '.' },
+    { type: 'group', value: ',' },
     { type: 'integer', value: '345' },
-    { type: 'decimal', value: ',' },
+    { type: 'decimal', value: '.' },
     { type: 'fraction', value: '23' },
     { type: 'spacer', value: '\u00a0' },
     { type: 'currency', value: 'BAD' },
@@ -517,8 +517,8 @@ test('currency non-latn', () => {
   let s: string;
 
   s = api.formatCurrency('123456789', 'USD', { style: 'name' });
-  expect(s).toEqual('123.456.789,00 ដុល្លារ​អាមេរិក');
+  expect(s).toEqual('123,456,789.00 ដុល្លារ​អាមេរិក');
 
   s = api.formatCurrency('123456789', 'USD', { style: 'code', nu: 'deva' });
-  expect(s).toEqual('१२३.४५६.७८९,०० USD');
+  expect(s).toEqual('१२३,४५६,७८९.०० USD');
 });

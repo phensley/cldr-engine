@@ -176,7 +176,7 @@ test('v38 units', () => {
 
   opts = { length: 'short' };
   s = api.formatQuantity(q, opts);
-  expect(s).toEqual('12.5 dstspn');
+  expect(s).toEqual('12.5 dsp');
 });
 
 test('v39 units', () => {

@@ -81,7 +81,10 @@ export class NumberInternalsImpl implements NumberInternals {
   }
 
   getCurrencyPluralName(bundle: Bundle, code: string, plural: PluralType): string {
-    return this.currencies.pluralName.get(bundle, plural, code as CurrencyType);
+    return (
+      this.currencies.pluralName.get(bundle, plural, code as CurrencyType) ||
+      this.currencies.displayName.get(bundle, code as CurrencyType)
+    );
   }
 
   getNumberPattern(raw: string, negative: boolean): NumberPattern {

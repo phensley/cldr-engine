@@ -178,9 +178,11 @@ test('compact non-latn', () => {
   let api: NumbersImpl;
   let s: string;
 
+  // Compact number formatting for zh-Hant-HK "long" changed in CLDR 44
+  // to be equal to "short"
   api = numbersApi('zh-HK');
   s = api.formatDecimal('1000000000', { style: 'long' });
-  expect(s).toEqual('10億'); // 億 = hundred millions
+  expect(s).toEqual('1B');
 
   s = api.formatDecimal('1000000000', { style: 'short' });
   expect(s).toEqual('1B');
