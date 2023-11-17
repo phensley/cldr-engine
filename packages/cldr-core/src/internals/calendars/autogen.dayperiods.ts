@@ -14,6 +14,7 @@ export const dayPeriodRules: { [x: string]: string } = {
   ar: '5 3 4 0 1|0 50 a0 k0 u0',
   az: '2 3 4 6 0 1 5|0 6o a0 k0 k1 sc vo',
   bg: '2 5 3 4 0 1 5|0 1 6o ic nc u0 10o',
+  blo: '5 3 4 0 1|0 6o bo k0 xc',
   bn: '5 3 4 0 1 5|0 6o a0 k0 u0 xc',
   bs: '2 5 3 6 0 1 5|0 1 6o k0 k1 u0 z0',
   ca: '2 3 4 0 1 5|0 1 a0 k0 vo z0',
