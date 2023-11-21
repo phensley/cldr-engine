@@ -99,7 +99,10 @@ export class DateSkeleton {
 export const EMPTY = new DateSkeleton();
 
 export class DateSkeletonParser {
-  constructor(readonly preferredFlex: DateTimeNode[], readonly allowedFlex: DateTimeNode[]) {}
+  constructor(
+    readonly preferredFlex: DateTimeNode[],
+    readonly allowedFlex: DateTimeNode[],
+  ) {}
 
   parse(skeleton: string, isPattern: boolean = false): DateSkeleton {
     const s = new DateSkeleton();

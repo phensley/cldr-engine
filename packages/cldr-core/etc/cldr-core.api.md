@@ -1246,11 +1246,6 @@ export interface Locale {
 }
 
 // @public
-export class Locale {
-    static resolve(id: string): Locale;
-}
-
-// @public
 export interface LocaleMatch {
     distance: number;
     locale: Locale;
@@ -1265,6 +1260,11 @@ export class LocaleMatcher {
 // @public
 export interface LocaleMatcherOptions {
     resolve?: boolean;
+}
+
+// @public
+export class LocaleResolver {
+    static resolve(id: string): Locale;
 }
 
 // @public

@@ -11,7 +11,10 @@ export interface CompactRange {
 }
 
 export class Range {
-  constructor(public start: number, public end: number) {}
+  constructor(
+    public start: number,
+    public end: number,
+  ) {}
 
   compact(): CompactRange {
     return [this.start, this.end];
@@ -28,7 +31,12 @@ export interface CompactExpr {
 }
 
 export class Expr {
-  constructor(public operand: string, public modop: number, public relop: string, public rangelist: RangeList) {}
+  constructor(
+    public operand: string,
+    public modop: number,
+    public relop: string,
+    public rangelist: RangeList,
+  ) {}
 
   compact(): CompactExpr {
     const rangelist = this.rangelist.map((e) => (typeof e === 'number' ? e : e.compact()));
@@ -57,7 +65,10 @@ export class OrCondition {
 }
 
 export class Rule {
-  constructor(public or: OrCondition, public samples: string) {}
+  constructor(
+    public or: OrCondition,
+    public samples: string,
+  ) {}
 
   compact(): CompactOrCondition {
     return this.or.compact();

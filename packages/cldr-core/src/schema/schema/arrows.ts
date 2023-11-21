@@ -32,7 +32,11 @@ export class DigitsArrowImpl<T extends string> implements DigitsArrow<T> {
 
   readonly size2: number;
 
-  constructor(readonly offset: number, readonly index: KeyIndex<T>, readonly values: number[]) {
+  constructor(
+    readonly offset: number,
+    readonly index: KeyIndex<T>,
+    readonly values: number[],
+  ) {
     this.size2 = values.length * 2; // store pattern and divisor as a pair
   }
 
@@ -65,7 +69,10 @@ export class VectorArrowImpl {
   private last: number;
   private factors: number[];
 
-  constructor(offset: number, readonly keysets: KeyIndex<string>[]) {
+  constructor(
+    offset: number,
+    readonly keysets: KeyIndex<string>[],
+  ) {
     this.offset = offset + 1; // skip over header
     this.len = keysets.length;
     this.last = this.len - 1;

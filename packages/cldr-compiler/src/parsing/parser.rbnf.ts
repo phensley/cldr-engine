@@ -78,57 +78,57 @@ export type RBNFNode = AtomNode | BlockNode | PluralNode | StringNode;
 
 // RULES
 
-const P_SUB_LEFT = matcher(/^\u2190\u2190/).map((_) => ({ kind: 'sub-left' } as AtomNode));
+const P_SUB_LEFT = matcher(/^\u2190\u2190/).map((_) => ({ kind: 'sub-left' }) as AtomNode);
 
-const P_SUB_RIGHT = matcher(/^\u2192\u2192/).map((_) => ({ kind: 'sub-right' } as AtomNode));
+const P_SUB_RIGHT = matcher(/^\u2192\u2192/).map((_) => ({ kind: 'sub-right' }) as AtomNode);
 
-const P_SUB_RIGHT_3 = matcher(/^\u2192\u2192\u2192/).map((_) => ({ kind: 'sub-right-3' } as AtomNode));
+const P_SUB_RIGHT_3 = matcher(/^\u2192\u2192\u2192/).map((_) => ({ kind: 'sub-right-3' }) as AtomNode);
 
 const P_PLURAL_BODY = matcher(/^[^\}]+/u)
   .prefix(P_BRACE_LEFT)
   .suffix(P_BRACE_RIGHT);
 
-const P_PLURAL_SUB = P_PLURAL_CAT.flatMap((category) => P_PLURAL_BODY.map((n) => ({ category, n } as PluralSub)));
+const P_PLURAL_SUB = P_PLURAL_CAT.flatMap((category) => P_PLURAL_BODY.map((n) => ({ category, n }) as PluralSub));
 
 const P_PLURAL_INNER = P_PLURAL_TYPE.flatMap((kind) =>
-  P_COMMA.flatMap((_) => P_PLURAL_SUB.oneOrMore().map((n) => ({ kind, n } as PluralNode))),
+  P_COMMA.flatMap((_) => P_PLURAL_SUB.oneOrMore().map((n) => ({ kind, n }) as PluralNode)),
 );
 
 const P_PLURALIZED = P_PLURAL_INNER.prefix(P_PLURAL_START).suffix(P_PLURAL_END);
 
 const P_APPLY_UNCH_RULE = P_RULENAME.prefix(P_EQUAL)
   .suffix(P_EQUAL)
-  .map((n) => ({ kind: 'apply-unch-rule', n } as StringNode));
+  .map((n) => ({ kind: 'apply-unch-rule', n }) as StringNode);
 
 const P_APPLY_UNCH_NUMFORMAT = P_NUMFORMAT.prefix(P_EQUAL)
   .suffix(P_EQUAL)
-  .map((n) => ({ kind: 'apply-unch-numfmt', n } as StringNode));
+  .map((n) => ({ kind: 'apply-unch-numfmt', n }) as StringNode);
 
 const P_APPLY_LEFT_RULE = P_RULENAME.prefix(P_ARROW_1_LEFT)
   .suffix(P_ARROW_1_LEFT)
-  .map((n) => ({ kind: 'apply-left-rule', n } as StringNode));
+  .map((n) => ({ kind: 'apply-left-rule', n }) as StringNode);
 
 const P_APPLY_LEFT_NUMFORMAT = P_NUMFORMAT.prefix(P_ARROW_1_LEFT)
   .suffix(P_ARROW_1_LEFT)
-  .map((n) => ({ kind: 'apply-left-numfmt', n } as StringNode));
+  .map((n) => ({ kind: 'apply-left-numfmt', n }) as StringNode);
 
 const P_APPLY_LEFT_2_RULE = P_RULENAME.prefix(P_ARROW_1_LEFT)
   .suffix(P_ARROW_2_LEFT)
-  .map((n) => ({ kind: 'apply-left-2-rule', n } as StringNode));
+  .map((n) => ({ kind: 'apply-left-2-rule', n }) as StringNode);
 
 const P_APPLY_LEFT_2_NUMFORMAT = P_NUMFORMAT.prefix(P_ARROW_1_LEFT)
   .suffix(P_ARROW_2_LEFT)
-  .map((n) => ({ kind: 'apply-left-2-numfmt', n } as StringNode));
+  .map((n) => ({ kind: 'apply-left-2-numfmt', n }) as StringNode);
 
 const P_APPLY_RIGHT_RULE = P_RULENAME.prefix(P_ARROW_1_RIGHT)
   .suffix(P_ARROW_1_RIGHT)
-  .map((n) => ({ kind: 'apply-right-rule', n } as StringNode));
+  .map((n) => ({ kind: 'apply-right-rule', n }) as StringNode);
 
 const P_APPLY_RIGHT_NUMFORMAT = P_NUMFORMAT.prefix(P_ARROW_1_RIGHT)
   .suffix(P_ARROW_1_RIGHT)
-  .map((n) => ({ kind: 'apply-right-numfmt', n } as StringNode));
+  .map((n) => ({ kind: 'apply-right-numfmt', n }) as StringNode);
 
-const P_LITERAL = matcher(/^[^\u2190\u2192%=\[\];$]+/u).map((n) => ({ kind: 'literal', n } as StringNode));
+const P_LITERAL = matcher(/^[^\u2190\u2192%=\[\];$]+/u).map((n) => ({ kind: 'literal', n }) as StringNode);
 
 // Rule for optional [ ... ]
 const P_OPTION = P_PLURALIZED.or(P_SUB_RIGHT_3)
@@ -146,7 +146,7 @@ const P_OPTION = P_PLURALIZED.or(P_SUB_RIGHT_3)
   .zeroOrMore()
   .prefix(P_SQ_LEFT)
   .suffix(P_SQ_RIGHT)
-  .map((n) => ({ kind: 'optional', n } as BlockNode));
+  .map((n) => ({ kind: 'optional', n }) as BlockNode);
 
 // Main RBNF rule
 const P_RULE = P_APOSTROPHE.orDefault('').flatMap((_) =>

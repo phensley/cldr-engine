@@ -18,7 +18,10 @@ export class NumberParamsCache {
   private latnSystem: NumberingSystem;
   private latnSystemInfo: NumberSystemInfo;
 
-  constructor(private bundle: Bundle, private internals: Internals) {
+  constructor(
+    private bundle: Bundle,
+    private internals: Internals,
+  ) {
     this.numberParamsCache = new Cache((s: string) => this.build(s as NumberSystemName), 20);
     this.numbers = internals.schema.Numbers;
     this.latnSystemInfo = this.numbers.numberSystem.get('latn') as NumberSystemInfo;

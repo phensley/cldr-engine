@@ -64,7 +64,10 @@ const WARNED: { [x: string]: boolean } = {};
 export class OriginImpl implements Origin {
   readonly type = 'origin';
 
-  constructor(readonly block: Scope[], readonly indices: { [x: string]: KeyIndex<string> }) {}
+  constructor(
+    readonly block: Scope[],
+    readonly indices: { [x: string]: KeyIndex<string> },
+  ) {}
 
   getIndex(name: string): KeyIndex<string> {
     const r = this.indices[name];

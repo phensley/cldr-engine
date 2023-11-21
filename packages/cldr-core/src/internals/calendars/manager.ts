@@ -16,7 +16,10 @@ export class CalendarManager {
   private readonly patternCache: Cache<CalendarPatterns>;
   private readonly availableCalendars: Set<string>;
 
-  constructor(private readonly bundle: Bundle, private readonly internals: Internals) {
+  constructor(
+    private readonly bundle: Bundle,
+    private readonly internals: Internals,
+  ) {
     // calendars config array should always be non-empty
     this.availableCalendars = new Set(internals.config.calendars || /* istanbul ignore next */ []);
     const schema = internals.schema;

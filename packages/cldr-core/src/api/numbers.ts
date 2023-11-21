@@ -173,8 +173,8 @@ const validate = <T>(
   return isnan
     ? renderer.make('nan', params.symbols.nan)
     : isinfinity
-    ? renderer.make('infinity', params.symbols.infinity)
-    : undefined;
+      ? renderer.make('infinity', params.symbols.infinity)
+      : undefined;
 };
 
 // Default an options context value

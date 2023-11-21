@@ -17,7 +17,10 @@ const right = (i: number) => (i << 1) + 2;
 export class Heap<T> {
   private items: T[];
 
-  constructor(private readonly cmp: Comparator<T>, data: T[]) {
+  constructor(
+    private readonly cmp: Comparator<T>,
+    data: T[],
+  ) {
     this.items = data.slice(0);
     for (let i = parent(data.length - 1); i >= 0; i--) {
       this._down(i);

@@ -57,7 +57,10 @@ export class RandString {
   private rng: RNG;
   private len: number;
 
-  constructor(seed: string, private chars: string) {
+  constructor(
+    seed: string,
+    private chars: string,
+  ) {
     this.rng = new RNG(seed);
     this.len = chars.length;
   }

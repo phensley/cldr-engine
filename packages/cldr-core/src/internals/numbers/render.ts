@@ -28,8 +28,8 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
     const decimal = decimalSymbol
       ? decimalSymbol
       : currency
-      ? symbols.currencyDecimal || symbols.decimal
-      : symbols.decimal;
+        ? symbols.currencyDecimal || symbols.decimal
+        : symbols.decimal;
     let group = '';
     if (grouping) {
       group = symbols.group;

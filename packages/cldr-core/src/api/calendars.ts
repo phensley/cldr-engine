@@ -267,8 +267,8 @@ export class CalendarsImpl implements Calendars {
       a instanceof CalendarDate
         ? a.type()
         : b instanceof CalendarDate
-        ? b.type()
-        : this.internals.calendars.selectCalendar(this.bundle);
+          ? b.type()
+          : this.internals.calendars.selectCalendar(this.bundle);
 
     // Convert a and b to CalendarDate having the correct type, ensuring their types and timezones match.
     if (!(a instanceof CalendarDate) || type !== a.type()) {

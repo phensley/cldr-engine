@@ -27,11 +27,11 @@ export interface Locale {
 }
 
 /**
- * Merged declaration to add a parse() method to Locale interface.
+ * Merged declaration to add a resolve() method to Locale interface.
  *
  * @public
  */
-export class Locale {
+export class LocaleResolver {
   /**
    * Parses a language tag and resolves it, substituting aliases and
    * adding likely subtags.

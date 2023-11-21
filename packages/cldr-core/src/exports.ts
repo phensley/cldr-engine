@@ -62,7 +62,7 @@ export {
 
 export { parseLanguageTag, LanguageTag } from '@phensley/language-tag';
 
-export { LanguageResolver, Locale } from '@phensley/locale';
+export { LanguageResolver, Locale, LocaleResolver } from '@phensley/locale';
 
 export { LocaleMatch, LocaleMatcher, LocaleMatcherOptions } from '@phensley/locale-matcher';
 

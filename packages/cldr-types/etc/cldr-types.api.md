@@ -183,7 +183,7 @@ export const enum DateTimePatternField {
     // (undocumented)
     HOUR = "H",
     // (undocumented)
-    MINUTE = "m",
+    MINUTE = "m",// am / pm
     // (undocumented)
     MONTH = "M",
     // (undocumented)

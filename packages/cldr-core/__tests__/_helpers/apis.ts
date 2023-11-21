@@ -6,7 +6,7 @@ import {
   CalendarsImpl,
   GeneralImpl,
   InternalsImpl,
-  Locale,
+  LocaleResolver,
   NumbersImpl,
   PrivateApiImpl,
   SchemaConfig,
@@ -17,7 +17,7 @@ import { VERSION as _VERSION } from '../../src/utils/version';
 
 export const VERSION = _VERSION;
 
-export const buildConfig = (cfg: SchemaConfig): SchemaConfig => ({ ...defaultconfig, ...cfg } as SchemaConfig);
+export const buildConfig = (cfg: SchemaConfig): SchemaConfig => ({ ...defaultconfig, ...cfg }) as SchemaConfig;
 
 export const INTERNALS = (): InternalsImpl => new InternalsImpl(defaultconfig as SchemaConfig, VERSION);
 
@@ -34,7 +34,7 @@ export const calendarsApi = (tag: string, config?: SchemaConfig): CalendarsImpl 
 export const generalApi = (tag: string, config?: SchemaConfig): GeneralImpl => {
   const bundle = languageBundle(tag, config);
   const internals = new InternalsImpl(config || defaultconfig, VERSION);
-  return new GeneralImpl(bundle, Locale.resolve(tag), internals, privateApi(bundle, config));
+  return new GeneralImpl(bundle, LocaleResolver.resolve(tag), internals, privateApi(bundle, config));
 };
 
 export const numbersApi = (tag: string, config?: SchemaConfig): NumbersImpl => {

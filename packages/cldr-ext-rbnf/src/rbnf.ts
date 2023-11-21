@@ -51,7 +51,10 @@ export class RBNF {
   protected numbers: Decimal[];
   protected locales: Map<string, RBNFSet> = new Map<string, RBNFSet>();
 
-  constructor(protected plurals: PluralRules, spellout: any) {
+  constructor(
+    protected plurals: PluralRules,
+    spellout: any,
+  ) {
     const { locales, symbols, numbers } = spellout;
     this.symbols = symbols ? symbols.split('_') : [];
     this.numbers = numbers ? numbers.split('_').map((n: string) => new Decimal(n)) : [];
@@ -425,7 +428,7 @@ export class RBNFEngine {
     return r[0] === RuleType.NORMAL_RADIX
       ? n[r[3]]
       : r[0] === RuleType.NORMAL
-      ? DIVISORS[n[r[2]].integerDigits()]
-      : TEN;
+        ? DIVISORS[n[r[2]].integerDigits()]
+        : TEN;
   }
 }

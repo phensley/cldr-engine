@@ -38,7 +38,10 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
   private general: GeneralInternals;
   private tz: TimeZoneSchema;
 
-  constructor(private internals: Internals, private cal: CalendarSchema) {
+  constructor(
+    private internals: Internals,
+    private cal: CalendarSchema,
+  ) {
     this.general = internals.general;
     this.tz = internals.schema.TimeZones;
   }

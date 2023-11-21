@@ -413,10 +413,13 @@ class ZoneRecord {
   }
 }
 
-const TYPES = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').reduce((p, c, i) => {
-  p[c] = i;
-  return p;
-}, {} as { [x: string]: number });
+const TYPES = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').reduce(
+  (p, c, i) => {
+    p[c] = i;
+    return p;
+  },
+  {} as { [x: string]: number },
+);
 
 interface ZoneInfoRec {
   abbr: string;

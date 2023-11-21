@@ -45,7 +45,10 @@ export class NumberInternalsImpl implements NumberInternals {
 
   private readonly numberPatternCache: Cache<NumberPattern[]>;
 
-  constructor(private internals: Internals, cacheSize: number) {
+  constructor(
+    private internals: Internals,
+    cacheSize: number,
+  ) {
     const schema = internals.schema;
     this.currencies = schema.Currencies;
     this.numbers = schema.Numbers;
@@ -123,8 +126,8 @@ export class NumberInternalsImpl implements NumberInternals {
             ? latnInfo.decimalFormats.short
             : decimalFormats.short
           : useLatn
-          ? latnInfo.decimalFormats.long
-          : decimalFormats.long;
+            ? latnInfo.decimalFormats.long
+            : decimalFormats.long;
 
         const ctx = new NumberContext(options, round, true, false);
 

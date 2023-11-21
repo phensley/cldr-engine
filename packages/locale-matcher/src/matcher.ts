@@ -13,7 +13,10 @@ const numberCmp = (a: number, b: number) => (a === b ? 0 : a < b ? -1 : 1);
 
 class Entry implements Locale {
   readonly compact: string;
-  constructor(readonly id: string, readonly tag: LanguageTag) {
+  constructor(
+    readonly id: string,
+    readonly tag: LanguageTag,
+  ) {
     this.compact = tag.compact();
   }
 }

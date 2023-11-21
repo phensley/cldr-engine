@@ -66,7 +66,11 @@ export class AlgorithmicNumberingSystems {
 }
 
 export class AlgorithmicNumberingSystem {
-  constructor(readonly name: string, readonly symbols: RBNFSymbols, readonly rbnf: RBNFSet) {}
+  constructor(
+    readonly name: string,
+    readonly symbols: RBNFSymbols,
+    readonly rbnf: RBNFSet,
+  ) {}
 
   format(n: Decimal, fallback: RBNFDecimalFormatter): string {
     return this.rbnf.format(this.name, this.symbols, n, fallback);

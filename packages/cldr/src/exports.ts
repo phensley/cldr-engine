@@ -56,6 +56,7 @@ export {
   Locale,
   LocaleMatch,
   LocaleMatcher,
+  LocaleResolver,
   MathContext,
   MeasurementCategory,
   MeasurementSystem,

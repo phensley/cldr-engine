@@ -35,7 +35,10 @@ const PADDING = 8;
 export class EncoderMachine {
   private origin!: Origin;
 
-  constructor(private encoder: Encoder, private verbose: boolean) {}
+  constructor(
+    private encoder: Encoder,
+    private verbose: boolean,
+  ) {}
 
   encode(obj: any, inst: Instruction): void {
     switch (inst.type) {

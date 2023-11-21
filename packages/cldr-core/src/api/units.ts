@@ -19,7 +19,11 @@ export class UnitsImpl implements Units {
   private numbers: NumberInternals;
   private units: UnitInternals;
 
-  constructor(private bundle: Bundle, private internal: Internals, private privateApi: PrivateApiImpl) {
+  constructor(
+    private bundle: Bundle,
+    private internal: Internals,
+    private privateApi: PrivateApiImpl,
+  ) {
     this.general = internal.general;
     this.numbers = internal.numbers;
     this.units = internal.units;

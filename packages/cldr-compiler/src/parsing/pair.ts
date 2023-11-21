@@ -2,7 +2,10 @@
  * Immutable pair of values of different types.
  */
 export class Pair<T, R> {
-  constructor(readonly _1: T, readonly _2: R) {}
+  constructor(
+    readonly _1: T,
+    readonly _2: R,
+  ) {}
 }
 
 /**

@@ -16,7 +16,10 @@ import { LRU } from './lru';
 export class Cache<T> {
   private storage: LRU<T>;
 
-  constructor(private builder: (s: string) => T, capacity: number) {
+  constructor(
+    private builder: (s: string) => T,
+    capacity: number,
+  ) {
     this.storage = new LRU(capacity);
   }
 

@@ -56,7 +56,7 @@ export interface Locale {
 }
 
 // @public
-export class Locale {
+export class LocaleResolver {
     static resolve(id: string): Locale;
 }
 

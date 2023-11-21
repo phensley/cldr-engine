@@ -1,4 +1,4 @@
-import { LanguageResolver, LanguageTag, Locale } from '@phensley/cldr-core';
+import { LanguageResolver, LanguageTag, Locale, LocaleResolver } from '@phensley/cldr-core';
 import { getOther } from '../cldr';
 import { RBNFPacker } from './rbnf';
 import { RBNFCollector } from '../rbnf';
@@ -8,7 +8,7 @@ const defaultContent = new Set();
 
 const loadDefaultContent = () =>
   getOther().DefaultContent.forEach((s: string) => {
-    const { tag } = Locale.resolve(s);
+    const { tag } = LocaleResolver.resolve(s);
     defaultContent.add(tag.expanded());
   });
 
@@ -23,7 +23,10 @@ class Layer {
   readonly strings: string[] = [];
   readonly index: number[] = [];
 
-  constructor(readonly tag: LanguageTag, readonly isDefault: boolean) {
+  constructor(
+    readonly tag: LanguageTag,
+    readonly isDefault: boolean,
+  ) {
     this.localeId = tag.expanded();
   }
 }
@@ -51,7 +54,12 @@ export class ResourcePack {
 
   private spellout: string = '{}';
 
-  constructor(private language: string, private version: string, private cldrVersion: string, rbnf?: RBNFCollector) {
+  constructor(
+    private language: string,
+    private version: string,
+    private cldrVersion: string,
+    rbnf?: RBNFCollector,
+  ) {
     if (rbnf) {
       const packer: RBNFPacker = new RBNFPacker(rbnf);
       this.spellout = packer.pack(language);

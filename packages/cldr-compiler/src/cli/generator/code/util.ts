@@ -18,7 +18,10 @@ const FORMAT_OPTIONS: Options = {
 };
 
 export class Code {
-  private constructor(readonly path: string[], readonly source: string) {}
+  private constructor(
+    readonly path: string[],
+    readonly source: string,
+  ) {}
 
   static core(path: string[], source: string): Code {
     return new Code(['packages', 'cldr-core', 'src', ...path], source);

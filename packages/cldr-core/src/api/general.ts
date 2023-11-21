@@ -38,7 +38,12 @@ export class GeneralImpl implements General {
   private names: NamesSchema;
   private transform: ContextTransformInfo;
 
-  constructor(private _bundle: Bundle, private _locale: Locale, internal: Internals, _private: PrivateApiImpl) {
+  constructor(
+    private _bundle: Bundle,
+    private _locale: Locale,
+    internal: Internals,
+    _private: PrivateApiImpl,
+  ) {
     this.general = internal.general;
     this.names = internal.schema.Names;
     this.transform = _private.getContextTransformInfo();

@@ -17,7 +17,10 @@ const BAR: Bar[] = ['bar1', 'bar2', 'bar3'];
 const PluralDigitValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 class DummyBundle implements PrimitiveBundle {
-  constructor(readonly exists: boolean, readonly header: boolean = true) {}
+  constructor(
+    readonly exists: boolean,
+    readonly header: boolean = true,
+  ) {}
 
   id(): string {
     return 'und-ZZ';

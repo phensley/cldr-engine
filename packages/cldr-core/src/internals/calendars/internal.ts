@@ -26,7 +26,10 @@ export class CalendarInternalsImpl implements CalendarInternals {
   private calendarFormatterCache: Cache<CalendarFormatter<CalendarDate>>;
   private availableCalendars: Set<string>;
 
-  constructor(private internals: Internals, cacheSize: number) {
+  constructor(
+    private internals: Internals,
+    cacheSize: number,
+  ) {
     this.schema = internals.schema;
     this.dayPeriodRules = new DayPeriodRules(cacheSize);
     this.patternCache = new Cache(parseDatePattern, cacheSize);

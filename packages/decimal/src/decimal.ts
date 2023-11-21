@@ -869,8 +869,8 @@ export class Decimal {
               ? POSITIVE_INFINITY
               : NEGATIVE_INFINITY
             : v.sign === 1
-            ? NEGATIVE_INFINITY
-            : POSITIVE_INFINITY;
+              ? NEGATIVE_INFINITY
+              : POSITIVE_INFINITY;
         }
         break;
 
@@ -893,8 +893,8 @@ export class Decimal {
               ? POSITIVE_INFINITY
               : NEGATIVE_INFINITY
             : u.sign === v.sign
-            ? POSITIVE_INFINITY
-            : NEGATIVE_INFINITY;
+              ? POSITIVE_INFINITY
+              : NEGATIVE_INFINITY;
         }
         if (vinf) {
           return ZERO;

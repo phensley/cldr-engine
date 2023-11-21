@@ -51,7 +51,10 @@ export class PartsDecimalFormatter implements DecimalFormatter<Part[]> {
   protected parts: Part[] = [];
   protected curr: string[] = [];
 
-  constructor(protected decimal: string, protected group: string) {}
+  constructor(
+    protected decimal: string,
+    protected group: string,
+  ) {}
 
   add(c: string): void {
     switch (c) {

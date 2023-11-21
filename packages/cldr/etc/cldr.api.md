@@ -753,11 +753,6 @@ export interface Locale {
 }
 
 // @public
-export class Locale {
-    static resolve(id: string): Locale;
-}
-
-// @public
 export interface LocaleMatch {
     distance: number;
     locale: Locale;
@@ -768,6 +763,11 @@ export class LocaleMatcher {
     // Warning: (ae-forgotten-export) The symbol "LocaleMatcherOptions" needs to be exported by the entry point index.d.ts
     constructor(supportedLocales: string | (Locale | LanguageTag | string)[], options?: LocaleMatcherOptions);
     match(desiredLocales: string | string[], threshold?: number): LocaleMatch;
+}
+
+// @public
+export class LocaleResolver {
+    static resolve(id: string): Locale;
 }
 
 // @public

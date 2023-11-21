@@ -5,11 +5,19 @@ export interface ValueType {
 }
 
 export class Entry {
-  constructor(readonly path: string[], readonly values: ValueType[]) {}
+  constructor(
+    readonly path: string[],
+    readonly values: ValueType[],
+  ) {}
 }
 
 export class TypedValue implements ValueType {
-  constructor(readonly name: string, readonly type: string, readonly obj: any, readonly overlong: boolean = false) {}
+  constructor(
+    readonly name: string,
+    readonly type: string,
+    readonly obj: any,
+    readonly overlong: boolean = false,
+  ) {}
 
   render(): string {
     const data = JSON.stringify(this.obj, undefined, 2);
@@ -26,7 +34,10 @@ const PLURAL_FIELD = /^.+-count-(\w+)$/;
  * Generates enum definitions for large sets of field values.
  */
 export class FieldEnumValue implements ValueType {
-  constructor(readonly name: string, readonly fields: string[]) {}
+  constructor(
+    readonly name: string,
+    readonly fields: string[],
+  ) {}
 
   render(): string {
     // Detect and unify plurals.
@@ -62,7 +73,11 @@ const ID_DASH = /[\/-]+/g;
  * Generates enum definitions for identifiers.
  */
 export class IdEnumValue implements ValueType {
-  constructor(readonly name: string, readonly fields: string[], readonly transform?: (v: string) => string) {}
+  constructor(
+    readonly name: string,
+    readonly fields: string[],
+    readonly transform?: (v: string) => string,
+  ) {}
 
   render(): string {
     // Values for identifiers are not modified.

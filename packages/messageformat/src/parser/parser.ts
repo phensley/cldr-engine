@@ -54,7 +54,11 @@ export const parseMessagePattern = (raw: string, matcher: MessageMatcher, disabl
  *   https://unpkg.com/messageformat-parser/parser.js
  */
 class MessagePatternParser {
-  constructor(private raw: string, private matcher: MessageMatcher, private disableEscapes?: boolean) {}
+  constructor(
+    private raw: string,
+    private matcher: MessageMatcher,
+    private disableEscapes?: boolean,
+  ) {}
 
   parse(): MessageCode {
     const t = this.raw;

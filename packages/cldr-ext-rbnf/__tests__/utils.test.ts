@@ -3,7 +3,7 @@ import { binarySearch } from '../src/utils';
 
 const { ONE, ZERO } = DecimalConstants;
 
-const cmp = (n: number) => (e: number) => e < n ? -1 : e > n ? 1 : 0;
+const cmp = (n: number) => (e: number) => (e < n ? -1 : e > n ? 1 : 0);
 
 const deccmp = (n: Decimal) => (e: Decimal) => e.compare(n);
 
