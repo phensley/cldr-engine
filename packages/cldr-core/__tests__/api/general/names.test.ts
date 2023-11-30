@@ -133,6 +133,10 @@ test('regions', () => {
   expect(api.getRegionDisplayName('US')).toEqual('Estados Unidos');
   expect(api.getRegionDisplayName('US', { type: 'short' })).toEqual('EE. UU.');
   expect(api.getRegionDisplayName('ZZ')).toEqual('Región desconocida');
+
+  // Confirmation of the CLDR 44 name change for Ivory Coast
+  api = generalApi('sv');
+  expect(api.getRegionDisplayName('CI', { type: 'long' })).toEqual('Elfenbenskusten');
 });
 
 test('internals', () => {
