@@ -36,8 +36,8 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/language-tag": "~1.8.0",
-    "@phensley/locale": "~1.8.0",
+    "@phensley/language-tag": "workspace:~1.8.0",
+    "@phensley/locale": "workspace:~1.8.0",
     "tslib": "^2.6.2"
   },
   "devDependencies": {

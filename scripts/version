@@ -32,7 +32,7 @@ def set_versions(cfg, version):
         for name in names:
             if not name.startswith('@phensley/'):
                 continue
-            rec[name] = '~' + version
+            rec[name] = 'workspace:~' + version
     return cfg
 
 def usage():
@@ -41,8 +41,6 @@ def usage():
 
 def main():
     args = set(sys.argv[1:])
-    if len(args) != 1:
-        usage()
 
     # collect paths to add, commit, and tag
     paths = []
@@ -52,6 +50,7 @@ def main():
     paths.append('version.json')
     path = os.path.join(CWD, 'version.json')
     cfg = load_json(path)
+
     old_version = cfg['version']
     major, minor, patch = [int(c) for c in old_version.split('.')]
 
@@ -65,11 +64,17 @@ def main():
         patch = 0
         minor = 0
         major += 1
+    elif 'write' in args:
+        pass
     else:
         usage()
 
     # set new version
     new_version = '%d.%d.%d' % (major, minor, patch)
+    if 'dry-run' in args:
+        print('new version:', new_version)
+        return
+
     cfg['version'] = new_version
     save_json(path, cfg)
 

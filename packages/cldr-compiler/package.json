@@ -43,12 +43,12 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-core": "~1.8.0",
-    "@phensley/cldr-ext-rbnf": "~1.8.0",
-    "@phensley/cldr-types": "~1.8.0",
-    "@phensley/cldr-utils": "~1.8.0",
-    "@phensley/decimal": "~1.8.0",
-    "@phensley/timezone": "~1.8.0",
+    "@phensley/cldr-core": "workspace:~1.8.0",
+    "@phensley/cldr-ext-rbnf": "workspace:~1.8.0",
+    "@phensley/cldr-types": "workspace:~1.8.0",
+    "@phensley/cldr-utils": "workspace:~1.8.0",
+    "@phensley/decimal": "workspace:~1.8.0",
+    "@phensley/timezone": "workspace:~1.8.0",
     "@types/node-fetch": "^2.6.2",
     "@types/prettier": "^2.7.3",
     "@types/yargs": "17.0.32",

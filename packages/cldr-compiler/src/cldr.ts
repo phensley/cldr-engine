@@ -37,7 +37,7 @@ const _timeZoneNames = ['dates', 'timeZoneNames'];
 
 const _dateFields = ['dates', 'fields'];
 
-const isTimeZone = (o: any) => typeof o === 'object' && ('exemplarCity' in o || 'short' in o || 'long' in o);
+const isTimeZone = (o: any) => typeof o === 'object' && (!!o['exemplarCity'] || !!o['short'] || !!o['long']);
 
 const isTimeZoneAlias = (o: any) => '_replacement' in o;
 
@@ -59,6 +59,7 @@ const assign = (dst: any, ...src: any[]): any => {
  */
 const flattenTimeZones = (obj: any): any => {
   const inner = (o: any, path: string[] = []): any => {
+    delete o['exemplarCity-alt-secondary'];
     return isTimeZone(o)
       ? [{ [path.join('/')]: o }]
       : [].concat(...Object.keys(o).map((k) => inner(o[k], path.concat([k]))));

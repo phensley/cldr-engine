@@ -6,8 +6,7 @@ on:
       - coverage
       - main
       - 1.2.x
-      - cldr-43
-      - cldr-44
+      - fix
 
 jobs:
   build:
@@ -32,7 +31,9 @@ jobs:
         run: |
           pnpm i
           pnpm run clean
-          pnpm run lint
+          pnpm --sequential --stream -r run build
+          pnpm --sequential --stream -r run build:lint
+          pnpm --sequential --stream -r run lint
           pnpm run api
           pnpm run test
 
