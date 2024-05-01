@@ -44,6 +44,15 @@ test('japanese default', () => {
 
   // TODO: once rbnf is implemented the year will be formatted
   // using the 'jpanyear' rule.
-  s = api.formatDate(date);
-  expect(s).toEqual('平成30年3月11日日曜日');
+  s = api.formatDate(date); // default options { date: 'full' }
+  expect(s).toEqual('2018年3月11日日曜日');
+
+  s = api.formatDate(date, { ca: 'gregory' });
+  expect(s).toEqual('2018年3月11日');
+
+  s = api.formatDate(date, { ca: 'gregory', date: 'full' });
+  expect(s).toEqual('2018年3月11日日曜日');
+
+  s = api.formatDate(date, { ca: 'japanese' });
+  expect(s).toEqual('平成30年3月11日');
 });

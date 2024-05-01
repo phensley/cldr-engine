@@ -16,6 +16,8 @@ const encode = (map: { [x: string]: number[] }): string => {
   return raw;
 };
 
+const fix = (s: string) => (s === 'gregorian' ? 'gregory' : s);
+
 export const getCalendarPrefs = (_data: any): Code[] => {
   const supplemental = getSupplemental();
   const prefsData = supplemental.CalendarPreferences;
@@ -39,7 +41,7 @@ export const getCalendarPrefs = (_data: any): Code[] => {
   });
 
   let code = HEADER + NOLINT;
-  code += `export const calendarIds: string[] = [${calendarIds.map((c) => `'${c}'`).join(', ')}];\n\n`;
+  code += `export const calendarIds: string[] = [${calendarIds.map((c) => `'${fix(c)}'`).join(', ')}];\n\n`;
 
   code += NOLINT;
   code += `export const calendarPrefData: { [x: string]: number[] } = {${encode(calendarPrefs)}};\n`;

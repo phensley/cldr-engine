@@ -2,8 +2,8 @@
   "cSpell.enabled": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": false,
-    "source.fixAll.eslint": true
+    "source.organizeImports": "never",
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.workingDirectories": [
     {
@@ -12,7 +12,7 @@
   ],
   "editor.formatOnSave": true,
   "files.trimTrailingWhitespace": true,
-	"[typescript]": {
-			"editor.defaultFormatter": "esbenp.prettier-vscode"
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

@@ -148,6 +148,13 @@ export class CalendarInternalsImpl implements CalendarInternals {
    * Translates a string into a supported calendar type, or undefined if none match.
    */
   private supportedCalendar(c: string | undefined): CalendarType | undefined {
+    // NOTE: cldr constrains identifiers to have segments that are 8 characters in length,
+    // so "gregorian" is invalid. instead, "gregory" is used. "islamic-umalqura" is valid since
+    // each segment is <= 8 characters. check for "gregorian" here.
+    if (c === 'gregorian') {
+      c = 'gregory';
+    }
+
     if (c && this.availableCalendars.has(c)) {
       switch (c) {
         case 'buddhist':
