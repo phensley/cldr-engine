@@ -36,9 +36,9 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-types": "~1.8.0",
-    "@phensley/cldr-utils": "~1.8.0",
-    "@phensley/decimal": "~1.8.0",
+    "@phensley/cldr-types": "workspace:~1.8.0",
+    "@phensley/cldr-utils": "workspace:~1.8.0",
+    "@phensley/decimal": "workspace:~1.8.0",
     "tslib": "^2.6.2"
   },
   "devDependencies": {

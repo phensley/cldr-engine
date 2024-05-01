@@ -60,14 +60,14 @@
     "scripts/"
   ],
   "dependencies": {
-    "@phensley/cldr-core": "~1.8.0",
-    "@phensley/cldr-utils": "~1.8.0",
-    "@phensley/messageformat": "~1.8.0",
+    "@phensley/cldr-core": "workspace:~1.8.0",
+    "@phensley/cldr-utils": "workspace:~1.8.0",
+    "@phensley/messageformat": "workspace:~1.8.0",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "~7.38.3",
-    "@phensley/cldr-compiler": "~1.8.0",
+    "@phensley/cldr-compiler": "workspace:~1.8.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
