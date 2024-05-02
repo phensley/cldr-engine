@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+
+import json, os, re, sys
+from subprocess import Popen
+
+# version all packages with a patch-level dependency between them
+
+CWD = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
+
+# TODO:
+# - change target for cldr-compiler to allow upgrade of the following pinned packages
+PINNED = [
+    '@types/node-fetch',
+    'node-fetch',
+
+    # chalk 5.3.0
+    # - requires dynamic import
+    'chalk',
+
+    # minimatch 9.0.4:
+    # - private identifiers conflict with es5 target
+    # - api changed
+    'minimatch',
+
+    # tar 7.0.1:
+    # - minizlib dependency private fields conflict with es5 target
+    # - misc type errors
+    'tar'
+
+    # eslint 9.1.1
+    # - unmet peer dependency with other eslint-related plugins
+    'eslint'
+]
+
+def run(cmd, cwd=None):
+    print('running:', ' '.join(cmd))
+    proc = Popen(cmd, cwd=cwd)
+    proc.communicate()
+
+def load_json(path):
+    return json.load(open(path))
+
+def save_json(path, data):
+    out = open(path, 'w')
+    json.dump(data, out, indent='  ')
+    out.write('\n')
+
+def set_versions(path, pkg, version):
+    cfg = load_json(path)
+    for key in ('dependencies', 'devDependencies'):
+        rec = cfg.get(key)
+        if rec is None:
+            continue
+        names = rec.keys()
+        for name in names:
+            if name != pkg:
+                continue
+            rec[name] = version
+    save_json(path, cfg)
+
+def usage():
+    print('Usage: %r [upgrade | pkg@version]' % sys.argv[0])
+    sys.exit(1)
+
+def main():
+    args = set(sys.argv[1:])
+
+    # gather paths
+    paths = [os.path.join(CWD, 'package.json')]
+    root = os.path.join(CWD, 'packages')
+    pkgs = os.listdir(root)
+    for p in pkgs:
+        paths.append(os.path.join('packages', p, 'package.json'))
+
+    if 'all' in args:
+        # trigger upgrade of all dependencies
+        pinned = ','.join(PINNED)
+        ncu = ['ncu', '-u', '-x', pinned]
+        run(ncu, CWD)
+        run(['pnpm', '--stream', '-r', 'exec', '--'] + ncu, CWD)
+    else:
+        hits = 0
+        for arg in args:
+            if '@' not in arg:
+                continue
+            parts = arg.split('@')
+            if len(parts) != 2:
+                continue
+            hits += 1
+            pkg, version = parts
+            for path in paths:
+                print('setting %r' % path)
+                set_versions(path, pkg, version)
+
+        if not hits:
+            usage()
+
+if __name__ == '__main__':
+    main()
+

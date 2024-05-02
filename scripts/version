@@ -20,10 +20,6 @@ def save_json(path, data):
     json.dump(data, out, indent='  ')
     out.write('\n')
 
-def run(cmd):
-    p = Popen(cmd)
-    p.communicate()
-
 def set_versions(cfg, version):
     cfg['version'] = version
     for key in ('dependencies', 'devDependencies'):
