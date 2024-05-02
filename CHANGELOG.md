@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.8.1]
+
+## Fixed/Changed
+
+- Fix bug in default calendar selection
+- Fix bug in generating Finnish timezones
+
 ## [1.8.0]
 
 ## Fixed/Changed
@@ -202,6 +209,7 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 - Switched from tslint to eslint.
 - Modified checksum so that resource packs are now compatible at the patch level. Resource packs must match the `major.minor` version of the `@phensley/cldr-core` package at runtime to ensure schema compatibility.
 
+[1.8.1]: https://github.com/phensley/cldr-engine/compare/v1.8.0...v1.8.1
 [1.8.0]: https://github.com/phensley/cldr-engine/compare/v1.7.3...v1.8.0
 [1.7.3]: https://github.com/phensley/cldr-engine/compare/v1.7.2...v1.7.3
 [1.7.2]: https://github.com/phensley/cldr-engine/compare/v1.7.1...v1.7.2
