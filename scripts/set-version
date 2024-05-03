@@ -59,7 +59,7 @@ def set_versions(path, pkg, version):
     save_json(path, cfg)
 
 def usage():
-    print('Usage: %r [upgrade | pkg@version]' % sys.argv[0])
+    print('Usage: %r [all | pkg@version]' % sys.argv[0])
     sys.exit(1)
 
 def main():
