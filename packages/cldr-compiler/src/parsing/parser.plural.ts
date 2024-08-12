@@ -121,9 +121,9 @@ const P_OR_CONDITION = P_AND_CONDITION.separatedBy(P_OR)
   .prefix(P_SPACE)
   .map((and) => new OrCondition(and));
 
-const P_SAMPLE = matcher(/^(@integer|@decimal).*$/u)
-  .orDefault('')
-  .prefix(P_SPACE);
+const P_SAMPLE_PATTERN = new RegExp(/^(@integer|@decimal).*$/, 'u');
+
+const P_SAMPLE = matcher(P_SAMPLE_PATTERN).orDefault('').prefix(P_SPACE);
 
 const P_RULE = P_OR_CONDITION.orDefault(new OrCondition([])).flatMap((or) =>
   P_SAMPLE.orDefault('').map((samples) => new Rule(or, samples)),

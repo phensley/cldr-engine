@@ -84,7 +84,7 @@ const P_SUB_RIGHT = matcher(/^\u2192\u2192/).map((_) => ({ kind: 'sub-right' }) 
 
 const P_SUB_RIGHT_3 = matcher(/^\u2192\u2192\u2192/).map((_) => ({ kind: 'sub-right-3' }) as AtomNode);
 
-const P_PLURAL_BODY = matcher(/^[^\}]+/u)
+const P_PLURAL_BODY = matcher(new RegExp(/^[^\}]+/, 'u'))
   .prefix(P_BRACE_LEFT)
   .suffix(P_BRACE_RIGHT);
 
@@ -128,7 +128,9 @@ const P_APPLY_RIGHT_NUMFORMAT = P_NUMFORMAT.prefix(P_ARROW_1_RIGHT)
   .suffix(P_ARROW_1_RIGHT)
   .map((n) => ({ kind: 'apply-right-numfmt', n }) as StringNode);
 
-const P_LITERAL = matcher(/^[^\u2190\u2192%=\[\];$]+/u).map((n) => ({ kind: 'literal', n }) as StringNode);
+const P_LITERAL = matcher(new RegExp(/^[^\u2190\u2192%=\[\];$]+/, 'u')).map(
+  (n) => ({ kind: 'literal', n }) as StringNode,
+);
 
 // Rule for optional [ ... ]
 const P_OPTION = P_PLURALIZED.or(P_SUB_RIGHT_3)

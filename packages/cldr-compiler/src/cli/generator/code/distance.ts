@@ -321,7 +321,9 @@ const convertDistanceMap = (): string => {
   const encoded = convert(distanceMap);
   // Quick hack to output a compact structure directly in code.
   const raw = JSON.stringify(encoded);
-  return raw.replace(/"/g, '').replace(/\ufffd/gu, '$');
+  const regexp = new RegExp(/\ufffd/, 'gu');
+  return raw.replace(/"/g, '').replace(regexp, '$');
+  // return raw.replace(/"/g, '').replace(/\ufffd/gu, '$');
 };
 
 export const getDistance = (data: any): Code[] => {
