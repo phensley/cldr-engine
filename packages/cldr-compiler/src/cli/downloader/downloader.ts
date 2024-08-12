@@ -82,6 +82,7 @@ export class Downloader {
       const desc = `${name} ${version} at ${url}`;
 
       const unzip = zlib.createGunzip();
+      const parser = new tar.Parser({ strip: 1 });
       fetch(url)
         .then((r: Response) => {
           r.body &&
@@ -94,7 +95,7 @@ export class Downloader {
               })
 
               // untar
-              .pipe(new tar.Parse({ strip: 1 }) as fs.WriteStream)
+              .pipe(parser)
               .on('entry', (entry: any) => {
                 this.save(version, entry);
               })
