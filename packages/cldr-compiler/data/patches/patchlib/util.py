@@ -1,9 +1,10 @@
 import codecs, json, os
-from lxml.etree import fromstring
+import xml.etree.ElementTree as ET
+
 
 def readxml(path):
     data = open(path, 'rb').read()
-    return fromstring(data)
+    return ET.fromstring(data)
 
 def save(dest, obj):
     json.dump(obj, codecs.open(dest, 'w', 'utf-8'), indent=2, sort_keys=1, ensure_ascii=0)

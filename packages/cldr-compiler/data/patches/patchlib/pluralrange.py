@@ -1,25 +1,24 @@
 
 import json, os, sys
 from collections import OrderedDict
-from lxml.etree import fromstring, tostring
 from util import readxml, save
 
 # Builds a temporary patch for 'pluralRanges' JSON from original
 # supplemental 'pluralRanges.xml'. This data is currently missing
 # from the JSON CLDR export.
 
-ROOT = '//pluralRanges'
+ROOT = 'plurals'
 
 def build(root, dest):
     path = os.path.join(root, 'common/supplemental/pluralRanges.xml')
-    tree = readxml(path)
+    tree = readxml(path).findall(ROOT)[0]
 
     ranges = OrderedDict()
-    for n in tree.xpath('//pluralRanges'):
+    for n in tree.findall('pluralRanges'):
         locales = n.attrib.get('locales').split()
         recs = []
-        for c in n.xpath('./pluralRange'):
-            rec = dict((k, v) for k, v in c.attrib.iteritems())
+        for c in n.findall('pluralRange'):
+            rec = dict((k, v) for k, v in c.attrib.items())
             recs.append(rec)
         for k in locales:
             ranges[k] = recs

@@ -27,7 +27,11 @@
           "value": "x.x"
         },
         {
-          "rule": "kosong;",
+          "rule": "←← koma →→;",
+          "value": "x,x"
+        },
+        {
+          "rule": "nol;",
           "value": "0"
         },
         {
@@ -156,6 +160,14 @@
         {
           "rule": "ke=%spellout-cardinal=;",
           "value": "0"
+        },
+        {
+          "rule": "pertama",
+          "value": "1"
+        },
+        {
+          "rule": "ke=%spellout-cardinal=;",
+          "value": "2"
         }
       ]
     }

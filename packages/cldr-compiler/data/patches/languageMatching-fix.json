@@ -785,12 +785,6 @@
             "supported": "ar"
           },
           {
-            "desired": "ajp",
-            "distance": "10",
-            "oneway": "1",
-            "supported": "ar"
-          },
-          {
             "desired": "apc",
             "distance": "10",
             "oneway": "1",

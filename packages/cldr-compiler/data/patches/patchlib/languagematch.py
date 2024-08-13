@@ -1,22 +1,23 @@
 
 import json, os, sys
 from collections import OrderedDict
-from lxml.etree import fromstring, tostring
 from util import readxml, save
+import xml.etree.ElementTree as ET
 
 # Builds a temporary patch for 'languageMatching' JSON from original
 # supplemental 'languageInfo.xml'. This is a temporary fix for a bug
 # in the JSON cldr-core data:
 # http://unicode.org/cldr/trac/ticket/10397
 
-ROOT = '//languageMatches[@type="written_new"]'
+ROOT = 'languageMatching/languageMatches[@type="written_new"]'
 
 def build(root, dest):
     path = os.path.join(root, 'common/supplemental/languageInfo.xml')
-    tree = readxml(path)
+    tree = readxml(path).findall(ROOT)[0]
+    print(tree.tag)
 
     rules = []
-    for n in tree.xpath(ROOT + '/languageMatch'):
+    for n in tree.findall('languageMatch'):
         desired = n.attrib.get('desired')
         rec = dict(desired=desired)
         for k in ('supported', 'distance', 'oneway'):
@@ -27,11 +28,11 @@ def build(root, dest):
                 rec[k] = v
         rules.append(rec)
 
-    node = tree.xpath(ROOT + '/paradigmLocales')[0]
+    node = tree.findall('paradigmLocales')[0]
     locales = node.attrib.get('locales')
 
     variables = OrderedDict()
-    for n in tree.xpath(ROOT + '/matchVariable'):
+    for n in tree.findall('matchVariable'):
         _id = n.attrib.get('id')
         val = n.attrib.get('value')
         variables[_id] = val
@@ -50,4 +51,3 @@ def build(root, dest):
 
     path = os.path.join(dest, 'languageMatching-fix.json')
     save(path, res)
-

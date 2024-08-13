@@ -25,7 +25,7 @@ from util import makedirs, readxml, save, to_utf8
 
 def get_rules(root):
     r = []
-    for n in root.xpath('./rbnfrule'):
+    for n in root.findall('rbnfrule'):
         value = n.attrib.get('value')
         radix = n.attrib.get('radix')
         rule = n.text
@@ -42,7 +42,7 @@ def get_rules(root):
 
 def get_rulesets(root):
     r = {}
-    for n in root.xpath('./ruleset'):
+    for n in root.findall('ruleset'):
         name = n.attrib.get('type')
         priv = 1 if n.attrib.get('access') else 0
         rules = get_rules(n)
@@ -54,7 +54,7 @@ def get_rulesets(root):
 
 def convert(tree):
     groups = defaultdict(list)
-    for n in tree.xpath('//rulesetGrouping'):
+    for n in tree.findall('rbnf/rulesetGrouping'):
         type = n.attrib.get('type')
         rulesets = get_rulesets(n)
         groups[type] = rulesets

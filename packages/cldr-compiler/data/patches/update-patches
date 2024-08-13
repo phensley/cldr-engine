@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse, gzip, io, os, json, shutil, sys, tarfile
-import requests
+from urllib import request
 # from subprocess import Popen
 
 CWD = os.path.abspath(os.path.dirname(__file__))
@@ -13,7 +13,7 @@ import rbnf
 from util import makedirs
 
 BASEURL = 'https://github.com/unicode-org/cldr/archive'
-TAG = 'maint/maint-43'
+TAG = 'maint/maint-45'
 ROOTPATH = 'common'
 
 TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')
@@ -30,8 +30,9 @@ def download():
     if not os.path.exists(realpath):
         makedirs(realpath)
         url = os.path.join(BASEURL, '%s.tar.gz' % TAG)
-        r = requests.get(url)
-        f = gzip.GzipFile(fileobj=io.BytesIO(r.content))
+        r = request.urlopen(url)
+        #f = gzip.GzipFile(fileobj=io.BytesIO(r.read()))
+        f = gzip.GzipFile(fileobj=r)
         t = tarfile.TarFile(fileobj=f)
         t.extractall(realpath)
     return os.path.join(realpath, 'cldr-%s' % tag)
