@@ -19,7 +19,6 @@
    af    nl  20    *     *  50    *     *   4
   afb    ar  10    *     *  50    *     *   4
   aii   syr  10    *     *  50    *     *   4
-  ajp    ar  10    *     *  50    *     *   4
    ak    en  30    *     *  50    *     *   4
   aln    sq  10    *     *  50    *     *   4
    am    en  30 Ethi  Latn  10    *     *   4

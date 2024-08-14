@@ -33,6 +33,10 @@ def get_rules(root):
             value = '%s/%s' % (value, radix)
         if value != 'x,x':
             value = value.replace(',', '')
+        # FIX for missing semicolon on literal
+        # See https://unicode-org.atlassian.net/jira/software/c/projects/CLDR/issues/CLDR-17730
+        if not rule.endswith(';'):
+            rule = rule + ';'
         o = {
             'value': value,
             'rule': rule

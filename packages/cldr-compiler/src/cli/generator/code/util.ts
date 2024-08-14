@@ -1,4 +1,5 @@
-import { format, Options } from 'prettier';
+import { Options } from 'prettier';
+import prettier from '@prettier/sync';
 
 export const HEADER = `\
 //
@@ -67,7 +68,7 @@ export const stripFieldSuffix = (raw: string) => {
   return raw.replace(FIELD_SUFFIX, '');
 };
 
-export const formatSource = (raw: string) => format(raw, FORMAT_OPTIONS);
+export const formatSource = (raw: string) => prettier.format(raw, FORMAT_OPTIONS);
 
 export const lineWrap = (max: number, sep: string, values: string[]): string => {
   let res = '';
