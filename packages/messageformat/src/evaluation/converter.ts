@@ -44,6 +44,7 @@ export class DefaultMessageArgConverter implements MessageArgConverter {
       case 'string':
         try {
           return new Decimal(arg);
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
           return DecimalConstants.NAN;
         }

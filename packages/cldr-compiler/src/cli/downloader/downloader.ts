@@ -85,7 +85,8 @@ export class Downloader {
       const parser = new tar.Parser({ strip: 1 });
       fetch(url)
         .then((r: Response) => {
-          r.body &&
+          return (
+            r.body &&
             r.body
               // un-gzip
               .pipe(unzip)
@@ -104,7 +105,8 @@ export class Downloader {
                 this.savestate();
                 info(`${chalk.green('      ok')} ${name}`);
                 resolve(true);
-              });
+              })
+          );
         })
         .catch((reason: any) => {
           reject(`failure downloading ${desc}: ${reason}`);

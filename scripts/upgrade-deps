@@ -6,12 +6,15 @@
 # project
 #
 # minimatch 8.x generates a typescript error when compiling ES5
+# 
+# eslint 9.x flat config support requires many changes
 
 PIN="
 @types/node-fetch
-node-fetch
 chalk
+eslint
 minimatch
+node-fetch
 "
 
 join() {

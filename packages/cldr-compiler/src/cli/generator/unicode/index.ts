@@ -156,7 +156,8 @@ const download = (): Promise<boolean> => {
         reject(`failure downloading: ${r.statusText}`);
         return;
       }
-      r.body &&
+      return (
+        r.body &&
         r.body
           .pipe(fs.createWriteStream(path, { encoding: 'utf-8' }))
           .on('error', (e: Error) => {
@@ -164,7 +165,8 @@ const download = (): Promise<boolean> => {
           })
           .on('close', () => {
             resolve(true);
-          });
+          })
+      );
     });
   });
 };

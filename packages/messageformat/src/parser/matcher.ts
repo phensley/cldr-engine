@@ -241,6 +241,7 @@ const hasStickyRegexp = (() => {
   try {
     const r = new RegExp('.', 'y');
     return r && true;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     /* istanbul ignore next */
     return false;
