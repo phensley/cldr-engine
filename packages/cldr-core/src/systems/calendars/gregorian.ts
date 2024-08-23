@@ -247,6 +247,7 @@ const computeJulianFields = (f: number[]): void => {
   if (doy >= mar1) {
     corr = isLeap ? 1 : 2;
   }
+
   const month = floor((12 * (doy + corr) + 6) / 367);
   const dom = doy - MONTH_COUNT[month][isLeap ? 3 : 2] + 1;
 

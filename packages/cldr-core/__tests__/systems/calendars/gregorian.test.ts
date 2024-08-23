@@ -4,6 +4,11 @@ import { CalendarDate, GregorianDate } from '../../../src';
 
 const make = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
+const unixEpochFromJD = (jd: number, msDay: number = 0): number => {
+  const days = jd - CalendarConstants.JD_UNIX_EPOCH;
+  return days * CalendarConstants.ONE_DAY_MS + Math.round(msDay);
+};
+
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
 const PARIS = 'Europe/Paris';
@@ -107,33 +112,25 @@ test('gregorian date', () => {
   expect(d.yearOfWeekOfYear()).toEqual(2018);
 });
 
-test('min / max date', () => {
-  let d: GregorianDate;
-  let n: number;
+test('min / max / clamp', () => {
+  let d: CalendarDate;
 
-  const unix = CalendarConstants.JD_UNIX_EPOCH;
+  const min = unixEpochFromJD(CalendarConstants.JD_MIN, 0);
+  const max = unixEpochFromJD(CalendarConstants.JD_MAX, 0);
 
-  n = (unix - 1) * CalendarConstants.ONE_DAY_MS;
-  d = make(-n, NEW_YORK);
-  expect(d.era()).toEqual(0);
-  expect(d.extendedYear()).toEqual(-4712);
-  expect(d.year()).toEqual(4713);
-  expect(d.month()).toEqual(1); // Jan
-  expect(d.dayOfMonth()).toEqual(1);
+  d = make(min, 'UTC');
+  expect(d.toString()).toEqual('Gregorian -4712-01-01 00:00:00.000 Etc/UTC');
 
-  // Attempting to represent Dec 31 4714 BC
-  expect(() => make(-n - CalendarConstants.ONE_DAY_MS, NEW_YORK)).toThrowError();
+  // Clamp to minimum date
+  d = make(min - CalendarConstants.ONE_DAY_MS, 'UTC');
+  expect(d.toString()).toEqual('Gregorian -4712-01-01 00:00:00.000 Etc/UTC');
 
-  n = (CalendarConstants.JD_MAX - unix + 1) * CalendarConstants.ONE_DAY_MS;
-  d = make(n, NEW_YORK);
-  expect(d.era()).toEqual(1);
-  expect(d.extendedYear()).toEqual(8652);
-  expect(d.year()).toEqual(8652);
-  expect(d.month()).toEqual(12); // Dec
-  expect(d.dayOfMonth()).toEqual(31);
+  d = make(max, 'UTC');
+  expect(d.toString()).toEqual('Gregorian 8652-12-31 00:00:00.000 Etc/UTC');
 
-  // Attempt to represent Jan  1 8653 AD
-  expect(() => make(n + CalendarConstants.ONE_DAY_MS, NEW_YORK)).toThrowError();
+  // Clamp to maximum date
+  d = make(max + CalendarConstants.ONE_DAY_MS, 'UTC');
+  expect(d.toString()).toEqual('Gregorian 8652-12-31 00:00:00.000 Etc/UTC');
 });
 
 test('millis in day', () => {
