@@ -4,8 +4,8 @@ export const enum CalendarConstants {
   // TODO: revisit to expand range of julian days
 
   // Min and max Julian day form a range of full years whose midpoint is the
-  // UNIX epoch Jan 1 1970
-  MIN_YEAR = 4713,
+  // UNIX epoch Jan 1 1970. The goal is to constrain the epoch
+  // timestamps to a reasonable range. This range may expand in the future.
 
   // Mon Jan  1 4713 BC
   JD_MIN = 0,

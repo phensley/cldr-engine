@@ -19,8 +19,11 @@ test('gregorian bounds', () => {
   let d: CalendarDate;
   const api = calendarsApi('en');
 
-  expect(() => api.newGregorianDate({ year: -9999 })).toThrow();
-  expect(() => api.newGregorianDate({ year: 9999 })).toThrow();
+  d = api.newGregorianDate({ year: -9999 });
+  expect(d.toString()).toEqual('Gregorian -4712-01-01 00:00:00.000 Etc/UTC');
+
+  d = api.newGregorianDate({ year: 9999 });
+  expect(d.toString()).toEqual('Gregorian 8652-12-31 00:00:00.000 Etc/UTC');
 
   d = api.newGregorianDate({ year: 2020, month: -1 });
   expect(d.toString()).toEqual('Gregorian 2020-01-01 00:00:00.000 Etc/UTC');
@@ -194,9 +197,13 @@ test('persian defaults', () => {
 
 test('persian bounds', () => {
   const api = calendarsApi('en');
+  let d: CalendarDate;
 
-  expect(() => api.newPersianDate({ year: -9999 })).toThrow();
-  expect(() => api.newPersianDate({ year: 9999 })).toThrow();
+  d = api.newPersianDate({ year: -9999 });
+  expect(d.toString()).toEqual('Persian -5334-09-03 00:00:00.000 Etc/UTC');
+
+  d = api.newPersianDate({ year: 9999 });
+  expect(d.toString()).toEqual('Persian 8031-10-11 00:00:00.000 Etc/UTC');
 });
 
 test('persian from fields', () => {

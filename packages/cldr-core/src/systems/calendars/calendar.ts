@@ -1,7 +1,7 @@
 import { DateTimePatternField, DateTimePatternFieldType, MetaZoneType } from '@phensley/cldr-types';
 
 import { dateFields, DateField, DayOfWeek } from './fields';
-import { CalendarConstants, ConstantsDesc } from './constants';
+import { CalendarConstants } from './constants';
 import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
 import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag, TIME_PERIOD_FIELDS } from './interval';
@@ -972,8 +972,8 @@ const jdFromUnixEpoch = (ms: number, f: number[]): void => {
  * is relative to these.
  */
 const computeBaseFields = (f: number[]): void => {
-  const jd = f[DateField.JULIAN_DAY];
-  checkJDRange(jd);
+  const jd = clamp(f[DateField.JULIAN_DAY], CalendarConstants.JD_MIN, CalendarConstants.JD_MAX);
+  // checkJDRange(jd);
 
   let msDay = f[DateField.MILLIS_IN_DAY];
   const ms = msDay + (jd - CalendarConstants.JD_UNIX_EPOCH) * CalendarConstants.ONE_DAY_MS;
@@ -1001,14 +1001,15 @@ const computeBaseFields = (f: number[]): void => {
   f[DateField.DAY_OF_WEEK] = dow;
 };
 
-const checkJDRange = (jd: number): void => {
-  if (jd < CalendarConstants.JD_MIN || jd > CalendarConstants.JD_MAX) {
-    throw new Error(
-      `Julian day ${jd} is outside the supported range of this library: ` +
-        `${ConstantsDesc.JD_MIN} to ${ConstantsDesc.JD_MAX}`,
-    );
-  }
-};
+// TODO: clamp range instead of throwing error.
+// const checkJDRange = (jd: number): void => {
+//   if (jd < CalendarConstants.JD_MIN || jd > CalendarConstants.JD_MAX) {
+//     throw new Error(
+//       `Julian day ${jd} is outside the supported range of this library: ` +
+//         `${ConstantsDesc.JD_MIN} to ${ConstantsDesc.JD_MAX}`,
+//     );
+//   }
+// };
 
 /**
  * Given a Julian day and local milliseconds (in UTC), return the Unix
