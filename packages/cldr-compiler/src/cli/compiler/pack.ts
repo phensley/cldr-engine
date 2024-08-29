@@ -15,6 +15,7 @@ import DEFAULT_CONFIG from './config.json';
 import { Downloader } from '../downloader/downloader';
 import { validateConfig } from './validate';
 import { RBNFCollector } from '../../rbnf';
+import { applyFixes } from './fixes';
 
 /**
  * Encodes fields into a resource pack and returns the offset
@@ -187,6 +188,11 @@ const runPackImpl = (argv: yargs.Arguments<PackArgs>, pkg: ProjectInfo) => {
       }
       pack.push(locale);
       const main = getMain(locale.id);
+
+      // Apply internal fixes first
+      applyFixes(locale, main);
+
+      // Apply user patches
       if (patchfiles.length) {
         for (const patch of patchfiles) {
           if (!applyPatch(locale.id, main, patch)) {
