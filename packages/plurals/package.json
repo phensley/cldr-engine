@@ -1,6 +1,6 @@
 {
   "name": "@phensley/plurals",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "Plural rules engine",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -36,7 +36,7 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/decimal": "workspace:~1.8.2",
+    "@phensley/decimal": "workspace:~1.8.3",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
