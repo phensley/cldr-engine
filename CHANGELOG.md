@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.9.0]
+
+### Fixed/Changed
+
+- Upgrade to [CLDR v45](https://cldr.unicode.org/index/downloads/cldr-45)
+- Upgrade to [tzdb 2024a](https://www.iana.org/time-zones)
+
+## [1.8.3]
+
+### Fixed/Changed
+
+- Fix for spaces in Japanese unit patterns
+
+## [1.8.2]
+
+### Fixed/Changed
+
+- Clamp all dates to our bounded range for Julian days
+
 ## [1.8.1]
 
 ## Fixed/Changed
@@ -122,7 +141,7 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 
 - Fixed internal package dependencies. Packages must depend on others from the same patch level.
 
-## [1.2.10]
+## [1.3.2]
 
 ## Fixed/Changed
 
@@ -139,6 +158,62 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 ## Fixed/Changed
 
 - Upgrade to [CLDR v39](http://cldr.unicode.org/index/downloads/cldr-39)
+
+## [1.2.17]
+
+### Fixed/Changed
+
+- Backport: Fix for spaces in Japanese unit patterns
+- Backport: Clamp all dates to our bounded range for Julian days
+
+## [1.2.16]
+
+### Fixed/Changed
+
+- Fix interval date formatter context
+
+## [1.2.15]
+
+### Fixed/Changed
+
+- Fixed imports in type declaration files
+
+## [1.2.14]
+
+### Added
+
+- Add option to disabled escapes in message formatter
+
+## [1.2.13]
+
+### Fixed/Changed
+
+- Removed unused parameter on `timeData` method.
+
+## [1.2.12]
+
+### Fixed/Changed
+
+- Add `Calendars.timeData` method to fetch preferred and allowed time cycles.
+
+## [1.2.11]
+
+### Fixed/Changed
+
+- Add long/short timezone names to timeZoneInfo results.
+
+## [1.2.10]
+
+### Fixed/Changed
+
+- Build improvements.
+
+## [1.2.9]
+
+### Fixed/Changed
+
+- Fix parsing of extended language subtag.
+- Ping all dependencies to same minor version.
 
 ## [1.2.8]
 
@@ -209,6 +284,9 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 - Switched from tslint to eslint.
 - Modified checksum so that resource packs are now compatible at the patch level. Resource packs must match the `major.minor` version of the `@phensley/cldr-core` package at runtime to ensure schema compatibility.
 
+[1.9.0]: https://github.com/phensley/cldr-engine/compare/v1.8.3...v1.9.0
+[1.8.3]: https://github.com/phensley/cldr-engine/compare/v1.8.2...v1.8.3
+[1.8.2]: https://github.com/phensley/cldr-engine/compare/v1.8.1...v1.8.2
 [1.8.1]: https://github.com/phensley/cldr-engine/compare/v1.8.0...v1.8.1
 [1.8.0]: https://github.com/phensley/cldr-engine/compare/v1.7.3...v1.8.0
 [1.7.3]: https://github.com/phensley/cldr-engine/compare/v1.7.2...v1.7.3
@@ -228,9 +306,17 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 [1.4.1]: https://github.com/phensley/cldr-engine/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/phensley/cldr-engine/compare/v1.3.3...v1.4.0
 [1.3.3]: https://github.com/phensley/cldr-engine/compare/v1.3.1...v1.3.3
-[1.2.10]: https://github.com/phensley/cldr-engine/compare/v1.2.8...v1.2.10
 [1.3.1]: https://github.com/phensley/cldr-engine/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/phensley/cldr-engine/compare/v1.2.7...v1.3.0
+[1.2.17]: https://github.com/phensley/cldr-engine/compare/v1.2.16...v1.2.17
+[1.2.16]: https://github.com/phensley/cldr-engine/compare/v1.2.15...v1.2.16
+[1.2.15]: https://github.com/phensley/cldr-engine/compare/v1.2.14...v1.2.15
+[1.2.14]: https://github.com/phensley/cldr-engine/compare/v1.2.13...v1.2.14
+[1.2.13]: https://github.com/phensley/cldr-engine/compare/v1.2.12...v1.2.13
+[1.2.12]: https://github.com/phensley/cldr-engine/compare/v1.2.11...v1.2.12
+[1.2.11]: https://github.com/phensley/cldr-engine/compare/v1.2.10...v1.2.11
+[1.2.10]: https://github.com/phensley/cldr-engine/compare/v1.2.9...v1.2.10
+[1.2.9]: https://github.com/phensley/cldr-engine/compare/v1.2.8...v1.2.9
 [1.2.8]: https://github.com/phensley/cldr-engine/compare/v1.2.7...v1.2.8
 [1.2.7]: https://github.com/phensley/cldr-engine/compare/v1.2.6...v1.2.7
 [1.2.6]: https://github.com/phensley/cldr-engine/compare/v1.2.5...v1.2.6
