@@ -1,5 +1,6 @@
 import yargs from 'yargs';
 import { runDump } from './dump';
+import { runInfo } from './info';
 import { runPack } from './pack';
 import { runSchema } from './schema';
 import { getProjectInfo } from './util';
@@ -11,6 +12,8 @@ export const main = () => {
   const pkg = getProjectInfo();
 
   yargs(process.argv.slice(2))
+    .command('info', 'Show build and data information', (y: yargs.Argv) => y, runInfo)
+
     .command(
       'pack',
       'Compile resource packs',
