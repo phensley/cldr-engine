@@ -73,7 +73,7 @@ export type DateFieldType =
 /**
  * @public
  */
-export const enum DateField {
+export enum DateField {
   ERA = 'era',
   YEAR = 'year',
   QUARTER = 'quarter',
@@ -106,7 +106,7 @@ export type DateFieldWidthType = 'short' | 'narrow' | 'wide';
 /**
  * @public
  */
-export const enum DateFieldWidth {
+export enum DateFieldWidth {
   SHORT = 'short',
   NARROW = 'narrow',
   WIDE = 'wide',
@@ -135,7 +135,7 @@ export type RelativeTimeFieldType =
 /**
  * @public
  */
-export const enum RelativeTimeField {
+export enum RelativeTimeField {
   YEAR = 'year',
   QUARTER = 'quarter',
   MONTH = 'month',
