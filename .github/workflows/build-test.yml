@@ -5,9 +5,6 @@ on:
     branches:
       - coverage
       - main
-      - 1.2.x
-      - 1.8.x
-      - fix
 
 jobs:
   build:
@@ -15,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x]
 
     steps:
       - uses: actions/checkout@v4
