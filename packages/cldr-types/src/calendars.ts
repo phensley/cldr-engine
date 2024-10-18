@@ -8,7 +8,7 @@ export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
 /**
  * @public
  */
-export const enum DateTimePatternField {
+export enum DateTimePatternField {
   YEAR = 'y',
   MONTH = 'M',
   DAY = 'd',
@@ -38,7 +38,7 @@ export type DayPeriodType =
 /**
  * @public
  */
-export const enum DayPeriod {
+export enum DayPeriod {
   NOON = 'noon',
   MIDNIGHT = 'midnight',
   AM = 'am',
@@ -61,7 +61,7 @@ export type EraWidthType = 'names' | 'abbr' | 'narrow';
 /**
  * @public
  */
-export const enum EraWidth {
+export enum EraWidth {
   NAMES = 'names',
   ABBR = 'abbr',
   NARROW = 'narrow',
@@ -75,7 +75,7 @@ export type FieldWidthType = 'abbreviated' | 'narrow' | 'short' | 'wide';
 /**
  * @public
  */
-export const enum FieldWidth {
+export enum FieldWidth {
   ABBREVIATED = 'abbreviated',
   NARROW = 'narrow',
   SHORT = 'short',
@@ -90,7 +90,7 @@ export type FormatWidthType = 'short' | 'medium' | 'long' | 'full';
 /**
  * @public
  */
-export const enum FormatWidth {
+export enum FormatWidth {
   SHORT = 'short',
   MEDIUM = 'medium',
   LONG = 'long',
@@ -105,7 +105,7 @@ export type QuarterType = '1' | '2' | '3' | '4';
 /**
  * @public
  */
-export const enum Quarter {
+export enum Quarter {
   FIRST = '1',
   SECOND = '2',
   THIRD = '3',
@@ -120,7 +120,7 @@ export type WeekdayType = '1' | '2' | '3' | '4' | '5' | '6' | '7';
 /**
  * @public
  */
-export const enum Weekday {
+export enum Weekday {
   SUNDAY = '1',
   MONDAY = '2',
   TUESDAY = '3',
