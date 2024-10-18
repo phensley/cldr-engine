@@ -28,10 +28,10 @@ jobs:
       - name: Build
         run: |
           yarn
-          yarn clean
-          yarn lint
-          yarn api
+          yarn clean:ci
+          yarn lint:ci
+          yarn api:ci
 
       - name: Test
-        run: yarn test
+        run: yarn test:ci
 
