@@ -98,7 +98,7 @@ export type CurrencySpacingPos = 'before' | 'after';
 export type CurrencyType = ('ADP' | 'AED' | 'AFA' | 'AFN' | 'ALK' | 'ALL' | 'AMD' | 'ANG' | 'AOA' | 'AOK' | 'AON' | 'AOR' | 'ARA' | 'ARL' | 'ARM' | 'ARP' | 'ARS' | 'ATS' | 'AUD' | 'AWG' | 'AZM' | 'AZN' | 'BAD' | 'BAM' | 'BAN' | 'BBD' | 'BDT' | 'BEC' | 'BEF' | 'BEL' | 'BGL' | 'BGM' | 'BGN' | 'BGO' | 'BHD' | 'BIF' | 'BMD' | 'BND' | 'BOB' | 'BOL' | 'BOP' | 'BOV' | 'BRB' | 'BRC' | 'BRE' | 'BRL' | 'BRN' | 'BRR' | 'BRZ' | 'BSD' | 'BTN' | 'BUK' | 'BWP' | 'BYB' | 'BYN' | 'BYR' | 'BZD' | 'CAD' | 'CDF' | 'CHE' | 'CHF' | 'CHW' | 'CLE' | 'CLF' | 'CLP' | 'CNH' | 'CNX' | 'CNY' | 'COP' | 'COU' | 'CRC' | 'CSD' | 'CSK' | 'CUC' | 'CUP' | 'CVE' | 'CYP' | 'CZK' | 'DDM' | 'DEM' | 'DJF' | 'DKK' | 'DOP' | 'DZD' | 'ECS' | 'ECV' | 'EEK' | 'EGP' | 'ERN' | 'ESA' | 'ESB' | 'ESP' | 'ETB' | 'EUR' | 'FIM' | 'FJD' | 'FKP' | 'FRF' | 'GBP' | 'GEK' | 'GEL' | 'GHC' | 'GHS' | 'GIP' | 'GMD' | 'GNF' | 'GNS' | 'GQE' | 'GRD' | 'GTQ' | 'GWE' | 'GWP' | 'GYD' | 'HKD' | 'HNL' | 'HRD' | 'HRK' | 'HTG' | 'HUF' | 'IDR' | 'IEP' | 'ILP' | 'ILR' | 'ILS' | 'INR' | 'IQD' | 'IRR' | 'ISJ' | 'ISK' | 'ITL' | 'JMD' | 'JOD' | 'JPY' | 'KES' | 'KGS' | 'KHR' | 'KMF' | 'KPW' | 'KRH' | 'KRO' | 'KRW' | 'KWD' | 'KYD' | 'KZT' | 'LAK' | 'LBP' | 'LKR' | 'LRD' | 'LSL' | 'LTL' | 'LTT' | 'LUC' | 'LUF' | 'LUL' | 'LVL' | 'LVR' | 'LYD' | 'MAD' | 'MAF' | 'MCF' | 'MDC' | 'MDL' | 'MGA' | 'MGF' | 'MKD' | 'MKN' | 'MLF' | 'MMK' | 'MNT' | 'MOP' | 'MRO' | 'MRU' | 'MTL' | 'MTP' | 'MUR' | 'MVP' | 'MVR' | 'MWK' | 'MXN' | 'MXP' | 'MXV' | 'MYR' | 'MZE' | 'MZM' | 'MZN' | 'NAD' | 'NGN' | 'NIC' | 'NIO' | 'NLG' | 'NOK' | 'NPR' | 'NZD' | 'OMR' | 'PAB' | 'PEI' | 'PEN' | 'PES' | 'PGK' | 'PHP' | 'PKR' | 'PLN' | 'PLZ' | 'PTE' | 'PYG' | 'QAR' | 'RHD' | 'ROL' | 'RON' | 'RSD' | 'RUB' | 'RUR' | 'RWF' | 'SAR' | 'SBD' | 'SCR' | 'SDD' | 'SDG' | 'SDP' | 'SEK' | 'SGD' | 'SHP' | 'SIT' | 'SKK' | 'SLL' | 'SOS' | 'SRD' | 'SRG' | 'SSP' | 'STD' | 'STN' | 'SUR' | 'SVC' | 'SYP' | 'SZL' | 'THB' | 'TJR' | 'TJS' | 'TMM' | 'TMT' | 'TND' | 'TOP' | 'TPE' | 'TRL' | 'TRY' | 'TTD' | 'TWD' | 'TZS' | 'UAH' | 'UAK' | 'UGS' | 'UGX' | 'USD' | 'USN' | 'USS' | 'UYI' | 'UYP' | 'UYU' | 'UYW' | 'UZS' | 'VEB' | 'VEF' | 'VES' | 'VND' | 'VNN' | 'VUV' | 'WST' | 'XAF' | 'XAG' | 'XAU' | 'XBA' | 'XBB' | 'XBC' | 'XBD' | 'XCD' | 'XDR' | 'XEU' | 'XFO' | 'XFU' | 'XOF' | 'XPD' | 'XPF' | 'XPT' | 'XRE' | 'XSU' | 'XTS' | 'XUA' | 'XXX' | 'YDD' | 'YER' | 'YUD' | 'YUM' | 'YUN' | 'YUR' | 'ZAL' | 'ZAR' | 'ZMK' | 'ZMW' | 'ZRN' | 'ZRZ' | 'ZWD' | 'ZWL' | 'ZWR');
 
 // @public (undocumented)
-export const enum DateField {
+export enum DateField {
     // (undocumented)
     DAY = "day",
     // (undocumented)
@@ -160,7 +160,7 @@ export type DateFieldSymbol = 'G' | 'y' | 'Y' | 'u' | 'U' | 'r' | 'Q' | 'q' | 'M
 export type DateFieldType = 'era' | 'year' | 'quarter' | 'month' | 'week' | 'weekday' | 'weekdayOfMonth' | 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'day' | 'dayperiod' | 'hour' | 'minute' | 'second' | 'zone';
 
 // @public (undocumented)
-export const enum DateFieldWidth {
+export enum DateFieldWidth {
     // (undocumented)
     NARROW = "narrow",
     // (undocumented)
@@ -173,7 +173,7 @@ export const enum DateFieldWidth {
 export type DateFieldWidthType = 'short' | 'narrow' | 'wide';
 
 // @public (undocumented)
-export const enum DateTimePatternField {
+export enum DateTimePatternField {
     // (undocumented)
     DAY = "d",
     // (undocumented)
@@ -194,7 +194,7 @@ export const enum DateTimePatternField {
 export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
 
 // @public (undocumented)
-export const enum DayPeriod {
+export enum DayPeriod {
     // (undocumented)
     AFTERNOON1 = "afternoon1",
     // (undocumented)
@@ -254,7 +254,7 @@ export interface DigitsArrow<T extends string> {
 export type EraAltType = 'none' | 'sensitive';
 
 // @public (undocumented)
-export const enum EraWidth {
+export enum EraWidth {
     // (undocumented)
     ABBR = "abbr",
     // (undocumented)
@@ -281,7 +281,7 @@ export interface FieldArrow {
 }
 
 // @public (undocumented)
-export const enum FieldWidth {
+export enum FieldWidth {
     // (undocumented)
     ABBREVIATED = "abbreviated",
     // (undocumented)
@@ -296,7 +296,7 @@ export const enum FieldWidth {
 export type FieldWidthType = 'abbreviated' | 'narrow' | 'short' | 'wide';
 
 // @public (undocumented)
-export const enum FormatWidth {
+export enum FormatWidth {
     // (undocumented)
     FULL = "full",
     // (undocumented)
@@ -458,7 +458,7 @@ export interface PrimitiveBundle {
 }
 
 // @public (undocumented)
-export const enum Quarter {
+export enum Quarter {
     // (undocumented)
     FIRST = "1",
     // (undocumented)
@@ -482,7 +482,7 @@ export interface RegionNameInfo {
 }
 
 // @public (undocumented)
-export const enum RelativeTimeField {
+export enum RelativeTimeField {
     // (undocumented)
     DAY = "day",
     // (undocumented)
@@ -678,7 +678,7 @@ export interface Vector3Arrow<T extends string, S extends string, U extends stri
 }
 
 // @public (undocumented)
-export const enum Weekday {
+export enum Weekday {
     // (undocumented)
     FRIDAY = "6",
     // (undocumented)
@@ -697,7 +697,6 @@ export const enum Weekday {
 
 // @public (undocumented)
 export type WeekdayType = '1' | '2' | '3' | '4' | '5' | '6' | '7';
-
 
 // (No @packageDocumentation comment for this package)
 
