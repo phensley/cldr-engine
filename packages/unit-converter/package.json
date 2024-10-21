@@ -1,6 +1,6 @@
 {
   "name": "@phensley/unit-converter",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "Conversions between CLDR units",
   "main": "lib/index.js",
   "module": "lib-es/index.js",
@@ -36,9 +36,9 @@
     "lib-es/"
   ],
   "dependencies": {
-    "@phensley/cldr-types": "workspace:~1.9.0",
-    "@phensley/cldr-utils": "workspace:~1.9.0",
-    "@phensley/decimal": "workspace:~1.9.0",
+    "@phensley/cldr-types": "workspace:~1.9.1",
+    "@phensley/cldr-utils": "workspace:~1.9.1",
+    "@phensley/decimal": "workspace:~1.9.1",
     "tslib": "^2.7.0"
   },
   "devDependencies": {
