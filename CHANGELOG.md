@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.9.1]
+
+### Fixed/Changed
+
+- Convert some enums to non-const for use at runtime
+
 ## [1.9.0]
 
 ### Fixed/Changed
@@ -159,6 +165,12 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 
 - Upgrade to [CLDR v39](http://cldr.unicode.org/index/downloads/cldr-39)
 
+## [1.2.18]
+
+### Fixed/Changed
+
+- Convert some enums to non-const for use at runtime
+
 ## [1.2.17]
 
 ### Fixed/Changed
@@ -308,6 +320,7 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 [1.3.3]: https://github.com/phensley/cldr-engine/compare/v1.3.1...v1.3.3
 [1.3.1]: https://github.com/phensley/cldr-engine/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/phensley/cldr-engine/compare/v1.2.7...v1.3.0
+[1.2.18]: https://github.com/phensley/cldr-engine/compare/v1.2.17...v1.2.18
 [1.2.17]: https://github.com/phensley/cldr-engine/compare/v1.2.16...v1.2.17
 [1.2.16]: https://github.com/phensley/cldr-engine/compare/v1.2.15...v1.2.16
 [1.2.15]: https://github.com/phensley/cldr-engine/compare/v1.2.14...v1.2.15
