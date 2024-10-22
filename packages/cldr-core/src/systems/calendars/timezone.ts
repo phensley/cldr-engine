@@ -115,7 +115,7 @@ class Metazones {
     // cases should ensure they're in sync, but warn of a discrepancy
     /* istanbul ignore if */
     if (zoneids.length !== zoneindex.length) {
-      console.log(`Error: time zone ids and zone index are not in sync!`);
+      console.log(`Error: time zone ids and zone index are not in sync!`, zoneids.length, '!=', zoneindex.length);
     }
 
     for (let i = 0; i < zoneindex.length; i++) {

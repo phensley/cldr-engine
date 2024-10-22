@@ -32,11 +32,11 @@ test('standard offset', () => {
   expect(r.countries).toEqual(['CI', 'BF', 'GH', 'GM', 'GN', 'IS', 'ML', 'MR', 'SH', 'SL', 'SN', 'TG']);
 
   r = TZ.zoneMeta('CET')!;
-  expect(r.zoneid).toEqual('CET');
+  expect(r.zoneid).toEqual('Europe/Brussels');
   expect(r.stdoffset).toEqual(3600000);
-  expect(r.latitude).toEqual(0);
-  expect(r.longitude).toEqual(0);
-  expect(r.countries).toEqual([]);
+  expect(r.latitude).toEqual(50.833333);
+  expect(r.longitude).toEqual(4.333333);
+  expect(r.countries).toEqual(['BE', 'LU', 'NL']);
 
   r = TZ.zoneMeta('FOO');
   expect(r).toEqual(undefined);
