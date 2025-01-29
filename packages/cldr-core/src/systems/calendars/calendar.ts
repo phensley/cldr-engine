@@ -59,12 +59,14 @@ const relativeField = (p: TimePeriod): TimePeriodField => {
 export type CalendarFromUnixEpoch<T> = (epoch: number, zoneId: string, firstDay: number, minDays: number) => T;
 
 const differenceFields: [number, DateTimePatternFieldType][] = [
+  [DateField.ERA, DateTimePatternField.ERA],
   [DateField.YEAR, DateTimePatternField.YEAR],
   [DateField.MONTH, DateTimePatternField.MONTH],
   [DateField.DAY_OF_MONTH, DateTimePatternField.DAY],
   [DateField.AM_PM, DateTimePatternField.DAYPERIOD],
-  [DateField.HOUR, DateTimePatternField.HOUR],
+  [DateField.HOUR, DateTimePatternField.HOUR24],
   [DateField.MINUTE, DateTimePatternField.MINUTE],
+  [DateField.SECOND, DateTimePatternField.SECOND],
 ];
 
 /**
@@ -316,16 +318,15 @@ export abstract class CalendarDate {
    * Note: This assumes the dates are of the same type and have the same
    * timezone offset.
    */
-  fieldOfVisualDifference(other: CalendarDate): DateTimePatternFieldType {
+  fieldOfVisualDifference(other: CalendarDate): DateTimePatternFieldType | undefined {
     const a = this._fields;
     const b = other._fields;
-    for (const pair of differenceFields) {
-      const [key, field] = pair;
+    for (const [key, field] of differenceFields) {
       if (a[key] !== b[key]) {
         return field;
       }
     }
-    return DateTimePatternField.SECOND;
+    return undefined;
   }
 
   /**

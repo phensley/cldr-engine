@@ -1,4 +1,4 @@
-import { DateTimePatternFieldType } from '@phensley/cldr-types';
+import { DateTimePatternField, DateTimePatternFieldType } from '@phensley/cldr-types';
 import { Cache } from '@phensley/cldr-utils';
 
 import { Internals } from '../internals';
@@ -8,9 +8,22 @@ import { DateTimeNode } from '../../parsing/date';
 import { CalendarDate } from '../../systems/calendars';
 import { NumberParams } from '../../common/private';
 import { CalendarPatterns, GregorianPatterns } from './patterns';
-import { DateSkeleton } from './skeleton';
+import { DateSkeleton, SkeletonField } from './skeleton';
 import { DateFormatRequest, DateIntervalFormatRequest } from './types';
 import { Field } from './fields';
+
+const maskedFOVDFields: Field[] = [
+  Field.ERA,
+  Field.YEAR,
+  Field.MONTH,
+  Field.DAY,
+  Field.DAYPERIOD,
+  Field.HOUR,
+  Field.MINUTE,
+  Field.SECOND,
+];
+
+const minutes = (d: CalendarDate): number => d.hourOfDay() * 60 + d.minute();
 
 export class CalendarManager {
   private readonly patternCache: Cache<CalendarPatterns>;
@@ -160,143 +173,312 @@ export class CalendarManager {
   }
 
   /**
-   * Best-fit match an input skeleton. The skeleton can contain both date and
-   * time fields.
+   * Formats datetime intervals.
    *
-   * The field of greatest difference between the start and end dates can be
-   * either a date or time field.
+   * NOTE: The ICU implementation of CLDR datetime range formatting
+   * contains inconsistent behavior (see code at end of comment below).
    *
-   * Given this we need to cover the following cases:
+   * The skeleton data for interval formatting consists of a series of
+   * separate date and time patterns. No interval skeletons / formats
+   * contain both date and time fields.
    *
-   * 1. Input skeleton requests both date and time fields.
-   *  a. "yMd" same: split skeleton, format date standalone, followed by time range.
-   *  b. "yMd" differ: format full start / end with fallback format.
+   * For example, the data might contain the following:
    *
-   * 2. Input skeleton requests date fields only:
-   *  a. "yMd" same: format date standalone
-   *  b. "yMd" differ: select and format date range
+   *  ['y', 'yM', 'yMd', 'h', 'hm', 'H', 'Hm']
    *
-   * 3. Input skeleton requests time fields only:
-   *  a. "yMd" same, "ahms" same: format time standalone
-   *  b. "yMd" same, "ahms" differ: select and format time range.
-   *  c. "yMd" differ: prepend "yMd" to skeleton and go to (1a).
+   * However a caller can pass input skeleton containing a mix of date and
+   * time fields. We split this skeleton into separate date and time
+   * skeletons, and perform formatting by considering the possibilities below.
+   *
+   * Variables:
+   *
+   *   start         = start datetime
+   *   end           = end datetime
+   *   skeleton      = input skeleton
+   *   fovd          = fieldOfVisualDifference(start, end)
+   *   date_differs  = fovd in ('era', 'year', 'month', 'day')
+   *   time_differs  = fovd in ('dayperiod', 'hour', 'minute')
+   *   equal         = fovd in ('second', undefined)
+   *
+   * Formatting Rules:
+   *
+   * 1. Skeleton requests both date and time fields
+   *
+   *   a. IF time_differs, format date followed by time range
+   *      e.g. "date, time0 - time 1"
+   *
+   *   b. ELSE IF date_differs, format generic fallback
+   *      e.g. "date0, time0 - date1, time1"
+   *
+   *   c. ELSE format the date + time standalone
+   *      e.g. "date0, time0"
+   *
+   * 2: Skeleton only requests date fields
+   *
+   *   a. IF date_differs, format date range
+   *      e.g. "date0 - date1"
+   *
+   *   b. ELSE format date standalone
+   *
+   * 3: Skeleton only requests time fields
+   *
+   *   a. IF time_differs, format time range
+   *      e.g. "time0 - time1"
+   *
+   *   b. ELSE format time standalone
+   *
+   * ========================================================
+   *
+   * Example of inconsistency of ICU range formatting.
+   * The output was produced using Node 23.7.0 and ICU 74.
+   * ICU4J version 75 produces the same output.
+   *
+   *     const OPTS = [
+   *       { day: 'numeric' },
+   *       { day: 'numeric', minute: '2-digit' }
+   *     ];
+   *     const start = new Date(Date.UTC(2007, 0, 1, 10, 12, 0));
+   *     const end = new Date(Date.UTC(2008, 0, 2, 11, 13, 0));
+   *     for (let i = 0; i < OPTS.length; i++) {
+   *       const opts = OPTS[i];
+   *       const fmt = new Intl.DateTimeFormat('en', opts);
+   *       console.log(fmt.formatRange(start, end));
+   *     }
+   *
+   * This code formats two dates two different ways:
+   *
+   *   2007-Jan-01 10:12
+   *   2008-Jan-02 11:13
+   *
+   * 1. Display the day: { day: 'numeric' }
+   *
+   *  ICU auto-expands the selected pattern to include the year
+   *  and month:
+   *
+   *    "1/1/2007 – 1/2/2008"
+   *
+   *  This adds context needed to understand the two
+   *  dates are separated by 367 days.
+   *
+   * 2. Display day and minute: { day: 'numeric', minute: '2-digit' }
+   *
+   *  No pattern expansion occurs, we get only what we
+   *  requested. The output is highly ambiguous since it's
+   *  missing year, month, and hour fields:
+   *
+   *    "1, 12 – 2, 13"
+   *
+   * Additional context is added in one case but not in the other.
+   *
+   * IMO it makes more sense to leave the input skeleton as untouched
+   * as possible, leaving it up to the caller to decide which
+   * fields to request.
    */
   getDateIntervalFormatRequest(
     calendar: string,
     start: CalendarDate,
-    fieldDiff: DateTimePatternFieldType,
+    end: CalendarDate,
     options: DateIntervalFormatOptions,
     params: NumberParams,
   ): DateIntervalFormatRequest {
     const patterns = this.getCalendarPatterns(calendar);
-
-    const dateDiffers = 'yMd'.indexOf(fieldDiff) !== -1;
-
     const wrapper = patterns.getIntervalFallback();
     const req: DateIntervalFormatRequest = { params, wrapper };
 
-    let origSkeleton = options.skeleton;
-    if (!origSkeleton) {
+    // Determine whether the largest field of visual difference (fovd)
+    // is a date or time field, or neither.  Note that interval patterns
+    // in the CLDR data do not include seconds, so we consider dates
+    // that only differ in seconds to be equivalent.
+    const fovd = start.fieldOfVisualDifference(end) || 's';
+    const dateDiffers = 'GyMd'.indexOf(fovd) !== -1;
+    const timeDiffers = 'BahHm'.indexOf(fovd) !== -1;
+
+    // If main skeleton input is not used, select either date or
+    // time based on whether the date or time differ.
+    let skeleton = options.skeleton;
+    if (!skeleton) {
       if (dateDiffers && options.date) {
-        origSkeleton = options.date;
+        skeleton = options.date;
       } else {
-        origSkeleton = options.time;
+        skeleton = options.time;
       }
     }
 
-    // If the skeleton is still undefined, select a reasonable default
-    if (!origSkeleton) {
-      origSkeleton = dateDiffers ? 'yMMMd' : 'hmsa';
+    // If no skeleton is defined, choose a simple default
+    let defaulted = false;
+    if (!skeleton) {
+      skeleton = dateDiffers ? 'yMMMd' : 'jm';
+      defaulted = true;
     }
 
-    let skeleton = origSkeleton;
+    // At this point the skeleton contains at least one field.
 
-    // Cache key consists of the input skeleton and the field of greatest difference between
-    // the start and end dates.
-    const cacheKey = `${skeleton}\t${fieldDiff}`;
-    let entry = patterns.getCachedIntervalRequest(cacheKey);
-    if (entry) {
-      req.date = entry.date;
-      req.range = entry.range;
-      req.skeleton = entry.skeleton;
-      return req;
-    }
-
-    entry = {};
-
+    // Parse the input skeleton.
     let query = patterns.parseSkeleton(skeleton);
 
-    let standalone = fieldDiff === 's' || (query.isDate && !dateDiffers) || (query.isTime && dateDiffers);
-
-    if (!standalone) {
-      if (query.has(Field.DAY) && !query.has(Field.MONTH)) {
-        skeleton = `M${skeleton}`;
-      }
-      if (query.has(Field.MINUTE) && !query.has(Field.HOUR)) {
-        skeleton = `j${skeleton}`;
-      }
-    }
-
-    if (!query.isDate && dateDiffers) {
-      // 3c. prepend "yMd" and proceed
-      if (fieldDiff === 'y') {
-        skeleton = `yMd${skeleton}`;
-      } else if (fieldDiff === 'M') {
-        skeleton = `Md${skeleton}`;
-      } else {
-        skeleton = `d${skeleton}`;
+    if (!defaulted) {
+      // Interval skeletons for bare seconds 's' and minutes 'm' do not
+      // exist in the CLDR data. We fill in the gap to ensure we at least
+      // match on the correct hour field for the current locale.
+      const largest = this.largestSkeletonField(query);
+      if ('sm'.indexOf(largest) !== -1) {
+        skeleton = (largest === 's' ? 'jm' : 'j') + skeleton;
+        query = patterns.parseSkeleton(skeleton);
       }
     }
 
-    if (origSkeleton !== skeleton) {
-      query = patterns.parseSkeleton(skeleton);
-    }
+    // BEGIN formatting rules.
 
-    let timeQuery: DateSkeleton | undefined;
-
-    // If both date and time fields are requested, we have two choices:
-    // a. date fields are the same:  "<date>, <time start> - <time end>"
-    // b. date fields differ, format full range: "<start> - <end>"
+    // RULE 1. Skeleton contains both date and time fields
     if (query.compound()) {
-      if (dateDiffers) {
-        // 1b. format start and end dates with fallback: "<start> - <end>"
+      if (timeDiffers) {
+        // RULE 1a. IF time_differs, format date followed by time range
+        const timeQuery = query.split();
+        req.date = this.matchAvailablePattern(patterns, start, query, params);
+        query = timeQuery;
+        // ... (1a) intentional fall through to format date + time range
+      } else if (dateDiffers) {
+        // RULE 1b. ELSE IF date_differs, format generic fallback
         req.skeleton = skeleton;
-        entry.skeleton = skeleton;
-        patterns.setCachedIntervalRequest(cacheKey, entry);
+        return req;
+      } else {
+        // RULE 1c. ELSE format the date + time standalone
+        const timeQuery = query.split();
+        if (query.isDate) {
+          req.date = this.matchAvailablePattern(patterns, start, query, params);
+        }
+        if (timeQuery.isTime) {
+          req.time = this.matchAvailablePattern(patterns, start, timeQuery, params);
+        }
         return req;
       }
-
-      // 1a. split skeleton, format date standalone ..
-      timeQuery = query.split();
-      entry.date = this.matchAvailablePattern(patterns, start, query, params);
-
-      // ... followed by time range: "<date>, <time start> - <time end>"
-      query = timeQuery;
     }
 
-    // standalone: in certain cases we cannot display a range.
-    standalone = fieldDiff === 's' || (query.isDate && !dateDiffers) || (query.isTime && dateDiffers);
-    if (standalone) {
-      // 2a. format date standalone: "<date>"
-      // 3a. format time standalone: "<time>"
-      entry.date = this.matchAvailablePattern(patterns, start, query, params);
-    } else {
-      // 2b. format date interval: "<date start> - <date end>"
-      // 3b. format time interval: "<time start> - <time end>"
-      const match = patterns.matchInterval(query, fieldDiff);
-      if (match) {
-        const pattern = patterns.getIntervalPattern(fieldDiff, match.skeleton);
+    // RULE 2: skeleton only contains date fields
+    // RULE 3: skeleotn only contains time fields
+    if (fovd !== 's') {
+      // RULE 2a IF dateDiffers, format date range
+      // RULE 3a IF timeDiffers, format time range
+      const match = patterns.matchInterval(query);
+      if (match && match.data) {
+        // Compute masked field of visual difference using the found skeleton.
+        const fovd = this.maskedFOVD(start, end, match.skeleton);
+
+        // Use fovd to select final pattern. Since it was masked by the matched
+        // skeleton, the fovd should completely cover the set of patterns in the data.
+        let pattern = match.data.patterns[fovd];
+
+        const parsedPattern = this.internals.calendars.parseDatePattern(pattern || '');
         /* istanbul ignore else */
-        if (pattern.length) {
-          entry.range = patterns.adjustPattern(pattern, query, params.symbols.decimal);
+        if (parsedPattern.length) {
+          req.range = patterns.adjustPattern(parsedPattern, query, params.symbols.decimal);
         }
+      }
+    } else {
+      // RULE 2b ELSE format date standalone
+      // RULE 3b ELSE format time standalone
+      req.date = this.matchAvailablePattern(patterns, start, query, params);
+    }
+
+    return req;
+  }
+
+  largestSkeletonField(skeleton: DateSkeleton): DateTimePatternFieldType {
+    for (const field of maskedFOVDFields) {
+      const info = skeleton.info[field];
+      if (info) {
+        return info.field as DateTimePatternFieldType;
+      }
+    }
+    return DateTimePatternField.SECOND;
+  }
+
+  maskedFOVD(start: CalendarDate, end: CalendarDate, skeleton: DateSkeleton): DateTimePatternFieldType {
+    let smallest: SkeletonField | undefined;
+    for (const field of maskedFOVDFields) {
+      const info = skeleton.info[field];
+      if (!info) {
+        continue;
+      }
+
+      smallest = info;
+      switch (field) {
+        case Field.ERA:
+          if (start.era() !== end.era()) {
+            return DateTimePatternField.ERA;
+          }
+          break;
+
+        case Field.YEAR:
+          if (start.year() !== end.year()) {
+            return DateTimePatternField.YEAR;
+          }
+          break;
+
+        case Field.MONTH:
+          if (start.month() !== end.month()) {
+            return DateTimePatternField.MONTH;
+          }
+          break;
+
+        case Field.DAY:
+          if (start.dayOfMonth() !== end.dayOfMonth()) {
+            return DateTimePatternField.DAY;
+          }
+          break;
+
+        case Field.DAYPERIOD:
+          switch (info.field) {
+            case 'a': // dayperiod
+            case 'b': // dayperiod extended (resolve to 'a' for now)
+              if (start.isAM() !== end.isAM()) {
+                return DateTimePatternField.DAYPERIOD;
+              }
+              break;
+            case 'B': // dayperiod flex
+              if (this.dayperiodFlex(start) !== this.dayperiodFlex(end)) {
+                return DateTimePatternField.DAYPERIOD_FLEX;
+              }
+              break;
+          }
+          break;
+
+        case Field.HOUR:
+          switch (info.field) {
+            case 'h': // hour 1-12
+            case 'K': // hour 0-11
+              if (start.hour() !== end.hour()) {
+                return DateTimePatternField.HOUR12;
+              }
+              break;
+
+            case 'H': // hour 0-23
+            case 'k': // hour 1-24
+              if (start.hourOfDay() !== end.hourOfDay()) {
+                return DateTimePatternField.HOUR24;
+              }
+              break;
+          }
+          break;
+
+        case Field.MINUTE:
+        case Field.SECOND:
+          if (start.minute() !== end.minute()) {
+            return DateTimePatternField.MINUTE;
+          }
+          break;
       }
     }
 
-    patterns.setCachedIntervalRequest(cacheKey, entry);
-    req.date = entry.date;
-    req.range = entry.range;
-    return req;
+    // If we exhaust all fields of the skeleton, the two dates are equivalent
+    // with respect to the fields masked by the skeleton. We return the smallest
+    // field by default.
+
+    return smallest ? (smallest.field as DateTimePatternFieldType) : DateTimePatternField.MINUTE;
+  }
+
+  private dayperiodFlex(date: CalendarDate): string {
+    return this.internals.calendars.flexDayPeriod(this.bundle, minutes(date)) || '';
   }
 
   private matchAvailablePattern(

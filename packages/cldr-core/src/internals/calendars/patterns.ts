@@ -1,11 +1,10 @@
 import { CalendarSchema, PluralType } from '@phensley/cldr-types';
 import { coerceDecimal } from '@phensley/decimal';
-import { LRU } from '@phensley/cldr-utils';
 
 import { timeData, timeStrings } from './autogen.timedata';
 import { Internals } from '../../internals';
 import { Bundle } from '../../resource';
-import { DatePatternMatcher, DateSkeleton, DateSkeletonParser } from './skeleton';
+import { DatePatternMatcher, DatePatternMatcherEntry, DateSkeleton, DateSkeletonParser } from './skeleton';
 import { parseDatePattern, DateTimeNode } from '../../parsing/date';
 import { CalendarDate } from '../../systems/calendars';
 
@@ -26,6 +25,11 @@ export type StandaloneFieldType = 'dayPeriods' | 'eras' | 'months' | 'quarters' 
 export type TwoLevelMap = { [x: string]: { [y: string]: string } };
 export type ThreeLevelMap = { [x: string]: { [y: string]: { [z: string]: string } } };
 
+export interface IntervalSkeleton {
+  skeleton: DateSkeleton;
+  patterns: any;
+}
+
 /**
  * Caches all available date formatting patterns for a given calendar schema.
  * We must cache all available skeletons in order to perform best-fit matching
@@ -37,14 +41,13 @@ export class CalendarPatterns {
 
   private readonly region: string;
   private readonly skeletonParser: DateSkeletonParser;
-  private readonly intervalRequestCache: LRU<CachedIntervalRequest>;
   private readonly dateFormats: { [x: string]: string };
   private readonly timeFormats: { [x: string]: string };
   private readonly wrapperFormats: { [x: string]: string };
   private readonly wrapperFormatsAt: { [x: string]: string };
 
-  private readonly availableMatcher: DatePatternMatcher = new DatePatternMatcher();
-  private readonly intervalMatcher: { [x: string]: DatePatternMatcher } = {};
+  private readonly availableMatcher: DatePatternMatcher<any> = new DatePatternMatcher();
+  private readonly intervalMatcher: DatePatternMatcher<IntervalSkeleton> = new DatePatternMatcher();
 
   private readonly rawIntervalFormats: { [x: string]: { [y: string]: string } } = {};
   private readonly intervalFallback: string;
@@ -61,7 +64,6 @@ export class CalendarPatterns {
     this.language = bundle.language();
     this.region = bundle.region();
     this.skeletonParser = this.buildSkeletonParser();
-    this.intervalRequestCache = new LRU(cacheSize);
 
     // Fetch this locale's main formats
     this.dateFormats = schema.dateFormats.mapping(bundle);
@@ -111,14 +113,6 @@ export class CalendarPatterns {
     return this.internals.calendars.parseDatePattern(this.timeFormats[width] || '');
   }
 
-  getCachedIntervalRequest(key: string): CachedIntervalRequest | undefined {
-    return this.intervalRequestCache.get(key);
-  }
-
-  setCachedIntervalRequest(key: string, req: CachedIntervalRequest): void {
-    this.intervalRequestCache.set(key, req);
-  }
-
   getWrapperPattern(width: string, atTime: boolean): string {
     let w = this.wrapperFormatsAt[width];
     return atTime && w ? w : this.wrapperFormats[width] || '';
@@ -146,20 +140,18 @@ export class CalendarPatterns {
   }
 
   matchAvailable(skeleton: DateSkeleton): DateSkeleton {
-    return this.availableMatcher.match(skeleton);
+    return this.availableMatcher.match(skeleton).skeleton;
   }
 
-  matchInterval(skeleton: DateSkeleton, field: string): DateSkeleton | undefined {
-    field = field === 's' ? 'm' : field;
-    const m = this.intervalMatcher[field];
-    return m ? m.match(skeleton) : undefined;
+  matchInterval(skeleton: DateSkeleton): DatePatternMatcherEntry<IntervalSkeleton> | undefined {
+    return this.intervalMatcher.match(skeleton);
   }
 
   private buildSkeletonParser(): DateSkeletonParser {
     const pair = this.getTimeData();
-    const allowedFlex = pair[0].split(' ').map(parseDatePattern);
-    const preferredFlex = parseDatePattern(pair[1]);
-    return new DateSkeletonParser(preferredFlex, allowedFlex[0]);
+    const allowed = pair[0].split(' ').map(parseDatePattern);
+    const preferred = parseDatePattern(pair[1]);
+    return new DateSkeletonParser(preferred, allowed[0]);
   }
 
   private buildAvailableMatcher(): void {
@@ -175,17 +167,19 @@ export class CalendarPatterns {
         this.availableMatcher.add(this.skeletonParser.parse(skeleton));
       }
     }
+    this.availableMatcher.sort();
   }
 
   private buildIntervalMatcher(): void {
-    for (const field of Object.keys(this.rawIntervalFormats)) {
-      const group = this.rawIntervalFormats[field];
-      const m = new DatePatternMatcher();
-      for (const skeleton of Object.keys(group)) {
-        m.add(this.skeletonParser.parse(skeleton));
+    for (const rawSkeleton of Object.keys(this.rawIntervalFormats)) {
+      const patterns = this.rawIntervalFormats[rawSkeleton];
+      if (Object.keys(patterns).length === 0) {
+        continue;
       }
-      this.intervalMatcher[field] = m;
+      const skeleton = this.skeletonParser.parse(rawSkeleton);
+      this.intervalMatcher.add(skeleton, { skeleton, patterns });
     }
+    this.intervalMatcher.sort();
   }
 
   getTimeData(): [string, string] {

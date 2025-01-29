@@ -87,10 +87,10 @@ export const getSymbols = (): any => {
     addKeys(nestedKeys(main.Persian.pluralFormats), persianPluralFormats);
     addKeys(nestedKeys(main.Japanese.pluralFormats), japanesePluralFormats);
 
-    addKeys(nestedKeys(main.Gregorian.intervalFormats), gregorianIntervalFormats);
-    addKeys(nestedKeys(main.Buddhist.intervalFormats), buddhistIntervalFormats);
-    addKeys(nestedKeys(main.Persian.intervalFormats), persianIntervalFormats);
-    addKeys(nestedKeys(main.Japanese.intervalFormats), japaneseIntervalFormats);
+    addKeys(main.Gregorian.intervalFormats, gregorianIntervalFormats);
+    addKeys(main.Buddhist.intervalFormats, buddhistIntervalFormats);
+    addKeys(main.Persian.intervalFormats, persianIntervalFormats);
+    addKeys(main.Japanese.intervalFormats, japaneseIntervalFormats);
   });
 
   const unitCategories = unique(sorted(unitsRaw).map((u) => u.split('-')[0]));

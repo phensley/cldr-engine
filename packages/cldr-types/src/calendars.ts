@@ -3,17 +3,20 @@
  *
  * @public
  */
-export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
+export type DateTimePatternFieldType = 'G' | 'y' | 'M' | 'd' | 'a' | 'B' | 'H' | 'h' | 'm' | 's';
 
 /**
  * @public
  */
 export enum DateTimePatternField {
+  ERA = 'G',
   YEAR = 'y',
   MONTH = 'M',
   DAY = 'd',
   DAYPERIOD = 'a', // am / pm
-  HOUR = 'H',
+  DAYPERIOD_FLEX = 'B', // in the afternoon
+  HOUR24 = 'H',
+  HOUR12 = 'h',
   MINUTE = 'm',
   SECOND = 's',
 }

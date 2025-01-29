@@ -50,7 +50,18 @@ export const GregorianMonthsIndex = rangeindex(1, 12);
 /**
  * @public
  */
-export const DateTimePatternFieldValues: DateTimePatternFieldType[] = ['y', 'M', 'd', 'a', 'H', 'm', 's'];
+export const DateTimePatternFieldValues: DateTimePatternFieldType[] = [
+  'G',
+  'y',
+  'M',
+  'd',
+  'a',
+  'B',
+  'H',
+  'h',
+  'm',
+  's',
+];
 
 /**
  * @public

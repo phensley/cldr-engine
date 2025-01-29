@@ -31,7 +31,7 @@ const calendarScope = (name: string, scopeName: string) =>
     formats('standAlone', 'standAlone', name),
     vector('availableFormats', [`${name}-available-format`]),
     vector('pluralFormats', ['plural-key', `${name}-plural-format`]),
-    vector('intervalFormats', ['date-time-pattern-field', `${name}-interval-format`]),
+    vector('intervalFormats', [`${name}-interval-format`, 'date-time-pattern-field']),
     vector('dateFormats', ['format-width']),
     vector('timeFormats', ['format-width']),
     vector('dateTimeFormats', ['format-width']),

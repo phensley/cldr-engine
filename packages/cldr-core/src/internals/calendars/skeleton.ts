@@ -79,16 +79,13 @@ export class DateSkeleton {
       const info = this.info[i];
       if (info !== undefined) {
         const { field } = info;
-        // Skip day period for backwards-compatibility
-        if (field !== '' && field !== 'a') {
-          let repeat = info.repeat;
-          // Override skeleton repeat for these fields.
-          if ('GEzvQ'.indexOf(field) !== -1) {
-            repeat = 1;
-          }
-          for (let j = 0; j < repeat; j++) {
-            r += field;
-          }
+        let repeat = info.repeat;
+        // Override skeleton repeat for these fields.
+        if ('GEzvQ'.indexOf(field) !== -1) {
+          repeat = 1;
+        }
+        for (let j = 0; j < repeat; j++) {
+          r += field;
         }
       }
     }
@@ -195,7 +192,6 @@ export class DateSkeletonParser {
   private setMeta(s: DateSkeleton, field: string): void {
     const meta = field === 'C' ? this.allowedFlex : this.preferredFlex;
     for (const n of meta) {
-      // Flex types have no static pattern fields
       /* istanbul ignore else */
       if (typeof n !== 'string') {
         this.set(s, field, n[0], n[1]);
@@ -228,39 +224,58 @@ export class DateSkeletonParser {
 
 const cmp = (a: number, b: number): number => (a < b ? -1 : a > b ? 1 : 0);
 
+export interface DatePatternMatcherEntry<T> {
+  skeleton: DateSkeleton;
+  data?: T;
+}
+
+export const NONE: DatePatternMatcherEntry<any> = {
+  skeleton: new DateSkeleton(),
+};
+
 /**
  * Cache of date patterns and skeletons with ICU-compatible best-fit matching.
  */
-export class DatePatternMatcher {
+export class DatePatternMatcher<T> {
   // Save some work for exact matches.
-  private exact: { [x: string]: DateSkeleton } = {};
+  private exact: { [x: string]: DatePatternMatcherEntry<T> } = {};
 
   // Array for matching by distances
-  private entries: DateSkeleton[] = [];
+  private entries: DatePatternMatcherEntry<T>[] = [];
 
-  add(skeleton: DateSkeleton, _pattern?: DateTimeNode[]): void {
+  add(skeleton: DateSkeleton, data?: T): void {
     const key = skeleton.skeleton;
     // Avoid adding patterns with duplicate skeletons
     if (this.exact[key] === undefined) {
-      this.exact[key] = skeleton;
-      this.entries.push(skeleton);
+      const entry: DatePatternMatcherEntry<T> = {
+        skeleton,
+        data,
+      };
+      this.exact[key] = entry;
+      this.entries.push(entry);
     }
-    this.entries.sort((a, b) => cmp(a.skeleton.length, b.skeleton.length));
+  }
+
+  /**
+   * Sort entries once they have all been added.
+   */
+  sort() {
+    this.entries.sort((a, b) => cmp(a.skeleton.skeleton.length, b.skeleton.skeleton.length));
   }
 
   // TODO: future options to control the match
 
-  match(input: DateSkeleton): DateSkeleton {
+  match(input: DateSkeleton): DatePatternMatcherEntry<T> {
     const match = this.exact[input.skeleton];
     if (match !== undefined) {
       return match;
     }
 
-    let best: DateSkeleton = EMPTY;
+    let best: DatePatternMatcherEntry<T> = NONE;
     let bestDist: number = Number.MAX_SAFE_INTEGER;
 
     for (const entry of this.entries) {
-      const dist = this.getDistance(entry, input);
+      const dist = this.getDistance(entry.skeleton, input);
       if (dist < bestDist) {
         best = entry;
         bestDist = dist;
@@ -321,12 +336,6 @@ export class DatePatternMatcher {
         }
       }
 
-      // TODO: UNREACHABLE as field replacement has been selected above
-      // // Metacharacters have already been replaced in the pattern.
-      // if ('jJC'.indexOf(adjfield) !== -1) {
-      //   console.log('adjust skeleton', adjfield);
-      //   adjfield = field;
-      // }
       r.push([adjfield, adjwidth]);
     }
 

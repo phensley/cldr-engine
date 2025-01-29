@@ -158,11 +158,12 @@ export interface Calendars {
   /**
    * Calculate the field of visual difference between two dates. This can be used
    * to choose an appropriate date or time skeleton for interval formatting.
+   * Returns undefined if the dates are equivalent down to the second.
    */
   fieldOfVisualDifference(
     a: CalendarDate | ZonedDateTime | Date,
     b: CalendarDate | ZonedDateTime | Date,
-  ): DateTimePatternFieldType;
+  ): DateTimePatternFieldType | undefined;
 
   /**
    * Formats a date-time value to string.

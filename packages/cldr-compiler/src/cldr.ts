@@ -109,8 +109,11 @@ const fixIntervals = (obj: any) => {
     const outer = obj[skel];
     const inner: any = {};
     Object.keys(outer).forEach((field) => {
-      const key = field === 'h' ? 'H' : field;
-      inner[key] = outer[field];
+      // We don't currently support the variants.
+      if (field.indexOf('-variant') !== -1) {
+        return;
+      }
+      inner[field] = outer[field];
     });
     res[skel] = inner;
   });

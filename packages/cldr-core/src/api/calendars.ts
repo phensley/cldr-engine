@@ -252,7 +252,7 @@ export class CalendarsImpl implements Calendars {
   fieldOfVisualDifference(
     a: CalendarDate | ZonedDateTime | Date,
     b: CalendarDate | ZonedDateTime | Date,
-  ): DateTimePatternFieldType {
+  ): DateTimePatternFieldType | undefined {
     // Date is interpreted as UTC
     if (a instanceof Date) {
       a = { date: a } as ZonedDateTime;
@@ -508,14 +508,14 @@ export class CalendarsImpl implements Calendars {
     start = this.convertDateTo(calendar, start);
     end = this.convertDateTo(calendar, end);
 
-    const fieldDiff = this.fieldOfVisualDifference(start, end);
+    // const fieldDiff = this.fieldOfVisualDifference(start, end);
     const params = this.privateApi.getNumberParams(options.nu, 'default');
-    const req = this.manager.getDateIntervalFormatRequest(calendar, start, fieldDiff, options, params);
+    const req = this.manager.getDateIntervalFormatRequest(calendar, start, end, options, params);
 
+    const ctx = this._context(start, params, options.context, options.alt);
     if (req.skeleton) {
       const { ca, nu } = options;
       const r = this.manager.getDateFormatRequest(start, { ca, nu, skeleton: req.skeleton }, params);
-      const ctx = this._context(start, params, options.context, options.alt);
       const _start = this.internals.calendars.formatDateTime(calendar, ctx, value, true, r.date, r.time, r.wrapper);
       ctx.date = end;
       const _end = this.internals.calendars.formatDateTime(calendar, ctx, value, false, r.date, r.time, r.wrapper);
@@ -524,10 +524,19 @@ export class CalendarsImpl implements Calendars {
       return value.render();
     }
 
+    const patterns = this.manager.getCalendarPatterns(calendar);
+    const atTime = options.atTime === false ? false : true;
+
     let _date: R | undefined;
     if (req.date) {
-      const ctx = this._context(start, params, options.context, options.alt);
       _date = this.internals.calendars.formatDateTime(calendar, ctx, value, true, req.date);
+    }
+
+    if (req.time) {
+      const _time = this.internals.calendars.formatDateTime(calendar, ctx, value, true, req.time);
+      const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern('medium', atTime));
+      value.wrap(wrapper, [_time, _date!]);
+      return value.render();
     }
 
     if (req.range) {
@@ -542,8 +551,6 @@ export class CalendarsImpl implements Calendars {
       // https://www.unicode.org/cldr/trac/ticket/11158
       // Docs don't mention this edge case:
       // https://www.unicode.org/reports/tr35/tr35-dates.html#intervalFormats
-      const patterns = this.manager.getCalendarPatterns(calendar);
-      const atTime = options.atTime === false ? false : true;
       const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern('medium', atTime));
       value.wrap(wrapper, [_range, _date]);
       return value.render();

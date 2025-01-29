@@ -1,8 +1,132 @@
 import { calendarsApi } from '../../_helpers';
-import { CalendarDate, DateIntervalFormatOptions } from '../../../src';
+import { CalendarDate, DateIntervalFormatOptions, TimePeriod } from '../../../src';
 
 // March 11, 2018 7:00:25 AM UTC
 const MARCH_11_2018_070025_UTC = 1520751625000;
+
+type TestCase = [Partial<TimePeriod>, string];
+
+type TestCases = [DateIntervalFormatOptions, TestCase[]][];
+
+const runt = (name: string, locale: string, base: number, zone: string, tests: TestCases) => {
+  const api = calendarsApi(locale);
+  const start = api.toGregorianDate({ date: base, zoneId: zone });
+  let actual: string;
+  let i = 1;
+  let j = 1;
+  for (const tst of tests) {
+    const [opts, cases] = tst;
+    for (const [time, expected] of cases) {
+      test(`${name} test ${i} case ${j}`, () => {
+        const end = start.add(time);
+        const [s, e] = end.compare(start) === -1 ? [end, start] : [start, end];
+        actual = api.formatDateInterval(s, e, opts);
+        expect(actual).toEqual(expected);
+      });
+      j++;
+    }
+    i++;
+  }
+};
+
+runt('English defaults', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
+  [
+    {}, // default skeleton: yMMMd or jm
+    [
+      // "h:mm – h:mm a"
+      [{ minute: 20 }, '3:00 – 3:20 AM'],
+      // "h:mm – h:mm a"
+      [{ hour: 3 }, '3:00 – 6:00 AM'],
+      // "h:mm a – h:mm a"
+      [{ hour: 10 }, '3:00 AM – 1:00 PM'],
+      // "MMM d – d, y"
+      [{ day: 2 }, 'Mar 11 – 13, 2018'],
+      // "MMM d – MMM d, y"
+      [{ month: 1 }, 'Mar 11 – Apr 11, 2018'],
+      // "MMM d, y – MMM d, y"
+      [{ year: 1 }, 'Mar 11, 2018 – Mar 11, 2019'],
+    ],
+  ],
+]);
+
+runt('English skeletons', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
+  [
+    { skeleton: 'jmv' },
+    [
+      // "h:mm – h:mm a v"
+      [{ minute: 20 }, '3:00 – 3:20 AM ET'],
+      // "h:mm – h:mm a v"
+      [{ hour: 4 }, '3:00 – 7:00 AM ET'],
+      // "h:mm a – h:mm a v"
+      [{ hour: 13 }, '3:00 AM – 4:00 PM ET'],
+      // "h:mm a – h:mm a v"
+      [{ day: 2 }, '3:00 – 3:00 AM ET'],
+    ],
+  ],
+  [
+    { skeleton: 'Hmv' },
+    [
+      // "HH:mm – HH:mm v"
+      [{ minute: 20 }, '03:00 – 03:20 ET'],
+      // "HH:mm – HH:mm v"
+      [{ hour: 4 }, '03:00 – 07:00 ET'],
+      // "HH:mm – HH:mm v"
+      [{ hour: 13 }, '03:00 – 16:00 ET'],
+    ],
+  ],
+]);
+
+runt('English flex dayperiod', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
+  [
+    { skeleton: 'Bjm' },
+    [
+      [{ hour: -2 }, '12:00 midnight – 3:00 at night'],
+      [{ minute: 20 }, '3:00 – 3:20 at night'],
+      [{ hour: 3 }, '3:00 at night – 6:00 in the morning'],
+      [{ hour: 9 }, '3:00 at night – 12:00 noon'],
+    ],
+  ],
+  [
+    { skeleton: 'yMMMdBj' },
+    [
+      [{ hour: -2 }, 'Mar 11, 2018, 12 midnight – 3 at night'],
+      [{ minute: 20 }, 'Mar 11, 2018, 3 – 3 at night'],
+      [{ hour: 3 }, 'Mar 11, 2018, 3 at night – 6 in the morning'],
+      [{ hour: 9 }, 'Mar 11, 2018, 3 at night – 12 noon'],
+    ],
+  ],
+]);
+
+runt('English field adjustments', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
+  [
+    { skeleton: 'GEEEEyMMMMdd' },
+    [
+      // "E, MMM d – E, MMM d, y G"
+      [{ day: -8 }, 'Saturday, March 03 – Sunday, March 11, 2018 AD'],
+      // "E, MMM d – E, MMM d, y G"
+      [{ month: 7 }, 'Sunday, March 11 – Thursday, October 11, 2018 AD'],
+      // "E, MMM d, y – E, MMM d, y G"
+      [{ year: 2 }, 'Sunday, March 11, 2018 – Wednesday, March 11, 2020 AD'],
+      // "E, MMM d, y G – E, MMM d, y G"
+      [{ year: -2030 }, 'Wednesday, March 11, 13 BC – Sunday, March 11, 2018 AD'],
+    ],
+  ],
+]);
+
+runt('English full skeletons', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
+  [{ skeleton: 'yMMMdjmv' }, [[{}, 'Mar 11, 2018, 3:00 AM ET']]],
+]);
+
+runt('German defaults', 'de', MARCH_11_2018_070025_UTC, 'Europe/Berlin', [
+  [
+    {},
+    [
+      [{ minute: 20 }, '08:00–08:20 Uhr'],
+      [{ hour: 10 }, '08:00–18:00 Uhr'],
+      [{ day: 2 }, '11.–13. März 2018'],
+    ],
+  ],
+]);
 
 test('interval defaulting', () => {
   const api = calendarsApi('en');
@@ -47,15 +171,15 @@ test('interval date/time choice', () => {
   let end: CalendarDate;
   let s: string;
 
-  const opts: DateIntervalFormatOptions = { date: 'EEEyMMMd', time: 'Hms' };
+  const opts: DateIntervalFormatOptions = { date: 'EEEyMMMd', time: 'jms' };
 
   end = start.add({ minute: 33 });
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('03:00 – 03:33');
+  expect(s).toEqual('3:00\u2009–\u20093:33\u202fAM');
 
   end = start.add({ day: 0.1 });
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('03:00 – 05:24');
+  expect(s).toEqual('3:00 – 5:24\u202fAM');
 
   end = start.add({ day: 0.4 });
   s = api.formatDateInterval(start, end, opts);
@@ -98,7 +222,7 @@ test('interval date/time choice', () => {
   opts.time = 'EBhm';
   end = start.add({ day: 0.3 });
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('Sun, 3:00 – 10:12 in the morning');
+  expect(s).toEqual('Sun, 3:00 at night – 10:12 in the morning');
 
   opts.time = 'MMMdh';
   end = start.add({ day: 0.3 });
@@ -120,11 +244,11 @@ test('interval mismatch', () => {
 
   end = start.add({ week: 2 });
   s = api.formatDateInterval(start, end, { skeleton: 'hm' });
-  expect(s).toEqual('11, 3:00 AM – 25, 3:00 AM');
+  expect(s).toEqual('3:00 – 3:00 AM');
 
   end = start.add({ month: 2 });
   s = api.formatDateInterval(start, end, { skeleton: 'hm' });
-  expect(s).toEqual('3/11, 3:00 AM – 5/11, 3:00 AM');
+  expect(s).toEqual('3:00 – 3:00 AM');
 });
 
 test('interval context', () => {

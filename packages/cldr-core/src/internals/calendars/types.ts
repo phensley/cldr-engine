@@ -10,6 +10,7 @@ export interface DateFormatRequest {
 
 export interface DateIntervalFormatRequest {
   date?: DateTimeNode[];
+  time?: DateTimeNode[];
   range?: DateTimeNode[];
   skeleton?: string;
   params: NumberParams;
