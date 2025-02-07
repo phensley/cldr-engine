@@ -509,13 +509,18 @@ export class CalendarsImpl implements Calendars {
     end = this.convertDateTo(calendar, end);
 
     // const fieldDiff = this.fieldOfVisualDifference(start, end);
+    const wrap = options.wrap || 'medium';
     const params = this.privateApi.getNumberParams(options.nu, 'default');
     const req = this.manager.getDateIntervalFormatRequest(calendar, start, end, options, params);
 
     const ctx = this._context(start, params, options.context, options.alt);
     if (req.skeleton) {
       const { ca, nu } = options;
-      const r = this.manager.getDateFormatRequest(start, { ca, nu, skeleton: req.skeleton }, params);
+      const r = this.manager.getDateFormatRequest(
+        start,
+        { ca, nu, skeleton: req.skeleton, wrap: options.wrap, atTime: options.atTime },
+        params,
+      );
       const _start = this.internals.calendars.formatDateTime(calendar, ctx, value, true, r.date, r.time, r.wrapper);
       ctx.date = end;
       const _end = this.internals.calendars.formatDateTime(calendar, ctx, value, false, r.date, r.time, r.wrapper);
@@ -534,7 +539,7 @@ export class CalendarsImpl implements Calendars {
 
     if (req.time) {
       const _time = this.internals.calendars.formatDateTime(calendar, ctx, value, true, req.time);
-      const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern('medium', atTime));
+      const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern(wrap, atTime));
       value.wrap(wrapper, [_time, _date!]);
       return value.render();
     }
@@ -551,7 +556,7 @@ export class CalendarsImpl implements Calendars {
       // https://www.unicode.org/cldr/trac/ticket/11158
       // Docs don't mention this edge case:
       // https://www.unicode.org/reports/tr35/tr35-dates.html#intervalFormats
-      const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern('medium', atTime));
+      const wrapper = this.internals.general.parseWrapper(patterns.getWrapperPattern(wrap, atTime));
       value.wrap(wrapper, [_range, _date]);
       return value.render();
     }

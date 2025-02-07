@@ -226,6 +226,11 @@ export interface DateIntervalFormatOptions {
   alt?: DateFormatAltOptions;
 
   /**
+   * Wrapper format to use, if both a date and time are being formatted.
+   */
+  wrap?: FormatWidthType;
+
+  /**
    * Wrap with 'at' if available. This defaults to true since it was
    * the default datetime wrapper format in CLDR releases prior to v42.
    */

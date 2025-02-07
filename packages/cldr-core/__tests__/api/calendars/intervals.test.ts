@@ -74,6 +74,13 @@ runt('English skeletons', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
       [{ hour: 13 }, '03:00 – 16:00 ET'],
     ],
   ],
+  [
+    { skeleton: 'yMdjm', wrap: 'full', atTime: true },
+    [
+      [{ hour: 4 }, '3/11/2018 at 3:00 – 7:00 AM'],
+      [{ day: 4 }, '3/11/2018 at 3:00 AM – 3/15/2018 at 3:00 AM'],
+    ],
+  ],
 ]);
 
 runt('English flex dayperiod', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
@@ -131,6 +138,13 @@ runt('German defaults', 'de', MARCH_11_2018_070025_UTC, 'Europe/Berlin', [
       [{ minute: 20 }, '08:00–08:20 Uhr'],
       [{ hour: 10 }, '08:00–18:00 Uhr'],
       [{ day: 2 }, '11.–13. März 2018'],
+    ],
+  ],
+  [
+    { skeleton: 'yMdjm', wrap: 'full' },
+    [
+      [{ day: 10, hour: 10 }, '11.3.2018 um 08:00 – 21.3.2018 um 18:00'],
+      [{ year: 20 }, '11.3.2018 um 08:00 – 11.3.2038 um 08:00'],
     ],
   ],
 ]);
