@@ -94,7 +94,7 @@ export abstract class CalendarDate {
     // (undocumented)
     extendedYear(): number;
     // Warning: (ae-forgotten-export) The symbol "DateTimePatternFieldType" needs to be exported by the entry point index.d.ts
-    fieldOfVisualDifference(other: CalendarDate): DateTimePatternFieldType;
+    fieldOfVisualDifference(other: CalendarDate): DateTimePatternFieldType | undefined;
     fields(): CalendarDateFields;
     // (undocumented)
     protected _fields: number[];
@@ -288,7 +288,7 @@ export interface Calendars {
     dateField(type: DateFieldType, options?: DateFieldFormatOptions): string;
     dayPeriods(options?: CalendarFieldsOptions): any;
     eras(options?: EraFieldOptions): any;
-    fieldOfVisualDifference(a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
+    fieldOfVisualDifference(a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType | undefined;
     firstDayOfWeek(): number;
     formatDate(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): string;
     formatDateInterval(start: CalendarDate | ZonedDateTime | Date, end: CalendarDate | ZonedDateTime | Date, options?: DateIntervalFormatOptions): string;
@@ -334,7 +334,7 @@ export class CalendarsImpl implements Calendars {
     dayPeriods(opt?: CalendarFieldsOptions): any;
     // (undocumented)
     eras(opt?: EraFieldOptions): any;
-    fieldOfVisualDifference(a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType;
+    fieldOfVisualDifference(a: CalendarDate | ZonedDateTime | Date, b: CalendarDate | ZonedDateTime | Date): DateTimePatternFieldType | undefined;
     // (undocumented)
     firstDayOfWeek(): number;
     formatDate(date: CalendarDate | ZonedDateTime | Date, options?: DateFormatOptions): string;

@@ -40,7 +40,7 @@ export interface CalendarSchema {
     // (undocumented)
     readonly intervalFormatFallback: FieldArrow;
     // (undocumented)
-    readonly intervalFormats: Vector2Arrow<DateTimePatternFieldType, string>;
+    readonly intervalFormats: Vector2Arrow<string, DateTimePatternFieldType>;
     // (undocumented)
     readonly pluralFormats: Vector2Arrow<PluralType, string>;
     // (undocumented)
@@ -181,9 +181,15 @@ export enum DateTimePatternField {
     // (undocumented)
     DAYPERIOD = "a",
     // (undocumented)
-    HOUR = "H",
+    DAYPERIOD_FLEX = "B",
     // (undocumented)
-    MINUTE = "m",// am / pm
+    ERA = "G",
+    // (undocumented)
+    HOUR12 = "h",// am / pm
+    // (undocumented)
+    HOUR24 = "H",// in the afternoon
+    // (undocumented)
+    MINUTE = "m",
     // (undocumented)
     MONTH = "M",
     // (undocumented)
@@ -193,7 +199,7 @@ export enum DateTimePatternField {
 }
 
 // @public
-export type DateTimePatternFieldType = 'y' | 'M' | 'd' | 'a' | 'H' | 'm' | 's';
+export type DateTimePatternFieldType = 'G' | 'y' | 'M' | 'd' | 'a' | 'B' | 'H' | 'h' | 'm' | 's';
 
 // @public (undocumented)
 export enum DayPeriod {

@@ -114,7 +114,14 @@ runt('English field adjustments', 'en', MARCH_11_2018_070025_UTC, 'America/New_Y
 ]);
 
 runt('English full skeletons', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
-  [{ skeleton: 'yMMMdjmv' }, [[{}, 'Mar 11, 2018, 3:00 AM ET']]],
+  [
+    { skeleton: 'yMMMdjmv' },
+    [
+      [{}, 'Mar 11, 2018, 3:00 AM ET'],
+      [{ hour: 3 }, 'Mar 11, 2018, 3:00 – 6:00 AM ET'],
+      [{ day: 2 }, 'Mar 11, 2018, 3:00 AM ET – Mar 13, 2018, 3:00 AM ET'],
+    ],
+  ],
 ]);
 
 runt('German defaults', 'de', MARCH_11_2018_070025_UTC, 'Europe/Berlin', [
