@@ -637,6 +637,7 @@ export interface DateIntervalFormatOptions {
     nu?: NumberSystemType;
     skeleton?: string;
     time?: string;
+    wrap?: FormatWidthType;
 }
 
 // @public (undocumented)
