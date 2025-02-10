@@ -183,9 +183,16 @@ export class CalendarPatterns {
   }
 
   getTimeData(): [string, string] {
-    const w = timeData['']['001'];
-    const t = timeData[''][this.region] || (timeData[this.language] || /* istanbul ignore next */ {})[this.region];
-    return timeStrings[t !== undefined ? t : w].split('|') as [string, string];
+    const world = timeData['']['001'];
+    let region: number | undefined;
+    let lang = timeData[this.language];
+    if (lang !== undefined) {
+      region = lang[this.region];
+    }
+    if (region === undefined) {
+      region = timeData[''][this.region];
+    }
+    return timeStrings[region !== undefined ? region : world].split('|') as [string, string];
   }
 }
 

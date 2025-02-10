@@ -25,13 +25,33 @@ test('time data', () => {
   api = calendarsApi('es-ES');
   t = api.timeData();
   expect(t.preferred).toEqual('H');
-  expect(t.allowed).toEqual(['H', 'hB', 'h', 'hb']);
+  expect(t.allowed).toEqual(['H', 'h', 'hB', 'hb']);
 
   expect(api.formatDate(date, { skeleton: t.preferred })).toEqual('13');
   expect(t.allowed.map((skeleton) => api.formatDate(date, { skeleton }))).toEqual([
     '13',
+    '1 p. m.',
     '1 de la tarde',
     '1 p. m.',
-    '1 p. m.',
   ]);
+
+  t = calendarsApi('es-419').timeData();
+  expect(t.preferred).toEqual('h');
+  expect(t.allowed).toEqual(['h', 'H', 'hB', 'hb']);
+
+  t = calendarsApi('und-AR').timeData();
+  expect(t.preferred).toEqual('h');
+  expect(t.allowed).toEqual(['h', 'H', 'hB', 'hb']);
+
+  t = calendarsApi('es-AR').timeData();
+  expect(t.preferred).toEqual('h');
+  expect(t.allowed).toEqual(['h', 'H', 'hB', 'hb']);
+
+  t = calendarsApi('es-BR').timeData();
+  expect(t.preferred).toEqual('H');
+  expect(t.allowed).toEqual(['H', 'h', 'hB', 'hb']);
+
+  t = calendarsApi('und-BR').timeData();
+  expect(t.preferred).toEqual('H');
+  expect(t.allowed).toEqual(['H', 'hB']);
 });
