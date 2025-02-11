@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Calendar Overview · @phensley/cldr</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This section attempts to provide a complete overview of the features of the calendar-related APIs. The goal is to give a concise description of each feature and let examples speak for themselves."/><meta name="docsearch:version" content="1.8.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Calendar Overview · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="This section attempts to provide a complete overview of the features of the calendar-related APIs. The goal is to give a concise description of each feature and let examples speak for themselves."/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.8.0</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.8.0/doc-index" target="_self">Docs</a></li><li class=""><a href="/cldr-engine/docs/en/1.8.0/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Calendars</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-index">Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-goals">Goals</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-faq">Rationale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-quickstart">Quick start</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Customization</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-resource-patching">Resource Patching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-locales-parsing">Locale parsing</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-locales-resolution">Locale resolution</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-locales-matching">Language matching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-calendar-overview">Calendar Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-calendar-examples">Example: date formatting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-math">Arbitrary Precision</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-math-example-factorial">Example: factorial</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-math-example-rational-approx">Math: rational approximation</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-math-example-contd-fractions">Math: continued fractions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Message Formatting</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-messageformatting">Usage</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-messageformatting-custom">Customization</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Design</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-design-bundles">Resource bundles</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.8.0/doc-design-caching">Caching</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Calendar Overview</h1></header><article><div><span><p>This section attempts to provide a complete overview of the features of the calendar-related APIs. The goal is to give a concise description of each feature and let examples speak for themselves.</p>
+<h2><a class="anchor" aria-hidden="true" id="calendars"></a><a href="#calendars" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Calendars</h2>
+<p>There are currently 5 calendar systems implemented: <a href="api-gregoriandate">gregorian</a>, <a href="api-iso8601date">ISO-8601</a>, <a href="api-japanesedate">japanese</a>, <a href="api-buddhistdate">buddhist</a>, and <a href="api-persiandate">persian</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="date-instances"></a><a href="#date-instances" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Date instances</h2>
+<p><a href="api-calendardate">CalendarDate</a> instances are created within a given locale, via the <a href="api-cldr-calendars">CLDR.Calendars</a> namespace. The reason for this is that date instances have methods and properties that depend on <a href="https://www.unicode.org/reports/tr35/tr35-dates.html#Week_Data">CLDR week data</a>.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> a = cldr.Calendars.toGregorianDate({ date: <span class="hljs-number">1568550896000</span> });
+<span class="hljs-keyword">const</span> b = cldr.Calendars.toJapaneseDate({ date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2019</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>, <span class="hljs-number">12</span>, <span class="hljs-number">34</span>, <span class="hljs-number">56</span>) });
+log(a);
+log(b);
+</code></pre>
+<pre class="output">
+Gregorian 2019-09-15 12:34:56.000 Etc/UTC
+Japanese 2019-09-15 16:34:56.000 Etc/UTC
+</pre>
+<h2><a class="anchor" aria-hidden="true" id="conversion"></a><a href="#conversion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conversion</h2>
+<p>Conversions of dates from one calendar system to another, or changing of the date's time zone.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> gregorian = cldr.Calendars.toGregorianDate({ date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2019</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>) });
+<span class="hljs-keyword">const</span> japanese = cldr.Calendars.toJapaneseDate(gregorian);
+log(japanese.toString());
+</code></pre>
+<pre class="output">
+Japanese 2019-09-15 04:00:00.000 Etc/UTC
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="see"></a><a href="#see" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>See</h4>
+<ul>
+<li class="list"><a href="api-cldr-calendars#togregoriandate">Calendars.toGregorianDate</a></li>
+<li class="list"><a href="api-calendardate#withzone">CalendarDate.withZone</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="date-formatting"></a><a href="#date-formatting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Date formatting</h2>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> utc = cldr.Calendars.toGregorianDate({ date: <span class="hljs-number">1568586645000</span> });
+log(utc.toString());
+log();
+
+<span class="hljs-keyword">const</span> ny = utc.withZone(<span class="hljs-string">'America/New_York'</span>);
+<span class="hljs-keyword">const</span> tokyo = utc.withZone(<span class="hljs-string">'Asia/Tokyo'</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> date of [utc, ny, tokyo]) {
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> width of [<span class="hljs-string">'short'</span>, <span class="hljs-string">'medium'</span>, <span class="hljs-string">'long'</span>, <span class="hljs-string">'full'</span>]) {
+    <span class="hljs-keyword">const</span> s = cldr.Calendars.formatDate(date, { datetime: width });
+    log(s);
+  }
+  log();
+}
+</code></pre>
+<pre class="output">
+Gregorian 2019-09-15 22:30:45.000 Etc/UTC
+&nbsp;
+9/15/19, 10:30 PM
+Sep 15, 2019, 10:30:45 PM
+September 15, 2019 at 10:30:45 PM GMT
+Sunday, September 15, 2019 at 10:30:45 PM Greenwich Mean Time
+&nbsp;
+9/15/19, 6:30 PM
+Sep 15, 2019, 6:30:45 PM
+September 15, 2019 at 6:30:45 PM EDT
+Sunday, September 15, 2019 at 6:30:45 PM Eastern Daylight Time
+&nbsp;
+9/16/19, 7:30 AM
+Sep 16, 2019, 7:30:45 AM
+September 16, 2019 at 7:30:45 AM GMT+9
+Monday, September 16, 2019 at 7:30:45 AM Japan Standard Time
+&nbsp;
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="see-1"></a><a href="#see-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>See</h4>
+<ul>
+<li class="list"><a href="api-calendardate#withzone">CalendarDate.withZone</a></li>
+<li class="list"><a href="api-cldr-calendars#formatdate">Calendars.formatDate</a></li>
+<li class="list"><a href="api-cldr-calendars#togregoriandate">Calendars.toGregorianDate</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="date-interval-formatting"></a><a href="#date-interval-formatting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Date interval formatting</h2>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> start = cldr.Calendars.toGregorianDate({ date: <span class="hljs-number">1568586645000</span> });
+<span class="hljs-keyword">const</span> options = [
+  { },
+  { skeleton: <span class="hljs-string">'y'</span> },
+  { skeleton: <span class="hljs-string">'yMMMd'</span> },
+  { skeleton: <span class="hljs-string">'EyMMMMd'</span> }
+];
+<span class="hljs-keyword">const</span> periods: TimePeriod[] = [
+  { day: <span class="hljs-number">3</span> },
+  { week: <span class="hljs-number">2</span> },
+  { month: <span class="hljs-number">7.9</span> },
+  { year: <span class="hljs-number">3</span>, month: <span class="hljs-number">4</span> }
+];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> o of options) {
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> p of periods) {
+    log(cldr.Calendars.formatDateInterval(start, start.add(p), o));
+  }
+  log();
+}
+</code></pre>
+<pre class="output">
+Sep 15 – 18, 2019
+Sep 15 – 29, 2019
+Sep 15, 2019 – May 12, 2020
+Sep 15, 2019 – Jan 15, 2023
+&nbsp;
+9/15/2019 – 9/18/2019
+9/15/2019 – 9/29/2019
+2019 – 2020
+2019 – 2023
+&nbsp;
+Sep 15 – 18, 2019
+Sep 15 – 29, 2019
+Sep 15, 2019 – May 12, 2020
+Sep 15, 2019 – Jan 15, 2023
+&nbsp;
+Sun, September 15 – Wed, September 18, 2019
+Sun, September 15 – Sun, September 29, 2019
+Sun, September 15, 2019 – Tue, May 12, 2020
+Sun, September 15, 2019 – Sun, January 15, 2023
+&nbsp;
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="see-2"></a><a href="#see-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>See</h4>
+<ul>
+<li class="list"><a href="api-cldr-calendars#formatdateinterval">Calendars.formatDateInterval</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="calendar-math"></a><a href="#calendar-math" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Calendar math</h2>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> start = cldr.Calendars.toGregorianDate({ date: <span class="hljs-number">1568586645000</span> });
+log(<span class="hljs-string">'baseline:'</span>, cldr.Calendars.formatDate(start, { datetime: <span class="hljs-string">'medium'</span> }));
+log();
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> n of [<span class="hljs-number">1</span>, <span class="hljs-number">17.5</span>]) {
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> field of [<span class="hljs-string">'minute'</span>, <span class="hljs-string">'hour'</span>, <span class="hljs-string">'day'</span>, <span class="hljs-string">'week'</span>, <span class="hljs-string">'month'</span>, <span class="hljs-string">'year'</span>]) {
+    <span class="hljs-keyword">let</span> s: <span class="hljs-built_in">string</span>;
+    <span class="hljs-keyword">const</span> end = start.add({ [field]: n });
+
+    <span class="hljs-keyword">const</span> d = start.difference(end);
+    <span class="hljs-keyword">const</span> q = cldr.Calendars.timePeriodToQuantity(d);
+    s = cldr.Units.formatQuantitySequence(q);
+    log(<span class="hljs-string">`+<span class="hljs-subst">${n}</span> <span class="hljs-subst">${field}</span> difference = <span class="hljs-subst">${s}</span>`</span>);
+
+    s = cldr.Calendars.formatDate(end, { datetime: <span class="hljs-string">'medium'</span> });
+    log(s);
+    log();
+  }
+}
+</code></pre>
+<pre class="output">
+baseline: Sep 15, 2019, 10:30:45 PM
+&nbsp;
++1 minute difference = 1 minute
+Sep 15, 2019, 10:31:45 PM
+&nbsp;
++1 hour difference = 1 hour
+Sep 15, 2019, 11:30:45 PM
+&nbsp;
++1 day difference = 1 day
+Sep 16, 2019, 10:30:45 PM
+&nbsp;
++1 week difference = 1 week
+Sep 22, 2019, 10:30:45 PM
+&nbsp;
++1 month difference = 1 month
+Oct 15, 2019, 10:30:45 PM
+&nbsp;
++1 year difference = 1 year
+Sep 15, 2020, 10:30:45 PM
+&nbsp;
++17.5 minute difference = 17 minutes, 30 seconds
+Sep 15, 2019, 10:48:15 PM
+&nbsp;
++17.5 hour difference = 17 hours, 30 minutes
+Sep 16, 2019, 4:00:45 PM
+&nbsp;
++17.5 day difference = 2 weeks, 3 days, 12 hours
+Oct 3, 2019, 10:30:45 AM
+&nbsp;
++17.5 week difference = 4 months, 12 hours
+Jan 16, 2020, 10:30:45 AM
+&nbsp;
++17.5 month difference = 1 year, 5 months, 2 weeks
+Mar 1, 2021, 10:30:45 PM
+&nbsp;
++17.5 year difference = 17 years, 6 months, 2 days
+Mar 17, 2037, 10:30:45 PM
+&nbsp;
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="see-3"></a><a href="#see-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>See</h4>
+<ul>
+<li class="list"><a href="api-calendardate#add">CalendarDate.add</a></li>
+<li class="list"><a href="api-calendardate#difference">CalendarDate.difference</a></li>
+<li class="list"><a href="api-calendardate#subtract">CalendarDate.subtract</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="relative-time-formatting"></a><a href="#relative-time-formatting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Relative time formatting</h2>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> start = cldr.Calendars.toGregorianDate({ date: <span class="hljs-number">1568586645000</span> });
+<span class="hljs-keyword">const</span> periods: TimePeriod[] = [
+  { millis: <span class="hljs-number">100</span> },
+  { hour: <span class="hljs-number">17.5</span> },
+  { day: <span class="hljs-number">-3</span> },
+  { week: <span class="hljs-number">2</span> },
+  { month: <span class="hljs-number">-7.9</span> },
+  { year: <span class="hljs-number">3</span>, month: <span class="hljs-number">4</span> }
+];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> p of periods) {
+  log(cldr.Calendars.formatRelativeTime(start, start.add(p)));
+  log(cldr.Calendars.formatRelativeTime(start, start.add(p), { maximumFractionDigits: <span class="hljs-number">1</span> }));
+  log(cldr.Calendars.formatRelativeTime(start, start.add(p), { field: <span class="hljs-string">'day'</span> }));
+  log();
+}
+</code></pre>
+<pre class="output">
+now
+in 0.1 seconds
+today
+&nbsp;
+in 18 hours
+in 17.5 hours
+tomorrow
+&nbsp;
+3 days ago
+3 days ago
+3 days ago
+&nbsp;
+in 2 weeks
+in 2 weeks
+in 14 days
+&nbsp;
+8 months ago
+7.9 months ago
+240 days ago
+&nbsp;
+in 3 years
+in 3.3 years
+in 1,218 days
+&nbsp;
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="see-4"></a><a href="#see-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>See</h4>
+<ul>
+<li class="list"><a href="api-cldr-calendars#formatrelativetime">Calendars.formatRelativeTime</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="relative-time-field-formatting"></a><a href="#relative-time-field-formatting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Relative time field formatting</h2>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> n of [<span class="hljs-number">0</span>, <span class="hljs-number">-2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">-17</span>]) {
+  log(cldr.Calendars.formatRelativeTimeField(n, <span class="hljs-string">'hour'</span>));
+}
+</code></pre>
+<pre class="output">
+this hour
+2 hours ago
+in 5 hours
+17 hours ago
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="see-5"></a><a href="#see-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>See</h4>
+<ul>
+<li class="list"><a href="api-cldr-calendars#formatrelativetimefield">Calendars.formatRelativeTimeField</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="time-period-quantities"></a><a href="#time-period-quantities" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Time period quantities</h2>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> cldr = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">const</span> start = cldr.Calendars.toGregorianDate({ date: <span class="hljs-number">1568586645000</span> });
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> n of [<span class="hljs-number">999</span>, <span class="hljs-number">12502</span>, <span class="hljs-number">135138</span>]) {
+  <span class="hljs-keyword">const</span> end = start.add({ minute: n });
+  <span class="hljs-keyword">const</span> qty = cldr.Calendars.timePeriodToQuantity(start.difference(end));
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> length of [<span class="hljs-string">'narrow'</span>, <span class="hljs-string">'short'</span>, <span class="hljs-string">'long'</span>]) {
+    log(cldr.Units.formatQuantitySequence(qty, { length }));
+  }
+  log();
+}
+</code></pre>
+<pre class="output">
+16h 39m
+16 hr, 39 min
+16 hours, 39 minutes
+&nbsp;
+1w 1d 16h 22m
+1 wk, 1 day, 16 hr, 22 min
+1 week, 1 day, 16 hours, 22 minutes
+&nbsp;
+3m 2d 20h 18m
+3 mths, 2 days, 20 hr, 18 min
+3 months, 2 days, 20 hours, 18 minutes
+&nbsp;
+</pre>
+<h4><a class="anchor" aria-hidden="true" id="see-6"></a><a href="#see-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>See</h4>
+<ul>
+<li class="list"><a href="api-calendardate#difference">CalendarDate.difference</a></li>
+<li class="list"><a href="api-cldr-calendars#timeperiodtoquantity">Calendars.timePeriodToQuantity</a></li>
+<li class="list"><a href="api-cldr-units#formatquantitysequence">Units.formatQuantitySequence</a></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.8.0/doc-locales-matching"><span class="arrow-prev">← </span><span>Language matching</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.8.0/doc-calendar-examples"><span>Example: date formatting</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#calendars">Calendars</a></li><li><a href="#date-instances">Date instances</a></li><li><a href="#conversion">Conversion</a></li><li><a href="#date-formatting">Date formatting</a></li><li><a href="#date-interval-formatting">Date interval formatting</a></li><li><a href="#calendar-math">Calendar math</a></li><li><a href="#relative-time-formatting">Relative time formatting</a></li><li><a href="#relative-time-field-formatting">Relative time field formatting</a></li><li><a href="#time-period-quantities">Time period quantities</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2025 Patrick Hensley</section></footer></div></body></html>

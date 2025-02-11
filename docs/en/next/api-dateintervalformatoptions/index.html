@@ -72,7 +72,8 @@ object {
   ca?,
   nu?,
   context?,
-  alt?
+  alt?,
+  wrap?
 }
 </pre>
 <h3><a class="anchor" aria-hidden="true" id="properties"></a><a href="#properties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties</h3>
@@ -105,10 +106,15 @@ object {
 <ul>
 <li>Specify options for alternate field values.</li>
 </ul></li>
+<li><code class="def">wrap?: <span><a href="api-formatwidthtype">FormatWidthType</a></span></code>
+<ul>
+<li>Select the wrapper format (default: &quot;medium&quot;)</li>
+</ul></li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="defaults"></a><a href="#defaults" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Defaults</h3>
 <pre><code class="hljs css language-javascript">{
-  <span class="hljs-attr">context</span>: <span class="hljs-string">'middle-of-text'</span>;
+  <span class="hljs-attr">context</span>: <span class="hljs-string">"middle-of-text"</span>,
+  <span class="hljs-attr">wrap</span>: <span class="hljs-string">'medium'</span>
 }
 </code></pre>
 <ul>
@@ -119,17 +125,17 @@ object {
 <h3><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h3>
 <pre><code class="hljs css language-typescript"><span class="hljs-comment">// June 27, 2018 4:23:00 AM</span>
 <span class="hljs-keyword">const</span> epoch = <span class="hljs-number">1530087780000</span>;
-<span class="hljs-keyword">const</span> zoneId = <span class="hljs-string">'America/New_York'</span>;
+<span class="hljs-keyword">const</span> zoneId = <span class="hljs-string">"America/New_York"</span>;
 
 <span class="hljs-keyword">const</span> day = <span class="hljs-number">86400000</span>;
 <span class="hljs-keyword">const</span> start = { date: epoch, zoneId };
 
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> locale of [<span class="hljs-string">'en'</span>, <span class="hljs-string">'de'</span>, <span class="hljs-string">'zh'</span>]) {
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> locale of [<span class="hljs-string">"en"</span>, <span class="hljs-string">"de"</span>, <span class="hljs-string">"zh"</span>]) {
   <span class="hljs-keyword">const</span> cldr = framework.get(locale);
   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> days of [<span class="hljs-number">1.2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">17</span>, <span class="hljs-number">73</span>, <span class="hljs-number">1000</span>]) {
     <span class="hljs-keyword">const</span> end = { date: epoch + days * day, zoneId };
     <span class="hljs-keyword">const</span> result = cldr.Calendars.formatDateInterval(start, end, {
-      skeleton: <span class="hljs-string">'yMMMMd'</span>,
+      skeleton: <span class="hljs-string">"yMMMMd"</span>,
     });
     log(<span class="hljs-string">`<span class="hljs-subst">${locale}</span>  <span class="hljs-subst">${result}</span>`</span>);
   }
@@ -195,4 +201,4 @@ Wed, Jun 27 – Sat, Aug 11, 2018
 </ul></li>
 </ul>
 </p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/next/api-dateformatoptions"><span class="arrow-prev">← </span><span class="function-name-prevnext">DateFormatOptions</span></a><a class="docs-next button" href="/cldr-engine/docs/en/next/api-daterawformatoptions"><span class="function-name-prevnext">DateRawFormatOptions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2023 Patrick Hensley</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/next/api-dateformatoptions"><span class="arrow-prev">← </span><span class="function-name-prevnext">DateFormatOptions</span></a><a class="docs-next button" href="/cldr-engine/docs/en/next/api-daterawformatoptions"><span class="function-name-prevnext">DateRawFormatOptions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2025 Patrick Hensley</section></footer></div></body></html>
