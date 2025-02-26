@@ -101,6 +101,8 @@ export abstract class CalendarDate {
 
   /**
    * Calendar type for this date, e.g. 'gregory' for Gregorian.
+   *
+   * @public
    */
   type(): CalendarType {
     return this._type;
@@ -109,6 +111,8 @@ export abstract class CalendarDate {
   /**
    * Returns a formatted ISO-8601 string of the date in UTC. Note that this
    * always returns a date in the Gregorian calendar.
+   *
+   * @public
    */
   toISOString(): string {
     return this._toISOString(this, true);
@@ -117,6 +121,8 @@ export abstract class CalendarDate {
   /**
    * Returns a formatted ISO 8601 string of the date with local timezone offset.
    * Note that this always returns a date in the Gregorian calendar.
+   *
+   * @public
    */
   toLocalISOString(): string {
     return this._toISOString(this, false);
@@ -124,21 +130,35 @@ export abstract class CalendarDate {
 
   /**
    * Unix epoch with no timezone offset.
+   *
+   * @public
    */
   unixEpoch(): number {
     return this._fields[DateField.LOCAL_MILLIS] - this._zoneInfo.offset;
   }
 
+  /**
+   * First day of week.
+   *
+   * @public
+   */
   firstDayOfWeek(): number {
     return this._firstDay;
   }
 
+  /**
+   * Minimum days in the first week.
+   *
+   * @public
+   */
   minDaysInFirstWeek(): number {
     return this._minDays;
   }
 
   /**
    * Returns a floating point number representing the real Julian Day, UTC.
+   *
+   * @public
    */
   julianDay(): number {
     const ms = (this._fields[DateField.MILLIS_IN_DAY] - this._zoneInfo.offset) / CalendarConstants.ONE_DAY_MS;
@@ -147,42 +167,84 @@ export abstract class CalendarDate {
 
   /**
    * CLDR's modified Julian day used as the basis for all date calculations.
+   *
+   * @public
    */
   modifiedJulianDay(): number {
     return this._fields[DateField.JULIAN_DAY];
   }
 
+  /**
+   * Era
+   *
+   * @public
+   */
   era(): number {
     return this._fields[DateField.ERA];
   }
 
+  /**
+   * Extended year.
+   *
+   * @public
+   */
   extendedYear(): number {
     return this._fields[DateField.EXTENDED_YEAR];
   }
 
+  /**
+   * Year.
+   *
+   * @public
+   */
   year(): number {
     return this._fields[DateField.YEAR];
   }
 
+  /**
+   * Related year.
+   *
+   * @public
+   */
   relatedYear(): number {
     return this._fields[DateField.EXTENDED_YEAR];
   }
 
+  /**
+   * Year of week of year.
+   *
+   * @public
+   */
   yearOfWeekOfYear(): number {
     this.computeWeekFields();
     return this._fields[DateField.YEAR_WOY];
   }
 
+  /**
+   * Week of year.
+   *
+   * @public
+   */
   weekOfYear(): number {
     this.computeWeekFields();
     return this._fields[DateField.WEEK_OF_YEAR];
   }
 
+  /**
+   * Year of week of year ISO.
+   *
+   * @public
+   */
   yearOfWeekOfYearISO(): number {
     this.computeWeekFields();
     return this._fields[DateField.ISO_YEAR_WOY];
   }
 
+  /**
+   * Week of year ISO.
+   *
+   * @public
+   */
   weekOfYearISO(): number {
     this.computeWeekFields();
     return this._fields[DateField.ISO_WEEK_OF_YEAR];
@@ -248,10 +310,20 @@ export abstract class CalendarDate {
     return this._fields[DateField.DAY_OF_WEEK_IN_MONTH];
   }
 
+  /**
+   * Day of month.
+   *
+   * @public
+   */
   dayOfMonth(): number {
     return this._fields[DateField.DAY_OF_MONTH];
   }
 
+  /**
+   * Is AM.
+   *
+   * @public
+   */
   isAM(): boolean {
     return this._fields[DateField.AM_PM] === 0;
   }
@@ -286,34 +358,74 @@ export abstract class CalendarDate {
     return this._fields[DateField.SECOND];
   }
 
+  /**
+   * Milliseconds.
+   *
+   * @public
+   */
   milliseconds(): number {
     return this._fields[DateField.MILLIS];
   }
 
+  /**
+   * Milliseconds in day.
+   *
+   * @public
+   */
   millisecondsInDay(): number {
     return this._fields[DateField.MILLIS_IN_DAY];
   }
 
+  /**
+   * Metazone (CLDR) identifier.
+   *
+   * @public
+   */
   metaZoneId(): MetaZoneType {
     return this._zoneInfo.metazoneid as MetaZoneType;
   }
 
+  /**
+   * Timezone identifier.
+   *
+   * @public
+   */
   timeZoneId(): string {
     return this._zoneInfo.zoneid;
   }
 
+  /**
+   * Timezone stable identifier (CLDR)
+   *
+   * @public
+   */
   timeZoneStableId(): string {
     return this._zoneInfo.stableid;
   }
 
+  /**
+   * Timezone offset
+   *
+   * @public
+   */
   timeZoneOffset(): number {
     return this._zoneInfo.offset;
   }
 
+  /**
+   * Is leap year.
+   *
+   * @public
+   */
   isLeapYear(): boolean {
     return this._fields[DateField.IS_LEAP] === 1;
   }
 
+  /**
+   * Is daylight savings time.
+   *
+   * @public
+   */
   isDaylightSavings(): boolean {
     return this._zoneInfo.dst === 1;
   }
@@ -322,6 +434,8 @@ export abstract class CalendarDate {
    * Computes the field of visual difference between the two dates.
    * Note: This assumes the dates are of the same type and have the same
    * timezone offset.
+   *
+   * @public
    */
   fieldOfVisualDifference(other: CalendarDate): DateTimePatternFieldType | undefined {
     const a = this._fields;
@@ -342,6 +456,8 @@ export abstract class CalendarDate {
    *   a = b  ->  0
    *   a > b  ->  1
    * ```
+   *
+   * @public
    */
   compare(other: CalendarDate): number {
     const a = this.unixEpoch();
@@ -353,6 +469,8 @@ export abstract class CalendarDate {
    * Calculate the relative time between two dates. If a field is specified
    * the time will be calculated in terms of that single field. Otherwise
    * the field of greatest difference will be used.
+   *
+   * @public
    */
   relativeTime(other: CalendarDate, field?: TimePeriodField): [TimePeriodField, number] {
     const [s, sf, , ef] = this.swap(other);
@@ -365,6 +483,8 @@ export abstract class CalendarDate {
   /**
    * Calculate the time period between two dates. Note this returns the
    * absolute value of the difference.
+   *
+   * @public
    */
   difference(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod {
     const [s, sf, , ef] = this.swap(other);
@@ -375,6 +495,8 @@ export abstract class CalendarDate {
   /**
    * Calculate the time period between two dates. If 'other' is before this date,
    * the time period fields will be negative.
+   *
+   * @public
    */
   differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod {
     const r = this.difference(other, fields);
@@ -383,6 +505,8 @@ export abstract class CalendarDate {
 
   /**
    * Return all of the date and time field values.
+   *
+   * @public
    */
   fields(): CalendarDateFields {
     return {
@@ -399,6 +523,8 @@ export abstract class CalendarDate {
 
   /**
    * Return a JavaScript Date object with the same date and time.
+   *
+   * @public
    */
   asJSDate(): Date {
     return new Date(this.toLocalISOString());
@@ -406,6 +532,8 @@ export abstract class CalendarDate {
 
   /**
    * Start of date, e.g. `date.startOf('day')`
+   *
+   * @public
    */
   startOf(field: CalendarDateModFields): CalendarDate {
     switch (field) {
@@ -433,6 +561,8 @@ export abstract class CalendarDate {
 
   /**
    * End of date, e.g. `date.endOf('day')`
+   *
+   * @public
    */
   endOf(field: CalendarDateModFields): CalendarDate {
     switch (field) {
@@ -469,21 +599,29 @@ export abstract class CalendarDate {
    *
    * Note: when setting the 'year' field you must use the "extended year".
    * For example, the extended year 0 is 1 B.C in the Gregorian calendar.
+   *
+   * @public
    */
   abstract set(fields: Partial<CalendarDateFields>): CalendarDate;
 
   /**
    * Add the fields to this date, returning a new date.
+   *
+   * @public
    */
   abstract add(fields: Partial<TimePeriod>): CalendarDate;
 
   /**
    * Subtract the fields from this date, returning a new date.
+   *
+   * @public
    */
   abstract subtract(fields: Partial<TimePeriod>): CalendarDate;
 
   /**
    * Change the timezone for this date, returning a new date.
+   *
+   * @public
    */
   abstract withZone(zoneId: string): CalendarDate;
 

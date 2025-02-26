@@ -33,31 +33,66 @@ export class GregorianDate extends CalendarDate {
     super(type, firstDay, minDays);
   }
 
+  /**
+   * Set fields
+   *
+   * @public
+   */
   set(fields: Partial<CalendarDateFields>): GregorianDate {
     return this._set({ ...this.fields(), ...fields });
   }
 
+  /**
+   * Add the fields to this date.
+   *
+   * @public
+   */
   add(fields: Partial<TimePeriod>): GregorianDate {
     const [jd, ms] = this._add(fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
+  /**
+   * Subtract the fields from this date.
+   *
+   * @public
+   */
   subtract(fields: Partial<TimePeriod>): GregorianDate {
     return this.add(this._invertPeriod(fields));
   }
 
+  /**
+   * Change the timezone, returning a new date.
+   *
+   * @public
+   */
   withZone(zoneId: string): GregorianDate {
     return this._new().initFromUnixEpoch(this.unixEpoch(), zoneId);
   }
 
+  /**
+   * String representation of this date.
+   *
+   * @public
+   */
   toString(): string {
     return this._toString('Gregorian');
   }
 
+  /**
+   * Construct a new date from the given fields.
+   *
+   * @public
+   */
   static fromFields(fields: Partial<CalendarDateFields>, firstDay: number = 1, minDays: number = 1): GregorianDate {
     return new GregorianDate('gregory', firstDay, minDays)._set({ ...ZEROS, ...fields });
   }
 
+  /**
+   * Construct a new date from the given UNIX epoch.
+   *
+   * @public
+   */
   static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number = 1, minDays: number = 1): GregorianDate {
     return new GregorianDate('gregory', firstDay, minDays).initFromUnixEpoch(epoch, zoneId);
   }

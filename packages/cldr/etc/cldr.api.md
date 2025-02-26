@@ -76,7 +76,9 @@ export abstract class CalendarDate {
     protected _diff(s: CalendarDate, sf: number[], ef: number[]): TimePeriod;
     difference(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
     differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
-    endOf(field: CalendarDateModFields): CalendarDate;
+    abstract endOf(field: CalendarDateModFields): CalendarDate;
+    // (undocumented)
+    protected _endOf(field: CalendarDateModFields): CalendarDate;
     // (undocumented)
     era(): number;
     // (undocumented)
@@ -138,7 +140,7 @@ export abstract class CalendarDate {
     second(): number;
     abstract set(fields: Partial<CalendarDateFields>): CalendarDate;
     // Warning: (ae-forgotten-export) The symbol "CalendarDateModFields" needs to be exported by the entry point index.d.ts
-    startOf(field: CalendarDateModFields): CalendarDate;
+    abstract startOf(field: CalendarDateModFields): CalendarDate;
     abstract subtract(fields: Partial<TimePeriod>): CalendarDate;
     // (undocumented)
     protected swap(other: CalendarDate): [CalendarDate, number[], CalendarDate, number[]];
@@ -631,6 +633,8 @@ export class GregorianDate extends CalendarDate {
     // (undocumented)
     protected daysInYear(y: number): number;
     // (undocumented)
+    endOf(fields: CalendarDateModFields): GregorianDate;
+    // (undocumented)
     static fromFields(fields: Partial<CalendarDateFields>, firstDay?: number, minDays?: number): GregorianDate;
     // (undocumented)
     static fromUnixEpoch(epoch: number, zoneId: string, firstDay?: number, minDays?: number): GregorianDate;
@@ -652,6 +656,8 @@ export class GregorianDate extends CalendarDate {
     set(fields: Partial<CalendarDateFields>): GregorianDate;
     // (undocumented)
     protected _set(f: Partial<CalendarDateFields>): GregorianDate;
+    // (undocumented)
+    startOf(fields: CalendarDateModFields): GregorianDate;
     // (undocumented)
     subtract(fields: Partial<TimePeriod>): GregorianDate;
     // (undocumented)
@@ -996,6 +1002,8 @@ export class PersianDate extends CalendarDate {
     // (undocumented)
     protected daysInYear(y: number): number;
     // (undocumented)
+    endOf(fields: CalendarDateModFields): PersianDate;
+    // (undocumented)
     static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): PersianDate;
     // (undocumented)
     static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): PersianDate;
@@ -1015,6 +1023,8 @@ export class PersianDate extends CalendarDate {
     relatedYear(): number;
     // (undocumented)
     set(fields: Partial<CalendarDateFields>): PersianDate;
+    // (undocumented)
+    startOf(fields: CalendarDateModFields): PersianDate;
     // (undocumented)
     subtract(fields: Partial<TimePeriod>): PersianDate;
     // (undocumented)
