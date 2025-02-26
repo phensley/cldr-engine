@@ -76,6 +76,7 @@ export abstract class CalendarDate {
     protected _diff(s: CalendarDate, sf: number[], ef: number[]): TimePeriod;
     difference(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
     differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
+    endOf(field: CalendarDateModFields): CalendarDate;
     // (undocumented)
     era(): number;
     // (undocumented)
@@ -136,6 +137,8 @@ export abstract class CalendarDate {
     protected _rollup(span: Partial<TimePeriod>, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod;
     second(): number;
     abstract set(fields: Partial<CalendarDateFields>): CalendarDate;
+    // Warning: (ae-forgotten-export) The symbol "CalendarDateModFields" needs to be exported by the entry point index.d.ts
+    startOf(field: CalendarDateModFields): CalendarDate;
     abstract subtract(fields: Partial<TimePeriod>): CalendarDate;
     // (undocumented)
     protected swap(other: CalendarDate): [CalendarDate, number[], CalendarDate, number[]];
@@ -231,6 +234,12 @@ export interface Calendars {
     newISO8601Date(fields: Partial<CalendarDateFields>): ISO8601Date;
     newJapaneseDate(fields: Partial<CalendarDateFields>): JapaneseDate;
     newPersianDate(fields: Partial<CalendarDateFields>): PersianDate;
+    now(zoneId?: string): GregorianDate;
+    nowBuddhist(zoneId?: string): BuddhistDate;
+    nowGregorian(zoneId?: string): GregorianDate;
+    nowISO8601(zoneId?: string): ISO8601Date;
+    nowJapanese(zoneId?: string): JapaneseDate;
+    nowPersian(zoneId?: string): PersianDate;
     quarters(options?: CalendarFieldsOptions): any;
     resolveTimeZoneId(zoneid: string): string | undefined;
     timeData(): TimeData;
@@ -404,6 +413,7 @@ export interface DateIntervalFormatOptions {
     date?: string;
     nu?: NumberSystemType;
     skeleton?: string;
+    strict?: boolean;
     time?: string;
     wrap?: FormatWidthType;
 }
@@ -621,7 +631,7 @@ export class GregorianDate extends CalendarDate {
     // (undocumented)
     protected daysInYear(y: number): number;
     // (undocumented)
-    static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): GregorianDate;
+    static fromFields(fields: Partial<CalendarDateFields>, firstDay?: number, minDays?: number): GregorianDate;
     // (undocumented)
     static fromUnixEpoch(epoch: number, zoneId: string, firstDay?: number, minDays?: number): GregorianDate;
     // (undocumented)

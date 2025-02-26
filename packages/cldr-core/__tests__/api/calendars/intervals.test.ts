@@ -29,6 +29,17 @@ const runt = (name: string, locale: string, base: number, zone: string, tests: T
   }
 };
 
+test('same day', () => {
+  const api = calendarsApi('en');
+  const base = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: 'America/New_York' });
+  const later = base.add({ hour: 1 });
+
+  let s = api.formatDateInterval(base, later, { skeleton: 'yMMMd' });
+  expect(s).toEqual('Mar 11, 2018');
+});
+
+test('same time', () => {});
+
 runt('English defaults', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
   [
     {}, // default skeleton: yMMMd or jm
@@ -60,7 +71,7 @@ runt('English skeletons', 'en', MARCH_11_2018_070025_UTC, 'America/New_York', [
       // "h:mm a – h:mm a v"
       [{ hour: 13 }, '3:00 AM – 4:00 PM ET'],
       // "h:mm a – h:mm a v"
-      [{ day: 2 }, '3:00 – 3:00 AM ET'],
+      [{ day: 2 }, 'Mar 11, 2018, 3:00 AM ET – Mar 13, 2018, 3:00 AM ET'],
     ],
   ],
   [
@@ -265,10 +276,16 @@ test('interval mismatch', () => {
 
   end = start.add({ week: 2 });
   s = api.formatDateInterval(start, end, { skeleton: 'hm' });
+  expect(s).toEqual('Mar 11, 2018, 3:00 AM – Mar 25, 2018, 3:00 AM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'hm', strict: true });
   expect(s).toEqual('3:00 – 3:00 AM');
 
   end = start.add({ month: 2 });
   s = api.formatDateInterval(start, end, { skeleton: 'hm' });
+  expect(s).toEqual('Mar 11, 2018, 3:00 AM – May 11, 2018, 3:00 AM');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'hm', strict: true });
   expect(s).toEqual('3:00 – 3:00 AM');
 });
 

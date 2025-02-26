@@ -522,22 +522,22 @@ test('intervals best-fit', () => {
   end = unix(base + 60000, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'd' });
-  expect(s).toEqual('10 – 10');
+  expect(s).toEqual('10');
 
   s = api.formatDateInterval(start, end, { skeleton: 'M' });
-  expect(s).toEqual('3 – 3');
+  expect(s).toEqual('3');
 
   s = api.formatDateInterval(start, end, { skeleton: 'y' });
-  expect(s).toEqual('2018 – 2018');
+  expect(s).toEqual('2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yMMMd' });
-  expect(s).toEqual('Mar 10 – 10, 2018');
+  expect(s).toEqual('Mar 10, 2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'yEMMMd' });
-  expect(s).toEqual('Sat, Mar 10 – Sat, Mar 10, 2018');
+  expect(s).toEqual('Sat, Mar 10, 2018');
 
   s = api.formatDateInterval(start, end, { skeleton: 'MMMd' });
-  expect(s).toEqual('Mar 10 – 10');
+  expect(s).toEqual('Mar 10');
 
   // Date skeleton, days differ
   end = unix(base + DAY * 3, LOS_ANGELES);
@@ -626,10 +626,10 @@ test('intervals best-fit', () => {
   end = unix(base + DAY * 301, LOS_ANGELES);
 
   s = api.formatDateInterval(start, end, { skeleton: 'ahm' });
-  expect(s).toEqual('11:00 – 11:00 PM');
+  expect(s).toEqual('Mar 10, 2018, 11:00 PM – Jan 5, 2019, 11:00 PM');
 
   s = api.formatDateInterval(start, end, { skeleton: 'ahmsSSS' });
-  expect(s).toEqual('11:00 – 11:00 PM');
+  expect(s).toEqual('Mar 10, 2018, 11:00:25.789 PM – Jan 5, 2019, 11:00:25.789 PM');
 
   // FALLBACKS
 
@@ -637,8 +637,11 @@ test('intervals best-fit', () => {
 
   end = unix(base + DAY * 301 - HOUR * 7, LOS_ANGELES);
 
-  s = api.formatDateInterval(start, end, { skeleton: 'Bh' });
+  s = api.formatDateInterval(start, end, { skeleton: 'Bh', strict: true });
   expect(s).toEqual('11 at night – 4 in the afternoon');
+
+  s = api.formatDateInterval(start, end, { skeleton: 'Bh', strict: false });
+  expect(s).toEqual('Mar 10, 2018, 11 at night – Jan 5, 2019, 4 in the afternoon');
 
   // Mixed skeleton, months differ
 

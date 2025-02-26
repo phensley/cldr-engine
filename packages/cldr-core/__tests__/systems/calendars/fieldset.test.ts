@@ -13,9 +13,10 @@ const ZONES = [
 ];
 
 test('gregorian fields', () => {
-  const d = GregorianDate.fromUnixEpoch(EPOCH, 'America/New_York', 1, 1);
-  expect(d.toString()).toEqual('Gregorian 2020-04-03 14:08:52.123 America/New_York');
-  expect(d.fields()).toEqual({
+  let d1 = GregorianDate.fromUnixEpoch(EPOCH, 'America/New_York');
+  expect(d1.toString()).toEqual('Gregorian 2020-04-03 14:08:52.123 America/New_York');
+  expect(d1.toISOString()).toEqual('2020-04-03T18:08:52.123Z');
+  expect(d1.fields()).toEqual({
     year: 2020,
     month: 4,
     day: 3,
@@ -25,12 +26,17 @@ test('gregorian fields', () => {
     millis: 123,
     zoneId: 'America/New_York',
   });
+
+  // Round-trip from fields to obtain idential value
+  let d2 = GregorianDate.fromFields(d1.fields());
+  expect(d2.toString()).toEqual('Gregorian 2020-04-03 14:08:52.123 America/New_York');
+  expect(d2.toISOString()).toEqual('2020-04-03T18:08:52.123Z');
 });
 
 test('gregorian set field', () => {
   let d: GregorianDate;
 
-  d = GregorianDate.fromUnixEpoch(EPOCH, 'America/New_York', 1, 1);
+  d = GregorianDate.fromUnixEpoch(EPOCH, 'America/New_York');
   expect(d.set({ year: 1997, day: 20 }).toString()).toEqual('Gregorian 1997-04-20 14:08:52.123 America/New_York');
   expect(d.set({ year: 1997, day: 20 }).toString()).toEqual('Gregorian 1997-04-20 14:08:52.123 America/New_York');
 

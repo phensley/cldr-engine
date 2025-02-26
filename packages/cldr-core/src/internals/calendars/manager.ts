@@ -316,7 +316,16 @@ export class CalendarManager {
     // Parse the input skeleton.
     let query = patterns.parseSkeleton(skeleton);
 
+    // If we are not using a default pattern, check a few cases and
+    // augment the skeleton accordingly.
     if (!defaulted) {
+      // In non-strict mode, if the query requested time fields only
+      // and the date fields differ, insert some context.
+      if (!options.strict && dateDiffers && !query.isDate) {
+        skeleton = `yMMMd` + skeleton;
+        query = patterns.parseSkeleton(skeleton);
+      }
+
       // Interval skeletons for bare seconds 's' and minutes 'm' do not
       // exist in the CLDR data. We fill in the gap to ensure we at least
       // match on the correct hour field for the current locale.
@@ -355,7 +364,13 @@ export class CalendarManager {
     }
 
     // RULE 2: skeleton only contains date fields
-    // RULE 3: skeleotn only contains time fields
+    // RULE 2b ELSE format date standalone (!dateDiffers)
+    if (!dateDiffers && !query.isTime) {
+      req.date = this.matchAvailablePattern(patterns, start, query, params);
+      return req;
+    }
+
+    // Something differs in date or time fields
     if (fovd !== 's') {
       // RULE 2a IF dateDiffers, format date range
       // RULE 3a IF timeDiffers, format time range
@@ -375,7 +390,6 @@ export class CalendarManager {
         }
       }
     } else {
-      // RULE 2b ELSE format date standalone
       // RULE 3b ELSE format time standalone
       req.date = this.matchAvailablePattern(patterns, start, query, params);
     }

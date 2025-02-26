@@ -13,6 +13,10 @@ test('gregorian defaults', () => {
 
   d = api.newGregorianDate({ day: 15 });
   expect(d.toString()).toEqual('Gregorian 1970-01-15 00:00:00.000 Etc/UTC');
+
+  d = api.newGregorianDate({ year: 2025, month: 2, day: 15, zoneId: 'America/New_York' });
+  expect(d.toString()).toEqual('Gregorian 2025-02-15 00:00:00.000 America/New_York');
+  expect(d.toISOString()).toEqual('2025-02-15T05:00:00.000Z');
 });
 
 test('gregorian bounds', () => {

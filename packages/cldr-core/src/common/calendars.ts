@@ -187,6 +187,21 @@ export interface DateRawFormatOptions {
  */
 export interface DateIntervalFormatOptions {
   /**
+   * Enable strict mode. This will avoid adding any context to the user's
+   * choices.
+   *
+   * Certain cases can be ambiguous, where two dates:
+   *   start = 2025-02-15 12:30:00 PM
+   *     end = 2025-02-20 13:30:00 PM
+   *
+   * Formatting with `jm` would produce "12:30 - 1:30 PM" leaving out the
+   * fact that the two dates also differ by 5 days.
+   * In non-strict mode the skeleton will be augmented with `yMMMd` to
+   * provide important context.
+   */
+  strict?: boolean;
+
+  /**
    * A skeleton format containing date and/or time fields. Note
    * that if present, this overrides the 'date' and 'time' options below.
    * If all are omitted a reasonable default will be selected.

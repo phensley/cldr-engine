@@ -238,6 +238,36 @@ export interface Calendars {
   formatDateWrapperToParts(date: Part[], time: Part[], options?: DateWrapperFormatOptions): Part[];
 
   /**
+   * Alias for nowGregorian()
+   */
+  now(zoneId?: string): GregorianDate;
+
+  /**
+   * Construct a new date in the Buddhist calendar representing the current date and time.
+   */
+  nowBuddhist(zoneId?: string): BuddhistDate;
+
+  /**
+   * Construct a new date in the Gregorian calendar representing the current date and time.
+   */
+  nowGregorian(zoneId?: string): GregorianDate;
+
+  /**
+   * Construct a new date in the ISO8601 calendar representing the current date and time.
+   */
+  nowISO8601(zoneId?: string): ISO8601Date;
+
+  /**
+   * Construct a new date in the Japanese calendar representing the current date and time.
+   */
+  nowJapanese(zoneId?: string): JapaneseDate;
+
+  /**
+   * Construct a new date in the Persian calendar representing the current date and time.
+   */
+  nowPersian(zoneId?: string): PersianDate;
+
+  /**
    * Return information about the locale's preferred and allowed time cycles.
    */
   timeData(): TimeData;

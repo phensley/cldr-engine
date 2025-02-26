@@ -54,7 +54,7 @@ export class GregorianDate extends CalendarDate {
     return this._toString('Gregorian');
   }
 
-  static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): GregorianDate {
+  static fromFields(fields: Partial<CalendarDateFields>, firstDay: number = 1, minDays: number = 1): GregorianDate {
     return new GregorianDate('gregory', firstDay, minDays)._set({ ...ZEROS, ...fields });
   }
 

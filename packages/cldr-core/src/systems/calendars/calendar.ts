@@ -9,6 +9,11 @@ import { CalendarDateFields, CalendarType } from './types';
 
 const zeropad = (n: number, w: number): string => INTERNAL_NUMBERING.formatString(n, false, w);
 
+export type CalendarDateModFields = keyof Pick<
+  CalendarDateFields,
+  'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
+>;
+
 /**
  * Implementation order, based on calendar preference data and ease of implementation.
  * https://github.com/unicode-cldr/cldr-core/blob/master/supplemental/calendarPreferenceData.json
@@ -397,6 +402,66 @@ export abstract class CalendarDate {
    */
   asJSDate(): Date {
     return new Date(this.toLocalISOString());
+  }
+
+  /**
+   * Start of date, e.g. `date.startOf('day')`
+   */
+  startOf(field: CalendarDateModFields): CalendarDate {
+    switch (field) {
+      case 'year':
+        return this.set({
+          month: 0,
+          day: 0,
+          hour: 0,
+          minute: 0,
+          second: 0,
+          millis: 0,
+        });
+      case 'month':
+        return this.set({ day: 0, hour: 0, minute: 0, second: 0, millis: 0 });
+      case 'day':
+        return this.set({ hour: 0, minute: 0, second: 0, millis: 0 });
+      case 'hour':
+        return this.set({ minute: 0, second: 0, millis: 0 });
+      case 'minute':
+        return this.set({ second: 0, millis: 0 });
+      case 'second':
+        return this.set({ millis: 0 });
+    }
+  }
+
+  /**
+   * End of date, e.g. `date.endOf('day')`
+   */
+  endOf(field: CalendarDateModFields): CalendarDate {
+    switch (field) {
+      case 'year':
+        return this.set({
+          month: 13,
+          day: 32,
+          hour: 23,
+          minute: 59,
+          second: 59,
+          millis: 999,
+        });
+      case 'month':
+        return this.set({
+          day: 32,
+          hour: 23,
+          minute: 59,
+          second: 59,
+          millis: 999,
+        });
+      case 'day':
+        return this.set({ hour: 23, minute: 59, second: 59, millis: 999 });
+      case 'hour':
+        return this.set({ minute: 59, second: 59, millis: 999 });
+      case 'minute':
+        return this.set({ second: 59, millis: 999 });
+      case 'second':
+        return this.set({ millis: 999 });
+    }
   }
 
   /**
