@@ -17,15 +17,15 @@ const STATEFILE = 'state.json';
 
 const ARCHIVES = [
   'cldr-core',
-  'cldr-dates-modern',
-  'cldr-cal-buddhist-modern',
-  'cldr-cal-japanese-modern',
-  'cldr-cal-persian-modern',
-  'cldr-localenames-modern',
-  'cldr-misc-modern',
-  'cldr-numbers-modern',
+  'cldr-dates-full',
+  'cldr-cal-buddhist-full',
+  'cldr-cal-japanese-full',
+  'cldr-cal-persian-full',
+  'cldr-localenames-full',
+  'cldr-misc-full',
+  'cldr-numbers-full',
   'cldr-rbnf',
-  'cldr-units-modern',
+  'cldr-units-full',
 ];
 
 const IGNORE = new Set<string>(['bower.json', 'package.json', 'LICENSE', 'README.md']);
