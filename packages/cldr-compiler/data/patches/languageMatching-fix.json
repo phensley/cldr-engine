@@ -545,6 +545,12 @@
             "supported": "hi"
           },
           {
+            "desired": "scn",
+            "distance": "20",
+            "oneway": "1",
+            "supported": "it"
+          },
+          {
             "desired": "sd",
             "distance": "30",
             "oneway": "1",
@@ -657,12 +663,6 @@
             "distance": "20",
             "oneway": "1",
             "supported": "zh"
-          },
-          {
-            "desired": "uk",
-            "distance": "20",
-            "oneway": "1",
-            "supported": "ru"
           },
           {
             "desired": "ur",
@@ -1019,7 +1019,7 @@
             "supported": "kln"
           },
           {
-            "desired": "gom",
+            "desired": "knn",
             "distance": "10",
             "oneway": "1",
             "supported": "kok"

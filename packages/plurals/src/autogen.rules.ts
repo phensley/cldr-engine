@@ -90,6 +90,7 @@ export const cardinalRules: { [x: string]: Rule[] } = {
     [3, [[39, 8]]],
     [4, [[37]]]
   ],
+  csw: [[1, [[1]]]],
   cy: [
     [0, [[3]]],
     [1, [[0]]],
@@ -258,6 +259,10 @@ export const cardinalRules: { [x: string]: Rule[] } = {
   lg: [[1, [[0]]]],
   lij: [[1, [[7, 8]]]],
   lkt: [],
+  lld: [
+    [1, [[7, 8]]],
+    [4, [[31, 32, 33, 8], [34]]]
+  ],
   ln: [[1, [[1]]]],
   lo: [],
   lt: [
@@ -385,7 +390,10 @@ export const cardinalRules: { [x: string]: Rule[] } = {
     [2, [[4]]]
   ],
   sc: [[1, [[7, 8]]]],
-  scn: [[1, [[7, 8]]]],
+  scn: [
+    [1, [[7, 8]]],
+    [4, [[31, 32, 33, 8], [34]]]
+  ],
   sd: [[1, [[0]]]],
   sdh: [[1, [[0]]]],
   se: [
@@ -637,6 +645,7 @@ export const ordinalRules: { [x: string]: Rule[] } = {
   ],
   ky: [],
   lij: [[4, [[116]]]],
+  lld: [[4, [[108]]]],
   lo: [[1, [[0]]]],
   lt: [],
   lv: [],

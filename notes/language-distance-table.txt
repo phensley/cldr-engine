@@ -181,7 +181,6 @@
    gl    es  20    *     *  50    *     *   4
    gn    es  20    *     *  50    *     *   4
   gnw    gn  10    *     *  50    *     *   4
-  gom   kok  10    *     *  50    *     *   4
   gsw    de   4    *     *  50    *     *   4
    gu    gu   0 Latn  Gujr  20    *     *   4
                    *     *  50    *     *   4
@@ -228,6 +227,7 @@
                    *     *  50    *     *   4
          kn   0 Latn  Knda  20    *     *   4
                    *     *  50    *     *   4
+  knn   kok  10    *     *  50    *     *   4
    ko    ko   0 Hang  Kore   5    *     *   4
                 Hani  Kore   5    *     *   4
                 Jamo  Hang   5    *     *   4
@@ -394,6 +394,7 @@
    rn    en  30    *     *  50    *     *   4
    rw    fr  30    *     *  50    *     *   4
    sa    hi  30    *     *  50    *     *   4
+  scn    it  20    *     *  50    *     *   4
    sd    en  30 Arab  Latn  10    *     *   4
                    *     *  50    *     *   4
   sdc    sc  10    *     *  50    *     *   4
@@ -446,7 +447,6 @@
   tuy   kln  10    *     *  50    *     *   4
   txy    mg  10    *     *  50    *     *   4
    ug    zh  20    *     *  50    *     *   4
-   uk    ru  20    *     *  50    *     *   4
    ur    en  30 Arab  Latn  10    *     *   4
                    *     *  50    *     *   4
   urk    ms  10    *     *  50    *     *   4

@@ -739,6 +739,16 @@ pa:
    spellout-ordinal
    spellout-ordinal-verbose
 
+pcm:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 pl:
    digits-ordinal
    spellout-cardinal-feminine
@@ -1000,6 +1010,16 @@ th:
    spellout-numbering
    spellout-numbering-year
    spellout-ordinal
+
+ti:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
 
 tk:
    digits-ordinal

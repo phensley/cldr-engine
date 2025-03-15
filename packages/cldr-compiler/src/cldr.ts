@@ -659,8 +659,16 @@ export const getExtensions = () => {
  */
 export const availableLocales = () => _availableLocales('modern').filter((v) => v !== 'root' && v !== 'und');
 
-const _availableLocales = (group: string): string[] =>
-  cldrjson('supplemental', 'availableLocales')['availableLocales'][group];
+const _availableLocales = (_group: string): string[] => {
+  const covered = cldrjson('supplemental', 'coverageLevels')['effectiveCoverageLevels'];
+  let locales: string[] = [];
+  for (const id of Object.keys(covered)) {
+    if (covered[id] === 'modern') {
+      locales.push(id);
+    }
+  }
+  return locales;
+};
 
 export const cldrjson = (...relpath: string[]): any => {
   const { cldrversion } = readjson(join(__dirname, '..', 'package.json'));

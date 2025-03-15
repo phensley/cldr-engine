@@ -33,7 +33,7 @@ test('decimals', () => {
 
   api = calendarsApi('my');
   s = api.formatDate(mar11, { datetime: 'full' });
-  expect(s).toEqual('၂၀၁၈၊ မတ် ၁၀၊ စနေ ပစိဖိတ်စံတော်ချိန် ၂၃:၀၀:၂၅');
+  expect(s).toEqual('၂၀၁၈ မတ် ၁၀ စနေ ပစိဖိတ်စံတော်ချိန် ၂၃:၀၀:၂၅');
 
   api = calendarsApi('mr');
   s = api.formatDate(mar11, { datetime: 'full' });

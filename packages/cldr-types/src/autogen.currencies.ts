@@ -32,4 +32,4 @@ export type CurrencyType = (
 | 'VES'| 'VND'| 'VNN'| 'VUV'| 'WST'| 'XAF'| 'XAG'| 'XAU'| 'XBA'| 'XBB'| 'XBC'
 | 'XBD'| 'XCD'| 'XCG'| 'XDR'| 'XEU'| 'XFO'| 'XFU'| 'XOF'| 'XPD'| 'XPF'| 'XPT'
 | 'XRE'| 'XSU'| 'XTS'| 'XUA'| 'XXX'| 'YDD'| 'YER'| 'YUD'| 'YUM'| 'YUN'| 'YUR'
-| 'ZAL'| 'ZAR'| 'ZMK'| 'ZMW'| 'ZRN'| 'ZRZ'| 'ZWD'| 'ZWL'| 'ZWR');
+| 'ZAL'| 'ZAR'| 'ZMK'| 'ZMW'| 'ZRN'| 'ZRZ'| 'ZWD'| 'ZWG'| 'ZWL'| 'ZWR');

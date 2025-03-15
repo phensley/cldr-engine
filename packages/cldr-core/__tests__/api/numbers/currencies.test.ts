@@ -163,7 +163,7 @@ test('currency name', () => {
   expect(s).toEqual('-12,345.68 libras esterlinas');
 
   s = api.formatCurrency('-12345.6789', 'JPY', opts);
-  expect(s).toEqual('-12,346 yenes');
+  expect(s).toEqual('-12,346 yenes japoneses');
 });
 
 test('currency short', () => {
