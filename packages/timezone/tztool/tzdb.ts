@@ -2,7 +2,6 @@ import * as fs from 'fs';
 import * as filepath from 'path';
 import * as rimraf from 'rimraf';
 import * as subproc from 'child_process';
-import { platform } from 'node:process';
 
 const REPO = 'https://github.com/eggert/tz.git';
 const TIMEOUT = 30000;
@@ -36,7 +35,7 @@ export const setupTZDB = (tag: string): string => {
 
   const exec = (cmd: string, cwd: string) => {
     console.log(`executing ${cmd} in ${cwd}`);
-    const env = platform === 'darwin' ? { ...process.env, LDFLAGS: '-L/usr/local/lib -lintl' } : process.env;
+    const env = { ...process.env, HAVE_GETTEXT: '0' };
     return subproc.execSync(cmd, { cwd, env, timeout: TIMEOUT });
   };
 
