@@ -309,12 +309,52 @@
       "private": 1,
       "rules": [
         {
-          "rule": "'и =%spellout-cardinal-feminine=;",
+          "rule": "и =%spellout-cardinal-feminine=;",
           "value": "0"
         },
         {
+          "rule": "и ←%spellout-cardinal-masculine←йсет;",
+          "value": "20"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←йсет →→;",
+          "value": "21"
+        },
+        {
+          "rule": "и четиресет;",
+          "value": "40"
+        },
+        {
+          "rule": "четиресет →→;",
+          "value": "41"
+        },
+        {
+          "rule": "и ←%spellout-cardinal-masculine←десет;",
+          "value": "50"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←десет →→;",
+          "value": "51"
+        },
+        {
+          "rule": "и шейсет;",
+          "value": "60"
+        },
+        {
+          "rule": "шейсет →→;",
+          "value": "61"
+        },
+        {
+          "rule": "и ←%spellout-cardinal-masculine←десет;",
+          "value": "70"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←десет →→;",
+          "value": "71"
+        },
+        {
           "rule": "=%spellout-cardinal-feminine=;",
-          "value": "10"
+          "value": "100"
         }
       ]
     },
@@ -403,12 +443,20 @@
       "private": 1,
       "rules": [
         {
-          "rule": "'и =%spellout-cardinal-feminine-financial=;",
+          "rule": "и =%spellout-cardinal-feminine-financial=;",
           "value": "0"
         },
         {
+          "rule": "и ←%spellout-cardinal-masculine-financial←десет;",
+          "value": "20"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine-financial←десет →→;",
+          "value": "21"
+        },
+        {
           "rule": "=%spellout-cardinal-feminine-financial=;",
-          "value": "10"
+          "value": "100"
         }
       ]
     },
@@ -549,12 +597,52 @@
       "private": 1,
       "rules": [
         {
-          "rule": "'и =%spellout-cardinal-masculine=;",
+          "rule": "и =%spellout-cardinal-masculine=;",
           "value": "0"
         },
         {
+          "rule": "и ←%spellout-cardinal-masculine←йсет;",
+          "value": "20"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←йсет →→;",
+          "value": "21"
+        },
+        {
+          "rule": "и четиресет;",
+          "value": "40"
+        },
+        {
+          "rule": "четиресет →→;",
+          "value": "41"
+        },
+        {
+          "rule": "и ←%spellout-cardinal-masculine←десет;",
+          "value": "50"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←десет →→;",
+          "value": "51"
+        },
+        {
+          "rule": "и шейсет;",
+          "value": "60"
+        },
+        {
+          "rule": "шейсет →→;",
+          "value": "61"
+        },
+        {
+          "rule": "и ←%spellout-cardinal-masculine←десет;",
+          "value": "70"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←десет →→;",
+          "value": "71"
+        },
+        {
           "rule": "=%spellout-cardinal-masculine=;",
-          "value": "10"
+          "value": "100"
         }
       ]
     },
@@ -683,12 +771,20 @@
       "private": 1,
       "rules": [
         {
-          "rule": "'и =%spellout-cardinal-masculine-financial=;",
+          "rule": "и =%spellout-cardinal-masculine-financial=;",
           "value": "0"
         },
         {
+          "rule": "и ←%spellout-cardinal-masculine-financial←десет;",
+          "value": "20"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine-financial←десет →→;",
+          "value": "21"
+        },
+        {
           "rule": "=%spellout-cardinal-masculine-financial=;",
-          "value": "10"
+          "value": "100"
         }
       ]
     },
@@ -805,12 +901,52 @@
       "private": 1,
       "rules": [
         {
-          "rule": "'и =%spellout-cardinal-masculine-personal=;",
+          "rule": "и =%spellout-cardinal-masculine-personal=;",
           "value": "0"
         },
         {
+          "rule": "и ←%spellout-cardinal-masculine-personal←йсет;",
+          "value": "20"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←йсет →→;",
+          "value": "21"
+        },
+        {
+          "rule": "и четиресет;",
+          "value": "40"
+        },
+        {
+          "rule": "четиресет →→;",
+          "value": "41"
+        },
+        {
+          "rule": "и ←%spellout-cardinal-masculine←десет;",
+          "value": "50"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←десет →→;",
+          "value": "51"
+        },
+        {
+          "rule": "и шейсет;",
+          "value": "60"
+        },
+        {
+          "rule": "шейсет →→;",
+          "value": "61"
+        },
+        {
+          "rule": "и ←%spellout-cardinal-masculine←десет;",
+          "value": "70"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←десет →→;",
+          "value": "71"
+        },
+        {
           "rule": "=%spellout-cardinal-masculine-personal=;",
-          "value": "10"
+          "value": "100"
         }
       ]
     },
@@ -911,12 +1047,20 @@
       "private": 1,
       "rules": [
         {
-          "rule": "'и =%spellout-cardinal-masculine-personal-financial=;",
+          "rule": "и =%spellout-cardinal-masculine-personal-financial=;",
           "value": "0"
         },
         {
+          "rule": "и ←%spellout-cardinal-masculine-personal-financial←десет;",
+          "value": "20"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine-personal-financial←десет →→;",
+          "value": "21"
+        },
+        {
           "rule": "=%spellout-cardinal-masculine-personal-financial=;",
-          "value": "10"
+          "value": "100"
         }
       ]
     },
@@ -1017,12 +1161,52 @@
       "private": 1,
       "rules": [
         {
-          "rule": "'и =%spellout-cardinal-neuter=;",
+          "rule": "и =%spellout-cardinal-neuter=;",
           "value": "0"
         },
         {
+          "rule": "и ←%spellout-cardinal-masculine←йсет;",
+          "value": "20"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←йсет →→;",
+          "value": "21"
+        },
+        {
+          "rule": "и четиресет;",
+          "value": "40"
+        },
+        {
+          "rule": "четиресет →→;",
+          "value": "41"
+        },
+        {
+          "rule": "и ←%spellout-cardinal-masculine←десет;",
+          "value": "50"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←десет →→;",
+          "value": "51"
+        },
+        {
+          "rule": "и шейсет;",
+          "value": "60"
+        },
+        {
+          "rule": "шейсет →→;",
+          "value": "61"
+        },
+        {
+          "rule": "и ←%spellout-cardinal-masculine←десет;",
+          "value": "70"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←десет →→;",
+          "value": "71"
+        },
+        {
           "rule": "=%spellout-cardinal-neuter=;",
-          "value": "10"
+          "value": "100"
         }
       ]
     },
@@ -1111,12 +1295,20 @@
       "private": 1,
       "rules": [
         {
-          "rule": "'и =%spellout-cardinal-neuter-financial=;",
+          "rule": "и =%spellout-cardinal-neuter-financial=;",
           "value": "0"
         },
         {
+          "rule": "и ←%spellout-cardinal-masculine-financial←десет;",
+          "value": "20"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine-financial←десет →→;",
+          "value": "21"
+        },
+        {
           "rule": "=%spellout-cardinal-neuter-financial=;",
-          "value": "10"
+          "value": "100"
         }
       ]
     },
@@ -1234,16 +1426,8 @@
           "value": "100"
         },
         {
-          "rule": "двеста→%%spellout-ordinal-feminine-hundreds-and-suffix→;",
+          "rule": "←%spellout-cardinal-masculine←сто→%%spellout-ordinal-feminine-hundreds-and-suffix→;",
           "value": "200"
-        },
-        {
-          "rule": "триста→%%spellout-ordinal-feminine-hundreds-and-suffix→;",
-          "value": "300"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine←стотин→%%spellout-ordinal-feminine-hundreds-and-suffix→;",
-          "value": "400"
         },
         {
           "rule": "хиляд→%%spellout-ordinal-feminine-thousand-and-suffix→;",
@@ -1316,8 +1500,72 @@
           "value": "1"
         },
         {
+          "rule": "' и =%spellout-ordinal-feminine=;",
+          "value": "20"
+        },
+        {
           "rule": "' =%spellout-ordinal-feminine=;",
-          "value": "10"
+          "value": "21"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-feminine=;",
+          "value": "30"
+        },
+        {
+          "rule": "' =%spellout-ordinal-feminine=;",
+          "value": "31"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-feminine=;",
+          "value": "40"
+        },
+        {
+          "rule": "' =%spellout-ordinal-feminine=;",
+          "value": "41"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-feminine=;",
+          "value": "50"
+        },
+        {
+          "rule": "' =%spellout-ordinal-feminine=;",
+          "value": "51"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-feminine=;",
+          "value": "60"
+        },
+        {
+          "rule": "' =%spellout-ordinal-feminine=;",
+          "value": "61"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-feminine=;",
+          "value": "70"
+        },
+        {
+          "rule": "' =%spellout-ordinal-feminine=;",
+          "value": "71"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-feminine=;",
+          "value": "80"
+        },
+        {
+          "rule": "' =%spellout-ordinal-feminine=;",
+          "value": "81"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-feminine=;",
+          "value": "90"
+        },
+        {
+          "rule": "' =%spellout-ordinal-feminine=;",
+          "value": "91"
+        },
+        {
+          "rule": "' =%spellout-ordinal-feminine=;",
+          "value": "100"
         }
       ]
     },
@@ -1464,16 +1712,8 @@
           "value": "100"
         },
         {
-          "rule": "двеста→%%spellout-ordinal-masculine-hundreds-and-suffix→;",
+          "rule": "←%spellout-cardinal-masculine←сто→%%spellout-ordinal-masculine-hundreds-and-suffix→;",
           "value": "200"
-        },
-        {
-          "rule": "триста→%%spellout-ordinal-masculine-hundreds-and-suffix→;",
-          "value": "300"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine←стотин→%%spellout-ordinal-masculine-hundreds-and-suffix→;",
-          "value": "400"
         },
         {
           "rule": "хиляд→%%spellout-ordinal-masculine-thousand-and-suffix→;",
@@ -1546,8 +1786,72 @@
           "value": "1"
         },
         {
+          "rule": "' и =%spellout-ordinal-masculine=;",
+          "value": "20"
+        },
+        {
           "rule": "' =%spellout-ordinal-masculine=;",
-          "value": "10"
+          "value": "21"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-masculine=;",
+          "value": "30"
+        },
+        {
+          "rule": "' =%spellout-ordinal-masculine=;",
+          "value": "31"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-masculine=;",
+          "value": "40"
+        },
+        {
+          "rule": "' =%spellout-ordinal-masculine=;",
+          "value": "41"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-masculine=;",
+          "value": "50"
+        },
+        {
+          "rule": "' =%spellout-ordinal-masculine=;",
+          "value": "51"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-masculine=;",
+          "value": "60"
+        },
+        {
+          "rule": "' =%spellout-ordinal-masculine=;",
+          "value": "61"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-masculine=;",
+          "value": "70"
+        },
+        {
+          "rule": "' =%spellout-ordinal-masculine=;",
+          "value": "71"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-masculine=;",
+          "value": "80"
+        },
+        {
+          "rule": "' =%spellout-ordinal-masculine=;",
+          "value": "81"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-masculine=;",
+          "value": "90"
+        },
+        {
+          "rule": "' =%spellout-ordinal-masculine=;",
+          "value": "91"
+        },
+        {
+          "rule": "' =%spellout-ordinal-masculine=;",
+          "value": "100"
         }
       ]
     },
@@ -1694,16 +1998,8 @@
           "value": "100"
         },
         {
-          "rule": "двеста→%%spellout-ordinal-neuter-hundreds-and-suffix→;",
+          "rule": "←%spellout-cardinal-masculine←сто→%%spellout-ordinal-neuter-hundreds-and-suffix→;",
           "value": "200"
-        },
-        {
-          "rule": "триста→%%spellout-ordinal-neuter-hundreds-and-suffix→;",
-          "value": "300"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine←стотин→%%spellout-ordinal-neuter-hundreds-and-suffix→;",
-          "value": "400"
         },
         {
           "rule": "хиляд→%%spellout-ordinal-neuter-thousand-and-suffix→;",
@@ -1776,8 +2072,72 @@
           "value": "1"
         },
         {
+          "rule": "' и =%spellout-ordinal-neuter=;",
+          "value": "20"
+        },
+        {
           "rule": "' =%spellout-ordinal-neuter=;",
-          "value": "10"
+          "value": "21"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-neuter=;",
+          "value": "30"
+        },
+        {
+          "rule": "' =%spellout-ordinal-neuter=;",
+          "value": "31"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-neuter=;",
+          "value": "40"
+        },
+        {
+          "rule": "' =%spellout-ordinal-neuter=;",
+          "value": "41"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-neuter=;",
+          "value": "50"
+        },
+        {
+          "rule": "' =%spellout-ordinal-neuter=;",
+          "value": "51"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-neuter=;",
+          "value": "60"
+        },
+        {
+          "rule": "' =%spellout-ordinal-neuter=;",
+          "value": "61"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-neuter=;",
+          "value": "70"
+        },
+        {
+          "rule": "' =%spellout-ordinal-neuter=;",
+          "value": "71"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-neuter=;",
+          "value": "80"
+        },
+        {
+          "rule": "' =%spellout-ordinal-neuter=;",
+          "value": "81"
+        },
+        {
+          "rule": "' и =%spellout-ordinal-neuter=;",
+          "value": "90"
+        },
+        {
+          "rule": "' =%spellout-ordinal-neuter=;",
+          "value": "91"
+        },
+        {
+          "rule": "' =%spellout-ordinal-neuter=;",
+          "value": "100"
         }
       ]
     },

@@ -4,11 +4,46 @@
       "private": 0,
       "rules": [
         {
+          "rule": "=%digits-ordinal-masculine=;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-feminine": {
+      "private": 0,
+      "rules": [
+        {
           "rule": "−→→;",
           "value": "-x"
         },
         {
-          "rule": "=#,##0=;",
+          "rule": "=#,##0=-$(ordinal,few{я}other{а})$;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-$(ordinal,few{ій}other{ий})$;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-neuter": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=-$(ordinal,few{є}other{е})$;",
           "value": "0"
         }
       ]

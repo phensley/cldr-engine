@@ -6,6 +6,7 @@ on:
       - coverage
       - main
       - cldr-46
+      - cldr-47
 
 jobs:
   build:

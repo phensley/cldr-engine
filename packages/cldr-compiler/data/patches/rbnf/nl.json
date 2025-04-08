@@ -227,6 +227,31 @@
         }
       ]
     },
+    "spellout-cardinal-stressed": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "min →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=%spellout-cardinal=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "=%spellout-cardinal=;",
+          "value": "0"
+        },
+        {
+          "rule": "één;",
+          "value": "1"
+        },
+        {
+          "rule": "=%spellout-cardinal=;",
+          "value": "2"
+        }
+      ]
+    },
     "spellout-numbering": {
       "private": 0,
       "rules": [

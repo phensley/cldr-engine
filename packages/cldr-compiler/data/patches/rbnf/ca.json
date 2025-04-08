@@ -22,40 +22,16 @@
         }
       ]
     },
-    "digits-ordinal-indicator-m": {
-      "private": 1,
+    "digits-ordinal-feminine-plural": {
+      "private": 0,
       "rules": [
         {
-          "rule": "è;",
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=es;",
           "value": "0"
-        },
-        {
-          "rule": "r;",
-          "value": "1"
-        },
-        {
-          "rule": "n;",
-          "value": "2"
-        },
-        {
-          "rule": "r;",
-          "value": "3"
-        },
-        {
-          "rule": "t;",
-          "value": "4"
-        },
-        {
-          "rule": "è;",
-          "value": "5"
-        },
-        {
-          "rule": "→→;",
-          "value": "20"
-        },
-        {
-          "rule": "→→;",
-          "value": "100"
         }
       ]
     },
@@ -67,7 +43,20 @@
           "value": "-x"
         },
         {
-          "rule": "=#,##0==%%digits-ordinal-indicator-m=;",
+          "rule": "=#,##0=$(ordinal,one{r}two{n}few{t}other{è})$;",
+          "value": "0"
+        }
+      ]
+    },
+    "digits-ordinal-masculine-plural": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "−→→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0=$(ordinal,one{rs}few{ts}other{ns})$;",
           "value": "0"
         }
       ]
@@ -134,11 +123,11 @@
           "value": "90"
         },
         {
-          "rule": "cent[-→→];",
+          "rule": "cent[ →→];",
           "value": "100"
         },
         {
-          "rule": "←%spellout-cardinal-masculine←-cent→%%spellout-cardinal-feminine-cents→;",
+          "rule": "←←-centes[ →→];",
           "value": "200"
         },
         {
@@ -146,7 +135,7 @@
           "value": "1000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← mil[ →→];",
+          "rule": "←← mil[ →→];",
           "value": "2000"
         },
         {
@@ -158,14 +147,6 @@
           "value": "2000000"
         },
         {
-          "rule": "un miliard[ →→];",
-          "value": "1000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← miliards[ →→];",
-          "value": "2000000000"
-        },
-        {
           "rule": "un bilió[ →→];",
           "value": "1000000000000"
         },
@@ -174,29 +155,8 @@
           "value": "2000000000000"
         },
         {
-          "rule": "un biliard[ →→];",
-          "value": "1000000000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← biliards[ →→];",
-          "value": "2000000000000000"
-        },
-        {
           "rule": "=#,##0=;",
           "value": "1000000000000000000"
-        }
-      ]
-    },
-    "spellout-cardinal-feminine-cents": {
-      "private": 1,
-      "rules": [
-        {
-          "rule": "s;",
-          "value": "0"
-        },
-        {
-          "rule": "' =%spellout-cardinal-feminine=;",
-          "value": "1"
         }
       ]
     },
@@ -324,11 +284,11 @@
           "value": "90"
         },
         {
-          "rule": "cent[-→→];",
+          "rule": "cent[ →→];",
           "value": "100"
         },
         {
-          "rule": "←%spellout-cardinal-masculine←-cent→%%spellout-cardinal-masculine-cents→;",
+          "rule": "←%spellout-cardinal-masculine←-cents[ →→];",
           "value": "200"
         },
         {
@@ -336,7 +296,7 @@
           "value": "1000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← mil[ →→];",
+          "rule": "←← mil[ →→];",
           "value": "2000"
         },
         {
@@ -344,49 +304,20 @@
           "value": "1000000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← milions[ →→];",
+          "rule": "←← milions[ →→];",
           "value": "2000000"
-        },
-        {
-          "rule": "un miliard[ →→];",
-          "value": "1000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← miliards[ →→];",
-          "value": "2000000000"
         },
         {
           "rule": "un bilió[ →→];",
           "value": "1000000000000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← bilions[ →→];",
+          "rule": "←← bilions[ →→];",
           "value": "2000000000000"
-        },
-        {
-          "rule": "un biliard[ →→];",
-          "value": "1000000000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← biliards[ →→];",
-          "value": "2000000000000000"
         },
         {
           "rule": "=#,##0=;",
           "value": "1000000000000000000"
-        }
-      ]
-    },
-    "spellout-cardinal-masculine-cents": {
-      "private": 1,
-      "rules": [
-        {
-          "rule": "s;",
-          "value": "0"
-        },
-        {
-          "rule": "' =%spellout-cardinal-masculine=;",
-          "value": "1"
         }
       ]
     },
@@ -446,11 +377,11 @@
           "value": "90"
         },
         {
-          "rule": "cent[-→→];",
+          "rule": "cent[ →→];",
           "value": "100"
         },
         {
-          "rule": "←%spellout-cardinal-masculine←-cent→%%spellout-numbering-cents→;",
+          "rule": "←%spellout-cardinal-masculine←-cents[ →→];",
           "value": "200"
         },
         {
@@ -470,14 +401,6 @@
           "value": "2000000"
         },
         {
-          "rule": "un miliard[ →→];",
-          "value": "1000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← miliards[ →→];",
-          "value": "2000000000"
-        },
-        {
           "rule": "un bilió[ →→];",
           "value": "1000000000000"
         },
@@ -486,29 +409,8 @@
           "value": "2000000000000"
         },
         {
-          "rule": "un biliard[ →→];",
-          "value": "1000000000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← biliards[ →→];",
-          "value": "2000000000000000"
-        },
-        {
           "rule": "=#,##0=;",
           "value": "1000000000000000000"
-        }
-      ]
-    },
-    "spellout-numbering-cents": {
-      "private": 1,
-      "rules": [
-        {
-          "rule": "s;",
-          "value": "0"
-        },
-        {
-          "rule": "' =%spellout-cardinal-masculine=;",
-          "value": "1"
         }
       ]
     },
@@ -681,15 +583,11 @@
           "value": "91"
         },
         {
-          "rule": "centena;",
+          "rule": "cent→%%spellout-ordinal-feminine-cont→;",
           "value": "100"
         },
         {
-          "rule": "cent-→→;",
-          "value": "101"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine←-cent→%%spellout-ordinal-feminine-cont→;",
+          "rule": "←%spellout-cardinal-masculine←-cent→%%spellout-ordinal-feminine-conts→;",
           "value": "200"
         },
         {
@@ -697,7 +595,7 @@
           "value": "1000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← mil→%%spellout-ordinal-feminine-cont→;",
+          "rule": "←%spellout-cardinal-masculine← mil→%%spellout-ordinal-feminine-conts→;",
           "value": "2000"
         },
         {
@@ -709,14 +607,6 @@
           "value": "2000000"
         },
         {
-          "rule": "un miliard→%%spellout-ordinal-feminine-cont→;",
-          "value": "1000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← miliard→%%spellout-ordinal-feminine-conts→;",
-          "value": "2000000000"
-        },
-        {
           "rule": "un bilion→%%spellout-ordinal-feminine-cont→;",
           "value": "1000000000000"
         },
@@ -725,15 +615,7 @@
           "value": "2000000000000"
         },
         {
-          "rule": "un biliard→%%spellout-ordinal-feminine-cont→;",
-          "value": "1000000000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← biliard→%%spellout-ordinal-feminine-conts→;",
-          "value": "2000000000000000"
-        },
-        {
-          "rule": "=#,##0=ena;",
+          "rule": "=#,##0=a;",
           "value": "1000000000000000000"
         }
       ]
@@ -746,7 +628,20 @@
           "value": "0"
         },
         {
-          "rule": "' =%spellout-ordinal-feminine=;",
+          "rule": "' =%%spellout-ordinal-feminine-large=;",
+          "value": "1"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-cont-plural": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "enes;",
+          "value": "0"
+        },
+        {
+          "rule": "' =%%spellout-ordinal-feminine-large-plural=;",
           "value": "1"
         }
       ]
@@ -759,8 +654,280 @@
           "value": "0"
         },
         {
-          "rule": "s =%spellout-ordinal-feminine=;",
+          "rule": "s =%%spellout-ordinal-feminine-large=;",
           "value": "1"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-conts-plural": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "enes;",
+          "value": "0"
+        },
+        {
+          "rule": "s =%%spellout-ordinal-feminine-large-plural=;",
+          "value": "1"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-large": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": ";",
+          "value": "0"
+        },
+        {
+          "rule": "unena;",
+          "value": "1"
+        },
+        {
+          "rule": "dosena;",
+          "value": "2"
+        },
+        {
+          "rule": "tresena;",
+          "value": "3"
+        },
+        {
+          "rule": "quatrena;",
+          "value": "4"
+        },
+        {
+          "rule": "=%spellout-ordinal-feminine=;",
+          "value": "5"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-large-plural": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": ";",
+          "value": "0"
+        },
+        {
+          "rule": "unenes;",
+          "value": "1"
+        },
+        {
+          "rule": "dosenes;",
+          "value": "2"
+        },
+        {
+          "rule": "tresenes;",
+          "value": "3"
+        },
+        {
+          "rule": "quatrenes;",
+          "value": "4"
+        },
+        {
+          "rule": "=%spellout-ordinal-feminine-plural=;",
+          "value": "5"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-plural": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "menys →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0.#=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "zeroenes;",
+          "value": "0"
+        },
+        {
+          "rule": "primeres;",
+          "value": "1"
+        },
+        {
+          "rule": "segones;",
+          "value": "2"
+        },
+        {
+          "rule": "terceres;",
+          "value": "3"
+        },
+        {
+          "rule": "quartes;",
+          "value": "4"
+        },
+        {
+          "rule": "cinquenes;",
+          "value": "5"
+        },
+        {
+          "rule": "sisenes;",
+          "value": "6"
+        },
+        {
+          "rule": "setenes;",
+          "value": "7"
+        },
+        {
+          "rule": "vuitenes;",
+          "value": "8"
+        },
+        {
+          "rule": "novenes;",
+          "value": "9"
+        },
+        {
+          "rule": "desenes;",
+          "value": "10"
+        },
+        {
+          "rule": "onzenes;",
+          "value": "11"
+        },
+        {
+          "rule": "dotzenes;",
+          "value": "12"
+        },
+        {
+          "rule": "tretzenes;",
+          "value": "13"
+        },
+        {
+          "rule": "catorzenes;",
+          "value": "14"
+        },
+        {
+          "rule": "quinzenes;",
+          "value": "15"
+        },
+        {
+          "rule": "setzenes;",
+          "value": "16"
+        },
+        {
+          "rule": "dissetenes;",
+          "value": "17"
+        },
+        {
+          "rule": "divuitenes;",
+          "value": "18"
+        },
+        {
+          "rule": "dinovenes;",
+          "value": "19"
+        },
+        {
+          "rule": "vintenes;",
+          "value": "20"
+        },
+        {
+          "rule": "vint-i-→%%spellout-ordinal-feminine-large-plural→;",
+          "value": "21"
+        },
+        {
+          "rule": "trentenes;",
+          "value": "30"
+        },
+        {
+          "rule": "trenta-→%%spellout-ordinal-feminine-large-plural→;",
+          "value": "31"
+        },
+        {
+          "rule": "quarantenes;",
+          "value": "40"
+        },
+        {
+          "rule": "quaranta-→%%spellout-ordinal-feminine-large-plural→;",
+          "value": "41"
+        },
+        {
+          "rule": "cinquantenes;",
+          "value": "50"
+        },
+        {
+          "rule": "cinquanta-→%%spellout-ordinal-feminine-large-plural→;",
+          "value": "51"
+        },
+        {
+          "rule": "seixantenes;",
+          "value": "60"
+        },
+        {
+          "rule": "seixanta-→%%spellout-ordinal-feminine-large-plural→;",
+          "value": "61"
+        },
+        {
+          "rule": "setantenes;",
+          "value": "70"
+        },
+        {
+          "rule": "setanta-→%%spellout-ordinal-feminine-large-plural→;",
+          "value": "71"
+        },
+        {
+          "rule": "vuitantenes;",
+          "value": "80"
+        },
+        {
+          "rule": "vuitanta-→%%spellout-ordinal-feminine-large-plural→;",
+          "value": "81"
+        },
+        {
+          "rule": "norantenes;",
+          "value": "90"
+        },
+        {
+          "rule": "noranta-→%%spellout-ordinal-feminine-large-plural→;",
+          "value": "91"
+        },
+        {
+          "rule": "cent→%%spellout-ordinal-feminine-cont-plural→;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine←-cent→%%spellout-ordinal-feminine-conts-plural→;",
+          "value": "200"
+        },
+        {
+          "rule": "mil→%%spellout-ordinal-feminine-cont-plural→;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← mil→%%spellout-ordinal-feminine-cont-plural→;",
+          "value": "2000"
+        },
+        {
+          "rule": "milionenes;",
+          "value": "1000000"
+        },
+        {
+          "rule": "un milió→%%spellout-ordinal-feminine-cont-plural→;",
+          "value": "1000001"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← milion→%%spellout-ordinal-feminine-conts-plural→;",
+          "value": "2000000"
+        },
+        {
+          "rule": "bilionenes;",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "un bilió→%%spellout-ordinal-feminine-cont-plural→;",
+          "value": "1000000000001"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← bilion→%%spellout-ordinal-feminine-conts-plural→;",
+          "value": "2000000000000"
+        },
+        {
+          "rule": "=#,##0=es;",
+          "value": "1000000000000000000"
         }
       ]
     },
@@ -920,15 +1087,11 @@
           "value": "91"
         },
         {
-          "rule": "centè;",
+          "rule": "cent→%%spellout-ordinal-masculine-cont→;",
           "value": "100"
         },
         {
-          "rule": "cent-→→;",
-          "value": "101"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine←-cent→%%spellout-ordinal-masculine-cont→;",
+          "rule": "←%spellout-cardinal-masculine←-cent→%%spellout-ordinal-masculine-conts→;",
           "value": "200"
         },
         {
@@ -948,28 +1111,12 @@
           "value": "2000000"
         },
         {
-          "rule": "un miliard→%%spellout-ordinal-masculine-cont→;",
-          "value": "1000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← miliard→%%spellout-ordinal-masculine-conts→;",
-          "value": "2000000000"
-        },
-        {
           "rule": "un bilion→%%spellout-ordinal-masculine-cont→;",
           "value": "1000000000000"
         },
         {
           "rule": "←%spellout-cardinal-masculine← bilion→%%spellout-ordinal-masculine-conts→;",
           "value": "2000000000000"
-        },
-        {
-          "rule": "un biliard→%%spellout-ordinal-masculine-cont→;",
-          "value": "1000000000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← biliard→%%spellout-ordinal-masculine-conts→;",
-          "value": "2000000000000000"
         },
         {
           "rule": "=#,##0=è;",
@@ -985,7 +1132,7 @@
           "value": "0"
         },
         {
-          "rule": "' =%spellout-ordinal-masculine=;",
+          "rule": "' =%%spellout-ordinal-masculine-large=;",
           "value": "1"
         }
       ]
@@ -998,8 +1145,46 @@
           "value": "0"
         },
         {
-          "rule": "s =%spellout-ordinal-masculine=;",
+          "rule": "s =%%spellout-ordinal-masculine-large=;",
           "value": "1"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-large": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": ";",
+          "value": "0"
+        },
+        {
+          "rule": "unè;",
+          "value": "1"
+        },
+        {
+          "rule": "dosè;",
+          "value": "2"
+        },
+        {
+          "rule": "tresè;",
+          "value": "3"
+        },
+        {
+          "rule": "quatrè;",
+          "value": "4"
+        },
+        {
+          "rule": "=%spellout-ordinal-masculine=;",
+          "value": "5"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-plural": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%spellout-ordinal-masculine=s;",
+          "value": "0"
         }
       ]
     }

@@ -14,7 +14,7 @@ from util import makedirs
 
 BASEURL = 'https://github.com/unicode-org/cldr/archive'
 #TAG = 'maint/maint-46'
-TAG = 'release-46-1'
+TAG = 'release-47'
 ROOTPATH = 'common'
 
 TEMPDIR = os.path.join(CWD, '..', '..', '.cldrpatches')

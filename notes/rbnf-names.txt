@@ -111,13 +111,17 @@ bs:
 ca:
    digits-ordinal
    digits-ordinal-feminine
+   digits-ordinal-feminine-plural
    digits-ordinal-masculine
+   digits-ordinal-masculine-plural
    spellout-cardinal-feminine
    spellout-cardinal-masculine
    spellout-numbering
    spellout-numbering-year
    spellout-ordinal-feminine
+   spellout-ordinal-feminine-plural
    spellout-ordinal-masculine
+   spellout-ordinal-masculine-plural
 
 ccp:
    digits-ordinal
@@ -374,13 +378,14 @@ gl:
 
 gu:
    digits-ordinal
+   digits-ordinal-feminine
+   digits-ordinal-masculine
+   digits-ordinal-masculine-oblique
    spellout-cardinal
-   spellout-cardinal-verbose
    spellout-numbering
-   spellout-numbering-verbose
    spellout-numbering-year
-   spellout-ordinal
-   spellout-ordinal-verbose
+   spellout-ordinal-feminine
+   spellout-ordinal-masculine
 
 ha:
    digits-ordinal
@@ -415,6 +420,7 @@ hi:
    spellout-numbering-year
    spellout-ordinal-feminine
    spellout-ordinal-masculine
+   spellout-ordinal-masculine-oblique
 
 hr:
    digits-ordinal
@@ -603,9 +609,44 @@ lrc:
 lt:
    digits-ordinal
    spellout-cardinal-feminine
+   spellout-cardinal-feminine-accusative
+   spellout-cardinal-feminine-dative
+   spellout-cardinal-feminine-genitive
+   spellout-cardinal-feminine-instrumental
+   spellout-cardinal-feminine-locative
    spellout-cardinal-masculine
+   spellout-cardinal-masculine-accusative
+   spellout-cardinal-masculine-dative
+   spellout-cardinal-masculine-genitive
+   spellout-cardinal-masculine-instrumental
+   spellout-cardinal-masculine-locative
    spellout-numbering
    spellout-numbering-year
+   spellout-ordinal-feminine
+   spellout-ordinal-feminine-accusative
+   spellout-ordinal-feminine-dative
+   spellout-ordinal-feminine-genitive
+   spellout-ordinal-feminine-instrumental
+   spellout-ordinal-feminine-locative
+   spellout-ordinal-feminine-plural
+   spellout-ordinal-feminine-plural-accusative
+   spellout-ordinal-feminine-plural-dative
+   spellout-ordinal-feminine-plural-genitive
+   spellout-ordinal-feminine-plural-instrumental
+   spellout-ordinal-feminine-plural-locative
+   spellout-ordinal-masculine
+   spellout-ordinal-masculine-accusative
+   spellout-ordinal-masculine-dative
+   spellout-ordinal-masculine-genitive
+   spellout-ordinal-masculine-instrumental
+   spellout-ordinal-masculine-locative
+   spellout-ordinal-masculine-plural
+   spellout-ordinal-masculine-plural-accusative
+   spellout-ordinal-masculine-plural-dative
+   spellout-ordinal-masculine-plural-genitive
+   spellout-ordinal-masculine-plural-instrumental
+   spellout-ordinal-masculine-plural-locative
+   spellout-ordinal-neuter
 
 lv:
    digits-ordinal
@@ -694,6 +735,7 @@ ne:
 nl:
    digits-ordinal
    spellout-cardinal
+   spellout-cardinal-stressed
    spellout-numbering
    spellout-numbering-year
    spellout-ordinal
@@ -818,49 +860,65 @@ ru:
    digits-ordinal-feminine-accusative
    digits-ordinal-feminine-dative
    digits-ordinal-feminine-genitive
+   digits-ordinal-feminine-instrumental
    digits-ordinal-feminine-locative
+   digits-ordinal-feminine-prepositional
    digits-ordinal-masculine
    digits-ordinal-masculine-ablative
    digits-ordinal-masculine-accusative
    digits-ordinal-masculine-dative
    digits-ordinal-masculine-genitive
+   digits-ordinal-masculine-instrumental
    digits-ordinal-masculine-locative
+   digits-ordinal-masculine-prepositional
    digits-ordinal-neuter
    digits-ordinal-neuter-ablative
    digits-ordinal-neuter-accusative
    digits-ordinal-neuter-dative
    digits-ordinal-neuter-genitive
+   digits-ordinal-neuter-instrumental
    digits-ordinal-neuter-locative
+   digits-ordinal-neuter-prepositional
    digits-ordinal-plural
    digits-ordinal-plural-ablative
    digits-ordinal-plural-accusative
    digits-ordinal-plural-dative
    digits-ordinal-plural-genitive
+   digits-ordinal-plural-instrumental
    digits-ordinal-plural-locative
+   digits-ordinal-plural-prepositional
    spellout-cardinal-feminine
    spellout-cardinal-feminine-ablative
    spellout-cardinal-feminine-accusative
    spellout-cardinal-feminine-dative
    spellout-cardinal-feminine-genitive
+   spellout-cardinal-feminine-instrumental
    spellout-cardinal-feminine-locative
+   spellout-cardinal-feminine-prepositional
    spellout-cardinal-masculine
    spellout-cardinal-masculine-ablative
    spellout-cardinal-masculine-accusative
    spellout-cardinal-masculine-dative
    spellout-cardinal-masculine-genitive
+   spellout-cardinal-masculine-instrumental
    spellout-cardinal-masculine-locative
+   spellout-cardinal-masculine-prepositional
    spellout-cardinal-neuter
    spellout-cardinal-neuter-ablative
    spellout-cardinal-neuter-accusative
    spellout-cardinal-neuter-dative
    spellout-cardinal-neuter-genitive
+   spellout-cardinal-neuter-instrumental
    spellout-cardinal-neuter-locative
+   spellout-cardinal-neuter-prepositional
    spellout-cardinal-plural
    spellout-cardinal-plural-ablative
    spellout-cardinal-plural-accusative
    spellout-cardinal-plural-dative
    spellout-cardinal-plural-genitive
+   spellout-cardinal-plural-instrumental
    spellout-cardinal-plural-locative
+   spellout-cardinal-plural-prepositional
    spellout-numbering
    spellout-numbering-year
    spellout-ordinal-feminine
@@ -868,25 +926,33 @@ ru:
    spellout-ordinal-feminine-accusative
    spellout-ordinal-feminine-dative
    spellout-ordinal-feminine-genitive
+   spellout-ordinal-feminine-instrumental
    spellout-ordinal-feminine-locative
+   spellout-ordinal-feminine-prepositional
    spellout-ordinal-masculine
    spellout-ordinal-masculine-ablative
    spellout-ordinal-masculine-accusative
    spellout-ordinal-masculine-dative
    spellout-ordinal-masculine-genitive
+   spellout-ordinal-masculine-instrumental
    spellout-ordinal-masculine-locative
+   spellout-ordinal-masculine-prepositional
    spellout-ordinal-neuter
    spellout-ordinal-neuter-ablative
    spellout-ordinal-neuter-accusative
    spellout-ordinal-neuter-dative
    spellout-ordinal-neuter-genitive
+   spellout-ordinal-neuter-instrumental
    spellout-ordinal-neuter-locative
+   spellout-ordinal-neuter-prepositional
    spellout-ordinal-plural
    spellout-ordinal-plural-ablative
    spellout-ordinal-plural-accusative
    spellout-ordinal-plural-dative
    spellout-ordinal-plural-genitive
+   spellout-ordinal-plural-instrumental
    spellout-ordinal-plural-locative
+   spellout-ordinal-plural-prepositional
 
 sd:
    digits-ordinal
@@ -1040,6 +1106,9 @@ tr:
 
 uk:
    digits-ordinal
+   digits-ordinal-feminine
+   digits-ordinal-masculine
+   digits-ordinal-neuter
    spellout-cardinal-feminine
    spellout-cardinal-masculine
    spellout-cardinal-neuter

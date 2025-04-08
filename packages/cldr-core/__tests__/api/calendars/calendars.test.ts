@@ -792,9 +792,13 @@ test('flexible day periods', () => {
   d = losangeles(-13 * hour);
   expect(api.formatDateRaw(d, opts)).toEqual('in the morning');
 
+  // 6 am
+  d = losangeles(-17 * hour);
+  expect(api.formatDateRaw(d, opts)).toEqual('in the morning');
+
   // 3 am
   d = losangeles(-20 * hour);
-  expect(api.formatDateRaw(d, opts)).toEqual('at night');
+  expect(api.formatDateRaw(d, opts)).toEqual('in the morning');
 
   // 12 am
   d = losangeles(-23 * hour);

@@ -1,5 +1,251 @@
 {
   "SpelloutRules": {
+    "fractions-feminine": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "←%spellout-cardinal-feminine← $(cardinal,one{dešimtosio}other{dešimtosios})$;",
+          "value": "10"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine← $(cardinal,one{šimtosio}other{šimtosios})$;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine← $(cardinal,one{tūkstantosio}other{tūkstantosios})$;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine← $(cardinal,one{dešimttūkstantosio}other{dešimttūkstantosios})$;",
+          "value": "10000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine← $(cardinal,one{šimtatūkstantosio}other{šimtatūkstantosios})$;",
+          "value": "100000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine← $(cardinal,one{milijonosio}other{milijonosios})$;",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine← $(cardinal,one{dešimtmilijonosio}other{dešimtmilijonosios})$;",
+          "value": "10000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine← $(cardinal,one{šimtamilijonosio}other{šimtamilijonosios})$;",
+          "value": "100000000"
+        },
+        {
+          "rule": "←0←;",
+          "value": "1000000000"
+        }
+      ]
+    },
+    "fractions-feminine-accusative": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative← $(cardinal,one{dešimtąsias}other{dešimtąsias})$;",
+          "value": "10"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative← $(cardinal,one{šimtąsias}other{šimtąsias})$;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative← $(cardinal,one{tūkstantąsias}other{tūkstantąsias})$;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative← $(cardinal,one{dešimttūkstantąsias}other{dešimttūkstantąsias})$;",
+          "value": "10000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative← $(cardinal,one{šimtatūkstantąsias}other{šimtatūkstantąsias})$;",
+          "value": "100000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative← $(cardinal,one{milijonąsias}other{milijonąsias})$;",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative← $(cardinal,one{dešimtmilijonąsias}other{dešimtmilijonąsias})$;",
+          "value": "10000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative← $(cardinal,one{šimtamilijonąsias}other{šimtamilijonąsias})$;",
+          "value": "100000000"
+        },
+        {
+          "rule": "←0←;",
+          "value": "1000000000"
+        }
+      ]
+    },
+    "fractions-feminine-dative": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "←%spellout-cardinal-feminine-dative← $(cardinal,one{dešimtosioms}other{dešimtosioms})$;",
+          "value": "10"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-dative← $(cardinal,one{šimtosioms}other{šimtosioms})$;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-dative← $(cardinal,one{tūkstantosioms}other{tūkstantosioms})$;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-dative← $(cardinal,one{dešimttūkstantosioms}other{dešimttūkstantosioms})$;",
+          "value": "10000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-dative← $(cardinal,one{šimtatūkstantosioms}other{šimtatūkstantosioms})$;",
+          "value": "100000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-dative← $(cardinal,one{milijonosioms}other{milijonosioms})$;",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-dative← $(cardinal,one{dešimtmilijonosioms}other{dešimtmilijonosioms})$;",
+          "value": "10000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-dative← $(cardinal,one{šimtamilijonosioms}other{šimtamilijonosioms})$;",
+          "value": "100000000"
+        },
+        {
+          "rule": "←0←;",
+          "value": "1000000000"
+        }
+      ]
+    },
+    "fractions-feminine-genitive": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "←%spellout-cardinal-feminine-genitive← $(cardinal,one{dešimtųjų}other{dešimtųjų})$;",
+          "value": "10"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-genitive← $(cardinal,one{šimtųjų}other{šimtųjų})$;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-genitive← $(cardinal,one{tūkstantųjų}other{tūkstantųjų})$;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-genitive← $(cardinal,one{dešimttūkstantųjų}other{dešimttūkstantųjų})$;",
+          "value": "10000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-genitive← $(cardinal,one{šimtatūkstantųjų}other{šimtatūkstantųjų})$;",
+          "value": "100000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-genitive← $(cardinal,one{milijonųjų}other{milijonųjų})$;",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-genitive← $(cardinal,one{dešimtmilijonųjų}other{dešimtmilijonųjų})$;",
+          "value": "10000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-genitive← $(cardinal,one{šimtamilijonųjų}other{šimtamilijonųjų})$;",
+          "value": "100000000"
+        },
+        {
+          "rule": "←0←;",
+          "value": "1000000000"
+        }
+      ]
+    },
+    "fractions-feminine-instrumental": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "←%spellout-cardinal-feminine-instrumental← $(cardinal,one{dešimtosiomis}other{dešimtosiomis})$;",
+          "value": "10"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-instrumental← $(cardinal,one{šimtosiomis}other{šimtosiomis})$;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-instrumental← $(cardinal,one{tūkstantosiomis}other{tūkstantosiomis})$;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-instrumental← $(cardinal,one{dešimttūkstantosiomis}other{dešimttūkstantosiomis})$;",
+          "value": "10000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-instrumental← $(cardinal,one{šimtatūkstantosiomis}other{šimtatūkstantosiomis})$;",
+          "value": "100000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-instrumental← $(cardinal,one{milijonosiomis}other{milijonosiomis})$;",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-instrumental← $(cardinal,one{dešimtmilijonosiomis}other{dešimtmilijonosiomis})$;",
+          "value": "10000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-instrumental← $(cardinal,one{šimtamilijonosiomis}other{šimtamilijonosiomis})$;",
+          "value": "100000000"
+        },
+        {
+          "rule": "←0←;",
+          "value": "1000000000"
+        }
+      ]
+    },
+    "fractions-feminine-locative": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "←%spellout-cardinal-feminine-locative← $(cardinal,one{dešimtosiose}other{dešimtosiose})$;",
+          "value": "10"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-locative← $(cardinal,one{šimtosiose}other{šimtosiose})$;",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-locative← $(cardinal,one{tūkstantosiose}other{tūkstantosiose})$;",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-locative← $(cardinal,one{dešimttūkstantosiose}other{dešimttūkstantosiose})$;",
+          "value": "10000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-locative← $(cardinal,one{šimtatūkstantosiose}other{šimtatūkstantosiose})$;",
+          "value": "100000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-locative← $(cardinal,one{milijonosiose}other{milijonosiose})$;",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-locative← $(cardinal,one{dešimtmilijonosiose}other{dešimtmilijonosiose})$;",
+          "value": "10000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-locative← $(cardinal,one{šimtamilijonosiose}other{šimtamilijonosiose})$;",
+          "value": "100000000"
+        },
+        {
+          "rule": "←0←;",
+          "value": "1000000000"
+        }
+      ]
+    },
     "spellout-cardinal-feminine": {
       "private": 0,
       "rules": [
@@ -8,7 +254,7 @@
           "value": "-x"
         },
         {
-          "rule": "←← kablelis →→;",
+          "rule": "[←← ir ]→%%fractions-feminine→;",
           "value": "x.x"
         },
         {
@@ -28,15 +274,19 @@
           "value": "3"
         },
         {
-          "rule": "=%spellout-cardinal-masculine=os;",
+          "rule": "=%%spellout-cardinal-stem-few=ios;",
           "value": "4"
         },
         {
-          "rule": "=%spellout-cardinal-masculine=;",
+          "rule": "dešimt;",
           "value": "10"
         },
         {
-          "rule": "←%%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "rule": "=%%spellout-cardinal-stem-few=a;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
           "value": "20"
         },
         {
@@ -52,40 +302,24 @@
           "value": "1000"
         },
         {
-          "rule": "←%%spellout-thousands←[ →→];",
-          "value": "2000/1000"
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
         },
         {
-          "rule": "vienas milijonas[ →→];",
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
           "value": "1000000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← milijonų[ →→];",
-          "value": "2000000"
-        },
-        {
-          "rule": "vienas milijardas[ →→];",
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
           "value": "1000000000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← milijardų[ →→];",
-          "value": "2000000000"
-        },
-        {
-          "rule": "vienas trilijonas[ →→];",
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
           "value": "1000000000000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← trilijonų[ →→];",
-          "value": "2000000000000"
-        },
-        {
-          "rule": "vienas kvadrilijonas[ →→];",
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
           "value": "1000000000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← kvadrilijonų[ →→];",
-          "value": "2000000000000000"
         },
         {
           "rule": "=#,##0=;",
@@ -94,11 +328,23 @@
       ]
     },
     "spellout-cardinal-feminine-accusative": {
-      "private": 1,
+      "private": 0,
       "rules": [
         {
-          "rule": "ERROR;",
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-accusative→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
           "value": "0"
+        },
+        {
+          "rule": "vieną;",
+          "value": "1"
         },
         {
           "rule": "dvi;",
@@ -109,32 +355,380 @@
           "value": "3"
         },
         {
-          "rule": "keturias;",
+          "rule": "=%%spellout-cardinal-stem-few=ias;",
           "value": "4"
         },
         {
-          "rule": "penkias;",
-          "value": "5"
-        },
-        {
-          "rule": "šešias;",
-          "value": "6"
-        },
-        {
-          "rule": "septynias;",
-          "value": "7"
-        },
-        {
-          "rule": "aštuonias;",
-          "value": "8"
-        },
-        {
-          "rule": "devynias;",
-          "value": "9"
-        },
-        {
-          "rule": "ERROR;",
+          "rule": "dešimt;",
           "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=ą;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-feminine-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-dative→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "vienai;",
+          "value": "1"
+        },
+        {
+          "rule": "dviem;",
+          "value": "2"
+        },
+        {
+          "rule": "trims;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=ioms;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=ai;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-feminine-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-genitive→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "vienos;",
+          "value": "1"
+        },
+        {
+          "rule": "dviejų;",
+          "value": "2"
+        },
+        {
+          "rule": "trijų;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=ių;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=os;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-feminine-instrumental": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-instrumental→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "viena;",
+          "value": "1"
+        },
+        {
+          "rule": "dviem;",
+          "value": "2"
+        },
+        {
+          "rule": "trimis;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=iomis;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=a;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-feminine-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-locative→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "vienoje;",
+          "value": "1"
+        },
+        {
+          "rule": "dviejose;",
+          "value": "2"
+        },
+        {
+          "rule": "trijose;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=iose;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=oje;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
         }
       ]
     },
@@ -146,7 +740,7 @@
           "value": "-x"
         },
         {
-          "rule": "←← kablelis →→;",
+          "rule": "[←← ir ]→%%fractions-feminine→;",
           "value": "x.x"
         },
         {
@@ -166,51 +760,19 @@
           "value": "3"
         },
         {
-          "rule": "keturi;",
+          "rule": "=%%spellout-cardinal-stem-few=i;",
           "value": "4"
-        },
-        {
-          "rule": "penki;",
-          "value": "5"
-        },
-        {
-          "rule": "šeši;",
-          "value": "6"
-        },
-        {
-          "rule": "septyni;",
-          "value": "7"
-        },
-        {
-          "rule": "aštuoni;",
-          "value": "8"
-        },
-        {
-          "rule": "devyni;",
-          "value": "9"
         },
         {
           "rule": "dešimt;",
           "value": "10"
         },
         {
-          "rule": "vienuolika;",
+          "rule": "=%%spellout-cardinal-stem-few=a;",
           "value": "11"
         },
         {
-          "rule": "dvylika;",
-          "value": "12"
-        },
-        {
-          "rule": "trylika;",
-          "value": "13"
-        },
-        {
-          "rule": "→→olika;",
-          "value": "14"
-        },
-        {
-          "rule": "←%%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
           "value": "20"
         },
         {
@@ -226,44 +788,522 @@
           "value": "1000"
         },
         {
-          "rule": "←%%spellout-thousands←[ →→];",
-          "value": "2000/1000"
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
         },
         {
-          "rule": "vienas milijonas[ →→];",
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
           "value": "1000000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← milijonų[ →→];",
-          "value": "2000000"
-        },
-        {
-          "rule": "vienas milijardas[ →→];",
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
           "value": "1000000000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← milijardų[ →→];",
-          "value": "2000000000"
-        },
-        {
-          "rule": "vienas trilijonas[ →→];",
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
           "value": "1000000000000"
         },
         {
-          "rule": "←%spellout-cardinal-masculine←trilijonų[ →→];",
-          "value": "2000000000000"
-        },
-        {
-          "rule": "vienas kvadrilijonas[ →→];",
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
           "value": "1000000000000000"
-        },
-        {
-          "rule": "←%spellout-cardinal-masculine← kvadrilijonų[ →→];",
-          "value": "2000000000000000"
         },
         {
           "rule": "=#,##0=;",
           "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-masculine-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-accusative→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "vieną;",
+          "value": "1"
+        },
+        {
+          "rule": "du;",
+          "value": "2"
+        },
+        {
+          "rule": "tris;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=is;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=ą;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-masculine-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-dative→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "vienam;",
+          "value": "1"
+        },
+        {
+          "rule": "dviem;",
+          "value": "2"
+        },
+        {
+          "rule": "trims;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=iems;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=ai;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-masculine-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-genitive→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "vieno;",
+          "value": "1"
+        },
+        {
+          "rule": "dviejų;",
+          "value": "2"
+        },
+        {
+          "rule": "trijų;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=ių;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=os;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-masculine-instrumental": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-instrumental→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "vienu;",
+          "value": "1"
+        },
+        {
+          "rule": "dviem;",
+          "value": "2"
+        },
+        {
+          "rule": "trimis;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=iais;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=a;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-masculine-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "[←← ir ]→%%fractions-feminine-locative→;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulis;",
+          "value": "0"
+        },
+        {
+          "rule": "viename;",
+          "value": "1"
+        },
+        {
+          "rule": "dviejuose;",
+          "value": "2"
+        },
+        {
+          "rule": "trijuose;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=iuose;",
+          "value": "4"
+        },
+        {
+          "rule": "dešimt;",
+          "value": "10"
+        },
+        {
+          "rule": "=%%spellout-cardinal-stem-few=oje;",
+          "value": "11"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimtas[ →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimtai[ →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstantis[ →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{tūkstantis}few{tūkstančiai}other{tūkstančių})$[ →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijonas}few{milijonai}other{milijonų})$[ →→];",
+          "value": "1000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{milijardas}few{milijardai}other{milijardų})$[ →→];",
+          "value": "1000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{trilijonas}few{trilijonai}other{trilijonų})$[ →→];",
+          "value": "1000000000000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← $(cardinal,one{kvadrilijonas}few{kvadrilijonai}other{kvadrilijonų})$[ →→];",
+          "value": "1000000000000000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "1000000000000000000"
+        }
+      ]
+    },
+    "spellout-cardinal-stem-few": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "0;",
+          "value": "0"
+        },
+        {
+          "rule": "1;",
+          "value": "1"
+        },
+        {
+          "rule": "2;",
+          "value": "2"
+        },
+        {
+          "rule": "3;",
+          "value": "3"
+        },
+        {
+          "rule": "ketur;",
+          "value": "4"
+        },
+        {
+          "rule": "penk;",
+          "value": "5"
+        },
+        {
+          "rule": "šeš;",
+          "value": "6"
+        },
+        {
+          "rule": "septyn;",
+          "value": "7"
+        },
+        {
+          "rule": "aštuon;",
+          "value": "8"
+        },
+        {
+          "rule": "devyn;",
+          "value": "9"
+        },
+        {
+          "rule": "10;",
+          "value": "10"
+        },
+        {
+          "rule": "vienuolik;",
+          "value": "11"
+        },
+        {
+          "rule": "dvylik;",
+          "value": "12"
+        },
+        {
+          "rule": "trylik;",
+          "value": "13"
+        },
+        {
+          "rule": "keturiolik;",
+          "value": "14"
+        },
+        {
+          "rule": "penkiolik;",
+          "value": "15"
+        },
+        {
+          "rule": "šešiolik;",
+          "value": "16"
+        },
+        {
+          "rule": "septyniolik;",
+          "value": "17"
+        },
+        {
+          "rule": "aštuoniolik;",
+          "value": "18"
+        },
+        {
+          "rule": "devyniolik;",
+          "value": "19"
+        },
+        {
+          "rule": "=%spellout-cardinal-masculine=;",
+          "value": "20"
         }
       ]
     },
@@ -284,129 +1324,495 @@
           "value": "x.x"
         },
         {
-          "rule": "=%spellout-numbering=;",
+          "rule": "=%spellout-ordinal-masculine-plural-genitive=;",
           "value": "0"
         }
       ]
     },
-    "spellout-thousands": {
+    "spellout-ordinal-base": {
       "private": 1,
       "rules": [
         {
-          "rule": "tūkstančių;",
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0.#=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulinis;",
           "value": "0"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
+          "rule": "pirm;",
           "value": "1"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
+          "rule": "antr;",
           "value": "2"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančių;",
+          "rule": "treči;",
+          "value": "3"
+        },
+        {
+          "rule": "ketvirt;",
+          "value": "4"
+        },
+        {
+          "rule": "penkt;",
+          "value": "5"
+        },
+        {
+          "rule": "šešt;",
+          "value": "6"
+        },
+        {
+          "rule": "septint;",
+          "value": "7"
+        },
+        {
+          "rule": "aštunt;",
+          "value": "8"
+        },
+        {
+          "rule": "devint;",
+          "value": "9"
+        },
+        {
+          "rule": "dešimt;",
           "value": "10"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
-          "value": "21"
+          "rule": "vienuolikt;",
+          "value": "11"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
-          "value": "22"
+          "rule": "dvylikt;",
+          "value": "12"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančių;",
-          "value": "30"
+          "rule": "trylikt;",
+          "value": "13"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
-          "value": "31"
+          "rule": "keturiolikt;",
+          "value": "14"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
-          "value": "32"
+          "rule": "penkiolikt;",
+          "value": "15"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančių;",
-          "value": "40"
+          "rule": "šešiolikt;",
+          "value": "16"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
-          "value": "41"
+          "rule": "septyniolikt;",
+          "value": "17"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
-          "value": "42"
+          "rule": "aštuoniolikt;",
+          "value": "18"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančių;",
-          "value": "50"
+          "rule": "devyniolikt;",
+          "value": "19"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
-          "value": "51"
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
         },
         {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
-          "value": "52"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstančių;",
-          "value": "60"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
-          "value": "61"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
-          "value": "62"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstančių;",
-          "value": "70"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
-          "value": "71"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
-          "value": "72"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstančių;",
-          "value": "80"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
-          "value": "81"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
-          "value": "82"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstančių;",
-          "value": "90"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstantis;",
-          "value": "91"
-        },
-        {
-          "rule": "=%spellout-cardinal-masculine= tūkstančiai;",
-          "value": "92"
-        },
-        {
-          "rule": "šimtas →→;",
+          "rule": "šimt[as →→];",
           "value": "100"
         },
         {
-          "rule": "←%spellout-cardinal-masculine← šimtai →→;",
+          "rule": "←%spellout-cardinal-masculine← šimt[ai →→];",
           "value": "200"
+        },
+        {
+          "rule": "tūkstant[is →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← tūkstant[ai →→];",
+          "value": "2000"
+        }
+      ]
+    },
+    "spellout-ordinal-base-i": {
+      "private": 1,
+      "rules": [
+        {
+          "rule": "mīnus →→;",
+          "value": "-x"
+        },
+        {
+          "rule": "=#,##0.#=;",
+          "value": "x.x"
+        },
+        {
+          "rule": "nulinis;",
+          "value": "0"
+        },
+        {
+          "rule": "pirm;",
+          "value": "1"
+        },
+        {
+          "rule": "antr;",
+          "value": "2"
+        },
+        {
+          "rule": "tret;",
+          "value": "3"
+        },
+        {
+          "rule": "=%%spellout-ordinal-base=;",
+          "value": "4"
+        },
+        {
+          "rule": "←%spellout-cardinal-feminine-accusative←dešimt[ →→];",
+          "value": "20"
+        },
+        {
+          "rule": "šimt[as →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimt[ai →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstant[is →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← tūkstant[ai →→];",
+          "value": "2000"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=a;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%spellout-ordinal-masculine-accusative=;",
+          "value": "0"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=ai;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=os;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-instrumental": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%spellout-ordinal-feminine=;",
+          "value": "0"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=oje;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-plural": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=os;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-plural-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%spellout-ordinal-masculine=;",
+          "value": "0"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-plural-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=oms;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-plural-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%spellout-ordinal-masculine-plural-genitive=;",
+          "value": "0"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-plural-instrumental": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=omis;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-feminine-plural-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=ose;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=as;",
+          "value": "0"
+        },
+        {
+          "rule": "šimt[as →→];",
+          "value": "100"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← šimt[ai →→];",
+          "value": "200"
+        },
+        {
+          "rule": "tūkstant[is →→];",
+          "value": "1000"
+        },
+        {
+          "rule": "←%spellout-cardinal-masculine← tūkstant[ai →→];",
+          "value": "2000"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=ą;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=am;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=o;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-instrumental": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=u;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=ame;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-plural": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base-i=i;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-plural-accusative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=us;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-plural-dative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base-i=iems;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-plural-genitive": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=ų;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-plural-instrumental": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=ais;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-masculine-plural-locative": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%%spellout-ordinal-base=uose;",
+          "value": "0"
+        },
+        {
+          "rule": "=#,##0=;",
+          "value": "10000"
+        }
+      ]
+    },
+    "spellout-ordinal-neuter": {
+      "private": 0,
+      "rules": [
+        {
+          "rule": "=%spellout-ordinal-feminine=;",
+          "value": "0"
         }
       ]
     }

@@ -98,19 +98,21 @@ runt('English flex dayperiod', 'en', MARCH_11_2018_070025_UTC, 'America/New_York
   [
     { skeleton: 'Bjm' },
     [
-      [{ hour: -2 }, '12:00 midnight – 3:00 at night'],
-      [{ minute: 20 }, '3:00 – 3:20 at night'],
-      [{ hour: 3 }, '3:00 at night – 6:00 in the morning'],
-      [{ hour: 9 }, '3:00 at night – 12:00 noon'],
+      [{ hour: -2 }, '12:00 midnight – 3:00 in the morning'],
+      [{ minute: 20 }, '3:00 – 3:20 in the morning'],
+      [{ hour: 2 }, '3:00 – 5:00 in the morning'],
+      [{ hour: 3 }, '3:00 – 6:00 in the morning'],
+      [{ hour: 4 }, '3:00 – 7:00 in the morning'],
+      [{ hour: 9 }, '3:00 in the morning – 12:00 noon'],
     ],
   ],
   [
     { skeleton: 'yMMMdBj' },
     [
-      [{ hour: -2 }, 'Mar 11, 2018, 12 midnight – 3 at night'],
-      [{ minute: 20 }, 'Mar 11, 2018, 3 – 3 at night'],
-      [{ hour: 3 }, 'Mar 11, 2018, 3 at night – 6 in the morning'],
-      [{ hour: 9 }, 'Mar 11, 2018, 3 at night – 12 noon'],
+      [{ hour: -2 }, 'Mar 11, 2018, 12 midnight – 3 in the morning'],
+      [{ minute: 20 }, 'Mar 11, 2018, 3 – 3 in the morning'],
+      [{ hour: 3 }, 'Mar 11, 2018, 3 – 6 in the morning'],
+      [{ hour: 9 }, 'Mar 11, 2018, 3 in the morning – 12 noon'],
     ],
   ],
 ]);
@@ -243,18 +245,18 @@ test('interval date/time choice', () => {
   opts.date = 'EEEB';
   end = start.add({ day: 0.9 });
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('Sun, 3 at night – Mon, 12 at night');
+  expect(s).toEqual('Sun, 3 in the morning – Mon, 12 in the morning');
 
   opts.atTime = false;
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('Sun, 3 at night – Mon, 12 at night');
+  expect(s).toEqual('Sun, 3 in the morning – Mon, 12 in the morning');
 
   // If time differs, always include some date fields
   opts.date = undefined;
   opts.time = 'EBhm';
   end = start.add({ day: 0.3 });
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('Sun, 3:00 at night – 10:12 in the morning');
+  expect(s).toEqual('Sun, 3:00 – 10:12 in the morning');
 
   opts.time = 'MMMdh';
   end = start.add({ day: 0.3 });
