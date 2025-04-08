@@ -443,6 +443,16 @@ hsb:
    spellout-ordinal
    spellout-ordinal-verbose
 
+ht:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 hu:
    digits-ordinal
    spellout-cardinal
