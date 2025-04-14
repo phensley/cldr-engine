@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.12.0]
+
+## Fixed/Changed
+
+- Upgrade to [CLDR v47](https://cldr.unicode.org/index/downloads/cldr-47)
+- Upgrade to [tzdb 2025b](https://www.iana.org/time-zones)
+
+## 1.11.0 skipped
+
+- Upgrade to CLDR v46.1
+
 ## [1.10.2]
 
 ## Fixed/Changed
@@ -322,6 +333,7 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 - Switched from tslint to eslint.
 - Modified checksum so that resource packs are now compatible at the patch level. Resource packs must match the `major.minor` version of the `@phensley/cldr-core` package at runtime to ensure schema compatibility.
 
+[1.12.0]: https://github.com/phensley/cldr-engine/compare/v1.10.2...v1.12.0
 [1.10.2]: https://github.com/phensley/cldr-engine/compare/v1.10.1...v1.10.2
 [1.10.1]: https://github.com/phensley/cldr-engine/compare/v1.10.0...v1.10.1
 [1.10.0]: https://github.com/phensley/cldr-engine/compare/v1.9.2...v1.10.0
