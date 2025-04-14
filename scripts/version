@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import json, os, re, sys
+import argparse, json, os, re, sys
 from subprocess import Popen
 
 # version all packages with a patch-level dependency between them
@@ -35,8 +35,18 @@ def usage():
     print('Usage: %r [patch | minor | major]' % sys.argv[0])
     sys.exit(1)
 
+def parse_args():
+    p = argparse.ArgumentParser(
+        prog=sys.argv[0],
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        description='create a new version')
+    p.add_argument('type', type=str, choices=['patch', 'minor', 'major'])
+    p.add_argument('--no-tag',  action='store_true')
+    p.add_argument('--dry-run', action='store_true')
+    return p.parse_args()
+
 def main():
-    args = set(sys.argv[1:])
+    args = parse_args()
 
     # collect paths to add, commit, and tag
     paths = []
@@ -51,23 +61,21 @@ def main():
     major, minor, patch = [int(c) for c in old_version.split('.')]
 
     # bump version
-    if 'patch' in args:
+    if args.type == 'patch':
         patch += 1
-    elif 'minor' in args:
+    elif args.type == 'minor':
         patch = 0
         minor += 1
-    elif 'major' in args:
+    elif args.type == 'major':
         patch = 0
         minor = 0
         major += 1
-    elif 'write' in args:
-        pass
     else:
         usage()
 
     # set new version
     new_version = '%d.%d.%d' % (major, minor, patch)
-    if 'dry-run' in args:
+    if args.dry_run:
         print('new version:', new_version)
         return
 
@@ -84,11 +92,12 @@ def main():
         cfg = set_versions(cfg, new_version)
         save_json(path, cfg)
 
-    # git add, commit, tag
-    run(['git', 'add'] + paths)
-    tag = 'v' + new_version
-    run(['git', 'commit', '-m', tag])
-    run(['git', 'tag', tag])
+    if not args.no_tag:
+        # git add, commit, tag
+        run(['git', 'add'] + paths)
+        tag = 'v' + new_version
+        run(['git', 'commit', '-m', tag])
+        run(['git', 'tag', tag])
 
 if __name__ == '__main__':
     main()
