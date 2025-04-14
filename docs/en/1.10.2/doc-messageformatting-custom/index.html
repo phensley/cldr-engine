@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Customization · @phensley/cldr</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The `@phensley/cldr` package does not currently define any i18n-specific message formatter functions. In the meantime you can easily hook up custom i18n formatters for your types using any formatter names you wish."/><meta name="docsearch:version" content="1.10.2"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Customization · @phensley/cldr"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/"/><meta property="og:description" content="The `@phensley/cldr` package does not currently define any i18n-specific message formatter functions. In the meantime you can easily hook up custom i18n formatters for your types using any formatter names you wish."/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-121435304-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cldr-engine/en"><img class="logo" src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr"/><h2 class="headerTitleWithLogo">@phensley/cldr</h2></a><a href="/cldr-engine/en/versions"><h3>1.10.2</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/cldr-engine/docs/en/1.10.2/doc-index" target="_self">Docs</a></li><li class=""><a href="/cldr-engine/docs/en/1.10.2/api-cldr" target="_self">API</a></li><li class=""><a href="https://phensley.github.io/cldr-engine-react-demo" target="_self">Demo </a></li><li class=""><a href="https://github.com/phensley/cldr-engine" target="_self">Github</a></li><li class=""><a href="https://yarnpkg.com/package/@phensley/cldr" target="_self">Yarn</a></li><li class=""><a href="https://www.npmjs.com/package/@phensley/cldr" target="_self">NPM</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Message Formatting</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-index">Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-goals">Goals</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-faq">Rationale</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-quickstart">Quick start</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Customization</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-resource-patching">Resource Patching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Locales</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-locales-parsing">Locale parsing</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-locales-resolution">Locale resolution</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-locales-matching">Language matching</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Calendars</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-calendar-overview">Calendar Overview</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-calendar-examples">Example: date formatting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Math</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-math">Arbitrary Precision</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-math-example-factorial">Example: factorial</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-math-example-rational-approx">Math: rational approximation</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-math-example-contd-fractions">Math: continued fractions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Message Formatting</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-messageformatting">Usage</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-messageformatting-custom">Customization</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Design</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-design-bundles">Resource bundles</a></li><li class="navListItem"><a class="navItem" href="/cldr-engine/docs/en/1.10.2/doc-design-caching">Caching</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Customization</h1></header><article><div><span><p>The <code>@phensley/cldr</code> package does not currently define any i18n-specific message formatter functions. In the meantime you can easily hook up custom i18n formatters for your types using any formatter names you wish.</p>
+<p>Below is an example of defining custom formatting functions that use a <a href="api-cldr.html"><code>CLDR</code></a> instance with options to control which format is rendered.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">import</span> {
+  buildMessageMatcher,
+  parseMessagePattern,
+  pluralRules,
+  CLDR,
+  CurrencyFormatStyleType,
+  CurrencyType,
+  Decimal,
+  DecimalConstants,
+  DecimalFormatStyleType,
+  DefaultMessageArgConverter,
+  FormatWidthType,
+  MessageArg,
+  MessageNamedArgs,
+  MessageEngine,
+  MessageFormatFuncMap,
+  PluralRules,
+  ZonedDateTime
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'@phensley/cldr'</span>;
+
+<span class="hljs-keyword">const</span> coerce = <span class="hljs-function">(<span class="hljs-params">arg: <span class="hljs-built_in">any</span></span>) =&gt;</span> {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Decimal(arg);
+  } <span class="hljs-keyword">catch</span> (e) {
+    <span class="hljs-keyword">return</span> DecimalConstants.NAN;
+  }
+};
+
+<span class="hljs-keyword">const</span> formatter = <span class="hljs-function">(<span class="hljs-params">cldr: CLDR</span>) =&gt;</span> ({
+  decimal: <span class="hljs-function">(<span class="hljs-params">args: MessageArg[], options: <span class="hljs-built_in">string</span>[]</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> style = options[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> DecimalFormatStyleType;
+    <span class="hljs-keyword">return</span> cldr.Numbers.formatDecimal(coerce(args[<span class="hljs-number">0</span>]), { style });
+  },
+  datetime: <span class="hljs-function">(<span class="hljs-params">args: MessageArg[], options: <span class="hljs-built_in">string</span>[]</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> width = options[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> FormatWidthType;
+    <span class="hljs-keyword">return</span> cldr.Calendars.formatDate(args[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> ZonedDateTime, {
+      datetime: width
+    });
+  },
+  currency: <span class="hljs-function">(<span class="hljs-params">args: MessageArg[], options: <span class="hljs-built_in">string</span>[]</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> arg = args[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> MyCurrency;
+    <span class="hljs-keyword">const</span> style = options[<span class="hljs-number">0</span>] <span class="hljs-keyword">as</span> CurrencyFormatStyleType;
+    <span class="hljs-keyword">return</span> cldr.Numbers.formatCurrency(coerce(arg.amount), arg.currencyCode, {
+      style
+    });
+  }
+});
+
+<span class="hljs-keyword">const</span> FORMATTER_NAMES = [<span class="hljs-string">'currency'</span>, <span class="hljs-string">'decimal'</span>, <span class="hljs-string">'datetime'</span>];
+<span class="hljs-keyword">const</span> MATCHER = buildMessageMatcher(FORMATTER_NAMES);
+<span class="hljs-keyword">const</span> CONVERTER = <span class="hljs-keyword">new</span> DefaultMessageArgConverter();
+
+<span class="hljs-keyword">const</span> parse = <span class="hljs-function">(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>) =&gt;</span> parseMessagePattern(message, MATCHER);
+
+<span class="hljs-keyword">const</span> format = (
+  plurals: PluralRules,
+  formatters: MessageFormatFuncMap,
+  message: <span class="hljs-built_in">string</span>,
+  positional: MessageArg[],
+  named: MessageNamedArgs = {}
+) =&gt; {
+  <span class="hljs-keyword">const</span> engine = <span class="hljs-keyword">new</span> MessageEngine(
+    plurals,
+    CONVERTER,
+    formatters,
+    parse(message)
+  );
+  <span class="hljs-keyword">return</span> engine.evaluate(positional, named);
+};
+
+<span class="hljs-keyword">const</span> ENGLISH = framework.get(<span class="hljs-string">'en'</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id of [<span class="hljs-string">'en'</span>, <span class="hljs-string">'es'</span>, <span class="hljs-string">'ko'</span>]) {
+  <span class="hljs-keyword">const</span> cldr = framework.get(id);
+
+  <span class="hljs-comment">// Fetch the PluralRules instance for the current locale</span>
+  <span class="hljs-keyword">const</span> plurals = cldr.General.bundle().plurals();
+
+  log(ENGLISH.General.getLanguageDisplayName(id));
+
+  <span class="hljs-comment">// Build our map of custom formatters once whenever the locale changes</span>
+  <span class="hljs-keyword">const</span> formatters = formatter(cldr);
+
+  <span class="hljs-keyword">let</span> msg = <span class="hljs-string">'  "{0 decimal}"  "{0 decimal short}"  "{0 decimal long}"'</span>;
+  <span class="hljs-keyword">let</span> s = format(plurals, formatters, msg, [<span class="hljs-string">'12535.99'</span>]);
+  log(s);
+
+  msg = <span class="hljs-string">'  "{0 datetime short}"  "{0 datetime long}"'</span>;
+  s = format(plurals, formatters, msg, [
+    { date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(), zoneId: <span class="hljs-string">'America/Los_Angeles'</span> }
+  ]);
+  log(s);
+
+  msg = <span class="hljs-string">'  "{0 currency name}"  "{0 currency}"  "{0 currency short}"'</span>;
+  s = format(plurals, formatters, msg, [
+    { amount: <span class="hljs-string">'12351330'</span>, currencyCode: <span class="hljs-string">'EUR'</span> }
+  ]);
+  log(s);
+}
+</code></pre>
+<pre class="output">
+English
+  "12,535.99"  "13K"  "13 thousand"
+  "12/6/22, 2:48 PM"  "December 6, 2022 at 2:48:12 PM PST"
+  "12,351,330.00 euros"  "€12,351,330.00"  "€12M"
+Spanish
+  "12.535,99"  "13 mil"  "13 mil"
+  "6/12/22, 14:48"  "6 de diciembre de 2022, 14:48:12 GMT-8"
+  "12.351.330,00 euros"  "12.351.330,00 €"  "12 M€"
+Korean
+  "12,535.99"  "1.3만"  "1.3만"
+  "22. 12. 6. PM 2:48"  "2022년 12월 6일 PM 2시 48분 12초 GMT-8"
+  "12,351,330.00 유로"  "€12,351,330.00"  "€1,235만"
+</pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cldr-engine/docs/en/1.10.2/doc-messageformatting"><span class="arrow-prev">← </span><span>Usage</span></a><a class="docs-next button" href="/cldr-engine/docs/en/1.10.2/doc-design-bundles"><span>Resource bundles</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/cldr-engine/" class="nav-home"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="@phensley/cldr" width="66" height="58"/></a><div><h5>Docs</h5><a href="/cldr-engine/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/cldr-engine/docs/en/doc2.html">Guides (or other categories)</a><a href="/cldr-engine/docs/en/doc3.html">API Reference (or other categories)</a></div><div></div><div><h5>More</h5><a href="https://github.com/phensley/cldr-engine">GitHub</a><a class="github-button" href="https://github.com/phensley/cldr-engine" data-icon="octicon-star" data-count-href="/phensley/cldr-engine/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2025 Patrick Hensley</section></footer></div></body></html>
