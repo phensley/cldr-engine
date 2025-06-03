@@ -47,7 +47,7 @@ export class NumberParamsCache {
 
       // TODO: temporary double-check to default for zh finance until we
       // have rbnf implemented.
-      /* istanbul ignore if */
+      /* istanbul ignore if -- @preserve */
       if (!decimalNumberingDigits[realName]) {
         realName = this.select('default');
       }
@@ -132,7 +132,7 @@ const makeDigits = (name: string): string[] => {
     const c = digits[0].charCodeAt(0);
     if (c >= 0xd800 && c <= 0xdbff) {
       const c2 = digits[0].charCodeAt(1);
-      /* istanbul ignore else */
+      /* istanbul ignore else -- @preserve */
       if (c2 >= 0xdc00 && c2 <= 0xdfff) {
         for (let i = 1; i < 10; i++) {
           const digit = String.fromCharCode(c) + String.fromCharCode(c2 + i);

@@ -95,7 +95,7 @@ export class StringBundle implements Bundle {
 
   get(offset: number): string {
     // If there is an exception index, attempt to resolve it.
-    /* istanbul ignore else */
+    /* istanbul ignore else -- @preserve */
     if (this.index) {
       const i = this.index[offset];
       if (i !== undefined) {

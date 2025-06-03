@@ -103,7 +103,7 @@ export class ResourcePack {
   add(raw: string | undefined): number {
     const value = typeof raw === 'string' ? raw : '';
 
-    /* istanbul ignore if */
+    /* istanbul ignore if -- @preserve */
     if (value.indexOf(DELIMITER) !== -1) {
       const id = this.current.localeId;
       throw new Error(`Resource pack delimiter character found in ${id} string "${value}"`);
@@ -142,13 +142,13 @@ export class ResourcePack {
   private renderScript(script: string): string {
     const layers = this.layers[script];
 
-    /* istanbul ignore if */
+    /* istanbul ignore if -- @preserve */
     if (layers === undefined) {
       throw new Error(`Attempt to render a non-existent script layer: ${script}`);
     }
     const len = layers.length;
 
-    /* istanbul ignore if */
+    /* istanbul ignore if -- @preserve */
     if (len === 0) {
       throw new Error('Attempt to render an empty pack');
     }
@@ -261,7 +261,7 @@ export class ResourcePack {
         // means there a severe bug in the encoder.
         const currLen = curr.strings.length;
 
-        /* istanbul ignore if */
+        /* istanbul ignore if -- @preserve */
         if (baseLen !== currLen) {
           throw new Error(
             `Severe error: string tables for ${base.localeId} and` +

@@ -45,7 +45,7 @@ export class LanguageTag {
 }
 
 // @public (undocumented)
-export const enum LanguageTagField {
+export enum LanguageTagField {
     // (undocumented)
     LANGUAGE = 0,
     // (undocumented)

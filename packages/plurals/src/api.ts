@@ -1,7 +1,7 @@
 import { cardinalRules, expressions, ordinalRules } from './autogen.rules';
 import { pluralRanges } from './autogen.ranges';
 import { PluralRules, PluralRulesImpl } from './rules';
-import { Rule, RuleMap } from './types';
+import type { Rule, RuleMap } from './types';
 
 const resolve = (r: RuleMap, language: string, region?: string): Rule[] =>
   (region ? r[`${language}-${region}`] : undefined) || r[language] || r.root;

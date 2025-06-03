@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+/* istanbul ignore file -- @preserve */
 
 import { Decimal } from '@phensley/decimal';
 import { PluralRules } from '@phensley/plurals';

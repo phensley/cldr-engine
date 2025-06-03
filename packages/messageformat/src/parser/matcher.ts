@@ -243,7 +243,7 @@ const hasStickyRegexp = (() => {
     return r && true;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
-    /* istanbul ignore next */
+    /* istanbul ignore next -- @preserve */
     return false;
   }
 })();

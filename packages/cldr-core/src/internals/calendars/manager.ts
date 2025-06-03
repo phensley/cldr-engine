@@ -34,7 +34,7 @@ export class CalendarManager {
     private readonly internals: Internals,
   ) {
     // calendars config array should always be non-empty
-    this.availableCalendars = new Set(internals.config.calendars || /* istanbul ignore next */ []);
+    this.availableCalendars = new Set(internals.config.calendars || /* istanbul ignore next -- @preserve */ []);
     const schema = internals.schema;
     this.patternCache = new Cache((calendar: string) => {
       if (this.availableCalendars.has(calendar)) {
@@ -384,7 +384,7 @@ export class CalendarManager {
         let pattern = match.data.patterns[fovd];
 
         const parsedPattern = this.internals.calendars.parseDatePattern(pattern || '');
-        /* istanbul ignore else */
+        /* istanbul ignore else -- @preserve */
         if (parsedPattern.length) {
           req.range = patterns.adjustPattern(parsedPattern, query, params.symbols.decimal);
         }
@@ -513,12 +513,12 @@ export class CalendarManager {
     params: NumberParams,
   ): DateTimeNode[] | undefined {
     const pattern = patterns.getAvailablePattern(date, match);
-    /* istanbul ignore else */
+    /* istanbul ignore else -- @preserve */
     if (pattern.length) {
       return patterns.adjustPattern(pattern, query, params.symbols.decimal);
     }
     // Base standard calendar formats are (currently) always defined.
-    /* istanbul ignore next */
+    /* istanbul ignore next -- @preserve */
     return undefined;
   }
 

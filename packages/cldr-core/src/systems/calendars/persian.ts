@@ -99,7 +99,7 @@ export class PersianDate extends CalendarDate {
 
       // Check if there is a fractional month part, and if so add the number
       // of the days in the next month multiplied by the fraction
-      /* istanbul ignore if */
+      /* istanbul ignore if -- @preserve */
       if (d !== 0) {
         // number of days in Esfand determined by:
         // "number of days between two vernal equinoxes"

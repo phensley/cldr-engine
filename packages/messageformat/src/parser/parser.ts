@@ -207,7 +207,7 @@ class MessagePatternParser {
 
     // This code should never be reached if the 'name' corresponds
     // to a valid formatter.
-    /* istanbul ignore next */
+    /* istanbul ignore next -- @preserve */
     return NOOP;
   }
 

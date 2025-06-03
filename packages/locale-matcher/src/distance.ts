@@ -19,15 +19,15 @@ const get = (map: DistanceMap, want: string, have: string): DistanceNode | undef
 
 const getany = (map: DistanceMap): DistanceNode => {
   const sub = map.$;
-  /* istanbul ignore else */
+  /* istanbul ignore else -- @preserve */
   if (sub !== undefined) {
     const node = sub.$;
-    /* istanbul ignore else */
+    /* istanbul ignore else -- @preserve */
     if (node !== undefined) {
       return node;
     }
   }
-  /* istanbul ignore next */
+  /* istanbul ignore next -- @preserve */
   throw new Error('Severe error: wildcard levels missing in distance map.');
 };
 
@@ -97,7 +97,7 @@ export const getDistance = (desired: LanguageTag, supported: LanguageTag, thresh
   // There are currently no region -> region distances, so the node
   // be undefined here.
 
-  /* istanbul ignore else */
+  /* istanbul ignore else -- @preserve */
   if (node === undefined) {
     // Compare the desired region against supported partitions, and vice-versa.
     node = scanRegion(map, want, wantPartitions, have, havePartitions);
@@ -127,7 +127,7 @@ export const getDistance = (desired: LanguageTag, supported: LanguageTag, thresh
   if (!match) {
     node = getany(map);
     // The 'any' lookup will always succeed here
-    /* istanbul ignore else */
+    /* istanbul ignore else -- @preserve */
     if (node !== undefined) {
       maxDistance = Math.max(maxDistance, _distance(node));
     }

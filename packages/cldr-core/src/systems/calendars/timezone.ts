@@ -113,7 +113,7 @@ class Metazones {
     // Sanity-check, since the zoneindex is based off the canonical
     // zoneids array, but could be generated at different times. our test
     // cases should ensure they're in sync, but warn of a discrepancy
-    /* istanbul ignore if */
+    /* istanbul ignore if -- @preserve */
     if (zoneids.length !== zoneindex.length) {
       console.log(`Error: time zone ids and zone index are not in sync!`, zoneids.length, '!=', zoneindex.length);
     }

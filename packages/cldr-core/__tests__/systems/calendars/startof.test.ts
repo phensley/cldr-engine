@@ -1,4 +1,4 @@
-import { GregorianDate } from '@phensley/cldr-core';
+import { GregorianDate } from '../../../src';
 
 const FEB_15_2025_123040_UTC = 1739622640000;
 

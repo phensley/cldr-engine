@@ -192,7 +192,7 @@ export class DateSkeletonParser {
   private setMeta(s: DateSkeleton, field: string): void {
     const meta = field === 'C' ? this.allowedFlex : this.preferredFlex;
     for (const n of meta) {
-      /* istanbul ignore else */
+      /* istanbul ignore else -- @preserve */
       if (typeof n !== 'string') {
         this.set(s, field, n[0], n[1]);
       }
@@ -202,7 +202,7 @@ export class DateSkeletonParser {
   private set(s: DateSkeleton, input: string, field: string, width: number): void {
     const ft = getFieldType(field, width);
     // Will never fail as field types are whitelisted at a higher call point
-    /* istanbul ignore else */
+    /* istanbul ignore else -- @preserve */
     if (ft !== undefined) {
       this.index(s, input, field, width, ft);
     }
@@ -329,7 +329,7 @@ export class DatePatternMatcher<T> {
         const _info = skeleton.info[i];
         // Since the 'i' comes from a parsed date pattern, this should
         // always be defined.
-        /* istanbul ignore else */
+        /* istanbul ignore else -- @preserve */
         if (_info) {
           adjfield = _info.field;
           adjwidth = _info.width;

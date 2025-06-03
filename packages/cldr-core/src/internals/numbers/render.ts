@@ -154,7 +154,7 @@ export abstract class NumberFormatter<R> implements NumberRenderer<R> {
         // is a mismatch between the CLDR wrapper pattern and the
         // number of arguments passed in, e.g. "{0} {1} {2}" with
         // only 2 arguments.
-        /* istanbul ignore else */
+        /* istanbul ignore else -- @preserve */
         if (v !== undefined) {
           res.append(v);
         }

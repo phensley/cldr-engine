@@ -274,8 +274,8 @@ const addhelper = (u: number[], j: number, v: number[], m: number, n: number): v
 
   while (k && i < m) {
     s = u[i + j] + k;
-    k = s === Constants.RADIX ? 1 : /* istanbul ignore next */ 0;
-    u[i + j] = k === 1 ? s - Constants.RADIX : /* istanbul ignore next */ s;
+    k = s === Constants.RADIX ? 1 : /* istanbul ignore next -- @preserve */ 0;
+    u[i + j] = k === 1 ? s - Constants.RADIX : /* istanbul ignore next -- @preserve */ s;
     i++;
   }
 

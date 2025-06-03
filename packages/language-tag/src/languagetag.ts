@@ -1,7 +1,7 @@
 /**
  * @public
  */
-export const enum LanguageTagField {
+export enum LanguageTagField {
   LANGUAGE = 0,
   SCRIPT = 1,
   REGION = 2,

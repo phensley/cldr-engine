@@ -8,6 +8,8 @@
 # minimatch 8.x generates a typescript error when compiling ES5
 # 
 # eslint 9.x flat config support requires many changes
+#
+# yargs 18 breaking changes, missing @types/yargs update
 
 PIN="
 @types/node-fetch
@@ -15,6 +17,7 @@ chalk
 eslint
 minimatch
 node-fetch
+yargs
 "
 
 join() {

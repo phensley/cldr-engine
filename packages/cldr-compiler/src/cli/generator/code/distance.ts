@@ -78,7 +78,7 @@ class DistanceMap {
         return node;
       }
     }
-    /* istanbul ignore next */
+    /* istanbul ignore next -- @preserve */
     throw new Error('Serious error: wildcard levels missing in distance map.');
   }
 

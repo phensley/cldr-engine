@@ -1,4 +1,4 @@
-import { coerceDecimal, Chars, DecimalArg, DecimalFormatter, StringDecimalFormatter } from '@phensley/decimal';
+import { coerceDecimal, DecimalArg, DecimalFormatter, StringDecimalFormatter } from '@phensley/decimal';
 import { NumberingSystem, NumberSymbols } from '../../common/private';
 
 const isInteger = (n: any): boolean => typeof n === 'number' && isFinite(n) && Math.floor(n) === n;
@@ -50,6 +50,29 @@ export class DecimalNumberingSystem extends NumberingSystem {
     );
     return f.render();
   }
+}
+
+/**
+ * Characters used in decimal parsing.
+ *
+ * @public
+ */
+const enum Chars {
+  PLUS = 43,
+  MINUS = 45,
+  DOT = 46,
+  DIGIT0 = 48,
+  DIGIT1 = 49,
+  DIGIT2 = 50,
+  DIGIT3 = 51,
+  DIGIT4 = 52,
+  DIGIT5 = 53,
+  DIGIT6 = 54,
+  DIGIT7 = 55,
+  DIGIT8 = 56,
+  DIGIT9 = 57,
+  ELOWER = 69,
+  EUPPER = 101,
 }
 
 /**
