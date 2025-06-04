@@ -4,6 +4,7 @@ import { DayOfWeek } from '../../../src/systems/calendars/fields';
 const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
 const LONDON = 'Europe/London';
+const TOKYO = 'Asia/Tokyo';
 
 // Sat March 11, 2000 8:00:25 AM UTC
 const BASE = 952761625000;
@@ -416,4 +417,29 @@ test('years addition 2', () => {
 
   q = date.add({ year: 3 });
   expect(q.toString()).toEqual('Gregorian 2029-05-16 23:39:37.853 America/New_York');
+});
+
+test('years addition 3', () => {
+  // May 17, 2026 4:00:00 PM
+  let base = 1779033600000;
+  let date: GregorianDate;
+  let q: GregorianDate;
+
+  date = gregorian(base, 'UTC');
+  expect(date.toString()).toEqual('Gregorian 2026-05-17 16:00:00.000 Etc/UTC');
+
+  q = date.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2027-05-17 16:00:00.000 Etc/UTC');
+
+  date = gregorian(base, TOKYO);
+  expect(date.toString()).toEqual('Gregorian 2026-05-18 01:00:00.000 Asia/Tokyo');
+
+  q = date.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2027-05-18 01:00:00.000 Asia/Tokyo');
+
+  q = date.add({ year: 2 });
+  expect(q.toString()).toEqual('Gregorian 2028-05-18 01:00:00.000 Asia/Tokyo');
+
+  q = date.add({ year: 3 });
+  expect(q.toString()).toEqual('Gregorian 2029-05-18 01:00:00.000 Asia/Tokyo');
 });
