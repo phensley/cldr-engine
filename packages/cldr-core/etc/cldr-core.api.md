@@ -70,7 +70,7 @@ export abstract class CalendarDate {
     protected constructor(_type: CalendarType, _firstDay: number, _minDays: number);
     abstract add(fields: Partial<TimePeriod>): CalendarDate;
     protected _add(fields: Partial<TimePeriod>): [number, number];
-    protected _addTime(fields: Partial<TimePeriod>): [number, number];
+    protected _addTime(utcfields: number[], fields: Partial<TimePeriod>): [number, number];
     asJSDate(): Date;
     compare(other: CalendarDate): number;
     protected computeWeekFields(): void;
