@@ -958,7 +958,7 @@ export abstract class CalendarDate {
     // Capture days and time fields (in milliseconds) for future use.
     // We do this here since we'll be re-initializing the date fields
     // below.
-    [_days, _ms] = this._addTime(fields);
+    [_days, _ms] = this._addTime(f, fields);
     _days += (fields.day || 0) + (fields.week || 0) * 7;
 
     // YEARS
@@ -1006,6 +1006,7 @@ export abstract class CalendarDate {
 
     // Compute updated julian day from year and fractional month
     const dim = this.daysInMonth(year, month) * monthf;
+
     [day, dayf] = splitfrac(_days + dim);
     jd = this.monthStart(year, month, false) + f[DateField.DAY_OF_MONTH];
 
@@ -1013,6 +1014,7 @@ export abstract class CalendarDate {
 
     // Adjust julian day by fractional day and time fields
     ms += Math.round(_ms + dayf * CalendarConstants.ONE_DAY_MS);
+
     if (ms >= CalendarConstants.ONE_DAY_MS) {
       const d = floor(ms / CalendarConstants.ONE_DAY_MS);
       ms -= d * CalendarConstants.ONE_DAY_MS;
@@ -1025,17 +1027,16 @@ export abstract class CalendarDate {
   /**
    * Converts all time fields into [days, milliseconds].
    */
-  protected _addTime(fields: Partial<TimePeriod>): [number, number] {
+  protected _addTime(utcfields: number[], fields: Partial<TimePeriod>): [number, number] {
     // Calculate the time difference in days and milliseconds
-    let msDay = this._fields[DateField.MILLIS_IN_DAY] - this.timeZoneOffset();
+    let msDay = utcfields[DateField.MILLIS_IN_DAY];
     msDay +=
       (fields.hour || 0) * CalendarConstants.ONE_HOUR_MS +
       (fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS +
       (fields.second || 0) * CalendarConstants.ONE_SECOND_MS +
       (fields.millis || 0);
-    const oneDay = CalendarConstants.ONE_DAY_MS;
-    const days = floor(msDay / oneDay);
-    const ms = msDay - days * oneDay;
+    const days = floor(msDay / CalendarConstants.ONE_DAY_MS);
+    const ms = msDay - days * CalendarConstants.ONE_DAY_MS;
     return [days, ms];
   }
 

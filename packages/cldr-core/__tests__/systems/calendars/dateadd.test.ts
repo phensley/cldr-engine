@@ -328,3 +328,92 @@ test('milliseconds', () => {
   q = date.add({ millis: DAY * 2.5 + 120.5 });
   expect(q.toString()).toEqual('Gregorian 2000-03-13 15:00:25.121 America/New_York');
 });
+
+test('milliseconds in day', () => {
+  // May 17, 2026 10:00:00.000 AM
+  let utc = gregorian(1779012000000, 'UTC');
+  // May 17, 2026 06:00:00.000 AM
+  let nyc = gregorian(1779012000000, NEW_YORK);
+
+  expect(utc.modifiedJulianDay()).toEqual(2461178);
+  expect(utc.millisecondsInDay()).toEqual(36000000); // 10 hours in ms
+  expect(nyc.modifiedJulianDay()).toEqual(2461178);
+  expect(nyc.millisecondsInDay()).toEqual(21600000); // 6 hours in ms
+
+  // May 17, 2026 03:00:00.000 AM
+  utc = gregorian(1778986800000, 'UTC');
+  // May 16, 2026 11:00:00.000 PM
+  nyc = gregorian(1778986800000, NEW_YORK);
+
+  expect(utc.modifiedJulianDay()).toEqual(2461178);
+  expect(utc.millisecondsInDay()).toEqual(10800000); // 3 hours in ms
+  expect(nyc.modifiedJulianDay()).toEqual(2461177);
+  expect(nyc.millisecondsInDay()).toEqual(82800000); // 23 hours in ms
+});
+
+test('years addition 1', () => {
+  const base = 1778986800000;
+  let date: GregorianDate;
+  let q: GregorianDate;
+
+  date = gregorian(base, 'UTC');
+  expect(date.toString()).toEqual('Gregorian 2026-05-17 03:00:00.000 Etc/UTC');
+
+  q = date.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2027-05-17 03:00:00.000 Etc/UTC');
+
+  date = gregorian(base, NEW_YORK);
+  expect(date.toString()).toEqual('Gregorian 2026-05-16 23:00:00.000 America/New_York');
+
+  q = date.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2027-05-16 23:00:00.000 America/New_York');
+
+  q = date.add({ year: 3 });
+  expect(q.toString()).toEqual('Gregorian 2029-05-16 23:00:00.000 America/New_York');
+});
+
+test('years addition 2', () => {
+  // May 17, 2026 10:00:00.000 AM
+  let base = 1779012000000;
+  let date: GregorianDate;
+  let q: GregorianDate;
+
+  date = gregorian(base, 'UTC');
+  expect(date.toString()).toEqual('Gregorian 2026-05-17 10:00:00.000 Etc/UTC');
+
+  q = date.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2027-05-17 10:00:00.000 Etc/UTC');
+
+  date = gregorian(base, NEW_YORK);
+  expect(date.toString()).toEqual('Gregorian 2026-05-17 06:00:00.000 America/New_York');
+
+  q = date.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2027-05-17 06:00:00.000 America/New_York');
+
+  // May 17, 2026 3:39:37.853 AM
+  base = 1778989177853;
+
+  date = gregorian(base, 'UTC');
+  expect(date.toString()).toEqual('Gregorian 2026-05-17 03:39:37.853 Etc/UTC');
+
+  q = date.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2027-05-17 03:39:37.853 Etc/UTC');
+
+  q = date.add({ year: 2 });
+  expect(q.toString()).toEqual('Gregorian 2028-05-17 03:39:37.853 Etc/UTC');
+
+  q = date.add({ year: 3 });
+  expect(q.toString()).toEqual('Gregorian 2029-05-17 03:39:37.853 Etc/UTC');
+
+  date = gregorian(base, 'America/New_York');
+  expect(date.toString()).toEqual('Gregorian 2026-05-16 23:39:37.853 America/New_York');
+
+  q = date.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2027-05-16 23:39:37.853 America/New_York');
+
+  q = date.add({ year: 2 });
+  expect(q.toString()).toEqual('Gregorian 2028-05-16 23:39:37.853 America/New_York');
+
+  q = date.add({ year: 3 });
+  expect(q.toString()).toEqual('Gregorian 2029-05-16 23:39:37.853 America/New_York');
+});
