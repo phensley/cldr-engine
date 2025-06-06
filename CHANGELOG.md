@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.12.2]
+
+## Fixed/Changed
+
+- Include patch files in `cldr-compiler` package distribution.
+
 ## [1.12.1]
 
 ## Fixed/Changed
@@ -339,6 +345,7 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 - Switched from tslint to eslint.
 - Modified checksum so that resource packs are now compatible at the patch level. Resource packs must match the `major.minor` version of the `@phensley/cldr-core` package at runtime to ensure schema compatibility.
 
+[1.12.2]: https://github.com/phensley/cldr-engine/compare/v1.12.1...v1.12.2
 [1.12.1]: https://github.com/phensley/cldr-engine/compare/v1.12.0...v1.12.1
 [1.12.0]: https://github.com/phensley/cldr-engine/compare/v1.10.2...v1.12.0
 [1.10.2]: https://github.com/phensley/cldr-engine/compare/v1.10.1...v1.10.2
