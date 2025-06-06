@@ -38,6 +38,7 @@
   },
   "files": [
     "bin",
+    "data/cldr-patches",
     "data/patches/rbnf",
     "lib/",
     "lib-es/"
