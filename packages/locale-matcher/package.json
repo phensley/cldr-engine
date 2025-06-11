@@ -27,7 +27,7 @@
     "clean": "rimraf ./lib ./lib-es ./.scratch",
     "clean:full": "pnpm run clean && rimraf ./node_modules",
     "coverage": "vitest run --coverage",
-    "lint": "eslint -c .eslintrc.js --ext .ts src __tests__",
+    "lint": "eslint src __tests__",
     "prepublish": "pnpm run build",
     "test": "vitest --run",
     "test:watch": "vitest"

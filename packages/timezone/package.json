@@ -28,7 +28,7 @@
     "clean:full": "pnpm run clean && rimraf ./node_modules ./.tztemp",
     "coverage": "vitest run --coverage",
     "generate": "./bin/tztool generate -o ./src/autogen.zonedata.ts",
-    "lint": "eslint -c .eslintrc.js --ext .ts src __benchmarks__ __tests__",
+    "lint": "eslint src __benchmarks__ __tests__",
     "prepublish": "pnpm run build",
     "test": "vitest --run",
     "test:watch": "vitest"

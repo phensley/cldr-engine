@@ -45,7 +45,7 @@
     "clean:full": "pnpm run clean && rimraf ./node_modules",
     "coverage": "vitest run --coverage",
     "off-install": "node ./scripts/extract.js",
-    "lint": "eslint -c .eslintrc.js --ext .ts src __stress__ __tests__",
+    "lint": "eslint src __stress__ __tests__",
     "prepublish": "pnpm run build",
     "stress": "ts-node ./__stress__",
     "test": "vitest --run",
