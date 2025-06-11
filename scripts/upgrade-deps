@@ -14,7 +14,6 @@
 PIN="
 @types/node-fetch
 chalk
-eslint
 minimatch
 node-fetch
 yargs
