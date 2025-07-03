@@ -1,7 +1,7 @@
 import { ContextType } from '@phensley/cldr-types';
 
-import { calendarsApi } from '../../_helpers';
 import { CalendarDate } from '../../../src';
+import { calendarsApi } from '../../_helpers';
 
 const UTC = 'UTC';
 
@@ -34,6 +34,10 @@ test('format relative time', () => {
   s = api.formatRelativeTime(start, end, { context });
   expect(s).toEqual('In 1 second');
 
+  end = start.add({ millis: 1250 });
+  s = api.formatRelativeTime(start, end, { context });
+  expect(s).toEqual('In 1 second');
+
   end = start.add({ second: 30 });
   s = api.formatRelativeTime(start, end);
   expect(s).toEqual('in 30 seconds');
@@ -46,28 +50,41 @@ test('format relative time', () => {
   expect(s).toEqual('32 minutes ago');
 
   end = start.add({ day: -27 });
-  s = api.formatRelativeTime(start, end, { context });
+  s = api.formatRelativeTime(start, end, { context, field: 'week' });
   expect(s).toEqual('4 weeks ago');
 
   end = start.add({ day: -27 });
-  s = api.formatRelativeTime(start, end, { context, maximumFractionDigits: 1 });
+  s = api.formatRelativeTime(start, end, { context, field: 'week', maximumFractionDigits: 1 });
   expect(s).toEqual('3.9 weeks ago');
 
   end = start.add({ week: 1 });
-  s = api.formatRelativeTime(start, end, { context });
+  s = api.formatRelativeTime(start, end, { context, field: 'week' });
   expect(s).toEqual('Next week');
 
   end = start.add({ week: 2 });
-  s = api.formatRelativeTime(start, end, { context });
+  s = api.formatRelativeTime(start, end, { context, field: 'week' });
   expect(s).toEqual('In 2 weeks');
 
-  end = start.add({ week: 2 });
-  s = api.formatRelativeTime(start, end, { context, dayOfWeek: true });
+  s = api.formatRelativeTime(start, end, { context, field: 'week', dayOfWeek: true });
   expect(s).toEqual('In 2 Sundays');
 
-  end = start.add({ year: 0.5 });
-  s = api.formatRelativeTime(start, end, { context });
+  s = api.formatRelativeTime(start, end, { context, allowWeeks: true });
+  expect(s).toEqual('In 2 weeks');
+
+  s = api.formatRelativeTime(start, end, { context, allowWeeks: true, dayOfWeek: true });
+  expect(s).toEqual('In 2 Sundays');
+
+  end = start.add({ month: 6 });
+  s = api.formatRelativeTime(start, end, { context, field: 'month' });
   expect(s).toEqual('In 6 months');
+
+  end = start.add({ month: 6 });
+  s = api.formatRelativeTime(start, end, { context, width: 'short' });
+  expect(s).toEqual('In 6 mo.');
+
+  end = start.add({ month: 6 });
+  s = api.formatRelativeTime(start, end, { context, field: 'day' });
+  expect(s).toEqual('In 184 days');
 
   end = start.add({ month: 3000 });
   s = api.formatRelativeTime(start, end, { context, field: 'month' });
@@ -76,19 +93,15 @@ test('format relative time', () => {
   s = api.formatRelativeTime(start, end, { context, field: 'month', group: false });
   expect(s).toEqual('In 3000 months');
 
-  end = start.add({ year: 0.5 });
-  s = api.formatRelativeTime(start, end, { context, width: 'short' });
-  expect(s).toEqual('In 6 mo.');
-
-  end = start.add({ year: 1.5 });
+  end = start.add({ year: 1, month: 2 });
   s = api.formatRelativeTime(start, end, { context, round: 'floor' });
   expect(s).toEqual('Next year');
 
-  end = start.add({ year: 1.5 });
+  end = start.add({ year: 1, month: 2 });
   s = api.formatRelativeTime(start, end, { context, width: 'short', round: 'floor' });
   expect(s).toEqual('Next yr.');
 
-  end = start.add({ year: 1.5 });
+  end = start.add({ year: 1, month: 2 });
   s = api.formatRelativeTime(start, end, { context, width: 'narrow', round: 'floor' });
   expect(s).toEqual('Next yr.');
 });
@@ -101,7 +114,7 @@ test('specific field', () => {
 
   const start = api.toGregorianDate({ date: MARCH_11_2018_070025_UTC, zoneId: UTC });
 
-  end = start.add({ year: 1.5 });
+  end = start.add({ year: 1, month: 6 });
   s = api.formatRelativeTime(start, end, { context, field: 'year' });
   expect(s).toEqual('In 2 years');
 

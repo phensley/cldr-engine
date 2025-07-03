@@ -172,27 +172,27 @@ test('interval defaulting', () => {
 
   // Omitting the skeleton will choose a reasonable default
 
-  end = start.add({ day: 0.1 });
+  end = start.add({ hour: 2, minute: 24 });
   s = api.formatDateInterval(start, end);
   expect(s).toEqual('3:00 – 5:24 AM');
 
-  end = start.add({ day: 0.6 });
+  end = start.add({ hour: 14, minute: 24 });
   s = api.formatDateInterval(start, end);
   expect(s).toEqual('3:00 AM – 5:24 PM');
 
-  end = start.add({ day: 0.9 });
+  end = start.add({ hour: 22, minute: 10 });
   s = api.formatDateInterval(start, end);
   expect(s).toEqual('Mar 11 – 12, 2018');
 
-  end = start.add({ week: 0.9 });
+  end = start.add({ day: 6, hour: 10 });
   s = api.formatDateInterval(start, end);
   expect(s).toEqual('Mar 11 – 17, 2018');
 
-  end = start.add({ month: 0.9 });
+  end = start.add({ day: 28 });
   s = api.formatDateInterval(start, end);
   expect(s).toEqual('Mar 11 – Apr 8, 2018');
 
-  end = start.add({ year: 2.9 });
+  end = start.add({ year: 2, month: 10, day: 23 });
   s = api.formatDateInterval(start, end);
   expect(s).toEqual('Mar 11, 2018 – Feb 3, 2021');
 });
@@ -211,15 +211,15 @@ test('interval date/time choice', () => {
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('3:00\u2009–\u20093:33\u202fAM');
 
-  end = start.add({ day: 0.1 });
+  end = start.add({ hour: 2, minute: 24 });
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('3:00 – 5:24\u202fAM');
 
-  end = start.add({ day: 0.4 });
+  end = start.add({ hour: 9, minute: 36 });
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('3:00 AM – 12:36 PM');
 
-  end = start.add({ day: 0.9 });
+  end = start.add({ hour: 23 });
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('Sun, Mar 11 – Mon, Mar 12, 2018');
 
@@ -227,39 +227,39 @@ test('interval date/time choice', () => {
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('Sun, Mar 11 – Tue, May 22, 2018');
 
-  end = start.add({ year: 2.9 });
+  end = start.add({ year: 2, month: 11 });
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('Sun, Mar 11, 2018 – Wed, Feb 3, 2021');
+  expect(s).toEqual('Sun, Mar 11, 2018 – Thu, Feb 11, 2021');
 
   opts.date = 'yMMM';
-  end = start.add({ year: 2.9 });
+  end = start.add({ year: 2, month: 11 });
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('Mar 2018 – Feb 2021');
 
   // If date differs, always include some time fields
   opts.date = 'EEEyMMMdHm';
-  end = start.add({ day: 0.9 });
+  end = start.add({ hour: 23, minute: 36 });
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('Sun, Mar 11, 2018, 03:00 – Mon, Mar 12, 2018, 00:36');
+  expect(s).toEqual('Sun, Mar 11, 2018, 03:00 – Mon, Mar 12, 2018, 02:36');
 
   opts.date = 'EEEB';
-  end = start.add({ day: 0.9 });
+  end = start.add({ hour: 23, minute: 36 });
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('Sun, 3 in the morning – Mon, 12 in the morning');
+  expect(s).toEqual('Sun, 3 in the morning – Mon, 2 in the morning');
 
   opts.atTime = false;
   s = api.formatDateInterval(start, end, opts);
-  expect(s).toEqual('Sun, 3 in the morning – Mon, 12 in the morning');
+  expect(s).toEqual('Sun, 3 in the morning – Mon, 2 in the morning');
 
   // If time differs, always include some date fields
   opts.date = undefined;
   opts.time = 'EBhm';
-  end = start.add({ day: 0.3 });
+  end = start.add({ hour: 7, minute: 12 });
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('Sun, 3:00 – 10:12 in the morning');
 
   opts.time = 'MMMdh';
-  end = start.add({ day: 0.3 });
+  end = start.add({ hour: 7, minute: 10 });
   s = api.formatDateInterval(start, end, opts);
   expect(s).toEqual('Mar 11, 3 – 10 AM');
 

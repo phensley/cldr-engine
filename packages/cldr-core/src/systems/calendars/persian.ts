@@ -1,8 +1,9 @@
+import { add } from './add';
 import { CalendarDate } from './calendar';
 import { CalendarConstants } from './constants';
 import { DateField } from './fields';
-import { floorDiv } from './utils';
 import { TimePeriod } from './interval';
+import { floorDiv } from './math';
 import { CalendarDateFields } from './types';
 
 /**
@@ -29,12 +30,12 @@ export class PersianDate extends CalendarDate {
   }
 
   add(fields: Partial<TimePeriod>): PersianDate {
-    const [jd, ms] = this._add(fields);
+    const [jd, ms] = add(this, fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
   subtract(fields: Partial<TimePeriod>): PersianDate {
-    return this.add(this._invertPeriod(fields));
+    return this.add(this._negatePeriod(fields));
   }
 
   withZone(zoneId: string): PersianDate {
@@ -69,18 +70,17 @@ export class PersianDate extends CalendarDate {
     return this;
   }
 
-  protected initFields(f: number[]): void {
-    computePersianFields(f);
-  }
-
+  // TODO: reorganize calendar-specific methods
   protected monthCount(): number {
     return 12;
   }
 
+  // TODO: reorganize calendar-specific methods
   protected daysInMonth(y: number, m: number): number {
     return MONTH_COUNT[m][leapPersian(y) ? 1 : 0];
   }
 
+  // TODO: reorganize calendar-specific methods
   protected daysInYear(y: number): number {
     return leapPersian(y) ? 366 : 365;
   }

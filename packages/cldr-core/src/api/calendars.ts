@@ -29,8 +29,8 @@ import {
   ZonedDateTime,
 } from '../common';
 
-import { Internals } from '../internals';
 import { Quantity } from '../common';
+import { Internals } from '../internals';
 
 import {
   BuddhistDate,
@@ -42,20 +42,20 @@ import {
   ISO8601Date,
   JapaneseDate,
   PersianDate,
-  TimePeriod,
   TIME_PERIOD_FIELDS,
+  TimePeriod,
 } from '../systems/calendars';
 
 import { CalendarManager } from '../internals/calendars/manager';
 import { CalendarPatterns } from '../internals/calendars/patterns';
 import { AbstractValue, PartsValue, StringValue } from '../utils/render';
 
+import { NumberParams } from '../common/private';
+import { CalendarContext } from '../internals/calendars/formatter';
+import { TimeZoneTypeIndex } from '../schema';
+import { currentMetazone, getStableTimeZoneId, substituteZoneAlias } from '../systems/calendars/timezone';
 import { Calendars } from './api';
 import { PrivateApiImpl } from './private';
-import { CalendarContext } from '../internals/calendars/formatter';
-import { NumberParams } from '../common/private';
-import { getStableTimeZoneId, substituteZoneAlias, currentMetazone } from '../systems/calendars/timezone';
-import { TimeZoneTypeIndex } from '../schema';
 
 const DOW_FIELDS: RelativeTimeFieldType[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
@@ -344,18 +344,17 @@ export class CalendarsImpl implements Calendars {
     const _start = this.convertDateTo(calendar, start);
     const _end = this.convertDateTo(calendar, end);
 
-    let [field, amount] = _start.relativeTime(_end, options.field);
-    if (_start.compare(_end) === 1) {
-      amount *= -1;
-    }
-
+    let [field, amount] = _start.relativeTime(_end, options.field, {
+      rollupFractional: true,
+      includeWeeks: options.allowWeeks,
+    });
     if (field === 'millis') {
       amount /= 1000.0;
       field = 'second';
     }
-    let _field = field as RelativeTimeFieldType;
 
     // See if we can use day of week formatting
+    let _field = field as RelativeTimeFieldType;
     if (options.dayOfWeek && field === 'week' && _start.dayOfWeek() === _end.dayOfWeek()) {
       const dow = _end.dayOfWeek() - 1;
       _field = DOW_FIELDS[dow];

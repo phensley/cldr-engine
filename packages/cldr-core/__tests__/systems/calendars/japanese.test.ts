@@ -4,7 +4,7 @@ import { JapaneseDate } from '../../../src/systems/calendars/japanese';
 const make = (e: number, z: string) => JapaneseDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
 // Monday, June 1, 1925 12:34:56 PM UTC
-const JUN_01 = -1406978704000;
+const JUN_01_1925 = -1406978704000;
 
 test('japanese calendar', () => {
   let d: JapaneseDate;
@@ -78,7 +78,7 @@ test('japanese era year', () => {
 test('with zone', () => {
   let d: JapaneseDate;
 
-  d = make(JUN_01, 'UTC');
+  d = make(JUN_01_1925, 'UTC');
   expect(d.toString()).toEqual('Japanese 1925-06-01 12:34:56.000 Etc/UTC');
 
   d = d.withZone('America/New_York');

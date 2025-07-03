@@ -3,7 +3,7 @@ import { ISO8601Date } from '../../../src/systems/calendars';
 const make = (e: number, z: string) => ISO8601Date.fromUnixEpoch(e, z, -1, -1);
 
 // Tue, Dec 28, 2004 13:03:04 UTC
-const DEC_28 = 1104238984000;
+const DEC_28_2004 = 1104238984000;
 
 test('iso week', () => {
   const zoneId = 'America/New_York';
@@ -68,7 +68,7 @@ test('iso week', () => {
 test('with zone', () => {
   let d: ISO8601Date;
 
-  d = make(DEC_28, 'UTC');
+  d = make(DEC_28_2004, 'UTC');
   expect(d.toString()).toEqual('ISO8601 2004-12-28 13:03:04.000 Etc/UTC');
 
   d = d.withZone('America/New_York');

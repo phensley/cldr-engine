@@ -2,7 +2,8 @@
   "cSpell.enabled": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "never",
+    "source.organizeImports": "always",
+    "source.sortImports": "always",
     "source.fixAll.eslint": "explicit"
   },
   "eslint.workingDirectories": [

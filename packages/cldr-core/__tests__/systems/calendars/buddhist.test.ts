@@ -1,14 +1,11 @@
-import { DayOfWeek } from '../../../src/systems/calendars/fields';
 import { BuddhistDate } from '../../../src';
+import { DayOfWeek } from '../../../src/systems/calendars/fields';
+import { LOS_ANGELES, NEW_YORK, UTC } from './_referencedates';
 
 const make = (e: number, z: string) => BuddhistDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
-const NEW_YORK = 'America/New_York';
-const LOS_ANGELES = 'America/Los_Angeles';
-const UTC = 'UTC';
-
 // Wednesday, April 11, 2018 11:59:59.123 PM UTC
-const APR_11 = 1523491199123;
+const APR_11_2018 = 1523491199123;
 
 // Year of Buddha's birth
 const BUDDHA = -79293887631000;
@@ -16,7 +13,7 @@ const BUDDHA = -79293887631000;
 test('buddhist calendar', () => {
   let d: BuddhistDate;
 
-  d = make(APR_11, NEW_YORK);
+  d = make(APR_11_2018, NEW_YORK);
   expect(d.toString()).toEqual('Buddhist 2018-04-11 19:59:59.123 America/New_York');
   expect(d.type()).toEqual('buddhist');
   expect(d.modifiedJulianDay()).toEqual(2458220);
@@ -37,7 +34,7 @@ test('buddhist calendar', () => {
 test('with zone', () => {
   let d: BuddhistDate;
 
-  d = make(APR_11, UTC);
+  d = make(APR_11_2018, UTC);
   expect(d.toString()).toEqual('Buddhist 2018-04-11 23:59:59.123 Etc/UTC');
 
   d = d.withZone(LOS_ANGELES);

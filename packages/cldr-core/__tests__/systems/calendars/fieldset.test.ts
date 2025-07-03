@@ -2,8 +2,10 @@ import { RNG } from '../../../../cldr-utils/__tests__/rng';
 import { BuddhistDate, GregorianDate, PersianDate } from '../../../src';
 
 // Fri Apr 3 2020 18:08:52.123 UTC
-const EPOCH = 1585937332123;
-const YEAR_3K = 32511703053000;
+const APR_03_2020 = 1585937332123;
+
+// Thu Apr 3 3000 20:37:33 UTC
+const APR_03_3000 = 32511703053000;
 
 const ZONES = [
   'America/New_York',
@@ -12,8 +14,25 @@ const ZONES = [
   'Antarctica/McMurdo', // alias
 ];
 
+const NEW_YORK = 'America/New_York';
+
+test('leap', () => {
+  // February 29, 2024 8:30:00 AM GMT-05:00
+  let s = GregorianDate.fromUnixEpoch(1709213400000, NEW_YORK);
+  let q = s.set({ year: 2025 });
+  expect(q.toString()).toEqual('Gregorian 2025-02-28 08:30:00.000 America/New_York');
+
+  // January 31, 2024 8:30:00 AM GMT-05:00
+  s = GregorianDate.fromUnixEpoch(1706707800000, NEW_YORK);
+  q = s.set({ month: 2 });
+  expect(q.toString()).toEqual('Gregorian 2024-02-29 08:30:00.000 America/New_York');
+
+  q = s.set({ year: 2025, month: 2 });
+  expect(q.toString()).toEqual('Gregorian 2025-02-28 08:30:00.000 America/New_York');
+});
+
 test('gregorian fields', () => {
-  let d1 = GregorianDate.fromUnixEpoch(EPOCH, 'America/New_York');
+  let d1 = GregorianDate.fromUnixEpoch(APR_03_2020, 'America/New_York');
   expect(d1.toString()).toEqual('Gregorian 2020-04-03 14:08:52.123 America/New_York');
   expect(d1.toISOString()).toEqual('2020-04-03T18:08:52.123Z');
   expect(d1.fields()).toEqual({
@@ -36,7 +55,7 @@ test('gregorian fields', () => {
 test('gregorian set field', () => {
   let d: GregorianDate;
 
-  d = GregorianDate.fromUnixEpoch(EPOCH, 'America/New_York');
+  d = GregorianDate.fromUnixEpoch(APR_03_2020, 'America/New_York');
   expect(d.set({ year: 1997, day: 20 }).toString()).toEqual('Gregorian 1997-04-20 14:08:52.123 America/New_York');
   expect(d.set({ year: 1997, day: 20 }).toString()).toEqual('Gregorian 1997-04-20 14:08:52.123 America/New_York');
 
@@ -90,7 +109,7 @@ test('gregorian set field', () => {
 });
 
 test('buddhist fields', () => {
-  const d = BuddhistDate.fromUnixEpoch(EPOCH, 'America/New_York', 1, 1);
+  const d = BuddhistDate.fromUnixEpoch(APR_03_2020, 'America/New_York', 1, 1);
 
   // The toString method formats the extended year
   expect(d.toString()).toEqual('Buddhist 2020-04-03 14:08:52.123 America/New_York');
@@ -109,12 +128,12 @@ test('buddhist fields', () => {
 test('buddhist set field', () => {
   let d: BuddhistDate;
 
-  d = BuddhistDate.fromUnixEpoch(EPOCH, 'America/New_York', 1, 1);
+  d = BuddhistDate.fromUnixEpoch(APR_03_2020, 'America/New_York', 1, 1);
   expect(d.set({ year: 1997, day: 20 }).toString()).toEqual('Buddhist 1997-04-20 14:08:52.123 America/New_York');
 });
 
 test('persian fields', () => {
-  const d = PersianDate.fromUnixEpoch(EPOCH, 'America/New_York', 1, 1);
+  const d = PersianDate.fromUnixEpoch(APR_03_2020, 'America/New_York', 1, 1);
   expect(d.toString()).toEqual('Persian 1399-01-15 14:08:52.123 America/New_York');
   expect(d.fields()).toEqual({
     year: 1399,
@@ -131,7 +150,7 @@ test('persian fields', () => {
 test('persian set field', () => {
   let d: PersianDate;
 
-  d = PersianDate.fromUnixEpoch(EPOCH, 'America/New_York', 1, 1);
+  d = PersianDate.fromUnixEpoch(APR_03_2020, 'America/New_York', 1, 1);
   expect(d.set({ year: 1997, day: 20 }).toString()).toEqual('Persian 1997-01-20 13:08:52.123 America/New_York');
 
   // Clamp invalid month to 1 <= m <= 12
@@ -166,7 +185,7 @@ test('gregorian random', () => {
   const rng = new RNG('1309');
   for (let i = 0; i < 10000; i++) {
     for (const sgn of [1, -1]) {
-      const n = Math.floor(sgn * rng.rand() * YEAR_3K);
+      const n = Math.floor(sgn * rng.rand() * APR_03_3000);
       for (const z of ZONES) {
         const d = GregorianDate.fromUnixEpoch(n, z, 1, 1);
         const r = d.set(d.fields());
@@ -181,7 +200,7 @@ test('persian random', () => {
   const rng = new RNG('1309');
   for (let i = 0; i < 10000; i++) {
     for (const sgn of [1, -1]) {
-      const n = Math.floor(sgn * rng.rand() * YEAR_3K);
+      const n = Math.floor(sgn * rng.rand() * APR_03_3000);
       for (const z of ZONES) {
         const d = PersianDate.fromUnixEpoch(n, z, 1, 1);
         const r = d.set(d.fields());

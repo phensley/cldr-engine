@@ -3,6 +3,7 @@ import { CalendarConstants } from './constants';
 import { GregorianDate } from './gregorian';
 import { TimePeriod } from './interval';
 import { CalendarDateFields } from './types';
+import { add } from './add';
 
 /**
  * Gregorian calendar with ISO-8601 first day of week and minimum days in week.
@@ -18,7 +19,7 @@ export class ISO8601Date extends GregorianDate {
   }
 
   add(fields: Partial<TimePeriod>): ISO8601Date {
-    const [jd, ms] = this._add(fields);
+    const [jd, ms] = add(this, fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId()) as ISO8601Date;
   }
 

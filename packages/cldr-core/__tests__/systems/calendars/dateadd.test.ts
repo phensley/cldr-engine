@@ -1,13 +1,6 @@
 import { BuddhistDate, GregorianDate, ISO8601Date, JapaneseDate, PersianDate } from '../../../src';
 import { DayOfWeek } from '../../../src/systems/calendars/fields';
-
-const NEW_YORK = 'America/New_York';
-const LOS_ANGELES = 'America/Los_Angeles';
-const LONDON = 'Europe/London';
-const TOKYO = 'Asia/Tokyo';
-
-// Sat March 11, 2000 8:00:25 AM UTC
-const BASE = 952761625000;
+import { LONDON, LOS_ANGELES, MAR_11_2000, NEW_YORK, TOKYO } from './_referencedates';
 
 const DAY = 86400 * 1000;
 
@@ -17,6 +10,26 @@ const iso8601 = (e: number, z: string) => ISO8601Date.fromUnixEpoch(e, z, 1, 1);
 const japanese = (e: number, z: string) => JapaneseDate.fromUnixEpoch(e, z, 1, 1);
 const persian = (e: number, z: string) => PersianDate.fromUnixEpoch(e, z, 1, 1);
 
+test('leap year', () => {
+  // January 31, 2024 8:30:00 AM GMT-05:00
+  let s = gregorian(1706707800000, NEW_YORK);
+
+  let q = s.add({ year: 1, month: 1 });
+  expect(q.toString()).toEqual('Gregorian 2025-02-28 08:30:00.000 America/New_York');
+
+  q = s.add({ year: 1, month: 1, day: 1 });
+  expect(q.toString()).toEqual('Gregorian 2025-03-01 08:30:00.000 America/New_York');
+
+  // February 29, 2024 8:30:00 AM GMT-05:00
+  s = gregorian(1709213400000, NEW_YORK);
+
+  q = s.add({ year: 1 });
+  expect(q.toString()).toEqual('Gregorian 2025-02-28 08:30:00.000 America/New_York');
+
+  q = s.add({ year: 1, day: 1 });
+  expect(q.toString()).toEqual('Gregorian 2025-03-01 08:30:00.000 America/New_York');
+});
+
 test('fractional years', () => {
   const base = new Date(2004, 3, 11, 16, 34, 56); // Treat as UTC
   const utc = base.getTime() - base.getTimezoneOffset() * 60000;
@@ -25,14 +38,11 @@ test('fractional years', () => {
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2004-04-11 16:34:56.000 Etc/UTC');
 
-  q = date.add({ year: 4.25 }); // + 4 years and 91.5 days (366 * .25)
-  expect(q.toString()).toEqual('Gregorian 2008-07-12 04:34:56.000 Etc/UTC');
+  q = date.add({ year: 4.25 }); // truncated to 4
+  expect(q.toString()).toEqual('Gregorian 2008-04-11 16:34:56.000 Etc/UTC');
 
   q = date.add({ year: 4, month: 3 });
   expect(q.toString()).toEqual('Gregorian 2008-07-11 16:34:56.000 Etc/UTC');
-
-  q = date.add({ year: -4.25 }); // - 4 years and 91.5 days (366 * .25)
-  expect(q.toString()).toEqual('Gregorian 2000-01-11 04:34:56.000 Etc/UTC');
 
   q = date.add({ year: -4, month: -3 });
   expect(q.toString()).toEqual('Gregorian 2000-01-11 16:34:56.000 Etc/UTC');
@@ -54,25 +64,22 @@ test('year wrap', () => {
 });
 
 test('years', () => {
-  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  const date: GregorianDate = gregorian(MAR_11_2000, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ year: 1 });
   expect(q.toString()).toEqual('Gregorian 2001-03-11 03:00:25.000 America/New_York');
 
-  q = date.add({ year: 1.5 });
-  expect(q.toString()).toEqual('Gregorian 2001-09-09 16:00:25.000 America/New_York');
-
   q = date.add({ year: -3 });
   expect(q.toString()).toEqual('Gregorian 1997-03-11 03:00:25.000 America/New_York');
 
   // Earliest timezone offset for NY is LMT -4:56:2
   q = date.add({ year: -305 });
-  expect(q.toString()).toEqual('Gregorian 1695-03-11 03:04:23.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 1695-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ year: -1000 });
-  expect(q.toString()).toEqual('Gregorian 1000-03-11 03:04:23.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 1000-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ year: 1100 });
   expect(q.toString()).toEqual('Gregorian 3100-03-11 03:00:25.000 America/New_York');
@@ -82,7 +89,7 @@ test('years', () => {
 });
 
 test('iso-8601 years', () => {
-  const date: ISO8601Date = iso8601(BASE, NEW_YORK);
+  const date: ISO8601Date = iso8601(MAR_11_2000, NEW_YORK);
   let q: ISO8601Date;
   expect(date.toString()).toEqual('ISO8601 2000-03-11 03:00:25.000 America/New_York');
 
@@ -94,7 +101,7 @@ test('iso-8601 years', () => {
 });
 
 test('japanese years', () => {
-  const date: JapaneseDate = japanese(BASE, NEW_YORK);
+  const date: JapaneseDate = japanese(MAR_11_2000, NEW_YORK);
   let q: JapaneseDate;
   expect(date.toString()).toEqual('Japanese 2000-03-11 03:00:25.000 America/New_York');
 
@@ -106,7 +113,7 @@ test('japanese years', () => {
 });
 
 test('persian years', () => {
-  const date: PersianDate = persian(BASE, NEW_YORK);
+  const date: PersianDate = persian(MAR_11_2000, NEW_YORK);
   let q: PersianDate;
   expect(date.toString()).toEqual('Persian 1378-12-21 03:00:25.000 America/New_York');
 
@@ -118,7 +125,7 @@ test('persian years', () => {
 });
 
 test('buddhist years', () => {
-  const date: BuddhistDate = buddhist(BASE, NEW_YORK);
+  const date: BuddhistDate = buddhist(MAR_11_2000, NEW_YORK);
   let q: BuddhistDate;
   expect(date.toString()).toEqual('Buddhist 2000-03-11 03:00:25.000 America/New_York');
 
@@ -130,24 +137,21 @@ test('buddhist years', () => {
 });
 
 test('months', () => {
-  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  const date: GregorianDate = gregorian(MAR_11_2000, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ month: 1 });
-  expect(q.toString()).toEqual('Gregorian 2000-04-11 04:00:25.000 America/New_York');
-
-  q = date.add({ month: 1.5 });
-  expect(q.toString()).toEqual('Gregorian 2000-04-26 04:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2000-04-11 03:00:25.000 America/New_York');
 
   q = date.add({ month: 7 });
-  expect(q.toString()).toEqual('Gregorian 2000-10-11 04:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2000-10-11 03:00:25.000 America/New_York');
 
   q = date.add({ month: 9 });
   expect(q.toString()).toEqual('Gregorian 2000-12-11 03:00:25.000 America/New_York');
 
   q = date.add({ month: -17 });
-  expect(q.toString()).toEqual('Gregorian 1998-10-11 04:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 1998-10-11 03:00:25.000 America/New_York');
 
   q = date.add({ month: -60 });
   expect(q.toString()).toEqual('Gregorian 1995-03-11 03:00:25.000 America/New_York');
@@ -167,13 +171,13 @@ test('month rollover', () => {
   expect(date.toString()).toEqual('Gregorian 2019-03-31 12:30:45.000 Etc/UTC');
 
   q = date.add({ month: 1 });
-  expect(q.toString()).toEqual('Gregorian 2019-05-01 12:30:45.000 Etc/UTC');
+  expect(q.toString()).toEqual('Gregorian 2019-04-30 12:30:45.000 Etc/UTC');
 
   q = date.add({ month: 2 });
   expect(q.toString()).toEqual('Gregorian 2019-05-31 12:30:45.000 Etc/UTC');
 
   q = date.add({ month: 3 });
-  expect(q.toString()).toEqual('Gregorian 2019-07-01 12:30:45.000 Etc/UTC');
+  expect(q.toString()).toEqual('Gregorian 2019-06-30 12:30:45.000 Etc/UTC');
 
   q = date.add({ month: 4 });
   expect(q.toString()).toEqual('Gregorian 2019-07-31 12:30:45.000 Etc/UTC');
@@ -182,11 +186,11 @@ test('month rollover', () => {
   expect(q.toString()).toEqual('Gregorian 2019-08-31 12:30:45.000 Etc/UTC');
 
   q = date.add({ month: 6 });
-  expect(q.toString()).toEqual('Gregorian 2019-10-01 12:30:45.000 Etc/UTC');
+  expect(q.toString()).toEqual('Gregorian 2019-09-30 12:30:45.000 Etc/UTC');
 });
 
 test('persian months', () => {
-  let date: PersianDate = persian(BASE, NEW_YORK);
+  let date: PersianDate = persian(MAR_11_2000, NEW_YORK);
   let q: PersianDate;
   expect(date.toString()).toEqual('Persian 1378-12-21 03:00:25.000 America/New_York');
 
@@ -195,10 +199,7 @@ test('persian months', () => {
   // to the next persian year, but in gregorian calendar it crosses a daylight
   // savings boundary for America/New_York, so the hour changes.
   q = date.add({ month: 1 });
-  expect(q.toString()).toEqual('Persian 1379-01-21 04:00:25.000 America/New_York');
-
-  q = date.add({ month: 1.5 });
-  expect(q.toString()).toEqual('Persian 1379-02-05 16:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Persian 1379-01-21 03:00:25.000 America/New_York');
 
   // Monday, March 21, 2022 12:34:54 PM UTC
   date = persian(1647880496000, NEW_YORK);
@@ -207,40 +208,37 @@ test('persian months', () => {
   q = date.add({ month: 1 });
   expect(q.toString()).toEqual('Persian 1401-02-01 12:34:56.000 America/New_York');
 
-  q = date.add({ month: 1.5 });
-  expect(q.toString()).toEqual('Persian 1401-02-17 00:34:56.000 America/New_York');
+  q = date.add({ month: 1.5 }); // truncated to 1
+  expect(q.toString()).toEqual('Persian 1401-02-01 12:34:56.000 America/New_York');
 });
 
 test('days', () => {
-  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  const date: GregorianDate = gregorian(MAR_11_2000, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ day: 1 });
   expect(q.toString()).toEqual('Gregorian 2000-03-12 03:00:25.000 America/New_York');
 
-  q = date.add({ day: 1.5 });
-  expect(q.toString()).toEqual('Gregorian 2000-03-12 15:00:25.000 America/New_York');
-
   q = date.add({ day: 15 });
   expect(q.toString()).toEqual('Gregorian 2000-03-26 03:00:25.000 America/New_York');
+
+  // Crossing DST boundary
+  q = date.add({ day: 30 });
+  expect(q.toString()).toEqual('Gregorian 2000-04-10 03:00:25.000 America/New_York');
 
   q = date.add({ day: -45 });
   expect(q.toString()).toEqual('Gregorian 2000-01-26 03:00:25.000 America/New_York');
 
   q = date.add({ day: 450 });
-  expect(q.toString()).toEqual('Gregorian 2001-06-04 04:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2001-06-04 03:00:25.000 America/New_York');
 
   q = date.add({ day: -3650 });
   expect(q.toString()).toEqual('Gregorian 1990-03-14 03:00:25.000 America/New_York');
-
-  // 35 days (5 weeks) + 5 days + 6 hours (.25 day) + 1 hour (timezone offset change)
-  q = date.add({ day: 40.25 });
-  expect(q.toString()).toEqual('Gregorian 2000-04-20 10:00:25.000 America/New_York');
 });
 
 test('weeks', () => {
-  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  const date: GregorianDate = gregorian(MAR_11_2000, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
   expect(date.dayOfWeek()).toEqual(DayOfWeek.SATURDAY);
@@ -249,12 +247,8 @@ test('weeks', () => {
   expect(q.toString()).toEqual('Gregorian 2000-03-18 03:00:25.000 America/New_York');
   expect(q.dayOfWeek()).toEqual(DayOfWeek.SATURDAY);
 
-  q = date.add({ week: 1.5 }); // 10 days 12 hours
-  expect(q.toString()).toEqual('Gregorian 2000-03-21 15:00:25.000 America/New_York');
-  expect(q.dayOfWeek()).toEqual(DayOfWeek.TUESDAY);
-
   q = date.add({ week: 10 });
-  expect(q.toString()).toEqual('Gregorian 2000-05-20 04:00:25.000 America/New_York');
+  expect(q.toString()).toEqual('Gregorian 2000-05-20 03:00:25.000 America/New_York');
   expect(q.dayOfWeek()).toEqual(DayOfWeek.SATURDAY);
 
   q = date.add({ week: -52 });
@@ -267,7 +261,7 @@ test('weeks', () => {
 });
 
 test('with zone', () => {
-  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  const date: GregorianDate = gregorian(MAR_11_2000, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
 
@@ -279,15 +273,15 @@ test('with zone', () => {
 });
 
 test('hours', () => {
-  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  const date: GregorianDate = gregorian(MAR_11_2000, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ hour: 5 });
   expect(q.toString()).toEqual('Gregorian 2000-03-11 08:00:25.000 America/New_York');
 
-  q = date.add({ hour: 10.5 });
-  expect(q.toString()).toEqual('Gregorian 2000-03-11 13:30:25.000 America/New_York');
+  q = date.add({ hour: 10.5 }); // truncated to 10
+  expect(q.toString()).toEqual('Gregorian 2000-03-11 13:00:25.000 America/New_York');
 
   q = date.add({ hour: -24 });
   expect(q.toString()).toEqual('Gregorian 2000-03-10 03:00:25.000 America/New_York');
@@ -303,31 +297,31 @@ test('hours', () => {
 });
 
 test('minute', () => {
-  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  const date: GregorianDate = gregorian(MAR_11_2000, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ minute: 60 });
   expect(q.toString()).toEqual('Gregorian 2000-03-11 04:00:25.000 America/New_York');
 
-  q = date.add({ minute: 5.505 });
-  expect(q.toString()).toEqual('Gregorian 2000-03-11 03:05:55.300 America/New_York');
+  q = date.add({ minute: 5.505 }); // truncated to 5
+  expect(q.toString()).toEqual('Gregorian 2000-03-11 03:05:25.000 America/New_York');
 });
 
 test('milliseconds', () => {
-  const date: GregorianDate = gregorian(BASE, NEW_YORK);
+  const date: GregorianDate = gregorian(MAR_11_2000, NEW_YORK);
   let q: GregorianDate;
   expect(date.toString()).toEqual('Gregorian 2000-03-11 03:00:25.000 America/New_York');
 
   q = date.add({ millis: 60 });
   expect(q.toString()).toEqual('Gregorian 2000-03-11 03:00:25.060 America/New_York');
 
-  q = date.add({ millis: 120.5 });
-  expect(q.toString()).toEqual('Gregorian 2000-03-11 03:00:25.121 America/New_York');
+  q = date.add({ millis: 120.5 }); // truncated to 120
+  expect(q.toString()).toEqual('Gregorian 2000-03-11 03:00:25.120 America/New_York');
 
   // milliseconds roll over next day
-  q = date.add({ millis: DAY * 2.5 + 120.5 });
-  expect(q.toString()).toEqual('Gregorian 2000-03-13 15:00:25.121 America/New_York');
+  q = date.add({ millis: DAY * 2 + 120.5 }); // truncated
+  expect(q.toString()).toEqual('Gregorian 2000-03-13 03:00:25.120 America/New_York');
 });
 
 test('milliseconds in day', () => {

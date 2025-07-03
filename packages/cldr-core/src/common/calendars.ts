@@ -8,9 +8,9 @@ import {
   FormatWidthType,
 } from '@phensley/cldr-types';
 
-import { NumberFormatOptions, NumberSystemType } from './numbers';
-import { CalendarType } from '../systems/calendars/types';
 import { TimePeriodField } from '../systems';
+import { CalendarType } from '../systems/calendars/types';
+import { NumberFormatOptions, NumberSystemType } from './numbers';
 
 /**
  * @public
@@ -294,6 +294,11 @@ export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOption
    * Include day-of-week formatting when applicable.
    */
   dayOfWeek?: boolean;
+
+  /**
+   * Allow weeks to be auto-selected.
+   */
+  allowWeeks?: boolean;
 
   /**
    * Specify which field the relative time should be expressed in.

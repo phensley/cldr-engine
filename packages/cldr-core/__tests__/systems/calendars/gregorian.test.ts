@@ -26,8 +26,11 @@ test('string methods', () => {
   expect(d.toTimeString()).toEqual('11:31:21.234');
   expect(d.toTimeString({ includeZoneId: true })).toEqual('11:31:21.234 America/New_York');
   expect(d.toTimeString({ includeZoneId: false })).toEqual('11:31:21.234');
-  expect(d.toTimeString({ includeZoneOffset: true })).toEqual('11:31:21.234 -04:00');
-  expect(d.toTimeString({ includeZoneOffset: false })).toEqual('11:31:21.234');
+  expect(d.toTimeString({ includeZoneOffset: true })).toEqual('11:31:21.234-04:00');
+
+  let q = d.add({ millis: -234 });
+  expect(q.toTimeString({ optionalMilliseconds: true })).toEqual('11:31:21');
+  expect(q.toTimeString({ optionalMilliseconds: false })).toEqual('11:31:21.000');
 });
 
 test('gregorian date', () => {
@@ -44,7 +47,7 @@ test('gregorian date', () => {
   expect(d.toTimeString()).toEqual('19:59:59.123');
   expect(d.toTimeString({ includeZoneId: true })).toEqual('19:59:59.123 America/New_York');
   expect(d.toTimeString({ includeZoneId: false })).toEqual('19:59:59.123');
-  expect(d.toTimeString({ includeZoneOffset: true })).toEqual('19:59:59.123 -04:00');
+  expect(d.toTimeString({ includeZoneOffset: true })).toEqual('19:59:59.123-04:00');
   expect(d.toTimeString({ includeZoneOffset: false })).toEqual('19:59:59.123');
   expect(d.type()).toEqual('gregory');
   expect(d.unixEpoch()).toEqual(1523491199123);

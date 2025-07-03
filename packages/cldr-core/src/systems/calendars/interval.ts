@@ -31,6 +31,17 @@ export interface TimePeriod {
   millis: number;
 }
 
+export const timePeriod = (): TimePeriod => ({
+  year: 0,
+  month: 0,
+  week: 0,
+  day: 0,
+  hour: 0,
+  minute: 0,
+  second: 0,
+  millis: 0,
+});
+
 /**
  * @internal
  */
@@ -65,8 +76,17 @@ const FIELDMAP: { [x: string]: number } = {
 /**
  * @internal
  */
-export const timePeriodFieldFlags = (fields: TimePeriodField[]): number =>
-  fields.reduce((p, c) => {
-    p |= FIELDMAP[c];
-    return p;
-  }, 0);
+export const timePeriodFieldFlags = (fields?: TimePeriodField[]): [number, number] => {
+  let flags = 0;
+  let smallest = TimePeriodFieldFlag.MILLIS;
+  if (fields) {
+    for (const field of fields) {
+      const flag = FIELDMAP[field];
+      if (flag) {
+        flags |= flag;
+        smallest = flag;
+      }
+    }
+  }
+  return [flags, smallest];
+};

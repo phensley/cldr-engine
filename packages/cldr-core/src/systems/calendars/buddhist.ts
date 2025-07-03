@@ -1,6 +1,7 @@
+import { add } from './add';
 import { CalendarConstants } from './constants';
-import { GregorianDate } from './gregorian';
 import { DateField } from './fields';
+import { GregorianDate } from './gregorian';
 import { TimePeriod } from './interval';
 import { CalendarDateFields } from './types';
 
@@ -23,7 +24,7 @@ export class BuddhistDate extends GregorianDate {
   }
 
   add(fields: Partial<TimePeriod>): BuddhistDate {
-    const [jd, ms] = this._add(fields);
+    const [jd, ms] = add(this, fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
@@ -49,19 +50,14 @@ export class BuddhistDate extends GregorianDate {
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): BuddhistDate {
     super.initFromUnixEpoch(epoch, zoneId);
-    this.initFields(this._fields);
+    computeBuddhistFields(this._fields);
     return this;
   }
 
   protected initFromJD(jd: number, msDay: number, zoneId: string): BuddhistDate {
     super.initFromJD(jd, msDay, zoneId);
-    this.initFields(this._fields);
+    computeBuddhistFields(this._fields);
     return this;
-  }
-
-  protected initFields(f: number[]): void {
-    super.initFields(f);
-    computeBuddhistFields(f);
   }
 }
 

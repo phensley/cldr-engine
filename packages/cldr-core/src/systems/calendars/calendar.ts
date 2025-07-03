@@ -1,12 +1,13 @@
 import { DateTimePatternField, DateTimePatternFieldType, MetaZoneType } from '@phensley/cldr-types';
-
-import { dateFields, DateField, DayOfWeek } from './fields';
-import { CalendarConstants } from './constants';
-import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
-import { INTERNAL_NUMBERING } from '../numbering';
-import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag, TIME_PERIOD_FIELDS } from './interval';
-import { CalendarDateFields, CalendarType } from './types';
 import { getTZC } from '../../internals/calendars/zoneutil';
+import { INTERNAL_NUMBERING } from '../numbering';
+import { CalendarConstants } from './constants';
+import { difference } from './difference';
+import { DateField, dateFields } from './fields';
+import { TIME_PERIOD_FIELDS, TimePeriod, TimePeriodField } from './interval';
+import { clamp, initBaseFromUnixEpoch } from './math';
+import { ZoneInfo, zoneInfoFromUTC } from './timezone';
+import { CalendarDateFields, CalendarType } from './types';
 
 const zeropad = (n: number, w: number): string => INTERNAL_NUMBERING.formatString(n, false, w);
 
@@ -28,6 +29,28 @@ export interface TimeStringOptions {
    * Include timezone offset.
    */
   includeZoneOffset?: boolean;
+
+  /**
+   * Only output milliseconds if non-zero.
+   */
+  optionalMilliseconds?: boolean;
+}
+
+export interface DateDiffOptions {
+  /**
+   * Calculate weeks.
+   */
+  includeWeeks?: boolean;
+
+  /**
+   * Rollup result into the given fields.
+   */
+  fields?: TimePeriodField[];
+
+  /**
+   * Rollup fractional fields.
+   */
+  rollupFractional?: boolean;
 }
 
 /**
@@ -55,16 +78,11 @@ export interface TimeStringOptions {
 // Indicates a null field to support computing on demand
 const NULL = Number.MAX_SAFE_INTEGER;
 
-const { abs, floor } = Math;
+const { floor } = Math;
 
-const splitfrac = (n: number | undefined): [number, number] => {
-  n = n || 0;
-  const t = abs(n);
-  const sign = n < 0 ? -1 : 1;
-  const r = t | 0;
-  return [sign * r, sign * (t - r)];
-};
-
+/**
+ * Automatically select the best field to represent the time period.
+ */
 const relativeField = (p: TimePeriod): TimePeriodField => {
   for (const f of TIME_PERIOD_FIELDS) {
     if (p[f]) {
@@ -476,24 +494,70 @@ export abstract class CalendarDate {
    * @public
    */
   compare(other: CalendarDate): number {
-    const a = this.unixEpoch();
-    const b = other.unixEpoch();
-    return a < b ? -1 : a > b ? 1 : 0;
+    return compare(this, other);
   }
 
   /**
    * Calculate the relative time between two dates. If a field is specified
    * the time will be calculated in terms of that single field. Otherwise
-   * the field of greatest difference will be used.
+   * the field will be auto-selected.
    *
    * @public
    */
-  relativeTime(other: CalendarDate, field?: TimePeriodField): [TimePeriodField, number] {
-    const [s, sf, , ef] = this.swap(other);
-    const d = this._diff(s, sf, ef);
-    const _field = field || relativeField(d);
-    const r = this._rollup(d, sf, ef, [_field]);
-    return [_field, r[_field] || 0];
+  relativeTime(other: CalendarDate, field?: TimePeriodField, options?: DateDiffOptions): [TimePeriodField, number] {
+    options = options || {};
+    let result: TimePeriod;
+
+    // If no field is specified, calculate the difference in all fields and select the largest.
+    if (field === undefined) {
+      result = difference(this, other, { ...options, rollupFractional: false, fields: undefined });
+      field = relativeField(result);
+    }
+
+    // Calculate the difference in terms of the requested or auto-selected field.
+    options = { ...options, fields: [field] };
+    result = difference(this, other, options);
+    return [field, result[field] || 0];
+  }
+
+  /**
+   * Calculate the period of time (years, months, days, ..) since the given date.
+   *
+   * In a normal call, "other is less-than-or-equal-to this".
+   * If "this is less-than other" we invert the sign of the result.
+   *
+   * For example:
+   *
+   *   "2024-03-03".since("2024-01-30") == "1 month 4 days"
+   *   "2024-01-30".since("2024-03-03") == "-1 month -3 days"
+   *
+   * The durations are not symmetrical due to calendar math, e.g. end-of-month alignment
+   * with months of different lengths.
+   *
+   * @public
+   */
+  since(other: CalendarDate, options?: DateDiffOptions): TimePeriod {
+    return this._negatePeriod(difference(this, other, options || {}));
+  }
+
+  /**
+   * Calculate the period of time (years, months, days, ..) until the given date.
+   *
+   * In a normal call, "this is less-than-or-equal-to other".
+   * If "other is less-than this" we invert the sign of the result.
+   *
+   * For example:
+   *
+   *   "2024-01-30".until("2024-03-30") == "1 month 3 days"
+   *   "2024-03-03".until("2024-01-30") == "-1 month -4 days"
+   *
+   * The duration are not symmetrical due to calendar math, e.g. end-of-month alignment
+   * with months of different lengths.
+   *
+   * @public
+   */
+  until(other: CalendarDate, options?: DateDiffOptions): TimePeriod {
+    return difference(this, other, options || {});
   }
 
   /**
@@ -502,10 +566,9 @@ export abstract class CalendarDate {
    *
    * @public
    */
-  difference(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod {
-    const [s, sf, , ef] = this.swap(other);
-    const d = this._diff(s, sf, ef);
-    return fields ? this._rollup(d, sf, ef, fields) : d;
+  difference(other: CalendarDate, options?: DateDiffOptions): TimePeriod {
+    const result = difference(this, other, options || {});
+    return this.compare(other) === 1 ? (this._negatePeriod(result) as TimePeriod) : result;
   }
 
   /**
@@ -514,9 +577,8 @@ export abstract class CalendarDate {
    *
    * @public
    */
-  differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod {
-    const r = this.difference(other, fields);
-    return other.compare(this) < 0 ? (this._invertPeriod(r) as TimePeriod) : r;
+  differenceSigned(other: CalendarDate, options?: DateDiffOptions): TimePeriod {
+    return this.until(other, options);
   }
 
   /**
@@ -561,16 +623,30 @@ export abstract class CalendarDate {
    * Return a string containing the time, with optional timezone.
    */
   toTimeString(options?: TimeStringOptions): string {
-    let s =
-      `${zeropad(this.hourOfDay(), 2)}:${zeropad(this.minute(), 2)}:${zeropad(this.second(), 2)}` +
-      `.${zeropad(this.milliseconds(), 3)}`;
-    if (options && options.includeZoneOffset) {
-      s += ` ${formatZoneOffset(this)}`;
+    let s = `${zeropad(this.hourOfDay(), 2)}:${zeropad(this.minute(), 2)}:${zeropad(this.second(), 2)}`;
+    const ms = this.milliseconds();
+
+    // Check if user disabled display of milliseconds when zero
+    const showMilliseconds = !(options && options.optionalMilliseconds && ms === 0);
+    if (showMilliseconds) {
+      s += `.${zeropad(ms, 3)}`;
     }
-    if (options && options.includeZoneId) {
-      s += ` ${this._zoneInfo.zoneid}`;
+    if (options) {
+      if (options.includeZoneOffset) {
+        s += `${formatZoneOffset(this)}`;
+      }
+      if (options.includeZoneId) {
+        s += ` ${this._zoneInfo.zoneid}`;
+      }
     }
     return s;
+  }
+
+  /**
+   * Return a compact string containing just date and time, with optional timezone.
+   */
+  toDateTimeString(options?: TimeStringOptions): string {
+    return `${this.toDateString()} ${this.toTimeString(options)}`;
   }
 
   /**
@@ -669,7 +745,8 @@ export abstract class CalendarDate {
   abstract withZone(zoneId: string): CalendarDate;
 
   protected abstract _new(): CalendarDate;
-  protected abstract initFields(f: number[]): void;
+
+  // TODO: reorganize calendar-specific methods
   protected abstract monthCount(): number;
   protected abstract daysInMonth(y: number, m: number): number;
   protected abstract daysInYear(y: number): number;
@@ -697,397 +774,27 @@ export abstract class CalendarDate {
    */
   protected _timeToMs(f: Partial<CalendarDateFields>): number {
     return (
-      clamp(f.hour || 0, 0, 23) * CalendarConstants.ONE_HOUR_MS +
-      clamp(f.minute || 0, 0, 59) * CalendarConstants.ONE_MINUTE_MS +
-      clamp(f.second || 0, 0, 59) * CalendarConstants.ONE_SECOND_MS +
-      clamp(f.millis || 0, 0, 999)
+      (clamp(f.hour || 0, 0, 23) | 0) * CalendarConstants.ONE_HOUR_MS +
+      (clamp(f.minute || 0, 0, 59) | 0) * CalendarConstants.ONE_MINUTE_MS +
+      (clamp(f.second || 0, 0, 59) | 0) * CalendarConstants.ONE_SECOND_MS +
+      (clamp(f.millis || 0, 0, 999) | 0)
     );
   }
 
-  protected _invertPeriod(fields: Partial<TimePeriod>): Partial<TimePeriod> {
+  protected _negatePeriod(fields: Partial<TimePeriod>): TimePeriod {
     const r: Partial<TimePeriod> = {};
     for (const f of TIME_PERIOD_FIELDS) {
       const v = fields[f];
       r[f] = v ? -v : 0;
     }
-    return r;
-  }
-
-  /**
-   * Roll up time period fields into a subset of fields.
-   */
-  protected _rollup(span: Partial<TimePeriod>, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod {
-    const f = timePeriodFieldFlags(fields);
-    if (!f) {
-      return { year: 0, month: 0, week: 0, day: 0, hour: 0, minute: 0, second: 0, millis: 0, ...span };
-    }
-
-    const mc = this.monthCount();
-
-    let year = span.year || 0;
-    let month = span.month || 0;
-    let day = (span.week || 0) * 7 + (span.day || 0);
-    let ms =
-      (span.hour || 0) * CalendarConstants.ONE_HOUR_MS +
-      (span.minute || 0) * CalendarConstants.ONE_MINUTE_MS +
-      (span.second || 0) * CalendarConstants.ONE_SECOND_MS +
-      (span.millis || 0);
-
-    if (f & TimePeriodFieldFlag.YEAR && f & TimePeriodFieldFlag.MONTH) {
-      // Both year and month were requested, so use their integer values.
-    } else if (f & TimePeriodFieldFlag.MONTH) {
-      // Month was requested so convert years into months
-      month += year * mc;
-      year = 0;
-    } else if (f & TimePeriodFieldFlag.YEAR && month) {
-      // Year was requested so convert months into days
-
-      // This is a little verbose but necessary to accurately convert
-      // months into days.  Example:
-      //
-      //  2001-03-11  and 2001-09-09   5 months and 29 days apart
-      //  == (last month days) + (full month days) + (first month days)
-      //  == 9 + 31 + 31 + 30 + 31 + 30 + (31 - 11)
-      //  == 182 days
-
-      let endy = ef[DateField.EXTENDED_YEAR];
-      let endm = ef[DateField.MONTH] - 1;
-
-      // TODO: create a cursor for year/month calculations to reduce
-      // the verbosity of this block
-
-      // Subtract the number of days to find the "day of month"
-      // relative to each of the months to be converted.
-      let dom = ef[DateField.DAY_OF_MONTH] - day;
-      if (dom < 0) {
-        endm--;
-        if (endm < 0) {
-          endm += mc;
-          endy--;
-        }
-        // const dim = this.daysInMonth(endy, endm);
-        dom += this.daysInMonth(endy, endm);
-      }
-
-      // Convert each month except the last into days
-      let tmpd = dom;
-      while (month > 1) {
-        endm--;
-        if (endm < 0) {
-          endm += mc;
-          endy--;
-        }
-        tmpd += this.daysInMonth(endy, endm);
-        month--;
-      }
-
-      // Convert the last month into days
-      endm--;
-      if (endm < 0) {
-        endm += mc;
-        endy--;
-      }
-
-      tmpd += this.daysInMonth(endy, endm) - dom;
-      day += tmpd;
-      month = 0;
-    } else {
-      // Neither year nor month were requested, so we ignore those parts
-      // of the time period, and re-calculate the days directly from the
-      // original date fields.
-      day = ef[DateField.JULIAN_DAY] - sf[DateField.JULIAN_DAY];
-      ms = ef[DateField.MILLIS_IN_DAY] - sf[DateField.MILLIS_IN_DAY];
-      if (ms < 0) {
-        day--;
-        ms += CalendarConstants.ONE_DAY_MS;
-      }
-      year = month = 0;
-    }
-
-    // We have integer year, month, and millis computed at this point.
-
-    ms += CalendarConstants.ONE_DAY_MS * day;
-    day = 0;
-
-    const onedy = CalendarConstants.ONE_DAY_MS;
-    const onewk = onedy * 7;
-    const onehr = CalendarConstants.ONE_HOUR_MS;
-    const onemn = CalendarConstants.ONE_MINUTE_MS;
-
-    let week = 0;
-    let hour = 0;
-    let minute = 0;
-    let second = 0;
-    let millis = 0;
-
-    // Roll down
-
-    if (f & TimePeriodFieldFlag.WEEK) {
-      week = (ms / onewk) | 0;
-      ms -= week * onewk;
-    }
-    if (f & TimePeriodFieldFlag.DAY) {
-      day = (ms / onedy) | 0;
-      ms -= day * onedy;
-    }
-    if (f & TimePeriodFieldFlag.HOUR) {
-      hour = (ms / onehr) | 0;
-      ms -= hour * onehr;
-    }
-    if (f & TimePeriodFieldFlag.MINUTE) {
-      minute = (ms / onemn) | 0;
-      ms -= minute * onemn;
-    }
-    if (f & TimePeriodFieldFlag.SECOND) {
-      second = (ms / 1000) | 0;
-      ms -= second * 1000;
-    }
-    if (f & TimePeriodFieldFlag.MILLIS) {
-      millis = ms;
-    }
-
-    const dayms = ms / CalendarConstants.ONE_DAY_MS;
-
-    // Roll up fractional
-
-    if (f < TimePeriodFieldFlag.MONTH) {
-      // Days in the last year before adding the remaining fields
-      const diy = this.daysInYear(sf[DateField.EXTENDED_YEAR] + year);
-      year += (day + dayms) / diy;
-      day = 0;
-    } else if (f < TimePeriodFieldFlag.WEEK) {
-      let ey = ef[DateField.YEAR];
-      let em = ef[DateField.MONTH] - 2;
-      if (em < 0) {
-        em += mc;
-        ey--;
-      }
-      const dim = this.daysInMonth(ey, em);
-      month += (day + dayms) / dim;
-    } else if (f < TimePeriodFieldFlag.DAY) {
-      week += (day + dayms) / 7;
-    } else if (f < TimePeriodFieldFlag.HOUR) {
-      day += dayms;
-    } else if (f < TimePeriodFieldFlag.MINUTE) {
-      hour += ms / onehr;
-    } else if (f < TimePeriodFieldFlag.SECOND) {
-      minute += ms / onemn;
-    } else if (f < TimePeriodFieldFlag.MILLIS) {
-      second += ms / 1000;
-    }
-
-    return {
-      year,
-      month,
-      week,
-      day,
-      hour,
-      minute,
-      second,
-      millis,
-    };
-  }
-
-  /**
-   * Compute the number of years, months, days, etc, between two dates. The result will
-   * have all fields as integers.
-   */
-  protected _diff(s: CalendarDate, sf: number[], ef: number[]): TimePeriod {
-    // Use a borrow-based method to compute fields. If a field X is negative, we borrow
-    // from the next-higher field until X is positive. Repeat until all fields are
-    // positive.
-
-    let millis = ef[DateField.MILLIS_IN_DAY] - sf[DateField.MILLIS_IN_DAY];
-    let day = ef[DateField.DAY_OF_MONTH] - sf[DateField.DAY_OF_MONTH];
-    let month = ef[DateField.MONTH] - sf[DateField.MONTH];
-    let year = ef[DateField.EXTENDED_YEAR] - sf[DateField.EXTENDED_YEAR];
-
-    // Convert days into milliseconds
-    if (millis < 0) {
-      millis += CalendarConstants.ONE_DAY_MS;
-      day--;
-    }
-
-    // Convert months into days
-    // This is a little more complex since months can have 28, 29 30 or 31 days.
-    // We work backwards from the current month and successively convert months
-    // into days until days are positive.
-    const mc = s.monthCount();
-    let m = ef[DateField.MONTH] - 1; // convert to 0-based month
-    let y = ef[DateField.EXTENDED_YEAR];
-    while (day < 0) {
-      // move to previous month
-      m--;
-      // add back the number of days in the current month, wrapping around to December
-      if (m < 0) {
-        m += mc;
-        y--;
-      }
-      const dim = this.daysInMonth(y, m);
-      day += dim;
-      month--;
-    }
-
-    // Convert years into months
-    if (month < 0) {
-      month += mc;
-      year--;
-    }
-
-    // Convert days to weeks
-    const week = day > 0 ? (day / 7) | 0 : 0;
-    if (week > 0) {
-      day -= week * 7;
-    }
-
-    // Break down milliseconds into components
-    const hour = (millis / CalendarConstants.ONE_HOUR_MS) | 0;
-    millis -= hour * CalendarConstants.ONE_HOUR_MS;
-    const minute = (millis / CalendarConstants.ONE_MINUTE_MS) | 0;
-    millis -= minute * CalendarConstants.ONE_MINUTE_MS;
-    const second = (millis / CalendarConstants.ONE_SECOND_MS) | 0;
-    millis -= second * CalendarConstants.ONE_SECOND_MS;
-
-    return {
-      year,
-      month,
-      week,
-      day,
-      hour,
-      minute,
-      second,
-      millis,
-    };
-  }
-
-  protected swap(other: CalendarDate): [CalendarDate, number[], CalendarDate, number[]] {
-    let s = this as CalendarDate;
-    let e = other;
-
-    // Swap start/end dates
-    if (this.compare(other) === 1) {
-      [s, e] = [e, s];
-    }
-
-    // Convert start and end to UTC and ensure both are of the same calendar type.
-    // We do this using lower-level logic since the CalendarDate base class currently
-    // cannot construct instances of subclasses.
-    return [s, s.utcfields(), e, e.utcfields()];
-  }
-
-  /**
-   * Compute a new Julian day and milliseconds UTC by updating one or more fields.
-   */
-  protected _add(fields: Partial<TimePeriod>): [number, number] {
-    const f = this.utcfields();
-
-    let jd: number;
-    let ms: number;
-    let year: number;
-    let yearf: number;
-
-    let ydays: number;
-    let ydaysf: number;
-
-    let month: number;
-    let monthf: number;
-
-    let day: number;
-    let dayf: number;
-
-    let _days: number;
-    let _ms: number;
-
-    // Capture days and time fields (in milliseconds) for future use.
-    // We do this here since we'll be re-initializing the date fields
-    // below.
-    [_days, _ms] = this._addTime(f, fields);
-    _days += (fields.day || 0) + (fields.week || 0) * 7;
-
-    // YEARS
-
-    // Split off the fractional part of the years. Add the integer
-    // years to the extended year. Then get the number of days in that
-    // year and multiply that by the fractional part.
-    // Example: In a Gregorian leap year we'll have 366 days. If the fractional
-    // year is 0.25 we'll get 91.5 days.
-    [year, yearf] = splitfrac(fields.year);
-    year += f[DateField.EXTENDED_YEAR];
-    [ydays, ydaysf] = splitfrac(this.daysInYear(year) * yearf);
-
-    // Add day fractions from year calculation to milliseconds
-    ms = ydaysf * CalendarConstants.ONE_DAY_MS;
-
-    // Calculate the julian day for the year, month and day-of-month combination,
-    // adding in the days due to fractional year
-    jd = this.monthStart(year, f[DateField.MONTH] - 1, false) + f[DateField.DAY_OF_MONTH] + ydays;
-
-    // Initialize fields from the julian day
-    f[DateField.JULIAN_DAY] = jd;
-    f[DateField.MILLIS_IN_DAY] = 0;
-    this.initFields(f);
-
-    year = f[DateField.EXTENDED_YEAR];
-
-    // MONTHS
-
-    // Get integer and fractional months
-    month = fields.month || 0;
-    [month, monthf] = splitfrac(f[DateField.MONTH] - 1 + month);
-
-    // Add back years by dividing by month count
-    const mc = this.monthCount();
-    const [myears] = splitfrac(month / 12); // ignore fraction here
-    month -= myears * mc;
-    year += myears;
-
-    // Take away a year if the month pointer went negative
-    if (month < 0) {
-      month += mc;
-      year--;
-    }
-
-    // Compute updated julian day from year and fractional month
-    const dim = this.daysInMonth(year, month) * monthf;
-
-    [day, dayf] = splitfrac(_days + dim);
-    jd = this.monthStart(year, month, false) + f[DateField.DAY_OF_MONTH];
-
-    // DAY AND TIME FIELDS
-
-    // Adjust julian day by fractional day and time fields
-    ms += Math.round(_ms + dayf * CalendarConstants.ONE_DAY_MS);
-
-    if (ms >= CalendarConstants.ONE_DAY_MS) {
-      const d = floor(ms / CalendarConstants.ONE_DAY_MS);
-      ms -= d * CalendarConstants.ONE_DAY_MS;
-      day += d;
-    }
-
-    return [jd + day, ms];
-  }
-
-  /**
-   * Converts all time fields into [days, milliseconds].
-   */
-  protected _addTime(utcfields: number[], fields: Partial<TimePeriod>): [number, number] {
-    // Calculate the time difference in days and milliseconds
-    let msDay = utcfields[DateField.MILLIS_IN_DAY];
-    msDay +=
-      (fields.hour || 0) * CalendarConstants.ONE_HOUR_MS +
-      (fields.minute || 0) * CalendarConstants.ONE_MINUTE_MS +
-      (fields.second || 0) * CalendarConstants.ONE_SECOND_MS +
-      (fields.millis || 0);
-    const days = floor(msDay / CalendarConstants.ONE_DAY_MS);
-    const ms = msDay - days * CalendarConstants.ONE_DAY_MS;
-    return [days, ms];
+    return r as TimePeriod;
+    // const result: Partial<TimePeriod> = {};
+    // (Object.keys(TIME_PERIOD_FIELDS) as (keyof TimePeriod)[]).forEach((k) => (result[k] = -(fields[k] || 0)));
+    // return result as TimePeriod;
   }
 
   protected initFromUnixEpoch(ms: number, zoneId: string): void {
-    zoneId = substituteZoneAlias(zoneId);
-    this._zoneInfo = zoneInfoFromUTC(zoneId, ms);
-    jdFromUnixEpoch(ms + this._zoneInfo.offset, this._fields);
-    computeBaseFields(this._fields);
+    this._zoneInfo = initBaseFromUnixEpoch(this._fields, ms, zoneId);
   }
 
   protected initFromJD(jd: number, msDay: number, zoneId: string): void {
@@ -1182,65 +889,15 @@ export abstract class CalendarDate {
     return 7 - psow >= minDays ? weekNo + 1 : weekNo;
   }
 
-  protected utcfields(): number[] {
-    const u = this.unixEpoch();
-    const f = this._fields.slice(0);
-    jdFromUnixEpoch(u, f);
-    computeBaseFields(f);
-    this.initFields(f);
-    return f;
-  }
+  // protected utcfields(): number[] {
+  //   const u = this.unixEpoch();
+  //   const f = this._fields.slice(0);
+  //   fieldsFromUnixEpoch(u, f);
+  //   computeBaseFields(f);
+  //   this.initFields(f);
+  //   return f;
+  // }
 }
-
-const clamp = (n: number, min: number, max: number): number => Math.max(Math.min(n, max), min) | 0;
-
-/**
- * Compute Julian day from timezone-adjusted Unix epoch milliseconds.
- */
-const jdFromUnixEpoch = (ms: number, f: number[]): void => {
-  const oneDayMS = CalendarConstants.ONE_DAY_MS;
-  const days = floor(ms / oneDayMS);
-  const jd = days + CalendarConstants.JD_UNIX_EPOCH;
-  const msDay = floor(ms - days * oneDayMS);
-
-  f[DateField.JULIAN_DAY] = jd;
-  f[DateField.MILLIS_IN_DAY] = msDay;
-};
-
-/**
- * Compute fields common to all calendars. Before calling this, we must
- * have the JULIAN_DAY and MILLIS_IN_DAY fields set. Every calculation
- * is relative to these.
- */
-const computeBaseFields = (f: number[]): void => {
-  const jd = clamp(f[DateField.JULIAN_DAY], CalendarConstants.JD_MIN, CalendarConstants.JD_MAX);
-  // checkJDRange(jd);
-
-  let msDay = f[DateField.MILLIS_IN_DAY];
-  const ms = msDay + (jd - CalendarConstants.JD_UNIX_EPOCH) * CalendarConstants.ONE_DAY_MS;
-
-  f[DateField.LOCAL_MILLIS] = ms;
-  f[DateField.JULIAN_DAY] = jd;
-  f[DateField.MILLIS_IN_DAY] = msDay;
-  f[DateField.MILLIS] = msDay % 1000;
-
-  msDay = (msDay / 1000) | 0;
-  f[DateField.SECOND] = msDay % 60;
-
-  msDay = (msDay / 60) | 0;
-  f[DateField.MINUTE] = msDay % 60;
-
-  msDay = (msDay / 60) | 0;
-  f[DateField.HOUR_OF_DAY] = msDay;
-  f[DateField.AM_PM] = (msDay / 12) | 0;
-  f[DateField.HOUR] = msDay % 12;
-
-  let dow = (jd + DayOfWeek.MONDAY) % 7;
-  if (dow < DayOfWeek.SUNDAY) {
-    dow += 7;
-  }
-  f[DateField.DAY_OF_WEEK] = dow;
-};
 
 // TODO: clamp range instead of throwing error.
 // const checkJDRange = (jd: number): void => {
@@ -1270,4 +927,19 @@ const formatZoneOffset = (date: CalendarDate): string => {
   s += ':';
   s += zeropad(minutes, 2);
   return s;
+};
+
+/**
+ * Compare two dates a and b, returning:
+ *
+ * ```
+ *   a < b  ->  -1
+ *   a = b  ->  0
+ *   a > b  ->  1
+ * ```
+ */
+export const compare = (a: CalendarDate, b: CalendarDate): number => {
+  const _a = a.unixEpoch();
+  const _b = b.unixEpoch();
+  return _a < _b ? -1 : _a > _b ? 1 : 0;
 };

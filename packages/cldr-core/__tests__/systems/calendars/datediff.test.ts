@@ -1,26 +1,127 @@
-import { CalendarDate, GregorianDate, TimePeriod, TimePeriodField } from '../../../src';
-
-const UTC = 'UTC';
-const NEW_YORK = 'America/New_York';
-
-// Sat March 11, 2000 8:00:25 AM UTC
-const MAR_11 = 952761625000;
-
-// Fri, Sep 15, 2000 12:00:00 PM
-const SEP_15 = 969019200000;
-
-// Fri, Sep 1, 2000 12:00:00 PM
-const SEP_01 = 967809600000;
+import { TimePeriodField } from '@phensley/cldr-core/lib';
+import { CalendarDate, GregorianDate, TimePeriod } from '../../../src';
+import { MAR_11_2000, NEW_YORK } from './_referencedates';
 
 const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1, 1);
 
 const period = (t: Partial<TimePeriod>): TimePeriod =>
   Object.assign({ year: 0, month: 0, week: 0, day: 0, hour: 0, minute: 0, second: 0, millis: 0 }, t);
 
+const cldrstr = (c: CalendarDate): string =>
+  c.toDateTimeString({ includeZoneOffset: true, optionalMilliseconds: true });
+
+test('negative time', () => {
+  let end: GregorianDate;
+
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+
+  end = start.add({ day: 2, hour: -7 });
+  expect(cldrstr(end)).toEqual('2024-03-02 01:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ day: 1, hour: 17 }));
+});
+
+test('difference month vs day', () => {
+  let end: GregorianDate;
+
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+
+  end = start.add({ month: 11, day: -28 });
+  expect(cldrstr(end)).toEqual('2025-01-01 08:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ year: 0, month: 10, day: 3 }));
+
+  end = start.add({ year: 1, month: -1 });
+  expect(cldrstr(end)).toEqual('2025-01-29 08:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ month: 11 }));
+
+  end = start.add({ year: 1, day: -5 });
+  expect(cldrstr(end)).toEqual('2025-02-23 08:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ month: 11, day: 25 }));
+});
+
+test('all flags', () => {
+  let end: GregorianDate;
+  const fields: TimePeriodField[] = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millis'];
+
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+
+  end = start.add({ year: 1, month: 1 });
+  expect(cldrstr(end)).toEqual('2025-03-29 08:30:00-04:00');
+  expect(start.difference(end)).toEqual(period({ year: 1, month: 1 }));
+  expect(start.difference(end, { fields })).toEqual(period({ year: 1, month: 1 }));
+});
+
+test('weeks', () => {
+  let end: GregorianDate;
+
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+
+  end = start.add({ day: 15 });
+  expect(start.difference(end, { fields: ['week', 'day'] })).toEqual(period({ week: 2, day: 1 }));
+
+  end = start.add({ day: 15 });
+  expect(start.difference(end, { fields: ['day'], includeWeeks: true })).toEqual(period({ week: 0, day: 15 }));
+});
+
+test('leap year', () => {
+  let end: GregorianDate;
+
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+
+  end = start.add({ year: 1 });
+  expect(cldrstr(end)).toEqual('2025-02-28 08:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ month: 11, day: 30 }));
+
+  end = start.add({ year: 1, month: 1 });
+  expect(cldrstr(end)).toEqual('2025-03-29 08:30:00-04:00');
+  expect(start.difference(end)).toEqual(period({ year: 1, month: 1 }));
+
+  end = start.add({ year: 1, month: 2, day: 3 });
+  expect(cldrstr(end)).toEqual('2025-05-02 08:30:00-04:00');
+  expect(start.difference(end)).toEqual(period({ year: 1, month: 2, day: 3 }));
+
+  end = start.add({ year: 1, month: 2, day: 17 });
+  expect(cldrstr(end)).toEqual('2025-05-16 08:30:00-04:00');
+  expect(start.difference(end, { includeWeeks: true })).toEqual(period({ year: 1, month: 2, week: 2, day: 3 }));
+});
+
+test('month backwards', () => {
+  let end: GregorianDate;
+
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+
+  end = start.add({ year: 1, month: -1 });
+  expect(cldrstr(end)).toEqual('2025-01-29 08:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ month: 11 }));
+
+  end = start.add({ year: 1, day: -5 });
+  expect(cldrstr(end)).toEqual('2025-02-23 08:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ month: 11, day: 25 }));
+
+  end = start.add({ year: 1, month: -1, day: -5 });
+  expect(cldrstr(end)).toEqual('2025-01-24 08:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ month: 10, day: 26 }));
+
+  end = start.add({ year: 1, month: -3 });
+  expect(cldrstr(end)).toEqual('2024-11-29 08:30:00-05:00');
+  expect(start.difference(end)).toEqual(period({ month: 9 }));
+});
+
 test('basic difference', () => {
   let t: TimePeriod;
   let end: CalendarDate;
-  const start = gregorian(MAR_11, NEW_YORK);
+  const start = gregorian(MAR_11_2000, NEW_YORK);
 
   end = start.add({ day: 369 }); // Mar 15, 2001
 
@@ -29,8 +130,10 @@ test('basic difference', () => {
 
   end = start.add({ day: 419 }); // May 4, 2001
 
-  t = start.difference(end);
+  t = start.difference(end, { includeWeeks: true });
   expect(t).toEqual(period({ year: 1, month: 1, week: 3, day: 2 }));
+  t = start.difference(end);
+  expect(t).toEqual(period({ year: 1, month: 1, week: 0, day: 23 }));
 
   end = start.add({ year: 3, month: 17 }); // Aug 11, 2004
 
@@ -39,7 +142,7 @@ test('basic difference', () => {
 
   end = start.add({ day: 45 }); // April 25, 2000
 
-  t = start.difference(end);
+  t = start.difference(end, { includeWeeks: true });
   expect(t).toEqual(period({ month: 1, week: 2 }));
 
   end = start.add({ hour: 48 }); // March 13, 2000
@@ -49,19 +152,19 @@ test('basic difference', () => {
 
   end = start.add({ day: 8, hour: 12 }); // March 19, 2000
 
-  t = start.difference(end);
+  t = start.difference(end, { includeWeeks: true });
   expect(t).toEqual(period({ week: 1, day: 1, hour: 12 }));
 
   end = start.add({ hour: 24 * 10 }); // March 21, 2000
 
-  t = start.difference(end);
+  t = start.difference(end, { includeWeeks: true });
   expect(t).toEqual(period({ week: 1, day: 3 }));
 });
 
-test('signed difference', () => {
+test('signed difference 1', () => {
   let t: TimePeriod;
   let end: CalendarDate;
-  const start = gregorian(MAR_11, NEW_YORK);
+  const start = gregorian(MAR_11_2000, NEW_YORK);
 
   end = start.add({ day: 369 }); // Mar 15, 2001
 
@@ -72,347 +175,140 @@ test('signed difference', () => {
   expect(t).toEqual(period({ year: 1, day: 4 }));
 
   end = start.add({ day: 419 }); // May 4, 2001
+  expect(cldrstr(end)).toEqual('2001-05-04 03:00:25-04:00');
+  expect(end.differenceSigned(start, { includeWeeks: true })).toEqual(
+    period({ year: -1, month: -1, week: -3, day: -3 }),
+  );
+  expect(end.differenceSigned(start, { includeWeeks: false })).toEqual(
+    period({ year: -1, month: -1, week: 0, day: -24 }),
+  );
 
-  t = end.differenceSigned(start);
-  expect(t).toEqual(period({ year: -1, month: -1, week: -3, day: -2 }));
-
-  t = start.differenceSigned(end);
-  expect(t).toEqual(period({ year: 1, month: 1, week: 3, day: 2 }));
+  expect(start.differenceSigned(end, { includeWeeks: true })).toEqual(period({ year: 1, month: 1, week: 3, day: 2 }));
+  expect(start.differenceSigned(end, { includeWeeks: false })).toEqual(period({ year: 1, month: 1, week: 0, day: 23 }));
 });
 
-test('difference year, month', () => {
-  let t: TimePeriod;
+test('basic difference 2', () => {
   let end: CalendarDate;
+  const start = gregorian(MAR_11_2000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2000-03-11 03:00:25-05:00');
 
-  // Mar 11 2000
-  let start = gregorian(MAR_11, NEW_YORK);
+  // Year 2000
+  //          March                April                  May
+  //  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa
+  //            1  2  3  4                     1      1  2  3  4  5  6
+  //   5  6  7  8  9 10 11   2  3  4  5  6  7  8   7  8  9 10 11 12 13
+  //  12 13 14 15 16 17 18   9 10 11 12 13 14 15  14 15 16 17 18 19 20
+  //  19 20 21 22 23 24 25  16 17 18 19 20 21 22  21 22 23 24 25 26 27
+  //  26 27 28 29 30 31     23 24 25 26 27 28 29  28 29 30 31
+  //                        30
 
-  end = start.add({ year: 3, day: 35 });
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 37, day: 4 }));
-
-  end = start.add({ month: 37, day: 4 });
-
-  t = start.difference(end, ['year', 'day']);
-  expect(t).toEqual(period({ year: 3, day: 35 }));
-
-  // Sept 15 2000
-  start = gregorian(SEP_15, UTC);
-
-  end = start.add({ year: 0.5 }); // Mar 17, 2001
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 6, day: 2 }));
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 183 }));
-
-  end = start.add({ month: 6, day: -5 }); // Mar 10, 2001
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 176 }));
-
-  t = start.difference(end, ['year', 'day']);
-  expect(t).toEqual(period({ day: 176 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 5, day: 23 }));
-
-  end = start.add({ month: 6, day: 2 }); // Mar 17, 2001
-
-  t = start.difference(end, ['year']);
-  expect(t).toEqual(period({ year: 0.5 }));
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 183 }));
-
-  // Sept 01 2000
-  start = gregorian(SEP_01, UTC);
-
-  end = start.add({ month: 4, day: -5 }); // Dec 27, 2001
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 117 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 3, day: 26 }));
-
-  end = start.add({ month: 5, day: -5 }); // Jan 27, 2001
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 148 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 4, day: 26 }));
-
-  end = start.add({ month: 6, day: -5 }); // Feb 24, 2001
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 176 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 5, day: 23 }));
-
-  end = start.add({ day: 176 }); // Feb 24, 2001
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 5, day: 23 }));
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 176 }));
+  end = start.add({ year: 1, month: 2, day: 3 });
+  expect(cldrstr(end)).toEqual('2001-05-14 03:00:25-04:00');
+  expect(start.until(end, { fields: ['month'] })).toEqual(period({ month: 14 }));
+  expect(start.until(end, { fields: ['day'] })).toEqual(period({ day: 429 }));
+  expect(start.until(end, { fields: ['year', 'day'] })).toEqual(period({ year: 1, day: 64 }));
 });
 
-test('difference year, month, day', () => {
-  let t: TimePeriod;
-  let end: CalendarDate;
-  const start = gregorian(MAR_11, NEW_YORK);
+test('diff all fields', () => {
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+  let end = start.add({ year: 1, month: 2, day: 3 });
+  expect(start.until(end, {})).toEqual(period({ year: 1, month: 2, day: 3 }));
 
-  // In the examples below, the start year is a leap year 2000
-  // which has 366 days, and the next year 2001 has 365 days.
+  end = start.add({ year: 1, month: 2, day: 17 });
+  expect(start.until(end, { includeWeeks: true })).toEqual(period({ year: 1, month: 2, week: 2, day: 3 }));
 
-  end = start.add({ day: 52 }); // May 2, 2000 04:00:25
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 52 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 1, day: 21 }));
-
-  t = start.difference(end, ['year', 'day']);
-  expect(t).toEqual(period({ year: 0, day: 52 }));
-
-  end = start.add({ day: 183 }); // Sep 10, 2000 04:00:25
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 5, day: 30 }));
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 183 }));
-
-  end = start.add({ day: 183.5 }); // Sep 10, 2000 16:00:25
-
-  t = start.difference(end, ['year', 'month', 'day', 'hour']);
-  expect(t).toEqual(period({ month: 5, day: 30, hour: 12 }));
-
-  t = start.difference(end, ['year', 'month', 'day']);
-  expect(t).toEqual(period({ month: 5, day: 30.5 }));
-
-  end = start.add({ day: 184.5 }); // Sep 11, 2000 16:00:25
-
-  t = start.difference(end, ['year', 'day']);
-  expect(t).toEqual(period({ year: 0, day: 184.5 }));
-
-  t = start.difference(end, ['year', 'month', 'day']);
-  expect(t).toEqual(period({ month: 6, day: 0.5 }));
-
-  // Next year
-
-  end = start.add({ day: 365 + 183 }); // Sep 10, 2001 04:00:25
-
-  t = start.difference(end, ['year', 'month', 'day']);
-  expect(t).toEqual(period({ year: 1, month: 5, day: 30 }));
-
-  end = start.add({ day: 365 + 182.5 }); // Sep 9, 2001 16:00:25
-
-  t = start.difference(end, ['year']);
-  expect(t).toEqual(period({ year: 1.5 }));
-
-  t = start.difference(end, ['year', 'month', 'day']);
-  expect(t).toEqual(period({ year: 1, month: 5, day: 29.5 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 17, day: 29.5 }));
-
-  t = start.difference(end, ['day']);
-  expect(t).toEqual(period({ day: 365 + 182.5 }));
+  expect(start.until(end, { fields: ['year', 'month', 'day', 'week'] })).toEqual(
+    period({ year: 1, month: 2, week: 2, day: 3 }),
+  );
 });
 
-test('difference hour, minute, second, millis', () => {
-  let t: TimePeriod;
-  let end: CalendarDate;
+test('diff YMD', () => {
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+  let end = start.add({ year: 1, month: 2, day: 3 });
+  expect(start.until(end, { fields: ['year', 'month', 'day'] })).toEqual(period({ year: 1, month: 2, day: 3 }));
 
-  // Saturday, June 10, 2000 12:00:00 PM
-  const start = gregorian(960638400000, 'UTC');
-  expect(start.toString()).toEqual('Gregorian 2000-06-10 12:00:00.000 Etc/UTC');
+  end = start.add({ year: 1, month: 2, day: 17 });
+  expect(start.until(end, { fields: ['year', 'month', 'day'] })).toEqual(period({ year: 1, month: 2, day: 17 }));
 
-  end = start.add({ day: 4 }); // June 14, 2000 12:00:00
-
-  t = start.difference(end, ['hour']);
-  expect(t).toEqual(period({ hour: 96 }));
-
-  end = start.add({ day: 4.25, minute: 45 }); // June 14, 2000 18:45:00
-
-  t = start.difference(end, ['hour']);
-  expect(t).toEqual(period({ hour: 102.75 }));
-
-  end = start.add({ day: 0.25 }); // June 10, 2000 18:00:00
-
-  t = start.difference(end, ['hour']);
-  expect(t).toEqual(period({ hour: 6 }));
-
-  end = start.add({ hour: 6.5 }); // June 10, 2000 18:30:00
-
-  t = start.difference(end, ['hour', 'minute']);
-  expect(t).toEqual(period({ hour: 6, minute: 30 }));
-
-  end = start.add({ hour: 6.5, minute: 15.5 }); // June 10, 2000 18:45:30
-
-  t = start.difference(end, ['hour', 'minute']);
-  expect(t).toEqual(period({ hour: 6, minute: 45.5 }));
-
-  t = start.difference(end, ['hour', 'minute', 'second']);
-  expect(t).toEqual(period({ hour: 6, minute: 45, second: 30 }));
-
-  end = start.add({ hour: 6.5, minute: 15.5, second: 5.5 }); // June 10, 2000 18:45:35.500
-
-  t = start.difference(end, ['hour', 'minute', 'second']);
-  expect(t).toEqual(period({ hour: 6, minute: 45, second: 35.5 }));
-
-  t = start.difference(end, ['hour', 'minute', 'second', 'millis']);
-  expect(t).toEqual(period({ hour: 6, minute: 45, second: 35, millis: 500 }));
-
-  end = start.add({ millis: 5503 }); // June 10, 2000 12:00:05.503
-
-  t = start.difference(end, ['hour', 'minute', 'second', 'millis']);
-  expect(t).toEqual(period({ second: 5, millis: 503 }));
-
-  end = start.add({ millis: 5503.6 }); // June 10, 2000 12:00:05.504
-
-  t = start.difference(end, ['hour', 'minute', 'second', 'millis']);
-  expect(t).toEqual(period({ second: 5, millis: 504 }));
+  expect(start.until(end, { fields: ['year', 'month', 'day', 'week'] })).toEqual(
+    period({ year: 1, month: 2, week: 2, day: 3 }),
+  );
 });
 
-test('difference sub-day', () => {
-  let t: TimePeriod;
-  let end: CalendarDate;
-
-  // Saturday, June 10, 2000 12:00:00 PM
-  const start = gregorian(960638400000, 'UTC');
-  expect(start.toString()).toEqual('Gregorian 2000-06-10 12:00:00.000 Etc/UTC');
-
-  end = start.add({ day: 4, minute: -120 }); // June 14, 2000 10:00:00
-
-  t = start.difference(end, ['day', 'hour']);
-  expect(t).toEqual(period({ day: 3, hour: 22 }));
+test('diff Y', () => {
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+  let end = start.add({ year: 1, month: 2, day: 3 });
+  expect(start.until(end, { fields: ['year'] })).toEqual(period({ year: 1 }));
 });
 
-test('difference year wrap', () => {
-  let t: TimePeriod;
-  let end: CalendarDate;
-
-  // Saturday, Dec 31, 1999 12:00:00 PM
-  const start = gregorian(946641600000, 'UTC');
-  expect(start.toString()).toEqual('Gregorian 1999-12-31 12:00:00.000 Etc/UTC');
-
-  end = start.add({ day: 28 }); // Jan 28, 2000 12:00:00
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ day: 28 }));
+test('diff M', () => {
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+  let end = start.add({ year: 1, month: 2, day: 3 });
+  expect(start.until(end, { fields: ['month'] })).toEqual(period({ month: 14 }));
 });
 
-test('all fields', () => {
-  let t: TimePeriod;
-  let end: CalendarDate;
-  const start = gregorian(MAR_11, NEW_YORK);
-
-  end = start.add({ year: 1, month: 1, day: 1, hour: 12, minute: 30, second: 30, millis: 15000 });
-
-  t = start.difference(end, ['year', 'month', 'day', 'hour', 'minute', 'second']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, minute: 30, second: 45 }));
-
-  t = start.difference(end, ['year', 'month', 'day', 'hour', /* minute */ 'second']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, second: 30 * 60 + 45 }));
-
-  t = start.difference(end, ['year', 'month', 'day', /* hour, minute */ 'second']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, second: 12 * 3600 + 30 * 60 + 45 }));
-
-  t = start.difference(end, ['year', 'month', 'day', 'hour', 'minute']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12, minute: 30.75 }));
-
-  t = start.difference(end, ['year', 'month', 'day', /* hour */ 'minute']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, minute: 12 * 60 + 30.75 }));
-
-  t = start.difference(end, ['year', 'month', 'day', 'hour']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1, hour: 12.5125 }));
-
-  end = start.add({ year: 1, month: 1, day: 1, hour: 12 });
-
-  t = start.difference(end, ['year', 'month', 'day']);
-  expect(t).toEqual(period({ year: 1, month: 1, day: 1.5 }));
-
-  end = start.add({ year: 1, month: 1, day: 15, hour: 12 });
-
-  t = start.difference(end, ['year', 'month']);
-  expect(t).toEqual(period({ year: 1, month: 1.5 }));
+test('diff YM', () => {
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+  let end = start.add({ year: 1, month: 2, day: 3 });
+  expect(cldrstr(end)).toEqual('2025-05-02 08:30:00-04:00');
+  expect(start.until(end, { fields: ['year', 'month'] })).toEqual(period({ year: 1, month: 2 }));
 });
 
-test('difference edge cases', () => {
-  let t: TimePeriod;
-  let end: CalendarDate;
-
-  const start = gregorian(MAR_11, 'UTC');
-
-  end = start.add({ month: 7, day: 82 }); // Jan 1, 2001
-
-  t = start.difference(end, ['year', 'day']);
-  expect(t).toEqual(period({ day: 296 }));
-
-  end = start.add({ month: 7, day: 92 }); // Jan 11, 2001
-
-  t = start.difference(end, ['year', 'day']);
-  expect(t).toEqual(period({ day: 306 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 10, day: 0 }));
-
-  t = start.difference(end, ['month']);
-  expect(t).toEqual(period({ month: 10 }));
-
-  end = start.add({ month: -3, day: -3 }); // Dec 8, 1999
-
-  t = start.difference(end, ['year', 'day']);
-  expect(t).toEqual(period({ day: 94 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 3, day: 3 }));
-
-  end = start.add({ month: 0, day: 76 }); // May 26, 2000
-
-  t = start.difference(end, ['month']);
-  expect(t).toEqual(period({ month: 2.5 }));
-
-  t = start.difference(end, ['month', 'day']);
-  expect(t).toEqual(period({ month: 2, day: 15 }));
-
-  // Invalid fields are ignored
-  t = start.difference(end, ['month', 'day', 'foobar' as TimePeriodField]);
-  expect(t).toEqual(period({ month: 2, day: 15 }));
-
-  // If no valid fields are passed in, it will
-  // return the raw difference with no field rollup
-  t = start.difference(end, ['foobar' as TimePeriodField, 'baz' as TimePeriodField]);
-  expect(t).toEqual(period({ month: 2, week: 2, day: 1 }));
+test('diff D', () => {
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+  let end = start.add({ year: 1, month: 2, day: 3 });
+  expect(cldrstr(end)).toEqual('2025-05-02 08:30:00-04:00');
+  expect(start.until(end, { fields: ['day'] })).toEqual(period({ day: 428 }));
 });
 
-test('comparison', () => {
-  let end: CalendarDate;
-  const start = gregorian(MAR_11, NEW_YORK);
+test('diff YD', () => {
+  let end: GregorianDate;
 
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
   end = start.add({ year: 1 });
-  expect(start.compare(end)).toEqual(-1);
+  expect(cldrstr(end)).toEqual('2025-02-28 08:30:00-05:00');
+  expect(start.until(end, { fields: ['year', 'day'] })).toEqual(period({ day: 365 }));
 
-  end = start.add({ millis: 1 });
-  expect(start.compare(end)).toEqual(-1);
+  end = start.add({ year: 1, month: 2 });
+  expect(cldrstr(end)).toEqual('2025-04-29 08:30:00-04:00');
+  expect(start.until(end, { fields: ['year', 'day'] })).toEqual(period({ year: 1, day: 60 }));
+});
 
-  end = start.add({});
-  expect(start.compare(end)).toEqual(0);
+test('diff MD', () => {
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
+  let end = start.add({ year: 1, month: 2, day: 3 });
+  expect(cldrstr(end)).toEqual('2025-05-02 08:30:00-04:00');
+  expect(start.until(end, { fields: ['month', 'day'] })).toEqual(period({ month: 14, day: 3 }));
+});
 
-  end = start.add({ year: 0, millis: 0 });
-  expect(start.compare(end)).toEqual(0);
+test('diff DH', () => {
+  let end: GregorianDate;
 
-  end = start.add({ millis: -1 });
-  expect(start.compare(end)).toEqual(1);
+  //  February 29, 2024 8:30:00 AM GMT-05:00
+  const start = gregorian(1709213400000, NEW_YORK);
+  expect(cldrstr(start)).toEqual('2024-02-29 08:30:00-05:00');
 
-  end = start.add({ year: -1 });
-  expect(start.compare(end)).toEqual(1);
+  end = start.add({ year: 1, month: 2, day: 3, hour: 15 });
+  expect(cldrstr(end)).toEqual('2025-05-02 23:30:00-04:00');
+  expect(start.until(end, { fields: ['day', 'hour'] })).toEqual(period({ month: 0, day: 428, hour: 15 }));
+
+  end = start.add({ year: 1, month: 2, day: 3 });
+  expect(cldrstr(end)).toEqual('2025-05-02 08:30:00-04:00');
+  expect(start.until(end, { fields: ['day', 'hour'] })).toEqual(period({ month: 0, day: 428 }));
 });

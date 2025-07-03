@@ -1,3 +1,4 @@
+import { add } from './add';
 import { DateField } from './fields';
 import { GregorianDate } from './gregorian';
 import { TimePeriod } from './interval';
@@ -16,7 +17,7 @@ export class JapaneseDate extends GregorianDate {
   }
 
   add(fields: Partial<TimePeriod>): JapaneseDate {
-    const [jd, ms] = this._add(fields);
+    const [jd, ms] = add(this, fields);
     return this._new().initFromJD(jd, ms, this.timeZoneId());
   }
 
@@ -42,19 +43,14 @@ export class JapaneseDate extends GregorianDate {
 
   protected initFromUnixEpoch(epoch: number, zoneId: string): JapaneseDate {
     super.initFromUnixEpoch(epoch, zoneId);
-    this.initFields(this._fields);
+    computeJapaneseFields(this._fields);
     return this;
   }
 
   protected initFromJD(jd: number, msDay: number, zoneId: string): JapaneseDate {
     super.initFromJD(jd, msDay, zoneId);
-    this.initFields(this._fields);
+    computeJapaneseFields(this._fields);
     return this;
-  }
-
-  protected initFields(f: number[]): void {
-    super.initFields(f);
-    computeJapaneseFields(f);
   }
 }
 

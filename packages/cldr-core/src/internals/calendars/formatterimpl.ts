@@ -7,7 +7,7 @@ import { CalendarDate } from '../../systems/calendars';
 import { DateTimeNode } from '../../parsing/date';
 import { AbstractValue } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
-import { getTZC, TZC } from './zoneutil';
+import { getTZC } from './zoneutil';
 
 const min = Math.min;
 

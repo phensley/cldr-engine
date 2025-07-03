@@ -1,9 +1,8 @@
-import { DayOfWeek } from '../../../src/systems/calendars/fields';
 import { GregorianDate } from '../../../src/systems/calendars';
+import { DayOfWeek } from '../../../src/systems/calendars/fields';
+import { NEW_YORK } from './_referencedates';
 
 const make = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
-
-const NEW_YORK = 'America/New_York';
 
 test('weeks coverage', () => {
   let d: GregorianDate;

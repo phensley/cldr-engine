@@ -27,8 +27,6 @@ export class BuddhistDate extends GregorianDate {
     // (undocumented)
     static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): BuddhistDate;
     // (undocumented)
-    protected initFields(f: number[]): void;
-    // (undocumented)
     protected initFromJD(jd: number, msDay: number, zoneId: string): BuddhistDate;
     // (undocumented)
     protected initFromUnixEpoch(epoch: number, zoneId: string): BuddhistDate;
@@ -69,8 +67,6 @@ export interface Bundle extends PrimitiveBundle {
 export abstract class CalendarDate {
     protected constructor(_type: CalendarType, _firstDay: number, _minDays: number);
     abstract add(fields: Partial<TimePeriod>): CalendarDate;
-    protected _add(fields: Partial<TimePeriod>): [number, number];
-    protected _addTime(utcfields: number[], fields: Partial<TimePeriod>): [number, number];
     asJSDate(): Date;
     compare(other: CalendarDate): number;
     protected computeWeekFields(): void;
@@ -85,9 +81,8 @@ export abstract class CalendarDate {
     protected abstract daysInMonth(y: number, m: number): number;
     // (undocumented)
     protected abstract daysInYear(y: number): number;
-    protected _diff(s: CalendarDate, sf: number[], ef: number[]): TimePeriod;
-    difference(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
-    differenceSigned(other: CalendarDate, fields?: TimePeriodField[]): TimePeriod;
+    difference(other: CalendarDate, options?: DateDiffOptions): TimePeriod;
+    differenceSigned(other: CalendarDate, options?: DateDiffOptions): TimePeriod;
     endOf(field: CalendarDateModFields): CalendarDate;
     era(): number;
     extendedYear(): number;
@@ -104,13 +99,9 @@ export abstract class CalendarDate {
     hour(): number;
     hourOfDay(): number;
     // (undocumented)
-    protected abstract initFields(f: number[]): void;
-    // (undocumented)
     protected initFromJD(jd: number, msDay: number, zoneId: string): void;
     // (undocumented)
     protected initFromUnixEpoch(ms: number, zoneId: string): void;
-    // (undocumented)
-    protected _invertPeriod(fields: Partial<TimePeriod>): Partial<TimePeriod>;
     isAM(): boolean;
     isDaylightSavings(): boolean;
     isLeapYear(): boolean;
@@ -130,22 +121,23 @@ export abstract class CalendarDate {
     // (undocumented)
     protected abstract monthStart(eyear: number, month: number, useMonth: boolean): number;
     // (undocumented)
+    protected _negatePeriod(fields: Partial<TimePeriod>): TimePeriod;
+    // (undocumented)
     protected abstract _new(): CalendarDate;
     ordinalDayOfWeek(): number;
     relatedYear(): number;
-    relativeTime(other: CalendarDate, field?: TimePeriodField): [TimePeriodField, number];
-    protected _rollup(span: Partial<TimePeriod>, sf: number[], ef: number[], fields: TimePeriodField[]): TimePeriod;
+    relativeTime(other: CalendarDate, field?: TimePeriodField, options?: DateDiffOptions): [TimePeriodField, number];
     second(): number;
     abstract set(fields: Partial<CalendarDateFields>): CalendarDate;
+    since(other: CalendarDate, options?: DateDiffOptions): TimePeriod;
     startOf(field: CalendarDateModFields): CalendarDate;
     abstract subtract(fields: Partial<TimePeriod>): CalendarDate;
-    // (undocumented)
-    protected swap(other: CalendarDate): [CalendarDate, number[], CalendarDate, number[]];
     protected _timeToMs(f: Partial<CalendarDateFields>): number;
     timeZoneId(): string;
     timeZoneOffset(): number;
     timeZoneStableId(): string;
     toDateString(): string;
+    toDateTimeString(options?: TimeStringOptions): string;
     toISOString(): string;
     // (undocumented)
     protected _toISOString(d: CalendarDate, utc: boolean): string;
@@ -157,8 +149,7 @@ export abstract class CalendarDate {
     // (undocumented)
     protected readonly _type: CalendarType;
     unixEpoch(): number;
-    // (undocumented)
-    protected utcfields(): number[];
+    until(other: CalendarDate, options?: DateDiffOptions): TimePeriod;
     // (undocumented)
     protected weekNumber(firstDay: number, minDays: number, desiredDay: number, dayOfPeriod: number, dayOfWeek: number): number;
     weekOfMonth(): number;
@@ -194,6 +185,26 @@ export interface CalendarDateFields {
     year: number;
     // (undocumented)
     zoneId: string;
+}
+
+// Warning: (ae-missing-release-tag) "CalendarDateInternals" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface CalendarDateInternals {
+    // (undocumented)
+    daysInMonth: (year: number, month: number) => number;
+    // (undocumented)
+    daysInYear: (year: number) => number;
+    // (undocumented)
+    _fields: number[];
+    // (undocumented)
+    monthCount(): number;
+    // (undocumented)
+    monthStart: (year: number, month: number, _useMonth: boolean) => number;
+    // (undocumented)
+    _ymdToJD: (year: number, month: number, day: number) => number;
+    // (undocumented)
+    _zoneInfo: ZoneInfo_2;
 }
 
 // Warning: (ae-missing-release-tag) "CalendarDateModFields" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -503,6 +514,11 @@ export class CodeBuilder {
 // @public
 export const coerceDecimal: (n: DecimalArg) => Decimal;
 
+// Warning: (ae-missing-release-tag) "compare" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const compare: (a: CalendarDate, b: CalendarDate) => number;
+
 // @public (undocumented)
 export type ContextTransformFieldType = ('calendar-field' | 'currencyName' | 'day-format-except-narrow' | 'day-standalone-except-narrow' | 'era-abbr' | 'era-name' | 'keyValue' | 'languages' | 'month-format-except-narrow' | 'month-standalone-except-narrow' | 'number-spellout' | 'relative' | 'script' | 'typographicNames');
 
@@ -565,6 +581,15 @@ export type CurrencySymbolWidthType = 'default' | 'narrow';
 
 // @public (undocumented)
 export type CurrencyType = ('ADP' | 'AED' | 'AFA' | 'AFN' | 'ALK' | 'ALL' | 'AMD' | 'ANG' | 'AOA' | 'AOK' | 'AON' | 'AOR' | 'ARA' | 'ARL' | 'ARM' | 'ARP' | 'ARS' | 'ATS' | 'AUD' | 'AWG' | 'AZM' | 'AZN' | 'BAD' | 'BAM' | 'BAN' | 'BBD' | 'BDT' | 'BEC' | 'BEF' | 'BEL' | 'BGL' | 'BGM' | 'BGN' | 'BGO' | 'BHD' | 'BIF' | 'BMD' | 'BND' | 'BOB' | 'BOL' | 'BOP' | 'BOV' | 'BRB' | 'BRC' | 'BRE' | 'BRL' | 'BRN' | 'BRR' | 'BRZ' | 'BSD' | 'BTN' | 'BUK' | 'BWP' | 'BYB' | 'BYN' | 'BYR' | 'BZD' | 'CAD' | 'CDF' | 'CHE' | 'CHF' | 'CHW' | 'CLE' | 'CLF' | 'CLP' | 'CNH' | 'CNX' | 'CNY' | 'COP' | 'COU' | 'CRC' | 'CSD' | 'CSK' | 'CUC' | 'CUP' | 'CVE' | 'CYP' | 'CZK' | 'DDM' | 'DEM' | 'DJF' | 'DKK' | 'DOP' | 'DZD' | 'ECS' | 'ECV' | 'EEK' | 'EGP' | 'ERN' | 'ESA' | 'ESB' | 'ESP' | 'ETB' | 'EUR' | 'FIM' | 'FJD' | 'FKP' | 'FRF' | 'GBP' | 'GEK' | 'GEL' | 'GHC' | 'GHS' | 'GIP' | 'GMD' | 'GNF' | 'GNS' | 'GQE' | 'GRD' | 'GTQ' | 'GWE' | 'GWP' | 'GYD' | 'HKD' | 'HNL' | 'HRD' | 'HRK' | 'HTG' | 'HUF' | 'IDR' | 'IEP' | 'ILP' | 'ILR' | 'ILS' | 'INR' | 'IQD' | 'IRR' | 'ISJ' | 'ISK' | 'ITL' | 'JMD' | 'JOD' | 'JPY' | 'KES' | 'KGS' | 'KHR' | 'KMF' | 'KPW' | 'KRH' | 'KRO' | 'KRW' | 'KWD' | 'KYD' | 'KZT' | 'LAK' | 'LBP' | 'LKR' | 'LRD' | 'LSL' | 'LTL' | 'LTT' | 'LUC' | 'LUF' | 'LUL' | 'LVL' | 'LVR' | 'LYD' | 'MAD' | 'MAF' | 'MCF' | 'MDC' | 'MDL' | 'MGA' | 'MGF' | 'MKD' | 'MKN' | 'MLF' | 'MMK' | 'MNT' | 'MOP' | 'MRO' | 'MRU' | 'MTL' | 'MTP' | 'MUR' | 'MVP' | 'MVR' | 'MWK' | 'MXN' | 'MXP' | 'MXV' | 'MYR' | 'MZE' | 'MZM' | 'MZN' | 'NAD' | 'NGN' | 'NIC' | 'NIO' | 'NLG' | 'NOK' | 'NPR' | 'NZD' | 'OMR' | 'PAB' | 'PEI' | 'PEN' | 'PES' | 'PGK' | 'PHP' | 'PKR' | 'PLN' | 'PLZ' | 'PTE' | 'PYG' | 'QAR' | 'RHD' | 'ROL' | 'RON' | 'RSD' | 'RUB' | 'RUR' | 'RWF' | 'SAR' | 'SBD' | 'SCR' | 'SDD' | 'SDG' | 'SDP' | 'SEK' | 'SGD' | 'SHP' | 'SIT' | 'SKK' | 'SLE' | 'SLL' | 'SOS' | 'SRD' | 'SRG' | 'SSP' | 'STD' | 'STN' | 'SUR' | 'SVC' | 'SYP' | 'SZL' | 'THB' | 'TJR' | 'TJS' | 'TMM' | 'TMT' | 'TND' | 'TOP' | 'TPE' | 'TRL' | 'TRY' | 'TTD' | 'TWD' | 'TZS' | 'UAH' | 'UAK' | 'UGS' | 'UGX' | 'USD' | 'USN' | 'USS' | 'UYI' | 'UYP' | 'UYU' | 'UYW' | 'UZS' | 'VEB' | 'VED' | 'VEF' | 'VES' | 'VND' | 'VNN' | 'VUV' | 'WST' | 'XAF' | 'XAG' | 'XAU' | 'XBA' | 'XBB' | 'XBC' | 'XBD' | 'XCD' | 'XCG' | 'XDR' | 'XEU' | 'XFO' | 'XFU' | 'XOF' | 'XPD' | 'XPF' | 'XPT' | 'XRE' | 'XSU' | 'XTS' | 'XUA' | 'XXX' | 'YDD' | 'YER' | 'YUD' | 'YUM' | 'YUN' | 'YUR' | 'ZAL' | 'ZAR' | 'ZMK' | 'ZMW' | 'ZRN' | 'ZRZ' | 'ZWD' | 'ZWG' | 'ZWL' | 'ZWR');
+
+// Warning: (ae-missing-release-tag) "DateDiffOptions" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DateDiffOptions {
+    fields?: TimePeriodField[];
+    includeWeeks?: boolean;
+    rollupFractional?: boolean;
+}
 
 // @public (undocumented)
 export interface DateFieldFormatOptions {
@@ -1038,8 +1063,6 @@ export class GregorianDate extends CalendarDate {
     // (undocumented)
     static _init: void;
     // (undocumented)
-    protected initFields(f: number[]): void;
-    // (undocumented)
     protected initFromJD(jd: number, msDay: number, zoneId: string): GregorianDate;
     // (undocumented)
     protected initFromUnixEpoch(epoch: number, zoneId: string): GregorianDate;
@@ -1055,7 +1078,6 @@ export class GregorianDate extends CalendarDate {
     subtract(fields: Partial<TimePeriod>): GregorianDate;
     toString(): string;
     withZone(zoneId: string): GregorianDate;
-    protected _ymdToJD(y: number, m: number, d: number): number;
 }
 
 // @public (undocumented)
@@ -1143,8 +1165,6 @@ export class JapaneseDate extends GregorianDate {
     static fromFields(fields: Partial<CalendarDateFields>, firstDay: number, minDays: number): JapaneseDate;
     // (undocumented)
     static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): JapaneseDate;
-    // (undocumented)
-    protected initFields(f: number[]): void;
     // (undocumented)
     protected initFromJD(jd: number, msDay: number, zoneId: string): JapaneseDate;
     // (undocumented)
@@ -1765,8 +1785,6 @@ export class PersianDate extends CalendarDate {
     // (undocumented)
     static fromUnixEpoch(epoch: number, zoneId: string, firstDay: number, minDays: number): PersianDate;
     // (undocumented)
-    protected initFields(f: number[]): void;
-    // (undocumented)
     protected initFromJD(jd: number, msDay: number, zoneId: string): PersianDate;
     // (undocumented)
     protected initFromUnixEpoch(epoch: number, zoneId: string): PersianDate;
@@ -1888,6 +1906,7 @@ export type RelativeTimeFieldType = 'year' | 'quarter' | 'month' | 'week' | 'day
 
 // @public
 export interface RelativeTimeFormatOptions extends RelativeTimeFieldFormatOptions {
+    allowWeeks?: boolean;
     ca?: CalendarType;
     dayOfWeek?: boolean;
     field?: TimePeriodField;
@@ -2142,6 +2161,11 @@ export interface TimePeriod {
     year: number;
 }
 
+// Warning: (ae-missing-release-tag) "timePeriod" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const timePeriod: () => TimePeriod;
+
 // @public (undocumented)
 export type TimePeriodField = 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'millis';
 
@@ -2170,12 +2194,13 @@ export const enum TimePeriodFieldFlag {
 // Warning: (ae-internal-missing-underscore) The name "timePeriodFieldFlags" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
-export const timePeriodFieldFlags: (fields: TimePeriodField[]) => number;
+export const timePeriodFieldFlags: (fields?: TimePeriodField[]) => [number, number];
 
 // @public (undocumented)
 export interface TimeStringOptions {
     includeZoneId?: boolean;
     includeZoneOffset?: boolean;
+    optionalMilliseconds?: boolean;
 }
 
 // @public (undocumented)
