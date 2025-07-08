@@ -7,21 +7,9 @@ import { CalendarDate } from '../../systems/calendars';
 import { DateTimeNode } from '../../parsing/date';
 import { AbstractValue } from '../../utils/render';
 import { CalendarContext, CalendarFormatter } from './formatter';
+import { getTZC, TZC } from './zoneutil';
 
 const min = Math.min;
-
-type TZC = [number, boolean, number, number];
-
-const getTZC = (offset: number): TZC => {
-  const negative = offset < 0;
-  if (negative) {
-    offset *= -1;
-  }
-  offset /= 60000;
-  const hours = (offset / 60) | 0;
-  const minutes = offset % 60 | 0;
-  return [offset, negative, hours, minutes];
-};
 
 const widthKey1 = (w: number): string => (w === 5 ? 'narrow' : w === 4 ? 'wide' : 'abbreviated');
 

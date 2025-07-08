@@ -6,6 +6,7 @@ import { substituteZoneAlias, zoneInfoFromUTC, ZoneInfo } from './timezone';
 import { INTERNAL_NUMBERING } from '../numbering';
 import { timePeriodFieldFlags, TimePeriod, TimePeriodField, TimePeriodFieldFlag, TIME_PERIOD_FIELDS } from './interval';
 import { CalendarDateFields, CalendarType } from './types';
+import { getTZC } from '../../internals/calendars/zoneutil';
 
 const zeropad = (n: number, w: number): string => INTERNAL_NUMBERING.formatString(n, false, w);
 
@@ -13,6 +14,21 @@ export type CalendarDateModFields = keyof Pick<
   CalendarDateFields,
   'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
 >;
+
+/**
+ * @public
+ */
+export interface TimeStringOptions {
+  /**
+   * Include timezone identifier.
+   */
+  includeZoneId?: boolean;
+
+  /**
+   * Include timezone offset.
+   */
+  includeZoneOffset?: boolean;
+}
 
 /**
  * Implementation order, based on calendar preference data and ease of implementation.
@@ -528,6 +544,33 @@ export abstract class CalendarDate {
    */
   asJSDate(): Date {
     return new Date(this.toLocalISOString());
+  }
+
+  /**
+   * Return a string containing the date.
+   */
+  toDateString(): string {
+    const y = this.extendedYear();
+    const neg = y < 0;
+    return (
+      `${neg ? '-' : ''}${zeropad(Math.abs(y), 4)}` + `-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)}`
+    );
+  }
+
+  /**
+   * Return a string containing the time, with optional timezone.
+   */
+  toTimeString(options?: TimeStringOptions): string {
+    let s =
+      `${zeropad(this.hourOfDay(), 2)}:${zeropad(this.minute(), 2)}:${zeropad(this.second(), 2)}` +
+      `.${zeropad(this.milliseconds(), 3)}`;
+    if (options && options.includeZoneOffset) {
+      s += ` ${formatZoneOffset(this)}`;
+    }
+    if (options && options.includeZoneId) {
+      s += ` ${this._zoneInfo.zoneid}`;
+    }
+    return s;
   }
 
   /**
@@ -1053,14 +1096,7 @@ export abstract class CalendarDate {
   }
 
   protected _toString(type: string): string {
-    const y = this.extendedYear();
-    const neg = y < 0;
-    return (
-      `${type} ${neg ? '-' : ''}${zeropad(Math.abs(y), 4)}` +
-      `-${zeropad(this.month(), 2)}-${zeropad(this.dayOfMonth(), 2)} ` +
-      `${zeropad(this.hourOfDay(), 2)}:${zeropad(this.minute(), 2)}:${zeropad(this.second(), 2)}` +
-      `.${zeropad(this.milliseconds(), 3)} ${this._zoneInfo.zoneid}`
-    );
+    return `${type} ${this.toDateString()} ${this.toTimeString({ includeZoneId: true })}`;
   }
 
   /**
@@ -1223,4 +1259,15 @@ const computeBaseFields = (f: number[]): void => {
 const unixEpochFromJD = (jd: number, msDay: number): number => {
   const days = jd - CalendarConstants.JD_UNIX_EPOCH;
   return days * CalendarConstants.ONE_DAY_MS + Math.round(msDay);
+};
+
+const formatZoneOffset = (date: CalendarDate): string => {
+  const [_, negative, hours, minutes] = getTZC(date.timeZoneOffset());
+  let s = '';
+  const zero = hours === 0 && minutes === 0;
+  s += zero ? '+' : negative ? '-' : '+';
+  s += zeropad(hours, 2);
+  s += ':';
+  s += zeropad(minutes, 2);
+  return s;
 };

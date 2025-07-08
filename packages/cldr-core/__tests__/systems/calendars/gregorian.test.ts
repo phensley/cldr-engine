@@ -13,6 +13,23 @@ const NEW_YORK = 'America/New_York';
 const LOS_ANGELES = 'America/Los_Angeles';
 const PARIS = 'Europe/Paris';
 
+test('string methods', () => {
+  let d: GregorianDate;
+  let n: number;
+
+  // Tuesday, July 8, 2025 11:31:21.234 AM GMT-04:00 DST
+  n = 1751988681234;
+
+  d = make(n, NEW_YORK);
+  expect(d.toString()).toEqual('Gregorian 2025-07-08 11:31:21.234 America/New_York');
+  expect(d.toDateString()).toEqual('2025-07-08');
+  expect(d.toTimeString()).toEqual('11:31:21.234');
+  expect(d.toTimeString({ includeZoneId: true })).toEqual('11:31:21.234 America/New_York');
+  expect(d.toTimeString({ includeZoneId: false })).toEqual('11:31:21.234');
+  expect(d.toTimeString({ includeZoneOffset: true })).toEqual('11:31:21.234 -04:00');
+  expect(d.toTimeString({ includeZoneOffset: false })).toEqual('11:31:21.234');
+});
+
 test('gregorian date', () => {
   let d: GregorianDate;
   let n: number;
@@ -23,6 +40,12 @@ test('gregorian date', () => {
   // 7:59 PM NY time
   d = make(n, NEW_YORK);
   expect(d.toString()).toEqual('Gregorian 2018-04-11 19:59:59.123 America/New_York');
+  expect(d.toDateString()).toEqual('2018-04-11');
+  expect(d.toTimeString()).toEqual('19:59:59.123');
+  expect(d.toTimeString({ includeZoneId: true })).toEqual('19:59:59.123 America/New_York');
+  expect(d.toTimeString({ includeZoneId: false })).toEqual('19:59:59.123');
+  expect(d.toTimeString({ includeZoneOffset: true })).toEqual('19:59:59.123 -04:00');
+  expect(d.toTimeString({ includeZoneOffset: false })).toEqual('19:59:59.123');
   expect(d.type()).toEqual('gregory');
   expect(d.unixEpoch()).toEqual(1523491199123);
 

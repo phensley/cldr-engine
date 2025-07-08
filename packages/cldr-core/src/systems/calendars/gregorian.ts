@@ -71,7 +71,7 @@ export class GregorianDate extends CalendarDate {
   }
 
   /**
-   * String representation of this date.
+   * String representation of the date and time.
    *
    * @public
    */

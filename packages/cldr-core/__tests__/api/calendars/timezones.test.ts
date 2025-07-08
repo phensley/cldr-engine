@@ -49,6 +49,10 @@ test('stability', () => {
   s = EN.formatDateRaw(date, { pattern: 'zzzz' });
   expect(s).toEqual('GMT+01:00');
 
+  date.zoneId = 'Europe/Jersey';
+  s = EN.formatDateRaw(date, { pattern: 'ZZZZZ' });
+  expect(s).toEqual('+01:00');
+
   s = EN.formatDateRaw(date, { pattern: 'VVV' });
   expect(s).toEqual('Jersey');
 

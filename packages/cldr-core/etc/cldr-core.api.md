@@ -145,12 +145,14 @@ export abstract class CalendarDate {
     timeZoneId(): string;
     timeZoneOffset(): number;
     timeZoneStableId(): string;
+    toDateString(): string;
     toISOString(): string;
     // (undocumented)
     protected _toISOString(d: CalendarDate, utc: boolean): string;
     toLocalISOString(): string;
     // (undocumented)
     protected _toString(type: string): string;
+    toTimeString(options?: TimeStringOptions): string;
     type(): CalendarType;
     // (undocumented)
     protected readonly _type: CalendarType;
@@ -2169,6 +2171,12 @@ export const enum TimePeriodFieldFlag {
 //
 // @internal (undocumented)
 export const timePeriodFieldFlags: (fields: TimePeriodField[]) => number;
+
+// @public (undocumented)
+export interface TimeStringOptions {
+    includeZoneId?: boolean;
+    includeZoneOffset?: boolean;
+}
 
 // @public (undocumented)
 export interface TimeZoneInfo {
