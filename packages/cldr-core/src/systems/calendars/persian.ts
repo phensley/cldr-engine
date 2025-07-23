@@ -3,8 +3,8 @@ import { CalendarDate } from './calendar';
 import { CalendarConstants } from './constants';
 import { DateField } from './fields';
 import { TimePeriod } from './interval';
-import { floorDiv } from './math';
 import { CalendarDateFields } from './types';
+import { floorDiv } from './util';
 
 /**
  * Construct a date using the rules of the Persian calendar.

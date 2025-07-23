@@ -1,6 +1,6 @@
 import { CalendarConstants } from './constants';
 import { DateField } from './fields';
-import { floorDiv } from './math';
+import { floorDiv } from './util';
 
 const floor = Math.floor;
 
