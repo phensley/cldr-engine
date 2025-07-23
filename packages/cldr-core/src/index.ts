@@ -9,4 +9,7 @@ export * from './systems';
 
 export * from './cldr';
 
+// No dependency on resource packs so safe to export globally.
+export { getCurrencyForRegion, getCurrencyFractions } from './internals/numbers/util';
+
 export { checksumIndices } from './resource/checksum';

@@ -12,6 +12,8 @@ import {
   PersianDate,
   Rational,
   buildMessageMatcher,
+  getCurrencyForRegion,
+  getCurrencyFractions,
   parseMessagePattern,
   pluralRules,
 } from '../src';
@@ -36,6 +38,22 @@ test('plural rules', () => {
 
   expect(rules.cardinal(DecimalConstants.ONE)).toEqual('one');
   expect(rules.cardinal(new Decimal('5'))).toEqual('other');
+});
+
+test('currency fractions', () => {
+  expect(getCurrencyFractions('AUD')).toEqual({ cashDigits: 2, cashRounding: 0, digits: 2, rounding: 0 });
+  expect(getCurrencyFractions('CAD')).toEqual({ cashDigits: 2, cashRounding: 5, digits: 2, rounding: 0 });
+  expect(getCurrencyFractions('JPY')).toEqual({ cashDigits: 0, cashRounding: 0, digits: 0, rounding: 0 });
+  expect(getCurrencyFractions('USD')).toEqual({ cashDigits: 2, cashRounding: 0, digits: 2, rounding: 0 });
+  expect(getCurrencyFractions('FOO')).toEqual({ cashDigits: 2, cashRounding: 0, digits: 2, rounding: 0 });
+});
+
+test('currency regions', () => {
+  expect(getCurrencyForRegion('US')).toEqual('USD');
+  expect(getCurrencyForRegion('MX')).toEqual('MXN');
+  expect(getCurrencyForRegion('CA')).toEqual('CAD');
+  expect(getCurrencyForRegion('JP')).toEqual('JPY');
+  expect(getCurrencyForRegion('XX')).toEqual('USD');
 });
 
 test('dates', () => {
