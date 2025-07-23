@@ -23,7 +23,9 @@ def save_json(path, data):
 def set_versions(cfg, version):
     cfg['version'] = version
     for key in ('dependencies', 'devDependencies'):
-        rec = cfg[key]
+        rec = cfg.get(key)
+        if rec is None:
+            continue
         names = rec.keys()
         for name in names:
             if not name.startswith('@phensley/'):
