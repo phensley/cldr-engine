@@ -1,7 +1,7 @@
 import { CurrencyType } from '@phensley/cldr-types';
-import { currencyFractionsRaw, currencyRegionsRaw } from './autogen.currencies';
 import { CurrencyFractions } from '../../common';
 import { numarray, stringToObject } from '../../utils/string';
+import { currencyFractionsRaw, currencyRegionsRaw } from './autogen.currencies';
 
 type CurrencyFractionMap = { [x: string]: CurrencyFractions };
 
@@ -31,13 +31,13 @@ const defaultCurrencyFractions: CurrencyFractions = {
 const currencyRegions = stringToObject(currencyRegionsRaw, '|', ':');
 
 /**
- * @internal
+ * @public
  */
 export const getCurrencyFractions = (code: string): CurrencyFractions =>
   currencyFractions[code] || defaultCurrencyFractions;
 
 /**
- * @internal
+ * @public
  */
 export const getCurrencyForRegion = (region: string): CurrencyType =>
   (currencyRegions[region] as CurrencyType) || 'USD';

@@ -1040,14 +1040,10 @@ export class GeneralInternalsImpl implements GeneralInternals {
     parseWrapper(raw: string): WrapperNode[];
 }
 
-// Warning: (ae-internal-missing-underscore) The name "getCurrencyForRegion" should be prefixed with an underscore because the declaration is marked as @internal
-//
-// @internal (undocumented)
+// @public (undocumented)
 export const getCurrencyForRegion: (region: string) => CurrencyType;
 
-// Warning: (ae-internal-missing-underscore) The name "getCurrencyFractions" should be prefixed with an underscore because the declaration is marked as @internal
-//
-// @internal (undocumented)
+// @public (undocumented)
 export const getCurrencyFractions: (code: string) => CurrencyFractions;
 
 // @public

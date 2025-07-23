@@ -595,6 +595,12 @@ export interface General {
     resolveLocale(id: string | LanguageTag): Locale;
 }
 
+// @public (undocumented)
+export const getCurrencyForRegion: (region: string) => CurrencyType;
+
+// @public (undocumented)
+export const getCurrencyFractions: (code: string) => CurrencyFractions;
+
 // @public
 export class GregorianDate extends CalendarDate {
     protected constructor(type: CalendarType, firstDay: number, minDays: number);
