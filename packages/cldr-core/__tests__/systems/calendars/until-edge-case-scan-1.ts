@@ -10,6 +10,12 @@ import { CLDRFormatter, TemporalFormatter } from './_utils';
 
 const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1, 1);
 
+const elapsed = (start: [number, number], end: [number, number]): number => {
+  const s = start[0] * 1e3 + start[1] / 1e6;
+  const e = end[0] * 1e3 + end[1] / 1e6;
+  return Math.round((e - s) * 1000) / 1000;
+};
+
 const TEMPORAL_OPTS: Temporal.DifferenceOptions<
   'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond'
 > = {
@@ -55,18 +61,18 @@ const scan = (epoch: number, zone: string, days: number, minutes: number) => {
     const tdate1 = Temporal.Instant.fromEpochMilliseconds(start).toZonedDateTimeISO(zone);
     const tdate1str = tempfmt.dateTimeString(tdate1);
 
-    console.log(`start ${cdate1str}`);
+    const iterstart = hrtime();
     if (cdate1str !== tdate1str) {
       console.log(`ERROR: "${cdate1str}" != "${cdate1str}" zone ${zone}`);
       continue;
     }
 
-    for (let j = i; j <= epochs.length; j++) {
+    for (let j = i; j < epochs.length; j++) {
       const end = epochs[j];
 
-      const cdate2 = gregorian(start, zone);
+      const cdate2 = gregorian(end, zone);
       const cdate2str = cldrfmt.dateTimeString(cdate2);
-      const tdate2 = Temporal.Instant.fromEpochMilliseconds(start).toZonedDateTimeISO(zone);
+      const tdate2 = Temporal.Instant.fromEpochMilliseconds(end).toZonedDateTimeISO(zone);
       const tdate2str = tempfmt.dateTimeString(tdate2);
 
       if (cdate2str !== tdate2str) {
@@ -112,6 +118,8 @@ const scan = (epoch: number, zone: string, days: number, minutes: number) => {
 
       iters++;
     }
+    const iterend = hrtime();
+    console.log(`start ${cdate1str} ${elapsed(iterstart, iterend)} ms`);
   }
   const [endtime] = hrtime();
   const seconds = endtime - starttime;
