@@ -39,7 +39,7 @@
     "build:watch": "tsc -p ./tsconfig.json -w --preserveWatchOutput",
     "x_build:rollup": "NODE_ENV=production rollup --bundleConfigAsCjs -c && pnpm run build:rollup-dts && rimraf dist/src && pnpm run build:rollup-report",
     "build:rollup": "NODE_ENV=production rollup --bundleConfigAsCjs -c && rimraf dist/src && pnpm run build:rollup-report",
-    "build:rollup-report": "source-map-explorer --html -m dist/cldrengine.umd.js dist/cldrengine.umd.js.map >dist/report.html",
+    "build:rollup-report": "source-map-explorer --no-border-checks --html -m dist/cldrengine.umd.js dist/cldrengine.umd.js.map >dist/report.html",
     "build:rollup-dts": "dts-bundle-generator -o ./dist/cldrengine.umd.d.ts src/index.ts",
     "clean": "rimraf ./lib ./lib-es ./packs ./dist",
     "clean:full": "pnpm run clean && rimraf ./node_modules",
