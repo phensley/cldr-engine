@@ -102,16 +102,20 @@ const edgeCaseAdd = (epoch: number, zone: string, added: Partial<TimePeriod>) =>
   expect(cldrfmt.periodString(cuntil)).toEqual(tempfmt.durationString(tuntil));
 };
 
-const edgeCaseEpochs = (epoch1: number, epoch2: number, zone: string) => {
+const edgeCaseEpochs = (epoch1: number, epoch2: number, zone: string, disableTemporal?: boolean) => {
   const tempfmt = new TemporalFormatter({ includeZoneOffset: true });
   const cldrfmt = new CLDRFormatter({ includeZoneOffset: true });
   const cldr1 = gregorian(epoch1, zone);
   const cldr2 = gregorian(epoch2, zone);
-  const temp1 = Temporal.Instant.fromEpochMilliseconds(epoch1).toZonedDateTimeISO(zone);
-  const temp2 = Temporal.Instant.fromEpochMilliseconds(epoch2).toZonedDateTimeISO(zone);
   const cuntil = cldr1.until(cldr2);
-  const tuntil = temp1.until(temp2, { largestUnit: 'year', smallestUnit: 'millisecond' });
-  expect(cldrfmt.periodString(cuntil)).toEqual(tempfmt.durationString(tuntil));
+
+  // Some edge cases exposed issues in the official polyfill.
+  if (!disableTemporal) {
+    const temp1 = Temporal.Instant.fromEpochMilliseconds(epoch1).toZonedDateTimeISO(zone);
+    const temp2 = Temporal.Instant.fromEpochMilliseconds(epoch2).toZonedDateTimeISO(zone);
+    const tuntil = temp1.until(temp2, { largestUnit: 'year', smallestUnit: 'millisecond' });
+    expect(cldrfmt.periodString(cuntil)).toEqual(tempfmt.durationString(tuntil));
+  }
 };
 
 test('api comment examples', () => {
@@ -127,6 +131,18 @@ test('edge case 1', () => {
 
 test('edge case 2', () => {
   edgeCaseEpochs(1742205000000, 1741517400000, VANCOUVER);
+});
+
+test('edge case 3', () => {
+  // Blows up Temporal with error:
+  // RangeError: mixed-sign values not allowed as duration fields
+  edgeCaseEpochs(1762070460000, 1762074000000, VANCOUVER, true);
+});
+
+test('edge case 4', () => {
+  // Blows up Temporal with error:
+  // RangeError: mixed-sign values not allowed as duration fields
+  edgeCaseEpochs(1762074000000, 1762070460000, VANCOUVER, true);
 });
 
 test('date-only utc', () => {

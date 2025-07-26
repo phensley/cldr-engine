@@ -119,14 +119,27 @@ export const difference = (date1: CalendarDate, date2: CalendarDate, options: Da
     return result;
   }
 
+  const sameDay = isSameDay(state.one, state.two);
+
   // Compute the time difference and adjust the end date while accounting for
   // shifts due to Daylight Savings Time. We do this first since the time difference
   // can shift the days in th date difference.
   let millis: number;
-  [state.two, millis] = timeDifference(state);
-
-  // Compute the difference between the date fields and store in the result.
-  dateDifference(state, result);
+  if (sameDay) {
+    // Special case: found a bug in Temporal that caused it to fail with a
+    // "mixed-sign values not allowed as duration fields" error on the following two
+    // dates:
+    //    zone = "America/Vancouver"
+    //   date1 = epoch 1762074000000 "2025-11-02 01:00:00-08:00"
+    //   date2 = epoch 1762070460000 "2025-11-02 01:01:00-07:00"
+    //   date1.until(date2)
+    //
+    millis = state.epoch2 - state.date1.unixEpoch();
+  } else {
+    [state.two, millis] = timeDifference(state);
+    // Compute the difference between the date fields and store in the result.
+    dateDifference(state, result);
+  }
 
   // ==> At this point we have computed the YEAR, MONTH, WEEK, and DAY fields in the result.
 
@@ -161,8 +174,6 @@ export const difference = (date1: CalendarDate, date2: CalendarDate, options: Da
 
   // Set all time fields from the milliseconds field.
   rollTime(state, result);
-
-  // Rounding cases.
 
   return result;
 };
@@ -289,6 +300,12 @@ const timeDifference = (state: DifferenceState): [YearMonthDay, number] => {
 
   return [intermediate!, delta];
 };
+
+/**
+ * Return true if dates are on same day.
+ */
+const isSameDay = (one: YearMonthDay, two: YearMonthDay): boolean =>
+  one.year === two.year && one.month === two.month && one.day === two.day;
 
 /**
  * Perform rounding of the result. The goal here is to check if the

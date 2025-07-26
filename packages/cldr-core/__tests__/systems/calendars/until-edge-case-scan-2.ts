@@ -164,6 +164,12 @@ const NUMBERS_2 = [1, 2, 3, 4, 5, 6, 7, 8];
 
 // Mar 9 2025, 1:00:00 AM -08:00 Vancouver time
 // 1 hour before the Spring DST boundary
-let epoch = 1741510800000;
-scan(epoch, VANCOUVER, ...timePeriodPermutations(NUMBERS_2));
-scan(epoch, VANCOUVER, ...timePeriodPermutations(NUMBERS_1));
+const epoch1 = 1741510800000;
+scan(epoch1, VANCOUVER, ...timePeriodPermutations(NUMBERS_2));
+scan(epoch1, VANCOUVER, ...timePeriodPermutations(NUMBERS_1));
+
+// Nov 2, 2025, 1:00:00 AM -8:00 Vancouver time
+// 1 hour before the Fall DST boundary
+const epoch2 = 1762074000000;
+scan(epoch2, VANCOUVER, ...timePeriodPermutations(NUMBERS_2));
+scan(epoch2, VANCOUVER, ...timePeriodPermutations(NUMBERS_1));
