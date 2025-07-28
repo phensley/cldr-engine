@@ -13,11 +13,11 @@ import { CLDRFormatter, enumerate, periodToDurationLike, TemporalFormatter } fro
 
 const gregorian = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, 1, 1);
 
+const CLDRFMT = new CLDRFormatter({ includeZoneOffset: true });
+const TEMPFMT = new TemporalFormatter({ includeZoneOffset: true });
+
 // Run epoch timestamp-based test cases from test262 repository.
 const test262 = (epoch1: number, epoch2: number, zoneId: string, debug?: boolean) => {
-  const cldrfmt = new CLDRFormatter();
-  const tempfmt = new TemporalFormatter();
-
   const temp1 = Temporal.Instant.fromEpochMilliseconds(epoch1).toZonedDateTimeISO(zoneId);
   const temp2 = Temporal.Instant.fromEpochMilliseconds(epoch2).toZonedDateTimeISO(zoneId);
   const cldr1 = gregorian(epoch1, zoneId);
@@ -25,9 +25,9 @@ const test262 = (epoch1: number, epoch2: number, zoneId: string, debug?: boolean
 
   const tuntil = temp1.until(temp2, { largestUnit: 'months' });
   const cuntil = cldr1.until(cldr2);
-  expect(tempfmt.durationString(tuntil)).toEqual(cldrfmt.periodString(cuntil));
+  expect(TEMPFMT.durationString(tuntil)).toEqual(CLDRFMT.periodString(cuntil));
   if (debug) {
-    console.log(cldrfmt.periodString(cuntil));
+    console.log(CLDRFMT.periodString(cuntil));
   }
 };
 
@@ -90,39 +90,46 @@ test('temporal test262 sub-minute-offset', () => {
 });
 
 const edgeCaseAdd = (epoch: number, zone: string, added: Partial<TimePeriod>) => {
-  const tempfmt = new TemporalFormatter({ includeZoneOffset: true });
-  const cldrfmt = new CLDRFormatter({ includeZoneOffset: true });
   const temp1 = Temporal.Instant.fromEpochMilliseconds(epoch).toZonedDateTimeISO(zone);
   const cldr1 = gregorian(epoch, zone);
   const cldr2 = cldr1.add(added);
   const temp2 = temp1.add(periodToDurationLike(added));
-  expect(cldrfmt.dateTimeString(cldr2)).toEqual(tempfmt.dateTimeString(temp2));
+  expect(CLDRFMT.dateTimeString(cldr2)).toEqual(TEMPFMT.dateTimeString(temp2));
   const tuntil = temp1.until(temp2, { largestUnit: 'year', smallestUnit: 'millisecond' });
   const cuntil = cldr1.until(cldr2);
-  expect(cldrfmt.periodString(cuntil)).toEqual(tempfmt.durationString(tuntil));
+  expect(CLDRFMT.periodString(cuntil)).toEqual(TEMPFMT.durationString(tuntil));
 };
 
-const edgeCaseEpochs = (epoch1: number, epoch2: number, zone: string, disableTemporal?: boolean) => {
-  const tempfmt = new TemporalFormatter({ includeZoneOffset: true });
-  const cldrfmt = new CLDRFormatter({ includeZoneOffset: true });
+const cldrUntil = (epoch1: number, epoch2: number, zone: string): string => {
   const cldr1 = gregorian(epoch1, zone);
   const cldr2 = gregorian(epoch2, zone);
   const cuntil = cldr1.until(cldr2);
+  console.log(CLDRFMT.dateTimeString(cldr1), cldr1.toISOString());
+  console.log(CLDRFMT.dateTimeString(cldr2), cldr2.toISOString());
+  return CLDRFMT.periodString(cuntil);
+};
 
-  // Some edge cases exposed issues in the official polyfill.
-  if (!disableTemporal) {
-    const temp1 = Temporal.Instant.fromEpochMilliseconds(epoch1).toZonedDateTimeISO(zone);
-    const temp2 = Temporal.Instant.fromEpochMilliseconds(epoch2).toZonedDateTimeISO(zone);
-    const tuntil = temp1.until(temp2, { largestUnit: 'year', smallestUnit: 'millisecond' });
-    expect(cldrfmt.periodString(cuntil)).toEqual(tempfmt.durationString(tuntil));
-  }
+const tempUntil = (epoch1: number, epoch2: number, zone: string): string => {
+  const temp1 = Temporal.Instant.fromEpochMilliseconds(epoch1).toZonedDateTimeISO(zone);
+  const temp2 = Temporal.Instant.fromEpochMilliseconds(epoch2).toZonedDateTimeISO(zone);
+  const tuntil = temp1.until(temp2, { largestUnit: 'year', smallestUnit: 'millisecond' });
+  console.log(TEMPFMT.dateTimeString(temp1), TEMPFMT.dateTimeString(temp2));
+  return TEMPFMT.durationString(tuntil);
 };
 
 test('api comment examples', () => {
+  let cuntil: string;
+  let tuntil: string;
+
   const epoch1 = 1706634000000; // 2024-01-30
   const epoch2 = 1709485200000; // 2024-03-03
-  edgeCaseEpochs(epoch1, epoch2, NEW_YORK);
-  edgeCaseEpochs(epoch2, epoch1, NEW_YORK);
+  cuntil = cldrUntil(epoch1, epoch2, NEW_YORK);
+  tuntil = tempUntil(epoch1, epoch2, NEW_YORK);
+  expect(cuntil).toEqual(tuntil);
+
+  cuntil = cldrUntil(epoch2, epoch1, NEW_YORK);
+  tuntil = tempUntil(epoch2, epoch1, NEW_YORK);
+  expect(cuntil).toEqual(tuntil);
 });
 
 test('edge case 1', () => {
@@ -130,19 +137,141 @@ test('edge case 1', () => {
 });
 
 test('edge case 2', () => {
-  edgeCaseEpochs(1742205000000, 1741517400000, VANCOUVER);
+  const cuntil = cldrUntil(1742205000000, 1741517400000, VANCOUVER);
+  const tuntil = tempUntil(1742205000000, 1741517400000, VANCOUVER);
+  expect(cuntil).toEqual(tuntil);
 });
 
-test('edge case 3', () => {
+// Filed bug 1 https://github.com/js-temporal/temporal-polyfill/issues/347
+test('temporal bug 1', () => {
+  const epoch1 = 1762070460000;
+  const epoch2 = 1762074000000;
+
+  let cuntil = cldrUntil(epoch1, epoch2, VANCOUVER);
+  expect(cuntil).toEqual('59M');
+  cuntil = cldrUntil(epoch2, epoch1, VANCOUVER);
+  expect(cuntil).toEqual('-59M');
+
   // Blows up Temporal with error:
   // RangeError: mixed-sign values not allowed as duration fields
-  edgeCaseEpochs(1762070460000, 1762074000000, VANCOUVER, true);
+  expect(() => tempUntil(epoch1, epoch2, VANCOUVER)).toThrowError();
+  expect(() => tempUntil(epoch2, epoch1, VANCOUVER)).toThrowError();
 });
 
-test('edge case 4', () => {
-  // Blows up Temporal with error:
-  // RangeError: mixed-sign values not allowed as duration fields
-  edgeCaseEpochs(1762074000000, 1762070460000, VANCOUVER, true);
+test('bug 2 cldr', () => {
+  const toString = (d: CalendarDate) => `${d.toDateTimeString({ includeZoneOffset: true })}`;
+  const until = (epoch1: number, epoch2: number, zone: string) => {
+    const date1 = gregorian(epoch1, zone);
+    const date2 = gregorian(epoch2, zone);
+    const result = date1.until(date2);
+    console.log(`${toString(date1)} until ${toString(date2)} is ${CLDRFMT.periodString(result)}`);
+  };
+
+  const zone = 'America/New_York';
+
+  // 2025-11-02 04:00:00 UTC
+  // 2025-11-02 00:00:00-0400 local, midnight before DST shift.
+  const midnight = 1762056000000;
+
+  // 2025-11-02 05:59:00 UTC
+  // 2025-11-02 01:59:00-04:00 local, first 1:59 before DST shift.
+  const first_0159 = 1762063140000;
+
+  // 2025-11-02 06:59:00 UTC
+  // 2025-11-02 01:59:00-05:00 local, second 1:59 after DST shift.
+  const second_0159 = 1762066740000;
+
+  // 2025-11-02 23:00:00 UTC
+  // 2025-11-02 18:00:00-05:00 local, evening in day of DST shift.
+  const evening = 1762124400000;
+
+  until(midnight, first_0159, zone);
+  //> 2025-11-02T00:00:00-04:00 until 2025-11-02T01:59:00-04:00 is PT1H59M
+
+  until(first_0159, midnight, zone);
+  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T00:00:00-04:00 is -PT1H59M
+
+  until(midnight, second_0159, zone);
+  //> 2025-11-02T00:00:00-04:00 until 2025-11-02T01:59:00-05:00 is PT2H59M
+
+  until(second_0159, midnight, zone);
+  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T00:00:00-04:00 is -PT1H59M
+
+  until(first_0159, second_0159, zone);
+  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T01:59:00-05:00 is PT1H
+
+  until(second_0159, first_0159, zone);
+  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T01:59:00-04:00 is PT0S
+
+  until(first_0159, evening, zone);
+  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T23:53:00-05:00 is PT22H54M
+
+  until(evening, first_0159, zone);
+  //> 2025-11-02T23:53:00-05:00 until 2025-11-02T01:59:00-04:00 is -PT22H54M
+
+  until(second_0159, evening, zone);
+  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T23:53:00-05:00 is PT22H54M
+
+  until(evening, second_0159, zone);
+  //> 2025-11-02T23:53:00-05:00 until 2025-11-02T01:59:00-05:00 is -PT21H54M
+});
+
+test('temporal bug 2 reproduction', () => {
+  const toString = (d: Temporal.ZonedDateTime) => `${d.toPlainDateTime().toString() + d.offset}`;
+  const until = (epoch1: number, epoch2: number, zone: string) => {
+    const date1 = Temporal.Instant.fromEpochMilliseconds(epoch1).toZonedDateTimeISO(zone);
+    const date2 = Temporal.Instant.fromEpochMilliseconds(epoch2).toZonedDateTimeISO(zone);
+    const result = date1.until(date2, { largestUnit: 'year', smallestUnit: 'millisecond' });
+    console.log(`${toString(date1)} until ${toString(date2)} is ${result.toString()}`);
+  };
+
+  const zone = 'America/New_York';
+
+  // 2025-11-02 04:00:00 UTC
+  // 2025-11-02 00:00:00-0400 local, midnight before DST shift.
+  const midnight = 1762056000000;
+
+  // 2025-11-02 05:59:00 UTC
+  // 2025-11-02 01:59:00-04:00 local, first 1:59 before DST shift.
+  const first_0159 = 1762063140000;
+
+  // 2025-11-02 06:59:00 UTC
+  // 2025-11-02 01:59:00-05:00 local, second 1:59 after DST shift.
+  const second_0159 = 1762066740000;
+
+  // 2025-11-02 23:00:00 UTC
+  // 2025-11-02 18:00:00-05:00 local, evening in day of DST shift.
+  const evening = 1762124400000;
+
+  until(midnight, first_0159, zone);
+  //> 2025-11-02T00:00:00-04:00 until 2025-11-02T01:59:00-04:00 is PT1H59M
+
+  until(first_0159, midnight, zone);
+  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T00:00:00-04:00 is -PT1H59M
+
+  until(midnight, second_0159, zone);
+  //> 2025-11-02T00:00:00-04:00 until 2025-11-02T01:59:00-05:00 is PT2H59M
+
+  until(second_0159, midnight, zone);
+  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T00:00:00-04:00 is -PT1H59M
+
+  until(first_0159, second_0159, zone);
+  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T01:59:00-05:00 is PT1H
+
+  until(second_0159, first_0159, zone);
+  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T01:59:00-04:00 is PT0S
+
+  until(first_0159, evening, zone);
+  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T23:53:00-05:00 is PT22H54M
+
+  until(evening, first_0159, zone);
+  //> 2025-11-02T23:53:00-05:00 until 2025-11-02T01:59:00-04:00 is -PT22H54M
+
+  until(second_0159, evening, zone);
+  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T23:53:00-05:00 is PT22H54M
+
+  until(evening, second_0159, zone);
+  //> 2025-11-02T23:53:00-05:00 until 2025-11-02T01:59:00-05:00 is -PT21H54M
 });
 
 test('date-only utc', () => {

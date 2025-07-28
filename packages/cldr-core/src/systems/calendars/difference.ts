@@ -104,6 +104,9 @@ export class DifferenceState {
 /**
  * Calculate the difference between two dates in years, months, days, etc.
  *
+ * Specification of algorithm:
+ * https://tc39.es/proposal-temporal/#sec-temporal-differencezoneddatetime
+ *
  * Compatible with the Temporal API until and since methods:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal/ZonedDateTime/since
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal/ZonedDateTime/until
@@ -136,7 +139,9 @@ export const difference = (date1: CalendarDate, date2: CalendarDate, options: Da
     //
     millis = state.epoch2 - state.date1.unixEpoch();
   } else {
+    // Scan for time difference, adjust end date.
     [state.two, millis] = timeDifference(state);
+
     // Compute the difference between the date fields and store in the result.
     dateDifference(state, result);
   }
