@@ -82,8 +82,16 @@ const scan = (epoch: number, zone: string, days: number, minutes: number) => {
 
       const cuntil1 = cdate1.until(cdate2);
       const cuntil2 = cdate2.until(cdate1);
-      const tuntil1 = tdate1.until(tdate2, TEMPORAL_OPTS);
-      const tuntil2 = tdate2.until(tdate1, TEMPORAL_OPTS);
+
+      let tuntil1: Temporal.Duration;
+      let tuntil2: Temporal.Duration;
+      try {
+        tuntil1 = tdate1.until(tdate2, TEMPORAL_OPTS);
+        tuntil2 = tdate2.until(tdate1, TEMPORAL_OPTS);
+      } catch (e) {
+        console.log(`TEMPORAL ERROR: ${e} for start ${start} end ${end}`);
+        continue;
+      }
 
       let c1 = cldrfmt.periodString(cuntil1);
       let t1 = tempfmt.durationString(tuntil1);
@@ -100,8 +108,17 @@ const scan = (epoch: number, zone: string, days: number, minutes: number) => {
 
       const csince1 = cdate1.since(cdate2);
       const csince2 = cdate2.since(cdate1);
-      const tsince1 = tdate1.since(tdate2, TEMPORAL_OPTS);
-      const tsince2 = tdate2.since(tdate1, TEMPORAL_OPTS);
+
+      let tsince1: Temporal.Duration;
+      let tsince2: Temporal.Duration;
+
+      try {
+        tsince1 = tdate1.since(tdate2, TEMPORAL_OPTS);
+        tsince2 = tdate2.since(tdate1, TEMPORAL_OPTS);
+      } catch (e) {
+        console.log(`TEMPORAL ERROR: ${e} for start ${start} end ${end}`);
+        continue;
+      }
 
       c1 = cldrfmt.periodString(csince1);
       t1 = tempfmt.durationString(tsince1);

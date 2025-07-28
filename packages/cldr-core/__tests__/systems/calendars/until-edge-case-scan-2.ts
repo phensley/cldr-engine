@@ -116,8 +116,16 @@ const scan = (epoch: number, zone: string, positive: Permutation[], negative: Pe
 
         const cuntil1 = cldr1.until(cldr2);
         const cuntil2 = cldr2.until(cldr1);
-        const tuntil1 = temp1.until(temp2, TEMPORAL_OPTS);
-        const tuntil2 = temp2.until(temp1, TEMPORAL_OPTS);
+
+        let tuntil1: Temporal.Duration;
+        let tuntil2: Temporal.Duration;
+        try {
+          tuntil1 = temp1.until(temp2, TEMPORAL_OPTS);
+          tuntil2 = temp2.until(temp1, TEMPORAL_OPTS);
+        } catch (e) {
+          console.log(`TEMPORAL ERROR: ${e} for start ${start} added ${JSON.stringify(period)}`);
+          continue;
+        }
 
         let c1 = cldrfmt.periodString(cuntil1);
         let t1 = tempfmt.durationString(tuntil1);
@@ -134,8 +142,16 @@ const scan = (epoch: number, zone: string, positive: Permutation[], negative: Pe
 
         const csince1 = cldr1.since(cldr2);
         const csince2 = cldr2.since(cldr1);
-        const tsince1 = temp1.since(temp2, TEMPORAL_OPTS);
-        const tsince2 = temp2.since(temp1, TEMPORAL_OPTS);
+
+        let tsince1: Temporal.Duration;
+        let tsince2: Temporal.Duration;
+        try {
+          tsince1 = temp1.since(temp2, TEMPORAL_OPTS);
+          tsince2 = temp2.since(temp1, TEMPORAL_OPTS);
+        } catch (e) {
+          console.log(`TEMPORAL ERROR: ${e} for start ${start} added ${JSON.stringify(period)}`);
+          continue;
+        }
 
         c1 = cldrfmt.periodString(csince1);
         t1 = tempfmt.durationString(tsince1);
