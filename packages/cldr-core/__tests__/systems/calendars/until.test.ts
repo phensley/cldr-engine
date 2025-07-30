@@ -142,7 +142,9 @@ test('edge case 2', () => {
   expect(cuntil).toEqual(tuntil);
 });
 
-// Filed bug 1 https://github.com/js-temporal/temporal-polyfill/issues/347
+// Filed bug 1:
+// https://github.com/tc39/proposal-temporal/issues/3141
+// https://github.com/js-temporal/temporal-polyfill/issues/347
 test('temporal bug 1', () => {
   const epoch1 = 1762070460000;
   const epoch2 = 1762074000000;
@@ -158,13 +160,15 @@ test('temporal bug 1', () => {
   expect(() => tempUntil(epoch2, epoch1, VANCOUVER)).toThrowError();
 });
 
-test('bug 2 cldr', () => {
-  const toString = (d: CalendarDate) => `${d.toDateTimeString({ includeZoneOffset: true })}`;
-  const until = (epoch1: number, epoch2: number, zone: string) => {
+test('temporal bug 2 cldr result', () => {
+  // const toString = (d: CalendarDate) => `${d.toDateTimeString({ includeZoneOffset: true })}`;
+  const until = (epoch1: number, epoch2: number, zone: string): string => {
     const date1 = gregorian(epoch1, zone);
     const date2 = gregorian(epoch2, zone);
-    const result = date1.until(date2);
-    console.log(`${toString(date1)} until ${toString(date2)} is ${CLDRFMT.periodString(result)}`);
+    const until = date1.until(date2);
+    const result = CLDRFMT.periodString(until);
+    // console.log(`${toString(date1)} until ${toString(date2)} is ${result}`);
+    return result;
   };
 
   const zone = 'America/New_York';
@@ -185,44 +189,48 @@ test('bug 2 cldr', () => {
   // 2025-11-02 18:00:00-05:00 local, evening in day of DST shift.
   const evening = 1762124400000;
 
-  until(midnight, first_0159, zone);
-  //> 2025-11-02T00:00:00-04:00 until 2025-11-02T01:59:00-04:00 is PT1H59M
+  let result: string;
 
-  until(first_0159, midnight, zone);
-  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T00:00:00-04:00 is -PT1H59M
+  result = until(midnight, first_0159, zone);
+  expect(result).toEqual('1H 59M');
 
-  until(midnight, second_0159, zone);
-  //> 2025-11-02T00:00:00-04:00 until 2025-11-02T01:59:00-05:00 is PT2H59M
+  result = until(first_0159, midnight, zone);
+  expect(result).toEqual('-1H -59M');
 
-  until(second_0159, midnight, zone);
-  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T00:00:00-04:00 is -PT1H59M
+  result = until(midnight, second_0159, zone);
+  expect(result).toEqual('2H 59M');
 
-  until(first_0159, second_0159, zone);
-  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T01:59:00-05:00 is PT1H
+  result = until(second_0159, midnight, zone);
+  expect(result).toEqual('-2H -59M');
 
-  until(second_0159, first_0159, zone);
-  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T01:59:00-04:00 is PT0S
+  result = until(first_0159, second_0159, zone);
+  expect(result).toEqual('1H');
 
-  until(first_0159, evening, zone);
-  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T23:53:00-05:00 is PT22H54M
+  result = until(second_0159, first_0159, zone);
+  expect(result).toEqual('-1H');
 
-  until(evening, first_0159, zone);
-  //> 2025-11-02T23:53:00-05:00 until 2025-11-02T01:59:00-04:00 is -PT22H54M
+  result = until(first_0159, evening, zone);
+  expect(result).toEqual('17H 1M');
 
-  until(second_0159, evening, zone);
-  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T23:53:00-05:00 is PT22H54M
+  result = until(evening, first_0159, zone);
+  expect(result).toEqual('-17H -1M');
 
-  until(evening, second_0159, zone);
-  //> 2025-11-02T23:53:00-05:00 until 2025-11-02T01:59:00-05:00 is -PT21H54M
+  result = until(second_0159, evening, zone);
+  expect(result).toEqual('16H 1M');
+
+  result = until(evening, second_0159, zone);
+  expect(result).toEqual('-16H -1M');
 });
 
-test('temporal bug 2 reproduction', () => {
-  const toString = (d: Temporal.ZonedDateTime) => `${d.toPlainDateTime().toString() + d.offset}`;
-  const until = (epoch1: number, epoch2: number, zone: string) => {
+test('temporal bug 2 temporal result', () => {
+  // const toString = (d: Temporal.ZonedDateTime) => `${d.toPlainDateTime().toString() + d.offset}`;
+  const until = (epoch1: number, epoch2: number, zone: string): string => {
     const date1 = Temporal.Instant.fromEpochMilliseconds(epoch1).toZonedDateTimeISO(zone);
     const date2 = Temporal.Instant.fromEpochMilliseconds(epoch2).toZonedDateTimeISO(zone);
-    const result = date1.until(date2, { largestUnit: 'year', smallestUnit: 'millisecond' });
-    console.log(`${toString(date1)} until ${toString(date2)} is ${result.toString()}`);
+    const until = date1.until(date2, { largestUnit: 'year', smallestUnit: 'millisecond' });
+    const result = TEMPFMT.durationString(until);
+    // console.log(`${toString(date1)} until ${toString(date2)} is ${result}`);
+    return result;
   };
 
   const zone = 'America/New_York';
@@ -243,35 +251,37 @@ test('temporal bug 2 reproduction', () => {
   // 2025-11-02 18:00:00-05:00 local, evening in day of DST shift.
   const evening = 1762124400000;
 
-  until(midnight, first_0159, zone);
-  //> 2025-11-02T00:00:00-04:00 until 2025-11-02T01:59:00-04:00 is PT1H59M
+  let result: string;
 
-  until(first_0159, midnight, zone);
-  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T00:00:00-04:00 is -PT1H59M
+  result = until(midnight, first_0159, zone);
+  expect(result).toEqual('1H 59M');
 
-  until(midnight, second_0159, zone);
-  //> 2025-11-02T00:00:00-04:00 until 2025-11-02T01:59:00-05:00 is PT2H59M
+  result = until(first_0159, midnight, zone);
+  expect(result).toEqual('-1H -59M');
 
-  until(second_0159, midnight, zone);
-  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T00:00:00-04:00 is -PT1H59M
+  result = until(midnight, second_0159, zone);
+  expect(result).toEqual('2H 59M');
 
-  until(first_0159, second_0159, zone);
-  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T01:59:00-05:00 is PT1H
+  result = until(second_0159, midnight, zone);
+  expect(result).toEqual('-1H -59M'); // cldr returns -2H -59M
 
-  until(second_0159, first_0159, zone);
-  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T01:59:00-04:00 is PT0S
+  result = until(first_0159, second_0159, zone);
+  expect(result).toEqual('1H');
 
-  until(first_0159, evening, zone);
-  //> 2025-11-02T01:59:00-04:00 until 2025-11-02T23:53:00-05:00 is PT22H54M
+  result = until(second_0159, first_0159, zone);
+  expect(result).toEqual(''); // cldr returns 1H
 
-  until(evening, first_0159, zone);
-  //> 2025-11-02T23:53:00-05:00 until 2025-11-02T01:59:00-04:00 is -PT22H54M
+  result = until(first_0159, evening, zone);
+  expect(result).toEqual('17H 1M');
 
-  until(second_0159, evening, zone);
-  //> 2025-11-02T01:59:00-05:00 until 2025-11-02T23:53:00-05:00 is PT22H54M
+  result = until(evening, first_0159, zone);
+  expect(result).toEqual('-17H -1M');
 
-  until(evening, second_0159, zone);
-  //> 2025-11-02T23:53:00-05:00 until 2025-11-02T01:59:00-05:00 is -PT21H54M
+  result = until(second_0159, evening, zone);
+  expect(result).toEqual('17H 1M'); // cldr returns 16H 1M
+
+  result = until(evening, second_0159, zone);
+  expect(result).toEqual('-16H -1M');
 });
 
 test('date-only utc', () => {

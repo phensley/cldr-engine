@@ -7,6 +7,27 @@ import { timePeriod, TimePeriod, TimePeriodFieldFlag, timePeriodFieldFlags } fro
 import { adjustYM, clampYMD, toYMD, unixEpochFromJD, YearMonth, YearMonthDay } from './math';
 import { CalendarDateInternals } from './types';
 
+/**
+ * This file implements Temporal-compatible date difference, underpinning
+ * the CalendarDate until/since methods.
+ *
+ * I've filled a bug against the specification and polyfill library that
+ * affects dates spanning the Fall DST boundary, where clocks are set
+ * back causing some wall clock times to occur twice, e.g.
+ *  2025-11-02 01:01:00-07:00 followed by 01:01:00-08:00 1 hour later.
+ *
+ * Both the polyfill and Firefox throw a RangeError which seems unexpected
+ * as these are otherwise normal zoned timestamps:
+ * https://github.com/js-temporal/temporal-polyfill/issues/347
+ * https://github.com/tc39/proposal-temporal/issues/3141
+ *
+ * A related issue involves off-by-1-hour results for times surrounding
+ * the same boundary.
+ *
+ * I've solved both of the above issues in this library by detecting whether
+ * two CalendarDate occur on the same calendar day, and thus skipping the
+ * date-differencing logic entirely opting for a pure time-of-day difference.
+ */
 const DEFAULT_FLAGS =
   TimePeriodFieldFlag.YEAR |
   TimePeriodFieldFlag.MONTH |
