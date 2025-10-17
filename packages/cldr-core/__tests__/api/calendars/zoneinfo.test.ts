@@ -32,7 +32,7 @@ test('timezone exemplar cities', () => {
 
   tz = api.timeZoneInfo(utc);
   expect(tz.id).toEqual(utc);
-  expect(tz.city).toEqual({ name: 'Unknown City' });
+  expect(tz.city).toEqual({ name: 'Unknown Location' });
   expect(tz.metazone).toEqual('GMT');
   expect(tz.latitude).toEqual(0);
   expect(tz.longitude).toEqual(0);
@@ -51,7 +51,7 @@ test('timezone exemplar cities', () => {
 
   tz = api.timeZoneInfo(unk);
   expect(tz.id).toEqual(unk);
-  expect(tz.city).toEqual({ name: 'Unknown City' });
+  expect(tz.city).toEqual({ name: 'Unknown Location' });
   expect(tz.metazone).toEqual('');
   expect(tz.names.long).toEqual({
     generic: '',
@@ -66,7 +66,7 @@ test('timezone exemplar cities', () => {
 
   tz = api.timeZoneInfo(invalid);
   expect(tz.id).toEqual(unk);
-  expect(tz.city).toEqual({ name: 'Unknown City' });
+  expect(tz.city).toEqual({ name: 'Unknown Location' });
   expect(tz.names.long).toEqual({
     generic: '',
     standard: '',

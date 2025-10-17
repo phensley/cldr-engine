@@ -85,7 +85,7 @@ test('raw formats', () => {
   // VVVV
 
   res = format(utc, 'V');
-  expect(res).toEqual(['unk', 'Etc/UTC', 'Unknown City', 'GMT', '', '']);
+  expect(res).toEqual(['unk', 'Etc/UTC', 'Unknown Location', 'GMT', '', '']);
 
   res = format(tarawa, 'V');
   expect(res).toEqual(['unk', 'Pacific/Tarawa', 'Tarawa', 'Tarawa Time', '', '']);

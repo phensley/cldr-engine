@@ -1,6 +1,6 @@
-import { calendarsApi } from '../../_helpers';
 import { CalendarType, DateRawFormatOptions, FormatWidthType, GregorianDate, ZonedDateTime } from '../../../src';
 import { CalendarConstants } from '../../../src/systems/calendars/constants';
+import { calendarsApi } from '../../_helpers';
 
 const unix = (date: number, zoneId: string): ZonedDateTime => ({ date, zoneId });
 
@@ -669,7 +669,7 @@ test('intervals', () => {
   expect(s).toEqual('Saturday, 10 March 2018');
 
   s = api.formatDateInterval(mar11, mar14, { skeleton: 'yMMMd' });
-  expect(s).toEqual('10–14 Mar 2018');
+  expect(s).toEqual('10 – 14 Mar 2018');
 
   api = calendarsApi('es');
   s = api.formatDate(mar11, { date: 'full' });
