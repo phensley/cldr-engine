@@ -1,5 +1,5 @@
 import { Decimal, DecimalConstants } from '@phensley/decimal';
-import { formatSource, Code, HEADER } from './util';
+import { Code, formatSource, HEADER } from './util';
 
 const generate = (sample: string): string[] => {
   if (sample.indexOf('~') === -1) {
@@ -17,7 +17,6 @@ const generate = (sample: string): string[] => {
     res.push(s.toString());
     s = s.add(incr);
   }
-  // console.log(`${s.toString()} ${e.toString()} incr ${incr.toString()}`;
   return res;
 };
 
@@ -43,7 +42,6 @@ export const getPlurals = (data: any): Code[] => {
     Object.keys(langs).forEach((lang) => {
       for (const group of langs[lang]) {
         const [category, cases] = group;
-        // console.log(category, cases, '!');
         const r: string[] = [];
         for (const c of cases) {
           for (const s of generate(c)) {

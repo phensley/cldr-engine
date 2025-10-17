@@ -19,6 +19,16 @@ test('invalid calendar type', () => {
   expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
 });
 
+test('invalid calendar type and extension', () => {
+  const mar11 = unix(MARCH_11_2018_070025_UTC, LOS_ANGELES);
+
+  const api = calendarsApi('en-GU-u-ca-foobar');
+  let s: string;
+
+  s = api.formatDate(mar11, { datetime: 'full', ca: 'invalid' as CalendarType });
+  expect(s).toEqual('Saturday, March 10, 2018 at 11:00:25 PM Pacific Standard Time');
+});
+
 test('invalid epoch timestamp', () => {
   const api = calendarsApi('en');
   let s: string;

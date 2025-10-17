@@ -131,14 +131,19 @@ export class CalendarInternalsImpl implements CalendarInternals {
   selectCalendar(bundle: Bundle, ca?: CalendarType): CalendarType {
     let calendar = this.supportedCalendar(ca) || this.supportedCalendar(bundle.calendarSystem());
     if (!calendar) {
-      const prefs = calendarPrefData[bundle.region()] || calendarPrefData['001'];
+      const prefs = calendarPrefData[bundle.region()] || [];
       for (const id of prefs) {
+        // The calendar preference data current as of CLDR 48) will always choose
+        // a calendar that is supported, so the else will never fire.
         calendar = this.supportedCalendar(calendarIds[id]);
+        /* istanbul ignore else -- @preserve */
         if (calendar) {
           return calendar;
         }
       }
-      return 'gregory';
+      // Fallback to World supported calendars, which will select Gregorian
+      const index = calendarPrefData['001'][0];
+      return calendarIds[index] as CalendarType;
     }
     return calendar;
   }

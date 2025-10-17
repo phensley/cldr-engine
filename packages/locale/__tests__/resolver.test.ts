@@ -73,4 +73,8 @@ test('aliases', () => {
   expect(LanguageResolver.substituteAliases('eng-Latn-US')).toEqual(parse('en-Latn-US'));
   expect(LanguageResolver.substituteAliases(parse('eng-Latn-US'))).toEqual(parse('en-Latn-US'));
   expect(LanguageResolver.substituteAliases('cmn')).toEqual(parse('zh'));
+  expect(LanguageResolver.substituteAliases('cmn')).toEqual(parse('zh'));
+
+  expect(LanguageResolver.substituteAliases('aam')).toEqual(parse('aas'));
+  expect(LanguageResolver.substituteAliases('sgn-US')).toEqual(parse('ase-US'));
 });

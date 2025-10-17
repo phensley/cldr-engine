@@ -353,12 +353,8 @@ export class CalendarManager {
       } else {
         // RULE 1c. ELSE format the date + time standalone
         const timeQuery = query.split();
-        if (query.isDate) {
-          req.date = this.matchAvailablePattern(patterns, start, query, params);
-        }
-        if (timeQuery.isTime) {
-          req.time = this.matchAvailablePattern(patterns, start, timeQuery, params);
-        }
+        req.date = this.matchAvailablePattern(patterns, start, query, params);
+        req.time = this.matchAvailablePattern(patterns, start, timeQuery, params);
         return req;
       }
     }

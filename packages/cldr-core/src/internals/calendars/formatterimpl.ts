@@ -459,9 +459,7 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
    * Timezone: short/long localized GMT format.
    */
   private timezone_O(ctx: CalendarContext<T>, node: [string, number]): string {
-    const r = node[1] === 1 || node[1] === 4 ? this._wrapGMT(ctx, node[1] === 1) : '';
-    // console.log(`XXX ${r} ${JSON.stringify(node)}`);
-    return r;
+    return node[1] === 1 || node[1] === 4 ? this._wrapGMT(ctx, node[1] === 1) : '';
   }
 
   /**
