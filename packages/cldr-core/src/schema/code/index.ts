@@ -1,5 +1,5 @@
 import { KeyIndex, KeyIndexMap } from '@phensley/cldr-types';
-import { origin, KeyIndexImpl, Origin } from '../instructions';
+import { KeyIndexImpl, origin, Origin } from '../instructions';
 import {
   BUDDHIST,
   BUDDHIST_INDICES,
@@ -170,6 +170,10 @@ export class CodeBuilder {
       UNITS,
       CONTEXT_TRANSFORM,
     ];
+
+    if (!this.config.calendars || !this.config.calendars.length) {
+      this.config.calendars = ['gregory'];
+    }
 
     for (const name of this.config.calendars || []) {
       switch (name) {

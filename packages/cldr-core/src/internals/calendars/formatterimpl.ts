@@ -1,11 +1,11 @@
 import { CalendarSchema, ContextTransformFieldType, TimeZoneSchema, Vector2Arrow } from '@phensley/cldr-types';
 
 import { GeneralInternals } from '../../internals/internals';
-import { Bundle } from '../../resource/bundle';
-import { Internals } from '../internals';
-import { CalendarDate } from '../../systems/calendars';
 import { DateTimeNode } from '../../parsing/date';
+import { Bundle } from '../../resource/bundle';
+import { CalendarDate } from '../../systems/calendars';
 import { AbstractValue } from '../../utils/render';
+import { Internals } from '../internals';
 import { CalendarContext, CalendarFormatter } from './formatter';
 import { getTZC } from './zoneutil';
 
@@ -459,7 +459,9 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
    * Timezone: short/long localized GMT format.
    */
   private timezone_O(ctx: CalendarContext<T>, node: [string, number]): string {
-    return node[1] === 1 || node[1] === 4 ? this._wrapGMT(ctx, node[1] === 1) : '';
+    const r = node[1] === 1 || node[1] === 4 ? this._wrapGMT(ctx, node[1] === 1) : '';
+    // console.log(`XXX ${r} ${JSON.stringify(node)}`);
+    return r;
   }
 
   /**

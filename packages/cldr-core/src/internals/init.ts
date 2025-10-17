@@ -1,6 +1,5 @@
 import { KeyIndexMap, Schema } from '@phensley/cldr-types';
 import { CodeBuilder, SchemaConfig } from '../schema';
-import { buildSchema } from './schema';
 import {
   CalendarInternals,
   DateFieldInternals,
@@ -9,13 +8,14 @@ import {
   NumberInternals,
   UnitInternals,
 } from './internals';
+import { buildSchema } from './schema';
 
+import { checksumIndices } from '../resource/checksum';
 import { CalendarInternalsImpl } from './calendars';
 import { DateFieldInternalsImpl } from './datefields';
 import { GeneralInternalsImpl } from './general';
 import { NumberInternalsImpl } from './numbers';
 import { UnitsInternalImpl } from './units';
-import { checksumIndices } from '../resource/checksum';
 
 /**
  * @internal

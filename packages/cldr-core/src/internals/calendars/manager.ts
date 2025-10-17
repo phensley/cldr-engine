@@ -1,16 +1,16 @@
 import { DateTimePatternField, DateTimePatternFieldType } from '@phensley/cldr-types';
 import { Cache } from '@phensley/cldr-utils';
 
-import { Internals } from '../internals';
-import { Bundle } from '../../resource';
 import { DateFormatOptions, DateIntervalFormatOptions } from '../../common';
-import { DateTimeNode } from '../../parsing/date';
-import { CalendarDate } from '../../systems/calendars';
 import { NumberParams } from '../../common/private';
+import { DateTimeNode } from '../../parsing/date';
+import { Bundle } from '../../resource';
+import { CalendarDate } from '../../systems/calendars';
+import { Internals } from '../internals';
+import { Field } from './fields';
 import { CalendarPatterns, GregorianPatterns } from './patterns';
 import { DateSkeleton, SkeletonField } from './skeleton';
 import { DateFormatRequest, DateIntervalFormatRequest } from './types';
-import { Field } from './fields';
 
 const maskedFOVDFields: Field[] = [
   Field.ERA,
@@ -34,7 +34,7 @@ export class CalendarManager {
     private readonly internals: Internals,
   ) {
     // calendars config array should always be non-empty
-    this.availableCalendars = new Set(internals.config.calendars || /* istanbul ignore next -- @preserve */ []);
+    this.availableCalendars = new Set(internals.config.calendars || []);
     const schema = internals.schema;
     this.patternCache = new Cache((calendar: string) => {
       if (this.availableCalendars.has(calendar)) {
