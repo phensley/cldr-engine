@@ -40,4 +40,4 @@ export const getCurrencyFractions = (code: string): CurrencyFractions =>
  * @public
  */
 export const getCurrencyForRegion = (region: string): CurrencyType =>
-  (currencyRegions[region] as CurrencyType) || 'USD';
+  (region !== 'ZZ' && (currencyRegions[region] as CurrencyType)) || 'USD';

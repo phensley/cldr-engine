@@ -1,12 +1,12 @@
 import { CalendarSchema, PluralType } from '@phensley/cldr-types';
 import { coerceDecimal } from '@phensley/decimal';
 
-import { timeData, timeStrings } from './autogen.timedata';
 import { Internals } from '../../internals';
+import { DateTimeNode, parseDatePattern } from '../../parsing/date';
 import { Bundle } from '../../resource';
-import { DatePatternMatcher, DatePatternMatcherEntry, DateSkeleton, DateSkeletonParser } from './skeleton';
-import { parseDatePattern, DateTimeNode } from '../../parsing/date';
 import { CalendarDate } from '../../systems/calendars';
+import { timeData, timeStrings } from './autogen.timedata';
+import { DatePatternMatcher, DatePatternMatcherEntry, DateSkeleton, DateSkeletonParser } from './skeleton';
 
 export interface CachedSkeletonRequest {
   dateSkel?: DateSkeleton;
