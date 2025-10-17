@@ -35,7 +35,7 @@ test('add likely subtags', () => {
 
   expect(addLikelySubtags('be')).toEqual(parse('be-Cyrl-BY'));
   expect(addLikelySubtags('be-BY')).toEqual(parse('be-Cyrl-BY'));
-  expect(addLikelySubtags('und-BY')).toEqual(parse('be-Cyrl-BY'));
+  expect(addLikelySubtags('und-BY')).toEqual(parse('ru-Cyrl-BY'));
 
   expect(addLikelySubtags('en-u-cu-usd')).toEqual(parse('en-Latn-US-u-cu-usd'));
 
@@ -61,7 +61,7 @@ test('remove likely subtags', () => {
 
   expect(removeLikelySubtags('be-Cyrl-BY')).toEqual(parse('be'));
   expect(removeLikelySubtags('be-BY')).toEqual(parse('be'));
-  expect(removeLikelySubtags('und-BY')).toEqual(parse('be'));
+  expect(removeLikelySubtags('und-BY')).toEqual(parse('ru-Zzzz-BY'));
 
   expect(removeLikelySubtags('en-US-u-cu-usd')).toEqual(parse('en-u-cu-usd'));
 

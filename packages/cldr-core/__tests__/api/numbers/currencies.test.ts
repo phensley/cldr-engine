@@ -1,8 +1,8 @@
 import { ContextType, CurrencyType } from '@phensley/cldr-types';
 import { Part } from '@phensley/decimal';
 
-import { numbersApi } from '../../_helpers';
 import { CurrencyFormatOptions, CurrencyFormatStyleType } from '../../../src';
+import { numbersApi } from '../../_helpers';
 
 test('currency fractions', () => {
   const api = numbersApi('en');
@@ -219,13 +219,13 @@ test('currency short', () => {
 
   e = numbersApi('es-419');
   s = e.formatCurrency('-12345.6789', 'EUR', opts);
-  expect(s).toEqual('-EUR 12 K');
+  expect(s).toEqual('-EUR 12 k');
 
   s = e.formatCurrency('-12345.6789', 'GBP', opts);
-  expect(s).toEqual('-GBP 12 K');
+  expect(s).toEqual('-GBP 12 k');
 
   s = e.formatCurrency('-12345.6789', 'JPY', opts);
-  expect(s).toEqual('-JPY 12 K');
+  expect(s).toEqual('-JPY 12 k');
 
   e = numbersApi('zh');
   s = e.formatCurrency('999999.987', 'USD', opts);

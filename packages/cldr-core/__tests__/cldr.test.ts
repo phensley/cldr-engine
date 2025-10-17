@@ -1,4 +1,4 @@
-import { CurrencyFormatOptions, CLDRFramework, NumberSystemInfo, Quantity, SchemaConfig } from '../src';
+import { CLDRFramework, CurrencyFormatOptions, NumberSystemInfo, Quantity, SchemaConfig } from '../src';
 import { getCLDR } from './_helpers';
 
 const { parseLanguageTag, resolveLocale } = CLDRFramework;
@@ -124,26 +124,26 @@ test('resolving locales', () => {
   expect(tag.compact()).toEqual('es-Latn-ES');
 });
 
-test('async loader', () => {
+test('async loader', async () => {
   const framework = getCLDR();
   const en = framework.get('en');
   const es = framework.get('es');
 
   const path = ['bundle', '_id'];
 
-  expect(framework.getAsync('en')).resolves.toEqual(en);
-  expect(framework.getAsync('es')).resolves.toEqual(es);
+  await expect(framework.getAsync('en')).resolves.toEqual(en);
+  await expect(framework.getAsync('es')).resolves.toEqual(es);
 
-  expect(framework.getAsync('xx')).rejects.toContain('no such file');
+  await expect(framework.getAsync('xx')).rejects.toContain('no such file');
 
-  expect(framework.getAsync('de')).resolves.toHaveProperty(path, 'de-Latn-DE');
-  expect(framework.getAsync('zh-TW')).resolves.toHaveProperty(path, 'zh-Hant-TW');
+  await expect(framework.getAsync('de')).resolves.toHaveProperty(path, 'de-Latn-DE');
+  await expect(framework.getAsync('zh-TW')).resolves.toHaveProperty(path, 'zh-Hant-TW');
 
-  expect(framework.getAsync('de')).resolves.toHaveProperty(path, 'de-Latn-DE');
-  expect(framework.getAsync('zh-TW')).resolves.toHaveProperty(path, 'zh-Hant-TW');
+  await expect(framework.getAsync('de')).resolves.toHaveProperty(path, 'de-Latn-DE');
+  await expect(framework.getAsync('zh-TW')).resolves.toHaveProperty(path, 'zh-Hant-TW');
 
   const l = resolveLocale('gu');
-  expect(framework.getAsync(l)).resolves.toHaveProperty(path, 'gu-Gujr-IN');
+  await expect(framework.getAsync(l)).resolves.toHaveProperty(path, 'gu-Gujr-IN');
 });
 
 test('async await loader', async () => {
@@ -187,8 +187,8 @@ test('framework config', () => {
 
   CLDRFramework.setDefaultConfig(undefined as unknown as SchemaConfig);
   framework = new CLDRFramework({});
-  expect(framework.config()).toEqual({});
+  expect(framework.config()).toEqual({ calendars: ['gregory'] });
 
   framework = new CLDRFramework({ config });
-  expect(framework.config()).toEqual(config);
+  expect(framework.config()).toEqual({ ...config, calendars: ['gregory'] });
 });
