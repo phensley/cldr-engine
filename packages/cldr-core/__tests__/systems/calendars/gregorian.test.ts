@@ -1,6 +1,6 @@
-import { DayOfWeek } from '../../../src/systems/calendars/fields';
-import { CalendarConstants } from '../../../src/systems/calendars/constants';
 import { CalendarDate, GregorianDate } from '../../../src';
+import { CalendarConstants } from '../../../src/systems/calendars/constants';
+import { DayOfWeek } from '../../../src/systems/calendars/fields';
 
 const make = (e: number, z: string) => GregorianDate.fromUnixEpoch(e, z, DayOfWeek.SUNDAY, 1);
 
@@ -31,6 +31,14 @@ test('string methods', () => {
   let q = d.add({ millis: -234 });
   expect(q.toTimeString({ optionalMilliseconds: true })).toEqual('11:31:21');
   expect(q.toTimeString({ optionalMilliseconds: false })).toEqual('11:31:21.000');
+
+  d = make(n, 'Europe/Paris');
+  expect(d.toString()).toEqual('Gregorian 2025-07-08 17:31:21.234 Europe/Paris');
+  expect(d.toDateString()).toEqual('2025-07-08');
+  expect(d.toTimeString()).toEqual('17:31:21.234');
+  expect(d.toTimeString({ includeZoneId: true })).toEqual('17:31:21.234 Europe/Paris');
+  expect(d.toTimeString({ includeZoneId: false })).toEqual('17:31:21.234');
+  expect(d.toTimeString({ includeZoneOffset: true })).toEqual('17:31:21.234+02:00');
 });
 
 test('gregorian date', () => {
@@ -616,4 +624,23 @@ test('constructor', () => {
 
   d = GregorianDate.fromUnixEpoch(0, 'Asia/Tokyo');
   expect(d.toString()).toEqual('Gregorian 1970-01-01 09:00:00.000 Asia/Tokyo');
+});
+
+test('days in month/year', () => {
+  let d: GregorianDate;
+
+  // Wednesday, April 11, 2018 11:59:59.123 PM UTC
+  d = make(1523491199123, 'UTC');
+
+  // Test protected methods
+  expect((d as any).daysInMonth(2025, 0)).toEqual(31);
+  expect((d as any).daysInMonth(2022, 0)).toEqual(31);
+
+  // Gregorian leap years
+  expect((d as any).daysInMonth(2025, 1)).toEqual(28);
+  expect((d as any).daysInMonth(2024, 1)).toEqual(29);
+
+  // Gregorian leap years
+  expect((d as any).daysInYear(2025)).toEqual(365);
+  expect((d as any).daysInYear(2024)).toEqual(366);
 });

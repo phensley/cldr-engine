@@ -79,11 +79,11 @@ export const add = (orig: CalendarDate, added: Partial<TimePeriod>): [number, nu
   // Convert Julian day and milliseconds to Unix epoch to find timezone offset.
   let epoch = unixEpochFromJD(jd, millis);
 
-  // Get the wall clock timezone offset.
-  const wall = TZ.fromWall(orig.timeZoneId(), epoch);
-  if (wall) {
-    epoch = wall[0];
-  }
+  // Get the wall clock timezone offset. We use the CalendarDate's timezoneId
+  // knowing it will always resolve to a valid timezone record, since constructing
+  // an instance must pass through the timezone resolution process.
+  const wall = TZ.fromWall(orig.timeZoneId(), epoch)!;
+  epoch = wall[0];
 
   // Add the time components.
   epoch += timeToMillis(truncated);

@@ -104,8 +104,8 @@ const cldrUntil = (epoch1: number, epoch2: number, zone: string): string => {
   const cldr1 = gregorian(epoch1, zone);
   const cldr2 = gregorian(epoch2, zone);
   const cuntil = cldr1.until(cldr2);
-  console.log(CLDRFMT.dateTimeString(cldr1), cldr1.toISOString());
-  console.log(CLDRFMT.dateTimeString(cldr2), cldr2.toISOString());
+  // console.log(CLDRFMT.dateTimeString(cldr1), cldr1.toISOString());
+  // console.log(CLDRFMT.dateTimeString(cldr2), cldr2.toISOString());
   return CLDRFMT.periodString(cuntil);
 };
 
@@ -113,7 +113,7 @@ const tempUntil = (epoch1: number, epoch2: number, zone: string): string => {
   const temp1 = Temporal.Instant.fromEpochMilliseconds(epoch1).toZonedDateTimeISO(zone);
   const temp2 = Temporal.Instant.fromEpochMilliseconds(epoch2).toZonedDateTimeISO(zone);
   const tuntil = temp1.until(temp2, { largestUnit: 'year', smallestUnit: 'millisecond' });
-  console.log(TEMPFMT.dateTimeString(temp1), TEMPFMT.dateTimeString(temp2));
+  // console.log(TEMPFMT.dateTimeString(temp1), TEMPFMT.dateTimeString(temp2));
   return TEMPFMT.durationString(tuntil);
 };
 

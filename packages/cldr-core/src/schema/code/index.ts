@@ -171,6 +171,9 @@ export class CodeBuilder {
       CONTEXT_TRANSFORM,
     ];
 
+    // TODO: upgrading to CLDR 48 BETA 3 caused some tests to fail when
+    // the calendar list was empty. For now we ensure it always contains
+    // 'gregory'.
     if (!this.config.calendars || !this.config.calendars.length) {
       this.config.calendars = ['gregory'];
     }

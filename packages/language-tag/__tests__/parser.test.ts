@@ -1,4 +1,4 @@
-import { parseLanguageTag } from '../src';
+import { LanguageTag, parseLanguageTag } from '../src';
 
 const compact = (s: string) => parseLanguageTag(s).compact();
 const expanded = (s: string) => parseLanguageTag(s).expanded();
@@ -34,6 +34,8 @@ test('extlang subtags', () => {
   // Extlangs are currently parsed but ignored.
   expect(compact('ar-aao')).toEqual('ar');
   expect(compact('en-abc-def-us')).toEqual('en-US');
+
+  expect(parseLanguageTag('arbv-arb')).toEqual(new LanguageTag('arbv', undefined, 'ARB'));
 });
 
 test('private use', () => {

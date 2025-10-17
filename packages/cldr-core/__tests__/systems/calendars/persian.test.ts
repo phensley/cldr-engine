@@ -83,3 +83,21 @@ test('subtract', () => {
   end = start.subtract({ year: -1, month: -1, day: -1 });
   expect(end.toString()).toEqual('Persian 1398-02-23 23:59:59.123 Etc/UTC');
 });
+
+test('days in month/year', () => {
+  let d: PersianDate;
+
+  d = make(APR_11_2018, 'UTC');
+
+  // Test protected methods
+  expect((d as any).daysInMonth(2025, 0)).toEqual(31);
+  expect((d as any).daysInMonth(2022, 0)).toEqual(31);
+
+  // Persian leap years
+  expect((d as any).daysInMonth(2025, 11)).toEqual(29);
+  expect((d as any).daysInMonth(2022, 11)).toEqual(30);
+
+  // Persian leap years
+  expect((d as any).daysInYear(2022)).toEqual(366);
+  expect((d as any).daysInYear(2025)).toEqual(365);
+});

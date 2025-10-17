@@ -1,14 +1,13 @@
 import {
+  LanguageTag,
   parseLanguageTag,
   substituteRegionAliases,
-  LanguageTag,
   LanguageTagField as Tag,
 } from '@phensley/language-tag';
 
-import { FastTag, LanguageAliasMap } from './util';
-import { stringToObject } from './util';
 import { languageAliasRaw } from './autogen.aliases';
 import { likelySubtags } from './autogen.subtags';
+import { FastTag, LanguageAliasMap, stringToObject } from './util';
 
 // Helper to cast LanguageTag to access protected fields
 interface FakeLanguageTag {
