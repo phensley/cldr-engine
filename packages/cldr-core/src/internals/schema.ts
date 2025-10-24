@@ -1,4 +1,5 @@
 import { KeyIndex, Schema } from '@phensley/cldr-types';
+import { Decimal } from '@phensley/decimal';
 import {
   Digits,
   DigitsArrowImpl,
@@ -12,7 +13,6 @@ import {
   Vector,
   VectorArrowImpl,
 } from '../schema';
-import { Decimal } from '@phensley/decimal';
 import { leftPad } from '../utils/string';
 
 /**
@@ -50,13 +50,10 @@ const elapsed = (start: [number, number], end: [number, number]): string =>
  */
 export class SchemaBuilder {
   private generator: Generator = new Generator();
-  private captureTimes: boolean;
   private _times: [string, string][] = [];
   private origin!: Origin;
 
-  constructor(debug: boolean) {
-    this.captureTimes = debug && process !== undefined && process.hrtime !== undefined;
-  }
+  constructor(private debug: boolean) {}
 
   construct(obj: Schema, inst: Instruction): void {
     switch (inst.type) {
@@ -95,16 +92,16 @@ export class SchemaBuilder {
   private constructOrigin(obj: any, inst: Origin): void {
     this.origin = inst;
 
-    const capture = this.captureTimes;
+    const emit = this.debug && typeof process !== 'undefined';
     for (const i of inst.block) {
-      const start: [number, number] = capture ? process.hrtime() : [0, 0];
+      const start: [number, number] = emit ? process.hrtime() : [0, 0];
       this.construct(obj, i);
-      const end: [number, number] = capture ? process.hrtime() : [0, 0];
-      if (capture) {
+      const end: [number, number] = emit ? process.hrtime() : [0, 0];
+      if (this.debug) {
         this._times.push([i.identifier, elapsed(start, end)]);
       }
     }
-    if (capture) {
+    if (this.debug) {
       console.log('Scope construct times (microseconds):');
       for (const t of this._times) {
         console.log(leftPad(t[0], 20), t[1]);

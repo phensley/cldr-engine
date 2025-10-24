@@ -6,8 +6,8 @@ import { join } from 'path';
 import { LRU } from '@phensley/cldr-utils';
 import { LanguageResolver } from '@phensley/locale';
 
-import { Bundle, Pack } from '../../src/resource';
 import { CLDRFramework, SchemaConfig } from '../../src';
+import { Bundle, Pack } from '../../src/resource';
 import { VERSION } from '../../src/utils/version';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -37,6 +37,7 @@ export const customFramework = (path: string, config: SchemaConfig): CLDRFramewo
   const loader = (_lang: string) => fs.readFileSync(path).toString('utf-8');
   return new CLDRFramework({
     config,
+    debug: true,
     loader,
   });
 };
