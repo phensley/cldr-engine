@@ -1,7 +1,7 @@
-import { defineConfig } from 'eslint/config';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 import prettier from 'eslint-plugin-prettier';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   {
@@ -41,7 +41,7 @@ export default defineConfig([
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/triple-slash-reference': 'off',
       '@typescript-eslint/no-this-alias': 'off',
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_.*$' }],
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_.*$', varsIgnorePattern: '^_.*$' }],
       '@typescript-eslint/no-use-before-define': 'off',
       // warn prettier for now
       'prettier/prettier': 'warn',

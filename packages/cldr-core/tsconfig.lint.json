@@ -1,7 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": ".scratch"
+    "outDir": ".scratch",
+    "types": ["vitest/globals", "node"]
   },
   "include": ["src/**/*", "__benchmarks__/**/*", "__tests__/**/*"]
 }
