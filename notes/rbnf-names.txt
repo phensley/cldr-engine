@@ -60,6 +60,16 @@ az:
    spellout-numbering-year
    spellout-ordinal
 
+ba:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 be:
    digits-ordinal
    spellout-cardinal-feminine
@@ -143,6 +153,16 @@ cs:
    spellout-cardinal-neuter
    spellout-numbering
    spellout-numbering-year
+
+cv:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
 
 cy:
    digits-ordinal
@@ -534,9 +554,12 @@ ka:
 kk:
    digits-ordinal
    spellout-cardinal
+   spellout-cardinal-verbose
    spellout-numbering
+   spellout-numbering-verbose
    spellout-numbering-year
    spellout-ordinal
+   spellout-ordinal-verbose
 
 kl:
    digits-ordinal
@@ -855,6 +878,16 @@ qu:
    spellout-numbering-year
    spellout-ordinal
 
+rm:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
+
 ro:
    digits-ordinal
    spellout-cardinal-feminine
@@ -979,6 +1012,16 @@ se:
    spellout-cardinal
    spellout-numbering
    spellout-numbering-year
+
+shn:
+   digits-ordinal
+   spellout-cardinal
+   spellout-cardinal-verbose
+   spellout-numbering
+   spellout-numbering-verbose
+   spellout-numbering-year
+   spellout-ordinal
+   spellout-ordinal-verbose
 
 si:
    digits-ordinal
