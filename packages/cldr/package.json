@@ -68,6 +68,6 @@
   },
   "devDependencies": {
     "@phensley/cldr-compiler": "workspace:~1.13.1",
-    "@types/node": "^24.9.1"
+    "@types/node": "^24.10.0"
   }
 }

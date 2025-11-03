@@ -50,6 +50,6 @@
   },
   "devDependencies": {
     "@js-temporal/polyfill": "0.5.1",
-    "@types/node": "^24.9.1"
+    "@types/node": "^24.10.0"
   }
 }
