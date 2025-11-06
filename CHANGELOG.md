@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 This project uses a **modified semantic versioning** scheme. See [README](README.md#versioning) for more details.
 
+## [1.14.0]
+
+## Fixed/Changed
+
+- Upgrade to [CLDR v48.0.0](https://cldr.unicode.org/downloads/cldr-48)
+
+## [1.13.1]
+
+## Fixed/Changed
+
+- Fix for [Temporal date difference spec bug](https://github.com/tc39/proposal-temporal/issues/3141).
+
+## [1.13.0]
+
+## Fixed/Changed
+
+- [Temporal](https://tc39.es/proposal-temporal/docs/)-compatible date math and date difference:
+  - New `CalendarDate` `until` and `since` methods and modification of existing `add`, `subtract`, and `difference` methods to be Temporal-compatible.
+  - Only integers can be used when adding to a date instance.
+- Improvements to `CalendarDate.relativeTime`.
+- Exposed currency functions globally
+- Added more fine-grained `CalendarDate` to-string methods.
+
 ## [1.12.2]
 
 ## Fixed/Changed
@@ -319,14 +342,12 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 ### Added
 
 - The `phensley/timezone` package includes a new `TZ.zoneMeta` method to return metadata for a timezone. This can be useful for displaying user interfaces for choosing a timezone. The new properties are:
-
   - `stdoffset` - Current standard offset, in milliseconds.
   - `latitude` - Latitude to 6 decimal places, for the timezone's "principal location"
   - `longitude` - Latitude to 6 decimal places, for the timezone's "principal location"
   - `countries` - List of ISO 3166 2-letter country codes for countries which overlap the timezone.
 
 - The `cldr.Calendars.timeZoneInfo` result `TimeZoneInfo` now includes the same properties as `TZ.zoneMeta` above, plus the following property:
-
   - `metazone` Current [CLDR metazone](http://www.unicode.org/reports/tr35/tr35-dates.html#Metazone_Names) for the timezone.
 
 ## [1.2.1]
@@ -345,6 +366,9 @@ This project uses a **modified semantic versioning** scheme. See [README](README
 - Switched from tslint to eslint.
 - Modified checksum so that resource packs are now compatible at the patch level. Resource packs must match the `major.minor` version of the `@phensley/cldr-core` package at runtime to ensure schema compatibility.
 
+[1.14.0]: https://github.com/phensley/cldr-engine/compare/v1.13.1...v1.14.0
+[1.13.1]: https://github.com/phensley/cldr-engine/compare/v1.13.0...v1.13.1
+[1.13.0]: https://github.com/phensley/cldr-engine/compare/v1.12.2...v1.13.0
 [1.12.2]: https://github.com/phensley/cldr-engine/compare/v1.12.1...v1.12.2
 [1.12.1]: https://github.com/phensley/cldr-engine/compare/v1.12.0...v1.12.1
 [1.12.0]: https://github.com/phensley/cldr-engine/compare/v1.10.2...v1.12.0
