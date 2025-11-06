@@ -59,8 +59,8 @@ This project follows [semantic versioning](https://semver.org/):
 
 ## Features
 
-- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 45.0.0](https://cldr.unicode.org/index/downloads/cldr-45)
-- [391 modern locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#availablelocales)
+- Implementation folows the [CLDR specification](https://www.unicode.org/reports/tr35/tr35-general.html) supporting [CLDR version 48.0.0](https://cldr.unicode.org/index/downloads/cldr-48)
+- [429 locales](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#availablelocales)
 - [Compact resource packs](https://phensley.github.io/cldr-engine/docs/en/doc-design-bundles) containing [all scripts and regions for a given language](https://unpkg.com/@phensley/cldr/packs/)
 - [Language tag parsing](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#parselanguagetag), [locale resolution](https://phensley.github.io/cldr-engine/docs/en/api-cldrframework#resolvelocale), and distance-based [enhanced language matching](https://phensley.github.io/cldr-engine/docs/en/api-localematcher) for improved locale fallback
 - [Fast, compact, and extensible ICU message formatting](packages/messageformat/README.md)
