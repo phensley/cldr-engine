@@ -24,7 +24,12 @@ interface PackSpec {
 
 const makedir = (dir: string) => {
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+    try {
+      fs.mkdirSync(dir);
+    } catch (err) {
+      // error if this block is entered by concurrent processes
+      console.log(`concurrent mkdir attempt: ${err}`);
+    }
   }
 };
 
