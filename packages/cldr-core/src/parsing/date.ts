@@ -93,7 +93,7 @@ export const intervalPatternBoundary = (pattern: DateTimeNode[]): number => {
     if (typeof node !== 'string') {
       const n = DATE_PATTERN_CHARS[node[0]];
       const idx = n >>> 5;
-      if (((data[idx] >>> n % 32) & 1) === 1) {
+      if (((data[idx] >>> (n % 32)) & 1) === 1) {
         return i;
       }
       data[idx] |= 1 << n;

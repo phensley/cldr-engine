@@ -757,7 +757,7 @@ export abstract class CalendarDate {
     let z = 'Z';
     if (!utc) {
       const o = (this.timeZoneOffset() / CalendarConstants.ONE_MINUTE_MS) | 0;
-      z = `${o < 0 ? '-' : '+'}${zeropad((o / 60) | 0, 2)}:${zeropad(o % 60 | 0, 2)}`;
+      z = `${o < 0 ? '-' : '+'}${zeropad((o / 60) | 0, 2)}:${zeropad((o % 60) | 0, 2)}`;
     }
     const y = d.extendedYear();
     const neg = y < 0;
