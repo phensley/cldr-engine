@@ -27,7 +27,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@typescript-eslint/eslint-plugin": "^8.53.1",
     "@typescript-eslint/parser": "^8.53.1",
-    "@vitest/coverage-istanbul": "^4.0.17",
+    "@vitest/coverage-istanbul": "^4.0.18",
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
     "chalk": "^4.1.2",
@@ -41,7 +41,7 @@
     "npm-check-updates": "^19.3.1",
     "prettier": "^3.8.1",
     "rimraf": "^6.1.2",
-    "rollup": "^4.55.3",
+    "rollup": "^4.56.0",
     "rollup-plugin-dts": "^6.3.0",
     "rollup-plugin-filesize": "^10.0.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
@@ -54,6 +54,6 @@
     "typedoc": "^0.28.16",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.53.1",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.18"
   }
 }
