@@ -29,7 +29,7 @@
     "access": "public"
   },
   "scripts": {
-    "api": "api-extractor run -c ./etc/api-extractor.json --verbose",
+    "api": "api-extractor run -c ./etc/api-extractor.json --local --verbose",
     "api:local": "pnpm run api -l",
     "build": "pnpm run build:cj && pnpm run build:es && pnpm run build:packs && pnpm run build:rollup",
     "build:cj": "tsc -p ./tsconfig.json",
