@@ -2,6 +2,7 @@
 .rpt2_cache/
 coverage/
 dist/
+docs/
 lib/
 lib-es/
 node_modules/

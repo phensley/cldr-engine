@@ -5,8 +5,61 @@ import os
 import sys
 from subprocess import Popen
 
-def main():
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
+def generate_apis():
+    cmd = ['pnpm', 'run', 'api']
+    Popen(cmd).communicate()
+
+def load_apis():
+    top = os.path.join(ROOT, 'packages')
+    packages = os.listdir(top)
+    apis = []
+    for pkg in packages:
+        temp = os.path.join(top, pkg, 'temp')
+        if not os.path.isdir(temp):
+            continue
+        files = [n for n in os.listdir(temp) if n.endswith('.api.json')]
+        for f in files:
+            api = json.load(open(os.path.join(temp, f), 'r'))
+            apis.append([f, api])
+    return apis
+
+def prune_members(orig):
+    members = []
+    for m in orig:
+        if m.get('fileUrlPath', '').startswith('..'):
+            continue
+        members.append(m)
+        if m.get('members', ()):
+            m['members'] = prune_members(m['members'])
+    return members
+
+def prune_apis(apis):
+    for _, api in apis:
+        api['members'] = prune_members(api['members'])
+
+def save_apis(apis):
+    top = os.path.join(ROOT, 'docs')
+    if not os.path.isdir(top):
+        os.makedirs(top)
+    for name, api in apis:
+        path = os.path.join(top, name)
+        print('writing %r' % path)
+        out = open(path, 'w')
+        json.dump(api, out, indent=2, sort_keys=True)
+        out.close()
+
+def generate_docs():
+    cmd = ['./node_modules/.bin/api-documenter', 'markdown', '-i', 'docs', '-o', 'docs']
+    Popen(cmd, cwd=ROOT).communicate()
+
+def main():
+    generate_apis()
+    apis = load_apis()
+    prune_apis(apis)
+    save_apis(apis)
+    generate_docs()
 
 if __name__ == '__main__':
     main()
