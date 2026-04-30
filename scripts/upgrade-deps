@@ -18,6 +18,7 @@ PIN="
 chalk
 minimatch
 node-fetch
+typescript
 yargs
 "
 
