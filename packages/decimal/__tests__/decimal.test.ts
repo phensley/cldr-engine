@@ -48,6 +48,11 @@ test('signum', () => {
 
 test('is integer', () => {
   expect(parse('0').isInteger()).toEqual(true);
+  expect(parse('0.00').isInteger()).toEqual(true);
+  expect(parse('0.000').isInteger()).toEqual(true);
+  expect(parse('-0.00').isInteger()).toEqual(true);
+  expect(parse('0e5').isInteger()).toEqual(true);
+  expect(parse('0e-10').isInteger()).toEqual(true);
   expect(parse('0.1').isInteger()).toEqual(false);
   expect(parse('123').isInteger()).toEqual(true);
   expect(parse('.123e3').isInteger()).toEqual(true);

@@ -36,6 +36,17 @@ test('zeros', () => {
 
   s = api.formatDecimal('-0.00', { minimumFractionDigits: 2, negativeZero: true });
   expect(s).toEqual('-0.00');
+
+  // Trim zero fractions on a scaled zero. isInteger() must treat "0.00" as
+  // an integer for the trim path in NumberContext.
+  s = api.formatDecimal('0.00', { trimZeroFractions: true });
+  expect(s).toEqual('0');
+
+  s = api.formatDecimal('-0.00', { trimZeroFractions: true });
+  expect(s).toEqual('0');
+
+  s = api.formatDecimal('2.50', { trimZeroFractions: true });
+  expect(s).toEqual('2.5');
 });
 
 test('decimals unknown style', () => {

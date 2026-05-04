@@ -250,7 +250,10 @@ export class Decimal {
     if (this.flag) {
       return false;
     }
-    return this._exp + this.trailingZeros() >= 0;
+    // Zero with any scale, e.g. "0.00", is exactly zero, which is an integer.
+    // Note: trailingZeros() returns 0 for an all-zero coefficient, so this
+    // check must come before the exponent comparison below.
+    return this.isZero() || this._exp + this.trailingZeros() >= 0;
   }
 
   /**
