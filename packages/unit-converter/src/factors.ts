@@ -84,7 +84,7 @@ export const DIGITAL_DECIMAL: FactorDef[] = DIGITAL_BASE.concat(
  * @public
  */
 export const DURATION: FactorDef[] = [
-  ['century', '315569520', 'second'],
+  ['century', '3155695200', 'second'],
   ['year', '12', 'month'],
   ['year', '31556952', 'second'],
   ['month', '30.436875', 'day'],

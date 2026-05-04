@@ -1,6 +1,6 @@
-import { Rational } from '@phensley/decimal';
 import { UnitType } from '@phensley/cldr-types';
-import { ANGLE, AREA, FactorDef, UnitConversion, UnitFactors } from '../src';
+import { Decimal, Rational } from '@phensley/decimal';
+import { ANGLE, AREA, DURATION, FactorDef, UnitConversion, UnitConverter, UnitFactors } from '../src';
 
 test('factors', () => {
   const factors: FactorDef[] = [['g-force', '9.80665', 'meter-per-square-second']];
@@ -66,4 +66,17 @@ test('rational factors', () => {
   expect(c.path).toEqual(['foo', 'bar']);
   expect(c.factors.length).toEqual(1);
   expect(c.factors[0].toString()).toEqual('2 / 1');
+});
+
+test('duration century is 100 years (CLDR 48.2.0 convertUnits: century = 100 year)', () => {
+  const map = new UnitFactors(DURATION);
+  const c = map.get('century', 'year')!;
+  const fac = c.factors.reduce((p, x) => p.multiply(x), new Rational(1));
+  expect(fac.compare('100 / 1')).toEqual(0);
+
+  const conv = new UnitConverter();
+  conv.add('duration', new UnitFactors(DURATION));
+  expect(conv.convert('duration', new Decimal(1), 'century', 'second')!.toString()).toEqual('3155695200');
+  expect(conv.convert('duration', new Decimal(1), 'century', 'year')!.toString()).toEqual('100');
+  expect(conv.convert('duration', new Decimal(1), 'year', 'second')!.toString()).toEqual('31556952');
 });
