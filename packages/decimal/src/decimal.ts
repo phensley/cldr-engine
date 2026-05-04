@@ -494,7 +494,11 @@ export class Decimal {
 
   /**
    * Return a scientific representation of the number,
-   * Decimal coefficient and adjusted exponent.
+   * Decimal coefficient and adjusted exponent, such that
+   * value = coefficient * 10^exponent.
+   *
+   * @param minIntDigits Minimum number of integer digits in
+   *   the coefficient. Must be >= 1; values < 1 are clamped to 1.
    */
   scientific(minIntDigits: number = 1): [Decimal, number] {
     if (this.flag) {
@@ -622,6 +626,9 @@ export class Decimal {
 
   /**
    * Format this number to scientific notation as a string.
+   *
+   * @param minIntegers Minimum number of integer digits in the
+   *   coefficient. Must be >= 1; values < 1 are clamped to 1.
    */
   toScientificString(minIntegers: number = 1): string {
     if (this.flag) {
@@ -641,6 +648,9 @@ export class Decimal {
 
   /**
    * Format this number to scientific notation as an array of parts.
+   *
+   * @param minIntegers Minimum number of integer digits in the
+   *   coefficient. Must be >= 1; values < 1 are clamped to 1.
    */
   toScientificParts(minIntegers: number = 1): Part[] {
     if (this.flag) {

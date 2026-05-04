@@ -22,6 +22,18 @@ test('scientific string', () => {
   expect(sci('1.2e6')).toEqual('1.2E+6');
 });
 
+test('minIntDigits < 1 is clamped to 1', () => {
+  expect(sci('1234.5678', 0)).toEqual(sci('1234.5678', 1));
+  expect(sci('1234.5678', -2)).toEqual(sci('1234.5678', 1));
+  expect(sci('1234.5678', 0)).toEqual('1.2345678E+3');
+
+  const [c0, e0] = new Decimal('1234.5678').scientific(0);
+  const [c1, e1] = new Decimal('1234.5678').scientific(1);
+  expect([c0.toString(), e0]).toEqual([c1.toString(), e1]);
+
+  expect(new Decimal('1234.5678').toScientificParts(0)).toEqual(new Decimal('1234.5678').toScientificParts(1));
+});
+
 test('negative zero', () => {
   expect(sci('-0')).toEqual('-0');
 });
