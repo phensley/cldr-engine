@@ -13,7 +13,7 @@
     "depgraph": "depcruise --no-config -T dot -x tslib packages/cldr/src | dot -T pdf > depgraph.pdf",
     "link-all": "pnpm --stream -r exec -- pnpm link",
     "unlink-all": "pnpm --stream -r exec -- pnpm unlink",
-    "lint": "pnpm run build && pnpm --stream -r run build:lint && pnpm --stream -r run lint",
+    "lint": "pnpm --stream -r exec tsc -p tsconfig.json --emitDeclarationOnly && pnpm --stream -r run build:lint && pnpm --stream -r run lint",
     "stress": "pnpm --stream -r run stress",
     "test": "TZ=America/New_York vitest --run --coverage",
     "test:watch": "TZ=America/New_York vitest"
