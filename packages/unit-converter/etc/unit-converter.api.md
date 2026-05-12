@@ -71,6 +71,9 @@ export class Decimal {
     properties(): [number[], number, number, number];
     protected round(rnd: number, rest: number, mode: RoundingModeType): number;
     scale(): number;
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     scientific(minIntDigits?: number): [Decimal, number];
     // Warning: (ae-forgotten-export) The symbol "RoundingModeType" needs to be exported by the entry point index.d.ts
     setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
@@ -90,7 +93,13 @@ export class Decimal {
     toInteger(): Decimal;
     // Warning: (ae-forgotten-export) The symbol "Part" needs to be exported by the entry point index.d.ts
     toParts(): Part[];
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     toScientificParts(minIntegers?: number): Part[];
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     toScientificString(minIntegers?: number): string;
     toString(): string;
     trailingZeros(): number;
@@ -113,7 +122,7 @@ export const ELECTRIC: FactorDef[];
 export const ENERGY: FactorDef[];
 
 // @public
-export type FactorDef = [UnitType, string | Rational, UnitType];
+export type FactorDef = [UnitType, string | Rational, UnitType, (string | Rational)?];
 
 // @public
 export const FORCE: FactorDef[];
@@ -152,6 +161,8 @@ export const PRESSURE: FactorDef[];
 // @public
 export class Rational {
     constructor(numerator: DecimalArg, denominator?: DecimalArg);
+    // (undocumented)
+    add(num: RationalArg, context?: MathContext): Rational;
     // Warning: (ae-forgotten-export) The symbol "RationalArg" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -167,9 +178,13 @@ export class Rational {
     // (undocumented)
     multiply(num: RationalArg, context?: MathContext): Rational;
     // (undocumented)
+    negate(): Rational;
+    // (undocumented)
     protected numer: Decimal;
     // (undocumented)
     numerator(): Decimal;
+    // (undocumented)
+    subtract(num: RationalArg, context?: MathContext): Rational;
     // (undocumented)
     toDecimal(context?: MathContext): Decimal;
     // (undocumented)
@@ -180,12 +195,17 @@ export class Rational {
 export const SPEED: FactorDef[];
 
 // @public
+export const TEMPERATURE: FactorDef[];
+
+// @public
 export const TORQUE: FactorDef[];
 
 // @public
 export interface UnitConversion {
     // (undocumented)
     factors: Rational[];
+    // (undocumented)
+    offset?: Rational;
     // (undocumented)
     path: string[];
 }

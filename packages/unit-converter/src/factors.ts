@@ -269,6 +269,19 @@ const VOLUME_BASE: FactorDef[] = [
 ];
 
 /**
+ * Conversions between CLDR temperature units, anchored to the kelvin.
+ * These are affine: the fourth element is the additive offset in kelvin,
+ * so `kelvin = unit × factor + offset`.
+ *
+ * @public
+ */
+export const TEMPERATURE: FactorDef[] = [
+  ['celsius', '1', 'kelvin', '273.15'],
+  ['fahrenheit', '5 / 9', 'kelvin', '2298.35 / 9'],
+  ['rankine', '5 / 9', 'kelvin'],
+];
+
+/**
  * Conversions between CLDR volume units.
  * These are US units. Grouped to be overridden below for UK.
  *

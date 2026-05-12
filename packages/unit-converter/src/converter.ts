@@ -62,13 +62,16 @@ export class UnitConverter {
   }
 
   /**
-   * Convert the decimal value from `src` to `dst` units.
+   * Convert the decimal value from `src` to `dst` units. Affine
+   * conversions (e.g. temperature) apply the combined additive offset
+   * after the multiplicative factor.
    */
   convert(category: string, n: Decimal, src: string, dst: string, ctx?: MathContext): Decimal | undefined {
     const conv = this.get(category, src, dst);
     if (conv) {
       const fac = conv.factors.reduce((p, c) => p.multiply(c, ctx), RationalConstants.ONE);
-      return n.multiply(fac.toDecimal(), ctx);
+      const res = n.multiply(fac.toDecimal(ctx), ctx);
+      return conv.offset ? res.add(conv.offset.toDecimal(ctx)) : res;
     }
     return undefined;
   }

@@ -1,9 +1,12 @@
-import { Rational } from '@phensley/decimal';
+import { Rational, RationalConstants } from '@phensley/decimal';
 import { Heap } from '@phensley/cldr-utils';
 import { FactorDef } from './types';
 
 type M<T> = { [dst: string]: T | undefined };
 type G<T> = { [src: string]: M<T> };
+
+// An edge converts `src` to `dst` as `dst = src × factor + offset`.
+type Edge = [Rational, Rational];
 
 type C = [
   number, // cost
@@ -16,14 +19,19 @@ type E = [
 ];
 
 /**
- * Represents a conversion path from source to destination unit, and the
- * rational conversion factors.
+ * Represents a conversion path from source to destination unit, the
+ * rational conversion factors, and the combined additive offset.
+ *
+ * A value `v` in the source unit converts to the destination unit as
+ * `v × (factors[0] × factors[1] × ...) + offset`. The offset is only
+ * present for affine conversions, e.g. temperature.
  *
  * @public
  */
 export interface UnitConversion {
   path: string[];
   factors: Rational[];
+  offset?: Rational;
 }
 
 const ONE = new Rational(1);
@@ -46,7 +54,7 @@ const ONE = new Rational(1);
 export class UnitFactors {
   readonly units: string[] = [];
   readonly unitset: Set<string> = new Set();
-  private graph: G<Rational> = {};
+  private graph: G<Edge> = {};
   private cache: G<UnitConversion> = {};
   private initialized: boolean = false;
 
@@ -79,9 +87,9 @@ export class UnitFactors {
     // See if a direct conversion exists
     const n = this.graph[src];
     if (n) {
-      const fac = n[dst];
-      if (fac) {
-        return { path: [src, dst], factors: [fac] };
+      const e = n[dst];
+      if (e) {
+        return { path: [src, dst], factors: [e[0]], offset: e[1].compare(0) === 0 ? undefined : e[1] };
       }
     }
 
@@ -98,17 +106,23 @@ export class UnitFactors {
     // the two factors
     const path = this.shortestPath(src, dst);
     if (path) {
-      // Collect the conversion factors
+      // Collect the conversion factors, composing the additive
+      // offset: after each step `offset = offset × factor + a`
       const factors: Rational[] = [];
+      let offset = RationalConstants.ZERO;
       let curr: string | undefined = path[0];
       for (let i = 1; i < path.length; i++) {
         const next = path[i];
-        const nextfac = this.graph[curr]![next]!;
-        factors.push(nextfac);
+        const [r, a] = this.graph[curr]![next]!;
+        factors.push(r);
+        offset = offset.multiply(r).add(a);
         curr = next;
       }
 
       const r: UnitConversion = { path, factors };
+      if (offset.compare(0) !== 0) {
+        r.offset = offset;
+      }
 
       // Record this conversion factor in the cache
       let tmp = this.cache[src];
@@ -127,24 +141,31 @@ export class UnitFactors {
    */
   protected init(): void {
     for (const factor of this.factors) {
-      const [src, raw, dst] = factor;
+      const [src, raw, dst, rawOffset] = factor;
       const rat = typeof raw === 'string' ? new Rational(raw) : raw;
+      const off =
+        rawOffset === undefined
+          ? RationalConstants.ZERO
+          : typeof rawOffset === 'string'
+            ? new Rational(rawOffset)
+            : rawOffset;
 
       // Convert src -> dst
       let m = this.graph[src];
       if (!m) {
         this.graph[src] = m = {};
       }
-      m[dst] = rat;
+      m[dst] = [rat, off];
 
       // Convert dst -> src, if an explicit mapping does not already exist.
+      // Inverting `dst = src × r + a` gives `src = dst × (1/r) − a/r`.
       m = this.graph[dst];
       if (!m) {
         this.graph[dst] = m = {};
       }
       const tmp = m[src];
       if (!tmp) {
-        m[src] = rat.inverse();
+        m[src] = [rat.inverse(), off.divide(rat).negate()];
       }
     }
     this.initialized = true;
@@ -171,7 +192,7 @@ export class UnitFactors {
       }
 
       for (const n of Object.keys(nbr)) {
-        const r = nbr[n]!;
+        const [r] = nbr[n]!;
         const newcost = cost + precision(r);
         const path = edges[n];
         if (!path || newcost < path[0]) {
