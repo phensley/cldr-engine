@@ -22,6 +22,18 @@ test('compare', () => {
   expect(cmp('23', '0')).toEqual(1);
   expect(cmp('-23', '0')).toEqual(-1);
 
+  // Zero vs a same-sign non-zero value with a different exponent
+  expect(cmp('0', '1e-18')).toEqual(-1);
+  expect(cmp('1e-18', '0')).toEqual(1);
+  expect(cmp('-1e-18', '0')).toEqual(-1);
+  expect(cmp('0', '-1e-18')).toEqual(1);
+  expect(cmp('1e18', '0')).toEqual(1);
+  expect(cmp('0', '1e18')).toEqual(-1);
+  expect(cmp('0', '1e-18', true)).toEqual(-1);
+  expect(cmp('1e-18', '0', true)).toEqual(1);
+  expect(cmp('-0', '1e-18')).toEqual(-1);
+  expect(cmp('1e-18', '-0')).toEqual(1);
+
   expect(cmp('12.34', '1.234')).toEqual(1);
   expect(cmp('1.234', '12.34')).toEqual(-1);
   expect(cmp('1.234', '12.34e-1')).toEqual(0);

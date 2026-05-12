@@ -174,6 +174,16 @@ export class Decimal {
       return us === -1 ? -1 : 1;
     }
 
+    // Opposite signs were handled above, so u and v share a sign: zero is
+    // never equal to a non-zero value of the same sign, and for negative
+    // values zero sorts after them.
+    if (uz || vz) {
+      if (abs) {
+        return uz ? -1 : 1;
+      }
+      return us === -1 ? (uz ? 1 : -1) : uz ? -1 : 1;
+    }
+
     const ue = u.alignexp();
     const ve = v.alignexp();
     if (ue !== ve) {
