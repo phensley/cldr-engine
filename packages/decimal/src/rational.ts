@@ -77,6 +77,26 @@ export class Rational {
     return a.compare(b);
   }
 
+  add(num: RationalArg, context?: MathContext): Rational {
+    const n = coerceRational(num);
+    return new Rational(
+      this.numer.multiply(n.denom, context).add(n.numer.multiply(this.denom, context)),
+      this.denom.multiply(n.denom, context),
+    );
+  }
+
+  subtract(num: RationalArg, context?: MathContext): Rational {
+    const n = coerceRational(num);
+    return new Rational(
+      this.numer.multiply(n.denom, context).subtract(n.numer.multiply(this.denom, context)),
+      this.denom.multiply(n.denom, context),
+    );
+  }
+
+  negate(): Rational {
+    return new Rational(this.numer.negate(), this.denom);
+  }
+
   divide(num: RationalArg, context?: MathContext): Rational {
     const n = coerceRational(num);
     return new Rational(this.numer.multiply(n.denom, context), this.denom.multiply(n.numer, context));
@@ -117,5 +137,6 @@ export class Rational {
  * @public
  */
 export const RationalConstants = {
+  ZERO: new Rational(0, 1),
   ONE: new Rational(1, 1),
 };

@@ -94,6 +94,9 @@ export class Decimal {
     properties(): [number[], number, number, number];
     protected round(rnd: number, rest: number, mode: RoundingModeType): number;
     scale(): number;
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     scientific(minIntDigits?: number): [Decimal, number];
     setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
     // (undocumented)
@@ -111,7 +114,13 @@ export class Decimal {
     subtract(v: DecimalArg): Decimal;
     toInteger(): Decimal;
     toParts(): Part[];
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     toScientificParts(minIntegers?: number): Part[];
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     toScientificString(minIntegers?: number): string;
     toString(): string;
     trailingZeros(): number;
@@ -181,6 +190,8 @@ export class PartsDecimalFormatter implements DecimalFormatter<Part[]> {
 export class Rational {
     constructor(numerator: DecimalArg, denominator?: DecimalArg);
     // (undocumented)
+    add(num: RationalArg, context?: MathContext): Rational;
+    // (undocumented)
     compare(num: RationalArg, context?: MathContext): number;
     // (undocumented)
     protected denom: Decimal;
@@ -193,9 +204,13 @@ export class Rational {
     // (undocumented)
     multiply(num: RationalArg, context?: MathContext): Rational;
     // (undocumented)
+    negate(): Rational;
+    // (undocumented)
     protected numer: Decimal;
     // (undocumented)
     numerator(): Decimal;
+    // (undocumented)
+    subtract(num: RationalArg, context?: MathContext): Rational;
     // (undocumented)
     toDecimal(context?: MathContext): Decimal;
     // (undocumented)
@@ -207,6 +222,7 @@ export type RationalArg = Rational | Decimal | number | string;
 
 // @public
 export const RationalConstants: {
+    ZERO: Rational;
     ONE: Rational;
 };
 

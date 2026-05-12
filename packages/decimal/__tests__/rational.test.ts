@@ -32,6 +32,23 @@ test('divide', () => {
   expect(parse('1 / 5').divide('2 / 7')).toEqual(parse('7 / 10'));
 });
 
+test('add', () => {
+  expect(parse('1 / 5').add('1 / 4')).toEqual(parse('9 / 20'));
+  expect(parse('1 / 5').add(1)).toEqual(parse('6 / 5'));
+  expect(parse('273.15').multiply('9 / 5').add('-459.67').compare('32 / 1')).toEqual(0);
+  expect(parse('1 / 3').add('1 / 3').compare('2 / 3')).toEqual(0);
+});
+
+test('subtract', () => {
+  expect(parse('1 / 5').subtract('1 / 4')).toEqual(parse('-1 / 20'));
+  expect(parse('3 / 5').subtract(1)).toEqual(parse('-2 / 5'));
+});
+
+test('negate', () => {
+  expect(parse('3 / 5').negate()).toEqual(parse('-3 / 5'));
+  expect(parse('-3 / 5').negate()).toEqual(parse('3 / 5'));
+});
+
 test('inverse', () => {
   expect(parse('1 / 5').inverse()).toEqual(parse('5 / 1'));
 });
