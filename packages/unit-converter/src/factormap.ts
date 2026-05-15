@@ -213,12 +213,15 @@ export class UnitFactors {
 const cmp = (x: E, y: E) => (x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0);
 
 /**
- * Return the maximum precision between the numerator and denominator
+ * Return the digit cost of a rational: the number of decimal digits its
+ * numerator and denominator contribute. Uses absolute magnitudes so the
+ * cost is always positive (Dijkstra's algorithm requires non-negative
+ * edge costs; e.g. `0.001` must not cost less than `1000`).
  */
 const precision = (r: Rational) => {
   const n = r.numerator();
   const d = r.denominator();
-  return n.precision() + n.alignexp() + (d.precision() + d.alignexp());
+  return Math.abs(n.precision() + n.alignexp()) + Math.abs(d.precision() + d.alignexp());
 };
 
 /**
