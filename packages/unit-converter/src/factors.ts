@@ -1,7 +1,6 @@
 import { UnitType } from '@phensley/cldr-types';
+import { CLDR_FACTORS } from './factors.generated';
 import { FactorDef } from './types';
-
-const PI = '3.14159265358979323846';
 
 const kfactors = (f: string, u: UnitType[]) => {
   const r: FactorDef[] = [];
@@ -11,12 +10,44 @@ const kfactors = (f: string, u: UnitType[]) => {
   return r;
 };
 
+/** Units whose generated (US) values must not leak into the UK variant. */
+const US_VOLUME_UNITS: Set<string> = new Set([
+  'gallon',
+  'bushel',
+  'cup',
+  'dram',
+  'dessert-spoon',
+  'drop',
+  'fluid-ounce',
+  'jigger',
+  'pinch',
+  'pint',
+  'quart',
+  'barrel',
+  'tablespoon',
+  'teaspoon',
+]);
+
+const VOLUME_UK_GENERATED = CLDR_FACTORS.volume.filter((e) => !US_VOLUME_UNITS.has(e[0]));
+
+// ---------------------------------------------------------------------------
+// CLDR-generated star tables (src/factors.generated.ts), merged with the
+// hand-maintained extensions below. The generated edges come from CLDR
+// 48.2.0 supplemental/units.json (convertUnits + unitConstants); the hand
+// entries cover units CLDR does not model in convertUnits (prefix units,
+// compound units, and bridge edges) and pin down localized variants.
+// ---------------------------------------------------------------------------
+
 /**
  * Conversions between CLDR acceleration units.
  *
  * @public
  */
-export const ACCELERATION: FactorDef[] = [['g-force', '9.80665', 'meter-per-square-second']];
+export const ACCELERATION: FactorDef[] = [
+  // hand-maintained (same value as CLDR's `gravity` constant)
+  ['g-force', '9.80665', 'meter-per-square-second'],
+  ...CLDR_FACTORS.acceleration,
+];
 
 /**
  * Conversions between CLDR angle units.
@@ -24,10 +55,11 @@ export const ACCELERATION: FactorDef[] = [['g-force', '9.80665', 'meter-per-squa
  * @public
  */
 export const ANGLE: FactorDef[] = [
+  // hand-maintained sub-degree chain (radian and the star edges come from CLDR)
   ['revolution', '360', 'degree'],
   ['arc-minute', '1/60', 'degree'],
   ['arc-second', '1/60', 'arc-minute'],
-  ['radian', '0.5 / ' + PI, 'revolution'],
+  ...CLDR_FACTORS.angle,
 ];
 
 /**
@@ -36,8 +68,8 @@ export const ANGLE: FactorDef[] = [
  * @public
  */
 export const AREA: FactorDef[] = [
+  // hand-maintained square-unit chain (CLDR only models square-meter)
   ['square-kilometer', '1000000', 'square-meter'],
-  ['hectare', '10000', 'square-meter'],
   ['square-centimeter', '1 / 10000', 'square-meter'],
   ['square-centimeter', '2500 / 16129', 'square-inch'],
   ['square-mile', '40468564224 / 15625', 'square-meter'],
@@ -46,6 +78,7 @@ export const AREA: FactorDef[] = [
   ['acre', '43560', 'square-foot'],
   ['square-yard', '9', 'square-foot'],
   ['square-foot', '144', 'square-inch'],
+  ...CLDR_FACTORS.area,
 ];
 
 /**
@@ -66,6 +99,7 @@ const DIGITAL_BASE: FactorDef[] = kfactors('1000', ['terabit', 'gigabit', 'megab
  */
 export const DIGITAL: FactorDef[] = DIGITAL_BASE.concat(
   kfactors('1024', ['terabyte', 'gigabyte', 'megabyte', 'kilobyte', 'byte']),
+  CLDR_FACTORS.digital,
 );
 
 /**
@@ -95,6 +129,7 @@ export const DURATION: FactorDef[] = [
   ['second', '1000', 'millisecond'],
   ['millisecond', '1000', 'microsecond'],
   ['microsecond', '1000', 'nanosecond'],
+  ...CLDR_FACTORS.duration,
 ];
 
 /**
@@ -102,7 +137,11 @@ export const DURATION: FactorDef[] = [
  *
  * @public
  */
-export const ELECTRIC: FactorDef[] = [['ampere', '1000', 'milliampere']];
+export const ELECTRIC: FactorDef[] = [
+  // hand-maintained (CLDR only models the base units)
+  ['ampere', '1000', 'milliampere'],
+  ...CLDR_FACTORS.electric,
+];
 
 /**
  * Conversions between CLDR energy units.
@@ -110,11 +149,12 @@ export const ELECTRIC: FactorDef[] = [['ampere', '1000', 'milliampere']];
  * @public
  */
 export const ENERGY: FactorDef[] = [
+  // hand-maintained prefix/compound units (calorie and foodcalorie come
+  // from CLDR: 1 calorie = 4.184 J, 1 foodcalorie = 4184 J)
   ['kilojoule', '1000', 'joule'],
   ['kilowatt-hour', '3600000', 'joule'],
-  ['calorie', '4.1868', 'joule'],
-  ['foodcalorie', '523 / 125', 'joule'],
   ['kilocalorie', '1000', 'calorie'],
+  ...CLDR_FACTORS.energy,
 ];
 
 /**
@@ -122,14 +162,16 @@ export const ENERGY: FactorDef[] = [
  *
  * @public
  */
-export const FORCE: FactorDef[] = [['pound-force', '4.448222', 'newton']];
+export const FORCE: FactorDef[] = [...CLDR_FACTORS.force];
 
 /**
  * Conversions between CLDR frequency units.
  *
  * @public
  */
-export const FREQUENCY: FactorDef[] = kfactors('1000', ['gigahertz', 'megahertz', 'kilohertz', 'hertz']);
+export const FREQUENCY: FactorDef[] = kfactors('1000', ['gigahertz', 'megahertz', 'kilohertz', 'hertz']).concat(
+  CLDR_FACTORS.frequency,
+);
 
 /**
  * Conversions between CLDR graphics 'per' units.
@@ -146,7 +188,19 @@ export const GRAPHICS_PER: FactorDef[] = [
  *
  * @public
  */
-export const GRAPHICS_PIXEL: FactorDef[] = [['megapixel', '1000000', 'pixel']];
+export const GRAPHICS_PIXEL: FactorDef[] = [
+  // hand-maintained (CLDR only models pixel, dot, and em)
+  ['megapixel', '1000000', 'pixel'],
+  ...CLDR_FACTORS.graphics,
+];
+
+/**
+ * Conversions between CLDR illuminance / luminous units (candela, lumen,
+ * lux; these are different dimensions and are not mutually convertible).
+ *
+ * @public
+ */
+export const ILLUMINANCE: FactorDef[] = [...CLDR_FACTORS.illuminance];
 
 /**
  * Conversions between CLDR length units.
@@ -154,6 +208,7 @@ export const GRAPHICS_PIXEL: FactorDef[] = [['megapixel', '1000000', 'pixel']];
  * @public
  */
 export const LENGTH: FactorDef[] = [
+  // hand-maintained sub-meter chain (meter star edges come from CLDR)
   ['kilometer', '100000', 'centimeter'],
   ['meter', '100', 'centimeter'],
   ['decimeter', '10', 'centimeter'],
@@ -162,21 +217,16 @@ export const LENGTH: FactorDef[] = [
   ['nanometer', '1 / 10000000', 'centimeter'],
   ['picometer', '1 / 10000000000', 'centimeter'],
 
+  // hand-maintained US chain
   ['mile', '5280', 'foot'],
   ['yard', '36', 'inch'],
   ['foot', '12', 'inch'],
   ['inch', '2.54', 'centimeter'],
-
-  ['light-year', '9460730472580800', 'meter'],
-  ['astronomical-unit', '149597870700', 'meter'],
-  ['parsec', '648000 / ' + PI, 'astronomical-unit'],
-
   ['furlong', '220', 'yard'],
   ['fathom', '6', 'foot'],
-  ['nautical-mile', '1852', 'meter'],
-  ['mile-scandinavian', '10000', 'meter'],
-
   ['point', '1 / 72', 'inch'],
+
+  ...CLDR_FACTORS.length,
 ];
 
 /**
@@ -185,18 +235,18 @@ export const LENGTH: FactorDef[] = [
  * @public
  */
 export const MASS: FactorDef[] = [
-  ['tonne', '1000', 'kilogram'],
+  // hand-maintained prefix chain (kilogram star edges come from CLDR)
   ['gram', '1 / 1000', 'kilogram'],
   ['milligram', '1 / 1000', 'gram'],
   ['microgram', '1 / 1000', 'milligram'],
 
   ['carat', '200', 'milligram'],
-
-  ['pound', '45359237 / 100000000', 'kilogram'],
   ['ton', '2000', 'pound'],
   ['stone', '14', 'pound'],
   ['ounce', '1 / 16', 'pound'],
   ['ounce-troy', '12 / 175', 'pound'],
+
+  ...CLDR_FACTORS.mass,
 ];
 
 /**
@@ -204,9 +254,9 @@ export const MASS: FactorDef[] = [
  *
  * @public
  */
-export const POWER: FactorDef[] = kfactors('1000', ['gigawatt', 'megawatt', 'kilowatt', 'watt']).concat([
-  ['horsepower', '745.69987158227', 'watt'],
-]);
+export const POWER: FactorDef[] = kfactors('1000', ['gigawatt', 'megawatt', 'kilowatt', 'watt']).concat(
+  CLDR_FACTORS.power,
+);
 
 /**
  * Conversions between CLDR pressure units.
@@ -214,11 +264,38 @@ export const POWER: FactorDef[] = kfactors('1000', ['gigawatt', 'megawatt', 'kil
  * @public
  */
 export const PRESSURE: FactorDef[] = [
+  // hand-maintained: CLDR does not model these units, and the pascal and
+  // mercury-column bridges connect the two CLDR pressure dimensions
+  ['hectopascal', '100', 'pascal'],
   ['hectopascal', '1', 'millibar'],
   ['hectopascal', '129032000000 / 8896443230521', 'pound-force-per-square-inch'],
   ['inch-ofhg', '33.86389', 'hectopascal'],
   ['millimeter-ofhg', '1013.25 / 760', 'hectopascal'],
+  ['ofhg', '133.322387415', 'pascal'],
+  ...CLDR_FACTORS.pressure,
 ];
+
+/**
+ * Conversions between CLDR radiation dose units (gray, sievert).
+ *
+ * @public
+ */
+export const RADIATION: FactorDef[] = [...CLDR_FACTORS.radiation];
+
+/**
+ * Conversions between CLDR radioactivity units (becquerel).
+ *
+ * @public
+ */
+export const RADIOACTIVITY: FactorDef[] = [...CLDR_FACTORS.radioactivity];
+
+/**
+ * Conversions between CLDR ratio units (part, percent, permille, permyriad,
+ * karat).
+ *
+ * @public
+ */
+export const RATIO: FactorDef[] = [...CLDR_FACTORS.ratio];
 
 /**
  * Conversions between CLDR consumption units.
@@ -229,7 +306,25 @@ export const SPEED: FactorDef[] = [
   ['kilometer-per-hour', '5 / 18', 'meter-per-second'],
   ['mile-per-hour', '1397 / 3125', 'meter-per-second'],
   ['knot', '463 / 900', 'meter-per-second'],
+  ...CLDR_FACTORS.speed,
 ];
+
+/**
+ * Conversions between CLDR substance units (item, mole; katal and
+ * ofglucose are different dimensions and are not mutually convertible).
+ *
+ * @public
+ */
+export const SUBSTANCE: FactorDef[] = [...CLDR_FACTORS.substance];
+
+/**
+ * Conversions between CLDR temperature units, anchored to the kelvin.
+ * These are affine: the fourth element is the additive offset in kelvin,
+ * so `kelvin = unit * factor + offset` (CLDR 48.2.0 `convertUnits`).
+ *
+ * @public
+ */
+export const TEMPERATURE: FactorDef[] = [...CLDR_FACTORS.temperature];
 
 /**
  * Conversions between CLDR consumption units.
@@ -243,6 +338,8 @@ const VOLUME_BASE: FactorDef[] = [
   ['cubic-meter', '1000000000', 'cubic-centimeter'],
   ['cubic-centimeter', '0.06102374409473', 'cubic-inch'],
 
+  // hand-maintained prefix chain (CLDR volume units connect to the
+  // cubic-meter hub from the generated table)
   ['liter', '1000', 'cubic-centimeter'],
   ['megaliter', '1000000', 'liter'],
   ['hectoliter', '100', 'liter'],
@@ -269,25 +366,12 @@ const VOLUME_BASE: FactorDef[] = [
 ];
 
 /**
- * Conversions between CLDR temperature units, anchored to the kelvin.
- * These are affine: the fourth element is the additive offset in kelvin,
- * so `kelvin = unit × factor + offset`.
- *
- * @public
- */
-export const TEMPERATURE: FactorDef[] = [
-  ['celsius', '1', 'kelvin', '273.15'],
-  ['fahrenheit', '5 / 9', 'kelvin', '2298.35 / 9'],
-  ['rankine', '5 / 9', 'kelvin'],
-];
-
-/**
  * Conversions between CLDR volume units.
  * These are US units. Grouped to be overridden below for UK.
  *
  * @public
  */
-export const VOLUME: FactorDef[] = VOLUME_BASE.concat([
+export const VOLUME: FactorDef[] = VOLUME_BASE.concat(CLDR_FACTORS.volume, [
   ['gallon', '3.785411784', 'liter'],
   ['gallon-imperial', '4.54609', 'liter'],
   ['bushel', '2150.42', 'cubic-inch'],
@@ -303,7 +387,7 @@ export const VOLUME: FactorDef[] = VOLUME_BASE.concat([
  *
  * @public
  */
-export const VOLUME_UK: FactorDef[] = VOLUME_BASE.concat([
+export const VOLUME_UK: FactorDef[] = VOLUME_BASE.concat(VOLUME_UK_GENERATED, [
   ['gallon', '4.54609', 'liter'],
   ['gallon-imperial', '4.54609', 'liter'],
   ['bushel', '8', 'gallon-imperial'],

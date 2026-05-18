@@ -30,7 +30,8 @@
     "lint": "eslint src __tests__",
     "prepublish": "pnpm run build",
     "test": "vitest --run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate-factors": "jiti ./scripts/generate-factors.ts"
   },
   "files": [
     "lib/",

@@ -24,8 +24,9 @@ test('converter', () => {
   expect(c.categories()).toEqual(['acceleration', 'angle', 'length']);
 
   f = c.get('angle', 'revolution', 'arc-minute')!;
-  expect(f.path).toEqual(['revolution', 'degree', 'arc-minute']);
-  expect(f.factors.map((x) => x.toString())).toEqual(['360 / 1', '60 / 1']);
+  // Direct edge from the CLDR star table (1 revolution = 21600 arc-minutes)
+  expect(f.path).toEqual(['revolution', 'arc-minute']);
+  expect(f.factors.map((x) => x.toString())).toEqual(['21600 / 1']);
 
   f = c.get('angle', 'unknown', 'arc-minute');
   expect(f).toBe(undefined);
