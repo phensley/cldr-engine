@@ -40,3 +40,16 @@ test('formatter prefixes', () => {
   expect(f.format('{0 quuxbar}', [0], {})).toEqual('quuxbar');
   expect(f.format('{0 quuxbaz}', [0], {})).toEqual('quuxbaz');
 });
+
+test('missing arguments pass through as literal argument reference text', () => {
+  const f = new MessageFormatter({ language: 'en' });
+
+  expect(f.format('{0}', [], {})).toEqual('{0}');
+  expect(f.format('hi {0}!', [], {})).toEqual('hi {0}!');
+  expect(f.format('{name}', [], {})).toEqual('{name}');
+  // plural / selectordinal / select are not evaluated for a missing argument
+  expect(f.format('{0, plural, other {#}}', [], {})).toEqual('{0}');
+  expect(f.format('{count, plural, one {# item} other {# items}}', [], {})).toEqual('{count}');
+  expect(f.format('{0, selectordinal, one {#st} other {#th}}', [], {})).toEqual('{0}');
+  expect(f.format('{name, select, female {her} other {their}}', [], {})).toEqual('{name}');
+});

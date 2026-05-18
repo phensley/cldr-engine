@@ -59,7 +59,7 @@ test('hidden tags', () => {
   expect(evaluate('en', c, [1, 2])).toEqual('1{0 missing formatter}2');
 
   c = parse('{0}{a}{-0}{-a}{}{-}{--}{---}');
-  expect(evaluate('en', c, [], { a: 'A' })).toEqual('A{0}{a}{}{-}{--}');
+  expect(evaluate('en', c, [], { a: 'A' })).toEqual('{0}A{0}{a}{}{-}{--}');
 });
 
 test('undefined formatter', () => {
@@ -117,6 +117,55 @@ test('blocks', () => {
 });
 
 // { one: 'st', two: 'nd', few: 'rd', other: 'th' }
+
+test('missing arguments pass through as literal argument reference text', () => {
+  // ICU emits the argument reference text (e.g. `{0}`, `{name}`) verbatim when
+  // the referenced argument is absent, and does not evaluate any formatter or
+  // branch. Verified against ICU4J 57.1-74.1.
+  let c: MessageCode;
+
+  c = parse('{0}');
+  expect(evaluate('en', c, [])).toEqual('{0}');
+
+  c = parse('hi {0}!');
+  expect(evaluate('en', c, [])).toEqual('hi {0}!');
+
+  c = parse('{5}');
+  expect(evaluate('en', c, [])).toEqual('{5}');
+
+  c = parse('{0} and {1}');
+  expect(evaluate('en', c, ['a'])).toEqual('a and {1}');
+
+  c = parse('{name}');
+  expect(evaluate('en', c, [], {})).toEqual('{name}');
+
+  c = parse('hi {name}!');
+  expect(evaluate('en', c, [], {})).toEqual('hi {name}!');
+  expect(evaluate('en', c, [], { name: 'Bob' })).toEqual('hi Bob!');
+
+  // Plural and selectordinal: the formatter is not evaluated at all when the
+  // number argument is missing (no `other` fallback, no `#` substitution).
+  c = parse('{0, plural, other {#}}');
+  expect(evaluate('en', c, [])).toEqual('{0}');
+
+  c = parse('{0, plural, one {one item} other {# items}}');
+  expect(evaluate('en', c, [])).toEqual('{0}');
+  expect(evaluate('en', c, [1])).toEqual('one item');
+
+  c = parse('{count, plural, offset:1 other {# items}}');
+  expect(evaluate('en', c, [], {})).toEqual('{count}');
+
+  c = parse('{0, selectordinal, one {#st} other {#th}}');
+  expect(evaluate('en', c, [])).toEqual('{0}');
+
+  c = parse('{name, select, a {A} other {OTHER}}');
+  expect(evaluate('en', c, [], {})).toEqual('{name}');
+  expect(evaluate('en', c, [], { name: 'a' })).toEqual('A');
+
+  // A null value is treated the same as a missing argument (ICU4J does the same).
+  c = parse('{0}');
+  expect(evaluate('en', c, [null])).toEqual('{0}');
+});
 
 test('custom formatter args', () => {
   let c: MessageCode;

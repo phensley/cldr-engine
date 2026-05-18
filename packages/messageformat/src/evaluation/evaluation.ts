@@ -2,7 +2,7 @@ import { Decimal, DecimalConstants } from '@phensley/decimal';
 import { PluralRules } from '@phensley/plurals';
 import { MessageArg, MessageArgs, MessageNamedArgs } from './args';
 import { MessageArgConverter } from './converter';
-import { MessageCode, MessageOpType, PluralChoiceType, PluralNumberType } from '../parser';
+import { Argument, MessageCode, MessageOpType, PluralChoiceType, PluralNumberType } from '../parser';
 
 /**
  * User-defined message formatter function.
@@ -22,6 +22,22 @@ const get = (key: number | string, args: MessageArgs): MessageArg => {
   const res: MessageArg = args.named[key];
   return res !== undefined ? res : typeof key === 'number' ? args.positional[key] : undefined;
 };
+
+/**
+ * An argument is "missing" when it was not provided (or provided as null).
+ *
+ * When a message references a missing argument, ICU passes the argument's
+ * reference text through to the output verbatim, e.g. `{0}` or `{name}`.
+ * This applies to plain arguments as well as plural/select/selectordinal:
+ * the formatter is not evaluated at all. Emitting the reference text (rather
+ * than an empty string or `NaN`) surfaces template/argument mismatches.
+ */
+const missing = (arg: MessageArg): boolean => arg === undefined || arg === null;
+
+/**
+ * The literal argument reference text for a missing argument, e.g. `{0}`.
+ */
+const argRef = (key: Argument): string => `{${key}}`;
 
 // Save a bit of processing of common exact matches
 const DECIMAL_EXACT: { [n: string]: Decimal } = {
@@ -66,7 +82,7 @@ export class MessageEngine {
 
       case MessageOpType.ARG: {
         const arg = get(code[1], args);
-        this.buf += this.converter.asString(arg);
+        this.buf += missing(arg) ? argRef(code[1]) : this.converter.asString(arg);
         break;
       }
 
@@ -77,6 +93,10 @@ export class MessageEngine {
 
       case MessageOpType.PLURAL: {
         const arg = get(code[1][0], args);
+        if (missing(arg)) {
+          this.buf += argRef(code[1][0]);
+          break;
+        }
         const offset = code[2];
         const num = this.converter.asDecimal(arg);
         argsub = offset ? num.subtract(offset) : num;
@@ -122,6 +142,10 @@ export class MessageEngine {
 
       case MessageOpType.SELECT: {
         const arg = get(code[1][0], args);
+        if (missing(arg)) {
+          this.buf += argRef(code[1][0]);
+          break;
+        }
         const str = this.converter.asString(arg);
 
         let other: MessageCode | undefined;
