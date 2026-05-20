@@ -5,7 +5,8 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   {
-    ignores: ['**/dist/*', '**/node_modules/*', '**/lib/*'],
+    // Skip build output and generated code (TS sources live in src/).
+    ignores: ['**/dist/*', '**/node_modules/*', '**/lib/*', '**/lib-es/*', '**/.scratch/*', '**/lib/*.js'],
   },
   {
     files: [
