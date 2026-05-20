@@ -1300,7 +1300,7 @@ export class Decimal {
           if (flags & ParseFlags.EXP) {
             return `Extra exponent character at ${i}`;
           }
-          if (data.length > 0) {
+          if (dig > Constants.RDIGITS) {
             // Exponent is currently limited to the size of Constants.RADIX
             return 'Exponent too large';
           }
@@ -1312,11 +1312,16 @@ export class Decimal {
           flags &= ~ParseFlags.SIGN;
 
           // Copy the parsed number to the exponent and reset the digit count.
+          // An exponent of exactly RDIGITS digits has already spilled into
+          // `data` as a full limb (n === 0), so take the value from there and
+          // clear the limbs so the mantissa starts fresh.
+          const expValue = dig === Constants.RDIGITS ? data[0] : n;
           dig = 0;
-          exp = sign === -1 ? -n : n;
+          exp = sign === -1 ? -expValue : expValue;
           sign = 1;
           n = 0;
           z = 0;
+          data.length = 0;
           break;
 
         case Chars.MINUS:
