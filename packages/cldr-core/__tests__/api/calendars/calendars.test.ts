@@ -100,11 +100,13 @@ test('conversions', () => {
 
 test('formats bare date', () => {
   const api = calendarsApi('en');
-  let s = api.formatDate(new Date(2018, 5, 15, 12, 34, 56, 789), { datetime: 'full' });
-  expect(s).toEqual('Friday, June 15, 2018 at 4:34:56 PM Greenwich Mean Time');
+  // Bare dates (no zoneId) are interpreted as UTC wall clock time, so use
+  // Date.UTC to keep the test independent of the host timezone.
+  let s = api.formatDate(new Date(Date.UTC(2018, 5, 15, 12, 34, 56, 789)), { datetime: 'full' });
+  expect(s).toEqual('Friday, June 15, 2018 at 12:34:56\u202fPM Greenwich Mean Time');
 
-  s = api.formatDate(new Date(1977, 4, 25, 14, 30, 0), { datetime: 'full' });
-  expect(s).toEqual('Wednesday, May 25, 1977 at 6:30:00 PM Greenwich Mean Time');
+  s = api.formatDate(new Date(Date.UTC(1977, 4, 25, 14, 30, 0)), { datetime: 'full' });
+  expect(s).toEqual('Wednesday, May 25, 1977 at 2:30:00\u202fPM Greenwich Mean Time');
 });
 
 test('options defaulting', () => {
@@ -698,11 +700,14 @@ test('intervals', () => {
 
 test('intervals bare date', () => {
   const api = calendarsApi('en');
-  let s = api.formatDateInterval(new Date(2018, 1, 20), new Date(2018, 5, 13));
-  expect(s).toEqual('Feb 20 – Jun 13, 2018');
+  // Bare dates (no zoneId) are interpreted as UTC wall clock time
+  let s = api.formatDateInterval(new Date(Date.UTC(2018, 1, 20)), new Date(Date.UTC(2018, 5, 13)));
+  expect(s).toEqual('Feb 20\u2009–\u2009Jun 13, 2018');
 
-  s = api.formatDateInterval(new Date(2018, 1, 20, 0, 10), new Date(2018, 1, 20, 17), { skeleton: 'hms' });
-  expect(s).toEqual('5:10 AM – 10:00 PM');
+  s = api.formatDateInterval(new Date(Date.UTC(2018, 1, 20, 0, 10)), new Date(Date.UTC(2018, 1, 20, 17)), {
+    skeleton: 'hms',
+  });
+  expect(s).toEqual('12:10\u202fAM\u2009–\u20095:00\u202fPM');
 });
 
 test('interval parts', () => {

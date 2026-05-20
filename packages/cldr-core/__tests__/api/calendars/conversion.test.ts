@@ -23,8 +23,8 @@ test('zoned date time gregorian epoch', () => {
   let d: GregorianDate;
   let date: Date;
 
-  // 1514828096789 UTC
-  date = new Date(2018, 0, 1, 12, 34, 56, 789);
+  // 1514828096789 UTC == Jan 1, 2018 12:34:56.789 EST (UTC-5)
+  date = new Date(1514828096789);
   d = api.toGregorianDate({ date, zoneId: NEW_YORK });
   expect(d.toString()).toEqual('Gregorian 2018-01-01 12:34:56.789 America/New_York');
   expect(d.unixEpoch()).toEqual(1514828096789);
@@ -98,8 +98,8 @@ test('bare date', () => {
   const api = calendarsApi('en');
   let d: CalendarDate;
 
-  // Defaults to UTC
-  d = api.toGregorianDate(new Date(2018, 1, 20, 12, 34));
+  // Defaults to UTC. 1519148040000 == Feb 20, 2018 12:34 EST (UTC-5)
+  d = api.toGregorianDate(new Date(1519148040000));
   expect(d.unixEpoch()).toEqual(1519148040000);
   expect(d.year()).toEqual(2018);
   expect(d.month()).toEqual(2);
@@ -119,7 +119,8 @@ test('noop conversions', () => {
   let d: CalendarDate;
   let r: CalendarDate;
 
-  d = api.toGregorianDate(new Date(2018, 1, 1));
+  // Feb 1, 2018 midnight UTC
+  d = api.toGregorianDate(new Date(1517443200000));
   r = api.toGregorianDate(d);
   expect(d).toEqual(r);
 });

@@ -8,7 +8,8 @@ test('custom calendars', () => {
   // The 'timezone-id' setting is used to pull in the exemplar city for each zone.
   // All metazones still work, so we get full timezone names.
 
-  const date = { date: new Date(2019, 5, 10, 12, 34, 56), zoneId: 'America/New_York' };
+  // June 10, 2019 12:34:56 PM EDT (UTC-4) == 16:34:56 UTC
+  const date = { date: new Date(1560184496000), zoneId: 'America/New_York' };
 
   s = api.formatDateRaw(date, { pattern: 'VV' });
   expect(s).toEqual('America/New_York');

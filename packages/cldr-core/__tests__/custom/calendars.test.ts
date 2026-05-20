@@ -1,8 +1,11 @@
 import { calendarsApi } from '../_helpers';
 
+// June 10, 2019 12:34:56 PM EDT (UTC-4) == 16:34:56 UTC
+const JUNE_10_2019_123456_EDT = 1560184496000;
+
 test('custom calendars', () => {
   const zoneId = 'America/New_York';
-  const date = { date: new Date(2019, 5, 10, 12, 34, 56), zoneId };
+  const date = { date: new Date(JUNE_10_2019_123456_EDT), zoneId };
   const api = calendarsApi('en', { calendars: [] });
   let s: string;
 
@@ -22,7 +25,7 @@ test('custom calendars', () => {
 
 test('skeleton pattern defaulting', () => {
   const zoneId = 'America/New_York';
-  const date = { date: new Date(2019, 5, 10, 12, 34, 56), zoneId };
+  const date = { date: new Date(JUNE_10_2019_123456_EDT), zoneId };
   const api = calendarsApi('en', { calendars: [] });
   let s: string;
 
@@ -45,7 +48,7 @@ test('skeleton pattern defaulting', () => {
 
 test('skeleton pattern quarters', () => {
   const zoneId = 'America/New_York';
-  const date = { date: new Date(2019, 5, 10, 12, 34, 56), zoneId };
+  const date = { date: new Date(JUNE_10_2019_123456_EDT), zoneId };
   const api = calendarsApi('en', {
     calendars: [],
     'gregorian-available-format': ['yQQQ', 'yQQQQ'],
@@ -68,7 +71,7 @@ test('missing interval patterns', () => {
   });
   let s: string;
 
-  const start = api.toGregorianDate({ date: new Date(2019, 5, 10, 12, 34, 56), zoneId });
+  const start = api.toGregorianDate({ date: new Date(JUNE_10_2019_123456_EDT), zoneId });
 
   s = api.formatDateInterval(start, start.add({ day: 1 }));
   expect(s).toEqual('');

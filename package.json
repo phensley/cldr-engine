@@ -15,8 +15,8 @@
     "unlink-all": "pnpm --stream -r exec -- pnpm unlink",
     "lint": "pnpm --stream -r exec tsc -p tsconfig.json --emitDeclarationOnly && pnpm --stream -r run build:lint && pnpm --stream -r run lint",
     "stress": "pnpm --stream -r run stress",
-    "test": "TZ=America/New_York vitest --run --coverage",
-    "test:watch": "TZ=America/New_York vitest"
+    "test": "vitest --run --coverage",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.5",
