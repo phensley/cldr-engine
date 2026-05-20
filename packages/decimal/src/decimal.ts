@@ -920,7 +920,10 @@ export class Decimal {
               : NEGATIVE_INFINITY;
         }
         if (vinf) {
-          return ZERO;
+          // x / +/-Infinity is zero with the sign of the quotient (IEEE 754 /
+          // ECMAScript div). Return a fresh instance so callers cannot alias
+          // the shared ZERO constant.
+          return Decimal.fromRaw(u.sign === v.sign ? 1 : -1, 0, [0], DecimalFlag.NONE);
         }
         if (vzero) {
           return uzero ? NAN : u.sign === 1 ? POSITIVE_INFINITY : NEGATIVE_INFINITY;

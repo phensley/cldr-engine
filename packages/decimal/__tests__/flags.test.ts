@@ -1,4 +1,4 @@
-import { Decimal } from '../src';
+import { Decimal, DecimalConstants } from '../src';
 
 const INF_POS = new Decimal('Infinity');
 const INF_NEG = new Decimal('-Infinity');
@@ -7,6 +7,7 @@ const NAN = new Decimal('NaN');
 const POS = new Decimal('10');
 const NEG = new Decimal('-10');
 const ZERO = new Decimal('0');
+const NEG_ZERO = new Decimal('-0');
 
 test('construction', () => {
   let d: Decimal;
@@ -313,22 +314,22 @@ test('division', () => {
 
   // -----
 
-  // 0 / Infinity = 0
+  // 0 / Infinity = +0
   expect(ZERO.divide(INF_POS)).toEqual(ZERO);
 
-  // 0 / -Infinity = 0
-  expect(ZERO.divide(INF_NEG)).toEqual(ZERO);
+  // 0 / -Infinity = -0
+  expect(ZERO.divide(INF_NEG)).toEqual(NEG_ZERO);
 
-  // 10 / Infinity = 0
+  // 10 / Infinity = +0
   expect(POS.divide(INF_POS)).toEqual(ZERO);
 
-  // 10 / -Infinity = 0
-  expect(POS.divide(INF_NEG)).toEqual(ZERO);
+  // 10 / -Infinity = -0
+  expect(POS.divide(INF_NEG)).toEqual(NEG_ZERO);
 
-  // -10 / Infinity = 0
-  expect(NEG.divide(INF_POS)).toEqual(ZERO);
+  // -10 / Infinity = -0
+  expect(NEG.divide(INF_POS)).toEqual(NEG_ZERO);
 
-  // -10 / -Infinity = 0
+  // -10 / -Infinity = +0
   expect(NEG.divide(INF_NEG)).toEqual(ZERO);
 
   // -----
@@ -338,6 +339,27 @@ test('division', () => {
 
   // -10 / 0 = -Infinity
   expect(NEG.divide(ZERO)).toEqual(INF_NEG);
+});
+
+test('division by infinity yields signed zero and does not alias the shared ZERO', () => {
+  // Result sign matches the ECMAScript div operator, e.g. Object.is(-10 / Infinity, -0)
+  expect(POS.divide(INF_POS).isNegative()).toBe(false);
+  expect(POS.divide(INF_NEG).isNegative()).toBe(true);
+  expect(NEG.divide(INF_POS).isNegative()).toBe(true);
+  expect(NEG.divide(INF_NEG).isNegative()).toBe(false);
+  expect(ZERO.divide(INF_POS).isNegative()).toBe(false);
+  expect(ZERO.divide(INF_NEG).isNegative()).toBe(true);
+
+  // Results are still exactly zero
+  const r = NEG.divide(INF_POS);
+  expect(r.isZero()).toBe(true);
+  expect(r.signum()).toBe(0);
+  expect(r.compare(ZERO)).toBe(0);
+
+  // A fresh instance is returned, not the shared module-level ZERO constant
+  expect(POS.divide(INF_POS)).not.toBe(DecimalConstants.ZERO);
+  expect(NEG.divide(INF_POS)).not.toBe(DecimalConstants.ZERO);
+  expect(ZERO.divide(INF_NEG)).not.toBe(DecimalConstants.ZERO);
 });
 
 test('mod', () => {
