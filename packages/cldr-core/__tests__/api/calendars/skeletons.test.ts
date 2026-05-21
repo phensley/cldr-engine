@@ -109,3 +109,34 @@ test('matching field widths', () => {
   // Field width constraints enforced
   expect(skel('yMMMMMMEEEEEEd')).toEqual('yMMMEd');
 });
+
+test('matching ties prefer unchanged date field widths', () => {
+  const matcher = new DatePatternMatcher<any>();
+
+  // Model the standard 'full' format shadowing the available 'yMMMMEd'
+  // skeleton: both canonicalize to the same key, but the full pattern
+  // carries a long weekday (EEEE) and the full pattern's literals.
+  matcher.add(parse('EEEE, MMMM d, y', true));
+  matcher.add(parse('yMMMEd'));
+  matcher.add(parse('yMMMd'));
+  matcher.add(parse('yMd'));
+  matcher.sort();
+
+  const skel = (s: string) => matcher.match(parse(s)).skeleton.skeleton;
+
+  // Long month + short weekday ties between the long-month pattern
+  // (weekday width off by one) and the short-month pattern (month width
+  // off by one). The long-month pattern must win: adjusting the weekday
+  // width keeps the pattern's literals, while widening the month cannot
+  // restore them (and can degenerate a named month to digits).
+  expect(skel('yMMMMdE')).toEqual('yMMMMEd');
+  expect(skel('EdMMMMy')).toEqual('yMMMMEd');
+
+  // Short month + short weekday still selects the short-month pattern,
+  // as does a numeric month (never the long-month pattern).
+  expect(skel('yEEEMMMd')).toEqual('yMMMEd');
+  expect(skel('yMMEEd')).toEqual('yMMMEd');
+
+  // Long weekday matches the long-month pattern exactly.
+  expect(skel('yMMMMEEEEd')).toEqual('yMMMMEd');
+});

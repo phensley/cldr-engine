@@ -273,18 +273,53 @@ export class DatePatternMatcher<T> {
 
     let best: DatePatternMatcherEntry<T> = NONE;
     let bestDist: number = Number.MAX_SAFE_INTEGER;
+    let bestKind: number = 0;
 
     for (const entry of this.entries) {
       const dist = this.getDistance(entry.skeleton, input);
       if (dist < bestDist) {
         best = entry;
         bestDist = dist;
+        bestKind = this.getKindDistance(entry.skeleton, input);
         if (dist === 0) {
           break;
+        }
+      } else if (dist === bestDist) {
+        // Tie on field distance: prefer the candidate that does not
+        // change the width class of a date field (month, year, day).
+        const kind = this.getKindDistance(entry.skeleton, input);
+        if (kind < bestKind) {
+          best = entry;
+          bestKind = kind;
         }
       }
     }
     return best;
+  }
+
+  /**
+   * Secondary comparison value for candidates that tie on getDistance.
+   * Sums the field width differences for the date fields (month, year,
+   * day) that are present in both skeletons.
+   *
+   * ICU's best-fit matching prefers candidates that do not change the
+   * width class of date fields. For input 'yMMMMdE' (long month, short
+   * weekday) this selects the pattern with the long month, adjusting the
+   * weekday width, over the pattern with the abbreviated month, adjusting
+   * the weekday exactly. The adjusted wider pattern carries the literals
+   * (e.g. 'de' in es, 'den' in da) that the narrower pattern lacks, and
+   * keeps a named month where the narrower pattern renders digits.
+   */
+  protected getKindDistance(a: DateSkeleton, b: DateSkeleton): number {
+    let result = 0;
+    for (const i of [Field.MONTH, Field.YEAR, Field.DAY]) {
+      const atype = a.type[i];
+      const btype = b.type[i];
+      if (atype !== 0 && btype !== 0) {
+        result += Math.abs(atype - btype);
+      }
+    }
+    return result;
   }
 
   /**
@@ -358,6 +393,9 @@ export class DatePatternMatcher<T> {
       } else if (btype === 0) {
         result += MISSING_FIELD;
       } else {
+        // Named field types already bucket equivalent widths together
+        // (E/EE/EEE all parse to the same 'short' type), so only short <>
+        // long (and narrow/shorter) widths differ here.
         result += Math.abs(atype - btype);
       }
     }
