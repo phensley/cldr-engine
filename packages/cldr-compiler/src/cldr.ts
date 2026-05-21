@@ -299,6 +299,7 @@ const coreCalendarSchema = (name: string) => {
     availableFormats: get([prefix('dateTimeFormats', 'availableFormats'), (o: any) => filterFormats(o, false)]),
     pluralFormats: get([prefix('dateTimeFormats', 'availableFormats'), (o: any) => filterFormats(o, true)]),
     dateFormats: get([prefix('dateFormats', _sizeProps), getDateFormat]),
+    dateSkeletons: get(prefix('dateSkeletons', _sizeProps)),
     dayPeriods: get(prefix('dayPeriods', _formats)),
     dateTimeFormats: get(prefix('dateTimeFormats', _sizeProps)),
     dateTimeFormatsAt: get(prefix('dateTimeFormats-atTime', 'standard', _sizeProps)),
@@ -308,6 +309,7 @@ const coreCalendarSchema = (name: string) => {
     months: get(prefix('months', _formats)),
     quarters: get(prefix('quarters', _formats)),
     timeFormats: get(prefix('timeFormats', _sizeProps)),
+    timeSkeletons: get(prefix('timeSkeletons', _sizeProps)),
     weekdays: get(prefix('days', _formats)),
   };
 };
