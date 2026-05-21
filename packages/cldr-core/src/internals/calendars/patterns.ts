@@ -1,4 +1,5 @@
 import { CalendarSchema, PluralType } from '@phensley/cldr-types';
+import { LRU } from '@phensley/cldr-utils';
 import { coerceDecimal } from '@phensley/decimal';
 
 import { Internals } from '../../internals';
@@ -12,12 +13,6 @@ export interface CachedSkeletonRequest {
   dateSkel?: DateSkeleton;
   date?: DateTimeNode[];
   time?: DateTimeNode[];
-}
-
-export interface CachedIntervalRequest {
-  date?: DateTimeNode[];
-  range?: DateTimeNode[];
-  skeleton?: string;
 }
 
 export type StandaloneFieldType = 'dayPeriods' | 'eras' | 'months' | 'quarters' | 'weekdays';
@@ -51,6 +46,7 @@ export class CalendarPatterns {
 
   private readonly rawIntervalFormats: { [x: string]: { [y: string]: string } } = {};
   private readonly intervalFallback: string;
+  private readonly skeletonRequestCache: LRU<CachedSkeletonRequest>;
 
   protected readonly rawAvailableFormats: { [x: string]: string } = {};
   protected readonly rawPluralFormats: { [x: string]: { [y: string]: string } } = {};
@@ -79,6 +75,7 @@ export class CalendarPatterns {
     this.buildIntervalMatcher();
 
     this.intervalFallback = this.schema.intervalFormatFallback.get(bundle);
+    this.skeletonRequestCache = new LRU<CachedSkeletonRequest>(cacheSize);
   }
 
   dayPeriods(): ThreeLevelMap {
@@ -103,6 +100,14 @@ export class CalendarPatterns {
 
   parseSkeleton(raw: string): DateSkeleton {
     return this.skeletonParser.parse(raw);
+  }
+
+  getCachedSkeletonRequest(key: string): CachedSkeletonRequest | undefined {
+    return this.skeletonRequestCache.get(key);
+  }
+
+  setCachedSkeletonRequest(key: string, req: CachedSkeletonRequest): void {
+    this.skeletonRequestCache.set(key, req);
   }
 
   getDatePattern(width: string): DateTimeNode[] {

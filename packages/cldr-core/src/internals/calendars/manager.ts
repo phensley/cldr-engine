@@ -62,7 +62,7 @@ export class CalendarManager {
     let dateKey = this.supportedOption(options.datetime || options.date);
     const timeKey = this.supportedOption(options.datetime || options.time);
     const wrapKey = this.supportedOption(options.wrap);
-    let skelKey = options.skeleton || '';
+    const skelKey = options.skeleton || '';
 
     if (!dateKey && !timeKey && !skelKey) {
       dateKey = 'long';
@@ -85,8 +85,6 @@ export class CalendarManager {
       req.time = patterns.getTimePattern(timeKey);
     }
 
-    let query: DateSkeleton;
-
     // We have both standard formats, we're done
     if (req.date && req.time) {
       return req;
@@ -98,62 +96,65 @@ export class CalendarManager {
       if (!skelKey) {
         return req;
       }
+    }
+
+    // Cache best-fit results per raw skeleton, plus flags for which
+    // standard date/time formats and wrapper are also in play. Mixing
+    // a standard format with a skeleton changes the result for the
+    // same skeleton, so the flags are part of the key. The original
+    // canonical skeleton key collapsed field widths (e.g. 'SS' to 'S'),
+    // which changed the adjusted output, so the raw skeleton is used.
+    const cacheKey = `${skelKey}\t${dateKey}\t${timeKey}\t${wrapKey}`;
+    let dateSkel: DateSkeleton | undefined;
+    const entry = patterns.getCachedSkeletonRequest(cacheKey);
+    if (entry) {
+      // Reuse the previously matched patterns
+      req.date = entry.date;
+      req.time = entry.time;
+      dateSkel = entry.dateSkel;
+    } else {
+      // No cached entry, so parse the skeleton and perform a best-fit
+      // match against all available formats.
+      let query: DateSkeleton;
 
       // We have a standard date or time pattern along with a skeleton.
       // We split the skeleton into date/time parts, then use the one
-      // that doesn't conflict with the specified standard format
-      query = patterns.parseSkeleton(skelKey);
-
-      // Use the part of the skeleton that does not conflict
-      const time = query.split();
-      if (req.date) {
-        query = time;
+      // that doesn't conflict with the specified standard format.
+      if (req.date || req.time) {
+        query = patterns.parseSkeleton(skelKey);
+        const time = query.split();
+        if (req.date) {
+          query = time;
+        }
+      } else {
+        // No standard format specified, so just parse the skeleton
+        query = patterns.parseSkeleton(skelKey);
       }
 
-      // Update skeleton key with only the used fields
-      skelKey = query.canonical();
-    } else {
-      // No standard format specified, so just parse the skeleton
-      query = patterns.parseSkeleton(skelKey);
-    }
+      let timeQuery: DateSkeleton | undefined;
+      let timeSkel: DateSkeleton | undefined;
 
-    // TODO: skeleton caching disabled for now due to mixed formats
-    // Check if we've cached the patterns for this skeleton before
-    // let entry = patterns.getCachedSkeletonRequest(skelKey);
-    // if (entry) {
-    //   req.date = entry.date;
-    //   req.time = entry.time;
-    //   if (!wrapKey && entry.dateSkel && req.date && req.time) {
-    //     // If wrapper not explicitly requested, select based on skeleton date fields.
-    //     req.wrapper = this.selectWrapper(patterns, entry.dateSkel, req.date);
-    //   }
-    //   return req;
-    // }
+      // Check if skeleton specifies date or time fields, or both.
+      if (query.compound()) {
+        // Separate into a date and a time skeletons.
+        timeQuery = query.split();
+        dateSkel = patterns.matchAvailable(query);
+        timeSkel = patterns.matchAvailable(timeQuery);
+      } else if (query.isDate) {
+        dateSkel = patterns.matchAvailable(query);
+      } else {
+        timeQuery = query;
+        timeSkel = patterns.matchAvailable(query);
+      }
 
-    // Perform a best-fit match on the skeleton
+      if (dateSkel) {
+        req.date = this.getAvailablePattern(patterns, date, query, dateSkel, params);
+      }
+      if (timeQuery && timeSkel) {
+        req.time = this.getAvailablePattern(patterns, date, timeQuery, timeSkel, params);
+      }
 
-    let timeQuery: DateSkeleton | undefined;
-    let dateSkel: DateSkeleton | undefined;
-    let timeSkel: DateSkeleton | undefined;
-
-    // Check if skeleton specifies date or time fields, or both.
-    if (query.compound()) {
-      // Separate into a date and a time skeletons.
-      timeQuery = query.split();
-      dateSkel = patterns.matchAvailable(query);
-      timeSkel = patterns.matchAvailable(timeQuery);
-    } else if (query.isDate) {
-      dateSkel = patterns.matchAvailable(query);
-    } else {
-      timeQuery = query;
-      timeSkel = patterns.matchAvailable(query);
-    }
-
-    if (dateSkel) {
-      req.date = this.getAvailablePattern(patterns, date, query, dateSkel, params);
-    }
-    if (timeQuery && timeSkel) {
-      req.time = this.getAvailablePattern(patterns, date, timeQuery, timeSkel, params);
+      patterns.setCachedSkeletonRequest(cacheKey, { date: req.date, time: req.time, dateSkel });
     }
 
     if (!wrapKey) {
@@ -166,9 +167,6 @@ export class CalendarManager {
       }
     }
 
-    // TODO: skeleton caching disabled for now due to mixed formats
-    // entry = { date: req.date, time: req.time, dateSkel: dateSkel };
-    // patterns.setCachedSkeletonRequest(skelKey, entry);
     return req;
   }
 
