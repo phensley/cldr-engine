@@ -144,8 +144,13 @@ export class CalendarPatterns {
     return this.intervalFallback;
   }
 
-  adjustPattern(pattern: DateTimeNode[], skeleton: DateSkeleton, decimal: string): DateTimeNode[] {
-    return this.availableMatcher.adjust(pattern, skeleton, decimal);
+  adjustPattern(
+    pattern: DateTimeNode[],
+    skeleton: DateSkeleton,
+    matched: DateSkeleton,
+    decimal: string,
+  ): DateTimeNode[] {
+    return this.availableMatcher.adjust(pattern, skeleton, matched, decimal);
   }
 
   matchAvailable(skeleton: DateSkeleton): DateSkeleton {

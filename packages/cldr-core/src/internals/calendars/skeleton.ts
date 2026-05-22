@@ -325,7 +325,7 @@ export class DatePatternMatcher<T> {
   /**
    * Make field width adjustments to pattern using the given skeleton.
    */
-  adjust(pattern: DateTimeNode[], skeleton: DateSkeleton, decimal: string): DateTimeNode[] {
+  adjust(pattern: DateTimeNode[], skeleton: DateSkeleton, matched: DateSkeleton, decimal: string): DateTimeNode[] {
     const r: DateTimeNode[] = [];
     for (const n of pattern) {
       if (typeof n === 'string') {
@@ -359,6 +359,14 @@ export class DatePatternMatcher<T> {
 
       const ptype = p[2];
       const stype = skeleton.type[i];
+      // TR35 "Matching Skeletons": when the matched pattern's skeleton field
+      // length equals the requested field length, the pattern's field length
+      // is authoritative (locale data overrides the requested length).
+      // Type equality covers both digit count (numeric) and width class (named).
+      if (stype !== 0 && matched.type[i] === stype) {
+        r.push(n);
+        continue;
+      }
       // Ensure magnitudes are the same
       if ((ptype < 0 && stype < 0) || (ptype > 0 && stype > 0)) {
         const _info = skeleton.info[i];

@@ -380,7 +380,7 @@ export class CalendarManager {
         const parsedPattern = this.internals.calendars.parseDatePattern(pattern || '');
         /* istanbul ignore else -- @preserve */
         if (parsedPattern.length) {
-          req.range = patterns.adjustPattern(parsedPattern, query, params.symbols.decimal);
+          req.range = patterns.adjustPattern(parsedPattern, query, match.skeleton, params.symbols.decimal);
         }
       }
     } else {
@@ -509,7 +509,7 @@ export class CalendarManager {
     const pattern = patterns.getAvailablePattern(date, match);
     /* istanbul ignore else -- @preserve */
     if (pattern.length) {
-      return patterns.adjustPattern(pattern, query, params.symbols.decimal);
+      return patterns.adjustPattern(pattern, query, match, params.symbols.decimal);
     }
     // Base standard calendar formats are (currently) always defined.
     /* istanbul ignore next -- @preserve */
