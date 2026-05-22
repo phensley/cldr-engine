@@ -37,7 +37,9 @@ export class CalendarPatterns {
   private readonly region: string;
   private readonly skeletonParser: DateSkeletonParser;
   private readonly dateFormats: { [x: string]: string };
+  private readonly dateSkeletons: { [x: string]: string };
   private readonly timeFormats: { [x: string]: string };
+  private readonly timeSkeletons: { [x: string]: string };
   private readonly wrapperFormats: { [x: string]: string };
   private readonly wrapperFormatsAt: { [x: string]: string };
 
@@ -63,7 +65,9 @@ export class CalendarPatterns {
 
     // Fetch this locale's main formats
     this.dateFormats = schema.dateFormats.mapping(bundle);
+    this.dateSkeletons = schema.dateSkeletons.mapping(bundle);
     this.timeFormats = schema.timeFormats.mapping(bundle);
+    this.timeSkeletons = schema.timeSkeletons.mapping(bundle);
     this.wrapperFormats = schema.dateTimeFormats.mapping(bundle);
     this.wrapperFormatsAt = schema.dateTimeFormatsAt.mapping(bundle);
 
@@ -161,8 +165,14 @@ export class CalendarPatterns {
 
   private buildAvailableMatcher(): void {
     for (const width of Object.keys(this.dateFormats)) {
-      this.availableMatcher.add(this.skeletonParser.parse(this.dateFormats[width], true));
-      this.availableMatcher.add(this.skeletonParser.parse(this.timeFormats[width], true));
+      const ds = this.skeletonParser.parse(this.dateFormats[width], true);
+      const dkey = this.dateSkeletons[width];
+      if (dkey) ds.skeleton = dkey; // CLDR-authoritative key
+      this.availableMatcher.add(ds);
+      const ts = this.skeletonParser.parse(this.timeFormats[width], true);
+      const tkey = this.timeSkeletons[width];
+      if (tkey) ts.skeleton = tkey; // CLDR-authoritative key
+      this.availableMatcher.add(ts);
     }
 
     // For the pluralized formats use the 'other' category which will
