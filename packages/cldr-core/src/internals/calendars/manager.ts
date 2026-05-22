@@ -1,3 +1,4 @@
+import { coerceDecimal } from '@phensley/decimal';
 import { DateTimePatternField, DateTimePatternFieldType } from '@phensley/cldr-types';
 import { Cache } from '@phensley/cldr-utils';
 
@@ -104,7 +105,19 @@ export class CalendarManager {
     // same skeleton, so the flags are part of the key. The original
     // canonical skeleton key collapsed field widths (e.g. 'SS' to 'S'),
     // which changed the adjusted output, so the raw skeleton is used.
-    const cacheKey = `${skelKey}\t${dateKey}\t${timeKey}\t${wrapKey}`;
+    //
+    // The resolved pattern also depends on the date for plural-category-
+    // dependent skeletons (e.g. 'yw'/'MMMMW' pick a per-plural-category
+    // pattern -- see CalendarPatterns.getAvailablePattern) and on the
+    // numbering system, since fractional-second adjustment embeds
+    // params.symbols.decimal in the nodes. Both are included in the
+    // cache key (claude-review.md bugs 1-2).
+    let pluralKey = '';
+    if (!req.date && /[wW]/.test(skelKey)) {
+      const p = this.bundle.plurals();
+      pluralKey = `${p.cardinal(coerceDecimal(date.weekOfMonth()))}\u0001${p.cardinal(coerceDecimal(date.weekOfYear()))}`;
+    }
+    const cacheKey = `${skelKey}\t${dateKey}\t${timeKey}\t${wrapKey}\t${pluralKey}\t${params.numberSystemName}`;
     let dateSkel: DateSkeleton | undefined;
     const entry = patterns.getCachedSkeletonRequest(cacheKey);
     if (entry) {
