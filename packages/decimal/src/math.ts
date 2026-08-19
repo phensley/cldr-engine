@@ -134,6 +134,28 @@ export const multiplyword = (w: number[], u: number[], n: number, v: number): vo
 /**
  * Knuth TAoCP 4.3.1 Algorithm D
  * Division of nonnegative integer u by v, returning the quotient q and remainder r.
+ *
+ * WARNING: this Algorithm D implementation is only correct because of two
+ * deliberate choices that must NOT be "optimized" away or changed:
+ *
+ * 1. D3 uses a `while` loop that keeps correcting the trial quotient qhat as
+ *    many times as needed. Knuth's printed D3 does at most two corrections and
+ *    then ASSUMES qhat fits in a single limb (qhat < RADIX). The qhat <= q + 3
+ *    bound (Theorem B) does not justify that assumption: for q = b - 1 the
+ *    trial quotient can be qhat = b + 2, leaving qhat = b (a two-limb value)
+ *    after only two corrections. This is the decades-old bug in TAOCP vol 2
+ *    Algorithm 4.3.1D, exposed for odd bases (see kolja.rs/algorithm-d).
+ *
+ * 2. D4 multiplies by the FULL qhat over all n+1 digits. It must never be
+ *    changed to Knuth's 1x-n fast path, which multiplies by only the low limb
+ *    of qhat and silently drops the high limb. That truncation is precisely
+ *    where the bug manifests. If the fast path is ever adopted, qhat must be
+ *    clamped below RADIX first (and rhat adjusted by the excess * v[n-1]).
+ *
+ * Note also that Constants.RADIX (1e7) is EVEN, and the degenerate qhat = b + 2
+ * case cannot occur for even bases. Changing the base to an odd value revives
+ * the vulnerability, so any change to RADIX must be re-validated (port the
+ * divide() logic with the base parametrized and fuzz against odd bases).
  */
 export const divide = (uc: number[], vc: number[]): [number[], number[]] => {
   const n = vc.length;
