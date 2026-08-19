@@ -26,8 +26,8 @@ jobs:
 
       - name: Build
         run: |
-          pnpm i
           pnpm approve-builds esbuild
+          pnpm i
           pnpm run clean
           pnpm --sequential --stream -r run build
           pnpm --sequential --stream -r run build:lint
