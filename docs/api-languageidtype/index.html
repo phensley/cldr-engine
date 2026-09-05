@@ -1,13 +1,3342 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>@phensley/cldr · CLDR internationalization and localization in Typescript, batteries-included</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="CLDR internationalization and localization in Typescript, batteries-included"/><meta property="og:title" content="@phensley/cldr · CLDR internationalization and localization in Typescript, batteries-included"/><meta property="og:type" content="website"/><meta property="og:url" content="https://phensley.github.io/cldr-engine/index.html"/><meta property="og:description" content="CLDR internationalization and localization in Typescript, batteries-included"/><meta property="og:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://phensley.github.io/cldr-engine/img/cldr-engine-logo-bw.png"/><meta http-equiv="refresh" content="0; URL=/cldr-engine/docs/en/api-languageidtype"/><link rel="shortcut icon" href="/cldr-engine/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"/><script>
-              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-              ga('create', 'UA-121435304-1', 'auto');
-              ga('send', 'pageview');
-            </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/cldr-engine/js/sidenav.js"></script><script src="/cldr-engine/js/scrollSpy.js"></script><link rel="stylesheet" href="/cldr-engine/css/main.css"/><script src="/cldr-engine/js/codetabs.js"></script></head><body><script>
-                <!--
-                window.location.href = "/cldr-engine/docs/en/api-languageidtype";
-                // -->
-                </script></body></html>
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-api-languageidtype" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.2">
+<title data-rh="true">LanguageIdType | @phensley/cldr</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://phensley.github.io/cldr-engine/docs/api-languageidtype"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="LanguageIdType | @phensley/cldr"><meta data-rh="true" name="description" content="An ISO 639 identifier for a language."><meta data-rh="true" property="og:description" content="An ISO 639 identifier for a language."><link data-rh="true" rel="icon" href="/cldr-engine/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://phensley.github.io/cldr-engine/docs/api-languageidtype"><link data-rh="true" rel="alternate" href="https://phensley.github.io/cldr-engine/docs/api-languageidtype" hreflang="en"><link data-rh="true" rel="alternate" href="https://phensley.github.io/cldr-engine/docs/api-languageidtype" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LanguageIdType","item":"https://phensley.github.io/cldr-engine/docs/api-languageidtype"}]}</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic"><link rel="stylesheet" href="/cldr-engine/assets/css/styles.45dcfa7e.css">
+<script src="/cldr-engine/assets/js/runtime~main.55ccfd85.js" defer="defer"></script>
+<script src="/cldr-engine/assets/js/main.6f3aea05.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/cldr-engine/img/cldr-engine-logo-w.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_FJwE" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/cldr-engine/"><div class="navbar__logo"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="cldr-engine logo" class="themedComponent_H8EN themedComponent--light_uNP3"><img src="/cldr-engine/img/cldr-engine-logo-w.svg" alt="cldr-engine logo" class="themedComponent_H8EN themedComponent--dark_vT4O"></div><b class="navbar__title text--truncate">@phensley/cldr</b></a><a class="navbar__item navbar__link" href="/cldr-engine/docs/doc-index">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/cldr-engine/docs/api-cldr">API</a><a href="https://phensley.github.io/cldr-engine-react-demo" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Demo<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_AE89"><use href="#theme-svg-external-link"></use></svg></a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/phensley/cldr-engine" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_AE89"><use href="#theme-svg-external-link"></use></svg></a><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a aria-current="page" class="navbar__link active" aria-haspopup="true" aria-expanded="false" role="button" href="/cldr-engine/docs/api-languageidtype">1.12.1</a><ul class="dropdown__menu"><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/cldr-engine/docs/api-languageidtype">1.12.1</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.12.0/api-languageidtype">1.12.0</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.10.2/api-languageidtype">1.10.2</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.10.1/api-languageidtype">1.10.1</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.8.0/api-languageidtype">1.8.0</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.7.3/api-languageidtype">1.7.3</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.6.5/api-languageidtype">1.6.5</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.5.1/api-languageidtype">1.5.1</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.4.1/api-languageidtype">1.4.1</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.3.3/api-languageidtype">1.3.3</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.2.10/api-languageidtype">1.2.10</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.1.2/api-languageidtype">1.1.2</a></li><li><a class="dropdown__link" href="/cldr-engine/docs/1.0.9/api-languageidtype">1.0.9</a></li></ul></div><a href="https://www.npmjs.com/package/@phensley/cldr" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">NPM<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_AE89"><use href="#theme-svg-external-link"></use></svg></a><div class="navbarSearchContainer_NbiP"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_xdpL"><div class="docsWrapper_s0Oc"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_zZuN" type="button"></button><div class="docRoot_zFS3"><aside class="theme-doc-sidebar-container docSidebarContainer_ZhlS"><div class="sidebarViewport_q_UW"><div class="sidebar_qtVd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_C_tA"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_nVyZ menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/cldr-engine/docs/api-cldrframework"><span class="categoryLinkLabel_jNqj">API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_nVyZ menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/cldr-engine/docs/api-buddhistdate"><span class="categoryLinkLabel_jNqj">Calendars</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_nVyZ menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/cldr-engine/docs/api-contexttype"><span class="categoryLinkLabel_jNqj">General</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/cldr-engine/docs/api-contexttype"><span class="linkLabel_TDZB">ContextType</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/cldr-engine/docs/api-displaynameoptions"><span class="linkLabel_TDZB">DisplayNameOptions</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/cldr-engine/docs/api-languageidtype"><span class="linkLabel_TDZB">LanguageIdType</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/cldr-engine/docs/api-listpatterntype"><span class="linkLabel_TDZB">ListPatternType</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/cldr-engine/docs/api-measurementcategory"><span class="linkLabel_TDZB">MeasurementCategory</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/cldr-engine/docs/api-measurementsystem"><span class="linkLabel_TDZB">MeasurementSystem</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/cldr-engine/docs/api-regionidtype"><span class="linkLabel_TDZB">RegionIdType</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/cldr-engine/docs/api-scriptidtype"><span class="linkLabel_TDZB">ScriptIdType</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_nVyZ menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/cldr-engine/docs/api-bundle"><span class="categoryLinkLabel_jNqj">Locales</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_nVyZ menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/cldr-engine/docs/api-decimal"><span class="categoryLinkLabel_jNqj">Math</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_nVyZ menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/cldr-engine/docs/api-buildmessagematcher"><span class="categoryLinkLabel_jNqj">Messages</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_nVyZ menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/cldr-engine/docs/api-currencyformatoptions"><span class="categoryLinkLabel_jNqj">Numbers</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_nVyZ menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/cldr-engine/docs/api-quantity"><span class="categoryLinkLabel_jNqj">Units</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_CzG3"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_BICC"><div class="docItemContainer_d1OC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_LHl5" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/cldr-engine/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_jAjq"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">General</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">LanguageIdType</span></li></ul></nav><span class="theme-doc-version-badge badge badge--secondary">Version: 1.12.1</span><div class="tocCollapsible_J82q theme-doc-toc-mobile tocMobile_Q810"><button type="button" class="clean-btn tocCollapsibleButton_H_gd">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>LanguageIdType</h1></header><p>An <a href="https://en.wikipedia.org/wiki/ISO_639" target="_blank" rel="noopener noreferrer" class="">ISO 639</a> identifier for a language.</p>
+<h3 class="anchor anchorTargetStickyNavbar_fOTX" id="syntax">Syntax<a href="#syntax" class="hash-link" aria-label="Direct link to Syntax" title="Direct link to Syntax" translate="no">​</a></h3>
+<pre class="syntax">&#x27;aa&#x27; | &#x27;ab&#x27; | &#x27;ace&#x27; ... &#x27;zun&#x27; | &#x27;zxx&#x27; | &#x27;zza&#x27;
+</pre>
+<h3 class="anchor anchorTargetStickyNavbar_fOTX" id="values">Values<a href="#values" class="hash-link" aria-label="Direct link to Values" title="Direct link to Values" translate="no">​</a></h3>
+<ul>
+<li class="">&#x27;aa&#x27;
+<ul>
+<li class="">Afar</li>
+</ul>
+</li>
+<li class="">&#x27;ab&#x27;
+<ul>
+<li class="">Abkhazian</li>
+</ul>
+</li>
+<li class="">&#x27;ace&#x27;
+<ul>
+<li class="">Acehnese</li>
+</ul>
+</li>
+<li class="">&#x27;ach&#x27;
+<ul>
+<li class="">Acoli</li>
+</ul>
+</li>
+<li class="">&#x27;ada&#x27;
+<ul>
+<li class="">Adangme</li>
+</ul>
+</li>
+<li class="">&#x27;ady&#x27;
+<ul>
+<li class="">Adyghe</li>
+</ul>
+</li>
+<li class="">&#x27;ae&#x27;
+<ul>
+<li class="">Avestan</li>
+</ul>
+</li>
+<li class="">&#x27;aeb&#x27;
+<ul>
+<li class="">Tunisian Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;af&#x27;
+<ul>
+<li class="">Afrikaans</li>
+</ul>
+</li>
+<li class="">&#x27;afh&#x27;
+<ul>
+<li class="">Afrihili</li>
+</ul>
+</li>
+<li class="">&#x27;agq&#x27;
+<ul>
+<li class="">Aghem</li>
+</ul>
+</li>
+<li class="">&#x27;ain&#x27;
+<ul>
+<li class="">Ainu</li>
+</ul>
+</li>
+<li class="">&#x27;ak&#x27;
+<ul>
+<li class="">Akan</li>
+</ul>
+</li>
+<li class="">&#x27;akk&#x27;
+<ul>
+<li class="">Akkadian</li>
+</ul>
+</li>
+<li class="">&#x27;akz&#x27;
+<ul>
+<li class="">Alabama</li>
+</ul>
+</li>
+<li class="">&#x27;ale&#x27;
+<ul>
+<li class="">Aleut</li>
+</ul>
+</li>
+<li class="">&#x27;aln&#x27;
+<ul>
+<li class="">Gheg Albanian</li>
+</ul>
+</li>
+<li class="">&#x27;alt&#x27;
+<ul>
+<li class="">Southern Altai</li>
+</ul>
+</li>
+<li class="">&#x27;am&#x27;
+<ul>
+<li class="">Amharic</li>
+</ul>
+</li>
+<li class="">&#x27;an&#x27;
+<ul>
+<li class="">Aragonese</li>
+</ul>
+</li>
+<li class="">&#x27;ang&#x27;
+<ul>
+<li class="">Old English</li>
+</ul>
+</li>
+<li class="">&#x27;ann&#x27;
+<ul>
+<li class="">Obolo</li>
+</ul>
+</li>
+<li class="">&#x27;anp&#x27;
+<ul>
+<li class="">Angika</li>
+</ul>
+</li>
+<li class="">&#x27;apc&#x27;
+<ul>
+<li class="">(no value)</li>
+</ul>
+</li>
+<li class="">&#x27;ar&#x27;
+<ul>
+<li class="">Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;ar-001&#x27;
+<ul>
+<li class="">Modern Standard Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;arc&#x27;
+<ul>
+<li class="">Aramaic</li>
+</ul>
+</li>
+<li class="">&#x27;arn&#x27;
+<ul>
+<li class="">Mapuche</li>
+</ul>
+</li>
+<li class="">&#x27;aro&#x27;
+<ul>
+<li class="">Araona</li>
+</ul>
+</li>
+<li class="">&#x27;arp&#x27;
+<ul>
+<li class="">Arapaho</li>
+</ul>
+</li>
+<li class="">&#x27;arq&#x27;
+<ul>
+<li class="">Algerian Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;ars&#x27;
+<ul>
+<li class="">Najdi Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;arw&#x27;
+<ul>
+<li class="">Arawak</li>
+</ul>
+</li>
+<li class="">&#x27;ary&#x27;
+<ul>
+<li class="">Moroccan Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;arz&#x27;
+<ul>
+<li class="">Egyptian Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;as&#x27;
+<ul>
+<li class="">Assamese</li>
+</ul>
+</li>
+<li class="">&#x27;asa&#x27;
+<ul>
+<li class="">Asu</li>
+</ul>
+</li>
+<li class="">&#x27;ase&#x27;
+<ul>
+<li class="">American Sign Language</li>
+</ul>
+</li>
+<li class="">&#x27;ast&#x27;
+<ul>
+<li class="">Asturian</li>
+</ul>
+</li>
+<li class="">&#x27;atj&#x27;
+<ul>
+<li class="">Atikamekw</li>
+</ul>
+</li>
+<li class="">&#x27;av&#x27;
+<ul>
+<li class="">Avaric</li>
+</ul>
+</li>
+<li class="">&#x27;avk&#x27;
+<ul>
+<li class="">Kotava</li>
+</ul>
+</li>
+<li class="">&#x27;awa&#x27;
+<ul>
+<li class="">Awadhi</li>
+</ul>
+</li>
+<li class="">&#x27;ay&#x27;
+<ul>
+<li class="">Aymara</li>
+</ul>
+</li>
+<li class="">&#x27;az&#x27;
+<ul>
+<li class="">Azerbaijani</li>
+</ul>
+</li>
+<li class="">&#x27;az-Arab&#x27;
+<ul>
+<li class="">Azerbaijani</li>
+</ul>
+</li>
+<li class="">&#x27;ba&#x27;
+<ul>
+<li class="">Bashkir</li>
+</ul>
+</li>
+<li class="">&#x27;bal&#x27;
+<ul>
+<li class="">Baluchi</li>
+</ul>
+</li>
+<li class="">&#x27;ban&#x27;
+<ul>
+<li class="">Balinese</li>
+</ul>
+</li>
+<li class="">&#x27;bar&#x27;
+<ul>
+<li class="">Bavarian</li>
+</ul>
+</li>
+<li class="">&#x27;bas&#x27;
+<ul>
+<li class="">Basaa</li>
+</ul>
+</li>
+<li class="">&#x27;bax&#x27;
+<ul>
+<li class="">Bamun</li>
+</ul>
+</li>
+<li class="">&#x27;bbc&#x27;
+<ul>
+<li class="">Batak Toba</li>
+</ul>
+</li>
+<li class="">&#x27;bbj&#x27;
+<ul>
+<li class="">Ghomala</li>
+</ul>
+</li>
+<li class="">&#x27;be&#x27;
+<ul>
+<li class="">Belarusian</li>
+</ul>
+</li>
+<li class="">&#x27;bej&#x27;
+<ul>
+<li class="">Beja</li>
+</ul>
+</li>
+<li class="">&#x27;bem&#x27;
+<ul>
+<li class="">Bemba</li>
+</ul>
+</li>
+<li class="">&#x27;bew&#x27;
+<ul>
+<li class="">Betawi</li>
+</ul>
+</li>
+<li class="">&#x27;bez&#x27;
+<ul>
+<li class="">Bena</li>
+</ul>
+</li>
+<li class="">&#x27;bfd&#x27;
+<ul>
+<li class="">Bafut</li>
+</ul>
+</li>
+<li class="">&#x27;bfq&#x27;
+<ul>
+<li class="">Badaga</li>
+</ul>
+</li>
+<li class="">&#x27;bg&#x27;
+<ul>
+<li class="">Bulgarian</li>
+</ul>
+</li>
+<li class="">&#x27;bgc&#x27;
+<ul>
+<li class="">Haryanvi</li>
+</ul>
+</li>
+<li class="">&#x27;bgn&#x27;
+<ul>
+<li class="">Western Balochi</li>
+</ul>
+</li>
+<li class="">&#x27;bho&#x27;
+<ul>
+<li class="">Bhojpuri</li>
+</ul>
+</li>
+<li class="">&#x27;bi&#x27;
+<ul>
+<li class="">Bislama</li>
+</ul>
+</li>
+<li class="">&#x27;bik&#x27;
+<ul>
+<li class="">Bikol</li>
+</ul>
+</li>
+<li class="">&#x27;bin&#x27;
+<ul>
+<li class="">Bini</li>
+</ul>
+</li>
+<li class="">&#x27;bjn&#x27;
+<ul>
+<li class="">Banjar</li>
+</ul>
+</li>
+<li class="">&#x27;bkm&#x27;
+<ul>
+<li class="">Kom</li>
+</ul>
+</li>
+<li class="">&#x27;bla&#x27;
+<ul>
+<li class="">Siksiká</li>
+</ul>
+</li>
+<li class="">&#x27;blo&#x27;
+<ul>
+<li class="">Anii</li>
+</ul>
+</li>
+<li class="">&#x27;blt&#x27;
+<ul>
+<li class="">Tai Dam</li>
+</ul>
+</li>
+<li class="">&#x27;bm&#x27;
+<ul>
+<li class="">Bambara</li>
+</ul>
+</li>
+<li class="">&#x27;bn&#x27;
+<ul>
+<li class="">Bangla</li>
+</ul>
+</li>
+<li class="">&#x27;bo&#x27;
+<ul>
+<li class="">Tibetan</li>
+</ul>
+</li>
+<li class="">&#x27;bpy&#x27;
+<ul>
+<li class="">Bishnupriya</li>
+</ul>
+</li>
+<li class="">&#x27;bqi&#x27;
+<ul>
+<li class="">Bakhtiari</li>
+</ul>
+</li>
+<li class="">&#x27;br&#x27;
+<ul>
+<li class="">Breton</li>
+</ul>
+</li>
+<li class="">&#x27;bra&#x27;
+<ul>
+<li class="">Braj</li>
+</ul>
+</li>
+<li class="">&#x27;brh&#x27;
+<ul>
+<li class="">Brahui</li>
+</ul>
+</li>
+<li class="">&#x27;brx&#x27;
+<ul>
+<li class="">Bodo</li>
+</ul>
+</li>
+<li class="">&#x27;bs&#x27;
+<ul>
+<li class="">Bosnian</li>
+</ul>
+</li>
+<li class="">&#x27;bss&#x27;
+<ul>
+<li class="">Akoose</li>
+</ul>
+</li>
+<li class="">&#x27;bua&#x27;
+<ul>
+<li class="">Buriat</li>
+</ul>
+</li>
+<li class="">&#x27;bug&#x27;
+<ul>
+<li class="">Buginese</li>
+</ul>
+</li>
+<li class="">&#x27;bum&#x27;
+<ul>
+<li class="">Bulu</li>
+</ul>
+</li>
+<li class="">&#x27;byn&#x27;
+<ul>
+<li class="">Blin</li>
+</ul>
+</li>
+<li class="">&#x27;byv&#x27;
+<ul>
+<li class="">Medumba</li>
+</ul>
+</li>
+<li class="">&#x27;ca&#x27;
+<ul>
+<li class="">Catalan</li>
+</ul>
+</li>
+<li class="">&#x27;cad&#x27;
+<ul>
+<li class="">Caddo</li>
+</ul>
+</li>
+<li class="">&#x27;car&#x27;
+<ul>
+<li class="">Carib</li>
+</ul>
+</li>
+<li class="">&#x27;cay&#x27;
+<ul>
+<li class="">Cayuga</li>
+</ul>
+</li>
+<li class="">&#x27;cch&#x27;
+<ul>
+<li class="">Atsam</li>
+</ul>
+</li>
+<li class="">&#x27;ccp&#x27;
+<ul>
+<li class="">Chakma</li>
+</ul>
+</li>
+<li class="">&#x27;ce&#x27;
+<ul>
+<li class="">Chechen</li>
+</ul>
+</li>
+<li class="">&#x27;ceb&#x27;
+<ul>
+<li class="">Cebuano</li>
+</ul>
+</li>
+<li class="">&#x27;cgg&#x27;
+<ul>
+<li class="">Chiga</li>
+</ul>
+</li>
+<li class="">&#x27;ch&#x27;
+<ul>
+<li class="">Chamorro</li>
+</ul>
+</li>
+<li class="">&#x27;chb&#x27;
+<ul>
+<li class="">Chibcha</li>
+</ul>
+</li>
+<li class="">&#x27;chg&#x27;
+<ul>
+<li class="">Chagatai</li>
+</ul>
+</li>
+<li class="">&#x27;chk&#x27;
+<ul>
+<li class="">Chuukese</li>
+</ul>
+</li>
+<li class="">&#x27;chm&#x27;
+<ul>
+<li class="">Mari</li>
+</ul>
+</li>
+<li class="">&#x27;chn&#x27;
+<ul>
+<li class="">Chinook Jargon</li>
+</ul>
+</li>
+<li class="">&#x27;cho&#x27;
+<ul>
+<li class="">Choctaw</li>
+</ul>
+</li>
+<li class="">&#x27;chp&#x27;
+<ul>
+<li class="">Chipewyan</li>
+</ul>
+</li>
+<li class="">&#x27;chr&#x27;
+<ul>
+<li class="">Cherokee</li>
+</ul>
+</li>
+<li class="">&#x27;chy&#x27;
+<ul>
+<li class="">Cheyenne</li>
+</ul>
+</li>
+<li class="">&#x27;cic&#x27;
+<ul>
+<li class="">Chickasaw</li>
+</ul>
+</li>
+<li class="">&#x27;ckb&#x27;
+<ul>
+<li class="">Central Kurdish</li>
+</ul>
+</li>
+<li class="">&#x27;clc&#x27;
+<ul>
+<li class="">Chilcotin</li>
+</ul>
+</li>
+<li class="">&#x27;co&#x27;
+<ul>
+<li class="">Corsican</li>
+</ul>
+</li>
+<li class="">&#x27;cop&#x27;
+<ul>
+<li class="">Coptic</li>
+</ul>
+</li>
+<li class="">&#x27;cps&#x27;
+<ul>
+<li class="">Capiznon</li>
+</ul>
+</li>
+<li class="">&#x27;cr&#x27;
+<ul>
+<li class="">Cree</li>
+</ul>
+</li>
+<li class="">&#x27;crg&#x27;
+<ul>
+<li class="">Michif</li>
+</ul>
+</li>
+<li class="">&#x27;crh&#x27;
+<ul>
+<li class="">Crimean Tatar</li>
+</ul>
+</li>
+<li class="">&#x27;crj&#x27;
+<ul>
+<li class="">Southern East Cree</li>
+</ul>
+</li>
+<li class="">&#x27;crk&#x27;
+<ul>
+<li class="">Plains Cree</li>
+</ul>
+</li>
+<li class="">&#x27;crl&#x27;
+<ul>
+<li class="">Northern East Cree</li>
+</ul>
+</li>
+<li class="">&#x27;crm&#x27;
+<ul>
+<li class="">Moose Cree</li>
+</ul>
+</li>
+<li class="">&#x27;crr&#x27;
+<ul>
+<li class="">Carolina Algonquian</li>
+</ul>
+</li>
+<li class="">&#x27;crs&#x27;
+<ul>
+<li class="">Seselwa Creole French</li>
+</ul>
+</li>
+<li class="">&#x27;cs&#x27;
+<ul>
+<li class="">Czech</li>
+</ul>
+</li>
+<li class="">&#x27;csb&#x27;
+<ul>
+<li class="">Kashubian</li>
+</ul>
+</li>
+<li class="">&#x27;csw&#x27;
+<ul>
+<li class="">Swampy Cree</li>
+</ul>
+</li>
+<li class="">&#x27;cu&#x27;
+<ul>
+<li class="">Church Slavic</li>
+</ul>
+</li>
+<li class="">&#x27;cv&#x27;
+<ul>
+<li class="">Chuvash</li>
+</ul>
+</li>
+<li class="">&#x27;cy&#x27;
+<ul>
+<li class="">Welsh</li>
+</ul>
+</li>
+<li class="">&#x27;da&#x27;
+<ul>
+<li class="">Danish</li>
+</ul>
+</li>
+<li class="">&#x27;dak&#x27;
+<ul>
+<li class="">Dakota</li>
+</ul>
+</li>
+<li class="">&#x27;dar&#x27;
+<ul>
+<li class="">Dargwa</li>
+</ul>
+</li>
+<li class="">&#x27;dav&#x27;
+<ul>
+<li class="">Taita</li>
+</ul>
+</li>
+<li class="">&#x27;de&#x27;
+<ul>
+<li class="">German</li>
+</ul>
+</li>
+<li class="">&#x27;de-AT&#x27;
+<ul>
+<li class="">Austrian German</li>
+</ul>
+</li>
+<li class="">&#x27;de-CH&#x27;
+<ul>
+<li class="">Swiss High German</li>
+</ul>
+</li>
+<li class="">&#x27;del&#x27;
+<ul>
+<li class="">Delaware</li>
+</ul>
+</li>
+<li class="">&#x27;den&#x27;
+<ul>
+<li class="">Slave</li>
+</ul>
+</li>
+<li class="">&#x27;dgr&#x27;
+<ul>
+<li class="">Dogrib</li>
+</ul>
+</li>
+<li class="">&#x27;din&#x27;
+<ul>
+<li class="">Dinka</li>
+</ul>
+</li>
+<li class="">&#x27;dje&#x27;
+<ul>
+<li class="">Zarma</li>
+</ul>
+</li>
+<li class="">&#x27;doi&#x27;
+<ul>
+<li class="">Dogri</li>
+</ul>
+</li>
+<li class="">&#x27;dsb&#x27;
+<ul>
+<li class="">Lower Sorbian</li>
+</ul>
+</li>
+<li class="">&#x27;dtp&#x27;
+<ul>
+<li class="">Central Dusun</li>
+</ul>
+</li>
+<li class="">&#x27;dua&#x27;
+<ul>
+<li class="">Duala</li>
+</ul>
+</li>
+<li class="">&#x27;dum&#x27;
+<ul>
+<li class="">Middle Dutch</li>
+</ul>
+</li>
+<li class="">&#x27;dv&#x27;
+<ul>
+<li class="">Divehi</li>
+</ul>
+</li>
+<li class="">&#x27;dyo&#x27;
+<ul>
+<li class="">Jola-Fonyi</li>
+</ul>
+</li>
+<li class="">&#x27;dyu&#x27;
+<ul>
+<li class="">Dyula</li>
+</ul>
+</li>
+<li class="">&#x27;dz&#x27;
+<ul>
+<li class="">Dzongkha</li>
+</ul>
+</li>
+<li class="">&#x27;dzg&#x27;
+<ul>
+<li class="">Dazaga</li>
+</ul>
+</li>
+<li class="">&#x27;ebu&#x27;
+<ul>
+<li class="">Embu</li>
+</ul>
+</li>
+<li class="">&#x27;ee&#x27;
+<ul>
+<li class="">Ewe</li>
+</ul>
+</li>
+<li class="">&#x27;efi&#x27;
+<ul>
+<li class="">Efik</li>
+</ul>
+</li>
+<li class="">&#x27;egl&#x27;
+<ul>
+<li class="">Emilian</li>
+</ul>
+</li>
+<li class="">&#x27;egy&#x27;
+<ul>
+<li class="">Ancient Egyptian</li>
+</ul>
+</li>
+<li class="">&#x27;eka&#x27;
+<ul>
+<li class="">Ekajuk</li>
+</ul>
+</li>
+<li class="">&#x27;el&#x27;
+<ul>
+<li class="">Greek</li>
+</ul>
+</li>
+<li class="">&#x27;elx&#x27;
+<ul>
+<li class="">Elamite</li>
+</ul>
+</li>
+<li class="">&#x27;en&#x27;
+<ul>
+<li class="">English</li>
+</ul>
+</li>
+<li class="">&#x27;en-AU&#x27;
+<ul>
+<li class="">Australian English</li>
+</ul>
+</li>
+<li class="">&#x27;en-CA&#x27;
+<ul>
+<li class="">Canadian English</li>
+</ul>
+</li>
+<li class="">&#x27;en-GB&#x27;
+<ul>
+<li class="">British English</li>
+</ul>
+</li>
+<li class="">&#x27;en-US&#x27;
+<ul>
+<li class="">American English</li>
+</ul>
+</li>
+<li class="">&#x27;enm&#x27;
+<ul>
+<li class="">Middle English</li>
+</ul>
+</li>
+<li class="">&#x27;eo&#x27;
+<ul>
+<li class="">Esperanto</li>
+</ul>
+</li>
+<li class="">&#x27;es&#x27;
+<ul>
+<li class="">Spanish</li>
+</ul>
+</li>
+<li class="">&#x27;es-419&#x27;
+<ul>
+<li class="">Latin American Spanish</li>
+</ul>
+</li>
+<li class="">&#x27;es-ES&#x27;
+<ul>
+<li class="">European Spanish</li>
+</ul>
+</li>
+<li class="">&#x27;es-MX&#x27;
+<ul>
+<li class="">Mexican Spanish</li>
+</ul>
+</li>
+<li class="">&#x27;esu&#x27;
+<ul>
+<li class="">Central Yupik</li>
+</ul>
+</li>
+<li class="">&#x27;et&#x27;
+<ul>
+<li class="">Estonian</li>
+</ul>
+</li>
+<li class="">&#x27;eu&#x27;
+<ul>
+<li class="">Basque</li>
+</ul>
+</li>
+<li class="">&#x27;ewo&#x27;
+<ul>
+<li class="">Ewondo</li>
+</ul>
+</li>
+<li class="">&#x27;ext&#x27;
+<ul>
+<li class="">Extremaduran</li>
+</ul>
+</li>
+<li class="">&#x27;fa&#x27;
+<ul>
+<li class="">Persian</li>
+</ul>
+</li>
+<li class="">&#x27;fa-AF&#x27;
+<ul>
+<li class="">Dari</li>
+</ul>
+</li>
+<li class="">&#x27;fan&#x27;
+<ul>
+<li class="">Fang</li>
+</ul>
+</li>
+<li class="">&#x27;fat&#x27;
+<ul>
+<li class="">Fanti</li>
+</ul>
+</li>
+<li class="">&#x27;ff&#x27;
+<ul>
+<li class="">Fula</li>
+</ul>
+</li>
+<li class="">&#x27;fi&#x27;
+<ul>
+<li class="">Finnish</li>
+</ul>
+</li>
+<li class="">&#x27;fil&#x27;
+<ul>
+<li class="">Filipino</li>
+</ul>
+</li>
+<li class="">&#x27;fit&#x27;
+<ul>
+<li class="">Tornedalen Finnish</li>
+</ul>
+</li>
+<li class="">&#x27;fj&#x27;
+<ul>
+<li class="">Fijian</li>
+</ul>
+</li>
+<li class="">&#x27;fo&#x27;
+<ul>
+<li class="">Faroese</li>
+</ul>
+</li>
+<li class="">&#x27;fon&#x27;
+<ul>
+<li class="">Fon</li>
+</ul>
+</li>
+<li class="">&#x27;fr&#x27;
+<ul>
+<li class="">French</li>
+</ul>
+</li>
+<li class="">&#x27;fr-CA&#x27;
+<ul>
+<li class="">Canadian French</li>
+</ul>
+</li>
+<li class="">&#x27;fr-CH&#x27;
+<ul>
+<li class="">Swiss French</li>
+</ul>
+</li>
+<li class="">&#x27;frc&#x27;
+<ul>
+<li class="">Cajun French</li>
+</ul>
+</li>
+<li class="">&#x27;frm&#x27;
+<ul>
+<li class="">Middle French</li>
+</ul>
+</li>
+<li class="">&#x27;fro&#x27;
+<ul>
+<li class="">Old French</li>
+</ul>
+</li>
+<li class="">&#x27;frp&#x27;
+<ul>
+<li class="">Arpitan</li>
+</ul>
+</li>
+<li class="">&#x27;frr&#x27;
+<ul>
+<li class="">Northern Frisian</li>
+</ul>
+</li>
+<li class="">&#x27;frs&#x27;
+<ul>
+<li class="">Eastern Frisian</li>
+</ul>
+</li>
+<li class="">&#x27;fur&#x27;
+<ul>
+<li class="">Friulian</li>
+</ul>
+</li>
+<li class="">&#x27;fy&#x27;
+<ul>
+<li class="">Western Frisian</li>
+</ul>
+</li>
+<li class="">&#x27;ga&#x27;
+<ul>
+<li class="">Irish</li>
+</ul>
+</li>
+<li class="">&#x27;gaa&#x27;
+<ul>
+<li class="">Ga</li>
+</ul>
+</li>
+<li class="">&#x27;gag&#x27;
+<ul>
+<li class="">Gagauz</li>
+</ul>
+</li>
+<li class="">&#x27;gan&#x27;
+<ul>
+<li class="">Gan Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;gay&#x27;
+<ul>
+<li class="">Gayo</li>
+</ul>
+</li>
+<li class="">&#x27;gba&#x27;
+<ul>
+<li class="">Gbaya</li>
+</ul>
+</li>
+<li class="">&#x27;gbz&#x27;
+<ul>
+<li class="">Zoroastrian Dari</li>
+</ul>
+</li>
+<li class="">&#x27;gd&#x27;
+<ul>
+<li class="">Scottish Gaelic</li>
+</ul>
+</li>
+<li class="">&#x27;gez&#x27;
+<ul>
+<li class="">Geez</li>
+</ul>
+</li>
+<li class="">&#x27;gil&#x27;
+<ul>
+<li class="">Gilbertese</li>
+</ul>
+</li>
+<li class="">&#x27;gl&#x27;
+<ul>
+<li class="">Galician</li>
+</ul>
+</li>
+<li class="">&#x27;glk&#x27;
+<ul>
+<li class="">Gilaki</li>
+</ul>
+</li>
+<li class="">&#x27;gmh&#x27;
+<ul>
+<li class="">Middle High German</li>
+</ul>
+</li>
+<li class="">&#x27;gn&#x27;
+<ul>
+<li class="">Guarani</li>
+</ul>
+</li>
+<li class="">&#x27;goh&#x27;
+<ul>
+<li class="">Old High German</li>
+</ul>
+</li>
+<li class="">&#x27;gon&#x27;
+<ul>
+<li class="">Gondi</li>
+</ul>
+</li>
+<li class="">&#x27;gor&#x27;
+<ul>
+<li class="">Gorontalo</li>
+</ul>
+</li>
+<li class="">&#x27;got&#x27;
+<ul>
+<li class="">Gothic</li>
+</ul>
+</li>
+<li class="">&#x27;grb&#x27;
+<ul>
+<li class="">Grebo</li>
+</ul>
+</li>
+<li class="">&#x27;grc&#x27;
+<ul>
+<li class="">Ancient Greek</li>
+</ul>
+</li>
+<li class="">&#x27;gsw&#x27;
+<ul>
+<li class="">Swiss German</li>
+</ul>
+</li>
+<li class="">&#x27;gu&#x27;
+<ul>
+<li class="">Gujarati</li>
+</ul>
+</li>
+<li class="">&#x27;guc&#x27;
+<ul>
+<li class="">Wayuu</li>
+</ul>
+</li>
+<li class="">&#x27;gur&#x27;
+<ul>
+<li class="">Frafra</li>
+</ul>
+</li>
+<li class="">&#x27;guz&#x27;
+<ul>
+<li class="">Gusii</li>
+</ul>
+</li>
+<li class="">&#x27;gv&#x27;
+<ul>
+<li class="">Manx</li>
+</ul>
+</li>
+<li class="">&#x27;gwi&#x27;
+<ul>
+<li class="">Gwichʼin</li>
+</ul>
+</li>
+<li class="">&#x27;ha&#x27;
+<ul>
+<li class="">Hausa</li>
+</ul>
+</li>
+<li class="">&#x27;hai&#x27;
+<ul>
+<li class="">Haida</li>
+</ul>
+</li>
+<li class="">&#x27;hak&#x27;
+<ul>
+<li class="">Hakka Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;haw&#x27;
+<ul>
+<li class="">Hawaiian</li>
+</ul>
+</li>
+<li class="">&#x27;hax&#x27;
+<ul>
+<li class="">Southern Haida</li>
+</ul>
+</li>
+<li class="">&#x27;he&#x27;
+<ul>
+<li class="">Hebrew</li>
+</ul>
+</li>
+<li class="">&#x27;hi&#x27;
+<ul>
+<li class="">Hindi</li>
+</ul>
+</li>
+<li class="">&#x27;hi-Latn&#x27;
+<ul>
+<li class="">Hindi (Latin)</li>
+</ul>
+</li>
+<li class="">&#x27;hif&#x27;
+<ul>
+<li class="">Fiji Hindi</li>
+</ul>
+</li>
+<li class="">&#x27;hil&#x27;
+<ul>
+<li class="">Hiligaynon</li>
+</ul>
+</li>
+<li class="">&#x27;hit&#x27;
+<ul>
+<li class="">Hittite</li>
+</ul>
+</li>
+<li class="">&#x27;hmn&#x27;
+<ul>
+<li class="">Hmong</li>
+</ul>
+</li>
+<li class="">&#x27;hnj&#x27;
+<ul>
+<li class="">Hmong Njua</li>
+</ul>
+</li>
+<li class="">&#x27;ho&#x27;
+<ul>
+<li class="">Hiri Motu</li>
+</ul>
+</li>
+<li class="">&#x27;hr&#x27;
+<ul>
+<li class="">Croatian</li>
+</ul>
+</li>
+<li class="">&#x27;hsb&#x27;
+<ul>
+<li class="">Upper Sorbian</li>
+</ul>
+</li>
+<li class="">&#x27;hsn&#x27;
+<ul>
+<li class="">Xiang Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;ht&#x27;
+<ul>
+<li class="">Haitian Creole</li>
+</ul>
+</li>
+<li class="">&#x27;hu&#x27;
+<ul>
+<li class="">Hungarian</li>
+</ul>
+</li>
+<li class="">&#x27;hup&#x27;
+<ul>
+<li class="">Hupa</li>
+</ul>
+</li>
+<li class="">&#x27;hur&#x27;
+<ul>
+<li class="">Halkomelem</li>
+</ul>
+</li>
+<li class="">&#x27;hy&#x27;
+<ul>
+<li class="">Armenian</li>
+</ul>
+</li>
+<li class="">&#x27;hz&#x27;
+<ul>
+<li class="">Herero</li>
+</ul>
+</li>
+<li class="">&#x27;ia&#x27;
+<ul>
+<li class="">Interlingua</li>
+</ul>
+</li>
+<li class="">&#x27;iba&#x27;
+<ul>
+<li class="">Iban</li>
+</ul>
+</li>
+<li class="">&#x27;ibb&#x27;
+<ul>
+<li class="">Ibibio</li>
+</ul>
+</li>
+<li class="">&#x27;id&#x27;
+<ul>
+<li class="">Indonesian</li>
+</ul>
+</li>
+<li class="">&#x27;ie&#x27;
+<ul>
+<li class="">Interlingue</li>
+</ul>
+</li>
+<li class="">&#x27;ig&#x27;
+<ul>
+<li class="">Igbo</li>
+</ul>
+</li>
+<li class="">&#x27;ii&#x27;
+<ul>
+<li class="">Sichuan Yi</li>
+</ul>
+</li>
+<li class="">&#x27;ik&#x27;
+<ul>
+<li class="">Inupiaq</li>
+</ul>
+</li>
+<li class="">&#x27;ikt&#x27;
+<ul>
+<li class="">Western Canadian Inuktitut</li>
+</ul>
+</li>
+<li class="">&#x27;ilo&#x27;
+<ul>
+<li class="">Iloko</li>
+</ul>
+</li>
+<li class="">&#x27;inh&#x27;
+<ul>
+<li class="">Ingush</li>
+</ul>
+</li>
+<li class="">&#x27;io&#x27;
+<ul>
+<li class="">Ido</li>
+</ul>
+</li>
+<li class="">&#x27;is&#x27;
+<ul>
+<li class="">Icelandic</li>
+</ul>
+</li>
+<li class="">&#x27;it&#x27;
+<ul>
+<li class="">Italian</li>
+</ul>
+</li>
+<li class="">&#x27;iu&#x27;
+<ul>
+<li class="">Inuktitut</li>
+</ul>
+</li>
+<li class="">&#x27;izh&#x27;
+<ul>
+<li class="">Ingrian</li>
+</ul>
+</li>
+<li class="">&#x27;ja&#x27;
+<ul>
+<li class="">Japanese</li>
+</ul>
+</li>
+<li class="">&#x27;jam&#x27;
+<ul>
+<li class="">Jamaican Creole English</li>
+</ul>
+</li>
+<li class="">&#x27;jbo&#x27;
+<ul>
+<li class="">Lojban</li>
+</ul>
+</li>
+<li class="">&#x27;jgo&#x27;
+<ul>
+<li class="">Ngomba</li>
+</ul>
+</li>
+<li class="">&#x27;jmc&#x27;
+<ul>
+<li class="">Machame</li>
+</ul>
+</li>
+<li class="">&#x27;jpr&#x27;
+<ul>
+<li class="">Judeo-Persian</li>
+</ul>
+</li>
+<li class="">&#x27;jrb&#x27;
+<ul>
+<li class="">Judeo-Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;jut&#x27;
+<ul>
+<li class="">Jutish</li>
+</ul>
+</li>
+<li class="">&#x27;jv&#x27;
+<ul>
+<li class="">Javanese</li>
+</ul>
+</li>
+<li class="">&#x27;ka&#x27;
+<ul>
+<li class="">Georgian</li>
+</ul>
+</li>
+<li class="">&#x27;kaa&#x27;
+<ul>
+<li class="">Kara-Kalpak</li>
+</ul>
+</li>
+<li class="">&#x27;kab&#x27;
+<ul>
+<li class="">Kabyle</li>
+</ul>
+</li>
+<li class="">&#x27;kac&#x27;
+<ul>
+<li class="">Kachin</li>
+</ul>
+</li>
+<li class="">&#x27;kaj&#x27;
+<ul>
+<li class="">Jju</li>
+</ul>
+</li>
+<li class="">&#x27;kam&#x27;
+<ul>
+<li class="">Kamba</li>
+</ul>
+</li>
+<li class="">&#x27;kaw&#x27;
+<ul>
+<li class="">Kawi</li>
+</ul>
+</li>
+<li class="">&#x27;kbd&#x27;
+<ul>
+<li class="">Kabardian</li>
+</ul>
+</li>
+<li class="">&#x27;kbl&#x27;
+<ul>
+<li class="">Kanembu</li>
+</ul>
+</li>
+<li class="">&#x27;kcg&#x27;
+<ul>
+<li class="">Tyap</li>
+</ul>
+</li>
+<li class="">&#x27;kde&#x27;
+<ul>
+<li class="">Makonde</li>
+</ul>
+</li>
+<li class="">&#x27;kea&#x27;
+<ul>
+<li class="">Kabuverdianu</li>
+</ul>
+</li>
+<li class="">&#x27;ken&#x27;
+<ul>
+<li class="">Kenyang</li>
+</ul>
+</li>
+<li class="">&#x27;kfo&#x27;
+<ul>
+<li class="">Koro</li>
+</ul>
+</li>
+<li class="">&#x27;kg&#x27;
+<ul>
+<li class="">Kongo</li>
+</ul>
+</li>
+<li class="">&#x27;kgp&#x27;
+<ul>
+<li class="">Kaingang</li>
+</ul>
+</li>
+<li class="">&#x27;kha&#x27;
+<ul>
+<li class="">Khasi</li>
+</ul>
+</li>
+<li class="">&#x27;kho&#x27;
+<ul>
+<li class="">Khotanese</li>
+</ul>
+</li>
+<li class="">&#x27;khq&#x27;
+<ul>
+<li class="">Koyra Chiini</li>
+</ul>
+</li>
+<li class="">&#x27;khw&#x27;
+<ul>
+<li class="">Khowar</li>
+</ul>
+</li>
+<li class="">&#x27;ki&#x27;
+<ul>
+<li class="">Kikuyu</li>
+</ul>
+</li>
+<li class="">&#x27;kiu&#x27;
+<ul>
+<li class="">Kirmanjki</li>
+</ul>
+</li>
+<li class="">&#x27;kj&#x27;
+<ul>
+<li class="">Kuanyama</li>
+</ul>
+</li>
+<li class="">&#x27;kk&#x27;
+<ul>
+<li class="">Kazakh</li>
+</ul>
+</li>
+<li class="">&#x27;kkj&#x27;
+<ul>
+<li class="">Kako</li>
+</ul>
+</li>
+<li class="">&#x27;kl&#x27;
+<ul>
+<li class="">Kalaallisut</li>
+</ul>
+</li>
+<li class="">&#x27;kln&#x27;
+<ul>
+<li class="">Kalenjin</li>
+</ul>
+</li>
+<li class="">&#x27;km&#x27;
+<ul>
+<li class="">Khmer</li>
+</ul>
+</li>
+<li class="">&#x27;kmb&#x27;
+<ul>
+<li class="">Kimbundu</li>
+</ul>
+</li>
+<li class="">&#x27;kn&#x27;
+<ul>
+<li class="">Kannada</li>
+</ul>
+</li>
+<li class="">&#x27;ko&#x27;
+<ul>
+<li class="">Korean</li>
+</ul>
+</li>
+<li class="">&#x27;koi&#x27;
+<ul>
+<li class="">Komi-Permyak</li>
+</ul>
+</li>
+<li class="">&#x27;kok&#x27;
+<ul>
+<li class="">Konkani</li>
+</ul>
+</li>
+<li class="">&#x27;kos&#x27;
+<ul>
+<li class="">Kosraean</li>
+</ul>
+</li>
+<li class="">&#x27;kpe&#x27;
+<ul>
+<li class="">Kpelle</li>
+</ul>
+</li>
+<li class="">&#x27;kr&#x27;
+<ul>
+<li class="">Kanuri</li>
+</ul>
+</li>
+<li class="">&#x27;krc&#x27;
+<ul>
+<li class="">Karachay-Balkar</li>
+</ul>
+</li>
+<li class="">&#x27;kri&#x27;
+<ul>
+<li class="">Krio</li>
+</ul>
+</li>
+<li class="">&#x27;krj&#x27;
+<ul>
+<li class="">Kinaray-a</li>
+</ul>
+</li>
+<li class="">&#x27;krl&#x27;
+<ul>
+<li class="">Karelian</li>
+</ul>
+</li>
+<li class="">&#x27;kru&#x27;
+<ul>
+<li class="">Kurukh</li>
+</ul>
+</li>
+<li class="">&#x27;ks&#x27;
+<ul>
+<li class="">Kashmiri</li>
+</ul>
+</li>
+<li class="">&#x27;ksb&#x27;
+<ul>
+<li class="">Shambala</li>
+</ul>
+</li>
+<li class="">&#x27;ksf&#x27;
+<ul>
+<li class="">Bafia</li>
+</ul>
+</li>
+<li class="">&#x27;ksh&#x27;
+<ul>
+<li class="">Colognian</li>
+</ul>
+</li>
+<li class="">&#x27;ku&#x27;
+<ul>
+<li class="">Kurdish</li>
+</ul>
+</li>
+<li class="">&#x27;kum&#x27;
+<ul>
+<li class="">Kumyk</li>
+</ul>
+</li>
+<li class="">&#x27;kut&#x27;
+<ul>
+<li class="">Kutenai</li>
+</ul>
+</li>
+<li class="">&#x27;kv&#x27;
+<ul>
+<li class="">Komi</li>
+</ul>
+</li>
+<li class="">&#x27;kw&#x27;
+<ul>
+<li class="">Cornish</li>
+</ul>
+</li>
+<li class="">&#x27;kwk&#x27;
+<ul>
+<li class="">Kwakʼwala</li>
+</ul>
+</li>
+<li class="">&#x27;kxv&#x27;
+<ul>
+<li class="">Kuvi</li>
+</ul>
+</li>
+<li class="">&#x27;ky&#x27;
+<ul>
+<li class="">Kyrgyz</li>
+</ul>
+</li>
+<li class="">&#x27;la&#x27;
+<ul>
+<li class="">Latin</li>
+</ul>
+</li>
+<li class="">&#x27;lad&#x27;
+<ul>
+<li class="">Ladino</li>
+</ul>
+</li>
+<li class="">&#x27;lag&#x27;
+<ul>
+<li class="">Langi</li>
+</ul>
+</li>
+<li class="">&#x27;lah&#x27;
+<ul>
+<li class="">Western Panjabi</li>
+</ul>
+</li>
+<li class="">&#x27;lam&#x27;
+<ul>
+<li class="">Lamba</li>
+</ul>
+</li>
+<li class="">&#x27;lb&#x27;
+<ul>
+<li class="">Luxembourgish</li>
+</ul>
+</li>
+<li class="">&#x27;lez&#x27;
+<ul>
+<li class="">Lezghian</li>
+</ul>
+</li>
+<li class="">&#x27;lfn&#x27;
+<ul>
+<li class="">Lingua Franca Nova</li>
+</ul>
+</li>
+<li class="">&#x27;lg&#x27;
+<ul>
+<li class="">Ganda</li>
+</ul>
+</li>
+<li class="">&#x27;li&#x27;
+<ul>
+<li class="">Limburgish</li>
+</ul>
+</li>
+<li class="">&#x27;lij&#x27;
+<ul>
+<li class="">Ligurian</li>
+</ul>
+</li>
+<li class="">&#x27;lil&#x27;
+<ul>
+<li class="">Lillooet</li>
+</ul>
+</li>
+<li class="">&#x27;liv&#x27;
+<ul>
+<li class="">Livonian</li>
+</ul>
+</li>
+<li class="">&#x27;lkt&#x27;
+<ul>
+<li class="">Lakota</li>
+</ul>
+</li>
+<li class="">&#x27;lld&#x27;
+<ul>
+<li class="">(no value)</li>
+</ul>
+</li>
+<li class="">&#x27;lmo&#x27;
+<ul>
+<li class="">Lombard</li>
+</ul>
+</li>
+<li class="">&#x27;ln&#x27;
+<ul>
+<li class="">Lingala</li>
+</ul>
+</li>
+<li class="">&#x27;lo&#x27;
+<ul>
+<li class="">Lao</li>
+</ul>
+</li>
+<li class="">&#x27;lol&#x27;
+<ul>
+<li class="">Mongo</li>
+</ul>
+</li>
+<li class="">&#x27;lou&#x27;
+<ul>
+<li class="">Louisiana Creole</li>
+</ul>
+</li>
+<li class="">&#x27;loz&#x27;
+<ul>
+<li class="">Lozi</li>
+</ul>
+</li>
+<li class="">&#x27;lrc&#x27;
+<ul>
+<li class="">Northern Luri</li>
+</ul>
+</li>
+<li class="">&#x27;lsm&#x27;
+<ul>
+<li class="">Saamia</li>
+</ul>
+</li>
+<li class="">&#x27;lt&#x27;
+<ul>
+<li class="">Lithuanian</li>
+</ul>
+</li>
+<li class="">&#x27;ltg&#x27;
+<ul>
+<li class="">Latgalian</li>
+</ul>
+</li>
+<li class="">&#x27;lu&#x27;
+<ul>
+<li class="">Luba-Katanga</li>
+</ul>
+</li>
+<li class="">&#x27;lua&#x27;
+<ul>
+<li class="">Luba-Lulua</li>
+</ul>
+</li>
+<li class="">&#x27;lui&#x27;
+<ul>
+<li class="">Luiseno</li>
+</ul>
+</li>
+<li class="">&#x27;lun&#x27;
+<ul>
+<li class="">Lunda</li>
+</ul>
+</li>
+<li class="">&#x27;luo&#x27;
+<ul>
+<li class="">Luo</li>
+</ul>
+</li>
+<li class="">&#x27;lus&#x27;
+<ul>
+<li class="">Mizo</li>
+</ul>
+</li>
+<li class="">&#x27;luy&#x27;
+<ul>
+<li class="">Luyia</li>
+</ul>
+</li>
+<li class="">&#x27;lv&#x27;
+<ul>
+<li class="">Latvian</li>
+</ul>
+</li>
+<li class="">&#x27;lzh&#x27;
+<ul>
+<li class="">Literary Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;lzz&#x27;
+<ul>
+<li class="">Laz</li>
+</ul>
+</li>
+<li class="">&#x27;mad&#x27;
+<ul>
+<li class="">Madurese</li>
+</ul>
+</li>
+<li class="">&#x27;maf&#x27;
+<ul>
+<li class="">Mafa</li>
+</ul>
+</li>
+<li class="">&#x27;mag&#x27;
+<ul>
+<li class="">Magahi</li>
+</ul>
+</li>
+<li class="">&#x27;mai&#x27;
+<ul>
+<li class="">Maithili</li>
+</ul>
+</li>
+<li class="">&#x27;mak&#x27;
+<ul>
+<li class="">Makasar</li>
+</ul>
+</li>
+<li class="">&#x27;man&#x27;
+<ul>
+<li class="">Mandingo</li>
+</ul>
+</li>
+<li class="">&#x27;mas&#x27;
+<ul>
+<li class="">Masai</li>
+</ul>
+</li>
+<li class="">&#x27;mde&#x27;
+<ul>
+<li class="">Maba</li>
+</ul>
+</li>
+<li class="">&#x27;mdf&#x27;
+<ul>
+<li class="">Moksha</li>
+</ul>
+</li>
+<li class="">&#x27;mdr&#x27;
+<ul>
+<li class="">Mandar</li>
+</ul>
+</li>
+<li class="">&#x27;men&#x27;
+<ul>
+<li class="">Mende</li>
+</ul>
+</li>
+<li class="">&#x27;mer&#x27;
+<ul>
+<li class="">Meru</li>
+</ul>
+</li>
+<li class="">&#x27;mfe&#x27;
+<ul>
+<li class="">Morisyen</li>
+</ul>
+</li>
+<li class="">&#x27;mg&#x27;
+<ul>
+<li class="">Malagasy</li>
+</ul>
+</li>
+<li class="">&#x27;mga&#x27;
+<ul>
+<li class="">Middle Irish</li>
+</ul>
+</li>
+<li class="">&#x27;mgh&#x27;
+<ul>
+<li class="">Makhuwa-Meetto</li>
+</ul>
+</li>
+<li class="">&#x27;mgo&#x27;
+<ul>
+<li class="">Metaʼ</li>
+</ul>
+</li>
+<li class="">&#x27;mh&#x27;
+<ul>
+<li class="">Marshallese</li>
+</ul>
+</li>
+<li class="">&#x27;mhn&#x27;
+<ul>
+<li class="">(no value)</li>
+</ul>
+</li>
+<li class="">&#x27;mi&#x27;
+<ul>
+<li class="">Māori</li>
+</ul>
+</li>
+<li class="">&#x27;mic&#x27;
+<ul>
+<li class="">Mi&#x27;kmaw</li>
+</ul>
+</li>
+<li class="">&#x27;min&#x27;
+<ul>
+<li class="">Minangkabau</li>
+</ul>
+</li>
+<li class="">&#x27;mk&#x27;
+<ul>
+<li class="">Macedonian</li>
+</ul>
+</li>
+<li class="">&#x27;ml&#x27;
+<ul>
+<li class="">Malayalam</li>
+</ul>
+</li>
+<li class="">&#x27;mn&#x27;
+<ul>
+<li class="">Mongolian</li>
+</ul>
+</li>
+<li class="">&#x27;mnc&#x27;
+<ul>
+<li class="">Manchu</li>
+</ul>
+</li>
+<li class="">&#x27;mni&#x27;
+<ul>
+<li class="">Manipuri</li>
+</ul>
+</li>
+<li class="">&#x27;moe&#x27;
+<ul>
+<li class="">Innu-aimun</li>
+</ul>
+</li>
+<li class="">&#x27;moh&#x27;
+<ul>
+<li class="">Mohawk</li>
+</ul>
+</li>
+<li class="">&#x27;mos&#x27;
+<ul>
+<li class="">Mossi</li>
+</ul>
+</li>
+<li class="">&#x27;mr&#x27;
+<ul>
+<li class="">Marathi</li>
+</ul>
+</li>
+<li class="">&#x27;mrj&#x27;
+<ul>
+<li class="">Western Mari</li>
+</ul>
+</li>
+<li class="">&#x27;ms&#x27;
+<ul>
+<li class="">Malay</li>
+</ul>
+</li>
+<li class="">&#x27;mt&#x27;
+<ul>
+<li class="">Maltese</li>
+</ul>
+</li>
+<li class="">&#x27;mua&#x27;
+<ul>
+<li class="">Mundang</li>
+</ul>
+</li>
+<li class="">&#x27;mul&#x27;
+<ul>
+<li class="">Multiple languages</li>
+</ul>
+</li>
+<li class="">&#x27;mus&#x27;
+<ul>
+<li class="">Muscogee</li>
+</ul>
+</li>
+<li class="">&#x27;mwl&#x27;
+<ul>
+<li class="">Mirandese</li>
+</ul>
+</li>
+<li class="">&#x27;mwr&#x27;
+<ul>
+<li class="">Marwari</li>
+</ul>
+</li>
+<li class="">&#x27;mwv&#x27;
+<ul>
+<li class="">Mentawai</li>
+</ul>
+</li>
+<li class="">&#x27;my&#x27;
+<ul>
+<li class="">Burmese</li>
+</ul>
+</li>
+<li class="">&#x27;mye&#x27;
+<ul>
+<li class="">Myene</li>
+</ul>
+</li>
+<li class="">&#x27;myv&#x27;
+<ul>
+<li class="">Erzya</li>
+</ul>
+</li>
+<li class="">&#x27;mzn&#x27;
+<ul>
+<li class="">Mazanderani</li>
+</ul>
+</li>
+<li class="">&#x27;na&#x27;
+<ul>
+<li class="">Nauru</li>
+</ul>
+</li>
+<li class="">&#x27;nan&#x27;
+<ul>
+<li class="">Min Nan Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;nap&#x27;
+<ul>
+<li class="">Neapolitan</li>
+</ul>
+</li>
+<li class="">&#x27;naq&#x27;
+<ul>
+<li class="">Nama</li>
+</ul>
+</li>
+<li class="">&#x27;nb&#x27;
+<ul>
+<li class="">Norwegian Bokmål</li>
+</ul>
+</li>
+<li class="">&#x27;nd&#x27;
+<ul>
+<li class="">North Ndebele</li>
+</ul>
+</li>
+<li class="">&#x27;nds&#x27;
+<ul>
+<li class="">Low German</li>
+</ul>
+</li>
+<li class="">&#x27;nds-NL&#x27;
+<ul>
+<li class="">Low Saxon</li>
+</ul>
+</li>
+<li class="">&#x27;ne&#x27;
+<ul>
+<li class="">Nepali</li>
+</ul>
+</li>
+<li class="">&#x27;new&#x27;
+<ul>
+<li class="">Newari</li>
+</ul>
+</li>
+<li class="">&#x27;ng&#x27;
+<ul>
+<li class="">Ndonga</li>
+</ul>
+</li>
+<li class="">&#x27;nia&#x27;
+<ul>
+<li class="">Nias</li>
+</ul>
+</li>
+<li class="">&#x27;niu&#x27;
+<ul>
+<li class="">Niuean</li>
+</ul>
+</li>
+<li class="">&#x27;njo&#x27;
+<ul>
+<li class="">Ao Naga</li>
+</ul>
+</li>
+<li class="">&#x27;nl&#x27;
+<ul>
+<li class="">Dutch</li>
+</ul>
+</li>
+<li class="">&#x27;nl-BE&#x27;
+<ul>
+<li class="">Flemish</li>
+</ul>
+</li>
+<li class="">&#x27;nmg&#x27;
+<ul>
+<li class="">Kwasio</li>
+</ul>
+</li>
+<li class="">&#x27;nn&#x27;
+<ul>
+<li class="">Norwegian Nynorsk</li>
+</ul>
+</li>
+<li class="">&#x27;nnh&#x27;
+<ul>
+<li class="">Ngiemboon</li>
+</ul>
+</li>
+<li class="">&#x27;no&#x27;
+<ul>
+<li class="">Norwegian</li>
+</ul>
+</li>
+<li class="">&#x27;nog&#x27;
+<ul>
+<li class="">Nogai</li>
+</ul>
+</li>
+<li class="">&#x27;non&#x27;
+<ul>
+<li class="">Old Norse</li>
+</ul>
+</li>
+<li class="">&#x27;nov&#x27;
+<ul>
+<li class="">Novial</li>
+</ul>
+</li>
+<li class="">&#x27;nqo&#x27;
+<ul>
+<li class="">N’Ko</li>
+</ul>
+</li>
+<li class="">&#x27;nr&#x27;
+<ul>
+<li class="">South Ndebele</li>
+</ul>
+</li>
+<li class="">&#x27;nso&#x27;
+<ul>
+<li class="">Northern Sotho</li>
+</ul>
+</li>
+<li class="">&#x27;nus&#x27;
+<ul>
+<li class="">Nuer</li>
+</ul>
+</li>
+<li class="">&#x27;nv&#x27;
+<ul>
+<li class="">Navajo</li>
+</ul>
+</li>
+<li class="">&#x27;nwc&#x27;
+<ul>
+<li class="">Classical Newari</li>
+</ul>
+</li>
+<li class="">&#x27;ny&#x27;
+<ul>
+<li class="">Nyanja</li>
+</ul>
+</li>
+<li class="">&#x27;nym&#x27;
+<ul>
+<li class="">Nyamwezi</li>
+</ul>
+</li>
+<li class="">&#x27;nyn&#x27;
+<ul>
+<li class="">Nyankole</li>
+</ul>
+</li>
+<li class="">&#x27;nyo&#x27;
+<ul>
+<li class="">Nyoro</li>
+</ul>
+</li>
+<li class="">&#x27;nzi&#x27;
+<ul>
+<li class="">Nzima</li>
+</ul>
+</li>
+<li class="">&#x27;oc&#x27;
+<ul>
+<li class="">Occitan</li>
+</ul>
+</li>
+<li class="">&#x27;oj&#x27;
+<ul>
+<li class="">Ojibwa</li>
+</ul>
+</li>
+<li class="">&#x27;ojb&#x27;
+<ul>
+<li class="">Northwestern Ojibwa</li>
+</ul>
+</li>
+<li class="">&#x27;ojc&#x27;
+<ul>
+<li class="">Central Ojibwa</li>
+</ul>
+</li>
+<li class="">&#x27;ojs&#x27;
+<ul>
+<li class="">Oji-Cree</li>
+</ul>
+</li>
+<li class="">&#x27;ojw&#x27;
+<ul>
+<li class="">Western Ojibwa</li>
+</ul>
+</li>
+<li class="">&#x27;oka&#x27;
+<ul>
+<li class="">Okanagan</li>
+</ul>
+</li>
+<li class="">&#x27;om&#x27;
+<ul>
+<li class="">Oromo</li>
+</ul>
+</li>
+<li class="">&#x27;or&#x27;
+<ul>
+<li class="">Odia</li>
+</ul>
+</li>
+<li class="">&#x27;os&#x27;
+<ul>
+<li class="">Ossetic</li>
+</ul>
+</li>
+<li class="">&#x27;osa&#x27;
+<ul>
+<li class="">Osage</li>
+</ul>
+</li>
+<li class="">&#x27;ota&#x27;
+<ul>
+<li class="">Ottoman Turkish</li>
+</ul>
+</li>
+<li class="">&#x27;pa&#x27;
+<ul>
+<li class="">Punjabi</li>
+</ul>
+</li>
+<li class="">&#x27;pag&#x27;
+<ul>
+<li class="">Pangasinan</li>
+</ul>
+</li>
+<li class="">&#x27;pal&#x27;
+<ul>
+<li class="">Pahlavi</li>
+</ul>
+</li>
+<li class="">&#x27;pam&#x27;
+<ul>
+<li class="">Pampanga</li>
+</ul>
+</li>
+<li class="">&#x27;pap&#x27;
+<ul>
+<li class="">Papiamento</li>
+</ul>
+</li>
+<li class="">&#x27;pau&#x27;
+<ul>
+<li class="">Palauan</li>
+</ul>
+</li>
+<li class="">&#x27;pcd&#x27;
+<ul>
+<li class="">Picard</li>
+</ul>
+</li>
+<li class="">&#x27;pcm&#x27;
+<ul>
+<li class="">Nigerian Pidgin</li>
+</ul>
+</li>
+<li class="">&#x27;pdc&#x27;
+<ul>
+<li class="">Pennsylvania German</li>
+</ul>
+</li>
+<li class="">&#x27;pdt&#x27;
+<ul>
+<li class="">Plautdietsch</li>
+</ul>
+</li>
+<li class="">&#x27;peo&#x27;
+<ul>
+<li class="">Old Persian</li>
+</ul>
+</li>
+<li class="">&#x27;pfl&#x27;
+<ul>
+<li class="">Palatine German</li>
+</ul>
+</li>
+<li class="">&#x27;phn&#x27;
+<ul>
+<li class="">Phoenician</li>
+</ul>
+</li>
+<li class="">&#x27;pi&#x27;
+<ul>
+<li class="">Pali</li>
+</ul>
+</li>
+<li class="">&#x27;pis&#x27;
+<ul>
+<li class="">Pijin</li>
+</ul>
+</li>
+<li class="">&#x27;pl&#x27;
+<ul>
+<li class="">Polish</li>
+</ul>
+</li>
+<li class="">&#x27;pms&#x27;
+<ul>
+<li class="">Piedmontese</li>
+</ul>
+</li>
+<li class="">&#x27;pnt&#x27;
+<ul>
+<li class="">Pontic</li>
+</ul>
+</li>
+<li class="">&#x27;pon&#x27;
+<ul>
+<li class="">Pohnpeian</li>
+</ul>
+</li>
+<li class="">&#x27;pqm&#x27;
+<ul>
+<li class="">Maliseet-Passamaquoddy</li>
+</ul>
+</li>
+<li class="">&#x27;prg&#x27;
+<ul>
+<li class="">Prussian</li>
+</ul>
+</li>
+<li class="">&#x27;pro&#x27;
+<ul>
+<li class="">Old Provençal</li>
+</ul>
+</li>
+<li class="">&#x27;ps&#x27;
+<ul>
+<li class="">Pashto</li>
+</ul>
+</li>
+<li class="">&#x27;pt&#x27;
+<ul>
+<li class="">Portuguese</li>
+</ul>
+</li>
+<li class="">&#x27;pt-BR&#x27;
+<ul>
+<li class="">Brazilian Portuguese</li>
+</ul>
+</li>
+<li class="">&#x27;pt-PT&#x27;
+<ul>
+<li class="">European Portuguese</li>
+</ul>
+</li>
+<li class="">&#x27;qu&#x27;
+<ul>
+<li class="">Quechua</li>
+</ul>
+</li>
+<li class="">&#x27;quc&#x27;
+<ul>
+<li class="">Kʼicheʼ</li>
+</ul>
+</li>
+<li class="">&#x27;qug&#x27;
+<ul>
+<li class="">Chimborazo Highland Quichua</li>
+</ul>
+</li>
+<li class="">&#x27;raj&#x27;
+<ul>
+<li class="">Rajasthani</li>
+</ul>
+</li>
+<li class="">&#x27;rap&#x27;
+<ul>
+<li class="">Rapanui</li>
+</ul>
+</li>
+<li class="">&#x27;rar&#x27;
+<ul>
+<li class="">Rarotongan</li>
+</ul>
+</li>
+<li class="">&#x27;rgn&#x27;
+<ul>
+<li class="">Romagnol</li>
+</ul>
+</li>
+<li class="">&#x27;rhg&#x27;
+<ul>
+<li class="">Rohingya</li>
+</ul>
+</li>
+<li class="">&#x27;rif&#x27;
+<ul>
+<li class="">Riffian</li>
+</ul>
+</li>
+<li class="">&#x27;rm&#x27;
+<ul>
+<li class="">Romansh</li>
+</ul>
+</li>
+<li class="">&#x27;rn&#x27;
+<ul>
+<li class="">Rundi</li>
+</ul>
+</li>
+<li class="">&#x27;ro&#x27;
+<ul>
+<li class="">Romanian</li>
+</ul>
+</li>
+<li class="">&#x27;ro-MD&#x27;
+<ul>
+<li class="">Moldavian</li>
+</ul>
+</li>
+<li class="">&#x27;rof&#x27;
+<ul>
+<li class="">Rombo</li>
+</ul>
+</li>
+<li class="">&#x27;rom&#x27;
+<ul>
+<li class="">Romany</li>
+</ul>
+</li>
+<li class="">&#x27;rtm&#x27;
+<ul>
+<li class="">Rotuman</li>
+</ul>
+</li>
+<li class="">&#x27;ru&#x27;
+<ul>
+<li class="">Russian</li>
+</ul>
+</li>
+<li class="">&#x27;rue&#x27;
+<ul>
+<li class="">Rusyn</li>
+</ul>
+</li>
+<li class="">&#x27;rug&#x27;
+<ul>
+<li class="">Roviana</li>
+</ul>
+</li>
+<li class="">&#x27;rup&#x27;
+<ul>
+<li class="">Aromanian</li>
+</ul>
+</li>
+<li class="">&#x27;rw&#x27;
+<ul>
+<li class="">Kinyarwanda</li>
+</ul>
+</li>
+<li class="">&#x27;rwk&#x27;
+<ul>
+<li class="">Rwa</li>
+</ul>
+</li>
+<li class="">&#x27;sa&#x27;
+<ul>
+<li class="">Sanskrit</li>
+</ul>
+</li>
+<li class="">&#x27;sad&#x27;
+<ul>
+<li class="">Sandawe</li>
+</ul>
+</li>
+<li class="">&#x27;sah&#x27;
+<ul>
+<li class="">Yakut</li>
+</ul>
+</li>
+<li class="">&#x27;sam&#x27;
+<ul>
+<li class="">Samaritan Aramaic</li>
+</ul>
+</li>
+<li class="">&#x27;saq&#x27;
+<ul>
+<li class="">Samburu</li>
+</ul>
+</li>
+<li class="">&#x27;sas&#x27;
+<ul>
+<li class="">Sasak</li>
+</ul>
+</li>
+<li class="">&#x27;sat&#x27;
+<ul>
+<li class="">Santali</li>
+</ul>
+</li>
+<li class="">&#x27;saz&#x27;
+<ul>
+<li class="">Saurashtra</li>
+</ul>
+</li>
+<li class="">&#x27;sba&#x27;
+<ul>
+<li class="">Ngambay</li>
+</ul>
+</li>
+<li class="">&#x27;sbp&#x27;
+<ul>
+<li class="">Sangu</li>
+</ul>
+</li>
+<li class="">&#x27;sc&#x27;
+<ul>
+<li class="">Sardinian</li>
+</ul>
+</li>
+<li class="">&#x27;scn&#x27;
+<ul>
+<li class="">Sicilian</li>
+</ul>
+</li>
+<li class="">&#x27;sco&#x27;
+<ul>
+<li class="">Scots</li>
+</ul>
+</li>
+<li class="">&#x27;sd&#x27;
+<ul>
+<li class="">Sindhi</li>
+</ul>
+</li>
+<li class="">&#x27;sdc&#x27;
+<ul>
+<li class="">Sassarese Sardinian</li>
+</ul>
+</li>
+<li class="">&#x27;sdh&#x27;
+<ul>
+<li class="">Southern Kurdish</li>
+</ul>
+</li>
+<li class="">&#x27;se&#x27;
+<ul>
+<li class="">Northern Sami</li>
+</ul>
+</li>
+<li class="">&#x27;see&#x27;
+<ul>
+<li class="">Seneca</li>
+</ul>
+</li>
+<li class="">&#x27;seh&#x27;
+<ul>
+<li class="">Sena</li>
+</ul>
+</li>
+<li class="">&#x27;sei&#x27;
+<ul>
+<li class="">Seri</li>
+</ul>
+</li>
+<li class="">&#x27;sel&#x27;
+<ul>
+<li class="">Selkup</li>
+</ul>
+</li>
+<li class="">&#x27;ses&#x27;
+<ul>
+<li class="">Koyraboro Senni</li>
+</ul>
+</li>
+<li class="">&#x27;sg&#x27;
+<ul>
+<li class="">Sango</li>
+</ul>
+</li>
+<li class="">&#x27;sga&#x27;
+<ul>
+<li class="">Old Irish</li>
+</ul>
+</li>
+<li class="">&#x27;sgs&#x27;
+<ul>
+<li class="">Samogitian</li>
+</ul>
+</li>
+<li class="">&#x27;sh&#x27;
+<ul>
+<li class="">Serbo-Croatian</li>
+</ul>
+</li>
+<li class="">&#x27;shi&#x27;
+<ul>
+<li class="">Tachelhit</li>
+</ul>
+</li>
+<li class="">&#x27;shn&#x27;
+<ul>
+<li class="">Shan</li>
+</ul>
+</li>
+<li class="">&#x27;shu&#x27;
+<ul>
+<li class="">Chadian Arabic</li>
+</ul>
+</li>
+<li class="">&#x27;si&#x27;
+<ul>
+<li class="">Sinhala</li>
+</ul>
+</li>
+<li class="">&#x27;sid&#x27;
+<ul>
+<li class="">Sidamo</li>
+</ul>
+</li>
+<li class="">&#x27;sk&#x27;
+<ul>
+<li class="">Slovak</li>
+</ul>
+</li>
+<li class="">&#x27;skr&#x27;
+<ul>
+<li class="">(no value)</li>
+</ul>
+</li>
+<li class="">&#x27;sl&#x27;
+<ul>
+<li class="">Slovenian</li>
+</ul>
+</li>
+<li class="">&#x27;slh&#x27;
+<ul>
+<li class="">Southern Lushootseed</li>
+</ul>
+</li>
+<li class="">&#x27;sli&#x27;
+<ul>
+<li class="">Lower Silesian</li>
+</ul>
+</li>
+<li class="">&#x27;sly&#x27;
+<ul>
+<li class="">Selayar</li>
+</ul>
+</li>
+<li class="">&#x27;sm&#x27;
+<ul>
+<li class="">Samoan</li>
+</ul>
+</li>
+<li class="">&#x27;sma&#x27;
+<ul>
+<li class="">Southern Sami</li>
+</ul>
+</li>
+<li class="">&#x27;smj&#x27;
+<ul>
+<li class="">Lule Sami</li>
+</ul>
+</li>
+<li class="">&#x27;smn&#x27;
+<ul>
+<li class="">Inari Sami</li>
+</ul>
+</li>
+<li class="">&#x27;sms&#x27;
+<ul>
+<li class="">Skolt Sami</li>
+</ul>
+</li>
+<li class="">&#x27;sn&#x27;
+<ul>
+<li class="">Shona</li>
+</ul>
+</li>
+<li class="">&#x27;snk&#x27;
+<ul>
+<li class="">Soninke</li>
+</ul>
+</li>
+<li class="">&#x27;so&#x27;
+<ul>
+<li class="">Somali</li>
+</ul>
+</li>
+<li class="">&#x27;sog&#x27;
+<ul>
+<li class="">Sogdien</li>
+</ul>
+</li>
+<li class="">&#x27;sq&#x27;
+<ul>
+<li class="">Albanian</li>
+</ul>
+</li>
+<li class="">&#x27;sr&#x27;
+<ul>
+<li class="">Serbian</li>
+</ul>
+</li>
+<li class="">&#x27;sr-ME&#x27;
+<ul>
+<li class="">Montenegrin</li>
+</ul>
+</li>
+<li class="">&#x27;srn&#x27;
+<ul>
+<li class="">Sranan Tongo</li>
+</ul>
+</li>
+<li class="">&#x27;srr&#x27;
+<ul>
+<li class="">Serer</li>
+</ul>
+</li>
+<li class="">&#x27;ss&#x27;
+<ul>
+<li class="">Swati</li>
+</ul>
+</li>
+<li class="">&#x27;ssy&#x27;
+<ul>
+<li class="">Saho</li>
+</ul>
+</li>
+<li class="">&#x27;st&#x27;
+<ul>
+<li class="">Southern Sotho</li>
+</ul>
+</li>
+<li class="">&#x27;stq&#x27;
+<ul>
+<li class="">Saterland Frisian</li>
+</ul>
+</li>
+<li class="">&#x27;str&#x27;
+<ul>
+<li class="">Straits Salish</li>
+</ul>
+</li>
+<li class="">&#x27;su&#x27;
+<ul>
+<li class="">Sundanese</li>
+</ul>
+</li>
+<li class="">&#x27;suk&#x27;
+<ul>
+<li class="">Sukuma</li>
+</ul>
+</li>
+<li class="">&#x27;sus&#x27;
+<ul>
+<li class="">Susu</li>
+</ul>
+</li>
+<li class="">&#x27;sux&#x27;
+<ul>
+<li class="">Sumerian</li>
+</ul>
+</li>
+<li class="">&#x27;sv&#x27;
+<ul>
+<li class="">Swedish</li>
+</ul>
+</li>
+<li class="">&#x27;sw&#x27;
+<ul>
+<li class="">Swahili</li>
+</ul>
+</li>
+<li class="">&#x27;sw-CD&#x27;
+<ul>
+<li class="">Congo Swahili</li>
+</ul>
+</li>
+<li class="">&#x27;swb&#x27;
+<ul>
+<li class="">Comorian</li>
+</ul>
+</li>
+<li class="">&#x27;syc&#x27;
+<ul>
+<li class="">Classical Syriac</li>
+</ul>
+</li>
+<li class="">&#x27;syr&#x27;
+<ul>
+<li class="">Syriac</li>
+</ul>
+</li>
+<li class="">&#x27;szl&#x27;
+<ul>
+<li class="">Silesian</li>
+</ul>
+</li>
+<li class="">&#x27;ta&#x27;
+<ul>
+<li class="">Tamil</li>
+</ul>
+</li>
+<li class="">&#x27;tce&#x27;
+<ul>
+<li class="">Southern Tutchone</li>
+</ul>
+</li>
+<li class="">&#x27;tcy&#x27;
+<ul>
+<li class="">Tulu</li>
+</ul>
+</li>
+<li class="">&#x27;te&#x27;
+<ul>
+<li class="">Telugu</li>
+</ul>
+</li>
+<li class="">&#x27;tem&#x27;
+<ul>
+<li class="">Timne</li>
+</ul>
+</li>
+<li class="">&#x27;teo&#x27;
+<ul>
+<li class="">Teso</li>
+</ul>
+</li>
+<li class="">&#x27;ter&#x27;
+<ul>
+<li class="">Tereno</li>
+</ul>
+</li>
+<li class="">&#x27;tet&#x27;
+<ul>
+<li class="">Tetum</li>
+</ul>
+</li>
+<li class="">&#x27;tg&#x27;
+<ul>
+<li class="">Tajik</li>
+</ul>
+</li>
+<li class="">&#x27;tgx&#x27;
+<ul>
+<li class="">Tagish</li>
+</ul>
+</li>
+<li class="">&#x27;th&#x27;
+<ul>
+<li class="">Thai</li>
+</ul>
+</li>
+<li class="">&#x27;tht&#x27;
+<ul>
+<li class="">Tahltan</li>
+</ul>
+</li>
+<li class="">&#x27;ti&#x27;
+<ul>
+<li class="">Tigrinya</li>
+</ul>
+</li>
+<li class="">&#x27;tig&#x27;
+<ul>
+<li class="">Tigre</li>
+</ul>
+</li>
+<li class="">&#x27;tiv&#x27;
+<ul>
+<li class="">Tiv</li>
+</ul>
+</li>
+<li class="">&#x27;tk&#x27;
+<ul>
+<li class="">Turkmen</li>
+</ul>
+</li>
+<li class="">&#x27;tkl&#x27;
+<ul>
+<li class="">Tokelau</li>
+</ul>
+</li>
+<li class="">&#x27;tkr&#x27;
+<ul>
+<li class="">Tsakhur</li>
+</ul>
+</li>
+<li class="">&#x27;tl&#x27;
+<ul>
+<li class="">Tagalog</li>
+</ul>
+</li>
+<li class="">&#x27;tlh&#x27;
+<ul>
+<li class="">Klingon</li>
+</ul>
+</li>
+<li class="">&#x27;tli&#x27;
+<ul>
+<li class="">Tlingit</li>
+</ul>
+</li>
+<li class="">&#x27;tly&#x27;
+<ul>
+<li class="">Talysh</li>
+</ul>
+</li>
+<li class="">&#x27;tmh&#x27;
+<ul>
+<li class="">Tamashek</li>
+</ul>
+</li>
+<li class="">&#x27;tn&#x27;
+<ul>
+<li class="">Tswana</li>
+</ul>
+</li>
+<li class="">&#x27;to&#x27;
+<ul>
+<li class="">Tongan</li>
+</ul>
+</li>
+<li class="">&#x27;tog&#x27;
+<ul>
+<li class="">Nyasa Tonga</li>
+</ul>
+</li>
+<li class="">&#x27;tok&#x27;
+<ul>
+<li class="">Toki Pona</li>
+</ul>
+</li>
+<li class="">&#x27;tpi&#x27;
+<ul>
+<li class="">Tok Pisin</li>
+</ul>
+</li>
+<li class="">&#x27;tr&#x27;
+<ul>
+<li class="">Turkish</li>
+</ul>
+</li>
+<li class="">&#x27;tru&#x27;
+<ul>
+<li class="">Turoyo</li>
+</ul>
+</li>
+<li class="">&#x27;trv&#x27;
+<ul>
+<li class="">Taroko</li>
+</ul>
+</li>
+<li class="">&#x27;trw&#x27;
+<ul>
+<li class="">Torwali</li>
+</ul>
+</li>
+<li class="">&#x27;ts&#x27;
+<ul>
+<li class="">Tsonga</li>
+</ul>
+</li>
+<li class="">&#x27;tsd&#x27;
+<ul>
+<li class="">Tsakonian</li>
+</ul>
+</li>
+<li class="">&#x27;tsi&#x27;
+<ul>
+<li class="">Tsimshian</li>
+</ul>
+</li>
+<li class="">&#x27;tt&#x27;
+<ul>
+<li class="">Tatar</li>
+</ul>
+</li>
+<li class="">&#x27;ttm&#x27;
+<ul>
+<li class="">Northern Tutchone</li>
+</ul>
+</li>
+<li class="">&#x27;ttt&#x27;
+<ul>
+<li class="">Muslim Tat</li>
+</ul>
+</li>
+<li class="">&#x27;tum&#x27;
+<ul>
+<li class="">Tumbuka</li>
+</ul>
+</li>
+<li class="">&#x27;tvl&#x27;
+<ul>
+<li class="">Tuvalu</li>
+</ul>
+</li>
+<li class="">&#x27;tw&#x27;
+<ul>
+<li class="">Twi</li>
+</ul>
+</li>
+<li class="">&#x27;twq&#x27;
+<ul>
+<li class="">Tasawaq</li>
+</ul>
+</li>
+<li class="">&#x27;ty&#x27;
+<ul>
+<li class="">Tahitian</li>
+</ul>
+</li>
+<li class="">&#x27;tyv&#x27;
+<ul>
+<li class="">Tuvinian</li>
+</ul>
+</li>
+<li class="">&#x27;tzm&#x27;
+<ul>
+<li class="">Central Atlas Tamazight</li>
+</ul>
+</li>
+<li class="">&#x27;udm&#x27;
+<ul>
+<li class="">Udmurt</li>
+</ul>
+</li>
+<li class="">&#x27;ug&#x27;
+<ul>
+<li class="">Uyghur</li>
+</ul>
+</li>
+<li class="">&#x27;uga&#x27;
+<ul>
+<li class="">Ugaritic</li>
+</ul>
+</li>
+<li class="">&#x27;uk&#x27;
+<ul>
+<li class="">Ukrainian</li>
+</ul>
+</li>
+<li class="">&#x27;umb&#x27;
+<ul>
+<li class="">Umbundu</li>
+</ul>
+</li>
+<li class="">&#x27;und&#x27;
+<ul>
+<li class="">Unknown language</li>
+</ul>
+</li>
+<li class="">&#x27;ur&#x27;
+<ul>
+<li class="">Urdu</li>
+</ul>
+</li>
+<li class="">&#x27;uz&#x27;
+<ul>
+<li class="">Uzbek</li>
+</ul>
+</li>
+<li class="">&#x27;vai&#x27;
+<ul>
+<li class="">Vai</li>
+</ul>
+</li>
+<li class="">&#x27;ve&#x27;
+<ul>
+<li class="">Venda</li>
+</ul>
+</li>
+<li class="">&#x27;vec&#x27;
+<ul>
+<li class="">Venetian</li>
+</ul>
+</li>
+<li class="">&#x27;vep&#x27;
+<ul>
+<li class="">Veps</li>
+</ul>
+</li>
+<li class="">&#x27;vi&#x27;
+<ul>
+<li class="">Vietnamese</li>
+</ul>
+</li>
+<li class="">&#x27;vls&#x27;
+<ul>
+<li class="">West Flemish</li>
+</ul>
+</li>
+<li class="">&#x27;vmf&#x27;
+<ul>
+<li class="">Main-Franconian</li>
+</ul>
+</li>
+<li class="">&#x27;vmw&#x27;
+<ul>
+<li class="">Makhuwa</li>
+</ul>
+</li>
+<li class="">&#x27;vo&#x27;
+<ul>
+<li class="">Volapük</li>
+</ul>
+</li>
+<li class="">&#x27;vot&#x27;
+<ul>
+<li class="">Votic</li>
+</ul>
+</li>
+<li class="">&#x27;vro&#x27;
+<ul>
+<li class="">Võro</li>
+</ul>
+</li>
+<li class="">&#x27;vun&#x27;
+<ul>
+<li class="">Vunjo</li>
+</ul>
+</li>
+<li class="">&#x27;wa&#x27;
+<ul>
+<li class="">Walloon</li>
+</ul>
+</li>
+<li class="">&#x27;wae&#x27;
+<ul>
+<li class="">Walser</li>
+</ul>
+</li>
+<li class="">&#x27;wal&#x27;
+<ul>
+<li class="">Wolaytta</li>
+</ul>
+</li>
+<li class="">&#x27;war&#x27;
+<ul>
+<li class="">Waray</li>
+</ul>
+</li>
+<li class="">&#x27;was&#x27;
+<ul>
+<li class="">Washo</li>
+</ul>
+</li>
+<li class="">&#x27;wbp&#x27;
+<ul>
+<li class="">Warlpiri</li>
+</ul>
+</li>
+<li class="">&#x27;wo&#x27;
+<ul>
+<li class="">Wolof</li>
+</ul>
+</li>
+<li class="">&#x27;wuu&#x27;
+<ul>
+<li class="">Wu Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;xal&#x27;
+<ul>
+<li class="">Kalmyk</li>
+</ul>
+</li>
+<li class="">&#x27;xh&#x27;
+<ul>
+<li class="">Xhosa</li>
+</ul>
+</li>
+<li class="">&#x27;xmf&#x27;
+<ul>
+<li class="">Mingrelian</li>
+</ul>
+</li>
+<li class="">&#x27;xnr&#x27;
+<ul>
+<li class="">Kangri</li>
+</ul>
+</li>
+<li class="">&#x27;xog&#x27;
+<ul>
+<li class="">Soga</li>
+</ul>
+</li>
+<li class="">&#x27;yao&#x27;
+<ul>
+<li class="">Yao</li>
+</ul>
+</li>
+<li class="">&#x27;yap&#x27;
+<ul>
+<li class="">Yapese</li>
+</ul>
+</li>
+<li class="">&#x27;yav&#x27;
+<ul>
+<li class="">Yangben</li>
+</ul>
+</li>
+<li class="">&#x27;ybb&#x27;
+<ul>
+<li class="">Yemba</li>
+</ul>
+</li>
+<li class="">&#x27;yi&#x27;
+<ul>
+<li class="">Yiddish</li>
+</ul>
+</li>
+<li class="">&#x27;yo&#x27;
+<ul>
+<li class="">Yoruba</li>
+</ul>
+</li>
+<li class="">&#x27;yrl&#x27;
+<ul>
+<li class="">Nheengatu</li>
+</ul>
+</li>
+<li class="">&#x27;yue&#x27;
+<ul>
+<li class="">Cantonese</li>
+</ul>
+</li>
+<li class="">&#x27;za&#x27;
+<ul>
+<li class="">Zhuang</li>
+</ul>
+</li>
+<li class="">&#x27;zap&#x27;
+<ul>
+<li class="">Zapotec</li>
+</ul>
+</li>
+<li class="">&#x27;zbl&#x27;
+<ul>
+<li class="">Blissymbols</li>
+</ul>
+</li>
+<li class="">&#x27;zea&#x27;
+<ul>
+<li class="">Zeelandic</li>
+</ul>
+</li>
+<li class="">&#x27;zen&#x27;
+<ul>
+<li class="">Zenaga</li>
+</ul>
+</li>
+<li class="">&#x27;zgh&#x27;
+<ul>
+<li class="">Standard Moroccan Tamazight</li>
+</ul>
+</li>
+<li class="">&#x27;zh&#x27;
+<ul>
+<li class="">Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;zh-Hans&#x27;
+<ul>
+<li class="">Simplified Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;zh-Hant&#x27;
+<ul>
+<li class="">Traditional Chinese</li>
+</ul>
+</li>
+<li class="">&#x27;zu&#x27;
+<ul>
+<li class="">Zulu</li>
+</ul>
+</li>
+<li class="">&#x27;zun&#x27;
+<ul>
+<li class="">Zuni</li>
+</ul>
+</li>
+<li class="">&#x27;zxx&#x27;
+<ul>
+<li class="">No linguistic content</li>
+</ul>
+</li>
+<li class="">&#x27;zza&#x27;
+<ul>
+<li class="">Zaza</li>
+</ul>
+</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/cldr-engine/docs/api-displaynameoptions"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">DisplayNameOptions</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/cldr-engine/docs/api-listpatterntype"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">ListPatternType</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents__UZk thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#syntax" class="table-of-contents__link toc-highlight">Syntax</a></li><li><a href="#values" class="table-of-contents__link toc-highlight">Values</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/cldr-engine/docs/doc-index">Introduction</a></li><li class="footer__item"><a class="footer__link-item" href="/cldr-engine/docs/api-cldr">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/cldr-engine/versions">Versions</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/phensley/cldr-engine" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_AE89"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://phensley.github.io/cldr-engine-react-demo" target="_blank" rel="noopener noreferrer" class="footer__link-item">Demo<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_AE89"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.npmjs.com/package/@phensley/cldr" target="_blank" rel="noopener noreferrer" class="footer__link-item">NPM<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_AE89"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Patrick Hensley</div></div></div></footer></div>
+</body>
+</html>

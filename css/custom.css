@@ -1,0 +1,134 @@
+html,
+body {
+  font-family: $baseFont;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+  .docMainWrapper > * {
+    margin: 0 14px;
+  }
+  .onPageNav {
+    flex: 0 0 200px;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
+
+.imageAlignTop .blockImage {
+  max-width: 100%;
+}
+
+.toc .toggleNav ul li.navListItemActive a {
+  color: darkblue;
+  font-weight: bold;
+}
+
+code {
+  font-size: 14px;
+  background-color: white;
+  color: black;
+  padding: 0;
+  font-weight: 400;
+  padding: 0.2em;
+}
+
+code.hljs {
+  background-color: #f0f1f3;
+}
+
+pre code {
+  display: block;
+  margin: 20px 0 20px 0px;
+  padding: 1em;
+  /* border-left: 6px solid #d3d8e0; */
+  font-family: "SFMono-Regular",source-code-pro,Menlo,Monaco,Consolas,"Roboto Mono","Droid Sans Mono","Liberation Mono",Consolas,"Courier New",Courier,monospace;
+  font-size: 13px;
+  overflow-x: auto;
+  font-weight: 400;
+}
+
+pre {
+  margin-bottom: 4px;
+}
+
+pre.output {
+  display: block;
+  margin: 0 0px 15px 0px;
+  padding: 1rem 1.5rem;
+  border-left: 6px solid #f0f1f3;
+  border-top: 5px solid #f0f1f3;
+  color: black;
+  /* background-color: #fefefe; */
+  font-family: "SFMono-Regular",source-code-pro,Menlo,Monaco,Consolas,"Roboto Mono","Droid Sans Mono","Liberation Mono",Consolas,"Courier New",Courier,monospace;
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+pre.output.small {
+  font-size: 10px;
+}
+
+pre + pre.output {
+  margin-top: -25px;
+  padding-top: 20px;
+}
+
+pre.plain {
+  display: block;
+  margin: 5px 0;
+  padding: .5rem 1.5rem;
+  font-family: "SFMono-Regular",source-code-pro,Menlo,Monaco,Consolas,"Roboto Mono","Droid Sans Mono","Liberation Mono",Consolas,"Courier New",Courier,monospace;
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+pre.syntax {
+  display: block;
+  padding: .75rem 1.5rem;
+  background-color: #eaf1fb;
+  font-family: "SFMono-Regular",source-code-pro,Menlo,Monaco,Consolas,"Roboto Mono","Droid Sans Mono","Liberation Mono",Consolas,"Courier New",Courier,monospace;
+  font-size: 15px;
+  overflow-x: auto;
+}
+
+a, a code {
+  color: #5596cc;
+}
+
+code.def {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: white;
+  color: black;
+}
+
+code.def span {
+  font-weight: 400;
+  color: green;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+ul li.list {
+  list-style-type: unset;
+}
+
+ul li.navListItem {
+  border-left: none;
+}
+
+ul.bullets li {
+  list-style-type: disc;
+}
