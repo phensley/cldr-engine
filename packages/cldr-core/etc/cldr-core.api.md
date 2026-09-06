@@ -734,6 +734,9 @@ export class Decimal {
     properties(): [number[], number, number, number];
     protected round(rnd: number, rest: number, mode: RoundingModeType): number;
     scale(): number;
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     scientific(minIntDigits?: number): [Decimal, number];
     setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
     // (undocumented)
@@ -751,7 +754,13 @@ export class Decimal {
     subtract(v: DecimalArg): Decimal;
     toInteger(): Decimal;
     toParts(): Part[];
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     toScientificParts(minIntegers?: number): Part[];
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     toScientificString(minIntegers?: number): string;
     toString(): string;
     trailingZeros(): number;
@@ -1852,6 +1861,8 @@ export interface Quantity {
 export class Rational {
     constructor(numerator: DecimalArg, denominator?: DecimalArg);
     // (undocumented)
+    add(num: RationalArg, context?: MathContext): Rational;
+    // (undocumented)
     compare(num: RationalArg, context?: MathContext): number;
     // (undocumented)
     protected denom: Decimal;
@@ -1864,9 +1875,13 @@ export class Rational {
     // (undocumented)
     multiply(num: RationalArg, context?: MathContext): Rational;
     // (undocumented)
+    negate(): Rational;
+    // (undocumented)
     protected numer: Decimal;
     // (undocumented)
     numerator(): Decimal;
+    // (undocumented)
+    subtract(num: RationalArg, context?: MathContext): Rational;
     // (undocumented)
     toDecimal(context?: MathContext): Decimal;
     // (undocumented)
@@ -2300,7 +2315,7 @@ export class UnitsInternalImpl implements UnitInternals {
 }
 
 // @public (undocumented)
-export type UnitType = 'g-force' | 'meter-per-square-second' | 'arc-minute' | 'arc-second' | 'degree' | 'radian' | 'revolution' | 'steradian' | 'acre' | 'bu-jp' | 'cho' | 'dunam' | 'hectare' | 'se-jp' | 'square-centimeter' | 'square-foot' | 'square-inch' | 'square-kilometer' | 'square-meter' | 'square-mile' | 'square-yard' | 'item' | 'karat' | 'katal' | 'milligram-ofglucose-per-deciliter' | 'millimole-per-liter' | 'mole' | 'ofglucose' | 'part' | 'part-per-1e6' | 'part-per-1e9' | 'percent' | 'permille' | 'permyriad' | 'liter-per-100-kilometer' | 'liter-per-kilometer' | 'mile-per-gallon' | 'mile-per-gallon-imperial' | 'bit' | 'byte' | 'gigabit' | 'gigabyte' | 'kilobit' | 'kilobyte' | 'megabit' | 'megabyte' | 'petabyte' | 'terabit' | 'terabyte' | 'century' | 'day' | 'day-person' | 'decade' | 'fortnight' | 'hour' | 'microsecond' | 'millisecond' | 'minute' | 'month' | 'nanosecond' | 'night' | 'quarter' | 'second' | 'week' | 'year' | 'ampere' | 'coulomb' | 'farad' | 'henry' | 'milliampere' | 'ohm' | 'siemens' | 'volt' | 'becquerel' | 'british-thermal-unit' | 'british-thermal-unit-it' | 'calorie' | 'calorie-it' | 'electronvolt' | 'foodcalorie' | 'gray' | 'joule' | 'kilocalorie' | 'kilojoule' | 'kilowatt-hour' | 'sievert' | 'therm-us' | 'kilogram-force' | 'kilowatt-hour-per-100-kilometer' | 'newton' | 'pound-force' | 'gigahertz' | 'hertz' | 'kilohertz' | 'megahertz' | 'dot' | 'dot-per-centimeter' | 'dot-per-inch' | 'em' | 'megapixel' | 'pixel' | 'pixel-per-centimeter' | 'pixel-per-inch' | 'astronomical-unit' | 'centimeter' | 'chain' | 'decimeter' | 'earth-radius' | 'fathom' | 'foot' | 'furlong' | 'inch' | 'jo-jp' | 'ken' | 'kilometer' | 'light-year' | 'meter' | 'micrometer' | 'mile' | 'mile-scandinavian' | 'millimeter' | 'nanometer' | 'nautical-mile' | 'parsec' | 'picometer' | 'point' | 'ri-jp' | 'rin' | 'rod' | 'shaku-cloth' | 'shaku-length' | 'solar-radius' | 'sun' | 'yard' | 'candela' | 'lumen' | 'lux' | 'solar-luminosity' | 'tesla' | 'weber' | 'carat' | 'dalton' | 'earth-mass' | 'fun' | 'grain' | 'gram' | 'kilogram' | 'microgram' | 'milligram' | 'ounce' | 'ounce-troy' | 'pound' | 'slug' | 'solar-mass' | 'stone' | 'ton' | 'tonne' | 'gigawatt' | 'horsepower' | 'kilowatt' | 'megawatt' | 'milliwatt' | 'watt' | 'atmosphere' | 'bar' | 'gasoline-energy-density' | 'hectopascal' | 'inch-ofhg' | 'kilopascal' | 'megapascal' | 'millibar' | 'millimeter-ofhg' | 'ofhg' | 'pascal' | 'pound-force-per-square-inch' | 'beaufort' | 'kilometer-per-hour' | 'knot' | 'light-speed' | 'meter-per-second' | 'mile-per-hour' | 'celsius' | 'fahrenheit' | 'temperature' | 'kelvin' | 'rankine' | 'newton-meter' | 'pound-force-foot' | 'acre-foot' | 'barrel' | 'bushel' | 'centiliter' | 'cubic-centimeter' | 'cubic-foot' | 'cubic-inch' | 'cubic-kilometer' | 'cubic-meter' | 'cubic-mile' | 'cubic-yard' | 'cup' | 'cup-imperial' | 'cup-jp' | 'cup-metric' | 'deciliter' | 'dessert-spoon' | 'dessert-spoon-imperial' | 'dram' | 'drop' | 'fluid-ounce' | 'fluid-ounce-imperial' | 'fluid-ounce-metric' | 'gallon' | 'gallon-imperial' | 'hectoliter' | 'jigger' | 'koku' | 'kosaji' | 'liter' | 'megaliter' | 'milliliter' | 'osaji' | 'pinch' | 'pint' | 'pint-imperial' | 'pint-metric' | 'quart' | 'quart-imperial' | 'sai' | 'shaku' | 'tablespoon' | 'teaspoon' | 'to-jp';
+export type UnitType = 'g-force' | 'meter-per-square-second' | 'arc-minute' | 'arc-second' | 'degree' | 'radian' | 'revolution' | 'steradian' | 'acre' | 'bu-jp' | 'cho' | 'dunam' | 'hectare' | 'se-jp' | 'square-centimeter' | 'square-foot' | 'square-inch' | 'square-kilometer' | 'square-meter' | 'square-mile' | 'square-yard' | 'item' | 'karat' | 'katal' | 'milligram-ofglucose-per-deciliter' | 'millimole-per-liter' | 'mole' | 'ofglucose' | 'part' | 'part-per-1e6' | 'part-per-1e9' | 'percent' | 'permille' | 'permyriad' | 'liter-per-100-kilometer' | 'liter-per-kilometer' | 'mile-per-gallon' | 'mile-per-gallon-imperial' | 'bit' | 'byte' | 'gigabit' | 'gigabyte' | 'kilobit' | 'kilobyte' | 'megabit' | 'megabyte' | 'petabyte' | 'terabit' | 'terabyte' | 'century' | 'day' | 'day-person' | 'decade' | 'fortnight' | 'hour' | 'microsecond' | 'millisecond' | 'minute' | 'month' | 'month-person' | 'nanosecond' | 'night' | 'quarter' | 'second' | 'week' | 'week-person' | 'year' | 'year-person' | 'ampere' | 'coulomb' | 'farad' | 'henry' | 'milliampere' | 'ohm' | 'siemens' | 'volt' | 'becquerel' | 'british-thermal-unit' | 'british-thermal-unit-it' | 'calorie' | 'calorie-it' | 'electronvolt' | 'foodcalorie' | 'gray' | 'joule' | 'kilocalorie' | 'kilojoule' | 'kilowatt-hour' | 'sievert' | 'therm-us' | 'kilogram-force' | 'kilowatt-hour-per-100-kilometer' | 'newton' | 'pound-force' | 'gigahertz' | 'hertz' | 'kilohertz' | 'megahertz' | 'dot' | 'dot-per-centimeter' | 'dot-per-inch' | 'em' | 'megapixel' | 'pixel' | 'pixel-per-centimeter' | 'pixel-per-inch' | 'astronomical-unit' | 'centimeter' | 'chain' | 'decimeter' | 'earth-radius' | 'fathom' | 'foot' | 'furlong' | 'inch' | 'jo-jp' | 'ken' | 'kilometer' | 'light-year' | 'meter' | 'micrometer' | 'mile' | 'mile-scandinavian' | 'millimeter' | 'nanometer' | 'nautical-mile' | 'parsec' | 'picometer' | 'point' | 'ri-jp' | 'rin' | 'rod' | 'shaku-cloth' | 'shaku-length' | 'solar-radius' | 'sun' | 'yard' | 'candela' | 'lumen' | 'lux' | 'solar-luminosity' | 'tesla' | 'weber' | 'carat' | 'dalton' | 'earth-mass' | 'fun' | 'grain' | 'gram' | 'kilogram' | 'microgram' | 'milligram' | 'ounce' | 'ounce-troy' | 'pound' | 'slug' | 'solar-mass' | 'stone' | 'ton' | 'tonne' | 'gigawatt' | 'horsepower' | 'kilowatt' | 'megawatt' | 'milliwatt' | 'watt' | 'atmosphere' | 'bar' | 'gasoline-energy-density' | 'hectopascal' | 'inch-ofhg' | 'kilopascal' | 'megapascal' | 'millibar' | 'millimeter-ofhg' | 'ofhg' | 'pascal' | 'pound-force-per-square-inch' | 'beaufort' | 'kilometer-per-hour' | 'knot' | 'light-speed' | 'meter-per-second' | 'mile-per-hour' | 'celsius' | 'fahrenheit' | 'temperature' | 'kelvin' | 'rankine' | 'newton-meter' | 'pound-force-foot' | 'acre-foot' | 'barrel' | 'bushel' | 'centiliter' | 'cubic-centimeter' | 'cubic-foot' | 'cubic-inch' | 'cubic-kilometer' | 'cubic-meter' | 'cubic-mile' | 'cubic-yard' | 'cup' | 'cup-imperial' | 'cup-jp' | 'cup-metric' | 'deciliter' | 'dessert-spoon' | 'dessert-spoon-imperial' | 'dram' | 'drop' | 'fluid-ounce' | 'fluid-ounce-imperial' | 'fluid-ounce-metric' | 'gallon' | 'gallon-imperial' | 'hectoliter' | 'jigger' | 'koku' | 'kosaji' | 'liter' | 'megaliter' | 'milliliter' | 'osaji' | 'pinch' | 'pint' | 'pint-imperial' | 'pint-metric' | 'quart' | 'quart-imperial' | 'sai' | 'shaku' | 'tablespoon' | 'teaspoon' | 'to-jp';
 
 // @public (undocumented)
 export interface Vector {

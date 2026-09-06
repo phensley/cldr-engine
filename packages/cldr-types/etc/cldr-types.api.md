@@ -30,6 +30,8 @@ export interface CalendarSchema {
     // (undocumented)
     readonly dateFormats: Vector1Arrow<FormatWidthType>;
     // (undocumented)
+    readonly dateSkeletons: Vector1Arrow<FormatWidthType>;
+    // (undocumented)
     readonly dateTimeFormats: Vector1Arrow<FormatWidthType>;
     // (undocumented)
     readonly dateTimeFormatsAt: Vector1Arrow<FormatWidthType>;
@@ -47,6 +49,8 @@ export interface CalendarSchema {
     readonly standAlone: CalendarFields;
     // (undocumented)
     readonly timeFormats: Vector1Arrow<FormatWidthType>;
+    // (undocumented)
+    readonly timeSkeletons: Vector1Arrow<FormatWidthType>;
 }
 
 // @public (undocumented)

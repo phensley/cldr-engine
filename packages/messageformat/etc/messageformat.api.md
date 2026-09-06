@@ -66,6 +66,9 @@ export class Decimal {
     properties(): [number[], number, number, number];
     protected round(rnd: number, rest: number, mode: RoundingModeType): number;
     scale(): number;
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     scientific(minIntDigits?: number): [Decimal, number];
     // Warning: (ae-forgotten-export) The symbol "RoundingModeType" needs to be exported by the entry point index.d.ts
     setScale(scale: number, roundingMode?: RoundingModeType): Decimal;
@@ -85,7 +88,13 @@ export class Decimal {
     toInteger(): Decimal;
     // Warning: (ae-forgotten-export) The symbol "Part" needs to be exported by the entry point index.d.ts
     toParts(): Part[];
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     toScientificParts(minIntegers?: number): Part[];
+    // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+    // Warning: (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+    // Warning: (tsdoc-malformed-html-name) Invalid HTML element: A space is not allowed here
     toScientificString(minIntegers?: number): string;
     toString(): string;
     trailingZeros(): number;
