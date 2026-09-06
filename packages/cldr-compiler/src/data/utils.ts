@@ -116,15 +116,7 @@ export interface FieldsSpec {
 }
 
 export type Spec =
-  | DigitsSpec
-  | PluralSpec
-  | AltSpec
-  | KeysSpec
-  | AltKeysSpec
-  | FieldSpec
-  | FieldsSpec
-  | PluralKeysSpec
-  | PointSpec;
+  DigitsSpec | PluralSpec | AltSpec | KeysSpec | AltKeysSpec | FieldSpec | FieldsSpec | PluralKeysSpec | PointSpec;
 
 /**
  * Apply the field mapping specs to the object, converting hierarchy of keys

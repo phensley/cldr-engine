@@ -2,7 +2,7 @@ import { calendarsApi } from '../../_helpers';
 
 test('best-fit cache is keyed by plural category', () => {
   const api = calendarsApi('fil');
-  const jan1 = { date: Date.UTC(2024, 0, 1, 12), zoneId: 'UTC' };   // yw plural 'one'
+  const jan1 = { date: Date.UTC(2024, 0, 1, 12), zoneId: 'UTC' }; // yw plural 'one'
   const jan22 = { date: Date.UTC(2024, 0, 22, 12), zoneId: 'UTC' }; // yw plural 'other'
   expect(api.formatDate(jan1, { skeleton: 'yw' })).toEqual('ika-1 linggo ng 2024');
   expect(api.formatDate(jan22, { skeleton: 'yw' })).toEqual('linggo 4 ng 2024');

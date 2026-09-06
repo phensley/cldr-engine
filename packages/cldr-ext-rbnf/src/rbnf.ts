@@ -28,11 +28,7 @@ const MINUS_ONE = ONE.negate();
 const TEN = new Decimal(10);
 
 type IntegerSubInst =
-  | ApplyLeftRuleInst
-  | ApplyLeft2RuleInst
-  | ApplyLeft2NumFormatInst
-  | ApplyLeftNumFormatInst
-  | SubLeftInst;
+  ApplyLeftRuleInst | ApplyLeft2RuleInst | ApplyLeft2NumFormatInst | ApplyLeftNumFormatInst | SubLeftInst;
 
 export interface RBNFSymbols {
   decimal: string;

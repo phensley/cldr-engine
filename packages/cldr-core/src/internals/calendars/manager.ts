@@ -115,7 +115,9 @@ export class CalendarManager {
     let pluralKey = '';
     if (!req.date && /[wW]/.test(skelKey)) {
       const p = this.bundle.plurals();
-      pluralKey = `${p.cardinal(coerceDecimal(date.weekOfMonth()))}\u0001${p.cardinal(coerceDecimal(date.weekOfYear()))}`;
+      const wkM = p.cardinal(coerceDecimal(date.weekOfMonth()));
+      const wkY = p.cardinal(coerceDecimal(date.weekOfYear()));
+      pluralKey = `${wkM}\u0001${wkY}`;
     }
     const cacheKey = `${skelKey}\t${dateKey}\t${timeKey}\t${wrapKey}\t${pluralKey}\t${params.numberSystemName}`;
     let dateSkel: DateSkeleton | undefined;

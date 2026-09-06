@@ -14,6 +14,7 @@
     "link-all": "pnpm --stream -r exec -- pnpm link",
     "unlink-all": "pnpm --stream -r exec -- pnpm unlink",
     "lint": "pnpm --stream -r exec tsc -p tsconfig.json --emitDeclarationOnly && pnpm --stream -r run build:lint && pnpm --stream -r run lint",
+    "lint:fix": "pnpm --stream -r exec tsc -p tsconfig.json --emitDeclarationOnly && pnpm --stream -r run build:lint && pnpm --stream -r run lint:fix",
     "stress": "pnpm --stream -r run stress",
     "test": "vitest --run --coverage",
     "test:watch": "vitest"

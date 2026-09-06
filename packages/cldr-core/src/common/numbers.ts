@@ -40,11 +40,7 @@ export type NumberFormatStyleType = 'decimal' | 'short' | 'long' | 'scientific';
  * @public
  */
 export type DecimalFormatStyleType =
-  | NumberFormatStyleType
-  | 'percent'
-  | 'percent-scaled'
-  | 'permille'
-  | 'permille-scaled';
+  NumberFormatStyleType | 'percent' | 'percent-scaled' | 'permille' | 'permille-scaled';
 
 /**
  * @public

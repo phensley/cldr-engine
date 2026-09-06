@@ -28,6 +28,7 @@
     "clean:full": "pnpm run clean && rimraf ./node_modules",
     "coverage": "vitest run --coverage",
     "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
     "prepublish": "pnpm run build",
     "test": "vitest --run",
     "test:watch": "vitest"
