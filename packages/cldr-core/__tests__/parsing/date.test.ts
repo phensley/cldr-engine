@@ -26,6 +26,33 @@ test('parse', () => {
   ]);
 });
 
+test('quoted apostrophe escapes', () => {
+  // TR35: '' inside a quoted section yields one literal apostrophe.
+  // ICU4J: yyyy 'o''clock' => 2024 o'clock
+  expect(parseDatePattern("yyyy 'o''clock'")).toEqual([['y', 4], " o'clock"]);
+
+  // Whole-pattern out-of-quote '' yields one literal apostrophe (ICU parity;
+  // ICU4J: '' => ').
+  expect(parseDatePattern("''")).toEqual(["'"]);
+
+  // Out-of-quote '' between fields is a literal apostrophe, not an empty
+  // quoted section (ICU4J: yyyy'' MM => 2024' 03).
+  expect(parseDatePattern("yyyy'' MM")).toEqual([['y', 4], "' ", ['M', 2]]);
+
+  // A single in-quote apostrophe closes the quote as before; subsequent
+  // letters are parsed as pattern fields. Behavior is intentionally lenient
+  // (ICU4J rejects this pattern with IllegalArgumentException; we keep
+  // parsing and pin the existing output).
+  expect(parseDatePattern("yyyy 'o'clock'")).toEqual([['y', 4], ' o', ['c', 1], ['l', 1], 'o', ['c', 1], ['k', 1], '']);
+
+  // A pattern ending in a dangling single quote keeps the existing lenient
+  // behavior: the quote opens a run that runs to end of input.
+  expect(parseDatePattern("yyyy'")).toEqual([['y', 4], '']);
+
+  // Unquoted text with an unclosed opening quote still lands in the buffer.
+  expect(parseDatePattern("yyyy 'abc")).toEqual([['y', 4], ' abc']);
+});
+
 test('interval boundary', () => {
   let pattern = parseDatePattern("yyy MMM x 'and' x MMM");
   expect(pattern).toEqual([

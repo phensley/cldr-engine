@@ -32,8 +32,14 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
     const ch = raw[i];
     if (inquote) {
       if (ch === "'") {
-        inquote = false;
-        field = '';
+        // TR35: '' inside a quoted section yields a literal apostrophe.
+        if (i + 1 < len && raw[i + 1] === "'") {
+          buf += "'";
+          i++;
+        } else {
+          inquote = false;
+          field = '';
+        }
       } else {
         buf += ch;
       }
@@ -64,7 +70,13 @@ export const parseDatePattern = (raw: string): DateTimeNode[] => {
       }
       field = '';
       if (ch === "'") {
-        inquote = true;
+        // Out-of-quote '' also yields one literal apostrophe (ICU parity).
+        if (i + 1 < len && raw[i + 1] === "'") {
+          buf += "'";
+          i++;
+        } else {
+          inquote = true;
+        }
       } else {
         buf += ch;
       }
