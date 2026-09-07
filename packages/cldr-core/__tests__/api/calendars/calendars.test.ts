@@ -1084,25 +1084,25 @@ test('timezone iso8601 basic format', () => {
   s = en.formatDateRaw(d, { pattern: 'x' });
   expect(s).toEqual('+00');
   s = en.formatDateRaw(d, { pattern: 'X' });
-  expect(s).toEqual('+00Z');
+  expect(s).toEqual('Z');
 
   s = en.formatDateRaw(d, { pattern: 'xx' });
   expect(s).toEqual('+0000');
   s = en.formatDateRaw(d, { pattern: 'XX' });
-  expect(s).toEqual('+0000Z');
+  expect(s).toEqual('Z');
 
   s = en.formatDateRaw(d, { pattern: 'xxx' });
   expect(s).toEqual('+00:00');
   s = en.formatDateRaw(d, { pattern: 'XXX' });
-  expect(s).toEqual('+00:00Z');
+  expect(s).toEqual('Z');
 
   s = en.formatDateRaw(d, { pattern: 'xxxx' });
   expect(s).toEqual('+0000');
   s = en.formatDateRaw(d, { pattern: 'XXXX' });
-  expect(s).toEqual('+0000Z');
+  expect(s).toEqual('Z');
 
   s = en.formatDateRaw(d, { pattern: 'xxxxx' });
   expect(s).toEqual('+00:00');
   s = en.formatDateRaw(d, { pattern: 'XXXXX' });
-  expect(s).toEqual('+00:00Z');
+  expect(s).toEqual('Z');
 });

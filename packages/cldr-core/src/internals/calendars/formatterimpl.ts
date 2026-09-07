@@ -520,17 +520,19 @@ export class CalendarFormatterImpl<T extends CalendarDate> implements CalendarFo
     const [offset, negative, hours, minutes] = getTZC(ctx.date.timeZoneOffset());
     let fmt = '';
     if (width >= 1 && width <= 5) {
-      const zero = hours === 0 && minutes === 0;
-      fmt += zero ? '+' : negative ? '-' : '+';
+      // TR35: the UTC indicator 'Z' is used only when the offset is zero and the
+      // specifier is X* (uppercase) — for every width 1..5. Lowercase 'x' renders
+      // '+00', '+0000', '+00:00', ... instead (never 'Z').
+      if (field === 'X' && offset === 0) {
+        return 'Z';
+      }
+      fmt += negative ? '-' : '+';
       fmt += _num(ctx, hours, 2);
       if (width === 3 || width === 5) {
         fmt += ':';
       }
       if (width !== 1 || minutes > 0) {
         fmt += _num(ctx, minutes, 2);
-      }
-      if (field === 'X' && offset === 0) {
-        fmt += 'Z';
       }
     }
     return fmt;
