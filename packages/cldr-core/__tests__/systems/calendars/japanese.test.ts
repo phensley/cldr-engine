@@ -87,3 +87,33 @@ test('with zone', () => {
   d = d.withZone('America/Los_Angeles');
   expect(d.toString()).toEqual('Japanese 1925-06-01 04:34:56.000 America/Los_Angeles');
 });
+
+test('einin era boundary (regression: 1293-08-55 typo)', () => {
+  // The era table lists Einin as starting 1293-08-05 (was 1293-08-55, an
+  // impossible day). Pre-1582 dates internalize via the proleptic Julian
+  // calendar (as in ICU), so the Einin boundary falls at Julian 1293-08-05 =
+  // Gregorian 1293-08-12. Values verified against ICU4J (era 140/141).
+
+  // 1293-08-04 → Shoo (started 1288-04-28), era-year 6
+  let d = make(-21345379200000, 'UTC');
+  expect(d.era()).toEqual(140);
+  expect(d.year()).toEqual(6);
+  expect(d.extendedYear()).toEqual(1293);
+
+  // 1293-08-11 → last day of Shoo
+  d = make(-21344774400000, 'UTC');
+  expect(d.era()).toEqual(140);
+  expect(d.year()).toEqual(6);
+
+  // 1293-08-12 → first day of Einin. With the 1293-08-55 typo (August has 31
+  // days) every date in August 1293 resolved to Shoo instead.
+  d = make(-21344688000000, 'UTC');
+  expect(d.era()).toEqual(141);
+  expect(d.year()).toEqual(1);
+  expect(d.extendedYear()).toEqual(1293);
+
+  // 1294-01-09 → Einin era-year 2
+  d = make(-21331728000000, 'UTC');
+  expect(d.era()).toEqual(141);
+  expect(d.year()).toEqual(2);
+});
